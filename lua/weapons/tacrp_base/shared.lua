@@ -132,6 +132,11 @@ SWEP.CustomizePos = Vector(5, 0, -6)
 SWEP.SightAng = Angle(0, 0, 0)
 SWEP.SightPos = Vector(0, 1, 1)
 
+SWEP.HolsterVisible = false
+SWEP.HolsterSlot = TacRP.HOLSTER_SLOT_BACK
+SWEP.HolsterPos = Vector(0, 0, 0)
+SWEP.HolsterAng = Angle(0, 0, 0)
+
 SWEP.SightMidPoint = {
     Pos = Vector(-1, 15, -6),
     Ang = Angle(0, 0, -45)

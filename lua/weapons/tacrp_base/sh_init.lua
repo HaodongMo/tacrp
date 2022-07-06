@@ -78,6 +78,20 @@ function SWEP:Holster()
     self:ToggleBlindFire(false)
     self:GetOwner():SetFOV(0, 0.1)
 
+    local holster = self:GetValue("HolsterVisible")
+    if holster then
+        local holsterslot = self:GetValue("HolsterSlot")
+        if game.SinglePlayer() or CLIENT then
+            self:GetOwner().TacRP_Holster = self:GetOwner().TacRP_Holster or {}
+            self:GetOwner().TacRP_Holster[holsterslot] = self
+        else
+            net.Start("TacRP_updateholster")
+                net.WriteEntity(self:GetOwner())
+                net.WriteEntity(self)
+            net.SendOmit(self:GetOwner())
+        end
+    end
+
     if game.SinglePlayer() then
         self:CallOnClient("KillModel")
     else
