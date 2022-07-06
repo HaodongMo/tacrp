@@ -56,8 +56,12 @@ function TacRP:ShootPhysBullet(wep, pos, vel, tbl)
         bullet.Underwater = true
     end
 
-    table.insert(TacRP.PhysBullets, bullet)
+    local add = game.SinglePlayer() or !GetConVar("tacrp_client_damage"):GetBool() or CLIENT
+    if add then
+        table.insert(TacRP.PhysBullets, bullet)
+    end
 
+    --[[]
     if wep:GetOwner():IsPlayer() and SERVER then
         local ping = wep:GetOwner():Ping() / 1000
         ping = math.Clamp(ping, 0, 0.5)
@@ -68,10 +72,17 @@ function TacRP:ShootPhysBullet(wep, pos, vel, tbl)
             ping = ping - timestep
         end
     end
+    ]]
+    if wep:GetOwner():IsPlayer() and SERVER and add then
+        local latency = math.floor(engine.TickCount() - wep:GetOwner():GetCurrentCommand():TickCount() - 1) -- FIXME: this math.floor does nothing
+        local timestep = engine.TickInterval()
+        while latency > 0 do
+            TacRP:ProgressPhysBullet(bullet, timestep)
+            latency = latency - 1
+        end
+    end
 
     if SERVER then
-        TacRP:ProgressPhysBullet(bullet, FrameTime())
-
         TacRP:SendBullet(bullet, wep:GetOwner())
     end
 end
@@ -250,7 +261,24 @@ function TacRP:ProgressPhysBullet(bullet, timestep)
                         Distance = spd + 16,
                         Tracer = 0,
                         Damage = 0,
-                        IgnoreEntity = attacker
+                        IgnoreEntity = attacker,
+                        Callback = function(att, btr, dmg)
+                            if GetConVar("tacrp_client_damage"):GetBool() and IsValid(btr.Entity) then
+                                net.Start("tacrp_clientdamage")
+                                    net.WriteEntity(weapon)
+                                    net.WriteEntity(btr.Entity)
+                                    net.WriteVector(oldpos)
+                                    net.WriteVector(dir)
+                                    net.WriteVector(btr.Entity:GetPos())
+                                    -- net.WriteVector(btr.Entity:WorldToLocal(btr.HitPos))
+
+                                    net.WriteFloat(bullet.Travelled)
+                                    net.WriteFloat(bullet.Penleft)
+                                    net.WriteUInt(#bullet.Damaged, 4)
+                                    for i = 1, #bullet.Damaged do net.WriteEntity(bullet.Damaged[i]) end
+                                net.SendToServer()
+                            end
+                        end
                     })
                 end
                 bullet.Dead = true
@@ -258,20 +286,21 @@ function TacRP:ProgressPhysBullet(bullet, timestep)
             elseif SERVER then
                 bullet.Damaged[eid] = true
                 bullet.Dead = true
-                bullet.Attacker:FireBullets({
-                    Damage = weapon:GetValue("Damage_Max"),
-                    Force = 8,
-                    Tracer = 0,
-                    Num = 1,
-                    Dir = bullet.Vel:GetNormalized(),
-                    Src = oldpos,
-                    Spread = Vector(0, 0, 0),
-                    Callback = function(att, btr, dmg)
-                        local range = bullet.Travelled
-
-                        weapon:AfterShotFunction(btr, dmg, range, bullet.Penleft, bullet.Damaged)
-                    end
-                })
+                if game.SinglePlayer() or !GetConVar("tacrp_client_damage"):GetBool() then
+                    bullet.Attacker:FireBullets({
+                        Damage = weapon:GetValue("Damage_Max"),
+                        Force = 8,
+                        Tracer = 0,
+                        Num = 1,
+                        Dir = bullet.Vel:GetNormalized(),
+                        Src = oldpos,
+                        Spread = Vector(0, 0, 0),
+                        Callback = function(att, btr, dmg)
+                            local range = bullet.Travelled
+                            weapon:AfterShotFunction(btr, dmg, range, bullet.Penleft, bullet.Damaged)
+                        end
+                    })
+                end
             end
 
             if attacker:IsPlayer() then
@@ -354,7 +383,7 @@ function TacRP:DrawPhysBullets()
     cam.Start3D()
     for _, i in pairs(TacRP.PhysBullets) do
         if i.Invisible then continue end
-        if i.Travelled <= 1024 then continue end
+        --if i.Travelled <= 1024 then continue end
         local pos = i.Pos
 
         local speedvec = -i.Vel:GetNormalized()
@@ -418,3 +447,45 @@ hook.Add("PreDrawEffects", "TacRP_DrawPhysBullets", TacRP.DrawPhysBullets)
 hook.Add("PostCleanupMap", "TacRP_CleanPhysBullets", function()
     TacRP.PhysBullets = {}
 end)
+
+if SERVER then
+    net.Receive("tacrp_clientdamage", function(len, ply)
+        local weapon = net.ReadEntity()
+        local tgt = net.ReadEntity()
+        local pos = net.ReadVector()
+        local dir = net.ReadVector()
+        local oldpos = net.ReadVector()
+        local diff = (tgt:GetPos() - oldpos)
+        --local hitpos = tgt:LocalToWorld(net.ReadVector())
+        local range = net.ReadFloat()
+        local penleft = net.ReadFloat()
+        local count = net.ReadUInt(3)
+        local damaged = {}
+        for i = 1, count do
+            table.insert(damaged, net.ReadEntity())
+        end
+
+        if !IsValid(weapon) or weapon:GetOwner() != ply then return end
+        --if math.abs(ply:GetPos():DistToSqr(hitpos) - ply:GetPos():DistToSqr(tgt:GetPos())) > 64 * 64 then return end
+        local suppress = !(tgt:IsNPC() or tgt:IsNextBot())
+        if suppress then
+            SuppressHostEvents(ply)
+        end
+        ply:FireBullets({
+            Damage = weapon:GetValue("Damage_Max"),
+            Force = 8,
+            Tracer = 0,
+            Num = 1,
+            Dir = dir,
+            Src = pos - diff,
+            Spread = Vector(0, 0, 0),
+            Callback = function(att, btr, dmg)
+                weapon:AfterShotFunction(btr, dmg, range, penleft, damaged)
+            end
+        })
+        if suppress then
+            SuppressHostEvents()
+        end
+        debugoverlay.Line(pos + diff, pos + diff + dir * 16, 5, Color(0, 255, 255), true)
+    end)
+end

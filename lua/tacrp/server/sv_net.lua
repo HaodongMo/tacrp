@@ -1,17 +1,18 @@
 if CLIENT then return end
 
-util.AddNetworkString("TacRP_toggleblindfire")
-util.AddNetworkString("TacRP_togglecustomize")
-util.AddNetworkString("TacRP_reloadatts")
-util.AddNetworkString("TacRP_networkweapon")
-util.AddNetworkString("TacRP_attach")
-util.AddNetworkString("TacRP_receivepreset")
-util.AddNetworkString("TacRP_sendattinv")
-util.AddNetworkString("TacRP_sendbullet")
+util.AddNetworkString("tacrp_toggleblindfire")
+util.AddNetworkString("tacrp_togglecustomize")
+util.AddNetworkString("tacrp_reloadatts")
+util.AddNetworkString("tacrp_networkweapon")
+util.AddNetworkString("tacrp_attach")
+util.AddNetworkString("tacrp_receivepreset")
+util.AddNetworkString("tacrp_sendattinv")
+util.AddNetworkString("tacrp_sendbullet")
 
-util.AddNetworkString("TacRP_updateholster")
+util.AddNetworkString("tacrp_updateholster")
+util.AddNetworkString("tacrp_clientdamage")
 
-net.Receive("TacRP_toggleblindfire", function(len, ply)
+net.Receive("tacrp_toggleblindfire", function(len, ply)
     local bf = net.ReadBool()
 
     local wpn = ply:GetActiveWeapon()
@@ -21,7 +22,7 @@ net.Receive("TacRP_toggleblindfire", function(len, ply)
     wpn:ToggleBlindFire(bf)
 end)
 
-net.Receive("TacRP_togglecustomize", function(len, ply)
+net.Receive("tacrp_togglecustomize", function(len, ply)
     local bf = net.ReadBool()
 
     local wpn = ply:GetActiveWeapon()
@@ -31,7 +32,7 @@ net.Receive("TacRP_togglecustomize", function(len, ply)
     wpn:ToggleCustomize(bf)
 end)
 
-net.Receive("TacRP_networkweapon", function(len, ply)
+net.Receive("tacrp_networkweapon", function(len, ply)
     local wpn = net.ReadEntity()
 
     if !wpn.ArcticTacRP then return end
@@ -39,7 +40,7 @@ net.Receive("TacRP_networkweapon", function(len, ply)
     wpn:NetworkWeapon(ply)
 end)
 
-net.Receive("TacRP_attach", function(len, ply)
+net.Receive("tacrp_attach", function(len, ply)
     local wpn = net.ReadEntity()
 
     local attach = net.ReadBool()
@@ -61,7 +62,7 @@ net.Receive("TacRP_attach", function(len, ply)
     end
 end)
 
-net.Receive("TacRP_receivepreset", function(len, ply)
+net.Receive("tacrp_receivepreset", function(len, ply)
     local wpn = net.ReadEntity()
 
     if !wpn.ArcticTacRP then return end

@@ -72,9 +72,13 @@ local conVars = {
         name = "resupply_grenades",
         default = "1",
     },
+    {
+        name = "client_damage",
+        default = "0",
+    },
 }
 
-local prefix = "TacRP_"
+local prefix = "tacrp_"
 
 for _, var in pairs(conVars) do
     local convar_name = prefix .. var.name
