@@ -22,6 +22,8 @@ SWEP.Range_Min = 3500 // distance for which to maintain maximum damage
 SWEP.Range_Max = 6000 // distance at which we drop to minimum damage
 SWEP.Penetration = 3 // units of metal this weapon can penetrate
 
+SWEP.MuzzleVelocity = 9000
+
 SWEP.BodyDamageMultipliers = {
     [HITGROUP_HEAD] = 2,
     [HITGROUP_CHEST] = 1,
@@ -53,7 +55,7 @@ SWEP.CrouchSpreadPenalty = 0
 
 SWEP.RecoilPerShot = 1
 SWEP.RecoilMaximum = 10
-SWEP.RecoilResetTime = 0 // time after you stop shooting for recoil to start dissipating
+SWEP.RecoilResetTime = 0.1// time after you stop shooting for recoil to start dissipating
 SWEP.RecoilDissipationRate = 10
 SWEP.RecoilFirstShotMult = 1 // multiplier for the first shot's recoil amount
 
@@ -61,7 +63,7 @@ SWEP.RecoilVisualKick = 2.5
 
 SWEP.RecoilKick = 5
 
-SWEP.RecoilSpreadPenalty = 0.002 // extra spread per one unit of recoil
+SWEP.RecoilSpreadPenalty = 0.0002 // extra spread per one unit of recoil
 
 SWEP.CanBlindFire = true
 
@@ -73,14 +75,14 @@ SWEP.SightedSpeedMult = 0.5
 SWEP.MeleeSpeedMult = 0.5
 SWEP.MeleeSpeedMultTime = 2 // seconds to apply slow down for
 
-SWEP.AimDownSightsTime = 0.25
-SWEP.SprintToFireTime = 0.25
+SWEP.AimDownSightsTime = 0.2
+SWEP.SprintToFireTime = 0.2
 
 // hold types
 
 SWEP.HoldType = "revolver"
 SWEP.HoldTypeSprint = "normal"
-SWEP.HoldTypeBlindFire = false
+SWEP.HoldTypeBlindFire = "pistol"
 
 SWEP.GestureShoot = ACT_HL2MP_GESTURE_RANGE_ATTACK_PISTOL
 SWEP.GestureReload = ACT_HL2MP_GESTURE_RELOAD_PISTOL

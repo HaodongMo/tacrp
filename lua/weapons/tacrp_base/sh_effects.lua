@@ -69,12 +69,14 @@ function SWEP:GetTracerOrigin()
 end
 
 function SWEP:GetMuzzleDevice(wm)
-    local model = self.VModel
-    local muzz = self:GetVM()
+    if !wm and self:GetOwner():IsNPC() then return end
 
-    if wm then
-        model = self.WModel
-        muzz = self
+    local model = self.WModel
+    local muzz = self
+
+    if !wm then
+        model = self.VModel
+        muzz = self:GetVM()
     end
 
     if model then

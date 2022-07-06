@@ -7,6 +7,7 @@ util.AddNetworkString("TacRP_networkweapon")
 util.AddNetworkString("TacRP_attach")
 util.AddNetworkString("TacRP_receivepreset")
 util.AddNetworkString("TacRP_sendattinv")
+util.AddNetworkString("TacRP_sendbullet")
 
 net.Receive("TacRP_toggleblindfire", function(len, ply)
     local bf = net.ReadBool()

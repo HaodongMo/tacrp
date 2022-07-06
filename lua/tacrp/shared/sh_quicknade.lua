@@ -64,6 +64,7 @@ TacRP.QuickNades = {
         Model = "models/weapons/tacint/v_quicknade_nuke.mdl",
         Spoon = false,
         Secret = true,
+        AdminOnly = true,
         Icon = Material("TacRP/grenades/nuke.png", "mips smooth")
     },
 }

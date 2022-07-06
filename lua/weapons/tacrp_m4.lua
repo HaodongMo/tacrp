@@ -16,11 +16,13 @@ SWEP.Slot = 3
 
 // "ballistics"
 
-SWEP.Damage_Max = 100 / 4 // damage at minimum range
+SWEP.Damage_Max = 100 / 3 // damage at minimum range
 SWEP.Damage_Min = 100 / 6 // damage at maximum range
-SWEP.Range_Min = 3250 // distance for which to maintain maximum damage
+SWEP.Range_Min = 1000 // distance for which to maintain maximum damage
 SWEP.Range_Max = 5500 // distance at which we drop to minimum damage
 SWEP.Penetration = 9 // units of metal this weapon can penetrate
+
+SWEP.MuzzleVelocity = 25000
 
 // misc. shooting
 
@@ -45,7 +47,7 @@ SWEP.CrouchSpreadPenalty = 0
 
 SWEP.RecoilPerShot = 1
 SWEP.RecoilMaximum = 10
-SWEP.RecoilResetTime = 0 // time after you stop shooting for recoil to start dissipating
+SWEP.RecoilResetTime = 0.1// time after you stop shooting for recoil to start dissipating
 SWEP.RecoilDissipationRate = 10
 SWEP.RecoilFirstShotMult = 1 // multiplier for the first shot's recoil amount
 
@@ -53,7 +55,7 @@ SWEP.RecoilVisualKick = 0.75
 
 SWEP.RecoilKick = 5
 
-SWEP.RecoilSpreadPenalty = 0.00125 // extra spread per one unit of recoil
+SWEP.RecoilSpreadPenalty = 0.000125 // extra spread per one unit of recoil
 
 SWEP.CanBlindFire = true
 
@@ -89,8 +91,8 @@ SWEP.SprintPos = Vector(5, 0, -2)
 SWEP.SightAng = Angle(0.18, 0.9, 0)
 SWEP.SightPos = Vector(-4.15, -7.5, -4.3)
 
-SWEP.CorrectivePos = Vector(0, 0, 0.1)
-SWEP.CorrectiveAng = Angle(0.2, 0.25, 0)
+SWEP.CorrectivePos = Vector(-0.05, 0, 0.05)
+SWEP.CorrectiveAng = Angle(0.03, 0.45, 0)
 
 // reload
 
@@ -143,7 +145,7 @@ SWEP.EjectEffect = 2
 // WM:
 // attack1
 SWEP.AnimationTranslationTable = {
-    ["fire_iron"] = "fire4_M",
+    ["fire_iron"] = "dryfire",
     ["fire1"] = "fire1_M",
     ["fire2"] = "fire2_M",
     ["fire3"] = "fire3_M",
@@ -178,7 +180,7 @@ SWEP.Attachments = {
         AttachSound = "TacRP/weapons/optic_on.wav",
         DetachSound = "TacRP/weapons/optic_off.wav",
         VMScale = 1,
-        Pos_VM = Vector(-5.35, -0.1, 7),
+        Pos_VM = Vector(-5.35, -0.05, 7),
         Pos_WM = Vector(0.75, 5, 1.15),
         Ang_VM = Angle(90, 0, 0),
         Ang_WM = Angle(0, -90 + 3.5, 0),

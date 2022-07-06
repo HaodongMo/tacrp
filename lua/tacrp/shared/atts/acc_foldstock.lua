@@ -16,6 +16,8 @@ ATT.Mult_SprintToFireTime = 0.75
 
 ATT.Mult_ScopedSway = 5
 
+ATT.Mult_AimDownSightsTime = 0.75
+
 ATT.InstalledElements = {"foldstock"}
 
 ATT.TryUnholster = true

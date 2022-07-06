@@ -11,6 +11,9 @@ function SWEP:ReceiveWeapon()
 
     self:SetupModel(true)
     self:SetupModel(false)
+
+    self.StatCache = {}
+    self.HookCache = {}
 end
 
 function SWEP:RequestWeapon()

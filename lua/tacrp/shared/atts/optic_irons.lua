@@ -16,3 +16,6 @@ ATT.Override_ScopeHideWeapon = false
 ATT.Override_ScopeOverlay = false // Material("path/to/overlay")
 ATT.Override_ScopeFOV = 90 / 1.1
 ATT.Override_ScopeLevels = 1 // 2 = like CS:S
+
+ATT.Mult_AimDownSightsTime = 0.8
+ATT.Mult_SprintToFireTime = 0.95

@@ -30,8 +30,6 @@ function SWEP:ScopeToggle(setlevel)
         self:ToggleBlindFire(false)
     end
 
-    local fov = self:GetShouldFOV()
-
     if oldlevel == 0 or level == 0 then
         self:SetLastScopeTime(CurTime())
     end
@@ -39,8 +37,6 @@ function SWEP:ScopeToggle(setlevel)
     if CLIENT then
         self:GenerateAutoSight()
     end
-
-    self:GetOwner():SetFOV(fov, 0.1)
 
     self:EmitSound(self:GetValue("Sound_ScopeIn"), 75, 100, 1, CHAN_ITEM)
 end
@@ -55,7 +51,7 @@ function SWEP:GetShouldFOV()
 
         return fov
     else
-        return GetConVar("fov_desired"):GetFloat()
+        return 90
     end
 end
 
@@ -139,10 +135,24 @@ function SWEP:ThinkSights()
     end
 end
 
-function SWEP:AdjustMouseSensitivity()
-    local fov = self:GetShouldFOV()
+function SWEP:GetMagnification()
+    local mag = 1
 
-    if fov > 0 then
-        return fov / 90
+    local level = self:GetScopeLevel()
+
+    if level > 0 then
+        mag = 90 / self:GetValue("ScopeFOV")
+
+        mag = Lerp(level / self:GetValue("ScopeLevels"), 1, mag)
+    end
+
+    return mag
+end
+
+function SWEP:AdjustMouseSensitivity()
+    local mag = self:GetMagnification()
+
+    if mag > 1 then
+        return 1 / mag
     end
 end

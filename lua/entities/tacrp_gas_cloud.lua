@@ -120,11 +120,7 @@ function ENT:Think()
                 if !vis then continue end
                 local dist = (k:GetPos() - self:GetPos()):Length()
                 local delta = dist / 300
-                local eyeang = k:EyeAngles()
-                local discombobulate = AngleRand() * 0.5 *  delta
-                discombobulate.r = 0
-                k:SetEyeAngles(eyeang + discombobulate)
-                k:ScreenFade( SCREENFADE.IN, Color(125, 150, 50), 1, 0 )
+                k:ScreenFade( SCREENFADE.IN, Color(125, 150, 50), 1 * delta, 0 )
             end
         end
 

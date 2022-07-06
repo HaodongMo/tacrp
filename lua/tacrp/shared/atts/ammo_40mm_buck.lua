@@ -6,13 +6,17 @@ ATT.Category = "ammo_40mm" // can be "string" or {"list", "of", "strings"}
 
 ATT.ShootEnt = false
 
-ATT.Damage_Min = 100 / 16
+ATT.NoRanger = false
+
 ATT.Damage_Max = 100 / 8
+ATT.Damage_Min = 100 / 16
 ATT.Num = 24
 ATT.Range_Min = 1000
 ATT.Range_Min = 2000
 ATT.Penetration = 1
-ATT.Spread = 0.1
+ATT.Spread = 0.05
+
+ATT.MuzzleVelocity = 9500
 
 ATT.Override_Sound_Shoot = "^TacRP/weapons/m4star10/fire-2.wav"
 

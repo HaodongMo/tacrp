@@ -22,6 +22,8 @@ SWEP.Range_Min = 1000 // distance for which to maintain maximum damage
 SWEP.Range_Max = 3000 // distance at which we drop to minimum damage
 SWEP.Penetration = 4 // units of metal this weapon can penetrate
 
+SWEP.MuzzleVelocity = 12000
+
 // misc. shooting
 
 SWEP.Firemodes = {
@@ -30,7 +32,7 @@ SWEP.Firemodes = {
     1
 }
 
-SWEP.RPM = 1000
+SWEP.RPM = 1200
 
 SWEP.Spread = 0.005
 
@@ -46,7 +48,7 @@ SWEP.CrouchSpreadPenalty = 0
 
 SWEP.RecoilPerShot = 1
 SWEP.RecoilMaximum = 10
-SWEP.RecoilResetTime = 0 // time after you stop shooting for recoil to start dissipating
+SWEP.RecoilResetTime = 0.1// time after you stop shooting for recoil to start dissipating
 SWEP.RecoilDissipationRate = 10
 SWEP.RecoilFirstShotMult = 1 // multiplier for the first shot's recoil amount
 
@@ -54,7 +56,7 @@ SWEP.RecoilVisualKick = 1
 
 SWEP.RecoilKick = 2.5
 
-SWEP.RecoilSpreadPenalty = 0.00125 // extra spread per one unit of recoil
+SWEP.RecoilSpreadPenalty = 0.000125 // extra spread per one unit of recoil
 
 SWEP.CanBlindFire = true
 
@@ -73,7 +75,7 @@ SWEP.SprintToFireTime = 0.33 // multiplies how long it takes to recover from spr
 
 SWEP.HoldType = "smg"
 SWEP.HoldTypeSprint = "passive"
-SWEP.HoldTypeBlindFire = false
+SWEP.HoldTypeBlindFire = "pistol"
 
 SWEP.GestureShoot = ACT_HL2MP_GESTURE_RANGE_ATTACK_AR2
 SWEP.GestureReload = ACT_HL2MP_GESTURE_RELOAD_SMG1
@@ -143,7 +145,7 @@ SWEP.MuzzleEffect = "muzzleflash_ak47"
 // WM:
 // attack1
 SWEP.AnimationTranslationTable = {
-    ["fire_iron"] = "fire3_M",
+    ["fire_iron"] = "dryfire",
     ["fire1"] = "fire1_L",
     ["fire2"] = "fire2_L",
     ["fire3"] = "fire3_L",

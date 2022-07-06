@@ -24,7 +24,6 @@ function SWEP:CreateAttachmentModel(wm, atttbl, slot, slottbl)
 
     if !IsValid(csmodel) then return end
 
-    csmodel:SetNoDraw(true)
     csmodel.Slot = slot
 
     local scale = Matrix()
@@ -36,6 +35,7 @@ function SWEP:CreateAttachmentModel(wm, atttbl, slot, slottbl)
     end
     scale:Scale(vec)
     csmodel:EnableMatrix("RenderMultiply", scale)
+    csmodel:SetNoDraw(true)
 
     local tbl = {
         Model = csmodel,

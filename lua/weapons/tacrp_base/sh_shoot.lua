@@ -36,7 +36,7 @@ function SWEP:PrimaryAttack()
         self:SetEndReload(true)
     end
 
-    if self:StillWaiting() then self:SetBurstCount(0) return end
+    if self:StillWaiting() then return end
 
     -- if self:GetValue("CanQuickNade") then
     --     if self:GetOwner():KeyDown(IN_USE) then
@@ -48,12 +48,14 @@ function SWEP:PrimaryAttack()
 
     if self:GetValue("Melee") then
         if self:GetOwner():KeyDown(IN_USE) then
+            self.Primary.Automatic = true
             self:Melee()
             return
         end
     end
 
     if self:GetCurrentFiremode() < 0 and self:GetBurstCount() >= -self:GetCurrentFiremode() then return end
+
     if self:Clip1() < self:GetValue("AmmoPerShot") then
         self.Primary.Automatic = false
         if self:GetBlindFire() then
@@ -151,7 +153,7 @@ function SWEP:PrimaryAttack()
         sshoot = table.Random(sshoot)
     end
 
-    self:EmitSound(sshoot, self:GetValue("Vol_Shoot"), 100 + util.SharedRandom("TacRP_sshoot", -pvar, pvar), 1, CHAN_WEAPON)
+    self:EmitSound(sshoot, self:GetValue("Vol_Shoot"), self:GetValue("Pitch_Shoot") + util.SharedRandom("TacRP_sshoot", -pvar, pvar), 1, CHAN_WEAPON)
 
     local delay = 60 / self:GetValue("RPM")
 
@@ -163,8 +165,6 @@ function SWEP:PrimaryAttack()
     end
 
     self:SetNextPrimaryFire(curatt + delay)
-
-    self:SetBurstCount(self:GetBurstCount() + 1)
 
     self:TakePrimaryAmmo(self:GetValue("AmmoPerShot"))
 
@@ -179,43 +179,52 @@ function SWEP:PrimaryAttack()
     if self:GetValue("ShootEnt") then
         self:ShootRocket()
     else
-        if IsFirstTimePredicted() or game.SinglePlayer() then
-        self:GetOwner():LagCompensation(true)
-            local tr = self:GetValue("TracerNum")
+        if IsFirstTimePredicted() then
+            if GetConVar("tacrp_physbullet"):GetBool() then
+                for i = 1, self:GetValue("Num") do
+                    dir = dir + (spread * AngleRand() / 3.6)
+                    TacRP:ShootPhysBullet(self, self:GetMuzzleOrigin(), dir:Forward() * self:GetValue("MuzzleVelocity"))
+                end
+            else
+                self:GetOwner():LagCompensation(true)
+                local tr = self:GetValue("TracerNum")
 
-            if self:GetValue("ScopeOverlay") and self:GetScopeLevel() > 0 then
-                tr = 0
-            end
+                if self:GetValue("ScopeOverlay") and self:GetScopeLevel() > 0 then
+                    tr = 0
+                end
 
-            self:GetOwner():FireBullets({
-                Damage = self:GetValue("Damage_Max"),
-                Force = 8,
-                Tracer = tr,
-                Num = self:GetValue("Num"),
-                Dir = dir:Forward(),
-                Src = self:GetMuzzleOrigin(),
-                Spread = Vector(spread, spread, spread),
-                IgnoreEntity = self:GetOwner():GetVehicle(),
-                Callback = function(att, btr, dmg)
-                    local range = (btr.HitPos - btr.StartPos):Length()
+                self:GetOwner():FireBullets({
+                    Damage = self:GetValue("Damage_Max"),
+                    Force = 8,
+                    Tracer = tr,
+                    Num = self:GetValue("Num"),
+                    Dir = dir:Forward(),
+                    Src = self:GetMuzzleOrigin(),
+                    Spread = Vector(spread, spread, spread),
+                    IgnoreEntity = self:GetOwner():GetVehicle(),
+                    Callback = function(att, btr, dmg)
+                        local range = (btr.HitPos - btr.StartPos):Length()
 
-                    self:AfterShotFunction(btr, dmg, range, self:GetValue("Penetration"), {})
+                        self:AfterShotFunction(btr, dmg, range, self:GetValue("Penetration"), {})
 
-                    if GetConVar("developer"):GetBool() then
-                        if SERVER then
-                            debugoverlay.Cross(btr.HitPos, 4, 5, Color(255, 0, 0), false)
-                        else
-                            debugoverlay.Cross(btr.HitPos, 4, 5, Color(255, 255, 255), false)
+                        if GetConVar("developer"):GetBool() then
+                            if SERVER then
+                                debugoverlay.Cross(btr.HitPos, 4, 5, Color(255, 0, 0), false)
+                            else
+                                debugoverlay.Cross(btr.HitPos, 4, 5, Color(255, 255, 255), false)
+                            end
                         end
                     end
-                end
-            })
+                })
 
-            self:GetOwner():LagCompensation(false)
+                self:GetOwner():LagCompensation(false)
+            end
         end
     end
 
     self:ApplyRecoil()
+
+    self:SetBurstCount(self:GetBurstCount() + 1)
 
     self:DoBulletBodygroups()
 
@@ -258,6 +267,10 @@ function SWEP:AfterShotFunction(tr, dmg, range, penleft, alreadypenned)
         alreadypenned[tr.Entity] = true
     end
 
+    if self:GetValue("Num") > 1 then
+        dmg:SetDamageType(DMG_BUCKSHOT)
+    end
+
     self:Penetrate(tr, range, penleft, alreadypenned)
 end
 
@@ -285,9 +298,17 @@ end
 function SWEP:GetShootDir()
     local dir = self:GetOwner():EyeAngles()
 
-    dir = dir + self:GetFreeAimOffset()
+    if self:GetBlindFireCorner() then
+        dir.y = dir.y + 75
+    end
 
-    dir = dir + self:GetSwayAngles()
+    local u, r, f = dir:Up(), dir:Right(), dir:Forward()
+
+    local oa = self:GetFreeAimOffset() + self:GetSwayAngles()
+
+    dir:RotateAroundAxis(u, oa.y)
+    -- dir:RotateAroundAxis(r, oa.r)
+    dir:RotateAroundAxis(r, -oa.p)
 
     return dir
 end

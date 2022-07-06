@@ -10,6 +10,4 @@ ATT.Category = "tactical" // can be "string" or {"list", "of", "strings"}
 
 ATT.SortOrder = 1
 
-ATT.Mult_Spread = 0.9
-
 ATT.Flashlight = true

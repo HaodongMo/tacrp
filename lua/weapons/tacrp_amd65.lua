@@ -18,7 +18,7 @@ SWEP.Slot = 3
 
 SWEP.Damage_Max = 100 / 3 // damage at minimum range
 SWEP.Damage_Min = 100 / 5 // damage at maximum range
-SWEP.Range_Min = 2500 // distance for which to maintain maximum damage
+SWEP.Range_Min = 1750 // distance for which to maintain maximum damage
 SWEP.Range_Max = 6000 // distance at which we drop to minimum damage
 SWEP.Penetration = 11 // units of metal this weapon can penetrate
 
@@ -36,6 +36,8 @@ SWEP.Spread = 0.003
 
 SWEP.ShootSpeedMult = 0.5
 
+SWEP.MuzzleVelocity = 25000
+
 // Spread penalties are in spread units and are additive
 SWEP.MoveSpreadPenalty = 0.0 // spread penalty while travelling at max. 250 u/s
 SWEP.MidAirSpreadPenalty = 0.0 // spread penalty for being in the air
@@ -46,7 +48,7 @@ SWEP.CrouchSpreadPenalty = 0
 
 SWEP.RecoilPerShot = 1
 SWEP.RecoilMaximum = 10
-SWEP.RecoilResetTime = 0 // time after you stop shooting for recoil to start dissipating
+SWEP.RecoilResetTime = 0.1 // time after you stop shooting for recoil to start dissipating
 SWEP.RecoilDissipationRate = 10
 SWEP.RecoilFirstShotMult = 1 // multiplier for the first shot's recoil amount
 
@@ -54,7 +56,7 @@ SWEP.RecoilVisualKick = 1.25
 
 SWEP.RecoilKick = 7.5
 
-SWEP.RecoilSpreadPenalty = 0.00125 // extra spread per one unit of recoil
+SWEP.RecoilSpreadPenalty = 0.000125 // extra spread per one unit of recoil
 
 SWEP.CanBlindFire = true
 
@@ -90,8 +92,8 @@ SWEP.SprintPos = Vector(5, 0, -2)
 SWEP.SightAng = Angle(-0.265, -0.9, 0)
 SWEP.SightPos = Vector(-4.54, -7.5, -2.9)
 
-SWEP.CorrectivePos = Vector(0, 0, 0.05)
-SWEP.CorrectiveAng = Angle(0.5, 0.1, 0)
+SWEP.CorrectivePos = Vector(0.05, 0, 0.05)
+SWEP.CorrectiveAng = Angle(0.64, 0.1, 0)
 
 // sway
 
@@ -147,7 +149,7 @@ SWEP.EjectEffect = 2
 // WM:
 // attack1
 SWEP.AnimationTranslationTable = {
-    ["fire_iron"] = "fire1_M",
+    ["fire_iron"] = "dryfire",
     ["deploy"] = "deploy",
     ["fire1"] = "fire1_M",
     ["fire2"] = "fire2_M",

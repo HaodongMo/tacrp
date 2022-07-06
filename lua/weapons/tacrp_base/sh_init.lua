@@ -78,8 +78,13 @@ function SWEP:Holster()
     self:ToggleBlindFire(false)
     self:GetOwner():SetFOV(0, 0.1)
 
-    if CLIENT then
-        self:RemoveCustomizeHUD()
+    if game.SinglePlayer() then
+        self:CallOnClient("KillModel")
+    else
+        if CLIENT then
+            self:RemoveCustomizeHUD()
+            self:KillModel()
+        end
     end
 
     -- if CLIENT then

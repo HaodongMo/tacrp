@@ -21,6 +21,8 @@ end
 function SWEP:Penetrate(tr, range, penleft, alreadypenned)
     if !GetConVar("TacRP_penetration"):GetBool() then return end
 
+    if !IsValid(self:GetOwner()) then return end
+
     local hitpos, startpos = tr.HitPos, tr.StartPos
     local dir    = (hitpos - startpos):GetNormalized()
 
@@ -41,6 +43,7 @@ function SWEP:Penetrate(tr, range, penleft, alreadypenned)
     if !tr.HitWorld then penmult = penmult * 0.5 end
 
     if trent.mmRHAe then penmult = trent.mmRHAe end
+    if trent.Impenetrable then penmult = 100000 end
 
     penmult = penmult * math.Rand(0.9, 1.1) * math.Rand(0.9, 1.1)
 

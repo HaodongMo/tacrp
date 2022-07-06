@@ -7,7 +7,7 @@ AddCSLuaFile()
 SWEP.PrintName = "PGM Ultima Ratio"
 SWEP.Category = "Tactical RP (Arctic)"
 
-SWEP.Description = "Powerful bolt action sniper rifle used at long ranges."
+SWEP.Description = "Powerful bolt action sniper rifle used at long ranges. Excellent muzzle velocity."
 
 SWEP.ViewModel = "models/weapons/tacint/v_uratio.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_uratio.mdl"
@@ -32,6 +32,8 @@ SWEP.BodyDamageMultipliers = {
     [HITGROUP_GEAR] = 0.9
 }
 
+SWEP.MuzzleVelocity = 45000
+
 // misc. shooting
 
 SWEP.Firemode = 1
@@ -50,7 +52,7 @@ SWEP.CrouchSpreadPenalty = 0
 
 SWEP.RecoilPerShot = 1
 SWEP.RecoilMaximum = 10
-SWEP.RecoilResetTime = 0 // time after you stop shooting for recoil to start dissipating
+SWEP.RecoilResetTime = 0.1// time after you stop shooting for recoil to start dissipating
 SWEP.RecoilDissipationRate = 10
 SWEP.RecoilFirstShotMult = 1 // multiplier for the first shot's recoil amount
 
@@ -70,8 +72,8 @@ SWEP.SightedSpeedMult = 0.5
 SWEP.MeleeSpeedMult = 0.5
 SWEP.MeleeSpeedMultTime = 2 // seconds to apply slow down for
 
-SWEP.AimDownSightsTime = 0.42
-SWEP.SprintToFireTime = 0.42 // multiplies how long it takes to recover from sprinting
+SWEP.AimDownSightsTime = 0.36
+SWEP.SprintToFireTime = 0.35 // multiplies how long it takes to recover from sprinting
 
 // hold types
 

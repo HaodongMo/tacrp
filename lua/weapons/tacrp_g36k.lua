@@ -16,11 +16,13 @@ SWEP.Slot = 3
 
 // "ballistics"
 
-SWEP.Damage_Max = 100 / 4 // damage at minimum range
+SWEP.Damage_Max = 100 / 3 // damage at minimum range
 SWEP.Damage_Min = 100 / 6 // damage at maximum range
-SWEP.Range_Min = 4000 // distance for which to maintain maximum damage
+SWEP.Range_Min = 1300 // distance for which to maintain maximum damage
 SWEP.Range_Max = 8000 // distance at which we drop to minimum damage
 SWEP.Penetration = 9 // units of metal this weapon can penetrate
+
+SWEP.MuzzleVelocity = 27500
 
 // misc. shooting
 
@@ -45,7 +47,7 @@ SWEP.CrouchSpreadPenalty = 0
 
 SWEP.RecoilPerShot = 1
 SWEP.RecoilMaximum = 10
-SWEP.RecoilResetTime = 0 // time after you stop shooting for recoil to start dissipating
+SWEP.RecoilResetTime = 0.1// time after you stop shooting for recoil to start dissipating
 SWEP.RecoilDissipationRate = 10
 SWEP.RecoilFirstShotMult = 1 // multiplier for the first shot's recoil amount
 
@@ -53,7 +55,7 @@ SWEP.RecoilVisualKick = 0.9
 
 SWEP.RecoilKick = 4
 
-SWEP.RecoilSpreadPenalty = 0.002 // extra spread per one unit of recoil
+SWEP.RecoilSpreadPenalty = 0.0002 // extra spread per one unit of recoil
 
 SWEP.CanBlindFire = true
 
@@ -155,7 +157,7 @@ SWEP.EjectEffect = 2
 // WM:
 // attack1
 SWEP.AnimationTranslationTable = {
-    ["fire_iron"] = {"fire1_M", "fire2_M"},
+    ["fire_iron"] = "dryfire",
     ["fire1"] = "fire1_M",
     ["fire2"] = "fire2_M",
     ["fire3"] = "fire3_M",

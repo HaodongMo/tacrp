@@ -32,6 +32,8 @@ SWEP.BodyDamageMultipliers = {
     [HITGROUP_GEAR] = 0.9
 }
 
+SWEP.MuzzleVelocity = 12000
+
 SWEP.Num = 1
 
 // misc. shooting
@@ -52,7 +54,7 @@ SWEP.CrouchSpreadPenalty = 0
 
 SWEP.RecoilPerShot = 1
 SWEP.RecoilMaximum = 10
-SWEP.RecoilResetTime = 0 // time after you stop shooting for recoil to start dissipating
+SWEP.RecoilResetTime = 0.1// time after you stop shooting for recoil to start dissipating
 SWEP.RecoilDissipationRate = 10
 SWEP.RecoilFirstShotMult = 1 // multiplier for the first shot's recoil amount
 
@@ -88,8 +90,11 @@ SWEP.GestureReload = ACT_HL2MP_GESTURE_RELOAD_AR2
 SWEP.PassiveAng = Angle(0, 0, 0)
 SWEP.PassivePos = Vector(2, -2, -6)
 
-SWEP.BlindFireAng = Angle(0, 15, -30)
-SWEP.BlindFirePos = Vector(1, -2, -2)
+SWEP.BlindFireAng = Angle(0, 0, -30)
+SWEP.BlindFirePos = Vector(1, -3, 0)
+
+SWEP.BlindFireCornerAng = Angle(75, 0, 0)
+SWEP.BlindFireCornerPos = Vector(8, 10, -6)
 
 SWEP.SprintAng = Angle(40, -15, 0)
 SWEP.SprintPos = Vector(4, 0, -4)

@@ -32,6 +32,8 @@ SWEP.BodyDamageMultipliers = {
     [HITGROUP_GEAR] = 0.9
 }
 
+SWEP.MuzzleVelocity = 32000
+
 // misc. shooting
 
 SWEP.Firemode = 1
@@ -52,7 +54,7 @@ SWEP.CrouchSpreadPenalty = 0
 
 SWEP.RecoilPerShot = 1
 SWEP.RecoilMaximum = 10
-SWEP.RecoilResetTime = 0 // time after you stop shooting for recoil to start dissipating
+SWEP.RecoilResetTime = 0.1// time after you stop shooting for recoil to start dissipating
 SWEP.RecoilDissipationRate = 10
 SWEP.RecoilFirstShotMult = 1 // multiplier for the first shot's recoil amount
 
@@ -60,7 +62,7 @@ SWEP.RecoilVisualKick = 3
 
 SWEP.RecoilKick = 5
 
-SWEP.RecoilSpreadPenalty = 0.005 // extra spread per one unit of recoil
+SWEP.RecoilSpreadPenalty = 0.0005 // extra spread per one unit of recoil
 
 SWEP.CanBlindFire = true
 
@@ -158,6 +160,7 @@ SWEP.EjectEffect = 2
 // WM:
 // attack1
 SWEP.AnimationTranslationTable = {
+    ["fire_iron"] = "dryfire",
     ["deploy"] = "draw",
     ["fire"] = {"shoot1", "shoot2"},
     ["blind_fire"] = "blind_shoot1"
@@ -198,9 +201,9 @@ SWEP.Attachments = {
         AttachSound = "TacRP/weapons/silencer_on.wav",
         DetachSound = "TacRP/weapons/silencer_off.wav",
         Pos_VM = Vector(-3.45, 0.2, 32.25),
-        Pos_WM = Vector(27, 1.25, -4.25),
+        Pos_WM = Vector(30, 0, -14.5),
         Ang_VM = Angle(90, 0, 0),
-        Ang_WM = Angle(0, 0, 180),
+        Ang_WM = Angle(-22.5, 5, 180),
         VMScale = 0.75
     },
     [3] = {
@@ -211,9 +214,9 @@ SWEP.Attachments = {
         DetachSound = "TacRP/weapons/flashlight_off.wav",
         InstalledElements = {"tactical"},
         Pos_VM = Vector(-3, -0.35, 20),
-        Pos_WM = Vector(19, 2.25, -4.4),
+        Pos_WM = Vector(23, 0, -11),
         Ang_VM = Angle(90, 0, -90),
-        Ang_WM = Angle(0, 0, 90),
+        Ang_WM = Angle(-22.5, 5, 90),
     },
     [4] = {
         PrintName = "Accessory",

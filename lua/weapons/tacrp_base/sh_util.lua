@@ -5,6 +5,7 @@ function SWEP:SanityCheck()
 end
 
 function SWEP:GetVM()
+    if self:GetOwner():IsNPC() then return end
     return self:GetOwner():GetViewModel()
 end
 

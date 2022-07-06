@@ -6,11 +6,14 @@ function SWEP:ThinkFreeAim()
 
         local freeaimang = Angle(self:GetFreeAimAngle())
 
-        local max = 10
+        local max = self:GetValue("FreeAimMaxAngle")
 
         local sightdelta = self:Curve(self:GetSightDelta())
+        local blindfiredelta = self:GetBlindFireAmount()
 
-        max = Lerp(sightdelta, max, 0.1)
+        max = max * Lerp(blindfiredelta, 1, 0.25)
+
+        max = max * Lerp(sightdelta, 1, 0)
 
         diff.p = math.NormalizeAngle(diff.p)
         diff.y = math.NormalizeAngle(diff.y)

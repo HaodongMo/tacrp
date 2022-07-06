@@ -16,17 +16,19 @@ SWEP.Slot = 2
 
 // "ballistics"
 
-SWEP.Damage_Max = 100 / 6 // damage at minimum range
+SWEP.Damage_Max = 100 / 8 // damage at minimum range
 SWEP.Damage_Min = 100 / 12 // damage at maximum range
-SWEP.Range_Min = 1000 // distance for which to maintain maximum damage
+SWEP.Range_Min = 500 // distance for which to maintain maximum damage
 SWEP.Range_Max = 3000 // distance at which we drop to minimum damage
 SWEP.Penetration = 1 // units of metal this weapon can penetrate
 SWEP.Num = 8
 
+SWEP.MuzzleVelocity = 9000
+
 SWEP.BodyDamageMultipliers = {
-    [HITGROUP_HEAD] = 1,
-    [HITGROUP_CHEST] = 1,
-    [HITGROUP_STOMACH] = 1,
+    [HITGROUP_HEAD] = 2,
+    [HITGROUP_CHEST] = 1.5,
+    [HITGROUP_STOMACH] = 1.25,
     [HITGROUP_LEFTARM] = 1,
     [HITGROUP_RIGHTARM] = 1,
     [HITGROUP_LEFTLEG] = 0.9,
@@ -40,7 +42,7 @@ SWEP.Firemode = 1
 
 SWEP.RPM = 80
 
-SWEP.Spread = 0.075
+SWEP.Spread = 0.02
 
 // Spread penalties are in spread units and are additive
 SWEP.MoveSpreadPenalty = 0 // spread penalty while travelling at max. 250 u/s
@@ -52,7 +54,7 @@ SWEP.ScopedSpreadPenalty = 0
 
 SWEP.RecoilPerShot = 1
 SWEP.RecoilMaximum = 1
-SWEP.RecoilResetTime = 0 // time after you stop shooting for recoil to start dissipating
+SWEP.RecoilResetTime = 0.1// time after you stop shooting for recoil to start dissipating
 SWEP.RecoilDissipationRate = 2.5
 SWEP.RecoilFirstShotMult = 1 // multiplier for the first shot's recoil amount
 
@@ -199,7 +201,7 @@ SWEP.Attachments = {
     },
     [3] = {
         PrintName = "Accessory",
-        Category = {"perk", "perk_melee", "perk_shooting", "perk_reload"},
+        Category = {"perk", "perk_melee", "perk_shooting", "perk_reload", "perk_shotgun_ammo"},
         AttachSound = "TacRP/weapons/flashlight_on.wav",
         DetachSound = "TacRP/weapons/flashlight_off.wav",
     },

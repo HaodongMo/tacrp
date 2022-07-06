@@ -7,7 +7,7 @@ AddCSLuaFile()
 SWEP.PrintName = "AI AS50"
 SWEP.Category = "Tactical RP (Arctic)"
 
-SWEP.Description = "High-calibre sniper rifle. Massively powerful but very difficult to handle."
+SWEP.Description = "High-calibre sniper rifle. Massively powerful but very difficult to handle. Rounds are incredibly powerful, but travel slowly."
 
 SWEP.ViewModel = "models/weapons/tacint/v_as50_hq.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_as50.mdl"
@@ -18,7 +18,7 @@ SWEP.Slot = 3
 
 SWEP.Damage_Max = 115 // damage at minimum range
 SWEP.Damage_Min = 95 // damage at maximum range
-SWEP.Range_Min = 8000 // distance for which to maintain maximum damage
+SWEP.Range_Min = 4000 // distance for which to maintain maximum damage
 SWEP.Range_Max = 12000 // distance at which we drop to minimum damage
 SWEP.Penetration = 24 // units of metal this weapon can penetrate
 SWEP.BodyDamageMultipliers = {
@@ -27,10 +27,12 @@ SWEP.BodyDamageMultipliers = {
     [HITGROUP_STOMACH] = 1,
     [HITGROUP_LEFTARM] = 1,
     [HITGROUP_RIGHTARM] = 1,
-    [HITGROUP_LEFTLEG] = 0.9,
-    [HITGROUP_RIGHTLEG] = 0.9,
-    [HITGROUP_GEAR] = 0.9
+    [HITGROUP_LEFTLEG] = 0.8,
+    [HITGROUP_RIGHTLEG] = 0.8,
+    [HITGROUP_GEAR] = 0.8
 }
+
+SWEP.MuzzleVelocity = 20000
 
 // misc. shooting
 
@@ -50,7 +52,7 @@ SWEP.CrouchSpreadPenalty = 0
 
 SWEP.RecoilPerShot = 1
 SWEP.RecoilMaximum = 5
-SWEP.RecoilResetTime = 0 // time after you stop shooting for recoil to start dissipating
+SWEP.RecoilResetTime = 0.1// time after you stop shooting for recoil to start dissipating
 SWEP.RecoilDissipationRate = 3
 SWEP.RecoilFirstShotMult = 1 // multiplier for the first shot's recoil amount
 

@@ -12,8 +12,9 @@ ATT.Category = "silencer" // can be "string" or {"list", "of", "strings"}
 ATT.SortOrder = 1
 
 ATT.Add_Vol_Shoot = -20
-ATT.Mult_RecoilPerShot = 0.9
+ATT.Mult_RecoilKick = 0.9
 ATT.Mult_Range_Max = 0.75
+ATT.Mult_MuzzleVelocity = 0.85
 
 ATT.Silencer = true
 ATT.Override_MuzzleEffect = "muzzleflash_suppressed"

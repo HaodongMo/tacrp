@@ -4,6 +4,10 @@ function SWEP:GetSwayAmount()
     local d = self:GetSightDelta()
     sway = Lerp(d, sway, self:GetValue("ScopedSway"))
 
+    if self:GetBlindFire() then
+        sway = sway + self:GetValue("BlindFireSway")
+    end
+
     return sway
 end
 

@@ -20,7 +20,12 @@ function SWEP:DrawCustomModel(wm)
 
     if !mdl then
         self:SetupModel(wm)
-        return
+
+        mdl = self.VModel
+
+        if wm then
+            mdl = self.WModel
+        end
     end
 
     local parentmdl = self
@@ -29,22 +34,37 @@ function SWEP:DrawCustomModel(wm)
         parentmdl = self:GetVM()
     end
 
-    for _, model in pairs(mdl) do
-        local slot = model.Slot
-        local slottbl = self.Attachments[slot]
-        local bone = slottbl.Bone
-        local atttbl = TacRP.GetAttTable(self.Attachments[slot].Installed)
+    if !mdl then return end
 
-        if wm then
-            bone = slottbl.WMBone or "ValveBiped.Bip01_R_Hand"
+    for _, model in pairs(mdl) do
+        local offset_pos = model.Pos
+        local offset_ang = model.Ang
+        local bone = model.Bone
+        local atttbl = {}
+        local slottbl = {}
+
+        if model.WMBase then
+            parentmdl = self:GetOwner()
         end
 
-        local offset_pos = slottbl.Pos_VM
-        local offset_ang = slottbl.Ang_VM
+        if !offset_pos or !offset_ang then
+            local slot = model.Slot
+            slottbl = self.Attachments[slot]
+            atttbl = TacRP.GetAttTable(self.Attachments[slot].Installed)
 
-        if wm then
-            offset_pos = slottbl.Pos_WM
-            offset_ang = slottbl.Ang_WM
+            bone = slottbl.Bone
+
+            if wm then
+                bone = slottbl.WMBone or "ValveBiped.Bip01_R_Hand"
+            end
+
+            offset_pos = slottbl.Pos_VM
+            offset_ang = slottbl.Ang_VM
+
+            if wm then
+                offset_pos = slottbl.Pos_WM
+                offset_ang = slottbl.Ang_WM
+            end
         end
 
         local boneindex = parentmdl:LookupBone(bone)

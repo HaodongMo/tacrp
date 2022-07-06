@@ -39,6 +39,16 @@ EFFECT.TypeSettings = {
             "TacRP/shells/shotshell_drop-5.wav",
         }
     },
+    [4] = {
+        Model = "models/tacint/shells/ks23_shell.mdl",
+        Sounds = {
+            "TacRP/shells/shotshell_drop-1.wav",
+            "TacRP/shells/shotshell_drop-2.wav",
+            "TacRP/shells/shotshell_drop-3.wav",
+            "TacRP/shells/shotshell_drop-4.wav",
+            "TacRP/shells/shotshell_drop-5.wav",
+        }
+    },
 }
 
 function EFFECT:Init(data)

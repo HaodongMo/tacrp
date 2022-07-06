@@ -55,3 +55,21 @@ function SWEP:GetDeployTime(base)
 
     return basetime * mult
 end
+
+function SWEP:GetMuzzleVelocity(base)
+    local basetime = self:GetValue("MuzzleVelocity")
+
+    if self:GetValue("ShootEnt") then
+        basetime = self:GetValue("ShootEntForce")
+    end
+
+    if base then
+        basetime = self.MuzzleVelocity
+
+        if self.ShootEnt then
+            basetime = self.ShootEntForce
+        end
+    end
+
+    return math.ceil(0.3048 * basetime / 12)
+end

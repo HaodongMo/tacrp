@@ -40,12 +40,12 @@ function SWEP:ThrowGrenade()
     local force = nade.ThrowForce
     local ent = nade.GrenadeEnt
 
-    if !self:GetOwner():KeyDown(IN_ATTACK) then
-        self:PlayAnimation("throw_grenade_underhand", self:GetValue("QuickNadeTimeMult"), true)
+    if !self:GetOwner():KeyDown(IN_GRENADE1) and !self:GetOwner():KeyDown(IN_ATTACK2) then
+        self:PlayAnimation("throw_grenade_underhand", self:GetValue("QuickNadeTimeMult"), true, true)
 
         force = force * 0.5
     else
-        self:PlayAnimation("throw_grenade", self:GetValue("QuickNadeTimeMult"), true)
+        self:PlayAnimation("throw_grenade", self:GetValue("QuickNadeTimeMult"), true, true)
     end
 
     if CLIENT then return end
@@ -97,6 +97,26 @@ end
 
 function SWEP:GetGrenadeIndex()
     return self:GetOwner():GetNWInt("ti_nade", 1)
+end
+
+function SWEP:GetNextGrenade(ind)
+    local ind = ind or self:GetGrenadeIndex()
+
+    ind = ind + 1
+
+    if ind > TacRP.QuickNades_Count then
+        ind = 1
+    elseif ind < 1 then
+        ind = TacRP.QuickNades_Count
+    end
+
+    local nade = self:GetGrenade(ind)
+
+    if nade.Secret and self:GetOwner():GetAmmoCount(nade.Ammo) <= 0 then
+        return self:GetNextGrenade(ind)
+    end
+
+    return self:GetGrenade(ind)
 end
 
 function SWEP:SelectGrenade(index)
@@ -166,6 +186,12 @@ function SWEP:ThinkGrenade()
             SafeRemoveEntity(self.QuickNadeModel)
             self.QuickNadeModel = nil
         end
+    end
+
+    if self:GetOwner():KeyDown(IN_GRENADE1) then
+        self:PrimeGrenade()
+    elseif self:GetOwner():KeyPressed(IN_GRENADE2) then
+        self:SelectGrenade()
     end
 
     if self:GetPrimedGrenade() then

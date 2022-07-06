@@ -60,7 +60,7 @@ function SWEP:CreateCustomizeHUD()
     end
     bg.Paint = function(self2, w, h)
         if !IsValid(self) then
-            self:Remove()
+            self2:Remove()
             gui.EnableScreenClicker(false)
         end
 
@@ -156,6 +156,10 @@ function SWEP:CreateCustomizeHUD()
 
                     local txt_dmg1 = tostring(math.Round(dmg)) .. " DMG"
 
+                    if self:GetValue("Num") > 1 then
+                        txt_dmg1 = math.Round(dmg * self:GetValue("Num")) .. "-" .. txt_dmg1
+                    end
+
                     surface.SetDrawColor(255, 255, 255, 255)
                     surface.DrawLine(range_m_x, 0, range_m_x, h)
 
@@ -181,6 +185,10 @@ function SWEP:CreateCustomizeHUD()
             if draw_rangetext then
                 local txt_dmg1 = tostring(math.Round(dmg_max)) .. " DMG"
 
+                if self:GetValue("Num") > 1 then
+                    txt_dmg1 = math.Round(dmg_max * self:GetValue("Num")) .. "-" .. txt_dmg1
+                end
+
                 surface.SetFont("TacRP_Myriad_Pro_8")
                 surface.SetTextColor(255, 255, 255)
                 local txt_dmg1_w = surface.GetTextSize(txt_dmg1)
@@ -196,6 +204,10 @@ function SWEP:CreateCustomizeHUD()
                 surface.DrawText(txt_range1)
 
                 local txt_dmg2 = tostring(math.Round(dmg_min)) .. " DMG"
+
+                if self:GetValue("Num") > 1 then
+                    txt_dmg2 = math.Round(dmg_min * self:GetValue("Num")) .. "-" .. txt_dmg2
+                end
 
                 surface.SetFont("TacRP_Myriad_Pro_8")
                 surface.SetTextColor(255, 255, 255)
@@ -265,6 +277,12 @@ function SWEP:CreateCustomizeHUD()
             LowerIsBetter = true,
         },
         {
+            Name = "Aim Down Sights",
+            Value = "AimDownSightsTime",
+            Unit = "s",
+            LowerIsBetter = true,
+        },
+        {
             Name = "Reload Time",
             AggregateFunction = function(base)
                 return self:GetReloadTime(base)
@@ -283,18 +301,26 @@ function SWEP:CreateCustomizeHUD()
             Unit = "s"
         },
         {
-            Name = "Recoil Per Shot",
-            Value = "RecoilPerShot",
+            Name = "Muzzle Velocity",
+            AggregateFunction = function(base)
+                return self:GetMuzzleVelocity(base)
+            end,
+            Value = "MuzzleVelocity",
+            LowerIsBetter = false,
+            Unit = "m/s"
+        },
+        {
+            Name = "Mag Size",
+            Value = "ClipSize",
+        },
+        {
+            Name = "Recoil",
+            Value = "RecoilKick",
             LowerIsBetter = true,
         },
         {
             Name = "Recoil Time",
             Value = "RecoilResetTime",
-            LowerIsBetter = true,
-        },
-        {
-            Name = "Recoil Kick",
-            Value = "RecoilKick",
             LowerIsBetter = true,
         },
         {
@@ -305,26 +331,6 @@ function SWEP:CreateCustomizeHUD()
         {
             Name = "Recoil Spread",
             Value = "RecoilSpreadPenalty",
-            LowerIsBetter = true,
-        },
-        {
-            Name = "Moving Spread",
-            Value = "MoveSpreadPenalty",
-            LowerIsBetter = true,
-        },
-        {
-            Name = "Crouched Spread",
-            Value = "CrouchSpreadPenalty",
-            LowerIsBetter = true,
-        },
-        {
-            Name = "Scoped Spread",
-            Value = "ScopedSpreadPenalty",
-            LowerIsBetter = true,
-        },
-        {
-            Name = "Blind Fire Spread",
-            Value = "BlindFireSpreadPenalty",
             LowerIsBetter = true,
         },
         {

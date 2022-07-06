@@ -27,3 +27,5 @@ TacRP.PenTable = {
 TacRP.PresetPath = "TacRP_presets/"
 
 TacRP.OverDraw = false
+
+TacRP.HUToM = 0.3048 / 12

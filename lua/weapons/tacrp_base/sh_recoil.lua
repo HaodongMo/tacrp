@@ -2,24 +2,8 @@ function SWEP:ThinkRecoil()
     if (IsFirstTimePredicted() and CLIENT) or game.SinglePlayer() then
         if self:GetRecoilAmount() > 0 then
             local kick = self:GetValue("RecoilKick")
-            local recoildir = self:GetRecoilDirection()
             local rec = math.min(self:GetRecoilAmount(), 1)
             local sightdelta = self:GetSightDelta()
-
-            local eyeang = self:GetOwner():EyeAngles()
-
-            if self:GetOwner():InVehicle() then
-                local vehang = self:GetOwner():GetVehicle():GetAngles()
-
-                eyeang.y = eyeang.y - vehang.y
-                eyeang.p = eyeang.p + vehang.p
-                eyeang.r = vehang.r
-            end
-
-            eyeang.p = eyeang.p + math.sin(math.rad(recoildir)) * FrameTime() * kick * rec
-            eyeang.y = eyeang.y + math.cos(math.rad(recoildir)) * FrameTime() * kick * rec
-
-            self:GetOwner():SetEyeAngles(eyeang)
 
             local aim_kick_v = rec * kick * math.sin((CurTime() - kick) * 15) * FrameTime() * (1 - sightdelta)
             local aim_kick_h = rec * kick * math.sin(CurTime() * 12.2) * FrameTime() * (1 - sightdelta)
@@ -68,6 +52,6 @@ function SWEP:ApplyRecoil()
 
     self:GetOwner():SetViewPunchAngles(Angle(vis_kick_v, vis_kick_h, vis_shake))
 
-    self:GetOwner():SetFOV(self:GetShouldFOV() * 0.99, 0)
-    self:GetOwner():SetFOV(self:GetShouldFOV(), 60 / (self:GetValue("RPM")))
+    -- self:GetOwner():SetFOV(self:GetOwner():GetFOV() * 0.99, 0)
+    -- self:GetOwner():SetFOV(self:GetOwner():GetFOV(), 60 / (self:GetValue("RPM")))
 end

@@ -24,3 +24,22 @@ function TacRP.DrawCorneredBox(x, y, w, h, col)
     surface.SetMaterial(mat_corner_br)
     surface.DrawTexturedRect(x + w - s, y + h - s, s, s)
 end
+
+local hide = {
+    ["CHudHealth"] = true,
+    ["CHudBattery"] = true,
+    ["CHudAmmo"] = true,
+    ["CHudSecondaryAmmo"] = true,
+}
+
+hook.Add("HUDShouldDraw", "TacRP_HideHUD", function(name)
+    if !IsValid(LocalPlayer()) then return end
+
+    local wpn = LocalPlayer():GetActiveWeapon()
+
+    if !wpn.ArcticTacRP then return end
+
+    if !GetConVar("tacrp_drawhud"):GetBool() then return end
+
+    if hide[name] then return false end
+end)

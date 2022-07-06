@@ -1,4 +1,3 @@
-local blindfiredelta = 0
 local customizedelta = 0
 
 SWEP.ViewModelPos = Vector(0, 0, 0)
@@ -11,6 +10,8 @@ function SWEP:GetViewModelPosition(pos, ang)
 
     -- pos = Vector(0, 0, 0)
     -- ang = Angle(0, 0, 0)
+
+    ang = ang - (self:GetOwner():GetViewPunchAngles() * 0.5)
 
     local oldang = Angle(0, 0, 0)
 
@@ -27,19 +28,23 @@ function SWEP:GetViewModelPosition(pos, ang)
     offsetpos:Set(self.PassivePos)
     offsetang:Set(self.PassiveAng)
 
-    local cor_val = (self.ViewModelFOV / self:GetShouldFOV())
+    -- local cor_val = (self.ViewModelFOV / self:GetShouldFOV())
+    local cor_val = 0.75
 
-    if (game.SinglePlayer() or IsFirstTimePredicted()) and self:GetBlindFire() then
-        blindfiredelta = math.Approach(blindfiredelta, 1, FrameTime() * 1 / 0.15)
-    else
-        blindfiredelta = math.Approach(blindfiredelta, 0, FrameTime() * 1 / 0.15)
-    end
+    local blindfiredelta = self:GetBlindFireAmount()
+    local blindfirecornerdelta = self:GetBlindFireCornerAmount()
 
     local curvedblindfiredelta = self:Curve(blindfiredelta)
+    local curvedblindfirecornerdelta = self:Curve(blindfirecornerdelta)
 
     if blindfiredelta > 0 then
         offsetpos = LerpVector(curvedblindfiredelta, offsetpos, self:GetValue("BlindFirePos"))
         offsetang = LerpAngle(curvedblindfiredelta, offsetang, self:GetValue("BlindFireAng"))
+
+        if curvedblindfirecornerdelta > 0 then
+            offsetpos = LerpVector(curvedblindfirecornerdelta, offsetpos, self:GetValue("BlindFireCornerPos"))
+            offsetang = LerpAngle(curvedblindfirecornerdelta, offsetang, self:GetValue("BlindFireCornerAng"))
+        end
     end
 
     local sightdelta = self:Curve(self:GetSightDelta())
@@ -128,9 +133,20 @@ function SWEP:GetViewModelPosition(pos, ang)
     extra_offsetpos = extra_offsetpos + spr_joffset
     extra_offsetang = extra_offsetang + spr_jaffset
 
-    self.BobScale = Lerp(sprintdelta, 1, 3)
-    self.BobScale = Lerp(sightdelta, self.BobScale, 0.1)
+    -- self.BobScale = Lerp(sprintdelta, 1, 3)
+    -- self.BobScale = Lerp(sightdelta, self.BobScale, 0.1)
     self.SwayScale = Lerp(sightdelta, 1, 0.1)
+
+    self.BobScale = 0
+
+    if game.SinglePlayer() or IsFirstTimePredicted() then
+        self.ViewModelPos = LerpVector(0.8, offsetpos, self.ViewModelPos)
+        self.ViewModelAng = LerpAngle(0.8, offsetang, self.ViewModelAng)
+    end
+
+    offsetpos = self.ViewModelPos
+    offsetang = self.ViewModelAng
+    self.ViewModelAng:Normalize()
 
     pos = pos + (ang:Right() * offsetpos[1])
     pos = pos + (ang:Forward() * offsetpos[2])
@@ -148,8 +164,15 @@ function SWEP:GetViewModelPosition(pos, ang)
     ang:RotateAroundAxis(oldang:Right(), extra_offsetang[2])
     ang:RotateAroundAxis(oldang:Forward(), extra_offsetang[3])
 
-    self.ViewModelPos = pos
-    self.ViewModelAng = ang
+    pos, ang = self:GetViewModelBob(pos, ang)
+    -- pos, ang = self:GetMidAirBob(pos, ang)
+    -- pos, ang = self:GetViewModelLeftRight(pos, ang)
+    -- pos, ang = self:GetViewModelInertia(pos, ang)
+    pos, ang = self:GetViewModelSway(pos, ang)
+    pos, ang = self:GetViewModelSmooth(pos, ang)
+
+    -- self.ViewModelPos = pos
+    -- self.ViewModelAng = ang
 
     return pos, ang
 end

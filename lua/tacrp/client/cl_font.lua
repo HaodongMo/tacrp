@@ -1,4 +1,5 @@
 local sizes_to_make = {
+    4,
     6,
     8,
     10,
@@ -12,8 +13,11 @@ local unscaled_sizes_to_make = {
 
 local fonts_to_make = {
     "LondonBetween",
-    "Myriad Pro"
+    "Myriad Pro",
+    "HD44780A00 5x8"
 }
+
+-- TacRP_HD44780A00_5x8_32
 
 local function generatefonts()
 

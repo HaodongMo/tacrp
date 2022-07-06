@@ -44,28 +44,36 @@ function SWEP:NPC_PrimaryAttack()
     if self:GetValue("ShootEnt") then
         self:ShootRocket()
     else
-        self:GetOwner():FireBullets({
-            Damage = self:GetValue("Damage_Max"),
-            Force = 8,
-            Tracer = tr,
-            Num = self:GetValue("Num"),
-            Dir = self:GetOwner():GetAimVector(),
-            Src = self:GetOwner():GetShootPos(),
-            Spread = Vector(spread, spread, spread),
-            Callback = function(att, btr, dmg)
-                local range = (btr.HitPos - btr.StartPos):Length()
+        if GetConVar("tacrp_physbullet"):GetBool() then
+            for i = 1, self:GetValue("Num") do
+                local dir = self:GetOwner():GetAimVector():Angle()
+                dir = dir + (spread * AngleRand() / 3.6)
+                TacRP:ShootPhysBullet(self, self:GetOwner():GetShootPos(), dir:Forward() * self:GetValue("MuzzleVelocity"))
+            end
+        else
+            self:GetOwner():FireBullets({
+                Damage = self:GetValue("Damage_Max"),
+                Force = 8,
+                Tracer = tr,
+                Num = self:GetValue("Num"),
+                Dir = self:GetOwner():GetAimVector(),
+                Src = self:GetOwner():GetShootPos(),
+                Spread = Vector(spread, spread, spread),
+                Callback = function(att, btr, dmg)
+                    local range = (btr.HitPos - btr.StartPos):Length()
 
-                self:AfterShotFunction(btr, dmg, range, self:GetValue("Penetration"), {})
+                    self:AfterShotFunction(btr, dmg, range, self:GetValue("Penetration"), {})
 
-                if GetConVar("developer"):GetBool() then
-                    if SERVER then
-                        debugoverlay.Cross(btr.HitPos, 4, 5, Color(255, 0, 0), false)
-                    else
-                        debugoverlay.Cross(btr.HitPos, 4, 5, Color(255, 255, 255), false)
+                    if GetConVar("developer"):GetBool() then
+                        if SERVER then
+                            debugoverlay.Cross(btr.HitPos, 4, 5, Color(255, 0, 0), false)
+                        else
+                            debugoverlay.Cross(btr.HitPos, 4, 5, Color(255, 255, 255), false)
+                        end
                     end
                 end
-            end
-        })
+            })
+        end
     end
 
     self:DoEffects()

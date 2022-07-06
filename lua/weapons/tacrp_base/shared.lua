@@ -44,6 +44,8 @@ SWEP.BodyDamageMultipliers = {
     [HITGROUP_GEAR] = 0.9
 }
 
+SWEP.MuzzleVelocity = 30000
+
 // misc. shooting
 
 // Firemode system works just like ArcCW
@@ -110,6 +112,7 @@ SWEP.HoldTypeNPC = nil
 
 SWEP.GestureShoot = ACT_HL2MP_GESTURE_RANGE_ATTACK_AR2
 SWEP.GestureReload = ACT_HL2MP_GESTURE_RELOAD_AR2
+SWEP.GestureBash = ACT_GMOD_GESTURE_MELEE_SHOVE_1HAND
 
 SWEP.PassiveAng = Angle(0, 0, 0)
 SWEP.PassivePos = Vector(0, 0, 0)
@@ -119,6 +122,9 @@ SWEP.SprintPos = Vector(0, 0, 0)
 
 SWEP.BlindFireAng = Angle(0, 15, 0)
 SWEP.BlindFirePos = Vector(0, 0, -6)
+
+SWEP.BlindFireCornerAng = Angle(75, 0, 0)
+SWEP.BlindFireCornerPos = Vector(8, 10, -12)
 
 SWEP.CustomizeAng = Angle(30, 15, 0)
 SWEP.CustomizePos = Vector(5, 0, -6)
@@ -147,12 +153,14 @@ SWEP.ScopeHideWeapon = false
 SWEP.QuickScopeSpreadPenalty = 0
 SWEP.QuickScopeTime = 0 // amount of time over which to fade out the quickscope spread penalty
 
-SWEP.FreeAim = true
-
 // sway
 
 SWEP.Sway = 1
 SWEP.ScopedSway = 0.1
+SWEP.BlindFireSway = 2
+
+SWEP.FreeAim = true
+SWEP.FreeAimMaxAngle = 10
 
 // quicknade
 
@@ -200,6 +208,7 @@ SWEP.Sound_Shoot = "^"
 SWEP.Sound_Shoot_Silenced = ""
 
 SWEP.Vol_Shoot = 110
+SWEP.Pitch_Shoot = 100
 SWEP.ShootPitchVariance = 2.5 // amount to vary pitch by each shot
 
 SWEP.Sound_ScopeIn = ""
@@ -284,10 +293,12 @@ SWEP.Attachments = nil
 // boilerplate
 
 SWEP.ArcticTacRP = true
-SWEP.DrawCrosshair = true
+SWEP.DrawCrosshair = false
 SWEP.AccurateCrosshair = true
 SWEP.DrawWeaponInfoBox = false
 SWEP.UseHands = true
+
+SWEP.Shields = {}
 
 SWEP.CurrentAnimation = ""
 
@@ -354,6 +365,8 @@ function SWEP:SetupDataTables()
     self:NetworkVar("Float", 10, "StartPrimedGrenadeTime")
     self:NetworkVar("Float", 11, "ReloadFinishTime")
     self:NetworkVar("Float", 12, "SightAmount")
+    self:NetworkVar("Float", 13, "BlindFireAmount")
+    self:NetworkVar("Float", 14, "BlindFireCornerAmount")
 
     self:NetworkVar("Int", 0, "BurstCount")
     self:NetworkVar("Int", 1, "ScopeLevel")
@@ -367,6 +380,8 @@ function SWEP:SetupDataTables()
     self:NetworkVar("Bool", 3, "EndReload")
     self:NetworkVar("Bool", 4, "PrimedGrenade")
     self:NetworkVar("Bool", 5, "Safe")
+    self:NetworkVar("Bool", 6, "BlindFireCorner")
+    self:NetworkVar("Bool", 7, "Charge")
 
     self:NetworkVar("Angle", 0, "FreeAimAngle")
     self:NetworkVar("Angle", 1, "LastAimAngle")

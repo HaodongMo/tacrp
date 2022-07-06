@@ -2,19 +2,18 @@
 
 local conVars = {
     {
-        name = "showgrenadepanel",
+        name = "drawhud",
         default = "1",
-        type = "bool",
         client = true
     },
     {
         name = "autoreload",
-        default = "0",
+        default = "1",
         client = true
     },
     {
         name = "autosave",
-        default = "0",
+        default = "1",
         client = true
     },
     {
@@ -24,12 +23,12 @@ local conVars = {
     },
     {
         name = "free_atts",
-        default = "0",
+        default = "1",
         replicated = true
     },
     {
         name = "lock_atts",
-        default = "0",
+        default = "1",
         replicated = true
     },
     {
@@ -64,6 +63,15 @@ local conVars = {
         default = "1",
         replicated = true
     },
+    {
+        name = "physbullet",
+        default = "1",
+        replicated = true
+    },
+    {
+        name = "resupply_grenades",
+        default = "1",
+    },
 }
 
 local prefix = "TacRP_"
@@ -84,6 +92,31 @@ end
 
 if CLIENT then
 
+TacRP.ControlGuide = [[
+TacRP Controls:
+
+Blind Fire Forward: +walk & +forward (ALT + W)
+
+Blind Fire Left: +walk & +moveleft (ALT + A)
+
+Quick Melee: +use & +attack (E + MOUSE1)
+
+Change Firemode: +use & +reload (E + R)
+
+Safe: +use & +attack2 (E + MOUSE2)
+
+Customize: +menu_context (C)
+
+Throw Grenade: +grenade1 (Not bound by default! Do 'bind g +grenade1' in console!)
+
+Change Grenade: +grenade2 (Not bound by default! Do 'bind h +grenade2' in console!)]]
+
+local function menu_guide_ti(panel)
+    panel:AddControl("label", {
+        text = TacRP.ControlGuide,
+    })
+end
+
 local function menu_client_ti(panel)
     panel:AddControl("checkbox", {
         label = "Reload Automatically",
@@ -94,8 +127,8 @@ local function menu_client_ti(panel)
         command = "TacRP_autosave"
     })
     panel:AddControl("checkbox", {
-        label = "Show Grenade Panel",
-        command = "TacRP_showgrenadepanel"
+        label = "Show HUD",
+        command = "TacRP_drawhud"
     })
 end
 
@@ -121,12 +154,20 @@ local function menu_server_ti(panel)
         command = "TacRP_penetration"
     })
     panel:AddControl("checkbox", {
+        label = "Supply Boxes Resupply Grenades",
+        command = "TacRP_resupply_grenades"
+    })
+    panel:AddControl("checkbox", {
         label = "NPCs Deal Equal Damage",
         command = "TacRP_npc_equality"
     })
     panel:AddControl("checkbox", {
         label = "NPCs Get Random Attachments",
         command = "TacRP_npc_atts"
+    })
+    panel:AddControl("checkbox", {
+        label = "Physical Bullets",
+        command = "TacRP_physbullet"
     })
     panel:AddControl("label", {
         text = "Disable body damage cancel only if you have another addon that will override the hl2 limb damage multipliers."
@@ -138,6 +179,9 @@ local function menu_server_ti(panel)
 end
 
 local clientmenus_ti = {
+    {
+        text = "Control Guide", func = menu_guide_ti
+    },
     {
         text = "Client", func = menu_client_ti
     },

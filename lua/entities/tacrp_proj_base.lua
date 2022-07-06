@@ -27,6 +27,7 @@ ENT.TimeFuse = false // projectile will arm after this amount of time
 ENT.RemoteFuse = false // allow this projectile to be triggered by remote detonator.
 ENT.ImpactFuse = false // projectile explodes on impact.
 
+ENT.ExplodeOnImpact = false
 ENT.ExplodeOnDamage = false // projectile explodes when it takes damage.
 ENT.ExplodeUnderwater = false // projectile explodes when it enters water
 
@@ -98,7 +99,7 @@ function ENT:PhysicsCollide(data, collider)
         self.ArmTime = CurTime()
         self.Armed = true
 
-        if self.Delay == 0 then
+        if self.Delay == 0 or self.ExplodeOnImpact then
             self:SetPos(data.HitPos)
             self:PreDetonate()
         end

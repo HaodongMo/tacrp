@@ -27,7 +27,7 @@ SWEP.RPM = 120
 
 SWEP.CanBlindFire = false
 
-SWEP.Ammo = ""
+SWEP.Ammo = "ti_c4"
 SWEP.ClipSize = -1
 
 SWEP.SupplyAmmoType = "ti_c4"
@@ -88,9 +88,10 @@ addsound("TacInt_C4_Detonator.Detonator_Press", path .. "detonator_press.wav")
 addsound("TacInt_C4_Detonator.antenna_open", path .. "antenna_open.wav")
 
 function SWEP:PrimaryAttack()
-    if self:GetValue("CanQuickNade") then
+    if self:GetValue("Melee") then
         if self:GetOwner():KeyDown(IN_USE) then
-            self:PrimeGrenade()
+            self.Primary.Automatic = true
+            self:Melee()
             return
         end
     end
@@ -108,6 +109,11 @@ function SWEP:PrimaryAttack()
     end
 
     self:SetNextPrimaryFire(CurTime() + (60 / self:GetValue("RPM")))
+end
+
+function SWEP:SecondaryAttack()
+    self:GetOwner():SetNWInt("ti_nade", 2)
+    self:PrimeGrenade()
 end
 
 function SWEP:GiveDefaultAmmo()

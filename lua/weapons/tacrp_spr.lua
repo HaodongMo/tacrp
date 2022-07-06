@@ -16,7 +16,7 @@ SWEP.Slot = 3
 
 // "ballistics"
 
-SWEP.Damage_Max = 100 // damage at minimum range
+SWEP.Damage_Max = 95 // damage at minimum range
 SWEP.Damage_Min = 60 // damage at maximum range
 SWEP.Range_Min = 4000 // distance for which to maintain maximum damage
 SWEP.Range_Max = 12000 // distance at which we drop to minimum damage
@@ -24,13 +24,15 @@ SWEP.Penetration = 17 // units of metal this weapon can penetrate
 SWEP.BodyDamageMultipliers = {
     [HITGROUP_HEAD] = 2,
     [HITGROUP_CHEST] = 1.25,
-    [HITGROUP_STOMACH] = 1,
+    [HITGROUP_STOMACH] = 1.1,
     [HITGROUP_LEFTARM] = 1,
     [HITGROUP_RIGHTARM] = 1,
     [HITGROUP_LEFTLEG] = 0.9,
     [HITGROUP_RIGHTLEG] = 0.9,
     [HITGROUP_GEAR] = 0.9
 }
+
+SWEP.MuzzleVelocity = 35000
 
 // misc. shooting
 
@@ -50,7 +52,7 @@ SWEP.CrouchSpreadPenalty = 0
 
 SWEP.RecoilPerShot = 1
 SWEP.RecoilMaximum = 10
-SWEP.RecoilResetTime = 0 // time after you stop shooting for recoil to start dissipating
+SWEP.RecoilResetTime = 0.1// time after you stop shooting for recoil to start dissipating
 SWEP.RecoilDissipationRate = 10
 SWEP.RecoilFirstShotMult = 1 // multiplier for the first shot's recoil amount
 
@@ -70,7 +72,7 @@ SWEP.SightedSpeedMult = 0.5
 SWEP.MeleeSpeedMult = 0.5
 SWEP.MeleeSpeedMultTime = 2 // seconds to apply slow down for
 
-SWEP.AimDownSightsTime = 0.30
+SWEP.AimDownSightsTime = 0.32
 SWEP.SprintToFireTime = 0.30 // multiplies how long it takes to recover from sprinting
 
 // hold types
@@ -89,14 +91,17 @@ SWEP.PassivePos = Vector(2, -2, -6)
 SWEP.BlindFireAng = Angle(0, 15, -45)
 SWEP.BlindFirePos = Vector(1, -2, -2)
 
+SWEP.BlindFireCornerAng = Angle(75, 0, 0)
+SWEP.BlindFireCornerPos = Vector(8, 10, -6)
+
 SWEP.SprintAng = Angle(30, -15, 0)
 SWEP.SprintPos = Vector(5, 0, -2)
 
 SWEP.SightAng = Angle(0.03, 0.4, 0)
 SWEP.SightPos = Vector(-2.715, -6.5, -4.62)
 
-SWEP.CorrectivePos = Vector(0.05, 0, 0.1)
-SWEP.CorrectiveAng = Angle(-0.4, 0, 0)
+SWEP.CorrectivePos = Vector(0.05, 0, 0.2)
+SWEP.CorrectiveAng = Angle(-0.36, -0.3, 0)
 
 // scope
 
