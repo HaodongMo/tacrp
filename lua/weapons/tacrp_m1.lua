@@ -82,7 +82,7 @@ SWEP.SprintAng = Angle(30, -15, 0)
 SWEP.SprintPos = Vector(5, 0, -2)
 
 SWEP.SightAng = Angle(0, -1, 0)
-SWEP.SightPos = Vector(-5.38, 0, -2.03)
+SWEP.SightPos = Vector(-5.381, -9, -2.0)
 
 // reload
 
