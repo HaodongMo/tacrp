@@ -335,6 +335,7 @@ local tracer = Material("effects/tracer_middle")
 function TacRP:DrawPhysBullets()
     cam.Start3D()
     for _, i in pairs(TacRP.PhysBullets) do
+        if i.Travelled <= 1024 then continue end
         local pos = i.Pos
 
         local speedvec = -i.Vel:GetNormalized()
