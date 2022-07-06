@@ -103,6 +103,11 @@ SWEP.SightPos = Vector(-3.45, -5, -2.7)
 SWEP.CorrectivePos = Vector(0.275, 0, -0.2)
 SWEP.CorrectiveAng = Angle(1.21, 0.1, 0)
 
+SWEP.HolsterVisible = true
+SWEP.HolsterSlot = TacRP.HOLSTER_SLOT_BACK
+SWEP.HolsterPos = Vector(5, 0, -6)
+SWEP.HolsterAng = Angle(0, 0, 0)
+
 // reload
 
 SWEP.ClipSize = 6
