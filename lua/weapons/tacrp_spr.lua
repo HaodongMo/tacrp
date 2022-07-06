@@ -212,9 +212,9 @@ SWEP.Attachments = {
         AttachSound = "TacRP/weapons/silencer_on.wav",
         DetachSound = "TacRP/weapons/silencer_off.wav",
         Pos_VM = Vector(-2.85, 0.125, 42),
-        Pos_WM = Vector(23, 2.5, -2.8),
+        Pos_WM = Vector(22.5, 1.2, -4.9),
         Ang_VM = Angle(90, 0, 0),
-        Ang_WM = Angle(0, -3.5, 180),
+        Ang_WM = Angle(0, 0, 180),
     },
     [3] = {
         PrintName = "Tactical",
@@ -225,9 +225,9 @@ SWEP.Attachments = {
         DetachSound = "TacRP/weapons/flashlight_off.wav",
         InstalledElements = {"tactical"},
         Pos_VM = Vector(-2, -0.8, 20),
-        Pos_WM = Vector(14, 3, -3),
+        Pos_WM = Vector(8, 2, -4),
         Ang_VM = Angle(90, 0, -90),
-        Ang_WM = Angle(0, -3.5, 90),
+        Ang_WM = Angle(0, 0, 90),
     },
     [4] = {
         PrintName = "Accessory",
