@@ -12,7 +12,7 @@ SWEP.Description = "Bullet hose machine pistol with a high rate of fire."
 SWEP.ViewModel = "models/weapons/tacint/v_uzi.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_uzi.mdl"
 
-SWEP.Slot = 2
+SWEP.Slot = 1
 
 // "ballistics"
 
@@ -90,6 +90,11 @@ SWEP.SprintPos = Vector(5, 0, -2)
 
 SWEP.SightAng = Angle(0.1, 0, 1)
 SWEP.SightPos = Vector(-3.67, -6.5, -3.4)
+
+SWEP.HolsterVisible = true
+SWEP.HolsterSlot = TacRP.HOLSTER_SLOT_PISTOL
+SWEP.HolsterPos = Vector(0, 3, -4)
+SWEP.HolsterAng = Angle(90, 0, 0)
 
 SWEP.Sway = 2
 SWEP.ScopedSway = 0.25

@@ -52,6 +52,12 @@ SWEP.PassivePos = Vector(-2, 0, -3)
 SWEP.SprintAng = Angle(0, 0, 0)
 SWEP.SprintPos = Vector(2, 0, -4)
 
+SWEP.HolsterVisible = true
+SWEP.HolsterSlot = TacRP.HOLSTER_SLOT_GEAR
+SWEP.HolsterPos = Vector(-3, -5, 0)
+SWEP.HolsterAng = Angle(-90, -90, 15)
+
+
 SWEP.SprintMidPoint = {
     Pos = Vector(0.25, 2, 1),
     Ang = Angle(0, -5, 10)

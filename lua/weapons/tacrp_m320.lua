@@ -103,9 +103,9 @@ SWEP.SightAng = Angle(1.075, 7.1, 0)
 SWEP.SightPos = Vector(-1.34, 0, -8.15)
 
 SWEP.HolsterVisible = true
-SWEP.HolsterSlot = TacRP.HOLSTER_SLOT_BACK
-SWEP.HolsterPos = Vector(5, 0, -6)
-SWEP.HolsterAng = Angle(0, 0, 0)
+SWEP.HolsterSlot = TacRP.HOLSTER_SLOT_GEAR
+SWEP.HolsterPos = Vector(0, -2, -3)
+SWEP.HolsterAng = Angle(0, -90, -25)
 
 // melee
 

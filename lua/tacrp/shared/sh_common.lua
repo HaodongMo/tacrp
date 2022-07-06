@@ -41,8 +41,8 @@ TacRP.HolsterBones = {
         Vector(0, 0, 0),
     },
     [TacRP.HOLSTER_SLOT_PISTOL] = {
-        "ValveBiped.Bip01_Pelvis",
-        Vector(0, -10, 0),
+        "ValveBiped.Bip01_R_Thigh",
+        Vector(0, 0, 0),
     },
     [TacRP.HOLSTER_SLOT_GEAR] = {
         "ValveBiped.Bip01_Pelvis",
