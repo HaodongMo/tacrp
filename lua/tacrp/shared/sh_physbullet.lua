@@ -335,27 +335,59 @@ local tracer = Material("effects/tracer_middle")
 function TacRP:DrawPhysBullets()
     cam.Start3D()
     for _, i in pairs(TacRP.PhysBullets) do
-        if i.Travelled <= (i.Vel:Length() * 0.05) then continue end
+        if i.Travelled <= 1024 then continue end
+        local pos = i.Pos
+
+        local speedvec = -i.Vel:GetNormalized()
+        local vec = speedvec
+        local shoulddraw = true
+
+        if IsValid(i.Weapon) then
+            local fromvec = (i.Weapon:GetTracerOrigin() - pos):GetNormalized()
+
+            local d = math.min(i.Travelled / 1024, 1)
+            if i.Indirect then
+                d = 1
+            end
+
+            vec = LerpVector(d, fromvec, speedvec)
+        end
+
+        if !shoulddraw then continue end
 
         local size = 1
 
-        size = size * math.log(EyePos():DistToSqr(i.Pos) - math.pow(512, 2))
+        size = size * math.log(EyePos():DistToSqr(pos) - math.pow(512, 2))
 
         size = math.Clamp(size, 0, math.huge)
 
-        -- local delta = (EyePos():DistToSqr(i.Pos) / math.pow(20000, 2))
+        local headsize = size
 
-        -- size = math.pow(size, Lerp(delta, 1, 2))
+        headsize = headsize * math.min(EyePos():DistToSqr(pos) / math.pow(2500, 2), 1)
+
+        local vel = i.Vel - LocalPlayer():GetVelocity()
+
+        local dot = EyeAngles():Forward():Dot(vel:GetNormalized())
+
+        dot = math.abs(dot)
+
+        dot = math.Clamp(((dot * dot) - 0.5) * 5, 0, 1)
+
+        headsize = headsize * dot * 2
 
         -- cam.Start3D()
 
-        local col = Color(255, 225, 200)
+        local col = i.Color or Color(255, 225, 200)
+        -- local col = Color(255, 225, 200)
 
         render.SetMaterial(head)
-        render.DrawSprite(i.Pos, size, size, col)
+        render.DrawSprite(pos, headsize, headsize, col)
 
         render.SetMaterial(tracer)
-        render.DrawBeam(i.Pos, i.Pos - i.Vel:GetNormalized() * math.min(i.Vel:Length() * 0.5, 512), size * 0.75, 0, 1, col)
+
+        local tail = (vec:GetNormalized() * math.min(vel:Length() * 0.5, math.min(512, i.Travelled - 64)))
+
+        render.DrawBeam(pos, pos + tail, size * 0.75, 0, 1, col)
 
         -- cam.End3D()
     end

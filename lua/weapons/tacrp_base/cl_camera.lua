@@ -5,10 +5,10 @@ function SWEP:CalcView(ply, pos, ang, fov)
 
     rec = math.max(rec, 0)
 
-    rec = rec * self:GetValue("RecoilKick")
+    rec = rec * (self:GetValue("RecoilKick")  + 1)
 
     if rec > 0 then
-        ang.r = ang.r + (math.sin(CurTime() * 70.151) * rec * 0.25)
+        ang.r = ang.r + (math.sin(CurTime() * 70.151) * rec)
     end
 
     local mag = self:GetMagnification()
