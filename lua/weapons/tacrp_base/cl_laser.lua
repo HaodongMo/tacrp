@@ -56,16 +56,14 @@ function SWEP:DrawLasers(wm)
         local power = 2
 
         if atttbl.Laser then
-            if wm then
+            if wm and IsValid(k.WModel) then
                 if self:GetOwner():IsPlayer() then
                     self:DrawLaser(k.WModel:GetPos(), self:GetShootDir(), power)
                 else
                     self:DrawLaser(k.WModel:GetPos(), k.WModel:GetAngles(), power)
                 end
-            else
-                if k.VModel then
-                    self:DrawLaser(k.VModel:GetPos() + (k.VModel:GetAngles():Up() * 0.75), k.VModel:GetAngles(), power)
-                end
+            elseif IsValid(k.VModel) then
+                self:DrawLaser(k.VModel:GetPos() + (k.VModel:GetAngles():Up() * 0.75), k.VModel:GetAngles(), power)
             end
         end
     end

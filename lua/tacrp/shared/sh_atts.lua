@@ -39,9 +39,9 @@ function TacRP.LoadAtts()
         TacRP.Attachments[shortname] = ATT
         TacRP.Attachments_Index[TacRP.Attachments_Count] = shortname
 
-        if GetConVar("TacRP_generateattentities"):GetBool() and !ATT.DoNotRegister and !ATT.InvAtt and !ATT.Free then
+        if GetConVar("tacrp_generateattentities"):GetBool() and !ATT.DoNotRegister and !ATT.InvAtt and !ATT.Free then
             local attent = {}
-            attent.Base = "TacRP_att"
+            attent.Base = "tacrp_att"
             attent.Icon = ATT.Icon
             attent.PrintName = ATT.PrintName or shortname
             attent.Spawnable = true
@@ -51,7 +51,7 @@ function TacRP.LoadAtts()
 
             print("Registering entity for " .. shortname)
 
-            scripted_ents.Register(attent, "TacRP_att_" .. shortname)
+            scripted_ents.Register(attent, "tacrp_att_" .. shortname)
         end
     end
 
