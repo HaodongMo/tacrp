@@ -86,7 +86,7 @@ SWEP.SightPos = Vector(-5.381, -9, -2.0)
 
 // reload
 
-SWEP.ClipSize = 30
+SWEP.ClipSize = 20
 SWEP.Ammo = "smg1"
 
 SWEP.ReloadTimeMult = 1
