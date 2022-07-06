@@ -1,5 +1,5 @@
 ATT.PrintName = "Flechette"
-ATT.Icon = Material("entities/TacRP_att_ammo_40mm_heat.png", "mips smooth")
+ATT.Icon = Material("entities/tacrp_att_ammo_40mm_heat.png", "mips smooth")
 ATT.Description = "Grenade packed with thin darts."
 
 ATT.Category = "ammo_40mm" // can be "string" or {"list", "of", "strings"}

@@ -1,5 +1,5 @@
 ATT.PrintName = "Fast Reload"
-ATT.Icon = Material("entities/tacRP_att_acc_reload.png", "mips smooth")
+ATT.Icon = Material("entities/tacrp_att_acc_reload.png", "mips smooth")
 ATT.Description = "Training techniques for improving reload speed under stress."
 ATT.Pros = {"Reload Speed"}
 

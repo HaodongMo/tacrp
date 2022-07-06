@@ -1,5 +1,5 @@
 ATT.PrintName = "Holographic"
-ATT.Icon = Material("entities/TacRP_att_optic_holographic.png", "mips smooth")
+ATT.Icon = Material("entities/tacrp_att_optic_holographic.png", "mips smooth")
 ATT.Description = "Boxy optic that helps to improve mid-range aim."
 ATT.Pros = {"Zoom"}
 ATT.Cons = {"No melee attack"}

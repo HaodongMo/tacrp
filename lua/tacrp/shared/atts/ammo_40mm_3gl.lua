@@ -1,5 +1,5 @@
 ATT.PrintName = "3GL"
-ATT.Icon = Material("entities/TacRP_att_ammo_40mm_3gl.png", "mips smooth")
+ATT.Icon = Material("entities/tacrp_att_ammo_40mm_3gl.png", "mips smooth")
 ATT.Description = "Three weak cluster grenades, fired at once."
 
 ATT.Category = "ammo_40mm" // can be "string" or {"list", "of", "strings"}

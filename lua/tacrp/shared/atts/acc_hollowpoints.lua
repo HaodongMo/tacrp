@@ -1,5 +1,5 @@
 ATT.PrintName = "Hollowpoints"
-ATT.Icon = Material("entities/TacRP_att_acc_hollowpoints.png", "mips smooth")
+ATT.Icon = Material("entities/tacrp_att_acc_hollowpoints.png", "mips smooth")
 ATT.Description = "Bullets that improve damage, but are available only in a small magazine."
 ATT.Pros = {"Damage"}
 ATT.Cons = {"Mag Capacity"}

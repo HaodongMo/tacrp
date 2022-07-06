@@ -1,5 +1,5 @@
 ATT.PrintName = "Red Dot"
-ATT.Icon = Material("entities/TacRP_att_optic_rds.png", "mips smooth")
+ATT.Icon = Material("entities/tacrp_att_optic_rds.png", "mips smooth")
 ATT.Description = "Tube optic that helps to improve mid-range aim."
 ATT.Pros = {"Zoom"}
 ATT.Cons = {"No melee attack"}

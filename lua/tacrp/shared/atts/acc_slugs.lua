@@ -1,5 +1,5 @@
 ATT.PrintName = "Slugs"
-ATT.Icon = Material("entities/TacRP_att_acc_slugs.png", "mips smooth")
+ATT.Icon = Material("entities/tacrp_att_acc_slugs.png", "mips smooth")
 
 ATT.InstalledElements = {"smallmag"}
 
