@@ -10,9 +10,10 @@ ATT.Category = {"ammo_pistol", "ammo_rifle", "ammo_shotgun"} // can be "string" 
 
 ATT.SortOrder = 1
 
-ATT.Add_RecoilKick = 0.75
+ATT.Add_RecoilKick = 1
 ATT.Mult_RecoilKick = 1.5
 ATT.Mult_RecoilSpreadPenalty = 2
 ATT.Mult_MuzzleVelocity = 1.25
 ATT.Mult_Damage_Max = 1.25
 ATT.Mult_RecoilFirstShotMult = 3
+ATT.Mult_Range_Min = 0.75

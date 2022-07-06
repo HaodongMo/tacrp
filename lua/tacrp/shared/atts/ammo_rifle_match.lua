@@ -7,4 +7,5 @@ ATT.Category = "ammo_rifle" // can be "string" or {"list", "of", "strings"}
 
 ATT.SortOrder = 1
 
-ATT.Mult_ScopedSpreadPenalty = -1
+ATT.ScopedSpreadPenalty = -1
+ATT.Mult_MuzzleVelocity = 1.25

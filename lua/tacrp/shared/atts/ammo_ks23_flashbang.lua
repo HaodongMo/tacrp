@@ -1,7 +1,7 @@
 ATT.PrintName = "Zvezda Shell"
 ATT.Icon = Material("entities/tacrp_att_ammo_ks23_flashbang.png", "mips smooth")
 
-ATT.Category = "perk_ks23_ammo" // can be "string" or {"list", "of", "strings"}
+ATT.Category = "ammo_ks23" // can be "string" or {"list", "of", "strings"}
 
 ATT.Override_MuzzleEffect = "muzzleflash_smg"
 
