@@ -1,4 +1,4 @@
-function SWEP:DoBodygroups(wm)
+function SWEP:DoBodygroups(wm, custom_wm)
     if !wm and !IsValid(self:GetOwner()) then return end
     if !wm and self:GetOwner():IsNPC() then return end
 
@@ -7,7 +7,7 @@ function SWEP:DoBodygroups(wm)
     local mdl
 
     if wm then
-        mdl = self
+        mdl = custom_wm or self
         dbg = self:GetValue("DefaultWMBodygroups")
     else
         mdl = self:GetVM()

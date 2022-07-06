@@ -44,6 +44,9 @@ hook.Add("PostPlayerDraw", "TacRP_Holster", function(ply)
         model:DrawModel()
         model:SetRenderOrigin()
         model:SetRenderAngles()
+
+        wep:DoBodygroups(true, model)
+
         wep:DrawCustomModel(true, ply.TacRP_HolsterModels[i])
     end
 end)
