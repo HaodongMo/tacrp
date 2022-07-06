@@ -102,7 +102,9 @@ function SWEP:DrawCustomModel(wm)
         model:SetRenderAngles(aang)
 
         if model.IsHolosight and !wm then
+            cam.Start3D(EyePos(), EyeAngles(), self.ViewModelFOV, 0, 0, nil, nil, 1, 10000)
             self:DoHolosight(model)
+            cam.End3D()
         end
 
         if !model.NoDraw then
