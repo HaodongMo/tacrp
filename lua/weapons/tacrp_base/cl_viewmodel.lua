@@ -7,7 +7,7 @@ function SWEP:ViewModelDrawn()
     self:DrawLasers()
 end
 
-function SWEP:DrawCustomModel(wm)
+function SWEP:DrawCustomModel(wm, custom_wm)
 
     if !wm and !IsValid(self:GetOwner()) then return end
     if !wm and self:GetOwner():IsNPC() then return end
@@ -19,7 +19,7 @@ function SWEP:DrawCustomModel(wm)
     end
 
     if !mdl then
-        self:SetupModel(wm)
+        self:SetupModel(wm, custom_wm)
 
         mdl = self.VModel
 
@@ -32,6 +32,8 @@ function SWEP:DrawCustomModel(wm)
 
     if !wm then
         parentmdl = self:GetVM()
+    elseif custom_wm then
+        parentmdl = custom_wm
     end
 
     if !mdl then return end
@@ -105,6 +107,7 @@ function SWEP:DrawCustomModel(wm)
             cam.Start3D(EyePos(), EyeAngles(), self.ViewModelFOV, 0, 0, nil, nil, 1, 10000)
             self:DoHolosight(model)
             cam.End3D()
+            cam.IgnoreZ(true)
         end
 
         if !model.NoDraw then
@@ -126,14 +129,15 @@ function SWEP:PreDrawViewModel()
 
     -- cam.Start3D(nil, nil, 70)
 
-    -- cam.Start3D(nil, nil, self.ViewModelFOV, nil, nil, nil, nil, 0.1, nil)
+    --cam.Start3D(nil, nil, self.ViewModelFOV, nil, nil, nil, nil, 0.1, nil)
     cam.IgnoreZ(true)
     -- self:DrawEjectedShells()
 end
 
 function SWEP:PostDrawViewModel()
+    --cam.End3D()
     cam.IgnoreZ(false)
-    -- cam.End3D()
+
     if self:GetValue("ScopeHideWeapon") then
         if self:IsInScope() then
             render.SetBlend(1)

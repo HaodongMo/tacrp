@@ -13,7 +13,7 @@ function SWEP:KillModel()
     self.WModel = nil
 end
 
-function SWEP:CreateAttachmentModel(wm, atttbl, slot, slottbl)
+function SWEP:CreateAttachmentModel(wm, atttbl, slot, slottbl, custom_wm)
     local model = atttbl.Model
 
     if wm and atttbl.WorldModel then
@@ -53,7 +53,7 @@ function SWEP:CreateAttachmentModel(wm, atttbl, slot, slottbl)
     return csmodel
 end
 
-function SWEP:SetupModel(wm)
+function SWEP:SetupModel(wm, custom_wm)
     self:KillModel()
 
     if !wm and !IsValid(self:GetOwner()) then return end

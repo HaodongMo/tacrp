@@ -29,3 +29,23 @@ TacRP.PresetPath = "TacRP_presets/"
 TacRP.OverDraw = false
 
 TacRP.HUToM = 0.3048 / 12
+
+TacRP.HolsterNetBits = 2
+TacRP.HOLSTER_SLOT_BACK = 1
+TacRP.HOLSTER_SLOT_PISTOL = 2
+TacRP.HOLSTER_SLOT_GEAR = 3
+
+TacRP.HolsterBones = {
+    [TacRP.HOLSTER_SLOT_BACK] = {
+        "ValveBiped.Bip01_Spine2",
+        Vector(0, 0, 0),
+    },
+    [TacRP.HOLSTER_SLOT_PISTOL] = {
+        "ValveBiped.Bip01_Pelvis",
+        Vector(0, -10, 0),
+    },
+    [TacRP.HOLSTER_SLOT_GEAR] = {
+        "ValveBiped.Bip01_Pelvis",
+        Vector(0, 10, 0),
+    },
+}
