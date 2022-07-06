@@ -95,7 +95,7 @@ SWEP.DropMagazineImpact = "metal"
 
 // sounds
 
-local path = "tacint/weapons/m1/"
+local path = "tacrp/weapons/m1/"
 
 SWEP.Sound_Shoot = "^" .. path .. "fire-1.wav"
 SWEP.Sound_Shoot_Silenced = path .. "fire_silenced-1.wav"
