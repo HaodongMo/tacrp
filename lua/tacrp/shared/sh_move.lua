@@ -8,7 +8,9 @@ function TacRP.Move(ply, mv, cmd)
 
     local mult = 1
 
-    mult = mult * wpn:GetValue("MoveSpeedMult")
+    if !wpn:GetSafe() then
+        mult = mult * wpn:GetValue("MoveSpeedMult")
+    end
 
     if wpn:GetScopeLevel() > 0 then
         mult = mult * wpn:GetValue("SightedSpeedMult")
