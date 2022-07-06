@@ -231,8 +231,8 @@ function SWEP:PrimaryAttack()
     if self:Clip1() == 0 then self.Primary.Automatic = false end
 end
 
-function SWEP:AfterShotFunction(tr, dmg, range, penleft, alreadypenned)
-    if !IsFirstTimePredicted() and !game.SinglePlayer() then return end
+function SWEP:AfterShotFunction(tr, dmg, range, penleft, alreadypenned, forced)
+    if !forced and !IsFirstTimePredicted() and !game.SinglePlayer() then return end
     local dmgv = self:GetDamageAtRange(range)
 
     local bodydamage = self:GetValue("BodyDamageMultipliers")

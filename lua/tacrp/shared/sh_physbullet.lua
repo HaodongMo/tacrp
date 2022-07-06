@@ -263,7 +263,7 @@ function TacRP:ProgressPhysBullet(bullet, timestep)
                         Damage = 0,
                         IgnoreEntity = attacker,
                         Callback = function(att, btr, dmg)
-                            if GetConVar("tacrp_client_damage"):GetBool() and IsValid(btr.Entity) then
+                            if GetConVar("tacrp_client_damage"):GetBool() then
                                 net.Start("tacrp_clientdamage")
                                     net.WriteEntity(weapon)
                                     net.WriteEntity(btr.Entity)
@@ -480,7 +480,7 @@ if SERVER then
             Src = pos - diff,
             Spread = Vector(0, 0, 0),
             Callback = function(att, btr, dmg)
-                weapon:AfterShotFunction(btr, dmg, range, penleft, damaged)
+                weapon:AfterShotFunction(btr, dmg, range, penleft, damaged, true)
             end
         })
         if suppress then

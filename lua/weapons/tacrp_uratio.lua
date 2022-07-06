@@ -110,7 +110,7 @@ SWEP.ScopeHideWeapon = true
 // reload
 
 SWEP.ClipSize = 10
-SWEP.Ammo = "sniperpenetratedround"
+SWEP.Ammo = "SniperPenetratedRound"
 
 SWEP.ReloadTimeMult = 1
 SWEP.DropMagazineImpact = "metal"
