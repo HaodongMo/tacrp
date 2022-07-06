@@ -47,16 +47,16 @@ SWEP.BlindFireSpreadPenalty = 0.0 // spread penalty for blind firing
 SWEP.CrouchSpreadPenalty = 0
 
 SWEP.RecoilPerShot = 1
-SWEP.RecoilMaximum = 10
-SWEP.RecoilResetTime = 0.1 // time after you stop shooting for recoil to start dissipating
+SWEP.RecoilMaximum = 15
+SWEP.RecoilResetTime = 0.15 // time after you stop shooting for recoil to start dissipating
 SWEP.RecoilDissipationRate = 10
 SWEP.RecoilFirstShotMult = 1 // multiplier for the first shot's recoil amount
 
-SWEP.RecoilVisualKick = 1.25
+SWEP.RecoilVisualKick = 2
 
-SWEP.RecoilKick = 7.5
+SWEP.RecoilKick = 8
 
-SWEP.RecoilSpreadPenalty = 0.000125 // extra spread per one unit of recoil
+SWEP.RecoilSpreadPenalty = 0.000175 // extra spread per one unit of recoil
 
 SWEP.CanBlindFire = true
 
