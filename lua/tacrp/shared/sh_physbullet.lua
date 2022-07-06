@@ -40,6 +40,14 @@ function TacRP:ShootPhysBullet(wep, pos, vel, tbl)
         NPC = wep:GetOwner():IsNPC()
     }
 
+    if wep:GetValue("TracerNum") == 0 then
+        bullet.Invisible = true
+    else
+        if wep:Clip1() % wep:GetValue("TracerNum") != 0 then
+            bullet.Invisible = true
+        end
+    end
+
     for i, k in pairs(tbl) do
         bullet[i] = k
     end
@@ -95,6 +103,16 @@ net.Receive("TacRP_sendbullet", function(len, ply)
         Gravity = grav,
         Weapon = weapon,
     }
+
+    if !weapon:IsValid() then return end
+
+    if weapon:GetValue("TracerNum") == 0 then
+        bullet.Invisible = true
+    else
+        if weapon:Clip1() % weapon:GetValue("TracerNum") != 0 then
+            bullet.Invisible = true
+        end
+    end
 
     if bit.band( util.PointContents( pos ), CONTENTS_WATER ) == CONTENTS_WATER then
         bullet.Underwater = true
@@ -335,6 +353,7 @@ local tracer = Material("effects/tracer_middle")
 function TacRP:DrawPhysBullets()
     cam.Start3D()
     for _, i in pairs(TacRP.PhysBullets) do
+        if i.Invisible then continue end
         if i.Travelled <= 1024 then continue end
         local pos = i.Pos
 

@@ -46,6 +46,10 @@ SWEP.BodyDamageMultipliers = {
 
 SWEP.MuzzleVelocity = 30000
 
+SWEP.ExplosiveEffect = nil
+SWEP.ExplosiveDamage = 0
+SWEP.ExplosiveRadius = 0
+
 // misc. shooting
 
 // Firemode system works just like ArcCW

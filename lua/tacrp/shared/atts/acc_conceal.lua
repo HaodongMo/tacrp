@@ -9,4 +9,4 @@ ATT.SortOrder = 4
 
 ATT.Override_HolsterVisible = false
 
-ATT.Mult_DeployTimeMult = 0.8
+ATT.Mult_DeployTimeMult = 1.25

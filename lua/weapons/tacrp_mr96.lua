@@ -202,6 +202,18 @@ SWEP.Attachments = {
         AttachSound = "TacRP/weapons/flashlight_on.wav",
         DetachSound = "TacRP/weapons/flashlight_off.wav",
     },
+    [4] = {
+        PrintName = "Trigger",
+        Category = {"trigger_semi"},
+        AttachSound = "TacRP/weapons/flashlight_on.wav",
+        DetachSound = "TacRP/weapons/flashlight_off.wav",
+    },
+    [5] = {
+        PrintName = "Ammo",
+        Category = {"ammo_pistol"},
+        AttachSound = "TacRP/weapons/flashlight_on.wav",
+        DetachSound = "TacRP/weapons/flashlight_off.wav",
+    }
 }
 
 local function addsound(name, spath)

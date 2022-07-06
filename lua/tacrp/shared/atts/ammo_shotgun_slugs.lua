@@ -3,7 +3,7 @@ ATT.Icon = Material("entities/tacrp_att_acc_slugs.png", "mips smooth")
 
 ATT.InstalledElements = {"smallmag"}
 
-ATT.Category = "perk_shotgun_ammo" // can be "string" or {"list", "of", "strings"}
+ATT.Category = "ammo_shotgun" // can be "string" or {"list", "of", "strings"}
 
 ATT.SortOrder = 1
 

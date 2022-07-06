@@ -6,7 +6,7 @@ ATT.Cons = {"Mag Capacity"}
 
 ATT.InstalledElements = {"smallmag"}
 
-ATT.Category = "perk_hollowpoints" // can be "string" or {"list", "of", "strings"}
+ATT.Category = "ammo_pistol" // can be "string" or {"list", "of", "strings"}
 
 ATT.SortOrder = 1
 
