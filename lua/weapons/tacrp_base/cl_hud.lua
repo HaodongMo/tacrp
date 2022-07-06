@@ -598,10 +598,16 @@ function SWEP:DrawHUD()
     lastammo = self:Clip1()
     lastarmor = LocalPlayer():Armor()
 
-    if self:GetSightAmount() > 0 and GetConVar("developer"):GetInt() > 1 and LocalPlayer():IsAdmin() then
+    if !self:GetReloading() and !self:GetCustomize() and GetConVar("developer"):GetInt() > 1 and LocalPlayer():IsAdmin() then
+        local v = LocalPlayer():EyePos() + self:GetShootDir():Forward() * 32
+        cam.Start3D()
+            local w2s = v:ToScreen()
+            w2s.x = math.Round(w2s.x)
+            w2s.y = math.Round(w2s.y)
+        cam.End3D()
         surface.SetDrawColor(255, 50, 50, 150)
-        surface.DrawLine(ScrW() / 2, ScrH() * 0.5 - 256, ScrW() / 2, ScrH() * 0.5 + 256)
-        surface.DrawLine(ScrW() * 0.5 - 256, ScrH() / 2, ScrW() * 0.5 + 256, ScrH() / 2)
+        surface.DrawLine(w2s.x, w2s.y - 256, w2s.x, w2s.y + 256)
+        surface.DrawLine(w2s.x - 256, w2s.y, w2s.x + 256, w2s.y)
     end
 end
 
