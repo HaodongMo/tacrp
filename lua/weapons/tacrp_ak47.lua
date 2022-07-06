@@ -7,7 +7,7 @@ AddCSLuaFile()
 SWEP.PrintName = "AKMS"
 SWEP.Category = "Tactical RP (Arctic)"
 
-SWEP.Description = "High caliber assault rifle with excellent damage."
+SWEP.Description = "High caliber assault rifle with excellent damage but poor sustained fire capabilities."
 
 SWEP.ViewModel = "models/weapons/tacint/v_ak47.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_ak47.mdl"
@@ -24,19 +24,16 @@ SWEP.Penetration = 10 // units of metal this weapon can penetrate
 
 // misc. shooting
 
-SWEP.Firemode = 2
+SWEP.Firemodes = {
+    2,
+    1
+}
 
 SWEP.RPM = 600
 
-SWEP.Spread = 0.007
+SWEP.Spread = 0.0025
 
-// Spread penalties are in spread units and are additive
-SWEP.MoveSpreadPenalty = 0 // spread penalty while travelling at max. 250 u/s
-SWEP.MidAirSpreadPenalty = 0 // spread penalty for being in the air
-SWEP.HipFireSpreadPenalty = 0 // spread penalty for not being scoped in
-SWEP.ScopedSpreadPenalty = 0
-SWEP.BlindFireSpreadPenalty = 0 // spread penalty for blind firing
-SWEP.CrouchSpreadPenalty = 0
+
 
 SWEP.RecoilPerShot = 1
 SWEP.RecoilMaximum = 10
@@ -48,7 +45,7 @@ SWEP.RecoilVisualKick = 0.75
 
 SWEP.RecoilKick = 5
 
-SWEP.RecoilSpreadPenalty = 0.0035 // extra spread per one unit of recoil
+SWEP.RecoilSpreadPenalty = 0.0005 // extra spread per one unit of recoil
 
 SWEP.CanBlindFire = true
 
@@ -207,6 +204,12 @@ SWEP.Attachments = {
         Ang_WM = Angle(0, -90, 180),
     },
     [4] = {
+        PrintName = "Ammunition",
+        Category = {"ammo", "ammo_rifle"},
+        AttachSound = "tacrp/weapons/flashlight_on.wav",
+        DetachSound = "tacrp/weapons/flashlight_off.wav",
+    },
+    [5] = {
         PrintName = "Accessory",
         Category = {"foldstock", "perk", "perk_melee", "perk_shooting", "perk_reload"},
         AttachSound = "tacrp/weapons/flashlight_on.wav",
