@@ -14,24 +14,74 @@ SWEP.WorldModel = "models/weapons/tacint/w_m4.mdl"
 
 SWEP.Slot = 3
 
+SWEP.RPM = 600
+
 SWEP.Firemode = 1
 
 SWEP.Firemodes = false
 
-local path = "TacRP/weapons/m4/m4_"
 
-local function addsound(name, spath)
-    sound.Add({
-        name = name,
-        channel = 16,
-        volume = 1.0,
-        sound = spath
-    })
-end
-
-addsound("TacInt_m4.Remove_Clip", path .. "remove_clip.wav")
-addsound("TacInt_m4.Insert_Clip", path .. "insert_clip.wav")
-addsound("TacInt_m4.Insert_Clip-mid", path .. "insert_clip-mid.wav")
-addsound("TacInt_m4.bolt_action", path .. "bolt_action.wav")
-addsound("TacInt_m4.bolt_slap", path .. "bolt_slap.wav")
-addsound("TacInt_m4.throw_catch", path .. "throw_catch.wav")
+SWEP.Attachments = {
+    [1] = {
+        PrintName = "Optic",
+        Category = {"optic_cqb", "optic_medium"},
+        InstalledElements = {"sights"},
+        Bone = "ValveBiped.m4_rootbone",
+        WMBone = "Box01",
+        AttachSound = "TacRP/weapons/optic_on.wav",
+        DetachSound = "TacRP/weapons/optic_off.wav",
+        VMScale = 1,
+        Pos_VM = Vector(-5.35, -0.05, 7),
+        Pos_WM = Vector(0.75, 5, 1.15),
+        Ang_VM = Angle(90, 0, 0),
+        Ang_WM = Angle(0, -90 + 3.5, 0),
+    },
+    [2] = {
+        PrintName = "Muzzle",
+        Category = "silencer",
+        Bone = "ValveBiped.m4_rootbone",
+        WMBone = "Box01",
+        AttachSound = "TacRP/weapons/silencer_on.wav",
+        DetachSound = "TacRP/weapons/silencer_off.wav",
+        Pos_VM = Vector(-3.95, 0, 23),
+        Pos_WM = Vector(1.4, 21, -0.5),
+        Ang_VM = Angle(90, 0, 0),
+        Ang_WM = Angle(0, -90 + 3.5, 0),
+    },
+    [3] = {
+        PrintName = "Tactical",
+        Category = "tactical",
+        Bone = "ValveBiped.m4_rootbone",
+        WMBone = "Box01",
+        AttachSound = "TacRP/weapons/flashlight_on.wav",
+        DetachSound = "TacRP/weapons/flashlight_off.wav",
+        Pos_VM = Vector(-3.9, -1.2, 13.5),
+        Pos_WM = Vector(2, 13, -0.5),
+        Ang_VM = Angle(90, 0, -90),
+        Ang_WM = Angle(-90, -90 + 3.5, 0),
+    },
+    [4] = {
+        PrintName = "Accessory",
+        Category = {"foldstock", "perk", "perk_melee", "perk_shooting", "perk_reload", "perk_extendedmag", "perk_sling"},
+        AttachSound = "TacRP/weapons/flashlight_on.wav",
+        DetachSound = "TacRP/weapons/flashlight_off.wav",
+    },
+    [5] = {
+        PrintName = "Bolt",
+        Category = {"bolt_automatic"},
+        AttachSound = "TacRP/weapons/flashlight_on.wav",
+        DetachSound = "TacRP/weapons/flashlight_off.wav",
+    },
+    [6] = {
+        PrintName = "Trigger",
+        Category = {"trigger_semi"},
+        AttachSound = "TacRP/weapons/flashlight_on.wav",
+        DetachSound = "TacRP/weapons/flashlight_off.wav",
+    },
+    [7] = {
+        PrintName = "Ammo",
+        Category = {"ammo_rifle"},
+        AttachSound = "TacRP/weapons/flashlight_on.wav",
+        DetachSound = "TacRP/weapons/flashlight_off.wav",
+    }
+}

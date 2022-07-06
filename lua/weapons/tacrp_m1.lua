@@ -30,11 +30,9 @@ SWEP.RPM = 450
 
 SWEP.Spread = 0.0035
 
-
-
 SWEP.RecoilPerShot = 1
 SWEP.RecoilMaximum = 5
-SWEP.RecoilResetTime = 0.25 // time after you stop shooting for recoil to start dissipating
+SWEP.RecoilResetTime = 0.2 // time after you stop shooting for recoil to start dissipating
 SWEP.RecoilDissipationRate = 100
 SWEP.RecoilFirstShotMult = 1 // multiplier for the first shot's recoil amount
 
