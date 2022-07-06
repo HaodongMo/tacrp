@@ -4,77 +4,67 @@ SWEP.Spawnable = true
 AddCSLuaFile()
 
 // names and stuff
-SWEP.PrintName = "Steyr AUG"
+SWEP.PrintName = "AKMS"
 SWEP.Category = "Tactical RP (Arctic)"
 
-SWEP.Description = "Three-round burst bullpup assault rifle with good recoil."
+SWEP.Description = "High caliber assault rifle with excellent damage."
 
-SWEP.ViewModel = "models/weapons/tacint/v_aug.mdl"
-SWEP.WorldModel = "models/weapons/tacint/w_aug.mdl"
+SWEP.ViewModel = "models/weapons/tacint/v_ak47.mdl"
+SWEP.WorldModel = "models/weapons/tacint/w_ak47.mdl"
 
 SWEP.Slot = 3
 
 // "ballistics"
 
 SWEP.Damage_Max = 100 / 3 // damage at minimum range
-SWEP.Damage_Min = 100 / 6 // damage at maximum range
-SWEP.Range_Min = 1200 // distance for which to maintain maximum damage
-SWEP.Range_Max = 6500 // distance at which we drop to minimum damage
-SWEP.Penetration = 2.5 // units of metal this weapon can penetrate
-
-SWEP.MuzzleVelocity = 24000
+SWEP.Damage_Min = 100 / 4 // damage at maximum range
+SWEP.Range_Min = 2000 // distance for which to maintain maximum damage
+SWEP.Range_Max = 5000 // distance at which we drop to minimum damage
+SWEP.Penetration = 10 // units of metal this weapon can penetrate
 
 // misc. shooting
 
-SWEP.Firemodes = {
-    -3,
-    1
-}
+SWEP.Firemode = 2
 
-SWEP.RPM = 750
+SWEP.RPM = 600
 
-SWEP.Spread = 0.00025
-
-SWEP.PostBurstDelay = 0.1
-
-SWEP.RunawayBurst = true
+SWEP.Spread = 0.007
 
 // Spread penalties are in spread units and are additive
-SWEP.MoveSpreadPenalty = 0.0 // spread penalty while travelling at max. 250 u/s
-SWEP.MidAirSpreadPenalty = 0.0 // spread penalty for being in the air
-SWEP.HipFireSpreadPenalty = 0.0 // spread penalty for not being scoped in
+SWEP.MoveSpreadPenalty = 0 // spread penalty while travelling at max. 250 u/s
+SWEP.MidAirSpreadPenalty = 0 // spread penalty for being in the air
+SWEP.HipFireSpreadPenalty = 0 // spread penalty for not being scoped in
 SWEP.ScopedSpreadPenalty = 0
-SWEP.BlindFireSpreadPenalty = 0.0 // spread penalty for blind firing
+SWEP.BlindFireSpreadPenalty = 0 // spread penalty for blind firing
 SWEP.CrouchSpreadPenalty = 0
 
 SWEP.RecoilPerShot = 1
 SWEP.RecoilMaximum = 10
-SWEP.RecoilResetTime = 0.1 // time after you stop shooting for recoil to start dissipating
+SWEP.RecoilResetTime = 0.2 // time after you stop shooting for recoil to start dissipating
 SWEP.RecoilDissipationRate = 100
-SWEP.RecoilFirstShotMult = 1 // multiplier for the first shot's recoil amount
+SWEP.RecoilFirstShotMult = 0.8 // multiplier for the first shot's recoil amount
 
 SWEP.RecoilVisualKick = 0.75
 
-SWEP.RecoilKick = 4
+SWEP.RecoilKick = 5
 
-SWEP.RecoilSpreadPenalty = 0.000175 // extra spread per one unit of recoil
+SWEP.RecoilSpreadPenalty = 0.0035 // extra spread per one unit of recoil
 
 SWEP.CanBlindFire = true
 
 // handling
 
-SWEP.MoveSpeedMult = 0.9
-SWEP.ShootingSpeedMult = 0.75 // slow down applied while shooting
+SWEP.MoveSpeedMult = 0.94
+SWEP.ShootingSpeedMult = 1 // slow down applied while shooting
 SWEP.SightedSpeedMult = 0.5
 SWEP.MeleeSpeedMult = 0.5
 SWEP.MeleeSpeedMultTime = 2 // seconds to apply slow down for
 
-SWEP.AimDownSightsTime = 0.4
-SWEP.SprintToFireTime = 0.4 // multiplies how long it takes to recover from sprinting
+SWEP.SprintToFireTime = 0.33 // multiplies how long it takes to recover from sprinting
 
 // hold types
 
-SWEP.HoldType = "smg"
+SWEP.HoldType = "ar2"
 SWEP.HoldTypeSprint = "passive"
 SWEP.HoldTypeBlindFire = false
 
@@ -82,7 +72,7 @@ SWEP.GestureShoot = ACT_HL2MP_GESTURE_RANGE_ATTACK_AR2
 SWEP.GestureReload = ACT_HL2MP_GESTURE_RELOAD_SMG1
 
 SWEP.PassiveAng = Angle(0, 0, 0)
-SWEP.PassivePos = Vector(0, -2, -5.5)
+SWEP.PassivePos = Vector(0, -2, -4)
 
 SWEP.BlindFireAng = Angle(0, 5, 0)
 SWEP.BlindFirePos = Vector(0, -2, -4)
@@ -90,29 +80,25 @@ SWEP.BlindFirePos = Vector(0, -2, -4)
 SWEP.SprintAng = Angle(30, -15, 0)
 SWEP.SprintPos = Vector(5, 0, -2)
 
-SWEP.SightAng = Angle(0.01, 0.12, 0)
-SWEP.SightPos = Vector(-3.93, -6, -4.9)
+SWEP.SightAng = Angle(0, 0, -1)
+SWEP.SightPos = Vector(-4.62, -7, -3)
 
-SWEP.CorrectivePos = Vector(0.12, 0, 0)
-SWEP.CorrectiveAng = Angle(0, 0, -1)
+SWEP.CorrectivePos = Vector(0, 0, -0.05)
+SWEP.CorrectiveAng = Angle(0.75, 0.7, 0)
 
-SWEP.HolsterVisible = true
-SWEP.HolsterSlot = TacRP.HOLSTER_SLOT_BACK
-SWEP.HolsterPos = Vector(5, 4, -6)
-SWEP.HolsterAng = Angle(0, 0, 0)
-
-// reload
+SWEP.Sway = 1
+SWEP.ScopedSway = 0.1
 
 SWEP.ClipSize = 30
-SWEP.Ammo = "smg1"
+SWEP.Ammo = "ar2"
 
 SWEP.ReloadTimeMult = 1
-SWEP.DropMagazineModel = "models/weapons/tacint/magazines/aug.mdl"
-SWEP.DropMagazineImpact = "plastic"
+SWEP.DropMagazineModel = "models/weapons/tacint/magazines/ak47.mdl"
+SWEP.DropMagazineImpact = "metal"
 
 // sounds
 
-local path = "tacrp/weapons/aug/aug_"
+local path = "tacrp/weapons/ak47/ak47_"
 
 SWEP.Sound_Shoot = "^" .. path .. "fire-1.wav"
 SWEP.Sound_Shoot_Silenced = path .. "fire_silenced-1.wav"
@@ -127,7 +113,7 @@ SWEP.QCA_Muzzle = 1
 // ditto for shell
 SWEP.QCA_Eject = 2
 
-SWEP.MuzzleEffect = "muzzleflash_5"
+SWEP.MuzzleEffect = "muzzleflash_ak47"
 SWEP.EjectEffect = 2
 
 // anims
@@ -152,7 +138,8 @@ SWEP.EjectEffect = 2
 // WM:
 // attack1
 SWEP.AnimationTranslationTable = {
-    ["fire_iron"] = "dryfire",
+    ["deploy"] = "deploy",
+    ["fire_iron"] = "fire1_M",
     ["fire1"] = "fire1_M",
     ["fire2"] = "fire2_M",
     ["fire3"] = "fire3_M",
@@ -164,13 +151,18 @@ SWEP.AnimationTranslationTable = {
 // attachments
 
 SWEP.AttachmentElements = {
-    ["irons"] = {
+    ["foldstock"] = {
         BGs_VM = {
             {1, 1}
         },
         BGs_WM = {
             {1, 1}
         }
+    },
+    ["tactical"] = {
+        BGs_VM = {
+            {2, 1}
+        },
     },
 }
 
@@ -179,42 +171,44 @@ SWEP.Attachments = {
     [1] = {
         PrintName = "Optic",
         Category = {"optic_cqb", "optic_medium", "optic_sniper"},
-        InstalledElements = {"irons"},
-        Bone = "ValveBiped.AUG_rootbone",
+        Bone = "ValveBiped.AK47_rootbone",
+        WMBone = "Box01",
+        InstalledElements = {"tactical"},
         AttachSound = "tacrp/weapons/optic_on.wav",
         DetachSound = "tacrp/weapons/optic_off.wav",
-        VMScale = 1,
-        Pos_VM = Vector(-6.4, 0, 1),
+        VMScale = 0.75,
+        Pos_VM = Vector(-5.15, 0.15, 4),
         Ang_VM = Angle(90, 0, 0),
-        Pos_WM = Vector(4.5, 1, -7),
-        Ang_WM = Angle(0, 0, 180),
+        Pos_WM = Vector(0, 3, 0.5),
+        Ang_WM = Angle(0, -90, 0),
     },
     [2] = {
         PrintName = "Muzzle",
         Category = "silencer",
-        Bone = "ValveBiped.AUG_rootbone",
+        Bone = "ValveBiped.AK47_rootbone",
+        WMBone = "Box01",
         AttachSound = "tacrp/weapons/silencer_on.wav",
         DetachSound = "tacrp/weapons/silencer_off.wav",
-        Pos_VM = Vector(-3.7, 0, 18.5),
+        Pos_VM = Vector(-3.2, 0.075, 27.6),
+        Pos_WM = Vector(0, 28, -1.75),
         Ang_VM = Angle(90, 0, 0),
-        Pos_WM = Vector(23, 1, -4.5),
-        Ang_WM = Angle(0, 0, 180),
+        Ang_WM = Angle(0, -90, 0),
     },
     [3] = {
         PrintName = "Tactical",
         Category = "tactical",
-        Bone = "ValveBiped.AUG_rootbone",
+        Bone = "ValveBiped.AK47_rootbone",
+        WMBone = "Box01",
         AttachSound = "tacrp/weapons/flashlight_on.wav",
         DetachSound = "tacrp/weapons/flashlight_off.wav",
-        InstalledElements = {"tactical"},
-        Pos_VM = Vector(-5, 0, 10),
-        Ang_VM = Angle(90, 0, 0),
-        Pos_WM = Vector(14, 1, -6),
-        Ang_WM = Angle(0, 0, 180),
+        Pos_VM = Vector(-3.25, -0.1, 19),
+        Pos_WM = Vector(0, 19, -2),
+        Ang_VM = Angle(90, 0, -90),
+        Ang_WM = Angle(0, -90, 180),
     },
     [4] = {
         PrintName = "Accessory",
-        Category = {"perk", "perk_melee", "perk_shooting", "perk_reload", "perk_sling"},
+        Category = {"foldstock", "perk", "perk_melee", "perk_shooting", "perk_reload"},
         AttachSound = "tacrp/weapons/flashlight_on.wav",
         DetachSound = "tacrp/weapons/flashlight_off.wav",
     },
@@ -229,8 +223,7 @@ local function addsound(name, spath)
     })
 end
 
-addsound("tacint_aug.insert_clip", path .. "insert_clip.wav")
-addsound("tacint_aug.remove_clip", path .. "remove_clip.wav")
-addsound("tacint_aug.Handle_FoldDown", path .. "handle_folddown.wav")
-addsound("tacint_aug.bolt_lockback", path .. "bolt_lockback.wav")
-addsound("tacint_aug.bolt_release", path .. "bolt_release.wav")
+addsound("tacint_ak47.remove_clip", path .. "remove_clip.wav")
+addsound("tacint_ak47.insert_clip", path .. "insert_clip.wav")
+addsound("tacint_ak47.boltaction", path .. "boltaction.wav")
+addsound("tacint_ak47.Buttstock_Back", path .. "buttstock_back.wav")

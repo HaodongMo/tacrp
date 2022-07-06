@@ -81,13 +81,16 @@ SWEP.BlindFirePos = Vector(0, -2, -4)
 SWEP.SprintAng = Angle(30, -15, 0)
 SWEP.SprintPos = Vector(5, 0, -2)
 
-SWEP.SightAng = Angle(0, -1, 0)
-SWEP.SightPos = Vector(-5.381, -9, -2.0)
+SWEP.SightAng = Angle(0, -0.9, 0)
+SWEP.SightPos = Vector(-5.381, -9, -1.99)
 
 SWEP.HolsterVisible = true
 SWEP.HolsterSlot = TacRP.HOLSTER_SLOT_BACK
 SWEP.HolsterPos = Vector(5, -8, -6)
 SWEP.HolsterAng = Angle(0, 0, 0)
+
+SWEP.Sway = 1.5
+SWEP.ScopedSway = 0.15
 
 // reload
 
@@ -194,7 +197,7 @@ SWEP.Attachments = {
         Ang_WM = Angle(-70, -90, 0),
     },
     [3] = {
-        PrintName = "Perk",
+        PrintName = "Accessory",
         Category = {"perk", "perk_melee", "perk_shooting", "perk_reload", "perk_sling"},
         AttachSound = "tacrp/weapons/flashlight_on.wav",
         DetachSound = "tacrp/weapons/flashlight_off.wav",

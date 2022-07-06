@@ -597,6 +597,12 @@ function SWEP:DrawHUD()
 
     lastammo = self:Clip1()
     lastarmor = LocalPlayer():Armor()
+
+    if self:GetSightAmount() > 0 and GetConVar("developer"):GetInt() > 1 and LocalPlayer():IsAdmin() then
+        surface.SetDrawColor(255, 50, 50, 150)
+        surface.DrawLine(ScrW() / 2, ScrH() * 0.5 - 256, ScrW() / 2, ScrH() * 0.5 + 256)
+        surface.DrawLine(ScrW() * 0.5 - 256, ScrH() / 2, ScrW() * 0.5 + 256, ScrH() / 2)
+    end
 end
 
 SWEP.Mat_Select = nil

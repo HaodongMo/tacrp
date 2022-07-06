@@ -202,7 +202,7 @@ SWEP.Attachments = {
         Ang_WM = Angle(0, -90, -60),
     },
     [4] = {
-        PrintName = "Perk",
+        PrintName = "Accessory",
         Category = {"perk", "perk_melee", "perk_shooting", "perk_reload", "perk_sling"},
         AttachSound = "TacRP/weapons/flashlight_on.wav",
         DetachSound = "TacRP/weapons/flashlight_off.wav",
