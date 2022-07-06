@@ -1,5 +1,5 @@
 ATT.PrintName = "Heavy Barrel"
-ATT.Icon = Material("entities/TacRP_att_muzz_hbar.png", "mips smooth")
+ATT.Icon = Material("entities/tacrp_att_muzz_hbar.png", "mips smooth")
 
 ATT.Category = "silencer" // can be "string" or {"list", "of", "strings"}
 

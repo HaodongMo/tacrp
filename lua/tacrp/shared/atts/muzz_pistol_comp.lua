@@ -1,5 +1,5 @@
 ATT.PrintName = "Compensator"
-ATT.Icon = Material("entities/TacRP_att_muzz_pistol_comp.png", "mips smooth")
+ATT.Icon = Material("entities/tacrp_att_muzz_pistol_comp.png", "mips smooth")
 ATT.Description = "Muzzle device which reduces first shot recoil."
 ATT.Pros = {"First Shot Recoil"}
 ATT.Cons = {"Accumulated Recoil"}

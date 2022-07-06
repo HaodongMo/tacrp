@@ -1,5 +1,5 @@
 ATT.PrintName = "Smackdown"
-ATT.Icon = Material("entities/tacRP_att_acc_melee.png", "mips smooth")
+ATT.Icon = Material("entities/tacrp_att_acc_melee.png", "mips smooth")
 ATT.Description = "Improves melee damage."
 ATT.Pros = {"Melee Power"}
 ATT.Cons = {"Incompatible with scopes"}

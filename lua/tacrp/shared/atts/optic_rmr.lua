@@ -1,5 +1,5 @@
 ATT.PrintName = "RMR"
-ATT.Icon = Material("entities/TacRP_att_optic_rmr.png", "mips smooth")
+ATT.Icon = Material("entities/tacrp_att_optic_rmr.png", "mips smooth")
 ATT.Description = "Low profile optic sight for pistols."
 ATT.Pros = {"Zoom"}
 ATT.Cons = {"No melee attack"}

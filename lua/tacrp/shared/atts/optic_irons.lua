@@ -1,5 +1,5 @@
 ATT.PrintName = "Iron Sights"
-ATT.Icon = Material("entities/TacRP_att_optic_irons.png", "mips smooth")
+ATT.Icon = Material("entities/tacrp_att_optic_irons.png", "mips smooth")
 ATT.Description = "Basic sights that won't be damaged by striking with the weapon."
 ATT.Pros = {"Melee attack"}
 ATT.Cons = {"No zoom"}

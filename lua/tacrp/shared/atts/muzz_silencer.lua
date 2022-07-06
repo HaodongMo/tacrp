@@ -1,5 +1,5 @@
 ATT.PrintName = "Silencer"
-ATT.Icon = Material("entities/TacRP_att_muzz_silencer.png", "mips smooth")
+ATT.Icon = Material("entities/tacrp_att_muzz_silencer.png", "mips smooth")
 ATT.Description = "Muzzle device that reduces audible report and recoil."
 ATT.Pros = {"Recoil"}
 ATT.Cons = {"Range"}

@@ -1,5 +1,5 @@
 ATT.PrintName = "OKP-7"
-ATT.Icon = Material("entities/TacRP_att_optic_okp7.png", "mips smooth")
+ATT.Icon = Material("entities/tacrp_att_optic_okp7.png", "mips smooth")
 
 ATT.Model = "models/weapons/tacint/addons/okp7.mdl"
 

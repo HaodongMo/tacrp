@@ -1,5 +1,5 @@
 ATT.PrintName = "Flashlight"
-ATT.Icon = Material("entities/TacRP_att_tac_flashlight.png", "mips smooth")
+ATT.Icon = Material("entities/tacrp_att_tac_flashlight.png", "mips smooth")
 ATT.Description = "Tactical device which illuminates enemies and improves spread."
 ATT.Pros = {"Spread"}
 
