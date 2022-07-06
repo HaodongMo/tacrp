@@ -9,6 +9,6 @@ ATT.Category = "trigger_semi" // can be "string" or {"list", "of", "strings"}
 ATT.SortOrder = 1
 
 ATT.Override_Firemodes = {2}
-ATT.Mult_RPM = 0.75
-ATT.Mult_Recoil = 1.1
-ATT.Mult_RecoilSpreadPenalty = 1.25
+ATT.Mult_RPM = 0.8
+ATT.Mult_RecoilKick = 1.1
+ATT.Mult_RecoilSpreadPenalty = 1.5
