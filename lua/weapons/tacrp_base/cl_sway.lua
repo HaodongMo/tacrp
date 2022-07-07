@@ -89,7 +89,7 @@ function SWEP:GetViewModelBob(pos, ang)
 
     local steprate = Lerp(d, 1, 2.5)
 
-    steprate = Lerp(self.ViewModelNotOnGround, steprate, 0.25)
+    steprate = Lerp(self.ViewModelNotOnGround, steprate, 0.9)
 
     if IsFirstTimePredicted() or game.SinglePlayer() then
         self.BobCT = self.BobCT + (FrameTime() * steprate)

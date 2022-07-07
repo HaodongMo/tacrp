@@ -109,7 +109,7 @@ SWEP.DropMagazineImpact = "plastic"
 
 local path = "tacrp/weapons/p90/"
 
-SWEP.Sound_Shoot = "<" .. path .. "fire-1.wav"
+SWEP.Sound_Shoot = "^" .. path .. "fire-1.wav"
 SWEP.Sound_Shoot_Silenced = path .. "fire_silenced-1.wav"
 
 SWEP.Vol_Shoot = 130
