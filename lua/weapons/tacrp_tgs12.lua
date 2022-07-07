@@ -23,6 +23,8 @@ SWEP.Range_Max = 3000 // distance at which we drop to minimum damage
 SWEP.Penetration = 1 // units of metal this weapon can penetrate
 SWEP.Num = 8
 
+SWEP.MuzzleVelocity = 9000
+
 SWEP.BodyDamageMultipliers = {
     [HITGROUP_HEAD] = 1,
     [HITGROUP_CHEST] = 1,
@@ -209,19 +211,19 @@ SWEP.Attachments = {
     },
     [3] = {
         PrintName = "Accessory",
-        Category = {"perk", "perk_melee", "perk_shooting", "perk_reload", "perk_extendedmag", "perk_duffle"},
+        Category = {"perk", "perk_melee", "perk_shooting", "perk_reload", "perk_duffle"},
         AttachSound = "tacrp/weapons/flashlight_on.wav",
         DetachSound = "tacrp/weapons/flashlight_off.wav",
     },
     [4] = {
         PrintName = "Bolt",
-        Category = {"bolt_automatic"},
+        Category = {"bolt_manual"},
         AttachSound = "TacRP/weapons/flashlight_on.wav",
         DetachSound = "TacRP/weapons/flashlight_off.wav",
     },
     [5] = {
         PrintName = "Trigger",
-        Category = {"trigger_semi"},
+        Category = {"trigger_manual", "trigger_pump"},
         AttachSound = "TacRP/weapons/flashlight_on.wav",
         DetachSound = "TacRP/weapons/flashlight_off.wav",
     },

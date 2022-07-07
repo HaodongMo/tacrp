@@ -41,7 +41,7 @@ SWEP.BodyDamageMultipliers = {
 
 SWEP.Firemode = 1
 
-SWEP.RPM = 60
+SWEP.RPM = 70
 
 SWEP.Spread = 0.015
 
@@ -61,7 +61,7 @@ SWEP.RecoilVisualShake = 2
 
 SWEP.RecoilKick = 15
 
-SWEP.RecoilSpreadPenalty = 0.02 // extra spread per one unit of recoil
+SWEP.RecoilSpreadPenalty = 0.03 // extra spread per one unit of recoil
 
 SWEP.CanBlindFire = true
 
@@ -219,7 +219,7 @@ SWEP.Attachments = {
     },
     [5] = {
         PrintName = "Trigger",
-        Category = {"trigger_manual"},
+        Category = {"trigger_manual", "trigger_pump"},
         AttachSound = "TacRP/weapons/flashlight_on.wav",
         DetachSound = "TacRP/weapons/flashlight_off.wav",
     },

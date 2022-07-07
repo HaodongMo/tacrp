@@ -61,7 +61,7 @@ SWEP.RecoilVisualShake = 2
 
 SWEP.RecoilKick = 20
 
-SWEP.RecoilSpreadPenalty = 0.015
+SWEP.RecoilSpreadPenalty = 0.0175
 
 SWEP.CanBlindFire = true
 
@@ -216,7 +216,7 @@ SWEP.Attachments = {
     },
     [5] = {
         PrintName = "Trigger",
-        Category = {"trigger_manual"},
+        Category = {"trigger_manual", "trigger_pump"},
         AttachSound = "TacRP/weapons/flashlight_on.wav",
         DetachSound = "TacRP/weapons/flashlight_off.wav",
     },
