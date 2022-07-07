@@ -2,6 +2,15 @@
 local bench_need = Color(255, 0, 0)
 local bench_have = Color(0, 255, 0)
 local flash_end = 0
+local range = 0
+
+local body = Material("tacrp/hud/body.png", "mips smooth")
+
+local body_head = Material("tacrp/hud/body_head.png", "mips smooth")
+local body_chest = Material("tacrp/hud/body_chest.png", "mips smooth")
+local body_stomach = Material("tacrp/hud/body_stomach.png", "mips smooth")
+local body_arms = Material("tacrp/hud/body_arms.png", "mips smooth")
+local body_legs = Material("tacrp/hud/body_legs.png", "mips smooth")
 
 local function multlinetext(text, maxw, font)
     local content = {}
@@ -34,6 +43,38 @@ local function multlinetext(text, maxw, font)
     end
 
     return content
+end
+
+local stk_clr = {
+    [1] = Color(75, 25, 25),
+    [2] = Color(40, 20, 20),
+    [3] = Color(50, 50, 50),
+    [4] = Color(75, 75, 75),
+    [5] = Color(100, 100, 100),
+    [6] = Color(120, 120, 120),
+    [7] = Color(140, 140, 140),
+    [8] = Color(160, 160, 160),
+    [9] = Color(200, 200, 200),
+}
+local function bodydamagetext(name, dmg, mult, x, y, hover)
+
+    local stk = math.ceil(100 / (dmg * mult))
+
+    surface.SetDrawColor(255, 255, 255, 255)
+    surface.DrawLine(ScreenScale(2), y, x, y)
+
+    surface.SetFont("TacRP_Myriad_Pro_6")
+    surface.SetTextPos(ScreenScale(2), y)
+    -- surface.DrawText(name)
+    -- surface.SetTextPos(ScreenScale(1), y + ScreenScale(6))
+    if hover then
+        surface.DrawText(stk .. " STK")
+    else
+        surface.DrawText(math.floor(dmg * mult))
+    end
+
+    local c = stk_clr[math.Clamp(stk, 1, 9)]
+    surface.SetDrawColor(c, c, c, 255)
 end
 
 local lastcustomize = false
@@ -87,7 +128,6 @@ function SWEP:CreateCustomizeHUD()
         local ranger = vgui.Create("DPanel", bg)
         ranger:SetPos(scrw - ScreenScale(128) - airgap, stack + smallgap)
         ranger:SetSize(ScreenScale(128), ScreenScale(64))
-        stack = stack + ScreenScale(64) + smallgap
         ranger.Paint = function(self2, w, h)
             surface.SetDrawColor(0, 0, 0, 150)
             surface.DrawRect(0, 0, w, h)
@@ -138,7 +178,6 @@ function SWEP:CreateCustomizeHUD()
             local draw_rangetext = true
 
             if mouse_x > 0 and mouse_x < w and mouse_y > 0 and mouse_y < h then
-                local range = 0
 
                 local range_m_x = 0
 
@@ -223,6 +262,62 @@ function SWEP:CreateCustomizeHUD()
                 surface.DrawText(txt_range2)
             end
         end
+
+        local bodychart = vgui.Create("DPanel", bg)
+        bodychart:SetPos(scrw - ScreenScale(128 + 44) - airgap, stack + smallgap)
+        bodychart:SetSize(ScreenScale(40), ScreenScale(64))
+        bodychart:SetZPos(100)
+        bodychart.Paint = function(self2, w, h)
+            surface.SetDrawColor(0, 0, 0, 150)
+            surface.DrawRect(0, 0, w, h)
+            TacRP.DrawCorneredBox(0, 0, w, h)
+
+            local h2 = h - ScreenScale(4)
+            local w2 = math.ceil(h2 * (136 / 370))
+            local x2, y2 = w - w2 - ScreenScale(2), ScreenScale(2)
+            surface.SetDrawColor(255, 255, 255, 255)
+            surface.SetMaterial(body)
+            surface.DrawTexturedRect(x2, y2, w2, h2)
+
+            local dmg = self:GetDamageAtRange(range) * self:GetValue("Num")
+            local mult = self:GetValue("BodyDamageMultipliers")
+            local hover = self2:IsHovered()
+
+            bodydamagetext("Head", dmg, mult[HITGROUP_HEAD], w - ScreenScale(16), ScreenScale(4), hover)
+            surface.SetMaterial(body_head)
+            surface.DrawTexturedRect(x2, y2, w2, h2)
+
+            local upperbody = mult[HITGROUP_STOMACH] == mult[HITGROUP_CHEST]
+
+            bodydamagetext("Chest", dmg, mult[HITGROUP_CHEST], w - ScreenScale(16), upperbody and ScreenScale(18) or ScreenScale(14), hover)
+            surface.SetMaterial(body_chest)
+            surface.DrawTexturedRect(x2, y2, w2, h2)
+
+            if !upperbody then
+                bodydamagetext("Stomach", dmg, mult[HITGROUP_STOMACH], w - ScreenScale(16), ScreenScale(24), hover)
+            end
+            surface.SetMaterial(body_stomach)
+            surface.DrawTexturedRect(x2, y2, w2, h2)
+
+            bodydamagetext("Arms", dmg, mult[HITGROUP_LEFTARM], w - ScreenScale(22), ScreenScale(34), hover)
+            surface.SetMaterial(body_arms)
+            surface.DrawTexturedRect(x2, y2, w2, h2)
+
+            bodydamagetext("Legs", dmg, mult[HITGROUP_LEFTLEG], w - ScreenScale(18), ScreenScale(44), hover)
+            surface.SetMaterial(body_legs)
+            surface.DrawTexturedRect(x2, y2, w2, h2)
+
+            surface.SetTextColor(255, 255, 255, 255)
+            surface.SetFont("TacRP_Myriad_Pro_8")
+            surface.SetTextPos(ScreenScale(2), h - ScreenScale(10))
+            local txt = self:RangeUnitize(range)
+            local tw, th = surface.GetTextSize(txt)
+            surface.SetDrawColor(50, 50, 50, 100)
+            surface.DrawRect(ScreenScale(1), h - ScreenScale(10), tw + ScreenScale(1), th)
+            surface.DrawText(txt)
+        end
+
+        stack = stack + ScreenScale(64) + smallgap
     end
 
     local desc_box = vgui.Create("DPanel", bg)
