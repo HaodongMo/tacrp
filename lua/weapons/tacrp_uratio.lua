@@ -7,7 +7,8 @@ AddCSLuaFile()
 SWEP.PrintName = "PGM Ultima Ratio"
 SWEP.Category = "Tactical RP (Arctic)"
 
-SWEP.Description = "Powerful bolt action sniper rifle used at long ranges. Excellent muzzle velocity."
+// Tier 2
+SWEP.Description = "Economic bolt action sniper rifle with great damage and muzzle velocity.\nEquipped with a 10x scope by default."
 
 SWEP.ViewModel = "models/weapons/tacint/v_uratio.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_uratio.mdl"
@@ -38,11 +39,11 @@ SWEP.MuzzleVelocity = 45000
 
 SWEP.Firemode = 1
 
-SWEP.RPM = 40
+SWEP.RPM = 42
 
 SWEP.Spread = 0.00
 
-
+SWEP.HipFireSpreadPenalty = 0.05
 
 SWEP.RecoilPerShot = 1
 SWEP.RecoilMaximum = 10
@@ -60,9 +61,9 @@ SWEP.CanBlindFire = true
 
 // handling
 
-SWEP.MoveSpeedMult = 0.95
-SWEP.ShootingSpeedMult = 0.75 // slow down applied while shooting
-SWEP.SightedSpeedMult = 0.5
+SWEP.MoveSpeedMult = 0.75
+SWEP.ShootingSpeedMult = 0.25
+SWEP.SightedSpeedMult = 0.15
 SWEP.MeleeSpeedMult = 0.5
 SWEP.MeleeSpeedMultTime = 2 // seconds to apply slow down for
 
@@ -103,13 +104,13 @@ SWEP.HolsterAng = Angle(0, 0, 0)
 
 SWEP.Scope = true
 SWEP.ScopeOverlay = Material("TacRP/scopes/sniper.png", "mips smooth") // Material("path/to/overlay")
-SWEP.ScopeFOV = 90 / 8
+SWEP.ScopeFOV = 90 / 10
 SWEP.ScopeLevels = 1 // 2 = like CS:S
 SWEP.ScopeHideWeapon = true
 
 // reload
 
-SWEP.ClipSize = 10
+SWEP.ClipSize = 6
 SWEP.Ammo = "SniperPenetratedRound"
 
 SWEP.ReloadTimeMult = 1
@@ -193,7 +194,7 @@ SWEP.AttachmentElements = {
 SWEP.Attachments = {
     [1] = {
         PrintName = "Optic",
-        Category = {"ironsights", "optic_cqb", "optic_medium", "optic_sniper"},
+        Category = {"ironsights_sniper", "optic_cqb", "optic_medium", "optic_sniper"},
         WMBone = "Box01",
         Bone = "ValveBiped.uratio_rootbone",
         AttachSound = "TacRP/weapons/optic_on.wav",

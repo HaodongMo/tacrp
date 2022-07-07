@@ -7,7 +7,8 @@ AddCSLuaFile()
 SWEP.PrintName = "Springfield M1A"
 SWEP.Category = "Tactical RP (Arctic)"
 
-SWEP.Description = "Semi-automatic sniper rifle. One hits to head at all ranges."
+// Tier 3
+SWEP.Description = "Premium semi-automatic sniper rifle with a lethal headshot.\nEquipped with a 6x scope by default."
 
 SWEP.ViewModel = "models/weapons/tacint/v_m14.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_m14.mdl"
@@ -42,29 +43,30 @@ SWEP.RPM = 500
 
 SWEP.Spread = 0.0000
 
+SWEP.HipFireSpreadPenalty = 0.05
+
+
 SWEP.ShootSpeedMult = 0.5
-
-
 
 SWEP.RecoilPerShot = 1
 SWEP.RecoilMaximum = 10
-SWEP.RecoilResetTime = 0.1// time after you stop shooting for recoil to start dissipating
-SWEP.RecoilDissipationRate = 10
+SWEP.RecoilResetTime = 0.15 // time after you stop shooting for recoil to start dissipating
+SWEP.RecoilDissipationRate = 9
 SWEP.RecoilFirstShotMult = 1 // multiplier for the first shot's recoil amount
 
 SWEP.RecoilVisualKick = 3
 
 SWEP.RecoilKick = 5
 
-SWEP.RecoilSpreadPenalty = 0.0005 // extra spread per one unit of recoil
+SWEP.RecoilSpreadPenalty = 0.0025 // extra spread per one unit of recoil
 
 SWEP.CanBlindFire = true
 
 // handling
 
-SWEP.MoveSpeedMult = 0.9
-SWEP.ShootingSpeedMult = 0.75 // slow down applied while shooting
-SWEP.SightedSpeedMult = 0.5
+SWEP.MoveSpeedMult = 0.75
+SWEP.ShootingSpeedMult = 0.4
+SWEP.SightedSpeedMult = 0.2
 SWEP.MeleeSpeedMult = 0.5
 SWEP.MeleeSpeedMultTime = 2 // seconds to apply slow down for
 
@@ -182,7 +184,7 @@ SWEP.AttachmentElements = {
 SWEP.Attachments = {
     [1] = {
         PrintName = "Optic",
-        Category = {"ironsights", "optic_cqb", "optic_medium"},
+        Category = {"ironsights_sniper", "optic_cqb", "optic_medium", "optic_sniper"},
         Bone = "ValveBiped.m14_rootbone",
         InstalledElements = {"sights"},
         AttachSound = "TacRP/weapons/optic_on.wav",
