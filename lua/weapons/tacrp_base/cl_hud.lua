@@ -21,6 +21,7 @@ local mat_radar = Material("tacrp/hud/radar.png", "smooth")
 local mat_radar_active = Material("tacrp/hud/radar_active.png", "mips smooth")
 local mat_dot = Material("tacrp/hud/dot.png", "mips smooth")
 local mat_mag = Material("tacrp/hud/mag.png", "")
+local mat_vignette = Material("tacrp/hud/vignette.png", "mips smooth")
 
 local cached_txt = ""
 local cached_txt2 = ""
@@ -44,6 +45,14 @@ local faceindex = 0
 
 function SWEP:DrawHUD()
     self:DoScope()
+
+    // if scoped, draw a vignette effect around the screen
+
+    if self:GetSightDelta() > 0 then
+        surface.SetDrawColor(0, 0, 0, 255 * self:GetSightDelta())
+        surface.SetMaterial(mat_vignette)
+        surface.DrawTexturedRect(0, 0, ScrW(), ScrH())
+    end
 
     if self:GetValue("BlindFireCamera") then
         self:DoCornershot()
