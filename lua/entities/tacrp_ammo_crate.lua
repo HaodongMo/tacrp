@@ -5,7 +5,7 @@ ENT.Base                     = "tacrp_ammo"
 ENT.RenderGroup              = RENDERGROUP_TRANSLUCENT
 
 ENT.PrintName                = "Ammo Crate"
-ENT.Category                 = "Tactical RP - Ammo"
+ENT.Category                 = "Tactical RP"
 
 ENT.Spawnable                = true
 ENT.Model                    = "models/weapons/tacint/ammoboxes/ammo_box-2b.mdl"

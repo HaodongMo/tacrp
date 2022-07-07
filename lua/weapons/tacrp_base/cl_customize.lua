@@ -1,4 +1,7 @@
 -- local customizedelta = 0
+local bench_need = Color(255, 0, 0)
+local bench_have = Color(0, 255, 0)
+local flash_end = 0
 
 local function multlinetext(text, maxw, font)
     local content = {}
@@ -134,51 +137,49 @@ function SWEP:CreateCustomizeHUD()
 
             local draw_rangetext = true
 
-            if mouse_x > 0 and mouse_x < w then
-                if mouse_y > 0 and mouse_y < h then
-                    local range = 0
+            if mouse_x > 0 and mouse_x < w and mouse_y > 0 and mouse_y < h then
+                local range = 0
 
-                    local range_m_x = 0
+                local range_m_x = 0
 
-                    if mouse_x < range_2_x then
-                        range = range_min
-                        range_m_x = range_2_x
-                    elseif mouse_x > range_3_x then
-                        range = range_max
-                        range_m_x = range_3_x
-                    else
-                        local d = (mouse_x - range_2_x) / (range_3_x - range_2_x)
-                        range = Lerp(d, range_min, range_max)
-                        range_m_x = mouse_x
-                    end
-
-                    local dmg = self:GetDamageAtRange(range)
-
-                    local txt_dmg1 = tostring(math.Round(dmg)) .. " DMG"
-
-                    if self:GetValue("Num") > 1 then
-                        txt_dmg1 = math.Round(dmg * self:GetValue("Num")) .. "-" .. txt_dmg1
-                    end
-
-                    surface.SetDrawColor(255, 255, 255, 255)
-                    surface.DrawLine(range_m_x, 0, range_m_x, h)
-
-                    surface.SetFont("TacRP_Myriad_Pro_8")
-                    surface.SetTextColor(255, 255, 255)
-                    local txt_dmg1_w = surface.GetTextSize(txt_dmg1)
-                    surface.SetTextPos((w / 3) - txt_dmg1_w - (ScreenScale(2)), ScreenScale(1))
-                    surface.DrawText(txt_dmg1)
-
-                    local txt_range1 = self:RangeUnitize(range)
-
-                    surface.SetFont("TacRP_Myriad_Pro_8")
-                    surface.SetTextColor(255, 255, 255)
-                    local txt_range1_w = surface.GetTextSize(txt_range1)
-                    surface.SetTextPos((w / 3) - txt_range1_w - (ScreenScale(2)), ScreenScale(1 + 8))
-                    surface.DrawText(txt_range1)
-
-                    draw_rangetext = false
+                if mouse_x < range_2_x then
+                    range = range_min
+                    range_m_x = range_2_x
+                elseif mouse_x > range_3_x then
+                    range = range_max
+                    range_m_x = range_3_x
+                else
+                    local d = (mouse_x - range_2_x) / (range_3_x - range_2_x)
+                    range = Lerp(d, range_min, range_max)
+                    range_m_x = mouse_x
                 end
+
+                local dmg = self:GetDamageAtRange(range)
+
+                local txt_dmg1 = tostring(math.Round(dmg)) .. " DMG"
+
+                if self:GetValue("Num") > 1 then
+                    txt_dmg1 = math.Round(dmg * self:GetValue("Num")) .. "-" .. txt_dmg1
+                end
+
+                surface.SetDrawColor(255, 255, 255, 255)
+                surface.DrawLine(range_m_x, 0, range_m_x, h)
+
+                surface.SetFont("TacRP_Myriad_Pro_8")
+                surface.SetTextColor(255, 255, 255)
+                local txt_dmg1_w = surface.GetTextSize(txt_dmg1)
+                surface.SetTextPos((w / 3) - txt_dmg1_w - (ScreenScale(2)), ScreenScale(1))
+                surface.DrawText(txt_dmg1)
+
+                local txt_range1 = self:RangeUnitize(range)
+
+                surface.SetFont("TacRP_Myriad_Pro_8")
+                surface.SetTextColor(255, 255, 255)
+                local txt_range1_w = surface.GetTextSize(txt_range1)
+                surface.SetTextPos((w / 3) - txt_range1_w - (ScreenScale(2)), ScreenScale(1 + 8))
+                surface.DrawText(txt_range1)
+
+                draw_rangetext = false
             end
 
 
@@ -562,6 +563,9 @@ function SWEP:CreateCustomizeHUD()
             slot_panel:SetPos(airgap + ((i - 1) * ScreenScale(34)), offset + airgap + ((slot - 1) * ScreenScale(34 + 8)))
             slot_panel:SetSize(ScreenScale(32), ScreenScale(32))
             slot_panel.DoClick = function(self2)
+                if !TacRP.NearBench(LocalPlayer()) then
+                    flash_end = CurTime() + 1
+                end
                 if attslot.Installed then
                     if attslot.Installed == att then
                         self:Detach(slot)
@@ -574,6 +578,9 @@ function SWEP:CreateCustomizeHUD()
                 end
             end
             slot_panel.DoRightClick = function(self2)
+                if !TacRP.NearBench(LocalPlayer()) then
+                    flash_end = CurTime() + 1
+                end
                 if attslot.Installed then
                     if attslot.Installed == att then
                         self:Detach(slot)
@@ -581,6 +588,7 @@ function SWEP:CreateCustomizeHUD()
                 end
             end
             slot_panel.Paint = function(self2, w, h)
+                if !IsValid(self:GetOwner()) then return end
                 local hover = self2:IsHovered()
                 local attached = attslot.Installed == att
 
@@ -653,6 +661,34 @@ function SWEP:CreateCustomizeHUD()
                     surface.DrawText(numtxt)
                 end
             end
+        end
+    end
+
+    if GetConVar("tacrp_rp_requirebench"):GetBool() then
+        local slot_name = vgui.Create("DPanel", bg)
+        slot_name:SetPos(airgap, ScrH() - ScreenScale(16))
+        slot_name:SetSize(ScreenScale(128 + 16), ScreenScale(12))
+        slot_name.Paint = function(self2, w, h)
+            surface.SetDrawColor(0, 0, 0, 150)
+            surface.DrawRect(0, 0, w, h)
+            TacRP.DrawCorneredBox(0, 0, w, h)
+
+            local txt = "Requires Customization Bench"
+            if TacRP.NearBench(LocalPlayer()) then
+                txt = "Able to customize"
+                surface.SetTextColor(bench_have)
+            else
+                if flash_end > CurTime() then
+                    local c = 255 - (flash_end - CurTime()) * 255
+                    surface.SetTextColor(255, c, c)
+                else
+                    surface.SetTextColor(255, 255, 255)
+                end
+            end
+            surface.SetFont("TacRP_Myriad_Pro_12")
+            local tw, th = surface.GetTextSize(txt)
+            surface.SetTextPos(w / 2 - tw / 2, 0)
+            surface.DrawText(txt)
         end
     end
 end
