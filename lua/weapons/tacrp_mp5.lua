@@ -40,7 +40,7 @@ SWEP.ShootSpeedMult = 0.5
 
 // Spread penalties are in spread units and are additive
 SWEP.MoveSpreadPenalty = 0.0 // spread penalty while travelling at max. 250 u/s
-SWEP.MidAirSpreadPenalty = 0.5 // spread penalty for being in the air
+SWEP.MidAirSpreadPenalty = 0 // spread penalty for being in the air
 SWEP.HipFireSpreadPenalty = 0.0 // spread penalty for not being scoped in
 SWEP.ScopedSpreadPenalty = 0
 SWEP.BlindFireSpreadPenalty = 0.0 // spread penalty for blind firing
@@ -89,8 +89,8 @@ SWEP.BlindFirePos = Vector(0, -4, -3)
 SWEP.SprintAng = Angle(30, -15, 0)
 SWEP.SprintPos = Vector(8, -1, -2)
 
-SWEP.SightAng = Angle(-0.02, 1.15, 0)
-SWEP.SightPos = Vector(-4.555, -7.5, -3.75)
+SWEP.SightAng = Angle(-0.02, 0.75, 0)
+SWEP.SightPos = Vector(-4.555, -7.5, -3.6)
 
 SWEP.CorrectivePos = Vector(0.025, 0, 0.1)
 SWEP.CorrectiveAng = Angle(0, 0, 0)
@@ -220,7 +220,7 @@ SWEP.Attachments = {
     },
     [4] = {
         PrintName = "Accessory",
-        Category = {"foldstock", "perk", "perk_melee", "perk_shooting", "perk_reload", "perk_extendedmag", "perk_hollowpoints"},
+        Category = {"foldstock", "perk", "perk_melee", "perk_shooting", "perk_reload", "perk_extendedmag", "perk_duffle", "perk_sling"},
         AttachSound = "TacRP/weapons/flashlight_on.wav",
         DetachSound = "TacRP/weapons/flashlight_off.wav",
     },

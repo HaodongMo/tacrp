@@ -4,7 +4,7 @@ ATT.Description = "Heavy trigger for sustained fire."
 ATT.Pros = {"Improved recoil spread"}
 ATT.Cons = {"Worse first shot recoil"}
 
-ATT.Category = {"trigger_semi", "trigger_auto"}
+ATT.Category = {"trigger_semi", "trigger_auto", "trigger_burst"}
 
 ATT.SortOrder = 3
 

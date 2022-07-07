@@ -16,10 +16,12 @@ hook.Add("PostPlayerDraw", "TacRP_Holster", function(ply)
         local matrix = bone and ply:GetBoneMatrix(bone)
         if !bone or !matrix then return end
 
+        local holstermodel = wep:GetValue("HolsterModel") or wep.WorldModel
+
         if !ply.TacRP_HolsterModels[i] or !IsValid(ply.TacRP_HolsterModels[i])
-                or ply.TacRP_HolsterModels[i]:GetModel() != wep.WorldModel then
+                or ply.TacRP_HolsterModels[i]:GetModel() != holstermodel then
             SafeRemoveEntity(ply.TacRP_HolsterModels[i])
-            ply.TacRP_HolsterModels[i] = ClientsideModel(wep.WorldModel, RENDERGROUP_OPAQUE)
+            ply.TacRP_HolsterModels[i] = ClientsideModel(holstermodel, RENDERGROUP_OPAQUE)
             ply.TacRP_HolsterModels[i]:SetNoDraw(true)
         end
 
@@ -45,8 +47,9 @@ hook.Add("PostPlayerDraw", "TacRP_Holster", function(ply)
         model:SetRenderOrigin()
         model:SetRenderAngles()
 
-        wep:DoBodygroups(true, model)
-
-        wep:DrawCustomModel(true, ply.TacRP_HolsterModels[i])
+        if !wep:GetValue("HolsterModel") then
+            wep:DoBodygroups(true, model)
+            wep:DrawCustomModel(true, ply.TacRP_HolsterModels[i])
+        end
     end
 end)

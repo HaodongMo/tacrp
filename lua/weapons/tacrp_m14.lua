@@ -159,7 +159,7 @@ SWEP.EjectEffect = 2
 // WM:
 // attack1
 SWEP.AnimationTranslationTable = {
-    ["fire_iron"] = "dryfire",
+    ["fire_iron"] = "shoot2",
     ["deploy"] = "draw",
     ["fire"] = {"shoot1", "shoot2"},
     ["blind_fire"] = "blind_shoot1"
@@ -219,7 +219,7 @@ SWEP.Attachments = {
     },
     [4] = {
         PrintName = "Accessory",
-        Category = {"perk", "perk_melee", "perk_shooting", "perk_reload", "perk_extendedmag", "perk_sling"},
+        Category = {"perk", "perk_melee", "perk_shooting", "perk_reload", "perk_extendedmag", "perk_sling", "perk_duffle"},
         AttachSound = "TacRP/weapons/flashlight_on.wav",
         DetachSound = "TacRP/weapons/flashlight_off.wav",
     },

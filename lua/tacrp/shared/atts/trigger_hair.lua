@@ -8,5 +8,5 @@ ATT.Category = {"trigger_semi"}
 
 ATT.SortOrder = 4
 
-ATT.Mult_RPM = 1.25
+ATT.Mult_RPM = 3
 ATT.Mult_RecoilKick = 1.1
