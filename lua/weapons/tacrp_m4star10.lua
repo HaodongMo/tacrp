@@ -7,7 +7,8 @@ AddCSLuaFile()
 SWEP.PrintName = "Benelli M4"
 SWEP.Category = "Tactical RP (Arctic)"
 
-SWEP.Description = "Semi-automatic combat shotgun. Low capacity."
+// Tier 4
+SWEP.Description = "Elite semi-automatic combat shotgun."
 
 SWEP.ViewModel = "models/weapons/tacint/v_m4star10.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_m4star10.mdl"
@@ -20,9 +21,9 @@ SWEP.ShootSpeedMult = 0.5
 
 SWEP.Damage_Max = 100 / 8 // damage at minimum range
 SWEP.Damage_Min = 100 / 14 // damage at maximum range
-SWEP.Range_Min = 1250 // distance for which to maintain maximum damage
+SWEP.Range_Min = 700 // distance for which to maintain maximum damage
 SWEP.Range_Max = 3000 // distance at which we drop to minimum damage
-SWEP.Penetration = 0.25 // units of metal this weapon can penetrate
+SWEP.Penetration = 1 // units of metal this weapon can penetrate
 SWEP.Num = 8
 
 SWEP.BodyDamageMultipliers = {
@@ -105,7 +106,7 @@ SWEP.Sway = 1
 SWEP.ScopedSway = 0.1
 // reload
 
-SWEP.ClipSize = 4
+SWEP.ClipSize = 7
 SWEP.Ammo = "buckshot"
 SWEP.ShotgunReload = true
 

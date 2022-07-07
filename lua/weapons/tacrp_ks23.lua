@@ -7,7 +7,7 @@ AddCSLuaFile()
 SWEP.PrintName = "KS-23"
 SWEP.Category = "Tactical RP (Arctic)"
 
-SWEP.Description = "Shotgun made out of anti-aircraft cannon parts, designed for suppressing prison riots. Terrible accuracy, recoil, and rate of fire, but makes for it by packing incredible power."
+SWEP.Description = "Elite large-caliber shotgun with poor handling but incredible stopping power."
 
 SWEP.ViewModel = "models/weapons/tacint/v_ks23.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_ks23.mdl"
@@ -16,12 +16,12 @@ SWEP.Slot = 2
 
 // "ballistics"
 
-SWEP.Damage_Max = 100 / 6 // damage at minimum range
-SWEP.Damage_Min = 100 / 12 // damage at maximum range
+SWEP.Damage_Max = 100 / 5 // damage at minimum range
+SWEP.Damage_Min = 100 / 15 // damage at maximum range
 SWEP.Range_Min = 450 // distance for which to maintain maximum damage
-SWEP.Range_Max = 2000 // distance at which we drop to minimum damage
+SWEP.Range_Max = 2500 // distance at which we drop to minimum damage
 SWEP.Penetration = 1 // units of metal this weapon can penetrate
-SWEP.Num = 12
+SWEP.Num = 24
 
 SWEP.MuzzleVelocity = 9000
 
@@ -42,7 +42,7 @@ SWEP.Firemode = 1
 
 SWEP.RPM = 60
 
-SWEP.Spread = 0.07
+SWEP.Spread = 0.05
 
 SWEP.ShootSpeedMult = 1.5
 
@@ -55,7 +55,7 @@ SWEP.RecoilResetTime = 0.33 // time after you stop shooting for recoil to start 
 SWEP.RecoilDissipationRate = 100
 SWEP.RecoilFirstShotMult = 1 // multiplier for the first shot's recoil amount
 
-SWEP.RecoilVisualKick = 5
+SWEP.RecoilVisualKick = 1
 SWEP.RecoilVisualShake = 5
 
 SWEP.RecoilKick = 20

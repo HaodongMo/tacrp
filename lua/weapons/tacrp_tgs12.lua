@@ -4,32 +4,29 @@ SWEP.Spawnable = true
 AddCSLuaFile()
 
 // names and stuff
-SWEP.PrintName = "HK FABARM FP6"
+SWEP.PrintName = "TGS-12"
 SWEP.Category = "Tactical RP (Arctic)"
 
-// Tier 3
-SWEP.Description = "Premium combat shotgun with well rounded performance."
+SWEP.Description = "Economic pistol grip shotgun with relatively high spread and recoil. Does not come with iron sights."
 
-SWEP.ViewModel = "models/weapons/tacint/v_fp6.mdl"
-SWEP.WorldModel = "models/weapons/tacint/w_fp6.mdl"
+SWEP.ViewModel = "models/weapons/tacint/v_tgs12.mdl"
+SWEP.WorldModel = "models/weapons/tacint/w_tgs12.mdl"
 
 SWEP.Slot = 2
 
 // "ballistics"
 
-SWEP.Damage_Max = 100 / 6 // damage at minimum range
+SWEP.Damage_Max = 100 / 7 // damage at minimum range
 SWEP.Damage_Min = 100 / 10 // damage at maximum range
-SWEP.Range_Min = 750 // distance for which to maintain maximum damage
+SWEP.Range_Min = 600 // distance for which to maintain maximum damage
 SWEP.Range_Max = 3000 // distance at which we drop to minimum damage
 SWEP.Penetration = 1 // units of metal this weapon can penetrate
 SWEP.Num = 8
 
-SWEP.MuzzleVelocity = 9000
-
 SWEP.BodyDamageMultipliers = {
-    [HITGROUP_HEAD] = 2,
-    [HITGROUP_CHEST] = 1.5,
-    [HITGROUP_STOMACH] = 1.25,
+    [HITGROUP_HEAD] = 1,
+    [HITGROUP_CHEST] = 1,
+    [HITGROUP_STOMACH] = 1,
     [HITGROUP_LEFTARM] = 1,
     [HITGROUP_RIGHTARM] = 1,
     [HITGROUP_LEFTLEG] = 0.9,
@@ -41,23 +38,26 @@ SWEP.BodyDamageMultipliers = {
 
 SWEP.Firemode = 1
 
-SWEP.RPM = 80
+SWEP.RPM = 75
 
-SWEP.Spread = 0.02
+SWEP.Spread = 0.04
 
+SWEP.ShootSpeedMult = 1
 
-SWEP.ScopedSpreadPenalty = 0
+// Spread penalties are in spread units and are additive
+SWEP.MoveSpreadPenalty = 0 // spread penalty while travelling at max. 250 u/s
+SWEP.HipFireSpreadPenalty = 0 // spread penalty for not being scoped in
 
 SWEP.RecoilPerShot = 1
 SWEP.RecoilMaximum = 1
-SWEP.RecoilResetTime = 0.1// time after you stop shooting for recoil to start dissipating
-SWEP.RecoilDissipationRate = 2.5
+SWEP.RecoilResetTime = 0.1
+SWEP.RecoilDissipationRate = 5
 SWEP.RecoilFirstShotMult = 1 // multiplier for the first shot's recoil amount
 
-SWEP.RecoilVisualKick = 2
+SWEP.RecoilVisualKick = 4
 SWEP.RecoilVisualShake = 2
 
-SWEP.RecoilKick = 20
+SWEP.RecoilKick = 30
 
 SWEP.RecoilSpreadPenalty = 0.25 // extra spread per one unit of recoil
 
@@ -65,13 +65,12 @@ SWEP.CanBlindFire = true
 
 // handling
 
-SWEP.MoveSpeedMult = 0.95
-SWEP.ShootingSpeedMult = 0.75 // slow down applied while shooting
+SWEP.MoveSpeedMult = 0.9
+SWEP.ShootingSpeedMult = 1 // slow down applied while shooting
 SWEP.SightedSpeedMult = 0.5
 SWEP.MeleeSpeedMult = 0.5
 SWEP.MeleeSpeedMultTime = 2 // seconds to apply slow down for
 
-SWEP.AimDownSightsTime = 0.35
 SWEP.SprintToFireTime = 0.35
 
 // hold types
@@ -85,28 +84,28 @@ SWEP.GestureShoot = ACT_HL2MP_GESTURE_RANGE_ATTACK_SHOTGUN
 SWEP.GestureReload = ACT_HL2MP_GESTURE_RELOAD_SHOTGUN
 
 SWEP.PassiveAng = Angle(0, 0, 0)
-SWEP.PassivePos = Vector(0, -2, -6)
+SWEP.PassivePos = Vector(0, -2, -4)
 
 SWEP.BlindFireAng = Angle(0, 5, 0)
 SWEP.BlindFirePos = Vector(0, -2, -4)
 
 SWEP.SprintAng = Angle(30, -15, 0)
-SWEP.SprintPos = Vector(5, 0, -4)
+SWEP.SprintPos = Vector(5, 0, -2)
 
-SWEP.SightAng = Angle(0, -0.6, 0)
-SWEP.SightPos = Vector(-4.89, -7.5, -3.15)
+SWEP.SightAng = Angle(-0.2, -0.6, 0)
+SWEP.SightPos = Vector(-2.98, -5, -3)
 
-SWEP.CorrectivePos = Vector(0.02, 0, 0.075)
-SWEP.CorrectiveAng = Angle(0, 0, 0)
+SWEP.CorrectivePos = Vector(0.08, 0, 0.05)
+SWEP.CorrectiveAng = Angle(0.25, 0, 0)
 
 SWEP.HolsterVisible = true
 SWEP.HolsterSlot = TacRP.HOLSTER_SLOT_BACK
-SWEP.HolsterPos = Vector(5, 0, -6)
+SWEP.HolsterPos = Vector(4, -8, -6)
 SWEP.HolsterAng = Angle(0, 0, 0)
 
 // reload
 
-SWEP.ClipSize = 8
+SWEP.ClipSize = 6
 SWEP.Ammo = "buckshot"
 SWEP.ShotgunReload = true
 
@@ -114,12 +113,12 @@ SWEP.ReloadTimeMult = 1
 
 // sounds
 
-local path = "TacRP/weapons/fp6/fp6_"
+local path = "tacrp/weapons/tgs12/"
 
 SWEP.Sound_Shoot = "^" .. path .. "fire-1.wav"
-SWEP.Sound_Shoot_Silenced = "TacRP/weapons/sg551/sg551_fire_silenced-1.wav"
+SWEP.Sound_Shoot_Silenced = "tacrp/weapons/sg551/sg551_fire_silenced-1.wav"
 
-SWEP.Vol_Shoot = 130
+SWEP.Vol_Shoot = 110
 SWEP.ShootPitchVariance = 0 // amount to vary pitch by each shot
 
 // effects
@@ -166,22 +165,22 @@ SWEP.Attachments = {
     [1] = {
         PrintName = "Optic",
         Category = "optic_cqb",
-        Bone = "ValveBiped.FP6_base",
+        Bone = "ValveBiped._ROOT_TGS12",
         InstalledElements = {"sights"},
-        AttachSound = "TacRP/weapons/optic_on.wav",
-        DetachSound = "TacRP/weapons/optic_off.wav",
-        VMScale = 1,
-        Pos_VM = Vector(-5.6, 0.075, 8),
-        Ang_VM = Angle(90, 0, 0),
-        Pos_WM = Vector(11, 1.5, -5.5),
+        AttachSound = "tacint/weapons/optic_on.wav",
+        DetachSound = "tacint/weapons/optic_off.wav",
+        VMScale = 0.75,
+        Pos_VM = Vector(5.25, 0, 6),
+        Pos_WM = Vector(9, 1.5, -5.5),
+        Ang_VM = Angle(-90, 180, 0),
         Ang_WM = Angle(0, 0, 180),
     },
     -- [2] = {
     --     PrintName = "Muzzle",
     --     Category = "silencer",
-    --     Bone = "ValveBiped.bekas_rootbone",
-    --     AttachSound = "TacRP/weapons/silencer_on.wav",
-    --     DetachSound = "TacRP/weapons/silencer_off.wav",
+    --     Bone = "ValveBiped._ROOT_TGS12",
+    --     AttachSound = "tacint/weapons/silencer_on.wav",
+    --     DetachSound = "tacint/weapons/silencer_off.wav",
     --     Pos_VM = Vector(-2.2, 0, 33),
     --     Pos_WM = Vector(23, 2.5, -2.8),
     --     Ang_VM = Angle(90, 0, 0),
@@ -190,31 +189,31 @@ SWEP.Attachments = {
     [2] = {
         PrintName = "Tactical",
         Category = "tactical",
-        Bone = "ValveBiped.FP6_base",
-        AttachSound = "TacRP/weapons/flashlight_on.wav",
-        DetachSound = "TacRP/weapons/flashlight_off.wav",
+        Bone = "ValveBiped._ROOT_TGS12",
+        AttachSound = "tacint/weapons/flashlight_on.wav",
+        DetachSound = "tacint/weapons/flashlight_off.wav",
         InstalledElements = {"tactical"},
         VMScale = 1.25,
-        Pos_VM = Vector(-4.4, -0.3, 24),
-        Pos_WM = Vector(25, 1.5, -4.5),
-        Ang_VM = Angle(90, 0, -90),
+        Pos_VM = Vector(4, 0.25, 22),
+        Pos_WM = Vector(20, 1.5, -4.5),
+        Ang_VM = Angle(-90, 180, -90),
         Ang_WM = Angle(0, 0, 90),
     },
     [3] = {
         PrintName = "Accessory",
-        Category = {"perk", "perk_melee", "perk_shooting", "perk_reload", "perk_sling", "perk_duffle"},
-        AttachSound = "TacRP/weapons/flashlight_on.wav",
-        DetachSound = "TacRP/weapons/flashlight_off.wav",
+        Category = {"perk", "perk_melee", "perk_shooting", "perk_reload", "perk_extendedmag", "perk_duffle"},
+        AttachSound = "tacint/weapons/flashlight_on.wav",
+        DetachSound = "tacint/weapons/flashlight_off.wav",
     },
     [4] = {
         PrintName = "Bolt",
-        Category = {"bolt_manual"},
+        Category = {"bolt_automatic"},
         AttachSound = "TacRP/weapons/flashlight_on.wav",
         DetachSound = "TacRP/weapons/flashlight_off.wav",
     },
     [5] = {
         PrintName = "Trigger",
-        Category = {"trigger_manual"},
+        Category = {"trigger_semi"},
         AttachSound = "TacRP/weapons/flashlight_on.wav",
         DetachSound = "TacRP/weapons/flashlight_off.wav",
     },
@@ -235,15 +234,14 @@ local function addsound(name, spath)
     })
 end
 
-addsound("TacInt_fp6.Insertshell",
+addsound("tacint_fp6.Insertshell",
     {
-        path .. "insertshell-1.wav",
-        path .. "insertshell-2.wav",
-        path .. "insertshell-3.wav",
+        "tacint/weapons/fp6/fp6_insertshell-1.wav",
+        "tacint/weapons/fp6/fp6_insertshell-2.wav",
+        "tacint/weapons/fp6/fp6_insertshell-3.wav",
     }
 )
-addsound("TacInt_fp6.Movement", path .. "movement-1.wav")
-addsound("TacInt_fp6.PumpBack", path .. "pumpback-1.wav")
-addsound("TacInt_fp6.PumpForward", path .. "pumpforward-1.wav")
-addsound("TacInt_fp6.ReloadStart", path .. "reloadstart.wav")
-addsound("TacInt_fp6.ReloadFinish", path .. "reloadfinish.wav")
+addsound("tacint_Bekas.Insertshell", "tacrp/weapons/bekas/insertshell-1.wav")
+addsound("tacint_Bekas.Movement", "tacrp/weapons/bekas/movement-1.wav")
+addsound("tacint_tgs12.PumpBack", path .. "pump_backward-1.wav")
+addsound("tacint_tgs12.PumpForward", path .. "pump_forward-1.wav")

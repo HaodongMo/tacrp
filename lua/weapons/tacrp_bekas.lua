@@ -7,7 +7,8 @@ AddCSLuaFile()
 SWEP.PrintName = "Molot Bekas"
 SWEP.Category = "Tactical RP (Arctic)"
 
-SWEP.Description = "Hunting shotgun with tight spread."
+// Tier 1
+SWEP.Description = "Cheap hunting shotgun."
 
 SWEP.ViewModel = "models/weapons/tacint/v_bekas.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_bekas.mdl"
@@ -40,9 +41,9 @@ SWEP.BodyDamageMultipliers = {
 
 SWEP.Firemode = 1
 
-SWEP.RPM = 75
+SWEP.RPM = 60
 
-SWEP.Spread = 0.01
+SWEP.Spread = 0.015
 
 
 SWEP.ScopedSpreadPenalty = 0
@@ -158,6 +159,8 @@ SWEP.AnimationTranslationTable = {
     ["melee"] = {"melee1", "melee2"},
     ["reload"] = {"reload", "reload2"}
 }
+
+SWEP.ShootSpeedMult = 0.75
 
 // attachments
 

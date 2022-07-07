@@ -17,8 +17,8 @@ SWEP.Slot = 1
 
 // "ballistics"
 
-SWEP.Damage_Max = 15 // 100 / 4 // damage at minimum range
-SWEP.Damage_Min = 9 // 100 / 7 // damage at maximum range
+SWEP.Damage_Max = 14 // 100 / 4 // damage at minimum range
+SWEP.Damage_Min = 7 // 100 / 7 // damage at maximum range
 SWEP.Range_Min = 2000 // distance for which to maintain maximum damage
 SWEP.Range_Max = 5000 // distance at which we drop to minimum damage
 SWEP.Penetration = 3 // units of metal this weapon can penetrate
@@ -43,9 +43,9 @@ SWEP.RPM = 450
 SWEP.Spread = 0.0015
 
 SWEP.RecoilPerShot = 1
-SWEP.RecoilMaximum = 6
-SWEP.RecoilResetTime = 0.25 // time after you stop shooting for recoil to start dissipating
-SWEP.RecoilDissipationRate = 80
+SWEP.RecoilMaximum = 10
+SWEP.RecoilResetTime = 0.2
+SWEP.RecoilDissipationRate = 100
 SWEP.RecoilFirstShotMult = 1 // multiplier for the first shot's recoil amount
 
 SWEP.RecoilVisualKick = 2.5
@@ -57,12 +57,13 @@ SWEP.CanBlindFire = true
 
 // handling
 
-SWEP.MoveSpeedMult = 0.99
-SWEP.ShootingSpeedMult = 1 // slow down applied while shooting
+SWEP.MoveSpeedMult = 0.9
+SWEP.ShootingSpeedMult = 0.75
 SWEP.SightedSpeedMult = 0.5
 SWEP.MeleeSpeedMult = 0.5
-SWEP.MeleeSpeedMultTime = 2 // seconds to apply slow down for
+SWEP.MeleeSpeedMultTime = 2
 
+SWEP.AimDownSightsTime = 0.25
 SWEP.SprintToFireTime = 0.25
 
 // hold types
@@ -96,7 +97,7 @@ SWEP.HolsterAng = Angle(90, 0, 0)
 
 // reload
 
-SWEP.ClipSize = 13
+SWEP.ClipSize = 18 // 13 not realism :(
 SWEP.Ammo = "pistol"
 
 SWEP.ReloadTimeMult = 1

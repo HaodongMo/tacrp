@@ -7,8 +7,8 @@ AddCSLuaFile()
 SWEP.PrintName = "Manurhin MR96"
 SWEP.Category = "Tactical RP (Arctic)"
 
-// Tier 2
-SWEP.Description = "Powerful revolver with high recoil."
+// Tier 3
+SWEP.Description = "Premium revolver with high recoil and incredible stopping power.\nDoes increased damage to the head and upper chest."
 
 SWEP.ViewModel = "models/weapons/tacint/v_mr96.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_mr96.mdl"
@@ -19,7 +19,7 @@ SWEP.Slot = 1
 
 SWEP.Damage_Max = 100 / 2 // damage at minimum range
 SWEP.Damage_Min = 100 / 4 // damage at maximum range
-SWEP.Range_Min = 800 // distance for which to maintain maximum damage
+SWEP.Range_Min = 1000 // distance for which to maintain maximum damage
 SWEP.Range_Max = 4000 // distance at which we drop to minimum damage
 SWEP.Penetration = 6 // units of metal this weapon can penetrate
 
@@ -64,14 +64,15 @@ SWEP.CanBlindFire = true
 
 // handling
 
-SWEP.MoveSpeedMult = 1
-SWEP.ShootingSpeedMult = 1 // slow down applied while shooting
+
+SWEP.MoveSpeedMult = 0.9
+SWEP.ShootingSpeedMult = 0.4
 SWEP.SightedSpeedMult = 0.5
 SWEP.MeleeSpeedMult = 0.5
-SWEP.MeleeSpeedMultTime = 2 // seconds to apply slow down for
+SWEP.MeleeSpeedMultTime = 2
 
-SWEP.AimDownSightsTime = 0.2
-SWEP.SprintToFireTime = 0.2
+SWEP.AimDownSightsTime = 0.22
+SWEP.SprintToFireTime = 0.3
 
 // hold types
 
