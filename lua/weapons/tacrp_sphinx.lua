@@ -88,7 +88,7 @@ SWEP.SightAng = Angle(5.1, 0.4, 1)
 SWEP.SightPos = Vector(-2.4, 0, -3.6)
 
 SWEP.SightAng = Angle(5.1, 0.4, 1)
-SWEP.SightPos = Vector(-2.4, 0, -3.6)
+SWEP.SightPos = Vector(-2.43, 0, -3.6)
 
 SWEP.CorrectivePos = Vector(-1.47, 0, 0)
 SWEP.CorrectiveAng = Angle(-5, 5, 0)
