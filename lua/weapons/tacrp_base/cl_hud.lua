@@ -625,13 +625,17 @@ function SWEP:DrawHUDBackground()
     lastarmor = LocalPlayer():Armor()
 
     if !self:GetReloading() and !self:GetCustomize() and GetConVar("developer"):GetInt() > 1 and LocalPlayer():IsAdmin() then
-        local v = LocalPlayer():EyePos() + self:GetShootDir():Forward() * 32
+        local v = self:GetMuzzleOrigin() + self:GetShootDir():Forward() * 30000
         cam.Start3D()
             local w2s = v:ToScreen()
             w2s.x = math.Round(w2s.x)
             w2s.y = math.Round(w2s.y)
         cam.End3D()
-        surface.SetDrawColor(255, 50, 50, 150)
+        if self:StillWaiting() then
+            surface.SetDrawColor(150, 150, 150, 255)
+        else
+            surface.SetDrawColor(255, 50, 50, 255)
+        end
         surface.DrawLine(w2s.x, w2s.y - 256, w2s.x, w2s.y + 256)
         surface.DrawLine(w2s.x - 256, w2s.y, w2s.x + 256, w2s.y)
         local spread = GetFOVAcc(self)
