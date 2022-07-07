@@ -8,7 +8,7 @@ ENT.PrintName                = "Customization Bench"
 ENT.Category                 = "Tactical RP"
 
 ENT.Spawnable                = true
-ENT.Model                    = "models/props/CS_militia/table_shed.mdl"
+ENT.Model                    = "models/props_canal/winch02.mdl"
 
 function ENT:Initialize()
     local model = self.Model

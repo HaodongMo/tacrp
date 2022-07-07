@@ -29,7 +29,7 @@ function SWEP:PlayAnimation(seq, mult, lock, doidle)
         self:SetAnimLockTime(CurTime())
     end
 
-    if doidle then
+    if doidle and !self.NoIdle then
         self:SetNextIdle(CurTime() + time)
     else
         self:SetNextIdle(math.huge)
