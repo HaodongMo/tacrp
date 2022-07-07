@@ -4,10 +4,10 @@ SWEP.Spawnable = true
 AddCSLuaFile()
 
 // names and stuff
-SWEP.PrintName = "AKMS"
+SWEP.PrintName = "Radom Wz. 96 Beryl"
 SWEP.Category = "Tactical RP (Arctic)"
 
-SWEP.Description = "High caliber assault rifle with excellent damage but poor sustained fire capabilities."
+SWEP.Description = "High caliber Polish assault rifle with excellent damage but poor sustained fire capabilities."
 
 SWEP.ViewModel = "models/weapons/tacint/v_ak47.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_ak47.mdl"
@@ -32,6 +32,8 @@ SWEP.Firemodes = {
 SWEP.RPM = 500
 
 SWEP.Spread = 0.0025
+
+SWEP.ShootSpeedMult = 0.5
 
 SWEP.RecoilPerShot = 1
 SWEP.RecoilMaximum = 10

@@ -49,7 +49,12 @@ function SWEP:DrawHUD()
     // if scoped, draw a vignette effect around the screen
 
     if self:GetSightDelta() > 0 then
-        surface.SetDrawColor(0, 0, 0, 255 * self:GetSightDelta())
+        local delta = self:Curve(self:GetSightDelta())
+        // surface.SetDrawColor(0, 0, 0, 255 * delta - 1)
+        // surface.SetMaterial(mat_vignette)
+        // surface.DrawTexturedRect(0, 0, ScrW(), ScrH())
+
+        surface.SetDrawColor(0, 0, 0, 255 * delta)
         surface.SetMaterial(mat_vignette)
         surface.DrawTexturedRect(0, 0, ScrW(), ScrH())
     end
