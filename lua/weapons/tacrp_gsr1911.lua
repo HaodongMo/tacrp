@@ -7,7 +7,8 @@ AddCSLuaFile()
 SWEP.PrintName = "M1911"
 SWEP.Category = "Tactical RP (Arctic)"
 
-SWEP.Description = "Lightweight .45 ACP pistol with single-stack magazine."
+// Tier 1
+SWEP.Description = "Ubiquitous low-capacity pistol with okay damage."
 
 SWEP.ViewModel = "models/weapons/tacint/v_gsr1911.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_gsr1911.mdl"
@@ -16,10 +17,10 @@ SWEP.Slot = 1
 
 // "ballistics"
 
-SWEP.Damage_Max = 100 / 3 // damage at minimum range
-SWEP.Damage_Min = 100 / 7 // damage at maximum range
+SWEP.Damage_Max = 20 // 100 / 3 // damage at minimum range
+SWEP.Damage_Min = 5 // 100 / 7 // damage at maximum range
 SWEP.Range_Min = 1000 // distance for which to maintain maximum damage
-SWEP.Range_Max = 4000 // distance at which we drop to minimum damage
+SWEP.Range_Max = 3000 // distance at which we drop to minimum damage
 SWEP.Penetration = 3 // units of metal this weapon can penetrate
 
 SWEP.MuzzleVelocity = 7500
@@ -41,7 +42,7 @@ SWEP.Firemode = 1
 
 SWEP.RPM = 400
 
-SWEP.Spread = 0.0015
+SWEP.Spread = 0.002
 
 SWEP.ShootSpeedMult = 0.5
 

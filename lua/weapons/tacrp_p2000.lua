@@ -4,26 +4,24 @@ SWEP.Spawnable = true
 AddCSLuaFile()
 
 // names and stuff
-SWEP.PrintName = "Beretta M92FS"
+SWEP.PrintName = "HK P2000"
 SWEP.Category = "Tactical RP (Arctic)"
 
-// Tier 1
-SWEP.Description = "Cheap, high-capacity civilian pistol."
+// Tier 2
+SWEP.Description = "Well-rounded and economic pistol."
 
-SWEP.ViewModel = "models/weapons/tacint/v_vertec.mdl"
-SWEP.WorldModel = "models/weapons/tacint/w_vertec.mdl"
+SWEP.ViewModel = "models/weapons/tacint/v_p2000.mdl"
+SWEP.WorldModel = "models/weapons/tacint/w_p2000.mdl"
 
 SWEP.Slot = 1
 
 // "ballistics"
 
-SWEP.Damage_Max = 12 // 100 / 4 // damage at minimum range
-SWEP.Damage_Min = 7 // 100 / 7 // damage at maximum range
-SWEP.Range_Min = 2500 // distance for which to maintain maximum damage
-SWEP.Range_Max = 4000 // distance at which we drop to minimum damage
+SWEP.Damage_Max = 15 // 100 / 4 // damage at minimum range
+SWEP.Damage_Min = 9 // 100 / 7 // damage at maximum range
+SWEP.Range_Min = 2000 // distance for which to maintain maximum damage
+SWEP.Range_Max = 5000 // distance at which we drop to minimum damage
 SWEP.Penetration = 3 // units of metal this weapon can penetrate
-
-SWEP.MuzzleVelocity = 9000
 
 SWEP.BodyDamageMultipliers = {
     [HITGROUP_HEAD] = 2,
@@ -42,21 +40,16 @@ SWEP.Firemode = 1
 
 SWEP.RPM = 450
 
-SWEP.Spread = 0.0012
-
-SWEP.ShootSpeedMult = 0.5
-
-
+SWEP.Spread = 0.009
 
 SWEP.RecoilPerShot = 1
-SWEP.RecoilMaximum = 10
-SWEP.RecoilResetTime = 0.1// time after you stop shooting for recoil to start dissipating
-SWEP.RecoilDissipationRate = 10
+SWEP.RecoilMaximum = 6
+SWEP.RecoilResetTime = 0.25 // time after you stop shooting for recoil to start dissipating
+SWEP.RecoilDissipationRate = 80
 SWEP.RecoilFirstShotMult = 1 // multiplier for the first shot's recoil amount
 
 SWEP.RecoilVisualKick = 2.5
-
-SWEP.RecoilKick = 5
+SWEP.RecoilKick = 4.5
 
 SWEP.RecoilSpreadPenalty = 0.0002 // extra spread per one unit of recoil
 
@@ -64,20 +57,19 @@ SWEP.CanBlindFire = true
 
 // handling
 
-SWEP.MoveSpeedMult = 0.95
+SWEP.MoveSpeedMult = 0.99
 SWEP.ShootingSpeedMult = 1 // slow down applied while shooting
 SWEP.SightedSpeedMult = 0.5
 SWEP.MeleeSpeedMult = 0.5
 SWEP.MeleeSpeedMultTime = 2 // seconds to apply slow down for
 
-SWEP.AimDownSightsTime = 0.2
-SWEP.SprintToFireTime = 0.2
+SWEP.SprintToFireTime = 0.25
 
 // hold types
 
 SWEP.HoldType = "revolver"
 SWEP.HoldTypeSprint = "normal"
-SWEP.HoldTypeBlindFire = "pistol"
+SWEP.HoldTypeBlindFire = false
 
 SWEP.GestureShoot = ACT_HL2MP_GESTURE_RANGE_ATTACK_PISTOL
 SWEP.GestureReload = ACT_HL2MP_GESTURE_RELOAD_PISTOL
@@ -92,34 +84,31 @@ SWEP.SprintAng = Angle(0, 30, 0)
 SWEP.SprintPos = Vector(2, 0, -12)
 
 SWEP.SightAng = Angle(-0.01, 0.14, 0)
-SWEP.SightPos = Vector(-3.2, 0, -3.35)
+SWEP.SightPos = Vector(-3.47, 0, -3.35)
 
 SWEP.HolsterVisible = true
 SWEP.HolsterSlot = TacRP.HOLSTER_SLOT_PISTOL
 SWEP.HolsterPos = Vector(0, 3, -4)
 SWEP.HolsterAng = Angle(90, 0, 0)
 
-SWEP.Sway = 2
-SWEP.ScopedSway = 1
-
 // reload
 
-SWEP.ClipSize = 15
+SWEP.ClipSize = 13
 SWEP.Ammo = "pistol"
 
 SWEP.ReloadTimeMult = 1
 
-SWEP.DropMagazineModel = "models/weapons/tacint/magazines/vertec.mdl"
+SWEP.DropMagazineModel = "models/weapons/tacint/magazines/p2000.mdl"
 SWEP.DropMagazineImpact = "pistol"
 
 // sounds
 
-local path = "TacRP/weapons/vertec/vertec_"
+local path = "tacrp/weapons/p2000/p2000_"
 
 SWEP.Sound_Shoot = "^" .. path .. "fire-1.wav"
 SWEP.Sound_Shoot_Silenced = path .. "fire_silenced-1.wav"
 
-SWEP.Vol_Shoot = 130
+SWEP.Vol_Shoot = 110
 SWEP.ShootPitchVariance = 2.5 // amount to vary pitch by each shot
 
 // effects
@@ -152,11 +141,13 @@ SWEP.MuzzleEffect = "muzzleflash_pistol"
 // attack1
 SWEP.AnimationTranslationTable = {
     ["deploy"] = "draw",
-    ["fire_iron"] = "shoot3",
+    ["fire_iron"] = "shoot2",
     ["fire"] = {"shoot1", "shoot2", "shoot3"},
     ["blind_fire"] = {"blind_shoot1", "blind_shoot2", "blind_shoot3"},
     ["melee"] = {"melee1", "melee2"}
 }
+
+SWEP.ShootSpeedMult = 0.5
 
 SWEP.LastShot = true
 
@@ -168,11 +159,11 @@ SWEP.Attachments = {
         Category = "optic_pistol",
         Bone = "ValveBiped.slide",
         WMBone = "Box01",
-        AttachSound = "TacRP/weapons/optic_on.wav",
-        DetachSound = "TacRP/weapons/optic_off.wav",
+        AttachSound = "tacrp/weapons/optic_on.wav",
+        DetachSound = "tacrp/weapons/optic_off.wav",
         VMScale = 1,
         WMScale = 1,
-        Pos_VM = Vector(0, 0, -0.35),
+        Pos_VM = Vector(0, 0, 0),
         Ang_VM = Angle(0, 90, 180),
         Pos_WM = Vector(0, -1, -1),
         Ang_WM = Angle(0, -90, 0),
@@ -180,24 +171,24 @@ SWEP.Attachments = {
     [2] = {
         PrintName = "Muzzle",
         Category = "silencer",
-        Bone = "ValveBiped.barrel",
+        Bone = "ValveBiped.barrel_assembly",
         WMBone = "Box01",
-        AttachSound = "TacRP/weapons/silencer_on.wav",
-        DetachSound = "TacRP/weapons/silencer_off.wav",
+        AttachSound = "tacrp/weapons/silencer_on.wav",
+        DetachSound = "tacrp/weapons/silencer_off.wav",
         VMScale = 0.5,
         WMScale = 0.5,
-        Pos_VM = Vector(-0.4, 0, 6.5),
+        Pos_VM = Vector(-0.5, 0.5, 6),
         Ang_VM = Angle(90, 0, 0),
-        Pos_WM = Vector(0, 8.5, -1.5),
+        Pos_WM = Vector(0, 8, -1.5),
         Ang_WM = Angle(0, -90, 0),
     },
     [3] = {
         PrintName = "Tactical",
         Category = "tactical",
-        Bone = "ValveBiped.vertec_rootbone",
+        Bone = "ValveBiped.p2000_rootbone",
         WMBone = "Box01",
-        AttachSound = "TacRP/weapons/flashlight_on.wav",
-        DetachSound = "TacRP/weapons/flashlight_off.wav",
+        AttachSound = "tacrp/weapons/flashlight_on.wav",
+        DetachSound = "tacrp/weapons/flashlight_off.wav",
         VMScale = 1.1,
         WMScale = 1.3,
         Pos_VM = Vector(-2, 0, 6),
@@ -206,10 +197,10 @@ SWEP.Attachments = {
         Ang_WM = Angle(0, -90, 180),
     },
     [4] = {
-        PrintName = "Accessory",
+        PrintName = "Perk",
         Category = {"perk", "perk_melee", "perk_shooting", "perk_reload", "perk_extendedmag", "perk_conceal"},
-        AttachSound = "TacRP/weapons/flashlight_on.wav",
-        DetachSound = "TacRP/weapons/flashlight_off.wav",
+        AttachSound = "tacrp/weapons/flashlight_on.wav",
+        DetachSound = "tacrp/weapons/flashlight_off.wav",
     },
     [5] = {
         PrintName = "Bolt",
@@ -240,9 +231,9 @@ local function addsound(name, spath)
     })
 end
 
-addsound("TacInt_vertec.clip_in", path .. "clip_in.wav")
-addsound("TacInt_vertec.clip_in-mid", path .. "clip_in-mid.wav")
-addsound("TacInt_vertec.clip_out", path .. "clip_out.wav")
-addsound("TacInt_vertec.slide_action", path .. "slide_action.wav")
-addsound("TacInt_vertec.slide_shut", path .. "slide_shut.wav")
-addsound("TacInt_vertec.cock_hammer", path .. "cockhammer.wav")
+addsound("tacint_p2000.clip_in", path .. "clip_in.wav")
+addsound("tacint_p2000.clip_in-mid", path .. "clip_in-mid.wav")
+addsound("tacint_p2000.clip_out", path .. "clip_out.wav")
+addsound("tacint_p2000.slide_action", path .. "slide_action.wav")
+addsound("tacint_p2000.slide_shut", path .. "slide_shut.wav")
+addsound("tacint_p2000.cock_hammer", path .. "cockhammer.wav")
