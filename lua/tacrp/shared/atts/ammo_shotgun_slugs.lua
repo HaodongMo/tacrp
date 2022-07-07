@@ -1,5 +1,8 @@
 ATT.PrintName = "Slugs"
 ATT.Icon = Material("entities/tacrp_att_acc_slugs.png", "mips smooth")
+ATT.Description = "Shells that fire a single accurate slug."
+ATT.Pros = {"Accuracy"}
+ATT.Cons = {"Power"}
 
 ATT.InstalledElements = {"smallmag"}
 

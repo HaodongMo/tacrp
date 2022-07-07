@@ -1,7 +1,7 @@
 ATT.PrintName = "Laser"
 ATT.Icon = Material("entities/tacrp_att_tac_laser.png", "mips smooth")
-ATT.Description = "Tactical device which improves spread."
-ATT.Pros = {"Spread"}
+ATT.Description = "Tactical device which shows where your gun will hit."
+ATT.Pros = {"Laser"}
 
 ATT.Model = "models/weapons/tacint/addons/laser_mounted.mdl"
 ATT.Scale = 1

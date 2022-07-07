@@ -2,7 +2,6 @@ ATT.PrintName = "8x"
 ATT.Icon = Material("entities/tacrp_att_optic_8x.png", "mips smooth")
 ATT.Description = "Long-range two-level sniper optic."
 ATT.Pros = {"Zoom"}
-ATT.Cons = {"No melee attack"}
 
 ATT.Model = "models/weapons/tacint/addons/8x.mdl"
 ATT.Scale = 1

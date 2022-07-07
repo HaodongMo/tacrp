@@ -1,7 +1,8 @@
 ATT.PrintName = "Subsonic"
 ATT.Icon = Material("entities/tacrp_att_acc_tmj.png", "mips smooth")
 ATT.Description = "Bullets with reduced load."
-ATT.Pros = {"Scoped accuracy"}
+ATT.Pros = {"Recoil"}
+ATT.Cons = {"Range"}
 
 ATT.Category = {"ammo_rifle", "ammo_shotgun", "ammo_pistol"} // can be "string" or {"list", "of", "strings"}
 

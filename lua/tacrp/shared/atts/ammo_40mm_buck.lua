@@ -1,6 +1,8 @@
 ATT.PrintName = "BUCK"
 ATT.Icon = Material("entities/tacrp_att_ammo_40mm_buck.png", "mips smooth")
 ATT.Description = "Huge 40mm shotgun shell."
+ATT.Pros = {"Direct fire"}
+ATT.Cons = {"No explosion"}
 
 ATT.Category = "ammo_40mm" // can be "string" or {"list", "of", "strings"}
 

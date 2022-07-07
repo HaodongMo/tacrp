@@ -1,8 +1,8 @@
 ATT.PrintName = "Magnum"
 ATT.Icon = Material("entities/tacrp_att_acc_hollowpoints.png", "mips smooth")
-ATT.Description = "Bullets that improve damage, but are available only in a small magazine."
+ATT.Description = "Bullets that deal more damage, but have a much higher kick."
 ATT.Pros = {"Damage"}
-ATT.Cons = {"Mag Capacity"}
+ATT.Cons = {"Recoil"}
 
 ATT.InstalledElements = {"smallmag"}
 

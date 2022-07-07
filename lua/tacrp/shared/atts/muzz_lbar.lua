@@ -1,5 +1,8 @@
 ATT.PrintName = "Light Barrel"
 ATT.Icon = Material("entities/tacrp_att_muzz_hbar.png", "mips smooth")
+ATT.Description = "Improves recoil, at the cost of range."
+ATT.Pros = {"Recoil"}
+ATT.Cons = {"Range"}
 
 ATT.Category = "silencer" // can be "string" or {"list", "of", "strings"}
 

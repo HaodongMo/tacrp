@@ -1,6 +1,8 @@
 ATT.PrintName = "Flechette"
 ATT.Icon = Material("entities/tacrp_att_ammo_40mm_heat.png", "mips smooth")
 ATT.Description = "Grenade packed with thin darts."
+ATT.Pros = {"Penetration", "Direct fire"}
+ATT.Cons = {"Less power"}
 
 ATT.Category = "ammo_40mm" // can be "string" or {"list", "of", "strings"}
 

@@ -1,8 +1,7 @@
 ATT.PrintName = "Red Dot"
 ATT.Icon = Material("entities/tacrp_att_optic_rds.png", "mips smooth")
 ATT.Description = "Tube optic that helps to improve mid-range aim."
-ATT.Pros = {"Zoom"}
-ATT.Cons = {"No melee attack"}
+ATT.Pros = {"Sight"}
 
 ATT.Model = "models/weapons/tacint/addons/reddot_hq.mdl"
 ATT.Scale = 0.35
