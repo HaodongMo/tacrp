@@ -303,6 +303,8 @@ SWEP.Attachments = nil
 
 // boilerplate
 
+SWEP.FreeAim = true
+
 SWEP.ArcticTacRP = true
 SWEP.DrawCrosshair = false
 SWEP.AccurateCrosshair = true
