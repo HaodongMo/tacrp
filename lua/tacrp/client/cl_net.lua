@@ -10,6 +10,9 @@ net.Receive("TacRP_updateholster", function()
     local ply = net.ReadEntity()
     --local slot = net.ReadUInt(TacRP.HolsterNetBits)
     local item = net.ReadEntity()
+
+    if !IsValid(item) then return end
+
     local slot = item:GetValue("HolsterSlot")
 
     if IsValid(item) and slot then
