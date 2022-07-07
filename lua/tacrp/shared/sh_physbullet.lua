@@ -26,6 +26,7 @@ function TacRP:ShootPhysBullet(wep, pos, vel, tbl)
         Penleft = wep:GetValue("Penetration"),
         Gravity = 1,
         Pos = pos,
+        StartPos = Vector(pos),
         Vel = vel,
         Drag = 1,
         Travelled = 0,
@@ -103,6 +104,7 @@ net.Receive("TacRP_sendbullet", function(len, ply)
 
     local bullet = {
         Pos = pos,
+        StartPos = pos,
         Vel = ang:Forward() * vel,
         Travelled = 0,
         StartTime = CurTime(),
@@ -376,8 +378,8 @@ function TacRP:ProgressPhysBullet(bullet, timestep)
     end
 end
 
-local head = Material("particle/particle_glow_04")
-local tracer = Material("effects/tracer_middle")
+local head = Material("particle/fire")
+local tracer = Material("tacrp/tracer")
 
 function TacRP:DrawPhysBullets()
     cam.Start3D()
@@ -411,7 +413,7 @@ function TacRP:DrawPhysBullets()
 
         local headsize = size
 
-        headsize = headsize * math.min(EyePos():DistToSqr(pos) / math.pow(2500, 2), 1)
+        --headsize = headsize * math.min(EyePos():DistToSqr(pos) / math.pow(2500, 2), 1)
 
         local vel = i.Vel - LocalPlayer():GetVelocity()
 

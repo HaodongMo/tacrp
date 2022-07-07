@@ -646,6 +646,10 @@ function SWEP:DrawHUDBackground()
         surface.SetTextColor(255, 255, 255, 255)
         surface.SetTextPos(w2s.x - 256, w2s.y)
         surface.DrawText(recoil_txt)
+        local spread_txt = tostring(math.Round(self:GetSpread(), 5))
+        local tw = surface.GetTextSize(spread_txt)
+        surface.SetTextPos(w2s.x + 256 - tw, w2s.y)
+        surface.DrawText(spread_txt)
     end
 end
 
