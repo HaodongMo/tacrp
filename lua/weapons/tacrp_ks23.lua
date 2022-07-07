@@ -119,7 +119,7 @@ SWEP.ReloadTimeMult = 1.15
 
 local path = "TacRP/weapons/bekas/"
 
-SWEP.Sound_Shoot = "^tacrp/weapons/fp6/fp6_fire-1.wav"
+SWEP.Sound_Shoot = "(tacrp/weapons/fp6/fp6_fire-1.wav"
 SWEP.Sound_Shoot_Silenced = "TacRP/weapons/sg551/sg551_fire_silenced-1.wav"
 
 SWEP.Vol_Shoot = 110

@@ -121,7 +121,7 @@ SWEP.DropMagazineImpact = "metal"
 
 local path = "TacRP/weapons/m14/m14_"
 
-SWEP.Sound_Shoot = "^" .. path .. "fire-1.wav"
+SWEP.Sound_Shoot = "(" .. path .. "fire-1.wav"
 SWEP.Sound_Shoot_Silenced = "TacRP/weapons/g36k/g36k_fire_silenced-1.wav"
 
 SWEP.Vol_Shoot = 110
