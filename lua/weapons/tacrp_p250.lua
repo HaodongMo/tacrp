@@ -7,7 +7,8 @@ AddCSLuaFile()
 SWEP.PrintName = "SIG P250"
 SWEP.Category = "Tactical RP (Arctic)"
 
-SWEP.Description = "9mm handgun with balanced characteristics."
+// Tier 3
+SWEP.Description = "Premium handgun with great damage and precision."
 
 SWEP.ViewModel = "models/weapons/tacint/v_p250.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_p250.mdl"
@@ -16,8 +17,8 @@ SWEP.Slot = 1
 
 // "ballistics"
 
-SWEP.Damage_Max = 100 / 4 // damage at minimum range
-SWEP.Damage_Min = 100 / 7 // damage at maximum range
+SWEP.Damage_Max = 25 // 100 / 4 // damage at minimum range
+SWEP.Damage_Min = 9 // 100 / 7 // damage at maximum range
 SWEP.Range_Min = 2000 // distance for which to maintain maximum damage
 SWEP.Range_Max = 6000 // distance at which we drop to minimum damage
 SWEP.Penetration = 3 // units of metal this weapon can penetrate
@@ -39,23 +40,23 @@ SWEP.BodyDamageMultipliers = {
 
 SWEP.Firemode = 1
 
-SWEP.RPM = 450
+SWEP.RPM = 500
 
-SWEP.Spread = 0.001
+SWEP.Spread = 0.0007
 
 SWEP.ShootSpeedMult = 0.5
 
 
 
 SWEP.RecoilPerShot = 1
-SWEP.RecoilMaximum = 10
-SWEP.RecoilResetTime = 0.1// time after you stop shooting for recoil to start dissipating
+SWEP.RecoilMaximum = 5
+SWEP.RecoilResetTime = 0.1 // time after you stop shooting for recoil to start dissipating
 SWEP.RecoilDissipationRate = 10
 SWEP.RecoilFirstShotMult = 1 // multiplier for the first shot's recoil amount
 
-SWEP.RecoilVisualKick = 3.5
+SWEP.RecoilVisualKick = 2
 
-SWEP.RecoilKick = 7.5
+SWEP.RecoilKick = 7
 
 SWEP.RecoilSpreadPenalty = 0.00025 // extra spread per one unit of recoil
 

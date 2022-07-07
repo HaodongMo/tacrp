@@ -8,7 +8,7 @@ SWEP.PrintName = "Dual MTX"
 SWEP.Category = "Tactical RP (Arctic)"
 
 // Tier 4
-SWEP.Description = "A pair of high capacity pistols. With firepower like these, who needs aiming?"
+SWEP.Description = "An elite pair of high capacity, high damage pistols.\nWith firepower like these, who needs aiming?"
 
 SWEP.ViewModel = "models/weapons/tacint/v_mtx_dual.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_mtx.mdl"
@@ -17,10 +17,10 @@ SWEP.Slot = 1
 
 // "ballistics"
 
-SWEP.Damage_Max = 22 // 100 / 4 // damage at minimum range
-SWEP.Damage_Min = 8 // 100 / 7 // damage at maximum range
-SWEP.Range_Min = 1200 // distance for which to maintain maximum damage
-SWEP.Range_Max = 4000 // distance at which we drop to minimum damage
+SWEP.Damage_Max = 25 // 100 / 4 // damage at minimum range
+SWEP.Damage_Min = 10 // 100 / 7 // damage at maximum range
+SWEP.Range_Min = 800 // distance for which to maintain maximum damage
+SWEP.Range_Max = 5000 // distance at which we drop to minimum damage
 SWEP.Penetration = 1 // units of metal this weapon can penetrate
 
 SWEP.TracerNum = 1
@@ -42,7 +42,7 @@ SWEP.Firemode = 1
 
 SWEP.RPM = 800
 
-SWEP.Spread = 0.008
+SWEP.Spread = 0.004
 
 // Spread penalties are in spread units and are additive
 SWEP.MoveSpreadPenalty = 0.010 // spread penalty while travelling at max. 250 u/s
@@ -61,9 +61,9 @@ SWEP.RecoilVisualKick = 1
 
 SWEP.RecoilKick = 5
 
-SWEP.RecoilSpreadPenalty = 0.004 // extra spread per one unit of recoil
+SWEP.RecoilSpreadPenalty = 0.0015 // extra spread per one unit of recoil
 
-SWEP.Sway = 2
+SWEP.Sway = 0.5
 
 SWEP.CanBlindFire = false
 
