@@ -43,7 +43,7 @@ local lastarmor = 0
 
 local faceindex = 0
 
-function SWEP:DrawHUD()
+function SWEP:DrawHUDBackground()
     self:DoScope()
 
     // if scoped, draw a vignette effect around the screen
