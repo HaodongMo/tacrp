@@ -29,11 +29,9 @@ SWEP.Firemodes = {
     1
 }
 
-SWEP.RPM = 600
+SWEP.RPM = 500
 
 SWEP.Spread = 0.0025
-
-
 
 SWEP.RecoilPerShot = 1
 SWEP.RecoilMaximum = 10
@@ -77,8 +75,8 @@ SWEP.BlindFirePos = Vector(0, -2, -4)
 SWEP.SprintAng = Angle(30, -15, 0)
 SWEP.SprintPos = Vector(5, 0, -2)
 
-SWEP.SightAng = Angle(0, 0, -1)
-SWEP.SightPos = Vector(-4.62, -7, -3)
+SWEP.SightAng = Angle(0.05, 0, 0)
+SWEP.SightPos = Vector(-4.66, -7.5, -2.9)
 
 SWEP.CorrectivePos = Vector(0, 0, -0.05)
 SWEP.CorrectiveAng = Angle(0.75, 0.7, 0)

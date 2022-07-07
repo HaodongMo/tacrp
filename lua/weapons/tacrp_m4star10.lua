@@ -106,9 +106,9 @@ SWEP.ReloadTimeMult = 1
 
 // sounds
 
-local path = "tacrp/weapons/m4star10/"
+// local path = "tacrp/weapons/m4star10/"
 
-SWEP.Sound_Shoot = "^" .. path .. "fire-1.wav"
+SWEP.Sound_Shoot = "^tacrp/weapons/m4star10/fire-2.wav"
 SWEP.Sound_Shoot_Silenced = "tacint/weapons/sg551/sg551_fire_silenced-1.wav"
 
 SWEP.Vol_Shoot = 110
@@ -182,19 +182,19 @@ SWEP.Attachments = {
     },
     [3] = {
         PrintName = "Accessory",
-        Category = {"perk", "perk_melee", "perk_shooting", "perk_reload"},
+        Category = {"perk", "perk_melee", "perk_shooting", "perk_reload", "perk_extendedmag"},
         AttachSound = "tacint/weapons/flashlight_on.wav",
         DetachSound = "tacint/weapons/flashlight_off.wav",
     },
     [4] = {
         PrintName = "Bolt",
-        Category = {"bolt_manual"},
+        Category = {"bolt_automatic"},
         AttachSound = "TacRP/weapons/flashlight_on.wav",
         DetachSound = "TacRP/weapons/flashlight_off.wav",
     },
     [5] = {
         PrintName = "Trigger",
-        Category = {"trigger_manual"},
+        Category = {"trigger_semi"},
         AttachSound = "TacRP/weapons/flashlight_on.wav",
         DetachSound = "TacRP/weapons/flashlight_off.wav",
     },

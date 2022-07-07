@@ -148,7 +148,7 @@ SWEP.EjectEffect = 2
 // WM:
 // attack1
 SWEP.AnimationTranslationTable = {
-    ["fire_iron"] = "dryfire",
+    ["fire_iron"] = "fire1_M",
     ["deploy"] = "deploy",
     ["fire1"] = "fire1_M",
     ["fire2"] = "fire2_M",

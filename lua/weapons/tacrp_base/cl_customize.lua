@@ -517,6 +517,41 @@ function SWEP:CreateCustomizeHUD()
             return order_a < order_b
         end)
 
+        local prosconspanel = vgui.Create("DPanel", bg)
+        prosconspanel:SetPos(airgap + ((table.Count(atts)) * ScreenScale(34)), offset + airgap + ((slot - 1) * ScreenScale(34 + 8)))
+        prosconspanel:SetSize(ScrW(), ScreenScale(34))
+        prosconspanel.Paint = function(self2, w, h)
+            local installed = attslot.Installed
+
+            if !installed then return end
+
+            local atttbl = TacRP.GetAttTable(installed)
+            // draw the pros and cons text from the attachment
+
+            local pros = atttbl.Pros or {}
+            local cons = atttbl.Cons or {}
+
+            local c = 0
+
+            for i, pro in pairs(pros) do
+                surface.SetFont("TacRP_Myriad_Pro_8")
+                surface.SetTextColor(Color(50, 255, 50))
+                surface.SetTextPos(0, ScreenScale((c * 8)))
+                surface.DrawText("+" .. pro)
+
+                c = c + 1
+            end
+
+            for i, con in pairs(cons) do
+                surface.SetFont("TacRP_Myriad_Pro_8")
+                surface.SetTextColor(Color(255, 50, 50))
+                surface.SetTextPos(0, ScreenScale((c * 8)))
+                surface.DrawText("-" .. con)
+
+                c = c + 1
+            end
+        end
+
         for i, att in pairs(atts) do
             local atttbl = TacRP.GetAttTable(att)
 
