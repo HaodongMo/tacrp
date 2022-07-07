@@ -86,14 +86,19 @@ SWEP.HoldTypeBlindFire = false
 SWEP.GestureShoot = ACT_HL2MP_GESTURE_RANGE_ATTACK_DUEL
 SWEP.GestureReload = ACT_HL2MP_GESTURE_RELOAD_DUEL
 
-SWEP.PassiveAng = Angle(0, 0, 0)
-SWEP.PassivePos = Vector(1, 0, -6)
+SWEP.PassiveAng = Angle(5, 0, -2)
+SWEP.PassivePos = Vector(3, 0, -6)
 
 SWEP.BlindFireAng = Angle(0, 5, 0)
 SWEP.BlindFirePos = Vector(0, 0, -5)
 
 SWEP.SprintAng = Angle(0, 30, 0)
 SWEP.SprintPos = Vector(1, 0, -12)
+
+SWEP.HolsterVisible = true
+SWEP.HolsterSlot = TacRP.HOLSTER_SLOT_PISTOL
+SWEP.HolsterPos = Vector(0, 3, -4)
+SWEP.HolsterAng = Angle(60, 5, 0)
 
 // reload
 
