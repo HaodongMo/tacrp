@@ -44,7 +44,12 @@ SWEP.RPM = 800
 
 SWEP.Spread = 0.02
 
-SWEP.HipFireSpreadPenalty = 0 // spread penalty for not being scoped in
+// Spread penalties are in spread units and are additive
+SWEP.MoveSpreadPenalty = 0.010 // spread penalty while travelling at max. 250 u/s
+SWEP.MidAirSpreadPenalty = 0 // spread penalty for being in the air
+SWEP.HipFireSpreadPenalty = 0.005 // spread penalty for not being scoped in
+SWEP.BlindFireSpreadPenalty = 0.01 // spread penalty for blind firing
+SWEP.CrouchSpreadPenalty = 0
 
 SWEP.RecoilPerShot = 1
 SWEP.RecoilMaximum = 15
