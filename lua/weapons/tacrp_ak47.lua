@@ -4,7 +4,7 @@ SWEP.Spawnable = true
 AddCSLuaFile()
 
 // names and stuff
-SWEP.PrintName = "Radom Wz. 96 Beryl"
+SWEP.PrintName = "FB Beryl 96"
 SWEP.Category = "Tactical RP (Arctic)"
 
 SWEP.Description = "Polish 5.56mm assault rifle with poor sustained fire capabilities."
