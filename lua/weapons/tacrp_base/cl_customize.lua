@@ -56,7 +56,7 @@ local stk_clr = {
     [8] = Color(160, 160, 160),
     [9] = Color(200, 200, 200),
 }
-local function bodydamagetext(name, dmg, mult, x, y, hover)
+local function bodydamagetext(name, dmg, num, mult, x, y, hover)
 
     local stk = math.ceil(100 / (dmg * mult))
 
@@ -68,12 +68,12 @@ local function bodydamagetext(name, dmg, mult, x, y, hover)
     -- surface.DrawText(name)
     -- surface.SetTextPos(ScreenScale(1), y + ScreenScale(6))
     if hover then
-        surface.DrawText(stk .. " STK")
+        surface.DrawText(stk .. (num > 1 and " PTK" or " STK"))
     else
-        surface.DrawText(math.floor(dmg * mult))
+        surface.DrawText(math.floor(dmg * mult)) --  .. (num > 1 and ("×" .. num) or "")
     end
 
-    local c = stk_clr[math.Clamp(stk, 1, 9)]
+    local c = stk_clr[math.Clamp(num > 1 and math.floor(stk / num * 3.5) or stk, 1, 9)]
     surface.SetDrawColor(c, c, c, 255)
 end
 
@@ -279,42 +279,59 @@ function SWEP:CreateCustomizeHUD()
             surface.SetMaterial(body)
             surface.DrawTexturedRect(x2, y2, w2, h2)
 
-            local dmg = self:GetDamageAtRange(range) * self:GetValue("Num")
+            local dmg = self:GetDamageAtRange(range)
+            local num =  self:GetValue("Num")
             local mult = self:GetValue("BodyDamageMultipliers")
             local hover = self2:IsHovered()
 
             local upperbody = mult[HITGROUP_STOMACH] == mult[HITGROUP_CHEST]
 
-            bodydamagetext("Head", dmg, mult[HITGROUP_HEAD], w - ScreenScale(16), upperbody and ScreenScale(6) or ScreenScale(4), hover)
+            bodydamagetext("Head", dmg, num, mult[HITGROUP_HEAD], w - ScreenScale(16), upperbody and ScreenScale(6) or ScreenScale(4), hover)
             surface.SetMaterial(body_head)
             surface.DrawTexturedRect(x2, y2, w2, h2)
 
-            bodydamagetext("Chest", dmg, mult[HITGROUP_CHEST], w - ScreenScale(16), upperbody and ScreenScale(18) or ScreenScale(14), hover)
+            bodydamagetext("Chest", dmg, num, mult[HITGROUP_CHEST], w - ScreenScale(16), upperbody and ScreenScale(18) or ScreenScale(14), hover)
             surface.SetMaterial(body_chest)
             surface.DrawTexturedRect(x2, y2, w2, h2)
 
             if !upperbody then
-                bodydamagetext("Stomach", dmg, mult[HITGROUP_STOMACH], w - ScreenScale(16), ScreenScale(24), hover)
+                bodydamagetext("Stomach", dmg, num, mult[HITGROUP_STOMACH], w - ScreenScale(16), ScreenScale(24), hover)
             end
             surface.SetMaterial(body_stomach)
             surface.DrawTexturedRect(x2, y2, w2, h2)
 
-            bodydamagetext("Arms", dmg, mult[HITGROUP_LEFTARM], w - ScreenScale(22), upperbody and ScreenScale(30) or ScreenScale(34), hover)
+            bodydamagetext("Arms", dmg, num, mult[HITGROUP_LEFTARM], w - ScreenScale(22), upperbody and ScreenScale(30) or ScreenScale(34), hover)
             surface.SetMaterial(body_arms)
             surface.DrawTexturedRect(x2, y2, w2, h2)
 
-            bodydamagetext("Legs", dmg, mult[HITGROUP_LEFTLEG], w - ScreenScale(18), upperbody and ScreenScale(42) or ScreenScale(44), hover)
+            bodydamagetext("Legs", dmg, num, mult[HITGROUP_LEFTLEG], w - ScreenScale(18), upperbody and ScreenScale(42) or ScreenScale(44), hover)
             surface.SetMaterial(body_legs)
             surface.DrawTexturedRect(x2, y2, w2, h2)
 
-            surface.SetTextColor(255, 255, 255, 255)
+            surface.SetDrawColor(0, 0, 0, 50)
+
             surface.SetFont("TacRP_Myriad_Pro_8")
-            surface.SetTextPos(ScreenScale(2), h - ScreenScale(10))
             local txt = self:RangeUnitize(range)
-            local tw, th = surface.GetTextSize(txt)
-            surface.SetDrawColor(50, 50, 50, 100)
-            surface.DrawRect(ScreenScale(1), h - ScreenScale(10), tw + ScreenScale(1), th)
+            --local tw, th = surface.GetTextSize(txt)
+            --surface.DrawRect(ScreenScale(1), h - ScreenScale(10), tw + ScreenScale(1), th)
+            surface.SetTextPos(ScreenScale(2) + 2, h - ScreenScale(10) + 2)
+            surface.SetTextColor(0, 0, 0, 150)
             surface.DrawText(txt)
+            surface.SetTextColor(255, 255, 255, 255)
+            surface.SetTextPos(ScreenScale(2), h - ScreenScale(10))
+            surface.DrawText(txt)
+            if num > 1 then
+                local txt2 = "×" .. num
+                local tw2 = surface.GetTextSize(txt2)
+                --surface.DrawRect(w - tw2 - ScreenScale(2), h - ScreenScale(10), tw2 + ScreenScale(1), th2)
+
+                surface.SetTextPos(w - tw2 - ScreenScale(2) + 2, h - ScreenScale(10) + 2)
+                surface.SetTextColor(0, 0, 0, 150)
+                surface.DrawText(txt2)
+                surface.SetTextColor(255, 255, 255, 255)
+                surface.SetTextPos(w - tw2 - ScreenScale(2), h - ScreenScale(10))
+                surface.DrawText(txt2)
+            end
         end
 
         stack = stack + ScreenScale(64) + smallgap
