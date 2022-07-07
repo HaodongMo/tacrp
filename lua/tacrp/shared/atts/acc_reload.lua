@@ -5,6 +5,6 @@ ATT.Pros = {"Reload Speed"}
 
 ATT.Category = "perk_reload" // can be "string" or {"list", "of", "strings"}
 
-ATT.SortOrder = 1
+ATT.SortOrder = 2
 
 ATT.Mult_ReloadTimeMult = 0.85

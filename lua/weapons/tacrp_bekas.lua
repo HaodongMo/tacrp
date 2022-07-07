@@ -8,7 +8,7 @@ SWEP.PrintName = "Molot Bekas"
 SWEP.Category = "Tactical RP (Arctic)"
 
 // Tier 1
-SWEP.Description = "Cheap hunting shotgun."
+SWEP.Description = "Common hunting shotgun.\nRelatively accurate, but cannot fire rapidly."
 
 SWEP.ViewModel = "models/weapons/tacint/v_bekas.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_bekas.mdl"
@@ -45,13 +45,15 @@ SWEP.RPM = 60
 
 SWEP.Spread = 0.015
 
+SWEP.HipFireSpreadPenalty = 0
+SWEP.MidAirSpreadPenalty = 0
 
 SWEP.ScopedSpreadPenalty = 0
 
 SWEP.RecoilPerShot = 1
-SWEP.RecoilMaximum = 1
+SWEP.RecoilMaximum = 1.5
 SWEP.RecoilResetTime = 0.25 // time after you stop shooting for recoil to start dissipating
-SWEP.RecoilDissipationRate = 100
+SWEP.RecoilDissipationRate = 1
 SWEP.RecoilFirstShotMult = 1 // multiplier for the first shot's recoil amount
 
 SWEP.RecoilVisualKick = 2
@@ -59,17 +61,17 @@ SWEP.RecoilVisualShake = 2
 
 SWEP.RecoilKick = 15
 
-SWEP.RecoilSpreadPenalty = 0.25 // extra spread per one unit of recoil
+SWEP.RecoilSpreadPenalty = 0.02 // extra spread per one unit of recoil
 
 SWEP.CanBlindFire = true
 
 // handling
 
-SWEP.MoveSpeedMult = 0.9
-SWEP.ShootingSpeedMult = 0.75 // slow down applied while shooting
-SWEP.SightedSpeedMult = 0.5
+SWEP.MoveSpeedMult = 0.8
+SWEP.ShootingSpeedMult = 0.5
+SWEP.SightedSpeedMult = 0.25
 SWEP.MeleeSpeedMult = 0.5
-SWEP.MeleeSpeedMultTime = 2 // seconds to apply slow down for
+SWEP.MeleeSpeedMultTime = 2
 
 SWEP.AimDownSightsTime = 0.35
 SWEP.SprintToFireTime = 0.35

@@ -4,9 +4,9 @@ ATT.Description = "Light trigger for rapid semi-automatic fire."
 ATT.Pros = {"Fire rate"}
 ATT.Cons = {"Recoil"}
 
-ATT.Category = {"trigger_semi"}
+ATT.Category = {"trigger_semi", "trigger_akimbo"}
 
 ATT.SortOrder = 4
 
 ATT.Mult_RPM = 1.5
-ATT.Mult_RecoilKick = 1.1
+ATT.Mult_RecoilKick = 1.15

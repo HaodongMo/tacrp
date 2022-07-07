@@ -42,23 +42,23 @@ SWEP.Firemode = 1
 
 SWEP.RPM = 400
 
-SWEP.Spread = 0.002
+SWEP.Spread = 0.003
 
 SWEP.ShootSpeedMult = 0.5
 
 
 
 SWEP.RecoilPerShot = 1
-SWEP.RecoilMaximum = 10
+SWEP.RecoilMaximum = 4
 SWEP.RecoilResetTime = 0.2
-SWEP.RecoilDissipationRate = 10
+SWEP.RecoilDissipationRate = 5
 SWEP.RecoilFirstShotMult = 1 // multiplier for the first shot's recoil amount
 
 SWEP.RecoilVisualKick = 3
 
 SWEP.RecoilKick = 6.5
 
-SWEP.RecoilSpreadPenalty = 0.0002 // extra spread per one unit of recoil
+SWEP.RecoilSpreadPenalty = 0.005
 
 SWEP.CanBlindFire = true
 

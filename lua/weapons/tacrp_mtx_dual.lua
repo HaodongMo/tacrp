@@ -8,7 +8,7 @@ SWEP.PrintName = "Dual MTX"
 SWEP.Category = "Tactical RP (Arctic)"
 
 // Tier 4
-SWEP.Description = "An elite pair of high capacity, high damage pistols.\nWith firepower like these, who needs aiming?"
+SWEP.Description = "An elite pair of high capacity, high damage pistols.\nWith firepower like this, who needs aiming?"
 
 SWEP.ViewModel = "models/weapons/tacint/v_mtx_dual.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_mtx.mdl"
@@ -42,26 +42,21 @@ SWEP.Firemode = 1
 
 SWEP.RPM = 800
 
-SWEP.Spread = 0.004
+SWEP.Spread = 0.02
 
-// Spread penalties are in spread units and are additive
-SWEP.MoveSpreadPenalty = 0.010 // spread penalty while travelling at max. 250 u/s
-SWEP.MidAirSpreadPenalty = 0.012 // spread penalty for being in the air
-SWEP.HipFireSpreadPenalty = 0.005 // spread penalty for not being scoped in
-SWEP.BlindFireSpreadPenalty = 0.01 // spread penalty for blind firing
-SWEP.CrouchSpreadPenalty = 0
+SWEP.HipFireSpreadPenalty = 0 // spread penalty for not being scoped in
 
 SWEP.RecoilPerShot = 1
-SWEP.RecoilMaximum = 4
+SWEP.RecoilMaximum = 15
 SWEP.RecoilResetTime = 0.2 // time after you stop shooting for recoil to start dissipating
-SWEP.RecoilDissipationRate = 80
+SWEP.RecoilDissipationRate = 15
 SWEP.RecoilFirstShotMult = 1 // multiplier for the first shot's recoil amount
 
 SWEP.RecoilVisualKick = 1
 
-SWEP.RecoilKick = 5
+SWEP.RecoilKick = 4
 
-SWEP.RecoilSpreadPenalty = 0.0015 // extra spread per one unit of recoil
+SWEP.RecoilSpreadPenalty = 0.002 // extra spread per one unit of recoil
 
 SWEP.Sway = 0.5
 
@@ -89,6 +84,9 @@ SWEP.GestureReload = ACT_HL2MP_GESTURE_RELOAD_DUEL
 
 SWEP.PassiveAng = Angle(5, 0, -2)
 SWEP.PassivePos = Vector(3, 0, -6)
+
+SWEP.CustomizeAng = Angle(0, 35, 0)
+SWEP.CustomizePos = Vector(1, 0, -12)
 
 SWEP.BlindFireAng = Angle(0, 5, 0)
 SWEP.BlindFirePos = Vector(0, 0, -5)
@@ -165,13 +163,13 @@ SWEP.Akimbo = true
 SWEP.Attachments = {
     [1] = {
         PrintName = "Accessory",
-        Category = {"perk", "perk_melee", "perk_shooting", "perk_reload", "perk_conceal"},
+        Category = {"perk", "perk_melee", "perk_shooting", "perk_reload", "perk_conceal",},
         AttachSound = "TacRP/weapons/flashlight_on.wav",
         DetachSound = "TacRP/weapons/flashlight_off.wav",
     },
     [2] = {
         PrintName = "Trigger",
-        Category = {"trigger_semi"},
+        Category = {"trigger_akimbo"},
         AttachSound = "TacRP/weapons/flashlight_on.wav",
         DetachSound = "TacRP/weapons/flashlight_off.wav",
     },

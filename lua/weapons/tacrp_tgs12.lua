@@ -7,7 +7,7 @@ AddCSLuaFile()
 SWEP.PrintName = "TGS-12"
 SWEP.Category = "Tactical RP (Arctic)"
 
-SWEP.Description = "Economic pistol grip shotgun with relatively high spread and recoil. Does not come with iron sights."
+SWEP.Description = "Economic pistol grip shotgun with high recoil and mobility. Does not come with iron sights."
 
 SWEP.ViewModel = "models/weapons/tacint/v_tgs12.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_tgs12.mdl"
@@ -40,18 +40,17 @@ SWEP.Firemode = 1
 
 SWEP.RPM = 75
 
-SWEP.Spread = 0.04
+SWEP.Spread = 0.025
 
 SWEP.ShootSpeedMult = 1
 
-// Spread penalties are in spread units and are additive
-SWEP.MoveSpreadPenalty = 0 // spread penalty while travelling at max. 250 u/s
-SWEP.HipFireSpreadPenalty = 0 // spread penalty for not being scoped in
+SWEP.HipFireSpreadPenalty = 0
+SWEP.MidAirSpreadPenalty = 0
 
 SWEP.RecoilPerShot = 1
-SWEP.RecoilMaximum = 1
-SWEP.RecoilResetTime = 0.1
-SWEP.RecoilDissipationRate = 5
+SWEP.RecoilMaximum = 2
+SWEP.RecoilResetTime = 0.2
+SWEP.RecoilDissipationRate = 1.1
 SWEP.RecoilFirstShotMult = 1 // multiplier for the first shot's recoil amount
 
 SWEP.RecoilVisualKick = 4
@@ -59,19 +58,20 @@ SWEP.RecoilVisualShake = 2
 
 SWEP.RecoilKick = 30
 
-SWEP.RecoilSpreadPenalty = 0.25 // extra spread per one unit of recoil
+SWEP.RecoilSpreadPenalty = 0.015
 
 SWEP.CanBlindFire = true
 
 // handling
 
-SWEP.MoveSpeedMult = 0.9
-SWEP.ShootingSpeedMult = 1 // slow down applied while shooting
-SWEP.SightedSpeedMult = 0.5
+SWEP.MoveSpeedMult = 0.85
+SWEP.ShootingSpeedMult = 0.6
+SWEP.SightedSpeedMult = 0.35
 SWEP.MeleeSpeedMult = 0.5
-SWEP.MeleeSpeedMultTime = 2 // seconds to apply slow down for
+SWEP.MeleeSpeedMultTime = 2
 
-SWEP.SprintToFireTime = 0.35
+SWEP.AimDownSightsTime = 0.25
+SWEP.SprintToFireTime = 0.3
 
 // hold types
 
@@ -190,8 +190,8 @@ SWEP.Attachments = {
         PrintName = "Tactical",
         Category = "tactical",
         Bone = "ValveBiped._ROOT_TGS12",
-        AttachSound = "tacint/weapons/flashlight_on.wav",
-        DetachSound = "tacint/weapons/flashlight_off.wav",
+        AttachSound = "tacrp/weapons/flashlight_on.wav",
+        DetachSound = "tacrp/weapons/flashlight_off.wav",
         InstalledElements = {"tactical"},
         VMScale = 1.25,
         Pos_VM = Vector(4, 0.25, 22),
@@ -202,8 +202,8 @@ SWEP.Attachments = {
     [3] = {
         PrintName = "Accessory",
         Category = {"perk", "perk_melee", "perk_shooting", "perk_reload", "perk_extendedmag", "perk_duffle"},
-        AttachSound = "tacint/weapons/flashlight_on.wav",
-        DetachSound = "tacint/weapons/flashlight_off.wav",
+        AttachSound = "tacrp/weapons/flashlight_on.wav",
+        DetachSound = "tacrp/weapons/flashlight_off.wav",
     },
     [4] = {
         PrintName = "Bolt",
@@ -236,9 +236,9 @@ end
 
 addsound("tacint_fp6.Insertshell",
     {
-        "tacint/weapons/fp6/fp6_insertshell-1.wav",
-        "tacint/weapons/fp6/fp6_insertshell-2.wav",
-        "tacint/weapons/fp6/fp6_insertshell-3.wav",
+        "tacrp/weapons/fp6/fp6_insertshell-1.wav",
+        "tacrp/weapons/fp6/fp6_insertshell-2.wav",
+        "tacrp/weapons/fp6/fp6_insertshell-3.wav",
     }
 )
 addsound("tacint_Bekas.Insertshell", "tacrp/weapons/bekas/insertshell-1.wav")
