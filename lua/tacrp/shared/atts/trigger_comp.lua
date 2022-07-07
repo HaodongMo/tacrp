@@ -1,8 +1,8 @@
 ATT.PrintName = "Competition"
 ATT.Icon = Material("entities/tacrp_att_trigger_comp.png", "mips smooth")
 ATT.Description = "Lightweight trigger for sports shooting."
-ATT.Pros = {"Improved first shot recoil"}
-ATT.Cons = {"Worse recoil spread"}
+ATT.Pros = {"First shot recoil"}
+ATT.Cons = {"Recoil spread"}
 
 ATT.Category = {"trigger_semi", "trigger_auto", "trigger_burst"}
 

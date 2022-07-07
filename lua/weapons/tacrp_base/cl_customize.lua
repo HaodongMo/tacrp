@@ -588,6 +588,7 @@ function SWEP:CreateCustomizeHUD()
                 end
             end
             slot_panel.Paint = function(self2, w, h)
+                if !IsValid(self:GetOwner()) then return end
                 local hover = self2:IsHovered()
                 local attached = attslot.Installed == att
 
