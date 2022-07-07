@@ -182,8 +182,8 @@ function SWEP:PrimaryAttack()
         if IsFirstTimePredicted() then
             if GetConVar("tacrp_physbullet"):GetBool() then
                 for i = 1, self:GetValue("Num") do
-                    dir = dir + (spread * AngleRand() / 3.6)
-                    TacRP:ShootPhysBullet(self, self:GetMuzzleOrigin(), dir:Forward() * self:GetValue("MuzzleVelocity"))
+                    local new_dir = dir + (spread * AngleRand() / 3.6)
+                    TacRP:ShootPhysBullet(self, self:GetMuzzleOrigin(), new_dir:Forward() * self:GetValue("MuzzleVelocity"))
                 end
             else
                 self:GetOwner():LagCompensation(true)

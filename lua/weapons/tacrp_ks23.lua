@@ -16,7 +16,7 @@ SWEP.Slot = 2
 
 // "ballistics"
 
-SWEP.Damage_Max = 35
+SWEP.Damage_Max = 20
 SWEP.Damage_Min = 10
 SWEP.Range_Min = 600 // distance for which to maintain maximum damage
 SWEP.Range_Max = 2000 // distance at which we drop to minimum damage
@@ -42,7 +42,7 @@ SWEP.Firemode = 1
 
 SWEP.RPM = 60
 
-SWEP.Spread = 0.04
+SWEP.Spread = 0.075
 
 SWEP.ShootSpeedMult = 1.5
 
