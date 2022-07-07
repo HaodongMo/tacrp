@@ -7,7 +7,8 @@ AddCSLuaFile()
 SWEP.PrintName = "Benelli M4"
 SWEP.Category = "Tactical RP (Arctic)"
 
-SWEP.Description = "Semi-automatic combat shotgun. Low capacity."
+// Tier 4
+SWEP.Description = "Elite semi-automatic combat shotgun."
 
 SWEP.ViewModel = "models/weapons/tacint/v_m4star10.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_m4star10.mdl"
@@ -20,10 +21,12 @@ SWEP.ShootSpeedMult = 0.5
 
 SWEP.Damage_Max = 100 / 8 // damage at minimum range
 SWEP.Damage_Min = 100 / 14 // damage at maximum range
-SWEP.Range_Min = 1250 // distance for which to maintain maximum damage
+SWEP.Range_Min = 700 // distance for which to maintain maximum damage
 SWEP.Range_Max = 3000 // distance at which we drop to minimum damage
-SWEP.Penetration = 0.25 // units of metal this weapon can penetrate
+SWEP.Penetration = 1 // units of metal this weapon can penetrate
 SWEP.Num = 8
+
+SWEP.MuzzleVelocity = 9000
 
 SWEP.BodyDamageMultipliers = {
     [HITGROUP_HEAD] = 1,
@@ -42,31 +45,35 @@ SWEP.Firemode = 1
 
 SWEP.RPM = 300
 
-SWEP.Spread = 0.035
+SWEP.Spread = 0.02
+
+SWEP.HipFireSpreadPenalty = 0
+SWEP.MidAirSpreadPenalty = 0
 
 SWEP.RecoilPerShot = 1
-SWEP.RecoilMaximum = 1
+SWEP.RecoilMaximum = 2
 SWEP.RecoilResetTime = 0.15 // time after you stop shooting for recoil to start dissipating
-SWEP.RecoilDissipationRate = 5
+SWEP.RecoilDissipationRate = 4
 SWEP.RecoilFirstShotMult = 1 // multiplier for the first shot's recoil amount
 
-SWEP.RecoilVisualKick = 2
-SWEP.RecoilVisualShake = 2
+SWEP.RecoilVisualKick = 1.5
+SWEP.RecoilVisualShake = 1.5
 
-SWEP.RecoilKick = 25
+SWEP.RecoilKick = 15
 
-SWEP.RecoilSpreadPenalty = 0.25 // extra spread per one unit of recoil
+SWEP.RecoilSpreadPenalty = 0.04 // extra spread per one unit of recoil
 
 SWEP.CanBlindFire = true
 
 // handling
 
-SWEP.MoveSpeedMult = 0.92
-SWEP.ShootingSpeedMult = 1 // slow down applied while shooting
-SWEP.SightedSpeedMult = 0.5
+SWEP.MoveSpeedMult = 0.8
+SWEP.ShootingSpeedMult = 0.35
+SWEP.SightedSpeedMult = 0.25
 SWEP.MeleeSpeedMult = 0.5
-SWEP.MeleeSpeedMultTime = 2 // seconds to apply slow down for
+SWEP.MeleeSpeedMultTime = 2
 
+SWEP.AimDownSightsTime = 0.35
 SWEP.SprintToFireTime = 0.35
 
 // hold types
@@ -105,7 +112,7 @@ SWEP.Sway = 1
 SWEP.ScopedSway = 0.1
 // reload
 
-SWEP.ClipSize = 4
+SWEP.ClipSize = 7
 SWEP.Ammo = "buckshot"
 SWEP.ShotgunReload = true
 
@@ -178,8 +185,8 @@ SWEP.Attachments = {
         PrintName = "Tactical",
         Category = "tactical",
         Bone = "ValveBiped._ROOT_Super90",
-        AttachSound = "tacint/weapons/flashlight_on.wav",
-        DetachSound = "tacint/weapons/flashlight_off.wav",
+        AttachSound = "tacrp/weapons/flashlight_on.wav",
+        DetachSound = "tacrp/weapons/flashlight_off.wav",
         InstalledElements = {"tactical"},
         VMScale = 1.25,
         Pos_VM = Vector(-3, 1, 15),
@@ -189,9 +196,9 @@ SWEP.Attachments = {
     },
     [3] = {
         PrintName = "Accessory",
-        Category = {"perk", "perk_melee", "perk_shooting", "perk_reload", "perk_extendedmag", "perk_duffle"},
-        AttachSound = "tacint/weapons/flashlight_on.wav",
-        DetachSound = "tacint/weapons/flashlight_off.wav",
+        Category = {"perk", "perk_melee", "perk_shooting", "perk_reload", "perk_duffle"},
+        AttachSound = "tacrp/weapons/flashlight_on.wav",
+        DetachSound = "tacrp/weapons/flashlight_off.wav",
     },
     [4] = {
         PrintName = "Bolt",
@@ -224,12 +231,12 @@ end
 
 addsound("tacint_fp6.Insertshell",
     {
-        "tacint/weapons/fp6/fp6_insertshell-1.wav",
-        "tacint/weapons/fp6/fp6_insertshell-2.wav",
-        "tacint/weapons/fp6/fp6_insertshell-3.wav",
+        "tacrp/weapons/fp6/fp6_insertshell-1.wav",
+        "tacrp/weapons/fp6/fp6_insertshell-2.wav",
+        "tacrp/weapons/fp6/fp6_insertshell-3.wav",
     }
 )
-addsound("tacint_Bekas.Movement", "tacint/weapons/bekas/movement-1.wav")
-addsound("tacint_M4Star10.Bolt_Back", "tacint/weapons/m4star10/bolt_back.wav")
-addsound("tacint_M4Star10.Bolt_release", "tacint/weapons/m4star10/bolt_release.wav")
-addsound("tacint_m4.throw_catch", "tacint/weapons/m4/m4_throw_catch.wav")
+addsound("tacint_Bekas.Movement", "tacrp/weapons/bekas/movement-1.wav")
+addsound("tacint_M4Star10.Bolt_Back", "tacrp/weapons/m4star10/bolt_back.wav")
+addsound("tacint_M4Star10.Bolt_release", "tacrp/weapons/m4star10/bolt_release.wav")
+addsound("tacint_m4.throw_catch", "tacrp/weapons/m4/m4_throw_catch.wav")

@@ -7,7 +7,7 @@ AddCSLuaFile()
 SWEP.PrintName = "Skorpion vz. 61"
 SWEP.Category = "Tactical RP (Arctic)"
 
-SWEP.Description = "Lightweight machine pistol."
+SWEP.Description = "Common machine pistol with low recoil.\nCan only mount pistol optics due to top ejection port."
 
 SWEP.ViewModel = "models/weapons/tacint/v_skorpion.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_skorpion.mdl"
@@ -16,8 +16,8 @@ SWEP.Slot = 1
 
 // "ballistics"
 
-SWEP.Damage_Max = 100 / 4 // damage at minimum range
-SWEP.Damage_Min = 100 / 7 // damage at maximum range
+SWEP.Damage_Max = 10 // 100 / 4 // damage at minimum range
+SWEP.Damage_Min = 5 // 100 / 7 // damage at maximum range
 SWEP.Range_Min = 1500 // distance for which to maintain maximum damage
 SWEP.Range_Max = 4000 // distance at which we drop to minimum damage
 SWEP.Penetration = 2 // units of metal this weapon can penetrate
@@ -55,14 +55,14 @@ SWEP.CanBlindFire = true
 
 // handling
 
-SWEP.MoveSpeedMult = 0.95
-SWEP.ShootingSpeedMult = 1 // slow down applied while shooting
-SWEP.SightedSpeedMult = 0.5
+SWEP.MoveSpeedMult = 0.9
+SWEP.ShootingSpeedMult = 0.75
+SWEP.SightedSpeedMult = 0.4
 SWEP.MeleeSpeedMult = 0.5
-SWEP.MeleeSpeedMultTime = 2 // seconds to apply slow down for
+SWEP.MeleeSpeedMultTime = 2
 
 SWEP.AimDownSightsTime = 0.275
-SWEP.SprintToFireTime = 0.30 // multiplies how long it takes to recover from sprinting
+SWEP.SprintToFireTime = 0.30
 
 // hold types
 
@@ -84,6 +84,9 @@ SWEP.SprintPos = Vector(5, 0, -2)
 
 SWEP.SightAng = Angle(-4.26, -1.025, 1)
 SWEP.SightPos = Vector(-5.2, -5, -2.4)
+
+SWEP.CorrectivePos = Vector(1.2, 0, -0.4)
+SWEP.CorrectiveAng = Angle(5.5, -2.7, 0)
 
 SWEP.HolsterVisible = true
 SWEP.HolsterSlot = TacRP.HOLSTER_SLOT_PISTOL
@@ -180,6 +183,20 @@ SWEP.AttachmentElements = {
 
 SWEP.Attachments = {
     [1] = {
+        PrintName = "Optic",
+        Category = "optic_pistol",
+        Bone = "Skorpion_ROOT",
+        WMBone = "Bone02",
+        AttachSound = "tacrp/weapons/optic_on.wav",
+        DetachSound = "tacrp/weapons/optic_off.wav",
+        VMScale = 1.2,
+        WMScale = 1.2,
+        Pos_VM = Vector(4.6, 0, 0.5),
+        Ang_VM = Angle(90, 0, 180),
+        Pos_WM = Vector(1.5, 1.25, -4.3),
+        Ang_WM = Angle(0, 0, 0),
+    },
+    [2] = {
         PrintName = "Muzzle",
         Category = "silencer",
         Bone = "Skorpion_ROOT",
@@ -193,7 +210,7 @@ SWEP.Attachments = {
         Pos_WM = Vector(1.5, 1.25, -4.3),
         Ang_WM = Angle(0, 0, 0),
     },
-    [2] = {
+    [3] = {
         PrintName = "Tactical",
         Category = "tactical",
         Bone = "Skorpion_ROOT",
@@ -207,25 +224,25 @@ SWEP.Attachments = {
         Pos_WM = Vector(-4, 1.25, -3.5),
         Ang_WM = Angle(0, 0, 0),
     },
-    [3] = {
+    [4] = {
         PrintName = "Accessory",
         Category = {"foldstock", "perk", "perk_melee", "perk_shooting", "perk_reload", "perk_extendedmag", "perk_hollowpoints", "perk_conceal"},
         AttachSound = "TacRP/weapons/flashlight_on.wav",
         DetachSound = "TacRP/weapons/flashlight_off.wav",
     },
-    [4] = {
+    [5] = {
         PrintName = "Bolt",
         Category = {"bolt_automatic"},
         AttachSound = "TacRP/weapons/flashlight_on.wav",
         DetachSound = "TacRP/weapons/flashlight_off.wav",
     },
-    [5] = {
+    [6] = {
         PrintName = "Trigger",
         Category = {"trigger_auto"},
         AttachSound = "TacRP/weapons/flashlight_on.wav",
         DetachSound = "TacRP/weapons/flashlight_off.wav",
     },
-    [6] = {
+    [7] = {
         PrintName = "Ammo",
         Category = {"ammo_pistol"},
         AttachSound = "TacRP/weapons/flashlight_on.wav",

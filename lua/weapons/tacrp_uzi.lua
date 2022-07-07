@@ -7,7 +7,7 @@ AddCSLuaFile()
 SWEP.PrintName = "IMI Mini Uzi"
 SWEP.Category = "Tactical RP (Arctic)"
 
-SWEP.Description = "Bullet hose machine pistol with a high rate of fire."
+SWEP.Description = "Economic machine pistol with a high rate of fire."
 
 SWEP.ViewModel = "models/weapons/tacint/v_uzi.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_uzi.mdl"
@@ -16,11 +16,11 @@ SWEP.Slot = 1
 
 // "ballistics"
 
-SWEP.Damage_Max = 100 / 5 // damage at minimum range
-SWEP.Damage_Min = 100 / 8 // damage at maximum range
+SWEP.Damage_Max = 12
+SWEP.Damage_Min = 6
 SWEP.Range_Min = 1000 // distance for which to maintain maximum damage
 SWEP.Range_Max = 3000 // distance at which we drop to minimum damage
-SWEP.Penetration = 2 // units of metal this weapon can penetrate
+SWEP.Penetration = 3 // units of metal this weapon can penetrate
 
 SWEP.MuzzleVelocity = 12500
 
@@ -41,13 +41,13 @@ SWEP.ShootSpeedMult = 0.5
 
 SWEP.RecoilPerShot = 1
 SWEP.RecoilMaximum = 10
-SWEP.RecoilResetTime = 0.1// time after you stop shooting for recoil to start dissipating
+SWEP.RecoilResetTime = 0.1 // time after you stop shooting for recoil to start dissipating
 SWEP.RecoilDissipationRate = 10
 SWEP.RecoilFirstShotMult = 1 // multiplier for the first shot's recoil amount
 
 SWEP.RecoilVisualKick = 1
 
-SWEP.RecoilKick = 1.5
+SWEP.RecoilKick = 1.75
 
 SWEP.RecoilSpreadPenalty = 0.0003 // extra spread per one unit of recoil
 
@@ -55,14 +55,14 @@ SWEP.CanBlindFire = true
 
 // handling
 
-SWEP.MoveSpeedMult = 0.95
-SWEP.ShootingSpeedMult = 1 // slow down applied while shooting
-SWEP.SightedSpeedMult = 0.5
+SWEP.MoveSpeedMult = 0.9
+SWEP.ShootingSpeedMult = 0.75
+SWEP.SightedSpeedMult = 0.4
 SWEP.MeleeSpeedMult = 0.5
-SWEP.MeleeSpeedMultTime = 2 // seconds to apply slow down for
+SWEP.MeleeSpeedMultTime = 2
 
 SWEP.AimDownSightsTime = 0.275
-SWEP.SprintToFireTime = 0.30 // multiplies how long it takes to recover from sprinting
+SWEP.SprintToFireTime = 0.30
 
 // hold types
 

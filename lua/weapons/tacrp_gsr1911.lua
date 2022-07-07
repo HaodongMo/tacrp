@@ -8,7 +8,7 @@ SWEP.PrintName = "M1911"
 SWEP.Category = "Tactical RP (Arctic)"
 
 // Tier 1
-SWEP.Description = "Ubiquitous low-capacity pistol with okay damage."
+SWEP.Description = "Ubiquitous low-capacity pistol with decent damage but low range."
 
 SWEP.ViewModel = "models/weapons/tacint/v_gsr1911.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_gsr1911.mdl"
@@ -17,10 +17,10 @@ SWEP.Slot = 1
 
 // "ballistics"
 
-SWEP.Damage_Max = 20 // 100 / 3 // damage at minimum range
-SWEP.Damage_Min = 5 // 100 / 7 // damage at maximum range
+SWEP.Damage_Max = 18 // 100 / 3 // damage at minimum range
+SWEP.Damage_Min = 4 // 100 / 7 // damage at maximum range
 SWEP.Range_Min = 1000 // distance for which to maintain maximum damage
-SWEP.Range_Max = 3000 // distance at which we drop to minimum damage
+SWEP.Range_Max = 4000 // distance at which we drop to minimum damage
 SWEP.Penetration = 3 // units of metal this weapon can penetrate
 
 SWEP.MuzzleVelocity = 7500
@@ -42,36 +42,36 @@ SWEP.Firemode = 1
 
 SWEP.RPM = 400
 
-SWEP.Spread = 0.002
+SWEP.Spread = 0.003
 
 SWEP.ShootSpeedMult = 0.5
 
 
 
 SWEP.RecoilPerShot = 1
-SWEP.RecoilMaximum = 10
-SWEP.RecoilResetTime = 0.1// time after you stop shooting for recoil to start dissipating
-SWEP.RecoilDissipationRate = 10
+SWEP.RecoilMaximum = 4
+SWEP.RecoilResetTime = 0.2
+SWEP.RecoilDissipationRate = 5
 SWEP.RecoilFirstShotMult = 1 // multiplier for the first shot's recoil amount
 
 SWEP.RecoilVisualKick = 3
 
 SWEP.RecoilKick = 6.5
 
-SWEP.RecoilSpreadPenalty = 0.0002 // extra spread per one unit of recoil
+SWEP.RecoilSpreadPenalty = 0.005
 
 SWEP.CanBlindFire = true
 
 // handling
 
-SWEP.MoveSpeedMult = 1
-SWEP.ShootingSpeedMult = 1 // slow down applied while shooting
+SWEP.MoveSpeedMult = 0.9
+SWEP.ShootingSpeedMult = 0.6
 SWEP.SightedSpeedMult = 0.5
 SWEP.MeleeSpeedMult = 0.5
-SWEP.MeleeSpeedMultTime = 2 // seconds to apply slow down for
+SWEP.MeleeSpeedMultTime = 2
 
-SWEP.AimDownSightsTime = 0.2
-SWEP.SprintToFireTime = 0.2
+SWEP.AimDownSightsTime = 0.25
+SWEP.SprintToFireTime = 0.25
 
 // hold types
 

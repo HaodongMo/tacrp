@@ -7,7 +7,7 @@ AddCSLuaFile()
 SWEP.PrintName = "KS-23"
 SWEP.Category = "Tactical RP (Arctic)"
 
-SWEP.Description = "Shotgun made out of anti-aircraft cannon parts, designed for suppressing prison riots. Terrible accuracy, recoil, and rate of fire, but makes for it by packing incredible power."
+SWEP.Description = "Elite large-caliber shotgun with poor handling but incredible stopping power."
 
 SWEP.ViewModel = "models/weapons/tacint/v_ks23.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_ks23.mdl"
@@ -16,19 +16,19 @@ SWEP.Slot = 2
 
 // "ballistics"
 
-SWEP.Damage_Max = 100 / 6 // damage at minimum range
-SWEP.Damage_Min = 100 / 12 // damage at maximum range
-SWEP.Range_Min = 450 // distance for which to maintain maximum damage
+SWEP.Damage_Max = 20
+SWEP.Damage_Min = 10
+SWEP.Range_Min = 600 // distance for which to maintain maximum damage
 SWEP.Range_Max = 2000 // distance at which we drop to minimum damage
-SWEP.Penetration = 1 // units of metal this weapon can penetrate
-SWEP.Num = 12
+SWEP.Penetration = 2 // units of metal this weapon can penetrate
+SWEP.Num = 36
 
 SWEP.MuzzleVelocity = 9000
 
 SWEP.BodyDamageMultipliers = {
-    [HITGROUP_HEAD] = 1.25,
-    [HITGROUP_CHEST] = 1.25,
-    [HITGROUP_STOMACH] = 1.25,
+    [HITGROUP_HEAD] = 1,
+    [HITGROUP_CHEST] = 1,
+    [HITGROUP_STOMACH] = 1,
     [HITGROUP_LEFTARM] = 1,
     [HITGROUP_RIGHTARM] = 1,
     [HITGROUP_LEFTLEG] = 0.9,
@@ -42,10 +42,12 @@ SWEP.Firemode = 1
 
 SWEP.RPM = 60
 
-SWEP.Spread = 0.07
+SWEP.Spread = 0.075
 
 SWEP.ShootSpeedMult = 1.5
 
+SWEP.HipFireSpreadPenalty = 0
+SWEP.MidAirSpreadPenalty = 0
 
 SWEP.ScopedSpreadPenalty = 0
 
@@ -55,22 +57,22 @@ SWEP.RecoilResetTime = 0.33 // time after you stop shooting for recoil to start 
 SWEP.RecoilDissipationRate = 100
 SWEP.RecoilFirstShotMult = 1 // multiplier for the first shot's recoil amount
 
-SWEP.RecoilVisualKick = 5
+SWEP.RecoilVisualKick = 1
 SWEP.RecoilVisualShake = 5
 
 SWEP.RecoilKick = 20
 
-SWEP.RecoilSpreadPenalty = 0.25 // extra spread per one unit of recoil
+SWEP.RecoilSpreadPenalty = 0 // extra spread per one unit of recoil
 
 SWEP.CanBlindFire = true
 
 // handling
 
-SWEP.MoveSpeedMult = 0.87
-SWEP.ShootingSpeedMult = 0.75 // slow down applied while shooting
-SWEP.SightedSpeedMult = 0.5
+SWEP.MoveSpeedMult = 0.7
+SWEP.ShootingSpeedMult = 0.4
+SWEP.SightedSpeedMult = 0.25
 SWEP.MeleeSpeedMult = 0.5
-SWEP.MeleeSpeedMultTime = 2 // seconds to apply slow down for
+SWEP.MeleeSpeedMultTime = 2
 
 SWEP.AimDownSightsTime = 0.42
 SWEP.SprintToFireTime = 0.42
@@ -219,7 +221,7 @@ SWEP.Attachments = {
     },
     [5] = {
         PrintName = "Trigger",
-        Category = {"trigger_manual"},
+        Category = {"trigger_manual", "trigger_pump"},
         AttachSound = "TacRP/weapons/flashlight_on.wav",
         DetachSound = "TacRP/weapons/flashlight_off.wav",
     },

@@ -5,6 +5,6 @@ ATT.Pros = {"Melee Power"}
 
 ATT.Category = "perk_melee" // can be "string" or {"list", "of", "strings"}
 
-ATT.SortOrder = 1
+ATT.SortOrder = 2
 
 ATT.Mult_MeleeDamage = 3

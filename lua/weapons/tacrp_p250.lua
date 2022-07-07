@@ -7,8 +7,8 @@ AddCSLuaFile()
 SWEP.PrintName = "SIG P250"
 SWEP.Category = "Tactical RP (Arctic)"
 
-// Tier 3
-SWEP.Description = "Premium handgun with great damage and precision."
+// Tier 2
+SWEP.Description = "Economic handgun that exchanges capacity for damage and precision."
 
 SWEP.ViewModel = "models/weapons/tacint/v_p250.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_p250.mdl"
@@ -17,9 +17,9 @@ SWEP.Slot = 1
 
 // "ballistics"
 
-SWEP.Damage_Max = 25 // 100 / 4 // damage at minimum range
-SWEP.Damage_Min = 9 // 100 / 7 // damage at maximum range
-SWEP.Range_Min = 2000 // distance for which to maintain maximum damage
+SWEP.Damage_Max = 20 // 100 / 4 // damage at minimum range
+SWEP.Damage_Min = 10 // 100 / 7 // damage at maximum range
+SWEP.Range_Min = 2500 // distance for which to maintain maximum damage
 SWEP.Range_Max = 6000 // distance at which we drop to minimum damage
 SWEP.Penetration = 3 // units of metal this weapon can penetrate
 
@@ -42,7 +42,7 @@ SWEP.Firemode = 1
 
 SWEP.RPM = 500
 
-SWEP.Spread = 0.0007
+SWEP.Spread = 0.001
 
 SWEP.ShootSpeedMult = 0.5
 
@@ -50,28 +50,28 @@ SWEP.ShootSpeedMult = 0.5
 
 SWEP.RecoilPerShot = 1
 SWEP.RecoilMaximum = 5
-SWEP.RecoilResetTime = 0.1 // time after you stop shooting for recoil to start dissipating
-SWEP.RecoilDissipationRate = 10
-SWEP.RecoilFirstShotMult = 1 // multiplier for the first shot's recoil amount
+SWEP.RecoilResetTime = 0.2
+SWEP.RecoilDissipationRate = 7
+SWEP.RecoilFirstShotMult = 1
 
 SWEP.RecoilVisualKick = 2
 
 SWEP.RecoilKick = 7
 
-SWEP.RecoilSpreadPenalty = 0.00025 // extra spread per one unit of recoil
+SWEP.RecoilSpreadPenalty = 0.004
 
 SWEP.CanBlindFire = true
 
 // handling
 
-SWEP.MoveSpeedMult = 1
-SWEP.ShootingSpeedMult = 1 // slow down applied while shooting
+SWEP.MoveSpeedMult = 0.9
+SWEP.ShootingSpeedMult = 0.6
 SWEP.SightedSpeedMult = 0.5
 SWEP.MeleeSpeedMult = 0.5
-SWEP.MeleeSpeedMultTime = 2 // seconds to apply slow down for
+SWEP.MeleeSpeedMultTime = 2
 
-SWEP.AimDownSightsTime = 0.2
-SWEP.SprintToFireTime = 0.2
+SWEP.AimDownSightsTime = 0.25
+SWEP.SprintToFireTime = 0.25
 
 // hold types
 

@@ -7,7 +7,7 @@ AddCSLuaFile()
 SWEP.PrintName = "HK MP5A3"
 SWEP.Category = "Tactical RP (Arctic)"
 
-SWEP.Description = "Well-balanced 9mm submachine gun."
+SWEP.Description = "Economic, well-balanced sub-machine gun known for its precision."
 
 SWEP.ViewModel = "models/weapons/tacint/v_mp5.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_mp5.mdl"
@@ -16,10 +16,10 @@ SWEP.Slot = 2
 
 // "ballistics"
 
-SWEP.Damage_Max = 100 / 3 // damage at minimum range
-SWEP.Damage_Min = 100 / 7 // damage at maximum range
-SWEP.Range_Min = 800 // distance for which to maintain maximum damage
-SWEP.Range_Max = 3000 // distance at which we drop to minimum damage
+SWEP.Damage_Max = 14
+SWEP.Damage_Min = 7
+SWEP.Range_Min = 1500 // distance for which to maintain maximum damage
+SWEP.Range_Max = 5000 // distance at which we drop to minimum damage
 SWEP.Penetration = 5 // units of metal this weapon can penetrate
 
 SWEP.MuzzleVelocity = 13500
@@ -54,14 +54,14 @@ SWEP.CanBlindFire = true
 
 // handling
 
-SWEP.MoveSpeedMult = 0.95
-SWEP.ShootingSpeedMult = 1 // slow down applied while shooting
-SWEP.SightedSpeedMult = 0.5
+SWEP.MoveSpeedMult = 0.85
+SWEP.ShootingSpeedMult = 0.5
+SWEP.SightedSpeedMult = 0.4
 SWEP.MeleeSpeedMult = 0.5
-SWEP.MeleeSpeedMultTime = 2 // seconds to apply slow down for
+SWEP.MeleeSpeedMultTime = 2
 
 SWEP.AimDownSightsTime = 0.33
-SWEP.SprintToFireTime = 0.33 // multiplies how long it takes to recover from sprinting
+SWEP.SprintToFireTime = 0.33
 
 // hold types
 

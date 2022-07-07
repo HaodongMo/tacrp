@@ -7,7 +7,7 @@ AddCSLuaFile()
 SWEP.PrintName = "FN P90"
 SWEP.Category = "Tactical RP (Arctic)"
 
-SWEP.Description = "PDW-class submachine gun with large magazine. Good at longer ranges than most submachine guns."
+SWEP.Description = "Premium personal defense weapon with a generous top-loaded magazine. Its high velocity rounds remain effective at range."
 
 SWEP.ViewModel = "models/weapons/tacint/v_p90.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_p90.mdl"
@@ -16,8 +16,8 @@ SWEP.Slot = 2
 
 // "ballistics"
 
-SWEP.Damage_Max = 100 / 4 // damage at minimum range
-SWEP.Damage_Min = 100 / 7 // damage at maximum range
+SWEP.Damage_Max = 15
+SWEP.Damage_Min = 12
 SWEP.Range_Min = 1200 // distance for which to maintain maximum damage
 SWEP.Range_Max = 4000 // distance at which we drop to minimum damage
 SWEP.Penetration = 1 // units of metal this weapon can penetrate
@@ -51,13 +51,15 @@ SWEP.CanBlindFire = true
 
 // handling
 
-SWEP.MoveSpeedMult = 0.95
-SWEP.ShootingSpeedMult = 1 // slow down applied while shooting
-SWEP.SightedSpeedMult = 0.5
-SWEP.MeleeSpeedMult = 0.5
-SWEP.MeleeSpeedMultTime = 2 // seconds to apply slow down for
 
-SWEP.SprintToFireTime = 0.35 // multiplies how long it takes to recover from sprinting
+SWEP.MoveSpeedMult = 0.85
+SWEP.ShootingSpeedMult = 0.5
+SWEP.SightedSpeedMult = 0.4
+SWEP.MeleeSpeedMult = 0.5
+SWEP.MeleeSpeedMultTime = 2
+
+SWEP.AimDownSightsTime = 0.35
+SWEP.SprintToFireTime = 0.375
 
 // hold types
 

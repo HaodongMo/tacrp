@@ -1,3 +1,15 @@
+local gaA = 0
+local function GetFOVAcc(wep)
+    cam.Start3D()
+        local lool = ( EyePos() + ( EyeAngles():Forward() ) + ( (wep:GetSpread()) * EyeAngles():Up() ) ):ToScreen()
+    cam.End3D()
+
+    local gau = ( (ScrH() / 2) - lool.y )
+    gaA = math.Approach(gaA, gau, (ScrH() / 2) * FrameTime())
+
+    return gaA
+end
+
 function SWEP:ShouldDrawCrosshair()
     -- return false
 end
@@ -613,15 +625,31 @@ function SWEP:DrawHUDBackground()
     lastarmor = LocalPlayer():Armor()
 
     if !self:GetReloading() and !self:GetCustomize() and GetConVar("developer"):GetInt() > 1 and LocalPlayer():IsAdmin() then
-        local v = LocalPlayer():EyePos() + self:GetShootDir():Forward() * 32
+        local v = self:GetMuzzleOrigin() + self:GetShootDir():Forward() * 30000
         cam.Start3D()
             local w2s = v:ToScreen()
             w2s.x = math.Round(w2s.x)
             w2s.y = math.Round(w2s.y)
         cam.End3D()
-        surface.SetDrawColor(255, 50, 50, 150)
+        if self:StillWaiting() then
+            surface.SetDrawColor(150, 150, 150, 255)
+        else
+            surface.SetDrawColor(255, 50, 50, 255)
+        end
         surface.DrawLine(w2s.x, w2s.y - 256, w2s.x, w2s.y + 256)
         surface.DrawLine(w2s.x - 256, w2s.y, w2s.x + 256, w2s.y)
+        local spread = GetFOVAcc(self)
+        local recoil_txt = tostring(math.Round(self:GetRecoilAmount() or 0, 3))
+        surface.DrawCircle(w2s.x, w2s.y, spread, 255, 255, 255, 150)
+        surface.DrawCircle(w2s.x, w2s.y, spread + 1, 255, 255, 255, 150)
+        surface.SetFont("TacRP_Myriad_Pro_32_Unscaled")
+        surface.SetTextColor(255, 255, 255, 255)
+        surface.SetTextPos(w2s.x - 256, w2s.y)
+        surface.DrawText(recoil_txt)
+        local spread_txt = tostring(math.Round(self:GetSpread(), 5))
+        local tw = surface.GetTextSize(spread_txt)
+        surface.SetTextPos(w2s.x + 256 - tw, w2s.y)
+        surface.DrawText(spread_txt)
     end
 end
 
