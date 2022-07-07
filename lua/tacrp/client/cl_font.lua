@@ -3,6 +3,7 @@ local sizes_to_make = {
     6,
     8,
     10,
+    12,
     16,
     32
 }

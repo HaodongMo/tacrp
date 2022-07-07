@@ -5,7 +5,7 @@ ENT.Base                     = "tacrp_ammo_frag"
 ENT.RenderGroup              = RENDERGROUP_TRANSLUCENT
 
 ENT.PrintName                = "Nuclear Device (Ammo)"
-ENT.Category                 = "Tactical RP - Ammo"
+ENT.Category                 = "Tactical RP"
 
 ENT.AdminOnly = true
 ENT.Spawnable                = true

@@ -104,6 +104,8 @@ function SWEP:CanAttach(slot, att)
         attcat = {attcat}
     end
 
+    if !TacRP.CanCustomize(self:GetOwner(), self, att, slot) then return false end
+
     for _, c in pairs(attcat) do
         if table.HasValue(cat, c) then
             return true
@@ -117,6 +119,8 @@ function SWEP:CanDetach(slot)
     local slottbl = self.Attachments[slot]
 
     if slottbl.Integral then return false end
+
+    if !TacRP.CanCustomize(self:GetOwner(), self, att, slot) then return false end
 
     return true
 end

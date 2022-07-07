@@ -5,7 +5,7 @@ ENT.Base                     = "base_entity"
 ENT.RenderGroup              = RENDERGROUP_TRANSLUCENT
 
 ENT.PrintName                = "Frag Grenade (Ammo)"
-ENT.Category                 = "Tactical RP - Ammo"
+ENT.Category                 = "Tactical RP"
 
 ENT.AdminOnly = false
 ENT.Spawnable                = true

@@ -76,6 +76,10 @@ local conVars = {
         name = "client_damage",
         default = "0",
     },
+    {
+        name = "rp_requirebench",
+        default = "0",
+    },
 }
 
 local prefix = "tacrp_"

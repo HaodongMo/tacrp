@@ -123,3 +123,28 @@ net.Receive("TacRP_reloadatts", function(len, ply)
 end)
 
 end
+
+TacRP.Benches = ents.FindByClass("tacrp_bench") or {}
+TacRP.BenchDistSqr = 128 * 128
+
+function TacRP.NearBench(ply)
+    if GetConVar("tacrp_rp_requirebench"):GetBool() then
+        local nearbench = false
+        for i, ent in pairs(TacRP.Benches) do
+            if !IsValid(ent) then table.remove(TacRP.Benches, i) continue end
+            if ent:GetPos():DistToSqr(ply:GetPos()) <= TacRP.BenchDistSqr then
+                nearbench = true
+                break
+            end
+        end
+        if !nearbench then return false end
+    end
+    return true
+end
+
+function TacRP.CanCustomize(ply, wep, att, slot)
+
+    if !TacRP.NearBench(ply) then return false end
+
+    return true
+end
