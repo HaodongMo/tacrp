@@ -1,3 +1,15 @@
+local gaA = 0
+local function GetFOVAcc(wep)
+    cam.Start3D()
+        local lool = ( EyePos() + ( EyeAngles():Forward() ) + ( (wep:GetSpread()) * EyeAngles():Up() ) ):ToScreen()
+    cam.End3D()
+
+    local gau = ( (ScrH() / 2) - lool.y )
+    gaA = math.Approach(gaA, gau, (ScrH() / 2) * FrameTime())
+
+    return gaA
+end
+
 function SWEP:ShouldDrawCrosshair()
     -- return false
 end
@@ -622,6 +634,14 @@ function SWEP:DrawHUDBackground()
         surface.SetDrawColor(255, 50, 50, 150)
         surface.DrawLine(w2s.x, w2s.y - 256, w2s.x, w2s.y + 256)
         surface.DrawLine(w2s.x - 256, w2s.y, w2s.x + 256, w2s.y)
+        local spread = GetFOVAcc(self)
+        local recoil_txt = tostring(math.Round(self:GetRecoilAmount() or 0, 3))
+        surface.DrawCircle(w2s.x, w2s.y, spread, 255, 255, 255, 150)
+        surface.DrawCircle(w2s.x, w2s.y, spread + 1, 255, 255, 255, 150)
+        surface.SetFont("TacRP_Myriad_Pro_32_Unscaled")
+        surface.SetTextColor(255, 255, 255, 255)
+        surface.SetTextPos(w2s.x - 256, w2s.y)
+        surface.DrawText(recoil_txt)
     end
 end
 
