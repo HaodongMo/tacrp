@@ -27,14 +27,21 @@ function TacRP.Move(ply, mv, cmd)
         mult = mult * Lerp(d, wpn:GetValue("MeleeSpeedMult"), 1)
     end
 
-    if wpn:GetNextPrimaryFire() + 0.1 > CurTime() then
-        local pft = CurTime() - wpn:GetNextPrimaryFire() - (60 / wpn:GetValue("RPM"))
-        local d = pft / 0.1
 
-        d = math.Clamp(d, 0, 1)
+    local shotdelta = 0 -- how close should we be to the shoot speed mult
+    local shottime = wpn:GetNextPrimaryFire() - CurTime() + 0.1
 
-        mult = mult * Lerp(d, wpn:GetValue("ShootingSpeedMult"), 1)
+    if shottime > 0 then
+        -- full slowdown for duration of firing
+        shotdelta = 1
+    else
+        -- recover from firing slowdown after shadow duration
+        local delay = 60 / wpn:GetValue("RPM")
+        local aftershottime = -shottime / delay
+        shotdelta = math.Clamp(1 - aftershottime, 0, 1)
     end
+    local shootmove = math.Clamp(wpn:GetValue("ShootingSpeedMult"), 0.0001, 1)
+    mult = mult * Lerp(shotdelta, 1, shootmove)
 
     mv:SetMaxSpeed(basespd * mult)
     mv:SetMaxClientSpeed(basespd * mult)
