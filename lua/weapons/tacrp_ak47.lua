@@ -7,7 +7,7 @@ AddCSLuaFile()
 SWEP.PrintName = "Radom Wz. 96 Beryl"
 SWEP.Category = "Tactical RP (Arctic)"
 
-SWEP.Description = "High caliber Polish assault rifle with excellent damage but poor sustained fire capabilities."
+SWEP.Description = "Polish 5.56mm assault rifle with poor sustained fire capabilities."
 
 SWEP.ViewModel = "models/weapons/tacint/v_ak47.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_ak47.mdl"
@@ -16,11 +16,11 @@ SWEP.Slot = 3
 
 // "ballistics"
 
-SWEP.Damage_Max = 100 / 3 // damage at minimum range
-SWEP.Damage_Min = 100 / 4 // damage at maximum range
-SWEP.Range_Min = 2000 // distance for which to maintain maximum damage
-SWEP.Range_Max = 5000 // distance at which we drop to minimum damage
-SWEP.Penetration = 10 // units of metal this weapon can penetrate
+SWEP.Damage_Max = 100 / 4 // damage at minimum range
+SWEP.Damage_Min = 100 / 6 // damage at maximum range
+SWEP.Range_Min = 1000 // distance for which to maintain maximum damage
+SWEP.Range_Max = 8000 // distance at which we drop to minimum damage
+SWEP.Penetration = 8 // units of metal this weapon can penetrate
 
 // misc. shooting
 
@@ -29,7 +29,7 @@ SWEP.Firemodes = {
     1
 }
 
-SWEP.RPM = 500
+SWEP.RPM = 550
 
 SWEP.Spread = 0.0025
 
@@ -87,7 +87,7 @@ SWEP.Sway = 1
 SWEP.ScopedSway = 0.1
 
 SWEP.ClipSize = 30
-SWEP.Ammo = "ar2"
+SWEP.Ammo = "smg1"
 
 SWEP.ReloadTimeMult = 1
 SWEP.DropMagazineModel = "models/weapons/tacint/magazines/ak47.mdl"
