@@ -283,11 +283,11 @@ function SWEP:CreateCustomizeHUD()
             local mult = self:GetValue("BodyDamageMultipliers")
             local hover = self2:IsHovered()
 
-            bodydamagetext("Head", dmg, mult[HITGROUP_HEAD], w - ScreenScale(16), ScreenScale(4), hover)
+            local upperbody = mult[HITGROUP_STOMACH] == mult[HITGROUP_CHEST]
+
+            bodydamagetext("Head", dmg, mult[HITGROUP_HEAD], w - ScreenScale(16), upperbody and ScreenScale(6) or ScreenScale(4), hover)
             surface.SetMaterial(body_head)
             surface.DrawTexturedRect(x2, y2, w2, h2)
-
-            local upperbody = mult[HITGROUP_STOMACH] == mult[HITGROUP_CHEST]
 
             bodydamagetext("Chest", dmg, mult[HITGROUP_CHEST], w - ScreenScale(16), upperbody and ScreenScale(18) or ScreenScale(14), hover)
             surface.SetMaterial(body_chest)
@@ -299,11 +299,11 @@ function SWEP:CreateCustomizeHUD()
             surface.SetMaterial(body_stomach)
             surface.DrawTexturedRect(x2, y2, w2, h2)
 
-            bodydamagetext("Arms", dmg, mult[HITGROUP_LEFTARM], w - ScreenScale(22), ScreenScale(34), hover)
+            bodydamagetext("Arms", dmg, mult[HITGROUP_LEFTARM], w - ScreenScale(22), upperbody and ScreenScale(30) or ScreenScale(34), hover)
             surface.SetMaterial(body_arms)
             surface.DrawTexturedRect(x2, y2, w2, h2)
 
-            bodydamagetext("Legs", dmg, mult[HITGROUP_LEFTLEG], w - ScreenScale(18), ScreenScale(44), hover)
+            bodydamagetext("Legs", dmg, mult[HITGROUP_LEFTLEG], w - ScreenScale(18), upperbody and ScreenScale(42) or ScreenScale(44), hover)
             surface.SetMaterial(body_legs)
             surface.DrawTexturedRect(x2, y2, w2, h2)
 
