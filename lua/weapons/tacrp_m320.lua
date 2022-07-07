@@ -120,9 +120,9 @@ SWEP.Ammo = "smg1_grenade"
 
 local path = "TacRP/weapons/m320/"
 
-SWEP.Sound_Shoot = "(" .. path .. "fire-1.wav"
+SWEP.Sound_Shoot = "<" .. path .. "fire-1.wav"
 
-SWEP.Vol_Shoot = 110
+SWEP.Vol_Shoot = 130
 SWEP.ShootPitchVariance = 2.5 // amount to vary pitch by each shot
 
 // effects

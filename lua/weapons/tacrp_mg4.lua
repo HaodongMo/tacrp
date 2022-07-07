@@ -128,10 +128,10 @@ SWEP.DefaultBodygroups = "000007"
 
 local path = "TacRP/weapons/mg4/"
 
-SWEP.Sound_Shoot = "(" .. path .. "fire-1.wav"
+SWEP.Sound_Shoot = "<" .. path .. "fire-1.wav"
 SWEP.Sound_Shoot_Silenced = "TacRP/weapons/g36k/g36k_fire_silenced-1.wav"
 
-SWEP.Vol_Shoot = 110
+SWEP.Vol_Shoot = 130
 SWEP.ShootPitchVariance = 2.5 // amount to vary pitch by each shot
 
 // effects

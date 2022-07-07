@@ -215,10 +215,10 @@ SWEP.LoadInTime = 0.25 // how long to replenish the visible "belt" of ammo
 
 // sounds
 
-SWEP.Sound_Shoot = "("
+SWEP.Sound_Shoot = "<"
 SWEP.Sound_Shoot_Silenced = ""
 
-SWEP.Vol_Shoot = 110
+SWEP.Vol_Shoot = 130
 SWEP.Pitch_Shoot = 100
 SWEP.ShootPitchVariance = 2.5 // amount to vary pitch by each shot
 

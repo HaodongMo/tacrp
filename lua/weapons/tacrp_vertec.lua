@@ -115,10 +115,10 @@ SWEP.DropMagazineImpact = "pistol"
 
 local path = "TacRP/weapons/vertec/vertec_"
 
-SWEP.Sound_Shoot = "(" .. path .. "fire-1.wav"
+SWEP.Sound_Shoot = "<" .. path .. "fire-1.wav"
 SWEP.Sound_Shoot_Silenced = path .. "fire_silenced-1.wav"
 
-SWEP.Vol_Shoot = 110
+SWEP.Vol_Shoot = 130
 SWEP.ShootPitchVariance = 2.5 // amount to vary pitch by each shot
 
 // effects

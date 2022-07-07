@@ -118,7 +118,7 @@ SWEP.Sound_Shoot = {
     "^" .. path .. "mr96_fire-3.wav",
 }
 
-SWEP.Vol_Shoot = 110
+SWEP.Vol_Shoot = 130
 SWEP.ShootPitchVariance = 2.5 // amount to vary pitch by each shot
 
 // effects
