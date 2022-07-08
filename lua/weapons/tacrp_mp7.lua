@@ -4,29 +4,30 @@ SWEP.Spawnable = true
 AddCSLuaFile()
 
 // names and stuff
-SWEP.PrintName = "FN P90"
+SWEP.PrintName = "HK MP7"
 SWEP.Category = "Tactical RP (Arctic)"
 
 // Tier 3
-SWEP.Description = "Premium personal defense weapon with a generous top-loaded magazine. High velocity rounds retain effectiveness at range."
+SWEP.Description = "Premium personal defense weapon with well-rounded performance."
 
-SWEP.ViewModel = "models/weapons/tacint/v_p90.mdl"
-SWEP.WorldModel = "models/weapons/tacint/w_p90.mdl"
+SWEP.ViewModel = "models/weapons/tacint/v_mp7.mdl"
+SWEP.WorldModel = "models/weapons/tacint/w_mp7.mdl"
 
 SWEP.Slot = 3
 
 // "ballistics"
 
-SWEP.Damage_Max = 16
-SWEP.Damage_Min = 13
-SWEP.Range_Min = 1200 // distance for which to maintain maximum damage
-SWEP.Range_Max = 6000 // distance at which we drop to minimum damage
+SWEP.Damage_Max = 18
+SWEP.Damage_Min = 10
+SWEP.Range_Min = 900 // distance for which to maintain maximum damage
+SWEP.Range_Max = 4000 // distance at which we drop to minimum damage
 SWEP.Penetration = 1 // units of metal this weapon can penetrate
 
+SWEP.MuzzleVelocity = 17500
 
 SWEP.BodyDamageMultipliers = {
     [HITGROUP_HEAD] = 2,
-    [HITGROUP_CHEST] = 1.2,
+    [HITGROUP_CHEST] = 1.25,
     [HITGROUP_STOMACH] = 1,
     [HITGROUP_LEFTARM] = 1,
     [HITGROUP_RIGHTARM] = 1,
@@ -34,8 +35,6 @@ SWEP.BodyDamageMultipliers = {
     [HITGROUP_RIGHTLEG] = 0.9,
     [HITGROUP_GEAR] = 0.9
 }
-
-SWEP.MuzzleVelocity = 22500
 
 // misc. shooting
 
@@ -46,19 +45,19 @@ SWEP.Firemodes = {
 
 SWEP.RPM = 850
 
-SWEP.Spread = 0.0035
+SWEP.Spread = 0.005
 
 SWEP.RecoilPerShot = 1
-SWEP.RecoilMaximum = 20
-SWEP.RecoilResetTime = 0.15 // time after you stop shooting for recoil to start dissipating
-SWEP.RecoilDissipationRate = 30
-SWEP.RecoilFirstShotMult = 1
+SWEP.RecoilMaximum = 10
+SWEP.RecoilResetTime = 0.2 // time after you stop shooting for recoil to start dissipating
+SWEP.RecoilDissipationRate = 20
+SWEP.RecoilFirstShotMult = 1 // multiplier for the first shot's recoil amount
 
-SWEP.RecoilVisualKick = 0.5
+SWEP.RecoilVisualKick = 1
 
-SWEP.RecoilKick = 1
+SWEP.RecoilKick = 1.25
 
-SWEP.RecoilSpreadPenalty = 0.00075 // extra spread per one unit of recoil
+SWEP.RecoilSpreadPenalty = 0.0015 // extra spread per one unit of recoil
 
 SWEP.CanBlindFire = true
 
@@ -70,8 +69,8 @@ SWEP.SightedSpeedMult = 0.4
 SWEP.MeleeSpeedMult = 0.5
 SWEP.MeleeSpeedMultTime = 2
 
-SWEP.AimDownSightsTime = 0.35
-SWEP.SprintToFireTime = 0.375
+SWEP.AimDownSightsTime = 0.33
+SWEP.SprintToFireTime = 0.33
 
 // hold types
 
@@ -91,10 +90,10 @@ SWEP.BlindFirePos = Vector(0, -4, -3)
 SWEP.SprintAng = Angle(30, -15, 0)
 SWEP.SprintPos = Vector(5, 0, -2)
 
-SWEP.SightAng = Angle(0.01, 0, 0)
-SWEP.SightPos = Vector(-3.705, -15, -4.6)
+SWEP.SightAng = Angle(0.1, 1, 0)
+SWEP.SightPos = Vector(-3.22, -2, -4.2)
 
-SWEP.CorrectivePos = Vector(0.02, 0, 0.1)
+SWEP.CorrectivePos = Vector(0.04, 0, 0.1)
 SWEP.CorrectiveAng = Angle(0, 0, 0)
 
 SWEP.HolsterVisible = true
@@ -104,21 +103,21 @@ SWEP.HolsterAng = Angle(0, 0, 0)
 
 // reload
 
-SWEP.ClipSize = 50
+SWEP.ClipSize = 40
 SWEP.Ammo = "smg1"
 
 SWEP.ReloadTimeMult = 1
-SWEP.DropMagazineModel = "models/weapons/tacint/magazines/p90.mdl"
+SWEP.DropMagazineModel = "models/weapons/tacint/magazines/mp7.mdl"
 SWEP.DropMagazineImpact = "plastic"
 
 // sounds
 
-local path = "tacrp/weapons/p90/"
+local path = "tacrp/weapons/mp7/mp7_"
 
 SWEP.Sound_Shoot = "^" .. path .. "fire-1.wav"
 SWEP.Sound_Shoot_Silenced = path .. "fire_silenced-1.wav"
 
-SWEP.Vol_Shoot = 130
+SWEP.Vol_Shoot = 110
 SWEP.ShootPitchVariance = 2.5 // amount to vary pitch by each shot
 
 // effects
@@ -128,8 +127,7 @@ SWEP.QCA_Muzzle = 1
 // ditto for shell
 SWEP.QCA_Eject = 2
 
-SWEP.MuzzleEffect = "muzzleflash_smg"
-SWEP.EjectEffect = 2
+SWEP.MuzzleEffect = "muzzleflash_ak47"
 
 // anims
 
@@ -153,7 +151,6 @@ SWEP.EjectEffect = 2
 // WM:
 // attack1
 SWEP.AnimationTranslationTable = {
-    ["fire_iron"] = "dryfire",
     ["fire1"] = "fire1_M",
     ["fire2"] = "fire2_M",
     ["fire3"] = "fire3_M",
@@ -165,9 +162,19 @@ SWEP.AnimationTranslationTable = {
 // attachments
 
 SWEP.AttachmentElements = {
-    ["optic"] = {
+    ["foldstock"] = {
         BGs_VM = {
             {1, 1}
+        },
+    },
+    ["optic"] = {
+        BGs_VM = {
+            {2, 1}
+        },
+    },
+    ["rail"] = {
+        BGs_VM = {
+            {3, 1}
         },
     },
 }
@@ -175,42 +182,42 @@ SWEP.AttachmentElements = {
 SWEP.Attachments = {
     [1] = {
         PrintName = "Optic",
-        Category = {"optic_cqb", "optic_medium", "optic_sniper"},
-        Bone = "p90_ROOT",
+        Category = {"optic_cqb", "optic_medium"},
+        Bone = "ValveBiped.mp7_rootbone",
         AttachSound = "tacrp/weapons/optic_on.wav",
         DetachSound = "tacrp/weapons/optic_off.wav",
         InstalledElements = {"optic"},
-        Pos_VM = Vector(-5.2, 0, 6.5),
-        Pos_WM = Vector(8, 1.5, -7),
+        Pos_VM = Vector(-4.25, 0, 1.5),
+        Pos_WM = Vector(4, 1.5, -6),
         Ang_VM = Angle(90, 0, 0),
         Ang_WM = Angle(0, -3.5, 180),
     },
     [2] = {
         PrintName = "Muzzle",
         Category = "silencer",
-        Bone = "p90_ROOT",
+        Bone = "ValveBiped.mp7_rootbone",
         AttachSound = "tacrp/weapons/silencer_on.wav",
         DetachSound = "tacrp/weapons/silencer_off.wav",
-        Pos_VM = Vector(-1.85, 0, 14),
-        Pos_WM = Vector(16, 2.25, -3.5),
+        Pos_VM = Vector(-2.25, 0, 13),
+        Pos_WM = Vector(18, 2.25, -4.25),
         Ang_VM = Angle(90, 0, 0),
         Ang_WM = Angle(0, -3.5, 180),
     },
     [3] = {
         PrintName = "Tactical",
         Category = "tactical",
-        Bone = "p90_ROOT",
+        Bone = "ValveBiped.mp7_rootbone",
         AttachSound = "tacrp/weapons/flashlight_on.wav",
         DetachSound = "tacrp/weapons/flashlight_off.wav",
         InstalledElements = {"rail"},
-        Pos_VM = Vector(-4.35, -0.6, 7.6),
+        Pos_VM = Vector(-2.2, -0.5, 5),
         Pos_WM = Vector(10, 1.3, -4),
         Ang_VM = Angle(90, 0, -90),
         Ang_WM = Angle(0, -3.5, -90),
     },
     [4] = {
         PrintName = "Accessory",
-        Category = {"perk", "perk_melee", "perk_shooting", "perk_reload", "perk_extendedmag", "perk_duffle", "perk_sling"},
+        Category = {"foldstock", "perk", "perk_melee", "perk_shooting", "perk_reload", "perk_extendedmag", "perk_duffle", "perk_sling"},
         AttachSound = "tacrp/weapons/flashlight_on.wav",
         DetachSound = "tacrp/weapons/flashlight_off.wav",
     },
@@ -243,11 +250,14 @@ local function addsound(name, spath)
     })
 end
 
-addsound("tacint_p90.Clip_Out", path .. "clip_out.wav")
-addsound("tacint_p90.Clip_In", path .. "clip_in.wav")
-addsound("tacint_p90.Clip_slap", path .. "clip_slap.wav")
-addsound("tacint_p90.bolt_release", path .. "bolt_release.wav")
-addsound("tacint_p90.bolt_back", path .. "bolt_back.wav")
-addsound("tacint_p90.bolt_forward", path .. "bolt_forward.wav")
-addsound("tacint_p90.fire_select", path .. "fire_select.wav")
-addsound("tacint_p90.mag_release", path .. "mag_release.wav")
+local path_mp5 = "tacrp/weapons/mp5/mp5_"
+
+addsound("tacint_mp7.remove_clip", path .. "remove_clip.wav")
+addsound("tacint_mp7.insert_clip", path .. "insert_clip.wav")
+addsound("tacint_mp7.bolt_action", path .. "bolt_action.wav")
+addsound("tacint_mp7.forearm_deploy", path .. "forearm_deploy.wav")
+addsound("tacint_mp5.fire_select", {
+    path_mp5 .. "fire_select-1.wav",
+    path_mp5 .. "fire_select-2.wav",
+    path_mp5 .. "fire_select-3.wav",
+})

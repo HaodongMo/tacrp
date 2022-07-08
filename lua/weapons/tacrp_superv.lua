@@ -7,7 +7,7 @@ AddCSLuaFile()
 SWEP.PrintName = "Kriss Vector"
 SWEP.Category = "Tactical RP (Arctic)"
 
-SWEP.Description = "SMG with extremely fast fire rate."
+SWEP.Description = "Elite close range SMG with extremely high fire rate. Advanced recoil dampening systems makes controlling this weapon a breeze."
 
 SWEP.ViewModel = "models/weapons/tacint/v_superv.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_superv.mdl"
@@ -16,11 +16,22 @@ SWEP.Slot = 3
 
 // "ballistics"
 
-SWEP.Damage_Max = 100 / 5 // damage at minimum range
-SWEP.Damage_Min = 100 / 7 // damage at maximum range
+SWEP.Damage_Max = 25
+SWEP.Damage_Min = 10
 SWEP.Range_Min = 1000 // distance for which to maintain maximum damage
 SWEP.Range_Max = 3000 // distance at which we drop to minimum damage
 SWEP.Penetration = 4 // units of metal this weapon can penetrate
+
+SWEP.BodyDamageMultipliers = {
+    [HITGROUP_HEAD] = 2,
+    [HITGROUP_CHEST] = 1.2,
+    [HITGROUP_STOMACH] = 1,
+    [HITGROUP_LEFTARM] = 1,
+    [HITGROUP_RIGHTARM] = 1,
+    [HITGROUP_LEFTLEG] = 0.9,
+    [HITGROUP_RIGHTLEG] = 0.9,
+    [HITGROUP_GEAR] = 0.9
+}
 
 SWEP.MuzzleVelocity = 12000
 
@@ -39,16 +50,16 @@ SWEP.Spread = 0.005
 SWEP.ShootSpeedMult = 0.5
 
 SWEP.RecoilPerShot = 1
-SWEP.RecoilMaximum = 10
-SWEP.RecoilResetTime = 0.1// time after you stop shooting for recoil to start dissipating
-SWEP.RecoilDissipationRate = 10
+SWEP.RecoilMaximum = 20
+SWEP.RecoilResetTime = 0.1 // time after you stop shooting for recoil to start dissipating
+SWEP.RecoilDissipationRate = 30
 SWEP.RecoilFirstShotMult = 1 // multiplier for the first shot's recoil amount
 
-SWEP.RecoilVisualKick = 1
+SWEP.RecoilVisualKick = 0.5
 
-SWEP.RecoilKick = 2.5
+SWEP.RecoilKick = 1
 
-SWEP.RecoilSpreadPenalty = 0.000125 // extra spread per one unit of recoil
+SWEP.RecoilSpreadPenalty = 0.0008 // extra spread per one unit of recoil
 
 SWEP.CanBlindFire = true
 
