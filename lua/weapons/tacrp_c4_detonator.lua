@@ -15,7 +15,7 @@ SWEP.WorldModel = "models/weapons/tacint/w_c4_det.mdl"
 SWEP.NoRanger = true
 SWEP.NoStatBox = true
 
-SWEP.Slot = 5
+SWEP.Slot = 4
 
 SWEP.NPCUsable = false
 

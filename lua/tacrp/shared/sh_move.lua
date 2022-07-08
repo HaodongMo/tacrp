@@ -55,7 +55,11 @@ TacRP.RecoilRise = Angle(0, 0, 0)
 function TacRP.StartCommand(ply, cmd)
     local wpn = ply:GetActiveWeapon()
 
-    if !wpn.ArcticTacRP then return end
+    if !wpn.ArcticTacRP then
+        TacRP.RecoilRise = Angle(0, 0, 0)
+        TacRP.LastEyeAngles = ply:EyeAngles()
+        return
+    end
 
     local diff = TacRP.LastEyeAngles - cmd:GetViewAngles()
     local recrise = TacRP.RecoilRise

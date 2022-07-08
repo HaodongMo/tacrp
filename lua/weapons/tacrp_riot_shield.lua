@@ -18,7 +18,7 @@ SWEP.NoStatBox = true
 
 SWEP.NPCUsable = false
 
-SWEP.Slot = 0
+SWEP.Slot = 3
 
 // misc. shooting
 
@@ -59,6 +59,11 @@ SWEP.SprintMidPoint = {
     Pos = Vector(0.25, 2, 1),
     Ang = Angle(0, -5, 10)
 }
+
+SWEP.HolsterVisible = true
+SWEP.HolsterSlot = TacRP.HOLSTER_SLOT_BACK
+SWEP.HolsterPos = Vector(2, -30, 0)
+SWEP.HolsterAng = Angle(-90, 0, -90)
 
 SWEP.AnimationTranslationTable = {
     ["deploy"] = "draw",

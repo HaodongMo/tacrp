@@ -39,6 +39,7 @@ function SWEP:DrawCustomModel(wm, custom_wm)
     if !mdl then return end
 
     for _, model in pairs(mdl) do
+        if !IsValid(model) then continue end
         local offset_pos = model.Pos
         local offset_ang = model.Ang
         local bone = model.Bone
