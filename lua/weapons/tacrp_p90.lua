@@ -7,7 +7,7 @@ AddCSLuaFile()
 SWEP.PrintName = "FN P90"
 SWEP.Category = "Tactical RP (Arctic)"
 
-SWEP.Description = "Premium personal defense weapon with a generous top-loaded magazine. Its high velocity rounds remain effective at range."
+SWEP.Description = "Premium personal defense weapon with a generous top-loaded magazine. High velocity rounds retain effectiveness at range."
 
 SWEP.ViewModel = "models/weapons/tacint/v_p90.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_p90.mdl"
@@ -36,21 +36,20 @@ SWEP.RPM = 850
 SWEP.Spread = 0.0035
 
 SWEP.RecoilPerShot = 1
-SWEP.RecoilMaximum = 10
-SWEP.RecoilResetTime = 0.1 // time after you stop shooting for recoil to start dissipating
-SWEP.RecoilDissipationRate = 10
+SWEP.RecoilMaximum = 20
+SWEP.RecoilResetTime = 0.15 // time after you stop shooting for recoil to start dissipating
+SWEP.RecoilDissipationRate = 30
 SWEP.RecoilFirstShotMult = 1
 
 SWEP.RecoilVisualKick = 0.5
 
 SWEP.RecoilKick = 1.1
 
-SWEP.RecoilSpreadPenalty = 0.000100 // extra spread per one unit of recoil
+SWEP.RecoilSpreadPenalty = 0.00075 // extra spread per one unit of recoil
 
 SWEP.CanBlindFire = true
 
 // handling
-
 
 SWEP.MoveSpeedMult = 0.85
 SWEP.ShootingSpeedMult = 0.5
