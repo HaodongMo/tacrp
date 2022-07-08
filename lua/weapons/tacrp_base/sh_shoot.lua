@@ -46,12 +46,10 @@ function SWEP:PrimaryAttack()
     --     end
     -- end
 
-    if self:GetValue("Melee") then
-        if self:GetOwner():KeyDown(IN_USE) then
-            self.Primary.Automatic = true
-            self:Melee()
-            return
-        end
+    if self:GetValue("Melee") and self:GetOwner():KeyDown(IN_USE) then
+        self.Primary.Automatic = false
+        self:Melee()
+        return
     end
 
     if self:GetCurrentFiremode() < 0 and self:GetBurstCount() >= -self:GetCurrentFiremode() then return end

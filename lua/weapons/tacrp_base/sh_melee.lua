@@ -44,21 +44,36 @@ function SWEP:Melee()
     local dmg = DamageInfo()
 
     dmg:SetDamage(self:GetValue("MeleeDamage"))
-    dmg:SetDamageForce(self:GetOwner():GetAimVector() * 32)
+    dmg:SetDamageForce(self:GetOwner():GetAimVector())
     dmg:SetDamageType(DMG_CLUB)
     dmg:SetAttacker(self:GetOwner())
     dmg:SetInflictor(self)
+
+    -- no damage, but makes effects and breaks glass
+    self:GetOwner():FireBullets({
+        Damage = 0,
+        Force = self:GetValue("MeleeDamage") / 3,
+        Tracer = 0,
+        Distance = 64,
+        HullSize = 0,
+        Dir = tr.Normal,
+        Src = tr.StartPos,
+        Spread = Vector(0, 0, 0),
+        IgnoreEntity = self.Shields,
+    })
 
     if tr.Hit then
         if IsValid(tr.Entity) and !tr.HitWorld and SERVER then
             tr.Entity:TakeDamageInfo(dmg)
         end
+
         if tr.Entity:IsNPC() or tr.Entity:IsPlayer() or tr.Entity:IsNextBot() then
             self:EmitSound(table.Random(self:GetValue("Sound_MeleeHitBody")), 75, 100, 1, CHAN_ITEM)
         else
             self:EmitSound(table.Random(self:GetValue("Sound_MeleeHit")), 75, 100, 1, CHAN_ITEM)
         end
 
+        --[[]
         if IsFirstTimePredicted() then
             if tr.MatType == MAT_FLESH or tr.MatType == MAT_ALIENFLESH or tr.MatType == MAT_ANTLION or tr.MatType == MAT_BLOODYFLESH then
                 local fx = EffectData()
@@ -76,7 +91,9 @@ function SWEP:Melee()
             fx:SetHitBox(tr.HitBox)
 
             util.Effect("Impact", fx)
+
         end
+        ]]
     end
 
     -- self:GetOwner():FireBullets({
@@ -103,6 +120,5 @@ function SWEP:Melee()
     -- })
 
     self:SetLastMeleeTime(CurTime())
-
     self:SetNextSecondaryFire(CurTime() + 0.5)
 end
