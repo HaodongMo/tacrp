@@ -13,7 +13,7 @@ SWEP.Description = "Well-rounded and economic pistol."
 SWEP.ViewModel = "models/weapons/tacint/v_p2000.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_p2000.mdl"
 
-SWEP.Slot = 1
+SWEP.Slot = 2
 
 // "ballistics"
 

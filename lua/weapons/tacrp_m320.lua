@@ -14,7 +14,7 @@ SWEP.WorldModel = "models/weapons/tacint/w_m320.mdl"
 
 SWEP.NoRanger = true
 
-SWEP.Slot = 4
+SWEP.Slot = 3
 
 // "ballistics"
 

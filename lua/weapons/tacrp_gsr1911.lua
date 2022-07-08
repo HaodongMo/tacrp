@@ -13,7 +13,7 @@ SWEP.Description = "Ubiquitous low-capacity pistol with decent damage but low ra
 SWEP.ViewModel = "models/weapons/tacint/v_gsr1911.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_gsr1911.mdl"
 
-SWEP.Slot = 1
+SWEP.Slot = 2
 
 // "ballistics"
 

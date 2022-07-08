@@ -12,7 +12,7 @@ SWEP.Description = "Elite, fully automatic machine pistol with incredible close 
 SWEP.ViewModel = "models/weapons/tacint/v_xd45.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_xd45.mdl"
 
-SWEP.Slot = 1
+SWEP.Slot = 2
 
 // "ballistics"
 

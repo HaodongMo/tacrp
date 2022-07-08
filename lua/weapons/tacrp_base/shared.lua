@@ -18,7 +18,7 @@ SWEP.NoStatBox = false
 
 SWEP.NPCUsable = true
 
-SWEP.Slot = 1
+SWEP.Slot = 2
 
 // "ballistics"
 
