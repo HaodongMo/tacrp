@@ -639,17 +639,36 @@ function SWEP:DrawHUDBackground()
         surface.DrawLine(w2s.x, w2s.y - 256, w2s.x, w2s.y + 256)
         surface.DrawLine(w2s.x - 256, w2s.y, w2s.x + 256, w2s.y)
         local spread = GetFOVAcc(self)
-        local recoil_txt = tostring(math.Round(self:GetRecoilAmount() or 0, 3))
+        local recoil_txt = "Recoil: " .. tostring(math.Round(self:GetRecoilAmount() or 0, 3))
         surface.DrawCircle(w2s.x, w2s.y, spread, 255, 255, 255, 150)
         surface.DrawCircle(w2s.x, w2s.y, spread + 1, 255, 255, 255, 150)
         surface.SetFont("TacRP_Myriad_Pro_32_Unscaled")
         surface.SetTextColor(255, 255, 255, 255)
         surface.SetTextPos(w2s.x - 256, w2s.y)
         surface.DrawText(recoil_txt)
-        local spread_txt = tostring(math.Round(self:GetSpread(), 5))
-        local tw = surface.GetTextSize(spread_txt)
-        surface.SetTextPos(w2s.x + 256 - tw, w2s.y)
+        local spread_txt = tostring("Cone: " .. math.Round(self:GetSpread(), 5))
+        surface.SetTextPos(w2s.x - 256, w2s.y - 34)
         surface.DrawText(spread_txt)
+        -- local tw = surface.GetTextSize(spread_txt)
+        -- surface.SetTextPos(w2s.x + 256 - tw, w2s.y)
+        -- surface.DrawText(spread_txt)
+
+        local tr = util.TraceLine({
+            start = self:GetMuzzleOrigin(),
+            endpos = self:GetMuzzleOrigin() + (self:GetShootDir():Forward() * 50000),
+            mask = MASK_SHOT,
+            filter = self:GetOwner()
+        })
+        local dist = (tr.HitPos - tr.StartPos):Length()
+        local dist_txt = math.Round(dist) .. " HU"
+        local tw = surface.GetTextSize(dist_txt)
+        surface.SetTextPos(w2s.x + 256 - tw, w2s.y)
+        surface.DrawText(dist_txt)
+
+        local damage_txt = math.Round(self:GetDamageAtRange(dist)) .. " DMG"
+        local tw2 = surface.GetTextSize(damage_txt)
+        surface.SetTextPos(w2s.x + 256 - tw2, w2s.y - 34)
+        surface.DrawText(damage_txt)
     end
 end
 
