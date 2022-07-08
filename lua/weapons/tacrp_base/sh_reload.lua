@@ -65,8 +65,11 @@ function SWEP:DropMagazine()
             local mag = ents.Create("TacRP_droppedmag")
 
             if mag then
-                mag:SetPos(self:GetOwner():EyePos() - (self:GetOwner():EyeAngles():Up() * 8))
-                mag:SetAngles(self:GetOwner():EyeAngles())
+                local matrix = self:GetOwner():GetBoneMatrix(self:GetOwner():LookupBone("ValveBiped.Bip01_R_Hand"))
+                local pos = matrix:GetTranslation() or self:GetOwner():EyePos() - (self:GetOwner():EyeAngles():Up() * 8)
+                local ang = matrix:GetAngles() or self:GetOwner():EyeAngles()
+                mag:SetPos(pos)
+                mag:SetAngles(ang)
                 mag.Model = self:GetValue("DropMagazineModel")
                 mag.ImpactType = self:GetValue("DropMagazineImpact")
                 mag:SetOwner(self:GetOwner())
