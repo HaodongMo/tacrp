@@ -7,7 +7,8 @@ AddCSLuaFile()
 SWEP.PrintName = "AI AS50"
 SWEP.Category = "Tactical RP (Arctic)"
 
-SWEP.Description = "High-calibre sniper rifle. Massively powerful but very difficult to handle. Rounds are incredibly powerful, but travel slowly."
+// Tier 4
+SWEP.Description = "Elite semi-automatic anti-materiel rifle that can easily decimate any person at any distance.\nEquipped with a 12x scope by default."
 
 SWEP.ViewModel = "models/weapons/tacint/v_as50_hq.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_as50.mdl"
@@ -16,19 +17,19 @@ SWEP.Slot = 3
 
 // "ballistics"
 
-SWEP.Damage_Max = 115 // damage at minimum range
+SWEP.Damage_Max = 120 // damage at minimum range
 SWEP.Damage_Min = 95 // damage at maximum range
 SWEP.Range_Min = 1000 // distance for which to maintain maximum damage
 SWEP.Range_Max = 6000 // distance at which we drop to minimum damage
 SWEP.Penetration = 24 // units of metal this weapon can penetrate
 SWEP.BodyDamageMultipliers = {
-    [HITGROUP_HEAD] = 100, // nobody is surviving this
+    [HITGROUP_HEAD] = 5, // nobody is surviving this
     [HITGROUP_CHEST] = 1,
     [HITGROUP_STOMACH] = 1,
     [HITGROUP_LEFTARM] = 1,
     [HITGROUP_RIGHTARM] = 1,
-    [HITGROUP_LEFTLEG] = 0.8,
-    [HITGROUP_RIGHTLEG] = 0.8,
+    [HITGROUP_LEFTLEG] = 0.9,
+    [HITGROUP_RIGHTLEG] = 0.9,
     [HITGROUP_GEAR] = 0.8
 }
 
@@ -42,26 +43,29 @@ SWEP.RPM = 200
 
 SWEP.Spread = 0
 
+SWEP.HipFireSpreadPenalty = 0.1
+
+
 SWEP.RecoilPerShot = 1
 SWEP.RecoilMaximum = 5
-SWEP.RecoilResetTime = 0.1// time after you stop shooting for recoil to start dissipating
+SWEP.RecoilResetTime = 0.1 // time after you stop shooting for recoil to start dissipating
 SWEP.RecoilDissipationRate = 3
-SWEP.RecoilFirstShotMult = 1 // multiplier for the first shot's recoil amount
+SWEP.RecoilFirstShotMult = 0.75 // multiplier for the first shot's recoil amount
 
 SWEP.RecoilVisualKick = 15
 SWEP.RecoilVisualShake = 0.9
 
 SWEP.RecoilKick = 15
 
-SWEP.RecoilSpreadPenalty = 0.5 // extra spread per one unit of recoil
+SWEP.RecoilSpreadPenalty = 0.1 // extra spread per one unit of recoil
 
 SWEP.CanBlindFire = true
 
 // handling
 
-SWEP.MoveSpeedMult = 0.8
-SWEP.ShootingSpeedMult = 0.5 // slow down applied while shooting
-SWEP.SightedSpeedMult = 0.25
+SWEP.MoveSpeedMult = 0.7
+SWEP.ShootingSpeedMult = 0.05
+SWEP.SightedSpeedMult = 0.1
 SWEP.MeleeSpeedMult = 0.5
 SWEP.MeleeSpeedMultTime = 2 // seconds to apply slow down for
 
@@ -109,7 +113,7 @@ SWEP.ScopedSway = 0.25
 
 SWEP.Scope = true
 SWEP.ScopeOverlay = Material("TacRP/scopes/sniper.png", "mips smooth") // Material("path/to/overlay")
-SWEP.ScopeFOV = 90 / 10
+SWEP.ScopeFOV = 90 / 12
 SWEP.ScopeLevels = 1 // 2 = like CS:S
 SWEP.ScopeHideWeapon = true
 
@@ -198,7 +202,7 @@ SWEP.AttachmentElements = {
 SWEP.Attachments = {
     [1] = {
         PrintName = "Optic",
-        Category = {"ironsights", "optic_cqb", "optic_medium", "optic_sniper"},
+        Category = {"ironsights_sniper", "optic_cqb", "optic_medium", "optic_sniper"},
         Bone = "ValveBiped._ROOT_AS50",
         WMBone = "Box01",
         AttachSound = "TacRP/weapons/optic_on.wav",

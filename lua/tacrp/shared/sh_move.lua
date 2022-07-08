@@ -36,7 +36,7 @@ function TacRP.Move(ply, mv, cmd)
         shotdelta = 1
     else
         -- recover from firing slowdown after shadow duration
-        local delay = 60 / wpn:GetValue("RPM")
+        local delay = math.min(60 / wpn:GetValue("RPM"), 0.5)
         local aftershottime = -shottime / delay
         shotdelta = math.Clamp(1 - aftershottime, 0, 1)
     end

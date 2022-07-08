@@ -7,7 +7,8 @@ AddCSLuaFile()
 SWEP.PrintName = "Remington 700 SPR"
 SWEP.Category = "Tactical RP (Arctic)"
 
-SWEP.Description = "Fast-reaction bolt-action rifle, effective at relatively close range."
+// Tier 1
+SWEP.Description = "Common hunting rifle with a relatively fast cycle speed.\nEquipped with a 6x scope by default."
 
 SWEP.ViewModel = "models/weapons/tacint/v_spr.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_spr.mdl"
@@ -16,7 +17,7 @@ SWEP.Slot = 3
 
 // "ballistics"
 
-SWEP.Damage_Max = 95 // damage at minimum range
+SWEP.Damage_Max = 85 // damage at minimum range
 SWEP.Damage_Min = 60 // damage at maximum range
 SWEP.Range_Min = 500 // distance for which to maintain maximum damage
 SWEP.Range_Max = 5000 // distance at which we drop to minimum damage
@@ -27,8 +28,8 @@ SWEP.BodyDamageMultipliers = {
     [HITGROUP_STOMACH] = 1.1,
     [HITGROUP_LEFTARM] = 1,
     [HITGROUP_RIGHTARM] = 1,
-    [HITGROUP_LEFTLEG] = 0.9,
-    [HITGROUP_RIGHTLEG] = 0.9,
+    [HITGROUP_LEFTLEG] = 0.8,
+    [HITGROUP_RIGHTLEG] = 0.8,
     [HITGROUP_GEAR] = 0.9
 }
 
@@ -42,7 +43,7 @@ SWEP.RPM = 55
 
 SWEP.Spread = 0
 
-
+SWEP.HipFireSpreadPenalty = 0.05
 
 SWEP.RecoilPerShot = 1
 SWEP.RecoilMaximum = 10
@@ -60,9 +61,9 @@ SWEP.CanBlindFire = true
 
 // handling
 
-SWEP.MoveSpeedMult = 0.95
-SWEP.ShootingSpeedMult = 0.75 // slow down applied while shooting
-SWEP.SightedSpeedMult = 0.5
+SWEP.MoveSpeedMult = 0.75
+SWEP.ShootingSpeedMult = 0.4
+SWEP.SightedSpeedMult = 0.2
 SWEP.MeleeSpeedMult = 0.5
 SWEP.MeleeSpeedMultTime = 2 // seconds to apply slow down for
 
@@ -116,6 +117,7 @@ SWEP.ClipSize = 5
 SWEP.Ammo = "SniperPenetratedRound"
 
 SWEP.ReloadTimeMult = 1
+SWEP.ShootSpeedMult = 0.75
 SWEP.DropMagazineModel = false
 
 // sounds
@@ -187,7 +189,7 @@ SWEP.AttachmentElements = {
 SWEP.Attachments = {
     [1] = {
         PrintName = "Optic",
-        Category = {"ironsights", "optic_cqb", "optic_medium", "optic_sniper"},
+        Category = {"ironsights_sniper", "optic_cqb", "optic_medium", "optic_sniper"},
         WMBone = "Bone02",
         Bone = "SPR_root",
         AttachSound = "TacRP/weapons/optic_on.wav",

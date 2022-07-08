@@ -108,15 +108,15 @@ function SWEP:DrawHUDBackground()
 
             txt = txt .. txt3
 
-            if edmg * self:GetValue("BodyDamageMultipliers")[HITGROUP_LEFTLEG] > 100 then
+            if edmg * self:GetValue("BodyDamageMultipliers")[HITGROUP_LEFTLEG] >= 100 then
                 txt4 = "LEGS"
-            elseif edmg * self:GetValue("BodyDamageMultipliers")[HITGROUP_LEFTARM] > 100 then
+            elseif edmg * self:GetValue("BodyDamageMultipliers")[HITGROUP_LEFTARM] >= 100 then
                 txt4 = "ARMS"
-            elseif edmg * self:GetValue("BodyDamageMultipliers")[HITGROUP_STOMACH] > 100 then
+            elseif edmg * self:GetValue("BodyDamageMultipliers")[HITGROUP_STOMACH] >= 100 then
                 txt4 = "STMCH"
-            elseif edmg * self:GetValue("BodyDamageMultipliers")[HITGROUP_CHEST] > 100 then
+            elseif edmg * self:GetValue("BodyDamageMultipliers")[HITGROUP_CHEST] >= 100 then
                 txt4 = "CHEST"
-            elseif edmg * self:GetValue("BodyDamageMultipliers")[HITGROUP_HEAD] > 100 then
+            elseif edmg * self:GetValue("BodyDamageMultipliers")[HITGROUP_HEAD] >= 100 then
                 txt4 = "HEAD"
             else
                 txt4 = tostring(math.ceil(100 / edmg)) .. "STK"
