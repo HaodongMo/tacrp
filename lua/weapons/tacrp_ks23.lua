@@ -12,7 +12,7 @@ SWEP.Description = "Elite large-caliber shotgun with poor handling but incredibl
 SWEP.ViewModel = "models/weapons/tacint/v_ks23.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_ks23.mdl"
 
-SWEP.Slot = 2
+SWEP.Slot = 3
 
 // "ballistics"
 

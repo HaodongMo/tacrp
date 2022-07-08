@@ -13,7 +13,7 @@ SWEP.Description = "Common hunting shotgun.\nRelatively accurate, but cannot fir
 SWEP.ViewModel = "models/weapons/tacint/v_bekas.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_bekas.mdl"
 
-SWEP.Slot = 2
+SWEP.Slot = 3
 
 // "ballistics"
 
