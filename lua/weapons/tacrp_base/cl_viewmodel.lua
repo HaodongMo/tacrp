@@ -69,6 +69,8 @@ function SWEP:DrawCustomModel(wm, custom_wm)
             end
         end
 
+        if !bone then continue end
+
         local boneindex = parentmdl:LookupBone(bone)
 
         if !boneindex then continue end
