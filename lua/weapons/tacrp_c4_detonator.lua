@@ -53,10 +53,15 @@ SWEP.GestureShoot = ACT_HL2MP_GESTURE_RANGE_ATTACK_PISTOL
 SWEP.GestureReload = ACT_HL2MP_GESTURE_RELOAD_PISTOL
 
 SWEP.PassiveAng = Angle(0, 0, 0)
-SWEP.PassivePos = Vector(0, -2, -5)
+SWEP.PassivePos = Vector(1, -2, -5)
 
 SWEP.SprintAng = Angle(0, 30, 0)
 SWEP.SprintPos = Vector(2, 0, -12)
+
+SWEP.HolsterVisible = true
+SWEP.HolsterSlot = TacRP.HOLSTER_SLOT_GEAR
+SWEP.HolsterPos = Vector(2, 0, 0)
+SWEP.HolsterAng = Angle(-90, -90, 15)
 
 // sounds
 
@@ -69,7 +74,16 @@ SWEP.AnimationTranslationTable = {
 
 // attachments
 
-SWEP.Attachments = {}
+SWEP.Attachments = {
+    [1] = {
+        PrintName = "Accessory",
+        Category = {"perk_conceal", "perk_melee"},
+        AttachSound = "TacRP/weapons/flashlight_on.wav",
+        DetachSound = "TacRP/weapons/flashlight_off.wav",
+    },
+}
+
+SWEP.FreeAim = false
 
 SWEP.AttachmentCapacity = 30 // amount of "Capacity" this gun can accept
 
