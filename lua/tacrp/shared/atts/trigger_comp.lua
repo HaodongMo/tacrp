@@ -4,7 +4,7 @@ ATT.Description = "Lightweight trigger for sports shooting."
 ATT.Pros = {"First shot recoil spread"}
 ATT.Cons = {"Total recoil spread"}
 
-ATT.Category = {"trigger_semi", "trigger_auto", "trigger_burst", "trigger_akimbo"}
+ATT.Category = {"trigger_semi", "trigger_auto", "trigger_burst", "trigger_akimbo", "trigger_revolver"}
 
 ATT.SortOrder = 2
 

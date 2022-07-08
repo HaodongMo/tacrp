@@ -4,11 +4,11 @@ SWEP.Spawnable = true
 AddCSLuaFile()
 
 // names and stuff
-SWEP.PrintName = "Kriss Sphinx"
+SWEP.PrintName = "Sphinx 2000"
 SWEP.Category = "Tactical RP (Arctic)"
 
 // Tier 3
-SWEP.Description = "Premium pistol with low recoil and a three-round burst firemode."
+SWEP.Description = "Premium pistol with low recoil and a crisp trigger.\nDeals increased damage to the chest and head."
 
 SWEP.ViewModel = "models/weapons/tacint/v_sphinx.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_sphinx.mdl"
@@ -17,15 +17,15 @@ SWEP.Slot = 2
 
 // "ballistics"
 
-SWEP.Damage_Max = 16 // 100 / 5 // damage at minimum range
-SWEP.Damage_Min = 8 // 100 / 9 // damage at maximum range
+SWEP.Damage_Max = 22 // 100 / 5 // damage at minimum range
+SWEP.Damage_Min = 10 // 100 / 9 // damage at maximum range
 SWEP.Range_Min = 2000 // distance for which to maintain maximum damage
 SWEP.Range_Max = 5000 // distance at which we drop to minimum damage
 SWEP.Penetration = 1 // units of metal this weapon can penetrate
 
 SWEP.BodyDamageMultipliers = {
-    [HITGROUP_HEAD] = 2,
-    [HITGROUP_CHEST] = 1,
+    [HITGROUP_HEAD] = 2.5,
+    [HITGROUP_CHEST] = 1.25,
     [HITGROUP_STOMACH] = 1,
     [HITGROUP_LEFTARM] = 1,
     [HITGROUP_RIGHTARM] = 1,
@@ -36,9 +36,9 @@ SWEP.BodyDamageMultipliers = {
 
 // misc. shooting
 
-SWEP.Firemode = -3
+SWEP.Firemode = 1
 
-SWEP.RPM = 900
+SWEP.RPM = 750
 
 SWEP.Spread = 0.002
 
@@ -50,7 +50,7 @@ SWEP.RecoilFirstShotMult = 1
 
 SWEP.RecoilVisualKick = 1.5
 
-SWEP.RecoilKick = 4
+SWEP.RecoilKick = 3.5
 
 SWEP.RecoilSpreadPenalty = 0.0025 // extra spread per one unit of recoil
 
@@ -101,7 +101,7 @@ SWEP.HolsterAng = Angle(90, 0, 0)
 
 // reload
 
-SWEP.ClipSize = 15
+SWEP.ClipSize = 16
 SWEP.Ammo = "pistol"
 
 SWEP.ReloadTimeMult = 1
@@ -217,7 +217,7 @@ SWEP.Attachments = {
     },
     [6] = {
         PrintName = "Trigger",
-        Category = {"trigger_burst"},
+        Category = {"trigger_semi"},
         AttachSound = "TacRP/weapons/flashlight_on.wav",
         DetachSound = "TacRP/weapons/flashlight_off.wav",
     },

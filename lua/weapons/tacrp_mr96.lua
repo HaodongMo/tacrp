@@ -40,7 +40,7 @@ SWEP.BodyDamageMultipliers = {
 
 SWEP.Firemode = 1
 
-SWEP.RPM = 200
+SWEP.RPM = 180
 
 SWEP.Spread = 0.001
 
@@ -200,7 +200,7 @@ SWEP.Attachments = {
     },
     [4] = {
         PrintName = "Trigger",
-        Category = {"trigger_semi"},
+        Category = {"trigger_revolver"},
         AttachSound = "TacRP/weapons/flashlight_on.wav",
         DetachSound = "TacRP/weapons/flashlight_off.wav",
     },

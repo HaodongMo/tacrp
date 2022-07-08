@@ -1,7 +1,7 @@
 ATT.PrintName = "Holographic (1.5x)"
 
 ATT.AdminOnly = false
-ATT.ShareInvAtt = ""
+ATT.InvAtt = ""
 ATT.Free = false
 ATT.Ignore = true
 
