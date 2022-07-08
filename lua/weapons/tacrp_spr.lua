@@ -62,8 +62,8 @@ SWEP.CanBlindFire = true
 // handling
 
 SWEP.MoveSpeedMult = 0.75
-SWEP.ShootingSpeedMult = 0.25
-SWEP.SightedSpeedMult = 0.15
+SWEP.ShootingSpeedMult = 0.4
+SWEP.SightedSpeedMult = 0.2
 SWEP.MeleeSpeedMult = 0.5
 SWEP.MeleeSpeedMultTime = 2 // seconds to apply slow down for
 
