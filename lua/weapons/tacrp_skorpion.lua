@@ -12,7 +12,7 @@ SWEP.Description = "Common machine pistol with low recoil.\nCan only mount pisto
 SWEP.ViewModel = "models/weapons/tacint/v_skorpion.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_skorpion.mdl"
 
-SWEP.Slot = 1
+SWEP.Slot = 2
 
 // "ballistics"
 

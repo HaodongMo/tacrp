@@ -12,7 +12,7 @@ SWEP.Description = "Subcompact 5.56mm rifle. High fire rate makes this an excell
 SWEP.ViewModel = "models/weapons/tacint/v_pdw.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_pdw.mdl"
 
-SWEP.Slot = 2
+SWEP.Slot = 3
 
 // "ballistics"
 

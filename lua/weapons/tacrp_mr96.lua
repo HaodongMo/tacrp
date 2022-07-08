@@ -13,7 +13,7 @@ SWEP.Description = "Premium revolver with high recoil and incredible stopping po
 SWEP.ViewModel = "models/weapons/tacint/v_mr96.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_mr96.mdl"
 
-SWEP.Slot = 1
+SWEP.Slot = 2
 
 // "ballistics"
 

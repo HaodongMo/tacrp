@@ -13,7 +13,7 @@ SWEP.Description = "An elite pair of high capacity, high damage pistols.\nWith f
 SWEP.ViewModel = "models/weapons/tacint/v_mtx_dual.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_mtx.mdl"
 
-SWEP.Slot = 1
+SWEP.Slot = 2
 
 // "ballistics"
 

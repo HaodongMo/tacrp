@@ -12,7 +12,7 @@ SWEP.Description = "Economic, well-balanced sub-machine gun known for its precis
 SWEP.ViewModel = "models/weapons/tacint/v_mp5.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_mp5.mdl"
 
-SWEP.Slot = 2
+SWEP.Slot = 3
 
 // "ballistics"
 

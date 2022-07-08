@@ -80,6 +80,10 @@ local conVars = {
         name = "rp_requirebench",
         default = "0",
     },
+    {
+        name = "limitslots",
+        default = "0"
+    }
 }
 
 local prefix = "tacrp_"
