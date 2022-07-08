@@ -11,6 +11,7 @@ util.AddNetworkString("tacrp_sendbullet")
 
 util.AddNetworkString("tacrp_updateholster")
 util.AddNetworkString("tacrp_clientdamage")
+util.AddNetworkString("tacrp_container")
 
 net.Receive("tacrp_toggleblindfire", function(len, ply)
     local bf = net.ReadBool()
