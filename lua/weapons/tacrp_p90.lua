@@ -12,7 +12,7 @@ SWEP.Description = "Premium personal defense weapon with a generous top-loaded m
 SWEP.ViewModel = "models/weapons/tacint/v_p90.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_p90.mdl"
 
-SWEP.Slot = 2
+SWEP.Slot = 3
 
 // "ballistics"
 
