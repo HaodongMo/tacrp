@@ -624,10 +624,15 @@ function SWEP:DrawHUDBackground()
     lastammo = self:Clip1()
     lastarmor = LocalPlayer():Armor()
 
-    if !self:GetReloading() and !self:GetCustomize() and GetConVar("developer"):GetInt() > 1 and LocalPlayer():IsAdmin() then
-        local v = self:GetMuzzleOrigin() + self:GetShootDir():Forward() * 30000
+    if !self:GetReloading() and !self:GetCustomize() and GetConVar("developer"):GetInt() > 0 and LocalPlayer():IsAdmin() then
+        local tr = util.TraceLine({
+            start = self:GetMuzzleOrigin(),
+            endpos = self:GetMuzzleOrigin() + (self:GetShootDir():Forward() * 50000),
+            mask = MASK_SHOT,
+            filter = self:GetOwner()
+        })
         cam.Start3D()
-            local w2s = v:ToScreen()
+            local w2s = tr.HitPos:ToScreen()
             w2s.x = math.Round(w2s.x)
             w2s.y = math.Round(w2s.y)
         cam.End3D()
@@ -653,12 +658,7 @@ function SWEP:DrawHUDBackground()
         -- surface.SetTextPos(w2s.x + 256 - tw, w2s.y)
         -- surface.DrawText(spread_txt)
 
-        local tr = util.TraceLine({
-            start = self:GetMuzzleOrigin(),
-            endpos = self:GetMuzzleOrigin() + (self:GetShootDir():Forward() * 50000),
-            mask = MASK_SHOT,
-            filter = self:GetOwner()
-        })
+
         local dist = (tr.HitPos - tr.StartPos):Length()
         local dist_txt = math.Round(dist) .. " HU"
         local tw = surface.GetTextSize(dist_txt)

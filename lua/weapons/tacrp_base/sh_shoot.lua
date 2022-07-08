@@ -241,7 +241,7 @@ function SWEP:AfterShotFunction(tr, dmg, range, penleft, alreadypenned, forced)
         dmgbodymult = dmgbodymult * bodydamage[tr.HitGroup]
     end
 
-    if GetConVar("TacRP_bodydamagecancel"):GetBool() and cancelmults[tr.HitGroup] then
+    if IsValid(tr.Entity) and !tr.Entity:IsNextBot() and GetConVar("TacRP_bodydamagecancel"):GetBool() and cancelmults[tr.HitGroup] then
         dmgbodymult = dmgbodymult / cancelmults[tr.HitGroup]
     end
 

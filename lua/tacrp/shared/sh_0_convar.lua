@@ -83,6 +83,10 @@ local conVars = {
     {
         name = "limitslots",
         default = "0"
+    },
+    {
+        name = "true_laser",
+        default = "1"
     }
 }
 
