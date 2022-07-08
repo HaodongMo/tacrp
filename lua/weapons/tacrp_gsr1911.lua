@@ -4,11 +4,11 @@ SWEP.Spawnable = true
 AddCSLuaFile()
 
 // names and stuff
-SWEP.PrintName = "M1911"
+SWEP.PrintName = "GSR M1911"
 SWEP.Category = "Tactical RP (Arctic)"
 
 // Tier 1
-SWEP.Description = "Ubiquitous low-capacity pistol with decent damage but low range."
+SWEP.Description = "Common low-capacity pistol with decent damage but low range."
 
 SWEP.ViewModel = "models/weapons/tacint/v_gsr1911.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_gsr1911.mdl"
@@ -27,7 +27,7 @@ SWEP.MuzzleVelocity = 7500
 
 SWEP.BodyDamageMultipliers = {
     [HITGROUP_HEAD] = 2,
-    [HITGROUP_CHEST] = 1,
+    [HITGROUP_CHEST] = 1.2,
     [HITGROUP_STOMACH] = 1,
     [HITGROUP_LEFTARM] = 1,
     [HITGROUP_RIGHTARM] = 1,
