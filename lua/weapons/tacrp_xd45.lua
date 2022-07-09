@@ -149,7 +149,7 @@ SWEP.AnimationTranslationTable = {
     ["melee"] = {"melee1", "melee2"}
 }
 
-SWEP.ShootSpeedMult = 0.5
+SWEP.ShootTimeMult = 0.5
 
 SWEP.LastShot = true
 

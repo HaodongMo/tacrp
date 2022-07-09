@@ -69,7 +69,7 @@ SWEP.RPM = 600
 
 SWEP.Spread = 0.01
 
-SWEP.ShootSpeedMult = 1
+SWEP.ShootTimeMult = 1
 
 // Spread penalties are in spread units and are additive
 SWEP.MoveSpreadPenalty = 0 // spread penalty while travelling at max. 250 u/s

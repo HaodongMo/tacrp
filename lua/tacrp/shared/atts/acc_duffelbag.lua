@@ -1,5 +1,5 @@
 ATT.PrintName = "Duffle Bag"
-ATT.Icon = Material("entities/tacrp_att_acc_conceal.png", "mips smooth")
+ATT.Icon = Material("entities/tacrp_dufflebag.png", "mips smooth")
 ATT.Description = ""
 ATT.Pros = {"Conceal weapon in bag"}
 ATT.Cons = {"Slower draw speed"}

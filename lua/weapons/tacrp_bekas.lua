@@ -162,7 +162,7 @@ SWEP.AnimationTranslationTable = {
     ["reload"] = {"reload", "reload2"}
 }
 
-SWEP.ShootSpeedMult = 0.75
+SWEP.ShootTimeMult = 0.75
 
 // attachments
 

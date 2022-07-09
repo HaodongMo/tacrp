@@ -44,7 +44,7 @@ SWEP.RPM = 180
 
 SWEP.Spread = 0.001
 
-SWEP.ShootSpeedMult = 1
+SWEP.ShootTimeMult = 1
 
 
 

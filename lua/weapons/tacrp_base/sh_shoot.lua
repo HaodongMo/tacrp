@@ -66,7 +66,7 @@ function SWEP:PrimaryAttack()
 
     local idle = true
 
-    local mult = self:GetValue("ShootSpeedMult")
+    local mult = self:GetValue("ShootTimeMult")
 
     if self:GetValue("LastShot") and self:Clip1() == 1 then
         seq = "lastshot"

@@ -155,7 +155,7 @@ SWEP.AnimationTranslationTable = {
 
 SWEP.NoIdle = true
 
-SWEP.ShootSpeedMult = 0.5
+SWEP.ShootTimeMult = 0.5
 
 SWEP.LastShot = true
 

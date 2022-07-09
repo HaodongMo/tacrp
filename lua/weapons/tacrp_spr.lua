@@ -117,7 +117,7 @@ SWEP.ClipSize = 5
 SWEP.Ammo = "SniperPenetratedRound"
 
 SWEP.ReloadTimeMult = 1
-SWEP.ShootSpeedMult = 0.75
+SWEP.ShootTimeMult = 0.75
 SWEP.DropMagazineModel = false
 
 // sounds

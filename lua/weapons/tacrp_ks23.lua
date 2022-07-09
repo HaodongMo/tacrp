@@ -44,7 +44,7 @@ SWEP.RPM = 40
 
 SWEP.Spread = 0.08
 
-SWEP.ShootSpeedMult = 1.25
+SWEP.ShootTimeMult = 1.25
 
 SWEP.HipFireSpreadPenalty = 0
 SWEP.MidAirSpreadPenalty = 0

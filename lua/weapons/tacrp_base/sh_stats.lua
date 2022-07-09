@@ -6,6 +6,10 @@ SWEP.ExcludeFromRawStats = {
     ["Description"] = true
 }
 
+SWEP.IntegerStats = {
+    ["ClipSize"] = true
+}
+
 function SWEP:RunHook(val, data)
     if self.HookCache[val] then
         for _, chook in pairs(self.HookCache[val]) do
@@ -103,6 +107,10 @@ function SWEP:GetValue(val)
                 stat = stat * atttbl["Mult_" .. val]
             end
         end
+    end
+
+    if self.IntegerStats[val] then
+        stat = math.Round(stat)
     end
 
     self.StatCache[val] = stat

@@ -17,7 +17,7 @@ SWEP.Slot = 3
 
 // "ballistics"
 
-SWEP.ShootSpeedMult = 0.5
+SWEP.ShootTimeMult = 0.5
 
 SWEP.Damage_Max = 100 / 8 // damage at minimum range
 SWEP.Damage_Min = 100 / 14 // damage at maximum range

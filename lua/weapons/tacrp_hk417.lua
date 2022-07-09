@@ -44,7 +44,7 @@ SWEP.RPM = 700
 
 SWEP.Spread = 0.0005
 
-SWEP.ShootSpeedMult = 0.4
+SWEP.ShootTimeMult = 0.4
 
 
 SWEP.RecoilPerShot = 1
