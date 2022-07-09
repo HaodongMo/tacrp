@@ -16,7 +16,7 @@ SWEP.Slot = 3
 
 // "ballistics"
 
-SWEP.Damage_Max = 26
+SWEP.Damage_Max = 22
 SWEP.Damage_Min = 18
 SWEP.Range_Min = 2000 // distance for which to maintain maximum damage
 SWEP.Range_Max = 6000
@@ -24,7 +24,7 @@ SWEP.Penetration = 9 // units of metal this weapon can penetrate
 
 SWEP.BodyDamageMultipliers = {
     [HITGROUP_HEAD] = 2.5,
-    [HITGROUP_CHEST] = 1.2,
+    [HITGROUP_CHEST] = 1.25,
     [HITGROUP_STOMACH] = 1,
     [HITGROUP_LEFTARM] = 1,
     [HITGROUP_RIGHTARM] = 1,
@@ -42,23 +42,23 @@ SWEP.Firemodes = {
     1
 }
 
-SWEP.RPM = 750
+SWEP.RPM = 800
 
-SWEP.Spread = 0.001
+SWEP.Spread = 0.005
 
 SWEP.ShootSpeedMult = 0.5
 
 
 
 SWEP.RecoilPerShot = 1
-SWEP.RecoilMaximum = 10
-SWEP.RecoilResetTime = 0.15 // time after you stop shooting for recoil to start dissipating
-SWEP.RecoilDissipationRate = 15
+SWEP.RecoilMaximum = 15
+SWEP.RecoilResetTime = 0.12
+SWEP.RecoilDissipationRate = 20
 SWEP.RecoilFirstShotMult = 1 // multiplier for the first shot's recoil amount
 
 SWEP.RecoilVisualKick = 0.75
 
-SWEP.RecoilKick = 4.5
+SWEP.RecoilKick = 4
 
 SWEP.RecoilSpreadPenalty = 0.0015
 
@@ -66,11 +66,11 @@ SWEP.CanBlindFire = true
 
 // handling
 
-SWEP.MoveSpeedMult = 0.9
-SWEP.ShootingSpeedMult = 0.75 // slow down applied while shooting
-SWEP.SightedSpeedMult = 0.5
+SWEP.MoveSpeedMult = 0.85
+SWEP.ShootingSpeedMult = 0.3
+SWEP.SightedSpeedMult = 0.25
 SWEP.MeleeSpeedMult = 0.5
-SWEP.MeleeSpeedMultTime = 2 // seconds to apply slow down for
+SWEP.MeleeSpeedMultTime = 2
 
 SWEP.AimDownSightsTime = 0.35
 SWEP.SprintToFireTime = 0.35 // multiplies how long it takes to recover from sprinting

@@ -40,11 +40,11 @@ SWEP.BodyDamageMultipliers = {
 
 SWEP.Firemode = 1
 
-SWEP.RPM = 55
+SWEP.RPM = 40
 
 SWEP.Spread = 0.08
 
-SWEP.ShootSpeedMult = 1.75
+SWEP.ShootSpeedMult = 1.25
 
 SWEP.HipFireSpreadPenalty = 0
 SWEP.MidAirSpreadPenalty = 0
@@ -115,7 +115,7 @@ SWEP.ClipSize = 4
 SWEP.Ammo = "buckshot"
 SWEP.ShotgunReload = true
 
-SWEP.ReloadTimeMult = 1.15
+SWEP.ReloadTimeMult = 1.25
 
 // sounds
 

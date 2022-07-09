@@ -17,30 +17,30 @@ SWEP.Slot = 3
 
 // "ballistics"
 
-SWEP.Damage_Max = 22
+SWEP.Damage_Max = 18
 SWEP.Damage_Min = 14
 SWEP.Range_Min = 3000 // distance for which to maintain maximum damage
 SWEP.Range_Max = 5000 // distance at which we drop to minimum damage
 SWEP.Penetration = 7 // units of metal this weapon can penetrate
 
 SWEP.BodyDamageMultipliers = {
-    [HITGROUP_HEAD] = 1.75,
-    [HITGROUP_CHEST] = 1.2,
+    [HITGROUP_HEAD] = 2,
+    [HITGROUP_CHEST] = 1.25,
     [HITGROUP_STOMACH] = 1,
     [HITGROUP_LEFTARM] = 1,
     [HITGROUP_RIGHTARM] = 1,
-    [HITGROUP_LEFTLEG] = 0.9,
-    [HITGROUP_RIGHTLEG] = 0.9,
+    [HITGROUP_LEFTLEG] = 0.85,
+    [HITGROUP_RIGHTLEG] = 0.85,
     [HITGROUP_GEAR] = 0.9
 }
 
 // misc. shooting
 
-SWEP.Firemode = -3
+SWEP.Firemodes = {-3, 1}
 SWEP.RunawayBurst = true
-SWEP.PostBurstDelay = 0.15
+SWEP.PostBurstDelay = 0.25
 
-SWEP.RPM = 700
+SWEP.RPM = 800
 
 SWEP.Spread = 0.0025
 
@@ -62,8 +62,8 @@ SWEP.CanBlindFire = true
 // handling
 
 SWEP.MoveSpeedMult = 0.85
-SWEP.ShootingSpeedMult = 0.4
-SWEP.SightedSpeedMult = 0.3
+SWEP.ShootingSpeedMult = 0.3
+SWEP.SightedSpeedMult = 0.25
 SWEP.MeleeSpeedMult = 0.5
 SWEP.MeleeSpeedMultTime = 2
 
@@ -175,13 +175,13 @@ SWEP.AttachmentElements = {
 SWEP.Attachments = {
     [1] = {
         PrintName = "Optic",
-        Category = {"optic_cqb", "optic_medium"},
+        Category = {"optic_cqb", "optic_medium", "optic_sniper"},
         Bone = "ValveBiped._ROOT_K1a",
         WMBone = "Box01",
         AttachSound = "tacrp/weapons/optic_on.wav",
         DetachSound = "tacrp/weapons/optic_off.wav",
         VMScale = 0.75,
-        Pos_VM = Vector(-5.15, 0.22, 5),
+        Pos_VM = Vector(-5.15, 0.22, 6),
         Pos_WM = Vector(0, 5, 1.4),
         Ang_VM = Angle(90, 0, 0),
         Ang_WM = Angle(0, -90, 0),

@@ -23,7 +23,7 @@ SWEP.Range_Min = 1600 // distance for which to maintain maximum damage
 SWEP.Range_Max = 5000 // distance at which we drop to minimum damage
 SWEP.Penetration = 1 // units of metal this weapon can penetrate
 
-SWEP.TracerNum = 1
+SWEP.MuzzleVelocity = 9500
 
 SWEP.BodyDamageMultipliers = {
     [HITGROUP_HEAD] = 2,

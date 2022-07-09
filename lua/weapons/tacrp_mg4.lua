@@ -7,7 +7,7 @@ AddCSLuaFile()
 SWEP.PrintName = "HK MG4"
 SWEP.Category = "Tactical RP (Arctic)"
 
-SWEP.Description = "Light machine gun that offers huge volume of fire. Despite its name, it is a very heavy weapon."
+SWEP.Description = "Elite light machine gun that offers huge volume of fire. Despite its name, it is a very heavy weapon."
 
 SWEP.ViewModel = "models/weapons/tacint/v_mg4.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_mg4.mdl"
@@ -16,13 +16,13 @@ SWEP.Slot = 3
 
 // "ballistics"
 
-SWEP.Damage_Max = 100 / 4 // damage at minimum range
-SWEP.Damage_Min = 100 / 5 // damage at maximum range
+SWEP.Damage_Max = 25
+SWEP.Damage_Min = 20
 SWEP.Range_Min = 2000 // distance for which to maintain maximum damage
 SWEP.Range_Max = 5000 // distance at which we drop to minimum damage
 SWEP.Penetration = 14 // units of metal this weapon can penetrate
 
-SWEP.MuzzleVelocity = 13500
+SWEP.MuzzleVelocity = 28500
 
 // misc. shooting
 
@@ -33,29 +33,29 @@ SWEP.Firemodes = {
 
 SWEP.RPM = 750
 
-SWEP.Spread = 0.015
+SWEP.Spread = 0.01
 
 SWEP.ShootSpeedMult = 0.5
 
 SWEP.RecoilPerShot = 1
 SWEP.RecoilMaximum = 50
-SWEP.RecoilResetTime = 0.1 // time after you stop shooting for recoil to start dissipating
-SWEP.RecoilDissipationRate = 40
+SWEP.RecoilResetTime = 0.25
+SWEP.RecoilDissipationRate = 50
 SWEP.RecoilFirstShotMult = 1 // multiplier for the first shot's recoil amount
 
 SWEP.RecoilVisualKick = 0.75
 
 SWEP.RecoilKick = 2
 
-SWEP.RecoilSpreadPenalty = 0.001 // extra spread per one unit of recoil
+SWEP.RecoilSpreadPenalty = 0.0005 // extra spread per one unit of recoil
 
 SWEP.CanBlindFire = true
 
 // handling
 
-SWEP.MoveSpeedMult = 0.85
-SWEP.ShootingSpeedMult = 0.5 // slow down applied while shooting
-SWEP.SightedSpeedMult = 0.5
+SWEP.MoveSpeedMult = 0.8
+SWEP.ShootingSpeedMult = 0.25
+SWEP.SightedSpeedMult = 0.25
 SWEP.MeleeSpeedMult = 0.5
 SWEP.MeleeSpeedMultTime = 2 // seconds to apply slow down for
 

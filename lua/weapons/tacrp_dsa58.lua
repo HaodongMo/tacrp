@@ -7,7 +7,7 @@ AddCSLuaFile()
 SWEP.PrintName = "DSA-58"
 SWEP.Category = "Tactical RP (Arctic)"
 
-SWEP.Description = "High damage battle rifle with slow fire rate."
+SWEP.Description = "Premium battle rifle with slow fire rate but very high damage."
 
 SWEP.ViewModel = "models/weapons/tacint/v_dsa58.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_dsa58.mdl"
@@ -16,11 +16,22 @@ SWEP.Slot = 3
 
 // "ballistics"
 
-SWEP.Damage_Max = 50 // damage at minimum range
-SWEP.Damage_Min = 100 / 4 // damage at maximum range
-SWEP.Range_Min = 600 // distance for which to maintain maximum damage
-SWEP.Range_Max = 6500 // distance at which we drop to minimum damage
-SWEP.Penetration = 20 // units of metal this weapon can penetrate
+SWEP.Damage_Max = 35
+SWEP.Damage_Min = 24
+SWEP.Range_Min = 600
+SWEP.Range_Max = 6000
+SWEP.Penetration = 20
+
+SWEP.BodyDamageMultipliers = {
+    [HITGROUP_HEAD] = 2.5,
+    [HITGROUP_CHEST] = 1.3,
+    [HITGROUP_STOMACH] = 1,
+    [HITGROUP_LEFTARM] = 1,
+    [HITGROUP_RIGHTARM] = 1,
+    [HITGROUP_LEFTLEG] = 0.9,
+    [HITGROUP_RIGHTLEG] = 0.9,
+    [HITGROUP_GEAR] = 0.9
+}
 
 SWEP.MuzzleVelocity = 28000
 
@@ -39,28 +50,28 @@ SWEP.Spread = 0.001
 
 SWEP.RecoilPerShot = 1
 SWEP.RecoilMaximum = 10
-SWEP.RecoilResetTime = 0.15 // time after you stop shooting for recoil to start dissipating
-SWEP.RecoilDissipationRate = 100
-SWEP.RecoilFirstShotMult = 1 // multiplier for the first shot's recoil amount
+SWEP.RecoilResetTime = 0.175
+SWEP.RecoilDissipationRate = 10
+SWEP.RecoilFirstShotMult = 0.8
 
 SWEP.RecoilVisualKick = 3
 
-SWEP.RecoilKick = 5
+SWEP.RecoilKick = 8
 
-SWEP.RecoilSpreadPenalty = 0.0002 // extra spread per one unit of recoil
+SWEP.RecoilSpreadPenalty = 0.005
 
 SWEP.CanBlindFire = true
 
 // handling
 
-SWEP.MoveSpeedMult = 0.9
-SWEP.ShootingSpeedMult = 0.75 // slow down applied while shooting
-SWEP.SightedSpeedMult = 0.5
+SWEP.MoveSpeedMult = 0.85
+SWEP.ShootingSpeedMult = 0.2
+SWEP.SightedSpeedMult = 0.25
 SWEP.MeleeSpeedMult = 0.5
-SWEP.MeleeSpeedMultTime = 2 // seconds to apply slow down for
+SWEP.MeleeSpeedMultTime = 2
 
-SWEP.AimDownSightsTime = 0.37
-SWEP.SprintToFireTime = 0.37 // multiplies how long it takes to recover from sprinting
+SWEP.AimDownSightsTime = 0.4
+SWEP.SprintToFireTime = 0.4
 
 // hold types
 
@@ -209,7 +220,7 @@ SWEP.Attachments = {
     },
     [6] = {
         PrintName = "Trigger",
-        Category = {"trigger_auto"},
+        Category = {"trigger_semi"},
         AttachSound = "TacRP/weapons/flashlight_on.wav",
         DetachSound = "TacRP/weapons/flashlight_off.wav",
     },

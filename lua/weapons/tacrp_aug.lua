@@ -8,7 +8,7 @@ SWEP.PrintName = "Steyr AUG"
 SWEP.Category = "Tactical RP (Arctic)"
 
 // Tier 2
-SWEP.Description = "Economic burst fire bullpup assault rifle. Has the potential to kill in one burst."
+SWEP.Description = "Economic burst fire bullpup assault rifle with a generous magazine capacity and low burst delay."
 
 SWEP.ViewModel = "models/weapons/tacint/v_aug.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_aug.mdl"
@@ -17,15 +17,15 @@ SWEP.Slot = 3
 
 // "ballistics"
 
-SWEP.Damage_Max = 28
+SWEP.Damage_Max = 22
 SWEP.Damage_Min = 14
 SWEP.Range_Min = 3500
 SWEP.Range_Max = 7000
 SWEP.Penetration = 7
 
 SWEP.BodyDamageMultipliers = {
-    [HITGROUP_HEAD] = 2.5,
-    [HITGROUP_CHEST] = 1.25,
+    [HITGROUP_HEAD] = 2,
+    [HITGROUP_CHEST] = 1.2,
     [HITGROUP_STOMACH] = 1,
     [HITGROUP_LEFTARM] = 1,
     [HITGROUP_RIGHTARM] = 1,
@@ -70,8 +70,8 @@ SWEP.CanBlindFire = true
 // handling
 
 SWEP.MoveSpeedMult = 0.85
-SWEP.ShootingSpeedMult = 0.4
-SWEP.SightedSpeedMult = 0.3
+SWEP.ShootingSpeedMult = 0.3
+SWEP.SightedSpeedMult = 0.25 + 0.1
 SWEP.MeleeSpeedMult = 0.5
 SWEP.MeleeSpeedMultTime = 2
 
@@ -109,7 +109,7 @@ SWEP.HolsterAng = Angle(0, 0, 0)
 
 // reload
 
-SWEP.ClipSize = 30
+SWEP.ClipSize = 36
 SWEP.Ammo = "smg1"
 
 SWEP.ReloadTimeMult = 1

@@ -7,7 +7,7 @@ AddCSLuaFile()
 SWEP.PrintName = "FB Beryl 96"
 SWEP.Category = "Tactical RP (Arctic)"
 
-SWEP.Description = "Common intermediate assault rifle with poor sustained fire capabilities. Despite its looks, it is not an AK."
+SWEP.Description = "Cheap automatic assault rifle with poor sustained fire capabilities. Despite its looks, it is not an AK."
 
 SWEP.ViewModel = "models/weapons/tacint/v_ak47.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_ak47.mdl"
@@ -16,22 +16,24 @@ SWEP.Slot = 3
 
 // "ballistics"
 
-SWEP.Damage_Max = 22
-SWEP.Damage_Min = 15
+SWEP.Damage_Max = 18
+SWEP.Damage_Min = 12
 SWEP.Range_Min = 2500 // distance for which to maintain maximum damage
 SWEP.Range_Max = 6000 // distance at which we drop to minimum damage
 SWEP.Penetration = 8 // units of metal this weapon can penetrate
 
 SWEP.BodyDamageMultipliers = {
-    [HITGROUP_HEAD] = 1.75,
-    [HITGROUP_CHEST] = 1.2,
+    [HITGROUP_HEAD] = 2,
+    [HITGROUP_CHEST] = 1.25,
     [HITGROUP_STOMACH] = 1,
     [HITGROUP_LEFTARM] = 1,
     [HITGROUP_RIGHTARM] = 1,
-    [HITGROUP_LEFTLEG] = 0.9,
-    [HITGROUP_RIGHTLEG] = 0.9,
+    [HITGROUP_LEFTLEG] = 0.85,
+    [HITGROUP_RIGHTLEG] = 0.85,
     [HITGROUP_GEAR] = 0.9
 }
+
+SWEP.MuzzleVelocity = 25000
 
 // misc. shooting
 
@@ -63,8 +65,8 @@ SWEP.CanBlindFire = true
 // handling
 
 SWEP.MoveSpeedMult = 0.85
-SWEP.ShootingSpeedMult = 0.4
-SWEP.SightedSpeedMult = 0.3
+SWEP.ShootingSpeedMult = 0.3
+SWEP.SightedSpeedMult = 0.25
 SWEP.MeleeSpeedMult = 0.5
 SWEP.MeleeSpeedMultTime = 2
 
