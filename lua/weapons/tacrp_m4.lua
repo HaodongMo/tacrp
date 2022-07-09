@@ -7,7 +7,7 @@ AddCSLuaFile()
 SWEP.PrintName = "Diemaco M4A1"
 SWEP.Category = "Tactical RP (Arctic)"
 
-SWEP.Description = "Well balanced American assault rifle. This model is a Canadian variant."
+SWEP.Description = "Premium American assault rifle. This model is a Canadian variant."
 
 SWEP.ViewModel = "models/weapons/tacint/v_m4.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_m4.mdl"
@@ -16,11 +16,22 @@ SWEP.Slot = 3
 
 // "ballistics"
 
-SWEP.Damage_Max = 100 / 4 // damage at minimum range
-SWEP.Damage_Min = 100 / 6 // damage at maximum range
+SWEP.Damage_Max = 26
+SWEP.Damage_Min = 18
 SWEP.Range_Min = 2000 // distance for which to maintain maximum damage
-SWEP.Range_Max = 5500 // distance at which we drop to minimum damage
+SWEP.Range_Max = 6000
 SWEP.Penetration = 9 // units of metal this weapon can penetrate
+
+SWEP.BodyDamageMultipliers = {
+    [HITGROUP_HEAD] = 2.5,
+    [HITGROUP_CHEST] = 1.2,
+    [HITGROUP_STOMACH] = 1,
+    [HITGROUP_LEFTARM] = 1,
+    [HITGROUP_RIGHTARM] = 1,
+    [HITGROUP_LEFTLEG] = 0.9,
+    [HITGROUP_RIGHTLEG] = 0.9,
+    [HITGROUP_GEAR] = 0.9
+}
 
 SWEP.MuzzleVelocity = 25000
 
@@ -41,15 +52,15 @@ SWEP.ShootSpeedMult = 0.5
 
 SWEP.RecoilPerShot = 1
 SWEP.RecoilMaximum = 10
-SWEP.RecoilResetTime = 0.1// time after you stop shooting for recoil to start dissipating
-SWEP.RecoilDissipationRate = 10
+SWEP.RecoilResetTime = 0.15 // time after you stop shooting for recoil to start dissipating
+SWEP.RecoilDissipationRate = 15
 SWEP.RecoilFirstShotMult = 1 // multiplier for the first shot's recoil amount
 
 SWEP.RecoilVisualKick = 0.75
 
-SWEP.RecoilKick = 5
+SWEP.RecoilKick = 4.5
 
-SWEP.RecoilSpreadPenalty = 0.000125 // extra spread per one unit of recoil
+SWEP.RecoilSpreadPenalty = 0.0015
 
 SWEP.CanBlindFire = true
 

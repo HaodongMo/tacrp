@@ -8,6 +8,6 @@ ATT.Category = {"trigger_semi", "trigger_auto", "trigger_burst", "trigger_akimbo
 
 ATT.SortOrder = 3
 
-ATT.Add_RecoilFirstShotMult = 1
-ATT.Mult_RecoilSpreadPenalty = 0.5
+ATT.Add_RecoilFirstShotMult = 3
+ATT.Mult_RecoilSpreadPenalty = 0.75
 ATT.Mult_RecoilKick = 0.9

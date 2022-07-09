@@ -7,7 +7,8 @@ AddCSLuaFile()
 SWEP.PrintName = "AMD65"
 SWEP.Category = "Tactical RP (Arctic)"
 
-SWEP.Description = "Hungarian 7.62mm assault rifle with good damage but poor handling and recoil."
+// Tier 2
+SWEP.Description = "Economic assault rifle with punishing recoil but high damage."
 
 SWEP.ViewModel = "models/weapons/tacint/v_amd65.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_amd65.mdl"
@@ -16,11 +17,22 @@ SWEP.Slot = 3
 
 // "ballistics"
 
-SWEP.Damage_Max = 100 / 3 // damage at minimum range
-SWEP.Damage_Min = 100 / 5 // damage at maximum range
+SWEP.Damage_Max = 32
+SWEP.Damage_Min = 20
 SWEP.Range_Min = 1750 // distance for which to maintain maximum damage
 SWEP.Range_Max = 6000 // distance at which we drop to minimum damage
 SWEP.Penetration = 11 // units of metal this weapon can penetrate
+
+SWEP.BodyDamageMultipliers = {
+    [HITGROUP_HEAD] = 2.5,
+    [HITGROUP_CHEST] = 1.2,
+    [HITGROUP_STOMACH] = 1,
+    [HITGROUP_LEFTARM] = 1,
+    [HITGROUP_RIGHTARM] = 1,
+    [HITGROUP_LEFTLEG] = 0.9,
+    [HITGROUP_RIGHTLEG] = 0.9,
+    [HITGROUP_GEAR] = 0.9
+}
 
 // misc. shooting
 
@@ -43,27 +55,27 @@ SWEP.MuzzleVelocity = 25000
 SWEP.RecoilPerShot = 1
 SWEP.RecoilMaximum = 15
 SWEP.RecoilResetTime = 0.15 // time after you stop shooting for recoil to start dissipating
-SWEP.RecoilDissipationRate = 10
+SWEP.RecoilDissipationRate = 30
 SWEP.RecoilFirstShotMult = 1 // multiplier for the first shot's recoil amount
 
 SWEP.RecoilVisualKick = 2
 
 SWEP.RecoilKick = 8
 
-SWEP.RecoilSpreadPenalty = 0.000175 // extra spread per one unit of recoil
+SWEP.RecoilSpreadPenalty = 0.001
 
 SWEP.CanBlindFire = true
 
 // handling
 
-SWEP.MoveSpeedMult = 0.9
-SWEP.ShootingSpeedMult = 0.75 // slow down applied while shooting
-SWEP.SightedSpeedMult = 0.5
+SWEP.MoveSpeedMult = 0.85
+SWEP.ShootingSpeedMult = 0.3
+SWEP.SightedSpeedMult = 0.3
 SWEP.MeleeSpeedMult = 0.5
-SWEP.MeleeSpeedMultTime = 2 // seconds to apply slow down for
+SWEP.MeleeSpeedMultTime = 2
 
-SWEP.AimDownSightsTime = 0.33
-SWEP.SprintToFireTime = 0.33 // multiplies how long it takes to recover from sprinting
+SWEP.AimDownSightsTime = 0.375
+SWEP.SprintToFireTime = 0.4
 
 // hold types
 

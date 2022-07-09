@@ -37,7 +37,7 @@ function SWEP:Melee()
 
     local tr = util.TraceLine({
         start = self:GetOwner():GetShootPos(),
-        endpos = self:GetOwner():GetShootPos() + self:GetOwner():GetAimVector() * 64,
+        endpos = self:GetOwner():GetShootPos() + self:GetOwner():GetAimVector() * self:GetValue("MeleeRange"),
         filter = filter,
     })
 
@@ -49,17 +49,17 @@ function SWEP:Melee()
     dmg:SetAttacker(self:GetOwner())
     dmg:SetInflictor(self)
 
-    -- no damage, but makes effects and breaks glass
-    self:GetOwner():FireBullets({
-        Damage = 0,
+    -- makes effects and breaks glass
+    self:FireBullets({
+        Damage = 0, -- no damage means no blood spill. thanks gaben
         Force = self:GetValue("MeleeDamage") / 3,
         Tracer = 0,
-        Distance = 64,
+        Distance = self:GetValue("MeleeRange"),
         HullSize = 0,
         Dir = tr.Normal,
         Src = tr.StartPos,
         Spread = Vector(0, 0, 0),
-        IgnoreEntity = self.Shields,
+        IgnoreEntity = self.Shields
     })
 
     if tr.Hit then
@@ -73,7 +73,6 @@ function SWEP:Melee()
             self:EmitSound(table.Random(self:GetValue("Sound_MeleeHit")), 75, 100, 1, CHAN_ITEM)
         end
 
-        --[[]
         if IsFirstTimePredicted() then
             if tr.MatType == MAT_FLESH or tr.MatType == MAT_ALIENFLESH or tr.MatType == MAT_ANTLION or tr.MatType == MAT_BLOODYFLESH then
                 local fx = EffectData()
@@ -81,7 +80,7 @@ function SWEP:Melee()
 
                 util.Effect("BloodImpact", fx)
             end
-
+            --[[]
             local fx = EffectData()
             fx:SetOrigin(tr.HitPos)
             fx:SetEntity(tr.Entity)
@@ -91,9 +90,8 @@ function SWEP:Melee()
             fx:SetHitBox(tr.HitBox)
 
             util.Effect("Impact", fx)
-
+            ]]
         end
-        ]]
     end
 
     -- self:GetOwner():FireBullets({

@@ -7,6 +7,7 @@ AddCSLuaFile()
 SWEP.PrintName = "Ruger Mini-14"
 SWEP.Category = "Tactical RP (Arctic)"
 
+// Tier 1
 SWEP.Description = "Cheap semi-automatic rifle with no stock and no optic mount."
 
 SWEP.ViewModel = "models/weapons/tacint/v_m1.mdl"
@@ -16,11 +17,22 @@ SWEP.Slot = 3
 
 // "ballistics"
 
-SWEP.Damage_Max = 100 / 4 // damage at minimum range
-SWEP.Damage_Min = 100 / 6 // damage at maximum range
+SWEP.Damage_Max = 25
+SWEP.Damage_Min = 17
 SWEP.Range_Min = 2000 // distance for which to maintain maximum damage
 SWEP.Range_Max = 6000 // distance at which we drop to minimum damage
 SWEP.Penetration = 7 // units of metal this weapon can penetrate
+
+SWEP.BodyDamageMultipliers = {
+    [HITGROUP_HEAD] = 1.5,
+    [HITGROUP_CHEST] = 1,
+    [HITGROUP_STOMACH] = 1,
+    [HITGROUP_LEFTARM] = 1,
+    [HITGROUP_RIGHTARM] = 1,
+    [HITGROUP_LEFTLEG] = 0.9,
+    [HITGROUP_RIGHTLEG] = 0.9,
+    [HITGROUP_GEAR] = 0.9
+}
 
 // misc. shooting
 
@@ -47,13 +59,14 @@ SWEP.CanBlindFire = true
 
 // handling
 
-SWEP.MoveSpeedMult = 0.96
-SWEP.ShootingSpeedMult = 1 // slow down applied while shooting
-SWEP.SightedSpeedMult = 0.5
+SWEP.MoveSpeedMult = 0.85
+SWEP.ShootingSpeedMult = 0.5
+SWEP.SightedSpeedMult = 0.3
 SWEP.MeleeSpeedMult = 0.5
-SWEP.MeleeSpeedMultTime = 2 // seconds to apply slow down for
+SWEP.MeleeSpeedMultTime = 2
 
-SWEP.SprintToFireTime = 0.35 // multiplies how long it takes to recover from sprinting
+SWEP.AimDownSightsTime = 0.3
+SWEP.SprintToFireTime = 0.35
 
 // hold types
 

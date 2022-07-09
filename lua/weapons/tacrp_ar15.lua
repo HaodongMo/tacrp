@@ -7,19 +7,30 @@ AddCSLuaFile()
 SWEP.PrintName = "Colt Canada AR-15"
 SWEP.Category = "Tactical RP (Arctic)"
 
-SWEP.Description = "Semi-automatic variation of a very popular American assault rifle."
+// Tier 2
+SWEP.Description = "Economic semi-automatic variation of a very popular American assault rifle."
 
 SWEP.ViewModel = "models/weapons/tacint/v_m4.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_m4.mdl"
 
 SWEP.Slot = 3
 
+SWEP.BodyDamageMultipliers = {
+    [HITGROUP_HEAD] = 2.5,
+    [HITGROUP_CHEST] = 1.2,
+    [HITGROUP_STOMACH] = 1,
+    [HITGROUP_LEFTARM] = 1,
+    [HITGROUP_RIGHTARM] = 1,
+    [HITGROUP_LEFTLEG] = 0.9,
+    [HITGROUP_RIGHTLEG] = 0.9,
+    [HITGROUP_GEAR] = 0.9
+}
+
 SWEP.RPM = 600
 
 SWEP.Firemode = 1
 
 SWEP.Firemodes = false
-
 
 SWEP.Attachments = {
     [1] = {

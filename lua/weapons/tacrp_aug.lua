@@ -7,7 +7,8 @@ AddCSLuaFile()
 SWEP.PrintName = "Steyr AUG"
 SWEP.Category = "Tactical RP (Arctic)"
 
-SWEP.Description = "Three-round burst bullpup assault rifle with good recoil."
+// Tier 2
+SWEP.Description = "Economic burst fire bullpup assault rifle. Has the potential to kill in one burst."
 
 SWEP.ViewModel = "models/weapons/tacint/v_aug.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_aug.mdl"
@@ -16,11 +17,22 @@ SWEP.Slot = 3
 
 // "ballistics"
 
-SWEP.Damage_Max = 100 / 3 // damage at minimum range
-SWEP.Damage_Min = 100 / 6 // damage at maximum range
-SWEP.Range_Min = 1200 // distance for which to maintain maximum damage
-SWEP.Range_Max = 6500 // distance at which we drop to minimum damage
-SWEP.Penetration = 2.5 // units of metal this weapon can penetrate
+SWEP.Damage_Max = 28
+SWEP.Damage_Min = 14
+SWEP.Range_Min = 3500
+SWEP.Range_Max = 7000
+SWEP.Penetration = 7
+
+SWEP.BodyDamageMultipliers = {
+    [HITGROUP_HEAD] = 2.5,
+    [HITGROUP_CHEST] = 1.25,
+    [HITGROUP_STOMACH] = 1,
+    [HITGROUP_LEFTARM] = 1,
+    [HITGROUP_RIGHTARM] = 1,
+    [HITGROUP_LEFTLEG] = 0.9,
+    [HITGROUP_RIGHTLEG] = 0.9,
+    [HITGROUP_GEAR] = 0.9
+}
 
 SWEP.MuzzleVelocity = 24000
 
@@ -33,7 +45,7 @@ SWEP.Firemodes = {
 
 SWEP.RPM = 750
 
-SWEP.Spread = 0.00025
+SWEP.Spread = 0.0005
 
 SWEP.PostBurstDelay = 0.1
 
@@ -42,29 +54,29 @@ SWEP.RunawayBurst = true
 
 
 SWEP.RecoilPerShot = 1
-SWEP.RecoilMaximum = 10
-SWEP.RecoilResetTime = 0.1 // time after you stop shooting for recoil to start dissipating
-SWEP.RecoilDissipationRate = 100
+SWEP.RecoilMaximum = 15
+SWEP.RecoilResetTime = 0.175
+SWEP.RecoilDissipationRate = 21
 SWEP.RecoilFirstShotMult = 1 // multiplier for the first shot's recoil amount
 
 SWEP.RecoilVisualKick = 0.75
 
-SWEP.RecoilKick = 4
+SWEP.RecoilKick = 3
 
-SWEP.RecoilSpreadPenalty = 0.000175 // extra spread per one unit of recoil
+SWEP.RecoilSpreadPenalty = 0.0015
 
 SWEP.CanBlindFire = true
 
 // handling
 
-SWEP.MoveSpeedMult = 0.9
-SWEP.ShootingSpeedMult = 0.75 // slow down applied while shooting
-SWEP.SightedSpeedMult = 0.5
+SWEP.MoveSpeedMult = 0.85
+SWEP.ShootingSpeedMult = 0.4
+SWEP.SightedSpeedMult = 0.3
 SWEP.MeleeSpeedMult = 0.5
-SWEP.MeleeSpeedMultTime = 2 // seconds to apply slow down for
+SWEP.MeleeSpeedMultTime = 2
 
-SWEP.AimDownSightsTime = 0.4
-SWEP.SprintToFireTime = 0.4 // multiplies how long it takes to recover from sprinting
+SWEP.AimDownSightsTime = 0.325
+SWEP.SprintToFireTime = 0.3
 
 // hold types
 
