@@ -71,6 +71,10 @@ function EFFECT:Render()
     render.SetMaterial(head)
     render.DrawSprite(endpos, headsize, headsize, col)
 
+    local tailpos = startpos
+    if (endpos - startpos):Length() > 512 then
+        tailpos = endpos - self.Dir * 512
+    end
     render.SetMaterial(tracer)
-    render.DrawBeam(endpos, startpos, size * 0.75, 0, 1, col)
+    render.DrawBeam(endpos, tailpos, size * 0.75, 0, 1, col)
 end

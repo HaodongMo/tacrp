@@ -169,13 +169,11 @@ function SWEP:PrimaryAttack()
         if IsFirstTimePredicted() then
 
             local hitscan = !GetConVar("tacrp_physbullet"):GetBool()
-            local dir2 = dir + (spread * AngleRand() / 3.6)
 
             -- If the bullet is going to hit something very close in front, use hitscan bullets instead
-            -- Because of random bullet spread, sometimes the client and server won't agree on whether hitscan should be used.
-            -- Not much to be done about that, unfortunately.
-            if self:GetValue("Num") == 1 and !hitscan then
-                local threshold = dir2:Forward() * self:GetValue("MuzzleVelocity") * engine.TickInterval() * 2
+            -- This uses the aim direction without random spread, which may result in hitscan bullets in distances where it shouldn't be.
+            if !hitscan then
+                local threshold = dir:Forward() * math.max(self:GetValue("MuzzleVelocity"), 12000) * engine.TickInterval() * 2
                 local inst_tr = util.TraceLine({
                     start = self:GetMuzzleOrigin(),
                     endpos = self:GetMuzzleOrigin() + threshold,
@@ -207,9 +205,9 @@ function SWEP:PrimaryAttack()
                     Tracer = tr,
                     TracerName = "tacrp_tracer",
                     Num = self:GetValue("Num"),
-                    Dir = dir2:Forward(), --dir:Forward(),
+                    Dir = dir:Forward(),
                     Src = self:GetMuzzleOrigin(),
-                    Spread = Vector(0, 0, 0), --Vector(spread, spread, spread),
+                    Spread = Vector(spread, spread, spread),
                     IgnoreEntity = self:GetOwner():GetVehicle(),
                     Callback = function(att, btr, dmg)
                         local range = (btr.HitPos - btr.StartPos):Length()
