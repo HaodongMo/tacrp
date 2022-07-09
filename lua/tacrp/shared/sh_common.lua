@@ -24,6 +24,18 @@ TacRP.PenTable = {
     [MAT_WARPSHIELD]  = 1
 }
 
+// Why the fuck is this a thing???
+TacRP.CancelMultipliers = {
+    [HITGROUP_HEAD] = 2,
+    [HITGROUP_CHEST] = 1,
+    [HITGROUP_STOMACH] = 1,
+    [HITGROUP_LEFTARM] = 0.25,
+    [HITGROUP_RIGHTARM] = 0.25,
+    [HITGROUP_LEFTLEG] = 0.25,
+    [HITGROUP_RIGHTLEG] = 0.25,
+    [HITGROUP_GEAR] = 0.25
+}
+
 TacRP.PresetPath = "TacRP_presets/"
 
 TacRP.OverDraw = false

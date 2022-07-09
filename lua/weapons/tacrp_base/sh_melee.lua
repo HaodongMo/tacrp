@@ -35,36 +35,52 @@ function SWEP:Melee()
 
     table.Add(filter, self.Shields)
 
+    local start = self:GetOwner():GetShootPos()
+    local dir = self:GetOwner():GetAimVector()
     local tr = util.TraceLine({
-        start = self:GetOwner():GetShootPos(),
-        endpos = self:GetOwner():GetShootPos() + self:GetOwner():GetAimVector() * self:GetValue("MeleeRange"),
+        start = start,
+        endpos = start + dir * self:GetValue("MeleeRange"),
         filter = filter,
+        mask = MASK_SHOT_HULL,
     })
 
-    local dmg = DamageInfo()
+    -- weapon_hl2mpbasebasebludgeon.cpp: do a hull trace if not hit
+    if tr.Fraction == 1 then
+        local dim = 16
+        local pos2 = tr.HitPos - dir * (dim * 1.732)
+        tr = util.TraceHull({
+            start = start,
+            endpos = pos2,
+            filter = filter,
+            mask = MASK_SHOT_HULL,
+            mins = Vector(-dim, -dim, -dim),
+            maxs = Vector(dim, dim, dim)
+        })
+        if tr.Fraction < 1 and IsValid(tr.Entity) then
+            local dot = (tr.Entity:GetPos() - start):GetNormalized():Dot(dir)
+            if dot < 0.70721 then
+                tr.Fraction = 1
+            end
+        end
+    end
 
+    local dmg = DamageInfo()
     dmg:SetDamage(self:GetValue("MeleeDamage"))
-    dmg:SetDamageForce(self:GetOwner():GetAimVector())
+    dmg:SetDamageForce(dir * self:GetValue("MeleeDamage"))
+    dmg:SetDamagePosition(tr.HitPos)
     dmg:SetDamageType(DMG_CLUB)
     dmg:SetAttacker(self:GetOwner())
     dmg:SetInflictor(self)
 
-    -- makes effects and breaks glass
-    self:FireBullets({
-        Damage = 0, -- no damage means no blood spill. thanks gaben
-        Force = self:GetValue("MeleeDamage") / 3,
-        Tracer = 0,
-        Distance = self:GetValue("MeleeRange"),
-        HullSize = 0,
-        Dir = tr.Normal,
-        Src = tr.StartPos,
-        Spread = Vector(0, 0, 0),
-        IgnoreEntity = self.Shields
-    })
+    if tr.Fraction < 1 then
 
-    if tr.Hit then
+        if IsValid(tr.Entity) and !tr.Entity:IsNextBot() and GetConVar("TacRP_bodydamagecancel"):GetBool() and TacRP.CancelMultipliers[tr.HitGroup] then
+            dmg:ScaleDamage(1 / TacRP.CancelMultipliers[tr.HitGroup])
+        end
+
         if IsValid(tr.Entity) and !tr.HitWorld and SERVER then
-            tr.Entity:TakeDamageInfo(dmg)
+            --tr.Entity:TakeDamageInfo(dmg)
+            tr.Entity:DispatchTraceAttack(dmg, tr)
         end
 
         if tr.Entity:IsNPC() or tr.Entity:IsPlayer() or tr.Entity:IsNextBot() then
@@ -73,6 +89,7 @@ function SWEP:Melee()
             self:EmitSound(table.Random(self:GetValue("Sound_MeleeHit")), 75, 100, 1, CHAN_ITEM)
         end
 
+        --[[]
         if IsFirstTimePredicted() then
             if tr.MatType == MAT_FLESH or tr.MatType == MAT_ALIENFLESH or tr.MatType == MAT_ANTLION or tr.MatType == MAT_BLOODYFLESH then
                 local fx = EffectData()
@@ -80,7 +97,7 @@ function SWEP:Melee()
 
                 util.Effect("BloodImpact", fx)
             end
-            --[[]
+
             local fx = EffectData()
             fx:SetOrigin(tr.HitPos)
             fx:SetEntity(tr.Entity)
@@ -90,8 +107,8 @@ function SWEP:Melee()
             fx:SetHitBox(tr.HitBox)
 
             util.Effect("Impact", fx)
-            ]]
         end
+        ]]
     end
 
     -- self:GetOwner():FireBullets({

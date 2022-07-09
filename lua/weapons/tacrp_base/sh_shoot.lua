@@ -1,14 +1,3 @@
-local cancelmults = {
-    [HITGROUP_HEAD] = 2,
-    [HITGROUP_CHEST] = 1,
-    [HITGROUP_STOMACH] = 1,
-    [HITGROUP_LEFTARM] = 0.25,
-    [HITGROUP_RIGHTARM] = 0.25,
-    [HITGROUP_LEFTLEG] = 0.25,
-    [HITGROUP_RIGHTLEG] = 0.25,
-    [HITGROUP_GEAR] = 0.25
-}
-
 function SWEP:StillWaiting()
     if self:GetNextPrimaryFire() > CurTime() then return true end
     if self:GetNextSecondaryFire() > CurTime() then return true end
@@ -241,8 +230,8 @@ function SWEP:AfterShotFunction(tr, dmg, range, penleft, alreadypenned, forced)
         dmgbodymult = dmgbodymult * bodydamage[tr.HitGroup]
     end
 
-    if IsValid(tr.Entity) and !tr.Entity:IsNextBot() and GetConVar("TacRP_bodydamagecancel"):GetBool() and cancelmults[tr.HitGroup] then
-        dmgbodymult = dmgbodymult / cancelmults[tr.HitGroup]
+    if IsValid(tr.Entity) and !tr.Entity:IsNextBot() and GetConVar("TacRP_bodydamagecancel"):GetBool() and TacRP.CancelMultipliers[tr.HitGroup] then
+        dmgbodymult = dmgbodymult / TacRP.CancelMultipliers[tr.HitGroup]
     end
 
     dmgv = dmgv * dmgbodymult
