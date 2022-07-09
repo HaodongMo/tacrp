@@ -21,7 +21,7 @@ SWEP.Damage_Max = 22 // 100 / 5 // damage at minimum range
 SWEP.Damage_Min = 10 // 100 / 9 // damage at maximum range
 SWEP.Range_Min = 2000 // distance for which to maintain maximum damage
 SWEP.Range_Max = 5000 // distance at which we drop to minimum damage
-SWEP.Penetration = 1 // units of metal this weapon can penetrate
+SWEP.Penetration = 3 // units of metal this weapon can penetrate
 
 SWEP.MuzzleVelocity = 9500
 
