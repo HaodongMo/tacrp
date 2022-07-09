@@ -407,25 +407,13 @@ function TacRP:DrawPhysBullets()
 
         if !shoulddraw then continue end
 
-        local size = 1
-
-        size = size * math.log(EyePos():DistToSqr(pos) - math.pow(512, 2))
-
-        size = math.Clamp(size, 0, math.huge)
-
-        local headsize = size
-
-        --headsize = headsize * math.min(EyePos():DistToSqr(pos) / math.pow(2500, 2), 1)
+        local size = math.Clamp(math.log(EyePos():DistToSqr(pos) - math.pow(512, 2)), 0, math.huge)
 
         local vel = i.Vel - LocalPlayer():GetVelocity()
 
-        local dot = EyeAngles():Forward():Dot(vel:GetNormalized())
-
-        dot = math.abs(dot)
-
+        local dot = math.abs(EyeAngles():Forward():Dot(vel:GetNormalized()))
         dot = math.Clamp(((dot * dot) - 0.5) * 5, 0, 1)
-
-        headsize = headsize * dot * 2
+        local headsize = size * dot * 2 -- * math.min(EyePos():DistToSqr(pos) / math.pow(2500, 2), 1)
 
         -- cam.Start3D()
 
@@ -437,7 +425,7 @@ function TacRP:DrawPhysBullets()
 
         render.SetMaterial(tracer)
 
-        local tail = (vec:GetNormalized() * math.min(vel:Length() * 0.5, math.min(512, i.Travelled - 64)))
+        local tail = (vec:GetNormalized() * math.min(vel:Length() * 0.5, 512, i.Travelled - 64))
 
         render.DrawBeam(pos, pos + tail, size * 0.75, 0, 1, col)
 

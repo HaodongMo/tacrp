@@ -171,7 +171,7 @@ SWEP.ScopedSway = 0.1
 SWEP.BlindFireSway = 2
 
 SWEP.FreeAim = true
-SWEP.FreeAimMaxAngle = 10
+SWEP.FreeAimMaxAngle = 7.5
 
 // quicknade
 

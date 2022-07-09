@@ -167,7 +167,28 @@ function SWEP:PrimaryAttack()
         self:ShootRocket()
     else
         if IsFirstTimePredicted() then
-            if GetConVar("tacrp_physbullet"):GetBool() then
+
+            local hitscan = !GetConVar("tacrp_physbullet"):GetBool()
+            local dir2 = dir + (spread * AngleRand() / 3.6)
+
+            -- If the bullet is going to hit something very close in front, use hitscan bullets instead
+            -- Because of random bullet spread, sometimes the client and server won't agree on whether hitscan should be used.
+            -- Not much to be done about that, unfortunately.
+            if self:GetValue("Num") == 1 and !hitscan then
+                local threshold = dir2:Forward() * self:GetValue("MuzzleVelocity") * engine.TickInterval() * 2
+                local inst_tr = util.TraceLine({
+                    start = self:GetMuzzleOrigin(),
+                    endpos = self:GetMuzzleOrigin() + threshold,
+                    mask = MASK_SHOT_HULL,
+                    filter = self:GetOwner():GetVehicle(),
+                })
+                debugoverlay.Line(self:GetMuzzleOrigin(), self:GetMuzzleOrigin() + threshold, 1, inst_tr.Hit and Color(255, 0, 255) or Color(255, 200, 255))
+                if inst_tr.Hit and !inst_tr.HitSky then
+                    hitscan = true
+                end
+            end
+
+            if !hitscan then
                 for i = 1, self:GetValue("Num") do
                     local new_dir = dir + (spread * AngleRand() / 3.6)
                     TacRP:ShootPhysBullet(self, self:GetMuzzleOrigin(), new_dir:Forward() * self:GetValue("MuzzleVelocity"))
@@ -184,22 +205,20 @@ function SWEP:PrimaryAttack()
                     Damage = self:GetValue("Damage_Max"),
                     Force = 8,
                     Tracer = tr,
+                    TracerName = "tacrp_tracer",
                     Num = self:GetValue("Num"),
-                    Dir = dir:Forward(),
+                    Dir = dir2:Forward(), --dir:Forward(),
                     Src = self:GetMuzzleOrigin(),
-                    Spread = Vector(spread, spread, spread),
+                    Spread = Vector(0, 0, 0), --Vector(spread, spread, spread),
                     IgnoreEntity = self:GetOwner():GetVehicle(),
                     Callback = function(att, btr, dmg)
                         local range = (btr.HitPos - btr.StartPos):Length()
 
                         self:AfterShotFunction(btr, dmg, range, self:GetValue("Penetration"), {})
-
-                        if GetConVar("developer"):GetBool() then
-                            if SERVER then
-                                debugoverlay.Cross(btr.HitPos, 4, 5, Color(255, 0, 0), false)
-                            else
-                                debugoverlay.Cross(btr.HitPos, 4, 5, Color(255, 255, 255), false)
-                            end
+                        if SERVER then
+                            debugoverlay.Cross(btr.HitPos, 4, 5, Color(255, 0, 0), false)
+                        else
+                            debugoverlay.Cross(btr.HitPos, 4, 5, Color(255, 255, 255), false)
                         end
                     end
                 })
