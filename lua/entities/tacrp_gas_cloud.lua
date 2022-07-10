@@ -110,7 +110,6 @@ function ENT:Think()
         local dmg = DamageInfo()
         dmg:SetAttacker(self:GetOwner())
         dmg:SetInflictor(self)
-        dmg:SetDamage(10)
         dmg:SetDamageType(DMG_NERVEGAS)
         dmg:SetDamageForce(Vector(0, 0, 0))
         dmg:SetDamagePosition(self:GetPos())
@@ -128,6 +127,9 @@ function ENT:Think()
                 if tr.Fraction < 1 then continue end
                 local dist = (tr.HitPos - tr.StartPos):Length()
                 local delta = dist / 300
+
+                dmg:SetDamage(10 * (1 - delta))
+
                 k:TakeDamageInfo(dmg)
                 if k:IsPlayer() then
                     k:ScreenFade( SCREENFADE.IN, Color(125, 150, 50), 2 * delta, 0 )
