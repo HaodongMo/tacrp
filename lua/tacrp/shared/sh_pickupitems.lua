@@ -5,6 +5,7 @@ TacRP.PickupItems_Count = 0
 TacRP.PickupItems_Bits = 16
 
 local MetaItem = {}
+MetaItem.IsItem = true
 
 function MetaItem:GetData(key, default)
     return self.Data[key] == nil and default or self.Data[key]
@@ -38,8 +39,8 @@ function MetaItem:Populate()
     TacRP.PickupItems_Lookup[self:GetClass()] = self:GetClass()
 end
 function MetaItem:Write()
-    net.WriteUInt(table.Count( self.Data ), 8)
-    for k, v in pairs( self.Data ) do
+    net.WriteUInt(table.Count(self.Data), 8)
+    for k, v in pairs(self.Data) do
         net.WriteString(k)
         net.WriteType(v)
     end
@@ -92,7 +93,7 @@ function TacRP.LoadPickupItems()
         AddCSLuaFile(searchdir .. filename)
         include(searchdir .. filename)
 
-        ITEM = setmetatable({}, { __index = MetaItem })
+        ITEM = setmetatable({}, {__index = MetaItem})
         ITEM.Class = shortname
         ITEM.ID = TacRP.PickupItems_Count
 
@@ -113,7 +114,7 @@ function TacRP.LoadPickupItems()
             local base = TacRP.PickupItems[item.Base]
 
             if base then
-                setmetatable(item, { __index = base })
+                setmetatable(item, {__index = base})
             else
                 ErrorNoHalt( item.Class .. " tried to derive from nonexistent base " .. item.Base .. "!" )
             end
@@ -124,3 +125,18 @@ function TacRP.LoadPickupItems()
 end
 
 TacRP.LoadPickupItems()
+
+function TacRP.CreateItem(item_class, data)
+    if isnumber(item_class) then
+        item_class = TacRP.PickupItems_Index[item_class]
+    end
+    if !item_class then return end
+
+    local item = {
+        Class = item_class,
+        Data = data or {}
+    }
+    setmetatable(item, {__index = item_class})
+    item:Initialize()
+    return item
+end
