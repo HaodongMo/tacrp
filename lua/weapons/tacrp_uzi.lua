@@ -7,7 +7,7 @@ AddCSLuaFile()
 SWEP.PrintName = "IMI Mini Uzi"
 SWEP.Category = "Tactical RP (Arctic)"
 
-SWEP.Description = "Economic machine pistol with a high rate of fire."
+SWEP.Description = "Quality machine pistol with a high rate of fire."
 
 SWEP.ViewModel = "models/weapons/tacint/v_uzi.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_uzi.mdl"

@@ -8,7 +8,7 @@ SWEP.PrintName = "Steyr AUG"
 SWEP.Category = "Tactical RP (Arctic)"
 
 // Tier 2
-SWEP.Description = "Economic burst fire bullpup assault rifle with a generous magazine capacity and low burst delay."
+SWEP.Description = "Quality burst fire bullpup assault rifle with a generous magazine capacity and low burst delay."
 
 SWEP.ViewModel = "models/weapons/tacint/v_aug.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_aug.mdl"

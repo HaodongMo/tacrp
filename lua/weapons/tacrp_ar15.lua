@@ -8,7 +8,7 @@ SWEP.PrintName = "Colt Canada AR-15"
 SWEP.Category = "Tactical RP (Arctic)"
 
 // Tier 2
-SWEP.Description = "Economic semi-automatic variation of a very popular American assault rifle."
+SWEP.Description = "Common semi-automatic variation of a very popular American assault rifle."
 
 SWEP.ViewModel = "models/weapons/tacint/v_m4.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_m4.mdl"

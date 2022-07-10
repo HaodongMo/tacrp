@@ -8,7 +8,7 @@ SWEP.PrintName = "AMD65"
 SWEP.Category = "Tactical RP (Arctic)"
 
 // Tier 2
-SWEP.Description = "Economic assault rifle with punishing recoil but high damage."
+SWEP.Description = "Quality assault rifle with punishing recoil but high damage."
 
 SWEP.ViewModel = "models/weapons/tacint/v_amd65.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_amd65.mdl"

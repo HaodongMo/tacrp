@@ -8,7 +8,7 @@ SWEP.PrintName = "Daewoo K1A"
 SWEP.Category = "Tactical RP (Arctic)"
 
 // Tier 1
-SWEP.Description = "Cheap burst fire assault rifle with low recoil."
+SWEP.Description = "Common burst fire assault rifle with low recoil."
 
 SWEP.ViewModel = "models/weapons/tacint/v_k1a_2.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_k1a.mdl"

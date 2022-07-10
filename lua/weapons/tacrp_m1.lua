@@ -8,7 +8,7 @@ SWEP.PrintName = "Ruger Mini-14"
 SWEP.Category = "Tactical RP (Arctic)"
 
 // Tier 1
-SWEP.Description = "Cheap semi-automatic rifle with no stock and no optic mount."
+SWEP.Description = "Common semi-automatic rifle with no stock and no optic mount."
 
 SWEP.ViewModel = "models/weapons/tacint/v_m1.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_m1.mdl"

@@ -7,7 +7,7 @@ AddCSLuaFile()
 SWEP.PrintName = "HK MP5A3"
 SWEP.Category = "Tactical RP (Arctic)"
 
-SWEP.Description = "Economic, well-balanced sub-machine gun known for its precision."
+SWEP.Description = "Quality, well-balanced sub-machine gun known for its precision."
 
 SWEP.ViewModel = "models/weapons/tacint/v_mp5.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_mp5.mdl"

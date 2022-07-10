@@ -8,7 +8,7 @@ SWEP.PrintName = "HK P2000"
 SWEP.Category = "Tactical RP (Arctic)"
 
 // Tier 2
-SWEP.Description = "Well-rounded and economic pistol."
+SWEP.Description = "Quality, well-rounded handgun."
 
 SWEP.ViewModel = "models/weapons/tacint/v_p2000.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_p2000.mdl"

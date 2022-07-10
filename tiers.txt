@@ -1,0 +1,33 @@
+SIDEARMS
+T1 - 1911, M9
+T2 - P2000, MR96
+T3 - P250, Sphinx
+T4 - XD-45, Dualies
+
+SHOTGUNS
+T1 - Bekas
+T2 - TGS-12
+T3 - FP6
+T4 - M1014, KS-23
+
+SMG
+T1 - Skorpion
+T2 - MP5, Uzi
+T3 - MP7, P90
+T4 - Super V, KPDW
+
+ASSAULT
+T1 - Mini-14, K1A, AK47
+T2 - AUG, AMD-65
+T3 - G36, M4A1, DSA-58
+T4 - SG551, HK417, MG4
+
+SNIPER
+T1 - SP-R
+T2 - Ultima Ratio
+T3 - M1A
+T4 - AS50
+
+SPECIAL
+T3 - M320
+T4 - RPG-7

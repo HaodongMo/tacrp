@@ -7,7 +7,7 @@ AddCSLuaFile()
 SWEP.PrintName = "FB Beryl 96"
 SWEP.Category = "Tactical RP (Arctic)"
 
-SWEP.Description = "Cheap automatic assault rifle with poor sustained fire capabilities. Despite its looks, it is not an AK."
+SWEP.Description = "Common automatic assault rifle with poor sustained fire capabilities. Despite its looks, it is not an AK."
 
 SWEP.ViewModel = "models/weapons/tacint/v_ak47.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_ak47.mdl"
