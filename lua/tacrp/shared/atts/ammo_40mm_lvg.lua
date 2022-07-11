@@ -1,4 +1,4 @@
-ATT.PrintName = "LVG"
+ATT.PrintName = "Concussion" --"LVG"
 ATT.Icon = Material("entities/tacrp_att_ammo_40mm_lvg.png", "mips smooth")
 ATT.Description = "Bouncy grenade"
 ATT.Pros = {"Bouncy"}

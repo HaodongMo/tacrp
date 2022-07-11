@@ -19,7 +19,7 @@ SWEP.Slot = 4
 // "ballistics"
 
 SWEP.ShootEnt = "tacrp_proj_40mm_he"
-SWEP.ShootEntForce = 10000
+SWEP.ShootEntForce = 7000
 
 SWEP.BodyDamageMultipliers = {
     [HITGROUP_HEAD] = 1,
@@ -32,7 +32,7 @@ SWEP.BodyDamageMultipliers = {
     [HITGROUP_GEAR] = 0.9
 }
 
-SWEP.MuzzleVelocity = 12000
+SWEP.MuzzleVelocity = 7000
 
 SWEP.Num = 1
 
