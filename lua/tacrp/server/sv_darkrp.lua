@@ -22,6 +22,9 @@ hook.Add("onDarkRPWeaponDropped", "TacRP", function(ply, ent, wep)
 end)
 
 hook.Add("PlayerPickupDarkRPWeapon", "TacRP", function(ply, ent, wep)
+    if hook.Run("PlayerGiveSWEP", ply, wep:GetClass(), wep) == false then
+        return false
+    end
     if wep.ArcticTacRP and wep.Attachments and ent.Attachments then
         -- DarkRP will remove wep (created with ents.Create?) so we must make one ourselves here too
         if ply:HasWeapon(wep:GetClass()) or ply:KeyDown(IN_WALK) then
