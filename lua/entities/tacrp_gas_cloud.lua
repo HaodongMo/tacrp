@@ -113,6 +113,7 @@ function ENT:Think()
         dmg:SetDamageType(DMG_NERVEGAS)
         dmg:SetDamageForce(Vector(0, 0, 0))
         dmg:SetDamagePosition(self:GetPos())
+        dmg:SetDamageCustom(1024) -- immersive death
 
         -- util.BlastDamageInfo(dmg, self:GetPos(), 300)
 
