@@ -105,22 +105,35 @@ function ENT:Think()
     if SERVER then
         if !self:GetOwner():IsValid() then self:Remove() return end
 
-        local dmg = DamageInfo()
+        local origin = self:GetPos() + Vector(0, 0, 16)
 
+        local dmg = DamageInfo()
         dmg:SetAttacker(self:GetOwner())
         dmg:SetInflictor(self)
-        dmg:SetDamage(5)
         dmg:SetDamageType(DMG_NERVEGAS)
+        dmg:SetDamageForce(Vector(0, 0, 0))
+        dmg:SetDamagePosition(self:GetPos())
 
-        util.BlastDamageInfo(dmg, self:GetPos(), 300)
+        -- util.BlastDamageInfo(dmg, self:GetPos(), 300)
 
-        for i, k in pairs(ents.FindInSphere(self:GetPos(), 300)) do
-            if k:IsPlayer() then
-                local vis = k:Visible(k)
-                if !vis then continue end
-                local dist = (k:GetPos() - self:GetPos()):Length()
+        for i, k in pairs(ents.FindInSphere(origin, 300)) do
+            if k:IsPlayer() or k:IsNPC() or k:IsNextBot() then
+                local tr = util.TraceLine({
+                    start = origin,
+                    endpos = k:EyePos() or k:WorldSpaceCenter(),
+                    filter = self,
+                    mask = MASK_SOLID_BRUSHONLY
+                })
+                if tr.Fraction < 1 then continue end
+                local dist = (tr.HitPos - tr.StartPos):Length()
                 local delta = dist / 300
-                k:ScreenFade( SCREENFADE.IN, Color(125, 150, 50), 1 * delta, 0 )
+
+                dmg:SetDamage(10 * (1 - delta))
+
+                k:TakeDamageInfo(dmg)
+                if k:IsPlayer() then
+                    k:ScreenFade( SCREENFADE.IN, Color(125, 150, 50), 2 * delta, 0 )
+                end
             end
         end
 
