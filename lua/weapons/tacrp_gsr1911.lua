@@ -8,7 +8,7 @@ SWEP.PrintName = "GSR M1911"
 SWEP.Category = "Tactical RP (Arctic)"
 
 // Tier 1
-SWEP.Description = "Common low-capacity pistol with decent damage but low range. A cheap knockoff of a venerable classic."
+SWEP.Description = "Common low-capacity pistol with decent damage but low range. A tactical knockoff of a venerable classic."
 
 SWEP.ViewModel = "models/weapons/tacint/v_gsr1911.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_gsr1911.mdl"
