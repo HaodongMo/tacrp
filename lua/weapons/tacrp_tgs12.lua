@@ -40,11 +40,11 @@ SWEP.BodyDamageMultipliers = {
 
 SWEP.Firemode = 1
 
-SWEP.RPM = 75
+SWEP.RPM = 70
 
 SWEP.Spread = 0.025
 
-SWEP.ShootTimeMult = 1
+SWEP.ShootTimeMult = 0.9
 
 SWEP.HipFireSpreadPenalty = 0
 SWEP.MidAirSpreadPenalty = 0
@@ -211,7 +211,7 @@ SWEP.Attachments = {
     },
     [3] = {
         PrintName = "Accessory",
-        Category = {"perk", "perk_melee", "perk_shooting", "perk_reload", "perk_duffle"},
+        Category = {"perk", "perk_melee", "perk_shooting", "perk_reload", "perk_duffle", "perk_extmag_shotgun"},
         AttachSound = "tacrp/weapons/flashlight_on.wav",
         DetachSound = "tacrp/weapons/flashlight_off.wav",
     },
