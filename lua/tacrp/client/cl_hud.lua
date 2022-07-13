@@ -43,3 +43,18 @@ hook.Add("HUDShouldDraw", "TacRP_HideHUD", function(name)
 
     if hide[name] then return false end
 end)
+
+local names = {
+    ["357"] = "Magnum Ammo",
+    ["smg1"] = "Carbine Ammo",
+    ["ar2"] = "Rifle Ammo",
+    ["sniperpenetratedround"] = "Sniper Ammo",
+}
+
+hook.Add("PreGamemodeLoaded", "TacRP_AmmoName", function()
+    if GetConVar("tacrp_ammonames"):GetBool() then
+        for k, v in pairs(game.GetAmmoTypes()) do
+            language.Add(k .. "_ammo", v)
+        end
+    end
+end)

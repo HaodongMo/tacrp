@@ -18,9 +18,9 @@ SWEP.Slot = 3
 // "ballistics"
 
 SWEP.Damage_Max = 45 // damage at minimum range
-SWEP.Damage_Min = 30 // damage at maximum range
+SWEP.Damage_Min = 35 // damage at maximum range
 SWEP.Range_Min = 1000 // distance for which to maintain maximum damage
-SWEP.Range_Max = 4000 // distance at which we drop to minimum damage
+SWEP.Range_Max = 5000 // distance at which we drop to minimum damage
 SWEP.Penetration = 15 // units of metal this weapon can penetrate
 SWEP.BodyDamageMultipliers = {
     [HITGROUP_HEAD] = 5,
@@ -221,7 +221,7 @@ SWEP.Attachments = {
     },
     [4] = {
         PrintName = "Accessory",
-        Category = {"perk", "perk_melee", "perk_shooting", "perk_reload", "acc_extmag_rifle2", "perk_sling", "perk_duffle"},
+        Category = {"perk", "perk_melee", "perk_shooting", "perk_reload", "perk_extmag_rifle2", "perk_sling", "perk_duffle"},
         AttachSound = "TacRP/weapons/flashlight_on.wav",
         DetachSound = "TacRP/weapons/flashlight_off.wav",
     },

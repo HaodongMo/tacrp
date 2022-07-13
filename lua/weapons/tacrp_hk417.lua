@@ -17,14 +17,14 @@ SWEP.Slot = 3
 
 // "ballistics"
 
-SWEP.Damage_Max = 45
-SWEP.Damage_Min = 35
-SWEP.Range_Min = 3000 // distance for which to maintain maximum damage
-SWEP.Range_Max = 8000 // distance at which we drop to minimum damage
-SWEP.Penetration = 4 // units of metal this weapon can penetrate
+SWEP.Damage_Max = 42
+SWEP.Damage_Min = 32
+SWEP.Range_Min = 2500 // distance for which to maintain maximum damage
+SWEP.Range_Max = 5000 // distance at which we drop to minimum damage
+SWEP.Penetration = 12 // units of metal this weapon can penetrate
 
 SWEP.BodyDamageMultipliers = {
-    [HITGROUP_HEAD] = 3,
+    [HITGROUP_HEAD] = 2.5,
     [HITGROUP_CHEST] = 1.25,
     [HITGROUP_STOMACH] = 1,
     [HITGROUP_LEFTARM] = 1,
@@ -56,7 +56,7 @@ SWEP.RecoilFirstShotMult = 1 // multiplier for the first shot's recoil amount
 SWEP.RecoilVisualKick = 1
 SWEP.RecoilVisualShake = 0.40
 
-SWEP.RecoilKick = 5
+SWEP.RecoilKick = 6
 
 SWEP.RecoilSpreadPenalty = 0.002
 
@@ -222,7 +222,7 @@ SWEP.Attachments = {
     },
     [4] = {
         PrintName = "Accessory",
-        Category = {"foldstock", "perk", "perk_melee", "perk_shooting", "perk_reload", "acc_extmag_rifle2", "perk_sling", "perk_duffle"},
+        Category = {"foldstock", "perk", "perk_melee", "perk_shooting", "perk_reload", "perk_extmag_rifle2", "perk_sling", "perk_duffle"},
         AttachSound = "TacRP/weapons/flashlight_on.wav",
         DetachSound = "TacRP/weapons/flashlight_off.wav",
     },

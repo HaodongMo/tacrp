@@ -87,6 +87,11 @@ local conVars = {
     {
         name = "true_laser",
         default = "1"
+    },
+    {
+        name = "ammonames",
+        default = "1",
+        client = true
     }
 }
 
