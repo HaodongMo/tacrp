@@ -9,7 +9,7 @@ ATT.Category = "bolt_manual"
 ATT.SortOrder = 1
 
 ATT.Mult_RPM = 1.1
-ATT.Mult_ShootTimeMult = 1 / 1.1
+ATT.Mult_ShootTimeMult = 1 / 1.15
 
 ATT.Mult_RecoilKick = 1.25
 ATT.Add_ShootingSpeedMult = -0.1

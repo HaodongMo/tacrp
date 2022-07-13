@@ -4,13 +4,13 @@ SWEP.Spawnable = true
 AddCSLuaFile()
 
 // names and stuff
-SWEP.PrintName = "Diemaco C8A1"
-SWEP.Category = "Tactical RP (Arctic)"
+SWEP.PrintName = "Colt M4A1"
+SWEP.Category = "Tactical RP (Extras)"
 
-SWEP.Description = "Premium assault rifle with balanced performance. A close cousin to the classic American rifle."
+SWEP.Description = "Premium American assault rifle. This model is the real deal."
 
-SWEP.ViewModel = "models/weapons/tacint/v_m4.mdl"
-SWEP.WorldModel = "models/weapons/tacint/w_m4.mdl"
+SWEP.ViewModel = "models/weapons/tacint_extras/v_m4a1.mdl"
+SWEP.WorldModel = "models/weapons/tacint_extras/w_m4a1.mdl"
 
 SWEP.Slot = 3
 
@@ -93,8 +93,8 @@ SWEP.BlindFirePos = Vector(0, -2, -4)
 SWEP.SprintAng = Angle(30, -15, 0)
 SWEP.SprintPos = Vector(5, 0, -2)
 
-SWEP.SightAng = Angle(0.18, 0.9, 0)
-SWEP.SightPos = Vector(-4.15, -7.5, -4.3)
+SWEP.SightAng = Angle(0.1, 0, 0)
+SWEP.SightPos = Vector(-4.154, -7.5, -4.45)
 
 SWEP.CorrectivePos = Vector(-0.05, 0, 0.05)
 SWEP.CorrectiveAng = Angle(0.03, 0.45, 0)
@@ -116,9 +116,10 @@ SWEP.DropMagazineImpact = "metal"
 // sounds
 
 local path = "TacRP/weapons/m4/m4_"
+local path2 = "tacrp_extras/m4a1/m4a1_"
 
-SWEP.Sound_Shoot = "^" .. path .. "fire-1.wav"
-SWEP.Sound_Shoot_Silenced = path .. "fire_silenced-1.wav"
+SWEP.Sound_Shoot = "^" .. path2 .. "fire-1.wav"
+SWEP.Sound_Shoot_Silenced = path2 .. "fire_silenced-1.wav"
 
 SWEP.Vol_Shoot = 130
 SWEP.ShootPitchVariance = 2.5 // amount to vary pitch by each shot
@@ -167,14 +168,12 @@ SWEP.AnimationTranslationTable = {
 // attachments
 
 SWEP.AttachmentElements = {
-    ["foldstock"] = {
-        BGs_VM = {
-            {1, 1}
-        },
-    },
     ["sights"] = {
         BGs_VM = {
             {2, 1}
+        },
+        BGs_WM = {
+            {1, 1}
         },
     },
 }
@@ -183,15 +182,15 @@ SWEP.AttachmentElements = {
 SWEP.Attachments = {
     [1] = {
         PrintName = "Optic",
-        Category = {"optic_cqb", "optic_medium"},
+        Category = {"optic_cqb", "optic_medium", "optic_sniper"},
         InstalledElements = {"sights"},
         Bone = "ValveBiped.m4_rootbone",
         WMBone = "Box01",
         AttachSound = "TacRP/weapons/optic_on.wav",
         DetachSound = "TacRP/weapons/optic_off.wav",
         VMScale = 1,
-        Pos_VM = Vector(-5.35, -0.05, 7),
-        Pos_WM = Vector(0.75, 5, 1.15),
+        Pos_VM = Vector(-5.5, -0.05, 4),
+        Pos_WM = Vector(0.75, 3, 1.15),
         Ang_VM = Angle(90, 0, 0),
         Ang_WM = Angle(0, -90 + 3.5, 0),
     },
@@ -202,8 +201,8 @@ SWEP.Attachments = {
         WMBone = "Box01",
         AttachSound = "TacRP/weapons/silencer_on.wav",
         DetachSound = "TacRP/weapons/silencer_off.wav",
-        Pos_VM = Vector(-3.95, 0, 23),
-        Pos_WM = Vector(1.4, 21, -0.5),
+        Pos_VM = Vector(-3.95, 0, 25),
+        Pos_WM = Vector(1.4, 26, -0.5),
         Ang_VM = Angle(90, 0, 0),
         Ang_WM = Angle(0, -90 + 3.5, 0),
     },
@@ -221,7 +220,7 @@ SWEP.Attachments = {
     },
     [4] = {
         PrintName = "Accessory",
-        Category = {"foldstock", "perk", "perk_melee", "perk_shooting", "perk_reload", "perk_extendedmag", "perk_sling", "perk_duffle"},
+        Category = {"perk", "perk_melee", "perk_shooting", "perk_reload", "perk_extendedmag", "perk_sling", "perk_duffle"},
         AttachSound = "TacRP/weapons/flashlight_on.wav",
         DetachSound = "TacRP/weapons/flashlight_off.wav",
     },
@@ -254,9 +253,9 @@ local function addsound(name, spath)
     })
 end
 
-addsound("TacInt_m4.Remove_Clip", path .. "remove_clip.wav")
-addsound("TacInt_m4.Insert_Clip", path .. "insert_clip.wav")
-addsound("TacInt_m4.Insert_Clip-mid", path .. "insert_clip-mid.wav")
-addsound("TacInt_m4.bolt_action", path .. "bolt_action.wav")
-addsound("TacInt_m4.bolt_slap", path .. "bolt_slap.wav")
-addsound("TacInt_m4.throw_catch", path .. "throw_catch.wav")
+addsound("tacint_extras_m4a1.Remove_Clip", path2 .. "clipout.mp3")
+addsound("tacint_extras_m4a1.Insert_Clip", path2 .. "clipin.mp3")
+addsound("tacint_extras_m4a1.Insert_Clip-mid", path .. "insert_clip-mid.wav")
+addsound("tacint_extras_m4a1.bolt_action", path .. "bolt_action.wav")
+addsound("tacint_extras_m4a1.bolt_slap", path .. "bolt_slap.wav")
+addsound("tacint_extras_m4a1.throw_catch", path .. "throw_catch.wav")
