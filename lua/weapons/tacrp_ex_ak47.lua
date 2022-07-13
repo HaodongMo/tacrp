@@ -24,7 +24,7 @@ SWEP.Penetration = 10 // units of metal this weapon can penetrate
 
 SWEP.BodyDamageMultipliers = {
     [HITGROUP_HEAD] = 2,
-    [HITGROUP_CHEST] = 1.1,
+    [HITGROUP_CHEST] = 1.2,
     [HITGROUP_STOMACH] = 1,
     [HITGROUP_LEFTARM] = 1,
     [HITGROUP_RIGHTARM] = 1,
@@ -49,16 +49,16 @@ SWEP.Spread = 0.003
 SWEP.ShootTimeMult = 0.5
 
 SWEP.RecoilPerShot = 1
-SWEP.RecoilMaximum = 10
-SWEP.RecoilResetTime = 0.2 // time after you stop shooting for recoil to start dissipating
-SWEP.RecoilDissipationRate = 20
+SWEP.RecoilMaximum = 15
+SWEP.RecoilResetTime = 0.15 // time after you stop shooting for recoil to start dissipating
+SWEP.RecoilDissipationRate = 18
 SWEP.RecoilFirstShotMult = 1 // multiplier for the first shot's recoil amount
 
 SWEP.RecoilVisualKick = 1
 
 SWEP.RecoilKick = 6
 
-SWEP.RecoilSpreadPenalty = 0.0025
+SWEP.RecoilSpreadPenalty = 0.0015
 
 SWEP.CanBlindFire = true
 
@@ -91,7 +91,7 @@ SWEP.BlindFirePos = Vector(0, -2, -4)
 SWEP.SprintAng = Angle(30, -15, 0)
 SWEP.SprintPos = Vector(5, 0, -2)
 
-SWEP.SightAng = Angle(0.05, 0, 0)
+SWEP.SightAng = Angle(0.05, -0.4, 0)
 SWEP.SightPos = Vector(-4.66, -7.5, -2.9)
 
 SWEP.CorrectivePos = Vector(-0.05, 0, -0.05)
@@ -164,6 +164,8 @@ SWEP.AnimationTranslationTable = {
     ["fire5"] = "fire5_M",
     ["melee"] = {"melee1", "melee2"}
 }
+
+SWEP.DeployTimeMult = 2.25
 
 // attachments
 
