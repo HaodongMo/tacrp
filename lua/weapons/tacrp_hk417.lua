@@ -53,12 +53,11 @@ SWEP.RecoilResetTime = 0.1
 SWEP.RecoilDissipationRate = 15
 SWEP.RecoilFirstShotMult = 1 // multiplier for the first shot's recoil amount
 
-SWEP.RecoilVisualKick = 1
-SWEP.RecoilVisualShake = 0.40
+SWEP.RecoilVisualKick = 3
 
-SWEP.RecoilKick = 5
+SWEP.RecoilKick = 7.25
 
-SWEP.RecoilSpreadPenalty = 0.002
+SWEP.RecoilSpreadPenalty = 0.006
 
 SWEP.CanBlindFire = true
 
@@ -94,8 +93,8 @@ SWEP.SprintPos = Vector(5, 0, -2)
 SWEP.SightAng = Angle(0.05, 0, 0)
 SWEP.SightPos = Vector(-4.495, -7.5, -4.17)
 
-SWEP.CorrectivePos = Vector(-0.675, 0, 0.15)
-SWEP.CorrectiveAng = Angle(-2.5, 2.5, 0)
+SWEP.CorrectivePos = Vector(0, 0, 0.1)
+SWEP.CorrectiveAng = Angle(0, 0, 0)
 
 SWEP.HolsterVisible = true
 SWEP.HolsterSlot = TacRP.HOLSTER_SLOT_BACK
