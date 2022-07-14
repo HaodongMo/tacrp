@@ -4,10 +4,10 @@ SWEP.Spawnable = true
 AddCSLuaFile()
 
 // names and stuff
-SWEP.PrintName = "Diemaco M4A1"
+SWEP.PrintName = "Diemaco C8A1"
 SWEP.Category = "Tactical RP (Arctic)"
 
-SWEP.Description = "Premium American assault rifle. This model is a Canadian variant."
+SWEP.Description = "Premium assault rifle with balanced performance. A close cousin to the classic American rifle."
 
 SWEP.ViewModel = "models/weapons/tacint/v_m4.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_m4.mdl"

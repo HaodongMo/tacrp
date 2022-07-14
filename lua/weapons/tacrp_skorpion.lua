@@ -7,7 +7,7 @@ AddCSLuaFile()
 SWEP.PrintName = "Skorpion vz. 61"
 SWEP.Category = "Tactical RP (Arctic)"
 
-SWEP.Description = "Common machine pistol with low recoil.\nCan only mount pistol optics due to top ejection port."
+SWEP.Description = "Common machine pistol with incredibly low recoil.\nCan only mount pistol optics due to top ejection port."
 
 SWEP.ViewModel = "models/weapons/tacint/v_skorpion.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_skorpion.mdl"
@@ -18,8 +18,8 @@ SWEP.Slot = 2
 
 SWEP.Damage_Max = 10 // 100 / 4 // damage at minimum range
 SWEP.Damage_Min = 5 // 100 / 7 // damage at maximum range
-SWEP.Range_Min = 1500 // distance for which to maintain maximum damage
-SWEP.Range_Max = 4000 // distance at which we drop to minimum damage
+SWEP.Range_Min = 800 // distance for which to maintain maximum damage
+SWEP.Range_Max = 3000 // distance at which we drop to minimum damage
 SWEP.Penetration = 2 // units of metal this weapon can penetrate
 
 SWEP.MuzzleVelocity = 12500
@@ -31,25 +31,25 @@ SWEP.Firemodes = {
     1
 }
 
-SWEP.RPM = 700
+SWEP.RPM = 850
 
-SWEP.Spread = 0.012
+SWEP.Spread = 0.01
+
+SWEP.HipFireSpreadPenalty = 0.01
 
 SWEP.ShootTimeMult = 0.5
 
-
-
 SWEP.RecoilPerShot = 1
-SWEP.RecoilMaximum = 10
-SWEP.RecoilResetTime = 0.1// time after you stop shooting for recoil to start dissipating
-SWEP.RecoilDissipationRate = 10
+SWEP.RecoilMaximum = 20
+SWEP.RecoilResetTime = 0.1 // time after you stop shooting for recoil to start dissipating
+SWEP.RecoilDissipationRate = 20
 SWEP.RecoilFirstShotMult = 1 // multiplier for the first shot's recoil amount
 
 SWEP.RecoilVisualKick = 0.4
 
-SWEP.RecoilKick = 1.25
+SWEP.RecoilKick = 1
 
-SWEP.RecoilSpreadPenalty = 0.0003 // extra spread per one unit of recoil
+SWEP.RecoilSpreadPenalty = 0.001
 
 SWEP.CanBlindFire = true
 
@@ -226,7 +226,7 @@ SWEP.Attachments = {
     },
     [4] = {
         PrintName = "Accessory",
-        Category = {"foldstock", "perk", "perk_melee", "perk_shooting", "perk_reload", "perk_extendedmag", "perk_hollowpoints", "perk_conceal"},
+        Category = {"foldstock", "perk", "perk_melee", "perk_shooting", "perk_reload", "perk_extmag_smg", "perk_hollowpoints", "perk_conceal"},
         AttachSound = "TacRP/weapons/flashlight_on.wav",
         DetachSound = "TacRP/weapons/flashlight_off.wav",
     },

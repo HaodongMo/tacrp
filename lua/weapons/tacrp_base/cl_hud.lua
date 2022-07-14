@@ -681,7 +681,7 @@ SWEP.Mat_Select = nil
 
 function SWEP:DrawWeaponSelection(x, y, w, h, a)
     if !self.Mat_Select then
-        self.Mat_Select = Material("entities/" .. self:GetClass() .. ".png")
+        self.Mat_Select = Material("entities/" .. self:GetClass() .. ".png", "smooth mips")
     end
 
     surface.SetDrawColor(255, 255, 255, 255)

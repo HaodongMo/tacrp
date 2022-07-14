@@ -38,7 +38,7 @@ SWEP.BodyDamageMultipliers = {
 
 SWEP.Firemodes = {-3, 1}
 SWEP.RunawayBurst = true
-SWEP.PostBurstDelay = 0.25
+SWEP.PostBurstDelay = 0.2
 
 SWEP.RPM = 800
 
@@ -53,7 +53,7 @@ SWEP.RecoilFirstShotMult = 1 // multiplier for the first shot's recoil amount
 SWEP.RecoilVisualKick = 0.75
 SWEP.RecoilVisualShake = 0.25
 
-SWEP.RecoilKick = 4
+SWEP.RecoilKick = 3
 
 SWEP.RecoilSpreadPenalty = 0.0015 // extra spread per one unit of recoil
 
