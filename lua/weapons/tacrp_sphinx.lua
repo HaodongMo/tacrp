@@ -8,7 +8,7 @@ SWEP.PrintName = "Sphinx 2000"
 SWEP.Category = "Tactical RP (Arctic)"
 
 // Tier 3
-SWEP.Description = "Premium pistol with low recoil and a crisp trigger.\nDeals increased damage to the chest and head."
+SWEP.Description = "Premium pistol with low recoil and a crisp trigger."
 
 SWEP.ViewModel = "models/weapons/tacint/v_sphinx.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_sphinx.mdl"
@@ -17,8 +17,8 @@ SWEP.Slot = 2
 
 // "ballistics"
 
-SWEP.Damage_Max = 22 // 100 / 5 // damage at minimum range
-SWEP.Damage_Min = 10 // 100 / 9 // damage at maximum range
+SWEP.Damage_Max = 20
+SWEP.Damage_Min = 10
 SWEP.Range_Min = 2000 // distance for which to maintain maximum damage
 SWEP.Range_Max = 5000 // distance at which we drop to minimum damage
 SWEP.Penetration = 3 // units of metal this weapon can penetrate
@@ -26,8 +26,8 @@ SWEP.Penetration = 3 // units of metal this weapon can penetrate
 SWEP.MuzzleVelocity = 9500
 
 SWEP.BodyDamageMultipliers = {
-    [HITGROUP_HEAD] = 2.5,
-    [HITGROUP_CHEST] = 1.25,
+    [HITGROUP_HEAD] = 2,
+    [HITGROUP_CHEST] = 1,
     [HITGROUP_STOMACH] = 1,
     [HITGROUP_LEFTARM] = 1,
     [HITGROUP_RIGHTARM] = 1,

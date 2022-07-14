@@ -8,7 +8,7 @@ SWEP.PrintName = "HK MP7"
 SWEP.Category = "Tactical RP (Arctic)"
 
 // Tier 3
-SWEP.Description = "Premium personal defense weapon with well-rounded performance."
+SWEP.Description = "Premium personal defense weapon with emphasis on close quarters combat."
 
 SWEP.ViewModel = "models/weapons/tacint/v_mp7.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_mp7.mdl"
@@ -18,9 +18,9 @@ SWEP.Slot = 3
 // "ballistics"
 
 SWEP.Damage_Max = 18
-SWEP.Damage_Min = 10
+SWEP.Damage_Min = 11
 SWEP.Range_Min = 900 // distance for which to maintain maximum damage
-SWEP.Range_Max = 4000 // distance at which we drop to minimum damage
+SWEP.Range_Max = 3000 // distance at which we drop to minimum damage
 SWEP.Penetration = 1 // units of metal this weapon can penetrate
 
 SWEP.MuzzleVelocity = 17500

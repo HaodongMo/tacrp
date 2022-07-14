@@ -17,8 +17,8 @@ SWEP.Slot = 2
 
 // "ballistics"
 
-SWEP.Damage_Max = 9 // 100 / 4 // damage at minimum range
-SWEP.Damage_Min = 5 // 100 / 7 // damage at maximum range
+SWEP.Damage_Max = 9
+SWEP.Damage_Min = 5
 SWEP.Range_Min = 2000 // distance for which to maintain maximum damage
 SWEP.Range_Max = 4000 // distance at which we drop to minimum damage
 SWEP.Penetration = 3 // units of metal this weapon can penetrate
@@ -40,7 +40,7 @@ SWEP.BodyDamageMultipliers = {
 
 SWEP.Firemode = 1
 
-SWEP.RPM = 550
+SWEP.RPM = 600
 
 SWEP.Spread = 0.005
 
@@ -50,8 +50,8 @@ SWEP.RecoilResetTime = 0.2
 SWEP.RecoilDissipationRate = 10
 SWEP.RecoilFirstShotMult = 1 // multiplier for the first shot's recoil amount
 
-SWEP.RecoilVisualKick = 2.5
-SWEP.RecoilKick = 4.5
+SWEP.RecoilVisualKick = 2
+SWEP.RecoilKick = 4
 
 SWEP.RecoilSpreadPenalty = 0.0025
 
@@ -113,7 +113,7 @@ local path = "tacrp/weapons/p2000/p2000_"
 local path2 = "tacrp_extras/glock/"
 
 SWEP.Sound_Shoot = "^" .. path2 .. "fire-1.wav"
-SWEP.Sound_Shoot_Silenced = path .. "fire_silenced-1.wav"
+SWEP.Sound_Shoot_Silenced = path2 .. "fire_silenced-1.wav"
 
 SWEP.Vol_Shoot = 110
 SWEP.ShootPitchVariance = 2.5 // amount to vary pitch by each shot
@@ -240,9 +240,9 @@ local function addsound(name, spath)
     })
 end
 
-addsound("tacint_p2000.clip_in", path .. "clip_in.wav")
-addsound("tacint_p2000.clip_in-mid", path .. "clip_in-mid.wav")
-addsound("tacint_p2000.clip_out", path .. "clip_out.wav")
-addsound("tacint_p2000.slide_action", path .. "slide_action.wav")
-addsound("tacint_p2000.slide_shut", path .. "slide_shut.wav")
-addsound("tacint_p2000.cock_hammer", path .. "cockhammer.wav")
+addsound("tacint_extras_glock.clip_in", path .. "clip_in.wav")
+addsound("tacint_extras_glock.clip_in-mid", path .. "clip_in-mid.wav")
+addsound("tacint_extras_glock.clip_out", path2 .. "magout.mp3")
+addsound("tacint_extras_glock.slide_action", path .. "slide_action.wav")
+addsound("tacint_extras_glock.slide_shut", path .. "slide_shut.wav")
+addsound("tacint_extras_glock.cock_hammer", path .. "cockhammer.wav")
