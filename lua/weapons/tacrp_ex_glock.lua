@@ -4,30 +4,30 @@ SWEP.Spawnable = true
 AddCSLuaFile()
 
 // names and stuff
-SWEP.PrintName = "Colt M1911"
+SWEP.PrintName = "Glock 17"
 SWEP.Category = "Tactical RP (Extras)"
 
-// Tier 1
-SWEP.Description = "Common low-capacity pistol with decent damage but low range. A venerable classic from an era before tactical attachments and pistol optics."
+// Tier 2
+SWEP.Description = "Cheap polymer pistol with large capacity but poor accuracy."
 
-SWEP.ViewModel = "models/weapons/tacint_extras/v_m1911.mdl"
-SWEP.WorldModel = "models/weapons/tacint_extras/w_m1911.mdl"
+SWEP.ViewModel = "models/weapons/tacint_extras/v_glock.mdl"
+SWEP.WorldModel = "models/weapons/tacint_extras/w_glock.mdl"
 
 SWEP.Slot = 2
 
 // "ballistics"
 
-SWEP.Damage_Max = 18 // 100 / 3 // damage at minimum range
-SWEP.Damage_Min = 4 // 100 / 7 // damage at maximum range
-SWEP.Range_Min = 1000 // distance for which to maintain maximum damage
+SWEP.Damage_Max = 9 // 100 / 4 // damage at minimum range
+SWEP.Damage_Min = 5 // 100 / 7 // damage at maximum range
+SWEP.Range_Min = 2000 // distance for which to maintain maximum damage
 SWEP.Range_Max = 4000 // distance at which we drop to minimum damage
 SWEP.Penetration = 3 // units of metal this weapon can penetrate
 
-SWEP.MuzzleVelocity = 8000
+SWEP.MuzzleVelocity = 9500
 
 SWEP.BodyDamageMultipliers = {
     [HITGROUP_HEAD] = 2,
-    [HITGROUP_CHEST] = 1.2,
+    [HITGROUP_CHEST] = 1,
     [HITGROUP_STOMACH] = 1,
     [HITGROUP_LEFTARM] = 1,
     [HITGROUP_RIGHTARM] = 1,
@@ -40,32 +40,27 @@ SWEP.BodyDamageMultipliers = {
 
 SWEP.Firemode = 1
 
-SWEP.RPM = 450
+SWEP.RPM = 550
 
-SWEP.Spread = 0.0025
-
-SWEP.ShootTimeMult = 0.5
-
-
+SWEP.Spread = 0.005
 
 SWEP.RecoilPerShot = 1
-SWEP.RecoilMaximum = 4
+SWEP.RecoilMaximum = 6
 SWEP.RecoilResetTime = 0.2
-SWEP.RecoilDissipationRate = 5
+SWEP.RecoilDissipationRate = 10
 SWEP.RecoilFirstShotMult = 1 // multiplier for the first shot's recoil amount
 
-SWEP.RecoilVisualKick = 3
+SWEP.RecoilVisualKick = 2.5
+SWEP.RecoilKick = 4.5
 
-SWEP.RecoilKick = 6.5
-
-SWEP.RecoilSpreadPenalty = 0.005
+SWEP.RecoilSpreadPenalty = 0.0025
 
 SWEP.CanBlindFire = true
 
 // handling
 
 SWEP.MoveSpeedMult = 0.9
-SWEP.ShootingSpeedMult = 0.6
+SWEP.ShootingSpeedMult = 0.75
 SWEP.SightedSpeedMult = 0.5
 SWEP.MeleeSpeedMult = 0.5
 SWEP.MeleeSpeedMultTime = 2
@@ -77,7 +72,7 @@ SWEP.SprintToFireTime = 0.25
 
 SWEP.HoldType = "revolver"
 SWEP.HoldTypeSprint = "normal"
-SWEP.HoldTypeBlindFire = "pistol"
+SWEP.HoldTypeBlindFire = false
 
 SWEP.GestureShoot = ACT_HL2MP_GESTURE_RANGE_ATTACK_PISTOL
 SWEP.GestureReload = ACT_HL2MP_GESTURE_RELOAD_PISTOL
@@ -91,36 +86,36 @@ SWEP.BlindFirePos = Vector(0, -2, -5)
 SWEP.SprintAng = Angle(0, 30, 0)
 SWEP.SprintPos = Vector(2, 0, -12)
 
-SWEP.SightAng = Angle(0, -0.1, 0)
-SWEP.SightPos = Vector(-3.25, 0, -3.77)
+SWEP.SightAng = Angle(-0.01, 0.55, 0)
+SWEP.SightPos = Vector(-3.26, 0, -3.65)
+
+SWEP.CorrectivePos = Vector(0.02, -1, 0)
+SWEP.CorrectiveAng = Angle(0.05, -0.05, 0)
 
 SWEP.HolsterVisible = true
 SWEP.HolsterSlot = TacRP.HOLSTER_SLOT_PISTOL
 SWEP.HolsterPos = Vector(0, 3, -4)
 SWEP.HolsterAng = Angle(90, 0, 0)
 
-SWEP.Sway = 2
-SWEP.ScopedSway = 0
-
 // reload
 
-SWEP.ClipSize = 7
+SWEP.ClipSize = 20
 SWEP.Ammo = "pistol"
 
-SWEP.ReloadTimeMult = 1
+SWEP.ReloadTimeMult = 1.5
 
-SWEP.DropMagazineModel = "models/weapons/tacint/magazines/gsr1911.mdl"
+SWEP.DropMagazineModel = "models/weapons/tacint_extras/magazines/glock.mdl"
 SWEP.DropMagazineImpact = "pistol"
 
 // sounds
 
-local path = "tacrp_extras/m1911/"
-local path2 = "TacRP/weapons/gsr1911/gsr1911_"
+local path = "tacrp/weapons/p2000/p2000_"
+local path2 = "tacrp_extras/glock/"
 
-SWEP.Sound_Shoot = "^" .. path .. "fire-1.wav"
-SWEP.Sound_Shoot_Silenced = path2 .. "fire_silenced-1.wav"
+SWEP.Sound_Shoot = "^" .. path2 .. "fire-1.wav"
+SWEP.Sound_Shoot_Silenced = path .. "fire_silenced-1.wav"
 
-SWEP.Vol_Shoot = 130
+SWEP.Vol_Shoot = 110
 SWEP.ShootPitchVariance = 2.5 // amount to vary pitch by each shot
 
 // effects
@@ -153,10 +148,15 @@ SWEP.MuzzleEffect = "muzzleflash_pistol"
 // attack1
 SWEP.AnimationTranslationTable = {
     ["deploy"] = "draw",
+    ["fire_iron"] = "shoot2",
     ["fire"] = {"shoot1", "shoot2", "shoot3"},
     ["blind_fire"] = {"blind_shoot1", "blind_shoot2", "blind_shoot3"},
     ["melee"] = {"melee1", "melee2"}
 }
+
+SWEP.NoIdle = true
+
+SWEP.ShootTimeMult = 0.45
 
 SWEP.LastShot = true
 
@@ -164,38 +164,66 @@ SWEP.LastShot = true
 
 SWEP.Attachments = {
     [1] = {
-        PrintName = "Muzzle",
-        Category = {"silencer"},
-        Bone = "ValveBiped.barrel",
+        PrintName = "Optic",
+        Category = "optic_pistol",
+        Bone = "ValveBiped.slide",
         WMBone = "Box01",
-        AttachSound = "TacRP/weapons/silencer_on.wav",
-        DetachSound = "TacRP/weapons/silencer_off.wav",
-        VMScale = 0.5,
-        WMScale = 0.5,
-        Pos_VM = Vector(-0.76, 0.7, 7.5),
-        Ang_VM = Angle(90, 0, 0),
-        Pos_WM = Vector(0, 9.25, -1.5),
+        AttachSound = "tacrp/weapons/optic_on.wav",
+        DetachSound = "tacrp/weapons/optic_off.wav",
+        VMScale = 1,
+        WMScale = 1.2,
+        Pos_VM = Vector(0.21, 0, -0.2),
+        Ang_VM = Angle(0, 90, 180),
+        Pos_WM = Vector(0, -3, -1),
         Ang_WM = Angle(0, -90, 0),
     },
     [2] = {
-        PrintName = "Accessory",
-        Category = {"perk", "perk_melee", "perk_shooting", "perk_reload", "perk_extmag_pistol", "perk_conceal"},
-        AttachSound = "TacRP/weapons/flashlight_on.wav",
-        DetachSound = "TacRP/weapons/flashlight_off.wav",
+        PrintName = "Muzzle",
+        Category = "silencer",
+        Bone = "ValveBiped.barrel_assembly",
+        WMBone = "Box01",
+        AttachSound = "tacrp/weapons/silencer_on.wav",
+        DetachSound = "tacrp/weapons/silencer_off.wav",
+        VMScale = 0.5,
+        WMScale = 0.6,
+        Pos_VM = Vector(-0.5, 0.25, 7),
+        Ang_VM = Angle(90, 0, 0),
+        Pos_WM = Vector(0, 8.4, -1.5),
+        Ang_WM = Angle(0, -90, 0),
     },
     [3] = {
+        PrintName = "Tactical",
+        Category = "tactical",
+        Bone = "ValveBiped.p2000_rootbone",
+        WMBone = "Box01",
+        AttachSound = "tacrp/weapons/flashlight_on.wav",
+        DetachSound = "tacrp/weapons/flashlight_off.wav",
+        VMScale = 1.1,
+        WMScale = 1.3,
+        Pos_VM = Vector(-2, -0.21, 6.8),
+        Ang_VM = Angle(90, 0, 180),
+        Pos_WM = Vector(0, 5, -2.75),
+        Ang_WM = Angle(0, -90, 180),
+    },
+    [4] = {
+        PrintName = "Perk",
+        Category = {"perk", "perk_melee", "perk_shooting", "perk_reload", "perk_extmag_pistol", "perk_conceal"},
+        AttachSound = "tacrp/weapons/flashlight_on.wav",
+        DetachSound = "tacrp/weapons/flashlight_off.wav",
+    },
+    [5] = {
         PrintName = "Bolt",
         Category = {"bolt_automatic"},
         AttachSound = "TacRP/weapons/flashlight_on.wav",
         DetachSound = "TacRP/weapons/flashlight_off.wav",
     },
-    [4] = {
+    [6] = {
         PrintName = "Trigger",
         Category = {"trigger_semi"},
         AttachSound = "TacRP/weapons/flashlight_on.wav",
         DetachSound = "TacRP/weapons/flashlight_off.wav",
     },
-    [5] = {
+    [7] = {
         PrintName = "Ammo",
         Category = {"ammo_pistol"},
         AttachSound = "TacRP/weapons/flashlight_on.wav",
@@ -212,9 +240,9 @@ local function addsound(name, spath)
     })
 end
 
-addsound("tacint_extras_m1911.clip_in", path .. "clipin.mp3")
-addsound("tacint_extras_m1911.clip_in-mid", path2 .. "clip_in-mid.wav")
-addsound("tacint_extras_m1911.clip_out", path .. "clipout.mp3")
-addsound("tacint_extras_m1911.slide_action", path2 .. "slide_action.wav")
-addsound("tacint_extras_m1911.slide_shut", path2 .. "slide_shut.wav")
-addsound("tacint_extras_m1911.cock_hammer", path2 .. "cockhammer.wav")
+addsound("tacint_p2000.clip_in", path .. "clip_in.wav")
+addsound("tacint_p2000.clip_in-mid", path .. "clip_in-mid.wav")
+addsound("tacint_p2000.clip_out", path .. "clip_out.wav")
+addsound("tacint_p2000.slide_action", path .. "slide_action.wav")
+addsound("tacint_p2000.slide_shut", path .. "slide_shut.wav")
+addsound("tacint_p2000.cock_hammer", path .. "cockhammer.wav")

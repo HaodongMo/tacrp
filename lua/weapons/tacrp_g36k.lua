@@ -111,10 +111,6 @@ SWEP.ScopeFOV = 90 / 2
 SWEP.ScopeLevels = 1 // 2 = like CS:S
 SWEP.ScopeHideWeapon = true
 
--- SWEP.ScopeOverlay = false
--- SWEP.ScopeFOV = 90 / 1.1
--- SWEP.ScopeHideWeapon = false
-
 // reload
 
 SWEP.ClipSize = 30
