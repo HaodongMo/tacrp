@@ -37,8 +37,9 @@ function SWEP:Think()
         end
     end
 
+    --[[]
     -- Semi-automatic click buffering
-    if !game.SinglePlayer() or SERVER then
+    if (IsFirstTimePredicted() and !game.SinglePlayer()) or SERVER then
         if !self:GetCharge() and self:GetCurrentFiremode() == 1 and owner:KeyPressed(IN_ATTACK)
                 and self:StillWaiting() and !self:GetReloading() and !self:GetCustomize() and self:Clip1() >= self:GetValue("AmmoPerShot")
                 and (self:GetNextPrimaryFire() - CurTime()) < 0.1 then
@@ -48,6 +49,7 @@ function SWEP:Think()
             self:PrimaryAttack()
         end
     end
+    ]]
 
     self:ThinkRecoil()
 
