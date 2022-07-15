@@ -50,6 +50,10 @@ function SWEP:Think()
         end
     end
     ]]
+    if self:GetCharge() and !self:StillWaiting() then
+        self:SetCharge(false)
+        self:PrimaryAttack()
+    end
 
     self:ThinkRecoil()
 
