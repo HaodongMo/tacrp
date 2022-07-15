@@ -11,3 +11,4 @@ ATT.Category = "tactical" // can be "string" or {"list", "of", "strings"}
 ATT.SortOrder = 1
 
 ATT.Flashlight = true
+ATT.CanToggle = true

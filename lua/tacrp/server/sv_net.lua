@@ -12,6 +12,7 @@ util.AddNetworkString("tacrp_sendbullet")
 util.AddNetworkString("tacrp_updateholster")
 util.AddNetworkString("tacrp_clientdamage")
 util.AddNetworkString("tacrp_container")
+util.AddNetworkString("tacrp_toggletactical")
 
 net.Receive("tacrp_toggleblindfire", function(len, ply)
     local bf = net.ReadBool()
@@ -31,6 +32,14 @@ net.Receive("tacrp_togglecustomize", function(len, ply)
     if !wpn or !IsValid(wpn) or !wpn.ArcticTacRP then return end
 
     wpn:ToggleCustomize(bf)
+end)
+
+net.Receive("tacrp_toggletactical", function(len, ply)
+    local wpn = ply:GetActiveWeapon()
+
+    if !wpn or !IsValid(wpn) or !wpn.ArcticTacRP or !wpn:GetValue("CanToggle") then return end
+
+    wpn:SetTactical(!wpn:GetTactical())
 end)
 
 net.Receive("tacrp_networkweapon", function(len, ply)

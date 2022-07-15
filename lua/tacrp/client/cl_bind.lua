@@ -21,21 +21,22 @@ hook.Add("PlayerBindPress", "TacRP_Binds", function(ply, bind, pressed, code)
     --     return true
     -- end
 
-    if bind == "+menu_context" then
-        if !LocalPlayer():KeyDown(IN_USE) then
-            if wpn:GetCustomize() then
-                net.Start("TacRP_togglecustomize")
-                net.WriteBool(false)
-                net.SendToServer()
-            else
-                net.Start("TacRP_togglecustomize")
-                net.WriteBool(true)
-                net.SendToServer()
-            end
-
-            return true
-        end
+    if bind == "+menu_context" and !LocalPlayer():KeyDown(IN_USE)  then
+        net.Start("TacRP_togglecustomize")
+        net.WriteBool(!wpn:GetCustomize())
+        net.SendToServer()
+        return true
     end
+
+    if GetConVar("tacrp_toggletactical"):GetBool() and bind == "impulse 100" then
+        net.Start("tacrp_toggletactical")
+        net.SendToServer()
+
+        surface.PlaySound("tacrp/firemode.wav")
+
+        if ply:FlashlightIsOn() then return false end -- if hl2 flahslight is on we will turn it off as expected
+        return true -- we dont want hl2 flashlight
+     end
 end)
 
 TacRP.Complaints = {}

@@ -89,6 +89,10 @@ local conVars = {
         default = "1"
     },
     {
+        name = "toggletactical",
+        default = "1"
+    },
+    {
         name = "ammonames",
         default = "1",
         client = true

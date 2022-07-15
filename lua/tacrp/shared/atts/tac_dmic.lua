@@ -9,3 +9,4 @@ ATT.Scale = 1
 ATT.Category = "tactical" // can be "string" or {"list", "of", "strings"}
 
 ATT.Minimap = true
+ATT.CanToggle = true

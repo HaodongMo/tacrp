@@ -86,6 +86,12 @@ function SWEP:KillFlashlightsVM()
 end
 
 function SWEP:DrawFlashlightsVM()
+
+    if !self:GetTactical() then
+        self:KillFlashlights()
+        return
+    end
+
     if !self.Flashlights then
         self:CreateFlashlightsVM()
     end

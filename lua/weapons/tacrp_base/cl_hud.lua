@@ -75,7 +75,7 @@ function SWEP:DrawHUDBackground()
         self:DoCornershot()
     end
 
-    if self:GetValue("Rangefinder") then
+    if self:GetValue("Rangefinder") and self:GetTactical() then
         local txt = "NO RTN"
         local txt2 = ""
         local txt3 = ""
@@ -166,7 +166,7 @@ function SWEP:DrawHUDBackground()
         surface.DrawText(txt2)
     end
 
-    if self:GetValue("Minimap") then
+    if self:GetValue("Minimap") and self:GetTactical() then
         local scrw = ScrW()
         local scrh = ScrH()
 
