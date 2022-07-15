@@ -138,6 +138,11 @@ function TacRP.StartCommand(ply, cmd)
     end
 
     TacRP.LastEyeAngles = cmd:GetViewAngles()
+
+    -- Sprint will not interrupt a runaway burst
+    if wpn:GetBurstCount() > 0 and cmd:KeyDown(IN_SPEED) and wpn:GetValue("RunawayBurst") then
+        cmd:SetButtons(cmd:GetButtons() - IN_SPEED)
+    end
 end
 
 hook.Add("StartCommand", "TacRP_StartCommand", TacRP.StartCommand)
