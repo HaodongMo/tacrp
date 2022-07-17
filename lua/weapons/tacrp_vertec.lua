@@ -8,7 +8,7 @@ SWEP.PrintName = "Beretta M92FS"
 SWEP.Category = "Tactical RP (Arctic)"
 
 // Tier 1
-SWEP.Description = "Cheap, high-capacity civilian pistol."
+SWEP.Description = "Common civilian pistol with decent accuracy."
 
 SWEP.ViewModel = "models/weapons/tacint/v_vertec.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_vertec.mdl"
@@ -50,7 +50,7 @@ SWEP.ShootTimeMult = 0.5
 
 SWEP.RecoilPerShot = 1
 SWEP.RecoilMaximum = 7
-SWEP.RecoilResetTime = 0.2
+SWEP.RecoilResetTime = 0.25
 SWEP.RecoilDissipationRate = 7
 SWEP.RecoilFirstShotMult = 1
 
@@ -58,7 +58,7 @@ SWEP.RecoilVisualKick = 2.5
 
 SWEP.RecoilKick = 5
 
-SWEP.RecoilSpreadPenalty = 0.003
+SWEP.RecoilSpreadPenalty = 0.0016
 
 SWEP.CanBlindFire = true
 
@@ -107,7 +107,7 @@ SWEP.ScopedSway = 1
 SWEP.ClipSize = 15
 SWEP.Ammo = "pistol"
 
-SWEP.ReloadTimeMult = 1
+SWEP.ReloadTimeMult = 1.15
 
 SWEP.DropMagazineModel = "models/weapons/tacint/magazines/vertec.mdl"
 SWEP.DropMagazineImpact = "pistol"

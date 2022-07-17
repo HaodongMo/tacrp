@@ -4,7 +4,7 @@ SWEP.Spawnable = true
 AddCSLuaFile()
 
 // names and stuff
-SWEP.PrintName = "GSR M1911"
+SWEP.PrintName = "GSR M1911A1"
 SWEP.Category = "Tactical RP (Arctic)"
 
 // Tier 1
@@ -17,8 +17,8 @@ SWEP.Slot = 2
 
 // "ballistics"
 
-SWEP.Damage_Max = 18 // 100 / 3 // damage at minimum range
-SWEP.Damage_Min = 4 // 100 / 7 // damage at maximum range
+SWEP.Damage_Max = 18
+SWEP.Damage_Min = 4
 SWEP.Range_Min = 1000 // distance for which to maintain maximum damage
 SWEP.Range_Max = 4000 // distance at which we drop to minimum damage
 SWEP.Penetration = 3 // units of metal this weapon can penetrate
@@ -107,7 +107,7 @@ SWEP.ScopedSway = 1
 SWEP.ClipSize = 8
 SWEP.Ammo = "pistol"
 
-SWEP.ReloadTimeMult = 1
+SWEP.ReloadTimeMult = 1.05
 
 SWEP.DropMagazineModel = "models/weapons/tacint/magazines/gsr1911.mdl"
 SWEP.DropMagazineImpact = "pistol"

@@ -8,7 +8,7 @@ SWEP.PrintName = "Colt M1911"
 SWEP.Category = "Tactical RP (Extras)"
 
 // Tier 1
-SWEP.Description = "Common low-capacity pistol with decent damage but low range. A venerable classic from an era before tactical attachments and pistol optics."
+SWEP.Description = "Cheap surplus pistol from an era before tactical attachments and pistol optics."
 
 SWEP.ViewModel = "models/weapons/tacint_extras/v_m1911.mdl"
 SWEP.WorldModel = "models/weapons/tacint_extras/w_m1911.mdl"
@@ -17,17 +17,17 @@ SWEP.Slot = 2
 
 // "ballistics"
 
-SWEP.Damage_Max = 18 // 100 / 3 // damage at minimum range
-SWEP.Damage_Min = 4 // 100 / 7 // damage at maximum range
-SWEP.Range_Min = 1000 // distance for which to maintain maximum damage
-SWEP.Range_Max = 4000 // distance at which we drop to minimum damage
+SWEP.Damage_Max = 16
+SWEP.Damage_Min = 4
+SWEP.Range_Min = 1200
+SWEP.Range_Max = 4000
 SWEP.Penetration = 3 // units of metal this weapon can penetrate
 
 SWEP.MuzzleVelocity = 8000
 
 SWEP.BodyDamageMultipliers = {
     [HITGROUP_HEAD] = 2,
-    [HITGROUP_CHEST] = 1.2,
+    [HITGROUP_CHEST] = 1.25,
     [HITGROUP_STOMACH] = 1,
     [HITGROUP_LEFTARM] = 1,
     [HITGROUP_RIGHTARM] = 1,
@@ -49,14 +49,14 @@ SWEP.ShootTimeMult = 0.5
 
 
 SWEP.RecoilPerShot = 1
-SWEP.RecoilMaximum = 4
-SWEP.RecoilResetTime = 0.2
-SWEP.RecoilDissipationRate = 5
+SWEP.RecoilMaximum = 5
+SWEP.RecoilResetTime = 0.3
+SWEP.RecoilDissipationRate = 8
 SWEP.RecoilFirstShotMult = 1 // multiplier for the first shot's recoil amount
 
 SWEP.RecoilVisualKick = 3
 
-SWEP.RecoilKick = 6.5
+SWEP.RecoilKick = 7
 
 SWEP.RecoilSpreadPenalty = 0.005
 

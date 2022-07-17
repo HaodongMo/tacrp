@@ -17,8 +17,8 @@ SWEP.Slot = 2
 
 // "ballistics"
 
-SWEP.Damage_Max = 9
-SWEP.Damage_Min = 5
+SWEP.Damage_Max = 10
+SWEP.Damage_Min = 4
 SWEP.Range_Min = 2000 // distance for which to maintain maximum damage
 SWEP.Range_Max = 4000 // distance at which we drop to minimum damage
 SWEP.Penetration = 3 // units of metal this weapon can penetrate
@@ -40,12 +40,12 @@ SWEP.BodyDamageMultipliers = {
 
 SWEP.Firemode = 1
 
-SWEP.RPM = 600
+SWEP.RPM = 550
 
 SWEP.Spread = 0.005
 
 SWEP.RecoilPerShot = 1
-SWEP.RecoilMaximum = 6
+SWEP.RecoilMaximum = 8
 SWEP.RecoilResetTime = 0.2
 SWEP.RecoilDissipationRate = 10
 SWEP.RecoilFirstShotMult = 1 // multiplier for the first shot's recoil amount
@@ -102,7 +102,7 @@ SWEP.HolsterAng = Angle(90, 0, 0)
 SWEP.ClipSize = 20
 SWEP.Ammo = "pistol"
 
-SWEP.ReloadTimeMult = 1.5
+SWEP.ReloadTimeMult = 1.4
 
 SWEP.DropMagazineModel = "models/weapons/tacint_extras/magazines/glock.mdl"
 SWEP.DropMagazineImpact = "pistol"

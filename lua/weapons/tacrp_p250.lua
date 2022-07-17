@@ -107,7 +107,7 @@ SWEP.ScopedSway = 1
 SWEP.ClipSize = 12
 SWEP.Ammo = "pistol"
 
-SWEP.ReloadTimeMult = 1
+SWEP.ReloadTimeMult = 1.1
 
 SWEP.DropMagazineModel = "models/weapons/tacint/magazines/p250.mdl"
 SWEP.DropMagazineImpact = "pistol"

@@ -102,7 +102,7 @@ SWEP.HolsterAng = Angle(90, 0, 0)
 SWEP.ClipSize = 15 // 13 not realism :(
 SWEP.Ammo = "pistol"
 
-SWEP.ReloadTimeMult = 1
+SWEP.ReloadTimeMult = 1.2
 
 SWEP.DropMagazineModel = "models/weapons/tacint/magazines/p2000.mdl"
 SWEP.DropMagazineImpact = "pistol"
@@ -155,7 +155,7 @@ SWEP.AnimationTranslationTable = {
 
 SWEP.NoIdle = true
 
-SWEP.ShoShootTimeMult = 0.5
+SWEP.ShootTimeMult = 0.5
 
 SWEP.LastShot = true
 
