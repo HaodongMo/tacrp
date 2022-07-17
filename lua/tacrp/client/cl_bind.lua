@@ -28,7 +28,7 @@ hook.Add("PlayerBindPress", "TacRP_Binds", function(ply, bind, pressed, code)
         return true
     end
 
-    if GetConVar("tacrp_toggletactical"):GetBool() and bind == "impulse 100" then
+    if GetConVar("tacrp_toggletactical"):GetBool() and bind == "impulse 100" and wpn:GetValue("CanToggle") then
         net.Start("tacrp_toggletactical")
         net.SendToServer()
 
