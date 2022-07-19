@@ -35,6 +35,11 @@ local mat_dot = Material("tacrp/hud/dot.png", "mips smooth")
 local mat_mag = Material("tacrp/hud/mag.png", "")
 local mat_vignette = Material("tacrp/hud/vignette.png", "mips smooth")
 
+local mat_spread = Material("tacrp/hud/spreadgauge.png", "smooth")
+local mat_spread_fire = Material("tacrp/hud/spreadgauge_fire.png", "")
+local mat_spread_gauge = Material("tacrp/hud/spreadgauge_gauge.png", "")
+local mat_cone = Material("tacrp/hud/cone.png", "smooth")
+
 local cached_txt = ""
 local cached_txt2 = ""
 local lastrangefinder = 0
@@ -233,6 +238,74 @@ function SWEP:DrawHUDBackground()
 
             surface.DrawTexturedRect(dx - (ds / 2), dy - (ds / 2), ds, ds)
         end
+    end
+
+    if self:GetValue("SpreadGauge") and self:GetTactical() then
+
+        local scrw = ScrW()
+        local scrh = ScrH()
+
+        local w = ScreenScale(60)
+        local h = ScreenScale(30)
+
+        local x = (scrw - w) / 2
+        local y = (scrh - h) * 5.5 / 6
+
+        -- if self:GetSightDelta() > 0 then
+        --     y = y - self:GetSightDelta() ^ 0.5 * ScreenScale(24)
+        -- end
+
+        surface.SetMaterial(mat_spread)
+        surface.SetDrawColor(255, 255, 255, 100)
+        surface.DrawTexturedRect(x, y, w, h)
+
+        local spread = math.Clamp(self:GetSpread() / 0.00092592592, 0, 999.9)
+        local spread1 = math.floor(spread)
+        local spread2 = math.floor((spread - spread1) * 10)
+        local spread_txt1 = tostring(spread1)
+        if spread < 10 then
+            spread_txt1 = "00" .. spread_txt1
+        elseif spread < 100 then
+            spread_txt1 = "0" .. spread_txt1
+        end
+        surface.SetFont("TacRP_HD44780A00_5x8_6")
+        surface.SetTextColor(0, 0, 0)
+        surface.SetTextPos(x + ScreenScale(22), y + ScreenScale(2.5))
+        surface.DrawText(spread_txt1)
+        surface.DrawText(".")
+        surface.DrawText(spread2)
+
+        local recoil = self:GetRecoilAmount()
+        local recoil_pct = math.Round(recoil / self:GetValue("RecoilMaximum") * 100)
+        surface.SetTextPos(x + ScreenScale(22), y + ScreenScale(11.5))
+        if recoil_pct >= 100 and math.sin(SysTime() * 20) > 0 then
+            surface.SetTextColor(0, 0, 0, 100)
+        else
+            surface.SetTextColor(0, 0, 0)
+        end
+        surface.DrawText(recoil_pct)
+
+        local last_fire = math.Clamp((self:GetNextPrimaryFire() - CurTime()) / (60 / self:GetValue("RPM")), 0, 1)
+        surface.SetDrawColor(255, 255, 255, last_fire * 255)
+        surface.SetMaterial(mat_spread_fire)
+        surface.DrawTexturedRect(x, y, w, h)
+
+        surface.SetDrawColor(255, 255, 255, math.abs(math.sin(SysTime())) * 200)
+        surface.SetMaterial(mat_spread_gauge)
+        surface.DrawTexturedRect(x, y, w, h)
+
+        local w_cone = ScreenScale(40)
+        local x2 = (scrw - w_cone) / 2
+        local y2 = y - w_cone - ScreenScale(4)
+
+        surface.SetMaterial(mat_cone)
+        surface.SetDrawColor(255, 255, 255, 100)
+        surface.DrawTexturedRect(x2, y2, w_cone, w_cone)
+
+        local acc_size = GetFOVAcc(self)
+        local a = math.Clamp(1 - (acc_size - ScreenScale(15)) / ScreenScale(5), 0, 1) ^ 0.5
+        surface.DrawCircle(x2 + w_cone / 2, y2 + w_cone / 2, acc_size - 1, 0, 0, 0, a * 150)
+        surface.DrawCircle(x2 + w_cone / 2, y2 + w_cone / 2, acc_size + 1, 0, 0, 0, a * 150)
     end
 
     self:DrawCustomizeHUD()
