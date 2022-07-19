@@ -304,8 +304,8 @@ function SWEP:DrawHUDBackground()
 
         local acc_size = GetFOVAcc(self)
         local a = math.Clamp(1 - (acc_size - ScreenScale(15)) / ScreenScale(5), 0, 1) ^ 0.5
-        surface.DrawCircle(x2 + w_cone / 2, y2 + w_cone / 2, acc_size - 1, 0, 0, 0, a * 150)
-        surface.DrawCircle(x2 + w_cone / 2, y2 + w_cone / 2, acc_size + 1, 0, 0, 0, a * 150)
+        surface.DrawCircle(x2 + w_cone / 2, y2 + w_cone / 2, acc_size - 1, 0, 0, 0, a * 250)
+        surface.DrawCircle(x2 + w_cone / 2, y2 + w_cone / 2, acc_size + 1, 0, 0, 0, a * 250)
     end
 
     self:DrawCustomizeHUD()
