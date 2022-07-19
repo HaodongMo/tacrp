@@ -306,6 +306,16 @@ function SWEP:DrawHUDBackground()
         local a = math.Clamp(1 - (acc_size - ScreenScale(15)) / ScreenScale(5), 0, 1) ^ 0.5
         surface.DrawCircle(x2 + w_cone / 2, y2 + w_cone / 2, acc_size - 1, 0, 0, 0, a * 250)
         surface.DrawCircle(x2 + w_cone / 2, y2 + w_cone / 2, acc_size + 1, 0, 0, 0, a * 250)
+
+        local fov_mult = LocalPlayer():GetFOV() / math.max(self.TacRPLastFOV or 90, 0.00001)
+        local fov_mult1 = math.floor(fov_mult)
+        local fov_mult2 = math.Round(fov_mult - math.floor(fov_mult), 1) * 10
+        if fov_mult2 == 10 then fov_mult1 = fov_mult1 + 1 fov_mult2 = 0 end
+
+        surface.SetFont("TacRP_HD44780A00_5x8_6")
+        surface.SetTextColor(0, 0, 0)
+        surface.SetTextPos(x2 + ScreenScale(2), y2 + w_cone - ScreenScale(8))
+        surface.DrawText(fov_mult1 .. "." .. fov_mult2 .. "x")
     end
 
     self:DrawCustomizeHUD()

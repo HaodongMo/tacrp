@@ -19,6 +19,8 @@ function SWEP:CalcView(ply, pos, ang, fov)
 
     fov = fov / self.SmoothedMagnification
 
+    self.TacRPLastFOV = fov
+
     fov = fov - rec
 
     return pos, ang, fov
