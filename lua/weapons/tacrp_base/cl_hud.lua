@@ -302,10 +302,10 @@ function SWEP:DrawHUDBackground()
         surface.SetDrawColor(255, 255, 255, 100)
         surface.DrawTexturedRect(x2, y2, w_cone, w_cone)
 
-        local acc_size = GetFOVAcc(self)
+        local acc_size = math.max(GetFOVAcc(self), 1)
         local a = math.Clamp(1 - (acc_size - ScreenScale(15)) / ScreenScale(5), 0, 1) ^ 0.5
-        surface.DrawCircle(x2 + w_cone / 2, y2 + w_cone / 2, acc_size - 1, 0, 0, 0, a * 250)
-        surface.DrawCircle(x2 + w_cone / 2, y2 + w_cone / 2, acc_size + 1, 0, 0, 0, a * 250)
+        surface.DrawCircle(x2 + w_cone / 2, y2 + w_cone / 2, acc_size - 1, 0, 0, 0, a * 200)
+        surface.DrawCircle(x2 + w_cone / 2, y2 + w_cone / 2, acc_size + 1, 0, 0, 0, a * 200)
 
         local fov_mult = LocalPlayer():GetFOV() / math.max(self.TacRPLastFOV or 90, 0.00001)
         local fov_mult1 = math.floor(fov_mult)
@@ -314,8 +314,12 @@ function SWEP:DrawHUDBackground()
 
         surface.SetFont("TacRP_HD44780A00_5x8_6")
         surface.SetTextColor(0, 0, 0)
-        surface.SetTextPos(x2 + ScreenScale(2), y2 + w_cone - ScreenScale(8))
+        surface.SetTextPos(x2 + ScreenScale(18), y2 + ScreenScale(2))
         surface.DrawText(fov_mult1 .. "." .. fov_mult2 .. "x")
+        local sway_txt = math.Clamp(math.Round(self:GetSwayAmount() * 100), 0, 999) .. "%"
+        local sway_w = surface.GetTextSize(sway_txt)
+        surface.SetTextPos(x2 + ScreenScale(22) - sway_w, y2 + w_cone - ScreenScale(8.5))
+        surface.DrawText(sway_txt)
     end
 
     self:DrawCustomizeHUD()
