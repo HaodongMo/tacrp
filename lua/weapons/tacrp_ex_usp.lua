@@ -97,8 +97,6 @@ SWEP.HolsterSlot = TacRP.HOLSTER_SLOT_PISTOL
 SWEP.HolsterPos = Vector(0, 3, -4)
 SWEP.HolsterAng = Angle(90, 0, 0)
 
-SWEP.ScopedSway = 0
-
 // reload
 
 SWEP.ClipSize = 12
