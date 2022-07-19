@@ -314,11 +314,11 @@ function SWEP:DrawHUDBackground()
 
         surface.SetFont("TacRP_HD44780A00_5x8_6")
         surface.SetTextColor(0, 0, 0)
-        surface.SetTextPos(x2 + ScreenScale(18), y2 + ScreenScale(2))
+        surface.SetTextPos(x2 + ScreenScale(17), y2 + ScreenScale(2))
         surface.DrawText(fov_mult1 .. "." .. fov_mult2 .. "x")
         local sway_txt = math.Clamp(math.Round(self:GetSwayAmount() * 100), 0, 999) .. "%"
         local sway_w = surface.GetTextSize(sway_txt)
-        surface.SetTextPos(x2 + ScreenScale(22) - sway_w, y2 + w_cone - ScreenScale(8.5))
+        surface.SetTextPos(x2 + ScreenScale(23) - sway_w, y2 + w_cone - ScreenScale(8.5))
         surface.DrawText(sway_txt)
     end
 
