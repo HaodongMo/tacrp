@@ -8,7 +8,7 @@ SWEP.PrintName = "HK FABARM FP6"
 SWEP.Category = "Tactical RP (Arctic)"
 
 // Tier 3
-SWEP.Description = "Premium combat shotgun with well rounded performance."
+SWEP.Description = "Premium combat shotgun with extended shell capacity."
 
 SWEP.ViewModel = "models/weapons/tacint/v_fp6.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_fp6.mdl"
@@ -41,7 +41,7 @@ SWEP.BodyDamageMultipliers = {
 
 SWEP.Firemode = 1
 
-SWEP.RPM = 80
+SWEP.RPM = 75
 
 SWEP.Spread = 0.02
 
@@ -61,7 +61,7 @@ SWEP.RecoilFirstShotMult = 1 // multiplier for the first shot's recoil amount
 SWEP.RecoilVisualKick = 2
 SWEP.RecoilVisualShake = 2
 
-SWEP.RecoilKick = 20
+SWEP.RecoilKick = 12
 
 SWEP.RecoilSpreadPenalty = 0.0175
 
