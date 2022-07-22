@@ -221,6 +221,7 @@ SWEP.Sound_Shoot_Silenced = ""
 
 SWEP.Vol_Shoot = 130
 SWEP.Pitch_Shoot = 100
+SWEP.Loudness_Shoot = 1
 SWEP.ShootPitchVariance = 2.5 // amount to vary pitch by each shot
 
 SWEP.Sound_ScopeIn = ""

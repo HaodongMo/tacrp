@@ -148,7 +148,7 @@ function SWEP:PrimaryAttack()
         sshoot = table.Random(sshoot)
     end
 
-    self:EmitSound(sshoot, self:GetValue("Vol_Shoot"), self:GetValue("Pitch_Shoot") + util.SharedRandom("TacRP_sshoot", -pvar, pvar), 1, CHAN_WEAPON)
+    self:EmitSound(sshoot, self:GetValue("Vol_Shoot"), self:GetValue("Pitch_Shoot") + util.SharedRandom("TacRP_sshoot", -pvar, pvar), self:GetValue("Loudness_Shoot"), CHAN_WEAPON)
 
     local delay = 60 / self:GetValue("RPM")
 

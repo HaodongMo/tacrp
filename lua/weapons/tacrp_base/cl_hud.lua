@@ -38,7 +38,10 @@ local mat_vignette = Material("tacrp/hud/vignette.png", "mips smooth")
 local mat_spread = Material("tacrp/hud/spreadgauge.png", "smooth")
 local mat_spread_fire = Material("tacrp/hud/spreadgauge_fire.png", "")
 local mat_spread_gauge = Material("tacrp/hud/spreadgauge_gauge.png", "")
+local mat_spread_text = Material("tacrp/hud/spreadgauge_text.png", "")
+
 local mat_cone = Material("tacrp/hud/cone.png", "smooth")
+local mat_cone_text = Material("tacrp/hud/cone_text.png", "")
 
 local cached_txt = ""
 local cached_txt2 = ""
@@ -294,12 +297,19 @@ function SWEP:DrawHUDBackground()
         surface.SetMaterial(mat_spread_gauge)
         surface.DrawTexturedRect(x, y, w, h)
 
+        surface.SetDrawColor(255, 255, 255, 255)
+        surface.SetMaterial(mat_spread_text)
+        surface.DrawTexturedRect(x, y, w, h)
+
         local w_cone = ScreenScale(40)
         local x2 = (scrw - w_cone) / 2
         local y2 = y - w_cone - ScreenScale(4)
 
         surface.SetMaterial(mat_cone)
         surface.SetDrawColor(255, 255, 255, 100)
+        surface.DrawTexturedRect(x2, y2, w_cone, w_cone)
+        surface.SetMaterial(mat_cone_text)
+        surface.SetDrawColor(255, 255, 255, 255)
         surface.DrawTexturedRect(x2, y2, w_cone, w_cone)
 
         local acc_size = math.max(GetFOVAcc(self), 1)
