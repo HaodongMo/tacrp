@@ -7,19 +7,19 @@ AddCSLuaFile()
 SWEP.PrintName = "MAC-10"
 SWEP.Category = "Tactical RP (Extras)"
 
-SWEP.Description = "Common bullet hoze machine pistol. A cheaply made weapon with subpar ironsights and no optics."
+SWEP.Description = "Common bullet hose machine pistol. A cheaply made weapon with subpar ironsights and better suited for spray-and-pray."
 
 SWEP.ViewModel = "models/weapons/tacint_extras/v_mac10.mdl"
-SWEP.WorldModel = "models/weapons/tacint/w_xd45.mdl"
+SWEP.WorldModel = "models/weapons/tacint_extras/w_mac10.mdl"
 
 SWEP.Slot = 2
 
 // "ballistics"
 
 SWEP.Damage_Max = 9
-SWEP.Damage_Min = 4
-SWEP.Range_Min = 700
-SWEP.Range_Max = 3000
+SWEP.Damage_Min = 5
+SWEP.Range_Min = 750
+SWEP.Range_Max = 2500
 SWEP.Penetration = 3
 
 SWEP.MuzzleVelocity = 9000
@@ -43,6 +43,8 @@ SWEP.RPM = 1200
 
 SWEP.Spread = 0.01
 
+SWEP.HipFireSpreadPenalty = 0.015
+
 SWEP.RecoilPerShot = 1
 SWEP.RecoilMaximum = 15
 SWEP.RecoilResetTime = 0.1 // time after you stop shooting for recoil to start dissipating
@@ -51,9 +53,9 @@ SWEP.RecoilFirstShotMult = 1 // multiplier for the first shot's recoil amount
 
 SWEP.RecoilVisualKick = 1.5
 
-SWEP.RecoilKick = 3
+SWEP.RecoilKick = 2.5
 
-SWEP.RecoilSpreadPenalty = 0.0025
+SWEP.RecoilSpreadPenalty = 0.002
 
 SWEP.CanBlindFire = true
 
@@ -99,12 +101,12 @@ SWEP.ScopedSway = 0.25
 
 // reload
 
-SWEP.ClipSize = 32
+SWEP.ClipSize = 40
 SWEP.Ammo = "pistol"
 
 SWEP.ReloadTimeMult = 1.2
 
-SWEP.DropMagazineModel = "models/weapons/tacint/magazines/p250.mdl"
+SWEP.DropMagazineModel = "models/weapons/tacint_extras/magazines/mac10.mdl"
 SWEP.DropMagazineImpact = "pistol"
 
 // sounds
@@ -198,7 +200,7 @@ SWEP.Attachments = {
         WMScale = 0.75,
         Pos_VM = Vector(-2.8, 0, 11),
         Ang_VM = Angle(90, 0, 0),
-        Pos_WM = Vector(0, 8, -1.5),
+        Pos_WM = Vector(0, 10, -1.6),
         Ang_WM = Angle(0, -90, 0),
     },
     [2] = {
@@ -208,11 +210,11 @@ SWEP.Attachments = {
         WMBone = "Box01",
         AttachSound = "tacrp/weapons/flashlight_on.wav",
         DetachSound = "tacrp/weapons/flashlight_off.wav",
-        VMScale = 1,
+        VMScale = 0.8,
         WMScale = 1,
         Pos_VM = Vector(-1.6, 0, 6),
         Ang_VM = Angle(90, 0, 180),
-        Pos_WM = Vector(0, 5, -2.75),
+        Pos_WM = Vector(0, 4, -2.75),
         Ang_WM = Angle(0, -90, 180),
     },
     [3] = {
