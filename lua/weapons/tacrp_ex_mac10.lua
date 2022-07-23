@@ -19,10 +19,10 @@ SWEP.Slot = 2
 SWEP.Damage_Max = 11
 SWEP.Damage_Min = 5
 SWEP.Range_Min = 750
-SWEP.Range_Max = 2500
+SWEP.Range_Max = 3000
 SWEP.Penetration = 3
 
-SWEP.MuzzleVelocity = 9000
+SWEP.MuzzleVelocity = 10000
 
 SWEP.BodyDamageMultipliers = {
     [HITGROUP_HEAD] = 2,
@@ -39,7 +39,7 @@ SWEP.BodyDamageMultipliers = {
 
 SWEP.Firemode = 2
 
-SWEP.RPM = 1200
+SWEP.RPM = 1000
 
 SWEP.Spread = 0.01
 
@@ -53,7 +53,7 @@ SWEP.RecoilFirstShotMult = 1 // multiplier for the first shot's recoil amount
 
 SWEP.RecoilVisualKick = 1.5
 
-SWEP.RecoilKick = 2.5
+SWEP.RecoilKick = 2
 
 SWEP.RecoilSpreadPenalty = 0.002
 
@@ -118,8 +118,8 @@ SWEP.Sound_Shoot_Silenced = path .. "mac10-suppressed-1.wav"
 
 SWEP.Vol_Shoot = 110
 SWEP.Vol_Pitch = 100
-SWEP.Loudness_Shoot = 0.65
-SWEP.ShootPitchVariance = 1 // amount to vary pitch by each shot
+SWEP.Loudness_Shoot = 1
+SWEP.ShootPitchVariance = 3
 
 // effects
 
@@ -161,7 +161,7 @@ SWEP.ShootTimeMult = 0.5
 
 SWEP.LastShot = true
 
-// attachments
+// attachmentsc
 
 SWEP.AttachmentElements = {
     ["foldstock"] = {
@@ -171,6 +171,14 @@ SWEP.AttachmentElements = {
         BGs_WM = {
             {1, 1}
         }
+    },
+    ["pistol_comp"] = {
+        BGs_VM = {
+            {2, 1}
+        },
+        BGs_WM = {
+            {2, 1}
+        },
     },
 }
 
@@ -191,7 +199,7 @@ SWEP.Attachments = {
     -- },
     [1] = {
         PrintName = "Muzzle",
-        Category = {"silencer"},
+        Category = {"comp_mac10", "silencer"},
         Bone = "xd45_rig.xd45_ROOT",
         WMBone = "Box01",
         AttachSound = "tacrp/weapons/silencer_on.wav",
