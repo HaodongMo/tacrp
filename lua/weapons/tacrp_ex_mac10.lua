@@ -152,14 +152,13 @@ SWEP.MuzzleEffect = "muzzleflash_pistol"
 SWEP.AnimationTranslationTable = {
     ["deploy"] = "draw",
     ["fire"] = {"shoot1", "shoot2", "shoot3"},
-    ["lastshot"] = {"shoot1", "shoot2", "shoot3"},
     ["blind_fire"] = {"blind_shoot1", "blind_shoot2", "blind_shoot3"},
     ["melee"] = {"melee1", "melee2"}
 }
 
 SWEP.ShootTimeMult = 0.5
 
-SWEP.LastShot = true
+SWEP.LastShot = false
 
 // attachmentsc
 
