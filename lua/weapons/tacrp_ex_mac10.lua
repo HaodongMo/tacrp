@@ -16,7 +16,7 @@ SWEP.Slot = 2
 
 // "ballistics"
 
-SWEP.Damage_Max = 9
+SWEP.Damage_Max = 11
 SWEP.Damage_Min = 5
 SWEP.Range_Min = 750
 SWEP.Range_Max = 2500
@@ -257,6 +257,8 @@ addsound("tacint_extras_mac10.clip_out", path .. "mac10_clipout.wav")
 -- addsound("tacint_extras_mac10.clip_slap", path2 .. "clip_slap-1.wav")
 addsound("tacint_extras_mac10.slide_back", path .. "mac10_boltpull.wav")
 addsound("tacint_extras_mac10.slide_forward", path .. "mac10_boltpull2.wav")
+addsound("tacint_extras_mac10.slide_shut", path .. "mac10_boltpull2.wav")
+
 -- addsound("tacint_extras_mac10.slide_shut", {
 --     path .. "slide_shut-1.wav",
 --     path .. "slide_shut-2.wav",
