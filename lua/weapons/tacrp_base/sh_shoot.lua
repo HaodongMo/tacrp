@@ -25,6 +25,7 @@ function SWEP:PrimaryAttack()
         self:SetEndReload(true)
     end
 
+    --[[]
     if self:StillWaiting() then
         if (!game.SinglePlayer() or SERVER)
                     and !self:GetCharge() and self:GetCurrentFiremode() == 1
@@ -34,6 +35,7 @@ function SWEP:PrimaryAttack()
         end
         return
     end
+    ]]
 
     -- if self:GetValue("CanQuickNade") then
     --     if self:GetOwner():KeyDown(IN_USE) then

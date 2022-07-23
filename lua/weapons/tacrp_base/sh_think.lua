@@ -37,7 +37,6 @@ function SWEP:Think()
         end
     end
 
-    --[[]
     -- Semi-automatic click buffering
     if (IsFirstTimePredicted() and !game.SinglePlayer()) or SERVER then
         if !self:GetCharge() and self:GetCurrentFiremode() == 1 and owner:KeyPressed(IN_ATTACK)
@@ -48,11 +47,6 @@ function SWEP:Think()
             self:SetCharge(false)
             self:PrimaryAttack()
         end
-    end
-    ]]
-    if self:GetCharge() and !self:StillWaiting() then
-        self:SetCharge(false)
-        self:PrimaryAttack()
     end
 
     self:ThinkRecoil()
