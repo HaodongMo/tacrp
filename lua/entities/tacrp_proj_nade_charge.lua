@@ -37,6 +37,8 @@ function ENT:Detonate()
         util.Effect("HelicopterMegaBomb", fx)
     end
 
+    self:EmitSound(table.Random(self.ExplodeSounds), 125)
+
     local door = self:GetParent()
     if IsValid(door) and string.find(door:GetClass(), "door") then
         local vel = self:GetForward() * -50000
@@ -49,8 +51,6 @@ function ENT:Detonate()
         TacRP.DoorBust(door, vel)
 
     end
-
-    self:EmitSound(table.Random(self.ExplodeSounds), 125)
 
     self:Remove()
 end

@@ -111,7 +111,7 @@ function ENT:PhysicsCollide(data, collider)
 
         self:SetAngles((-data.HitNormal):Angle())
 
-        if data.HitEntity:IsWorld() then
+        if data.HitEntity:IsWorld() or data.HitEntity:GetSolid() == SOLID_BSP then
             self:SetMoveType(MOVETYPE_NONE)
             self:SetPos(data.HitPos)
         else
