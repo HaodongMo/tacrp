@@ -99,6 +99,8 @@ function ENT:PhysicsCollide(data, collider)
         self.ArmTime = CurTime()
         self.Armed = true
 
+        self:Impact()
+
         if self.Delay == 0 or self.ExplodeOnImpact then
             self:SetPos(data.HitPos)
             self:PreDetonate()
@@ -213,6 +215,9 @@ end
 
 function ENT:Detonate()
     // fill this in :)
+end
+
+function ENT:Impact()
 end
 
 function ENT:DrawTranslucent()

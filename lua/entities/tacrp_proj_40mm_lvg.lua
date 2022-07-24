@@ -15,7 +15,7 @@ ENT.ImpactFuse = true // projectile explodes on impact.
 ENT.ExplodeOnDamage = false // projectile explodes when it takes damage.
 ENT.ExplodeUnderwater = true
 
-ENT.Delay = 0.5
+ENT.Delay = 0.3
 
 ENT.ExplodeSounds = {
     "^TacRP/weapons/grenade/frag_explode-1.wav",
@@ -47,4 +47,8 @@ function ENT:Detonate()
     self:EmitSound(table.Random(self.ExplodeSounds), 125)
 
     self:Remove()
+end
+
+function ENT:Impact()
+    self:EmitSound("weapons/rpg/shotdown.wav", 90, 115)
 end

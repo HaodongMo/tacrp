@@ -30,6 +30,7 @@ function ENT:Detonate()
 
     local fx = EffectData()
     fx:SetOrigin(self:GetPos())
+    fx:SetNormal(self:GetForward())
 
     if self:WaterLevel() > 0 then
         util.Effect("WaterSurfaceExplosion", fx)
@@ -57,6 +58,13 @@ function ENT:Detonate()
     self:Remove()
 end
 
+local beep = 0
+function ENT:OnThink()
+    if SERVER and beep < CurTime() then
+        beep = CurTime() + 0.25
+        self:EmitSound("weapons/c4/c4_beep1.wav", 80, 110)
+    end
+end
 
 local mat = Material("sprites/light_glow02_add")
 function ENT:Draw()

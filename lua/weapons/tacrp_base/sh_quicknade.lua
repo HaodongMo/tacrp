@@ -73,8 +73,8 @@ function SWEP:ThrowGrenade()
         local mag = ents.Create("TacRP_droppedmag")
 
         if mag then
-            mag:SetPos(self:GetOwner():EyePos() - (self:GetOwner():EyeAngles():Up() * 8))
-            mag:SetAngles(self:GetOwner():EyeAngles())
+            mag:SetPos(src)
+            mag:SetAngles(ang)
             mag.Model = "models/weapons/tacint/flashbang_spoon.mdl"
             mag.ImpactType = "spoon"
             mag:SetOwner(self:GetOwner())
@@ -83,6 +83,7 @@ function SWEP:ThrowGrenade()
             local phys2 = mag:GetPhysicsObject()
 
             if IsValid(phys2) then
+                phys2:ApplyForceCenter(ang:Forward() * force * 0.25 + VectorRand() * 50)
                 phys2:AddAngleVelocity(Vector(math.Rand(-300, 300), math.Rand(-300, 300), math.Rand(-300, 300)))
             end
         end
