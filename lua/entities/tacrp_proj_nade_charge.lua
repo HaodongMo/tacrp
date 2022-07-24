@@ -37,18 +37,20 @@ function ENT:Detonate()
         util.Effect("HelicopterMegaBomb", fx)
     end
 
-    self:EmitSound(table.Random(self.ExplodeSounds), 125)
+    self:EmitSound(table.Random(self.ExplodeSounds), 115)
 
     local door = self:GetParent()
+    self:SetParent(NULL)
+
     if IsValid(door) and string.find(door:GetClass(), "door") then
         local vel = self:GetForward() * -50000
         for _, otherDoor in pairs(ents.FindInSphere(door:GetPos(), 72)) do
             if door != otherDoor and otherDoor:GetClass() == door:GetClass() then
-                TacRP.DoorBust(otherDoor, vel)
+                TacRP.DoorBust(otherDoor, vel, self:GetOwner())
                 break
             end
         end
-        TacRP.DoorBust(door, vel)
+        TacRP.DoorBust(door, vel, self:GetOwner())
 
     end
 

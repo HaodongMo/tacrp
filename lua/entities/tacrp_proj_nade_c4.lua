@@ -39,5 +39,19 @@ function ENT:Detonate()
 
     self:EmitSound(table.Random(self.ExplodeSounds), 125)
 
+    self:SetParent(NULL)
+    for _, door in pairs(ents.FindInSphere(self:GetPos(), 256)) do
+        if IsValid(door) and string.find(door:GetClass(), "door") and !door.TacRP_DoorBusted then
+            local vel = (door:GetPos() - self:GetPos()):GetNormalized() * 200000
+            for _, otherDoor in pairs(ents.FindInSphere(door:GetPos(), 72)) do
+                if door != otherDoor and otherDoor:GetClass() == door:GetClass() then
+                    TacRP.DoorBust(otherDoor, vel, self:GetOwner())
+                    break
+                end
+            end
+            TacRP.DoorBust(door, vel, self:GetOwner())
+        end
+    end
+
     self:Remove()
 end

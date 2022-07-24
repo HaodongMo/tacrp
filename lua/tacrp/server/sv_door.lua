@@ -1,4 +1,4 @@
-function TacRP.DoorBust(ent, vel)
+function TacRP.DoorBust(ent, vel, attacker)
     if !string.find(ent:GetClass(), "door") then return end
     local cvar = 1 --GetConVar("TacRP_doorbust"):GetInt()
     local t = 300 -- GetConVar("TacRP_doorbust_time"):GetFloat()
@@ -25,6 +25,7 @@ function TacRP.DoorBust(ent, vel)
         prop:SetSkin(ent:GetSkin() or 0)
         prop:Spawn()
         prop:GetPhysicsObject():SetVelocityInstantaneous(vel)
+        prop:SetPhysicsAttacker(attacker, 3)
 
         -- This is necessary to set the render bounds of func doors
         timer.Simple(0, function()
@@ -34,7 +35,7 @@ function TacRP.DoorBust(ent, vel)
         end)
 
         -- Make it not collide with players after a bit cause that's annoying
-        timer.Create("TacRP_DoorBust_" .. prop:EntIndex(), 2, 1, function()
+        timer.Create("TacRP_DoorBust_" .. prop:EntIndex(), 3, 1, function()
             if IsValid(prop) then
                 prop:SetCollisionGroup(COLLISION_GROUP_WEAPON)
             end
