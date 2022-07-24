@@ -67,6 +67,16 @@ TacRP.QuickNades = {
         AdminOnly = true,
         Icon = Material("TacRP/grenades/nuke.png", "mips smooth")
     },
+    ["charge"] = {
+        PrintName = "BREACH",
+        GrenadeEnt = "tacrp_proj_nade_charge",
+        ThrowForce = 2000,
+        Ammo = "ti_charge",
+        Model = "models/weapons/tacint/door_charge-1.mdl",
+        Spoon = false,
+        Secret = false,
+        Icon = Material("TacRP/grenades/c4.png", "mips smooth")
+    },
 }
 
 TacRP.QuickNades_Index = {}

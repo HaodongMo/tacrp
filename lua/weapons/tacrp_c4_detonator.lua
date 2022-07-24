@@ -27,8 +27,9 @@ SWEP.RPM = 120
 
 SWEP.CanBlindFire = false
 
-SWEP.Ammo = "ti_c4"
+SWEP.Ammo = "t1_c4"
 SWEP.ClipSize = -1
+SWEP.Primary.ClipSize = -1
 
 SWEP.SupplyAmmoType = "ti_c4"
 SWEP.SupplyAmmoAmount = 3

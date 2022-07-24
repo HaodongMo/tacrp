@@ -25,6 +25,13 @@ net.Receive("TacRP_updateholster", function()
     end
 end)
 
+net.Receive("tacrp_doorbust", function()
+    local door = net.ReadEntity()
+    if IsValid(door) then
+        door:SetRenderBounds(door:GetModelBounds())
+    end
+end)
+
 gameevent.Listen("player_spawn")
 hook.Add("player_connect", "TacRP_Holster", function(userid)
     local ply = Player(userid)
