@@ -16,7 +16,9 @@ function SWEP:GetSwayAngles()
     local swayamt = self:GetSwayAmount()
     local swayspeed = 1
 
-    local ang = Angle(math.sin(CurTime() * 0.6 * swayspeed) + (math.cos(CurTime() * 2) * 0.5), math.sin(CurTime() * 0.4 * swayspeed) + (math.cos(CurTime() * 1.6) * 0.5), 0)
+    local ct = CLIENT and UnPredictedCurTime() or CurTime()
+
+    local ang = Angle(math.sin(ct * 0.6 * swayspeed) + (math.cos(ct * 2) * 0.5), math.sin(ct * 0.4 * swayspeed) + (math.cos(ct * 1.6) * 0.5), 0)
 
     ang = ang * swayamt
 
