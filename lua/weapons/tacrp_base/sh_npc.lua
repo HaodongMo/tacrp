@@ -1,9 +1,14 @@
 function SWEP:NPC_PrimaryAttack()
     if !IsValid(self:GetOwner()) then return end
-    if self:Clip1() <= 0 then self:GetOwner():SetSchedule(SCHED_HIDE_AND_RELOAD) return end
+    if self:Clip1() <= 0 then
+        self:GetOwner():SetSchedule(math.random() >= (self:Health() / self:GetMaxHealth()) and SCHED_HIDE_AND_RELOAD or SCHED_RELOAD)
+        return
+    end
 
     self:SetBaseSettings()
     self:SetShouldHoldType()
+
+    self.Primary.Automatic = true
 
     local pvar = self:GetValue("ShootPitchVariance")
 
@@ -34,12 +39,7 @@ function SWEP:NPC_PrimaryAttack()
 
     local tr = self:GetValue("TracerNum")
 
-    local spread = self:GetNPCBulletSpread(self:GetOwner():GetCurrentWeaponProficiency())
-
-    spread = spread / 360
-    spread = spread * 10
-
-    spread = spread + self:GetNPCSpread()
+    local spread = self:GetNPCSpread()
 
     if self:GetValue("ShootEnt") then
         self:ShootRocket()
@@ -54,6 +54,7 @@ function SWEP:NPC_PrimaryAttack()
             self:GetOwner():FireBullets({
                 Damage = self:GetValue("Damage_Max"),
                 Force = 8,
+                TracerName = "tacrp_tracer",
                 Tracer = tr,
                 Num = self:GetValue("Num"),
                 Dir = self:GetOwner():GetAimVector(),
@@ -85,16 +86,19 @@ function SWEP:GetNPCBulletSpread(prof)
 
     if mode < 0 then
         return 10 / (prof + 1)
-    elseif mode == 0 then
-        return 20 / (prof + 1)
     elseif mode == 1 then
-        if math.Rand(0, 100) < (prof + 1) * 5 then
+        if math.Rand(0, 100) < (prof + 5) * 5 then
+            return 5 / (prof + 1)
+        else
+            return 20 / (prof + 1)
+        end
+    elseif mode > 1 then
+        if math.Rand(0, 100) < (prof + 5) * 2 then
             return 10 / (prof + 1)
         else
-            return 25 / (prof + 1)
+            return 30 / (prof + 1)
         end
-    elseif mode >= 2 then
-        return 20 / (prof + 1)
+
     end
 
     return 15
@@ -119,7 +123,7 @@ function SWEP:GetNPCBurstSettings()
 
     local delay = 60 / self:GetValue("RPM")
 
-    self:SetNextPrimaryFire(CurTime() + delay)
+    -- self:SetNextPrimaryFire(CurTime() + delay)
 
     if !mode then return 1, 1, delay end
 
@@ -139,7 +143,21 @@ function SWEP:GetNPCBurstSettings()
 end
 
 function SWEP:GetNPCRestTimes()
-    return 0.33, 1
+    local mode = self:GetCurrentFiremode()
+    local postburst = self:GetValue("PostBurstDelay") or 0
+    local m = self:GetValue("RecoilKick")
+    local delay = 60 / self:GetValue("RPM")
+
+    if !mode then return 0.3, 0.6 end
+
+    local o = m >= 1 and math.sqrt(m) or m
+    if delay <= 60 / 90 then
+        return delay + 0.1 * o, delay + 0.2 * o
+    elseif mode < 0 then
+        o = o * 0.5 + postburst
+    end
+
+    return 0.4 * o, 0.6 * o
 end
 
 function SWEP:CanBePickedUpByNPCs()

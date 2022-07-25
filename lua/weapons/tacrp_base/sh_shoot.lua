@@ -197,9 +197,9 @@ function SWEP:PrimaryAttack()
                 self:GetOwner():LagCompensation(true)
                 local tr = self:GetValue("TracerNum")
 
-                if self:GetValue("ScopeOverlay") and self:GetScopeLevel() > 0 then
-                    tr = 0
-                end
+                -- if self:GetValue("ScopeOverlay") and self:GetScopeLevel() > 0 then
+                --     tr = 0
+                -- end
 
                 self:GetOwner():FireBullets({
                     Damage = self:GetValue("Damage_Max"),
