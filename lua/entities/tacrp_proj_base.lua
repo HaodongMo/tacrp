@@ -71,6 +71,8 @@ function ENT:Initialize()
 
     self.SpawnTime = CurTime()
 
+    self.NPCDamage = IsValid(self:GetOwner()) and self:GetOwner():IsNPC() and !GetConVar("tacrp_npc_equality"):GetBool()
+
     if self.AudioLoop then
         self.LoopSound = CreateSound(self, self.AudioLoop)
         self.LoopSound:Play()
@@ -99,7 +101,9 @@ function ENT:PhysicsCollide(data, collider)
         self.ArmTime = CurTime()
         self.Armed = true
 
-        self:Impact()
+        if self:Impact(data, collider) then
+            return
+        end
 
         if self.Delay == 0 or self.ExplodeOnImpact then
             self:SetPos(data.HitPos)

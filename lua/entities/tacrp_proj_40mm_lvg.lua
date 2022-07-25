@@ -27,12 +27,14 @@ ENT.SmokeTrail = true
 
 function ENT:Detonate()
 
+    local mult = self.NPCDamage and 0.5 or 1
+
     local dmg = DamageInfo()
     dmg:SetAttacker(self:GetOwner())
     dmg:SetInflictor(self)
     dmg:SetDamageType(DMG_SONIC + DMG_BLAST)
     dmg:SetDamagePosition(self:GetPos())
-    dmg:SetDamage(120)
+    dmg:SetDamage(120 * mult)
     util.BlastDamageInfo(dmg, self:GetPos(), 300)
 
     local fx = EffectData()

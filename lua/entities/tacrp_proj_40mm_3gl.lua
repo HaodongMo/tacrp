@@ -28,7 +28,10 @@ ENT.AudioLoop = "TacRP/weapons/rpg7/rocket_flight-1.wav"
 ENT.SmokeTrail = true
 
 function ENT:Detonate()
-    util.BlastDamage(self, self:GetOwner(), self:GetPos(), 160, 80)
+
+    local mult = self.NPCDamage and 0.25 or 1
+
+    util.BlastDamage(self, self:GetOwner(), self:GetPos(), 160, 80 * mult)
 
     local fx = EffectData()
     fx:SetOrigin(self:GetPos())

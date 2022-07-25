@@ -21,19 +21,38 @@ ENT.AudioLoop = "TacRP/weapons/rpg7/rocket_flight-1.wav"
 
 ENT.SmokeTrail = true
 
-function ENT:Detonate()
-    if self.SpawnTime + 0.1 > CurTime() then
+function ENT:Impact(data, collider)
+    if self.SpawnTime + 0.1 > CurTime() and !self.NPCDamage then
+        local ang = data.OurOldVelocity:Angle()
         local fx = EffectData()
-        fx:SetOrigin(self:GetPos())
-        fx:SetNormal(-self:GetAngles():Forward())
-        fx:SetAngles(-self:GetAngles())
+        fx:SetOrigin(data.HitPos)
+        fx:SetNormal(-ang:Forward())
+        fx:SetAngles(-ang)
         util.Effect("ManhackSparks", fx)
-        self:Remove()
-        return
-    end
 
-    util.BlastDamage(self, self:GetOwner(), self:GetPos(), 100, 750)
-    util.BlastDamage(self, self:GetOwner(), self:GetPos(), 400, 150)
+        if IsValid(data.HitEntity) then
+            local dmginfo = DamageInfo()
+            dmginfo:SetAttacker(self:GetOwner())
+            dmginfo:SetInflictor(self)
+            dmginfo:SetDamageType(DMG_CLUB)
+            dmginfo:SetDamage(100 * (self.NPCDamage and 0.5 or 1))
+            dmginfo:SetDamageForce(data.OurOldVelocity * 25)
+            dmginfo:SetDamagePosition(data.HitPos)
+            data.HitEntity:TakeDamageInfo(dmginfo)
+        end
+
+        self:Remove()
+        return true
+    end
+end
+
+function ENT:Detonate()
+    if self.NPCDamage then
+        util.BlastDamage(self, self:GetOwner(), self:GetPos(), 350, 100)
+    else
+        util.BlastDamage(self, self:GetOwner(), self:GetPos(), 100, 750)
+        util.BlastDamage(self, self:GetOwner(), self:GetPos(), 400, 150)
+    end
 
     local fx = EffectData()
     fx:SetOrigin(self:GetPos())

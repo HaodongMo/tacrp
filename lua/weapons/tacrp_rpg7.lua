@@ -62,6 +62,7 @@ SWEP.SprintToFireTime = 0.5 // multiplies how long it takes to recover from spri
 SWEP.HoldType = "rpg"
 SWEP.HoldTypeSprint = "passive"
 SWEP.HoldTypeBlindFire = false
+SWEP.HoldTypeNPC = "ar2"
 
 SWEP.GestureShoot = ACT_HL2MP_GESTURE_RANGE_ATTACK_RPG
 SWEP.GestureReload = ACT_HL2MP_GESTURE_RELOAD_AR2

@@ -1,7 +1,15 @@
 function SWEP:NPC_PrimaryAttack()
     if !IsValid(self:GetOwner()) then return end
+
+    local enemy = self:GetOwner():GetEnemy()
+
     if self:Clip1() <= 0 then
-        self:GetOwner():SetSchedule(math.random() >= (self:Health() / self:GetMaxHealth()) and SCHED_HIDE_AND_RELOAD or SCHED_RELOAD)
+        if !IsValid(enemy) or !IsValid(enemy:GetActiveWeapon()) or table.HasValue({"weapon_crowbar", "weapon_stunstick"}, enemy:GetActiveWeapon():GetClass()) then
+            // do not attempt to find cover if enemy does not have a ranged weapon
+            self:GetOwner():SetSchedule(SCHED_RELOAD)
+        else
+            self:GetOwner():SetSchedule(SCHED_HIDE_AND_RELOAD)
+        end
         return
     end
 
@@ -41,14 +49,19 @@ function SWEP:NPC_PrimaryAttack()
 
     local spread = self:GetNPCSpread()
 
+    local dir = self:GetOwner():GetAimVector()
+
     if self:GetValue("ShootEnt") then
-        self:ShootRocket()
+        if IsValid(enemy) then
+            dir = (enemy:WorldSpaceCenter() - self:GetOwner():GetShootPos()):GetNormalized():Angle()
+            dir = dir + ((spread + (0.1 / self:GetOwner():GetCurrentWeaponProficiency())) * AngleRand() / 3.6)
+        end
+        self:ShootRocket(dir)
     else
         if GetConVar("tacrp_physbullet"):GetBool() then
             for i = 1, self:GetValue("Num") do
-                local dir = self:GetOwner():GetAimVector():Angle()
-                dir = dir + (spread * AngleRand() / 3.6)
-                TacRP:ShootPhysBullet(self, self:GetOwner():GetShootPos(), dir:Forward() * self:GetValue("MuzzleVelocity"))
+                local newdir = dir:Angle() + (spread * AngleRand() / 3.6)
+                TacRP:ShootPhysBullet(self, self:GetOwner():GetShootPos(), newdir:Forward() * self:GetValue("MuzzleVelocity"))
             end
         else
             self:GetOwner():FireBullets({
@@ -57,7 +70,7 @@ function SWEP:NPC_PrimaryAttack()
                 TracerName = "tacrp_tracer",
                 Tracer = tr,
                 Num = self:GetValue("Num"),
-                Dir = self:GetOwner():GetAimVector(),
+                Dir = dir,
                 Src = self:GetOwner():GetShootPos(),
                 Spread = Vector(spread, spread, spread),
                 Callback = function(att, btr, dmg)
@@ -137,7 +150,7 @@ function SWEP:GetNPCBurstSettings()
         if self:GetValue("RunawayBurst") then
             return self:Clip1(), self:Clip1(), delay
         else
-            return 2, math.floor(2.5 / delay), delay
+            return math.min(self:Clip1(), 2), math.min(self:Clip1(), math.floor(2.5 / delay)), delay
         end
     end
 end

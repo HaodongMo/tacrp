@@ -335,11 +335,11 @@ function SWEP:GetShootDir()
     return dir
 end
 
-function SWEP:ShootRocket()
+function SWEP:ShootRocket(dir)
     if CLIENT then return end
 
     local src = self:GetMuzzleOrigin()
-    local dir = self:GetShootDir()
+    dir = dir or self:GetShootDir()
 
     local num = self:GetValue("Num")
     local ent = self:GetValue("ShootEnt")
@@ -347,7 +347,6 @@ function SWEP:ShootRocket()
     local spread
 
     if self:GetOwner():IsNPC() then
-        ang = self:GetOwner():GetAimVector():Angle()
         spread = self:GetNPCSpread()
     else
         spread = self:GetSpread()
