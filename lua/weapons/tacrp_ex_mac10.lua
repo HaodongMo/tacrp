@@ -117,7 +117,7 @@ SWEP.Sound_Shoot = "^" .. path .. "mac10-1.wav"
 SWEP.Sound_Shoot_Silenced = path .. "mac10-suppressed-1.wav"
 
 SWEP.Vol_Shoot = 110
-SWEP.Vol_Pitch = 100
+SWEP.Pitch_Shoot = 100
 SWEP.Loudness_Shoot = 1
 SWEP.ShootPitchVariance = 3
 

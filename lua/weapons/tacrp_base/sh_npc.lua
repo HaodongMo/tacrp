@@ -17,7 +17,7 @@ function SWEP:NPC_PrimaryAttack()
         sshoot = table.Random(sshoot)
     end
 
-    self:EmitSound(sshoot, self:GetValue("Vol_Shoot"), self:GetValue("Vol_Pitch") + math.Rand(-pvar, pvar), 1, CHAN_WEAPON)
+    self:EmitSound(sshoot, self:GetValue("Vol_Shoot"), self:GetValue("Pitch_Shoot") + math.Rand(-pvar, pvar), 1, CHAN_WEAPON)
 
     local delay = 60 / self:GetValue("RPM")
 
