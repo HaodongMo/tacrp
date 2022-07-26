@@ -8,7 +8,7 @@ SWEP.PrintName = "PGM Ultima Ratio"
 SWEP.Category = "Tactical RP (Arctic)"
 
 // Tier 2
-SWEP.Description = "Economic bolt action sniper rifle with great damage and muzzle velocity.\nEquipped with a 10x scope by default."
+SWEP.Description = "Quality bolt action sniper rifle with great damage and muzzle velocity.\nEquipped with a 10x scope by default."
 
 SWEP.ViewModel = "models/weapons/tacint/v_uratio.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_uratio.mdl"
@@ -20,7 +20,7 @@ SWEP.Slot = 3
 SWEP.Damage_Max = 90 // damage at minimum range
 SWEP.Damage_Min = 75 // damage at maximum range
 SWEP.Range_Min = 1000 // distance for which to maintain maximum damage
-SWEP.Range_Max = 6000 // distance at which we drop to minimum damage
+SWEP.Range_Max = 5000 // distance at which we drop to minimum damage
 SWEP.Penetration = 17 // units of metal this weapon can penetrate
 SWEP.BodyDamageMultipliers = {
     [HITGROUP_HEAD] = 2,
