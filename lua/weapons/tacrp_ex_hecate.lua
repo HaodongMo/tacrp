@@ -281,7 +281,7 @@ end
 
 addsound("tacint_extras_hecate.Clip_Out", path2 .. "magout.wav")
 addsound("tacint_extras_hecate.Clip_In", path2 .. "magin.wav")
-addsound("tacint_extras_hecate.Bolt_Back", path2 .. "boltback.wav")
-addsound("tacint_extras_hecate.bolt_forward", path2 .. "boltrelease.wav")
+addsound("tacint_extras_hecate.Bolt_Back", path2 .. "boltrelease.wav")
+addsound("tacint_extras_hecate.bolt_forward", path2 .. "boltback.wav")
 addsound("tacint_extras_hecate.Bolt_Up", path2 .. "boltup.wav")
 addsound("tacint_extras_hecate.bolt_down", path2 .. "boltdown.wav")
