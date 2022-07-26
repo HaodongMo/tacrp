@@ -108,11 +108,17 @@ function SWEP:GetSightDelta()
     return self:GetSightAmount()
 end
 
+function SWEP:SetSightDelta(d)
+    self:SetSightAmount(d)
+end
+
 function SWEP:ThinkSights()
     if self:GetOwner():KeyDown(IN_USE) and self:GetOwner():KeyPressed(IN_ATTACK2) then
         self:ToggleSafety()
         return
     end
+
+    local FT = FrameTime()
 
     if self:GetSafe() then return end
 
@@ -121,12 +127,12 @@ function SWEP:ThinkSights()
     local amt = self:GetSightAmount()
 
     if sighted then
-        amt = math.Approach(amt, 1, FrameTime() / self:GetValue("AimDownSightsTime"))
+        amt = math.Approach(amt, 1, FT / self:GetValue("AimDownSightsTime"))
     else
-        amt = math.Approach(amt, 0, FrameTime() / self:GetValue("AimDownSightsTime"))
+        amt = math.Approach(amt, 0, FT / self:GetValue("AimDownSightsTime"))
     end
 
-    self:SetSightAmount(amt)
+    self:SetSightDelta(amt)
 
     if sighted and !self:GetOwner():KeyDown(IN_ATTACK2) then
         self:ScopeToggle(0)

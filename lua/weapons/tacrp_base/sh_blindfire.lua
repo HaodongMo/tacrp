@@ -215,18 +215,18 @@ function SWEP:ThinkBlindFire()
 
     if self:GetOwner():KeyDown(IN_WALK) then
         if self:GetBlindFire() then
-            if self:GetOwner():KeyDown(IN_MOVERIGHT) or self:GetOwner():KeyDown(IN_BACK) then
-                self:ToggleBlindFire(false)
-            elseif self:GetOwner():KeyDown(IN_FORWARD) then
+            if self:GetOwner():KeyDown(IN_FORWARD) then
                 self:ToggleBlindFire(true, false)
             elseif self:GetOwner():KeyDown(IN_MOVELEFT) then
                 self:ToggleBlindFire(true, true)
+            elseif self:GetOwner():KeyDown(IN_MOVERIGHT) or self:GetOwner():KeyDown(IN_BACK) then
+                self:ToggleBlindFire(false)
             end
         else
-            if self:GetOwner():KeyDown(IN_MOVELEFT) then
-                self:ToggleBlindFire(true, true)
-            elseif self:GetOwner():KeyDown(IN_FORWARD) then
+            if self:GetOwner():KeyDown(IN_FORWARD) then
                 self:ToggleBlindFire(true, false)
+            elseif self:GetOwner():KeyDown(IN_MOVELEFT) then
+                self:ToggleBlindFire(true, true)
             end
         end
     end

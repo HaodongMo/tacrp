@@ -7,18 +7,21 @@ SWEP.ViewModelAng = Angle(0, 0, 0)
 SWEP.SwayCT = 0
 
 function SWEP:GetViewModelSway(pos, ang)
-    local d = Lerp(self:GetSightAmount(), 1, 0.02)
+    local d = Lerp(self:GetSightDelta(), 1, 0.02)
     local v = 1
     local steprate = 1
 
+    local FT = self:DeltaSysTime() * 1 --FrameTime()
+    local CT = UnPredictedCurTime() -- CurTime()
+
     d = d * 0.25
 
-    pos = pos + (ang:Up() * (math.sin(self.SwayCT * 0.311 * v) + math.cos(self.SwayCT * 0.44 * v)) * math.sin(CurTime() * 0.8) * d)
-    pos = pos + (ang:Right() * (math.sin(self.SwayCT * 0.324 * v) + math.cos(self.SwayCT * 0.214 * v)) * math.sin(CurTime() * 0.76) * d)
+    pos = pos + (ang:Up() * (math.sin(self.SwayCT * 0.311 * v) + math.cos(self.SwayCT * 0.44 * v)) * math.sin(CT * 0.8) * d)
+    pos = pos + (ang:Right() * (math.sin(self.SwayCT * 0.324 * v) + math.cos(self.SwayCT * 0.214 * v)) * math.sin(CT * 0.76) * d)
 
-    if IsFirstTimePredicted() then
-        self.SwayCT = self.SwayCT + (FrameTime() * steprate)
-    end
+    --if IsFirstTimePredicted() then
+        self.SwayCT = self.SwayCT + (FT * steprate)
+    --end
 
     return pos, ang
 end
@@ -27,7 +30,7 @@ SWEP.ViewModelLastEyeAng = Angle(0, 0, 0)
 SWEP.ViewModelSwayInertia = Angle(0, 0, 0)
 
 function SWEP:GetViewModelInertia(pos, ang)
-    local d = 1 - self:GetSightAmount()
+    local d = 1 - self:GetSightDelta()
 
     local diff = self:GetOwner():EyeAngles() - self.ViewModelLastEyeAng
 
@@ -65,35 +68,39 @@ function SWEP:GetViewModelBob(pos, ang)
     local step = 10
     local mag = 1
 
+    local FT = self:DeltaSysTime() * 1 --FrameTime()
+    local CT = UnPredictedCurTime() -- CurTime()
+
     local v = self:GetOwner():GetVelocity():Length()
     local runs = self:GetOwner():GetRunSpeed()
     v = math.Clamp(v, 0, runs)
-    self.ViewModelBobVelocity = math.Approach(self.ViewModelBobVelocity, v, FrameTime() * 2400)
+    self.ViewModelBobVelocity = math.Approach(self.ViewModelBobVelocity, v, FT * 2400)
     local d = math.Clamp(self.ViewModelBobVelocity / runs, 0, 1)
 
     if self:GetOwner():OnGround() then
-        self.ViewModelNotOnGround = math.Approach(self.ViewModelNotOnGround, 0, FrameTime() / 1)
+        self.ViewModelNotOnGround = math.Approach(self.ViewModelNotOnGround, 0, FT / 1)
     else
-        self.ViewModelNotOnGround = math.Approach(self.ViewModelNotOnGround, 1, FrameTime() / 1)
+        self.ViewModelNotOnGround = math.Approach(self.ViewModelNotOnGround, 1, FT / 1)
     end
 
-    d = d * Lerp(self:GetSightAmount(), 1, 0.1)
+    d = d * Lerp(self:GetSightDelta(), 1, 0.1)
     mag = d * 2
     step = 10
 
-    ang:RotateAroundAxis(ang:Forward(), math.sin(self.BobCT * step * 0.5) * ((math.sin(CurTime() * 6.151) * 0.2) + 1) * 4.5 * d)
-    ang:RotateAroundAxis(ang:Right(), math.sin(self.BobCT * step * 0.12) * ((math.sin(CurTime() * 1.521) * 0.2) + 1) * 2.11 * d)
-    pos = pos - (ang:Up() * math.sin(self.BobCT * step) * 0.11 * ((math.sin(CurTime() * 3.515) * 0.2) + 1) * mag)
-    pos = pos + (ang:Forward() * math.sin(self.BobCT * step * 0.5) * 0.11 * ((math.sin(CurTime() * 1.615) * 0.2) + 1) * mag)
+    local m = 0.2
+    ang:RotateAroundAxis(ang:Forward(), math.sin(self.BobCT * step * 0.5) * ((math.sin(CT * 6.151) * m) + 1) * 4.5 * d)
+    ang:RotateAroundAxis(ang:Right(), math.sin(self.BobCT * step * 0.12) * ((math.sin(CT * 1.521) * m) + 1) * 2.11 * d)
+    pos = pos - (ang:Up() * math.sin(self.BobCT * step) * 0.11 * ((math.sin(CT * 3.515) * m) + 1) * mag)
+    pos = pos + (ang:Forward() * math.sin(self.BobCT * step * 0.5) * 0.11 * ((math.sin(CT * 1.615) * m) + 1) * mag)
     pos = pos + (ang:Right() * (math.sin(self.BobCT * step * 0.3) + (math.cos(self.BobCT * step * 0.3332))) * 0.16 * mag)
 
     local steprate = Lerp(d, 1, 2.5)
 
     steprate = Lerp(self.ViewModelNotOnGround, steprate, 0.9)
 
-    if IsFirstTimePredicted() or game.SinglePlayer() then
-        self.BobCT = self.BobCT + (FrameTime() * steprate)
-    end
+    --if IsFirstTimePredicted() or game.SinglePlayer() then
+        self.BobCT = self.BobCT + (FT * steprate)
+    --end
 
     return pos, ang
 end
@@ -122,7 +129,7 @@ function SWEP:GetMidAirBob(pos, ang)
 
     local d = self.ViewModelNotOnGround
 
-    d = d * Lerp(self:GetSightAmount(), 1, 0.1)
+    d = d * Lerp(self:GetSightDelta(), 1, 0.1)
 
     ang:RotateAroundAxis(ang:Right(), -v * d * 8 * math.sin(CurTime() * 0.15))
 

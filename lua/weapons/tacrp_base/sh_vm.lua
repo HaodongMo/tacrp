@@ -1,4 +1,28 @@
 local customizedelta = 0
+local sightdelta = 0
+local sprintdelta = 0
+local blindfiredelta, blindfirecornerdelta = 0, 0
+local freeaim_p, freeaim_y = 0, 0
+
+local angle_zero = Angle(0, 0, 0)
+local vector_origin = Vector(0, 0, 0)
+
+local m_appor = math.Approach
+local f_lerp = Lerp
+local function ApproachMod(usrobj, to, dlt)
+    usrobj[1] = m_appor(usrobj[1], to[1], dlt)
+    usrobj[2] = m_appor(usrobj[2], to[2], dlt)
+    usrobj[3] = m_appor(usrobj[3], to[3], dlt)
+end
+
+local function LerpMod(usrobj, to, dlt, clamp_ang)
+    usrobj[1] = f_lerp(dlt, usrobj[1], to[1])
+    usrobj[2] = f_lerp(dlt, usrobj[2], to[2])
+    usrobj[3] = f_lerp(dlt, usrobj[3], to[3])
+    if clamp_ang then
+        for i = 1, 3 do usrobj[i] = math.NormalizeAngle(usrobj[i]) end
+    end
+end
 
 SWEP.ViewModelPos = Vector(0, 0, 0)
 SWEP.ViewModelAng = Angle(0, 0, 0)
@@ -8,8 +32,7 @@ function SWEP:GetViewModelPosition(pos, ang)
         return Vector(0, 0, 0), Angle(0, 0, 0)
     end
 
-    -- pos = Vector(0, 0, 0)
-    -- ang = Angle(0, 0, 0)
+    local FT = self:DeltaSysTime() -- FrameTime()
 
     ang = ang - (self:GetOwner():GetViewPunchAngles() * 0.5)
 
@@ -17,22 +40,27 @@ function SWEP:GetViewModelPosition(pos, ang)
 
     oldang:Set(ang)
 
-    local offsetpos = Vector(0, 0, 0)
-    local offsetang = Angle(0, 0, 0)
+    local offsetpos = Vector(self.PassivePos)
+    local offsetang = Angle(self.PassiveAng)
 
     local extra_offsetpos = Vector(0, 0, 0)
     local extra_offsetang = Angle(0, 0, 0)
 
-    -- print(extra_offsetang)
-
-    offsetpos:Set(self.PassivePos)
-    offsetang:Set(self.PassiveAng)
-
     -- local cor_val = (self.ViewModelFOV / self:GetShouldFOV())
     local cor_val = 0.75
 
-    local blindfiredelta = self:GetBlindFireAmount()
-    local blindfirecornerdelta = self:GetBlindFireCornerAmount()
+    -- local blindfiredelta = self:GetBlindFireAmount()
+    -- local blindfirecornerdelta = self:GetBlindFireCornerAmount()
+    if self:GetBlindFire() then
+        blindfiredelta = math.Approach(blindfiredelta, 1, FT / 0.25)
+    else
+        blindfiredelta = math.Approach(blindfiredelta, 0, FT / 0.25)
+    end
+    if self:GetBlindFireCorner() then
+        blindfirecornerdelta = math.Approach(blindfirecornerdelta, 1, FT / 0.25)
+    else
+        blindfirecornerdelta = math.Approach(blindfirecornerdelta, 0, FT / 0.25)
+    end
 
     local curvedblindfiredelta = self:Curve(blindfiredelta)
     local curvedblindfirecornerdelta = self:Curve(blindfirecornerdelta)
@@ -47,49 +75,64 @@ function SWEP:GetViewModelPosition(pos, ang)
         end
     end
 
-    local sightdelta = self:Curve(self:GetSightDelta())
+    --local sightdelta = self:Curve(self:GetSightDelta())
+    if self:GetScopeLevel() > 0 then
+        sightdelta = m_appor(sightdelta, 1, FT / self:GetValue("AimDownSightsTime"))
+    else
+        sightdelta = m_appor(sightdelta, 0, FT / self:GetValue("AimDownSightsTime"))
+    end
+
+    local curvedsightdelta = self:Curve(sightdelta)
 
     -- cor_val = Lerp(sightdelta, cor_val, 1)
 
     if sightdelta > 0 then
         local sightpos, sightang = self:GetSightPositions()
 
-        offsetpos = LerpVector(sightdelta, offsetpos, sightpos)
-        offsetang = LerpAngle(sightdelta, offsetang, sightang)
+        LerpMod(offsetpos, sightpos, curvedsightdelta)
+        LerpMod(offsetang, sightang, curvedsightdelta, true)
     end
 
     local eepos, eeang = self:GetExtraSightPosition()
 
     local im = self:GetValue("SightMidPoint")
 
-    local midpoint = sightdelta * math.cos(sightdelta * (math.pi / 2))
+    local midpoint = curvedsightdelta * math.cos(curvedsightdelta * (math.pi / 2))
     local joffset = (im and im.Pos or Vector(0, 0, 0)) * midpoint
     local jaffset = (im and im.Ang or Angle(0, 0, 0)) * midpoint
 
-    extra_offsetpos = LerpVector(sightdelta, extra_offsetpos, -eepos + joffset)
-    extra_offsetang = LerpAngle(sightdelta, extra_offsetang, -eeang + jaffset)
+    LerpMod(extra_offsetpos, -eepos + joffset, curvedsightdelta)
+    LerpMod(extra_offsetang, -eeang + jaffset, curvedsightdelta)
 
     extra_offsetang.y = extra_offsetang.y - (self:GetSwayAngles().p * cor_val)
     extra_offsetang.p = extra_offsetang.p + (self:GetSwayAngles().y * cor_val)
 
-    extra_offsetang.y = extra_offsetang.y - (self:GetFreeAimOffset().p * cor_val)
-    extra_offsetang.p = extra_offsetang.p + (self:GetFreeAimOffset().y * cor_val)
+    -- extra_offsetang.y = extra_offsetang.y - (self:GetFreeAimOffset().p * cor_val)
+    -- extra_offsetang.p = extra_offsetang.p + (self:GetFreeAimOffset().y * cor_val)
 
-    if game.SinglePlayer() or IsFirstTimePredicted() then
+    freeaim_p = f_lerp(0.5, freeaim_p, self:GetFreeAimOffset().p)
+    freeaim_y = f_lerp(0.5, freeaim_y, self:GetFreeAimOffset().y)
+    freeaim_p = m_appor(freeaim_p, self:GetFreeAimOffset().p, FT)
+    freeaim_y = m_appor(freeaim_y, self:GetFreeAimOffset().y, FT)
+
+    extra_offsetang.y = extra_offsetang.y - (freeaim_p * cor_val)
+    extra_offsetang.p = extra_offsetang.p + (freeaim_y * cor_val)
+
+    --if game.SinglePlayer() or IsFirstTimePredicted() then
         if self:GetCustomize() then
-            customizedelta = math.Approach(customizedelta, 1, FrameTime() * 1 / 0.15)
+            customizedelta = m_appor(customizedelta, 1, FT * 1 / 0.15)
         else
-            customizedelta = math.Approach(customizedelta, 0, FrameTime() * 1 / 0.15)
+            customizedelta = m_appor(customizedelta, 0, FT * 1 / 0.15)
         end
-    end
+    --end
 
     local curvedcustomizedelta = self:Curve(customizedelta)
 
     if customizedelta > 0 then
-        offsetpos = LerpVector(curvedcustomizedelta, offsetpos, self:GetValue("CustomizePos"))
-        offsetang = LerpAngle(curvedcustomizedelta, offsetang, self:GetValue("CustomizeAng"))
+        LerpMod(offsetpos, self:GetValue("CustomizePos"), curvedcustomizedelta)
+        LerpMod(offsetang, self:GetValue("CustomizeAng"), curvedcustomizedelta)
 
-        extra_offsetang = LerpAngle(curvedcustomizedelta, extra_offsetang, Angle(0, 0, 0))
+        LerpMod(extra_offsetang, angle_zero, curvedcustomizedelta, true)
 
         -- local c_axis_x = ((gui.MouseX() / ScrW()) * 2) - 1
         -- local c_axis_y = ((gui.MouseY() / ScrH()) * 2) - 1
@@ -115,37 +158,49 @@ function SWEP:GetViewModelPosition(pos, ang)
     end
 
     -- local sprintdelta = self:Curve(self:GetSprintDelta())
-    local sprintdelta = self:Curve(self:GetSprintDelta())
+    if self.LastWasSprinting then
+        sprintdelta = m_appor(sprintdelta, 1, FT / self:GetSprintToFireTime())
+    else
+        sprintdelta = m_appor(sprintdelta, 0, FT / self:GetSprintToFireTime())
+    end
+    local curvedsprintdelta = self:Curve(sprintdelta)
 
-    if sprintdelta > 0 then
-        offsetpos = LerpVector(sprintdelta, offsetpos, self:GetValue("SprintPos"))
-        offsetang = LerpAngle(sprintdelta, offsetang, self:GetValue("SprintAng"))
+    if curvedsprintdelta > 0 then
+        LerpMod(offsetpos, self:GetValue("SprintPos"), curvedsprintdelta)
+        LerpMod(offsetang, self:GetValue("SprintAng"), curvedsprintdelta)
 
-        extra_offsetang = LerpAngle(sprintdelta, extra_offsetang, Angle(0, 0, 0))
+        LerpMod(extra_offsetang, angle_zero, curvedsprintdelta, true)
     end
 
     local sim = self:GetValue("SprintMidPoint")
 
-    local spr_midpoint = sprintdelta * math.cos(sprintdelta * (math.pi / 2))
+    local spr_midpoint = curvedsprintdelta * math.cos(curvedsprintdelta * (math.pi / 2))
     local spr_joffset = (sim and sim.Pos or Vector(0, 0, 0)) * spr_midpoint
     local spr_jaffset = (sim and sim.Ang or Angle(0, 0, 0)) * spr_midpoint
 
-    extra_offsetpos = extra_offsetpos + spr_joffset
-    extra_offsetang = extra_offsetang + spr_jaffset
+    extra_offsetpos:Add(spr_joffset)
+    extra_offsetang:Add(spr_jaffset)
 
     -- self.BobScale = Lerp(sprintdelta, 1, 3)
     -- self.BobScale = Lerp(sightdelta, self.BobScale, 0.1)
-    self.SwayScale = Lerp(sightdelta, 1, 0.1)
-
+    self.SwayScale = f_lerp(sightdelta, 1, 0.1)
     self.BobScale = 0
 
-    if game.SinglePlayer() or IsFirstTimePredicted() then
-        self.ViewModelPos = LerpVector(0.8, offsetpos, self.ViewModelPos)
-        self.ViewModelAng = LerpAngle(0.8, offsetang, self.ViewModelAng)
-    end
+    -- if game.SinglePlayer() or IsFirstTimePredicted() then
+    --     self.ViewModelPos = LerpVector(0.8, offsetpos, self.ViewModelPos)
+    --     self.ViewModelAng = LerpAngle(0.8, offsetang, self.ViewModelAng)
+    -- end
 
-    offsetpos = self.ViewModelPos
-    offsetang = self.ViewModelAng
+    -- offsetpos = self.ViewModelPos
+    -- offsetang = self.ViewModelAng
+
+    local speed = 15 * FT * (game.SinglePlayer() and 1 or 2)
+
+    LerpMod(self.ViewModelPos, offsetpos, speed)
+    LerpMod(self.ViewModelAng, offsetang, speed, true)
+    ApproachMod(self.ViewModelPos, offsetpos, speed * 0.1)
+    ApproachMod(self.ViewModelAng, offsetang, speed * 0.1)
+
     self.ViewModelAng:Normalize()
 
     pos = pos + (ang:Right() * offsetpos[1])
@@ -169,10 +224,11 @@ function SWEP:GetViewModelPosition(pos, ang)
     -- pos, ang = self:GetViewModelLeftRight(pos, ang)
     -- pos, ang = self:GetViewModelInertia(pos, ang)
     pos, ang = self:GetViewModelSway(pos, ang)
-    pos, ang = self:GetViewModelSmooth(pos, ang)
+    -- pos, ang = self:GetViewModelSmooth(pos, ang)
 
-    -- self.ViewModelPos = pos
-    -- self.ViewModelAng = ang
+    self.ViewModelPos = pos
+    self.ViewModelAng = ang
 
+    self.LastSysTime = SysTime()
     return pos, ang
 end

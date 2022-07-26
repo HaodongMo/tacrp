@@ -13,6 +13,12 @@ function SWEP:Curve(x)
     return 0.5 * math.cos((x + 1) * math.pi) + 0.5
 end
 
+SWEP.LastSysTime = SysTime()
+function SWEP:DeltaSysTime()
+    local ret = (SysTime() - (self.LastSysTime or SysTime())) * GetConVar("host_timescale"):GetFloat()
+    return ret
+end
+
 function SWEP:IsAnimLocked()
     return self:GetAnimLockTime() > CurTime()
 end
