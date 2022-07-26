@@ -396,7 +396,7 @@ function SWEP:SetupDataTables()
     self:NetworkVar("Bool", 4, "PrimedGrenade")
     self:NetworkVar("Bool", 5, "Safe")
     self:NetworkVar("Bool", 6, "BlindFireCorner")
-    self:NetworkVar("Bool", 7, "Tactical")
+    self:NetworkVar("Bool", 7, "NWTactical")
     self:NetworkVar("Bool", 8, "Charge")
 
     self:NetworkVar("Angle", 0, "FreeAimAngle")
@@ -405,6 +405,18 @@ function SWEP:SetupDataTables()
     self:SetFreeAimAngle(Angle(0, 0, 0))
     self:SetLastAimAngle(Angle(0, 0, 0))
     self:SetFiremode(1)
+    self:SetTactical(true)
+end
+
+SWEP.CL_Tactical = true
+function SWEP:SetTactical(x)
+    if (!game.SinglePlayer() and CLIENT) then self.CL_Tactical = x end
+    self:SetNWTactical(x)
+end
+
+function SWEP:GetTactical()
+    if (!game.SinglePlayer() and CLIENT) then return self.CL_Tactical end
+    return self:GetNWTactical()
 end
 
 function SWEP:SecondaryAttack()

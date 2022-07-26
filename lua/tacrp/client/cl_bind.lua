@@ -31,6 +31,7 @@ hook.Add("PlayerBindPress", "TacRP_Binds", function(ply, bind, pressed, code)
     if GetConVar("tacrp_toggletactical"):GetBool() and bind == "impulse 100" and wpn:GetValue("CanToggle") then
         net.Start("tacrp_toggletactical")
         net.SendToServer()
+        wpn:SetTactical(!wpn:GetTactical())
 
         surface.PlaySound("tacrp/firemode.wav")
 
