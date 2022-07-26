@@ -45,6 +45,16 @@ function TacRP.Move(ply, mv, cmd)
 
     mv:SetMaxSpeed(basespd * mult)
     mv:SetMaxClientSpeed(basespd * mult)
+
+    -- Semi auto click buffer
+    if !wpn:GetCharge() and wpn:GetCurrentFiremode() == 1 and mv:KeyPressed(IN_ATTACK)
+            and wpn:StillWaiting() and !wpn:GetReloading() and !wpn:GetCustomize() and wpn:Clip1() >= wpn:GetValue("AmmoPerShot")
+            and (wpn:GetNextPrimaryFire() - CurTime()) < 0.1 then
+        wpn:SetCharge(true)
+    elseif wpn:GetCharge() and !wpn:StillWaiting() and !owner and !mv:KeyDown(IN_ATTACK) then
+        wpn:SetCharge(false)
+        wpn:PrimaryAttack()
+    end
 end
 
 hook.Add("SetupMove", "ArcticTacRP.SetupMove", TacRP.Move)
