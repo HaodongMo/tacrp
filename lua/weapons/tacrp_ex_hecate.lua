@@ -107,7 +107,8 @@ SWEP.HolsterPos = Vector(4, -8, -6)
 SWEP.HolsterAng = Angle(0, 0, 0)
 
 SWEP.Sway = 5
-SWEP.ScopedSway = 0
+SWEP.ScopedSway = 0.2
+
 // scope
 
 SWEP.Scope = true
