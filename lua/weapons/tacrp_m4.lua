@@ -7,7 +7,7 @@ AddCSLuaFile()
 SWEP.PrintName = "Diemaco C8A1"
 SWEP.Category = "Tactical RP (Arctic)"
 
-SWEP.Description = "Premium assault rifle with balanced performance. A close cousin to the classic American rifle."
+SWEP.Description = "Premium assault rifle with balanced performance. A close cousin to the classic American rifle, with a slower but more controllable rate of fire."
 
 SWEP.ViewModel = "models/weapons/tacint/v_m4.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_m4.mdl"
@@ -42,7 +42,7 @@ SWEP.Firemodes = {
     1
 }
 
-SWEP.RPM = 800
+SWEP.RPM = 700
 
 SWEP.Spread = 0.005
 
@@ -58,9 +58,9 @@ SWEP.RecoilFirstShotMult = 1 // multiplier for the first shot's recoil amount
 
 SWEP.RecoilVisualKick = 0.75
 
-SWEP.RecoilKick = 4
+SWEP.RecoilKick = 3.5
 
-SWEP.RecoilSpreadPenalty = 0.0015
+SWEP.RecoilSpreadPenalty = 0.0012
 
 SWEP.CanBlindFire = true
 
