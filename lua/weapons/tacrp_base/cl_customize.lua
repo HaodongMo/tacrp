@@ -129,6 +129,8 @@ function SWEP:CreateCustomizeHUD()
         ranger:SetPos(scrw - ScreenScale(128) - airgap, stack + smallgap)
         ranger:SetSize(ScreenScale(128), ScreenScale(64))
         ranger.Paint = function(self2, w, h)
+            if !IsValid(self) then return end
+
             surface.SetDrawColor(0, 0, 0, 150)
             surface.DrawRect(0, 0, w, h)
             TacRP.DrawCorneredBox(0, 0, w, h)
@@ -268,6 +270,8 @@ function SWEP:CreateCustomizeHUD()
         bodychart:SetSize(ScreenScale(40), ScreenScale(64))
         bodychart:SetZPos(100)
         bodychart.Paint = function(self2, w, h)
+            if !IsValid(self) then return end
+
             surface.SetDrawColor(0, 0, 0, 150)
             surface.DrawRect(0, 0, w, h)
             TacRP.DrawCorneredBox(0, 0, w, h)
@@ -342,6 +346,8 @@ function SWEP:CreateCustomizeHUD()
     desc_box:SetPos(scrw - ScreenScale(172) - airgap, stack + smallgap)
     stack = stack + ScreenScale(48) + smallgap
     desc_box.Paint = function(self2, w, h)
+        if !IsValid(self) then return end
+
         surface.SetDrawColor(0, 0, 0, 150)
         surface.DrawRect(0, 0, w, h)
         TacRP.DrawCorneredBox(0, 0, w, h)
@@ -510,6 +516,8 @@ function SWEP:CreateCustomizeHUD()
         stat_box:SetSize(ScreenScale(128), ScreenScale(184))
         stat_box:SetPos(scrw - ScreenScale(128) - airgap, stack + smallgap)
         stat_box.Paint = function(self2, w, h)
+            if !IsValid(self) then return end
+
             surface.SetDrawColor(0, 0, 0, 150)
             surface.DrawRect(0, 0, w, h)
             TacRP.DrawCorneredBox(0, 0, w, h)
@@ -628,6 +636,8 @@ function SWEP:CreateCustomizeHUD()
         slot_name:SetPos(airgap, offset + airgap - ScreenScale(8) + ((slot - 1) * ScreenScale(34 + 8)))
         slot_name:SetSize(ScreenScale(128), ScreenScale(8))
         slot_name.Paint = function(self2, w, h)
+            if !IsValid(self) then return end
+
             local txt = attslot.PrintName or ""
 
             surface.SetFont("TacRP_Myriad_Pro_8")
@@ -662,6 +672,8 @@ function SWEP:CreateCustomizeHUD()
         prosconspanel:SetPos(airgap + ((table.Count(atts)) * ScreenScale(34)), offset + airgap + ((slot - 1) * ScreenScale(34 + 8)))
         prosconspanel:SetSize(ScrW(), ScreenScale(34))
         prosconspanel.Paint = function(self2, w, h)
+            if !IsValid(self) then return end
+
             local installed = attslot.Installed
 
             if !installed then return end
@@ -728,6 +740,7 @@ function SWEP:CreateCustomizeHUD()
                 end
             end
             slot_panel.Paint = function(self2, w, h)
+                if !IsValid(self) then return end
                 if !IsValid(self:GetOwner()) then return end
                 local hover = self2:IsHovered()
                 local attached = attslot.Installed == att
@@ -809,6 +822,8 @@ function SWEP:CreateCustomizeHUD()
         slot_name:SetPos(airgap, ScrH() - ScreenScale(16))
         slot_name:SetSize(ScreenScale(128 + 16), ScreenScale(12))
         slot_name.Paint = function(self2, w, h)
+            if !IsValid(self) then return end
+
             surface.SetDrawColor(0, 0, 0, 150)
             surface.DrawRect(0, 0, w, h)
             TacRP.DrawCorneredBox(0, 0, w, h)
