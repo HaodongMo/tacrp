@@ -7,7 +7,7 @@ AddCSLuaFile()
 SWEP.PrintName = "Colt M4A1"
 SWEP.Category = "Tactical RP (Extras)"
 
-SWEP.Description = "Premium American assault rifle. This model is the real deal."
+SWEP.Description = "Premium automatic assault rifle. A true American classic."
 
 SWEP.ViewModel = "models/weapons/tacint_extras/v_m4a1.mdl"
 SWEP.WorldModel = "models/weapons/tacint_extras/w_m4a1.mdl"
