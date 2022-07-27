@@ -475,7 +475,7 @@ function SWEP:CreateCustomizeHUD()
         {
             Name = "Move Speed",
             AggregateFunction = function(base, val)
-                return math.Round(val*100, 1)
+                return math.Round(val*100, 0)
             end,
             Unit = "%",
             Value = "MoveSpeedMult"
@@ -483,7 +483,7 @@ function SWEP:CreateCustomizeHUD()
         {
             Name = "Shooting Speed",
             AggregateFunction = function(base, val)
-                return math.Round(val*100, 1)
+                return math.Round(val*100, 0)
             end,
             Unit = "%",
             Value = "ShootingSpeedMult"
@@ -491,7 +491,7 @@ function SWEP:CreateCustomizeHUD()
         {
             Name = "Sighted Speed",
             AggregateFunction = function(base, val)
-                return math.Round(val*100, 1)
+                return math.Round(val*100, 0)
             end,
             Unit = "%",
             Value = "SightedSpeedMult"
