@@ -17,7 +17,7 @@ function SWEP:DoBodygroups(wm, custom_wm)
 
     mdl:SetBodyGroups(dbg or "")
 
-    local eles = self:GetElements()
+    local eles = self:GetElements(true)
 
     for i, k in pairs(eles) do
         if wm then
@@ -49,7 +49,7 @@ function SWEP:DoBodygroups(wm, custom_wm)
     end
 end
 
-function SWEP:GetElements()
+function SWEP:GetElements(holster)
     local eles = {}
 
     for i, k in pairs(self.Attachments) do
@@ -62,6 +62,10 @@ function SWEP:GetElements()
         else
             table.Add(eles, k.UnInstalledElements or {})
         end
+    end
+
+    if holster and self.AttachmentElements["foldstock"] then
+        table.insert(eles, "foldstock")
     end
 
     local eleatts = {}
