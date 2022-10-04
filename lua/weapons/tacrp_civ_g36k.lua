@@ -1,65 +1,65 @@
-SWEP.Base = "tacrp_m4"
+SWEP.Base = "tacrp_g36k"
 SWEP.Spawnable = true
 
 AddCSLuaFile()
 
 // names and stuff
-SWEP.PrintName = "Colt Canada AR-15"
+SWEP.PrintName = "HK HK243" // technically HK243 is the sporter version of the G36, not the G36K. too lazy to model edit
 SWEP.Category = "Tactical RP (Arctic)"
 
-// Tier 2
-SWEP.Description = "Civilian, semi-automatic variation of an ubiquitous American rifle.\nUses reduced capacity magazines."
+SWEP.Description = "Civilian, semi-automatic variant of an iconic polymer rifle.\nUses reduced capacity magazines."
 
-SWEP.ViewModel = "models/weapons/tacint/v_m4.mdl"
-SWEP.WorldModel = "models/weapons/tacint/w_m4.mdl"
+SWEP.ViewModel = "models/weapons/tacint/v_g36k_hq.mdl"
+SWEP.WorldModel = "models/weapons/tacint/w_g36k.mdl"
 
 SWEP.Slot = 3
 
-SWEP.RPM = 550
-
 SWEP.Firemode = 1
 SWEP.Firemodes = false
+
+SWEP.RPM = 500
 
 SWEP.ClipSize = 15
 
 SWEP.Attachments = {
     [1] = {
         PrintName = "Optic",
-        Category = {"optic_cqb", "optic_medium"},
-        InstalledElements = {"sights"},
-        Bone = "ValveBiped.m4_rootbone",
+        Category = {"ironsights", "optic_cqb", "optic_medium"},
+        Bone = "ValveBiped.g36k_rootbone",
         WMBone = "Box01",
+        InstalledElements = {"irons"},
         AttachSound = "TacRP/weapons/optic_on.wav",
         DetachSound = "TacRP/weapons/optic_off.wav",
         VMScale = 1,
-        Pos_VM = Vector(-5.35, -0.05, 7),
-        Pos_WM = Vector(0.75, 5, 1.15),
+        Pos_VM = Vector(-6.4, 0.14, 7),
+        Pos_WM = Vector(0, 0, 2.75),
         Ang_VM = Angle(90, 0, 0),
-        Ang_WM = Angle(0, -90 + 3.5, 0),
+        Ang_WM = Angle(0, -90, 0),
     },
     [2] = {
         PrintName = "Muzzle",
         Category = "silencer",
-        Bone = "ValveBiped.m4_rootbone",
+        Bone = "ValveBiped.g36k_rootbone",
         WMBone = "Box01",
         AttachSound = "TacRP/weapons/silencer_on.wav",
         DetachSound = "TacRP/weapons/silencer_off.wav",
-        Pos_VM = Vector(-3.95, 0, 23),
-        Pos_WM = Vector(1.4, 21, -0.5),
+        Pos_VM = Vector(-3.45, 0.075, 24.5),
+        Pos_WM = Vector(-0.25, 24, -1),
         Ang_VM = Angle(90, 0, 0),
-        Ang_WM = Angle(0, -90 + 3.5, 0),
+        Ang_WM = Angle(0, -90, 0),
     },
     [3] = {
         PrintName = "Tactical",
         Category = "tactical",
-        Bone = "ValveBiped.m4_rootbone",
+        Bone = "ValveBiped.g36k_rootbone",
         WMBone = "Box01",
         AttachSound = "TacRP/weapons/flashlight_on.wav",
         DetachSound = "TacRP/weapons/flashlight_off.wav",
-        Pos_VM = Vector(-3.9, -1.2, 13.5),
-        Pos_WM = Vector(2, 13, -0.5),
-        Ang_VM = Angle(90, 0, -90),
-        Ang_WM = Angle(-90, -90 + 3.5, 0),
+        InstalledElements = {"tactical"},
+        Pos_VM = Vector(-3.75, -0.75, 17),
+        Pos_WM = Vector(0.9, 15, -1),
+        Ang_VM = Angle(90, 0, -80),
+        Ang_WM = Angle(-70, -90, 0),
     },
     [4] = {
         PrintName = "Accessory",
