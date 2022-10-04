@@ -35,7 +35,7 @@ function ENT:Impact(data, collider)
             dmginfo:SetAttacker(self:GetOwner())
             dmginfo:SetInflictor(self)
             dmginfo:SetDamageType(DMG_CLUB)
-            dmginfo:SetDamage(100 * (self.NPCDamage and 0.5 or 1))
+            dmginfo:SetDamage(500 * (self.NPCDamage and 0.5 or 1))
             dmginfo:SetDamageForce(data.OurOldVelocity * 25)
             dmginfo:SetDamagePosition(data.HitPos)
             data.HitEntity:TakeDamageInfo(dmginfo)
@@ -51,7 +51,7 @@ function ENT:Detonate()
         util.BlastDamage(self, self:GetOwner(), self:GetPos(), 350, 100)
     else
         util.BlastDamage(self, self:GetOwner(), self:GetPos(), 100, 750)
-        util.BlastDamage(self, self:GetOwner(), self:GetPos(), 400, 150)
+        util.BlastDamage(self, self:GetOwner(), self:GetPos(), 400, 200)
     end
 
     local fx = EffectData()

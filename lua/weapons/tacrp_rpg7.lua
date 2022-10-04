@@ -7,7 +7,7 @@ AddCSLuaFile()
 SWEP.PrintName = "RPG-7"
 SWEP.Category = "Tactical RP (Arctic)"
 
-SWEP.Description = "Soviet rocket launcher with powerful explosion."
+SWEP.Description = "Soviet rocket launcher with powerful explosion.\nSafety fuse prevents point blank detonations."
 
 SWEP.ViewModel = "models/weapons/tacint/v_rpg7.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_rpg7.mdl"
@@ -155,7 +155,7 @@ SWEP.AnimationTranslationTable = {
 SWEP.Attachments = {
     [1] = {
         PrintName = "Accessory",
-        Category = {"perk", "perk_reload", "perk_blindfire", "perk_duffle"},
+        Category = {"perk", "perk_reload", "perk_blindfire", "perk_duffle", "perk_shooting"},
         AttachSound = "TacRP/weapons/flashlight_on.wav",
         DetachSound = "TacRP/weapons/flashlight_off.wav",
     },

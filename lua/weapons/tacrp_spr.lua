@@ -106,7 +106,7 @@ SWEP.HolsterAng = Angle(0, 0, 0)
 // scope
 
 SWEP.Scope = true
-SWEP.ScopeOverlay = Material("TacRP/scopes/sniper.png", "mips smooth") // Material("path/to/overlay")
+SWEP.ScopeOverlay = Material("tacrp/scopes/l96.png", "mips smooth") // Material("path/to/overlay")
 SWEP.ScopeFOV = 90 / 6
 SWEP.ScopeLevels = 1 // 2 = like CS:S
 SWEP.ScopeHideWeapon = true

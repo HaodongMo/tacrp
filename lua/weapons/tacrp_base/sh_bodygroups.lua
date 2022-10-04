@@ -65,10 +65,17 @@ function SWEP:GetElements(holster)
     end
     local eleatts = {}
 
+    local foldstock = false
     for i, k in pairs(eles) do
         if self.AttachmentElements then
             table.insert(eleatts, self.AttachmentElements[k])
+            foldstock = foldstock or k == "foldstock"
         end
+    end
+
+    -- Hack: Always fold stock when weapon is holstered
+    if self:GetOwner():GetActiveWeapon() != self and !foldstock and self.AttachmentElements["foldstock"] then
+        table.insert(eleatts, self.AttachmentElements["foldstock"])
     end
 
     table.sort(eleatts, function(a, b)
