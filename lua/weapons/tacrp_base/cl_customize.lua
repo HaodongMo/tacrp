@@ -433,6 +433,14 @@ function SWEP:CreateCustomizeHUD()
             LowerIsBetter = true,
         },
         {
+            Name = "Recoil Recover Rate",
+            AggregateFunction = function(base, val)
+                return math.Round(math.deg(val * (base and self:GetTable().RecoilSpreadPenalty or self:GetValue("RecoilSpreadPenalty"))), 1)
+            end,
+            Unit = "°/s",
+            Value = "RecoilDissipationRate",
+        },
+        {
             Name = "Move Speed",
             AggregateFunction = function(base, val)
                 return math.Round(val*100, 0)
@@ -488,15 +496,6 @@ function SWEP:CreateCustomizeHUD()
             Name = "Sway In Sights",
             Value = "ScopedSway",
             LowerIsBetter = true,
-        },
-        {
-            Name = "Recoil Recover Rate",
-            AggregateFunction = function(base, val)
-                return math.Round(math.deg(val * (base and self:GetTable().RecoilSpreadPenalty or self:GetValue("RecoilSpreadPenalty"))), 1)
-            end,
-            Unit = "°/s",
-            Value = "RecoilDissipationRate",
-            HideIfSame = true,
         },
         {
             Name = "Mid-Air Spread",
