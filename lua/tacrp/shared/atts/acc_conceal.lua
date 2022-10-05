@@ -4,7 +4,7 @@ ATT.Description = ""
 ATT.Pros = {"Weapon hidden while holstered"}
 ATT.Cons = {"Slower draw speed"}
 
-ATT.Category = "perk_conceal" // can be "string" or {"list", "of", "strings"}
+ATT.Category = "acc_holster" // can be "string" or {"list", "of", "strings"}
 
 ATT.SortOrder = 4
 

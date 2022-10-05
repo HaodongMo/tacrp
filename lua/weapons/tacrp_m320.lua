@@ -200,9 +200,15 @@ SWEP.Attachments = {
     },
     [2] = {
         PrintName = "Accessory",
-        Category = {"foldstock", "perk", "perk_reload", "perk_blindfire", "perk_melee"},
+        Category = {"acc_foldstock", "acc_holster"},
         AttachSound = "TacRP/weapons/flashlight_on.wav",
         DetachSound = "TacRP/weapons/flashlight_off.wav",
+    },
+    [3] = {
+        PrintName = "Perk",
+        Category = {"perk", "perk_shooting", "perk_reload"},
+        AttachSound = "tacrp/weapons/flashlight_on.wav",
+        DetachSound = "tacrp/weapons/flashlight_off.wav",
     },
 }
 

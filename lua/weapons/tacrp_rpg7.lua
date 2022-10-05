@@ -155,9 +155,15 @@ SWEP.AnimationTranslationTable = {
 SWEP.Attachments = {
     [1] = {
         PrintName = "Accessory",
-        Category = {"perk", "perk_reload", "perk_blindfire", "perk_duffle", "perk_shooting"},
+        Category = {"acc_duffle", "acc_sling"},
         AttachSound = "TacRP/weapons/flashlight_on.wav",
         DetachSound = "TacRP/weapons/flashlight_off.wav",
+    },
+    [2] = {
+        PrintName = "Perk",
+        Category = {"perk", "perk_shooting", "perk_reload"},
+        AttachSound = "tacrp/weapons/flashlight_on.wav",
+        DetachSound = "tacrp/weapons/flashlight_off.wav",
     },
 }
 

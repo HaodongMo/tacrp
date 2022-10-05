@@ -4,7 +4,7 @@ ATT.Description = ""
 ATT.Pros = {"Conceal weapon in bag"}
 ATT.Cons = {"Slower draw speed"}
 
-ATT.Category = "perk_duffle" // can be "string" or {"list", "of", "strings"}
+ATT.Category = "acc_duffle" // can be "string" or {"list", "of", "strings"}
 
 ATT.SortOrder = 4
 

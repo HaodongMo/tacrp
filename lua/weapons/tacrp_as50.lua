@@ -117,10 +117,6 @@ SWEP.ScopeFOV = 90 / 12
 SWEP.ScopeLevels = 1 // 2 = like CS:S
 SWEP.ScopeHideWeapon = true
 
--- SWEP.ScopeOverlay = false
--- SWEP.ScopeFOV = 90 / 1.1
--- SWEP.ScopeHideWeapon = false
-
 SWEP.Melee = false
 
 // reload
@@ -240,13 +236,13 @@ SWEP.Attachments = {
     },
     [4] = {
         PrintName = "Accessory",
-        Category = {"perk", "perk_shooting", "perk_reload", "perk_extmag_sniper", "perk_duffle"},
-        AttachSound = "TacRP/weapons/flashlight_on.wav",
-        DetachSound = "TacRP/weapons/flashlight_off.wav",
+        Category = {"acc_extmag_sniper", "acc_sling", "acc_duffle"},
+        AttachSound = "tacrp/weapons/flashlight_on.wav",
+        DetachSound = "tacrp/weapons/flashlight_off.wav",
     },
     [5] = {
         PrintName = "Bolt",
-        Category = {"bolt_semi"},
+        Category = {"bolt_automatic"},
         AttachSound = "TacRP/weapons/flashlight_on.wav",
         DetachSound = "TacRP/weapons/flashlight_off.wav",
     },
@@ -261,7 +257,13 @@ SWEP.Attachments = {
         Category = {"ammo_amr"},
         AttachSound = "TacRP/weapons/flashlight_on.wav",
         DetachSound = "TacRP/weapons/flashlight_off.wav",
-    }
+    },
+    [8] = {
+        PrintName = "Perk",
+        Category = {"perk", "perk_melee", "perk_shooting", "perk_reload"},
+        AttachSound = "tacrp/weapons/flashlight_on.wav",
+        DetachSound = "tacrp/weapons/flashlight_off.wav",
+    },
 }
 
 local function addsound(name, spath)

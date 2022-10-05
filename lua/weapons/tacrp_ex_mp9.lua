@@ -227,7 +227,7 @@ SWEP.Attachments = {
     },
     [4] = {
         PrintName = "Accessory",
-        Category = {"foldstock", "perk", "perk_melee", "perk_shooting", "perk_reload", "perk_extmag_smg", "perk_duffle", "perk_sling"},
+        Category = {"acc_foldstock", "acc_sling", "acc_duffle", "acc_extmag_smg"},
         AttachSound = "tacrp/weapons/flashlight_on.wav",
         DetachSound = "tacrp/weapons/flashlight_off.wav",
     },
@@ -248,7 +248,13 @@ SWEP.Attachments = {
         Category = {"ammo_rifle"},
         AttachSound = "TacRP/weapons/flashlight_on.wav",
         DetachSound = "TacRP/weapons/flashlight_off.wav",
-    }
+    },
+    [8] = {
+        PrintName = "Perk",
+        Category = {"perk", "perk_melee", "perk_shooting", "perk_reload"},
+        AttachSound = "tacrp/weapons/flashlight_on.wav",
+        DetachSound = "tacrp/weapons/flashlight_off.wav",
+    },
 }
 
 local function addsound(name, spath)
@@ -259,8 +265,6 @@ local function addsound(name, spath)
         sound = spath
     })
 end
-
-local path_mp5 = "tacrp/weapons/mp5/mp5_"
 
 addsound("tacint_extras_mp9.remove_clip", path2 .. "clipout.mp3")
 addsound("tacint_extras_mp9.insert_clip", path2 .. "clipin.mp3")

@@ -109,11 +109,10 @@ SWEP.DropMagazineImpact = "pistol"
 
 // sounds
 
-local path = "tacrp/weapons/p2000/p2000_"
-local path2 = "tacrp_extras/usp/"
+local path = "tacrp_extras/usp/"
 
-SWEP.Sound_Shoot = "^" .. path2 .. "Fire.wav"
-SWEP.Sound_Shoot_Silenced = path2 .. "Supressed.wav"
+SWEP.Sound_Shoot = "^" .. path .. "Fire.wav"
+SWEP.Sound_Shoot_Silenced = path .. "Supressed.wav"
 
 SWEP.Vol_Shoot = 110
 SWEP.ShootPitchVariance = 2.5 // amount to vary pitch by each shot
@@ -218,8 +217,8 @@ SWEP.Attachments = {
         Ang_WM = Angle(0, -90, 180),
     },
     [4] = {
-        PrintName = "Perk",
-        Category = {"perk", "perk_melee", "perk_shooting", "perk_reload", "perk_extmag_pistol", "perk_conceal"},
+        PrintName = "Accessory",
+        Category = {"acc_extmag_pistol", "acc_holster"},
         AttachSound = "tacrp/weapons/flashlight_on.wav",
         DetachSound = "tacrp/weapons/flashlight_off.wav",
     },
@@ -240,7 +239,13 @@ SWEP.Attachments = {
         Category = {"ammo_pistol"},
         AttachSound = "TacRP/weapons/flashlight_on.wav",
         DetachSound = "TacRP/weapons/flashlight_off.wav",
-    }
+    },
+    [8] = {
+        PrintName = "Perk",
+        Category = {"perk", "perk_melee", "perk_shooting", "perk_reload"},
+        AttachSound = "tacrp/weapons/flashlight_on.wav",
+        DetachSound = "tacrp/weapons/flashlight_off.wav",
+    },
 }
 
 local function addsound(name, spath)
@@ -252,11 +257,11 @@ local function addsound(name, spath)
     })
 end
 
-addsound("tacint_extras_usp.clip_in", path2 .. "clipin.wav")
-addsound("tacint_extras_usp.clip_in-mid", path2 .. "clipin.wav")
-addsound("tacint_extras_usp.clip_out", path2 .. "clipout.wav")
+addsound("tacint_extras_usp.clip_in", path .. "clipin.wav")
+addsound("tacint_extras_usp.clip_in-mid", path .. "clipin.wav")
+addsound("tacint_extras_usp.clip_out", path .. "clipout.wav")
 
-addsound("tacint_extras_usp.slide_action", path2 .. "SlideBack.wav")
+addsound("tacint_extras_usp.slide_action", path .. "SlideBack.wav")
 
-addsound("tacint_extras_usp.slide_open", path2 .. "magshove.mp3")
-addsound("tacint_extras_usp.slide_shut", path2 .. "boltrelease.wav")
+addsound("tacint_extras_usp.slide_open", path .. "magshove.mp3")
+addsound("tacint_extras_usp.slide_shut", path .. "boltrelease.wav")

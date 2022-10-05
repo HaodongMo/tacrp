@@ -202,8 +202,8 @@ SWEP.Attachments = {
         Ang_WM = Angle(-70, -90, 0),
     },
     [3] = {
-        PrintName = "Perk",
-        Category = {"perk", "perk_melee", "perk_shooting", "perk_reload", "perk_extendedmag", "perk_sling", "perk_duffle"},
+        PrintName = "Accessory",
+        Category = {"perk_extendedmag", "acc_sling", "acc_duffle"},
         AttachSound = "tacrp/weapons/flashlight_on.wav",
         DetachSound = "tacrp/weapons/flashlight_off.wav",
     },
@@ -224,5 +224,11 @@ SWEP.Attachments = {
         Category = {"ammo_rifle"},
         AttachSound = "TacRP/weapons/flashlight_on.wav",
         DetachSound = "TacRP/weapons/flashlight_off.wav",
-    }
+    },
+    [7] = {
+        PrintName = "Perk",
+        Category = {"perk", "perk_melee", "perk_shooting", "perk_reload"},
+        AttachSound = "tacrp/weapons/flashlight_on.wav",
+        DetachSound = "tacrp/weapons/flashlight_off.wav",
+    },
 }

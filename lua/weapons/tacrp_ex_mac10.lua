@@ -182,20 +182,6 @@ SWEP.AttachmentElements = {
 }
 
 SWEP.Attachments = {
-    -- [1] = {
-    --     PrintName = "Optic",
-    --     Category = "optic_pistol",
-    --     Bone = "xd45_rig.xd45_ROOT",
-    --     WMBone = "Box01",
-    --     AttachSound = "tacrp/weapons/optic_on.wav",
-    --     DetachSound = "tacrp/weapons/optic_off.wav",
-    --     VMScale = 1,
-    --     WMScale = 1,
-    --     Pos_VM = Vector(-3.7, 0, -1.5),
-    --     Ang_VM = Angle(90, 0, 0),
-    --     Pos_WM = Vector(0, -1, -1),
-    --     Ang_WM = Angle(0, -90, 0),
-    -- },
     [1] = {
         PrintName = "Muzzle",
         Category = {"comp_mac10", "silencer"},
@@ -226,7 +212,7 @@ SWEP.Attachments = {
     },
     [3] = {
         PrintName = "Accessory",
-        Category = {"foldstock", "perk", "perk_melee", "perk_shooting", "perk_reload", "perk_extmag_smg", "perk_conceal"},
+        Category = {"acc_foldstock", "acc_extmag_smg", "acc_holster"},
         AttachSound = "TacRP/weapons/flashlight_on.wav",
         DetachSound = "TacRP/weapons/flashlight_off.wav",
     },
@@ -247,7 +233,13 @@ SWEP.Attachments = {
         Category = {"ammo_pistol"},
         AttachSound = "TacRP/weapons/flashlight_on.wav",
         DetachSound = "TacRP/weapons/flashlight_off.wav",
-    }
+    },
+    [7] = {
+        PrintName = "Perk",
+        Category = {"perk", "perk_melee", "perk_shooting", "perk_reload"},
+        AttachSound = "tacrp/weapons/flashlight_on.wav",
+        DetachSound = "tacrp/weapons/flashlight_off.wav",
+    },
 }
 
 local function addsound(name, spath)
@@ -261,15 +253,6 @@ end
 
 addsound("tacint_extras_mac10.clip_in", path .. "mac10_clipin.wav")
 addsound("tacint_extras_mac10.clip_out", path .. "mac10_clipout.wav")
--- addsound("tacint_extras_mac10.clip_slap", path2 .. "clip_slap-1.wav")
 addsound("tacint_extras_mac10.slide_back", path .. "mac10_boltpull.wav")
 addsound("tacint_extras_mac10.slide_forward", path .. "mac10_boltpull2.wav")
 addsound("tacint_extras_mac10.slide_shut", path .. "mac10_boltpull2.wav")
-
--- addsound("tacint_extras_mac10.slide_shut", {
---     path .. "slide_shut-1.wav",
---     path .. "slide_shut-2.wav",
---     path .. "slide_shut-3.wav",
--- })
--- addsound("tacint_extras_mac10.cock_hammer", path .. "cockhammer.wav")
--- addsound("tacint_extras_mac10.safety_switch", path .. "safety_switch.wav")

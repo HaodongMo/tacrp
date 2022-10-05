@@ -165,9 +165,15 @@ SWEP.Akimbo = true
 SWEP.Attachments = {
     [1] = {
         PrintName = "Accessory",
-        Category = {"perk", "perk_melee", "perk_shooting", "perk_reload", "perk_conceal",},
+        Category = {"acc_holster"},
         AttachSound = "TacRP/weapons/flashlight_on.wav",
         DetachSound = "TacRP/weapons/flashlight_off.wav",
+    },
+    [4] = {
+        PrintName = "Perk",
+        Category = {"perk", "perk_melee", "perk_shooting", "perk_reload"},
+        AttachSound = "tacrp/weapons/flashlight_on.wav",
+        DetachSound = "tacrp/weapons/flashlight_off.wav",
     },
     [2] = {
         PrintName = "Trigger",

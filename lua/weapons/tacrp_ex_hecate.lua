@@ -128,10 +128,9 @@ SWEP.DropMagazineModel = "models/weapons/tacint/magazines/uratio.mdl"
 
 // sounds
 
-local path = "TacRP/weapons/uratio/uratio_"
-local path2 = "tacrp_extras/hecate/ax308_"
+local path = "tacrp_extras/hecate/ax308_"
 
-SWEP.Sound_Shoot = {"^" .. path2 .. "fire_1.wav", "^" .. path2 .. "fire_2.wav", "^" .. path2 .. "fire_3.wav"}
+SWEP.Sound_Shoot = {"^" .. path .. "fire_1.wav", "^" .. path .. "fire_2.wav", "^" .. path .. "fire_3.wav"}
 SWEP.Sound_Shoot_Silenced = "TacRP/weapons/ak47/ak47_fire_silenced-1.wav"
 
 SWEP.Vol_Shoot = 130
@@ -247,7 +246,7 @@ SWEP.Attachments = {
     },
     [4] = {
         PrintName = "Accessory",
-        Category = {"perk", "perk_melee", "perk_shooting", "perk_reload", "perk_extmag_sniper", "perk_sling", "perk_duffle"},
+        Category = {"acc_extmag_sniper", "acc_sling", "acc_duffle"},
         AttachSound = "TacRP/weapons/flashlight_on.wav",
         DetachSound = "TacRP/weapons/flashlight_off.wav",
     },
@@ -268,7 +267,13 @@ SWEP.Attachments = {
         Category = {"ammo_amr"},
         AttachSound = "TacRP/weapons/flashlight_on.wav",
         DetachSound = "TacRP/weapons/flashlight_off.wav",
-    }
+    },
+    [8] = {
+        PrintName = "Perk",
+        Category = {"perk", "perk_melee", "perk_shooting", "perk_reload"},
+        AttachSound = "tacrp/weapons/flashlight_on.wav",
+        DetachSound = "tacrp/weapons/flashlight_off.wav",
+    },
 }
 
 local function addsound(name, spath)
@@ -280,9 +285,9 @@ local function addsound(name, spath)
     })
 end
 
-addsound("tacint_extras_hecate.Clip_Out", path2 .. "magout.wav")
-addsound("tacint_extras_hecate.Clip_In", path2 .. "magin.wav")
-addsound("tacint_extras_hecate.Bolt_Back", path2 .. "boltrelease.wav")
-addsound("tacint_extras_hecate.bolt_forward", path2 .. "boltback.wav")
-addsound("tacint_extras_hecate.Bolt_Up", path2 .. "boltup.wav")
-addsound("tacint_extras_hecate.bolt_down", path2 .. "boltdown.wav")
+addsound("tacint_extras_hecate.Clip_Out", path .. "magout.wav")
+addsound("tacint_extras_hecate.Clip_In", path .. "magin.wav")
+addsound("tacint_extras_hecate.Bolt_Back", path .. "boltrelease.wav")
+addsound("tacint_extras_hecate.bolt_forward", path .. "boltback.wav")
+addsound("tacint_extras_hecate.Bolt_Up", path .. "boltup.wav")
+addsound("tacint_extras_hecate.bolt_down", path .. "boltdown.wav")
