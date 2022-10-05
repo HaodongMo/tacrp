@@ -8,7 +8,7 @@ ATT.Category = "comp_mac10" // can be "string" or {"list", "of", "strings"}
 ATT.InvAtt = "muzz_pistol_comp"
 ATT.SortOrder = 1
 
-ATT.Mult_RecoilKick = 0.75
+ATT.Mult_RecoilKick = 0.6
 ATT.Mult_RPM = 0.8
 ATT.Mult_RecoilSpreadPenalty = 0.75
 ATT.Mult_Spread = 0.75

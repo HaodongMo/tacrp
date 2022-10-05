@@ -4,22 +4,22 @@ SWEP.Spawnable = true
 AddCSLuaFile()
 
 // names and stuff
-SWEP.PrintName = "HK MP5A3"
-SWEP.Category = "Tactical RP (Arctic)"
+SWEP.PrintName = "HK UMP45"
+SWEP.Category = "Tactical RP (Extras)"
 
-SWEP.Description = "Quality, well-balanced sub-machine gun known for its precision."
+SWEP.Description = "Quality sub-machine gun designed to be a cheaper alternative to the MP5. Low capacity and fire rate, but damage is higher."
 
-SWEP.ViewModel = "models/weapons/tacint/v_mp5.mdl"
-SWEP.WorldModel = "models/weapons/tacint/w_mp5.mdl"
+SWEP.ViewModel = "models/weapons/tacint_extras/v_ump45.mdl"
+SWEP.WorldModel = "models/weapons/tacint_extras/w_ump45.mdl"
 
 SWEP.Slot = 3
 
 // "ballistics"
 
-SWEP.Damage_Max = 14
-SWEP.Damage_Min = 7
-SWEP.Range_Min = 1500 // distance for which to maintain maximum damage
-SWEP.Range_Max = 4000 // distance at which we drop to minimum damage
+SWEP.Damage_Max = 18
+SWEP.Damage_Min = 6
+SWEP.Range_Min = 1200 // distance for which to maintain maximum damage
+SWEP.Range_Max = 3500 // distance at which we drop to minimum damage
 SWEP.Penetration = 5 // units of metal this weapon can penetrate
 
 SWEP.BodyDamageMultipliers = {
@@ -33,7 +33,7 @@ SWEP.BodyDamageMultipliers = {
     [HITGROUP_GEAR] = 0.9
 }
 
-SWEP.MuzzleVelocity = 13500
+SWEP.MuzzleVelocity = 12500
 
 // misc. shooting
 
@@ -43,23 +43,23 @@ SWEP.Firemodes = {
     1
 }
 
-SWEP.RPM = 750
+SWEP.RPM = 600
 
-SWEP.Spread = 0.003
+SWEP.Spread = 0.005
 
 SWEP.ShootTimeMult = 0.5
 
 SWEP.RecoilPerShot = 1
-SWEP.RecoilMaximum = 10
-SWEP.RecoilResetTime = 0.1// time after you stop shooting for recoil to start dissipating
-SWEP.RecoilDissipationRate = 10
+SWEP.RecoilMaximum = 12
+SWEP.RecoilResetTime = 0.12 // time after you stop shooting for recoil to start dissipating
+SWEP.RecoilDissipationRate = 12
 SWEP.RecoilFirstShotMult = 1
 
 SWEP.RecoilVisualKick = 0.5
 
-SWEP.RecoilKick = 2.5
+SWEP.RecoilKick = 3.5
 
-SWEP.RecoilSpreadPenalty = 0.001 // extra spread per one unit of recoil
+SWEP.RecoilSpreadPenalty = 0.0008
 
 SWEP.CanBlindFire = true
 
@@ -92,10 +92,10 @@ SWEP.BlindFirePos = Vector(0, -4, -3)
 SWEP.SprintAng = Angle(30, -15, 0)
 SWEP.SprintPos = Vector(8, -1, -2)
 
-SWEP.SightAng = Angle(-0.02, 0.75, 0)
-SWEP.SightPos = Vector(-4.555, -7.5, -3.6)
+SWEP.SightAng = Angle(-0, 0, 0)
+SWEP.SightPos = Vector(-4.5, -7.5, -3.26)
 
-SWEP.CorrectivePos = Vector(0.025, 0, 0.1)
+SWEP.CorrectivePos = Vector(0, 0, 0)
 SWEP.CorrectiveAng = Angle(0, 0, 0)
 
 SWEP.HolsterVisible = true
@@ -105,19 +105,20 @@ SWEP.HolsterAng = Angle(0, 0, 0)
 
 // reload
 
-SWEP.ClipSize = 30
+SWEP.ClipSize = 25
 SWEP.Ammo = "pistol"
 
 SWEP.ReloadTimeMult = 1
-SWEP.DropMagazineModel = "models/weapons/tacint/magazines/mp5.mdl"
+SWEP.DropMagazineModel = "models/weapons/tacint_extras/magazines/ump45.mdl"
 SWEP.DropMagazineImpact = "plastic"
 
 // sounds
 
 local path = "TacRP/weapons/mp5/mp5_"
+local path2 = "tacrp_extras/ump45/ump45_"
 
-SWEP.Sound_Shoot = "^" .. path .. "fire-1.wav"
-SWEP.Sound_Shoot_Silenced = path .. "fire_silenced-1.wav"
+SWEP.Sound_Shoot = "^" .. path2 .. "1.wav"
+SWEP.Sound_Shoot_Silenced = "TacRP/weapons/superv/fire_silenced-1.wav"
 
 SWEP.Vol_Shoot = 130
 SWEP.ShootPitchVariance = 2.5 // amount to vary pitch by each shot
@@ -193,8 +194,8 @@ SWEP.Attachments = {
         AttachSound = "TacRP/weapons/optic_on.wav",
         DetachSound = "TacRP/weapons/optic_off.wav",
         InstalledElements = {"optic"},
-        Pos_VM = Vector(-6.25, -0.3, 6.5),
-        Pos_WM = Vector(7, 1.5, -6.5),
+        Pos_VM = Vector(-6, -0.35, 4.5),
+        Pos_WM = Vector(7, 1.6, -7),
         Ang_VM = Angle(90, 0, 0),
         Ang_WM = Angle(0, -3.5, 180),
     },
@@ -204,8 +205,8 @@ SWEP.Attachments = {
         Bone = "ValveBiped.mp5_rootbone",
         AttachSound = "TacRP/weapons/silencer_on.wav",
         DetachSound = "TacRP/weapons/silencer_off.wav",
-        Pos_VM = Vector(-4.25, -0.1, 20.5),
-        Pos_WM = Vector(24, 2.5, -5.25),
+        Pos_VM = Vector(-4.25, -0.1, 22),
+        Pos_WM = Vector(26, 2.5, -5),
         Ang_VM = Angle(90, 0, 0),
         Ang_WM = Angle(0, -3.5, 180),
     },
@@ -256,12 +257,14 @@ local function addsound(name, spath)
     })
 end
 
-addsound("TacInt_mp5.remove_clip", path .. "remove_clip.wav")
-addsound("TacInt_mp5.insert_clip", path .. "insert_clip.wav")
-addsound("TacInt_mp5.insert_clip-mid", path .. "insert_clip-mid.wav")
-addsound("TacInt_mp5.HK_Slap", path .. "hk_slap.wav")
-addsound("TacInt_mp5.bolt_back", path .. "bolt_back.wav")
-addsound("TacInt_mp5.fire_select", {
+addsound("tacint_extras_ump45.remove_clip1", path2 .. "clipout1.mp3")
+addsound("tacint_extras_ump45.insert_clip1", path2 .. "clipin1.mp3")
+addsound("tacint_extras_ump45.remove_clip2", path2 .. "clipout2.mp3")
+addsound("tacint_extras_ump45.insert_clip2", path2 .. "clipin2.mp3")
+addsound("tacint_extras_ump45.insert_clip-mid", path .. "insert_clip-mid.wav")
+addsound("tacint_extras_ump45.HK_Slap", path2 .. "boltslap.mp3")
+addsound("tacint_extras_ump45.bolt_back", path .. "bolt_back.wav")
+addsound("tacint_extras_ump45.fire_select", {
     path .. "fire_select-1.wav",
     path .. "fire_select-2.wav",
     path .. "fire_select-3.wav",

@@ -12,5 +12,5 @@ ATT.Category = "pistol_muzzle" // can be "string" or {"list", "of", "strings"}
 
 ATT.SortOrder = 1
 
-ATT.Mult_RecoilKick = 0.75
+ATT.Mult_RecoilKick = 0.5
 ATT.Mult_RPM = 0.9

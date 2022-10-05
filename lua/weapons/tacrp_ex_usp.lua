@@ -42,7 +42,7 @@ SWEP.Firemode = 1
 
 SWEP.RPM = 400
 
-SWEP.Spread = 0.0008
+SWEP.Spread = 0.002
 
 SWEP.RecoilPerShot = 1
 SWEP.RecoilMaximum = 6
