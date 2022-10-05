@@ -208,7 +208,7 @@ SWEP.Attachments = {
     },
     [4] = {
         PrintName = "Accessory",
-        Category = {"acc_sling", "acc_duffle", "acc_extmag_rifl"},
+        Category = {"acc", "acc_sling", "acc_duffle", "acc_extmag_rifle"},
         AttachSound = "tacrp/weapons/flashlight_on.wav",
         DetachSound = "tacrp/weapons/flashlight_off.wav",
     },

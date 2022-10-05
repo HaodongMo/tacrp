@@ -3,6 +3,7 @@ SWEP.ClientFreeAimAng = Angle(0, 0, 0)
 function SWEP:ThinkFreeAim()
     if self:GetValue("FreeAim") then
         local diff = self:GetOwner():EyeAngles() - self:GetLastAimAngle()
+        diff = LerpAngle(0.8, diff, angle_zero)
 
         local freeaimang = Angle(self:GetFreeAimAngle())
 

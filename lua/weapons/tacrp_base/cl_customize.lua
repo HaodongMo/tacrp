@@ -414,7 +414,7 @@ function SWEP:CreateCustomizeHUD()
             Unit = "m/s"
         },
         {
-            Name = "Recoil",
+            Name = "Recoil Kick",
             Value = "RecoilKick",
             LowerIsBetter = true,
         },
@@ -480,6 +480,25 @@ function SWEP:CreateCustomizeHUD()
             Unit = "\""
         },
         {
+            Name = "Sway",
+            Value = "Sway",
+            LowerIsBetter = true,
+        },
+        {
+            Name = "Sway In Sights",
+            Value = "ScopedSway",
+            LowerIsBetter = true,
+        },
+        {
+            Name = "Recoil Recover Rate",
+            AggregateFunction = function(base, val)
+                return math.Round(math.deg(val * (base and self:GetTable().RecoilSpreadPenalty or self:GetValue("RecoilSpreadPenalty"))), 1)
+            end,
+            Unit = "°/s",
+            Value = "RecoilDissipationRate",
+            HideIfSame = true,
+        },
+        {
             Name = "Mid-Air Spread",
             AggregateFunction = function(base, val)
                 return math.Round(math.deg(val), 2)
@@ -507,6 +526,10 @@ function SWEP:CreateCustomizeHUD()
         },
         {
             Name = "Max Recoil Spread",
+            AggregateFunction = function(base, val)
+                return math.Round(math.deg(val * (base and self:GetTable().RecoilSpreadPenalty or self:GetValue("RecoilSpreadPenalty"))), 1)
+            end,
+            Unit = "°",
             Value = "RecoilMaximum",
             LowerIsBetter = true,
             HideIfSame = true,
@@ -572,6 +595,13 @@ function SWEP:CreateCustomizeHUD()
                 end
             end,
             Value = "Firemodes",
+            HideIfSame = true,
+        },
+        {
+            Name = "Free Aim Angle",
+            Unit = "°",
+            Value = "FreeAimMaxAngle",
+            LowerIsBetter = true,
             HideIfSame = true,
         },
     }

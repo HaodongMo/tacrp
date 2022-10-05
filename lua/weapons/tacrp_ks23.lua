@@ -42,7 +42,7 @@ SWEP.Firemode = 1
 
 SWEP.RPM = 40
 
-SWEP.Spread = 0.08
+SWEP.Spread = 0.075
 
 SWEP.ShootTimeMult = 1.25
 
@@ -52,17 +52,17 @@ SWEP.MidAirSpreadPenalty = 0
 SWEP.ScopedSpreadPenalty = 0
 
 SWEP.RecoilPerShot = 1
-SWEP.RecoilMaximum = 1
+SWEP.RecoilMaximum = 2
 SWEP.RecoilResetTime = 0.3
-SWEP.RecoilDissipationRate = 2
+SWEP.RecoilDissipationRate = 0.5
 SWEP.RecoilFirstShotMult = 1 // multiplier for the first shot's recoil amount
 
 SWEP.RecoilVisualKick = 3
-SWEP.RecoilVisualShake = 5
+SWEP.RecoilVisualShake = 2
 
 SWEP.RecoilKick = 20
 
-SWEP.RecoilSpreadPenalty = 0 // extra spread per one unit of recoil
+SWEP.RecoilSpreadPenalty = 0.045 // extra spread per one unit of recoil
 
 SWEP.CanBlindFire = true
 
@@ -198,7 +198,7 @@ SWEP.Attachments = {
     },
     [3] = {
         PrintName = "Accessory",
-        Category = {"acc_duffle", "acc_sling", "acc_extmag_shotgun"},
+        Category = {"acc", "acc_duffle", "acc_sling", "acc_extmag_shotgun"},
         AttachSound = "TacRP/weapons/flashlight_on.wav",
         DetachSound = "TacRP/weapons/flashlight_off.wav",
     },

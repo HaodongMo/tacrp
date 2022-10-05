@@ -7,7 +7,7 @@ AddCSLuaFile()
 SWEP.PrintName = "TGS-12"
 SWEP.Category = "Tactical RP (Arctic)"
 
-SWEP.Description = "Economic pistol grip shotgun with high recoil and mobility."
+SWEP.Description = "Quality pistol grip shotgun with high recoil and mobility."
 
 SWEP.ViewModel = "models/weapons/tacint/v_tgs12_2.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_tgs12.mdl"
@@ -50,9 +50,9 @@ SWEP.HipFireSpreadPenalty = 0
 SWEP.MidAirSpreadPenalty = 0
 
 SWEP.RecoilPerShot = 1
-SWEP.RecoilMaximum = 2
+SWEP.RecoilMaximum = 2.5
 SWEP.RecoilResetTime = 0.2
-SWEP.RecoilDissipationRate = 1.1
+SWEP.RecoilDissipationRate = 1
 SWEP.RecoilFirstShotMult = 1 // multiplier for the first shot's recoil amount
 
 SWEP.RecoilVisualKick = 4
@@ -60,7 +60,7 @@ SWEP.RecoilVisualShake = 2
 
 SWEP.RecoilKick = 30
 
-SWEP.RecoilSpreadPenalty = 0.015
+SWEP.RecoilSpreadPenalty = 0.02
 
 SWEP.CanBlindFire = true
 
@@ -185,17 +185,6 @@ SWEP.Attachments = {
         Ang_VM = Angle(-90, 180, 0),
         Ang_WM = Angle(0, 0, 180),
     },
-    -- [2] = {
-    --     PrintName = "Muzzle",
-    --     Category = "silencer",
-    --     Bone = "ValveBiped._ROOT_TGS12",
-    --     AttachSound = "tacint/weapons/silencer_on.wav",
-    --     DetachSound = "tacint/weapons/silencer_off.wav",
-    --     Pos_VM = Vector(-2.2, 0, 33),
-    --     Pos_WM = Vector(23, 2.5, -2.8),
-    --     Ang_VM = Angle(90, 0, 0),
-    --     Ang_WM = Angle(0, -3.5, 180),
-    -- },
     [2] = {
         PrintName = "Tactical",
         Category = "tactical",
@@ -211,7 +200,7 @@ SWEP.Attachments = {
     },
     [3] = {
         PrintName = "Accessory",
-        Category = {"acc_duffle", "acc_extmag_shotgun"},
+        Category = {"acc", "acc_duffle", "acc_extmag_shotgun"},
         AttachSound = "tacrp/weapons/flashlight_on.wav",
         DetachSound = "tacrp/weapons/flashlight_off.wav",
     },
