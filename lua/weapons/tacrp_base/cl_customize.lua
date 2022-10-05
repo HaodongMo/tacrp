@@ -61,6 +61,7 @@ local function bodydamagetext(name, dmg, num, mult, x, y, hover)
     local stk = math.ceil(100 / (dmg * mult))
 
     surface.SetDrawColor(255, 255, 255, 255)
+    surface.SetTextColor(255, 255, 255, 255)
     surface.DrawLine(ScreenScale(2), y, x, y)
 
     surface.SetFont("TacRP_Myriad_Pro_6")
