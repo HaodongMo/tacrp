@@ -1,6 +1,6 @@
-ATT.PrintName = "Fast Reload"
+ATT.PrintName = "Quickload"
 ATT.Icon = Material("entities/tacrp_att_acc_reload.png", "mips smooth")
-ATT.Description = "Training techniques for improving reload speed under stress."
+ATT.Description = "Improves reloading speed."
 ATT.Pros = {"Reload Speed"}
 
 ATT.Category = "perk_reload" // can be "string" or {"list", "of", "strings"}

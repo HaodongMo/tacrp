@@ -167,17 +167,17 @@ function SWEP:PrimaryAttack()
             -- If the bullet is going to hit something very close in front, use hitscan bullets instead
             -- This uses the aim direction without random spread, which may result in hitscan bullets in distances where it shouldn't be.
             if !hitscan then
-                local threshold = dir:Forward() * math.max(self:GetValue("MuzzleVelocity"), 12000) * engine.TickInterval() * 2
+                local threshold = dir:Forward() * math.max(self:GetValue("MuzzleVelocity"), 15000) * engine.TickInterval() * (self:GetValue("Num") == 1 and 4 or 2)
                 local inst_tr = util.TraceLine({
                     start = self:GetMuzzleOrigin(),
                     endpos = self:GetMuzzleOrigin() + threshold,
-                    mask = MASK_SHOT_HULL,
-                    filter = self:GetOwner():GetVehicle(),
+                    mask = MASK_SHOT,
+                    filter = {self:GetOwner(), self:GetOwner():GetVehicle(), self},
                 })
-                debugoverlay.Line(self:GetMuzzleOrigin(), self:GetMuzzleOrigin() + threshold, 1, inst_tr.Hit and Color(255, 0, 255) or Color(255, 200, 255))
                 if inst_tr.Hit and !inst_tr.HitSky then
                     hitscan = true
                 end
+                debugoverlay.Line(self:GetMuzzleOrigin(), self:GetMuzzleOrigin() + threshold, 2, hitscan and Color(255, 0, 255) or Color(255, 255, 255))
             end
 
             if !hitscan then
