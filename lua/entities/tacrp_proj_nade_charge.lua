@@ -25,6 +25,24 @@ ENT.ExplodeSounds = {
     "TacRP/weapons/breaching_charge-1.wav"
 }
 
+function ENT:SetupDataTables()
+    self:NetworkVar("Bool", 0, "Remote")
+end
+
+DEFINE_BASECLASS(ENT.Base)
+
+function ENT:Initialize()
+    if IsValid(self:GetOwner()) and self:GetOwner():IsPlayer() and IsValid(self:GetOwner():GetActiveWeapon()) and self:GetOwner():GetActiveWeapon():GetClass() == "tacrp_c4_detonator" then
+        self.InstantFuse = false
+        self.RemoteFuse = true
+        self.Delay = 0.5
+        self.Defusable = true
+        self:SetRemote(true)
+    end
+
+    BaseClass.Initialize(self)
+end
+
 function ENT:Detonate()
     util.BlastDamage(self, self:GetOwner(), self:GetPos(), 128, 300)
 
@@ -58,20 +76,23 @@ function ENT:Detonate()
     self:Remove()
 end
 
-local beep = 0
 function ENT:OnThink()
-    if SERVER and beep < CurTime() then
-        beep = CurTime() + 0.25
+    self.Beep = self.Beep or self.SpawnTime
+    if !self:GetRemote() and SERVER and self.Beep < CurTime() then
+        self.Beep = CurTime() + 0.25
         self:EmitSound("weapons/c4/c4_beep1.wav", 80, 110)
     end
 end
+
+local clr_timed = Color(255, 0, 0)
+local clr_remote = Color(0, 255, 0)
 
 local mat = Material("sprites/light_glow02_add")
 function ENT:Draw()
     self:DrawModel()
 
-    if math.ceil((CurTime() - self.SpawnTime) * 4) % 2 == 1 then
+    if math.ceil((CurTime() - self.SpawnTime) * (self:GetRemote() and 1 or 4)) % 2 == 1 then
         render.SetMaterial(mat)
-        render.DrawSprite(self:GetPos() + self:GetAngles():Up() * 7.5 + self:GetAngles():Right() * -4.5 + self:GetAngles():Forward() * 2, 8, 8, Color(255, 0, 0))
+        render.DrawSprite(self:GetPos() + self:GetAngles():Up() * 7.5 + self:GetAngles():Right() * -4.5 + self:GetAngles():Forward() * 2, 8, 8, self:GetRemote() and clr_remote or clr_timed)
     end
 end
