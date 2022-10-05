@@ -36,7 +36,7 @@ SWEP.BodyDamageMultipliers = {
 
 // misc. shooting
 
-SWEP.Firemode = 2
+SWEP.Firemodes = {2, -3, 1}
 
 SWEP.RPM = 850
 

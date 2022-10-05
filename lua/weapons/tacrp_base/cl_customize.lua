@@ -389,9 +389,8 @@ function SWEP:CreateCustomizeHUD()
             Value = "RPM"
         },
         {
-            Name = "Penetration",
-            Value = "Penetration",
-            Unit = "\""
+            Name = "Capacity",
+            Value = "ClipSize",
         },
         {
             Name = "Sprint To Fire",
@@ -406,24 +405,6 @@ function SWEP:CreateCustomizeHUD()
             LowerIsBetter = true,
         },
         {
-            Name = "Reload Time",
-            AggregateFunction = function(base, val)
-                return math.Round(self:GetReloadTime(base), 2)
-            end,
-            Value = "ReloadTimeMult",
-            LowerIsBetter = true,
-            Unit = "s"
-        },
-        {
-            Name = "Deploy Time",
-            AggregateFunction = function(base, val)
-                return math.Round(self:GetDeployTime(base), 2)
-            end,
-            Value = "DeployTimeMult",
-            LowerIsBetter = true,
-            Unit = "s"
-        },
-        {
             Name = "Muzzle Velocity",
             AggregateFunction = function(base, val)
                 return math.Round(self:GetMuzzleVelocity(base), 2)
@@ -433,22 +414,13 @@ function SWEP:CreateCustomizeHUD()
             Unit = "m/s"
         },
         {
-            Name = "Mag Size",
-            Value = "ClipSize",
-        },
-        {
             Name = "Recoil",
             Value = "RecoilKick",
             LowerIsBetter = true,
         },
         {
-            Name = "Recoil Time",
+            Name = "Recoil Reset Time",
             Value = "RecoilResetTime",
-            LowerIsBetter = true,
-        },
-        {
-            Name = "1st Shot Recoil",
-            Value = "RecoilFirstShotMult",
             LowerIsBetter = true,
         },
         {
@@ -458,24 +430,6 @@ function SWEP:CreateCustomizeHUD()
             end,
             Unit = "°",
             Value = "RecoilSpreadPenalty",
-            LowerIsBetter = true,
-        },
-        {
-            Name = "Mid-Air Spread",
-            AggregateFunction = function(base, val)
-                return math.Round(math.deg(val), 2)
-            end,
-            Unit = "°",
-            Value = "MidAirSpreadPenalty",
-            LowerIsBetter = true,
-        },
-        {
-            Name = "Hip Fire Spread",
-            AggregateFunction = function(base, val)
-                return math.Round(math.deg(val), 2)
-            end,
-            Unit = "°",
-            Value = "HipFireSpreadPenalty",
             LowerIsBetter = true,
         },
         {
@@ -503,8 +457,122 @@ function SWEP:CreateCustomizeHUD()
             Value = "SightedSpeedMult"
         },
         {
+            Name = "Reload Time",
+            AggregateFunction = function(base, val)
+                return math.Round(self:GetReloadTime(base), 2)
+            end,
+            Value = "ReloadTimeMult",
+            LowerIsBetter = true,
+            Unit = "s"
+        },
+        {
+            Name = "Deploy Time",
+            AggregateFunction = function(base, val)
+                return math.Round(self:GetDeployTime(base), 2)
+            end,
+            Value = "DeployTimeMult",
+            LowerIsBetter = true,
+            Unit = "s"
+        },
+        {
+            Name = "Penetration",
+            Value = "Penetration",
+            Unit = "\""
+        },
+        {
+            Name = "Mid-Air Spread",
+            AggregateFunction = function(base, val)
+                return math.Round(math.deg(val), 2)
+            end,
+            Unit = "°",
+            Value = "MidAirSpreadPenalty",
+            LowerIsBetter = true,
+            HideIfSame = true,
+        },
+        {
+            Name = "Hip Fire Spread",
+            AggregateFunction = function(base, val)
+                return math.Round(math.deg(val), 2)
+            end,
+            Unit = "°",
+            Value = "HipFireSpreadPenalty",
+            LowerIsBetter = true,
+            HideIfSame = true,
+        },
+        {
+            Name = "First Shot Recoil",
+            Value = "RecoilFirstShotMult",
+            LowerIsBetter = true,
+            HideIfSame = true,
+        },
+        {
+            Name = "Max Recoil Spread",
+            Value = "RecoilMaximum",
+            LowerIsBetter = true,
+            HideIfSame = true,
+        },
+        {
             Name = "Melee Damage",
-            Value = "MeleeDamage"
+            Value = "MeleeDamage",
+            HideIfSame = true,
+        },
+        {
+            Name = "Firemode",
+            AggregateFunction = function(base, val)
+                if !val then
+                    val = {base and self:GetTable()["Firemode"] or self:GetValue("Firemode")}
+                end
+                if #val == 1 then
+                    if val[1] == 2 then
+                        return "Auto"
+                    elseif val[1] == 1 then
+                        return "Semi"
+                    elseif val[1] < 0 then
+                        return val[1] .. "-Burst"
+                    end
+                else
+                    local tbl = table.Copy(val)
+                    table.sort(tbl, function(a, b)
+                        if a == 2 then
+                            return b == 2
+                        elseif b == 2 then
+                            return a ~= 2
+                        end
+                        return math.abs(a) <= math.abs(b)
+                    end)
+                    local str = "S-"
+                    for i = 1, #tbl do
+                        str = str .. (tbl[i] == 2 and "F" or math.abs(tbl[i])) .. (i < #tbl and "-" or "")
+                    end
+                    return str
+                end
+                return table.ToString(val)
+            end,
+            BetterFunction = function(old, new)
+                if !old then
+                    old = {self:GetTable()["Firemode"]}
+                end
+                local oldbest, newbest = 0, 0
+                for i = 1, #old do
+                    local v = math.abs(old[i])
+                    if v > oldbest or v == 2 then
+                        oldbest = (v == 2 and math.huge) or v
+                    end
+                end
+                for i = 1, #new do
+                    local v = math.abs(new[i])
+                    if v > newbest or v == 2 then
+                        newbest = (v == 2 and math.huge) or v
+                    end
+                end
+                if oldbest == newbest then
+                    return #old ~= #new , #old < #new
+                else
+                    return true, oldbest < newbest
+                end
+            end,
+            Value = "Firemodes",
+            HideIfSame = true,
         },
     }
 
@@ -540,8 +608,11 @@ function SWEP:CreateCustomizeHUD()
             surface.SetTextPos(x_2 + ScreenScale(4), ScreenScale(2))
             surface.DrawText("CURR")
 
+            local i2 = 0
             for i, k in pairs(stats) do
-                local i2 = i - 1
+                local value = self:GetValue(k.Value)
+
+                if k.HideIfSame and selftbl[k.Value] == value then continue end
 
                 surface.SetFont("TacRP_Myriad_Pro_8")
                 surface.SetTextColor(255, 255, 255)
@@ -553,10 +624,10 @@ function SWEP:CreateCustomizeHUD()
 
                 if k.AggregateFunction then
                     stat_base = k.AggregateFunction(true, selftbl[k.Value])
-                    stat_curr = k.AggregateFunction(false, self:GetValue(k.Value))
+                    stat_curr = k.AggregateFunction(false, value)
                 else
                     stat_base = math.Round(selftbl[k.Value], 4)
-                    stat_curr = math.Round(self:GetValue(k.Value), 4)
+                    stat_curr = math.Round(value, 4)
                 end
 
                 local txt_base = tostring(stat_base)
@@ -583,23 +654,16 @@ function SWEP:CreateCustomizeHUD()
                 local good = false
                 local goodorbad = false
 
-                if stat_base == stat_curr then
-                    surface.SetTextColor(255, 255, 255)
-                else
+
+                if k.BetterFunction then
+                    goodorbad, good = k.BetterFunction(selftbl[k.Value], value)
+                elseif stat_base ~= stat_curr then
                     if isnumber(stat_curr) then
-                        if stat_curr > stat_base then
-                            good = true
-                            goodorbad = true
-                        else
-                            goodorbad =  true
-                        end
+                        good = stat_curr > stat_base
+                        goodorbad = true
                     elseif isbool(stat_curr) then
-                        if !stat_base and stat_curr then
-                            good = true
-                            goodorbad = true
-                        else
-                            goodorbad =  true
-                        end
+                        good = !stat_base and stat_curr
+                        goodorbad = true
                     end
                 end
 
@@ -613,10 +677,14 @@ function SWEP:CreateCustomizeHUD()
                     else
                         surface.SetTextColor(255, 175, 175)
                     end
+                else
+                    surface.SetTextColor(255, 255, 255)
                 end
 
                 surface.SetTextPos(x_2 + ScreenScale(3), ScreenScale(8 + 4 + 1) + (ScreenScale(8 * i2)))
                 surface.DrawText(txt_curr .. (k.Unit or ""))
+
+                i2 = i2 + 1
             end
         end
     end
@@ -801,6 +869,12 @@ function SWEP:CreateCustomizeHUD()
                 surface.SetFont("TacRP_Myriad_Pro_6")
                 surface.SetTextColor(col_text)
                 local t_w = surface.GetTextSize(txt)
+
+                if col_text == Color(0, 0, 0) then
+                    surface.SetDrawColor(255, 255, 255, 50)
+                    surface.DrawRect(w / 2 - (t_w + ScreenScale(2)) / 2, h - ScreenScale(6), t_w + ScreenScale(2), ScreenScale(6))
+                end
+
                 surface.SetTextPos((w - t_w) / 2, h - ScreenScale(6))
                 surface.DrawText(txt)
 

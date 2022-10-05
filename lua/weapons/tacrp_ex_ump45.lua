@@ -39,7 +39,6 @@ SWEP.MuzzleVelocity = 12500
 
 SWEP.Firemodes = {
     2,
-    -3,
     1
 }
 
