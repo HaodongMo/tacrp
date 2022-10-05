@@ -14,14 +14,14 @@ function SWEP:Reload()
         return
     end
 
-    if self:StillWaiting() then return end
+    if self:StillWaiting(true) then return end
     if self:GetValue("ClipSize") <= 0 then return end
     if self:Clip1() >= self:GetValue("ClipSize") then return end
     if self:Ammo1() <= 0 then return end
 
     -- self:ScopeToggle(0)
     self:ToggleBlindFire(false)
-    self:ToggleCustomize(false)
+    --self:ToggleCustomize(false)
 
     local anim = "reload"
 
