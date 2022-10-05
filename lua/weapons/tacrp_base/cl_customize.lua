@@ -922,7 +922,7 @@ function SWEP:CreateCustomizeHUD()
 
     if GetConVar("tacrp_rp_requirebench"):GetBool() then
         local slot_name = vgui.Create("DPanel", bg)
-        slot_name:SetPos(airgap, ScrH() - ScreenScale(16))
+        slot_name:SetPos(ScrW() / 2 - ScreenScale(64 + 8), ScreenScale(16))
         slot_name:SetSize(ScreenScale(128 + 16), ScreenScale(12))
         slot_name.Paint = function(self2, w, h)
             if !IsValid(self) then return end
