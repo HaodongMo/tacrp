@@ -74,7 +74,7 @@ function SWEP:GetElements(holster)
     end
 
     -- Hack: Always fold stock when weapon is holstered
-    if self:GetOwner():GetActiveWeapon() != self and !foldstock and self.AttachmentElements["foldstock"] then
+    if IsValid(self:GetOwner()) and self:GetOwner():GetActiveWeapon() != self and !foldstock and self.AttachmentElements["foldstock"] then
         table.insert(eleatts, self.AttachmentElements["foldstock"])
     end
 
