@@ -16,6 +16,7 @@ ATT.Mult_Range_Max = 1.25
 ATT.Num = 1
 
 ATT.Mult_Spread = 0.33
+ATT.Mult_RecoilSpreadPenalty = 0.25
 
 ATT.Override_MuzzleEffect = "muzzleflash_slug"
 

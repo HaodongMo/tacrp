@@ -64,6 +64,9 @@ SWEP.RecoilSpreadPenalty = 0.02
 
 SWEP.CanBlindFire = true
 
+SWEP.Sway = 1.5
+SWEP.ScopedSway = 0.15
+
 // handling
 
 SWEP.MoveSpeedMult = 0.85

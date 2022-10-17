@@ -16,3 +16,4 @@ ATT.Mult_MuzzleVelocity = 1.5
 ATT.Mult_RPM = 0.9
 
 ATT.Add_Spread = 0.005
+ATT.Mult_RecoilSpreadPenalty = 1.25

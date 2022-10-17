@@ -310,6 +310,7 @@ function SWEP:GetDamageAtRange(range)
 end
 
 function SWEP:GetShootDir()
+    if !IsValid(self:GetOwner()) then return self:GetAngles() end
     local dir = self:GetOwner():EyeAngles()
 
     if self:GetBlindFireCorner() then

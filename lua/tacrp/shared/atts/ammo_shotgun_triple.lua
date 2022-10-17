@@ -14,6 +14,7 @@ ATT.Mult_Damage_Max = 3.5
 ATT.Num = 3
 
 ATT.Mult_Spread = 0.75
+ATT.Mult_RecoilSpreadPenalty = 0.5
 
 ATT.Override_MuzzleEffect = "muzzleflash_slug"
 

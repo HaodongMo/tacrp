@@ -1,6 +1,9 @@
 function SWEP:GetMuzzleOrigin()
+    if !IsValid(self:GetOwner()) then
+        return self:GetPos()
+    end
     if self:GetOwner():IsNPC() then
-        return self:GetOwner():GetShootPos()
+        return SERVER and self:GetOwner():GetShootPos() or self:GetOwner():EyePos()
     end
 
     if self:GetBlindFire() then

@@ -16,7 +16,8 @@ ATT.Mult_SprintToFireTime = 0.75
 ATT.Mult_AimDownSightsTime = 0.75
 ATT.Mult_SightedSpeedMult = 1.25
 
-ATT.Mult_ScopedSway = 3
+ATT.Mult_ScopedSway = 2.5
+ATT.Mult_Sway = 1.5
 
 
 ATT.InstalledElements = {"foldstock"}
