@@ -73,14 +73,14 @@ function SWEP:DrawCustomModel(wm, custom_wm)
         if !bone then continue end
 
         local boneindex = parentmdl:LookupBone(bone)
-
         if !boneindex then continue end
 
         local bonemat = parentmdl:GetBoneMatrix(boneindex)
-        if bonemat then
-            bpos = bonemat:GetTranslation()
-            bang = bonemat:GetAngles()
-        end
+        if !bonemat then continue end
+
+        local bpos, bang
+        bpos = bonemat:GetTranslation()
+        bang = bonemat:GetAngles()
 
         local apos, aang
 
