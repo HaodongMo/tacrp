@@ -28,7 +28,8 @@ end)
 net.Receive("tacrp_doorbust", function()
     local door = net.ReadEntity()
     if IsValid(door) then
-        door:SetRenderBounds(door:GetModelBounds())
+        local mins, maxs = door:GetCollisionBounds()
+        door:SetRenderBounds(mins, maxs, Vector(4, 4, 4))
     end
 end)
 
