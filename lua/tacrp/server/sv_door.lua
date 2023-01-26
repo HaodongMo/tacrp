@@ -24,6 +24,13 @@ function TacRP.DoorBust(ent, vel, attacker)
         prop:SetAngles(ent:GetAngles())
         prop:SetSkin(ent:GetSkin() or 0)
         prop:Spawn()
+
+        -- Shrink the door collision a little so it will slide through the door frame. Only do it to brush doors or the hl2 one in case some of them have custom collision
+        if prop:GetModel() == "models/props_c17/door01_left.mdl" or string.Left(prop:GetModel(), 1) == "*" then
+            local mins, maxs = prop:GetCollisionBounds()
+            prop:PhysicsInitBox(mins + Vector(2, 2, 2), maxs - Vector(2, 2, 2))
+        end
+
         prop:GetPhysicsObject():SetVelocityInstantaneous(vel)
         prop:SetPhysicsAttacker(attacker, 3)
 
