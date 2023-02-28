@@ -18,8 +18,8 @@ hook.Add("PostPlayerDraw", "TacRP_Holster", function(ply)
 
         local fallback
         local holstermodel = wep:GetValue("HolsterModel") or wep.WorldModel
-        if true or (!util.IsValidModel(holstermodel) and v[3]) then
-            holstermodel = v[3][1] or "models/Gibs/HGIBS.mdl" -- :skull:
+        if !util.IsValidModel(holstermodel) and v[3] then
+            holstermodel = v[3][1]
             fallback = true
         end
 
