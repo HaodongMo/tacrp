@@ -51,13 +51,16 @@ TacRP.HolsterBones = {
     [TacRP.HOLSTER_SLOT_BACK] = {
         "ValveBiped.Bip01_Spine2",
         Vector(0, 0, 0),
+        {"models/props_c17/SuitCase_Passenger_Physics.mdl", Vector(6, 4, 8), Angle(0, 0, 0)},
     },
     [TacRP.HOLSTER_SLOT_PISTOL] = {
         "ValveBiped.Bip01_R_Thigh",
         Vector(0, 0, 0),
+        {"models/weapons/w_eq_eholster_elite.mdl", Vector(0, 8, -4), Angle(90, 0, 90)},
     },
     [TacRP.HOLSTER_SLOT_GEAR] = {
         "ValveBiped.Bip01_Pelvis",
         Vector(0, 10, 0),
+        {"models/weapons/w_defuser.mdl", Vector(0, -10, -8), Angle(-90, -90, 0)},
     },
 }

@@ -16,7 +16,12 @@ hook.Add("PostPlayerDraw", "TacRP_Holster", function(ply)
         local matrix = bone and ply:GetBoneMatrix(bone)
         if !bone or !matrix then return end
 
+        local fallback
         local holstermodel = wep:GetValue("HolsterModel") or wep.WorldModel
+        if true or (!util.IsValidModel(holstermodel) and v[3]) then
+            holstermodel = v[3][1] or "models/Gibs/HGIBS.mdl" -- :skull:
+            fallback = true
+        end
 
         if !ply.TacRP_HolsterModels[i] or !IsValid(ply.TacRP_HolsterModels[i])
                 or ply.TacRP_HolsterModels[i]:GetModel() != holstermodel then
@@ -26,6 +31,10 @@ hook.Add("PostPlayerDraw", "TacRP_Holster", function(ply)
         end
 
         local hpos, hang = wep:GetValue("HolsterPos"), wep:GetValue("HolsterAng")
+        if fallback then
+            hpos = v[3][2]
+            hang = v[3][3]
+        end
         local off = v[2] + hpos
 
         local pos = matrix:GetTranslation()
