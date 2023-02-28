@@ -7,6 +7,11 @@ local conVars = {
         client = true
     },
     {
+        name = "minhud",
+        default = "1",
+        client = true
+    },
+    {
         name = "autoreload",
         default = "1",
         client = true
@@ -154,6 +159,10 @@ local function menu_client_ti(panel)
     panel:AddControl("checkbox", {
         label = "Show HUD",
         command = "TacRP_drawhud"
+    })
+    panel:AddControl("checkbox", {
+        label = "Backup Minimal HUD",
+        command = "tacrp_minhud"
     })
 end
 

@@ -53,7 +53,7 @@ local names = {
 
 hook.Add("PreGamemodeLoaded", "TacRP_AmmoName", function()
     if GetConVar("tacrp_ammonames"):GetBool() then
-        for k, v in pairs(game.GetAmmoTypes()) do
+        for k, v in pairs(names) do
             language.Add(k .. "_ammo", v)
         end
     end
