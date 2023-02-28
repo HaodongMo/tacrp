@@ -4,7 +4,7 @@ ATT.Description = "Trigger that sacrfices automatic fire for stability."
 ATT.Pros = {"Recoil spread", "Recoil"}
 ATT.Cons = {"No automatic fire"}
 
-ATT.Category = {"trigger_auto"} // can be "string" or {"list", "of", "strings"}
+ATT.Category = {"trigger_auto"}
 
 ATT.SortOrder = 1.1
 

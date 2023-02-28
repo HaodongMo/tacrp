@@ -7,7 +7,7 @@ ATT.Model = "models/weapons/tacint/addons/holosight_hq.mdl"
 ATT.Scale = 0.35
 ATT.ModelOffset = Vector(0, 0.05, 0)
 
-ATT.Category = "optic_cqb" // can be "string" or {"list", "of", "strings"}
+ATT.Category = "optic_cqb"
 
 ATT.SortOrder = 1
 

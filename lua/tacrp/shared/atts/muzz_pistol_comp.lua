@@ -8,7 +8,7 @@ ATT.Model = "models/weapons/tacint/addons/pistol_comp.mdl"
 ATT.Scale = 2
 ATT.ModelOffset = Vector(-17.75, 0, -3.5)
 
-ATT.Category = "pistol_muzzle" // can be "string" or {"list", "of", "strings"}
+ATT.Category = "pistol_muzzle"
 
 ATT.SortOrder = 1
 

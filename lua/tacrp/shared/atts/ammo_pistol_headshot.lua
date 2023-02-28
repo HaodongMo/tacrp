@@ -4,7 +4,7 @@ ATT.Description = "."
 ATT.Pros = {"Headshot damage"}
 ATT.Cons = {"Limb damage"}
 
-ATT.Category = "ammo_pistol" // can be "string" or {"list", "of", "strings"}
+ATT.Category = "ammo_pistol"
 
 ATT.SortOrder = 2
 

@@ -4,7 +4,7 @@ ATT.Description = "Grenade packed with thin darts."
 ATT.Pros = {"Direct fire", "Accuracy"}
 ATT.Cons = {"No explosion"}
 
-ATT.Category = "ammo_40mm" // can be "string" or {"list", "of", "strings"}
+ATT.Category = "ammo_40mm"
 
 ATT.ShootEnt = false
 

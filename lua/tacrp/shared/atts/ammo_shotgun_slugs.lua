@@ -4,7 +4,7 @@ ATT.Description = "Shells that fire a single accurate slug."
 ATT.Pros = {"Accuracy", "Range"}
 ATT.Cons = {"One projectile"}
 
-ATT.Category = "ammo_shotgun" // can be "string" or {"list", "of", "strings"}
+ATT.Category = "ammo_shotgun"
 
 ATT.SortOrder = 1
 

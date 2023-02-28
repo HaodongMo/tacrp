@@ -4,7 +4,7 @@ ATT.Description = "Flashbang shells that stun enemies, right from the barrel."
 ATT.Pros = {"Stun"}
 ATT.Cons = {"No damage"}
 
-ATT.Category = "ammo_ks23" // can be "string" or {"list", "of", "strings"}
+ATT.Category = "ammo_ks23"
 
 ATT.Override_MuzzleEffect = "muzzleflash_smg"
 

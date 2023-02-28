@@ -4,7 +4,7 @@ ATT.Description = "Fire high powder yield pellets."
 ATT.Pros = {"Power", "Muzzle Velocity"}
 ATT.Cons = {"Recoil", "Range"}
 
-ATT.Category = "ammo_shotgun" // can be "string" or {"list", "of", "strings"}
+ATT.Category = "ammo_shotgun"
 
 ATT.SortOrder = 1
 

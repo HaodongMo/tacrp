@@ -6,7 +6,7 @@ ATT.Cons = {"Fire rate", "Recoil spread"}
 
 ATT.InvAtt = "trigger_frcd"
 
-ATT.Category = "trigger_burst" // can be "string" or {"list", "of", "strings"}
+ATT.Category = "trigger_burst"
 
 ATT.SortOrder = 1
 

@@ -4,7 +4,7 @@ ATT.Description = "Fire smaller pellets in a larger spread."
 ATT.Pros = {"Extra projectiles", "Recoil"}
 ATT.Cons = {"Spread"}
 
-ATT.Category = "ammo_shotgun" // can be "string" or {"list", "of", "strings"}
+ATT.Category = "ammo_shotgun"
 
 ATT.SortOrder = 1
 

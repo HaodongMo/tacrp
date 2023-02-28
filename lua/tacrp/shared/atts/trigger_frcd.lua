@@ -4,7 +4,7 @@ ATT.Description = "Trigger that emulates automatic fire but with poor performanc
 ATT.Pros = {"Automatic fire"}
 ATT.Cons = {"Fire rate", "Recoil spread"}
 
-ATT.Category = "trigger_semi" // can be "string" or {"list", "of", "strings"}
+ATT.Category = "trigger_semi"
 
 ATT.SortOrder = 1
 

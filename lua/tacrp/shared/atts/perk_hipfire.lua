@@ -3,7 +3,7 @@ ATT.Icon = Material("entities/tacrp_att_acc_hipfire.png", "mips smooth")
 ATT.Description = "Make shooting while not aiming easier."
 ATT.Pros = {"Free aim angle", "Mid-air spread"}
 
-ATT.Category = "perk" // can be "string" or {"list", "of", "strings"}
+ATT.Category = "perk"
 
 ATT.SortOrder = 2
 

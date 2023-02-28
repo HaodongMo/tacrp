@@ -4,7 +4,7 @@ ATT.Description = "Extended belt that gives the gun even greater capacity and ma
 ATT.Pros = {"Capacity"}
 ATT.Cons = {"Handling"}
 
-ATT.Category = "extendedbelt" // can be "string" or {"list", "of", "strings"}
+ATT.Category = "extendedbelt"
 
 ATT.Override_ClipSize = 200
 ATT.Mult_SprintToFireTime = 1.5

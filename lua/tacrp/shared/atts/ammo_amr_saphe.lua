@@ -4,7 +4,7 @@ ATT.Description = "High explosive rounds."
 ATT.Pros = {"High explosive"}
 ATT.Cons = {"Low penetration"}
 
-ATT.Category = "ammo_amr" // can be "string" or {"list", "of", "strings"}
+ATT.Category = "ammo_amr"
 
 ATT.SortOrder = 1
 

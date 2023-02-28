@@ -4,7 +4,7 @@ ATT.Description = "Grenade containing crowd control chemicals."
 ATT.Pros = {"Crowd control"}
 ATT.Cons = {"Less power"}
 
-ATT.Category = "ammo_40mm" // can be "string" or {"list", "of", "strings"}
+ATT.Category = "ammo_40mm"
 
 ATT.ShootEnt = "tacrp_proj_40mm_gas"
 ATT.Mult_ShootEntForce = 0.5

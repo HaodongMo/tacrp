@@ -3,7 +3,7 @@ ATT.Icon = Material("entities/tacrp_att_acc_sling.png", "mips smooth")
 ATT.Description = ""
 ATT.Pros = {"Faster draw speed"}
 
-ATT.Category = "acc_sling" // can be "string" or {"list", "of", "strings"}
+ATT.Category = "acc_sling"
 
 ATT.SortOrder = 5
 

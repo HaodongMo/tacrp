@@ -6,7 +6,7 @@ ATT.Cons = {"Recoil", "Sway"}
 
 ATT.Free = true
 
-ATT.Category = "acc_foldstock" // can be "string" or {"list", "of", "strings"}
+ATT.Category = "acc_foldstock"
 
 ATT.SortOrder = 1
 

@@ -4,7 +4,7 @@ ATT.Description = "Bouncy grenade"
 ATT.Pros = {"Bouncy"}
 ATT.Cons = {"Less range"}
 
-ATT.Category = "ammo_40mm" // can be "string" or {"list", "of", "strings"}
+ATT.Category = "ammo_40mm"
 
 ATT.ShootEnt = "tacrp_proj_40mm_lvg"
 ATT.Mult_ShootEntForce = 0.75

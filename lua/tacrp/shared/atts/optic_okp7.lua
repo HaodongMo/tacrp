@@ -5,7 +5,7 @@ ATT.Pros = {"Sight"}
 
 ATT.Model = "models/weapons/tacint/addons/okp7.mdl"
 
-ATT.Category = "optic_cqb" // can be "string" or {"list", "of", "strings"}
+ATT.Category = "optic_cqb"
 ATT.Scale = 1.5
 ATT.ModelOffset = Vector(-1.5, 0, -0.5)
 

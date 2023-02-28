@@ -4,7 +4,7 @@ ATT.Description = "Bullets with greatly improved accuracy."
 ATT.Pros = {"Spread", "Muzzle velocity"}
 ATT.Cons = {"Hip spread"}
 
-ATT.Category = "ammo_rifle" // can be "string" or {"list", "of", "strings"}
+ATT.Category = "ammo_rifle"
 
 ATT.SortOrder = 1
 

@@ -7,7 +7,7 @@ ATT.Model = "models/weapons/tacint/addons/8x.mdl"
 ATT.Scale = 1
 ATT.ModelOffset = Vector(-1.5, 0, -0.3)
 
-ATT.Category = "optic_sniper" // can be "string" or {"list", "of", "strings"}
+ATT.Category = "optic_sniper"
 
 ATT.SortOrder = 3
 

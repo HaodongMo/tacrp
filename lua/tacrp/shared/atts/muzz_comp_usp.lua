@@ -4,7 +4,7 @@ ATT.Description = "Muzzle device which reduces recoil impact."
 ATT.Pros = {"Recoil"}
 ATT.Cons = {"Fire rate"}
 
-ATT.Category = "comp_usp" // can be "string" or {"list", "of", "strings"}
+ATT.Category = "comp_usp"
 ATT.InvAtt = "muzz_pistol_comp"
 ATT.SortOrder = 1
 

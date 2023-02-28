@@ -4,7 +4,7 @@ ATT.Description = "Grenade that produces a concealing smokescreen on impact."
 ATT.Pros = {"Concealing"}
 ATT.Cons = {"Weak"}
 
-ATT.Category = "ammo_40mm" // can be "string" or {"list", "of", "strings"}
+ATT.Category = "ammo_40mm"
 
 ATT.ShootEnt = "tacrp_proj_40mm_smoke"
 

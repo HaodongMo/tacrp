@@ -4,7 +4,7 @@ ATT.Description = "Improves sway, at the cost of range."
 ATT.Pros = {"Sway", "Recoil"}
 ATT.Cons = {"Spread", "Range"}
 
-ATT.Category = {"silencer", "barrel"} // can be "string" or {"list", "of", "strings"}
+ATT.Category = {"silencer", "barrel"}
 
 ATT.SortOrder = 1
 

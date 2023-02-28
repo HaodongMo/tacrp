@@ -6,7 +6,7 @@ ATT.Pros = {"Sight"}
 ATT.Model = "models/weapons/tacint/addons/optic_rmr_hq.mdl"
 ATT.Scale =  1
 
-ATT.Category = "optic_pistol" // can be "string" or {"list", "of", "strings"}
+ATT.Category = "optic_pistol"
 
 ATT.SortOrder = 1
 

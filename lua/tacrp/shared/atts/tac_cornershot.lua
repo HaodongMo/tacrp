@@ -6,6 +6,6 @@ ATT.Pros = {"Corner vision"}
 ATT.Model = "models/weapons/tacint/addons/cornershot_mounted.mdl"
 ATT.Scale = 1
 
-ATT.Category = "tactical" // can be "string" or {"list", "of", "strings"}
+ATT.Category = "tactical"
 
 ATT.BlindFireCamera = true

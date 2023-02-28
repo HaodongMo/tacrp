@@ -6,7 +6,7 @@ ATT.Cons = {"Recoil spread"}
 
 ATT.InvAtt = "trigger_burst"
 
-ATT.Category = {"trigger_semi"} // can be "string" or {"list", "of", "strings"}
+ATT.Category = {"trigger_semi"}
 
 ATT.SortOrder = 1.1
 

@@ -6,7 +6,7 @@ ATT.Cons = {"Fire rate", "Recoil spread"}
 
 ATT.Free = true
 
-ATT.Category = "trigger_akimbo" // can be "string" or {"list", "of", "strings"}
+ATT.Category = "trigger_akimbo"
 
 ATT.SortOrder = 0.5
 

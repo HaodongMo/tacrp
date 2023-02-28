@@ -7,7 +7,7 @@ ATT.Model = "models/weapons/tacint/addons/acog.mdl"
 ATT.Scale = 0.3
 ATT.ModelOffset = Vector(-1.5, 0, 0.7)
 
-ATT.Category = "optic_medium" // can be "string" or {"list", "of", "strings"}
+ATT.Category = "optic_medium"
 
 ATT.SortOrder = 2.5
 

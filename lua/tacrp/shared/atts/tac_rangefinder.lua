@@ -6,7 +6,7 @@ ATT.Pros = {"Rangefinder"}
 ATT.Model = "models/weapons/tacint/addons/rangefinder_mounted.mdl"
 ATT.Scale = 1
 
-ATT.Category = "tactical" // can be "string" or {"list", "of", "strings"}
+ATT.Category = "tactical"
 
 ATT.Rangefinder = true
 ATT.CanToggle = true

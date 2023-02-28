@@ -8,7 +8,7 @@ ATT.Free = true
 
 ATT.InstalledElements = {"irons"}
 
-ATT.Category = "ironsights" // can be "string" or {"list", "of", "strings"}
+ATT.Category = "ironsights"
 
 ATT.SortOrder = 0
 
