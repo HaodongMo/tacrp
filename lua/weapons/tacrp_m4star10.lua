@@ -5,9 +5,11 @@ AddCSLuaFile()
 
 // names and stuff
 SWEP.PrintName = "Benelli M4"
-SWEP.Category = "Tactical RP (Arctic)"
+SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 
-// Tier 4
+SWEP.SubCatTier = "1Elite"
+SWEP.SubCatType = "5Shotguns"
+
 SWEP.Description = "Elite semi-automatic combat shotgun."
 
 SWEP.ViewModel = "models/weapons/tacint/v_m4star10.mdl"
@@ -45,14 +47,14 @@ SWEP.Firemode = 1
 
 SWEP.RPM = 300
 
-SWEP.Spread = 0.02
+SWEP.Spread = 0.025
 
 SWEP.HipFireSpreadPenalty = 0
 SWEP.MidAirSpreadPenalty = 0
 
 SWEP.RecoilPerShot = 1
-SWEP.RecoilMaximum = 2
-SWEP.RecoilResetTime = 0.15 // time after you stop shooting for recoil to start dissipating
+SWEP.RecoilMaximum = 2.5
+SWEP.RecoilResetTime = 0.2 // time after you stop shooting for recoil to start dissipating
 SWEP.RecoilDissipationRate = 4
 SWEP.RecoilFirstShotMult = 1 // multiplier for the first shot's recoil amount
 
@@ -89,7 +91,7 @@ SWEP.PassiveAng = Angle(0, 0, 0)
 SWEP.PassivePos = Vector(0, -2, -6)
 
 SWEP.BlindFireAng = Angle(0, 5, 0)
-SWEP.BlindFirePos = Vector(0, -2, -4)
+SWEP.BlindFirePos = Vector(4, -2, -4)
 
 SWEP.SprintAng = Angle(30, -15, 0)
 SWEP.SprintPos = Vector(5, 0, -2)

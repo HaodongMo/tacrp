@@ -5,9 +5,11 @@ AddCSLuaFile()
 
 // names and stuff
 SWEP.PrintName = "Daewoo K1A"
-SWEP.Category = "Tactical RP (Arctic)"
+SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 
-// Tier 1
+SWEP.SubCatTier = "4Common"
+SWEP.SubCatType = "4Assault Rifles"
+
 SWEP.Description = "Common burst fire assault rifle with low recoil."
 
 SWEP.ViewModel = "models/weapons/tacint/v_k1a_2.mdl"

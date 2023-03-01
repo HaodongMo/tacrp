@@ -5,9 +5,11 @@ AddCSLuaFile()
 
 // names and stuff
 SWEP.PrintName = "HK G36K"
-SWEP.Category = "Tactical RP (Arctic)"
+SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 
-// Tier 3
+SWEP.SubCatTier = "2Premium"
+SWEP.SubCatType = "4Assault Rifles"
+
 SWEP.Description = "Premium assault rifle with integral scope. Well suited for long range sustained fire."
 
 SWEP.ViewModel = "models/weapons/tacint/v_g36k_hq.mdl"

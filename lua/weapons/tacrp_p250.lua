@@ -5,9 +5,11 @@ AddCSLuaFile()
 
 // names and stuff
 SWEP.PrintName = "SIG P250"
-SWEP.Category = "Tactical RP (Arctic)"
+SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 
-// Tier 2
+SWEP.SubCatTier = "2Premium"
+SWEP.SubCatType = "1Pistols"
+
 SWEP.Description = "Premium handgun that exchanges capacity for damage and precision."
 
 SWEP.ViewModel = "models/weapons/tacint/v_p250.mdl"

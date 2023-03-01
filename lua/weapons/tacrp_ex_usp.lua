@@ -5,9 +5,11 @@ AddCSLuaFile()
 
 // names and stuff
 SWEP.PrintName = "HK USP"
-SWEP.Category = "Tactical RP (Extras)"
+SWEP.Category = "Tactical RP" // "Tactical RP (Extras)"
 
-// Tier 2
+SWEP.SubCatTier = "3Quality"
+SWEP.SubCatType = "1Pistols"
+
 SWEP.Description = "Quality tactical pistol with low fire rate but great damage."
 
 SWEP.ViewModel = "models/weapons/tacint_extras/v_usp.mdl"

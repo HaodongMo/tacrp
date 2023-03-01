@@ -5,11 +5,13 @@ AddCSLuaFile()
 
 // names and stuff
 SWEP.PrintName = "BT MP9"
-SWEP.Category = "Tactical RP (Extras)"
+SWEP.Category = "Tactical RP" // "Tactical RP (Extras)"
 
 // Assets: https://gamebanana.com/mods/208831
 
-// Tier 3
+SWEP.SubCatTier = "2Premium"
+SWEP.SubCatType = "3Submachine Guns"
+
 SWEP.Description = "Premium submachine gun packing lots of firepower in a small package."
 
 SWEP.ViewModel = "models/weapons/tacint_extras/v_mp9.mdl"

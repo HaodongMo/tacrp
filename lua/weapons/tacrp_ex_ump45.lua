@@ -5,7 +5,10 @@ AddCSLuaFile()
 
 // names and stuff
 SWEP.PrintName = "HK UMP45"
-SWEP.Category = "Tactical RP (Extras)"
+SWEP.Category = "Tactical RP" // "Tactical RP (Extras)"
+
+SWEP.SubCatTier = "3Quality"
+SWEP.SubCatType = "3Submachine Guns"
 
 SWEP.Description = "Quality sub-machine gun designed to be a cheaper alternative to the MP5. Low capacity and fire rate, but damage is higher."
 

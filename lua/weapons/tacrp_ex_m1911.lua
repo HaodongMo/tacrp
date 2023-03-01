@@ -5,10 +5,12 @@ AddCSLuaFile()
 
 // names and stuff
 SWEP.PrintName = "Colt M1911"
-SWEP.Category = "Tactical RP (Extras)"
+SWEP.Category = "Tactical RP" // "Tactical RP (Extras)"
 
-// Tier 1
-SWEP.Description = "Cheap surplus pistol from an era before tactical attachments and pistol optics."
+SWEP.SubCatTier = "4Common"
+SWEP.SubCatType = "1Pistols"
+
+SWEP.Description = "Surplus pistol from an era before tactical attachments and pistol optics."
 
 SWEP.ViewModel = "models/weapons/tacint_extras/v_m1911.mdl"
 SWEP.WorldModel = "models/weapons/tacint_extras/w_m1911.mdl"

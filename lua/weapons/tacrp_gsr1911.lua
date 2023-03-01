@@ -5,9 +5,11 @@ AddCSLuaFile()
 
 // names and stuff
 SWEP.PrintName = "GSR M1911A1"
-SWEP.Category = "Tactical RP (Arctic)"
+SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 
-// Tier 1
+SWEP.SubCatTier = "4Common"
+SWEP.SubCatType = "1Pistols"
+
 SWEP.Description = "Common low-capacity pistol with decent damage but low range. A tactical knockoff of a venerable classic."
 
 SWEP.ViewModel = "models/weapons/tacint/v_gsr1911.mdl"
@@ -45,8 +47,6 @@ SWEP.RPM = 400
 SWEP.Spread = 0.003
 
 SWEP.ShootTimeMult = 0.5
-
-
 
 SWEP.RecoilPerShot = 1
 SWEP.RecoilMaximum = 4

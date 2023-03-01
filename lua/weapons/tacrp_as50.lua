@@ -5,9 +5,11 @@ AddCSLuaFile()
 
 // names and stuff
 SWEP.PrintName = "AI AS50"
-SWEP.Category = "Tactical RP (Arctic)"
+SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 
-// Tier 4
+SWEP.SubCatTier = "1Elite"
+SWEP.SubCatType = "7Sniper Rifles"
+
 SWEP.Description = "Elite semi-automatic anti-materiel rifle that can easily decimate any person at any distance.\nEquipped with a 12x scope by default."
 
 SWEP.ViewModel = "models/weapons/tacint/v_as50_hq.mdl"

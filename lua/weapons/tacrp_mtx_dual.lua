@@ -5,9 +5,11 @@ AddCSLuaFile()
 
 // names and stuff
 SWEP.PrintName = "Dual MTX"
-SWEP.Category = "Tactical RP (Arctic)"
+SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 
-// Tier 4
+SWEP.SubCatTier = "1Elite"
+SWEP.SubCatType = "1Pistols"
+
 SWEP.Description = "An elite pair of high capacity, high damage pistols.\nWith firepower like this, who needs aiming?"
 
 SWEP.ViewModel = "models/weapons/tacint/v_mtx_dual.mdl"

@@ -5,9 +5,11 @@ AddCSLuaFile()
 
 // names and stuff
 SWEP.PrintName = "HK MP7"
-SWEP.Category = "Tactical RP (Arctic)"
+SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 
-// Tier 3
+SWEP.SubCatTier = "2Premium"
+SWEP.SubCatType = "3Submachine Guns"
+
 SWEP.Description = "Premium personal defense weapon with emphasis on close quarters combat."
 
 SWEP.ViewModel = "models/weapons/tacint/v_mp7.mdl"

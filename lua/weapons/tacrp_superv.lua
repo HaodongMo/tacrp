@@ -5,7 +5,10 @@ AddCSLuaFile()
 
 // names and stuff
 SWEP.PrintName = "Kriss Vector"
-SWEP.Category = "Tactical RP (Arctic)"
+SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
+
+SWEP.SubCatTier = "1Elite"
+SWEP.SubCatType = "3Submachine Guns"
 
 SWEP.Description = "Elite close range SMG with extremely high fire rate. Advanced recoil dampening systems makes controlling this weapon a breeze."
 

@@ -5,7 +5,10 @@ AddCSLuaFile()
 
 // names and stuff
 SWEP.PrintName = "HK MP5A3"
-SWEP.Category = "Tactical RP (Arctic)"
+SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
+
+SWEP.SubCatTier = "3Quality"
+SWEP.SubCatType = "3Submachine Guns"
 
 SWEP.Description = "Quality, well-balanced sub-machine gun known for its precision."
 

@@ -6,7 +6,10 @@ DEFINE_BASECLASS( "tacrp_base" )
 
 // names and stuff
 SWEP.PrintName = "First Aid Kit"
-SWEP.Category = "Tactical RP (Arctic)"
+SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
+
+SWEP.SubCatTier = "9Special"
+SWEP.SubCatType = "9Equipment"
 
 SWEP.Description = "Compact pack of medical supplies for fixing anything from gunshot wounds to broken bones and bruises. Supplies regenerate over time."
 

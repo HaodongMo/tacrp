@@ -8,10 +8,10 @@ ATT.Category = "ammo_shotgun"
 
 ATT.SortOrder = 1
 
-ATT.Mult_Damage_Min = 6
-ATT.Mult_Damage_Max = 6
+ATT.Mult_Damage_Min = 6.5
+ATT.Mult_Damage_Max = 6.5
 
-ATT.Mult_Range_Max = 1.25
+ATT.Mult_Range_Max = 1.5
 
 ATT.Num = 1
 
@@ -22,7 +22,7 @@ ATT.Override_MuzzleEffect = "muzzleflash_slug"
 
 ATT.Override_BodyDamageMultipliers = {
     [HITGROUP_HEAD] = 2,
-    [HITGROUP_CHEST] = 1.25,
+    [HITGROUP_CHEST] = 1.4,
     [HITGROUP_STOMACH] = 1,
     [HITGROUP_LEFTARM] = 1,
     [HITGROUP_RIGHTARM] = 1,

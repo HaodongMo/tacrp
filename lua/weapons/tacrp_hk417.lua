@@ -5,9 +5,11 @@ AddCSLuaFile()
 
 // names and stuff
 SWEP.PrintName = "HK HK417"
-SWEP.Category = "Tactical RP (Arctic)"
+SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 
-// Tier 4
+SWEP.SubCatTier = "1Elite"
+SWEP.SubCatType = "6Marksman Rifles"
+
 SWEP.Description = "Elite high-caliber battle rifle. Capable of automatic fire, although it is very unstable."
 
 SWEP.ViewModel = "models/weapons/tacint/v_hk417.mdl"

@@ -5,9 +5,11 @@ AddCSLuaFile()
 
 // names and stuff
 SWEP.PrintName = "SIG SG551"
-SWEP.Category = "Tactical RP (Arctic)"
+SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 
-// Tier 4
+SWEP.SubCatTier = "1Elite"
+SWEP.SubCatType = "4Assault Rifles"
+
 SWEP.Description = "Elite assault rifle with all around excellent performance."
 
 SWEP.ViewModel = "models/weapons/tacint/v_sg551.mdl"

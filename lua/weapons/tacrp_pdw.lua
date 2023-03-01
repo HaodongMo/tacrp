@@ -5,7 +5,10 @@ AddCSLuaFile()
 
 // names and stuff
 SWEP.PrintName = "KAC PDW"
-SWEP.Category = "Tactical RP (Arctic)"
+SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
+
+SWEP.SubCatTier = "1Elite"
+SWEP.SubCatType = "3Submachine Guns"
 
 SWEP.Description = "Elite subcompact personal defense weapon. The perfect blend of rifle and sub-machine gun."
 

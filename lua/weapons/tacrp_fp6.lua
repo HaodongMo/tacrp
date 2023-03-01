@@ -5,9 +5,11 @@ AddCSLuaFile()
 
 // names and stuff
 SWEP.PrintName = "HK FABARM FP6"
-SWEP.Category = "Tactical RP (Arctic)"
+SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 
-// Tier 3
+SWEP.SubCatTier = "2Premium"
+SWEP.SubCatType = "5Shotguns"
+
 SWEP.Description = "Premium combat shotgun with extended shell capacity."
 
 SWEP.ViewModel = "models/weapons/tacint/v_fp6.mdl"
@@ -89,10 +91,10 @@ SWEP.GestureShoot = ACT_HL2MP_GESTURE_RANGE_ATTACK_SHOTGUN
 SWEP.GestureReload = ACT_HL2MP_GESTURE_RELOAD_SHOTGUN
 
 SWEP.PassiveAng = Angle(0, 0, 0)
-SWEP.PassivePos = Vector(0, -2, -6)
+SWEP.PassivePos = Vector(0, -2, -5)
 
-SWEP.BlindFireAng = Angle(0, 5, 0)
-SWEP.BlindFirePos = Vector(0, -2, -4)
+SWEP.BlindFireAng = Angle(0, -5, 5)
+SWEP.BlindFirePos = Vector(4, -2, -4)
 
 SWEP.SprintAng = Angle(30, -15, 0)
 SWEP.SprintPos = Vector(5, 0, -4)

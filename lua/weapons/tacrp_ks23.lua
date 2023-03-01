@@ -5,7 +5,10 @@ AddCSLuaFile()
 
 // names and stuff
 SWEP.PrintName = "KS-23"
-SWEP.Category = "Tactical RP (Arctic)"
+SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
+
+SWEP.SubCatTier = "1Elite"
+SWEP.SubCatType = "5Shotguns"
 
 SWEP.Description = "Elite large-caliber shotgun with poor handling but incredible stopping power."
 
@@ -16,12 +19,12 @@ SWEP.Slot = 3
 
 // "ballistics"
 
-SWEP.Damage_Max = 15
-SWEP.Damage_Min = 5
+SWEP.Damage_Max = 20
+SWEP.Damage_Min = 8
 SWEP.Range_Min = 600 // distance for which to maintain maximum damage
 SWEP.Range_Max = 3000 // distance at which we drop to minimum damage
 SWEP.Penetration = 2 // units of metal this weapon can penetrate
-SWEP.Num = 36
+SWEP.Num = 16
 
 SWEP.MuzzleVelocity = 10000
 
@@ -42,7 +45,7 @@ SWEP.Firemode = 1
 
 SWEP.RPM = 40
 
-SWEP.Spread = 0.075
+SWEP.Spread = 0.05
 
 SWEP.ShootTimeMult = 1.25
 
@@ -52,32 +55,32 @@ SWEP.MidAirSpreadPenalty = 0
 SWEP.ScopedSpreadPenalty = 0
 
 SWEP.RecoilPerShot = 1
-SWEP.RecoilMaximum = 2
+SWEP.RecoilMaximum = 2.5
 SWEP.RecoilResetTime = 0.3
 SWEP.RecoilDissipationRate = 0.5
 SWEP.RecoilFirstShotMult = 1 // multiplier for the first shot's recoil amount
 
-SWEP.RecoilVisualKick = 3
-SWEP.RecoilVisualShake = 2
+SWEP.RecoilVisualKick = 2
+SWEP.RecoilVisualShake = 1.5
 
-SWEP.RecoilKick = 20
+SWEP.RecoilKick = 35
 
-SWEP.RecoilSpreadPenalty = 0.045 // extra spread per one unit of recoil
+SWEP.RecoilSpreadPenalty = 0.035
 
 SWEP.CanBlindFire = true
 
 // handling
 
-SWEP.MoveSpeedMult = 0.7
+SWEP.MoveSpeedMult = 0.75
 SWEP.ShootingSpeedMult = 0.4
-SWEP.SightedSpeedMult = 0.25
+SWEP.SightedSpeedMult = 0.3
 SWEP.MeleeSpeedMult = 0.5
 SWEP.MeleeSpeedMultTime = 2
 
-SWEP.AimDownSightsTime = 0.42
-SWEP.SprintToFireTime = 0.42
+SWEP.AimDownSightsTime = 0.35
+SWEP.SprintToFireTime = 0.32
 
-SWEP.ReloadTimeMult = 0.75
+SWEP.ReloadTimeMult = 0.8
 
 // hold types
 
@@ -93,7 +96,7 @@ SWEP.PassiveAng = Angle(0, 0, 0)
 SWEP.PassivePos = Vector(0, -2, -5)
 
 SWEP.BlindFireAng = Angle(0, 5, 0)
-SWEP.BlindFirePos = Vector(0, -2, -4)
+SWEP.BlindFirePos = Vector(4, -2, -4)
 
 SWEP.SprintAng = Angle(30, -15, 0)
 SWEP.SprintPos = Vector(5, 0, -2)

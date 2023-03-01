@@ -5,9 +5,11 @@ AddCSLuaFile()
 
 // names and stuff
 SWEP.PrintName = "Manurhin MR96"
-SWEP.Category = "Tactical RP (Arctic)"
+SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 
-// Tier 3
+SWEP.SubCatTier = "2Premium"
+SWEP.SubCatType = "1Pistols"
+
 SWEP.Description = "Premium revolver with high recoil and incredible stopping power.\nDoes increased damage to the head and upper chest."
 
 SWEP.ViewModel = "models/weapons/tacint/v_mr96.mdl"

@@ -5,9 +5,11 @@ AddCSLuaFile()
 
 // names and stuff
 SWEP.PrintName = "FN P90"
-SWEP.Category = "Tactical RP (Arctic)"
+SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 
-// Tier 3
+SWEP.SubCatTier = "2Premium"
+SWEP.SubCatType = "3Submachine Guns"
+
 SWEP.Description = "Premium personal defense weapon with a generous top-loaded magazine. High velocity rounds retain effectiveness at range."
 
 SWEP.ViewModel = "models/weapons/tacint/v_p90.mdl"

@@ -5,9 +5,11 @@ AddCSLuaFile()
 
 // names and stuff
 SWEP.PrintName = "Beretta M92FS"
-SWEP.Category = "Tactical RP (Arctic)"
+SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 
-// Tier 1
+SWEP.SubCatTier = "4Common"
+SWEP.SubCatType = "1Pistols"
+
 SWEP.Description = "Common civilian pistol with decent accuracy."
 
 SWEP.ViewModel = "models/weapons/tacint/v_vertec.mdl"

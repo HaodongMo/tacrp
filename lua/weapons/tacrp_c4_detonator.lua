@@ -5,7 +5,10 @@ AddCSLuaFile()
 
 // names and stuff
 SWEP.PrintName = "C4 Detonator"
-SWEP.Category = "Tactical RP (Arctic)"
+SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
+
+SWEP.SubCatTier = "9Special"
+SWEP.SubCatType = "9Equipment"
 
 SWEP.Description = "Device for touching off C4 charges or other types of remote explosives."
 

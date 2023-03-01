@@ -326,7 +326,7 @@ function SWEP:CreateCustomizeHUD()
             surface.SetTextPos(ScreenScale(2), h - ScreenScale(10))
             surface.DrawText(txt)
             if num > 1 then
-                local txt2 = "×" .. num
+                local txt2 = "×" .. math.floor(num)
                 local tw2 = surface.GetTextSize(txt2)
                 --surface.DrawRect(w - tw2 - ScreenScale(2), h - ScreenScale(10), tw2 + ScreenScale(1), th2)
 

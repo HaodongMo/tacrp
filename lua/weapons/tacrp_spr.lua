@@ -5,9 +5,11 @@ AddCSLuaFile()
 
 // names and stuff
 SWEP.PrintName = "Remington 700 SPR"
-SWEP.Category = "Tactical RP (Arctic)"
+SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 
-// Tier 1
+SWEP.SubCatTier = "4Common"
+SWEP.SubCatType = "7Sniper Rifles"
+
 SWEP.Description = "Common hunting rifle with a relatively fast cycle speed.\nEquipped with a 6x scope by default."
 
 SWEP.ViewModel = "models/weapons/tacint/v_spr.mdl"

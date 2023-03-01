@@ -5,9 +5,11 @@ AddCSLuaFile()
 
 // names and stuff
 SWEP.PrintName = "PGM Ultima Ratio"
-SWEP.Category = "Tactical RP (Arctic)"
+SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 
-// Tier 2
+SWEP.SubCatTier = "3Quality"
+SWEP.SubCatType = "7Sniper Rifles"
+
 SWEP.Description = "Quality bolt action sniper rifle with great damage and muzzle velocity.\nEquipped with a 10x scope by default."
 
 SWEP.ViewModel = "models/weapons/tacint/v_uratio.mdl"

@@ -5,7 +5,10 @@ AddCSLuaFile()
 
 // names and stuff
 SWEP.PrintName = "Duffle Bag"
-SWEP.Category = "Tactical RP (Arctic)"
+SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
+
+SWEP.SubCatTier = "9Special"
+SWEP.SubCatType = "9Equipment"
 
 SWEP.Description = "Carry entities around."
 

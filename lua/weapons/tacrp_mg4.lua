@@ -5,7 +5,10 @@ AddCSLuaFile()
 
 // names and stuff
 SWEP.PrintName = "HK MG4"
-SWEP.Category = "Tactical RP (Arctic)"
+SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
+
+SWEP.SubCatTier = "1Elite"
+SWEP.SubCatType = "4Assault Rifles"
 
 SWEP.Description = "Elite light machine gun that offers huge volume of fire. Despite its name, it is a very heavy weapon."
 

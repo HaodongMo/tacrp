@@ -5,9 +5,11 @@ AddCSLuaFile()
 
 // names and stuff
 SWEP.PrintName = "AMD65"
-SWEP.Category = "Tactical RP (Arctic)"
+SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 
-// Tier 2
+SWEP.SubCatTier = "3Quality"
+SWEP.SubCatType = "4Assault Rifles"
+
 SWEP.Description = "Quality assault rifle with punishing recoil but high damage."
 
 SWEP.ViewModel = "models/weapons/tacint/v_amd65.mdl"

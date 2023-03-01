@@ -5,9 +5,11 @@ AddCSLuaFile()
 
 // names and stuff
 SWEP.PrintName = "Springfield M1A"
-SWEP.Category = "Tactical RP (Arctic)"
+SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 
-// Tier 3
+SWEP.SubCatTier = "2Premium"
+SWEP.SubCatType = "7Sniper Rifles"
+
 SWEP.Description = "Premium semi-automatic sniper rifle with a lethal headshot.\nEquipped with a 6x scope by default."
 
 SWEP.ViewModel = "models/weapons/tacint/v_m14.mdl"

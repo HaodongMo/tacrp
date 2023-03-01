@@ -5,9 +5,11 @@ AddCSLuaFile()
 
 // names and stuff
 SWEP.PrintName = "Glock 17"
-SWEP.Category = "Tactical RP (Extras)"
+SWEP.Category = "Tactical RP" // "Tactical RP (Extras)"
 
-// Tier 2
+SWEP.SubCatTier = "4Common"
+SWEP.SubCatType = "1Pistols"
+
 SWEP.Description = "Cheap polymer pistol with large capacity but poor accuracy."
 
 SWEP.ViewModel = "models/weapons/tacint_extras/v_glock.mdl"

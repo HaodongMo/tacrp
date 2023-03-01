@@ -5,9 +5,11 @@ AddCSLuaFile()
 
 // names and stuff
 SWEP.PrintName = "Ruger Mini-14"
-SWEP.Category = "Tactical RP (Arctic)"
+SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 
-// Tier 1
+SWEP.SubCatTier = "5Civilian"
+SWEP.SubCatType = "6Marksman Rifles"
+
 SWEP.Description = "Common semi-automatic rifle with no stock and no optic mount."
 
 SWEP.ViewModel = "models/weapons/tacint/v_m1.mdl"

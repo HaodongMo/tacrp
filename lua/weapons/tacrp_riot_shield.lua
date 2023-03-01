@@ -6,7 +6,10 @@ DEFINE_BASECLASS( "tacrp_base" )
 
 // names and stuff
 SWEP.PrintName = "Riot Shield"
-SWEP.Category = "Tactical RP (Arctic)"
+SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
+
+SWEP.SubCatTier = "9Special"
+SWEP.SubCatType = "9Equipment"
 
 SWEP.Description = "Metal-framed plastic shield, capable of stopping all incoming bullets, no matter how big. Somehow."
 

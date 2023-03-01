@@ -5,7 +5,10 @@ AddCSLuaFile()
 
 // names and stuff
 SWEP.PrintName = "Diemaco C8A1"
-SWEP.Category = "Tactical RP (Arctic)"
+SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
+
+SWEP.SubCatTier = "2Premium"
+SWEP.SubCatType = "4Assault Rifles"
 
 SWEP.Description = "Premium assault rifle with balanced performance. A close cousin to the classic American rifle, with a slower but more controllable rate of fire."
 

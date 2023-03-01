@@ -5,9 +5,11 @@ AddCSLuaFile()
 
 // names and stuff
 SWEP.PrintName = "Molot Bekas"
-SWEP.Category = "Tactical RP (Arctic)"
+SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 
-// Tier 1
+SWEP.SubCatTier = "4Common"
+SWEP.SubCatType = "5Shotguns"
+
 SWEP.Description = "Common hunting shotgun.\nRelatively accurate, but cannot fire rapidly."
 
 SWEP.ViewModel = "models/weapons/tacint/v_bekas.mdl"
@@ -41,7 +43,7 @@ SWEP.BodyDamageMultipliers = {
 
 SWEP.Firemode = 1
 
-SWEP.RPM = 65
+SWEP.RPM = 60
 
 SWEP.Spread = 0.015
 
@@ -53,7 +55,7 @@ SWEP.ScopedSpreadPenalty = 0
 SWEP.RecoilPerShot = 1
 SWEP.RecoilMaximum = 2
 SWEP.RecoilResetTime = 0.25 // time after you stop shooting for recoil to start dissipating
-SWEP.RecoilDissipationRate = 1.15
+SWEP.RecoilDissipationRate = 1
 SWEP.RecoilFirstShotMult = 1 // multiplier for the first shot's recoil amount
 
 SWEP.RecoilVisualKick = 2
@@ -90,7 +92,7 @@ SWEP.PassiveAng = Angle(0, 0, 0)
 SWEP.PassivePos = Vector(0, -2, -4)
 
 SWEP.BlindFireAng = Angle(0, 5, 0)
-SWEP.BlindFirePos = Vector(0, -2, -4)
+SWEP.BlindFirePos = Vector(4, -2, -4)
 
 SWEP.SprintAng = Angle(30, -15, 0)
 SWEP.SprintPos = Vector(5, 0, -2)

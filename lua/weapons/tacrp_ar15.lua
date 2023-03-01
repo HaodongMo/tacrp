@@ -5,9 +5,11 @@ AddCSLuaFile()
 
 // names and stuff
 SWEP.PrintName = "Colt Canada AR-15"
-SWEP.Category = "Tactical RP (Arctic)"
+SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 
-// Tier 2
+SWEP.SubCatTier = "5Civilian"
+SWEP.SubCatType = "6Marksman Rifles"
+
 SWEP.Description = "Civilian, semi-automatic variation of an ubiquitous American rifle.\nUses reduced capacity magazines."
 
 SWEP.ViewModel = "models/weapons/tacint/v_m4.mdl"
