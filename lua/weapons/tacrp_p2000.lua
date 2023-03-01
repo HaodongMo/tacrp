@@ -8,7 +8,7 @@ SWEP.PrintName = "HK P2000"
 SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 
 SWEP.SubCatTier = "3Quality"
-SWEP.SubCatType = "1Pistols"
+SWEP.SubCatType = "1Pistol"
 
 SWEP.Description = "Quality, well-rounded handgun."
 

@@ -8,7 +8,7 @@ SWEP.PrintName = "PGM Ultima Ratio"
 SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 
 SWEP.SubCatTier = "3Quality"
-SWEP.SubCatType = "7Sniper Rifles"
+SWEP.SubCatType = "7Sniper Rifle"
 
 SWEP.Description = "Quality bolt action sniper rifle with great damage and muzzle velocity.\nEquipped with a 10x scope by default."
 

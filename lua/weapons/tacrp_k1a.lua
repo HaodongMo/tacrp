@@ -8,7 +8,7 @@ SWEP.PrintName = "Daewoo K1A"
 SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 
 SWEP.SubCatTier = "4Common"
-SWEP.SubCatType = "4Assault Rifles"
+SWEP.SubCatType = "4Assault Rifle"
 
 SWEP.Description = "Common burst fire assault rifle with low recoil."
 

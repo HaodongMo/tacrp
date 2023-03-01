@@ -8,7 +8,7 @@ SWEP.PrintName = "Glock 17"
 SWEP.Category = "Tactical RP" // "Tactical RP (Extras)"
 
 SWEP.SubCatTier = "4Common"
-SWEP.SubCatType = "1Pistols"
+SWEP.SubCatType = "1Pistol"
 
 SWEP.Description = "Cheap polymer pistol with large capacity but poor accuracy."
 

@@ -8,7 +8,7 @@ SWEP.PrintName = "Molot Bekas"
 SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 
 SWEP.SubCatTier = "4Common"
-SWEP.SubCatType = "5Shotguns"
+SWEP.SubCatType = "5Shotgun"
 
 SWEP.Description = "Common hunting shotgun.\nRelatively accurate, but cannot fire rapidly."
 

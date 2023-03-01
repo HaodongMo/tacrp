@@ -8,7 +8,7 @@ SWEP.PrintName = "FN PS90"
 SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 
 SWEP.SubCatTier = "5Civilian"
-SWEP.SubCatType = "3Submachine Guns"
+SWEP.SubCatType = "3Submachine Gun"
 
 SWEP.Description = "Civilian, semi-automatic variation of a bullpup PDW.\nUses reduced capacity magazines."
 

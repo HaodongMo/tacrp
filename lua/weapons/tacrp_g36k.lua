@@ -8,7 +8,7 @@ SWEP.PrintName = "HK G36K"
 SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 
 SWEP.SubCatTier = "2Premium"
-SWEP.SubCatType = "4Assault Rifles"
+SWEP.SubCatType = "4Assault Rifle"
 
 SWEP.Description = "Premium assault rifle with integral scope. Well suited for long range sustained fire."
 

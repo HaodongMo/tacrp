@@ -75,7 +75,7 @@ TacRP.QuickNades = {
         Model = "models/weapons/tacint/v_quicknade_door_charge.mdl",
         Spoon = false,
         Secret = false,
-        Icon = Material("TacRP/grenades/c4.png", "mips smooth")
+        Icon = Material("TacRP/grenades/breach.png", "mips smooth")
     },
 }
 

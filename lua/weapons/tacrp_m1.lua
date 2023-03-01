@@ -8,7 +8,7 @@ SWEP.PrintName = "Ruger Mini-14"
 SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 
 SWEP.SubCatTier = "5Civilian"
-SWEP.SubCatType = "6Marksman Rifles"
+SWEP.SubCatType = "6Marksman Rifle"
 
 SWEP.Description = "Common semi-automatic rifle with no stock and no optic mount."
 

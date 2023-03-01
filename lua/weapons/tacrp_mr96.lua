@@ -8,7 +8,7 @@ SWEP.PrintName = "Manurhin MR96"
 SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 
 SWEP.SubCatTier = "2Premium"
-SWEP.SubCatType = "1Pistols"
+SWEP.SubCatType = "1Pistol"
 
 SWEP.Description = "Premium revolver with high recoil and incredible stopping power.\nDoes increased damage to the head and upper chest."
 

@@ -8,7 +8,7 @@ SWEP.PrintName = "Remington 700 SPR"
 SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 
 SWEP.SubCatTier = "4Common"
-SWEP.SubCatType = "7Sniper Rifles"
+SWEP.SubCatType = "7Sniper Rifle"
 
 SWEP.Description = "Common hunting rifle with a relatively fast cycle speed.\nEquipped with a 6x scope by default."
 

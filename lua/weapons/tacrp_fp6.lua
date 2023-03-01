@@ -8,7 +8,7 @@ SWEP.PrintName = "HK FABARM FP6"
 SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 
 SWEP.SubCatTier = "2Premium"
-SWEP.SubCatType = "5Shotguns"
+SWEP.SubCatType = "5Shotgun"
 
 SWEP.Description = "Premium combat shotgun with extended shell capacity."
 

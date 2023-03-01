@@ -8,7 +8,7 @@ SWEP.PrintName = "HK HK417"
 SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 
 SWEP.SubCatTier = "1Elite"
-SWEP.SubCatType = "6Marksman Rifles"
+SWEP.SubCatType = "6Marksman Rifle"
 
 SWEP.Description = "Elite high-caliber battle rifle. Capable of automatic fire, although it is very unstable."
 

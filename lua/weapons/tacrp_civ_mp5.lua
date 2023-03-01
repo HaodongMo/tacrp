@@ -8,7 +8,7 @@ SWEP.PrintName = "HK SP5"
 SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 
 SWEP.SubCatTier = "5Civilian"
-SWEP.SubCatType = "3Submachine Guns"
+SWEP.SubCatType = "3Submachine Gun"
 
 SWEP.Description = "Civilian, semi-automatic variant of a legendary submachine gun.\nUses reduced capacity magazines."
 

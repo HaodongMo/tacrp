@@ -8,7 +8,7 @@ SWEP.PrintName = "Colt Canada AR-15"
 SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 
 SWEP.SubCatTier = "5Civilian"
-SWEP.SubCatType = "6Marksman Rifles"
+SWEP.SubCatType = "6Marksman Rifle"
 
 SWEP.Description = "Civilian, semi-automatic variation of an ubiquitous American rifle.\nUses reduced capacity magazines."
 

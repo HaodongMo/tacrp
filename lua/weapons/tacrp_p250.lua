@@ -8,7 +8,7 @@ SWEP.PrintName = "SIG P250"
 SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 
 SWEP.SubCatTier = "2Premium"
-SWEP.SubCatType = "1Pistols"
+SWEP.SubCatType = "1Pistol"
 
 SWEP.Description = "Premium handgun that exchanges capacity for damage and precision."
 

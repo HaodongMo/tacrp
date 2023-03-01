@@ -8,7 +8,7 @@ SWEP.PrintName = "AMD65"
 SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 
 SWEP.SubCatTier = "3Quality"
-SWEP.SubCatType = "4Assault Rifles"
+SWEP.SubCatType = "4Assault Rifle"
 
 SWEP.Description = "Quality assault rifle with punishing recoil but high damage."
 

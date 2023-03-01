@@ -8,7 +8,7 @@ SWEP.PrintName = "MAC-10"
 SWEP.Category = "Tactical RP" // "Tactical RP (Extras)"
 
 SWEP.SubCatTier = "4Common"
-SWEP.SubCatType = "2Machine Pistols"
+SWEP.SubCatType = "2Machine Pistol"
 
 SWEP.Description = "Common bullet hose machine pistol. A cheaply made weapon with subpar ironsights and better suited for spray-and-pray."
 

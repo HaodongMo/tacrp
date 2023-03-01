@@ -104,7 +104,7 @@ function SWEP:CreateCustomizeHUD()
         self:SavePreset()
     end
     bg.Paint = function(self2, w, h)
-        if !IsValid(self) then
+        if !IsValid(self) or !IsValid(self:GetOwner()) or self:GetOwner():GetActiveWeapon() ~= self then
             self2:Remove()
             gui.EnableScreenClicker(false)
         end
@@ -121,6 +121,34 @@ function SWEP:CreateCustomizeHUD()
         surface.SetTextPos(w - name_w - ScreenScale(14), airgap)
         surface.SetTextColor(255, 255, 255)
         surface.DrawText(name_txt)
+
+        surface.SetFont("TacRP_Myriad_Pro_12")
+
+        local ammo_txt = language.GetPhrase(string.lower(self.Ammo) .. "_ammo")
+        local ammo_w = surface.GetTextSize(ammo_txt)
+
+        surface.SetDrawColor(0, 0, 0, 150)
+        surface.DrawRect(w - name_w - ammo_w - ScreenScale(32) - smallgap, airgap + ScreenScale(20), ammo_w + ScreenScale(12), ScreenScale(14))
+        TacRP.DrawCorneredBox(w - name_w - ammo_w - ScreenScale(32) - smallgap, airgap + ScreenScale(20), ammo_w + ScreenScale(12), ScreenScale(14))
+
+        surface.SetTextPos(w - name_w - ammo_w - ScreenScale(30), airgap + ScreenScale(21))
+        surface.SetTextColor(255, 255, 255)
+        surface.DrawText(ammo_txt)
+
+        if self.SubCatTier and self.SubCatType then
+            local type_txt = string.sub(self.SubCatTier, 2) .. " " .. string.sub(self.SubCatType, 2)
+            surface.SetFont("TacRP_Myriad_Pro_12")
+            local type_w = surface.GetTextSize(type_txt)
+
+            surface.SetDrawColor(0, 0, 0, 150)
+            surface.DrawRect(w - name_w - type_w - ScreenScale(32) - smallgap, airgap, type_w + ScreenScale(12), ScreenScale(18))
+            TacRP.DrawCorneredBox(w - name_w - type_w - ScreenScale(32) - smallgap, airgap, type_w + ScreenScale(12), ScreenScale(18))
+
+            surface.SetTextPos(w - name_w - type_w - ScreenScale(30), airgap + ScreenScale(3))
+            surface.SetTextColor(255, 255, 255)
+            surface.DrawText(type_txt)
+        end
+
     end
 
     local stack = airgap + ScreenScale(34)

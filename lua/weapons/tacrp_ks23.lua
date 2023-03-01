@@ -8,7 +8,7 @@ SWEP.PrintName = "KS-23"
 SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 
 SWEP.SubCatTier = "1Elite"
-SWEP.SubCatType = "5Shotguns"
+SWEP.SubCatType = "5Shotgun"
 
 SWEP.Description = "Elite large-caliber shotgun with poor handling but incredible stopping power."
 

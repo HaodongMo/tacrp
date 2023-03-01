@@ -8,7 +8,7 @@ SWEP.PrintName = "FB Beryl 96"
 SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 
 SWEP.SubCatTier = "4Common"
-SWEP.SubCatType = "4Assault Rifles"
+SWEP.SubCatType = "4Assault Rifle"
 
 SWEP.Description = "Common automatic assault rifle with poor sustained fire capabilities. Despite its looks, it is not an AK."
 

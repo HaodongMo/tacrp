@@ -8,7 +8,7 @@ SWEP.PrintName = "GSR M1911A1"
 SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 
 SWEP.SubCatTier = "4Common"
-SWEP.SubCatType = "1Pistols"
+SWEP.SubCatType = "1Pistol"
 
 SWEP.Description = "Common low-capacity pistol with decent damage but low range. A tactical knockoff of a venerable classic."
 

@@ -8,7 +8,7 @@ SWEP.PrintName = "HK USP"
 SWEP.Category = "Tactical RP" // "Tactical RP (Extras)"
 
 SWEP.SubCatTier = "3Quality"
-SWEP.SubCatType = "1Pistols"
+SWEP.SubCatType = "1Pistol"
 
 SWEP.Description = "Quality tactical pistol with low fire rate but great damage."
 

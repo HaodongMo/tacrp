@@ -8,7 +8,7 @@ SWEP.PrintName = "AK-47"
 SWEP.Category = "Tactical RP" // "Tactical RP (Extras)"
 
 SWEP.SubCatTier = "3Quality"
-SWEP.SubCatType = "4Assault Rifles"
+SWEP.SubCatType = "4Assault Rifle"
 
 SWEP.Description = "Quality large-caliber automatic assault rifle.\nAn insurgent's greatest ally and a terrorist's best friend."
 

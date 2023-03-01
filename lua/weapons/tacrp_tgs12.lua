@@ -8,7 +8,7 @@ SWEP.PrintName = "TGS-12"
 SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 
 SWEP.SubCatTier = "3Quality"
-SWEP.SubCatType = "5Shotguns"
+SWEP.SubCatType = "5Shotgun"
 
 SWEP.Description = "Quality pistol grip shotgun with high recoil and mobility."
 

@@ -8,7 +8,7 @@ SWEP.PrintName = "Sphinx 2000"
 SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 
 SWEP.SubCatTier = "2Premium"
-SWEP.SubCatType = "1Pistols"
+SWEP.SubCatType = "1Pistol"
 
 SWEP.Description = "Premium pistol with low recoil and a crisp trigger."
 

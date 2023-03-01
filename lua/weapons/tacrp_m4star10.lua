@@ -8,7 +8,7 @@ SWEP.PrintName = "Benelli M4"
 SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 
 SWEP.SubCatTier = "1Elite"
-SWEP.SubCatType = "5Shotguns"
+SWEP.SubCatType = "5Shotgun"
 
 SWEP.Description = "Elite semi-automatic combat shotgun."
 

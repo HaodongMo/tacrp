@@ -8,7 +8,7 @@ SWEP.PrintName = "DSA-58"
 SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 
 SWEP.SubCatTier = "2Premium"
-SWEP.SubCatType = "6Marksman Rifles"
+SWEP.SubCatType = "6Marksman Rifle"
 
 SWEP.Description = "Premium battle rifle with slow fire rate but very high damage."
 

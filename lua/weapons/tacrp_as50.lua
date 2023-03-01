@@ -8,7 +8,7 @@ SWEP.PrintName = "AI AS50"
 SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 
 SWEP.SubCatTier = "1Elite"
-SWEP.SubCatType = "7Sniper Rifles"
+SWEP.SubCatType = "7Sniper Rifle"
 
 SWEP.Description = "Elite semi-automatic anti-materiel rifle that can easily decimate any person at any distance.\nEquipped with a 12x scope by default."
 
