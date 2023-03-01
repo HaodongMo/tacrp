@@ -7,17 +7,17 @@ AddCSLuaFile()
 SWEP.PrintName = "Colt Canada AR-15"
 SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 
-SWEP.SubCatTier = "5Civilian"
+SWEP.SubCatTier = "3Quality"
 SWEP.SubCatType = "6Marksman Rifle"
 
-SWEP.Description = "Civilian, semi-automatic variation of an ubiquitous American rifle.\nUses reduced capacity magazines."
+SWEP.Description = "Semi-automatic model of an ubiquitous American rifle.\nUses reduced capacity magazines."
 
 SWEP.ViewModel = "models/weapons/tacint/v_m4.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_m4.mdl"
 
 SWEP.Slot = 3
 
-SWEP.RPM = 550
+SWEP.RPM = 500
 
 SWEP.Firemode = 1
 SWEP.Firemodes = false

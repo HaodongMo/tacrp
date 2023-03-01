@@ -10,7 +10,7 @@ SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 SWEP.SubCatTier = "3Quality"
 SWEP.SubCatType = "4Assault Rifle"
 
-SWEP.Description = "Quality assault rifle with punishing recoil but high damage."
+SWEP.Description = "Hungarian rifle with punishing recoil but high damage."
 
 SWEP.ViewModel = "models/weapons/tacint/v_amd65.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_amd65.mdl"

@@ -10,7 +10,7 @@ SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 SWEP.SubCatTier = "4Common"
 SWEP.SubCatType = "5Shotgun"
 
-SWEP.Description = "Common hunting shotgun.\nRelatively accurate, but cannot fire rapidly."
+SWEP.Description = "Accurate hunting shotgun with a low fire rate."
 
 SWEP.ViewModel = "models/weapons/tacint/v_bekas.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_bekas.mdl"

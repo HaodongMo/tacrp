@@ -10,7 +10,7 @@ SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 SWEP.SubCatTier = "1Elite"
 SWEP.SubCatType = "2Machine Pistol"
 
-SWEP.Description = "Elite, fully automatic machine pistol with incredible close range power."
+SWEP.Description = "Automatic machine pistol with incredible close range power."
 
 SWEP.ViewModel = "models/weapons/tacint/v_xd45.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_xd45.mdl"

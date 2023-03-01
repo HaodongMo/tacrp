@@ -10,7 +10,7 @@ SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 SWEP.SubCatTier = "1Elite"
 SWEP.SubCatType = "3Submachine Gun"
 
-SWEP.Description = "Elite subcompact personal defense weapon. The perfect blend of rifle and sub-machine gun."
+SWEP.Description = "Subcompact personal defense weapon firing a rifle cartridge. The perfect blend of rifle and submachine gun."
 
 SWEP.ViewModel = "models/weapons/tacint/v_pdw.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_pdw.mdl"

@@ -7,10 +7,10 @@ AddCSLuaFile()
 SWEP.PrintName = "PGM Hécate II"
 SWEP.Category = "Tactical RP" // "Tactical RP (Extras)"
 
-SWEP.SubCatTier = "1Elite"
+SWEP.SubCatTier = "2Premium"
 SWEP.SubCatType = "7Sniper Rifle"
 
-SWEP.Description = "Premium bolt-action anti-materiel rifle that kills in one shot. Cannot fire phantom bullets.\nEquipped with a 10x scope by default."
+SWEP.Description = "Bolt-action anti-materiel rifle that can kill in one shot. Does not fire phantom bullets.\nEquipped with a 10x scope by default."
 
 SWEP.ViewModel = "models/weapons/tacint_extras/v_hecate.mdl"
 SWEP.WorldModel = "models/weapons/tacint_extras/w_hecate.mdl"

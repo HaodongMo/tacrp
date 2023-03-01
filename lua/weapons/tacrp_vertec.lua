@@ -8,9 +8,9 @@ SWEP.PrintName = "Beretta M92FS"
 SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 
 SWEP.SubCatTier = "4Common"
-SWEP.SubCatType = "1Pistol"
+SWEP.SubCatType = "1Sidearm"
 
-SWEP.Description = "Common civilian pistol with decent accuracy."
+SWEP.Description = "Civilian pistol with good accuracy."
 
 SWEP.ViewModel = "models/weapons/tacint/v_vertec.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_vertec.mdl"

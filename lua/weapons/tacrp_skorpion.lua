@@ -10,7 +10,7 @@ SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 SWEP.SubCatTier = "4Common"
 SWEP.SubCatType = "2Machine Pistol"
 
-SWEP.Description = "Common machine pistol with incredibly low recoil.\nCan only mount pistol optics due to top ejection port."
+SWEP.Description = "Machine pistol with incredibly low recoil."
 
 SWEP.ViewModel = "models/weapons/tacint/v_skorpion.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_skorpion.mdl"
@@ -196,8 +196,8 @@ SWEP.Attachments = {
         WMScale = 1.2,
         Pos_VM = Vector(4.6, 0, 0.5),
         Ang_VM = Angle(90, 0, 180),
-        Pos_WM = Vector(1.5, 1.25, -4.3),
-        Ang_WM = Angle(0, 0, 0),
+        Pos_WM = Vector(-12, 1.25, -5),
+        Ang_WM = Angle(0, 0, 180),
     },
     [2] = {
         PrintName = "Muzzle",

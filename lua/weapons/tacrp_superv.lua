@@ -10,7 +10,7 @@ SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 SWEP.SubCatTier = "1Elite"
 SWEP.SubCatType = "3Submachine Gun"
 
-SWEP.Description = "Elite close range SMG with extremely high fire rate. Advanced recoil dampening systems makes controlling this weapon a breeze."
+SWEP.Description = "Close range SMG with extremely high fire rate. Advanced recoil dampening systems makes controlling this weapon a breeze."
 
 SWEP.ViewModel = "models/weapons/tacint/v_superv.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_superv.mdl"

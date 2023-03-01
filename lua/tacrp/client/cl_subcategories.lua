@@ -23,14 +23,14 @@ hook.Add("PopulateWeapons", "zzzzz_TacRP_SubCategories", function(pnlContent, tr
 
             -- Get the weapon subcategory as a string
             local SubCategory = "Other"
-            if cvar == 1 then
+            if cvar == 2 then
                 if (WepTable != nil && WepTable.SubCatTier != nil) then
                     SubCategory = WepTable.SubCatTier
                     if (!isstring(SubCategory)) then
                         SubCategory = tostring(SubCategory)
                     end
                 end
-            elseif cvar == 2 then
+            elseif cvar == 1 then
                 if (WepTable != nil && WepTable.SubCatType != nil) then
                     SubCategory = WepTable.SubCatType
                     if (!isstring(SubCategory)) then

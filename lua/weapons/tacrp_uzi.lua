@@ -10,7 +10,7 @@ SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 SWEP.SubCatTier = "3Quality"
 SWEP.SubCatType = "2Machine Pistol"
 
-SWEP.Description = "Quality machine pistol with a high rate of fire."
+SWEP.Description = "Machine pistol with a high rate of fire while maintaining decent recoil control."
 
 SWEP.ViewModel = "models/weapons/tacint/v_uzi.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_uzi.mdl"

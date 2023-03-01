@@ -10,7 +10,7 @@ SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 SWEP.SubCatTier = "3Quality"
 SWEP.SubCatType = "5Shotgun"
 
-SWEP.Description = "Quality pistol grip shotgun with high recoil and mobility."
+SWEP.Description = "Pistol grip shotgun with high recoil and mobility."
 
 SWEP.ViewModel = "models/weapons/tacint/v_tgs12_2.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_tgs12.mdl"

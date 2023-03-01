@@ -7,10 +7,10 @@ AddCSLuaFile()
 SWEP.PrintName = "GSR M1911A1"
 SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 
-SWEP.SubCatTier = "4Common"
-SWEP.SubCatType = "1Pistol"
+SWEP.SubCatTier = "3Quality"
+SWEP.SubCatType = "1Sidearm"
 
-SWEP.Description = "Common low-capacity pistol with decent damage but low range. A tactical knockoff of a venerable classic."
+SWEP.Description = "Low-capacity pistol with decent damage. A tactical knockoff of a venerable classic."
 
 SWEP.ViewModel = "models/weapons/tacint/v_gsr1911.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_gsr1911.mdl"
@@ -19,7 +19,7 @@ SWEP.Slot = 2
 
 // "ballistics"
 
-SWEP.Damage_Max = 18
+SWEP.Damage_Max = 22
 SWEP.Damage_Min = 4
 SWEP.Range_Min = 1000 // distance for which to maintain maximum damage
 SWEP.Range_Max = 4000 // distance at which we drop to minimum damage
@@ -56,7 +56,7 @@ SWEP.RecoilFirstShotMult = 1 // multiplier for the first shot's recoil amount
 
 SWEP.RecoilVisualKick = 3
 
-SWEP.RecoilKick = 6.5
+SWEP.RecoilKick = 8
 
 SWEP.RecoilSpreadPenalty = 0.005
 

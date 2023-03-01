@@ -10,7 +10,7 @@ SWEP.Category = "Tactical RP" // "Tactical RP (Extras)"
 SWEP.SubCatTier = "3Quality"
 SWEP.SubCatType = "3Submachine Gun"
 
-SWEP.Description = "Quality sub-machine gun designed to be a cheaper alternative to the MP5. Low capacity and fire rate, but damage is higher."
+SWEP.Description = "A weapon designed to be a cheaper alternative to the MP5. Higher damage, but lower rate of fire."
 
 SWEP.ViewModel = "models/weapons/tacint_extras/v_ump45.mdl"
 SWEP.WorldModel = "models/weapons/tacint_extras/w_ump45.mdl"

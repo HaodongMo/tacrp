@@ -107,6 +107,7 @@ function SWEP:CreateCustomizeHUD()
         if !IsValid(self) or !IsValid(self:GetOwner()) or self:GetOwner():GetActiveWeapon() ~= self then
             self2:Remove()
             gui.EnableScreenClicker(false)
+            return
         end
 
         local name_txt = self:GetValue("PrintName")

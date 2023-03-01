@@ -7,10 +7,10 @@ AddCSLuaFile()
 SWEP.PrintName = "HK SP5"
 SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 
-SWEP.SubCatTier = "5Civilian"
+SWEP.SubCatTier = "4Common"
 SWEP.SubCatType = "3Submachine Gun"
 
-SWEP.Description = "Civilian, semi-automatic variant of a legendary submachine gun.\nUses reduced capacity magazines."
+SWEP.Description = "Semi-automatic variant of a legendary submachine gun.\nUses reduced capacity magazines."
 
 SWEP.ViewModel = "models/weapons/tacint/v_mp5.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_mp5.mdl"

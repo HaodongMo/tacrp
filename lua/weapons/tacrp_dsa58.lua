@@ -10,7 +10,7 @@ SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 SWEP.SubCatTier = "2Premium"
 SWEP.SubCatType = "6Marksman Rifle"
 
-SWEP.Description = "Premium battle rifle with slow fire rate but very high damage."
+SWEP.Description = "Battle rifle with slow fire rate but very high damage."
 
 SWEP.ViewModel = "models/weapons/tacint/v_dsa58.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_dsa58.mdl"

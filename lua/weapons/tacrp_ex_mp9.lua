@@ -12,7 +12,7 @@ SWEP.Category = "Tactical RP" // "Tactical RP (Extras)"
 SWEP.SubCatTier = "2Premium"
 SWEP.SubCatType = "3Submachine Gun"
 
-SWEP.Description = "Premium submachine gun packing lots of firepower in a small package."
+SWEP.Description = "Compact polymer submachine gun packing lots of firepower in a small package."
 
 SWEP.ViewModel = "models/weapons/tacint_extras/v_mp9.mdl"
 SWEP.WorldModel = "models/weapons/tacint_extras/w_mp9.mdl"

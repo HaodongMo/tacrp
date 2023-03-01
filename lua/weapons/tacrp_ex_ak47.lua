@@ -10,7 +10,7 @@ SWEP.Category = "Tactical RP" // "Tactical RP (Extras)"
 SWEP.SubCatTier = "3Quality"
 SWEP.SubCatType = "4Assault Rifle"
 
-SWEP.Description = "Quality large-caliber automatic assault rifle.\nAn insurgent's greatest ally and a terrorist's best friend."
+SWEP.Description = "An insurgent's greatest ally and a terrorist's best friend."
 
 SWEP.ViewModel = "models/weapons/tacint_extras/v_ak47.mdl"
 SWEP.WorldModel = "models/weapons/tacint_extras/w_ak47.mdl"

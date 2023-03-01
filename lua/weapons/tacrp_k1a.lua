@@ -10,7 +10,7 @@ SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 SWEP.SubCatTier = "4Common"
 SWEP.SubCatType = "4Assault Rifle"
 
-SWEP.Description = "Common burst fire assault rifle with low recoil."
+SWEP.Description = "Burst assault rifle with minimal recoil."
 
 SWEP.ViewModel = "models/weapons/tacint/v_k1a_2.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_k1a.mdl"
@@ -40,7 +40,7 @@ SWEP.BodyDamageMultipliers = {
 
 SWEP.Firemodes = {-3, 1}
 SWEP.RunawayBurst = true
-SWEP.PostBurstDelay = 0.2
+SWEP.PostBurstDelay = 0.17
 
 SWEP.RPM = 800
 

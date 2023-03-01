@@ -8,7 +8,7 @@ SWEP.PrintName = "Colt M1911"
 SWEP.Category = "Tactical RP" // "Tactical RP (Extras)"
 
 SWEP.SubCatTier = "4Common"
-SWEP.SubCatType = "1Pistol"
+SWEP.SubCatType = "1Sidearm"
 
 SWEP.Description = "Surplus pistol from an era before tactical attachments and pistol optics."
 

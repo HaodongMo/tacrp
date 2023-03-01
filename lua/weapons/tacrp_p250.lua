@@ -8,9 +8,9 @@ SWEP.PrintName = "SIG P250"
 SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 
 SWEP.SubCatTier = "2Premium"
-SWEP.SubCatType = "1Pistol"
+SWEP.SubCatType = "1Sidearm"
 
-SWEP.Description = "Premium handgun that exchanges capacity for damage and precision."
+SWEP.Description = "Powerful handgun that exchanges capacity for damage and precision."
 
 SWEP.ViewModel = "models/weapons/tacint/v_p250.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_p250.mdl"

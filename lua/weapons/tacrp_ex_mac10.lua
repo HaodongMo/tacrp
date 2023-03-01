@@ -10,7 +10,7 @@ SWEP.Category = "Tactical RP" // "Tactical RP (Extras)"
 SWEP.SubCatTier = "4Common"
 SWEP.SubCatType = "2Machine Pistol"
 
-SWEP.Description = "Common bullet hose machine pistol. A cheaply made weapon with subpar ironsights and better suited for spray-and-pray."
+SWEP.Description = "A cheaply made bullet hose with subpar ironsights, best used for spray-and-pray."
 
 SWEP.ViewModel = "models/weapons/tacint_extras/v_mac10.mdl"
 SWEP.WorldModel = "models/weapons/tacint_extras/w_mac10.mdl"

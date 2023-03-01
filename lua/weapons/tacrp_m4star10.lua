@@ -10,7 +10,7 @@ SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 SWEP.SubCatTier = "1Elite"
 SWEP.SubCatType = "5Shotgun"
 
-SWEP.Description = "Elite semi-automatic combat shotgun."
+SWEP.Description = "Semi-automatic combat shotgun."
 
 SWEP.ViewModel = "models/weapons/tacint/v_m4star10.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_m4star10.mdl"

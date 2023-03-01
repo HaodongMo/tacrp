@@ -7,10 +7,10 @@ AddCSLuaFile()
 SWEP.PrintName = "Ruger Mini-14"
 SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 
-SWEP.SubCatTier = "5Civilian"
+SWEP.SubCatTier = "4Common"
 SWEP.SubCatType = "6Marksman Rifle"
 
-SWEP.Description = "Common semi-automatic rifle with no stock and no optic mount."
+SWEP.Description = "Semi-automatic rifle with no stock and no optic mount."
 
 SWEP.ViewModel = "models/weapons/tacint/v_m1.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_m1.mdl"
@@ -27,7 +27,7 @@ SWEP.Penetration = 7 // units of metal this weapon can penetrate
 
 SWEP.BodyDamageMultipliers = {
     [HITGROUP_HEAD] = 2,
-    [HITGROUP_CHEST] = 1,
+    [HITGROUP_CHEST] = 1.25,
     [HITGROUP_STOMACH] = 1,
     [HITGROUP_LEFTARM] = 1,
     [HITGROUP_RIGHTARM] = 1,

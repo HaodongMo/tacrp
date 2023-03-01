@@ -7,10 +7,10 @@ AddCSLuaFile()
 SWEP.PrintName = "FN PS90"
 SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 
-SWEP.SubCatTier = "5Civilian"
+SWEP.SubCatTier = "3Quality"
 SWEP.SubCatType = "3Submachine Gun"
 
-SWEP.Description = "Civilian, semi-automatic variation of a bullpup PDW.\nUses reduced capacity magazines."
+SWEP.Description = "Semi-automatic variation of a futuristic PDW.\nUses reduced capacity magazines."
 
 SWEP.ViewModel = "models/weapons/tacint/v_p90.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_p90.mdl"

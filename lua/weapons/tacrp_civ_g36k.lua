@@ -7,10 +7,10 @@ AddCSLuaFile()
 SWEP.PrintName = "HK HK243" // technically HK243 is the sporter version of the G36, not the G36K. too lazy to model edit
 SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 
-SWEP.SubCatTier = "5Civilian"
+SWEP.SubCatTier = "3Quality"
 SWEP.SubCatType = "6Marksman Rifle"
 
-SWEP.Description = "Civilian, semi-automatic variant of an iconic polymer rifle.\nUses reduced capacity magazines."
+SWEP.Description = "Semi-automatic variant of an iconic polymer rifle.\nUses reduced capacity magazines."
 
 SWEP.ViewModel = "models/weapons/tacint/v_g36k_hq.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_g36k.mdl"

@@ -10,7 +10,7 @@ SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 SWEP.SubCatTier = "2Premium"
 SWEP.SubCatType = "4Assault Rifle"
 
-SWEP.Description = "Premium assault rifle with balanced performance. A close cousin to the classic American rifle, with a slower but more controllable rate of fire."
+SWEP.Description = "A close cousin to the classic American rifle with a slower but more controllable rate of fire."
 
 SWEP.ViewModel = "models/weapons/tacint/v_m4.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_m4.mdl"

@@ -8,9 +8,9 @@ SWEP.PrintName = "HK USP"
 SWEP.Category = "Tactical RP" // "Tactical RP (Extras)"
 
 SWEP.SubCatTier = "3Quality"
-SWEP.SubCatType = "1Pistol"
+SWEP.SubCatType = "1Sidearm"
 
-SWEP.Description = "Quality tactical pistol with low fire rate but great damage."
+SWEP.Description = "Tactical pistol with low fire rate but great damage."
 
 SWEP.ViewModel = "models/weapons/tacint_extras/v_usp.mdl"
 SWEP.WorldModel = "models/weapons/tacint_extras/w_usp.mdl"
@@ -29,7 +29,7 @@ SWEP.MuzzleVelocity = 12000
 
 SWEP.BodyDamageMultipliers = {
     [HITGROUP_HEAD] = 2,
-    [HITGROUP_CHEST] = 1,
+    [HITGROUP_CHEST] = 1.15,
     [HITGROUP_STOMACH] = 1,
     [HITGROUP_LEFTARM] = 1,
     [HITGROUP_RIGHTARM] = 1,
@@ -53,7 +53,7 @@ SWEP.RecoilDissipationRate = 8
 SWEP.RecoilFirstShotMult = 1 // multiplier for the first shot's recoil amount
 
 SWEP.RecoilVisualKick = 2.5
-SWEP.RecoilKick = 8
+SWEP.RecoilKick = 7
 
 SWEP.RecoilSpreadPenalty = 0.004
 

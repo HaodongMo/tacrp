@@ -10,7 +10,7 @@ SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 SWEP.SubCatTier = "2Premium"
 SWEP.SubCatType = "4Assault Rifle"
 
-SWEP.Description = "Premium assault rifle with integral scope. Well suited for long range sustained fire."
+SWEP.Description = "Assault rifle with integral scope. Well suited for long range sustained fire."
 
 SWEP.ViewModel = "models/weapons/tacint/v_g36k_hq.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_g36k.mdl"

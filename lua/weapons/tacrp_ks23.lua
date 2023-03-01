@@ -10,7 +10,7 @@ SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 SWEP.SubCatTier = "1Elite"
 SWEP.SubCatType = "5Shotgun"
 
-SWEP.Description = "Elite large-caliber shotgun with poor handling but incredible stopping power."
+SWEP.Description = "Made from recycled aircraft gun barrels, this shotgun is hard to handle but devestating when fired."
 
 SWEP.ViewModel = "models/weapons/tacint/v_ks23.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_ks23.mdl"

@@ -10,7 +10,7 @@ SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 SWEP.SubCatTier = "1Elite"
 SWEP.SubCatType = "4Assault Rifle"
 
-SWEP.Description = "Elite light machine gun that offers huge volume of fire. Despite its name, it is a very heavy weapon."
+SWEP.Description = "Light machine gun that offers huge volume of fire. Despite its name, it is a very heavy weapon."
 
 SWEP.ViewModel = "models/weapons/tacint/v_mg4.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_mg4.mdl"

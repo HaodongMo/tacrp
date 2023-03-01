@@ -11,7 +11,7 @@ SWEP.SubCatTier = "3Quality"
 SWEP.SubCatType = "4Assault Rifle"
 
 // Tier 2
-SWEP.Description = "Quality burst fire bullpup assault rifle with a generous magazine capacity and low burst delay."
+SWEP.Description = "Burst bullpup rifle with a generous magazine capacity and low burst delay."
 
 SWEP.ViewModel = "models/weapons/tacint/v_aug.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_aug.mdl"
