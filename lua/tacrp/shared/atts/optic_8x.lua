@@ -9,7 +9,7 @@ ATT.ModelOffset = Vector(-1.5, 0, -0.3)
 
 ATT.Category = "optic_sniper"
 
-ATT.SortOrder = 3
+ATT.SortOrder = 8
 
 ATT.Override_Scope = true
 ATT.Override_ScopeOverlay = Material("tacrp/scopes/sniper.png", "mips smooth")

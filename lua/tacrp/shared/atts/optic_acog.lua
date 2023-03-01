@@ -9,7 +9,7 @@ ATT.ModelOffset = Vector(-1.5, 0, 0.7)
 
 ATT.Category = "optic_medium"
 
-ATT.SortOrder = 2.5
+ATT.SortOrder = 4
 
 ATT.Override_Scope = true
 ATT.Override_ScopeOverlay = Material("tacrp/scopes/acog.png", "mips smooth")
