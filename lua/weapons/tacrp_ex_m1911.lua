@@ -10,7 +10,7 @@ SWEP.Category = "Tactical RP" // "Tactical RP (Extras)"
 SWEP.SubCatTier = "4Common"
 SWEP.SubCatType = "1Sidearm"
 
-SWEP.Description = "Surplus pistol from an era before tactical attachments and pistol optics."
+SWEP.Description = "Surplus pistol from an era before tactical attachments and pistol optics, yet still hits quite hard."
 
 SWEP.ViewModel = "models/weapons/tacint_extras/v_m1911.mdl"
 SWEP.WorldModel = "models/weapons/tacint_extras/w_m1911.mdl"
@@ -19,10 +19,10 @@ SWEP.Slot = 2
 
 // "ballistics"
 
-SWEP.Damage_Max = 16
-SWEP.Damage_Min = 4
-SWEP.Range_Min = 1200
-SWEP.Range_Max = 4000
+SWEP.Damage_Max = 18
+SWEP.Damage_Min = 5
+SWEP.Range_Min = 500
+SWEP.Range_Max = 3000
 SWEP.Penetration = 3 // units of metal this weapon can penetrate
 
 SWEP.MuzzleVelocity = 8000

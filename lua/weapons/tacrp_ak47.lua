@@ -10,7 +10,7 @@ SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 SWEP.SubCatTier = "4Common"
 SWEP.SubCatType = "4Assault Rifle"
 
-SWEP.Description = "Polish rifle with poor sustained fire capabilities.\nDespite its looks, it is not an AK."
+SWEP.Description = "Automatic rifle with poor sustained fire capabilities.\nDespite its looks, it is not an AK."
 
 SWEP.ViewModel = "models/weapons/tacint/v_ak47.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_ak47.mdl"
@@ -21,9 +21,9 @@ SWEP.Slot = 3
 
 SWEP.Damage_Max = 16
 SWEP.Damage_Min = 12
-SWEP.Range_Min = 2500 // distance for which to maintain maximum damage
-SWEP.Range_Max = 6000 // distance at which we drop to minimum damage
-SWEP.Penetration = 8 // units of metal this weapon can penetrate
+SWEP.Range_Min = 1500 // distance for which to maintain maximum damage
+SWEP.Range_Max = 5000 // distance at which we drop to minimum damage
+SWEP.Penetration = 7 // units of metal this weapon can penetrate
 
 SWEP.BodyDamageMultipliers = {
     [HITGROUP_HEAD] = 2,

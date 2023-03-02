@@ -10,7 +10,7 @@ SWEP.Category = "Tactical RP" // "Tactical RP (Extras)"
 SWEP.SubCatTier = "3Quality"
 SWEP.SubCatType = "4Assault Rifle"
 
-SWEP.Description = "An insurgent's greatest ally and a terrorist's best friend."
+SWEP.Description = "High damage assault rifle.\nAn insurgent's greatest ally and a terrorist's best friend."
 
 SWEP.ViewModel = "models/weapons/tacint_extras/v_ak47.mdl"
 SWEP.WorldModel = "models/weapons/tacint_extras/w_ak47.mdl"
@@ -22,7 +22,7 @@ SWEP.Slot = 3
 SWEP.Damage_Max = 25
 SWEP.Damage_Min = 17
 SWEP.Range_Min = 2000 // distance for which to maintain maximum damage
-SWEP.Range_Max = 4500 // distance at which we drop to minimum damage
+SWEP.Range_Max = 5500 // distance at which we drop to minimum damage
 SWEP.Penetration = 10 // units of metal this weapon can penetrate
 
 SWEP.BodyDamageMultipliers = {
@@ -36,7 +36,7 @@ SWEP.BodyDamageMultipliers = {
     [HITGROUP_GEAR] = 0.9
 }
 
-SWEP.MuzzleVelocity = 25000
+SWEP.MuzzleVelocity = 28000
 
 // misc. shooting
 

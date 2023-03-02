@@ -10,7 +10,7 @@ SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 SWEP.SubCatTier = "4Common"
 SWEP.SubCatType = "4Assault Rifle"
 
-SWEP.Description = "Burst assault rifle with minimal recoil."
+SWEP.Description = "Burst rifle with minimal recoil."
 
 SWEP.ViewModel = "models/weapons/tacint/v_k1a_2.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_k1a.mdl"
@@ -21,7 +21,7 @@ SWEP.Slot = 3
 
 SWEP.Damage_Max = 16
 SWEP.Damage_Min = 12
-SWEP.Range_Min = 3000 // distance for which to maintain maximum damage
+SWEP.Range_Min = 1500 // distance for which to maintain maximum damage
 SWEP.Range_Max = 5000 // distance at which we drop to minimum damage
 SWEP.Penetration = 7 // units of metal this weapon can penetrate
 
@@ -35,6 +35,8 @@ SWEP.BodyDamageMultipliers = {
     [HITGROUP_RIGHTLEG] = 0.85,
     [HITGROUP_GEAR] = 0.9
 }
+
+SWEP.MuzzleVelocity = 25000
 
 // misc. shooting
 
@@ -214,7 +216,7 @@ SWEP.Attachments = {
     },
     [4] = {
         PrintName = "Accessory",
-        Category = {"acc", "acc_foldstock", "acc_sling", "acc_duffle", "perk_extendedmag"},
+        Category = {"acc", "acc_foldstock2", "acc_sling", "acc_duffle", "perk_extendedmag"},
         AttachSound = "tacrp/weapons/flashlight_on.wav",
         DetachSound = "tacrp/weapons/flashlight_off.wav",
     },

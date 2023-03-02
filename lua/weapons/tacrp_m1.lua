@@ -10,7 +10,7 @@ SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 SWEP.SubCatTier = "4Common"
 SWEP.SubCatType = "6Marksman Rifle"
 
-SWEP.Description = "Semi-automatic rifle with no stock and no optic mount."
+SWEP.Description = "Lightweight rifle with no stock or optic mount.\nGood hip-fire accuracy among rifles, but range is low."
 
 SWEP.ViewModel = "models/weapons/tacint/v_m1.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_m1.mdl"
@@ -19,15 +19,15 @@ SWEP.Slot = 3
 
 // "ballistics"
 
-SWEP.Damage_Max = 21
-SWEP.Damage_Min = 14
+SWEP.Damage_Max = 20
+SWEP.Damage_Min = 12
 SWEP.Range_Min = 2000 // distance for which to maintain maximum damage
 SWEP.Range_Max = 6000 // distance at which we drop to minimum damage
 SWEP.Penetration = 7 // units of metal this weapon can penetrate
 
 SWEP.BodyDamageMultipliers = {
     [HITGROUP_HEAD] = 2,
-    [HITGROUP_CHEST] = 1.25,
+    [HITGROUP_CHEST] = 1.5,
     [HITGROUP_STOMACH] = 1,
     [HITGROUP_LEFTARM] = 1,
     [HITGROUP_RIGHTARM] = 1,
@@ -40,22 +40,23 @@ SWEP.BodyDamageMultipliers = {
 
 SWEP.Firemode = 1
 
-SWEP.RPM = 450
+SWEP.RPM = 400
 
 SWEP.Spread = 0.0035
+SWEP.HipFireSpreadPenalty = 0.0065
 
 SWEP.RecoilPerShot = 1
-SWEP.RecoilMaximum = 5
-SWEP.RecoilResetTime = 0.2 // time after you stop shooting for recoil to start dissipating
-SWEP.RecoilDissipationRate = 100
+SWEP.RecoilMaximum = 6
+SWEP.RecoilResetTime = 0.15 // time after you stop shooting for recoil to start dissipating
+SWEP.RecoilDissipationRate = 10
 SWEP.RecoilFirstShotMult = 1 // multiplier for the first shot's recoil amount
 
 SWEP.RecoilVisualKick = 1
 
-SWEP.RecoilKick = 4
+SWEP.RecoilKick = 5
 
 
-SWEP.RecoilSpreadPenalty = 0.0025 // extra spread per one unit of recoil
+SWEP.RecoilSpreadPenalty = 0.003 // extra spread per one unit of recoil
 
 SWEP.CanBlindFire = true
 
@@ -63,7 +64,7 @@ SWEP.CanBlindFire = true
 
 SWEP.MoveSpeedMult = 0.85
 SWEP.ShootingSpeedMult = 0.5
-SWEP.SightedSpeedMult = 0.3
+SWEP.SightedSpeedMult = 0.35
 SWEP.MeleeSpeedMult = 0.5
 SWEP.MeleeSpeedMultTime = 2
 

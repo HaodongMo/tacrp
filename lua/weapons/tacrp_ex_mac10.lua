@@ -19,16 +19,16 @@ SWEP.Slot = 2
 
 // "ballistics"
 
-SWEP.Damage_Max = 11
-SWEP.Damage_Min = 5
-SWEP.Range_Min = 750
-SWEP.Range_Max = 3000
+SWEP.Damage_Max = 10
+SWEP.Damage_Min = 4
+SWEP.Range_Min = 400
+SWEP.Range_Max = 2000
 SWEP.Penetration = 3
 
 SWEP.MuzzleVelocity = 10000
 
 SWEP.BodyDamageMultipliers = {
-    [HITGROUP_HEAD] = 2,
+    [HITGROUP_HEAD] = 1.5,
     [HITGROUP_CHEST] = 1,
     [HITGROUP_STOMACH] = 1,
     [HITGROUP_LEFTARM] = 1,
@@ -44,7 +44,7 @@ SWEP.Firemode = 2
 
 SWEP.RPM = 1000
 
-SWEP.Spread = 0.01
+SWEP.Spread = 0.015
 
 SWEP.HipFireSpreadPenalty = 0.015
 

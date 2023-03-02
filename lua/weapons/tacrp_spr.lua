@@ -10,7 +10,7 @@ SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 SWEP.SubCatTier = "4Common"
 SWEP.SubCatType = "7Sniper Rifle"
 
-SWEP.Description = "Hunting rifle with a relatively fast cycle speed.\nEquipped with a 6x scope by default."
+SWEP.Description = "Hunting rifle with fast cycle speed but low range.\nEquipped with a 6x scope by default."
 
 SWEP.ViewModel = "models/weapons/tacint/v_spr.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_spr.mdl"
@@ -41,7 +41,7 @@ SWEP.MuzzleVelocity = 35000
 
 SWEP.Firemode = 1
 
-SWEP.RPM = 55
+SWEP.RPM = 50
 
 SWEP.Spread = 0
 

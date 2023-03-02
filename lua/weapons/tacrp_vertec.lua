@@ -10,7 +10,7 @@ SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 SWEP.SubCatTier = "4Common"
 SWEP.SubCatType = "1Sidearm"
 
-SWEP.Description = "Civilian pistol with good accuracy."
+SWEP.Description = "Italian pistol with above average range and accuracy."
 
 SWEP.ViewModel = "models/weapons/tacint/v_vertec.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_vertec.mdl"
@@ -19,11 +19,11 @@ SWEP.Slot = 2
 
 // "ballistics"
 
-SWEP.Damage_Max = 10 // 100 / 4 // damage at minimum range
-SWEP.Damage_Min = 5 // 100 / 7 // damage at maximum range
-SWEP.Range_Min = 2000 // distance for which to maintain maximum damage
-SWEP.Range_Max = 4000 // distance at which we drop to minimum damage
-SWEP.Penetration = 3 // units of metal this weapon can penetrate
+SWEP.Damage_Max = 10
+SWEP.Damage_Min = 6
+SWEP.Range_Min = 1200
+SWEP.Range_Max = 3000
+SWEP.Penetration = 3
 
 SWEP.MuzzleVelocity = 9000
 
