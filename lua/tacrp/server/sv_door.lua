@@ -49,7 +49,9 @@ function TacRP.DoorBust(ent, vel, attacker)
         end)
 
         -- Reset it after a while
-        ent:SetPos(ent.original_pos - Vector(0, 0, 100000))
+        timer.Simple(1, function()
+            ent:SetPos(ent.original_pos - Vector(0, 0, 100000))
+        end)
         SafeRemoveEntityDelayed(prop, t)
         timer.Create("TacRP_DoorBust_" .. ent:EntIndex(), t, 1, function()
             if IsValid(ent) then

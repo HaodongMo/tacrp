@@ -35,7 +35,7 @@ ENT.SmokeTrail = true
 function ENT:Detonate()
     if self:WaterLevel() > 0 then self:Remove() return end
 
-    util.BlastDamage(self, self:GetOwner(), self:GetPos(), 150, 25)
+    // util.BlastDamage(self, self:GetOwner(), self:GetPos(), 150, 25)
 
     self:EmitSound(table.Random(self.ExplodeSounds), 75)
 

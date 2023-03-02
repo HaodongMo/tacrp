@@ -15,9 +15,9 @@ ATT.NoRanger = false
 ATT.Damage_Max = 34
 ATT.Damage_Min = 12
 ATT.Num = 8
-ATT.Range_Min = 1500
-ATT.Range_Min = 2500
-ATT.Penetration = 2.5
+ATT.Range_Min = 500
+ATT.Range_Max = 3000
+ATT.Penetration = 4
 ATT.Spread = 0.015
 
 ATT.MuzzleVelocity = 15000

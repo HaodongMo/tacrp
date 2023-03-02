@@ -26,6 +26,7 @@ ENT.InstantFuse = true // projectile is armed immediately after firing.
 ENT.TimeFuse = false // projectile will arm after this amount of time
 ENT.RemoteFuse = false // allow this projectile to be triggered by remote detonator.
 ENT.ImpactFuse = false // projectile explodes on impact.
+ENT.StickyFuse = false // projectile becomes timed after sticking.
 
 ENT.ExplodeOnImpact = false
 ENT.ExplodeOnDamage = false // projectile explodes when it takes damage.
@@ -126,6 +127,14 @@ function ENT:PhysicsCollide(data, collider)
         end
 
         self:EmitSound("TacRP/weapons/plant_bomb.wav")
+
+        self.Attacker = self:GetOwner()
+        self:SetOwner(NULL)
+
+        if self.StickyFuse and !self.Armed then
+            self.ArmTime = CurTime()
+            self.Armed = true
+        end
     end
 
     if data.DeltaTime < 0.1 then return end
@@ -195,6 +204,11 @@ function ENT:Use(ply)
     if !self.Defusable then return end
 
     self:EmitSound("TacRP/weapons/rifle_jingle-1.wav")
+
+    if self.PickupAmmo then
+        ply:GiveAmmo(1, self.PickupAmmo, true)
+    end
+
     self:Remove()
 end
 
@@ -211,7 +225,7 @@ function ENT:PreDetonate()
     if !self.Detonated then
         self.Detonated = true
 
-        if !self:GetOwner():IsValid() then self:Remove() return end
+        if !IsValid(self.Attacker) and !IsValid(self:GetOwner()) then self:Remove() return end
 
         self:Detonate()
     end

@@ -247,7 +247,7 @@ function SWEP:AfterShotFunction(tr, dmg, range, penleft, alreadypenned, forced)
 
     dmgv = dmgv * dmgbodymult
 
-    local pendelta = penleft / self:GetValue("Penetration")
+    local pendelta = self:GetValue("Penetration") > 0 and penleft / self:GetValue("Penetration") or 1
 
     pendelta = math.Clamp(pendelta, 0.1, 1)
 
@@ -283,6 +283,26 @@ function SWEP:AfterShotFunction(tr, dmg, range, penleft, alreadypenned, forced)
 
     if self:GetValue("Num") > 1 then
         dmg:SetDamageType(DMG_BUCKSHOT)
+    end
+
+    if IsValid(tr.Entity) and !tr.Entity.TacRP_DoorBusted
+            and string.find(tr.Entity:GetClass(), "door") and self:GetValue("DoorBreach") then
+        if !tr.Entity.TacRP_BreachThreshold or CurTime() - tr.Entity.TacRP_BreachThreshold[1] > 0.1 then
+            tr.Entity.TacRP_BreachThreshold = {CurTime(), 0}
+        end
+        tr.Entity.TacRP_BreachThreshold[2] = tr.Entity.TacRP_BreachThreshold[2] + dmgv
+        if tr.Entity.TacRP_BreachThreshold[2] > (self:GetValue("DoorBreachThreshold") or 100) then
+            tr.Entity:EmitSound("ambient/materials/door_hit1.wav", 80, math.Rand(95, 105))
+            for _, otherDoor in pairs(ents.FindInSphere(tr.Entity:GetPos(), 72)) do
+                if tr.Entity != otherDoor and otherDoor:GetClass() == tr.Entity:GetClass() then
+                    local v = (otherDoor.TacRP_BreachThreshold and CurTime() - otherDoor.TacRP_BreachThreshold[1] <= 0.1) and 800 or 200
+                    TacRP.DoorBust(otherDoor, tr.Normal * v, dmg:GetAttacker())
+                    break
+                end
+            end
+            TacRP.DoorBust(tr.Entity, tr.Normal * 800, dmg:GetAttacker())
+            tr.Entity.TacRP_BreachThreshold = nil
+        end
     end
 
     self:Penetrate(tr, range, penleft, alreadypenned)

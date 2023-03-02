@@ -21,12 +21,15 @@ ENT.Defusable = true
 
 ENT.Delay = 0.5
 
+ENT.PickupAmmo = "ti_c4"
+
 ENT.ExplodeSounds = {
     "TacRP/weapons/breaching_charge-1.wav"
 }
 
 function ENT:Detonate()
-    util.BlastDamage(self, self:GetOwner(), self:GetPos(), 512, 200)
+    local attacker = IsValid(self.Attacker) and self.Attacker or self:GetOwner()
+    util.BlastDamage(self, attacker, self:GetPos(), 512, 200)
 
     local fx = EffectData()
     fx:SetOrigin(self:GetPos())
@@ -45,11 +48,11 @@ function ENT:Detonate()
             local vel = (door:GetPos() - self:GetPos()):GetNormalized() * 200000
             for _, otherDoor in pairs(ents.FindInSphere(door:GetPos(), 72)) do
                 if door != otherDoor and otherDoor:GetClass() == door:GetClass() then
-                    TacRP.DoorBust(otherDoor, vel, self:GetOwner())
+                    TacRP.DoorBust(otherDoor, vel, attacker)
                     break
                 end
             end
-            TacRP.DoorBust(door, vel, self:GetOwner())
+            TacRP.DoorBust(door, vel, attacker)
         end
     end
 

@@ -127,7 +127,7 @@ function SWEP:PrimaryAttack()
     self:PlayAnimation("detonate")
 
     for i, k in pairs(ents.FindByClass("tacrp_proj_nade_*")) do
-        if k:GetOwner() == self:GetOwner() and k.RemoteFuse then
+        if (k:GetOwner() == self:GetOwner() or k.Attacker == self:GetOwner()) and k.RemoteFuse then
             k:RemoteDetonate()
         end
     end
