@@ -58,10 +58,3 @@ function TacRP.GetBind(binding)
 
     return string.upper(bind)
 end
-
-hook.Add("InitPostEntity", "TacRP_ComplainAboutBinds", function()
-    LocalPlayer():PrintMessage(HUD_PRINTTALK, "Check Q menu -> Options/Tactical RP/Control Guide to see the controls!")
-    if !input.LookupBinding("grenade1") or !input.LookupBinding("grenade2") then
-        LocalPlayer():PrintMessage(HUD_PRINTTALK, "Bind +grenade1 and +grenade2 to use TacRP quick grenades!")
-    end
-end)

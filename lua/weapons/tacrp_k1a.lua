@@ -40,7 +40,7 @@ SWEP.BodyDamageMultipliers = {
 
 SWEP.Firemodes = {-3, 1}
 SWEP.RunawayBurst = true
-SWEP.PostBurstDelay = 0.17
+SWEP.PostBurstDelay = 0.19
 
 SWEP.RPM = 800
 
@@ -64,7 +64,7 @@ SWEP.CanBlindFire = true
 // handling
 
 SWEP.MoveSpeedMult = 0.85
-SWEP.ShootingSpeedMult = 0.3
+SWEP.ShootingSpeedMult = 0.4
 SWEP.SightedSpeedMult = 0.25
 SWEP.MeleeSpeedMult = 0.5
 SWEP.MeleeSpeedMultTime = 2

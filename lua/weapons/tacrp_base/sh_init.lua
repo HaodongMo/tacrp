@@ -131,6 +131,14 @@ function SWEP:ClientInitialize()
         self:CallOnClient("ClientInitialize")
     end
 
+    if !LocalPlayer().TacRPGreet and !GetConVar("tacrp_shutup"):GetBool() then
+        LocalPlayer().TacRPGreet = true
+        LocalPlayer():PrintMessage(HUD_PRINTTALK, "Check Q menu -> Options/Tactical RP/Control Guide to see the controls!")
+        if !input.LookupBinding("grenade1") or !input.LookupBinding("grenade2") then
+            LocalPlayer():PrintMessage(HUD_PRINTTALK, "Bind +grenade1 and +grenade2 to use TacRP quick grenades!")
+        end
+    end
+
     -- local mat = Material("entities/" .. self:GetClass() .. ".png")
 
     -- local tex = mat:GetTexture("$basetexture")

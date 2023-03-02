@@ -11,7 +11,7 @@ SWEP.SubCatTier = "3Quality"
 SWEP.SubCatType = "4Assault Rifle"
 
 // Tier 2
-SWEP.Description = "Burst bullpup rifle with a generous magazine capacity and low burst delay."
+SWEP.Description = "Burst bullpup rifle with a generous magazine capacity and great handling."
 
 SWEP.ViewModel = "models/weapons/tacint/v_aug.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_aug.mdl"
@@ -50,7 +50,7 @@ SWEP.RPM = 900
 
 SWEP.Spread = 0.0005
 
-SWEP.PostBurstDelay = 0.1
+SWEP.PostBurstDelay = 0.15
 
 SWEP.RunawayBurst = true
 
@@ -73,7 +73,7 @@ SWEP.CanBlindFire = true
 // handling
 
 SWEP.MoveSpeedMult = 0.85
-SWEP.ShootingSpeedMult = 0.3
+SWEP.ShootingSpeedMult = 0.4
 SWEP.SightedSpeedMult = 0.25 + 0.1
 SWEP.MeleeSpeedMult = 0.5
 SWEP.MeleeSpeedMultTime = 2

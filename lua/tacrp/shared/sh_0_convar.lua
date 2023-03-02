@@ -27,6 +27,11 @@ local conVars = {
         client = true,
     },
     {
+        name = "shutup",
+        default = "0",
+        client = true
+    },
+    {
         name = "bodydamagecancel",
         default = "1",
         replicated = true
@@ -149,6 +154,10 @@ Change Grenade: +grenade2 (Not bound by default! Do 'bind h +grenade2' in consol
 local function menu_guide_ti(panel)
     panel:AddControl("label", {
         text = TacRP.ControlGuide,
+    })
+    panel:AddControl("checkbox", {
+        label = "Hide Control Guide Message On Startup",
+        command = "tacrp_shutup"
     })
 end
 
