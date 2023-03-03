@@ -123,7 +123,6 @@ ENT.ExtraModels = {
     "models/props_interiors/bathtub01a.mdl", // now this is just absurd
     "models/props_junk/garbage_takeoutcarton001a.mdl",
     "models/props_junk/garbage_newspaper001a.mdl",
-    "models/props_junk/wood_crate001a_damaged.mdl",
     "models/props_junk/sawblade001a.mdl",
     "models/props_lab/bewaredog.mdl",
     "models/props_lab/huladoll.mdl",
@@ -133,11 +132,37 @@ ENT.ExtraModels = {
     "models/weapons/w_bugbait.mdl",
     "models/weapons/w_alyx_gun.mdl",
     "models/weapons/w_crowbar.mdl",
+    "models/weapons/w_smg1.mdl",
+    "models/weapons/w_shotgun.mdl",
+    "models/weapons/w_rocket_launcher.mdl",
+    "models/weapons/w_pistol.mdl",
+    "models/weapons/w_physics.mdl",
+    "models/weapons/w_irifle.mdl",
+    "models/weapons/w_357.mdl",
+    "models/weapons/w_package.mdl",
+    "models/weapons/w_pist_deagle.mdl",
+    "models/weapons/w_pist_elite_single.mdl",
+    "models/weapons/w_pist_glock18.mdl",
+    "models/weapons/w_rif_ak47.mdl",
+    "models/weapons/w_rif_m4a1.mdl",
+    "models/weapons/w_shot_m3super90.mdl",
+    "models/weapons/w_smg_mp5.mdl",
+    "models/weapons/w_snip_awp.mdl",
+    "models/weapons/w_crossbow.mdl",
+    "models/weapons/w_eq_defuser.mdl",
+    "models/weapons/w_toolgun.mdl",
     "models/weapons/w_missile_closed.mdl",
     "models/weapons/w_stunbaton.mdl",
     "models/weapons/w_annabelle.mdl",
     "models/roller.mdl",
     "models/pigeon.mdl",
+    "models/headcrabclassic.mdl",
+    "models/headcrab.mdl",
+    "models/headcrabblack.mdl",
+    "models/crow.mdl",
+    "models/seagull.mdl",
+    "models/kleiner.mdl",
+    "models/gman.mdl",
 
     // CSS
     "models/props/cs_militia/bottle01.mdl",
@@ -262,12 +287,27 @@ function ENT:PhysicsCollide(data, collider)
             SafeRemoveEntityDelayed(self, 3)
         else
             self:EmitSound(prop1.impactHardSound)
-            local gibs = self:PrecacheGibs()
-            if gibs > 0 then
-                self:GibBreakClient( data.OurNewVelocity )
+            if util.IsValidRagdoll(self:GetModel()) then
+                local rag = ents.Create("prop_ragdoll")
+                rag:SetModel(self:GetModel())
+                rag:SetPos(self:GetPos())
+                rag:SetAngles(self:GetAngles())
+                rag:Spawn()
+                rag:SetCollisionGroup(COLLISION_GROUP_WEAPON)
+                if IsValid(rag:GetPhysicsObject()) then
+                    rag:GetPhysicsObject():ApplyForceOffset(data.HitPos, data.OurOldVelocity)
+                end
+
+                SafeRemoveEntityDelayed(rag, 5)
                 self:Remove()
             else
-                SafeRemoveEntityDelayed(self, 3)
+            local gibs = self:PrecacheGibs()
+                if gibs > 0 then
+                    self:GibBreakServer( data.OurOldVelocity * 2 )
+                    self:Remove()
+                else
+                    SafeRemoveEntityDelayed(self, 3)
+                end
             end
         end
 
