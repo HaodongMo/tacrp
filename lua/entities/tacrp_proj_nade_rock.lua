@@ -166,6 +166,7 @@ ENT.ExtraModels = {
     "models/seagull.mdl",
     "models/kleiner.mdl",
     "models/gman.mdl",
+    "models/manhack.mdl",
 
     // CSS
     "models/props/cs_militia/bottle01.mdl",

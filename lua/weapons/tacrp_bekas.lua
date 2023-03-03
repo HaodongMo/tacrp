@@ -45,11 +45,13 @@ SWEP.Firemode = 1
 
 SWEP.FiremodeName = "Pump-Action" // only used externally for firemode name distinction
 
-SWEP.RPM = 60
+SWEP.RPM = 55
+
+SWEP.ShootTimeMult = 1
 
 SWEP.Spread = 0.015
 
-SWEP.HipFireSpreadPenalty = 0
+SWEP.HipFireSpreadPenalty = 0.01
 SWEP.MidAirSpreadPenalty = 0
 
 SWEP.ScopedSpreadPenalty = 0
@@ -75,10 +77,10 @@ SWEP.MoveSpeedMult = 0.8
 SWEP.ShootingSpeedMult = 0.5
 SWEP.SightedSpeedMult = 0.25
 SWEP.MeleeSpeedMult = 0.5
-SWEP.MeleeSpeedMultTime = 2
+SWEP.ReloadSpeedMult = 0.25
 
-SWEP.AimDownSightsTime = 0.35
-SWEP.SprintToFireTime = 0.35
+SWEP.AimDownSightsTime = 0.34
+SWEP.SprintToFireTime = 0.38
 
 // hold types
 
@@ -166,8 +168,6 @@ SWEP.AnimationTranslationTable = {
     ["reload"] = {"reload", "reload2"}
 }
 
-SWEP.ShootTimeMult = 0.75
-
 // attachments
 
 SWEP.Attachments = {
@@ -212,7 +212,7 @@ SWEP.Attachments = {
     },
     [5] = {
         PrintName = "Trigger",
-        Category = {"trigger_manual", "trigger_pump"},
+        Category = {"trigger_manual"}, // "trigger_pump"
         AttachSound = "TacRP/weapons/flashlight_on.wav",
         DetachSound = "TacRP/weapons/flashlight_off.wav",
     },

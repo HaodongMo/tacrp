@@ -10,7 +10,7 @@ SWEP.Category = "Tactical RP" // "Tactical RP (Extras)"
 SWEP.SubCatTier = "2Premium"
 SWEP.SubCatType = "7Sniper Rifle"
 
-SWEP.Description = "Bolt-action anti-materiel rifle that can kill in one shot. Does not fire phantom bullets.\nEquipped with a 10x scope by default."
+SWEP.Description = "Heavy anti-materiel rifle that can kill in one shot. Does not fire phantom bullets.\nEquipped with a 10x scope by default."
 
 SWEP.ViewModel = "models/weapons/tacint_extras/v_hecate.mdl"
 SWEP.WorldModel = "models/weapons/tacint_extras/w_hecate.mdl"
@@ -19,19 +19,19 @@ SWEP.Slot = 3
 
 // "ballistics"
 
-SWEP.Damage_Max = 140 // damage at minimum range
-SWEP.Damage_Min = 115 // damage at maximum range
-SWEP.Range_Min = 1000 // distance for which to maintain maximum damage
-SWEP.Range_Max = 6000 // distance at which we drop to minimum damage
+SWEP.Damage_Max = 150 // damage at minimum range
+SWEP.Damage_Min = 125 // damage at maximum range
+SWEP.Range_Min = 800 // distance for which to maintain maximum damage
+SWEP.Range_Max = 8000 // distance at which we drop to minimum damage
 SWEP.Penetration = 30 // units of metal this weapon can penetrate
 SWEP.BodyDamageMultipliers = {
     [HITGROUP_HEAD] = 5, // nobody is surviving this
-    [HITGROUP_CHEST] = 1,
+    [HITGROUP_CHEST] = 1.25,
     [HITGROUP_STOMACH] = 1,
-    [HITGROUP_LEFTARM] = 1,
-    [HITGROUP_RIGHTARM] = 1,
-    [HITGROUP_LEFTLEG] = 0.9,
-    [HITGROUP_RIGHTLEG] = 0.9,
+    [HITGROUP_LEFTARM] = 0.9,
+    [HITGROUP_RIGHTARM] = 0.9,
+    [HITGROUP_LEFTLEG] = 0.8,
+    [HITGROUP_RIGHTLEG] = 0.8,
     [HITGROUP_GEAR] = 0.8
 }
 
@@ -73,7 +73,7 @@ SWEP.MoveSpeedMult = 0.7
 SWEP.ShootingSpeedMult = 0.25
 SWEP.SightedSpeedMult = 0.1
 SWEP.MeleeSpeedMult = 0.5
-SWEP.MeleeSpeedMultTime = 2 // seconds to apply slow down for
+SWEP.ReloadSpeedMult = 0.2
 
 SWEP.AimDownSightsTime = 0.7
 SWEP.SprintToFireTime = 0.6

@@ -10,7 +10,7 @@ SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 SWEP.SubCatTier = "3Quality"
 SWEP.SubCatType = "1Sidearm"
 
-SWEP.Description = "Well-rounded handgun."
+SWEP.Description = "Well-rounded high capacity handgun."
 
 SWEP.ViewModel = "models/weapons/tacint/v_p2000.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_p2000.mdl"
@@ -19,13 +19,13 @@ SWEP.Slot = 2
 
 // "ballistics"
 
-SWEP.Damage_Max = 12
+SWEP.Damage_Max = 14
 SWEP.Damage_Min = 7 // 100 / 7 // damage at maximum range
-SWEP.Range_Min = 2000 // distance for which to maintain maximum damage
-SWEP.Range_Max = 5000 // distance at which we drop to minimum damage
+SWEP.Range_Min = 1000 // distance for which to maintain maximum damage
+SWEP.Range_Max = 4000 // distance at which we drop to minimum damage
 SWEP.Penetration = 3 // units of metal this weapon can penetrate
 
-SWEP.MuzzleVelocity = 9500
+SWEP.MuzzleVelocity = 11500
 
 SWEP.BodyDamageMultipliers = {
     [HITGROUP_HEAD] = 2,
@@ -65,10 +65,13 @@ SWEP.MoveSpeedMult = 0.9
 SWEP.ShootingSpeedMult = 0.75
 SWEP.SightedSpeedMult = 0.5
 SWEP.MeleeSpeedMult = 0.5
-SWEP.MeleeSpeedMultTime = 2
+SWEP.ReloadSpeedMult = 0.75
 
 SWEP.AimDownSightsTime = 0.25
 SWEP.SprintToFireTime = 0.25
+
+SWEP.Sway = 2
+SWEP.ScopedSway = 1
 
 // hold types
 
@@ -208,7 +211,7 @@ SWEP.Attachments = {
     },
     [4] = {
         PrintName = "Accessory",
-        Category = {"acc", "acc_extmag_pistol", "acc_holster"},
+        Category = {"acc", "acc_extmag_pistol", "acc_holster", "acc_brace"},
         AttachSound = "tacrp/weapons/flashlight_on.wav",
         DetachSound = "tacrp/weapons/flashlight_off.wav",
     },

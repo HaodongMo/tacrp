@@ -10,7 +10,7 @@ SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 SWEP.SubCatTier = "3Quality"
 SWEP.SubCatType = "1Sidearm"
 
-SWEP.Description = "Low-capacity pistol with decent damage. A tactical knockoff of a venerable classic."
+SWEP.Description = "High damage pistol with low range and capacity.\nA tactical evolution, or some would call devolution, of a venerable classic."
 
 SWEP.ViewModel = "models/weapons/tacint/v_gsr1911.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_gsr1911.mdl"
@@ -19,17 +19,17 @@ SWEP.Slot = 2
 
 // "ballistics"
 
-SWEP.Damage_Max = 22
+SWEP.Damage_Max = 20
 SWEP.Damage_Min = 4
-SWEP.Range_Min = 1000 // distance for which to maintain maximum damage
-SWEP.Range_Max = 4000 // distance at which we drop to minimum damage
+SWEP.Range_Min = 800 // distance for which to maintain maximum damage
+SWEP.Range_Max = 3000 // distance at which we drop to minimum damage
 SWEP.Penetration = 3 // units of metal this weapon can penetrate
 
 SWEP.MuzzleVelocity = 8000
 
 SWEP.BodyDamageMultipliers = {
     [HITGROUP_HEAD] = 2,
-    [HITGROUP_CHEST] = 1.2,
+    [HITGROUP_CHEST] = 1.25,
     [HITGROUP_STOMACH] = 1,
     [HITGROUP_LEFTARM] = 1,
     [HITGROUP_RIGHTARM] = 1,
@@ -68,7 +68,7 @@ SWEP.MoveSpeedMult = 0.9
 SWEP.ShootingSpeedMult = 0.6
 SWEP.SightedSpeedMult = 0.5
 SWEP.MeleeSpeedMult = 0.5
-SWEP.MeleeSpeedMultTime = 2
+SWEP.ReloadSpeedMult = 0.75
 
 SWEP.AimDownSightsTime = 0.25
 SWEP.SprintToFireTime = 0.25
@@ -206,7 +206,7 @@ SWEP.Attachments = {
     },
     [4] = {
         PrintName = "Accessory",
-        Category = {"acc", "acc_extmag_pistol", "acc_holster"},
+        Category = {"acc", "acc_extmag_pistol", "acc_holster", "acc_brace"},
         AttachSound = "TacRP/weapons/flashlight_on.wav",
         DetachSound = "TacRP/weapons/flashlight_off.wav",
     },

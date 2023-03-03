@@ -7,7 +7,7 @@ AddCSLuaFile()
 SWEP.PrintName = "AK-47"
 SWEP.Category = "Tactical RP" // "Tactical RP (Extras)"
 
-SWEP.SubCatTier = "3Quality"
+SWEP.SubCatTier = "2Premium"
 SWEP.SubCatType = "4Assault Rifle"
 
 SWEP.Description = "High damage assault rifle.\nAn insurgent's greatest ally and a terrorist's best friend."
@@ -21,13 +21,13 @@ SWEP.Slot = 3
 
 SWEP.Damage_Max = 25
 SWEP.Damage_Min = 17
-SWEP.Range_Min = 2000 // distance for which to maintain maximum damage
+SWEP.Range_Min = 1400 // distance for which to maintain maximum damage
 SWEP.Range_Max = 5500 // distance at which we drop to minimum damage
 SWEP.Penetration = 10 // units of metal this weapon can penetrate
 
 SWEP.BodyDamageMultipliers = {
     [HITGROUP_HEAD] = 2,
-    [HITGROUP_CHEST] = 1.2,
+    [HITGROUP_CHEST] = 1.25,
     [HITGROUP_STOMACH] = 1,
     [HITGROUP_LEFTARM] = 1,
     [HITGROUP_RIGHTARM] = 1,
@@ -59,7 +59,7 @@ SWEP.RecoilFirstShotMult = 1 // multiplier for the first shot's recoil amount
 
 SWEP.RecoilVisualKick = 1
 
-SWEP.RecoilKick = 6
+SWEP.RecoilKick = 5
 
 SWEP.RecoilSpreadPenalty = 0.0015
 
@@ -71,7 +71,7 @@ SWEP.MoveSpeedMult = 0.85
 SWEP.ShootingSpeedMult = 0.3
 SWEP.SightedSpeedMult = 0.25
 SWEP.MeleeSpeedMult = 0.5
-SWEP.MeleeSpeedMultTime = 2
+SWEP.ReloadSpeedMult = 0.5
 
 SWEP.AimDownSightsTime = 0.4
 SWEP.SprintToFireTime = 0.4

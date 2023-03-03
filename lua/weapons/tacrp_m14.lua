@@ -21,12 +21,12 @@ SWEP.Slot = 3
 
 SWEP.Damage_Max = 45 // damage at minimum range
 SWEP.Damage_Min = 35 // damage at maximum range
-SWEP.Range_Min = 1000 // distance for which to maintain maximum damage
-SWEP.Range_Max = 5000 // distance at which we drop to minimum damage
+SWEP.Range_Min = 2000 // distance for which to maintain maximum damage
+SWEP.Range_Max = 6000 // distance at which we drop to minimum damage
 SWEP.Penetration = 15 // units of metal this weapon can penetrate
 SWEP.BodyDamageMultipliers = {
     [HITGROUP_HEAD] = 5,
-    [HITGROUP_CHEST] = 1.25,
+    [HITGROUP_CHEST] = 1.5,
     [HITGROUP_STOMACH] = 1,
     [HITGROUP_LEFTARM] = 1,
     [HITGROUP_RIGHTARM] = 1,
@@ -41,7 +41,7 @@ SWEP.MuzzleVelocity = 32000
 
 SWEP.Firemode = 1
 
-SWEP.RPM = 500
+SWEP.RPM = 240
 
 SWEP.Spread = 0.0000
 
@@ -67,13 +67,13 @@ SWEP.CanBlindFire = true
 // handling
 
 SWEP.MoveSpeedMult = 0.75
-SWEP.ShootingSpeedMult = 0.4
+SWEP.ShootingSpeedMult = 0.25
 SWEP.SightedSpeedMult = 0.2
 SWEP.MeleeSpeedMult = 0.5
-SWEP.MeleeSpeedMultTime = 2 // seconds to apply slow down for
+SWEP.ReloadSpeedMult = 0.4
 
 SWEP.AimDownSightsTime = 0.4
-SWEP.SprintToFireTime = 0.4 // multiplies how long it takes to recover from sprinting
+SWEP.SprintToFireTime = 0.5
 
 // hold types
 

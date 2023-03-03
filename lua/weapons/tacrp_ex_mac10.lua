@@ -10,7 +10,7 @@ SWEP.Category = "Tactical RP" // "Tactical RP (Extras)"
 SWEP.SubCatTier = "4Common"
 SWEP.SubCatType = "2Machine Pistol"
 
-SWEP.Description = "A cheaply made bullet hose with subpar ironsights, best used for spray-and-pray."
+SWEP.Description = "A bullet hose best used for point blank spray-and-pray."
 
 SWEP.ViewModel = "models/weapons/tacint_extras/v_mac10.mdl"
 SWEP.WorldModel = "models/weapons/tacint_extras/w_mac10.mdl"
@@ -19,8 +19,8 @@ SWEP.Slot = 2
 
 // "ballistics"
 
-SWEP.Damage_Max = 10
-SWEP.Damage_Min = 4
+SWEP.Damage_Max = 8
+SWEP.Damage_Min = 3
 SWEP.Range_Min = 400
 SWEP.Range_Max = 2000
 SWEP.Penetration = 3
@@ -49,7 +49,7 @@ SWEP.Spread = 0.015
 SWEP.HipFireSpreadPenalty = 0.015
 
 SWEP.RecoilPerShot = 1
-SWEP.RecoilMaximum = 15
+SWEP.RecoilMaximum = 30
 SWEP.RecoilResetTime = 0.1 // time after you stop shooting for recoil to start dissipating
 SWEP.RecoilDissipationRate = 45
 SWEP.RecoilFirstShotMult = 1 // multiplier for the first shot's recoil amount
@@ -58,7 +58,7 @@ SWEP.RecoilVisualKick = 1.5
 
 SWEP.RecoilKick = 2
 
-SWEP.RecoilSpreadPenalty = 0.002
+SWEP.RecoilSpreadPenalty = 0.0018
 
 SWEP.CanBlindFire = true
 
@@ -68,10 +68,13 @@ SWEP.MoveSpeedMult = 0.9
 SWEP.ShootingSpeedMult = 0.75
 SWEP.SightedSpeedMult = 0.4
 SWEP.MeleeSpeedMult = 0.5
-SWEP.MeleeSpeedMultTime = 2
+SWEP.ReloadSpeedMult = 0.6
 
 SWEP.AimDownSightsTime = 0.275
 SWEP.SprintToFireTime = 0.30
+
+SWEP.Sway = 1.3
+SWEP.ScopedSway = 0.4
 
 // hold types
 
@@ -98,9 +101,6 @@ SWEP.HolsterVisible = true
 SWEP.HolsterSlot = TacRP.HOLSTER_SLOT_PISTOL
 SWEP.HolsterPos = Vector(0, 3, -4)
 SWEP.HolsterAng = Angle(90, 0, 0)
-
-SWEP.Sway = 2
-SWEP.ScopedSway = 0.25
 
 // reload
 

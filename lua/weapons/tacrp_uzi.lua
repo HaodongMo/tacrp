@@ -19,13 +19,24 @@ SWEP.Slot = 2
 
 // "ballistics"
 
-SWEP.Damage_Max = 12
-SWEP.Damage_Min = 6
-SWEP.Range_Min = 1000 // distance for which to maintain maximum damage
-SWEP.Range_Max = 3000 // distance at which we drop to minimum damage
+SWEP.Damage_Max = 10
+SWEP.Damage_Min = 5
+SWEP.Range_Min = 800 // distance for which to maintain maximum damage
+SWEP.Range_Max = 2500 // distance at which we drop to minimum damage
 SWEP.Penetration = 3 // units of metal this weapon can penetrate
 
 SWEP.MuzzleVelocity = 12500
+
+SWEP.BodyDamageMultipliers = {
+    [HITGROUP_HEAD] = 2,
+    [HITGROUP_CHEST] = 1,
+    [HITGROUP_STOMACH] = 1,
+    [HITGROUP_LEFTARM] = 1,
+    [HITGROUP_RIGHTARM] = 1,
+    [HITGROUP_LEFTLEG] = 0.75,
+    [HITGROUP_RIGHTLEG] = 0.75,
+    [HITGROUP_GEAR] = 0.9
+}
 
 // misc. shooting
 
@@ -50,7 +61,7 @@ SWEP.RecoilFirstShotMult = 1 // multiplier for the first shot's recoil amount
 
 SWEP.RecoilVisualKick = 1
 
-SWEP.RecoilKick = 1.75
+SWEP.RecoilKick = 3
 
 SWEP.RecoilSpreadPenalty = 0.0008
 
@@ -62,7 +73,7 @@ SWEP.MoveSpeedMult = 0.9
 SWEP.ShootingSpeedMult = 0.75
 SWEP.SightedSpeedMult = 0.4
 SWEP.MeleeSpeedMult = 0.5
-SWEP.MeleeSpeedMultTime = 2
+SWEP.ReloadSpeedMult = 0.6
 
 SWEP.AimDownSightsTime = 0.275
 SWEP.SprintToFireTime = 0.30
@@ -93,8 +104,8 @@ SWEP.HolsterSlot = TacRP.HOLSTER_SLOT_PISTOL
 SWEP.HolsterPos = Vector(0, 3, -4)
 SWEP.HolsterAng = Angle(90, 0, 0)
 
-SWEP.Sway = 2
-SWEP.ScopedSway = 0.25
+SWEP.Sway = 1.2
+SWEP.ScopedSway = 0.4
 
 // reload
 

@@ -10,7 +10,7 @@ SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 SWEP.SubCatTier = "3Quality"
 SWEP.SubCatType = "4Assault Rifle"
 
-SWEP.Description = "Hungarian rifle with punishing recoil but high damage."
+SWEP.Description = "Hungarian AK clone with integrated grip and wire stock. Flexible, but recoil is quite punishing."
 
 SWEP.ViewModel = "models/weapons/tacint/v_amd65.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_amd65.mdl"
@@ -19,10 +19,10 @@ SWEP.Slot = 3
 
 // "ballistics"
 
-SWEP.Damage_Max = 28
-SWEP.Damage_Min = 20
-SWEP.Range_Min = 1750 // distance for which to maintain maximum damage
-SWEP.Range_Max = 6000 // distance at which we drop to minimum damage
+SWEP.Damage_Max = 22
+SWEP.Damage_Min = 10
+SWEP.Range_Min = 900 // distance for which to maintain maximum damage
+SWEP.Range_Max = 3000 // distance at which we drop to minimum damage
 SWEP.Penetration = 11 // units of metal this weapon can penetrate
 
 SWEP.BodyDamageMultipliers = {
@@ -62,7 +62,7 @@ SWEP.RecoilFirstShotMult = 1 // multiplier for the first shot's recoil amount
 
 SWEP.RecoilVisualKick = 2
 
-SWEP.RecoilKick = 8
+SWEP.RecoilKick = 5
 
 SWEP.RecoilSpreadPenalty = 0.0015
 
@@ -74,7 +74,7 @@ SWEP.MoveSpeedMult = 0.85
 SWEP.ShootingSpeedMult = 0.2
 SWEP.SightedSpeedMult = 0.25
 SWEP.MeleeSpeedMult = 0.5
-SWEP.MeleeSpeedMultTime = 2
+SWEP.ReloadSpeedMult = 0.5
 
 SWEP.AimDownSightsTime = 0.375
 SWEP.SprintToFireTime = 0.4

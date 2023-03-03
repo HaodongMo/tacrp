@@ -69,7 +69,7 @@ function SWEP:DrawHUDBackground()
     // draw a vignette effect around the screen based on recoil
     local recoil = self:GetRecoilAmount()
     if recoil > 0 then
-        local recoil_pct = math.Clamp(recoil / self:GetValue("RecoilMaximum"), 0, 1)
+        local recoil_pct = math.Clamp(recoil / self:GetValue("RecoilMaximum"), 0, 1) ^ 1.5
         local delta = self:Curve(recoil_pct)
         surface.SetDrawColor(0, 0, 0, 255 * delta)
         surface.SetMaterial(mat_vignette)

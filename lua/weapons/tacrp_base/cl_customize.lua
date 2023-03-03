@@ -407,6 +407,7 @@ function SWEP:CreateCustomizeHUD()
         -- }
         {
             Name = "Spread",
+            Description = "Mechanical accuracy of the weapon while aiming.",
             AggregateFunction = function(base, val)
                 return math.Round(math.deg(val), 1)
             end,
@@ -416,45 +417,50 @@ function SWEP:CreateCustomizeHUD()
         },
         {
             Name = "RPM",
+            Description = "Rate of fire of the weapon.",
             Value = "RPM"
         },
         {
             Name = "Capacity",
+            Description = "Amount of ammo this weapon can spend before reloading.",
+
             Value = "ClipSize",
         },
         {
             Name = "Sprint To Fire",
+            Description = "Time required to transition from fully sprinting to being able to fire.",
+
             Value = "SprintToFireTime",
             Unit = "s",
             LowerIsBetter = true,
         },
         {
             Name = "Aim Down Sights",
+            Description = "Time required to transition from hipfiring to aiming.",
             Value = "AimDownSightsTime",
             Unit = "s",
             LowerIsBetter = true,
         },
         {
             Name = "Muzzle Velocity",
+            Description = "How fast the bullet travels in the world.",
             AggregateFunction = function(base, val)
                 return math.Round(self:GetMuzzleVelocity(base), 2)
             end,
+            ConVarCheck = "tacrp_physbullet",
             Value = "MuzzleVelocity",
             LowerIsBetter = false,
             Unit = "m/s"
         },
         {
             Name = "Recoil Kick",
+            Description = "Strength of \"felt recoil\" that throws off your aim.",
             Value = "RecoilKick",
             LowerIsBetter = true,
         },
         {
-            Name = "Recoil Reset Time",
-            Value = "RecoilResetTime",
-            LowerIsBetter = true,
-        },
-        {
             Name = "Recoil Spread",
+            Description = "Inaccuracy caused by accumulated recoil. Larger value means the weapon becomes inaccurate faster while continuous firing.",
             AggregateFunction = function(base, val)
                 return math.Round(math.deg(val), 2)
             end,
@@ -463,23 +469,33 @@ function SWEP:CreateCustomizeHUD()
             LowerIsBetter = true,
         },
         {
-            Name = "Recoil Recover Rate",
+            Name = "Recoil Recovery",
+            Description = "Rate at which accumulated recoil disspiates, in shots per second. Larger value means the effects of recoil disappear faster after the reset time.",
             AggregateFunction = function(base, val)
-                return math.Round(math.deg(val * (base and self:GetTable().RecoilSpreadPenalty or self:GetValue("RecoilSpreadPenalty"))), 1)
+                return math.Round(val, 2)
+                --return math.Round(math.deg(val * (base and self:GetTable().RecoilSpreadPenalty or self:GetValue("RecoilSpreadPenalty"))), 1)
             end,
-            Unit = "°/s",
+            Unit = "/s",
             Value = "RecoilDissipationRate",
         },
         {
+            Name = "Recoil Reset Time",
+            Description = "Duration of delay before recoil can start to dissipate. Larger value means you must wait longer between shots to start recovering from recoil.",
+            Value = "RecoilResetTime",
+            LowerIsBetter = true,
+        },
+        {
             Name = "Move Speed",
+            Description = "Speed multiplier while the weapon is held up. Has no effect when weapon is in safety.",
             AggregateFunction = function(base, val)
-                return math.Round(val*100, 0)
+                return math.Round(val * 100, 0)
             end,
             Unit = "%",
             Value = "MoveSpeedMult"
         },
         {
             Name = "Shooting Speed",
+            Description = "Speed multiplier from firing the weapon. Accumulating recoil increases slowdown intensity.",
             AggregateFunction = function(base, val)
                 return math.Round(val*100, 0)
             end,
@@ -488,6 +504,7 @@ function SWEP:CreateCustomizeHUD()
         },
         {
             Name = "Sighted Speed",
+            Description = "Speed multiplier while the weapon is aiming.",
             AggregateFunction = function(base, val)
                 return math.Round(val*100, 0)
             end,
@@ -495,7 +512,18 @@ function SWEP:CreateCustomizeHUD()
             Value = "SightedSpeedMult"
         },
         {
+            Name = "Reload Speed",
+            Description = "Speed multiplier while reloading.",
+            AggregateFunction = function(base, val)
+                return math.Round(val*100, 0)
+            end,
+            Unit = "%",
+            Value = "ReloadSpeedMult",
+            ConVarCheck = "tacrp_reloadslowdown",
+        },
+        {
             Name = "Reload Time",
+            Description = "Amount of time required to perform a reload.",
             AggregateFunction = function(base, val)
                 return math.Round(self:GetReloadTime(base), 2)
             end,
@@ -505,30 +533,39 @@ function SWEP:CreateCustomizeHUD()
         },
         {
             Name = "Deploy Time",
+            Description = "Amount of time required to bring up the weapon. Holstering is instant.",
             AggregateFunction = function(base, val)
                 return math.Round(self:GetDeployTime(base), 2)
             end,
             Value = "DeployTimeMult",
             LowerIsBetter = true,
+            HideIfSame = true,
             Unit = "s"
         },
         {
             Name = "Penetration",
+            Description = "Thickness of metal this weapon can penetrate. Actual penetration is material-dependent.",
             Value = "Penetration",
             Unit = "\""
         },
         {
             Name = "Sway",
+            Description = "Amount of sway in hipfire. Sway affects your firing direction without changing your aiming direction.",
+
             Value = "Sway",
             LowerIsBetter = true,
+            ConVarCheck = "tacrp_sway",
         },
         {
             Name = "Sway In Sights",
+            Description = "Amount of sway while aiming. Sway affects your firing direction without changing your aiming direction.",
             Value = "ScopedSway",
             LowerIsBetter = true,
+            ConVarCheck = "tacrp_sway",
         },
         {
             Name = "Mid-Air Spread",
+            Description = "Amount of inaccuracy caused by not standing on solid ground. Applied at half intensity while swimming.",
             AggregateFunction = function(base, val)
                 return math.Round(math.deg(val), 2)
             end,
@@ -538,7 +575,8 @@ function SWEP:CreateCustomizeHUD()
             HideIfSame = true,
         },
         {
-            Name = "Hip Fire Spread",
+            Name = "Hipfire Spread",
+            Description = "Amount of inaccuracy added while hipfiring.",
             AggregateFunction = function(base, val)
                 return math.Round(math.deg(val), 2)
             end,
@@ -549,12 +587,14 @@ function SWEP:CreateCustomizeHUD()
         },
         {
             Name = "First Shot Recoil",
+            Description = "Recoil multiplier on the first shot, reset after the reset time has passed. Does not affect recoil kick.",
             Value = "RecoilFirstShotMult",
             LowerIsBetter = true,
             HideIfSame = true,
         },
         {
             Name = "Max Recoil Spread",
+            Description = "Maximum amount of inaccuracy from continuous firing.",
             AggregateFunction = function(base, val)
                 return math.Round(math.deg(val * (base and self:GetTable().RecoilSpreadPenalty or self:GetValue("RecoilSpreadPenalty"))), 1)
             end,
@@ -565,11 +605,13 @@ function SWEP:CreateCustomizeHUD()
         },
         {
             Name = "Melee Damage",
+            Description = "Damage dealt when bashing.",
             Value = "MeleeDamage",
             HideIfSame = true,
         },
         {
             Name = "Firemode",
+            Description = "The weapon's firing capabilities.",
             AggregateFunction = function(base, val)
                 if !val then
                     val = {base and self:GetTable()["Firemode"] or self:GetValue("Firemode")}
@@ -628,10 +670,12 @@ function SWEP:CreateCustomizeHUD()
         },
         {
             Name = "Free Aim Angle",
+            Description = "Maximum amount of deviation from the aim direction while hipfiring.",
             Unit = "°",
             Value = "FreeAimMaxAngle",
             LowerIsBetter = true,
             HideIfSame = true,
+            ConVarCheck = "tacrp_freeaim",
         },
     }
 
@@ -672,6 +716,11 @@ function SWEP:CreateCustomizeHUD()
                 local value = self:GetValue(k.Value)
 
                 if k.HideIfSame and selftbl[k.Value] == value then continue end
+
+                if k.ConVarCheck then
+                    if !k.ConVar then k.ConVar = GetConVar(k.ConVarCheck) end
+                    if k.ConVar:GetBool() == tobool(k.ConVarInvert) then continue end
+                end
 
                 surface.SetFont("TacRP_Myriad_Pro_8")
                 surface.SetTextColor(255, 255, 255)

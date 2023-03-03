@@ -10,7 +10,7 @@ SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 SWEP.SubCatTier = "2Premium"
 SWEP.SubCatType = "4Assault Rifle"
 
-SWEP.Description = "Assault rifle with integral scope. Well suited for long range sustained fire."
+SWEP.Description = "Assault rifle with integral scope and high muzzle velocity. Well suited for sustained fire at long ranges."
 
 SWEP.ViewModel = "models/weapons/tacint/v_g36k_hq.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_g36k.mdl"
@@ -36,7 +36,7 @@ SWEP.BodyDamageMultipliers = {
     [HITGROUP_GEAR] = 0.9
 }
 
-SWEP.MuzzleVelocity = 27500
+SWEP.MuzzleVelocity = 35000
 
 // misc. shooting
 
@@ -71,7 +71,7 @@ SWEP.MoveSpeedMult = 0.85
 SWEP.ShootingSpeedMult = 0.3
 SWEP.SightedSpeedMult = 0.25
 SWEP.MeleeSpeedMult = 0.5
-SWEP.MeleeSpeedMultTime = 2
+SWEP.ReloadSpeedMult = 0.5
 
 SWEP.AimDownSightsTime = 0.38
 SWEP.SprintToFireTime = 0.38 // multiplies how long it takes to recover from sprinting

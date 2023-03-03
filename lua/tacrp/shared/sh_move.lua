@@ -1,19 +1,45 @@
 function TacRP.Move(ply, mv, cmd)
     local wpn = ply:GetActiveWeapon()
+    local iscurrent = true
 
-    if !wpn.ArcticTacRP then return end
+    -- Remember last weapon to keep applying slowdown on shooting and melee
+    if !wpn.ArcticTacRP then
+        if !IsValid(ply.LastTacRPWeapon) or ply.LastTacRPWeapon:GetOwner() ~= ply then
+            return
+        else
+            wpn = ply.LastTacRPWeapon
+            iscurrent = false
+        end
+    else
+        ply.LastTacRPWeapon = wpn
+    end
 
     local basespd = (Vector(cmd:GetForwardMove(), cmd:GetUpMove(), cmd:GetSideMove())):Length()
     basespd = math.min(basespd, mv:GetMaxClientSpeed())
 
     local mult = 1
 
-    if !wpn:GetSafe() then
+    if iscurrent and !wpn:GetSafe() then
         mult = mult * wpn:GetValue("MoveSpeedMult")
     end
 
-    if wpn:GetScopeLevel() > 0 then
+    if iscurrent and wpn:GetScopeLevel() > 0 then
         mult = mult * wpn:GetValue("SightedSpeedMult")
+    end
+
+    if iscurrent and GetConVar("tacrp_reloadslowdown"):GetBool() then
+        local rsmt = wpn:GetValue("ReloadSpeedMultTime")
+
+        if wpn:GetReloading() then
+            mult = mult * wpn:GetValue("ReloadSpeedMult")
+        elseif wpn:GetReloadFinishTime() + rsmt > CurTime() then
+            local mt = CurTime() - wpn:GetReloadFinishTime()
+            local d = mt / rsmt
+
+            d = math.Clamp(d, 0, 1)
+
+            mult = mult * Lerp(d, wpn:GetValue("ReloadSpeedMult"), 1)
+        end
     end
 
     local msmt = wpn:GetValue("MeleeSpeedMultTime")
@@ -29,22 +55,38 @@ function TacRP.Move(ply, mv, cmd)
 
 
     local shotdelta = 0 -- how close should we be to the shoot speed mult
-    local shottime = wpn:GetNextPrimaryFire() - CurTime() + 0.1
+    local rpmd = wpn:GetValue("RPM") / 900
+    local fulldur = Lerp(rpmd, 1, 0.25) -- time considered "during shot". cant be just primary fire since it hurts slow guns too much
+    local delay = Lerp(rpmd, 0.25, 0.5)
+    local shottime = wpn:GetNextPrimaryFire() - (60 / wpn:GetValue("RPM")) - CurTime() + fulldur
 
+    -- slowdown based on recoil intensity (firing longer means heavier slowdown)
     if shottime > 0 then
-        -- full slowdown for duration of firing
-        shotdelta = 1
-    else
-        -- recover from firing slowdown after shadow duration
-        local delay = math.min(60 / wpn:GetValue("RPM"), 0.5)
+        shotdelta = Lerp(wpn:GetRecoilAmount() / (wpn:GetValue("RecoilMaximum") * 0.5), 0.5, 1)
+    elseif -shottime < delay then
         local aftershottime = -shottime / delay
-        shotdelta = math.Clamp(1 - aftershottime, 0, 1)
+        shotdelta = Lerp(wpn:GetRecoilAmount() / (wpn:GetValue("RecoilMaximum") * 0.5), 0.5, 1) * math.Clamp(1 - aftershottime, 0, 1)
     end
+
+    -- if shottime > 0 then
+    --     -- at least 0.25s of full slowdown regardless of RPM
+    --     shotdelta = 1
+    -- else
+    --     -- recover from firing slowdown after shadow duration
+    --     local delay = math.min(60 / wpn:GetValue("RPM"), 0.5)
+    --     local aftershottime = -shottime / delay
+    --     shotdelta = math.Clamp(1 - aftershottime, 0, 1)
+    -- end
+
+    -- if SERVER and shotdelta > 0 then print(math.Round(shottime, 2), wpn:GetBurstCount(), math.Round(shotdelta, 2)) end
+
     local shootmove = math.Clamp(wpn:GetValue("ShootingSpeedMult"), 0.0001, 1)
     mult = mult * Lerp(shotdelta, 1, shootmove)
 
     mv:SetMaxSpeed(basespd * mult)
     mv:SetMaxClientSpeed(basespd * mult)
+
+    if !iscurrent then return end
 
     -- Semi auto click buffer
     if !wpn:GetCharge() and wpn:GetCurrentFiremode() < 2 and mv:KeyPressed(IN_ATTACK)
@@ -149,10 +191,17 @@ function TacRP.StartCommand(ply, cmd)
 
     TacRP.LastEyeAngles = cmd:GetViewAngles()
 
-    -- Sprint will not interrupt a runaway burst
-    if wpn:GetBurstCount() > 0 and cmd:KeyDown(IN_SPEED) and wpn:GetValue("RunawayBurst") then
+
+
+    if cmd:KeyDown(IN_SPEED) and (
+        -- Sprint will not interrupt a runaway burst
+        (wpn:GetBurstCount() > 0 and wpn:GetValue("RunawayBurst"))
+        -- Cannot sprint while reloading if convar is set
+        or (GetConVar("tacrp_reloadslowdown"):GetBool() and wpn:GetReloading())
+    ) then
         cmd:SetButtons(cmd:GetButtons() - IN_SPEED)
     end
+
 end
 
 hook.Add("StartCommand", "TacRP_StartCommand", TacRP.StartCommand)

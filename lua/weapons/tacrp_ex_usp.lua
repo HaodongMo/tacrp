@@ -10,7 +10,7 @@ SWEP.Category = "Tactical RP" // "Tactical RP (Extras)"
 SWEP.SubCatTier = "3Quality"
 SWEP.SubCatType = "1Sidearm"
 
-SWEP.Description = "Tactical pistol with low fire rate but great damage."
+SWEP.Description = "Tactical pistol with low fire rate but above average damage and range."
 
 SWEP.ViewModel = "models/weapons/tacint_extras/v_usp.mdl"
 SWEP.WorldModel = "models/weapons/tacint_extras/w_usp.mdl"
@@ -19,17 +19,17 @@ SWEP.Slot = 2
 
 // "ballistics"
 
-SWEP.Damage_Max = 20
-SWEP.Damage_Min = 12 // 100 / 7 // damage at maximum range
-SWEP.Range_Min = 2000 // distance for which to maintain maximum damage
-SWEP.Range_Max = 5000 // distance at which we drop to minimum damage
+SWEP.Damage_Max = 18
+SWEP.Damage_Min = 5 // 100 / 7 // damage at maximum range
+SWEP.Range_Min = 800 // distance for which to maintain maximum damage
+SWEP.Range_Max = 3500 // distance at which we drop to minimum damage
 SWEP.Penetration = 3 // units of metal this weapon can penetrate
 
-SWEP.MuzzleVelocity = 12000
+SWEP.MuzzleVelocity = 9000
 
 SWEP.BodyDamageMultipliers = {
     [HITGROUP_HEAD] = 2,
-    [HITGROUP_CHEST] = 1.15,
+    [HITGROUP_CHEST] = 1.25,
     [HITGROUP_STOMACH] = 1,
     [HITGROUP_LEFTARM] = 1,
     [HITGROUP_RIGHTARM] = 1,
@@ -65,10 +65,13 @@ SWEP.MoveSpeedMult = 0.9
 SWEP.ShootingSpeedMult = 0.6
 SWEP.SightedSpeedMult = 0.5
 SWEP.MeleeSpeedMult = 0.5
-SWEP.MeleeSpeedMultTime = 2
+SWEP.ReloadSpeedMult = 0.75
 
 SWEP.AimDownSightsTime = 0.25
 SWEP.SprintToFireTime = 0.25
+
+SWEP.Sway = 2
+SWEP.ScopedSway = 1
 
 // hold types
 
@@ -220,7 +223,7 @@ SWEP.Attachments = {
     },
     [4] = {
         PrintName = "Accessory",
-        Category = {"acc", "acc_extmag_pistol", "acc_holster"},
+        Category = {"acc", "acc_extmag_pistol", "acc_holster", "acc_brace"},
         AttachSound = "tacrp/weapons/flashlight_on.wav",
         DetachSound = "tacrp/weapons/flashlight_off.wav",
     },

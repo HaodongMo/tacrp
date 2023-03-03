@@ -100,6 +100,9 @@ SWEP.ShootingSpeedMult = 1 // slow down applied while shooting
 SWEP.SightedSpeedMult = 0.5
 SWEP.MeleeSpeedMult = 0.5
 SWEP.MeleeSpeedMultTime = 2 // seconds to apply slow down for
+SWEP.ReloadSpeedMult = 0.25
+SWEP.ReloadSpeedMultTime = 1 // duration for slowdown to fade out for AFTER RELOAD FINISHES
+
 
 SWEP.ShootWhileSprint = false
 
@@ -205,6 +208,7 @@ SWEP.DeployTimeMult = 1
 SWEP.DropMagazineModel = false
 SWEP.DropMagazineImpact = "pistol" // available: "pistol", "plastic", "metal", "bullet", "shotgun"
 SWEP.DropMagazineAmount = 1
+SWEP.MidReload = false // allow guns with "midreload" animation to continue reload after holster
 
 SWEP.DefaultBodygroups = "0000000"
 SWEP.DefaultWMBodygroups = "0000000"

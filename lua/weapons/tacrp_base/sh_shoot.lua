@@ -408,7 +408,8 @@ function SWEP:GetSpread(baseline)
     spread = spread + (spd * self:GetValue("MoveSpreadPenalty"))
 
     if !self:GetOwner():OnGround() then
-        spread = spread + self:GetValue("MidAirSpreadPenalty")
+        local v = self:GetOwner():WaterLevel() > 0 and 0.5 or 1
+        spread = spread + self:GetValue("MidAirSpreadPenalty") * v
     end
 
     if self:GetOwner():OnGround() and self:GetOwner():Crouching() then

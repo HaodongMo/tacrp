@@ -73,7 +73,7 @@ SWEP.MoveSpeedMult = 0.9
 SWEP.ShootingSpeedMult = 0.4
 SWEP.SightedSpeedMult = 0.5
 SWEP.MeleeSpeedMult = 0.5
-SWEP.MeleeSpeedMultTime = 2
+SWEP.ReloadSpeedMult = 0.75
 
 SWEP.AimDownSightsTime = 0.22
 SWEP.SprintToFireTime = 0.3
@@ -198,7 +198,7 @@ SWEP.Attachments = {
     },
     [3] = {
         PrintName = "Accessory",
-        Category = {"acc", "acc_holster"},
+        Category = {"acc", "acc_holster", "acc_brace"},
         AttachSound = "TacRP/weapons/flashlight_on.wav",
         DetachSound = "TacRP/weapons/flashlight_off.wav",
     },

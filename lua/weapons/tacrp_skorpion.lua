@@ -10,7 +10,7 @@ SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 SWEP.SubCatTier = "4Common"
 SWEP.SubCatType = "2Machine Pistol"
 
-SWEP.Description = "Machine pistol with incredibly low recoil."
+SWEP.Description = "Low capacity machine pistol with very controllable recoil."
 
 SWEP.ViewModel = "models/weapons/tacint/v_skorpion.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_skorpion.mdl"
@@ -20,12 +20,23 @@ SWEP.Slot = 2
 // "ballistics"
 
 SWEP.Damage_Max = 10
-SWEP.Damage_Min = 5
+SWEP.Damage_Min = 4
 SWEP.Range_Min = 800 // distance for which to maintain maximum damage
 SWEP.Range_Max = 2800 // distance at which we drop to minimum damage
 SWEP.Penetration = 2 // units of metal this weapon can penetrate
 
 SWEP.MuzzleVelocity = 12500
+
+SWEP.BodyDamageMultipliers = {
+    [HITGROUP_HEAD] = 2,
+    [HITGROUP_CHEST] = 1,
+    [HITGROUP_STOMACH] = 1,
+    [HITGROUP_LEFTARM] = 1,
+    [HITGROUP_RIGHTARM] = 1,
+    [HITGROUP_LEFTLEG] = 0.75,
+    [HITGROUP_RIGHTLEG] = 0.75,
+    [HITGROUP_GEAR] = 0.9
+}
 
 // misc. shooting
 
@@ -62,10 +73,13 @@ SWEP.MoveSpeedMult = 0.9
 SWEP.ShootingSpeedMult = 0.75
 SWEP.SightedSpeedMult = 0.4
 SWEP.MeleeSpeedMult = 0.5
-SWEP.MeleeSpeedMultTime = 2
+SWEP.ReloadSpeedMult = 0.6
 
 SWEP.AimDownSightsTime = 0.275
 SWEP.SprintToFireTime = 0.30
+
+SWEP.Sway = 1
+SWEP.ScopedSway = 0.3
 
 // hold types
 
@@ -96,12 +110,9 @@ SWEP.HolsterSlot = TacRP.HOLSTER_SLOT_PISTOL
 SWEP.HolsterPos = Vector(0, 3, -4)
 SWEP.HolsterAng = Angle(90, 0, 0)
 
-SWEP.Sway = 2
-SWEP.ScopedSway = 0.25
-
 // reload
 
-SWEP.ClipSize = 25
+SWEP.ClipSize = 20
 SWEP.Ammo = "pistol"
 
 SWEP.ReloadTimeMult = 1

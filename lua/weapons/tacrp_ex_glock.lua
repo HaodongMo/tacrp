@@ -25,7 +25,7 @@ SWEP.Range_Min = 800 // distance for which to maintain maximum damage
 SWEP.Range_Max = 2400 // distance at which we drop to minimum damage
 SWEP.Penetration = 3 // units of metal this weapon can penetrate
 
-SWEP.MuzzleVelocity = 9500
+SWEP.MuzzleVelocity = 11000
 
 SWEP.BodyDamageMultipliers = {
     [HITGROUP_HEAD] = 2,
@@ -65,10 +65,13 @@ SWEP.MoveSpeedMult = 0.9
 SWEP.ShootingSpeedMult = 0.75
 SWEP.SightedSpeedMult = 0.5
 SWEP.MeleeSpeedMult = 0.5
-SWEP.MeleeSpeedMultTime = 2
+SWEP.ReloadSpeedMult = 0.75
 
 SWEP.AimDownSightsTime = 0.25
 SWEP.SprintToFireTime = 0.25
+
+SWEP.Sway = 2
+SWEP.ScopedSway = 1
 
 // hold types
 
@@ -209,7 +212,7 @@ SWEP.Attachments = {
     },
     [4] = {
         PrintName = "Accessory",
-        Category = {"acc", "acc_extmag_pistol", "acc_holster"},
+        Category = {"acc", "acc_extmag_pistol", "acc_holster", "acc_brace"},
         AttachSound = "tacrp/weapons/flashlight_on.wav",
         DetachSound = "tacrp/weapons/flashlight_off.wav",
     },

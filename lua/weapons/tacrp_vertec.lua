@@ -25,7 +25,7 @@ SWEP.Range_Min = 1200
 SWEP.Range_Max = 3000
 SWEP.Penetration = 3
 
-SWEP.MuzzleVelocity = 9000
+SWEP.MuzzleVelocity = 12000
 
 SWEP.BodyDamageMultipliers = {
     [HITGROUP_HEAD] = 2,
@@ -70,10 +70,13 @@ SWEP.MoveSpeedMult = 0.9
 SWEP.ShootingSpeedMult = 0.75
 SWEP.SightedSpeedMult = 0.5
 SWEP.MeleeSpeedMult = 0.5
-SWEP.MeleeSpeedMultTime = 2
+SWEP.ReloadSpeedMult = 0.75
 
 SWEP.AimDownSightsTime = 0.25
 SWEP.SprintToFireTime = 0.25
+
+SWEP.Sway = 2
+SWEP.ScopedSway = 1
 
 // hold types
 
@@ -101,8 +104,6 @@ SWEP.HolsterSlot = TacRP.HOLSTER_SLOT_PISTOL
 SWEP.HolsterPos = Vector(0, 3, -4)
 SWEP.HolsterAng = Angle(90, 0, 0)
 
-SWEP.Sway = 2
-SWEP.ScopedSway = 1
 
 // reload
 
@@ -209,7 +210,7 @@ SWEP.Attachments = {
     },
     [4] = {
         PrintName = "Accessory",
-        Category = {"acc", "acc_extmag_pistol", "acc_holster"},
+        Category = {"acc", "acc_extmag_pistol", "acc_holster", "acc_brace"},
         AttachSound = "TacRP/weapons/flashlight_on.wav",
         DetachSound = "TacRP/weapons/flashlight_off.wav",
     },

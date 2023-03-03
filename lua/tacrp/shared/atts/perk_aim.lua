@@ -8,4 +8,4 @@ ATT.Category = "perk_shooting"
 ATT.SortOrder = 2
 
 ATT.Mult_ScopeFOV = 0.75
-ATT.Mult_ScopedSway = 0.5
+ATT.Mult_ScopedSway = 0.25

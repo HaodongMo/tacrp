@@ -10,7 +10,7 @@ SWEP.Category = "Tactical RP" // "Tactical RP (Extras)"
 SWEP.SubCatTier = "3Quality"
 SWEP.SubCatType = "3Submachine Gun"
 
-SWEP.Description = "A weapon designed to be a cheaper alternative to the MP5. Higher damage, but lower rate of fire."
+SWEP.Description = "SMG designed to be a cheaper alternative to the MP5.\nHigh damage up close, but range and rate of fire is low."
 
 SWEP.ViewModel = "models/weapons/tacint_extras/v_ump45.mdl"
 SWEP.WorldModel = "models/weapons/tacint_extras/w_ump45.mdl"
@@ -21,13 +21,13 @@ SWEP.Slot = 3
 
 SWEP.Damage_Max = 18
 SWEP.Damage_Min = 6
-SWEP.Range_Min = 1200 // distance for which to maintain maximum damage
-SWEP.Range_Max = 3500 // distance at which we drop to minimum damage
+SWEP.Range_Min = 1000 // distance for which to maintain maximum damage
+SWEP.Range_Max = 3000 // distance at which we drop to minimum damage
 SWEP.Penetration = 5 // units of metal this weapon can penetrate
 
 SWEP.BodyDamageMultipliers = {
     [HITGROUP_HEAD] = 2,
-    [HITGROUP_CHEST] = 1,
+    [HITGROUP_CHEST] = 1.25,
     [HITGROUP_STOMACH] = 1,
     [HITGROUP_LEFTARM] = 1,
     [HITGROUP_RIGHTARM] = 1,
@@ -36,7 +36,7 @@ SWEP.BodyDamageMultipliers = {
     [HITGROUP_GEAR] = 0.9
 }
 
-SWEP.MuzzleVelocity = 12500
+SWEP.MuzzleVelocity = 11000
 
 // misc. shooting
 
@@ -47,21 +47,21 @@ SWEP.Firemodes = {
 
 SWEP.RPM = 600
 
-SWEP.Spread = 0.005
+SWEP.Spread = 0.004
 
 SWEP.ShootTimeMult = 0.5
 
 SWEP.RecoilPerShot = 1
-SWEP.RecoilMaximum = 12
+SWEP.RecoilMaximum = 10
 SWEP.RecoilResetTime = 0.12 // time after you stop shooting for recoil to start dissipating
-SWEP.RecoilDissipationRate = 12
+SWEP.RecoilDissipationRate = 15
 SWEP.RecoilFirstShotMult = 1
 
 SWEP.RecoilVisualKick = 0.5
 
-SWEP.RecoilKick = 3.5
+SWEP.RecoilKick = 4
 
-SWEP.RecoilSpreadPenalty = 0.0008
+SWEP.RecoilSpreadPenalty = 0.0012
 
 SWEP.CanBlindFire = true
 
@@ -71,7 +71,7 @@ SWEP.MoveSpeedMult = 0.85
 SWEP.ShootingSpeedMult = 0.5
 SWEP.SightedSpeedMult = 0.4
 SWEP.MeleeSpeedMult = 0.5
-SWEP.MeleeSpeedMultTime = 2
+SWEP.ReloadSpeedMult = 0.5
 
 SWEP.AimDownSightsTime = 0.33
 SWEP.SprintToFireTime = 0.33

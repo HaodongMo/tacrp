@@ -57,7 +57,7 @@ SWEP.MoveSpeedMult = 0.7
 SWEP.ShootingSpeedMult = 0.05 // slow down applied while shooting
 SWEP.SightedSpeedMult = 0.1
 SWEP.MeleeSpeedMult = 0.5
-SWEP.MeleeSpeedMultTime = 2 // seconds to apply slow down for
+SWEP.ReloadSpeedMult = 0.1
 
 SWEP.AimDownSightsTime = 0.5
 SWEP.SprintToFireTime = 0.5 // multiplies how long it takes to recover from sprinting

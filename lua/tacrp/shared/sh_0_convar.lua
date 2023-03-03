@@ -120,6 +120,10 @@ local conVars = {
         default = "0.05"
     },
     {
+        name = "reloadslowdown",
+        default = "1"
+    },
+    {
         name = "ammonames",
         default = "1",
         client = true

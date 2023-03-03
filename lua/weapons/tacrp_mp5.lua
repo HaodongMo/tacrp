@@ -19,11 +19,11 @@ SWEP.Slot = 3
 
 // "ballistics"
 
-SWEP.Damage_Max = 14
-SWEP.Damage_Min = 7
-SWEP.Range_Min = 1500 // distance for which to maintain maximum damage
-SWEP.Range_Max = 4000 // distance at which we drop to minimum damage
-SWEP.Penetration = 5 // units of metal this weapon can penetrate
+SWEP.Damage_Max = 13
+SWEP.Damage_Min = 6
+SWEP.Range_Min = 1200 // distance for which to maintain maximum damage
+SWEP.Range_Max = 3000 // distance at which we drop to minimum damage
+SWEP.Penetration = 4 // units of metal this weapon can penetrate
 
 SWEP.BodyDamageMultipliers = {
     [HITGROUP_HEAD] = 2,
@@ -42,13 +42,12 @@ SWEP.MuzzleVelocity = 13500
 
 SWEP.Firemodes = {
     2,
-    -3,
     1
 }
 
 SWEP.RPM = 750
 
-SWEP.Spread = 0.003
+SWEP.Spread = 0.0015
 
 SWEP.ShootTimeMult = 0.5
 
@@ -72,7 +71,7 @@ SWEP.MoveSpeedMult = 0.85
 SWEP.ShootingSpeedMult = 0.5
 SWEP.SightedSpeedMult = 0.4
 SWEP.MeleeSpeedMult = 0.5
-SWEP.MeleeSpeedMultTime = 2
+SWEP.ReloadSpeedMult = 0.5
 
 SWEP.AimDownSightsTime = 0.33
 SWEP.SprintToFireTime = 0.33
@@ -226,7 +225,7 @@ SWEP.Attachments = {
     },
     [4] = {
         PrintName = "Accessory",
-        Category = {"acc", "acc_foldstock", "acc_sling", "acc_duffle", "acc_extmag_smg"},
+        Category = {"acc", "acc_foldstock2", "acc_sling", "acc_duffle", "acc_extmag_smg"},
         AttachSound = "tacrp/weapons/flashlight_on.wav",
         DetachSound = "tacrp/weapons/flashlight_off.wav",
     },

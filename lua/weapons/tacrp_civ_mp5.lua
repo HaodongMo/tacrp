@@ -20,7 +20,7 @@ SWEP.Slot = 3
 SWEP.Firemode = 1
 SWEP.Firemodes = false
 
-SWEP.RPM = 500
+SWEP.RPM = 600
 
 SWEP.ClipSize = 15
 

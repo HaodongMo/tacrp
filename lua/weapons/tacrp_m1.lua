@@ -19,15 +19,15 @@ SWEP.Slot = 3
 
 // "ballistics"
 
-SWEP.Damage_Max = 20
-SWEP.Damage_Min = 12
-SWEP.Range_Min = 2000 // distance for which to maintain maximum damage
-SWEP.Range_Max = 6000 // distance at which we drop to minimum damage
+SWEP.Damage_Max = 18
+SWEP.Damage_Min = 8
+SWEP.Range_Min = 800 // distance for which to maintain maximum damage
+SWEP.Range_Max = 4000 // distance at which we drop to minimum damage
 SWEP.Penetration = 7 // units of metal this weapon can penetrate
 
 SWEP.BodyDamageMultipliers = {
     [HITGROUP_HEAD] = 2,
-    [HITGROUP_CHEST] = 1.5,
+    [HITGROUP_CHEST] = 1.25,
     [HITGROUP_STOMACH] = 1,
     [HITGROUP_LEFTARM] = 1,
     [HITGROUP_RIGHTARM] = 1,
@@ -66,10 +66,10 @@ SWEP.MoveSpeedMult = 0.85
 SWEP.ShootingSpeedMult = 0.5
 SWEP.SightedSpeedMult = 0.35
 SWEP.MeleeSpeedMult = 0.5
-SWEP.MeleeSpeedMultTime = 2
+SWEP.ReloadSpeedMult = 0.5
 
-SWEP.AimDownSightsTime = 0.3
-SWEP.SprintToFireTime = 0.35
+SWEP.AimDownSightsTime = 0.28
+SWEP.SprintToFireTime = 0.32
 
 // hold types
 
@@ -98,7 +98,7 @@ SWEP.HolsterPos = Vector(5, -8, -6)
 SWEP.HolsterAng = Angle(0, 0, 0)
 
 SWEP.Sway = 1.5
-SWEP.ScopedSway = 0.15
+SWEP.ScopedSway = 0.2
 
 // reload
 

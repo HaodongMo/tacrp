@@ -1,5 +1,5 @@
 function SWEP:DoDeployAnimation()
-    if self:GetReloading() and !self:GetValue("ShotgunReload") and self:HasSequence("midreload") then
+    if self:GetReloading() and self:GetValue("MidReload") and !self:GetValue("ShotgunReload") and self:HasSequence("midreload") then
         local t = self:PlayAnimation("midreload", self:GetValue("ReloadTimeMult"), true, true)
 
         self:SetTimer(t, function()

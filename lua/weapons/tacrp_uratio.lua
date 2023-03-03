@@ -10,7 +10,7 @@ SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 SWEP.SubCatTier = "3Quality"
 SWEP.SubCatType = "7Sniper Rifle"
 
-SWEP.Description = "Bolt action sniper rifle with great damage and muzzle velocity.\nEquipped with a 10x scope by default."
+SWEP.Description = "Modernized sniper rifle lethal on a upper torso shot.\nEquipped with a 10x scope by default."
 
 SWEP.ViewModel = "models/weapons/tacint/v_uratio.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_uratio.mdl"
@@ -19,19 +19,19 @@ SWEP.Slot = 3
 
 // "ballistics"
 
-SWEP.Damage_Max = 110 // damage at minimum range
-SWEP.Damage_Min = 75 // damage at maximum range
-SWEP.Range_Min = 2000 // distance for which to maintain maximum damage
-SWEP.Range_Max = 7000 // distance at which we drop to minimum damage
+SWEP.Damage_Max = 100 // damage at minimum range
+SWEP.Damage_Min = 80 // damage at maximum range
+SWEP.Range_Min = 800 // distance for which to maintain maximum damage
+SWEP.Range_Max = 6000 // distance at which we drop to minimum damage
 SWEP.Penetration = 17 // units of metal this weapon can penetrate
 SWEP.BodyDamageMultipliers = {
     [HITGROUP_HEAD] = 2,
     [HITGROUP_CHEST] = 1.25,
     [HITGROUP_STOMACH] = 1,
-    [HITGROUP_LEFTARM] = 1,
-    [HITGROUP_RIGHTARM] = 1,
-    [HITGROUP_LEFTLEG] = 0.9,
-    [HITGROUP_RIGHTLEG] = 0.9,
+    [HITGROUP_LEFTARM] = 0.9,
+    [HITGROUP_RIGHTARM] = 0.9,
+    [HITGROUP_LEFTLEG] = 0.75,
+    [HITGROUP_RIGHTLEG] = 0.75,
     [HITGROUP_GEAR] = 0.9
 }
 
@@ -47,19 +47,19 @@ SWEP.RPM = 35
 
 SWEP.Spread = 0.00
 
-SWEP.HipFireSpreadPenalty = 0.05
+SWEP.HipFireSpreadPenalty = 0.08
 
 SWEP.RecoilPerShot = 1
-SWEP.RecoilMaximum = 10
-SWEP.RecoilResetTime = 0.1// time after you stop shooting for recoil to start dissipating
-SWEP.RecoilDissipationRate = 10
+SWEP.RecoilMaximum = 1
+SWEP.RecoilResetTime = 0.5 // time after you stop shooting for recoil to start dissipating
+SWEP.RecoilDissipationRate = 1
 SWEP.RecoilFirstShotMult = 1 // multiplier for the first shot's recoil amount
 
 SWEP.RecoilVisualKick = 5
 
-SWEP.RecoilKick = 5
+SWEP.RecoilKick = 2
 
-SWEP.RecoilSpreadPenalty = 0.25 // extra spread per one unit of recoil
+SWEP.RecoilSpreadPenalty = 0 // extra spread per one unit of recoil
 
 SWEP.CanBlindFire = true
 
@@ -69,10 +69,10 @@ SWEP.MoveSpeedMult = 0.75
 SWEP.ShootingSpeedMult = 0.25
 SWEP.SightedSpeedMult = 0.15
 SWEP.MeleeSpeedMult = 0.5
-SWEP.MeleeSpeedMultTime = 2 // seconds to apply slow down for
+SWEP.ReloadSpeedMult = 0.3
 
-SWEP.AimDownSightsTime = 0.36
-SWEP.SprintToFireTime = 0.35 // multiplies how long it takes to recover from sprinting
+SWEP.AimDownSightsTime = 0.38
+SWEP.SprintToFireTime = 0.46
 
 // hold types
 
