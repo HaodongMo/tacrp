@@ -98,6 +98,24 @@ function ENT:TakeDamage(amt, atk, inf)
 end
 
 function ENT:PhysicsCollide(data, collider)
+
+    if IsValid(data.HitEntity) and data.HitEntity:GetClass() == "func_breakable_surf" then
+        self:FireBullets({
+            Attacker = self:GetOwner(),
+            Inflictor = self,
+            Damage = 0,
+            Distance = 32,
+            Tracer = 0,
+            Src = self:GetPos(),
+            Dir = data.OurOldVelocity:GetNormalized(),
+        })
+        local pos, ang, vel = self:GetPos(), self:GetAngles(), data.OurOldVelocity
+        self:SetAngles(ang)
+        self:SetPos(pos)
+        self:GetPhysicsObject():SetVelocityInstantaneous(vel * 0.5)
+        return
+    end
+
     if self.ImpactFuse and !self.Armed then
         self.ArmTime = CurTime()
         self.Armed = true

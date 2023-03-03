@@ -7,7 +7,7 @@ function SWEP:PrimeGrenade()
 
     local nade = self:GetGrenade()
 
-    if nade.Ammo then
+    if nade.Ammo and not (GetConVar("tacrp_infinitegrenades"):GetBool() and not nade.AdminOnly) then
         local ammo = self:GetOwner():GetAmmoCount(nade.Ammo)
 
         if ammo < 1 then return end

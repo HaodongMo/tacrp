@@ -112,6 +112,10 @@ local conVars = {
         default = "0"
     },
     {
+        name = "infinitegrenades",
+        default = "0"
+    },
+    {
         name = "ammonames",
         default = "1",
         client = true
