@@ -5,7 +5,7 @@ local ammotypes = {
     ["ti_c4"] = "C4 Charges",
     ["ti_gas"] = "Gas Grenades",
     ["ti_nuke"] = "Nuclear Device",
-    ["ti_charge"] = "Breaching Charge",
+    ["ti_charge"] = "Door Charges",
 }
 
 for i, k in pairs(ammotypes) do

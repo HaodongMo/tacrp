@@ -43,6 +43,8 @@ SWEP.BodyDamageMultipliers = {
 
 SWEP.Firemode = 1
 
+SWEP.FiremodeName = "Pump-Action" // only used externally for firemode name distinction
+
 SWEP.RPM = 40
 
 SWEP.Spread = 0.05

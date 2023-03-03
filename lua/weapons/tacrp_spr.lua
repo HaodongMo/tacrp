@@ -41,6 +41,8 @@ SWEP.MuzzleVelocity = 35000
 
 SWEP.Firemode = 1
 
+SWEP.FiremodeName = "Bolt-Action" // only used externally for firemode name distinction
+
 SWEP.RPM = 50
 
 SWEP.Spread = 0

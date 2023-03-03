@@ -308,7 +308,7 @@ function SWEP:AfterShotFunction(tr, dmg, range, penleft, alreadypenned, forced)
     self:Penetrate(tr, range, penleft, alreadypenned)
 end
 
-function SWEP:GetDamageAtRange(range)
+function SWEP:GetDamageAtRange(range, noround)
     local d = 1
 
     local r_min = self:GetValue("Range_Min")
@@ -324,7 +324,9 @@ function SWEP:GetDamageAtRange(range)
 
     local dmgv = Lerp(d, self:GetValue("Damage_Max"), self:GetValue("Damage_Min"))
 
-    dmgv = math.ceil(dmgv)
+    if !noround then
+        dmgv = math.ceil(dmgv)
+    end
 
     return dmgv
 end

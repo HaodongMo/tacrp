@@ -43,6 +43,8 @@ SWEP.ShootTimeMult = 1.25
 
 SWEP.Firemode = 1
 
+SWEP.FiremodeName = "Bolt-Action" // only used externally for firemode name distinction
+
 SWEP.RPM = 27
 
 SWEP.Spread = 0
