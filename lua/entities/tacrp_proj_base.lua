@@ -62,7 +62,7 @@ function ENT:Initialize()
         if !phys:IsValid() then
             self:Remove()
         else
-            phys:SetDragCoefficient(0)
+            phys:SetDragCoefficient(1)
         end
 
         if self.IsRocket then

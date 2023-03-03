@@ -116,6 +116,10 @@ local conVars = {
         default = "0"
     },
     {
+        name = "rock_funny",
+        default = "0.05"
+    },
+    {
         name = "ammonames",
         default = "1",
         client = true
@@ -223,6 +227,10 @@ local function menu_server_ti(panel)
     panel:AddControl("checkbox", {
         label = "Infinite Ammo",
         command = "tacrp_infiniteammo"
+    })
+    panel:AddControl("checkbox", {
+        label = "Infinite Grenades",
+        command = "tacrp_infinitegrenades"
     })
     panel:AddControl("checkbox", {
         label = "Enable Penetration",

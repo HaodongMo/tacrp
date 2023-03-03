@@ -7,10 +7,12 @@ local function addsound(name, spath)
     })
 end
 
-addsound("Grenade.PullPin", {
-    "TacRP/weapons/grenade/pullpin-1.wav",
-    "TacRP/weapons/grenade/pullpin-2.wav"
-})
+-- addsound("Grenade.PullPin", {
+--     "TacRP/weapons/grenade/pullpin-1.wav",
+--     "TacRP/weapons/grenade/pullpin-2.wav"
+-- })
+
+addsound("Grenade.PullPin", "common/null.wav")
 
 addsound("Grenade.Throw", {
     "TacRP/weapons/grenade/throw-1.wav",

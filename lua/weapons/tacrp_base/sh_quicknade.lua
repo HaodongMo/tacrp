@@ -7,7 +7,12 @@ function SWEP:PrimeGrenade()
 
     local nade = self:GetGrenade()
 
-    if nade.Ammo and not (GetConVar("tacrp_infinitegrenades"):GetBool() and not nade.AdminOnly) then
+    if (nade.Secret and self:GetOwner():GetAmmoCount(nade.Ammo) <= 0) or (nade.RequireStat and !self:GetValue(nade.RequireStat)) then
+        self:SelectGrenade()
+        return
+    end
+
+    if nade.Ammo and !(GetConVar("tacrp_infinitegrenades"):GetBool() and !nade.AdminOnly) then
         local ammo = self:GetOwner():GetAmmoCount(nade.Ammo)
 
         if ammo < 1 then return end
@@ -15,7 +20,7 @@ function SWEP:PrimeGrenade()
         self:GetOwner():SetAmmo(ammo - 1, nade.Ammo)
     end
 
-    local t = self:PlayAnimation("prime_grenade", self:GetValue("QuickNadeTimeMult"), true)
+    local t = self:PlayAnimation("prime_grenade", self:GetValue("QuickNadeTimeMult") / (nade.ThrowSpeed or 1), true)
 
     self:SetPrimedGrenade(true)
     self:ToggleBlindFire(false)
@@ -32,6 +37,10 @@ function SWEP:PrimeGrenade()
     if CLIENT then return end
 
     self.CurrentGrenade = self:GetGrenade()
+
+    if !nade.NoSounds then
+        self:EmitSound(nade.PullSound or ("TacRP/weapons/grenade/pullpin-" .. math.random(1, 2) .. ".wav"))
+    end
 end
 
 function SWEP:ThrowGrenade()
@@ -40,51 +49,66 @@ function SWEP:ThrowGrenade()
     local force = nade.ThrowForce
     local ent = nade.GrenadeEnt
 
-    if !self:GetOwner():KeyDown(IN_GRENADE1) and !self:GetOwner():KeyDown(IN_ATTACK2) then
+    local src = self:GetOwner():EyePos()
+    local ang = self:GetOwner():EyeAngles()
+    local spread = 0
+
+    local amount = 1
+
+    if !self:GetOwner():KeyDown(IN_GRENADE1) and !self:GetOwner():KeyDown(IN_ATTACK2) and !nade.OverhandOnly then
         self:PlayAnimation("throw_grenade_underhand", self:GetValue("QuickNadeTimeMult"), true, true)
 
-        force = force * 0.5
+        force = force / 3
+        ang:RotateAroundAxis(ang:Right(), 15)
+        if nade.UnderhandSpecial then
+            amount = math.random(2, 4)
+            spread = 0.15
+        end
     else
         self:PlayAnimation("throw_grenade", self:GetValue("QuickNadeTimeMult"), true, true)
     end
 
     if CLIENT then return end
 
-    local rocket = ents.Create(ent or "")
+    for i = 1, amount do
 
-    if !IsValid(rocket) then return end
+        local rocket = ents.Create(ent or "")
 
-    local src = self:GetOwner():EyePos()
-    local ang = self:GetOwner():EyeAngles()
+        if !IsValid(rocket) then return end
 
-    rocket:SetPos(src)
-    rocket:SetOwner(self:GetOwner())
-    rocket:SetAngles(ang)
-    rocket:Spawn()
+        local dispersion = Angle(math.Rand(-1, 1), math.Rand(-1, 1), 0)
+        dispersion = dispersion * spread * 36
 
-    local phys = rocket:GetPhysicsObject()
+        rocket:SetPos(src)
+        rocket:SetOwner(self:GetOwner())
+        rocket:SetAngles(ang + dispersion)
+        rocket:Spawn()
+        rocket:SetPhysicsAttacker(self:GetOwner(), 10)
 
-    if phys:IsValid() then
-        phys:ApplyForceCenter(ang:Forward() * force)
-        phys:AddAngleVelocity(VectorRand() * 1000)
-    end
+        local phys = rocket:GetPhysicsObject()
 
-    if nade.Spoon then
-        local mag = ents.Create("TacRP_droppedmag")
+        if phys:IsValid() then
+            phys:ApplyForceCenter((ang + dispersion):Forward() * force)
+            phys:AddAngleVelocity(VectorRand() * 1000)
+        end
 
-        if mag then
-            mag:SetPos(src)
-            mag:SetAngles(ang)
-            mag.Model = "models/weapons/tacint/flashbang_spoon.mdl"
-            mag.ImpactType = "spoon"
-            mag:SetOwner(self:GetOwner())
-            mag:Spawn()
+        if nade.Spoon then
+            local mag = ents.Create("TacRP_droppedmag")
 
-            local phys2 = mag:GetPhysicsObject()
+            if mag then
+                mag:SetPos(src)
+                mag:SetAngles(ang)
+                mag.Model = "models/weapons/tacint/flashbang_spoon.mdl"
+                mag.ImpactType = "spoon"
+                mag:SetOwner(self:GetOwner())
+                mag:Spawn()
 
-            if IsValid(phys2) then
-                phys2:ApplyForceCenter(ang:Forward() * force * 0.25 + VectorRand() * 50)
-                phys2:AddAngleVelocity(Vector(math.Rand(-300, 300), math.Rand(-300, 300), math.Rand(-300, 300)))
+                local phys2 = mag:GetPhysicsObject()
+
+                if IsValid(phys2) then
+                    phys2:ApplyForceCenter(ang:Forward() * force * 0.25 + VectorRand() * 50)
+                    phys2:AddAngleVelocity(Vector(math.Rand(-300, 300), math.Rand(-300, 300), math.Rand(-300, 300)))
+                end
             end
         end
     end
@@ -101,7 +125,7 @@ function SWEP:GetGrenadeIndex()
 end
 
 function SWEP:GetNextGrenade(ind)
-    local ind = ind or self:GetGrenadeIndex()
+    ind = ind or self:GetGrenadeIndex()
 
     ind = ind + 1
 
@@ -113,7 +137,7 @@ function SWEP:GetNextGrenade(ind)
 
     local nade = self:GetGrenade(ind)
 
-    if nade.Secret and self:GetOwner():GetAmmoCount(nade.Ammo) <= 0 then
+    if (nade.Secret and self:GetOwner():GetAmmoCount(nade.Ammo) <= 0) or (nade.RequireStat and !self:GetValue(nade.RequireStat)) then
         return self:GetNextGrenade(ind)
     end
 
@@ -146,7 +170,7 @@ function SWEP:SelectGrenade(index)
 
     local nade = self:GetGrenade()
 
-    if nade.Secret and self:GetOwner():GetAmmoCount(nade.Ammo) <= 0 then
+    if (nade.Secret and self:GetOwner():GetAmmoCount(nade.Ammo) <= 0) or (nade.RequireStat and !self:GetValue(nade.RequireStat)) then
         self:SelectGrenade()
     end
 end
@@ -159,7 +183,7 @@ end
 
 function SWEP:ThinkGrenade()
     if CLIENT then
-        if self:GetPrimedGrenade() and !IsValid(self.QuickNadeModel) and self:GetStartPrimedGrenadeTime() + 0.1 < CurTime() then
+        if self:GetPrimedGrenade() and !IsValid(self.QuickNadeModel) and self:GetStartPrimedGrenadeTime() + 0.1 < CurTime() and self:GetGrenade().Model then
             local nade = self:GetGrenade()
             local vm = self:GetVM()
 
