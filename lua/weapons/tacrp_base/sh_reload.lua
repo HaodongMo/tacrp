@@ -17,7 +17,7 @@ function SWEP:Reload()
     if self:StillWaiting(true) then return end
     if self:GetValue("ClipSize") <= 0 then return end
     if self:Clip1() >= self:GetValue("ClipSize") then return end
-    if self:Ammo1() <= 0 then return end
+    if self:Ammo1() <= 0 and !self:GetValue("InfiniteAmmo") then return end
 
     -- self:ScopeToggle(0)
     self:ToggleBlindFire(false)
@@ -86,17 +86,23 @@ function SWEP:DropMagazine()
 end
 
 function SWEP:RestoreClip(amt)
-    local reserve = self:Clip1() + self:Ammo1()
+    local reserve = self:GetInfiniteAmmo() and math.huge or (self:Clip1() + self:Ammo1())
 
     local lastclip1 = self:Clip1()
 
     self:SetClip1(math.min(math.min(self:Clip1() + amt, self:GetValue("ClipSize")), reserve))
 
-    reserve = reserve - self:Clip1()
-
-    self:GetOwner():SetAmmo(reserve, self.Primary.Ammo)
+    if !self:GetInfiniteAmmo() then
+        reserve = reserve - self:Clip1()
+        self:GetOwner():SetAmmo(reserve, self.Primary.Ammo)
+    end
 
     return self:Clip1() - lastclip1
+end
+
+function SWEP:Unload()
+    self:GetOwner():GiveAmmo(self:Clip1(), self.Primary.Ammo)
+    self:SetClip1(0)
 end
 
 function SWEP:EndReload()
@@ -144,4 +150,8 @@ function SWEP:ThinkReload()
     if self:GetReloading() and self:GetReloadFinishTime() < CurTime() then
         self:EndReload()
     end
+end
+
+function SWEP:GetInfiniteAmmo()
+    return GetConVar("tacrp_infiniteammo"):GetBool() or self:GetValue("InfiniteAmmo")
 end

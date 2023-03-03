@@ -1,13 +1,12 @@
 function SWEP:DoDeployAnimation()
-    if self:GetReloading() and !self:GetValue("ShotgunReload") then
-        if self:HasSequence("midreload") then
-            local t = self:PlayAnimation("midreload", self:GetValue("ReloadTimeMult"), true, true)
+    if self:GetReloading() and !self:GetValue("ShotgunReload") and self:HasSequence("midreload") then
+        local t = self:PlayAnimation("midreload", self:GetValue("ReloadTimeMult"), true, true)
 
-            self:SetTimer(t, function()
-                self:EndReload()
-            end)
-        end
+        self:SetTimer(t, function()
+            self:EndReload()
+        end)
     else
+        self:SetReloading(false)
         if self:GetValue("TryUnholster") then
             self:PlayAnimation("unholster", self:GetValue("DeployTimeMult"), true, true)
         else
@@ -77,6 +76,10 @@ function SWEP:Holster()
     self:KillTimers()
     self:ToggleBlindFire(false)
     self:GetOwner():SetFOV(0, 0.1)
+
+    if self:GetPrimedGrenade() then
+        return false
+    end
 
     local holster = self:GetValue("HolsterVisible")
     if holster then

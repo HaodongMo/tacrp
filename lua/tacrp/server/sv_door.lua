@@ -42,9 +42,12 @@ function TacRP.DoorBust(ent, vel, attacker)
         end)
 
         -- Make it not collide with players after a bit cause that's annoying
-        timer.Create("TacRP_DoorBust_" .. prop:EntIndex(), 3, 1, function()
+        timer.Create("TacRP_DoorBust_" .. prop:EntIndex(), 2, 1, function()
             if IsValid(prop) then
                 prop:SetCollisionGroup(COLLISION_GROUP_WEAPON)
+                local c = prop:GetColor()
+                prop:SetRenderMode(RENDERMODE_TRANSALPHA)
+                prop:SetColor(Color(c.r, c.g, c.b, c.a * 0.8))
             end
         end)
 

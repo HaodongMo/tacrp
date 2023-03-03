@@ -9,6 +9,8 @@ function SWEP:Attach(slot, att, silent)
     if !atttbl then return end
     if TacRP:PlayerGetAtts(self:GetOwner(), att) <= 0 then return end
 
+    local inf_old = self:GetValue("InfiniteAmmo")
+
     slottbl.Installed = att
 
     TacRP:PlayerTakeAtt(self:GetOwner(), att, 1)
@@ -43,6 +45,15 @@ function SWEP:Attach(slot, att, silent)
     if atttbl.CanToggle then
         self:SetTactical(true)
     end
+
+    local inf_new = self:GetValue("InfiniteAmmo")
+    if SERVER then
+        if inf_old and !inf_new then
+            self:SetClip1(0)
+        elseif inf_new and !inf_old then
+            self:Unload()
+        end
+    end
 end
 
 function SWEP:Detach(slot, silent)
@@ -52,6 +63,8 @@ function SWEP:Detach(slot, silent)
     if !self:CanDetach(slot) then return end
 
     TacRP:PlayerGiveAtt(self:GetOwner(), slottbl.Installed, 1)
+
+    local inf_old = self:GetValue("InfiniteAmmo")
 
     slottbl.Installed = nil
 
@@ -78,6 +91,15 @@ function SWEP:Detach(slot, silent)
     self.HookCache = {}
 
     self:SetBaseSettings()
+
+    local inf_new = self:GetValue("InfiniteAmmo")
+    if SERVER then
+        if inf_old and !inf_new then
+            self:SetClip1(0)
+        elseif inf_new and !inf_old then
+            self:Unload()
+        end
+    end
 end
 
 function SWEP:ToggleCustomize(on)

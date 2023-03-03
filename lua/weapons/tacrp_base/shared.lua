@@ -191,6 +191,8 @@ SWEP.AmmoPerShot = 1
 SWEP.ClipSize = 30
 SWEP.Ammo = "pistol"
 
+SWEP.InfiniteAmmo = false // do not consume reserve ammo
+
 SWEP.SupplyAmmoType = false // overrides clipsize/ammo for ammo pickups
 SWEP.SupplyAmmoAmount = false
 

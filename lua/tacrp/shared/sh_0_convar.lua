@@ -108,6 +108,10 @@ local conVars = {
         default = "1"
     },
     {
+        name = "infiniteammo",
+        default = "0"
+    },
+    {
         name = "ammonames",
         default = "1",
         client = true
@@ -196,6 +200,10 @@ local function menu_server_ti(panel)
     panel:AddControl("checkbox", {
         label = "Generate Attachment Entities",
         command = "TacRP_generateattentities"
+    })
+    panel:AddControl("checkbox", {
+        label = "Infinite Ammo",
+        command = "tacrp_infiniteammo"
     })
     panel:AddControl("checkbox", {
         label = "Enable Penetration",

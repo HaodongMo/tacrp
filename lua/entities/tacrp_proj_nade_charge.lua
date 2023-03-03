@@ -95,7 +95,7 @@ local mat = Material("sprites/light_glow02_add")
 function ENT:Draw()
     self:DrawModel()
 
-    if (self:GetMoveType() == MOVETYPE_NONE or IsValid(self:GetParent())) and math.ceil((CurTime() - self.SpawnTime) * (self:GetRemote() and 1 or 4)) % 2 == 1 then
+    if (self:GetRemote() or self:GetMoveType() == MOVETYPE_NONE or IsValid(self:GetParent())) and math.ceil((CurTime() - self.SpawnTime) * (self:GetRemote() and 1 or 4)) % 2 == 1 then
         render.SetMaterial(mat)
         render.DrawSprite(self:GetPos() + self:GetAngles():Up() * 7.5 + self:GetAngles():Right() * -4.5 + self:GetAngles():Forward() * 2, 8, 8, self:GetRemote() and clr_remote or clr_timed)
     end
