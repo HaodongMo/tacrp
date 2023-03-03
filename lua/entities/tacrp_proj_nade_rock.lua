@@ -58,6 +58,9 @@ ENT.ExtraModels = {
     "models/food/burger.mdl",
     "models/food/hotdog.mdl",
     "models/lamps/torch.mdl",
+    "models/player/items/humans/top_hat.mdl",
+    "models/dav0r/camera.mdl",
+    "models/dav0r/tnt/tnt.mdl",
     "models/maxofs2d/camera.mdl",
     "models/maxofs2d/companion_doll.mdl",
     "models/maxofs2d/cube_tool.mdl",
@@ -179,8 +182,11 @@ ENT.ExtraModels = {
 
 function ENT:Initialize()
     if SERVER then
-        if math.random() <= GetConVar("tacrp_rock_funny"):GetFloat() then
-            local mdl = self.ExtraModels[math.random(1, #self.ExtraModels)]
+        if util.IsValidModel(GetConVar("tacrp_rock_funny"):GetString()) then
+            self:SetModel(GetConVar("tacrp_rock_funny"):GetString())
+        elseif math.random() <= GetConVar("tacrp_rock_funny"):GetFloat() then
+            local i = math.min(GetConVar("tacrp_rock_funny"):GetFloat() > 1 and GetConVar("tacrp_rock_funny"):GetInt() - 1 or math.random(1, #self.ExtraModels), #self.ExtraModels)
+            local mdl = self.ExtraModels[i]
             self:SetModel(util.IsValidModel(mdl) and mdl or self.Model)
         else
             self:SetModel(self.Model)
