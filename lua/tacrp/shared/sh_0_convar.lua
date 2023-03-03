@@ -115,7 +115,22 @@ local conVars = {
         name = "ammonames",
         default = "1",
         client = true
-    }
+    },
+    {
+        name = "font1",
+        default = "",
+        client = true
+    },
+    {
+        name = "font2",
+        default = "",
+        client = true
+    },
+    {
+        name = "font3",
+        default = "",
+        client = true
+    },
 }
 
 local prefix = "tacrp_"

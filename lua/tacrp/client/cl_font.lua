@@ -23,8 +23,12 @@ local fonts_to_make = {
 
 local function generatefonts()
 
-    for _, font in pairs(fonts_to_make) do
+    for ind, font in pairs(fonts_to_make) do
         local fontname = string.Replace(font, " ", "_")
+
+        if GetConVar("tacrp_font" .. ind) and GetConVar("tacrp_font" .. ind):GetString() ~= "" then
+            font = GetConVar("tacrp_font" .. ind):GetString()
+        end
 
         for _, i in pairs(sizes_to_make) do
 
