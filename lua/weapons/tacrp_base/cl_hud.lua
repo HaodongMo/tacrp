@@ -66,14 +66,11 @@ local faceindex = 0
 function SWEP:DrawHUDBackground()
     self:DoScope()
 
-    // if scoped, draw a vignette effect around the screen
-
-    if self:GetSightDelta() > 0 then
-        local delta = self:Curve(self:GetSightDelta())
-        // surface.SetDrawColor(0, 0, 0, 255 * delta - 1)
-        // surface.SetMaterial(mat_vignette)
-        // surface.DrawTexturedRect(0, 0, ScrW(), ScrH())
-
+    // draw a vignette effect around the screen based on recoil
+    local recoil = self:GetRecoilAmount()
+    if recoil > 0 then
+        local recoil_pct = math.Clamp(recoil / self:GetValue("RecoilMaximum"), 0, 1)
+        local delta = self:Curve(recoil_pct)
         surface.SetDrawColor(0, 0, 0, 255 * delta)
         surface.SetMaterial(mat_vignette)
         surface.DrawTexturedRect(0, 0, ScrW(), ScrH())
