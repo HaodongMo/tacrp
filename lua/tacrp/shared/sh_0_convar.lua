@@ -285,17 +285,23 @@ local function menu_server_ti(panel)
         label = "Attachment Locking",
         command = "TacRP_lock_atts"
     })
-    panel:AddControl("checkbox", {
-        label = "Limit One Weapon Per Slot",
-        command = "tacrp_limitslots"
+    panel:AddControl("label", {
+        text = "In Locking mode, owning one attachment allows you to use it on multiple weapons."
     })
     panel:AddControl("checkbox", {
         label = "Lose Attachments On Death",
         command = "TacRP_loseattsondie"
     })
     panel:AddControl("checkbox", {
-        label = "Generate Attachment Entities",
+        label = "Attachment Entities in Spawnmenu",
         command = "TacRP_generateattentities"
+    })
+    panel:AddControl("checkbox", {
+        label = "One Weapon Per Slot",
+        command = "tacrp_limitslots"
+    })
+    panel:AddControl("label", {
+        text = "Slot limit only counts TacRP weapons in slots 2-5. Spawning new guns will delete old guns in the slot."
     })
     panel:AddControl("checkbox", {
         label = "Supply Boxes Resupply Grenades",
