@@ -10,12 +10,29 @@ SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 SWEP.SubCatTier = "4Common"
 SWEP.SubCatType = "3Submachine Gun"
 
-SWEP.Description = "Semi-automatic variant of a legendary submachine gun.\nUses reduced capacity magazines."
+SWEP.Description = "Semi-automatic model of a legendary submachine gun.\nUses reduced capacity magazines."
 
 SWEP.ViewModel = "models/weapons/tacint/v_mp5.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_mp5.mdl"
 
 SWEP.Slot = 3
+
+SWEP.ArcadeStats = {
+
+    Description = "Semi-automatic model of a legendary submachine gun. Fine tuned for precision shooting.",
+
+    Damage_Max = 15,
+    Damage_Min = 7,
+
+    Recoil_Kick = 1,
+    Spread = 0.001,
+
+    MoveSpeedMult = 0.9,
+    ShootingSpeedMult = 0.8,
+    SightedSpeedMult = 0.85,
+    MeleeSpeedMult = 1,
+    ReloadSpeedMult = 1,
+}
 
 SWEP.Firemode = 1
 SWEP.Firemodes = false

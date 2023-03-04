@@ -17,6 +17,23 @@ SWEP.WorldModel = "models/weapons/tacint/w_m4.mdl"
 
 SWEP.Slot = 3
 
+SWEP.ArcadeStats = {
+
+    Description = "Semi-automatic model of an ubiquitous American rifle. Fine tuned for precision shooting.",
+
+    Damage_Max = 22,
+    Damage_Min = 15,
+
+    Recoil_Kick = 1.5,
+    Spread = 0.001,
+
+    MoveSpeedMult = 0.85,
+    ShootingSpeedMult = 0.75,
+    SightedSpeedMult = 0.75,
+    MeleeSpeedMult = 1,
+    ReloadSpeedMult = 1,
+}
+
 SWEP.RPM = 500
 
 SWEP.Firemode = 1

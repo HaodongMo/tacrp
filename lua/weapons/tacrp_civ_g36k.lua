@@ -10,12 +10,30 @@ SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 SWEP.SubCatTier = "3Quality"
 SWEP.SubCatType = "6Marksman Rifle"
 
-SWEP.Description = "Semi-automatic variant of an iconic polymer rifle.\nUses reduced capacity magazines."
+SWEP.Description = "Semi-automatic model of an iconic polymer rifle.\nUses reduced capacity magazines."
 
 SWEP.ViewModel = "models/weapons/tacint/v_g36k_hq.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_g36k.mdl"
 
 SWEP.Slot = 3
+
+SWEP.ArcadeStats = {
+
+    Description = "Semi-automatic model of an iconic polymer rifle. Fine tuned for precision shooting.",
+
+    Damage_Max = 22,
+    Damage_Min = 18,
+
+    Recoil_Kick = 1,
+    Spread = 0.001,
+
+    MoveSpeedMult = 0.85,
+    ShootingSpeedMult = 0.75,
+    SightedSpeedMult = 0.75,
+    MeleeSpeedMult = 1,
+    ReloadSpeedMult = 1,
+}
+
 
 SWEP.Firemode = 1
 SWEP.Firemodes = false

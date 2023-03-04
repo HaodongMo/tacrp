@@ -17,7 +17,24 @@ SWEP.WorldModel = "models/weapons/tacint/w_p90.mdl"
 
 SWEP.Slot = 3
 
-SWEP.RPM = 600
+SWEP.ArcadeStats = {
+
+    Description = "Semi-automatic model of a futuristic PDW. Fine tuned for precision shooting.",
+
+    Damage_Max = 16,
+    Damage_Min = 14,
+
+    Recoil_Kick = 0.5,
+    Spread = 0.001,
+
+    MoveSpeedMult = 0.9,
+    ShootingSpeedMult = 0.8,
+    SightedSpeedMult = 0.85,
+    MeleeSpeedMult = 1,
+    ReloadSpeedMult = 1,
+}
+
+SWEP.RPM = 700
 
 SWEP.Firemode = 1
 SWEP.Firemodes = false
