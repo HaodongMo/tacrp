@@ -322,15 +322,22 @@ function SWEP:DrawHUDBackground()
         surface.DrawText(".")
         surface.DrawText(spread2)
 
-        local recoil = self:GetRecoilAmount()
         local recoil_pct = math.Round(recoil / self:GetValue("RecoilMaximum") * 100)
+        local recoil_txt = tostring(recoil_pct)
         surface.SetTextPos(x + ScreenScale(22), y + ScreenScale(11.5))
-        if recoil_pct >= 100 and math.sin(SysTime() * 20) > 0 then
+        surface.SetTextColor(0, 0, 0)
+
+        if recoil_pct == 0 then
+            recoil_txt = "000"
             surface.SetTextColor(0, 0, 0, 100)
-        else
-            surface.SetTextColor(0, 0, 0)
+        elseif recoil_pct < 10 then
+            recoil_txt = "00" .. recoil_txt
+        elseif recoil_pct < 100 then
+            recoil_txt = "0" .. recoil_txt
+        elseif math.sin(SysTime() * 30) > 0 then
+            surface.SetTextColor(0, 0, 0, 100)
         end
-        surface.DrawText(recoil_pct)
+        surface.DrawText(recoil_txt)
 
         local last_fire = math.Clamp((self:GetNextPrimaryFire() - CurTime()) / (60 / self:GetValue("RPM")), 0, 1)
         surface.SetDrawColor(255, 255, 255, last_fire * 255)
