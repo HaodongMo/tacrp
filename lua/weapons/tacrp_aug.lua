@@ -15,7 +15,7 @@ SWEP.Description = "Burst bullpup rifle with a generous magazine capacity and gr
 SWEP.ViewModel = "models/weapons/tacint/v_aug.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_aug.mdl"
 
-SWEP.Slot = 3
+SWEP.Slot = 2
 
 SWEP.ArcadeStats = {
 

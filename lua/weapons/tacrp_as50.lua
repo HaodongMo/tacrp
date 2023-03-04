@@ -15,7 +15,7 @@ SWEP.Description = "Semi-automatic anti-materiel rifle that can easily decimate 
 SWEP.ViewModel = "models/weapons/tacint/v_as50_hq.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_as50.mdl"
 
-SWEP.Slot = 3
+SWEP.Slot = 2
 
 SWEP.ArcadeStats = {
 

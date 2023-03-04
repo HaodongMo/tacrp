@@ -15,7 +15,7 @@ SWEP.Description = "Light machine gun that offers huge volume of fire. Despite i
 SWEP.ViewModel = "models/weapons/tacint/v_mg4.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_mg4.mdl"
 
-SWEP.Slot = 3
+SWEP.Slot = 2
 
 SWEP.ArcadeStats = {
     MoveSpeedMult = 0.75,

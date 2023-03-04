@@ -15,7 +15,7 @@ SWEP.Description = "Burst rifle with minimal recoil."
 SWEP.ViewModel = "models/weapons/tacint/v_k1a_2.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_k1a.mdl"
 
-SWEP.Slot = 3
+SWEP.Slot = 2
 
 SWEP.ArcadeStats = {
 

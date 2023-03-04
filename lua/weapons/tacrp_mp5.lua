@@ -15,7 +15,7 @@ SWEP.Description = "Well-balanced submachine gun known for its precision."
 SWEP.ViewModel = "models/weapons/tacint/v_mp5.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_mp5.mdl"
 
-SWEP.Slot = 3
+SWEP.Slot = 2
 
 SWEP.ArcadeStats = {
     MoveSpeedMult = 0.9,

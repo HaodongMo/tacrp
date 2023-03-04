@@ -18,7 +18,7 @@ SWEP.NoStatBox = false
 
 SWEP.NPCUsable = true
 
-SWEP.Slot = 2
+SWEP.Slot = 1
 
 SWEP.ArcadeStats = {}
 

@@ -15,7 +15,7 @@ SWEP.Description = "Assault rifle with all around excellent performance."
 SWEP.ViewModel = "models/weapons/tacint/v_sg551.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_sg551.mdl"
 
-SWEP.Slot = 3
+SWEP.Slot = 2
 
 SWEP.ArcadeStats = {
 

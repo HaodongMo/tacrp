@@ -15,7 +15,7 @@ SWEP.Description = "Automatic machine pistol with incredible close range power."
 SWEP.ViewModel = "models/weapons/tacint/v_xd45.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_xd45.mdl"
 
-SWEP.Slot = 2
+SWEP.Slot = 1
 
 SWEP.ArcadeStats = {
 

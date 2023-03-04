@@ -15,7 +15,7 @@ SWEP.Description = "Light machine pistol with very good recoil and spread."
 SWEP.ViewModel = "models/weapons/tacint/v_skorpion.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_skorpion.mdl"
 
-SWEP.Slot = 2
+SWEP.Slot = 1
 
 SWEP.ArcadeStats = {
 

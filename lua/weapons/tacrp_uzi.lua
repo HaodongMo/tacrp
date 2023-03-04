@@ -15,7 +15,7 @@ SWEP.Description = "Balanced machine pistol with a high yet controllable rate of
 SWEP.ViewModel = "models/weapons/tacint/v_uzi.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_uzi.mdl"
 
-SWEP.Slot = 2
+SWEP.Slot = 1
 
 SWEP.ArcadeStats = {
 

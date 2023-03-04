@@ -15,7 +15,7 @@ SWEP.Description = "Tactical pistol with low fire rate but above average damage 
 SWEP.ViewModel = "models/weapons/tacint_extras/v_usp.mdl"
 SWEP.WorldModel = "models/weapons/tacint_extras/w_usp.mdl"
 
-SWEP.Slot = 2
+SWEP.Slot = 1
 
 SWEP.ArcadeStats = {
 

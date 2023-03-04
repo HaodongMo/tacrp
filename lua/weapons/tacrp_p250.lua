@@ -15,7 +15,7 @@ SWEP.Description = "Powerful handgun that exchanges capacity for damage and prec
 SWEP.ViewModel = "models/weapons/tacint/v_p250.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_p250.mdl"
 
-SWEP.Slot = 2
+SWEP.Slot = 1
 
 SWEP.ArcadeStats = {
     MoveSpeedMult = 1,

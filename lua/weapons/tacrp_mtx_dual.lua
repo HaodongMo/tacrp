@@ -15,7 +15,7 @@ SWEP.Description = "An indulgent pair of high capacity, high damage pistols.\nWi
 SWEP.ViewModel = "models/weapons/tacint/v_mtx_dual.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_mtx.mdl"
 
-SWEP.Slot = 2
+SWEP.Slot = 1
 
 SWEP.ArcadeStats = {
     MoveSpeedMult = 1,

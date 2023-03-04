@@ -15,7 +15,7 @@ SWEP.Description = "Hunting rifle with fast cycle speed but low range.\nEquipped
 SWEP.ViewModel = "models/weapons/tacint/v_spr.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_spr.mdl"
 
-SWEP.Slot = 3
+SWEP.Slot = 2
 
 SWEP.ArcadeStats = {
 

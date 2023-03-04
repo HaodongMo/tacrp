@@ -15,7 +15,7 @@ SWEP.Description = "Semi-automatic sniper rifle with a lethal headshot.\nEquippe
 SWEP.ViewModel = "models/weapons/tacint/v_m14.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_m14.mdl"
 
-SWEP.Slot = 3
+SWEP.Slot = 2
 
 SWEP.ArcadeStats = {
 

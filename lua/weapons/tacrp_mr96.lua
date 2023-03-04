@@ -15,7 +15,7 @@ SWEP.Description = "Magnum revolver with high recoil and incredible stopping pow
 SWEP.ViewModel = "models/weapons/tacint/v_mr96.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_mr96.mdl"
 
-SWEP.Slot = 2
+SWEP.Slot = 1
 
 SWEP.ArcadeStats = {
     MoveSpeedMult = 1,

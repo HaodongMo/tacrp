@@ -15,7 +15,7 @@ SWEP.Description = "Italian pistol with above average range and accuracy."
 SWEP.ViewModel = "models/weapons/tacint/v_vertec.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_vertec.mdl"
 
-SWEP.Slot = 2
+SWEP.Slot = 1
 
 SWEP.ArcadeStats = {
 

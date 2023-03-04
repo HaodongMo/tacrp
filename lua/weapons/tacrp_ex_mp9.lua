@@ -17,7 +17,7 @@ SWEP.Description = "Compact polymer submachine gun packing lots of firepower in 
 SWEP.ViewModel = "models/weapons/tacint_extras/v_mp9.mdl"
 SWEP.WorldModel = "models/weapons/tacint_extras/w_mp9.mdl"
 
-SWEP.Slot = 3
+SWEP.Slot = 2
 
 SWEP.ArcadeStats = {
     MoveSpeedMult = 0.9,

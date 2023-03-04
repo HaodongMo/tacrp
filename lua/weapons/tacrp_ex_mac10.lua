@@ -15,7 +15,7 @@ SWEP.Description = "A bullet hose best used for point blank spray-and-pray."
 SWEP.ViewModel = "models/weapons/tacint_extras/v_mac10.mdl"
 SWEP.WorldModel = "models/weapons/tacint_extras/w_mac10.mdl"
 
-SWEP.Slot = 2
+SWEP.Slot = 1
 
 SWEP.ArcadeStats = {
 

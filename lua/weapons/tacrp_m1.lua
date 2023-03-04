@@ -15,7 +15,7 @@ SWEP.Description = "Lightweight rifle with no stock or optic mount.\nGood hip-fi
 SWEP.ViewModel = "models/weapons/tacint/v_m1.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_m1.mdl"
 
-SWEP.Slot = 3
+SWEP.Slot = 2
 
 SWEP.ArcadeStats = {
 

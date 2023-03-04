@@ -15,7 +15,7 @@ SWEP.Description = "Pistol grip shotgun with high recoil and mobility."
 SWEP.ViewModel = "models/weapons/tacint/v_tgs12_2.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_tgs12.mdl"
 
-SWEP.Slot = 3
+SWEP.Slot = 2
 
 SWEP.ArcadeStats = {
 

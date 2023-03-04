@@ -15,7 +15,7 @@ SWEP.Description = "Assault rifle with integral scope and high muzzle velocity. 
 SWEP.ViewModel = "models/weapons/tacint/v_g36k_hq.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_g36k.mdl"
 
-SWEP.Slot = 3
+SWEP.Slot = 2
 
 SWEP.ArcadeStats = {
 

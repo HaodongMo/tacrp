@@ -15,7 +15,7 @@ SWEP.Description = "Subcompact personal defense weapon firing a rifle cartridge.
 SWEP.ViewModel = "models/weapons/tacint/v_pdw.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_pdw.mdl"
 
-SWEP.Slot = 3
+SWEP.Slot = 2
 
 SWEP.ArcadeStats = {
 

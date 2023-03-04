@@ -18,7 +18,7 @@ SWEP.WorldModel = ""
 SWEP.NoRanger = true
 SWEP.NoStatBox = true
 
-SWEP.Slot = 3
+SWEP.Slot = 2
 
 SWEP.NPCUsable = false
 

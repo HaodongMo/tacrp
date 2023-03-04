@@ -15,7 +15,7 @@ SWEP.Description = "Well-rounded high capacity handgun."
 SWEP.ViewModel = "models/weapons/tacint/v_p2000.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_p2000.mdl"
 
-SWEP.Slot = 2
+SWEP.Slot = 1
 
 SWEP.ArcadeStats = {
 

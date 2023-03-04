@@ -15,7 +15,7 @@ SWEP.Description = "Close range SMG with extremely high fire rate. Advanced reco
 SWEP.ViewModel = "models/weapons/tacint/v_superv.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_superv.mdl"
 
-SWEP.Slot = 3
+SWEP.Slot = 2
 
 SWEP.ArcadeStats = {
 

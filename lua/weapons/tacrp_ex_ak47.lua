@@ -15,7 +15,7 @@ SWEP.Description = "High damage assault rifle.\nAn insurgent's greatest ally and
 SWEP.ViewModel = "models/weapons/tacint_extras/v_ak47.mdl"
 SWEP.WorldModel = "models/weapons/tacint_extras/w_ak47.mdl"
 
-SWEP.Slot = 3
+SWEP.Slot = 2
 
 SWEP.ArcadeStats = {
     MoveSpeedMult = 0.85,

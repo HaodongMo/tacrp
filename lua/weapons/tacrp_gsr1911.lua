@@ -15,7 +15,7 @@ SWEP.Description = "High damage pistol with low range and capacity.\nA tactical 
 SWEP.ViewModel = "models/weapons/tacint/v_gsr1911.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_gsr1911.mdl"
 
-SWEP.Slot = 2
+SWEP.Slot = 1
 
 SWEP.ArcadeStats = {
 

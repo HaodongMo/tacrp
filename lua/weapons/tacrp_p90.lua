@@ -15,7 +15,7 @@ SWEP.Description = "Bullpup personal defense weapon with a generous top-loaded m
 SWEP.ViewModel = "models/weapons/tacint/v_p90.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_p90.mdl"
 
-SWEP.Slot = 3
+SWEP.Slot = 2
 
 SWEP.ArcadeStats = {
     MoveSpeedMult = 0.9,

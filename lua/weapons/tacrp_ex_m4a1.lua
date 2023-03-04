@@ -15,7 +15,7 @@ SWEP.Description = "A true American classic boasting high fire rate and balanced
 SWEP.ViewModel = "models/weapons/tacint_extras/v_m4a1.mdl"
 SWEP.WorldModel = "models/weapons/tacint_extras/w_m4a1.mdl"
 
-SWEP.Slot = 3
+SWEP.Slot = 2
 
 SWEP.ArcadeStats = {
     MoveSpeedMult = 0.85,

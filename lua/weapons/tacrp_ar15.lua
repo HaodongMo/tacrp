@@ -15,7 +15,7 @@ SWEP.Description = "Semi-automatic model of an ubiquitous American rifle.\nUses 
 SWEP.ViewModel = "models/weapons/tacint/v_m4.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_m4.mdl"
 
-SWEP.Slot = 3
+SWEP.Slot = 2
 
 SWEP.ArcadeStats = {
 

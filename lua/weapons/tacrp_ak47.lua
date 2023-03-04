@@ -15,7 +15,7 @@ SWEP.Description = "Automatic rifle with poor sustained fire capabilities.\nDesp
 SWEP.ViewModel = "models/weapons/tacint/v_ak47.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_ak47.mdl"
 
-SWEP.Slot = 3
+SWEP.Slot = 2
 
 SWEP.ArcadeStats = {
 

@@ -15,7 +15,7 @@ SWEP.Description = "Compact personal defense weapon with emphasis on close quart
 SWEP.ViewModel = "models/weapons/tacint/v_mp7.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_mp7.mdl"
 
-SWEP.Slot = 3
+SWEP.Slot = 2
 
 SWEP.ArcadeStats = {
     MoveSpeedMult = 0.9,

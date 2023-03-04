@@ -29,7 +29,7 @@ SWEP.ArcadeStats = {
     MeleeSpeedMult = 0.9,
 }
 
-SWEP.Slot = 3
+SWEP.Slot = 2
 
 // misc. shooting
 

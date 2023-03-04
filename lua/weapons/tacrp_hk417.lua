@@ -15,7 +15,7 @@ SWEP.Description = "Battle rifle with superb damage, fire rate and precision. Ca
 SWEP.ViewModel = "models/weapons/tacint/v_hk417.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_hk417.mdl"
 
-SWEP.Slot = 3
+SWEP.Slot = 2
 
 SWEP.ArcadeStats = {
 

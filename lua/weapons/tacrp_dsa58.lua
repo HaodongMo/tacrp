@@ -15,7 +15,7 @@ SWEP.Description = "Battle rifle with slow fire rate but very high damage."
 SWEP.ViewModel = "models/weapons/tacint/v_dsa58.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_dsa58.mdl"
 
-SWEP.Slot = 3
+SWEP.Slot = 2
 
 SWEP.ArcadeStats = {
 

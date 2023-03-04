@@ -15,7 +15,7 @@ SWEP.Description = "Modernized sniper rifle lethal on a upper torso shot.\nEquip
 SWEP.ViewModel = "models/weapons/tacint/v_uratio.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_uratio.mdl"
 
-SWEP.Slot = 3
+SWEP.Slot = 2
 
 SWEP.ArcadeStats = {
 

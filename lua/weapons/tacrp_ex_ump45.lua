@@ -15,7 +15,7 @@ SWEP.Description = "SMG designed to be a cheaper alternative to the MP5.\nHigh d
 SWEP.ViewModel = "models/weapons/tacint_extras/v_ump45.mdl"
 SWEP.WorldModel = "models/weapons/tacint_extras/w_ump45.mdl"
 
-SWEP.Slot = 3
+SWEP.Slot = 2
 
 SWEP.ArcadeStats = {
     MoveSpeedMult = 0.9,

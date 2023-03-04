@@ -15,7 +15,7 @@ SWEP.Description = "Semi-automatic variation of a futuristic PDW.\nUses reduced 
 SWEP.ViewModel = "models/weapons/tacint/v_p90.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_p90.mdl"
 
-SWEP.Slot = 3
+SWEP.Slot = 2
 
 SWEP.ArcadeStats = {
 

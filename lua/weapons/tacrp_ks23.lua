@@ -15,7 +15,7 @@ SWEP.Description = "Made from recycled aircraft gun barrels, this shotgun is har
 SWEP.ViewModel = "models/weapons/tacint/v_ks23.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_ks23.mdl"
 
-SWEP.Slot = 3
+SWEP.Slot = 2
 
 // "ballistics"
 

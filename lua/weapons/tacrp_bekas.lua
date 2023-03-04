@@ -15,7 +15,7 @@ SWEP.Description = "Accurate hunting shotgun with a low fire rate."
 SWEP.ViewModel = "models/weapons/tacint/v_bekas.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_bekas.mdl"
 
-SWEP.Slot = 3
+SWEP.Slot = 2
 
 SWEP.ArcadeStats = {
     MoveSpeedMult = 0.9,
