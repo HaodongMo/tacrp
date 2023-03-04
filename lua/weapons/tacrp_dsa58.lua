@@ -18,6 +18,12 @@ SWEP.WorldModel = "models/weapons/tacint/w_dsa58.mdl"
 SWEP.Slot = 3
 
 SWEP.ArcadeStats = {
+
+    Damage_Max = 45,
+    Damage_Min = 25,
+
+    RPM = 360,
+
     MoveSpeedMult = 0.8,
     ShootingSpeedMult = 0.6,
     SightedSpeedMult = 0.75,
@@ -34,7 +40,7 @@ SWEP.Range_Max = 6000
 SWEP.Penetration = 20
 
 SWEP.BodyDamageMultipliers = {
-    [HITGROUP_HEAD] = 2.5,
+    [HITGROUP_HEAD] = 3,
     [HITGROUP_CHEST] = 1.3,
     [HITGROUP_STOMACH] = 1,
     [HITGROUP_LEFTARM] = 1,
@@ -53,11 +59,9 @@ SWEP.Firemodes = {
     1
 }
 
-SWEP.RPM = 450
+SWEP.RPM = 400
 
 SWEP.Spread = 0.001
-
-
 
 SWEP.RecoilPerShot = 1
 SWEP.RecoilMaximum = 10

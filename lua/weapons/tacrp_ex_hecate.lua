@@ -18,6 +18,13 @@ SWEP.WorldModel = "models/weapons/tacint_extras/w_hecate.mdl"
 SWEP.Slot = 3
 
 SWEP.ArcadeStats = {
+
+    Damage_Max = 80,
+    Damage_Min = 120,
+
+    Range_Min = 200,
+    Range_Max = 2000,
+
     MoveSpeedMult = 0.7,
     ShootingSpeedMult = 0.5,
     SightedSpeedMult = 0.5,
@@ -32,6 +39,7 @@ SWEP.Damage_Min = 125 // damage at maximum range
 SWEP.Range_Min = 800 // distance for which to maintain maximum damage
 SWEP.Range_Max = 8000 // distance at which we drop to minimum damage
 SWEP.Penetration = 30 // units of metal this weapon can penetrate
+
 SWEP.BodyDamageMultipliers = {
     [HITGROUP_HEAD] = 5, // nobody is surviving this
     [HITGROUP_CHEST] = 1.25,

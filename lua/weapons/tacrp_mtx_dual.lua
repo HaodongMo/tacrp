@@ -10,7 +10,7 @@ SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 SWEP.SubCatTier = "1Elite"
 SWEP.SubCatType = "1Sidearm"
 
-SWEP.Description = "An elite pair of high capacity, high damage pistols.\nWith firepower like this, who needs aiming?"
+SWEP.Description = "An indulgent pair of high capacity, high damage pistols.\nWith firepower like this, who needs aiming?"
 
 SWEP.ViewModel = "models/weapons/tacint/v_mtx_dual.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_mtx.mdl"
@@ -27,10 +27,10 @@ SWEP.ArcadeStats = {
 
 // "ballistics"
 
-SWEP.Damage_Max = 25
+SWEP.Damage_Max = 20
 SWEP.Damage_Min = 10
-SWEP.Range_Min = 1600 // distance for which to maintain maximum damage
-SWEP.Range_Max = 5000 // distance at which we drop to minimum damage
+SWEP.Range_Min = 1000 // distance for which to maintain maximum damage
+SWEP.Range_Max = 3000 // distance at which we drop to minimum damage
 SWEP.Penetration = 1 // units of metal this weapon can penetrate
 
 SWEP.MuzzleVelocity = 9500

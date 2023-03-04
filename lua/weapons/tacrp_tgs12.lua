@@ -18,9 +18,12 @@ SWEP.WorldModel = "models/weapons/tacint/w_tgs12.mdl"
 SWEP.Slot = 3
 
 SWEP.ArcadeStats = {
-    MoveSpeedMult = 0.9,
-    ShootingSpeedMult = 0.75,
-    SightedSpeedMult = 0.9,
+
+    ClipSize = 4,
+
+    MoveSpeedMult = 0.95,
+    ShootingSpeedMult = 0.85,
+    SightedSpeedMult = 0.95,
     MeleeSpeedMult = 1,
     ReloadSpeedMult = 1,
 }

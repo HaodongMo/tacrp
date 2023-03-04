@@ -18,6 +18,12 @@ SWEP.WorldModel = "models/weapons/tacint/w_sg551.mdl"
 SWEP.Slot = 3
 
 SWEP.ArcadeStats = {
+
+    Damage_Max = 24,
+    Damage_Min = 12,
+
+    ClipSize = 20,
+
     MoveSpeedMult = 0.85,
     ShootingSpeedMult = 0.75,
     SightedSpeedMult = 0.75,
@@ -29,7 +35,7 @@ SWEP.ArcadeStats = {
 
 SWEP.Damage_Max = 28
 SWEP.Damage_Min = 18
-SWEP.Range_Min = 3500 // distance for which to maintain maximum damage
+SWEP.Range_Min = 2000 // distance for which to maintain maximum damage
 SWEP.Range_Max = 5500 // distance at which we drop to minimum damage
 SWEP.Penetration = 2 // units of metal this weapon can penetrate
 

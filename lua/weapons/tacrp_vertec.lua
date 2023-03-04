@@ -18,6 +18,10 @@ SWEP.WorldModel = "models/weapons/tacint/w_vertec.mdl"
 SWEP.Slot = 2
 
 SWEP.ArcadeStats = {
+
+    Damage_Max = 15,
+    Damage_Min = 9,
+
     MoveSpeedMult = 1,
     ShootingSpeedMult = 1,
     SightedSpeedMult = 1,
@@ -66,7 +70,7 @@ SWEP.RecoilFirstShotMult = 1
 
 SWEP.RecoilVisualKick = 2.5
 
-SWEP.RecoilKick = 5
+SWEP.RecoilKick = 4
 
 SWEP.RecoilSpreadPenalty = 0.0016
 

@@ -18,9 +18,13 @@ SWEP.WorldModel = "models/weapons/tacint/w_skorpion.mdl"
 SWEP.Slot = 2
 
 SWEP.ArcadeStats = {
-    MoveSpeedMult = 0.95,
-    ShootingSpeedMult = 0.8,
-    SightedSpeedMult = 0.9,
+
+    Damage_Max = 13,
+    Damage_Min = 5,
+
+    MoveSpeedMult = 1,
+    ShootingSpeedMult = 0.9,
+    SightedSpeedMult = 1,
     MeleeSpeedMult = 1,
     ReloadSpeedMult = 1,
 }

@@ -137,7 +137,10 @@ function SWEP:CreateCustomizeHUD()
         surface.DrawText(ammo_txt)
 
         if self.SubCatTier and self.SubCatType then
-            local type_txt = string.sub(self.SubCatTier, 2) .. " " .. string.sub(self.SubCatType, 2)
+            local type_txt = string.sub(self.SubCatType, 2)
+            if !GetConVar("tacrp_arcade"):GetBool() then
+                type_txt = string.sub(self.SubCatTier, 2) .. " " .. type_txt
+            end
             surface.SetFont("TacRP_Myriad_Pro_12")
             local type_w = surface.GetTextSize(type_txt)
 

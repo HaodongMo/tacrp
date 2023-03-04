@@ -271,7 +271,7 @@ local function menu_balance_ti(panel)
         command = "tacrp_arcade"
     })
     panel:AddControl("label", {
-        text = "Arcade mode tweaks weapon attributes and significantly increases mobility on all weapons. Recommended for Sandbox."
+        text = "Arcade mode tweaks weapons to be similar in strength to each other and significantly increases mobility on all weapons. Recommended for Sandbox."
     })
 
     panel:AddControl("checkbox", {

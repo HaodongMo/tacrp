@@ -18,6 +18,12 @@ SWEP.WorldModel = "models/weapons/tacint_extras/w_glock.mdl"
 SWEP.Slot = 2
 
 SWEP.ArcadeStats = {
+
+    Damage_Max = 14,
+    Damage_Min = 5,
+
+    RecoilKick = 3,
+
     MoveSpeedMult = 1,
     ShootingSpeedMult = 1,
     SightedSpeedMult = 1,

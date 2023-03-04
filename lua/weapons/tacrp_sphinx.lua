@@ -18,6 +18,12 @@ SWEP.WorldModel = "models/weapons/tacint/w_sphinx.mdl"
 SWEP.Slot = 2
 
 SWEP.ArcadeStats = {
+
+    Damage_Max = 14,
+    Damage_Min = 7,
+
+    RecoilKick = 3,
+
     MoveSpeedMult = 1,
     ShootingSpeedMult = 1,
     SightedSpeedMult = 1,
@@ -29,8 +35,8 @@ SWEP.ArcadeStats = {
 
 SWEP.Damage_Max = 20
 SWEP.Damage_Min = 10
-SWEP.Range_Min = 2000 // distance for which to maintain maximum damage
-SWEP.Range_Max = 5000 // distance at which we drop to minimum damage
+SWEP.Range_Min = 1000 // distance for which to maintain maximum damage
+SWEP.Range_Max = 4000 // distance at which we drop to minimum damage
 SWEP.Penetration = 3 // units of metal this weapon can penetrate
 
 SWEP.MuzzleVelocity = 9500
@@ -52,10 +58,10 @@ SWEP.Firemode = 1
 
 SWEP.RPM = 750
 
-SWEP.Spread = 0.002
+SWEP.Spread = 0.0012
 
 SWEP.RecoilPerShot = 1
-SWEP.RecoilMaximum = 9
+SWEP.RecoilMaximum = 8
 SWEP.RecoilResetTime = 0.15
 SWEP.RecoilDissipationRate = 18
 SWEP.RecoilFirstShotMult = 1
@@ -64,7 +70,7 @@ SWEP.RecoilVisualKick = 1.5
 
 SWEP.RecoilKick = 3.5
 
-SWEP.RecoilSpreadPenalty = 0.0025 // extra spread per one unit of recoil
+SWEP.RecoilSpreadPenalty = 0.002 // extra spread per one unit of recoil
 
 SWEP.CanBlindFire = true
 

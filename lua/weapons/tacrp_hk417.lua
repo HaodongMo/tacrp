@@ -10,7 +10,7 @@ SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 SWEP.SubCatTier = "1Elite"
 SWEP.SubCatType = "6Marksman Rifle"
 
-SWEP.Description = "Battle rifle with superb damage, range and precision. Capable of automatic fire, although it is very unstable."
+SWEP.Description = "Battle rifle with superb damage, fire rate and precision. Capable of automatic fire, although it is very unstable."
 
 SWEP.ViewModel = "models/weapons/tacint/v_hk417.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_hk417.mdl"
@@ -18,6 +18,10 @@ SWEP.WorldModel = "models/weapons/tacint/w_hk417.mdl"
 SWEP.Slot = 3
 
 SWEP.ArcadeStats = {
+
+    Damage_Max = 40,
+    Damage_Min = 20,
+
     MoveSpeedMult = 0.8,
     ShootingSpeedMult = 0.6,
     SightedSpeedMult = 0.75,
@@ -29,8 +33,8 @@ SWEP.ArcadeStats = {
 
 SWEP.Damage_Max = 44
 SWEP.Damage_Min = 32
-SWEP.Range_Min = 2500 // distance for which to maintain maximum damage
-SWEP.Range_Max = 5000 // distance at which we drop to minimum damage
+SWEP.Range_Min = 1500 // distance for which to maintain maximum damage
+SWEP.Range_Max = 6000 // distance at which we drop to minimum damage
 SWEP.Penetration = 12 // units of metal this weapon can penetrate
 
 SWEP.BodyDamageMultipliers = {

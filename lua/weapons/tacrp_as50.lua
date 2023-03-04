@@ -18,6 +18,13 @@ SWEP.WorldModel = "models/weapons/tacint/w_as50.mdl"
 SWEP.Slot = 3
 
 SWEP.ArcadeStats = {
+
+    Damage_Max = 70,
+    Damage_Min = 100,
+
+    Range_Min = 500,
+    Range_Max = 2500,
+
     MoveSpeedMult = 0.7,
     ShootingSpeedMult = 0.5,
     SightedSpeedMult = 0.5,
@@ -34,7 +41,7 @@ SWEP.Range_Max = 6000 // distance at which we drop to minimum damage
 SWEP.Penetration = 24 // units of metal this weapon can penetrate
 SWEP.BodyDamageMultipliers = {
     [HITGROUP_HEAD] = 5, // nobody is surviving this
-    [HITGROUP_CHEST] = 1,
+    [HITGROUP_CHEST] = 1.25,
     [HITGROUP_STOMACH] = 1,
     [HITGROUP_LEFTARM] = 1,
     [HITGROUP_RIGHTARM] = 1,

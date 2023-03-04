@@ -18,6 +18,12 @@ SWEP.WorldModel = "models/weapons/tacint/w_amd65.mdl"
 SWEP.Slot = 3
 
 SWEP.ArcadeStats = {
+
+    Damage_Max = 32,
+    Damage_Min = 14,
+
+    RecoilKick = 6,
+
     MoveSpeedMult = 0.85,
     ShootingSpeedMult = 0.75,
     SightedSpeedMult = 0.75,
@@ -70,7 +76,7 @@ SWEP.RecoilVisualKick = 2
 
 SWEP.RecoilKick = 5
 
-SWEP.RecoilSpreadPenalty = 0.0015
+SWEP.RecoilSpreadPenalty = 0.0025
 
 SWEP.CanBlindFire = true
 

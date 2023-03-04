@@ -22,7 +22,7 @@ ENT.AudioLoop = "TacRP/weapons/rpg7/rocket_flight-1.wav"
 ENT.SmokeTrail = true
 
 function ENT:Impact(data, collider)
-    if self.SpawnTime + 0.1 > CurTime() and !self.NPCDamage then
+    if self.SpawnTime + 0.15 > CurTime() and !self.NPCDamage then
         local ang = data.OurOldVelocity:Angle()
         local fx = EffectData()
         fx:SetOrigin(data.HitPos)
@@ -47,8 +47,9 @@ function ENT:Impact(data, collider)
             prop:SetAngles(self:GetAngles())
             prop:SetModel("models/weapons/tacint/rpg7_shrapnel_p" .. i .. ".mdl")
             prop:Spawn()
-            prop:SetCollisionGroup(COLLISION_GROUP_DEBRIS)
             prop:GetPhysicsObject():SetVelocityInstantaneous(data.OurNewVelocity * 0.5 + VectorRand() * 75)
+            prop:SetCollisionGroup(COLLISION_GROUP_DEBRIS)
+
             SafeRemoveEntityDelayed(prop, 3)
         end
 

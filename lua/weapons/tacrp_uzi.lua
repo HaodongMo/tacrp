@@ -10,7 +10,7 @@ SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 SWEP.SubCatTier = "3Quality"
 SWEP.SubCatType = "2Machine Pistol"
 
-SWEP.Description = "Machine pistol with a high rate of fire while maintaining decent recoil control."
+SWEP.Description = "Balanced machine pistol with a high yet controllable rate of fire."
 
 SWEP.ViewModel = "models/weapons/tacint/v_uzi.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_uzi.mdl"
@@ -18,6 +18,10 @@ SWEP.WorldModel = "models/weapons/tacint/w_uzi.mdl"
 SWEP.Slot = 2
 
 SWEP.ArcadeStats = {
+
+    Damage_Max = 15,
+    Damage_Min = 5,
+
     MoveSpeedMult = 0.95,
     ShootingSpeedMult = 0.8,
     SightedSpeedMult = 0.9,

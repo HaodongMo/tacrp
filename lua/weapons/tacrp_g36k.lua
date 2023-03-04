@@ -18,6 +18,9 @@ SWEP.WorldModel = "models/weapons/tacint/w_g36k.mdl"
 SWEP.Slot = 3
 
 SWEP.ArcadeStats = {
+
+    RecoilKick = 1.5,
+
     MoveSpeedMult = 0.85,
     ShootingSpeedMult = 0.75,
     SightedSpeedMult = 0.75,

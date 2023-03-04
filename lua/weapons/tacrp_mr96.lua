@@ -10,7 +10,7 @@ SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 SWEP.SubCatTier = "2Premium"
 SWEP.SubCatType = "1Sidearm"
 
-SWEP.Description = "Premium revolver with high recoil and incredible stopping power.\nDoes increased damage to the head and upper chest."
+SWEP.Description = "Magnum revolver with high recoil and incredible stopping power. Accurate, but hard to fire rapidly."
 
 SWEP.ViewModel = "models/weapons/tacint/v_mr96.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_mr96.mdl"
@@ -27,9 +27,9 @@ SWEP.ArcadeStats = {
 
 // "ballistics"
 
-SWEP.Damage_Max = 100 / 2 // damage at minimum range
-SWEP.Damage_Min = 100 / 4 // damage at maximum range
-SWEP.Range_Min = 1000 // distance for which to maintain maximum damage
+SWEP.Damage_Max = 50 // damage at minimum range
+SWEP.Damage_Min = 25 // damage at maximum range
+SWEP.Range_Min = 400 // distance for which to maintain maximum damage
 SWEP.Range_Max = 4000 // distance at which we drop to minimum damage
 SWEP.Penetration = 6 // units of metal this weapon can penetrate
 

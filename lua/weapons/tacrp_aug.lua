@@ -10,7 +10,6 @@ SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 SWEP.SubCatTier = "3Quality"
 SWEP.SubCatType = "4Assault Rifle"
 
-// Tier 2
 SWEP.Description = "Burst bullpup rifle with a generous magazine capacity and great handling."
 
 SWEP.ViewModel = "models/weapons/tacint/v_aug.mdl"
@@ -19,6 +18,10 @@ SWEP.WorldModel = "models/weapons/tacint/w_aug.mdl"
 SWEP.Slot = 3
 
 SWEP.ArcadeStats = {
+
+    Damage_Max = 20,
+    Damage_Min = 12,
+
     MoveSpeedMult = 0.85,
     ShootingSpeedMult = 0.75,
     SightedSpeedMult = 0.85,

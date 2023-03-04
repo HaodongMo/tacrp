@@ -29,8 +29,8 @@ SWEP.ArcadeStats = {
 
 SWEP.Damage_Max = 22
 SWEP.Damage_Min = 10
-SWEP.Range_Min = 2500 // distance for which to maintain maximum damage
-SWEP.Range_Max = 6000 // distance at which we drop to minimum damage
+SWEP.Range_Min = 1200 // distance for which to maintain maximum damage
+SWEP.Range_Max = 4000 // distance at which we drop to minimum damage
 SWEP.Penetration = 3 // units of metal this weapon can penetrate
 
 SWEP.MuzzleVelocity = 11000
@@ -66,9 +66,9 @@ SWEP.RecoilFirstShotMult = 1
 
 SWEP.RecoilVisualKick = 2
 
-SWEP.RecoilKick = 7
+SWEP.RecoilKick = 5
 
-SWEP.RecoilSpreadPenalty = 0.004
+SWEP.RecoilSpreadPenalty = 0.003
 
 SWEP.CanBlindFire = true
 

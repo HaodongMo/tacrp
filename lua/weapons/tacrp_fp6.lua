@@ -19,7 +19,7 @@ SWEP.Slot = 3
 
 SWEP.ArcadeStats = {
     MoveSpeedMult = 0.9,
-    ShootingSpeedMult = 0.65,
+    ShootingSpeedMult = 0.8,
     SightedSpeedMult = 0.9,
     MeleeSpeedMult = 1,
     ReloadSpeedMult = 1,
@@ -27,19 +27,19 @@ SWEP.ArcadeStats = {
 
 // "ballistics"
 
-SWEP.Damage_Max = 100 / 6 // damage at minimum range
-SWEP.Damage_Min = 100 / 10 // damage at maximum range
-SWEP.Range_Min = 750 // distance for which to maintain maximum damage
-SWEP.Range_Max = 3000 // distance at which we drop to minimum damage
+SWEP.Damage_Max = 15
+SWEP.Damage_Min = 5
+SWEP.Range_Min = 200 // distance for which to maintain maximum damage
+SWEP.Range_Max = 2500 // distance at which we drop to minimum damage
 SWEP.Penetration = 1 // units of metal this weapon can penetrate
 SWEP.Num = 8
 
 SWEP.MuzzleVelocity = 9000
 
 SWEP.BodyDamageMultipliers = {
-    [HITGROUP_HEAD] = 2,
-    [HITGROUP_CHEST] = 1.5,
-    [HITGROUP_STOMACH] = 1.25,
+    [HITGROUP_HEAD] = 1.25,
+    [HITGROUP_CHEST] = 1,
+    [HITGROUP_STOMACH] = 1,
     [HITGROUP_LEFTARM] = 1,
     [HITGROUP_RIGHTARM] = 1,
     [HITGROUP_LEFTLEG] = 0.9,
@@ -55,11 +55,11 @@ SWEP.FiremodeName = "Pump-Action" // only used externally for firemode name dist
 
 SWEP.RPM = 75
 
-SWEP.Spread = 0.02
+SWEP.Spread = 0.025
 
 SWEP.ShootTimeMult = 0.8
 
-SWEP.HipFireSpreadPenalty = 0
+SWEP.HipFireSpreadPenalty = 0.01
 SWEP.MidAirSpreadPenalty = 0
 
 SWEP.ScopedSpreadPenalty = 0

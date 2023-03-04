@@ -18,6 +18,12 @@ SWEP.WorldModel = "models/weapons/tacint/w_ak47.mdl"
 SWEP.Slot = 3
 
 SWEP.ArcadeStats = {
+
+    Damage_Max = 22,
+    Damage_Min = 13,
+
+    RecoilKick = 2,
+
     MoveSpeedMult = 0.85,
     ShootingSpeedMult = 0.75,
     SightedSpeedMult = 0.75,

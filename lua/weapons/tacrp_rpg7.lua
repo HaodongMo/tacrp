@@ -46,8 +46,8 @@ SWEP.Spread = 0.01
 
 SWEP.RecoilPerShot = 1
 SWEP.RecoilMaximum = 1
-SWEP.RecoilResetTime = 0.1// time after you stop shooting for recoil to start dissipating
-SWEP.RecoilDissipationRate = 10
+SWEP.RecoilResetTime = 0.2// time after you stop shooting for recoil to start dissipating
+SWEP.RecoilDissipationRate = 1
 SWEP.RecoilFirstShotMult = 1 // multiplier for the first shot's recoil amount
 
 SWEP.RecoilVisualKick = 3
@@ -55,7 +55,7 @@ SWEP.RecoilVisualShake = 0.2
 
 SWEP.RecoilKick = 25
 
-SWEP.RecoilSpreadPenalty = 0.35 // extra spread per one unit of recoil
+SWEP.RecoilSpreadPenalty = 0 // extra spread per one unit of recoil
 
 SWEP.CanBlindFire = true
 
@@ -67,8 +67,8 @@ SWEP.SightedSpeedMult = 0.1
 SWEP.MeleeSpeedMult = 0.5
 SWEP.ReloadSpeedMult = 0.1
 
-SWEP.AimDownSightsTime = 0.5
-SWEP.SprintToFireTime = 0.5 // multiplies how long it takes to recover from sprinting
+SWEP.AimDownSightsTime = 0.6
+SWEP.SprintToFireTime = 0.8 // multiplies how long it takes to recover from sprinting
 
 // hold types
 
