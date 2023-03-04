@@ -1,6 +1,6 @@
 ATT.PrintName = "Gun Bag"
 ATT.Icon = Material("entities/tacrp_dufflebag.png", "mips smooth")
-ATT.Description = ""
+ATT.Description = "Hide the gun in a bag so you don't cause mass panic."
 ATT.Pros = {"Conceal weapon in bag"}
 // ATT.Cons = {"Slower draw speed"}
 
@@ -16,4 +16,4 @@ ATT.HolsterAng = Angle(10, 90, 90)
 
 // ATT.Mult_DeployTimeMult = 1.25
 
-ATT.Ignore = false
+ATT.Ignore = true
