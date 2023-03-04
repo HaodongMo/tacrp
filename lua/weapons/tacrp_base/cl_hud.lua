@@ -31,7 +31,7 @@ function SWEP:DoDrawCrosshair(x, y)
     end
 
     local u, r, f = dir:Up(), dir:Right(), dir:Forward()
-    local oa = self:GetFreeAimOffset() -- + self:GetSwayAngles()
+    local oa = self:GetFreeAimOffset()
     dir:RotateAroundAxis(u, oa.y)
     dir:RotateAroundAxis(r, -oa.p)
 
@@ -115,10 +115,10 @@ function SWEP:DrawHUDBackground()
 
     // draw a vignette effect around the screen based on recoil
     local recoil = self:GetRecoilAmount()
-    if recoil > 0 then
+    if recoil > 0 and GetConVar("tacrp_vignette"):GetBool() then
         local recoil_pct = math.Clamp(recoil / self:GetValue("RecoilMaximum"), 0, 1) ^ 1.5
         local delta = self:Curve(recoil_pct)
-        surface.SetDrawColor(0, 0, 0, 200 * delta)
+        surface.SetDrawColor(0, 0, 0, 100 * delta)
         surface.SetMaterial(mat_vignette)
         surface.DrawTexturedRect(0, 0, ScrW(), ScrH())
     end

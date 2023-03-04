@@ -157,6 +157,11 @@ local conVars = {
         name = "crosshair",
         default = "1",
     },
+    {
+        name = "vignette",
+        default = "1",
+        client = true,
+    },
 }
 
 local prefix = "tacrp_"
@@ -166,7 +171,7 @@ for _, var in pairs(conVars) do
 
     if var.client and CLIENT then
         CreateClientConVar(convar_name, var.default, true)
-    else
+    elseif !var.client then
         local flags = FCVAR_ARCHIVE
         if var.replicated then
             flags = flags + FCVAR_REPLICATED
@@ -225,6 +230,13 @@ local function menu_client_ti(panel)
     panel:AddControl("checkbox", {
         label = "Show Backup HUD",
         command = "tacrp_minhud"
+    })
+    panel:AddControl("checkbox", {
+        label = "Recoil Vignette",
+        command = "tacrp_vignette"
+    })
+    panel:AddControl("label", {
+        text = "Shows vignette based on intensity of accumulated recoil."
     })
     panel:AddControl("checkbox", {
         label = "Draw Holstered Weapons",
