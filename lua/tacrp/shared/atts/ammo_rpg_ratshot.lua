@@ -7,4 +7,5 @@ ATT.Cons = {"No explosion"}
 
 ATT.Category = "ammo_rpg"
 
-ATT.ShootEnt = "tacrp_proj_rpg7_ratshot"
+ATT.Override_ShootEnt = "tacrp_proj_rpg7_ratshot"
+ATT.Mult_ShootEntForce = 0.5

@@ -16,13 +16,16 @@ ENT.ExplodeOnDamage = false // projectile explodes when it takes damage.
 ENT.ExplodeUnderwater = true
 
 ENT.Delay = 0
+ENT.SafetyFuse = 0.15
 
 ENT.AudioLoop = "TacRP/weapons/rpg7/rocket_flight-1.wav"
 
 ENT.SmokeTrail = true
 
+ENT.FlareColor = Color(255, 255, 255)
+
 function ENT:Impact(data, collider)
-    if self.SpawnTime + 0.15 > CurTime() and !self.NPCDamage then
+    if self.SpawnTime + self.SafetyFuse > CurTime() and !self.NPCDamage then
         local ang = data.OurOldVelocity:Angle()
         local fx = EffectData()
         fx:SetOrigin(data.HitPos)
