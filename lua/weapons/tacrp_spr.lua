@@ -18,6 +18,13 @@ SWEP.WorldModel = "models/weapons/tacint/w_spr.mdl"
 SWEP.Slot = 3
 
 SWEP.ArcadeStats = {
+
+    Damage_Max = 55,
+    Damage_Min = 80,
+
+    Range_Min = 100,
+    Range_Max = 1000,
+
     MoveSpeedMult = 0.8,
     ShootingSpeedMult = 0.65,
     SightedSpeedMult = 0.75,
