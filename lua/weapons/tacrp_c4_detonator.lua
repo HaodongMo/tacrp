@@ -141,7 +141,7 @@ function SWEP:PrimaryAttack()
 end
 
 function SWEP:SecondaryAttack()
-    self:GetOwner():SetNWInt("ti_nade", 2)
+    self:GetOwner():SetNWInt("ti_nade", 1)
     self:PrimeGrenade()
 end
 
