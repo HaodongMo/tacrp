@@ -10,14 +10,14 @@ ENT.IsRocket = true // projectile has a booster and will not drop.
 
 ENT.InstantFuse = true // projectile is armed immediately after firing.
 ENT.RemoteFuse = false // allow this projectile to be triggered by remote detonator.
-ENT.ImpactFuse = false // projectile explodes on impact.
+ENT.ImpactFuse = true // projectile explodes on impact.
 ENT.TimeFuse = false
 
 ENT.ExplodeOnDamage = false // projectile explodes when it takes damage.
 ENT.ExplodeUnderwater = true
 
-ENT.Delay = 0.25
-ENT.SafetyFuse = 0.075
+ENT.Delay = 0.15
+ENT.SafetyFuse = 0
 
 ENT.AudioLoop = "TacRP/weapons/rpg7/rocket_flight-1.wav"
 
@@ -28,24 +28,34 @@ ENT.FlareColor = Color(75, 175, 255)
 
 DEFINE_BASECLASS(ENT.Base)
 
+function ENT:PhysicsCollide(data, collider)
+    if self:Impact(data, collider) then
+        return
+    end
+
+    BaseClass.PhysicsCollide(self, data, collider)
+end
+
 function ENT:Think()
-    -- if self.SpawnTime + self.SafetyFuse < CurTime() and (self.NextTraceTime or 0) < CurTime() then
-    --     self.NextTraceTime = CurTime() + 0.1
+    --[[]
+    if self.SpawnTime + self.SafetyFuse < CurTime() and (self.NextTraceTime or 0) < CurTime() then
+        self.NextTraceTime = CurTime() + 0.1
 
-    --     local dir = self:GetVelocity():GetNormalized()
-    --     local deg = math.Clamp(1.5 - dir:Cross(Vector(0, 0, -1)):Length(), 0.5, 1)
+        local dir = self:GetVelocity():GetNormalized()
+        local deg = math.Clamp(1.5 - dir:Cross(Vector(0, 0, -1)):Length(), 0.5, 1)
 
-    --     local tr = util.TraceHull({
-    --         start = self:GetPos(),
-    --         endpos = self:GetPos() + dir * (1024 * deg),
-    --         filter = self,
-    --         mins = Vector(-16, -16, -8),
-    --         maxs = Vector(16, 16, 8)
-    --     })
-    --     if tr.Hit then
-    --         self:PreDetonate()
-    --     end
-    -- end
+        local tr = util.TraceHull({
+            start = self:GetPos(),
+            endpos = self:GetPos() + dir * (1024 * deg),
+            filter = self,
+            mins = Vector(-16, -16, -8),
+            maxs = Vector(16, 16, 8)
+        })
+        if tr.Hit then
+            self:PreDetonate()
+        end
+    end
+    ]]
 
     BaseClass.Think(self)
 end
@@ -101,6 +111,22 @@ function ENT:Detonate()
         fx:SetRadius(16)
         fx:SetNormal(dir)
         util.Effect("Sparks", fx)
+
+        local tr = util.TraceHull({
+            start = self:GetPos(),
+            endpos = self:GetPos() + dir * 2048,
+            filter = self,
+            mins = Vector(-16, -16, -8),
+            maxs = Vector(16, 16, 8)
+        })
+        fx:SetMagnitude(4)
+        fx:SetScale(2)
+        fx:SetRadius(2)
+        fx:SetNormal(dir)
+        for i = 1, math.floor(tr.Fraction * 10) do
+            fx:SetOrigin(tr.StartPos + tr.Normal * (i / 10) * 2048)
+            util.Effect("Sparks", fx)
+        end
     end
 
     self:FireBullets({
@@ -121,16 +147,16 @@ function ENT:Detonate()
     dmg:SetDamageType(DMG_BULLET + DMG_BLAST)
     dmg:SetInflictor(self)
     dmg:SetDamageForce(self:GetVelocity() * 100)
-    for _, ent in pairs(ents.FindInCone(self:GetPos(), dir, 1024, 0.707)) do
+    for _, ent in pairs(ents.FindInCone(self:GetPos(), dir, 2048, 0.707)) do
         local tr = util.QuickTrace(self:GetPos(), ent:WorldSpaceCenter() - self:GetPos(), self)
         if tr.Entity == ent then
             dmg:SetDamagePosition(self:GetPos())
-            dmg:SetDamage(120 * math.Rand(0.75, 1) * tr.Fraction)
+            dmg:SetDamage(150 * math.Rand(0.75, 1) * Lerp(tr.Fraction, 1, 0.25))
             ent:TakeDamageInfo(dmg)
         end
     end
 
-    util.BlastDamage(self, attacker, self:GetPos(), 128, 100)
+    util.BlastDamage(self, attacker, self:GetPos(), 256, 100)
 
     self:EmitSound("TacRP/weapons/rpg7/explode.wav", 125, 100)
     self:EmitSound("physics/metal/metal_box_break1.wav", 100, 200)
