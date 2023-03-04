@@ -926,5 +926,9 @@ function SWEP:DrawWeaponSelection(x, y, w, h, a)
 end
 
 function SWEP:RangeUnitize(range)
-    return tostring(math.Round(range)) .. " HU"
+    if GetConVar("tacrp_metricunit"):GetBool() then
+        return tostring(math.Round(range * TacRP.HUToM)) .. "m"
+    else
+        return tostring(math.Round(range)) .. " HU"
+    end
 end

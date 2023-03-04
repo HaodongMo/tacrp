@@ -187,6 +187,11 @@ local conVars = {
         max = 1,
         replicated = true,
     },
+    {
+        name = "metricunit",
+        default = "0",
+        client = true,
+    },
 }
 
 local prefix = "tacrp_"
@@ -255,6 +260,10 @@ local function menu_client_ti(panel)
     panel:AddControl("checkbox", {
         label = "Show Backup HUD",
         command = "tacrp_minhud"
+    })
+    panel:AddControl("checkbox", {
+        label = "Use Meters instead of HU",
+        command = "tacrp_metricunit"
     })
     panel:AddControl("checkbox", {
         label = "Recoil Vignette",
