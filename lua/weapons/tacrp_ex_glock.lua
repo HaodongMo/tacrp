@@ -10,7 +10,7 @@ SWEP.Category = "Tactical RP" // "Tactical RP (Extras)"
 SWEP.SubCatTier = "4Common"
 SWEP.SubCatType = "1Sidearm"
 
-SWEP.Description = "Polymer pistol with large capacity but poor range."
+SWEP.Description = "Polymer pistol with large capacity and fire rate."
 
 SWEP.ViewModel = "models/weapons/tacint_extras/v_glock.mdl"
 SWEP.WorldModel = "models/weapons/tacint_extras/w_glock.mdl"
@@ -19,9 +19,10 @@ SWEP.Slot = 2
 
 SWEP.ArcadeStats = {
 
-    Damage_Max = 14,
+    Damage_Max = 13,
     Damage_Min = 5,
 
+    RPM = 750,
     RecoilKick = 3,
 
     MoveSpeedMult = 1,
@@ -56,7 +57,7 @@ SWEP.BodyDamageMultipliers = {
 
 SWEP.Firemode = 1
 
-SWEP.RPM = 550
+SWEP.RPM = 650
 
 SWEP.Spread = 0.005
 

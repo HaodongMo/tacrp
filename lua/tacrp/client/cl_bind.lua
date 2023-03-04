@@ -21,10 +21,21 @@ hook.Add("PlayerBindPress", "TacRP_Binds", function(ply, bind, pressed, code)
     --     return true
     -- end
 
-    if bind == "+menu_context" and !LocalPlayer():KeyDown(IN_USE)  then
-        net.Start("TacRP_togglecustomize")
-        net.WriteBool(!wpn:GetCustomize())
-        net.SendToServer()
+    if bind == "+menu_context" and !LocalPlayer():KeyDown(IN_USE) then
+        if !LocalPlayer():KeyDown(IN_ATTACK2) then
+            net.Start("TacRP_togglecustomize")
+            net.WriteBool(!wpn:GetCustomize())
+            net.SendToServer()
+        elseif !GetConVar("tacrp_togglepeek"):GetBool() then
+            net.Start("tacrp_togglepeek")
+            net.WriteBool(true) -- release is handled in sh_scope
+            net.SendToServer()
+        else
+            net.Start("tacrp_togglepeek")
+            net.WriteBool(!wpn:GetPeeking())
+            net.SendToServer()
+        end
+
         return true
     end
 

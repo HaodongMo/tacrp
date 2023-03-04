@@ -1,6 +1,7 @@
 local customizedelta = 0
 local sightdelta = 0
 local sprintdelta = 0
+local peekdelta = 0
 local blindfiredelta, blindfirecornerdelta = 0, 0
 local freeaim_p, freeaim_y = 0, 0
 
@@ -82,15 +83,28 @@ function SWEP:GetViewModelPosition(pos, ang)
         sightdelta = m_appor(sightdelta, 0, FT / self:GetValue("AimDownSightsTime"))
     end
 
+    if self:GetScopeLevel() > 0 and self:GetPeeking() then
+        peekdelta = m_appor(peekdelta, 1, FT / 0.2)
+    else
+        peekdelta = m_appor(peekdelta, 0, FT / 0.2)
+    end
+
     local curvedsightdelta = self:Curve(sightdelta)
+    local curvedpeekdelta = self:Curve(peekdelta)
 
     -- cor_val = Lerp(sightdelta, cor_val, 1)
+
+    local ppos = Vector(self.PeekPos) * curvedpeekdelta
+    local pang = Angle(self.PeekAng) * curvedpeekdelta
 
     if sightdelta > 0 then
         local sightpos, sightang = self:GetSightPositions()
 
-        LerpMod(offsetpos, sightpos, curvedsightdelta)
-        LerpMod(offsetang, sightang, curvedsightdelta, true)
+        LerpMod(offsetpos, sightpos + ppos, curvedsightdelta)
+        LerpMod(offsetang, sightang + pang, curvedsightdelta, true)
+
+        -- LerpMod(offsetang, sightpos + ppos, curvedpeekdelta)
+        -- LerpMod(offsetang, sightang + pang, curvedpeekdelta, true)
     end
 
     local eepos, eeang = self:GetExtraSightPosition()
@@ -98,8 +112,8 @@ function SWEP:GetViewModelPosition(pos, ang)
     local im = self:GetValue("SightMidPoint")
 
     local midpoint = curvedsightdelta * math.cos(curvedsightdelta * (math.pi / 2))
-    local joffset = (im and im.Pos or Vector(0, 0, 0)) * midpoint
-    local jaffset = (im and im.Ang or Angle(0, 0, 0)) * midpoint
+    local joffset = (im and im.Pos or Vector(0, 0, 0) + ppos) * midpoint
+    local jaffset = (im and im.Ang or Angle(0, 0, 0) + pang) * midpoint
 
     LerpMod(extra_offsetpos, -eepos + joffset, curvedsightdelta)
     LerpMod(extra_offsetang, -eeang + jaffset, curvedsightdelta)

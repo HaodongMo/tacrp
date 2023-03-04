@@ -1,6 +1,6 @@
-ATT.PrintName = "Folded Stock"
+ATT.PrintName = "Fold Stock"
 ATT.Icon = Material("entities/tacrp_att_acc_foldstock.png", "mips smooth")
-ATT.Description = "Keep stock folded, improving handling at the cost of recoil."
+ATT.Description = "Keep stock folded, improving handling significantly at the cost of recoil."
 ATT.Pros = {"Handling", "Draw Speed"}
 ATT.Cons = {"Recoil", "Sway"}
 

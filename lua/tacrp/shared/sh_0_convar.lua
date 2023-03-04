@@ -32,6 +32,11 @@ local conVars = {
         client = true
     },
     {
+        name = "togglepeek",
+        default = "1",
+        client = true
+    },
+    {
         name = "bodydamagecancel",
         default = "1",
         replicated = true
@@ -187,9 +192,12 @@ Safe: +use & +attack2 (E + MOUSE2)
 
 Customize: +menu_context (C)
 
+Peek: +menu_context (C) while aiming
+
 Throw Grenade: +grenade1 (Not bound by default! Do 'bind g +grenade1' in console!)
 
-Change Grenade: +grenade2 (Not bound by default! Do 'bind h +grenade2' in console!)]]
+Change Grenade: +grenade2 (Not bound by default! Do 'bind h +grenade2' in console!)
+]]
 
 local function menu_guide_ti(panel)
     panel:AddControl("label", {
@@ -205,6 +213,10 @@ local function menu_client_ti(panel)
     panel:AddControl("checkbox", {
         label = "Auto-Save Weapon",
         command = "TacRP_autosave"
+    })
+    panel:AddControl("checkbox", {
+        label = "Toggle Peeking",
+        command = "tacrp_togglepeek"
     })
     panel:AddControl("checkbox", {
         label = "Show HUD",

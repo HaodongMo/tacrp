@@ -15,6 +15,18 @@ util.AddNetworkString("tacrp_container")
 util.AddNetworkString("tacrp_toggletactical")
 util.AddNetworkString("tacrp_doorbust")
 
+util.AddNetworkString("tacrp_togglepeek")
+
+net.Receive("tacrp_togglepeek", function(len, ply)
+    local bf = net.ReadBool()
+
+    local wpn = ply:GetActiveWeapon()
+
+    if !wpn or !IsValid(wpn) or !wpn.ArcticTacRP then return end
+
+    wpn:SetPeeking(bf)
+end)
+
 net.Receive("tacrp_toggleblindfire", function(len, ply)
     local bf = net.ReadBool()
 

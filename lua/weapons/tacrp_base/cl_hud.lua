@@ -5,13 +5,13 @@ local function GetFOVAcc(wep)
     cam.End3D()
 
     local gau = ( (ScrH() / 2) - lool.y )
-    gaA = math.Approach(gaA, gau, (ScrH() / 1.5) * FrameTime())
+    gaA = math.Approach(gaA, gau, (ScrH() / 2) * FrameTime())
 
     return gaA
 end
 
 function SWEP:ShouldDrawCrosshair()
-    return GetConVar("tacrp_crosshair"):GetBool() and !self:GetReloading() and !self:GetCustomize() and !self:SprintLock() and self:GetSightAmount() <= 0.5
+    return GetConVar("tacrp_crosshair"):GetBool() and !self:GetReloading() and !self:GetCustomize() and !self:SprintLock() and (self:GetSightAmount() <= 0.5 or self:GetPeeking())
 end
 
 function SWEP:DoDrawCrosshair(x, y)

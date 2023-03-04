@@ -141,6 +141,9 @@ SWEP.CustomizePos = Vector(5, 0, -6)
 SWEP.SightAng = Angle(0, 0, 0)
 SWEP.SightPos = Vector(0, 1, 1)
 
+SWEP.PeekAng = Angle(0, 0, -7)
+SWEP.PeekPos = Vector(3, 2, -1.5)
+
 SWEP.HolsterVisible = false
 SWEP.HolsterSlot = TacRP.HOLSTER_SLOT_BACK
 SWEP.HolsterPos = Vector(0, 0, 0)
@@ -406,6 +409,7 @@ function SWEP:SetupDataTables()
     self:NetworkVar("Bool", 6, "BlindFireCorner")
     self:NetworkVar("Bool", 7, "NWTactical")
     self:NetworkVar("Bool", 8, "Charge")
+    self:NetworkVar("Bool", 9, "Peeking")
 
     self:NetworkVar("Angle", 0, "FreeAimAngle")
     self:NetworkVar("Angle", 1, "LastAimAngle")

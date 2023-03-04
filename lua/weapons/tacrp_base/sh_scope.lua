@@ -44,7 +44,7 @@ end
 function SWEP:GetShouldFOV()
     local level = self:GetScopeLevel()
 
-    if level > 0 then
+    if level > 0 and !self:GetPeeking() then
         local fov = self:GetValue("ScopeFOV")
 
         fov = Lerp(level / self:GetValue("ScopeLevels"), 90, fov)
@@ -58,7 +58,7 @@ end
 function SWEP:IsInScope()
     local sightdelta = self:Curve(self:GetSightDelta())
 
-    return (self:GetScopeLevel() > 0 and sightdelta > 0.1) or (sightdelta > 0.9)
+    return (SERVER or !self:GetPeeking()) and ((self:GetScopeLevel() > 0 and sightdelta > 0.1) or (sightdelta > 0.9))
 end
 
 function SWEP:DoScope()
@@ -134,6 +134,10 @@ function SWEP:ThinkSights()
 
     self:SetSightDelta(amt)
 
+    if CLIENT then
+        self:ThinkPeek()
+    end
+
     if sighted and !self:GetOwner():KeyDown(IN_ATTACK2) then
         self:ScopeToggle(0)
     elseif !sighted and self:GetOwner():KeyDown(IN_ATTACK2) then
@@ -147,6 +151,11 @@ function SWEP:GetMagnification()
     local level = self:GetScopeLevel()
 
     if level > 0 then
+
+        if self:GetPeeking() then
+            return 1.25
+        end
+
         mag = 90 / self:GetValue("ScopeFOV")
 
         mag = Lerp(level / self:GetValue("ScopeLevels"), 1, mag)
@@ -160,5 +169,13 @@ function SWEP:AdjustMouseSensitivity()
 
     if mag > 1 then
         return 1 / mag
+    end
+end
+
+function SWEP:ThinkPeek()
+    if IsFirstTimePredicted() and !GetConVar("tacrp_togglepeek"):GetBool() and self:GetPeeking() ~= input.IsKeyDown(input.GetKeyCode(input.LookupBinding("menu_context") or "???")) then
+        net.Start("tacrp_togglepeek")
+        net.WriteBool(!self:GetPeeking())
+        net.SendToServer()
     end
 end
