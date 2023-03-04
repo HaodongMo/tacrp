@@ -41,6 +41,17 @@ function ENT:Impact(data, collider)
             data.HitEntity:TakeDamageInfo(dmginfo)
         end
 
+        for i = 1, 4 do
+            local prop = ents.Create("prop_physics")
+            prop:SetPos(self:GetPos())
+            prop:SetAngles(self:GetAngles())
+            prop:SetModel("models/weapons/tacint/rpg7_shrapnel_p" .. i .. ".mdl")
+            prop:Spawn()
+            prop:SetCollisionGroup(COLLISION_GROUP_DEBRIS)
+            prop:GetPhysicsObject():SetVelocityInstantaneous(data.OurNewVelocity * 0.5 + VectorRand() * 75)
+            SafeRemoveEntityDelayed(prop, 3)
+        end
+
         self:Remove()
         return true
     end
@@ -50,8 +61,8 @@ function ENT:Detonate()
     if self.NPCDamage then
         util.BlastDamage(self, self:GetOwner(), self:GetPos(), 350, 100)
     else
-        util.BlastDamage(self, self:GetOwner(), self:GetPos(), 100, 750)
-        util.BlastDamage(self, self:GetOwner(), self:GetPos(), 400, 200)
+        util.BlastDamage(self, self:GetOwner(), self:GetPos(), 128, 750)
+        util.BlastDamage(self, self:GetOwner(), self:GetPos(), 400, 150)
     end
 
     local fx = EffectData()

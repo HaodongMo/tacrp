@@ -213,7 +213,7 @@ function SWEP:ThinkGrenade()
         end
     end
 
-    if self:GetOwner():KeyDown(IN_GRENADE1) then
+    if self:GetOwner():KeyPressed(IN_GRENADE1) then
         self:PrimeGrenade()
     elseif self:GetOwner():KeyPressed(IN_GRENADE2) then
         self:SelectGrenade()

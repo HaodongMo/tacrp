@@ -20,7 +20,7 @@ ENT.ExplodeUnderwater = false
 
 ENT.Defusable = false
 
-ENT.Delay = 3
+ENT.Delay = 2
 
 ENT.PickupAmmo = "ti_charge"
 

@@ -16,7 +16,7 @@ ENT.ExplodeOnDamage = false // projectile explodes when it takes damage.
 ENT.ExplodeUnderwater = true
 ENT.ExplodeOnImpact = true
 
-ENT.Delay = 0.25
+ENT.Delay = 0.5
 
 ENT.ExplodeSounds = {
     "TacRP/weapons/grenade/flashbang_explode-1.wav",

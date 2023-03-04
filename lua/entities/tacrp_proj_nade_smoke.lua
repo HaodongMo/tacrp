@@ -15,7 +15,7 @@ ENT.ImpactFuse = false // projectile explodes on impact.
 ENT.ExplodeOnDamage = false // projectile explodes when it takes damage.
 ENT.ExplodeUnderwater = false
 
-ENT.Delay = 3.5
+ENT.Delay = 2
 
 ENT.BounceSounds = {
     "TacRP/weapons/grenade/smoke_bounce-1.wav",
