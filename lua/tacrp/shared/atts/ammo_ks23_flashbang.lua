@@ -2,7 +2,7 @@ ATT.PrintName = "Zvezda Shell"
 ATT.Icon = Material("entities/tacrp_att_ammo_ks23_flashbang.png", "mips smooth")
 ATT.Description = "Flashbang shells that stun enemies, right from the barrel."
 ATT.Pros = {"Stun"}
-ATT.Cons = {"No damage"}
+ATT.Cons = {"Minimal damage"}
 
 ATT.Category = "ammo_ks23"
 

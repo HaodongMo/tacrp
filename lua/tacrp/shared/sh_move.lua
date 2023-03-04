@@ -3,9 +3,23 @@ function TacRP.Move(ply, mv, cmd)
     local iscurrent = true
 
     if ply:GetNWFloat("TacRPLastBashed", 0) + 2 > CurTime() then
-        local mult = 0.5
-        if ply:GetNWFloat("TacRPLastBashed", 0) + 1 < CurTime() then
-            mult = Lerp((CurTime() - ply:GetNWFloat("TacRPLastBashed", 0) - 1) / 1, 0.5, 1)
+        local slow = GetConVar("tacrp_melee_slow"):GetFloat()
+        local mult = slow
+        if ply:GetNWFloat("TacRPLastBashed", 0) + 1.4 < CurTime() then
+            mult = Lerp((CurTime() - ply:GetNWFloat("TacRPLastBashed", 0) - 1.4) / (2 - 1.4), slow, 1)
+        end
+
+        local basespd = math.min((Vector(cmd:GetForwardMove(), cmd:GetUpMove(), cmd:GetSideMove())):Length(), mv:GetMaxClientSpeed())
+        mv:SetMaxSpeed(basespd * mult)
+        mv:SetMaxClientSpeed(basespd * mult)
+    end
+
+    local stunstart, stundur = ply:GetNWFloat("TacRPStunStart", 0), ply:GetNWFloat("TacRPStunDur", 0)
+    if stunstart + stundur > CurTime() then
+        local slow = GetConVar("tacrp_flash_slow"):GetFloat()
+        local mult = slow
+        if stunstart + stundur * 0.7 < CurTime() then
+            mult = Lerp((CurTime() - stunstart - stundur * 0.7) / (stundur * 0.3), slow, 1)
         end
 
         local basespd = math.min((Vector(cmd:GetForwardMove(), cmd:GetUpMove(), cmd:GetSideMove())):Length(), mv:GetMaxClientSpeed())
@@ -207,6 +221,8 @@ function TacRP.StartCommand(ply, cmd)
         (wpn:GetBurstCount() > 0 and wpn:GetValue("RunawayBurst"))
         -- Cannot sprint while reloading if convar is set
         or (!GetConVar("tacrp_arcade"):GetBool() and wpn:GetReloading())
+        -- Stunned by a flashbang and cannot sprint
+        or (ply:GetNWFloat("TacRPStunStart", 0) + ply:GetNWFloat("TacRPStunDur", 0) > CurTime())
     ) then
         cmd:SetButtons(cmd:GetButtons() - IN_SPEED)
     end

@@ -37,7 +37,7 @@ function ENT:Initialize()
         self.SpawnTime = CurTime()
         self:Detonate()
 
-        self.FireTime = math.Rand(9.5, 10.5)
+        self.FireTime = math.Rand(6, 8)
 
         self:SetCollisionGroup(COLLISION_GROUP_PROJECTILE)
     end
@@ -54,7 +54,7 @@ function ENT:Think()
                 self.Light.r = 255
                 self.Light.g = 135
                 self.Light.b = 0
-                self.Light.Brightness = 8
+                self.Light.Brightness = 5
                 self.Light.Size = 256
                 self.Light.DieTime = CurTime() + self.FireTime
             end
@@ -214,9 +214,9 @@ function ENT:Think()
         dmg:SetDamage(50)
         dmg:SetInflictor(self)
         dmg:SetAttacker(self:GetOwner())
-        util.BlastDamageInfo(dmg, self:GetPos(), 150)
+        util.BlastDamageInfo(dmg, self:GetPos(), 200)
 
-        self.NextDamageTick = CurTime() + 0.25
+        self.NextDamageTick = CurTime() + 0.2
 
         if self.SpawnTime + self.FireTime <= CurTime() then self:Remove() return end
     end
@@ -234,10 +234,17 @@ function ENT:Detonate()
 
     if self.Order and self.Order != 1 then return end
 
-    self.FireSound = CreateSound(self, "arccw_go/molotov/fire_loop_1.wav")
+    self.FireSound = CreateSound(self, "tacrp_extras/grenades/fire_loop_1.wav")
     self.FireSound:Play()
 
     self.FireSound:ChangePitch(80, self.FireTime)
+
+    local dmg = DamageInfo()
+    dmg:SetDamageType(DMG_BURN + DMG_BLAST)
+    dmg:SetDamage(40)
+    dmg:SetInflictor(self)
+    dmg:SetAttacker(self:GetOwner())
+    util.BlastDamageInfo(dmg, self:GetPos(), 256)
 
     timer.Simple(self.FireTime - 1, function()
         if !IsValid(self) then return end

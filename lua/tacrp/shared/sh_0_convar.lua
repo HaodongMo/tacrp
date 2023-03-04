@@ -162,6 +162,22 @@ local conVars = {
         default = "1",
         client = true,
     },
+    {
+        name = "flash_dark",
+        default = "0",
+    },
+    {
+        name = "flash_slow",
+        default = "0.4",
+        min = 0,
+        max = 1,
+    },
+    {
+        name = "melee_slow",
+        default = "0.4",
+        min = 0,
+        max = 1,
+    },
 }
 
 local prefix = "tacrp_"
@@ -176,7 +192,7 @@ for _, var in pairs(conVars) do
         if var.replicated then
             flags = flags + FCVAR_REPLICATED
         end
-        CreateConVar(convar_name, var.default, flags)
+        CreateConVar(convar_name, var.default, flags, var.help, var.min, var.max)
     end
 end
 
@@ -292,6 +308,27 @@ local function menu_server_ti(panel)
     panel:AddControl("checkbox", {
         label = "NPCs Get Random Attachments",
         command = "TacRP_npc_atts"
+    })
+    panel:AddControl("checkbox", {
+        label = "Flashbang Dark Mode",
+        command = "tacrp_flash_dark"
+    })
+    panel:AddControl("label", {
+        text = "In dark mode, flashbangs turn your screen black instead of white, and mutes audio intead of ringing."
+    })
+    panel:AddControl("slider", {
+        label = "Flashbang Slow",
+        command = "tacrp_flash_slow",
+        type = "float",
+        min = 0,
+        max = 1,
+    })
+    panel:AddControl("slider", {
+        label = "Smackdown Slow",
+        command = "tacrp_melee_slow",
+        type = "float",
+        min = 0,
+        max = 1,
     })
 
     panel:AddControl("checkbox", {

@@ -16,7 +16,7 @@ ENT.ExplodeOnDamage = false // projectile explodes when it takes damage.
 ENT.ExplodeUnderwater = true
 ENT.ExplodeOnImpact = true
 
-ENT.Delay = 0.5
+ENT.Delay = 0.2
 
 ENT.ExplodeSounds = {
     "TacRP/weapons/grenade/flashbang_explode-1.wav",
@@ -42,7 +42,7 @@ function ENT:Detonate()
 
     local flashorigin = self:GetPos()
 
-    local flashpower = 1024
+    local flashpower = 512
     local targets = ents.FindInSphere(flashorigin, flashpower)
 
     for _, k in pairs(targets) do
@@ -52,13 +52,18 @@ function ENT:Detonate()
 
             local time = Lerp( dp, 1, 0.25 )
 
-            time = Lerp( dist / flashpower, time, 0 )
+            time = Lerp( dist / flashpower, time, 0.1 )
 
-            if k:VisibleVec( flashorigin ) then
-                k:ScreenFade( SCREENFADE.IN, Color( 255, 255, 255, 255 ), 0.5, time )
+            k:ScreenFade( SCREENFADE.IN, GetConVar("tacrp_flash_dark"):GetBool() and Color(0, 0, 0, 254) or Color(255, 255, 255, 254), 1, k:VisibleVec( flashorigin ) and time or 0.1 )
+
+            if GetConVar("tacrp_flash_dark"):GetBool() then
+                k:SetDSP( 32, false )
+            else
+                k:SetDSP( 37, false )
             end
 
-            k:SetDSP( 37, false )
+            k:SetNWFloat("TacRPStunStart", CurTime())
+            k:SetNWFloat("TacRPStunDur", time + 0.25)
         end
     end
 
