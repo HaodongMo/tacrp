@@ -5,5 +5,18 @@
     "realism",
     "roleplay"
   ],
-  "ignore": []
+	"ignore":
+	[
+		"*.cmd",
+		"*.ini",
+		"*.lnk",
+		"*.url",
+		"*.psd",
+		"_workfolder/*",
+		".gitattributes",
+    ".gitignore",
+		"README.md",
+		".git/*",
+    "tiers.txt"
+	]
 }
