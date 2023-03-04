@@ -120,7 +120,7 @@ local conVars = {
         default = "0.05"
     },
     {
-        name = "reloadslowdown",
+        name = "arcade",
         default = "1"
     },
     {
@@ -265,6 +265,35 @@ local function menu_server_ti(panel)
     })
 end
 
+local function menu_balance_ti(panel)
+    panel:AddControl("checkbox", {
+        label = "Arcade Mode",
+        command = "tacrp_arcade"
+    })
+    panel:AddControl("label", {
+        text = "Arcade mode tweaks weapon attributes and significantly increases mobility on all weapons. Recommended for Sandbox."
+    })
+
+    panel:AddControl("checkbox", {
+        label = "Enable Sway",
+        command = "tacrp_sway"
+    })
+
+    panel:AddControl("checkbox", {
+        label = "Enable Free Aim",
+        command = "tacrp_freeaim"
+    })
+
+    panel:AddControl("checkbox", {
+        label = "Infinite Ammo",
+        command = "tacrp_infiniteammo"
+    })
+    panel:AddControl("checkbox", {
+        label = "Infinite Grenades",
+        command = "tacrp_infinitegrenades"
+    })
+end
+
 local clientmenus_ti = {
     {
         text = "Control Guide", func = menu_guide_ti
@@ -274,6 +303,9 @@ local clientmenus_ti = {
     },
     {
         text = "Server", func = menu_server_ti
+    },
+    {
+        text = "Balance", func = menu_balance_ti
     },
 }
 

@@ -17,6 +17,14 @@ SWEP.WorldModel = "models/weapons/tacint/w_dsa58.mdl"
 
 SWEP.Slot = 3
 
+SWEP.ArcadeStats = {
+    MoveSpeedMult = 0.8,
+    ShootingSpeedMult = 0.6,
+    SightedSpeedMult = 0.75,
+    MeleeSpeedMult = 1,
+    ReloadSpeedMult = 1,
+}
+
 // "ballistics"
 
 SWEP.Damage_Max = 35

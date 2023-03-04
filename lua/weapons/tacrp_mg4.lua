@@ -17,6 +17,14 @@ SWEP.WorldModel = "models/weapons/tacint/w_mg4.mdl"
 
 SWEP.Slot = 3
 
+SWEP.ArcadeStats = {
+    MoveSpeedMult = 0.75,
+    ShootingSpeedMult = 0.5,
+    SightedSpeedMult = 0.75,
+    MeleeSpeedMult = 1,
+    ReloadSpeedMult = 1,
+}
+
 // "ballistics"
 
 SWEP.Damage_Max = 25
@@ -41,7 +49,7 @@ SWEP.Spread = 0.01
 SWEP.ShootTimeMult = 0.5
 
 SWEP.RecoilPerShot = 1
-SWEP.RecoilMaximum = 25
+SWEP.RecoilMaximum = 30
 SWEP.RecoilResetTime = 0.15
 SWEP.RecoilDissipationRate = 20
 SWEP.RecoilFirstShotMult = 1 // multiplier for the first shot's recoil amount

@@ -24,7 +24,7 @@ function SWEP:Melee()
     --     return
     -- end
     if self:StillWaiting() then return end
-    if self:SprintLock() then return end
+    -- if self:SprintLock() then return end
     if !self:GetValue("CanMeleeAttack") then return end
 
     self:PlayAnimation("melee", 1, false, true)
@@ -46,7 +46,7 @@ function SWEP:Melee()
 
     -- weapon_hl2mpbasebasebludgeon.cpp: do a hull trace if not hit
     if tr.Fraction == 1 then
-        local dim = 16
+        local dim = 24
         local pos2 = tr.HitPos - dir * (dim * 1.732)
         tr = util.TraceHull({
             start = start,
@@ -58,7 +58,7 @@ function SWEP:Melee()
         })
         if tr.Fraction < 1 and IsValid(tr.Entity) then
             local dot = (tr.Entity:GetPos() - start):GetNormalized():Dot(dir)
-            if dot < 0.70721 then
+            if dot < 0.5 then
                 tr.Fraction = 1
             end
         end

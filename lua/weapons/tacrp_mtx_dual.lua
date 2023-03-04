@@ -17,6 +17,14 @@ SWEP.WorldModel = "models/weapons/tacint/w_mtx.mdl"
 
 SWEP.Slot = 2
 
+SWEP.ArcadeStats = {
+    MoveSpeedMult = 1,
+    ShootingSpeedMult = 1,
+    SightedSpeedMult = 1,
+    MeleeSpeedMult = 1,
+    ReloadSpeedMult = 1,
+}
+
 // "ballistics"
 
 SWEP.Damage_Max = 25
@@ -40,9 +48,9 @@ SWEP.BodyDamageMultipliers = {
 
 // misc. shooting
 
-SWEP.Firemode = 1
+SWEP.Firemode = -2
 
-SWEP.RPM = 800
+SWEP.RPM = 700
 
 SWEP.Spread = 0.02
 

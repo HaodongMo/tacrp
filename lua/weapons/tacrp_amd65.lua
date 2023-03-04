@@ -17,6 +17,14 @@ SWEP.WorldModel = "models/weapons/tacint/w_amd65.mdl"
 
 SWEP.Slot = 3
 
+SWEP.ArcadeStats = {
+    MoveSpeedMult = 0.85,
+    ShootingSpeedMult = 0.75,
+    SightedSpeedMult = 0.75,
+    MeleeSpeedMult = 1,
+    ReloadSpeedMult = 1,
+}
+
 // "ballistics"
 
 SWEP.Damage_Max = 22
@@ -51,8 +59,6 @@ SWEP.Spread = 0.003
 SWEP.ShootTimeMult = 0.5
 
 SWEP.MuzzleVelocity = 25000
-
-
 
 SWEP.RecoilPerShot = 1
 SWEP.RecoilMaximum = 15

@@ -19,6 +19,14 @@ SWEP.NoRanger = true
 
 SWEP.Slot = 3
 
+SWEP.ArcadeStats = {
+    MoveSpeedMult = 0.8,
+    ShootingSpeedMult = 0.5,
+    SightedSpeedMult = 1,
+    MeleeSpeedMult = 1,
+    ReloadSpeedMult = 0.75,
+}
+
 // "ballistics"
 
 SWEP.ShootEnt = "tacrp_proj_rpg7"

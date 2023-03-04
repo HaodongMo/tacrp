@@ -21,6 +21,14 @@ SWEP.NoStatBox = true
 
 SWEP.NPCUsable = false
 
+
+SWEP.ArcadeStats = {
+    MoveSpeedMult = 0.9,
+    ShootingSpeedMult = 1,
+    SightedSpeedMult = 1,
+    MeleeSpeedMult = 0.9,
+}
+
 SWEP.Slot = 3
 
 // misc. shooting

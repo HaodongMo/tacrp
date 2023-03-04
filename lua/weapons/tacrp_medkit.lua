@@ -19,6 +19,11 @@ SWEP.WorldModel = "models/weapons/tacint/w_medkit.mdl"
 SWEP.NoRanger = true
 SWEP.NoStatBox = true
 
+
+SWEP.ArcadeStats = {
+    MeleeSpeedMult = 1,
+}
+
 SWEP.Slot = 4
 
 SWEP.NPCUsable = false

@@ -19,6 +19,14 @@ SWEP.Slot = 3
 
 // "ballistics"
 
+SWEP.ArcadeStats = {
+    MoveSpeedMult = 0.8,
+    ShootingSpeedMult = 0.6,
+    SightedSpeedMult = 0.8,
+    MeleeSpeedMult = 1,
+    ReloadSpeedMult = 1,
+}
+
 SWEP.Damage_Max = 20
 SWEP.Damage_Min = 8
 SWEP.Range_Min = 600 // distance for which to maintain maximum damage

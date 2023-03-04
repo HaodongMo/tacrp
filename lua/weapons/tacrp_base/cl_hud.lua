@@ -71,7 +71,7 @@ function SWEP:DrawHUDBackground()
     if recoil > 0 then
         local recoil_pct = math.Clamp(recoil / self:GetValue("RecoilMaximum"), 0, 1) ^ 1.5
         local delta = self:Curve(recoil_pct)
-        surface.SetDrawColor(0, 0, 0, 255 * delta)
+        surface.SetDrawColor(0, 0, 0, 200 * delta)
         surface.SetMaterial(mat_vignette)
         surface.DrawTexturedRect(0, 0, ScrW(), ScrH())
     end

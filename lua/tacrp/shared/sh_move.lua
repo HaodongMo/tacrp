@@ -27,7 +27,7 @@ function TacRP.Move(ply, mv, cmd)
         mult = mult * wpn:GetValue("SightedSpeedMult")
     end
 
-    if iscurrent and GetConVar("tacrp_reloadslowdown"):GetBool() then
+    if iscurrent then
         local rsmt = wpn:GetValue("ReloadSpeedMultTime")
 
         if wpn:GetReloading() then
@@ -61,11 +61,9 @@ function TacRP.Move(ply, mv, cmd)
     local shottime = wpn:GetNextPrimaryFire() - (60 / wpn:GetValue("RPM")) - CurTime() + fulldur
 
     -- slowdown based on recoil intensity (firing longer means heavier slowdown)
-    if shottime > 0 then
-        shotdelta = Lerp(wpn:GetRecoilAmount() / (wpn:GetValue("RecoilMaximum") * 0.5), 0.5, 1)
-    elseif -shottime < delay then
-        local aftershottime = -shottime / delay
-        shotdelta = Lerp(wpn:GetRecoilAmount() / (wpn:GetValue("RecoilMaximum") * 0.5), 0.5, 1) * math.Clamp(1 - aftershottime, 0, 1)
+    if shottime > -delay then
+        local aftershottime = math.Clamp(1 + shottime / delay, 0, 1)
+        shotdelta = Lerp((wpn:GetRecoilAmount() / (wpn:GetValue("RecoilMaximum") * 0.75)) ^ 1.5, 0.25, 1) * aftershottime
     end
 
     -- if shottime > 0 then
@@ -78,7 +76,7 @@ function TacRP.Move(ply, mv, cmd)
     --     shotdelta = math.Clamp(1 - aftershottime, 0, 1)
     -- end
 
-    -- if SERVER and shotdelta > 0 then print(math.Round(shottime, 2), wpn:GetBurstCount(), math.Round(shotdelta, 2)) end
+    -- if SERVER and shotdelta > 0 then print(math.Round(shottime, 2), math.Round(shotdelta, 2)) end
 
     local shootmove = math.Clamp(wpn:GetValue("ShootingSpeedMult"), 0.0001, 1)
     mult = mult * Lerp(shotdelta, 1, shootmove)
@@ -197,7 +195,7 @@ function TacRP.StartCommand(ply, cmd)
         -- Sprint will not interrupt a runaway burst
         (wpn:GetBurstCount() > 0 and wpn:GetValue("RunawayBurst"))
         -- Cannot sprint while reloading if convar is set
-        or (GetConVar("tacrp_reloadslowdown"):GetBool() and wpn:GetReloading())
+        or (!GetConVar("tacrp_arcade"):GetBool() and wpn:GetReloading())
     ) then
         cmd:SetButtons(cmd:GetButtons() - IN_SPEED)
     end

@@ -17,6 +17,14 @@ SWEP.WorldModel = "models/weapons/tacint_extras/w_hecate.mdl"
 
 SWEP.Slot = 3
 
+SWEP.ArcadeStats = {
+    MoveSpeedMult = 0.7,
+    ShootingSpeedMult = 0.5,
+    SightedSpeedMult = 0.5,
+    MeleeSpeedMult = 1,
+    ReloadSpeedMult = 1,
+}
+
 // "ballistics"
 
 SWEP.Damage_Max = 150 // damage at minimum range

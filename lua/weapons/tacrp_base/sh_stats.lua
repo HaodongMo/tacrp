@@ -51,6 +51,10 @@ function SWEP:GetValue(val)
 
     local stat = tbl[val]
 
+    if GetConVar("tacrp_arcade"):GetBool() and self.ArcadeStats and self.ArcadeStats[val] != nil then
+        stat = self.ArcadeStats[val]
+    end
+
     if self.StatCache[val] then
         return self.StatCache[val]
     end

@@ -17,6 +17,14 @@ SWEP.WorldModel = "models/weapons/tacint/w_m4star10.mdl"
 
 SWEP.Slot = 3
 
+SWEP.ArcadeStats = {
+    MoveSpeedMult = 0.9,
+    ShootingSpeedMult = 0.6,
+    SightedSpeedMult = 0.9,
+    MeleeSpeedMult = 1,
+    ReloadSpeedMult = 1,
+}
+
 // "ballistics"
 
 SWEP.ShootTimeMult = 0.5

@@ -17,6 +17,14 @@ SWEP.WorldModel = "models/weapons/tacint/w_fp6.mdl"
 
 SWEP.Slot = 3
 
+SWEP.ArcadeStats = {
+    MoveSpeedMult = 0.9,
+    ShootingSpeedMult = 0.65,
+    SightedSpeedMult = 0.9,
+    MeleeSpeedMult = 1,
+    ReloadSpeedMult = 1,
+}
+
 // "ballistics"
 
 SWEP.Damage_Max = 100 / 6 // damage at minimum range

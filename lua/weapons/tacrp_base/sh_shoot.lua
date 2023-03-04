@@ -391,11 +391,13 @@ end
 function SWEP:GetSpread(baseline)
     local spread = self:GetValue("Spread")
 
-    if self:GetScopeLevel() == 0 then
-        spread = spread + self:GetValue("HipFireSpreadPenalty")
-    else
-        spread = spread + self:GetValue("ScopedSpreadPenalty")
-    end
+    spread = spread + Lerp(self:GetSightAmount(), self:GetValue("HipFireSpreadPenalty"), self:GetValue("ScopedSpreadPenalty"))
+
+    -- if self:GetScopeLevel() == 0 then
+    --     spread = spread + self:GetValue("HipFireSpreadPenalty")
+    -- else
+    --     spread = spread + self:GetValue("ScopedSpreadPenalty")
+    -- end
 
     if baseline then return spread end
 

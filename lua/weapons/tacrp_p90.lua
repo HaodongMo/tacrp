@@ -17,6 +17,14 @@ SWEP.WorldModel = "models/weapons/tacint/w_p90.mdl"
 
 SWEP.Slot = 3
 
+SWEP.ArcadeStats = {
+    MoveSpeedMult = 0.9,
+    ShootingSpeedMult = 0.8,
+    SightedSpeedMult = 0.85,
+    MeleeSpeedMult = 1,
+    ReloadSpeedMult = 1,
+}
+
 // "ballistics"
 
 SWEP.Damage_Max = 15

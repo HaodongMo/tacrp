@@ -519,7 +519,8 @@ function SWEP:CreateCustomizeHUD()
             end,
             Unit = "%",
             Value = "ReloadSpeedMult",
-            ConVarCheck = "tacrp_reloadslowdown",
+            --ConVarCheck = "tacrp_arcade",
+            --ConVarInvert = true,
         },
         {
             Name = "Reload Time",
@@ -715,28 +716,35 @@ function SWEP:CreateCustomizeHUD()
             for i, k in pairs(stats) do
                 local value = self:GetValue(k.Value)
 
-                if k.HideIfSame and selftbl[k.Value] == value then continue end
+                local orig = selftbl[k.Value]
+                if GetConVar("tacrp_arcade"):GetBool() and self.ArcadeStats and self.ArcadeStats[k.Value] ~= nil then
+                    orig = self.ArcadeStats[k.Value]
+                end
+
+                if k.HideIfSame and orig == value then continue end
 
                 if k.ConVarCheck then
                     if !k.ConVar then k.ConVar = GetConVar(k.ConVarCheck) end
                     if k.ConVar:GetBool() == tobool(k.ConVarInvert) then continue end
                 end
 
-                surface.SetFont("TacRP_Myriad_Pro_8")
-                surface.SetTextColor(255, 255, 255)
-                surface.SetTextPos(ScreenScale(2), ScreenScale(8 + 4 + 1) + (ScreenScale(8 * i2)))
-                surface.DrawText(k.Name .. ":")
-
                 local stat_base = 0
                 local stat_curr = 0
 
                 if k.AggregateFunction then
-                    stat_base = k.AggregateFunction(true, selftbl[k.Value])
+                    stat_base = k.AggregateFunction(true, orig)
                     stat_curr = k.AggregateFunction(false, value)
                 else
-                    stat_base = math.Round(selftbl[k.Value], 4)
+                    stat_base = math.Round(orig, 4)
                     stat_curr = math.Round(value, 4)
                 end
+
+                if stat_base == nil and stat_cur == nil then continue end
+
+                surface.SetFont("TacRP_Myriad_Pro_8")
+                surface.SetTextColor(255, 255, 255)
+                surface.SetTextPos(ScreenScale(2), ScreenScale(8 + 4 + 1) + (ScreenScale(8 * i2)))
+                surface.DrawText(k.Name .. ":")
 
                 local txt_base = tostring(stat_base)
                 local txt_curr = tostring(stat_curr)
@@ -764,7 +772,7 @@ function SWEP:CreateCustomizeHUD()
 
 
                 if k.BetterFunction then
-                    goodorbad, good = k.BetterFunction(selftbl[k.Value], value)
+                    goodorbad, good = k.BetterFunction(orig, value)
                 elseif stat_base ~= stat_curr then
                     if isnumber(stat_curr) then
                         good = stat_curr > stat_base
