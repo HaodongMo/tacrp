@@ -5,17 +5,64 @@ local function GetFOVAcc(wep)
     cam.End3D()
 
     local gau = ( (ScrH() / 2) - lool.y )
-    gaA = math.Approach(gaA, gau, (ScrH() / 2) * FrameTime())
+    gaA = math.Approach(gaA, gau, (ScrH() / 1.5) * FrameTime())
 
     return gaA
 end
 
 function SWEP:ShouldDrawCrosshair()
-    -- return false
+    return GetConVar("tacrp_crosshair"):GetBool() and !self:GetReloading() and !self:GetCustomize() and !self:SprintLock() and self:GetSightAmount() <= 0.5
 end
 
 function SWEP:DoDrawCrosshair(x, y)
-    -- return true
+    local ft = FrameTime()
+    self.CrosshairAlpha = self.CrosshairAlpha or 0
+    if !self:ShouldDrawCrosshair() then
+        self.CrosshairAlpha = math.Approach(self.CrosshairAlpha, 0, -10 * ft)
+    else
+        self.CrosshairAlpha = math.Approach(self.CrosshairAlpha, 1, 5 * ft)
+    end
+    if self.CrosshairAlpha <= 0 then return true end
+
+    local dir = self:GetOwner():EyeAngles()
+
+    if self:GetBlindFireCorner() then
+        dir.y = dir.y + 75
+    end
+
+    local u, r, f = dir:Up(), dir:Right(), dir:Forward()
+    local oa = self:GetFreeAimOffset() -- + self:GetSwayAngles()
+    dir:RotateAroundAxis(u, oa.y)
+    dir:RotateAroundAxis(r, -oa.p)
+
+    local tr = util.TraceLine({
+        start = self:GetMuzzleOrigin(),
+        endpos = self:GetMuzzleOrigin() + (dir:Forward() * 50000),
+        mask = MASK_SHOT,
+        filter = self:GetOwner()
+    })
+    cam.Start3D()
+        local w2s = tr.HitPos:ToScreen()
+        x = math.Round(w2s.x)
+        y = math.Round(w2s.y)
+    cam.End3D()
+
+
+    surface.SetDrawColor(50, 255, 50, 255 * self.CrosshairAlpha)
+
+    local spread = math.max(GetFOVAcc(self), 2)
+    local sway = self:GetSwayAmount() * math.pi
+    spread = math.Round(spread + ScreenScale(sway))
+
+    surface.DrawRect(x, y, 1, 1)
+
+    local w = 16
+    surface.DrawLine(x, y - spread - w, x, y - spread)
+    surface.DrawLine(x, y + spread, x, y + spread + w)
+    surface.DrawLine(x - spread - w, y, x - spread, y)
+    surface.DrawLine(x + spread, y, x + spread + w, y)
+
+    return true
 end
 
 function SWEP:GetBinding(bind)

@@ -148,6 +148,10 @@ local conVars = {
         default = "1",
         client = true,
     },
+    {
+        name = "crosshair",
+        default = "1",
+    },
 }
 
 local prefix = "tacrp_"
@@ -229,6 +233,10 @@ local function menu_client_ti(panel)
 end
 
 local function menu_server_ti(panel)
+    panel:AddControl("checkbox", {
+        label = "Enable Crosshair (for everyone)",
+        command = "tacrp_crosshair"
+    })
     panel:AddControl("checkbox", {
         label = "Free Attachments",
         command = "TacRP_free_atts"

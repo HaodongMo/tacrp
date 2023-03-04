@@ -316,7 +316,7 @@ SWEP.Attachments = nil
 SWEP.FreeAim = true
 
 SWEP.ArcticTacRP = true
-SWEP.DrawCrosshair = false
+SWEP.DrawCrosshair = true
 SWEP.AccurateCrosshair = true
 SWEP.DrawWeaponInfoBox = false
 SWEP.UseHands = true
