@@ -29,9 +29,9 @@ SWEP.ArcadeStats = {
 
 // "ballistics"
 
-SWEP.Damage_Max = 17
-SWEP.Damage_Min = 8
-SWEP.Range_Min = 1200 // distance for which to maintain maximum damage
+SWEP.Damage_Max = 18
+SWEP.Damage_Min = 9
+SWEP.Range_Min = 500 // distance for which to maintain maximum damage
 SWEP.Range_Max = 3500 // distance at which we drop to minimum damage
 SWEP.Penetration = 3 // units of metal this weapon can penetrate
 
@@ -60,16 +60,16 @@ SWEP.RPM = 900
 SWEP.Spread = 0.0075
 
 SWEP.RecoilPerShot = 1
-SWEP.RecoilMaximum = 10
+SWEP.RecoilMaximum = 15
 SWEP.RecoilResetTime = 0.15 // time after you stop shooting for recoil to start dissipating
-SWEP.RecoilDissipationRate = 22
+SWEP.RecoilDissipationRate = 20
 SWEP.RecoilFirstShotMult = 1 // multiplier for the first shot's recoil amount
 
 SWEP.RecoilVisualKick = 1
 
-SWEP.RecoilKick = 1.5
+SWEP.RecoilKick = 2
 
-SWEP.RecoilSpreadPenalty = 0.0025
+SWEP.RecoilSpreadPenalty = 0.0022
 
 SWEP.CanBlindFire = true
 

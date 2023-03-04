@@ -125,16 +125,18 @@ function SWEP:CreateCustomizeHUD()
 
         surface.SetFont("TacRP_Myriad_Pro_12")
 
-        local ammo_txt = language.GetPhrase(string.lower(self.Ammo) .. "_ammo")
-        local ammo_w = surface.GetTextSize(ammo_txt)
+        if self.Ammo ~= "" then
+            local ammo_txt = language.GetPhrase(string.lower(self.Ammo) .. "_ammo")
+            local ammo_w = surface.GetTextSize(ammo_txt)
 
-        surface.SetDrawColor(0, 0, 0, 150)
-        surface.DrawRect(w - name_w - ammo_w - ScreenScale(32) - smallgap, airgap + ScreenScale(20), ammo_w + ScreenScale(12), ScreenScale(14))
-        TacRP.DrawCorneredBox(w - name_w - ammo_w - ScreenScale(32) - smallgap, airgap + ScreenScale(20), ammo_w + ScreenScale(12), ScreenScale(14))
+            surface.SetDrawColor(0, 0, 0, 150)
+            surface.DrawRect(w - name_w - ammo_w - ScreenScale(32) - smallgap, airgap + ScreenScale(20), ammo_w + ScreenScale(12), ScreenScale(14))
+            TacRP.DrawCorneredBox(w - name_w - ammo_w - ScreenScale(32) - smallgap, airgap + ScreenScale(20), ammo_w + ScreenScale(12), ScreenScale(14))
 
-        surface.SetTextPos(w - name_w - ammo_w - ScreenScale(30), airgap + ScreenScale(21))
-        surface.SetTextColor(255, 255, 255)
-        surface.DrawText(ammo_txt)
+            surface.SetTextPos(w - name_w - ammo_w - ScreenScale(30), airgap + ScreenScale(21))
+            surface.SetTextColor(255, 255, 255)
+            surface.DrawText(ammo_txt)
+        end
 
         if self.SubCatTier and self.SubCatType then
             local type_txt = string.sub(self.SubCatType, 2)

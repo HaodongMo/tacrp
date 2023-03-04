@@ -87,11 +87,11 @@ function TacRP.Move(ply, mv, cmd)
     if !iscurrent then return end
 
     -- Semi auto click buffer
-    if !wpn:GetCharge() and wpn:GetCurrentFiremode() < 2 and mv:KeyPressed(IN_ATTACK)
+    if !wpn.NoBuffer and !wpn:GetCharge() and wpn:GetCurrentFiremode() < 2 and mv:KeyPressed(IN_ATTACK)
             and wpn:StillWaiting() and !wpn:GetReloading() and !wpn:GetCustomize() and wpn:Clip1() >= wpn:GetValue("AmmoPerShot")
             and wpn:GetNextSecondaryFire() < CurTime() and (wpn:GetNextPrimaryFire() - CurTime()) < 0.1 then
         wpn:SetCharge(true)
-    elseif wpn:GetCharge() and !wpn:StillWaiting() and !owner and !mv:KeyDown(IN_ATTACK) then
+    elseif !wpn.NoBuffer and wpn:GetCharge() and !wpn:StillWaiting() and !owner and !mv:KeyDown(IN_ATTACK) then
         wpn:SetCharge(false)
         wpn:PrimaryAttack()
     end

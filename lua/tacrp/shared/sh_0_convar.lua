@@ -143,6 +143,11 @@ local conVars = {
         default = "",
         client = true
     },
+    {
+        name = "drawholsters",
+        default = "1",
+        client = true,
+    },
 }
 
 local prefix = "tacrp_"
@@ -194,10 +199,6 @@ end
 
 local function menu_client_ti(panel)
     panel:AddControl("checkbox", {
-        label = "Reload Automatically",
-        command = "TacRP_autoreload"
-    })
-    panel:AddControl("checkbox", {
         label = "Auto-Save Weapon",
         command = "TacRP_autosave"
     })
@@ -206,8 +207,24 @@ local function menu_client_ti(panel)
         command = "TacRP_drawhud"
     })
     panel:AddControl("checkbox", {
-        label = "Backup Minimal HUD",
+        label = "Show Backup HUD",
         command = "tacrp_minhud"
+    })
+    panel:AddControl("checkbox", {
+        label = "Draw Holstered Weapons",
+        command = "tacrp_drawholsters"
+    })
+    panel:AddControl("checkbox", {
+        label = "True Laser Position",
+        command = "tacrp_true_laser"
+    })
+    panel:AddControl("checkbox", {
+        label = "Auto Reload When Empty",
+        command = "TacRP_autoreload"
+    })
+    panel:AddControl("checkbox", {
+        label = "Immersive Ammo Names (Requires map reload)",
+        command = "tacrp_ammonames"
     })
 end
 
@@ -221,24 +238,16 @@ local function menu_server_ti(panel)
         command = "TacRP_lock_atts"
     })
     panel:AddControl("checkbox", {
+        label = "Limit One Weapon Per Slot",
+        command = "tacrp_limitslots"
+    })
+    panel:AddControl("checkbox", {
         label = "Lose Attachments On Death",
         command = "TacRP_loseattsondie"
     })
     panel:AddControl("checkbox", {
         label = "Generate Attachment Entities",
         command = "TacRP_generateattentities"
-    })
-    panel:AddControl("checkbox", {
-        label = "Infinite Ammo",
-        command = "tacrp_infiniteammo"
-    })
-    panel:AddControl("checkbox", {
-        label = "Infinite Grenades",
-        command = "tacrp_infinitegrenades"
-    })
-    panel:AddControl("checkbox", {
-        label = "Enable Penetration",
-        command = "TacRP_penetration"
     })
     panel:AddControl("checkbox", {
         label = "Supply Boxes Resupply Grenades",
@@ -252,16 +261,13 @@ local function menu_server_ti(panel)
         label = "NPCs Get Random Attachments",
         command = "TacRP_npc_atts"
     })
-    panel:AddControl("checkbox", {
-        label = "Physical Bullets",
-        command = "TacRP_physbullet"
-    })
-    panel:AddControl("label", {
-        text = "Disable body damage cancel only if you have another addon that will override the hl2 limb damage multipliers."
-    })
+
     panel:AddControl("checkbox", {
         label = "Default Body Damage Cancel",
         command = "TacRP_bodydamagecancel"
+    })
+    panel:AddControl("label", {
+        text = "Disable body damage cancel only if you have another addon that will override the hl2 limb damage multipliers."
     })
 end
 
@@ -275,16 +281,6 @@ local function menu_balance_ti(panel)
     })
 
     panel:AddControl("checkbox", {
-        label = "Enable Sway",
-        command = "tacrp_sway"
-    })
-
-    panel:AddControl("checkbox", {
-        label = "Enable Free Aim",
-        command = "tacrp_freeaim"
-    })
-
-    panel:AddControl("checkbox", {
         label = "Infinite Ammo",
         command = "tacrp_infiniteammo"
     })
@@ -292,6 +288,25 @@ local function menu_balance_ti(panel)
         label = "Infinite Grenades",
         command = "tacrp_infinitegrenades"
     })
+
+    panel:AddControl("checkbox", {
+        label = "Enable Sway",
+        command = "tacrp_sway"
+    })
+    panel:AddControl("checkbox", {
+        label = "Enable Free Aim",
+        command = "tacrp_freeaim"
+    })
+    panel:AddControl("checkbox", {
+        label = "Enable Penetration",
+        command = "TacRP_penetration"
+    })
+    panel:AddControl("checkbox", {
+        label = "Enable Physical Bullets",
+        command = "TacRP_physbullet"
+    })
+
+
 end
 
 local clientmenus_ti = {
@@ -305,7 +320,7 @@ local clientmenus_ti = {
         text = "Server", func = menu_server_ti
     },
     {
-        text = "Balance", func = menu_balance_ti
+        text = "Mechanics", func = menu_balance_ti
     },
 }
 

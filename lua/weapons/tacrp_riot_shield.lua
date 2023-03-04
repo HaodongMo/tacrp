@@ -92,7 +92,14 @@ SWEP.ShieldProps = {
 
 // attachments
 
-SWEP.Attachments = {}
+SWEP.Attachments = {
+    [1] = {
+        PrintName = "Perk",
+        Category = {"perk_melee", "perk_throw"},
+        AttachSound = "TacRP/weapons/flashlight_on.wav",
+        DetachSound = "TacRP/weapons/flashlight_off.wav",
+    }
+}
 
 function SWEP:PrimaryAttack()
     self.Primary.Automatic = true

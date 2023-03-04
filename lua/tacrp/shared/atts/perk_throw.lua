@@ -8,4 +8,4 @@ ATT.Category = {"perk", "perk_throw"}
 ATT.SortOrder = 6
 
 ATT.ThrowRocks = true
-ATT.Mult_QuickNadeTimeMult = 0.5
+ATT.Mult_QuickNadeTimeMult = 0.65

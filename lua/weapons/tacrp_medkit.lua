@@ -38,6 +38,10 @@ SWEP.ClipSize = 30
 
 // handling
 
+SWEP.NoBuffer = true
+
+SWEP.Firemode = 1
+
 SWEP.MoveSpeedMult = 1
 
 SWEP.MeleeSpeedMult = 0.5
@@ -81,19 +85,24 @@ SWEP.AnimationTranslationTable = {
 
 // attachments
 
-SWEP.Attachments = {}
+SWEP.Attachments = {
+    [1] = {
+        PrintName = "Perk",
+        Category = {"perk_melee", "perk_throw"},
+        AttachSound = "TacRP/weapons/flashlight_on.wav",
+        DetachSound = "TacRP/weapons/flashlight_off.wav",
+    }
+}
 
 SWEP.HealTarget = nil
 
 SWEP.LoopSound = nil
 
 function SWEP:PrimaryAttack()
-    if self:GetValue("Melee") then
-        if self:GetOwner():KeyDown(IN_USE) then
-            self.Primary.Automatic = true
-            self:Melee()
-            return
-        end
+    if self:GetValue("Melee") and self:GetOwner():KeyDown(IN_USE) then
+        self.Primary.Automatic = true
+        self:Melee()
+        return
     end
 
     if self:StillWaiting() then return end
@@ -113,6 +122,8 @@ function SWEP:PrimaryAttack()
     if tr.Entity:Health() >= tr.Entity:GetMaxHealth() then return end
 
     self.HealTarget = tr.Entity
+
+    self.Primary.Automatic = false
 
     self:PlayAnimation("unzip", 1, true)
 
@@ -153,6 +164,9 @@ function SWEP:SecondaryAttack()
 
     self.HealTarget = self:GetOwner()
 
+    self.Primary.Automatic = false
+    self.Secondary.Automatic = false
+
     self:PlayAnimation("unzip", 1, true)
 
     self:SetCharge(true)
@@ -167,33 +181,26 @@ function SWEP:SecondaryAttack()
 end
 
 function SWEP:Think()
-    if IsFirstTimePredicted() then
-        if self:GetCharge() then
-            if self:GetNextPrimaryFire() < CurTime() then
-                if !IsValid(self.HealTarget) or
-                self:Clip1() <= 0 or
-                (self.HealTarget:GetPos() - self:GetOwner():GetPos()):Length() > 64
-                or
-                (self.HealTarget:Health() >= self.HealTarget:GetMaxHealth()) or
-                !(self:GetOwner():KeyDown(IN_ATTACK) or self:GetOwner():KeyDown(IN_ATTACK2)) then
-                    self.HealTarget = nil
-                    self:SetCharge(false)
-                    self:PlayAnimation("draw", 1, true)
+    if IsFirstTimePredicted() and self:GetCharge() and self:GetNextPrimaryFire() < CurTime() then
+        if !IsValid(self.HealTarget) or
+        self:Clip1() <= 0 or
+        (self.HealTarget:GetPos() - self:GetOwner():GetPos()):Length() > 64
+        or
+        (self.HealTarget:Health() >= self.HealTarget:GetMaxHealth()) or
+        !(self:GetOwner():KeyDown(IN_ATTACK) or self:GetOwner():KeyDown(IN_ATTACK2)) then
+            self.HealTarget = nil
+            self:SetCharge(false)
+            self:PlayAnimation("draw", 1, true)
 
-                    if self.LoopSound then
-                        self.LoopSound:Stop()
-                        self.LoopSound = nil
-                    end
-                else
-                    local hp = self.HealTarget:Health()
-                    hp = hp + 3
-                    hp = math.min(hp, self.HealTarget:GetMaxHealth())
-                    self:SetClip1(self:Clip1() - 1)
-                    self.HealTarget:SetHealth(hp)
-
-                    self:SetNextPrimaryFire(CurTime() + 0.33)
-                end
+            if self.LoopSound then
+                self.LoopSound:Stop()
+                self.LoopSound = nil
             end
+        else
+            self:SetClip1(self:Clip1() - 1)
+            self.HealTarget:SetHealth(math.min(self.HealTarget:Health() + 4, self.HealTarget:GetMaxHealth()))
+
+            self:SetNextPrimaryFire(CurTime() + (self.HealTarget == self:GetOwner() and 0.2 or 0.15))
         end
     end
 
