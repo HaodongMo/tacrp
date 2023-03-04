@@ -21,10 +21,10 @@ SWEP.Slot = 4
 
 SWEP.ArcadeStats = {
     MoveSpeedMult = 1,
-    ShootingSpeedMult = 0.8,
+    ShootingSpeedMult = 0.6,
     SightedSpeedMult = 1,
     MeleeSpeedMult = 1,
-    ReloadSpeedMult = 0.75,
+    ReloadSpeedMult = 0.85,
 }
 
 // "ballistics"
@@ -53,14 +53,14 @@ SWEP.Firemode = 1
 
 SWEP.FiremodeName = "Single-Shot" // only used externally for firemode name distinction
 
-SWEP.RPM = 150
+SWEP.RPM = 60
 
 SWEP.Spread = 0.025
 
 SWEP.RecoilPerShot = 1
-SWEP.RecoilMaximum = 10
-SWEP.RecoilResetTime = 0.1// time after you stop shooting for recoil to start dissipating
-SWEP.RecoilDissipationRate = 10
+SWEP.RecoilMaximum = 2
+SWEP.RecoilResetTime = 0.2 // time after you stop shooting for recoil to start dissipating
+SWEP.RecoilDissipationRate = 1
 SWEP.RecoilFirstShotMult = 1 // multiplier for the first shot's recoil amount
 
 SWEP.RecoilVisualKick = 5
@@ -68,7 +68,7 @@ SWEP.RecoilVisualShake = 2
 
 SWEP.RecoilKick = 15
 
-SWEP.RecoilSpreadPenalty = 0.25 // extra spread per one unit of recoil
+SWEP.RecoilSpreadPenalty = 0 // extra spread per one unit of recoil
 
 SWEP.CanBlindFire = true
 
@@ -219,7 +219,7 @@ SWEP.Attachments = {
     },
     [3] = {
         PrintName = "Perk",
-        Category = {"perk", "perk_shooting", "perk_reload"},
+        Category = {"perk", "perk_shooting", "perk_reload", "perk_melee"},
         AttachSound = "tacrp/weapons/flashlight_on.wav",
         DetachSound = "tacrp/weapons/flashlight_off.wav",
     },
