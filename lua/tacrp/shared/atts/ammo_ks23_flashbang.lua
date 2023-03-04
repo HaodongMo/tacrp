@@ -12,3 +12,5 @@ ATT.ShootEnt = "tacrp_proj_ks23_flashbang"
 
 ATT.Num = 1
 ATT.ShootEntForce = 1000
+
+ATT.Ignore = true
