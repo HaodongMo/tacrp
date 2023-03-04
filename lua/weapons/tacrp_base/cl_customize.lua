@@ -933,6 +933,7 @@ function SWEP:CreateCustomizeHUD()
                 if !IsValid(self:GetOwner()) then return end
                 local hover = self2:IsHovered()
                 local attached = attslot.Installed == att
+                self2:SetDrawOnTop(hover)
 
                 local col_bg = Color(0, 0, 0, 150)
                 local col_corner = Color(255, 255, 255)
@@ -1007,6 +1008,79 @@ function SWEP:CreateCustomizeHUD()
                     local nt_w = surface.GetTextSize(numtxt)
                     surface.SetTextPos(w - nt_w - ScreenScale(2), ScreenScale(1))
                     surface.DrawText(numtxt)
+                end
+
+                -- thank u fesiug
+                if hover then
+                    local todo = DisableClipping(true)
+                    local col_bg = Color(0, 0, 0, 230)
+                    local col_corner = Color(255, 255, 255)
+                    local col_text = Color(255, 255, 255)
+                    local col_text_pro = Color(0, 130, 0, 230)
+                    local col_text_con = Color(130, 0, 0, 230)
+                    local rx, ry = self2:CursorPos()
+                    rx = rx + ScreenScale(16)
+                    ry = ry + ScreenScale(16)
+                    local gap = ScreenScale(18)
+                    local firstoff = ScreenScale(20)
+                    local statjump = ScreenScale(12)
+                    local statted = false
+
+                    local bw, bh = ScreenScale(160), ScreenScale(18)
+                    surface.SetDrawColor(col_bg)
+                    TacRP.DrawCorneredBox(rx, ry, bw, bh, col_corner)
+
+                    local txt = atttbl.FullName or atttbl.PrintName
+                    surface.SetTextColor(col_text)
+                    surface.SetFont("TacRP_Myriad_Pro_10")
+                    surface.SetTextPos(rx + ScreenScale(2), ry + ScreenScale(1))
+                    surface.DrawText(txt)
+
+                    txt = atttbl.Description or ""
+                    surface.SetFont("TacRP_Myriad_Pro_6")
+                    surface.SetTextPos(rx + ScreenScale(2), ry + ScreenScale(1 + 8 + 2))
+                    surface.DrawText(txt)
+
+                    local bump = firstoff
+                    local txjy = ScreenScale(1)
+                    local rump = ScreenScale(9)
+                    if atttbl.Pros then for aa, ab in ipairs(atttbl.Pros) do
+                        surface.SetDrawColor(col_text_pro)
+                        TacRP.DrawCorneredBox( rx, ry + bump, bw, ScreenScale(10) )
+                        surface.SetFont("TacRP_Myriad_Pro_8")
+                        surface.SetTextColor(col_text)
+                        surface.SetTextPos(rx + rump, ry + bump + txjy)
+                        surface.DrawText(ab)
+
+                        surface.SetFont("TacRP_Myriad_Pro_8")
+                        surface.SetTextPos(rx + ScreenScale(3), ry + bump + txjy)
+                        surface.DrawText("+")
+
+                        bump = bump + statjump
+                        statted = true
+                    end end
+                    if atttbl.Cons then for aa, ab in ipairs(atttbl.Cons) do
+                        surface.SetDrawColor(col_text_con)
+                        TacRP.DrawCorneredBox( rx, ry + bump, bw, ScreenScale(10) )
+                        surface.SetFont("TacRP_Myriad_Pro_8")
+                        surface.SetTextColor(col_text)
+                        surface.SetTextPos(rx + rump, ry + bump + txjy)
+                        surface.DrawText(ab)
+
+                        surface.SetFont("TacRP_Myriad_Pro_8")
+                        surface.SetTextPos(rx + ScreenScale(3.8), ry + bump + txjy)
+                        surface.DrawText("-")
+
+                        bump = bump + statjump
+                        statted = true
+                    end end
+
+                    if statted then
+                        surface.SetDrawColor(col_bg)
+                        surface.DrawLine(rx, ry + gap, rx + bw, ry + gap)
+                    end
+
+                    DisableClipping(todo)
                 end
             end
         end
