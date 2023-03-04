@@ -141,7 +141,10 @@ function SWEP:PrimaryAttack()
 end
 
 function SWEP:SecondaryAttack()
-    self:GetOwner():SetNWInt("ti_nade", 1)
+    local nade = self:GetOwner():GetNWInt("ti_nade")
+    if nade != 1 and nade != 4 then
+        self:GetOwner():SetNWInt("ti_nade", 1)
+    end
     self:PrimeGrenade()
 end
 
