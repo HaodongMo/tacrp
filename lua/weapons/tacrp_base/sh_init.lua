@@ -31,6 +31,10 @@ function SWEP:Deploy()
     self:SetLastScopeTime(0)
     self:SetPrimedGrenade(false)
 
+    if IsValid(self:GetOwner()) and self:GetOwner():IsPlayer() then
+        self:GetOwner():SetCanZoom(false)
+    end
+
     self:DoDeployAnimation()
 
     self:SetBurstCount(0)
@@ -70,16 +74,15 @@ function SWEP:Holster()
     if self:GetOwner():IsNPC() then
         return
     end
+    if self:GetPrimedGrenade() then
+        return false
+    end
 
     self:SetScopeLevel(0)
     self:ToggleBoneMods(false)
     self:KillTimers()
     self:ToggleBlindFire(false)
     self:GetOwner():SetFOV(0, 0.1)
-
-    if self:GetPrimedGrenade() then
-        return false
-    end
 
     local holster = self:GetValue("HolsterVisible")
     if holster then
@@ -108,6 +111,8 @@ function SWEP:Holster()
     --     RunConsoleCommand("pp_bokeh", "0")
     -- end
 
+    self:GetOwner():SetCanZoom(true)
+
     return true
 end
 
@@ -123,6 +128,8 @@ function SWEP:Initialize()
 
     self:SetLastMeleeTime(0)
     self:SetNthShot(0)
+
+    self.m_WeaponDeploySpeed = 4
 
     self:ClientInitialize()
 end

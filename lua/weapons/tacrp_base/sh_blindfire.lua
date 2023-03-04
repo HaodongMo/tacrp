@@ -216,7 +216,7 @@ function SWEP:ThinkBlindFire()
 
     self:SetBlindFireCornerAmount(amt2)
 
-    if self:GetOwner():KeyDown(IN_WALK) then
+    if self:GetOwner():KeyDown(IN_ZOOM) then
         if self:GetBlindFire() then
             if self:GetOwner():KeyDown(IN_FORWARD) then
                 self:ToggleBlindFire(true, false)
