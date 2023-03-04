@@ -61,6 +61,8 @@ function SWEP:ThrowGrenade()
         force = force / 2
         ang:RotateAroundAxis(ang:Right(), 20)
         if nade.UnderhandSpecial then
+            force = force * 0.75
+            ang:RotateAroundAxis(ang:Right(), -10)
             amount = math.random(2, 4)
             spread = 0.15
         end
