@@ -148,8 +148,8 @@ function ENT:Detonate()
     dmg:SetInflictor(self)
     dmg:SetDamageForce(self:GetVelocity() * 100)
     for _, ent in pairs(ents.FindInCone(self:GetPos(), dir, 2048, 0.707)) do
-        local tr = util.QuickTrace(self:GetPos(), ent:WorldSpaceCenter() - self:GetPos(), self)
-        if tr.Entity == ent then
+        local tr = util.QuickTrace(self:GetPos(), ent:GetPos() - self:GetPos(), {self, ent})
+        if tr.Fraction == 1 then
             dmg:SetDamagePosition(self:GetPos())
             dmg:SetDamage(100 * math.Rand(0.75, 1.25) * Lerp(tr.Fraction ^ 0.5, 0.25, 1))
             ent:TakeDamageInfo(dmg)
