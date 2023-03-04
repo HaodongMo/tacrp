@@ -151,7 +151,7 @@ function ENT:Detonate()
         local tr = util.QuickTrace(self:GetPos(), ent:GetPos() - self:GetPos(), {self, ent})
         if tr.Fraction == 1 then
             dmg:SetDamagePosition(self:GetPos())
-            dmg:SetDamage(100 * math.Rand(0.75, 1.25) * Lerp(tr.Fraction ^ 0.5, 0.25, 1))
+            dmg:SetDamage(100 * math.Rand(0.75, 1.25) * Lerp(tr.Fraction ^ 1.5, 0.25, 1))
             ent:TakeDamageInfo(dmg)
         end
     end
