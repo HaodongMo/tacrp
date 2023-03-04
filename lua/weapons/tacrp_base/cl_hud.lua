@@ -239,6 +239,7 @@ function SWEP:DrawHUDBackground()
         else
             local tbl = ents.FindInSphere(self:GetOwner():GetPos(), 50 / TacRP.HUToM)
 
+            local i = 0
             for _, ent in ipairs(tbl) do
                 if !(ent:IsPlayer() or ent:IsNPC() or ent:IsNextBot()) then continue end
                 if ent == self:GetOwner() then continue end
@@ -257,10 +258,13 @@ function SWEP:DrawHUDBackground()
                 }
 
                 table.insert(radarpositions, read)
+                i = i + 1
             end
 
             lastradar = CurTime()
             cache_lastradarpositions = radarpositions
+
+            LocalPlayer():EmitSound("plats/elevbell1.wav", 60, 95 + math.min(i, 3) * 5, 0.2)
         end
 
         surface.SetDrawColor(0, 0, 0, 255 * 2 * (1 - ((CurTime() - lastradar) / scantime)))
