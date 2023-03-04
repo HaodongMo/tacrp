@@ -29,27 +29,27 @@ local conVars = {
     {
         name = "shutup",
         default = "0",
-        client = true
+        client = true,
     },
     {
         name = "togglepeek",
         default = "1",
-        client = true
+        client = true,
     },
     {
         name = "bodydamagecancel",
         default = "1",
-        replicated = true
+        replicated = true,
     },
     {
         name = "free_atts",
         default = "1",
-        replicated = true
+        replicated = true,
     },
     {
         name = "lock_atts",
         default = "1",
-        replicated = true
+        replicated = true,
     },
     {
         name = "loseattsondie",
@@ -58,7 +58,7 @@ local conVars = {
     {
         name = "generateattentities",
         default = "1",
-        replicated = true
+        replicated = true,
     },
     {
         name = "npc_equality",
@@ -71,22 +71,22 @@ local conVars = {
     {
         name = "penetration",
         default = "1",
-        replicated = true
+        replicated = true,
     },
     {
         name = "freeaim",
         default = "1",
-        replicated = true
+        replicated = true,
     },
     {
         name = "sway",
         default = "1",
-        replicated = true
+        replicated = true,
     },
     {
         name = "physbullet",
         default = "1",
-        replicated = true
+        replicated = true,
     },
     {
         name = "resupply_grenades",
@@ -102,23 +102,27 @@ local conVars = {
     },
     {
         name = "limitslots",
-        default = "0"
+        default = "0",
     },
     {
         name = "true_laser",
-        default = "1"
+        default = "1",
+        client = true,
     },
     {
         name = "toggletactical",
-        default = "1"
+        default = "1",
+        replicated = true,
     },
     {
         name = "infiniteammo",
-        default = "0"
+        default = "0",
+        replicated = true,
     },
     {
         name = "infinitegrenades",
-        default = "0"
+        default = "0",
+        replicated = true,
     },
     {
         name = "rock_funny",
@@ -126,7 +130,8 @@ local conVars = {
     },
     {
         name = "arcade",
-        default = "1"
+        default = "1",
+        replicated = true,
     },
     {
         name = "ammonames",
@@ -156,6 +161,7 @@ local conVars = {
     {
         name = "crosshair",
         default = "1",
+        replicated = true,
     },
     {
         name = "vignette",
@@ -165,18 +171,21 @@ local conVars = {
     {
         name = "flash_dark",
         default = "0",
+        replicated = true,
     },
     {
         name = "flash_slow",
         default = "0.4",
         min = 0,
         max = 1,
+        replicated = true,
     },
     {
         name = "melee_slow",
         default = "0.4",
         min = 0,
         max = 1,
+        replicated = true,
     },
 }
 

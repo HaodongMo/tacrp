@@ -38,3 +38,14 @@ hook.Add("player_connect", "TacRP_Holster", function(userid)
     local ply = Player(userid)
     ply.TacRP_Holster = {}
 end)
+
+net.Receive("tacrp_flashbang", function()
+    local time = net.ReadFloat()
+    LocalPlayer():ScreenFade( SCREENFADE.IN, GetConVar("tacrp_flash_dark"):GetBool() and Color(0, 0, 0, 254) or Color(255, 255, 255, 254), 2.5, time )
+
+    if GetConVar("tacrp_flash_dark"):GetBool() then
+        LocalPlayer():SetDSP( 32, false )
+    else
+        LocalPlayer():SetDSP( 37, false )
+    end
+end)

@@ -55,13 +55,19 @@ function ENT:Detonate()
 
             time = Lerp( dist / flashpower, time, 0.1 )
 
-            k:ScreenFade( SCREENFADE.IN, GetConVar("tacrp_flash_dark"):GetBool() and Color(0, 0, 0, 254) or Color(255, 255, 255, 254), 2.5, k:VisibleVec( flashorigin ) and time or 0.1 )
+            if !k:VisibleVec( flashorigin ) then time = 0.1 end
 
-            if GetConVar("tacrp_flash_dark"):GetBool() then
-                k:SetDSP( 32, false )
-            else
-                k:SetDSP( 37, false )
-            end
+            net.Start("tacrp_flashbang")
+                net.WriteFloat(time)
+            net.Send(k)
+
+            -- k:ScreenFade( SCREENFADE.IN, GetConVar("tacrp_flash_dark"):GetBool() and Color(0, 0, 0, 254) or Color(255, 255, 255, 254), 2.5, k:VisibleVec( flashorigin ) and time or 0.1 )
+
+            -- if GetConVar("tacrp_flash_dark"):GetBool() then
+            --     k:SetDSP( 32, false )
+            -- else
+            --     k:SetDSP( 37, false )
+            -- end
 
             k:SetNWFloat("TacRPStunStart", CurTime())
             k:SetNWFloat("TacRPStunDur", time + 0.5)

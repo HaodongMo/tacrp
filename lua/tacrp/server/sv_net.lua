@@ -16,6 +16,8 @@ util.AddNetworkString("tacrp_toggletactical")
 util.AddNetworkString("tacrp_doorbust")
 
 util.AddNetworkString("tacrp_togglepeek")
+util.AddNetworkString("tacrp_flashbang")
+
 
 net.Receive("tacrp_togglepeek", function(len, ply)
     local bf = net.ReadBool()
