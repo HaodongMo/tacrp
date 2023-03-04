@@ -20,10 +20,10 @@ SWEP.Slot = 2
 SWEP.ArcadeStats = {
 
     Damage_Max = 30,
-    Damage_Min = 45,
+    Damage_Min = 50,
 
-    Range_Min = 100,
-    Range_Max = 800,
+    Range_Min = 1000,
+    Range_Max = 2000,
 
     MoveSpeedMult = 0.8,
     ShootingSpeedMult = 0.6,

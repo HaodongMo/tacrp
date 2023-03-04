@@ -9,6 +9,7 @@ ATT.Category = {"trigger_auto", "trigger_burst"}
 ATT.SortOrder = 1
 
 ATT.Override_Firemodes = {1}
-ATT.Mult_Spread = 0.75
+ATT.Mult_Spread = 0.5
 ATT.Mult_RecoilSpreadPenalty = 0.75
-ATT.Mult_RecoilKick = 0.8
+ATT.Mult_RecoilKick = 0.75
+ATT.Mult_RecoilVisualKick = 0.5
