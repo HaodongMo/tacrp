@@ -19,6 +19,10 @@ SWEP.Slot = 3
 
 SWEP.ArcadeStats = {
 
+    Description = "Pistol grip shotgun powerful at very close range.",
+
+    Damage_Max = 16,
+    Damage_Min = 5,
     ClipSize = 4,
 
     MoveSpeedMult = 0.95,
@@ -74,7 +78,7 @@ SWEP.RecoilFirstShotMult = 1 // multiplier for the first shot's recoil amount
 SWEP.RecoilVisualKick = 4
 SWEP.RecoilVisualShake = 2
 
-SWEP.RecoilKick = 30
+SWEP.RecoilKick = 20
 
 SWEP.RecoilSpreadPenalty = 0.02
 

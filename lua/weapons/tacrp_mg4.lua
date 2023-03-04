@@ -37,19 +37,16 @@ SWEP.MuzzleVelocity = 28500
 
 // misc. shooting
 
-SWEP.Firemodes = {
-    2,
-    1
-}
+SWEP.Firemode = 2
 
 SWEP.RPM = 750
 
-SWEP.Spread = 0.01
+SWEP.Spread = 0.007
 
 SWEP.ShootTimeMult = 0.5
 
 SWEP.RecoilPerShot = 1
-SWEP.RecoilMaximum = 30
+SWEP.RecoilMaximum = 20
 SWEP.RecoilResetTime = 0.15
 SWEP.RecoilDissipationRate = 20
 SWEP.RecoilFirstShotMult = 1 // multiplier for the first shot's recoil amount
@@ -58,7 +55,8 @@ SWEP.RecoilVisualKick = 0.75
 
 SWEP.RecoilKick = 2
 
-SWEP.RecoilSpreadPenalty = 0.0005 // extra spread per one unit of recoil
+SWEP.HipFireSpreadPenalty = 0.01
+SWEP.RecoilSpreadPenalty = 0.0008 // extra spread per one unit of recoil
 
 SWEP.CanBlindFire = true
 
@@ -105,8 +103,8 @@ SWEP.HolsterAng = Angle(0, 0, 0)
 
 // sway
 
-SWEP.Sway = 5
-SWEP.ScopedSway = 0.5
+SWEP.Sway = 2
+SWEP.ScopedSway = 0.75
 
 // reload
 
