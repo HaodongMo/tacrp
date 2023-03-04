@@ -1026,6 +1026,10 @@ function SWEP:CreateCustomizeHUD()
                     local statjump = ScreenScale(12)
                     local statted = false
 
+                    if self2:GetY() + ry >= ScreenScale(320) then
+                        ry = ry - ScreenScale(60)
+                    end
+
                     local bw, bh = ScreenScale(160), ScreenScale(18)
                     surface.SetDrawColor(col_bg)
                     TacRP.DrawCorneredBox(rx, ry, bw, bh, col_corner)
