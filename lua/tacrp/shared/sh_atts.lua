@@ -52,7 +52,7 @@ function TacRP.LoadAtts()
             attent.AttToGive = shortname
             attent.Category = "Tactical RP - Attachments"
 
-            print("Registering entity for " .. shortname)
+            // print("Registering entity for " .. shortname)
 
             scripted_ents.Register(attent, "tacrp_att_" .. shortname)
         end
