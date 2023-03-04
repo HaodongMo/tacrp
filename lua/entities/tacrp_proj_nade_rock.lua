@@ -267,7 +267,7 @@ function ENT:PhysicsCollide(data, collider)
         local dmg = DamageInfo()
         dmg:SetAttacker(attacker)
         dmg:SetInflictor(self)
-        dmg:SetDamage(Lerp((data.OurOldVelocity:Length() - 400) / 2000, 4, 30))
+        dmg:SetDamage(Lerp((data.OurOldVelocity:Length() - 500) / 2500, 4, 30))
         if self:GetModel() != self.Model then
             dmg:ScaleDamage(2)
         end
@@ -310,7 +310,8 @@ function ENT:PhysicsCollide(data, collider)
             else
             local gibs = self:PrecacheGibs()
                 if gibs > 0 then
-                    self:GibBreakServer( data.OurOldVelocity * 2 )
+                    self:GibBreakClient(data.OurNewVelocity * math.Rand(0.8, 1.2))
+                    // self:GibBreakServer( data.OurOldVelocity * 2 )
                     self:Remove()
                 else
                     SafeRemoveEntityDelayed(self, 3)

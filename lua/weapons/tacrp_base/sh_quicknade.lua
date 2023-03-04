@@ -88,7 +88,7 @@ function SWEP:ThrowGrenade()
         local phys = rocket:GetPhysicsObject()
 
         if phys:IsValid() then
-            phys:ApplyForceCenter((ang + dispersion):Forward() * force)
+            phys:ApplyForceCenter((ang + dispersion):Forward() * force + self:GetOwner():GetVelocity())
             phys:AddAngleVelocity(VectorRand() * 1000)
         end
 
