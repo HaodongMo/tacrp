@@ -2,7 +2,7 @@ function SWEP:PrimeGrenade()
     self.Primary.Automatic = true
 
     if self:StillWaiting() then return end
-    if self:SprintLock() then return end
+    -- if self:SprintLock() then return end
     if self:GetPrimedGrenade() then return end
 
     local nade = self:GetGrenade()
@@ -55,16 +55,17 @@ function SWEP:ThrowGrenade()
 
     local amount = 1
 
-    if !self:GetOwner():KeyDown(IN_GRENADE1) and !self:GetOwner():KeyDown(IN_ATTACK2) and !nade.OverhandOnly then
+    if !self:GetOwner():KeyDown(IN_GRENADE1) and !nade.OverhandOnly then
         self:PlayAnimation("throw_grenade_underhand", self:GetValue("QuickNadeTimeMult"), true, true)
 
-        force = force / 3
-        ang:RotateAroundAxis(ang:Right(), 15)
+        force = force / 2
+        ang:RotateAroundAxis(ang:Right(), 20)
         if nade.UnderhandSpecial then
             amount = math.random(2, 4)
             spread = 0.15
         end
     else
+        ang:RotateAroundAxis(ang:Right(), 5)
         self:PlayAnimation("throw_grenade", self:GetValue("QuickNadeTimeMult"), true, true)
     end
 
@@ -219,10 +220,8 @@ function SWEP:ThinkGrenade()
         self:SelectGrenade()
     end
 
-    if self:GetPrimedGrenade() then
-        if self:GetAnimLockTime() < CurTime() then
-            self:ThrowGrenade()
-            self:SetPrimedGrenade(false)
-        end
+    if self:GetPrimedGrenade() and self:GetAnimLockTime() < CurTime() then
+        self:ThrowGrenade()
+        self:SetPrimedGrenade(false)
     end
 end
