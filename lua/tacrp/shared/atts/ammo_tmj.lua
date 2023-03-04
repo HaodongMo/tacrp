@@ -1,4 +1,5 @@
 ATT.PrintName = "TMJ"
+ATT.FullName = "Total Metal Jacket Rounds"
 ATT.Icon = Material("entities/tacrp_att_acc_tmj.png", "mips smooth")
 ATT.Description = "Bullets with improved penetration capability."
 ATT.Pros = {"Penetration"}

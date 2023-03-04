@@ -1,4 +1,5 @@
 ATT.PrintName = "Magnum Buck"
+ATT.FullName = "Magnum Buckshot"
 ATT.Icon = Material("entities/tacrp_att_acc_slugs.png", "mips smooth")
 ATT.Description = "Fire high powder yield pellets."
 ATT.Pros = {"Damage", "Muzzle Velocity"}
