@@ -72,7 +72,7 @@ function TacRP.GetAttTable(name)
     if TacRP.Attachments[shortname] then
         return TacRP.Attachments[shortname]
     else
-        assert(false, "!!!! TacRP tried to access invalid attachment " .. (shortname or "NIL") .. "!!!")
+        // assert(false, "!!!! TacRP tried to access invalid attachment " .. (shortname or "NIL") .. "!!!")
         return {}
     end
 end
