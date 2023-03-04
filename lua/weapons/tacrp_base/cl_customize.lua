@@ -1026,7 +1026,7 @@ function SWEP:CreateCustomizeHUD()
                     local statjump = ScreenScale(12)
                     local statted = false
 
-                    if self2:GetY() + ry >= ScreenScale(320) then
+                    if self2:GetY() + ry >= ScreenScale(280) then
                         ry = ry - ScreenScale(60)
                     end
 
