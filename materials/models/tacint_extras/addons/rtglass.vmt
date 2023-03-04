@@ -1,7 +1,7 @@
 "VertexlitGeneric"
 {
-	"$basetexture" "effects/arc9/glass"
-	"$bumpmap"    "effects/arc9/glass_nm"
+	"$basetexture" "models\tacint_extras\addons\glass"
+	"$bumpmap"    "models\tacint_extras\addons\glass_nm"
 	"$translucent" 1
 	"$phong" 1
 	"$phongboost" "2"

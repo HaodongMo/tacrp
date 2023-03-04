@@ -151,7 +151,7 @@ function ENT:Detonate()
         local tr = util.QuickTrace(self:GetPos(), ent:WorldSpaceCenter() - self:GetPos(), self)
         if tr.Entity == ent then
             dmg:SetDamagePosition(self:GetPos())
-            dmg:SetDamage(150 * math.Rand(0.75, 1) * Lerp(tr.Fraction, 1, 0.25))
+            dmg:SetDamage(150 * math.Rand(0.5, 1.5) * Lerp(tr.Fraction, 1, 0.25))
             ent:TakeDamageInfo(dmg)
         end
     end
