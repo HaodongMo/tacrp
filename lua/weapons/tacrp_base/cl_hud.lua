@@ -116,9 +116,9 @@ function SWEP:DrawHUDBackground()
     // draw a vignette effect around the screen based on recoil
     local recoil = self:GetRecoilAmount()
     if recoil > 0 and GetConVar("tacrp_vignette"):GetBool() then
-        local recoil_pct = math.Clamp(recoil / self:GetValue("RecoilMaximum"), 0, 1) ^ 1.5
+        local recoil_pct = math.Clamp(recoil / self:GetValue("RecoilMaximum"), 0, 1) ^ 1.25
         local delta = self:Curve(recoil_pct)
-        surface.SetDrawColor(0, 0, 0, 100 * delta)
+        surface.SetDrawColor(0, 0, 0, 200 * delta)
         surface.SetMaterial(mat_vignette)
         surface.DrawTexturedRect(0, 0, ScrW(), ScrH())
     end
@@ -481,7 +481,9 @@ function SWEP:DrawHUDBackground()
             clips = math.ceil(clips)
             clips = math.min(clips, 999)
 
-            if self:GetValue("Ammo") == "" then
+            if self:GetInfiniteAmmo() then
+                clips = "INF"
+            elseif self:GetValue("Ammo") == "" then
                 clips = "---"
             else
                 surface.SetTextColor(col)
@@ -525,9 +527,9 @@ function SWEP:DrawHUDBackground()
             if self:GetValue("CanQuickNade") then
                 local nade = self:GetGrenade()
 
-                local qty = "INF"
+                local qty = nil --"INF"
 
-                if nade.Ammo then
+                if nade.Ammo and (nade.Secret or !GetConVar("tacrp_infinitegrenades"):GetBool()) then
                     qty = tostring(self:GetOwner():GetAmmoCount(nade.Ammo))
                 end
 
@@ -539,7 +541,7 @@ function SWEP:DrawHUDBackground()
                     surface.DrawTexturedRect(x + ScreenScale(2), y + h - sg - ScreenScale(1), sg, sg)
                 end
 
-                local nadetext = nade.PrintName .. "x" .. qty
+                local nadetext = nade.PrintName .. (qty and ("x" .. qty) or "")
                 surface.SetTextPos(x + ScreenScale(4) + sg, y + h - sg + ScreenScale(1))
                 surface.SetFont("TacRP_HD44780A00_5x8_8")
                 surface.SetTextColor(col)
