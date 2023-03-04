@@ -1,6 +1,7 @@
 ATT.PrintName = "Skullsplitter"
+ATT.FullName = "Skullsplitter Rounds"
 ATT.Icon = Material("entities/tacrp_att_acc_hollowpoints.png", "mips smooth")
-ATT.Description = "."
+ATT.Description = "Specialized rounds that penetrate bones well, increasing damage to head."
 ATT.Pros = {"Headshot damage"}
 ATT.Cons = {"Limb damage"}
 

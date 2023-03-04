@@ -2,15 +2,18 @@ ATT.PrintName = "SAPHE"
 ATT.Icon = Material("entities/tacrp_att_acc_tmj.png", "mips smooth")
 ATT.Description = "High explosive rounds."
 ATT.Pros = {"Explosion on hit"}
-ATT.Cons = {"Capacity", "Muzzle Velocity", "Fire Rate"}
+ATT.Cons = {"Direct Damage", "Capacity", "Fire Rate"}
 
 ATT.Category = "ammo_amr"
 
 ATT.SortOrder = 1
 
 ATT.ExplosiveEffect = "Explosion"
-ATT.ExplosiveDamage = 100
+ATT.ExplosiveDamage = 50
 ATT.ExplosiveRadius = 256
+
+ATT.Add_Damage_Max = -50
+ATT.Add_Damage_Min = -25
 
 ATT.Mult_MuzzleVelocity = 0.667
 

@@ -1,6 +1,7 @@
 ATT.PrintName = "Greased"
+ATT.FullName = "Greased Bolt"
 ATT.Icon = Material("entities/tacrp_att_bolt_greased.png", "mips smooth")
-ATT.Description = "Faster firerate."
+ATT.Description = "Faster cycle speed but handling is worse."
 ATT.Pros = {"Cycle speed"}
 ATT.Cons = {"Mobility", "Recoil", "Muzzle velocity"}
 

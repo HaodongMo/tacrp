@@ -1,6 +1,6 @@
 ATT.PrintName = "Smackdown"
 ATT.Icon = Material("entities/tacrp_att_acc_melee.png", "mips smooth")
-ATT.Description = "Improves melee damage."
+ATT.Description = "Improves melee performance."
 ATT.Pros = {"Melee Damage", "Slow On Bash"}
 
 ATT.Category = "perk_melee"

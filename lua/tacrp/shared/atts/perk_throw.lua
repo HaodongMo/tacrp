@@ -1,6 +1,6 @@
 ATT.PrintName = "Grenadier"
 ATT.Icon = Material("entities/tacrp_att_acc_grenade.png", "mips smooth")
-ATT.Description = ""
+ATT.Description = "Throw grenades faster, and rocks are available."
 ATT.Pros = {"Faster Quickthrow", "Throw Rocks"}
 
 ATT.Category = {"perk", "perk_throw"}

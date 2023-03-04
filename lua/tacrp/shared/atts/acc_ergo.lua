@@ -1,6 +1,7 @@
 ATT.PrintName = "Ergo Grip"
+ATT.FullName = "Ergonomic Grip"
 ATT.Icon = Material("entities/tacrp_att_acc_ergo.png", "mips smooth")
-ATT.Description = ""
+ATT.Description = "Grooved grip reduces sway and improves aim speed."
 ATT.Pros = {"Sway", "Aim Down Sights Time"}
 
 ATT.Category = "acc"

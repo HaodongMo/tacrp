@@ -1,6 +1,7 @@
 ATT.PrintName = "Tactical"
+ATT.FullName = "Tactical Bolt"
 ATT.Icon = Material("entities/tacrp_att_bolt_tactical.png", "mips smooth")
-ATT.Description = "Better handling."
+ATT.Description = "Slower bolt speed but improve overall handling."
 ATT.Pros = {"Recoil", "Mobility", "Muzzle velocity"}
 ATT.Cons = {"Cycle speed"}
 

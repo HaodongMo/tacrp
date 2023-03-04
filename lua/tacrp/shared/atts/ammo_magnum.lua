@@ -1,4 +1,6 @@
-ATT.PrintName = "Magnum"
+ATT.PrintName = "Overpressure"
+ATT.FullName = "Overpressured Rounds"
+
 ATT.Icon = Material("entities/tacrp_att_acc_hollowpoints.png", "mips smooth")
 ATT.Description = "Bullets that maintain close range power better, but have higher recoil."
 ATT.Pros = {"Minimum Range", "Muzzle Velocity"}

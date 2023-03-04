@@ -1,8 +1,8 @@
 ATT.PrintName = "Iron Sights"
 ATT.Icon = Material("entities/tacrp_att_optic_irons.png", "mips smooth")
-ATT.Description = "Basic sights that won't be damaged by striking with the weapon."
-ATT.Pros = {"Handling"}
-ATT.Cons = {"No zoom"}
+ATT.Description = "Replace default scope for faster aim and better mobility."
+ATT.Pros = {"Handling", "Mobility"}
+ATT.Cons = {"No Scope"}
 
 ATT.Free = true
 
@@ -18,5 +18,7 @@ ATT.Override_ScopeFOV = 90 / 1.1
 ATT.Override_ScopeLevels = 1 // 2 = like CS:S
 
 ATT.Mult_AimDownSightsTime = 0.8
-ATT.Mult_SprintToFireTime = 0.95
-ATT.Add_SightedSpeedMult = 0.15
+ATT.Mult_SprintToFireTime = 0.9
+ATT.Add_SightedSpeedMult = 0.1
+ATT.Add_ShootingSpeedMult = 0.05
+ATT.Mult_HipfireSpreadPenalty = 0.75

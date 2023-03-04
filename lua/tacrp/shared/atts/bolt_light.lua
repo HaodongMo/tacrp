@@ -1,4 +1,5 @@
 ATT.PrintName = "Light"
+ATT.FullName = "Light Bolt"
 ATT.Icon = Material("entities/tacrp_att_bolt_light.png", "mips smooth")
 ATT.Description = "Faster firerate."
 ATT.Pros = {"Fire rate"}

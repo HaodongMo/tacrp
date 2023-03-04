@@ -1,6 +1,7 @@
 ATT.PrintName = "Quickdraw"
+ATT.FullName = "Quickdraw Holster"
 ATT.Icon = Material("entities/tacrp_att_acc_quickdraw.png", "mips smooth")
-ATT.Description = ""
+ATT.Description = "Strapless holster that allows you to ready a weapon quickly."
 ATT.Pros = {"Faster draw speed"}
 
 ATT.Category = "acc_holster"

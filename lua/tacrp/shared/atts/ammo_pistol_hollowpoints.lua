@@ -1,6 +1,8 @@
 ATT.PrintName = "Hollowpoints"
+ATT.FullName = "Hollowpoint Rounds"
+
 ATT.Icon = Material("entities/tacrp_att_acc_hollowpoints.png", "mips smooth")
-ATT.Description = "Bullets that expand on hit, improving limb damage but cannot penetrate well at all."
+ATT.Description = "Bullets that expand on hit, improving limb damage."
 ATT.Pros = {"Limb Damage"}
 ATT.Cons = {"Penetration"}
 

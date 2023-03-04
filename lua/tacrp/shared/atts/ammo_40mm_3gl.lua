@@ -1,8 +1,8 @@
 ATT.PrintName = "3GL"
 ATT.Icon = Material("entities/tacrp_att_ammo_40mm_3gl.png", "mips smooth")
 ATT.Description = "Three weak cluster grenades, fired at once."
-ATT.Pros = {"More projectiles"}
-ATT.Cons = {"Weaker projectiles"}
+ATT.Pros = {"3 projectiles"}
+ATT.Cons = {"Spread", "Damage"}
 
 ATT.Category = "ammo_40mm"
 
