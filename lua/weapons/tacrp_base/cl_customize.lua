@@ -493,7 +493,7 @@ function SWEP:CreateCustomizeHUD()
             Name = "Move Speed",
             Description = "Speed multiplier while the weapon is held up. Has no effect when weapon is in safety.",
             AggregateFunction = function(base, val)
-                return math.Round(val * 100, 0)
+                return math.min(100, math.Round(val * 100, 0))
             end,
             Unit = "%",
             Value = "MoveSpeedMult"
@@ -502,7 +502,7 @@ function SWEP:CreateCustomizeHUD()
             Name = "Shooting Speed",
             Description = "Speed multiplier from firing the weapon. Accumulating recoil increases slowdown intensity.",
             AggregateFunction = function(base, val)
-                return math.Round(val*100, 0)
+                return math.min(100, math.Round(val * 100, 0))
             end,
             Unit = "%",
             Value = "ShootingSpeedMult"
@@ -511,7 +511,7 @@ function SWEP:CreateCustomizeHUD()
             Name = "Sighted Speed",
             Description = "Speed multiplier while the weapon is aiming.",
             AggregateFunction = function(base, val)
-                return math.Round(val*100, 0)
+                return math.min(100, math.Round(val * 100, 0))
             end,
             Unit = "%",
             Value = "SightedSpeedMult"
@@ -520,7 +520,7 @@ function SWEP:CreateCustomizeHUD()
             Name = "Reload Speed",
             Description = "Speed multiplier while reloading.",
             AggregateFunction = function(base, val)
-                return math.Round(val*100, 0)
+                return math.min(100, math.Round(val * 100, 0))
             end,
             Unit = "%",
             Value = "ReloadSpeedMult",

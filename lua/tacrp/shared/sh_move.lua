@@ -20,25 +20,25 @@ function TacRP.Move(ply, mv, cmd)
     local mult = 1
 
     if iscurrent and !wpn:GetSafe() then
-        mult = mult * wpn:GetValue("MoveSpeedMult")
+        mult = mult * math.Clamp(wpn:GetValue("MoveSpeedMult"), 0.0001, 1)
     end
 
     if iscurrent and wpn:GetScopeLevel() > 0 then
-        mult = mult * wpn:GetValue("SightedSpeedMult")
+        mult = mult * math.Clamp(wpn:GetValue("SightedSpeedMult"), 0.0001, 1)
     end
 
     if iscurrent then
         local rsmt = wpn:GetValue("ReloadSpeedMultTime")
 
         if wpn:GetReloading() then
-            mult = mult * wpn:GetValue("ReloadSpeedMult")
+            mult = mult * math.Clamp(wpn:GetValue("ReloadSpeedMult"), 0.0001, 1)
         elseif wpn:GetReloadFinishTime() + rsmt > CurTime() then
             local mt = CurTime() - wpn:GetReloadFinishTime()
             local d = mt / rsmt
 
             d = math.Clamp(d, 0, 1)
 
-            mult = mult * Lerp(d, wpn:GetValue("ReloadSpeedMult"), 1)
+            mult = mult * Lerp(d, math.Clamp(wpn:GetValue("ReloadSpeedMult"), 0.0001, 1), 1)
         end
     end
 
@@ -50,7 +50,7 @@ function TacRP.Move(ply, mv, cmd)
 
         d = math.Clamp(d, 0, 1)
 
-        mult = mult * Lerp(d, wpn:GetValue("MeleeSpeedMult"), 1)
+        mult = mult * Lerp(d, math.Clamp(wpn:GetValue("MeleeSpeedMult"), 0.0001, 1), 1)
     end
 
 
