@@ -15,3 +15,5 @@ ATT.HolsterPos = Vector(7, -2, 0)
 ATT.HolsterAng = Angle(10, 90, 90)
 
 ATT.Mult_DeployTimeMult = 1.25
+
+ATT.Ignore = true
