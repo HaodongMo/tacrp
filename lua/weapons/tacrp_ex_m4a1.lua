@@ -59,8 +59,6 @@ SWEP.Spread = 0.005
 
 SWEP.ShootTimeMult = 0.5
 
-
-
 SWEP.RecoilPerShot = 1
 SWEP.RecoilMaximum = 15
 SWEP.RecoilResetTime = 0.12
@@ -72,6 +70,8 @@ SWEP.RecoilVisualKick = 0.75
 SWEP.RecoilKick = 3.5
 
 SWEP.RecoilSpreadPenalty = 0.0015
+
+SWEP.HipfireSpreadPenalty = 0.02
 
 SWEP.CanBlindFire = true
 

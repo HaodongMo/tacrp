@@ -67,7 +67,7 @@ function SWEP:LoadPreset(filename)
             net.WriteUInt(0, TacRP.Attachments_Bits)
         else
             local atttbl = TacRP.GetAttTable(k.Installed)
-            net.WriteUInt(atttbl.ID, TacRP.Attachments_Bits)
+            net.WriteUInt(atttbl.ID or 0, TacRP.Attachments_Bits)
         end
     end
     net.SendToServer()

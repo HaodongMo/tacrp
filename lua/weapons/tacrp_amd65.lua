@@ -22,7 +22,7 @@ SWEP.ArcadeStats = {
     Damage_Max = 32,
     Damage_Min = 14,
 
-    RecoilKick = 6,
+    RecoilKick = 6.5,
 
     MoveSpeedMult = 0.85,
     ShootingSpeedMult = 0.75,

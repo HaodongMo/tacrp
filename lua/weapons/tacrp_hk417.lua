@@ -19,8 +19,10 @@ SWEP.Slot = 2
 
 SWEP.ArcadeStats = {
 
-    Damage_Max = 40,
-    Damage_Min = 20,
+    Damage_Max = 38,
+    Damage_Min = 26,
+
+    RecoilDissipationRate = 10,
 
     MoveSpeedMult = 0.8,
     ShootingSpeedMult = 0.6,
@@ -34,12 +36,12 @@ SWEP.ArcadeStats = {
 SWEP.Damage_Max = 44
 SWEP.Damage_Min = 32
 SWEP.Range_Min = 1500 // distance for which to maintain maximum damage
-SWEP.Range_Max = 6000 // distance at which we drop to minimum damage
+SWEP.Range_Max = 6500 // distance at which we drop to minimum damage
 SWEP.Penetration = 12 // units of metal this weapon can penetrate
 
 SWEP.BodyDamageMultipliers = {
     [HITGROUP_HEAD] = 2.5,
-    [HITGROUP_CHEST] = 1.25,
+    [HITGROUP_CHEST] = 1.4,
     [HITGROUP_STOMACH] = 1,
     [HITGROUP_LEFTARM] = 1,
     [HITGROUP_RIGHTARM] = 1,
@@ -62,16 +64,18 @@ SWEP.ShootTimeMult = 0.4
 
 
 SWEP.RecoilPerShot = 1
-SWEP.RecoilMaximum = 15
-SWEP.RecoilResetTime = 0.1
-SWEP.RecoilDissipationRate = 15
-SWEP.RecoilFirstShotMult = 1 // multiplier for the first shot's recoil amount
+SWEP.RecoilMaximum = 8
+SWEP.RecoilResetTime = 0.15
+SWEP.RecoilDissipationRate = 12
+SWEP.RecoilFirstShotMult = 0.85 // multiplier for the first shot's recoil amount
 
 SWEP.RecoilVisualKick = 3
 
 SWEP.RecoilKick = 7.25
 
-SWEP.RecoilSpreadPenalty = 0.006
+SWEP.RecoilSpreadPenalty = 0.009
+
+SWEP.HipfireSpreadPenalty = 0.06
 
 SWEP.CanBlindFire = true
 
@@ -84,7 +88,7 @@ SWEP.MeleeSpeedMult = 0.5
 SWEP.ReloadSpeedMult = 0.4
 
 SWEP.AimDownSightsTime = 0.4
-SWEP.SprintToFireTime = 0.4
+SWEP.SprintToFireTime = 0.42
 
 // hold types
 
