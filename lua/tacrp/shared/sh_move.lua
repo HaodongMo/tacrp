@@ -2,6 +2,17 @@ function TacRP.Move(ply, mv, cmd)
     local wpn = ply:GetActiveWeapon()
     local iscurrent = true
 
+    if ply:GetNWFloat("TacRPLastBashed", 0) + 2 > CurTime() then
+        local mult = 0.5
+        if ply:GetNWFloat("TacRPLastBashed", 0) + 1 < CurTime() then
+            mult = Lerp((CurTime() - ply:GetNWFloat("TacRPLastBashed", 0) - 1) / 1, 0.5, 1)
+        end
+
+        local basespd = math.min((Vector(cmd:GetForwardMove(), cmd:GetUpMove(), cmd:GetSideMove())):Length(), mv:GetMaxClientSpeed())
+        mv:SetMaxSpeed(basespd * mult)
+        mv:SetMaxClientSpeed(basespd * mult)
+    end
+
     -- Remember last weapon to keep applying slowdown on shooting and melee
     if !wpn.ArcticTacRP then
         if !IsValid(ply.LastTacRPWeapon) or ply.LastTacRPWeapon:GetOwner() ~= ply then

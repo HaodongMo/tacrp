@@ -89,6 +89,10 @@ function SWEP:Melee()
             self:EmitSound(table.Random(self:GetValue("Sound_MeleeHit")), 75, 100, 1, CHAN_ITEM)
         end
 
+        if tr.Entity:IsPlayer() and self:GetValue("MeleeSlow") then
+            tr.Entity:SetNWFloat("TacRPLastBashed", CurTime())
+        end
+
         --[[]
         if IsFirstTimePredicted() then
             if tr.MatType == MAT_FLESH or tr.MatType == MAT_ALIENFLESH or tr.MatType == MAT_ANTLION or tr.MatType == MAT_BLOODYFLESH then
