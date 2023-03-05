@@ -117,7 +117,7 @@ net.Receive("TacRP_sendbullet", function(len, ply)
         Weapon = weapon,
     }
 
-    if !weapon:IsValid() then return end
+    if !weapon:IsValid() or !weapon.GetValue then return end
 
     if weapon:GetValue("TracerNum") == 0 then
         bullet.Invisible = true
@@ -292,7 +292,7 @@ function TacRP:ProgressPhysBullet(bullet, timestep)
                 bullet.Dead = true
                 if game.SinglePlayer() or !GetConVar("tacrp_client_damage"):GetBool() then
                     bullet.Attacker:FireBullets({
-                        Damage = weapon:GetValue("Damage_Max"),
+                        Damage = 1, -- weapon:GetValue("Damage_Max"),
                         Force = 8,
                         Tracer = 0,
                         Num = 1,
@@ -301,6 +301,7 @@ function TacRP:ProgressPhysBullet(bullet, timestep)
                         Spread = Vector(0, 0, 0),
                         Callback = function(att, btr, dmg)
                             local range = bullet.Travelled
+                            if !IsValid(weapon) then return end
                             weapon:AfterShotFunction(btr, dmg, range, bullet.Penleft, bullet.Damaged)
                         end
                     })
