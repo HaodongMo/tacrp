@@ -413,7 +413,7 @@ function SWEP:CreateCustomizeHUD()
             Name = "Spread",
             Description = "Mechanical accuracy of the weapon while aiming.",
             AggregateFunction = function(base, val)
-                return math.Round(math.deg(val), 1)
+                return math.Round(math.deg(val), 2)
             end,
             Unit = "°",
             Value = "Spread",

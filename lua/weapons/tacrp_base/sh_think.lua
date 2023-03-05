@@ -19,14 +19,6 @@ function SWEP:Think()
     --     end
     -- end
 
-    if owner:KeyReleased(IN_ATTACK) then
-        if !self:GetValue("RunawayBurst") then
-            self:SetBurstCount(0)
-        end
-        if -self:GetCurrentFiremode() < 0 and !self:GetValue("RunawayBurst") and self:GetBurstCount() > 0 then
-            self:SetNextPrimaryFire(CurTime() + self:GetValue("PostBurstDelay"))
-        end
-    end
 
     if self:GetValue("RunawayBurst") then
         if self:GetBurstCount() >= -self:GetCurrentFiremode() and -self:GetCurrentFiremode() > 0 then
@@ -35,6 +27,11 @@ function SWEP:Think()
         elseif self:GetBurstCount() > 0 and self:GetBurstCount() < -self:GetCurrentFiremode() then
             self:PrimaryAttack()
         end
+    elseif owner:KeyReleased(IN_ATTACK) then
+        if self:GetCurrentFiremode() < 0 and self:GetBurstCount() > 1 then
+            self:SetNextPrimaryFire(CurTime() + self:GetValue("PostBurstDelay"))
+        end
+        self:SetBurstCount(0)
     end
 
     self:ThinkRecoil()
