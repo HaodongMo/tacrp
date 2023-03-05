@@ -122,7 +122,8 @@ function ATT.TacticalCrosshair(self, x, y, spread, sway)
     else
         circlealpha = math.Approach(circlealpha, 0, FrameTime() * 10)
     end
+    if dropalpha == 0 then return end
 
-    surface.DrawCircle(x, y, spread - 1, 255, 255, 255, circlealpha * 75)
-    surface.DrawCircle(x, y, spread + 1, 255, 255, 255, circlealpha * 75)
+    surface.DrawCircle(x, y, spread - 1, 255, 255, 255, circlealpha * 100)
+    surface.DrawCircle(x, y, spread + 1, 255, 255, 255, circlealpha * 100)
 end
