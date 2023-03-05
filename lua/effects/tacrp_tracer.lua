@@ -15,7 +15,7 @@ function EFFECT:Init(data)
     local hit = data:GetOrigin()
     local wep = data:GetEntity()
 
-    if !IsValid(wep) then return end
+    if !IsValid(wep) or !wep.GetValue then return end
 
     local speed = wep:GetValue("MuzzleVelocity") or data:GetScale()
     local start = (wep.GetTracerOrigin and wep:GetTracerOrigin()) or data:GetStart()
@@ -40,6 +40,8 @@ function EFFECT:Think()
 end
 
 function EFFECT:Render()
+
+    if !self.Dir then return end
 
     local d = (UnPredictedCurTime() - self.StartTime) / self.LifeTime
     local startpos = self.StartPos + (d * 0.2 * (self.EndPos - self.StartPos))

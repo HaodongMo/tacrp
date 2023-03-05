@@ -116,24 +116,28 @@ function SWEP:ToggleBoneMods(on, left)
         if left then
             for i, k in pairs(bone_mods_left) do
                 local boneindex = self:GetOwner():LookupBone(i)
+                if !boneindex then continue end
 
                 self:GetOwner():ManipulateBoneAngles(boneindex, k)
             end
 
             for i, k in pairs(bone_mods_left_pos) do
                 local boneindex = self:GetOwner():LookupBone(i)
+                if !boneindex then continue end
 
                 self:GetOwner():ManipulateBonePosition(boneindex, k)
             end
         else
             for i, k in pairs(bone_mods) do
                 local boneindex = self:GetOwner():LookupBone(i)
+                if !boneindex then continue end
 
                 self:GetOwner():ManipulateBoneAngles(boneindex, k)
             end
 
             for i, k in pairs(bone_mods_pos) do
                 local boneindex = self:GetOwner():LookupBone(i)
+                if !boneindex then continue end
 
                 self:GetOwner():ManipulateBonePosition(boneindex, k)
             end
@@ -141,24 +145,28 @@ function SWEP:ToggleBoneMods(on, left)
     else
         for i, k in pairs(bone_mods_left) do
             local boneindex = self:GetOwner():LookupBone(i)
+            if !boneindex then continue end
 
             self:GetOwner():ManipulateBoneAngles(boneindex, Angle(0, 0, 0))
         end
 
         for i, k in pairs(bone_mods_left_pos) do
             local boneindex = self:GetOwner():LookupBone(i)
+            if !boneindex then continue end
 
             self:GetOwner():ManipulateBonePosition(boneindex, Vector(0, 0, 0))
         end
 
         for i, k in pairs(bone_mods) do
             local boneindex = self:GetOwner():LookupBone(i)
+            if !boneindex then continue end
 
             self:GetOwner():ManipulateBoneAngles(boneindex, Angle(0, 0, 0))
         end
 
         for i, k in pairs(bone_mods_pos) do
             local boneindex = self:GetOwner():LookupBone(i)
+            if !boneindex then continue end
 
             self:GetOwner():ManipulateBonePosition(boneindex, Vector(0, 0, 0))
         end

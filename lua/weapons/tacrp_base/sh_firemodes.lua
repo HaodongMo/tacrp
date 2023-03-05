@@ -40,6 +40,7 @@ function SWEP:GetCurrentFiremode()
     else
         return self:GetValue("Firemode")
     end
+    return 0
 end
 
 function SWEP:ToggleSafety(onoff)
@@ -69,5 +70,7 @@ function SWEP:GetFiremodeMat(mode)
         return mat_2
     elseif mode == -3 then
         return mat_3
+    else
+        return mat_1 // epic fail
     end
 end
