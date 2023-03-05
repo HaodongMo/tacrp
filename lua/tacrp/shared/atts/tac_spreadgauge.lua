@@ -116,13 +116,12 @@ end
 
 local circlealpha = 0
 function ATT.TacticalCrosshair(self, x, y, spread, sway)
-
-    if self:IsInScope() and (self:GetValue("ScopeOverlay") or !self:GetReloading()) then
+    if self:IsInScope() and !self:GetReloading() then
         circlealpha = math.Approach(circlealpha, self:GetSightAmount() ^ 2, FrameTime() * 2)
     else
         circlealpha = math.Approach(circlealpha, 0, FrameTime() * 10)
     end
-    if dropalpha == 0 then return end
+    if circlealpha == 0 then return end
 
     surface.DrawCircle(x, y, spread - 1, 255, 255, 255, circlealpha * 100)
     surface.DrawCircle(x, y, spread + 1, 255, 255, 255, circlealpha * 100)

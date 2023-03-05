@@ -10,6 +10,7 @@ function SWEP:DoDrawCrosshair(x, y)
     else
         self.CrosshairAlpha = math.Approach(self.CrosshairAlpha, 1, 5 * ft)
     end
+
     if self:GetValue("TacticalCrosshair") and self:GetTactical() then
         tacfunc = self:GetValue("TacticalCrosshair")
     elseif self.CrosshairAlpha <= 0 then return true end
