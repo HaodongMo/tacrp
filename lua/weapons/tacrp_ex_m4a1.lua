@@ -62,16 +62,15 @@ SWEP.ShootTimeMult = 0.5
 SWEP.RecoilPerShot = 1
 SWEP.RecoilMaximum = 15
 SWEP.RecoilResetTime = 0.12
-SWEP.RecoilDissipationRate = 20
+SWEP.RecoilDissipationRate = 18
 SWEP.RecoilFirstShotMult = 1 // multiplier for the first shot's recoil amount
 
 SWEP.RecoilVisualKick = 0.75
 
-SWEP.RecoilKick = 3.5
+SWEP.RecoilKick = 4.5
 
-SWEP.RecoilSpreadPenalty = 0.0015
-
-SWEP.HipfireSpreadPenalty = 0.02
+SWEP.RecoilSpreadPenalty = 0.0032
+SWEP.HipfireSpreadPenalty = 0.04
 
 SWEP.CanBlindFire = true
 
@@ -83,8 +82,8 @@ SWEP.SightedSpeedMult = 0.25
 SWEP.MeleeSpeedMult = 0.5
 SWEP.ReloadSpeedMult = 0.5
 
-SWEP.AimDownSightsTime = 0.35
-SWEP.SprintToFireTime = 0.35 // multiplies how long it takes to recover from sprinting
+SWEP.AimDownSightsTime = 0.36
+SWEP.SprintToFireTime = 0.38 // multiplies how long it takes to recover from sprinting
 
 // hold types
 
@@ -99,7 +98,7 @@ SWEP.PassiveAng = Angle(0, 0, 0)
 SWEP.PassivePos = Vector(0, -2, -6)
 
 SWEP.BlindFireAng = Angle(0, 5, 0)
-SWEP.BlindFirePos = Vector(0, -2, -4)
+SWEP.BlindFirePos = Vector(3, -2, -5)
 
 SWEP.SprintAng = Angle(30, -15, 0)
 SWEP.SprintPos = Vector(5, 0, -2)

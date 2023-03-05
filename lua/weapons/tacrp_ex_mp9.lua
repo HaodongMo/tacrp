@@ -21,7 +21,7 @@ SWEP.Slot = 2
 
 SWEP.ArcadeStats = {
 
-    Damage_Max = 17,
+    Damage_Max = 18,
     Damage_Min = 6,
 
     MoveSpeedMult = 0.9,
@@ -36,7 +36,7 @@ SWEP.ArcadeStats = {
 SWEP.Damage_Max = 18
 SWEP.Damage_Min = 9
 SWEP.Range_Min = 500 // distance for which to maintain maximum damage
-SWEP.Range_Max = 3500 // distance at which we drop to minimum damage
+SWEP.Range_Max = 2500 // distance at which we drop to minimum damage
 SWEP.Penetration = 3 // units of metal this weapon can penetrate
 
 SWEP.MuzzleVelocity = 16000
@@ -86,7 +86,7 @@ SWEP.MeleeSpeedMult = 0.5
 SWEP.ReloadSpeedMult = 0.5
 
 SWEP.AimDownSightsTime = 0.33
-SWEP.SprintToFireTime = 0.33
+SWEP.SprintToFireTime = 0.3
 
 // hold types
 

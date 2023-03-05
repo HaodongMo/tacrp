@@ -10,7 +10,7 @@ SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 SWEP.SubCatTier = "2Premium"
 SWEP.SubCatType = "3Submachine Gun"
 
-SWEP.Description = "Compact personal defense weapon with emphasis on close quarters combat."
+SWEP.Description = "Compact personal defense weapon with superb handling. High velocity rounds retain effectiveness at range."
 
 SWEP.ViewModel = "models/weapons/tacint/v_mp7.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_mp7.mdl"
@@ -27,10 +27,10 @@ SWEP.ArcadeStats = {
 
 // "ballistics"
 
-SWEP.Damage_Max = 18
-SWEP.Damage_Min = 11
-SWEP.Range_Min = 900 // distance for which to maintain maximum damage
-SWEP.Range_Max = 3000 // distance at which we drop to minimum damage
+SWEP.Damage_Max = 17
+SWEP.Damage_Min = 14
+SWEP.Range_Min = 1200 // distance for which to maintain maximum damage
+SWEP.Range_Max = 5000 // distance at which we drop to minimum damage
 SWEP.Penetration = 10 // units of metal this weapon can penetrate
 
 SWEP.MuzzleVelocity = 17500
@@ -58,14 +58,14 @@ SWEP.RPM = 850
 SWEP.Spread = 0.005
 
 SWEP.RecoilPerShot = 1
-SWEP.RecoilMaximum = 10
+SWEP.RecoilMaximum = 20
 SWEP.RecoilResetTime = 0.2 // time after you stop shooting for recoil to start dissipating
-SWEP.RecoilDissipationRate = 20
+SWEP.RecoilDissipationRate = 25
 SWEP.RecoilFirstShotMult = 1 // multiplier for the first shot's recoil amount
 
 SWEP.RecoilVisualKick = 1
 
-SWEP.RecoilKick = 1.25
+SWEP.RecoilKick = 2.5
 
 SWEP.RecoilSpreadPenalty = 0.0015 // extra spread per one unit of recoil
 
@@ -79,8 +79,8 @@ SWEP.SightedSpeedMult = 0.4
 SWEP.MeleeSpeedMult = 0.5
 SWEP.ReloadSpeedMult = 0.5
 
-SWEP.AimDownSightsTime = 0.33
-SWEP.SprintToFireTime = 0.33
+SWEP.AimDownSightsTime = 0.3
+SWEP.SprintToFireTime = 0.28
 
 // hold types
 

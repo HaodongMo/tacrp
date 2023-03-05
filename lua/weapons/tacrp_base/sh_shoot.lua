@@ -233,7 +233,7 @@ function SWEP:AfterShotFunction(tr, dmg, range, penleft, alreadypenned, forced)
     if !forced and !IsFirstTimePredicted() and !game.SinglePlayer() then return end
     local dmgv = self:GetDamageAtRange(range)
 
-    local bodydamage = self:GetValue("BodyDamageMultipliers")
+    local bodydamage = self:GetBodyDamageMultipliers() --self:GetValue("BodyDamageMultipliers")
 
     local dmgbodymult = 1
 
@@ -285,7 +285,7 @@ function SWEP:AfterShotFunction(tr, dmg, range, penleft, alreadypenned, forced)
         dmg:SetDamageType(DMG_BUCKSHOT)
     end
 
-    if IsValid(tr.Entity) and !tr.Entity.TacRP_DoorBusted
+    if SERVER and IsValid(tr.Entity) and !tr.Entity.TacRP_DoorBusted
             and string.find(tr.Entity:GetClass(), "door") and self:GetValue("DoorBreach") then
         if !tr.Entity.TacRP_BreachThreshold or CurTime() - tr.Entity.TacRP_BreachThreshold[1] > 0.1 then
             tr.Entity.TacRP_BreachThreshold = {CurTime(), 0}
@@ -308,11 +308,15 @@ function SWEP:AfterShotFunction(tr, dmg, range, penleft, alreadypenned, forced)
     self:Penetrate(tr, range, penleft, alreadypenned)
 end
 
+function SWEP:GetMinMaxRange()
+    local max, min = self:GetValue("Damage_Max"), self:GetValue("Damage_Min")
+    return self:GetValue("Range_Min", max < min), self:GetValue("Range_Max", max < min)
+end
+
 function SWEP:GetDamageAtRange(range, noround)
     local d = 1
 
-    local r_min = self:GetValue("Range_Min")
-    local r_max = self:GetValue("Range_Max")
+    local r_min, r_max = self:GetMinMaxRange()
 
     if range <= r_min then
         d = 0
@@ -433,6 +437,20 @@ function SWEP:GetSpread(baseline)
     spread = math.max(spread, 0)
 
     return spread
+end
+
+function SWEP:GetBodyDamageMultipliers()
+    local base = table.Copy(self:GetValue("BodyDamageMultipliers"))
+
+    for k, v in pairs(self:GetValue("BodyDamageMultipliersExtra") or {}) do
+        if v < 0 then
+            base[k] = math.abs(v)
+        else
+            base[k] = base[k] * v
+        end
+    end
+
+    return base
 end
 
 function SWEP:FireAnimationEvent( pos, ang, event, options )

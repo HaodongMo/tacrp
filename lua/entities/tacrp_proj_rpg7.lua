@@ -44,6 +44,8 @@ function ENT:Impact(data, collider)
             data.HitEntity:TakeDamageInfo(dmginfo)
         end
 
+        self:EmitSound("weapons/rpg/shotdown.wav", 80)
+
         for i = 1, 4 do
             local prop = ents.Create("prop_physics")
             prop:SetPos(self:GetPos())

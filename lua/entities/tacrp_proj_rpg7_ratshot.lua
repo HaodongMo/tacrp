@@ -80,6 +80,8 @@ function ENT:Impact(data, collider)
             data.HitEntity:TakeDamageInfo(dmginfo)
         end
 
+        self:EmitSound("weapons/rpg/shotdown.wav", 80)
+
         for i = 1, 4 do
             local prop = ents.Create("prop_physics")
             prop:SetPos(self:GetPos())
@@ -106,9 +108,9 @@ function ENT:Detonate()
     if self:WaterLevel() > 0 then
         util.Effect("WaterSurfaceExplosion", fx)
     else
-        fx:SetMagnitude(16)
-        fx:SetScale(1)
-        fx:SetRadius(16)
+        fx:SetMagnitude(8)
+        fx:SetScale(2)
+        fx:SetRadius(8)
         fx:SetNormal(dir)
         util.Effect("Sparks", fx)
 
@@ -120,11 +122,11 @@ function ENT:Detonate()
             maxs = Vector(16, 16, 8)
         })
         fx:SetMagnitude(4)
-        fx:SetScale(2)
+        fx:SetScale(1)
         fx:SetRadius(2)
         fx:SetNormal(dir)
-        for i = 1, math.floor(tr.Fraction * 10) do
-            fx:SetOrigin(tr.StartPos + tr.Normal * (i / 10) * 2048)
+        for i = 1, math.floor(tr.Fraction * 6) do
+            fx:SetOrigin(tr.StartPos + tr.Normal * (i / 6) * 2048)
             util.Effect("Sparks", fx)
         end
     end
@@ -151,7 +153,7 @@ function ENT:Detonate()
         local tr = util.QuickTrace(self:GetPos(), ent:GetPos() - self:GetPos(), {self, ent})
         if tr.Fraction == 1 then
             dmg:SetDamagePosition(self:GetPos())
-            dmg:SetDamage(100 * math.Rand(0.75, 1.25) * Lerp(tr.Fraction ^ 1.5, 0.25, 1))
+            dmg:SetDamage(100 * math.Rand(0.75, 1) * Lerp(tr.Fraction ^ 1.5, 0.25, 1))
             ent:TakeDamageInfo(dmg)
         end
     end

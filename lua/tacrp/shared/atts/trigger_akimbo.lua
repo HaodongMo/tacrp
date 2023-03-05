@@ -1,8 +1,9 @@
 ATT.PrintName = "Akimbo"
+ATT.FullName = "Akimbo Trigger"
 ATT.Icon = Material("entities/tacrp_att_trigger_akimbo.png", "mips smooth")
-ATT.Description = ""
+ATT.Description = "Let'em have it!"
 ATT.Pros = {"Automatic fire"}
-ATT.Cons = {"Fire rate", "Recoil spread"}
+ATT.Cons = {"Fire Rate", "Recoil Spread"}
 
 ATT.Free = true
 

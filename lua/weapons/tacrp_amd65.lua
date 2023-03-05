@@ -22,8 +22,6 @@ SWEP.ArcadeStats = {
     Damage_Max = 32,
     Damage_Min = 14,
 
-    RecoilKick = 6.5,
-
     MoveSpeedMult = 0.85,
     ShootingSpeedMult = 0.75,
     SightedSpeedMult = 0.75,
@@ -58,25 +56,25 @@ SWEP.Firemodes = {
 }
 
 SWEP.RPM = 600
-SWEP.PostBurstDelay = 0.1
 
-SWEP.Spread = 0.003
+SWEP.Spread = 0.005
 
 SWEP.ShootTimeMult = 0.5
 
 SWEP.MuzzleVelocity = 25000
 
 SWEP.RecoilPerShot = 1
-SWEP.RecoilMaximum = 15
+SWEP.RecoilMaximum = 10
 SWEP.RecoilResetTime = 0.15 // time after you stop shooting for recoil to start dissipating
-SWEP.RecoilDissipationRate = 30
+SWEP.RecoilDissipationRate = 13
 SWEP.RecoilFirstShotMult = 1 // multiplier for the first shot's recoil amount
 
 SWEP.RecoilVisualKick = 2
 
-SWEP.RecoilKick = 5
+SWEP.RecoilKick = 7.5
 
-SWEP.RecoilSpreadPenalty = 0.0025
+SWEP.RecoilSpreadPenalty = 0.0045
+SWEP.HipFireSpreadPenalty = 0.04
 
 SWEP.CanBlindFire = true
 
@@ -104,7 +102,7 @@ SWEP.PassiveAng = Angle(0, 0, 0)
 SWEP.PassivePos = Vector(0, -2, -5)
 
 SWEP.BlindFireAng = Angle(0, 5, 0)
-SWEP.BlindFirePos = Vector(0, -2, -4)
+SWEP.BlindFirePos = Vector(3, -2, -5)
 
 SWEP.SprintAng = Angle(30, -15, 0)
 SWEP.SprintPos = Vector(5, 0, -2)

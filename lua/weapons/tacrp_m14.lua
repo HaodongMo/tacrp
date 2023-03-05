@@ -8,7 +8,7 @@ SWEP.PrintName = "Springfield M1A"
 SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 
 SWEP.SubCatTier = "2Premium"
-SWEP.SubCatType = "7Sniper Rifle"
+SWEP.SubCatType = "6Precision Rifle"
 
 SWEP.Description = "Semi-automatic sniper rifle with a lethal headshot.\nEquipped with a 6x scope by default."
 
@@ -22,8 +22,8 @@ SWEP.ArcadeStats = {
     Damage_Max = 30,
     Damage_Min = 50,
 
-    Range_Min = 1000,
-    Range_Max = 2000,
+    Range_Min = 1200,
+    Range_Max = 3000,
 
     MoveSpeedMult = 0.8,
     ShootingSpeedMult = 0.6,
@@ -60,22 +60,22 @@ SWEP.RPM = 240
 
 SWEP.Spread = 0.0000
 
-SWEP.HipFireSpreadPenalty = 0.075
 
 
 SWEP.ShootTimeMult = 0.5
 
 SWEP.RecoilPerShot = 1
-SWEP.RecoilMaximum = 10
-SWEP.RecoilResetTime = 0.15 // time after you stop shooting for recoil to start dissipating
-SWEP.RecoilDissipationRate = 9
-SWEP.RecoilFirstShotMult = 1 // multiplier for the first shot's recoil amount
+SWEP.RecoilMaximum = 4
+SWEP.RecoilResetTime = 0.25 // time after you stop shooting for recoil to start dissipating
+SWEP.RecoilDissipationRate = 4
+SWEP.RecoilFirstShotMult = 0.5
 
 SWEP.RecoilVisualKick = 3
 
 SWEP.RecoilKick = 5
 
-SWEP.RecoilSpreadPenalty = 0.0025 // extra spread per one unit of recoil
+SWEP.RecoilSpreadPenalty = 0.0075
+SWEP.HipFireSpreadPenalty = 0.075
 
 SWEP.CanBlindFire = true
 
@@ -103,7 +103,7 @@ SWEP.PassiveAng = Angle(0, 0, 0)
 SWEP.PassivePos = Vector(0, -2, -6)
 
 SWEP.BlindFireAng = Angle(0, 5, 0)
-SWEP.BlindFirePos = Vector(0, -2, -4)
+SWEP.BlindFirePos = Vector(3, -2, -5)
 
 SWEP.SprintAng = Angle(30, -15, 0)
 SWEP.SprintPos = Vector(5, 0, -2)

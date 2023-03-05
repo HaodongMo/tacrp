@@ -7,7 +7,7 @@ ATT.Cons = {"Muzzle Velocity", "Range"}
 
 ATT.Category = {"ammo_rifle", "ammo_pistol"}
 
-ATT.SortOrder = 1
+ATT.SortOrder = 2
 
 ATT.Mult_RecoilKick = 0.75
 ATT.Mult_RecoilSpreadPenalty = 0.5

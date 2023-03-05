@@ -19,7 +19,9 @@ SWEP.Slot = 2
 
 SWEP.ArcadeStats = {
 
-    Damage_Max = 24,
+    Description = "Low capacity assault rifle with elite performance.",
+
+    Damage_Max = 25,
     Damage_Min = 12,
 
     ClipSize = 20,
@@ -61,7 +63,7 @@ SWEP.Spread = 0.001
 SWEP.RecoilPerShot = 1
 SWEP.RecoilMaximum = 12
 SWEP.RecoilResetTime = 0.15
-SWEP.RecoilDissipationRate = 24
+SWEP.RecoilDissipationRate = 17
 SWEP.RecoilFirstShotMult = 1 // multiplier for the first shot's recoil amount
 
 SWEP.RecoilVisualKick = 1
@@ -69,7 +71,8 @@ SWEP.RecoilVisualShake = 0.5
 
 SWEP.RecoilKick = 2.5
 
-SWEP.RecoilSpreadPenalty = 0.001
+SWEP.RecoilSpreadPenalty = 0.0015
+SWEP.HipFireSpreadPenalty = 0.035
 
 SWEP.CanBlindFire = true
 
@@ -97,7 +100,7 @@ SWEP.PassiveAng = Angle(0, 0, 0)
 SWEP.PassivePos = Vector(0, -2, -6)
 
 SWEP.BlindFireAng = Angle(0, 5, 0)
-SWEP.BlindFirePos = Vector(0, -2, -4)
+SWEP.BlindFirePos = Vector(3, -2, -5)
 
 SWEP.SprintAng = Angle(30, -15, 0)
 SWEP.SprintPos = Vector(5, 0, -2)

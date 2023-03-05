@@ -34,7 +34,7 @@ SWEP.Range_Max = 2000 // distance at which we drop to minimum damage
 SWEP.Penetration = 1 // units of metal this weapon can penetrate
 SWEP.Num = 8
 
-SWEP.MuzzleVelocity = 9000
+SWEP.MuzzleVelocity = 11000
 
 SWEP.BodyDamageMultipliers = {
     [HITGROUP_HEAD] = 1.25,
@@ -53,9 +53,9 @@ SWEP.Firemode = 1
 
 SWEP.FiremodeName = "Pump-Action" // only used externally for firemode name distinction
 
-SWEP.RPM = 55
+SWEP.RPM = 60
 
-SWEP.ShootTimeMult = 1
+SWEP.ShootTimeMult = 0.9
 
 SWEP.Spread = 0.015
 

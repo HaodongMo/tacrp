@@ -1,4 +1,5 @@
 ATT.PrintName = "Competition"
+ATT.FullName = "Competition Trigger"
 ATT.Icon = Material("entities/tacrp_att_trigger_comp.png", "mips smooth")
 ATT.Description = "Lightweight trigger for sports shooting."
 ATT.Pros = {"Shooting movement speed"}

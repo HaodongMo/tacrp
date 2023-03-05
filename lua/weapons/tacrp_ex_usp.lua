@@ -10,7 +10,7 @@ SWEP.Category = "Tactical RP" // "Tactical RP (Extras)"
 SWEP.SubCatTier = "3Quality"
 SWEP.SubCatType = "1Sidearm"
 
-SWEP.Description = "Tactical pistol with low fire rate but above average damage and range."
+SWEP.Description = "Tactical pistol with good damage and range for its capacity."
 
 SWEP.ViewModel = "models/weapons/tacint_extras/v_usp.mdl"
 SWEP.WorldModel = "models/weapons/tacint_extras/w_usp.mdl"
@@ -21,6 +21,8 @@ SWEP.ArcadeStats = {
 
     Damage_Max = 20,
     Damage_Min = 6,
+
+    RPM = 450,
 
     MoveSpeedMult = 1,
     ShootingSpeedMult = 1,

@@ -8,7 +8,7 @@ SWEP.PrintName = "Ruger Mini-14"
 SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 
 SWEP.SubCatTier = "4Common"
-SWEP.SubCatType = "6Marksman Rifle"
+SWEP.SubCatType = "6Precision Rifle"
 
 SWEP.Description = "Lightweight rifle with no stock or optic mount.\nGood hip-fire accuracy among rifles, but range is low."
 
@@ -19,11 +19,12 @@ SWEP.Slot = 2
 
 SWEP.ArcadeStats = {
 
-    Damage_Max = 20,
+    Damage_Max = 22,
     Damage_Min = 12,
 
-    RPM = 500,
-    RecoilSpreadPenalty = 0.001,
+    RPM = 550,
+    RecoilSpreadPenalty = 0.004,
+    HipFireSpreadPenalty = 0.008,
 
     MoveSpeedMult = 0.95,
     ShootingSpeedMult = 0.85,
@@ -99,7 +100,7 @@ SWEP.PassiveAng = Angle(0, 0, 0)
 SWEP.PassivePos = Vector(0, -2, -4)
 
 SWEP.BlindFireAng = Angle(0, 5, 0)
-SWEP.BlindFirePos = Vector(0, -2, -4)
+SWEP.BlindFirePos = Vector(3, -2, -5)
 
 SWEP.SprintAng = Angle(30, -15, 0)
 SWEP.SprintPos = Vector(5, 0, -2)

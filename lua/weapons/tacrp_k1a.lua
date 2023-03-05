@@ -10,7 +10,7 @@ SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 SWEP.SubCatTier = "4Common"
 SWEP.SubCatType = "4Assault Rifle"
 
-SWEP.Description = "Burst rifle with minimal recoil."
+SWEP.Description = "Burst rifle with minimal recoil and good hip firing accuracy."
 
 SWEP.ViewModel = "models/weapons/tacint/v_k1a_2.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_k1a.mdl"
@@ -63,9 +63,9 @@ SWEP.RPM = 800
 SWEP.Spread = 0.0025
 
 SWEP.RecoilPerShot = 1
-SWEP.RecoilMaximum = 15
-SWEP.RecoilResetTime = 0.175
-SWEP.RecoilDissipationRate = 18
+SWEP.RecoilMaximum = 12
+SWEP.RecoilResetTime = 0.25
+SWEP.RecoilDissipationRate = 15
 SWEP.RecoilFirstShotMult = 1 // multiplier for the first shot's recoil amount
 
 SWEP.RecoilVisualKick = 0.75
@@ -73,7 +73,8 @@ SWEP.RecoilVisualShake = 0.25
 
 SWEP.RecoilKick = 2
 
-SWEP.RecoilSpreadPenalty = 0.0015 // extra spread per one unit of recoil
+SWEP.RecoilSpreadPenalty = 0.002
+SWEP.HipFireSpreadPenalty = 0.03
 
 SWEP.CanBlindFire = true
 
@@ -101,7 +102,7 @@ SWEP.PassiveAng = Angle(0, 0, 0)
 SWEP.PassivePos = Vector(0, -2, -6)
 
 SWEP.BlindFireAng = Angle(0, 5, 0)
-SWEP.BlindFirePos = Vector(0, -2, -4)
+SWEP.BlindFirePos = Vector(3, -2, -5)
 
 SWEP.SprintAng = Angle(30, -15, 0)
 SWEP.SprintPos = Vector(5, 0, -2)

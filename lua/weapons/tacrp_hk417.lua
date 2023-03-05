@@ -8,7 +8,7 @@ SWEP.PrintName = "HK HK417"
 SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 
 SWEP.SubCatTier = "1Elite"
-SWEP.SubCatType = "6Marksman Rifle"
+SWEP.SubCatType = "6Precision Rifle"
 
 SWEP.Description = "Battle rifle with superb damage, fire rate and precision. Capable of automatic fire, although it is very unstable."
 
@@ -69,13 +69,13 @@ SWEP.RecoilResetTime = 0.15
 SWEP.RecoilDissipationRate = 12
 SWEP.RecoilFirstShotMult = 0.85 // multiplier for the first shot's recoil amount
 
-SWEP.RecoilVisualKick = 3
+SWEP.RecoilVisualKick = 2
 
-SWEP.RecoilKick = 7.25
+SWEP.RecoilKick = 8
 
 SWEP.RecoilSpreadPenalty = 0.009
 
-SWEP.HipfireSpreadPenalty = 0.06
+SWEP.HipFireSpreadPenalty = 0.06
 
 SWEP.CanBlindFire = true
 
@@ -103,7 +103,7 @@ SWEP.PassiveAng = Angle(0, 0, 0)
 SWEP.PassivePos = Vector(0, -2, -5)
 
 SWEP.BlindFireAng = Angle(0, 5, 0)
-SWEP.BlindFirePos = Vector(0, -2, -4)
+SWEP.BlindFirePos = Vector(3, -2, -5)
 
 SWEP.SprintAng = Angle(30, -15, 0)
 SWEP.SprintPos = Vector(5, 0, -2)

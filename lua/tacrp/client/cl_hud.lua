@@ -58,3 +58,16 @@ hook.Add("PreGamemodeLoaded", "TacRP_AmmoName", function()
         end
     end
 end)
+
+local gaA = 0
+function TacRP.GetFOVAcc(spread)
+    if spread:IsWeapon() then spread = spread:GetSpread() end
+    cam.Start3D()
+        local lool = ( EyePos() + ( EyeAngles():Forward() ) + ( spread * EyeAngles():Up() ) ):ToScreen()
+    cam.End3D()
+
+    local gau = ( (ScrH() / 2) - lool.y )
+    gaA = math.Approach(gaA, gau, (ScrH() / 2) * FrameTime() * 2)
+
+    return gaA
+end

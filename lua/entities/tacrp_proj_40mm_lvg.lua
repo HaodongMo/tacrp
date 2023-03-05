@@ -32,9 +32,9 @@ function ENT:Detonate()
     local dmg = DamageInfo()
     dmg:SetAttacker(self:GetOwner())
     dmg:SetInflictor(self)
-    dmg:SetDamageType(DMG_SONIC + DMG_BLAST)
+    dmg:SetDamageType(DMG_SONIC)
     dmg:SetDamagePosition(self:GetPos())
-    dmg:SetDamage(120 * mult)
+    dmg:SetDamage(100 * mult)
     util.BlastDamageInfo(dmg, self:GetPos(), 300)
 
     local fx = EffectData()
@@ -43,10 +43,14 @@ function ENT:Detonate()
     if self:WaterLevel() > 0 then
         util.Effect("WaterSurfaceExplosion", fx)
     else
-        util.Effect("Explosion", fx)
+        util.Effect("TacRP_flashexplosion", fx)
+        util.Effect("HelicopterMegaBomb", fx)
     end
 
-    self:EmitSound(table.Random(self.ExplodeSounds), 125)
+    TacRP.Flashbang(self:GetPos(), 512, 2.5, 0.25, 1)
+
+    self:EmitSound(table.Random(self.ExplodeSounds), 125, 110)
+    self:EmitSound("TacRP/weapons/grenade/flashbang_explode-1.wav", 125, 90, 0.8)
 
     self:Remove()
 end

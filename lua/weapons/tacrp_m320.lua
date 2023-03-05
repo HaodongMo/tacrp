@@ -20,9 +20,9 @@ SWEP.NoRanger = true
 SWEP.Slot = 4
 
 SWEP.ArcadeStats = {
-    MoveSpeedMult = 1,
+    MoveSpeedMult = 0.95,
     ShootingSpeedMult = 0.6,
-    SightedSpeedMult = 1,
+    SightedSpeedMult = 0.9,
     MeleeSpeedMult = 1,
     ReloadSpeedMult = 0.85,
 }
@@ -69,6 +69,7 @@ SWEP.RecoilVisualShake = 2
 SWEP.RecoilKick = 15
 
 SWEP.RecoilSpreadPenalty = 0 // extra spread per one unit of recoil
+SWEP.HipFireSpreadPenalty = 0.05
 
 SWEP.CanBlindFire = true
 
@@ -213,7 +214,7 @@ SWEP.Attachments = {
     },
     [2] = {
         PrintName = "Accessory",
-        Category = {"acc", "acc_foldstock", "acc_holster"},
+        Category = {"acc", "acc_foldstock2", "acc_holster"},
         AttachSound = "TacRP/weapons/flashlight_on.wav",
         DetachSound = "TacRP/weapons/flashlight_off.wav",
     },

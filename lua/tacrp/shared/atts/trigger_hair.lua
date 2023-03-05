@@ -1,8 +1,9 @@
 ATT.PrintName = "Feather"
+ATT.FullName = "Feather Trigger"
 ATT.Icon = Material("entities/tacrp_att_trigger_hair.png", "mips smooth")
-ATT.Description = "Light trigger for rapid semi-automatic fire."
-ATT.Pros = {"Fire rate"}
-ATT.Cons = {"Recoil time", "Maximum spread"}
+ATT.Description = "Very sensitive trigger for rapid semi-automatic fire."
+ATT.Pros = {"Fire Rate"}
+ATT.Cons = {"Recoil Time", "Maximum Spread"}
 
 ATT.Category = {"trigger_semi", "trigger_akimbo", "trigger_revolver"}
 

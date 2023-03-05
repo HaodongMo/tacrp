@@ -7,15 +7,13 @@ ATT.Cons = {"Limb damage"}
 
 ATT.Category = "ammo_pistol"
 
-ATT.SortOrder = 2
+ATT.SortOrder = 1
 
-ATT.Override_BodyDamageMultipliers = {
-    [HITGROUP_HEAD] = 3,
-    [HITGROUP_CHEST] = 1,
-    [HITGROUP_STOMACH] = 1,
-    [HITGROUP_LEFTARM] = 0.75,
-    [HITGROUP_RIGHTARM] = 0.75,
-    [HITGROUP_LEFTLEG] = 0.5,
-    [HITGROUP_RIGHTLEG] = 0.5,
-    [HITGROUP_GEAR] = 0.9
+ATT.Override_BodyDamageMultipliersExtra = {
+    [HITGROUP_HEAD] = 2,
+    [HITGROUP_LEFTARM] = 0.9,
+    [HITGROUP_RIGHTARM] = 0.9,
+    [HITGROUP_LEFTLEG] = 0.75,
+    [HITGROUP_RIGHTLEG] = 0.75,
+    [HITGROUP_GEAR] = 0.75
 }

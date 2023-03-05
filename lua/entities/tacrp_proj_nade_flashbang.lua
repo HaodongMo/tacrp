@@ -41,38 +41,7 @@ function ENT:Detonate()
         util.Effect("TacRP_flashexplosion", fx)
     end
 
-    local flashorigin = self:GetPos()
-
-    local flashpower = 1024
-    local targets = ents.FindInSphere(flashorigin, flashpower)
-
-    for _, k in pairs(targets) do
-        if k:IsPlayer() then
-            local dist = k:EyePos():Distance(flashorigin)
-            local dp = (k:EyePos() - flashorigin):Dot(k:EyeAngles():Forward())
-
-            local time = Lerp( dp, 2.5, 0.25 )
-
-            time = Lerp( dist / flashpower, time, 0.1 )
-
-            if !k:VisibleVec( flashorigin ) then time = 0.1 end
-
-            net.Start("tacrp_flashbang")
-                net.WriteFloat(time)
-            net.Send(k)
-
-            -- k:ScreenFade( SCREENFADE.IN, GetConVar("tacrp_flash_dark"):GetBool() and Color(0, 0, 0, 254) or Color(255, 255, 255, 254), 2.5, k:VisibleVec( flashorigin ) and time or 0.1 )
-
-            -- if GetConVar("tacrp_flash_dark"):GetBool() then
-            --     k:SetDSP( 32, false )
-            -- else
-            --     k:SetDSP( 37, false )
-            -- end
-
-            k:SetNWFloat("TacRPStunStart", CurTime())
-            k:SetNWFloat("TacRPStunDur", time + 0.5)
-        end
-    end
+    TacRP.Flashbang(self:GetPos(), 1024, 3, 0.25, 0.5)
 
     self:EmitSound(table.Random(self.ExplodeSounds), 125)
 

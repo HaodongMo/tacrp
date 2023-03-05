@@ -171,7 +171,7 @@ local conVars = {
     {
         name = "flash_dark",
         default = "0",
-        replicated = true,
+        client = true,
     },
     {
         name = "flash_slow",
@@ -245,13 +245,9 @@ local function menu_guide_ti(panel)
 end
 
 local function menu_client_ti(panel)
-    panel:AddControl("checkbox", {
-        label = "Auto-Save Weapon",
-        command = "TacRP_autosave"
-    })
-    panel:AddControl("checkbox", {
-        label = "Toggle Peeking",
-        command = "tacrp_togglepeek"
+
+    panel:AddControl("header", {
+        description = "Interface",
     })
     panel:AddControl("checkbox", {
         label = "Show HUD",
@@ -270,7 +266,44 @@ local function menu_client_ti(panel)
         command = "tacrp_vignette"
     })
     panel:AddControl("label", {
-        text = "Shows vignette based on intensity of accumulated recoil."
+        text = "Vignette intensity is based on amount of accumulated recoil."
+    })
+    -- panel:AddControl("slider", {
+    --     label = "Spawnmenu Sub-categories",
+    --     command = "subcats",
+    --     min = 0,
+    --     max = 2,
+    -- })
+    -- panel:AddControl("label", {
+    --     text = "1 - based on weapon type; 2 - based on tier."
+    -- })
+
+    panel:AddControl("header", {
+        description = "\nPreference",
+    })
+    panel:AddControl("checkbox", {
+        label = "Toggle Peeking",
+        command = "tacrp_togglepeek"
+    })
+    panel:AddControl("checkbox", {
+        label = "Auto-Save Weapon",
+        command = "TacRP_autosave"
+    })
+    panel:AddControl("checkbox", {
+        label = "Auto Reload When Empty",
+        command = "TacRP_autoreload"
+    })
+    panel:AddControl("checkbox", {
+        label = "Flashbang Dark Mode",
+        command = "tacrp_flash_dark"
+    })
+    panel:AddControl("label", {
+        text = "In dark mode, flashbangs turn your screen black instead of white, and mutes audio intead of ringing."
+    })
+
+
+    panel:AddControl("header", {
+        description = "\nMiscellaneous",
     })
     panel:AddControl("checkbox", {
         label = "Draw Holstered Weapons",
@@ -279,10 +312,6 @@ local function menu_client_ti(panel)
     panel:AddControl("checkbox", {
         label = "True Laser Position",
         command = "tacrp_true_laser"
-    })
-    panel:AddControl("checkbox", {
-        label = "Auto Reload When Empty",
-        command = "TacRP_autoreload"
     })
     panel:AddControl("checkbox", {
         label = "Immersive Ammo Names (Requires map reload)",
@@ -332,13 +361,6 @@ local function menu_server_ti(panel)
     panel:AddControl("checkbox", {
         label = "NPCs Get Random Attachments",
         command = "TacRP_npc_atts"
-    })
-    panel:AddControl("checkbox", {
-        label = "Flashbang Dark Mode",
-        command = "tacrp_flash_dark"
-    })
-    panel:AddControl("label", {
-        text = "In dark mode, flashbangs turn your screen black instead of white, and mutes audio intead of ringing."
     })
     panel:AddControl("slider", {
         label = "Flashbang Slow",

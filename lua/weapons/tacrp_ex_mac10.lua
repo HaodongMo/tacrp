@@ -19,8 +19,8 @@ SWEP.Slot = 1
 
 SWEP.ArcadeStats = {
 
-    Damage_Max = 10,
-    Damage_Min = 3,
+    Damage_Max = 11,
+    Damage_Min = 4,
 
     MoveSpeedMult = 0.95,
     ShootingSpeedMult = 0.8,

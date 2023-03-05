@@ -30,7 +30,7 @@ SWEP.ArcadeStats = {
 
 // "ballistics"
 
-SWEP.Damage_Max = 20
+SWEP.Damage_Max = 18
 SWEP.Damage_Min = 15
 SWEP.Range_Min = 2500 // distance for which to maintain maximum damage
 SWEP.Range_Max = 7500 // distance at which we drop to minimum damage
@@ -38,7 +38,7 @@ SWEP.Penetration = 9 // units of metal this weapon can penetrate
 
 SWEP.BodyDamageMultipliers = {
     [HITGROUP_HEAD] = 2.5,
-    [HITGROUP_CHEST] = 1.3,
+    [HITGROUP_CHEST] = 1.4,
     [HITGROUP_STOMACH] = 1,
     [HITGROUP_LEFTARM] = 1,
     [HITGROUP_RIGHTARM] = 1,
@@ -63,7 +63,7 @@ SWEP.Spread = 0.0025
 SWEP.ShootTimeMult = 0.5
 
 SWEP.RecoilPerShot = 1
-SWEP.RecoilMaximum = 10
+SWEP.RecoilMaximum = 14
 SWEP.RecoilResetTime = 0.12 // time after you stop shooting for recoil to start dissipating
 SWEP.RecoilDissipationRate = 20
 SWEP.RecoilFirstShotMult = 1 // multiplier for the first shot's recoil amount
@@ -72,7 +72,8 @@ SWEP.RecoilVisualKick = 0.9
 
 SWEP.RecoilKick = 3.25
 
-SWEP.RecoilSpreadPenalty = 0.0005
+SWEP.RecoilSpreadPenalty = 0.002
+SWEP.HipFireSpreadPenalty = 0.04
 
 SWEP.CanBlindFire = true
 
@@ -84,8 +85,8 @@ SWEP.SightedSpeedMult = 0.25
 SWEP.MeleeSpeedMult = 0.5
 SWEP.ReloadSpeedMult = 0.5
 
-SWEP.AimDownSightsTime = 0.38
-SWEP.SprintToFireTime = 0.38 // multiplies how long it takes to recover from sprinting
+SWEP.AimDownSightsTime = 0.4
+SWEP.SprintToFireTime = 0.37
 
 // hold types
 
@@ -100,7 +101,7 @@ SWEP.PassiveAng = Angle(0, 0, 0)
 SWEP.PassivePos = Vector(0, -2, -4)
 
 SWEP.BlindFireAng = Angle(0, 5, 0)
-SWEP.BlindFirePos = Vector(0, -2, -4)
+SWEP.BlindFirePos = Vector(3, -2, -5)
 
 SWEP.SprintAng = Angle(40, -15, 0)
 SWEP.SprintPos = Vector(5, 0, -4)

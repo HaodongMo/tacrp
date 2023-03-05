@@ -53,15 +53,19 @@ function SWEP:Think()
 
     self:ProcessTimers()
 
-    if IsValid(self:GetOwner()) and self:GetTactical() and self:GetValue("Minimap") and (SERVER and !game.SinglePlayer()) and (self.NextRadarBeep or 0) < CurTime() then
-        self.NextRadarBeep = CurTime() + 1.5
-        local f = RecipientFilter()
-        f:AddPVS(self:GetPos())
-        f:RemovePlayer(self:GetOwner())
-        local s = CreateSound(self, "plats/elevbell1.wav", f)
-        s:SetSoundLevel(75)
-        s:PlayEx(0.25, 105)
+    if IsValid(self:GetOwner()) and self:GetOwner():IsPlayer() and self:GetValue("TacticalThink") and self:GetTactical() then
+        self:GetValue("TacticalThink")(self)
     end
+
+    -- if IsValid(self:GetOwner()) and self:GetTactical() and self:GetValue("Minimap") and (SERVER and !game.SinglePlayer()) and (self.NextRadarBeep or 0) < CurTime() then
+    --     self.NextRadarBeep = CurTime() + 1.5
+    --     local f = RecipientFilter()
+    --     f:AddPVS(self:GetPos())
+    --     f:RemovePlayer(self:GetOwner())
+    --     local s = CreateSound(self, "plats/elevbell1.wav", f)
+    --     s:SetSoundLevel(75)
+    --     s:PlayEx(0.25, 105)
+    -- end
 
     if self:GetNextIdle() < CurTime() then
         self:Idle()

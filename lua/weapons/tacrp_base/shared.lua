@@ -169,8 +169,8 @@ SWEP.ScopeFOV = 90 / 1.1
 SWEP.ScopeLevels = 1 // 2 = like CS:S
 SWEP.ScopeHideWeapon = false
 
-SWEP.QuickScopeSpreadPenalty = 0
-SWEP.QuickScopeTime = 0 // amount of time over which to fade out the quickscope spread penalty
+SWEP.QuickScopeSpreadPenalty = 0.025
+SWEP.QuickScopeTime = 0.3 // amount of time over which to fade out the quickscope spread penalty
 
 // sway
 

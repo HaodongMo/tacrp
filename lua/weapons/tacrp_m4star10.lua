@@ -10,7 +10,7 @@ SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 SWEP.SubCatTier = "1Elite"
 SWEP.SubCatType = "5Shotgun"
 
-SWEP.Description = "Semi-automatic combat shotgun."
+SWEP.Description = "Semi-automatic combat shotgun. Low damage, but makes up with high capacity and fire rate."
 
 SWEP.ViewModel = "models/weapons/tacint/v_m4star10.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_m4star10.mdl"
@@ -18,8 +18,12 @@ SWEP.WorldModel = "models/weapons/tacint/w_m4star10.mdl"
 SWEP.Slot = 2
 
 SWEP.ArcadeStats = {
+
+    Damage_Max = 10,
+    Damage_Min = 4,
+
     MoveSpeedMult = 0.9,
-    ShootingSpeedMult = 0.75,
+    ShootingSpeedMult = 0.7,
     SightedSpeedMult = 0.9,
     MeleeSpeedMult = 1,
     ReloadSpeedMult = 1,
@@ -29,17 +33,17 @@ SWEP.ArcadeStats = {
 
 SWEP.ShootTimeMult = 0.5
 
-SWEP.Damage_Max = 100 / 8 // damage at minimum range
-SWEP.Damage_Min = 100 / 14 // damage at maximum range
-SWEP.Range_Min = 700 // distance for which to maintain maximum damage
-SWEP.Range_Max = 3000 // distance at which we drop to minimum damage
+SWEP.Damage_Max = 12
+SWEP.Damage_Min = 6
+SWEP.Range_Min = 200 // distance for which to maintain maximum damage
+SWEP.Range_Max = 1500 // distance at which we drop to minimum damage
 SWEP.Penetration = 1 // units of metal this weapon can penetrate
 SWEP.Num = 8
 
 SWEP.MuzzleVelocity = 9000
 
 SWEP.BodyDamageMultipliers = {
-    [HITGROUP_HEAD] = 1,
+    [HITGROUP_HEAD] = 1.25,
     [HITGROUP_CHEST] = 1,
     [HITGROUP_STOMACH] = 1,
     [HITGROUP_LEFTARM] = 1,
@@ -53,7 +57,7 @@ SWEP.BodyDamageMultipliers = {
 
 SWEP.Firemode = 1
 
-SWEP.RPM = 300
+SWEP.RPM = 240
 
 SWEP.Spread = 0.025
 
@@ -63,7 +67,7 @@ SWEP.MidAirSpreadPenalty = 0
 SWEP.RecoilPerShot = 1
 SWEP.RecoilMaximum = 2.5
 SWEP.RecoilResetTime = 0.2 // time after you stop shooting for recoil to start dissipating
-SWEP.RecoilDissipationRate = 4
+SWEP.RecoilDissipationRate = 3
 SWEP.RecoilFirstShotMult = 1 // multiplier for the first shot's recoil amount
 
 SWEP.RecoilVisualKick = 1.5
@@ -71,7 +75,7 @@ SWEP.RecoilVisualShake = 1.5
 
 SWEP.RecoilKick = 15
 
-SWEP.RecoilSpreadPenalty = 0.04 // extra spread per one unit of recoil
+SWEP.RecoilSpreadPenalty = 0.03
 
 SWEP.CanBlindFire = true
 
@@ -126,7 +130,7 @@ SWEP.ClipSize = 7
 SWEP.Ammo = "buckshot"
 SWEP.ShotgunReload = true
 
-SWEP.ReloadTimeMult = 1
+SWEP.ReloadTimeMult = 1.15
 
 // sounds
 

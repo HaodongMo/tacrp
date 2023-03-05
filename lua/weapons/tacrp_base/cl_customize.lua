@@ -173,8 +173,7 @@ function SWEP:CreateCustomizeHUD()
             local dmg_max = self:GetValue("Damage_Max")
             local dmg_min = self:GetValue("Damage_Min")
 
-            local range_min = self:GetValue("Range_Min")
-            local range_max = self:GetValue("Range_Max")
+            local range_min, range_max = self:GetMinMaxRange()
 
             surface.SetDrawColor(255, 255, 255, 50)
 
@@ -320,7 +319,7 @@ function SWEP:CreateCustomizeHUD()
 
             local dmg = self:GetDamageAtRange(range)
             local num =  self:GetValue("Num")
-            local mult = self:GetValue("BodyDamageMultipliers")
+            local mult = self:GetBodyDamageMultipliers() --self:GetValue("BodyDamageMultipliers")
             local hover = self2:IsHovered()
 
             local upperbody = mult[HITGROUP_STOMACH] == mult[HITGROUP_CHEST]
@@ -490,6 +489,20 @@ function SWEP:CreateCustomizeHUD()
             LowerIsBetter = true,
         },
         {
+            Name = "Maximum Recoil",
+            Description = "Maximum amount of inaccuracy from continuous firing.",
+            Value = "RecoilMaximum",
+            LowerIsBetter = true,
+            HideIfSame = true,
+        },
+        {
+            Name = "First Shot Recoil",
+            Description = "Recoil multiplier on the first shot, reset after the reset time has passed. Does not affect recoil kick.",
+            Value = "RecoilFirstShotMult",
+            LowerIsBetter = true,
+            HideIfSame = true,
+        },
+        {
             Name = "Move Speed",
             Description = "Speed multiplier while the weapon is held up. Has no effect when weapon is in safety.",
             AggregateFunction = function(base, val)
@@ -588,24 +601,6 @@ function SWEP:CreateCustomizeHUD()
             end,
             Unit = "°",
             Value = "HipFireSpreadPenalty",
-            LowerIsBetter = true,
-            HideIfSame = true,
-        },
-        {
-            Name = "First Shot Recoil",
-            Description = "Recoil multiplier on the first shot, reset after the reset time has passed. Does not affect recoil kick.",
-            Value = "RecoilFirstShotMult",
-            LowerIsBetter = true,
-            HideIfSame = true,
-        },
-        {
-            Name = "Max Recoil Spread",
-            Description = "Maximum amount of inaccuracy from continuous firing.",
-            AggregateFunction = function(base, val)
-                return math.Round(math.deg(val * (base and self:GetTable().RecoilSpreadPenalty or self:GetValue("RecoilSpreadPenalty"))), 1)
-            end,
-            Unit = "°",
-            Value = "RecoilMaximum",
             LowerIsBetter = true,
             HideIfSame = true,
         },

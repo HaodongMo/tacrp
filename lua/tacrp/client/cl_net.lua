@@ -41,11 +41,14 @@ end)
 
 net.Receive("tacrp_flashbang", function()
     local time = net.ReadFloat()
-    LocalPlayer():ScreenFade( SCREENFADE.IN, GetConVar("tacrp_flash_dark"):GetBool() and Color(0, 0, 0, 254) or Color(255, 255, 255, 254), 2.5, time )
+
+    if time > 0 then
+        LocalPlayer():ScreenFade( SCREENFADE.IN, GetConVar("tacrp_flash_dark"):GetBool() and Color(0, 0, 0, 255) or Color(255, 255, 255, 255), math.min(time * 2, 2.5), time)
+    end
 
     if GetConVar("tacrp_flash_dark"):GetBool() then
-        LocalPlayer():SetDSP( 32, false )
+        LocalPlayer():SetDSP(32, time == 0)
     else
-        LocalPlayer():SetDSP( 37, false )
+        LocalPlayer():SetDSP(37, time == 0)
     end
 end)

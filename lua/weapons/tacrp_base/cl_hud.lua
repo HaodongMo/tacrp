@@ -1,15 +1,3 @@
-local gaA = 0
-local function GetFOVAcc(wep)
-    cam.Start3D()
-        local lool = ( EyePos() + ( EyeAngles():Forward() ) + ( (wep:GetSpread()) * EyeAngles():Up() ) ):ToScreen()
-    cam.End3D()
-
-    local gau = ( (ScrH() / 2) - lool.y )
-    gaA = math.Approach(gaA, gau, (ScrH() / 2) * FrameTime())
-
-    return gaA
-end
-
 function SWEP:ShouldDrawCrosshair()
     return GetConVar("tacrp_crosshair"):GetBool() and !self:GetReloading() and !self:GetCustomize() and !self:SprintLock() and (self:GetSightAmount() <= 0.5 or self:GetPeeking())
 end
@@ -22,7 +10,9 @@ function SWEP:DoDrawCrosshair(x, y)
     else
         self.CrosshairAlpha = math.Approach(self.CrosshairAlpha, 1, 5 * ft)
     end
-    if self.CrosshairAlpha <= 0 then return true end
+    if self:GetValue("TacticalCrosshair") and self:GetTactical() then
+        tacfunc = self:GetValue("TacticalCrosshair")
+    elseif self.CrosshairAlpha <= 0 then return true end
 
     local dir = self:GetOwner():EyeAngles()
 
@@ -47,12 +37,18 @@ function SWEP:DoDrawCrosshair(x, y)
         y = math.Round(w2s.y)
     cam.End3D()
 
+    local spread = TacRP.GetFOVAcc(self)
+    local sway = self:GetSwayAmount()
+
+    if tacfunc then
+        tacfunc(self, x, y, spread, sway)
+    end
+
+    spread = math.Round( math.max(spread, 2) + ScreenScale(sway * math.pi))
+
+    if self.CrosshairAlpha <= 0 then return true end
 
     surface.SetDrawColor(50, 255, 50, 255 * self.CrosshairAlpha)
-
-    local spread = math.max(GetFOVAcc(self), 2)
-    local sway = self:GetSwayAmount() * math.pi
-    spread = math.Round(spread + ScreenScale(sway))
 
     surface.DrawRect(x, y, 1, 1)
 
@@ -75,32 +71,9 @@ function SWEP:GetBinding(bind)
     return string.upper(t_bind)
 end
 
-local mat_rf = Material("tacrp/hud/rangefinder.png", "mips smooth")
-local mat_radar = Material("tacrp/hud/radar.png", "smooth")
-local mat_radar_active = Material("tacrp/hud/radar_active.png", "mips smooth")
-local mat_dot = Material("tacrp/hud/dot.png", "mips smooth")
-local mat_mag = Material("tacrp/hud/mag.png", "")
 local mat_vignette = Material("tacrp/hud/vignette.png", "mips smooth")
 
-local mat_spread = Material("tacrp/hud/spreadgauge.png", "smooth")
-local mat_spread_fire = Material("tacrp/hud/spreadgauge_fire.png", "")
-local mat_spread_gauge = Material("tacrp/hud/spreadgauge_gauge.png", "")
-local mat_spread_text = Material("tacrp/hud/spreadgauge_text.png", "")
-
-local mat_cone = Material("tacrp/hud/cone.png", "smooth")
-local mat_cone_text = Material("tacrp/hud/cone_text.png", "")
-
-local cached_txt = ""
-local cached_txt2 = ""
-local lastrangefinder = 0
-local lastradar = 0
-local scantime = 1.5
-local cache_lastradarpositions = {}
-
-local lastammo = 0
-local lastshoottime = 0
 local rackrisetime = 0
-local lastshotalpha = 0
 local lastrow = 0
 
 local lasthp = 0
@@ -123,268 +96,8 @@ function SWEP:DrawHUDBackground()
         surface.DrawTexturedRect(0, 0, ScrW(), ScrH())
     end
 
-    if self:GetValue("BlindFireCamera") then
-        self:DoCornershot()
-    end
-
-    if self:GetValue("Rangefinder") and self:GetTactical() then
-        local txt = "NO RTN"
-        local txt2 = ""
-        local txt3 = ""
-        local txt4 = ""
-
-        if lastrangefinder + (1 / 30) < CurTime() then
-            local tr = util.TraceLine({
-                start = self:GetMuzzleOrigin(),
-                endpos = self:GetMuzzleOrigin() + (self:GetShootDir():Forward() * 50000),
-                mask = MASK_SHOT,
-                filter = self:GetOwner()
-            })
-
-            local dist = (tr.HitPos - tr.StartPos):Length()
-            local dist2 = math.Round(dist * 0.3048 / 12, 0)
-            dist = math.Round(dist, 0)
-            dist = math.min(dist, 99999)
-            dist2 = math.min(dist2, 9999)
-            txt = tostring(dist2) .. "m"
-            txt2 = tostring(dist) .. "HU"
-
-            local edmg = self:GetDamageAtRange(dist)
-            edmg = math.ceil(edmg)
-
-            txt3 = tostring(edmg) .. "DMG"
-
-            for _ = 0, 12 - string.len(txt3) - string.len(txt) do
-                txt = txt .. " "
-            end
-
-            txt = txt .. txt3
-
-            local mult = self:GetValue("BodyDamageMultipliers")
-            local min = math.min(unpack(mult))
-
-            if edmg * min >= 100 then
-                txt4 = "LETHAL"
-            elseif edmg * mult[HITGROUP_LEFTLEG] >= 100 then
-                txt4 = "LEGS"
-            elseif edmg * mult[HITGROUP_LEFTARM] >= 100 then
-                txt4 = "ARMS"
-            elseif edmg * mult[HITGROUP_STOMACH] >= 100 then
-                txt4 = "STMCH"
-            elseif edmg * mult[HITGROUP_CHEST] >= 100 then
-                txt4 = "CHEST"
-            elseif edmg * mult[HITGROUP_HEAD] >= 100 then
-                txt4 = "HEAD"
-            else
-                txt4 = tostring(math.ceil(100 / edmg)) .. (self:GetValue("Num") > 1 and "PTK" or "STK")
-            end
-
-            for _ = 0, 12 - string.len(txt4) - string.len(txt2) do
-                txt2 = txt2 .. " "
-            end
-
-            txt2 = txt2 .. txt4
-
-            cached_txt = txt
-            cached_txt2 = txt2
-            lastrangefinder = CurTime()
-        else
-            txt = cached_txt
-            txt2 = cached_txt2
-        end
-
-        local scrw = ScrW()
-        local scrh = ScrH()
-
-        local w = ScreenScale(100)
-        local h = ScreenScale(50)
-
-        local x = (scrw - w) / 2
-        local y = (scrh - h) * 5 / 6
-
-        surface.SetMaterial(mat_rf)
-        surface.SetDrawColor(255, 255, 255, 100)
-        surface.DrawTexturedRect(x, y, w, h)
-
-        surface.SetFont("TacRP_HD44780A00_5x8_10")
-        -- local tw = surface.GetTextSize(txt)
-        surface.SetTextPos(x + ScreenScale(3), y + ScreenScale(12))
-        surface.SetTextColor(0, 0, 0)
-        surface.DrawText(txt)
-
-        -- local tw2 = surface.GetTextSize(txt2)
-        surface.SetTextPos(x + ScreenScale(3), y + ScreenScale(22))
-        surface.SetTextColor(0, 0, 0)
-        surface.DrawText(txt2)
-    end
-
-    if self:GetValue("Minimap") and self:GetTactical() then
-        local scrw = ScrW()
-        local scrh = ScrH()
-
-        local w = ScreenScale(100)
-        local h = ScreenScale(100)
-
-        local x = (scrw - w) / 2
-        local y = (scrh - h) * 0.99
-
-        surface.SetMaterial(mat_radar)
-        surface.SetDrawColor(255, 255, 255, 100)
-        surface.DrawTexturedRect(x, y, w, h)
-
-        local radarpositions = {}
-
-        if lastradar + scantime > CurTime() then
-            radarpositions = cache_lastradarpositions
-        else
-            local tbl = ents.FindInSphere(self:GetOwner():GetPos(), 50 / TacRP.HUToM)
-
-            local i = 0
-            for _, ent in ipairs(tbl) do
-                if !(ent:IsPlayer() or ent:IsNPC() or ent:IsNextBot()) then continue end
-                if ent == self:GetOwner() then continue end
-
-                local ang = self:GetOwner():EyeAngles()
-
-                ang.y = ang.y + 90
-                ang.p = 0
-                ang.r = 0
-
-                local relpos = WorldToLocal(ent:GetPos(), Angle(0, 0, 0), self:GetOwner():GetPos(), ang)
-
-                local read = {
-                    x = -relpos.x,
-                    y = relpos.y,
-                }
-
-                table.insert(radarpositions, read)
-                i = i + 1
-            end
-
-            lastradar = CurTime()
-            cache_lastradarpositions = radarpositions
-
-            LocalPlayer():EmitSound("plats/elevbell1.wav", 60, 95 + math.min(i, 3) * 5, 0.2)
-        end
-
-        surface.SetDrawColor(0, 0, 0, 255 * 2 * (1 - ((CurTime() - lastradar) / scantime)))
-        surface.SetMaterial(mat_radar_active)
-        surface.DrawTexturedRect(x, y, w, h)
-        -- surface.SetDrawColor(255, 255, 255, 255)
-        surface.SetMaterial(mat_dot)
-
-        local ds = ScreenScale(4)
-
-        for _, dot in ipairs(radarpositions) do
-            local dx = x + (dot.x * TacRP.HUToM * w * (36 / 40) / 100) + (w / 2)
-            local dy = y + (dot.y * TacRP.HUToM * h * (36 / 40) / 100) + (h / 2)
-
-            local gs = ScreenScale(8)
-
-            dx = math.Round(dx / (w / gs)) * (w / gs)
-            dy = math.Round(dy / (h / gs)) * (h / gs)
-
-            dx = dx - ScreenScale(0.5)
-            dy = dy - ScreenScale(0.5)
-
-            surface.DrawTexturedRect(dx - (ds / 2), dy - (ds / 2), ds, ds)
-        end
-    end
-
-    if self:GetValue("SpreadGauge") and self:GetTactical() then
-
-        local scrw = ScrW()
-        local scrh = ScrH()
-
-        local w = ScreenScale(60)
-        local h = ScreenScale(30)
-
-        local x = (scrw - w) / 2
-        local y = (scrh - h) * 5.5 / 6
-
-        -- if self:GetSightDelta() > 0 then
-        --     y = y - self:GetSightDelta() ^ 0.5 * ScreenScale(24)
-        -- end
-
-        surface.SetMaterial(mat_spread)
-        surface.SetDrawColor(255, 255, 255, 100)
-        surface.DrawTexturedRect(x, y, w, h)
-
-        local spread = math.Clamp(self:GetSpread() / 0.00092592592, 0, 999.9)
-        local spread1 = math.floor(spread)
-        local spread2 = math.floor((spread - spread1) * 10)
-        local spread_txt1 = tostring(spread1)
-        if spread < 10 then
-            spread_txt1 = "00" .. spread_txt1
-        elseif spread < 100 then
-            spread_txt1 = "0" .. spread_txt1
-        end
-        surface.SetFont("TacRP_HD44780A00_5x8_6")
-        surface.SetTextColor(0, 0, 0)
-        surface.SetTextPos(x + ScreenScale(22), y + ScreenScale(2.5))
-        surface.DrawText(spread_txt1)
-        surface.DrawText(".")
-        surface.DrawText(spread2)
-
-        local recoil_pct = math.Round(recoil / self:GetValue("RecoilMaximum") * 100)
-        local recoil_txt = tostring(recoil_pct)
-        surface.SetTextPos(x + ScreenScale(22), y + ScreenScale(11.5))
-        surface.SetTextColor(0, 0, 0)
-
-        if recoil_pct == 0 then
-            recoil_txt = "000"
-            surface.SetTextColor(0, 0, 0, 100)
-        elseif recoil_pct < 10 then
-            recoil_txt = "00" .. recoil_txt
-        elseif recoil_pct < 100 then
-            recoil_txt = "0" .. recoil_txt
-        elseif math.sin(SysTime() * 30) > 0 then
-            surface.SetTextColor(0, 0, 0, 100)
-        end
-        surface.DrawText(recoil_txt)
-
-        local last_fire = math.Clamp((self:GetNextPrimaryFire() - CurTime()) / (60 / self:GetValue("RPM")), 0, 1)
-        surface.SetDrawColor(255, 255, 255, last_fire * 255)
-        surface.SetMaterial(mat_spread_fire)
-        surface.DrawTexturedRect(x, y, w, h)
-
-        surface.SetDrawColor(255, 255, 255, math.abs(math.sin(SysTime())) * 200)
-        surface.SetMaterial(mat_spread_gauge)
-        surface.DrawTexturedRect(x, y, w, h)
-
-        surface.SetDrawColor(255, 255, 255, 255)
-        surface.SetMaterial(mat_spread_text)
-        surface.DrawTexturedRect(x, y, w, h)
-
-        local w_cone = ScreenScale(40)
-        local x2 = (scrw - w_cone) / 2
-        local y2 = y - w_cone - ScreenScale(4)
-
-        surface.SetMaterial(mat_cone)
-        surface.SetDrawColor(255, 255, 255, 100)
-        surface.DrawTexturedRect(x2, y2, w_cone, w_cone)
-        surface.SetMaterial(mat_cone_text)
-        surface.SetDrawColor(255, 255, 255, 255)
-        surface.DrawTexturedRect(x2, y2, w_cone, w_cone)
-
-        local acc_size = math.max(GetFOVAcc(self), 1)
-        local a = math.Clamp(1 - (acc_size - ScreenScale(15)) / ScreenScale(5), 0, 1) ^ 0.5
-        surface.DrawCircle(x2 + w_cone / 2, y2 + w_cone / 2, acc_size - 1, 0, 0, 0, a * 200)
-        surface.DrawCircle(x2 + w_cone / 2, y2 + w_cone / 2, acc_size + 1, 0, 0, 0, a * 200)
-
-        local fov_mult = LocalPlayer():GetFOV() / math.max(self.TacRPLastFOV or 90, 0.00001)
-        local fov_mult1 = math.floor(fov_mult)
-        local fov_mult2 = math.Round(fov_mult - math.floor(fov_mult), 1) * 10
-        if fov_mult2 == 10 then fov_mult1 = fov_mult1 + 1 fov_mult2 = 0 end
-
-        surface.SetFont("TacRP_HD44780A00_5x8_6")
-        surface.SetTextColor(0, 0, 0)
-        surface.SetTextPos(x2 + ScreenScale(17), y2 + ScreenScale(2))
-        surface.DrawText(fov_mult1 .. "." .. fov_mult2 .. "x")
-        local sway_txt = math.Clamp(math.Round(self:GetSwayAmount() * 100), 0, 999) .. "%"
-        local sway_w = surface.GetTextSize(sway_txt)
-        surface.SetTextPos(x2 + ScreenScale(23) - sway_w, y2 + w_cone - ScreenScale(8.5))
-        surface.DrawText(sway_txt)
+    if self:GetValue("TacticalDraw") and self:GetTactical() then
+        self:GetValue("TacticalDraw")(self)
     end
 
     self:DrawCustomizeHUD()
@@ -816,9 +529,9 @@ function SWEP:DrawHUDBackground()
             if self:GetValue("CanQuickNade") then
                 local nade = self:GetGrenade()
 
-                local qty = "INF"
+                local qty = nil --"INF"
 
-                if nade.Ammo then
+                if nade.Ammo and (nade.Secret or !GetConVar("tacrp_infinitegrenades"):GetBool()) then
                     qty = tostring(self:GetOwner():GetAmmoCount(nade.Ammo))
                 end
 
@@ -830,7 +543,7 @@ function SWEP:DrawHUDBackground()
                     surface.DrawTexturedRect(x + ScreenScale(2), y + h - sg - ScreenScale(1), sg, sg)
                 end
 
-                local nadetext = nade.PrintName .. "x" .. qty
+                local nadetext = nade.PrintName .. (qty and ("x" .. qty) or "")
                 surface.SetTextPos(x + ScreenScale(4) + sg, y + h - sg + ScreenScale(1))
                 surface.SetFont("TacRP_HD44780A00_5x8_8")
                 surface.SetTextColor(col)
@@ -879,7 +592,7 @@ function SWEP:DrawHUDBackground()
         end
         surface.DrawLine(w2s.x, w2s.y - 256, w2s.x, w2s.y + 256)
         surface.DrawLine(w2s.x - 256, w2s.y, w2s.x + 256, w2s.y)
-        local spread = GetFOVAcc(self)
+        local spread = TacRP.GetFOVAcc(self)
         local recoil_txt = "Recoil: " .. tostring(math.Round(self:GetRecoilAmount() or 0, 3))
         surface.DrawCircle(w2s.x, w2s.y, spread, 255, 255, 255, 150)
         surface.DrawCircle(w2s.x, w2s.y, spread + 1, 255, 255, 255, 150)

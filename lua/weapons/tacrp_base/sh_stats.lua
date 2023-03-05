@@ -7,7 +7,8 @@ SWEP.ExcludeFromRawStats = {
 }
 
 SWEP.IntegerStats = {
-    ["ClipSize"] = true
+    ["ClipSize"] = true,
+    ["Num"] = true,
 }
 
 function SWEP:RunHook(val, data)
@@ -46,7 +47,7 @@ function SWEP:RunHook(val, data)
     return data
 end
 
-function SWEP:GetValue(val)
+function SWEP:GetValue(val, invert)
     local tbl = self:GetTable()
 
     local stat = tbl[val]
@@ -55,7 +56,7 @@ function SWEP:GetValue(val)
         stat = self.ArcadeStats[val]
     end
 
-    if self.StatCache[val] then
+    if !invert and self.StatCache[val] then
         return self.StatCache[val]
     end
 
@@ -87,37 +88,27 @@ function SWEP:GetValue(val)
             stat = atttbl["Override_" .. val]
             priority = att_priority
         end
-    end
 
-    for slot, slottbl in pairs(self.Attachments) do
-        if !slottbl.Installed then continue end
-
-        local atttbl = TacRP.GetAttTable(slottbl.Installed)
-
-        if stat then
-            if atttbl["Add_" .. val] then
-                stat = stat + atttbl["Add_" .. val]
-            end
+        if isnumber(stat) and atttbl["Add_" .. val] then
+            stat = stat + atttbl["Add_" .. val] * (invert and -1 or 1)
         end
-    end
 
-    for slot, slottbl in pairs(self.Attachments) do
-        if !slottbl.Installed then continue end
-
-        local atttbl = TacRP.GetAttTable(slottbl.Installed)
-
-        if stat then
-            if atttbl["Mult_" .. val] then
+        if isnumber(stat) and atttbl["Mult_" .. val] then
+            if invert then
+                stat = stat / atttbl["Mult_" .. val]
+            else
                 stat = stat * atttbl["Mult_" .. val]
             end
         end
     end
 
     if self.IntegerStats[val] then
-        stat = math.Round(stat)
+        stat = math.ceil(stat)
     end
 
-    self.StatCache[val] = stat
+    if !invert then
+        self.StatCache[val] = stat
+    end
 
     return stat
 end

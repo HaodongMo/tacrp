@@ -38,5 +38,3 @@ function ENT:Detonate()
 
     self:Remove()
 end
-
-ENT.SmokeTrail = true

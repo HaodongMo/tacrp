@@ -8,7 +8,7 @@ SWEP.PrintName = "DSA-58"
 SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 
 SWEP.SubCatTier = "2Premium"
-SWEP.SubCatType = "6Marksman Rifle"
+SWEP.SubCatType = "6Precision Rifle"
 
 SWEP.Description = "Battle rifle with slow fire rate but very high damage."
 
@@ -57,23 +57,22 @@ SWEP.Firemodes = {
     1
 }
 
-SWEP.RPM = 400
+SWEP.RPM = 420
 
 SWEP.Spread = 0.001
 
 SWEP.RecoilPerShot = 1
-SWEP.RecoilMaximum = 5
+SWEP.RecoilMaximum = 6
 SWEP.RecoilResetTime = 0.2
 SWEP.RecoilDissipationRate = 6
-SWEP.RecoilFirstShotMult = 0.75
+SWEP.RecoilFirstShotMult = 0.6
 
-SWEP.RecoilVisualKick = 3
+SWEP.RecoilVisualKick = 2
 
-SWEP.RecoilKick = 8
+SWEP.RecoilKick = 9
 
 SWEP.RecoilSpreadPenalty = 0.007
-
-SWEP.HipfireSpreadPenalty = 0.1
+SWEP.HipFireSpreadPenalty = 0.08
 
 SWEP.CanBlindFire = true
 
@@ -101,7 +100,7 @@ SWEP.PassiveAng = Angle(0, 0, 0)
 SWEP.PassivePos = Vector(0, -2, -4)
 
 SWEP.BlindFireAng = Angle(0, 5, 0)
-SWEP.BlindFirePos = Vector(0, -2, -4)
+SWEP.BlindFirePos = Vector(3, -2, -5)
 
 SWEP.SightAng = Angle(2.5, 0, 0)
 SWEP.SightPos = Vector(-2.45, -4, -3.11)

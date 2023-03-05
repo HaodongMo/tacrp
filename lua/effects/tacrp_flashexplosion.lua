@@ -17,7 +17,7 @@ function EFFECT:Init(data)
 
         particle:SetVelocity( 250 * VectorRand() )
         particle:SetDieTime( math.Rand(1.5, 5) )
-        particle:SetStartAlpha( 255 )
+        particle:SetStartAlpha( 150 )
         particle:SetEndAlpha( 0 )
         particle:SetStartSize( math.Rand(100,200) )
         particle:SetEndSize( math.Rand(300,400) )
