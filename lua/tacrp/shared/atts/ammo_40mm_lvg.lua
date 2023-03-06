@@ -2,15 +2,15 @@ ATT.PrintName = "Concussion" --"LVG"
 ATT.FullName = "40mm Concussion Grenades"
 
 ATT.Icon = Material("entities/tacrp_att_ammo_40mm_lvg.png", "mips smooth")
-ATT.Description = "Low velocity grenade designed for crowd control."
+ATT.Description = "Low velocity grenade made to incapacitate targets with indirect fire."
 ATT.Pros = {"Ricochet on impact", "Stuns targets"}
 ATT.Cons = {"Muzzle Velocity", "Damage"}
 
 ATT.Category = "ammo_40mm"
 
-ATT.SortOrder = 3.5
+ATT.SortOrder = 3
 
 ATT.ShootEnt = "tacrp_proj_40mm_lvg"
-ATT.Mult_ShootEntForce = 0.75
+ATT.Mult_ShootEntForce = 0.5
 
 ATT.InstalledElements = {"lvg"}

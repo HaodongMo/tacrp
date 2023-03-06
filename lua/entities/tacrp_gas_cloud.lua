@@ -105,6 +105,7 @@ function ENT:Think()
     if SERVER then
         if !self:GetOwner():IsValid() then self:Remove() return end
 
+        local o = self:GetOwner()
         local origin = self:GetPos() + Vector(0, 0, 16)
 
         local dmg = DamageInfo()
@@ -129,11 +130,47 @@ function ENT:Think()
                 local dist = (tr.HitPos - tr.StartPos):Length()
                 local delta = dist / 300
 
-                dmg:SetDamage(10 * (1 - delta))
+                dmg:SetDamage(math.random(5, 10))
+
+                if math.random() <= 0.3 then
+                    k:EmitSound("ambient/voices/cough" .. math.random(1, 4) .. ".wav", 80, math.Rand(95, 105))
+                end
 
                 k:TakeDamageInfo(dmg)
                 if k:IsPlayer() then
-                    k:ScreenFade( SCREENFADE.IN, Color(125, 150, 50), 2 * delta, 0 )
+                    k:ScreenFade( SCREENFADE.IN, Color(125, 150, 50, 100), 2 * delta, 0 )
+
+                    local hookname = "tacrp_gas_" .. k:EntIndex()
+                    local reps = 6
+
+                    if timer.Exists(hookname) then
+                        reps = math.max(timer.RepsLeft(hookname) + 3, reps)
+                        timer.Remove(hookname)
+                    end
+                    timer.Create(hookname, 1.5, reps, function()
+                        if !IsValid(k) or !k:Alive() then
+                            timer.Remove(hookname)
+                            return
+                        end
+                        k:ScreenFade( SCREENFADE.IN, Color(125, 150, 50, 5), 0.1, 0 )
+                        if k:Health() > 1 then
+                            local d = DamageInfo()
+                            d:SetDamageType(DMG_NERVEGAS)
+                            d:SetDamage(math.random(1, 2))
+                            d:SetInflictor(IsValid(self) and self or o)
+                            d:SetAttacker(o)
+                            d:SetDamageForce(k:GetForward())
+                            d:SetDamagePosition(k:GetPos())
+                            d:SetDamageCustom(1024)
+                            k:TakeDamageInfo(d)
+                        else
+                            k:ViewPunch(Angle(math.Rand(-2, 2), 0, 0))
+                        end
+                        if math.random() <= 0.3 then
+                            k:EmitSound("ambient/voices/cough" .. math.random(1, 4) .. ".wav", 80, math.Rand(95, 105))
+                        end
+                    end)
+
                 end
             end
         end
@@ -151,3 +188,14 @@ end
 function ENT:Draw()
     return false
 end
+
+-- cs gas strips armor and will try not deal lethal damage
+hook.Add("EntityTakeDamage", "z_tacrp_gas", function(ent, dmg)
+    if ent:IsPlayer() and dmg:GetDamageType() == DMG_NERVEGAS and bit.band(dmg:GetDamageCustom(), 1024) == 1024 then
+        ent:SetArmor(math.max(0, ent:Armor() - dmg:GetDamage() * 2))
+        if ent:Health() <= dmg:GetDamage() then
+            dmg:SetDamage(math.max(0, ent:Health() - 1))
+        end
+        if dmg:GetDamage() <= 0 then return true end
+    end
+end)

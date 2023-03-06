@@ -8,7 +8,7 @@ ATT.Cons = {"Minimal damage"}
 
 ATT.Category = "ammo_40mm"
 
-ATT.SortOrder = 3.5
+ATT.SortOrder = 4
 
 ATT.ShootEnt = "tacrp_proj_40mm_smoke"
 

@@ -87,17 +87,17 @@ function SWEP:PrimaryAttack()
         end
     end
 
-    if self:GetScopeLevel() > 0 and self:HasSequence(seq .. "_iron") then
+    if self:GetScopeLevel() > 0 and self:HasSequence(seq .. "_iron") and !self:GetPeeking() then
         self:PlayAnimation(seq .. "_iron", mult, false, idle)
     elseif self:HasSequence(seq .. "1") then
         local seq1 = seq .. "1"
-        if self:GetScopeLevel() < 1 then
+        if self:GetScopeLevel() < 1 or self:GetPeeking() then
             seq1 = seq .. tostring(self:GetBurstCount() + 1)
         end
 
         if self:HasSequence(seq1) then
             self:PlayAnimation(seq1, mult, false, idle)
-        elseif self:GetScopeLevel() < 1 then
+        elseif self:GetScopeLevel() < 1 or self:GetPeeking() then
             for i = self:GetBurstCount() + 1, 1, -1 do
                 local seq2 = seq .. tostring(i)
                 if self:HasSequence(seq2) then

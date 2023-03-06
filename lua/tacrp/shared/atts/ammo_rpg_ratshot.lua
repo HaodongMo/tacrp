@@ -8,4 +8,4 @@ ATT.Cons = {"Timed fuse"}
 ATT.Category = "ammo_rpg"
 
 ATT.Override_ShootEnt = "tacrp_proj_rpg7_ratshot"
-ATT.Override_ShootEntForce = 3000
+ATT.Override_ShootEntForce = 2500
