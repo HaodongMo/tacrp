@@ -5,7 +5,8 @@ ATT.Description = "Trigger that emulates automatic fire but with poor performanc
 ATT.Pros = {"Fire rate", "Automatic fire"}
 ATT.Cons = {"Spread", "Mobility"}
 
-ATT.Category = "trigger_pump"
+ATT.Category = "trigger_pump2"
+ATT.InvAtt = "trigger_slam"
 
 ATT.SortOrder = 1
 
@@ -15,5 +16,5 @@ ATT.Mult_RecoilSpreadPenalty = 1.25
 ATT.Add_RecoilMaximum = 0.5
 
 ATT.Mult_RPM = 1.15
-ATT.Mult_ShootTimeMult = 1.25
+ATT.Mult_ShootTimeMult = 1.4
 ATT.Mult_ShootingSpeedMult = 0.75

@@ -1,6 +1,6 @@
 ATT.PrintName = "Radar"
 ATT.Icon = Material("entities/tacrp_att_tac_dmic.png", "mips smooth")
-ATT.Description = "Shows the position of nearby enemies, but emits sound."
+ATT.Description = "Detects the position of nearby targets, but emits sound."
 ATT.Pros = {"Display nearby targets"}
 ATT.Cons = {"Audible to others"}
 

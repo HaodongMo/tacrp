@@ -10,7 +10,7 @@ SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 SWEP.SubCatTier = "4Common"
 SWEP.SubCatType = "2Machine Pistol"
 
-SWEP.Description = "Light machine pistol with very good recoil and spread."
+SWEP.Description = "Light machine pistol with good range, recoil and spread."
 
 SWEP.ViewModel = "models/weapons/tacint/v_skorpion.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_skorpion.mdl"
@@ -19,15 +19,11 @@ SWEP.Slot = 1
 
 SWEP.ArcadeStats = {
 
-    Damage_Max = 14,
-    Damage_Min = 5,
+    Damage_Max = 13,
+    Damage_Min = 8,
 
-    Range_Min = 600,
-    Range_Max = 2800,
-
-    Spread = 0.005,
-    HipFireSpreadPenalty = 0.005,
-    RecoilSpreadPenalty = 0.0009,
+    Range_Min = 500,
+    Range_Max = 3500,
 
     ClipSize = 30,
 
@@ -69,8 +65,8 @@ SWEP.Firemodes = {
 SWEP.RPM = 850
 
 SWEP.Spread = 0.008
-
-SWEP.HipFireSpreadPenalty = 0.014
+SWEP.RecoilSpreadPenalty = 0.001
+SWEP.HipFireSpreadPenalty = 0.02
 
 SWEP.ShootTimeMult = 0.5
 
@@ -84,7 +80,7 @@ SWEP.RecoilVisualKick = 0.4
 
 SWEP.RecoilKick = 1
 
-SWEP.RecoilSpreadPenalty = 0.001
+
 
 SWEP.CanBlindFire = true
 

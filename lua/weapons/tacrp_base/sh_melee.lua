@@ -46,7 +46,7 @@ function SWEP:Melee()
 
     -- weapon_hl2mpbasebasebludgeon.cpp: do a hull trace if not hit
     if tr.Fraction == 1 then
-        local dim = 24
+        local dim = 32
         local pos2 = tr.HitPos - dir * (dim * 1.732)
         tr = util.TraceHull({
             start = start,

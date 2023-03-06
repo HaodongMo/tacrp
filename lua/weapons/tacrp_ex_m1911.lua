@@ -19,7 +19,7 @@ SWEP.Slot = 1
 
 SWEP.ArcadeStats = {
 
-    Damage_Max = 25,
+    Damage_Max = 28,
     Damage_Min = 8,
 
     MoveSpeedMult = 1,
@@ -54,25 +54,24 @@ SWEP.BodyDamageMultipliers = {
 
 SWEP.Firemode = 1
 
-SWEP.RPM = 450
+SWEP.RPM = 420
 
-SWEP.Spread = 0.0025
+SWEP.Spread = 0.007
+SWEP.RecoilSpreadPenalty = 0.006
+SWEP.HipFireSpreadPenalty = 0.01
 
 SWEP.ShootTimeMult = 0.5
 
-
-
 SWEP.RecoilPerShot = 1
-SWEP.RecoilMaximum = 5
-SWEP.RecoilResetTime = 0.3
+SWEP.RecoilMaximum = 4
+SWEP.RecoilResetTime = 0.2
 SWEP.RecoilDissipationRate = 8
-SWEP.RecoilFirstShotMult = 1 // multiplier for the first shot's recoil amount
+SWEP.RecoilFirstShotMult = 0.6
 
 SWEP.RecoilVisualKick = 3
 
 SWEP.RecoilKick = 7
 
-SWEP.RecoilSpreadPenalty = 0.005
 
 SWEP.CanBlindFire = true
 
@@ -193,7 +192,7 @@ SWEP.Attachments = {
     },
     [2] = {
         PrintName = "Accessory",
-        Category = {"acc", "acc_extmag_pistol", "acc_holster", "acc_brace"},
+        Category = {"acc", "acc_extmag_pistol2", "acc_holster", "acc_brace"},
         AttachSound = "TacRP/weapons/flashlight_on.wav",
         DetachSound = "TacRP/weapons/flashlight_off.wav",
     },

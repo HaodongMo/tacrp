@@ -55,7 +55,7 @@ SWEP.FiremodeName = "Pump-Action" // only used externally for firemode name dist
 
 SWEP.RPM = 60
 
-SWEP.ShootTimeMult = 0.9
+SWEP.ShootTimeMult = 0.85
 
 SWEP.Spread = 0.015
 
@@ -220,7 +220,7 @@ SWEP.Attachments = {
     },
     [5] = {
         PrintName = "Trigger",
-        Category = {"trigger_manual"}, // "trigger_pump"
+        Category = {"trigger_manual", "trigger_pump2"},
         AttachSound = "TacRP/weapons/flashlight_on.wav",
         DetachSound = "TacRP/weapons/flashlight_off.wav",
     },

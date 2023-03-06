@@ -1,6 +1,6 @@
 ATT.PrintName = "Spread Gauge"
 ATT.Icon = Material("entities/tacrp_att_tac_rangefinder.png", "mips smooth")
-ATT.Description = "Measures weapon performance over sway and recoil."
+ATT.Description = "Measures weapon stability from sway and recoil."
 ATT.Pros = {"Display recoil, sway and spread", "Spread visualization in sights"}
 
 ATT.Model = "models/weapons/tacint/addons/rangefinder_mounted.mdl"

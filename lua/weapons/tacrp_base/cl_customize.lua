@@ -595,7 +595,7 @@ function SWEP:CreateCustomizeHUD()
         },
         {
             Name = "Hipfire Spread",
-            Description = "Amount of inaccuracy added while hipfiring.",
+            Description = "Amount of additional inaccuracy while hipfiring.",
             AggregateFunction = function(base, val)
                 return math.Round(math.deg(val), 2)
             end,

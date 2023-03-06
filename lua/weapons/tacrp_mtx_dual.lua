@@ -39,8 +39,8 @@ SWEP.BodyDamageMultipliers = {
     [HITGROUP_HEAD] = 2,
     [HITGROUP_CHEST] = 1,
     [HITGROUP_STOMACH] = 1,
-    [HITGROUP_LEFTARM] = 1,
-    [HITGROUP_RIGHTARM] = 1,
+    [HITGROUP_LEFTARM] = 0.9,
+    [HITGROUP_RIGHTARM] = 0.9,
     [HITGROUP_LEFTLEG] = 0.75,
     [HITGROUP_RIGHTLEG] = 0.75,
     [HITGROUP_GEAR] = 0.9
@@ -55,20 +55,20 @@ SWEP.RPM = 700
 SWEP.Spread = 0.02
 
 SWEP.MoveSpreadPenalty = 0
-SWEP.MidAirSpreadPenalty = 0
+SWEP.MidAirSpreadPenalty = 0.08
 SWEP.HipFireSpreadPenalty = 0
 
 SWEP.RecoilPerShot = 1
 SWEP.RecoilMaximum = 15
-SWEP.RecoilResetTime = 0.15
-SWEP.RecoilDissipationRate = 15
+SWEP.RecoilResetTime = 0.25
+SWEP.RecoilDissipationRate = 20
 SWEP.RecoilFirstShotMult = 1 // multiplier for the first shot's recoil amount
 
 SWEP.RecoilVisualKick = 1
 
-SWEP.RecoilKick = 4
+SWEP.RecoilKick = 5
 
-SWEP.RecoilSpreadPenalty = 0.0015 // extra spread per one unit of recoil
+SWEP.RecoilSpreadPenalty = 0.002
 
 SWEP.Sway = 0.5
 

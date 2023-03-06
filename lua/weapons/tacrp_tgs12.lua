@@ -19,14 +19,14 @@ SWEP.Slot = 2
 
 SWEP.ArcadeStats = {
 
-    Description = "Pistol grip shotgun powerful at very close range.",
+    Description = "Compact pistol grip shotgun effective at very close range.",
 
-    Damage_Max = 16,
+    Damage_Max = 18,
     Damage_Min = 5,
-    ClipSize = 4,
+    ClipSize = 5,
 
     MoveSpeedMult = 0.95,
-    ShootingSpeedMult = 0.85,
+    ShootingSpeedMult = 0.9,
     SightedSpeedMult = 0.95,
     MeleeSpeedMult = 1,
     ReloadSpeedMult = 1,
@@ -36,7 +36,7 @@ SWEP.ArcadeStats = {
 
 SWEP.Damage_Max = 15
 SWEP.Damage_Min = 6
-SWEP.Range_Min = 200 // distance for which to maintain maximum damage
+SWEP.Range_Min = 100 // distance for which to maintain maximum damage
 SWEP.Range_Max = 2000 // distance at which we drop to minimum damage
 SWEP.Penetration = 1 // units of metal this weapon can penetrate
 SWEP.Num = 8
@@ -62,9 +62,9 @@ SWEP.FiremodeName = "Pump-Action" // only used externally for firemode name dist
 
 SWEP.RPM = 70
 
-SWEP.Spread = 0.03
+SWEP.Spread = 0.02
 
-SWEP.ShootTimeMult = 0.9
+SWEP.ShootTimeMult = 0.8
 
 SWEP.HipFireSpreadPenalty = 0.02
 SWEP.MidAirSpreadPenalty = 0

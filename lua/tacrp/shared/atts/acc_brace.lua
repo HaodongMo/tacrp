@@ -8,8 +8,8 @@ ATT.Category = "acc_brace"
 
 ATT.SortOrder = 3
 
-ATT.Mult_RecoilKick = 0.4
-ATT.Mult_RecoilSpreadPenalty = 0.85
+ATT.Mult_RecoilKick = 0.3
+ATT.Mult_RecoilSpreadPenalty = 0.75
 
 ATT.Add_Sway = -0.8
 ATT.Add_ScopedSway = -0.8

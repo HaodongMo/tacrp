@@ -10,7 +10,7 @@ SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 SWEP.SubCatTier = "2Premium"
 SWEP.SubCatType = "1Sidearm"
 
-SWEP.Description = "Magnum revolver with high recoil and incredible stopping power. Accurate, but hard to fire rapidly."
+SWEP.Description = "Magnum revolver with good handling and stopping power. Accurate, but hard to fire rapidly."
 
 SWEP.ViewModel = "models/weapons/tacint/v_mr96.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_mr96.mdl"
@@ -33,17 +33,17 @@ SWEP.Range_Min = 400 // distance for which to maintain maximum damage
 SWEP.Range_Max = 4000 // distance at which we drop to minimum damage
 SWEP.Penetration = 6 // units of metal this weapon can penetrate
 
-SWEP.MuzzleVelocity = 12000
+SWEP.MuzzleVelocity = 12500
 
 SWEP.BodyDamageMultipliers = {
     [HITGROUP_HEAD] = 2.5,
     [HITGROUP_CHEST] = 1.25,
     [HITGROUP_STOMACH] = 1,
-    [HITGROUP_LEFTARM] = 1,
-    [HITGROUP_RIGHTARM] = 1,
-    [HITGROUP_LEFTLEG] = 0.8,
-    [HITGROUP_RIGHTLEG] = 0.8,
-    [HITGROUP_GEAR] = 0.9
+    [HITGROUP_LEFTARM] = 0.9,
+    [HITGROUP_RIGHTARM] = 0.9,
+    [HITGROUP_LEFTLEG] = 0.75,
+    [HITGROUP_RIGHTLEG] = 0.75,
+    [HITGROUP_GEAR] = 0.75
 }
 
 // misc. shooting
@@ -52,7 +52,7 @@ SWEP.Firemode = 1
 
 SWEP.FiremodeName = "Double-Action" // only used externally for firemode name distinction
 
-SWEP.RPM = 180
+SWEP.RPM = 150
 
 SWEP.Spread = 0.001
 
@@ -61,16 +61,16 @@ SWEP.ShootTimeMult = 1
 
 
 SWEP.RecoilPerShot = 1
-SWEP.RecoilMaximum = 3
-SWEP.RecoilResetTime = 0.4
-SWEP.RecoilDissipationRate = 5
-SWEP.RecoilFirstShotMult = 1 // multiplier for the first shot's recoil amount
+SWEP.RecoilMaximum = 2.5
+SWEP.RecoilResetTime = 0.3
+SWEP.RecoilDissipationRate = 3
+SWEP.RecoilFirstShotMult = 0.75 // multiplier for the first shot's recoil amount
 
 SWEP.RecoilVisualKick = 10
 
-SWEP.RecoilKick = 12.5
+SWEP.RecoilKick = 9
 
-SWEP.RecoilSpreadPenalty = 0.015 // extra spread per one unit of recoil
+SWEP.RecoilSpreadPenalty = 0.035
 
 SWEP.CanBlindFire = true
 

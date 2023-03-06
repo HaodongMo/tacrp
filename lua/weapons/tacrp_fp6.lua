@@ -10,7 +10,7 @@ SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 SWEP.SubCatTier = "2Premium"
 SWEP.SubCatType = "5Shotgun"
 
-SWEP.Description = "Combat shotgun with extended shell capacity."
+SWEP.Description = "Combat shotgun with high fire rate."
 
 SWEP.ViewModel = "models/weapons/tacint/v_fp6.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_fp6.mdl"
@@ -18,6 +18,12 @@ SWEP.WorldModel = "models/weapons/tacint/w_fp6.mdl"
 SWEP.Slot = 2
 
 SWEP.ArcadeStats = {
+
+    Damage_Max = 14,
+    Damage_Min = 5,
+
+    ClipSize = 7,
+
     MoveSpeedMult = 0.9,
     ShootingSpeedMult = 0.8,
     SightedSpeedMult = 0.9,

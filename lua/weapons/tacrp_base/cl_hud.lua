@@ -39,7 +39,7 @@ function SWEP:DoDrawCrosshair(x, y)
     cam.End3D()
 
     local spread = TacRP.GetFOVAcc(self)
-    local sway = self:GetSwayAmount()
+    local sway = self:IsSwayEnabled() and self:GetSwayAmount() or 0
 
     if tacfunc then
         tacfunc(self, x, y, spread, sway)
@@ -95,6 +95,10 @@ function SWEP:DrawHUDBackground()
         surface.SetDrawColor(0, 0, 0, 200 * delta)
         surface.SetMaterial(mat_vignette)
         surface.DrawTexturedRect(0, 0, ScrW(), ScrH())
+    end
+
+    if self:GetValue("BlindFireCamera") then
+        self:DoCornershot()
     end
 
     if self:GetValue("TacticalDraw") and self:GetTactical() then

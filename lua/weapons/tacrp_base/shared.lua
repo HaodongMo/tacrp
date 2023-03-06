@@ -80,6 +80,7 @@ SWEP.HipFireSpreadPenalty = 0.02 // spread penalty for not being scoped in
 SWEP.ScopedSpreadPenalty = 0 // spread penalty for... being scoped in?
 SWEP.BlindFireSpreadPenalty = 0 // spread penalty for blind firing
 SWEP.CrouchSpreadPenalty = 0
+SWEP.PeekPenaltyFraction = 0.3 // percentage of hipfire penalty to use while peeking in sights
 
 SWEP.RecoilPerShot = 1
 SWEP.RecoilMaximum = 10
@@ -191,7 +192,7 @@ SWEP.QuickNadeTimeMult = 1
 SWEP.CanMeleeAttack = true
 SWEP.MeleeDamage = 20
 SWEP.MeleeAttackTime = 1 // time between swings
-SWEP.MeleeRange = 72
+SWEP.MeleeRange = 96
 
 // reload
 

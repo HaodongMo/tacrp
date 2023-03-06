@@ -1,6 +1,6 @@
 ATT.PrintName = "Rangefinder"
 ATT.Icon = Material("entities/tacrp_att_tac_rangefinder.png", "mips smooth")
-ATT.Description = "Measures distance to point of aim and bullet drop."
+ATT.Description = "Measures ballistic performance of the weapon."
 ATT.Pros = {"Display distance and damage at range", "Bullet drop visualization in sights"}
 
 ATT.Model = "models/weapons/tacint/addons/rangefinder_mounted.mdl"

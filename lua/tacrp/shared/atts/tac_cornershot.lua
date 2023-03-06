@@ -9,7 +9,3 @@ ATT.Scale = 1
 ATT.Category = "tactical"
 
 ATT.BlindFireCamera = true
-
-function ATT.TacticalDraw(self)
-    self:DoCornershot()
-end

@@ -13,7 +13,7 @@ end
 
 function SWEP:GetSwayAngles()
     --local stunned = self:GetOwner():GetNWFloat("TacRPStunStart", 0) + self:GetOwner():GetNWFloat("TacRPStunDur", 0) > CurTime()
-    if !GetConVar("tacrp_sway"):GetBool() then return Angle(0, 0, 0) end
+    if !self:IsSwayEnabled() then return Angle(0, 0, 0) end
     local swayamt = self:GetSwayAmount()
     local swayspeed = 1
 
@@ -30,4 +30,8 @@ function SWEP:GetSwayAngles()
     ang = ang * swayamt
 
     return ang
+end
+
+function SWEP:IsSwayEnabled()
+    return GetConVar("tacrp_sway"):GetBool()
 end
