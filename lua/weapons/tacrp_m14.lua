@@ -10,7 +10,7 @@ SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 SWEP.SubCatTier = "2Premium"
 SWEP.SubCatType = "6Precision Rifle"
 
-SWEP.Description = "Semi-automatic sniper rifle with a lethal headshot.\nEquipped with a 6x scope by default."
+SWEP.Description = "Semi-automatic rifle with a lethal headshot.\nEquipped with a 6x scope by default."
 
 SWEP.ViewModel = "models/weapons/tacint/v_m14.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_m14.mdl"

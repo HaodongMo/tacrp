@@ -83,7 +83,7 @@ function SWEP:GetViewModelPosition(pos, ang)
         sightdelta = m_appor(sightdelta, 0, FT / self:GetValue("AimDownSightsTime"))
     end
 
-    if self:GetScopeLevel() > 0 and self:GetPeeking() then
+    if self:GetPeeking() then
         peekdelta = m_appor(peekdelta, 1, FT / 0.2)
     else
         peekdelta = m_appor(peekdelta, 0, FT / 0.2)
@@ -112,7 +112,7 @@ function SWEP:GetViewModelPosition(pos, ang)
     local im = self:GetValue("SightMidPoint")
 
 
-    local midpoint = curvedpeekdelta == 0 and curvedsightdelta * math.cos(curvedsightdelta * (math.pi / 2)) or 0
+    local midpoint = curvedsightdelta * math.cos(curvedsightdelta * (math.pi / 2)) * (1 - curvedpeekdelta)
 
     local joffset = (im and im.Pos or Vector(0, 0, 0) + ppos) * midpoint
     local jaffset = (im and im.Ang or Angle(0, 0, 0) + pang) * midpoint
