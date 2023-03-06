@@ -10,7 +10,7 @@ SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 SWEP.SubCatTier = "1Elite"
 SWEP.SubCatType = "4Assault Rifle"
 
-SWEP.Description = "Light machine gun that offers huge volume of fire. Despite its name, it is a very heavy weapon."
+SWEP.Description = "Machine gun with huge volume of fire. "
 
 SWEP.ViewModel = "models/weapons/tacint/v_mg4.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_mg4.mdl"
@@ -18,6 +18,12 @@ SWEP.WorldModel = "models/weapons/tacint/w_mg4.mdl"
 SWEP.Slot = 2
 
 SWEP.ArcadeStats = {
+
+    Damage_Max = 30,
+    Damage_Min = 24,
+
+    ClipSize = 75,
+
     MoveSpeedMult = 0.75,
     ShootingSpeedMult = 0.5,
     SightedSpeedMult = 0.75,
@@ -236,7 +242,7 @@ SWEP.Attachments = {
     },
     [4] = {
         PrintName = "Accessory",
-        Category = {"acc", "extendedbelt", "acc_duffle"},
+        Category = {"acc", "extendedbelt", "acc_duffle", "acc_bipod"},
         AttachSound = "TacRP/weapons/flashlight_on.wav",
         DetachSound = "TacRP/weapons/flashlight_off.wav",
     },

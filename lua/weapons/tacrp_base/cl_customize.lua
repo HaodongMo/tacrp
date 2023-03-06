@@ -503,6 +503,17 @@ function SWEP:CreateCustomizeHUD()
             HideIfSame = true,
         },
         {
+            Name = "Crouching Recoil",
+            Description = "Recoil multiplier when crouched and not moving.",
+            AggregateFunction = function(base, val)
+                return math.min(100, math.Round(val * 100, 0))
+            end,
+            Unit = "%",
+            Value = "RecoilCrouchMult",
+            LowerIsBetter = true,
+            HideIfSame = true,
+        },
+        {
             Name = "Move Speed",
             Description = "Speed multiplier while the weapon is held up. Has no effect when weapon is in safety.",
             AggregateFunction = function(base, val)
@@ -580,6 +591,18 @@ function SWEP:CreateCustomizeHUD()
             Description = "Amount of sway while aiming. Sway affects your firing direction without changing your aiming direction.",
             Value = "ScopedSway",
             LowerIsBetter = true,
+            ConVarCheck = "tacrp_sway",
+        },
+        {
+            Name = "Crouching Sway",
+            Description = "Sway multiplier when crouched and not moving.",
+            Value = "SwayCrouchMult",
+            AggregateFunction = function(base, val)
+                return math.min(100, math.Round(val * 100, 0))
+            end,
+            Unit = "%",
+            LowerIsBetter = true,
+            HideIfSame = true,
             ConVarCheck = "tacrp_sway",
         },
         {

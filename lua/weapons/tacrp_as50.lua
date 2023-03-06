@@ -18,12 +18,13 @@ SWEP.WorldModel = "models/weapons/tacint/w_as50.mdl"
 SWEP.Slot = 2
 
 SWEP.ArcadeStats = {
+    Description = "Semi-automatic anti-materiel rifle lethal at long distances.\nEquipped with a 12x scope by default.",
 
     Damage_Max = 70,
-    Damage_Min = 100,
+    Damage_Min = 125,
 
     Range_Min = 500,
-    Range_Max = 2500,
+    Range_Max = 3000,
 
     MoveSpeedMult = 0.7,
     ShootingSpeedMult = 0.5,
@@ -59,22 +60,23 @@ SWEP.Firemode = 1
 SWEP.RPM = 200
 
 SWEP.Spread = 0
-
+SWEP.RecoilSpreadPenalty = 0.05
 SWEP.HipFireSpreadPenalty = 0.1
+SWEP.PeekPenaltyFraction = 0.15
 
 
 SWEP.RecoilPerShot = 1
 SWEP.RecoilMaximum = 2
-SWEP.RecoilResetTime = 0.15
-SWEP.RecoilDissipationRate = 4
+SWEP.RecoilResetTime = 0.25
+SWEP.RecoilDissipationRate = 2
 SWEP.RecoilFirstShotMult = 1
+SWEP.RecoilCrouchMult = 0.5
 
 SWEP.RecoilVisualKick = 15
 SWEP.RecoilVisualShake = 0.9
 
 SWEP.RecoilKick = 15
 
-SWEP.RecoilSpreadPenalty = 0.05
 
 SWEP.CanBlindFire = true
 

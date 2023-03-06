@@ -8,6 +8,10 @@ function SWEP:GetSwayAmount()
         sway = sway + self:GetValue("BlindFireSway")
     end
 
+    if self:GetOwner():Crouching() and !(self:GetOwner():KeyDown(IN_FORWARD) or self:GetOwner():KeyDown(IN_MOVELEFT) or self:GetOwner():KeyDown(IN_MOVERIGHT) or self:GetOwner():KeyDown(IN_BACK)) then
+        sway = sway * self:GetValue("SwayCrouchMult")
+    end
+
     return sway
 end
 

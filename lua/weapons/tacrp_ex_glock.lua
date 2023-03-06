@@ -10,7 +10,7 @@ SWEP.Category = "Tactical RP" // "Tactical RP (Extras)"
 SWEP.SubCatTier = "4Common"
 SWEP.SubCatType = "1Sidearm"
 
-SWEP.Description = "Polymer pistol with large capacity and fire rate. Custom modifications allow it to burst fire."
+SWEP.Description = "Polymer pistol with large capacity and fire rate."
 
 SWEP.ViewModel = "models/weapons/tacint_extras/v_glock.mdl"
 SWEP.WorldModel = "models/weapons/tacint_extras/w_glock.mdl"
@@ -19,9 +19,10 @@ SWEP.Slot = 1
 
 SWEP.ArcadeStats = {
 
-    Damage_Max = 13,
-    Damage_Min = 5,
+    Damage_Max = 14,
+    Damage_Min = 7,
 
+    RecoilKick = 2.5,
     RPM = 1200,
 
     MoveSpeedMult = 1,
@@ -36,7 +37,7 @@ SWEP.ArcadeStats = {
 SWEP.Damage_Max = 10
 SWEP.Damage_Min = 5
 SWEP.Range_Min = 800 // distance for which to maintain maximum damage
-SWEP.Range_Max = 2400 // distance at which we drop to minimum damage
+SWEP.Range_Max = 2500 // distance at which we drop to minimum damage
 SWEP.Penetration = 3 // units of metal this weapon can penetrate
 
 SWEP.MuzzleVelocity = 11000
@@ -54,16 +55,14 @@ SWEP.BodyDamageMultipliers = {
 
 // misc. shooting
 
-SWEP.Firemodes = {-3, 1}
-SWEP.RunawayBurst = true
-SWEP.PostBurstDelay = 0.17
+SWEP.Firemode = 1
 
 SWEP.RPM = 900
 
 SWEP.Spread = 0.005
 
 SWEP.RecoilPerShot = 1
-SWEP.RecoilMaximum = 8
+SWEP.RecoilMaximum = 6
 SWEP.RecoilResetTime = 0.3
 SWEP.RecoilDissipationRate = 15
 SWEP.RecoilFirstShotMult = 1 // multiplier for the first shot's recoil amount
@@ -228,7 +227,7 @@ SWEP.Attachments = {
     },
     [4] = {
         PrintName = "Accessory",
-        Category = {"acc", "acc_extmag_pistol", "acc_holster", "acc_brace"},
+        Category = {"acc", "acc_extmag_smg", "acc_holster", "acc_brace"},
         AttachSound = "tacrp/weapons/flashlight_on.wav",
         DetachSound = "tacrp/weapons/flashlight_off.wav",
     },

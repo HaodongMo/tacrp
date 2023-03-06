@@ -1,15 +1,18 @@
 function SWEP:ThinkRecoil()
-    if (IsFirstTimePredicted() and CLIENT) or game.SinglePlayer() then
-        if self:GetRecoilAmount() > 0 then
-            local kick = self:GetValue("RecoilKick")
-            local rec = math.min(self:GetRecoilAmount(), 1)
-            local sightdelta = self:GetSightDelta()
+    if ((IsFirstTimePredicted() and CLIENT) or game.SinglePlayer()) and self:GetRecoilAmount() > 0 then
+        local kick = self:GetValue("RecoilKick")
 
-            local aim_kick_v = rec * kick * math.sin((CurTime() - kick) * 15) * FrameTime() * (1 - sightdelta)
-            local aim_kick_h = rec * kick * math.sin(CurTime() * 12.2) * FrameTime() * (1 - sightdelta)
-
-            self:SetFreeAimAngle(self:GetFreeAimAngle() - Angle(aim_kick_v, aim_kick_h, 0))
+        if self:GetOwner():Crouching() and !(self:GetOwner():KeyDown(IN_FORWARD) or self:GetOwner():KeyDown(IN_MOVELEFT) or self:GetOwner():KeyDown(IN_MOVERIGHT) or self:GetOwner():KeyDown(IN_BACK)) then
+            kick = kick * self:GetValue("RecoilCrouchMult")
         end
+
+        local rec = math.min(self:GetRecoilAmount(), 1)
+        local sightdelta = self:GetSightDelta()
+
+        local aim_kick_v = rec * kick * math.sin((CurTime() - kick) * 15) * FrameTime() * (1 - sightdelta)
+        local aim_kick_h = rec * kick * math.sin(CurTime() * 12.2) * FrameTime() * (1 - sightdelta)
+
+        self:SetFreeAimAngle(self:GetFreeAimAngle() - Angle(aim_kick_v, aim_kick_h, 0))
     end
 
     if self:GetLastRecoilTime() + self:GetValue("RecoilResetTime") < CurTime() then
@@ -30,6 +33,10 @@ function SWEP:ApplyRecoil()
 
     if rec == 0 then
         rps = rps * self:GetValue("RecoilFirstShotMult")
+    end
+
+    if self:GetOwner():Crouching() and !(self:GetOwner():KeyDown(IN_FORWARD) or self:GetOwner():KeyDown(IN_MOVELEFT) or self:GetOwner():KeyDown(IN_MOVERIGHT) or self:GetOwner():KeyDown(IN_BACK)) then
+        rps = rps * self:GetValue("RecoilCrouchMult")
     end
 
     rec = rec + rps

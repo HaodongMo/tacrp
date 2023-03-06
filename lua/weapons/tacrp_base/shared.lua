@@ -88,6 +88,8 @@ SWEP.RecoilResetTime = 0 // time after you stop shooting for recoil to start dis
 SWEP.RecoilDissipationRate = 2
 SWEP.RecoilFirstShotMult = 1 // multiplier for the first shot's recoil amount
 
+SWEP.RecoilCrouchMult = 0.85 // multiplier for when crouched
+
 SWEP.RecoilVisualKick = 0.1
 
 SWEP.RecoilKick = 0.25
@@ -170,14 +172,15 @@ SWEP.ScopeFOV = 90 / 1.1
 SWEP.ScopeLevels = 1 // 2 = like CS:S
 SWEP.ScopeHideWeapon = false
 
-SWEP.QuickScopeSpreadPenalty = 0.025
-SWEP.QuickScopeTime = 0.3 // amount of time over which to fade out the quickscope spread penalty
+SWEP.QuickScopeSpreadPenalty = 0.04
+SWEP.QuickScopeTime = 0.25 // amount of time over which to fade out the quickscope spread penalty
 
 // sway
 
 SWEP.Sway = 1
 SWEP.ScopedSway = 0.1
 SWEP.BlindFireSway = 2
+SWEP.SwayCrouchMult = 0.75
 
 SWEP.FreeAim = true
 SWEP.FreeAimMaxAngle = 7.5

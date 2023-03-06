@@ -22,7 +22,7 @@ SWEP.ArcadeStats = {
     Damage_Max = 75,
     Damage_Min = 100,
 
-    Range_Min = 250,
+    Range_Min = 600,
     Range_Max = 2000,
 
     MoveSpeedMult = 0.8,
@@ -63,6 +63,7 @@ SWEP.RPM = 35
 SWEP.Spread = 0.00
 
 SWEP.HipFireSpreadPenalty = 0.08
+SWEP.PeekPenaltyFraction = 0.2
 
 SWEP.RecoilPerShot = 1
 SWEP.RecoilMaximum = 1

@@ -22,8 +22,8 @@ SWEP.ArcadeStats = {
     Damage_Max = 55,
     Damage_Min = 80,
 
-    Range_Min = 100,
-    Range_Max = 1000,
+    Range_Min = 400,
+    Range_Max = 1500,
 
     MoveSpeedMult = 0.8,
     ShootingSpeedMult = 0.65,
@@ -62,7 +62,8 @@ SWEP.RPM = 50
 
 SWEP.Spread = 0
 
-SWEP.HipFireSpreadPenalty = 0.05
+SWEP.HipFireSpreadPenalty = 0.06
+SWEP.PeekPenaltyFraction = 0.2
 
 SWEP.RecoilPerShot = 1
 SWEP.RecoilMaximum = 1
@@ -246,7 +247,7 @@ SWEP.Attachments = {
     },
     [4] = {
         PrintName = "Accessory",
-        Category = {"acc", "acc_extmag_sniper", "acc_sling", "acc_duffle"},
+        Category = {"acc", "acc_extmag_sniper", "acc_sling", "acc_duffle", "acc_bipod"},
         AttachSound = "TacRP/weapons/flashlight_on.wav",
         DetachSound = "TacRP/weapons/flashlight_off.wav",
     },
