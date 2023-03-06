@@ -22,6 +22,10 @@ SWEP.ArcadeStats = {
     Damage_Max = 24,
     Damage_Min = 5,
 
+    RecoilSpreadPenalty = 0.005,
+    HipFireSpreadPenalty = 0.025,
+    RecoilKick = 8,
+
     MoveSpeedMult = 0.95,
     ShootingSpeedMult = 0.8,
     SightedSpeedMult = 0.9,
@@ -56,7 +60,7 @@ SWEP.Firemodes = {2, 1}
 
 SWEP.RPM = 850
 
-SWEP.Spread = 0.001
+SWEP.Spread = 0.01
 
 SWEP.RecoilPerShot = 1
 SWEP.RecoilMaximum = 8
@@ -69,6 +73,7 @@ SWEP.RecoilVisualKick = 1.5
 SWEP.RecoilKick = 6
 
 SWEP.RecoilSpreadPenalty = 0.0025
+SWEP.HipFireSpreadPenalty = 0.02
 
 SWEP.CanBlindFire = true
 

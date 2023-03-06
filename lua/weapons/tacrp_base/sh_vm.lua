@@ -111,7 +111,9 @@ function SWEP:GetViewModelPosition(pos, ang)
 
     local im = self:GetValue("SightMidPoint")
 
-    local midpoint = curvedsightdelta * math.cos(curvedsightdelta * (math.pi / 2))
+
+    local midpoint = curvedpeekdelta == 0 and curvedsightdelta * math.cos(curvedsightdelta * (math.pi / 2)) or 0
+
     local joffset = (im and im.Pos or Vector(0, 0, 0) + ppos) * midpoint
     local jaffset = (im and im.Ang or Angle(0, 0, 0) + pang) * midpoint
 

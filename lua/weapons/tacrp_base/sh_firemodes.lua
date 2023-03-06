@@ -36,7 +36,7 @@ end
 
 function SWEP:GetCurrentFiremode()
     if self:GetValue("Firemodes") then
-        return self:GetValue("Firemodes")[self:GetFiremode()]
+        return self:GetValue("Firemodes")[self:GetFiremode()] or 0
     else
         return self:GetValue("Firemode")
     end

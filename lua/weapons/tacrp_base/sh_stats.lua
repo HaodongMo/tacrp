@@ -3,7 +3,7 @@ SWEP.HookCache = {}
 
 SWEP.ExcludeFromRawStats = {
     ["PrintName"] = true,
-    ["Description"] = true
+    ["Description"] = true,
 }
 
 SWEP.IntegerStats = {

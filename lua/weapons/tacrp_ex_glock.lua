@@ -10,7 +10,7 @@ SWEP.Category = "Tactical RP" // "Tactical RP (Extras)"
 SWEP.SubCatTier = "4Common"
 SWEP.SubCatType = "1Sidearm"
 
-SWEP.Description = "Polymer pistol with large capacity and fire rate."
+SWEP.Description = "Polymer pistol with large capacity and fire rate. Custom modifications allow it to burst fire."
 
 SWEP.ViewModel = "models/weapons/tacint_extras/v_glock.mdl"
 SWEP.WorldModel = "models/weapons/tacint_extras/w_glock.mdl"
@@ -22,8 +22,7 @@ SWEP.ArcadeStats = {
     Damage_Max = 13,
     Damage_Min = 5,
 
-    RPM = 750,
-    RecoilKick = 3,
+    RPM = 1200,
 
     MoveSpeedMult = 1,
     ShootingSpeedMult = 1,
@@ -55,22 +54,24 @@ SWEP.BodyDamageMultipliers = {
 
 // misc. shooting
 
-SWEP.Firemode = 1
+SWEP.Firemodes = {-3, 1}
+SWEP.RunawayBurst = true
+SWEP.PostBurstDelay = 0.17
 
-SWEP.RPM = 650
+SWEP.RPM = 900
 
 SWEP.Spread = 0.005
 
 SWEP.RecoilPerShot = 1
 SWEP.RecoilMaximum = 8
-SWEP.RecoilResetTime = 0.2
-SWEP.RecoilDissipationRate = 10
+SWEP.RecoilResetTime = 0.3
+SWEP.RecoilDissipationRate = 15
 SWEP.RecoilFirstShotMult = 1 // multiplier for the first shot's recoil amount
 
 SWEP.RecoilVisualKick = 2
 SWEP.RecoilKick = 4
 
-SWEP.RecoilSpreadPenalty = 0.0025
+SWEP.RecoilSpreadPenalty = 0.004
 
 SWEP.CanBlindFire = true
 

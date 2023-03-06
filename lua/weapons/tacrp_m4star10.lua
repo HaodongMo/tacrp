@@ -19,7 +19,7 @@ SWEP.Slot = 2
 
 SWEP.ArcadeStats = {
 
-    Damage_Max = 10,
+    Damage_Max = 12,
     Damage_Min = 4,
 
     MoveSpeedMult = 0.9,
@@ -73,9 +73,9 @@ SWEP.RecoilFirstShotMult = 1 // multiplier for the first shot's recoil amount
 SWEP.RecoilVisualKick = 1.5
 SWEP.RecoilVisualShake = 1.5
 
-SWEP.RecoilKick = 15
+SWEP.RecoilKick = 12
 
-SWEP.RecoilSpreadPenalty = 0.03
+SWEP.RecoilSpreadPenalty = 0.025
 
 SWEP.CanBlindFire = true
 
