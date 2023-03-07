@@ -211,12 +211,12 @@ function ENT:Think()
 
         local dmg = DamageInfo()
         dmg:SetDamageType(DMG_BURN)
-        dmg:SetDamage(50)
+        dmg:SetDamage(30)
         dmg:SetInflictor(self)
         dmg:SetAttacker(self:GetOwner())
         util.BlastDamageInfo(dmg, self:GetPos(), 200)
 
-        self.NextDamageTick = CurTime() + 0.2
+        self.NextDamageTick = CurTime() + 0.15
 
         if self.SpawnTime + self.FireTime <= CurTime() then self:Remove() return end
     end
@@ -239,12 +239,7 @@ function ENT:Detonate()
 
     self.FireSound:ChangePitch(80, self.FireTime)
 
-    local dmg = DamageInfo()
-    dmg:SetDamageType(DMG_BURN + DMG_BLAST)
-    dmg:SetDamage(40)
-    dmg:SetInflictor(self)
-    dmg:SetAttacker(self:GetOwner())
-    util.BlastDamageInfo(dmg, self:GetPos(), 256)
+    util.BlastDamage(self, self:GetOwner(), self:GetPos(), 328, 30)
 
     timer.Simple(self.FireTime - 1, function()
         if !IsValid(self) then return end

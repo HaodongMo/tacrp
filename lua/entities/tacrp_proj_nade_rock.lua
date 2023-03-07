@@ -267,7 +267,7 @@ function ENT:PhysicsCollide(data, collider)
         local dmg = DamageInfo()
         dmg:SetAttacker(attacker)
         dmg:SetInflictor(self)
-        dmg:SetDamage(Lerp((data.OurOldVelocity:Length() - 500) / 2500, 4, 30))
+        dmg:SetDamage(Lerp((data.OurOldVelocity:Length() - 500) / 2500, 4, 35))
         if self:GetModel() != self.Model then
             dmg:ScaleDamage(2)
         end

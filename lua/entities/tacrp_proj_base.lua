@@ -154,6 +154,15 @@ function ENT:PhysicsCollide(data, collider)
             self:SetPos(data.HitPos)
             self:PreDetonate()
         end
+    elseif IsValid(data.HitEntity) then
+        local dmg = DamageInfo()
+        dmg:SetAttacker(IsValid(self:GetOwner()) and self:GetOwner() or self.Attacker)
+        dmg:SetInflictor(self)
+        dmg:SetDamage(Lerp((data.OurOldVelocity:Length() - 600) / 400, 1, 10))
+        dmg:SetDamageType(DMG_CRUSH)
+        dmg:SetDamageForce(data.OurOldVelocity)
+        dmg:SetDamagePosition(data.HitPos)
+        data.HitEntity:TakeDamageInfo(dmg)
     end
 
     if self.Sticky then
