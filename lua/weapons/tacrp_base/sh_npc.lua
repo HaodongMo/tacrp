@@ -32,20 +32,13 @@ function SWEP:NPC_PrimaryAttack()
 
     self:EmitSound(sshoot, self:GetValue("Vol_Shoot"), self:GetValue("Pitch_Shoot") + math.Rand(-pvar, pvar), 1, CHAN_WEAPON)
 
-    local delay = 60 / self:GetValue("RPM")
-
-    local curatt = self:GetNextPrimaryFire()
-    local diff = CurTime() - curatt
-
-    if diff > engine.TickInterval() or diff < 0 then
-        curatt = CurTime()
-    end
-
-    self:SetNextPrimaryFire(curatt + delay)
-
     self:SetClip1(self:Clip1() - 1)
 
-    local tr = self:GetValue("TracerNum")
+    local delay = 60 / self:GetValue("RPM")
+    self:SetNextPrimaryFire(CurTime() + delay)
+    if delay < 0.1 then
+        self:GetOwner():NextThink(CurTime() + delay) // they will only attempt to fire once per think
+    end
 
     local spread = self:GetNPCSpread()
 
@@ -62,7 +55,7 @@ function SWEP:NPC_PrimaryAttack()
             Damage = self:GetValue("Damage_Max"),
             Force = 8,
             TracerName = "tacrp_tracer",
-            Tracer = tr,
+            Tracer = self:GetValue("TracerNum"),
             Num = self:GetValue("Num"),
             Dir = dir,
             Src = self:GetOwner():GetShootPos(),
@@ -70,7 +63,7 @@ function SWEP:NPC_PrimaryAttack()
             Callback = function(att, btr, dmg)
                 local range = (btr.HitPos - btr.StartPos):Length()
 
-                self:AfterShotFunction(btr, dmg, range, self:GetValue("Penetration"), {})
+                self:AfterShotFunction(btr, dmg, range, 0, {}) // self:GetValue("Penetration")
 
                 if GetConVar("developer"):GetBool() then
                     if SERVER then
@@ -111,25 +104,13 @@ function SWEP:GetNPCBulletSpread(prof)
 end
 
 function SWEP:GetNPCSpread()
-    local spread = self:GetValue("Spread")
-
-    local spd = math.min(self:GetOwner():GetAbsVelocity():Length(), 250)
-
-    spd = spd / 250
-
-    spread = spread + (spd * self:GetValue("MoveSpreadPenalty"))
-
-    spread = math.max(spread, 0)
-
-    return spread
+    return self:GetValue("Spread")
 end
 
 function SWEP:GetNPCBurstSettings()
     local mode = self:GetCurrentFiremode()
 
     local delay = 60 / self:GetValue("RPM")
-
-    -- self:SetNextPrimaryFire(CurTime() + delay)
 
     if !mode then return 1, 1, delay end
 
@@ -138,13 +119,10 @@ function SWEP:GetNPCBurstSettings()
     elseif mode == 0 then
         return 0, 0, delay
     elseif mode == 1 then
-        return 0, 1, delay + math.Rand(0.3, 0.6)
+        local c = self:GetValue("ClipSize")
+        return math.ceil(c * 0.075), math.floor(c * math.Rand(0.15, 0.3)), delay + math.Rand(0.2, 0.4)
     elseif mode >= 2 then
-        if self:GetValue("RunawayBurst") then
-            return self:Clip1(), self:Clip1(), delay
-        else
-            return math.min(self:Clip1(), 2), math.min(self:Clip1(), math.floor(2.5 / delay)), delay
-        end
+        return math.min(self:Clip1(), 1 + math.floor(0.5 / delay)), math.min(self:Clip1(), 1 + math.floor(2 / delay)), delay
     end
 end
 
@@ -156,7 +134,7 @@ function SWEP:GetNPCRestTimes()
 
     if !mode then return 0.3, 0.6 end
 
-    local o = m >= 1 and math.sqrt(m) or m
+    local o = m > 1 and math.sqrt(m) or m
     if delay <= 60 / 90 then
         return delay + 0.1 * o, delay + 0.2 * o
     elseif mode < 0 then
@@ -191,14 +169,16 @@ function SWEP:NPC_Initialize()
             end
         end
 
-        timer.Simple(0.25, function()
-            if !IsValid(self) then return end
-            self:NetworkWeapon()
-        end)
-
         self.StatCache = {}
         self.HookCache = {}
     end
 
+    timer.Simple(0.25, function()
+        if !IsValid(self) then return end
+        self:NetworkWeapon()
+    end)
+
     self:SetBaseSettings()
+
+    self:SetClip1(self:GetMaxClip1())
 end
