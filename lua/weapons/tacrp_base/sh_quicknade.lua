@@ -178,6 +178,24 @@ function SWEP:SelectGrenade(index)
     end
 end
 
+function SWEP:CheckGrenade(index, checkammo)
+    local nade = self:GetGrenade(index)
+    if (nade.Secret and (!checkammo or self:GetOwner():GetAmmoCount(nade.Ammo) <= 0)) or (nade.RequireStat and !self:GetValue(nade.RequireStat)) then
+        return false
+    end
+    return true
+end
+
+function SWEP:GetAvailableGrenades(checkammo)
+    local nades = {}
+    for i = 1, TacRP.QuickNades_Count do
+        if self:CheckGrenade(i, checkammo) then
+            table.insert(nades, self:GetGrenade(i))
+        end
+    end
+    return nades
+end
+
 if CLIENT then
 
 SWEP.QuickNadeModel = nil
@@ -218,7 +236,7 @@ function SWEP:ThinkGrenade()
 
     if self:GetOwner():KeyPressed(IN_GRENADE1) then
         self:PrimeGrenade()
-    elseif self:GetOwner():KeyPressed(IN_GRENADE2) then
+    elseif !GetConVar("tacrp_nademenu"):GetBool() and self:GetOwner():KeyPressed(IN_GRENADE2) then
         self:SelectGrenade()
     end
 

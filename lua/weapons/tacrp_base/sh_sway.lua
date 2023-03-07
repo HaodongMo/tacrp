@@ -1,7 +1,7 @@
 function SWEP:GetSwayAmount()
     local sway = self:GetValue("Sway")
 
-    local d = self:GetSightDelta()
+    local d = self:GetSightDelta() - (self:GetPeeking() and self:GetValue("PeekPenaltyFraction") or 0)
     sway = Lerp(d, sway, self:GetValue("ScopedSway"))
 
     if self:GetBlindFire() then

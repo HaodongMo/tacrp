@@ -192,6 +192,11 @@ local conVars = {
         default = "0",
         client = true,
     },
+    {
+        name = "nademenu",
+        default = "1",
+        client = true,
+    },
 }
 
 local prefix = "tacrp_"
@@ -256,6 +261,13 @@ local function menu_client_ti(panel)
     panel:AddControl("checkbox", {
         label = "Show Backup HUD",
         command = "tacrp_minhud"
+    })
+    panel:AddControl("checkbox", {
+        label = "Quickthrow Radial menu",
+        command = "tacrp_nademenu"
+    })
+    panel:AddControl("label", {
+        text = "When enabled, +grenade2 brings up a menu to select grenades. Otherwise it switches between them."
     })
     panel:AddControl("checkbox", {
         label = "Use Meters instead of HU",

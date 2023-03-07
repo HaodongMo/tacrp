@@ -93,7 +93,7 @@ TacRP.QuickNades = {
         Spoon = false,
         NoSounds = true,
         PullSound = "tacrp/weapons/pistol_holster-1.wav",
-        Icon = Material("TacRP/grenades/thermite.png", "mips smooth"),
+        Icon = Material("TacRP/grenades/rock.png", "mips smooth"),
         RequireStat = "ThrowRocks",
     },
 }

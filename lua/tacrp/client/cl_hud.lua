@@ -60,7 +60,6 @@ hook.Add("PreGamemodeLoaded", "TacRP_AmmoName", function()
 end)
 
 local gaA = 0
-local cached
 function TacRP.GetFOVAcc(spread)
     local raw = isnumber(spread)
     if !raw and spread:IsWeapon() then spread = spread:GetSpread() end

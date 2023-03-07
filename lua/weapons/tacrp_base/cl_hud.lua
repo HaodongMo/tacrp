@@ -1,5 +1,10 @@
 function SWEP:ShouldDrawCrosshair()
-    return GetConVar("tacrp_crosshair"):GetBool() and !self:GetReloading() and !self:GetCustomize() and !self:SprintLock() and (self:GetSightAmount() <= 0.5 or self:GetPeeking())
+    return GetConVar("tacrp_crosshair"):GetBool()
+        and !self:GetReloading()
+        and !self:GetCustomize()
+        and !self:SprintLock()
+        and (self:GetSightAmount() <= 0.5 or self:GetPeeking())
+        and !self:GetOwner():KeyDown(IN_GRENADE2)
 end
 
 function SWEP:DoDrawCrosshair(x, y)
@@ -11,10 +16,11 @@ function SWEP:DoDrawCrosshair(x, y)
         self.CrosshairAlpha = math.Approach(self.CrosshairAlpha, 1, 5 * ft)
     end
 
+    local dev = GetConVar("developer"):GetInt() > 0 and LocalPlayer():IsAdmin()
     local tacfunc
     if self:GetValue("TacticalCrosshair") and self:GetTactical() then
         tacfunc = self:GetValue("TacticalCrosshair")
-    elseif self.CrosshairAlpha <= 0 then return true end
+    elseif !dev and self.CrosshairAlpha <= 0 then return true end
 
     local dir = self:GetOwner():EyeAngles()
 
@@ -48,7 +54,7 @@ function SWEP:DoDrawCrosshair(x, y)
 
     spread = math.Round( math.max(spread, 2) + ScreenScale(sway * math.pi))
 
-    if self.CrosshairAlpha <= 0 then return true end
+    if !dev and self.CrosshairAlpha <= 0 then return true end
 
     surface.SetDrawColor(50, 255, 50, 255 * self.CrosshairAlpha)
 
@@ -60,8 +66,58 @@ function SWEP:DoDrawCrosshair(x, y)
     surface.DrawLine(x - spread - w, y, x - spread, y)
     surface.DrawLine(x + spread, y, x + spread + w, y)
 
+    -- Developer Crosshair
+    if !self:GetReloading() and !self:GetCustomize() and dev then
+        local tr2 = util.TraceLine({
+            start = self:GetMuzzleOrigin(),
+            endpos = self:GetMuzzleOrigin() + (self:GetShootDir():Forward() * 50000),
+            mask = MASK_SHOT,
+            filter = self:GetOwner()
+        })
+        cam.Start3D()
+            local tw2s = tr2.HitPos:ToScreen()
+            tw2s.x = math.Round(tw2s.x)
+            tw2s.y = math.Round(tw2s.y)
+        cam.End3D()
+        if self:StillWaiting() then
+            surface.SetDrawColor(150, 150, 150, 255)
+        else
+            surface.SetDrawColor(255, 50, 50, 255)
+        end
+        surface.DrawLine(tw2s.x, tw2s.y - 256, tw2s.x, tw2s.y + 256)
+        surface.DrawLine(tw2s.x - 256, tw2s.y, tw2s.x + 256, tw2s.y)
+        local spread = TacRP.GetFOVAcc(self)
+        local recoil_txt = "Recoil: " .. tostring(math.Round(self:GetRecoilAmount() or 0, 3))
+        surface.DrawCircle(tw2s.x, tw2s.y, spread, 255, 255, 255, 150)
+        surface.DrawCircle(tw2s.x, tw2s.y, spread + 1, 255, 255, 255, 150)
+        surface.SetFont("TacRP_Myriad_Pro_32_Unscaled")
+        surface.SetTextColor(255, 255, 255, 255)
+        surface.SetTextPos(tw2s.x - 256, tw2s.y)
+        surface.DrawText(recoil_txt)
+        local spread_txt = tostring("Cone: " .. math.Round(self:GetSpread(), 5))
+        surface.SetTextPos(tw2s.x - 256, tw2s.y - 34)
+        surface.DrawText(spread_txt)
+        -- local tw = surface.GetTextSize(spread_txt)
+        -- surface.SetTextPos(tw2s.x + 256 - tw, tw2s.y)
+        -- surface.DrawText(spread_txt)
+
+
+        local dist = (tr.HitPos - tr.StartPos):Length()
+        local dist_txt = math.Round(dist) .. " HU"
+        local tw = surface.GetTextSize(dist_txt)
+        surface.SetTextPos(tw2s.x + 256 - tw, tw2s.y)
+        surface.DrawText(dist_txt)
+
+        local damage_txt = math.Round(self:GetDamageAtRange(dist)) .. " DMG"
+        local tw2 = surface.GetTextSize(damage_txt)
+        surface.SetTextPos(tw2s.x + 256 - tw2, tw2s.y - 34)
+        surface.DrawText(damage_txt)
+    end
+
     return true
 end
+
+SWEP.GrenadeMenuAlpha = 0
 
 function SWEP:GetBinding(bind)
     local t_bind = input.LookupBinding(bind)
@@ -88,7 +144,7 @@ local faceindex = 0
 function SWEP:DrawHUDBackground()
     self:DoScope()
 
-    // draw a vignette effect around the screen based on recoil
+    -- draw a vignette effect around the screen based on recoil
     local recoil = self:GetRecoilAmount()
     if recoil > 0 and GetConVar("tacrp_vignette"):GetBool() then
         local recoil_pct = math.Clamp(recoil / self:GetValue("RecoilMaximum"), 0, 1) ^ 1.25
@@ -576,55 +632,26 @@ function SWEP:DrawHUDBackground()
         end
     end
 
+    -- local ft = FrameTime()
+    -- if self:GetOwner():KeyDown(IN_GRENADE2) then
+    --     self.GrenadeMenuAlpha = math.Approach(self.GrenadeMenuAlpha, 1, 5 * ft)
+    --     if !self.GrenadeHUD then
+    --         self:CreateGrenadeHUD()
+    --     end
+    -- else
+    --     self.GrenadeMenuAlpha = math.Approach(self.GrenadeMenuAlpha, 0, -10 * ft)
+    --     if self:GetOwner():KeyDownLast(IN_GRENADE2) then
+    --         gui.EnableScreenClicker(false)
+    --         -- todo check grneade
+    --     elseif self.GrenadeMenuAlpha == 0 and self.GrenadeHUD then
+    --         self:RemoveGrenadeHUD()
+    --     end
+    -- end
+
+    self:DrawGrenadeHUD()
+
     lastammo = self:Clip1()
     lastarmor = LocalPlayer():Armor()
-
-    if !self:GetReloading() and !self:GetCustomize() and GetConVar("developer"):GetInt() > 0 and LocalPlayer():IsAdmin() then
-        local tr = util.TraceLine({
-            start = self:GetMuzzleOrigin(),
-            endpos = self:GetMuzzleOrigin() + (self:GetShootDir():Forward() * 50000),
-            mask = MASK_SHOT,
-            filter = self:GetOwner()
-        })
-        cam.Start3D()
-            local w2s = tr.HitPos:ToScreen()
-            w2s.x = math.Round(w2s.x)
-            w2s.y = math.Round(w2s.y)
-        cam.End3D()
-        if self:StillWaiting() then
-            surface.SetDrawColor(150, 150, 150, 255)
-        else
-            surface.SetDrawColor(255, 50, 50, 255)
-        end
-        surface.DrawLine(w2s.x, w2s.y - 256, w2s.x, w2s.y + 256)
-        surface.DrawLine(w2s.x - 256, w2s.y, w2s.x + 256, w2s.y)
-        local spread = TacRP.GetFOVAcc(self)
-        local recoil_txt = "Recoil: " .. tostring(math.Round(self:GetRecoilAmount() or 0, 3))
-        surface.DrawCircle(w2s.x, w2s.y, spread, 255, 255, 255, 150)
-        surface.DrawCircle(w2s.x, w2s.y, spread + 1, 255, 255, 255, 150)
-        surface.SetFont("TacRP_Myriad_Pro_32_Unscaled")
-        surface.SetTextColor(255, 255, 255, 255)
-        surface.SetTextPos(w2s.x - 256, w2s.y)
-        surface.DrawText(recoil_txt)
-        local spread_txt = tostring("Cone: " .. math.Round(self:GetSpread(), 5))
-        surface.SetTextPos(w2s.x - 256, w2s.y - 34)
-        surface.DrawText(spread_txt)
-        -- local tw = surface.GetTextSize(spread_txt)
-        -- surface.SetTextPos(w2s.x + 256 - tw, w2s.y)
-        -- surface.DrawText(spread_txt)
-
-
-        local dist = (tr.HitPos - tr.StartPos):Length()
-        local dist_txt = math.Round(dist) .. " HU"
-        local tw = surface.GetTextSize(dist_txt)
-        surface.SetTextPos(w2s.x + 256 - tw, w2s.y)
-        surface.DrawText(dist_txt)
-
-        local damage_txt = math.Round(self:GetDamageAtRange(dist)) .. " DMG"
-        local tw2 = surface.GetTextSize(damage_txt)
-        surface.SetTextPos(w2s.x + 256 - tw2, w2s.y - 34)
-        surface.DrawText(damage_txt)
-    end
 end
 
 SWEP.Mat_Select = nil
