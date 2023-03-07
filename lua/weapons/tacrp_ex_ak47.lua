@@ -27,14 +27,14 @@ SWEP.ArcadeStats = {
 
 // "ballistics"
 
-SWEP.Damage_Max = 27
+SWEP.Damage_Max = 28
 SWEP.Damage_Min = 16
-SWEP.Range_Min = 1400 // distance for which to maintain maximum damage
+SWEP.Range_Min = 1200 // distance for which to maintain maximum damage
 SWEP.Range_Max = 5500 // distance at which we drop to minimum damage
 SWEP.Penetration = 10 // units of metal this weapon can penetrate
 
 SWEP.BodyDamageMultipliers = {
-    [HITGROUP_HEAD] = 2,
+    [HITGROUP_HEAD] = 3.25,
     [HITGROUP_CHEST] = 1.25,
     [HITGROUP_STOMACH] = 1,
     [HITGROUP_LEFTARM] = 1,

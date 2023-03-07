@@ -19,8 +19,8 @@ SWEP.Slot = 2
 
 SWEP.ArcadeStats = {
 
-    Damage_Max = 30,
-    Damage_Min = 24,
+    Damage_Max = 28,
+    Damage_Min = 22,
 
     ClipSize = 75,
 
@@ -29,6 +29,17 @@ SWEP.ArcadeStats = {
     SightedSpeedMult = 0.75,
     MeleeSpeedMult = 1,
     ReloadSpeedMult = 1,
+}
+
+SWEP.BodyDamageMultipliers = {
+    [HITGROUP_HEAD] = 2,
+    [HITGROUP_CHEST] = 1.25,
+    [HITGROUP_STOMACH] = 1,
+    [HITGROUP_LEFTARM] = 0.9,
+    [HITGROUP_RIGHTARM] = 0.9,
+    [HITGROUP_LEFTLEG] = 0.75,
+    [HITGROUP_RIGHTLEG] = 0.75,
+    [HITGROUP_GEAR] = 0.75
 }
 
 // "ballistics"
@@ -76,7 +87,7 @@ SWEP.ReloadSpeedMult = 0.05
 SWEP.ReloadSpeedMultTime = 1
 
 SWEP.AimDownSightsTime = 0.5
-SWEP.SprintToFireTime = 0.5 // multiplies how long it takes to recover from sprinting
+SWEP.SprintToFireTime = 0.5
 
 // hold types
 
