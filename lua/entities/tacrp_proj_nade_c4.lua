@@ -14,10 +14,11 @@ ENT.InstantFuse = false // projectile is armed immediately after firing.
 ENT.RemoteFuse = true // allow this projectile to be triggered by remote detonator.
 ENT.ImpactFuse = false // projectile explodes on impact.
 
-ENT.ExplodeOnDamage = true // projectile explodes when it takes damage.
+ENT.ExplodeOnDamage = false // projectile explodes when it takes damage.
 ENT.ExplodeUnderwater = false
 
 ENT.Defusable = true
+ENT.DefuseOnDamage = true
 
 ENT.Delay = 0.5
 
@@ -57,4 +58,12 @@ function ENT:Detonate()
     end
 
     self:Remove()
+end
+
+function ENT:Stuck()
+    // you are already dead
+    if IsValid(self:GetParent()) and self:GetParent():IsPlayer() and !IsValid(self:GetParent().nadescream) then
+        self:GetParent().nadescream = self
+        self:GetParent():EmitSound("vo/npc/male01/ohno.wav")
+    end
 end

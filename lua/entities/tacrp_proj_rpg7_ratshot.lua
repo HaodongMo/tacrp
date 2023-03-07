@@ -13,7 +13,7 @@ ENT.RemoteFuse = false // allow this projectile to be triggered by remote detona
 ENT.ImpactFuse = true // projectile explodes on impact.
 ENT.TimeFuse = false
 
-ENT.ExplodeOnDamage = false // projectile explodes when it takes damage.
+ENT.ExplodeOnDamage = true
 ENT.ExplodeUnderwater = true
 
 ENT.Delay = 0.15
@@ -73,8 +73,8 @@ function ENT:Impact(data, collider)
             local dmginfo = DamageInfo()
             dmginfo:SetAttacker(self:GetOwner())
             dmginfo:SetInflictor(self)
-            dmginfo:SetDamageType(DMG_CLUB)
-            dmginfo:SetDamage(500 * (self.NPCDamage and 0.5 or 1))
+            dmginfo:SetDamageType(DMG_CRUSH)
+            dmginfo:SetDamage(250 * (self.NPCDamage and 0.5 or 1))
             dmginfo:SetDamageForce(data.OurOldVelocity * 25)
             dmginfo:SetDamagePosition(data.HitPos)
             data.HitEntity:TakeDamageInfo(dmginfo)
@@ -100,10 +100,11 @@ function ENT:Impact(data, collider)
 end
 
 function ENT:Detonate()
-    local dir = self:GetVelocity():GetNormalized()
+    local dir = self:GetForward()
     local attacker = self:GetOwner() or self
+    local src = self:GetPos() - dir * 64
     local fx = EffectData()
-    fx:SetOrigin(self:GetPos())
+    fx:SetOrigin(src)
 
     if self:WaterLevel() > 0 then
         util.Effect("WaterSurfaceExplosion", fx)
@@ -115,8 +116,8 @@ function ENT:Detonate()
         util.Effect("Sparks", fx)
 
         local tr = util.TraceHull({
-            start = self:GetPos(),
-            endpos = self:GetPos() + dir * 2048,
+            start = src,
+            endpos = src + dir * 2048,
             filter = self,
             mins = Vector(-16, -16, -8),
             maxs = Vector(16, 16, 8)
@@ -139,7 +140,7 @@ function ENT:Detonate()
         HullSize = 16,
         Num = 48,
         Tracer = 1,
-        Src = self:GetPos(),
+        Src = src,
         Dir = dir,
         Spread = Vector(1, 1, 0),
         IgnoreEntity = self,
@@ -149,16 +150,17 @@ function ENT:Detonate()
     dmg:SetDamageType(DMG_BULLET + DMG_BLAST)
     dmg:SetInflictor(self)
     dmg:SetDamageForce(self:GetVelocity() * 100)
-    for _, ent in pairs(ents.FindInCone(self:GetPos(), dir, 2048, 0.707)) do
-        local tr = util.QuickTrace(self:GetPos(), ent:GetPos() - self:GetPos(), {self, ent})
+    dmg:SetDamagePosition(src)
+    for _, ent in pairs(ents.FindInCone(src, dir, 2048, 0.707)) do
+        local tr = util.QuickTrace(src, ent:GetPos() - src, {self, ent})
         if tr.Fraction == 1 then
-            dmg:SetDamagePosition(self:GetPos())
-            dmg:SetDamage(125 * math.Rand(0.8, 1) * Lerp(tr.Fraction ^ 1.5, 0.25, 1))
+            dmg:SetDamage(150 * math.Rand(0.75, 1) * Lerp((ent:GetPos():DistToSqr(src) / 4194304) ^ 0.5, 1, 0.25) * (self.NPCDamage and 0.5 or 1))
+            if !ent:IsOnGround() then dmg:ScaleDamage(1.5) end
             ent:TakeDamageInfo(dmg)
         end
     end
 
-    util.BlastDamage(self, attacker, self:GetPos(), 256, 100)
+    util.BlastDamage(self, attacker, src, 256, 50)
 
     self:EmitSound("TacRP/weapons/rpg7/explode.wav", 125, 100)
     self:EmitSound("physics/metal/metal_box_break1.wav", 100, 200)

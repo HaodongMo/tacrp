@@ -15,10 +15,11 @@ ENT.RemoteFuse = false // allow this projectile to be triggered by remote detona
 ENT.ImpactFuse = false // projectile explodes on impact.
 ENT.StickyFuse = true
 
-ENT.ExplodeOnDamage = true // projectile explodes when it takes damage.
+ENT.ExplodeOnDamage = false // projectile explodes when it takes damage.
 ENT.ExplodeUnderwater = false
 
 ENT.Defusable = false
+ENT.DefuseOnDamage = true
 
 ENT.Delay = 2
 
@@ -30,6 +31,7 @@ ENT.ExplodeSounds = {
 
 function ENT:SetupDataTables()
     self:NetworkVar("Bool", 0, "Remote")
+    self:NetworkVar("Float", 0, "ArmTime")
 end
 
 DEFINE_BASECLASS(ENT.Base)
@@ -80,12 +82,28 @@ function ENT:Detonate()
     self:Remove()
 end
 
-function ENT:OnThink()
-    self.Beep = self.Beep or self.SpawnTime
-    if !self:GetRemote() and SERVER and self.Beep < CurTime() and (self:GetMoveType() == MOVETYPE_NONE or IsValid(self:GetParent())) then
-        self.Beep = CurTime() + 0.25
+function ENT:Stuck()
+    self:SetArmTime(CurTime())
+    if !self:GetRemote() then
         self:EmitSound("weapons/c4/c4_beep1.wav", 80, 110)
+        timer.Create("breachbeep_" .. self:EntIndex(), 0.25, 7, function()
+            if !IsValid(self) then return end
+            self:EmitSound("weapons/c4/c4_beep1.wav", 80, 110)
+        end)
     end
+
+    // you are already dead
+    if IsValid(self:GetParent()) and self:GetParent():IsPlayer() and !IsValid(self:GetParent().nadescream) then
+        self:GetParent().nadescream = self
+        if self:GetRemote() then
+            self:GetParent():EmitSound("vo/npc/male01/ohno.wav")
+        else
+            self:GetParent():EmitSound("vo/npc/male01/no0" .. math.random(1, 2) .. ".wav")
+        end
+    end
+end
+
+function ENT:OnThink()
 end
 
 local clr_timed = Color(255, 0, 0)
@@ -95,7 +113,7 @@ local mat = Material("sprites/light_glow02_add")
 function ENT:Draw()
     self:DrawModel()
 
-    if (self:GetRemote() or self:GetMoveType() == MOVETYPE_NONE or IsValid(self:GetParent())) and math.ceil((CurTime() - self.SpawnTime) * (self:GetRemote() and 1 or 4)) % 2 == 1 then
+    if (self:GetRemote() or self:GetArmTime() > 0) and math.ceil((CurTime() - self:GetArmTime()) * (self:GetRemote() and 2 or 8)) % 2 == 1 then
         render.SetMaterial(mat)
         render.DrawSprite(self:GetPos() + self:GetAngles():Up() * 7.5 + self:GetAngles():Right() * -4.5 + self:GetAngles():Forward() * 2, 8, 8, self:GetRemote() and clr_remote or clr_timed)
     end

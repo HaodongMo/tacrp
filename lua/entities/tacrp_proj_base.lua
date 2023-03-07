@@ -33,6 +33,7 @@ ENT.ExplodeOnDamage = false // projectile explodes when it takes damage.
 ENT.ExplodeUnderwater = false // projectile explodes when it enters water
 
 ENT.Defusable = false // press E on the projectile to defuse it
+ENT.DefuseOnDamage = false
 
 ENT.Delay = 5 // after being triggered and this amount of time has passed, the projectile will explode.
 
@@ -92,10 +93,34 @@ function ENT:OnRemove()
     end
 end
 
+--[[]
 function ENT:TakeDamage(amt, atk, inf)
     self:SetOwner(atk)
 
     self:PreDetonate()
+end
+]]
+
+function ENT:OnTakeDamage(dmg)
+    if self.Detonated then return end
+
+    self:TakePhysicsDamage(dmg)
+
+    if self.ExplodeOnDamage then
+        if IsValid(self:GetOwner()) and IsValid(dmg:GetAttacker()) then self:SetOwner(dmg:GetAttacker())
+        else self.Attacker = dmg:GetAttacker() or self.Attacker end
+
+        self:PreDetonate()
+    elseif self.DefuseOnDamage then
+        self:EmitSound("physics/plastic/plastic_box_break" .. math.random(1, 2) .. ".wav", 75, math.Rand(95, 105))
+        local fx = EffectData()
+        fx:SetOrigin(self:GetPos())
+        fx:SetNormal(self:GetAngles():Forward())
+        fx:SetAngles(self:GetAngles())
+        util.Effect("ManhackSparks", fx)
+        self.Detonated = true
+        self:Remove()
+    end
 end
 
 function ENT:PhysicsCollide(data, collider)
@@ -154,6 +179,8 @@ function ENT:PhysicsCollide(data, collider)
             self.ArmTime = CurTime()
             self.Armed = true
         end
+
+        self:Stuck()
     end
 
     if data.DeltaTime < 0.1 then return end
@@ -168,7 +195,7 @@ function ENT:OnThink()
 end
 
 function ENT:Think()
-    if !IsValid(self) then return end
+    if !IsValid(self) or self:GetNoDraw() then return end
 
     if !self.SpawnTime then
         self.SpawnTime = CurTime()
@@ -255,6 +282,10 @@ function ENT:Detonate()
 end
 
 function ENT:Impact()
+end
+
+function ENT:Stuck()
+
 end
 
 function ENT:DrawTranslucent()

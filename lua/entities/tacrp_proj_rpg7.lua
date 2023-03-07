@@ -12,7 +12,7 @@ ENT.InstantFuse = false // projectile is armed immediately after firing.
 ENT.RemoteFuse = false // allow this projectile to be triggered by remote detonator.
 ENT.ImpactFuse = true // projectile explodes on impact.
 
-ENT.ExplodeOnDamage = false // projectile explodes when it takes damage.
+ENT.ExplodeOnDamage = true
 ENT.ExplodeUnderwater = true
 
 ENT.Delay = 0
@@ -37,8 +37,8 @@ function ENT:Impact(data, collider)
             local dmginfo = DamageInfo()
             dmginfo:SetAttacker(self:GetOwner())
             dmginfo:SetInflictor(self)
-            dmginfo:SetDamageType(DMG_CLUB)
-            dmginfo:SetDamage(500 * (self.NPCDamage and 0.5 or 1))
+            dmginfo:SetDamageType(DMG_CRUSH)
+            dmginfo:SetDamage(250 * (self.NPCDamage and 0.5 or 1))
             dmginfo:SetDamageForce(data.OurOldVelocity * 25)
             dmginfo:SetDamagePosition(data.HitPos)
             data.HitEntity:TakeDamageInfo(dmginfo)
