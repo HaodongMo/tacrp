@@ -46,7 +46,7 @@ function TacRP.LoadAtts()
             if attent.Icon then
                 attent.IconOverride = string.Replace( attent.Icon:GetTexture( "$basetexture" ):GetName() .. ".png", "0001010", "" )
             end
-            attent.PrintName = ATT.PrintName or shortname
+            attent.PrintName = ATT.FullName or ATT.PrintName or shortname
             attent.Spawnable = true
             attent.AdminOnly = ATT.AdminOnly or false
             attent.AttToGive = shortname

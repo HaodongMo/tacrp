@@ -97,7 +97,7 @@ function SWEP:Detach(slot, silent)
     self:SetBaseSettings()
 
     local nade = self:GetGrenade()
-    if (nade.Secret and self:GetOwner():GetAmmoCount(nade.Ammo) <= 0) or (nade.RequireStat and !self:GetValue(nade.RequireStat)) then
+    if (nade.AdminOnly and self:GetOwner():GetAmmoCount(nade.Ammo) <= 0) or (nade.RequireStat and !self:GetValue(nade.RequireStat)) then
         self:SelectGrenade()
     end
 

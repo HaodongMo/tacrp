@@ -7,14 +7,13 @@ function SWEP:PrimeGrenade()
 
     local nade = self:GetGrenade()
 
-    if (nade.Secret and self:GetOwner():GetAmmoCount(nade.Ammo) <= 0) or (nade.RequireStat and !self:GetValue(nade.RequireStat)) then
+    if !self:CheckGrenade() then
         self:SelectGrenade()
         return
     end
 
-    if nade.Ammo and !(GetConVar("tacrp_infinitegrenades"):GetBool() and !nade.AdminOnly) then
+    if !TacRP.IsGrenadeInfiniteAmmo(nade) then
         local ammo = self:GetOwner():GetAmmoCount(nade.Ammo)
-
         if ammo < 1 then return end
 
         self:GetOwner():SetAmmo(ammo - 1, nade.Ammo)
@@ -88,6 +87,10 @@ function SWEP:ThrowGrenade()
         rocket:Spawn()
         rocket:SetPhysicsAttacker(self:GetOwner(), 10)
 
+        if rocket.PickupAmmo and TacRP.IsGrenadeInfiniteAmmo(nade) then
+            rocket.PickupAmmo = nil
+        end
+
         local phys = rocket:GetPhysicsObject()
 
         if phys:IsValid() then
@@ -138,9 +141,7 @@ function SWEP:GetNextGrenade(ind)
         ind = TacRP.QuickNades_Count
     end
 
-    local nade = self:GetGrenade(ind)
-
-    if (nade.Secret and self:GetOwner():GetAmmoCount(nade.Ammo) <= 0) or (nade.RequireStat and !self:GetValue(nade.RequireStat)) then
+    if !self:CheckGrenade(ind) then
         return self:GetNextGrenade(ind)
     end
 
@@ -171,16 +172,19 @@ function SWEP:SelectGrenade(index)
 
     self:GetOwner():SetNWInt("ti_nade", ind)
 
-    local nade = self:GetGrenade()
-
-    if (nade.Secret and self:GetOwner():GetAmmoCount(nade.Ammo) <= 0) or (nade.RequireStat and !self:GetValue(nade.RequireStat)) then
+    if !self:CheckGrenade(ind) then
         self:SelectGrenade()
     end
 end
 
 function SWEP:CheckGrenade(index, checkammo)
+    index = index or self:GetOwner():GetNWInt("ti_nade", 1)
     local nade = self:GetGrenade(index)
-    if (nade.Secret and (!checkammo or self:GetOwner():GetAmmoCount(nade.Ammo) <= 0)) or (nade.RequireStat and !self:GetValue(nade.RequireStat)) then
+    local hasammo = nade.Ammo == nil or self:GetOwner():GetAmmoCount(nade.Ammo) > 0
+    if (nade.Secret and !hasammo and !self:GetOwner():HasWeapon(nade.SecretWeapon or "")) or (nade.RequireStat and !self:GetValue(nade.RequireStat)) then
+        return false
+    end
+    if checkammo and !TacRP.IsGrenadeInfiniteAmmo(index) and !hasammo then
         return false
     end
     return true

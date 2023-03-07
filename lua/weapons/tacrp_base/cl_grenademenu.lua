@@ -32,6 +32,7 @@ local function filledcircle(x, y, radius, seg)
 end
 
 local currentnade
+local lastmenu
 function SWEP:DrawGrenadeHUD()
 
     if !GetConVar("tacrp_nademenu"):GetBool() then return end
@@ -41,7 +42,7 @@ function SWEP:DrawGrenadeHUD()
     local scrw = ScrW()
     local scrh = ScrH()
     local r = ScreenScale(128)
-    local r2 = ScreenScale(32)
+    local r2 = ScreenScale(40)
     local sg = ScreenScale(32)
     local ri = r * 0.667
     local arcdegrees = 360 / #nades
@@ -50,8 +51,9 @@ function SWEP:DrawGrenadeHUD()
 
     if self:GetOwner():KeyDown(IN_GRENADE2) and !self:GetPrimedGrenade() then
         self.GrenadeMenuAlpha = math.Approach(self.GrenadeMenuAlpha, 1, 15 * ft)
-        if !self:GetOwner():KeyDownLast(IN_GRENADE2) then
+        if !lastmenu then
             gui.EnableScreenClicker(true)
+            lastmenu = true
         end
 
         local cursorx, cursory = input.GetCursorPos()
@@ -70,7 +72,7 @@ function SWEP:DrawGrenadeHUD()
         end
     else
         self.GrenadeMenuAlpha = math.Approach(self.GrenadeMenuAlpha, 0, -10 * ft)
-        if self:GetOwner():KeyDownLast(IN_GRENADE2) then
+        if lastmenu then
             if !self:GetCustomize() then
                 gui.EnableScreenClicker(false)
             end
@@ -81,8 +83,8 @@ function SWEP:DrawGrenadeHUD()
                 net.Start("tacrp_togglenade")
                 net.WriteUInt(currentnade.Index, 4)
                 net.SendToServer()
-
             end
+            lastmenu = false
         end
     end
 
@@ -94,11 +96,10 @@ function SWEP:DrawGrenadeHUD()
 
     surface.DrawCircle(scrw / 2, scrh / 2, r, 255, 255, 255, a * 255)
     surface.SetDrawColor(0, 0, 0, a * 200)
+    draw.NoTexture()
     filledcircle(scrw / 2, scrh / 2, r, 32)
     surface.SetDrawColor(0, 0, 0, a * 255)
     surface.DrawCircle(scrw / 2, scrh / 2, r2, 255, 255, 255, a * 255)
-
-
 
     for i = 1, #nades do
         local rad = math.rad( d + arcdegrees * 0.5 )
@@ -115,7 +116,7 @@ function SWEP:DrawGrenadeHUD()
 
         local qty = nil --"INF"
 
-        if nade.Ammo and (nade.Secret or !GetConVar("tacrp_infinitegrenades"):GetBool()) then
+        if !TacRP.IsGrenadeInfiniteAmmo(nade.Index) then
             qty = self:GetOwner():GetAmmoCount(nade.Ammo)
         end
 
@@ -155,7 +156,7 @@ function SWEP:DrawGrenadeHUD()
     surface.SetTextColor(255, 255, 255, a * 255)
     surface.DrawText(nadetext)
 
-    if nade.Ammo and (nade.Secret or !GetConVar("tacrp_infinitegrenades"):GetBool()) then
+    if !TacRP.IsGrenadeInfiniteAmmo(nade.Index) then
         local qty = "x" ..  tostring(self:GetOwner():GetAmmoCount(nade.Ammo))
         surface.SetFont("TacRP_HD44780A00_5x8_8")
         local qtyw = surface.GetTextSize(qty)

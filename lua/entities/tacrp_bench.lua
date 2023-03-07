@@ -7,7 +7,7 @@ ENT.RenderGroup              = RENDERGROUP_OPAQUE
 ENT.PrintName                = "Customization Bench"
 ENT.Category                 = "Tactical RP"
 
-ENT.Spawnable                = true
+ENT.Spawnable                = false
 ENT.Model                    = "models/props_canal/winch02.mdl"
 
 function ENT:Initialize()

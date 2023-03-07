@@ -308,7 +308,7 @@ function SWEP:DrawHUDBackground()
 
                 local qty = nil --"INF"
 
-                if nade.Ammo and (nade.Secret or !GetConVar("tacrp_infinitegrenades"):GetBool()) then
+                if !TacRP.IsGrenadeInfiniteAmmo(nade) then
                     qty = tostring(self:GetOwner():GetAmmoCount(nade.Ammo))
                 end
 
@@ -326,23 +326,25 @@ function SWEP:DrawHUDBackground()
                 surface.SetTextColor(col)
                 surface.DrawText(nadetext)
 
-                local nextnade = self:GetNextGrenade()
+                if !GetConVar("tacrp_nademenu"):GetBool() then
+                    local nextnade = self:GetNextGrenade()
 
-                local nsg = ScreenScale(10)
+                    local nsg = ScreenScale(10)
 
-                if nextnade.Icon then
-                    surface.SetMaterial(nextnade.Icon)
-                    surface.SetDrawColor(255, 255, 255)
-                    surface.DrawTexturedRect(x + w - ScreenScale(41), y + h - nsg - ScreenScale(1), nsg, nsg)
+                    if nextnade.Icon then
+                        surface.SetMaterial(nextnade.Icon)
+                        surface.SetDrawColor(255, 255, 255)
+                        surface.DrawTexturedRect(x + w - ScreenScale(41), y + h - nsg - ScreenScale(1), nsg, nsg)
+                    end
+
+                    local nextnadetxt = TacRP.GetBind("grenade2")
+
+                    surface.SetTextColor(col)
+                    surface.SetFont("TacRP_HD44780A00_5x8_4")
+                    local tw = surface.GetTextSize(nextnadetxt)
+                    surface.SetTextPos(x + w - ScreenScale(36) - (tw / 2), y + h - nsg - ScreenScale(4))
+                    surface.DrawText(nextnadetxt)
                 end
-
-                local nextnadetxt = TacRP.GetBind("grenade2")
-
-                surface.SetTextColor(col)
-                surface.SetFont("TacRP_HD44780A00_5x8_4")
-                local tw = surface.GetTextSize(nextnadetxt)
-                surface.SetTextPos(x + w - ScreenScale(36) - (tw / 2), y + h - nsg - ScreenScale(4))
-                surface.DrawText(nextnadetxt)
             end
 
             local l_w = ScreenScale(80)
@@ -593,7 +595,7 @@ function SWEP:DrawHUDBackground()
 
                 local qty = nil --"INF"
 
-                if nade.Ammo and (nade.Secret or !GetConVar("tacrp_infinitegrenades"):GetBool()) then
+                if !TacRP.IsGrenadeInfiniteAmmo(nade) then
                     qty = tostring(self:GetOwner():GetAmmoCount(nade.Ammo))
                 end
 
@@ -611,23 +613,25 @@ function SWEP:DrawHUDBackground()
                 surface.SetTextColor(col)
                 surface.DrawText(nadetext)
 
-                local nextnade = self:GetNextGrenade()
+                if !GetConVar("tacrp_nademenu"):GetBool() then
+                    local nextnade = self:GetNextGrenade()
 
-                local nsg = ScreenScale(10)
+                    local nsg = ScreenScale(10)
 
-                if nextnade.Icon then
-                    surface.SetMaterial(nextnade.Icon)
-                    surface.SetDrawColor(255, 255, 255)
-                    surface.DrawTexturedRect(x + w - ScreenScale(41), y + h - nsg - ScreenScale(1), nsg, nsg)
+                    if nextnade.Icon then
+                        surface.SetMaterial(nextnade.Icon)
+                        surface.SetDrawColor(255, 255, 255)
+                        surface.DrawTexturedRect(x + w - ScreenScale(41), y + h - nsg - ScreenScale(1), nsg, nsg)
+                    end
+
+                    local nextnadetxt = TacRP.GetBind("grenade2")
+
+                    surface.SetTextColor(col)
+                    surface.SetFont("TacRP_HD44780A00_5x8_4")
+                    local tw = surface.GetTextSize(nextnadetxt)
+                    surface.SetTextPos(x + w - ScreenScale(36) - (tw / 2), y + h - nsg - ScreenScale(4))
+                    surface.DrawText(nextnadetxt)
                 end
-
-                local nextnadetxt = TacRP.GetBind("grenade2")
-
-                surface.SetTextColor(col)
-                surface.SetFont("TacRP_HD44780A00_5x8_4")
-                local tw = surface.GetTextSize(nextnadetxt)
-                surface.SetTextPos(x + w - ScreenScale(36) - (tw / 2), y + h - nsg - ScreenScale(4))
-                surface.DrawText(nextnadetxt)
             end
         end
     end

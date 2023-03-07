@@ -6,7 +6,10 @@ TacRP.QuickNades = {
         Ammo = "grenade",
         Model = "models/weapons/tacint/v_quicknade_frag.mdl",
         Spoon = true,
-        Icon = Material("TacRP/grenades/frag.png", "mips smooth")
+        Icon = Material("TacRP/grenades/frag.png", "mips smooth"),
+
+        Category = "LETHAL",
+        SortOrder = 1,
     },
     ["flashbang"] = {
         PrintName = "FLASH",
@@ -15,7 +18,10 @@ TacRP.QuickNades = {
         Ammo = "ti_flashbang",
         Model = "models/weapons/tacint/v_quicknade_flashbang.mdl",
         Spoon = true,
-        Icon = Material("TacRP/grenades/flashbang.png", "mips smooth")
+        Icon = Material("TacRP/grenades/flashbang.png", "mips smooth"),
+
+        Category = "UTILITY",
+        SortOrder = 4,
     },
     ["smoke"] = {
         PrintName = "SMOKE",
@@ -24,7 +30,10 @@ TacRP.QuickNades = {
         Ammo = "ti_smoke",
         Model = "models/weapons/tacint/v_quicknade_smoke.mdl",
         Spoon = true,
-        Icon = Material("TacRP/grenades/smoke.png", "mips smooth")
+        Icon = Material("TacRP/grenades/smoke.png", "mips smooth"),
+
+        Category = "UTILITY",
+        SortOrder = 5,
     },
     ["gas"] = {
         PrintName = "GAS",
@@ -34,7 +43,10 @@ TacRP.QuickNades = {
         Model = "models/weapons/tacint/v_quicknade_smoke.mdl",
         Spoon = true,
         Material = "models/tacint/weapons/v_models/smoke/gas-1",
-        Icon = Material("TacRP/grenades/gas.png", "mips smooth")
+        Icon = Material("TacRP/grenades/gas.png", "mips smooth"),
+
+        Category = "UTILITY",
+        SortOrder = 6,
     },
     ["thermite"] = {
         PrintName = "FIRE",
@@ -44,7 +56,10 @@ TacRP.QuickNades = {
         Model = "models/weapons/tacint/v_quicknade_smoke.mdl",
         Spoon = true,
         Material = "models/tacint/weapons/v_models/smoke/thermite-1",
-        Icon = Material("TacRP/grenades/thermite.png", "mips smooth")
+        Icon = Material("TacRP/grenades/thermite.png", "mips smooth"),
+
+        Category = "LETHAL",
+        SortOrder = 2,
     },
     ["c4"] = {
         PrintName = "C4",
@@ -56,7 +71,11 @@ TacRP.QuickNades = {
         OverhandOnly = true,
         Spoon = false,
         Secret = true,
-        Icon = Material("TacRP/grenades/c4.png", "mips smooth")
+        SecretWeapon = "tacrp_c4_detonator",
+        Icon = Material("TacRP/grenades/c4.png", "mips smooth"),
+
+        Category = "SPECIAL",
+        SortOrder = 8,
     },
     ["nuke"] = {
         PrintName = "NUKE",
@@ -68,7 +87,10 @@ TacRP.QuickNades = {
         Spoon = false,
         Secret = true,
         AdminOnly = true,
-        Icon = Material("TacRP/grenades/nuke.png", "mips smooth")
+        Icon = Material("TacRP/grenades/nuke.png", "mips smooth"),
+
+        Category = "SPECIAL",
+        SortOrder = 9,
     },
     ["charge"] = {
         PrintName = "BREACH",
@@ -79,8 +101,10 @@ TacRP.QuickNades = {
         Model = "models/weapons/tacint/v_quicknade_door_charge.mdl",
         OverhandOnly = true,
         Spoon = false,
-        Secret = false,
-        Icon = Material("TacRP/grenades/breach.png", "mips smooth")
+        Icon = Material("TacRP/grenades/breach.png", "mips smooth"),
+
+        Category = "LETHAL",
+        SortOrder = 3,
     },
     ["rock"] = {
         PrintName = "ROCK",
@@ -95,6 +119,9 @@ TacRP.QuickNades = {
         PullSound = "tacrp/weapons/pistol_holster-1.wav",
         Icon = Material("TacRP/grenades/rock.png", "mips smooth"),
         RequireStat = "ThrowRocks",
+
+        Category = "SPECIAL",
+        SortOrder = 7,
     },
 }
 
@@ -102,9 +129,28 @@ TacRP.QuickNades_Index = {}
 
 TacRP.QuickNades_Count = 0
 
-for i, k in pairs(TacRP.QuickNades) do
+for i, k in SortedPairsByMemberValue(TacRP.QuickNades, "SortOrder") do
     TacRP.QuickNades_Count = TacRP.QuickNades_Count + 1
 
     TacRP.QuickNades_Index[TacRP.QuickNades_Count] = i
     k.Index = TacRP.QuickNades_Count
+end
+
+function TacRP.IsGrenadeInfiniteAmmo(i)
+    local nade = i
+    if isstring(i) then
+        nade = TacRP.QuickNades[i]
+    elseif isnumber(i) then
+        nade = TacRP.QuickNades[TacRP.QuickNades_Index[i]]
+    end
+
+    if !istable(nade) then return false end
+
+    -- no ammo type means infinite ammo
+    if !nade.Ammo then return true end
+
+    -- non-admin nades are affected by infinite grenades cvar
+    if !nade.AdminOnly and GetConVar("tacrp_infinitegrenades"):GetBool() then return true end
+
+    return false
 end

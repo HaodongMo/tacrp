@@ -102,7 +102,7 @@ elseif CLIENT then
             pos = pos + ang:Right() * -8
 
             cam.Start3D2D(pos, ang, 0.1)
-                surface.SetFont("TacRP_LondonBetween_32_Unscaled")
+                surface.SetFont("TacRP_LondonBetween_24_Unscaled")
 
                 local w = surface.GetTextSize(self.PrintName)
 
@@ -129,7 +129,7 @@ elseif CLIENT then
             pos2 = pos2 + ang2:Right() * -8
 
             cam.Start3D2D(pos2, ang2, 0.1)
-                surface.SetFont("TacRP_LondonBetween_32_Unscaled")
+                surface.SetFont("TacRP_LondonBetween_24_Unscaled")
 
                 local w2 = surface.GetTextSize(self.PrintName)
 
