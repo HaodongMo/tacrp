@@ -135,7 +135,7 @@ function SWEP:DrawGrenadeHUD()
         local nadetext = nade.PrintName .. (qty and ("x" .. qty) or "")
         surface.SetFont("TacRP_HD44780A00_5x8_8")
         local nadetextw = surface.GetTextSize(nadetext)
-        surface.SetTextPos(nadex - nadetextw * 0.5, nadey + ScreenScale(4))
+        surface.SetTextPos(nadex - nadetextw * 0.5, nadey + ScreenScale(6))
         surface.DrawText(nadetext)
 
         d = d - arcdegrees
