@@ -51,14 +51,16 @@ function ENT:RadiationAttack()
 
     local dmg = DamageInfo()
     dmg:SetDamage((1 - d) * 5000)
-    dmg:SetDamageType(DMG_BLAST)
+    dmg:SetDamageType(DMG_RADIATION)
     dmg:SetDamagePosition(self:GetPos())
-    dmg:SetAttacker(self:GetOwner())
+    dmg:SetAttacker(self:GetOwner() or self.Attacker)
+    dmg:SetInflictor(self)
 
     for i, k in pairs(ents.FindInSphere(self:GetPos(), radius)) do
+        if !IsValid(k) then continue end
+        constraint.RemoveAll(k)
         k:TakeDamageInfo(dmg)
 
-        constraint.RemoveAll(k)
     end
 end
 

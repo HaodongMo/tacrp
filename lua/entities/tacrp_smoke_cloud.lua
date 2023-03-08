@@ -16,7 +16,7 @@ ENT.Particles = nil
 ENT.SmokeRadius = 256
 ENT.SmokeColor = Color(150, 150, 150)
 ENT.BillowTime = 1
-ENT.Life = 15
+ENT.Life = 20
 
 AddCSLuaFile()
 
@@ -35,7 +35,7 @@ function ENT:Initialize()
 
         for i = 1, amt do
             local smoke = emitter:Add(GetSmokeImage(), self:GetPos())
-            smoke:SetVelocity( VectorRand() * 8 + (Angle(0, i * (360 / amt), 0):Forward() * 100) )
+            smoke:SetVelocity( VectorRand() * 8 + (Angle(0, i * (360 / amt), 0):Forward() * 250) )
             smoke:SetStartAlpha( 0 )
             smoke:SetEndAlpha( 255 )
             smoke:SetStartSize( 0 )

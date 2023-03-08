@@ -37,7 +37,7 @@ function ENT:Initialize()
         self.SpawnTime = CurTime()
         self:Detonate()
 
-        self.FireTime = math.Rand(6, 8)
+        self.FireTime = math.Rand(7, 9)
 
         self:SetCollisionGroup(COLLISION_GROUP_PROJECTILE)
     end
