@@ -291,7 +291,7 @@ end
 hook.Add("VGUIMousePressed", "tacrp_grenademenu", function(pnl, mousecode)
     local wpn = LocalPlayer():GetActiveWeapon()
     if !(LocalPlayer():Alive() and IsValid(wpn) and wpn.ArcticTacRP and !wpn:StillWaiting() and (wpn.GrenadeMenuAlpha or 0) == 1) then return end
-    if !GetConVar("tacrp_nademenu_click"):GetBool() or !currentnade then return end
+    if !GetConVar("tacrp_nademenu_click"):GetBool() or !currentnade or (mousecode != MOUSE_RIGHT and mousecode != MOUSE_LEFT) then return end
     local under = (mousecode == MOUSE_RIGHT)
     wpn.GrenadeThrowOverride = under
     net.Start("tacrp_togglenade")
