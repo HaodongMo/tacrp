@@ -29,6 +29,7 @@ function SWEP:Think()
     else
         if (owner:KeyReleased(IN_ATTACK) or (self:GetCurrentFiremode() < 0 and self:GetBurstCount() >= -self:GetCurrentFiremode())) then
             if self:GetCurrentFiremode() < 0 and self:GetBurstCount() > 1 then
+                self.Primary.Automatic = false
                 self:SetNextPrimaryFire(CurTime() + self:GetValue("PostBurstDelay"))
             end
             self:SetBurstCount(0)
