@@ -62,6 +62,11 @@ function SWEP:Deploy()
 
     self:SetShouldHoldType()
 
+    if !self:CheckGrenade() then
+        self:SelectGrenade()
+        return
+    end
+
     return true
 end
 
