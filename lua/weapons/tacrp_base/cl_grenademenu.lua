@@ -165,8 +165,13 @@ function SWEP:DrawGrenadeHUD()
         surface.DrawText(qty)
     end
 
+    -- description box is blocked in customize
+    if self:GetCustomize() then return end
+
     local w, h = ScreenScale(96), ScreenScale(128)
     local tx, ty = scrw / 2 + r + ScreenScale(16), scrh / 2
+
+    -- full name
 
     surface.SetDrawColor(0, 0, 0, 200 * a)
     TacRP.DrawCorneredBox(tx, ty - h * 0.5 - ScreenScale(28), w, ScreenScale(24), col)
@@ -182,6 +187,9 @@ function SWEP:DrawGrenadeHUD()
     surface.SetTextPos(tx + w / 2 - name_w / 2, ty - h * 0.5 - ScreenScale(28) + ScreenScale(12) - name_h / 2)
     surface.DrawText(name)
 
+
+    -- Description
+
     surface.SetDrawColor(0, 0, 0, 200 * a)
     TacRP.DrawCorneredBox(tx, ty - h * 0.5, w, h, col)
 
@@ -196,8 +204,6 @@ function SWEP:DrawGrenadeHUD()
     surface.SetFont("TacRP_Myriad_Pro_8")
     surface.SetTextPos(tx + ScreenScale(4), ty - h / 2 + ScreenScale(22))
     surface.DrawText("DESCRIPTION:")
-
-    -- Description
 
     surface.SetFont("TacRP_Myriad_Pro_8")
     local descmultiline = TacRP.MultiLineText(nade.Description or "", w - ScreenScale(7), "TacRP_Myriad_Pro_8")
