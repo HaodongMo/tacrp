@@ -179,4 +179,8 @@ function SWEP:NPC_Initialize()
     self:SetBaseSettings()
 
     self:SetClip1(self:GetMaxClip1())
+
+    if math.random() <= 0.5 then
+        self:SetFiremode(math.random(1, self:GetFiremodeAmount()))
+    end
 end
