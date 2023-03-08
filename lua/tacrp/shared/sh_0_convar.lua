@@ -196,6 +196,7 @@ local conVars = {
         name = "nademenu",
         default = "1",
         client = true,
+        userinfo = true,
     },
     {
         name = "gas_sway",
@@ -217,6 +218,9 @@ for _, var in pairs(conVars) do
         local flags = FCVAR_ARCHIVE
         if var.replicated then
             flags = flags + FCVAR_REPLICATED
+        end
+        if var.userinfo then
+            flags = flags + FCVAR_USERINFO
         end
         CreateConVar(convar_name, var.default, flags, var.help, var.min, var.max)
     end

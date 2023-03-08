@@ -240,7 +240,7 @@ function SWEP:ThinkGrenade()
 
     if self:GetOwner():KeyPressed(IN_GRENADE1) then
         self:PrimeGrenade()
-    elseif !GetConVar("tacrp_nademenu"):GetBool() and self:GetOwner():KeyPressed(IN_GRENADE2) then
+    elseif !tobool(self:GetOwner():GetInfo("tacrp_nademenu")) and self:GetOwner():KeyPressed(IN_GRENADE2) then
         self:SelectGrenade()
     end
 
