@@ -151,3 +151,15 @@ function TacRP.CanCustomize(ply, wep, att, slot)
 
     return true
 end
+
+hook.Add("OnReloaded", "TacRP_ReloadAtts", function()
+    if game.SinglePlayer() then
+        TacRP.LoadAtts()
+        for _, e in pairs(ents.GetAll()) do
+            if e:IsWeapon() and e.ArcticTacRP then
+                e.StatCache = {}
+                e.HookCache = {}
+            end
+        end
+    end
+end)

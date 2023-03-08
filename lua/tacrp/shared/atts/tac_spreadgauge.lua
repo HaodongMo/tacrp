@@ -40,14 +40,18 @@ function ATT.TacticalDraw(self)
     local spread1 = math.floor(spread)
     local spread2 = math.floor((spread - spread1) * 10)
     local spread_txt1 = tostring(spread1)
-    if spread < 10 then
-        spread_txt1 = "00" .. spread_txt1
-    elseif spread < 100 then
-        spread_txt1 = "0" .. spread_txt1
-    end
     surface.SetFont("TacRP_HD44780A00_5x8_6")
     surface.SetTextColor(0, 0, 0)
     surface.SetTextPos(x + ScreenScale(22), y + ScreenScale(2.5))
+    if spread < 10 then
+        surface.SetTextColor(0, 0, 0, 100)
+        surface.DrawText("00")
+        surface.SetTextColor(0, 0, 0)
+    elseif spread < 100 then
+        surface.SetTextColor(0, 0, 0, 100)
+        surface.DrawText("0")
+        surface.SetTextColor(0, 0, 0)
+    end
     surface.DrawText(spread_txt1)
     surface.DrawText(".")
     surface.DrawText(spread2)
@@ -58,15 +62,16 @@ function ATT.TacticalDraw(self)
     surface.SetTextPos(x + ScreenScale(22), y + ScreenScale(11.5))
     surface.SetTextColor(0, 0, 0)
 
-    if recoil_pct == 0 then
-        recoil_txt = "000"
+    if recoil_pct < 10 then
         surface.SetTextColor(0, 0, 0, 100)
-    elseif recoil_pct < 10 then
-        recoil_txt = "00" .. recoil_txt
+        surface.DrawText("00")
+        surface.SetTextColor(0, 0, 0)
     elseif recoil_pct < 100 then
-        recoil_txt = "0" .. recoil_txt
-    elseif math.sin(SysTime() * 30) > 0 then
         surface.SetTextColor(0, 0, 0, 100)
+        surface.DrawText("0")
+        surface.SetTextColor(0, 0, 0)
+    elseif math.sin(SysTime() * 30) > 0 then
+        surface.SetTextColor(0, 0, 0, 150)
     end
     surface.DrawText(recoil_txt)
 
@@ -108,9 +113,19 @@ function ATT.TacticalDraw(self)
     surface.SetTextColor(0, 0, 0)
     surface.SetTextPos(x2 + ScreenScale(17), y2 + ScreenScale(2))
     surface.DrawText(fov_mult1 .. "." .. fov_mult2 .. "x")
-    local sway_txt = math.Clamp(math.Round(self:GetSwayAmount() * 100), 0, 999) .. "%"
-    local sway_w = surface.GetTextSize(sway_txt)
+    local sway_pct = math.Clamp(math.Round((self:IsSwayEnabled() and self:GetSwayAmount() or self:GetForcedSwayAmount()) * 100), 0, 999)
+    local sway_txt = sway_pct .. "%"
+    local sway_w = surface.GetTextSize("100%") -- same width per char so its ok
     surface.SetTextPos(x2 + ScreenScale(23) - sway_w, y2 + w_cone - ScreenScale(8.5))
+    if sway_pct < 10 then
+        surface.SetTextColor(0, 0, 0, 100)
+        surface.DrawText("00")
+        surface.SetTextColor(0, 0, 0)
+    elseif sway_pct < 100 then
+        surface.SetTextColor(0, 0, 0, 100)
+        surface.DrawText("0")
+        surface.SetTextColor(0, 0, 0)
+    end
     surface.DrawText(sway_txt)
 end
 
