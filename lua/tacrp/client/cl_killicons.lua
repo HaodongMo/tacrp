@@ -31,13 +31,12 @@ TacRPNewKilliconDraw = function(x, y, name, alpha)
         -- nade icons are smaller
         if killicons_cachednames[name] == 2 then
             w, h = 48, 48
-            x = x - 24
-            y = y - 16
         else
             w, h = 64, 64
-            x = x - 32
-            y = y - 24
         end
+
+        x = x - w * 0.5
+        y = y - h * 0.3
 
         cam.Start2D()
 
