@@ -31,7 +31,37 @@ local function filledcircle(x, y, radius, seg)
     surface.DrawPoly(cir)
 end
 
+local function slicedcircle(x, y, radius, seg, ang0, ang1)
+    local cir = {}
+
+    ang0 = ang0 + 90
+    ang1 = ang1 + 90
+
+    local arcseg = math.Round(360 / math.abs(ang1 - ang0) * seg)
+
+    table.insert(cir, {
+        x = x,
+        y = y,
+        u = 0.5,
+        v = 0.5
+    })
+
+    for i = 0, arcseg do
+        local a = math.rad((i / arcseg) * -math.abs(ang1 - ang0) + ang0)
+
+        table.insert(cir, {
+            x = x + math.sin(a) * radius,
+            y = y + math.cos(a) * radius,
+            u = math.sin(a) / 2 + 0.5,
+            v = math.cos(a) / 2 + 0.5
+        })
+    end
+
+    surface.DrawPoly(cir)
+end
+
 local currentnade
+local currentind
 local lastmenu
 function SWEP:DrawGrenadeHUD()
 
@@ -49,6 +79,14 @@ function SWEP:DrawGrenadeHUD()
     local d = 360
     local ft = FrameTime()
 
+    local cursorx, cursory = input.GetCursorPos()
+    local mouseangle = math.deg(math.atan2(cursorx - scrw / 2, cursory - scrh / 2))
+    local mousedist = math.sqrt(math.pow(cursorx - scrw / 2, 2) + math.pow(cursory - scrh / 2, 2))
+    mouseangle = math.NormalizeAngle(360 - (mouseangle - 90) + arcdegrees)
+    if mouseangle < 0 then
+        mouseangle = mouseangle + 360
+    end
+
     if self:GetOwner():KeyDown(IN_GRENADE2) and !self:GetPrimedGrenade() then
         self.GrenadeMenuAlpha = math.Approach(self.GrenadeMenuAlpha, 1, 15 * ft)
         if !lastmenu then
@@ -56,19 +94,13 @@ function SWEP:DrawGrenadeHUD()
             lastmenu = true
         end
 
-        local cursorx, cursory = input.GetCursorPos()
-        local mouseangle = math.deg(math.atan2(cursorx - scrw / 2, cursory - scrh / 2))
-        local mousedist = math.sqrt(math.pow(cursorx - scrw / 2, 2) + math.pow(cursory - scrh / 2, 2))
-        mouseangle = math.NormalizeAngle(360 - (mouseangle - 90) + arcdegrees)
-        if mouseangle < 0 then
-            mouseangle = mouseangle + 360
-        end
-
         if mousedist > r2 then
             local i = math.floor( mouseangle / arcdegrees ) + 1
             currentnade = nades[i]
+            currentind = i
         else
             currentnade = self:GetGrenade()
+            currentind = nil
         end
     else
         self.GrenadeMenuAlpha = math.Approach(self.GrenadeMenuAlpha, 0, -10 * ft)
@@ -95,9 +127,19 @@ function SWEP:DrawGrenadeHUD()
     local a = self.GrenadeMenuAlpha
 
     surface.DrawCircle(scrw / 2, scrh / 2, r, 255, 255, 255, a * 255)
+
     surface.SetDrawColor(0, 0, 0, a * 200)
     draw.NoTexture()
     filledcircle(scrw / 2, scrh / 2, r, 32)
+
+    if currentind then
+        surface.SetDrawColor(150, 150, 150, a * 100)
+        draw.NoTexture()
+        local i = currentind
+        local d0 = 0 - arcdegrees * (i - 2)
+        slicedcircle(scrw / 2, scrh / 2, r, 32, d0, d0 + arcdegrees)
+    end
+
     surface.SetDrawColor(0, 0, 0, a * 255)
     surface.DrawCircle(scrw / 2, scrh / 2, r2, 255, 255, 255, a * 255)
 
