@@ -114,6 +114,7 @@ function SWEP:DrawGrenadeHUD()
                 end
                 net.Start("tacrp_togglenade")
                 net.WriteUInt(currentnade.Index, 4)
+                net.WriteBool(false)
                 net.SendToServer()
             end
             lastmenu = false
@@ -125,6 +126,7 @@ function SWEP:DrawGrenadeHUD()
     end
 
     local a = self.GrenadeMenuAlpha
+    local col = Color(255, 255, 255, 255 * a)
 
     surface.DrawCircle(scrw / 2, scrh / 2, r, 255, 255, 255, a * 255)
 
@@ -254,4 +256,45 @@ function SWEP:DrawGrenadeHUD()
         surface.SetTextPos(tx + ScreenScale(4), ty - h / 2 + ScreenScale(30) + (i - 1) * ScreenScale(8))
         surface.DrawText(text)
     end
+
+    surface.SetFont("TacRP_Myriad_Pro_8")
+    surface.SetDrawColor(0, 0, 0, 200 * a)
+
+
+    if GetConVar("tacrp_nademenu_click"):GetBool() then
+
+        local binded = input.LookupBinding("grenade1")
+
+        TacRP.DrawCorneredBox(tx, ty + h * 0.5 + ScreenScale(2), w, ScreenScale(binded and 28 or 20), col)
+
+        surface.SetTextPos(tx + ScreenScale(4), ty + h / 2 + ScreenScale(4))
+        surface.DrawText("[" .. TacRP.GetBind("attack") .. "] - Throw Overhand")
+        surface.SetTextPos(tx + ScreenScale(4), ty + h / 2 + ScreenScale(12))
+        surface.DrawText("[" .. TacRP.GetBind("attack2") .. "] - Throw Underhand")
+        if binded then
+            surface.SetTextPos(tx + ScreenScale(4), ty + h / 2 + ScreenScale(20))
+            surface.DrawText("Hold/Tap [" .. TacRP.GetBind("grenade1") .. "] - Over/Under")
+        end
+    else
+
+        TacRP.DrawCorneredBox(tx, ty + h * 0.5 + ScreenScale(2), w, ScreenScale(20), col)
+
+        surface.SetTextPos(tx + ScreenScale(4), ty + h / 2 + ScreenScale(4))
+        surface.DrawText("Hold [" .. TacRP.GetBind("grenade1") .. "] - Throw Overhand")
+        surface.SetTextPos(tx + ScreenScale(4), ty + h / 2 + ScreenScale(12))
+        surface.DrawText("Tap [" .. TacRP.GetBind("grenade1") .. "] - Throw Underhand")
+    end
 end
+
+hook.Add("VGUIMousePressed", "tacrp_grenademenu", function(pnl, mousecode)
+    local wpn = LocalPlayer():GetActiveWeapon()
+    if !(LocalPlayer():Alive() and IsValid(wpn) and wpn.ArcticTacRP and !wpn:StillWaiting() and (wpn.GrenadeMenuAlpha or 0) == 1) then return end
+    if !GetConVar("tacrp_nademenu_click"):GetBool() or !currentnade then return end
+    local under = (mousecode == MOUSE_RIGHT)
+    wpn.GrenadeThrowOverride = under
+    net.Start("tacrp_togglenade")
+        net.WriteUInt(currentnade.Index, 4)
+        net.WriteBool(true)
+        net.WriteBool(under)
+    net.SendToServer()
+end)

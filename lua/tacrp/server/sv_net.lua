@@ -33,12 +33,19 @@ end)
 
 net.Receive("tacrp_togglenade", function(len, ply)
     local bf = net.ReadUInt(4)
+    local throw = net.ReadBool()
+    local under = false
+    if throw then under = net.ReadBool() end
 
     local wpn = ply:GetActiveWeapon()
 
     if !wpn or !IsValid(wpn) or !wpn.ArcticTacRP then return end
 
     wpn:SelectGrenade(bf)
+    if throw then
+        wpn:PrimeGrenade()
+        wpn.GrenadeThrowOverride = under
+    end
 end)
 
 net.Receive("tacrp_toggleblindfire", function(len, ply)
