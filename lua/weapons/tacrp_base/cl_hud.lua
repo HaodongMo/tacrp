@@ -130,6 +130,7 @@ function SWEP:GetBinding(bind)
 end
 
 local mat_vignette = Material("tacrp/hud/vignette.png", "mips smooth")
+local mat_radial = Material("tacrp/grenades/radial.png", "mips smooth")
 
 local rackrisetime = 0
 local lastrow = 0
@@ -326,25 +327,28 @@ function SWEP:DrawHUDBackground()
                 surface.SetTextColor(col)
                 surface.DrawText(nadetext)
 
+                local mat = nil
                 if !GetConVar("tacrp_nademenu"):GetBool() then
-                    local nextnade = self:GetNextGrenade()
-
-                    local nsg = ScreenScale(10)
-
-                    if nextnade.Icon then
-                        surface.SetMaterial(nextnade.Icon)
-                        surface.SetDrawColor(255, 255, 255)
-                        surface.DrawTexturedRect(x + w - ScreenScale(41), y + h - nsg - ScreenScale(1), nsg, nsg)
-                    end
-
-                    local nextnadetxt = TacRP.GetBind("grenade2")
-
-                    surface.SetTextColor(col)
-                    surface.SetFont("TacRP_HD44780A00_5x8_4")
-                    local tw = surface.GetTextSize(nextnadetxt)
-                    surface.SetTextPos(x + w - ScreenScale(36) - (tw / 2), y + h - nsg - ScreenScale(4))
-                    surface.DrawText(nextnadetxt)
+                    mat = self:GetNextGrenade().Icon
+                else
+                    mat = mat_radial
                 end
+
+                local nsg = ScreenScale(10)
+
+                if mat then
+                    surface.SetMaterial(mat)
+                    surface.SetDrawColor(255, 255, 255)
+                    surface.DrawTexturedRect(x + w - ScreenScale(41), y + h - nsg - ScreenScale(1), nsg, nsg)
+                end
+
+                local nextnadetxt = TacRP.GetBind("grenade2")
+
+                surface.SetTextColor(col)
+                surface.SetFont("TacRP_HD44780A00_5x8_4")
+                local tw = surface.GetTextSize(nextnadetxt)
+                surface.SetTextPos(x + w - ScreenScale(36) - (tw / 2), y + h - nsg - ScreenScale(4))
+                surface.DrawText(nextnadetxt)
             end
 
             local l_w = ScreenScale(80)
@@ -613,25 +617,28 @@ function SWEP:DrawHUDBackground()
                 surface.SetTextColor(col)
                 surface.DrawText(nadetext)
 
+                local mat = nil
                 if !GetConVar("tacrp_nademenu"):GetBool() then
-                    local nextnade = self:GetNextGrenade()
-
-                    local nsg = ScreenScale(10)
-
-                    if nextnade.Icon then
-                        surface.SetMaterial(nextnade.Icon)
-                        surface.SetDrawColor(255, 255, 255)
-                        surface.DrawTexturedRect(x + w - ScreenScale(41), y + h - nsg - ScreenScale(1), nsg, nsg)
-                    end
-
-                    local nextnadetxt = TacRP.GetBind("grenade2")
-
-                    surface.SetTextColor(col)
-                    surface.SetFont("TacRP_HD44780A00_5x8_4")
-                    local tw = surface.GetTextSize(nextnadetxt)
-                    surface.SetTextPos(x + w - ScreenScale(36) - (tw / 2), y + h - nsg - ScreenScale(4))
-                    surface.DrawText(nextnadetxt)
+                    mat = self:GetNextGrenade().Icon
+                else
+                    mat = mat_radial
                 end
+
+                local nsg = ScreenScale(10)
+
+                if mat then
+                    surface.SetMaterial(mat)
+                    surface.SetDrawColor(255, 255, 255)
+                    surface.DrawTexturedRect(x + w - ScreenScale(41), y + h - nsg - ScreenScale(1), nsg, nsg)
+                end
+
+                local nextnadetxt = TacRP.GetBind("grenade2")
+
+                surface.SetTextColor(col)
+                surface.SetFont("TacRP_HD44780A00_5x8_4")
+                local tw = surface.GetTextSize(nextnadetxt)
+                surface.SetTextPos(x + w - ScreenScale(36) - (tw / 2), y + h - nsg - ScreenScale(4))
+                surface.DrawText(nextnadetxt)
             end
         end
     end
