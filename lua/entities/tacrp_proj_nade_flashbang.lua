@@ -28,7 +28,14 @@ ENT.ExplodeSounds = {
 }
 
 function ENT:Detonate()
-    util.BlastDamage(self, self:GetOwner(), self:GetPos(), 512, 10)
+
+    local dmg = DamageInfo()
+    dmg:SetAttacker(self:GetOwner())
+    dmg:SetInflictor(self)
+    dmg:SetDamageType(DMG_SONIC)
+    dmg:SetDamagePosition(self:GetPos())
+    dmg:SetDamage(10)
+    util.BlastDamageInfo(dmg, self:GetPos(), 512)
 
     local fx = EffectData()
     fx:SetOrigin(self:GetPos())
