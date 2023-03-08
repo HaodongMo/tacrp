@@ -128,13 +128,9 @@ function ENT:Think()
                 })
                 if tr.Fraction < 1 then continue end
                 local dist = (tr.HitPos - tr.StartPos):Length()
-                local delta = dist / 300
+                local delta = dist / 320
 
-                dmg:SetDamage(k:IsPlayer() and math.Rand(4, 8) or math.Rand(5, 10))
-
-                if math.random() <= 0.3 then
-                    k:EmitSound("ambient/voices/cough" .. math.random(1, 4) .. ".wav", 80, math.Rand(95, 105))
-                end
+                dmg:SetDamage(k:IsPlayer() and math.Rand(4, 8) or math.Rand(5, 15))
 
                 k:TakeDamageInfo(dmg)
                 if k:IsPlayer() then
@@ -170,6 +166,10 @@ function ENT:Think()
                             k:EmitSound("ambient/voices/cough" .. math.random(1, 4) .. ".wav", 80, math.Rand(95, 105))
                         end
                     end)
+
+                    if math.random() <= 0.3 then
+                        k:EmitSound("ambient/voices/cough" .. math.random(1, 4) .. ".wav", 80, math.Rand(95, 105))
+                    end
                 end
             end
         end

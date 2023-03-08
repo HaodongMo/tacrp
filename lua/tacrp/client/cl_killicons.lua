@@ -16,6 +16,7 @@ TacRP.KillIconAlias = {
 
     ["tacrp_proj_ks23_flashbang"] = "tacrp_ks23",
 
+    ["tacrp_gas_cloud"] = "tacrp_proj_nade_gas", -- also used by 40mm gas but whatever
     ["tacrp_fire_cloud"] = "tacrp_proj_nade_thermite",
     ["tacrp_nuke_cloud"] = "tacrp_proj_nade_nuke",
 }
@@ -24,10 +25,19 @@ TacRPNewKilliconDraw = function(x, y, name, alpha)
     name = TacRP.KillIconAlias[name] or name
     local wpn = weapons.Get(name)
 
-    if killicons_cachednames[name] == true then
-        local w, h = 64, 64
-        x = x - 32
-        y = y - 24
+    if tobool(killicons_cachednames[name]) == true then
+        local w, h
+
+        -- nade icons are smaller
+        if killicons_cachednames[name] == 2 then
+            w, h = 48, 48
+            x = x - 24
+            y = y - 16
+        else
+            w, h = 64, 64
+            x = x - 32
+            y = y - 24
+        end
 
         cam.Start2D()
 
@@ -46,7 +56,7 @@ TacRPNewKilliconDraw = function(x, y, name, alpha)
     else
         if killicons_cachednames[name] == nil then -- not cached yet, checking for tacrp
             if TacRP.QuickNades_EntLookup[name] then
-                killicons_cachednames[name] = true
+                killicons_cachednames[name] = 2
                 killicons_cachedicons[name] = TacRP.QuickNades[TacRP.QuickNades_EntLookup[name]].Icon or killiconmat
             else
                 killicons_cachednames[name] = (weapons.Get(name) and weapons.Get(name).ArcticTacRP) or false
