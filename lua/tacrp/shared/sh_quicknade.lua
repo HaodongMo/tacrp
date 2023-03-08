@@ -154,6 +154,7 @@ TacRP.QuickNades = {
 }
 
 TacRP.QuickNades_Index = {}
+TacRP.QuickNades_EntLookup = {}
 
 TacRP.QuickNades_Count = 0
 
@@ -161,6 +162,7 @@ for i, k in SortedPairsByMemberValue(TacRP.QuickNades, "SortOrder") do
     TacRP.QuickNades_Count = TacRP.QuickNades_Count + 1
 
     TacRP.QuickNades_Index[TacRP.QuickNades_Count] = i
+    TacRP.QuickNades_EntLookup[k.GrenadeEnt] = i
     k.Index = TacRP.QuickNades_Count
 end
 
