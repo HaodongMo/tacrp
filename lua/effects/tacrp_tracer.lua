@@ -17,7 +17,18 @@ function EFFECT:Init(data)
 
     if !IsValid(wep) or !wep.GetValue then return end
 
-    local start = (wep.GetTracerOrigin and wep:GetTracerOrigin()) or data:GetStart()
+    local start = data:GetStart()
+    if wep.GetTracerOrigin then
+        if wep:GetOwner() == LocalPlayer() and wep:GetValue("ScopeHideWeapon") and wep:IsInScope() then
+            start = EyePos()
+                    + EyeAngles():Right() * wep.PassivePos.x
+                    + EyeAngles():Forward() * wep.PassivePos.y
+                    + EyeAngles():Up() * wep.PassivePos.z
+        else
+            start = wep:GetTracerOrigin()
+        end
+    end
+
     local diff = hit - start
     local dist = diff:Length()
 
