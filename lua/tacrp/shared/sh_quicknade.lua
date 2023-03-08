@@ -98,14 +98,16 @@ TacRP.QuickNades = {
     ["nuke"] = {
         PrintName = "NUKE",
         GrenadeEnt = "tacrp_proj_nade_nuke",
-        ThrowForce = 500,
-        ThrowSpeed = 0.75,
+        ThrowForce = 200,
+        ThrowSpeed = 0.6,
         Ammo = "ti_nuke",
         Model = "models/weapons/tacint/v_quicknade_nuke.mdl",
         Spoon = false,
         Secret = true,
         AdminOnly = true,
         Icon = Material("TacRP/grenades/nuke.png", "mips smooth"),
+        NoSounds = false,
+        PullSound = "tacrp/weapons/grenade/deploy-1.wav",
 
         FullName = "Nuclear Device",
         DetType = "Remote",
@@ -140,7 +142,6 @@ TacRP.QuickNades = {
         Model = "models/weapons/tacint_extras/v_quicknade_rock.mdl",
         Spoon = false,
         NoSounds = true,
-        PullSound = "tacrp/weapons/pistol_holster-1.wav",
         Icon = Material("TacRP/grenades/rock.png", "mips smooth"),
         RequireStat = "ThrowRocks",
 

@@ -18,6 +18,7 @@ ENT.ExplodeOnDamage = true // projectile explodes when it takes damage.
 ENT.ExplodeUnderwater = false
 
 ENT.Defusable = true
+ENT.PickupAmmo = "ti_nuke"
 
 ENT.Delay = 0.5
 
