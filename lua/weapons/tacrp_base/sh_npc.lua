@@ -87,13 +87,13 @@ function SWEP:GetNPCBulletSpread(prof)
         return 10 / (prof + 1)
     elseif mode == 1 then
         if math.Rand(0, 100) < (prof + 5) * 5 then
-            return 5 / (prof + 1)
+            return 2 / (prof + 1)
         else
             return 20 / (prof + 1)
         end
     elseif mode > 1 then
         if math.Rand(0, 100) < (prof + 5) * 2 then
-            return 10 / (prof + 1)
+            return 5 / (prof + 1)
         else
             return 30 / (prof + 1)
         end
@@ -120,7 +120,7 @@ function SWEP:GetNPCBurstSettings()
         return 0, 0, delay
     elseif mode == 1 then
         local c = self:GetValue("ClipSize")
-        return math.ceil(c * 0.075), math.floor(c * math.Rand(0.15, 0.3)), delay + math.Rand(0.2, 0.4)
+        return math.ceil(c * 0.075), math.max(1, math.floor(c * math.Rand(0.15, 0.3))), delay + math.Rand(0.1, 0.2)
     elseif mode >= 2 then
         return math.min(self:Clip1(), 1 + math.floor(0.5 / delay)), math.min(self:Clip1(), 1 + math.floor(2 / delay)), delay
     end
@@ -132,16 +132,16 @@ function SWEP:GetNPCRestTimes()
     local m = self:GetValue("RecoilKick")
     local delay = 60 / self:GetValue("RPM")
 
-    if !mode then return 0.3, 0.6 end
+    if !mode then return delay + 0.3, delay + 0.6 end
 
     local o = m > 1 and math.sqrt(m) or m
     if delay <= 60 / 90 then
         return delay + 0.1 * o, delay + 0.2 * o
     elseif mode < 0 then
-        o = o * 0.5 + postburst
+        o = delay + o * 0.5 + postburst
     end
 
-    return 0.4 * o, 0.6 * o
+    return delay + 0.4 * o, delay + 0.6 * o
 end
 
 function SWEP:CanBePickedUpByNPCs()
@@ -162,9 +162,7 @@ function SWEP:NPC_Initialize()
 
             local ind = math.random(0, #atts)
 
-            if ind == 0 then
-                -- slot.Installed = nil
-            else
+            if ind > 0 and math.random() <= 0.75 then
                 slot.Installed = atts[ind]
             end
         end

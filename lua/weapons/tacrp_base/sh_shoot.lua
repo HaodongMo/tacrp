@@ -247,14 +247,12 @@ function SWEP:AfterShotFunction(tr, dmg, range, penleft, alreadypenned, forced)
 
     dmgv = dmgv * dmgbodymult
 
-    local pendelta = self:GetValue("Penetration") > 0 and penleft / self:GetValue("Penetration") or 1
-
-    pendelta = math.Clamp(pendelta, 0.1, 1)
-
-    dmgv = dmgv * pendelta
-
     if self:GetOwner():IsNPC() and !GetConVar("TacRP_npc_equality"):GetBool() then
         dmgv = dmgv * 0.25
+    else
+        local pendelta = self:GetValue("Penetration") > 0 and penleft / self:GetValue("Penetration") or 1
+        pendelta = math.Clamp(pendelta, 0.1, 1)
+        dmgv = dmgv * pendelta
     end
 
     dmg:SetDamage(dmgv)
