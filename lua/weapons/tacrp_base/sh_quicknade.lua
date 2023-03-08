@@ -183,7 +183,7 @@ function SWEP:CheckGrenade(index, checkammo)
     index = index or self:GetOwner():GetNWInt("ti_nade", 1)
     local nade = self:GetGrenade(index)
     local hasammo = nade.Ammo == nil or self:GetOwner():GetAmmoCount(nade.Ammo) > 0
-    if (nade.Secret and !hasammo and !self:GetOwner():HasWeapon(nade.SecretWeapon or "")) or (nade.RequireStat and !self:GetValue(nade.RequireStat)) then
+    if (nade.Secret and !hasammo and (!nade.SecretWeapon or !self:GetOwner():HasWeapon(nade.SecretWeapon))) or (nade.RequireStat and !self:GetValue(nade.RequireStat)) then
         return false
     end
     if checkammo and !TacRP.IsGrenadeInfiniteAmmo(index) and !hasammo then

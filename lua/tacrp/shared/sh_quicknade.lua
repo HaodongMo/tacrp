@@ -109,7 +109,7 @@ TacRP.QuickNades = {
 
         FullName = "Nuclear Device",
         DetType = "Remote",
-        Description = "Briefcase-sized micro nuclear bomb that can be touched off by a detonator.\n\nIts explosive outcome needs no description.",
+        Description = "Briefcase-sized micro nuclear bomb that can be touched off by a detonator remotely.\n\nIts explosive outcome needs no description.",
         Category = "SPECIAL",
         SortOrder = 9,
     },
