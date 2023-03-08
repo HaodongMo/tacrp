@@ -76,3 +76,66 @@ function TacRP.Regen(full)
 end
 
 hook.Add( "OnScreenSizeChanged", "TacRP.Regen", function() TacRP.Regen(true) end)
+
+function TacRP.MultiLineText(text, maxw, font)
+    local content = {}
+    local tline = ""
+    local x = 0
+    surface.SetFont(font)
+
+    local ts = surface.GetTextSize(" ")
+
+    local newlined = string.Split(text, "\n")
+
+    for _, line in ipairs(newlined) do
+        local words = string.Split(line, " ")
+
+        for _, word in ipairs(words) do
+            local tx = surface.GetTextSize(word)
+
+            if x + tx > maxw then
+                local dashi = string.find(word, "-")
+                if dashi and surface.GetTextSize(utf8.sub(word, 0, dashi)) <= maxw - x then
+                    -- cut the word at the dash sign if possible
+                    table.insert(content, tline .. utf8.sub(word, 0, dashi))
+                    tline = ""
+                    x = 0
+                    word = utf8.sub(word, dashi + 1)
+                    tx = surface.GetTextSize(word)
+                elseif maxw - x <= maxw * 0.2 then
+                    -- move whole word to new line if blank space is not very large
+                    table.insert(content, tline)
+                    tline = ""
+                    x = 0
+                else
+                    -- cut the word down from the middle
+                    while x + tx > maxw do
+                        local cut = ""
+                        for i = 2, utf8.len(word) do
+                            cut = utf8.sub(word, 0, -i)
+                            tx = surface.GetTextSize(cut)
+                            if x + tx < maxw then
+                                table.insert(content, tline .. cut)
+                                tline = ""
+                                word = utf8.sub(word, utf8.len(word) - i + 2)
+                                x = 0
+                                tx = surface.GetTextSize(word)
+                                break
+                            end
+                        end
+                    end
+                end
+            end
+
+            tline = tline .. word .. " "
+
+            x = x + surface.GetTextSize(word .. " ")
+        end
+
+        table.insert(content, tline)
+        tline = ""
+        x = 0
+    end
+
+    return content
+end

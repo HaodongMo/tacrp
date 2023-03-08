@@ -1,4 +1,4 @@
-function SWEP:GetSwayAmount()
+function SWEP:GetSwayAmount(pure)
     local sway = self:GetValue("Sway")
 
     local d = self:GetSightDelta() - (self:GetPeeking() and self:GetValue("PeekPenaltyFraction") or 0)
@@ -12,11 +12,25 @@ function SWEP:GetSwayAmount()
         sway = sway * self:GetValue("SwayCrouchMult")
     end
 
+    if !pure then
+        sway = sway + self:GetForcedSwayAmount()
+    end
+
+    return sway
+end
+
+function SWEP:GetForcedSwayAmount()
+    local sway = 0
+
+    if self:GetOwner():GetNWFloat("TacRPGasEnd") > CurTime() then
+        sway = sway + GetConVar("tacrp_gas_sway"):GetFloat() * Lerp(self:GetSightAmount(), 1, 0.25) * math.Clamp((self:GetOwner():GetNWFloat("TacRPGasEnd") - CurTime()) / 3, 0, 1) ^ 1.5
+    end
+
     return sway
 end
 
 function SWEP:GetSwayAngles()
-    local swayamt = self:IsSwayEnabled() and self:GetSwayAmount() or 0
+    local swayamt = self:IsSwayEnabled() and self:GetSwayAmount() or self:GetForcedSwayAmount()
     local swayspeed = 1
 
     if swayamt <= 0 then return Angle(0, 0, 0) end

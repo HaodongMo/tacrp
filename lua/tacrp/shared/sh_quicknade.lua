@@ -8,6 +8,9 @@ TacRP.QuickNades = {
         Spoon = true,
         Icon = Material("TacRP/grenades/frag.png", "mips smooth"),
 
+        FullName = "Frag Grenade",
+        DetType = "Timed - 2 seconds",
+        Description = "Standard explosive grenade spraying shrapnel in a medium radius.\n\nTypically not lethal by itself, but can wound targets or flush them out of cover.",
         Category = "LETHAL",
         SortOrder = 1,
     },
@@ -20,6 +23,9 @@ TacRP.QuickNades = {
         Spoon = true,
         Icon = Material("TacRP/grenades/flashbang.png", "mips smooth"),
 
+        FullName = "Flashbang",
+        DetType = "Timed - 1.5 seconds",
+        Description = "Emits a bright flash and deafening bang that disorients targets (hence its name).\n\nSlows affected targets, and deals minor damage in a large radius.",
         Category = "UTILITY",
         SortOrder = 4,
     },
@@ -32,6 +38,9 @@ TacRP.QuickNades = {
         Spoon = true,
         Icon = Material("TacRP/grenades/smoke.png", "mips smooth"),
 
+        FullName = "Smoke Grenade",
+        DetType = "Timed - 2 seconds",
+        Description = "Emits a concealing cloud of smoke that lasts about 20 seconds.\n\nDeals no damage whatsoever, and is commonly used to cover an advance or to obscure a line of sight.",
         Category = "UTILITY",
         SortOrder = 5,
     },
@@ -45,6 +54,9 @@ TacRP.QuickNades = {
         Material = "models/tacint/weapons/v_models/smoke/gas-1",
         Icon = Material("TacRP/grenades/gas.png", "mips smooth"),
 
+        FullName = "CS Gas Grenade",
+        DetType = "Timed - 2 seconds",
+        Description = "Emits a cloud of tear gas that lasts about 15 seconds.\n\nAnyone caught within will take non-lethal lingering damage and have trouble keeping their weapon steady.\n\nIt is a chemical weapon banned by the Geneva Convention and is ABSOLUTELY NOT FART GAS.",
         Category = "UTILITY",
         SortOrder = 6,
     },
@@ -58,6 +70,9 @@ TacRP.QuickNades = {
         Material = "models/tacint/weapons/v_models/smoke/thermite-1",
         Icon = Material("TacRP/grenades/thermite.png", "mips smooth"),
 
+        FullName = "Thermite Grenade",
+        DetType = "Timed - 2 seconds",
+        Description = "Burns intensely for about 8 seconds, dealing damage within a small radius.\n\nWhile thermite is typically used to burn through materiel, it is also useful for area denial.",
         Category = "LETHAL",
         SortOrder = 2,
     },
@@ -74,6 +89,9 @@ TacRP.QuickNades = {
         SecretWeapon = "tacrp_c4_detonator",
         Icon = Material("TacRP/grenades/c4.png", "mips smooth"),
 
+        FullName = "C4 Charges",
+        DetType = "Remote Signal",
+        Description = "A brick of powerful explosives that can be touched off by a detonator remotely.\n\nC4 is remarkably inert, but the signalling device can be removed or destroyed, defusing the charge.",
         Category = "SPECIAL",
         SortOrder = 8,
     },
@@ -89,6 +107,9 @@ TacRP.QuickNades = {
         AdminOnly = true,
         Icon = Material("TacRP/grenades/nuke.png", "mips smooth"),
 
+        FullName = "Nuclear Device",
+        DetType = "Remote Signal",
+        Description = "Briefcase-sized micro nuclear bomb that can be touched off by a detonator.\n\nIts explosive outcome needs no description.",
         Category = "SPECIAL",
         SortOrder = 9,
     },
@@ -103,6 +124,9 @@ TacRP.QuickNades = {
         Spoon = false,
         Icon = Material("TacRP/grenades/breach.png", "mips smooth"),
 
+        FullName = "Breaching Charge",
+        DetType = "Timed - 2 seconds OR Remote",
+        Description = "Shaped charge made to bust through doors and weak walls.\n\nSmall blast radius, but will destroy any door it is attached to and hurt targets on the other side with its shockwave.\n\nWhen holding a detonator, the charge is configured to detonate remotely.",
         Category = "LETHAL",
         SortOrder = 3,
     },
@@ -120,6 +144,9 @@ TacRP.QuickNades = {
         Icon = Material("TacRP/grenades/rock.png", "mips smooth"),
         RequireStat = "ThrowRocks",
 
+        FullName = "Rock",
+        DetType = "Blunt Trauma",
+        Description = "Possibly the first weapon ever used by humans.\n\nUse as last resort, for ancient capital punishments, or for violent pranks.\n\nResourceful as you are, there's no telling what else you can pull out of your pants in a pinch...",
         Category = "SPECIAL",
         SortOrder = 7,
     },

@@ -197,6 +197,13 @@ local conVars = {
         default = "1",
         client = true,
     },
+    {
+        name = "gas_sway",
+        default = "6",
+        min = 0,
+        max = 10,
+        replicated = true,
+    },
 }
 
 local prefix = "tacrp_"
@@ -313,7 +320,6 @@ local function menu_client_ti(panel)
         text = "In dark mode, flashbangs turn your screen black instead of white, and mutes audio intead of ringing."
     })
 
-
     panel:AddControl("header", {
         description = "\nMiscellaneous",
     })
@@ -374,20 +380,6 @@ local function menu_server_ti(panel)
         label = "NPCs Get Random Attachments",
         command = "TacRP_npc_atts"
     })
-    panel:AddControl("slider", {
-        label = "Flashbang Slow",
-        command = "tacrp_flash_slow",
-        type = "float",
-        min = 0,
-        max = 1,
-    })
-    panel:AddControl("slider", {
-        label = "Smackdown Slow",
-        command = "tacrp_melee_slow",
-        type = "float",
-        min = 0,
-        max = 1,
-    })
 
     panel:AddControl("checkbox", {
         label = "Default Body Damage Cancel",
@@ -433,7 +425,27 @@ local function menu_balance_ti(panel)
         command = "TacRP_physbullet"
     })
 
-
+    panel:AddControl("slider", {
+        label = "Flashbang Slow",
+        command = "tacrp_flash_slow",
+        type = "float",
+        min = 0,
+        max = 1,
+    })
+    panel:AddControl("slider", {
+        label = "Smackdown Slow",
+        command = "tacrp_melee_slow",
+        type = "float",
+        min = 0,
+        max = 1,
+    })
+    panel:AddControl("slider", {
+        label = "CS Gas Sway",
+        command = "tacrp_gas_sway",
+        type = "float",
+        min = 0,
+        max = 10,
+    })
 end
 
 local clientmenus_ti = {

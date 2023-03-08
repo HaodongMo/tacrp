@@ -25,3 +25,14 @@ local function SV_TacRP_CollectGarbage()
 end
 
 timer.Create("TacRP Shield Model Garbage Collector", 5, 0, SV_TacRP_CollectGarbage)
+
+hook.Add("PlayerDeath", "TacRP_DeathCleanup", function(ply, inflictor, attacker)
+    ply:SetNWFloat("TacRPGasEnd", 0)
+    ply:SetNWFloat("TacRPStunStart", 0)
+    ply:SetNWFloat("TacRPStunDur", 0)
+
+    local timername = "tacrp_gas_" .. ply:EntIndex()
+    if timer.Exists(timername) then
+        timer.Remove(timername)
+    end
+end)

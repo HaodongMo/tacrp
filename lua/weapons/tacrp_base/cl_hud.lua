@@ -46,7 +46,7 @@ function SWEP:DoDrawCrosshair(x, y)
     cam.End3D()
 
     local spread = TacRP.GetFOVAcc(self)
-    local sway = self:IsSwayEnabled() and self:GetSwayAmount() or 0
+    local sway = self:IsSwayEnabled() and self:GetSwayAmount() or self:GetForcedSwayAmount()
 
     if tacfunc then
         tacfunc(self, x, y, spread, sway)

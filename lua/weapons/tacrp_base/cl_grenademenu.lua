@@ -165,4 +165,45 @@ function SWEP:DrawGrenadeHUD()
         surface.DrawText(qty)
     end
 
+    local w, h = ScreenScale(96), ScreenScale(128)
+    local tx, ty = scrw / 2 + r + ScreenScale(16), scrh / 2
+
+    surface.SetDrawColor(0, 0, 0, 200 * a)
+    TacRP.DrawCorneredBox(tx, ty - h * 0.5 - ScreenScale(28), w, ScreenScale(24), col)
+    surface.SetTextColor(255, 255, 255, a * 255)
+
+    local name = nade.FullName or nade.PrintName
+    surface.SetFont("TacRP_Myriad_Pro_16")
+    local name_w, name_h = surface.GetTextSize(name)
+    if name_w > w then
+        surface.SetFont("TacRP_Myriad_Pro_14")
+        name_w, name_h = surface.GetTextSize(name)
+    end
+    surface.SetTextPos(tx + w / 2 - name_w / 2, ty - h * 0.5 - ScreenScale(28) + ScreenScale(12) - name_h / 2)
+    surface.DrawText(name)
+
+    surface.SetDrawColor(0, 0, 0, 200 * a)
+    TacRP.DrawCorneredBox(tx, ty - h * 0.5, w, h, col)
+
+    surface.SetFont("TacRP_Myriad_Pro_8")
+    surface.SetTextPos(tx + ScreenScale(4), ty - h / 2 + ScreenScale(2))
+    surface.DrawText("FUSE:")
+
+    surface.SetFont("TacRP_Myriad_Pro_8")
+    surface.SetTextPos(tx + ScreenScale(4), ty - h / 2 + ScreenScale(10))
+    surface.DrawText(nade.DetType or "")
+
+    surface.SetFont("TacRP_Myriad_Pro_8")
+    surface.SetTextPos(tx + ScreenScale(4), ty - h / 2 + ScreenScale(22))
+    surface.DrawText("DESCRIPTION:")
+
+    -- Description
+
+    surface.SetFont("TacRP_Myriad_Pro_8")
+    local descmultiline = TacRP.MultiLineText(nade.Description or "", w - ScreenScale(7), "TacRP_Myriad_Pro_8")
+    surface.SetTextColor(255, 255, 255, a * 255)
+    for i, text in ipairs(descmultiline) do
+        surface.SetTextPos(tx + ScreenScale(4), ty - h / 2 + ScreenScale(30) + (i - 1) * ScreenScale(8))
+        surface.DrawText(text)
+    end
 end
