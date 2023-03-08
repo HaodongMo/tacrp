@@ -104,9 +104,11 @@ function SWEP:CreateCustomizeHUD()
         self:SavePreset()
     end
     bg.Paint = function(self2, w, h)
-        if !IsValid(self) or !IsValid(self:GetOwner()) or self:GetOwner():GetActiveWeapon() ~= self then
+        if !IsValid(self) or !IsValid(self:GetOwner()) or self:GetOwner():GetActiveWeapon() != self then
             self2:Remove()
-            gui.EnableScreenClicker(false)
+            if (self.GrenadeMenuAlpha or 0) != 1 then
+                gui.EnableScreenClicker(false)
+            end
             return
         end
 
@@ -125,7 +127,7 @@ function SWEP:CreateCustomizeHUD()
 
         surface.SetFont("TacRP_Myriad_Pro_12")
 
-        if self.Ammo ~= "" then
+        if self.Ammo != "" then
             local ammo_txt = language.GetPhrase(string.lower(self.Ammo) .. "_ammo")
             local ammo_w = surface.GetTextSize(ammo_txt)
 
@@ -654,7 +656,7 @@ function SWEP:CreateCustomizeHUD()
                         if a == 2 then
                             return b == 2
                         elseif b == 2 then
-                            return a ~= 2
+                            return a != 2
                         end
                         return math.abs(a) <= math.abs(b)
                     end)
@@ -684,7 +686,7 @@ function SWEP:CreateCustomizeHUD()
                     end
                 end
                 if oldbest == newbest then
-                    return #old ~= #new , #old < #new
+                    return #old != #new , #old < #new
                 else
                     return true, oldbest < newbest
                 end
@@ -740,7 +742,7 @@ function SWEP:CreateCustomizeHUD()
                 local value = self:GetValue(k.Value)
 
                 local orig = selftbl[k.Value]
-                if GetConVar("tacrp_arcade"):GetBool() and self.ArcadeStats and self.ArcadeStats[k.Value] ~= nil then
+                if GetConVar("tacrp_arcade"):GetBool() and self.ArcadeStats and self.ArcadeStats[k.Value] != nil then
                     orig = self.ArcadeStats[k.Value]
                 end
 
@@ -796,7 +798,7 @@ function SWEP:CreateCustomizeHUD()
 
                 if k.BetterFunction then
                     goodorbad, good = k.BetterFunction(orig, value)
-                elseif stat_base ~= stat_curr then
+                elseif stat_base != stat_curr then
                     if isnumber(stat_curr) then
                         good = stat_curr > stat_base
                         goodorbad = true
@@ -1143,7 +1145,9 @@ function SWEP:RemoveCustomizeHUD()
     if self.CustomizeHUD then
         self.CustomizeHUD:Remove()
 
-        gui.EnableScreenClicker(false)
+        if (self.GrenadeMenuAlpha or 0) != 1 then
+            gui.EnableScreenClicker(false)
+        end
     end
 end
 
