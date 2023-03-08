@@ -89,8 +89,8 @@ TacRP.QuickNades = {
         SecretWeapon = "tacrp_c4_detonator",
         Icon = Material("TacRP/grenades/c4.png", "mips smooth"),
 
-        FullName = "C4 Charges",
-        DetType = "Remote Signal",
+        FullName = "C4 Charge",
+        DetType = "Remote",
         Description = "A brick of powerful explosives that can be touched off by a detonator remotely.\n\nC4 is remarkably inert, but the signalling device can be removed or destroyed, defusing the charge.",
         Category = "SPECIAL",
         SortOrder = 8,
@@ -108,7 +108,7 @@ TacRP.QuickNades = {
         Icon = Material("TacRP/grenades/nuke.png", "mips smooth"),
 
         FullName = "Nuclear Device",
-        DetType = "Remote Signal",
+        DetType = "Remote",
         Description = "Briefcase-sized micro nuclear bomb that can be touched off by a detonator.\n\nIts explosive outcome needs no description.",
         Category = "SPECIAL",
         SortOrder = 9,
