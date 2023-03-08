@@ -446,6 +446,7 @@ function SWEP:CreateCustomizeHUD()
             Value = "AimDownSightsTime",
             Unit = "s",
             LowerIsBetter = true,
+            ValueCheck = "Scope",
         },
         {
             Name = "Muzzle Velocity",
@@ -540,7 +541,8 @@ function SWEP:CreateCustomizeHUD()
                 return math.min(100, math.Round(val * 100, 0))
             end,
             Unit = "%",
-            Value = "SightedSpeedMult"
+            Value = "SightedSpeedMult",
+            ValueCheck = "Scope",
         },
         {
             Name = "Reload Speed",
@@ -594,6 +596,7 @@ function SWEP:CreateCustomizeHUD()
             Value = "ScopedSway",
             LowerIsBetter = true,
             ConVarCheck = "tacrp_sway",
+            ValueCheck = "Scope",
         },
         {
             Name = "Crouching Sway",
@@ -751,6 +754,10 @@ function SWEP:CreateCustomizeHUD()
                 if k.ConVarCheck then
                     if !k.ConVar then k.ConVar = GetConVar(k.ConVarCheck) end
                     if k.ConVar:GetBool() == tobool(k.ConVarInvert) then continue end
+                end
+
+                if k.ValueCheck and self:GetValue(k.ValueCheck) != !k.ValueInvert then
+                    continue
                 end
 
                 local stat_base = 0
