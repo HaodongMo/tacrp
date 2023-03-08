@@ -134,12 +134,14 @@ function SWEP:DrawGrenadeHUD()
     draw.NoTexture()
     filledcircle(scrw / 2, scrh / 2, r, 32)
 
+    surface.SetDrawColor(150, 150, 150, a * 100)
+    draw.NoTexture()
     if currentind then
-        surface.SetDrawColor(150, 150, 150, a * 100)
-        draw.NoTexture()
         local i = currentind
         local d0 = 0 - arcdegrees * (i - 2)
         slicedcircle(scrw / 2, scrh / 2, r, 32, d0, d0 + arcdegrees)
+    else
+        filledcircle(scrw / 2, scrh / 2, r2, 32)
     end
 
     surface.SetDrawColor(0, 0, 0, a * 255)
