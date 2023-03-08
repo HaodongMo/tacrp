@@ -5,7 +5,7 @@ ATT.Description = "High yield powder improves damage retention past point blank.
 ATT.Pros = {"Minimum Range", "Muzzle Velocity"}
 ATT.Cons = {"Recoil", "Spread"}
 
-ATT.Category = "ammo_shotgun"
+ATT.Category = {"ammo_shotgun", "ammo_shotgun2"}
 
 ATT.SortOrder = 1
 
