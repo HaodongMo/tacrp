@@ -141,7 +141,7 @@ SWEP.ShootPitchVariance = 2.5 // amount to vary pitch by each shot
 // effects
 
 // the .qc attachment for the muzzle
-SWEP.QCA_Muzzle = 4
+SWEP.QCA_Muzzle = 1
 
 SWEP.MuzzleEffect = "muzzleflash_pistol"
 

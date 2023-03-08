@@ -17,22 +17,24 @@ function EFFECT:Init(data)
 
     if !IsValid(wep) or !wep.GetValue then return end
 
-    local speed = wep:GetValue("MuzzleVelocity") or data:GetScale()
     local start = (wep.GetTracerOrigin and wep:GetTracerOrigin()) or data:GetStart()
+    local diff = hit - start
+    local dist = diff:Length()
 
-    if speed > 0 then
-        self.Speed = speed
+    if GetConVar("tacrp_physbullet"):GetBool() then
+        self.Speed = math.max(wep:GetValue("MuzzleVelocity") or data:GetScale(), 5000)
+    else
+        self.Speed = math.max(wep:GetValue("MuzzleVelocity") or data:GetScale(), dist / 0.4)
+
     end
 
-    self.LifeTime = (hit - start):Length() / self.Speed
-
+    self.LifeTime = dist / self.Speed
     self.StartTime = UnPredictedCurTime()
     self.DieTime = UnPredictedCurTime() + math.max(self.LifeTime, self.LifeTime2)
 
     self.StartPos = start
     self.EndPos = hit
-
-    self.Dir = data:GetNormal()
+    self.Dir = diff:GetNormalized()
 end
 
 function EFFECT:Think()
@@ -63,7 +65,7 @@ function EFFECT:Render()
     local vel = self.Dir * self.Speed - LocalPlayer():GetVelocity()
 
     local dot = math.abs(EyeAngles():Forward():Dot(vel:GetNormalized()))
-    dot = math.Clamp(((dot * dot) - 0.25) * 5, 0, 1)
+    --dot = math.Clamp(((dot * dot) - 0.25) * 5, 0, 1)
     local headsize = size * dot * 2 -- * math.min(EyePos():DistToSqr(pos) / math.pow(2500, 2), 1)
     -- cam.Start3D()
 
@@ -73,10 +75,12 @@ function EFFECT:Render()
     render.SetMaterial(head)
     render.DrawSprite(endpos, headsize, headsize, col)
 
-    local tailpos = startpos
-    if (endpos - startpos):Length() > 512 then
-        tailpos = endpos - self.Dir * 512
-    end
+    -- local tailpos = startpos
+    -- if (endpos - startpos):Length() > 512 then
+    --     tailpos = endpos - self.Dir * 512
+    -- end
+    local tail = (self.Dir * math.min(self.Speed / 25, 512, (endpos - startpos):Length() - 64))
+
     render.SetMaterial(tracer)
-    render.DrawBeam(endpos, tailpos, size * 0.75, 0, 1, col)
+    render.DrawBeam(endpos, endpos - tail, size * 0.75, 0, 1, col)
 end

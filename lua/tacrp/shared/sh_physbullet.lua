@@ -414,24 +414,20 @@ function TacRP:DrawPhysBullets()
         local vel = i.Vel - LocalPlayer():GetVelocity()
 
         local dot = math.abs(EyeAngles():Forward():Dot(vel:GetNormalized()))
-        dot = math.Clamp(((dot * dot) - 0.5) * 5, 0, 1)
+        -- dot = math.Clamp(((dot * dot) - 0.25) * 5, 0, 1)
         local headsize = size * dot * 2 -- * math.min(EyePos():DistToSqr(pos) / math.pow(2500, 2), 1)
 
-        -- cam.Start3D()
-
         local col = i.Color or Color(255, 225, 200)
-        -- local col = Color(255, 225, 200)
 
         render.SetMaterial(head)
         render.DrawSprite(pos, headsize, headsize, col)
 
         render.SetMaterial(tracer)
 
-        local tail = (vec:GetNormalized() * math.min(vel:Length() * 0.5, 512, i.Travelled - 64))
+        local tail = (vec:GetNormalized() * math.min(vel:Length() / 25, 512, i.Travelled - 64))
 
         render.DrawBeam(pos, pos + tail, size * 0.75, 0, 1, col)
 
-        -- cam.End3D()
     end
     cam.End3D()
 end
