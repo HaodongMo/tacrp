@@ -199,6 +199,11 @@ local conVars = {
         userinfo = true,
     },
     {
+        name = "nademenu_click",
+        default = "1",
+        client = true,
+    },
+    {
         name = "gas_sway",
         default = "6",
         min = 0,
@@ -274,11 +279,18 @@ local function menu_client_ti(panel)
         command = "tacrp_minhud"
     })
     panel:AddControl("checkbox", {
-        label = "Quickthrow Radial menu",
+        label = "Quickthrow Radial Menu",
         command = "tacrp_nademenu"
     })
     panel:AddControl("label", {
         text = "When enabled, +grenade2 brings up a menu to select grenades. Otherwise it switches between them."
+    })
+    panel:AddControl("checkbox", {
+        label = "Radial Menu Click to Throw",
+        command = "tacrp_nademenu_click"
+    })
+    panel:AddControl("label", {
+        text = "When enabled, left click and right click in the menu performs an overhand and underhand throw of the highlighted grenade."
     })
     panel:AddControl("checkbox", {
         label = "Use Meters instead of HU",

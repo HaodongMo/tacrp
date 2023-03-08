@@ -54,7 +54,7 @@ function SWEP:ThrowGrenade()
 
     local amount = 1
 
-    if !self:GetOwner():KeyDown(IN_GRENADE1) and !nade.OverhandOnly then
+    if !nade.OverhandOnly and (self.GrenadeThrowOverride == true or (self.GrenadeThrowOverride == nil and !self:GetOwner():KeyDown(IN_GRENADE1))) then
         self:PlayAnimation("throw_grenade_underhand", self:GetValue("QuickNadeTimeMult"), true, true)
 
         force = force / 2
@@ -69,6 +69,8 @@ function SWEP:ThrowGrenade()
         ang:RotateAroundAxis(ang:Right(), 5)
         self:PlayAnimation("throw_grenade", self:GetValue("QuickNadeTimeMult"), true, true)
     end
+
+    self.GrenadeThrowOverride = nil
 
     if CLIENT then return end
 
