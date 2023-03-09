@@ -23,7 +23,7 @@ function SWEP:Think()
         if self:GetBurstCount() >= -self:GetCurrentFiremode() then
             self:SetBurstCount(0)
             self:SetNextPrimaryFire(CurTime() + self:GetValue("PostBurstDelay"))
-        elseif self:GetBurstCount() > 0 and self:GetBurstCount() < -self:GetCurrentFiremode() then
+        elseif self:GetBurstCount() > 0 and self:GetBurstCount() < -self:GetCurrentFiremode() and IsFirstTimePredicted() then
             self:PrimaryAttack()
         end
     else
