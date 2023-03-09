@@ -303,15 +303,6 @@ local function menu_client_ti(panel)
     panel:AddControl("label", {
         text = "Vignette intensity is based on amount of accumulated recoil."
     })
-    -- panel:AddControl("slider", {
-    --     label = "Spawnmenu Sub-categories",
-    --     command = "subcats",
-    --     min = 0,
-    --     max = 2,
-    -- })
-    -- panel:AddControl("label", {
-    --     text = "1 - based on weapon type; 2 - based on tier."
-    -- })
 
     panel:AddControl("header", {
         description = "\nPreference",
@@ -350,6 +341,13 @@ local function menu_client_ti(panel)
     panel:AddControl("checkbox", {
         label = "Immersive Ammo Names (Requires map reload)",
         command = "tacrp_ammonames"
+    })
+    panel:AddControl("checkbox", {
+        label = "Spawnmenu Subcategories",
+        command = "tacrp_subcats"
+    })
+    panel:AddControl("label", {
+        text = "Separate weapons based on their type (like Sidearm, Assault Rifle, Shotgun). Use ConCommand \"spawnmenu_reload\" to take effect."
     })
 end
 
