@@ -43,11 +43,11 @@ SWEP.BodyDamageMultipliers = {
     [HITGROUP_HEAD] = 5,
     [HITGROUP_CHEST] = 1.5,
     [HITGROUP_STOMACH] = 1,
-    [HITGROUP_LEFTARM] = 1,
-    [HITGROUP_RIGHTARM] = 1,
-    [HITGROUP_LEFTLEG] = 0.9,
-    [HITGROUP_RIGHTLEG] = 0.9,
-    [HITGROUP_GEAR] = 0.9
+    [HITGROUP_LEFTARM] = 0.9,
+    [HITGROUP_RIGHTARM] = 0.9,
+    [HITGROUP_LEFTLEG] = 0.75,
+    [HITGROUP_RIGHTLEG] = 0.75,
+    [HITGROUP_GEAR] = 0.75
 }
 
 SWEP.MuzzleVelocity = 32000
@@ -58,7 +58,7 @@ SWEP.Firemode = 1
 
 SWEP.RPM = 240
 
-SWEP.Spread = 0.0000
+SWEP.Spread = 0.0002
 
 
 
@@ -76,6 +76,7 @@ SWEP.RecoilKick = 5
 
 SWEP.RecoilSpreadPenalty = 0.0075
 SWEP.HipFireSpreadPenalty = 0.075
+SWEP.PeekPenaltyFraction = 0.1
 
 SWEP.CanBlindFire = true
 
@@ -106,7 +107,12 @@ SWEP.BlindFireAng = Angle(0, 5, 0)
 SWEP.BlindFirePos = Vector(3, -2, -5)
 
 SWEP.SprintAng = Angle(30, -15, 0)
-SWEP.SprintPos = Vector(5, 0, -2)
+SWEP.SprintPos = Vector(7, -3, -2)
+
+SWEP.SprintMidPoint = {
+    Pos = Vector(4, 5, 2),
+    Ang = Angle(0, -2, -45)
+}
 
 SWEP.SightAng = Angle(0, -0.2, 0)
 SWEP.SightPos = Vector(-3.81, -7.5, -2.7)
