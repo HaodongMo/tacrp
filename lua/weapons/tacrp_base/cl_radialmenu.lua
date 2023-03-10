@@ -417,8 +417,12 @@ function SWEP:DrawBlindFireHUD()
         if !lastmenu_bf then
             gui.EnableScreenClicker(true)
             lastmenu_bf = true
-            bf_suicidelock = self:GetBlindFireMode() == TacRP.BLINDFIRE_KYS and 0 or 1
-            bf_funnyline = nil
+            if self:GetBlindFireMode() == TacRP.BLINDFIRE_KYS then
+                bf_suicidelock = 0
+            else
+                bf_suicidelock = 1
+                bf_funnyline = nil
+            end
         end
 
         if mousedist > r2 then
