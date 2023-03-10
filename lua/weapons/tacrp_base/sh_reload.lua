@@ -8,7 +8,7 @@ function SWEP:Reload()
         return
     end
 
-    if self:GetValue("Firemodes") and self:GetOwner():KeyDown(IN_USE) then
+    if self:GetValue("Firemodes") and self:GetOwner():KeyDown(IN_USE) and self:GetFiremodeAmount() > 1 then
         self:SwitchFiremode()
         self:EmitSound("tacrp/weapons/pdw/fire_select-1.wav", 75, 100, 1, CHAN_ITEM)
         return
