@@ -1,12 +1,12 @@
 AddCSLuaFile()
 
 ENT.Base                     = "tacrp_proj_base"
-ENT.PrintName                = "RPG-7 Ratshot"
+ENT.PrintName                = "40mm Ratshot"
 ENT.Spawnable                = false
 
-ENT.Model                    = "models/weapons/tacint/rocket_deployed.mdl"
+ENT.Model                    = "models/weapons/tacint/grenade_40mm.mdl"
 
-ENT.IsRocket = true // projectile has a booster and will not drop.
+ENT.IsRocket = false // projectile has a booster and will not drop.
 
 ENT.InstantFuse = true // projectile is armed immediately after firing.
 ENT.RemoteFuse = false // allow this projectile to be triggered by remote detonator.
@@ -19,14 +19,13 @@ ENT.ExplodeUnderwater = true
 ENT.Delay = 0.15
 ENT.SafetyFuse = 0
 
-ENT.AudioLoop = "TacRP/weapons/rpg7/rocket_flight-1.wav"
+ENT.ExplodeSounds = {
+    "^TacRP/weapons/grenade/frag_explode-1.wav",
+    "^TacRP/weapons/grenade/frag_explode-2.wav",
+    "^TacRP/weapons/grenade/frag_explode-3.wav",
+}
 
 ENT.SmokeTrail = true
-
-ENT.FlareColor = Color(75, 175, 255)
-
-
-DEFINE_BASECLASS(ENT.Base)
 
 function ENT:PhysicsCollide(data, collider)
     if self:Impact(data, collider) then
@@ -34,30 +33,6 @@ function ENT:PhysicsCollide(data, collider)
     end
 
     BaseClass.PhysicsCollide(self, data, collider)
-end
-
-function ENT:Think()
-    --[[]
-    if self.SpawnTime + self.SafetyFuse < CurTime() and (self.NextTraceTime or 0) < CurTime() then
-        self.NextTraceTime = CurTime() + 0.1
-
-        local dir = self:GetVelocity():GetNormalized()
-        local deg = math.Clamp(1.5 - dir:Cross(Vector(0, 0, -1)):Length(), 0.5, 1)
-
-        local tr = util.TraceHull({
-            start = self:GetPos(),
-            endpos = self:GetPos() + dir * (1024 * deg),
-            filter = self,
-            mins = Vector(-16, -16, -8),
-            maxs = Vector(16, 16, 8)
-        })
-        if tr.Hit then
-            self:PreDetonate()
-        end
-    end
-    ]]
-
-    BaseClass.Think(self)
 end
 
 function ENT:Impact(data, collider)
@@ -79,7 +54,7 @@ function ENT:Impact(data, collider)
             dmginfo:SetAttacker(attacker)
             dmginfo:SetInflictor(self)
             dmginfo:SetDamageType(DMG_CRUSH)
-            dmginfo:SetDamage(250 * (self.NPCDamage and 0.5 or 1))
+            dmginfo:SetDamage(120 * (self.NPCDamage and 0.5 or 1))
             dmginfo:SetDamageForce(data.OurOldVelocity * 25)
             dmginfo:SetDamagePosition(data.HitPos)
             data.HitEntity:TakeDamageInfo(dmginfo)
@@ -87,18 +62,15 @@ function ENT:Impact(data, collider)
 
         self:EmitSound("weapons/rpg/shotdown.wav", 80)
 
-        for i = 1, 4 do
-            local prop = ents.Create("prop_physics")
-            prop:SetPos(self:GetPos())
-            prop:SetAngles(self:GetAngles())
-            prop:SetModel("models/weapons/tacint/rpg7_shrapnel_p" .. i .. ".mdl")
-            prop:Spawn()
-            prop:GetPhysicsObject():SetVelocityInstantaneous(data.OurNewVelocity * 0.5 + VectorRand() * 75)
-            prop:SetCollisionGroup(COLLISION_GROUP_DEBRIS)
+        local prop = ents.Create("prop_physics")
+        prop:SetPos(self:GetPos())
+        prop:SetAngles(self:GetAngles())
+        prop:SetModel("models/weapons/tacint/grenade_40mm.mdl")
+        prop:Spawn()
+        prop:GetPhysicsObject():SetVelocityInstantaneous(data.OurNewVelocity * 0.5 + VectorRand() * 75)
+        prop:SetCollisionGroup(COLLISION_GROUP_DEBRIS)
 
-            SafeRemoveEntityDelayed(prop, 3)
-        end
-
+        SafeRemoveEntityDelayed(prop, 3)
         self:Remove()
         return true
     end
@@ -114,9 +86,9 @@ function ENT:Detonate()
     if self:WaterLevel() > 0 then
         util.Effect("WaterSurfaceExplosion", fx)
     else
-        fx:SetMagnitude(8)
-        fx:SetScale(2)
-        fx:SetRadius(8)
+        fx:SetMagnitude(4)
+        fx:SetScale(1.5)
+        fx:SetRadius(4)
         fx:SetNormal(dir)
         util.Effect("Sparks", fx)
 
@@ -127,9 +99,9 @@ function ENT:Detonate()
             mins = Vector(-16, -16, -8),
             maxs = Vector(16, 16, 8)
         })
-        fx:SetMagnitude(4)
+        fx:SetMagnitude(2)
         fx:SetScale(1)
-        fx:SetRadius(2)
+        fx:SetRadius(1)
         fx:SetNormal(dir)
         for i = 1, math.floor(tr.Fraction * 6) do
             fx:SetOrigin(tr.StartPos + tr.Normal * (i / 6) * 2048)
@@ -159,16 +131,16 @@ function ENT:Detonate()
     for _, ent in pairs(ents.FindInCone(src, dir, 2048, 0.707)) do
         local tr = util.QuickTrace(src, ent:GetPos() - src, {self, ent})
         if tr.Fraction == 1 then
-            dmg:SetDamage(150 * math.Rand(0.75, 1) * Lerp((ent:GetPos():DistToSqr(src) / 4194304) ^ 0.5, 1, 0.25) * (self.NPCDamage and 0.5 or 1))
+            dmg:SetDamage(120 * math.Rand(0.75, 1) * Lerp((ent:GetPos():DistToSqr(src) / 4194304) ^ 0.5, 1, 0.2) * (self.NPCDamage and 0.5 or 1))
             if !ent:IsOnGround() then dmg:ScaleDamage(1.5) end
             ent:TakeDamageInfo(dmg)
         end
     end
 
-    util.BlastDamage(self, attacker, src, 256, 50)
+    util.BlastDamage(self, attacker, src, 196, 35)
 
-    self:EmitSound("TacRP/weapons/rpg7/explode.wav", 125, 100)
-    self:EmitSound("physics/metal/metal_box_break1.wav", 100, 200)
+    self:EmitSound(table.Random(self.ExplodeSounds), 125)
+    self:EmitSound("physics/metal/metal_box_break1.wav", 100, 190)
 
     self:Remove()
 end

@@ -12,7 +12,7 @@ ATT.SortOrder = 2.5
 
 ATT.ShootEnt = false
 
-ATT.InstalledElements = {"heat"}
+ATT.InstalledElements = {"buck"} --{"heat"}
 
 ATT.NoRanger = false
 

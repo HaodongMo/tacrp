@@ -1,7 +1,7 @@
 ATT.PrintName = "Concussion" --"LVG"
 ATT.FullName = "40mm Concussion Grenades"
 
-ATT.Icon = Material("entities/tacrp_att_ammo_40mm_lvg.png", "mips smooth")
+ATT.Icon = Material("entities/tacrp_att_ammo_40mm_concussion.png", "mips smooth")
 ATT.Description = "Low velocity grenade made to incapacitate targets with indirect fire."
 ATT.Pros = {"Ricochet on impact", "Stuns targets"}
 ATT.Cons = {"Muzzle Velocity", "Damage"}
