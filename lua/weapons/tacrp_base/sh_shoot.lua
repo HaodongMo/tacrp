@@ -2,7 +2,7 @@ function SWEP:StillWaiting(cust)
     if self:GetNextPrimaryFire() > CurTime() then return true end
     if self:GetNextSecondaryFire() > CurTime() then return true end
     if self:GetAnimLockTime() > CurTime() then return true end
-    if self:GetBlindFireFinishTime() > CurTime() then return true end
+    if !cust and self:GetBlindFireFinishTime() > CurTime() then return true end
     if !cust and self:GetCustomize() then return true end
     if self:GetPrimedGrenade() then return true end
 

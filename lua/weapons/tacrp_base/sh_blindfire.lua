@@ -295,7 +295,7 @@ function SWEP:ToggleBlindFire(bf, left)
 
         if bf != TacRP.BLINDFIRE_NONE then
             self:ScopeToggle(0)
-            self:SetBlindFireFinishTime(CurTime() + (bf == TacRP.BLINDFIRE_KYS and 0.75 or 0.25))
+            self:SetBlindFireFinishTime(CurTime() + (bf == TacRP.BLINDFIRE_KYS and 0.8 or 0.3))
         end
 
         self:ToggleBoneMods(bf)
@@ -319,7 +319,7 @@ function SWEP:ToggleBlindFire(bf, left)
 
     self:SetShouldHoldType()
 
-    if self:StillWaiting() then self:IdleAtEndOfAnimation() return end
+    if self:StillWaiting(true) then self:IdleAtEndOfAnimation() return end
 
     self:Idle()
 end
