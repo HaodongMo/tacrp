@@ -89,8 +89,8 @@ SWEP.SightedSpeedMult = 0.25 + 0.1
 SWEP.MeleeSpeedMult = 0.5
 SWEP.ReloadSpeedMult = 0.5
 
-SWEP.AimDownSightsTime = 0.325
-SWEP.SprintToFireTime = 0.3
+SWEP.AimDownSightsTime = 0.35
+SWEP.SprintToFireTime = 0.33
 
 // hold types
 

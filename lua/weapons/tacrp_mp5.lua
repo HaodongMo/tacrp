@@ -38,7 +38,7 @@ SWEP.Range_Max = 3000 // distance at which we drop to minimum damage
 SWEP.Penetration = 4 // units of metal this weapon can penetrate
 
 SWEP.BodyDamageMultipliers = {
-    [HITGROUP_HEAD] = 3,
+    [HITGROUP_HEAD] = 2.5,
     [HITGROUP_CHEST] = 1.25,
     [HITGROUP_STOMACH] = 1,
     [HITGROUP_LEFTARM] = 1,
@@ -74,6 +74,7 @@ SWEP.RecoilVisualKick = 0.5
 SWEP.RecoilKick = 2.5
 
 SWEP.RecoilSpreadPenalty = 0.001 // extra spread per one unit of recoil
+SWEP.HipFireSpreadPenalty = 0.025
 
 SWEP.CanBlindFire = true
 
