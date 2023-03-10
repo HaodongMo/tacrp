@@ -60,6 +60,9 @@ local function slicedcircle(x, y, radius, seg, ang0, ang1)
     surface.DrawPoly(cir)
 end
 
+SWEP.GrenadeMenuAlpha = 0
+SWEP.BlindFireMenuAlpha = 0
+
 local currentnade
 local currentind
 local lastmenu
@@ -87,7 +90,7 @@ function SWEP:DrawGrenadeHUD()
         mouseangle = mouseangle + 360
     end
 
-    if self:GetOwner():KeyDown(IN_GRENADE2) and !self:GetPrimedGrenade() then
+    if self:GetOwner():KeyDown(IN_GRENADE2) and !self:GetPrimedGrenade() and self.BlindFireMenuAlpha == 0 then
         self.GrenadeMenuAlpha = math.Approach(self.GrenadeMenuAlpha, 1, 15 * ft)
         if !lastmenu then
             gui.EnableScreenClicker(true)
@@ -288,15 +291,230 @@ function SWEP:DrawGrenadeHUD()
     end
 end
 
+local mat_none = Material("tacrp/blindfire/none.png", "smooth")
+local mat_wall = Material("tacrp/blindfire/wall.png", "smooth")
+local bf_slices = {
+    {TacRP.BLINDFIRE_RIGHT, mat_wall, 270},
+    {TacRP.BLINDFIRE_KYS, Material("tacrp/blindfire/suicide.png", "smooth"), 0},
+    {TacRP.BLINDFIRE_LEFT, mat_wall, 90},
+    {TacRP.BLINDFIRE_UP, mat_wall, 0},
+}
+local bf_slices2 = {
+    {TacRP.BLINDFIRE_RIGHT, mat_wall, 270},
+    {TacRP.BLINDFIRE_LEFT, mat_wall, 90},
+    {TacRP.BLINDFIRE_UP, mat_wall, 0},
+}
+local bf_slices3 = {
+    {TacRP.BLINDFIRE_RIGHT, mat_wall, 270},
+    {TacRP.BLINDFIRE_NONE, mat_none, 0},
+    {TacRP.BLINDFIRE_LEFT, mat_wall, 90},
+    {TacRP.BLINDFIRE_UP, mat_wall, 0},
+}
+local lastmenu_bf
+local bf_suicidelock
+local bf_funnyline
+local bf_lines = {
+    "Go ahead, see if I care.",
+    "Why not just killbind?",
+    "But you have so much to live for!",
+    "Just like Hemingway, eh?",
+    "... NOW!",
+    "DO IT!",
+    "Now THIS is realism.",
+    "See you in the next life!",
+    "Time to commit a little insurance fraud.",
+    "Don't give them the satisfaction.",
+    "Why not jump off a building instead?",
+    "Ripperoni in pepperoni.",
+    "F",
+    "L + ratio + you're a minge + touch grass",
+    "You serve NO PURPOSE!",
+    "type unbindall in console",
+    "Citizens aren't supposed to have guns.",
+    "I have decided that I want to die.",
+    "What's the point?",
+    "eh",
+    "not worth",
+    "Just like Hitler.",
+}
+
+local function canhighlight(self, slice)
+    if !self:GetValue("CanBlindFire") and self:GetValue("CanSuicide") then return slice[1] == TacRP.BLINDFIRE_NONE or slice[1] == TacRP.BLINDFIRE_KYS end
+    return true
+end
+
+function SWEP:DrawBlindFireHUD()
+    if !GetConVar("tacrp_blindfiremenu"):GetBool() then return end
+    local nocenter = GetConVar("tacrp_blindfiremenu_nocenter"):GetBool()
+    local nosuicide = nocenter or GetConVar("tacrp_idunwannadie"):GetBool()
+
+    -- adapted from tfa vox radial menu
+    local ft = FrameTime()
+    local scrw = ScrW()
+    local scrh = ScrH()
+    local r = ScreenScale(72)
+    local r2 = ScreenScale(24)
+    local sg = ScreenScale(32)
+    local ri = r * 0.667
+    local s = 45
+    local slices = bf_slices
+    if nocenter then
+        slices = bf_slices3
+    elseif nosuicide then
+        slices = bf_slices2
+        s = 90
+    end
+    local arcdegrees = 360 / #slices
+    local d = 360 - s
+
+    local cursorx, cursory = input.GetCursorPos()
+    local mouseangle = math.deg(math.atan2(cursorx - scrw / 2, cursory - scrh / 2))
+    local mousedist = math.sqrt(math.pow(cursorx - scrw / 2, 2) + math.pow(cursory - scrh / 2, 2))
+    if #slices == 3 then
+        mouseangle = math.NormalizeAngle(360 - mouseangle + arcdegrees) -- ???
+    else
+        mouseangle = math.NormalizeAngle(360 - (mouseangle - s) + arcdegrees)
+    end
+    if mouseangle < 0 then
+        mouseangle = mouseangle + 360
+    end
+
+    if self:GetOwner():KeyDown(IN_ZOOM) and self:CheckBlindFire(true) and self.GrenadeMenuAlpha == 0 then
+        self.BlindFireMenuAlpha = math.Approach(self.BlindFireMenuAlpha, 1, 15 * ft)
+        if !lastmenu_bf then
+            gui.EnableScreenClicker(true)
+            lastmenu_bf = true
+            bf_suicidelock = 3
+            bf_funnyline = nil
+        end
+
+        if mousedist > r2 then
+            local i = math.floor( mouseangle / arcdegrees ) + 1
+            currentind = i
+        else
+            currentind = 0
+        end
+    else
+        self.BlindFireMenuAlpha = math.Approach(self.BlindFireMenuAlpha, 0, -10 * ft)
+        if lastmenu_bf then
+            if !self:GetCustomize() then
+                gui.EnableScreenClicker(false)
+            end
+            if (!nocenter or currentind > 0) and (nosuicide or bf_suicidelock == 0 or currentind != 2) then
+                net.Start("tacrp_toggleblindfire")
+                    net.WriteUInt(currentind > 0 and slices[currentind][1] or TacRP.BLINDFIRE_NONE, TacRP.BlindFireNetBits)
+                net.SendToServer()
+            end
+
+            lastmenu_bf = false
+        end
+    end
+
+    if self.BlindFireMenuAlpha <= 0 then
+        return
+    end
+
+    local a = self.BlindFireMenuAlpha
+    local col = Color(255, 255, 255, 255 * a)
+
+    surface.DrawCircle(scrw / 2, scrh / 2, r, 255, 255, 255, a * 255)
+
+    surface.SetDrawColor(0, 0, 0, a * 200)
+    draw.NoTexture()
+    filledcircle(scrw / 2, scrh / 2, r, 32)
+
+    if currentind != nil and canhighlight(self, slices[currentind]) then
+        surface.SetDrawColor(150, 150, 150, a * 100)
+        draw.NoTexture()
+        if currentind > 0 then
+            if !nosuicide and currentind == 2 and bf_suicidelock > 0 then
+                surface.SetDrawColor(150, 50, 50, a * 100)
+            end
+            local d0 = -s - arcdegrees * (currentind - 2)
+            slicedcircle(scrw / 2, scrh / 2, r, 32, d0, d0 + arcdegrees)
+        else
+            filledcircle(scrw / 2, scrh / 2, r2, 32)
+        end
+    end
+
+    surface.SetDrawColor(0, 0, 0, a * 255)
+    surface.DrawCircle(scrw / 2, scrh / 2, r2, 255, 255, 255, a * 255)
+
+    for i = 1, #slices do
+        local rad = math.rad( d + arcdegrees * 0.5 )
+
+        surface.SetDrawColor(255, 255, 255, a * 255)
+        surface.DrawLine(
+            scrw / 2 + math.cos(math.rad(d)) * r2,
+            scrh / 2 - math.sin(math.rad(d)) * r2,
+            scrw / 2 + math.cos(math.rad(d)) * r,
+            scrh / 2 - math.sin(math.rad(d)) * r)
+
+        local nadex, nadey = scrw / 2 + math.cos(rad) * ri, scrh / 2 - math.sin(rad) * ri
+
+        if !canhighlight(self, slices[i]) or (!nosuicide and i == 2 and bf_suicidelock > 0) then
+            surface.SetDrawColor(150, 150, 150, a * 200)
+        end
+
+        surface.SetMaterial(slices[i][2])
+        surface.DrawTexturedRectRotated(nadex, nadey, sg, sg, slices[i][3])
+
+        d = d - arcdegrees
+    end
+
+    if !nocenter then
+        surface.SetDrawColor(255, 255, 255, a * 255)
+        surface.SetMaterial(mat_none)
+        surface.DrawTexturedRectRotated(scrw / 2, scrh / 2, ScreenScale(28), ScreenScale(28), 0)
+    end
+
+    if !nosuicide and currentind == 2 then
+
+        local w, h = ScreenScale(96), ScreenScale(24)
+        local tx, ty = scrw / 2, scrh / 2 + r + ScreenScale(4)
+
+        surface.SetDrawColor(0, 0, 0, 200 * a)
+        TacRP.DrawCorneredBox(tx - w / 2, ty, w, h, col)
+        surface.SetTextColor(255, 255, 255, a * 255)
+
+        surface.SetFont("TacRP_Myriad_Pro_10")
+        surface.SetTextColor(255, 255, 255, 255 * a)
+        local t1 = "Shoot Yourself"
+        local t1_w = surface.GetTextSize(t1)
+        surface.SetTextPos(tx - t1_w / 2, ty + ScreenScale(2))
+        surface.DrawText(t1)
+
+        surface.SetFont("TacRP_Myriad_Pro_6")
+        local t2 = bf_funnyline or ""
+        if bf_suicidelock > 0 then
+            surface.SetFont("TacRP_Myriad_Pro_8")
+            t2 = "[" .. TacRP.GetBind("attack") .. "] x" .. bf_suicidelock .. " - Unlock"
+        elseif !bf_funnyline then
+            bf_funnyline = bf_lines[math.random(1, #bf_lines)]
+        end
+        local t2_w = surface.GetTextSize(t2)
+        surface.SetTextPos(tx - t2_w / 2, ty + ScreenScale(14))
+        surface.DrawText(t2)
+
+    end
+end
+
 hook.Add("VGUIMousePressed", "tacrp_grenademenu", function(pnl, mousecode)
     local wpn = LocalPlayer():GetActiveWeapon()
-    if !(LocalPlayer():Alive() and IsValid(wpn) and wpn.ArcticTacRP and !wpn:StillWaiting() and (wpn.GrenadeMenuAlpha or 0) == 1) then return end
-    if !GetConVar("tacrp_nademenu_click"):GetBool() or !currentnade or (mousecode != MOUSE_RIGHT and mousecode != MOUSE_LEFT) then return end
-    local under = (mousecode == MOUSE_RIGHT)
-    wpn.GrenadeThrowOverride = under
-    net.Start("tacrp_togglenade")
-        net.WriteUInt(currentnade.Index, 4)
-        net.WriteBool(true)
-        net.WriteBool(under)
-    net.SendToServer()
+    if !(LocalPlayer():Alive() and IsValid(wpn) and wpn.ArcticTacRP and !wpn:StillWaiting()) then return end
+    if wpn.GrenadeMenuAlpha == 1 then
+        if !GetConVar("tacrp_nademenu_click"):GetBool() or !currentnade or (mousecode != MOUSE_RIGHT and mousecode != MOUSE_LEFT) then return end
+        local under = (mousecode == MOUSE_RIGHT)
+        wpn.GrenadeThrowOverride = under
+        net.Start("tacrp_togglenade")
+            net.WriteUInt(currentnade.Index, 4)
+            net.WriteBool(true)
+            net.WriteBool(under)
+        net.SendToServer()
+    elseif wpn.BlindFireMenuAlpha == 1 then
+        if mousecode == MOUSE_LEFT and currentind == 2 then
+            bf_suicidelock = bf_suicidelock - 1
+        end
+    end
+
 end)

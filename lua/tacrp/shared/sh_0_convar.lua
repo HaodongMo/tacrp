@@ -204,11 +204,29 @@ local conVars = {
         client = true,
     },
     {
+        name = "blindfiremenu",
+        default = "1",
+        client = true,
+        userinfo = true,
+    },
+    {
+        name = "blindfiremenu_nocenter",
+        default = "0",
+        client = true,
+        userinfo = true,
+    },
+    {
         name = "gas_sway",
         default = "6",
         min = 0,
         max = 10,
         replicated = true,
+    },
+    {
+        name = "idunwannadie",
+        default = "0",
+        client = true,
+        userinfo = true,
     },
 }
 
@@ -286,11 +304,25 @@ local function menu_client_ti(panel)
         text = "When enabled, +grenade2 brings up a menu to select grenades. Otherwise it switches between them."
     })
     panel:AddControl("checkbox", {
-        label = "Radial Menu Click to Throw",
+        label = "Quickthrow Menu Clicking",
         command = "tacrp_nademenu_click"
     })
     panel:AddControl("label", {
-        text = "When enabled, left click and right click in the menu performs an overhand and underhand throw of the highlighted grenade."
+        text = "When enabled, left click and right click in the quickthrow menu performs an overhand and underhand throw of the highlighted grenade."
+    })
+    panel:AddControl("checkbox", {
+        label = "Blindfire Radial Menu",
+        command = "tacrp_blindfiremenu"
+    })
+    panel:AddControl("label", {
+        text = "When enabled, +zoom brings up a menu to change blindfire type. Otherwise it sets blindfire based on movement keys pressed."
+    })
+    panel:AddControl("checkbox", {
+        label = "Blindfire Menu Empty Center",
+        command = "tacrp_blindfiremenu_nocenter"
+    })
+    panel:AddControl("label", {
+        text = "When enabled, center option does nothing, and bottom option will cancel blindfire instead.\nThis will hide the option to shoot yourself."
     })
     panel:AddControl("checkbox", {
         label = "Use Meters instead of HU",
@@ -329,6 +361,13 @@ local function menu_client_ti(panel)
 
     panel:AddControl("header", {
         description = "\nMiscellaneous",
+    })
+    panel:AddControl("checkbox", {
+        label = "Disable Suicide Mode",
+        command = "tacrp_idunwannadie"
+    })
+    panel:AddControl("label", {
+        text = "Hides the option to shoot yourself from the radial menu, and disables the SHIFT+ALT+B key combo."
     })
     panel:AddControl("checkbox", {
         label = "Draw Holstered Weapons",

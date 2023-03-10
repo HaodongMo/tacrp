@@ -274,19 +274,24 @@ function SWEP:SetBlindFireMode(mode)
     self:SetBlindFireRight(bfmode[mode][3])
 end
 
-function SWEP:ToggleBlindFire(bf, left)
-    left = left or false
-    if (!self:GetValue("CanBlindFire") and !self:GetValue("CanSuicide")) or (self:GetValue("CanSuicide") and bf != TacRP.BLINDFIRE_KYS and bf != TacRP.BLINDFIRE_NONE and bf != false) then return end
-
-    if isbool(bf) and bf == self:GetBlindFire() and left == self:GetBlindFireLeft() then return end
-    if isnumber(bf) and bf == self:GetBlindFireMode() then return end
-    if bf and (self:GetIsSprinting()
+function SWEP:CheckBlindFire(suicide)
+    if !self:GetValue("CanBlindFire") and (!suicide or !self:GetValue("CanSuicide")) then return false end
+    if (self:GetIsSprinting()
             or self:GetAnimLockTime() > CurTime()
             or self:GetPrimedGrenade()
             or self:IsInScope()
             or self:GetSafe()) then
-        return
+        return false
     end
+    return true
+end
+
+function SWEP:ToggleBlindFire(bf, left)
+    left = left or false
+    local kms = bf == TacRP.BLINDFIRE_KYS or bf == TacRP.BLINDFIRE_NONE or bf == false
+    if !self:CheckBlindFire(kms) then return end
+    if isbool(bf) and bf == self:GetBlindFire() and left == self:GetBlindFireLeft() then return end
+    if isnumber(bf) and bf == self:GetBlindFireMode() then return end
 
     self:ToggleCustomize(false)
 
@@ -325,14 +330,14 @@ function SWEP:ToggleBlindFire(bf, left)
 end
 
 function SWEP:ThinkBlindFire()
-    if self:GetOwner():KeyDown(IN_ZOOM) then
+    if self:GetOwner():KeyDown(IN_ZOOM) and !tobool(self:GetOwner():GetInfo("tacrp_blindfiremenu")) then
         if self:GetOwner():KeyDown(IN_FORWARD) then
             self:ToggleBlindFire(TacRP.BLINDFIRE_UP)
         elseif self:GetOwner():KeyDown(IN_MOVELEFT) and !self:GetOwner():KeyDown(IN_MOVERIGHT) then
             self:ToggleBlindFire(TacRP.BLINDFIRE_LEFT)
         elseif self:GetOwner():KeyDown(IN_MOVERIGHT) and !self:GetOwner():KeyDown(IN_MOVELEFT)  then
             self:ToggleBlindFire(TacRP.BLINDFIRE_RIGHT)
-        elseif self:GetOwner():KeyDown(IN_SPEED) and self:GetOwner():KeyDown(IN_WALK) then
+        elseif self:GetOwner():KeyDown(IN_SPEED) and self:GetOwner():KeyDown(IN_WALK) and !tobool(self:GetOwner():GetInfo("tacrp_idunwannadie")) then
             self:ToggleBlindFire(TacRP.BLINDFIRE_KYS)
         elseif self:GetOwner():KeyDown(IN_BACK) then
             self:ToggleBlindFire(TacRP.BLINDFIRE_NONE)

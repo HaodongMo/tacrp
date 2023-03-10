@@ -49,7 +49,7 @@ net.Receive("tacrp_togglenade", function(len, ply)
 end)
 
 net.Receive("tacrp_toggleblindfire", function(len, ply)
-    local bf = net.ReadBool()
+    local bf = net.ReadUInt(TacRP.BlindFireNetBits)
 
     local wpn = ply:GetActiveWeapon()
 

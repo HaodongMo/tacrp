@@ -4,7 +4,8 @@ function SWEP:ShouldDrawCrosshair()
         and !self:GetCustomize()
         and !self:SprintLock()
         and (self:GetSightAmount() <= 0.5 or self:GetPeeking())
-        and !self:GetOwner():KeyDown(IN_GRENADE2)
+        and !(tobool(self:GetOwner():GetInfo("tacrp_nademenu")) and self:GetOwner():KeyDown(IN_GRENADE2))
+        and !(tobool(self:GetOwner():GetInfo("tacrp_blindfiremenu")) and self:GetOwner():KeyDown(IN_ZOOM))
 end
 
 function SWEP:DoDrawCrosshair(x, y)
@@ -651,6 +652,8 @@ function SWEP:DrawHUDBackground()
     -- end
 
     self:DrawGrenadeHUD()
+
+    self:DrawBlindFireHUD()
 
     lastammo = self:Clip1()
     lastarmor = LocalPlayer():Armor()
