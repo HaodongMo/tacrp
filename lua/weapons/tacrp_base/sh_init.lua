@@ -87,7 +87,7 @@ function SWEP:Holster()
     self:SetScopeLevel(0)
     self:ToggleBoneMods(false)
     self:KillTimers()
-    self:ToggleBlindFire(false)
+    self:ToggleBlindFire(TacRP.BLINDFIRE_NONE)
     self:GetOwner():SetFOV(0, 0.1)
 
     local holster = self:GetValue("HolsterVisible")

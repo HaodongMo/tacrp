@@ -49,7 +49,7 @@ function SWEP:ToggleSafety(onoff)
     self:SetSafe(onoff)
 
     if onoff == true then
-        self:ToggleBlindFire(false)
+        self:ToggleBlindFire(TacRP.BLINDFIRE_NONE)
     end
 end
 

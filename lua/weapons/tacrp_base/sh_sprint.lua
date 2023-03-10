@@ -30,7 +30,7 @@ function SWEP:GetSprintDelta()
 end
 
 function SWEP:EnterSprint()
-    self:ToggleBlindFire(false)
+    self:ToggleBlindFire(TacRP.BLINDFIRE_NONE)
 
     self:ScopeToggle(0)
 

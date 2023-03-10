@@ -27,7 +27,7 @@ function SWEP:ScopeToggle(setlevel)
     self:SetScopeLevel(level)
 
     if level > 0 then
-        self:ToggleBlindFire(false)
+        self:ToggleBlindFire(TacRP.BLINDFIRE_NONE)
     end
 
     if oldlevel == 0 or level == 0 then

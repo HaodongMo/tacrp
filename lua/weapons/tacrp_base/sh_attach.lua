@@ -115,7 +115,7 @@ function SWEP:ToggleCustomize(on)
     if on == self:GetCustomize() then return end
 
     self:ScopeToggle(0)
-    self:ToggleBlindFire(false)
+    self:ToggleBlindFire(TacRP.BLINDFIRE_NONE)
 
     self:SetCustomize(on)
 

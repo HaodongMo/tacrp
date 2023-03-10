@@ -317,7 +317,7 @@ local bf_lines = {
     "Go ahead, see if I care.",
     "Why not just killbind?",
     "But you have so much to live for!",
-    "Just like Hemingway, eh?",
+    "Just like Hemingway.",
     "... NOW!",
     "DO IT!",
     "Now THIS is realism.",
@@ -336,10 +336,40 @@ local bf_lines = {
     "eh",
     "not worth",
     "Just like Hitler.",
+    "Kill your own worst enemy.",
+    "You've come to the right place.",
+    "Don't forget to like and subscribe",
+    "noooooooooooooo",
+    "tfa base sucks lololololol",
+    "The HUD is mandatory.",
+    "No Bitches?",
+    "now you have truly become garry's mod",
+    "type 'tacrp_rock_funny 1' in console",
+    "is only gaem, y u haev to be mad?",
+    "And so it ends.",
+    "Suicide is badass!",
+    "Stop staring at me and get to it!",
+    "you like kissing boys don't you",
+    "A most tactical decision.",
+    "Bye have a great time!",
+    "Try doing this with the Dual MTX!",
+    "Try doing this with the RPG-7!",
+    "sad",
+    "commit sudoku",
+    "kermit suicide",
+    "You can disable this button in the options.",
+    "Goodbye, cruel world!",
+    "Adios!",
+    "Sayonara, [------]!",
+    "Nice boat!",
+    "I find it quite Inconceievable!",
+    "Delete system32.dll",
+    "Press ALT+F4 for admin gun",
+    "arctic lazy dev",
 }
 
 local function canhighlight(self, slice)
-    if !self:GetValue("CanBlindFire") and self:GetValue("CanSuicide") then return slice[1] == TacRP.BLINDFIRE_NONE or slice[1] == TacRP.BLINDFIRE_KYS end
+    if !self:GetValue("CanBlindFire") and self:GetValue("CanSuicide") then return !slice or slice[1] == TacRP.BLINDFIRE_NONE or slice[1] == TacRP.BLINDFIRE_KYS end
     return true
 end
 
@@ -357,6 +387,7 @@ function SWEP:DrawBlindFireHUD()
     local sg = ScreenScale(32)
     local ri = r * 0.667
     local s = 45
+
     local slices = bf_slices
     if nocenter then
         slices = bf_slices3
@@ -364,6 +395,8 @@ function SWEP:DrawBlindFireHUD()
         slices = bf_slices2
         s = 90
     end
+    if currentind and currentind > #slices then currentind = 0 end
+
     local arcdegrees = 360 / #slices
     local d = 360 - s
 
@@ -384,7 +417,7 @@ function SWEP:DrawBlindFireHUD()
         if !lastmenu_bf then
             gui.EnableScreenClicker(true)
             lastmenu_bf = true
-            bf_suicidelock = 3
+            bf_suicidelock = 1
             bf_funnyline = nil
         end
 
@@ -423,7 +456,7 @@ function SWEP:DrawBlindFireHUD()
     draw.NoTexture()
     filledcircle(scrw / 2, scrh / 2, r, 32)
 
-    if currentind != nil and canhighlight(self, slices[currentind]) then
+    if currentind and canhighlight(self, slices[currentind]) then
         surface.SetDrawColor(150, 150, 150, a * 100)
         draw.NoTexture()
         if currentind > 0 then
@@ -477,7 +510,7 @@ function SWEP:DrawBlindFireHUD()
         TacRP.DrawCorneredBox(tx - w / 2, ty, w, h, col)
         surface.SetTextColor(255, 255, 255, a * 255)
 
-        surface.SetFont("TacRP_Myriad_Pro_10")
+        surface.SetFont("TacRP_Myriad_Pro_12")
         surface.SetTextColor(255, 255, 255, 255 * a)
         local t1 = "Shoot Yourself"
         local t1_w = surface.GetTextSize(t1)
@@ -488,12 +521,12 @@ function SWEP:DrawBlindFireHUD()
         local t2 = bf_funnyline or ""
         if bf_suicidelock > 0 then
             surface.SetFont("TacRP_Myriad_Pro_8")
-            t2 = "[" .. TacRP.GetBind("attack") .. "] x" .. bf_suicidelock .. " - Unlock"
+            t2 = "[" .. TacRP.GetBind("attack") .. "] - Unlock"
         elseif !bf_funnyline then
             bf_funnyline = bf_lines[math.random(1, #bf_lines)]
         end
-        local t2_w = surface.GetTextSize(t2)
-        surface.SetTextPos(tx - t2_w / 2, ty + ScreenScale(14))
+        local t2_w, t2_h = surface.GetTextSize(t2)
+        surface.SetTextPos(tx - t2_w / 2, ty + ScreenScale(18) - t2_h / 2)
         surface.DrawText(t2)
 
     end

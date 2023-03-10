@@ -20,7 +20,7 @@ function SWEP:Reload()
     if self:Ammo1() <= 0 and !self:GetValue("InfiniteAmmo") then return end
 
     -- self:ScopeToggle(0)
-    self:ToggleBlindFire(false)
+    self:ToggleBlindFire(TacRP.BLINDFIRE_NONE)
     --self:ToggleCustomize(false)
 
     local anim = "reload"

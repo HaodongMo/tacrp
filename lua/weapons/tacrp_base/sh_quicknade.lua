@@ -22,7 +22,7 @@ function SWEP:PrimeGrenade()
     local t = self:PlayAnimation("prime_grenade", self:GetValue("QuickNadeTimeMult") / (nade.ThrowSpeed or 1), true)
 
     self:SetPrimedGrenade(true)
-    self:ToggleBlindFire(false)
+    self:ToggleBlindFire(TacRP.BLINDFIRE_NONE)
     self:ScopeToggle(0)
 
     local ct = CurTime()

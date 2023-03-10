@@ -286,41 +286,22 @@ function SWEP:CheckBlindFire(suicide)
     return true
 end
 
-function SWEP:ToggleBlindFire(bf, left)
+function SWEP:ToggleBlindFire(bf)
     left = left or false
     local kms = bf == TacRP.BLINDFIRE_KYS or bf == TacRP.BLINDFIRE_NONE or bf == false
     if !self:CheckBlindFire(kms) then return end
-    if isbool(bf) and bf == self:GetBlindFire() and left == self:GetBlindFireLeft() then return end
-    if isnumber(bf) and bf == self:GetBlindFireMode() then return end
+    if bf == self:GetBlindFireMode() then return end
 
     self:ToggleCustomize(false)
 
-    if isnumber(bf) then
-        self:SetBlindFireMode(bf)
+    self:SetBlindFireMode(bf)
 
-        if bf != TacRP.BLINDFIRE_NONE then
-            self:ScopeToggle(0)
-            self:SetBlindFireFinishTime(CurTime() + (bf == TacRP.BLINDFIRE_KYS and 0.8 or 0.3))
-        end
-
-        self:ToggleBoneMods(bf)
-    else
-
-        self:SetBlindFire(bf)
-
-        if bf then
-            self:ScopeToggle(0)
-        end
-
-        self:ToggleBoneMods(bf, left)
-
-        if !bf then
-            self:SetBlindFireLeft(false)
-        else
-            self:SetBlindFireLeft(left)
-        end
-        self:SetBlindFireRight(false)
+    if bf != TacRP.BLINDFIRE_NONE then
+        self:ScopeToggle(0)
     end
+    self:SetBlindFireFinishTime(CurTime() + (bf == TacRP.BLINDFIRE_KYS and 0.8 or 0.3))
+
+    self:ToggleBoneMods(bf)
 
     self:SetShouldHoldType()
 
