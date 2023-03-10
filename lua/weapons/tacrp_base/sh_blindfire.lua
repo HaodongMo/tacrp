@@ -12,7 +12,7 @@ function SWEP:GetMuzzleOrigin()
 
         local testpos = pos + eyeang:Up() * 24
 
-        if self:GetBlindFireCorner() then
+        if self:GetBlindFireLeft() or self:GetBlindFireRight() then
             testpos = pos + eyeang:Forward() * 24
         end
 
@@ -88,6 +88,15 @@ ValveBiped.Bip01_R_Finger02
 
 */
 
+local bone_list = {
+    "ValveBiped.Bip01_R_UpperArm",
+    "ValveBiped.Bip01_R_Forearm",
+    "ValveBiped.Bip01_R_Hand",
+    "ValveBiped.Bip01_L_UpperArm",
+    "ValveBiped.Bip01_L_Forearm",
+    "ValveBiped.Bip01_L_Hand",
+}
+
 local bone_mods = {
     -- ["ValveBiped.Bip01_R_UpperArm"] = Angle(0, -70, 0),
     -- ["ValveBiped.Bip01_R_Hand"] = Angle(-55, 45, -90),
@@ -103,16 +112,77 @@ local bone_mods_left = {
     ["ValveBiped.Bip01_R_Hand"] = Angle(0, -75, 0),
 }
 
-local bone_mods_pos = {
-    ["ValveBiped.Bip01_R_Hand"] = Vector(0, 0, 0),
+local bone_mods_right = {
+    ["ValveBiped.Bip01_R_UpperArm"] = Angle(-45, 0, 0),
+    ["ValveBiped.Bip01_R_Forearm"] = Angle(0, 0, 0),
+    ["ValveBiped.Bip01_R_Hand"] = Angle(35, 75, 0),
 }
 
-local bone_mods_left_pos = {
-    ["ValveBiped.Bip01_R_Hand"] = Vector(0, 0, 0),
+local bone_mods_kys = {
+    ["ValveBiped.Bip01_R_UpperArm"] = Angle(5, 0, 0),
+    ["ValveBiped.Bip01_R_Forearm"] = Angle(0, -5, 0),
+    ["ValveBiped.Bip01_R_Hand"] = Angle(0, -165, 0),
+}
+local bone_mods_kys_pistol = {
+    ["ValveBiped.Bip01_R_UpperArm"] = Angle(55, 0, 0),
+    ["ValveBiped.Bip01_R_Forearm"] = Angle(0, -75, 5),
+    ["ValveBiped.Bip01_R_Hand"] = Angle(45, -75, 0),
+}
+local bone_mods_kys_dual = {
+    ["ValveBiped.Bip01_L_UpperArm"] = Angle(-60, 0, -45),
+    ["ValveBiped.Bip01_L_Forearm"] = Angle(0, -60, -30),
+    ["ValveBiped.Bip01_L_Hand"] = Angle(-30, -45, -90),
+    ["ValveBiped.Bip01_R_UpperArm"] = Angle(55, 0, 30),
+    ["ValveBiped.Bip01_R_Forearm"] = Angle(0, -60, 30),
+    ["ValveBiped.Bip01_R_Hand"] = Angle(45, -75, 90),
+}
+
+local bone_mods_pos = {}
+local bone_mods_left_pos = {}
+local bone_mods_right_pos = {}
+local bone_mods_kys_pos = {}
+
+local bone_mods_index = {
+    [TacRP.BLINDFIRE_UP]    = {bone_mods, bone_mods_pos},
+    [TacRP.BLINDFIRE_LEFT]  = {bone_mods_left, bone_mods_left_pos},
+    [TacRP.BLINDFIRE_RIGHT] = {bone_mods_right, bone_mods_right_pos},
+    [TacRP.BLINDFIRE_KYS] = {bone_mods_kys, bone_mods_kys_pos},
 }
 
 function SWEP:ToggleBoneMods(on, left)
-    if on then
+
+    if isnumber(on) or on == false then
+        if on == TacRP.BLINDFIRE_NONE or on == false then
+            for _, i in ipairs(bone_list) do
+                local boneindex = self:GetOwner():LookupBone(i)
+                if !boneindex then continue end
+
+                self:GetOwner():ManipulateBoneAngles(boneindex, Angle(0, 0, 0))
+                self:GetOwner():ManipulateBonePosition(boneindex, Vector(0, 0, 0))
+            end
+        else
+            local tbl = bone_mods_index[on]
+            if on == TacRP.BLINDFIRE_KYS and self:GetValue("HoldTypeSuicide") == "duel" then
+                tbl = {bone_mods_kys_dual, bone_mods_kys_pos}
+            elseif on == TacRP.BLINDFIRE_KYS and self:GetValue("HoldType") == "revolver" then
+                tbl = {bone_mods_kys_pistol, bone_mods_kys_pos}
+            end
+
+            for i, k in pairs(tbl[1]) do
+                local boneindex = self:GetOwner():LookupBone(i)
+                if !boneindex then continue end
+
+                self:GetOwner():ManipulateBoneAngles(boneindex, k)
+            end
+
+            for i, k in pairs(tbl[2]) do
+                local boneindex = self:GetOwner():LookupBone(i)
+                if !boneindex then continue end
+
+                self:GetOwner():ManipulateBonePosition(boneindex, k)
+            end
+        end
+    elseif on then
         if left then
             for i, k in pairs(bone_mods_left) do
                 local boneindex = self:GetOwner():LookupBone(i)
@@ -173,30 +243,81 @@ function SWEP:ToggleBoneMods(on, left)
     end
 end
 
+function SWEP:GetBlindFireMode()
+    if !self:GetBlindFire() then
+        return TacRP.BLINDFIRE_NONE
+    elseif self:GetBlindFireLeft() and self:GetBlindFireRight() then
+        return TacRP.BLINDFIRE_KYS
+    elseif self:GetBlindFireLeft() then
+        return TacRP.BLINDFIRE_LEFT
+    elseif self:GetBlindFireRight() then
+        return TacRP.BLINDFIRE_RIGHT
+    else
+        return TacRP.BLINDFIRE_UP
+    end
+end
+
+local bfmode = {
+    [TacRP.BLINDFIRE_NONE] = {false, false, false},
+    [TacRP.BLINDFIRE_UP] = {true, false, false},
+    [TacRP.BLINDFIRE_LEFT] = {true, true, false},
+    [TacRP.BLINDFIRE_RIGHT] = {true, false, true},
+    [TacRP.BLINDFIRE_KYS] = {true, true, true},
+}
+function SWEP:SetBlindFireMode(mode)
+    if !bfmode[mode] then
+        print("[TacRP] WARNING! Trying to set invalid blindfire mode: " .. tostring(mode))
+        mode = 0
+    end
+    self:SetBlindFire(bfmode[mode][1])
+    self:SetBlindFireLeft(bfmode[mode][2])
+    self:SetBlindFireRight(bfmode[mode][3])
+end
+
 function SWEP:ToggleBlindFire(bf, left)
     left = left or false
-    if !self:GetValue("CanBlindFire") then return end
+    if (!self:GetValue("CanBlindFire") and !self:GetValue("CanSuicide")) or (self:GetValue("CanSuicide") and bf != TacRP.BLINDFIRE_KYS and bf != TacRP.BLINDFIRE_NONE and bf != false) then return end
 
-    if bf == self:GetBlindFire() and left == self:GetBlindFireCorner() then return end
-    if bf and self:GetIsSprinting() then return end
-    if bf and self:GetAnimLockTime() > CurTime() then return end
-    if bf and self:GetPrimedGrenade() then return end
-    if bf and self:GetSafe() then return end
+    if isbool(bf) and bf == self:GetBlindFire() and left == self:GetBlindFireLeft() then return end
+    if isnumber(bf) and bf == self:GetBlindFireMode() then return end
+    if bf and (self:GetIsSprinting()
+            or self:GetAnimLockTime() > CurTime()
+            or self:GetPrimedGrenade()
+            or self:IsInScope()
+            or self:GetSafe()) then
+        return
+    end
 
-    self:SetBlindFire(bf)
     self:ToggleCustomize(false)
 
-    if bf then
-        self:ScopeToggle(0)
-    end
+    if isnumber(bf) then
+        self:SetBlindFireMode(bf)
 
-    self:ToggleBoneMods(bf, left)
+        if bf != TacRP.BLINDFIRE_NONE then
+            self:ScopeToggle(0)
+            self:SetBlindFireFinishTime(CurTime() + (bf == TacRP.BLINDFIRE_KYS and 0.75 or 0.25))
+        end
 
-    if !bf then
-        self:SetBlindFireCorner(false)
+        self:ToggleBoneMods(bf)
     else
-        self:SetBlindFireCorner(left)
+
+        self:SetBlindFire(bf)
+
+        if bf then
+            self:ScopeToggle(0)
+        end
+
+        self:ToggleBoneMods(bf, left)
+
+        if !bf then
+            self:SetBlindFireLeft(false)
+        else
+            self:SetBlindFireLeft(left)
+        end
+        self:SetBlindFireRight(false)
     end
+
+    self:SetShouldHoldType()
 
     if self:StillWaiting() then self:IdleAtEndOfAnimation() return end
 
@@ -204,51 +325,17 @@ function SWEP:ToggleBlindFire(bf, left)
 end
 
 function SWEP:ThinkBlindFire()
-    local amt = self:GetBlindFireAmount()
-
-    if self:GetBlindFire() then
-        amt = math.Approach(amt, 1, FrameTime() / 0.25)
-    else
-        amt = math.Approach(amt, 0, FrameTime() / 0.25)
-    end
-
-    self:SetBlindFireAmount(amt)
-
-    local amt2 = self:GetBlindFireCornerAmount()
-
-    if self:GetBlindFireCorner() then
-        amt2 = math.Approach(amt2, 1, FrameTime() / 0.25)
-    else
-        amt2 = math.Approach(amt2, 0, FrameTime() / 0.25)
-    end
-
-    self:SetBlindFireCornerAmount(amt2)
-
     if self:GetOwner():KeyDown(IN_ZOOM) then
-        if self:GetBlindFire() then
-            if self:GetOwner():KeyDown(IN_FORWARD) then
-                self:ToggleBlindFire(true, false)
-            elseif self:GetOwner():KeyDown(IN_MOVELEFT) then
-                self:ToggleBlindFire(true, true)
-            elseif self:GetOwner():KeyDown(IN_MOVERIGHT) or self:GetOwner():KeyDown(IN_BACK) then
-                self:ToggleBlindFire(false)
-            end
-        else
-            if self:GetOwner():KeyDown(IN_FORWARD) then
-                self:ToggleBlindFire(true, false)
-            elseif self:GetOwner():KeyDown(IN_MOVELEFT) then
-                self:ToggleBlindFire(true, true)
-            end
+        if self:GetOwner():KeyDown(IN_FORWARD) then
+            self:ToggleBlindFire(TacRP.BLINDFIRE_UP)
+        elseif self:GetOwner():KeyDown(IN_MOVELEFT) and !self:GetOwner():KeyDown(IN_MOVERIGHT) then
+            self:ToggleBlindFire(TacRP.BLINDFIRE_LEFT)
+        elseif self:GetOwner():KeyDown(IN_MOVERIGHT) and !self:GetOwner():KeyDown(IN_MOVELEFT)  then
+            self:ToggleBlindFire(TacRP.BLINDFIRE_RIGHT)
+        elseif self:GetOwner():KeyDown(IN_SPEED) and self:GetOwner():KeyDown(IN_WALK) then
+            self:ToggleBlindFire(TacRP.BLINDFIRE_KYS)
+        elseif self:GetOwner():KeyDown(IN_BACK) then
+            self:ToggleBlindFire(TacRP.BLINDFIRE_NONE)
         end
     end
-
-    -- if self:GetBlindFire() then
-    --     if self:GetOwner():KeyDown(IN_USE) and self:GetOwner():KeyPressed(IN_MOVELEFT) then
-    --         self:SetBlindFireCorner(!self:GetBlindFireCorner())
-    --     end
-    -- else
-    --     if self:GetBlindFireCorner() then
-    --         self:SetBlindFireCorner(false)
-    --     end
-    -- end
 end

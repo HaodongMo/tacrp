@@ -64,3 +64,11 @@ TacRP.HolsterBones = {
         {"models/weapons/w_defuser.mdl", Vector(0, -10, -8), Angle(-90, -90, 0)},
     },
 }
+
+TacRP.BlindFireNetBits = 3
+
+TacRP.BLINDFIRE_NONE  = 0
+TacRP.BLINDFIRE_UP    = 1
+TacRP.BLINDFIRE_LEFT  = 2
+TacRP.BLINDFIRE_RIGHT = 3
+TacRP.BLINDFIRE_KYS   = 4 // You should kill yourself... NOW!

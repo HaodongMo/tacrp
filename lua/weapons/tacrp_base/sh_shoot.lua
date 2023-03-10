@@ -2,6 +2,7 @@ function SWEP:StillWaiting(cust)
     if self:GetNextPrimaryFire() > CurTime() then return true end
     if self:GetNextSecondaryFire() > CurTime() then return true end
     if self:GetAnimLockTime() > CurTime() then return true end
+    if self:GetBlindFireFinishTime() > CurTime() then return true end
     if !cust and self:GetCustomize() then return true end
     if self:GetPrimedGrenade() then return true end
 
@@ -134,7 +135,13 @@ function SWEP:PrimaryAttack()
         sshoot = table.Random(sshoot)
     end
 
-    self:EmitSound(sshoot, self:GetValue("Vol_Shoot"), self:GetValue("Pitch_Shoot") + util.SharedRandom("TacRP_sshoot", -pvar, pvar), self:GetValue("Loudness_Shoot"), CHAN_WEAPON)
+    -- if we die from suicide, EmitSound will not play
+    if self:GetBlindFireMode() == TacRP.BLINDFIRE_KYS then
+        sound.Play(sshoot, self:GetMuzzleOrigin(), self:GetValue("Vol_Shoot"), self:GetValue("Pitch_Shoot") + util.SharedRandom("TacRP_sshoot", -pvar, pvar), self:GetValue("Loudness_Shoot"))
+    else
+        self:EmitSound(sshoot, self:GetValue("Vol_Shoot"), self:GetValue("Pitch_Shoot") + util.SharedRandom("TacRP_sshoot", -pvar, pvar), self:GetValue("Loudness_Shoot"), CHAN_WEAPON)
+    end
+
 
     local delay = 60 / self:GetValue("RPM")
 
@@ -227,6 +234,27 @@ function SWEP:PrimaryAttack()
     self:DoBulletBodygroups()
 
     if self:Clip1() == 0 then self.Primary.Automatic = false end
+
+    -- FireBullets won't hit ourselves. Apply damage directly!
+    if self:GetBlindFireMode() == TacRP.BLINDFIRE_KYS then
+        timer.Simple(0, function()
+            if !IsValid(self) or !IsValid(self:GetOwner()) then return end
+            local damage = DamageInfo()
+            damage:SetAttacker(self:GetOwner())
+            damage:SetInflictor(self)
+            damage:SetDamage(self:GetValue("Damage_Max") * self:GetValue("Num"))
+            damage:SetDamageType(self:GetValue("Num") > 1 and DMG_BUCKSHOT or DMG_BULLET)
+            damage:SetDamagePosition(self:GetMuzzleOrigin())
+            damage:SetDamageForce(dir:Forward() * self:GetValue("Num"))
+
+            damage:ScaleDamage(self:GetBodyDamageMultipliers()[HITGROUP_HEAD])
+
+            self:GetOwner():TakeDamageInfo(damage)
+        end)
+        sound.Play(sshoot, self:GetMuzzleOrigin(), self:GetValue("Vol_Shoot"), self:GetValue("Pitch_Shoot") + util.SharedRandom("TacRP_sshoot", -pvar, pvar), self:GetValue("Loudness_Shoot"))
+    else
+        self:EmitSound(sshoot, self:GetValue("Vol_Shoot"), self:GetValue("Pitch_Shoot") + util.SharedRandom("TacRP_sshoot", -pvar, pvar), self:GetValue("Loudness_Shoot"), CHAN_WEAPON)
+    end
 end
 
 function SWEP:AfterShotFunction(tr, dmg, range, penleft, alreadypenned, forced)
@@ -333,17 +361,25 @@ function SWEP:GetDamageAtRange(range, noround)
     return dmgv
 end
 
-function SWEP:GetShootDir()
+function SWEP:GetShootDir(nosway)
     if !IsValid(self:GetOwner()) then return self:GetAngles() end
     local dir = self:GetOwner():EyeAngles()
 
-    if self:GetBlindFireCorner() then
+    local bf = self:GetBlindFireMode()
+    if bf == TacRP.BLINDFIRE_KYS then
+        dir.y = dir.y + 180
+    elseif bf == TacRP.BLINDFIRE_LEFT then
         dir.y = dir.y + 75
+    elseif bf == TacRP.BLINDFIRE_RIGHT then
+        dir.y = dir.y - 75
     end
 
     local u, r, f = dir:Up(), dir:Right(), dir:Forward()
 
-    local oa = self:GetFreeAimOffset() + self:GetSwayAngles()
+    local oa = self:GetFreeAimOffset()
+    if !nosway then
+        oa = oa +  self:GetSwayAngles()
+    end
 
     dir:RotateAroundAxis(u, oa.y)
     -- dir:RotateAroundAxis(r, oa.r)
@@ -378,7 +414,11 @@ function SWEP:ShootRocket(dir)
         if !IsValid(rocket) then return end
 
         rocket:SetPos(src)
-        rocket:SetOwner(self:GetOwner())
+        if self:GetBlindFireMode() != TacRP.BLINDFIRE_KYS then
+            rocket:SetOwner(self:GetOwner())
+        else
+            rocket.Attacker = self:GetOwner()
+        end
         rocket:SetAngles(dir + dispersion)
         rocket:Spawn()
 

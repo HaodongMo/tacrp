@@ -236,9 +236,9 @@ if CLIENT then
 TacRP.ControlGuide = [[
 TacRP Controls:
 
-Blind Fire Forward: +zoom & +forward (B + W)
+Blind Fire: +zoom & +forward / +moveleft / +moveright (B + W/A/D)
 
-Blind Fire Left: +zoom & +moveleft (B + A)
+Suicide: +zoom & +speed & +walk (B + SHIFT + ALT)
 
 Quick Melee: +use & +attack (E + MOUSE1)
 

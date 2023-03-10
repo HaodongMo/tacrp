@@ -29,8 +29,9 @@ ENT.SmokeTrail = true
 
 function ENT:Detonate()
     if self:WaterLevel() > 0 then self:Remove() return end
+    local attacker = self.Attacker or self:GetOwner() or self
 
-    util.BlastDamage(self, self:GetOwner(), self:GetPos(), 150, 25)
+    util.BlastDamage(self, attacker, self:GetPos(), 150, 25)
 
     self:EmitSound(table.Random(self.ExplodeSounds), 75)
 
@@ -44,7 +45,7 @@ function ENT:Detonate()
 
     cloud:SetPos(self:GetPos())
     cloud:SetAngles(ang)
-    cloud:SetOwner(self:GetOwner())
+    cloud:SetOwner(attacker)
     cloud:Spawn()
 
     cloud:SetMoveType(MOVETYPE_NONE)

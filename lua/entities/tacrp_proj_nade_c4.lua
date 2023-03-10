@@ -29,7 +29,7 @@ ENT.ExplodeSounds = {
 }
 
 function ENT:Detonate()
-    local attacker = IsValid(self.Attacker) and self.Attacker or self:GetOwner()
+    local attacker = self.Attacker or self:GetOwner() or self
     util.BlastDamage(self, attacker, self:GetPos(), 512, 200)
 
     local fx = EffectData()

@@ -121,6 +121,7 @@ SWEP.HoldTypeSprint = "passive"
 SWEP.HoldTypeBlindFire = false
 SWEP.HoldTypeCustomize = "slam"
 SWEP.HoldTypeNPC = nil
+SWEP.HoldTypeSuicide = "pistol"
 
 SWEP.GestureShoot = ACT_HL2MP_GESTURE_RANGE_ATTACK_AR2
 SWEP.GestureReload = ACT_HL2MP_GESTURE_RELOAD_AR2
@@ -135,8 +136,14 @@ SWEP.SprintPos = Vector(0, 0, 0)
 SWEP.BlindFireAng = Angle(0, 15, 0)
 SWEP.BlindFirePos = Vector(0, 0, -6)
 
-SWEP.BlindFireCornerAng = Angle(75, 0, 0)
-SWEP.BlindFireCornerPos = Vector(8, 10, -12)
+SWEP.BlindFireLeftAng = Angle(75, 0, 0)
+SWEP.BlindFireLeftPos = Vector(8, 10, -12)
+
+SWEP.BlindFireRightAng = Angle(-75, 0, 0)
+SWEP.BlindFireRightPos = Vector(-10, 10, -12)
+
+SWEP.BlindFireSuicideAng = Angle(0, 145, 130)
+SWEP.BlindFireSuicidePos = Vector(-6, 32, -26)
 
 SWEP.CustomizeAng = Angle(30, 15, 0)
 SWEP.CustomizePos = Vector(5, 0, -6)
@@ -395,8 +402,8 @@ function SWEP:SetupDataTables()
     self:NetworkVar("Float", 10, "StartPrimedGrenadeTime")
     self:NetworkVar("Float", 11, "ReloadFinishTime")
     self:NetworkVar("Float", 12, "SightAmount")
-    self:NetworkVar("Float", 13, "BlindFireAmount")
-    self:NetworkVar("Float", 14, "BlindFireCornerAmount")
+    self:NetworkVar("Float", 13, "BlindFireFinishTime")
+    -- self:NetworkVar("Float", 14, "BlindFireCornerAmount")
 
     self:NetworkVar("Int", 0, "BurstCount")
     self:NetworkVar("Int", 1, "ScopeLevel")
@@ -410,10 +417,11 @@ function SWEP:SetupDataTables()
     self:NetworkVar("Bool", 3, "EndReload")
     self:NetworkVar("Bool", 4, "PrimedGrenade")
     self:NetworkVar("Bool", 5, "Safe")
-    self:NetworkVar("Bool", 6, "BlindFireCorner")
+    self:NetworkVar("Bool", 6, "BlindFireLeft")
     self:NetworkVar("Bool", 7, "NWTactical")
     self:NetworkVar("Bool", 8, "Charge")
     self:NetworkVar("Bool", 9, "Peeking")
+    self:NetworkVar("Bool", 10, "BlindFireRight") -- bleh, but actually less networking load than using an integer (32 bit)
 
     self:NetworkVar("Angle", 0, "FreeAimAngle")
     self:NetworkVar("Angle", 1, "LastAimAngle")

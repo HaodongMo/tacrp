@@ -26,11 +26,11 @@ ENT.ExplodeSounds = {
 ENT.SmokeTrail = true
 
 function ENT:Detonate()
-
+    local attacker = self.Attacker or self:GetOwner() or self
     local mult = self.NPCDamage and 0.5 or 1
 
     local dmg = DamageInfo()
-    dmg:SetAttacker(self:GetOwner())
+    dmg:SetAttacker(attacker)
     dmg:SetInflictor(self)
     dmg:SetDamageType(DMG_SONIC)
     dmg:SetDamagePosition(self:GetPos())

@@ -240,10 +240,11 @@ end
 
 
 function ENT:PhysicsCollide(data, collider)
+    local attacker = self.Attacker or self:GetOwner() or self
 
     if IsValid(data.HitEntity) and data.HitEntity:GetClass() == "func_breakable_surf" then
         self:FireBullets({
-            Attacker = self:GetOwner(),
+            Attacker = attacker,
             Inflictor = self,
             Damage = 0,
             Distance = 32,
@@ -263,7 +264,6 @@ function ENT:PhysicsCollide(data, collider)
 
 
     if IsValid(data.HitEntity) and (self.LastDamage or 0) + 0.25 < CurTime() then
-        local attacker = self.Attacker or self:GetOwner() or self
         local dmg = DamageInfo()
         dmg:SetAttacker(attacker)
         dmg:SetInflictor(self)

@@ -27,6 +27,8 @@ ENT.ExplodeSounds = {
 }
 
 function ENT:Detonate()
+    local attacker = self.Attacker or self:GetOwner() or self
+
     local fx = EffectData()
     fx:SetOrigin(self:GetPos())
 
@@ -37,14 +39,14 @@ function ENT:Detonate()
         util.Effect("TacRP_nukeexplosion", fx)
     end
 
-    util.BlastDamage(self, self:GetOwner(), self:GetPos(), 1024, 100000)
+    util.BlastDamage(self, attacker, self:GetPos(), 1024, 100000)
 
     local cloud = ents.Create( "TacRP_nuke_cloud" )
 
     if !IsValid(cloud) then return end
 
     cloud:SetPos(self:GetPos())
-    cloud:SetOwner(self:GetOwner())
+    cloud:SetOwner(attacker)
     cloud:Spawn()
 
     self:EmitSound(table.Random(self.ExplodeSounds), 149)

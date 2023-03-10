@@ -154,6 +154,7 @@ end
 
 hook.Add("OnReloaded", "TacRP_ReloadAtts", function()
     if game.SinglePlayer() then
+        print("Reloading...")
         TacRP.LoadAtts()
         for _, e in pairs(ents.GetAll()) do
             if e:IsWeapon() and e.ArcticTacRP then

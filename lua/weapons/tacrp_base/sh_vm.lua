@@ -2,7 +2,7 @@ local customizedelta = 0
 local sightdelta = 0
 local sprintdelta = 0
 local peekdelta = 0
-local blindfiredelta, blindfirecornerdelta = 0, 0
+local blindfiredelta, blindfiredeltaleft, blindfiredeltaright, blindfiredeltakys = 0, 0, 0, 0
 local freeaim_p, freeaim_y = 0, 0
 
 local angle_zero = Angle(0, 0, 0)
@@ -50,29 +50,39 @@ function SWEP:GetViewModelPosition(pos, ang)
     -- local cor_val = (self.ViewModelFOV / self:GetShouldFOV())
     local cor_val = 0.75
 
-    -- local blindfiredelta = self:GetBlindFireAmount()
-    -- local blindfirecornerdelta = self:GetBlindFireCornerAmount()
-    if self:GetBlindFire() then
-        blindfiredelta = math.Approach(blindfiredelta, 1, FT / 0.25)
-    else
-        blindfiredelta = math.Approach(blindfiredelta, 0, FT / 0.25)
-    end
-    if self:GetBlindFireCorner() then
-        blindfirecornerdelta = math.Approach(blindfirecornerdelta, 1, FT / 0.25)
-    else
-        blindfirecornerdelta = math.Approach(blindfirecornerdelta, 0, FT / 0.25)
-    end
+    local bfmode = self:GetBlindFireMode()
+    local bfl = bfmode == TacRP.BLINDFIRE_LEFT
+    local bfr = bfmode == TacRP.BLINDFIRE_RIGHT
+    local bfs = bfmode == TacRP.BLINDFIRE_KYS
+
+    blindfiredelta = math.Approach(blindfiredelta, self:GetBlindFire() and 1 or 0, FT / 0.3)
+
+    blindfiredeltaleft = math.Approach(blindfiredeltaleft, bfl and 1 or 0, FT / (bfr and 0.45 or 0.3))
+    blindfiredeltaright = math.Approach(blindfiredeltaright, bfr and 1 or 0, FT / (bfl and 0.45 or 0.3))
+    blindfiredeltakys = math.Approach(blindfiredeltakys, bfs and 1 or 0, FT / (bfs and 0.75 or 0.3))
 
     local curvedblindfiredelta = self:Curve(blindfiredelta)
-    local curvedblindfirecornerdelta = self:Curve(blindfirecornerdelta)
+    local curvedblindfiredeltaleft = self:Curve(blindfiredeltaleft)
+    local curvedblindfiredeltaright = self:Curve(blindfiredeltaright)
+    local curvedblindfiredeltakys = self:Curve(blindfiredeltakys)
 
     if blindfiredelta > 0 then
         offsetpos = LerpVector(curvedblindfiredelta, offsetpos, self:GetValue("BlindFirePos"))
         offsetang = LerpAngle(curvedblindfiredelta, offsetang, self:GetValue("BlindFireAng"))
 
-        if curvedblindfirecornerdelta > 0 then
-            offsetpos = LerpVector(curvedblindfirecornerdelta, offsetpos, self:GetValue("BlindFireCornerPos"))
-            offsetang = LerpAngle(curvedblindfirecornerdelta, offsetang, self:GetValue("BlindFireCornerAng"))
+        if curvedblindfiredeltaleft > 0 then
+            offsetpos = LerpVector(curvedblindfiredeltaleft, offsetpos, self:GetValue("BlindFireLeftPos"))
+            offsetang = LerpAngle(curvedblindfiredeltaleft, offsetang,  self:GetValue("BlindFireLeftAng"))
+        end
+
+        if curvedblindfiredeltaright > 0 then
+            offsetpos = LerpVector(curvedblindfiredeltaright, offsetpos, self:GetValue("BlindFireRightPos"))
+            offsetang = LerpAngle(curvedblindfiredeltaright, offsetang,  self:GetValue("BlindFireRightAng"))
+        end
+
+        if curvedblindfiredeltakys > 0 then
+            offsetpos = LerpVector(curvedblindfiredeltakys, offsetpos, self:GetValue("BlindFireSuicidePos"))
+            offsetang = LerpAngle(curvedblindfiredeltakys, offsetang,  self:GetValue("BlindFireSuicideAng"))
         end
     end
 

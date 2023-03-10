@@ -30,6 +30,7 @@ function SWEP:Deploy()
     self:SetRecoilAmount(0)
     self:SetLastScopeTime(0)
     self:SetPrimedGrenade(false)
+    self:SetBlindFireFinishTime(0)
 
     if IsValid(self:GetOwner()) and self:GetOwner():IsPlayer() then
         self:GetOwner():SetCanZoom(false)
@@ -197,32 +198,26 @@ end
 function SWEP:SetShouldHoldType()
     if self:GetOwner():IsNPC() then
         self:SetHoldType(self:GetValue("HoldTypeNPC") or self:GetValue("HoldType"))
-
         return
     end
 
-    if self:GetIsSprinting() or self:GetSafe() then
-        if self:GetValue("HoldTypeSprint") then
-            self:SetHoldType(self:GetValue("HoldTypeSprint"))
-
-            return
-        end
+    if self:GetIsSprinting() or self:GetSafe() and self:GetValue("HoldTypeSprint") then
+        self:SetHoldType(self:GetValue("HoldTypeSprint"))
     end
 
     if self:GetBlindFire() then
-        if self:GetValue("HoldTypeBlindFire") then
+        if self:GetBlindFireMode() == TacRP.BLINDFIRE_KYS and self:GetValue("HoldTypeSuicide") then
+            self:SetHoldType(self:GetValue("HoldTypeSuicide"))
+            return
+        elseif self:GetValue("HoldTypeBlindFire") then
             self:SetHoldType(self:GetValue("HoldTypeBlindFire"))
-
             return
         end
     end
 
-    if self:GetCustomize() then
-        if self:GetValue("HoldTypeCustomize") then
-            self:SetHoldType(self:GetValue("HoldTypeCustomize"))
-
-            return
-        end
+    if self:GetCustomize() and self:GetValue("HoldTypeCustomize") then
+        self:SetHoldType(self:GetValue("HoldTypeCustomize"))
+        return
     end
 
     self:SetHoldType(self:GetValue("HoldType"))

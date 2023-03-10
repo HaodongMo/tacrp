@@ -22,16 +22,7 @@ function SWEP:DoDrawCrosshair(x, y)
         tacfunc = self:GetValue("TacticalCrosshair")
     elseif !dev and self.CrosshairAlpha <= 0 then return true end
 
-    local dir = self:GetOwner():EyeAngles()
-
-    if self:GetBlindFireCorner() then
-        dir.y = dir.y + 75
-    end
-
-    local u, r, f = dir:Up(), dir:Right(), dir:Forward()
-    local oa = self:GetFreeAimOffset()
-    dir:RotateAroundAxis(u, oa.y)
-    dir:RotateAroundAxis(r, -oa.p)
+    local dir = self:GetShootDir(true)
 
     local tr = util.TraceLine({
         start = self:GetMuzzleOrigin(),

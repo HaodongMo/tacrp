@@ -79,6 +79,7 @@ SWEP.RecoilSpreadPenalty = 0.002
 SWEP.Sway = 0.5
 
 SWEP.CanBlindFire = false
+SWEP.CanSuicide = true
 
 SWEP.ShootTimeMult = 0.6
 
@@ -98,6 +99,7 @@ SWEP.SprintToFireTime = 0.25
 SWEP.HoldType = "duel"
 SWEP.HoldTypeSprint = "normal"
 SWEP.HoldTypeBlindFire = false
+SWEP.HoldTypeSuicide = "duel"
 
 SWEP.GestureShoot = ACT_HL2MP_GESTURE_RANGE_ATTACK_DUEL
 SWEP.GestureReload = ACT_HL2MP_GESTURE_RELOAD_DUEL
@@ -108,8 +110,11 @@ SWEP.PassivePos = Vector(3, 0, -6)
 SWEP.CustomizeAng = Angle(0, 35, 0)
 SWEP.CustomizePos = Vector(1, 0, -12)
 
-SWEP.BlindFireAng = Angle(0, 5, 0)
-SWEP.BlindFirePos = Vector(0, 0, -5)
+SWEP.BlindFireAng = Angle(0, 0, 0)
+SWEP.BlindFirePos = Vector(0, 0, 0)
+
+SWEP.BlindFireSuicideAng = Angle(0, 130, 0)
+SWEP.BlindFireSuicidePos = Vector(1, 22, -15)
 
 SWEP.SprintAng = Angle(0, 30, 0)
 SWEP.SprintPos = Vector(1, 0, -12)
@@ -169,7 +174,8 @@ SWEP.MuzzleEffect = "muzzleflash_pistol"
 // attack1
 SWEP.AnimationTranslationTable = {
     ["deploy"] = "draw",
-    ["blind_fire"] = "blind_shoot1",
+    ["blind_idle"] = "idle",
+    ["blind_fire"] = "idle",
     ["melee"] = {"melee1", "melee2"},
     ["shoot_left"] = {"shoot_left-1", "shoot_left-2"},
     ["shoot_right"] = {"shoot_right-1", "shoot_right-2"}

@@ -28,9 +28,10 @@ ENT.ExplodeSounds = {
 }
 
 function ENT:Detonate()
+    local attacker = self.Attacker or self:GetOwner() or self
 
     local dmg = DamageInfo()
-    dmg:SetAttacker(self:GetOwner())
+    dmg:SetAttacker(attacker)
     dmg:SetInflictor(self)
     dmg:SetDamageType(DMG_SONIC)
     dmg:SetDamagePosition(self:GetPos())

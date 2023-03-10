@@ -103,8 +103,11 @@ SWEP.GestureReload = ACT_HL2MP_GESTURE_RELOAD_AR2
 SWEP.PassiveAng = Angle(0, 0, 0)
 SWEP.PassivePos = Vector(2, -2, -6)
 
-SWEP.BlindFireAng = Angle(0, 15, -45)
-SWEP.BlindFirePos = Vector(1, -2, -2)
+SWEP.BlindFireAng = Angle(-10, -15, -0)
+SWEP.BlindFirePos = Vector(3, -2, -2)
+
+SWEP.BlindFireSuicideAng = Angle(0, 115, 0)
+SWEP.BlindFireSuicidePos = Vector(0, 32, -24)
 
 SWEP.SprintAng = Angle(30, -15, 0)
 SWEP.SprintPos = Vector(5, 0, -4)
@@ -182,7 +185,7 @@ SWEP.EjectDelay = 0.9
 SWEP.AnimationTranslationTable = {
     ["deploy"] = "draw",
     ["fire"] = {"shoot1", "shoot2"},
-    ["blind_fire"] = "shoot1"
+    ["blind_fire"] = "blind_shoot1"
 }
 
 // attachments

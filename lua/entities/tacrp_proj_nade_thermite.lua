@@ -27,6 +27,7 @@ ENT.ExplodeSounds = {
 
 function ENT:Detonate()
     if self:WaterLevel() > 0 then self:Remove() return end
+    local attacker = self.Attacker or self:GetOwner() or self
 
     self:EmitSound(table.Random(self.ExplodeSounds), 75)
 
@@ -36,7 +37,7 @@ function ENT:Detonate()
 
     cloud:SetPos(self:GetPos())
     cloud:SetAngles(self:GetAngles())
-    cloud:SetOwner(self:GetOwner())
+    cloud:SetOwner(attacker)
     cloud:Spawn()
 
     self:Remove()

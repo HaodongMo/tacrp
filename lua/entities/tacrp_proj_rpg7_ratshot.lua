@@ -61,6 +61,8 @@ function ENT:Think()
 end
 
 function ENT:Impact(data, collider)
+    local attacker = self.Attacker or self:GetOwner() or self
+
     if !self.NPCDamage then
         local ang = data.OurOldVelocity:Angle()
         local fx = EffectData()
@@ -71,7 +73,7 @@ function ENT:Impact(data, collider)
 
         if IsValid(data.HitEntity) then
             local dmginfo = DamageInfo()
-            dmginfo:SetAttacker(self:GetOwner())
+            dmginfo:SetAttacker(attacker)
             dmginfo:SetInflictor(self)
             dmginfo:SetDamageType(DMG_CRUSH)
             dmginfo:SetDamage(250 * (self.NPCDamage and 0.5 or 1))
@@ -101,7 +103,7 @@ end
 
 function ENT:Detonate()
     local dir = self:GetForward()
-    local attacker = self:GetOwner() or self
+    local attacker = self.Attacker or self:GetOwner() or self
     local src = self:GetPos() - dir * 64
     local fx = EffectData()
     fx:SetOrigin(src)

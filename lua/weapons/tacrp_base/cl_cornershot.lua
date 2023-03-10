@@ -30,7 +30,7 @@ local lastrendertime = 0
 local fps = 30
 
 function SWEP:DoRT()
-    if !self:GetBlindFire() then lastblindfire = false return end
+    if !self:GetBlindFire() or self:GetBlindFireMode() == TacRP.BLINDFIRE_KYS then lastblindfire = false return end
     if TacRP.OverDraw then return end
 
     if !lastblindfire then
@@ -132,7 +132,7 @@ end
 
 function SWEP:DoCornershot()
 
-    if !self:GetBlindFire() then lastblindfire = false return end
+    if !self:GetBlindFire() or self:GetBlindFireMode() == TacRP.BLINDFIRE_KYS then lastblindfire = false return end
 
     local w = ScreenScale(640 / 4)
     local h = ScreenScale(480 / 4)
