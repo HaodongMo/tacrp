@@ -2,8 +2,8 @@ ATT.PrintName = "Refined"
 ATT.FullName = "Refined Bolt"
 ATT.Icon = Material("entities/tacrp_att_bolt_fine.png", "mips smooth")
 ATT.Description = "Recoil recovers faster, but spread is worse."
-ATT.Pros = {"Recoil recovery"}
-ATT.Cons = {"Recoil spread"}
+ATT.Pros = {"Recoil Recovery"}
+ATT.Cons = {"Recoil Spread"}
 
 ATT.Category = "bolt_automatic"
 

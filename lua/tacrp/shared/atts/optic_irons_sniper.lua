@@ -21,4 +21,4 @@ ATT.Mult_AimDownSightsTime = 0.8
 ATT.Mult_SprintToFireTime = 0.9
 ATT.Add_SightedSpeedMult = 0.1
 ATT.Add_ShootingSpeedMult = 0.05
-ATT.Mult_HipfireSpreadPenalty = 0.75
+ATT.Mult_HipFireSpreadPenalty = 0.75
