@@ -467,9 +467,9 @@ function SWEP:CreateCustomizeHUD()
         },
         {
             Name = "Recoil Spread",
-            Description = "Inaccuracy caused by accumulated recoil. Larger value means the weapon becomes inaccurate faster while continuous firing.",
+            Description = "Inaccuracy per unit of recoil. Larger value means the weapon becomes inaccurate faster while continuous firing.",
             AggregateFunction = function(base, val)
-                return math.Round(math.deg(val), 2)
+                return math.Round(math.deg(val), 3)
             end,
             Unit = "°",
             Value = "RecoilSpreadPenalty",
