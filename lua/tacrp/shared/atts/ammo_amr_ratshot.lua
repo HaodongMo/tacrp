@@ -7,13 +7,14 @@ ATT.Cons = {"Damage", "Spread"}
 
 ATT.Category = {"ammo_amr"}
 
-ATT.SortOrder = 3
+ATT.SortOrder = 5
 
 ATT.Mult_MuzzleVelocity = 0.75
 
 ATT.Num = 16
 ATT.Override_Damage_Max = 5
 ATT.Override_Damage_Min = 2
+ATT.Override_Penetration = 1
 
 ATT.Add_Spread = 0.01
 ATT.Mult_HipFireSpreadPenalty = 0.5

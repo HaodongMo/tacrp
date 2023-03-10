@@ -6,7 +6,7 @@ ATT.Cons = {"Direct Damage", "Capacity", "Fire Rate"}
 
 ATT.Category = "ammo_amr"
 
-ATT.SortOrder = 5
+ATT.SortOrder = 4
 
 ATT.ExplosiveEffect = "Explosion"
 ATT.ExplosiveDamage = 50

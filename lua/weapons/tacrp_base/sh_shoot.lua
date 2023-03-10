@@ -236,7 +236,7 @@ function SWEP:PrimaryAttack()
     if self:Clip1() == 0 then self.Primary.Automatic = false end
 
     -- FireBullets won't hit ourselves. Apply damage directly!
-    if self:GetBlindFireMode() == TacRP.BLINDFIRE_KYS then
+    if SERVER and self:GetBlindFireMode() == TacRP.BLINDFIRE_KYS then
         timer.Simple(0, function()
             if !IsValid(self) or !IsValid(self:GetOwner()) then return end
             local damage = DamageInfo()
