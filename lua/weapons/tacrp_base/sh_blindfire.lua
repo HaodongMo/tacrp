@@ -287,9 +287,8 @@ function SWEP:CheckBlindFire(suicide)
 end
 
 function SWEP:ToggleBlindFire(bf)
-    left = left or false
-    local kms = bf == TacRP.BLINDFIRE_KYS or bf == TacRP.BLINDFIRE_NONE or bf == false
-    if !self:CheckBlindFire(kms) then return end
+    local kms = bf == TacRP.BLINDFIRE_KYS or bf == TacRP.BLINDFIRE_NONE
+    if bf != TacRP.BLINDFIRE_NONE and !self:CheckBlindFire(kms) then return end
     if bf == self:GetBlindFireMode() then return end
 
     self:ToggleCustomize(false)
