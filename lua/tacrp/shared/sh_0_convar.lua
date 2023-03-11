@@ -45,11 +45,13 @@ local conVars = {
         name = "free_atts",
         default = "1",
         replicated = true,
+        notify = true,
     },
     {
         name = "lock_atts",
         default = "1",
         replicated = true,
+        notify = true,
     },
     {
         name = "loseattsondie",
@@ -72,21 +74,25 @@ local conVars = {
         name = "penetration",
         default = "1",
         replicated = true,
+        notify = true,
     },
     {
         name = "freeaim",
         default = "1",
         replicated = true,
+        notify = true,
     },
     {
         name = "sway",
         default = "1",
         replicated = true,
+        notify = true,
     },
     {
         name = "physbullet",
         default = "1",
         replicated = true,
+        notify = true,
     },
     {
         name = "resupply_grenades",
@@ -94,11 +100,13 @@ local conVars = {
     },
     {
         name = "fixedspread",
-        default = "0",
+        default = "1",
+        notify = true,
     },
     {
         name = "pelletspread",
-        default = "0",
+        default = "1",
+        notify = true,
     },
     {
         name = "client_damage",
@@ -126,11 +134,13 @@ local conVars = {
         name = "infiniteammo",
         default = "0",
         replicated = true,
+        notify = true,
     },
     {
         name = "infinitegrenades",
         default = "0",
         replicated = true,
+        notify = true,
     },
     {
         name = "rock_funny",
@@ -240,20 +250,20 @@ local conVars = {
 
 local prefix = "tacrp_"
 
+local flags = {
+    ["replicated"] = FCVAR_REPLICATED,
+    ["userinfo"] = FCVAR_USERINFO,
+    ["notify"] = FCVAR_NOTIFY
+}
 for _, var in pairs(conVars) do
     local convar_name = prefix .. var.name
 
     if var.client and CLIENT then
-        CreateClientConVar(convar_name, var.default, true)
+        CreateClientConVar(convar_name, var.default, true, var.userinfo)
     elseif !var.client then
-        local flags = FCVAR_ARCHIVE
-        if var.replicated then
-            flags = flags + FCVAR_REPLICATED
-        end
-        if var.userinfo then
-            flags = flags + FCVAR_USERINFO
-        end
-        CreateConVar(convar_name, var.default, flags, var.help, var.min, var.max)
+        local flag = FCVAR_ARCHIVE
+        for k, v in pairs(flags) do if var[k] then flag = flag + v end end
+        CreateConVar(convar_name, var.default, flag, var.help, var.min, var.max)
     end
 end
 
