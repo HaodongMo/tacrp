@@ -22,3 +22,8 @@ end
 function SWEP:IsAnimLocked()
     return self:GetAnimLockTime() > CurTime()
 end
+
+function SWEP:ChooseSound(tbl)
+    tbl.BaseClass = nil -- lua tables lel
+    return tbl[math.random(1, #tbl)]
+end

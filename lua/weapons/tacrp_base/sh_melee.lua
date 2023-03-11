@@ -11,18 +11,6 @@ SWEP.Sound_MeleeHitBody = {
 }
 
 function SWEP:Melee()
-    -- if self:GetValue("CanQuickNade") then
-    --     if self:GetOwner():KeyDown(IN_USE) then
-    --         self:SelectGrenade()
-    --         self:EmitSound("TacRP/weapons/switch_grenade-1.wav")
-    --         return
-    --     end
-    -- end
-
-    -- if self:GetValue("Scope") then
-    --     self:ScopeToggle()
-    --     return
-    -- end
     if self:StillWaiting() then return end
     -- if self:SprintLock() then return end
     if !self:GetValue("CanMeleeAttack") then return end
@@ -84,9 +72,9 @@ function SWEP:Melee()
         end
 
         if tr.Entity:IsNPC() or tr.Entity:IsPlayer() or tr.Entity:IsNextBot() then
-            self:EmitSound(table.Random(self:GetValue("Sound_MeleeHitBody")), 75, 100, 1, CHAN_ITEM)
+            self:EmitSound(self:ChooseSound(self:GetValue("Sound_MeleeHitBody")), 75, 100, 1, CHAN_ITEM)
         else
-            self:EmitSound(table.Random(self:GetValue("Sound_MeleeHit")), 75, 100, 1, CHAN_ITEM)
+            self:EmitSound(self:ChooseSound(self:GetValue("Sound_MeleeHit")), 75, 100, 1, CHAN_ITEM)
         end
 
         if tr.Entity:IsPlayer() and self:GetValue("MeleeSlow") then
@@ -139,6 +127,6 @@ function SWEP:Melee()
     -- })
 
     self:SetLastMeleeTime(CurTime())
-    self:SetNextSecondaryFire(CurTime() + 0.6)
+    self:SetNextSecondaryFire(CurTime() + self:GetValue("MeleeAttackTime"))
 
 end
