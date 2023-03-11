@@ -99,7 +99,7 @@ SWEP.RecoilKick = 0.25
 
 SWEP.RecoilSpreadPenalty = 0.001 // extra spread per one unit of recoil
 
-SWEP.ShotgunPelletSpread = 0.01
+SWEP.ShotgunPelletSpread = 0 // per-pellet clump spread for shotguns (if enabled). Otherwise just adds to spread
 
 SWEP.CanBlindFire = true
 

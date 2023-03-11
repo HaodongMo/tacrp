@@ -47,18 +47,21 @@ function SWEP:RunHook(val, data)
     return data
 end
 
-function SWEP:GetValue(val, invert)
-    local tbl = self:GetTable()
-
-    local stat = tbl[val]
-
+function SWEP:GetBaseValue(val)
+    local stat = self:GetTable()[val]
     if GetConVar("tacrp_arcade"):GetBool() and self.ArcadeStats and self.ArcadeStats[val] != nil then
         stat = self.ArcadeStats[val]
     end
+    return stat
+end
+
+function SWEP:GetValue(val, invert)
 
     if !invert and self.StatCache[val] then
         return self.StatCache[val]
     end
+
+    local stat = self:GetBaseValue(val)
 
     local priority = 0
 

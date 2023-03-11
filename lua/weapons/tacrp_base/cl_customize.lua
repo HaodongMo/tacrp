@@ -413,13 +413,32 @@ function SWEP:CreateCustomizeHUD()
         -- }
         {
             Name = "Spread",
-            Description = "Mechanical accuracy of the weapon while aiming.",
+            Description = "Base accuracy of the weapon.",
             AggregateFunction = function(base, val)
-                return math.Round(math.deg(val), 2)
+                local spread = val
+
+                local valfunc = base and self.GetBaseValue or self.GetValue
+                if valfunc(self, "Num") > 1 and !GetConVar("tacrp_pelletspread"):GetBool() then
+                    spread = spread + valfunc(self, "ShotgunPelletSpread")
+                end
+
+                return math.Round(math.deg(spread), 2)
+
             end,
             Unit = "°",
             Value = "Spread",
             LowerIsBetter = true,
+        },
+        {
+            Name = "Clump Spread",
+            Description = "Accuracy of shotgun pellets independent of other spread values.",
+            AggregateFunction = function(base, val)
+                return math.Round(math.deg(val), 2)
+            end,
+            Unit = "°",
+            Value = "ShotgunPelletSpread",
+            LowerIsBetter = true,
+            ConVarCheck = "tacrp_pelletspread",
         },
         {
             Name = "RPM",

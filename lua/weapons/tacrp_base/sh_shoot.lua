@@ -517,13 +517,10 @@ end
 function SWEP:GetSpread(baseline)
     local spread = self:GetValue("Spread")
 
-    spread = spread + Lerp(self:GetSightAmount() - (self:GetPeeking() and self:GetValue("PeekPenaltyFraction") or 0), self:GetValue("HipFireSpreadPenalty"), self:GetValue("ScopedSpreadPenalty"))
-
     -- Tack on the ShotgunPelletSpread value if pellet spread is disabled (otherwise the stat does nothing!)
     if self:GetValue("Num") > 1 and self:GetValue("ShotgunPelletSpread") > 0 and !GetConVar("tacrp_pelletspread"):GetBool() then
         spread = spread + self:GetValue("ShotgunPelletSpread")
     end
-
 
     -- if self:GetScopeLevel() == 0 then
     --     spread = spread + self:GetValue("HipFireSpreadPenalty")
@@ -532,6 +529,8 @@ function SWEP:GetSpread(baseline)
     -- end
 
     if baseline then return spread end
+
+    spread = spread + Lerp(self:GetSightAmount() - (self:GetPeeking() and self:GetValue("PeekPenaltyFraction") or 0), self:GetValue("HipFireSpreadPenalty"), self:GetValue("ScopedSpreadPenalty"))
 
     spread = spread + (self:GetRecoilAmount() * self:GetValue("RecoilSpreadPenalty"))
 
