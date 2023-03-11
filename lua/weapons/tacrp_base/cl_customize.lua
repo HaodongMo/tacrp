@@ -880,7 +880,7 @@ function SWEP:CreateCustomizeHUD()
 
             if hovered then
                 local todo = DisableClipping(true)
-                local col_bg = Color(0, 0, 0, 252)
+                local col_bg = Color(0, 0, 0, 254)
                 local col_corner = Color(255, 255, 255)
                 local col_text = Color(255, 255, 255)
                 local rx, ry = self2:CursorPos()
