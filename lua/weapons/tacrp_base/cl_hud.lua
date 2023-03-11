@@ -134,6 +134,9 @@ local lastarmor = 0
 
 local faceindex = 0
 
+local shockedtime = 0
+local lastblindfiremode = 0
+
 function SWEP:DrawHUDBackground()
     self:DoScope()
 
@@ -398,6 +401,17 @@ function SWEP:DrawHUDBackground()
 
             local face = "-_-"
 
+            local blindfiremode = self:GetBlindFireMode()
+
+            if blindfiremode == TacRP.BLINDFIRE_KYS then
+                if lastblindfiremode != blindfiremode then
+                    shockedtime = CurTime() + 1
+                    faceindex = math.random(1, 2)
+                end
+            end
+
+            lastblindfiremode = blindfiremode
+
             if lastdmgtime + 1 > CurTime() then
                 face = ({
                     "#> <",
@@ -410,6 +424,17 @@ function SWEP:DrawHUDBackground()
                     "(*_*)",
                     "゜・+_+"
                 })[faceindex]
+            elseif shockedtime > CurTime() then
+                face = ({
+                    ";O-O;",
+                    ";>-<;",
+                })[faceindex]
+            elseif blindfiremode == TacRP.BLINDFIRE_KYS then
+                if math.sin(CurTime() * 1) > 0.995 then
+                    face = ";>_<;"
+                else
+                    face = ";o_o;"
+                end
             elseif lasthealtime + 1 > CurTime() then
                 if perc >= 1 then
                     face = ({
