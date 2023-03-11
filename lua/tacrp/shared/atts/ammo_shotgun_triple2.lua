@@ -14,7 +14,8 @@ ATT.Mult_Damage_Min = 1.75
 
 ATT.Num = 3
 
-ATT.Mult_Spread = 0.6
+ATT.Mult_Spread = 0.75
+
 ATT.Mult_RecoilSpreadPenalty = 0.5
 
 ATT.Add_HipFireSpreadPenalty = 0.005

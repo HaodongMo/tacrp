@@ -61,12 +61,12 @@ SWEP.FiremodeName = "Pump-Action" // only used externally for firemode name dist
 
 SWEP.RPM = 75
 
-SWEP.Spread = 0.025
-SWEP.ShotgunPelletSpread = 0.01
+SWEP.Spread = 0.02
+SWEP.ShotgunPelletSpread = 0.015
 
 SWEP.ShootTimeMult = 0.8
 
-SWEP.HipFireSpreadPenalty = 0.01
+SWEP.HipFireSpreadPenalty = 0.015
 SWEP.MidAirSpreadPenalty = 0
 
 SWEP.ScopedSpreadPenalty = 0
@@ -75,14 +75,14 @@ SWEP.RecoilPerShot = 1
 SWEP.RecoilMaximum = 2
 SWEP.RecoilResetTime = 0.15
 SWEP.RecoilDissipationRate = 1.15
-SWEP.RecoilFirstShotMult = 1 // multiplier for the first shot's recoil amount
+SWEP.RecoilFirstShotMult = 1.2
 
 SWEP.RecoilVisualKick = 2
 SWEP.RecoilVisualShake = 2
 
 SWEP.RecoilKick = 12
 
-SWEP.RecoilSpreadPenalty = 0.0175
+SWEP.RecoilSpreadPenalty = 0.025
 
 SWEP.CanBlindFire = true
 

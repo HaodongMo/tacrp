@@ -16,8 +16,9 @@ ATT.Override_Damage_Max = 5
 ATT.Override_Damage_Min = 2
 ATT.Override_Penetration = 1
 
-ATT.Add_Spread = 0.01
 ATT.Mult_HipFireSpreadPenalty = 0.5
+
+ATT.Add_ShotgunPelletSpread = 0.015
 
 ATT.Override_BodyDamageMultipliers = {
     [HITGROUP_HEAD] = 3,

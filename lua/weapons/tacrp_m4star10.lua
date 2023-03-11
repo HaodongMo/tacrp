@@ -59,10 +59,10 @@ SWEP.Firemode = 1
 
 SWEP.RPM = 240
 
-SWEP.Spread = 0.1
-SWEP.ShotgunPelletSpread = 0.015
+SWEP.Spread = 0.025
+SWEP.ShotgunPelletSpread = 0.02
 
-SWEP.HipFireSpreadPenalty = 0
+SWEP.HipFireSpreadPenalty = 0.015
 SWEP.MidAirSpreadPenalty = 0
 
 SWEP.RecoilPerShot = 1
