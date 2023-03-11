@@ -93,6 +93,14 @@ local conVars = {
         default = "1",
     },
     {
+        name = "fixedspread",
+        default = "0",
+    },
+    {
+        name = "pelletspread",
+        default = "0",
+    },
+    {
         name = "client_damage",
         default = "0",
     },
@@ -476,6 +484,20 @@ local function menu_balance_ti(panel)
     panel:AddControl("checkbox", {
         label = "Enable Physical Bullets",
         command = "TacRP_physbullet"
+    })
+    panel:AddControl("checkbox", {
+        label = "Enable Fixed Shotgun Patterns",
+        command = "tacrp_fixedspread"
+    })
+    panel:AddControl("label", {
+        text = "Shotgun pellets uses a fixed pattern that covers the spread area. This does not affect spread size."
+    })
+    panel:AddControl("checkbox", {
+        label = "Enable Shotgun Clump Spread",
+        command = "tacrp_pelletspread"
+    })
+    panel:AddControl("label", {
+        text = "ArcCW/CW2 styled shotgun spread. Uses a separate Clump Spread stat and is not affected by other spread stats. If disabled, Clump Spread is added to total spread."
     })
 
     panel:AddControl("slider", {
