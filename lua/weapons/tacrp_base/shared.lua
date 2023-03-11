@@ -74,6 +74,7 @@ SWEP.Spread = 0.01
 SWEP.ShootTimeMult = 1
 
 SWEP.ShootChance = 1
+SWEP.JamWaitTime = 0.5
 
 // Spread penalties are in spread units and are additive
 SWEP.MoveSpreadPenalty = 0 // spread penalty while travelling at max. 250 u/s
@@ -216,6 +217,7 @@ SWEP.InfiniteAmmo = false // do not consume reserve ammo
 
 SWEP.SupplyAmmoType = false // overrides clipsize/ammo for ammo pickups
 SWEP.SupplyAmmoAmount = false
+SWEP.SupplyLimit = 1 // Multiplier for supply ammo
 
 SWEP.TryUnholster = false // if we have an "unholster" animation use it instead of "deploy"
 
@@ -286,7 +288,8 @@ SWEP.EjectDelay = 0
 // WM:
 // attack1
 SWEP.AnimationTranslationTable = {
-    ["melee"] = {"melee1", "melee2"}
+    ["melee"] = {"melee1", "melee2"},
+    ["jam"] = "midreload"
 } // translates ["fire"] = "shoot"; key = translates from, value = translates to
 // e.g. you have a "shoot1" sequence and need "fire"
 // so ["fire"] = "shoot1"

@@ -172,7 +172,8 @@ SWEP.AnimationTranslationTable = {
     ["fire_iron"] = "shoot3",
     ["fire"] = {"shoot1", "shoot2", "shoot3"},
     ["blind_fire"] = {"blind_shoot1", "blind_shoot2", "blind_shoot3"},
-    ["melee"] = {"melee1", "melee2"}
+    ["melee"] = {"melee1", "melee2"},
+    ["jam"] = "midreload"
 }
 
 SWEP.LastShot = true

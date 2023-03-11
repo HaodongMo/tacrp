@@ -62,7 +62,7 @@ function SWEP:PrimaryAttack()
         end
         self:EmitSound(self:GetValue("Sound_DryFire"), 75, 100, 1, CHAN_BODY)
         self:SetBurstCount(0)
-        self:SetNextPrimaryFire(CurTime() + (60 / self:GetValue("RPM")))
+        self:SetNextPrimaryFire(CurTime() + self:GetValue("JamWaitTime"))
         self:SetJammed(true)
         return
     end

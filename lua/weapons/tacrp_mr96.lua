@@ -173,7 +173,8 @@ SWEP.AnimationTranslationTable = {
     ["fire"] = {"shoot1", "shoot2", "shoot3"},
     ["fire_iron"] = "shoot1",
     ["blind_fire"] = {"blind_shoot1", "blind_shoot2"},
-    ["melee"] = {"melee1", "melee2"}
+    ["melee"] = {"melee1", "melee2"},
+    ["jam"] = "draw"
 }
 
 // attachments
