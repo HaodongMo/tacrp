@@ -210,7 +210,14 @@ function SWEP:PrimaryAttack()
 
             if !hitscan then
                 for i = 1, self:GetValue("Num") do
+                    local sgp_x, sgp_y = self:GetShotgunPattern(i)
+
                     local new_dir = dir + (spread * AngleRand() / 3.6)
+
+                    if self:GetValue("Num") > 1 then
+                        new_dir = dir + Angle(sgp_x, sgp_y, 0) + (self:GetValue("ShotgunPelletSpread") * AngleRand() / 3.6)
+                    end
+
                     TacRP:ShootPhysBullet(self, self:GetMuzzleOrigin(), new_dir:Forward() * self:GetValue("MuzzleVelocity"))
                 end
             else
@@ -221,28 +228,39 @@ function SWEP:PrimaryAttack()
                 --     tr = 0
                 -- end
 
-                self:GetOwner():FireBullets({
-                    Damage = self:GetValue("Damage_Max"),
-                    Force = 8,
-                    Tracer = tr,
-                    TracerName = "tacrp_tracer",
-                    Num = self:GetValue("Num"),
-                    Dir = dir:Forward(),
-                    Src = self:GetMuzzleOrigin(),
-                    Spread = Vector(spread, spread, spread),
-                    IgnoreEntity = self:GetOwner():GetVehicle(),
-                    Distance = dist,
-                    Callback = function(att, btr, dmg)
-                        local range = (btr.HitPos - btr.StartPos):Length()
+                for i = 1, self:GetValue("Num") do
 
-                        self:AfterShotFunction(btr, dmg, range, self:GetValue("Penetration"), {})
-                        if SERVER then
-                            debugoverlay.Cross(btr.HitPos, 4, 5, Color(255, 0, 0), false)
-                        else
-                            debugoverlay.Cross(btr.HitPos, 4, 5, Color(255, 255, 255), false)
-                        end
+                    local sgp_x, sgp_y = self:GetShotgunPattern(i)
+
+                    local new_dir = dir + (spread * AngleRand() / 3.6)
+
+                    if self:GetValue("Num") > 1 then
+                        new_dir = dir + (Angle(sgp_x, sgp_y, 0) * 36) + (self:GetValue("ShotgunPelletSpread") * AngleRand() / 3.6)
                     end
-                })
+
+                    self:GetOwner():FireBullets({
+                        Damage = self:GetValue("Damage_Max"),
+                        Force = 8,
+                        Tracer = tr,
+                        TracerName = "tacrp_tracer",
+                        Num = 1,
+                        Dir = new_dir:Forward(),
+                        Src = self:GetMuzzleOrigin(),
+                        Spread = Vector(0, 0, 0),
+                        IgnoreEntity = self:GetOwner():GetVehicle(),
+                        Distance = dist,
+                        Callback = function(att, btr, dmg)
+                            local range = (btr.HitPos - btr.StartPos):Length()
+
+                            self:AfterShotFunction(btr, dmg, range, self:GetValue("Penetration"), {})
+                            if SERVER then
+                                debugoverlay.Cross(btr.HitPos, 4, 5, Color(255, 0, 0), false)
+                            else
+                                debugoverlay.Cross(btr.HitPos, 4, 5, Color(255, 255, 255), false)
+                            end
+                        end
+                    })
+                end
 
                 self:GetOwner():LagCompensation(false)
             end
@@ -274,6 +292,21 @@ function SWEP:PrimaryAttack()
             self:GetOwner():TakeDamageInfo(damage)
         end)
     end
+end
+
+function SWEP:GetShotgunPattern(i)
+    local ring_spread = self:GetSpread()
+    local num = self:GetValue("Num")
+
+    local x = 0
+    local y = 0
+
+    local angle = 3 * (i / num) * 360
+
+    x = math.sin(math.rad(angle)) * ring_spread * i / num
+    y = math.cos(math.rad(angle)) * ring_spread * i / num
+
+    return x, y
 end
 
 function SWEP:AfterShotFunction(tr, dmg, range, penleft, alreadypenned, forced)

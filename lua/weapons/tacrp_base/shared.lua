@@ -99,6 +99,8 @@ SWEP.RecoilKick = 0.25
 
 SWEP.RecoilSpreadPenalty = 0.001 // extra spread per one unit of recoil
 
+SWEP.ShotgunPelletSpread = 0.01
+
 SWEP.CanBlindFire = true
 
 // handling

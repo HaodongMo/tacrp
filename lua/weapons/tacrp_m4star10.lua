@@ -59,7 +59,8 @@ SWEP.Firemode = 1
 
 SWEP.RPM = 240
 
-SWEP.Spread = 0.025
+SWEP.Spread = 0.1
+SWEP.ShotgunPelletSpread = 0.015
 
 SWEP.HipFireSpreadPenalty = 0
 SWEP.MidAirSpreadPenalty = 0

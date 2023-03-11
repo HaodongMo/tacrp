@@ -62,6 +62,7 @@ SWEP.FiremodeName = "Pump-Action" // only used externally for firemode name dist
 SWEP.RPM = 75
 
 SWEP.Spread = 0.025
+SWEP.ShotgunPelletSpread = 0.01
 
 SWEP.ShootTimeMult = 0.8
 
