@@ -706,6 +706,18 @@ function SWEP:CreateCustomizeHUD()
             HideIfSame = true,
             ConVarCheck = "tacrp_freeaim",
         },
+        {
+            Name = "Mean Shots To Fail",
+            Description = "The average number of shots that will be fired before the weapon jams.",
+            AggregateFunction = function(base, val)
+                return math.Round(self:GetMeanShotsToFail(base), 0)
+            end,
+            DisplayFunction = function(base, val)
+                if val == 1 then return "∞" end
+                return math.Round(self:GetMeanShotsToFail(base), 0)
+            end,
+            Value = "ShootChance",
+        },
     }
 
     if !self:GetValue("NoStatBox") then
@@ -793,6 +805,11 @@ function SWEP:CreateCustomizeHUD()
                     else
                         txt_curr = "NO"
                     end
+                end
+
+                if k.DisplayFunction then
+                    txt_base = k.DisplayFunction(true, orig)
+                    txt_curr = k.DisplayFunction(false, value)
                 end
 
                 surface.SetTextColor(255, 255, 255)
