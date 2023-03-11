@@ -255,6 +255,7 @@ SWEP.ShootPitchVariance = 2.5 // amount to vary pitch by each shot
 SWEP.Sound_ScopeIn = ""
 SWEP.Sound_MeleeAttack = ""
 SWEP.Sound_DryFire = "TacRP/weapons/dryfire_pistol-1.wav"
+SWEP.Sound_Jam = "TacRP/malfunction.wav"
 
 // effects
 
