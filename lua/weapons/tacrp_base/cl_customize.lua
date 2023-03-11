@@ -467,7 +467,8 @@ function SWEP:CreateCustomizeHUD()
         },
         {
             Name = "Recoil Spread",
-            Description = "Inaccuracy per unit of recoil. Larger value means the weapon becomes inaccurate faster while continuous firing.",
+            Description = {"Inaccuracy per unit of recoil. Larger value means the weapon becomes",
+            "inaccurate faster while continuous firing."},
             AggregateFunction = function(base, val)
                 return math.Round(math.deg(val), 3)
             end,
@@ -477,7 +478,9 @@ function SWEP:CreateCustomizeHUD()
         },
         {
             Name = "Recoil Recovery",
-            Description = "Rate at which accumulated recoil disspiates, in shots per second. Larger value means the effects of recoil disappear faster after the reset time.",
+            Description = {"Rate at which accumulated recoil disspiates, in shots per second.",
+            "Larger value means the effects of recoil disappear faster",
+            "after the reset time."},
             AggregateFunction = function(base, val)
                 return math.Round(val, 2)
                 --return math.Round(math.deg(val * (base and self:GetTable().RecoilSpreadPenalty or self:GetValue("RecoilSpreadPenalty"))), 1)
@@ -487,7 +490,9 @@ function SWEP:CreateCustomizeHUD()
         },
         {
             Name = "Recoil Reset Time",
-            Description = "Duration of delay before recoil can start to dissipate. Larger value means you must wait longer between shots to start recovering from recoil.",
+            Description = {"Duration of delay before recoil can start to dissipate.",
+            "Larger value means you must wait longer between shots to start recovering",
+            "from recoil."},
             Value = "RecoilResetTime",
             LowerIsBetter = true,
         },
@@ -500,7 +505,8 @@ function SWEP:CreateCustomizeHUD()
         },
         {
             Name = "First Shot Recoil",
-            Description = "Recoil multiplier on the first shot, reset after the reset time has passed. Does not affect recoil kick.",
+            Description = {"Recoil multiplier on the first shot, reset after the reset time has passed.",
+            "Does not affect recoil kick."},
             Value = "RecoilFirstShotMult",
             LowerIsBetter = true,
             HideIfSame = true,
@@ -518,7 +524,8 @@ function SWEP:CreateCustomizeHUD()
         },
         {
             Name = "Move Speed",
-            Description = "Speed multiplier while the weapon is held up. Has no effect when weapon is in safety.",
+            Description = {"Speed multiplier while the weapon is held up.",
+            "Has no effect when weapon is in safety."},
             AggregateFunction = function(base, val)
                 return math.min(100, math.Round(val * 100, 0))
             end,
@@ -527,7 +534,8 @@ function SWEP:CreateCustomizeHUD()
         },
         {
             Name = "Shooting Speed",
-            Description = "Speed multiplier from firing the weapon. Accumulating recoil increases slowdown intensity.",
+            Description = {"Speed multiplier from firing the weapon.",
+            "Accumulating recoil increases slowdown intensity."},
             AggregateFunction = function(base, val)
                 return math.min(100, math.Round(val * 100, 0))
             end,
@@ -578,13 +586,15 @@ function SWEP:CreateCustomizeHUD()
         },
         {
             Name = "Penetration",
-            Description = "Thickness of metal this weapon can penetrate. Actual penetration is material-dependent.",
+            Description = {"Thickness of metal this weapon can penetrate.",
+            "Actual penetration is material-dependent."},
             Value = "Penetration",
             Unit = "\""
         },
         {
             Name = "Sway",
-            Description = "Amount of sway in hipfire. Sway affects your firing direction without changing your aiming direction.",
+            Description = {"Amount of sway in hipfire. Sway affects your firing direction",
+            "without changing your aiming direction."},
 
             Value = "Sway",
             LowerIsBetter = true,
@@ -592,7 +602,8 @@ function SWEP:CreateCustomizeHUD()
         },
         {
             Name = "Sway In Sights",
-            Description = "Amount of sway while aiming. Sway affects your firing direction without changing your aiming direction.",
+            Description = {"Amount of sway while aiming. Sway affects your firing direction",
+            "without changing your aiming direction."},
             Value = "ScopedSway",
             LowerIsBetter = true,
             ConVarCheck = "tacrp_sway",
@@ -706,6 +717,19 @@ function SWEP:CreateCustomizeHUD()
             HideIfSame = true,
             ConVarCheck = "tacrp_freeaim",
         },
+        {
+            Name = "Mean Shots To Fail",
+            Description = "The average number of shots that will be fired before the weapon jams.",
+            AggregateFunction = function(base, val)
+                return math.Round(self:GetMeanShotsToFail(base), 0)
+            end,
+            DisplayFunction = function(base, val)
+                if val == 1 then return "∞" end
+                return math.Round(self:GetMeanShotsToFail(base), 0)
+            end,
+            HideIfSame = true,
+            Value = "ShootChance",
+        },
     }
 
     if !self:GetValue("NoStatBox") then
@@ -717,6 +741,9 @@ function SWEP:CreateCustomizeHUD()
         stat_box:SetPos(scrw - ScreenScale(128) - airgap, stack + smallgap)
         stat_box.Paint = function(self2, w, h)
             if !IsValid(self) then return end
+
+            local hovered = false
+            local hoverindex = 0
 
             surface.SetDrawColor(0, 0, 0, 150)
             surface.DrawRect(0, 0, w, h)
@@ -739,6 +766,8 @@ function SWEP:CreateCustomizeHUD()
             surface.SetTextColor(255, 255, 255)
             surface.SetTextPos(x_2 + ScreenScale(4), ScreenScale(2))
             surface.DrawText("CURR")
+
+            -- if hovered try to figure out what stat we're hovering over
 
             local i2 = 0
             for i, k in pairs(stats) do
@@ -795,7 +824,13 @@ function SWEP:CreateCustomizeHUD()
                     end
                 end
 
+                if k.DisplayFunction then
+                    txt_base = k.DisplayFunction(true, orig)
+                    txt_curr = k.DisplayFunction(false, value)
+                end
+
                 surface.SetTextColor(255, 255, 255)
+                surface.SetFont("TacRP_Myriad_Pro_8")
                 surface.SetTextPos(x_1 + ScreenScale(3), ScreenScale(8 + 4 + 1) + (ScreenScale(8 * i2)))
                 surface.DrawText(txt_base .. (k.Unit or ""))
 
@@ -832,7 +867,57 @@ function SWEP:CreateCustomizeHUD()
                 surface.SetTextPos(x_2 + ScreenScale(3), ScreenScale(8 + 4 + 1) + (ScreenScale(8 * i2)))
                 surface.DrawText(txt_curr .. (k.Unit or ""))
 
+                local mx, my = self2:CursorPos()
+                if mx > 0 and mx < w then
+                    if my > ScreenScale(8 + 4 + 1) + (ScreenScale(8 * i2)) and my < ScreenScale(8 + 4 + 1) + (ScreenScale(8 * i2)) + ScreenScale(8) then
+                        hovered = true
+                        hoverindex = i
+                    end
+                end
+
                 i2 = i2 + 1
+            end
+
+            if hovered then
+                local todo = DisableClipping(true)
+                local col_bg = Color(0, 0, 0, 254)
+                local col_corner = Color(255, 255, 255)
+                local col_text = Color(255, 255, 255)
+                local rx, ry = self2:CursorPos()
+                rx = rx + ScreenScale(16)
+                ry = ry + ScreenScale(16)
+                local stat = stats[hoverindex]
+
+                local desc = stat.Description or {""}
+                if isstring(desc) then
+                    desc = {desc}
+                end
+
+                if self2:GetY() + ry >= ScreenScale(280) then
+                    ry = ry - ScreenScale(60)
+                end
+
+                if self2:GetX() + rx + ScreenScale(160) >= ScrW() then
+                    rx = rx - ScreenScale(160)
+                end
+
+                local bw, bh = ScreenScale(160), ScreenScale(12 + (6 * #desc))
+                surface.SetDrawColor(col_bg)
+                TacRP.DrawCorneredBox(rx, ry, bw, bh, col_corner)
+
+                local txt = stat.Name
+                surface.SetTextColor(col_text)
+                surface.SetFont("TacRP_Myriad_Pro_10")
+                surface.SetTextPos(rx + ScreenScale(2), ry + ScreenScale(1))
+                surface.DrawText(txt)
+
+                surface.SetFont("TacRP_Myriad_Pro_6")
+                for i, k in pairs(desc) do
+                    surface.SetTextPos(rx + ScreenScale(2), ry + ScreenScale(1 + 8 + 2) + (ScreenScale(6 * (i - 1))))
+                    surface.DrawText(k)
+                end
+
+                DisableClipping(todo)
             end
         end
     end

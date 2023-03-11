@@ -66,6 +66,11 @@ function SWEP:Think()
     --     s:PlayEx(0.25, 105)
     -- end
 
+    if self:GetJammed() and !self:StillWaiting() then
+        self:PlayAnimation("jam", 1, true, true)
+        self:SetJammed(false)
+    end
+
     if self:GetNextIdle() < CurTime() then
         self:Idle()
     end

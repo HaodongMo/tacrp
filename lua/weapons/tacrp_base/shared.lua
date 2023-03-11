@@ -73,6 +73,9 @@ SWEP.Spread = 0.01
 
 SWEP.ShootTimeMult = 1
 
+SWEP.ShootChance = 1
+SWEP.JamWaitTime = 0.5
+
 // Spread penalties are in spread units and are additive
 SWEP.MoveSpreadPenalty = 0 // spread penalty while travelling at max. 250 u/s
 SWEP.MidAirSpreadPenalty = 0.1 // spread penalty for being in the air
@@ -95,6 +98,8 @@ SWEP.RecoilVisualKick = 0.1
 SWEP.RecoilKick = 0.25
 
 SWEP.RecoilSpreadPenalty = 0.001 // extra spread per one unit of recoil
+
+SWEP.ShotgunPelletSpread = 0.01
 
 SWEP.CanBlindFire = true
 
@@ -214,6 +219,7 @@ SWEP.InfiniteAmmo = false // do not consume reserve ammo
 
 SWEP.SupplyAmmoType = false // overrides clipsize/ammo for ammo pickups
 SWEP.SupplyAmmoAmount = false
+SWEP.SupplyLimit = 1 // Multiplier for supply ammo
 
 SWEP.TryUnholster = false // if we have an "unholster" animation use it instead of "deploy"
 
@@ -284,7 +290,8 @@ SWEP.EjectDelay = 0
 // WM:
 // attack1
 SWEP.AnimationTranslationTable = {
-    ["melee"] = {"melee1", "melee2"}
+    ["melee"] = {"melee1", "melee2"},
+    ["jam"] = "midreload"
 } // translates ["fire"] = "shoot"; key = translates from, value = translates to
 // e.g. you have a "shoot1" sequence and need "fire"
 // so ["fire"] = "shoot1"
@@ -422,6 +429,7 @@ function SWEP:SetupDataTables()
     self:NetworkVar("Bool", 8, "Charge")
     self:NetworkVar("Bool", 9, "Peeking")
     self:NetworkVar("Bool", 10, "BlindFireRight") -- bleh, but actually less networking load than using an integer (32 bit)
+    self:NetworkVar("Bool", 11, "Jammed")
 
     self:NetworkVar("Angle", 0, "FreeAimAngle")
     self:NetworkVar("Angle", 1, "LastAimAngle")

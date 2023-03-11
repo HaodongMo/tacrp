@@ -58,6 +58,7 @@ SWEP.RPM = 60
 SWEP.ShootTimeMult = 0.85
 
 SWEP.Spread = 0.015
+SWEP.ShotgunPelletSpread = 0.005
 
 SWEP.HipFireSpreadPenalty = 0.01
 SWEP.MidAirSpreadPenalty = 0
@@ -173,7 +174,8 @@ SWEP.AnimationTranslationTable = {
     ["fire"] = {"shoot1", "shoot2"},
     ["blind_fire"] = {"blind_shoot1"},
     ["melee"] = {"melee1", "melee2"},
-    ["reload"] = {"reload", "reload2"}
+    ["reload"] = {"reload", "reload2"},
+    ["jam"] = "reload_finish"
 }
 
 // attachments

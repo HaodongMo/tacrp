@@ -56,6 +56,7 @@ SWEP.FiremodeName = "Pump-Action" // only used externally for firemode name dist
 SWEP.RPM = 40
 
 SWEP.Spread = 0.05
+SWEP.ShotgunPelletSpread = 0.01
 
 SWEP.ShootTimeMult = 1.25
 
@@ -176,7 +177,8 @@ SWEP.AnimationTranslationTable = {
     ["fire"] = {"shoot1", "shoot2"},
     ["blind_fire"] = {"blind_shoot1"},
     ["melee"] = {"melee1", "melee2"},
-    ["reload"] = {"reload", "reload2"}
+    ["reload"] = {"reload", "reload2"},
+    ["jam"] = "reload_finish"
 }
 
 // attachments

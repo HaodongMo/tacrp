@@ -1,6 +1,6 @@
 ATT.PrintName = "Triple Hit"
 ATT.FullName = "Triple Hit Shells"
-ATT.Icon = Material("entities/tacrp_att_acc_slugs.png", "mips smooth")
+ATT.Icon = Material("entities/tacrp_att_acc_triple.png", "mips smooth")
 ATT.Description = "Fire three smaller slugs for improved accuracy."
 ATT.Pros = {"Spread"}
 ATT.Cons = {"Three projectiles", "Hipfire Spread"}

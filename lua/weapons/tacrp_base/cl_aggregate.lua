@@ -73,3 +73,13 @@ function SWEP:GetMuzzleVelocity(base)
 
     return math.ceil(0.3048 * basetime / 12)
 end
+
+function SWEP:GetMeanShotsToFail(base)
+    local shootchance = self:GetValue("ShootChance")
+
+    if base then
+        shootchance = self.ShootChance
+    end
+
+    return 1 / (1 - shootchance)
+end

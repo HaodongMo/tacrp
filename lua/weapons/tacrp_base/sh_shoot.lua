@@ -36,6 +36,8 @@ function SWEP:PrimaryAttack()
         return
     end
 
+    if self:GetJammed() then return end
+
     if self:GetCurrentFiremode() < 0 and self:GetBurstCount() >= -self:GetCurrentFiremode() then return end
 
     if self:Clip1() < self:GetValue("AmmoPerShot") then
@@ -48,6 +50,21 @@ function SWEP:PrimaryAttack()
         self:EmitSound(self:GetValue("Sound_DryFire"), 75, 100, 1, CHAN_BODY)
         self:SetBurstCount(0)
         self:SetNextPrimaryFire(CurTime() + 0.1)
+        return
+    end
+
+    if self:GetValue("ShootChance") < util.SharedRandom("tacRP_shootChance", 0, 1) then
+        self.Primary.Automatic = false
+        if self:GetBlindFire() then
+            self:PlayAnimation("blind_dryfire")
+        else
+            self:PlayAnimation("dryfire")
+        end
+        self:EmitSound(self:GetValue("Sound_DryFire"), 75, 100, 1, CHAN_BODY)
+        self:SetBurstCount(0)
+        self:SetNextPrimaryFire(CurTime() + self:GetValue("JamWaitTime"))
+        self:SetNextSecondaryFire(CurTime() + self:GetValue("JamWaitTime"))
+        self:SetJammed(true)
         return
     end
 
@@ -172,11 +189,13 @@ function SWEP:PrimaryAttack()
         if IsFirstTimePredicted() then
 
             local hitscan = !GetConVar("tacrp_physbullet"):GetBool()
+            local dist = 100000
 
             -- If the bullet is going to hit something very close in front, use hitscan bullets instead
             -- This uses the aim direction without random spread, which may result in hitscan bullets in distances where it shouldn't be.
             if !hitscan then
-                local threshold = dir:Forward() * math.max(self:GetValue("MuzzleVelocity"), 15000) * engine.TickInterval() * (self:GetValue("Num") == 1 and 4 or 2)
+                dist = math.max(self:GetValue("MuzzleVelocity"), 15000) * engine.TickInterval() * (self:GetValue("Num") == 1 and 4 or 2)
+                local threshold = dir:Forward() * dist
                 local inst_tr = util.TraceLine({
                     start = self:GetMuzzleOrigin(),
                     endpos = self:GetMuzzleOrigin() + threshold,
@@ -191,7 +210,14 @@ function SWEP:PrimaryAttack()
 
             if !hitscan then
                 for i = 1, self:GetValue("Num") do
+                    local sgp_x, sgp_y = self:GetShotgunPattern(i)
+
                     local new_dir = dir + (spread * AngleRand() / 3.6)
+
+                    if self:GetValue("Num") > 1 then
+                        new_dir = dir + Angle(sgp_x, sgp_y, 0) + (self:GetValue("ShotgunPelletSpread") * AngleRand() / 3.6)
+                    end
+
                     TacRP:ShootPhysBullet(self, self:GetMuzzleOrigin(), new_dir:Forward() * self:GetValue("MuzzleVelocity"))
                 end
             else
@@ -202,27 +228,39 @@ function SWEP:PrimaryAttack()
                 --     tr = 0
                 -- end
 
-                self:GetOwner():FireBullets({
-                    Damage = self:GetValue("Damage_Max"),
-                    Force = 8,
-                    Tracer = tr,
-                    TracerName = "tacrp_tracer",
-                    Num = self:GetValue("Num"),
-                    Dir = dir:Forward(),
-                    Src = self:GetMuzzleOrigin(),
-                    Spread = Vector(spread, spread, spread),
-                    IgnoreEntity = self:GetOwner():GetVehicle(),
-                    Callback = function(att, btr, dmg)
-                        local range = (btr.HitPos - btr.StartPos):Length()
+                for i = 1, self:GetValue("Num") do
 
-                        self:AfterShotFunction(btr, dmg, range, self:GetValue("Penetration"), {})
-                        if SERVER then
-                            debugoverlay.Cross(btr.HitPos, 4, 5, Color(255, 0, 0), false)
-                        else
-                            debugoverlay.Cross(btr.HitPos, 4, 5, Color(255, 255, 255), false)
-                        end
+                    local sgp_x, sgp_y = self:GetShotgunPattern(i)
+
+                    local new_dir = dir + (spread * AngleRand() / 3.6)
+
+                    if self:GetValue("Num") > 1 then
+                        new_dir = dir + (Angle(sgp_x, sgp_y, 0) * 36) + (self:GetValue("ShotgunPelletSpread") * AngleRand() / 3.6)
                     end
-                })
+
+                    self:GetOwner():FireBullets({
+                        Damage = self:GetValue("Damage_Max"),
+                        Force = 8,
+                        Tracer = tr,
+                        TracerName = "tacrp_tracer",
+                        Num = 1,
+                        Dir = new_dir:Forward(),
+                        Src = self:GetMuzzleOrigin(),
+                        Spread = Vector(0, 0, 0),
+                        IgnoreEntity = self:GetOwner():GetVehicle(),
+                        Distance = dist,
+                        Callback = function(att, btr, dmg)
+                            local range = (btr.HitPos - btr.StartPos):Length()
+
+                            self:AfterShotFunction(btr, dmg, range, self:GetValue("Penetration"), {})
+                            if SERVER then
+                                debugoverlay.Cross(btr.HitPos, 4, 5, Color(255, 0, 0), false)
+                            else
+                                debugoverlay.Cross(btr.HitPos, 4, 5, Color(255, 255, 255), false)
+                            end
+                        end
+                    })
+                end
 
                 self:GetOwner():LagCompensation(false)
             end
@@ -254,6 +292,21 @@ function SWEP:PrimaryAttack()
             self:GetOwner():TakeDamageInfo(damage)
         end)
     end
+end
+
+function SWEP:GetShotgunPattern(i)
+    local ring_spread = self:GetSpread()
+    local num = self:GetValue("Num")
+
+    local x = 0
+    local y = 0
+
+    local angle = 3 * (i / num) * 360
+
+    x = math.sin(math.rad(angle)) * ring_spread * i / num
+    y = math.cos(math.rad(angle)) * ring_spread * i / num
+
+    return x, y
 end
 
 function SWEP:AfterShotFunction(tr, dmg, range, penleft, alreadypenned, forced)
