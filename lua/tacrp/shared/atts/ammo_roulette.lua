@@ -9,5 +9,4 @@ ATT.Category = {"ammo_roulette"}
 ATT.SortOrder = -1
 
 ATT.Mult_ShootChance = 1 / 6
-ATT.Override_RPM = 60
 ATT.Override_ClipSize = 1

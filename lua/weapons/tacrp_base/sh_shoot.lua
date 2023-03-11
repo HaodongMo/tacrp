@@ -36,6 +36,8 @@ function SWEP:PrimaryAttack()
         return
     end
 
+    if self:GetJammed() then return end
+
     if self:GetCurrentFiremode() < 0 and self:GetBurstCount() >= -self:GetCurrentFiremode() then return end
 
     if self:Clip1() < self:GetValue("AmmoPerShot") then
@@ -61,6 +63,7 @@ function SWEP:PrimaryAttack()
         self:EmitSound(self:GetValue("Sound_DryFire"), 75, 100, 1, CHAN_BODY)
         self:SetBurstCount(0)
         self:SetNextPrimaryFire(CurTime() + (60 / self:GetValue("RPM")))
+        self:SetJammed(true)
         return
     end
 

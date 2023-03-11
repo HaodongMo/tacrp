@@ -424,6 +424,7 @@ function SWEP:SetupDataTables()
     self:NetworkVar("Bool", 8, "Charge")
     self:NetworkVar("Bool", 9, "Peeking")
     self:NetworkVar("Bool", 10, "BlindFireRight") -- bleh, but actually less networking load than using an integer (32 bit)
+    self:NetworkVar("Bool", 11, "Jammed")
 
     self:NetworkVar("Angle", 0, "FreeAimAngle")
     self:NetworkVar("Angle", 1, "LastAimAngle")
