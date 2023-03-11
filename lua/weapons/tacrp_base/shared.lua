@@ -73,6 +73,8 @@ SWEP.Spread = 0.01
 
 SWEP.ShootTimeMult = 1
 
+SWEP.ShootChance = 1
+
 // Spread penalties are in spread units and are additive
 SWEP.MoveSpreadPenalty = 0 // spread penalty while travelling at max. 250 u/s
 SWEP.MidAirSpreadPenalty = 0.1 // spread penalty for being in the air

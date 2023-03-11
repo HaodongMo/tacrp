@@ -51,6 +51,19 @@ function SWEP:PrimaryAttack()
         return
     end
 
+    if self:GetValue("ShootChance") < util.SharedRandom("tacRP_shootChance", 0, 1) then
+        self.Primary.Automatic = false
+        if self:GetBlindFire() then
+            self:PlayAnimation("blind_dryfire")
+        else
+            self:PlayAnimation("dryfire")
+        end
+        self:EmitSound(self:GetValue("Sound_DryFire"), 75, 100, 1, CHAN_BODY)
+        self:SetBurstCount(0)
+        self:SetNextPrimaryFire(CurTime() + (60 / self:GetValue("RPM")))
+        return
+    end
+
     self:SetBaseSettings()
 
     if self:SprintLock() then return end
