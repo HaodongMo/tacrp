@@ -1,6 +1,6 @@
 ATT.PrintName = "Roulette"
 ATT.FullName = "Russian Roulette"
-ATT.Icon = Material("entities/tacrp_att_acc_tmj.png", "mips smooth")
+ATT.Icon = Material("entities/tacrp_att_acc_roulette.png", "mips smooth")
 ATT.Description = "One in Six chance to fire."
 ATT.Pros = {}
 ATT.Cons = {"Probably won't even shoot", "One bullet", "Slow fire rate"}

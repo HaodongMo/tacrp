@@ -1,5 +1,5 @@
 ATT.PrintName = "Birdshot"
-ATT.Icon = Material("entities/tacrp_att_acc_slugs.png", "mips smooth")
+ATT.Icon = Material("entities/tacrp_att_acc_bird.png", "mips smooth")
 ATT.Description = "Fire smaller pellets in a larger spread."
 ATT.Pros = {"Extra projectiles", "Recoil"}
 ATT.Cons = {"Spread"}
