@@ -189,11 +189,13 @@ function SWEP:PrimaryAttack()
         if IsFirstTimePredicted() then
 
             local hitscan = !GetConVar("tacrp_physbullet"):GetBool()
+            local dist = 100000
 
             -- If the bullet is going to hit something very close in front, use hitscan bullets instead
             -- This uses the aim direction without random spread, which may result in hitscan bullets in distances where it shouldn't be.
             if !hitscan then
-                local threshold = dir:Forward() * math.max(self:GetValue("MuzzleVelocity"), 15000) * engine.TickInterval() * (self:GetValue("Num") == 1 and 4 or 2)
+                dist = math.max(self:GetValue("MuzzleVelocity"), 15000) * engine.TickInterval() * (self:GetValue("Num") == 1 and 4 or 2)
+                local threshold = dir:Forward() * dist
                 local inst_tr = util.TraceLine({
                     start = self:GetMuzzleOrigin(),
                     endpos = self:GetMuzzleOrigin() + threshold,
@@ -229,6 +231,7 @@ function SWEP:PrimaryAttack()
                     Src = self:GetMuzzleOrigin(),
                     Spread = Vector(spread, spread, spread),
                     IgnoreEntity = self:GetOwner():GetVehicle(),
+                    Distance = dist,
                     Callback = function(att, btr, dmg)
                         local range = (btr.HitPos - btr.StartPos):Length()
 
