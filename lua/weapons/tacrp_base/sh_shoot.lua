@@ -333,10 +333,18 @@ function SWEP:GetShotgunPattern(i)
     local x = 0
     local y = 0
 
-    local angle = 3 * (i / num) * 360
+    if i == 1 then return x, y end
+    local f = (i - 1) / (num - 1)
 
-    x = math.sin(math.rad(angle)) * ring_spread * i / num
-    y = math.cos(math.rad(angle)) * ring_spread * i / num
+    if num <= 8 then
+        local angle = f * 360
+        x = math.sin(math.rad(angle)) * ring_spread
+        y = math.cos(math.rad(angle)) * ring_spread
+    else
+        local angle = 2 * f * 360
+        x = math.sin(math.rad(angle)) * ring_spread * f
+        y = math.cos(math.rad(angle)) * ring_spread * f
+    end
 
     return x, y
 end
