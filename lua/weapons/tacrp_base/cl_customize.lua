@@ -727,6 +727,7 @@ function SWEP:CreateCustomizeHUD()
                 if val == 1 then return "∞" end
                 return math.Round(self:GetMeanShotsToFail(base), 0)
             end,
+            HideIfSame = true,
             Value = "ShootChance",
         },
     }
