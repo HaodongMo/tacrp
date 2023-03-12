@@ -9,4 +9,5 @@ ATT.Category = "acc_holster"
 ATT.SortOrder = 4
 
 ATT.Mult_DeployTimeMult = 0.6
+ATT.Mult_HolsterTimeMult = 0.6
 ATT.Mult_ReloadTimeMult = 0.925

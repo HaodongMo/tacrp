@@ -38,20 +38,17 @@ end
 
 function SWEP:GetDeployTime(base)
     local vm = self:GetVM()
+    local valfunc = base and self.GetBaseValue or self.GetValue
 
     local anim = "deploy"
+    local mult = valfunc(self, "DeployTimeMult")
 
-    if (!base and self:GetValue("TryUnholster")) or (base and self.TryUnholster) then
+    if valfunc(self, "TryUnholster") then
         anim = "unholster"
     end
 
     local seq = vm:LookupSequence(self:TranslateSequence(anim))
     local basetime = vm:SequenceDuration(seq)
-    local mult = self.DeployTimeMult
-
-    if !base then
-        mult = self:GetValue("DeployTimeMult")
-    end
 
     return basetime * mult
 end

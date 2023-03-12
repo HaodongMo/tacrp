@@ -227,6 +227,7 @@ SWEP.ShotgunReload = false
 SWEP.ShotgunThreeload = true // use those stupid 3 shot reload animations
 SWEP.ReloadTimeMult = 1
 SWEP.DeployTimeMult = 1
+SWEP.HolsterTimeMult = 1
 SWEP.DropMagazineModel = false
 SWEP.DropMagazineImpact = "pistol" // available: "pistol", "plastic", "metal", "bullet", "shotgun"
 SWEP.DropMagazineAmount = 1

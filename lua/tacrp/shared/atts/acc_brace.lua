@@ -20,3 +20,4 @@ ATT.Add_SprintToFireTime = 0.1
 ATT.Add_HipFireSpreadPenalty = 0.005
 
 ATT.Mult_DeployTimeMult = 1.5
+ATT.Mult_HolsterTimeMult = 1.5

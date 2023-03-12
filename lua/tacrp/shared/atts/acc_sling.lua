@@ -8,4 +8,5 @@ ATT.Category = "acc_sling"
 ATT.SortOrder = 5
 
 ATT.Mult_DeployTimeMult = 0.75
+ATT.Mult_HolsterTimeMult = 0.75
 ATT.Mult_ReloadTimeMult = 0.925
