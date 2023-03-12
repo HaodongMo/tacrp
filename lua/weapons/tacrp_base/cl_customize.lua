@@ -427,20 +427,6 @@ function SWEP:CreateCustomizeHUD()
             LowerIsBetter = true,
         },
         {
-            Name = "Clump Spread",
-            Description = "Accuracy of shotgun pellets independent of other spread values.",
-            AggregateFunction = function(base, val)
-                if self:GetBaseValue("Num") <= 1 and self:GetValue("Num") <= 1 then
-                    return nil
-                end
-                return math.Round(math.deg(val), 2)
-            end,
-            Unit = "°",
-            Value = "ShotgunPelletSpread",
-            LowerIsBetter = true,
-            ConVarCheck = "tacrp_pelletspread",
-        },
-        {
             Name = "RPM",
             Description = "Rate of fire of the weapon.",
             Value = "RPM"
