@@ -10,7 +10,7 @@ SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 SWEP.SubCatTier = "3Quality"
 SWEP.SubCatType = "7Sniper Rifle"
 
-SWEP.Description = "Modernized sniper rifle lethal on a upper torso shot.\nEquipped with a 10x scope by default."
+SWEP.Description = "Lightweight sniper rifle with high mobility.\nEquipped with a 10x scope by default."
 
 SWEP.ViewModel = "models/weapons/tacint/v_uratio.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_uratio.mdl"
@@ -22,8 +22,8 @@ SWEP.ArcadeStats = {
     Damage_Max = 75,
     Damage_Min = 100,
 
-    Range_Min = 600,
-    Range_Max = 2000,
+    Range_Min = 900,
+    Range_Max = 3000,
 
     MoveSpeedMult = 0.8,
     ShootingSpeedMult = 0.6,
@@ -58,12 +58,12 @@ SWEP.Firemode = 1
 
 SWEP.FiremodeName = "Bolt-Action" // only used externally for firemode name distinction
 
-SWEP.RPM = 35
+SWEP.RPM = 37
 
 SWEP.Spread = 0.00
 
 SWEP.HipFireSpreadPenalty = 0.08
-SWEP.PeekPenaltyFraction = 0.2
+SWEP.PeekPenaltyFraction = 0.15
 
 SWEP.RecoilPerShot = 1
 SWEP.RecoilMaximum = 1
@@ -87,8 +87,8 @@ SWEP.SightedSpeedMult = 0.15
 SWEP.MeleeSpeedMult = 0.5
 SWEP.ReloadSpeedMult = 0.3
 
-SWEP.AimDownSightsTime = 0.38
-SWEP.SprintToFireTime = 0.46
+SWEP.AimDownSightsTime = 0.36
+SWEP.SprintToFireTime = 0.42
 
 // hold types
 
@@ -255,7 +255,7 @@ SWEP.Attachments = {
     },
     [4] = {
         PrintName = "Accessory",
-        Category = {"acc", "acc_foldstock", "acc_extmag_sniper", "acc_sling", "acc_duffle"},
+        Category = {"acc", "acc_foldstock", "acc_extmag_sniper", "acc_sling", "acc_duffle", "acc_bipod"},
         AttachSound = "TacRP/weapons/flashlight_on.wav",
         DetachSound = "TacRP/weapons/flashlight_off.wav",
     },

@@ -426,17 +426,6 @@ function SWEP:CreateCustomizeHUD()
             Value = "Spread",
             LowerIsBetter = true,
         },
-        // {
-        //     Name = "Clump Spread",
-        //     Description = "Accuracy of shotgun pellets independent of other spread values.",
-        //     AggregateFunction = function(base, val)
-        //         return math.Round(math.deg(val), 2)
-        //     end,
-        //     Unit = "°",
-        //     Value = "ShotgunPelletSpread",
-        //     LowerIsBetter = true,
-        //     ConVarCheck = "tacrp_pelletspread",
-        // },
         {
             Name = "RPM",
             Description = "Rate of fire of the weapon.",
