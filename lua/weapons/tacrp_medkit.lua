@@ -147,15 +147,6 @@ function SWEP:OnRemove()
     return BaseClass.OnRemove(self)
 end
 
-function SWEP:Holster()
-    if self.LoopSound then
-        self.LoopSound:Stop()
-        self.LoopSound = nil
-    end
-
-    return BaseClass.Holster(self)
-end
-
 function SWEP:SecondaryAttack()
     if self:StillWaiting() then return end
     if self:GetCharge() then return end
@@ -220,7 +211,7 @@ function SWEP:Regenerate()
     self:SetClip1(amt)
 end
 
-function SWEP:Holster()
+function SWEP:Holster(wep)
     if self.LoopSound then
         self.LoopSound:Stop()
         self.LoopSound = nil
@@ -229,7 +220,7 @@ function SWEP:Holster()
     self:SetCharge(false)
     self.HealTarget = nil
 
-    return BaseClass.Holster(self)
+    return BaseClass.Holster(self, wep)
 end
 
 function SWEP:OnRemove()

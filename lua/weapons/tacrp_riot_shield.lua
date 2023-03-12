@@ -81,6 +81,8 @@ SWEP.AnimationTranslationTable = {
     ["melee"] = "melee"
 }
 
+SWEP.NoHolsterAnimation = true
+
 SWEP.ShieldProps = {
     {
         Model = "models/weapons/tacint/w_riot_shield_2.mdl",
@@ -120,10 +122,10 @@ function SWEP:SetBaseSettings()
     end
 end
 
-function SWEP:Holster()
+function SWEP:Holster(wep)
     self:KillShields()
 
-    return BaseClass.Holster(self)
+    return BaseClass.Holster(self, wep)
 end
 
 function SWEP:SetupShields()
