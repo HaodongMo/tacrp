@@ -181,7 +181,7 @@ function SWEP:PrimaryAttack()
 
     local num = self:GetValue("Num")
     local fixed_spread = num > 1 and GetConVar("tacrp_fixedspread"):GetBool()
-    local pellet_spread = num > 1 and self:GetValue("ShotgunPelletSpread") > 0 and GetConVar("tacrp_pelletspread"):GetBool()
+    local pellet_spread = num > 1 and self:GetValue("ShotgunPelletSpread") > 0
 
     local spread = self:GetSpread()
 
