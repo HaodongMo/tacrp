@@ -1,4 +1,6 @@
 function SWEP:GetSwayAmount(pure)
+    if self:GetOwner():IsNPC() then return 0 end
+
     local sway = self:GetValue("Sway")
 
     local d = self:GetSightDelta() - (self:GetPeeking() and self:GetValue("PeekPenaltyFraction") or 0)
