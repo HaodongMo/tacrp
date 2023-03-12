@@ -364,6 +364,8 @@ SWEP.BounceWeaponIcon = false
 SWEP.SwayScale = 1
 SWEP.BobScale = 1
 
+SWEP.ActiveEffects = {}
+
 AddCSLuaFile()
 
 local searchdir = "weapons/tacrp_base"
