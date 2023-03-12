@@ -430,6 +430,9 @@ function SWEP:CreateCustomizeHUD()
             Name = "Clump Spread",
             Description = "Accuracy of shotgun pellets independent of other spread values.",
             AggregateFunction = function(base, val)
+                if self:GetBaseValue("Num") <= 1 and self:GetValue("Num") <= 1 then
+                    return nil
+                end
                 return math.Round(math.deg(val), 2)
             end,
             Unit = "°",
