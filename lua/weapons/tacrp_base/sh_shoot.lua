@@ -224,8 +224,10 @@ function SWEP:PrimaryAttack()
                         -- GetShotgunPattern will use pellet spread if enabled
                         local sgp_x, sgp_y = self:GetShotgunPattern(i)
                         new_dir:Add(Angle(sgp_x, sgp_y, 0) * 36 * 1.4142135623730)
-                    elseif pellet_spread then
-                        new_dir:Add(self:RandomSpread(self:GetValue("ShotgunPelletSpread"), i))
+
+                        if pellet_spread then
+                            new_dir:Add(self:RandomSpread(self:GetValue("ShotgunPelletSpread"), i))
+                        end
                     else
                         new_dir:Add(self:RandomSpread(spread, i))
                     end
