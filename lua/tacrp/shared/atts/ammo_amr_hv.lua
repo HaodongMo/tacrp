@@ -1,6 +1,6 @@
 ATT.PrintName = "HV"
 ATT.FullName = "High Velocity Rounds"
-ATT.Icon = Material("entities/tacrp_att_acc_tmj.png", "mips smooth")
+ATT.Icon = Material("entities/tacrp_att_acc_match.png", "mips smooth")
 ATT.Description = "Bullets with much higher velocity, but worsens overpenetration."
 ATT.Pros = {"Range", "Muzzle Velocity"}
 ATT.Cons = {"Close Range Damage"}

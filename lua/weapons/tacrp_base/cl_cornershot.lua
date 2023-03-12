@@ -30,7 +30,7 @@ local lastrendertime = 0
 local fps = 30
 
 function SWEP:DoRT()
-    if !self:GetBlindFire() or self:GetBlindFireMode() == TacRP.BLINDFIRE_KYS then lastblindfire = false return end
+    if !self:GetBlindFire() then lastblindfire = false return end
     if TacRP.OverDraw then return end
 
     if !lastblindfire then
@@ -39,15 +39,33 @@ function SWEP:DoRT()
 
     if lastrendertime > CurTime() - (1 / fps) then return end
 
+    local angles = self:GetShootDir()
+    local origin = self:GetMuzzleOrigin()
+
+    if self:GetBlindFireMode() == TacRP.BLINDFIRE_KYS then
+        local bone = self:GetOwner():LookupBone("ValveBiped.Bip01_R_Hand")
+
+        if bone then
+            local pos, ang = self:GetOwner():GetBonePosition(bone)
+
+            angles = ang
+            angles:RotateAroundAxis(angles:Forward(), 180)
+            origin = pos
+
+            TacRP.SuicideCornerCam = true
+        end
+    end
+
     local rt = {
         x = 0,
         y = 0,
         w = rt_w,
         h = rt_h,
-        angles = self:GetShootDir(),
-        origin = self:GetMuzzleOrigin(),
+        angles = angles,
+        origin = origin,
         drawviewmodel = false,
         fov = 40,
+        znear = 6
     }
 
     render.PushRenderTarget(rtmat, 0, 0, rt_w, rt_h)
@@ -57,6 +75,8 @@ function SWEP:DoRT()
         render.RenderView(rt)
         TacRP.OverDraw = false
     end
+
+    TacRP.SuicideCornerCam = false
 
     DrawColorModify({
         ["$pp_colour_addr"] = 0.25 * 132 / 255,
@@ -80,6 +100,8 @@ function SWEP:DoRT()
     -- end
 
     cam.Start2D()
+
+    render.ClearDepth()
 
     if blindfiretime < 1 then
         if blindfiretime < 0.75 then
@@ -132,7 +154,7 @@ end
 
 function SWEP:DoCornershot()
 
-    if !self:GetBlindFire() or self:GetBlindFireMode() == TacRP.BLINDFIRE_KYS then lastblindfire = false return end
+    if !self:GetBlindFire() then lastblindfire = false return end
 
     local w = ScreenScale(640 / 4)
     local h = ScreenScale(480 / 4)
@@ -141,3 +163,9 @@ function SWEP:DoCornershot()
     y = y + (ScrH() / 4)
     render.DrawTextureToScreenRect(rtmat, x, y, w, h)
 end
+
+hook.Add("ShouldDrawLocalPlayer", "TacRP_SuicideCornerCam", function(ply)
+    if TacRP.SuicideCornerCam then
+        return true
+    end
+end)

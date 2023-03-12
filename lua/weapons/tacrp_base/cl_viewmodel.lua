@@ -5,6 +5,18 @@ function SWEP:ViewModelDrawn()
 
     self:DrawCustomModel(false)
     self:DrawLasers()
+
+    local newactiveeffects = {}
+    for _, effect in ipairs(self.ActiveEffects) do
+        if !IsValid(effect) then continue end
+        if !effect.VMContext then continue end
+
+        effect:DrawModel()
+
+        table.insert(newactiveeffects, effect)
+    end
+
+    self.ActiveEffects = newactiveeffects
 end
 
 function SWEP:DrawCustomModel(wm, custom_wm)

@@ -1,6 +1,6 @@
 ATT.PrintName = "+P"
 ATT.FullName = "Overpressured Rounds"
-ATT.Icon = Material("entities/tacrp_att_acc_tmj.png", "mips smooth")
+ATT.Icon = Material("entities/tacrp_att_acc_plusp.png", "mips smooth")
 ATT.Description = "Bullets that maintain close range power better, but have higher recoil."
 ATT.Pros = {"Minimum Range", "Muzzle Velocity"}
 ATT.Cons = {"Recoil Kick", "Spread"}

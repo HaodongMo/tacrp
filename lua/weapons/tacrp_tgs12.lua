@@ -36,7 +36,7 @@ SWEP.ArcadeStats = {
 
 SWEP.Damage_Max = 15
 SWEP.Damage_Min = 6
-SWEP.Range_Min = 100 // distance for which to maintain maximum damage
+SWEP.Range_Min = 900 // distance for which to maintain maximum damage
 SWEP.Range_Max = 2000 // distance at which we drop to minimum damage
 SWEP.Penetration = 1 // units of metal this weapon can penetrate
 SWEP.Num = 8

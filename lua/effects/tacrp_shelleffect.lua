@@ -51,6 +51,8 @@ EFFECT.TypeSettings = {
     },
 }
 
+EFFECT.VMContext = true
+
 function EFFECT:Init(data)
 
     local att = data:GetAttachment()
@@ -67,8 +69,10 @@ function EFFECT:Init(data)
     if LocalPlayer():ShouldDrawLocalPlayer() or ent:GetOwner() != LocalPlayer() then
         mdl = ent
         att = 2
+        self.VMContext = false
     else
         mdl = LocalPlayer():GetViewModel()
+        table.insert(ent.ActiveEffects, self)
     end
 
     if !IsValid(ent) then self:Remove() return end
@@ -86,13 +90,15 @@ function EFFECT:Init(data)
 
     local dir = ang:Forward()
 
-    ang:RotateAroundAxis(ang:Forward(), 90)
-    ang:RotateAroundAxis(ang:Up(), 180)
+    ang:RotateAroundAxis(ang:Forward(), 0)
+    ang:RotateAroundAxis(ang:Up(), 0)
 
     self:SetPos(origin)
     self:SetModel(typetbl.Model)
     self:DrawShadow(true)
     self:SetAngles(ang)
+
+    self:SetNoDraw(true)
 
     -- if !LocalPlayer():ShouldDrawLocalPlayer() and ent:GetOwner() == LocalPlayer() then
     --     self:SetNoDraw(true)
@@ -127,7 +133,7 @@ function EFFECT:Init(data)
     phys:SetVelocity((dir * mag * math.Rand(1, 2)) + plyvel)
 
     phys:AddAngleVelocity(VectorRand() * 100)
-    phys:AddAngleVelocity(ang:Up() * 2500 * math.Rand(0.75, 1.25))
+    phys:AddAngleVelocity(ang:Up() * -2500 * math.Rand(0.75, 1.25))
 
     -- local emitter = ParticleEmitter(origin)
 
@@ -158,6 +164,8 @@ function EFFECT:PhysicsCollide()
     if self.AlreadyPlayedSound then return end
 
     sound.Play(self.Sounds[math.random(#self.Sounds)], self:GetPos(), 65, 100, 1)
+    self.VMContext = false
+    self:SetNoDraw(false)
 
     self.AlreadyPlayedSound = true
 end
@@ -182,9 +190,12 @@ end
 
 function EFFECT:Render()
     if !IsValid(self) then return end
+
     self:DrawModel()
 end
 
 function EFFECT:DrawTranslucent()
+    if !IsValid(self) then return end
+
     self:DrawModel()
 end

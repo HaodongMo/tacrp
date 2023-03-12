@@ -77,51 +77,114 @@ function SWEP:GiveDefaultAmmo()
     self:GetOwner():GiveAmmo(self:GetValue("ClipSize") * 2, self:GetValue("Ammo"))
 end
 
-function SWEP:Holster()
+
+local v0 = Vector(0, 0, 0)
+local v1 = Vector(1, 1, 1)
+local a0 = Angle(0, 0, 0)
+
+function SWEP:ClientHolster()
+    if game.SinglePlayer() then
+        self:CallOnClient("ClientHolster")
+    end
+
+    self:GetVM():SetSubMaterial()
+    self:GetVM():SetMaterial()
+
+    for i = 0, self:GetVM():GetBoneCount() do
+        self:GetVM():ManipulateBoneScale(i, v1)
+        self:GetVM():ManipulateBoneAngles(i, a0)
+        self:GetVM():ManipulateBonePosition(i, v0)
+    end
+end
+
+function SWEP:Holster(wep)
+    if game.SinglePlayer() and CLIENT then return end
+
+    if CLIENT and self:GetOwner() != LocalPlayer() then return end
+
     if self:GetOwner():IsNPC() then
         return
     end
-    if self:GetPrimedGrenade() then
-        return false
-    end
 
-    self:SetScopeLevel(0)
-    self:ToggleBoneMods(false)
-    self:KillTimers()
-    self:ToggleBlindFire(TacRP.BLINDFIRE_NONE)
-    self:GetOwner():SetFOV(0, 0.1)
+    self:SetCustomize(false)
+    self:SetReloadFinishTime(math.huge)
 
-    local holster = self:GetValue("HolsterVisible")
-    if holster then
-        local holsterslot = self:GetValue("HolsterSlot")
-        if game.SinglePlayer() or CLIENT then
-            self:GetOwner().TacRP_Holster = self:GetOwner().TacRP_Holster or {}
-            self:GetOwner().TacRP_Holster[holsterslot] = self
+    if self:GetHolsterTime() > CurTime() then return false end
+
+    if (self:GetHolsterTime() != 0 and self:GetHolsterTime() <= CurTime()) or !IsValid(wep) then
+        -- Do the final holster request
+        -- Picking up props try to switch to NULL, by the way
+        self:SetHolsterTime(0)
+        self:SetHolsterEntity(NULL)
+
+        local holster = self:GetValue("HolsterVisible")
+        if holster then
+            local holsterslot = self:GetValue("HolsterSlot")
+            if game.SinglePlayer() or CLIENT then
+                self:GetOwner().TacRP_Holster = self:GetOwner().TacRP_Holster or {}
+                self:GetOwner().TacRP_Holster[holsterslot] = self
+            else
+                net.Start("TacRP_updateholster")
+                    net.WriteEntity(self:GetOwner())
+                    net.WriteEntity(self)
+                net.SendOmit(self:GetOwner())
+            end
+        end
+
+        if game.SinglePlayer() then
+            self:CallOnClient("KillModel")
         else
-            net.Start("TacRP_updateholster")
-                net.WriteEntity(self:GetOwner())
-                net.WriteEntity(self)
-            net.SendOmit(self:GetOwner())
+            if CLIENT then
+                self:RemoveCustomizeHUD()
+                self:KillModel()
+            end
         end
-    end
 
-    if game.SinglePlayer() then
-        self:CallOnClient("KillModel")
+        self:GetOwner():SetCanZoom(true)
+
+        self:ClientHolster()
+
+        return true
     else
-        if CLIENT then
-            self:RemoveCustomizeHUD()
-            self:KillModel()
+        local reverse = 1
+        local anim = "holster"
+
+        if self:GetValue("NoHolsterAnimation") then
+            anim = "deploy"
+            reverse = -1
+        end
+
+        local animation = self:PlayAnimation(anim, self:GetValue("DeployTimeMult") * reverse, true, true)
+        self:SetHolsterTime(CurTime() + animation)
+        self:SetHolsterEntity(wep)
+
+        self:SetScopeLevel(0)
+        self:ToggleBoneMods(false)
+        self:KillTimers()
+        self:ToggleBlindFire(TacRP.BLINDFIRE_NONE)
+        self:GetOwner():SetFOV(0, 0.1)
+    end
+end
+
+local holsteranticrash = false
+
+hook.Add("StartCommand", "TacRP_Holster", function(ply, ucmd)
+    local wep = ply:GetActiveWeapon()
+
+    if IsValid(wep) and wep.ArcticTacRP then
+        if wep:GetHolsterTime() != 0 and wep:GetHolsterTime() <= CurTime() then
+            if IsValid(wep:GetHolsterEntity()) then
+                wep:SetHolsterTime(-math.huge) -- Pretty much force it to work
+
+                if !holsteranticrash then
+                    holsteranticrash = true
+                    ucmd:SelectWeapon(wep:GetHolsterEntity()) -- Call the final holster request
+                    holsteranticrash = false
+                end
+            end
         end
     end
-
-    -- if CLIENT then
-    --     RunConsoleCommand("pp_bokeh", "0")
-    -- end
-
-    self:GetOwner():SetCanZoom(true)
-
-    return true
-end
+end)
 
 function SWEP:Initialize()
     self:SetShouldHoldType()

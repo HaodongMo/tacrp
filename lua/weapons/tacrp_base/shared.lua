@@ -99,7 +99,7 @@ SWEP.RecoilKick = 0.25
 
 SWEP.RecoilSpreadPenalty = 0.001 // extra spread per one unit of recoil
 
-SWEP.ShotgunPelletSpread = 0 // per-pellet clump spread for shotguns (if enabled). Otherwise just adds to spread
+SWEP.ShotgunPelletSpread = 0 // per-pellet spread for shotguns (if enabled). Otherwise just adds to spread
 
 SWEP.CanBlindFire = true
 
@@ -298,6 +298,7 @@ SWEP.AnimationTranslationTable = {
 // so ["fire"] = "shoot1"
 // can be ["fire"] = {"list", "of", "values"}
 
+SWEP.NoHolsterAnimation = false // Will play draw reversed instead
 SWEP.LastShot = false
 SWEP.Akimbo = false
 
@@ -363,6 +364,8 @@ SWEP.BounceWeaponIcon = false
 SWEP.SwayScale = 1
 SWEP.BobScale = 1
 
+SWEP.ActiveEffects = {}
+
 AddCSLuaFile()
 
 local searchdir = "weapons/tacrp_base"
@@ -411,6 +414,7 @@ function SWEP:SetupDataTables()
     self:NetworkVar("Float", 11, "ReloadFinishTime")
     self:NetworkVar("Float", 12, "SightAmount")
     self:NetworkVar("Float", 13, "BlindFireFinishTime")
+    self:NetworkVar("Float", 14, "HolsterTime")
     -- self:NetworkVar("Float", 14, "BlindFireCornerAmount")
 
     self:NetworkVar("Int", 0, "BurstCount")
@@ -434,6 +438,8 @@ function SWEP:SetupDataTables()
 
     self:NetworkVar("Angle", 0, "FreeAimAngle")
     self:NetworkVar("Angle", 1, "LastAimAngle")
+
+    self:NetworkVar("Entity", 0, "HolsterEntity")
 
     self:SetFreeAimAngle(Angle(0, 0, 0))
     self:SetLastAimAngle(Angle(0, 0, 0))
