@@ -106,10 +106,6 @@ function SWEP:Holster(wep)
         return
     end
 
-    if self:GetReloading() then
-        self:CancelReload()
-    end
-
     self:SetCustomize(false)
 
     if self:GetHolsterTime() > CurTime() then return false end
@@ -149,7 +145,15 @@ function SWEP:Holster(wep)
 
         return true
     else
-        local animation = self:PlayAnimation("holster", self:GetValue("DeployTimeMult"), true, true)
+        local reverse = 1
+        local anim = "holster"
+
+        if self:GetValue("NoHolsterAnimation") then
+            anim = "deploy"
+            reverse = -1
+        end
+
+        local animation = self:PlayAnimation(anim, self:GetValue("DeployTimeMult") * reverse, true, true)
         self:SetHolsterTime(CurTime() + animation)
         self:SetHolsterEntity(wep)
 

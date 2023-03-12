@@ -3,6 +3,12 @@ function SWEP:PlayAnimation(seq, mult, lock, doidle)
     lock = lock or false
     seq = self:TranslateSequence(seq)
     doidle = doidle or false
+    local reverse = false
+
+    if mult < 0 then
+        reverse = true
+        mult = -mult
+    end
 
     local vm = self:GetVM()
 
@@ -21,7 +27,14 @@ function SWEP:PlayAnimation(seq, mult, lock, doidle)
     time = time * mult
 
     vm:SendViewModelMatchingSequence(seq)
-    vm:SetPlaybackRate(1 / mult)
+
+    if reverse then
+        vm:SetCycle(1)
+        vm:SetPlaybackRate(-1 / mult)
+    else
+        vm:SetCycle(0)
+        vm:SetPlaybackRate(1 / mult)
+    end
 
     if lock then
         self:SetAnimLockTime(CurTime() + time)

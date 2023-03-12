@@ -298,6 +298,7 @@ SWEP.AnimationTranslationTable = {
 // so ["fire"] = "shoot1"
 // can be ["fire"] = {"list", "of", "values"}
 
+SWEP.NoHolsterAnimation = false // Will play draw reversed instead
 SWEP.LastShot = false
 SWEP.Akimbo = false
 
