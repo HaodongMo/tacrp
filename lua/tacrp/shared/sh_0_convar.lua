@@ -500,7 +500,7 @@ local function menu_balance_ti(panel)
         command = "tacrp_fixedspread"
     })
     panel:AddControl("label", {
-        text = "Shotgun pellets uses a fixed pattern that covers the spread area. This does not affect spread size."
+        text = "Shotgun pellets uses a fixed pattern that covers the spread area for more consistent spread."
     })
     // panel:AddControl("checkbox", {
     //     label = "Enable Shotgun Clump Spread",
