@@ -411,6 +411,7 @@ function SWEP:SetupDataTables()
     self:NetworkVar("Float", 11, "ReloadFinishTime")
     self:NetworkVar("Float", 12, "SightAmount")
     self:NetworkVar("Float", 13, "BlindFireFinishTime")
+    self:NetworkVar("Float", 14, "HolsterTime")
     -- self:NetworkVar("Float", 14, "BlindFireCornerAmount")
 
     self:NetworkVar("Int", 0, "BurstCount")
@@ -434,6 +435,8 @@ function SWEP:SetupDataTables()
 
     self:NetworkVar("Angle", 0, "FreeAimAngle")
     self:NetworkVar("Angle", 1, "LastAimAngle")
+
+    self:NetworkVar("Entity", 0, "HolsterEntity")
 
     self:SetFreeAimAngle(Angle(0, 0, 0))
     self:SetLastAimAngle(Angle(0, 0, 0))
