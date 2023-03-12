@@ -107,6 +107,7 @@ function SWEP:Holster(wep)
     end
 
     self:SetCustomize(false)
+    self:SetReloadFinishTime(math.huge)
 
     if self:GetHolsterTime() > CurTime() then return false end
 
