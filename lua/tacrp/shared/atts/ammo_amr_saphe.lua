@@ -1,5 +1,5 @@
 ATT.PrintName = "SAPHE"
-ATT.Icon = Material("entities/tacrp_att_acc_tmj.png", "mips smooth")
+ATT.Icon = Material("entities/tacrp_att_acc_saphe.png", "mips smooth")
 ATT.Description = "High explosive rounds."
 ATT.Pros = {"Explosion on hit"}
 ATT.Cons = {"Direct Damage", "Capacity", "Fire Rate"}

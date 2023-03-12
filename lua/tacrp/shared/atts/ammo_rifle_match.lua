@@ -1,6 +1,6 @@
 ATT.PrintName = "Match"
 ATT.FullName = "Match Rounds"
-ATT.Icon = Material("entities/tacrp_att_acc_tmj.png", "mips smooth")
+ATT.Icon = Material("entities/tacrp_att_acc_match.png", "mips smooth")
 ATT.Description = "Bullets with greatly improved accuracy."
 ATT.Pros = {"Spread", "Recoil Spread", "Muzzle Velocity"}
 ATT.Cons = {"Hipfire Spread"}
