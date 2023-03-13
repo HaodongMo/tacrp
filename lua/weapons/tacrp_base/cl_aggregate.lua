@@ -230,8 +230,8 @@ SWEP.StatGroups = {
             local fss = valfunc(self, "RecoilFirstShotMult") * rps
             score = score + math.Clamp(1 - (fss * rsp - rbs) / 0.01, 0, 1) * 25
 
-            -- [25] spread over 0.5 second (or one burst)
-            local shots = math.floor(math.min(valfunc(self, "ClipSize"), erpm / 60 * 0.5))
+            -- [25] spread over 0.3s (or one burst)
+            local shots = math.floor(erpm / 60 * 0.3)
             if bfm < 0 then
                 shots = -bfm
             end
@@ -281,29 +281,35 @@ SWEP.StatGroups = {
                 return math.Clamp(1 - rk * rrt / 3, 0, 1) * 100
             end
 
-            -- [15] maximum spread
-            score = score + math.Clamp(1 - rmax * rsp / 0.1, 0, 1) * 15
+            -- recoil recovery
+            local rrec_s = math.Clamp(rdr / rps / 30, 0, 1) ^ 0.9
+            -- print("rrec", rdr / rps, math.Clamp(math.max(0, (rdr / rps) - 4) / 16, 0, 1) * 30)
 
-            -- [25] recoil kick over 1s
+            -- maximum spread
+            local mspr_s = math.Clamp(1 - rmax * rsp / 0.1, 0, 1) ^ 0.9
+            -- score = score + math.Clamp(1 - rmax * rsp / 0.1, 0, 1) * 15
+
+            -- 40 scaled between max spread and recovery
+            score = score + math.max(rrec_s, mspr_s) * 30 + math.min(rrec_s, mspr_s) * 10
+            -- print(rrec_s, mspr_s)
+
+            -- [35] recoil kick over 1s
             local shots = math.ceil(erpm / 60 * 1)
-            score = score + math.Clamp(1 - rk * shots * rrt / 15, 0, 1) * 25
+            score = score + math.Clamp(1 - rk * shots * rrt / 15, 0, 1) * 35
             --print("rk1", rk * shots * rrt, math.Clamp(1 - rk * shots * rrt / 15, 0, 1) * 25)
 
-            -- [30] recoil recovery
-            score = score + math.Clamp(math.max(0, (rdr / rps) - 4) / 16, 0, 1) * 30
-            --print("rrec", rdr, math.Clamp(math.max(0, (rdr / rps) - 4) / 16, 0, 1) * 30)
-
-            -- [30] spread over 1s (or 2 bursts)
-            local score_sg = 30
+            -- [25] spread over 1s (or 2 bursts)
+            local score_sg = 25
             if bfm < 0 then
                 local rbb = math.max(0, pbd - rrt) * rdr -- recovery between bursts
                 local rpb = -bfm * rps - (-bfm - 1) * rbs - rbb -- recoil per full burst
-                score = score + math.Clamp(1 - (rpb * rsp * 2) / 0.04, 0, 1) ^ 2 * score_sg
+                score = score + math.Clamp(1 - (rpb * rsp * 2) / 0.04, 0, 1) ^ 0.75 * score_sg
                 --print("spb", rpb * rsp, math.Clamp(1 - (rpb * rsp * 3) / 0.04, 0, 1) ^ 2 * score_sg)
             else
-                local sot = math.min(rmax, fss - rbs + shots * (rps - rbs)) * rsp
+                local sg = math.min(shots, math.ceil(rmax / rsp))
+                local sot = math.min(rmax, fss - rbs + sg * (rps - rbs)) * rsp
                 --print("sot", sot, math.Clamp(1 - sot / 0.04, 0, 1) ^ 2 * score_sg)
-                score = score + math.Clamp(1 - sot / 0.04, 0, 1) ^ 2 * score_sg
+                score = score + math.Clamp(1 - sot / 0.04, 0, 1) ^ 0.75 * score_sg
             end
 
             return score

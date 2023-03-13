@@ -10,4 +10,4 @@ ATT.Category = "bolt_automatic"
 ATT.SortOrder = 3
 
 ATT.Mult_RecoilDissipationRate = 1.25
-ATT.Mult_RecoilSpreadPenalty = 1.25
+ATT.Mult_RecoilSpreadPenalty = 1.175
