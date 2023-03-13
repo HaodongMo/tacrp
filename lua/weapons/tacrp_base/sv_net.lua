@@ -19,8 +19,7 @@ function SWEP:NetworkWeapon(sendto)
     self:DoBodygroups(true)
     self:DoBodygroups(false)
 
-    self.StatCache = {}
-    self.HookCache = {}
+    self:InvalidateCache()
 end
 
 function SWEP:ReceivePreset()

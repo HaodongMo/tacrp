@@ -72,8 +72,7 @@ function SWEP:LoadPreset(filename)
     end
     net.SendToServer()
 
-    self.StatCache = {}
-    self.HookCache = {}
+    self:InvalidateCache()
 
     self:SetBaseSettings()
 end

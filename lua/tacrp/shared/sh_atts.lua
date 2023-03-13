@@ -158,8 +158,7 @@ hook.Add("OnReloaded", "TacRP_ReloadAtts", function()
         TacRP.LoadAtts()
         for _, e in pairs(ents.GetAll()) do
             if e:IsWeapon() and e.ArcticTacRP then
-                e.StatCache = {}
-                e.HookCache = {}
+                e:InvalidateCache()
             end
         end
     end

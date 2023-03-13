@@ -167,8 +167,7 @@ function SWEP:NPC_Initialize()
             end
         end
 
-        self.StatCache = {}
-        self.HookCache = {}
+        self:InvalidateCache()
     end
 
     timer.Simple(0.25, function()

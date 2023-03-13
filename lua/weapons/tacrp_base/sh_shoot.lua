@@ -428,9 +428,11 @@ function SWEP:AfterShotFunction(tr, dmg, range, penleft, alreadypenned, forced)
     self:Penetrate(tr, range, penleft, alreadypenned)
 end
 
-function SWEP:GetMinMaxRange()
-    local max, min = self:GetValue("Damage_Max"), self:GetValue("Damage_Min")
-    return self:GetValue("Range_Min", max < min), self:GetValue("Range_Max", max < min)
+function SWEP:GetMinMaxRange(base)
+    local valfunc = base and self.GetBaseValue or self.GetValue
+
+    local max, min = valfunc(self, "Damage_Max"), valfunc(self, "Damage_Min")
+    return valfunc(self, "Range_Min", max < min), valfunc(self, "Range_Max", max < min)
 end
 
 function SWEP:GetDamageAtRange(range, noround)
@@ -576,18 +578,19 @@ function SWEP:GetSpread(baseline)
     return spread
 end
 
-function SWEP:GetBodyDamageMultipliers()
-    local base = table.Copy(self:GetValue("BodyDamageMultipliers"))
+function SWEP:GetBodyDamageMultipliers(base)
+    local valfunc = base and self.GetBaseValue or self.GetValue
+    local btbl = table.Copy(valfunc(self, "BodyDamageMultipliers"))
 
-    for k, v in pairs(self:GetValue("BodyDamageMultipliersExtra") or {}) do
+    for k, v in pairs(valfunc(self, "BodyDamageMultipliersExtra") or {}) do
         if v < 0 then
-            base[k] = math.abs(v)
+            btbl[k] = math.abs(v)
         else
-            base[k] = base[k] * v
+            btbl[k] = btbl[k] * v
         end
     end
 
-    return base
+    return btbl
 end
 
 function SWEP:FireAnimationEvent( pos, ang, event, options )

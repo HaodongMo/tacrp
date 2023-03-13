@@ -1,5 +1,6 @@
 SWEP.StatCache = {}
 SWEP.HookCache = {}
+SWEP.StatScoreCache = {} -- used by cust menu
 
 SWEP.ExcludeFromRawStats = {
     ["PrintName"] = true,
@@ -10,6 +11,12 @@ SWEP.IntegerStats = {
     ["ClipSize"] = true,
     ["Num"] = true,
 }
+
+function SWEP:InvalidateCache()
+    self.StatCache = {}
+    self.HookCache = {}
+    self.StatScoreCache = {}
+end
 
 function SWEP:RunHook(val, data)
     if self.HookCache[val] then

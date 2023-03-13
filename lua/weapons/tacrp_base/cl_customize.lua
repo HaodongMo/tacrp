@@ -741,9 +741,117 @@ function SWEP:CreateCustomizeHUD()
 
         local selftbl = self:GetTable()
 
+        local tabs_h = ScreenScale(10)
+
+        local group_box = vgui.Create("DPanel", bg)
+        group_box.PrintName = "Rating"
+        group_box:SetSize(ScreenScale(168), ScreenScale(128))
+        group_box:SetPos(scrw - ScreenScale(168) - airgap, stack + smallgap * 2 + tabs_h)
+        group_box.Paint = function(self2)
+            if !IsValid(self) then return end
+
+            local w, h = ScreenScale(172), ScreenScale(16)
+            local x, y = 0, 0
+
+            local hovered = false
+            local hoverindex = 0
+            local hoverscore = 0
+
+            for i, v in ipairs(self.StatGroups) do
+
+                if !self.StatScoreCache[i] then
+                    local sb, cb = v.RatingFunction(self, true)
+                    local sc, cc = v.RatingFunction(self, false)
+                    self.StatScoreCache[i] = {{math.min(sc or 0, 100), cc}, {math.min(sb or 0, 100), cb}}
+                end
+                local scorecache = self.StatScoreCache[i]
+                local f = scorecache[1][1] / 100
+                local f_base = scorecache[2][1] / 100
+
+                local w2, h2 = ScreenScale(100), ScreenScale(8)
+                surface.SetDrawColor(0, 0, 0, 150)
+                surface.DrawRect(x, y, w, h)
+                TacRP.DrawCorneredBox(x, y, w, h)
+
+                draw.SimpleText(v.Name, "TacRP_Myriad_Pro_10", x + ScreenScale(4), y + ScreenScale(8), color_white, TEXT_ALIGN_LEFT, TEXT_ALIGN_CENTER)
+
+                surface.SetDrawColor(75, 75, 75, 100)
+                surface.DrawRect(x + ScreenScale(64), y + ScreenScale(4), w2, h2)
+
+                surface.SetDrawColor(Lerp(f, 200, 0), Lerp(f, 0, 200), 0, 150)
+                surface.DrawRect(x + ScreenScale(64), y + ScreenScale(4), w2 * f, h2)
+
+                surface.SetDrawColor(0, 0, 0, 0)
+                TacRP.DrawCorneredBox(x + ScreenScale(64), y + ScreenScale(4), w2, h2)
+
+                for j = 1, 4 do
+                    surface.SetDrawColor(255, 255, 255, 125)
+                    surface.DrawRect(x + ScreenScale(64) + w2 * (j / 5) - 0.5, y + h2 - ScreenScale(1.5), 1, ScreenScale(3))
+                end
+
+                surface.SetDrawColor(255, 255, 255, 20)
+                surface.DrawRect(x + ScreenScale(64), y + ScreenScale(2.5) + h2 / 2, w2 * f_base, ScreenScale(3))
+
+                local mx, my = self2:CursorPos()
+                if mx > 0 and mx <= w and my > y and my <= y + h then
+                    hovered = true
+                    hoverindex = i
+                    hoverscore = scorecache[1][1]
+                end
+
+                y = y + ScreenScale(18)
+            end
+
+            if hovered then
+                local v = self.StatGroups[hoverindex]
+                local todo = DisableClipping(true)
+                local col_bg = Color(0, 0, 0, 254)
+                local col_corner = Color(255, 255, 255)
+                local col_text = Color(255, 255, 255)
+                local rx, ry = self2:CursorPos()
+                rx = rx + ScreenScale(16)
+                ry = ry + ScreenScale(16)
+
+                local desc = v.Description or {""}
+                if isstring(desc) then
+                    desc = {desc}
+                end
+
+                if self2:GetY() + ry >= ScreenScale(280) then
+                    ry = ry - ScreenScale(60)
+                end
+
+                if self2:GetX() + rx + ScreenScale(160) >= ScrW() then
+                    rx = rx - ScreenScale(160)
+                end
+
+                local bw, bh = ScreenScale(160), ScreenScale(12 + (6 * #desc))
+                surface.SetDrawColor(col_bg)
+                TacRP.DrawCorneredBox(rx, ry, bw, bh, col_corner)
+
+                local txt = v.Name
+                surface.SetTextColor(col_text)
+                surface.SetFont("TacRP_Myriad_Pro_10")
+                surface.SetTextPos(rx + ScreenScale(2), ry + ScreenScale(1))
+                surface.DrawText(txt)
+
+                local scoretxt = "(Rating: " .. math.Round(hoverscore) .. " / 100)"
+                draw.SimpleText(scoretxt, "TacRP_Myriad_Pro_8", rx + bw - ScreenScale(2), ry + ScreenScale(2), col_text, TEXT_ALIGN_RIGHT, TEXT_ALIGN_TOP)
+
+                surface.SetFont("TacRP_Myriad_Pro_6")
+                for j, k in pairs(desc) do
+                    surface.SetTextPos(rx + ScreenScale(2), ry + ScreenScale(1 + 8 + 2) + (ScreenScale(6 * (j - 1))))
+                    surface.DrawText(k)
+                end
+
+                DisableClipping(todo)
+            end
+        end
+
         local stat_box = vgui.Create("DPanel", bg)
-        stat_box:SetSize(ScreenScale(128), ScreenScale(184))
-        stat_box:SetPos(scrw - ScreenScale(128) - airgap, stack + smallgap)
+        stat_box.PrintName = "Stats"
+        stat_box:SetSize(ScreenScale(128), ScreenScale(172))
+        stat_box:SetPos(scrw - ScreenScale(128) - airgap, stack + smallgap * 2 + tabs_h)
         stat_box.Paint = function(self2, w, h)
             if !IsValid(self) then return end
 
@@ -925,6 +1033,72 @@ function SWEP:CreateCustomizeHUD()
                 DisableClipping(todo)
             end
         end
+
+        local tabs = {group_box, stat_box}
+        local active_tab = 1
+
+        -- local tab_list = vgui.Create("DPanel", bg)
+        -- tab_list:SetSize(ScreenScale(172), tabs_h)
+        -- tab_list:SetPos(scrw - ScreenScale(172) - airgap, stack + smallgap)
+        -- tab_list:SetMouseInputEnabled(false)
+        -- tab_list.Paint = function() return end
+
+        local tabs_w = ScreenScale(172) / #tabs - #tabs * ScreenScale(1)
+        for i = 1, #tabs do
+            if i != active_tab then
+                tabs[i]:Hide()
+            end
+
+            local tab_button = vgui.Create("DLabel", bg)
+            tab_button.TabIndex = i
+            tab_button:SetSize(tabs_w, tabs_h)
+            tab_button:SetPos(scrw - ScreenScale(172) - airgap + (ScreenScale(2) + tabs_w) * (i - 1), stack + smallgap)
+            tab_button:SetText("")
+            tab_button:SetMouseInputEnabled(true)
+            tab_button:MoveToFront()
+            tab_button.Paint = function(self2, w2, h2)
+                if !IsValid(self) then return end
+
+                local hover = self2:IsHovered()
+                local selected = active_tab == i
+
+                local col_bg = Color(0, 0, 0, 150)
+                local col_corner = Color(255, 255, 255)
+                local col_text = Color(255, 255, 255)
+
+                if selected then
+                    col_bg = Color(150, 150, 150, 150)
+                    col_corner = Color(50, 50, 255)
+                    col_text = Color(0, 0, 0)
+                    if hover then
+                        col_bg = Color(255, 255, 255)
+                        col_corner = Color(150, 150, 255)
+                        col_text = Color(0, 0, 0)
+                    end
+                elseif hover then
+                    col_bg = Color(255, 255, 255)
+                    col_corner = Color(0, 0, 0)
+                    col_text = Color(0, 0, 0)
+                end
+
+                surface.SetDrawColor(col_bg)
+                surface.DrawRect(0, 0, w2, h2)
+                TacRP.DrawCorneredBox(0, 0, w2, h2, col_corner)
+
+                draw.SimpleText(tabs[i].PrintName, "TacRP_Myriad_Pro_8", w2 / 2, h2 / 2, col_text, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+            end
+            tab_button.DoClick = function(self2)
+                if self2.TabIndex == active_tab then return end
+                active_tab = self2.TabIndex
+                for j = 1, #tabs do
+                    if j != active_tab then
+                        tabs[j]:Hide()
+                    else
+                        tabs[j]:Show()
+                    end
+                end
+            end
+        end
     end
 
     local attachment_slots = {}
@@ -976,7 +1150,7 @@ function SWEP:CreateCustomizeHUD()
 
         local prosconspanel = vgui.Create("DPanel", bg)
         prosconspanel:SetPos(airgap + ((table.Count(atts)) * ScreenScale(34)), offset + airgap + ((slot - 1) * ScreenScale(34 + 8)))
-        prosconspanel:SetSize(ScrW(), ScreenScale(34))
+        prosconspanel:SetSize(ScreenScale(256), ScreenScale(34))
         prosconspanel.Paint = function(self2, w, h)
             if !IsValid(self) then return end
 

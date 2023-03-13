@@ -37,8 +37,7 @@ function SWEP:Attach(slot, att, silent)
         TacRP:PlayerSendAttInv(self:GetOwner())
     end
 
-    self.StatCache = {}
-    self.HookCache = {}
+    self:InvalidateCache()
 
     self:SetBaseSettings()
 
@@ -91,8 +90,7 @@ function SWEP:Detach(slot, silent)
         TacRP:PlayerSendAttInv(self:GetOwner())
     end
 
-    self.StatCache = {}
-    self.HookCache = {}
+    self:InvalidateCache()
 
     self:SetBaseSettings()
 
