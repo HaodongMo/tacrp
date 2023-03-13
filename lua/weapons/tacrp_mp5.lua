@@ -19,8 +19,15 @@ SWEP.Slot = 2
 
 SWEP.ArcadeStats = {
 
-    Damage_Max = 15,
+    Damage_Max = 14,
     Damage_Min = 7,
+
+    Range_Min = 1500,
+    Range_Max = 4000,
+
+    HipFireSpreadPenalty = 0.025,
+
+    RecoilKick = 3,
 
     MoveSpeedMult = 0.9,
     ShootingSpeedMult = 0.8,
@@ -64,16 +71,16 @@ SWEP.Spread = 0.0015
 SWEP.ShootTimeMult = 0.5
 
 SWEP.RecoilPerShot = 1
-SWEP.RecoilMaximum = 10
+SWEP.RecoilMaximum = 8
 SWEP.RecoilResetTime = 0.1// time after you stop shooting for recoil to start dissipating
-SWEP.RecoilDissipationRate = 10
-SWEP.RecoilFirstShotMult = 1
+SWEP.RecoilDissipationRate = 12
+SWEP.RecoilFirstShotMult = 0.85
 
 SWEP.RecoilVisualKick = 0.5
 
 SWEP.RecoilKick = 2.5
 
-SWEP.RecoilSpreadPenalty = 0.001 // extra spread per one unit of recoil
+SWEP.RecoilSpreadPenalty = 0.003
 SWEP.HipFireSpreadPenalty = 0.025
 
 SWEP.CanBlindFire = true
