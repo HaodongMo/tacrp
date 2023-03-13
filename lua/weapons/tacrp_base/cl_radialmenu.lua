@@ -469,7 +469,8 @@ local bf_lines = {
     "We really shouldn't be encouraging this.",
     "You'll never see all the quotes",
     "When the going gets tough, the tough get going",
-    "Acute cerebral lead poisoning"
+    "Acute cerebral lead poisoning",
+    "Those bullets are laced with estrogen, you know",
 }
 
 local function canhighlight(self, slice)
