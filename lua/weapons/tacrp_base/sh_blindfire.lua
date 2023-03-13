@@ -322,5 +322,7 @@ function SWEP:ThinkBlindFire()
         elseif self:GetOwner():KeyDown(IN_BACK) then
             self:ToggleBlindFire(TacRP.BLINDFIRE_NONE)
         end
+    elseif self:GetOwner():KeyDown(IN_ZOOM) and self:GetOwner():GetInfo("tacrp_blindfiremenu") and self:GetOwner():GetCanZoom() then
+        self:GetOwner():SetCanZoom(false)
     end
 end

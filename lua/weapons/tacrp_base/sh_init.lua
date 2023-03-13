@@ -33,6 +33,7 @@ function SWEP:Deploy()
     self:SetBlindFireFinishTime(0)
     self:SetJammed(false)
 
+    self.PreviousZoom = self:GetOwner():GetCanZoom()
     if IsValid(self:GetOwner()) and self:GetOwner():IsPlayer() then
         self:GetOwner():SetCanZoom(false)
     end
@@ -145,7 +146,9 @@ function SWEP:Holster(wep)
             end
         end
 
-        self:GetOwner():SetCanZoom(true)
+        if self.PreviousZoom then
+            self:GetOwner():SetCanZoom(true)
+        end
 
         self:ClientHolster()
 
