@@ -137,16 +137,37 @@ function SWEP:SetupShields()
         if !k then continue end
         if !k.Model then continue end
 
-        local bonename = k.Bone or "ValveBiped.Bip01_R_Hand"
+        local correctang, correctpos
 
+        local bonename = k.Bone or "ValveBiped.Bip01_R_Hand"
         local boneindex = self:GetOwner():LookupBone(bonename)
+        if !boneindex then
+            bonename = "ValveBiped.Anim_Attachment_RH"
+            boneindex = self:GetOwner():LookupBone(bonename)
+            if !boneindex then
+                boneindex = 0 // just give up
+                if !self:GetOwner().ShieldPosWarn then
+                    self:GetOwner().ShieldPosWarn = true
+                    self:GetOwner():ChatPrint("[TacRP] Your playermodel does not have the right hand bone or attachment bone.")
+                    self:GetOwner():ChatPrint("[TacRP] The shield will not be able to position itself correctly!")
+                end
+            else
+                // this should be close enough for most models
+                correctang = Angle(-90, 90, 0)
+                correctpos = Vector(0, -25, -28)
+            end
+        end
 
         local bpos, bang = self:GetOwner():GetBonePosition(boneindex)
 
         local pos = k.Pos or Vector(0, 0, 0)
         local ang = k.Ang or Angle(0, 0, 0)
+        if correctang and correctpos then
+            ang = ang + correctang
+            pos = pos + correctpos
+        end
 
-        local apos = LocalToWorld(pos, ang, bpos, bang)
+        local apos = LocalToWorld(pos, ang, bpos or Vector(), bang or Angle())
 
         local shield = ents.Create("physics_prop")
         if !shield then
@@ -166,6 +187,7 @@ function SWEP:SetupShields()
         shield.Weapon = self
         if GetConVar("developer"):GetBool() then
             shield:SetColor( Color(0, 0, 0, 255) )
+            shield:SetMaterial("models/wireframe")
         else
             shield:SetColor( Color(0, 0, 0, 0) )
             shield:SetRenderMode(RENDERMODE_NONE)
@@ -212,6 +234,15 @@ function SWEP:SetupModel(wm)
         if !IsValid(self2.Weapon:GetOwner()) then self2:Remove() return end
         if self2.Weapon != self2.Weapon:GetOwner():GetActiveWeapon() then self2:Remove() return end
         self2:DrawModel()
+    end
+
+    if !self:GetOwner():LookupBone(csmodel.Bone) then
+        csmodel.Bone = "ValveBiped.Anim_Attachment_RH"
+        if !self:GetOwner():LookupBone(csmodel.Bone) then
+            csmodel.Bone = self:GetOwner():GetBoneName(0) // give up
+        end
+        csmodel.Ang = csmodel.Ang + Angle(90, 0, 90)
+        csmodel.Pos = csmodel.Pos + Vector(-1, 25, -28)
     end
 
     local tbl = {
