@@ -1035,7 +1035,7 @@ function SWEP:CreateCustomizeHUD()
         end
 
         local tabs = {group_box, stat_box}
-        local active_tab = 1
+        self.ActiveTab = self.ActiveTab or 1
 
         -- local tab_list = vgui.Create("DPanel", bg)
         -- tab_list:SetSize(ScreenScale(172), tabs_h)
@@ -1043,9 +1043,9 @@ function SWEP:CreateCustomizeHUD()
         -- tab_list:SetMouseInputEnabled(false)
         -- tab_list.Paint = function() return end
 
-        local tabs_w = ScreenScale(172) / #tabs - #tabs * ScreenScale(1)
+        local tabs_w = ScreenScale(172) / #tabs - #tabs * ScreenScale(0.5)
         for i = 1, #tabs do
-            if i != active_tab then
+            if i != self.ActiveTab then
                 tabs[i]:Hide()
             end
 
@@ -1060,7 +1060,7 @@ function SWEP:CreateCustomizeHUD()
                 if !IsValid(self) then return end
 
                 local hover = self2:IsHovered()
-                local selected = active_tab == i
+                local selected = self.ActiveTab == i
 
                 local col_bg = Color(0, 0, 0, 150)
                 local col_corner = Color(255, 255, 255)
@@ -1088,10 +1088,10 @@ function SWEP:CreateCustomizeHUD()
                 draw.SimpleText(tabs[i].PrintName, "TacRP_Myriad_Pro_8", w2 / 2, h2 / 2, col_text, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
             end
             tab_button.DoClick = function(self2)
-                if self2.TabIndex == active_tab then return end
-                active_tab = self2.TabIndex
+                if self2.TabIndex == self.ActiveTab then return end
+                self.ActiveTab = self2.TabIndex
                 for j = 1, #tabs do
-                    if j != active_tab then
+                    if j != self.ActiveTab then
                         tabs[j]:Hide()
                     else
                         tabs[j]:Show()
