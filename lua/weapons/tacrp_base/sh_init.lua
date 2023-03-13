@@ -107,7 +107,11 @@ function SWEP:Holster(wep)
     end
 
     self:SetCustomize(false)
-    self:SetReloadFinishTime(math.huge)
+
+    if self:GetReloading() and self:GetValue("ShotgunReload") and !self:GetEndReload() then
+        self:SetEndReload(false)
+        self:SetReloading(false)
+    end
 
     if self:GetHolsterTime() > CurTime() then return false end
 
@@ -116,6 +120,7 @@ function SWEP:Holster(wep)
         -- Picking up props try to switch to NULL, by the way
         self:SetHolsterTime(0)
         self:SetHolsterEntity(NULL)
+        self:SetReloadFinishTime(0)
 
         local holster = self:GetValue("HolsterVisible")
         if holster then

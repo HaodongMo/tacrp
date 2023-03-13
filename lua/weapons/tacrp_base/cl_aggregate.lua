@@ -108,8 +108,8 @@ local mssd_scoring = {
 }
 
 SWEP.StatGroupGrades = {
-    {92, "S", Color(230, 60, 60)},
-    {80, "A", Color(230, 180, 60)},
+    {93, "S", Color(230, 60, 60)},
+    {78, "A", Color(230, 180, 60)},
     {60, "B", Color(230, 230, 60)},
     {40, "C", Color(60, 230, 60)},
     {20, "D", Color(60, 60, 230)},
