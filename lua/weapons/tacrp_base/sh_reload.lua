@@ -65,7 +65,7 @@ function SWEP:DropMagazine()
             local mag = ents.Create("TacRP_droppedmag")
 
             if mag then
-                local matrix = self:GetOwner():GetBoneMatrix(self:GetOwner():LookupBone("ValveBiped.Bip01_R_Hand"))
+                local matrix = self:GetOwner():GetBoneMatrix(self:GetOwner():LookupBone("ValveBiped.Bip01_R_Hand") or -1)
                 local pos, ang
                 if matrix then
                     pos = matrix:GetTranslation()
