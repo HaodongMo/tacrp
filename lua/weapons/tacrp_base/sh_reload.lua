@@ -66,8 +66,15 @@ function SWEP:DropMagazine()
 
             if mag then
                 local matrix = self:GetOwner():GetBoneMatrix(self:GetOwner():LookupBone("ValveBiped.Bip01_R_Hand"))
-                local pos = matrix:GetTranslation() or self:GetOwner():EyePos() - (self:GetOwner():EyeAngles():Up() * 8)
-                local ang = matrix:GetAngles() or self:GetOwner():EyeAngles()
+                local pos, ang
+                if matrix then
+                    pos = matrix:GetTranslation()
+                    ang = matrix:GetAngles()
+                else
+                    pos = self:GetOwner():EyePos() - (self:GetOwner():EyeAngles():Up() * 8)
+                    ang = self:GetOwner():EyeAngles()
+                end
+
                 mag:SetPos(pos)
                 mag:SetAngles(ang)
                 mag.Model = self:GetValue("DropMagazineModel")
