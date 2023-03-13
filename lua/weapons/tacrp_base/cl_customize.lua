@@ -745,7 +745,7 @@ function SWEP:CreateCustomizeHUD()
 
         local group_box = vgui.Create("DPanel", bg)
         group_box.PrintName = "Rating"
-        group_box:SetSize(ScreenScale(168), ScreenScale(128))
+        group_box:SetSize(ScreenScale(168), ScreenScale(172))
         group_box:SetPos(scrw - ScreenScale(168) - airgap, stack + smallgap * 2 + tabs_h)
         group_box.Paint = function(self2)
             if !IsValid(self) then return end
@@ -760,9 +760,20 @@ function SWEP:CreateCustomizeHUD()
             for i, v in ipairs(self.StatGroups) do
 
                 if !self.StatScoreCache[i] then
-                    local sb, cb = v.RatingFunction(self, true)
-                    local sc, cc = v.RatingFunction(self, false)
-                    self.StatScoreCache[i] = {{math.min(sc or 0, 100), cc}, {math.min(sb or 0, 100), cb}}
+                    local sb = v.RatingFunction(self, true)
+                    local sc = v.RatingFunction(self, false)
+
+                    local ib, ic = 0, 0
+                    for j = 1, #self.StatGroupGrades do
+                        if ib == 0 and sb >= self.StatGroupGrades[j][1] then
+                            ib = j
+                        end
+                        if ic == 0 and sc >= self.StatGroupGrades[j][1] then
+                            ic = j
+                        end
+                    end
+
+                    self.StatScoreCache[i] = {{math.min(sc or 0, 100), ic}, {math.min(sb or 0, 100), ib}}
                 end
                 local scorecache = self.StatScoreCache[i]
                 local f = scorecache[1][1] / 100
@@ -791,6 +802,11 @@ function SWEP:CreateCustomizeHUD()
 
                 surface.SetDrawColor(255, 255, 255, 20)
                 surface.DrawRect(x + ScreenScale(64), y + ScreenScale(2.5) + h2 / 2, w2 * f_base, ScreenScale(3))
+
+                local grade = self.StatGroupGrades[scorecache[1][2]]
+                if grade then
+                    draw.SimpleText(grade[2], "TacRP_HD44780A00_5x8_8", x + ScreenScale(61), y + ScreenScale(7.5), grade[3], TEXT_ALIGN_RIGHT, TEXT_ALIGN_CENTER)
+                end
 
                 local mx, my = self2:CursorPos()
                 if mx > 0 and mx <= w and my > y and my <= y + h then

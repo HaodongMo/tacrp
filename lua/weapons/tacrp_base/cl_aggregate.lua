@@ -107,12 +107,21 @@ local mssd_scoring = {
     [HITGROUP_LEFTLEG] = {0.15, 1,   {1, 0.9,  0.7, 0.4,  0.25, 0.15, 0.1}},
 }
 
+SWEP.StatGroupGrades = {
+    {92, "S", Color(230, 60, 60)},
+    {80, "A", Color(230, 180, 60)},
+    {60, "B", Color(230, 230, 60)},
+    {40, "C", Color(60, 230, 60)},
+    {20, "D", Color(60, 60, 230)},
+    { 0, "F", Color(150, 150, 150)},
+}
+
 SWEP.StatGroups = {
     {
         Name = "Lethality",
         Description = {"How easily and quickly the weapon kills under ideal circumstances.", "Affected by Damage and RPM."},
         RatingFunction = function(self, base)
-            local score = 0
+            -- local score = 0
             local valfunc = base and self.GetBaseValue or self.GetValue
 
             local bfm = self:GetBestFiremode(base)
@@ -274,7 +283,7 @@ SWEP.StatGroups = {
             local fss = valfunc(self, "RecoilFirstShotMult") * rps
             local rmax = valfunc(self, "RecoilMaximum")
 
-            local rk = valfunc(self, "RecoilKick")
+            local rk = math.abs(valfunc(self, "RecoilKick"))
 
             if rbs > fss or rsp == 0 then
                 -- judge solely on recoil kick and reset time, as spread is not a factor
@@ -349,6 +358,45 @@ SWEP.StatGroups = {
         end,
     },
     {
+        Name = "Maneuvering",
+        Description = {"How well the weapon performs while moving around and not aiming.", "Affected by Hipfire, Moving and Mid-air Spread, as well as Peeking Penalty.", "If Free Aim or Sway is enabled, they will also be scored."},
+        RatingFunction = function(self, base)
+            local score = 0
+            local valfunc = base and self.GetBaseValue or self.GetValue
+
+            -- [25] free aim + sway (if both are disabled, score goes to other 2)
+            local bonus = 30
+            local freeaim_s = 1
+            if GetConVar("tacrp_freeaim"):GetBool() then
+                if valfunc(self, "FreeAim") then
+                    freeaim_s = math.Clamp(1 - (valfunc(self, "FreeAimMaxAngle") - 5) / 5, 0, 1)
+                end
+                bonus = 0
+            end
+            local sway_s = 1
+            if GetConVar("tacrp_sway"):GetBool() then
+                sway_s = math.Clamp(1 - (valfunc(self, "Sway") ) / 4, 0, 1) ^ 0.6
+                bonus = 0
+            end
+            if bonus == 0 then
+                score = score + math.max(freeaim_s, sway_s) * 22 + math.min(freeaim_s, sway_s) * 8
+            end
+
+            local diff = valfunc(self, "HipFireSpreadPenalty") / math.Clamp(self:GetBaseValue("Spread"), 0.015, 0.03)
+
+            -- [20] peeking
+            score = score + math.Clamp(1 - (diff * valfunc(self, "PeekPenaltyFraction")) / 1.5, 0, 1) * (20 + bonus * 0.25)
+
+            -- [40] hip spread
+            score = score + math.Clamp(1 - (diff - 1) / 4, 0, 1) ^ 0.9 * (40 + bonus * 0.5)
+
+            -- [15] mid-air/moving spread
+            score = score + math.Clamp(1 - (valfunc(self, "MidAirSpreadPenalty") * 0.3 + valfunc(self, "MoveSpreadPenalty") * 0.7) / 0.15, 0, 1) * (15 + bonus * 0.25)
+
+            return score
+        end,
+    },
+    {
         Name = "Mobility",
         Description = {"How fast the user can move while using this weapon.", "Affected by various Speed stats, such as Sighted Speed."},
         RatingFunction = function(self, base)
@@ -371,20 +419,20 @@ SWEP.StatGroups = {
         end,
     },
     {
-        Name = "Sway",
-        Description = {"How much the weapon's point of aim will move around.", "Affected by various Sway stats.", "NOTE: Has no effect when Sway is disabled in the options."},
+        Name = "Stability",
+        Description = {"How much the weapon's point of aim will move around.", "Affected by various Sway stats.", "NOTE: No difference if Sway is disabled in the options."},
         RatingFunction = function(self, base)
             local score = 0
             local valfunc = base and self.GetBaseValue or self.GetValue
 
-            -- [55] sway
-            score = score + math.Clamp(1 - valfunc(self, "Sway") / 5, 0, 1) * 55
+            -- [30] sway
+            score = score + math.Clamp(1 - valfunc(self, "Sway") / 5, 0, 1) ^ 0.75 * 30
 
-            -- [40] sighted sway
-            score = score + math.Clamp(1 - valfunc(self, "ScopedSway") / 2, 0, 1) ^ 1.5 * 40
+            -- [60] sighted sway
+            score = score + math.Clamp(1 - valfunc(self, "ScopedSway") / 2, 0, 1) ^ 1.5 * 60
 
-            -- [5] blindfire sway
-            score = score + math.Clamp(1 - valfunc(self, "BlindFireSway") / 2, 0, 1) * 5
+            -- [10] blindfire sway
+            score = score + math.Clamp(1 - valfunc(self, "BlindFireSway") / 2, 0, 1) * 10
 
             return score
         end,
