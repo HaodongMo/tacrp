@@ -415,12 +415,7 @@ function SWEP:CreateCustomizeHUD()
             Name = "Spread",
             Description = "Base accuracy of the weapon.",
             AggregateFunction = function(base, val)
-                local spread = val
-                local valfunc = base and self.GetBaseValue or self.GetValue
-                if valfunc(self, "Num") > 1 and !GetConVar("tacrp_pelletspread"):GetBool() then
-                    spread = spread + valfunc(self, "ShotgunPelletSpread")
-                end
-                return math.Round(math.deg(spread), 2)
+                return math.Round(math.deg(val), 2)
             end,
             Unit = "°",
             Value = "Spread",

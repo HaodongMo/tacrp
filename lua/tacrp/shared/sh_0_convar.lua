@@ -513,15 +513,15 @@ local function menu_balance_ti(panel)
         command = "tacrp_fixedspread"
     })
     panel:AddControl("label", {
-        text = "Shotgun pellets uses a fixed pattern that covers the spread area for more consistent spread."
+        text = "Shotgun pellets uses a fixed pattern that covers the spread area for more consistency. They are still subject to a small amount of randomness."
     })
-    // panel:AddControl("checkbox", {
-    //     label = "Enable Shotgun Clump Spread",
-    //     command = "tacrp_pelletspread"
-    // })
-    // panel:AddControl("label", {
-    //     text = "ArcCW/CW2 styled shotgun spread. Uses a separate Clump Spread stat and is not affected by other spread stats. If disabled, Clump Spread is added to total spread."
-    // })
+    panel:AddControl("checkbox", {
+        label = "Enabled Fixed Pattern Randomness",
+        command = "tacrp_pelletspread"
+    })
+    panel:AddControl("label", {
+        text = "Additional random spread onto the fixed pattern. Does not affect total spread. If disabled, shotgun patterns become completely static."
+    })
 
     panel:AddControl("slider", {
         label = "Flashbang Slow",

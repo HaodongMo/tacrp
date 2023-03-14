@@ -14,4 +14,6 @@ ATT.Mult_Damage_Max = 0.5
 ATT.Mult_Num = 2
 ATT.Mult_RecoilKick = 0.75
 ATT.Mult_MuzzleVelocity = 0.75
-ATT.Add_ShotgunPelletSpread = 0.02
+
+ATT.Add_Spread = 0.02
+ATT.Add_ShotgunPelletSpread = 0.01

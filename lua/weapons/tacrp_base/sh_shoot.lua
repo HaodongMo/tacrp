@@ -181,7 +181,7 @@ function SWEP:PrimaryAttack()
 
     local num = self:GetValue("Num")
     local fixed_spread = num > 1 and GetConVar("tacrp_fixedspread"):GetBool()
-    local pellet_spread = num > 1 and self:GetValue("ShotgunPelletSpread") > 0
+    local pellet_spread = num > 1 and self:GetValue("ShotgunPelletSpread") > 0 and GetConVar("tacrp_pelletspread"):GetBool()
 
     local spread = self:GetSpread()
 
@@ -221,10 +221,8 @@ function SWEP:PrimaryAttack()
                 for i = 1, num do
                     local new_dir = Angle(dir)
                     if fixed_spread then
-                        -- GetShotgunPattern will use pellet spread if enabled
                         local sgp_x, sgp_y = self:GetShotgunPattern(i)
                         new_dir:Add(Angle(sgp_x, sgp_y, 0) * 36 * 1.4142135623730)
-
                         if pellet_spread then
                             new_dir:Add(self:RandomSpread(self:GetValue("ShotgunPelletSpread"), i))
                         end
@@ -262,10 +260,10 @@ function SWEP:PrimaryAttack()
             else
                 local new_dir = Angle(dir)
                 local new_spread = spread
-                if pellet_spread then
-                    new_spread = self:GetValue("ShotgunPelletSpread")
-                    new_dir:Add(self:RandomSpread(spread, 0))
-                end
+                -- if pellet_spread then
+                --     new_spread = self:GetValue("ShotgunPelletSpread")
+                --     new_dir:Add(self:RandomSpread(spread, 0))
+                -- end
 
                 -- Try to use Num in FireBullets if at all possible, as this is more performant and better for damage calc compatibility
                 -- Also it generates nice big numbers in various hit number addons instead of a buncha small ones.
@@ -329,7 +327,7 @@ function SWEP:GetShotgunPattern(i)
     local num = self:GetValue("Num")
 
     if num > 1 and self:GetValue("ShotgunPelletSpread") > 0 and GetConVar("tacrp_pelletspread"):GetBool() then
-        ring_spread = self:GetValue("ShotgunPelletSpread")
+        ring_spread = ring_spread - self:GetValue("ShotgunPelletSpread")
     end
 
     local x = 0
@@ -528,11 +526,6 @@ end
 
 function SWEP:GetSpread(baseline)
     local spread = self:GetValue("Spread")
-
-    -- Tack on the ShotgunPelletSpread value if pellet spread is disabled (otherwise the stat does nothing!)
-    if self:GetValue("Num") > 1 and self:GetValue("ShotgunPelletSpread") > 0 and !GetConVar("tacrp_pelletspread"):GetBool() then
-        spread = spread + self:GetValue("ShotgunPelletSpread")
-    end
 
     -- if self:GetScopeLevel() == 0 then
     --     spread = spread + self:GetValue("HipFireSpreadPenalty")

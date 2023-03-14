@@ -221,7 +221,7 @@ SWEP.StatGroups = {
             end
 
             local num = valfunc(self, "Num")
-            local spread = valfunc(self, "Spread") + (num > 1 and !GetConVar("tacrp_pelletspread"):GetBool() and valfunc(self, "ShotgunPelletSpread") or 0)
+            local spread = valfunc(self, "Spread")
             local delay = 60 / valfunc(self, "RPM")
             local rps = valfunc(self, "RecoilPerShot")
             local rsp = valfunc(self, "RecoilSpreadPenalty")

@@ -14,7 +14,9 @@ ATT.Add_Range_Min = 250
 ATT.Mult_RecoilKick = 1.5
 ATT.Mult_MuzzleVelocity = 1.5
 
+ATT.Add_Spread = 0.005
 ATT.Add_ShotgunPelletSpread = 0.005
+
 ATT.Mult_RecoilSpreadPenalty = 1.25
 
 ATT.Mult_ShootingSpeedMult = 0.8
