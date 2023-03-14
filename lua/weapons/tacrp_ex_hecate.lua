@@ -10,7 +10,7 @@ SWEP.Category = "Tactical RP" // "Tactical RP (Extras)"
 SWEP.SubCatTier = "2Premium"
 SWEP.SubCatType = "7Sniper Rifle"
 
-SWEP.Description = "Heavy anti-materiel rifle that can kill in one shot. Does not fire phantom bullets.\nEquipped with a 10x scope by default."
+SWEP.Description = "Heavy anti-materiel rifle that can kill in one shot.\nDoes not fire phantom bullets.\nEquipped with a 10x scope by default."
 
 SWEP.ViewModel = "models/weapons/tacint_extras/v_hecate.mdl"
 SWEP.WorldModel = "models/weapons/tacint_extras/w_hecate.mdl"
@@ -20,14 +20,14 @@ SWEP.Slot = 2
 SWEP.ArcadeStats = {
 
     Damage_Max = 80,
-    Damage_Min = 125,
+    Damage_Min = 150,
 
-    Range_Min = 250,
-    Range_Max = 2500,
+    Range_Min = 700,
+    Range_Max = 5000,
 
     MoveSpeedMult = 0.7,
     ShootingSpeedMult = 0.5,
-    SightedSpeedMult = 0.5,
+    SightedSpeedMult = 0.55,
     MeleeSpeedMult = 1,
     ReloadSpeedMult = 1,
 }
@@ -53,7 +53,7 @@ SWEP.BodyDamageMultipliers = {
 
 SWEP.MuzzleVelocity = 20000
 
-SWEP.ShootTimeMult = 1.25
+SWEP.ShootTimeMult = 1.35
 
 // misc. shooting
 
@@ -61,7 +61,7 @@ SWEP.Firemode = 1
 
 SWEP.FiremodeName = "Bolt-Action" // only used externally for firemode name distinction
 
-SWEP.RPM = 27
+SWEP.RPM = 25
 
 SWEP.Spread = 0
 
@@ -69,8 +69,8 @@ SWEP.HipFireSpreadPenalty = 0.1
 SWEP.PeekPenaltyFraction = 0.15
 
 SWEP.RecoilPerShot = 1
-SWEP.RecoilMaximum = 2
-SWEP.RecoilResetTime = 0.15
+SWEP.RecoilMaximum = 1
+SWEP.RecoilResetTime = 0.25
 SWEP.RecoilDissipationRate = 1
 SWEP.RecoilFirstShotMult = 1
 

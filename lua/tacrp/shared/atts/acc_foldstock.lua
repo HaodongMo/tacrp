@@ -11,7 +11,8 @@ ATT.Category = "acc_foldstock"
 ATT.SortOrder = 0.5
 
 ATT.Mult_VisualRecoilKick = 2
-ATT.Mult_RecoilKick = 2
+ATT.Add_RecoilKick = 2
+ATT.Mult_RecoilKick = 1.5
 ATT.Mult_SprintToFireTime = 0.75
 ATT.Mult_AimDownSightsTime = 0.75
 ATT.Mult_SightedSpeedMult = 1.25

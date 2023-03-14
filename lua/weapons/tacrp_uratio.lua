@@ -10,7 +10,7 @@ SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 SWEP.SubCatTier = "3Quality"
 SWEP.SubCatType = "7Sniper Rifle"
 
-SWEP.Description = "Lightweight sniper rifle with high mobility.\nEquipped with a 10x scope by default."
+SWEP.Description = "Lightweight sniper rifle with good damage and high mobility.\nEquipped with a 10x scope by default."
 
 SWEP.ViewModel = "models/weapons/tacint/v_uratio.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_uratio.mdl"
@@ -19,14 +19,14 @@ SWEP.Slot = 2
 
 SWEP.ArcadeStats = {
 
-    Damage_Max = 75,
-    Damage_Min = 100,
+    Damage_Max = 65,
+    Damage_Min = 92,
 
-    Range_Min = 900,
-    Range_Max = 3000,
+    Range_Min = 1000,
+    Range_Max = 3500,
 
     MoveSpeedMult = 0.8,
-    ShootingSpeedMult = 0.6,
+    ShootingSpeedMult = 0.55,
     SightedSpeedMult = 0.75,
     MeleeSpeedMult = 1,
     ReloadSpeedMult = 1,
@@ -82,13 +82,13 @@ SWEP.CanBlindFire = true
 // handling
 
 SWEP.MoveSpeedMult = 0.75
-SWEP.ShootingSpeedMult = 0.25
+SWEP.ShootingSpeedMult = 0.3
 SWEP.SightedSpeedMult = 0.15
 SWEP.MeleeSpeedMult = 0.5
 SWEP.ReloadSpeedMult = 0.3
 
 SWEP.AimDownSightsTime = 0.36
-SWEP.SprintToFireTime = 0.42
+SWEP.SprintToFireTime = 0.4
 
 // hold types
 

@@ -192,9 +192,9 @@ SWEP.StatGroups = {
                 -- [60] damage reduction from range
                 score = score + math.Clamp(1 - d_diff, 0, 1) * 60
             else
-                -- [30] free points
-                -- [50] 50% damage rampup range
-                score = score + 30 + math.Clamp(1 - r_mid / 5000, 0, 1) * 50
+                -- [40] free points
+                -- [40] 50% damage rampup range
+                score = score + 40 + math.Clamp(r_mid / 5000, 0, 1) * 40
                 -- print(r_mid, math.Clamp(1 - r_mid / 5000, 0, 1))
 
                 -- [20] damage reduction from range
@@ -287,7 +287,7 @@ SWEP.StatGroups = {
 
             if rbs > fss or rsp == 0 then
                 -- judge solely on recoil kick and reset time, as spread is not a factor
-                return math.Clamp(1 - rk * rrt / 3, 0, 1) * 100
+                return math.Clamp(1 - rk * rrt / 4, 0, 1) * 100
             end
 
             -- recoil recovery

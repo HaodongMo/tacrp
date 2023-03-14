@@ -10,7 +10,7 @@ SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 SWEP.SubCatTier = "4Common"
 SWEP.SubCatType = "7Sniper Rifle"
 
-SWEP.Description = "Hunting rifle with fast cycle speed but low range.\nEquipped with a 6x scope by default."
+SWEP.Description = "Medium range hunting rifle with a fast cycle speed.\nEquipped with a 6x scope by default."
 
 SWEP.ViewModel = "models/weapons/tacint/v_spr.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_spr.mdl"
@@ -19,15 +19,15 @@ SWEP.Slot = 2
 
 SWEP.ArcadeStats = {
 
-    Damage_Max = 55,
-    Damage_Min = 80,
+    Damage_Max = 50,
+    Damage_Min = 75,
 
-    Range_Min = 400,
+    Range_Min = 500,
     Range_Max = 1500,
 
     MoveSpeedMult = 0.8,
     ShootingSpeedMult = 0.65,
-    SightedSpeedMult = 0.75,
+    SightedSpeedMult = 0.7,
     MeleeSpeedMult = 1,
     ReloadSpeedMult = 1,
 }
@@ -58,7 +58,7 @@ SWEP.Firemode = 1
 
 SWEP.FiremodeName = "Bolt-Action" // only used externally for firemode name distinction
 
-SWEP.RPM = 50
+SWEP.RPM = 54
 
 SWEP.Spread = 0
 
