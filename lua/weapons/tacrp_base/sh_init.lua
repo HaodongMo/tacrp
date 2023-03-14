@@ -116,7 +116,7 @@ function SWEP:Holster(wep)
 
     if self:GetHolsterTime() > CurTime() then return false end
 
-    if (self:GetHolsterTime() != 0 and self:GetHolsterTime() <= CurTime()) or !IsValid(wep) then
+    if !GetConVar("TacRP_holster"):GetBool() or (self:GetHolsterTime() != 0 and self:GetHolsterTime() <= CurTime()) or !IsValid(wep) then
         -- Do the final holster request
         -- Picking up props try to switch to NULL, by the way
         self:SetHolsterTime(0)

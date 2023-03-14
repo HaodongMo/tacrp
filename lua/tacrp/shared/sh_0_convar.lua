@@ -246,6 +246,12 @@ local conVars = {
         client = true,
         userinfo = true,
     },
+    {
+        name = "holster",
+        default = "1",
+        replicated = true,
+        notify = true,
+    },
 }
 
 local prefix = "tacrp_"
@@ -494,6 +500,13 @@ local function menu_balance_ti(panel)
     panel:AddControl("checkbox", {
         label = "Enable Physical Bullets",
         command = "TacRP_physbullet"
+    })
+    panel:AddControl("checkbox", {
+        label = "Enable Holstering",
+        command = "TacRP_holster"
+    })
+    panel:AddControl("label", {
+        text = "Play a holster animation before pulling out another weapon. If disabled, holstering is instant."
     })
     panel:AddControl("checkbox", {
         label = "Enable Fixed Shotgun Patterns",
