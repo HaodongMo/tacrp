@@ -80,8 +80,10 @@ SWEP.SprintMidPoint = {
 
 SWEP.AnimationTranslationTable = {
     ["deploy"] = "draw",
-    ["melee"] = {"melee1", "melee2"}
+    ["melee"] = {"melee1", "melee2"},
 }
+SWEP.NoHolsterAnimation = true
+SWEP.HolsterTimeMult = 0.75
 
 // attachments
 

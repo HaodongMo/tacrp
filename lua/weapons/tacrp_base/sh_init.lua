@@ -163,7 +163,7 @@ function SWEP:Holster(wep)
         end
 
         local animation = self:PlayAnimation(anim, self:GetValue("HolsterTimeMult") * reverse, true, true)
-        self:SetHolsterTime(CurTime() + animation)
+        self:SetHolsterTime(CurTime() + (animation or 0))
         self:SetHolsterEntity(wep)
 
         self:SetScopeLevel(0)
@@ -179,17 +179,12 @@ local holsteranticrash = false
 hook.Add("StartCommand", "TacRP_Holster", function(ply, ucmd)
     local wep = ply:GetActiveWeapon()
 
-    if IsValid(wep) and wep.ArcticTacRP then
-        if wep:GetHolsterTime() != 0 and wep:GetHolsterTime() <= CurTime() then
-            if IsValid(wep:GetHolsterEntity()) then
-                wep:SetHolsterTime(-math.huge) -- Pretty much force it to work
-
-                if !holsteranticrash then
-                    holsteranticrash = true
-                    ucmd:SelectWeapon(wep:GetHolsterEntity()) -- Call the final holster request
-                    holsteranticrash = false
-                end
-            end
+    if IsValid(wep) and wep.ArcticTacRP and wep:GetHolsterTime() != 0 and wep:GetHolsterTime() <= CurTime() and IsValid(wep:GetHolsterEntity()) then
+        wep:SetHolsterTime(-math.huge) -- Pretty much force it to work
+        if !holsteranticrash then
+            holsteranticrash = true
+            ucmd:SelectWeapon(wep:GetHolsterEntity()) -- Call the final holster request
+            holsteranticrash = false
         end
     end
 end)
