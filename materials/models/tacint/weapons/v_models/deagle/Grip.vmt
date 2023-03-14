@@ -1,9 +1,0 @@
-"VertexLitGeneric"
-{
-	"$baseTexture" "models/tacint/weapons/v_models/deagle/Grip"
-	"$bumpmap" "models/tacint/weapons/v_models/deagle/Grip norm"	
-     	"$phong" "1"
-      "$phongboost" "1"
-      "$phongfresnelranges" "[2 4 6]"     	
-      
-}
