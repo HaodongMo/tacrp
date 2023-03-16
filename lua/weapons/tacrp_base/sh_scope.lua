@@ -1,6 +1,5 @@
 function SWEP:ScopeToggle(setlevel)
-    if !self:GetValue("Scope") then return end
-    if setlevel and setlevel > 0 and self:GetPrimedGrenade() then return end
+    if (setlevel or 0) > 0 and (!self:GetValue("Scope") or self:GetPrimedGrenade()) then return end
     -- if setlevel and setlevel > 0 and self:GetAnimLockTime() > CurTime() or (!setlevel and self:GetAnimLockTime() > CurTime()) then return end
     -- if (setlevel and setlevel > 0 and self:GetReloading()) or (!setlevel and self:GetReloading()) then return end
 
