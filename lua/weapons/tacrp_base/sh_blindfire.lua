@@ -137,109 +137,43 @@ local bone_mods_kys_dual = {
     ["ValveBiped.Bip01_R_Hand"] = Angle(45, -75, 90),
 }
 
-local bone_mods_pos = {}
-local bone_mods_left_pos = {}
-local bone_mods_right_pos = {}
-local bone_mods_kys_pos = {}
-
 local bone_mods_index = {
-    [TacRP.BLINDFIRE_UP]    = {bone_mods, bone_mods_pos},
-    [TacRP.BLINDFIRE_LEFT]  = {bone_mods_left, bone_mods_left_pos},
-    [TacRP.BLINDFIRE_RIGHT] = {bone_mods_right, bone_mods_right_pos},
-    [TacRP.BLINDFIRE_KYS] = {bone_mods_kys, bone_mods_kys_pos},
+    [TacRP.BLINDFIRE_UP]    = bone_mods,
+    [TacRP.BLINDFIRE_LEFT]  = bone_mods_left,
+    [TacRP.BLINDFIRE_RIGHT] = bone_mods_right,
+    [TacRP.BLINDFIRE_KYS] = bone_mods_kys,
 }
 
-function SWEP:ToggleBoneMods(on, left)
+function SWEP:ToggleBoneMods(on)
+    if on == TacRP.BLINDFIRE_NONE or on == false or on == nil then
+        for _, i in ipairs(bone_list) do
+            local boneindex = self:GetOwner():LookupBone(i)
+            if !boneindex then continue end
 
-    if isnumber(on) or on == false then
-        if on == TacRP.BLINDFIRE_NONE or on == false then
-            for _, i in ipairs(bone_list) do
-                local boneindex = self:GetOwner():LookupBone(i)
-                if !boneindex then continue end
-
-                self:GetOwner():ManipulateBoneAngles(boneindex, Angle(0, 0, 0))
-                self:GetOwner():ManipulateBonePosition(boneindex, Vector(0, 0, 0))
-            end
-        else
-            local tbl = bone_mods_index[on]
-            if on == TacRP.BLINDFIRE_KYS and self:GetValue("HoldTypeSuicide") == "duel" then
-                tbl = {bone_mods_kys_dual, bone_mods_kys_pos}
-            elseif on == TacRP.BLINDFIRE_KYS and self:GetValue("HoldType") == "revolver" then
-                tbl = {bone_mods_kys_pistol, bone_mods_kys_pos}
-            end
-
-            for i, k in pairs(tbl[1]) do
-                local boneindex = self:GetOwner():LookupBone(i)
-                if !boneindex then continue end
-
-                self:GetOwner():ManipulateBoneAngles(boneindex, k)
-            end
-
-            for i, k in pairs(tbl[2]) do
-                local boneindex = self:GetOwner():LookupBone(i)
-                if !boneindex then continue end
-
-                self:GetOwner():ManipulateBonePosition(boneindex, k)
-            end
-        end
-    elseif on then
-        if left then
-            for i, k in pairs(bone_mods_left) do
-                local boneindex = self:GetOwner():LookupBone(i)
-                if !boneindex then continue end
-
-                self:GetOwner():ManipulateBoneAngles(boneindex, k)
-            end
-
-            for i, k in pairs(bone_mods_left_pos) do
-                local boneindex = self:GetOwner():LookupBone(i)
-                if !boneindex then continue end
-
-                self:GetOwner():ManipulateBonePosition(boneindex, k)
-            end
-        else
-            for i, k in pairs(bone_mods) do
-                local boneindex = self:GetOwner():LookupBone(i)
-                if !boneindex then continue end
-
-                self:GetOwner():ManipulateBoneAngles(boneindex, k)
-            end
-
-            for i, k in pairs(bone_mods_pos) do
-                local boneindex = self:GetOwner():LookupBone(i)
-                if !boneindex then continue end
-
-                self:GetOwner():ManipulateBonePosition(boneindex, k)
-            end
+            self:GetOwner():ManipulateBoneAngles(boneindex, Angle(0, 0, 0))
+            -- self:GetOwner():ManipulateBonePosition(boneindex, Vector(0, 0, 0))
         end
     else
-        for i, k in pairs(bone_mods_left) do
+        local tbl = bone_mods_index[on]
+        if on == TacRP.BLINDFIRE_KYS and self:GetValue("HoldTypeSuicide") == "duel" then
+            tbl = bone_mods_kys_dual
+        elseif on == TacRP.BLINDFIRE_KYS and self:GetValue("HoldType") == "revolver" then
+            tbl = bone_mods_kys_pistol
+        end
+
+        for i, k in pairs(tbl) do
             local boneindex = self:GetOwner():LookupBone(i)
             if !boneindex then continue end
 
-            self:GetOwner():ManipulateBoneAngles(boneindex, Angle(0, 0, 0))
+            self:GetOwner():ManipulateBoneAngles(boneindex, k)
         end
 
-        for i, k in pairs(bone_mods_left_pos) do
-            local boneindex = self:GetOwner():LookupBone(i)
-            if !boneindex then continue end
+        -- for i, k in pairs(tbl[2]) do
+        --     local boneindex = self:GetOwner():LookupBone(i)
+        --     if !boneindex then continue end
 
-            self:GetOwner():ManipulateBonePosition(boneindex, Vector(0, 0, 0))
-        end
-
-        for i, k in pairs(bone_mods) do
-            local boneindex = self:GetOwner():LookupBone(i)
-            if !boneindex then continue end
-
-            self:GetOwner():ManipulateBoneAngles(boneindex, Angle(0, 0, 0))
-        end
-
-        for i, k in pairs(bone_mods_pos) do
-            local boneindex = self:GetOwner():LookupBone(i)
-            if !boneindex then continue end
-
-            self:GetOwner():ManipulateBonePosition(boneindex, Vector(0, 0, 0))
-        end
+        --     self:GetOwner():ManipulateBonePosition(boneindex, k)
+        -- end
     end
 end
 
@@ -288,8 +222,7 @@ end
 
 function SWEP:ToggleBlindFire(bf)
     local kms = bf == TacRP.BLINDFIRE_KYS or bf == TacRP.BLINDFIRE_NONE
-    if bf != TacRP.BLINDFIRE_NONE and !self:CheckBlindFire(kms) then return end
-    if bf == self:GetBlindFireMode() then return end
+    if bf != TacRP.BLINDFIRE_NONE and (!self:CheckBlindFire(kms) or bf == self:GetBlindFireMode()) then return end
 
     self:ToggleCustomize(false)
 
