@@ -61,7 +61,7 @@ function SWEP:Deploy()
         self:SetupModel(false)
     end
 
-    self:ToggleBoneMods(self:GetBlindFire())
+    self:ToggleBlindFire(TacRP.BLINDFIRE_NONE)
 
     self:SetShouldHoldType()
 
@@ -167,7 +167,6 @@ function SWEP:Holster(wep)
         self:SetHolsterEntity(wep)
 
         self:SetScopeLevel(0)
-        self:ToggleBoneMods(false)
         self:KillTimers()
         self:ToggleBlindFire(TacRP.BLINDFIRE_NONE)
         self:GetOwner():SetFOV(0, 0.1)
@@ -288,4 +287,10 @@ function SWEP:SetShouldHoldType()
     end
 
     self:SetHoldType(self:GetValue("HoldType"))
+end
+
+function SWEP:OnRemove()
+    if IsValid(self:GetOwner()) then
+        self:ToggleBoneMods(TacRP.BLINDFIRE_NONE)
+    end
 end
