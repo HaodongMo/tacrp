@@ -26,13 +26,13 @@ function SWEP:PrimaryAttack()
         self:SetEndReload(true)
     end
 
-    if self:StillWaiting() then
-        return
-    end
-
     if self:GetValue("Melee") and self:GetOwner():KeyDown(IN_USE) then
         self.Primary.Automatic = false
         self:Melee()
+        return
+    end
+
+    if self:StillWaiting() then
         return
     end
 
@@ -73,6 +73,9 @@ function SWEP:PrimaryAttack()
     if self:SprintLock() then return end
 
     if self:GetSafe() then self:ToggleSafety(false) return end
+
+    local stop = self:RunHook("Hook_PreShoot")
+    if stop then return end
 
     local seq = "fire"
 
@@ -320,6 +323,8 @@ function SWEP:PrimaryAttack()
             self:GetOwner():TakeDamageInfo(damage)
         end)
     end
+
+    self:RunHook("Hook_PostShoot")
 end
 
 function SWEP:GetShotgunPattern(i)

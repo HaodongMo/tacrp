@@ -14,10 +14,13 @@ function SWEP:Reload()
         return
     end
 
+    local stop = self:RunHook("Hook_PreReload")
+    if stop then return end
+
     if self:StillWaiting(true) then return end
     if self:GetValue("ClipSize") <= 0 then return end
     if self:Clip1() >= self:GetValue("ClipSize") then return end
-    if self:Ammo1() <= 0 and !self:GetValue("InfiniteAmmo") then return end
+    if self:Ammo1() <= 0 and !self:GetInfiniteAmmo() then return end
 
     -- self:ScopeToggle(0)
     self:ToggleBlindFire(TacRP.BLINDFIRE_NONE)
@@ -54,6 +57,8 @@ function SWEP:Reload()
     --     self:SetEndReload(false)
     --     self:EndReload()
     -- end)
+
+    self:RunHook("Hook_StartReload")
 
     self:SetReloadFinishTime(CurTime() + (t * 0.95))
 end
@@ -151,6 +156,8 @@ function SWEP:EndReload()
 
         self:SetNthShot(0)
     end
+
+    self:RunHook("Hook_EndReload")
 end
 
 function SWEP:ThinkReload()
