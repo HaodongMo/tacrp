@@ -224,15 +224,14 @@ function SWEP:ToggleBlindFire(bf)
     local kms = bf == TacRP.BLINDFIRE_KYS or bf == TacRP.BLINDFIRE_NONE
     if bf != TacRP.BLINDFIRE_NONE and (!self:CheckBlindFire(kms) or bf == self:GetBlindFireMode()) then return end
 
-    self:SetBlindFireMode(bf)
-    self:ToggleBoneMods(bf)
-
     if bf != self:GetBlindFireMode() then
         self:ToggleCustomize(false)
         self:ScopeToggle(0)
-        self:SetBlindFireFinishTime(CurTime() + (bf == TacRP.BLINDFIRE_KYS and 0.8 or 0.3))
+        self:SetBlindFireFinishTime(CurTime() + (bf == TacRP.BLINDFIRE_KYS and 1 or 0.3))
     end
 
+    self:SetBlindFireMode(bf)
+    self:ToggleBoneMods(bf)
     self:SetShouldHoldType()
 
     if self:StillWaiting(true) then self:IdleAtEndOfAnimation() return end

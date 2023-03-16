@@ -4,7 +4,7 @@ SWEP.Spawnable = true
 AddCSLuaFile()
 
 // names and stuff
-SWEP.PrintName = "SIG SG551"
+SWEP.PrintName = "SIG SG 551"
 SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 
 SWEP.SubCatTier = "1Elite"
@@ -51,6 +51,8 @@ SWEP.BodyDamageMultipliers = {
     [HITGROUP_RIGHTLEG] = 0.9,
     [HITGROUP_GEAR] = 0.9
 }
+
+SWEP.MuzzleVelocity = 22000
 
 // misc. shooting
 
