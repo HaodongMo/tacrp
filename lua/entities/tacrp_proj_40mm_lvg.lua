@@ -49,7 +49,7 @@ function ENT:Detonate()
         util.Effect("HelicopterMegaBomb", fx)
     end
 
-    TacRP.Flashbang(self:GetPos(), 1024, 2.5, 0.25, 1)
+    TacRP.Flashbang(self, self:GetPos(), 1024, 2.5, 0.25, 1)
 
     self:EmitSound(table.Random(self.ExplodeSounds), 125, 110)
     self:EmitSound("TacRP/weapons/grenade/flashbang_explode-1.wav", 125, 90, 0.8)

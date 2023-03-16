@@ -49,7 +49,7 @@ function ENT:Detonate()
         util.Effect("TacRP_flashexplosion", fx)
     end
 
-    TacRP.Flashbang(self:GetPos(), 1024, 3, 0.25, 0.5)
+    TacRP.Flashbang(self, self:GetPos(), 1024, 3, 0.25, 0.5)
 
     self:EmitSound(table.Random(self.ExplodeSounds), 125)
 

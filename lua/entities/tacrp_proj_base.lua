@@ -280,7 +280,7 @@ function ENT:PreDetonate()
     if !self.Detonated then
         self.Detonated = true
 
-        if !IsValid(self.Attacker) and !IsValid(self:GetOwner()) then self:Remove() return end
+        if !IsValid(self.Attacker) and !IsValid(self:GetOwner()) then self.Attacker = game.GetWorld() end
 
         self:Detonate()
     end

@@ -1,4 +1,4 @@
-function TacRP.Flashbang(pos, radius, time_max, time_min, time_stunadd)
+function TacRP.Flashbang(ent, pos, radius, time_max, time_min, time_stunadd)
 
     for _, k in ipairs(ents.FindInSphere(pos, radius)) do
         if k:IsPlayer() then
@@ -9,7 +9,9 @@ function TacRP.Flashbang(pos, radius, time_max, time_min, time_stunadd)
 
             time = Lerp( dist / radius, time, time_min )
 
-            if !k:VisibleVec( pos ) then
+            local tr = util.QuickTrace(pos, k:EyePos() - pos, {k, ent})
+
+            if tr.Fraction < 1 then
                 time = 0
             else
                 k:SetNWFloat("TacRPStunStart", CurTime())
