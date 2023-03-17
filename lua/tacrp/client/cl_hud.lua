@@ -128,5 +128,5 @@ function TacRP.GetPanelColors(hvr, sel)
     elseif hvr then
         i = 2
     end
-    return TacRP.PanelColors["bg"][i], TacRP.PanelColors["corner"][i], TacRP.PanelColors["text"][i]
+    return TacRP.PanelColors["bg2"][i], TacRP.PanelColors["corner"][i], TacRP.PanelColors["text"][i]
 end

@@ -36,7 +36,7 @@ TacRP.CancelMultipliers = {
     [HITGROUP_GEAR] = 0.25
 }
 
-TacRP.PresetPath = "TacRP_presets/"
+TacRP.PresetPath = "tacrp_presets/"
 
 TacRP.OverDraw = false
 
