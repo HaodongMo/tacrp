@@ -74,3 +74,59 @@ function TacRP.GetFOVAcc(spread)
 
     return gaA
 end
+
+TacRP.PanelColors = {
+    ["bg"] = {
+        Color(0, 0, 0, 150), -- normal
+        Color(255, 255, 255, 255), -- hover
+        Color(150, 150, 150, 150), -- sel
+        Color(255, 255, 255, 255), -- sel, hover
+    },
+    ["bg2"] = {
+        Color(0, 0, 0, 200), -- normal
+        Color(255, 255, 255, 255), -- hover
+        Color(150, 150, 150, 200), -- sel
+        Color(255, 255, 255, 255), -- sel, hover
+    },
+    ["corner"] = {
+        Color(255, 255, 255),
+        Color(0, 0, 0),
+        Color(50, 50, 255),
+        Color(150, 150, 255),
+    },
+    ["text"] = {
+        Color(255, 255, 255),
+        Color(0, 0, 0),
+        Color(255, 255, 255),
+        Color(0, 0, 0),
+    },
+    ["text_glow"] = {
+        Color(255, 255, 255, 100),
+        Color(0, 0, 0, 100),
+        Color(255, 255, 255, 100),
+        Color(0, 0, 0, 100),
+    },
+}
+
+function TacRP.GetPanelColor(str, hvr, sel)
+    local i = 1
+    if isnumber(hvr) or hvr == nil then
+        i = hvr or 1
+    elseif sel then
+        i = hvr and 4 or 3
+    elseif hvr then
+        i = 2
+    end
+
+    return TacRP.PanelColors[str][i]
+end
+
+function TacRP.GetPanelColors(hvr, sel)
+    local i = 1
+    if sel then
+        i = hvr and 4 or 3
+    elseif hvr then
+        i = 2
+    end
+    return TacRP.PanelColors["bg"][i], TacRP.PanelColors["corner"][i], TacRP.PanelColors["text"][i]
+end

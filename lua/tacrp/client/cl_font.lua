@@ -6,6 +6,7 @@ local sizes_to_make = {
     12,
     14,
     16,
+    20,
     32
 }
 
@@ -102,34 +103,35 @@ function TacRP.MultiLineText(text, maxw, font)
                     x = 0
                     word = utf8.sub(word, dashi + 1)
                     tx = surface.GetTextSize(word)
-                elseif maxw - x <= maxw * 0.2 then
-                    -- move whole word to new line if blank space is not very large
+                else
+                    -- move whole word to new line
                     table.insert(content, tline)
                     tline = ""
                     x = 0
-                else
-                    -- cut the word down from the middle
-                    while x + tx > maxw do
-                        local cut = ""
-                        for i = 2, utf8.len(word) do
-                            cut = utf8.sub(word, 0, -i)
-                            tx = surface.GetTextSize(cut)
-                            if x + tx < maxw then
-                                table.insert(content, tline .. cut)
-                                tline = ""
-                                word = utf8.sub(word, utf8.len(word) - i + 2)
-                                x = 0
-                                tx = surface.GetTextSize(word)
-                                break
-                            end
-                        end
-                    end
+
+                -- else
+                --     -- cut the word down from the middle
+                --     while x + tx > maxw do
+                --         local cut = ""
+                --         for i = 2, utf8.len(word) do
+                --             cut = utf8.sub(word, 0, -i)
+                --             tx = surface.GetTextSize(cut)
+                --             if x + tx < maxw then
+                --                 table.insert(content, tline .. cut)
+                --                 tline = ""
+                --                 word = utf8.sub(word, utf8.len(word) - i + 2)
+                --                 x = 0
+                --                 tx = surface.GetTextSize(word)
+                --                 break
+                --             end
+                --         end
+                --     end
                 end
             end
 
             tline = tline .. word .. " "
 
-            x = x + surface.GetTextSize(word .. " ")
+            x = x + tx + ts
         end
 
         table.insert(content, tline)

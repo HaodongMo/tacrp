@@ -252,6 +252,11 @@ local conVars = {
         replicated = true,
         notify = true,
     },
+    {
+        name = "news_majoronly",
+        default = "0",
+        client = true,
+    },
 }
 
 local prefix = "tacrp_"
