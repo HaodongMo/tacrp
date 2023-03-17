@@ -140,6 +140,8 @@ local lastblindfiremode = 0
 function SWEP:DrawHUDBackground()
     self:DoScope()
 
+    if !GetConVar("cl_drawhud"):GetBool() then return end
+
     -- draw a vignette effect around the screen based on recoil
     local recoil = self:GetRecoilAmount()
     if recoil > 0 and GetConVar("tacrp_vignette"):GetBool() then
