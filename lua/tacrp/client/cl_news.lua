@@ -21,7 +21,7 @@ TacRP.News = {
         Summary = nil,
         Contents = [[<body style="font-family:'Myriad Pro';color:white;font-size:125%;">
 <p>Thank you for using Tactical RP, and welcome to our new newsletter!<br>
-<span style="font-size:80%;">(If you forgot you had TacRP installed, we're sorry for distrubing your gmod session, please don't unsubscribe 🥺)</span></p>
+<span style="font-size:80%;"><i>If you forgot you had TacRP installed, we're sorry for distrubing your gmod session, please don't unsubscribe</i> 🥺</span></p>
 
 <p>You can now catch up with updates, dev blogs, and more, all from the comfort of your own video game! A few posts (like this one) are embedded within the addon and will always be available, while others will be fetched remotely so you can get the hottest news without updating the addon.</p>
 
@@ -31,7 +31,7 @@ TacRP.News = {
 
 <p>In the meantime, we hope you enjoy Tactical RP, and remember:<br>
 <i>No matter what Arctic might say, the RP in TacRP stands for Remix Pack, not Role Play!</i>
-<br><span style="font-size:50%;">It is seriously kind of stupid to put roleplay in your weapon pack name. Is there even a DarkRP server out there that uses these guns? Don't they all just use M9K? Why do we even make new weapon packs if a decade-old weapon base with no c_hands is enough for them? Is humanity truly doomed?</span></p>
+<br><span style="font-size:50%;opacity:0.25;">It is seriously kind of stupid to put roleplay in your weapon pack name. Is there even a DarkRP server out there that uses these guns? Don't they all just use M9K? Why do we even make new weapon packs if a decade-old weapon base with no c_hands is enough for them? Is humanity truly doomed? sussy imposter amogus??? 💀💀💀</span></p>
 
 <p>Yours,<br>
 <b>8Z, the gmod hyperealist</b></p>
