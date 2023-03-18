@@ -536,6 +536,7 @@ concommand.Add("tacrp_news_check", notifynews)
 
 hook.Add("InitPostEntity", "tacrp_news", function()
     timer.Simple(5, function()
+        if !GetConVar("tacrp_checknews"):GetBool() then return end
         notifynews()
     end)
 end)

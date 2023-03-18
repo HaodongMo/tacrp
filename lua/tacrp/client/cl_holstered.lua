@@ -2,7 +2,7 @@ hook.Add("PostPlayerDraw", "TacRP_Holster", function(ply)
     if !ply.TacRP_Holster then return end
     if ply == LocalPlayer() and !LocalPlayer():ShouldDrawLocalPlayer() then return end
 
-    if !GetConVar("tacrp_drawholsters"):GetBool() then return end
+    if !GetConVar("tacrp_drawholsters"):GetBool() or !GetConVar("tacrp_visibleholster"):GetBool() then return end
 
     ply.TacRP_HolsterModels = ply.TacRP_HolsterModels or {}
     for i, v in ipairs(TacRP.HolsterBones) do

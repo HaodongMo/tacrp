@@ -180,6 +180,7 @@ local conVars = {
         name = "crosshair",
         default = "1",
         replicated = true,
+        notify = true,
     },
     {
         name = "vignette",
@@ -256,6 +257,23 @@ local conVars = {
         name = "news_majoronly",
         default = "0",
         client = true,
+    },
+    {
+        name = "hud",
+        default = "1",
+        replicated = true,
+        notify = true,
+    },
+    {
+        name = "visibleholster",
+        default = "1",
+        replicated = true,
+        notify = true,
+    },
+    {
+        name = "checknews",
+        default = "1",
+        replicated = true,
     },
 }
 
@@ -420,9 +438,33 @@ local function menu_client_ti(panel)
 end
 
 local function menu_server_ti(panel)
+    panel:AddControl("header", {
+        description = "\nFeatures",
+    })
+    panel:AddControl("label", {
+        text = "Settings in this section affect ALL PLAYERS."
+    })
     panel:AddControl("checkbox", {
-        label = "Enable Crosshair (for everyone)",
+        label = "Enable Crosshair",
         command = "tacrp_crosshair"
+    })
+    panel:AddControl("checkbox", {
+        label = "Enable HUD (and Minimal HUD)",
+        command = "tacrp_hud"
+    })
+    panel:AddControl("checkbox", {
+        label = "Draw Holstered Weapons",
+        command = "tacrp_visibleholster"
+    })
+    panel:AddControl("checkbox", {
+        label = "Enable Newsletter",
+        command = "tacrp_checknews"
+    })
+    panel:AddControl("label", {
+        text = "If turned off, newsletter popup/notification will not happen. Players can still open the newsletter page manually."
+    })
+    panel:AddControl("header", {
+        description = "\nAttachments",
     })
     panel:AddControl("checkbox", {
         label = "Free Attachments",
@@ -443,16 +485,9 @@ local function menu_server_ti(panel)
         label = "Attachment Entities in Spawnmenu",
         command = "TacRP_generateattentities"
     })
-    panel:AddControl("checkbox", {
-        label = "One Weapon Per Slot",
-        command = "tacrp_limitslots"
-    })
-    panel:AddControl("label", {
-        text = "Slot limit only counts TacRP weapons in slots 2-5. Spawning new guns will delete old guns in the slot."
-    })
-    panel:AddControl("checkbox", {
-        label = "Supply Boxes Resupply Grenades",
-        command = "TacRP_resupply_grenades"
+
+    panel:AddControl("header", {
+        description = "\nNPC",
     })
     panel:AddControl("checkbox", {
         label = "NPCs Deal Equal Damage",
@@ -463,12 +498,26 @@ local function menu_server_ti(panel)
         command = "TacRP_npc_atts"
     })
 
+    panel:AddControl("header", {
+        description = "\nMiscellaneous",
+    })
+    panel:AddControl("checkbox", {
+        label = "One Weapon Per Slot",
+        command = "tacrp_limitslots"
+    })
+    panel:AddControl("label", {
+        text = "Slot limit only considers TacRP weapons. Spawning new guns will delete old guns in the slot."
+    })
+    panel:AddControl("checkbox", {
+        label = "Supply Boxes Resupply Grenades",
+        command = "TacRP_resupply_grenades"
+    })
     panel:AddControl("checkbox", {
         label = "Default Body Damage Cancel",
         command = "TacRP_bodydamagecancel"
     })
     panel:AddControl("label", {
-        text = "Disable body damage cancel only if you have another addon that will override the hl2 limb damage multipliers."
+        text = "Only disable this if another addon or gamemode is also modifying default hitgroup damage multipliers."
     })
 end
 

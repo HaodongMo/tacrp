@@ -162,7 +162,7 @@ function SWEP:DrawHUDBackground()
 
     self:DrawCustomizeHUD()
 
-    if !self:GetCustomize() then
+    if !self:GetCustomize() and GetConVar("tacrp_hud"):GetBool() then
         local col = Color(255, 255, 255)
         local col_hi = Color(255, 150, 0)
 

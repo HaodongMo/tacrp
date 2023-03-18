@@ -4,7 +4,7 @@ local function check(ply, wep)
     local weps = {}
     if limit > 0 and (limit > 1 or wep.ArcticTacRP) then
         for k, v in pairs( ply:GetWeapons() ) do
-            if (limit > 1 or v.ArcticTacRP) and (slot >= 1 and slot <= 4) and (v:GetSlot() == slot) then
+            if (limit > 1 or v.ArcticTacRP) and (v:GetSlot() == slot) then
                 table.insert(weps, v)
             end
         end
