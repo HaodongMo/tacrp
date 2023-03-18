@@ -12,20 +12,11 @@ TacRP.News = {
         Contents = "", -- main text, uses HTML
     },
     ]]
-    -- {
-    --     Title = "HTML test",
-    --     Type = "Update",
-    --     Date = "2023-03-25", -- yyyy-mm-dd
-    --     Major = false, -- if unread, brings up page on startup
-    --     Summary = nil, -- text shown in the side tab
-    --     Hyperlink = nil, -- if set, loads the specified webpage instead of Contents.
-    --     ContentSource = "https://theonly8z.github.io/tacrp_pages/post1",
-    --     Contents = "", -- main text, uses HTML
-    -- },
     {
         Title = "New Newsletter System!",
-        Type = "Post",
+        Type = "Announcement",
         Date = "2023-03-17",
+        Author = "8Z",
         Major = true,
         Summary = nil,
         Contents = [[<body style="font-family:'Myriad Pro';color:white;font-size:125%;">
@@ -36,25 +27,11 @@ TacRP.News = {
 
 <p>Major updates and releases will be displayed on startup, while minor posts will bring up a reminder in the chat box. If you want to be only notified for major updates, toggle the checkbox above.</p>
 
-<p>Despite the cold reception TacRP got at launch, some of you stuck with us (or at least tolerated its presence in the weapons tab), and we cannot thank you enough for your support.</p>
-
-<p>That's why we here at <b>Garry's Mod Tactical Realism Industries™</b><i style="font-size:50%;">(trademark pending)</i> are cooking up more good stuff for you to enjoy, including an <i>expansion pack full of new weapons</i>.</p>
-
-<p>Here's a little sneak peak of what will come in the future:</p>
-
-<p style="text-align:center;">
-<img width="80%" src="asset://garrysmod/materials/tacrp/news/preview1.jpg"><br>
-<img width="80%" src="asset://garrysmod/materials/tacrp/news/preview2.jpg"><br>
-<img width="80%" src="asset://garrysmod/materials/tacrp/news/preview3.jpg"><br>
-</p>
-
-<p>If you want to keep up with development, join the Diamond Doves Discord server here:</p>
-<div style="text-align: center;">
-<input style="width: 50%;height: 10%;" type='button' value='Join Discord' onclick='console.log("RUNLUA:gui.OpenURL( \"https://discord.gg/gaHXusZ\" )")' />
-</div>
+<p>Despite the cold reception TacRP got at launch, some of you stuck with us (or at least tolerated its presence in the weapons tab), and we cannot thank you enough for your support. That's why we here at <b>Garry's Mod Tactical Realism Industries™</b><i style="font-size:50%;">(trademark pending)</i> are cooking up more good stuff for you to enjoy, including an <i>expansion pack full of new weapons</i>.</p>
 
 <p>In the meantime, we hope you enjoy Tactical RP, and remember:<br>
-<i>No matter what Arctic tells you, the RP actually stands for Remix Pack, not Role Play!</i></p>
+<i>No matter what Arctic might say, the RP in TacRP stands for Remix Pack, not Role Play!</i>
+<br><span style="font-size:50%;">It is seriously kind of stupid to put roleplay in your weapon pack name. Is there even a DarkRP server out there that uses these guns? Don't they all just use M9K? Why do we even make new weapon packs if a decade-old weapon base with no c_hands is enough for them? Is humanity truly doomed?</span></p>
 
 <p>Yours,<br>
 <b>8Z, the gmod hyperealist</b></p>
@@ -116,7 +93,7 @@ local function fetchnews(callback)
         return
     end
     TacRP.NewsResult = "Fetching news..."
-    http.Fetch("https://theonly8z.github.io/tacrp_pages/article_list", function(body, length, headers, code)
+    http.Fetch("https://theonly8z.github.io/tactical_realist/article_list", function(body, length, headers, code)
         local _, body_start = string.find(body, "<html lang=\"en\">", nil, true)
         local body_end = string.find(body, "</html>", nil, true)
         if body_start and body_end then
@@ -369,7 +346,8 @@ function TacRP.CreateNewsPanel(open)
             end)
         end
 
-        if data.Hyperlink then
+        local pagelink = data.Hyperlink or data.Link
+        if pagelink then
             self:SetSize(w_news - w_list - ScreenScale(2), h_news - h_title - h_bottom - ScreenScale(16))
 
             local topbar = vgui.Create("DPanel", self)
@@ -393,14 +371,14 @@ function TacRP.CreateNewsPanel(open)
                 draw.SimpleText("HOME", "TacRP_HD44780A00_5x8_4", w / 2, h / 2, c_txt, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
             end
             function homebutton.DoClick(self2)
-                homebutton.Page:OpenURL(data.Hyperlink)
+                homebutton.Page:OpenURL(pagelink)
             end
 
             local linkbutton = vgui.Create("DButton", topbar)
             linkbutton:SetText("")
             linkbutton:Dock(FILL)
             linkbutton:SetMouseInputEnabled(true)
-            linkbutton.Hyperlink = data.Hyperlink
+            linkbutton.Hyperlink = pagelink
             function linkbutton.Paint(self2, w, h)
                 surface.SetDrawColor(255, 255, 255, 255)
                 surface.DrawRect(0, 0, w, h)
@@ -421,7 +399,7 @@ function TacRP.CreateNewsPanel(open)
 
             local html = vgui.Create("DHTML", self)
             html:Dock(FILL)
-            html:OpenURL(data.Hyperlink)
+            html:OpenURL(pagelink)
             function html.OnBeginLoadingDocument(self2, url)
                 linkbutton.Hyperlink = url
             end
@@ -462,10 +440,10 @@ function TacRP.CreateNewsPanel(open)
 
             local html = vgui.Create("DHTML", self)
             html:Dock(FILL)
-            local url = data.ContentSource or data.Link
+            local url = data.ContentSource --or data.Link
             if url then
                 http.Fetch(url, function(body, length, headers, code)
-                    local article_start = string.find(body, "<section style=\"font-family:'Myriad Pro';color:white;font-size:125%;\">", nil, true)
+                    local article_start = string.find(body, "<section[^>]+>", nil, true)
                     local _, article_end = string.find(body, "</section>", nil, true)
                     if article_start and article_end then
                         body = string.sub(body, article_start, article_end)
