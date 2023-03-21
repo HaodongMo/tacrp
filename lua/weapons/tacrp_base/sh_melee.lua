@@ -66,6 +66,11 @@ function SWEP:Melee()
             dmg:ScaleDamage(1 / TacRP.CancelMultipliers[tr.HitGroup])
         end
 
+        -- Lambda Players call ScalePlayerDamage and cancel out hitgroup damage... except on the head
+        if IsValid(tr.Entity) and tr.Entity.IsLambdaPlayer and tr.HitGroup == HITGROUP_HEAD then
+            dmg:ScaleDamage(1 / TacRP.CancelMultipliers[tr.HitGroup])
+        end
+
         if IsValid(tr.Entity) and !tr.HitWorld and SERVER then
             --tr.Entity:TakeDamageInfo(dmg)
             tr.Entity:DispatchTraceAttack(dmg, tr)

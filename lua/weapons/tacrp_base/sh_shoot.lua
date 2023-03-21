@@ -370,6 +370,11 @@ function SWEP:AfterShotFunction(tr, dmg, range, penleft, alreadypenned, forced)
         dmgbodymult = dmgbodymult / TacRP.CancelMultipliers[tr.HitGroup]
     end
 
+    -- Lambda Players call ScalePlayerDamage and cancel out hitgroup damage... except on the head
+    if IsValid(tr.Entity) and tr.Entity.IsLambdaPlayer and tr.HitGroup == HITGROUP_HEAD then
+        dmgbodymult = dmgbodymult / TacRP.CancelMultipliers[tr.HitGroup]
+    end
+
     dmgv = dmgv * dmgbodymult
 
     if self:GetOwner():IsNPC() and !GetConVar("TacRP_npc_equality"):GetBool() then
