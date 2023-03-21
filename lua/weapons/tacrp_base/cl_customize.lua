@@ -393,7 +393,7 @@ function SWEP:CreateCustomizeHUD()
         surface.SetTextPos(ScreenScale(6), ScreenScale(4))
         surface.DrawText("DESCRIPTION:")
 
-        local txt = multlinetext(self:GetValue("Description"), w - ScreenScale(6 * 2), "TacRP_Myriad_Pro_8")
+        local txt = multlinetext(self:GetValue("Description"), w - ScreenScale(8), "TacRP_Myriad_Pro_8")
 
         for i, k in pairs(txt) do
             surface.SetFont("TacRP_Myriad_Pro_8")
