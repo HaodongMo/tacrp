@@ -215,9 +215,8 @@ function TacRP.StartCommand(ply, cmd)
     TacRP.LastEyeAngles = cmd:GetViewAngles()
 
 
-
     if cmd:KeyDown(IN_SPEED) and (
-        -- Sprint will not interrupt a runaway burst
+        -- Sprint cannot interrupt a runaway burst
         (wpn:GetBurstCount() > 0 and wpn:GetValue("RunawayBurst"))
         -- Cannot sprint while reloading if convar is set
         or (!GetConVar("tacrp_arcade"):GetBool() and wpn:GetReloading())
@@ -225,8 +224,10 @@ function TacRP.StartCommand(ply, cmd)
         or (ply:GetNWFloat("TacRPStunStart", 0) + ply:GetNWFloat("TacRPStunDur", 0) > CurTime())
     ) then
         cmd:SetButtons(cmd:GetButtons() - IN_SPEED)
+        ply.TacRP_SprintBlock = true -- for some reason KeyDown(IN_SPEED) doesn't seem to see the modified buttons, so we set this
+    else
+        ply.TacRP_SprintBlock = false
     end
-
 end
 
 hook.Add("StartCommand", "TacRP_StartCommand", TacRP.StartCommand)
