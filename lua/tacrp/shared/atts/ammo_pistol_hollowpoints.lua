@@ -6,7 +6,7 @@ ATT.Description = "Bullets that expand on hit, improving damage to the limbs."
 ATT.Pros = {"Limb damage", "Minimum Range"}
 ATT.Cons = {"Penetration"}
 
-ATT.InstalledElements = {"smallmag"}
+--ATT.InstalledElements = {"smallmag"}
 
 ATT.Category = "ammo_pistol"
 
