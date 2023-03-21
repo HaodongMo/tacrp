@@ -3,7 +3,10 @@ function EFFECT:Init(data)
 
     if !IsValid(wpn) then self:Remove() return end
 
-    local muzzle = wpn:GetValue("MuzzleEffect")
+    local muzzle = TacRP.MuzzleEffects[data:GetFlags() or 1] or "muzzleflash_pistol"
+    if wpn.GetValue then
+        muzzle = wpn:GetValue("MuzzleEffect")
+    end
 
     local att = data:GetAttachment() or 1
 
@@ -20,7 +23,11 @@ function EFFECT:Init(data)
         parent = LocalPlayer():GetViewModel()
     end
 
-    parent = wpn:GetMuzzleDevice(wm)
+    if wpn.GetMuzzleDevice then
+        parent = wpn:GetMuzzleDevice(wm)
+    else
+        parent = self
+    end
 
     -- if !IsValid(parent) then return end
 

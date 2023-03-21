@@ -15,28 +15,28 @@ function EFFECT:Init(data)
     local hit = data:GetOrigin()
     local wep = data:GetEntity()
 
-    if !IsValid(wep) or !wep.GetValue then return end
+    if !IsValid(wep) then return end
+    local tacrp = wep.ArcticTacRP and wep.GetValue
 
     local start = data:GetStart()
-    if wep.GetTracerOrigin then
-        if wep:GetOwner() == LocalPlayer() and wep:GetValue("ScopeHideWeapon") and wep:IsInScope() then
-            start = EyePos()
-                    + EyeAngles():Right() * wep.PassivePos.x
-                    + EyeAngles():Forward() * wep.PassivePos.y
-                    + EyeAngles():Up() * wep.PassivePos.z
-        else
-            start = wep:GetTracerOrigin()
-        end
+    if wep:GetOwner() == LocalPlayer() and tacrp and wep:GetValue("ScopeHideWeapon") and wep:IsInScope() then
+        start = EyePos()
+                + EyeAngles():Right() * wep.PassivePos.x
+                + EyeAngles():Forward() * wep.PassivePos.y
+                + EyeAngles():Up() * wep.PassivePos.z
+    elseif wep.GetTracerOrigin then
+        start = wep:GetTracerOrigin()
     end
 
     local diff = hit - start
     local dist = diff:Length()
 
-    if GetConVar("tacrp_physbullet"):GetBool() then
+    if !tacrp then
+        self.Speed = 15000
+    elseif GetConVar("tacrp_physbullet"):GetBool() then
         self.Speed = math.max(wep:GetValue("MuzzleVelocity") or data:GetScale(), 5000)
     else
         self.Speed = math.max(wep:GetValue("MuzzleVelocity") or data:GetScale(), dist / 0.4)
-
     end
 
     self.LifeTime = dist / self.Speed

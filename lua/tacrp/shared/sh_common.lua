@@ -72,3 +72,34 @@ TacRP.BLINDFIRE_UP    = 1
 TacRP.BLINDFIRE_LEFT  = 2
 TacRP.BLINDFIRE_RIGHT = 3
 TacRP.BLINDFIRE_KYS   = 4 // You should kill yourself... NOW!
+
+TacRP.MuzzleEffects = {
+    "muzzleflash_smg",
+    "muzzleflash_smg_bizon",
+    "muzzleflash_shotgun",
+    "muzzleflash_slug",
+    "muzzleflash_slug_flame",
+    "muzzleflash_pistol",
+    "muzzleflash_pistol_cleric",
+    "muzzleflash_pistol_deagle",
+    "muzzleflash_suppressed",
+    "muzzleflash_mp5",
+    "muzzleflash_MINIMI",
+    "muzzleflash_m79",
+    "muzzleflash_m14",
+    "muzzleflash_ak47",
+    "muzzleflash_ak74",
+    "muzzleflash_m82",
+    "muzzleflash_m3",
+    "muzzleflash_famas",
+    "muzzleflash_g3",
+    "muzzleflash_1",
+    "muzzleflash_3",
+    "muzzleflash_4",
+    "muzzleflash_5",
+    "muzzleflash_6",
+}
+TacRP.MuzzleEffectsLookup = {}
+for k, v in ipairs(TacRP.MuzzleEffects) do
+    TacRP.MuzzleEffectsLookup[v] = k
+end
