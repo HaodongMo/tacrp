@@ -18,7 +18,9 @@ function SWEP:ScopeToggle(setlevel)
 
     if level == self:GetScopeLevel() then return end
 
-    self:SetScopeLevel(level)
+    if IsFirstTimePredicted() then
+        self:SetScopeLevel(level)
+    end
 
     if level > 0 then
         self:ToggleBlindFire(TacRP.BLINDFIRE_NONE)
@@ -135,12 +137,10 @@ function SWEP:ThinkSights()
     local toggle = self:GetOwner():GetInfoNum("tacrp_toggleaim", 0) == 1
     local press, down = self:GetOwner():KeyPressed(IN_ATTACK2), self:GetOwner():KeyDown(IN_ATTACK2)
 
-    if !self:PredictionFilter() then
-        if sighted and ((toggle and press) or (!toggle and !down)) then
-            self:ScopeToggle(0)
-        elseif !sighted and ((toggle and press) or (!toggle and down)) then
-            self:ScopeToggle(1)
-        end
+    if sighted and ((toggle and press) or (!toggle and !down)) then
+        self:ScopeToggle(0)
+    elseif !sighted and ((toggle and press) or (!toggle and down)) then
+        self:ScopeToggle(1)
     end
 end
 
