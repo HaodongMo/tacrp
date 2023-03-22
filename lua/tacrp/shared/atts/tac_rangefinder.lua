@@ -133,7 +133,9 @@ function ATT.TacticalCrosshair(self, x, y, spread, sway)
 
     if self:GetNextPrimaryFire() + 0.1 > CurTime() then
         dropalpha2 = 0
-    elseif self:IsInScope() and (self:GetValue("ScopeOverlay") or !self:GetReloading()) then
+    end
+
+    if self:IsInScope() and (self:GetValue("ScopeOverlay") or !self:GetReloading()) then
         dropalpha = math.Approach(dropalpha, self:GetSightAmount() ^ 2, FrameTime() * 1)
         dropalpha2 = math.Approach(dropalpha2, dropalpha, FrameTime() * 1)
     else
