@@ -22,7 +22,7 @@ hook.Add("PlayerBindPress", "TacRP_Binds", function(ply, bind, pressed, code)
     -- end
 
     if bind == "+menu_context" and !LocalPlayer():KeyDown(IN_USE) then
-        if !LocalPlayer():KeyDown(IN_ATTACK2) then
+        if wpn:GetScopeLevel() == 0 then
             net.Start("TacRP_togglecustomize")
             net.WriteBool(!wpn:GetCustomize())
             net.SendToServer()

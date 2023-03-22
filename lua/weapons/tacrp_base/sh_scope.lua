@@ -132,10 +132,15 @@ function SWEP:ThinkSights()
         self:ThinkPeek()
     end
 
-    if sighted and !self:GetOwner():KeyDown(IN_ATTACK2) then
-        self:ScopeToggle(0)
-    elseif !sighted and self:GetOwner():KeyDown(IN_ATTACK2) then
-        self:ScopeToggle(1)
+    local toggle = self:GetOwner():GetInfoNum("tacrp_toggleaim", 0) == 1
+    local press, down = self:GetOwner():KeyPressed(IN_ATTACK2), self:GetOwner():KeyDown(IN_ATTACK2)
+
+    if !self:PredictionFilter() then
+        if sighted and ((toggle and press) or (!toggle and !down)) then
+            self:ScopeToggle(0)
+        elseif !sighted and ((toggle and press) or (!toggle and down)) then
+            self:ScopeToggle(1)
+        end
     end
 end
 

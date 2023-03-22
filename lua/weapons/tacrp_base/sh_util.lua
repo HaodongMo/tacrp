@@ -27,3 +27,15 @@ function SWEP:ChooseSound(tbl)
     tbl.BaseClass = nil -- lua tables lel
     return tbl[math.random(1, #tbl)]
 end
+
+if SERVER then
+    function SWEP:PredictionFilter()
+        return false
+    end
+else
+    local isSingleplayer = game.SinglePlayer()
+
+    function SWEP:PredictionFilter()
+        return isSingleplayer
+    end
+end

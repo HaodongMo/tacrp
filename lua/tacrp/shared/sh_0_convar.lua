@@ -280,6 +280,12 @@ local conVars = {
         default = "0",
         client = true,
     },
+    {
+        name = "toggleaim",
+        default = "0",
+        client = true,
+        userinfo = true,
+    },
 }
 
 local prefix = "tacrp_"
@@ -390,6 +396,10 @@ local function menu_client_ti(panel)
 
     panel:AddControl("header", {
         description = "\nPreference",
+    })
+    panel:AddControl("checkbox", {
+        label = "Toggle Aiming",
+        command = "tacrp_toggleaim"
     })
     panel:AddControl("checkbox", {
         label = "Toggle Peeking",
