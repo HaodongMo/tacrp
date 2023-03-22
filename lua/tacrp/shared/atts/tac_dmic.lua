@@ -18,6 +18,7 @@ local cache_lastradarpositions
 local mat_radar = Material("tacrp/hud/radar.png", "smooth")
 local mat_radar_active = Material("tacrp/hud/radar_active.png", "mips smooth")
 local mat_dot = Material("tacrp/hud/dot.png", "mips smooth")
+local mat_tri = Material("tacrp/hud/triangle.png", "mips smooth")
 function ATT.TacticalDraw(self)
     local scrw = ScrW()
     local scrh = ScrH()
@@ -55,6 +56,7 @@ function ATT.TacticalDraw(self)
             local read = {
                 x = -relpos.x,
                 y = relpos.y,
+                z = relpos.z,
             }
 
             table.insert(radarpositions, read)
@@ -73,7 +75,6 @@ function ATT.TacticalDraw(self)
     surface.SetMaterial(mat_radar_active)
     surface.DrawTexturedRect(x, y, w, h)
     -- surface.SetDrawColor(255, 255, 255, 255)
-    surface.SetMaterial(mat_dot)
 
     local ds = ScreenScale(4)
 
@@ -89,7 +90,13 @@ function ATT.TacticalDraw(self)
         dx = dx - ScreenScale(0.5)
         dy = dy - ScreenScale(0.5)
 
-        surface.DrawTexturedRect(dx - (ds / 2), dy - (ds / 2), ds, ds)
+        if math.abs(dot.z) > 128 then
+            surface.SetMaterial(mat_tri)
+            surface.DrawTexturedRectRotated(dx, dy, ds, ds, dot.z > 0 and 0 or 180)
+        else
+            surface.SetMaterial(mat_dot)
+            surface.DrawTexturedRect(dx - (ds / 2), dy - (ds / 2), ds, ds)
+        end
     end
 end
 
