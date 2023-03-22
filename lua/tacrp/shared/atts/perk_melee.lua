@@ -7,5 +7,5 @@ ATT.Category = "perk_melee"
 
 ATT.SortOrder = 2
 
-ATT.Mult_MeleeDamage = 35 / 20
+ATT.Mult_MeleeDamage = 35 / 25
 ATT.MeleeSlow = true

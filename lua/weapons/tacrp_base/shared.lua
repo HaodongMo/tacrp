@@ -205,8 +205,8 @@ SWEP.QuickNadeTimeMult = 1
 // melee
 
 SWEP.CanMeleeAttack = true
-SWEP.MeleeDamage = 20
-SWEP.MeleeAttackTime = 0.6 // time between swings
+SWEP.MeleeDamage = 25
+SWEP.MeleeAttackTime = 0.7 // time between swings
 SWEP.MeleeRange = 96
 
 // reload
