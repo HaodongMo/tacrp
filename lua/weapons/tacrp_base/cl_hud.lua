@@ -23,6 +23,7 @@ function SWEP:DoDrawCrosshair(x, y)
         tacfunc = self:GetValue("TacticalCrosshair")
     elseif !dev and self.CrosshairAlpha <= 0 then return true end
 
+
     local dir = self:GetShootDir(true)
 
     local tr = util.TraceLine({
@@ -36,12 +37,27 @@ function SWEP:DoDrawCrosshair(x, y)
         x = math.Round(w2s.x)
         y = math.Round(w2s.y)
     cam.End3D()
+    local x2, y2 = x, y
 
     local spread = TacRP.GetFOVAcc(self)
     local sway = self:IsSwayEnabled() and self:GetSwayAmount() or self:GetForcedSwayAmount()
 
+    if dev or self:GetValue("TacticalCrosshairTruePos") then
+        local tr2 = util.TraceLine({
+            start = self:GetMuzzleOrigin(),
+            endpos = self:GetMuzzleOrigin() + (self:GetShootDir():Forward() * 50000),
+            mask = MASK_SHOT,
+            filter = self:GetOwner()
+        })
+        cam.Start3D()
+            local tw2s = tr2.HitPos:ToScreen()
+            x2 = math.Round(tw2s.x)
+            y2 = math.Round(tw2s.y)
+        cam.End3D()
+    end
+
     if tacfunc then
-        tacfunc(self, x, y, spread, sway)
+        tacfunc(self, x2, y2, spread, sway)
     end
 
     spread = math.Round( math.max(spread, 2) + ScreenScale(sway * math.pi))
@@ -59,18 +75,8 @@ function SWEP:DoDrawCrosshair(x, y)
     surface.DrawLine(x + spread, y, x + spread + w, y)
 
     -- Developer Crosshair
-    if !self:GetReloading() and !self:GetCustomize() and dev then
-        local tr2 = util.TraceLine({
-            start = self:GetMuzzleOrigin(),
-            endpos = self:GetMuzzleOrigin() + (self:GetShootDir():Forward() * 50000),
-            mask = MASK_SHOT,
-            filter = self:GetOwner()
-        })
-        cam.Start3D()
-            local tw2s = tr2.HitPos:ToScreen()
-            tw2s.x = math.Round(tw2s.x)
-            tw2s.y = math.Round(tw2s.y)
-        cam.End3D()
+    if dev then
+
         if self:StillWaiting() then
             surface.SetDrawColor(150, 150, 150, 255)
         else
@@ -78,31 +84,31 @@ function SWEP:DoDrawCrosshair(x, y)
         end
         surface.DrawLine(tw2s.x, tw2s.y - 256, tw2s.x, tw2s.y + 256)
         surface.DrawLine(tw2s.x - 256, tw2s.y, tw2s.x + 256, tw2s.y)
-        local spread = TacRP.GetFOVAcc(self)
+        spread = TacRP.GetFOVAcc(self)
         local recoil_txt = "Recoil: " .. tostring(math.Round(self:GetRecoilAmount() or 0, 3))
-        surface.DrawCircle(tw2s.x, tw2s.y, spread, 255, 255, 255, 150)
-        surface.DrawCircle(tw2s.x, tw2s.y, spread + 1, 255, 255, 255, 150)
+        surface.DrawCircle(x2, y2, spread, 255, 255, 255, 150)
+        surface.DrawCircle(x2, y2, spread + 1, 255, 255, 255, 150)
         surface.SetFont("TacRP_Myriad_Pro_32_Unscaled")
         surface.SetTextColor(255, 255, 255, 255)
-        surface.SetTextPos(tw2s.x - 256, tw2s.y)
+        surface.SetTextPos(x2 - 256, y2)
         surface.DrawText(recoil_txt)
         local spread_txt = tostring("Cone: " .. math.Round(self:GetSpread(), 5))
-        surface.SetTextPos(tw2s.x - 256, tw2s.y - 34)
+        surface.SetTextPos(x2 - 256, y2 - 34)
         surface.DrawText(spread_txt)
         -- local tw = surface.GetTextSize(spread_txt)
-        -- surface.SetTextPos(tw2s.x + 256 - tw, tw2s.y)
+        -- surface.SetTextPos(x2 + 256 - tw, y2)
         -- surface.DrawText(spread_txt)
 
 
         local dist = (tr.HitPos - tr.StartPos):Length()
         local dist_txt = math.Round(dist) .. " HU"
         local tw = surface.GetTextSize(dist_txt)
-        surface.SetTextPos(tw2s.x + 256 - tw, tw2s.y)
+        surface.SetTextPos(x2 + 256 - tw, y2)
         surface.DrawText(dist_txt)
 
         local damage_txt = math.Round(self:GetDamageAtRange(dist)) .. " DMG"
         local tw2 = surface.GetTextSize(damage_txt)
-        surface.SetTextPos(tw2s.x + 256 - tw2, tw2s.y - 34)
+        surface.SetTextPos(x2 + 256 - tw2, y2 - 34)
         surface.DrawText(damage_txt)
     end
 

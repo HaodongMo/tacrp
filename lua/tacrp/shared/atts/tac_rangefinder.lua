@@ -123,44 +123,31 @@ function ATT.TacticalDraw(self)
 end
 
 local last_laze_time = 0
-local last_laze_dist = 0
 local laze_interval = 0.25
-local tilt = 0
 local ccip_v = 0
-local no_ccip = true
 local dropalpha = 0
+local dropalpha2 = 0
 function ATT.TacticalCrosshair(self, x, y, spread, sway)
 
     if !GetConVar("tacrp_physbullet"):GetBool() then return end
 
     if self:GetNextPrimaryFire() + 0.1 > CurTime() then
-        dropalpha = 0
+        dropalpha2 = 0
     elseif self:IsInScope() and (self:GetValue("ScopeOverlay") or !self:GetReloading()) then
         dropalpha = math.Approach(dropalpha, self:GetSightAmount() ^ 2, FrameTime() * 1)
+        dropalpha2 = math.Approach(dropalpha2, dropalpha, FrameTime() * 1)
     else
         dropalpha = math.Approach(dropalpha, 0, FrameTime() * 10)
+        dropalpha2 = dropalpha
     end
     if dropalpha == 0 then return end
 
     if last_laze_time + laze_interval <= CurTime() then
-        local d = 1000000
-        local tr = util.TraceLine({
-            start = self:GetMuzzleOrigin(),
-            endpos = self:GetMuzzleOrigin() + (self:GetShootDir():Forward() * d),
-            mask = MASK_SHOT,
-            filter = self:GetOwner()
-        })
-
-        last_laze_dist = tr.Fraction * d
         last_laze_time = CurTime()
-
-        tilt = (math.NormalizeAngle(self:GetShootDir().p) / 90)
-
         local ccip = self:GetCCIP()
 
         if !ccip then
             ccip_v = 0
-            no_ccip = true
         else
             cam.Start3D(nil, nil, self.ViewModelFOV)
             ccip_v = (ccip.HitPos:ToScreen().y - (ScrH() / 2)) * self:GetCorVal()
@@ -168,21 +155,25 @@ function ATT.TacticalCrosshair(self, x, y, spread, sway)
             -- local localpos = mdl:WorldToLocal(pos)
             -- ccip_v = (localpos.z - localhp.z)
             cam.End3D()
-            no_ccip = false
         end
         last_ccip_time = CurTime()
     end
 
+    surface.SetDrawColor(255, 255, 255, dropalpha * 80)
+    surface.DrawCircle(x, y, 9.9, 255, 255, 255, 75)
+
     for i = 1, math.Round((ccip_v - 5) / 5) do
-        surface.DrawCircle(x, y + i * 5, 1, 255, 255, 255, dropalpha * 75)
+        surface.DrawCircle(x, y + i * 5, 1, 255, 255, 255, dropalpha2 * 75)
     end
 
     -- surface.DrawCircle(x, y + ccip_v, 6, 255, 255, 255, dropalpha * 120)
     -- surface.DrawCircle(x, y + ccip_v, 8, 255, 255, 255, dropalpha * 120)
-    surface.SetDrawColor(255, 255, 255, dropalpha * 150)
+    surface.SetDrawColor(255, 255, 255, dropalpha2 * 150)
     surface.DrawLine(x - 7, y - 7 + ccip_v, x + 7, y + 7 + ccip_v)
     surface.DrawLine(x - 7, y + 7 + ccip_v, x + 7, y - 7 + ccip_v)
 
     -- surface.DrawCircle(x, y, spread - 1, 255, 255, 255, circlealpha * 75)
     -- surface.DrawCircle(x, y, spread + 1, 255, 255, 255, circlealpha * 75)
 end
+
+ATT.TacticalCrosshairTruePos = true

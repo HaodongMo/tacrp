@@ -482,7 +482,7 @@ function SWEP:GetShootDir(nosway)
 
     local oa = self:GetFreeAimOffset()
     if !nosway then
-        oa = oa +  self:GetSwayAngles()
+        oa = oa + self:GetSwayAngles()
     end
 
     dir:RotateAroundAxis(u, oa.y)

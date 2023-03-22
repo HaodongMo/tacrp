@@ -141,3 +141,5 @@ function ATT.TacticalCrosshair(self, x, y, spread, sway)
     surface.DrawCircle(x, y, spread - 1, 255, 255, 255, circlealpha * 100)
     surface.DrawCircle(x, y, spread + 1, 255, 255, 255, circlealpha * 100)
 end
+
+ATT.TacticalCrosshairTruePos = true
