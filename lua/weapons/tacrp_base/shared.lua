@@ -406,14 +406,14 @@ function SWEP:SetupDataTables()
     self:NetworkVar("Float", 2, "NextIdle")
     self:NetworkVar("Float", 3, "LastRecoilTime")
     self:NetworkVar("Float", 4, "RecoilDirection")
-    self:NetworkVar("Float", 5, "SprintAmount")
+    self:NetworkVar("Float", 5, "NWSprintAmount")
     self:NetworkVar("Float", 6, "SprintLockTime")
     self:NetworkVar("Float", 7, "LastScopeTime")
     self:NetworkVar("Float", 8, "LastMeleeTime")
     self:NetworkVar("Float", 9, "PrimedGrenadeTime")
     self:NetworkVar("Float", 10, "StartPrimedGrenadeTime")
     self:NetworkVar("Float", 11, "ReloadFinishTime")
-    self:NetworkVar("Float", 12, "SightAmount")
+    self:NetworkVar("Float", 12, "NWSightAmount")
     self:NetworkVar("Float", 13, "BlindFireFinishTime")
     self:NetworkVar("Float", 14, "HolsterTime")
     -- self:NetworkVar("Float", 14, "BlindFireCornerAmount")
@@ -448,17 +448,27 @@ function SWEP:SetupDataTables()
     self:SetTactical(true)
 end
 
-SWEP.CL_Tactical = true
-function SWEP:SetTactical(x)
-    if (!game.SinglePlayer() and CLIENT) then self.CL_Tactical = x end
-    self:SetNWTactical(x)
-end
-
-function SWEP:GetTactical()
-    if (!game.SinglePlayer() and CLIENT) then return self.CL_Tactical end
-    return self:GetNWTactical()
-end
-
 function SWEP:SecondaryAttack()
     return
 end
+
+local function clunpredictvar(tbl, name, varname, default)
+    local clvar = "CL_" .. name
+
+    tbl[clvar] = default
+
+    tbl["Set" .. name] = function(self, v)
+        if (!game.SinglePlayer() and CLIENT) then self[clvar] = v end
+        self["Set" .. varname](self, v)
+    end
+
+    tbl["Get" .. name] = function(self)
+        if (!game.SinglePlayer() and CLIENT) then return self[clvar] end
+        return self["Get" .. varname](self)
+    end
+end
+
+clunpredictvar(SWEP, "Tactical", "NWTactical", true)
+clunpredictvar(SWEP, "SightAmount", "NWSightAmount", 0)
+clunpredictvar(SWEP, "SprintAmount", "NWSprintAmount", 0)
+clunpredictvar(SWEP, "RecoilAmount", "NWRecoilAmount", 0)
