@@ -136,7 +136,7 @@ function SWEP:EndReload()
 
             for i = 1, res do
                 self:SetTimer(t * 0.95 * ((i - 1) / 3), function()
-                    self:RestoreClip(1)
+                    if self:GetReloading() then self:RestoreClip(1) end
                 end)
             end
 

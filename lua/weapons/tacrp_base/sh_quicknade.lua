@@ -1,9 +1,14 @@
 function SWEP:PrimeGrenade()
     self.Primary.Automatic = true
 
-    if self:StillWaiting() then return end
-    -- if self:SprintLock() then return end
+    if self:StillWaiting(nil, true) then return end
     if self:GetPrimedGrenade() then return end
+    -- if self:SprintLock() then return end
+
+    if self:GetReloading() then
+        self:SetReloading(false)
+        self:SetEndReload(false)
+    end
 
     local nade = self:GetGrenade()
 

@@ -11,9 +11,14 @@ SWEP.Sound_MeleeHitBody = {
 }
 
 function SWEP:Melee()
-    if self:StillWaiting() then return end
-    -- if self:SprintLock() then return end
     if !self:GetValue("CanMeleeAttack") then return end
+    if self:StillWaiting(false, true) then return end
+    -- if self:SprintLock() then return end
+
+    if self:GetReloading() then
+        self:SetReloading(false)
+        self:SetEndReload(false)
+    end
 
     self:PlayAnimation("melee", 1, false, true)
 

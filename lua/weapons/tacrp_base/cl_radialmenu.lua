@@ -643,7 +643,7 @@ end
 
 hook.Add("VGUIMousePressed", "tacrp_grenademenu", function(pnl, mousecode)
     local wpn = LocalPlayer():GetActiveWeapon()
-    if !(LocalPlayer():Alive() and IsValid(wpn) and wpn.ArcticTacRP and !wpn:StillWaiting()) then return end
+    if !(LocalPlayer():Alive() and IsValid(wpn) and wpn.ArcticTacRP and !wpn:StillWaiting(nil, true)) then return end
     if wpn.GrenadeMenuAlpha == 1 then
         if !GetConVar("tacrp_nademenu_click"):GetBool() or !currentnade or (mousecode != MOUSE_RIGHT and mousecode != MOUSE_LEFT) then return end
         local under = (mousecode == MOUSE_RIGHT)
@@ -658,5 +658,4 @@ hook.Add("VGUIMousePressed", "tacrp_grenademenu", function(pnl, mousecode)
             bf_suicidelock = bf_suicidelock - 1
         end
     end
-
 end)

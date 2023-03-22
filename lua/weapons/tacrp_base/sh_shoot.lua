@@ -1,7 +1,7 @@
-function SWEP:StillWaiting(cust)
+function SWEP:StillWaiting(cust, reload)
     if self:GetNextPrimaryFire() > CurTime() then return true end
-    if self:GetNextSecondaryFire() > CurTime() then return true end
-    if self:GetAnimLockTime() > CurTime() then return true end
+    if self:GetNextSecondaryFire() > CurTime() and (!reload or !(reload and self:GetReloading())) then return true end
+    if self:GetAnimLockTime() > CurTime() and (!reload or !(reload and self:GetReloading())) then return true end
     if !cust and self:GetBlindFireFinishTime() > CurTime() then return true end
     if !cust and self:GetCustomize() then return true end
     if self:GetPrimedGrenade() then return true end
@@ -22,14 +22,14 @@ function SWEP:PrimaryAttack()
         return
     end
 
-    if self:GetReloading() then
-        self:SetEndReload(true)
-    end
-
     if self:GetValue("Melee") and self:GetOwner():KeyDown(IN_USE) then
         self.Primary.Automatic = false
         self:Melee()
         return
+    end
+
+    if self:GetReloading() then
+        self:SetEndReload(true)
     end
 
     if self:StillWaiting() then
