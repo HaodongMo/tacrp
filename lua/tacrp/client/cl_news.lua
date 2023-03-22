@@ -1,5 +1,3 @@
-TacRP.Version = "DEV"
-
 TacRP.News = {
     --[[]
     {
@@ -236,9 +234,9 @@ function TacRP.CreateNewsPanel(open)
 
         local text
         if is_workshop == true then
-            text = "Workshop Version: Last Updated " .. last_update
+            text = "Version " .. tostring(TacRP.Version) .. " | " .. "Workshop: " .. last_update
         elseif is_workshop == false then
-            text = "GitHub Version: " .. tostring(TacRP.Version)
+            text = "Version " .. tostring(TacRP.Version) .. " | " .. "Workshop: N/A"
         end
 
         if text then

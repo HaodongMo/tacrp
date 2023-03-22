@@ -1,3 +1,5 @@
+TacRP.Version = "1" -- 2023-03-21
+
 TacRP.PenTable = {
     [MAT_ANTLION]     = 0.1,
     [MAT_BLOODYFLESH] = 0.1,
