@@ -128,12 +128,19 @@ function SWEP:Holster(wep)
             if game.SinglePlayer() or CLIENT then
                 self:GetOwner().TacRP_Holster = self:GetOwner().TacRP_Holster or {}
                 self:GetOwner().TacRP_Holster[holsterslot] = self
+                if game.SinglePlayer() then -- not run clientside in singleplayer. lol
+                    net.Start("TacRP_updateholster")
+                        net.WriteEntity(self:GetOwner())
+                        net.WriteEntity(self)
+                    net.Send(self:GetOwner())
+                end
             else
                 net.Start("TacRP_updateholster")
                     net.WriteEntity(self:GetOwner())
                     net.WriteEntity(self)
                 net.SendOmit(self:GetOwner())
             end
+            print(holsterslot, self:GetOwner().TacRP_Holster[holsterslot])
         end
 
         if game.SinglePlayer() then
