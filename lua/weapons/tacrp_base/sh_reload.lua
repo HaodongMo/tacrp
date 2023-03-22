@@ -38,6 +38,7 @@ function SWEP:Reload()
     end
 
     local t = self:PlayAnimation(anim, self:GetValue("ReloadTimeMult"), true, true)
+
     self:GetOwner():DoAnimationEvent(self:GetValue("GestureReload"))
 
     if SERVER then
@@ -113,7 +114,12 @@ end
 function SWEP:EndReload()
     if self:GetValue("ShotgunReload") then
         if self:Clip1() >= self:GetValue("ClipSize") or (!self:GetInfiniteAmmo() and self:Ammo1() == 0) or self:GetEndReload() then
-            self:PlayAnimation("reload_finish", self:GetValue("ReloadTimeMult"), true, true)
+            if self:Clip1() == self:GetLoadedRounds() then
+                self:PlayAnimation("reload_start", -0.75 * self:GetValue("ReloadTimeMult"), true, true)
+            else
+                self:PlayAnimation("reload_finish", self:GetValue("ReloadTimeMult"), true, true)
+            end
+
             self:SetReloading(false)
 
             self:SetNthShot(0)
@@ -153,28 +159,39 @@ end
 function SWEP:CancelReload(doanims, keeptime)
     if self:GetReloading() then
 
-        self:KillTimer("SetLoadedRounds")
-        self:KillTimer("ShotgunRestoreClip")
-        self:SetReloading(false)
-        self:SetEndReload(false)
-        self:SetNthShot(0)
-        self:DoBulletBodygroups()
+        local stop = false
 
         if doanims then
             if self:GetValue("ShotgunReload") then
-                if self:Clip1() == self:GetLoadedRounds() then
-                    self:PlayAnimation("reload_start", -0.6 * self:GetValue("ReloadTimeMult"), true, true)
+                if self.CurrentAnimation == "reload_start" and self.ShotgunReloadCompleteStart then
+                    self:SetEndReload(true)
+                elseif self:Clip1() == self:GetLoadedRounds() then
+                    self:PlayAnimation("reload_start", -0.75 * self:GetValue("ReloadTimeMult"), true, true)
+                    stop = true
                 else
                     self:PlayAnimation("reload_finish", self:GetValue("ReloadTimeMult"), true, true)
+                    stop = true
                 end
             else
                 self:Idle()
+                stop = true
+            end
+        else
+            stop = true
+        end
+
+        if stop then
+            self:KillTimer("SetLoadedRounds")
+            self:KillTimer("ShotgunRestoreClip")
+            self:SetReloading(false)
+            self:SetEndReload(false)
+            self:SetNthShot(0)
+            self:DoBulletBodygroups()
+            if !keeptime then
+                self:SetReloadFinishTime(0)
             end
         end
 
-        if !keeptime then
-            self:SetReloadFinishTime(0)
-        end
     end
 end
 

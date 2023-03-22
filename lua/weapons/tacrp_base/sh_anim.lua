@@ -1,7 +1,7 @@
 function SWEP:PlayAnimation(seq, mult, lock, doidle)
     mult = mult or 1
     lock = lock or false
-    seq = self:TranslateSequence(seq)
+    local anim = self:TranslateSequence(seq)
     doidle = doidle or false
     local reverse = false
 
@@ -14,13 +14,14 @@ function SWEP:PlayAnimation(seq, mult, lock, doidle)
 
     if !IsValid(vm) then return end
 
-    if isstring(seq) then
-        seq = vm:LookupSequence(seq)
+    if isstring(anim) then
+        seq = vm:LookupSequence(anim)
     end
 
     if seq == -1 then return end
 
-    self.CurrentAnimation = seq
+    self.CurrentAnimation = anim
+    self.CurrentSeqeunce = seq
 
     local time = vm:SequenceDuration(seq)
 

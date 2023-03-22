@@ -132,6 +132,7 @@ SWEP.HolsterAng = Angle(0, 0, 0)
 SWEP.ClipSize = 8
 SWEP.Ammo = "buckshot"
 SWEP.ShotgunReload = true
+SWEP.ShotgunReloadCompleteStart = true
 
 SWEP.ReloadTimeMult = 1
 
