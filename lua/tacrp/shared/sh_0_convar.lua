@@ -275,6 +275,11 @@ local conVars = {
         default = "1",
         replicated = true,
     },
+    {
+        name = "radar_quiet",
+        default = "0",
+        client = true,
+    },
 }
 
 local prefix = "tacrp_"
@@ -404,6 +409,13 @@ local function menu_client_ti(panel)
     })
     panel:AddControl("label", {
         text = "In dark mode, flashbangs turn your screen black instead of white, and mutes audio intead of ringing."
+    })
+    panel:AddControl("checkbox", {
+        label = "Quiet Radar",
+        command = "tacrp_radar_quiet"
+    })
+    panel:AddControl("label", {
+        text = "This mutes your own radar sound for yourself only. Others can still hear your radar, and you can still hear others' radars."
     })
 
     panel:AddControl("header", {

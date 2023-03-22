@@ -41,7 +41,7 @@ function ATT.TacticalDraw(self)
 
         local i = 0
         for _, ent in ipairs(tbl) do
-            if !(ent:IsPlayer() or ent:IsNPC() or ent:IsNextBot()) then continue end
+            if !((ent:IsPlayer() and ent:Alive()) or (ent:IsNPC() and ent:Health() > 0) or ent:IsNextBot()) then continue end
             if ent == self:GetOwner() then continue end
 
             local ang = self:GetOwner():EyeAngles()
@@ -64,7 +64,9 @@ function ATT.TacticalDraw(self)
         lastradar = CurTime()
         cache_lastradarpositions = radarpositions
 
-        LocalPlayer():EmitSound("plats/elevbell1.wav", 60, 95 + math.min(i, 3) * 5, 0.2)
+        if !GetConVar("tacrp_radar_quiet"):GetBool() then
+            LocalPlayer():EmitSound("plats/elevbell1.wav", 60, 95 + math.min(i, 3) * 5, 0.1 + math.min(i, 3) * 0.05)
+        end
     end
 
     surface.SetDrawColor(0, 0, 0, 255 * 2 * (1 - ((CurTime() - lastradar) / scantime)))
