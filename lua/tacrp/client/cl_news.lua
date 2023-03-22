@@ -37,7 +37,6 @@ TacRP.News = {
 <b>8Z, the gmod hyperealist</b></p>
 </body>]]
     },
-
 }
 TacRP.NewsRead = {}
 TacRP.NewsLoaded = nil
@@ -203,21 +202,26 @@ function TacRP.CreateNewsPanel(open)
             draw.SimpleText("O", "TacRP_HD44780A00_5x8_4", w / 2, h / 2, c_txt, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
         end
     end
-    local cvartext = vgui.Create("DLabel", TacRP.NewsPanel)
-    cvartext:SetFont("TacRP_Myriad_Pro_8")
-    cvartext:SetPos(ScreenScale(12), 0)
-    cvartext:SetText("Only notify major news/updates in the future")
-    cvartext:SetColor(color_white)
-    cvartext:SizeToContents()
+    local cvarback = vgui.Create("DPanel", TacRP.NewsPanel)
+    cvarback:SetPos(ScreenScale(11), 0)
+    cvarback:SetSize(ScreenScale(110), ScreenScale(8))
+    function cvarback.Paint(self, w, h)
+        surface.SetDrawColor(0, 0, 0, 100)
+        surface.DrawRect(0, 0, w, h)
+        TacRP.DrawCorneredBox(0, 0, w, h)
 
+        draw.SimpleText("Only notify on major news/updates", "TacRP_Myriad_Pro_8", w / 2, h / 2, color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+    end
+
+    local y_title = ScreenScale(2)
     local title = vgui.Create("DPanel", TacRP.NewsPanel)
     title:SetSize(w_news, h_title)
     title:Dock(TOP)
     function title.Paint(self, w, h)
         local c_bg = TacRP.GetPanelColor("bg2")
         surface.SetDrawColor(c_bg)
-        surface.DrawRect(0, 0, w, h)
-        TacRP.DrawCorneredBox(0, 0, w, h)
+        surface.DrawRect(0, y_title, w, h - y_title)
+        TacRP.DrawCorneredBox(0, y_title, w, h - y_title)
         draw.SimpleText("Tactical RP Newsletter", "TacRP_Myriad_Pro_20", w / 2, ScreenScale(2), color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_TOP)
     end
 
