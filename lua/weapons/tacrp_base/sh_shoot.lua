@@ -28,9 +28,12 @@ function SWEP:PrimaryAttack()
         return
     end
 
-    if self:GetReloading() then
-        self:SetEndReload(true)
+    if self:GetReloading() and self:GetValue("ShotgunReload") then
+        self:CancelReload(true)
     end
+    -- if self:GetReloading() then
+    --     self:SetEndReload(true)
+    -- end
 
     if self:StillWaiting() then
         return

@@ -112,7 +112,7 @@ end
 
 function SWEP:EndReload()
     if self:GetValue("ShotgunReload") then
-        if self:Clip1() >= self:GetValue("ClipSize") or self:Ammo1() == 0 or self:GetEndReload() then
+        if self:Clip1() >= self:GetValue("ClipSize") or (!self:GetInfiniteAmmo() and self:Ammo1() == 0) or self:GetEndReload() then
             self:PlayAnimation("reload_finish", self:GetValue("ReloadTimeMult"), true, true)
             self:SetReloading(false)
 
@@ -122,17 +122,21 @@ function SWEP:EndReload()
         else
             local t = self:PlayAnimation("reload", self:GetValue("ReloadTimeMult"), true)
 
-            local res = math.min(math.min(3, self:GetValue("ClipSize") - self:Clip1()), self:Ammo1())
+            local res = math.min(math.min(3, self:GetValue("ClipSize") - self:Clip1()), self:GetInfiniteAmmo() and math.huge or self:Ammo1())
 
-            self:SetLoadedRounds(res)
-
+            local delay = 0.9
             for i = 1, res do
-                self:SetTimer(t * 0.95 * ((i - 1) / 3), function()
+                self:SetTimer(t * delay * ((i - 1) / 3) + 0.22, function()
                     self:RestoreClip(1)
                 end, "ShotgunRestoreClip")
             end
 
-            self:SetReloadFinishTime(CurTime() + (t * 0.95 * (res / 3)))
+            self:SetTimer(t * delay * (res / 3) + 0.22, function()
+                self:SetLoadedRounds(self:GetLoadedRounds() + res)
+                self:DoBulletBodygroups()
+            end, "SetLoadedRounds")
+
+            self:SetReloadFinishTime(CurTime() + (t * delay * (res / 3)) + 0.05)
 
             self:DoBulletBodygroups()
         end
@@ -146,13 +150,27 @@ function SWEP:EndReload()
     self:RunHook("Hook_EndReload")
 end
 
-function SWEP:CancelReload(keeptime)
+function SWEP:CancelReload(doanims, keeptime)
     if self:GetReloading() then
 
         self:KillTimer("SetLoadedRounds")
         self:KillTimer("ShotgunRestoreClip")
         self:SetReloading(false)
         self:SetEndReload(false)
+        self:SetNthShot(0)
+        self:DoBulletBodygroups()
+
+        if doanims then
+            if self:GetValue("ShotgunReload") then
+                if self:Clip1() == self:GetLoadedRounds() then
+                    self:PlayAnimation("reload_start", -0.6 * self:GetValue("ReloadTimeMult"), true, true)
+                else
+                    self:PlayAnimation("reload_finish", self:GetValue("ReloadTimeMult"), true, true)
+                end
+            else
+                self:Idle()
+            end
+        end
 
         if !keeptime then
             self:SetReloadFinishTime(0)

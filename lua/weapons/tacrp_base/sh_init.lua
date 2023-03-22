@@ -2,9 +2,7 @@ function SWEP:DoDeployAnimation()
     if self:GetReloading() and self:GetValue("MidReload") and !self:GetValue("ShotgunReload") and self:HasSequence("midreload") then
         local t = self:PlayAnimation("midreload", self:GetValue("ReloadTimeMult"), true, true)
 
-        self:SetTimer(t, function()
-            self:EndReload()
-        end)
+        self:SetReloadFinishTime(CurTime() + t)
     else
         self:SetReloading(false)
         if self:GetValue("TryUnholster") then
