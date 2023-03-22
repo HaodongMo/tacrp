@@ -20,6 +20,9 @@ function SWEP:Melee()
         self:SetEndReload(false)
     end
 
+    self:ToggleBlindFire(TacRP.BLINDFIRE_NONE)
+    self:ScopeToggle(0)
+
     self:PlayAnimation("melee", 1, false, true)
 
     self:GetOwner():DoAnimationEvent(self:GetValue("GestureBash"))

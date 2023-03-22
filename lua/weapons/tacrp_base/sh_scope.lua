@@ -4,20 +4,15 @@ function SWEP:ScopeToggle(setlevel)
     -- if (setlevel and setlevel > 0 and self:GetReloading()) or (!setlevel and self:GetReloading()) then return end
 
     local level = self:GetScopeLevel()
-
     local oldlevel = level
 
     level = setlevel or (level + 1)
 
     if level > self:GetValue("ScopeLevels") then
-        level = 0
+        level = self:GetValue("ScopeLevels")
     end
 
-    if self:SprintLock() then
-        level = 0
-    end
-
-    if self:GetCustomize() then
+    if self:SprintLock() or self:GetCustomize() or self:GetLastMeleeTime() + 1 > CurTime() then
         level = 0
     end
 
