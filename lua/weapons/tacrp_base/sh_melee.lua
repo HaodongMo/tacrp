@@ -18,6 +18,7 @@ function SWEP:Melee()
     if self:GetReloading() then
         self:SetReloading(false)
         self:SetEndReload(false)
+        self:SetReloadFinishTime(0)
     end
 
     self:ToggleBlindFire(TacRP.BLINDFIRE_NONE)

@@ -8,6 +8,7 @@ function SWEP:PrimeGrenade()
     if self:GetReloading() then
         self:SetReloading(false)
         self:SetEndReload(false)
+        self:SetReloadFinishTime(0)
     end
 
     local nade = self:GetGrenade()
