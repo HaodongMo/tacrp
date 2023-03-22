@@ -123,15 +123,13 @@ function ATT.TacticalDraw(self)
 end
 
 local last_laze_time = 0
-local last_laze_dist = 0
+-- local last_laze_dist = 0
 local laze_interval = 0.25
 local ccip_v = 0
 local dropalpha = 0
 local dropalpha2 = 0
 local frac = 0
 function ATT.TacticalCrosshair(self, x, y, spread, sway)
-
-    if !GetConVar("tacrp_physbullet"):GetBool() then return end
 
     if self:GetNextPrimaryFire() + 0.1 > CurTime() then
         dropalpha2 = 0
@@ -143,6 +141,16 @@ function ATT.TacticalCrosshair(self, x, y, spread, sway)
         dropalpha2 = dropalpha
     end
     if dropalpha == 0 then return end
+
+    frac = math.Clamp((rawdist - self:GetValue("Range_Min")) / (self:GetValue("Range_Max") - self:GetValue("Range_Min")), 0, 1)
+    if self:GetValue("Damage_Min") <= self:GetValue("Damage_Max") then frac = 1 - frac end
+
+    surface.DrawCircle(x, y, 16, 255, 255, 255, dropalpha * 80)
+    surface.SetDrawColor(255, 255, 255, dropalpha * 60 * frac + 20)
+    surface.DrawLine(x - 16, y, x + 16, y)
+    surface.DrawLine(x, y + 16, x, y - 16)
+
+    if !GetConVar("tacrp_physbullet"):GetBool() then return end
 
     if last_laze_time + laze_interval <= CurTime() then
         last_laze_time = CurTime()
@@ -157,16 +165,9 @@ function ATT.TacticalCrosshair(self, x, y, spread, sway)
             -- local localpos = mdl:WorldToLocal(pos)
             -- ccip_v = (localpos.z - localhp.z)
             cam.End3D()
-            last_laze_dist = ccip.HitPos:Distance(self:GetMuzzleOrigin())
-            frac = math.Clamp((last_laze_dist - self:GetValue("Range_Min")) / (self:GetValue("Range_Max") - self:GetValue("Range_Min")), 0, 1)
-            if self:GetValue("Damage_Min") <= self:GetValue("Damage_Max") then frac = 1 - frac end
+            -- last_laze_dist = ccip.HitPos:Distance(self:GetMuzzleOrigin())
         end
     end
-
-    surface.DrawCircle(x, y, 16, 255, 255, 255, dropalpha * 80)
-    surface.SetDrawColor(255, 255, 255, dropalpha * 60 * frac + 20)
-    surface.DrawLine(x - 16, y, x + 16, y)
-    surface.DrawLine(x, y + 16, x, y - 16)
 
     for i = 1, math.Round((ccip_v - 4) / 4) do
         surface.DrawCircle(x, y + i * 4, 1, 255, 255, 255, dropalpha2 * 75)
