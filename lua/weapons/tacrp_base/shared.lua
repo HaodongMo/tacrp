@@ -225,7 +225,7 @@ SWEP.TryUnholster = false // if we have an "unholster" animation use it instead 
 
 SWEP.ShotgunReload = false
 SWEP.ShotgunThreeload = true // use those stupid 3 shot reload animations
-SWEP.ShotgunReloadCompleteStart = true // do not interrupt reload_start and instead wait for it to finish first. used on FP6 animations
+SWEP.ShotgunReloadCompleteStart = false // do not interrupt reload_start and instead wait for it to finish first. used on FP6 animations
 SWEP.ReloadTimeMult = 1
 SWEP.DeployTimeMult = 1
 SWEP.HolsterTimeMult = 1
