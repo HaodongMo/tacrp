@@ -140,7 +140,6 @@ function SWEP:Holster(wep)
                     net.WriteEntity(self)
                 net.SendOmit(self:GetOwner())
             end
-            print(holsterslot, self:GetOwner().TacRP_Holster[holsterslot])
         end
 
         if game.SinglePlayer() then
