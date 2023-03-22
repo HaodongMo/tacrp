@@ -15,11 +15,7 @@ function SWEP:Melee()
     if self:StillWaiting(false, true) then return end
     -- if self:SprintLock() then return end
 
-    if self:GetReloading() then
-        self:SetReloading(false)
-        self:SetEndReload(false)
-        self:SetReloadFinishTime(0)
-    end
+    self:CancelReload()
 
     self:ToggleBlindFire(TacRP.BLINDFIRE_NONE)
     self:ScopeToggle(0)

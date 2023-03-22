@@ -5,11 +5,7 @@ function SWEP:PrimeGrenade()
     if self:GetPrimedGrenade() then return end
     -- if self:SprintLock() then return end
 
-    if self:GetReloading() then
-        self:SetReloading(false)
-        self:SetEndReload(false)
-        self:SetReloadFinishTime(0)
-    end
+    self:CancelReload()
 
     local nade = self:GetGrenade()
 

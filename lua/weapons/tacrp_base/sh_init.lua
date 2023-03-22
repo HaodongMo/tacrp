@@ -109,9 +109,10 @@ function SWEP:Holster(wep)
 
     self:SetCustomize(false)
 
-    if self:GetReloading() and self:GetValue("ShotgunReload") and !self:GetEndReload() then
+    if self:GetReloading() and self:GetValue("ShotgunReload") then
         self:SetEndReload(false)
         self:SetReloading(false)
+        self:KillTimer("ShotgunRestoreClip")
     end
 
     if self:GetHolsterTime() > CurTime() then return false end

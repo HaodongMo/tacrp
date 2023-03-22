@@ -34,7 +34,7 @@ function SWEP:Reload()
         self:SetTimer(self:GetValue("LoadInTime") * self:GetValue("ReloadTimeMult"), function()
             self:SetLoadedRounds(math.min(self:GetValue("ClipSize"), self:Clip1() + self:Ammo1()))
             self:DoBulletBodygroups()
-        end)
+        end, "SetLoadedRounds")
     end
 
     local t = self:PlayAnimation(anim, self:GetValue("ReloadTimeMult"), true, true)
@@ -50,13 +50,6 @@ function SWEP:Reload()
     self:SetEndReload(false)
 
     self:DoBulletBodygroups()
-
-    -- self:SetTimer(t * 0.9, function()
-    --     if !IsValid(self) then return end
-
-    --     self:SetEndReload(false)
-    --     self:EndReload()
-    -- end)
 
     self:RunHook("Hook_StartReload")
 
@@ -120,7 +113,6 @@ end
 function SWEP:EndReload()
     if self:GetValue("ShotgunReload") then
         if self:Clip1() >= self:GetValue("ClipSize") or self:Ammo1() == 0 or self:GetEndReload() then
-            // finish
             self:PlayAnimation("reload_finish", self:GetValue("ReloadTimeMult"), true, true)
             self:SetReloading(false)
 
@@ -136,17 +128,11 @@ function SWEP:EndReload()
 
             for i = 1, res do
                 self:SetTimer(t * 0.95 * ((i - 1) / 3), function()
-                    if self:GetReloading() then self:RestoreClip(1) end
-                end)
+                    self:RestoreClip(1)
+                end, "ShotgunRestoreClip")
             end
 
             self:SetReloadFinishTime(CurTime() + (t * 0.95 * (res / 3)))
-
-            -- self:SetTimer(t * 0.95 * (res / 3), function()
-            --     if !IsValid(self) then return end
-
-            --     self:EndReload()
-            -- end)
 
             self:DoBulletBodygroups()
         end
@@ -158,6 +144,20 @@ function SWEP:EndReload()
     end
 
     self:RunHook("Hook_EndReload")
+end
+
+function SWEP:CancelReload(keeptime)
+    if self:GetReloading() then
+
+        self:KillTimer("SetLoadedRounds")
+        self:KillTimer("ShotgunRestoreClip")
+        self:SetReloading(false)
+        self:SetEndReload(false)
+
+        if !keeptime then
+            self:SetReloadFinishTime(0)
+        end
+    end
 end
 
 function SWEP:ThinkReload()
