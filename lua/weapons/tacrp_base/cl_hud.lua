@@ -82,8 +82,8 @@ function SWEP:DoDrawCrosshair(x, y)
         else
             surface.SetDrawColor(255, 50, 50, 255)
         end
-        surface.DrawLine(tw2s.x, tw2s.y - 256, tw2s.x, tw2s.y + 256)
-        surface.DrawLine(tw2s.x - 256, tw2s.y, tw2s.x + 256, tw2s.y)
+        surface.DrawLine(x2, y2 - 256, x2, y2 + 256)
+        surface.DrawLine(x2 - 256, y2, x2 + 256, y2)
         spread = TacRP.GetFOVAcc(self)
         local recoil_txt = "Recoil: " .. tostring(math.Round(self:GetRecoilAmount() or 0, 3))
         surface.DrawCircle(x2, y2, spread, 255, 255, 255, 150)
@@ -98,7 +98,6 @@ function SWEP:DoDrawCrosshair(x, y)
         -- local tw = surface.GetTextSize(spread_txt)
         -- surface.SetTextPos(x2 + 256 - tw, y2)
         -- surface.DrawText(spread_txt)
-
 
         local dist = (tr.HitPos - tr.StartPos):Length()
         local dist_txt = math.Round(dist) .. " HU"
