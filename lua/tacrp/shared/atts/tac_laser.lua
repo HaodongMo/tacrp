@@ -1,6 +1,6 @@
 ATT.PrintName = "Laser"
 ATT.Icon = Material("entities/tacrp_att_tac_laser.png", "mips smooth")
-ATT.Description = "Tactical device which shows where your gun will hit."
+ATT.Description = "Emits a narrow red beam and dot, indicating where the gun is pointed at."
 ATT.Pros = {"Highlight point of aim"}
 ATT.Cons = {"Visible to others"}
 

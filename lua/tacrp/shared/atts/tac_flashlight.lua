@@ -1,7 +1,7 @@
 ATT.PrintName = "Flashlight"
 ATT.Icon = Material("entities/tacrp_att_tac_flashlight.png", "mips smooth")
-ATT.Description = "Emits a beam of light, difficult to aim at with scopes."
-ATT.Pros = {"Flashlight", "Blinds scopes"}
+ATT.Description = "Emits a strong beam of light, blinding anyone staring into it."
+ATT.Pros = {"Flashlight", "Blinds when looked at"}
 ATT.Cons = {"Visible to others"}
 
 ATT.Model = "models/weapons/tacint/addons/flashlight_mounted.mdl"
