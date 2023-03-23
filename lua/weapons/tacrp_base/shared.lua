@@ -20,6 +20,8 @@ SWEP.NPCUsable = true
 
 SWEP.Slot = 1
 
+SWEP.RenderGroup = RENDERGROUP_BOTH
+
 SWEP.ArcadeStats = {}
 
 // "ballistics"

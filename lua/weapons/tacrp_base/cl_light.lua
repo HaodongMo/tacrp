@@ -13,7 +13,7 @@ function SWEP:GetHasFlashlights()
     return false
 end
 
-function SWEP:CreateFlashlightsVM()
+function SWEP:CreateFlashlights()
     self:KillFlashlights()
     self.Flashlights = {}
 
@@ -29,7 +29,7 @@ function SWEP:CreateFlashlightsVM()
                 att = i,
                 light = ProjectedTexture(),
                 col = Color(255, 255, 255),
-                br = 3,
+                br = 8,
             }
             total_lights = total_lights + 1
 
@@ -38,8 +38,7 @@ function SWEP:CreateFlashlightsVM()
 
             table.insert(self.Flashlights, newlight)
 
-            l:SetFOV(50)
-
+            l:SetFOV(60)
 
             l:SetFarZ(1024)
             l:SetNearZ(4)
@@ -48,7 +47,7 @@ function SWEP:CreateFlashlightsVM()
 
             l:SetColor(Color(255, 255, 255))
             l:SetTexture("effects/flashlight001")
-            l:SetBrightness(3)
+            l:SetBrightness(8)
             l:SetEnableShadows(true)
             l:Update()
 
@@ -93,7 +92,7 @@ function SWEP:DrawFlashlightsVM()
     end
 
     if !self.Flashlights then
-        self:CreateFlashlightsVM()
+        self:CreateFlashlights()
     end
 
     for i, k in pairs(self.Flashlights) do
@@ -101,7 +100,7 @@ function SWEP:DrawFlashlightsVM()
 
         local pos, ang
 
-        if !model then
+        if !IsValid(model) then
             pos = self:GetOwner():EyePos()
             ang = self:GetOwner():EyeAngles()
         else
@@ -147,5 +146,119 @@ function SWEP:DrawFlashlightsVM()
         --     dl.dietime = CurTime() + 0.1
         --     dl.size = (k.br or 2) * 64
         -- end
+    end
+end
+
+function SWEP:DrawFlashlightsWM()
+    if self:GetOwner() != LocalPlayer() then return end
+
+    if !self.Flashlights then
+        self:CreateFlashlights()
+    end
+
+    for i, k in ipairs(self.Flashlights) do
+        local model = (k.slottbl or {}).WModel
+
+        if !IsValid(model) then continue end
+
+        local pos, ang
+
+        if !model then
+            pos = self:GetOwner():EyePos()
+            ang = self:GetOwner():EyeAngles()
+        else
+            pos = model:GetPos()
+            ang = model:GetAngles()
+        end
+
+        -- ang:RotateAroundAxis(ang:Up(), 90)
+
+        local tr = util.TraceLine({
+            start = pos,
+            endpos = pos + ang:Forward() * 16,
+            mask = MASK_OPAQUE,
+            filter = LocalPlayer(),
+        })
+        if tr.Fraction < 1 then -- We need to push the flashlight back
+            local tr2 = util.TraceLine({
+                start = pos,
+                endpos = pos - ang:Forward() * 16,
+                mask = MASK_OPAQUE,
+                filter = LocalPlayer(),
+            })
+            -- push it as back as the area behind us allows
+            pos = pos + -ang:Forward() * 16 * math.min(1 - tr.Fraction, tr2.Fraction)
+        else
+            pos = tr.HitPos
+        end
+
+        k.light:SetPos(pos)
+        k.light:SetAngles(ang)
+        k.light:Update()
+    end
+end
+
+
+local flaremat = Material("effects/yellowflare")
+function SWEP:DrawFlashlightGlare(pos, ang, strength, thirdperson)
+    strength = strength or 1
+
+    local diff = EyePos() - pos
+    local wep = LocalPlayer():GetActiveWeapon()
+    local dot = math.Clamp((-ang:Forward():Dot(EyeAngles():Forward()) - 0.707) / (1 - 0.707), 0, 1) ^ 2
+    if GetConVar("tacrp_flashlight_blind"):GetBool() and IsValid(wep) and wep.ArcticTacRP and wep:IsInScope() and wep:GetValue("ScopeOverlay") then
+
+        local tr = util.QuickTrace(pos, diff, {self:GetOwner(), LocalPlayer()})
+        if tr.Fraction == 1 then
+            local toscreen = pos:ToScreen()
+            local s = ScreenScale(math.Clamp(1 - diff:Length() / 8196, 0, 1) ^ 1.2 * wep:GetSightAmount() * dot * 3000 * math.Rand(0.95, 1.05))
+            cam.Start2D()
+                surface.SetMaterial(flaremat)
+                surface.SetDrawColor(255, 255, 255, 255)
+                surface.DrawTexturedRect(toscreen.x - s / 2, toscreen.y - s / 2, s, s)
+            cam.End2D()
+            return
+        else
+            strength = strength + dot * math.Clamp(1 - diff:Length() / 8196, 0, 1) * wep:GetSightAmount() * 4
+        end
+    end
+
+    local rad = math.Rand(0.9, 1.1) * 200 * strength
+    local a = 100 + strength * 155
+
+    pos = pos + ang:Forward() * 2
+    pos = pos + diff:GetNormalized() * (2 + 14 * strength)
+
+    render.SetMaterial(flaremat)
+    render.DrawSprite(pos, rad, rad, Color(255, 255, 255, a))
+end
+
+function SWEP:DrawFlashlightGlares()
+    if !self:GetOwner():IsPlayer() then return end
+    for i, k in pairs(self.Attachments) do
+        if !k.Installed then continue end
+
+        local atttbl = TacRP.GetAttTable(k.Installed)
+
+        local src, dir
+        if atttbl.Flashlight and self:GetTactical() then
+            if IsValid(k.WModel) then
+                src, dir = k.WModel:GetPos(), self:GetShootDir()
+            else
+                src, dir = self:GetShootPos(), self:GetShootDir()
+            end
+        else
+            continue
+        end
+
+        local power = 1
+        local dot = -dir:Forward():Dot(EyeAngles():Forward())
+        if dot < 0.5 then continue end
+
+        power = power * math.Clamp(dot * 2 - 1, 0, 1)
+        local distsqr = (src - EyePos()):LengthSqr()
+        power = power * ((1 - math.Clamp(distsqr / 4194304, 0, 1)) ^ 1.25)
+
+        self:DrawFlashlightGlare(src, dir, power, true)
     end
 end

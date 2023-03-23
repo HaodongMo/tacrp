@@ -286,6 +286,12 @@ local conVars = {
         client = true,
         userinfo = true,
     },
+    {
+        name = "flashlight_blind",
+        default = "1",
+        replicated = true,
+        notify = true,
+    },
 }
 
 local prefix = "tacrp_"
@@ -597,6 +603,14 @@ local function menu_balance_ti(panel)
     })
     panel:AddControl("label", {
         text = "Additional random spread onto the fixed pattern. Does not affect total spread. If disabled, shotgun patterns become completely static."
+    })
+
+    panel:AddControl("checkbox", {
+        label = "Flashlights Blind Scopes",
+        command = "tacrp_flashlight_blind"
+    })
+    panel:AddControl("label", {
+        text = "Flashlight glare will obscure scopes based on distance and viewing angle. If disabled, glare sprite will be visible but does not grow when looking through scopes."
     })
 
     panel:AddControl("slider", {

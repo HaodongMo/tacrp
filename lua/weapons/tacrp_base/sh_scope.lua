@@ -86,6 +86,12 @@ function SWEP:DoScope()
             -- sx = sx + math.Round(math.Rand(-shakey, shakey))
             -- sy = sy + math.Round(math.Rand(-shakey, shakey))
 
+            -- local int = self:CheckFlashlightPointing()
+            -- if int > 0 then
+            --     surface.SetDrawColor(255, 255, 255, int * 250)
+            --     surface.DrawRect(0, 0, w, h)
+            -- end
+
             surface.SetMaterial(img)
             surface.SetDrawColor(255, 255, 255, 255)
             surface.DrawTexturedRect(sx, sy, ss, ss)
@@ -96,6 +102,11 @@ function SWEP:DoScope()
 
             surface.DrawRect(0, 0, sx, h)
             surface.DrawRect(sx + ss, 0, w - sx, h)
+
+            -- if int > 0 then
+            --     surface.SetDrawColor(255, 255, 255, int * 25)
+            --     surface.DrawRect(0, 0, w, h)
+            -- end
         end
     end
 end
@@ -142,6 +153,7 @@ function SWEP:ThinkSights()
     elseif !sighted and ((toggle and press) or (!toggle and down)) then
         self:ScopeToggle(1)
     end
+
 end
 
 function SWEP:GetMagnification()
@@ -232,3 +244,34 @@ function SWEP:GetCorVal()
 
     return vmfov / (fov * 1.33333)
 end
+
+-- function SWEP:CheckFlashlightPointing()
+--     if game.SinglePlayer() then return 0 end
+--     if !GetConVar("tacrp_flashlight_blind"):GetBool() then return 0 end
+--     if self.FlashlightPointingCache and self.FlashlightPointingCache[2] == CurTime() then return self.FlashlightPointingCache[1] end
+--     local src0 = self:GetOwner():EyePos()
+--     local v = 0
+--     for _, ply in pairs(player.GetAll()) do
+--         if ply == self:GetOwner() or !ply:Alive() or !IsValid(ply:GetActiveWeapon()) or !ply:GetActiveWeapon().ArcticTacRP then continue end
+--         --  !ply:GetActiveWeapon():GetValue("Flashlight") or !ply:GetActiveWeapon():GetTactical()
+--         local src, dir = ply:GetActiveWeapon():GetMuzzleOrigin(), ply:GetActiveWeapon():GetShootDir():Forward()
+--         local diff = src - src0
+
+--         local add = 1
+
+--         local dot = -dir:Dot(EyeAngles():Forward())
+--         if dot < 0.707 then continue end
+--         add = add * math.Clamp((dot - 0.707) / (1 - 0.707), 0, 1)
+
+--         local distsqr = diff:LengthSqr()
+--         add = add * (1 - math.Clamp(distsqr / 4194304, 0, 1)) ^ 1.25
+
+--         local tr = util.QuickTrace(src, self:GetOwner():EyePos() - src, {self:GetOwner(), ply})
+--         if tr.Fraction < 1 then continue end
+
+--         v = v + add
+--     end
+
+--     self.FlashlightPointingCache = {v, CurTime()}
+--     return v
+-- end

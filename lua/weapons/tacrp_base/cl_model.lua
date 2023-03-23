@@ -93,6 +93,6 @@ function SWEP:SetupModel(wm, custom_wm)
     end
 
     if !wm then
-        self:CreateFlashlightsVM()
+        self:CreateFlashlights()
     end
 end
