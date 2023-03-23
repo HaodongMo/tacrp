@@ -200,17 +200,18 @@ end
 
 
 local flaremat = Material("tacrp/particle_flare")
-function SWEP:DrawFlashlightGlare(pos, ang, strength, thirdperson)
+function SWEP:DrawFlashlightGlare(pos, ang, strength, dot)
     strength = strength or 1
 
     local diff = EyePos() - pos
     local wep = LocalPlayer():GetActiveWeapon()
-    local dot = math.Clamp((-ang:Forward():Dot(EyeAngles():Forward()) - 0.707) / (1 - 0.707), 0, 1) ^ 2
+    --local dot = math.Clamp((-ang:Forward():Dot(EyeAngles():Forward()) - 0.707) / (1 - 0.707), 0, 1) ^ 2
     if GetConVar("tacrp_flashlight_blind"):GetBool() then
+        dot = dot ^ 2
         local tr = util.QuickTrace(pos, diff, {self:GetOwner(), LocalPlayer()})
-        local s = math.Clamp(1 - diff:Length() / 1024, 0, 1) ^ 2 * dot * 1500 * math.Rand(0.95, 1.05)
+        local s = math.Clamp(1 - diff:Length() / 512, 0, 1) ^ 1 * dot * 1500 * math.Rand(0.95, 1.05)
         if IsValid(wep) and wep.ArcticTacRP and wep:IsInScope() and wep:GetValue("ScopeOverlay") then
-            s = s + math.Clamp(1 - diff:Length() / 4096, 0, 1) ^ 1.25 * wep:GetSightAmount() * dot * 3000 * math.Rand(0.95, 1.05)
+            s = s + math.Clamp(1 - diff:Length() / 4096, 0, 1) ^ 1.25 * wep:GetSightAmount() * dot * 4000 * math.Rand(0.95, 1.05)
         end
         if tr.Fraction == 1 then
             s = ScreenScale(s)
@@ -223,8 +224,8 @@ function SWEP:DrawFlashlightGlare(pos, ang, strength, thirdperson)
         end
     end
 
-    local rad = math.Rand(0.9, 1.1) * 200 * strength
-    local a = 100 + strength * 155
+    local rad = math.Rand(0.9, 1.1) * 128 * strength
+    local a = 50 + strength * 205
 
     pos = pos + ang:Forward() * 2
     pos = pos + diff:GetNormalized() * (2 + 14 * strength)
@@ -253,12 +254,14 @@ function SWEP:DrawFlashlightGlares()
 
         local power = 1
         local dot = -dir:Forward():Dot(EyeAngles():Forward())
-        if dot < 0.5 then continue end
+        local dot2 = dir:Forward():Dot((EyePos() - src):GetNormalized())
+        dot = (dot + dot2) / 2
+        if dot < 0 then continue end
 
         power = power * math.Clamp(dot * 2 - 1, 0, 1)
         local distsqr = (src - EyePos()):LengthSqr()
         power = power * ((1 - math.Clamp(distsqr / 4194304, 0, 1)) ^ 1.25)
 
-        self:DrawFlashlightGlare(src, dir, power, true)
+        self:DrawFlashlightGlare(src, dir, power, dot)
     end
 end

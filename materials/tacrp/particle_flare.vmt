@@ -6,5 +6,5 @@ $translucent 1
 $depthblend 0
 $minsize .25
 $maxsize .5
-$ignorez 1
+$ignorez 0
 }
