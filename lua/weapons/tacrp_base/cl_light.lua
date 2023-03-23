@@ -199,27 +199,27 @@ function SWEP:DrawFlashlightsWM()
 end
 
 
-local flaremat = Material("effects/yellowflare")
+local flaremat = Material("tacrp/particle_flare")
 function SWEP:DrawFlashlightGlare(pos, ang, strength, thirdperson)
     strength = strength or 1
 
     local diff = EyePos() - pos
     local wep = LocalPlayer():GetActiveWeapon()
     local dot = math.Clamp((-ang:Forward():Dot(EyeAngles():Forward()) - 0.707) / (1 - 0.707), 0, 1) ^ 2
-    if GetConVar("tacrp_flashlight_blind"):GetBool() and IsValid(wep) and wep.ArcticTacRP and wep:IsInScope() and wep:GetValue("ScopeOverlay") then
-
+    if GetConVar("tacrp_flashlight_blind"):GetBool() then
         local tr = util.QuickTrace(pos, diff, {self:GetOwner(), LocalPlayer()})
+        local s = math.Clamp(1 - diff:Length() / 1024, 0, 1) ^ 2 * dot * 1500 * math.Rand(0.95, 1.05)
+        if IsValid(wep) and wep.ArcticTacRP and wep:IsInScope() and wep:GetValue("ScopeOverlay") then
+            s = s + math.Clamp(1 - diff:Length() / 4096, 0, 1) ^ 1.25 * wep:GetSightAmount() * dot * 3000 * math.Rand(0.95, 1.05)
+        end
         if tr.Fraction == 1 then
+            s = ScreenScale(s)
             local toscreen = pos:ToScreen()
-            local s = ScreenScale(math.Clamp(1 - diff:Length() / 4096, 0, 1) ^ 1.2 * wep:GetSightAmount() * dot * 3000 * math.Rand(0.95, 1.05))
             cam.Start2D()
                 surface.SetMaterial(flaremat)
                 surface.SetDrawColor(255, 255, 255, 255)
                 surface.DrawTexturedRect(toscreen.x - s / 2, toscreen.y - s / 2, s, s)
             cam.End2D()
-            return
-        else
-            strength = strength + dot * math.Clamp(1 - diff:Length() / 4096, 0, 1) * wep:GetSightAmount() * 4
         end
     end
 
