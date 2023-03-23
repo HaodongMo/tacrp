@@ -20,7 +20,7 @@ SWEP.Slot = 2
 SWEP.ArcadeStats = {
 
     Damage_Max = 50,
-    Damage_Min = 75,
+    Damage_Min = 70,
 
     Range_Min = 500,
     Range_Max = 1500,
@@ -43,11 +43,11 @@ SWEP.BodyDamageMultipliers = {
     [HITGROUP_HEAD] = 2,
     [HITGROUP_CHEST] = 1.25,
     [HITGROUP_STOMACH] = 1,
-    [HITGROUP_LEFTARM] = 0.9,
-    [HITGROUP_RIGHTARM] = 0.9,
-    [HITGROUP_LEFTLEG] = 0.75,
-    [HITGROUP_RIGHTLEG] = 0.75,
-    [HITGROUP_GEAR] = 0.9
+    [HITGROUP_LEFTARM] = 0.75,
+    [HITGROUP_RIGHTARM] = 0.75,
+    [HITGROUP_LEFTLEG] = 0.5,
+    [HITGROUP_RIGHTLEG] = 0.5,
+    [HITGROUP_GEAR] = 0.5
 }
 
 SWEP.MuzzleVelocity = 35000
