@@ -292,6 +292,12 @@ local conVars = {
         replicated = true,
         notify = true,
     },
+    {
+        name = "glint",
+        default = "1",
+        replicated = true,
+        notify = true,
+    },
 }
 
 local prefix = "tacrp_"
@@ -604,13 +610,19 @@ local function menu_balance_ti(panel)
     panel:AddControl("label", {
         text = "Additional random spread onto the fixed pattern. Does not affect total spread. If disabled, shotgun patterns become completely static."
     })
-
     panel:AddControl("checkbox", {
-        label = "Flashlights Blind Scopes",
+        label = "Enable Scope Glint",
+        command = "tacrp_glint"
+    })
+    panel:AddControl("label", {
+        text = "Scopes show a visible glint. Glint size is dependent on angle of view, scope magnification and distance, and is bigger when zoomed in."
+    })
+    panel:AddControl("checkbox", {
+        label = "Enable Blinding Flashlights",
         command = "tacrp_flashlight_blind"
     })
     panel:AddControl("label", {
-        text = "Flashlight glare will obscure scopes based on distance and viewing angle. If disabled, glare sprite will be visible but does not grow when looking through scopes."
+        text = "Flashlight glare will obscure vision based on distance and viewing angle. Effect is more significant on scopes. If disabled, glare sprite will be visible but not grow in size."
     })
 
     panel:AddControl("slider", {

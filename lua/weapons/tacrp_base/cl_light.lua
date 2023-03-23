@@ -270,6 +270,7 @@ local glintmat = Material("effects/blueflare1")
 local glintmat2 = Material("tacrp/scope_flare")
 function SWEP:DoScopeGlint()
     --if self:GetOwner() == LocalPlayer() then return end
+    if !GetConVar("tacrp_glint"):GetBool() then return end
     if !self:GetValue("ScopeOverlay") then return end
     local src, dir = self:GetTracerOrigin(), self:GetShootDir()
 
@@ -285,7 +286,7 @@ function SWEP:DoScopeGlint()
 
     src = self:GetTracerOrigin() + dir:Up() * 4 + diff:GetNormalized() * math.Clamp(diff:Length() / 2048, 0, 1) * 16
 
-    local a = 100 + self:GetSightAmount() * 75
+    local a = 120 + self:GetSightAmount() * 70
 
     render.SetMaterial(glintmat)
     render.DrawSprite(src, rad, rad, Color(a, a, a))
