@@ -269,8 +269,8 @@ end
 local glintmat = Material("effects/blueflare1")
 local glintmat2 = Material("tacrp/scope_flare")
 function SWEP:DoScopeGlint()
-    --if self:GetOwner() == LocalPlayer() then return end
-    --if !self:GetValue("ScopeOverlay") or self:GetSightAmount() == 0 then return end
+    if self:GetOwner() == LocalPlayer() then return end
+    if !self:GetValue("ScopeOverlay") or self:GetSightAmount() == 0 then return end
     local src, dir = self:GetTracerOrigin(), self:GetShootDir()
 
     local diff = EyePos() - src
