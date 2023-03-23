@@ -274,6 +274,7 @@ function SWEP:SetShouldHoldType()
 
     if self:GetIsSprinting() or self:GetSafe() and self:GetValue("HoldTypeSprint") then
         self:SetHoldType(self:GetValue("HoldTypeSprint"))
+        return
     end
 
     if self:GetBlindFire() then
