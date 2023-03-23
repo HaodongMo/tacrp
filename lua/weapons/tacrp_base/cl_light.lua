@@ -269,25 +269,29 @@ end
 local glintmat = Material("effects/blueflare1")
 local glintmat2 = Material("tacrp/scope_flare")
 function SWEP:DoScopeGlint()
-    if self:GetOwner() == LocalPlayer() then return end
-    if !self:GetValue("ScopeOverlay") or self:GetSightAmount() == 0 then return end
+    --if self:GetOwner() == LocalPlayer() then return end
+    if !self:GetValue("ScopeOverlay") then return end
     local src, dir = self:GetTracerOrigin(), self:GetShootDir()
 
     local diff = EyePos() - src
 
     local dot = -dir:Forward():Dot(EyeAngles():Forward())
     local dot2 = dir:Forward():Dot(diff:GetNormalized())
-    dot = math.max(0, (dot + dot2) / 2)
+    dot = math.max(0, (dot + dot2) / 2) ^ 1.5
 
-    local strength = dot * math.Clamp(diff:Length() / 2048, 0, 5) * math.Clamp(90 / self:GetShouldFOV(true) / 10, 0, 1)
+    local strength = dot * math.Clamp((diff:Length() - 2048) / 2048, 0, 4) * math.Clamp(90 / self:GetValue("ScopeFOV") / 10, 0, 1)
 
-    local rad = (8 + strength * 64) * self:GetSightAmount()
+    local rad = strength * 96 * (self:GetSightAmount() * 0.6 + 0.4)
 
-    src = self:GetTracerOrigin() + dir:Up() * 4 + diff:GetNormalized() * 16
+    src = self:GetTracerOrigin() + dir:Up() * 4 + diff:GetNormalized() * math.Clamp(diff:Length() / 2048, 0, 1) * 16
+
+    local a = 100 + self:GetSightAmount() * 75
 
     render.SetMaterial(glintmat)
-    render.DrawSprite(src, rad, rad, Color(255, 255, 255, 100))
+    render.DrawSprite(src, rad, rad, Color(a, a, a))
 
-    render.SetMaterial(glintmat2)
-    render.DrawSprite(src, rad * 1.5, rad * 1.5, color_white)
+    if self:GetSightAmount() > 0 then
+        render.SetMaterial(glintmat2)
+        render.DrawSprite(src, rad * 1.5, rad * 1.5, color_white)
+    end
 end
