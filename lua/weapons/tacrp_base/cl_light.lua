@@ -211,7 +211,7 @@ function SWEP:DrawFlashlightGlare(pos, ang, strength, thirdperson)
         local tr = util.QuickTrace(pos, diff, {self:GetOwner(), LocalPlayer()})
         if tr.Fraction == 1 then
             local toscreen = pos:ToScreen()
-            local s = ScreenScale(math.Clamp(1 - diff:Length() / 8196, 0, 1) ^ 1.2 * wep:GetSightAmount() * dot * 3000 * math.Rand(0.95, 1.05))
+            local s = ScreenScale(math.Clamp(1 - diff:Length() / 4096, 0, 1) ^ 1.2 * wep:GetSightAmount() * dot * 3000 * math.Rand(0.95, 1.05))
             cam.Start2D()
                 surface.SetMaterial(flaremat)
                 surface.SetDrawColor(255, 255, 255, 255)
@@ -219,7 +219,7 @@ function SWEP:DrawFlashlightGlare(pos, ang, strength, thirdperson)
             cam.End2D()
             return
         else
-            strength = strength + dot * math.Clamp(1 - diff:Length() / 8196, 0, 1) * wep:GetSightAmount() * 4
+            strength = strength + dot * math.Clamp(1 - diff:Length() / 4096, 0, 1) * wep:GetSightAmount() * 4
         end
     end
 
