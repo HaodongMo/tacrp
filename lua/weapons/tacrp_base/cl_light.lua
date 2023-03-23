@@ -207,11 +207,11 @@ function SWEP:DrawFlashlightGlare(pos, ang, strength, dot)
     local wep = LocalPlayer():GetActiveWeapon()
     --local dot = math.Clamp((-ang:Forward():Dot(EyeAngles():Forward()) - 0.707) / (1 - 0.707), 0, 1) ^ 2
     if GetConVar("tacrp_flashlight_blind"):GetBool() then
-        dot = dot ^ 2
+        dot = dot ^ 4
         local tr = util.QuickTrace(pos, diff, {self:GetOwner(), LocalPlayer()})
-        local s = math.Clamp(1 - diff:Length() / 512, 0, 1) ^ 1 * dot * 1500 * math.Rand(0.95, 1.05)
+        local s = math.Clamp(1 - diff:Length() / 328, 0, 1) ^ 1 * dot * 1500 * math.Rand(0.95, 1.05)
         if IsValid(wep) and wep.ArcticTacRP and wep:IsInScope() and wep:GetValue("ScopeOverlay") then
-            s = s + math.Clamp(1 - diff:Length() / 4096, 0, 1) ^ 1.25 * wep:GetSightAmount() * dot * 4000 * math.Rand(0.95, 1.05)
+            s = s + math.Clamp(1 - diff:Length() / 4096, 0, 1) ^ 1.2 * wep:GetSightAmount() * dot * 3000 * math.Rand(0.95, 1.05)
         end
         if tr.Fraction == 1 then
             s = ScreenScale(s)
