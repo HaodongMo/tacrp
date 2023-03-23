@@ -16,4 +16,6 @@ function SWEP:DrawWorldModelTranslucent()
     self:DrawFlashlightsWM()
 
     self:DrawFlashlightGlares()
+
+    self:DoScopeGlint()
 end

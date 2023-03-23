@@ -198,7 +198,6 @@ function SWEP:DrawFlashlightsWM()
     end
 end
 
-
 local flaremat = Material("tacrp/particle_flare")
 function SWEP:DrawFlashlightGlare(pos, ang, strength, dot)
     strength = strength or 1
@@ -246,7 +245,7 @@ function SWEP:DrawFlashlightGlares()
             if IsValid(k.WModel) then
                 src, dir = k.WModel:GetPos(), self:GetShootDir()
             else
-                src, dir = self:GetShootPos(), self:GetShootDir()
+                src, dir = self:GetTracerOrigin(), self:GetShootDir()
             end
         else
             continue
@@ -264,4 +263,31 @@ function SWEP:DrawFlashlightGlares()
 
         self:DrawFlashlightGlare(src, dir, power, dot)
     end
+end
+
+
+local glintmat = Material("effects/blueflare1")
+local glintmat2 = Material("tacrp/scope_flare")
+function SWEP:DoScopeGlint()
+    --if self:GetOwner() == LocalPlayer() then return end
+    --if !self:GetValue("ScopeOverlay") or self:GetSightAmount() == 0 then return end
+    local src, dir = self:GetTracerOrigin(), self:GetShootDir()
+
+    local diff = EyePos() - src
+
+    local dot = -dir:Forward():Dot(EyeAngles():Forward())
+    local dot2 = dir:Forward():Dot(diff:GetNormalized())
+    dot = math.max(0, (dot + dot2) / 2)
+
+    local strength = dot * math.Clamp(diff:Length() / 2048, 0, 5) * math.Clamp(90 / self:GetShouldFOV(true) / 10, 0, 1)
+
+    local rad = (8 + strength * 64) * self:GetSightAmount()
+
+    src = self:GetTracerOrigin() + dir:Up() * 4 + diff:GetNormalized() * 16
+
+    render.SetMaterial(glintmat)
+    render.DrawSprite(src, rad, rad, Color(255, 255, 255, 100))
+
+    render.SetMaterial(glintmat2)
+    render.DrawSprite(src, rad * 1.5, rad * 1.5, color_white)
 end

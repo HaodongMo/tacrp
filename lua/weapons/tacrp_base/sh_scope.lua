@@ -37,10 +37,10 @@ function SWEP:ScopeToggle(setlevel)
     self:EmitSound(self:GetValue("Sound_ScopeIn"), 75, 100, 1, CHAN_ITEM)
 end
 
-function SWEP:GetShouldFOV()
+function SWEP:GetShouldFOV(ignorepeek)
     local level = self:GetScopeLevel()
 
-    if level > 0 and !self:GetPeeking() then
+    if level > 0 and (ignorepeek or !self:GetPeeking()) then
         local fov = self:GetValue("ScopeFOV")
 
         fov = Lerp(level / self:GetValue("ScopeLevels"), 90, fov)

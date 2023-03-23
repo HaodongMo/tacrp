@@ -461,12 +461,12 @@ local function clunpredictvar(tbl, name, varname, default)
     tbl[clvar] = default
 
     tbl["Set" .. name] = function(self, v)
-        if (!game.SinglePlayer() and CLIENT) then self[clvar] = v end
+        if (!game.SinglePlayer() and CLIENT and self:GetOwner() == LocalPlayer()) then self[clvar] = v end
         self["Set" .. varname](self, v)
     end
 
     tbl["Get" .. name] = function(self)
-        if (!game.SinglePlayer() and CLIENT) then return self[clvar] end
+        if (!game.SinglePlayer() and CLIENT and self:GetOwner() == LocalPlayer()) then return self[clvar] end
         return self["Get" .. varname](self)
     end
 end
