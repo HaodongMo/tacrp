@@ -13,7 +13,7 @@ local function GetSmokeImage()
 end
 
 ENT.Particles = nil
-ENT.SmokeRadius = 256
+ENT.SmokeRadius = 300
 ENT.SmokeColor = Color(150, 150, 150)
 ENT.BillowTime = 1
 ENT.Life = 20
@@ -27,6 +27,9 @@ function ENT:Initialize()
         self:SetSolid( SOLID_NONE )
         self:DrawShadow( false )
     else
+
+        table.insert(TacRP.ClientSmokeCache, self)
+
         local emitter = ParticleEmitter(self:GetPos())
 
         self.Particles = {}
@@ -94,7 +97,7 @@ function ENT:Initialize()
         emitter:Finish()
     end
 
-    self.dt = CurTime() + self.Life + self.BillowTime
+    self.dt = CurTime() + self.Life + self.BillowTime + 2
 end
 
 function ENT:Think()
@@ -112,6 +115,16 @@ function ENT:Think()
         if SERVER then
             SafeRemoveEntity(self)
         end
+    end
+end
+
+function ENT:OnRemove()
+    if CLIENT then
+        timer.Simple(0, function()
+            if !IsValid(self) then
+                table.RemoveByValue(TacRP.ClientSmokeCache, self)
+            end
+        end)
     end
 end
 

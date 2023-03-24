@@ -8,14 +8,16 @@ function SWEP:DrawWorldModel()
     end
 
     self:DrawModel()
-
 end
 
-function SWEP:DrawWorldModelTranslucent()
-    self:DrawLasers(true)
-    self:DrawFlashlightsWM()
-
-    -- self:DrawFlashlightGlares()
-
-    -- self:DoScopeGlint()
-end
+hook.Add("PostDrawTranslucentRenderables", "TacRP_TranslucentDraw", function()
+    for _, ply in pairs(player.GetAll()) do
+        local wep = ply:GetActiveWeapon()
+        if ply != LocalPlayer() and IsValid(wep) and wep.ArcticTacRP then
+            wep:DrawLasers(true)
+            wep:DrawFlashlightsWM()
+            wep:DrawFlashlightGlares()
+            wep:DoScopeGlint()
+        end
+    end
+end)

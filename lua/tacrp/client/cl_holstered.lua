@@ -1,5 +1,5 @@
-hook.Add("PostPlayerDraw", "TacRP_Holster", function(ply)
-    if !ply.TacRP_Holster then return end
+hook.Add("PostPlayerDraw", "TacRP_Holster", function(ply, flags)
+    if !ply.TacRP_Holster or bit.band(flags, STUDIO_RENDER) != STUDIO_RENDER then return end
     if ply == LocalPlayer() and !LocalPlayer():ShouldDrawLocalPlayer() then return end
 
     if !GetConVar("tacrp_drawholsters"):GetBool() or !GetConVar("tacrp_visibleholster"):GetBool() then return end
@@ -65,15 +65,7 @@ hook.Add("PostPlayerDraw", "TacRP_Holster", function(ply)
     end
 end)
 
-hook.Add("PostDrawTranslucentRenderables", "TacRP_FlashlightGlint", function()
-    for _, ply in pairs(player.GetAll()) do
-        local wep = ply:GetActiveWeapon()
-        if ply != LocalPlayer() and IsValid(wep) and wep.ArcticTacRP then
-            wep:DrawFlashlightGlares()
-            wep:DoScopeGlint()
-        end
-    end
-end)
+TacRP.ClientSmokeCache = {}
 
 hook.Add( "HUDDrawTargetID", "TacRP_FlashlightGlint", function()
     local ply = LocalPlayer():GetEyeTrace().Entity
@@ -88,16 +80,33 @@ hook.Add( "HUDDrawTargetID", "TacRP_FlashlightGlint", function()
             local dot = -dir:Forward():Dot(EyeAngles():Forward())
             local dot2 = dir:Forward():Dot(diff:GetNormalized())
             dot = math.max(0, (dot + dot2) / 2) ^ 1.5
-            if dot <= 0.707 then return end
+            if dot > 0.707 then
+                local dist = 300
+                local wep2 = LocalPlayer():GetActiveWeapon()
+                if IsValid(wep2) and wep2.ArcticTacRP and wep2:IsInScope() and wep2:GetValue("ScopeOverlay") then
+                    dist = 3500
+                end
+                if wep:GetTracerOrigin():Distance(EyePos()) <= dist then
+                    return false
+                end
+            end
+        end
 
-            local dist = 300
-            local wep2 = LocalPlayer():GetActiveWeapon()
-            if IsValid(wep2) and wep2.ArcticTacRP and wep2:IsInScope() and wep2:GetValue("ScopeOverlay") then
-                dist = 3500
-            end
-            if wep:GetTracerOrigin():Distance(EyePos()) <= dist then
-                return false
-            end
+        for i, ent in pairs(TacRP.ClientSmokeCache) do
+            if !IsValid(ent) then table.remove(TacRP.ClientSmokeCache, i) continue end
+            local pos = ent:GetPos()
+
+            -- target is in smoke
+            if ply:WorldSpaceCenter():DistToSqr(pos) <= 90000 then return false end
+
+            local s = ply:WorldSpaceCenter() - EyePos()
+            local d = s:GetNormalized()
+            local v = pos - EyePos()
+            local t = v:Dot(d)
+            local p = EyePos() + t * d
+
+            -- we are in smoke OR line of sight is intersecting smoke
+            if t > -300 and t < s:Length() and p:DistToSqr(pos) <= 90000 then return false end
         end
     end
 end)
