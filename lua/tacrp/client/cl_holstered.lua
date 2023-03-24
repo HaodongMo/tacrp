@@ -64,3 +64,40 @@ hook.Add("PostPlayerDraw", "TacRP_Holster", function(ply)
         end
     end
 end)
+
+hook.Add("PostDrawTranslucentRenderables", "TacRP_FlashlightGlint", function()
+    for _, ply in pairs(player.GetAll()) do
+        local wep = ply:GetActiveWeapon()
+        if ply != LocalPlayer() and IsValid(wep) and wep.ArcticTacRP then
+            wep:DrawFlashlightGlares()
+            wep:DoScopeGlint()
+        end
+    end
+end)
+
+hook.Add( "HUDDrawTargetID", "TacRP_FlashlightGlint", function()
+    local ply = LocalPlayer():GetEyeTrace().Entity
+    if IsValid(ply) and ply:IsPlayer() then
+        local wep = ply:GetActiveWeapon()
+        if IsValid(wep) and wep.ArcticTacRP and wep:GetValue("Flashlight") then
+
+            local src, dir = wep:GetTracerOrigin(), wep:GetShootDir()
+
+            local diff = EyePos() - src
+
+            local dot = -dir:Forward():Dot(EyeAngles():Forward())
+            local dot2 = dir:Forward():Dot(diff:GetNormalized())
+            dot = math.max(0, (dot + dot2) / 2) ^ 1.5
+            if dot <= 0.707 then return end
+
+            local dist = 300
+            local wep2 = LocalPlayer():GetActiveWeapon()
+            if IsValid(wep2) and wep2.ArcticTacRP and wep2:IsInScope() and wep2:GetValue("ScopeOverlay") then
+                dist = 3500
+            end
+            if wep:GetTracerOrigin():Distance(EyePos()) <= dist then
+                return false
+            end
+        end
+    end
+end)
