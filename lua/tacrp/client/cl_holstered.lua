@@ -69,7 +69,13 @@ TacRP.ClientSmokeCache = {}
 
 hook.Add( "HUDDrawTargetID", "TacRP_FlashlightGlint", function()
     local ply = LocalPlayer():GetEyeTrace().Entity
-    if IsValid(ply) and ply:IsPlayer() then
+    if !IsValid(ply) then return end
+
+    -- Flashed
+    if LocalPlayer():GetNWFloat("TacRPStunStart", 0) +  LocalPlayer():GetNWFloat("TacRPStunDur", 0) > CurTime() then return false end
+
+    -- Flashlight glint
+    if ply:IsPlayer() and GetConVar("tacrp_flashlight_blind"):GetBool() then
         local wep = ply:GetActiveWeapon()
         if IsValid(wep) and wep.ArcticTacRP and wep:GetValue("Flashlight") then
 
@@ -91,22 +97,24 @@ hook.Add( "HUDDrawTargetID", "TacRP_FlashlightGlint", function()
                 end
             end
         end
+    end
 
-        for i, ent in pairs(TacRP.ClientSmokeCache) do
-            if !IsValid(ent) then table.remove(TacRP.ClientSmokeCache, i) continue end
-            local pos = ent:GetPos()
 
-            -- target is in smoke
-            if ply:WorldSpaceCenter():DistToSqr(pos) <= 90000 then return false end
+    -- Smoke
+    for i, ent in pairs(TacRP.ClientSmokeCache) do
+        if !IsValid(ent) then table.remove(TacRP.ClientSmokeCache, i) continue end
+        local pos = ent:GetPos()
 
-            local s = ply:WorldSpaceCenter() - EyePos()
-            local d = s:GetNormalized()
-            local v = pos - EyePos()
-            local t = v:Dot(d)
-            local p = EyePos() + t * d
+        -- target is in smoke
+        if ply:WorldSpaceCenter():DistToSqr(pos) <= 90000 then return false end
 
-            -- we are in smoke OR line of sight is intersecting smoke
-            if t > -300 and t < s:Length() and p:DistToSqr(pos) <= 90000 then return false end
-        end
+        local s = ply:WorldSpaceCenter() - EyePos()
+        local d = s:GetNormalized()
+        local v = pos - EyePos()
+        local t = v:Dot(d)
+        local p = EyePos() + t * d
+
+        -- we are in smoke OR line of sight is intersecting smoke
+        if t > -300 and t < s:Length() and p:DistToSqr(pos) <= 90000 then return false end
     end
 end)
