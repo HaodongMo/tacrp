@@ -28,6 +28,10 @@ function EFFECT:Init(data)
         start = wep:GetTracerOrigin()
     end
 
+    if !start then
+        start = wep:GetPos() -- ???
+    end
+
     local diff = hit - start
     local dist = diff:Length()
 
