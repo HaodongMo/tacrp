@@ -16,7 +16,7 @@ ENT.TimeFuse = false
 ENT.ExplodeOnDamage = true
 ENT.ExplodeUnderwater = true
 
-ENT.Delay = 0.15
+ENT.Delay = 0.4
 ENT.SafetyFuse = 0
 
 ENT.AudioLoop = "TacRP/weapons/rpg7/rocket_flight-1.wav"
@@ -159,7 +159,7 @@ function ENT:Detonate()
     for _, ent in pairs(ents.FindInCone(src, dir, 2048, 0.707)) do
         local tr = util.QuickTrace(src, ent:GetPos() - src, {self, ent})
         if tr.Fraction == 1 then
-            dmg:SetDamage(150 * math.Rand(0.75, 1) * Lerp((ent:GetPos():DistToSqr(src) / 4194304) ^ 0.5, 1, 0.25) * (self.NPCDamage and 0.5 or 1))
+            dmg:SetDamage(130 * math.Rand(0.75, 1) * Lerp((ent:GetPos():DistToSqr(src) / 4194304) ^ 0.5, 1, 0.25) * (self.NPCDamage and 0.5 or 1))
             if !ent:IsOnGround() then dmg:ScaleDamage(1.5) end
             ent:TakeDamageInfo(dmg)
         end

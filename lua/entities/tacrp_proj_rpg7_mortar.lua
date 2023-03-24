@@ -1,29 +1,29 @@
 AddCSLuaFile()
 
 ENT.Base                     = "tacrp_proj_base"
-ENT.PrintName                = "RPG-7 Improvised Rocket"
+ENT.PrintName                = "RPG-7 Mortar Rocket"
 ENT.Spawnable                = false
 
 ENT.Model                    = "models/weapons/tacint/rocket_deployed.mdl"
 
-ENT.IsRocket = true // projectile has a booster and will not drop.
+ENT.IsRocket = true
 
-ENT.InstantFuse = false // projectile is armed immediately after firing.
-ENT.RemoteFuse = false // allow this projectile to be triggered by remote detonator.
-ENT.ImpactFuse = true // projectile explodes on impact.
+ENT.InstantFuse = false
+ENT.RemoteFuse = false
+ENT.ImpactFuse = true
 
 ENT.ExplodeOnDamage = true
 ENT.ExplodeUnderwater = true
 
 ENT.Delay = 0
-ENT.SafetyFuse = 0
-ENT.BoostTime = 5
+ENT.SafetyFuse = 0.75
+ENT.BoostTime = 0.25
 
 ENT.AudioLoop = "TacRP/weapons/rpg7/rocket_flight-1.wav"
 
 ENT.SmokeTrail = true
 
-ENT.FlareColor = Color(255, 255, 75)
+ENT.FlareColor = Color(255, 50, 0)
 
 DEFINE_BASECLASS(ENT.Base)
 
@@ -35,67 +35,37 @@ function ENT:Initialize()
     BaseClass.Initialize(self)
 
     if SERVER then
+        -- self:SetAngles(self:GetAngles() + Angle(-5, 0, 0))
         local phys = self:GetPhysicsObject()
-        local rng = math.random()
-        if rng <= 0.01 then
-            self:EmitSound("weapons/rpg/shotdown.wav", 80, 95)
-            local fx = EffectData()
-            fx:SetOrigin(self:GetPos() + self:GetForward() * 32)
-            fx:SetStart(Vector(math.Rand(0, 255), math.Rand(0, 255), math.Rand(0, 255)))
-            util.Effect("balloon_pop", fx)
-            self:GetOwner():EmitSound("tacrp/kids_cheering.mp3", 100, 100, 1)
-            SafeRemoveEntity(self)
-        elseif rng <= 0.25 then
-            self.BoostTime = math.Rand(0.5, 5)
-
-            self:EmitSound("weapons/rpg/shotdown.wav", 80, 95)
-
-            self:SetNoBooster(math.random() <= 0.2)
-            phys:EnableGravity(true)
-
-            if self:GetNoBooster() then
-                phys:SetVelocityInstantaneous(self:GetOwner():GetVelocity() + self:GetForward() * math.Rand(25, 75) + self:GetUp() * math.Rand(75, 150))
-            else
-                phys:SetVelocityInstantaneous(self:GetOwner():GetVelocity() + self:GetForward() * math.Rand(100, 500) + self:GetUp() * math.Rand(50, 200))
-            end
-            phys:AddAngleVelocity(VectorRand() * 180)
-        else
-            self.BoostTime = math.Rand(1, 5)
-            phys:SetVelocityInstantaneous(self:GetForward() * math.Rand(1500, 4000))
-        end
+        phys:SetMass(30)
+        phys:SetDragCoefficient(1)
+        phys:SetVelocity(self:GetForward() * 4000)
     end
 end
+
 
 function ENT:Impact(data, collider)
-    if self.Impacted then return end
-    self.Impacted = true
-
-    local attacker = self.Attacker or self:GetOwner() or self
-    if IsValid(data.HitEntity) then
-        local dmginfo = DamageInfo()
-        dmginfo:SetAttacker(attacker)
-        dmginfo:SetInflictor(self)
-        dmginfo:SetDamageType(DMG_CRUSH)
-        dmginfo:SetDamage(250 * (self.NPCDamage and 0.5 or 1))
-        dmginfo:SetDamageForce(data.OurOldVelocity * 25)
-        dmginfo:SetDamagePosition(data.HitPos)
-        data.HitEntity:TakeDamageInfo(dmginfo)
-    end
-end
-
-
-function ENT:Detonate()
-    local attacker = self.Attacker or self:GetOwner()
-
-    if math.random() <= 0.05 then
-        self:EmitSound("physics/metal/metal_barrel_impact_hard3.wav", 125, 115)
+    if self.SpawnTime + self.BoostTime > CurTime() and !self.NPCDamage then
+        local attacker = self.Attacker or self:GetOwner()
+        local ang = data.OurOldVelocity:Angle()
         local fx = EffectData()
-        fx:SetOrigin(self:GetPos())
-        fx:SetMagnitude(4)
-        fx:SetScale(4)
-        fx:SetRadius(4)
-        fx:SetNormal(self:GetVelocity():GetNormalized())
-        util.Effect("Sparks", fx)
+        fx:SetOrigin(data.HitPos)
+        fx:SetNormal(-ang:Forward())
+        fx:SetAngles(-ang)
+        util.Effect("ManhackSparks", fx)
+
+        if IsValid(data.HitEntity) then
+            local dmginfo = DamageInfo()
+            dmginfo:SetAttacker(attacker)
+            dmginfo:SetInflictor(self)
+            dmginfo:SetDamageType(DMG_CRUSH)
+            dmginfo:SetDamage(250 * (self.NPCDamage and 0.5 or 1))
+            dmginfo:SetDamageForce(data.OurOldVelocity * 25)
+            dmginfo:SetDamagePosition(data.HitPos)
+            data.HitEntity:TakeDamageInfo(dmginfo)
+        end
+
+        self:EmitSound("weapons/rpg/shotdown.wav", 80)
 
         for i = 1, 4 do
             local prop = ents.Create("prop_physics")
@@ -103,49 +73,65 @@ function ENT:Detonate()
             prop:SetAngles(self:GetAngles())
             prop:SetModel("models/weapons/tacint/rpg7_shrapnel_p" .. i .. ".mdl")
             prop:Spawn()
-            prop:GetPhysicsObject():SetVelocityInstantaneous(self:GetVelocity() * 0.5 + VectorRand() * 75)
+            prop:GetPhysicsObject():SetVelocityInstantaneous(data.OurNewVelocity * 0.5 + VectorRand() * 75)
             prop:SetCollisionGroup(COLLISION_GROUP_DEBRIS)
 
             SafeRemoveEntityDelayed(prop, 3)
         end
 
         self:Remove()
-        return
+        return true
     end
+end
 
-    if self.NPCDamage then
-        util.BlastDamage(self, attacker, self:GetPos(), 350, 100)
-    else
-        util.BlastDamage(self, attacker, self:GetPos(), 128, math.Rand(300, 700))
-        util.BlastDamage(self, attacker, self:GetPos(), 400, math.Rand(90, 120))
-    end
+
+function ENT:Detonate()
+    local attacker = self.Attacker or self:GetOwner()
 
     local fx = EffectData()
     fx:SetOrigin(self:GetPos())
 
-    if self:WaterLevel() > 0 then
-        util.Effect("WaterSurfaceExplosion", fx)
+    if self.NPCDamage then
+        if self:WaterLevel() > 0 then
+            util.Effect("WaterSurfaceExplosion", fx)
+        else
+            util.Effect("HelicopterMegaBomb", fx)
+        end
+        util.BlastDamage(self, attacker, self:GetPos(), 512, 150)
     else
-        util.Effect("Explosion", fx)
+        if self.SpawnTime + self.SafetyFuse >= CurTime() then
+            if self:WaterLevel() > 0 then
+                util.Effect("WaterSurfaceExplosion", fx)
+            else
+                util.Effect("HelicopterMegaBomb", fx)
+            end
+            util.BlastDamage(self, attacker, self:GetPos(), 256, 100)
+        else
+            if self:WaterLevel() > 0 then
+                util.Effect("WaterSurfaceExplosion", fx)
+            else
+                util.Effect("Explosion", fx)
+            end
+            self:EmitSound("^ambient/explosions/explode_3.wav", 100, 90, 0.75, CHAN_AUTO)
+            util.BlastDamage(self, attacker, self:GetPos(), 128, 650)
+            util.BlastDamage(self, attacker, self:GetPos(), 328, 150)
+            util.BlastDamage(self, attacker, self:GetPos(), 768, 100)
+            local count = 8
+            for i = 1, count do
+                local tr = util.TraceLine({
+                    start = self:GetPos(),
+                    endpos = self:GetPos() + Angle(0, i / count * 360, 0):Forward() * 328 * math.Rand(0.75, 1),
+                    mask = MASK_SHOT,
+                    filter = self,
+                })
+                fx:SetOrigin(tr.HitPos)
+                util.Effect("HelicopterMegaBomb", fx)
+            end
+        end
     end
-
-    self:EmitSound("TacRP/weapons/rpg7/explode.wav", 125)
+    self:EmitSound("TacRP/weapons/rpg7/explode.wav", 125, 95)
 
     self:Remove()
-end
-
-function ENT:PhysicsUpdate(phys)
-    if self:GetNoBooster() then return end
-    local len = phys:GetVelocity():Length()
-    local f = math.Clamp(len / 4000, 0, 1)
-    if phys:IsGravityEnabled() then
-        phys:AddVelocity(self:GetForward() * math.Rand(0, Lerp(f, 100, 10)))
-        phys:AddAngleVelocity(VectorRand() * Lerp(f, 8, 2))
-    elseif self.SpawnTime < CurTime() and len < 500 then
-        phys:EnableGravity(true)
-    else
-        phys:AddVelocity(VectorRand() * Lerp(f, 5, 50) + self:GetForward() * Lerp(f, 10, 0))
-    end
 end
 
 local smokeimages = {"particle/smokesprites_0001", "particle/smokesprites_0002", "particle/smokesprites_0003", "particle/smokesprites_0004", "particle/smokesprites_0005", "particle/smokesprites_0006", "particle/smokesprites_0007", "particle/smokesprites_0008", "particle/smokesprites_0009", "particle/smokesprites_0010", "particle/smokesprites_0011", "particle/smokesprites_0012", "particle/smokesprites_0013", "particle/smokesprites_0014", "particle/smokesprites_0015", "particle/smokesprites_0016"}
@@ -173,6 +159,7 @@ function ENT:Think()
     if SERVER and !self:GetNoBooster() and self.SpawnTime + self.BoostTime < CurTime() then
         self:SetNoBooster(true)
         self:GetPhysicsObject():EnableGravity(true)
+        self:GetPhysicsObject():SetVelocityInstantaneous(self:GetVelocity() * 0.5)
     end
 
     if self.LoopSound and self:GetNoBooster() then
@@ -246,14 +233,47 @@ function ENT:Think()
 
             smoke:SetGravity(Vector(0, 0, 0))
         end
+
+        if CurTime() >= (self.SpawnTime + self.SafetyFuse) and !self.Sparked then
+            self.Sparked = true
+            for i = 1, 15 do
+                local fire = emitter:Add("effects/spark", self:GetPos())
+                fire:SetVelocity(VectorRand() * 512 + self:GetVelocity() * 0.25)
+                fire:SetGravity(Vector(math.Rand(-5, 5), math.Rand(-5, 5), -1000))
+                fire:SetDieTime(math.Rand(0.2, 0.4))
+                fire:SetStartAlpha(255)
+                fire:SetEndAlpha(0)
+                fire:SetStartSize(8)
+                fire:SetEndSize(0)
+                fire:SetRoll(math.Rand(-180, 180))
+                fire:SetRollDelta(math.Rand(-0.2, 0.2))
+                fire:SetColor(255, 255, 255)
+                fire:SetAirResistance(50)
+                fire:SetLighting(false)
+                fire:SetCollide(true)
+                fire:SetBounce(0.8)
+            end
+        end
+
         emitter:Finish()
 
         self.LastNoBooster = self:GetNoBooster()
-
     end
 
-
     self:OnThink()
+end
+
+local g = Vector(0, 0, -9.81)
+function ENT:PhysicsUpdate(phys)
+    if phys:IsGravityEnabled() then
+        local v = phys:GetVelocity()
+        self:SetAngles(v:Angle())
+        phys:SetVelocityInstantaneous(v + g)
+    end
+
+    -- local v = phys:GetVelocity()
+    -- self:SetAngles(v:Angle() + Angle(2, 0, 0))
+    -- phys:SetVelocityInstantaneous(self:GetForward() * v:Length())
 end
 
 local mat = Material("effects/ar2_altfire1b")
