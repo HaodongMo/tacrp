@@ -208,7 +208,7 @@ function SWEP:DrawFlashlightGlare(pos, ang, strength, dot)
     if GetConVar("tacrp_flashlight_blind"):GetBool() then
         dot = dot ^ 4
         local tr = util.QuickTrace(pos, diff, {self:GetOwner(), LocalPlayer()})
-        local s = math.Clamp(1 - diff:Length() / 328, 0, 1) ^ 1 * dot * 1500 * math.Rand(0.95, 1.05)
+        local s = math.Clamp(1 - diff:Length() / 328, 0, 1) ^ 1 * dot * 2000 * math.Rand(0.95, 1.05)
         if IsValid(wep) and wep.ArcticTacRP and wep:IsInScope() and wep:GetValue("ScopeOverlay") then
             s = s + math.Clamp(1 - diff:Length() / 4096, 0, 1) ^ 1.2 * wep:GetSightAmount() * dot * 3000 * math.Rand(0.95, 1.05)
         end
@@ -280,11 +280,11 @@ function SWEP:DoScopeGlint()
     local dot2 = dir:Forward():Dot(diff:GetNormalized())
     dot = math.max(0, (dot + dot2) / 2) ^ 1.5
 
-    local strength = dot * math.Clamp((diff:Length() - 2048) / 2048, 0, 4) * math.Clamp(90 / self:GetValue("ScopeFOV") / 10, 0, 1)
+    local strength = dot * math.Clamp((diff:Length() - 2048) / 3072, 0, 3) * math.Clamp(90 / self:GetValue("ScopeFOV") / 10, 0, 1)
 
-    local rad = strength * 96 * (self:GetSightAmount() * 0.6 + 0.4)
+    local rad = strength * 128 * (self:GetSightAmount() * 0.6 + 0.4)
 
-    src = self:GetTracerOrigin() + dir:Up() * 4 + diff:GetNormalized() * math.Clamp(diff:Length() / 2048, 0, 1) * 16
+    src = src + dir:Up() * 4 + diff:GetNormalized() * math.Clamp(diff:Length() / 2048, 0, 1) * 16
 
     local a = 120 + self:GetSightAmount() * 70
 

@@ -147,10 +147,8 @@ function TacRP.CreateNewsPanel(open)
     local is_workshop = nil
     local last_update = nil
     steamworks.FileInfo(2588031232, function(result)
-        is_workshop = tobool(result.installed)
-        if is_workshop then
-            last_update = os.date("%Y-%m-%d %H:%M", result.updated)
-        end
+        last_update = os.date("%Y-%m-%d %H:%M", result.updated)
+        is_workshop = steamworks.ShouldMountAddon(2588031232)
     end)
 
     local w_news, h_news = ScreenScale(384), ScreenScale(256)
@@ -234,9 +232,9 @@ function TacRP.CreateNewsPanel(open)
 
         local text
         if is_workshop == true then
-            text = "Version " .. tostring(TacRP.Version) .. " | " .. "Workshop: " .. last_update
+            text = "Update " .. tostring(TacRP.Version) .. " | " .. "Workshop: " .. last_update
         elseif is_workshop == false then
-            text = "Version " .. tostring(TacRP.Version) .. " | " .. "Workshop: N/A"
+            text = "Update " .. tostring(TacRP.Version) .. " | " .. "Workshop: Not Mounted"
         end
 
         if text then
