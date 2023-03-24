@@ -404,7 +404,7 @@ end
 autoinclude(searchdir)
 
 function SWEP:SetupDataTables()
-    self:NetworkVar("Float", 0, "NWRecoilAmount")
+    self:NetworkVar("Float", 0, "RecoilAmount")
     self:NetworkVar("Float", 1, "AnimLockTime")
     self:NetworkVar("Float", 2, "NextIdle")
     self:NetworkVar("Float", 3, "LastRecoilTime")
@@ -474,4 +474,3 @@ end
 clunpredictvar(SWEP, "Tactical", "NWTactical", true)
 clunpredictvar(SWEP, "SightAmount", "NWSightAmount", 0)
 clunpredictvar(SWEP, "SprintAmount", "NWSprintAmount", 0)
-clunpredictvar(SWEP, "RecoilAmount", "NWRecoilAmount", 0)
