@@ -10,3 +10,5 @@ ATT.Category = "ammo_rpg"
 ATT.Override_ShootEnt = "tacrp_proj_rpg7_improvised"
 ATT.Add_ShootingSpeedMult = 0.3
 ATT.Add_ReloadSpeedMult = 0.15
+
+ATT.Override_ShootEntForce = 0

@@ -528,7 +528,7 @@ function SWEP:ShootRocket(dir)
 
         local phys = rocket:GetPhysicsObject()
 
-        if phys:IsValid() then
+        if phys:IsValid() and self:GetValue("ShootEntForce") > 0 then
             phys:ApplyForceCenter((dir + dispersion):Forward() * self:GetValue("ShootEntForce"))
         end
     end
