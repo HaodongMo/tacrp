@@ -261,6 +261,8 @@ SWEP.Sound_MeleeAttack = ""
 SWEP.Sound_DryFire = "TacRP/weapons/dryfire_pistol-1.wav"
 SWEP.Sound_Jam = "TacRP/malfunction.wav"
 
+SWEP.Sound_MeleeSwing = ""
+
 // effects
 
 // the .qc attachment for the muzzle
@@ -357,7 +359,7 @@ SWEP.Primary.ClipSize = 0
 SWEP.Primary.Ammo = ""
 SWEP.Primary.DefaultClip = 0
 
-SWEP.Secondary.Automatic = false
+SWEP.Secondary.Automatic = true
 SWEP.Secondary.ClipSize = -1
 SWEP.Secondary.Ammo = ""
 
@@ -452,6 +454,7 @@ function SWEP:SetupDataTables()
 end
 
 function SWEP:SecondaryAttack()
+    self:RunHook("Hook_SecondaryAttack")
     return
 end
 

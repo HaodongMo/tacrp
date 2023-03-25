@@ -4,10 +4,6 @@ function SWEP:Reload()
         return
     end
 
-    if !self:GetOwner():KeyPressed(IN_RELOAD) then
-        return
-    end
-
     if self:GetValue("Firemodes") and self:GetOwner():KeyDown(IN_USE) and self:GetFiremodeAmount() > 1 then
         self:SwitchFiremode()
         self:EmitSound("tacrp/weapons/pdw/fire_select-1.wav", 75, 100, 1, CHAN_ITEM)
@@ -16,6 +12,10 @@ function SWEP:Reload()
 
     local stop = self:RunHook("Hook_PreReload")
     if stop then return end
+
+    if !self:GetOwner():KeyPressed(IN_RELOAD) then
+        return
+    end
 
     if self:StillWaiting(true) then return end
     if self:GetValue("ClipSize") <= 0 then return end

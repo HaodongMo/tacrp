@@ -13,10 +13,10 @@ local function GetSmokeImage()
 end
 
 ENT.Particles = nil
-ENT.SmokeRadius = 300
+ENT.SmokeRadius = 256
 ENT.SmokeColor = Color(150, 150, 150)
 ENT.BillowTime = 1
-ENT.Life = 20
+ENT.Life = 10
 
 AddCSLuaFile()
 
@@ -38,7 +38,7 @@ function ENT:Initialize()
 
         for i = 1, amt do
             local smoke = emitter:Add(GetSmokeImage(), self:GetPos())
-            smoke:SetVelocity( VectorRand() * 8 + (Angle(0, i * (360 / amt), 0):Forward() * 250) )
+            smoke:SetVelocity( VectorRand() * 8 + (Angle(0, i * (360 / amt), 0):Forward() * 220) )
             smoke:SetStartAlpha( 0 )
             smoke:SetEndAlpha( 255 )
             smoke:SetStartSize( 0 )
@@ -54,7 +54,7 @@ function ENT:Initialize()
             smoke:SetNextThink( CurTime() + FrameTime() )
             smoke.bt = CurTime() + self.BillowTime
             smoke.dt = CurTime() + self.BillowTime + self.Life
-            smoke.ft = CurTime() + self.BillowTime + self.Life + math.Rand(2.5, 5)
+            smoke.ft = CurTime() + self.BillowTime + self.Life + math.Rand(1, 3)
             smoke:SetDieTime(smoke.ft)
             smoke.life = self.Life
             smoke.billowed = false
@@ -103,7 +103,7 @@ end
 function ENT:Think()
 
     if SERVER then
-        local targets = ents.FindInSphere(self:GetPos(), self.SmokeRadius)
+        local targets = ents.FindInSphere(self:GetPos(), 256)
         for _, k in pairs(targets) do
             if k:IsNPC() then
                 k:SetSchedule(SCHED_STANDOFF)

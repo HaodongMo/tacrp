@@ -1,0 +1,28 @@
+ATT.PrintName = "Grenade"
+ATT.FullName = "Grenadier"
+ATT.Icon = Material("entities/tacrp_att_acc_grenade.png", "mips smooth")
+ATT.Description = "Improves quickthrow, and adds the option to throw rocks."
+ATT.Pros = {"ALT-FIRE: Quickthrow", "Faster Quickthrow", "Throw Rocks"} -- "RELOAD: Toggle Grenade",
+
+ATT.Category = {"melee_tech"}
+
+ATT.SortOrder = 4
+ATT.InvAtt = "perk_throw"
+
+ATT.ThrowRocks = true
+ATT.Mult_QuickNadeTimeMult = 0.65
+
+ATT.Hook_SecondaryAttack = function(self)
+    self.GrenadeDownKey = IN_ATTACK2
+    self:PrimeGrenade()
+end
+
+--[[]
+ATT.Hook_PreReload = function(self)
+    self.GrenadeMenuKey = IN_RELOAD
+    if game.SinglePlayer() and SERVER then
+        self:CallOnClient("Reload")
+    end
+    return true
+end
+]]

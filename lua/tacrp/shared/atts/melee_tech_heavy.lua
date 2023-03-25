@@ -1,0 +1,14 @@
+ATT.PrintName = "Heavy"
+ATT.FullName = "Heavy-handed"
+ATT.Icon = Material("entities/tacrp_att_acc_melee.png", "mips smooth")
+ATT.Description = ""
+ATT.Pros = {"ALT-FIRE: Heavy Attack", "Backstab Damage"}
+
+ATT.Category = {"melee_tech"}
+
+ATT.SortOrder = 1
+
+ATT.Hook_SecondaryAttack = function(self)
+    self:Melee(true)
+    return true
+end

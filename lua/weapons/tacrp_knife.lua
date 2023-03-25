@@ -1,5 +1,5 @@
 SWEP.Base = "tacrp_base"
-SWEP.Spawnable = false
+SWEP.Spawnable = true
 
 AddCSLuaFile()
 
@@ -28,7 +28,11 @@ SWEP.NPCUsable = false
 // misc. shooting
 
 SWEP.MeleeDamage = 35
-SWEP.MeleeAttackTime = 0.5
+SWEP.MeleeAttackTime = 0.45
+
+SWEP.Melee2Damage = 55
+SWEP.Melee2AttackTime = 0.75
+SWEP.Melee2Range = 72
 
 SWEP.Firemode = 2
 
@@ -49,6 +53,8 @@ SWEP.MeleeSpeedMultTime = 0.5
 
 SWEP.SprintToFireTime = 0.25
 
+SWEP.QuickNadeTimeMult = 0.8
+
 SWEP.Scope = false
 
 // hold types
@@ -59,12 +65,20 @@ SWEP.HoldTypeSprint = "knife"
 SWEP.GestureShoot = ACT_HL2MP_GESTURE_RANGE_ATTACK_PISTOL
 SWEP.GestureReload = ACT_HL2MP_GESTURE_RELOAD_PISTOL
 SWEP.GestureBash = ACT_HL2MP_GESTURE_RANGE_ATTACK_KNIFE
+SWEP.GestureBash2 = ACT_HL2MP_GESTURE_RANGE_ATTACK_MELEE
+
+SWEP.MidAirSpreadPenalty = 0
 
 SWEP.PassiveAng = Angle(0, 0, 0)
 SWEP.PassivePos = Vector(2, 0, -5)
 
 SWEP.SprintAng = Angle(0, 0, 0)
 SWEP.SprintPos = Vector(2, 0, -5)
+
+SWEP.SprintMidPoint = {
+    Pos = Vector(2, 0, -5),
+    Ang = Angle(0, 0, 0)
+}
 
 SWEP.HolsterVisible = true
 SWEP.HolsterSlot = TacRP.HOLSTER_SLOT_GEAR
@@ -77,7 +91,9 @@ local path = "tacrp/weapons/knife/"
 
 SWEP.AnimationTranslationTable = {
     ["deploy"] = "deploy",
-    ["melee"] = {"slash_left1", "slash_left2", "slash_right1", "slash_right2", "slash_forward1", "slash_forward2"}
+    ["melee"] = {"slash_left1", "slash_left2", "slash_right1", "slash_right2"},
+    ["melee2"] = {"slash_forward1", "slash_forward2"},
+    ["meleethrow"] = {"slash_right1", "slash_right2"},
 }
 
 SWEP.Sound_MeleeHit = {
@@ -94,26 +110,36 @@ SWEP.Sound_MeleeHitBody = {
     path .. "/flesh_hit-5.wav",
 }
 
+SWEP.Sound_MeleeSwing = {
+    path .. "swing-1.wav",
+    path .. "swing-2.wav",
+    path .. "swing-3.wav",
+    path .. "swing-4.wav",
+    path .. "swing-5.wav",
+    path .. "swing-6.wav",
+}
+
 // attachments
 
 SWEP.Attachments = {
     [1] = {
-        PrintName = "Accessory",
-        Category = {"acc_holster"},
+        PrintName = "Technique",
+        Category = "melee_tech",
         AttachSound = "TacRP/weapons/flashlight_on.wav",
         DetachSound = "TacRP/weapons/flashlight_off.wav",
     },
     [2] = {
-        PrintName = "Perk",
-        Category = {"perk_throw"},
+        PrintName = "Special",
+        Category = "melee_spec",
         AttachSound = "TacRP/weapons/flashlight_on.wav",
         DetachSound = "TacRP/weapons/flashlight_off.wav",
-    }
+    },
 }
 
 SWEP.FreeAim = false
 
-SWEP.DrawCrosshair = false
+SWEP.DrawCrosshair = true
+SWEP.DrawCrosshairInSprint = true
 
 local function addsound(name, spath)
     sound.Add({
@@ -124,12 +150,14 @@ local function addsound(name, spath)
     })
 end
 
+addsound("tacint_knife.deploy", path .. "open-1.wav")
+
 function SWEP:PrimaryAttack()
+    local stop = self:RunHook("Hook_PreShoot")
+    if stop then return end
+
     self:Melee()
     return
-end
-
-function SWEP:SecondaryAttack()
 end
 
 function SWEP:GiveDefaultAmmo()

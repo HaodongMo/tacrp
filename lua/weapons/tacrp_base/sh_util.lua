@@ -24,6 +24,7 @@ function SWEP:IsAnimLocked()
 end
 
 function SWEP:ChooseSound(tbl)
+    if !istable(tbl) then return tbl end
     tbl.BaseClass = nil -- lua tables lel
     return tbl[math.random(1, #tbl)]
 end

@@ -1,6 +1,9 @@
 function SWEP:Think()
     local owner = self:GetOwner()
 
+    local stop = self:RunHook("Hook_PreThink")
+    if stop then return end
+
     -- if owner:KeyReleased(IN_ATTACK) then
     --     if !self:GetValue("RunawayBurst") then
     --         self:SetBurstCount(0)
@@ -85,4 +88,6 @@ function SWEP:Think()
             end
         end
     end
+
+    self:RunHook("Hook_PostThink")
 end

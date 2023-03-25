@@ -1,3 +1,6 @@
+SWEP.GrenadeDownKey = IN_GRENADE1
+SWEP.GrenadeMenuKey = IN_GRENADE2
+
 function SWEP:PrimeGrenade()
     self.Primary.Automatic = true
 
@@ -56,7 +59,7 @@ function SWEP:ThrowGrenade()
 
     local amount = 1
 
-    if !nade.OverhandOnly and (self.GrenadeThrowOverride == true or (self.GrenadeThrowOverride == nil and !self:GetOwner():KeyDown(IN_GRENADE1))) then
+    if !nade.OverhandOnly and (self.GrenadeThrowOverride == true or (self.GrenadeThrowOverride == nil and !self:GetOwner():KeyDown(self.GrenadeDownKey))) then
         self:PlayAnimation("throw_grenade_underhand", self:GetValue("QuickNadeTimeMult"), true, true)
 
         force = force / 2
@@ -73,6 +76,7 @@ function SWEP:ThrowGrenade()
     end
 
     self.GrenadeThrowOverride = nil
+    self.GrenadeDownKey = IN_GRENADE1
 
     if CLIENT then return end
 
@@ -244,8 +248,10 @@ function SWEP:ThinkGrenade()
 
     if self:GetOwner():KeyPressed(IN_GRENADE1) then
         self:PrimeGrenade()
-    elseif !tobool(self:GetOwner():GetInfo("tacrp_nademenu")) and self:GetOwner():KeyPressed(IN_GRENADE2) then
+    elseif !tobool(self:GetOwner():GetInfo("tacrp_nademenu")) and self:GetOwner():KeyPressed(self.GrenadeMenuKey) then
         self:SelectGrenade()
+    elseif tobool(self:GetOwner():GetInfo("tacrp_nademenu")) and self.GrenadeMenuKey != IN_GRENADE2 and !self:GetOwner():KeyDown(self.GrenadeMenuKey) then
+        self.GrenadeMenuKey = IN_GRENADE2
     end
 
     if self:GetPrimedGrenade() and self:GetAnimLockTime() < CurTime() then

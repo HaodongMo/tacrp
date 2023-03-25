@@ -104,9 +104,10 @@ hook.Add( "HUDDrawTargetID", "TacRP_FlashlightGlint", function()
     for i, ent in pairs(TacRP.ClientSmokeCache) do
         if !IsValid(ent) then table.remove(TacRP.ClientSmokeCache, i) continue end
         local pos = ent:GetPos()
+        local rad = ent.SmokeRadius
 
         -- target is in smoke
-        if ply:WorldSpaceCenter():DistToSqr(pos) <= 90000 then return false end
+        if ply:WorldSpaceCenter():Distance(pos) <= rad then return false end
 
         local s = ply:WorldSpaceCenter() - EyePos()
         local d = s:GetNormalized()
@@ -115,6 +116,6 @@ hook.Add( "HUDDrawTargetID", "TacRP_FlashlightGlint", function()
         local p = EyePos() + t * d
 
         -- we are in smoke OR line of sight is intersecting smoke
-        if t > -300 and t < s:Length() and p:DistToSqr(pos) <= 90000 then return false end
+        if t > -rad and t < s:Length() and p:Distance(pos) <= rad then return false end
     end
 end)

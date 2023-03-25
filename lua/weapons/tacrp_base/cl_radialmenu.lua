@@ -90,7 +90,7 @@ function SWEP:DrawGrenadeHUD()
         mouseangle = mouseangle + 360
     end
 
-    if self:GetOwner():KeyDown(IN_GRENADE2) and !self:GetPrimedGrenade() and self.BlindFireMenuAlpha == 0 then
+    if self:GetOwner():KeyDown(self.GrenadeMenuKey) and !self:GetPrimedGrenade() and self.BlindFireMenuAlpha == 0 then
         self.GrenadeMenuAlpha = math.Approach(self.GrenadeMenuAlpha, 1, 15 * ft)
         if !lastmenu then
             gui.EnableScreenClicker(true)

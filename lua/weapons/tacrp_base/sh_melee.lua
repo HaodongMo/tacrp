@@ -10,7 +10,7 @@ SWEP.Sound_MeleeHitBody = {
     "TacRP/weapons/melee_body_hit-5.wav",
 }
 
-function SWEP:Melee()
+function SWEP:Melee(alt)
     if !self:GetValue("CanMeleeAttack") then return end
     if self:StillWaiting(false, true) then return end
     -- if self:SprintLock() then return end
@@ -20,9 +20,19 @@ function SWEP:Melee()
     self:ToggleBlindFire(TacRP.BLINDFIRE_NONE)
     self:ScopeToggle(0)
 
-    self:PlayAnimation("melee", 1, false, true)
+    self:EmitSound(self:ChooseSound(self:GetValue("Sound_MeleeSwing")), 75, 100, 1)
 
-    self:GetOwner():DoAnimationEvent(self:GetValue("GestureBash"))
+    local dmg = self:GetValue("MeleeDamage")
+    local range = self:GetValue("MeleeRange")
+    if alt then
+        self:PlayAnimation("melee2", 1, false, true)
+        self:GetOwner():DoAnimationEvent(self:GetValue("GestureBash2") or self:GetValue("GestureBash"))
+        range = self:GetValue("Melee2Range") or range
+        dmg = self:GetValue("Melee2Damage") or dmg
+    else
+        self:PlayAnimation("melee", 1, false, true)
+        self:GetOwner():DoAnimationEvent(self:GetValue("GestureBash"))
+    end
 
     local filter = {self:GetOwner()}
 
@@ -32,7 +42,7 @@ function SWEP:Melee()
     local dir = self:GetOwner():GetAimVector()
     local tr = util.TraceLine({
         start = start,
-        endpos = start + dir * self:GetValue("MeleeRange"),
+        endpos = start + dir * range,
         filter = filter,
         mask = MASK_SHOT_HULL,
     })
@@ -57,28 +67,28 @@ function SWEP:Melee()
         end
     end
 
-    local dmg = DamageInfo()
-    dmg:SetDamage(self:GetValue("MeleeDamage"))
-    dmg:SetDamageForce(dir * self:GetValue("MeleeDamage") * 1000)
-    dmg:SetDamagePosition(tr.HitPos)
-    dmg:SetDamageType(DMG_CLUB)
-    dmg:SetAttacker(self:GetOwner())
-    dmg:SetInflictor(self)
+    local dmginfo = DamageInfo()
+    dmginfo:SetDamage(dmg)
+    dmginfo:SetDamageForce(dir * dmg * 1000)
+    dmginfo:SetDamagePosition(tr.HitPos)
+    dmginfo:SetDamageType(DMG_CLUB)
+    dmginfo:SetAttacker(self:GetOwner())
+    dmginfo:SetInflictor(self)
 
     if tr.Fraction < 1 then
 
         if IsValid(tr.Entity) and !tr.Entity:IsNextBot() and GetConVar("TacRP_bodydamagecancel"):GetBool() and TacRP.CancelMultipliers[tr.HitGroup] then
-            dmg:ScaleDamage(1 / TacRP.CancelMultipliers[tr.HitGroup])
+            dmginfo:ScaleDamage(1 / TacRP.CancelMultipliers[tr.HitGroup])
         end
 
         -- Lambda Players call ScalePlayerDamage and cancel out hitgroup damage... except on the head
         if IsValid(tr.Entity) and tr.Entity.IsLambdaPlayer and tr.HitGroup == HITGROUP_HEAD then
-            dmg:ScaleDamage(1 / TacRP.CancelMultipliers[tr.HitGroup])
+            dmginfo:ScaleDamage(1 / TacRP.CancelMultipliers[tr.HitGroup])
         end
 
         if IsValid(tr.Entity) and !tr.HitWorld and SERVER then
-            --tr.Entity:TakeDamageInfo(dmg)
-            tr.Entity:DispatchTraceAttack(dmg, tr)
+            --tr.Entity:TakeDamageInfo(dmginfo)
+            tr.Entity:DispatchTraceAttack(dmginfo, tr)
         end
 
         if tr.Entity:IsNPC() or tr.Entity:IsPlayer() or tr.Entity:IsNextBot() then
@@ -137,6 +147,6 @@ function SWEP:Melee()
     -- })
 
     self:SetLastMeleeTime(CurTime())
-    self:SetNextSecondaryFire(CurTime() + self:GetValue("MeleeAttackTime"))
+    self:SetNextSecondaryFire(CurTime() + (alt and self:GetValue("Melee2AttackTime") or self:GetValue("MeleeAttackTime")))
 
 end
