@@ -111,7 +111,11 @@ end
 function SWEP:DrawWorldModel()
     if !IsValid(self:GetOwner()) then
         self:DrawModel()
-    else
+    end
+end
+
+function SWEP:DrawWorldModelTranslucent()
+    if IsValid(self:GetOwner()) then
         self:DrawCustomModel(true)
     end
 end
