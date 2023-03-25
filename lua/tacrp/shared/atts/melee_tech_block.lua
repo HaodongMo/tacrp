@@ -15,8 +15,8 @@ ATT.Melee2AttackTime = 0.5
 ATT.Hook_SecondaryAttack = function(wep)
     -- if wep:StillWaiting() then return end
     if wep:GetNWFloat("TacRPNextBlock", 0) > CurTime() then return end
+    wep:SetNextSecondaryFire(CurTime() + 0.25)
     wep:SetNWFloat("TacRPNextBlock", CurTime() + 1)
-    wep:SetAnimLockTime(0)
     wep:PlayAnimation("idle_defend", 1)
     wep:SetHoldType("magic")
     wep:SetNWFloat("TacRPKnifeParry", CurTime() + 0.5)
@@ -36,6 +36,13 @@ ATT.Hook_PreShoot = function(wep)
         wep:SetNWFloat("TacRPKnifeCounter", 0)
         wep:SetNWFloat("TacRPNextBlock", 0)
         return true
+    end
+end
+
+-- cancel attack post swing into block since SecondaryAttack won't be called at all otherwise
+ATT.Hook_PostThink = function(wep)
+    if wep:GetOwner():KeyDown(IN_ATTACK2) and wep:GetNextSecondaryFire() - CurTime() <= 0.25 and wep:GetNWFloat("TacRPNextBlock", 0) <= CurTime() then
+        wep:SetNextSecondaryFire(CurTime())
     end
 end
 
@@ -60,6 +67,8 @@ hook.Add("EntityTakeDamage", "TacRP_Block", function(ent, dmginfo)
     end
 
     ent:EmitSound("physics/metal/metal_solid_impact_hard5.wav", 90, math.Rand(105, 110))
+    ent:ViewPunch(AngleRand(-1, 1) * (dmginfo:GetDamage() ^ 0.5))
+
     wep:Idle()
     wep:SetNWFloat("TacRPKnifeCounter", CurTime() + 1)
     wep:SetNWFloat("TacRPNextBlock", CurTime())
@@ -76,10 +85,8 @@ hook.Add("EntityTakeDamage", "TacRP_Counter", function(ent, dmginfo)
 
     if !IsValid(wep) or !wep.ArcticTacRP or wep:GetNWFloat("TacRPKnifeCounter", 0) < CurTime() then return end
     local dropwep = ent:IsPlayer() and ent:GetActiveWeapon()
-    local d = Angle(0, dmginfo:GetAttacker():EyeAngles().y, 0):Forward()
 
     if ent.IsLambdaPlayer then
-
         -- drop client weapon model; delay a tick so we don't duplicate on death
         timer.Simple(0, function()
             if !IsValid(ent) or ent:Health() < 0 then return end
