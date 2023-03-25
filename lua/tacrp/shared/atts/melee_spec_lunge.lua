@@ -1,12 +1,13 @@
-ATT.PrintName = "Lunge"
+ATT.PrintName = "Frenzy"
 ATT.Icon = Material("entities/tacrp_att_acc_grenade.png", "mips smooth")
-ATT.Description = "Close the distance or reach heights with a long jump."
-ATT.Pros = {"RELOAD (Ground): Lunge forwards", "RELOAD (Mid-Air): Lunge towards point of aim"}
+ATT.Description = "Close the distance and ensnare your enemies."
+ATT.Pros = {"RELOAD (Ground): Lunge forwards", "RELOAD (Mid-Air): Lunge towards point of aim", "Slow on Hit"}
 
 ATT.Category = {"melee_spec"}
-ATT.Free = true
 
 ATT.SortOrder = 3
+
+ATT.MeleeSlow = true
 
 ATT.Hook_PreReload = function(wep)
     local ply = wep:GetOwner()
@@ -14,9 +15,12 @@ ATT.Hook_PreReload = function(wep)
     if !ply:KeyPressed(IN_RELOAD) or ply:GetNWFloat("TacRPDashCharge", 0) < 0.75 then return end
 
     ply:SetNWFloat("TacRPDashCharge", ply:GetNWFloat("TacRPDashCharge", 0) - 0.75)
-    ply:EmitSound("npc/fast_zombie/leap1.wav", 80, 105)
 
     local ang = Angle(0, ply:GetAngles().y, 0)
+
+    if SERVER then
+        ply:EmitSound("npc/fast_zombie/leap1.wav", 80, 105)
+    end
 
     if ply:IsOnGround() then
         ply:SetVelocity(ang:Forward() * 500 + Vector(0, 0, 250))
@@ -29,7 +33,7 @@ end
 
 ATT.Hook_PostThink = function(wep)
     local ply = wep:GetOwner()
-    if ply:GetNWFloat("TacRPDashTime", 0) + 0.3 < CurTime() then
+    if (game.SinglePlayer() or IsFirstTimePredicted()) and ply:GetNWFloat("TacRPDashTime", 0) + 0.3 < CurTime() then
         ply:SetNWFloat("TacRPDashCharge", math.min(1, ply:GetNWFloat("TacRPDashCharge", 0) + FrameTime() / 7.5))
     end
 end

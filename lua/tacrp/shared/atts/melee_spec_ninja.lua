@@ -1,10 +1,9 @@
 ATT.PrintName = "Ninja"
 ATT.Icon = Material("entities/tacrp_att_acc_grenade.png", "mips smooth")
 ATT.Description = "Disrupt your enemies and strike with the element of surprise."
-ATT.Pros = {"RELOAD: Palm Punch / Climb", "RELOAD (Mid-air + Crouch): Dive Kick","RELOAD (Ground + Crouch): Smokescreen", "Silent Footsteps"}
+ATT.Pros = {"RELOAD: Palm Strike / Climb", "RELOAD (Mid-air + Crouch): Dive Kick","RELOAD (Ground + Crouch): Smokescreen", "Silent Footsteps"}
 
 ATT.Category = {"melee_spec"}
-ATT.Free = true
 
 ATT.SortOrder = 2
 
@@ -155,7 +154,7 @@ end)
 
 hook.Add("GetFallDamage", "TacRP_Ninja", function(ply, speed)
     if ply:GetNWBool("TacRPNinjaDive") then
-        if ply:GetNWFloat("TacRPDiveTime", 0) + 0.25 <= CurTime() then
+        if ply:GetNWFloat("TacRPDiveTime", 0) + 0.2 <= CurTime() then
             ply:EmitSound("physics/concrete/boulder_impact_hard" .. math.random(1, 4) .. ".wav")
             local eff = EffectData()
             eff:SetOrigin(ply:GetPos())
@@ -164,7 +163,7 @@ hook.Add("GetFallDamage", "TacRP_Ninja", function(ply, speed)
             util.Effect("ThumperDust", eff)
 
             local dmginfo = DamageInfo()
-            dmginfo:SetDamage(math.Clamp((speed - 250) / 20, 25, 75))
+            dmginfo:SetDamage(math.Clamp((speed - 300) / 25, 10, 60))
             dmginfo:SetDamageForce(Vector(0, 0, 3000))
             dmginfo:SetDamagePosition(ply:GetPos())
             dmginfo:SetDamageType(DMG_CRUSH)
@@ -206,7 +205,7 @@ end)
 hook.Add("PostEntityTakeDamage", "TacRP_GoombaStomp", function(ent, dmginfo, took)
     if took and ent.GoombaStomped == true and dmginfo:GetDamageType() == DMG_CRUSH + DMG_NEVERGIB then
         if ent:Health() < 0 then
-            ent:EmitSound("tacrp/mario_death.wav", 100, 100, 0.3)
+            ent:EmitSound("tacrp/mario_death.wav", 100, 100, 0.5)
         end
         ent.GoombaStomped = false
     end

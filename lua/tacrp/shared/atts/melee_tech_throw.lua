@@ -15,9 +15,11 @@ ATT.Hook_SecondaryAttack = function(self)
     self:PlayAnimation("meleethrow", 1, false, true)
     self:GetOwner():DoAnimationEvent(ACT_GMOD_GESTURE_ITEM_THROW)
 
-    self:EmitSound(self:ChooseSound(self:GetValue("Sound_MeleeSwing")), 75, 100, 1)
+    self:EmitSound("weapons/iceaxe/iceaxe_swing1.wav", 75, 120, 1)
 
     self:SetTimer(0.15, function()
+        if CLIENT then return end
+
         local rocket = ents.Create("tacrp_proj_knife")
 
         if !IsValid(rocket) then return end

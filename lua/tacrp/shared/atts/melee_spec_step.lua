@@ -4,7 +4,6 @@ ATT.Description = "Mobility tool used by blood-fueled robots and transgender wom
 ATT.Pros = {"RELOAD: Dash in movement direction", "Dash redirects momentum"}
 
 ATT.Category = {"melee_spec"}
-ATT.Free = true
 
 ATT.SortOrder = 1
 
@@ -16,14 +15,17 @@ ATT.Hook_PreReload = function(wep)
     ply:SetNWFloat("TacRPDashCharge", ply:GetNWFloat("TacRPDashCharge", 0) - 1 / 3)
     ply:SetNWVector("TacRPDashDir", Vector())
     ply:SetNWFloat("TacRPDashTime", CurTime())
-    ply:EmitSound("player/suit_sprint.wav", 80, 95)
+
+    if SERVER then
+        ply:EmitSound("player/suit_sprint.wav", 80, 95)
+    end
 
     return true
 end
 
 ATT.Hook_PostThink = function(wep)
     local ply = wep:GetOwner()
-    if ply:GetNWFloat("TacRPDashTime", 0) + 0.3 < CurTime() then
+    if (game.SinglePlayer() or IsFirstTimePredicted()) and ply:GetNWFloat("TacRPDashTime", 0) + 0.3 < CurTime() then
         ply:SetNWFloat("TacRPDashCharge", math.min(1, ply:GetNWFloat("TacRPDashCharge", 0) + FrameTime() / 7.5))
     end
 end
@@ -78,4 +80,8 @@ hook.Add("Move", "TacRP_Quickstep", function(ply, mv)
         mv:SetVelocity(math.min(ply:GetRunSpeed(), ply:GetNWFloat("TacRPDashStored")) * ply:GetNWVector("TacRPDashDir"))
         ply:SetNWVector("TacRPDashDir", Vector())
     end
+end)
+
+hook.Add("PlayerSpawn", "TacRP_Quickstep", function(ply)
+    ply:SetNWFloat("TacRPDashCharge", 1)
 end)

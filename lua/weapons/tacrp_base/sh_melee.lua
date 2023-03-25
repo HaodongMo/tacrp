@@ -86,19 +86,28 @@ function SWEP:Melee(alt)
             dmginfo:ScaleDamage(1 / TacRP.CancelMultipliers[tr.HitGroup])
         end
 
-        if IsValid(tr.Entity) and !tr.HitWorld and SERVER then
-            --tr.Entity:TakeDamageInfo(dmginfo)
-            tr.Entity:DispatchTraceAttack(dmginfo, tr)
-        end
-
-        if tr.Entity:IsNPC() or tr.Entity:IsPlayer() or tr.Entity:IsNextBot() then
+        if IsValid(tr.Entity) and (tr.Entity:IsNPC() or tr.Entity:IsPlayer() or tr.Entity:IsNextBot()) then
             self:EmitSound(self:ChooseSound(self:GetValue("Sound_MeleeHitBody")), 75, 100, 1, CHAN_ITEM)
+
+            if SERVER and self:GetValue("MeleeBackstab") then
+                local ang = math.NormalizeAngle(self:GetOwner():GetAngles().y - tr.Entity:GetAngles().y)
+                print(ang)
+                if ang <= 60 and ang >= -60 then
+                    dmginfo:ScaleDamage(self:GetValue("MeleeBackstabMult"))
+                    self:EmitSound("buttons/blip1.wav", 75, 100, 1, CHAN_ITEM + 1)
+                end
+            end
         else
             self:EmitSound(self:ChooseSound(self:GetValue("Sound_MeleeHit")), 75, 100, 1, CHAN_ITEM)
         end
 
-        if tr.Entity:IsPlayer() and self:GetValue("MeleeSlow") then
+        if IsValid(tr.Entity) and tr.Entity:IsPlayer() and self:GetValue("MeleeSlow") then
             tr.Entity:SetNWFloat("TacRPLastBashed", CurTime())
+        end
+
+        if IsValid(tr.Entity) and !tr.HitWorld and SERVER then
+            --tr.Entity:TakeDamageInfo(dmginfo)
+            tr.Entity:DispatchTraceAttack(dmginfo, tr)
         end
 
         --[[]

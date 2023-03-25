@@ -8,6 +8,9 @@ ATT.Category = {"melee_tech"}
 
 ATT.SortOrder = 1
 
+ATT.MeleeBackstab = true
+ATT.MeleeBackstabMult = 2
+
 ATT.Hook_SecondaryAttack = function(self)
     self:Melee(true)
     return true
