@@ -12,9 +12,9 @@ ATT.MeleeSlow = true
 ATT.Hook_PreReload = function(wep)
     local ply = wep:GetOwner()
 
-    if !ply:KeyPressed(IN_RELOAD) or ply:GetNWFloat("TacRPDashCharge", 0) < 0.75 then return end
+    if !ply:KeyPressed(IN_RELOAD) or ply:GetNWFloat("TacRPDashCharge", 0) < 0.5 then return end
 
-    ply:SetNWFloat("TacRPDashCharge", ply:GetNWFloat("TacRPDashCharge", 0) - 0.75)
+    ply:SetNWFloat("TacRPDashCharge", ply:GetNWFloat("TacRPDashCharge", 0) - 0.5)
 
     local ang = Angle(0, ply:GetAngles().y, 0)
 
@@ -23,9 +23,9 @@ ATT.Hook_PreReload = function(wep)
     end
 
     if ply:IsOnGround() then
-        ply:SetVelocity(ang:Forward() * 500 + Vector(0, 0, 250))
+        ply:SetVelocity(ang:Forward() * 600 + Vector(0, 0, 250))
     else
-        ply:SetVelocity(ply:GetAngles():Forward() * 300)
+        ply:SetVelocity(ply:GetAngles():Forward() * 350)
     end
 
     return true
@@ -62,5 +62,5 @@ function ATT.TacticalDraw(self)
     surface.DrawRect(x, y, w * c, h)
 
     surface.SetDrawColor(255, 255, 255, 200)
-    surface.DrawLine(x + w * 0.75, y, x + w * 0.75, y + h)
+    surface.DrawLine(x + w * 0.5, y, x + w * 0.5, y + h)
 end

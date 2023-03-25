@@ -15,6 +15,7 @@ ATT.Hook_PreReload = function(wep)
     ply:SetNWFloat("TacRPDashCharge", ply:GetNWFloat("TacRPDashCharge", 0) - 1 / 3)
     ply:SetNWVector("TacRPDashDir", Vector())
     ply:SetNWFloat("TacRPDashTime", CurTime())
+    ply:SetNWBool("TacRPDashGrounded", ply:IsOnGround())
 
     if SERVER then
         ply:EmitSound("player/suit_sprint.wav", 80, 95)
@@ -74,8 +75,21 @@ hook.Add("Move", "TacRP_Quickstep", function(ply, mv)
             ply:SetNWVector("TacRPDashDir", vel)
         end
 
-        local d = (1 - ((CurTime() - ply:GetNWFloat("TacRPDashTime", 0)) / 0.1)) ^ 0.5
-        mv:SetVelocity(ply:GetNWVector("TacRPDashDir") * FrameTime() * 500 * d * math.max(ply:GetRunSpeed(), 250))
+        if mv:KeyPressed(IN_JUMP) then -- ply:IsOnGround() and
+            -- cancel the dash
+            local buffer = CurTime() - ply:GetNWFloat("TacRPDashTime", 0)
+            local vel = ply:GetNWVector("TacRPDashDir") * (100 + math.max(250, math.min(ply:GetRunSpeed(), ply:GetNWFloat("TacRPDashStored"))))
+            if ply:IsOnGround() then
+                vel = vel + Vector(0, 0, ply:GetJumpPower() * 0.5)
+            end
+            mv:SetVelocity(vel)
+            ply:SetNWFloat("TacRPDashTime", 0)
+            ply:SetNWVector("TacRPDashDir", Vector())
+        else
+            local d = (1 - ((CurTime() - ply:GetNWFloat("TacRPDashTime", 0)) / 0.1)) ^ 0.5
+            mv:SetVelocity(ply:GetNWVector("TacRPDashDir") * FrameTime() * 500 * d * math.max(ply:GetRunSpeed(), 250))
+        end
+
     elseif ply:GetNWVector("TacRPDashDir", Vector()) != Vector() then
         mv:SetVelocity(math.min(ply:GetRunSpeed(), ply:GetNWFloat("TacRPDashStored")) * ply:GetNWVector("TacRPDashDir"))
         ply:SetNWVector("TacRPDashDir", Vector())

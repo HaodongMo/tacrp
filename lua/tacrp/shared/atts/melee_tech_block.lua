@@ -10,7 +10,7 @@ ATT.Category = {"melee_tech"}
 ATT.SortOrder = 2
 
 ATT.Melee2AttackTime = 0.5
-ATT.Melee2Damage = 70
+-- ATT.Melee2Damage = 70
 
 ATT.Hook_SecondaryAttack = function(wep)
     -- if wep:StillWaiting() then return end
@@ -44,7 +44,7 @@ hook.Add("EntityTakeDamage", "TacRP_Block", function(ent, dmginfo)
     local wep = ent:GetActiveWeapon()
 
     if !IsValid(wep) or !wep.ArcticTacRP or wep:GetNWFloat("TacRPKnifeParry", 0) < CurTime() then return end
-    if !(dmginfo:IsDamageType(DMG_GENERIC) or dmginfo:IsDamageType(DMG_CLUB) or dmginfo:IsDamageType(DMG_SLASH)) then return end
+    if !(dmginfo:IsDamageType(DMG_GENERIC) or dmginfo:IsDamageType(DMG_CLUB) or dmginfo:IsDamageType(DMG_SLASH) or dmginfo:GetDamageType() == 0) then return end
     if dmginfo:GetAttacker():GetPos():DistToSqr(ent:GetPos()) >= 22500 then return end
     if (dmginfo:GetAttacker():GetPos() - ent:EyePos()):GetNormalized():Dot(ent:EyeAngles():Forward()) < 0.5 then return end
 
@@ -54,6 +54,10 @@ hook.Add("EntityTakeDamage", "TacRP_Block", function(ent, dmginfo)
     fx:SetNormal(ang:Forward())
     fx:SetAngles(ang)
     util.Effect("ManhackSparks", fx)
+
+    if dmginfo:GetAttacker():IsNPC() and dmginfo:GetAttacker():GetClass() != "npc_antlionguard" then
+        dmginfo:GetAttacker():SetSchedule(SCHED_FLINCH_PHYSICS)
+    end
 
     ent:EmitSound("physics/metal/metal_solid_impact_hard5.wav", 90, math.Rand(105, 110))
     wep:Idle()
@@ -67,12 +71,51 @@ hook.Add("EntityTakeDamage", "TacRP_Block", function(ent, dmginfo)
 end)
 
 hook.Add("EntityTakeDamage", "TacRP_Counter", function(ent, dmginfo)
-    if !IsValid(dmginfo:GetAttacker()) or !dmginfo:GetAttacker():IsPlayer() or !ent:IsPlayer() then return end
+    if !IsValid(dmginfo:GetAttacker()) or !dmginfo:GetAttacker():IsPlayer() then return end
     local wep = dmginfo:GetAttacker():GetActiveWeapon()
 
     if !IsValid(wep) or !wep.ArcticTacRP or wep:GetNWFloat("TacRPKnifeCounter", 0) < CurTime() then return end
-    local dropwep = ent:GetActiveWeapon()
-    if !IsValid(dropwep) or dropwep:GetHoldType() == "fists" or dropwep:GetHoldType() == "normal" or string.find(dropwep:GetClass(), "fist") or string.find(dropwep:GetClass(), "unarmed") or string.find(dropwep:GetClass(), "hand") then return end
+    local dropwep = ent:IsPlayer() and ent:GetActiveWeapon()
+    local d = Angle(0, dmginfo:GetAttacker():EyeAngles().y, 0):Forward()
 
-    ent:DropWeapon(dropwep, dmginfo:GetAttacker():GetPos())
+    if ent.IsLambdaPlayer then
+
+        -- drop client weapon model; delay a tick so we don't duplicate on death
+        timer.Simple(0, function()
+            if !IsValid(ent) or ent:Health() < 0 then return end
+            if ent.l_DropWeaponOnDeath and !ent:IsWeaponMarkedNodraw() then
+                net.Start( "lambdaplayers_createclientsidedroppedweapon" )
+                    net.WriteEntity( ent:GetWeaponENT() )
+                    net.WriteEntity( ent )
+                    net.WriteVector( ent:GetPhysColor() )
+                    net.WriteString( ent:GetWeaponName() )
+                    net.WriteVector( dmginfo:GetDamageForce() )
+                    net.WriteVector( dmginfo:GetDamagePosition() )
+                net.Broadcast()
+            end
+        end)
+
+        local run = math.Rand(1, 3)
+        ent.l_WeaponUseCooldown = CurTime() + run
+
+        -- wait a bit before swapping because client relies on the entity to set model
+        ent:GetWeaponENT():SetNoDraw(true)
+        ent:GetWeaponENT():DrawShadow(false)
+        ent:SetHasCustomDrawFunction(false)
+        ent:RetreatFrom(dmginfo:GetAttacker(), run)
+        timer.Simple(1, function()
+            if !IsValid(ent) or ent:Health() < 0 then return end
+            ent.l_Weapon = "none" -- holster function? never heard of 'em
+            ent:PreventWeaponSwitch(false)
+            ent:SwitchWeapon("none", true)
+        end)
+        timer.Simple(run, function()
+            if !IsValid(ent) or ent:Health() < 0 then return end
+            ent:AttackTarget(dmginfo:GetAttacker())
+        end)
+    elseif !IsValid(dropwep) or dropwep:GetHoldType() == "fists" or dropwep:GetHoldType() == "normal" or string.find(dropwep:GetClass(), "fist") or string.find(dropwep:GetClass(), "unarmed") or string.find(dropwep:GetClass(), "hand") then
+        dmginfo:ScaleDamage(1.5)
+    else
+        ent:DropWeapon(dropwep, dmginfo:GetAttacker():GetPos())
+    end
 end)
