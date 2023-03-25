@@ -91,10 +91,9 @@ function SWEP:Melee(alt)
 
             if SERVER and self:GetValue("MeleeBackstab") then
                 local ang = math.NormalizeAngle(self:GetOwner():GetAngles().y - tr.Entity:GetAngles().y)
-                print(ang)
                 if ang <= 60 and ang >= -60 then
                     dmginfo:ScaleDamage(self:GetValue("MeleeBackstabMult"))
-                    self:EmitSound("buttons/blip1.wav", 75, 100, 1, CHAN_ITEM + 1)
+                    self:EmitSound("tacrp/riki_backstab.wav", 75, 100, 1)
                 end
             end
         else
