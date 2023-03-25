@@ -1,6 +1,6 @@
 ATT.PrintName = "Throw"
 ATT.FullName = "Knife Throw"
-ATT.Icon = Material("entities/tacrp_att_acc_grenade.png", "mips smooth")
+ATT.Icon = Material("entities/tacrp_att_acc_melee.png", "mips smooth")
 ATT.Description = ""
 ATT.Pros = {"ALT-FIRE: Knife Projectile"}
 

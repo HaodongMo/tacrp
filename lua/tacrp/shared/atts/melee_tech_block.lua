@@ -9,12 +9,15 @@ ATT.Category = {"melee_tech"}
 
 ATT.SortOrder = 2
 
+ATT.Melee2AttackTime = 0.5
+ATT.Melee2Damage = 70
+
 ATT.Hook_SecondaryAttack = function(wep)
     -- if wep:StillWaiting() then return end
     if wep:GetNWFloat("TacRPNextBlock", 0) > CurTime() then return end
     wep:SetNWFloat("TacRPNextBlock", CurTime() + 1)
-
-    wep:PlayAnimation("idle_defend", 1, true)
+    wep:SetAnimLockTime(0)
+    wep:PlayAnimation("idle_defend", 1)
     wep:SetHoldType("magic")
     wep:SetNWFloat("TacRPKnifeParry", CurTime() + 0.5)
     wep:EmitSound("tacrp/weapons/pistol_holster-" .. math.random(1, 4) .. ".wav", 75, 110)
@@ -30,6 +33,8 @@ end
 ATT.Hook_PreShoot = function(wep)
     if wep:GetNWFloat("TacRPKnifeCounter", 0) > CurTime() then
         wep:Melee(true)
+        wep:SetNWFloat("TacRPKnifeCounter", 0)
+        wep:SetNWFloat("TacRPNextBlock", 0)
         return true
     end
 end
@@ -50,11 +55,11 @@ hook.Add("EntityTakeDamage", "TacRP_Block", function(ent, dmginfo)
     fx:SetAngles(ang)
     util.Effect("ManhackSparks", fx)
 
-    wep:EmitSound("physics/metal/metal_solid_impact_hard5.wav", 90, math.Rand(105, 110))
-    wep:SetNextSecondaryFire(CurTime())
+    ent:EmitSound("physics/metal/metal_solid_impact_hard5.wav", 90, math.Rand(105, 110))
     wep:Idle()
     wep:SetNWFloat("TacRPKnifeCounter", CurTime() + 1)
     wep:SetNWFloat("TacRPNextBlock", CurTime())
+    wep:SetNextSecondaryFire(CurTime())
     wep:KillTimer("BlockReset")
     wep:SetShouldHoldType()
 

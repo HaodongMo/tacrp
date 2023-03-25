@@ -1,5 +1,5 @@
 ATT.PrintName = "Frenzy"
-ATT.Icon = Material("entities/tacrp_att_acc_grenade.png", "mips smooth")
+ATT.Icon = Material("entities/tacrp_att_acc_melee.png", "mips smooth")
 ATT.Description = "Close the distance and ensnare your enemies."
 ATT.Pros = {"RELOAD (Ground): Lunge forwards", "RELOAD (Mid-Air): Lunge towards point of aim", "Slow on Hit"}
 

@@ -1,5 +1,5 @@
 ATT.PrintName = "Airdash"
-ATT.Icon = Material("entities/tacrp_att_acc_grenade.png", "mips smooth")
+ATT.Icon = Material("entities/tacrp_att_acc_melee.png", "mips smooth")
 ATT.Description = "Mobility tool used by blood-fueled robots and transgender women."
 ATT.Pros = {"RELOAD: Dash in movement direction", "Dash redirects momentum"}
 
@@ -75,7 +75,7 @@ hook.Add("Move", "TacRP_Quickstep", function(ply, mv)
         end
 
         local d = (1 - ((CurTime() - ply:GetNWFloat("TacRPDashTime", 0)) / 0.1)) ^ 0.5
-        mv:SetVelocity(ply:GetNWVector("TacRPDashDir") * FrameTime() * 300 * d * math.max(ply:GetRunSpeed(), 250))
+        mv:SetVelocity(ply:GetNWVector("TacRPDashDir") * FrameTime() * 500 * d * math.max(ply:GetRunSpeed(), 250))
     elseif ply:GetNWVector("TacRPDashDir", Vector()) != Vector() then
         mv:SetVelocity(math.min(ply:GetRunSpeed(), ply:GetNWFloat("TacRPDashStored")) * ply:GetNWVector("TacRPDashDir"))
         ply:SetNWVector("TacRPDashDir", Vector())
