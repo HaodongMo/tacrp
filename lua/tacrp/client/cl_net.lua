@@ -51,4 +51,14 @@ net.Receive("tacrp_flashbang", function()
     else
         LocalPlayer():SetDSP(37, time == 0)
     end
+
+end)
+net.Receive("tacrp_addshieldmodel", function(len, ply)
+    local wpn = net.ReadEntity()
+    local mdl = net.ReadEntity()
+
+    if !IsValid(wpn) or !wpn.ArcticTacRP then return end
+
+    wpn.Shields = wpn.Shields or {}
+    table.insert(wpn.Shields, mdl)
 end)

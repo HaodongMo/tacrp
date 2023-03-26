@@ -23,7 +23,7 @@ SWEP.NPCUsable = false
 
 
 SWEP.ArcadeStats = {
-    MoveSpeedMult = 0.9,
+    MoveSpeedMult = 0.85,
     ShootingSpeedMult = 1,
     SightedSpeedMult = 1,
     MeleeSpeedMult = 0.9,
@@ -40,7 +40,6 @@ SWEP.ClipSize = -1
 
 SWEP.MoveSpeedMult = 0.5
 
-
 SWEP.MeleeSpeedMultTime = 2 // seconds to apply slow down for
 
 SWEP.SprintToFireTime = 0.25
@@ -54,11 +53,11 @@ SWEP.QuickNadeTimeMult = 1.5
 // hold types
 
 SWEP.HoldType = "melee2"
-SWEP.HoldTypeSprint = "slam"
+SWEP.HoldTypeSprint = "melee2"
 
 SWEP.GestureShoot = ACT_HL2MP_GESTURE_RANGE_ATTACK_PISTOL
 SWEP.GestureReload = ACT_HL2MP_GESTURE_RELOAD_PISTOL
-SWEP.GestureBash = ACT_HL2MP_GESTURE_RANGE_ATTACK_MELEE
+SWEP.GestureBash = ACT_HL2MP_GESTURE_RANGE_ATTACK_KNIFE
 
 SWEP.PassiveAng = Angle(0, 0, 0)
 SWEP.PassivePos = Vector(0, 0, 0)
@@ -127,7 +126,9 @@ function SWEP:SetBaseSettings()
 end
 
 function SWEP:Holster(wep)
-    self:KillShields()
+    if SERVER then
+        self:KillShields()
+    end
 
     return BaseClass.Holster(self, wep)
 end
@@ -188,6 +189,7 @@ function SWEP:SetupShields()
         shield:SetAngles( self:GetOwner():GetAngles() + ang )
         shield:SetOwner(self:GetOwner())
         shield:SetCollisionGroup(COLLISION_GROUP_DEBRIS)
+        -- shield:SetModelScale(1.1, 0.00001)
         shield.Weapon = self
         if GetConVar("developer"):GetBool() then
             shield:SetColor( Color(0, 0, 0, 255) )
@@ -203,6 +205,14 @@ function SWEP:SetupShields()
 
         table.insert(TacRP.ShieldPropPile, {Weapon = self, Model = shield})
 
+        timer.Simple(0.5, function()
+            if !IsValid(self) or !IsValid(shield) then return end
+            net.Start("tacrp_addshieldmodel")
+                net.WriteEntity(self)
+                net.WriteEntity(shield)
+            net.SendPVS(shield:GetPos())
+        end)
+
         local phys = shield:GetPhysicsObject()
 
         phys:SetMass(1000)
@@ -213,6 +223,7 @@ function SWEP:KillShields()
     for i, k in pairs(self.Shields) do
         SafeRemoveEntity(k)
     end
+    self.Shields = {}
 end
 
 function SWEP:SetupModel(wm)
@@ -258,3 +269,23 @@ function SWEP:SetupModel(wm)
 
     table.insert(self.WModel, 1, csmodel)
 end
+
+function SWEP:ThinkSprint()
+end
+
+hook.Add("EntityTakeDamage", "TacRP_RiotShield", function(ent, dmginfo)
+    if !IsValid(dmginfo:GetAttacker()) or !ent:IsPlayer() then return end
+    local wep = ent:GetActiveWeapon()
+
+    if !IsValid(wep) or wep:GetClass() != "tacrp_riot_shield" then return end
+    if (dmginfo:GetAttacker():GetPos() - ent:EyePos()):GetNormalized():Dot(ent:EyeAngles():Forward()) < 0.5
+    and ((dmginfo:GetDamagePosition() - ent:EyePos()):GetNormalized():Dot(ent:EyeAngles():Forward()) < 0.5) then return end
+    if dmginfo:IsExplosionDamage() or dmginfo:GetInflictor():GetClass() == "entityflame" then return end
+
+    -- block melee... kind of
+    if dmginfo:IsDamageType(DMG_GENERIC) or dmginfo:IsDamageType(DMG_CLUB) or dmginfo:IsDamageType(DMG_CRUSH) or dmginfo:IsDamageType(DMG_SLASH) or dmginfo:GetDamageType() == 0 then
+        return true
+    end
+
+    dmginfo:ScaleDamage(0.5)
+end)
