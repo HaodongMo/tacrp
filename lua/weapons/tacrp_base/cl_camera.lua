@@ -7,6 +7,10 @@ function SWEP:CalcView(ply, pos, ang, fov)
 
     rec = rec * (self:GetValue("RecoilKick") + 1) * (self:GetRecoilAmount() / self:GetValue("RecoilMaximum")) ^ 0.75
 
+    if !game.SinglePlayer() then
+        rec = rec * 0.5 -- ???????????????
+    end
+
     if rec > 0 then
         ang.r = ang.r + (math.sin(CurTime() * 70.151) * rec)
     end
