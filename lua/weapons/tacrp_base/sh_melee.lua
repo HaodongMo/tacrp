@@ -122,4 +122,11 @@ hook.Add("PostEntityTakeDamage", "tacrp_melee", function(ent, dmg, took)
         end
         ent.TacRPBashSlow = false
     end
+
+    local wep = dmg:GetInflictor()
+    if !IsValid(wep) or !wep:IsWeapon() then wep = dmg:GetAttacker():GetActiveWeapon() end
+    if took and IsValid(wep) and wep.ArcticTacRP and wep:GetValue("Lifesteal") then
+        local v = dmg:GetDamage() * wep:GetValue("Lifesteal")
+        wep:GetOwner():SetHealth(math.min(wep:GetOwner():GetMaxHealth(), wep:GetOwner():Health() + v))
+    end
 end)

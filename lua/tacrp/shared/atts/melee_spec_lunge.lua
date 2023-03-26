@@ -1,11 +1,13 @@
 ATT.PrintName = "Frenzy"
 ATT.Icon = Material("entities/tacrp_att_acc_melee.png", "mips smooth")
-ATT.Description = "Close the distance and ensnare your enemies."
-ATT.Pros = {"RELOAD (Ground): Lunge forwards", "RELOAD (Mid-Air): Lunge towards point of aim"}
+ATT.Description = "Close the distance and overwhelm your enemies."
+ATT.Pros = {"RELOAD (Ground): Lunge forwards", "RELOAD (Mid-Air): Lunge towards point of aim", "Heal on hit"}
 
 ATT.Category = {"melee_spec"}
 
 ATT.SortOrder = 3
+
+ATT.Lifesteal = 1 / 3
 
 local chargeamt = 0.7
 
