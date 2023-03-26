@@ -60,6 +60,7 @@ function ATT.TacticalDraw(self)
 
 end
 
+-- safe to use since Move is followed up by FinishMove immediately... or so they say
 hook.Add("Move", "TacRP_Quickstep", function(ply, mv)
     if ply:GetNWFloat("TacRPDashTime", 0) + 0.1 > CurTime() then
 
@@ -78,18 +79,37 @@ hook.Add("Move", "TacRP_Quickstep", function(ply, mv)
         if mv:KeyPressed(IN_JUMP) then -- ply:IsOnGround() and
             -- cancel the dash
             local buffer = CurTime() - ply:GetNWFloat("TacRPDashTime", 0)
-            local vel = ply:GetNWVector("TacRPDashDir") * (100 + math.max(250, math.min(ply:GetRunSpeed(), ply:GetNWFloat("TacRPDashStored"))))
-            if ply:IsOnGround() then
-                vel = vel + Vector(0, 0, ply:GetJumpPower() * 0.5)
-            end
-            mv:SetVelocity(vel)
+            local v = ply:GetNWVector("TacRPDashDir") * 500 --(250 + math.max(250, math.min(ply:GetRunSpeed(), ply:GetNWFloat("TacRPDashStored"))))
+
+            mv:SetVelocity(v)
+            mv:SetButtons(bit.band(mv:GetButtons(), bit.bnot(IN_JUMP)))
+
             ply:SetNWFloat("TacRPDashTime", 0)
             ply:SetNWVector("TacRPDashDir", Vector())
-        else
-            local d = (1 - ((CurTime() - ply:GetNWFloat("TacRPDashTime", 0)) / 0.1)) ^ 0.5
-            mv:SetVelocity(ply:GetNWVector("TacRPDashDir") * FrameTime() * 500 * d * math.max(ply:GetRunSpeed(), 250))
-        end
 
+            -- Cancel sandbox jump boost.
+            -- if player_manager.GetPlayerClass(ply) == "player_sandbox" and bit.band( mv:GetOldButtons(), IN_JUMP ) == 0 and ply:OnGround() then
+            --     local forward = ply:GetNWVector("TacRPDashDir")
+            --     local speedBoostPerc = ( ( !ply:Crouching() ) and 0.5 ) or 0.1
+            --     local speedAddition = math.abs( mv:GetForwardSpeed() * speedBoostPerc )
+            --     local maxSpeed = mv:GetMaxSpeed() * ( 1 + speedBoostPerc )
+            --     local newSpeed = speedAddition + mv:GetVelocity():Length2D()
+            --     if newSpeed > maxSpeed then
+            --         speedAddition = speedAddition - (newSpeed - maxSpeed)
+            --     end
+            --     if mv:GetVelocity():Dot(forward) < 0 then
+            --         speedAddition = -speedAddition
+            --     end
+
+            --     print(speedAddition)
+            --     v = v - speedAddition * forward * 1
+            --     --mv:SetVelocity(mv:GetVelocity() + speedAddition * forward * 1)
+            -- end
+
+        else
+            local d = (1 - ((CurTime() - ply:GetNWFloat("TacRPDashTime", 0)) / 0.1))
+            mv:SetVelocity(ply:GetNWVector("TacRPDashDir") * FrameTime() * 600 * d * math.max(ply:GetRunSpeed(), 250))
+        end
     elseif ply:GetNWVector("TacRPDashDir", Vector()) != Vector() then
         mv:SetVelocity(math.min(ply:GetRunSpeed(), ply:GetNWFloat("TacRPDashStored")) * ply:GetNWVector("TacRPDashDir"))
         ply:SetNWVector("TacRPDashDir", Vector())

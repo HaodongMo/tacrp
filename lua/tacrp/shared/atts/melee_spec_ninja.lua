@@ -14,7 +14,7 @@ ATT.Hook_PreReload = function(wep)
     if !ply:KeyPressed(IN_RELOAD) then return end
 
     if ply:IsOnGround() and ply:Crouching() then
-        if ply:GetNWFloat("TacRPNinjaSmoke", 0) > CurTime() then return true end
+        if ply:GetNWFloat("TacRPNinjaSmoke", 0) > CurTime() or ply:GetNWFloat("TacRPDiveTime", 0) + 0.5 > CurTime() then return true end
         if SERVER then
             wep:EmitSound("TacRP/weapons/grenade/smoke_explode-1.wav", 80, 110)
             local cloud = ents.Create( "tacrp_smoke_cloud_ninja" )
@@ -95,9 +95,10 @@ ATT.Hook_PreReload = function(wep)
                 wep:EmitSound("tacrp/weapons/melee_body_hit-" .. math.random(1, 5) .. ".wav", 75, 100, 1, CHAN_ITEM)
                 tr.Entity.PalmPunched = true
             else
+                local vel = ply:GetVelocity():Length()
                 wep:EmitSound("tacrp/weapons/melee_hit-" .. math.random(1, 2) .. ".wav", 75, 100, 1, CHAN_ITEM)
-                if ply:IsOnGround() and math.abs(tr.HitNormal:Dot(Vector(0, 0, 1))) <= 0.25 and ply:GetVelocity():Length() <= 100 then
-                    ply:SetVelocity(Vector(0, 0, 400))
+                if ply:IsOnGround() and math.abs(tr.HitNormal:Dot(Vector(0, 0, 1))) <= 0.25 and vel <= 250 then
+                    ply:SetVelocity(Vector(0, 0, Lerp(vel / 250, 450, 250)))
                 end
             end
 
@@ -146,6 +147,7 @@ hook.Add("Move", "TacRP_Ninja", function(ply, mv)
     if ply:GetNWBool("TacRPNinjaDive") then
         if ply:IsOnGround() or !ply:Alive() or ply:GetMoveType() == MOVETYPE_NOCLIP then
             ply:SetNWBool("TacRPNinjaDive", false)
+            mv:SetVelocity(mv:GetAngles():Forward() * mv:GetVelocity():Length() * 2)
         elseif ply:GetNWFloat("TacRPDiveTime", 0) + 0.1 > CurTime() then
             mv:SetVelocity(ply:GetNWVector("TacRPDiveDir") * 50000 * FrameTime())
         end
@@ -163,7 +165,7 @@ hook.Add("GetFallDamage", "TacRP_Ninja", function(ply, speed)
             util.Effect("ThumperDust", eff)
 
             local dmginfo = DamageInfo()
-            dmginfo:SetDamage(math.Clamp((speed - 300) / 25, 10, 60))
+            dmginfo:SetDamage(math.Clamp((speed - 250) / 25, 10, 70))
             dmginfo:SetDamageForce(Vector(0, 0, 3000))
             dmginfo:SetDamagePosition(ply:GetPos())
             dmginfo:SetDamageType(DMG_CRUSH)
@@ -190,6 +192,8 @@ hook.Add("GetFallDamage", "TacRP_Ninja", function(ply, speed)
                 ply:GetGroundEntity():TakeDamageInfo(dmginfo)
                 ply:EmitSound("tacrp/mario_coin.wav", 80, 100, 0.2)
             end
+
+            ply:SetNWBool("TacRPNinjaDive", false)
         end
         return 0
     end

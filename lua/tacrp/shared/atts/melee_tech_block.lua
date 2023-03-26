@@ -2,8 +2,8 @@ ATT.PrintName = "Guard"
 ATT.FullName = "High Guard"
 
 ATT.Icon = Material("entities/tacrp_att_acc_melee.png", "mips smooth")
-ATT.Description = ""
-ATT.Pros = {"ALT-FIRE: Block melee attacks", "Counterattack disarms"}
+ATT.Description = "Defense is the best offense."
+ATT.Pros = {"ALT-FIRE: Block melee attacks", "Counterattack On Block"}
 
 ATT.Category = {"melee_tech"}
 

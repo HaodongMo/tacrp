@@ -4,16 +4,16 @@ SWEP.Spawnable = true
 AddCSLuaFile()
 
 // names and stuff
-SWEP.PrintName = "Knife"
+SWEP.PrintName = "Jackal Knife"
 SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 
 SWEP.SubCatTier = "9Special"
 SWEP.SubCatType = "9Equipment"
 
-SWEP.Description = "A multipurpose tool, most of the purposes involving stabbing someone.\nWORK IN PROGRESS"
+SWEP.Description = "Very edgy looking knife. Fast, but not very lethal.\nWORK IN PROGRESS"
 
-SWEP.ViewModel = "models/weapons/tacint/v_knife.mdl"
-SWEP.WorldModel = "models/weapons/tacint/w_knife.mdl"
+SWEP.ViewModel = "models/weapons/tacint/v_knife2.mdl"
+SWEP.WorldModel = "models/weapons/tacint/w_knife2.mdl"
 
 SWEP.NoRanger = true
 SWEP.NoStatBox = true
@@ -27,11 +27,11 @@ SWEP.NPCUsable = false
 
 // misc. shooting
 
-SWEP.MeleeDamage = 35
-SWEP.MeleeAttackTime = 0.45
+SWEP.MeleeDamage = 30
+SWEP.MeleeAttackTime = 0.35
 
-SWEP.Melee2Damage = 55
-SWEP.Melee2AttackTime = 0.75
+SWEP.Melee2Damage = 60
+SWEP.Melee2AttackTime = 0.6
 SWEP.Melee2Range = 72
 
 SWEP.Firemode = 2
@@ -149,8 +149,6 @@ local function addsound(name, spath)
         sound = spath
     })
 end
-
-addsound("tacint_knife.deploy", path .. "open-1.wav")
 
 function SWEP:PrimaryAttack()
     local stop = self:RunHook("Hook_PreShoot")

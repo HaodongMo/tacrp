@@ -13,7 +13,8 @@ ATT.Hook_SecondaryAttack = function(self)
     if self:StillWaiting() or self:GetNextSecondaryFire() > CurTime() then return end
 
     self:PlayAnimation("meleethrow", 1, false, true)
-    self:GetOwner():DoAnimationEvent(ACT_GMOD_GESTURE_ITEM_THROW)
+    --self:GetOwner():DoAnimationEvent(ACT_GMOD_GESTURE_ITEM_THROW)
+    self:GetOwner():DoAnimationEvent(ACT_HL2MP_GESTURE_RANGE_ATTACK_MELEE)
 
     self:EmitSound("weapons/iceaxe/iceaxe_swing1.wav", 75, 120, 1)
 

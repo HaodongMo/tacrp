@@ -25,7 +25,12 @@ ATT.Hook_PreReload = function(wep)
     if ply:IsOnGround() then
         ply:SetVelocity(ang:Forward() * 600 + Vector(0, 0, 250))
     else
-        ply:SetVelocity(ply:GetAngles():Forward() * 350)
+        local dot = ply:GetAngles():Forward():Dot(ply:GetVelocity():GetNormalized())
+        if dot < 0.5 then
+            ply:SetVelocity(-ply:GetVelocity() + ply:GetAngles():Forward() * 500)
+        else
+            ply:SetVelocity(ply:GetAngles():Forward() * 400)
+        end
     end
 
     return true
