@@ -16,6 +16,8 @@ TacRP.KillIconAlias = {
 
     ["tacrp_proj_ks23_flashbang"] = "tacrp_ks23",
 
+    ["tacrp_proj_knife"] = "tacrp_knife",
+
     ["tacrp_gas_cloud"] = "tacrp_proj_nade_gas", -- also used by 40mm gas but whatever
     ["tacrp_fire_cloud"] = "tacrp_proj_nade_thermite",
     ["tacrp_nuke_cloud"] = "tacrp_proj_nade_nuke",

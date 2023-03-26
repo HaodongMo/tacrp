@@ -9,6 +9,8 @@ ATT.SortOrder = 2
 
 ATT.SilentFootstep = true
 
+local smokedelay = 18
+
 ATT.Hook_PreReload = function(wep)
     local ply = wep:GetOwner()
     if !ply:KeyPressed(IN_RELOAD) then return end
@@ -20,16 +22,17 @@ ATT.Hook_PreReload = function(wep)
             local cloud = ents.Create( "tacrp_smoke_cloud_ninja" )
             if !IsValid(cloud) then return end
             cloud:SetPos(ply:GetPos())
+            cloud:SetOwner(ply)
             cloud:Spawn()
         end
-        ply:SetNWFloat("TacRPNinjaSmoke", CurTime() + 10)
+        ply:SetNWFloat("TacRPNinjaSmoke", CurTime() + smokedelay)
         local ang = ply:GetAngles()
         if ang.p >= -15 then
             ang.p = math.Clamp(ang.p, 45, 180 - 45)
-            ply:SetVelocity(ang:Forward() * -450)
+            ply:SetVelocity(ang:Forward() * -500)
         end
     elseif !ply:IsOnGround() and ply:Crouching() then
-        if !ply:GetNWBool("TacRPNinjaDive") and ply:GetNWFloat("TacRPDiveTime", 0) + 1 < CurTime() and ply:EyeAngles():Forward():Dot(Vector(0, 0, 1)) < -0.25 then
+        if ply:GetMoveType() != MOVETYPE_NOCLIP and !ply:GetNWBool("TacRPNinjaDive") and ply:GetNWFloat("TacRPDiveTime", 0) + 1 < CurTime() and ply:EyeAngles():Forward():Dot(Vector(0, 0, 1)) < -0.25 then
             ply:SetNWBool("TacRPNinjaDive", true)
             ply:SetNWFloat("TacRPDiveTime", CurTime())
             ply:SetNWVector("TacRPDiveDir", ply:EyeAngles():Forward())
@@ -103,7 +106,7 @@ ATT.Hook_PreReload = function(wep)
                 local vel = ply:GetVelocity():Length()
                 wep:EmitSound("tacrp/weapons/melee_hit-" .. math.random(1, 2) .. ".wav", 75, 100, 1, CHAN_ITEM)
                 if ply:IsOnGround() and math.abs(tr.HitNormal:Dot(Vector(0, 0, 1))) <= 0.25 and (tr.Normal:Dot(ply:GetAimVector())) >= 0.5 and vel <= 250 then
-                    ply:SetVelocity(Vector(0, 0, Lerp(vel / 250, 450, 250)))
+                    ply:SetVelocity(Vector(0, 0, Lerp(vel / 250, 500, 250)))
                 end
             end
 
@@ -137,7 +140,7 @@ function ATT.TacticalDraw(self)
     surface.SetDrawColor(0, 0, 0, 200)
     TacRP.DrawCorneredBox(x, y, w, h)
 
-    local c = math.Clamp((self:GetOwner():GetNWFloat("TacRPNinjaSmoke", 0) - CurTime()) / 10, 0, 1)
+    local c = math.Clamp((self:GetOwner():GetNWFloat("TacRPNinjaSmoke", 0) - CurTime()) / smokedelay, 0, 1)
     surface.SetDrawColor(150, 150, 150, 75)
     surface.DrawRect(x, y + h * (1 - c), w, h * c)
 
@@ -150,9 +153,13 @@ end
 
 hook.Add("FinishMove", "TacRP_Ninja", function(ply, mv)
     if ply:GetNWBool("TacRPNinjaDive") then
-        if ply:IsOnGround() or !ply:Alive() or ply:GetMoveType() == MOVETYPE_NOCLIP then
+        if ply:IsOnGround() and !ply.TacRPNinjaGroundTime then
+            ply.TacRPNinjaGroundTime = CurTime()
+        end
+        if (ply:IsOnGround() and ply.TacRPNinjaGroundTime + engine.TickInterval() < CurTime()) or !ply:Alive() or ply:GetMoveType() == MOVETYPE_NOCLIP then
             ply:SetNWBool("TacRPNinjaDive", false)
             mv:SetVelocity(mv:GetAngles():Forward() * mv:GetVelocity():Length() * 2)
+            ply.TacRPNinjaGroundTime = nil
         elseif ply:GetNWFloat("TacRPDiveTime", 0) + 0.1 > CurTime() then
             mv:SetVelocity(ply:GetNWVector("TacRPDiveDir") * 50000 * FrameTime())
         end
@@ -170,7 +177,7 @@ hook.Add("GetFallDamage", "TacRP_Ninja", function(ply, speed)
             util.Effect("ThumperDust", eff)
 
             local dmginfo = DamageInfo()
-            dmginfo:SetDamage(math.Clamp((speed - 250) / 20, 25, 70))
+            dmginfo:SetDamage(math.Clamp((speed - 300) / 30, 20, 70))
             dmginfo:SetDamageForce(Vector(0, 0, 3000))
             dmginfo:SetDamagePosition(ply:GetPos())
             dmginfo:SetDamageType(DMG_CRUSH)
@@ -180,9 +187,10 @@ hook.Add("GetFallDamage", "TacRP_Ninja", function(ply, speed)
             for _, ent in pairs(ents.FindInSphere(ply:GetPos(), 256)) do
                 if ent == ply or !IsValid(ent:GetPhysicsObject()) then continue end
                 if ent:IsPlayer() or ent:IsNPC() then
-                    ent:SetVelocity(Vector(0, 0, math.Clamp(speed / 2.5, 250, 750)))
+                    ent:SetVelocity(Vector(0, 0, math.Clamp(speed / 4, 250, 1000)))
                 else
-                    ent:GetPhysicsObject():ApplyForceCenter(Vector(0, 0, 3000))
+                    ent:GetPhysicsObject():ApplyTorqueCenter(VectorRand() * speed ^ 0.5)
+                    ent:GetPhysicsObject():ApplyForceOffset(Vector(0, 0, speed) * (ent:GetPhysicsObject():GetMass() ^ 0.5), ply:GetPos())
                 end
                 ent:TakeDamageInfo(dmginfo)
             end
@@ -199,6 +207,7 @@ hook.Add("GetFallDamage", "TacRP_Ninja", function(ply, speed)
             end
 
             ply:SetNWBool("TacRPNinjaDive", false)
+            ply.TacRPNinjaGroundTime = nil
         end
         return 0
     end

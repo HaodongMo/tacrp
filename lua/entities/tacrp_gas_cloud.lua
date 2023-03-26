@@ -201,7 +201,7 @@ end)
 hook.Add("PostEntityTakeDamage", "tacrp_gas", function(ent, dmg, took)
     if took and ent:IsPlayer() and dmg:GetDamageType() == DMG_NERVEGAS and bit.band(dmg:GetDamageCustom(), 1024) == 1024 then
         ent:SetArmor(math.max(0, ent:Armor() - dmg:GetDamage()))
-        if IsValid(dmg:GetInflictor()) and dmg:GetInflictor():GetClass() == "tacrp_gas_cloud" and dmg:GetInflictor():GetPos():Distance(ent:GetPos()) <= 350 then
+        if IsValid(dmg:GetInflictor()) and (dmg:GetInflictor():GetClass() == "tacrp_gas_cloud" or dmg:GetInflictor():GetClass() == "tacrp_smoke_cloud_ninja") and dmg:GetInflictor():GetPos():Distance(ent:GetPos()) <= 350 then
             ent:SetNWFloat("TacRPGasEnd", CurTime() + 10)
         end
     end

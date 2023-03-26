@@ -89,11 +89,11 @@ function SWEP:Melee(alt)
         if IsValid(tr.Entity) and (tr.Entity:IsNPC() or tr.Entity:IsPlayer() or tr.Entity:IsNextBot()) then
             self:EmitSound(self:ChooseSound(self:GetValue("Sound_MeleeHitBody")), 75, 100, 1, CHAN_ITEM)
 
-            if SERVER and self:GetValue("MeleeBackstab") then
+            if self:GetValue("MeleeBackstab") then
                 local ang = math.NormalizeAngle(self:GetOwner():GetAngles().y - tr.Entity:GetAngles().y)
                 if ang <= 60 and ang >= -60 then
                     dmginfo:ScaleDamage(self:GetValue("MeleeBackstabMult"))
-                    self:EmitSound("tacrp/riki_backstab.wav", 75, 100, 1)
+                    self:EmitSound("tacrp/riki_backstab.wav", 70, 100, 0.4)
                 end
             end
         else

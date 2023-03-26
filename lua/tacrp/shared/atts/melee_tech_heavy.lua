@@ -1,7 +1,7 @@
 ATT.PrintName = "Heavy"
 ATT.FullName = "Heavy-handed"
 ATT.Icon = Material("entities/tacrp_att_acc_melee.png", "mips smooth")
-ATT.Description = ""
+ATT.Description = "A classic counter-terrorist technique: Just smack them real hard."
 ATT.Pros = {"ALT-FIRE: Heavy Attack", "Backstab Damage"}
 
 ATT.Category = {"melee_tech"}

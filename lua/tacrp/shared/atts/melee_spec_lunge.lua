@@ -7,13 +7,15 @@ ATT.Category = {"melee_spec"}
 
 ATT.SortOrder = 3
 
+local chargeamt = 0.7
+
 ATT.Hook_PreReload = function(wep)
     local ply = wep:GetOwner()
 
-    if !ply:KeyPressed(IN_RELOAD) or ply:GetNWFloat("TacRPDashCharge", 0) < 0.8 or (ply.TacRPNextLunge or 0) > CurTime() then return end
+    if !ply:KeyPressed(IN_RELOAD) or ply:GetNWFloat("TacRPDashCharge", 0) < chargeamt or (ply.TacRPNextLunge or 0) > CurTime() then return end
 
     ply.TacRPNextLunge = CurTime() + 0.5
-    ply:SetNWFloat("TacRPDashCharge", ply:GetNWFloat("TacRPDashCharge", 0) - 0.8)
+    ply:SetNWFloat("TacRPDashCharge", ply:GetNWFloat("TacRPDashCharge", 0) - chargeamt)
 
     local ang = Angle(0, ply:GetAngles().y, 0)
 
@@ -65,5 +67,5 @@ function ATT.TacticalDraw(self)
     surface.DrawRect(x, y, w * c, h)
 
     surface.SetDrawColor(255, 255, 255, 200)
-    surface.DrawLine(x + w * 0.8, y, x + w * 0.8, y + h)
+    surface.DrawLine(x + w * chargeamt, y, x + w * chargeamt, y + h)
 end

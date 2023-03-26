@@ -26,7 +26,7 @@ end
 ATT.Hook_PostThink = function(wep)
     local ply = wep:GetOwner()
     if (game.SinglePlayer() or IsFirstTimePredicted()) and ply:GetNWFloat("TacRPDashTime", 0) + 0.3 < CurTime() then
-        ply:SetNWFloat("TacRPDashCharge", math.min(1, ply:GetNWFloat("TacRPDashCharge", 0) + FrameTime() / 5))
+        ply:SetNWFloat("TacRPDashCharge", math.min(1, ply:GetNWFloat("TacRPDashCharge", 0) + FrameTime() / 7.5))
     end
 end
 
@@ -58,13 +58,6 @@ function ATT.TacticalDraw(self)
     surface.DrawLine(x + w / 3 * 2, y, x + w / 3 * 2, y + h)
 
 end
-
-hook.Add("StartCommand", "TacRP_Quickstep", function(ply, cmd)
-    if ply:GetNWFloat("TacRPDashTime", 0) + 0.1 > CurTime() then
-        -- cmd:SetButtons(bit.band(cmd:GetButtons(), bit.bnot(IN_JUMP)))
-        -- cmd:SetUpMove(0)
-    end
-end)
 
 hook.Add("SetupMove", "TacRP_Quickstep", function(ply, mv, cmd)
     if !IsFirstTimePredicted() then return end
@@ -110,66 +103,8 @@ hook.Add("FinishMove", "TacRP_Quickstep", function(ply, mv)
         v.z = 0
         mv:SetVelocity(v)
     end
-    -- if ply:GetNWFloat("TacRPDashTime", 0) + 0.1 > CurTime() then
-
-    --     -- if ply.TacRPCancelPending  then
-    --     --     mv:SetVelocity((ply:GetRunSpeed() + math.Clamp((ply.TacRPDashStored - ply:GetRunSpeed()) ^ 0.5, 0, 500)) * ply:GetNWVector("TacRPDashDir"))
-
-    --     --     ply:SetNWFloat("TacRPDashTime", 0)
-    --     --     ply.TacRPDashDir = nil
-    --     --     ply.TacRPCancelPending = false
-    --     -- end
-
-    --     -- if ply.TacRPDashPending and ply.TacRPDashDir then
-    --     --     ply.TacRPDashPending = false
-    --     --     mv:SetVelocity(ply.TacRPDashDir * ply:GetRunSpeed() * 50)
-    --     -- elseif ply.TacRPCancelPending  then
-    --     --     print("cancelled", mv:GetVelocity():GetNormalized())
-    --     --     mv:SetVelocity((ply:GetRunSpeed() + math.Clamp((ply.TacRPDashStored - ply:GetRunSpeed()) ^ 0.5, 0, 500)) * ply:GetNWVector("TacRPDashDir"))
-    --     --     ply:SetNWFloat("TacRPDashTime", 0)
-    --     --     ply.TacRPDashDir = nil
-    --     --     ply.TacRPCancelPending = false
-    --     -- end
-
-    --     -- if ply:IsOnGround() and mv:KeyPressed(IN_JUMP) then
-    --     --     -- cancel the dash
-    --     --     local buffer = CurTime() - ply:GetNWFloat("TacRPDashTime", 0)
-    --     --     local v = ply:GetNWVector("TacRPDashDir") * 500 + Vector(0, 0, ply:GetJumpPower())
-
-    --     --     mv:SetVelocity(v)
-    --     --     --mv:SetButtons(bit.band(mv:GetButtons(), bit.bnot(IN_JUMP)))
-
-    --     --     ply:SetNWFloat("TacRPDashTime", 0)
-    --     --     ply:SetNWVector("TacRPDashDir", Vector())
-
-    --     --     -- Cancel sandbox jump boost.
-    --     --     -- if player_manager.GetPlayerClass(ply) == "player_sandbox" and bit.band( mv:GetOldButtons(), IN_JUMP ) == 0 and ply:OnGround() then
-    --     --     --     local forward = ply:GetNWVector("TacRPDashDir")
-    --     --     --     local speedBoostPerc = ( ( !ply:Crouching() ) and 0.5 ) or 0.1
-    --     --     --     local speedAddition = math.abs( mv:GetForwardSpeed() * speedBoostPerc )
-    --     --     --     local maxSpeed = mv:GetMaxSpeed() * ( 1 + speedBoostPerc )
-    --     --     --     local newSpeed = speedAddition + mv:GetVelocity():Length2D()
-    --     --     --     if newSpeed > maxSpeed then
-    --     --     --         speedAddition = speedAddition - (newSpeed - maxSpeed)
-    --     --     --     end
-    --     --     --     if mv:GetVelocity():Dot(forward) < 0 then
-    --     --     --         speedAddition = -speedAddition
-    --     --     --     end
-
-    --     --     --     print(speedAddition)
-    --     --     --     v = v - speedAddition * forward * 1
-    --     --     --     --mv:SetVelocity(mv:GetVelocity() + speedAddition * forward * 1)
-    --     --     -- end
-    --     -- end
-    -- elseif ply.TacRPDashDir != nil then
-    --     mv:SetVelocity((ply:GetRunSpeed() + math.Clamp((ply:GetNWFloat("TacRPDashStored") - ply:GetRunSpeed()) ^ 0.5, 0, 500)) * ply:GetNWVector("TacRPDashDir"))
-    --     ply.TacRPDashDir = nil
-    -- end
 end)
 
-hook.Add("PlayerSpawn", "TacRP_Quickstep", function(ply)
-    ply:SetNWFloat("TacRPDashCharge", 1)
-end)
 
 hook.Add("EntityTakeDamage", "TacRP_Quickstep", function(ent, dmginfo)
     if !ent:IsPlayer() or ent:GetNWFloat("TacRPDashTime", 0) + 0.1 <= CurTime() then return end

@@ -41,38 +41,40 @@ function ENT:Impact(data, collider)
         dmg:SetDamageForce(d * 5000)
         dmg:SetDamagePosition(data.HitPos)
 
-        if !data.HitEntity:IsOnGround() then
-            dmg:ScaleDamage(2)
-            data.HitEntity:EmitSound("weapons/crossbow/bolt_skewer1.wav", 80, 110)
-        end
-
-        -- Check if the knife is a headshot
-        -- Either the head is the closest bodygroup, or the direction is quite on point
-        local pos = data.HitPos + d * 8
-        local hset = data.HitEntity:GetHitboxSet()
-        local hdot, bhg, bdist, hdist = 0, 0, math.huge, math.huge
-        for i = 0, data.HitEntity:GetHitBoxCount(hset) or 0 do
-
-            local bone = data.HitEntity:GetHitBoxBone(i, hset)
-            local mtx = bone and data.HitEntity:GetBoneMatrix(bone)
-            if !mtx then continue end
-            local hpos = mtx:GetTranslation()
-            local dot = (hpos - data.HitPos):GetNormalized():Dot(d)
-            local dist = (hpos - pos):LengthSqr()
-
-            if data.HitEntity:GetHitBoxHitGroup(i, hset) == HITGROUP_HEAD then
-                hdot = dot
-                hdist = dist
+        if (data.HitEntity:IsPlayer() or data.HitEntity:IsNPC() or data.HitEntity:IsNextBot()) then
+            if !data.HitEntity:IsOnGround() then
+                dmg:ScaleDamage(2)
+                data.HitEntity:EmitSound("weapons/crossbow/bolt_skewer1.wav", 80, 110)
             end
-            if dist < bdist then
-                bdist = dist
-                bhg = data.HitEntity:GetHitBoxHitGroup(i, hset)
-            end
-        end
 
-        if bhg == HITGROUP_HEAD or (hdot >= 0.92 and hdist < 2304) then
-            dmg:ScaleDamage(2)
-            data.HitEntity:EmitSound("player/headshot" .. math.random(1, 2) .. ".wav", 80, 105)
+            -- Check if the knife is a headshot
+            -- Either the head is the closest bodygroup, or the direction is quite on point
+            local pos = data.HitPos + d * 8
+            local hset = data.HitEntity:GetHitboxSet()
+            local hdot, bhg, bdist, hdist = 0, 0, math.huge, math.huge
+            for i = 0, data.HitEntity:GetHitBoxCount(hset) or 0 do
+
+                local bone = data.HitEntity:GetHitBoxBone(i, hset)
+                local mtx = bone and data.HitEntity:GetBoneMatrix(bone)
+                if !mtx then continue end
+                local hpos = mtx:GetTranslation()
+                local dot = (hpos - data.HitPos):GetNormalized():Dot(d)
+                local dist = (hpos - pos):LengthSqr()
+
+                if data.HitEntity:GetHitBoxHitGroup(i, hset) == HITGROUP_HEAD then
+                    hdot = dot
+                    hdist = dist
+                end
+                if dist < bdist then
+                    bdist = dist
+                    bhg = data.HitEntity:GetHitBoxHitGroup(i, hset)
+                end
+            end
+
+            if bhg == HITGROUP_HEAD or (hdot >= 0.92 and hdist < 2304) then
+                dmg:ScaleDamage(2)
+                data.HitEntity:EmitSound("player/headshot" .. math.random(1, 2) .. ".wav", 80, 105)
+            end
         end
 
         data.HitEntity:TakeDamageInfo(dmg)
