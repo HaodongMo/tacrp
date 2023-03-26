@@ -3,7 +3,7 @@ ATT.FullName = "High Guard"
 
 ATT.Icon = Material("entities/tacrp_att_acc_melee.png", "mips smooth")
 ATT.Description = "Defense is the best offense."
-ATT.Pros = {"ALT-FIRE: Block melee attacks", "Counterattack On Block"}
+ATT.Pros = {"ALT-FIRE: Block melee attacks or projectiles", "Gain disarming counter-attack on block"}
 
 ATT.Category = {"melee_tech"}
 
@@ -24,7 +24,7 @@ ATT.Hook_SecondaryAttack = function(wep)
 
     wep:SetNextIdle(CurTime() + 0.5)
     if SERVER then
-        wep:SetTimer(0.5, function()
+        wep:SetTimer(0.75, function()
             wep:SetShouldHoldType()
         end, "BlockReset")
     end
@@ -51,9 +51,16 @@ hook.Add("EntityTakeDamage", "TacRP_Block", function(ent, dmginfo)
     local wep = ent:GetActiveWeapon()
 
     if !IsValid(wep) or !wep.ArcticTacRP or wep:GetNWFloat("TacRPKnifeParry", 0) < CurTime() then return end
-    if !(dmginfo:IsDamageType(DMG_GENERIC) or dmginfo:IsDamageType(DMG_CLUB) or dmginfo:IsDamageType(DMG_SLASH) or dmginfo:GetDamageType() == 0) then return end
-    if dmginfo:GetAttacker():GetPos():DistToSqr(ent:GetPos()) >= 22500 then return end
-    if (dmginfo:GetAttacker():GetPos() - ent:EyePos()):GetNormalized():Dot(ent:EyeAngles():Forward()) < 0.5 then return end
+    if !(dmginfo:IsDamageType(DMG_GENERIC) or dmginfo:IsDamageType(DMG_CLUB) or dmginfo:IsDamageType(DMG_CRUSH) or dmginfo:IsDamageType(DMG_SLASH) or dmginfo:GetDamageType() == 0) then return end
+    -- if dmginfo:GetAttacker():GetPos():DistToSqr(ent:GetPos()) >= 22500 then return end
+    if (dmginfo:GetAttacker():GetPos() - ent:EyePos()):GetNormalized():Dot(ent:EyeAngles():Forward()) < 0.5 and ((dmginfo:GetDamagePosition() - ent:EyePos()):GetNormalized():Dot(ent:EyeAngles():Forward()) < 0.5) then return end
+
+    -- get guard broken bitch
+    if ent.PalmPunched then
+        ent:SetActiveWeapon(NULL)
+        ent:DropWeapon(wep, dmginfo:GetAttacker():GetPos())
+        return
+    end
 
     local ang = ent:EyeAngles()
     local fx = EffectData()
@@ -62,19 +69,34 @@ hook.Add("EntityTakeDamage", "TacRP_Block", function(ent, dmginfo)
     fx:SetAngles(ang)
     util.Effect("ManhackSparks", fx)
 
-    if dmginfo:GetAttacker():IsNPC() and dmginfo:GetAttacker():GetClass() != "npc_antlionguard" then
+    if dmginfo:GetAttacker():IsNPC() and dmginfo:GetAttacker():GetClass() != "npc_antlionguard" and dmginfo:GetAttacker():GetPos():DistToSqr(ent:GetPos()) < 22500 then
         dmginfo:GetAttacker():SetSchedule(SCHED_FLINCH_PHYSICS)
     end
 
     ent:EmitSound("physics/metal/metal_solid_impact_hard5.wav", 90, math.Rand(105, 110))
     ent:ViewPunch(AngleRand(-1, 1) * (dmginfo:GetDamage() ^ 0.5))
 
-    wep:Idle()
-    wep:SetNWFloat("TacRPKnifeCounter", CurTime() + 1)
-    wep:SetNWFloat("TacRPNextBlock", CurTime())
     wep:SetNextSecondaryFire(CurTime())
+
     wep:KillTimer("BlockReset")
-    wep:SetShouldHoldType()
+    wep:SetNWFloat("TacRPNextBlock", CurTime() + 0.75)
+    wep:SetNWFloat("TacRPKnifeCounter", CurTime() + 1)
+    wep:PlayAnimation("idle_defend", 1)
+    wep:SetNWFloat("TacRPKnifeParry", CurTime() + 1)
+    wep:SetNextIdle(CurTime() + 1)
+    if SERVER then
+        wep:SetTimer(1, function()
+            wep:SetShouldHoldType()
+        end, "BlockReset")
+    end
+
+    local inflictor = dmginfo:GetInflictor()
+    timer.Simple(0, function()
+        if IsValid(inflictor) and !inflictor:IsWeapon() and IsValid(inflictor:GetPhysicsObject()) then
+            inflictor:GetPhysicsObject():SetVelocityInstantaneous(ent:EyeAngles():Forward() * 2000)
+            inflictor:SetOwner(ent)
+        end
+    end)
 
     return true
 end)
@@ -83,7 +105,7 @@ hook.Add("EntityTakeDamage", "TacRP_Counter", function(ent, dmginfo)
     if !IsValid(dmginfo:GetAttacker()) or !dmginfo:GetAttacker():IsPlayer() then return end
     local wep = dmginfo:GetAttacker():GetActiveWeapon()
 
-    if !IsValid(wep) or !wep.ArcticTacRP or wep:GetNWFloat("TacRPKnifeCounter", 0) < CurTime() then return end
+    if !IsValid(wep) or !wep.ArcticTacRP or wep:GetNWFloat("TacRPKnifeCounter", 0) < CurTime() or (dmginfo:GetInflictor() != wep and dmginfo:GetInflictor() != dmginfo:GetAttacker()) then return end
     local dropwep = ent:IsPlayer() and ent:GetActiveWeapon()
 
     if ent.IsLambdaPlayer then
@@ -123,6 +145,7 @@ hook.Add("EntityTakeDamage", "TacRP_Counter", function(ent, dmginfo)
     elseif !IsValid(dropwep) or dropwep:GetHoldType() == "fists" or dropwep:GetHoldType() == "normal" or string.find(dropwep:GetClass(), "fist") or string.find(dropwep:GetClass(), "unarmed") or string.find(dropwep:GetClass(), "hand") then
         dmginfo:ScaleDamage(1.5)
     else
+        ent:SetActiveWeapon(NULL)
         ent:DropWeapon(dropwep, dmginfo:GetAttacker():GetPos())
     end
 end)

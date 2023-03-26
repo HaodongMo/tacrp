@@ -2,7 +2,7 @@ ATT.PrintName = "Throw"
 ATT.FullName = "Knife Throw"
 ATT.Icon = Material("entities/tacrp_att_acc_melee.png", "mips smooth")
 ATT.Description = ""
-ATT.Pros = {"ALT-FIRE: Knife Projectile"}
+ATT.Pros = {"ALT-FIRE: Throw knife", "Does not consume weapon or ammo"}
 
 ATT.Category = {"melee_tech"}
 
@@ -26,8 +26,8 @@ ATT.Hook_SecondaryAttack = function(self)
         if !IsValid(rocket) then return end
 
         local src, ang = self:GetOwner():GetShootPos(), self:GetShootDir() + Angle(-3, 0, 0)
-        local spread = 0.01
-        local force = 1500
+        local spread = 0
+        local force = 1200
         local dispersion = Angle(math.Rand(-1, 1), math.Rand(-1, 1), 0)
         dispersion = dispersion * spread * 36
 
@@ -49,6 +49,6 @@ ATT.Hook_SecondaryAttack = function(self)
         self:PlayAnimation("deploy", 1, false, true)
     end)
 
-    self:SetNextSecondaryFire(CurTime() + 0.85)
+    self:SetNextSecondaryFire(CurTime() + 1)
     return true
 end

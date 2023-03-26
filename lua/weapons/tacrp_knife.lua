@@ -29,10 +29,11 @@ SWEP.NPCUsable = false
 
 SWEP.MeleeDamage = 35
 SWEP.MeleeAttackTime = 0.45
+SWEP.MeleeRange = 128
 
 SWEP.Melee2Damage = 55
 SWEP.Melee2AttackTime = 0.75
-SWEP.Melee2Range = 72
+SWEP.Melee2Range = 96
 
 SWEP.Firemode = 2
 
@@ -161,4 +162,7 @@ function SWEP:PrimaryAttack()
 end
 
 function SWEP:GiveDefaultAmmo()
+end
+
+function SWEP:ThinkSprint()
 end

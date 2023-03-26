@@ -29,7 +29,7 @@ SWEP.ViewModelPos = Vector(0, 0, 0)
 SWEP.ViewModelAng = Angle(0, 0, 0)
 
 function SWEP:GetViewModelPosition(pos, ang)
-    if false then
+    if !IsValid(self:GetOwner()) then
         return Vector(0, 0, 0), Angle(0, 0, 0)
     end
 

@@ -32,7 +32,10 @@ ENT.ExplodeSounds = {
 function ENT:Detonate()
     local attacker = self.Attacker or self:GetOwner() or self
 
-    util.BlastDamage(self, attacker, self:GetPos(), 350, 110)
+    local dmg = 110
+    if self.ImpactFuse then dmg = dmg * 0.5 end
+
+    util.BlastDamage(self, attacker, self:GetPos(), 350, dmg)
 
     local fx = EffectData()
     fx:SetOrigin(self:GetPos())

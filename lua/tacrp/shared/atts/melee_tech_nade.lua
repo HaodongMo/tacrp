@@ -1,7 +1,7 @@
 ATT.PrintName = "Grenade"
 ATT.FullName = "Grenadier"
 ATT.Icon = Material("entities/tacrp_att_acc_grenade.png", "mips smooth")
-ATT.Description = "Improves quickthrow, and adds the option to throw rocks."
+ATT.Description = "Always good to have something handy to throw."
 ATT.Pros = {"ALT-FIRE: Quickthrow", "Faster Quickthrow", "Throw Rocks"} -- "RELOAD: Toggle Grenade",
 
 ATT.Category = {"melee_tech"}

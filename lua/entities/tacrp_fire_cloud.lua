@@ -8,7 +8,7 @@ ENT.AdminSpawnable = false
 
 ENT.Model = "models/Items/AR2_Grenade.mdl"
 
-ENT.FireTime = 10
+ENT.FireTime = 8
 
 ENT.Armed = false
 
@@ -37,7 +37,7 @@ function ENT:Initialize()
         self.SpawnTime = CurTime()
         self:Detonate()
 
-        self.FireTime = math.Rand(7, 9)
+        self.FireTime = self.FireTime * math.Rand(0.8, 1.2)
 
         self:SetCollisionGroup(COLLISION_GROUP_PROJECTILE)
     end
@@ -56,7 +56,7 @@ function ENT:Think()
                 self.Light.b = 0
                 self.Light.Brightness = 5
                 self.Light.Size = 256
-                self.Light.DieTime = CurTime() + self.FireTime
+                self.Light.DieTime = CurTime() + 10
             end
         else
             self.Light.Pos = self:GetPos()
@@ -223,6 +223,10 @@ function ENT:Think()
 end
 
 function ENT:OnRemove()
+    if self.Light then
+        self.Light.dietime = CurTime() + 0.5
+        self.Light.decay = 2000
+    end
     if !self.FireSound then return end
     self.FireSound:Stop()
 end
@@ -238,8 +242,6 @@ function ENT:Detonate()
     self.FireSound:Play()
 
     self.FireSound:ChangePitch(80, self.FireTime)
-
-    util.BlastDamage(self, self:GetOwner(), self:GetPos(), 328, 30)
 
     timer.Simple(self.FireTime - 1, function()
         if !IsValid(self) then return end

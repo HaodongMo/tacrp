@@ -6,13 +6,13 @@ ENT.Spawnable                = false
 
 ENT.Model                    = "models/weapons/tacint/w_knife.mdl"
 
-ENT.IsRocket = false // projectile has a booster and will not drop.
+ENT.IsRocket = false
 
-ENT.InstantFuse = false // projectile is armed immediately after firing.
-ENT.RemoteFuse = false // allow this projectile to be triggered by remote detonator.
-ENT.ImpactFuse = true // projectile explodes on impact.
+ENT.InstantFuse = false
+ENT.RemoteFuse = false
+ENT.ImpactFuse = true
 
-ENT.ExplodeOnDamage = false // projectile explodes when it takes damage.
+ENT.ExplodeOnDamage = false
 ENT.ExplodeUnderwater = true
 
 ENT.Delay = 0
@@ -26,7 +26,8 @@ ENT.BounceSounds = {
 
 
 function ENT:Impact(data, collider)
-    self:EmitSound("tacrp/weapons/knife/scrape_metal-" .. math.random(2, 3) .. ".wav", 80, 115)
+    if self.Impacted then return end
+    self.Impacted = true
 
     if IsValid(data.HitEntity) then
         local d = data.OurOldVelocity:GetNormalized()
@@ -35,25 +36,58 @@ function ENT:Impact(data, collider)
         local dmg = DamageInfo()
         dmg:SetAttacker(attacker)
         dmg:SetInflictor(self)
-        dmg:SetDamage(65)
+        dmg:SetDamage(35)
         dmg:SetDamageType(DMG_SLASH)
         dmg:SetDamageForce(d * 5000)
         dmg:SetDamagePosition(data.HitPos)
 
         if !data.HitEntity:IsOnGround() then
             dmg:ScaleDamage(2)
-            data.HitEntity:EmitSound("weapons/crossbow/bolt_skewer1.wav", 90, 110)
+            data.HitEntity:EmitSound("weapons/crossbow/bolt_skewer1.wav", 80, 110)
+        end
+
+        -- Check if the knife is a headshot
+        -- Either the head is the closest bodygroup, or the direction is quite on point
+        local pos = data.HitPos + d * 8
+        local hset = data.HitEntity:GetHitboxSet()
+        local hdot, bhg, bdist, hdist = 0, 0, math.huge, math.huge
+        for i = 0, data.HitEntity:GetHitBoxCount(hset) or 0 do
+
+            local bone = data.HitEntity:GetHitBoxBone(i, hset)
+            local mtx = bone and data.HitEntity:GetBoneMatrix(bone)
+            if !mtx then continue end
+            local hpos = mtx:GetTranslation()
+            local dot = (hpos - data.HitPos):GetNormalized():Dot(d)
+            local dist = (hpos - pos):LengthSqr()
+
+            if data.HitEntity:GetHitBoxHitGroup(i, hset) == HITGROUP_HEAD then
+                hdot = dot
+                hdist = dist
+            end
+            if dist < bdist then
+                bdist = dist
+                bhg = data.HitEntity:GetHitBoxHitGroup(i, hset)
+            end
+        end
+
+        if bhg == HITGROUP_HEAD or (hdot >= 0.92 and hdist < 2304) then
+            dmg:ScaleDamage(2)
+            data.HitEntity:EmitSound("player/headshot" .. math.random(1, 2) .. ".wav", 80, 105)
         end
 
         data.HitEntity:TakeDamageInfo(dmg)
-    end
 
-    local ang = data.OurOldVelocity:Angle()
-    local fx = EffectData()
-    fx:SetOrigin(data.HitPos)
-    fx:SetNormal(-ang:Forward())
-    fx:SetAngles(-ang)
-    util.Effect("ManhackSparks", fx)
+        self:EmitSound("tacrp/weapons/knife/flesh_hit-" .. math.random(1, 5) .. ".wav", 70, 110, 1)
+    else
+        local ang = data.OurOldVelocity:Angle()
+        local fx = EffectData()
+        fx:SetOrigin(data.HitPos)
+        fx:SetNormal(-ang:Forward())
+        fx:SetAngles(-ang)
+        util.Effect("ManhackSparks", fx)
+        self:EmitSound("tacrp/weapons/knife/scrape_metal-" .. math.random(2, 3) .. ".wav", 70, 110, 0.75)
+
+    end
 
     self:Remove()
     return true

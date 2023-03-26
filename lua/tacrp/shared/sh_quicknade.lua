@@ -7,12 +7,14 @@ TacRP.QuickNades = {
         Model = "models/weapons/tacint/v_quicknade_frag.mdl",
         Spoon = true,
         Icon = Material("TacRP/grenades/frag.png", "mips smooth"),
+        CanSetImpact = true,
 
         FullName = "Frag Grenade",
         DetType = "Timed - 2 seconds",
         Description = "Standard explosive grenade spraying shrapnel in a medium radius.\n\nTypically not lethal by itself, but can wound targets or flush them out of cover.",
         Category = "LETHAL",
         SortOrder = 1,
+
     },
     ["flashbang"] = {
         PrintName = "FLASH",
@@ -22,6 +24,7 @@ TacRP.QuickNades = {
         Model = "models/weapons/tacint/v_quicknade_flashbang.mdl",
         Spoon = true,
         Icon = Material("TacRP/grenades/flashbang.png", "mips smooth"),
+        CanSetImpact = true,
 
         FullName = "Flashbang",
         DetType = "Timed - 1.5 seconds",
@@ -37,6 +40,7 @@ TacRP.QuickNades = {
         Model = "models/weapons/tacint/v_quicknade_smoke.mdl",
         Spoon = true,
         Icon = Material("TacRP/grenades/smoke.png", "mips smooth"),
+        CanSetImpact = true,
 
         FullName = "Smoke Grenade",
         DetType = "Timed - 2 seconds",
@@ -53,6 +57,7 @@ TacRP.QuickNades = {
         Spoon = true,
         Material = "models/tacint/weapons/v_models/smoke/gas-1",
         Icon = Material("TacRP/grenades/gas.png", "mips smooth"),
+        CanSetImpact = true,
 
         FullName = "CS Gas Grenade",
         DetType = "Timed - 2 seconds",
@@ -69,6 +74,7 @@ TacRP.QuickNades = {
         Spoon = true,
         Material = "models/tacint/weapons/v_models/smoke/thermite-1",
         Icon = Material("TacRP/grenades/thermite.png", "mips smooth"),
+        CanSetImpact = true,
 
         FullName = "Thermite Grenade",
         DetType = "Timed - 2 seconds",

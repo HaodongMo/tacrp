@@ -48,10 +48,10 @@ function SWEP:Melee(alt)
     })
 
     -- weapon_hl2mpbasebasebludgeon.cpp: do a hull trace if not hit
-    if tr.Fraction == 1 then
+    if tr.Fraction == 1 or !IsValid(tr.Entity) then
         local dim = 32
         local pos2 = tr.HitPos - dir * (dim * 1.732)
-        tr = util.TraceHull({
+        local tr2 = util.TraceHull({
             start = start,
             endpos = pos2,
             filter = filter,
@@ -59,10 +59,10 @@ function SWEP:Melee(alt)
             mins = Vector(-dim, -dim, -dim),
             maxs = Vector(dim, dim, dim)
         })
-        if tr.Fraction < 1 and IsValid(tr.Entity) then
-            local dot = (tr.Entity:GetPos() - start):GetNormalized():Dot(dir)
-            if dot < 0.5 then
-                tr.Fraction = 1
+        if tr2.Fraction < 1 and IsValid(tr2.Entity) then
+            local dot = (tr2.Entity:GetPos() - start):GetNormalized():Dot(dir)
+            if dot >= 0.5 then
+                tr = tr2
             end
         end
     end
@@ -101,60 +101,25 @@ function SWEP:Melee(alt)
         end
 
         if IsValid(tr.Entity) and tr.Entity:IsPlayer() and self:GetValue("MeleeSlow") then
-            tr.Entity:SetNWFloat("TacRPLastBashed", CurTime())
+            tr.Entity.TacRPBashSlow = true
         end
 
-        if IsValid(tr.Entity) and !tr.HitWorld and SERVER then
+        if IsValid(tr.Entity) and !tr.HitWorld then
             --tr.Entity:TakeDamageInfo(dmginfo)
             tr.Entity:DispatchTraceAttack(dmginfo, tr)
         end
-
-        --[[]
-        if IsFirstTimePredicted() then
-            if tr.MatType == MAT_FLESH or tr.MatType == MAT_ALIENFLESH or tr.MatType == MAT_ANTLION or tr.MatType == MAT_BLOODYFLESH then
-                local fx = EffectData()
-                fx:SetOrigin(tr.HitPos)
-
-                util.Effect("BloodImpact", fx)
-            end
-
-            local fx = EffectData()
-            fx:SetOrigin(tr.HitPos)
-            fx:SetEntity(tr.Entity)
-            fx:SetStart(tr.StartPos)
-            fx:SetSurfaceProp(tr.SurfaceProps)
-            fx:SetDamageType(DMG_CLUB)
-            fx:SetHitBox(tr.HitBox)
-
-            util.Effect("Impact", fx)
-        end
-        ]]
     end
-
-    -- self:GetOwner():FireBullets({
-    --     Damage = self:GetValue("MeleeDamage"),
-    --     Force = 32,
-    --     Tracer = 0,
-    --     Distance = 64,
-    --     HullSize = 16,
-    --     Dir = self:GetOwner():EyeAngles():Forward(),
-    --     Src = self:GetOwner():EyePos(),
-    --     Spread = Vector(0, 0, 0),
-    --     IgnoreEntity = self.Shields,
-    --     Callback = function(att, tr, dmg)
-    --         dmg:SetDamageType(DMG_CLUB)
-
-    --         if tr.Hit then
-    --             if tr.Entity:IsNPC() or tr.Entity:IsPlayer() or tr.Entity:IsNextBot() then
-    --                 self:EmitSound(table.Random(self:GetValue("Sound_MeleeHitBody")), 75, 100, 1, CHAN_ITEM)
-    --             else
-    --                 self:EmitSound(table.Random(self:GetValue("Sound_MeleeHit")), 75, 100, 1, CHAN_ITEM)
-    --             end
-    --         end
-    --     end
-    -- })
 
     self:SetLastMeleeTime(CurTime())
     self:SetNextSecondaryFire(CurTime() + (alt and self:GetValue("Melee2AttackTime") or self:GetValue("MeleeAttackTime")))
 
 end
+
+hook.Add("PostEntityTakeDamage", "tacrp_melee", function(ent, dmg, took)
+    if ent.TacRPBashSlow then
+        if took and ent:IsPlayer() then
+            ent:SetNWFloat("TacRPLastBashed", CurTime())
+        end
+        ent.TacRPBashSlow = false
+    end
+end)

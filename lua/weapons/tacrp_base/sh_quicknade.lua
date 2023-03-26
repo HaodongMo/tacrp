@@ -99,6 +99,13 @@ function SWEP:ThrowGrenade()
             rocket.PickupAmmo = nil
         end
 
+        if self:GetValue("QuickNadeTryImpact") and nade.CanSetImpact then
+            rocket.InstantFuse = false
+            rocket.Delay = 0
+            rocket.Armed = false
+            rocket.ImpactFuse = true
+        end
+
         local phys = rocket:GetPhysicsObject()
 
         if phys:IsValid() then

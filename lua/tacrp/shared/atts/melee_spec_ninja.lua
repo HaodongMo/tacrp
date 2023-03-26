@@ -14,21 +14,26 @@ ATT.Hook_PreReload = function(wep)
     if !ply:KeyPressed(IN_RELOAD) then return end
 
     if ply:IsOnGround() and ply:Crouching() then
-        if ply:GetNWFloat("TacRPNinjaSmoke", 0) > CurTime() or ply:GetNWFloat("TacRPDiveTime", 0) + 0.5 > CurTime() then return true end
+        if ply:GetNWFloat("TacRPNinjaSmoke", 0) > CurTime() or ply:GetNWFloat("TacRPDiveTime", 0) + 1 > CurTime() then return true end
         if SERVER then
-            wep:EmitSound("TacRP/weapons/grenade/smoke_explode-1.wav", 80, 110)
+            ply:EmitSound("TacRP/weapons/grenade/smoke_explode-1.wav", 80, 110)
             local cloud = ents.Create( "tacrp_smoke_cloud_ninja" )
             if !IsValid(cloud) then return end
             cloud:SetPos(ply:GetPos())
             cloud:Spawn()
         end
-        ply:SetNWFloat("TacRPNinjaSmoke", CurTime() + 15)
+        ply:SetNWFloat("TacRPNinjaSmoke", CurTime() + 10)
+        local ang = ply:GetAngles()
+        if ang.p >= -15 then
+            ang.p = math.Clamp(ang.p, 45, 180 - 45)
+            ply:SetVelocity(ang:Forward() * -450)
+        end
     elseif !ply:IsOnGround() and ply:Crouching() then
-        if !ply:GetNWBool("TacRPNinjaDive") and ply:GetNWFloat("TacRPDiveTime", 0) + 0.25 < CurTime() and ply:EyeAngles():Forward():Dot(Vector(0, 0, 1)) < -0.25 then
+        if !ply:GetNWBool("TacRPNinjaDive") and ply:GetNWFloat("TacRPDiveTime", 0) + 1 < CurTime() and ply:EyeAngles():Forward():Dot(Vector(0, 0, 1)) < -0.25 then
             ply:SetNWBool("TacRPNinjaDive", true)
             ply:SetNWFloat("TacRPDiveTime", CurTime())
             ply:SetNWVector("TacRPDiveDir", ply:EyeAngles():Forward())
-            wep:EmitSound("weapons/mortar/mortar_fire1.wav", 75, 120)
+            wep:EmitSound("weapons/mortar/mortar_fire1.wav", 65, 120, 0.5)
         end
     elseif !wep:StillWaiting() then
         if (wep.NextPalmPunch or 0) > CurTime() then return end
@@ -39,8 +44,8 @@ ATT.Hook_PreReload = function(wep)
         wep:GetOwner():DoAnimationEvent(ACT_HL2MP_GESTURE_RANGE_ATTACK_FIST)
         wep:EmitSound("npc/fast_zombie/claw_miss1.wav", 75, 90, 1)
 
-        local dmg = 15
-        local range = 48
+        local dmg = 20
+        local range = 64
         local filter = {wep:GetOwner()}
 
         local start = wep:GetOwner():GetShootPos()
@@ -53,10 +58,10 @@ ATT.Hook_PreReload = function(wep)
         })
 
         -- weapon_hl2mpbasebasebludgeon.cpp: do a hull trace if not hit
-        if tr.Fraction == 1 then
+        if tr.Fraction == 1 or !IsValid(tr.Entity) then
             local dim = 32
             local pos2 = tr.HitPos - dir * (dim * 1.732)
-            tr = util.TraceHull({
+            local tr2 = util.TraceHull({
                 start = start,
                 endpos = pos2,
                 filter = filter,
@@ -64,10 +69,10 @@ ATT.Hook_PreReload = function(wep)
                 mins = Vector(-dim, -dim, -dim),
                 maxs = Vector(dim, dim, dim)
             })
-            if tr.Fraction < 1 and IsValid(tr.Entity) then
-                local dot = (tr.Entity:GetPos() - start):GetNormalized():Dot(dir)
-                if dot < 0.5 then
-                    tr.Fraction = 1
+            if tr2.Fraction < 1 and IsValid(tr2.Entity) then
+                local dot = (tr2.Entity:GetPos() - start):GetNormalized():Dot(dir)
+                if dot >= 0 then
+                    tr = tr2
                 end
             end
         end
@@ -97,12 +102,12 @@ ATT.Hook_PreReload = function(wep)
             else
                 local vel = ply:GetVelocity():Length()
                 wep:EmitSound("tacrp/weapons/melee_hit-" .. math.random(1, 2) .. ".wav", 75, 100, 1, CHAN_ITEM)
-                if ply:IsOnGround() and math.abs(tr.HitNormal:Dot(Vector(0, 0, 1))) <= 0.25 and vel <= 250 then
+                if ply:IsOnGround() and math.abs(tr.HitNormal:Dot(Vector(0, 0, 1))) <= 0.25 and (tr.Normal:Dot(ply:GetAimVector())) >= 0.5 and vel <= 250 then
                     ply:SetVelocity(Vector(0, 0, Lerp(vel / 250, 450, 250)))
                 end
             end
 
-            if IsValid(tr.Entity) and !tr.HitWorld and SERVER then
+            if IsValid(tr.Entity) and !tr.HitWorld then
                 --tr.Entity:TakeDamageInfo(dmginfo)
                 tr.Entity:DispatchTraceAttack(dmginfo, tr)
             end
@@ -132,7 +137,7 @@ function ATT.TacticalDraw(self)
     surface.SetDrawColor(0, 0, 0, 200)
     TacRP.DrawCorneredBox(x, y, w, h)
 
-    local c = math.Clamp((self:GetOwner():GetNWFloat("TacRPNinjaSmoke", 0) - CurTime()) / 15, 0, 1)
+    local c = math.Clamp((self:GetOwner():GetNWFloat("TacRPNinjaSmoke", 0) - CurTime()) / 10, 0, 1)
     surface.SetDrawColor(150, 150, 150, 75)
     surface.DrawRect(x, y + h * (1 - c), w, h * c)
 
@@ -143,7 +148,7 @@ function ATT.TacticalDraw(self)
 end
 
 
-hook.Add("Move", "TacRP_Ninja", function(ply, mv)
+hook.Add("FinishMove", "TacRP_Ninja", function(ply, mv)
     if ply:GetNWBool("TacRPNinjaDive") then
         if ply:IsOnGround() or !ply:Alive() or ply:GetMoveType() == MOVETYPE_NOCLIP then
             ply:SetNWBool("TacRPNinjaDive", false)
@@ -165,7 +170,7 @@ hook.Add("GetFallDamage", "TacRP_Ninja", function(ply, speed)
             util.Effect("ThumperDust", eff)
 
             local dmginfo = DamageInfo()
-            dmginfo:SetDamage(math.Clamp((speed - 250) / 25, 10, 70))
+            dmginfo:SetDamage(math.Clamp((speed - 250) / 20, 25, 70))
             dmginfo:SetDamageForce(Vector(0, 0, 3000))
             dmginfo:SetDamagePosition(ply:GetPos())
             dmginfo:SetDamageType(DMG_CRUSH)
@@ -175,7 +180,7 @@ hook.Add("GetFallDamage", "TacRP_Ninja", function(ply, speed)
             for _, ent in pairs(ents.FindInSphere(ply:GetPos(), 256)) do
                 if ent == ply or !IsValid(ent:GetPhysicsObject()) then continue end
                 if ent:IsPlayer() or ent:IsNPC() then
-                    ent:SetVelocity(Vector(0, 0, math.Clamp(speed / 3, 250, 1000)))
+                    ent:SetVelocity(Vector(0, 0, math.Clamp(speed / 2.5, 250, 750)))
                 else
                     ent:GetPhysicsObject():ApplyForceCenter(Vector(0, 0, 3000))
                 end

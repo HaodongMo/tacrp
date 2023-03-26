@@ -34,7 +34,6 @@ function ENT:Detonate()
     self:EmitSound(table.Random(self.ExplodeSounds), 75)
 
     local cloud = ents.Create( "TacRP_smoke_cloud" )
-
     if !IsValid(cloud) then return end
 
     cloud:SetPos(self:GetPos())

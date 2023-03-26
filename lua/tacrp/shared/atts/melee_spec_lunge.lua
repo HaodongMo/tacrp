@@ -1,35 +1,33 @@
 ATT.PrintName = "Frenzy"
 ATT.Icon = Material("entities/tacrp_att_acc_melee.png", "mips smooth")
 ATT.Description = "Close the distance and ensnare your enemies."
-ATT.Pros = {"RELOAD (Ground): Lunge forwards", "RELOAD (Mid-Air): Lunge towards point of aim", "Slow on Hit"}
+ATT.Pros = {"RELOAD (Ground): Lunge forwards", "RELOAD (Mid-Air): Lunge towards point of aim"}
 
 ATT.Category = {"melee_spec"}
 
 ATT.SortOrder = 3
 
-ATT.MeleeSlow = true
-
 ATT.Hook_PreReload = function(wep)
     local ply = wep:GetOwner()
 
-    if !ply:KeyPressed(IN_RELOAD) or ply:GetNWFloat("TacRPDashCharge", 0) < 0.5 then return end
+    if !ply:KeyPressed(IN_RELOAD) or ply:GetNWFloat("TacRPDashCharge", 0) < 0.8 or (ply.TacRPNextLunge or 0) > CurTime() then return end
 
-    ply:SetNWFloat("TacRPDashCharge", ply:GetNWFloat("TacRPDashCharge", 0) - 0.5)
+    ply.TacRPNextLunge = CurTime() + 0.5
+    ply:SetNWFloat("TacRPDashCharge", ply:GetNWFloat("TacRPDashCharge", 0) - 0.8)
 
     local ang = Angle(0, ply:GetAngles().y, 0)
 
-    if SERVER then
-        ply:EmitSound("npc/fast_zombie/leap1.wav", 80, 105)
-    end
 
     if ply:IsOnGround() then
-        ply:SetVelocity(ang:Forward() * 600 + Vector(0, 0, 250))
+        ply:SetVelocity(ang:Forward() * 600 + Vector(0, 0, 300))
+        if SERVER then
+            ply:EmitSound("npc/fast_zombie/leap1.wav", 80, 95)
+        end
     else
-        local dot = ply:GetAngles():Forward():Dot(ply:GetVelocity():GetNormalized())
-        if dot < 0.5 then
-            ply:SetVelocity(-ply:GetVelocity() + ply:GetAngles():Forward() * 500)
-        else
-            ply:SetVelocity(ply:GetAngles():Forward() * 400)
+        local int = math.Clamp(ply:GetVelocity():Dot(ply:GetAngles():Forward()) ^ 0.9, 0, 400)
+        ply:SetVelocity(ply:GetVelocity() * -1 + ply:GetAngles():Forward() * (int + 500))
+        if SERVER then
+            ply:EmitSound("npc/fast_zombie/leap1.wav", 80, 105)
         end
     end
 
@@ -67,5 +65,5 @@ function ATT.TacticalDraw(self)
     surface.DrawRect(x, y, w * c, h)
 
     surface.SetDrawColor(255, 255, 255, 200)
-    surface.DrawLine(x + w * 0.5, y, x + w * 0.5, y + h)
+    surface.DrawLine(x + w * 0.8, y, x + w * 0.8, y + h)
 end

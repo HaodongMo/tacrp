@@ -29,12 +29,20 @@ function ENT:Detonate()
     if self:WaterLevel() > 0 then self:Remove() return end
     local attacker = self.Attacker or self:GetOwner() or self
 
+    local dmg = 50
+    if self.ImpactFuse then dmg = dmg * 0.5 end
+    util.BlastDamage(self, attacker, self:GetPos(), 350, dmg)
+
     self:EmitSound(table.Random(self.ExplodeSounds), 75)
 
     local cloud = ents.Create( "TacRP_fire_cloud" )
 
     if !IsValid(cloud) then return end
 
+    local t = 8
+    if self.ImpactFuse then t = t * 0.5 end
+
+    cloud.FireTime = t
     cloud:SetPos(self:GetPos())
     cloud:SetAngles(self:GetAngles())
     cloud:SetOwner(attacker)

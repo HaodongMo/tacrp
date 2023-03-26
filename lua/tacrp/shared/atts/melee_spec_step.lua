@@ -1,7 +1,7 @@
 ATT.PrintName = "Airdash"
 ATT.Icon = Material("entities/tacrp_att_acc_melee.png", "mips smooth")
 ATT.Description = "Mobility tool used by blood-fueled robots and transgender women."
-ATT.Pros = {"RELOAD: Dash in movement direction", "Dash redirects momentum"}
+ATT.Pros = {"RELOAD: Dash in movement direction", "Invulnerable during dash"}
 
 ATT.Category = {"melee_spec"}
 
@@ -10,12 +10,11 @@ ATT.SortOrder = 1
 ATT.Hook_PreReload = function(wep)
     local ply = wep:GetOwner()
 
-    if ply:GetNWFloat("TacRPDashTime", 0) + 0.3 > CurTime() or !ply:KeyPressed(IN_RELOAD) or ply:GetNWFloat("TacRPDashCharge", 0) < 1 / 3 then return end
+    if ply:GetNWFloat("TacRPDashTime", 0) + 0.25 > CurTime() or !ply:KeyPressed(IN_RELOAD) or ply:GetMoveType() == MOVETYPE_NOCLIP or ply:GetNWFloat("TacRPDashCharge", 0) < 1 / 3 then return end
 
     ply:SetNWFloat("TacRPDashCharge", ply:GetNWFloat("TacRPDashCharge", 0) - 1 / 3)
     ply:SetNWVector("TacRPDashDir", Vector())
     ply:SetNWFloat("TacRPDashTime", CurTime())
-    ply:SetNWBool("TacRPDashGrounded", ply:IsOnGround())
 
     if SERVER then
         ply:EmitSound("player/suit_sprint.wav", 80, 95)
@@ -27,7 +26,7 @@ end
 ATT.Hook_PostThink = function(wep)
     local ply = wep:GetOwner()
     if (game.SinglePlayer() or IsFirstTimePredicted()) and ply:GetNWFloat("TacRPDashTime", 0) + 0.3 < CurTime() then
-        ply:SetNWFloat("TacRPDashCharge", math.min(1, ply:GetNWFloat("TacRPDashCharge", 0) + FrameTime() / 7.5))
+        ply:SetNWFloat("TacRPDashCharge", math.min(1, ply:GetNWFloat("TacRPDashCharge", 0) + FrameTime() / 5))
     end
 end
 
@@ -60,62 +59,120 @@ function ATT.TacticalDraw(self)
 
 end
 
--- safe to use since Move is followed up by FinishMove immediately... or so they say
-hook.Add("Move", "TacRP_Quickstep", function(ply, mv)
+hook.Add("StartCommand", "TacRP_Quickstep", function(ply, cmd)
     if ply:GetNWFloat("TacRPDashTime", 0) + 0.1 > CurTime() then
-
-        if ply:GetNWVector("TacRPDashDir", Vector()) == Vector() then
-            local ang = Angle(0, mv:GetAngles().y, 0)
-            local vel = Vector()
-            vel:Add(ang:Forward() * mv:GetForwardSpeed())
-            vel:Add(ang:Right() * mv:GetSideSpeed())
-            vel:Add(ang:Up() * mv:GetUpSpeed())
-            if vel:LengthSqr() == 0 then vel = ang:Forward() end
-            vel:Normalize()
-            ply:SetNWFloat("TacRPDashStored", ply:GetVelocity():Length())
-            ply:SetNWVector("TacRPDashDir", vel)
-        end
-
-        if mv:KeyPressed(IN_JUMP) then -- ply:IsOnGround() and
-            -- cancel the dash
-            local buffer = CurTime() - ply:GetNWFloat("TacRPDashTime", 0)
-            local v = ply:GetNWVector("TacRPDashDir") * 500 --(250 + math.max(250, math.min(ply:GetRunSpeed(), ply:GetNWFloat("TacRPDashStored"))))
-
-            mv:SetVelocity(v)
-            mv:SetButtons(bit.band(mv:GetButtons(), bit.bnot(IN_JUMP)))
-
-            ply:SetNWFloat("TacRPDashTime", 0)
-            ply:SetNWVector("TacRPDashDir", Vector())
-
-            -- Cancel sandbox jump boost.
-            -- if player_manager.GetPlayerClass(ply) == "player_sandbox" and bit.band( mv:GetOldButtons(), IN_JUMP ) == 0 and ply:OnGround() then
-            --     local forward = ply:GetNWVector("TacRPDashDir")
-            --     local speedBoostPerc = ( ( !ply:Crouching() ) and 0.5 ) or 0.1
-            --     local speedAddition = math.abs( mv:GetForwardSpeed() * speedBoostPerc )
-            --     local maxSpeed = mv:GetMaxSpeed() * ( 1 + speedBoostPerc )
-            --     local newSpeed = speedAddition + mv:GetVelocity():Length2D()
-            --     if newSpeed > maxSpeed then
-            --         speedAddition = speedAddition - (newSpeed - maxSpeed)
-            --     end
-            --     if mv:GetVelocity():Dot(forward) < 0 then
-            --         speedAddition = -speedAddition
-            --     end
-
-            --     print(speedAddition)
-            --     v = v - speedAddition * forward * 1
-            --     --mv:SetVelocity(mv:GetVelocity() + speedAddition * forward * 1)
-            -- end
-
-        else
-            local d = (1 - ((CurTime() - ply:GetNWFloat("TacRPDashTime", 0)) / 0.1))
-            mv:SetVelocity(ply:GetNWVector("TacRPDashDir") * FrameTime() * 600 * d * math.max(ply:GetRunSpeed(), 250))
-        end
-    elseif ply:GetNWVector("TacRPDashDir", Vector()) != Vector() then
-        mv:SetVelocity(math.min(ply:GetRunSpeed(), ply:GetNWFloat("TacRPDashStored")) * ply:GetNWVector("TacRPDashDir"))
-        ply:SetNWVector("TacRPDashDir", Vector())
+        -- cmd:SetButtons(bit.band(cmd:GetButtons(), bit.bnot(IN_JUMP)))
+        -- cmd:SetUpMove(0)
     end
+end)
+
+hook.Add("SetupMove", "TacRP_Quickstep", function(ply, mv, cmd)
+    if !IsFirstTimePredicted() then return end
+    if ply:GetNWFloat("TacRPDashTime", 0) + 0.1 > CurTime() then
+        if !ply.TacRPDashDir and !ply.TacRPDashCancel then
+            ply.TacRPDashDir = TacRP.GetCmdVector(cmd, true)
+            ply.TacRPDashStored = ply:GetVelocity():Length()
+            ply.TacRPDashCancel = nil
+            ply.TacRPDashPending = true
+            ply.TacRPDashGrounded = ply:IsOnGround()
+
+            local f, s = cmd:GetForwardMove(), cmd:GetSideMove()
+            if math.abs(f + s) == 0 then f = 10000 end
+
+            ply:ViewPunch(Angle(f / 2500, s / -5000, s / 2500))
+
+            ply:SetVelocity(ply.TacRPDashDir * ply:GetRunSpeed() * 4)
+        end
+
+        if ply.TacRPDashGrounded and ply.TacRPDashCancel == nil and cmd:KeyDown(IN_JUMP) then
+            --ply:SetVelocity(ply.TacRPDashDir * ply:GetRunSpeed() * 1 + Vector(0, 0, 5 * ply:GetJumpPower()))
+            ply.TacRPDashGrounded = false
+            ply.TacRPDashCancel = CurTime()
+            ply:SetNWFloat("TacRPDashTime", 0)
+        end
+    elseif ply:GetNWFloat("TacRPDashTime", 0) + 0.1 <= CurTime() then
+        if ply.TacRPDashCancel != nil and CurTime() - ply.TacRPDashCancel > 0 and !ply:IsOnGround() then
+            ply:SetVelocity(ply:GetVelocity():GetNegated() + ply.TacRPDashDir * ply:GetRunSpeed() * 1.5 + Vector(0, 0, 2 * ply:GetJumpPower()))
+            ply.TacRPDashCancel = nil
+            ply.TacRPDashDir = nil
+        elseif ply.TacRPDashDir and ply.TacRPDashCancel == nil then
+            ply.TacRPDashDir = nil
+            if !ply:IsOnGround() then
+                ply:SetVelocity(ply:GetVelocity():GetNegated() / 1.5)
+            end
+        end
+    end
+end)
+
+hook.Add("FinishMove", "TacRP_Quickstep", function(ply, mv)
+    if ply:GetNWFloat("TacRPDashTime", 0) + 0.1 > CurTime() and ply.TacRPDashCancel == nil then
+        local v = mv:GetVelocity()
+        v.z = 0
+        mv:SetVelocity(v)
+    end
+    -- if ply:GetNWFloat("TacRPDashTime", 0) + 0.1 > CurTime() then
+
+    --     -- if ply.TacRPCancelPending  then
+    --     --     mv:SetVelocity((ply:GetRunSpeed() + math.Clamp((ply.TacRPDashStored - ply:GetRunSpeed()) ^ 0.5, 0, 500)) * ply:GetNWVector("TacRPDashDir"))
+
+    --     --     ply:SetNWFloat("TacRPDashTime", 0)
+    --     --     ply.TacRPDashDir = nil
+    --     --     ply.TacRPCancelPending = false
+    --     -- end
+
+    --     -- if ply.TacRPDashPending and ply.TacRPDashDir then
+    --     --     ply.TacRPDashPending = false
+    --     --     mv:SetVelocity(ply.TacRPDashDir * ply:GetRunSpeed() * 50)
+    --     -- elseif ply.TacRPCancelPending  then
+    --     --     print("cancelled", mv:GetVelocity():GetNormalized())
+    --     --     mv:SetVelocity((ply:GetRunSpeed() + math.Clamp((ply.TacRPDashStored - ply:GetRunSpeed()) ^ 0.5, 0, 500)) * ply:GetNWVector("TacRPDashDir"))
+    --     --     ply:SetNWFloat("TacRPDashTime", 0)
+    --     --     ply.TacRPDashDir = nil
+    --     --     ply.TacRPCancelPending = false
+    --     -- end
+
+    --     -- if ply:IsOnGround() and mv:KeyPressed(IN_JUMP) then
+    --     --     -- cancel the dash
+    --     --     local buffer = CurTime() - ply:GetNWFloat("TacRPDashTime", 0)
+    --     --     local v = ply:GetNWVector("TacRPDashDir") * 500 + Vector(0, 0, ply:GetJumpPower())
+
+    --     --     mv:SetVelocity(v)
+    --     --     --mv:SetButtons(bit.band(mv:GetButtons(), bit.bnot(IN_JUMP)))
+
+    --     --     ply:SetNWFloat("TacRPDashTime", 0)
+    --     --     ply:SetNWVector("TacRPDashDir", Vector())
+
+    --     --     -- Cancel sandbox jump boost.
+    --     --     -- if player_manager.GetPlayerClass(ply) == "player_sandbox" and bit.band( mv:GetOldButtons(), IN_JUMP ) == 0 and ply:OnGround() then
+    --     --     --     local forward = ply:GetNWVector("TacRPDashDir")
+    --     --     --     local speedBoostPerc = ( ( !ply:Crouching() ) and 0.5 ) or 0.1
+    --     --     --     local speedAddition = math.abs( mv:GetForwardSpeed() * speedBoostPerc )
+    --     --     --     local maxSpeed = mv:GetMaxSpeed() * ( 1 + speedBoostPerc )
+    --     --     --     local newSpeed = speedAddition + mv:GetVelocity():Length2D()
+    --     --     --     if newSpeed > maxSpeed then
+    --     --     --         speedAddition = speedAddition - (newSpeed - maxSpeed)
+    --     --     --     end
+    --     --     --     if mv:GetVelocity():Dot(forward) < 0 then
+    --     --     --         speedAddition = -speedAddition
+    --     --     --     end
+
+    --     --     --     print(speedAddition)
+    --     --     --     v = v - speedAddition * forward * 1
+    --     --     --     --mv:SetVelocity(mv:GetVelocity() + speedAddition * forward * 1)
+    --     --     -- end
+    --     -- end
+    -- elseif ply.TacRPDashDir != nil then
+    --     mv:SetVelocity((ply:GetRunSpeed() + math.Clamp((ply:GetNWFloat("TacRPDashStored") - ply:GetRunSpeed()) ^ 0.5, 0, 500)) * ply:GetNWVector("TacRPDashDir"))
+    --     ply.TacRPDashDir = nil
+    -- end
 end)
 
 hook.Add("PlayerSpawn", "TacRP_Quickstep", function(ply)
     ply:SetNWFloat("TacRPDashCharge", 1)
+end)
+
+hook.Add("EntityTakeDamage", "TacRP_Quickstep", function(ent, dmginfo)
+    if !ent:IsPlayer() or ent:GetNWFloat("TacRPDashTime", 0) + 0.1 <= CurTime() then return end
+    ent:EmitSound("weapons/fx/nearmiss/bulletltor0" .. math.random(3, 4) .. ".wav")
+    return true
 end)

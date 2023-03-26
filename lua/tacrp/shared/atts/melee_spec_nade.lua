@@ -1,8 +1,9 @@
-ATT.PrintName = "Toggle Nade"
-ATT.FullName = "Toggle Grenade"
+ATT.PrintName = "Bomber"
+ATT.FullName = "Bombardier"
 ATT.Icon = Material("entities/tacrp_att_acc_grenade.png", "mips smooth")
-ATT.Description = "Use the reload bind to switch between grenades."
-ATT.Pros = {"RELOAD: Toggle Grenade"}
+ATT.Description = "Use jury rigged impact grenades to ruin someone's day."
+ATT.Pros = {"RELOAD: Toggle Grenade", "Grenades explode on impact"}
+ATT.Cons = {"Slower Quickthrow", "Grenade Damage"}
 
 ATT.Category = {"melee_spec"}
 ATT.Free = true
@@ -16,3 +17,6 @@ ATT.Hook_PreReload = function(self)
     end
     return true
 end
+
+ATT.QuickNadeTryImpact = true
+ATT.Mult_QuickNadeTimeMult = 1.5
