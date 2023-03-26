@@ -111,3 +111,9 @@ hook.Add("EntityTakeDamage", "TacRP_Quickstep", function(ent, dmginfo)
     ent:EmitSound("weapons/fx/nearmiss/bulletltor0" .. math.random(3, 4) .. ".wav")
     return true
 end)
+
+hook.Add("PlayerSpawn", "TacRP_Quickstep", function(ply, trans)
+    if trans then return end
+    ply:SetNWFloat("TacRPDashCharge", 1)
+    ply:SetNWFloat("TacRPNinjaSmoke", 0)
+end)
