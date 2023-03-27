@@ -75,6 +75,12 @@ hook.Add("SetupMove", "TacRP_Quickstep", function(ply, mv, cmd)
             ply:ViewPunch(Angle(f / 2500, s / -5000, s / 2500))
 
             ply:SetVelocity(ply.TacRPDashDir * ply:GetRunSpeed() * 4)
+
+            local eff = EffectData()
+            eff:SetOrigin(ply:GetPos())
+            eff:SetNormal(ply.TacRPDashDir)
+            eff:SetEntity(ply)
+            util.Effect("tacrp_dashsmoke", eff)
         end
 
         if ply.TacRPDashGrounded and ply.TacRPDashCancel == nil and cmd:KeyDown(IN_JUMP) then
