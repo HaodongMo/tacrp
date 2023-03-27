@@ -29,6 +29,11 @@ SWEP.ArcadeStats = {
 
 // "ballistics"
 
+SWEP.Damage_Max = 200 // just to fool the ratings
+SWEP.Damage_Min = 150
+SWEP.Range_Max = 4000
+SWEP.Range_Min = 1000
+
 SWEP.ShootEnt = "tacrp_proj_40mm_he"
 SWEP.ShootEntForce = 7000
 
