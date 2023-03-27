@@ -60,8 +60,8 @@ function TacRP.LoadAtts()
 
     TacRP.Attachments_Bits = math.min(math.ceil(math.log(TacRP.Attachments_Count + 1, 2)), 32)
 
-    for _, e in pairs(ents.GetAll()) do
-        if e:IsWeapon() and e.ArcticTacRP then
+    for _, e in pairs(ents.GetAll() or {}) do
+        if IsValid(e) and e:IsWeapon() and e.ArcticTacRP then
             e:InvalidateCache()
         end
     end

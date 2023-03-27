@@ -2,36 +2,38 @@ function EFFECT:Init(data)
     local pos = data:GetOrigin()
     local dir = data:GetNormal()
 
-    self.EndTime = CurTime() + 0.25
-    self.TrailEnt = data:GetEntity()
-
     local emitter = ParticleEmitter(pos)
-    local amt = 16
+    local amt = 24
 
-    if IsValid(self.TrailEnt) and self.TrailEnt:IsOnGround() then
+    if IsValid(data:GetEntity()) and data:GetEntity():IsOnGround() then
         pos = pos + Vector(0, 0, 2)
+
+        local dir2 = Vector(dir)
+        dir2.z = 0
+        dir2:Normalize()
 
         for i = 1, amt do
             local smoke = emitter:Add("particle/smokestack", pos)
-            smoke:SetVelocity(dir * -200 + VectorRand() * 128 + Vector(0, 0, math.Rand(50, 100)))
-            smoke:SetStartAlpha(200)
+            smoke:SetVelocity(dir2 * math.Rand(-600, -200) + VectorRand() * 128 + Vector(0, 0, math.Rand(250, 400)))
+            smoke:SetGravity(Vector(0, 0, -300))
+            smoke:SetStartAlpha(150)
             smoke:SetEndAlpha(0)
             smoke:SetStartSize(8)
-            smoke:SetEndSize(24)
+            smoke:SetEndSize(32)
             smoke:SetRoll(math.Rand(-180, 180))
             smoke:SetRollDelta(math.Rand(-0.2, 0.2))
             smoke:SetColor(200, 200, 200)
-            smoke:SetAirResistance(150)
+            smoke:SetAirResistance(200)
             smoke:SetCollide(true)
             smoke:SetBounce(0.2)
             smoke:SetLighting(true)
-            smoke:SetDieTime(0.5)
+            smoke:SetDieTime(1)
         end
     else
         for i = 1, amt do
             local _, a = LocalToWorld(Vector(), Angle((i / amt) * 360, 90, 0), pos, dir:Angle())
             local smoke = emitter:Add("particle/smokestack", pos)
-            smoke:SetVelocity(dir * -50 + 150 * a:Up())
+            smoke:SetVelocity(dir * -50 + 150 * a:Up() + VectorRand() * 8)
             smoke:SetStartAlpha(200)
             smoke:SetEndAlpha(0)
             smoke:SetStartSize(8)
@@ -43,7 +45,7 @@ function EFFECT:Init(data)
             smoke:SetCollide(true)
             smoke:SetBounce(0.2)
             smoke:SetLighting(true)
-            smoke:SetDieTime(0.5)
+            smoke:SetDieTime(0.75)
         end
     end
 
@@ -51,31 +53,8 @@ function EFFECT:Init(data)
 end
 
 function EFFECT:Think()
-    if CurTime() > self.EndTime or !IsValid(self.TrailEnt) or (self.TrailEnt:IsPlayer() and !self.TrailEnt:Alive()) then
-        return false
-    end
-    return true
+    return false
 end
 
 function EFFECT:Render()
-    local pos = self.TrailEnt:GetPos() + Vector( 0, 0, 1 )
-    local emitter = ParticleEmitter(pos)
-    local d = math.Clamp((self.EndTime - CurTime()) / 0.15, 0, 1) ^ 2
-
-    local smoke = emitter:Add("particle/smokestack", pos)
-    smoke:SetVelocity(VectorRand() * 4)
-    smoke:SetStartAlpha(d * 150)
-    smoke:SetEndAlpha(0)
-    smoke:SetStartSize(4)
-    smoke:SetEndSize(24)
-    smoke:SetRoll(math.Rand(-180, 180))
-    smoke:SetRollDelta(math.Rand(-0.2, 0.2))
-    smoke:SetColor(200, 200, 200)
-    smoke:SetAirResistance(15)
-    smoke:SetCollide(false)
-    smoke:SetBounce(0.2)
-    smoke:SetLighting(true)
-    smoke:SetDieTime(0.25)
-
-    emitter:Finish()
 end

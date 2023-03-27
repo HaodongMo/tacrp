@@ -14,26 +14,39 @@ local chargeamt = 0.7
 ATT.Hook_PreReload = function(wep)
     local ply = wep:GetOwner()
 
-    if !ply:KeyPressed(IN_RELOAD) or ply:GetNWFloat("TacRPDashCharge", 0) < chargeamt or (ply.TacRPNextLunge or 0) > CurTime() then return end
+    if !ply:KeyPressed(IN_RELOAD) or ply:GetMoveType() == MOVETYPE_NOCLIP or ply:GetNWFloat("TacRPDashCharge", 0) < chargeamt or (ply.TacRPNextLunge or 0) > CurTime() then return end
 
     ply.TacRPNextLunge = CurTime() + 0.5
     ply:SetNWFloat("TacRPDashCharge", ply:GetNWFloat("TacRPDashCharge", 0) - chargeamt)
 
     local ang = Angle(0, ply:GetAngles().y, 0)
-
+    local vel
 
     if ply:IsOnGround() then
-        ply:SetVelocity(ang:Forward() * 600 + Vector(0, 0, 300))
+        vel = ang:Forward() * 600 + Vector(0, 0, 300)
         if SERVER then
             ply:EmitSound("npc/fast_zombie/leap1.wav", 80, 95)
         end
     else
         local int = math.Clamp(ply:GetVelocity():Dot(ply:GetAngles():Forward()) ^ 0.9, 0, 400)
-        ply:SetVelocity(ply:GetVelocity() * -1 + ply:GetAngles():Forward() * (int + 500))
+        vel = ply:GetVelocity() * -1 + ply:GetAngles():Forward() * (int + 500)
         if SERVER then
             ply:EmitSound("npc/fast_zombie/leap1.wav", 80, 105)
         end
     end
+
+    ply:DoCustomAnimEvent(PLAYERANIMEVENT_JUMP , -1)
+
+    ply:SetVelocity(vel)
+
+    -- so client can draw the effect. blehhhh
+    if game.SinglePlayer() and SERVER then wep:CallOnClient("Reload") end
+
+    local eff = EffectData()
+    eff:SetOrigin(ply:GetPos())
+    eff:SetNormal(vel:GetNormalized())
+    eff:SetEntity(ply)
+    util.Effect("tacrp_leapsmoke", eff)
 
     return true
 end
