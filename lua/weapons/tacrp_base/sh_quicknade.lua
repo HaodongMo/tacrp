@@ -24,7 +24,12 @@ function SWEP:PrimeGrenade()
         self:GetOwner():SetAmmo(ammo - 1, nade.Ammo)
     end
 
-    local t = self:PlayAnimation("prime_grenade", self:GetValue("QuickNadeTimeMult") / (nade.ThrowSpeed or 1), true)
+    local rate = self:GetValue("QuickNadeTimeMult") / (nade.ThrowSpeed or 1)
+    if self:GetValue("QuickNadeTryImpact") and nade.CanSetImpact then
+        rate = rate * 1.5
+    end
+
+    local t = self:PlayAnimation("prime_grenade", rate, true)
 
     self:SetPrimedGrenade(true)
     self:ToggleBlindFire(TacRP.BLINDFIRE_NONE)

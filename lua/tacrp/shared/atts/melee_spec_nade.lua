@@ -19,4 +19,4 @@ ATT.Hook_PreReload = function(self)
 end
 
 ATT.QuickNadeTryImpact = true
-ATT.Mult_QuickNadeTimeMult = 1.5
+-- ATT.Mult_QuickNadeTimeMult = 1.5
