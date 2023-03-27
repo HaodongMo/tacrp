@@ -59,9 +59,13 @@ function TacRP.LoadAtts()
     end
 
     TacRP.Attachments_Bits = math.min(math.ceil(math.log(TacRP.Attachments_Count + 1, 2)), 32)
-end
 
-TacRP.LoadAtts()
+    for _, e in pairs(ents.GetAll()) do
+        if e:IsWeapon() and e.ArcticTacRP then
+            e:InvalidateCache()
+        end
+    end
+end
 
 function TacRP.GetAttTable(name)
     local shortname = name
@@ -103,25 +107,25 @@ end
 
 if CLIENT then
 
-concommand.Add("TacRP_reloadatts", function()
+concommand.Add("tacrp_reloadatts", function()
     if !LocalPlayer():IsSuperAdmin() then return end
 
-    net.Start("TacRP_reloadatts")
+    net.Start("tacrp_reloadatts")
     net.SendToServer()
 end)
 
-net.Receive("TacRP_reloadatts", function(len, ply)
+net.Receive("tacrp_reloadatts", function(len, ply)
     TacRP.LoadAtts()
 end)
 
 elseif SERVER then
 
-net.Receive("TacRP_reloadatts", function(len, ply)
+net.Receive("tacrp_reloadatts", function(len, ply)
     if !ply:IsSuperAdmin() then return end
 
     TacRP.LoadAtts()
 
-    net.Start("TacRP_reloadatts")
+    net.Start("tacrp_reloadatts")
     net.Broadcast()
 end)
 
@@ -146,16 +150,17 @@ function TacRP.NearBench(ply)
 end
 
 function TacRP.CanCustomize(ply, wep, att, slot)
-
     if !TacRP.NearBench(ply) then return false end
-
     return true
 end
 
+// Unfortunately this only runs when the GAMEMODE is reloaded, not each attachment
+local last_reload = 0
 hook.Add("OnReloaded", "TacRP_ReloadAtts", function()
-    if game.SinglePlayer() then
-        print("Reloading...")
+    if last_reload != CurTime() then
+        last_reload = CurTime()
         TacRP.LoadAtts()
+
         for _, e in pairs(ents.GetAll()) do
             if e:IsWeapon() and e.ArcticTacRP then
                 e:InvalidateCache()
@@ -163,3 +168,5 @@ hook.Add("OnReloaded", "TacRP_ReloadAtts", function()
         end
     end
 end)
+
+TacRP.LoadAtts()
