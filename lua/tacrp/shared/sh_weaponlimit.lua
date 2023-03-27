@@ -44,13 +44,16 @@ hook.Add("PlayerGiveSWEP", "TacRP_Pickup", function(ply, wepname, weptbl)
     local _, weps = check(ply, weapons.Get(wepname) or {Slot = slot[wepname]})
     if weps and !ply:HasWeapon(wepname) then
         local mode = GetConVar("tacrp_slot_action"):GetInt()
+        local limit = GetConVar("tacrp_slot_limit"):GetInt()
 
         if mode == 0 then
-            ply:ChatPrint("[TacRP] Couldn't spawn " .. weptbl.PrintName .. " due to the slot limit (max " .. GetConVar("tacrp_slot_limit"):GetInt() .. ").")
+            ply:ChatPrint("[TacRP] Couldn't spawn " .. weptbl.PrintName .. " due to the slot limit (max " .. limit .. ").")
             return false
         elseif mode == 1 or mode == 2 then
 
-            local str = #weps == 1 and (weps[1]:GetPrintName() .. " was") or (#weps .. " weapons were")
+            local amt = #weps + 1 - limit
+
+            local str = amt == 1 and (weps[1]:GetPrintName() .. " was") or (amt .. " weapons were")
             str = str .. (mode == 1 and " removed" or " dropped")
 
             for _, e in pairs(weps) do
@@ -59,9 +62,11 @@ hook.Add("PlayerGiveSWEP", "TacRP_Pickup", function(ply, wepname, weptbl)
                 else
                     ply:DropWeapon(e, nil, ply:GetForward() * 50)
                 end
+                amt = amt - 1
+                if amt <= 0 then break end
             end
 
-            ply:ChatPrint("[TacRP] " .. str .. " due to the slot limit (max " .. GetConVar("tacrp_slot_limit"):GetInt() .. ").")
+            ply:ChatPrint("[TacRP] " .. str .. " due to the slot limit (max " .. limit .. ").")
         end
     end
 end)

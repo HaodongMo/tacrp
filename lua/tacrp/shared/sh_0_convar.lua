@@ -558,7 +558,7 @@ local function menu_server_ti(panel)
         command = "tacrp_slot_hl2"
     })
     panel:AddControl("label", {
-        text = "Use slot 4 for shotguns and snipers, slot 5 for explosive launchers. Holster slots may overlap."
+        text = "Use slot 4 for MGs, shotguns and snipers, slot 5 for explosives."
     })
     panel:AddControl("checkbox", {
         label = "Count ALL weapons",
