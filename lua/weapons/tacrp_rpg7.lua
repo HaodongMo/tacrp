@@ -18,6 +18,7 @@ SWEP.WorldModel = "models/weapons/tacint/w_rpg7.mdl"
 SWEP.NoRanger = true
 
 SWEP.Slot = 2
+SWEP.SlotAlt = 4
 
 SWEP.ArcadeStats = {
     MoveSpeedMult = 0.8,

@@ -19,6 +19,7 @@ util.AddNetworkString("tacrp_togglepeek")
 util.AddNetworkString("tacrp_flashbang")
 util.AddNetworkString("tacrp_togglenade")
 util.AddNetworkString("tacrp_addshieldmodel")
+util.AddNetworkString("tacrp_updateslot")
 
 net.Receive("tacrp_togglepeek", function(len, ply)
     local bf = net.ReadBool()

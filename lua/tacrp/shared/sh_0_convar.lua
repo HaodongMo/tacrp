@@ -117,10 +117,6 @@ local conVars = {
         default = "0",
     },
     {
-        name = "limitslots",
-        default = "0",
-    },
-    {
         name = "true_laser",
         default = "1",
         client = true,
@@ -298,6 +294,35 @@ local conVars = {
         replicated = true,
         notify = true,
     },
+
+    {
+        name = "slot_hl2",
+        default = "0",
+        replicated = true,
+        notify = true,
+        min = 0,
+        max = 1,
+    },
+    {
+        name = "slot_limit",
+        default = "0",
+        notify = true,
+        min = 0,
+    },
+    {
+        name = "slot_countall",
+        default = "0",
+        notify = true,
+        min = 0,
+        max = 1,
+    },
+    {
+        name = "slot_action",
+        default = "1",
+        notify = true,
+        min = 0,
+        max = 2,
+    },
 }
 
 local prefix = "tacrp_"
@@ -343,6 +368,12 @@ Throw Grenade: +grenade1 (Not bound by default! Do 'bind g +grenade1' in console
 Change Grenade: +grenade2 (Not bound by default! Do 'bind h +grenade2' in console!)
 ]]
 
+local function header(panel, text)
+    local ctrl = panel:Help(text)
+    ctrl:SetFont("DermaDefaultBold")
+    return ctrl
+end
+
 local function menu_guide_ti(panel)
     panel:AddControl("label", {
         text = TacRP.ControlGuide,
@@ -355,9 +386,7 @@ end
 
 local function menu_client_ti(panel)
 
-    panel:AddControl("header", {
-        description = "Interface",
-    })
+    header(panel, "Interface")
     panel:AddControl("checkbox", {
         label = "Show HUD",
         command = "TacRP_drawhud"
@@ -406,9 +435,7 @@ local function menu_client_ti(panel)
         text = "Vignette intensity is based on amount of accumulated recoil."
     })
 
-    panel:AddControl("header", {
-        description = "\nPreference",
-    })
+    header(panel, "\nPreference")
     panel:AddControl("checkbox", {
         label = "Toggle Aiming",
         command = "tacrp_toggleaim"
@@ -440,9 +467,7 @@ local function menu_client_ti(panel)
         text = "This mutes your own radar sound for yourself only. Others can still hear your radar, and you can still hear others' radars."
     })
 
-    panel:AddControl("header", {
-        description = "\nMiscellaneous",
-    })
+    header(panel, "\nMiscellaneous")
     panel:AddControl("checkbox", {
         label = "Disable Suicide Mode",
         command = "tacrp_idunwannadie"
@@ -472,9 +497,7 @@ local function menu_client_ti(panel)
 end
 
 local function menu_server_ti(panel)
-    panel:AddControl("header", {
-        description = "\nFeatures",
-    })
+    header(panel, "Features")
     panel:AddControl("label", {
         text = "Settings in this section affect ALL PLAYERS."
     })
@@ -497,9 +520,8 @@ local function menu_server_ti(panel)
     panel:AddControl("label", {
         text = "If turned off, newsletter popup/notification will not happen. Players can still open the newsletter page manually."
     })
-    panel:AddControl("header", {
-        description = "\nAttachments",
-    })
+
+    header(panel, "\nAttachments")
     panel:AddControl("checkbox", {
         label = "Free Attachments",
         command = "TacRP_free_atts"
@@ -520,9 +542,44 @@ local function menu_server_ti(panel)
         command = "TacRP_generateattentities"
     })
 
-    panel:AddControl("header", {
-        description = "\nNPC",
+    header(panel, "\nWeapon Slot Restriction")
+    panel:AddControl("label", {
+        text = "Restrict TacRP weapons for pickup/spawning based on their weapon slot."
     })
+    panel:AddControl("slider", {
+        label = "Max Per Slot (0 - no limit)",
+        command = "tacrp_slot_limit",
+        type = "int",
+        min = 0,
+        max = 3,
+    })
+    panel:AddControl("checkbox", {
+        label = "Use HL2-style slots",
+        command = "tacrp_slot_hl2"
+    })
+    panel:AddControl("label", {
+        text = "Use slot 4 for shotguns and snipers, slot 5 for explosive launchers. Holster slots may overlap."
+    })
+    panel:AddControl("checkbox", {
+        label = "Count ALL weapons",
+        command = "tacrp_slot_countall"
+    })
+    panel:AddControl("label", {
+        text = "WARNING! If set, non-TacRP weapons may be dropped/removed to make room for TacRP weapons! This can have unintended consequences!"
+    })
+
+    local cb_slot_action, lb_slot_action = panel:ComboBox("Weapon Spawning Behavior", "tacrp_slot_action")
+    cb_slot_action:AddChoice("0 - Fail", "0")
+    cb_slot_action:AddChoice("1 - Remove", "1")
+    cb_slot_action:AddChoice("2 - Drop", "2")
+    cb_slot_action:DockMargin(8, 0, 0, 0)
+    lb_slot_action:SizeToContents()
+
+    panel:AddControl("label", {
+        text = "Only affects giving weapons with the spawnmenu."
+    })
+
+    header(panel, "\nNPC")
     panel:AddControl("checkbox", {
         label = "NPCs Deal Equal Damage",
         command = "TacRP_npc_equality"
@@ -532,16 +589,8 @@ local function menu_server_ti(panel)
         command = "TacRP_npc_atts"
     })
 
-    panel:AddControl("header", {
-        description = "\nMiscellaneous",
-    })
-    panel:AddControl("checkbox", {
-        label = "One Weapon Per Slot",
-        command = "tacrp_limitslots"
-    })
-    panel:AddControl("label", {
-        text = "Slot limit only considers TacRP weapons. Spawning new guns will delete old guns in the slot."
-    })
+
+    header(panel, "\nMiscellaneous")
     panel:AddControl("checkbox", {
         label = "Supply Boxes Resupply Grenades",
         command = "TacRP_resupply_grenades"

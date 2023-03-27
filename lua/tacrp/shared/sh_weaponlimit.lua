@@ -1,16 +1,25 @@
+local whitelist = {
+    weapon_physgun = true,
+    weapon_physcannon = true,
+    gmod_tool = true,
+    gmod_camera = true,
+}
+
 local function check(ply, wep)
-    local limit = GetConVar("tacrp_limitslots"):GetInt()
+    local limit = GetConVar("tacrp_slot_limit"):GetInt()
+    local countall = GetConVar("tacrp_slot_countall"):GetBool()
     local slot = (wep.GetSlot and wep:GetSlot()) or wep.Slot
     local weps = {}
-    if limit > 0 and (limit > 1 or wep.ArcticTacRP) then
+    if limit > 0 and wep.ArcticTacRP then
         for k, v in pairs( ply:GetWeapons() ) do
-            if (limit > 1 or v.ArcticTacRP) and (v:GetSlot() == slot) then
+            if !whitelist[v:GetClass()] and (countall or v.ArcticTacRP) and (v:GetSlot() == slot) then
                 table.insert(weps, v)
             end
         end
-    end
-    if #weps > 0 then
-        return false, weps
+
+        if #weps >= limit then
+            return false, weps
+        end
     end
 end
 
@@ -33,13 +42,61 @@ local slot = {
 }
 hook.Add("PlayerGiveSWEP", "TacRP_Pickup", function(ply, wepname, weptbl)
     local _, weps = check(ply, weapons.Get(wepname) or {Slot = slot[wepname]})
-    if weps and #weps > 0 and !ply:HasWeapon(wepname) then
-        for _, e in pairs(weps) do
-            ply:ChatPrint("[TacRP] " .. e:GetPrintName() .. " was removed due to the slot limit.")
-            ply:StripWeapon(e:GetClass())
-            --ply:DropWeapon(e, nil, ply:GetForward() * 50)
-        end
+    if weps and !ply:HasWeapon(wepname) then
+        local mode = GetConVar("tacrp_slot_action"):GetInt()
 
-        -- return false
+        if mode == 0 then
+            ply:ChatPrint("[TacRP] Couldn't spawn " .. weptbl.PrintName .. " due to the slot limit (max " .. GetConVar("tacrp_slot_limit"):GetInt() .. ").")
+            return false
+        elseif mode == 1 or mode == 2 then
+
+            local str = #weps == 1 and (weps[1]:GetPrintName() .. " was") or (#weps .. " weapons were")
+            str = str .. (mode == 1 and " removed" or " dropped")
+
+            for _, e in pairs(weps) do
+                if mode == 1 then
+                    ply:StripWeapon(e:GetClass())
+                else
+                    ply:DropWeapon(e, nil, ply:GetForward() * 50)
+                end
+            end
+
+            ply:ChatPrint("[TacRP] " .. str .. " due to the slot limit (max " .. GetConVar("tacrp_slot_limit"):GetInt() .. ").")
+        end
     end
 end)
+
+local function slotty()
+    local ahh = GetConVar("tacrp_slot_hl2"):GetBool()
+    for _, wpn in pairs(weapons.GetList()) do
+
+        -- weapons.GetStored does not contain inherited values (like ArcticTacRP)
+        local tbl = weapons.Get(wpn.ClassName)
+        if !tbl.ArcticTacRP then continue end
+
+        local tblStored = weapons.GetStored(wpn.ClassName)
+        if tblStored.SlotOrig == nil then
+            tblStored.SlotOrig = tblStored.Slot
+        end
+
+        tblStored.Slot = ahh and tblStored.SlotAlt or tblStored.SlotOrig
+    end
+end
+
+hook.Add("InitPostEntity", "TacRP_Slot", function()
+    slotty()
+
+    -- even if the convar is replicated, the callback is not run on client
+    cvars.AddChangeCallback("tacrp_slot_hl2", function(cvar, old, new)
+        if CLIENT then return end
+        slotty()
+        timer.Simple(0, function()
+            net.Start("tacrp_updateslot")
+            net.Broadcast()
+        end)
+    end, "slotty")
+end)
+
+if CLIENT then
+    net.Receive("tacrp_updateslot", slotty)
+end

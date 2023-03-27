@@ -30,6 +30,7 @@ SWEP.ArcadeStats = {
 }
 
 SWEP.Slot = 2
+SWEP.SlotAlt = 0
 
 // misc. shooting
 

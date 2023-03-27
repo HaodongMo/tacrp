@@ -44,15 +44,20 @@ TacRP.OverDraw = false
 
 TacRP.HUToM = 0.3048 / 12
 
-TacRP.HolsterNetBits = 2
+TacRP.HolsterNetBits = 3
 TacRP.HOLSTER_SLOT_BACK = 1
-TacRP.HOLSTER_SLOT_PISTOL = 2
-TacRP.HOLSTER_SLOT_GEAR = 3
-
+TacRP.HOLSTER_SLOT_BACK2 = 2
+TacRP.HOLSTER_SLOT_PISTOL = 3
+TacRP.HOLSTER_SLOT_GEAR = 4
 TacRP.HolsterBones = {
     [TacRP.HOLSTER_SLOT_BACK] = {
         "ValveBiped.Bip01_Spine2",
         Vector(0, 0, 0),
+        {"models/props_c17/SuitCase_Passenger_Physics.mdl", Vector(6, 4, 8), Angle(0, 0, 0)},
+    },
+    [TacRP.HOLSTER_SLOT_BACK2] = {
+        "ValveBiped.Bip01_Spine2",
+        {Vector(0, 4, 12), Angle(180, 180, 0)},
         {"models/props_c17/SuitCase_Passenger_Physics.mdl", Vector(6, 4, 8), Angle(0, 0, 0)},
     },
     [TacRP.HOLSTER_SLOT_PISTOL] = {

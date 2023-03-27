@@ -32,20 +32,29 @@ hook.Add("PostPlayerDraw", "TacRP_Holster", function(ply, flags)
             ply.TacRP_HolsterModels[i]:SetNoDraw(true)
         end
 
+        local spos, sang = v[2], Angle()
+        if istable(v[2]) then
+            spos = v[2][1]
+            sang = v[2][2]
+        elseif v[2] == nil then
+            spos = Vector()
+        end
+
         local hpos, hang = wep:GetValue("HolsterPos"), wep:GetValue("HolsterAng")
         if fallback then
             hpos = v[3][2]
             hang = v[3][3]
         end
-        local off = v[2] + hpos
+        local off = spos + hpos
+        local rot = hang + sang
 
         local pos = matrix:GetTranslation()
         local ang = matrix:GetAngles()
 
         pos = pos + ang:Right() * off.x + ang:Forward() * off.y + ang:Up() * off.z
-        ang:RotateAroundAxis(ang:Forward(), hang.p)
-        ang:RotateAroundAxis(ang:Up(), hang.y)
-        ang:RotateAroundAxis(ang:Right(), hang.r)
+        ang:RotateAroundAxis(ang:Forward(), rot.p)
+        ang:RotateAroundAxis(ang:Up(), rot.y)
+        ang:RotateAroundAxis(ang:Right(), rot.r)
 
         debugoverlay.Axis(pos, ang, 8, FrameTime() * 2, true)
 

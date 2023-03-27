@@ -75,22 +75,19 @@ local function lambda_fire(self, wepent, target)
 
     return true
 end
-]]
-
-hook.Add("InitPostEntity", "TacRP_NPCRegister", function()
     local function stat(tbl, stat)
         if tbl.ArcadeStats and tbl.ArcadeStats[stat] then
             return tbl.ArcadeStats[stat]
         end
         return tbl[stat]
     end
+]]
 
+hook.Add("InitPostEntity", "TacRP_Register", function()
     for _, wpn in pairs(weapons.GetList()) do
         local tbl = weapons.Get(wpn.ClassName)
 
-        if !tbl.ArcticTacRP then continue end
-        if !tbl.NPCUsable then continue end
-        if !tbl.Spawnable then continue end
+        if !tbl.ArcticTacRP or !tbl.NPCUsable or !tbl.Spawnable then continue end
 
         list.Add("NPCUsableWeapons",
             {
