@@ -162,6 +162,16 @@ hook.Add("FinishMove", "TacRP_Ninja", function(ply, mv)
             ply.TacRPNinjaGroundTime = nil
         elseif ply:GetNWFloat("TacRPDiveTime", 0) + 0.1 > CurTime() then
             mv:SetVelocity(ply:GetNWVector("TacRPDiveDir") * 50000 * FrameTime())
+
+            -- do it here to get around reload not called clientside in SP
+            if (ply.TacRPDiveEffect or 0) != ply:GetNWFloat("TacRPDiveTime", 0) then
+                ply.TacRPDiveEffect = CurTime()
+                local eff = EffectData()
+                eff:SetOrigin(ply:GetPos())
+                eff:SetNormal(ply:GetNWVector("TacRPDiveDir", ply:EyeAngles():Forward()))
+                eff:SetEntity(ply)
+                util.Effect("tacrp_divesmoke", eff)
+            end
         end
     end
 end)
