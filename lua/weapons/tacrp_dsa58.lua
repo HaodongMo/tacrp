@@ -7,7 +7,7 @@ AddCSLuaFile()
 SWEP.PrintName = "DSA-58"
 SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 
-SWEP.SubCatTier = "2Premium"
+SWEP.SubCatTier = "3Quality"
 SWEP.SubCatType = "6Precision Rifle"
 
 SWEP.Description = "Battle rifle with slow fire rate but very high damage."
@@ -19,7 +19,7 @@ SWEP.Slot = 2
 
 SWEP.ArcadeStats = {
 
-    Damage_Max = 48,
+    Damage_Max = 50,
     Damage_Min = 30,
 
     MoveSpeedMult = 0.8,
@@ -38,8 +38,8 @@ SWEP.Range_Max = 7500
 SWEP.Penetration = 20
 
 SWEP.BodyDamageMultipliers = {
-    [HITGROUP_HEAD] = 3,
-    [HITGROUP_CHEST] = 1.25,
+    [HITGROUP_HEAD] = 3.5,
+    [HITGROUP_CHEST] = 1.2,
     [HITGROUP_STOMACH] = 1,
     [HITGROUP_LEFTARM] = 1,
     [HITGROUP_RIGHTARM] = 1,
@@ -63,9 +63,9 @@ SWEP.Spread = 0.001
 
 SWEP.RecoilPerShot = 1
 SWEP.RecoilMaximum = 6
-SWEP.RecoilResetTime = 0.2
-SWEP.RecoilDissipationRate = 6
-SWEP.RecoilFirstShotMult = 0.6
+SWEP.RecoilResetTime = 0.15
+SWEP.RecoilDissipationRate = 8
+SWEP.RecoilFirstShotMult = 0.5
 
 SWEP.RecoilVisualKick = 2
 
@@ -73,6 +73,7 @@ SWEP.RecoilKick = 9
 
 SWEP.RecoilSpreadPenalty = 0.007
 SWEP.HipFireSpreadPenalty = 0.08
+SWEP.PeekPenaltyFraction = 0.2
 
 SWEP.CanBlindFire = true
 
