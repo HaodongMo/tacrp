@@ -10,7 +10,7 @@ SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 SWEP.SubCatTier = "9Special"
 SWEP.SubCatType = "9Equipment"
 
-SWEP.Description = "A multipurpose tool, most of the purposes involving stabbing someone.\nWORK IN PROGRESS"
+SWEP.Description = "A multi-purpose flip knife, although most of the purposes involving stabbing someone."
 
 SWEP.ViewModel = "models/weapons/tacint/v_knife.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_knife.mdl"

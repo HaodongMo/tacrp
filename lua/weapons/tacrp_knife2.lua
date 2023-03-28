@@ -10,7 +10,7 @@ SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 SWEP.SubCatTier = "9Special"
 SWEP.SubCatType = "9Equipment"
 
-SWEP.Description = "Very edgy looking knife. Fast, but not very lethal.\nWORK IN PROGRESS"
+SWEP.Description = "Very edgy looking knife. Light, partially skeletized blade makes it faster to swing but do less damage."
 
 SWEP.ViewModel = "models/weapons/tacint/v_knife2.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_knife2.mdl"
