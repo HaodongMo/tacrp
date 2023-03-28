@@ -76,6 +76,9 @@ SWEP.PassivePos = Vector(2, 0, -5)
 SWEP.SprintAng = Angle(0, 0, 0)
 SWEP.SprintPos = Vector(2, 0, -5)
 
+SWEP.CustomizeAng = Angle(0, 25, 0)
+SWEP.CustomizePos = Vector(2, 0, -12)
+
 SWEP.SprintMidPoint = {
     Pos = Vector(2, 0, -5),
     Ang = Angle(0, 0, 0)
