@@ -225,9 +225,7 @@ function SWEP:GetCCIP(pos, ang)
             mask = MASK_SHOT
         })
 
-        if tr.HitSky then
-            return nil
-        elseif tr.Hit then
+        if tr.Hit then
             return tr, i * timestep
         else
             pos = newpos

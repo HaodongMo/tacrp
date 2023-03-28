@@ -124,7 +124,7 @@ end
 
 local last_laze_time = 0
 -- local last_laze_dist = 0
-local laze_interval = 0.25
+local laze_interval = 0.2
 local ccip_v = 0
 local dropalpha = 0
 local dropalpha2 = 0
