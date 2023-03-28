@@ -15,6 +15,9 @@ function SWEP:Melee(alt)
     if self:StillWaiting(false, true) then return end
     -- if self:SprintLock() then return end
 
+    self.Primary.Automatic = true
+    self.Secondary.Automatic = true
+
     self:CancelReload()
 
     self:ToggleBlindFire(TacRP.BLINDFIRE_NONE)
@@ -75,6 +78,8 @@ function SWEP:Melee(alt)
     dmginfo:SetAttacker(self:GetOwner())
     dmginfo:SetInflictor(self)
 
+    local t = (alt and self:GetValue("Melee2AttackTime") or self:GetValue("MeleeAttackTime"))
+
     if tr.Fraction < 1 then
 
         if IsValid(tr.Entity) and !tr.Entity:IsNextBot() and GetConVar("TacRP_bodydamagecancel"):GetBool() and TacRP.CancelMultipliers[tr.HitGroup] then
@@ -108,10 +113,16 @@ function SWEP:Melee(alt)
             --tr.Entity:TakeDamageInfo(dmginfo)
             tr.Entity:DispatchTraceAttack(dmginfo, tr)
         end
+    else
+        if !alt and self:GetValue("MeleeAttackMissTime") then
+            t = self:GetValue("MeleeAttackMissTime")
+        elseif alt and self:GetValue("Melee2AttackMissTime") then
+            t = self:GetValue("Melee2AttackMissTime")
+        end
     end
 
     self:SetLastMeleeTime(CurTime())
-    self:SetNextSecondaryFire(CurTime() + (alt and self:GetValue("Melee2AttackTime") or self:GetValue("MeleeAttackTime")))
+    self:SetNextSecondaryFire(CurTime() + t)
 
 end
 

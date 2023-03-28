@@ -12,7 +12,9 @@ ATT.Hook_SecondaryAttack = function(self)
 
     if self:StillWaiting() or self:GetNextSecondaryFire() > CurTime() then return end
 
-    self:PlayAnimation("meleethrow", 1, false, true)
+    local s = self:GetValue("Melee2AttackTime") / 0.75
+    print(s)
+    self:PlayAnimation("meleethrow", s, false, true)
     --self:GetOwner():DoAnimationEvent(ACT_GMOD_GESTURE_ITEM_THROW)
     self:GetOwner():DoAnimationEvent(ACT_HL2MP_GESTURE_RANGE_ATTACK_MELEE)
 
@@ -31,6 +33,9 @@ ATT.Hook_SecondaryAttack = function(self)
         local dispersion = Angle(math.Rand(-1, 1), math.Rand(-1, 1), 0)
         dispersion = dispersion * spread * 36
 
+        rocket.Model = self.ThrownKnifeModel or self.WorldModel
+        rocket.Damage = self:GetValue("MeleeDamage")
+
         rocket:SetPos(src)
         rocket:SetOwner(self:GetOwner())
         rocket:SetAngles(ang + dispersion)
@@ -45,10 +50,10 @@ ATT.Hook_SecondaryAttack = function(self)
         end
     end)
 
-    self:SetTimer(0.3, function()
+    self:SetTimer(s / 3, function()
         self:PlayAnimation("deploy", 1, false, true)
     end)
 
-    self:SetNextSecondaryFire(CurTime() + 1)
+    self:SetNextSecondaryFire(CurTime() + (0.15 + self:GetValue("Melee2AttackTime")))
     return true
 end

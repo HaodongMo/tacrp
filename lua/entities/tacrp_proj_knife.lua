@@ -24,6 +24,7 @@ ENT.BounceSounds = {
     "TacRP/weapons/grenade/flashbang_bounce-3.wav",
 }
 
+ENT.Damage = 35
 
 function ENT:Impact(data, collider)
     if self.Impacted then return end
@@ -36,7 +37,7 @@ function ENT:Impact(data, collider)
         local dmg = DamageInfo()
         dmg:SetAttacker(attacker)
         dmg:SetInflictor(self)
-        dmg:SetDamage(35)
+        dmg:SetDamage(self.Damage)
         dmg:SetDamageType(DMG_SLASH)
         dmg:SetDamageForce(d * 5000)
         dmg:SetDamagePosition(data.HitPos)

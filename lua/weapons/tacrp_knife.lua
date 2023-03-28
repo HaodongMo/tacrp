@@ -28,12 +28,14 @@ SWEP.NPCUsable = false
 // misc. shooting
 
 SWEP.MeleeDamage = 35
-SWEP.MeleeAttackTime = 0.45
+SWEP.MeleeAttackTime = 0.4
 SWEP.MeleeRange = 128
+SWEP.MeleeAttackMissTime = 0.5
 
-SWEP.Melee2Damage = 55
-SWEP.Melee2AttackTime = 0.75
+SWEP.Melee2Damage = 50
+SWEP.Melee2AttackTime = 0.65
 SWEP.Melee2Range = 96
+SWEP.Melee2AttackMissTime = 0.8
 
 SWEP.Firemode = 2
 
