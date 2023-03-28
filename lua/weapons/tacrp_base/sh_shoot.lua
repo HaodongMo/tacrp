@@ -54,11 +54,13 @@ function SWEP:PrimaryAttack()
     end
 
     if self:GetValue("ShootChance") < util.SharedRandom("tacRP_shootChance", 0, 1) then
-        self.Primary.Automatic = false
-        if self:GetBlindFire() then
-            self:PlayAnimation("blind_dryfire")
-        else
-            self:PlayAnimation("dryfire")
+        if self:GetBurstCount() == 0 then -- dryfire anim is snapping so don't interrupt fire anim for it
+            self.Primary.Automatic = false
+            if self:GetBlindFire() then
+                self:PlayAnimation("blind_dryfire")
+            else
+                self:PlayAnimation("dryfire")
+            end
         end
         self:EmitSound(self:GetValue("Sound_Jam"), 75, 100, 1, CHAN_BODY)
         self:SetBurstCount(0)
