@@ -1,6 +1,6 @@
 ATT.PrintName = "Throw"
 ATT.FullName = "Knife Throw"
-ATT.Icon = Material("entities/tacrp_att_acc_melee.png", "mips smooth")
+ATT.Icon = Material("entities/tacrp_att_melee_tech_throw.png", "mips smooth")
 ATT.Description = "Bar trick turned lethal. Headshots and mid-airs do more damage."
 ATT.Pros = {"ALT-FIRE: Throw knife", "Does not consume weapon or ammo"}
 

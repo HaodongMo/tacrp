@@ -1,5 +1,5 @@
 ATT.PrintName = "Ninja"
-ATT.Icon = Material("entities/tacrp_att_acc_melee.png", "mips smooth")
+ATT.Icon = Material("entities/tacrp_att_melee_spec_ninja.png", "mips smooth")
 ATT.Description = "Disrupt your enemies and strike with the element of surprise."
 ATT.Pros = {"RELOAD: Palm Strike / Climb", "RELOAD (Mid-air + Crouch): Dive Kick","RELOAD (Ground + Crouch): Smokescreen", "Silent Footsteps"}
 
