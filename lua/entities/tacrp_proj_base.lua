@@ -63,9 +63,10 @@ function ENT:Initialize()
         local phys = self:GetPhysicsObject()
         if !phys:IsValid() then
             self:Remove()
-        else
-            phys:SetDragCoefficient(0)
         end
+
+        phys:SetDragCoefficient(0)
+        phys:SetBuoyancyRatio(0)
 
         if self.IsRocket then
             phys:EnableGravity(false)

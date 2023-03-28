@@ -92,7 +92,7 @@ hook.Add("EntityTakeDamage", "TacRP_Block", function(ent, dmginfo)
 
     local inflictor = dmginfo:GetInflictor()
     timer.Simple(0, function()
-        if IsValid(inflictor) and !inflictor:IsWeapon() and IsValid(inflictor:GetPhysicsObject()) then
+        if IsValid(inflictor) and inflictor:IsScripted() and scripted_ents.IsBasedOn(inflictor:GetClass(), "tacrp_proj_base") and IsValid(inflictor:GetPhysicsObject()) then
             inflictor:GetPhysicsObject():SetVelocityInstantaneous(ent:EyeAngles():Forward() * 2000)
             inflictor:SetOwner(ent)
         end
