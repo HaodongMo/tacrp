@@ -37,6 +37,9 @@ SWEP.Melee2AttackTime = 0.6
 SWEP.Melee2Range = 96
 SWEP.Melee2AttackMissTime = 0.7
 
+SWEP.MeleeThrowTime = 1
+SWEP.MeleeThrowTimeWait = 0.15
+
 SWEP.Firemode = 2
 
 SWEP.RPM = 120
@@ -72,8 +75,8 @@ SWEP.GestureBash2 = ACT_HL2MP_GESTURE_RANGE_ATTACK_MELEE
 
 SWEP.MidAirSpreadPenalty = 0
 
-SWEP.PassiveAng = Angle(0, 0, 0)
-SWEP.PassivePos = Vector(2, 0, -5)
+SWEP.PassiveAng = Angle(-2.5, 0, 0)
+SWEP.PassivePos = Vector(1, 0, -5)
 
 SWEP.SprintAng = Angle(0, 0, 0)
 SWEP.SprintPos = Vector(2, 0, -5)
@@ -99,7 +102,7 @@ SWEP.AnimationTranslationTable = {
     ["deploy"] = "deploy",
     ["melee"] = {"slash_left1", "slash_left2", "slash_right1", "slash_right2"},
     ["melee2"] = {"slash_forward1", "slash_forward2"},
-    ["meleethrow"] = {"slash_right1", "slash_right2"},
+    ["meleethrow"] = {"knifethrow"},
 }
 
 SWEP.Sound_MeleeHit = {
@@ -155,6 +158,8 @@ local function addsound(name, spath)
         sound = spath
     })
 end
+
+addsound("tacint_knife2.deploy", "tacrp/magtap.ogg")
 
 function SWEP:PrimaryAttack()
     local stop = self:RunHook("Hook_PreShoot")

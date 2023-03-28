@@ -12,7 +12,7 @@ ATT.Hook_SecondaryAttack = function(self)
 
     if self:StillWaiting() or self:GetNextSecondaryFire() > CurTime() then return end
 
-    local s = self:GetValue("Melee2AttackTime") / 0.75
+    local s = self:GetValue("MeleeThrowTime")
     self:PlayAnimation("meleethrow", s, false, true)
     --self:GetOwner():DoAnimationEvent(ACT_GMOD_GESTURE_ITEM_THROW)
     self:GetOwner():DoAnimationEvent(ACT_HL2MP_GESTURE_RANGE_ATTACK_MELEE)
@@ -49,10 +49,10 @@ ATT.Hook_SecondaryAttack = function(self)
         end
     end)
 
-    self:SetTimer(s / 3, function()
+    self:SetTimer(self:GetValue("MeleeThrowTimeWait"), function()
         self:PlayAnimation("deploy", 1, false, true)
     end)
 
-    self:SetNextSecondaryFire(CurTime() + (0.15 + self:GetValue("Melee2AttackTime")))
+    self:SetNextSecondaryFire(CurTime() + s)
     return true
 end
