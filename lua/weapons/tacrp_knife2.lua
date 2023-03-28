@@ -37,8 +37,8 @@ SWEP.Melee2AttackTime = 0.6
 SWEP.Melee2Range = 96
 SWEP.Melee2AttackMissTime = 0.7
 
-SWEP.MeleeThrowTime = 1
-SWEP.MeleeThrowTimeWait = 0.15
+SWEP.MeleeThrowTime = 1.1
+SWEP.MeleeThrowTimeWait = 0.2
 
 SWEP.Firemode = 2
 

@@ -47,10 +47,10 @@ ENT.AudioLoop = nil
 ENT.BounceSounds = nil
 
 function ENT:Initialize()
-    self:SetModel(self.Model)
-    self:SetMaterial(self.Material or "")
-
     if SERVER then
+        self:SetModel(self.Model)
+        self:SetMaterial(self.Material or "")
+
         self:PhysicsInit(SOLID_VPHYSICS)
         self:SetMoveType(MOVETYPE_VPHYSICS)
         self:SetSolid(SOLID_VPHYSICS)
