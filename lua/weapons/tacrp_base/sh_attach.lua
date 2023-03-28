@@ -110,7 +110,7 @@ function SWEP:Detach(slot, silent)
 end
 
 function SWEP:ToggleCustomize(on)
-    if on == self:GetCustomize() then return end
+    if on == self:GetCustomize() or (self:GetValue("RunawayBurst") and self:GetBurstCount() > 0) then return end
 
     self:ScopeToggle(0)
     self:ToggleBlindFire(TacRP.BLINDFIRE_NONE)
