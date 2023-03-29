@@ -10,9 +10,10 @@ ATT.InvAtt = "ammo_shotgun_slugs"
 
 ATT.SortOrder = 1
 
-ATT.Mult_Damage_Min = 6
-ATT.Mult_Damage_Max = 3
+ATT.Mult_Damage_Min = 7
+ATT.Mult_Damage_Max = 4.5
 
+ATT.Mult_Range_Min = 1.5
 ATT.Mult_Range_Max = 1.5
 
 ATT.Num = 1

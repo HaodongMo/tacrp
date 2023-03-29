@@ -9,8 +9,8 @@ ATT.Category = "ammo_shotgun2"
 
 ATT.SortOrder = 1
 
-ATT.Mult_Damage_Max = 1.75
-ATT.Mult_Damage_Min = 1.75
+ATT.Mult_Damage_Max = 2
+ATT.Mult_Damage_Min = 2
 
 ATT.Num = 3
 
