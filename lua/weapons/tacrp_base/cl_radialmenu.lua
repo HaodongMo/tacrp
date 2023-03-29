@@ -680,7 +680,7 @@ hook.Add("VGUIMousePressed", "tacrp_grenademenu", function(pnl, mousecode)
                 net.SendToServer()
                 wpn.GrenadeWaitSelect = nadewep -- cannot try to switch immediately as the nade wep does not exist on client yet
             end
-        elseif mousecode == MOUSE_RIGHT and mousecode == MOUSE_LEFT then
+        elseif mousecode == MOUSE_RIGHT or mousecode == MOUSE_LEFT then
             wpn.GrenadeThrowOverride = mousecode == MOUSE_RIGHT
             net.Start("tacrp_togglenade")
                 net.WriteUInt(currentnade.Index, TacRP.QuickNades_Bits)
