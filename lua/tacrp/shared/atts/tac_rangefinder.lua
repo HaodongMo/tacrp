@@ -53,7 +53,7 @@ function ATT.TacticalDraw(self)
             end
         end
 
-        local edmg = self:GetDamageAtRange(dist)
+        local edmg = self:GetDamageAtRange(rawdist)
         edmg = math.ceil(edmg)
 
         txt3 = tostring(edmg) .. "DMG"
