@@ -1,41 +1,52 @@
 ATT.PrintName = "Frenzy"
 ATT.Icon = Material("entities/tacrp_att_melee_spec_lunge.png", "mips smooth")
 ATT.Description = "Close the distance and overwhelm your enemies."
-ATT.Pros = {"RELOAD (Ground): Lunge forwards", "RELOAD (Mid-Air): Lunge towards point of aim", "Heal on hit"}
+ATT.Pros = {"RELOAD (Ground): Pounce", "RELOAD (Ground + Crouch): Super Jump", "RELOAD (Mid-Air): Lunge", "Heal on hit"}
 
 ATT.Category = {"melee_spec"}
 
 ATT.SortOrder = 3
 
-ATT.Lifesteal = 1 / 3
+ATT.Lifesteal = 1 / 4
 
-local chargeamt = 0.7
+local chargeamt = 0.5
 
 ATT.Hook_PreReload = function(wep)
     local ply = wep:GetOwner()
 
     if !ply:KeyPressed(IN_RELOAD) or ply:GetMoveType() == MOVETYPE_NOCLIP or ply:GetNWFloat("TacRPDashCharge", 0) < chargeamt or (ply.TacRPNextLunge or 0) > CurTime() then return end
 
-    ply.TacRPNextLunge = CurTime() + 0.5
+    ply.TacRPNextLunge = CurTime() + 1.5
     ply:SetNWFloat("TacRPDashCharge", ply:GetNWFloat("TacRPDashCharge", 0) - chargeamt)
+    ply:SetNWFloat("TacRPLastLeap", CurTime())
 
     local ang = Angle(0, ply:GetAngles().y, 0)
     local vel
 
-    if ply:IsOnGround() then
-        vel = ang:Forward() * 600 + Vector(0, 0, 300)
+    if ply:IsOnGround() and ply:Crouching() then
+        local ang2 = ply:GetAngles()
+        ang2.p = math.min(-70, ang2.p)
+        vel = ang2:Forward() * 800
         if SERVER then
-            ply:EmitSound("npc/fast_zombie/leap1.wav", 80, 95)
+            ply:EmitSound("physics/concrete/boulder_impact_hard" .. math.random(1, 4) .. ".wav", 70, 120, 0.5)
+            ply:EmitSound("npc/fast_zombie/leap1.wav", 80, 100)
+        end
+    elseif ply:IsOnGround() then
+        vel = ang:Forward() * (400 + math.max(0, 500 - ang:Forward():Dot(ply:GetVelocity()))) + Vector(0, 0, 300)
+        if SERVER then
+            ply:EmitSound("npc/fast_zombie/leap1.wav", 80, 92)
         end
     else
-        local int = math.Clamp(ply:GetVelocity():Dot(ply:GetAngles():Forward()) ^ 0.9, 0, 400)
-        vel = ply:GetVelocity() * -1 + ply:GetAngles():Forward() * (int + 500)
+        local int = math.Clamp(ply:GetVelocity():Dot(ply:GetAngles():Forward()) ^ 0.9, 0, 500)
+        vel = ply:GetVelocity() * -1 + ply:GetAngles():Forward() * (int + 600)
         if SERVER then
-            ply:EmitSound("npc/fast_zombie/leap1.wav", 80, 105)
+            ply:EmitSound("npc/fast_zombie/leap1.wav", 80, 110)
         end
     end
 
-    ply:DoCustomAnimEvent(PLAYERANIMEVENT_JUMP , -1)
+    ply:ViewPunch(Angle(-5, 0, 0))
+
+    ply:DoCustomAnimEvent(PLAYERANIMEVENT_JUMP, -1)
 
     ply:SetVelocity(vel)
 
@@ -53,7 +64,7 @@ end
 
 ATT.Hook_PostThink = function(wep)
     local ply = wep:GetOwner()
-    if (game.SinglePlayer() or IsFirstTimePredicted()) and ply:GetNWFloat("TacRPDashTime", 0) + 0.3 < CurTime() then
+    if (game.SinglePlayer() or IsFirstTimePredicted()) and ply:GetNWFloat("TacRPLastLeap", 0) + 1 < CurTime() then
         ply:SetNWFloat("TacRPDashCharge", math.min(1, ply:GetNWFloat("TacRPDashCharge", 0) + FrameTime() / 7.5))
     end
 end
