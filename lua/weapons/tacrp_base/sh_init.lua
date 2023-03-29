@@ -119,7 +119,7 @@ function SWEP:Holster(wep)
         self:KillTimer("ShotgunRestoreClip")
     end
 
-    if self:GetHolsterTime() > CurTime() then return false end
+    if self:GetHolsterTime() > CurTime() or self:GetPrimedGrenade() then return false end
 
     if !GetConVar("TacRP_holster"):GetBool() or (self:GetHolsterTime() != 0 and self:GetHolsterTime() <= CurTime()) or !IsValid(wep) then
         -- Do the final holster request
