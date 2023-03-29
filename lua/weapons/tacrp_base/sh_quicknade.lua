@@ -156,6 +156,10 @@ function SWEP:ThrowGrenade()
             end
             self:PlayAnimation("deploy", self:GetValue("DeployTimeMult"), false, true)
         end)
+    elseif nade.GrenadeWep and self:GetOwner():HasWeapon(nade.GrenadeWep) and !TacRP.IsGrenadeInfiniteAmmo(nade) and self:GetOwner():GetAmmoCount(nade.Ammo) == 0 then
+        if SERVER then
+            self:GetOwner():GetWeapon(nade.GrenadeWep):Remove()
+        end
     end
 end
 

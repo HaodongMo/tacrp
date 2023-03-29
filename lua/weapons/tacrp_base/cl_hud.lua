@@ -255,7 +255,6 @@ function SWEP:DrawHUDBackground()
 
     if !self:GetCustomize() and GetConVar("tacrp_hud"):GetBool() then
 
-
         if GetConVar("tacrp_drawhud"):GetBool() then
 
             local w = ScreenScale(110)
@@ -277,6 +276,9 @@ function SWEP:DrawHUDBackground()
             end
             surface.SetTextColor(col)
             surface.DrawText(self.PrintName)
+
+            local ammotype = self:GetValue("PrimaryGrenade") and (TacRP.QuickNades[self:GetValue("PrimaryGrenade")].Ammo) or self:GetValue("Ammo")
+            local clips = math.min(math.ceil(self:GetOwner():GetAmmoCount(ammotype)), 999)
 
             if self.Primary.ClipSize > 0 then
 
@@ -377,8 +379,6 @@ function SWEP:DrawHUDBackground()
                 end
 
                 render.SetScissorRect(0, 0, 0, 0, false)
-                local ammotype = self:GetValue("PrimaryGrenade") and (TacRP.QuickNades[self:GetValue("PrimaryGrenade")].Ammo) or self:GetValue("Ammo")
-                local clips = math.min(math.ceil(self:GetOwner():GetAmmoCount(ammotype)), 999)
 
                 if self.Primary.ClipSize <= 0 and ammotype == "" then
                     clips = ""
@@ -398,6 +398,33 @@ function SWEP:DrawHUDBackground()
                 surface.SetTextPos(x + w - ScreenScale(25), y + ScreenScale(12))
                 surface.SetFont("TacRP_HD44780A00_5x8_10")
                 surface.DrawText(clips)
+            else
+                if ammotype == "" then
+                    clips = ""
+                elseif (self:GetValue("PrimaryGrenade") and TacRP.IsGrenadeInfiniteAmmo(self:GetValue("PrimaryGrenade"))) or (!self:GetValue("PrimaryGrenade") and self:GetInfiniteAmmo()) then
+                    clips = "INF"
+                end
+
+
+                if self:GetValue("PrimaryGrenade") then
+                    local nade = TacRP.QuickNades[self:GetValue("PrimaryGrenade")]
+                    if nade.Icon then
+                        local sg = ScreenScale(32)
+                        surface.SetMaterial(nade.Icon)
+                        surface.SetDrawColor(255, 255, 255)
+                        surface.DrawTexturedRect(x + ScreenScale(4), y + h - sg + ScreenScale(1), sg, sg)
+                    end
+
+                    surface.SetTextColor(col)
+                    surface.SetTextPos(x + ScreenScale(36), y + h - ScreenScale(20))
+                    surface.SetFont("TacRP_HD44780A00_5x8_14")
+                    surface.DrawText("x" .. clips)
+                else
+                    surface.SetTextColor(col)
+                    surface.SetTextPos(x + ScreenScale(36), y + ScreenScale(12))
+                    surface.SetFont("TacRP_HD44780A00_5x8_10")
+                    surface.DrawText(clips)
+                end
             end
 
             if self:ShouldDrawBottomBar() then

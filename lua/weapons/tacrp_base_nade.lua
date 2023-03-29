@@ -54,6 +54,15 @@ function SWEP:ThinkGrenade()
     if self:GetPrimedGrenade() and self:GetAnimLockTime() < CurTime() and !self:GetOwner():KeyDown(self.GrenadeDownKey) then
         self:ThrowGrenade()
         self:SetPrimedGrenade(false)
+    elseif !self:GetPrimedGrenade() then
+        local nade = TacRP.QuickNades[self:GetValue("PrimaryGrenade")]
+        if !TacRP.IsGrenadeInfiniteAmmo(nade) and self:GetOwner():GetAmmoCount(nade.Ammo) == 0 then
+            if SERVER then
+                self:Remove()
+            elseif CLIENT and IsValid(self:GetOwner():GetPreviousWeapon()) and self:GetOwner():GetPreviousWeapon():IsWeapon() then
+                input.SelectWeapon(self:GetOwner():GetPreviousWeapon())
+            end
+        end
     end
 end
 
