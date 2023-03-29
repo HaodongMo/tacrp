@@ -1,7 +1,9 @@
+AddCSLuaFile()
+
 SWEP.Base = "tacrp_base_nade"
 SWEP.Spawnable = true
+SWEP.IconOverride = "entities/tacrp_ammo_flashbang.png"
 
-AddCSLuaFile()
 
 // names and stuff
 SWEP.PrintName = "Flashbang"

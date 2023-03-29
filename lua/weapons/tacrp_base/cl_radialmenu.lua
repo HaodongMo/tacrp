@@ -91,7 +91,7 @@ function SWEP:DrawGrenadeHUD()
         mouseangle = mouseangle + 360
     end
 
-    if self:GetOwner():KeyDown(self.GrenadeMenuKey) and !self:GetPrimedGrenade() and self.BlindFireMenuAlpha == 0 then
+    if self:GetOwner():KeyDown(self.GrenadeMenuKey) and !self:GetPrimedGrenade() and self.BlindFireMenuAlpha == 0 and self:GetHolsterTime() == 0 then
         self.GrenadeMenuAlpha = math.Approach(self.GrenadeMenuAlpha, 1, 15 * ft)
         if !lastmenu then
             gui.EnableScreenClicker(true)
@@ -275,24 +275,28 @@ function SWEP:DrawGrenadeHUD()
 
         local binded = input.LookupBinding("grenade1")
 
-        TacRP.DrawCorneredBox(tx, ty + h * 0.5 + ScreenScale(2), w, ScreenScale(binded and 28 or 20), col)
+        TacRP.DrawCorneredBox(tx, ty + h * 0.5 + ScreenScale(2), w, ScreenScale(binded and 36 or 28), col)
 
         surface.SetTextPos(tx + ScreenScale(4), ty + h / 2 + ScreenScale(4))
-        surface.DrawText("[" .. TacRP.GetBind("attack") .. "] - Throw Overhand")
+        surface.DrawText("[LMB] - Throw Overhand")
         surface.SetTextPos(tx + ScreenScale(4), ty + h / 2 + ScreenScale(12))
-        surface.DrawText("[" .. TacRP.GetBind("attack2") .. "] - Throw Underhand")
+        surface.DrawText("[RMB] - Throw Underhand")
+        surface.SetTextPos(tx + ScreenScale(4), ty + h / 2 + ScreenScale(20))
+        surface.DrawText("[MMB] - Pull Out Grenade")
         if binded then
-            surface.SetTextPos(tx + ScreenScale(4), ty + h / 2 + ScreenScale(20))
+            surface.SetTextPos(tx + ScreenScale(4), ty + h / 2 + ScreenScale(28))
             surface.DrawText("Hold/Tap [" .. TacRP.GetBind("grenade1") .. "] - Over/Under")
         end
     else
 
-        TacRP.DrawCorneredBox(tx, ty + h * 0.5 + ScreenScale(2), w, ScreenScale(20), col)
+        TacRP.DrawCorneredBox(tx, ty + h * 0.5 + ScreenScale(2), w, ScreenScale(28), col)
 
         surface.SetTextPos(tx + ScreenScale(4), ty + h / 2 + ScreenScale(4))
         surface.DrawText("Hold [" .. TacRP.GetBind("grenade1") .. "] - Throw Overhand")
         surface.SetTextPos(tx + ScreenScale(4), ty + h / 2 + ScreenScale(12))
         surface.DrawText("Tap [" .. TacRP.GetBind("grenade1") .. "] - Throw Underhand")
+        surface.SetTextPos(tx + ScreenScale(4), ty + h / 2 + ScreenScale(20))
+        surface.DrawText("[MMB] - Pull Out Grenade")
     end
 end
 
@@ -476,6 +480,19 @@ local bf_lines = {
     "When the going gets tough, the tough get going",
     "Acute cerebral lead poisoning",
     "Those bullets are laced with estrogen, you know",
+    "google en passant",
+    "And then he sacrificed... THE PLAYERRRRRRRRRRR",
+    "You should grow and change as a person",
+    "dont leave me </3",
+    "Nyoooom~",
+    "yeah take that fat L",
+    "not very ez now is it",
+    "You'll never live to see the day TF2 gets updated.",
+    "go commit die",
+    "oof",
+    "早死早超生",
+    "-800 social credit 干得好",
+    "So long, and thanks for all the tactical realism!",
 }
 
 local function canhighlight(self, slice)
@@ -650,14 +667,27 @@ hook.Add("VGUIMousePressed", "tacrp_grenademenu", function(pnl, mousecode)
     local wpn = LocalPlayer():GetActiveWeapon()
     if !(LocalPlayer():Alive() and IsValid(wpn) and wpn.ArcticTacRP and !wpn:StillWaiting(nil, true)) then return end
     if wpn.GrenadeMenuAlpha == 1 then
-        if !GetConVar("tacrp_nademenu_click"):GetBool() or !currentnade or (mousecode != MOUSE_RIGHT and mousecode != MOUSE_LEFT) then return end
-        local under = (mousecode == MOUSE_RIGHT)
-        wpn.GrenadeThrowOverride = under
-        net.Start("tacrp_togglenade")
-            net.WriteUInt(currentnade.Index, 4)
-            net.WriteBool(true)
-            net.WriteBool(under)
-        net.SendToServer()
+        if !GetConVar("tacrp_nademenu_click"):GetBool() or !currentnade then return end
+        if mousecode == MOUSE_MIDDLE then
+            local nadewep = currentnade.GrenadeWep
+            if !nadewep or !wpn:CheckGrenade(currentnade.Index, true) then return end
+
+            if LocalPlayer():HasWeapon(nadewep) then
+                input.SelectWeapon(LocalPlayer():GetWeapon(nadewep))
+            else
+                net.Start("tacrp_givenadewep")
+                    net.WriteUInt(currentnade.Index, TacRP.QuickNades_Bits)
+                net.SendToServer()
+                wpn.GrenadeWaitSelect = nadewep -- cannot try to switch immediately as the nade wep does not exist on client yet
+            end
+        elseif mousecode == MOUSE_RIGHT and mousecode == MOUSE_LEFT then
+            wpn.GrenadeThrowOverride = mousecode == MOUSE_RIGHT
+            net.Start("tacrp_togglenade")
+                net.WriteUInt(currentnade.Index, TacRP.QuickNades_Bits)
+                net.WriteBool(true)
+                net.WriteBool(wpn.GrenadeThrowOverride)
+            net.SendToServer()
+        end
     elseif wpn.BlindFireMenuAlpha == 1 then
         if mousecode == MOUSE_LEFT and currentind == 2 then
             bf_suicidelock = bf_suicidelock - 1

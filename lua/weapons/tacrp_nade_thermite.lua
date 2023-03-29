@@ -1,7 +1,8 @@
+AddCSLuaFile()
+
 SWEP.Base = "tacrp_base_nade"
 SWEP.Spawnable = true
-
-AddCSLuaFile()
+SWEP.IconOverride = "entities/tacrp_ammo_fire.png"
 
 // names and stuff
 SWEP.PrintName = "Thermite Grenade"

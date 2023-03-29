@@ -1,7 +1,8 @@
+AddCSLuaFile()
+
 SWEP.Base = "tacrp_base_nade"
 SWEP.Spawnable = true
-
-AddCSLuaFile()
+SWEP.IconOverride = "entities/tacrp_ammo_frag.png"
 
 // names and stuff
 SWEP.PrintName = "Frag Grenade"

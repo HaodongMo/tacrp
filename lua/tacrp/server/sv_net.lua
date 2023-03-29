@@ -14,12 +14,12 @@ util.AddNetworkString("tacrp_clientdamage")
 util.AddNetworkString("tacrp_container")
 util.AddNetworkString("tacrp_toggletactical")
 util.AddNetworkString("tacrp_doorbust")
-
 util.AddNetworkString("tacrp_togglepeek")
 util.AddNetworkString("tacrp_flashbang")
 util.AddNetworkString("tacrp_togglenade")
 util.AddNetworkString("tacrp_addshieldmodel")
 util.AddNetworkString("tacrp_updateslot")
+util.AddNetworkString("tacrp_givenadewep")
 
 net.Receive("tacrp_togglepeek", function(len, ply)
     local bf = net.ReadBool()
@@ -33,7 +33,7 @@ net.Receive("tacrp_togglepeek", function(len, ply)
 end)
 
 net.Receive("tacrp_togglenade", function(len, ply)
-    local bf = net.ReadUInt(4)
+    local bf = net.ReadUInt(TacRP.QuickNades_Bits)
     local throw = net.ReadBool()
     local under = false
     if throw then under = net.ReadBool() end
@@ -47,6 +47,17 @@ net.Receive("tacrp_togglenade", function(len, ply)
         wpn:PrimeGrenade()
         wpn.GrenadeThrowOverride = under
     end
+end)
+
+net.Receive("tacrp_givenadewep", function(len, ply)
+    local bf = net.ReadUInt(TacRP.QuickNades_Bits)
+    local wpn = ply:GetActiveWeapon()
+    if !wpn or !IsValid(wpn) or !wpn.ArcticTacRP then return end
+
+    local nade = TacRP.QuickNades[TacRP.QuickNades_Index[bf]]
+    if !nade or !nade.GrenadeWep or !wpn:CheckGrenade(bf, true) then return end
+
+    ply:Give(nade.GrenadeWep, true)
 end)
 
 net.Receive("tacrp_toggleblindfire", function(len, ply)

@@ -4,7 +4,6 @@ SWEP.GrenadeMenuKey = IN_GRENADE2
 function SWEP:PrimeGrenade()
     self.Primary.Automatic = true
 
-
     if !self:GetValue("CanQuickNade") and !self:GetValue("PrimaryGrenade") then return end
     if self:StillWaiting(nil, true) then return end
     if self:GetPrimedGrenade() then return end
@@ -288,6 +287,11 @@ function SWEP:ThinkGrenade()
         self:SelectGrenade()
     elseif tobool(self:GetOwner():GetInfo("tacrp_nademenu")) and self.GrenadeMenuKey != IN_GRENADE2 and !self:GetOwner():KeyDown(self.GrenadeMenuKey) then
         self.GrenadeMenuKey = IN_GRENADE2
+    end
+
+    if CLIENT and self.GrenadeWaitSelect and self:GetOwner():HasWeapon(self.GrenadeWaitSelect) then
+        input.SelectWeapon(self:GetOwner():GetWeapon(self.GrenadeWaitSelect))
+        self.GrenadeWaitSelect = nil
     end
 
     if self:GetPrimedGrenade() and self:GetAnimLockTime() < CurTime() then

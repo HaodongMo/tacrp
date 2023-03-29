@@ -2,6 +2,7 @@ TacRP.QuickNades = {
     ["frag"] = {
         PrintName = "FRAG",
         GrenadeEnt = "tacrp_proj_nade_frag",
+        GrenadeWep = "tacrp_nade_frag",
         ThrowForce = 1000,
         Ammo = "grenade",
         Model = "models/weapons/tacint/v_quicknade_frag.mdl",
@@ -19,6 +20,7 @@ TacRP.QuickNades = {
     ["flashbang"] = {
         PrintName = "FLASH",
         GrenadeEnt = "tacrp_proj_nade_flashbang",
+        GrenadeWep = "tacrp_nade_flashbang",
         ThrowForce = 1000,
         Ammo = "ti_flashbang",
         Model = "models/weapons/tacint/v_quicknade_flashbang.mdl",
@@ -35,6 +37,7 @@ TacRP.QuickNades = {
     ["smoke"] = {
         PrintName = "SMOKE",
         GrenadeEnt = "tacrp_proj_nade_smoke",
+        GrenadeWep = "tacrp_nade_smoke",
         ThrowForce = 1000,
         Ammo = "ti_smoke",
         Model = "models/weapons/tacint/v_quicknade_smoke.mdl",
@@ -51,6 +54,7 @@ TacRP.QuickNades = {
     ["gas"] = {
         PrintName = "GAS",
         GrenadeEnt = "tacrp_proj_nade_gas",
+        GrenadeWep = "tacrp_nade_gas",
         ThrowForce = 1000,
         Ammo = "ti_gas",
         Model = "models/weapons/tacint/v_quicknade_smoke.mdl",
@@ -68,6 +72,7 @@ TacRP.QuickNades = {
     ["thermite"] = {
         PrintName = "FIRE",
         GrenadeEnt = "tacrp_proj_nade_thermite",
+        GrenadeWep = "tacrp_nade_thermite",
         ThrowForce = 1000,
         Ammo = "ti_thermite",
         Model = "models/weapons/tacint/v_quicknade_smoke.mdl",
@@ -124,6 +129,7 @@ TacRP.QuickNades = {
     ["charge"] = {
         PrintName = "BREACH",
         GrenadeEnt = "tacrp_proj_nade_charge",
+        GrenadeWep = "tacrp_nade_charge",
         ThrowForce = 2000,
         ThrowSpeed = 0.75,
         Ammo = "ti_charge",
@@ -163,7 +169,6 @@ TacRP.QuickNades_Index = {}
 TacRP.QuickNades_EntLookup = {}
 
 TacRP.QuickNades_Count = 0
-
 for i, k in SortedPairsByMemberValue(TacRP.QuickNades, "SortOrder") do
     TacRP.QuickNades_Count = TacRP.QuickNades_Count + 1
 
@@ -171,6 +176,7 @@ for i, k in SortedPairsByMemberValue(TacRP.QuickNades, "SortOrder") do
     TacRP.QuickNades_EntLookup[k.GrenadeEnt] = i
     k.Index = TacRP.QuickNades_Count
 end
+TacRP.QuickNades_Bits = math.min(math.ceil(math.log(TacRP.QuickNades_Count + 1, 2)), 32)
 
 function TacRP.IsGrenadeInfiniteAmmo(i)
     local nade = i

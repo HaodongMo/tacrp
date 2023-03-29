@@ -1,11 +1,11 @@
 local ammotypes = {
     ["ti_flashbang"] = "Flashbangs",
-    ["ti_thermite"] = "Fire Grenades",
+    ["ti_thermite"] = "Thermite Grenades",
     ["ti_smoke"] = "Smoke Grenades",
     ["ti_c4"] = "C4 Charges",
-    ["ti_gas"] = "Gas Grenades",
-    ["ti_nuke"] = "Nuclear Device",
-    ["ti_charge"] = "Door Charges",
+    ["ti_gas"] = "CS Gas Grenades",
+    ["ti_nuke"] = "Nuclear Devices",
+    ["ti_charge"] = "Breaching Charge",
 }
 
 for i, k in pairs(ammotypes) do
