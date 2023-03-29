@@ -323,6 +323,14 @@ local conVars = {
         min = 0,
         max = 2,
     },
+
+    {
+        name = "hud_ammo_number",
+        default = "0",
+        client = true,
+        min = 0,
+        max = 1
+    }
 }
 
 local prefix = "tacrp_"

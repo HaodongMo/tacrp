@@ -144,6 +144,90 @@ local faceindex = 0
 local shockedtime = 0
 local lastblindfiremode = 0
 
+local col = Color(255, 255, 255)
+local col_hi = Color(255, 150, 0)
+local col_hi2 = Color(255, 230, 200)
+local col_dark = Color(255, 255, 255, 20)
+
+function SWEP:ShouldDrawBottomBar()
+    return self:GetFiremodeAmount() > 0 or self:GetValue("CanQuickNade")
+end
+
+function SWEP:DrawBottomBar(x, y, w, h)
+    if self:GetFiremodeAmount() > 0 then
+        if self:GetSafe() then
+            surface.SetMaterial(self:GetFiremodeMat(0))
+        else
+            surface.SetMaterial(self:GetFiremodeMat(self:GetCurrentFiremode()))
+        end
+        surface.SetDrawColor(col)
+        local sfm = ScreenScale(14)
+        surface.DrawTexturedRect(x + w - sfm - ScreenScale(1 + 10), y + h - sfm - ScreenScale(1), sfm, sfm)
+    end
+
+    if self:GetFiremodeAmount() > 1 and !self:GetSafe() then
+        local nextfm = TacRP.GetBind("use") .. "+" .. TacRP.GetBind("reload")
+
+        surface.SetTextColor(col)
+        surface.SetFont("TacRP_HD44780A00_5x8_4")
+        local tw = surface.GetTextSize(nextfm)
+        surface.SetTextPos(x + w - tw - ScreenScale(2), y + h - ScreenScale(14))
+        surface.DrawText(nextfm)
+
+        surface.SetMaterial(self:GetFiremodeMat(self:GetNextFiremode()))
+        surface.SetDrawColor(col)
+        local nfm = ScreenScale(8)
+        surface.DrawTexturedRect(x + w - nfm - ScreenScale(4), y + h - nfm - ScreenScale(1), nfm, nfm)
+    end
+
+    if self:GetValue("CanQuickNade") then
+        local nade = self:GetGrenade()
+
+        local qty = nil --"INF"
+
+        if !TacRP.IsGrenadeInfiniteAmmo(nade) then
+            qty = tostring(self:GetOwner():GetAmmoCount(nade.Ammo))
+        end
+
+        local sg = ScreenScale(14)
+
+        if nade.Icon then
+            surface.SetMaterial(nade.Icon)
+            surface.SetDrawColor(255, 255, 255)
+            surface.DrawTexturedRect(x + ScreenScale(2), y + h - sg - ScreenScale(1), sg, sg)
+        end
+
+        local nadetext = nade.PrintName .. (qty and ("x" .. qty) or "")
+        surface.SetTextPos(x + ScreenScale(4) + sg, y + h - sg + ScreenScale(1))
+        surface.SetFont("TacRP_HD44780A00_5x8_8")
+        surface.SetTextColor(col)
+        surface.DrawText(nadetext)
+
+        local mat = nil
+        if !GetConVar("tacrp_nademenu"):GetBool() then
+            mat = self:GetNextGrenade().Icon
+        else
+            mat = mat_radial
+        end
+
+        local nsg = ScreenScale(10)
+
+        if mat then
+            surface.SetMaterial(mat)
+            surface.SetDrawColor(255, 255, 255)
+            surface.DrawTexturedRect(x + w - ScreenScale(41), y + h - nsg - ScreenScale(1), nsg, nsg)
+        end
+
+        local nextnadetxt = TacRP.GetBind("grenade2")
+
+        surface.SetTextColor(col)
+        surface.SetFont("TacRP_HD44780A00_5x8_4")
+        local tw = surface.GetTextSize(nextnadetxt)
+        surface.SetTextPos(x + w - ScreenScale(36) - (tw / 2), y + h - nsg - ScreenScale(4))
+        surface.DrawText(nextnadetxt)
+    end
+end
+
 function SWEP:DrawHUDBackground()
     self:DoScope()
 
@@ -170,8 +254,7 @@ function SWEP:DrawHUDBackground()
     self:DrawCustomizeHUD()
 
     if !self:GetCustomize() and GetConVar("tacrp_hud"):GetBool() then
-        local col = Color(255, 255, 255)
-        local col_hi = Color(255, 150, 0)
+
 
         if GetConVar("tacrp_drawhud"):GetBool() then
 
@@ -183,179 +266,146 @@ function SWEP:DrawHUDBackground()
             surface.SetDrawColor(0, 0, 0, 150)
             TacRP.DrawCorneredBox(x, y, w, h, col)
 
-            surface.SetTextColor(col)
-            surface.SetTextPos(x + ScreenScale(3), y + ScreenScale(1))
             surface.SetFont("TacRP_HD44780A00_5x8_8")
+            local tw = surface.GetTextSize(self.PrintName)
+            surface.SetTextPos(x + ScreenScale(3), y + ScreenScale(1))
+            if tw > w then
+                surface.SetFont("TacRP_HD44780A00_5x8_6")
+                tw = surface.GetTextSize(self.PrintName)
+            elseif tw > w - ScreenScale(3) then
+                surface.SetTextPos(x + ScreenScale(1.5), y + ScreenScale(1))
+            end
+            surface.SetTextColor(col)
             surface.DrawText(self.PrintName)
 
-            local row_size = 15
+            if self.Primary.ClipSize > 0 then
 
-            local row1_bullets = 0
-            local row2_bullets = 0
-            local rackrise = 0
-
-            local disparity = self:GetValue("ClipSize") % row_size
-
-            local corrected = self:Clip1() - disparity
-
-            local row = math.ceil(corrected / row_size)
-
-            local sb = ScreenScale(4)
-
-            local crc = self:Clip1()
-
-            if disparity > 0 then
-                crc = self:Clip1() + row_size - disparity
-            end
-
-            if crc > row_size then
-                row2_bullets = math.min(row_size, self:Clip1() + disparity)
-                row1_bullets = (corrected % row_size)
-
-                if row1_bullets == 0 then
-                    row1_bullets = row_size
-                end
-
-                if self:Clip1() <= row_size + disparity then
-                    row2_bullets = disparity
-                end
-
-                if row < lastrow then
-                    rackrisetime = CurTime()
-                end
-
-                lastrow = row
-            else
-                row2_bullets = self:Clip1()
-            end
-
-            if rackrisetime + 0.2 > CurTime() then
-                local rackrisedelta = ((rackrisetime + 0.2) - CurTime()) / 0.2
-                rackrise = rackrisedelta * (sb + ScreenScale(1))
-            end
-
-            render.SetScissorRect(x, y, x + w, y + ScreenScale(12) + sb + sb + 3, true)
-
-            for i = 1, row1_bullets do
-                if i == row1_bullets then
-                    surface.SetDrawColor(col_hi)
+                if GetConVar("tacrp_hud_ammo_number"):GetBool() then
+                    surface.SetFont("TacRP_HD44780A00_5x8_10")
+                    local t = math.max(0, self:Clip1()) .. " /" .. self.Primary.ClipSize
+                    local tw = surface.GetTextSize(t)
+                    surface.SetTextColor(col)
+                    surface.SetTextPos(x + w - tw - ScreenScale(40), y + ScreenScale(12))
+                    surface.DrawText(t)
                 else
-                    surface.SetDrawColor(col)
+                    local sb = ScreenScale(4)
+                    local xoffset = ScreenScale(77)
+                    -- local pw = ScreenScale(1)
+
+                    local row1_bullets = 0
+                    local row2_bullets = 0
+                    local rackrise = 0
+                    local cs = self:GetValue("ClipSize")
+                    local c1 = self:Clip1()
+
+                    local row_size = 15
+                    if cs == 20 then
+                        row_size = 10
+                    end
+
+                    local row = math.ceil(c1 / row_size)
+                    local maxrow = math.ceil(cs / row_size)
+
+                    local row2_size = math.min(row_size, self:GetValue("ClipSize"))
+                    local row1_size = math.Clamp(self:GetValue("ClipSize") - row2_size, 0, row_size)
+
+                    if c1 > row_size * 2 then
+                        if row == maxrow then
+                            row1_size = cs - row_size * (maxrow - 1)
+                            row1_bullets = c1 - row_size * (maxrow - 1)
+                        else
+                            row1_bullets = row1_bullets == 0 and row_size or c1 % row_size
+                        end
+                        row2_bullets = row2_size
+                    else
+                        row2_bullets = math.min(row2_size, c1)
+                        row1_bullets = math.min(row1_size, c1 - row2_bullets)
+                    end
+
+                    if row > 1 and row < lastrow then
+                        rackrisetime = CurTime()
+                    end
+                    lastrow = row
+
+                    if rackrisetime + 0.2 > CurTime() then
+                        local rackrisedelta = ((rackrisetime + 0.2) - CurTime()) / 0.2
+                        rackrise = rackrisedelta * (sb + ScreenScale(1))
+                    end
+
+                    render.SetScissorRect(x, y, x + w, y + ScreenScale(12) + sb + sb + 3, true)
+
+                    for i = 1, row1_size do
+                        if i == row1_bullets then
+                            surface.SetDrawColor(col_hi)
+                        elseif i > row1_bullets then
+                            surface.SetDrawColor(col_dark)
+                        elseif i % 5 == 0 then
+                            surface.SetDrawColor(col_hi2)
+                        else
+                            surface.SetDrawColor(col)
+                        end
+                        surface.DrawRect(x + xoffset - (i * (sb + ScreenScale(1))), y + ScreenScale(12) + rackrise, sb, sb)
+                    end
+
+                    for i = 1, row2_size do
+                        if i == row2_bullets and row1_bullets <= 0 then
+                            surface.SetDrawColor(col_hi)
+                        elseif i > row2_bullets then
+                            surface.SetDrawColor(col_dark)
+                        elseif i % 5 == 0 then
+                            surface.SetDrawColor(col_hi2)
+                        else
+                            surface.SetDrawColor(col)
+                        end
+
+                        if row1_size == 0 and row2_size <= 10 then
+                            local m = 1.5
+                            if row2_size <= 5 then
+                                m = 2
+                            end
+
+                            surface.DrawRect(x + xoffset - (i * (sb * m + ScreenScale(1))), y + ScreenScale(12 + 1) + sb * (2 - m) / 2, sb * m, sb * m)
+                        -- elseif row > 2 and i <= row - 2 then
+                        --     surface.DrawRect(x + xoffset - (i * (sb + ScreenScale(1))), y + ScreenScale(12 + 1) + sb + rackrise, sb, sb)
+                        --     surface.SetDrawColor(col_hi)
+                        --     surface.DrawRect(x + xoffset - (i * (sb + ScreenScale(1))) + sb / 2 - pw / 2, y + ScreenScale(12 + 1) + sb + rackrise, pw, sb)
+                        --     surface.DrawRect(x + xoffset - (i * (sb + ScreenScale(1))), y + ScreenScale(12 + 1) + sb + rackrise + sb / 2 - pw / 2, sb, pw)
+                        else
+                            surface.DrawRect(x + xoffset - (i * (sb + ScreenScale(1))), y + ScreenScale(12 + 1) + sb + rackrise, sb, sb)
+                        end
+                    end
                 end
-                surface.DrawRect(x + ScreenScale(75 + 2) - (i * (sb + ScreenScale(1))), y + ScreenScale(12) + rackrise, sb, sb)
-            end
 
-            for i = 1, row2_bullets do
-                if i == row2_bullets and row1_bullets <= 0 then
-                    surface.SetDrawColor(col_hi)
-                else
-                    surface.SetDrawColor(col)
+                render.SetScissorRect(0, 0, 0, 0, false)
+                local ammotype = self:GetValue("PrimaryGrenade") and (TacRP.QuickNades[self:GetValue("PrimaryGrenade")].Ammo) or self:GetValue("Ammo")
+                local clips = math.min(math.ceil(self:GetOwner():GetAmmoCount(ammotype)), 999)
+
+                if self.Primary.ClipSize <= 0 and ammotype == "" then
+                    clips = ""
+                elseif ammotype == "" then
+                    clips = "---"
+                elseif self.Primary.ClipSize > 0 then
+                    surface.SetTextColor(col)
+                    surface.SetTextPos(x + w - ScreenScale(31), y + ScreenScale(16))
+                    surface.SetFont("TacRP_HD44780A00_5x8_6")
+                    surface.DrawText("+")
+                    if (self:GetValue("PrimaryGrenade") and TacRP.IsGrenadeInfiniteAmmo(self:GetValue("PrimaryGrenade"))) or (!self:GetValue("PrimaryGrenade") and self:GetInfiniteAmmo()) then
+                        clips = "INF"
+                    end
                 end
-                surface.DrawRect(x + ScreenScale(75 + 2) - (i * (sb + ScreenScale(1))), y + ScreenScale(12 + 1) + sb + rackrise, sb, sb)
-            end
 
-            render.SetScissorRect(0, 0, 0, 0, false)
-
-            -- surface.SetDrawColor(col)
-            -- surface.SetMaterial(mat_mag)
-            -- surface.DrawRect(x + w - ScreenScale(31), y + ScreenScale(6), ScreenScale(5), ScreenScale(8))
-
-            local clips = self:GetOwner():GetAmmoCount(self:GetValue("Ammo"))
-
-            clips = math.ceil(clips)
-            clips = math.min(clips, 999)
-
-            if self:GetInfiniteAmmo() then
-                clips = "INF"
-            elseif self:GetValue("Ammo") == "" then
-                clips = "---"
-            else
                 surface.SetTextColor(col)
-                surface.SetTextPos(x + w - ScreenScale(31), y + ScreenScale(16))
-                surface.SetFont("TacRP_HD44780A00_5x8_6")
-                surface.DrawText("+")
+                surface.SetTextPos(x + w - ScreenScale(25), y + ScreenScale(12))
+                surface.SetFont("TacRP_HD44780A00_5x8_10")
+                surface.DrawText(clips)
             end
 
-            surface.SetTextColor(col)
-            surface.SetTextPos(x + w - ScreenScale(25), y + ScreenScale(12))
-            surface.SetFont("TacRP_HD44780A00_5x8_10")
-            surface.DrawText(clips)
-
-            surface.SetDrawColor(col)
-            surface.DrawLine(x + ScreenScale(2), y + ScreenScale(24), x + w - ScreenScale(2), y + ScreenScale(24))
-
-            if self:GetFiremodeAmount() > 0 then
-                if self:GetSafe() then
-                    surface.SetMaterial(self:GetFiremodeMat(0))
-                else
-                    surface.SetMaterial(self:GetFiremodeMat(self:GetCurrentFiremode()))
-                end
+            if self:ShouldDrawBottomBar() then
                 surface.SetDrawColor(col)
-                local sfm = ScreenScale(14)
-                surface.DrawTexturedRect(x + w - sfm - ScreenScale(1 + 10), y + h - sfm - ScreenScale(1), sfm, sfm)
+                surface.DrawLine(x + ScreenScale(2), y + ScreenScale(24), x + w - ScreenScale(2), y + ScreenScale(24))
+                self:DrawBottomBar(x, y, w, h)
             end
 
-            if self:GetFiremodeAmount() > 1 and !self:GetSafe() then
-                local nextfm = TacRP.GetBind("use") .. "+" .. TacRP.GetBind("reload")
-
-                surface.SetTextColor(col)
-                surface.SetFont("TacRP_HD44780A00_5x8_4")
-                local tw = surface.GetTextSize(nextfm)
-                surface.SetTextPos(x + w - tw - ScreenScale(2), y + h - ScreenScale(14))
-                surface.DrawText(nextfm)
-
-                surface.SetMaterial(self:GetFiremodeMat(self:GetNextFiremode()))
-                surface.SetDrawColor(col)
-                local nfm = ScreenScale(8)
-                surface.DrawTexturedRect(x + w - nfm - ScreenScale(4), y + h - nfm - ScreenScale(1), nfm, nfm)
-            end
-
-            if self:GetValue("CanQuickNade") then
-                local nade = self:GetGrenade()
-
-                local qty = nil --"INF"
-
-                if !TacRP.IsGrenadeInfiniteAmmo(nade) then
-                    qty = tostring(self:GetOwner():GetAmmoCount(nade.Ammo))
-                end
-
-                local sg = ScreenScale(14)
-
-                if nade.Icon then
-                    surface.SetMaterial(nade.Icon)
-                    surface.SetDrawColor(255, 255, 255)
-                    surface.DrawTexturedRect(x + ScreenScale(2), y + h - sg - ScreenScale(1), sg, sg)
-                end
-
-                local nadetext = nade.PrintName .. (qty and ("x" .. qty) or "")
-                surface.SetTextPos(x + ScreenScale(4) + sg, y + h - sg + ScreenScale(1))
-                surface.SetFont("TacRP_HD44780A00_5x8_8")
-                surface.SetTextColor(col)
-                surface.DrawText(nadetext)
-
-                local mat = nil
-                if !GetConVar("tacrp_nademenu"):GetBool() then
-                    mat = self:GetNextGrenade().Icon
-                else
-                    mat = mat_radial
-                end
-
-                local nsg = ScreenScale(10)
-
-                if mat then
-                    surface.SetMaterial(mat)
-                    surface.SetDrawColor(255, 255, 255)
-                    surface.DrawTexturedRect(x + w - ScreenScale(41), y + h - nsg - ScreenScale(1), nsg, nsg)
-                end
-
-                local nextnadetxt = TacRP.GetBind("grenade2")
-
-                surface.SetTextColor(col)
-                surface.SetFont("TacRP_HD44780A00_5x8_4")
-                local tw = surface.GetTextSize(nextnadetxt)
-                surface.SetTextPos(x + w - ScreenScale(36) - (tw / 2), y + h - nsg - ScreenScale(4))
-                surface.DrawText(nextnadetxt)
-            end
 
             local l_w = ScreenScale(80)
             local l_h = ScreenScale(40)
@@ -589,7 +639,7 @@ function SWEP:DrawHUDBackground()
             else
                 drawarmorsquare(1, cx1, cy2)
             end
-        elseif GetConVar("tacrp_minhud"):GetBool() then
+        elseif GetConVar("tacrp_minhud"):GetBool() and self:ShouldDrawBottomBar() then
             local w = ScreenScale(110)
             local h = ScreenScale(16)
             local x = ScrW() / 2 - w / 2
@@ -598,76 +648,7 @@ function SWEP:DrawHUDBackground()
             surface.SetDrawColor(0, 0, 0, 150)
             TacRP.DrawCorneredBox(x, y, w, h, col)
 
-            if self:GetSafe() then
-                surface.SetMaterial(self:GetFiremodeMat(0))
-            else
-                surface.SetMaterial(self:GetFiremodeMat(self:GetCurrentFiremode()))
-            end
-            surface.SetDrawColor(col)
-            local sfm = ScreenScale(14)
-            surface.DrawTexturedRect(x + w - sfm - ScreenScale(1 + 10), y + h - sfm - ScreenScale(1), sfm, sfm)
-
-            if self:GetFiremodeAmount() > 1 and !self:GetSafe() then
-                local nextfm = TacRP.GetBind("use") .. "+" .. TacRP.GetBind("reload")
-
-                surface.SetTextColor(col)
-                surface.SetFont("TacRP_HD44780A00_5x8_4")
-                local tw = surface.GetTextSize(nextfm)
-                surface.SetTextPos(x + w - tw - ScreenScale(2), y + h - ScreenScale(14))
-                surface.DrawText(nextfm)
-
-                surface.SetMaterial(self:GetFiremodeMat(self:GetNextFiremode()))
-                surface.SetDrawColor(col)
-                local nfm = ScreenScale(8)
-                surface.DrawTexturedRect(x + w - nfm - ScreenScale(4), y + h - nfm - ScreenScale(1), nfm, nfm)
-            end
-
-            if self:GetValue("CanQuickNade") then
-                local nade = self:GetGrenade()
-
-                local qty = nil --"INF"
-
-                if !TacRP.IsGrenadeInfiniteAmmo(nade) then
-                    qty = tostring(self:GetOwner():GetAmmoCount(nade.Ammo))
-                end
-
-                local sg = ScreenScale(14)
-
-                if nade.Icon then
-                    surface.SetMaterial(nade.Icon)
-                    surface.SetDrawColor(255, 255, 255)
-                    surface.DrawTexturedRect(x + ScreenScale(2), y + h - sg - ScreenScale(1), sg, sg)
-                end
-
-                local nadetext = nade.PrintName .. (qty and ("x" .. qty) or "")
-                surface.SetTextPos(x + ScreenScale(4) + sg, y + h - sg + ScreenScale(1))
-                surface.SetFont("TacRP_HD44780A00_5x8_8")
-                surface.SetTextColor(col)
-                surface.DrawText(nadetext)
-
-                local mat = nil
-                if !GetConVar("tacrp_nademenu"):GetBool() then
-                    mat = self:GetNextGrenade().Icon
-                else
-                    mat = mat_radial
-                end
-
-                local nsg = ScreenScale(10)
-
-                if mat then
-                    surface.SetMaterial(mat)
-                    surface.SetDrawColor(255, 255, 255)
-                    surface.DrawTexturedRect(x + w - ScreenScale(41), y + h - nsg - ScreenScale(1), nsg, nsg)
-                end
-
-                local nextnadetxt = TacRP.GetBind("grenade2")
-
-                surface.SetTextColor(col)
-                surface.SetFont("TacRP_HD44780A00_5x8_4")
-                local tw = surface.GetTextSize(nextnadetxt)
-                surface.SetTextPos(x + w - ScreenScale(36) - (tw / 2), y + h - nsg - ScreenScale(4))
-                surface.DrawText(nextnadetxt)
-            end
+            self:DrawBottomBar(x, y, w, h)
         end
     end
 
