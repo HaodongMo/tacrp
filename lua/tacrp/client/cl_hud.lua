@@ -34,14 +34,12 @@ local hide = {
 
 hook.Add("HUDShouldDraw", "TacRP_HideHUD", function(name)
     if !IsValid(LocalPlayer()) then return end
-
     local wpn = LocalPlayer():GetActiveWeapon()
 
-    if !wpn.ArcticTacRP then return end
-
-    if !GetConVar("tacrp_drawhud"):GetBool() then return end
-
-    if hide[name] then return false end
+    if IsValid(wpn) and wpn.ArcticTacRP and
+            (GetConVar("tacrp_drawhud"):GetBool() or wpn:GetCustomize()) and hide[name]  then
+        return false
+    end
 end)
 
 local names = {

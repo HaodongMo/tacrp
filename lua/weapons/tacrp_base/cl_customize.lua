@@ -12,39 +12,6 @@ local body_stomach = Material("tacrp/hud/body_stomach.png", "mips smooth")
 local body_arms = Material("tacrp/hud/body_arms.png", "mips smooth")
 local body_legs = Material("tacrp/hud/body_legs.png", "mips smooth")
 
-local function multlinetext(text, maxw, font)
-    local content = {}
-    local tline = ""
-    local x = 0
-    surface.SetFont(font)
-
-    local newlined = string.Split(text, "\n")
-
-    for _, line in pairs(newlined) do
-        local words = string.Split(line, " ")
-
-        for _, word in pairs(words) do
-            local tx = surface.GetTextSize(word)
-
-            if x + tx >= maxw then
-                table.insert(content, tline)
-                tline = ""
-                x = surface.GetTextSize(word)
-            end
-
-            tline = tline .. word .. " "
-
-            x = x + surface.GetTextSize(word .. " ")
-        end
-
-        table.insert(content, tline)
-        tline = ""
-        x = 0
-    end
-
-    return content
-end
-
 local stk_clr = {
     [1] = Color(75, 25, 25),
     [2] = Color(40, 20, 20),
@@ -377,31 +344,75 @@ function SWEP:CreateCustomizeHUD()
         stack = stack + ScreenScale(64) + smallgap
     end
 
-    local desc_box = vgui.Create("DPanel", bg)
-    desc_box:SetSize(ScreenScale(172), ScreenScale(48))
-    desc_box:SetPos(scrw - ScreenScale(172) - airgap, stack + smallgap)
-    stack = stack + ScreenScale(48) + smallgap
-    desc_box.Paint = function(self2, w, h)
-        if !IsValid(self) then return end
+    if self:GetValue("PrimaryGrenade") then
+        local desc_box = vgui.Create("DPanel", bg)
+        desc_box:SetSize(ScreenScale(172), ScreenScale(108))
+        desc_box:SetPos(scrw - ScreenScale(172) - airgap, stack + smallgap)
+        stack = stack + ScreenScale(48) + smallgap
+        desc_box.Paint = function(self2, w, h)
+            if !IsValid(self) then return end
 
-        surface.SetDrawColor(0, 0, 0, 150)
-        surface.DrawRect(0, 0, w, h)
-        TacRP.DrawCorneredBox(0, 0, w, h)
+            surface.SetDrawColor(0, 0, 0, 150)
+            surface.DrawRect(0, 0, w, h)
+            TacRP.DrawCorneredBox(0, 0, w, h)
 
-        surface.SetFont("TacRP_Myriad_Pro_8")
-        surface.SetTextColor(255, 255, 255)
-        surface.SetTextPos(ScreenScale(6), ScreenScale(4))
-        surface.DrawText("DESCRIPTION:")
+            local nade = TacRP.QuickNades[self:GetValue("PrimaryGrenade")]
 
-        local txt = multlinetext(self:GetValue("Description"), w - ScreenScale(8), "TacRP_Myriad_Pro_8")
+            surface.SetFont("TacRP_Myriad_Pro_8")
+            surface.SetTextPos(ScreenScale(6), ScreenScale(4))
+            surface.DrawText("FUSE:")
 
-        for i, k in pairs(txt) do
+            surface.SetFont("TacRP_Myriad_Pro_8")
+            surface.SetTextPos(ScreenScale(4), ScreenScale(12))
+            surface.DrawText(nade.DetType or "")
+
             surface.SetFont("TacRP_Myriad_Pro_8")
             surface.SetTextColor(255, 255, 255)
-            surface.SetTextPos(ScreenScale(4), ScreenScale(4 + 8 + 1) + (ScreenScale(8 * (i - 1))))
-            surface.DrawText(k)
+            surface.SetTextPos(ScreenScale(6), ScreenScale(24))
+            surface.DrawText("DESCRIPTION:")
+
+            if !self.MiscCache["cust_desc"] then
+                self.MiscCache["cust_desc"] = TacRP.MultiLineText(nade.Description, w - ScreenScale(8), "TacRP_Myriad_Pro_8")
+            end
+
+            for i, k in ipairs(self.MiscCache["cust_desc"]) do
+                surface.SetFont("TacRP_Myriad_Pro_8")
+                surface.SetTextColor(255, 255, 255)
+                surface.SetTextPos(ScreenScale(4), ScreenScale(32) + (ScreenScale(8 * (i - 1))))
+                surface.DrawText(k)
+            end
+        end
+    else
+        local desc_box = vgui.Create("DPanel", bg)
+        desc_box:SetSize(ScreenScale(172), ScreenScale(48))
+        desc_box:SetPos(scrw - ScreenScale(172) - airgap, stack + smallgap)
+        stack = stack + ScreenScale(48) + smallgap
+        desc_box.Paint = function(self2, w, h)
+            if !IsValid(self) then return end
+
+            surface.SetDrawColor(0, 0, 0, 150)
+            surface.DrawRect(0, 0, w, h)
+            TacRP.DrawCorneredBox(0, 0, w, h)
+
+            surface.SetFont("TacRP_Myriad_Pro_8")
+            surface.SetTextColor(255, 255, 255)
+            surface.SetTextPos(ScreenScale(6), ScreenScale(4))
+            surface.DrawText("DESCRIPTION:")
+
+            if !self.MiscCache["cust_desc"] then
+                self.MiscCache["cust_desc"] = TacRP.MultiLineText(self:GetValue("Description"), w - ScreenScale(8), "TacRP_Myriad_Pro_8")
+            end
+
+            for i, k in pairs(self.MiscCache["cust_desc"]) do
+                surface.SetFont("TacRP_Myriad_Pro_8")
+                surface.SetTextColor(255, 255, 255)
+                surface.SetTextPos(ScreenScale(4), ScreenScale(4 + 8 + 1) + (ScreenScale(8 * (i - 1))))
+                surface.DrawText(k)
+            end
         end
     end
+
+
 
     local stats = {
         -- {

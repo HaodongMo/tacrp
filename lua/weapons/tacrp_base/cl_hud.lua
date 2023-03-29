@@ -4,8 +4,8 @@ function SWEP:ShouldDrawCrosshair()
         and !self:GetCustomize()
         and !(self:SprintLock() and !self.DrawCrosshairInSprint)
         and (self:GetSightAmount() <= 0.5 or self:GetPeeking())
-        and !(tobool(self:GetOwner():GetInfo("tacrp_nademenu")) and self:GetOwner():KeyDown(IN_GRENADE2))
-        and !(tobool(self:GetOwner():GetInfo("tacrp_blindfiremenu")) and self:GetOwner():KeyDown(IN_ZOOM))
+        and !(self:GetValue("CanQuickNade") and tobool(self:GetOwner():GetInfo("tacrp_nademenu")) and self:GetOwner():KeyDown(IN_GRENADE2))
+        and !(self:GetValue("CanBlindFire") and tobool(self:GetOwner():GetInfo("tacrp_blindfiremenu")) and self:GetOwner():KeyDown(IN_ZOOM))
 end
 
 function SWEP:DoDrawCrosshair(x, y)
@@ -67,6 +67,8 @@ function SWEP:DoDrawCrosshair(x, y)
     surface.SetDrawColor(50, 255, 50, 255 * self.CrosshairAlpha)
 
     surface.DrawRect(x, y, 1, 1)
+
+    if self.CrosshairStatic then spread = 16 end
 
     local w = 16
     surface.DrawLine(x, y - spread - w, x, y - spread)

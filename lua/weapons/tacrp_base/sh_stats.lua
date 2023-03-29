@@ -1,6 +1,7 @@
 SWEP.StatCache = {}
 SWEP.HookCache = {}
 SWEP.StatScoreCache = {} -- used by cust menu
+SWEP.MiscCache = {}
 
 SWEP.ExcludeFromRawStats = {
     ["PrintName"] = true,
@@ -16,6 +17,7 @@ function SWEP:InvalidateCache()
     self.StatCache = {}
     self.HookCache = {}
     self.StatScoreCache = {}
+    self.MiscCache = {}
 end
 
 function SWEP:RunHook(val, data)

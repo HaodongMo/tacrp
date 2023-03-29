@@ -69,6 +69,7 @@ local lastmenu
 function SWEP:DrawGrenadeHUD()
 
     if !GetConVar("tacrp_nademenu"):GetBool() then return end
+    if !self:GetValue("CanQuickNade") then return end
 
     -- adapted from tfa vox radial menu
     local nades = self:GetAvailableGrenades(false)
@@ -255,9 +256,13 @@ function SWEP:DrawGrenadeHUD()
     surface.DrawText("DESCRIPTION:")
 
     surface.SetFont("TacRP_Myriad_Pro_8")
-    local descmultiline = TacRP.MultiLineText(nade.Description or "", w - ScreenScale(7), "TacRP_Myriad_Pro_8")
+
+    if nade.Description then
+        nade.DescriptionMultiLine = TacRP.MultiLineText(nade.Description or "", w - ScreenScale(7), "TacRP_Myriad_Pro_8")
+    end
+
     surface.SetTextColor(255, 255, 255, a * 255)
-    for i, text in ipairs(descmultiline) do
+    for i, text in ipairs(nade.DescriptionMultiLine) do
         surface.SetTextPos(tx + ScreenScale(4), ty - h / 2 + ScreenScale(30) + (i - 1) * ScreenScale(8))
         surface.DrawText(text)
     end

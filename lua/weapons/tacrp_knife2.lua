@@ -8,7 +8,7 @@ SWEP.PrintName = "Jackal Knife"
 SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 
 SWEP.SubCatTier = "9Special"
-SWEP.SubCatType = "9Equipment"
+SWEP.SubCatType = "8Melee Weapon"
 
 SWEP.Description = "Very edgy looking knife. Light, partially skeletized blade makes it faster to swing but do less damage."
 
@@ -149,6 +149,7 @@ SWEP.FreeAim = false
 
 SWEP.DrawCrosshair = true
 SWEP.DrawCrosshairInSprint = true
+SWEP.CrosshairStatic = true
 
 local function addsound(name, spath)
     sound.Add({
@@ -173,4 +174,7 @@ function SWEP:GiveDefaultAmmo()
 end
 
 function SWEP:ThinkSprint()
+end
+
+function SWEP:ThinkSights()
 end
