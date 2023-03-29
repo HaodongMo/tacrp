@@ -19,8 +19,8 @@ SWEP.Slot = 2
 
 SWEP.ArcadeStats = {
 
-    Damage_Max = 25,
-    Damage_Min = 5,
+    Damage_Max = 26,
+    Damage_Min = 7,
 
     MoveSpeedMult = 0.9,
     ShootingSpeedMult = 0.8,
@@ -38,7 +38,7 @@ SWEP.Range_Max = 3000 // distance at which we drop to minimum damage
 SWEP.Penetration = 5 // units of metal this weapon can penetrate
 
 SWEP.BodyDamageMultipliers = {
-    [HITGROUP_HEAD] = 2,
+    [HITGROUP_HEAD] = 2.5,
     [HITGROUP_CHEST] = 1.25,
     [HITGROUP_STOMACH] = 1,
     [HITGROUP_LEFTARM] = 1,
@@ -71,9 +71,9 @@ SWEP.RecoilFirstShotMult = 1
 
 SWEP.RecoilVisualKick = 0.5
 
-SWEP.RecoilKick = 4
+SWEP.RecoilKick = 5
 
-SWEP.RecoilSpreadPenalty = 0.0012
+SWEP.RecoilSpreadPenalty = 0.002
 
 SWEP.CanBlindFire = true
 

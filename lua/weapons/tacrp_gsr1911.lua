@@ -19,7 +19,7 @@ SWEP.Slot = 1
 
 SWEP.ArcadeStats = {
 
-    Damage_Max = 22,
+    Damage_Max = 28,
     Damage_Min = 7,
 
     RPM = 500,
@@ -35,14 +35,14 @@ SWEP.ArcadeStats = {
 
 SWEP.Damage_Max = 20
 SWEP.Damage_Min = 4
-SWEP.Range_Min = 800 // distance for which to maintain maximum damage
+SWEP.Range_Min = 600 // distance for which to maintain maximum damage
 SWEP.Range_Max = 3000 // distance at which we drop to minimum damage
 SWEP.Penetration = 3 // units of metal this weapon can penetrate
 
 SWEP.MuzzleVelocity = 8000
 
 SWEP.BodyDamageMultipliers = {
-    [HITGROUP_HEAD] = 2,
+    [HITGROUP_HEAD] = 2.5,
     [HITGROUP_CHEST] = 1.25,
     [HITGROUP_STOMACH] = 1,
     [HITGROUP_LEFTARM] = 1,
@@ -59,20 +59,20 @@ SWEP.Firemode = 1
 SWEP.RPM = 400
 
 SWEP.Spread = 0.005
-SWEP.RecoilSpreadPenalty = 0.01
+SWEP.RecoilSpreadPenalty = 0.008
 SWEP.HipFireSpreadPenalty = 0.01
 
 SWEP.ShootTimeMult = 0.5
 
 SWEP.RecoilPerShot = 1
 SWEP.RecoilMaximum = 5
-SWEP.RecoilResetTime = 0.2
-SWEP.RecoilDissipationRate = 7
-SWEP.RecoilFirstShotMult = 0.8
+SWEP.RecoilResetTime = 0.15
+SWEP.RecoilDissipationRate = 8
+SWEP.RecoilFirstShotMult = 0.75
 
 SWEP.RecoilVisualKick = 3
 
-SWEP.RecoilKick = 8
+SWEP.RecoilKick = 7.5
 
 SWEP.CanBlindFire = true
 

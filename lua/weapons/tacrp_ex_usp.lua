@@ -19,8 +19,8 @@ SWEP.Slot = 1
 
 SWEP.ArcadeStats = {
 
-    Damage_Max = 20,
-    Damage_Min = 6,
+    Damage_Max = 24,
+    Damage_Min = 9,
 
     RPM = 450,
 
@@ -35,14 +35,14 @@ SWEP.ArcadeStats = {
 
 SWEP.Damage_Max = 18
 SWEP.Damage_Min = 5 // 100 / 7 // damage at maximum range
-SWEP.Range_Min = 800 // distance for which to maintain maximum damage
+SWEP.Range_Min = 700 // distance for which to maintain maximum damage
 SWEP.Range_Max = 3500 // distance at which we drop to minimum damage
-SWEP.Penetration = 3 // units of metal this weapon can penetrate
+SWEP.Penetration = 5 // units of metal this weapon can penetrate
 
 SWEP.MuzzleVelocity = 9000
 
 SWEP.BodyDamageMultipliers = {
-    [HITGROUP_HEAD] = 2,
+    [HITGROUP_HEAD] = 2.5,
     [HITGROUP_CHEST] = 1.25,
     [HITGROUP_STOMACH] = 1,
     [HITGROUP_LEFTARM] = 1,
