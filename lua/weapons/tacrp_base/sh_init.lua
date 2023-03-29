@@ -63,7 +63,13 @@ function SWEP:Deploy()
 
     self:SetShouldHoldType()
 
-    if !self:CheckGrenade() then
+    if self:GetValue("PrimaryGrenade") then
+        local nade = TacRP.QuickNades[self:GetValue("PrimaryGrenade")]
+        if !TacRP.IsGrenadeInfiniteAmmo(nade) and self:GetOwner():GetAmmoCount(nade.Ammo) == 0 then
+            self:Remove()
+            return true
+        end
+    elseif !self:CheckGrenade() then
         self:SelectGrenade()
         return
     end
@@ -253,16 +259,19 @@ function SWEP:SetBaseSettings()
         self.Primary.Automatic = false
     end
 
-    self.Primary.ClipSize = self:GetValue("ClipSize")
-    self.Primary.Ammo = self:GetValue("Ammo")
+    if self.PrimaryGrenade then
+        self.Primary.ClipSize = -1
+        self.Primary.Ammo = TacRP.QuickNades[self.PrimaryGrenade].Ammo or ""
+        self.Primary.DefaultClip = 1
+    else
+        self.Primary.ClipSize = self:GetValue("ClipSize")
+        self.Primary.Ammo = self:GetValue("Ammo")
+        self.Primary.DefaultClip = self.Primary.ClipSize
+    end
 
-    self.Primary.DefaultClip = self.Primary.ClipSize
-
-    if SERVER then
-        if self:GetValue("ClipSize") > 0 and self:Clip1() > self:GetValue("ClipSize") then
-            self:GetOwner():GiveAmmo(self:Clip1() - self:GetValue("ClipSize"), self:GetValue("Ammo"))
-            self:SetClip1(self:GetValue("ClipSize"))
-        end
+    if SERVER and self:GetValue("ClipSize") > 0 and self:Clip1() > self:GetValue("ClipSize") then
+        self:GetOwner():GiveAmmo(self:Clip1() - self:GetValue("ClipSize"), self:GetValue("Ammo"))
+        self:SetClip1(self:GetValue("ClipSize"))
     end
 end
 
@@ -298,5 +307,21 @@ end
 function SWEP:OnRemove()
     if IsValid(self:GetOwner()) then
         self:ToggleBoneMods(TacRP.BLINDFIRE_NONE)
+    end
+end
+
+function SWEP:EquipAmmo(ply)
+    local ammotype = self:GetValue("SupplyAmmoType") or self.Primary.Ammo
+    if ammotype == "" then return end
+
+    local supplyamount = self.GaveDefaultAmmo and self:Clip1() or math.max(1, self.Primary.ClipSize)
+    ply:GiveAmmo(supplyamount, ammotype)
+end
+
+function SWEP:Equip()
+    local ply = self:GetOwner()
+    if !self.GaveDefaultAmmo and IsValid(ply) and ply:IsPlayer() then
+        self:GiveDefaultAmmo()
+        self.GaveDefaultAmmo = true
     end
 end
