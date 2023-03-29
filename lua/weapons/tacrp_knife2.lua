@@ -40,7 +40,7 @@ SWEP.Melee2AttackMissTime = 0.7
 SWEP.MeleeThrowTime = 1.1
 SWEP.MeleeThrowTimeWait = 0.2
 
-SWEP.Firemode = 2
+SWEP.Firemode = 0
 
 SWEP.RPM = 120
 

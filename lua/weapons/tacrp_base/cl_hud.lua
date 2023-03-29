@@ -282,14 +282,16 @@ function SWEP:DrawHUDBackground()
             surface.SetDrawColor(col)
             surface.DrawLine(x + ScreenScale(2), y + ScreenScale(24), x + w - ScreenScale(2), y + ScreenScale(24))
 
-            if self:GetSafe() then
-                surface.SetMaterial(self:GetFiremodeMat(0))
-            else
-                surface.SetMaterial(self:GetFiremodeMat(self:GetCurrentFiremode()))
+            if self:GetFiremodeAmount() > 0 then
+                if self:GetSafe() then
+                    surface.SetMaterial(self:GetFiremodeMat(0))
+                else
+                    surface.SetMaterial(self:GetFiremodeMat(self:GetCurrentFiremode()))
+                end
+                surface.SetDrawColor(col)
+                local sfm = ScreenScale(14)
+                surface.DrawTexturedRect(x + w - sfm - ScreenScale(1 + 10), y + h - sfm - ScreenScale(1), sfm, sfm)
             end
-            surface.SetDrawColor(col)
-            local sfm = ScreenScale(14)
-            surface.DrawTexturedRect(x + w - sfm - ScreenScale(1 + 10), y + h - sfm - ScreenScale(1), sfm, sfm)
 
             if self:GetFiremodeAmount() > 1 and !self:GetSafe() then
                 local nextfm = TacRP.GetBind("use") .. "+" .. TacRP.GetBind("reload")

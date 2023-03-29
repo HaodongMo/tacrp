@@ -13,12 +13,15 @@ end
 function SWEP:GetFiremodeAmount()
     if self:GetValue("Firemodes") then
         return #self:GetValue("Firemodes")
+    elseif self:GetValue("Firemode") == 0 then
+        return 0
     else
         return 1
     end
 end
 
 function SWEP:GetNextFiremode()
+    if self:GetFiremodeAmount() == 0 then return 1 end
     if self:GetValue("Firemodes") then
         local fm = self:GetFiremode()
 
@@ -44,6 +47,7 @@ function SWEP:GetCurrentFiremode()
 end
 
 function SWEP:ToggleSafety(onoff)
+    if self:GetValue("Firemode") == 0 then return end
     onoff = onoff or !self:GetSafe()
 
     self:SetSafe(onoff)
