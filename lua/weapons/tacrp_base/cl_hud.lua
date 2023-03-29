@@ -717,3 +717,18 @@ function SWEP:RangeUnitize(range)
         return tostring(math.Round(range)) .. " HU"
     end
 end
+
+function SWEP:CustomAmmoDisplay()
+    self.AmmoDisplay = self.AmmoDisplay or {}
+    self.AmmoDisplay.Draw = true
+
+    if self.Primary.ClipSize > 0 then
+        self.AmmoDisplay.PrimaryClip = self:Clip1()
+        self.AmmoDisplay.PrimaryAmmo = self:Ammo1()
+    elseif self.Primary.Ammo != "" then
+        self.AmmoDisplay.PrimaryClip = self:Ammo1()
+        self.AmmoDisplay.PrimaryAmmo = -1
+    end
+
+    return self.AmmoDisplay
+end
