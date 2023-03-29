@@ -31,4 +31,5 @@ end
 
 function SWEP:OnReloaded()
     self:InvalidateCache()
+    self:SetBaseSettings()
 end
