@@ -41,6 +41,10 @@ SWEP.Firemode = 0
 SWEP.Ammo = ""
 SWEP.PrimaryGrenade = ""
 
+SWEP.Sway = 0
+
+SWEP.QuickNadeTimeMult = 0.6
+
 function SWEP:GiveDefaultAmmo()
 end
 
@@ -70,6 +74,8 @@ function SWEP:PrimaryAttack()
 
     self.Primary.Automatic = false
     self.Secondary.Automatic = false
+    self.GrenadeDownKey = IN_ATTACK
+    self.GrenadeThrowOverride = false
 
     if self:GetValue("Melee") and self:GetOwner():KeyDown(IN_USE) then
         self:Melee()
@@ -85,18 +91,21 @@ function SWEP:PrimaryAttack()
     local stop = self:RunHook("Hook_PreShoot")
     if stop then return end
 
-    self.GrenadeDownKey = IN_ATTACK
-    self.GrenadeThrowOverride = false
-
     self:PrimeGrenade()
+    self:SetNextPrimaryFire(self:GetAnimLockTime())
+    self:SetNextSecondaryFire(self:GetAnimLockTime())
 
     self:RunHook("Hook_PostShoot")
+
+    if game.SinglePlayer() and SERVER then self:CallOnClient("PrimaryAttack") end
 end
 
 function SWEP:SecondaryAttack()
 
     self.Primary.Automatic = false
     self.Secondary.Automatic = false
+    self.GrenadeDownKey = IN_ATTACK2
+    self.GrenadeThrowOverride = true
 
     if self:StillWaiting() then
         return
@@ -107,12 +116,13 @@ function SWEP:SecondaryAttack()
     local stop = self:RunHook("Hook_PreShoot")
     if stop then return end
 
-    self.GrenadeDownKey = IN_ATTACK2
-    self.GrenadeThrowOverride = true
-
     self:PrimeGrenade()
+    self:SetNextPrimaryFire(self:GetAnimLockTime())
+    self:SetNextSecondaryFire(self:GetAnimLockTime())
 
     self:RunHook("Hook_PostShoot")
+
+    if game.SinglePlayer() and SERVER then self:CallOnClient("SecondaryAttack") end
 end
 
 function SWEP:Reload()
