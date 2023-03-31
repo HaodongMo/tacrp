@@ -63,6 +63,8 @@ SWEP.QuickNadeTimeMult = 0.8
 
 SWEP.Scope = false
 
+SWEP.Sway = 0
+
 // hold types
 
 SWEP.HoldType = "knife"

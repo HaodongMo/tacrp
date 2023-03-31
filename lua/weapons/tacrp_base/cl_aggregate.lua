@@ -240,7 +240,7 @@ SWEP.StatGroups = {
             score = score + math.Clamp(1 - (fss * rsp - rbs) / 0.01, 0, 1) * 25
 
             -- [25] spread over 0.3s (or one burst)
-            local shots = math.floor(erpm / 60 * 0.3)
+            local shots = math.min(math.floor(erpm / 60 * 0.3), math.floor(self:GetBaseValue("ClipSize") * 0.5))
             if bfm < 0 then
                 shots = -bfm
             end
