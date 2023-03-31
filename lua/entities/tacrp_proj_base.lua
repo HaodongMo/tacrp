@@ -112,7 +112,7 @@ function ENT:OnTakeDamage(dmg)
         else self.Attacker = dmg:GetAttacker() or self.Attacker end
 
         self:PreDetonate()
-    elseif self.DefuseOnDamage then
+    elseif self.DefuseOnDamage and dmg:GetDamageType() != DMG_BLAST then
         self:EmitSound("physics/plastic/plastic_box_break" .. math.random(1, 2) .. ".wav", 75, math.Rand(95, 105))
         local fx = EffectData()
         fx:SetOrigin(self:GetPos())
