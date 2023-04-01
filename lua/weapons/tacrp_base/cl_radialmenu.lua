@@ -281,11 +281,13 @@ function SWEP:DrawGrenadeHUD()
         surface.DrawText("[LMB] - Throw Overhand")
         surface.SetTextPos(tx + ScreenScale(4), ty + h / 2 + ScreenScale(12))
         surface.DrawText("[RMB] - Throw Underhand")
-        surface.SetTextPos(tx + ScreenScale(4), ty + h / 2 + ScreenScale(20))
-        surface.DrawText("[MMB] - Pull Out Grenade")
         if binded then
-            surface.SetTextPos(tx + ScreenScale(4), ty + h / 2 + ScreenScale(28))
+            surface.SetTextPos(tx + ScreenScale(4), ty + h / 2 + ScreenScale(20))
             surface.DrawText("Hold/Tap [" .. TacRP.GetBind("grenade1") .. "] - Over/Under")
+        end
+        if TacRP.AreTheGrenadeAnimsReadyYet then
+            surface.SetTextPos(tx + ScreenScale(4), ty + h / 2 + ScreenScale(28))
+            surface.DrawText("[MMB] - Pull Out Grenade")
         end
     else
 
@@ -295,8 +297,11 @@ function SWEP:DrawGrenadeHUD()
         surface.DrawText("Hold [" .. TacRP.GetBind("grenade1") .. "] - Throw Overhand")
         surface.SetTextPos(tx + ScreenScale(4), ty + h / 2 + ScreenScale(12))
         surface.DrawText("Tap [" .. TacRP.GetBind("grenade1") .. "] - Throw Underhand")
-        surface.SetTextPos(tx + ScreenScale(4), ty + h / 2 + ScreenScale(20))
-        surface.DrawText("[MMB] - Pull Out Grenade")
+
+        if TacRP.AreTheGrenadeAnimsReadyYet then
+            surface.SetTextPos(tx + ScreenScale(4), ty + h / 2 + ScreenScale(20))
+            surface.DrawText("[MMB] - Pull Out Grenade")
+        end
     end
 end
 
@@ -668,7 +673,7 @@ hook.Add("VGUIMousePressed", "tacrp_grenademenu", function(pnl, mousecode)
     if !(LocalPlayer():Alive() and IsValid(wpn) and wpn.ArcticTacRP and !wpn:StillWaiting(nil, true)) then return end
     if wpn.GrenadeMenuAlpha == 1 then
         if !GetConVar("tacrp_nademenu_click"):GetBool() or !currentnade then return end
-        if mousecode == MOUSE_MIDDLE then
+        if mousecode == MOUSE_MIDDLE and TacRP.AreTheGrenadeAnimsReadyYet then
             local nadewep = currentnade.GrenadeWep
             if !nadewep or !wpn:CheckGrenade(currentnade.Index, true) then return end
 

@@ -1,7 +1,7 @@
 AddCSLuaFile()
 
 SWEP.Base = "tacrp_base_nade"
-SWEP.Spawnable = true
+SWEP.Spawnable = TacRP.AreTheGrenadeAnimsReadyYet
 SWEP.IconOverride = "entities/tacrp_ammo_gas.png"
 
 // names and stuff

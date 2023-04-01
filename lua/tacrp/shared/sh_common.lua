@@ -110,3 +110,5 @@ TacRP.MuzzleEffectsLookup = {}
 for k, v in ipairs(TacRP.MuzzleEffects) do
     TacRP.MuzzleEffectsLookup[v] = k
 end
+
+TacRP.AreTheGrenadeAnimsReadyYet = false

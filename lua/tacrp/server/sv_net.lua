@@ -52,7 +52,7 @@ end)
 net.Receive("tacrp_givenadewep", function(len, ply)
     local bf = net.ReadUInt(TacRP.QuickNades_Bits)
     local wpn = ply:GetActiveWeapon()
-    if !wpn or !IsValid(wpn) or !wpn.ArcticTacRP then return end
+    if !wpn or !IsValid(wpn) or !wpn.ArcticTacRP or !TacRP.AreTheGrenadeAnimsReadyYet then return end
 
     local nade = TacRP.QuickNades[TacRP.QuickNades_Index[bf]]
     if !nade or !nade.GrenadeWep or !wpn:CheckGrenade(bf, true) then return end
