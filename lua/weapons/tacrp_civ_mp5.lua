@@ -4,7 +4,7 @@ SWEP.Spawnable = true
 AddCSLuaFile()
 
 // names and stuff
-SWEP.PrintName = "HK SP5"
+SWEP.PrintName = "HK HK94"
 SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 
 SWEP.SubCatTier = "4Common"
@@ -12,7 +12,7 @@ SWEP.SubCatType = "8Civilian Firearm"
 
 SWEP.Description = "Semi-automatic model of a legendary submachine gun.\nUses reduced capacity magazines."
 
-SWEP.ViewModel = "models/weapons/tacint/v_mp5.mdl"
+SWEP.ViewModel = "models/weapons/tacint/v_hk94.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_mp5.mdl"
 
 SWEP.Slot = 2
@@ -60,7 +60,7 @@ SWEP.Attachments = {
         Bone = "ValveBiped.mp5_rootbone",
         AttachSound = "TacRP/weapons/silencer_on.wav",
         DetachSound = "TacRP/weapons/silencer_off.wav",
-        Pos_VM = Vector(-4.25, -0.1, 20.5),
+        Pos_VM = Vector(-4.25, -0.2, 26),
         Pos_WM = Vector(24, 2.5, -5.25),
         Ang_VM = Angle(90, 0, 0),
         Ang_WM = Angle(0, -3.5, 180),

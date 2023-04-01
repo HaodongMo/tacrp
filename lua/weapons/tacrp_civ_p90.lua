@@ -12,7 +12,7 @@ SWEP.SubCatType = "8Civilian Firearm"
 
 SWEP.Description = "Semi-automatic variation of a futuristic PDW.\nUses reduced capacity magazines."
 
-SWEP.ViewModel = "models/weapons/tacint/v_p90.mdl"
+SWEP.ViewModel = "models/weapons/tacint/v_ps90.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_p90.mdl"
 
 SWEP.Slot = 2
@@ -60,7 +60,7 @@ SWEP.Attachments = {
         Bone = "p90_ROOT",
         AttachSound = "tacrp/weapons/silencer_on.wav",
         DetachSound = "tacrp/weapons/silencer_off.wav",
-        Pos_VM = Vector(-1.85, 0, 14),
+        Pos_VM = Vector(-1.85, 0, 20),
         Pos_WM = Vector(16, 2.25, -3.5),
         Ang_VM = Angle(90, 0, 0),
         Ang_WM = Angle(0, -3.5, 180),
