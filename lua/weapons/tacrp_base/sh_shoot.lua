@@ -47,9 +47,9 @@ function SWEP:PrimaryAttack()
         else
             self:PlayAnimation("dryfire")
         end
-        self:EmitSound(self:GetValue("Sound_DryFire"), 75, 100, 1, CHAN_BODY)
+        self:EmitSound(self:GetValue("Sound_DryFire"), 75, 100, 1)
         self:SetBurstCount(0)
-        self:SetNextPrimaryFire(CurTime() + 0.1)
+        self:SetNextPrimaryFire(CurTime() + 0.2)
         return
     end
 
@@ -62,7 +62,7 @@ function SWEP:PrimaryAttack()
                 self:PlayAnimation("dryfire")
             end
         end
-        self:EmitSound(self:GetValue("Sound_Jam"), 75, 100, 1, CHAN_BODY)
+        self:EmitSound(self:GetValue("Sound_Jam"), 75, 100, 1)
         self:SetBurstCount(0)
         self:SetNextPrimaryFire(CurTime() + self:GetValue("JamWaitTime"))
         self:SetNextSecondaryFire(CurTime() + self:GetValue("JamWaitTime"))
