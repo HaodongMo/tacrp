@@ -238,7 +238,9 @@ SWEP.MidReload = false // allow guns with "midreload" animation to continue relo
 
 SWEP.DefaultBodygroups = "0000000"
 SWEP.DefaultWMBodygroups = "0000000"
+SWEP.DefaultSkin = 0
 SWEP.BulletBodygroups = nil
+
 /*
 {
     [1] = {5, 1}

@@ -16,6 +16,7 @@ function SWEP:DoBodygroups(wm, custom_wm)
     if !IsValid(mdl) then return end
 
     mdl:SetBodyGroups(dbg or "")
+    mdl:SetSkin(self:GetValue("DefaultSkin"))
 
     local eles = self:GetElements()
 
