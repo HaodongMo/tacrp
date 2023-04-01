@@ -11,6 +11,13 @@ ATT.SilentFootstep = true
 
 local smokedelay = 18
 
+local function makehitsound(ent)
+    if TacRP.ShouldWeFunny() then
+        ent:EmitSound("tacrp/slap.mp3", 75, 100)
+    else
+        ent:EmitSound("tacrp/weapons/melee_body_hit-" .. math.random(1, 5) .. ".wav", 75, 100, 1, CHAN_ITEM)
+    end
+end
 
 local function makesmokesound(ent, pitch)
     if TacRP.ShouldWeFunny() then
@@ -109,7 +116,7 @@ ATT.Hook_PreReload = function(wep)
             end
 
             if tr.Entity:IsNPC() or tr.Entity:IsPlayer() or tr.Entity:IsNextBot() then
-                wep:EmitSound("tacrp/weapons/melee_body_hit-" .. math.random(1, 5) .. ".wav", 75, 100, 1, CHAN_ITEM)
+                makehitsound(wep)
                 tr.Entity.PalmPunched = true
             else
                 local vel = ply:GetVelocity():Length()
