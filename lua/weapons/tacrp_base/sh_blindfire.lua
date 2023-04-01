@@ -234,6 +234,10 @@ function SWEP:ToggleBlindFire(bf)
     self:ToggleBoneMods(bf)
     self:SetShouldHoldType()
 
+    if bf == TacRP.BLINDFIRE_KYS and TacRP.ShouldWeFunny() and math.random() <= 0.4 then
+        self:GetOwner():EmitSound("tacrp/low-tier-god.mp3", 80, 100)
+    end
+
     if self:StillWaiting(true) then self:IdleAtEndOfAnimation() return end
 
     self:Idle()

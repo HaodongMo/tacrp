@@ -7,6 +7,16 @@ ATT.Category = {"melee_spec"}
 
 ATT.SortOrder = 1
 
+local function makedashsound(ent, pitch)
+    if TacRP.ShouldWeFunny() then
+        ent:EmitSound("tacrp/vineboom.mp3", 75, pitch)
+    else
+        ent:EmitSound("player/suit_sprint.wav", 75, pitch)
+
+    end
+end
+
+
 ATT.Hook_PreReload = function(wep)
     local ply = wep:GetOwner()
 
@@ -17,7 +27,7 @@ ATT.Hook_PreReload = function(wep)
     ply:SetNWFloat("TacRPDashTime", CurTime())
 
     if SERVER then
-        ply:EmitSound("player/suit_sprint.wav", 80, 95)
+        makedashsound(ply, 95)
     end
 
     return true

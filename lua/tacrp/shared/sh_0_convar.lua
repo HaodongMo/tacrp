@@ -294,6 +294,14 @@ local conVars = {
         replicated = true,
         notify = true,
     },
+    {
+        name = "funny_loudnoises",
+        default = "1",
+        min = 0,
+        max = 2,
+        replicated = true,
+    },
+
 
     {
         name = "slot_hl2",
@@ -330,7 +338,7 @@ local conVars = {
         client = true,
         min = 0,
         max = 1
-    }
+    },
 }
 
 local prefix = "tacrp_"

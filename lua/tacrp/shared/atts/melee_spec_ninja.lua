@@ -11,6 +11,15 @@ ATT.SilentFootstep = true
 
 local smokedelay = 18
 
+
+local function makesmokesound(ent, pitch)
+    if TacRP.ShouldWeFunny() then
+        ent:EmitSound("tacrp/fart-with-reverb.mp3", 75, pitch)
+    else
+        ent:EmitSound("TacRP/weapons/grenade/smoke_explode-1.wav", 75, pitch)
+    end
+end
+
 ATT.Hook_PreReload = function(wep)
     local ply = wep:GetOwner()
     if !ply:KeyPressed(IN_RELOAD) then return end
@@ -18,7 +27,7 @@ ATT.Hook_PreReload = function(wep)
     if ply:IsOnGround() and ply:Crouching() then
         if ply:GetNWFloat("TacRPNinjaSmoke", 0) > CurTime() or ply:GetNWFloat("TacRPDiveTime", 0) + 1 > CurTime() then return true end
         if SERVER then
-            ply:EmitSound("TacRP/weapons/grenade/smoke_explode-1.wav", 80, 110)
+            makesmokesound(ply, 110)
             local cloud = ents.Create( "tacrp_smoke_cloud_ninja" )
             if !IsValid(cloud) then return end
             cloud:SetPos(ply:GetPos())

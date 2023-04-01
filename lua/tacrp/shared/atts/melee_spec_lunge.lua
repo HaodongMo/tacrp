@@ -11,6 +11,14 @@ ATT.Lifesteal = 1 / 4
 
 local chargeamt = 0.5
 
+local function makesound(ent, pitch)
+    if TacRP.ShouldWeFunny() then
+        ent:EmitSound("tacrp/amongus_loud.mp3", 75, pitch)
+    else
+        ent:EmitSound("npc/fast_zombie/leap1.wav", 75, pitch)
+    end
+end
+
 ATT.Hook_PreReload = function(wep)
     local ply = wep:GetOwner()
 
@@ -29,18 +37,18 @@ ATT.Hook_PreReload = function(wep)
         vel = ang2:Forward() * 800
         if SERVER then
             ply:EmitSound("physics/concrete/boulder_impact_hard" .. math.random(1, 4) .. ".wav", 70, 120, 0.5)
-            ply:EmitSound("npc/fast_zombie/leap1.wav", 80, 100)
+            makesound(ply, 100)
         end
     elseif ply:IsOnGround() then
         vel = ang:Forward() * (400 + math.max(0, 500 - ang:Forward():Dot(ply:GetVelocity()))) + Vector(0, 0, 300)
         if SERVER then
-            ply:EmitSound("npc/fast_zombie/leap1.wav", 80, 92)
+            makesound(ply, 92)
         end
     else
         local int = math.Clamp(ply:GetVelocity():Dot(ply:GetAngles():Forward()) ^ 0.9, 0, 500)
         vel = ply:GetVelocity() * -1 + ply:GetAngles():Forward() * (int + 600)
         if SERVER then
-            ply:EmitSound("npc/fast_zombie/leap1.wav", 80, 110)
+            makesound(ply, 110)
         end
     end
 
