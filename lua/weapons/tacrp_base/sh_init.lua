@@ -20,7 +20,7 @@ function SWEP:Deploy()
 
     self:SetBaseSettings()
 
-    self:SetNextPrimaryFire(0)
+    -- self:SetNextPrimaryFire(0)
     self:SetNextSecondaryFire(0)
     self:SetAnimLockTime(0)
     self:SetSprintLockTime(0)
