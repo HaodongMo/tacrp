@@ -17,12 +17,14 @@ ATT.InstalledElements = {"buck"} --{"heat"}
 ATT.NoRanger = false
 
 ATT.Damage_Max = 34
-ATT.Damage_Min = 12
+ATT.Damage_Min = 5
 ATT.Num = 8
-ATT.Range_Min = 500
-ATT.Range_Max = 3000
-ATT.Penetration = 4
+ATT.Range_Min = 250
+ATT.Range_Max = 2000
+ATT.Penetration = 6
+
 ATT.Spread = 0.015
+ATT.ShotgunPelletSpread = 0.01
 
 ATT.MuzzleVelocity = 15000
 

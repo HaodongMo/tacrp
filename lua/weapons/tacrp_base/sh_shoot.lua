@@ -185,8 +185,8 @@ function SWEP:PrimaryAttack()
     self:DoEffects()
 
     local num = self:GetValue("Num")
-    local fixed_spread = num > 1 and GetConVar("tacrp_fixedspread"):GetBool()
-    local pellet_spread = num > 1 and self:GetValue("ShotgunPelletSpread") > 0 and GetConVar("tacrp_pelletspread"):GetBool()
+    local fixed_spread = self:IsShotgun() and GetConVar("tacrp_fixedspread"):GetBool()
+    local pellet_spread = self:IsShotgun() and self:GetValue("ShotgunPelletSpread") > 0 and GetConVar("tacrp_pelletspread"):GetBool()
 
     local spread = self:GetSpread()
 
@@ -223,10 +223,11 @@ function SWEP:PrimaryAttack()
             self:GetOwner():LagCompensation(true)
 
             if !hitscan or fixed_spread then
+                local d = math.random() -- self:GetNthShot() / self:GetValue("ClipSize")
                 for i = 1, num do
                     local new_dir = Angle(dir)
                     if fixed_spread then
-                        local sgp_x, sgp_y = self:GetShotgunPattern(i)
+                        local sgp_x, sgp_y = self:GetShotgunPattern(i, d)
                         new_dir:Add(Angle(sgp_x, sgp_y, 0) * 36 * 1.4142135623730)
                         if pellet_spread then
                             new_dir:Add(self:RandomSpread(self:GetValue("ShotgunPelletSpread"), i))
@@ -316,7 +317,7 @@ function SWEP:PrimaryAttack()
             damage:SetAttacker(self:GetOwner())
             damage:SetInflictor(self)
             damage:SetDamage(self:GetValue("Damage_Max") * self:GetValue("Num"))
-            damage:SetDamageType(self:GetValue("Num") > 1 and DMG_BUCKSHOT or DMG_BULLET)
+            damage:SetDamageType(self:IsShotgun() and DMG_BUCKSHOT or DMG_BULLET)
             damage:SetDamagePosition(self:GetMuzzleOrigin())
             damage:SetDamageForce(dir:Forward() * self:GetValue("Num"))
 
@@ -329,28 +330,66 @@ function SWEP:PrimaryAttack()
     self:RunHook("Hook_PostShoot")
 end
 
-function SWEP:GetShotgunPattern(i)
+local rings = {1, 9, 24, 45}
+local function ringnum(i)
+    return rings[i] or (rings[#rings] + i ^ 2)
+end
+
+local function getring(x)
+    local i = 1
+    while x > ringnum(i) do i = i + 1 end
+    return i
+end
+
+function SWEP:GetShotgunPattern(i, d)
     local ring_spread = self:GetSpread()
     local num = self:GetValue("Num")
+    if num == 1 then return 0, 0 end
 
-    if num > 1 and self:GetValue("ShotgunPelletSpread") > 0 and GetConVar("tacrp_pelletspread"):GetBool() then
-        ring_spread = ring_spread - self:GetValue("ShotgunPelletSpread")
+    local pelspread = self:GetValue("ShotgunPelletSpread") > 0 and GetConVar("tacrp_pelletspread"):GetBool()
+    if !pelspread then
+        d = 0
     end
+    -- ring_spread = ring_spread - self:GetValue("ShotgunPelletSpread")
 
     local x = 0
     local y = 0
+    local red = num <= 3 and 0 or 1
+    local f = (i - red) / (num - red)
 
-    if i == 1 then return x, y end
-    local f = (i - 1) / (num - 1)
+    if num == 2 then
+        local angle = f * 180 + (pelspread and (d - 0.5) * 60 or 0)
 
-    if num <= 8 then
-        local angle = f * 360
         x = math.sin(math.rad(angle)) * ring_spread
         y = math.cos(math.rad(angle)) * ring_spread
+    elseif num == 3 then
+        local angle = f * 360 + d * 180 + 30
+        x = math.sin(math.rad(angle)) * ring_spread
+        y = math.cos(math.rad(angle)) * ring_spread
+    elseif i == 1 then
+        return x, y
+    -- elseif num <= 9 then
+    --     local angle = 360 * (f + d - (1 / (num - 2)))
+    --     x = math.sin(math.rad(angle)) * ring_spread
+    --     y = math.cos(math.rad(angle)) * ring_spread
     else
-        local angle = 2 * f * 360
-        x = math.sin(math.rad(angle)) * ring_spread * f
-        y = math.cos(math.rad(angle)) * ring_spread * f
+        local tr = getring(num)
+        local ri = getring(i)
+        local rin = ringnum(ri)
+        local rln = ringnum(ri - 1)
+
+        local l = (ri - 1) / (tr - 1)
+        if ri == tr then
+            f = (i - rln) / ((math.min(rin, num)) - rln)
+        else
+            f = (i - rln) / (rin - rln)
+        end
+
+        local angle = 360 * (f + l + d)
+        x = math.sin(math.rad(angle)) * ring_spread * l
+        y = math.cos(math.rad(angle)) * ring_spread * l
+
+        print(i, tr, ri, rin, rln, math.Round(f, 2), math.Round(l, 2))
     end
 
     return x, y
@@ -411,7 +450,7 @@ function SWEP:AfterShotFunction(tr, dmg, range, penleft, alreadypenned, forced)
         end
     end
 
-    if self:GetValue("Num") > 1 then
+    if self:IsShotgun() then
         dmg:SetDamageType(DMG_BUCKSHOT)
     end
 
@@ -612,4 +651,12 @@ function SWEP:RandomSpread(spread, seed)
     angleRand:Mul(spread * util.SharedRandom("tacrp_randomspread2", 0, 45, seed) * 1.4142135623730)
 
     return angleRand
+end
+
+function SWEP:IsShotgun(base)
+    if base then
+        return self:GetBaseValue("Num") > 1
+    else
+        return self:GetValue("Num") > 1
+    end
 end

@@ -11,15 +11,15 @@ ATT.SortOrder = 5
 
 ATT.Mult_MuzzleVelocity = 0.75
 
-ATT.Num = 16
+ATT.Num = 20
 ATT.Override_Damage_Max = 5
 ATT.Override_Damage_Min = 2
 ATT.Override_Penetration = 1
 
 ATT.Mult_HipFireSpreadPenalty = 0.5
 
-ATT.Add_Spread = 0.015
-ATT.Add_ShotgunPelletSpread = 0.001
+ATT.Add_Spread = 0.012
+ATT.Add_ShotgunPelletSpread = 0.006
 
 ATT.Override_BodyDamageMultipliers = {
     [HITGROUP_HEAD] = 3,

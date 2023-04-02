@@ -18,7 +18,7 @@ ATT.Mult_Range_Max = 1.5
 
 ATT.Num = 1
 
-ATT.Mult_Spread = 0.33
+ATT.Mult_Spread = 0.25
 ATT.Mult_RecoilSpreadPenalty = 0.25
 
 ATT.Add_HipFireSpreadPenalty = 0.025

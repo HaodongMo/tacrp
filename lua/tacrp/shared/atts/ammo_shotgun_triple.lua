@@ -14,8 +14,8 @@ ATT.Mult_Damage_Min = 2.5
 
 ATT.Num = 3
 
-ATT.Mult_Spread = 0.75
-ATT.Mult_ShotgunPelletSpread = 0.5
+ATT.Mult_Spread = 0.4
+ATT.Mult_ShotgunPelletSpread = 0.4
 
 ATT.Mult_RecoilSpreadPenalty = 0.5
 

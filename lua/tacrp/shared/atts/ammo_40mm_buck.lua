@@ -16,10 +16,12 @@ ATT.NoRanger = false
 ATT.Damage_Max = 10
 ATT.Damage_Min = 3
 ATT.Num = 24
-ATT.Range_Min = 200
-ATT.Range_Max = 2000
+ATT.Range_Min = 100
+ATT.Range_Max = 1500
 ATT.PenetrationOverride = 0
+
 ATT.Spread = 0.05
+ATT.ShotgunPelletSpread = 0.015
 
 ATT.MuzzleVelocity = 9500
 
