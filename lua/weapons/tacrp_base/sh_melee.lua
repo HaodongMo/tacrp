@@ -82,14 +82,7 @@ function SWEP:Melee(alt)
 
     if tr.Fraction < 1 then
 
-        if IsValid(tr.Entity) and !tr.Entity:IsNextBot() and GetConVar("TacRP_bodydamagecancel"):GetBool() and TacRP.CancelMultipliers[tr.HitGroup] then
-            dmginfo:ScaleDamage(1 / TacRP.CancelMultipliers[tr.HitGroup])
-        end
-
-        -- Lambda Players call ScalePlayerDamage and cancel out hitgroup damage... except on the head
-        if IsValid(tr.Entity) and tr.Entity.IsLambdaPlayer and tr.HitGroup == HITGROUP_HEAD then
-            dmginfo:ScaleDamage(1 / TacRP.CancelMultipliers[tr.HitGroup])
-        end
+        TacRP.CancelBodyDamage(tr.Entity, dmginfo, tr.HitGroup)
 
         if IsValid(tr.Entity) and (tr.Entity:IsNPC() or tr.Entity:IsPlayer() or tr.Entity:IsNextBot()) then
             self:EmitSound(self:ChooseSound(self:GetValue("Sound_MeleeHitBody")), 75, 100, 1, CHAN_ITEM)

@@ -46,3 +46,18 @@ function TacRP.GetCmdVector(cmd, defaultforward)
 
     return vec
 end
+
+function TacRP.CancelBodyDamage(ent, dmginfo, hitgroup)
+    local tbl = TacRP.CancelMultipliers[string.lower(engine.ActiveGamemode())] or TacRP.CancelMultipliers[1]
+
+    if IsValid(ent) and (ent:IsNPC() or ent:IsPlayer()) and GetConVar("tacrp_bodydamagecancel"):GetBool() then
+        dmginfo:ScaleDamage(1 / (tbl[hitgroup] or 1))
+    end
+
+    -- Lambda Players call ScalePlayerDamage and cancel out hitgroup damage... except on the head
+    if IsValid(ent) and ent.IsLambdaPlayer and hitgroup == HITGROUP_HEAD then
+        dmginfo:ScaleDamage(1 / TacRP.CancelMultipliers[hitgroup])
+    end
+
+    return dmginfo
+end

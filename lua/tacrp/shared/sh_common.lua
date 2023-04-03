@@ -28,14 +28,22 @@ TacRP.PenTable = {
 
 // Why the fuck is this a thing???
 TacRP.CancelMultipliers = {
-    [HITGROUP_HEAD] = 2,
-    [HITGROUP_CHEST] = 1,
-    [HITGROUP_STOMACH] = 1,
-    [HITGROUP_LEFTARM] = 0.25,
-    [HITGROUP_RIGHTARM] = 0.25,
-    [HITGROUP_LEFTLEG] = 0.25,
-    [HITGROUP_RIGHTLEG] = 0.25,
-    [HITGROUP_GEAR] = 0.25
+    [1] = {
+        [HITGROUP_HEAD]     = 2,
+        [HITGROUP_LEFTARM]  = 0.25,
+        [HITGROUP_RIGHTARM] = 0.25,
+        [HITGROUP_LEFTLEG]  = 0.25,
+        [HITGROUP_RIGHTLEG] = 0.25,
+        [HITGROUP_GEAR]     = 0.25,
+    },
+    ["terrortown"] = {
+        [HITGROUP_HEAD]     = 2.5,
+        [HITGROUP_LEFTARM]  = 0.55,
+        [HITGROUP_RIGHTARM] = 0.55,
+        [HITGROUP_LEFTLEG]  = 0.55,
+        [HITGROUP_RIGHTLEG] = 0.55,
+        [HITGROUP_GEAR]     = 0.55,
+    },
 }
 
 TacRP.PresetPath = "tacrp_presets/"
@@ -116,4 +124,24 @@ TacRP.AreTheGrenadeAnimsReadyYet = false
 function TacRP.ShouldWeFunny()
     local i = GetConVar("tacrp_funny_loudnoises"):GetInt()
     return i == 2 or (i == 1 and os.date("%m-%d") == "04-01")
+end
+
+TacRP.BALANCE_AUTO = -1
+TacRP.BALANCE_RP = 0
+TacRP.BALANCE_SBOX = 1
+TacRP.BALANCE_TTT = 2
+
+function TacRP.GetBalanceMode()
+    local i = GetConVar("tacrp_balance"):GetInt()
+    if i == TacRP.BALANCE_AUTO then
+        if engine.ActiveGamemode() == "terrortown" then
+            return TacRP.BALANCE_TTT
+        elseif DarkRP or ix then
+            return TacRP.BALANCE_RP
+        else
+            return TacRP.BALANCE_SBOX
+        end
+    else
+        return i
+    end
 end

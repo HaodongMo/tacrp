@@ -397,40 +397,25 @@ end
 
 function SWEP:AfterShotFunction(tr, dmg, range, penleft, alreadypenned, forced)
     if !forced and !IsFirstTimePredicted() and !game.SinglePlayer() then return end
-    local dmgv = self:GetDamageAtRange(range)
-
-    local bodydamage = self:GetBodyDamageMultipliers() --self:GetValue("BodyDamageMultipliers")
-
-    local dmgbodymult = 1
-
-    if bodydamage[tr.HitGroup] then
-        dmgbodymult = dmgbodymult * bodydamage[tr.HitGroup]
-    end
-
-    if IsValid(tr.Entity) and !tr.Entity:IsNextBot() and GetConVar("TacRP_bodydamagecancel"):GetBool() and TacRP.CancelMultipliers[tr.HitGroup] then
-        dmgbodymult = dmgbodymult / TacRP.CancelMultipliers[tr.HitGroup]
-    end
-
-    -- Lambda Players call ScalePlayerDamage and cancel out hitgroup damage... except on the head
-    if IsValid(tr.Entity) and tr.Entity.IsLambdaPlayer and tr.HitGroup == HITGROUP_HEAD then
-        dmgbodymult = dmgbodymult / TacRP.CancelMultipliers[tr.HitGroup]
-    end
-
-    dmgv = dmgv * dmgbodymult
-
-    if self:GetOwner():IsNPC() and !GetConVar("TacRP_npc_equality"):GetBool() then
-        dmgv = dmgv * 0.25
-    elseif !self:GetOwner():IsNPC() then
-        local pendelta = self:GetValue("Penetration") > 0 and penleft / self:GetValue("Penetration") or 1
-        pendelta = math.Clamp(pendelta, 0.1, 1)
-        dmgv = dmgv * pendelta
-    end
-
-    dmg:SetDamage(dmgv)
-
     if tr.Entity and alreadypenned[tr.Entity] then
         dmg:SetDamage(0)
-    elseif tr.Entity then
+    elseif IsValid(tr.Entity) then
+        dmg:SetDamage(self:GetDamageAtRange(range))
+        local bodydamage = self:GetBodyDamageMultipliers()
+
+        if bodydamage[tr.HitGroup] then
+            dmg:ScaleDamage(bodydamage[tr.HitGroup])
+        end
+
+        TacRP.CancelBodyDamage(tr.Entity, dmg, tr.HitGroup)
+
+        if self:GetOwner():IsNPC() and !GetConVar("TacRP_npc_equality"):GetBool() then
+            dmg:ScaleDamage(0.25)
+        elseif !self:GetOwner():IsNPC() then
+            local pendelta = self:GetValue("Penetration") > 0 and penleft / self:GetValue("Penetration") or 1
+            pendelta = math.Clamp(pendelta, 0.1, 1)
+            dmg:ScaleDamage(pendelta)
+        end
         alreadypenned[tr.Entity] = true
     end
 
