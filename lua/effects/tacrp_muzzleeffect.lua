@@ -3,6 +3,11 @@ function EFFECT:Init(data)
 
     if !IsValid(wpn) then self:Remove() return end
 
+    if wpn:GetOwner() == LocalPlayer() and wpn:GetValue("ScopeHideWeapon") and wpn:IsInScope() then
+        self:Remove()
+        return
+    end
+
     local muzzle = TacRP.MuzzleEffects[data:GetFlags() or 1] or "muzzleflash_pistol"
     if wpn.GetValue then
         muzzle = wpn:GetValue("MuzzleEffect")

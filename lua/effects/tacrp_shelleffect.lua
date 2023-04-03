@@ -66,32 +66,42 @@ function EFFECT:Init(data)
     if !IsValid(ent) then self:Remove() return end
     if !IsValid(ent:GetOwner()) then self:Remove() return end
 
-    if LocalPlayer():ShouldDrawLocalPlayer() or ent:GetOwner() != LocalPlayer() then
+    local origin, ang, dir
+
+    if ent:GetOwner() == LocalPlayer() and ent:GetValue("ScopeHideWeapon") and ent:IsInScope() then
+        origin = EyePos()
+                + EyeAngles():Right() * ent.PassivePos.x
+                + EyeAngles():Forward() * ent.PassivePos.y
+                + EyeAngles():Up() * ent.PassivePos.z
+        ang = EyeAngles()
+        dir = -ang:Right()
+    elseif LocalPlayer():ShouldDrawLocalPlayer() or ent:GetOwner() != LocalPlayer() then
         mdl = ent
         att = 2
         self.VMContext = false
     else
         mdl = LocalPlayer():GetViewModel()
         table.insert(ent.ActiveEffects, self)
+
+        if !IsValid(ent) then self:Remove() return end
+        if !mdl or !IsValid(mdl) then self:Remove() return end
+        if !mdl:GetAttachment(att) then self:Remove() return end
+        if !typetbl then return end
+
+        origin = mdl:GetAttachment(att).Pos
+        ang = mdl:GetAttachment(att).Ang
+
+        -- ang:RotateAroundAxis(ang:Up(), -90)
+
+        -- ang:RotateAroundAxis(ang:Right(), (ent.ShellRotateAngle or Angle(0, 0, 0))[1])
+        -- ang:RotateAroundAxis(ang:Up(), (ent.ShellRotateAngle or Angle(0, 0, 0))[2])
+        -- ang:RotateAroundAxis(ang:Forward(), (ent.ShellRotateAngle or Angle(0, 0, 0))[3])
+
+        dir = ang:Forward()
+
+        ang:RotateAroundAxis(ang:Forward(), 0)
+        ang:RotateAroundAxis(ang:Up(), 0)
     end
-
-    if !IsValid(ent) then self:Remove() return end
-    if !mdl or !IsValid(mdl) then self:Remove() return end
-    if !mdl:GetAttachment(att) then self:Remove() return end
-    if !typetbl then return end
-
-    local origin, ang = mdl:GetAttachment(att).Pos, mdl:GetAttachment(att).Ang
-
-    -- ang:RotateAroundAxis(ang:Up(), -90)
-
-    -- ang:RotateAroundAxis(ang:Right(), (ent.ShellRotateAngle or Angle(0, 0, 0))[1])
-    -- ang:RotateAroundAxis(ang:Up(), (ent.ShellRotateAngle or Angle(0, 0, 0))[2])
-    -- ang:RotateAroundAxis(ang:Forward(), (ent.ShellRotateAngle or Angle(0, 0, 0))[3])
-
-    local dir = ang:Forward()
-
-    ang:RotateAroundAxis(ang:Forward(), 0)
-    ang:RotateAroundAxis(ang:Up(), 0)
 
     self:SetPos(origin)
     self:SetModel(typetbl.Model)
@@ -99,6 +109,7 @@ function EFFECT:Init(data)
     self:SetAngles(ang)
 
     self:SetNoDraw(true)
+
 
     -- if !LocalPlayer():ShouldDrawLocalPlayer() and ent:GetOwner() == LocalPlayer() then
     --     self:SetNoDraw(true)

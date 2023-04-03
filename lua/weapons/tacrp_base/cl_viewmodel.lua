@@ -137,10 +137,9 @@ function SWEP:DrawCustomModel(wm, custom_wm)
 end
 
 function SWEP:PreDrawViewModel()
-    if self:GetValue("ScopeHideWeapon") then
-        if self:IsInScope() then
-            render.SetBlend(0)
-        end
+    if self:GetValue("ScopeHideWeapon") and self:IsInScope() then
+        render.SetBlend(0)
+
     end
 
     -- cam.Start3D(nil, nil, 70)
@@ -154,9 +153,7 @@ function SWEP:PostDrawViewModel()
     --cam.End3D()
     cam.IgnoreZ(false)
 
-    if self:GetValue("ScopeHideWeapon") then
-        if self:IsInScope() then
-            render.SetBlend(1)
-        end
+    if self:GetValue("ScopeHideWeapon") and self:IsInScope() then
+        render.SetBlend(1)
     end
 end
