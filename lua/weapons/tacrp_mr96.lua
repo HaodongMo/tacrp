@@ -216,7 +216,6 @@ SWEP.ProceduralIronFire = {
     bones = {
         {
             bone = "ValveBiped.cylinder",
-            pos = false,
             ang = Angle(-60, 0, 0),
             t0 = 0,
             t1 = 0.2,

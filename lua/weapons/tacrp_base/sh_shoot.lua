@@ -85,7 +85,7 @@ function SWEP:PrimaryAttack()
 
     local mult = self:GetValue("ShootTimeMult")
 
-    if self:GetValue("LastShot") and self:Clip1() == 1 then
+    if self:GetValue("LastShot") and self:Clip1() == self:GetValue("AmmoPerShot") then
         seq = self:TranslateSequence("lastshot")
         idle = false
     end
@@ -110,11 +110,11 @@ function SWEP:PrimaryAttack()
         end
     end
 
-    if self:GetScopeLevel() > 0 and (self:DoProceduralIrons() or self:HasSequence(seq .. "_iron")) and !self:GetPeeking() then
-        if self:DoProceduralIrons() then
-            if self:GetValue("LastShot") and self:Clip1() == 1 then
-                self:PlayAnimation("dryfire", mult * 0.25, false, idle)
-                self:SetLastProceduralFireTime(0)
+    local prociron = self:DoProceduralIrons()
+    if self:GetScopeLevel() > 0 and (prociron or self:HasSequence(seq .. "_iron")) and !self:GetPeeking() then
+        if prociron then
+            if self:GetValue("LastShot") and self:Clip1() == self:GetValue("AmmoPerShot") then
+                self:PlayAnimation(self:TranslateSequence("dryfire"), mult, false)
             end
             self:SetLastProceduralFireTime(CurTime())
         else
