@@ -17,17 +17,33 @@ SWEP.WorldModel = "models/weapons/tacint/w_vertec.mdl"
 
 SWEP.Slot = 1
 
-SWEP.ArcadeStats = {
+SWEP.BalanceStats = {
+    [TacRP.BALANCE_SBOX] = {
+        Damage_Max = 15,
+        Damage_Min = 9,
 
-    Damage_Max = 15,
-    Damage_Min = 9,
+        MoveSpeedMult = 1,
+        ShootingSpeedMult = 1,
+        SightedSpeedMult = 1,
+        MeleeSpeedMult = 1,
+        ReloadSpeedMult = 1,
+    },
+    [TacRP.BALANCE_TTT] = {
+        Damage_Max = 18,
+        Damage_Min = 12,
 
-    MoveSpeedMult = 1,
-    ShootingSpeedMult = 1,
-    SightedSpeedMult = 1,
-    MeleeSpeedMult = 1,
-    ReloadSpeedMult = 1,
+        RPM = 300,
+
+        ReloadTimeMult = 1.15 * 1.25,
+
+        MoveSpeedMult = 1,
+        ShootingSpeedMult = 1,
+        MeleeSpeedMult = 1,
+        SightedSpeedMult = 0.75,
+        ReloadSpeedMult = 0.8,
+    },
 }
+
 
 // "ballistics"
 
@@ -86,8 +102,8 @@ SWEP.ReloadSpeedMult = 0.75
 SWEP.AimDownSightsTime = 0.25
 SWEP.SprintToFireTime = 0.25
 
-SWEP.Sway = 2
-SWEP.ScopedSway = 1
+SWEP.Sway = 1
+SWEP.ScopedSway = 0.5
 
 // hold types
 

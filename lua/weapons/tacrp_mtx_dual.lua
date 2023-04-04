@@ -17,18 +17,38 @@ SWEP.WorldModel = "models/weapons/tacint/w_mtx.mdl"
 
 SWEP.Slot = 1
 
+SWEP.BalanceStats = {
+    [TacRP.BALANCE_SBOX] = {
+        Damage_Max = 15,
+        Damage_Min = 6,
+
+        Spread = 0.025,
+
+        MoveSpeedMult = 0.95,
+        ShootingSpeedMult = 0.8,
+        SightedSpeedMult = 1,
+        MeleeSpeedMult = 1,
+        ReloadSpeedMult = 1,
+    },
+    [TacRP.BALANCE_TTT] = {
+        Damage_Max = 10,
+        Damage_Min = 4,
+
+        Spread = 0.03,
+
+        RPM = 600,
+
+        ReloadTimeMult = 1.25,
+
+        MoveSpeedMult = 1,
+        ShootingSpeedMult = 0.9,
+        MeleeSpeedMult = 1,
+        SightedSpeedMult = 0.75,
+        ReloadSpeedMult = 0.8,
+    },
+}
+
 SWEP.ArcadeStats = {
-
-    Damage_Max = 15,
-    Damage_Min = 6,
-
-    Spread = 0.025,
-
-    MoveSpeedMult = 0.95,
-    ShootingSpeedMult = 0.8,
-    SightedSpeedMult = 1,
-    MeleeSpeedMult = 1,
-    ReloadSpeedMult = 1,
 }
 
 // "ballistics"

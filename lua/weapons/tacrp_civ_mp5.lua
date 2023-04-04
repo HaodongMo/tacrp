@@ -17,21 +17,55 @@ SWEP.WorldModel = "models/weapons/tacint/w_mp5.mdl"
 
 SWEP.Slot = 2
 
-SWEP.ArcadeStats = {
 
-    Description = "Semi-automatic model of a legendary submachine gun. Fine tuned for precision shooting.",
+SWEP.BalanceStats = {
+    [TacRP.BALANCE_SBOX] = {
+        Description = "Semi-automatic model of a legendary submachine gun. Fine tuned for precision shooting.",
 
-    Damage_Max = 15,
-    Damage_Min = 7,
+        Damage_Max = 15,
+        Damage_Min = 7,
 
-    Recoil_Kick = 1,
-    Spread = 0.001,
+        Recoil_Kick = 1,
+        Spread = 0.001,
 
-    MoveSpeedMult = 0.9,
-    ShootingSpeedMult = 0.8,
-    SightedSpeedMult = 0.85,
-    MeleeSpeedMult = 1,
-    ReloadSpeedMult = 1,
+        MoveSpeedMult = 0.9,
+        ShootingSpeedMult = 0.8,
+        SightedSpeedMult = 0.85,
+        MeleeSpeedMult = 1,
+        ReloadSpeedMult = 1,
+    },
+    [TacRP.BALANCE_TTT] = {
+        Description = "Semi-automatic model of a legendary submachine gun. Fine tuned for precision shooting.",
+
+        Damage_Max = 15,
+        Damage_Min = 8,
+
+        RPM = 420,
+
+        RecoilResetTime = 0.125,
+        RecoilDissipationRate = 6,
+        RecoilSpreadPenalty = 0.003,
+        HipFireSpreadPenalty = 0.04,
+
+        BodyDamageMultipliers = {
+            [HITGROUP_HEAD] = 3,
+            [HITGROUP_CHEST] = 1.25,
+            [HITGROUP_STOMACH] = 1,
+            [HITGROUP_LEFTARM] = 1,
+            [HITGROUP_RIGHTARM] = 1,
+            [HITGROUP_LEFTLEG] = 0.75,
+            [HITGROUP_RIGHTLEG] = 0.75,
+            [HITGROUP_GEAR] = 0.9
+        },
+
+        ReloadTimeMult = 1,
+
+        MoveSpeedMult = 0.95,
+        ShootingSpeedMult = 0.85,
+        MeleeSpeedMult = 1,
+        SightedSpeedMult = 0.6,
+        ReloadSpeedMult = 0.7,
+    },
 }
 
 SWEP.Firemode = 1

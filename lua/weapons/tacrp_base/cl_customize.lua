@@ -907,11 +907,7 @@ function SWEP:CreateCustomizeHUD()
             local i2 = 0
             for i, k in pairs(stats) do
                 local value = self:GetValue(k.Value)
-
-                local orig = selftbl[k.Value]
-                if GetConVar("tacrp_arcade"):GetBool() and self.ArcadeStats and self.ArcadeStats[k.Value] != nil then
-                    orig = self.ArcadeStats[k.Value]
-                end
+                local orig = self:GetBaseValue(k.Value)
 
                 if k.HideIfSame and orig == value then continue end
 

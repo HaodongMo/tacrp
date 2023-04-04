@@ -17,24 +17,52 @@ SWEP.WorldModel = "models/weapons/tacint/w_mp5.mdl"
 
 SWEP.Slot = 2
 
-SWEP.ArcadeStats = {
+SWEP.BalanceStats = {
+    [TacRP.BALANCE_SBOX] = {
+        Damage_Max = 14,
+        Damage_Min = 7,
 
-    Damage_Max = 14,
-    Damage_Min = 7,
+        Range_Min = 1500,
+        Range_Max = 4000,
 
-    Range_Min = 1500,
-    Range_Max = 4000,
+        HipFireSpreadPenalty = 0.025,
 
-    HipFireSpreadPenalty = 0.025,
+        RecoilKick = 3,
 
-    RecoilKick = 3,
+        MoveSpeedMult = 0.9,
+        ShootingSpeedMult = 0.8,
+        SightedSpeedMult = 0.85,
+        MeleeSpeedMult = 1,
+        ReloadSpeedMult = 1,
+    },
+    [TacRP.BALANCE_TTT] = {
+        Damage_Max = 11,
+        Damage_Min = 5,
 
-    MoveSpeedMult = 0.9,
-    ShootingSpeedMult = 0.8,
-    SightedSpeedMult = 0.85,
-    MeleeSpeedMult = 1,
-    ReloadSpeedMult = 1,
+        RecoilSpreadPenalty = 0.0015,
+        HipFireSpreadPenalty = 0.04,
+
+        BodyDamageMultipliers = {
+            [HITGROUP_HEAD] = 2,
+            [HITGROUP_CHEST] = 1,
+            [HITGROUP_STOMACH] = 1,
+            [HITGROUP_LEFTARM] = 1,
+            [HITGROUP_RIGHTARM] = 1,
+            [HITGROUP_LEFTLEG] = 0.75,
+            [HITGROUP_RIGHTLEG] = 0.75,
+            [HITGROUP_GEAR] = 0.9
+        },
+
+        ReloadTimeMult = 1.25,
+
+        MoveSpeedMult = 0.95,
+        ShootingSpeedMult = 0.85,
+        MeleeSpeedMult = 1,
+        SightedSpeedMult = 0.6,
+        ReloadSpeedMult = 0.7,
+    },
 }
+
 
 // "ballistics"
 

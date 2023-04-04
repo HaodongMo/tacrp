@@ -107,6 +107,15 @@ local mssd_scoring = {
     [HITGROUP_LEFTLEG] = {0.15, 1,   {1, 0.9,  0.7, 0.4,  0.25, 0.15, 0.1}},
 }
 
+local mssd_scoring_ttt = {
+    [HITGROUP_HEAD]    = {0.15, 0.5, {1, 0.75, 0.6,  0.5,  0.25, 0.1, 0.05, 0.01}},
+    [HITGROUP_CHEST]   = {0.25, 0.8, {1, 0.8,  0.7,  0.6,  0.3,  0.2, 0.1,  0.05}},
+    [HITGROUP_STOMACH] = {0.25, 1,   {1, 0.85, 0.75, 0.65, 0.4,  0.3, 0.15, 0.1,  0.025}},
+    [HITGROUP_LEFTARM] = {0.2,  1,   {1, 0.9,  0.8,  0.7,  0.5,  0.4, 0.2,  0.15, 0.05}},
+    [HITGROUP_LEFTLEG] = {0.15, 1,   {1, 0.95, 0.85, 0.75, 0.6,  0.5, 0.25, 0.2,  0.1}},
+}
+
+
 SWEP.StatGroupGrades = {
     {93, "S", Color(230, 60, 60)},
     {78, "A", Color(230, 180, 60)},
@@ -127,13 +136,14 @@ SWEP.StatGroups = {
             local bfm = self:GetBestFiremode(base)
             local rrpm = valfunc(self, "RPM")
             local erpm = rrpm
-            local pbd = valfunc(self, "AutoBurst") and valfunc(self, "PostBurstDelay") or math.max(0.15, valfunc(self, "PostBurstDelay"))
+            local pbd = valfunc(self, "PostBurstDelay")
+            local ttt = TacRP.GetBalanceMode() == TacRP.BALANCE_TTT
 
-            -- if bfm == 1 then
-            --     erpm = math.min(rrpm, 600) -- you can't click *that* fast
-            -- elseif bfm < 0 then
-            --     erpm = 60 / ((60 / rrpm) + pbd / -bfm)
-            -- end
+            if bfm == 1 then
+                erpm = math.min(rrpm, 700) -- you can't click *that* fast
+            elseif bfm < 0 then
+                erpm = rrpm - 60 / (-bfm / pbd)
+            end
 
             local num = valfunc(self, "Num")
             local bdm = self:GetBodyDamageMultipliers(base)
@@ -148,15 +158,16 @@ SWEP.StatGroups = {
 
             -- dps
             local dot = dmg_avg * num * erpm / 60
-            local dot_s = math.Clamp(dot / 600, 0, 1) ^ 0.8
+            local dot_s = math.Clamp(dot / (ttt and 200 or 600), 0, 1) ^ (ttt and 1 or 0.8)
 
             -- max single shot damage
             local mssd = 0
-            for k, v in pairs(mssd_scoring) do
+            for k, v in pairs(ttt and mssd_scoring_ttt or mssd_scoring) do
                 local stk = math.ceil(100 / (dmg_avg * (bdm[k] or 1) * (num ^ v[2])))
                 mssd = mssd + (v[3][stk] or 0) * v[1]
                 -- print(bdm[k], stk, (mssd_scoring[k][stk] or 0))
             end
+            mssd = ttt and mssd ^ 0.75 or mssd
 
             -- avg time to kill
             local stk = math.ceil(100 / dmg_avg)
@@ -165,12 +176,13 @@ SWEP.StatGroups = {
             if bfm < 0 then
                 ttk = ttk + math.floor(ttk / -bfm) * pbd
             end
-            local ttk_s = math.Clamp(1 - ttk / 1.5, 0, 1) ^ 1.5
+            local ttk_s = math.Clamp(1 - ttk / (ttt and 2 or 1.5), 0, 1) ^ (ttt and 2 or 1.5)
 
             local scores = {mssd, ttk_s, dot_s}
             table.sort(scores)
-            -- print(mssd, ttk_s, dot_s)
+            -- print(self:GetClass(), base, math.Round(mssd, 2), math.Round(ttk_s, 2), math.Round(dot_s, 2))
             return scores[3] * 70 + scores[2] * 30 + scores[1] * 0
+
         end,
     },
     {
@@ -182,19 +194,20 @@ SWEP.StatGroups = {
 
             local d_max, d_min = valfunc(self, "Damage_Max"), valfunc(self, "Damage_Min")
             local r_min, r_max = self:GetMinMaxRange(base)
+            local ttt = TacRP.GetBalanceMode() == TacRP.BALANCE_TTT
 
             local r_mid = r_min + (r_max - r_min) / 2
             local d_diff = math.abs(d_max - d_min) / math.max(d_max, d_min)
             if d_max > d_min then
                 -- [40] 50% damage falloff range
-                score = score + math.Clamp((r_mid - 1000) / 4000, 0, 1) * 40
+                score = score + math.Clamp((r_mid - (ttt and 200 or 1000)) / (ttt and 2000 or 4000), 0, 1) * 40
 
                 -- [60] damage reduction from range
                 score = score + math.Clamp(1 - d_diff, 0, 1) * 60
             else
                 -- [40] free points
                 -- [40] 50% damage rampup range
-                score = score + 40 + math.Clamp(r_mid / 5000, 0, 1) * 40
+                score = score + 40 + math.Clamp(r_mid / (ttt and 2500 or 5000), 0, 1) * 40
                 -- print(r_mid, math.Clamp(1 - r_mid / 5000, 0, 1))
 
                 -- [20] damage reduction from range
@@ -402,18 +415,34 @@ SWEP.StatGroups = {
         RatingFunction = function(self, base)
             local score = 0
             local valfunc = base and self.GetBaseValue or self.GetValue
+            local ttt = TacRP.GetBalanceMode() == TacRP.BALANCE_TTT
 
-            -- [40] move
-            score = score + math.Clamp((valfunc(self, "MoveSpeedMult") - 0.4) / 0.6, 0, 1) * 40
+            if ttt then
+                -- [30] move
+                score = score + math.Clamp((valfunc(self, "MoveSpeedMult") - 0.6) / 0.4, 0, 1) * 30
 
-            -- [30] sighted
-            score = score + math.Clamp((valfunc(self, "SightedSpeedMult") - 0.2) / 0.8, 0, 1) * 30
+                -- [25] sighted
+                score = score + math.Clamp((valfunc(self, "SightedSpeedMult") - 0.2) / 0.8, 0, 1) * 25
 
-            -- [30] shooting
-            score = score + math.Clamp((valfunc(self, "ShootingSpeedMult") - 0.2) / 0.8, 0, 1) * 30
+                -- [25] shooting
+                score = score + math.Clamp((valfunc(self, "ShootingSpeedMult") - 0.2) / 0.8, 0, 1) * 25
 
-            -- [-20] reload
-            score = score - math.Clamp(1 - (valfunc(self, "ReloadSpeedMult") - 0.4) / 0.6, 0, 1) * 20
+                -- [20] reload
+                score = score + math.Clamp((valfunc(self, "ReloadSpeedMult") - 0.4) / 0.6, 0, 1) * 20
+            else
+                -- [40] move
+                score = score + math.Clamp((valfunc(self, "MoveSpeedMult") - 0.4) / 0.6, 0, 1) * 40
+
+                -- [30] sighted
+                score = score + math.Clamp((valfunc(self, "SightedSpeedMult") - 0.2) / 0.8, 0, 1) * 30
+
+                -- [30] shooting
+                score = score + math.Clamp((valfunc(self, "ShootingSpeedMult") - 0.2) / 0.8, 0, 1) * 30
+
+                -- [-20] reload
+                score = score - math.Clamp(1 - (valfunc(self, "ReloadSpeedMult") - 0.4) / 0.6, 0, 1) * 20
+            end
+
 
             return score
         end,

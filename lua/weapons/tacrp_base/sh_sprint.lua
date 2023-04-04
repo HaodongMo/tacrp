@@ -9,11 +9,18 @@ function SWEP:GetIsSprinting()
         return false
     end
 
+    if owner.TacRP_SprintBlock then return false end
+
     local curspeed = owner:GetVelocity():Length()
+
+    if TTT2 and owner.isSprinting == true then
+        return (owner.sprintProgress or 0) > 0 and owner:KeyDown(IN_SPEED) and !owner:Crouching() and curspeed > walkspeed and owner:OnGround()
+    elseif engine.ActiveGamemode() == "terrortown" then
+        return false -- assume no sprint addon. tis silly anyways
+    end
 
     if !owner:KeyDown(IN_FORWARD) and !owner:KeyDown(IN_BACK) and !owner:KeyDown(IN_MOVELEFT) and !owner:KeyDown(IN_MOVERIGHT) then return false end
     if !owner:KeyDown(IN_SPEED) then return false end -- SetButtons does not seem to affect this?
-    if owner.TacRP_SprintBlock then return false end
     if curspeed <= 0 then return false end
     if !owner:OnGround() then return false end
 

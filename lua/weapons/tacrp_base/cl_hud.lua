@@ -10,6 +10,8 @@ end
 
 function SWEP:DoDrawCrosshair(x, y)
     local ft = FrameTime()
+    local ply = self:GetOwner()
+
     self.CrosshairAlpha = self.CrosshairAlpha or 0
     if !self:ShouldDrawCrosshair() then
         self.CrosshairAlpha = math.Approach(self.CrosshairAlpha, 0, -10 * ft)
@@ -22,7 +24,6 @@ function SWEP:DoDrawCrosshair(x, y)
     if self:GetValue("TacticalCrosshair") and self:GetTactical() then
         tacfunc = self:GetValue("TacticalCrosshair")
     elseif !dev and self.CrosshairAlpha <= 0 then return true end
-
 
     local dir = self:GetShootDir(true)
 
@@ -64,7 +65,22 @@ function SWEP:DoDrawCrosshair(x, y)
 
     if !dev and self.CrosshairAlpha <= 0 then return true end
 
-    surface.SetDrawColor(50, 255, 50, 255 * self.CrosshairAlpha)
+    local clr = Color(50, 255, 50)
+    if GetConVar("tacrp_ttt_rolecrosshair") and GetConVar("tacrp_ttt_rolecrosshair"):GetBool() then
+        if GetRoundState() == ROUND_PREP or GetRoundState() == ROUND_POST then
+            clr = Color(255, 255, 255)
+        elseif ply.GetRoleColor and ply:GetRoleColor() then
+            clr = ply:GetRoleColor() -- TTT2 feature
+        elseif ply:IsActiveTraitor() then
+            clr = Color(255, 50, 50)
+        elseif ply:IsActiveDetective() then
+            clr = Color(50, 50, 255)
+        else
+            clr = Color(50, 255, 50)
+        end
+    end
+
+    surface.SetDrawColor(clr.r, clr.g, clr.b, clr.a * self.CrosshairAlpha)
 
     surface.DrawRect(x, y, 1, 1)
 

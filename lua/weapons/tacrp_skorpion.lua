@@ -17,29 +17,47 @@ SWEP.WorldModel = "models/weapons/tacint/w_skorpion.mdl"
 
 SWEP.Slot = 1
 
+SWEP.BalanceStats = {
+    [TacRP.BALANCE_SBOX] = {
+        Damage_Max = 13,
+        Damage_Min = 8,
+
+        ClipSize = 30,
+
+        MoveSpeedMult = 1,
+        ShootingSpeedMult = 0.9,
+        SightedSpeedMult = 1,
+        MeleeSpeedMult = 1,
+        ReloadSpeedMult = 1,
+    },
+    [TacRP.BALANCE_TTT] = {
+        Damage_Max = 8,
+        Damage_Min = 4,
+
+        Range_Min = 800,
+
+        RPM = 850,
+
+        ReloadTimeMult = 1.25,
+
+        MoveSpeedMult = 0.95,
+        ShootingSpeedMult = 0.9,
+        MeleeSpeedMult = 1,
+        SightedSpeedMult = 0.7,
+        ReloadSpeedMult = 0.75,
+    },
+}
+
 SWEP.ArcadeStats = {
 
-    Damage_Max = 13,
-    Damage_Min = 8,
-
-    Range_Min = 500,
-    Range_Max = 3500,
-
-    ClipSize = 30,
-
-    MoveSpeedMult = 1,
-    ShootingSpeedMult = 0.9,
-    SightedSpeedMult = 1,
-    MeleeSpeedMult = 1,
-    ReloadSpeedMult = 1,
 }
 
 // "ballistics"
 
 SWEP.Damage_Max = 10
 SWEP.Damage_Min = 4
-SWEP.Range_Min = 800
-SWEP.Range_Max = 2800
+SWEP.Range_Min = 500
+SWEP.Range_Max = 3500
 SWEP.Penetration = 2 // units of metal this weapon can penetrate
 
 SWEP.MuzzleVelocity = 12500

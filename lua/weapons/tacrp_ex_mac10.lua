@@ -17,18 +17,52 @@ SWEP.WorldModel = "models/weapons/tacint_extras/w_mac10.mdl"
 
 SWEP.Slot = 1
 
+SWEP.BalanceStats = {
+    [TacRP.BALANCE_SBOX] = {
+        Damage_Max = 13,
+        Damage_Min = 5,
+
+        RecoilKick = 3,
+
+        MoveSpeedMult = 0.95,
+        ShootingSpeedMult = 0.8,
+        SightedSpeedMult = 0.9,
+        MeleeSpeedMult = 1,
+        ReloadSpeedMult = 1,
+    },
+    [TacRP.BALANCE_TTT] = {
+        Damage_Max = 6,
+        Damage_Min = 3,
+
+        Range_Min = 150,
+        Range_Max = 1500,
+
+        RPM = 1000,
+
+        HipFireSpreadPenalty = 0.025,
+
+        BodyDamageMultipliers = {
+            [HITGROUP_HEAD] = 2,
+            [HITGROUP_CHEST] = 1,
+            [HITGROUP_STOMACH] = 1,
+            [HITGROUP_LEFTARM] = 1,
+            [HITGROUP_RIGHTARM] = 1,
+            [HITGROUP_LEFTLEG] = 0.75,
+            [HITGROUP_RIGHTLEG] = 0.75,
+            [HITGROUP_GEAR] = 0.9
+        },
+
+        ReloadTimeMult = 1.25,
+
+        MoveSpeedMult = 0.95,
+        ShootingSpeedMult = 0.9,
+        MeleeSpeedMult = 1,
+        SightedSpeedMult = 0.7,
+        ReloadSpeedMult = 0.75,
+    },
+}
+
 SWEP.ArcadeStats = {
-
-    Damage_Max = 13,
-    Damage_Min = 5,
-
-    RecoilKick = 3,
-
-    MoveSpeedMult = 0.95,
-    ShootingSpeedMult = 0.8,
-    SightedSpeedMult = 0.9,
-    MeleeSpeedMult = 1,
-    ReloadSpeedMult = 1,
 }
 
 // "ballistics"

@@ -13,7 +13,7 @@ ATT.SortOrder = 1
 
 ATT.Override_Firemodes = {2}
 ATT.Override_Firemode = 2
-ATT.Mult_RPM = 0.8
-ATT.Mult_RecoilKick = 1.2
-ATT.Mult_RecoilSpreadPenalty = 1.5
-ATT.Mult_RecoilMaximum = 1.2
+ATT.Mult_RPM = 0.9
+ATT.Mult_RecoilKick = 1.25
+ATT.Mult_RecoilSpreadPenalty = 1.25
+-- ATT.Mult_RecoilMaximum = 1.2

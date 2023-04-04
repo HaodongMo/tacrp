@@ -139,7 +139,6 @@ end
 function SWEP:PreDrawViewModel()
     if self:GetValue("ScopeHideWeapon") and self:IsInScope() then
         render.SetBlend(0)
-
     end
 
     -- cam.Start3D(nil, nil, 70)

@@ -129,6 +129,17 @@ TacRP.RecoilRise = Angle(0, 0, 0)
 
 function TacRP.StartCommand(ply, cmd)
     local wpn = ply:GetActiveWeapon()
+    local mt_notair = ply:GetMoveType() == MOVETYPE_NOCLIP or ply:GetMoveType() == MOVETYPE_LADDER
+
+    if !mt_notair then
+        if ply:IsOnGround() and !ply.TacRP_LastOnGround then
+            ply.TacRP_LastAirDuration = CurTime() - (ply.TacRP_LastLeaveGroundTime or 0)
+            ply.TacRP_LastOnGroundTime = CurTime()
+        elseif !ply:IsOnGround() and ply.TacRP_LastOnGround then
+            ply.TacRP_LastLeaveGroundTime = CurTime()
+        end
+    end
+    ply.TacRP_LastOnGround = ply:IsOnGround() or mt_notair
 
     if !wpn.ArcticTacRP then
         TacRP.RecoilRise = Angle(0, 0, 0)

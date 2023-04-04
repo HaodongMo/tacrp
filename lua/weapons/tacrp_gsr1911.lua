@@ -17,18 +17,42 @@ SWEP.WorldModel = "models/weapons/tacint/w_gsr1911.mdl"
 
 SWEP.Slot = 1
 
+SWEP.BalanceStats = {
+    [TacRP.BALANCE_SBOX] = {
+        Damage_Max = 28,
+        Damage_Min = 7,
+        RPM = 500,
+
+        MoveSpeedMult = 1,
+        ShootingSpeedMult = 1,
+        SightedSpeedMult = 1,
+        MeleeSpeedMult = 1,
+        ReloadSpeedMult = 1,
+    },
+    [TacRP.BALANCE_TTT] = {
+        Damage_Max = 25,
+        Damage_Min = 8,
+
+        RPM = 180,
+
+        RecoilMaximum = 4,
+        RecoilResetTime = 0.2,
+        RecoilDissipationRate = 5,
+        RecoilFirstShotMult = 0.8,
+
+        RecoilSpreadPenalty = 0.012,
+
+        ReloadTimeMult = 1.05 * 1.25,
+
+        MoveSpeedMult = 1,
+        ShootingSpeedMult = 1,
+        MeleeSpeedMult = 1,
+        SightedSpeedMult = 0.75,
+        ReloadSpeedMult = 0.8,
+    },
+}
+
 SWEP.ArcadeStats = {
-
-    Damage_Max = 28,
-    Damage_Min = 7,
-
-    RPM = 500,
-
-    MoveSpeedMult = 1,
-    ShootingSpeedMult = 1,
-    SightedSpeedMult = 1,
-    MeleeSpeedMult = 1,
-    ReloadSpeedMult = 1,
 }
 
 // "ballistics"
@@ -116,8 +140,8 @@ SWEP.HolsterSlot = TacRP.HOLSTER_SLOT_PISTOL
 SWEP.HolsterPos = Vector(0, 3, -4)
 SWEP.HolsterAng = Angle(90, 0, 0)
 
-SWEP.Sway = 2
-SWEP.ScopedSway = 1
+SWEP.Sway = 1
+SWEP.ScopedSway = 0.5
 
 // reload
 

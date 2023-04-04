@@ -17,18 +17,44 @@ SWEP.WorldModel = "models/weapons/tacint_extras/w_usp.mdl"
 
 SWEP.Slot = 1
 
+
+SWEP.BalanceStats = {
+    [TacRP.BALANCE_SBOX] = {
+        Damage_Max = 24,
+        Damage_Min = 9,
+        RPM = 450,
+
+        MoveSpeedMult = 1,
+        ShootingSpeedMult = 1,
+        SightedSpeedMult = 1,
+        MeleeSpeedMult = 1,
+        ReloadSpeedMult = 1,
+    },
+    [TacRP.BALANCE_TTT] = {
+        Damage_Max = 20,
+        Damage_Min = 8,
+
+        RPM = 250,
+
+        RecoilMaximum = 5,
+        RecoilResetTime = 0.2,
+        RecoilDissipationRate = 6,
+        RecoilFirstShotMult = 0.8,
+
+        RecoilSpreadPenalty = 0.01,
+
+        ReloadTimeMult = 1.25 * 1.25,
+
+        MoveSpeedMult = 1,
+        ShootingSpeedMult = 1,
+        MeleeSpeedMult = 1,
+        SightedSpeedMult = 0.75,
+        ReloadSpeedMult = 0.8,
+    },
+}
+
 SWEP.ArcadeStats = {
 
-    Damage_Max = 24,
-    Damage_Min = 9,
-
-    RPM = 450,
-
-    MoveSpeedMult = 1,
-    ShootingSpeedMult = 1,
-    SightedSpeedMult = 1,
-    MeleeSpeedMult = 1,
-    ReloadSpeedMult = 1,
 }
 
 // "ballistics"
@@ -85,8 +111,8 @@ SWEP.ReloadSpeedMult = 0.75
 SWEP.AimDownSightsTime = 0.25
 SWEP.SprintToFireTime = 0.25
 
-SWEP.Sway = 2
-SWEP.ScopedSway = 1
+SWEP.Sway = 1
+SWEP.ScopedSway = 0.5
 
 // hold types
 

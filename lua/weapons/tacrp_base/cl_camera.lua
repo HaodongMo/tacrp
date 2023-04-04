@@ -19,7 +19,7 @@ function SWEP:CalcView(ply, pos, ang, fov)
 
     local diff = math.abs(self.SmoothedMagnification - mag)
 
-    self.SmoothedMagnification = math.Approach(self.SmoothedMagnification, mag, FrameTime() * diff * 10)
+    self.SmoothedMagnification = math.Approach(self.SmoothedMagnification, mag, FrameTime() * diff * (self.SmoothedMagnification > mag and 10 or 5))
 
     fov = fov / self.SmoothedMagnification
 

@@ -13,7 +13,6 @@ ATT.SortOrder = 1.1
 
 ATT.Override_Firemodes = {-3, 1}
 ATT.Override_RunawayBurst = false
-ATT.Mult_RecoilSpreadPenalty = 1.25
-ATT.Mult_RecoilMaximum = 1.25
+ATT.Mult_RecoilSpreadPenalty = 1.1
 ATT.Override_PostBurstDelay = 0.15
 ATT.Mult_RPM = 1.1

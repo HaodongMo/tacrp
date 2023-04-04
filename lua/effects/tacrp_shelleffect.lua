@@ -74,14 +74,16 @@ function EFFECT:Init(data)
                 + EyeAngles():Forward() * ent.PassivePos.y
                 + EyeAngles():Up() * ent.PassivePos.z
         ang = EyeAngles()
-        dir = -ang:Right()
-    elseif LocalPlayer():ShouldDrawLocalPlayer() or ent:GetOwner() != LocalPlayer() then
-        mdl = ent
-        att = 2
-        self.VMContext = false
+        dir = ang:Right() -- not exactly correct but we can't rely on weapon model here
     else
-        mdl = LocalPlayer():GetViewModel()
-        table.insert(ent.ActiveEffects, self)
+        if LocalPlayer():ShouldDrawLocalPlayer() or ent:GetOwner() != LocalPlayer() then
+            mdl = ent
+            att = 2
+            self.VMContext = false
+        else
+            mdl = LocalPlayer():GetViewModel()
+            table.insert(ent.ActiveEffects, self)
+        end
 
         if !IsValid(ent) then self:Remove() return end
         if !mdl or !IsValid(mdl) then self:Remove() return end

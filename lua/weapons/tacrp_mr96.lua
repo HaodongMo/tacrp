@@ -17,12 +17,45 @@ SWEP.WorldModel = "models/weapons/tacint/w_mr96.mdl"
 
 SWEP.Slot = 1
 
+SWEP.BalanceStats = {
+    [TacRP.BALANCE_SBOX] = {
+        MoveSpeedMult = 1,
+        ShootingSpeedMult = 0.75,
+        SightedSpeedMult = 1,
+        MeleeSpeedMult = 1,
+        ReloadSpeedMult = 1,
+    },
+    [TacRP.BALANCE_TTT] = {
+        Damage_Max = 35,
+        Damage_Min = 15,
+
+        RPM = 120,
+
+        BodyDamageMultipliers = {
+            [HITGROUP_HEAD] = 3,
+            [HITGROUP_CHEST] = 1,
+            [HITGROUP_STOMACH] = 1,
+            [HITGROUP_LEFTARM] = 1,
+            [HITGROUP_RIGHTARM] = 1,
+            [HITGROUP_LEFTLEG] = 0.75,
+            [HITGROUP_RIGHTLEG] = 0.75,
+            [HITGROUP_GEAR] = 0.75
+        },
+
+        RecoilMaximum = 2,
+        RecoilDissipationRate = 2.5,
+
+        ReloadTimeMult = 1.25,
+
+        MoveSpeedMult = 1,
+        ShootingSpeedMult = 0.75,
+        MeleeSpeedMult = 1,
+        SightedSpeedMult = 0.75,
+        ReloadSpeedMult = 0.75,
+    },
+}
+
 SWEP.ArcadeStats = {
-    MoveSpeedMult = 1,
-    ShootingSpeedMult = 0.75,
-    SightedSpeedMult = 1,
-    MeleeSpeedMult = 1,
-    ReloadSpeedMult = 1,
 }
 
 // "ballistics"
@@ -115,8 +148,8 @@ SWEP.HolsterSlot = TacRP.HOLSTER_SLOT_PISTOL
 SWEP.HolsterPos = Vector(0, 3, -4)
 SWEP.HolsterAng = Angle(90, 0, 0)
 
-SWEP.Sway = 2
-SWEP.ScopedSway = 1
+SWEP.Sway = 1.5
+SWEP.ScopedSway = 0.6
 
 // reload
 

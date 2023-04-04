@@ -58,9 +58,14 @@ end
 
 function SWEP:GetBaseValue(val)
     local stat = self:GetTable()[val]
-    if GetConVar("tacrp_arcade"):GetBool() and self.ArcadeStats and self.ArcadeStats[val] != nil then
+
+    local b = TacRP.GetBalanceMode()
+    if b > 0 and self.BalanceStats != nil and self.BalanceStats[b] != nil and self.BalanceStats[b][val] != nil then
+        stat = self.BalanceStats[b][val]
+    elseif GetConVar("tacrp_arcade"):GetBool() and self.ArcadeStats and self.ArcadeStats[val] != nil then
         stat = self.ArcadeStats[val]
     end
+
     return stat
 end
 

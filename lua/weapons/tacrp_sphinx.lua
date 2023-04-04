@@ -17,18 +17,38 @@ SWEP.WorldModel = "models/weapons/tacint/w_sphinx.mdl"
 
 SWEP.Slot = 1
 
-SWEP.ArcadeStats = {
+SWEP.BalanceStats = {
+    [TacRP.BALANCE_SBOX] = {
+        Damage_Max = 15,
+        Damage_Min = 7,
+        RecoilKick = 3,
 
-    Damage_Max = 14,
-    Damage_Min = 7,
+        MoveSpeedMult = 1,
+        ShootingSpeedMult = 1,
+        SightedSpeedMult = 1,
+        MeleeSpeedMult = 1,
+        ReloadSpeedMult = 1,
+    },
+    [TacRP.BALANCE_TTT] = {
+        Damage_Max = 14,
+        Damage_Min = 6,
 
-    RecoilKick = 3,
+        RPM = 500,
 
-    MoveSpeedMult = 1,
-    ShootingSpeedMult = 1,
-    SightedSpeedMult = 1,
-    MeleeSpeedMult = 1,
-    ReloadSpeedMult = 1,
+        RecoilMaximum = 5,
+        RecoilResetTime = 0.15,
+        RecoilDissipationRate = 7,
+        RecoilFirstShotMult = 0.8,
+        RecoilSpreadPenalty = 0.01,
+
+        ReloadTimeMult = 1.25,
+
+        MoveSpeedMult = 1,
+        ShootingSpeedMult = 1,
+        MeleeSpeedMult = 1,
+        SightedSpeedMult = 0.75,
+        ReloadSpeedMult = 0.8,
+    },
 }
 
 // "ballistics"

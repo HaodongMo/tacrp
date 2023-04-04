@@ -214,6 +214,10 @@ function SWEP:Initialize()
 
     self.m_WeaponDeploySpeed = 4
 
+    if engine.ActiveGamemode() == "terrortown" then
+        self:TTT_Init()
+    end
+
     self:ClientInitialize()
 end
 

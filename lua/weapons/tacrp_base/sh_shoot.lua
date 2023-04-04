@@ -388,8 +388,6 @@ function SWEP:GetShotgunPattern(i, d)
         local angle = 360 * (f + l + d)
         x = math.sin(math.rad(angle)) * ring_spread * l
         y = math.cos(math.rad(angle)) * ring_spread * l
-
-        print(i, tr, ri, rin, rln, math.Round(f, 2), math.Round(l, 2))
     end
 
     return x, y
@@ -561,13 +559,8 @@ function SWEP:ShootRocket(dir)
 end
 
 function SWEP:GetSpread(baseline)
+    local ply = self:GetOwner()
     local spread = self:GetValue("Spread")
-
-    -- if self:GetScopeLevel() == 0 then
-    --     spread = spread + self:GetValue("HipFireSpreadPenalty")
-    -- else
-    --     spread = spread + self:GetValue("ScopedSpreadPenalty")
-    -- end
 
     if baseline then return spread end
 
@@ -575,18 +568,21 @@ function SWEP:GetSpread(baseline)
 
     spread = spread + (self:GetRecoilAmount() * self:GetValue("RecoilSpreadPenalty"))
 
-    local spd = math.min(self:GetOwner():GetAbsVelocity():Length(), 250)
+    local spd = math.min(ply:GetAbsVelocity():Length(), 250)
 
     spd = spd / 250
 
     spread = spread + (spd * self:GetValue("MoveSpreadPenalty"))
 
-    if !self:GetOwner():OnGround() then
-        local v = self:GetOwner():WaterLevel() > 0 and 0.5 or 1
-        spread = spread + self:GetValue("MidAirSpreadPenalty") * v
+    local groundtime = CurTime() - (ply.TacRP_LastOnGroundTime or 0)
+    local gd = math.Clamp(!ply:IsOnGround() and 0 or groundtime / math.Clamp(ply.TacRP_LastAirDuration, 0.1, 1.5), 0, 1) ^ 0.4
+
+    if gd < 1 and ply:GetMoveType() != MOVETYPE_NOCLIP then
+        local v = (ply:WaterLevel() > 0 or ply:GetMoveType() == MOVETYPE_LADDER) and 0.5 or 0
+        spread = spread + Lerp(gd + v, self:GetValue("MidAirSpreadPenalty"), 0)
     end
 
-    if self:GetOwner():OnGround() and self:GetOwner():Crouching() then
+    if ply:OnGround() and ply:Crouching() then
         spread = spread + self:GetValue("CrouchSpreadPenalty")
     end
 
@@ -596,7 +592,7 @@ function SWEP:GetSpread(baseline)
 
     local quickscopetime = CurTime() - self:GetLastScopeTime()
 
-    local qsd = quickscopetime / self:GetValue("QuickScopeTime")
+    local qsd = (quickscopetime / self:GetValue("QuickScopeTime")) ^ 2
 
     if qsd < 1 then
         spread = spread + Lerp(qsd, self:GetValue("QuickScopeSpreadPenalty"), 0)

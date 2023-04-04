@@ -301,7 +301,14 @@ local conVars = {
         max = 2,
         replicated = true,
     },
-
+    {
+        name = "balance",
+        default = "-1",
+        min = -1,
+        max = 2,
+        replicated = true,
+        notify = true,
+    },
 
     {
         name = "slot_hl2",

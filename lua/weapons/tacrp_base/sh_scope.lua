@@ -1,27 +1,27 @@
--- local blur = Material("pp/blurscreen")
--- local function drawBlurAt(x, y, w, h, amount, passes, reverse)
---     -- Intensity of the blur.
---     amount = amount or 5
+local blur = Material("pp/blurscreen")
+local function drawBlurAt(x, y, w, h, amount, passes, reverse)
+    -- Intensity of the blur.
+    amount = amount or 5
 
---     surface.SetMaterial(blur)
---     surface.SetDrawColor(color_white)
+    surface.SetMaterial(blur)
+    surface.SetDrawColor(color_white)
 
---     local scrW, scrH = ScrW(), ScrH()
---     local x2, y2 = x / scrW, y / scrH
---     local w2, h2 = (x + w) / scrW, (y + h) / scrH
+    local scrW, scrH = ScrW(), ScrH()
+    local x2, y2 = x / scrW, y / scrH
+    local w2, h2 = (x + w) / scrW, (y + h) / scrH
 
---     for i = -(passes or 0.2), 1, 0.2 do
---         if reverse then
---             blur:SetFloat("$blur", i*-1 * amount)
---         else
---             blur:SetFloat("$blur", i * amount)
---         end
---         blur:Recompute()
+    for i = -(passes or 0.2), 1, 0.2 do
+        if reverse then
+            blur:SetFloat("$blur", i*-1 * amount)
+        else
+            blur:SetFloat("$blur", i * amount)
+        end
+        blur:Recompute()
 
---         render.UpdateScreenEffectTexture()
---         surface.DrawTexturedRectUV(x, y, w, h, x2, y2, w2, h2)
---     end
--- end
+        render.UpdateScreenEffectTexture()
+        surface.DrawTexturedRectUV(x, y, w, h, x2, y2, w2, h2)
+    end
+end
 
 function SWEP:ScopeToggle(setlevel)
     if (setlevel or 0) > 0 and (!self:GetValue("Scope") or self:GetPrimedGrenade()) then return end
@@ -79,7 +79,7 @@ end
 function SWEP:IsInScope()
     local sightdelta = self:Curve(self:GetSightDelta())
 
-    return (SERVER or !self:GetPeeking()) and ((self:GetScopeLevel() > 0 and sightdelta > 0.1) or (sightdelta > 0.9))
+    return (SERVER or !self:GetPeeking()) and ((self:GetScopeLevel() > 0 and sightdelta > 0.5) or (sightdelta > 0.9))
 end
 
 function SWEP:DoScope()
@@ -127,6 +127,10 @@ function SWEP:DoScope()
 
             surface.DrawRect(0, 0, sx, h)
             surface.DrawRect(sx + ss, 0, w - sx, h)
+
+            if self:GetReloading() then
+                drawBlurAt(0, 0, w, h, 1, 1)
+            end
 
             -- if int > 0 then
             --     surface.SetDrawColor(255, 255, 255, int * 25)
