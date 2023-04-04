@@ -12,7 +12,7 @@ local function drawBlurAt(x, y, w, h, amount, passes, reverse)
 
     for i = -(passes or 0.2), 1, 0.2 do
         if reverse then
-            blur:SetFloat("$blur", i*-1 * amount)
+            blur:SetFloat("$blur", i * -1 * amount)
         else
             blur:SetFloat("$blur", i * amount)
         end
