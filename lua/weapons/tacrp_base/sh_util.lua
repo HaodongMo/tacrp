@@ -37,7 +37,7 @@ end
 function SWEP:DoLowerIrons()
     if self:GetValue("Holosight") or self:GetValue("ScopeOverlay") then return false end
     local i = GetConVar("tacrp_irons_lower"):GetInt()
-    return i == 1 or (i == -1 and engine.ActiveGamemode() == "terrortown")
+    return i == 2 or (i == 1 and engine.ActiveGamemode() == "terrortown")
 end
 
 function SWEP:DoProceduralIrons()

@@ -349,11 +349,11 @@ local conVars = {
 
     {
         name = "irons_lower",
-        default = "-1",
+        default = "1",
         replicated = true,
         notify = true,
-        min = -1,
-        max = 1,
+        min = 0,
+        max = 2,
     },
     {
         name = "irons_procedural",
@@ -571,10 +571,10 @@ local function menu_server_ti(panel)
         text = "Applies mostly to pistols. Replaces firing animation while aiming with a much less disruptive procedural effect, making aiming with the weapon's sights easier."
     })
 
-    local cb_irons_lower, lb_irons_lower = panel:ComboBox("Lower Ironsights", "tacrp_irons_lower")
-    cb_irons_lower:AddChoice("-1 - In TTT", "-1")
+    local cb_irons_lower, lb_irons_lower = panel:ComboBox("Use Lowered Ironsights", "tacrp_irons_lower")
     cb_irons_lower:AddChoice("0  - Never", "0")
-    cb_irons_lower:AddChoice("1  - Always", "1")
+    cb_irons_lower:AddChoice("1 - In TTT", "1")
+    cb_irons_lower:AddChoice("2  - Always", "2")
     cb_irons_lower:DockMargin(8, 0, 0, 0)
     lb_irons_lower:SizeToContents()
     panel:AddControl("label", {
