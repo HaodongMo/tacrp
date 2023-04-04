@@ -166,7 +166,7 @@ SWEP.HolsterSlot = TacRP.HOLSTER_SLOT_BACK
 SWEP.HolsterPos = Vector(0, 0, 0)
 SWEP.HolsterAng = Angle(0, 0, 0)
 
-SWEP.HolsterModel = nil -- string, model.
+SWEP.HolsterModel = nil // string, model.
 
 SWEP.SightMidPoint = {
     Pos = Vector(-1, 15, -6),
@@ -306,6 +306,23 @@ SWEP.AnimationTranslationTable = {
 // so ["fire"] = "shoot1"
 // can be ["fire"] = {"list", "of", "values"}
 
+SWEP.ProceduralIronFire = nil // procedurally animate the viewmodel and bones when using ironsights
+// {
+//     vm_pos = Vector(0, -0.5, -0.6),
+//     vm_ang = Angle(0, 2, 0),
+//     t = 0.2, // duration of vm pos/ang
+//     tmax = 0.2, // clean up after this time has passed
+//     bones = {
+//         {
+//             bone = "ValveBiped.slide",
+//             pos = Vector(0, 0, -3), // optional
+//             ang = Angle(0, 0, 0), // optional
+//             t0 = 0.05, // duration to reach full movement
+//             t1 = 0.2, // duration to reset
+//         },
+//     },
+// }
+
 SWEP.NoHolsterAnimation = false // Will play draw reversed instead
 SWEP.LastShot = false
 SWEP.Akimbo = false
@@ -324,23 +341,23 @@ SWEP.AttachmentElements = {
 }
 
 SWEP.Attachments = nil
--- {
---     [1] = {
---         Installed = nil,
---         Default = nil, // install this attachment by default
---         InstalledElements = "", // single or list of elements to activate when something is installed here
---         UnInstalledElements = "",
---         Integral = false, // cannot be removed
---         Category = "", // single or {"list", "of", "values"}
---         Bone = "",
---         WMBone = "",
---         Pos_VM = Vector(0, 0, 0),
---         Pos_WM = Vector(0, 0, 0),
---         Ang_VM = Angle(0, 0, 0),
---         Ang_WM = Angle(0, 0, 0),
---         CapacityMult = 1, // multiply the amount of Capacity this attachment occupies
---     }
--- }
+// {
+//     [1] = {
+//         Installed = nil,
+//         Default = nil, // install this attachment by default
+//         InstalledElements = "", // single or list of elements to activate when something is installed here
+//         UnInstalledElements = "",
+//         Integral = false, // cannot be removed
+//         Category = "", // single or {"list", "of", "values"}
+//         Bone = "",
+//         WMBone = "",
+//         Pos_VM = Vector(0, 0, 0),
+//         Pos_WM = Vector(0, 0, 0),
+//         Ang_VM = Angle(0, 0, 0),
+//         Ang_WM = Angle(0, 0, 0),
+//         CapacityMult = 1, // multiply the amount of Capacity this attachment occupies
+//     }
+// }
 
 // boilerplate
 
@@ -423,7 +440,7 @@ function SWEP:SetupDataTables()
     self:NetworkVar("Float", 12, "NWSightAmount")
     self:NetworkVar("Float", 13, "BlindFireFinishTime")
     self:NetworkVar("Float", 14, "HolsterTime")
-    -- self:NetworkVar("Float", 14, "BlindFireCornerAmount")
+    self:NetworkVar("Float", 15, "NWLastProceduralFireTime")
 
     self:NetworkVar("Int", 0, "BurstCount")
     self:NetworkVar("Int", 1, "ScopeLevel")
@@ -441,7 +458,7 @@ function SWEP:SetupDataTables()
     self:NetworkVar("Bool", 7, "NWTactical")
     self:NetworkVar("Bool", 8, "Charge")
     self:NetworkVar("Bool", 9, "Peeking")
-    self:NetworkVar("Bool", 10, "BlindFireRight") -- bleh, but actually less networking load than using an integer (32 bit)
+    self:NetworkVar("Bool", 10, "BlindFireRight") // bleh, but actually less networking load than using an integer (32 bit)
     self:NetworkVar("Bool", 11, "Jammed")
 
     self:NetworkVar("Angle", 0, "FreeAimAngle")
@@ -479,3 +496,4 @@ end
 clunpredictvar(SWEP, "Tactical", "NWTactical", true)
 clunpredictvar(SWEP, "SightAmount", "NWSightAmount", 0)
 clunpredictvar(SWEP, "SprintAmount", "NWSprintAmount", 0)
+clunpredictvar(SWEP, "LastProceduralFireTime", "NWLastProceduralFireTime", 0)

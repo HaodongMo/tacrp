@@ -37,13 +37,14 @@ function SWEP:DoHolosight(mdl)
 
     if img then
         local pos = self:GetOwner():EyePos()
+        local dir = (self:GetShootDir() + self:GetOwner():GetViewPunchAngles() * 0.5):Forward() -- mdl:GetAngles():Forward()
 
-        pos = pos + mdl:GetAngles():Forward() * 9000
+        pos = pos + dir * 9000
 
         -- cam.Start3D()
 
         render.SetMaterial(img)
-        render.DrawQuadEasy(pos, -mdl:GetAngles():Forward(), 512, 512, Color(255, 255, 255))
+        render.DrawQuadEasy(pos, -dir, 512, 512, Color(255, 255, 255))
 
         -- cam.End3D()
 

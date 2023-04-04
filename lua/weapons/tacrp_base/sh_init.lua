@@ -181,6 +181,8 @@ function SWEP:Holster(wep)
         self:KillTimers()
         self:ToggleBlindFire(TacRP.BLINDFIRE_NONE)
         self:GetOwner():SetFOV(0, 0.1)
+        self:SetLastProceduralFireTime(0)
+
     end
 end
 

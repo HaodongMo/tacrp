@@ -129,9 +129,6 @@ SWEP.SprintPos = Vector(2, 0, -12)
 SWEP.SightAng = Angle(5.1, 0.4, 1)
 SWEP.SightPos = Vector(-2.4, 0, -3.6)
 
-SWEP.SightAng = Angle(5.1, 0.4, 1)
-SWEP.SightPos = Vector(-2.43, 0, -3.6)
-
 SWEP.CorrectivePos = Vector(-1.47, 0, 0)
 SWEP.CorrectiveAng = Angle(-5, 5, 0)
 
@@ -193,6 +190,39 @@ SWEP.AnimationTranslationTable = {
     ["fire"] = {"shoot1", "shoot2", "shoot3"},
     ["blind_fire"] = {"blind_shoot1", "blind_shoot2", "blind_shoot3"},
     ["melee"] = {"melee1", "melee2"}
+}
+
+SWEP.ProceduralIronFire = {
+    vm_pos = Vector(0, -0.5, -0.6),
+    vm_ang = Angle(0, 2, 0),
+    t = 0.2,
+    tmax = 0.2,
+    bones = {
+        {
+            bone = "slide",
+            pos = Vector(0, 0, -3),
+            t0 = 0.05,
+            t1 = 0.2,
+        },
+        {
+            bone = "hammer",
+            ang = Angle(-15, 0, 0),
+            t0 = 0,
+            t1 = 0.15,
+        },
+        {
+            bone = "ValveBiped.Bip01_R_Finger1",
+            ang = Angle(0, -15, 0),
+            t0 = 0,
+            t1 = 0.2,
+        },
+        {
+            bone = "ValveBiped.Bip01_R_Finger11",
+            ang = Angle(-35, 0, 0),
+            t0 = 0,
+            t1 = 0.15,
+        },
+    },
 }
 
 SWEP.ShootTimeMult = 0.5

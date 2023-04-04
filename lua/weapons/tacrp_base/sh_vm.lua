@@ -4,6 +4,7 @@ local sprintdelta = 0
 local peekdelta = 0
 local blindfiredelta, blindfiredeltaleft, blindfiredeltaright, blindfiredeltakys = 0, 0, 0, 0
 local freeaim_p, freeaim_y = 0, 0
+local procfiredelta = 0
 
 local angle_zero = Angle(0, 0, 0)
 local vector_origin = Vector(0, 0, 0)
@@ -33,6 +34,7 @@ function SWEP:GetViewModelPosition(pos, ang)
         return Vector(0, 0, 0), Angle(0, 0, 0)
     end
 
+    local vm = self:GetOwner():GetViewModel()
     local FT = self:DeltaSysTime() -- FrameTime()
 
     ang = ang - (self:GetOwner():GetViewPunchAngles() * 0.5)
@@ -110,11 +112,59 @@ function SWEP:GetViewModelPosition(pos, ang)
     if sightdelta > 0 then
         local sightpos, sightang = self:GetSightPositions()
 
+        if self:DoLowerIrons() then
+            sightpos = sightpos + Vector(0, 1, -1)
+        end
+
         LerpMod(offsetpos, sightpos + ppos, curvedsightdelta)
         LerpMod(offsetang, sightang + pang, curvedsightdelta, true)
 
         -- LerpMod(offsetang, sightpos + ppos, curvedpeekdelta)
         -- LerpMod(offsetang, sightang + pang, curvedpeekdelta, true)
+    end
+
+    local dt = CurTime() - self:GetLastProceduralFireTime()
+    if IsValid(vm) and self.ProceduralIronFire then
+        if dt <= self.ProceduralIronFire.tmax then
+            self.ProceduralIronCleanup = false
+            if !(self:GetValue("LastShot") and self:Clip1() == 0) then
+                for k, v in pairs(self.ProceduralIronFire.bones) do
+                    local bone = vm:LookupBone(v.bone or "")
+                    if !bone then continue end
+
+                    local f = v.t1 and (dt > v.t0 and self:Curve(math.Clamp(1 - (dt - v.t0) / (v.t1 - v.t0), 0, 1)) or (dt / v.t0)) or (dt > v.t0 and 1 or (dt / v.t0))
+                    if v.pos then
+                        local offset = LerpVector(f, vector_origin, v.pos)
+                        vm:ManipulateBonePosition(bone, offset, false)
+                    end
+                    if v.ang then
+                        local offset = LerpAngle(f, angle_zero, v.ang)
+                        vm:ManipulateBoneAngles(bone, offset, false)
+                    end
+                end
+            end
+
+            local dtc = self:Curve(1 - math.Clamp(dt / self.ProceduralIronFire.t, 0, 1))
+
+            if dtc > 0 and self.ProceduralIronFire.vm_pos then
+                LerpMod(offsetpos, offsetpos + self.ProceduralIronFire.vm_pos, dtc)
+            end
+            if dtc > 0 and self.ProceduralIronFire.vm_ang then
+                LerpMod(offsetang, offsetang + self.ProceduralIronFire.vm_ang, dtc, true)
+            end
+        elseif !self.ProceduralIronCleanup then
+            self.ProceduralIronCleanup = true
+            for k, v in pairs(self.ProceduralIronFire.bones) do
+                local bone = vm:LookupBone(v.bone or "")
+                if !bone then continue end
+                if v.pos then
+                    vm:ManipulateBonePosition(bone, vector_origin, false)
+                end
+                if v.ang then
+                    vm:ManipulateBoneAngles(bone, angle_zero, false)
+                end
+            end
+        end
     end
 
     local eepos, eeang = self:GetExtraSightPosition()

@@ -228,6 +228,12 @@ function SWEP:ToggleBlindFire(bf)
         self:ToggleCustomize(false)
         self:ScopeToggle(0)
         self:SetBlindFireFinishTime(CurTime() + (bf == TacRP.BLINDFIRE_KYS and 1 or 0.3))
+
+        if self:StillWaiting(true) then
+            self:IdleAtEndOfAnimation()
+        else
+            self:Idle()
+        end
     end
 
     self:SetBlindFireMode(bf)
@@ -237,10 +243,6 @@ function SWEP:ToggleBlindFire(bf)
     if bf == TacRP.BLINDFIRE_KYS and TacRP.ShouldWeFunny() and math.random() <= 0.4 then
         self:GetOwner():EmitSound("tacrp/low-tier-god.mp3", 80, 100)
     end
-
-    if self:StillWaiting(true) then self:IdleAtEndOfAnimation() return end
-
-    self:Idle()
 end
 
 function SWEP:ThinkBlindFire()

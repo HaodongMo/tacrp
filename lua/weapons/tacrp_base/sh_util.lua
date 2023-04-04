@@ -33,3 +33,14 @@ function SWEP:OnReloaded()
     self:InvalidateCache()
     self:SetBaseSettings()
 end
+
+function SWEP:DoLowerIrons()
+    if self:GetValue("Holosight") or self:GetValue("ScopeOverlay") then return false end
+    local i = GetConVar("tacrp_irons_lower"):GetInt()
+    return i == 1 or (i == -1 and engine.ActiveGamemode() == "terrortown")
+end
+
+function SWEP:DoProceduralIrons()
+    local i = GetConVar("tacrp_irons_procedural"):GetInt()
+    return self.ProceduralIronFire and (i == 2 or (i == 1 and self:GetValue("Holosight"))) --and (!self.LastShot or self:Clip1() > 1)
+end

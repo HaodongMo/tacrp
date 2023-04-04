@@ -208,6 +208,40 @@ SWEP.AnimationTranslationTable = {
     ["jam"] = "draw"
 }
 
+SWEP.ProceduralIronFire = {
+    vm_pos = Vector(0, -3, -4.5),
+    vm_ang = Angle(0, 15, 0),
+    t = 0.3,
+    tmax = 0.3,
+    bones = {
+        {
+            bone = "ValveBiped.cylinder",
+            pos = false,
+            ang = Angle(-60, 0, 0),
+            t0 = 0,
+            t1 = 0.2,
+        },
+        {
+            bone = "ValveBiped.hammer",
+            ang = Angle(35, 0, 0),
+            t0 = 0,
+            t1 = 0.1,
+        },
+        {
+            bone = "ValveBiped.Bip01_R_Finger1",
+            ang = Angle(0, -15, 0),
+            t0 = 0,
+            t1 = 0.2,
+        },
+        {
+            bone = "ValveBiped.Bip01_R_Finger11",
+            ang = Angle(-35, 0, 0),
+            t0 = 0,
+            t1 = 0.15,
+        },
+    },
+}
+
 // attachments
 
 SWEP.Attachments = {

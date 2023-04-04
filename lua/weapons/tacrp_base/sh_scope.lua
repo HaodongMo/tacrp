@@ -195,7 +195,7 @@ function SWEP:GetMagnification()
     if level > 0 then
 
         if self:GetPeeking() then
-            return 1.25
+            return 1
         end
 
         mag = 90 / self:GetValue("ScopeFOV")

@@ -192,6 +192,39 @@ SWEP.AnimationTranslationTable = {
     ["melee"] = {"melee1", "melee2"}
 }
 
+SWEP.ProceduralIronFire = {
+    vm_pos = Vector(0, -0.5, -0.6),
+    vm_ang = Angle(0, 2, 0),
+    t = 0.2,
+    tmax = 0.2,
+    bones = {
+        {
+            bone = "ValveBiped.slide",
+            pos = Vector(0, 0, -3),
+            t0 = 0.05,
+            t1 = 0.2,
+        },
+        {
+            bone = "ValveBiped.hammer",
+            ang = Angle(-15, 0, 0),
+            t0 = 0,
+            t1 = 0.15,
+        },
+        {
+            bone = "ValveBiped.Bip01_R_Finger1",
+            ang = Angle(0, -15, 0),
+            t0 = 0,
+            t1 = 0.2,
+        },
+        {
+            bone = "ValveBiped.Bip01_R_Finger11",
+            ang = Angle(-35, 0, 0),
+            t0 = 0,
+            t1 = 0.15,
+        },
+    },
+}
+
 SWEP.NoIdle = true
 
 SWEP.ShootTimeMult = 0.5
@@ -210,7 +243,7 @@ SWEP.Attachments = {
         DetachSound = "tacrp/weapons/optic_off.wav",
         VMScale = 1,
         WMScale = 1,
-        Pos_VM = Vector(0, 0, 0),
+        Pos_VM = Vector(0.05, 0, 0),
         Ang_VM = Angle(0, 90, 180),
         Pos_WM = Vector(0, -1, -1),
         Ang_WM = Angle(0, -90, 0),

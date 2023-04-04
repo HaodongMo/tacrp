@@ -1,9 +1,11 @@
 function SWEP:ShouldDrawCrosshair()
-    return GetConVar("tacrp_crosshair"):GetBool()
-        and !self:GetReloading()
+    if !GetConVar("tacrp_crosshair"):GetBool() then
+        return self:DoLowerIrons() and self:GetSightAmount() > 0 and !self:GetPeeking() and !self:GetReloading()
+    end
+    return  !self:GetReloading()
         and !self:GetCustomize()
         and !(self:SprintLock() and !self.DrawCrosshairInSprint)
-        and (self:GetSightAmount() <= 0.5 or self:GetPeeking())
+        and (self:GetSightAmount() <= 0.5 or self:GetPeeking() or self:DoLowerIrons())
         and !(self:GetValue("CanQuickNade") and tobool(self:GetOwner():GetInfo("tacrp_nademenu")) and self:GetOwner():KeyDown(IN_GRENADE2))
         and !(self:GetValue("CanBlindFire") and tobool(self:GetOwner():GetInfo("tacrp_blindfiremenu")) and self:GetOwner():KeyDown(IN_ZOOM))
 end
@@ -25,6 +27,8 @@ function SWEP:DoDrawCrosshair(x, y)
         tacfunc = self:GetValue("TacticalCrosshair")
     elseif !dev and self.CrosshairAlpha <= 0 then return true end
 
+    local loweriron = self:DoLowerIrons() and self:GetSightAmount() > 0 and !self:GetPeeking() and !self:GetReloading()
+
     local dir = self:GetShootDir(true)
 
     local tr = util.TraceLine({
@@ -43,7 +47,8 @@ function SWEP:DoDrawCrosshair(x, y)
     local spread = TacRP.GetFOVAcc(self)
     local sway = self:IsSwayEnabled() and self:GetSwayAmount() or self:GetForcedSwayAmount()
 
-    if dev or self:GetValue("TacticalCrosshairTruePos") then
+    local truepos = self:GetValue("TacticalCrosshairTruePos")
+    if dev or truepos then
         local tr2 = util.TraceLine({
             start = self:GetMuzzleOrigin(),
             endpos = self:GetMuzzleOrigin() + (self:GetShootDir():Forward() * 50000),
@@ -58,14 +63,14 @@ function SWEP:DoDrawCrosshair(x, y)
     end
 
     if tacfunc then
-        tacfunc(self, x2, y2, spread, sway)
+        tacfunc(self, truepos and x2 or x, truepos and y2 or y, spread, sway)
     end
 
     spread = math.Round( math.max(spread, 2) + ScreenScale(sway * math.pi))
 
     if !dev and self.CrosshairAlpha <= 0 then return true end
 
-    local clr = Color(50, 255, 50)
+    local clr
     if GetConVar("tacrp_ttt_rolecrosshair") and GetConVar("tacrp_ttt_rolecrosshair"):GetBool() then
         if GetRoundState() == ROUND_PREP or GetRoundState() == ROUND_POST then
             clr = Color(255, 255, 255)
@@ -80,17 +85,25 @@ function SWEP:DoDrawCrosshair(x, y)
         end
     end
 
-    surface.SetDrawColor(clr.r, clr.g, clr.b, clr.a * self.CrosshairAlpha)
+    if loweriron then
+        clr = clr or color_white
+        surface.SetDrawColor(clr.r, clr.g, clr.b, clr.a * self.CrosshairAlpha * 0.75 * self:GetSightAmount())
+        surface.DrawRect(x - 1, y - 1, 3, 3)
 
-    surface.DrawRect(x, y, 1, 1)
+        surface.SetDrawColor(0, 0, 0, clr.a * self.CrosshairAlpha * self:GetSightAmount() * 0.5)
+        surface.DrawOutlinedRect(x - 2, y - 2, 5, 5, 1)
+    elseif GetConVar("tacrp_crosshair"):GetBool() then
+        clr = clr or Color(50, 255, 50)
+        surface.SetDrawColor(clr.r, clr.g, clr.b, clr.a * self.CrosshairAlpha)
 
-    if self.CrosshairStatic then spread = 16 end
-
-    local w = 16
-    surface.DrawLine(x, y - spread - w, x, y - spread)
-    surface.DrawLine(x, y + spread, x, y + spread + w)
-    surface.DrawLine(x - spread - w, y, x - spread, y)
-    surface.DrawLine(x + spread, y, x + spread + w, y)
+        surface.DrawRect(x, y, 1, 1)
+        if self.CrosshairStatic then spread = 16 end
+        local w = 16
+        surface.DrawLine(x, y - spread - w, x, y - spread)
+        surface.DrawLine(x, y + spread, x, y + spread + w)
+        surface.DrawLine(x - spread - w, y, x - spread, y)
+        surface.DrawLine(x + spread, y, x + spread + w, y)
+    end
 
     -- Developer Crosshair
     if dev then

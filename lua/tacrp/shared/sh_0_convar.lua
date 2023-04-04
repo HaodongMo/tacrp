@@ -346,6 +346,23 @@ local conVars = {
         min = 0,
         max = 1
     },
+
+    {
+        name = "irons_lower",
+        default = "-1",
+        replicated = true,
+        notify = true,
+        min = -1,
+        max = 1,
+    },
+    {
+        name = "irons_procedural",
+        default = "1",
+        notify = true,
+        replicated = true,
+        min = 0,
+        max = 2,
+    },
 }
 
 local prefix = "tacrp_"
@@ -542,6 +559,26 @@ local function menu_server_ti(panel)
     })
     panel:AddControl("label", {
         text = "If turned off, newsletter popup/notification will not happen. Players can still open the newsletter page manually."
+    })
+
+    local cb_irons_procedural, lb_irons_procedural = panel:ComboBox("Use Procedural Ironsights Firing Animation", "tacrp_irons_procedural")
+    cb_irons_procedural:AddChoice("0 - Never", "0")
+    cb_irons_procedural:AddChoice("1 - With Sights", "1")
+    cb_irons_procedural:AddChoice("2 - Always", "2")
+    cb_irons_procedural:DockMargin(8, 0, 0, 0)
+    lb_irons_procedural:SizeToContents()
+    panel:AddControl("label", {
+        text = "Applies mostly to pistols. Replaces firing animation while aiming with a much less disruptive procedural effect, making aiming with the weapon's sights easier."
+    })
+
+    local cb_irons_lower, lb_irons_lower = panel:ComboBox("Lower Ironsights", "tacrp_irons_lower")
+    cb_irons_lower:AddChoice("-1 - In TTT", "-1")
+    cb_irons_lower:AddChoice("0  - Never", "0")
+    cb_irons_lower:AddChoice("1  - Always", "1")
+    cb_irons_lower:DockMargin(8, 0, 0, 0)
+    lb_irons_lower:SizeToContents()
+    panel:AddControl("label", {
+        text = "While aiming with ironsights, lower the weapon and draw a dot where the point of aim is (even when Enable Crosshair is off)."
     })
 
     header(panel, "\nAttachments")

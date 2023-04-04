@@ -110,8 +110,16 @@ function SWEP:PrimaryAttack()
         end
     end
 
-    if self:GetScopeLevel() > 0 and self:HasSequence(seq .. "_iron") and !self:GetPeeking() then
-        self:PlayAnimation(seq .. "_iron", mult, false, idle)
+    if self:GetScopeLevel() > 0 and (self:DoProceduralIrons() or self:HasSequence(seq .. "_iron")) and !self:GetPeeking() then
+        if self:DoProceduralIrons() then
+            if self:GetValue("LastShot") and self:Clip1() == 1 then
+                self:PlayAnimation("dryfire", mult * 0.25, false, idle)
+                self:SetLastProceduralFireTime(0)
+            end
+            self:SetLastProceduralFireTime(CurTime())
+        else
+            self:PlayAnimation(seq .. "_iron", mult, false, idle)
+        end
     elseif self:HasSequence(seq .. "1") then
         local seq1 = seq .. "1"
         if self:GetScopeLevel() < 1 or self:GetPeeking() then
@@ -575,7 +583,7 @@ function SWEP:GetSpread(baseline)
     spread = spread + (spd * self:GetValue("MoveSpreadPenalty"))
 
     local groundtime = CurTime() - (ply.TacRP_LastOnGroundTime or 0)
-    local gd = math.Clamp(!ply:IsOnGround() and 0 or groundtime / math.Clamp(ply.TacRP_LastAirDuration, 0.1, 1.5), 0, 1) ^ 0.4
+    local gd = math.Clamp(!ply:IsOnGround() and 0 or groundtime / math.Clamp(ply.TacRP_LastAirDuration - 0.25, 0.1, 1.5), 0, 1) ^ 0.75
 
     if gd < 1 and ply:GetMoveType() != MOVETYPE_NOCLIP then
         local v = (ply:WaterLevel() > 0 or ply:GetMoveType() == MOVETYPE_LADDER) and 0.5 or 0

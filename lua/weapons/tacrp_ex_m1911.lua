@@ -195,6 +195,39 @@ SWEP.AnimationTranslationTable = {
     ["melee"] = {"melee1", "melee2"}
 }
 
+SWEP.ProceduralIronFire = {
+    vm_pos = Vector(0, -0.5, -0.6),
+    vm_ang = Angle(0, 2, 0),
+    t = 0.2,
+    tmax = 0.2,
+    bones = {
+        {
+            bone = "ValveBiped.slide",
+            pos = Vector(0, 0, -3),
+            t0 = 0.05,
+            t1 = 0.2,
+        },
+        {
+            bone = "ValveBiped.hammer",
+            ang = Angle(-15, 0, 0),
+            t0 = 0,
+            t1 = 0.15,
+        },
+        {
+            bone = "ValveBiped.Bip01_R_Finger1",
+            ang = Angle(0, -15, 0),
+            t0 = 0,
+            t1 = 0.2,
+        },
+        {
+            bone = "ValveBiped.Bip01_R_Finger11",
+            ang = Angle(-35, 0, 0),
+            t0 = 0,
+            t1 = 0.15,
+        },
+    },
+}
+
 SWEP.LastShot = true
 
 // attachments

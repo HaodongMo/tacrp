@@ -19,7 +19,7 @@ SWEP.Slot = 1
 
 SWEP.BalanceStats = {
     [TacRP.BALANCE_SBOX] = {
-        Damage_Max = 14,
+        Damage_Max = 15,
         Damage_Min = 8,
         RecoilKick = 2.5,
 
@@ -122,8 +122,8 @@ SWEP.BlindFireSuicidePos = Vector(25, 12, -5)
 SWEP.SprintAng = Angle(0, 30, 0)
 SWEP.SprintPos = Vector(2, 0, -12)
 
-SWEP.SightAng = Angle(-0.01, 0.55, 0)
-SWEP.SightPos = Vector(-3.26, 0, -3.65)
+SWEP.SightAng = Angle(-0.01, 0.75, 0)
+SWEP.SightPos = Vector(-3.3, 0, -3.65)
 
 SWEP.CorrectivePos = Vector(0.02, -1, 0)
 SWEP.CorrectiveAng = Angle(0.05, -0.05, 0)
@@ -190,7 +190,40 @@ SWEP.AnimationTranslationTable = {
     ["melee"] = {"melee1", "melee2"}
 }
 
-SWEP.NoIdle = true
+SWEP.ProceduralIronFire = {
+    vm_pos = Vector(0, -0.5, -0.6),
+    vm_ang = Angle(0, 2, 0),
+    t = 0.2,
+    tmax = 0.2,
+    bones = {
+        {
+            bone = "ValveBiped.slide",
+            pos = Vector(0, 0, -3),
+            t0 = 0.05,
+            t1 = 0.15,
+        },
+        {
+            bone = "ValveBiped.hammer",
+            ang = Angle(-15, 0, 0),
+            t0 = 0,
+            t1 = 0.15,
+        },
+        {
+            bone = "ValveBiped.Bip01_R_Finger1",
+            ang = Angle(0, -15, 0),
+            t0 = 0,
+            t1 = 0.15,
+        },
+        {
+            bone = "ValveBiped.Bip01_R_Finger11",
+            ang = Angle(-35, 0, 0),
+            t0 = 0,
+            t1 = 0.1,
+        },
+    },
+}
+
+SWEP.NoIdle = false
 
 SWEP.ShootTimeMult = 0.45
 
