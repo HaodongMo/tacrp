@@ -16,3 +16,5 @@ ATT.Override_ScopeOverlay = Material("tacrp/scopes/sniper.png", "mips smooth")
 ATT.Override_ScopeFOV = 90 / 8
 ATT.Override_ScopeLevels = 1
 ATT.Override_ScopeHideWeapon = true
+
+ATT.Override_ScopeOverlaySize = 0.8

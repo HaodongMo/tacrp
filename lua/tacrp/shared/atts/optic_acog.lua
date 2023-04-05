@@ -17,6 +17,7 @@ ATT.Override_ScopeOverlay = Material("tacrp/scopes/acog.png", "mips smooth")
 ATT.Override_ScopeFOV = 90 / 4
 ATT.Override_ScopeLevels = 1
 ATT.Override_ScopeHideWeapon = true
+ATT.Override_ScopeOverlaySize = 0.85
 
 ATT.SightPos = Vector(0, -10, 1.01611)
 ATT.SightAng = Angle(0, 0, 0)

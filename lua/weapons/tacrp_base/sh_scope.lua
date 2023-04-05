@@ -102,7 +102,7 @@ function SWEP:DoScope()
             local x = toscreen.x
             local y = toscreen.y
 
-            local ss = h
+            local ss = math.Round(h * (self:GetValue("ScopeOverlaySize") or 1))
             local sx = x - (ss / 2)
             local sy = y - (ss / 2)
 
