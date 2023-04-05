@@ -246,7 +246,7 @@ SWEP.StatGroups = {
             -- [35] base spread
             local tgt = 0.02
             if num > 1 then tgt = 0.04 end
-            score = score + math.Clamp(1 - spread / tgt, 0, 1) ^ 3 * 35
+            score = score + math.Clamp(1 - spread / tgt, 0, 1) ^ 2 * 35
 
             -- [25] first shot spread
             local fss = valfunc(self, "RecoilFirstShotMult") * rps
@@ -259,7 +259,7 @@ SWEP.StatGroups = {
             end
             if rbs <= fss then
                 local so1 = (fss - rbs + shots * (rps - rbs)) * rsp
-                score = score + math.Clamp(1 - so1 / 0.03, 0, 1) ^ 1.5 * 25
+                score = score + math.Clamp(1 - so1 / 0.03, 0, 1) ^ 1.25 * 25
             else
                 -- delay is so long we always get first shot
                 score = score + 25
@@ -315,13 +315,13 @@ SWEP.StatGroups = {
             score = score + math.max(rrec_s, mspr_s) * 30 + math.min(rrec_s, mspr_s) * 10
             -- print(rrec_s, mspr_s)
 
-            -- [35] recoil kick over 1s
+            -- [30] recoil kick over 1s
             local shots = math.ceil(erpm / 60 * 1)
-            score = score + math.Clamp(1 - rk * shots * rrt / 15, 0, 1) * 35
+            score = score + math.Clamp(1 - rk * shots * rrt / 15, 0, 1) * 30
             --print("rk1", rk * shots * rrt, math.Clamp(1 - rk * shots * rrt / 15, 0, 1) * 25)
 
-            -- [25] spread over 1s (or 2 bursts)
-            local score_sg = 25
+            -- [30] spread over 1s (or 2 bursts)
+            local score_sg = 30
             if bfm < 0 then
                 local rbb = math.max(0, pbd - rrt) * rdr -- recovery between bursts
                 local rpb = -bfm * rps - (-bfm - 1) * rbs - rbb -- recoil per full burst
