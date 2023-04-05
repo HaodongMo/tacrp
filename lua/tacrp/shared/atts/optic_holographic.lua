@@ -1,7 +1,7 @@
 ATT.PrintName = "Holographic"
 ATT.Icon = Material("entities/tacrp_att_optic_holographic.png", "mips smooth")
 ATT.Description = "Boxy optic that helps to improve mid-range aim."
-ATT.Pros = {"Sight"}
+ATT.Pros = {"1.5x Sight"}
 
 ATT.Model = "models/weapons/tacint/addons/holosight_hq.mdl"
 ATT.Scale = 0.35
@@ -9,7 +9,7 @@ ATT.ModelOffset = Vector(0, 0.05, 0)
 
 ATT.Category = "optic_cqb"
 
-ATT.SortOrder = 1
+ATT.SortOrder = 1.1
 
 ATT.Override_Scope = true
 ATT.Override_ScopeOverlay = false

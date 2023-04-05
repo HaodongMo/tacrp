@@ -1,7 +1,7 @@
 ATT.PrintName = "OKP-7"
 ATT.Icon = Material("entities/tacrp_att_optic_okp7.png", "mips smooth")
 ATT.Description = "Russian-made reflex sight."
-ATT.Pros = {"Sight"}
+ATT.Pros = {"1.25x Sight"}
 
 ATT.Model = "models/weapons/tacint/addons/okp7.mdl"
 
@@ -13,7 +13,7 @@ ATT.SortOrder = 1
 
 ATT.Override_Scope = true
 ATT.Override_ScopeOverlay = false
-ATT.Override_ScopeFOV = 90 / 1.5
+ATT.Override_ScopeFOV = 90 / 1.25
 ATT.Override_ScopeLevels = 1
 ATT.Override_ScopeHideWeapon = false
 

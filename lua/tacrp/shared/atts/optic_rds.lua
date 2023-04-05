@@ -1,7 +1,7 @@
 ATT.PrintName = "Red Dot"
 ATT.Icon = Material("entities/tacrp_att_optic_rds.png", "mips smooth")
 ATT.Description = "Tube optic that helps to improve mid-range aim."
-ATT.Pros = {"Sight"}
+ATT.Pros = {"1.75x Sight"}
 
 ATT.Model = "models/weapons/tacint/addons/reddot_hq.mdl"
 ATT.Scale = 0.35
@@ -9,11 +9,11 @@ ATT.ModelOffset = Vector(0, 0, 1.2)
 
 ATT.Category = "optic_cqb"
 
-ATT.SortOrder = 1
+ATT.SortOrder = 1.2
 
 ATT.Override_Scope = true
 ATT.Override_ScopeOverlay = false
-ATT.Override_ScopeFOV = 90 / 1.5
+ATT.Override_ScopeFOV = 90 / 1.75
 ATT.Override_ScopeLevels = 1
 ATT.Override_ScopeHideWeapon = false
 
