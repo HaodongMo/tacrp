@@ -71,8 +71,16 @@ function SWEP:Idle()
     if self:GetPrimedGrenade() then return end
 
     if self:GetBlindFire() then
-        self:PlayAnimation("blind_idle")
+        if self:Clip1() == 0 then
+            self:PlayAnimation("blind_dryfire", 0, false, false)
+        else
+            self:PlayAnimation("blind_idle")
+        end
     else
-        self:PlayAnimation("idle")
+        if self:Clip1() == 0 then
+            self:PlayAnimation("dryfire", 0, false, false)
+        else
+            self:PlayAnimation("idle")
+        end
     end
 end
