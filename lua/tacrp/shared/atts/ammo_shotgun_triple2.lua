@@ -6,6 +6,7 @@ ATT.Pros = {"Spread"}
 ATT.Cons = {"Three projectiles", "Hipfire Spread"}
 
 ATT.Category = "ammo_shotgun2"
+ATT.InvAtt = "ammo_shotgun_triple"
 
 ATT.SortOrder = 1
 
