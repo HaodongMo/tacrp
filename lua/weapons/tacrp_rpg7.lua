@@ -25,7 +25,7 @@ SWEP.ArcadeStats = {
     ShootingSpeedMult = 0.5,
     SightedSpeedMult = 1,
     MeleeSpeedMult = 1,
-    ReloadSpeedMult = 0.75,
+    ReloadSpeedMult = 0.8,
 }
 
 // "ballistics"

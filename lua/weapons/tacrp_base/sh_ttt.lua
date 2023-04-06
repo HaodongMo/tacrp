@@ -86,7 +86,7 @@ function SWEP:TTT_Init()
     --     self:NPC_SetupAttachments()
     -- end
 
-    if self.ForgetDefaultBehavior or self.PrimaryGrenade then return end
+    if self.PrimaryGrenade then return end
 
     self.Primary.ClipMax = TacRP.TTTAmmoToClipMax[self.Ammo] or self.Primary.ClipSize * 2
     self:SetClip1(self.Primary.ClipSize)

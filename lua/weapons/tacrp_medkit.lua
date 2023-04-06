@@ -252,7 +252,7 @@ function SWEP:Initialize()
             timer.Stop("medkit_ammo" .. self:EntIndex())
             return
         end
-        if self != self:GetOwner():GetActiveWeapon() then
+        if IsValid(self:GetOwner()) and self != self:GetOwner():GetActiveWeapon() then
             if self.LoopSound then
                 self.LoopSound:Stop()
                 self.LoopSound = nil

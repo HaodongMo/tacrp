@@ -37,7 +37,7 @@ TacRP.CancelMultipliers = {
         [HITGROUP_GEAR]     = 0.25,
     },
     ["terrortown"] = {
-        [HITGROUP_HEAD]     = 2.5,
+        [HITGROUP_HEAD]     = 1,
         [HITGROUP_LEFTARM]  = 0.55,
         [HITGROUP_RIGHTARM] = 0.55,
         [HITGROUP_LEFTLEG]  = 0.55,

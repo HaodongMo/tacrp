@@ -54,7 +54,7 @@ SWEP.BalanceStats = {
         ShootingSpeedMult = 0.8,
         MeleeSpeedMult = 1,
         SightedSpeedMult = 0.55,
-        ReloadSpeedMult = 0.5,
+        ReloadSpeedMult = 0.65,
     },
 }
 

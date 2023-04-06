@@ -583,7 +583,7 @@ function SWEP:GetSpread(baseline)
     spread = spread + (spd * self:GetValue("MoveSpreadPenalty"))
 
     local groundtime = CurTime() - (ply.TacRP_LastOnGroundTime or 0)
-    local gd = math.Clamp(!ply:IsOnGround() and 0 or groundtime / math.Clamp(ply.TacRP_LastAirDuration - 0.25, 0.1, 1.5), 0, 1) ^ 0.75
+    local gd = math.Clamp(!ply:IsOnGround() and 0 or groundtime / math.Clamp((ply.TacRP_LastAirDuration or 0) - 0.25, 0.1, 1.5), 0, 1) ^ 0.75
 
     if gd < 1 and ply:GetMoveType() != MOVETYPE_NOCLIP then
         local v = (ply:WaterLevel() > 0 or ply:GetMoveType() == MOVETYPE_LADDER) and 0.5 or 0
