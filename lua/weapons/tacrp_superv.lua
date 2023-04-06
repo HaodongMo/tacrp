@@ -120,8 +120,11 @@ SWEP.SightedSpeedMult = 0.4
 
 SWEP.ReloadSpeedMult = 0.5
 
-SWEP.AimDownSightsTime = 0.33
-SWEP.SprintToFireTime = 0.33 // multiplies how long it takes to recover from sprinting
+SWEP.AimDownSightsTime = 0.3
+SWEP.SprintToFireTime = 0.3
+
+SWEP.Sway = 0.75
+SWEP.ScopedSway = 0.25
 
 // hold types
 

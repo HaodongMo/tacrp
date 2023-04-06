@@ -18,15 +18,49 @@ SWEP.WorldModel = "models/weapons/tacint/w_ks23.mdl"
 SWEP.Slot = 2
 SWEP.SlotAlt = 3
 
-// "ballistics"
+SWEP.BalanceStats = {
+    [TacRP.BALANCE_SBOX] = {
+        MoveSpeedMult = 0.8,
+        ShootingSpeedMult = 0.6,
+        SightedSpeedMult = 0.8,
+        MeleeSpeedMult = 1,
+        ReloadSpeedMult = 1,
+    },
+    [TacRP.BALANCE_TTT] = {
+        Damage_Max = 8,
+        Damage_Min = 2,
+        Range_Min = 500,
+        Range_Max = 3000,
+        Num = 16,
+        ClipSize = 4,
 
-SWEP.ArcadeStats = {
-    MoveSpeedMult = 0.8,
-    ShootingSpeedMult = 0.6,
-    SightedSpeedMult = 0.8,
-    MeleeSpeedMult = 1,
-    ReloadSpeedMult = 1,
+        Spread = 0.04,
+        ShotgunPelletSpread = 0.02,
+        HipFireSpreadPenalty = 0.025,
+        RecoilSpreadPenalty = 0.02,
+
+        BodyDamageMultipliers = {
+            [HITGROUP_HEAD] = 2,
+            [HITGROUP_CHEST] = 1,
+            [HITGROUP_STOMACH] = 1,
+            [HITGROUP_LEFTARM] = 1,
+            [HITGROUP_RIGHTARM] = 1,
+            [HITGROUP_LEFTLEG] = 0.75,
+            [HITGROUP_RIGHTLEG] = 0.75,
+            [HITGROUP_GEAR] = 0.9
+        },
+
+        ReloadTimeMult = 1.5,
+
+        MoveSpeedMult = 0.8,
+        ShootingSpeedMult = 0.5,
+        MeleeSpeedMult = 1,
+        SightedSpeedMult = 0.65,
+        ReloadSpeedMult = 0.4,
+    },
 }
+
+// "ballistics"
 
 SWEP.Damage_Max = 20
 SWEP.Damage_Min = 8

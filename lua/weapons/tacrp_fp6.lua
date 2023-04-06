@@ -18,18 +18,50 @@ SWEP.WorldModel = "models/weapons/tacint/w_fp6.mdl"
 SWEP.Slot = 2
 SWEP.SlotAlt = 3
 
-SWEP.ArcadeStats = {
+SWEP.BalanceStats = {
+    [TacRP.BALANCE_SBOX] = {
+        Damage_Max = 14,
+        Damage_Min = 5,
+        ClipSize = 7,
 
-    Damage_Max = 14,
-    Damage_Min = 5,
+        MoveSpeedMult = 0.9,
+        ShootingSpeedMult = 0.8,
+        SightedSpeedMult = 0.9,
+        MeleeSpeedMult = 1,
+        ReloadSpeedMult = 1,
+    },
+    [TacRP.BALANCE_TTT] = {
+        Damage_Max = 9,
+        Damage_Min = 4,
+        Range_Min = 250,
+        Range_Max = 1500,
+        Num = 8,
+        ClipSize = 8,
 
-    ClipSize = 7,
+        Spread = 0.03,
+        ShotgunPelletSpread = 0.015,
+        HipFireSpreadPenalty = 0.02,
+        RecoilSpreadPenalty = 0.015,
 
-    MoveSpeedMult = 0.9,
-    ShootingSpeedMult = 0.8,
-    SightedSpeedMult = 0.9,
-    MeleeSpeedMult = 1,
-    ReloadSpeedMult = 1,
+        BodyDamageMultipliers = {
+            [HITGROUP_HEAD] = 2,
+            [HITGROUP_CHEST] = 1,
+            [HITGROUP_STOMACH] = 1,
+            [HITGROUP_LEFTARM] = 1,
+            [HITGROUP_RIGHTARM] = 1,
+            [HITGROUP_LEFTLEG] = 0.75,
+            [HITGROUP_RIGHTLEG] = 0.75,
+            [HITGROUP_GEAR] = 0.9
+        },
+
+        ReloadTimeMult = 1.25,
+
+        MoveSpeedMult = 0.9,
+        ShootingSpeedMult = 0.5,
+        MeleeSpeedMult = 1,
+        SightedSpeedMult = 0.75,
+        ReloadSpeedMult = 0.4,
+    },
 }
 
 // "ballistics"

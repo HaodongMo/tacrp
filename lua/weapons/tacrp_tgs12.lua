@@ -18,19 +18,53 @@ SWEP.WorldModel = "models/weapons/tacint/w_tgs12.mdl"
 SWEP.Slot = 2
 SWEP.SlotAlt = 3
 
-SWEP.ArcadeStats = {
+SWEP.BalanceStats = {
+    [TacRP.BALANCE_SBOX] = {
+        Description = "Compact pistol grip shotgun effective at very close range.",
 
-    Description = "Compact pistol grip shotgun effective at very close range.",
+        Damage_Max = 18,
+        Damage_Min = 5,
+        ClipSize = 5,
 
-    Damage_Max = 18,
-    Damage_Min = 5,
-    ClipSize = 5,
+        MoveSpeedMult = 0.95,
+        ShootingSpeedMult = 0.9,
+        SightedSpeedMult = 0.95,
+        MeleeSpeedMult = 1,
+        ReloadSpeedMult = 1,
+    },
+    [TacRP.BALANCE_TTT] = {
+        Description = "Compact pistol grip shotgun effective at very close range.",
 
-    MoveSpeedMult = 0.95,
-    ShootingSpeedMult = 0.9,
-    SightedSpeedMult = 0.95,
-    MeleeSpeedMult = 1,
-    ReloadSpeedMult = 1,
+        Damage_Max = 10,
+        Damage_Min = 2,
+        Range_Min = 300,
+        Range_Max = 1200,
+        Num = 9,
+        ClipSize = 6,
+
+        Spread = 0.05,
+        ShotgunPelletSpread = 0.025,
+        HipFireSpreadPenalty = 0.01,
+
+        BodyDamageMultipliers = {
+            [HITGROUP_HEAD] = 2,
+            [HITGROUP_CHEST] = 1,
+            [HITGROUP_STOMACH] = 1,
+            [HITGROUP_LEFTARM] = 1,
+            [HITGROUP_RIGHTARM] = 1,
+            [HITGROUP_LEFTLEG] = 0.75,
+            [HITGROUP_RIGHTLEG] = 0.75,
+            [HITGROUP_GEAR] = 0.9
+        },
+
+        ReloadTimeMult = 1.25,
+
+        MoveSpeedMult = 0.95,
+        ShootingSpeedMult = 0.6,
+        MeleeSpeedMult = 1,
+        SightedSpeedMult = 0.8,
+        ReloadSpeedMult = 0.4,
+    },
 }
 
 // "ballistics"
@@ -68,7 +102,6 @@ SWEP.ShotgunPelletSpread = 0.01
 
 SWEP.ShootTimeMult = 0.8
 
-SWEP.HipFireSpreadPenalty = 0.02
 SWEP.MidAirSpreadPenalty = 0
 
 SWEP.RecoilPerShot = 1
@@ -83,11 +116,12 @@ SWEP.RecoilVisualShake = 2
 SWEP.RecoilKick = 20
 
 SWEP.RecoilSpreadPenalty = 0.02
+SWEP.HipFireSpreadPenalty = 0.02
 
 SWEP.CanBlindFire = true
 
-SWEP.Sway = 1.5
-SWEP.ScopedSway = 0.15
+SWEP.Sway = 0.5
+SWEP.ScopedSway = 0.5
 
 // handling
 
@@ -126,8 +160,8 @@ SWEP.CorrectivePos = Vector(0.09, 0, 0.05)
 SWEP.CorrectiveAng = Angle(0.25, -0.05, 0)
 
 SWEP.HolsterVisible = true
-SWEP.HolsterSlot = TacRP.HOLSTER_SLOT_BACK
-SWEP.HolsterPos = Vector(4, -8, -6)
+SWEP.HolsterSlot = TacRP.HOLSTER_SLOT_BACK2
+SWEP.HolsterPos = Vector(5, 0, -6)
 SWEP.HolsterAng = Angle(0, 0, 0)
 
 // reload

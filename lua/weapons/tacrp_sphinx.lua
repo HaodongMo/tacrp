@@ -116,6 +116,9 @@ SWEP.ReloadSpeedMult = 0.75
 SWEP.AimDownSightsTime = 0.25
 SWEP.SprintToFireTime = 0.25
 
+SWEP.Sway = 1
+SWEP.ScopedSway = 0.5
+
 // hold types
 
 SWEP.HoldType = "revolver"
@@ -211,13 +214,19 @@ SWEP.ProceduralIronFire = {
     bones = {
         {
             bone = "slide",
-            pos = Vector(0, 0, -3),
-            t0 = 0.05,
+            pos = Vector(0, 0, -1),
+            t0 = 0.02,
+            t1 = 0.2,
+        },
+        {
+            bone = "bullet",
+            pos = Vector(0, 0, 0),
+            t0 = 0,
             t1 = 0.2,
         },
         {
             bone = "hammer",
-            ang = Angle(-15, 0, 0),
+            ang = Angle(0, 0, 0),
             t0 = 0,
             t1 = 0.15,
         },
