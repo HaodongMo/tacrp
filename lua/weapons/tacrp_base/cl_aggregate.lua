@@ -1,14 +1,11 @@
 function SWEP:GetReloadTime(base)
     local vm = self:GetVM()
+    local valfunc = base and self.GetBaseValue or self.GetValue
 
-    if !self:GetValue("ShotgunReload") then
+    if !valfunc(self, "ShotgunReload") then
         local seq = vm:LookupSequence(self:TranslateSequence("reload"))
         local basetime = vm:SequenceDuration(seq)
-        local mult = self.ReloadTimeMult
-
-        if !base then
-            mult = self:GetValue("ReloadTimeMult")
-        end
+        local mult = valfunc(self, "ReloadTimeMult")
 
         return basetime * mult
     else
@@ -20,16 +17,12 @@ function SWEP:GetReloadTime(base)
         local time_2 = vm:SequenceDuration(seq2)
         local time_3 = vm:SequenceDuration(seq3)
 
-        local mult = self.ReloadTimeMult
+        local mult = valfunc(self, "ReloadTimeMult")
 
-        if !base then
-            mult = self:GetValue("ReloadTimeMult")
-        end
+        local basetime = time_1 + (time_2 * valfunc(self, "ClipSize")) + time_3
 
-        local basetime = time_1 + (time_2 * self:GetValue("ClipSize")) + time_3
-
-        if self:GetValue("ShotgunThreeload") then
-            basetime = time_1 + (time_2 * self:GetValue("ClipSize") / 3) + time_3
+        if valfunc(self, "ShotgunThreeload") then
+            basetime = time_1 + (time_2 * valfunc(self, "ClipSize") / 3) + time_3
         end
 
         return basetime * mult
@@ -54,29 +47,20 @@ function SWEP:GetDeployTime(base)
 end
 
 function SWEP:GetMuzzleVelocity(base)
-    local basetime = self:GetValue("MuzzleVelocity")
+    local valfunc = base and self.GetBaseValue or self.GetValue
 
-    if self:GetValue("ShootEnt") then
-        basetime = self:GetValue("ShootEntForce")
-    end
+    local basetime = valfunc(self, "MuzzleVelocity")
 
-    if base then
-        basetime = self.MuzzleVelocity
-
-        if self.ShootEnt then
-            basetime = self.ShootEntForce
-        end
+    if valfunc(self, "ShootEnt") then
+        basetime = valfunc(self, "ShootEntForce")
     end
 
     return math.ceil(0.3048 * basetime / 12)
 end
 
 function SWEP:GetMeanShotsToFail(base)
-    local shootchance = self:GetValue("ShootChance")
-
-    if base then
-        shootchance = self.ShootChance
-    end
+    local valfunc = base and self.GetBaseValue or self.GetValue
+    local shootchance = valfunc(self, "ShootChance")
 
     return 1 / (1 - shootchance)
 end
@@ -98,6 +82,13 @@ function SWEP:GetBestFiremode(base)
     end
 end
 
+local hitgroups = {
+    [HITGROUP_HEAD] = 0.1,
+    [HITGROUP_CHEST] = 0.2,
+    [HITGROUP_STOMACH] = 0.3,
+    [HITGROUP_LEFTARM] = 0.2,
+    [HITGROUP_LEFTLEG] = 0.2,
+}
 
 local mssd_scoring = {
     [HITGROUP_HEAD]    = {0.15, 0.5, {1, 0.6,  0.3, 0.15, 0.05}},
@@ -108,11 +99,11 @@ local mssd_scoring = {
 }
 
 local mssd_scoring_ttt = {
-    [HITGROUP_HEAD]    = {0.15, 0.5, {1, 0.75, 0.6,  0.5,  0.25, 0.1, 0.05, 0.01}},
-    [HITGROUP_CHEST]   = {0.25, 0.8, {1, 0.8,  0.7,  0.6,  0.3,  0.2, 0.1,  0.05}},
-    [HITGROUP_STOMACH] = {0.25, 1,   {1, 0.85, 0.75, 0.65, 0.4,  0.3, 0.15, 0.1,  0.025}},
-    [HITGROUP_LEFTARM] = {0.2,  1,   {1, 0.9,  0.8,  0.7,  0.5,  0.4, 0.2,  0.15, 0.05}},
-    [HITGROUP_LEFTLEG] = {0.15, 1,   {1, 0.95, 0.85, 0.75, 0.6,  0.5, 0.25, 0.2,  0.1}},
+    [HITGROUP_HEAD]    = {0.25, 0.5, {1, 0.75, 0.50, 0.25, 0.15, 0.10, 0.05, 0.025}},
+    [HITGROUP_CHEST]   = {0.25, 0.8, {1, 0.90, 0.75, 0.55, 0.45, 0.35, 0.25, 0.15, 0.10, 0.05}},
+    [HITGROUP_STOMACH] = {0.25, 1,   {1, 1.00, 0.90, 0.80, 0.60, 0.40, 0.30, 0.20, 0.15, 0.10, 0.05}},
+    [HITGROUP_LEFTARM] = {0.15, 1,   {1, 1.00, 0.80, 0.70, 0.50, 0.30, 0.25, 0.15, 0.10, 0.05, 0.025}},
+    [HITGROUP_LEFTLEG] = {0.10, 1,   {1, 1.00, 0.90, 0.75, 0.60, 0.50, 0.40, 0.30, 0.25, 0.20, 0.15, 0.10, 0.05}},
 }
 
 
@@ -128,37 +119,26 @@ SWEP.StatGroupGrades = {
 SWEP.StatGroups = {
     {
         Name = "Lethality",
-        Description = {"How easily and quickly the weapon kills under ideal circumstances.", "Affected by Damage and RPM."},
+        Description = {"How easily and quickly the weapon can take out a single target.", "Affected by Damage and RPM."},
         RatingFunction = function(self, base)
             -- local score = 0
             local valfunc = base and self.GetBaseValue or self.GetValue
 
             local bfm = self:GetBestFiremode(base)
             local rrpm = valfunc(self, "RPM")
-            local erpm = rrpm
             local pbd = valfunc(self, "PostBurstDelay")
             local ttt = TacRP.GetBalanceMode() == TacRP.BALANCE_TTT
-
-            if bfm == 1 then
-                erpm = math.min(rrpm, 700) -- you can't click *that* fast
-            elseif bfm < 0 then
-                erpm = rrpm - 60 / (-bfm / pbd)
-            end
 
             local num = valfunc(self, "Num")
             local bdm = self:GetBodyDamageMultipliers(base)
             local bdm_add = 0
-            for k, v in pairs(mssd_scoring) do
-                bdm_add = bdm_add + bdm[k] * v[1]
+            for k, v in pairs(hitgroups) do
+                bdm_add = bdm_add + bdm[k] * v
             end
 
             local d_max, d_min = valfunc(self, "Damage_Max"), valfunc(self, "Damage_Min")
             -- local dmg_max = math.max(d_max, d_min)
             local dmg_avg = Lerp(0.2, math.max(d_max, d_min), math.min(d_max, d_min)) * bdm_add
-
-            -- dps
-            local dot = dmg_avg * num * erpm / 60
-            local dot_s = math.Clamp(dot / (ttt and 200 or 600), 0, 1) ^ (ttt and 1 or 0.8)
 
             -- max single shot damage
             local mssd = 0
@@ -178,11 +158,60 @@ SWEP.StatGroups = {
             end
             local ttk_s = math.Clamp(1 - ttk / (ttt and 2 or 1.5), 0, 1) ^ (ttt and 2 or 1.5)
 
-            local scores = {mssd, ttk_s, dot_s}
+            -- local scores = {mssd, ttk_s, dot_s}
+            -- table.sort(scores)
+            -- -- print(self:GetClass(), base, math.Round(mssd, 2), math.Round(ttk_s, 2), math.Round(dot_s, 2))
+            -- if ttt then
+            --     return scores[3] * 70 + scores[2] * 30 + scores[1] * 0
+            -- else
+            --     return scores[3] * 70 + scores[2] * 30 + scores[1] * 0
+            -- end
+            local scores = {mssd, ttk_s}
             table.sort(scores)
-            -- print(self:GetClass(), base, math.Round(mssd, 2), math.Round(ttk_s, 2), math.Round(dot_s, 2))
-            return scores[3] * 70 + scores[2] * 30 + scores[1] * 0
 
+            return scores[2] * 70 + scores[1] * 30
+
+        end,
+    },
+    {
+        Name = "Suppression",
+        Description = {"How much damage the weapon can deal over extended engagements.", "Affected by Damage, RPM, Capacity and Reload Time."},
+        RatingFunction = function(self, base)
+            local valfunc = base and self.GetBaseValue or self.GetValue
+
+            local bfm = self:GetBestFiremode(base)
+            local rrpm = valfunc(self, "RPM")
+            local erpm = rrpm
+            local pbd = valfunc(self, "PostBurstDelay")
+            local ttt = TacRP.GetBalanceMode() == TacRP.BALANCE_TTT
+
+            if bfm == 1 then
+                erpm = math.min(rrpm, 600) + math.max(rrpm - 600, 0) ^ 0.75 -- you can't click *that* fast
+            elseif bfm < 0 then
+                erpm = rrpm - 60 / (-bfm / pbd)
+            end
+
+            local num = valfunc(self, "Num")
+            local bdm = self:GetBodyDamageMultipliers(base)
+            local bdm_add = 0
+            for k, v in pairs(hitgroups) do
+                bdm_add = bdm_add + bdm[k] * v
+            end
+
+            local d_max, d_min = valfunc(self, "Damage_Max"), valfunc(self, "Damage_Min")
+            -- local dmg_max = math.max(d_max, d_min)
+            local dmg_avg = Lerp(0.2, math.max(d_max, d_min), math.min(d_max, d_min)) * bdm_add
+
+            -- raw dps
+            local dps = dmg_avg * num * erpm / 60
+            local tttm = ttt and 0.5 or 1
+            local dps_s = math.Clamp((dps - 50 * tttm) / (400 * tttm), 0, 1) ^ (ttt and 1 or 0.9)
+
+            -- average dps over time
+            local dot = dmg_avg * num / (60 / erpm + self:GetReloadTime(base) / valfunc(self, "ClipSize"))
+            local dot_s = math.Clamp((dot - 20 * tttm) / (180 * tttm), 0, 1) ^ (ttt and 1 or 0.9)
+
+            return dps_s * 30 + dot_s * 70
         end,
     },
     {
@@ -339,33 +368,19 @@ SWEP.StatGroups = {
     },
     {
         Name = "Handling",
-        Description = {"How quickly this weapon readies from sprint, aims, deploys, and reloads.", "Affected by various Time stats, such as Aim Down Sights Time."},
+        Description = {"How quickly this weapon readies from sprinting, aiming and deploying.", "Affected by Aim Down Sights Time, Sprint To Fire Time, and Deploy Time."},
         RatingFunction = function(self, base)
             local score = 0
             local valfunc = base and self.GetBaseValue or self.GetValue
 
-            -- [32] sprint
-            score = score + math.Clamp(1 - (valfunc(self, "SprintToFireTime") - 0.2) / 0.7, 0, 1) * 32
+            -- [40] sprint
+            score = score + math.Clamp(1 - (valfunc(self, "SprintToFireTime") - 0.2) / 0.6, 0, 1) * 40
 
-            -- [32] ads
-            score = score + math.Clamp(1 - (valfunc(self, "AimDownSightsTime") - 0.2) / 0.7, 0, 1) * 32
+            -- [40] ads
+            score = score + math.Clamp(1 - (valfunc(self, "AimDownSightsTime") - 0.2) / 0.6, 0, 1) * 40
 
-            -- [25] reload
-            if valfunc(self, "ShotgunReload") then
-                local vm = self:GetVM()
-                local seq1 = vm:LookupSequence(self:TranslateSequence("reload_start"))
-                local seq2 = vm:LookupSequence(self:TranslateSequence("reload_finish"))
-
-                local time = vm:SequenceDuration(seq1) + vm:SequenceDuration(seq2)
-                time = time * valfunc(self, "ReloadTimeMult")
-
-                score = score + math.Clamp(1 - (time - 0.5) / 2, 0, 1) * 25
-            else
-                score = score + math.Clamp(1 - (self:GetReloadTime(base) - 1.5) / 3, 0, 1) * 25
-            end
-
-            -- [11] deploy
-            score = score + math.Clamp(1 - (self:GetDeployTime(base) - 0.5) / 1, 0, 1) * 11
+            -- [20] deploy
+            score = score + math.Clamp(1 - (self:GetDeployTime(base) - 0.5) / 1.5, 0, 1) * 20
 
             return score
         end,
