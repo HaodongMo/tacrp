@@ -17,16 +17,45 @@ SWEP.WorldModel = "models/weapons/tacint/w_pdw.mdl"
 
 SWEP.Slot = 2
 
-SWEP.ArcadeStats = {
+SWEP.BalanceStats = {
+    [TacRP.BALANCE_SBOX] = {
+        Damage_Max = 20,
+        Damage_Min = 12,
 
-    Damage_Max = 20,
-    Damage_Min = 12,
+        MoveSpeedMult = 0.88,
+        ShootingSpeedMult = 0.8,
+        SightedSpeedMult = 0.85,
+        MeleeSpeedMult = 1,
+        ReloadSpeedMult = 1,
+    },
+    [TacRP.BALANCE_TTT] = {
+        Damage_Max = 14,
+        Damage_Min = 5,
+        Range_Min = 600,
+        Range_Max = 2500,
 
-    MoveSpeedMult = 0.88,
-    ShootingSpeedMult = 0.8,
-    SightedSpeedMult = 0.85,
-    MeleeSpeedMult = 1,
-    ReloadSpeedMult = 1,
+        RecoilSpreadPenalty = 0.0025,
+        HipFireSpreadPenalty = 0.04,
+
+        BodyDamageMultipliers = {
+            [HITGROUP_HEAD] = 3,
+            [HITGROUP_CHEST] = 1.25,
+            [HITGROUP_STOMACH] = 1,
+            [HITGROUP_LEFTARM] = 0.9,
+            [HITGROUP_RIGHTARM] = 0.9,
+            [HITGROUP_LEFTLEG] = 0.75,
+            [HITGROUP_RIGHTLEG] = 0.75,
+            [HITGROUP_GEAR] = 0.9
+        },
+
+        ReloadTimeMult = 1.3,
+
+        MoveSpeedMult = 0.925,
+        ShootingSpeedMult = 0.8,
+        MeleeSpeedMult = 1,
+        SightedSpeedMult = 0.55,
+        ReloadSpeedMult = 0.6,
+    },
 }
 
 // "ballistics"

@@ -40,7 +40,7 @@ SWEP.BalanceStats = {
         Damage_Min = 5,
 
         RecoilSpreadPenalty = 0.0015,
-        HipFireSpreadPenalty = 0.04,
+        HipFireSpreadPenalty = 0.03,
 
         BodyDamageMultipliers = {
             [HITGROUP_HEAD] = 2,
