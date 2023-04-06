@@ -113,7 +113,7 @@ SWEP.SightedSpeedMult = 0.5
 SWEP.MeleeSpeedMult = 0.85
 SWEP.MeleeSpeedMultTime = 1 // seconds to apply slow down for
 SWEP.ReloadSpeedMult = 1
-SWEP.ReloadSpeedMultTime = 1 // duration for slowdown to fade out for AFTER RELOAD FINISHES
+SWEP.ReloadSpeedMultTime = 0.5 // duration for slowdown to fade out for AFTER RELOAD FINISHES
 
 
 SWEP.ShootWhileSprint = false

@@ -26,19 +26,28 @@ SWEP.BalanceStats = {
         ReloadSpeedMult = 1,
     },
     [TacRP.BALANCE_TTT] = {
-        Damage_Max = 22,
-        Damage_Min = 15,
+        Description = "Powerful handgun that exchanges fire rate for damage and precision.",
 
+        Damage_Max = 22,
+        Damage_Min = 12,
+        Range_Min = 800,
+        Range_Max = 2000,
         RPM = 200,
+
+        RecoilMaximum = 5,
+        RecoilResetTime = 0.2,
+        RecoilDissipationRate = 5.5,
+        RecoilFirstShotMult = 0.8,
+        RecoilSpreadPenalty = 0.012,
 
         BodyDamageMultipliers = {
             [HITGROUP_HEAD] = 2.5,
             [HITGROUP_CHEST] = 1,
             [HITGROUP_STOMACH] = 1,
-            [HITGROUP_LEFTARM] = 1,
-            [HITGROUP_RIGHTARM] = 1,
-            [HITGROUP_LEFTLEG] = 0.9,
-            [HITGROUP_RIGHTLEG] = 0.9,
+            [HITGROUP_LEFTARM] = 0.9,
+            [HITGROUP_RIGHTARM] = 0.9,
+            [HITGROUP_LEFTLEG] = 0.75,
+            [HITGROUP_RIGHTLEG] = 0.75,
             [HITGROUP_GEAR] = 0.9
         },
 

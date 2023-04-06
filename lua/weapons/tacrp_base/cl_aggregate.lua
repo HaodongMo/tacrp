@@ -91,19 +91,19 @@ local hitgroups = {
 }
 
 local mssd_scoring = {
-    [HITGROUP_HEAD]    = {0.15, 0.5, {1, 0.6,  0.3, 0.15, 0.05}},
-    [HITGROUP_CHEST]   = {0.25, 0.8, {1, 0.75, 0.4, 0.2,  0.1}},
-    [HITGROUP_STOMACH] = {0.25, 1,   {1, 0.8,  0.5, 0.25, 0.15, 0.05}},
-    [HITGROUP_LEFTARM] = {0.2,  1,   {1, 0.85, 0.6, 0.3,  0.2,  0.1, 0.05}},
-    [HITGROUP_LEFTLEG] = {0.15, 1,   {1, 0.9,  0.7, 0.4,  0.25, 0.15, 0.1}},
+    [HITGROUP_HEAD]    = {0.15, 0.5,  {1, 0.6,  0.3, 0.15, 0.05}},
+    [HITGROUP_CHEST]   = {0.25, 0.75, {1, 0.75, 0.4, 0.2,  0.1}},
+    [HITGROUP_STOMACH] = {0.25, 0.8,  {1, 0.8,  0.5, 0.25, 0.15, 0.05}},
+    [HITGROUP_LEFTARM] = {0.2,  0.5,  {1, 0.85, 0.6, 0.3,  0.2,  0.1, 0.05}},
+    [HITGROUP_LEFTLEG] = {0.15, 0.5,  {1, 0.9,  0.7, 0.4,  0.25, 0.15, 0.1}},
 }
 
 local mssd_scoring_ttt = {
-    [HITGROUP_HEAD]    = {0.25, 0.5, {1, 0.75, 0.50, 0.25, 0.15, 0.10, 0.05, 0.025}},
-    [HITGROUP_CHEST]   = {0.25, 0.8, {1, 0.90, 0.75, 0.55, 0.45, 0.35, 0.25, 0.15, 0.10, 0.05}},
-    [HITGROUP_STOMACH] = {0.25, 1,   {1, 1.00, 0.90, 0.80, 0.60, 0.40, 0.30, 0.20, 0.15, 0.10, 0.05}},
-    [HITGROUP_LEFTARM] = {0.15, 1,   {1, 1.00, 0.80, 0.70, 0.50, 0.30, 0.25, 0.15, 0.10, 0.05, 0.025}},
-    [HITGROUP_LEFTLEG] = {0.10, 1,   {1, 1.00, 0.90, 0.75, 0.60, 0.50, 0.40, 0.30, 0.25, 0.20, 0.15, 0.10, 0.05}},
+    [HITGROUP_HEAD]    = {0.25, 0.5,  {1, 0.75, 0.50, 0.25, 0.15, 0.10, 0.05, 0.025}},
+    [HITGROUP_CHEST]   = {0.25, 0.75, {1, 0.90, 0.75, 0.55, 0.45, 0.35, 0.25, 0.15, 0.10, 0.05}},
+    [HITGROUP_STOMACH] = {0.25, 1,    {1, 1.00, 0.90, 0.80, 0.60, 0.40, 0.30, 0.20, 0.15, 0.10, 0.05}},
+    [HITGROUP_LEFTARM] = {0.15, 1,    {1, 1.00, 0.80, 0.70, 0.50, 0.30, 0.25, 0.15, 0.10, 0.05, 0.025}},
+    [HITGROUP_LEFTLEG] = {0.10, 1,    {1, 1.00, 0.90, 0.75, 0.60, 0.50, 0.40, 0.30, 0.25, 0.20, 0.15, 0.10, 0.05}},
 }
 
 
@@ -137,35 +137,31 @@ SWEP.StatGroups = {
             end
 
             local d_max, d_min = valfunc(self, "Damage_Max"), valfunc(self, "Damage_Min")
-            -- local dmg_max = math.max(d_max, d_min)
+            local dmg_max = math.max(d_max, d_min)
             local dmg_avg = Lerp(0.2, math.max(d_max, d_min), math.min(d_max, d_min)) * bdm_add
 
             -- max single shot damage
             local mssd = 0
             for k, v in pairs(ttt and mssd_scoring_ttt or mssd_scoring) do
-                local stk = math.ceil(100 / (dmg_avg * (bdm[k] or 1) * (num ^ v[2])))
+                local stk = math.ceil(100 / (dmg_max * (bdm[k] or 1) * (1 + (num - 1) * v[2])))
                 mssd = mssd + (v[3][stk] or 0) * v[1]
                 -- print(bdm[k], stk, (mssd_scoring[k][stk] or 0))
             end
             mssd = ttt and mssd ^ 0.75 or mssd
 
             -- avg time to kill
-            local stk = math.ceil(100 / dmg_avg)
-            local trpm = rrpm
-            local ttk = (stk - 1) * (60 / trpm)
-            if bfm < 0 then
-                ttk = ttk + math.floor(ttk / -bfm) * pbd
+            local stk = math.ceil(100 / (dmg_avg * num))
+            local ttk_s
+            if stk == 1 then
+                ttk_s = math.Clamp(rrpm / 120, 0, 1) ^ 0.75
+            else
+                local ttk = (stk - 1) * (60 / rrpm)
+                if bfm < 0 then
+                    ttk = ttk + math.floor(ttk / -bfm) * pbd
+                end
+                ttk_s = math.Clamp(1 - ttk / (ttt and 2 or 1.5), 0, 1) ^ (ttt and 2 or 1.5)
             end
-            local ttk_s = math.Clamp(1 - ttk / (ttt and 2 or 1.5), 0, 1) ^ (ttt and 2 or 1.5)
 
-            -- local scores = {mssd, ttk_s, dot_s}
-            -- table.sort(scores)
-            -- -- print(self:GetClass(), base, math.Round(mssd, 2), math.Round(ttk_s, 2), math.Round(dot_s, 2))
-            -- if ttt then
-            --     return scores[3] * 70 + scores[2] * 30 + scores[1] * 0
-            -- else
-            --     return scores[3] * 70 + scores[2] * 30 + scores[1] * 0
-            -- end
             local scores = {mssd, ttk_s}
             table.sort(scores)
 
@@ -175,7 +171,7 @@ SWEP.StatGroups = {
     },
     {
         Name = "Suppression",
-        Description = {"How much damage the weapon can deal over extended engagements.", "Affected by Damage, RPM, Capacity and Reload Time."},
+        Description = {"How much damage the weapon can output over a long period of time.", "Affected by Damage, RPM, Capacity and Reload Time."},
         RatingFunction = function(self, base)
             local valfunc = base and self.GetBaseValue or self.GetValue
 
@@ -209,7 +205,7 @@ SWEP.StatGroups = {
 
             -- average dps over time
             local dot = dmg_avg * num / (60 / erpm + self:GetReloadTime(base) / valfunc(self, "ClipSize"))
-            local dot_s = math.Clamp((dot - 20 * tttm) / (180 * tttm), 0, 1) ^ (ttt and 1 or 0.9)
+            local dot_s = math.Clamp((dot - 20 * tttm) / (200 * tttm), 0, 1) ^ (ttt and 1 or 0.9)
 
             return dps_s * 30 + dot_s * 70
         end,
@@ -228,11 +224,11 @@ SWEP.StatGroups = {
             local r_mid = r_min + (r_max - r_min) / 2
             local d_diff = math.abs(d_max - d_min) / math.max(d_max, d_min)
             if d_max > d_min then
-                -- [40] 50% damage falloff range
-                score = score + math.Clamp((r_mid - (ttt and 200 or 1000)) / (ttt and 2000 or 4000), 0, 1) * 40
+                -- [50] 50% damage falloff range
+                score = score + math.Clamp((r_mid - (ttt and 0 or 1000)) / (ttt and 3000 or 4000), 0, 1) * 50
 
-                -- [60] damage reduction from range
-                score = score + math.Clamp(1 - d_diff, 0, 1) * 60
+                -- [50] damage reduction from range
+                score = score + math.Clamp(1 - d_diff, 0, 1) ^ 0.8 * 50
             else
                 -- [40] free points
                 -- [40] 50% damage rampup range
@@ -254,17 +250,11 @@ SWEP.StatGroups = {
             local valfunc = base and self.GetBaseValue or self.GetValue
 
             local bfm = self:GetBestFiremode(base)
-            local erpm = valfunc(self, "RPM")
-            local pbd = valfunc(self, "AutoBurst") and valfunc(self, "PostBurstDelay") or math.max(0.15, valfunc(self, "PostBurstDelay"))
-            if bfm == 1 then
-                erpm = math.min(erpm, 600) -- you can't click *that* fast
-            elseif bfm < 0 then
-                erpm = 60 / ((60 / erpm) + pbd / -bfm)
-            end
+            local rpm = valfunc(self, "RPM")
 
             local num = valfunc(self, "Num")
             local spread = valfunc(self, "Spread")
-            local delay = 60 / valfunc(self, "RPM")
+            local delay = 60 / rpm
             local rps = valfunc(self, "RecoilPerShot")
             local rsp = valfunc(self, "RecoilSpreadPenalty")
             local rrt = valfunc(self, "RecoilResetTime")
@@ -272,17 +262,17 @@ SWEP.StatGroups = {
             local dt = math.max(0, delay - rrt)
             local rbs = dt * rdr -- amount of recoil we can recover between shots even if fired ASAP
 
-            -- [35] base spread
-            local tgt = 0.02
-            if num > 1 then tgt = 0.04 end
-            score = score + math.Clamp(1 - spread / tgt, 0, 1) ^ 2 * 35
+            -- [50] base spread
+            local tgt = 0.015
+            if num > 2 then tgt = 0.04 end
+            score = score + math.Clamp(1 - spread / tgt, 0, 1) * 50
 
             -- [25] first shot spread
             local fss = valfunc(self, "RecoilFirstShotMult") * rps
-            score = score + math.Clamp(1 - (fss * rsp - rbs) / 0.01, 0, 1) * 25
+            score = score + math.Clamp(1 - (spread + fss * rsp - rbs) / tgt, 0, 1) * 25
 
             -- [25] spread over 0.3s (or one burst)
-            local shots = math.min(math.floor(erpm / 60 * 0.3), math.floor(self:GetBaseValue("ClipSize") * 0.5))
+            local shots = math.min(math.ceil(rpm / 60 * 0.3), math.floor(self:GetBaseValue("ClipSize") * 0.5))
             if bfm < 0 then
                 shots = -bfm
             end
@@ -294,8 +284,8 @@ SWEP.StatGroups = {
                 score = score + 25
             end
 
-            -- [15] recoil reset time
-            score = score + math.Clamp(1 - math.max(0, rrt - delay) / 0.25, 0, 1) * 15
+            -- recoil reset time
+            -- score = score + math.Clamp(1 - math.max(0, rrt - delay) / 0.25, 0, 1) * 10
 
             return score
         end,

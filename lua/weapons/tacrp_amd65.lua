@@ -17,21 +17,56 @@ SWEP.WorldModel = "models/weapons/tacint/w_amd65.mdl"
 
 SWEP.Slot = 2
 
+SWEP.BalanceStats = {
+    [TacRP.BALANCE_SBOX] = {
+        Damage_Max = 33,
+        Damage_Min = 15,
+
+        Range_Min = 800,
+        Range_Max = 3200,
+
+        RecoilSpreadPenalty = 0.0037,
+
+        MoveSpeedMult = 0.85,
+        ShootingSpeedMult = 0.75,
+        SightedSpeedMult = 0.75,
+        MeleeSpeedMult = 1,
+        ReloadSpeedMult = 1,
+    },
+    [TacRP.BALANCE_TTT] = {
+        Damage_Max = 24,
+        Damage_Min = 12,
+        Range_Min = 300,
+        Range_Max = 1500,
+        RPM = 500,
+
+        RecoilSpreadPenalty = 0.005,
+        RecoilMaximum = 10,
+
+        BodyDamageMultipliers = {
+            [HITGROUP_HEAD] = 3,
+            [HITGROUP_CHEST] = 1.25,
+            [HITGROUP_STOMACH] = 1,
+            [HITGROUP_LEFTARM] = 0.9,
+            [HITGROUP_RIGHTARM] = 0.9,
+            [HITGROUP_LEFTLEG] = 0.75,
+            [HITGROUP_RIGHTLEG] = 0.75,
+            [HITGROUP_GEAR] = 0.9
+        },
+
+        ReloadTimeMult = 1.25,
+
+        MoveSpeedMult = 0.9,
+        ShootingSpeedMult = 0.8,
+        MeleeSpeedMult = 1,
+        SightedSpeedMult = 0.6,
+        ReloadSpeedMult = 0.6,
+    },
+}
+
 SWEP.ArcadeStats = {
 
-    Damage_Max = 33,
-    Damage_Min = 15,
 
-    Range_Min = 800,
-    Range_Max = 3200,
-
-    RecoilSpreadPenalty = 0.0037,
-
-    MoveSpeedMult = 0.85,
-    ShootingSpeedMult = 0.75,
-    SightedSpeedMult = 0.75,
-    MeleeSpeedMult = 1,
-    ReloadSpeedMult = 1,
 }
 
 // "ballistics"
@@ -62,7 +97,7 @@ SWEP.Firemodes = {
 
 SWEP.RPM = 600
 
-SWEP.Spread = 0.0055
+SWEP.Spread = 0.006
 
 SWEP.ShootTimeMult = 0.5
 
@@ -125,8 +160,8 @@ SWEP.HolsterAng = Angle(0, 0, 0)
 
 // sway
 
-SWEP.Sway = 1
-SWEP.ScopedSway = 0.1
+SWEP.Sway = 1.25
+SWEP.ScopedSway = 0.15
 
 SWEP.ClipSize = 30
 SWEP.Ammo = "ar2"

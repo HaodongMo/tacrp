@@ -10,22 +10,51 @@ SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 SWEP.SubCatTier = "2Premium"
 SWEP.SubCatType = "4Assault Rifle"
 
-SWEP.Description = "Assault rifle with integral scope and high muzzle velocity. Well suited for sustained fire at long ranges."
+SWEP.Description = "Assault rifle with high muzzle velocity. Well suited for medium range sustained fire.\nEquipped with a 2x scope by default."
 
 SWEP.ViewModel = "models/weapons/tacint/v_g36k_hq.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_g36k.mdl"
 
 SWEP.Slot = 2
 
-SWEP.ArcadeStats = {
 
-    RecoilKick = 1.5,
+SWEP.BalanceStats = {
+    [TacRP.BALANCE_SBOX] = {
+        RecoilKick = 1.5,
 
-    MoveSpeedMult = 0.85,
-    ShootingSpeedMult = 0.75,
-    SightedSpeedMult = 0.75,
-    MeleeSpeedMult = 1,
-    ReloadSpeedMult = 1,
+        MoveSpeedMult = 0.85,
+        ShootingSpeedMult = 0.75,
+        SightedSpeedMult = 0.75,
+        MeleeSpeedMult = 1,
+        ReloadSpeedMult = 1,
+    },
+    [TacRP.BALANCE_TTT] = {
+        Damage_Max = 15,
+        Damage_Min = 12,
+        Range_Min = 100,
+        Range_Max = 4000,
+
+        RecoilKick = 1.5,
+
+        BodyDamageMultipliers = {
+            [HITGROUP_HEAD] = 3,
+            [HITGROUP_CHEST] = 1.25,
+            [HITGROUP_STOMACH] = 1,
+            [HITGROUP_LEFTARM] = 0.9,
+            [HITGROUP_RIGHTARM] = 0.9,
+            [HITGROUP_LEFTLEG] = 0.75,
+            [HITGROUP_RIGHTLEG] = 0.75,
+            [HITGROUP_GEAR] = 0.9
+        },
+
+        ReloadTimeMult = 1.25,
+
+        MoveSpeedMult = 0.9,
+        ShootingSpeedMult = 0.8,
+        MeleeSpeedMult = 1,
+        SightedSpeedMult = 0.55,
+        ReloadSpeedMult = 0.5,
+    },
 }
 
 // "ballistics"
@@ -63,16 +92,16 @@ SWEP.Spread = 0.0025
 SWEP.ShootTimeMult = 0.5
 
 SWEP.RecoilPerShot = 1
-SWEP.RecoilMaximum = 14
-SWEP.RecoilResetTime = 0.12 // time after you stop shooting for recoil to start dissipating
-SWEP.RecoilDissipationRate = 20
+SWEP.RecoilMaximum = 20
+SWEP.RecoilResetTime = 0.15 // time after you stop shooting for recoil to start dissipating
+SWEP.RecoilDissipationRate = 25
 SWEP.RecoilFirstShotMult = 1 // multiplier for the first shot's recoil amount
 
 SWEP.RecoilVisualKick = 0.9
 
 SWEP.RecoilKick = 3.25
 
-SWEP.RecoilSpreadPenalty = 0.002
+SWEP.RecoilSpreadPenalty = 0.0014
 SWEP.HipFireSpreadPenalty = 0.04
 
 SWEP.CanBlindFire = true

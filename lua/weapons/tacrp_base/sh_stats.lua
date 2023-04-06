@@ -68,7 +68,7 @@ function SWEP:GetBaseValue(val)
         end
     end
 
-    if GetConVar("tacrp_arcade"):GetBool() and self.ArcadeStats and self.ArcadeStats[val] != nil then
+    if b > 0 and self.ArcadeStats and self.ArcadeStats[val] != nil then
         return self.ArcadeStats[val]
     end
 

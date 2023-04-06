@@ -17,18 +17,49 @@ SWEP.WorldModel = "models/weapons/tacint/w_ak47.mdl"
 
 SWEP.Slot = 2
 
-SWEP.ArcadeStats = {
+SWEP.BalanceStats = {
+    [TacRP.BALANCE_SBOX] = {
+        Damage_Max = 22,
+        Damage_Min = 13,
 
-    Damage_Max = 22,
-    Damage_Min = 13,
+        RecoilKick = 2,
 
-    RecoilKick = 2,
+        MoveSpeedMult = 0.85,
+        ShootingSpeedMult = 0.75,
+        SightedSpeedMult = 0.75,
+        MeleeSpeedMult = 1,
+        ReloadSpeedMult = 1,
+    },
+    [TacRP.BALANCE_TTT] = {
+        Damage_Max = 16,
+        Damage_Min = 11,
 
-    MoveSpeedMult = 0.85,
-    ShootingSpeedMult = 0.75,
-    SightedSpeedMult = 0.75,
-    MeleeSpeedMult = 1,
-    ReloadSpeedMult = 1,
+        Range_Min = 400,
+        Range_Max = 2000,
+
+        RPM = 600,
+
+        RecoilSpreadPenalty = 0.0025,
+
+        BodyDamageMultipliers = {
+            [HITGROUP_HEAD] = 2.5,
+            [HITGROUP_CHEST] = 1.25,
+            [HITGROUP_STOMACH] = 1,
+            [HITGROUP_LEFTARM] = 0.9,
+            [HITGROUP_RIGHTARM] = 0.9,
+            [HITGROUP_LEFTLEG] = 0.75,
+            [HITGROUP_RIGHTLEG] = 0.75,
+            [HITGROUP_GEAR] = 0.9
+        },
+
+        ReloadTimeMult = 1.25,
+
+        MoveSpeedMult = 0.9,
+        ShootingSpeedMult = 0.8,
+        MeleeSpeedMult = 1,
+        SightedSpeedMult = 0.55,
+        ReloadSpeedMult = 0.5,
+    },
 }
 
 // "ballistics"
@@ -76,7 +107,7 @@ SWEP.RecoilVisualKick = 0.75
 SWEP.RecoilKick = 4
 
 SWEP.RecoilSpreadPenalty = 0.002
-SWEP.HipfireSpreadPenalty = 0.03
+SWEP.HipFireSpreadPenalty = 0.03
 
 SWEP.CanBlindFire = true
 
@@ -90,6 +121,9 @@ SWEP.ReloadSpeedMult = 0.5
 
 SWEP.AimDownSightsTime = 0.4
 SWEP.SprintToFireTime = 0.4
+
+SWEP.Sway = 1.25
+SWEP.ScopedSway = 0.15
 
 // hold types
 
@@ -120,8 +154,6 @@ SWEP.HolsterSlot = TacRP.HOLSTER_SLOT_BACK
 SWEP.HolsterPos = Vector(5, -2, -6)
 SWEP.HolsterAng = Angle(0, 0, 0)
 
-SWEP.Sway = 1
-SWEP.ScopedSway = 0.1
 
 SWEP.ClipSize = 30
 SWEP.Ammo = "smg1"

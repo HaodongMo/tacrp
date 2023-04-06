@@ -17,18 +17,48 @@ SWEP.WorldModel = "models/weapons/tacint/w_k1a.mdl"
 
 SWEP.Slot = 2
 
-SWEP.ArcadeStats = {
+SWEP.BalanceStats = {
+    [TacRP.BALANCE_SBOX] = {
+        Damage_Max = 20,
+        Damage_Min = 9,
 
-    Damage_Max = 20,
-    Damage_Min = 9,
+        RecoilKick = 1,
 
-    RecoilKick = 1,
+        MoveSpeedMult = 0.85,
+        ShootingSpeedMult = 0.8,
+        SightedSpeedMult = 0.8,
+        MeleeSpeedMult = 1,
+        ReloadSpeedMult = 1,
+    },
+    [TacRP.BALANCE_TTT] = {
+        Damage_Max = 15,
+        Damage_Min = 10,
+        Range_Min = 600,
+        Range_Max = 2000,
+        RPM = 800,
+        PostBurstDelay = 0.25,
 
-    MoveSpeedMult = 0.85,
-    ShootingSpeedMult = 0.8,
-    SightedSpeedMult = 0.8,
-    MeleeSpeedMult = 1,
-    ReloadSpeedMult = 1,
+        RecoilSpreadPenalty = 0.0025,
+
+        BodyDamageMultipliers = {
+            [HITGROUP_HEAD] = 3,
+            [HITGROUP_CHEST] = 1.25,
+            [HITGROUP_STOMACH] = 1,
+            [HITGROUP_LEFTARM] = 0.9,
+            [HITGROUP_RIGHTARM] = 0.9,
+            [HITGROUP_LEFTLEG] = 0.75,
+            [HITGROUP_RIGHTLEG] = 0.75,
+            [HITGROUP_GEAR] = 0.9
+        },
+
+        ReloadTimeMult = 1.25,
+
+        MoveSpeedMult = 0.9,
+        ShootingSpeedMult = 0.8,
+        MeleeSpeedMult = 1,
+        SightedSpeedMult = 0.55,
+        ReloadSpeedMult = 0.5,
+    },
 }
 
 // "ballistics"
@@ -88,6 +118,9 @@ SWEP.ReloadSpeedMult = 0.5
 
 SWEP.AimDownSightsTime = 0.35
 SWEP.SprintToFireTime = 0.375
+
+SWEP.Sway = 1.25
+SWEP.ScopedSway = 0.15
 
 // hold types
 

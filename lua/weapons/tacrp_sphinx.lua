@@ -36,10 +36,21 @@ SWEP.BalanceStats = {
         RPM = 500,
 
         RecoilMaximum = 5,
-        RecoilResetTime = 0.15,
-        RecoilDissipationRate = 7,
-        RecoilFirstShotMult = 0.8,
+        RecoilResetTime = 0.1,
+        RecoilDissipationRate = 5,
+        RecoilFirstShotMult = 0.75,
         RecoilSpreadPenalty = 0.01,
+
+        BodyDamageMultipliers = {
+            [HITGROUP_HEAD] = 2.5,
+            [HITGROUP_CHEST] = 1,
+            [HITGROUP_STOMACH] = 1,
+            [HITGROUP_LEFTARM] = 0.9,
+            [HITGROUP_RIGHTARM] = 0.9,
+            [HITGROUP_LEFTLEG] = 0.75,
+            [HITGROUP_RIGHTLEG] = 0.75,
+            [HITGROUP_GEAR] = 0.9
+        },
 
         ReloadTimeMult = 1.25,
 

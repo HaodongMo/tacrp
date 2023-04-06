@@ -10,7 +10,7 @@ SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 SWEP.SubCatTier = "3Quality"
 SWEP.SubCatType = "1Sidearm"
 
-SWEP.Description = "Well-rounded high capacity handgun."
+SWEP.Description = "Well-rounded handgun."
 
 SWEP.ViewModel = "models/weapons/tacint/v_p2000.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_p2000.mdl"
@@ -32,7 +32,21 @@ SWEP.BalanceStats = {
         Damage_Max = 15,
         Damage_Min = 7,
 
-        RPM = 400,
+        Range_Min = 500,
+        Range_Max = 2000,
+
+        RPM = 420,
+
+        BodyDamageMultipliers = {
+            [HITGROUP_HEAD] = 2.5,
+            [HITGROUP_CHEST] = 1,
+            [HITGROUP_STOMACH] = 1,
+            [HITGROUP_LEFTARM] = 0.9,
+            [HITGROUP_RIGHTARM] = 0.9,
+            [HITGROUP_LEFTLEG] = 0.75,
+            [HITGROUP_RIGHTLEG] = 0.75,
+            [HITGROUP_GEAR] = 0.9
+        },
 
         ReloadTimeMult = 1.2 * 1.25,
 

@@ -29,8 +29,13 @@ SWEP.BalanceStats = {
         ReloadSpeedMult = 1,
     },
     [TacRP.BALANCE_TTT] = {
-        Damage_Max = 8,
-        Damage_Min = 4,
+        Description = "Balanced machine pistol with a controllable rate of fire.",
+
+        Damage_Max = 12,
+        Damage_Min = 6,
+        Range_Min = 800,
+        Range_Max = 2000,
+        RPM = 750,
 
         BodyDamageMultipliers = {
             [HITGROUP_HEAD] = 2,

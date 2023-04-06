@@ -1,7 +1,7 @@
 ATT.PrintName = "Adjust Stock"
 ATT.Icon = Material("entities/tacrp_att_acc_foldstock.png", "mips smooth")
 ATT.Description = "Shorten stock to improve handling somewhat at the cost of recoil."
-ATT.Pros = {"Handling", "Draw Speed"}
+ATT.Pros = {"Handling", "Deploy Time"}
 ATT.Cons = {"Recoil Kick", "Sway"}
 
 ATT.Free = true
