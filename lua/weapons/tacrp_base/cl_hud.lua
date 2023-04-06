@@ -345,7 +345,7 @@ function SWEP:DrawHUDBackground()
                             row1_size = cs - row_size * (maxrow - 1)
                             row1_bullets = c1 - row_size * (maxrow - 1)
                         else
-                            row1_bullets = row1_bullets == 0 and row_size or c1 % row_size
+                            row1_bullets = c1 % row_size
                         end
                         row2_bullets = row2_size
                     else
