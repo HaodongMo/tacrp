@@ -263,3 +263,5 @@ function SWEP:Initialize()
 
     return BaseClass.Initialize(self)
 end
+
+SWEP.AutoSpawnable = false

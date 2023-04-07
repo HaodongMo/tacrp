@@ -207,3 +207,5 @@ end
 addsound("TacInt_rpg7.jingle", path .. "handling-1.wav")
 addsound("TacInt_rpg7.insert_rocket", path .. "insert_rocket.wav")
 addsound("TacInt_rpg7.flipup_sight", path .. "flipup_sight.wav")
+
+SWEP.AutoSpawnable = false

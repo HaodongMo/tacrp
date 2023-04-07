@@ -290,3 +290,5 @@ hook.Add("EntityTakeDamage", "TacRP_RiotShield", function(ent, dmginfo)
 
     dmginfo:ScaleDamage(0.5)
 end)
+
+SWEP.AutoSpawnable = false

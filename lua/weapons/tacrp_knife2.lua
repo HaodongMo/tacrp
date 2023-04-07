@@ -180,3 +180,5 @@ end
 
 function SWEP:ThinkSights()
 end
+
+SWEP.AutoSpawnable = false

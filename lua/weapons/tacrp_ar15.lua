@@ -17,21 +17,57 @@ SWEP.WorldModel = "models/weapons/tacint/w_m4.mdl"
 
 SWEP.Slot = 2
 
-SWEP.ArcadeStats = {
 
-    Description = "Semi-automatic model of an ubiquitous American rifle. Fine tuned for precision shooting.",
+SWEP.BalanceStats = {
+    [TacRP.BALANCE_SBOX] = {
+        Description = "Semi-automatic model of an ubiquitous American rifle. Fine tuned for precision shooting.",
 
-    Damage_Max = 22,
-    Damage_Min = 15,
+        Damage_Max = 22,
+        Damage_Min = 15,
 
-    Recoil_Kick = 1.5,
-    Spread = 0.001,
+        Recoil_Kick = 1.5,
+        Spread = 0.001,
 
-    MoveSpeedMult = 0.85,
-    ShootingSpeedMult = 0.75,
-    SightedSpeedMult = 0.75,
-    MeleeSpeedMult = 1,
-    ReloadSpeedMult = 1,
+        MoveSpeedMult = 0.85,
+        ShootingSpeedMult = 0.75,
+        SightedSpeedMult = 0.75,
+        MeleeSpeedMult = 1,
+        ReloadSpeedMult = 1,
+    },
+    [TacRP.BALANCE_TTT] = {
+        Description = "Semi-automatic model of an ubiquitous American rifle. Fine tuned for precision shooting.",
+
+        Damage_Max = 17,
+        Damage_Min = 14,
+        Range_Min = 600,
+        Range_Max = 2500,
+        RPM = 420,
+
+        Recoil_Kick = 1.5,
+        Spread = 0.001,
+
+        RecoilDissipationRate = 12,
+        RecoilSpreadPenalty = 0.002,
+
+        BodyDamageMultipliers = {
+            [HITGROUP_HEAD] = 4,
+            [HITGROUP_CHEST] = 1.25,
+            [HITGROUP_STOMACH] = 1,
+            [HITGROUP_LEFTARM] = 0.9,
+            [HITGROUP_RIGHTARM] = 0.9,
+            [HITGROUP_LEFTLEG] = 0.75,
+            [HITGROUP_RIGHTLEG] = 0.75,
+            [HITGROUP_GEAR] = 0.9
+        },
+
+        ReloadTimeMult = 1.25,
+
+        MoveSpeedMult = 0.9,
+        ShootingSpeedMult = 0.8,
+        MeleeSpeedMult = 1,
+        SightedSpeedMult = 0.55,
+        ReloadSpeedMult = 0.65,
+    },
 }
 
 SWEP.RPM = 500

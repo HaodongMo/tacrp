@@ -151,3 +151,5 @@ end
 function SWEP:GiveDefaultAmmo()
     self:GetOwner():GiveAmmo(1, "ti_c4")
 end
+
+SWEP.AutoSpawnable = false

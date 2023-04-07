@@ -249,3 +249,5 @@ addsound("TacInt_m320.shell_out", path .. "shell_out-1.wav")
 addsound("TacInt_m320.shell_in", path .. "shell_in-1.wav")
 addsound("TacInt_m320.buttstock_back", path .. "buttstock_back-1.wav")
 addsound("TacInt_m320.sight_flipup", path .. "sight_flipup-1.wav")
+
+SWEP.AutoSpawnable = false
