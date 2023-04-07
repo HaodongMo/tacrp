@@ -18,19 +18,51 @@ SWEP.WorldModel = "models/weapons/tacint/w_uratio.mdl"
 SWEP.Slot = 2
 SWEP.SlotAlt = 3
 
-SWEP.ArcadeStats = {
+SWEP.BalanceStats = {
+    [TacRP.BALANCE_SBOX] = {
+        Damage_Max = 65,
+        Damage_Min = 92,
 
-    Damage_Max = 65,
-    Damage_Min = 92,
+        Range_Min = 1000,
+        Range_Max = 3500,
 
-    Range_Min = 1000,
-    Range_Max = 3500,
+        MoveSpeedMult = 0.8,
+        ShootingSpeedMult = 0.55,
+        SightedSpeedMult = 0.75,
+        MeleeSpeedMult = 1,
+        ReloadSpeedMult = 1,
+    },
+    [TacRP.BALANCE_TTT] = {
 
-    MoveSpeedMult = 0.8,
-    ShootingSpeedMult = 0.55,
-    SightedSpeedMult = 0.75,
-    MeleeSpeedMult = 1,
-    ReloadSpeedMult = 1,
+        Description = "Lightweight sniper rifle with high mobility and good damage at distance.\nEquipped with a 10x scope by default.",
+
+        Damage_Max = 25,
+        Damage_Min = 65,
+        Range_Min = 900,
+        Range_Max = 3000,
+
+        RPM = 35,
+        ShootTimeMult = 1.1,
+
+        BodyDamageMultipliers = {
+            [HITGROUP_HEAD] = 5,
+            [HITGROUP_CHEST] = 1.25,
+            [HITGROUP_STOMACH] = 1,
+            [HITGROUP_LEFTARM] = 0.75,
+            [HITGROUP_RIGHTARM] = 0.75,
+            [HITGROUP_LEFTLEG] = 0.5,
+            [HITGROUP_RIGHTLEG] = 0.5,
+            [HITGROUP_GEAR] = 0.5
+        },
+
+        ReloadTimeMult = 1.25,
+
+        MoveSpeedMult = 0.9,
+        ShootingSpeedMult = 0.65,
+        MeleeSpeedMult = 1,
+        SightedSpeedMult = 0.6,
+        ReloadSpeedMult = 0.55,
+    },
 }
 
 // "ballistics"
@@ -91,6 +123,9 @@ SWEP.ReloadSpeedMult = 0.3
 SWEP.AimDownSightsTime = 0.36
 SWEP.SprintToFireTime = 0.4
 
+SWEP.Sway = 2
+SWEP.ScopedSway = 0.075
+
 // hold types
 
 SWEP.HoldType = "ar2"
@@ -120,8 +155,8 @@ SWEP.CorrectivePos = Vector(0.025, 0, 0.1)
 SWEP.CorrectiveAng = Angle(0, 0, 0)
 
 SWEP.HolsterVisible = true
-SWEP.HolsterSlot = TacRP.HOLSTER_SLOT_BACK
-SWEP.HolsterPos = Vector(5, 0, -6)
+SWEP.HolsterSlot = TacRP.HOLSTER_SLOT_BACK2
+SWEP.HolsterPos = Vector(5, 4, -6)
 SWEP.HolsterAng = Angle(0, 0, 0)
 
 // scope
@@ -131,6 +166,7 @@ SWEP.ScopeOverlay = Material("tacrp/scopes/sniper.png", "mips smooth") // Materi
 SWEP.ScopeFOV = 90 / 10
 SWEP.ScopeLevels = 1 // 2 = like CS:S
 SWEP.ScopeHideWeapon = true
+SWEP.ScopeOverlaySize = 0.75
 
 // reload
 

@@ -17,18 +17,54 @@ SWEP.WorldModel = "models/weapons/tacint/w_hk417.mdl"
 
 SWEP.Slot = 2
 
-SWEP.ArcadeStats = {
 
-    Damage_Max = 38,
-    Damage_Min = 26,
+SWEP.BalanceStats = {
+    [TacRP.BALANCE_SBOX] = {
+        Damage_Max = 38,
+        Damage_Min = 26,
 
-    RecoilDissipationRate = 10,
+        RecoilDissipationRate = 10,
 
-    MoveSpeedMult = 0.8,
-    ShootingSpeedMult = 0.6,
-    SightedSpeedMult = 0.75,
-    MeleeSpeedMult = 1,
-    ReloadSpeedMult = 1,
+        MoveSpeedMult = 0.8,
+        ShootingSpeedMult = 0.6,
+        SightedSpeedMult = 0.75,
+        MeleeSpeedMult = 1,
+        ReloadSpeedMult = 1,
+    },
+    [TacRP.BALANCE_TTT] = {
+
+        Description = "Battle rifle with high rate of fire.",
+
+        Damage_Max = 20,
+        Damage_Min = 14,
+        Range_Min = 750,
+        Range_Max = 3000,
+        RPM = 700,
+
+        RecoilResetTime = 0.15,
+        RecoilDissipationRate = 12,
+        RecoilMaximum = 9,
+        RecoilSpreadPenalty = 0.01,
+
+        BodyDamageMultipliers = {
+            [HITGROUP_HEAD] = 3,
+            [HITGROUP_CHEST] = 1.25,
+            [HITGROUP_STOMACH] = 1,
+            [HITGROUP_LEFTARM] = 0.75,
+            [HITGROUP_RIGHTARM] = 0.75,
+            [HITGROUP_LEFTLEG] = 0.5,
+            [HITGROUP_RIGHTLEG] = 0.5,
+            [HITGROUP_GEAR] = 0.5
+        },
+
+        ReloadTimeMult = 1.25,
+
+        MoveSpeedMult = 0.85,
+        ShootingSpeedMult = 0.75,
+        MeleeSpeedMult = 1,
+        SightedSpeedMult = 0.5,
+        ReloadSpeedMult = 0.5,
+    },
 }
 
 // "ballistics"
@@ -89,6 +125,9 @@ SWEP.ReloadSpeedMult = 0.4
 
 SWEP.AimDownSightsTime = 0.4
 SWEP.SprintToFireTime = 0.42
+
+SWEP.Sway = 1.5
+SWEP.ScopedSway = 0.1
 
 // hold types
 

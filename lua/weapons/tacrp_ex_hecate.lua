@@ -18,19 +18,47 @@ SWEP.WorldModel = "models/weapons/tacint_extras/w_hecate.mdl"
 SWEP.Slot = 2
 SWEP.SlotAlt = 3
 
-SWEP.ArcadeStats = {
+SWEP.BalanceStats = {
+    [TacRP.BALANCE_SBOX] = {
+        Damage_Max = 80,
+        Damage_Min = 150,
+        Range_Min = 700,
+        Range_Max = 5000,
 
-    Damage_Max = 80,
-    Damage_Min = 150,
+        MoveSpeedMult = 0.7,
+        ShootingSpeedMult = 0.5,
+        SightedSpeedMult = 0.55,
+        MeleeSpeedMult = 1,
+        ReloadSpeedMult = 1,
+    },
+    [TacRP.BALANCE_TTT] = { // this is a buyable weapon in TTT
+        Damage_Max = 80,
+        Damage_Min = 200,
+        Range_Min = 500,
+        Range_Max = 5000,
 
-    Range_Min = 700,
-    Range_Max = 5000,
+        Penetration = 60,
+        RecoilDissipationRate = 0.5,
 
-    MoveSpeedMult = 0.7,
-    ShootingSpeedMult = 0.5,
-    SightedSpeedMult = 0.55,
-    MeleeSpeedMult = 1,
-    ReloadSpeedMult = 1,
+        BodyDamageMultipliers = {
+            [HITGROUP_HEAD] = 5,
+            [HITGROUP_CHEST] = 1.25,
+            [HITGROUP_STOMACH] = 1,
+            [HITGROUP_LEFTARM] = 0.75,
+            [HITGROUP_RIGHTARM] = 0.75,
+            [HITGROUP_LEFTLEG] = 0.5,
+            [HITGROUP_RIGHTLEG] = 0.5,
+            [HITGROUP_GEAR] = 0.5
+        },
+
+        ReloadTimeMult = 1.75,
+
+        MoveSpeedMult = 0.8,
+        ShootingSpeedMult = 0.25,
+        MeleeSpeedMult = 1,
+        SightedSpeedMult = 0.4,
+        ReloadSpeedMult = 0.25,
+    },
 }
 
 // "ballistics"
@@ -95,6 +123,9 @@ SWEP.ReloadSpeedMult = 0.2
 SWEP.AimDownSightsTime = 0.7
 SWEP.SprintToFireTime = 0.6
 
+SWEP.Sway = 5
+SWEP.ScopedSway = 0.2
+
 // hold types
 
 SWEP.HoldType = "ar2"
@@ -129,12 +160,9 @@ SWEP.CorrectivePos = Vector(0.025, 0, 0.1)
 SWEP.CorrectiveAng = Angle(0, 0, 0)
 
 SWEP.HolsterVisible = true
-SWEP.HolsterSlot = TacRP.HOLSTER_SLOT_BACK
-SWEP.HolsterPos = Vector(4, -8, -6)
+SWEP.HolsterSlot = TacRP.HOLSTER_SLOT_BACK2
+SWEP.HolsterPos = Vector(5, 6, -6)
 SWEP.HolsterAng = Angle(0, 0, 0)
-
-SWEP.Sway = 5
-SWEP.ScopedSway = 0.2
 
 // scope
 
@@ -143,6 +171,7 @@ SWEP.ScopeOverlay = Material("tacrp/scopes/sniper.png", "mips smooth") // Materi
 SWEP.ScopeFOV = 90 / 10
 SWEP.ScopeLevels = 1 // 2 = like CS:S
 SWEP.ScopeHideWeapon = true
+SWEP.ScopeOverlaySize = 0.75
 
 // reload
 
@@ -318,3 +347,13 @@ addsound("tacint_extras_hecate.Bolt_Back", path .. "boltrelease.wav")
 addsound("tacint_extras_hecate.bolt_forward", path .. "boltback.wav")
 addsound("tacint_extras_hecate.Bolt_Up", path .. "boltup.wav")
 addsound("tacint_extras_hecate.bolt_down", path .. "boltdown.wav")
+
+if engine.ActiveGamemode() == "terrortown" then
+    SWEP.AutoSpawnable = false
+    SWEP.Kind = WEAPON_HEAVY
+    SWEP.CanBuy = { ROLE_TRAITOR, ROLE_DETECTIVE }
+    SWEP.EquipMenuData = {
+        type = "Weapon",
+        desc = "Heavy anti-materiel rifle that can kill in one shot.\nDoes not fire phantom bullets.",
+    }
+end

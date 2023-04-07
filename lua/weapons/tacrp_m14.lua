@@ -17,19 +17,55 @@ SWEP.WorldModel = "models/weapons/tacint/w_m14.mdl"
 
 SWEP.Slot = 2
 
-SWEP.ArcadeStats = {
 
-    Damage_Max = 30,
-    Damage_Min = 50,
+SWEP.BalanceStats = {
+    [TacRP.BALANCE_SBOX] = {
+        Damage_Max = 30,
+        Damage_Min = 50,
 
-    Range_Min = 1200,
-    Range_Max = 3000,
+        Range_Min = 1200,
+        Range_Max = 3000,
 
-    MoveSpeedMult = 0.8,
-    ShootingSpeedMult = 0.6,
-    SightedSpeedMult = 0.75,
-    MeleeSpeedMult = 1,
-    ReloadSpeedMult = 1,
+        MoveSpeedMult = 0.8,
+        ShootingSpeedMult = 0.6,
+        SightedSpeedMult = 0.75,
+        MeleeSpeedMult = 1,
+        ReloadSpeedMult = 1,
+    },
+    [TacRP.BALANCE_TTT] = {
+
+        Description = "Semi-automatic rifle with excellent accuracy.\nEquipped with a 6x scope by default.",
+
+        Damage_Max = 22,
+        Damage_Min = 35,
+        Range_Min = 1200,
+        Range_Max = 3000,
+        RPM = 180,
+
+        RecoilResetTime = 0.2,
+        RecoilDissipationRate = 2.5,
+        RecoilMaximum = 2,
+        RecoilSpreadPenalty = 0.025,
+
+        BodyDamageMultipliers = {
+            [HITGROUP_HEAD] = 4,
+            [HITGROUP_CHEST] = 1.25,
+            [HITGROUP_STOMACH] = 1,
+            [HITGROUP_LEFTARM] = 0.75,
+            [HITGROUP_RIGHTARM] = 0.75,
+            [HITGROUP_LEFTLEG] = 0.5,
+            [HITGROUP_RIGHTLEG] = 0.5,
+            [HITGROUP_GEAR] = 0.5
+        },
+
+        ReloadTimeMult = 1.25,
+
+        MoveSpeedMult = 0.85,
+        ShootingSpeedMult = 0.75,
+        MeleeSpeedMult = 1,
+        SightedSpeedMult = 0.5,
+        ReloadSpeedMult = 0.5,
+    },
 }
 
 // "ballistics"
@@ -60,8 +96,6 @@ SWEP.RPM = 240
 
 SWEP.Spread = 0.0002
 
-
-
 SWEP.ShootTimeMult = 0.5
 
 SWEP.RecoilPerShot = 1
@@ -90,6 +124,9 @@ SWEP.ReloadSpeedMult = 0.4
 
 SWEP.AimDownSightsTime = 0.4
 SWEP.SprintToFireTime = 0.5
+
+SWEP.Sway = 2
+SWEP.ScopedSway = 0.1
 
 // hold types
 

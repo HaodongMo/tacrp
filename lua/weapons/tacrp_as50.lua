@@ -18,20 +18,53 @@ SWEP.WorldModel = "models/weapons/tacint/w_as50.mdl"
 SWEP.Slot = 2
 SWEP.SlotAlt = 3
 
-SWEP.ArcadeStats = {
-    Description = "Semi-automatic anti-materiel rifle with integral bipod.\nCan kill in up to 2 shots regardless of distance.\nEquipped with a 12x scope by default.",
 
-    Damage_Max = 70,
-    Damage_Min = 140,
+SWEP.BalanceStats = {
+    [TacRP.BALANCE_SBOX] = {
+        Description = "Semi-automatic anti-materiel rifle with integral bipod.\nCan kill in up to 2 shots regardless of distance.\nEquipped with a 12x scope by default.",
 
-    Range_Min = 900,
-    Range_Max = 5000,
+        Damage_Max = 70,
+        Damage_Min = 140,
 
-    MoveSpeedMult = 0.7,
-    ShootingSpeedMult = 0.5,
-    SightedSpeedMult = 0.5,
-    MeleeSpeedMult = 1,
-    ReloadSpeedMult = 1,
+        Range_Min = 900,
+        Range_Max = 5000,
+
+        MoveSpeedMult = 0.7,
+        ShootingSpeedMult = 0.5,
+        SightedSpeedMult = 0.5,
+        MeleeSpeedMult = 1,
+        ReloadSpeedMult = 1,
+    },
+    [TacRP.BALANCE_TTT] = { // this is a buyable weapon in TTT
+        Description = "Semi-automatic anti-materiel rifle with integral bipod.\nCan kill in up to 2 shots regardless of distance.\nEquipped with a 12x scope by default.",
+
+        Damage_Max = 80,
+        Damage_Min = 150,
+        Range_Min = 500,
+        Range_Max = 4000,
+        RPM = 180,
+
+        Penetration = 50,
+
+        BodyDamageMultipliers = {
+            [HITGROUP_HEAD] = 5,
+            [HITGROUP_CHEST] = 1.25,
+            [HITGROUP_STOMACH] = 1,
+            [HITGROUP_LEFTARM] = 1,
+            [HITGROUP_RIGHTARM] = 1,
+            [HITGROUP_LEFTLEG] = 0.675,
+            [HITGROUP_RIGHTLEG] = 0.675,
+            [HITGROUP_GEAR] = 0.6
+        },
+
+        ReloadTimeMult = 1.25,
+
+        MoveSpeedMult = 0.8,
+        ShootingSpeedMult = 0.25,
+        MeleeSpeedMult = 1,
+        SightedSpeedMult = 0.4,
+        ReloadSpeedMult = 0.25,
+    },
 }
 
 // "ballistics"
@@ -61,7 +94,7 @@ SWEP.Firemode = 1
 SWEP.RPM = 200
 
 SWEP.Spread = 0
-SWEP.RecoilSpreadPenalty = 0.05
+SWEP.RecoilSpreadPenalty = 0.075
 SWEP.HipFireSpreadPenalty = 0.1
 SWEP.PeekPenaltyFraction = 0.15
 
@@ -69,15 +102,13 @@ SWEP.PeekPenaltyFraction = 0.15
 SWEP.RecoilPerShot = 1
 SWEP.RecoilMaximum = 2
 SWEP.RecoilResetTime = 0.25
-SWEP.RecoilDissipationRate = 2
-SWEP.RecoilFirstShotMult = 1
-SWEP.RecoilCrouchMult = 0.5
+SWEP.RecoilDissipationRate = 1.5
+SWEP.RecoilFirstShotMult = 0.8
+SWEP.RecoilCrouchMult = 0.25
 
-SWEP.RecoilVisualKick = 15
-SWEP.RecoilVisualShake = 0.9
+SWEP.RecoilVisualKick = 5
 
 SWEP.RecoilKick = 14
-
 
 SWEP.CanBlindFire = true
 
@@ -91,6 +122,10 @@ SWEP.ReloadSpeedMult = 0.2
 
 SWEP.AimDownSightsTime = 0.75
 SWEP.SprintToFireTime = 0.65 // multiplies how long it takes to recover from sprinting
+
+SWEP.Sway = 5
+SWEP.ScopedSway = 0.25
+SWEP.SwayCrouchMult = 0.15
 
 // hold types
 
@@ -123,14 +158,9 @@ SWEP.CorrectivePos = Vector(0.03, 0, 0.1)
 SWEP.CorrectiveAng = Angle(0, 0, 0)
 
 SWEP.HolsterVisible = true
-SWEP.HolsterSlot = TacRP.HOLSTER_SLOT_BACK
-SWEP.HolsterPos = Vector(5, 0, -6)
+SWEP.HolsterSlot = TacRP.HOLSTER_SLOT_BACK2
+SWEP.HolsterPos = Vector(5, 4, -6)
 SWEP.HolsterAng = Angle(0, 0, 0)
-
-// sway
-
-SWEP.Sway = 5
-SWEP.ScopedSway = 0.25
 
 // scope
 
@@ -302,3 +332,13 @@ addsound("TacInt_as50.Clip_Out", path .. "clip_out.wav")
 addsound("TacInt_as50.Clip_In", path .. "clip_in.wav")
 addsound("TacInt_as50.Bolt_Back", path .. "bolt_back.wav")
 addsound("TacInt_as50.bolt_forward", path .. "bolt_forward.wav")
+
+if engine.ActiveGamemode() == "terrortown" then
+    SWEP.AutoSpawnable = false
+    SWEP.Kind = WEAPON_HEAVY
+    SWEP.CanBuy = { ROLE_TRAITOR, ROLE_DETECTIVE }
+    SWEP.EquipMenuData = {
+        type = "Weapon",
+        desc = "Semi-automatic anti-materiel rifle with integral bipod.\nCan kill in up to 2 shots regardless of distance.",
+    }
+end

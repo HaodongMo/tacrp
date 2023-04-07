@@ -18,7 +18,6 @@ SWEP.WorldModel = "models/weapons/tacint/w_m320.mdl"
 SWEP.NoRanger = true
 
 SWEP.Slot = 4
-SWEP.SlotAlt = 3
 
 SWEP.ArcadeStats = {
     MoveSpeedMult = 0.95,

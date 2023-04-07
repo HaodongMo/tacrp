@@ -18,19 +18,51 @@ SWEP.WorldModel = "models/weapons/tacint/w_spr.mdl"
 SWEP.Slot = 2
 SWEP.SlotAlt = 3
 
-SWEP.ArcadeStats = {
+SWEP.BalanceStats = {
+    [TacRP.BALANCE_SBOX] = {
+        Damage_Max = 50,
+        Damage_Min = 70,
 
-    Damage_Max = 50,
-    Damage_Min = 70,
+        Range_Min = 500,
+        Range_Max = 1500,
 
-    Range_Min = 500,
-    Range_Max = 1500,
+        MoveSpeedMult = 0.8,
+        ShootingSpeedMult = 0.65,
+        SightedSpeedMult = 0.7,
+        MeleeSpeedMult = 1,
+        ReloadSpeedMult = 1,
+    },
+    [TacRP.BALANCE_TTT] = {
 
-    MoveSpeedMult = 0.8,
-    ShootingSpeedMult = 0.65,
-    SightedSpeedMult = 0.7,
-    MeleeSpeedMult = 1,
-    ReloadSpeedMult = 1,
+        Description = "Well rounded hunting rifle with good damage even up close.\nEquipped with a 6x scope by default.",
+
+        Damage_Max = 30,
+        Damage_Min = 50,
+        Range_Min = 1000,
+        Range_Max = 2500,
+
+        RPM = 45,
+        ShootTimeMult = 0.9,
+
+        BodyDamageMultipliers = {
+            [HITGROUP_HEAD] = 5,
+            [HITGROUP_CHEST] = 1.25,
+            [HITGROUP_STOMACH] = 1,
+            [HITGROUP_LEFTARM] = 0.75,
+            [HITGROUP_RIGHTARM] = 0.75,
+            [HITGROUP_LEFTLEG] = 0.5,
+            [HITGROUP_RIGHTLEG] = 0.5,
+            [HITGROUP_GEAR] = 0.5
+        },
+
+        ReloadTimeMult = 1.25,
+
+        MoveSpeedMult = 0.85,
+        ShootingSpeedMult = 0.5,
+        MeleeSpeedMult = 1,
+        SightedSpeedMult = 0.5,
+        ReloadSpeedMult = 0.5,
+    },
 }
 
 // "ballistics"
@@ -91,6 +123,9 @@ SWEP.ReloadSpeedMult = 0.3
 SWEP.AimDownSightsTime = 0.38
 SWEP.SprintToFireTime = 0.45
 
+SWEP.Sway = 2
+SWEP.ScopedSway = 0.075
+
 // hold types
 
 SWEP.HoldType = "ar2"
@@ -126,8 +161,8 @@ SWEP.CorrectivePos = Vector(0.05, 0, 0.2)
 SWEP.CorrectiveAng = Angle(-0.36, -0.3, 0)
 
 SWEP.HolsterVisible = true
-SWEP.HolsterSlot = TacRP.HOLSTER_SLOT_BACK
-SWEP.HolsterPos = Vector(5, 0, -6)
+SWEP.HolsterSlot = TacRP.HOLSTER_SLOT_BACK2
+SWEP.HolsterPos = Vector(5, 4, -6)
 SWEP.HolsterAng = Angle(0, 0, 0)
 
 // scope

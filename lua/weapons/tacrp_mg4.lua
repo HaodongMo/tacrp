@@ -10,7 +10,7 @@ SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 SWEP.SubCatTier = "1Elite"
 SWEP.SubCatType = "4Assault Rifle"
 
-SWEP.Description = "Machine gun with huge volume of fire. "
+SWEP.Description = "Machine gun with huge volume of fire."
 
 SWEP.ViewModel = "models/weapons/tacint/v_mg4.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_mg4.mdl"
@@ -18,18 +18,48 @@ SWEP.WorldModel = "models/weapons/tacint/w_mg4.mdl"
 SWEP.Slot = 2
 SWEP.SlotAlt = 3
 
-SWEP.ArcadeStats = {
+SWEP.BalanceStats = {
+    [TacRP.BALANCE_SBOX] = {
+        Damage_Max = 28,
+        Damage_Min = 22,
 
-    Damage_Max = 28,
-    Damage_Min = 22,
+        ClipSize = 75,
 
-    ClipSize = 75,
+        MoveSpeedMult = 0.75,
+        ShootingSpeedMult = 0.5,
+        SightedSpeedMult = 0.75,
+        MeleeSpeedMult = 1,
+        ReloadSpeedMult = 1,
+    },
+    [TacRP.BALANCE_TTT] = {
 
-    MoveSpeedMult = 0.75,
-    ShootingSpeedMult = 0.5,
-    SightedSpeedMult = 0.75,
-    MeleeSpeedMult = 1,
-    ReloadSpeedMult = 1,
+        Description = "Machine gun with high damage but very low mobility.",
+
+        Damage_Max = 20,
+        Damage_Min = 12,
+        Range_Min = 750,
+        Range_Max = 3000,
+        ClipSize = 75,
+
+        BodyDamageMultipliers = {
+            [HITGROUP_HEAD] = 2,
+            [HITGROUP_CHEST] = 1,
+            [HITGROUP_STOMACH] = 1,
+            [HITGROUP_LEFTARM] = 0.9,
+            [HITGROUP_RIGHTARM] = 0.9,
+            [HITGROUP_LEFTLEG] = 0.75,
+            [HITGROUP_RIGHTLEG] = 0.75,
+            [HITGROUP_GEAR] = 0.9
+        },
+
+        ReloadTimeMult = 1.2,
+
+        MoveSpeedMult = 0.85,
+        ShootingSpeedMult = 0.4,
+        MeleeSpeedMult = 1,
+        SightedSpeedMult = 0.5,
+        ReloadSpeedMult = 0.4,
+    },
 }
 
 SWEP.BodyDamageMultipliers = {
@@ -90,6 +120,9 @@ SWEP.ReloadSpeedMultTime = 1
 SWEP.AimDownSightsTime = 0.5
 SWEP.SprintToFireTime = 0.5
 
+SWEP.Sway = 2
+SWEP.ScopedSway = 0.75
+
 // hold types
 
 SWEP.HoldType = "ar2"
@@ -115,14 +148,9 @@ SWEP.CorrectivePos = Vector(0.025, 0, 0.125)
 SWEP.CorrectiveAng = Angle(0, 0, 0)
 
 SWEP.HolsterVisible = true
-SWEP.HolsterSlot = TacRP.HOLSTER_SLOT_BACK
+SWEP.HolsterSlot = TacRP.HOLSTER_SLOT_BACK2
 SWEP.HolsterPos = Vector(5, 0, -6)
 SWEP.HolsterAng = Angle(0, 0, 0)
-
-// sway
-
-SWEP.Sway = 2
-SWEP.ScopedSway = 0.75
 
 // reload
 

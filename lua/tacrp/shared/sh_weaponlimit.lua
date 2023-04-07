@@ -1,3 +1,5 @@
+if engine.ActiveGamemode() == "terrortown" then return end
+
 local whitelist = {
     weapon_physgun = true,
     weapon_physcannon = true,
