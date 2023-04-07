@@ -35,8 +35,9 @@ SWEP.BalanceStats = {
         Damage_Min = 3,
         Range_Min = 300,
         Range_Max = 2000,
+        RPM = 180,
 
-        RPM = 150,
+        RecoilSpreadPenalty = 0.02,
 
         BodyDamageMultipliers = {
             [HITGROUP_HEAD] = 2,
@@ -49,7 +50,7 @@ SWEP.BalanceStats = {
             [HITGROUP_GEAR] = 0.9
         },
 
-        ReloadTimeMult = 1.25,
+        ReloadTimeMult = 1.4,
 
         MoveSpeedMult = 0.9,
         ShootingSpeedMult = 0.5,
@@ -156,6 +157,7 @@ SWEP.HolsterAng = Angle(0, 0, 0)
 
 SWEP.Sway = 1
 SWEP.ScopedSway = 0.1
+
 // reload
 
 SWEP.ClipSize = 7

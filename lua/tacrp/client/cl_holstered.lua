@@ -7,7 +7,7 @@ hook.Add("PostPlayerDraw", "TacRP_Holster", function(ply, flags)
     ply.TacRP_HolsterModels = ply.TacRP_HolsterModels or {}
     for i, v in ipairs(TacRP.HolsterBones) do
         local wep = ply.TacRP_Holster[i]
-        if !IsValid(wep) or wep == ply:GetActiveWeapon() or !wep:GetValue("HolsterVisible") then
+        if !IsValid(wep) or wep:GetOwner() != ply or wep == ply:GetActiveWeapon() or !wep:GetValue("HolsterVisible") then
             SafeRemoveEntity(ply.TacRP_HolsterModels[i])
             ply.TacRP_HolsterModels[i] = nil
             ply.TacRP_Holster[i] = nil
