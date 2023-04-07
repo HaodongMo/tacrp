@@ -37,6 +37,8 @@ SWEP.Melee2AttackTime = 0.6
 SWEP.Melee2Range = 96
 SWEP.Melee2AttackMissTime = 0.7
 
+SWEP.MeleeDamageType = DMG_SLASH
+
 SWEP.MeleeThrowTime = 1.1
 SWEP.MeleeThrowTimeWait = 0.2
 

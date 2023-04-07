@@ -210,6 +210,7 @@ SWEP.CanMeleeAttack = true
 SWEP.MeleeDamage = 25
 SWEP.MeleeAttackTime = 0.7 // time between swings
 SWEP.MeleeRange = 96
+SWEP.MeleeDamageType = DMG_GENERIC
 
 // reload
 
