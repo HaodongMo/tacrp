@@ -44,3 +44,11 @@ function SWEP:DoProceduralIrons()
     local i = GetConVar("tacrp_irons_procedural"):GetInt()
     return self.ProceduralIronFire and (i == 2 or (i == 1 and self:GetValue("Holosight"))) --and (!self.LastShot or self:Clip1() > 1)
 end
+
+function SWEP:CountAttachments()
+    local count = 0
+    for k, v in ipairs(self.Attachments) do
+        if v.Installed then count = count + 1 end
+    end
+    return count
+end

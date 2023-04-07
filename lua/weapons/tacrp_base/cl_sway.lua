@@ -72,10 +72,14 @@ function SWEP:GetViewModelBob(pos, ang)
     local CT = UnPredictedCurTime() -- CurTime()
 
     local v = self:GetOwner():GetVelocity():Length()
+    local walks = self:GetOwner():GetWalkSpeed()
     local runs = self:GetOwner():GetRunSpeed()
-    v = math.Clamp(v, 0, runs)
+
+    local sprints = walks + math.max(runs - walks, walks)
+
+    v = math.Clamp(v, 0, sprints)
     self.ViewModelBobVelocity = math.Approach(self.ViewModelBobVelocity, v, FT * 2400)
-    local d = math.Clamp(self.ViewModelBobVelocity / runs, 0, 1)
+    local d = math.Clamp(self.ViewModelBobVelocity / sprints, 0, 1)
 
     if self:GetOwner():OnGround() then
         self.ViewModelNotOnGround = math.Approach(self.ViewModelNotOnGround, 0, FT / 1)

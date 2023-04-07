@@ -70,7 +70,7 @@ TacRP.HolsterBones = {
     },
     [TacRP.HOLSTER_SLOT_PISTOL] = {
         "ValveBiped.Bip01_R_Thigh",
-        Vector(0, 0, 0),
+        Vector(-1.5, 1.5, -0.75),
         {"models/weapons/w_eq_eholster_elite.mdl", Vector(0, 8, -4), Angle(90, 0, 90)},
     },
     [TacRP.HOLSTER_SLOT_GEAR] = {
