@@ -355,10 +355,11 @@ function SWEP:GetShotgunPattern(i, d)
     if num == 1 then return 0, 0 end
 
     local pelspread = self:GetValue("ShotgunPelletSpread") > 0 and GetConVar("tacrp_pelletspread"):GetBool()
-    if !pelspread then
+    if pelspread then
+        ring_spread = ring_spread - self:GetValue("ShotgunPelletSpread")
+    else
         d = 0
     end
-    -- ring_spread = ring_spread - self:GetValue("ShotgunPelletSpread")
 
     local x = 0
     local y = 0
