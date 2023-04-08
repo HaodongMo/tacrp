@@ -19,7 +19,7 @@ SWEP.Slot = 2
 
 SWEP.BalanceStats = {
     [TacRP.BALANCE_SBOX] = {
-        Damage_Max = 50,
+        Damage_Max = 45,
         Damage_Min = 30,
 
         MoveSpeedMult = 0.8,
@@ -66,7 +66,7 @@ SWEP.BalanceStats = {
 
 SWEP.Damage_Max = 35
 SWEP.Damage_Min = 27
-SWEP.Range_Min = 600
+SWEP.Range_Min = 800
 SWEP.Range_Max = 7500
 SWEP.Penetration = 20
 
@@ -95,16 +95,16 @@ SWEP.RPM = 420
 SWEP.Spread = 0.001
 
 SWEP.RecoilPerShot = 1
-SWEP.RecoilMaximum = 6
-SWEP.RecoilResetTime = 0.15
-SWEP.RecoilDissipationRate = 8
+SWEP.RecoilMaximum = 5
+SWEP.RecoilResetTime = 0.13
+SWEP.RecoilDissipationRate = 10
 SWEP.RecoilFirstShotMult = 0.5
 
-SWEP.RecoilVisualKick = 2
+SWEP.RecoilVisualKick = 1.5
 
-SWEP.RecoilKick = 9
+SWEP.RecoilKick = 8
 
-SWEP.RecoilSpreadPenalty = 0.007
+SWEP.RecoilSpreadPenalty = 0.01
 SWEP.HipFireSpreadPenalty = 0.08
 SWEP.PeekPenaltyFraction = 0.2
 
