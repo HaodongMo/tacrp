@@ -145,3 +145,7 @@ function TacRP.GetBalanceMode()
         return i
     end
 end
+
+function TacRP.UseTiers()
+    return TacRP.GetBalanceMode() == TacRP.BALANCE_RP
+end

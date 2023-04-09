@@ -466,30 +466,22 @@ local function menu_client_ti(panel)
         label = "Quickthrow Radial Menu",
         command = "tacrp_nademenu"
     })
-    panel:AddControl("label", {
-        text = "When enabled, +grenade2 brings up a menu to select grenades. Otherwise it switches between them."
-    })
+    panel:ControlHelp("When enabled, +grenade2 brings up a menu to select grenades. Otherwise it switches between them.")
     panel:AddControl("checkbox", {
         label = "Quickthrow Menu Clicking",
         command = "tacrp_nademenu_click"
     })
-    panel:AddControl("label", {
-        text = "When enabled, left click and right click in the quickthrow menu performs an overhand and underhand throw of the highlighted grenade."
-    })
+    panel:ControlHelp("When enabled, left click and right click in the quickthrow menu performs an overhand and underhand throw of the highlighted grenade.")
     panel:AddControl("checkbox", {
         label = "Blindfire Radial Menu",
         command = "tacrp_blindfiremenu"
     })
-    panel:AddControl("label", {
-        text = "When enabled, +zoom brings up a menu to change blindfire type. Otherwise it sets blindfire based on movement keys pressed."
-    })
+    panel:ControlHelp("When enabled, +zoom brings up a menu to change blindfire type. Otherwise it sets blindfire based on movement keys pressed.")
     panel:AddControl("checkbox", {
         label = "Blindfire Menu Empty Center",
         command = "tacrp_blindfiremenu_nocenter"
     })
-    panel:AddControl("label", {
-        text = "When enabled, center option does nothing, and bottom option will cancel blindfire instead.\nThis will hide the option to shoot yourself."
-    })
+    panel:ControlHelp("When enabled, center option does nothing, and bottom option will cancel blindfire instead.\nThis will hide the option to shoot yourself.")
     panel:AddControl("checkbox", {
         label = "Use Meters instead of HU",
         command = "tacrp_metricunit"
@@ -498,9 +490,7 @@ local function menu_client_ti(panel)
         label = "Recoil Vignette",
         command = "tacrp_vignette"
     })
-    panel:AddControl("label", {
-        text = "Vignette intensity is based on amount of accumulated recoil."
-    })
+    panel:ControlHelp("Vignette intensity is based on amount of accumulated recoil.")
 
     header(panel, "\nPreference")
     panel:AddControl("checkbox", {
@@ -523,25 +513,19 @@ local function menu_client_ti(panel)
         label = "Flashbang Dark Mode",
         command = "tacrp_flash_dark"
     })
-    panel:AddControl("label", {
-        text = "In dark mode, flashbangs turn your screen black instead of white, and mutes audio intead of ringing."
-    })
+    panel:ControlHelp("In dark mode, flashbangs turn your screen black instead of white, and mutes audio intead of ringing.")
     panel:AddControl("checkbox", {
         label = "Quiet Radar",
         command = "tacrp_radar_quiet"
     })
-    panel:AddControl("label", {
-        text = "This mutes your own radar sound for yourself only. Others can still hear your radar, and you can still hear others' radars."
-    })
+    panel:ControlHelp("This mutes your own radar sound for yourself only. Others can still hear your radar, and you can still hear others' radars.")
 
     header(panel, "\nMiscellaneous")
     panel:AddControl("checkbox", {
         label = "Disable Suicide Mode",
         command = "tacrp_idunwannadie"
     })
-    panel:AddControl("label", {
-        text = "Hides the option to shoot yourself from the radial menu, and disables the SHIFT+ALT+B key combo."
-    })
+    panel:ControlHelp("Hides the option to shoot yourself from the radial menu, and disables the SHIFT+ALT+B key combo.")
     panel:AddControl("checkbox", {
         label = "Draw Holstered Weapons",
         command = "tacrp_drawholsters"
@@ -565,9 +549,7 @@ end
 
 local function menu_server_ti(panel)
     header(panel, "Features")
-    panel:AddControl("label", {
-        text = "Settings in this section affect ALL PLAYERS."
-    })
+    panel:Help("Settings in this section affect ALL PLAYERS.")
     panel:AddControl("checkbox", {
         label = "Enable Crosshair",
         command = "tacrp_crosshair"
@@ -584,19 +566,15 @@ local function menu_server_ti(panel)
         label = "Enable Newsletter",
         command = "tacrp_checknews"
     })
-    panel:AddControl("label", {
-        text = "If turned off, newsletter popup/notification will not happen. Players can still open the newsletter page manually."
-    })
+    panel:ControlHelp("If turned off, newsletter popup/notification will not happen. Players can still open the newsletter page manually.")
 
-    local cb_irons_procedural, lb_irons_procedural = panel:ComboBox("Use Procedural Ironsights Firing Animation", "tacrp_irons_procedural")
+    local cb_irons_procedural, lb_irons_procedural = panel:ComboBox("Use Procedural Ironsights", "tacrp_irons_procedural")
     cb_irons_procedural:AddChoice("0 - Never", "0")
-    cb_irons_procedural:AddChoice("1 - With Sights", "1")
+    cb_irons_procedural:AddChoice("1 - With Optic", "1")
     cb_irons_procedural:AddChoice("2 - Always", "2")
     cb_irons_procedural:DockMargin(8, 0, 0, 0)
     lb_irons_procedural:SizeToContents()
-    panel:AddControl("label", {
-        text = "Applies mostly to pistols. Replaces firing animation while aiming with a much less disruptive procedural effect, making aiming with the weapon's sights easier."
-    })
+    panel:ControlHelp("Applies mostly to pistols. Replaces firing animation while aiming with a much less disruptive procedural effect, making aiming with the weapon's sights easier.")
 
     local cb_irons_lower, lb_irons_lower = panel:ComboBox("Use Lowered Ironsights", "tacrp_irons_lower")
     cb_irons_lower:AddChoice("0  - Never", "0")
@@ -604,9 +582,7 @@ local function menu_server_ti(panel)
     cb_irons_lower:AddChoice("2  - Always", "2")
     cb_irons_lower:DockMargin(8, 0, 0, 0)
     lb_irons_lower:SizeToContents()
-    panel:AddControl("label", {
-        text = "While aiming with ironsights, lower the weapon and draw a dot where the point of aim is (even when Enable Crosshair is off)."
-    })
+    panel:ControlHelp("While aiming with ironsights, lower the weapon and draw a dot where the point of aim is (even when Enable Crosshair is off). The dot does not display weapon sway or spread.")
 
     header(panel, "\nAttachments")
     panel:AddControl("checkbox", {
@@ -617,9 +593,7 @@ local function menu_server_ti(panel)
         label = "Attachment Locking",
         command = "TacRP_lock_atts"
     })
-    panel:AddControl("label", {
-        text = "In Locking mode, owning one attachment allows you to use it on multiple weapons."
-    })
+    panel:ControlHelp("In Locking mode, owning one attachment allows you to use it on multiple weapons.")
     panel:AddControl("checkbox", {
         label = "Lose Attachments On Death",
         command = "TacRP_loseattsondie"
@@ -630,9 +604,7 @@ local function menu_server_ti(panel)
     })
 
     header(panel, "\nWeapon Slot Restriction")
-    panel:AddControl("label", {
-        text = "Restrict TacRP weapons for pickup/spawning based on their weapon slot."
-    })
+    panel:ControlHelp("Restrict TacRP weapons for pickup/spawning based on their weapon slot.")
     panel:AddControl("slider", {
         label = "Max Per Slot (0 - no limit)",
         command = "tacrp_slot_limit",
@@ -644,16 +616,12 @@ local function menu_server_ti(panel)
         label = "Use HL2-style slots",
         command = "tacrp_slot_hl2"
     })
-    panel:AddControl("label", {
-        text = "Use slot 4 for MGs, shotguns and snipers, slot 5 for explosives."
-    })
+    panel:ControlHelp("Use slot 4 for MGs, shotguns and snipers, slot 5 for explosives.")
     panel:AddControl("checkbox", {
         label = "Count ALL weapons",
         command = "tacrp_slot_countall"
     })
-    panel:AddControl("label", {
-        text = "WARNING! If set, non-TacRP weapons may be dropped/removed to make room for TacRP weapons! This can have unintended consequences!"
-    })
+    panel:ControlHelp("WARNING! If set, non-TacRP weapons may be dropped/removed to make room for TacRP weapons! This can have unintended consequences!")
 
     local cb_slot_action, lb_slot_action = panel:ComboBox("Weapon Spawning Behavior", "tacrp_slot_action")
     cb_slot_action:AddChoice("0 - Fail", "0")
@@ -662,9 +630,7 @@ local function menu_server_ti(panel)
     cb_slot_action:DockMargin(8, 0, 0, 0)
     lb_slot_action:SizeToContents()
 
-    panel:AddControl("label", {
-        text = "Only affects giving weapons with the spawnmenu."
-    })
+    panel:ControlHelp("Only affects giving weapons with the spawnmenu.")
 
     header(panel, "\nNPC")
     panel:AddControl("checkbox", {
@@ -678,13 +644,6 @@ local function menu_server_ti(panel)
 
 
     header(panel, "\nMiscellaneous")
-    panel:AddControl("slider", {
-        label = "Default Clip Multiplier",
-        command = "tacrp_defaultammo",
-        type = "float",
-        min = 0,
-        max = 10,
-    })
     panel:AddControl("checkbox", {
         label = "Supply Boxes Resupply Grenades",
         command = "TacRP_resupply_grenades"
@@ -693,29 +652,43 @@ local function menu_server_ti(panel)
         label = "Default Body Damage Cancel",
         command = "TacRP_bodydamagecancel"
     })
-    panel:AddControl("label", {
-        text = "Only disable this if another addon or gamemode is also modifying default hitgroup damage multipliers."
-    })
+    panel:ControlHelp("Only disable this if another addon or gamemode is also modifying default hitgroup damage multipliers.")
 end
 
 local function menu_balance_ti(panel)
-    panel:AddControl("checkbox", {
-        label = "Arcade Mode",
-        command = "tacrp_arcade"
-    })
-    panel:AddControl("label", {
-        text = "Arcade mode tweaks weapons to be similar in strength to each other and significantly increases mobility on all weapons. Recommended for Sandbox."
-    })
+    header(panel, "Balance")
+    panel:Help("Adjust weapon attributes to suit your gameplay needs.\nAutomatic sets balance to TTT in TTT, Tactical for DarkRP/Helix, and Arcade otherwise.")
+    local cb_balance, lb_balance = panel:ComboBox("Weapon Balance", "tacrp_balance")
+    cb_balance:AddChoice("Automatic", "-1")
+    cb_balance:AddChoice("Tactical", "0")
+    cb_balance:AddChoice("Arcade", "1")
+    cb_balance:AddChoice("TTT", "2")
+    cb_balance:DockMargin(8, 0, 0, 0)
+    lb_balance:SizeToContents()
 
+    panel:Help("Tactical: Low mobility, medium TTK. Weapons are divided into 4 tiers.")
+    panel:Help("Arcade: Very high mobility, low TTK.")
+    panel:Help("TTT: Medium mobility, high TTK. Some weapons have lower fire rate.")
+
+    header(panel, "\nAmmo")
     panel:AddControl("checkbox", {
         label = "Infinite Ammo",
         command = "tacrp_infiniteammo"
     })
+    panel:ControlHelp("Reloading does not require or consume ammo.")
     panel:AddControl("checkbox", {
         label = "Infinite Grenades",
         command = "tacrp_infinitegrenades"
     })
+    panel:AddControl("slider", {
+        label = "Default Clip Multiplier",
+        command = "tacrp_defaultammo",
+        type = "float",
+        min = 0,
+        max = 10,
+    })
 
+    header(panel, "\nFeatures")
     panel:AddControl("checkbox", {
         label = "Enable Sway",
         command = "tacrp_sway"
@@ -732,42 +705,35 @@ local function menu_balance_ti(panel)
         label = "Enable Physical Bullets",
         command = "TacRP_physbullet"
     })
+    panel:ControlHelp("Bullets will be hitscan up to a certain range depending on muzzle velocity.")
+
     panel:AddControl("checkbox", {
         label = "Enable Holstering",
         command = "TacRP_holster"
     })
-    panel:AddControl("label", {
-        text = "Play a holster animation before pulling out another weapon. If disabled, holstering is instant."
-    })
+    panel:ControlHelp("Play a holster animation before pulling out another weapon. If disabled, holstering is instant.")
     panel:AddControl("checkbox", {
-        label = "Enable Fixed Shotgun Patterns",
+        label = "Enable Shotgun Patterns",
         command = "tacrp_fixedspread"
     })
-    panel:AddControl("label", {
-        text = "Shotgun pellets uses a fixed pattern that covers the spread area for more consistency. They are still subject to a small amount of randomness."
-    })
+    panel:ControlHelp("Shotgun pellets uses a pattern that covers the spread area for more consistency.")
     panel:AddControl("checkbox", {
-        label = "Enabled Fixed Pattern Randomness",
+        label = "Enable Pattern Randomness",
         command = "tacrp_pelletspread"
     })
-    panel:AddControl("label", {
-        text = "Additional random spread onto the fixed pattern. Does not affect total spread. If disabled, shotgun patterns become completely static."
-    })
+    panel:ControlHelp("Add random spread onto the pattern. Does not affect total spread. If disabled, shotgun patterns become completely static.")
     panel:AddControl("checkbox", {
         label = "Enable Scope Glint",
         command = "tacrp_glint"
     })
-    panel:AddControl("label", {
-        text = "Scopes show a visible glint. Glint size is dependent on angle of view, scope magnification and distance, and is bigger when zoomed in."
-    })
+    panel:ControlHelp("Scopes show a visible glint. Glint size is dependent on angle of view, scope magnification and distance, and is bigger when zoomed in.")
     panel:AddControl("checkbox", {
         label = "Enable Blinding Flashlights",
         command = "tacrp_flashlight_blind"
     })
-    panel:AddControl("label", {
-        text = "Flashlight glare will obscure vision based on distance and viewing angle. Effect is more significant on scopes. If disabled, glare sprite will be visible but not grow in size."
-    })
+    panel:ControlHelp("Flashlight glare will obscure vision based on distance and viewing angle. Effect is more significant on scopes. If disabled, glare sprite will be visible but not grow in size.")
 
+    header(panel, "\nSliders")
     panel:AddControl("slider", {
         label = "Flashbang Slow",
         command = "tacrp_flash_slow",
