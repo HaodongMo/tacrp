@@ -1,5 +1,5 @@
 function TacRP.Flashbang(ent, pos, radius, time_max, time_min, time_stunadd)
-
+    time_stunadd = time_stunadd or 0.5
     for _, k in ipairs(ents.FindInSphere(pos, radius)) do
         if k:IsPlayer() then
             local dist = k:EyePos():Distance(pos)
@@ -14,8 +14,14 @@ function TacRP.Flashbang(ent, pos, radius, time_max, time_min, time_stunadd)
             if tr.Fraction < 1 then
                 time = 0
             else
+                local wep = k:GetActiveWeapon()
+                if IsValid(wep) and wep.ArcticTacRP and wep:GetValue("StunResist") then
+                    time = math.sqrt(time) * 0.5
+                    time_stunadd = math.sqrt(time_stunadd) * 0.5
+                end
+
                 k:SetNWFloat("TacRPStunStart", CurTime())
-                k:SetNWFloat("TacRPStunDur", time + (time_stunadd or 0.5))
+                k:SetNWFloat("TacRPStunDur", time + time_stunadd)
             end
 
             net.Start("tacrp_flashbang")

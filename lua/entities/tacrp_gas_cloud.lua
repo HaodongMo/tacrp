@@ -120,6 +120,14 @@ function ENT:Think()
 
         for i, k in pairs(ents.FindInSphere(origin, 300)) do
             if k:IsPlayer() or k:IsNPC() or k:IsNextBot() then
+
+                if k:IsPlayer() then
+                    local wep = k:GetActiveWeapon()
+                    if IsValid(wep) and wep.ArcticTacRP and wep:GetValue("GasImmunity") then
+                        continue
+                    end
+                end
+
                 local tr = util.TraceLine({
                     start = origin,
                     endpos = k:EyePos() or k:WorldSpaceCenter(),
@@ -191,7 +199,10 @@ end
 -- cs gas strips armor and will try not deal lethal damage
 hook.Add("EntityTakeDamage", "tacrp_gas", function(ent, dmg)
     if ent:IsPlayer() and dmg:GetDamageType() == DMG_NERVEGAS and bit.band(dmg:GetDamageCustom(), 1024) == 1024 then
-        if ent:Health() <= dmg:GetDamage() then
+        local wep = ent:GetActiveWeapon()
+        if IsValid(wep) and wep.ArcticTacRP and wep:GetValue("GasImmunity") then
+            dmg:SetDamage(0)
+        elseif ent:Health() <= dmg:GetDamage() then
             dmg:SetDamage(math.max(0, ent:Health() - 1))
         end
         if dmg:GetDamage() <= 0 then return true end
@@ -199,7 +210,7 @@ hook.Add("EntityTakeDamage", "tacrp_gas", function(ent, dmg)
 end)
 
 hook.Add("PostEntityTakeDamage", "tacrp_gas", function(ent, dmg, took)
-    if took and ent:IsPlayer() and dmg:GetDamageType() == DMG_NERVEGAS and bit.band(dmg:GetDamageCustom(), 1024) == 1024 then
+    if took and ent:IsPlayer() and dmg:GetDamageType() == DMG_NERVEGAS and bit.band(dmg:GetDamageCustom(), 1024) == 1024 and dmg:GetDamage() > 0 then
         ent:SetArmor(math.max(0, ent:Armor() - dmg:GetDamage()))
         if IsValid(dmg:GetInflictor()) and (dmg:GetInflictor():GetClass() == "tacrp_gas_cloud" or dmg:GetInflictor():GetClass() == "tacrp_smoke_cloud_ninja") and dmg:GetInflictor():GetPos():Distance(ent:GetPos()) <= 350 then
             ent:SetNWFloat("TacRPGasEnd", CurTime() + 10)

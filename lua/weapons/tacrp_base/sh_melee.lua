@@ -121,7 +121,7 @@ end
 
 hook.Add("PostEntityTakeDamage", "tacrp_melee", function(ent, dmg, took)
     if ent.TacRPBashSlow then
-        if took and ent:IsPlayer() then
+        if took and ent:IsPlayer() and !(IsValid(ent:GetActiveWeapon()) and ent:GetActiveWeapon().ArcticTacRP and ent:GetActiveWeapon():GetValue("StunResist")) then
             ent:SetNWFloat("TacRPLastBashed", CurTime())
         end
         ent.TacRPBashSlow = false
