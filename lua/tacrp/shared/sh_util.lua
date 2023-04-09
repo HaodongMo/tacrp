@@ -61,3 +61,7 @@ function TacRP.CancelBodyDamage(ent, dmginfo, hitgroup)
 
     return dmginfo
 end
+
+function TacRP.GetRandomWeapon(key)
+
+end

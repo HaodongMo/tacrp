@@ -309,7 +309,15 @@ local conVars = {
         replicated = true,
         notify = true,
     },
+    {
+        name = "defaultammo",
+        default = "2",
+        replicated = true,
+        notify = false,
+        min = 0,
+    },
 
+    // --------------------------- Slots
     {
         name = "slot_hl2",
         default = "0",
@@ -347,6 +355,7 @@ local conVars = {
         max = 1
     },
 
+    // --------------------------- Irons
     {
         name = "irons_lower",
         default = "1",
@@ -362,6 +371,24 @@ local conVars = {
         replicated = true,
         min = 0,
         max = 2,
+    },
+
+    // --------------------------- TTT
+    {
+        name = "ttt_weapon_include",
+        default = "1",
+        notify = true,
+        replicated = true,
+        min = 0,
+        max = 1,
+    },
+    {
+        name = "ttt_weapon_replace",
+        default = "1", // fraction chance
+        notify = true,
+        replicated = true,
+        min = 0,
+        max = 1,
     },
 }
 
@@ -651,6 +678,13 @@ local function menu_server_ti(panel)
 
 
     header(panel, "\nMiscellaneous")
+    panel:AddControl("slider", {
+        label = "Default Clip Multiplier",
+        command = "tacrp_defaultammo",
+        type = "float",
+        min = 0,
+        max = 10,
+    })
     panel:AddControl("checkbox", {
         label = "Supply Boxes Resupply Grenades",
         command = "TacRP_resupply_grenades"

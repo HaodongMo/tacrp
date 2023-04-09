@@ -119,7 +119,7 @@ function SWEP:GetNPCBurstSettings()
     elseif mode == 0 then
         return 0, 0, delay
     elseif mode == 1 then
-        local c = self:GetValue("ClipSize")
+        local c = self:GetCapacity()
         return math.ceil(c * 0.075), math.max(1, math.floor(c * math.Rand(0.15, 0.3))), delay + math.Rand(0.1, 0.2)
     elseif mode >= 2 then
         return math.min(self:Clip1(), 1 + math.floor(0.5 / delay)), math.min(self:Clip1(), 1 + math.floor(2 / delay)), delay
@@ -177,7 +177,7 @@ function SWEP:NPC_Initialize()
 
     self:SetBaseSettings()
 
-    self:SetClip1(self:GetMaxClip1())
+    self:SetClip1(self:GetCapacity())
 
     if math.random() <= 0.5 then
         self:SetFiremode(math.random(1, self:GetFiremodeAmount()))

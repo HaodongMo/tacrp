@@ -231,7 +231,7 @@ function SWEP:PrimaryAttack()
             self:GetOwner():LagCompensation(true)
 
             if !hitscan or fixed_spread then
-                local d = math.random() -- self:GetNthShot() / self:GetValue("ClipSize")
+                local d = math.random() -- self:GetNthShot() / self:GetCapacity()
                 for i = 1, num do
                     local new_dir = Angle(dir)
                     if fixed_spread then

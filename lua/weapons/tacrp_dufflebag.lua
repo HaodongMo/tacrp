@@ -78,6 +78,3 @@ end
 
 function SWEP:SecondaryAttack()
 end
-
-function SWEP:GiveDefaultAmmo()
-end

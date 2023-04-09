@@ -220,8 +220,7 @@ SWEP.Ammo = "pistol"
 
 SWEP.InfiniteAmmo = false // do not consume reserve ammo
 
-SWEP.SupplyAmmoType = false // overrides clipsize/ammo for ammo pickups
-SWEP.SupplyAmmoAmount = false
+SWEP.SupplyAmmoAmount = false // overrides clipsize/ammo for ammo pickups
 SWEP.SupplyLimit = 1 // Multiplier for supply ammo
 
 SWEP.TryUnholster = false // if we have an "unholster" animation use it instead of "deploy"

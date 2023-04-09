@@ -30,6 +30,21 @@ TacRP.TTTAmmoToClipMax = {
     ["buckshot"] = 24
 }
 
+TacRP.TTTReplaceLookup = {
+    ["weapon_ttt_glock"] = true,
+    ["weapon_ttt_m16"] = true,
+    ["weapon_zm_mac10"] = true,
+    ["weapon_zm_pistol"] = true,
+    ["weapon_zm_revolver"] = true,
+    ["weapon_zm_rifle"] = true,
+    ["weapon_zm_shotgun"] = true,
+    ["weapon_zm_sledge"] = true,
+
+    ["weapon_zm_molotov"] = true,
+    ["weapon_ttt_confgrenade"] = true,
+    ["weapon_ttt_smokegrenade"] = true,
+}
+
 if engine.ActiveGamemode() != "terrortown" then return end
 
 hook.Add("OnGamemodeLoaded", "TacRP_TTT", function()
@@ -105,5 +120,43 @@ hook.Add("OnGamemodeLoaded", "TacRP_TTT", function()
             wep.Icon = "entities/npc_headcrab.png"
         end
 
+    end
+end)
+
+hook.Add( "OnEntityCreated", "TacRP_TTT_Spawn", function(ent)
+    if CLIENT then return end
+    if GetConVar("ttt_weapon_include"):GetBool()
+            and TacRP.TTTReplaceLookup[ent:GetClass()] != nil
+            and math.random() <= GetConVar("ttt_weapon_replace"):GetFloat() then
+        timer.Simple(0, function()
+            if !IsValid(ent) or IsValid(ent:GetOwner()) then return end
+
+
+            --[[]
+            local class = ent:GetClass()
+
+            local wpn = TacRP.GetRandomWeapon(class)
+
+            if wpn then
+                local wpnent = ents.Create(wpn)
+                wpnent:SetPos(ent:GetPos())
+                wpnent:SetAngles(ent:GetAngles())
+
+                wpnent:NPC_Initialize()
+
+                wpnent:Spawn()
+
+                if engine.ActiveGamemode() == "terrortown" and GetConVar("arccw_ttt_atts"):GetBool() then
+                    wpnent:NPC_SetupAttachments()
+                end
+
+                timer.Simple(0, function()
+                    if !ent:IsValid() then return end
+                    wpnent:OnDrop(true)
+                    ent:Remove()
+                end)
+            end
+            ]]
+        end)
     end
 end)

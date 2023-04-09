@@ -66,7 +66,7 @@ function ENT:ApplyAmmo(ply)
     local t2
 
     if wpn.ArcticTacRP then
-        ammotype = wpn:GetValue("SupplyAmmoType") or wpn:GetValue("Ammo")
+        ammotype = wpn:GetValue("Ammo")
         clipsize = wpn.ClipSize
         max = (wpn:GetValue("SupplyAmmoAmount") or (clipsize * 6)) * (wpn:GetValue("SupplyLimit") or 1)
 

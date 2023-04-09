@@ -174,9 +174,6 @@ function SWEP:PrimaryAttack()
     return
 end
 
-function SWEP:GiveDefaultAmmo()
-end
-
 function SWEP:ThinkSprint()
 end
 

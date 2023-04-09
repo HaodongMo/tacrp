@@ -52,3 +52,7 @@ function SWEP:CountAttachments()
     end
     return count
 end
+
+function SWEP:GetMaxClip1()
+    return self:GetCapacity()
+end

@@ -46,11 +46,6 @@ function SWEP:Deploy()
     self:GetOwner():DoAnimationEvent(ACT_HL2MP_GESTURE_RANGE_ATTACK_KNIFE)
 
     if SERVER then
-        if !self.GaveDefaultAmmo then
-            self:GiveDefaultAmmo()
-            self.GaveDefaultAmmo = true
-        end
-
         self:NetworkWeapon()
     end
 
@@ -76,12 +71,6 @@ function SWEP:Deploy()
 
     return true
 end
-
-function SWEP:GiveDefaultAmmo()
-    self:SetClip1(self:GetValue("ClipSize"))
-    self:GetOwner():GiveAmmo(self:GetValue("ClipSize") * 2, self:GetValue("Ammo"))
-end
-
 
 local v0 = Vector(0, 0, 0)
 local v1 = Vector(1, 1, 1)
@@ -270,14 +259,14 @@ function SWEP:SetBaseSettings()
         self.Primary.Ammo = TacRP.QuickNades[self.PrimaryGrenade].Ammo or ""
         self.Primary.DefaultClip = 1
     else
-        self.Primary.ClipSize = self:GetValue("ClipSize")
+        self.Primary.ClipSize = self:GetCapacity()
         self.Primary.Ammo = self:GetValue("Ammo")
-        self.Primary.DefaultClip = self.Primary.ClipSize
+        self.Primary.DefaultClip = math.ceil(self.Primary.ClipSize * GetConVar("tacrp_defaultammo"):GetFloat())
     end
 
-    if SERVER and self:GetValue("ClipSize") > 0 and self:Clip1() > self:GetValue("ClipSize") then
-        self:GetOwner():GiveAmmo(self:Clip1() - self:GetValue("ClipSize"), self:GetValue("Ammo"))
-        self:SetClip1(self:GetValue("ClipSize"))
+    if SERVER and self:GetCapacity() > 0 and self:Clip1() > self:GetCapacity() then
+        self:GetOwner():GiveAmmo(self:Clip1() - self:GetCapacity(), self:GetValue("Ammo"))
+        self:SetClip1(self:GetCapacity())
     end
 end
 
@@ -317,17 +306,12 @@ function SWEP:OnRemove()
 end
 
 function SWEP:EquipAmmo(ply)
-    local ammotype = self:GetValue("SupplyAmmoType") or self.Primary.Ammo
+    local ammotype = self.Primary.Ammo
     if ammotype == "" then return end
 
-    local supplyamount = self.GaveDefaultAmmo and self:Clip1() or math.max(1, self.Primary.ClipSize)
+    local supplyamount = self.GaveDefaultAmmo and self:Clip1() or math.ceil(math.max(1, self.Primary.ClipSize) * GetConVar("tacrp_defaultammo"):GetFloat())
     ply:GiveAmmo(supplyamount, ammotype)
 end
 
 function SWEP:Equip()
-    local ply = self:GetOwner()
-    if !self.GaveDefaultAmmo and IsValid(ply) and ply:IsPlayer() then
-        self:GiveDefaultAmmo()
-        self.GaveDefaultAmmo = true
-    end
 end

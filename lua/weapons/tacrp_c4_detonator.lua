@@ -38,8 +38,6 @@ SWEP.CanBlindFire = false
 SWEP.Ammo = "ti_c4"
 SWEP.ClipSize = -1
 SWEP.Primary.ClipSize = -1
-
-SWEP.SupplyAmmoType = "ti_c4"
 SWEP.SupplyAmmoAmount = 3
 
 // handling
@@ -146,10 +144,6 @@ function SWEP:SecondaryAttack()
         self:GetOwner():SetNWInt("ti_nade", 8)
     end
     self:PrimeGrenade()
-end
-
-function SWEP:GiveDefaultAmmo()
-    self:GetOwner():GiveAmmo(1, "ti_c4")
 end
 
 SWEP.AutoSpawnable = false

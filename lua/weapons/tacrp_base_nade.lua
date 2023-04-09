@@ -45,9 +45,6 @@ SWEP.Sway = 0
 
 SWEP.QuickNadeTimeMult = 0.6
 
-function SWEP:GiveDefaultAmmo()
-end
-
 function SWEP:ThinkSprint()
 end
 

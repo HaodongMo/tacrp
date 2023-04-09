@@ -326,7 +326,7 @@ function SWEP:DrawHUDBackground()
                     local row1_bullets = 0
                     local row2_bullets = 0
                     local rackrise = 0
-                    local cs = self:GetValue("ClipSize")
+                    local cs = self:GetCapacity()
                     local c1 = self:Clip1()
 
                     local row_size = 15
@@ -337,8 +337,8 @@ function SWEP:DrawHUDBackground()
                     local row = math.ceil(c1 / row_size)
                     local maxrow = math.ceil(cs / row_size)
 
-                    local row2_size = math.min(row_size, self:GetValue("ClipSize"))
-                    local row1_size = math.Clamp(self:GetValue("ClipSize") - row2_size, 0, row_size)
+                    local row2_size = math.min(row_size, self:GetCapacity())
+                    local row1_size = math.Clamp(self:GetCapacity() - row2_size, 0, row_size)
 
                     if c1 > row_size * 2 then
                         if row == maxrow then

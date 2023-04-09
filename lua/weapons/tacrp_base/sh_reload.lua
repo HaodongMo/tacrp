@@ -18,8 +18,8 @@ function SWEP:Reload()
     end
 
     if self:StillWaiting(true) then return end
-    if self:GetValue("ClipSize") <= 0 then return end
-    if self:Clip1() >= self:GetValue("ClipSize") then return end
+    if self:GetCapacity() <= 0 then return end
+    if self:Clip1() >= self:GetCapacity() then return end
     if self:Ammo1() <= 0 and !self:GetInfiniteAmmo() then return end
 
     -- self:ScopeToggle(0)
@@ -32,7 +32,7 @@ function SWEP:Reload()
         anim = "reload_start"
     else
         self:SetTimer(self:GetValue("LoadInTime") * self:GetValue("ReloadTimeMult"), function()
-            self:SetLoadedRounds(math.min(self:GetValue("ClipSize"), self:Clip1() + self:Ammo1()))
+            self:SetLoadedRounds(math.min(self:GetCapacity(), self:Clip1() + self:Ammo1()))
             self:DoBulletBodygroups()
         end, "SetLoadedRounds")
     end
@@ -96,7 +96,7 @@ function SWEP:RestoreClip(amt)
 
     local lastclip1 = self:Clip1()
 
-    self:SetClip1(math.min(math.min(self:Clip1() + amt, self:GetValue("ClipSize")), reserve))
+    self:SetClip1(math.min(math.min(self:Clip1() + amt, self:GetCapacity()), reserve))
 
     if !self:GetInfiniteAmmo() then
         reserve = reserve - self:Clip1()
@@ -113,7 +113,7 @@ end
 
 function SWEP:EndReload()
     if self:GetValue("ShotgunReload") then
-        if self:Clip1() >= self:GetValue("ClipSize") or (!self:GetInfiniteAmmo() and self:Ammo1() == 0) or self:GetEndReload() then
+        if self:Clip1() >= self:GetCapacity() or (!self:GetInfiniteAmmo() and self:Ammo1() == 0) or self:GetEndReload() then
             if self:Clip1() == self:GetLoadedRounds() then
                 self:PlayAnimation("reload_start", -0.75 * self:GetValue("ReloadTimeMult"), true, true)
             else
@@ -128,7 +128,7 @@ function SWEP:EndReload()
         else
             local t = self:PlayAnimation("reload", self:GetValue("ReloadTimeMult"), true)
 
-            local res = math.min(math.min(3, self:GetValue("ClipSize") - self:Clip1()), self:GetInfiniteAmmo() and math.huge or self:Ammo1())
+            local res = math.min(math.min(3, self:GetCapacity() - self:Clip1()), self:GetInfiniteAmmo() and math.huge or self:Ammo1())
 
             local delay = 0.9
             for i = 1, res do
@@ -147,7 +147,7 @@ function SWEP:EndReload()
             self:DoBulletBodygroups()
         end
     else
-        self:RestoreClip(self:GetValue("ClipSize"))
+        self:RestoreClip(self:GetCapacity())
         self:SetReloading(false)
 
         self:SetNthShot(0)
@@ -203,4 +203,12 @@ end
 
 function SWEP:GetInfiniteAmmo()
     return GetConVar("tacrp_infiniteammo"):GetBool() or self:GetValue("InfiniteAmmo")
+end
+
+function SWEP:GetCapacity(base)
+    if base then
+        return self:GetBaseValue("ClipSize")
+    else
+        return self:GetValue("ClipSize")
+    end
 end
