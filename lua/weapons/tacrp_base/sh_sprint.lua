@@ -38,8 +38,13 @@ function SWEP:GetSprintDelta()
 end
 
 function SWEP:EnterSprint()
-    self:ToggleBlindFire(TacRP.BLINDFIRE_NONE)
-
+    if !self:CanShootInSprint() then
+        self:ToggleBlindFire(TacRP.BLINDFIRE_NONE)
+    end
+    if !self:CanReloadInSprint() and self:GetReloading() then
+        self:CancelReload()
+        self:Idle()
+    end
     self:ScopeToggle(0)
 
     self:SetShouldHoldType()
@@ -74,4 +79,16 @@ function SWEP:ThinkSprint()
     end
 
     self:SetSprintAmount(amt)
+end
+
+function SWEP:CanShootInSprint(base)
+    if base then
+        return self:GetBaseValue("ShootWhileSprint")
+    else
+        return self:GetValue("ShootWhileSprint")
+    end
+end
+
+function SWEP:CanReloadInSprint(base)
+    return GetConVar("tacrp_sprint_reload"):GetBool()
 end

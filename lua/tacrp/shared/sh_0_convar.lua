@@ -127,18 +127,6 @@ local conVars = {
         replicated = true,
     },
     {
-        name = "infiniteammo",
-        default = "0",
-        replicated = true,
-        notify = true,
-    },
-    {
-        name = "infinitegrenades",
-        default = "0",
-        replicated = true,
-        notify = true,
-    },
-    {
         name = "rock_funny",
         default = "0.05"
     },
@@ -310,11 +298,33 @@ local conVars = {
         notify = true,
     },
     {
+        name = "sprint_reload",
+        default = "1",
+        replicated = true,
+        notify = true,
+        min = 0,
+        max = 1,
+    },
+
+    // --------------------------- Ammo
+    {
         name = "defaultammo",
         default = "2",
         replicated = true,
         notify = false,
         min = 0,
+    },
+    {
+        name = "infiniteammo",
+        default = "0",
+        replicated = true,
+        notify = true,
+    },
+    {
+        name = "infinitegrenades",
+        default = "0",
+        replicated = true,
+        notify = true,
     },
 
     // --------------------------- Slots
@@ -670,7 +680,7 @@ local function menu_balance_ti(panel)
     panel:Help("Arcade: Very high mobility, low TTK.")
     panel:Help("TTT: Medium mobility, high TTK. Some weapons have lower fire rate.")
 
-    header(panel, "\nAmmo")
+    header(panel, "\nAmmo & Reloading")
     panel:AddControl("checkbox", {
         label = "Infinite Ammo",
         command = "tacrp_infiniteammo"
@@ -679,6 +689,10 @@ local function menu_balance_ti(panel)
     panel:AddControl("checkbox", {
         label = "Infinite Grenades",
         command = "tacrp_infinitegrenades"
+    })
+    panel:AddControl("checkbox", {
+        label = "Allow Reload while Sprinting",
+        command = "tacrp_sprint_reload"
     })
     panel:AddControl("slider", {
         label = "Default Clip Multiplier",
@@ -706,7 +720,6 @@ local function menu_balance_ti(panel)
         command = "TacRP_physbullet"
     })
     panel:ControlHelp("Bullets will be hitscan up to a certain range depending on muzzle velocity.")
-
     panel:AddControl("checkbox", {
         label = "Enable Holstering",
         command = "TacRP_holster"

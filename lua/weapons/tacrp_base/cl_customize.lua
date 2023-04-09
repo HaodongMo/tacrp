@@ -109,7 +109,7 @@ function SWEP:CreateCustomizeHUD()
 
         if self.SubCatTier and self.SubCatType then
             local type_txt = string.sub(self.SubCatType, 2)
-            if !TacRP.UseTiers() then
+            if TacRP.UseTiers() then
                 type_txt = string.sub(self.SubCatTier, 2) .. " " .. type_txt
             end
             surface.SetFont("TacRP_Myriad_Pro_12")

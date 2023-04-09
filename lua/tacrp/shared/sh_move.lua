@@ -225,12 +225,9 @@ function TacRP.StartCommand(ply, cmd)
 
     TacRP.LastEyeAngles = cmd:GetViewAngles()
 
-
     if cmd:KeyDown(IN_SPEED) and (
         -- Sprint cannot interrupt a runaway burst
         (wpn:GetBurstCount() > 0 and wpn:GetValue("RunawayBurst"))
-        -- Cannot sprint while reloading if convar is set
-        or (!GetConVar("tacrp_arcade"):GetBool() and wpn:GetReloading())
         -- Stunned by a flashbang and cannot sprint
         or (ply:GetNWFloat("TacRPStunStart", 0) + ply:GetNWFloat("TacRPStunDur", 0) > CurTime())
     ) then
