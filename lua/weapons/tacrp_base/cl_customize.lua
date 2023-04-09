@@ -412,347 +412,14 @@ function SWEP:CreateCustomizeHUD()
         end
     end
 
-
-
-    local stats = {
-        -- {
-        --     Name = "",
-        --     Value = "",
-        --     LowerIsBetter = false,
-        --     AggregateFunction = nil,
-        --     Unit = ""
-        -- }
-        {
-            Name = "Spread",
-            Description = "Base accuracy of the weapon.",
-            AggregateFunction = function(base, val)
-                return math.Round(math.deg(val), 2)
-            end,
-            Unit = "°",
-            Value = "Spread",
-            LowerIsBetter = true,
-        },
-        {
-            Name = "RPM",
-            Description = "Rate of fire of the weapon.",
-            Value = "RPM"
-        },
-        {
-            Name = "Capacity",
-            Description = "Amount of ammo this weapon can spend before reloading.",
-
-            Value = "ClipSize",
-        },
-        {
-            Name = "Sprint To Fire",
-            Description = "Time required to transition from fully sprinting to being able to fire.",
-
-            Value = "SprintToFireTime",
-            Unit = "s",
-            LowerIsBetter = true,
-        },
-        {
-            Name = "Aim Down Sights",
-            Description = "Time required to transition from hipfiring to aiming.",
-            Value = "AimDownSightsTime",
-            Unit = "s",
-            LowerIsBetter = true,
-            ValueCheck = "Scope",
-        },
-        {
-            Name = "Muzzle Velocity",
-            Description = "How fast the bullet travels in the world.",
-            AggregateFunction = function(base, val)
-                return math.Round(self:GetMuzzleVelocity(base), 2)
-            end,
-            ConVarCheck = "tacrp_physbullet",
-            Value = "MuzzleVelocity",
-            LowerIsBetter = false,
-            Unit = "m/s"
-        },
-        {
-            Name = "Recoil Kick",
-            Description = "Strength of \"felt recoil\" that throws off your aim.",
-            Value = "RecoilKick",
-            LowerIsBetter = true,
-        },
-        {
-            Name = "Recoil Spread",
-            Description = {"Inaccuracy per unit of recoil. Larger value means the weapon becomes",
-            "inaccurate faster while continuous firing."},
-            AggregateFunction = function(base, val)
-                return math.Round(math.deg(val), 3)
-            end,
-            Unit = "°",
-            Value = "RecoilSpreadPenalty",
-            LowerIsBetter = true,
-        },
-        {
-            Name = "Recoil Recovery",
-            Description = {"Rate at which accumulated recoil disspiates, in shots per second.",
-            "Larger value means the effects of recoil disappear faster",
-            "after the reset time."},
-            AggregateFunction = function(base, val)
-                return math.Round(val, 2)
-                --return math.Round(math.deg(val * (base and self:GetTable().RecoilSpreadPenalty or self:GetValue("RecoilSpreadPenalty"))), 1)
-            end,
-            Unit = "/s",
-            Value = "RecoilDissipationRate",
-        },
-        {
-            Name = "Recoil Reset Time",
-            Description = {"Duration of delay before recoil can start to dissipate.",
-            "Larger value means you must wait longer between shots to start recovering",
-            "from recoil."},
-            Value = "RecoilResetTime",
-            LowerIsBetter = true,
-        },
-        {
-            Name = "Maximum Recoil",
-            Description = "Maximum amount of inaccuracy from continuous firing.",
-            Value = "RecoilMaximum",
-            LowerIsBetter = true,
-            HideIfSame = true,
-        },
-        {
-            Name = "First Shot Recoil",
-            Description = {"Recoil multiplier on the first shot, reset after the reset time has passed.",
-            "Does not affect recoil kick."},
-            Value = "RecoilFirstShotMult",
-            LowerIsBetter = true,
-            HideIfSame = true,
-        },
-        {
-            Name = "Crouching Recoil",
-            Description = "Recoil multiplier when crouched and not moving.",
-            AggregateFunction = function(base, val)
-                return math.min(100, math.Round(val * 100, 0))
-            end,
-            Unit = "%",
-            Value = "RecoilCrouchMult",
-            LowerIsBetter = true,
-            HideIfSame = true,
-        },
-        {
-            Name = "Move Speed",
-            Description = {"Speed multiplier while the weapon is held up.",
-            "Has no effect when weapon is in safety."},
-            AggregateFunction = function(base, val)
-                return math.min(100, math.Round(val * 100, 0))
-            end,
-            Unit = "%",
-            Value = "MoveSpeedMult"
-        },
-        {
-            Name = "Shooting Speed",
-            Description = {"Speed multiplier from firing the weapon.",
-            "Accumulating recoil increases slowdown intensity."},
-            AggregateFunction = function(base, val)
-                return math.min(100, math.Round(val * 100, 0))
-            end,
-            Unit = "%",
-            Value = "ShootingSpeedMult"
-        },
-        {
-            Name = "Sighted Speed",
-            Description = "Speed multiplier while the weapon is aiming.",
-            AggregateFunction = function(base, val)
-                return math.min(100, math.Round(val * 100, 0))
-            end,
-            Unit = "%",
-            Value = "SightedSpeedMult",
-            ValueCheck = "Scope",
-        },
-        {
-            Name = "Reload Speed",
-            Description = "Speed multiplier while reloading.",
-            AggregateFunction = function(base, val)
-                return math.min(100, math.Round(val * 100, 0))
-            end,
-            Unit = "%",
-            Value = "ReloadSpeedMult",
-            --ConVarCheck = "tacrp_arcade",
-            --ConVarInvert = true,
-        },
-        {
-            Name = "Reload Time",
-            Description = "Amount of time required to perform a reload.",
-            AggregateFunction = function(base, val)
-                return math.Round(self:GetReloadTime(base), 2)
-            end,
-            Value = "ReloadTimeMult",
-            LowerIsBetter = true,
-            Unit = "s"
-        },
-        {
-            Name = "Deploy Time",
-            Description = "Amount of time required to bring up the weapon. Holstering is instant.",
-            AggregateFunction = function(base, val)
-                return math.Round(self:GetDeployTime(base), 2)
-            end,
-            Value = "DeployTimeMult",
-            LowerIsBetter = true,
-            HideIfSame = true,
-            Unit = "s"
-        },
-        {
-            Name = "Penetration",
-            Description = {"Thickness of metal this weapon can penetrate.",
-            "Actual penetration is material-dependent."},
-            Value = "Penetration",
-            Unit = "\""
-        },
-        {
-            Name = "Sway",
-            Description = {"Amount of sway in hipfire. Sway affects your firing direction",
-            "without changing your aiming direction."},
-
-            Value = "Sway",
-            LowerIsBetter = true,
-            ConVarCheck = "tacrp_sway",
-        },
-        {
-            Name = "Sway In Sights",
-            Description = {"Amount of sway while aiming. Sway affects your firing direction",
-            "without changing your aiming direction."},
-            Value = "ScopedSway",
-            LowerIsBetter = true,
-            ConVarCheck = "tacrp_sway",
-            ValueCheck = "Scope",
-        },
-        {
-            Name = "Crouching Sway",
-            Description = "Sway multiplier when crouched and not moving.",
-            Value = "SwayCrouchMult",
-            AggregateFunction = function(base, val)
-                return math.min(100, math.Round(val * 100, 0))
-            end,
-            Unit = "%",
-            LowerIsBetter = true,
-            HideIfSame = true,
-            ConVarCheck = "tacrp_sway",
-        },
-        {
-            Name = "Mid-Air Spread",
-            Description = "Amount of inaccuracy caused by not standing on solid ground. Applied at half intensity while swimming.",
-            AggregateFunction = function(base, val)
-                return math.Round(math.deg(val), 2)
-            end,
-            Unit = "°",
-            Value = "MidAirSpreadPenalty",
-            LowerIsBetter = true,
-            HideIfSame = true,
-        },
-        {
-            Name = "Hipfire Spread",
-            Description = "Amount of additional inaccuracy while hipfiring.",
-            AggregateFunction = function(base, val)
-                return math.Round(math.deg(val), 2)
-            end,
-            Unit = "°",
-            Value = "HipFireSpreadPenalty",
-            LowerIsBetter = true,
-            HideIfSame = true,
-        },
-        {
-            Name = "Melee Damage",
-            Description = "Damage dealt when bashing.",
-            Value = "MeleeDamage",
-            HideIfSame = true,
-        },
-        {
-            Name = "Firemode",
-            Description = "The weapon's firing capabilities.",
-            AggregateFunction = function(base, val)
-                if !val then
-                    val = {base and self:GetTable()["Firemode"] or self:GetValue("Firemode")}
-                end
-                if #val == 1 then
-                    if val[1] == 2 then
-                        return "Auto"
-                    elseif val[1] == 1 then
-                        return "Semi"
-                    elseif val[1] < 0 then
-                        return val[1] .. "-Burst"
-                    end
-                else
-                    local tbl = table.Copy(val)
-                    table.sort(tbl, function(a, b)
-                        if a == 2 then
-                            return b == 2
-                        elseif b == 2 then
-                            return a != 2
-                        end
-                        return math.abs(a) <= math.abs(b)
-                    end)
-                    local str = "S-"
-                    for i = 1, #tbl do
-                        str = str .. (tbl[i] == 2 and "F" or math.abs(tbl[i])) .. (i < #tbl and "-" or "")
-                    end
-                    return str
-                end
-                return table.ToString(val)
-            end,
-            BetterFunction = function(old, new)
-                if !old then
-                    old = {self:GetTable()["Firemode"]}
-                end
-                local oldbest, newbest = 0, 0
-                for i = 1, #old do
-                    local v = math.abs(old[i])
-                    if v > oldbest or v == 2 then
-                        oldbest = (v == 2 and math.huge) or v
-                    end
-                end
-                for i = 1, #new do
-                    local v = math.abs(new[i])
-                    if v > newbest or v == 2 then
-                        newbest = (v == 2 and math.huge) or v
-                    end
-                end
-                if oldbest == newbest then
-                    return #old != #new , #old < #new
-                else
-                    return true, oldbest < newbest
-                end
-            end,
-            Value = "Firemodes",
-            HideIfSame = true,
-        },
-        {
-            Name = "Free Aim Angle",
-            Description = "Maximum amount of deviation from the aim direction while hipfiring.",
-            Unit = "°",
-            Value = "FreeAimMaxAngle",
-            LowerIsBetter = true,
-            HideIfSame = true,
-            ConVarCheck = "tacrp_freeaim",
-        },
-        {
-            Name = "Mean Shots To Fail",
-            Description = "The average number of shots that will be fired before the weapon jams.",
-            AggregateFunction = function(base, val)
-                return math.Round(self:GetMeanShotsToFail(base), 0)
-            end,
-            DisplayFunction = function(base, val)
-                if val == 1 then return "∞" end
-                return math.Round(self:GetMeanShotsToFail(base), 0)
-            end,
-            HideIfSame = true,
-            Value = "ShootChance",
-        },
-    }
-
     if !self:GetValue("NoStatBox") then
-
-        local selftbl = self:GetTable()
 
         local tabs_h = ScreenScale(10)
 
         local group_box = vgui.Create("DPanel", bg)
         group_box.PrintName = "Rating"
-        group_box:SetSize(ScreenScale(168), ScreenScale(172))
-        group_box:SetPos(scrw - ScreenScale(168) - airgap, stack + smallgap * 2 + tabs_h)
+        group_box:SetSize(ScreenScale(164), ScreenScale(172))
+        group_box:SetPos(scrw - ScreenScale(164) - airgap - smallgap, stack + smallgap * 2 + tabs_h)
         group_box.Paint = function(self2)
             if !IsValid(self) then return end
 
@@ -785,7 +452,7 @@ function SWEP:CreateCustomizeHUD()
                 local f = scorecache[1][1] / 100
                 local f_base = scorecache[2][1] / 100
 
-                local w2, h2 = ScreenScale(100), ScreenScale(8)
+                local w2, h2 = ScreenScale(95), ScreenScale(8)
                 surface.SetDrawColor(0, 0, 0, 150)
                 surface.DrawRect(x, y, w, h)
                 TacRP.DrawCorneredBox(x, y, w, h)
@@ -870,6 +537,276 @@ function SWEP:CreateCustomizeHUD()
             end
         end
 
+        local w_statbox = ScreenScale(164)
+        local x_3 = w_statbox - ScreenScale(32)
+        local x_2 = x_3 - ScreenScale(32)
+        local x_1 = x_2 - ScreenScale(32)
+
+        local function updatestat(i, k)
+            local value = self:GetValue(k.Value)
+            local orig = self:GetBaseValue(k.Value)
+            local diff = nil
+
+            -- if k.HideIfSame and orig == value then return end
+
+            if k.ConVarCheck then
+                if !k.ConVar then k.ConVar = GetConVar(k.ConVarCheck) end
+                if k.ConVar:GetBool() == tobool(k.ConVarInvert) then return end
+            end
+
+            if k.ValueCheck and self:GetValue(k.ValueCheck) != !k.ValueInvert then
+                return
+            end
+
+            local stat_base = 0
+            local stat_curr = 0
+
+            if k.AggregateFunction then
+                stat_base = k.AggregateFunction(self, true, orig)
+                stat_curr = k.AggregateFunction(self, false, value)
+            else
+                stat_base = math.Round(orig, 4)
+                stat_curr = math.Round(value, 4)
+            end
+
+            if stat_base == nil and stat_cur == nil then return end
+
+            if k.DifferenceFunction then
+                diff = k.DifferenceFunction(self, orig, value)
+            elseif isnumber(stat_base) and isnumber(stat_curr) then
+                if stat_curr == stat_base then
+                    diff = ""
+                else
+                    diff = math.Round((stat_curr / stat_base - 1) * 100, 1)
+                    if diff > 0 then
+                        diff = "+" .. tostring(diff) .. "%"
+                    else
+                        diff = tostring(diff) .. "%"
+                    end
+                end
+            end
+
+            local txt_base = tostring(stat_base)
+            local txt_curr = tostring(stat_curr)
+
+            if isbool(stat_base) then
+                if stat_base then
+                    txt_base = "YES"
+                else
+                    txt_base = "NO"
+                end
+
+                if stat_curr then
+                    txt_curr = "YES"
+                else
+                    txt_curr = "NO"
+                end
+            end
+
+            if k.DisplayFunction then
+                txt_base = k.DisplayFunction(self, true, orig)
+                txt_curr = k.DisplayFunction(self, false, value)
+            end
+
+            if k.Unit then
+                txt_base = txt_base .. k.Unit
+                txt_curr = txt_curr .. k.Unit
+            end
+
+            local good = false
+            local goodorbad = false
+
+            if k.BetterFunction then
+                goodorbad, good = k.BetterFunction(self, orig, value)
+            elseif stat_base != stat_curr then
+                if isnumber(stat_curr) then
+                    good = stat_curr > stat_base
+                    goodorbad = true
+                elseif isbool(stat_curr) then
+                    good = !stat_base and stat_curr
+                    goodorbad = true
+                end
+            end
+
+            if k.LowerIsBetter then
+                good = !good
+            end
+
+            if goodorbad then
+                if good then
+                    surface.SetTextColor(175, 255, 175)
+                else
+                    surface.SetTextColor(255, 175, 175)
+                end
+            else
+                surface.SetTextColor(255, 255, 255)
+            end
+
+            self.MiscCache["statbox"][i] = {txt_base, txt_curr, goodorbad, good, diff}
+        end
+
+        local function populate_stats(layout)
+            layout:Clear()
+            self.MiscCache["statbox"] = {}
+            self.StatRows = {}
+            for i, k in ipairs(self.StatDisplay) do
+                updatestat(i, k)
+                if !self.MiscCache["statbox"][i] then continue end
+
+                local row = layout:Add("DPanel")
+                row:SetSize(w_statbox, ScreenScale(8))
+                row.StatIndex = i
+                row.Paint = function(self2, w, h)
+                    if !IsValid(self) then return end
+                    if !self.MiscCache["statbox"] then
+                        populate_stats(layout)
+                    end
+                    local sicache = self.MiscCache["statbox"][self2.StatIndex]
+                    if !sicache then
+                        self2:Remove()
+                        return
+                    end
+                    surface.SetFont("TacRP_Myriad_Pro_8")
+                    surface.SetTextColor(255, 255, 255)
+                    surface.SetTextPos(ScreenScale(3), 0)
+                    surface.DrawText(k.Name .. ":")
+
+                    surface.SetTextPos(x_1 + ScreenScale(4), 0)
+                    surface.DrawText(sicache[1])
+
+                    if sicache[3] then
+                        if sicache[4] then
+                            surface.SetTextColor(175, 255, 175)
+                        else
+                            surface.SetTextColor(255, 175, 175)
+                        end
+                    else
+                        surface.SetTextColor(255, 255, 255)
+                    end
+
+                    surface.SetTextPos(x_2 + ScreenScale(4), 0)
+                    surface.DrawText(sicache[2])
+
+                    if sicache[5] then
+                        surface.SetTextPos(x_3 + ScreenScale(4), 0)
+                        surface.DrawText(sicache[5])
+                    end
+                end
+                self.StatRows[row] = i
+            end
+        end
+
+        local stat_box = vgui.Create("DPanel", bg)
+        stat_box.PrintName = "Stats"
+        stat_box:SetSize(w_statbox, ScreenScale(172))
+        stat_box:SetPos(scrw - w_statbox - airgap - smallgap, stack + smallgap * 2 + tabs_h)
+        stat_box.Paint = function(self2, w, h)
+            if !IsValid(self) then return end
+
+            surface.SetDrawColor(0, 0, 0, 150)
+            surface.DrawRect(0, 0, w, h)
+            TacRP.DrawCorneredBox(0, 0, w, h)
+
+            surface.SetDrawColor(255, 255, 255, 100)
+            surface.DrawLine(x_1, 0, x_1, h)
+            surface.DrawLine(x_2, 0, x_2, h)
+            surface.DrawLine(x_3, 0, x_3, h)
+            surface.DrawLine(0, ScreenScale(2 + 8 + 1), w, ScreenScale(2 + 8 + 1))
+
+            surface.SetFont("TacRP_Myriad_Pro_8")
+            surface.SetTextColor(255, 255, 255)
+            surface.SetTextPos(ScreenScale(4), ScreenScale(2))
+            surface.DrawText("STAT")
+
+            surface.SetFont("TacRP_Myriad_Pro_8")
+            surface.SetTextColor(255, 255, 255)
+            surface.SetTextPos(x_1 + ScreenScale(4), ScreenScale(2))
+            surface.DrawText("BASE")
+
+            surface.SetFont("TacRP_Myriad_Pro_8")
+            surface.SetTextColor(255, 255, 255)
+            surface.SetTextPos(x_2 + ScreenScale(4), ScreenScale(2))
+            surface.DrawText("CURR")
+
+            surface.SetFont("TacRP_Myriad_Pro_8")
+            surface.SetTextColor(255, 255, 255)
+            surface.SetTextPos(x_3 + ScreenScale(4), ScreenScale(2))
+            surface.DrawText("DIFF")
+        end
+        local stat_scroll = vgui.Create("DScrollPanel", stat_box)
+        stat_scroll:Dock(FILL)
+        stat_scroll:DockMargin(0, ScreenScale(12), 0, 0)
+        local sbar = stat_scroll:GetVBar()
+        function sbar:Paint(w, h)
+        end
+        function sbar.btnUp:Paint(w, h)
+            local c_bg, c_txt = TacRP.GetPanelColor("bg2", self:IsHovered()), TacRP.GetPanelColor("text", self:IsHovered())
+            surface.SetDrawColor(c_bg)
+            surface.DrawRect(0, 0, w, h)
+            draw.SimpleText("↑", "TacRP_HD44780A00_5x8_4", w / 2, h / 2, c_txt, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+        end
+        function sbar.btnDown:Paint(w, h)
+            local c_bg, c_txt = TacRP.GetPanelColor("bg2", self:IsHovered()), TacRP.GetPanelColor("text", self:IsHovered())        surface.SetDrawColor(c_bg)
+            surface.DrawRect(0, 0, w, h)
+            draw.SimpleText("↓", "TacRP_HD44780A00_5x8_4", w / 2, h / 2, c_txt, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+        end
+        function sbar.btnGrip:Paint(w, h)
+            local c_bg, c_cnr = TacRP.GetPanelColor("bg2", self:IsHovered()), TacRP.GetPanelColor("corner", self:IsHovered())        surface.SetDrawColor(c_bg)
+            TacRP.DrawCorneredBox(0, 0, w, h, c_cnr)
+        end
+        local stat_layout = vgui.Create("DIconLayout", stat_scroll)
+        stat_layout:Dock(FILL)
+        stat_layout:SetLayoutDir(TOP)
+        -- stat_layout:SetSpaceY(ScreenScale(2))
+        populate_stats(stat_layout)
+
+        stat_box.PaintOver = function(self2, w, h)
+            local panel = vgui.GetHoveredPanel()
+            if self.StatRows[panel] then
+                local stat = self.StatDisplay[self.StatRows[panel]]
+
+                local todo = DisableClipping(true)
+                local col_bg = Color(0, 0, 0, 254)
+                local col_corner = Color(255, 255, 255)
+                local col_text = Color(255, 255, 255)
+                local rx, ry = self2:CursorPos()
+                rx = rx + ScreenScale(16)
+                ry = ry + ScreenScale(16)
+
+                local desc = stat.Description or {""}
+                if isstring(desc) then
+                    desc = {desc}
+                end
+
+                if self2:GetY() + ry >= ScreenScale(280) then
+                    ry = ry - ScreenScale(60)
+                end
+
+                if self2:GetX() + rx + ScreenScale(160) >= ScrW() then
+                    rx = rx - ScreenScale(160)
+                end
+
+                local bw, bh = ScreenScale(160), ScreenScale(12 + (6 * #desc))
+                surface.SetDrawColor(col_bg)
+                TacRP.DrawCorneredBox(rx, ry, bw, bh, col_corner)
+
+                local txt = stat.Name
+                surface.SetTextColor(col_text)
+                surface.SetFont("TacRP_Myriad_Pro_10")
+                surface.SetTextPos(rx + ScreenScale(2), ry + ScreenScale(1))
+                surface.DrawText(txt)
+
+                surface.SetFont("TacRP_Myriad_Pro_6")
+                for i, k in pairs(desc) do
+                    surface.SetTextPos(rx + ScreenScale(2), ry + ScreenScale(1 + 8 + 2) + (ScreenScale(6 * (i - 1))))
+                    surface.DrawText(k)
+                end
+
+                DisableClipping(todo)
+            end
+        end
+
+        --[[]
         local stat_box = vgui.Create("DPanel", bg)
         stat_box.PrintName = "Stats"
         stat_box:SetSize(ScreenScale(128), ScreenScale(172))
@@ -968,7 +905,6 @@ function SWEP:CreateCustomizeHUD()
                 local good = false
                 local goodorbad = false
 
-
                 if k.BetterFunction then
                     goodorbad, good = k.BetterFunction(orig, value)
                 elseif stat_base != stat_curr then
@@ -1051,6 +987,7 @@ function SWEP:CreateCustomizeHUD()
                 DisableClipping(todo)
             end
         end
+        ]]
 
         local tabs = {group_box, stat_box}
         self.ActiveTab = self.ActiveTab or 1
@@ -1168,7 +1105,7 @@ function SWEP:CreateCustomizeHUD()
 
         local prosconspanel = vgui.Create("DPanel", bg)
         prosconspanel:SetPos(airgap + ((table.Count(atts)) * ScreenScale(34)), offset + airgap + ((slot - 1) * ScreenScale(34 + 8)))
-        prosconspanel:SetSize(ScreenScale(256), ScreenScale(34))
+        prosconspanel:SetSize(ScreenScale(128), ScreenScale(34))
         prosconspanel.Paint = function(self2, w, h)
             if !IsValid(self) then return end
 
@@ -1177,7 +1114,6 @@ function SWEP:CreateCustomizeHUD()
             if !installed then return end
 
             local atttbl = TacRP.GetAttTable(installed)
-            // draw the pros and cons text from the attachment
 
             local pros = atttbl.Pros or {}
             local cons = atttbl.Cons or {}
@@ -1187,7 +1123,7 @@ function SWEP:CreateCustomizeHUD()
             for i, pro in pairs(pros) do
                 surface.SetFont("TacRP_Myriad_Pro_8")
                 surface.SetTextColor(Color(50, 255, 50))
-                surface.SetTextPos(0, ScreenScale((c * 8)))
+                surface.SetTextPos(0, ScreenScale(c * 8))
                 surface.DrawText("+" .. pro)
 
                 c = c + 1
@@ -1196,7 +1132,7 @@ function SWEP:CreateCustomizeHUD()
             for i, con in pairs(cons) do
                 surface.SetFont("TacRP_Myriad_Pro_8")
                 surface.SetTextColor(Color(255, 50, 50))
-                surface.SetTextPos(0, ScreenScale((c * 8)))
+                surface.SetTextPos(0, ScreenScale(c * 8))
                 surface.DrawText("-" .. con)
 
                 c = c + 1

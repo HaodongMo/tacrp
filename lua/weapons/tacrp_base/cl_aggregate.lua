@@ -472,3 +472,351 @@ SWEP.StatGroups = {
         end,
     },
 }
+
+SWEP.StatDisplay = {
+    -- {
+    --     Name = "",
+    --     Value = "",
+    --     LowerIsBetter = false,
+    --     AggregateFunction = nil,
+    --     Unit = ""
+    -- }
+    {
+        Name = "Spread",
+        Description = "Base accuracy of the weapon.",
+        AggregateFunction = function(self, base, val)
+            return math.Round(math.deg(val), 2)
+        end,
+        Unit = "°",
+        Value = "Spread",
+        LowerIsBetter = true,
+    },
+    {
+        Name = "RPM",
+        Description = "Rate of fire of the weapon.",
+        Value = "RPM"
+    },
+    {
+        Name = "Capacity",
+        Description = "Amount of ammo this weapon can spend before reloading.",
+
+        Value = "ClipSize",
+    },
+    {
+        Name = "Sprint To Fire",
+        Description = "Time required to transition from fully sprinting to being able to fire.",
+
+        Value = "SprintToFireTime",
+        Unit = "s",
+        LowerIsBetter = true,
+    },
+    {
+        Name = "Aim Down Sights",
+        Description = "Time required to transition from hipfiring to aiming.",
+        Value = "AimDownSightsTime",
+        Unit = "s",
+        LowerIsBetter = true,
+        ValueCheck = "Scope",
+    },
+    {
+        Name = "Muzzle Velocity",
+        Description = "How fast the bullet travels in the world.",
+        AggregateFunction = function(self, base, val)
+            return math.Round(self:GetMuzzleVelocity(base), 2)
+        end,
+        ConVarCheck = "tacrp_physbullet",
+        Value = "MuzzleVelocity",
+        LowerIsBetter = false,
+        Unit = "m/s"
+    },
+    {
+        Name = "Recoil Kick",
+        Description = "Strength of \"felt recoil\" that throws off your aim.",
+        Value = "RecoilKick",
+        LowerIsBetter = true,
+    },
+    {
+        Name = "Recoil Spread",
+        Description = {"Inaccuracy per unit of recoil. Larger value means the weapon becomes",
+        "inaccurate faster while continuous firing."},
+        AggregateFunction = function(self, base, val)
+            return math.Round(math.deg(val), 3)
+        end,
+        Unit = "°",
+        Value = "RecoilSpreadPenalty",
+        LowerIsBetter = true,
+    },
+    {
+        Name = "Recoil Recovery",
+        Description = {"Rate at which accumulated recoil disspiates, in shots per second.",
+        "Larger value means the effects of recoil disappear faster",
+        "after the reset time."},
+        AggregateFunction = function(self, base, val)
+            return math.Round(val, 2)
+            --return math.Round(math.deg(val * (base and self:GetTable().RecoilSpreadPenalty or self:GetValue("RecoilSpreadPenalty"))), 1)
+        end,
+        Unit = "/s",
+        Value = "RecoilDissipationRate",
+    },
+    {
+        Name = "Recoil Reset Time",
+        Description = {"Duration of delay before recoil can start to dissipate.",
+        "Larger value means you must wait longer between shots until recoil can",
+        "go down."},
+        Value = "RecoilResetTime",
+        LowerIsBetter = true,
+    },
+    {
+        Name = "Maximum Recoil",
+        Description = "Maximum amount of inaccuracy from continuous firing.",
+        Value = "RecoilMaximum",
+        LowerIsBetter = true,
+        HideIfSame = true,
+    },
+    {
+        Name = "First Shot Recoil",
+        Description = {"Recoil multiplier on the first shot, reset after the reset time has passed.",
+        "Does not affect recoil kick."},
+        Value = "RecoilFirstShotMult",
+        LowerIsBetter = true,
+        HideIfSame = true,
+    },
+    {
+        Name = "Crouching Recoil",
+        Description = "Recoil multiplier when crouched and not moving.",
+        AggregateFunction = function(self, base, val)
+            return math.min(100, math.Round(val * 100, 0))
+        end,
+        Unit = "%",
+        Value = "RecoilCrouchMult",
+        LowerIsBetter = true,
+        HideIfSame = true,
+    },
+    {
+        Name = "Move Speed",
+        Description = {"Speed multiplier while the weapon is held up.",
+        "Has no effect when weapon is in safety."},
+        AggregateFunction = function(self, base, val)
+            return math.min(100, math.Round(val * 100, 0))
+        end,
+        Unit = "%",
+        Value = "MoveSpeedMult"
+    },
+    {
+        Name = "Shooting Speed",
+        Description = {"Speed multiplier from firing the weapon.",
+        "Accumulating recoil increases slowdown intensity."},
+        AggregateFunction = function(self, base, val)
+            return math.min(100, math.Round(val * 100, 0))
+        end,
+        Unit = "%",
+        Value = "ShootingSpeedMult"
+    },
+    {
+        Name = "Sighted Speed",
+        Description = "Speed multiplier while the weapon is aiming.",
+        AggregateFunction = function(self, base, val)
+            return math.min(100, math.Round(val * 100, 0))
+        end,
+        Unit = "%",
+        Value = "SightedSpeedMult",
+        ValueCheck = "Scope",
+    },
+    {
+        Name = "Reload Speed",
+        Description = "Speed multiplier while reloading.",
+        AggregateFunction = function(self, base, val)
+            return math.min(100, math.Round(val * 100, 0))
+        end,
+        Unit = "%",
+        Value = "ReloadSpeedMult",
+    },
+    {
+        Name = "Reload Time",
+        Description = "Amount of time required to perform a reload.",
+        AggregateFunction = function(self, base, val)
+            return math.Round(self:GetReloadTime(base), 2)
+        end,
+        Value = "ReloadTimeMult",
+        LowerIsBetter = true,
+        Unit = "s"
+    },
+    {
+        Name = "Deploy Time",
+        Description = "Amount of time required to bring up the weapon. Holstering is instant.",
+        AggregateFunction = function(self, base, val)
+            return math.Round(self:GetDeployTime(base), 2)
+        end,
+        Value = "DeployTimeMult",
+        LowerIsBetter = true,
+        HideIfSame = true,
+        Unit = "s"
+    },
+    {
+        Name = "Penetration",
+        Description = {"Thickness of metal this weapon can penetrate.",
+        "Actual penetration is material-dependent."},
+        Value = "Penetration",
+        Unit = "\""
+    },
+    {
+        Name = "Sway",
+        Description = {"Amount of sway in hipfire. Sway affects your firing direction",
+        "without changing your aiming direction."},
+
+        Value = "Sway",
+        LowerIsBetter = true,
+        ConVarCheck = "tacrp_sway",
+    },
+    {
+        Name = "Sway In Sights",
+        Description = {"Amount of sway while aiming. Sway affects your firing direction",
+        "without changing your aiming direction."},
+        Value = "ScopedSway",
+        LowerIsBetter = true,
+        ConVarCheck = "tacrp_sway",
+        ValueCheck = "Scope",
+    },
+    {
+        Name = "Crouching Sway",
+        Description = "Sway multiplier when crouched and not moving.",
+        Value = "SwayCrouchMult",
+        AggregateFunction = function(self, base, val)
+            return math.min(100, math.Round(val * 100, 0))
+        end,
+        Unit = "%",
+        LowerIsBetter = true,
+        HideIfSame = true,
+        ConVarCheck = "tacrp_sway",
+    },
+    {
+        Name = "Mid-Air Spread",
+        Description = {"Amount of inaccuracy caused by not standing on solid ground.", "Applied at half intensity while swimming and climbing ladders."},
+        AggregateFunction = function(self, base, val)
+            return math.Round(math.deg(val), 2)
+        end,
+        Unit = "°",
+        Value = "MidAirSpreadPenalty",
+        LowerIsBetter = true,
+        HideIfSame = true,
+    },
+    {
+        Name = "Hipfire Spread",
+        Description = "Amount of additional inaccuracy while hipfiring.",
+        AggregateFunction = function(self, base, val)
+            return math.Round(math.deg(val), 2)
+        end,
+        Unit = "°",
+        Value = "HipFireSpreadPenalty",
+        LowerIsBetter = true,
+        HideIfSame = true,
+    },
+    {
+        Name = "Melee Damage",
+        Description = "Damage dealt when bashing.",
+        Value = "MeleeDamage",
+        HideIfSame = true,
+    },
+    {
+        Name = "Firemode",
+        Description = "The weapon's firing capabilities.",
+        AggregateFunction = function(self, base, val)
+            if !val then
+                val = {base and self:GetTable()["Firemode"] or self:GetValue("Firemode")}
+            end
+            if #val == 1 then
+                if val[1] == 2 then
+                    return "Auto"
+                elseif val[1] == 1 then
+                    return "Semi"
+                elseif val[1] < 0 then
+                    return val[1] .. "-Burst"
+                end
+            else
+                local tbl = table.Copy(val)
+                table.sort(tbl, function(a, b)
+                    if a == 2 then
+                        return b == 2
+                    elseif b == 2 then
+                        return a != 2
+                    end
+                    return math.abs(a) <= math.abs(b)
+                end)
+                local str = "S-"
+                for i = 1, #tbl do
+                    str = str .. (tbl[i] == 2 and "F" or math.abs(tbl[i])) .. (i < #tbl and "-" or "")
+                end
+                return str
+            end
+            return table.ToString(val)
+        end,
+        BetterFunction = function(self, old, new)
+            if !old then
+                old = {self:GetBaseValue("Firemode")}
+            end
+            if !new then
+                new = {self:GetValue("Firemode")}
+            end
+            local oldbest, newbest = 0, 0
+            for i = 1, #old do
+                local v = math.abs(old[i])
+                if v > oldbest or v == 2 then
+                    oldbest = (v == 2 and math.huge) or v
+                end
+            end
+            for i = 1, #new do
+                local v = math.abs(new[i])
+                if v > newbest or v == 2 then
+                    newbest = (v == 2 and math.huge) or v
+                end
+            end
+            if oldbest == newbest then
+                return #old != #new , #old < #new
+            else
+                return true, oldbest < newbest
+            end
+        end,
+        DifferenceFunction = function(self, orig, value)
+            if !orig then
+                orig = {self:GetBaseValue("Firemode")}
+            end
+            if !value then
+                value = {self:GetValue("Firemode")}
+            end
+            local old_best = self:GetBestFiremode(true)
+            local new_best = self:GetBestFiremode(false)
+            if old_best == new_best then return end
+            if new_best == 2 then
+                return "+Auto"
+            elseif old_best == 2 then
+                return "-Auto"
+            elseif new_best < 0 then
+                return "+Burst"
+            end
+        end,
+        Value = "Firemodes",
+        HideIfSame = true,
+    },
+    {
+        Name = "Free Aim Angle",
+        Description = "Maximum amount of deviation from the aim direction while hipfiring.",
+        Unit = "°",
+        Value = "FreeAimMaxAngle",
+        LowerIsBetter = true,
+        HideIfSame = true,
+        ConVarCheck = "tacrp_freeaim",
+    },
+    {
+        Name = "Mean Shots To Fail",
+        Description = "The average number of shots that will be fired before the weapon jams.",
+        AggregateFunction = function(self, base, val)
+            return math.Round(self:GetMeanShotsToFail(base), 0)
+        end,
+        DisplayFunction = function(self, base, val)
+            if val == 1 then return "∞" end
+            return math.Round(self:GetMeanShotsToFail(base), 0)
+        end,
+        HideIfSame = true,
+        Value = "ShootChance",
+    },
+}
