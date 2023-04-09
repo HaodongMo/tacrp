@@ -123,7 +123,7 @@ function SWEP:GetViewModelPosition(pos, ang)
         -- LerpMod(offsetang, sightang + pang, curvedpeekdelta, true)
     end
 
-    local dt = CurTime() - self:GetLastProceduralFireTime()
+    local dt = math.max(0, CurTime() - self:GetLastProceduralFireTime())
     if IsValid(vm) and self.ProceduralIronFire then
         if dt <= self.ProceduralIronFire.tmax then
             self.ProceduralIronCleanup = false
@@ -132,7 +132,12 @@ function SWEP:GetViewModelPosition(pos, ang)
                     local bone = vm:LookupBone(v.bone or "")
                     if !bone then continue end
 
-                    local f = v.t1 and (dt > v.t0 and self:Curve(math.Clamp(1 - (dt - v.t0) / (v.t1 - v.t0), 0, 1)) or (dt / v.t0)) or (dt > v.t0 and 1 or (dt / v.t0))
+                    local f = 1
+                    if v.t0 == 0 then
+                        f = v.t1 and self:Curve(math.Clamp(1 - dt / v.t1, 0, 1)) or 0
+                    else
+                        f = v.t1 and (dt > v.t0 and self:Curve(math.Clamp(1 - (dt - v.t0) / (v.t1 - v.t0), 0, 1)) or (dt / v.t0)) or (dt > v.t0 and 1 or (dt / v.t0))
+                    end
                     if v.pos then
                         local offset = LerpVector(f, vector_origin, v.pos)
                         vm:ManipulateBonePosition(bone, offset, false)
