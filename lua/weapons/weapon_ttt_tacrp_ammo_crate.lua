@@ -15,15 +15,11 @@ if CLIENT then
    LANG.AddToLanguage("english", "tacrp_ammocrate_name", "Ammo Crate")
    LANG.AddToLanguage("english", "tacrp_ammocrate_help", "{primaryfire} places the Ammo Crate.")
    LANG.AddToLanguage("english", "tacrp_ammocrate_desc", [[
-Allows people to replenish ammo.
-Slow recharge. Can even give certain
-traitor ammo types at a high cost.
+Allows people to replenish ammo. Slow recharge.
+Can even give certain traitor weapon ammo types.
 
-Anyone can use it. If destroyed,
-it will cause a big explosion.
-
-Can be checked for DNA samples of its
-users.]])
+Anyone can use it. Explodes if destroyed.
+Can be checked for DNA samples of its users.]])
 
    SWEP.EquipMenuData = {
       type = "item_weapon",

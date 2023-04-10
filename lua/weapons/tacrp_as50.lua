@@ -339,7 +339,7 @@ if engine.ActiveGamemode() == "terrortown" then
     SWEP.CanBuy = { ROLE_TRAITOR, ROLE_DETECTIVE }
     SWEP.EquipMenuData = {
         type = "Weapon",
-        desc = "Semi-automatic anti-materiel rifle with integral bipod.\nCan kill in up to 2 shots regardless of distance.\nComes with 10 rounds.\n\nBeware: Others may be able to see this\neven if you have it holstered!",
+        desc = "Semi-automatic anti-materiel rifle.\nComes with 10 rounds.\n\nBeware: Others may be able to see this\neven if you have it holstered!",
     }
 
     function SWEP:TTTBought(buyer)

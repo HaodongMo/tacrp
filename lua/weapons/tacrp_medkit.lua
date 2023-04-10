@@ -90,7 +90,7 @@ SWEP.HolsterTimeMult = 0.75
 SWEP.Attachments = {
     [1] = {
         PrintName = "Perk",
-        Category = {"perk_melee", "perk_throw"},
+        Category = {"perk_melee", "perk_throw", "perk_passive"},
         AttachSound = "TacRP/weapons/flashlight_on.wav",
         DetachSound = "TacRP/weapons/flashlight_off.wav",
     }
@@ -190,10 +190,16 @@ function SWEP:Think()
                 self.LoopSound = nil
             end
         else
-            self:SetClip1(self:Clip1() - 1)
-            self.HealTarget:SetHealth(math.min(self.HealTarget:Health() + 4, self.HealTarget:GetMaxHealth()))
-
-            self:SetNextPrimaryFire(CurTime() + (self.HealTarget == self:GetOwner() and 0.2 or 0.15))
+            local selfheal = self.HealTarget == self:GetOwner()
+            if engine.ActiveGamemode() == "terrortown" then
+                self:SetClip1(self:Clip1() - 1)
+                self.HealTarget:SetHealth(math.min(self.HealTarget:Health() + (selfheal and 2 or 3), self.HealTarget:GetMaxHealth()))
+                self:SetNextPrimaryFire(CurTime() + (selfheal and 0.5 or 0.25))
+            else
+                self:SetClip1(self:Clip1() - 1)
+                self.HealTarget:SetHealth(math.min(self.HealTarget:Health() + 4, self.HealTarget:GetMaxHealth()))
+                self:SetNextPrimaryFire(CurTime() + (selfheal and 0.2 or 0.15))
+            end
         end
     end
 
@@ -203,14 +209,8 @@ end
 function SWEP:Regenerate()
     if CLIENT then return end
     if self:GetNextPrimaryFire() + 0.1 > CurTime() then return end
-
-    local amt = self:Clip1()
-
-    amt = amt + 1
-
-    amt = math.min(amt, 30)
-
-    self:SetClip1(amt)
+    if !engine.ActiveGamemode() == "terrortown" or !IsValid(self:GetOwner()) or self:GetOwner():GetActiveWeapon() != self then return end
+    self:SetClip1(math.min(self:Clip1() + 1, 30))
 end
 
 function SWEP:Holster(wep)
@@ -243,7 +243,7 @@ function SWEP:Initialize()
 
     self:SetCharge(false)
 
-    timer.Create("medkit_ammo" .. self:EntIndex(), 1, 0, function()
+    timer.Create("medkit_ammo" .. self:EntIndex(), engine.ActiveGamemode() == "terrortown" and 3 or 1, 0, function()
         if !IsValid(self) then
             if self.LoopSound then
                 self.LoopSound:Stop()
@@ -264,4 +264,16 @@ function SWEP:Initialize()
     return BaseClass.Initialize(self)
 end
 
-SWEP.AutoSpawnable = false
+if engine.ActiveGamemode() == "terrortown" then
+    SWEP.AutoSpawnable = false
+    SWEP.Kind = WEAPON_EQUIP2
+    SWEP.CanBuy = { ROLE_DETECTIVE, ROLE_TRAITOR }
+    SWEP.EquipMenuData = {
+        type = "Weapon",
+        desc = "Medical supplies for treating wounds.\nMore efficient when used on others.\nCharge regenrates slowly while weapon is out.",
+    }
+
+    function SWEP:TTTBought(buyer)
+        buyer:GiveAmmo(2, "SMG1_Grenade")
+    end
+end

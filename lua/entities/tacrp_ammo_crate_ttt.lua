@@ -180,11 +180,12 @@ function ENT:ApplyAmmo(ply)
     local amt = self.AmmoInfo[ammotype][1]
     amt = ClampedGiveAmmo(ply, ammotype, amt, max) -- amount we need
     local cost = self.AmmoInfo[ammotype][3] * (amt / self.AmmoInfo[ammotype][1])
-    local f = self:TakeFromStorage(cost) / cost -- fraction of cost we can afford
+    local f = math.min(cost, self:GetStoredAmmo()) / cost -- fraction of cost we can afford
 
-    amt = math.ceil(amt * f)
+    amt = math.floor(amt * f)
 
     if amt > 0 then
+        self:TakeFromStorage(cost * f)
         ply:GiveAmmo(amt, ammotype)
 
         if !self.Open then
