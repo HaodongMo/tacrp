@@ -14,3 +14,7 @@ ATT.ShootEnt = "tacrp_proj_40mm_lvg"
 ATT.Mult_ShootEntForce = 0.5
 
 ATT.InstalledElements = {"lvg"}
+
+if engine.ActiveGamemode() == "terrortown" then
+    ATT.Free = true
+end

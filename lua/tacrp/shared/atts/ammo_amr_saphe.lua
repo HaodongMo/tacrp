@@ -23,3 +23,7 @@ ATT.Mult_ClipSize = 0.45
 
 ATT.Mult_RPM = 0.85
 ATT.Mult_ShootTimeMult = 1 / 0.85
+
+if engine.ActiveGamemode() == "terrortown" then
+    ATT.Free = true
+end

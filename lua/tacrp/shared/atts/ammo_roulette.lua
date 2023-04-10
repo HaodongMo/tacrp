@@ -31,7 +31,11 @@ ATT.Hook_EndReload = function(wep)
 end
 
 ATT.Hook_PreShoot = function(wep)
-    if wep:GetNWInt("TacRP_RouletteShot", 1) != wep:GetNthShot() % wep:GetBaseValue("ClipSize") + 1 then
+    if SERVER and wep:GetNWInt("TacRP_RouletteShot", 0) == 0 then
+        wep:SetNWInt("TacRP_RouletteShot", math.random(1, wep:GetBaseValue("ClipSize")))
+    end
+
+    if wep:GetNWInt("TacRP_RouletteShot") != wep:GetNthShot() % wep:GetBaseValue("ClipSize") + 1 then
         wep.Primary.Automatic = false
         if wep:GetBlindFire() then
             wep:PlayAnimation("blind_dryfire")
@@ -41,8 +45,15 @@ ATT.Hook_PreShoot = function(wep)
         wep:EmitSound(wep:GetValue("Sound_DryFire"), 75, 100, 1, CHAN_BODY)
         wep:SetBurstCount(0)
         wep:SetNthShot(wep:GetNthShot() + 1)
-        wep:SetNextPrimaryFire(CurTime() + 0.3)
+        wep:SetNextPrimaryFire(CurTime() + 0.5)
 
         return true
     end
+end
+
+if engine.ActiveGamemode() == "terrortown" then
+    ATT.Pros = {"Explosive bullet"}
+    ATT.ExplosiveEffect = "HelicopterMegaBomb"
+    ATT.ExplosiveDamage = 35
+    ATT.ExplosiveRadius = 200
 end

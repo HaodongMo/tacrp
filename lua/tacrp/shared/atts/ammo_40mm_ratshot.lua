@@ -13,3 +13,7 @@ ATT.ShootEnt = "tacrp_proj_40mm_ratshot"
 ATT.Mult_ShootEntForce = 0.25
 
 ATT.InstalledElements = {"smoke"}
+
+if engine.ActiveGamemode() == "terrortown" then
+    ATT.Free = true
+end

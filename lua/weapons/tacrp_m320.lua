@@ -258,7 +258,7 @@ if engine.ActiveGamemode() == "terrortown" then
     SWEP.CanBuy = { ROLE_TRAITOR }
     SWEP.EquipMenuData = {
         type = "Weapon",
-        desc = "Grenade launcher capable of firing a variety of payloads.\nComes with 3 grenades.\n\nBeware: Others may be able to see the gun on your back!",
+        desc = "Grenade launcher capable of firing a variety of payloads.\nComes with 3 grenades.\n\nBeware: Others may be able to see this\neven if you have it holstered!",
     }
 
     function SWEP:TTTBought(buyer)

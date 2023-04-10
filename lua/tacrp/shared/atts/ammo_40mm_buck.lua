@@ -32,3 +32,7 @@ ATT.DoorBreach = true
 ATT.DoorBreachThreshold = 120
 
 ATT.InstalledElements = {"buck"}
+
+if engine.ActiveGamemode() == "terrortown" then
+    ATT.Free = true
+end

@@ -11,3 +11,7 @@ ATT.SortOrder = 2
 
 ATT.Override_ShootEnt = "tacrp_proj_rpg7_ratshot"
 ATT.Override_ShootEntForce = 2000
+
+if engine.ActiveGamemode() == "terrortown" then
+    ATT.Free = true
+end

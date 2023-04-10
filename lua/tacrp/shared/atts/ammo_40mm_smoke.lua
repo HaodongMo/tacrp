@@ -13,3 +13,7 @@ ATT.SortOrder = 4
 ATT.ShootEnt = "tacrp_proj_40mm_smoke"
 
 ATT.InstalledElements = {"smoke"}
+
+if engine.ActiveGamemode() == "terrortown" then
+    ATT.Free = true
+end

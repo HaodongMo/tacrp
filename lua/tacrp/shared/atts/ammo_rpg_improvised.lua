@@ -14,3 +14,7 @@ ATT.Add_ShootingSpeedMult = 0.3
 ATT.Add_ReloadSpeedMult = 0.15
 
 ATT.Override_ShootEntForce = 0
+
+if engine.ActiveGamemode() == "terrortown" then
+    ATT.Free = true
+end

@@ -17,3 +17,7 @@ ATT.InstalledElements = {"3gl"}
 
 ATT.Add_Spread = 0.02
 ATT.Mult_ShootEntForce = 0.85
+
+if engine.ActiveGamemode() == "terrortown" then
+    ATT.Free = true
+end

@@ -13,3 +13,7 @@ ATT.Mult_MuzzleVelocity = 1.5
 
 ATT.Mult_Range_Max = 1.25
 ATT.Mult_Damage_Max = 0.85
+
+if engine.ActiveGamemode() == "terrortown" then
+    ATT.Free = true
+end

@@ -30,3 +30,7 @@ ATT.MuzzleVelocity = 15000
 
 ATT.Override_Sound_Shoot = "^tacrp/weapons/m4star10/fire-2.wav"
 ATT.Pitch_Shoot = 110
+
+if engine.ActiveGamemode() == "terrortown" then
+    ATT.Free = true
+end

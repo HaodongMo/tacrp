@@ -129,7 +129,7 @@ function SWEP:TTT_Init()
 
     if self.PrimaryGrenade then return end
 
-    self.Primary.ClipMax = TacRP.TTTAmmoToClipMax[self.Ammo] or self.Primary.ClipSize * 2
+    self.Primary.ClipMax = TacRP.TTTAmmoToClipMax[string.lower(self.AmmoTTT or self.Ammo)] or self.Primary.ClipSize * 2
     self:SetClip1(self.Primary.ClipSize)
     self.GaveDefaultAmmo = true
 end
