@@ -15,6 +15,7 @@ ENT.InfiniteUse = false
 ENT.OpeningAnim = false
 ENT.NextUse = 0
 ENT.Open = false
+ENT.MaxHealth = 0
 
 function ENT:Initialize()
     local model = self.Model
@@ -33,6 +34,11 @@ function ENT:Initialize()
         self:SetCollisionGroup(COLLISION_GROUP_WEAPON)
         self:SetUseType(CONTINUOUS_USE)
         self:PhysWake()
+
+        if self.MaxHealth > 0 then
+            self:SetMaxHealth(self.MaxHealth)
+            self:SetHealth(self.MaxHealth)
+        end
 
         self:SetTrigger(true) -- Enables Touch() to be called even when not colliding
         self:UseTriggerBounds(true, 24)
