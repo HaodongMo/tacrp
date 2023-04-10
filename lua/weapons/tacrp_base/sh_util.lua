@@ -32,6 +32,8 @@ end
 function SWEP:OnReloaded()
     self:InvalidateCache()
     self:SetBaseSettings()
+
+    hook.Run("TacRP_WeaponReloaded", self)
 end
 
 function SWEP:DoLowerIrons()

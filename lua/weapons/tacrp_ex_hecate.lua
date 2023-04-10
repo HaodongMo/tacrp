@@ -177,6 +177,7 @@ SWEP.ScopeOverlaySize = 0.75
 
 SWEP.ClipSize = 7
 SWEP.Ammo = "SniperPenetratedRound"
+SWEP.AmmoTTT = "ti_sniper"
 
 SWEP.ReloadTimeMult = 1.4
 SWEP.DropMagazineImpact = "metal"
@@ -354,6 +355,10 @@ if engine.ActiveGamemode() == "terrortown" then
     SWEP.CanBuy = { ROLE_TRAITOR, ROLE_DETECTIVE }
     SWEP.EquipMenuData = {
         type = "Weapon",
-        desc = "Heavy anti-materiel rifle that can kill in one shot.\nDoes not fire phantom bullets.",
+        desc = "Heavy anti-materiel rifle that can kill in one shot.\nDoes not fire phantom bullets.\nComes with 10 rounds.\n\nBeware: Others may be able to see the gun on your back!",
     }
+
+    function SWEP:TTTBought(buyer)
+        buyer:GiveAmmo(3, "ti_sniper")
+    end
 end

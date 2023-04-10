@@ -251,3 +251,17 @@ addsound("TacInt_m320.buttstock_back", path .. "buttstock_back-1.wav")
 addsound("TacInt_m320.sight_flipup", path .. "sight_flipup-1.wav")
 
 SWEP.AutoSpawnable = false
+
+if engine.ActiveGamemode() == "terrortown" then
+    SWEP.AutoSpawnable = false
+    SWEP.Kind = WEAPON_EQUIP2
+    SWEP.CanBuy = { ROLE_TRAITOR }
+    SWEP.EquipMenuData = {
+        type = "Weapon",
+        desc = "Grenade launcher capable of firing a variety of payloads.\nComes with 3 grenades.\n\nBeware: Others may be able to see the gun on your back!",
+    }
+
+    function SWEP:TTTBought(buyer)
+        buyer:GiveAmmo(2, "SMG1_Grenade")
+    end
+end

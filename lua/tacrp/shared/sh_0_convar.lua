@@ -400,6 +400,28 @@ local conVars = {
         min = 0,
         max = 1,
     },
+    {
+        name = "ttt_atts_random",
+        default = "0.5", // fraction chance
+        notify = true,
+        replicated = true,
+        min = 0,
+        max = 1,
+    },
+    {
+        name = "ttt_atts_max",
+        default = "0", // fraction chance
+        notify = true,
+        replicated = true,
+        min = 0,
+    },
+    {
+        name = "ttt_atts_giveonspawn",
+        default = "20",
+        notify = true,
+        replicated = true,
+        min = 0,
+    },
 }
 
 local prefix = "tacrp_"

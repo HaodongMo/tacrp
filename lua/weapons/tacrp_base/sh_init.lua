@@ -264,7 +264,7 @@ function SWEP:SetBaseSettings()
         self.Primary.DefaultClip = math.ceil(self.Primary.ClipSize * GetConVar("tacrp_defaultammo"):GetFloat())
     end
 
-    if SERVER and self:GetCapacity() > 0 and self:Clip1() > self:GetCapacity() then
+    if SERVER and IsValid(self:GetOwner()) and self:GetCapacity() > 0 and self:Clip1() > self:GetCapacity() then
         self:GetOwner():GiveAmmo(self:Clip1() - self:GetCapacity(), self:GetValue("Ammo"))
         self:SetClip1(self:GetCapacity())
     end
@@ -311,7 +311,4 @@ function SWEP:EquipAmmo(ply)
 
     local supplyamount = self.GaveDefaultAmmo and self:Clip1() or math.ceil(math.max(1, self.Primary.ClipSize) * GetConVar("tacrp_defaultammo"):GetFloat())
     ply:GiveAmmo(supplyamount, ammotype)
-end
-
-function SWEP:Equip()
 end

@@ -105,7 +105,7 @@ SWEP.SightAng = Angle(0.03, -0.4, 0)
 SWEP.SightPos = Vector(-3.57, -6.5, -5.1)
 
 SWEP.HolsterVisible = true
-SWEP.HolsterSlot = TacRP.HOLSTER_SLOT_BACK
+SWEP.HolsterSlot = TacRP.HOLSTER_SLOT_SPECIAL
 SWEP.HolsterPos = Vector(5, 0, -6)
 SWEP.HolsterAng = Angle(0, 0, 0)
 
@@ -208,4 +208,16 @@ addsound("TacInt_rpg7.jingle", path .. "handling-1.wav")
 addsound("TacInt_rpg7.insert_rocket", path .. "insert_rocket.wav")
 addsound("TacInt_rpg7.flipup_sight", path .. "flipup_sight.wav")
 
-SWEP.AutoSpawnable = false
+if engine.ActiveGamemode() == "terrortown" then
+    SWEP.AutoSpawnable = false
+    SWEP.Kind = WEAPON_EQUIP2
+    SWEP.CanBuy = { ROLE_TRAITOR }
+    SWEP.EquipMenuData = {
+        type = "Weapon",
+        desc = "Soviet rocket launcher with powerful explosion.\nSafety fuse prevents point blank detonations.\nComes with 2 rockets.\n\nBeware: Others may be able to see the gun on your back!",
+    }
+
+    function SWEP:TTTBought(buyer)
+        buyer:GiveAmmo(1, "RPG_Round")
+    end
+end

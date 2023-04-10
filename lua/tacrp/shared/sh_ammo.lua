@@ -17,3 +17,12 @@ for i, k in pairs(ammotypes) do
         language.Add(i .. "_ammo", k)
     end
 end
+
+if engine.ActiveGamemode() == "terrortown" then
+    game.AddAmmoType({
+        name = "ti_sniper",
+    })
+    if CLIENT then
+        language.Add("ti_sniper_ammo", "Anti-Materiel Ammo")
+    end
+end

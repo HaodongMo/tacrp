@@ -58,6 +58,13 @@ function SWEP:Equip(newowner)
         if !table.HasValue(self.fingerprints, newowner) then
             table.insert(self.fingerprints, newowner)
         end
+
+        if newowner:GetActiveWeapon() != self and self:GetValue("HolsterVisible") then
+            net.Start("TacRP_updateholster")
+                net.WriteEntity(self:GetOwner())
+                net.WriteEntity(self)
+            net.Broadcast()
+        end
     end
 
     if SERVER and IsValid(newowner) and self.Primary.ClipMax and self.StoredAmmo > 0 and self.Primary.Ammo != "none" and self.Primary.Ammo != "" then
@@ -69,7 +76,19 @@ function SWEP:Equip(newowner)
     end
 end
 
+-- other guns may use this function to setup stuff
+function SWEP:TTTBought(buyer)
+end
+
 function SWEP:WasBought(buyer)
+    if buyer:GetActiveWeapon() != self and self:GetValue("HolsterVisible") then
+        net.Start("TacRP_updateholster")
+            net.WriteEntity(self:GetOwner())
+            net.WriteEntity(self)
+        net.Broadcast()
+    end
+
+    self:TTTBought(buyer)
 end
 
 function SWEP:TTT_PostAttachments()
@@ -82,9 +101,31 @@ function SWEP:TTT_Init()
         self.fingerprints = {}
     end
 
-    -- if SERVER and GetConVar("arccw_ttt_atts"):GetBool() then
-    --     self:NPC_SetupAttachments()
-    -- end
+    local att_chance = GetConVar("tacrp_ttt_atts_random"):GetFloat()
+    local att_max = GetConVar("tacrp_ttt_atts_max"):GetFloat()
+    local added = 0
+
+    if att_chance > 0 then
+        for i, slot in pairs(self.Attachments) do
+            if math.random() > att_chance then continue end
+
+            local atts = TacRP.GetAttsForCats(slot.Category or "")
+            local ind = math.random(1, #atts)
+            slot.Installed = atts[ind]
+            added = added + 1
+
+            if att_max > 0 and added >= att_max then break end
+        end
+
+        self:InvalidateCache()
+    end
+
+    if SERVER and added > 0 then
+        timer.Simple(0.25, function()
+            if !IsValid(self) then return end
+            self:NetworkWeapon()
+        end)
+    end
 
     if self.PrimaryGrenade then return end
 

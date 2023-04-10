@@ -167,6 +167,7 @@ local function setupttt()
     end
 end
 hook.Add("OnGamemodeLoaded", "TacRP_TTT", setupttt)
+hook.Add("TacRP_LoadAtts", "TacRP_TTT", setupttt)
 
 hook.Add( "OnEntityCreated", "TacRP_TTT_Spawn", function(ent)
     if CLIENT then return end
@@ -192,5 +193,19 @@ hook.Add( "OnEntityCreated", "TacRP_TTT_Spawn", function(ent)
                 end)
             end
         end)
+    end
+end)
+
+hook.Add("TTTPrepareRound", "TacRP_TTT", function()
+    if CLIENT then return end
+    local give = GetConVar("tacrp_ttt_atts_giveonspawn"):GetInt()
+    if give <= 0 then return end
+
+    for _, ply in pairs(player.GetAll()) do
+        ply.TacRP_AttInv = {}
+        for i = 1, give do
+            TacRP:PlayerGiveAtt(ply, TacRP.Attachments_Index[math.random(1, TacRP.Attachments_Count)], 1)
+        end
+        TacRP:PlayerSendAttInv(ply)
     end
 end)

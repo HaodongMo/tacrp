@@ -68,7 +68,9 @@ function SWEP:CreateCustomizeHUD()
     bg:SetSize(ScrW(), ScrH())
     bg.OnRemove = function(self2)
         if !IsValid(self) then return end
-        self:SavePreset()
+        if GetConVar("tacrp_autosave"):GetBool() and GetConVar("tacrp_free_atts"):GetBool() then
+            self:SavePreset()
+        end
     end
     bg.Paint = function(self2, w, h)
         if !IsValid(self) or !IsValid(self:GetOwner()) or self:GetOwner():GetActiveWeapon() != self then
@@ -1215,10 +1217,10 @@ function SWEP:CreateCustomizeHUD()
                             col_text = Color(0, 0, 0)
                             col_image = Color(255, 100, 100)
                         else
-                            col_bg = Color(25, 0, 0)
+                            col_bg = Color(25, 0, 0, 150)
                             col_corner = Color(255, 0, 0)
                             col_text = Color(255, 50, 50)
-                            col_image = Color(200, 25, 25)
+                            col_image = Color(255, 200, 200)
                         end
                     end
                 end

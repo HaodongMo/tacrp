@@ -57,6 +57,8 @@ TacRP.HOLSTER_SLOT_BACK = 1
 TacRP.HOLSTER_SLOT_BACK2 = 2
 TacRP.HOLSTER_SLOT_PISTOL = 3
 TacRP.HOLSTER_SLOT_GEAR = 4
+TacRP.HOLSTER_SLOT_SPECIAL = 5
+
 TacRP.HolsterBones = {
     [TacRP.HOLSTER_SLOT_BACK] = {
         "ValveBiped.Bip01_Spine2",
@@ -77,6 +79,11 @@ TacRP.HolsterBones = {
         "ValveBiped.Bip01_Pelvis",
         Vector(0, 10, 0),
         {"models/weapons/w_defuser.mdl", Vector(0, -10, -8), Angle(-90, -90, 0)},
+    },
+    [TacRP.HOLSTER_SLOT_SPECIAL] = {
+        "ValveBiped.Bip01_Spine2",
+        Vector(0, 4, 4),
+        {"models/props_c17/SuitCase_Passenger_Physics.mdl", Vector(6, 4, 8), Angle(0, 0, 0)},
     },
 }
 

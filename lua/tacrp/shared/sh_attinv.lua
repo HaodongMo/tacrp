@@ -120,7 +120,7 @@ end)
 hook.Add("PlayerSpawn", "TacRP_SpawnAttInv", function(ply, trans)
     if trans then return end
 
-    if GetConVar("TacRP_loseattsondie"):GetInt() >= 1 then
+    if engine.ActiveGamemode() != "terrortown" and GetConVar("TacRP_loseattsondie"):GetInt() >= 1 then
         ply.TacRP_AttInv = {}
 
         TacRP:PlayerSendAttInv(ply)
