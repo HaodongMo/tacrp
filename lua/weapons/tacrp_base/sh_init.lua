@@ -61,7 +61,7 @@ function SWEP:Deploy()
     if self:GetValue("PrimaryGrenade") then
         local nade = TacRP.QuickNades[self:GetValue("PrimaryGrenade")]
         if !TacRP.IsGrenadeInfiniteAmmo(nade) and self:GetOwner():GetAmmoCount(nade.Ammo) == 0 then
-            self:Remove()
+            if SERVER then self:Remove() end
             return true
         end
     elseif !self:CheckGrenade() then
