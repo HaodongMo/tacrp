@@ -61,6 +61,7 @@ SWEP.BalanceStats = {
     },
 }
 
+SWEP.TTTReplace = TacRP.TTTReplacePreset.BattleRifle
 
 // "ballistics"
 

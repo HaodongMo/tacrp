@@ -22,7 +22,10 @@ SWEP.Slot = 1
 
 SWEP.RenderGroup = RENDERGROUP_BOTH
 
-SWEP.ArcadeStats = {}
+SWEP.BalanceStats = {} // replacement stats for each TacRP.BALANCE_ enum
+
+// What weapon this will replace in TTT if enabled. Use TacRP.TTTReplacePreset presets or define your own
+SWEP.TTTReplace = nil // {["weapon_ttt_glock"] = 1} // key is weapon to replace, value is relative weight.
 
 // "ballistics"
 

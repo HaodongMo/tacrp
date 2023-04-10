@@ -72,6 +72,7 @@ SWEP.BalanceStats = {
     },
 }
 
+SWEP.TTTReplace = {}
 
 SWEP.Firemode = 1
 SWEP.Firemodes = false

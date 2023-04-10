@@ -17,7 +17,6 @@ SWEP.WorldModel = "models/weapons/tacint/w_m14.mdl"
 
 SWEP.Slot = 2
 
-
 SWEP.BalanceStats = {
     [TacRP.BALANCE_SBOX] = {
         Damage_Max = 30,
@@ -67,6 +66,8 @@ SWEP.BalanceStats = {
         ReloadSpeedMult = 0.5,
     },
 }
+
+SWEP.TTTReplace = TacRP.TTTReplacePreset.MarksmanRifle
 
 // "ballistics"
 

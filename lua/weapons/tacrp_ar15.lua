@@ -70,6 +70,8 @@ SWEP.BalanceStats = {
     },
 }
 
+SWEP.TTTReplace = {}
+
 SWEP.RPM = 500
 
 SWEP.Firemode = 1

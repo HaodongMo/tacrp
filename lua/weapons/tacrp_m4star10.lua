@@ -60,6 +60,7 @@ SWEP.BalanceStats = {
     },
 }
 
+SWEP.TTTReplace = TacRP.TTTReplacePreset.AutoShotgun
 
 // "ballistics"
 

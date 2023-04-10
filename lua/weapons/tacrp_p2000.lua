@@ -58,9 +58,7 @@ SWEP.BalanceStats = {
     },
 }
 
-SWEP.ArcadeStats = {
-
-}
+SWEP.TTTReplace = TacRP.TTTReplacePreset.Pistol
 
 // "ballistics"
 

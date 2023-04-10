@@ -60,7 +60,7 @@ function SWEP:Equip(newowner)
         end
     end
 
-    if SERVER and IsValid(newowner) and self.StoredAmmo > 0 and self.Primary.Ammo != "none" and self.Primary.Ammo != "" then
+    if SERVER and IsValid(newowner) and self.Primary.ClipMax and self.StoredAmmo > 0 and self.Primary.Ammo != "none" and self.Primary.Ammo != "" then
         local ammo = newowner:GetAmmoCount(self.Primary.Ammo)
         local given = math.min(self.StoredAmmo, self.Primary.ClipMax - ammo)
 

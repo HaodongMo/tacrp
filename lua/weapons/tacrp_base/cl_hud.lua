@@ -284,7 +284,7 @@ function SWEP:DrawHUDBackground()
 
     if !self:GetCustomize() and GetConVar("tacrp_hud"):GetBool() then
 
-        if GetConVar("tacrp_drawhud"):GetBool() then
+        if GetConVar("tacrp_drawhud"):GetBool() and engine.ActiveGamemode() != "terrortown" then
 
             local w = ScreenScale(110)
             local h = ScreenScale(40)

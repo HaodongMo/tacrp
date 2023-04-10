@@ -60,8 +60,7 @@ SWEP.BalanceStats = {
     },
 }
 
-SWEP.ArcadeStats = {
-}
+SWEP.TTTReplace = {["weapon_zm_pistol"] = 0.5, ["weapon_ttt_glock"] = 0.5}
 
 // "ballistics"
 

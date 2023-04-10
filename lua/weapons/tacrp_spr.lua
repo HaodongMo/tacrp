@@ -34,7 +34,7 @@ SWEP.BalanceStats = {
     },
     [TacRP.BALANCE_TTT] = {
 
-        Description = "Well rounded hunting rifle with good damage even up close.\nEquipped with a 6x scope by default.",
+        Description = "Well rounded hunting rifle with good damage up close.\nEquipped with a 6x scope by default.",
 
         Damage_Max = 30,
         Damage_Min = 50,
@@ -64,6 +64,8 @@ SWEP.BalanceStats = {
         ReloadSpeedMult = 0.5,
     },
 }
+
+SWEP.TTTReplace = TacRP.TTTReplacePreset.SniperRifle
 
 // "ballistics"
 

@@ -45,16 +45,60 @@ TacRP.TTTReplaceLookup = {
     ["weapon_ttt_smokegrenade"] = true,
 }
 
-if engine.ActiveGamemode() != "terrortown" then return end
+TacRP.TTTReplacePreset = {
+    ["Pistol"] = {["weapon_zm_pistol"] = 1},
+    ["Magnum"] = {["weapon_zm_revolver"] = 1},
+    ["MachinePistol"] = {["weapon_ttt_glock"] = 1},
+    ["SMG"] = {["weapon_ttt_m16"] = 1, ["weapon_zm_mac10"] = 0.5},
+    ["AssaultRifle"] = {["weapon_ttt_m16"] = 0.5, ["weapon_zm_mac10"] = 1},
+    ["BattleRifle"] = {["weapon_ttt_m16"] = 1, ["weapon_zm_mac10"] = 1},
+    ["MarksmanRifle"] = {["weapon_zm_mac10"] = 0.5, ["weapon_zm_rifle"] = 1},
+    ["Shotgun"] = {["weapon_zm_shotgun"] = 1},
+    ["AutoShotgun"] = {["weapon_zm_shotgun"] = 0.5},
+    ["MachineGun"] = {["weapon_zm_sledge"] = 1},
+    ["SniperRifle"] = {["weapon_zm_rifle"] = 1},
+}
 
-hook.Add("OnGamemodeLoaded", "TacRP_TTT", function()
+TacRP.TTTReplaceCache = {}
+function TacRP.GetRandomTTTWeapon(key)
+    if !TacRP.TTTReplaceLookup[key] then return end
+    if !TacRP.TTTReplaceCache[key] then
+        TacRP.TTTReplaceCache[key] = {0, {}}
+        for i, wep in pairs(weapons.GetList()) do
+            local weap = weapons.Get(wep.ClassName)
+            if !weap or !weap.ArcticTacRP or wep.ClassName == "tacrp_base" or wep.ClassName == "tacrp_base_nade" or !wep.AutoSpawnable then
+                continue
+            end
+
+            if (istable(wep.TTTReplace) and wep.TTTReplace[key]) then
+                TacRP.TTTReplaceCache[key][1] = TacRP.TTTReplaceCache[key][1] + wep.TTTReplace[key]
+                TacRP.TTTReplaceCache[key][2][wep.ClassName] = wep.TTTReplace[key]
+            end
+        end
+    end
+
+    if TacRP.TTTReplaceCache[key][1] > 0 and #TacRP.TTTReplaceCache[key][2] > 0 then
+        local rng = math.random() * TacRP.TTTReplaceCache[key][1]
+        for k, v in ipairs(TacRP.TTTReplaceCache[key][2]) do
+            rng = rng - v
+            if rng <= 0 then
+                return k
+            end
+        end
+    end
+end
+
+if engine.ActiveGamemode() != "terrortown" then return end
+local function setupttt()
     for i, wep in pairs(weapons.GetList()) do
         local weap = weapons.Get(wep.ClassName)
         if !weap or !weap.ArcticTacRP or wep.ClassName == "tacrp_base" or wep.ClassName == "tacrp_base_nade" then
             continue
         end
 
-        if TacRP.AmmoToTTT[wep.Ammo] then
+        if wep.AmmoTTT then
+            wep.Ammo = wep.AmmoTTT
+        elseif TacRP.AmmoToTTT[wep.Ammo] then
             wep.Ammo = TacRP.AmmoToTTT[wep.Ammo]
         end
 
@@ -121,34 +165,25 @@ hook.Add("OnGamemodeLoaded", "TacRP_TTT", function()
         end
 
     end
-end)
+end
+hook.Add("OnGamemodeLoaded", "TacRP_TTT", setupttt)
 
 hook.Add( "OnEntityCreated", "TacRP_TTT_Spawn", function(ent)
     if CLIENT then return end
-    if GetConVar("ttt_weapon_include"):GetBool()
+    if GetConVar("tacrp_ttt_weapon_include"):GetBool()
             and TacRP.TTTReplaceLookup[ent:GetClass()] != nil
-            and math.random() <= GetConVar("ttt_weapon_replace"):GetFloat() then
+            and math.random() <= GetConVar("tacrp_ttt_weapon_replace"):GetFloat() then
         timer.Simple(0, function()
             if !IsValid(ent) or IsValid(ent:GetOwner()) then return end
 
-
-            --[[]
             local class = ent:GetClass()
-
-            local wpn = TacRP.GetRandomWeapon(class)
+            local wpn = TacRP.GetRandomTTTWeapon(class)
 
             if wpn then
                 local wpnent = ents.Create(wpn)
                 wpnent:SetPos(ent:GetPos())
                 wpnent:SetAngles(ent:GetAngles())
-
-                wpnent:NPC_Initialize()
-
                 wpnent:Spawn()
-
-                if engine.ActiveGamemode() == "terrortown" and GetConVar("arccw_ttt_atts"):GetBool() then
-                    wpnent:NPC_SetupAttachments()
-                end
 
                 timer.Simple(0, function()
                     if !ent:IsValid() then return end
@@ -156,7 +191,6 @@ hook.Add( "OnEntityCreated", "TacRP_TTT_Spawn", function(ent)
                     ent:Remove()
                 end)
             end
-            ]]
         end)
     end
 end)

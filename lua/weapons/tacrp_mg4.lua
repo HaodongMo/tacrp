@@ -62,6 +62,8 @@ SWEP.BalanceStats = {
     },
 }
 
+SWEP.TTTReplace = TacRP.TTTReplacePreset.MachineGun
+
 SWEP.BodyDamageMultipliers = {
     [HITGROUP_HEAD] = 2,
     [HITGROUP_CHEST] = 1.25,

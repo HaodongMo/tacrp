@@ -65,6 +65,8 @@ SWEP.BalanceStats = {
     },
 }
 
+SWEP.TTTReplace = TacRP.TTTReplacePreset.MachinePistol
+
 SWEP.ArcadeStats = {
 }
 
