@@ -692,7 +692,8 @@ hook.Add("VGUIMousePressed", "tacrp_grenademenu", function(pnl, mousecode)
         if mousecode == MOUSE_MIDDLE and TacRP.AreTheGrenadeAnimsReadyYet then
             local nadewep = currentnade.GrenadeWep
             if !nadewep or !wpn:CheckGrenade(currentnade.Index, true) then return end
-
+            wpn.GrenadeMenuAlpha = 0
+            gui.EnableScreenClicker(false)
             if LocalPlayer():HasWeapon(nadewep) then
                 input.SelectWeapon(LocalPlayer():GetWeapon(nadewep))
             else
