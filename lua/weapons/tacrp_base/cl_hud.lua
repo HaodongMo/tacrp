@@ -214,8 +214,10 @@ function SWEP:DrawBottomBar(x, y, w, h)
 
         local qty = nil --"INF"
 
-        if !TacRP.IsGrenadeInfiniteAmmo(nade) then
-            qty = tostring(self:GetOwner():GetAmmoCount(nade.Ammo))
+        if nade.Singleton then
+            qty = self:GetOwner():HasWeapon(nade.GrenadeWep) and 1 or 0
+        elseif !TacRP.IsGrenadeInfiniteAmmo(nade.Index) then
+            qty = self:GetOwner():GetAmmoCount(nade.Ammo)
         end
 
         local sg = ScreenScale(14)

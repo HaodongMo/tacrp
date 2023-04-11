@@ -77,9 +77,9 @@ function TacRP.GetRandomTTTWeapon(key)
         end
     end
 
-    if TacRP.TTTReplaceCache[key][1] > 0 and #TacRP.TTTReplaceCache[key][2] > 0 then
+    if TacRP.TTTReplaceCache[key][1] > 0 then
         local rng = math.random() * TacRP.TTTReplaceCache[key][1]
-        for k, v in ipairs(TacRP.TTTReplaceCache[key][2]) do
+        for k, v in pairs(TacRP.TTTReplaceCache[key][2]) do
             rng = rng - v
             if rng <= 0 then
                 return k
@@ -172,8 +172,9 @@ hook.Add("TacRP_LoadAtts", "TacRP_TTT", setupttt)
 hook.Add( "OnEntityCreated", "TacRP_TTT_Spawn", function(ent)
     if CLIENT then return end
     if GetConVar("tacrp_ttt_weapon_include"):GetBool()
-            and TacRP.TTTReplaceLookup[ent:GetClass()] != nil
+            and TacRP.TTTReplaceLookup[ent:GetClass()]
             and math.random() <= GetConVar("tacrp_ttt_weapon_replace"):GetFloat() then
+
         timer.Simple(0, function()
             if !IsValid(ent) or IsValid(ent:GetOwner()) then return end
 
@@ -188,7 +189,7 @@ hook.Add( "OnEntityCreated", "TacRP_TTT_Spawn", function(ent)
 
                 timer.Simple(0, function()
                     if !ent:IsValid() then return end
-                    wpnent:OnDrop(true)
+                    -- wpnent:OnDrop(true)
                     ent:Remove()
                 end)
             end

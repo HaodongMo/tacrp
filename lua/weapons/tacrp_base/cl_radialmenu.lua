@@ -79,7 +79,7 @@ function SWEP:DrawGrenadeHUD()
     local r2 = ScreenScale(40)
     local sg = ScreenScale(32)
     local ri = r * 0.667
-    local arcdegrees = 360 / #nades
+    local arcdegrees = 360 / math.max(1, #nades)
     local d = 360
     local ft = FrameTime()
 
@@ -138,6 +138,15 @@ function SWEP:DrawGrenadeHUD()
     draw.NoTexture()
     filledcircle(scrw / 2, scrh / 2, r, 32)
 
+    if #nades == 0 then
+        local nadetext = "NO GRENADES AVAILABLE"
+        surface.SetFont("TacRP_HD44780A00_5x8_8")
+        local nadetextw = surface.GetTextSize(nadetext)
+        surface.SetTextPos(scrw / 2 - nadetextw * 0.5, scrh / 2 + ScreenScale(6))
+        surface.DrawText(nadetext)
+        return
+    end
+
     surface.SetDrawColor(150, 150, 150, a * 100)
     draw.NoTexture()
     if currentind then
@@ -166,7 +175,9 @@ function SWEP:DrawGrenadeHUD()
 
         local qty = nil --"INF"
 
-        if !TacRP.IsGrenadeInfiniteAmmo(nade.Index) then
+        if nade.Singleton then
+            qty = self:GetOwner():HasWeapon(nade.GrenadeWep) and 1 or 0
+        elseif !TacRP.IsGrenadeInfiniteAmmo(nade.Index) then
             qty = self:GetOwner():GetAmmoCount(nade.Ammo)
         end
 
@@ -207,7 +218,12 @@ function SWEP:DrawGrenadeHUD()
     surface.DrawText(nadetext)
 
     if !TacRP.IsGrenadeInfiniteAmmo(nade.Index) then
-        local qty = "x" ..  tostring(self:GetOwner():GetAmmoCount(nade.Ammo))
+        local qty
+        if nade.Singleton then
+            qty = self:GetOwner():HasWeapon(nade.GrenadeWep) and "x1" or "x0"
+        else
+            qty = "x" .. tostring(self:GetOwner():GetAmmoCount(nade.Ammo))
+        end
         surface.SetFont("TacRP_HD44780A00_5x8_8")
         local qtyw = surface.GetTextSize(qty)
         surface.SetTextPos(scrw / 2 - qtyw * 0.5, scrh / 2 + ScreenScale(16))

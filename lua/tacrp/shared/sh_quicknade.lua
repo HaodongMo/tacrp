@@ -163,6 +163,62 @@ TacRP.QuickNades = {
         Category = "SPECIAL",
         SortOrder = 7,
     },
+
+    ["ttt_smoke"] = {
+        PrintName = "SMOKE",
+        GrenadeEnt = "ttt_smokegrenade_proj",
+        GrenadeWep = "weapon_ttt_smokegrenade",
+        ThrowForce = 4000,
+        Model = "models/weapons/tacint/v_quicknade_smoke.mdl",
+        Spoon = false,
+        Icon = Material("TacRP/grenades/smoke.png", "mips smooth"),
+
+        Singleton = true,
+        TTTTimer = 2,
+
+        FullName = "Smoke Grenade",
+        DetType = "Timed - 2 seconds",
+        Description = "Terrorist issue smoke grenade.\n\nCreates a smokescreen.",
+        Category = "TTT",
+        SortOrder = 0,
+    },
+    ["ttt_conf"] = {
+        PrintName = "CONCUSS",
+        GrenadeEnt = "ttt_confgrenade_proj",
+        GrenadeWep = "weapon_ttt_confgrenade",
+        ThrowForce = 4000,
+        Model = "models/weapons/tacint/v_quicknade_frag.mdl",
+        Spoon = false,
+        Icon = Material("TacRP/grenades/frag.png", "mips smooth"),
+
+        Singleton = true,
+        TTTTimer = 3,
+
+        FullName = "Discombobulator",
+        DetType = "Timed - 3 seconds",
+        Description = "Terrorist issue concussion grenade.\n\nDoes no damage, but creates a blast that pulls props in and pulls players out.",
+        Category = "TTT",
+        SortOrder = 0,
+    },
+    ["ttt_fire"] = {
+        PrintName = "FIRE",
+        GrenadeEnt = "ttt_firegrenade_proj",
+        GrenadeWep = "weapon_zm_molotov",
+        ThrowForce = 4000,
+        Model = "models/weapons/tacint/v_quicknade_smoke.mdl",
+        Material = "models/tacint/weapons/v_models/smoke/thermite-1",
+        Spoon = false,
+        Icon = Material("TacRP/grenades/thermite.png", "mips smooth"),
+
+        Singleton = true,
+        TTTTimer = 3,
+
+        FullName = "Incendiary Grenade",
+        DetType = "Timed - 3 seconds",
+        Description = "Terrorist issue incendiary grenade.\n\nExplodes with minor damage, and starts fires in an area.",
+        Category = "TTT",
+        SortOrder = 0,
+    },
 }
 
 TacRP.QuickNades_Index = {}
@@ -187,6 +243,9 @@ function TacRP.IsGrenadeInfiniteAmmo(i)
     end
 
     if !istable(nade) then return false end
+
+    -- ttt grenades do not use ammo
+    if nade.Singleton then return false end
 
     -- no ammo type means infinite ammo
     if !nade.Ammo then return true end

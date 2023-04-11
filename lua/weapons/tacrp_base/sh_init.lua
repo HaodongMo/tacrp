@@ -303,6 +303,9 @@ function SWEP:OnRemove()
     if IsValid(self:GetOwner()) then
         self:ToggleBoneMods(TacRP.BLINDFIRE_NONE)
     end
+    if CLIENT and (self:GetCustomize() or (self.GrenadeMenuAlpha or 0) > 0 or (self.BlindFireMenuAlpha or 0) > 0) then
+        gui.EnableScreenClicker(false)
+    end
 end
 
 function SWEP:EquipAmmo(ply)

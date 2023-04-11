@@ -8,18 +8,19 @@ function SWEP:PrimeGrenade()
     if self:StillWaiting(nil, true) then return end
     if self:GetPrimedGrenade() then return end
 
+    if engine.ActiveGamemode() == "terrortown" and !self:GetValue("PrimaryGrenade") and !self:CheckGrenade(nil, true) then
+        self:SelectGrenade(nil, true)
+    end
+
     -- if self:SprintLock() then return end
 
     self:CancelReload()
 
     local nade = self:GetValue("PrimaryGrenade") and TacRP.QuickNades[self:GetValue("PrimaryGrenade")] or self:GetGrenade()
 
-    if !self:GetValue("PrimaryGrenade") and !self:CheckGrenade() then
-        self:SelectGrenade()
-        return
-    end
-
-    if !TacRP.IsGrenadeInfiniteAmmo(nade) then
+    if nade.Singleton then
+        if !self:GetOwner():HasWeapon(nade.GrenadeWep) then return end
+    elseif !TacRP.IsGrenadeInfiniteAmmo(nade) then
         local ammo = self:GetOwner():GetAmmoCount(nade.Ammo)
         if ammo < 1 then return end
 
@@ -114,6 +115,14 @@ function SWEP:ThrowGrenade()
                 rocket.ImpactFuse = true
             end
 
+            if nade.TTTTimer then
+                rocket:SetGravity(0.4)
+                rocket:SetFriction(0.2)
+                rocket:SetElasticity(0.45)
+                rocket:SetDetonateExact(CurTime() + nade.TTTTimer)
+                rocket:SetThrower(self:GetOwner())
+            end
+
             local phys = rocket:GetPhysicsObject()
 
             if phys:IsValid() then
@@ -153,7 +162,13 @@ function SWEP:ThrowGrenade()
                 self:PlayAnimation("deploy", self:GetValue("DeployTimeMult"), true, true)
             end
         end)
-    elseif nade.GrenadeWep and self:GetOwner():HasWeapon(nade.GrenadeWep) and !TacRP.IsGrenadeInfiniteAmmo(nade) and self:GetOwner():GetAmmoCount(nade.Ammo) == 0 then
+    elseif nade.Singleton and self:GetOwner():HasWeapon(nade.GrenadeWep) then
+        local nadewep = self:GetOwner():GetWeapon(nade.GrenadeWep)
+        nadewep.OnRemove = nil -- TTT wants to switch to unarmed when the nade wep is removed - DON'T.
+        if SERVER then
+            nadewep:Remove()
+        end
+    elseif nade.GrenadeWep and self:GetOwner():HasWeapon(nade.GrenadeWep) and !TacRP.IsGrenadeInfiniteAmmo(nade) and (nade.Singleton or self:GetOwner():GetAmmoCount(nade.Ammo) == 0) then
         if SERVER then
             self:GetOwner():GetWeapon(nade.GrenadeWep):Remove()
         end
@@ -188,7 +203,7 @@ function SWEP:GetNextGrenade(ind)
     return self:GetGrenade(ind)
 end
 
-function SWEP:SelectGrenade(index)
+function SWEP:SelectGrenade(index, requireammo)
     if !IsFirstTimePredicted() then return end
     if self:GetPrimedGrenade() then return end
 
@@ -210,17 +225,23 @@ function SWEP:SelectGrenade(index)
         ind = TacRP.QuickNades_Count
     end
 
-    self:GetOwner():SetNWInt("ti_nade", ind)
-
-    if !self:CheckGrenade(ind) then
-        self:SelectGrenade()
+    if self:CheckGrenade(ind, requireammo) then
+        self:GetOwner():SetNWInt("ti_nade", ind)
+    else
+        local nades = self:GetAvailableGrenades(requireammo)
+        if #nades > 0 then
+            self:GetOwner():SetNWInt("ti_nade", nades[1].Index)
+        end
     end
 end
 
 function SWEP:CheckGrenade(index, checkammo)
     index = index or (self:GetValue("PrimaryGrenade") and TacRP.QuickNades_Index[self:GetValue("PrimaryGrenade")] or self:GetOwner():GetNWInt("ti_nade", 1))
     local nade = self:GetGrenade(index)
-    local hasammo = nade.Ammo == nil or self:GetOwner():GetAmmoCount(nade.Ammo) > 0
+    if nade.Singleton then
+        return self:GetOwner():HasWeapon(nade.GrenadeWep)
+    end
+    local hasammo = (nade.Ammo == nil or self:GetOwner():GetAmmoCount(nade.Ammo) > 0)
     if (nade.Secret and !hasammo and (!nade.SecretWeapon or !self:GetOwner():HasWeapon(nade.SecretWeapon))) or (nade.RequireStat and !self:GetValue(nade.RequireStat)) then
         return false
     end
