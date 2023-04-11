@@ -8,7 +8,7 @@ end
 function SWEP:TimerExists(id)
     if (!self.ActiveTimers) then return false end
 
-    for _, v in ipairs(self.ActiveTimers) do
+    for _, v in pairs(self.ActiveTimers) do
         if v[2] == id then return true end
     end
 
@@ -18,7 +18,7 @@ end
 function SWEP:KillTimer(id)
     if (!self.ActiveTimers) then return false end
 
-    for k, v in ipairs(self.ActiveTimers) do
+    for k, v in pairs(self.ActiveTimers) do
         if v[2] == id then table.remove(self.ActiveTimers, k) end
     end
 end
@@ -27,7 +27,7 @@ function SWEP:KillTimers()
     if (!self.ActiveTimers) then return end
 
     -- memory
-    for k in ipairs(self.ActiveTimers) do
+    for k in pairs(self.ActiveTimers) do
         self.ActiveTimers[k] = nil
     end
 
@@ -37,10 +37,10 @@ end
 function SWEP:ProcessTimers()
     if (!self.ActiveTimers) then return end
 
-    for k, v in ipairs(self.ActiveTimers) do
+    for k, v in pairs(self.ActiveTimers) do
         if v[1] <= UCT then
+            self.ActiveTimers[k] = nil
             v[3]()
-            table.remove(self.ActiveTimers, k)
         end
     end
 end
