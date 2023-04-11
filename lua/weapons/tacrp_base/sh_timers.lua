@@ -37,15 +37,10 @@ end
 function SWEP:ProcessTimers()
     if (!self.ActiveTimers) then return end
 
-    local timer = 0
-
     for k, v in ipairs(self.ActiveTimers) do
-        timer = v[1]
-
-        if timer > UCT then
-            table.remove(self.ActiveTimers, k)
-        else
+        if v[1] <= UCT then
             v[3]()
+            table.remove(self.ActiveTimers, k)
         end
     end
 end
