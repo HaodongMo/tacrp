@@ -24,7 +24,7 @@ function SWEP:PrimeGrenade()
         local ammo = self:GetOwner():GetAmmoCount(nade.Ammo)
         if ammo < 1 then return end
 
-        self:GetOwner():SetAmmo(ammo - 1, nade.Ammo)
+        -- self:GetOwner():SetAmmo(ammo - 1, nade.Ammo)
     end
 
     local rate = self:GetValue("QuickNadeTimeMult") / (nade.ThrowSpeed or 1)
@@ -150,25 +150,29 @@ function SWEP:ThrowGrenade()
                 end
             end
         end
+
+        if !nade.Singleton and !TacRP.IsGrenadeInfiniteAmmo(nade) then
+            self:GetOwner():RemoveAmmo(1, nade.Ammo)
+        end
     end
 
     if self:GetValue("PrimaryGrenade") then
-        self:SetTimer(t, function()
-            if !TacRP.IsGrenadeInfiniteAmmo(nade) and self:GetOwner():GetAmmoCount(nade.Ammo) == 0 then
-                if SERVER then
-                    self:Remove()
-                end
-            else
-                self:PlayAnimation("deploy", self:GetValue("DeployTimeMult"), true, true)
+        if !TacRP.IsGrenadeInfiniteAmmo(nade) and self:GetOwner():GetAmmoCount(nade.Ammo) == 0 then
+            if SERVER then
+                self:Remove()
             end
-        end)
+        else
+            self:SetTimer(t, function()
+                self:PlayAnimation("deploy", self:GetValue("DeployTimeMult"), true, true)
+            end)
+        end
     elseif nade.Singleton and self:GetOwner():HasWeapon(nade.GrenadeWep) then
         local nadewep = self:GetOwner():GetWeapon(nade.GrenadeWep)
         nadewep.OnRemove = nil -- TTT wants to switch to unarmed when the nade wep is removed - DON'T.
         if SERVER then
             nadewep:Remove()
         end
-    elseif nade.GrenadeWep and self:GetOwner():HasWeapon(nade.GrenadeWep) and !TacRP.IsGrenadeInfiniteAmmo(nade) and (nade.Singleton or self:GetOwner():GetAmmoCount(nade.Ammo) == 0) then
+    elseif nade.GrenadeWep and self:GetOwner():HasWeapon(nade.GrenadeWep) and !TacRP.IsGrenadeInfiniteAmmo(nade) and self:GetOwner():GetAmmoCount(nade.Ammo) == 0 then
         if SERVER then
             self:GetOwner():GetWeapon(nade.GrenadeWep):Remove()
         end

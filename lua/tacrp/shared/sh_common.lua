@@ -126,7 +126,7 @@ for k, v in ipairs(TacRP.MuzzleEffects) do
     TacRP.MuzzleEffectsLookup[v] = k
 end
 
-TacRP.AreTheGrenadeAnimsReadyYet = false
+TacRP.AreTheGrenadeAnimsReadyYet = true
 
 function TacRP.ShouldWeFunny()
     local i = GetConVar("tacrp_funny_loudnoises"):GetInt()

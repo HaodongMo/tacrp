@@ -58,15 +58,16 @@ function ENT:Initialize()
         if self.Defusable then
             self:SetUseType(SIMPLE_USE)
         end
-        self:PhysWake()
 
         local phys = self:GetPhysicsObject()
         if !phys:IsValid() then
             self:Remove()
+            return
         end
 
         phys:SetDragCoefficient(0)
         phys:SetBuoyancyRatio(0)
+        phys:Wake()
 
         if self.IsRocket then
             phys:EnableGravity(false)
@@ -94,18 +95,10 @@ function ENT:OnRemove()
     end
 end
 
---[[]
-function ENT:TakeDamage(amt, atk, inf)
-    self:SetOwner(atk)
-
-    self:PreDetonate()
-end
-]]
-
 function ENT:OnTakeDamage(dmg)
     if self.Detonated then return end
 
-    self:TakePhysicsDamage(dmg)
+    // self:TakePhysicsDamage(dmg)
 
     if self.ExplodeOnDamage then
         if IsValid(self:GetOwner()) and IsValid(dmg:GetAttacker()) then self:SetOwner(dmg:GetAttacker())

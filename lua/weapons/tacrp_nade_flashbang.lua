@@ -9,8 +9,8 @@ SWEP.IconOverride = "entities/tacrp_ammo_flashbang.png"
 SWEP.PrintName = "Flashbang"
 SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 
-SWEP.ViewModel = "models/weapons/cstrike/c_eq_fraggrenade.mdl"
-SWEP.WorldModel = "models/weapons/w_eq_fraggrenade.mdl"
+SWEP.ViewModel = "models/weapons/cstrike/c_eq_flashbang.mdl"
+SWEP.WorldModel = "models/weapons/w_eq_flashbang.mdl"
 
 SWEP.ViewModelFOV = 65
 
@@ -23,5 +23,7 @@ SWEP.AnimationTranslationTable = {
     ["throw_grenade"] = "throw",
     ["throw_grenade_underhand"] = "throw",
 }
+
+SWEP.TTTReplace = {["weapon_ttt_confgrenade"] = 1}
 
 SWEP.Attachments = {}

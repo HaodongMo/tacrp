@@ -23,4 +23,7 @@ SWEP.AnimationTranslationTable = {
     ["throw_grenade_underhand"] = "throw",
 }
 
+SWEP.TTTReplace = {}
+SWEP.AutoSpawnable = false
+
 SWEP.Attachments = {}

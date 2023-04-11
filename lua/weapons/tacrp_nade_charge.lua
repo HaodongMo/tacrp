@@ -24,4 +24,6 @@ SWEP.AnimationTranslationTable = {
     ["throw_grenade_underhand"] = "throw",
 }
 
+SWEP.TTTReplace = {["weapon_ttt_confgrenade"] = 0.5}
+
 SWEP.Attachments = {}
