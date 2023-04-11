@@ -1,17 +1,14 @@
-local tick = 0
-
-function SWEP:InitTimers()
-    self.ActiveTimers = {} -- { { time, id, func } }
-end
-
 function SWEP:SetTimer(time, callback, id)
     if !IsFirstTimePredicted() then return end
 
+	self.ActiveTimers = self.ActiveTimers or {}
     table.insert(self.ActiveTimers, { time + CurTime(), id or "", callback })
 end
 
 function SWEP:TimerExists(id)
-    for _, v in pairs(self.ActiveTimers) do
+	if (!self.ActiveTimers) then return false end
+
+    for _, v in ipairs(self.ActiveTimers) do
         if v[2] == id then return true end
     end
 
@@ -19,33 +16,36 @@ function SWEP:TimerExists(id)
 end
 
 function SWEP:KillTimer(id)
-    local keeptimers = {}
+    if (!self.ActiveTimers) then return false end
 
-    for _, v in pairs(self.ActiveTimers) do
-        if v[2] != id then table.insert(keeptimers, v) end
+    for k, v in ipairs(self.ActiveTimers) do
+        if v[2] == id then table.remove(self.ActiveTimers, k) end
     end
-
-    self.ActiveTimers = keeptimers
 end
 
 function SWEP:KillTimers()
+	if (!self.ActiveTimers) then return end
+
+	-- memory
+	for k in ipairs(self.ActiveTimers) do
+		self.ActiveTimers[k] = nil
+	end
+
     self.ActiveTimers = {}
 end
 
 function SWEP:ProcessTimers()
-    local keeptimers, UCT = {}, CurTime()
+	if (!self.ActiveTimers) then return end
 
-    if CLIENT and UCT == tick then return end
+	local timer = 0
 
-    if !self.ActiveTimers then self:InitTimers() end
+    for k, v in ipairs(self.ActiveTimers) do
+		timer = v[1]
 
-    for _, v in pairs(self.ActiveTimers) do
-        if v[1] <= UCT then v[3]() end
+		if timer > UCT then
+			table.remove(self.ActiveTimers, k)
+        elseif timer <= UCT then
+			v[3]()
+		end
     end
-
-    for _, v in pairs(self.ActiveTimers) do
-        if v[1] > UCT then table.insert(keeptimers, v) end
-    end
-
-    self.ActiveTimers = keeptimers
 end
