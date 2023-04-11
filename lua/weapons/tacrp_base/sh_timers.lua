@@ -44,7 +44,7 @@ function SWEP:ProcessTimers()
 
         if timer > UCT then
             table.remove(self.ActiveTimers, k)
-        elseif timer <= UCT then
+        else
             v[3]()
         end
     end
