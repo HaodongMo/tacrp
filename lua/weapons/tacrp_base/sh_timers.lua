@@ -19,7 +19,7 @@ function SWEP:KillTimer(id)
     if (!self.ActiveTimers) then return false end
 
     for k, v in pairs(self.ActiveTimers) do
-        if v[2] == id then table.remove(self.ActiveTimers, k) end
+        if v[2] == id then self.ActiveTimers[k] = nil end
     end
 end
 
