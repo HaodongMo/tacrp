@@ -14,9 +14,9 @@ end
 
 ENT.Particles = nil
 ENT.SmokeRadius = 256
-ENT.SmokeColor = Color(220, 220, 100)
+ENT.SmokeColor = Color(220, 220, 220)
 ENT.BillowTime = 1
-ENT.Life = 10
+ENT.Life = 12
 
 AddCSLuaFile()
 
@@ -106,81 +106,81 @@ function ENT:Think()
     if SERVER then
         if !self:GetOwner():IsValid() then self:Remove() return end
 
-        local o = self:GetOwner()
-        local origin = self:GetPos() + Vector(0, 0, 16)
+        -- local o = self:GetOwner()
+        -- local origin = self:GetPos() + Vector(0, 0, 16)
 
-        local dmg = DamageInfo()
-        dmg:SetAttacker(self:GetOwner())
-        dmg:SetInflictor(self)
-        dmg:SetDamageType(DMG_NERVEGAS)
-        dmg:SetDamageForce(Vector(0, 0, 0))
-        dmg:SetDamagePosition(self:GetPos())
-        dmg:SetDamageCustom(1024) -- immersive death
+        -- local dmg = DamageInfo()
+        -- dmg:SetAttacker(self:GetOwner())
+        -- dmg:SetInflictor(self)
+        -- dmg:SetDamageType(DMG_NERVEGAS)
+        -- dmg:SetDamageForce(Vector(0, 0, 0))
+        -- dmg:SetDamagePosition(self:GetPos())
+        -- dmg:SetDamageCustom(1024) -- immersive death
 
         -- util.BlastDamageInfo(dmg, self:GetPos(), 300)
 
-        for i, k in pairs(ents.FindInSphere(origin, 300)) do
-            if k == self:GetOwner() then continue end
+        -- for i, k in pairs(ents.FindInSphere(origin, 300)) do
+        --     if k == self:GetOwner() then continue end
 
-            if k:IsPlayer() or k:IsNPC() or k:IsNextBot() then
-                local tr = util.TraceLine({
-                    start = origin,
-                    endpos = k:EyePos() or k:WorldSpaceCenter(),
-                    filter = self,
-                    mask = MASK_SOLID_BRUSHONLY
-                })
-                if tr.Fraction < 1 then continue end
-                local dist = (tr.HitPos - tr.StartPos):Length()
-                local delta = dist / 320
+        --     if k:IsPlayer() or k:IsNPC() or k:IsNextBot() then
+        --         local tr = util.TraceLine({
+        --             start = origin,
+        --             endpos = k:EyePos() or k:WorldSpaceCenter(),
+        --             filter = self,
+        --             mask = MASK_SOLID_BRUSHONLY
+        --         })
+        --         if tr.Fraction < 1 then continue end
+        --         local dist = (tr.HitPos - tr.StartPos):Length()
+        --         local delta = dist / 320
 
-                dmg:SetDamage(k:IsPlayer() and math.Rand(1, 3) or math.Rand(5, 15))
+        --         dmg:SetDamage(k:IsPlayer() and math.Rand(1, 3) or math.Rand(5, 15))
 
-                k:TakeDamageInfo(dmg)
+        --         k:TakeDamageInfo(dmg)
 
-                if k:IsPlayer() then
-                    k:ScreenFade( SCREENFADE.IN, Color(150, 150, 50, 100), 2 * delta, 0 )
+        --         if k:IsPlayer() then
+        --             k:ScreenFade( SCREENFADE.IN, Color(150, 150, 50, 100), 2 * delta, 0 )
 
-                    local timername = "tacrp_ninja_gas_" .. k:EntIndex()
-                    local reps = 3
+        --             local timername = "tacrp_ninja_gas_" .. k:EntIndex()
+        --             local reps = 3
 
-                    if timer.Exists(timername) then
-                        reps = math.Clamp(timer.RepsLeft(timername) + 3, reps, 10)
-                        timer.Remove(timername)
-                    end
-                    timer.Create(timername, 2, reps, function()
-                        if !IsValid(k) or !k:Alive() then
-                            timer.Remove(timername)
-                            return
-                        end
-                        k:ScreenFade( SCREENFADE.IN, Color(150, 150, 50, 5), 0.1, 0 )
-                        if k:Health() > 1 then
-                            local d = DamageInfo()
-                            d:SetDamageType(DMG_NERVEGAS)
-                            d:SetDamage(math.random(1, 2))
-                            d:SetInflictor(IsValid(self) and self or o)
-                            d:SetAttacker(o)
-                            d:SetDamageForce(k:GetForward())
-                            d:SetDamagePosition(k:GetPos())
-                            d:SetDamageCustom(1024)
-                            k:TakeDamageInfo(d)
-                        else
-                            k:ViewPunch(Angle(math.Rand(-2, 2), 0, 0))
-                        end
-                        if math.random() <= 0.3 then
-                            k:EmitSound("ambient/voices/cough" .. math.random(1, 4) .. ".wav", 80, math.Rand(95, 105))
-                        end
-                    end)
+        --             if timer.Exists(timername) then
+        --                 reps = math.Clamp(timer.RepsLeft(timername) + 3, reps, 10)
+        --                 timer.Remove(timername)
+        --             end
+        --             timer.Create(timername, 2, reps, function()
+        --                 if !IsValid(k) or !k:Alive() then
+        --                     timer.Remove(timername)
+        --                     return
+        --                 end
+        --                 k:ScreenFade( SCREENFADE.IN, Color(150, 150, 50, 5), 0.1, 0 )
+        --                 if k:Health() > 1 then
+        --                     local d = DamageInfo()
+        --                     d:SetDamageType(DMG_NERVEGAS)
+        --                     d:SetDamage(math.random(1, 2))
+        --                     d:SetInflictor(IsValid(self) and self or o)
+        --                     d:SetAttacker(o)
+        --                     d:SetDamageForce(k:GetForward())
+        --                     d:SetDamagePosition(k:GetPos())
+        --                     d:SetDamageCustom(1024)
+        --                     k:TakeDamageInfo(d)
+        --                 else
+        --                     k:ViewPunch(Angle(math.Rand(-2, 2), 0, 0))
+        --                 end
+        --                 if math.random() <= 0.3 then
+        --                     k:EmitSound("ambient/voices/cough" .. math.random(1, 4) .. ".wav", 80, math.Rand(95, 105))
+        --                 end
+        --             end)
 
-                    if math.random() <= 0.3 then
-                        k:EmitSound("ambient/voices/cough" .. math.random(1, 4) .. ".wav", 80, math.Rand(95, 105))
-                    end
-                elseif k:IsNPC() then
-                    k:SetSchedule(SCHED_STANDOFF)
-                end
-            end
-        end
+        --             if math.random() <= 0.3 then
+        --                 k:EmitSound("ambient/voices/cough" .. math.random(1, 4) .. ".wav", 80, math.Rand(95, 105))
+        --             end
+        --         elseif k:IsNPC() then
+        --             k:SetSchedule(SCHED_STANDOFF)
+        --         end
+        --     end
+        -- end
 
-        self:NextThink(CurTime() + 1)
+        -- self:NextThink(CurTime() + 1)
 
         if self.dt < CurTime() then
             SafeRemoveEntity(self)

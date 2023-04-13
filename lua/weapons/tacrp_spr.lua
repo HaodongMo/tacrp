@@ -43,6 +43,7 @@ SWEP.BalanceStats = {
 
         RPM = 45,
         ShootTimeMult = 0.9,
+        HipFireSpreadPenalty = 0.025,
 
         BodyDamageMultipliers = {
             [HITGROUP_HEAD] = 5,

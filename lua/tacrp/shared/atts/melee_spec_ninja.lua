@@ -9,7 +9,7 @@ ATT.SortOrder = 2
 
 ATT.SilentFootstep = true
 
-local smokedelay = 18
+local smokedelay = 10
 
 local function makehitsound(ent)
     if TacRP.ShouldWeFunny() then

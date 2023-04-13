@@ -19,7 +19,7 @@ SWEP.Slot = 2
 
 SWEP.BalanceStats = {
     [TacRP.BALANCE_SBOX] = {
-        Damage_Max = 9,
+        Damage_Max = 10,
         Damage_Min = 3,
 
         Range_Min = 200,
@@ -32,13 +32,15 @@ SWEP.BalanceStats = {
         ReloadSpeedMult = 1,
     },
     [TacRP.BALANCE_TTT] = {
+        Description = "Close range SMG with extremely high fire rate. Practically no recoil, but accuracy is very poor.",
+
         Damage_Max = 12,
         Damage_Min = 4,
         Range_Min = 100,
         Range_Max = 2000,
 
-        Spread = 0.01,
-        RecoilSpreadPenalty = 0.005,
+        Spread = 0.012,
+        RecoilSpreadPenalty = 0.003,
         HipFireSpreadPenalty = 0.015,
         RecoilMaximum = 12,
 

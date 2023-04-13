@@ -25,6 +25,8 @@ function SWEP:Melee(alt)
 
     self:EmitSound(self:ChooseSound(self:GetValue("Sound_MeleeSwing")), 75, 100, 1)
 
+    self:GetOwner():LagCompensation(true)
+
     local dmg = self:GetValue("MeleeDamage")
     local range = self:GetValue("MeleeRange")
     if alt then
@@ -113,6 +115,8 @@ function SWEP:Melee(alt)
             t = self:GetValue("Melee2AttackMissTime")
         end
     end
+
+    self:GetOwner():LagCompensation(false)
 
     self:SetLastMeleeTime(CurTime())
     self:SetNextSecondaryFire(CurTime() + t)

@@ -132,4 +132,6 @@ hook.Add("PlayerSpawn", "TacRP_Quickstep", function(ply, trans)
     if trans then return end
     ply:SetNWFloat("TacRPDashCharge", 1)
     ply:SetNWFloat("TacRPNinjaSmoke", 0)
+    ply:SetNWFloat("TacRPCharge", 1)
+    ply:SetNWFloat("TacRPChargeTime", 0)
 end)
