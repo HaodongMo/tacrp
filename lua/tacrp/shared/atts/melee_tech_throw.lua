@@ -6,6 +6,8 @@ ATT.Pros = {"ALT-FIRE: Throw knife", "Does not consume weapon or ammo"}
 
 ATT.Category = {"melee_tech"}
 
+ATT.Mult_Melee2Damage = 0.9
+
 ATT.SortOrder = 3
 
 ATT.Hook_SecondaryAttack = function(self)
@@ -26,14 +28,14 @@ ATT.Hook_SecondaryAttack = function(self)
 
         if !IsValid(rocket) then return end
 
-        local src, ang = self:GetOwner():GetShootPos(), self:GetShootDir() + Angle(-3, 0, 0)
+        local src, ang = self:GetOwner():GetShootPos(), self:GetShootDir() + Angle(-1, 0, 0)
         local spread = 0
-        local force = 1200
+        local force = 3000
         local dispersion = Angle(math.Rand(-1, 1), math.Rand(-1, 1), 0)
         dispersion = dispersion * spread * 36
 
         rocket.Model = self.ThrownKnifeModel or self.WorldModel
-        rocket.Damage = self:GetValue("MeleeDamage")
+        rocket.Damage = self:GetValue("Melee2Damage")
 
         rocket:SetPos(src)
         rocket:SetOwner(self:GetOwner())

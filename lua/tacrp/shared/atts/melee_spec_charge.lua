@@ -42,6 +42,8 @@ ATT.Hook_PreReload = function(wep)
         wep:SetShouldHoldType()
     end)
 
+    ply:EmitSound("^npc/stalker/go_alert2.wav", 80, 95)
+
     if game.SinglePlayer() then
         wep:CallOnClient("Reload")
     end
