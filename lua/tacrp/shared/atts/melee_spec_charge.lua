@@ -2,7 +2,7 @@ ATT.PrintName = "Charge"
 ATT.FullName = "demoknight tf2"
 ATT.Icon = Material("entities/tacrp_att_melee_spec_charge.png", "mips smooth")
 ATT.Description = "demoknight tf2 demoknight tf2 demoknight tf2 demoknight tf2"
-ATT.Pros = {"RELOAD: Charge forwards", "Damage on impact"}
+ATT.Pros = {"RELOAD: Charge forwards", "Bonus damage after impact or during charge"}
 ATT.Cons = {"Limited turn control"}
 
 ATT.Category = {"melee_spec"}
@@ -12,6 +12,7 @@ ATT.SortOrder = 5
 ATT.KnifeCharge = true
 
 local chargedur = 1.5
+local followup = 0.75
 
 local function wishspeedthreshold()
     return 100 * GetConVar("sv_friction"):GetFloat() / GetConVar("sv_accelerate"):GetFloat()
@@ -20,14 +21,20 @@ end
 ATT.Hook_PreShoot = function(wep)
     local ply = wep:GetOwner()
 
-    if ply:GetNWFloat("TacRPChargeTime", 0) + chargedur > CurTime() then
+    if ply:GetNWFloat("TacRPChargeTime", 0) + chargedur + followup > CurTime() then
         wep:Melee(true)
         ply:SetNWFloat("TacRPChargeTime", 0)
+        return true
+    elseif ply:GetNWFloat("TacRPChargeFollowup", 0) > CurTime() then
+        wep:Melee(true)
+        ply:SetNWFloat("TacRPChargeFollowup", 0)
         return true
     end
 end
 
 ATT.Hook_PreReload = function(wep)
+    if !IsFirstTimePredicted() then return end
+
     local ply = wep:GetOwner()
 
     if ply:GetNWFloat("TacRPChargeTime", 0) + 0.25 > CurTime() or !ply:KeyPressed(IN_RELOAD) or ply:GetMoveType() == MOVETYPE_NOCLIP or ply:GetNWFloat("TacRPCharge", 0) < 1 then return end
@@ -42,7 +49,7 @@ ATT.Hook_PreReload = function(wep)
         wep:SetShouldHoldType()
     end)
 
-    ply:EmitSound("^npc/stalker/go_alert2.wav", 80, 95)
+    ply:EmitSound("TacRP.Charge.Windup", 80)
 
     if game.SinglePlayer() then
         wep:CallOnClient("Reload")
@@ -56,6 +63,11 @@ ATT.Hook_PostThink = function(wep)
     if (game.SinglePlayer() or IsFirstTimePredicted()) and ply:GetNWFloat("TacRPChargeTime", 0) + chargedur < CurTime() then
         ply:SetNWFloat("TacRPCharge", math.min(1, ply:GetNWFloat("TacRPCharge", 0) + FrameTime() / 1))
     end
+end
+
+local function ChargeFraction(ply)
+    local g = 0.25
+    return 1 - math.Clamp((ply:GetNWFloat("TacRPChargeTime", 0) + chargedur - CurTime()) / chargedur, 0, 1)
 end
 
 function ATT.TacticalDraw(self)
@@ -77,14 +89,13 @@ function ATT.TacticalDraw(self)
     h = h - ScreenScale(2)
 
     local c = math.Clamp(self:GetOwner():GetNWFloat("TacRPCharge", 0), 0, 1)
-    local clr = 255
+    local d = 1
     if self:GetOwner():GetNWFloat("TacRPChargeTime", 0) + chargedur > CurTime() then
         c = math.Clamp((self:GetOwner():GetNWFloat("TacRPChargeTime", 0) + chargedur - CurTime()) / chargedur, 0, 1)
-        clr = c * 255
+        d = 1 - ChargeFraction(self:GetOwner())
     end
 
-
-    surface.SetDrawColor(255, clr, clr, 100)
+    surface.SetDrawColor(255, 255 * d ^ 0.5, 255 * d, 100)
     surface.DrawRect(x, y, w * c, h)
 
     surface.SetDrawColor(255, 255, 255, 200)
@@ -346,7 +357,8 @@ hook.Add("Move", "TacRP_Charge", function(ply, mv)
 
         local pos = mv:GetOrigin()
 
-        -- naive implementation: always
+        -- naive implementation: always move in direction of aim.
+        -- does not allow for cool stuff like charge strafing
         -- local v = mv:GetVelocity().z
         -- local speed = mv:GetVelocity():Dot(ply:GetForward())
         -- mv:SetVelocity(ply:GetForward() * math.max(ply:GetRunSpeed() + (ply:IsOnGround() and 450 or 350), speed) + Vector(0, 0, v))
@@ -371,25 +383,39 @@ hook.Add("Move", "TacRP_Charge", function(ply, mv)
         local currentspeed = mv:GetVelocity():Dot(wishdir)
         local addspeed = wishspeed - currentspeed
 
+        -- Grounded friction is constantly trying to slow us down. Counteract it!
+        -- TF2 doesn't have to deal with it since it disables friction in-engine. We can't since I don't want to reimplement gamemovement.cpp
+        if ply:IsOnGround() then
+            addspeed = addspeed + wishspeed ^ 0.7 -- approximate grounded friciton with magic number
+        end
+
         if addspeed > 0 then
             accelspeed = math.min(addspeed, flAccelerate * FrameTime() * wishspeed) -- * player->m_surfaceFriction but it seems like it's 1 by default?
+
             mv:SetVelocity(mv:GetVelocity() + accelspeed * wishdir)
         end
 
-        -- The player will double dip on air acceleration since engine also applies its version.
-        -- I overthought this completely and attempted to reimplement a good chunk of HL2 movement code, but it isn't necessary (and didn't work).
+        -- The player will double dip on air acceleration since engine also applies its acceleration.
         -- Stop engine behavior if we're in mid-air and not colliding. If we collide, let engine kick in.
+        -- In theory this will still cause double dipping as long as the player is near a thing (like sliding along a wall). Not a big enough deal though.
         if !ply:IsOnGround() then
-            mv:SetVelocity(mv:GetVelocity() + physenv.GetGravity() * FrameTime())
+
+            -- since we are about to override the rest of engine movement code, apply gravity ourselves
+            if ply:WaterLevel() == 0 then
+                mv:SetVelocity(mv:GetVelocity() + physenv.GetGravity() * FrameTime())
+            end
 
             local dest = pos + mv:GetVelocity() * FrameTime()
             local tr = TracePlayerBBox(ply, pos, dest)
             -- If we made it all the way, then copy trace end as new player position.
             if tr.Fraction == 1 then
                 mv:SetOrigin(tr.HitPos)
+                -- mv:SetVelocity(mv:GetVelocity() - ply:GetBaseVelocity()) -- probably not relevant?
                 return true
             end
         end
+
+        -- I overthought this completely and attempted to reimplement a good chunk of HL2 movement code, but it isn't necessary (and didn't work).
 
         -- -- first try moving directly to the next spot
         -- tr = TracePlayerBBox(ply, pos, dest)
@@ -505,9 +531,12 @@ hook.Add("FinishMove", "TacRP_Charge", function(ply, mv)
     if !IsFirstTimePredicted() then return end
     if ply:GetNWFloat("TacRPChargeTime", 0) + chargedur > CurTime() then
         local wep = ply:GetActiveWeapon()
-        local d = math.Clamp(1 - (ply:GetNWFloat("TacRPChargeTime", 0) + chargedur - CurTime()) / chargedur + 0.25, 0, 1)
-        if ply:GetNWFloat("TacRPChargeTime", 0) + FrameTime() * 10 < CurTime() and mv:GetVelocity():Length() < 300 then
-            if SERVER then
+        local d = ChargeFraction(ply)
+
+        -- https://github.com/OthmanAba/TeamFortress2/blob/1b81dded673d49adebf4d0958e52236ecc28a956/tf2_src/game/shared/tf/tf_gamemovement.cpp#L248
+        -- some grace time to make point blank charges not awkward.
+        if ply:GetNWFloat("TacRPChargeTime", 0) + engine.TickInterval() * 5 < CurTime() then
+            if mv:GetVelocity():Length() < 300 then
                 ply:LagCompensation(true)
                 local tr = util.TraceHull({
                     start = ply:EyePos(),
@@ -516,83 +545,109 @@ hook.Add("FinishMove", "TacRP_Charge", function(ply, mv)
                     mask = MASK_PLAYERSOLID,
                     mins = -dim,
                     maxs = dim,
-                    ignoreworld = true
+                    ignoreworld = false
                 })
 
                 debugoverlay.Box(tr.HitPos, -dim, dim, FrameTime() * 10, Color(255, 255, 255, 0))
 
                 if IsValid(tr.Entity) and tr.Entity:GetOwner() != ply then
-                    local dmginfo = DamageInfo()
-                    dmginfo:SetDamage(20 + d * 40)
-                    dmginfo:SetDamageForce(ply:GetForward() * 5000)
-                    dmginfo:SetDamagePosition(tr.HitPos)
-                    dmginfo:SetDamageType(DMG_CLUB)
-                    dmginfo:SetAttacker(wep:GetOwner())
-                    dmginfo:SetInflictor(wep)
-                    tr.Entity:TakeDamageInfo(dmginfo)
 
-                    local phys = tr.Entity:GetPhysicsObject()
-                    if tr.Entity:IsPlayer() or tr.Entity:IsNPC() or tr.Entity:IsNextBot() then
-                        tr.Entity:SetVelocity(ply:GetForward() * d * 3000 + Vector(0, 0, 250))
-                    elseif IsValid(phys) then
-                        phys:ApplyForceCenter(ply:GetForward() * (phys:GetMass() ^ 0.5) * 20000 * (d * 0.5 + 0.5))
+                    if SERVER then
+                        local dmginfo = DamageInfo()
+                        dmginfo:SetDamage(20 + d * 40)
+                        dmginfo:SetDamageForce(ply:GetForward() * 5000)
+                        dmginfo:SetDamagePosition(tr.HitPos)
+                        dmginfo:SetDamageType(DMG_CLUB)
+                        dmginfo:SetAttacker(wep:GetOwner())
+                        dmginfo:SetInflictor(wep)
+                        tr.Entity:TakeDamageInfo(dmginfo)
+
+                        local phys = tr.Entity:GetPhysicsObject()
+                        if tr.Entity:IsPlayer() or tr.Entity:IsNPC() or tr.Entity:IsNextBot() then
+                            tr.Entity:SetVelocity(ply:GetForward() * d * 3000 + Vector(0, 0, 250))
+                        elseif IsValid(phys) then
+                            phys:ApplyForceCenter(ply:GetForward() * (phys:GetMass() ^ 0.5) * 20000 * (d * 0.5 + 0.5))
+                        end
+                    end
+
+                    if d >= 0.9 then
+                        ply:EmitSound("TacRP.Charge.HitFlesh_Range", 80)
+                    else
+                        ply:EmitSound("TacRP.Charge.HitFlesh", 80)
+                    end
+                elseif tr.Hit then
+                    ply:EmitSound("TacRP.Charge.HitWorld", 80)
+                end
+
+                -- In TF2, going below 300 velocity instantly cancels the charge.
+                -- However, this feels really bad if you're trying to cancel your momentum mid-air!
+                -- Let's be generous and only stop on a hit or if it's grounded.
+                if ply:IsOnGround() or tr.Hit then
+                    ply:SetNWFloat("TacRPChargeFollowup", CurTime() + 0.75)
+                    ply:SetNWFloat("TacRPChargeStrength", d)
+
+                    ply:SetNWFloat("TacRPChargeTime", 0)
+
+                    util.ScreenShake(ply:EyePos(), 15, 150, d * 1, 750)
+                    if IsValid(wep) and wep.ArcticTacRP then
+                        wep:SetShouldHoldType()
                     end
                 end
 
                 ply:LagCompensation(false)
-            end
+            elseif (ply.TacRPNextChargeTrace or 0) < CurTime() then
+                ply.TacRPNextChargeTrace = CurTime() + engine.TickInterval() * 2
+                ply:LagCompensation(true)
+                local tr = util.TraceHull({
+                    start = ply:EyePos(),
+                    endpos = ply:EyePos() + ply:GetForward() * 32,
+                    filter = {ply},
+                    mask = MASK_PLAYERSOLID,
+                    mins = -dim2,
+                    maxs = dim2,
+                    ignoreworld = true
+                })
+                debugoverlay.Box(tr.HitPos, -dim2, dim2, FrameTime() * 5, Color(255, 255, 255, 0))
+                if IsValid(tr.Entity) and tr.Entity:GetOwner() != ply then
+                    if SERVER then
+                        local dmginfo = DamageInfo()
+                        dmginfo:SetDamage(20 + d * 40)
+                        dmginfo:SetDamageForce(ply:GetForward() * 5000)
+                        dmginfo:SetDamagePosition(tr.HitPos)
+                        dmginfo:SetDamageType(DMG_CLUB)
+                        dmginfo:SetAttacker(wep:GetOwner())
+                        dmginfo:SetInflictor(wep)
+                        tr.Entity:TakeDamageInfo(dmginfo)
 
-            ply:SetNWFloat("TacRPChargeTime", 0)
-            ply:EmitSound("physics/metal/metal_canister_impact_hard3.wav")
-            util.ScreenShake(ply:EyePos(), 15, 150, d * 1, 750)
-            if IsValid(wep) and wep.ArcticTacRP then
-                wep:SetShouldHoldType()
-            end
-
-        elseif SERVER and (ply.TacRPNextChargeTrace or 0) < CurTime() then
-            ply.TacRPNextChargeTrace = CurTime() + FrameTime() * 2
-
-            ply:LagCompensation(true)
-            local tr = util.TraceHull({
-                start = ply:EyePos(),
-                endpos = ply:EyePos() + ply:GetForward() * 32,
-                filter = {ply},
-                mask = MASK_PLAYERSOLID,
-                mins = -dim2,
-                maxs = dim2,
-                ignoreworld = true
-            })
-            debugoverlay.Box(tr.HitPos, -dim2, dim2, FrameTime() * 5, Color(255, 255, 255, 0))
-            if IsValid(tr.Entity) and tr.Entity:GetOwner() != ply then
-                local dmginfo = DamageInfo()
-                dmginfo:SetDamage(20 + d * 40)
-                dmginfo:SetDamageForce(ply:GetForward() * 5000)
-                dmginfo:SetDamagePosition(tr.HitPos)
-                dmginfo:SetDamageType(DMG_CLUB)
-                dmginfo:SetAttacker(wep:GetOwner())
-                dmginfo:SetInflictor(wep)
-                tr.Entity:TakeDamageInfo(dmginfo)
-
-                local phys = tr.Entity:GetPhysicsObject()
-                if tr.Entity:IsPlayer() or tr.Entity:IsNPC() or tr.Entity:IsNextBot() then
-                    tr.Entity:SetVelocity(ply:GetForward() * d * 3000 + Vector(0, 0, 250))
-                elseif IsValid(phys) then
-                    phys:ApplyForceCenter(ply:GetForward() * (phys:GetMass() ^ 0.5) * 20000 * (d * 0.5 + 0.5))
-                end
-
-                timer.Simple(FrameTime(), function()
-                    if IsValid(ply) and IsValid(tr.Entity) and (!tr.Entity:IsPlayer() or tr.Entity:Alive()) then
-                        ply:SetNWFloat("TacRPChargeTime", 0)
-                        ply:EmitSound("physics/metal/metal_canister_impact_hard3.wav")
-                        util.ScreenShake(ply:EyePos(), 15, 150, d * 1, 750)
-                        if IsValid(wep) and wep.ArcticTacRP then
-                            wep:SetShouldHoldType()
+                        local phys = tr.Entity:GetPhysicsObject()
+                        if tr.Entity:IsPlayer() or tr.Entity:IsNPC() or tr.Entity:IsNextBot() then
+                            tr.Entity:SetVelocity(ply:GetForward() * d * 3000 + Vector(0, 0, 250))
+                        elseif IsValid(phys) then
+                            phys:ApplyForceCenter(ply:GetForward() * (phys:GetMass() ^ 0.5) * 20000 * (d * 0.5 + 0.5))
                         end
                     end
-                end)
-            end
 
-            ply:LagCompensation(false)
+                    timer.Simple(0.001, function()
+                        if IsValid(ply) and IsValid(tr.Entity) and (!tr.Entity:IsPlayer() or tr.Entity:Alive()) then
+                            ply:SetNWFloat("TacRPChargeFollowup", CurTime() + 0.75)
+                            ply:SetNWFloat("TacRPChargeStrength", d)
+
+                            ply:SetNWFloat("TacRPChargeTime", 0)
+                            if d >= 0.9 then
+                                ply:EmitSound("TacRP.Charge.HitFlesh_Range", 80)
+                            else
+                                ply:EmitSound("TacRP.Charge.HitFlesh", 80)
+                            end
+                            util.ScreenShake(ply:EyePos(), 15, 150, d * 1, 750)
+                            if IsValid(wep) and wep.ArcticTacRP then
+                                wep:SetShouldHoldType()
+                            end
+                        end
+                    end)
+
+                    ply:LagCompensation(false)
+                end
+            end
         end
     end
 end)

@@ -64,3 +64,51 @@ addsound("Weapon.Pistol_Clip_Scrape_plastic", {
     "TacRP/weapons/pistol_clip_scrape_plastic-2.wav",
     "TacRP/weapons/pistol_clip_scrape_plastic-3.wav",
 })
+
+addsound("TacRP.Charge.Windup", {
+    "tacrp/charge/demo_charge_windup1.wav",
+    "tacrp/charge/demo_charge_windup2.wav",
+})
+
+sound.Add({
+    name = "TacRP.Charge.Windup",
+    channel = 16,
+    volume = 1.0,
+    sound = {
+        "tacrp/charge/demo_charge_windup1.wav",
+        "tacrp/charge/demo_charge_windup2.wav",
+    }
+})
+
+sound.Add({
+    name = "TacRP.Charge.HitWorld",
+    channel = 16,
+    volume = 1.0,
+    sound = {
+        "tacrp/charge/demo_charge_hit_world1.wav",
+        "tacrp/charge/demo_charge_hit_world2.wav",
+        "tacrp/charge/demo_charge_hit_world3.wav",
+    }
+})
+
+sound.Add({
+    name = "TacRP.Charge.HitFlesh",
+    channel = 16,
+    volume = 1.0,
+    sound = {
+        "tacrp/charge/demo_charge_hit_flesh1.wav",
+        "tacrp/charge/demo_charge_hit_flesh2.wav",
+        "tacrp/charge/demo_charge_hit_flesh3.wav",
+    }
+})
+
+sound.Add({
+    name = "TacRP.Charge.HitFlesh_Range",
+    channel = 16,
+    volume = 1.0,
+    sound = {
+        "tacrp/charge/demo_charge_hit_flesh_range1.wav",
+        "tacrp/charge/demo_charge_hit_flesh_range2.wav",
+        "tacrp/charge/demo_charge_hit_flesh_range3.wav",
+    }
+})
