@@ -35,7 +35,7 @@ ATT.Hook_SecondaryAttack = function(self)
         dispersion = dispersion * spread * 36
 
         rocket.Model = self.ThrownKnifeModel or self.WorldModel
-        rocket.Damage = self:GetValue("Melee2Damage")
+        rocket.Damage = self:GetValue("MeleeDamage")
         rocket.Inflictor = self
 
         rocket:SetPos(src)

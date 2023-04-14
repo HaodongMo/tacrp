@@ -54,7 +54,7 @@ function ENT:Impact(data, collider)
         local tgtpos = data.HitPos
         if (data.HitEntity:IsPlayer() or data.HitEntity:IsNPC() or data.HitEntity:IsNextBot()) then
             if !data.HitEntity:IsOnGround() then
-                dmg:ScaleDamage(1.75)
+                dmg:ScaleDamage(2)
                 data.HitEntity:EmitSound("weapons/crossbow/bolt_skewer1.wav", 80, 110)
             end
 
@@ -90,7 +90,7 @@ function ENT:Impact(data, collider)
                 data.HitEntity:EmitSound("player/headshot" .. math.random(1, 2) .. ".wav", 80, 105)
                 tgtpos = headpos
             end
-            self:EmitSound("tacrp/weapons/knife/flesh_hit-" .. math.random(1, 5) .. ".wav", 70, 110, 1)
+            self:EmitSound("tacrp/weapons/knife/flesh_hit-" .. math.random(1, 5) .. ".wav", 80, 110, 1)
 
             -- local ang = data.OurOldVelocity:Angle()
             -- local fx = EffectData()
@@ -111,7 +111,7 @@ function ENT:Impact(data, collider)
             fx:SetNormal(-ang:Forward())
             fx:SetAngles(-ang)
             util.Effect("ManhackSparks", fx)
-            self:EmitSound("tacrp/weapons/knife/scrape_metal-" .. math.random(2, 3) .. ".wav", 70, 100, 0.75)
+            self:EmitSound("tacrp/weapons/knife/scrape_metal-" .. math.random(2, 3) .. ".wav", 80, 100, 0.75)
         end
 
         -- data.HitEntity:TakeDamageInfo(dmg)
@@ -131,7 +131,7 @@ function ENT:Impact(data, collider)
         fx:SetNormal(-ang:Forward())
         fx:SetAngles(-ang)
         util.Effect("ManhackSparks", fx)
-        self:EmitSound("tacrp/weapons/knife/scrape_metal-" .. math.random(2, 3) .. ".wav", 70, 110, 0.75)
+        self:EmitSound("tacrp/weapons/knife/scrape_metal-" .. math.random(2, 3) .. ".wav", 80, 110, 0.75)
 
         -- leave a bullet hole. Also may be able to hit things it can't collide with (like stuck C4)
         self:FireBullets({

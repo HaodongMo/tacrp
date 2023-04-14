@@ -92,7 +92,7 @@ local function chargemelee(self)
 
     self:GetOwner():LagCompensation(true)
 
-    local dmg = self:GetValue("Melee2Damage") * (0.5 + self:GetOwner():GetNWFloat("TacRPChargeStrength", 0))
+    local dmg = self:GetValue("Melee2Damage") * (1 + self:GetOwner():GetNWFloat("TacRPChargeStrength", 0) ^ 1.5 * 2)
     local range = 200
     self:GetOwner():DoAnimationEvent(ACT_HL2MP_GESTURE_RANGE_ATTACK_MELEE2)
     self:PlayAnimation("melee2", 1, false, true)
