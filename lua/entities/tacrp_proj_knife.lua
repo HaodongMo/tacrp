@@ -36,7 +36,7 @@ function ENT:Impact(data, collider)
         local attacker = self.Attacker or self:GetOwner() or self
         local dmg = DamageInfo()
         dmg:SetAttacker(attacker)
-        dmg:SetInflictor(self)
+        dmg:SetInflictor(IsValid(self.Inflictor) and self.Inflictor or self)
         dmg:SetDamage(self.Damage)
         dmg:SetDamageType(DMG_SLASH)
         dmg:SetDamageForce(d * 5000)

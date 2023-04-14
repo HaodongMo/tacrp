@@ -36,6 +36,7 @@ ATT.Hook_SecondaryAttack = function(self)
 
         rocket.Model = self.ThrownKnifeModel or self.WorldModel
         rocket.Damage = self:GetValue("Melee2Damage")
+        rocket.Inflictor = self
 
         rocket:SetPos(src)
         rocket:SetOwner(self:GetOwner())
