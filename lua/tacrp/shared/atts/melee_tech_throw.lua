@@ -28,7 +28,7 @@ ATT.Hook_SecondaryAttack = function(self)
 
         if !IsValid(rocket) then return end
 
-        local src, ang = self:GetOwner():GetShootPos(), self:GetShootDir() + Angle(-1, 0, 0)
+        local src, ang = self:GetOwner():GetShootPos(), self:GetShootDir() --+ Angle(-1, 0, 0)
         local spread = 0
         local force = 3000
         local dispersion = Angle(math.Rand(-1, 1), math.Rand(-1, 1), 0)

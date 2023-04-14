@@ -104,6 +104,10 @@ function SWEP:Melee(alt)
             tr.Entity.TacRPBashSlow = true
         end
 
+        if tr.HitGroup == HITGROUP_HEAD then
+            dmginfo:ScaleDamage(1.25)
+        end
+
         if IsValid(tr.Entity) and !tr.HitWorld then
             --tr.Entity:TakeDamageInfo(dmginfo)
             tr.Entity:DispatchTraceAttack(dmginfo, tr)

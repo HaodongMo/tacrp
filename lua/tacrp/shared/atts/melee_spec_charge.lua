@@ -51,10 +51,8 @@ end
 local function entercharge(ply)
     ply:SetNWFloat("TacRPChargeStrength", 0)
     ply:SetNWBool("TacRPChargeState", true)
-    --[[]
     ply.TacRPPrevColCheck = ply:GetCustomCollisionCheck()
     ply:SetCustomCollisionCheck(true)
-    ]]
     ply.TacRPPrevFlag = ply:IsEFlagSet(EFL_NO_DAMAGE_FORCES)
     if ply:GetNWInt("TacRPChargeMode", 0) == 2 and !ply.TacRPPrevFlag then
         ply:AddEFlags(EFL_NO_DAMAGE_FORCES)
@@ -71,7 +69,7 @@ local function exitcharge(ply, nohit)
         ply:SetNWFloat("TacRPChargeFollowup", CurTime() + followup)
     end
 
-    -- ply:SetCustomCollisionCheck(ply.TacRPPrevColCheck)
+    ply:SetCustomCollisionCheck(ply.TacRPPrevColCheck)
     if ply.TacRPPrevFlag then
         ply:RemoveEFlags(EFL_NO_DAMAGE_FORCES)
     end
@@ -345,185 +343,6 @@ local function TracePlayerBBox(ply, pos0, pos1)
     })
 end
 
---[[]
--- https://github.com/ValveSoftware/source-sdk-2013/blob/master/mp/src/public/coordsize.h
-local COORD_RESOLUTION = 1 / 32
-local function StayOnGround(ply, mv)
-    local start = mv:GetOrigin()
-    start.z = start.z + 2
-    local endpos = mv:GetOrigin()
-    endpos.z = endpos.z - ply:GetStepSize()
-    -- See how far up we can go without getting stuck
-    local tr = TracePlayerBBox(ply, mv:GetOrigin(), start)
-    start = tr.HitPos
-    -- using trace.startsolid is unreliable here, it doesn't get set when
-    --  tracing bounding box vs. terrain
-    -- Now trace down from a known safe position
-    local tr2 = TracePlayerBBox(ply, start, endpos)
-    if (tr2.Fraction > 0 and tr2.Fraction < 1 and !tr2.StartSolid and tr2.HitNormal.z >= 0.7) then
-        local flDelta = math.abs(mv:GetOrigin().z - tr2.HitPos.z)
-        if flDelta > 0.5 * COORD_RESOLUTION then
-            mv:SetOrigin(tr.HitPos)
-        end
-    end
-end
--- Note we don't have out as a parameter - it's the return value!
--- https://github.com/ValveSoftware/source-sdk-2013/blob/0d8dceea4310fde5706b3ce1c70609d72a38efdf/mp/src/game/shared/gamemovement.cpp#L3145
-local function ClipVelocity(ply, mv, in_vec, normal, overbounce)
-    local out = Vector()
-    local blocked = 0 -- Assume unblocked.
-    if normal.z > 0 then
-        blocked = 1 -- If the plane that is blocking us has a positive z component, then assume it's a floor.
-    elseif normal.z == 0 then
-        blocked = 2 -- If the plane has no Z, it is vertical (wall/step)
-    end
-    -- Determine how far along plane to slide based on incoming direction.
-    local backoff = in_vec:Dot(normal) * overbounce
-    for i = 1, 3 do
-        out[i] = in_vec[i] - (normal[i] * backoff)
-    end
-    -- iterate once to make sure we aren't still moving through the plane
-    local adjust = out:Dot(normal)
-    if adjust < 0 then
-        out:Sub(normal * adjust)
-    end
-    return out, blocked
-end
-local vector_origin = Vector()
-local MAX_CLIP_PLANES = 5
--- https://github.com/ValveSoftware/source-sdk-2013/blob/0d8dceea4310fde5706b3ce1c70609d72a38efdf/mp/src/game/shared/gamemovement.cpp#L2560
-local function TryPlayerMove(ply, mv, dest)
-    local numbumps = 4
-    local blocked = 0
-    local numplanes = 0
-    local original_velocity = mv:GetVelocity()
-    local primal_velocity = mv:GetVelocity()
-    local allFraction = 0
-    local time_left = FrameTime()
-    local new_velocity
-    local end_vector
-    local pm
-    local planes = {}
-    for bumpcount = 0, numbumps - 1 do
-        if mv:GetVelocity():Length() == 0 then break end
-        -- Assume we can move all the way from the current origin to the end point.
-        end_vector = mv:GetOrigin() + mv:GetVelocity() * time_left
-        -- See if we can make it from origin to end point.
-        pm = TracePlayerBBox(ply, mv:GetOrigin(), end_vector)
-        allFraction = allFraction + pm.Fraction
-        -- If we started in a solid object, or we were in solid space
-        --  the whole way, zero out our velocity and return that we
-        --  are blocked by floor and wall.
-        if pm.AllSolid then
-            mv:SetVelocity(vector_origin)
-            return 4
-        end
-        -- If we moved some portion of the total distance, then
-        --  copy the end position into the pmove.origin and
-        --  zero the plane counter.
-        if pm.Fraction > 0 then
-            if numbumps > 0 and pm.Fraction == 1 then
-                -- There's a precision issue with terrain tracing that can cause a swept box to successfully trace
-                -- when the end position is stuck in the triangle.  Re-run the test with an uswept box to catch that
-                -- case until the bug is fixed.
-                -- If we detect getting stuck, don't allow the movement
-                local stuck = TracePlayerBBox(ply, pm.HitPos, pm.HitPos)
-                if stuck.StartSolid or stuck.Fraction != 1 then
-                    mv:SetVelocity(vector_origin)
-                    break
-                end
-            end
-            -- actually covered some distance
-            mv:SetOrigin(pm.HitPos)
-            mv:SetVelocity(original_velocity)
-            numplanes = 0
-        end
-        -- If we covered the entire distance, we are done and can return.
-        if pm.Fraction == 1 then
-            break -- moved the entire distance
-        end
-        -- what???
-        -- MoveHelper( )->AddToTouched( pm, mv->m_vecVelocity );
-        -- If the plane we hit has a high z component in the normal, then it's probably a floor
-        if pm.HitNormal.z > 0.7 then
-            blocked = bit.bor(blocked, 1)
-        end
-        -- If the plane has a zero z component in the normal, then it's a step or wall
-        if pm.HitNormal.z == 0 then
-            blocked = bit.bor(blocked, 2)
-        end
-        -- Reduce amount of m_flFrameTime left by total time left * fraction that we covered.
-        time_left = time_left * (1 - pm.Fraction)
-        -- Did we run out of planes to clip against?
-        if numplanes >= MAX_CLIP_PLANES then
-            mv:SetVelocity(vector_origin)
-            break
-        end
-        -- Set up next clipping plane
-        planes[numplanes] = pm.HitNormal
-        numplanes = numplanes + 1
-
-        -- reflect player velocity
-        -- Only give this a try for first impact plane because you can get yourself stuck in an acute corner by jumping in place
-        -- pressing forward and nobody was really using this bounce/reflection feature anyway...
-        if (numplanes == 1 and ply:GetMoveType() == MOVETYPE_WALK and ply:GetGroundEntity() == NULL) then
-            for i = 0, numplanes - 1 do
-                if planes[i].z > 0.7 then
-                    new_velocity = ClipVelocity(ply, mv, original_velocity, planes[i], 1)
-                    original_velocity = new_velocity
-                else
-                    new_velocity = ClipVelocity(ply, mv, original_velocity, planes[i], 1) -- something about bounce but it's always cancelled out by friction?
-                end
-            end
-            mv:SetVelocity(new_velocity)
-            original_velocity = new_velocity
-        else
-            local ii
-            for i = 0, numplanes - 1 do
-                ii = i
-                mv:SetVelocity(ClipVelocity(ply, mv, original_velocity, planes[i], 1))
-                local jj
-                for j = 0, numplanes - 1 do
-                    -- Are we now moving against this plane?
-                    jj = j
-                    if j != i and mv:GetVelocity():Dot(planes[j]) < 0 then
-                        break -- not ok
-                    end
-                end
-                if jj == numplanes - 1 then
-                    break -- Didn't have to clip, so we're ok
-                end
-            end
-            -- Did we go all the way through plane set
-            -- print(ii, numplanes)
-            if ii != numplanes then
-                -- uhh
-            else
-                -- go along the crease
-                if numplanes != 2 then
-                    mv:SetVelocity(vector_origin)
-                    break
-                end
-                local dir = planes[0]:Cross(planes[1]):Normalize()
-                local d = dir:Dot(mv:GetVelocity())
-                print(d)
-                mv:SetVelocity(dir * d)
-            end
-            -- if original velocity is against the original velocity, stop dead
-            -- to avoid tiny occilations in sloping corners
-            if mv:GetVelocity():Dot(primal_velocity) < 0 then
-                mv:SetVelocity(vector_origin)
-                break
-            end
-        end
-    end
-    if allFraction == 0 then
-        mv:SetVelocity(vector_origin)
-    end
-    return blocked
-end
-]]
-
 hook.Add("Move", "TacRP_Charge", function(ply, mv)
     if incharge(ply) then
 
@@ -574,7 +393,6 @@ hook.Add("Move", "TacRP_Charge", function(ply, mv)
 
         -- The player will double dip on air acceleration since engine also applies its acceleration.
         -- Stop engine behavior if we're in mid-air and not colliding. If we collide, let engine kick in.
-        -- Thiw will still cause double dipping if player is near a thing (like sliding along a wall).
         if !ply:IsOnGround() and ply:WaterLevel() == 0 then
 
             -- since we are about to override the rest of engine movement code, apply gravity ourselves
@@ -596,12 +414,12 @@ hook.Add("Move", "TacRP_Charge", function(ply, mv)
                 ply.TacRPChargeTrace = tr
             end
 
-            -- local p, v = mv:GetOrigin(), mv:GetVelocity()
-            -- local blocked = TryPlayerMove(ply, mv)
-            -- mv:SetOrigin(p)
-            -- mv:SetVelocity(v)
-            -- print(blocked)
-            -- return true
+            -- Sliding along a wall seems to increase velocity beyond desired value. Clamp it if so
+            local v2d = mv:GetVelocity()
+            v2d.z = 0
+            if v2d:Length2D() > wishspeed then
+                mv:SetVelocity(v2d:GetNormalized() * wishspeed + Vector(0, 0, mv:GetVelocity().z))
+            end
         end
     end
 end)
@@ -618,9 +436,11 @@ hook.Add("FinishMove", "TacRP_Charge", function(ply, mv)
         if ply:GetNWFloat("TacRPChargeTime", 0) + engine.TickInterval() * 5 < CurTime() then
             local active = activecharge(ply)
             local vel = mv:GetVelocity():Length()
-            if !active or vel < chargestats(ply, stat_vel) * 0.4 then
+
+            if !active or vel < chargestats(ply, stat_vel) * 0.4 or IsValid(ply.TacRPTryCollide) then
 
                 local tr = ply.TacRPChargeTrace
+                local ent = ply.TacRPTryCollide
 
                 if !tr then
                     ply:LagCompensation(true)
@@ -636,8 +456,10 @@ hook.Add("FinishMove", "TacRP_Charge", function(ply, mv)
                     ply:LagCompensation(false)
                     debugoverlay.Box(tr.HitPos, mins, maxs, FrameTime() * 10, Color(255, 255, 255, 0))
                 end
+                if !IsValid(ent) then
+                    ent = tr.Entity
+                end
 
-                local ent = tr.Entity
                 local grace = false
                 if IsValid(ent) and ent:GetOwner() != ply then
                     if SERVER then
@@ -656,7 +478,12 @@ hook.Add("FinishMove", "TacRP_Charge", function(ply, mv)
                             ent:SetVelocity(ply:GetForward() * 300 * d + Vector(0, 0, 100 + 200 * d))
                             ent:SetGroundEntity(NULL)
 
-                            if d >= 0.5 then
+                            -- we may be able to kill the target and go through them
+                            grace = (ent.TacRPNextChargeHit or 0) <= CurTime() and ent:Health() <= dmginfo:GetDamage() * dmgscale
+
+                            if grace then
+                                mv:SetVelocity(ply:GetForward() * chargestats(ply, stat_vel))
+                            elseif d >= 0.5 then
                                 ply:EmitSound("TacRP.Charge.HitFlesh_Range", 80)
                             else
                                 ply:EmitSound("TacRP.Charge.HitFlesh", 80)
@@ -678,16 +505,18 @@ hook.Add("FinishMove", "TacRP_Charge", function(ply, mv)
                             end
                         end
 
-                        dmginfo:ScaleDamage(dmgscale)
-                        ent:TakeDamageInfo(dmginfo)
+                        if (ent.TacRPNextChargeHit or 0) <= CurTime() then
+                            dmginfo:ScaleDamage(dmgscale)
+                            ent:TakeDamageInfo(dmginfo)
+                        end
                     end
-                elseif tr.HitWorld then
+                elseif tr and tr.HitWorld then
                     ply:EmitSound("TacRP.Charge.HitWorld", 80)
                 end
                 -- In TF2, going below 300 velocity instantly cancels the charge.
                 -- However, this feels really bad if you're trying to cancel your momentum mid-air!
                 -- Also works poorly with props
-                if !active or (!grace and tr.Hit) or (ply.TacRPChargeTrace and (ent:IsNPC() or ent:IsPlayer() or ent:IsNextBot())) then
+                if !active or (!grace and (tr.Hit or (ply.TacRPChargeTrace and (ent:IsNPC() or ent:IsPlayer() or ent:IsNextBot())))) then
 
                     exitcharge(ply)
 
@@ -709,6 +538,7 @@ hook.Add("FinishMove", "TacRP_Charge", function(ply, mv)
             end
 
             ply.TacRPChargeTrace = nil
+            ply.TacRPTryCollide = nil
         end
     end
 end)
@@ -760,21 +590,41 @@ hook.Add("PostEntityTakeDamage", "TacRP_Charge", function(ent, dmginfo, took)
     end
 end)
 
---[[]
+-- don't slide off stuff
+-- blehhhhhhh
+local col = {
+    [COLLISION_GROUP_NONE] = true,
+    [COLLISION_GROUP_INTERACTIVE_DEBRIS] = true,
+    [COLLISION_GROUP_INTERACTIVE] = true,
+    [COLLISION_GROUP_PLAYER] = true,
+    [COLLISION_GROUP_BREAKABLE_GLASS] = true,
+    [COLLISION_GROUP_VEHICLE] = true,
+    [COLLISION_GROUP_PLAYER_MOVEMENT] = true,
+    [COLLISION_GROUP_NPC] = true,
+}
+local mt = {
+    [MOVETYPE_PUSH] = true,
+    [MOVETYPE_NONE] = true,
+}
 local function touchy(ply, ent)
-    if IsValid(ply) and IsValid(ent) and ply:IsPlayer() and !ent:IsPlayer() and incharge(ply)
-            and ent:GetMoveType() == MOVETYPE_VPHYSICS
-            and IsValid(ent:GetPhysicsObject()) and ent:GetPhysicsObject():IsMotionEnabled() then
-        print("charging", ent)
+    if IsValid(ply) and IsValid(ent) and ply:IsPlayer() and !ent:IsPlayer() and incharge(ply) and ent:GetOwner() != ply and ent:GetParent() != ply and ply:GetParent() != ent
+            and (!mt[ent:GetMoveType()] and col[ent:GetCollisionGroup()] and IsValid(ent:GetPhysicsObject()) and ent:GetPhysicsObject():IsMotionEnabled()) then
 
+        local diff = ent:GetPos() - ply:GetPos()
+        if diff:Length() <= ent:BoundingRadius() + ply:BoundingRadius() + 8 then
+            local dot = diff:GetNormalized():Dot(ply:GetVelocity():GetNormalized())
+            if dot >= 0.5 then
+                ply.TacRPTryCollide = ent
+            end
+        end
         return true
     end
 end
 hook.Add("ShouldCollide", "TacRP_Charge", function(ent1, ent2)
+    if IsValid(ent1.TacRPTryCollide) or IsValid(ent2.TacRPTryCollide) then return end
     if touchy(ent1, ent2) then return end
     if touchy(ent2, ent1) then return end
 end)
-]]
 
 hook.Add("DoPlayerDeath", "TacRP_Charge", function(ply)
     exitcharge(ply, true)

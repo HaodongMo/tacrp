@@ -26,30 +26,41 @@ ENT.BounceSounds = {
 
 ENT.Damage = 35
 
+DEFINE_BASECLASS(ENT.Base)
+
+function ENT:Initialize()
+    BaseClass.Initialize(self)
+    if SERVER then
+        self:GetPhysicsObject():SetDragCoefficient(5)
+    end
+end
+
 function ENT:Impact(data, collider)
     if self.Impacted then return end
     self.Impacted = true
 
+    local attacker = self.Attacker or self:GetOwner() or self
     if IsValid(data.HitEntity) then
         local d = data.OurOldVelocity:GetNormalized()
 
-        local attacker = self.Attacker or self:GetOwner() or self
         local dmg = DamageInfo()
         dmg:SetAttacker(attacker)
         dmg:SetInflictor(IsValid(self.Inflictor) and self.Inflictor or self)
         dmg:SetDamage(self.Damage)
         dmg:SetDamageType(DMG_SLASH)
-        dmg:SetDamageForce(d * 5000)
+        dmg:SetDamageForce(d * 10000)
         dmg:SetDamagePosition(data.HitPos)
 
+        local tgtpos = data.HitPos
         if (data.HitEntity:IsPlayer() or data.HitEntity:IsNPC() or data.HitEntity:IsNextBot()) then
             if !data.HitEntity:IsOnGround() then
-                dmg:ScaleDamage(2)
+                dmg:ScaleDamage(1.75)
                 data.HitEntity:EmitSound("weapons/crossbow/bolt_skewer1.wav", 80, 110)
             end
 
             -- Check if the knife is a headshot
             -- Either the head is the closest bodygroup, or the direction is quite on point
+            local headpos = nil
             local pos = data.HitPos + d * 8
             local hset = data.HitEntity:GetHitboxSet()
             local hdot, bhg, bdist, hdist = 0, 0, math.huge, math.huge
@@ -65,22 +76,54 @@ function ENT:Impact(data, collider)
                 if data.HitEntity:GetHitBoxHitGroup(i, hset) == HITGROUP_HEAD then
                     hdot = dot
                     hdist = dist
+                    headpos = hpos
                 end
                 if dist < bdist then
                     bdist = dist
                     bhg = data.HitEntity:GetHitBoxHitGroup(i, hset)
+                    tgtpos = hpos
                 end
             end
 
-            if bhg == HITGROUP_HEAD or (hdot >= 0.92 and hdist < 2304) then
-                dmg:ScaleDamage(2)
+            if bhg == HITGROUP_HEAD or (hdot >= 0.9 and hdist < 2304) then
+                dmg:ScaleDamage(2.5)
                 data.HitEntity:EmitSound("player/headshot" .. math.random(1, 2) .. ".wav", 80, 105)
+                tgtpos = headpos
             end
+            self:EmitSound("tacrp/weapons/knife/flesh_hit-" .. math.random(1, 5) .. ".wav", 70, 110, 1)
+
+            -- local ang = data.OurOldVelocity:Angle()
+            -- local fx = EffectData()
+            -- fx:SetStart(data.HitPos - d * 4)
+            -- fx:SetOrigin(data.HitPos)
+            -- fx:SetNormal(d)
+            -- fx:SetAngles(-ang)
+            -- fx:SetEntity(data.HitEntity)
+            -- fx:SetDamageType(DMG_SLASH)
+            -- fx:SetSurfaceProp(data.TheirSurfaceProps)
+            -- util.Effect("Impact", fx)
+
+        else
+            dmg:SetDamageForce(d * 30000)
+            local ang = data.OurOldVelocity:Angle()
+            local fx = EffectData()
+            fx:SetOrigin(data.HitPos)
+            fx:SetNormal(-ang:Forward())
+            fx:SetAngles(-ang)
+            util.Effect("ManhackSparks", fx)
+            self:EmitSound("tacrp/weapons/knife/scrape_metal-" .. math.random(2, 3) .. ".wav", 70, 100, 0.75)
         end
 
-        data.HitEntity:TakeDamageInfo(dmg)
+        -- data.HitEntity:TakeDamageInfo(dmg)
 
-        self:EmitSound("tacrp/weapons/knife/flesh_hit-" .. math.random(1, 5) .. ".wav", 70, 110, 1)
+        local atktr = util.TraceLine({
+            start = self:GetPos(),
+            endpos = tgtpos,
+            filter = self
+        })
+
+        TacRP.CancelBodyDamage(data.HitEntity, dmg, atktr.HitGroup)
+        data.HitEntity:DispatchTraceAttack(dmg, atktr)
     else
         local ang = data.OurOldVelocity:Angle()
         local fx = EffectData()
@@ -90,6 +133,21 @@ function ENT:Impact(data, collider)
         util.Effect("ManhackSparks", fx)
         self:EmitSound("tacrp/weapons/knife/scrape_metal-" .. math.random(2, 3) .. ".wav", 70, 110, 0.75)
 
+        -- leave a bullet hole. Also may be able to hit things it can't collide with (like stuck C4)
+        self:FireBullets({
+            Attacker = attacker,
+            Damage = self.Damage,
+            Force = 1,
+            Distance = 4,
+            HullSize = 4,
+            Tracer = 0,
+            Dir = ang:Forward(),
+            Src = data.HitPos - ang:Forward(),
+            IgnoreEntity = self,
+            Callback = function(atk, tr, dmginfo)
+                dmginfo:SetInflictor(IsValid(self.Inflictor) and self.Inflictor or self)
+            end
+        })
     end
 
     self:Remove()
