@@ -1,7 +1,7 @@
 ATT.PrintName = "Charge"
 ATT.FullName = "demoknight tf2"
 ATT.Icon = Material("entities/tacrp_att_melee_spec_charge.png", "mips smooth")
-ATT.Description = "demoknight tf2 demoknight tf2 demoknight tf2 demoknight tf2"
+ATT.Description = "Advance with reckless abandon, and break some laws of physics too."
 ATT.Pros = {"RELOAD: Charge forwards", "WALK + RELOAD: Select charge mode", "Damage resistance during charge", "Self damage resistance"}
 ATT.Cons = {}
 
@@ -242,7 +242,7 @@ end
 ATT.Hook_PostThink = function(wep)
     local ply = wep:GetOwner()
     if (game.SinglePlayer() or IsFirstTimePredicted()) and !incharge(ply) then
-        ply:SetNWFloat("TacRPCharge", math.min(1, ply:GetNWFloat("TacRPCharge", 0) + FrameTime() / 1))
+        ply:SetNWFloat("TacRPCharge", math.min(1, ply:GetNWFloat("TacRPCharge", 0) + FrameTime() / 9))
     end
 end
 
@@ -580,7 +580,7 @@ hook.Add("PostEntityTakeDamage", "TacRP_Charge", function(ent, dmginfo, took)
         ply:SetNWFloat("TacRPCharge", math.min(1, ply:GetNWFloat("TacRPCharge", 0) + dmginfo:GetDamage() * (ent:IsPlayer() and 0.01 or 0.005)))
     end
     ]]
-    if took and ent:IsPlayer() and incharge(ent) and ent:GetNWInt("TacRPChargeMode", 0) == 1 then
+    if took and dmginfo:GetAttacker() != ent and !dmginfo:IsFallDamage() and ent:IsPlayer() and incharge(ent) and ent:GetNWInt("TacRPChargeMode", 0) == 1 then
         local dur = chargestats(ent, stat_dur)
         local left = ent:GetNWFloat("TacRPChargeTime", 0) + dur - CurTime() - dmginfo:GetDamage() * 0.1 * dur
         ent:SetNWFloat("TacRPChargeTime", CurTime() - dur + left)
