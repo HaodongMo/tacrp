@@ -75,7 +75,7 @@ function SWEP:Melee(alt)
 
     local dmginfo = DamageInfo()
     dmginfo:SetDamage(dmg)
-    dmginfo:SetDamageForce(dir * dmg * 1000)
+    dmginfo:SetDamageForce(dir * dmg * 500)
     dmginfo:SetDamagePosition(tr.HitPos)
     dmginfo:SetDamageType(self:GetValue("MeleeDamageType"))
     dmginfo:SetAttacker(self:GetOwner())
