@@ -72,7 +72,7 @@ addsound("TacRP.Charge.Windup", {
 
 sound.Add({
     name = "TacRP.Charge.Windup",
-    channel = CHAN_VOICE,
+    channel = 130,
     volume = 1.0,
     sound = {
         "tacrp/charge/demo_charge_windup1.wav",
@@ -82,7 +82,7 @@ sound.Add({
 
 sound.Add({
     name = "TacRP.Charge.End",
-    channel = CHAN_VOICE,
+    channel = 130,
     volume = 1.0,
     sound = {
         "common/null.wav",
@@ -91,7 +91,7 @@ sound.Add({
 
 sound.Add({
     name = "TacRP.Charge.HitWorld",
-    channel = CHAN_VOICE,
+    channel = 130,
     volume = 1.0,
     sound = {
         "tacrp/charge/demo_charge_hit_world1.wav",
@@ -102,7 +102,7 @@ sound.Add({
 
 sound.Add({
     name = "TacRP.Charge.HitFlesh",
-    channel = CHAN_VOICE,
+    channel = 130,
     volume = 1.0,
     sound = {
         "tacrp/charge/demo_charge_hit_flesh1.wav",
@@ -113,7 +113,7 @@ sound.Add({
 
 sound.Add({
     name = "TacRP.Charge.HitFlesh_Range",
-    channel = CHAN_VOICE,
+    channel = 130,
     volume = 1.0,
     sound = {
         "tacrp/charge/demo_charge_hit_flesh_range1.wav",

@@ -64,6 +64,7 @@ function SWEP:Melee(alt)
             mins = Vector(-dim, -dim, -dim),
             maxs = Vector(dim, dim, dim)
         })
+
         if tr2.Fraction < 1 and IsValid(tr2.Entity) then
             local dot = (tr2.Entity:GetPos() - start):GetNormalized():Dot(dir)
             if dot >= 0.5 then

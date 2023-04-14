@@ -78,7 +78,7 @@ local function exitcharge(ply, nohit)
 end
 
 local function incharge(ply)
-    return ply:Alive() and ply:GetNWBool("TacRPChargeState")
+    return ply:Alive() and ply:GetNWBool("TacRPChargeState", false)
 end
 
 local function activecharge(ply)
@@ -316,7 +316,7 @@ hook.Add("StartCommand", "TacRP_Charge", function(ply, cmd)
         local ang = cmd:GetViewAngles()
 
         cmd:SetButtons(bit.band(cmd:GetButtons(), bit.bnot(IN_DUCK + IN_JUMP + IN_FORWARD + IN_BACK + IN_MOVELEFT + IN_MOVERIGHT + IN_WALK + IN_SPEED)))
-        cmd:SetForwardMove(0)
+        cmd:SetForwardMove(chargestats(ply, stat_vel))
         cmd:SetUpMove(0)
         cmd:SetSideMove(0)
 
@@ -369,6 +369,9 @@ hook.Add("Move", "TacRP_Charge", function(ply, mv)
         -- TF2 doesn't have to deal with it since it disables friction in-engine. We can't since I don't want to reimplement gamemovement.cpp
         if ply:IsOnGround() and ply:WaterLevel() == 0 then
             wishspeed = wishspeed / 0.88 -- approximate grounded friciton with magic number
+            if !game.SinglePlayer() then
+                wishspeed = wishspeed / 0.88 -- ???????????
+            end
         end
 
         -- if our wish speed is too low (attributes), we must increase acceleration or we'll never overcome friction
@@ -426,7 +429,8 @@ end)
 
 local mins, maxs = Vector(-24, -24, 16), Vector(24, 24, 72)
 hook.Add("FinishMove", "TacRP_Charge", function(ply, mv)
-    -- if !IsFirstTimePredicted() then return end
+    -- if true then return end
+    --if !IsFirstTimePredicted() then return end
     if incharge(ply) then
         local wep = ply:GetNWEntity("TacRPChargeWeapon")
         local d = ChargeFraction(ply)
@@ -442,7 +446,7 @@ hook.Add("FinishMove", "TacRP_Charge", function(ply, mv)
                 local tr = ply.TacRPChargeTrace
                 local ent = ply.TacRPTryCollide
 
-                if !tr then
+                if !tr and IsFirstTimePredicted() then
                     ply:LagCompensation(true)
                     tr = util.TraceHull({
                         start = ply:GetPos(),
@@ -456,7 +460,7 @@ hook.Add("FinishMove", "TacRP_Charge", function(ply, mv)
                     ply:LagCompensation(false)
                     debugoverlay.Box(tr.HitPos, mins, maxs, FrameTime() * 10, Color(255, 255, 255, 0))
                 end
-                if !IsValid(ent) then
+                if !IsValid(ent) and tr then
                     ent = tr.Entity
                 end
 
@@ -475,7 +479,7 @@ hook.Add("FinishMove", "TacRP_Charge", function(ply, mv)
                         if ent:IsPlayer() or ent:IsNPC() or ent:IsNextBot() then
                             dmginfo:SetDamage((IsValid(wep) and wep:GetValue("MeleeDamage") or 25) * d)
 
-                            ent:SetVelocity(ply:GetForward() * 300 * d + Vector(0, 0, 100 + 200 * d))
+                            ent:SetVelocity(ply:GetForward() * 300 * d + Vector(0, 0, 100 + 150 * d))
                             ent:SetGroundEntity(NULL)
 
                             -- we may be able to kill the target and go through them
@@ -516,9 +520,20 @@ hook.Add("FinishMove", "TacRP_Charge", function(ply, mv)
                 -- In TF2, going below 300 velocity instantly cancels the charge.
                 -- However, this feels really bad if you're trying to cancel your momentum mid-air!
                 -- Also works poorly with props
-                if !active or (!grace and (tr.Hit or (ply.TacRPChargeTrace and (ent:IsNPC() or ent:IsPlayer() or ent:IsNextBot())))) then
-
+                if !active or (!grace and ((tr and tr.Hit) or (ply.TacRPChargeTrace and IsValid(ent) and (ent:IsNPC() or ent:IsPlayer() or ent:IsNextBot())))) then
                     exitcharge(ply)
+
+                    if !game.SinglePlayer() and CLIENT then
+                        if (ent:IsNPC() or ent:IsPlayer() or ent:IsNextBot()) then
+                            if d >= 0.5 then
+                                ply:EmitSound("TacRP.Charge.HitFlesh_Range", 80)
+                            else
+                                ply:EmitSound("TacRP.Charge.HitFlesh", 80)
+                            end
+                        else
+                            ply:EmitSound("TacRP.Charge.HitWorld", 80)
+                        end
+                    end
 
                     if tr.Hit then
                         util.ScreenShake(tr.HitPos, 20, 125, d * 1, 750)
@@ -530,8 +545,13 @@ hook.Add("FinishMove", "TacRP_Charge", function(ply, mv)
                         wep:SetShouldHoldType()
                     end
                 elseif grace and IsValid(ent) and (ent.TacRPNextChargeHit or 0) <= CurTime() then
-                    ent.TacRPNextChargeHit = CurTime() + 0.3
-                    ply.TacRPGrace = CurTime() + 0.15
+                    if game.SinglePlayer() then
+                        ent.TacRPNextChargeHit = CurTime() + 0.5
+                        ply.TacRPGrace = CurTime() + 0.3
+                    else
+                        ent.TacRPNextChargeHit = CurTime() + 0.3
+                        ply.TacRPGrace = CurTime() + 0.15
+                    end
                     util.ScreenShake(tr.HitPos, 10, 125, 0.25, 750)
                     ply:EmitSound("physics/body/body_medium_impact_hard" .. math.random(1, 6) .. ".wav")
                 end
