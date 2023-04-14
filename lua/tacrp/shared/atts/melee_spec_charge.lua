@@ -232,7 +232,7 @@ end
 ATT.Hook_PostThink = function(wep)
     local ply = wep:GetOwner()
     if (game.SinglePlayer() or IsFirstTimePredicted()) and !incharge(ply) then
-        ply:SetNWFloat("TacRPCharge", math.min(1, ply:GetNWFloat("TacRPCharge", 0) + FrameTime() / 1))
+        ply:SetNWFloat("TacRPCharge", math.min(1, ply:GetNWFloat("TacRPCharge", 0) + FrameTime() / 12))
     end
 end
 
