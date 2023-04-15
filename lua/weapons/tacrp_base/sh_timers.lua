@@ -36,6 +36,7 @@ end
 
 function SWEP:ProcessTimers()
     if (!self.ActiveTimers) then return end
+    local UCT = CurTime()
 
     for k, v in pairs(self.ActiveTimers) do
         if v[1] <= UCT then
