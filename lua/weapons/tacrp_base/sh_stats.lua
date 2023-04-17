@@ -58,69 +58,127 @@ function SWEP:GetBaseValue(val)
         end
     end
 
-    -- if b > 0 and self.ArcadeStats and self.ArcadeStats[val] != nil then
-    --     return self.ArcadeStats[val]
-    -- end
-
     return stat
 end
 
 function SWEP:GetValue(val, static, invert)
 
-    if !invert and self.StatCache[val] then
-        return self.StatCache[val]
-    end
+    local cachei = invert and 2 or 1
 
-    local stat = self:GetBaseValue(val)
+    local stat = nil
 
-    local priority = 0
+    -- Generate a cache if it doesn't exist already
+    if !self.StatCache[val] or !self.StatCache[val][cachei] then
 
-    if !self.ExcludeFromRawStats[val] then
+        self.StatCache[val] = self.StatCache[val] or {}
+
+        stat = self:GetBaseValue(val)
+
+        local modifiers = {
+            ["stat"] = nil, -- return this unless hook is set
+            ["hook"] = nil, -- if set, always call hook and use the following values
+            ["set"] = stat, -- override and no prefix
+            ["prio"] = 0, -- override priority
+            ["add"] = 0,
+            ["mul"] = 1,
+        }
+
+        -- local priority = 0
+
+        if !self.ExcludeFromRawStats[val] then
+            for slot, slottbl in pairs(self.Attachments) do
+                if !slottbl.Installed then continue end
+
+                local atttbl = TacRP.GetAttTable(slottbl.Installed)
+
+                local att_priority = atttbl["Priority_" .. val] or 1
+
+                if atttbl[val] != nil and att_priority > modifiers.prio then
+                    -- stat = atttbl[val]
+                    -- priority = att_priority
+                    modifiers.set = atttbl[val]
+                    modifiers.prio = att_priority
+                end
+            end
+        end
+
         for slot, slottbl in pairs(self.Attachments) do
             if !slottbl.Installed then continue end
 
             local atttbl = TacRP.GetAttTable(slottbl.Installed)
 
-            local att_priority = atttbl["Priority_" .. val] or 1
+            local att_priority = atttbl["Override_Priority_" .. val] or 1
 
-            if atttbl[val] != nil and att_priority > priority then
-                stat = atttbl[val]
-                priority = att_priority
+            if atttbl["Override_" .. val] != nil and att_priority > modifiers.prio then
+                -- stat = atttbl["Override_" .. val]
+                -- priority = att_priority
+                modifiers.set = atttbl["Override_" .. val]
+                modifiers.prio = att_priority
+            end
+
+            if atttbl["Add_" .. val] then -- isnumber(stat) and
+                -- stat = stat + atttbl["Add_" .. val] * (invert and -1 or 1)
+                modifiers.add = modifiers.add + atttbl["Add_" .. val] * (invert and -1 or 1)
+            end
+
+            if atttbl["Mult_" .. val] then -- isnumber(stat) and
+                if invert then
+                    -- stat = stat / atttbl["Mult_" .. val]
+                    modifiers.mul = modifiers.mul / atttbl["Mult_" .. val]
+                else
+                    -- stat = stat * atttbl["Mult_" .. val]
+                    modifiers.mul = modifiers.mul * atttbl["Mult_" .. val]
+                end
             end
         end
+
+        -- Check for stat hooks. If any exist, we must call it whenever we try to get the stat.
+        -- Cache this check so we don't unnecessarily call hook.Run a million times when nobody wants to hook us.
+        if table.Count(hook.GetTable()["TacRP_Stat_" .. val] or {}) > 0 then
+            modifiers.hook = true
+        end
+
+        -- Calculate the final value
+        if isnumber(modifiers.set) then
+            modifiers.stat = (modifiers.set + modifiers.add) * modifiers.mul
+            if self.IntegerStats[val] then
+                modifiers.stat = math.ceil(modifiers.stat)
+            end
+        else
+            modifiers.stat = modifiers.set
+        end
+
+        -- Cache our final value, presence of hooks, and summed modifiers
+        self.StatCache[val][cachei] = modifiers
     end
 
-    for slot, slottbl in pairs(self.Attachments) do
-        if !slottbl.Installed then continue end
+    local cache = self.StatCache[val][cachei]
+    if !static and cache.hook then
+        -- Run the hook
+        -- Hooks are expected to modify "set", "prio", "add" and "mul", so we can do all calculations in the right order.
+        local modifiers = {set = nil, prio = 0, add = 0, mul = 1}
+        hook.Run("TacRP_Stat_" .. val, self, modifiers)
+        if !istable(modifiers) then modifiers = {set = nil, prio = 0, add = 0, mul = 1} end -- some hook isn't cooperating!
 
-        local atttbl = TacRP.GetAttTable(slottbl.Installed)
-
-        local att_priority = atttbl["Override_Priority_" .. val] or 1
-
-        if atttbl["Override_" .. val] != nil and att_priority > priority then
-            stat = atttbl["Override_" .. val]
-            priority = att_priority
+        if modifiers.prio > cache.prio then
+            stat = modifiers.set
+        else
+            stat = cache.set
         end
 
-        if isnumber(stat) and atttbl["Add_" .. val] then
-            stat = stat + atttbl["Add_" .. val] * (invert and -1 or 1)
-        end
-
-        if isnumber(stat) and atttbl["Mult_" .. val] then
+        if isnumber(stat) then
             if invert then
-                stat = stat / atttbl["Mult_" .. val]
+                stat = (stat - modifiers.add - cache.add) / modifiers.mul / cache.mul
             else
-                stat = stat * atttbl["Mult_" .. val]
+                stat = (stat + modifiers.add + cache.add) * modifiers.mul * cache.mul
+            end
+
+            if self.IntegerStats[val] then
+                stat = math.ceil(stat)
             end
         end
-    end
-
-    if self.IntegerStats[val] then
-        stat = math.ceil(stat)
-    end
-
-    if !invert then
-        self.StatCache[val] = stat
+    else
+        stat = cache.stat
     end
 
     return stat
