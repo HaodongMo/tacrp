@@ -21,14 +21,6 @@ SWEP.NoStatBox = true
 
 SWEP.NPCUsable = false
 
-
-SWEP.ArcadeStats = {
-    MoveSpeedMult = 0.85,
-    ShootingSpeedMult = 1,
-    SightedSpeedMult = 1,
-    MeleeSpeedMult = 0.9,
-}
-
 SWEP.Slot = 2
 SWEP.SlotAlt = 0
 
@@ -39,9 +31,11 @@ SWEP.ClipSize = -1
 
 // handling
 
-SWEP.MoveSpeedMult = 0.5
-
-SWEP.MeleeSpeedMultTime = 2 // seconds to apply slow down for
+SWEP.MoveSpeedMult = 0.85
+SWEP.SightedSpeedMult = 1
+SWEP.ShootingSpeedMult = 1
+SWEP.MeleeSpeedMult = 0.9
+SWEP.MeleeSpeedMultTime = 1
 
 SWEP.SprintToFireTime = 0.25
 

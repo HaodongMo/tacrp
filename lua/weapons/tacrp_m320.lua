@@ -19,12 +19,23 @@ SWEP.NoRanger = true
 
 SWEP.Slot = 4
 
-SWEP.ArcadeStats = {
-    MoveSpeedMult = 0.95,
-    ShootingSpeedMult = 0.6,
-    SightedSpeedMult = 0.9,
-    MeleeSpeedMult = 1,
-    ReloadSpeedMult = 0.85,
+SWEP.BalanceStats = {
+    [TacRP.BALANCE_SBOX] = {
+        MoveSpeedMult = 0.95,
+        ShootingSpeedMult = 0.6,
+        SightedSpeedMult = 0.9,
+        MeleeSpeedMult = 1,
+        ReloadSpeedMult = 0.85,
+    },
+    [TacRP.BALANCE_TTT] = {
+        ReloadTimeMult = 1.25,
+
+        MoveSpeedMult = 0.95,
+        ShootingSpeedMult = 0.6,
+        SightedSpeedMult = 0.5,
+        MeleeSpeedMult = 1,
+        ReloadSpeedMult = 0.75,
+    },
 }
 
 // "ballistics"

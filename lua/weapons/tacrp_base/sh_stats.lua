@@ -21,37 +21,27 @@ function SWEP:InvalidateCache()
 end
 
 function SWEP:RunHook(val, data)
-    if self.HookCache[val] then
-        for _, chook in pairs(self.HookCache[val]) do
+    if !self.HookCache[val] then
+        self.HookCache[val] = {}
+        for slot, slottbl in pairs(self.Attachments) do
+            if !slottbl.Installed then continue end
 
-            local d = chook(self, data)
+            local atttbl = TacRP.GetAttTable(slottbl.Installed)
 
-            if d != nil then
-                data = d
-            end
-        end
-
-        return data
-    end
-
-    self.HookCache[val] = {}
-
-    for slot, slottbl in pairs(self.Attachments) do
-        if !slottbl.Installed then continue end
-
-        local atttbl = TacRP.GetAttTable(slottbl.Installed)
-
-        if atttbl[val] then
-
-            table.insert(self.HookCache[val], atttbl[val])
-
-            local d = atttbl[val](self, data)
-
-            if d != nil then
-                data = d
+            if atttbl[val] then
+                table.insert(self.HookCache[val], atttbl[val])
             end
         end
     end
+
+    for _, chook in pairs(self.HookCache[val]) do
+        local d = chook(self, data)
+        if d != nil then
+            data = d
+        end
+    end
+
+    data = hook.Run("TacRP_" .. val, self, data) or data
 
     return data
 end
@@ -68,14 +58,14 @@ function SWEP:GetBaseValue(val)
         end
     end
 
-    if b > 0 and self.ArcadeStats and self.ArcadeStats[val] != nil then
-        return self.ArcadeStats[val]
-    end
+    -- if b > 0 and self.ArcadeStats and self.ArcadeStats[val] != nil then
+    --     return self.ArcadeStats[val]
+    -- end
 
     return stat
 end
 
-function SWEP:GetValue(val, invert)
+function SWEP:GetValue(val, static, invert)
 
     if !invert and self.StatCache[val] then
         return self.StatCache[val]

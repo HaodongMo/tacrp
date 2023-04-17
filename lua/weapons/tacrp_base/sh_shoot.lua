@@ -451,7 +451,7 @@ function SWEP:AfterShotFunction(tr, dmg, range, penleft, alreadypenned, forced)
         if !tr.Entity.TacRP_BreachThreshold or CurTime() - tr.Entity.TacRP_BreachThreshold[1] > 0.1 then
             tr.Entity.TacRP_BreachThreshold = {CurTime(), 0}
         end
-        tr.Entity.TacRP_BreachThreshold[2] = tr.Entity.TacRP_BreachThreshold[2] + dmgv
+        tr.Entity.TacRP_BreachThreshold[2] = tr.Entity.TacRP_BreachThreshold[2] + dmg:GetDamage()
         if tr.Entity.TacRP_BreachThreshold[2] > (self:GetValue("DoorBreachThreshold") or 100) then
             tr.Entity:EmitSound("ambient/materials/door_hit1.wav", 80, math.Rand(95, 105))
             for _, otherDoor in pairs(ents.FindInSphere(tr.Entity:GetPos(), 72)) do
@@ -469,11 +469,11 @@ function SWEP:AfterShotFunction(tr, dmg, range, penleft, alreadypenned, forced)
     self:Penetrate(tr, range, penleft, alreadypenned)
 end
 
-function SWEP:GetMinMaxRange(base)
+function SWEP:GetMinMaxRange(base, static)
     local valfunc = base and self.GetBaseValue or self.GetValue
 
     local max, min = valfunc(self, "Damage_Max"), valfunc(self, "Damage_Min")
-    return valfunc(self, "Range_Min", max < min), valfunc(self, "Range_Max", max < min)
+    return valfunc(self, "Range_Min", static, max < min), valfunc(self, "Range_Max", static, max < min)
 end
 
 function SWEP:GetDamageAtRange(range, noround)

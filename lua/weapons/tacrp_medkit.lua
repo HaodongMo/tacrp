@@ -19,11 +19,6 @@ SWEP.WorldModel = "models/weapons/tacint/w_medkit.mdl"
 SWEP.NoRanger = true
 SWEP.NoStatBox = true
 
-
-SWEP.ArcadeStats = {
-    MeleeSpeedMult = 1,
-}
-
 SWEP.Slot = 4
 
 SWEP.NPCUsable = false
@@ -43,7 +38,6 @@ SWEP.NoBuffer = true
 SWEP.Firemode = 1
 
 SWEP.MoveSpeedMult = 1
-
 
 SWEP.MeleeSpeedMultTime = 2 // seconds to apply slow down for
 

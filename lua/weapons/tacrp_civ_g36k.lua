@@ -17,12 +17,6 @@ SWEP.WorldModel = "models/weapons/tacint/w_g36k.mdl"
 
 SWEP.Slot = 2
 
-SWEP.ArcadeStats = {
-
-
-}
-
-
 SWEP.BalanceStats = {
     [TacRP.BALANCE_SBOX] = {
         Description = "Semi-automatic model of an iconic polymer rifle. Fine tuned for precision shooting.",

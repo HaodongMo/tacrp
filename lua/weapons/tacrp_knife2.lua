@@ -18,9 +18,6 @@ SWEP.WorldModel = "models/weapons/tacint/w_knife2.mdl"
 SWEP.NoRanger = true
 SWEP.NoStatBox = true
 
-SWEP.ArcadeStats = {
-}
-
 SWEP.Slot = 0
 
 SWEP.NPCUsable = false
