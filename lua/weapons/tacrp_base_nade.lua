@@ -35,6 +35,7 @@ SWEP.CrosshairStatic = true
 SWEP.Scope = false
 SWEP.CanBlindFire = false
 SWEP.CanQuickNade = false
+SWEP.CanMeleeAttack = false
 
 SWEP.Firemode = 0
 

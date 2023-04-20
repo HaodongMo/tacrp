@@ -8,7 +8,7 @@ SWEP.PrintName = "HK MG4"
 SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 
 SWEP.SubCatTier = "1Elite"
-SWEP.SubCatType = "4Assault Rifle"
+SWEP.SubCatType = "4Machine Gun"
 
 SWEP.Description = "Machine gun with huge volume of fire."
 
