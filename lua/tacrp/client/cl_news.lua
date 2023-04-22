@@ -96,6 +96,14 @@ local function fetchnews(callback)
         if body_start and body_end then
             local json = string.sub(body, body_start + 1, body_end - 1)
             local loaded = (util.JSONToTable(json) or {}).news
+            if not loaded then
+                loadlocalandsort()
+                if callback then
+                    callback()
+                end
+                TacRP.NewsResult = "Fetch failed: " .. #TacRP.News .. " local (cannot parse)"
+                return
+            end
             TacRP.NewsLoaded = {}
             for i, v in pairs(loaded or {}) do
                 v.Key = v.Link
