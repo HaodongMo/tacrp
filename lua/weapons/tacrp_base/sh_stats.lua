@@ -13,6 +13,10 @@ SWEP.IntegerStats = {
     ["Num"] = true,
 }
 
+SWEP.AllowNegativeStats = {
+    ["RecoilKick"] = true,
+}
+
 function SWEP:InvalidateCache()
     self.StatCache = {}
     self.HookCache = {}
@@ -53,8 +57,18 @@ function SWEP:GetBaseValue(val)
     if b > 0 and self.BalanceStats != nil then
         for j = b, 1, -1 do
             if self.BalanceStats[b] and self.BalanceStats[b][val] then
-                return self.BalanceStats[b][val]
+                stat = self.BalanceStats[b][val]
+                break
             end
+        end
+    end
+
+    if isnumber(stat) then
+        if self.IntegerStats[val] then
+            stat = math.ceil(stat)
+        end
+        if !self.AllowNegativeStats[val] then
+            stat = math.max(stat, 0)
         end
     end
 
@@ -144,6 +158,9 @@ function SWEP:GetValue(val, static, invert)
             if self.IntegerStats[val] then
                 modifiers.stat = math.ceil(modifiers.stat)
             end
+            if !self.AllowNegativeStats[val] then
+                modifiers.stat = math.max(modifiers.stat, 0)
+            end
         else
             modifiers.stat = modifiers.set
         end
@@ -175,6 +192,9 @@ function SWEP:GetValue(val, static, invert)
 
             if self.IntegerStats[val] then
                 stat = math.ceil(stat)
+            end
+            if !self.AllowNegativeStats[val] then
+                stat = math.max(stat, 0)
             end
         end
     else
