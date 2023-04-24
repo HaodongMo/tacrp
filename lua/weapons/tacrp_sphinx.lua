@@ -7,7 +7,7 @@ AddCSLuaFile()
 SWEP.PrintName = "Sphinx 2000"
 SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 
-SWEP.SubCatTier = "2Premium"
+SWEP.SubCatTier = "2Operator"
 SWEP.SubCatType = "1Sidearm"
 
 SWEP.Description = "Competition pistol with low recoil and a crisp trigger."

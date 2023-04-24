@@ -7,7 +7,7 @@ AddCSLuaFile()
 SWEP.PrintName = "HK MP7"
 SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 
-SWEP.SubCatTier = "2Premium"
+SWEP.SubCatTier = "2Operator"
 SWEP.SubCatType = "3Submachine Gun"
 
 SWEP.Description = "PDW with superb handling and close range effectiveness.\nHigh velocity rounds retain effectiveness at range and pierces armor easily."

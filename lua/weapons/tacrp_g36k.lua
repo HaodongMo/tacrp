@@ -7,7 +7,7 @@ AddCSLuaFile()
 SWEP.PrintName = "HK G36K"
 SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 
-SWEP.SubCatTier = "2Premium"
+SWEP.SubCatTier = "2Operator"
 SWEP.SubCatType = "4Assault Rifle"
 
 SWEP.Description = "Assault rifle with high muzzle velocity. Well suited for medium range sustained fire.\nEquipped with a 2x scope by default."

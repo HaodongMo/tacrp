@@ -7,7 +7,7 @@ AddCSLuaFile()
 SWEP.PrintName = "PGM Hécate II"
 SWEP.Category = "Tactical RP" // "Tactical RP (Extras)"
 
-SWEP.SubCatTier = "2Premium"
+SWEP.SubCatTier = "2Operator"
 SWEP.SubCatType = "7Sniper Rifle"
 
 SWEP.Description = "Heavy anti-materiel rifle that can kill in one shot.\nDoes not fire phantom bullets.\nEquipped with a 10x scope by default."

@@ -9,7 +9,7 @@ SWEP.Category = "Tactical RP" // "Tactical RP (Extras)"
 
 // Assets: https://gamebanana.com/mods/208831
 
-SWEP.SubCatTier = "2Premium"
+SWEP.SubCatTier = "2Operator"
 SWEP.SubCatType = "3Submachine Gun"
 
 SWEP.Description = "Compact polymer submachine gun packing lots of firepower in a small package."

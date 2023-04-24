@@ -7,7 +7,7 @@ AddCSLuaFile()
 SWEP.PrintName = "Colt M4A1"
 SWEP.Category = "Tactical RP" // "Tactical RP (Extras)"
 
-SWEP.SubCatTier = "2Premium"
+SWEP.SubCatTier = "2Operator"
 SWEP.SubCatType = "4Assault Rifle"
 
 SWEP.Description = "A true American classic boasting high fire rate and balanced performance."

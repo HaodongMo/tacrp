@@ -7,7 +7,7 @@ AddCSLuaFile()
 SWEP.PrintName = "Manurhin MR96"
 SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 
-SWEP.SubCatTier = "2Premium"
+SWEP.SubCatTier = "2Operator"
 SWEP.SubCatType = "1Sidearm"
 
 SWEP.Description = "Magnum revolver with good handling and stopping power. Accurate, but hard to fire rapidly."

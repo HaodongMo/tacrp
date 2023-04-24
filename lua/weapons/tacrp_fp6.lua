@@ -7,7 +7,7 @@ AddCSLuaFile()
 SWEP.PrintName = "HK FABARM FP6"
 SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 
-SWEP.SubCatTier = "2Premium"
+SWEP.SubCatTier = "2Operator"
 SWEP.SubCatType = "5Shotgun"
 
 SWEP.Description = "Combat shotgun with high fire rate and capacity."

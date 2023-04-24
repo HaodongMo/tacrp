@@ -7,7 +7,7 @@ AddCSLuaFile()
 SWEP.PrintName = "AK-47"
 SWEP.Category = "Tactical RP" // "Tactical RP (Extras)"
 
-SWEP.SubCatTier = "2Premium"
+SWEP.SubCatTier = "2Operator"
 SWEP.SubCatType = "4Assault Rifle"
 
 SWEP.Description = "High damage assault rifle able to one-tap through armor.\nAn insurgent's greatest ally and a terrorist's best friend."

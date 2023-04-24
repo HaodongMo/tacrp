@@ -7,7 +7,7 @@ AddCSLuaFile()
 SWEP.PrintName = "FN P90"
 SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 
-SWEP.SubCatTier = "2Premium"
+SWEP.SubCatTier = "2Operator"
 SWEP.SubCatType = "3Submachine Gun"
 
 SWEP.Description = "Bullpup PDW with a generous top-loaded magazine and controllable spread. Perfect for rushing bombsites.\nHigh velocity rounds retain effectiveness at range and pierces armor easily."

@@ -7,7 +7,7 @@ AddCSLuaFile()
 SWEP.PrintName = "SIG P250"
 SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 
-SWEP.SubCatTier = "2Premium"
+SWEP.SubCatTier = "2Operator"
 SWEP.SubCatType = "1Sidearm"
 
 SWEP.Description = "Powerful handgun that exchanges capacity for damage and precision."
