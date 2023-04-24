@@ -383,35 +383,72 @@ function TacRP.CreateNewsPanel(open)
             end
 
             local linkbutton = vgui.Create("DButton", topbar)
-            linkbutton:SetText("")
-            linkbutton:Dock(FILL)
-            linkbutton:SetMouseInputEnabled(true)
-            linkbutton.Hyperlink = pagelink
-            function linkbutton.Paint(self2, w, h)
-                surface.SetDrawColor(255, 255, 255, 255)
-                surface.DrawRect(0, 0, w, h)
-                TacRP.DrawCorneredBox(0, 0, w, h, Color(0, 0, 0, 255))
-                local c = Color(50, 50, 255)
-                if self2:IsHovered() then
-                    c = Color(100, 100, 255)
+            if BRANCH == "unknown" then
+                linkbutton:SetText("")
+                linkbutton:Dock(FILL)
+                linkbutton:SetMouseInputEnabled(true)
+                linkbutton.Hyperlink = pagelink
+                function linkbutton.Paint(self2, w, h)
+                    surface.SetDrawColor(255, 255, 255, 255)
+                    surface.DrawRect(0, 0, w, h)
+                    TacRP.DrawCorneredBox(0, 0, w, h, Color(0, 0, 0, 255))
+                    local c = Color(50, 50, 255)
+                    if self2:IsHovered() then
+                        c = Color(100, 100, 255)
+                    end
+                    draw.SimpleText(self2.Hyperlink, "TacRP_Myriad_Pro_6", w / 2, h / 2, c, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+
+                    DisableClipping(true)
+                    draw.SimpleText("Embedded browers do not work on your branch of GMod.", "TacRP_Myriad_Pro_8", w / 2, h + ScreenScale(96), color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+                    draw.SimpleText("Click here to open the tab in the overlay.", "TacRP_Myriad_Pro_8", w / 2, h + ScreenScale(106), color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+                    DisableClipping(false)
                 end
-                draw.SimpleText(self2.Hyperlink, "TacRP_Myriad_Pro_6", w / 2, h / 2, c, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+                function linkbutton.DoClick(self2)
+                    gui.OpenURL(self2.Hyperlink)
+                end
+            else
+                linkbutton:SetText("")
+                linkbutton:Dock(FILL)
+                linkbutton:SetMouseInputEnabled(true)
+                linkbutton.Hyperlink = pagelink
+                function linkbutton.Paint(self2, w, h)
+                    surface.SetDrawColor(255, 255, 255, 255)
+                    surface.DrawRect(0, 0, w, h)
+                    TacRP.DrawCorneredBox(0, 0, w, h, Color(0, 0, 0, 255))
+                    local c = Color(50, 50, 255)
+                    if self2:IsHovered() then
+                        c = Color(100, 100, 255)
+                    end
+                    draw.SimpleText(self2.Hyperlink, "TacRP_Myriad_Pro_6", w / 2, h / 2, c, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
 
-                DisableClipping(true)
-                draw.SimpleText("If the page does not load, click the link at the top to open externally.", "TacRP_Myriad_Pro_8", w / 2, h + ScreenScale(96), color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
-                DisableClipping(false)
-            end
-            function linkbutton.DoClick(self2)
-                gui.OpenURL(self2.Hyperlink)
+                    DisableClipping(true)
+                    draw.SimpleText("If the page does not load, click the link at the top to open externally.", "TacRP_Myriad_Pro_8", w / 2, h + ScreenScale(96), color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+                    DisableClipping(false)
+                end
+                function linkbutton.DoClick(self2)
+                    gui.OpenURL(self2.Hyperlink)
+                end
             end
 
-            local html = vgui.Create("DHTML", self)
-            html:Dock(FILL)
-            html:OpenURL(pagelink)
-            function html.OnBeginLoadingDocument(self2, url)
-                linkbutton.Hyperlink = url
+
+            if BRANCH != "unknown" then
+                local html = vgui.Create("DHTML", self)
+                html:Dock(FILL)
+                html:OpenURL(pagelink)
+                function html.OnBeginLoadingDocument(self2, url)
+                    linkbutton.Hyperlink = url
+                end
+                homebutton.Page = html
+            else
+                local html = vgui.Create("DButton", self)
+                html:SetText("")
+                html:Dock(FILL)
+                linkbutton.Hyperlink = pagelink
+                function html.Paint(self2) end
+                function html.DoClick(self2)
+                    gui.OpenURL(linkbutton.Hyperlink)
+                end
             end
-            homebutton.Page = html
         else
             local c_txt = TacRP.GetPanelColor("text")
 
