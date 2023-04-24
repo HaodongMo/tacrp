@@ -7,7 +7,7 @@ AddCSLuaFile()
 SWEP.PrintName = "MAC-10"
 SWEP.Category = "Tactical RP" // "Tactical RP (Extras)"
 
-SWEP.SubCatTier = "4Common"
+SWEP.SubCatTier = "4Consumer"
 SWEP.SubCatType = "2Machine Pistol"
 
 SWEP.Description = "A bullet hose best used for point blank spray-and-pray."

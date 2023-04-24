@@ -7,7 +7,7 @@ AddCSLuaFile()
 SWEP.PrintName = "Colt M1911"
 SWEP.Category = "Tactical RP" // "Tactical RP (Extras)"
 
-SWEP.SubCatTier = "4Common"
+SWEP.SubCatTier = "4Consumer"
 SWEP.SubCatType = "1Sidearm"
 
 SWEP.Description = "Surplus pistol from an era before tactical attachments and pistol optics, yet still hits quite hard."

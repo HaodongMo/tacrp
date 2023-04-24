@@ -7,8 +7,8 @@ AddCSLuaFile()
 SWEP.PrintName = "HK HK94"
 SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 
-SWEP.SubCatTier = "4Common"
-SWEP.SubCatType = "8Civilian Firearm"
+SWEP.SubCatTier = "4Consumer"
+SWEP.SubCatType = "8Semi-auto Carbine"
 
 SWEP.Description = "Semi-automatic model of a legendary submachine gun.\nUses reduced capacity magazines."
 

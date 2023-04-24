@@ -7,7 +7,7 @@ AddCSLuaFile()
 SWEP.PrintName = "PGM Ultima Ratio"
 SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 
-SWEP.SubCatTier = "3Quality"
+SWEP.SubCatTier = "3Security"
 SWEP.SubCatType = "7Sniper Rifle"
 
 SWEP.Description = "Lightweight sniper rifle with good damage and high mobility.\nEquipped with a 10x scope by default."

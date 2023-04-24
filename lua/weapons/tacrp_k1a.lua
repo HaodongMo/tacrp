@@ -7,7 +7,7 @@ AddCSLuaFile()
 SWEP.PrintName = "Daewoo K1A"
 SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 
-SWEP.SubCatTier = "4Common"
+SWEP.SubCatTier = "4Consumer"
 SWEP.SubCatType = "4Assault Rifle"
 
 SWEP.Description = "Burst rifle with minimal recoil and good hip firing accuracy."

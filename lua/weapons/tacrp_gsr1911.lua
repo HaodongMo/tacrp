@@ -7,7 +7,7 @@ AddCSLuaFile()
 SWEP.PrintName = "GSR M1911A1"
 SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 
-SWEP.SubCatTier = "3Quality"
+SWEP.SubCatTier = "3Security"
 SWEP.SubCatType = "1Sidearm"
 
 SWEP.Description = "High damage pistol with low range and capacity.\nA tactical evolution, or some would call devolution, of a venerable classic."

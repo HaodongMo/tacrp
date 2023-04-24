@@ -7,7 +7,7 @@ AddCSLuaFile()
 SWEP.PrintName = "Skorpion vz. 61"
 SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 
-SWEP.SubCatTier = "4Common"
+SWEP.SubCatTier = "4Consumer"
 SWEP.SubCatType = "2Machine Pistol"
 
 SWEP.Description = "Light machine pistol with good range, recoil and spread."

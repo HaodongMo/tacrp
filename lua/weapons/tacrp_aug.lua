@@ -7,7 +7,7 @@ AddCSLuaFile()
 SWEP.PrintName = "Steyr AUG"
 SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 
-SWEP.SubCatTier = "3Quality"
+SWEP.SubCatTier = "3Security"
 SWEP.SubCatType = "4Assault Rifle"
 
 SWEP.Description = "Burst bullpup rifle with a generous magazine capacity and great handling."

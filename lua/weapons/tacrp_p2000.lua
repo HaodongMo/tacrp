@@ -7,7 +7,7 @@ AddCSLuaFile()
 SWEP.PrintName = "HK P2000"
 SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 
-SWEP.SubCatTier = "3Quality"
+SWEP.SubCatTier = "3Security"
 SWEP.SubCatType = "1Sidearm"
 
 SWEP.Description = "Well-rounded handgun."

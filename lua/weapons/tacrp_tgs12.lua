@@ -7,7 +7,7 @@ AddCSLuaFile()
 SWEP.PrintName = "TGS-12"
 SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 
-SWEP.SubCatTier = "3Quality"
+SWEP.SubCatTier = "3Security"
 SWEP.SubCatType = "5Shotgun"
 
 SWEP.Description = "Pistol grip shotgun with high recoil and mobility."

@@ -7,7 +7,7 @@ AddCSLuaFile()
 SWEP.PrintName = "FB Beryl 96"
 SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 
-SWEP.SubCatTier = "4Common"
+SWEP.SubCatTier = "4Consumer"
 SWEP.SubCatType = "4Assault Rifle"
 
 SWEP.Description = "Easy to handle rifle with low fire rate and recoil.\nDespite its looks, it is not an AK."

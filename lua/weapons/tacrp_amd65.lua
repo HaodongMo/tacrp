@@ -7,7 +7,7 @@ AddCSLuaFile()
 SWEP.PrintName = "AMD-65"
 SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 
-SWEP.SubCatTier = "3Quality"
+SWEP.SubCatTier = "3Security"
 SWEP.SubCatType = "4Assault Rifle"
 
 SWEP.Description = "Hungarian AK clone with integrated grip and wire stock. High damage, but lower range than most rifles."

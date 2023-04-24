@@ -7,8 +7,8 @@ AddCSLuaFile()
 SWEP.PrintName = "Colt Canada AR-15"
 SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 
-SWEP.SubCatTier = "3Quality"
-SWEP.SubCatType = "8Civilian Firearm"
+SWEP.SubCatTier = "3Security"
+SWEP.SubCatType = "8Semi-auto Carbine"
 
 SWEP.Description = "Semi-automatic model of an ubiquitous American rifle.\nUses reduced capacity magazines."
 

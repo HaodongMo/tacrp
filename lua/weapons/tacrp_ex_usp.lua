@@ -7,7 +7,7 @@ AddCSLuaFile()
 SWEP.PrintName = "HK USP"
 SWEP.Category = "Tactical RP" // "Tactical RP (Extras)"
 
-SWEP.SubCatTier = "3Quality"
+SWEP.SubCatTier = "3Security"
 SWEP.SubCatType = "1Sidearm"
 
 SWEP.Description = "Tactical pistol with good damage and range for its capacity."

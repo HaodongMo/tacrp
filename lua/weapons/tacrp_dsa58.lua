@@ -7,7 +7,7 @@ AddCSLuaFile()
 SWEP.PrintName = "DSA-58"
 SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 
-SWEP.SubCatTier = "3Quality"
+SWEP.SubCatTier = "3Security"
 SWEP.SubCatType = "6Precision Rifle"
 
 SWEP.Description = "Battle rifle with slow fire rate but very high damage."

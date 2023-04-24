@@ -7,7 +7,7 @@ AddCSLuaFile()
 SWEP.PrintName = "Glock 17"
 SWEP.Category = "Tactical RP" // "Tactical RP (Extras)"
 
-SWEP.SubCatTier = "4Common"
+SWEP.SubCatTier = "4Consumer"
 SWEP.SubCatType = "1Sidearm"
 
 SWEP.Description = "Polymer pistol with large capacity and fire rate."
