@@ -10,7 +10,7 @@ SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 SWEP.SubCatTier = "3Security"
 SWEP.SubCatType = "6Precision Rifle"
 
-SWEP.Description = "Battle rifle with slow fire rate but very high damage."
+SWEP.Description = "Battle rifle with slow fire rate but very high damage and armor penetration."
 
 SWEP.ViewModel = "models/weapons/tacint/v_dsa58.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_dsa58.mdl"
@@ -66,16 +66,16 @@ SWEP.TTTReplace = TacRP.TTTReplacePreset.BattleRifle
 // "ballistics"
 
 SWEP.Damage_Max = 35
-SWEP.Damage_Min = 27
+SWEP.Damage_Min = 28
 SWEP.Range_Min = 800
-SWEP.Range_Max = 7500
+SWEP.Range_Max = 6500
 SWEP.Penetration = 20
-SWEP.ArmorPenetration = 0.85
+SWEP.ArmorPenetration = 0.9
 
 SWEP.BodyDamageMultipliers = {
     [HITGROUP_HEAD] = 3.5,
-    [HITGROUP_CHEST] = 1.2,
-    [HITGROUP_STOMACH] = 1,
+    [HITGROUP_CHEST] = 1,
+    [HITGROUP_STOMACH] = 1.25,
     [HITGROUP_LEFTARM] = 1,
     [HITGROUP_RIGHTARM] = 1,
     [HITGROUP_LEFTLEG] = 0.9,
