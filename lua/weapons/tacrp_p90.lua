@@ -10,7 +10,7 @@ SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 SWEP.SubCatTier = "2Premium"
 SWEP.SubCatType = "3Submachine Gun"
 
-SWEP.Description = "Bullpup personal defense weapon with a generous top-loaded magazine. High velocity rounds retain effectiveness at range."
+SWEP.Description = "Bullpup PDW with a generous top-loaded magazine and controllable spread. Perfect for rushing bombsites.\nHigh velocity rounds retain effectiveness at range and pierces armor easily."
 
 SWEP.ViewModel = "models/weapons/tacint/v_p90.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_p90.mdl"
@@ -19,8 +19,8 @@ SWEP.Slot = 2
 
 SWEP.BalanceStats = {
     [TacRP.BALANCE_SBOX] = {
-        Damage_Max = 15,
-        Damage_Min = 13,
+        Damage_Max = 16,
+        Damage_Min = 14,
 
         MoveSpeedMult = 0.9,
         ShootingSpeedMult = 0.8,
@@ -60,17 +60,17 @@ SWEP.TTTReplace = TacRP.TTTReplacePreset.SMG
 
 // "ballistics"
 
-SWEP.Damage_Max = 15
-SWEP.Damage_Min = 13
-SWEP.Range_Min = 2000 // distance for which to maintain maximum damage
+SWEP.Damage_Max = 18
+SWEP.Damage_Min = 16
+SWEP.Range_Min = 2500 // distance for which to maintain maximum damage
 SWEP.Range_Max = 5000 // distance at which we drop to minimum damage
 SWEP.Penetration = 10 // units of metal this weapon can penetrate
-
+SWEP.ArmorPenetration = 0.875
 
 SWEP.BodyDamageMultipliers = {
-    [HITGROUP_HEAD] = 2,
-    [HITGROUP_CHEST] = 1.25,
-    [HITGROUP_STOMACH] = 1,
+    [HITGROUP_HEAD] = 3,
+    [HITGROUP_CHEST] = 1,
+    [HITGROUP_STOMACH] = 1.25,
     [HITGROUP_LEFTARM] = 1,
     [HITGROUP_RIGHTARM] = 1,
     [HITGROUP_LEFTLEG] = 0.9,
@@ -101,7 +101,7 @@ SWEP.RecoilVisualKick = 0.5
 
 SWEP.RecoilKick = 1
 
-SWEP.RecoilSpreadPenalty = 0.001
+SWEP.RecoilSpreadPenalty = 0.0012
 
 SWEP.CanBlindFire = true
 

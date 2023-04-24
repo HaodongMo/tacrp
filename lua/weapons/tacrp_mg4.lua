@@ -10,7 +10,7 @@ SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 SWEP.SubCatTier = "1Elite"
 SWEP.SubCatType = "4Machine Gun"
 
-SWEP.Description = "Machine gun with huge volume of fire."
+SWEP.Description = "Machine gun with huge volume of fire, but is really, really, really heavy."
 
 SWEP.ViewModel = "models/weapons/tacint/v_mg4.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_mg4.mdl"
@@ -65,9 +65,9 @@ SWEP.BalanceStats = {
 SWEP.TTTReplace = TacRP.TTTReplacePreset.MachineGun
 
 SWEP.BodyDamageMultipliers = {
-    [HITGROUP_HEAD] = 2,
-    [HITGROUP_CHEST] = 1.25,
-    [HITGROUP_STOMACH] = 1,
+    [HITGROUP_HEAD] = 4,
+    [HITGROUP_CHEST] = 1,
+    [HITGROUP_STOMACH] = 1.25,
     [HITGROUP_LEFTARM] = 0.9,
     [HITGROUP_RIGHTARM] = 0.9,
     [HITGROUP_LEFTLEG] = 0.75,
@@ -78,10 +78,11 @@ SWEP.BodyDamageMultipliers = {
 // "ballistics"
 
 SWEP.Damage_Max = 32
-SWEP.Damage_Min = 24
+SWEP.Damage_Min = 27
 SWEP.Range_Min = 2000 // distance for which to maintain maximum damage
-SWEP.Range_Max = 4000 // distance at which we drop to minimum damage
+SWEP.Range_Max = 6000 // distance at which we drop to minimum damage
 SWEP.Penetration = 10 // units of metal this weapon can penetrate
+SWEP.ArmorPenetration = 0.8
 
 SWEP.MuzzleVelocity = 17500
 
@@ -91,30 +92,30 @@ SWEP.Firemode = 2
 
 SWEP.RPM = 750
 
-SWEP.Spread = 0.007
+SWEP.Spread = 0.01
 
 SWEP.ShootTimeMult = 0.5
 
 SWEP.RecoilPerShot = 1
-SWEP.RecoilMaximum = 25
-SWEP.RecoilResetTime = 0.15
-SWEP.RecoilDissipationRate = 25
-SWEP.RecoilFirstShotMult = 1 // multiplier for the first shot's recoil amount
+SWEP.RecoilMaximum = 35
+SWEP.RecoilResetTime = 0.175
+SWEP.RecoilDissipationRate = 35
+SWEP.RecoilFirstShotMult = 2 // multiplier for the first shot's recoil amount
 
-SWEP.RecoilVisualKick = 0.75
+SWEP.RecoilVisualKick = 1
 
-SWEP.RecoilKick = 2
+SWEP.RecoilKick = 4
 
-SWEP.HipFireSpreadPenalty = 0.03
+SWEP.HipFireSpreadPenalty = 0.04
 SWEP.RecoilSpreadPenalty = 0.0009
 
 SWEP.CanBlindFire = true
 
 // handling
 
-SWEP.MoveSpeedMult = 0.875
-SWEP.ShootingSpeedMult = 0.55
-SWEP.SightedSpeedMult = 0.75
+SWEP.MoveSpeedMult = 0.85
+SWEP.ShootingSpeedMult = 0.4
+SWEP.SightedSpeedMult = 0.5
 
 SWEP.ReloadSpeedMult = 0.1
 SWEP.ReloadSpeedMultTime = 1

@@ -69,11 +69,12 @@ SWEP.Damage_Min = 10
 SWEP.Range_Min = 1800
 SWEP.Range_Max = 4000
 SWEP.Penetration = 7
+SWEP.ArmorPenetration = 0.7
 
 SWEP.BodyDamageMultipliers = {
-    [HITGROUP_HEAD] = 2,
-    [HITGROUP_CHEST] = 1.25,
-    [HITGROUP_STOMACH] = 1,
+    [HITGROUP_HEAD] = 4,
+    [HITGROUP_CHEST] = 1,
+    [HITGROUP_STOMACH] = 1.25,
     [HITGROUP_LEFTARM] = 1,
     [HITGROUP_RIGHTARM] = 1,
     [HITGROUP_LEFTLEG] = 0.9,
@@ -97,8 +98,6 @@ SWEP.Spread = 0.0008
 SWEP.PostBurstDelay = 0.15
 
 SWEP.RunawayBurst = true
-
-
 
 SWEP.RecoilPerShot = 1
 SWEP.RecoilMaximum = 15

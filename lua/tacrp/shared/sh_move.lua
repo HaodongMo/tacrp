@@ -185,7 +185,7 @@ function TacRP.StartCommand(ply, cmd)
     recrise:Normalize()
     TacRP.RecoilRise = recrise
 
-    if wpn:GetLastRecoilTime() + wpn:GetValue("RecoilResetTime") > CurTime() then
+    if wpn:GetLastRecoilTime() + wpn:RecoilDuration() > CurTime() then
         local kick = wpn:GetValue("RecoilKick")
         local recoildir = wpn:GetRecoilDirection()
         local rec = math.Clamp(wpn:GetRecoilAmount(), 0, 1)
@@ -222,7 +222,7 @@ function TacRP.StartCommand(ply, cmd)
     --     delay_extra = 60 / wpn:GetValue("RPM")
     -- end
 
-    if wpn:GetLastRecoilTime() + wpn:GetValue("RecoilResetTime") - (ping * 0.5) < CurTime() and wpn:GetRecoilAmount() == 0 then
+    if wpn:GetLastRecoilTime() + wpn:RecoilDuration() - (ping * 0.5) < CurTime() and wpn:GetRecoilAmount() == 0 then
         recrise = TacRP.RecoilRise
 
         local recreset = recrise * FrameTime() * 6

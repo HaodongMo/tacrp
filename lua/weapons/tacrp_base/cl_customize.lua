@@ -4,6 +4,9 @@ local bench_have = Color(0, 255, 0)
 local flash_end = 0
 local range = 0
 
+local enable_armor = false
+local armor = Material("tacrp/hud/armor.png", "mip smooth")
+
 local body = Material("tacrp/hud/body.png", "mips smooth")
 
 local body_head = Material("tacrp/hud/body_head.png", "mips smooth")
@@ -15,8 +18,8 @@ local body_legs = Material("tacrp/hud/body_legs.png", "mips smooth")
 local stk_clr = {
     [1] = Color(75, 25, 25),
     [2] = Color(40, 20, 20),
-    [3] = Color(50, 50, 50),
-    [4] = Color(75, 75, 75),
+    [3] = Color(60, 50, 50),
+    [4] = Color(80, 75, 75),
     [5] = Color(100, 100, 100),
     [6] = Color(120, 120, 120),
     [7] = Color(140, 140, 140),
@@ -42,7 +45,11 @@ local function bodydamagetext(name, dmg, num, mult, x, y, hover)
     end
 
     local c = stk_clr[math.Clamp(num > 1 and math.floor(stk / num * 3.5) or stk, 1, 9)]
-    surface.SetDrawColor(c, c, c, 255)
+    if enable_armor then
+        surface.SetDrawColor(c.b, c.g, c.r - (c.r - c.g) * 0.25, 255)
+    else
+        surface.SetDrawColor(c.r, c.g, c.b, 255)
+    end
 end
 
 local lastcustomize = false
@@ -288,7 +295,12 @@ function SWEP:CreateCustomizeHUD()
             surface.SetMaterial(body)
             surface.DrawTexturedRect(x2, y2, w2, h2)
 
-            local dmg = self:GetDamageAtRange(range)
+            local dmg = self:GetDamageAtRange(range, true)
+
+            if enable_armor then
+                dmg = dmg * math.Clamp(self:GetValue("ArmorPenetration"), 0, 1)
+            end
+
             local num =  self:GetValue("Num")
             local mult = self:GetBodyDamageMultipliers() --self:GetValue("BodyDamageMultipliers")
             local hover = self2:IsHovered()
@@ -341,6 +353,33 @@ function SWEP:CreateCustomizeHUD()
                 surface.SetTextPos(w - tw2 - ScreenScale(2), h - ScreenScale(10))
                 surface.DrawText(txt2)
             end
+        end
+
+        local armorbtn = vgui.Create("DLabel", bg)
+        armorbtn:SetText("")
+        armorbtn:SetPos(scrw - ScreenScale(128 + 44 - 32) - airgap, stack + smallgap + ScreenScale(2))
+        armorbtn:SetSize(ScreenScale(6), ScreenScale(6))
+        armorbtn:SetZPos(110)
+        armorbtn:SetMouseInputEnabled(true)
+        armorbtn:MoveToFront()
+        armorbtn.Paint = function(self2, w, h)
+            if !IsValid(self) then return end
+
+            if enable_armor and self2:IsHovered() then
+                surface.SetDrawColor(Color(255, 255, 255, 255))
+            elseif self2:IsHovered() then
+                surface.SetDrawColor(Color(255, 220, 220, 255))
+            elseif enable_armor then
+                surface.SetDrawColor(Color(255, 255, 255, 175))
+            else
+                surface.SetDrawColor(Color(255, 200, 200, 125))
+            end
+            surface.SetMaterial(armor)
+            -- surface.DrawTexturedRect(w * 0.2, h * 0.2, w * 0.6, h * 0.6)
+            surface.DrawTexturedRect(0, 0, w, h)
+        end
+        armorbtn.DoClick = function(self2)
+            enable_armor = !enable_armor
         end
 
         stack = stack + ScreenScale(64) + smallgap

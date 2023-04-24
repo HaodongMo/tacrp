@@ -72,15 +72,16 @@ SWEP.TTTReplace = TacRP.TTTReplacePreset.MachinePistol
 // "ballistics"
 
 SWEP.Damage_Max = 30
-SWEP.Damage_Min = 10
-SWEP.Range_Min = 500
-SWEP.Range_Max = 3000
+SWEP.Damage_Min = 6
+SWEP.Range_Min = 400
+SWEP.Range_Max = 2000
 SWEP.Penetration = 4
+SWEP.ArmorPenetration = 0.6
 
 SWEP.MuzzleVelocity = 9000
 
 SWEP.BodyDamageMultipliers = {
-    [HITGROUP_HEAD] = 2,
+    [HITGROUP_HEAD] = 3,
     [HITGROUP_CHEST] = 1,
     [HITGROUP_STOMACH] = 1,
     [HITGROUP_LEFTARM] = 1,
@@ -158,7 +159,7 @@ SWEP.HolsterAng = Angle(90, 0, 0)
 
 // reload
 
-SWEP.ClipSize = 20
+SWEP.ClipSize = 18
 SWEP.Ammo = "pistol"
 
 SWEP.ReloadTimeMult = 1

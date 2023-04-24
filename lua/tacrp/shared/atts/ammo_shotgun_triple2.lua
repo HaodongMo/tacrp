@@ -10,6 +10,8 @@ ATT.InvAtt = "ammo_shotgun_triple"
 
 ATT.SortOrder = 1
 
+ATT.Add_ArmorPenetration = 0.075
+
 ATT.Mult_Damage_Max = 2
 ATT.Mult_Damage_Min = 2
 

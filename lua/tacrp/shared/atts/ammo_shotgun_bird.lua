@@ -8,8 +8,10 @@ ATT.Category = {"ammo_shotgun", "ammo_shotgun2"}
 
 ATT.SortOrder = 1
 
-ATT.Mult_Damage_Min = 0.5
-ATT.Mult_Damage_Max = 0.5
+ATT.Add_ArmorPenetration = -0.1
+
+ATT.Mult_Damage_Min = 0.55
+ATT.Mult_Damage_Max = 0.55
 
 ATT.Mult_Num = 2
 ATT.Mult_RecoilKick = 0.85

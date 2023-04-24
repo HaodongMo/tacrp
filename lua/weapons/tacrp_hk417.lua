@@ -17,7 +17,6 @@ SWEP.WorldModel = "models/weapons/tacint/w_hk417.mdl"
 
 SWEP.Slot = 2
 
-
 SWEP.BalanceStats = {
     [TacRP.BALANCE_SBOX] = {
         Damage_Max = 38,
@@ -76,6 +75,7 @@ SWEP.Damage_Min = 32
 SWEP.Range_Min = 1500 // distance for which to maintain maximum damage
 SWEP.Range_Max = 6500 // distance at which we drop to minimum damage
 SWEP.Penetration = 12 // units of metal this weapon can penetrate
+SWEP.ArmorPenetration = 0.825
 
 SWEP.BodyDamageMultipliers = {
     [HITGROUP_HEAD] = 2.5,

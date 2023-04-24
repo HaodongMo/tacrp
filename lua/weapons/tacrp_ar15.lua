@@ -8,7 +8,7 @@ SWEP.PrintName = "Colt Canada AR-15"
 SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 
 SWEP.SubCatTier = "3Security"
-SWEP.SubCatType = "8Semi-auto Carbine"
+SWEP.SubCatType = "8Civilian Carbine"
 
 SWEP.Description = "Semi-automatic model of an ubiquitous American rifle.\nUses reduced capacity magazines."
 
@@ -72,7 +72,7 @@ SWEP.BalanceStats = {
 
 SWEP.TTTReplace = {}
 
-SWEP.RPM = 500
+SWEP.RPM = 650
 
 SWEP.Firemode = 1
 SWEP.Firemodes = false

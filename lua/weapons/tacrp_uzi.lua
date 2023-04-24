@@ -10,7 +10,7 @@ SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 SWEP.SubCatTier = "3Security"
 SWEP.SubCatType = "2Machine Pistol"
 
-SWEP.Description = "Balanced machine pistol with a high yet controllable rate of fire."
+SWEP.Description = "Balanced machine pistol with a controllable rate of fire."
 
 SWEP.ViewModel = "models/weapons/tacint/v_uzi.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_uzi.mdl"
@@ -19,8 +19,8 @@ SWEP.Slot = 1
 
 SWEP.BalanceStats = {
     [TacRP.BALANCE_SBOX] = {
-        Damage_Max = 13,
-        Damage_Min = 8,
+        Damage_Max = 18,
+        Damage_Min = 9,
 
         MoveSpeedMult = 0.95,
         ShootingSpeedMult = 0.8,
@@ -29,8 +29,6 @@ SWEP.BalanceStats = {
         ReloadSpeedMult = 1,
     },
     [TacRP.BALANCE_TTT] = {
-        Description = "Balanced machine pistol with a controllable rate of fire.",
-
         Damage_Max = 12,
         Damage_Min = 6,
         Range_Min = 800,
@@ -62,11 +60,12 @@ SWEP.TTTReplace = TacRP.TTTReplacePreset.MachinePistol
 
 // "ballistics"
 
-SWEP.Damage_Max = 10
-SWEP.Damage_Min = 5
+SWEP.Damage_Max = 16
+SWEP.Damage_Min = 6
 SWEP.Range_Min = 800 // distance for which to maintain maximum damage
 SWEP.Range_Max = 2500 // distance at which we drop to minimum damage
-SWEP.Penetration = 3 // units of metal this weapon can penetrate
+SWEP.Penetration = 4 // units of metal this weapon can penetrate
+SWEP.ArmorPenetration = 0.575
 
 SWEP.MuzzleVelocity = 12500
 
@@ -91,21 +90,20 @@ SWEP.Firemodes = {
 SWEP.RPM = 950
 
 SWEP.Spread = 0.01
-SWEP.RecoilSpreadPenalty = 0.0015
+SWEP.RecoilSpreadPenalty = 0.002
 SWEP.HipFireSpreadPenalty = 0.01
 
 SWEP.ShootTimeMult = 0.5
 
 SWEP.RecoilPerShot = 1
-SWEP.RecoilMaximum = 15
+SWEP.RecoilMaximum = 20
 SWEP.RecoilResetTime = 0.12 // time after you stop shooting for recoil to start dissipating
 SWEP.RecoilDissipationRate = 25
 SWEP.RecoilFirstShotMult = 1 // multiplier for the first shot's recoil amount
 
 SWEP.RecoilVisualKick = 1
 
-SWEP.RecoilKick = 3
-
+SWEP.RecoilKick = 4
 
 SWEP.CanBlindFire = true
 

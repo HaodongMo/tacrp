@@ -10,7 +10,7 @@ SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 SWEP.SubCatTier = "1Elite"
 SWEP.SubCatType = "5Shotgun"
 
-SWEP.Description = "Semi-automatic combat shotgun. Low damage, but makes up with high capacity and fire rate."
+SWEP.Description = "Semi-automatic shotgun with very high damage.\nThere's nothing seven 12 Gauge rounds can't solve."
 
 SWEP.ViewModel = "models/weapons/tacint/v_m4star10.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_m4star10.mdl"
@@ -68,15 +68,18 @@ SWEP.ShootTimeMult = 0.5
 
 SWEP.Damage_Max = 12
 SWEP.Damage_Min = 6
-SWEP.Range_Min = 1000 // distance for which to maintain maximum damage
-SWEP.Range_Max = 1500 // distance at which we drop to minimum damage
+SWEP.Range_Min = 900 // distance for which to maintain maximum damage
+SWEP.Range_Max = 2000 // distance at which we drop to minimum damage
 SWEP.Penetration = 1 // units of metal this weapon can penetrate
+SWEP.ArmorPenetration = 0.8
+SWEP.ArmorBonus = 2
+
 SWEP.Num = 8
 
 SWEP.MuzzleVelocity = 9000
 
 SWEP.BodyDamageMultipliers = {
-    [HITGROUP_HEAD] = 1.25,
+    [HITGROUP_HEAD] = 2,
     [HITGROUP_CHEST] = 1,
     [HITGROUP_STOMACH] = 1,
     [HITGROUP_LEFTARM] = 1,
@@ -92,16 +95,16 @@ SWEP.Firemode = 1
 
 SWEP.RPM = 240
 
-SWEP.Spread = 0.035
+SWEP.Spread = 0.03
 SWEP.ShotgunPelletSpread = 0.01
 
 SWEP.HipFireSpreadPenalty = 0.015
 SWEP.MidAirSpreadPenalty = 0
 
 SWEP.RecoilPerShot = 1
-SWEP.RecoilMaximum = 2.5
+SWEP.RecoilMaximum = 2
 SWEP.RecoilResetTime = 0.2 // time after you stop shooting for recoil to start dissipating
-SWEP.RecoilDissipationRate = 3
+SWEP.RecoilDissipationRate = 3.5
 SWEP.RecoilFirstShotMult = 1 // multiplier for the first shot's recoil amount
 
 SWEP.RecoilVisualKick = 1.5

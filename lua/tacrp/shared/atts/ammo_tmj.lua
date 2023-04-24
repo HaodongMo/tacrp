@@ -11,3 +11,4 @@ ATT.SortOrder = 1.5
 ATT.Add_Penetration = 4
 ATT.Mult_Penetration = 1.5
 ATT.Mult_RecoilFirstShotMult = 1.5
+ATT.Add_ArmorPenetration = 0.05

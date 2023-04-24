@@ -9,6 +9,8 @@ ATT.Category = "ammo_shotgun"
 
 ATT.SortOrder = 1
 
+ATT.Add_ArmorPenetration = 0.1
+
 ATT.Mult_Damage_Max = 2.5
 ATT.Mult_Damage_Min = 2.5
 

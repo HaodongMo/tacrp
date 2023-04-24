@@ -10,7 +10,7 @@ SWEP.Category = "Tactical RP" // "Tactical RP (Extras)"
 SWEP.SubCatTier = "2Premium"
 SWEP.SubCatType = "4Assault Rifle"
 
-SWEP.Description = "High damage assault rifle.\nAn insurgent's greatest ally and a terrorist's best friend."
+SWEP.Description = "High damage assault rifle able to one-tap through armor.\nAn insurgent's greatest ally and a terrorist's best friend."
 
 SWEP.ViewModel = "models/weapons/tacint_extras/v_ak47.mdl"
 SWEP.WorldModel = "models/weapons/tacint_extras/w_ak47.mdl"
@@ -63,19 +63,21 @@ SWEP.TTTReplace = TacRP.TTTReplacePreset.AssaultRifle
 // "ballistics"
 
 SWEP.Damage_Max = 28
-SWEP.Damage_Min = 16
+SWEP.Damage_Min = 22
 SWEP.Range_Min = 1200 // distance for which to maintain maximum damage
-SWEP.Range_Max = 5500 // distance at which we drop to minimum damage
-SWEP.Penetration = 10 // units of metal this weapon can penetrate
+SWEP.Range_Max = 4500 // distance at which we drop to minimum damage
+SWEP.Penetration = 11 // units of metal this weapon can penetrate
+SWEP.ArmorPenetration = 0.775
+SWEP.ArmorBonus = 1.25
 
 SWEP.BodyDamageMultipliers = {
-    [HITGROUP_HEAD] = 3.25,
-    [HITGROUP_CHEST] = 1.25,
-    [HITGROUP_STOMACH] = 1,
+    [HITGROUP_HEAD] = 5,
+    [HITGROUP_CHEST] = 1,
+    [HITGROUP_STOMACH] = 1.25,
     [HITGROUP_LEFTARM] = 1,
     [HITGROUP_RIGHTARM] = 1,
-    [HITGROUP_LEFTLEG] = 0.85,
-    [HITGROUP_RIGHTLEG] = 0.85,
+    [HITGROUP_LEFTLEG] = 0.75,
+    [HITGROUP_RIGHTLEG] = 0.75,
     [HITGROUP_GEAR] = 0.9
 }
 

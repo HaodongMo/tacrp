@@ -574,9 +574,9 @@ function SWEP:GetSpread(baseline)
     if baseline then return spread end
 
     local hippenalty = self:GetValue("HipFireSpreadPenalty")
-    if GetConVar("tacrp_sway"):GetBool() then
-        hippenalty = hippenalty / (1 + math.Clamp(self:GetBaseValue("Sway"), 0, 3))
-    end
+    -- if GetConVar("tacrp_sway"):GetBool() then
+    --     hippenalty = hippenalty / (1 + math.Clamp(self:GetBaseValue("Sway"), 0, 3))
+    -- end
 
     spread = spread + Lerp(self:GetSightAmount() - (self:GetPeeking() and self:GetValue("PeekPenaltyFraction") or 0), hippenalty, 0)
 

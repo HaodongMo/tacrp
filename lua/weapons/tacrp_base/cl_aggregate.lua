@@ -482,6 +482,52 @@ SWEP.StatDisplay = {
     --     Unit = ""
     -- }
     {
+        Name = "Damage Per Second",
+        Description = {"Calculated raw damage output of the weapon, assuming max damage.", "Does not consider hitgroup damage multipliers and armor penetration."},
+        Value = "",
+        AggregateFunction = function(self, base, val)
+            local valfunc = base and self.GetBaseValue or self.GetValue
+
+            local bfm = self:GetBestFiremode(base)
+            local rrpm = valfunc(self, "RPM")
+            local erpm = rrpm
+            local pbd = valfunc(self, "PostBurstDelay")
+
+            if bfm < 0 then
+                erpm = rrpm - 60 / (-bfm / pbd)
+            end
+
+            local num = valfunc(self, "Num")
+            local dmg_max = math.max(valfunc(self, "Damage_Max"), valfunc(self, "Damage_Min"))
+            return math.Round(dmg_max * num * erpm / 60, 1)
+        end,
+    },
+    {
+        Name = "Armor Piercing",
+        Description = {"How much damage the weapon can retain against body armor.", "Higher value indicates less damage to armor and more to health.", "At 100%, armor is ignored entirely. At 0%, armor will block all damage."},
+        Value = "ArmorPenetration",
+        AggregateFunction = function(self, base, val)
+            return math.max(math.Round(val * 100, 1), 0)
+        end,
+        Unit = "%",
+    },
+    {
+        Name = "Armor Shredding",
+        Description = {"Multiplier for damage dealt against armor after being blocked.", "Additionally affects damage dealt to non-living materiel.", "High AP weapons will shred less armor due to most of the damage being", "dealt directly to health. At 100% AP, armor shredding will never occur."},
+        Value = "ArmorBonus",
+        AggregateFunction = function(self, base, val)
+            return math.Round(val * 100, 1)
+        end,
+        Unit = "%",
+    },
+    {
+        Name = "Penetration",
+        Description = {"Thickness of metal this weapon can penetrate.",
+        "Actual penetration is material-dependent."},
+        Value = "Penetration",
+        Unit = "\""
+    },
+    {
         Name = "Spread",
         Description = "Base accuracy of the weapon.",
         AggregateFunction = function(self, base, val)
@@ -499,7 +545,6 @@ SWEP.StatDisplay = {
     {
         Name = "Capacity",
         Description = "Amount of ammo this weapon can spend before reloading.",
-
         Value = "ClipSize",
     },
     {
@@ -651,13 +696,6 @@ SWEP.StatDisplay = {
         LowerIsBetter = true,
         HideIfSame = true,
         Unit = "s"
-    },
-    {
-        Name = "Penetration",
-        Description = {"Thickness of metal this weapon can penetrate.",
-        "Actual penetration is material-dependent."},
-        Value = "Penetration",
-        Unit = "\""
     },
     {
         Name = "Sway",

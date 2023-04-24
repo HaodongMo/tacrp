@@ -1,7 +1,7 @@
 SWEP.SmoothedMagnification = 1
 
 function SWEP:CalcView(ply, pos, ang, fov)
-    local rec = (self:GetLastRecoilTime() + self:GetValue("RecoilResetTime")) - CurTime()
+    local rec = (self:GetLastRecoilTime() + self:RecoilDuration()) - CurTime()
 
     rec = math.max(rec, 0)
 

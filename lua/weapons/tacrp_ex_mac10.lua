@@ -10,7 +10,7 @@ SWEP.Category = "Tactical RP" // "Tactical RP (Extras)"
 SWEP.SubCatTier = "4Consumer"
 SWEP.SubCatType = "2Machine Pistol"
 
-SWEP.Description = "A bullet hose best used for point blank spray-and-pray."
+SWEP.Description = "A bullet hose best used for point blank spray-and-pray. Low power cartridge performs very poorly against armor."
 
 SWEP.ViewModel = "models/weapons/tacint_extras/v_mac10.mdl"
 SWEP.WorldModel = "models/weapons/tacint_extras/w_mac10.mdl"
@@ -19,8 +19,8 @@ SWEP.Slot = 1
 
 SWEP.BalanceStats = {
     [TacRP.BALANCE_SBOX] = {
-        Damage_Max = 13,
-        Damage_Min = 5,
+        Damage_Max = 18,
+        Damage_Min = 6,
 
         RecoilKick = 3,
 
@@ -69,11 +69,13 @@ SWEP.TTTReplace = TacRP.TTTReplacePreset.MachinePistol
 
 // "ballistics"
 
-SWEP.Damage_Max = 8
-SWEP.Damage_Min = 3
+SWEP.Damage_Max = 15
+SWEP.Damage_Min = 5
 SWEP.Range_Min = 400
 SWEP.Range_Max = 2000
 SWEP.Penetration = 3
+SWEP.ArmorPenetration = 0.45
+SWEP.ArmorBonus = 0.75
 
 SWEP.MuzzleVelocity = 10000
 

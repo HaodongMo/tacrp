@@ -71,15 +71,17 @@ SWEP.TTTReplace = TacRP.TTTReplacePreset.AssaultRifle
 // "ballistics"
 
 SWEP.Damage_Max = 18
-SWEP.Damage_Min = 8
+SWEP.Damage_Min = 11
 SWEP.Range_Min = 800 // distance for which to maintain maximum damage
-SWEP.Range_Max = 4000 // distance at which we drop to minimum damage
+SWEP.Range_Max = 3000 // distance at which we drop to minimum damage
 SWEP.Penetration = 7 // units of metal this weapon can penetrate
+SWEP.ArmorPenetration = 0.8
+SWEP.ArmorBonus = 1.25
 
 SWEP.BodyDamageMultipliers = {
-    [HITGROUP_HEAD] = 2,
-    [HITGROUP_CHEST] = 1.25,
-    [HITGROUP_STOMACH] = 1,
+    [HITGROUP_HEAD] = 4,
+    [HITGROUP_CHEST] = 1,
+    [HITGROUP_STOMACH] = 1.25,
     [HITGROUP_LEFTARM] = 1,
     [HITGROUP_RIGHTARM] = 1,
     [HITGROUP_LEFTLEG] = 0.9,
@@ -93,7 +95,7 @@ SWEP.MuzzleVelocity = 22000
 
 SWEP.Firemode = 1
 
-SWEP.RPM = 400
+SWEP.RPM = 450
 
 SWEP.Spread = 0.0035
 SWEP.HipFireSpreadPenalty = 0.0065

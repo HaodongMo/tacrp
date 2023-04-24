@@ -1,4 +1,4 @@
-ATT.PrintName = "Belt Extender"
+ATT.PrintName = "Box Extender"
 ATT.Icon = Material("entities/tacrp_att_acc_extendedbelt.png", "mips smooth")
 ATT.Description = "Increase ammo capacity for machine guns significantly."
 ATT.Pros = {"Capacity"}

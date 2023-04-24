@@ -62,3 +62,8 @@ function SWEP:ApplyRecoil()
     -- self:GetOwner():SetFOV(self:GetOwner():GetFOV() * 0.99, 0)
     -- self:GetOwner():SetFOV(self:GetOwner():GetFOV(), 60 / (self:GetValue("RPM")))
 end
+
+function SWEP:RecoilDuration()
+    -- return self:GetValue("RecoilResetTime")
+    return 0.04 + math.Clamp(math.abs(self:GetValue("RecoilKick")) ^ 0.5, 0, 4) * 0.04
+end

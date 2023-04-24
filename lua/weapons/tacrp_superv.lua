@@ -10,7 +10,7 @@ SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 SWEP.SubCatTier = "1Elite"
 SWEP.SubCatType = "3Submachine Gun"
 
-SWEP.Description = "Close range SMG with extremely high fire rate. Advanced recoil dampening systems makes controlling this weapon a breeze."
+SWEP.Description = "Close range SMG with extremely high fire rate and practically no recoil. Low armor penetration, but can chew through it very quickly."
 
 SWEP.ViewModel = "models/weapons/tacint/v_superv.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_superv.mdl"
@@ -74,6 +74,8 @@ SWEP.Damage_Min = 8
 SWEP.Range_Min = 500 // distance for which to maintain maximum damage
 SWEP.Range_Max = 3500 // distance at which we drop to minimum damage
 SWEP.Penetration = 3 // units of metal this weapon can penetrate
+SWEP.ArmorPenetration = 0.3
+SWEP.ArmorBonus = 2
 
 SWEP.BodyDamageMultipliers = {
     [HITGROUP_HEAD] = 2,

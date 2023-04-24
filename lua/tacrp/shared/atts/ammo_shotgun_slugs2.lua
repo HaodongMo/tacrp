@@ -10,6 +10,8 @@ ATT.InvAtt = "ammo_shotgun_slugs"
 
 ATT.SortOrder = 1
 
+ATT.Add_ArmorPenetration = 0.15
+
 ATT.Mult_Damage_Min = 7
 ATT.Mult_Damage_Max = 4.5
 
@@ -29,8 +31,8 @@ ATT.Override_MuzzleEffect = "muzzleflash_slug"
 
 ATT.Override_BodyDamageMultipliers = {
     [HITGROUP_HEAD] = 2,
-    [HITGROUP_CHEST] = 1.25,
-    [HITGROUP_STOMACH] = 1,
+    [HITGROUP_CHEST] = 1,
+    [HITGROUP_STOMACH] = 1.25,
     [HITGROUP_LEFTARM] = 0.9,
     [HITGROUP_RIGHTARM] = 0.9,
     [HITGROUP_LEFTLEG] = 0.75,

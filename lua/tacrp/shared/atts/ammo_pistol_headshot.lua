@@ -3,13 +3,14 @@ ATT.FullName = "Skullsplitter Rounds"
 ATT.Icon = Material("entities/tacrp_att_acc_skullsplitter.png", "mips smooth")
 ATT.Description = "Specialized rounds that do more damage to vital body parts."
 ATT.Pros = {"Head and Chest damage", "Spread"}
-ATT.Cons = {"Limb damage"}
+ATT.Cons = {"Limb damage", "Armor Shredding"}
 
 ATT.Category = "ammo_pistol"
 
 ATT.SortOrder = 1
 
 ATT.Mult_Spread = 0.85
+ATT.Mult_ArmorBonus = 0.5
 
 ATT.Override_BodyDamageMultipliersExtra = {
     [HITGROUP_HEAD] = 1.5,
