@@ -152,6 +152,10 @@ function SWEP:ThrowGrenade()
             end
         end
 
+        if !nade.NoSounds then
+            self:EmitSound(nade.ThrowSound or ("tacrp/weapons/grenade/throw-" .. math.random(1, 2) .. ".wav"))
+        end
+
         if !nade.Singleton and !TacRP.IsGrenadeInfiniteAmmo(nade) then
             self:GetOwner():RemoveAmmo(1, nade.Ammo)
         end
@@ -278,7 +282,7 @@ function SWEP:ThinkGrenade()
     if !self:GetValue("CanQuickNade") then return end
 
     if CLIENT then
-        if self:GetPrimedGrenade() and !IsValid(self.QuickNadeModel) and self:GetStartPrimedGrenadeTime() + 0.1 < CurTime() and self:GetGrenade().Model then
+        if self:GetPrimedGrenade() and !IsValid(self.QuickNadeModel) and self:GetStartPrimedGrenadeTime() + 0.2 < CurTime() and self:GetGrenade().Model then
             local nade = self:GetGrenade()
             local vm = self:GetVM()
 

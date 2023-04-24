@@ -169,6 +169,7 @@ TacRP.QuickNades = {
         GrenadeEnt = "dz_proj_bumpmine",
         GrenadeWep = "weapon_dz_bumpmine",
         ThrowForce = 2000,
+        ThrowSpeed = 0.9,
         Ammo = "dz_bumpmine",
         Model = "models/weapons/dz_ents/c_bumpmine.mdl",
         Spoon = false,
@@ -176,6 +177,9 @@ TacRP.QuickNades = {
         OverhandOnly = true,
         Secret = true,
         SecretWeapon = "weapon_dz_bumpmine",
+        NoSounds = false,
+        PullSound = "DZ_Ents.HEGrenade.Draw",
+        ThrowSound = "DZ_Ents.BumpMine.Throw",
 
         FullName = "Bump Mine",
         DetType = "Pressure Plate",

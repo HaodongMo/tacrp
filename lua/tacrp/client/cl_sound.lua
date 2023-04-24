@@ -13,11 +13,12 @@ end
 -- })
 
 addsound("Grenade.PullPin", "common/null.wav")
+addsound("Grenade.Throw", "common/null.wav")
 
-addsound("Grenade.Throw", {
-    "TacRP/weapons/grenade/throw-1.wav",
-    "TacRP/weapons/grenade/throw-2.wav"
-})
+-- addsound("Grenade.Throw", {
+--     "TacRP/weapons/grenade/throw-1.wav",
+--     "TacRP/weapons/grenade/throw-2.wav"
+-- })
 
 addsound("TacInt_genericrifle.jingle", {
     "TacRP/weapons/rifle_jingle-1.wav",
