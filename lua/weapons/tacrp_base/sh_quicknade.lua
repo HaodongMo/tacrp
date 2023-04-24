@@ -104,8 +104,9 @@ function SWEP:ThrowGrenade()
             rocket:Spawn()
             rocket:SetPhysicsAttacker(self:GetOwner(), 10)
 
-            if rocket.PickupAmmo and TacRP.IsGrenadeInfiniteAmmo(nade) then
+            if TacRP.IsGrenadeInfiniteAmmo(nade) then
                 rocket.PickupAmmo = nil
+                rocket.WeaponClass = nil -- dz ents
             end
 
             if self:GetValue("QuickNadeTryImpact") and nade.CanSetImpact then

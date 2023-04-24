@@ -164,6 +164,26 @@ TacRP.QuickNades = {
         SortOrder = 7,
     },
 
+    ["dz_bumpmine"] = {
+        PrintName = "BUMP",
+        GrenadeEnt = "dz_proj_bumpmine",
+        GrenadeWep = "weapon_dz_bumpmine",
+        ThrowForce = 2000,
+        Ammo = "dz_bumpmine",
+        Model = "models/weapons/dz_ents/c_bumpmine.mdl",
+        Spoon = false,
+        Icon = Material("entities/weapon_dz_bumpmine.png", "mips smooth"),
+        OverhandOnly = true,
+        Secret = true,
+        SecretWeapon = "weapon_dz_bumpmine",
+
+        FullName = "Bump Mine",
+        DetType = "Pressure Plate",
+        Description = "Magnetized mine that sticks to surfaces.\n\nCreates a harmless explosion that pushes everything away, hurting targets by sending them into walls or floors.\n\nCan be used to launch yourself very far, but remember to bring a parachute.",
+        Category = "Danger Zone",
+        SortOrder = 8,
+    },
+
     ["ttt_smoke"] = {
         PrintName = "SMOKE",
         GrenadeEnt = "ttt_smokegrenade_proj",
