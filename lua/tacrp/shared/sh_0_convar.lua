@@ -698,9 +698,9 @@ local function menu_balance_ti(panel)
     cb_balance:DockMargin(8, 0, 0, 0)
     lb_balance:SizeToContents()
 
-    panel:Help("Tactical: Medium TTK, reloads slow you down. Weapons are divided into 4 tiers.")
-    panel:Help("Arcade: Low TTK, slightly reduced mobility.")
-    panel:Help("TTT: High TTK, reloads slow you down and take longer. Some weapons have lower fire rate.")
+    panel:Help("Tactical: Balanced for reduced move speed. Medium TTK.\nWeapons are divided into 4 tiers.")
+    panel:Help("Arcade: Balanced for Sandbox move speed. Low TTK.")
+    panel:Help("TTT: Balanced for TTT. High TTK, reloads slow you down and take longer. Some weapons have lower fire rate.")
 
     header(panel, "\nAmmo & Reloading")
     panel:AddControl("checkbox", {

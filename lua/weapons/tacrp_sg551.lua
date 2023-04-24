@@ -21,8 +21,8 @@ SWEP.BalanceStats = {
     [TacRP.BALANCE_SBOX] = {
         Description = "Low capacity assault rifle with elite performance.",
 
-        Damage_Max = 25,
-        Damage_Min = 12,
+        Damage_Max = 22,
+        Damage_Min = 13,
 
         ClipSize = 20,
 
