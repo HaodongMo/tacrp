@@ -115,9 +115,9 @@ SWEP.CanBlindFire = true
 
 // handling
 
-SWEP.MoveSpeedMult = 0.85
-SWEP.ShootingSpeedMult = 0.3
-SWEP.SightedSpeedMult = 0.25
+SWEP.MoveSpeedMult = 0.9
+SWEP.ShootingSpeedMult = 0.75
+SWEP.SightedSpeedMult = 0.65
 
 SWEP.ReloadSpeedMult = 0.5
 
@@ -153,12 +153,12 @@ SWEP.HolsterSlot = TacRP.HOLSTER_SLOT_BACK
 SWEP.HolsterPos = Vector(5, 0, -6)
 SWEP.HolsterAng = Angle(0, 0, 0)
 
-SWEP.ScopedSway = 0.1
-
+SWEP.Sway = 1.25
+SWEP.ScopedSway = 0.15
 
 // reload
 
-SWEP.ClipSize = 30
+SWEP.ClipSize = 25
 SWEP.Ammo = "smg1"
 
 SWEP.ReloadTimeMult = 1

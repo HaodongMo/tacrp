@@ -2,6 +2,11 @@ function TacRP.Move(ply, mv, cmd)
     local wpn = ply:GetActiveWeapon()
     local iscurrent = true
 
+    local origspeed = ply:GetMaxSpeed()
+    local basespd = math.min((Vector(cmd:GetForwardMove(), cmd:GetUpMove(), cmd:GetSideMove())):Length(), mv:GetMaxClientSpeed())
+
+    local totalmult = 1
+
     if ply:GetNWFloat("TacRPLastBashed", 0) + 2 > CurTime() then
         local slow = GetConVar("tacrp_melee_slow"):GetFloat()
         local mult = slow
@@ -9,9 +14,10 @@ function TacRP.Move(ply, mv, cmd)
             mult = Lerp((CurTime() - ply:GetNWFloat("TacRPLastBashed", 0) - 1.4) / (2 - 1.4), slow, 1)
         end
 
-        local basespd = math.min((Vector(cmd:GetForwardMove(), cmd:GetUpMove(), cmd:GetSideMove())):Length(), mv:GetMaxClientSpeed())
-        mv:SetMaxSpeed(basespd * mult)
-        mv:SetMaxClientSpeed(basespd * mult)
+        -- local basespd = math.min((Vector(cmd:GetForwardMove(), cmd:GetUpMove(), cmd:GetSideMove())):Length(), mv:GetMaxClientSpeed())
+        -- mv:SetMaxSpeed(basespd * mult)
+        -- mv:SetMaxClientSpeed(basespd * mult)
+        totalmult = totalmult * mult
     end
 
     local stunstart, stundur = ply:GetNWFloat("TacRPStunStart", 0), ply:GetNWFloat("TacRPStunDur", 0)
@@ -22,9 +28,15 @@ function TacRP.Move(ply, mv, cmd)
             mult = Lerp((CurTime() - stunstart - stundur * 0.7) / (stundur * 0.3), slow, 1)
         end
 
-        local basespd = math.min((Vector(cmd:GetForwardMove(), cmd:GetUpMove(), cmd:GetSideMove())):Length(), mv:GetMaxClientSpeed())
-        mv:SetMaxSpeed(basespd * mult)
-        mv:SetMaxClientSpeed(basespd * mult)
+        -- local basespd = math.min((Vector(cmd:GetForwardMove(), cmd:GetUpMove(), cmd:GetSideMove())):Length(), mv:GetMaxClientSpeed())
+        -- mv:SetMaxSpeed(basespd * mult)
+        -- mv:SetMaxClientSpeed(basespd * mult)
+        totalmult = totalmult * mult
+    end
+
+    if totalmult < 1 then
+        mv:SetMaxSpeed(basespd * totalmult)
+        mv:SetMaxClientSpeed(basespd * totalmult)
     end
 
     -- Remember last weapon to keep applying slowdown on shooting and melee
@@ -39,31 +51,34 @@ function TacRP.Move(ply, mv, cmd)
         ply.LastTacRPWeapon = wpn
     end
 
-    local basespd = (Vector(cmd:GetForwardMove(), cmd:GetUpMove(), cmd:GetSideMove())):Length()
-    basespd = math.min(basespd, mv:GetMaxClientSpeed())
+    basespd = math.min((Vector(cmd:GetForwardMove(), cmd:GetUpMove(), cmd:GetSideMove())):Length(), mv:GetMaxClientSpeed())
 
+    -- mult1: stacking slow (move speed and shooting speed)
     local mult = 1
-
     if iscurrent and !wpn:GetSafe() then
         mult = mult * math.Clamp(wpn:GetValue("MoveSpeedMult"), 0.0001, 1)
     end
 
+    -- mult2: non-stacking slow (sighted, reloading, melee)
+    local mult2 = 1
     if iscurrent and wpn:GetScopeLevel() > 0 then
-        mult = mult * math.Clamp(wpn:GetValue("SightedSpeedMult"), 0.0001, 1)
+        mult2 = math.Clamp(wpn:GetValue("SightedSpeedMult"), 0.0001, 1)
     end
 
     if iscurrent then
         local rsmt = wpn:GetValue("ReloadSpeedMultTime")
 
         if wpn:GetReloading() then
-            mult = mult * math.Clamp(wpn:GetValue("ReloadSpeedMult"), 0.0001, 1)
+            -- mult = mult * math.Clamp(wpn:GetValue("ReloadSpeedMult"), 0.0001, 1)
+            mult2 = math.min(mult2, math.Clamp(wpn:GetValue("ReloadSpeedMult"), 0.0001, 1))
         elseif wpn:GetReloadFinishTime() + rsmt > CurTime() then
             local mt = CurTime() - wpn:GetReloadFinishTime()
             local d = mt / rsmt
 
             d = math.Clamp(d, 0, 1)
 
-            mult = mult * Lerp(d, math.Clamp(wpn:GetValue("ReloadSpeedMult"), 0.0001, 1), 1)
+            mult2 = math.min(mult2, Lerp(d, math.Clamp(wpn:GetValue("ReloadSpeedMult"), 0.0001, 1), 1))
+            -- mult = mult * Lerp(d, math.Clamp(wpn:GetValue("ReloadSpeedMult"), 0.0001, 1), 1)
         end
     end
 
@@ -75,9 +90,9 @@ function TacRP.Move(ply, mv, cmd)
 
         d = math.Clamp(d, 0, 1)
 
-        mult = mult * Lerp(d, math.Clamp(wpn:GetValue("MeleeSpeedMult"), 0.0001, 1), 1)
+        mult2 = math.min(mult2, Lerp(d, math.Clamp(wpn:GetValue("MeleeSpeedMult"), 0.0001, 1), 1))
+        -- mult = mult * Lerp(d, math.Clamp(wpn:GetValue("MeleeSpeedMult"), 0.0001, 1), 1)
     end
-
 
     local shotdelta = 0 -- how close should we be to the shoot speed mult
     local rpmd = wpn:GetValue("RPM") / 900
@@ -104,10 +119,15 @@ function TacRP.Move(ply, mv, cmd)
     -- if SERVER and shotdelta > 0 then print(math.Round(shottime, 2), math.Round(shotdelta, 2)) end
 
     local shootmove = math.Clamp(wpn:GetValue("ShootingSpeedMult"), 0.0001, 1)
+    -- mult2 = math.min(mult2, Lerp(shotdelta, 1, shootmove))
     mult = mult * Lerp(shotdelta, 1, shootmove)
 
-    mv:SetMaxSpeed(basespd * mult)
-    mv:SetMaxClientSpeed(basespd * mult)
+    local tgtspeed = origspeed * mult * mult2
+
+    if tgtspeed < mv:GetMaxClientSpeed() then
+        mv:SetMaxSpeed(tgtspeed)
+        mv:SetMaxClientSpeed(tgtspeed)
+    end
 
     if !iscurrent then return end
 

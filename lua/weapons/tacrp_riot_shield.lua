@@ -31,9 +31,9 @@ SWEP.ClipSize = -1
 
 // handling
 
-SWEP.MoveSpeedMult = 0.85
-SWEP.SightedSpeedMult = 1
-SWEP.ShootingSpeedMult = 1
+SWEP.MoveSpeedMult = 1
+SWEP.SightedSpeedMult = 0.5
+SWEP.ShootingSpeedMult = 0.5
 SWEP.MeleeSpeedMult = 0.9
 SWEP.MeleeSpeedMultTime = 1
 

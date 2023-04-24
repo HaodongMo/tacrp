@@ -77,8 +77,8 @@ SWEP.BodyDamageMultipliers = {
 
 // "ballistics"
 
-SWEP.Damage_Max = 25
-SWEP.Damage_Min = 20
+SWEP.Damage_Max = 32
+SWEP.Damage_Min = 24
 SWEP.Range_Min = 2000 // distance for which to maintain maximum damage
 SWEP.Range_Max = 4000 // distance at which we drop to minimum damage
 SWEP.Penetration = 10 // units of metal this weapon can penetrate
@@ -112,11 +112,11 @@ SWEP.CanBlindFire = true
 
 // handling
 
-SWEP.MoveSpeedMult = 0.75
-SWEP.ShootingSpeedMult = 0.2
-SWEP.SightedSpeedMult = 0.25
+SWEP.MoveSpeedMult = 0.875
+SWEP.ShootingSpeedMult = 0.55
+SWEP.SightedSpeedMult = 0.75
 
-SWEP.ReloadSpeedMult = 0.05
+SWEP.ReloadSpeedMult = 0.1
 SWEP.ReloadSpeedMultTime = 1
 
 SWEP.AimDownSightsTime = 0.5

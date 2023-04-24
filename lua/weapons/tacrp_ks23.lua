@@ -69,7 +69,7 @@ SWEP.Damage_Min = 8
 SWEP.Range_Min = 600 // distance for which to maintain maximum damage
 SWEP.Range_Max = 3000 // distance at which we drop to minimum damage
 SWEP.Penetration = 2 // units of metal this weapon can penetrate
-SWEP.Num = 16
+SWEP.Num = 20
 
 SWEP.MuzzleVelocity = 10000
 
@@ -93,7 +93,7 @@ SWEP.FiremodeName = "Pump-Action" // only used externally for firemode name dist
 SWEP.RPM = 40
 
 SWEP.Spread = 0.04
-SWEP.ShotgunPelletSpread = 0.01
+SWEP.ShotgunPelletSpread = 0.02
 
 SWEP.ShootTimeMult = 1.25
 
@@ -119,11 +119,11 @@ SWEP.CanBlindFire = true
 
 // handling
 
-SWEP.MoveSpeedMult = 0.75
-SWEP.ShootingSpeedMult = 0.4
-SWEP.SightedSpeedMult = 0.3
+SWEP.MoveSpeedMult = 0.875
+SWEP.ShootingSpeedMult = 0.6
+SWEP.SightedSpeedMult = 0.6
 
-SWEP.ReloadSpeedMult = 0.25
+SWEP.ReloadSpeedMult = 0.5
 
 SWEP.AimDownSightsTime = 0.35
 SWEP.SprintToFireTime = 0.32
@@ -250,7 +250,7 @@ SWEP.Attachments = {
     },
     [3] = {
         PrintName = "Accessory",
-        Category = {"acc", "acc_duffle", "acc_sling", "acc_extmag_shotgun"},
+        Category = {"acc", "acc_duffle", "acc_extmag_shotgun"},
         AttachSound = "TacRP/weapons/flashlight_on.wav",
         DetachSound = "TacRP/weapons/flashlight_off.wav",
     },

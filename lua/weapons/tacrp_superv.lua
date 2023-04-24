@@ -98,7 +98,7 @@ SWEP.Firemodes = {
 
 SWEP.RPM = 1200
 
-SWEP.Spread = 0.02
+SWEP.Spread = 0.015
 
 SWEP.HipFireSpreadPenalty = 0.005
 
@@ -120,9 +120,9 @@ SWEP.CanBlindFire = true
 
 // handling
 
-SWEP.MoveSpeedMult = 0.9
-SWEP.ShootingSpeedMult = 0.75
-SWEP.SightedSpeedMult = 0.4
+SWEP.MoveSpeedMult = 0.95
+SWEP.ShootingSpeedMult = 0.7
+SWEP.SightedSpeedMult = 0.7
 
 SWEP.ReloadSpeedMult = 0.5
 

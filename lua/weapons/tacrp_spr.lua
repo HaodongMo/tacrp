@@ -117,9 +117,9 @@ SWEP.CanBlindFire = true
 
 // handling
 
-SWEP.MoveSpeedMult = 0.75
-SWEP.ShootingSpeedMult = 0.4
-SWEP.SightedSpeedMult = 0.2
+SWEP.MoveSpeedMult = 0.9
+SWEP.ShootingSpeedMult = 0.7
+SWEP.SightedSpeedMult = 0.5
 
 SWEP.ReloadSpeedMult = 0.3
 

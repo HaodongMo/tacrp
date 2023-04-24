@@ -7,7 +7,7 @@ AddCSLuaFile()
 SWEP.PrintName = "Springfield M1A"
 SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 
-SWEP.SubCatTier = "2Premium"
+SWEP.SubCatTier = "3Security"
 SWEP.SubCatType = "6Precision Rifle"
 
 SWEP.Description = "Semi-automatic rifle with a lethal headshot.\nEquipped with a 6x scope by default."
@@ -71,8 +71,8 @@ SWEP.TTTReplace = TacRP.TTTReplacePreset.MarksmanRifle
 
 // "ballistics"
 
-SWEP.Damage_Max = 45 // damage at minimum range
-SWEP.Damage_Min = 35 // damage at maximum range
+SWEP.Damage_Max = 40 // damage at minimum range
+SWEP.Damage_Min = 32 // damage at maximum range
 SWEP.Range_Min = 2000 // distance for which to maintain maximum damage
 SWEP.Range_Max = 6000 // distance at which we drop to minimum damage
 SWEP.Penetration = 15 // units of metal this weapon can penetrate
@@ -117,9 +117,9 @@ SWEP.CanBlindFire = true
 
 // handling
 
-SWEP.MoveSpeedMult = 0.75
-SWEP.ShootingSpeedMult = 0.25
-SWEP.SightedSpeedMult = 0.2
+SWEP.MoveSpeedMult = 0.85
+SWEP.ShootingSpeedMult = 0.75
+SWEP.SightedSpeedMult = 0.5
 
 SWEP.ReloadSpeedMult = 0.4
 
