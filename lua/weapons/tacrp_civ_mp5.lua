@@ -8,7 +8,7 @@ SWEP.PrintName = "HK HK94"
 SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 
 SWEP.SubCatTier = "4Consumer"
-SWEP.SubCatType = "8Civilian Carbine"
+SWEP.SubCatType = "8Sporter Carbine"
 
 SWEP.Description = "Semi-automatic model of a legendary submachine gun.\nUses reduced capacity magazines."
 

@@ -8,7 +8,7 @@ SWEP.PrintName = "HK HK243" // technically HK243 is the sporter version of the G
 SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 
 SWEP.SubCatTier = "3Security"
-SWEP.SubCatType = "8Civilian Carbine"
+SWEP.SubCatType = "8Sporter Carbine"
 
 SWEP.Description = "Semi-automatic model of an iconic polymer rifle.\nUses reduced capacity magazines."
 
