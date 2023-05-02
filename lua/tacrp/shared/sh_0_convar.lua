@@ -391,6 +391,14 @@ local conVars = {
         max = 2,
     },
 
+    // --------------------------- Attachments
+    {
+        name = "att_radartime",
+        default = "1.5",
+        replicated = true,
+        min = 0.5,
+    },
+
     // --------------------------- TTT
     {
         name = "ttt_weapon_include",
@@ -766,16 +774,6 @@ local function menu_balance_ti(panel)
     })
     panel:ControlHelp("Add random spread onto the pattern. Does not affect total spread. If disabled, shotgun patterns become completely static.")
     panel:AddControl("checkbox", {
-        label = "Enable Scope Glint",
-        command = "tacrp_glint"
-    })
-    panel:ControlHelp("Scopes show a visible glint. Glint size is dependent on angle of view, scope magnification and distance, and is bigger when zoomed in.")
-    panel:AddControl("checkbox", {
-        label = "Enable Blinding Flashlights",
-        command = "tacrp_flashlight_blind"
-    })
-    panel:ControlHelp("Flashlight glare will obscure vision based on distance and viewing angle. Effect is more significant on scopes. If disabled, glare sprite will be visible but not grow in size.")
-    panel:AddControl("checkbox", {
         label = "Custom Armor Penetration",
         command = "tacrp_armorpenetration"
     })
@@ -790,6 +788,29 @@ local function menu_balance_ti(panel)
         max = 1,
     })
     panel:AddControl("slider", {
+        label = "CS Gas Sway",
+        command = "tacrp_gas_sway",
+        type = "float",
+        min = 0,
+        max = 10,
+    })
+end
+
+local function menu_atts_ti(panel)
+    header(panel, "Attachment Mechanics")
+    panel:AddControl("checkbox", {
+        label = "Enable Scope Glint",
+        command = "tacrp_glint"
+    })
+    panel:ControlHelp("Scopes show a visible glint. Glint size is dependent on angle of view, scope magnification and distance, and is bigger when zoomed in.")
+    panel:AddControl("checkbox", {
+        label = "Enable Blinding Flashlights",
+        command = "tacrp_flashlight_blind"
+    })
+    panel:ControlHelp("Flashlight glare will obscure vision based on distance and viewing angle. Effect is more significant on scopes. If disabled, glare sprite will be visible but not grow in size.")
+
+    header(panel, "\nAttachment Balance")
+    panel:AddControl("slider", {
         label = "Smackdown Slow",
         command = "tacrp_melee_slow",
         type = "float",
@@ -797,10 +818,10 @@ local function menu_balance_ti(panel)
         max = 1,
     })
     panel:AddControl("slider", {
-        label = "CS Gas Sway",
-        command = "tacrp_gas_sway",
+        label = "Radar Frequency",
+        command = "tacrp_att_radartime",
         type = "float",
-        min = 0,
+        min = 0.5,
         max = 10,
     })
 end
@@ -817,6 +838,9 @@ local clientmenus_ti = {
     },
     {
         text = "Mechanics", func = menu_balance_ti
+    },
+    {
+        text = "Attachments", func = menu_atts_ti
     },
 }
 

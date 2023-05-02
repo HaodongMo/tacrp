@@ -12,7 +12,7 @@ ATT.Category = "tactical"
 ATT.Minimap = true
 ATT.CanToggle = true
 
-local scantime = 1.5
+local scantime = GetConVar("tacrp_att_radartime")
 local lastradar = 0
 local cache_lastradarpositions
 local mat_radar = Material("tacrp/hud/radar.png", "smooth")
@@ -35,7 +35,7 @@ function ATT.TacticalDraw(self)
 
     local radarpositions = {}
 
-    if lastradar + scantime > CurTime() then
+    if lastradar + scantime:GetFloat() > CurTime() then
         radarpositions = cache_lastradarpositions
     else
         local tbl = ents.FindInSphere(self:GetOwner():GetPos(), 50 / TacRP.HUToM)
@@ -71,7 +71,7 @@ function ATT.TacticalDraw(self)
         end
     end
 
-    surface.SetDrawColor(0, 0, 0, 255 * 2 * (1 - ((CurTime() - lastradar) / scantime)))
+    surface.SetDrawColor(0, 0, 0, 255 * 2 * (1 - ((CurTime() - lastradar) / scantime:GetFloat())))
     surface.SetMaterial(mat_radar_active)
     surface.DrawTexturedRect(x, y, w, h)
     -- surface.SetDrawColor(255, 255, 255, 255)
@@ -102,12 +102,12 @@ end
 
 function ATT.TacticalThink(self)
     if IsValid(self:GetOwner()) and self:GetTactical() and (SERVER and !game.SinglePlayer()) and (self.NextRadarBeep or 0) < CurTime() then
-        self.NextRadarBeep = CurTime() + 1.5
+        self.NextRadarBeep = CurTime() + scantime:GetFloat()
         local f = RecipientFilter()
-        f:AddPVS(self:GetPos())
+        f:AddPAS(self:GetPos())
         f:RemovePlayer(self:GetOwner())
         local s = CreateSound(self, "plats/elevbell1.wav", f)
-        s:SetSoundLevel(75)
-        s:PlayEx(0.25, 105)
+        s:SetSoundLevel(80)
+        s:PlayEx(0.2, 105)
     end
 end
