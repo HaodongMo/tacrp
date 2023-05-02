@@ -714,8 +714,8 @@ local function menu_balance_ti(panel)
     cb_balance:DockMargin(8, 0, 0, 0)
     lb_balance:SizeToContents()
 
-    panel:Help("Tactical: Balanced for reduced move speed. Medium TTK.\nWeapons are divided into 4 tiers.")
-    panel:Help("Arcade: Balanced for Sandbox move speed. Low TTK.")
+    panel:Help("Tactical: Balanced for reduced move speed. Medium TTK. Weapons are divided into 4 tiers.")
+    panel:Help("Arcade: Balanced for Sandbox move speed. Low TTK. Snipers/DMRs have damage rampup.")
     panel:Help("TTT: Balanced for TTT. High TTK, reloads slow you down and take longer. Some weapons have lower fire rate.")
 
     header(panel, "\nAmmo & Reloading")

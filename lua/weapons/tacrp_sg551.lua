@@ -24,6 +24,17 @@ SWEP.BalanceStats = {
         Damage_Max = 22,
         Damage_Min = 13,
 
+        BodyDamageMultipliers = {
+            [HITGROUP_HEAD] = 6,
+            [HITGROUP_CHEST] = 1,
+            [HITGROUP_STOMACH] = 1.25,
+            [HITGROUP_LEFTARM] = 1,
+            [HITGROUP_RIGHTARM] = 1,
+            [HITGROUP_LEFTLEG] = 0.9,
+            [HITGROUP_RIGHTLEG] = 0.9,
+            [HITGROUP_GEAR] = 0.9
+        },
+
         ClipSize = 20,
 
         MoveSpeedMult = 0.85,

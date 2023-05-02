@@ -513,7 +513,7 @@ SWEP.StatDisplay = {
     },
     {
         Name = "Armor Shredding",
-        Description = {"Multiplier for damage dealt against armor after being blocked.", "Additionally affects damage dealt to non-living materiel.", "High AP weapons will shred less armor due to most of the damage being", "dealt directly to health. At 100% AP, armor shredding will never occur."},
+        Description = {"Multiplier for damage dealt against armor after penetration.", "High AP weapons will shred less armor due to most of the damage being", "dealt directly to health. At 100% AP, no armor damage will be dealt."},
         Value = "ArmorBonus",
         AggregateFunction = function(self, base, val)
             return math.Round(val * 100, 1)
