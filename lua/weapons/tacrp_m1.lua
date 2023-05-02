@@ -8,7 +8,7 @@ SWEP.PrintName = "Ruger Mini-14"
 SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 
 SWEP.SubCatTier = "4Consumer"
-SWEP.SubCatType = "6Precision Rifle"
+SWEP.SubCatType = "5Sporter Carbine"
 
 SWEP.Description = "Lightweight rifle with no stock or optic mount.\nGood hip-fire accuracy among rifles, but range is low."
 

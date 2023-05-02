@@ -1,5 +1,5 @@
 SWEP.Base = "tacrp_g36k"
-SWEP.Spawnable = true
+SWEP.Spawnable = false // deprecated since SL8 is a thing now
 
 AddCSLuaFile()
 
@@ -8,7 +8,7 @@ SWEP.PrintName = "HK HK243" // technically HK243 is the sporter version of the G
 SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 
 SWEP.SubCatTier = "3Security"
-SWEP.SubCatType = "8Sporter Carbine"
+SWEP.SubCatType = "5Sporter Carbine"
 
 SWEP.Description = "Semi-automatic model of an iconic polymer rifle.\nUses reduced capacity magazines."
 

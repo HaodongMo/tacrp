@@ -8,7 +8,7 @@ SWEP.PrintName = "FN PS90"
 SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 
 SWEP.SubCatTier = "3Security"
-SWEP.SubCatType = "8Sporter Carbine"
+SWEP.SubCatType = "5Sporter Carbine"
 
 SWEP.Description = "Semi-automatic variation of a futuristic PDW.\nUses reduced capacity magazines."
 
