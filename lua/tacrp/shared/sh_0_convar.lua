@@ -305,6 +305,14 @@ local conVars = {
         min = 0,
         max = 1,
     },
+    {
+        name = "armorpenetration",
+        default = "1",
+        replicated = true,
+        notify = true,
+        min = 0,
+        max = 1,
+    },
 
     // --------------------------- Ammo
     {
@@ -767,6 +775,11 @@ local function menu_balance_ti(panel)
         command = "tacrp_flashlight_blind"
     })
     panel:ControlHelp("Flashlight glare will obscure vision based on distance and viewing angle. Effect is more significant on scopes. If disabled, glare sprite will be visible but not grow in size.")
+    panel:AddControl("checkbox", {
+        label = "Custom Armor Penetration",
+        command = "tacrp_armorpenetration"
+    })
+    panel:ControlHelp("Weapons use defined piercing and shredding stats to calculate damage when hitting players with HL2 suit armor, instead of using the standard 20% damage. This generally increases the weapons' effectiveness against armor.\nCompatible with Danger Zone Entities' armor.")
 
     header(panel, "\nSliders")
     panel:AddControl("slider", {

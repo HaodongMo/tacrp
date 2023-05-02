@@ -42,7 +42,7 @@ end
 
 local bitflags_blockable = DMG_BULLET + DMG_BUCKSHOT + DMG_BLAST
 hook.Add("EntityTakeDamage", "Z_TacRP", function(ply, dmginfo)
-
+    if !GetConVar("tacrp_armorpenetration"):GetBool() then return end
     if !ply:IsPlayer() or dmginfo:IsFallDamage() or dmginfo:GetDamage() < 1 then return end
 
     local wep = dmginfo:GetInflictor()
@@ -77,6 +77,7 @@ hook.Add("EntityTakeDamage", "Z_TacRP", function(ply, dmginfo)
 end)
 
 hook.Add("PostEntityTakeDamage", "TacRP", function(ply, dmginfo, took)
+    if !GetConVar("tacrp_armorpenetration"):GetBool() then return end
     if !ply:IsPlayer() then return end
     if ply.TacRPPendingArmor then
         ply:SetArmor(ply.TacRPPendingArmor)
