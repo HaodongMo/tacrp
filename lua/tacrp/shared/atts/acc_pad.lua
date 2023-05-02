@@ -7,4 +7,5 @@ ATT.Category = "acc_sling"
 
 ATT.SortOrder = 6
 
-ATT.Mult_RecoilKick = 0.9
+ATT.Add_RecoilKick = -0.5
+ATT.Mult_RecoilKick = 0.95
