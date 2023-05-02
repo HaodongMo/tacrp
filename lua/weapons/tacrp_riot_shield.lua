@@ -24,10 +24,15 @@ SWEP.NPCUsable = false
 SWEP.Slot = 2
 SWEP.SlotAlt = 0
 
+SWEP.DrawCrosshair = true
+SWEP.DrawCrosshairInSprint = true
+SWEP.CrosshairStatic = true
+
 // misc. shooting
 
 SWEP.Ammo = ""
 SWEP.ClipSize = -1
+SWEP.Firemode = 0
 
 // handling
 
@@ -45,7 +50,11 @@ SWEP.FreeAim = false
 
 SWEP.QuickNadeTimeMult = 1.5
 
+SWEP.Sway = 0
+
 // hold types
+
+SWEP.CanBlindFire = false
 
 SWEP.HoldType = "melee2"
 SWEP.HoldTypeSprint = "melee2"
