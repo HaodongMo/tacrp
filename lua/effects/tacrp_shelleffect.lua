@@ -107,6 +107,7 @@ function EFFECT:Init(data)
 
     self:SetPos(origin)
     self:SetModel(typetbl.Model)
+    self:SetModelScale(data:GetScale(), 0)
     self:DrawShadow(true)
     self:SetAngles(ang)
 

@@ -45,6 +45,7 @@ function SWEP:DoEject()
     data:SetEntity(self)
     data:SetFlags(self:GetValue("EjectEffect"))
     data:SetAttachment(eject_qca)
+    data:SetScale(self:GetValue("EjectScale"))
 
     util.Effect( "TacRP_shelleffect", data )
 end

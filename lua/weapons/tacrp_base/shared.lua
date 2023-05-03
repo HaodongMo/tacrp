@@ -281,6 +281,7 @@ SWEP.MuzzleEffect = "muzzleflash_pistol"
 
 SWEP.EjectEffect = 1 // 1 = pistol, 2 = rifle, 3 = shotgun
 SWEP.EjectDelay = 0
+SWEP.EjectScale = 1
 
 // anims
 
