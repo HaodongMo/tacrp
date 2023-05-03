@@ -23,6 +23,8 @@ local function drawBlurAt(x, y, w, h, amount, passes, reverse)
     end
 end
 
+local peekzoom = 1.2
+
 function SWEP:ScopeToggle(setlevel)
     if (setlevel or 0) > 0 and (!self:GetValue("Scope") or self:GetPrimedGrenade()) then return end
     -- if setlevel and setlevel > 0 and self:GetAnimLockTime() > CurTime() or (!setlevel and self:GetAnimLockTime() > CurTime()) then return end
@@ -71,6 +73,8 @@ function SWEP:GetShouldFOV(ignorepeek)
         fov = Lerp(level / self:GetValue("ScopeLevels"), 90, fov)
 
         return fov
+    elseif !ignorepeek and self:GetPeeking() then
+        return 90 / peekzoom
     else
         return 90
     end
@@ -195,7 +199,7 @@ function SWEP:GetMagnification()
     if level > 0 then
 
         if self:GetPeeking() then
-            return 1
+            return peekzoom
         end
 
         mag = 90 / self:GetValue("ScopeFOV")
