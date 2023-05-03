@@ -219,9 +219,10 @@ function SWEP:AdjustMouseSensitivity()
 end
 
 function SWEP:ThinkPeek()
-    if IsFirstTimePredicted() and !GetConVar("tacrp_togglepeek"):GetBool() and self:GetPeeking() ~= input.IsKeyDown(input.GetKeyCode(input.LookupBinding("menu_context") or "???")) then
+    local down = input.IsKeyDown(input.GetKeyCode(input.LookupBinding("menu_context") or "???"))
+    if !GetConVar("tacrp_togglepeek"):GetBool() and self:GetPeeking() ~= down then
         net.Start("tacrp_togglepeek")
-        net.WriteBool(!self:GetPeeking())
+        net.WriteBool(down)
         net.SendToServer()
     end
 end

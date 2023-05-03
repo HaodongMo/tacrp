@@ -29,7 +29,9 @@ net.Receive("tacrp_togglepeek", function(len, ply)
     if !wpn or !IsValid(wpn) or !wpn.ArcticTacRP then return end
 
     wpn:SetPeeking(bf)
-    wpn:SetLastScopeTime(CurTime())
+    if bf and wpn:GetSightAmount() > 0 then
+        wpn:SetLastScopeTime(CurTime())
+    end
 end)
 
 net.Receive("tacrp_togglenade", function(len, ply)
