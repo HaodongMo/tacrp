@@ -616,15 +616,27 @@ SWEP.StatDisplay = {
         Description = "Maximum amount of inaccuracy from continuous firing.",
         Value = "RecoilMaximum",
         LowerIsBetter = true,
-        HideIfSame = true,
     },
     {
         Name = "First Shot Recoil",
-        Description = {"Recoil multiplier on the first shot, reset after the reset time has passed.",
+        Description = {"Recoil multiplier when firing the first shot in a burst. Resets after all recoil dissipates.",
         "Does not affect recoil kick."},
         Value = "RecoilFirstShotMult",
+        AggregateFunction = function(self, base, val)
+            return math.Round(val * 100)
+        end,
+        Unit = "%",
         LowerIsBetter = true,
+    },
+    {
+        Name = "Recoil Gain",
+        Description = {"How much units of recoil is added per shot, typically 1.", "Larger value increases inaccuracy faster and takes longer to recover."},
+        AggregateFunction = function(self, base, val)
+            return math.Round(val, 2)
+        end,
+        Value = "RecoilPerShot",
         HideIfSame = true,
+        LowerIsBetter = true,
     },
     {
         Name = "Crouching Recoil",
@@ -635,7 +647,7 @@ SWEP.StatDisplay = {
         Unit = "%",
         Value = "RecoilCrouchMult",
         LowerIsBetter = true,
-        HideIfSame = true,
+        -- HideIfSame = true,
     },
     {
         Name = "Move Speed",
@@ -694,7 +706,7 @@ SWEP.StatDisplay = {
         end,
         Value = "DeployTimeMult",
         LowerIsBetter = true,
-        HideIfSame = true,
+        -- HideIfSame = true,
         Unit = "s"
     },
     {
@@ -724,7 +736,7 @@ SWEP.StatDisplay = {
         end,
         Unit = "%",
         LowerIsBetter = true,
-        HideIfSame = true,
+        -- HideIfSame = true,
         ConVarCheck = "tacrp_sway",
     },
     {
@@ -736,7 +748,7 @@ SWEP.StatDisplay = {
         Unit = "°",
         Value = "MidAirSpreadPenalty",
         LowerIsBetter = true,
-        HideIfSame = true,
+        -- HideIfSame = true,
     },
     {
         Name = "Hipfire Spread",
@@ -747,7 +759,7 @@ SWEP.StatDisplay = {
         Unit = "°",
         Value = "HipFireSpreadPenalty",
         LowerIsBetter = true,
-        HideIfSame = true,
+        -- HideIfSame = true,
     },
     {
         Name = "Melee Damage",
@@ -833,7 +845,7 @@ SWEP.StatDisplay = {
             end
         end,
         Value = "Firemodes",
-        HideIfSame = true,
+        -- HideIfSame = true,
     },
     {
         Name = "Free Aim Angle",
@@ -841,7 +853,7 @@ SWEP.StatDisplay = {
         Unit = "°",
         Value = "FreeAimMaxAngle",
         LowerIsBetter = true,
-        HideIfSame = true,
+        -- HideIfSame = true,
         ConVarCheck = "tacrp_freeaim",
     },
     {
@@ -854,7 +866,7 @@ SWEP.StatDisplay = {
             if val == 1 then return "∞" end
             return math.Round(self:GetMeanShotsToFail(base), 0)
         end,
-        HideIfSame = true,
+        -- HideIfSame = true,
         Value = "ShootChance",
     },
 }
