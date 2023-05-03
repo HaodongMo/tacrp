@@ -1,5 +1,5 @@
 SWEP.Base = "tacrp_m4"
-SWEP.Spawnable = true
+SWEP.Spawnable = false // deprecated by ST AR-15
 
 AddCSLuaFile()
 
