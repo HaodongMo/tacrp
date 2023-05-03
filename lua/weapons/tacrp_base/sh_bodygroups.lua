@@ -16,7 +16,8 @@ function SWEP:DoBodygroups(wm, custom_wm)
     if !IsValid(mdl) then return end
 
     mdl:SetBodyGroups(dbg or "")
-    mdl:SetSkin(self:GetValue("DefaultSkin"))
+
+    local sk = self:GetValue("DefaultSkin")
 
     local eles = self:GetElements()
 
@@ -25,12 +26,16 @@ function SWEP:DoBodygroups(wm, custom_wm)
             for _, j in pairs(k.BGs_WM or {}) do
                 mdl:SetBodygroup(j[1], j[2])
             end
+            if k.Skin_WM ~= nil then sk = k.Skin_WM end
         else
             for _, j in pairs(k.BGs_VM or {}) do
                 mdl:SetBodygroup(j[1], j[2])
             end
+            if k.Skin_VM ~= nil then sk = k.Skin_VM end
         end
     end
+
+    mdl:SetSkin(sk)
 
     local bbg = self:GetValue("BulletBodygroups")
 
