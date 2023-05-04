@@ -75,6 +75,8 @@ SWEP.PostBurstDelay = 0 // only applies to runaway burst guns
 SWEP.AutoBurst = false // hold the trigger to keep firing burst after burst
 
 SWEP.RPM = 600
+SWEP.RPMBurstMult = 1 // modify RPM while in burst mode
+SWEP.RPMSemiMult = 1 // modify RPM while in semi mode
 
 SWEP.Spread = 0.01
 

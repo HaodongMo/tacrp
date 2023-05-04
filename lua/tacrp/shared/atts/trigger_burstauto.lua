@@ -5,7 +5,7 @@ ATT.Description = "Trigger that allows continuous burst fire while held."
 ATT.Pros = {"Automatic Burst"}
 ATT.Cons = {"Burst Delay"}
 
-ATT.Category = {"trigger_burst"}
+ATT.Category = {"trigger_burst", "trigger_burstauto"}
 
 ATT.SortOrder = 4
 

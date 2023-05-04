@@ -5,7 +5,7 @@ ATT.Description = "Heavy trigger for sustained fire."
 ATT.Pros = {"Recoil Kick", "Max recoil spread"}
 ATT.Cons = {"First shot recoil"}
 
-ATT.Category = {"trigger_semi", "trigger_auto", "trigger_burst", "trigger_akimbo", "trigger_revolver"}
+ATT.Category = {"trigger_semi", "trigger_auto", "trigger_burst", "trigger_akimbo", "trigger_revolver", "trigger"}
 
 ATT.SortOrder = 3
 

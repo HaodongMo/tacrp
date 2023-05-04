@@ -5,7 +5,7 @@ ATT.Description = "Narrow trigger with superior recoil performance."
 ATT.Pros = {"Recoil Spread", "Recoil Recovery"}
 ATT.Cons = {"Recoil Time", "Shooting Speed"}
 
-ATT.Category = {"trigger_auto"}
+ATT.Category = {"trigger_auto", "trigger_straight"}
 
 ATT.SortOrder = 5.5
 
