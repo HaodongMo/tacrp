@@ -165,6 +165,10 @@ function SWEP:PrimaryAttack()
         sshoot = table.Random(sshoot)
     end
 
+    if self:GetValue("Sound_ShootAdd") then
+        self:EmitSound(self:GetValue("Sound_ShootAdd"), self:GetValue("Vol_Shoot"), self:GetValue("Pitch_Shoot") + util.SharedRandom("TacRP_sshoot", -pvar, pvar), self:GetValue("Loudness_Shoot"), CHAN_BODY)
+    end
+
     -- if we die from suicide, EmitSound will not play, so do this instead
     if self:GetBlindFireMode() == TacRP.BLINDFIRE_KYS then
         if SERVER then

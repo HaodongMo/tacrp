@@ -25,7 +25,7 @@ ATT.ShotgunPelletSpread = 0.015
 
 ATT.MuzzleVelocity = 9500
 
-ATT.Override_Sound_Shoot = "^TacRP/weapons/m4star10/fire-2.wav"
+ATT.Override_Sound_ShootAdd = "^TacRP/weapons/m4star10/fire-2.wav"
 ATT.Pitch_Shoot = 95
 
 ATT.DoorBreach = true
