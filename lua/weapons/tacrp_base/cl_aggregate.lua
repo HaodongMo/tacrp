@@ -482,8 +482,8 @@ SWEP.StatDisplay = {
     --     Unit = ""
     -- }
     {
-        Name = "Damage Per Second",
-        Description = {"Calculated raw damage output of the weapon, assuming max damage.", "Does not consider hitgroup damage multipliers and armor penetration."},
+        Name = "Average DPS",
+        Description = {"Calculated damage output of the weapon at 25% damage falloff.", "Does not consider hitgroup damage multipliers or armor penetration."},
         Value = "",
         AggregateFunction = function(self, base, val)
             local valfunc = base and self.GetBaseValue or self.GetValue
@@ -498,8 +498,36 @@ SWEP.StatDisplay = {
             end
 
             local num = valfunc(self, "Num")
-            local dmg_max = math.max(valfunc(self, "Damage_Max"), valfunc(self, "Damage_Min"))
-            return math.Round(dmg_max * num * erpm / 60, 1)
+            local hi, lo = valfunc(self, "Damage_Max"), valfunc(self, "Damage_Min")
+            if lo > hi then
+                hi, lo = valfunc(self, "Damage_Min"), valfunc(self, "Damage_Max")
+            end
+            local dmg = Lerp(0.25, hi, lo)
+            return math.Round(dmg * num * erpm / 60, 1)
+        end,
+    },
+    {
+        Name = "Minimum TTK",
+        Description = {"Calculated time needed to kill a target starting from the second shot.", "Assumes no damage falloff and an unarmored target at 100 health.", "Does not consider hitgroup damage multipliers."},
+        Value = "",
+        Unit = "s",
+        LowerIsBetter = true,
+        AggregateFunction = function(self, base, val)
+            local valfunc = base and self.GetBaseValue or self.GetValue
+
+            local bfm = self:GetBestFiremode(base)
+            local rpm = valfunc(self, "RPM")
+
+            local num = valfunc(self, "Num")
+            local dmg = math.max(valfunc(self, "Damage_Max"), valfunc(self, "Damage_Min"))
+            local stk = math.ceil(100 / (dmg * num))
+            local ttk = stk * (60 / rpm)
+
+            if bfm < 0 and stk > -bfm then
+                local pbd = valfunc(self, "PostBurstDelay")
+                ttk = ttk + pbd * math.floor(stk / -bfm)
+            end
+            return math.Round(ttk, 2)
         end,
     },
     {
@@ -565,14 +593,14 @@ SWEP.StatDisplay = {
     },
     {
         Name = "Muzzle Velocity",
-        Description = "How fast the bullet travels in the world.",
+        Description = {"How fast the projectile travels in the world.", "Also controls the distance threshold below which bullets become hitscan."},
         AggregateFunction = function(self, base, val)
             return math.Round(self:GetMuzzleVelocity(base), 2)
         end,
         ConVarCheck = "tacrp_physbullet",
         Value = "MuzzleVelocity",
         LowerIsBetter = false,
-        Unit = "m/s"
+        Unit = "m/s",
     },
     {
         Name = "Recoil Kick",
