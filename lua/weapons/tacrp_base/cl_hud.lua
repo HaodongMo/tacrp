@@ -7,7 +7,7 @@ function SWEP:ShouldDrawCrosshair()
         and !(self:SprintLock() and !self.DrawCrosshairInSprint)
         and (self:GetSightAmount() <= 0.5 or self:GetPeeking() or self:DoLowerIrons())
         and !(self:GetValue("CanQuickNade") and tobool(self:GetOwner():GetInfo("tacrp_nademenu")) and self:GetOwner():KeyDown(IN_GRENADE2))
-        and !(self:GetValue("CanBlindFire") and tobool(self:GetOwner():GetInfo("tacrp_blindfiremenu")) and self:GetOwner():KeyDown(IN_ZOOM))
+        and !(self:GetValue("CanBlindFire") and tobool(self:GetOwner():GetInfo("tacrp_blindfiremenu")) and (self:GetOwner():KeyDown(IN_ZOOM) or self.BlindFireMenuHolding))
 end
 
 function SWEP:DoDrawCrosshair(x, y)

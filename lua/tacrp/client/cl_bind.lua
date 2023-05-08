@@ -3,23 +3,14 @@ hook.Add("PlayerBindPress", "TacRP_Binds", function(ply, bind, pressed, code)
 
     if !wpn or !IsValid(wpn) or !wpn.ArcticTacRP then return end
 
+    if bind == "+zoom" and !LocalPlayer():KeyDown(IN_USE) then
+        wpn.BlindFireMenuHolding = pressed
+        print(wpn.BlindFireMenuHolding)
+        -- if we don't block, TTT will do radio menu
+        if engine.ActiveGamemode() == "terrortown" then return true end
+    end
+
     if !pressed then return end
-
-    -- print(bind)
-
-    -- if bind == "+zoom" then
-    --     if wpn:GetBlindFire() then
-    --         net.Start("TacRP_toggleblindfire")
-    --         net.WriteBool(false)
-    --         net.SendToServer()
-    --     else
-    --         net.Start("TacRP_toggleblindfire")
-    --         net.WriteBool(true)
-    --         net.SendToServer()
-    --     end
-
-    --     return true
-    -- end
 
     if bind == "+menu_context" and !LocalPlayer():KeyDown(IN_USE) then
         if wpn:GetScopeLevel() == 0 then

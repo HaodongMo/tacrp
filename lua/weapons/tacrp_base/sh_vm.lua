@@ -113,7 +113,7 @@ function SWEP:GetViewModelPosition(pos, ang)
         local sightpos, sightang = self:GetSightPositions()
 
         if self:DoLowerIrons() then
-            sightpos = sightpos + Vector(0, 1, -1)
+            sightpos = sightpos + Vector(0, 1.5, -2.5)
         end
 
         LerpMod(offsetpos, sightpos + ppos, curvedsightdelta)

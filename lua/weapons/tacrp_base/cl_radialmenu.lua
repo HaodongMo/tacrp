@@ -63,6 +63,8 @@ end
 SWEP.GrenadeMenuAlpha = 0
 SWEP.BlindFireMenuAlpha = 0
 
+SWEP.BlindFireMenuHolding = false
+
 local currentnade
 local currentind
 local lastmenu
@@ -560,7 +562,7 @@ function SWEP:DrawBlindFireHUD()
         mouseangle = mouseangle + 360
     end
 
-    if self:GetOwner():KeyDown(IN_ZOOM) and self:CheckBlindFire(true) and self.GrenadeMenuAlpha == 0 then
+    if (self:GetOwner():KeyDown(IN_ZOOM) or self.BlindFireMenuHolding) and self:CheckBlindFire(true) and self.GrenadeMenuAlpha == 0 then
         self.BlindFireMenuAlpha = math.Approach(self.BlindFireMenuAlpha, 1, 15 * ft)
         if !lastmenu_bf then
             gui.EnableScreenClicker(true)

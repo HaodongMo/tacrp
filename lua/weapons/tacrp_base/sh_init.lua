@@ -52,6 +52,8 @@ function SWEP:Deploy()
     if CLIENT then
         self:SetupModel(true)
         self:SetupModel(false)
+
+        self.BlindFireMenuHolding = self:GetOwner():KeyDown(IN_ZOOM)
     end
 
     self:ToggleBlindFire(TacRP.BLINDFIRE_NONE)
