@@ -571,6 +571,10 @@ local function menu_client_ti(panel)
         label = "Hints Use Alternate Font",
         command = "tacrp_hints_altfont"
     })
+    panel:AddControl("checkbox", {
+        label = "Hide Startup Quickthrow Bind Reminder",
+        command = "tacrp_shutup"
+    })
 
     header(panel, "\nPreference")
     panel:AddControl("checkbox", {
@@ -601,10 +605,6 @@ local function menu_client_ti(panel)
     panel:ControlHelp("This mutes your own radar sound for yourself only. Others can still hear your radar, and you can still hear others' radars.")
 
     header(panel, "\nMiscellaneous")
-    panel:AddControl("checkbox", {
-        label = "Hide Quick Grenade Hint On Startup",
-        command = "tacrp_shutup"
-    })
     panel:AddControl("checkbox", {
         label = "Disable Suicide Mode",
         command = "tacrp_idunwannadie"
