@@ -52,8 +52,7 @@ function SWEP:Deploy()
     if CLIENT then
         self:SetupModel(true)
         self:SetupModel(false)
-
-        self.BlindFireMenuHolding = self:GetOwner():KeyDown(IN_ZOOM)
+        self.LastHintLife = CurTime()
     end
 
     self:ToggleBlindFire(TacRP.BLINDFIRE_NONE)
@@ -223,7 +222,7 @@ function SWEP:ClientInitialize()
 
     if !LocalPlayer().TacRPGreet and !GetConVar("tacrp_shutup"):GetBool() then
         LocalPlayer().TacRPGreet = true
-        LocalPlayer():PrintMessage(HUD_PRINTTALK, "Check Q menu -> Options/Tactical RP/Control Guide to see the controls!")
+        -- LocalPlayer():PrintMessage(HUD_PRINTTALK, "Check Q menu -> Options/Tactical RP/Control Guide to see the controls!")
         if !input.LookupBinding("grenade1") and !input.LookupBinding("grenade2") then
             LocalPlayer():PrintMessage(HUD_PRINTTALK, "Bind +grenade1 and +grenade2 to use TacRP quick grenades!")
         end

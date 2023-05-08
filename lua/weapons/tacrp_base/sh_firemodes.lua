@@ -54,6 +54,8 @@ function SWEP:ToggleSafety(onoff)
     if onoff == true then
         self:ToggleBlindFire(TacRP.BLINDFIRE_NONE)
     end
+
+    if CLIENT then self.LastHintLife = CurTime() end
 end
 
 local mat_1 = Material("tacrp/hud/firemode_1.png", "mips smooth")

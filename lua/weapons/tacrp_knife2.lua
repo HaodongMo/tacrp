@@ -24,6 +24,8 @@ SWEP.NPCUsable = false
 
 // misc. shooting
 
+SWEP.PrimaryMelee = true
+
 SWEP.MeleeDamage = 30
 SWEP.MeleeAttackTime = 0.35
 SWEP.MeleeRange = 128

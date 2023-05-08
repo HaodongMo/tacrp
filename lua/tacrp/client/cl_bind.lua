@@ -3,11 +3,14 @@ hook.Add("PlayerBindPress", "TacRP_Binds", function(ply, bind, pressed, code)
 
     if !wpn or !IsValid(wpn) or !wpn.ArcticTacRP then return end
 
-    if bind == "+zoom" and !LocalPlayer():KeyDown(IN_USE) then
-        wpn.BlindFireMenuHolding = pressed
-        print(wpn.BlindFireMenuHolding)
-        -- if we don't block, TTT will do radio menu
-        if engine.ActiveGamemode() == "terrortown" then return true end
+    -- if we don't block, TTT will do radio menu
+    if engine.ActiveGamemode() == "terrortown" and bind == "+zoom" and !LocalPlayer():KeyDown(IN_USE) then
+        ply.TacRPBlindFireDown = pressed
+        return true
+    end
+
+    if bind == "+showscores" then
+        wpn.LastHintLife = CurTime() -- ping the hints
     end
 
     if !pressed then return end
@@ -59,4 +62,29 @@ function TacRP.GetBind(binding)
     end
 
     return string.upper(bind)
+end
+
+function TacRP.GetBindKey(bind)
+    local key = input.LookupBinding(bind)
+    if !key then
+        return bind
+    else
+        return string.upper(key)
+    end
+end
+
+function TacRP.GetKeyIsBound(bind)
+    local key = input.LookupBinding(bind)
+
+    if !key then
+        return false
+    else
+        return true
+    end
+end
+
+function TacRP.GetKey(bind)
+    local key = input.LookupBinding(bind)
+
+    return key and input.GetKeyCode(key)
 end

@@ -59,6 +59,7 @@ function SWEP:ScopeToggle(setlevel)
 
     if CLIENT then
         self:GenerateAutoSight()
+        self.LastHintLife = CurTime()
     end
 
     self:EmitSound(self:GetValue("Sound_ScopeIn"), 75, 100, 1, CHAN_ITEM)

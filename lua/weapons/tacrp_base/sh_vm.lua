@@ -9,6 +9,8 @@ local procfiredelta = 0
 local angle_zero = Angle(0, 0, 0)
 local vector_origin = Vector(0, 0, 0)
 
+local peekvector = Vector(0, 0, -2)
+
 local m_appor = math.Approach
 local f_lerp = Lerp
 local function ApproachMod(usrobj, to, dlt)
@@ -113,7 +115,7 @@ function SWEP:GetViewModelPosition(pos, ang)
         local sightpos, sightang = self:GetSightPositions()
 
         if self:DoLowerIrons() then
-            sightpos = sightpos + Vector(0, 1.5, -2.5)
+            sightpos = sightpos + LerpVector(curvedpeekdelta, peekvector, vector_origin)
         end
 
         LerpMod(offsetpos, sightpos + ppos, curvedsightdelta)

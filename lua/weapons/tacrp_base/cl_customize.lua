@@ -1411,9 +1411,11 @@ function SWEP:RemoveCustomizeHUD()
     if self.CustomizeHUD then
         self.CustomizeHUD:Remove()
 
-        if (self.GrenadeMenuAlpha or 0) != 1 then
+        if (self.GrenadeMenuAlpha or 0) != 1 and (self.BlindFireMenuAlpha or 0) != 1 then
             gui.EnableScreenClicker(false)
         end
+
+        self.LastHintLife = CurTime()
     end
 end
 

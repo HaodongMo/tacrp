@@ -13,3 +13,5 @@ ATT.SortOrder = 1
 
 ATT.Flashlight = true
 ATT.CanToggle = true
+
+ATT.TacticalName = "Flashlight"

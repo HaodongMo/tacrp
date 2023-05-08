@@ -11,6 +11,8 @@ ATT.Category = "tactical"
 ATT.Rangefinder = true
 ATT.CanToggle = true
 
+ATT.TacticalName = "Ranger"
+
 local lastrangefinder = 0
 local rftime = 1 / 10
 local rawdist = 0

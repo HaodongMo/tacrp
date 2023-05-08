@@ -13,3 +13,5 @@ ATT.SortOrder = 1
 
 ATT.Laser = true
 ATT.CanToggle = true
+
+ATT.TacticalName = "Laser"

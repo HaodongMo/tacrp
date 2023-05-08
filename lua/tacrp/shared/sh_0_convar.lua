@@ -314,6 +314,23 @@ local conVars = {
         max = 1,
     },
 
+    // --------------------------- Hints
+    {
+        name = "hints",
+        default = "1",
+        client = true,
+    },
+    {
+        name = "hints_always",
+        default = "0",
+        client = true,
+    },
+    {
+        name = "hints_altfont",
+        default = "0",
+        client = true,
+    },
+
     // --------------------------- Ammo
     {
         name = "defaultammo",
@@ -540,6 +557,21 @@ local function menu_client_ti(panel)
     })
     panel:ControlHelp("Vignette intensity is based on amount of accumulated recoil.")
 
+    header(panel, "\nHints")
+    panel:AddControl("checkbox", {
+        label = "Show Control Hints",
+        command = "tacrp_hints"
+    })
+    panel:ControlHelp("Shows your currently available actions regardless of whether the HUD is enabled or not.")
+    panel:AddControl("checkbox", {
+        label = "Hints Always Active",
+        command = "tacrp_hints_always"
+    })
+    panel:AddControl("checkbox", {
+        label = "Hints Use Alternate Font",
+        command = "tacrp_hints_altfont"
+    })
+
     header(panel, "\nPreference")
     panel:AddControl("checkbox", {
         label = "Toggle Aiming",
@@ -570,6 +602,10 @@ local function menu_client_ti(panel)
 
     header(panel, "\nMiscellaneous")
     panel:AddControl("checkbox", {
+        label = "Hide Quick Grenade Hint On Startup",
+        command = "tacrp_shutup"
+    })
+    panel:AddControl("checkbox", {
         label = "Disable Suicide Mode",
         command = "tacrp_idunwannadie"
     })
@@ -590,9 +626,7 @@ local function menu_client_ti(panel)
         label = "Spawnmenu Subcategories",
         command = "tacrp_subcats"
     })
-    panel:AddControl("label", {
-        text = "Separate weapons based on their type (like Sidearm, Assault Rifle, Shotgun). Use ConCommand \"spawnmenu_reload\" to take effect."
-    })
+    panel:ControlHelp("Separate weapons based on their type (like Sidearm, Assault Rifle, Shotgun). Use ConCommand \"spawnmenu_reload\" to take effect.")
 end
 
 local function menu_server_ti(panel)
@@ -827,9 +861,9 @@ local function menu_atts_ti(panel)
 end
 
 local clientmenus_ti = {
-    {
-        text = "Control Guide", func = menu_guide_ti
-    },
+    -- {
+    --     text = "Control Guide", func = menu_guide_ti
+    -- },
     {
         text = "Client", func = menu_client_ti
     },

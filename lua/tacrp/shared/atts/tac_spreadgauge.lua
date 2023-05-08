@@ -11,6 +11,7 @@ ATT.Category = "tactical"
 ATT.SpreadGauge = true
 ATT.CanToggle = true
 
+ATT.TacticalName = "Gauge"
 
 local mat_spread = Material("tacrp/hud/spreadgauge.png", "smooth")
 local mat_spread_fire = Material("tacrp/hud/spreadgauge_fire.png", "")

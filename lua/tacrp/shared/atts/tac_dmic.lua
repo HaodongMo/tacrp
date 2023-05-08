@@ -12,6 +12,8 @@ ATT.Category = "tactical"
 ATT.Minimap = true
 ATT.CanToggle = true
 
+ATT.TacticalName = "Radar"
+
 local scantime = GetConVar("tacrp_att_radartime")
 local lastradar = 0
 local cache_lastradarpositions

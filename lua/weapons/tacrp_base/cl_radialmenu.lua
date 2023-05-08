@@ -63,8 +63,6 @@ end
 SWEP.GrenadeMenuAlpha = 0
 SWEP.BlindFireMenuAlpha = 0
 
-SWEP.BlindFireMenuHolding = false
-
 local currentnade
 local currentind
 local lastmenu
@@ -108,6 +106,7 @@ function SWEP:DrawGrenadeHUD()
             currentnade = self:GetGrenade()
             currentind = nil
         end
+        self.GrenadeMenuHighlighted = currentind
     else
         self.GrenadeMenuAlpha = math.Approach(self.GrenadeMenuAlpha, 0, -10 * ft)
         if lastmenu then
@@ -288,6 +287,11 @@ function SWEP:DrawGrenadeHUD()
     surface.SetFont("TacRP_Myriad_Pro_8")
     surface.SetDrawColor(0, 0, 0, 200 * a)
 
+    -- Only use the old bind hints if current hint is disabled
+    if GetConVar("tacrp_hints"):GetBool() then
+        self.LastHintLife = CurTime()
+        return
+    end
 
     if GetConVar("tacrp_nademenu_click"):GetBool() then
 
@@ -562,7 +566,7 @@ function SWEP:DrawBlindFireHUD()
         mouseangle = mouseangle + 360
     end
 
-    if (self:GetOwner():KeyDown(IN_ZOOM) or self.BlindFireMenuHolding) and self:CheckBlindFire(true) and self.GrenadeMenuAlpha == 0 then
+    if (self:GetOwner():KeyDown(IN_ZOOM) or self:GetOwner().TacRPBlindFireDown) and self:CheckBlindFire(true) and self.GrenadeMenuAlpha == 0 then
         self.BlindFireMenuAlpha = math.Approach(self.BlindFireMenuAlpha, 1, 15 * ft)
         if !lastmenu_bf then
             gui.EnableScreenClicker(true)
