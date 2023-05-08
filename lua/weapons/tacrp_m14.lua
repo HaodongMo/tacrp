@@ -33,7 +33,7 @@ SWEP.BalanceStats = {
     },
     [TacRP.BALANCE_TTT] = {
 
-        Description = "Semi-automatic rifle with excellent accuracy.\nEquipped with a 6x scope by default.",
+        Description = "Semi-automatic rifle with excellent accuracy and a lethal headshot at long range.\nEquipped with a 6x scope by default.",
 
         Damage_Max = 22,
         Damage_Min = 35,
@@ -41,13 +41,14 @@ SWEP.BalanceStats = {
         Range_Max = 3000,
         RPM = 180,
 
-        RecoilResetTime = 0.2,
-        RecoilDissipationRate = 2.5,
-        RecoilMaximum = 2,
-        RecoilSpreadPenalty = 0.025,
+        RecoilResetTime = 0.18,
+        RecoilDissipationRate = 3,
+        RecoilMaximum = 3,
+        RecoilSpreadPenalty = 0.01,
+        RecoilFirstShotMult = 0.5,
 
         BodyDamageMultipliers = {
-            [HITGROUP_HEAD] = 4,
+            [HITGROUP_HEAD] = 3.5,
             [HITGROUP_CHEST] = 1.25,
             [HITGROUP_STOMACH] = 1,
             [HITGROUP_LEFTARM] = 0.75,
@@ -107,7 +108,7 @@ SWEP.RecoilResetTime = 0.25 // time after you stop shooting for recoil to start 
 SWEP.RecoilDissipationRate = 4
 SWEP.RecoilFirstShotMult = 0.5
 
-SWEP.RecoilVisualKick = 3
+SWEP.RecoilVisualKick = 2
 
 SWEP.RecoilKick = 5
 
