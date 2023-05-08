@@ -234,7 +234,7 @@ function SWEP:ToggleBlindFire(bf)
     self:ToggleBoneMods(bf)
     self:SetShouldHoldType()
 
-    if bf == TacRP.BLINDFIRE_KYS and TacRP.ShouldWeFunny() and math.random() <= 0.4 then
+    if bf == TacRP.BLINDFIRE_KYS and TacRP.ShouldWeFunny() then
         self:GetOwner():EmitSound("tacrp/low-tier-god.mp3", 80, 100)
     end
 
@@ -247,6 +247,7 @@ end
 
 function SWEP:ThinkBlindFire()
     if (self:GetOwner():KeyDown(IN_ZOOM) or self:GetOwner().TacRPBlindFireDown) and !tobool(self:GetOwner():GetInfo("tacrp_blindfiremenu")) then
+        if CLIENT then self.LastHintLife = CurTime() end
         if self:GetOwner():KeyDown(IN_FORWARD) then
             self:ToggleBlindFire(TacRP.BLINDFIRE_UP)
         elseif self:GetOwner():KeyDown(IN_MOVELEFT) and !self:GetOwner():KeyDown(IN_MOVERIGHT) then

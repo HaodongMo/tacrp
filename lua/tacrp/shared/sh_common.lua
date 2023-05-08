@@ -130,7 +130,7 @@ TacRP.AreTheGrenadeAnimsReadyYet = true
 
 function TacRP.ShouldWeFunny()
     local i = GetConVar("tacrp_funny_loudnoises"):GetInt()
-    return i == 2 or (i == 1 and os.date("%m-%d") == "04-01")
+    return i == 2 or (i == 1 and (os.date("%m-%d") == "04-01" or math.random() <= 0.01))
 end
 
 TacRP.BALANCE_AUTO = -1
