@@ -16,6 +16,10 @@ local function makedashsound(ent, pitch)
     end
 end
 
+ATT.Hook_GetHintCapabilities = function(self, tbl)
+    tbl["+reload"] = {so = 0.4, str = "Airdash"}
+end
+
 
 ATT.Hook_PreReload = function(wep)
     local ply = wep:GetOwner()

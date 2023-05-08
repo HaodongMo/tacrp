@@ -149,3 +149,7 @@ hook.Add("EntityTakeDamage", "TacRP_Counter", function(ent, dmginfo)
         ent:DropWeapon(dropwep, dmginfo:GetAttacker():GetPos())
     end
 end)
+
+ATT.Hook_GetHintCapabilities = function(self, tbl)
+    tbl["+attack2"] = {so = 0.1, str = "Block"}
+end

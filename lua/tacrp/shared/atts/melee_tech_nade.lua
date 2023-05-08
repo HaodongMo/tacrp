@@ -26,3 +26,7 @@ ATT.Hook_PreReload = function(self)
     return true
 end
 ]]
+
+ATT.Hook_GetHintCapabilities = function(self, tbl)
+    tbl["+attack2"] = {so = 0.1, str = "Quickthrow"}
+end

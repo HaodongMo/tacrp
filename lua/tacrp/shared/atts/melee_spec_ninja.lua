@@ -9,6 +9,15 @@ ATT.SortOrder = 2
 
 ATT.SilentFootstep = true
 
+ATT.Hook_GetHintCapabilities = function(self, tbl)
+    tbl["+reload"] = {so = 0.4, str = "Palm Strike"}
+    if self:GetOwner():IsOnGround() then
+        tbl["+duck/+reload"] = {so = 0.5, str = "Smokescreen"}
+    else
+        tbl["+duck/+reload"] = {so = 0.5, str = "Dive Kick"}
+    end
+end
+
 local smokedelay = 10
 
 local function makehitsound(ent)
@@ -28,6 +37,7 @@ local function makesmokesound(ent, pitch)
 end
 
 ATT.Hook_PreReload = function(wep)
+    wep.LastHintLife = CurTime()
     local ply = wep:GetOwner()
     if !ply:KeyPressed(IN_RELOAD) then return end
 

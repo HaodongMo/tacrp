@@ -11,6 +11,11 @@ ATT.SortOrder = 5
 
 ATT.MeleeCharge = true
 
+ATT.Hook_GetHintCapabilities = function(self, tbl)
+    tbl["+reload"] = {so = 0.4, str = "Charge"}
+    tbl["+walk/+reload"] = {so = 0.5, str = "Toggle Charge"}
+end
+
 local followup = 0.75
 
 local modecount = 3
@@ -198,6 +203,8 @@ ATT.Hook_PreShoot = function(wep)
 end
 
 ATT.Hook_PreReload = function(wep)
+    wep.LastHintLife = CurTime()
+
     if !(game.SinglePlayer() or IsFirstTimePredicted()) then return end
     local ply = wep:GetOwner()
 

@@ -9,6 +9,11 @@ ATT.SortOrder = 3
 
 ATT.Lifesteal = 1 / 4
 
+ATT.Hook_GetHintCapabilities = function(self, tbl)
+    tbl["+reload"] = {so = 0.4, str = "Pounce / Lunge"}
+    tbl["+duck/+reload"] = {so = 0.5, str = "Super Jump"}
+end
+
 local chargeamt = 0.5
 
 local function makesound(ent, pitch)

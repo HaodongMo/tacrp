@@ -15,3 +15,8 @@ ATT.Hook_SecondaryAttack = function(self)
     self:Melee(true)
     return true
 end
+
+ATT.Hook_GetHintCapabilities = function(self, tbl)
+    tbl["+attack"] = {so = 0, str = "Light Melee"}
+    tbl["+attack2"] = {so = 0.1, str = "Heavy Melee"}
+end

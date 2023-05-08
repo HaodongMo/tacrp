@@ -59,3 +59,8 @@ ATT.Hook_SecondaryAttack = function(self)
     self:SetNextSecondaryFire(CurTime() + s)
     return true
 end
+
+
+ATT.Hook_GetHintCapabilities = function(self, tbl)
+    tbl["+attack2"] = {so = 0.1, str = "Knife Throw"}
+end

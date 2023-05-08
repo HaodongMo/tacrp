@@ -18,5 +18,9 @@ ATT.Hook_PreReload = function(self)
     return true
 end
 
+ATT.Hook_GetHintCapabilities = function(self, tbl)
+    tbl["+reload"] = {so = 0.4, str = "Quickthrow Menu"}
+end
+
 ATT.QuickNadeTryImpact = true
 -- ATT.Mult_QuickNadeTimeMult = 1.5
