@@ -193,6 +193,10 @@ local entityGetOwner = FindMetaTable("Entity").GetOwner
 function SWEP:GetNearWallAmount()
     local now = engine.TickCount()
 
+    if !GetConVar("tacrp_nearwall"):GetBool() or LocalPlayer():GetMoveType() == MOVETYPE_NOCLIP then
+        return 0
+    end
+
     if self.NearWallTick == now then
         return self.NearWallCached
     end
