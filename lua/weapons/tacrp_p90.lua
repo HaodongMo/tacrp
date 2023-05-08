@@ -29,8 +29,8 @@ SWEP.BalanceStats = {
         ReloadSpeedMult = 1,
     },
     [TacRP.BALANCE_TTT] = {
-        Damage_Max = 8,
-        Damage_Min = 5,
+        Damage_Max = 10,
+        Damage_Min = 8,
 
         Range_Min = 900,
         Range_Max = 3000,
@@ -46,7 +46,7 @@ SWEP.BalanceStats = {
             [HITGROUP_GEAR] = 0.9
         },
 
-        ReloadTimeMult = 1.25,
+        ReloadTimeMult = 1.3,
 
         MoveSpeedMult = 0.95,
         ShootingSpeedMult = 0.85,
@@ -78,7 +78,7 @@ SWEP.BodyDamageMultipliers = {
     [HITGROUP_GEAR] = 0.9
 }
 
-SWEP.MuzzleVelocity = 22500
+SWEP.MuzzleVelocity = 26000
 
 // misc. shooting
 

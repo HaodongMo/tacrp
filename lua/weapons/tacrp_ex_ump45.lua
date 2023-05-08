@@ -35,9 +35,9 @@ SWEP.BalanceStats = {
         Range_Min = 150,
         Range_Max = 1500,
 
-        RecoilMaximum = 10,
-        RecoilSpreadPenalty = 0.004,
-        HipFireSpreadPenalty = 0.025,
+        RecoilMaximum = 12,
+        RecoilSpreadPenalty = 0.003,
+        HipFireSpreadPenalty = 0.02,
 
         BodyDamageMultipliers = {
             [HITGROUP_HEAD] = 2,

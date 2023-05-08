@@ -31,14 +31,15 @@ SWEP.BalanceStats = {
     [TacRP.BALANCE_TTT] = {
         Damage_Max = 14,
         Damage_Min = 6,
-
         RPM = 500,
 
-        RecoilMaximum = 5,
-        RecoilResetTime = 0.1,
-        RecoilDissipationRate = 5,
-        RecoilFirstShotMult = 0.75,
-        RecoilSpreadPenalty = 0.01,
+        Description = "Competition pistol with high capacity and low recoil.\nCan be fired quickly, but becomes inaccurate past the first few shots.",
+
+        RecoilMaximum = 7,
+        RecoilResetTime = 0.12,
+        RecoilDissipationRate = 7,
+        RecoilFirstShotMult = 0.6,
+        RecoilSpreadPenalty = 0.008,
 
         BodyDamageMultipliers = {
             [HITGROUP_HEAD] = 2.5,
@@ -73,7 +74,7 @@ SWEP.Penetration = 3 // units of metal this weapon can penetrate
 SWEP.ArmorPenetration = 0.6
 SWEP.ArmorBonus = 1.25
 
-SWEP.MuzzleVelocity = 11500
+SWEP.MuzzleVelocity = 17500
 
 SWEP.BodyDamageMultipliers = {
     [HITGROUP_HEAD] = 5,
@@ -100,7 +101,7 @@ SWEP.RecoilResetTime = 0.15
 SWEP.RecoilDissipationRate = 18
 SWEP.RecoilFirstShotMult = 0.6
 
-SWEP.RecoilVisualKick = 1.5
+SWEP.RecoilVisualKick = 1
 
 SWEP.RecoilKick = 3.5
 

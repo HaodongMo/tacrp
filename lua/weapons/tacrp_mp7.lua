@@ -29,10 +29,10 @@ SWEP.BalanceStats = {
         ReloadSpeedMult = 1,
     },
     [TacRP.BALANCE_TTT] = {
-        Damage_Max = 9,
-        Damage_Min = 3,
+        Damage_Max = 12,
+        Damage_Min = 7,
 
-        Range_Min = 900,
+        Range_Min = 600,
         Range_Max = 3000,
 
         RPM = 800,
@@ -69,7 +69,7 @@ SWEP.Range_Max = 5000 // distance at which we drop to minimum damage
 SWEP.Penetration = 10 // units of metal this weapon can penetrate
 SWEP.ArmorPenetration = 0.85
 
-SWEP.MuzzleVelocity = 17500
+SWEP.MuzzleVelocity = 23500
 
 SWEP.BodyDamageMultipliers = {
     [HITGROUP_HEAD] = 3,

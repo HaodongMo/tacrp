@@ -11,7 +11,7 @@ function SWEP:SwitchFiremode()
 end
 
 function SWEP:GetFiremodeAmount()
-    if self:GetValue("Firemodes") then
+    if istable(self:GetValue("Firemodes")) then
         return #self:GetValue("Firemodes")
     elseif self:GetValue("Firemode") == 0 then
         return 0
@@ -39,11 +39,10 @@ end
 
 function SWEP:GetCurrentFiremode()
     if self:GetValue("Firemodes") then
-        return self:GetValue("Firemodes")[self:GetFiremode()] or 0
+        return self:GetValue("Firemodes")[self:GetFiremode()] or self:GetValue("Firemode") or 0
     else
         return self:GetValue("Firemode")
     end
-    return 0
 end
 
 function SWEP:ToggleSafety(onoff)

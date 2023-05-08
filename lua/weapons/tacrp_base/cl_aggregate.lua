@@ -159,7 +159,7 @@ SWEP.StatGroups = {
                 if bfm < 0 then
                     ttk = ttk + math.floor(ttk / -bfm) * pbd
                 end
-                ttk_s = math.Clamp(1 - ttk / (ttt and 2 or 1.5), 0, 1) ^ (ttt and 2 or 1.5)
+                ttk_s = math.Clamp(1 - ttk / (ttt and 3 or 1.5), 0, 1) ^ (ttt and 3 or 1.5)
             end
 
             local scores = {mssd, ttk_s}
@@ -482,8 +482,8 @@ SWEP.StatDisplay = {
     --     Unit = ""
     -- }
     {
-        Name = "Average DPS",
-        Description = {"Calculated damage output of the weapon at 25% damage falloff.", "Does not consider hitgroup damage multipliers or armor penetration."},
+        Name = "Raw DPS",
+        Description = {"Calculated damage output of the weapon with no damage falloff.", "Does not consider hitgroup damage multipliers or armor penetration."},
         Value = "",
         AggregateFunction = function(self, base, val)
             local valfunc = base and self.GetBaseValue or self.GetValue
@@ -498,11 +498,12 @@ SWEP.StatDisplay = {
             end
 
             local num = valfunc(self, "Num")
-            local hi, lo = valfunc(self, "Damage_Max"), valfunc(self, "Damage_Min")
-            if lo > hi then
-                hi, lo = valfunc(self, "Damage_Min"), valfunc(self, "Damage_Max")
-            end
-            local dmg = Lerp(0.25, hi, lo)
+            -- local hi, lo = valfunc(self, "Damage_Max"), valfunc(self, "Damage_Min")
+            -- if lo > hi then
+            --     hi, lo = valfunc(self, "Damage_Min"), valfunc(self, "Damage_Max")
+            -- end
+            -- local dmg = Lerp(0.25, hi, lo)
+            local dmg = math.max(valfunc(self, "Damage_Max"), valfunc(self, "Damage_Min"))
             return math.Round(dmg * num * erpm / 60, 1)
         end,
     },
@@ -808,7 +809,7 @@ SWEP.StatDisplay = {
                 elseif val[1] == 1 then
                     return "Semi"
                 elseif val[1] < 0 then
-                    return val[1] .. "-Burst"
+                    return (-val[1]) .. "-Burst"
                 end
             else
                 local tbl = table.Copy(val)

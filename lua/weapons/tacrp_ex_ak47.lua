@@ -26,6 +26,8 @@ SWEP.BalanceStats = {
         ReloadSpeedMult = 1,
     },
     [TacRP.BALANCE_TTT] = {
+        Description = "Classic high damage assault rifle.\nAn insurgent's greatest ally and a terrorist's best friend.",
+
         Damage_Max = 20,
         Damage_Min = 15,
 

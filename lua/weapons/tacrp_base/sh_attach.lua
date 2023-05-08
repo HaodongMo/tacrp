@@ -45,9 +45,7 @@ function SWEP:Attach(slot, att, silent)
         self:SetTactical(true)
     end
 
-    if self:GetCurrentFiremode() == 0 then
-        self:SetFiremode(1)
-    end
+    self:SetFiremode(1)
 
     local inf_new = self:GetValue("InfiniteAmmo")
     if SERVER then
@@ -93,6 +91,8 @@ function SWEP:Detach(slot, silent)
     self:InvalidateCache()
 
     self:SetBaseSettings()
+
+    self:SetFiremode(1)
 
     local nade = self:GetGrenade()
     if (nade.AdminOnly and self:GetOwner():GetAmmoCount(nade.Ammo) <= 0) or (nade.RequireStat and !self:GetValue(nade.RequireStat)) then
