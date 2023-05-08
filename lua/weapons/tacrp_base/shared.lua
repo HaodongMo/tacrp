@@ -151,10 +151,10 @@ SWEP.BlindFireAng = Angle(0, 15, 0)
 SWEP.BlindFirePos = Vector(0, 0, -6)
 
 SWEP.BlindFireLeftAng = Angle(75, 0, 0)
-SWEP.BlindFireLeftPos = Vector(8, 10, -12)
+SWEP.BlindFireLeftPos = Vector(8, 14, -12)
 
 SWEP.BlindFireRightAng = Angle(-75, 0, 0)
-SWEP.BlindFireRightPos = Vector(-10, 10, -12)
+SWEP.BlindFireRightPos = Vector(-8, 14, -12)
 
 SWEP.BlindFireSuicideAng = Angle(0, 145, 130)
 SWEP.BlindFireSuicidePos = Vector(-6, 32, -26)
@@ -184,6 +184,9 @@ SWEP.SprintMidPoint = {
     Pos = Vector(4, 10, 2),
     Ang = Angle(0, -10, -45)
 }
+
+SWEP.NearWallPos = Vector(0, 6, 0)
+SWEP.NearWallAng = Angle(-3, 5, -5)
 
 // scope
 

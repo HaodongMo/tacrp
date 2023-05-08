@@ -169,3 +169,55 @@ hook.Add("ShouldDrawLocalPlayer", "TacRP_SuicideCornerCam", function(ply)
         return true
     end
 end)
+
+SWEP.NearWallTick = 0
+SWEP.NearWallCached = false
+
+local traceResults = {}
+
+local traceData = {
+    start = true,
+    endpos = true,
+    filter = true,
+    mask = MASK_SHOT_HULL,
+    output = traceResults
+}
+
+local VECTOR = FindMetaTable("Vector")
+local vectorAdd = VECTOR.Add
+local vectorMul = VECTOR.Mul
+
+local angleForward = FindMetaTable("Angle").Forward
+local entityGetOwner = FindMetaTable("Entity").GetOwner
+
+function SWEP:GetNearWallAmount()
+    local now = engine.TickCount()
+
+    if self.NearWallTick == now then
+        return self.NearWallCached
+    end
+
+    local length = 32
+
+    local startPos = self:GetMuzzleOrigin()
+
+    local endPos = angleForward(self:GetShootDir())
+    vectorMul(endPos, length)
+    vectorAdd(endPos, startPos)
+
+    traceData.start = startPos
+    traceData.endpos = endPos
+    traceData.filter = entityGetOwner(self)
+
+    util.TraceLine(traceData)
+    local hit = 1 - traceResults.Fraction
+
+    self.NearWallCached = hit
+    self.NearWallTick = now
+
+    return hit
+end
+
+function SWEP:ThinkNearWall()
+    self:GetNearWallAmount()
+end

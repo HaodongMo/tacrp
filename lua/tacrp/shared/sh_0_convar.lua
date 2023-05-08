@@ -313,6 +313,11 @@ local conVars = {
         min = 0,
         max = 1,
     },
+    {
+        name = "nearwall",
+        default = "1",
+        client = true,
+    },
 
     // --------------------------- Hints
     {
@@ -605,6 +610,12 @@ local function menu_client_ti(panel)
     panel:ControlHelp("This mutes your own radar sound for yourself only. Others can still hear your radar, and you can still hear others' radars.")
 
     header(panel, "\nMiscellaneous")
+    panel:AddControl("checkbox", {
+        label = "Near Walling",
+        command = "tacrp_nearwall"
+    })
+    panel:ControlHelp("Pushes viewmodel back when the point of aim is in front of a wall. Purely visual effect, but may help when blindfiring.")
+
     panel:AddControl("checkbox", {
         label = "Disable Suicide Mode",
         command = "tacrp_idunwannadie"

@@ -79,6 +79,9 @@ function SWEP:Think()
     end
 
     if CLIENT then
+
+        self:ThinkNearWall()
+
         if !self.LoadedPreset then
             self.LoadedPreset = true
 

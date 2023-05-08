@@ -4,7 +4,7 @@ local sprintdelta = 0
 local peekdelta = 0
 local blindfiredelta, blindfiredeltaleft, blindfiredeltaright, blindfiredeltakys = 0, 0, 0, 0
 local freeaim_p, freeaim_y = 0, 0
-local procfiredelta = 0
+local nearwalldelta = 0
 
 local angle_zero = Angle(0, 0, 0)
 local vector_origin = Vector(0, 0, 0)
@@ -267,6 +267,29 @@ function SWEP:GetViewModelPosition(pos, ang)
 
     extra_offsetpos:Add(spr_joffset)
     extra_offsetang:Add(spr_jaffset)
+
+    -- local nearwalldelta = self:Curve(self:GetNearWallAmount()) - curvedcustomizedelta
+    nearwalldelta = m_appor(nearwalldelta, self:GetNearWallAmount(), FT / 0.3)
+    local curvednearwalldelta = self:Curve(nearwalldelta) - curvedcustomizedelta - curvedsightdelta
+    if curvednearwalldelta > 0 then
+        local sprpos = LerpVector(curvednearwalldelta, vector_origin, self:GetValue("NearWallPos"))
+        local sprang = LerpAngle(curvednearwalldelta, angle_zero, self:GetValue("NearWallAng"))
+
+        local pointdir = self:GetOwner():WorldToLocalAngles(self:GetShootDir())
+
+        extra_offsetpos:Add(pointdir:Right() * sprpos[2])
+        extra_offsetpos:Add(pointdir:Forward() * sprpos[1])
+        extra_offsetpos:Add(pointdir:Up() * sprpos[3])
+
+        extra_offsetang:Add(sprang)
+
+        -- extra_offsetpos:Add(LerpVector(nearwalldelta, vector_origin, sprpos))
+        -- extra_offsetang:Add(sprang)
+
+        -- LerpMod(offsetpos, sprpos, nearwalldelta)
+        -- LerpMod(offsetang, sprang, nearwalldelta)
+        -- LerpMod(extra_offsetang, angle_zero, nearwalldelta, true)
+    end
 
     -- self.BobScale = Lerp(sprintdelta, 1, 3)
     -- self.BobScale = Lerp(sightdelta, self.BobScale, 0.1)
