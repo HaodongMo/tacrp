@@ -13,7 +13,8 @@ local sizes_to_make = {
 
 local unscaled_sizes_to_make = {
     24,
-    32
+    32,
+    48
 }
 
 local fonts_to_make = {

@@ -85,10 +85,37 @@ elseif CLIENT then
         self:Draw()
     end
 
+    local font = "TacRP_Myriad_Pro_48_Unscaled"
+    local iw2 = 128
+
+    local drawit = function(self, p, a, alpha)
+        cam.Start3D2D(p, a, 0.05)
+            -- surface.SetFont("TacRP_LondonBetween_24_Unscaled")
+
+            if !self.PrintLines then
+                self.PrintLines = TacRP.MultiLineText(self.PrintName, 328, font)
+            end
+            for j, text in ipairs(self.PrintLines or {}) do
+                draw.SimpleTextOutlined(text, font, 0, -40 + j * 40, Color(255, 255, 255, alpha * 255), TEXT_ALIGN_CENTER, TEXT_ALIGN_TOP, 2, Color(0, 0, 0, alpha * 75))
+            end
+
+            -- local w2 = surface.GetTextSize(self.PrintName)
+
+            -- surface.SetTextPos(-w2 / 2, 0)
+            -- surface.SetTextColor(255, 255, 255, 255)
+            -- surface.DrawText(self.PrintName)
+
+            surface.SetDrawColor(255, 255, 255, alpha * 255)
+            surface.SetMaterial(self.Icon or defaulticon)
+            surface.DrawTexturedRect(-iw2 / 2, -iw2 - 8, iw2, iw2)
+        cam.End3D2D()
+    end
+
     function ENT:Draw()
         self:DrawModel()
-
-        if (EyePos() - self:WorldSpaceCenter()):LengthSqr() <= 262144 then -- 512^2
+        local distsqr = (EyePos() - self:WorldSpaceCenter()):LengthSqr()
+        if distsqr <= 262144 then -- 512^2
+            local a = math.Clamp(1 - (distsqr - 196608) / 65536, 0, 1)
             local ang = self:GetAngles()
 
             ang:RotateAroundAxis(ang:Forward(), 180)
@@ -101,20 +128,22 @@ elseif CLIENT then
             pos = pos + ang:Up() * 4.1
             pos = pos + ang:Right() * -8
 
-            cam.Start3D2D(pos, ang, 0.1)
-                surface.SetFont("TacRP_LondonBetween_24_Unscaled")
+            drawit(self, pos, ang, a)
 
-                local w = surface.GetTextSize(self.PrintName)
+            -- cam.Start3D2D(pos, ang, 0.1)
+            --     surface.SetFont("TacRP_LondonBetween_24_Unscaled")
 
-                surface.SetTextPos(-w / 2, 0)
-                surface.SetTextColor(255, 255, 255, 255)
-                surface.DrawText(self.PrintName)
+            --     local w = surface.GetTextSize(self.PrintName)
 
-                surface.SetDrawColor(255, 255, 255)
-                surface.SetMaterial(self.Icon or defaulticon)
-                local iw = 64
-                surface.DrawTexturedRect(-iw / 2, -iw - 8, iw, iw)
-            cam.End3D2D()
+            --     surface.SetTextPos(-w / 2, 0)
+            --     surface.SetTextColor(255, 255, 255, 255)
+            --     surface.DrawText(self.PrintName)
+
+            --     surface.SetDrawColor(255, 255, 255)
+            --     surface.SetMaterial(self.Icon or defaulticon)
+            --     local iw = 64
+            --     surface.DrawTexturedRect(-iw / 2, -iw - 8, iw, iw)
+            -- cam.End3D2D()
 
             local ang2 = self:GetAngles()
 
@@ -128,20 +157,9 @@ elseif CLIENT then
             pos2 = pos2 + ang2:Up() * 4.1
             pos2 = pos2 + ang2:Right() * -8
 
-            cam.Start3D2D(pos2, ang2, 0.1)
-                surface.SetFont("TacRP_LondonBetween_24_Unscaled")
+            drawit(self, pos2, ang2, a)
 
-                local w2 = surface.GetTextSize(self.PrintName)
 
-                surface.SetTextPos(-w2 / 2, 0)
-                surface.SetTextColor(255, 255, 255, 255)
-                surface.DrawText(self.PrintName)
-
-                surface.SetDrawColor(255, 255, 255)
-                surface.SetMaterial(self.Icon or defaulticon)
-                local iw2 = 64
-                surface.DrawTexturedRect(-iw2 / 2, -iw2 - 8, iw2, iw2)
-            cam.End3D2D()
         end
     end
 
