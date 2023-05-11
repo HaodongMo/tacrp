@@ -184,7 +184,7 @@ SWEP.StatGroups = {
             if bfm == 1 then
                 erpm = math.min(rrpm, 600) + math.max(rrpm - 600, 0) ^ 0.75 -- you can't click *that* fast
             elseif bfm < 0 then
-                erpm = rrpm - 60 / (-bfm / pbd)
+                erpm = 60 / ((1 / (rrpm / 60)) + (pbd / -bfm))
             end
 
             local num = valfunc(self, "Num")
@@ -303,7 +303,7 @@ SWEP.StatGroups = {
             if bfm == 1 then
                 erpm = math.min(erpm, 600) -- you can't click *that* fast
             elseif bfm < 0 then
-                erpm = 60 / ((60 / erpm) + pbd / -bfm)
+                erpm = 60 / ((1 / (erpm / 60)) + (pbd / -bfm))
             end
             local delay = 60 / valfunc(self, "RPM")
             local rps = valfunc(self, "RecoilPerShot")
@@ -494,7 +494,7 @@ SWEP.StatDisplay = {
             local pbd = valfunc(self, "PostBurstDelay")
 
             if bfm < 0 then
-                erpm = rrpm - 60 / (-bfm / pbd)
+                erpm = 60 / ((1 / (rrpm / 60)) + (pbd / -bfm))
             end
 
             local num = valfunc(self, "Num")

@@ -82,13 +82,16 @@ function SWEP:ClientHolster()
         self:CallOnClient("ClientHolster")
     end
 
-    self:GetVM():SetSubMaterial()
-    self:GetVM():SetMaterial()
+    local vm = self:GetVM()
+    if IsValid(vm) then
+        vm:SetSubMaterial()
+        vm:SetMaterial()
 
-    for i = 0, self:GetVM():GetBoneCount() do
-        self:GetVM():ManipulateBoneScale(i, v1)
-        self:GetVM():ManipulateBoneAngles(i, a0)
-        self:GetVM():ManipulateBonePosition(i, v0)
+        for i = 0, vm:GetBoneCount() do
+            vm:ManipulateBoneScale(i, v1)
+            vm:ManipulateBoneAngles(i, a0)
+            vm:ManipulateBonePosition(i, v0)
+        end
     end
 end
 
