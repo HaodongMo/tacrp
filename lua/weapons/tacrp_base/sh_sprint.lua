@@ -10,6 +10,7 @@ function SWEP:GetIsSprinting()
     end
 
     if owner.TacRP_SprintBlock then return false end
+    if owner:GetNWBool("TacRPChargeState") then return true end
 
     local curspeed = owner:GetVelocity():Length()
     local walkspeed = owner:GetWalkSpeed()
