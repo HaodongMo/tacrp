@@ -89,7 +89,7 @@ SWEP.MuzzleVelocity = 25000
 
 SWEP.Firemodes = {-3, 1}
 SWEP.RunawayBurst = true
-SWEP.PostBurstDelay = 0.19
+SWEP.PostBurstDelay = 0.16
 
 SWEP.RPM = 800
 

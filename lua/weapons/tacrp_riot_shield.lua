@@ -16,6 +16,15 @@ SWEP.Description = "Metal-framed plastic shield, capable of stopping all incomin
 SWEP.ViewModel = "models/weapons/tacint/v_riot_shield-2.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_riot_shield_2.mdl"
 
+SWEP.BalanceStats = {
+    [TacRP.BALANCE_SBOX] = {
+        MoveSpeedMult = 0.8,
+    },
+    [TacRP.BALANCE_TTT] = {
+        MoveSpeedMult = 0.9,
+    },
+}
+
 SWEP.NoRanger = true
 SWEP.NoStatBox = true
 

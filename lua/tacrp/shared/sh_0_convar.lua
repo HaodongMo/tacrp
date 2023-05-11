@@ -319,6 +319,18 @@ local conVars = {
         client = true,
     },
 
+    {
+        name = "dev_benchgun",
+        default = "0",
+        client = true,
+        noarchive = true,
+    },
+    {
+        name = "dev_benchgun_custom",
+        default = "",
+        client = true,
+    },
+
     // --------------------------- Hints
     {
         name = "hints",
@@ -521,7 +533,7 @@ for _, var in pairs(conVars) do
     local convar_name = prefix .. var.name
 
     if var.client and CLIENT then
-        CreateClientConVar(convar_name, var.default, true, var.userinfo)
+        CreateClientConVar(convar_name, var.default, !var.noarchive, var.userinfo)
     elseif !var.client then
         local flag = FCVAR_ARCHIVE
         for k, v in pairs(flags) do if var[k] then flag = flag + v end end

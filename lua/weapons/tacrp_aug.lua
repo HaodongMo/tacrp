@@ -19,7 +19,7 @@ SWEP.Slot = 2
 
 SWEP.BalanceStats = {
     [TacRP.BALANCE_SBOX] = {
-        Damage_Max = 18,
+        Damage_Max = 20,
         Damage_Min = 12,
 
         MoveSpeedMult = 0.85,
@@ -64,7 +64,7 @@ SWEP.TTTReplace = TacRP.TTTReplacePreset.AssaultRifle
 
 // "ballistics"
 
-SWEP.Damage_Max = 16
+SWEP.Damage_Max = 18
 SWEP.Damage_Min = 10
 SWEP.Range_Min = 1800
 SWEP.Range_Max = 4000
@@ -95,7 +95,7 @@ SWEP.RPM = 900
 
 SWEP.Spread = 0.0008
 
-SWEP.PostBurstDelay = 0.15
+SWEP.PostBurstDelay = 0.12
 
 SWEP.RunawayBurst = true
 
