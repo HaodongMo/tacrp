@@ -238,12 +238,14 @@ SWEP.TryUnholster = false // if we have an "unholster" animation use it instead 
 SWEP.ShotgunReload = false
 SWEP.ShotgunThreeload = true // use those stupid 3 shot reload animations
 SWEP.ShotgunReloadCompleteStart = false // do not interrupt reload_start and instead wait for it to finish first. used on FP6 animations
+SWEP.ReloadUpInTime = nil // time to restore ammo, if unset restores at end of animation
 SWEP.ReloadTimeMult = 1
 SWEP.DeployTimeMult = 1
 SWEP.HolsterTimeMult = 1
 SWEP.DropMagazineModel = false
 SWEP.DropMagazineImpact = "pistol" // available: "pistol", "plastic", "metal", "bullet", "shotgun"
 SWEP.DropMagazineAmount = 1
+SWEP.DropMagazineTime = 0
 SWEP.MidReload = false // allow guns with "midreload" animation to continue reload after holster
 
 SWEP.DefaultBodygroups = "0000000"

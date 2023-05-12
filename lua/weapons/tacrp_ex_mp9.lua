@@ -158,6 +158,9 @@ SWEP.DropMagazineModel = "models/weapons/tacint_extras/magazines/mp9.mdl"
 SWEP.DropMagazineImpact = "plastic"
 SWEP.GestureReload = ACT_HL2MP_GESTURE_RELOAD_PISTOL
 
+SWEP.ReloadUpInTime = 1.2
+SWEP.DropMagazineTime = 0.4
+
 // sounds
 
 local path = "tacrp/weapons/mp7/mp7_"

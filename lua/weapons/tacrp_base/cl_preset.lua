@@ -40,13 +40,14 @@ function SWEP:LoadPreset(filename)
     local anyinstalled = false
 
     for i = 1, table.Count(self.Attachments) do
+        if !self.Attachments[i] then continue end
+
         local att = presetTbl[i]
         if att == "" then
             self.Attachments[i].Installed = nil
             continue
         end
 
-        if !self.Attachments[i] then continue end
 
         if att == self.Attachments[i].Installed then continue end
         if !TacRP.GetAttTable(att) then continue end

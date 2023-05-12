@@ -159,6 +159,9 @@ SWEP.HolsterAng = Angle(90, 0, 0)
 SWEP.ClipSize = 15
 SWEP.Ammo = "pistol"
 
+SWEP.ReloadUpInTime = 1
+SWEP.DropMagazineTime = 0.25
+
 SWEP.ReloadTimeMult = 1.15
 
 SWEP.DropMagazineModel = "models/weapons/tacint/magazines/vertec.mdl"

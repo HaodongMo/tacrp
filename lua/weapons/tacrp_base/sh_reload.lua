@@ -34,6 +34,12 @@ function SWEP:Reload()
             self:SetLoadedRounds(math.min(self:GetCapacity(), self:Clip1() + self:Ammo1()))
             self:DoBulletBodygroups()
         end, "SetLoadedRounds")
+        if self.ReloadUpInTime then
+            self:SetTimer(self.ReloadUpInTime * self:GetValue("ReloadTimeMult"), function()
+                self:RestoreClip(self:GetCapacity())
+                self:SetNthShot(0)
+            end, "ReloadUpIn")
+        end
     end
 
     local t = self:PlayAnimation(anim, self:GetValue("ReloadTimeMult"), true, true)
@@ -41,7 +47,9 @@ function SWEP:Reload()
     self:GetOwner():DoAnimationEvent(self:GetValue("GestureReload"))
 
     if SERVER then
-        self:DropMagazine()
+        self:SetTimer(self.DropMagazineTime * self:GetValue("ReloadTimeMult"), function()
+            self:DropMagazine()
+        end, "DropMagazine")
     end
 
     self:SetLoadedRounds(self:Clip1())
@@ -146,10 +154,12 @@ function SWEP:EndReload()
             self:DoBulletBodygroups()
         end
     else
-        self:RestoreClip(self:GetCapacity())
+        if !self.ReloadUpInTime then
+            self:RestoreClip(self:GetCapacity())
+            self:SetNthShot(0)
+        end
         self:SetReloading(false)
 
-        self:SetNthShot(0)
     end
 
     self:RunHook("Hook_EndReload")
@@ -182,6 +192,8 @@ function SWEP:CancelReload(doanims, keeptime)
         if stop then
             self:KillTimer("SetLoadedRounds")
             self:KillTimer("ShotgunRestoreClip")
+            self:KillTimer("ReloadUpIn")
+            self:KillTimer("DropMagazine")
             self:SetReloading(false)
             self:SetEndReload(false)
             self:SetNthShot(0)

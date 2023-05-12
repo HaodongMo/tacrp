@@ -169,6 +169,9 @@ SWEP.ReloadTimeMult = 1
 SWEP.DropMagazineModel = "models/weapons/tacint/magazines/skorpion.mdl"
 SWEP.DropMagazineImpact = "pistol"
 
+SWEP.ReloadUpInTime = 0.9
+SWEP.DropMagazineTime = 0.2
+
 // sounds
 
 local path = "TacRP/weapons/skorpion/"
@@ -186,7 +189,7 @@ SWEP.QCA_Muzzle = 1
 // ditto for shell
 SWEP.QCA_Eject = 2
 
-SWEP.MuzzleEffect = "muzzleflash_ak47"
+SWEP.MuzzleEffect = "muzzleflash_pistol"
 
 // anims
 

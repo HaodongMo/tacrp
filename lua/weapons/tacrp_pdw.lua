@@ -19,7 +19,7 @@ SWEP.Slot = 2
 
 SWEP.BalanceStats = {
     [TacRP.BALANCE_SBOX] = {
-        Damage_Max = 20,
+        Damage_Max = 22,
         Damage_Min = 9,
 
         MoveSpeedMult = 0.88,
@@ -98,7 +98,7 @@ SWEP.ShootTimeMult = 0.5
 
 SWEP.RecoilPerShot = 1
 SWEP.RecoilMaximum = 14
-SWEP.RecoilResetTime = 0.2 // time after you stop shooting for recoil to start dissipating
+SWEP.RecoilResetTime = 0.15 // time after you stop shooting for recoil to start dissipating
 SWEP.RecoilDissipationRate = 20
 SWEP.RecoilFirstShotMult = 1 // multiplier for the first shot's recoil amount
 
@@ -163,6 +163,9 @@ SWEP.Ammo = "smg1"
 SWEP.ReloadTimeMult = 1
 SWEP.DropMagazineModel = "models/weapons/tacint/magazines/pdw.mdl"
 SWEP.DropMagazineImpact = "plastic"
+
+SWEP.ReloadUpInTime = 1.35
+SWEP.DropMagazineTime = 0.45
 
 // sounds
 

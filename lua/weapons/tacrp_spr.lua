@@ -186,7 +186,10 @@ SWEP.Ammo = "SniperPenetratedRound"
 
 SWEP.ReloadTimeMult = 1
 SWEP.ShootTimeMult = 0.75
-SWEP.DropMagazineModel = false
+SWEP.DropMagazineModel = "models/weapons/tacint/magazines/uratio.mdl" // why doesn't it have its own mag model?
+
+SWEP.ReloadUpInTime = 2.1
+SWEP.DropMagazineTime = 1.4
 
 // sounds
 

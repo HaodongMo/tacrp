@@ -157,6 +157,9 @@ SWEP.ReloadTimeMult = 1
 SWEP.DropMagazineModel = "models/weapons/tacint/magazines/p90.mdl"
 SWEP.DropMagazineImpact = "plastic"
 
+SWEP.ReloadUpInTime = 1.85
+SWEP.DropMagazineTime = 0.55
+
 // sounds
 
 local path = "tacrp/weapons/p90/"

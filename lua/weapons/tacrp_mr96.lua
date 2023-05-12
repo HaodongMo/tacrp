@@ -158,6 +158,8 @@ SWEP.Ammo = "357"
 
 SWEP.ReloadTimeMult = 1
 
+SWEP.ReloadUpInTime = 1.35
+
 // sounds
 
 local path = "TacRP/weapons/mr96/"

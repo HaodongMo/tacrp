@@ -19,10 +19,10 @@ SWEP.Slot = 1
 
 SWEP.BalanceStats = {
     [TacRP.BALANCE_SBOX] = {
-        Damage_Max = 24,
-        Damage_Min = 5,
+        Damage_Max = 26,
+        Damage_Min = 6,
 
-        RecoilSpreadPenalty = 0.005,
+        RecoilSpreadPenalty = 0.004,
         HipFireSpreadPenalty = 0.025,
         RecoilKick = 8,
 
@@ -167,6 +167,9 @@ SWEP.ReloadTimeMult = 1
 SWEP.DropMagazineModel = "models/weapons/tacint/magazines/p250.mdl"
 SWEP.DropMagazineImpact = "pistol"
 
+SWEP.ReloadUpInTime = 1
+SWEP.DropMagazineTime = 0.3
+
 // sounds
 
 local path = "tacrp/weapons/xd45/"
@@ -182,7 +185,7 @@ SWEP.ShootPitchVariance = 2.5 // amount to vary pitch by each shot
 // the .qc attachment for the muzzle
 SWEP.QCA_Muzzle = 1
 
-SWEP.MuzzleEffect = "muzzleflash_pistol"
+SWEP.MuzzleEffect = "muzzleflash_1"
 
 // anims
 

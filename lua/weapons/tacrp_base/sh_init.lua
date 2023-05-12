@@ -106,11 +106,16 @@ function SWEP:Holster(wep)
 
     self:SetCustomize(false)
 
-    if self:GetReloading() and self:GetValue("ShotgunReload") then
-        self:SetEndReload(false)
-        self:SetReloading(false)
-        self:KillTimer("ShotgunRestoreClip")
+    if self:GetReloading() then
+        if self:GetValue("ShotgunReload") then
+            self:SetEndReload(false)
+            self:SetReloading(false)
+            self:KillTimer("ShotgunRestoreClip")
+        else
+            self:CancelReload(false)
+        end
     end
+
 
     if self:GetHolsterTime() > CurTime() then return false end -- or self:GetPrimedGrenade()
 

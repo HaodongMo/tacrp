@@ -97,21 +97,21 @@ SWEP.Firemodes = {
 
 SWEP.RPM = 750
 
-SWEP.Spread = 0.0015
+SWEP.Spread = 0.001
 
 SWEP.ShootTimeMult = 0.5
 
 SWEP.RecoilPerShot = 1
-SWEP.RecoilMaximum = 8
-SWEP.RecoilResetTime = 0.1// time after you stop shooting for recoil to start dissipating
-SWEP.RecoilDissipationRate = 12
-SWEP.RecoilFirstShotMult = 0.85
+SWEP.RecoilMaximum = 12
+SWEP.RecoilResetTime = 0.12  // time after you stop shooting for recoil to start dissipating
+SWEP.RecoilDissipationRate = 16
+SWEP.RecoilFirstShotMult = 0.75
 
 SWEP.RecoilVisualKick = 0.5
 
 SWEP.RecoilKick = 2.5
 
-SWEP.RecoilSpreadPenalty = 0.003
+SWEP.RecoilSpreadPenalty = 0.0022
 SWEP.HipFireSpreadPenalty = 0.025
 
 SWEP.CanBlindFire = true
@@ -167,6 +167,9 @@ SWEP.Ammo = "pistol"
 SWEP.ReloadTimeMult = 1
 SWEP.DropMagazineModel = "models/weapons/tacint/magazines/mp5.mdl"
 SWEP.DropMagazineImpact = "plastic"
+
+SWEP.ReloadUpInTime = 1.55
+SWEP.DropMagazineTime = 1
 
 // sounds
 

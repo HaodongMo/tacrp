@@ -19,8 +19,8 @@ SWEP.Slot = 2
 
 SWEP.BalanceStats = {
     [TacRP.BALANCE_SBOX] = {
-        Damage_Max = 10,
-        Damage_Min = 3,
+        Damage_Max = 15,
+        Damage_Min = 6,
 
         Range_Min = 200,
         Range_Max = 3500,
@@ -171,6 +171,9 @@ SWEP.Ammo = "pistol"
 SWEP.ReloadTimeMult = 1
 SWEP.DropMagazineModel = "models/weapons/tacint/magazines/superv.mdl"
 SWEP.DropMagazineImpact = "pistol"
+
+SWEP.ReloadUpInTime = 1.3
+SWEP.DropMagazineTime = 0.4
 
 // sounds
 
