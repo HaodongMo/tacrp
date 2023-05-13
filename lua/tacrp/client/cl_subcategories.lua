@@ -26,6 +26,9 @@ hook.Add("PopulateWeapons", "zzz_TacRP_SubCategories", function(pnlContent, tree
             if cvar == 2 then
                 if (WepTable != nil && WepTable.SubCatTier != nil) then
                     SubCategory = WepTable.SubCatTier
+                    if SubCategory == "9Special" then
+                        SubCategory = WepTable.SubCatType
+                    end
                     if (!isstring(SubCategory)) then
                         SubCategory = tostring(SubCategory)
                     end

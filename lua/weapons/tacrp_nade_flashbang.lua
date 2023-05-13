@@ -7,7 +7,7 @@ SWEP.IconOverride = "entities/tacrp_ammo_flashbang.png"
 
 // names and stuff
 SWEP.PrintName = "Flashbang"
-SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
+SWEP.Category = "Tactical RP (Special)" // "Tactical RP (Arctic)"
 
 SWEP.ViewModel = "models/weapons/cstrike/c_eq_flashbang.mdl"
 SWEP.WorldModel = "models/weapons/w_eq_flashbang.mdl"

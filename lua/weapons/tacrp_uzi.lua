@@ -7,7 +7,7 @@ AddCSLuaFile()
 SWEP.PrintName = "IMI Mini Uzi"
 SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 
-SWEP.SubCatTier = "3Security"
+SWEP.SubCatTier = "2Operator"
 SWEP.SubCatType = "2Machine Pistol"
 
 SWEP.Description = "Balanced machine pistol with a controllable rate of fire."
@@ -60,8 +60,8 @@ SWEP.TTTReplace = TacRP.TTTReplacePreset.MachinePistol
 
 // "ballistics"
 
-SWEP.Damage_Max = 16
-SWEP.Damage_Min = 6
+SWEP.Damage_Max = 20
+SWEP.Damage_Min = 9
 SWEP.Range_Min = 800 // distance for which to maintain maximum damage
 SWEP.Range_Max = 2500 // distance at which we drop to minimum damage
 SWEP.Penetration = 4 // units of metal this weapon can penetrate
@@ -89,21 +89,21 @@ SWEP.Firemodes = {
 
 SWEP.RPM = 950
 
-SWEP.Spread = 0.01
-SWEP.RecoilSpreadPenalty = 0.002
+SWEP.Spread = 0.008
+SWEP.RecoilSpreadPenalty = 0.0018
 SWEP.HipFireSpreadPenalty = 0.01
 
 SWEP.ShootTimeMult = 0.5
 
 SWEP.RecoilPerShot = 1
-SWEP.RecoilMaximum = 20
+SWEP.RecoilMaximum = 18
 SWEP.RecoilResetTime = 0.12 // time after you stop shooting for recoil to start dissipating
-SWEP.RecoilDissipationRate = 25
+SWEP.RecoilDissipationRate = 24
 SWEP.RecoilFirstShotMult = 1 // multiplier for the first shot's recoil amount
 
 SWEP.RecoilVisualKick = 1
 
-SWEP.RecoilKick = 4
+SWEP.RecoilKick = 3.5
 
 SWEP.CanBlindFire = true
 

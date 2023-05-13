@@ -21,6 +21,7 @@ SWEP.BalanceStats = {
     [TacRP.BALANCE_SBOX] = {
         Damage_Max = 24,
         Damage_Min = 12,
+        RPM = 700,
 
         Spread = 0.025,
 
@@ -64,8 +65,8 @@ SWEP.TTTReplace = {["weapon_zm_pistol"] = 0.5, ["weapon_ttt_glock"] = 0.5}
 
 // "ballistics"
 
-SWEP.Damage_Max = 20
-SWEP.Damage_Min = 10
+SWEP.Damage_Max = 28
+SWEP.Damage_Min = 15
 SWEP.Range_Min = 1000 // distance for which to maintain maximum damage
 SWEP.Range_Max = 3000 // distance at which we drop to minimum damage
 SWEP.Penetration = 1 // units of metal this weapon can penetrate
@@ -89,9 +90,9 @@ SWEP.BodyDamageMultipliers = {
 SWEP.Firemodes = {-2}
 SWEP.Firemode = -2
 
-SWEP.RPM = 700
+SWEP.RPM = 750
 
-SWEP.Spread = 0.02
+SWEP.Spread = 0.015
 
 SWEP.MoveSpreadPenalty = 0
 SWEP.MidAirSpreadPenalty = 0.08
