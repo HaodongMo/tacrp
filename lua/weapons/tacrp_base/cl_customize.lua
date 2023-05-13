@@ -8,6 +8,7 @@ local enable_armor = false
 local armor = Material("tacrp/hud/armor.png", "mip smooth")
 
 local body = Material("tacrp/hud/body.png", "mips smooth")
+local lock = Material("tacrp/hud/mark_lock.png", "mips smooth")
 
 local body_head = Material("tacrp/hud/body_head.png", "mips smooth")
 local body_chest = Material("tacrp/hud/body_chest.png", "mips smooth")
@@ -1370,39 +1371,33 @@ function SWEP:CreateCustomizeHUD()
                         surface.DrawLine(rx, ry + gap, rx + bw, ry + gap)
                     end
 
+                    local can, reason = TacRP.CanCustomize(self:GetOwner(), self, att, attslot)
+                    if !can then
+                        reason = reason or "Restricted"
+                        local reasonx, reasonw = rx + ScreenScale(14), bw - ScreenScale(14)
+                        surface.SetDrawColor(25, 0, 0, 240)
+                        TacRP.DrawCorneredBox(reasonx, ry + bump, reasonw, ScreenScale(12), col_text_con)
+                        surface.SetFont("TacRP_Myriad_Pro_12")
+                        if flash_end > CurTime() then
+                            local c = 255 - (flash_end - CurTime()) * 255
+                            surface.SetTextColor(255, c, c)
+                            surface.SetDrawColor(255, c, c)
+                        else
+                            surface.SetTextColor(255, 255, 255)
+                            surface.SetDrawColor(255, 255, 255)
+                        end
+
+                        surface.SetMaterial(lock)
+                        surface.DrawTexturedRect(rx, ry + bump, ScreenScale(12), ScreenScale(12))
+
+                        local tw = surface.GetTextSize(reason)
+                        surface.SetTextPos(reasonx + reasonw / 2 - tw / 2, ry + bump)
+                        surface.DrawText(reason)
+                    end
+
                     DisableClipping(todo)
                 end
             end
-        end
-    end
-
-    if GetConVar("tacrp_rp_requirebench"):GetBool() then
-        local slot_name = vgui.Create("DPanel", bg)
-        slot_name:SetPos(ScrW() / 2 - ScreenScale(64 + 8), ScreenScale(16))
-        slot_name:SetSize(ScreenScale(128 + 16), ScreenScale(12))
-        slot_name.Paint = function(self2, w, h)
-            if !IsValid(self) then return end
-
-            surface.SetDrawColor(0, 0, 0, 150)
-            surface.DrawRect(0, 0, w, h)
-            TacRP.DrawCorneredBox(0, 0, w, h)
-
-            local txt = "Requires Customization Bench"
-            if TacRP.NearBench(LocalPlayer()) then
-                txt = "Able to customize"
-                surface.SetTextColor(bench_have)
-            else
-                if flash_end > CurTime() then
-                    local c = 255 - (flash_end - CurTime()) * 255
-                    surface.SetTextColor(255, c, c)
-                else
-                    surface.SetTextColor(255, 255, 255)
-                end
-            end
-            surface.SetFont("TacRP_Myriad_Pro_12")
-            local tw, th = surface.GetTextSize(txt)
-            surface.SetTextPos(w / 2 - tw / 2, 0)
-            surface.DrawText(txt)
         end
     end
 end

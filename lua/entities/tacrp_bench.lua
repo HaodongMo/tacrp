@@ -6,7 +6,7 @@ ENT.RenderGroup              = RENDERGROUP_BOTH
 ENT.PrintName                = "Customization Bench"
 ENT.Category                 = "Tactical RP"
 
-ENT.Spawnable                = false
+ENT.Spawnable                = true
 ENT.Model                    = "models/props_canal/winch02.mdl"
 
 function ENT:Initialize()
@@ -18,6 +18,7 @@ function ENT:Initialize()
         self:PhysicsInit(SOLID_VPHYSICS)
         self:SetMoveType(MOVETYPE_VPHYSICS)
         self:SetSolid(SOLID_VPHYSICS)
+        self:SetCollisionGroup(COLLISION_GROUP_WEAPON)
         self:SetUseType(SIMPLE_USE)
         self:PhysWake()
     end
@@ -26,7 +27,7 @@ function ENT:Initialize()
     table.insert(TacRP.Benches, self)
 end
 
-local font = "TacRP_Myriad_Pro_48_Unscaled"
+local font = "TacRP_Myriad_Pro_24_Unscaled"
 
 function ENT:DrawTranslucent()
 
@@ -46,11 +47,18 @@ function ENT:DrawTranslucent()
         pos = pos + ang:Right() * -33
 
         cam.Start3D2D(pos, ang, 0.075)
-            surface.SetFont("TacRP_LondonBetween_48_Unscaled")
+            surface.SetFont(font)
             local w = surface.GetTextSize(self.PrintName)
             surface.SetTextPos(-w / 2, 0)
-            surface.SetTextColor(255, 255, 255, a * 255)
+            surface.SetTextColor(255, 255, 255)
             surface.DrawText(self.PrintName)
+            if distsqr <= 16384 then
+                local t2 = "READY"
+                local w2 = surface.GetTextSize(t2)
+                surface.SetTextPos(-w2 / 2, 30)
+                surface.SetTextColor(100, 255, 100)
+                surface.DrawText(t2)
+            end
         cam.End3D2D()
     end
 end

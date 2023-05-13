@@ -136,22 +136,44 @@ TacRP.Benches = ents.FindByClass("tacrp_bench") or {}
 TacRP.BenchDistSqr = 128 * 128
 
 function TacRP.NearBench(ply)
-    if GetConVar("tacrp_rp_requirebench"):GetBool() then
-        local nearbench = false
-        for i, ent in pairs(TacRP.Benches) do
-            if !IsValid(ent) then table.remove(TacRP.Benches, i) continue end
-            if ent:GetPos():DistToSqr(ply:GetPos()) <= TacRP.BenchDistSqr then
-                nearbench = true
-                break
-            end
+    local nearbench = false
+    for i, ent in pairs(TacRP.Benches) do
+        if !IsValid(ent) then table.remove(TacRP.Benches, i) continue end
+        if ent:GetPos():DistToSqr(ply:GetPos()) <= TacRP.BenchDistSqr then
+            nearbench = true
+            break
         end
-        if !nearbench then return false end
     end
+    if !nearbench then return false end
     return true
 end
 
 function TacRP.CanCustomize(ply, wep, att, slot)
-    if !TacRP.NearBench(ply) then return false end
+
+    if engine.ActiveGamemode() == "terrortown" then
+        local role = ply:GetTraitor() or ply:IsDetective()
+
+        // disabled across role
+        if (role and !GetConVar("tacrp_ttt_cust_role_allow"):GetBool()) or (!role and !GetConVar("tacrp_ttt_cust_inno_allow"):GetBool()) then
+            return false, "Restricted for role"
+        end
+
+        // disabled during round
+        if GetRoundState() == ROUND_ACTIVE and ((role and !GetConVar("tacrp_ttt_cust_role_round"):GetBool()) or (!role and !GetConVar("tacrp_ttt_cust_inno_round"):GetBool())) then
+            return false, "Restricted during round"
+        end
+
+        // disabled when not near bench
+        if ((role and GetConVar("tacrp_ttt_cust_role_needbench"):GetBool()) or (!role and GetConVar("tacrp_ttt_cust_inno_needbench"):GetBool())) and !TacRP.NearBench(ply) then
+            return false, "Requires Customization Bench"
+        end
+    else
+        // check bench
+        if GetConVar("tacrp_rp_requirebench"):GetBool() and !TacRP.NearBench(ply) then
+            return false, "Restricted during round"
+        end
+    end
+
     return true
 end
 
