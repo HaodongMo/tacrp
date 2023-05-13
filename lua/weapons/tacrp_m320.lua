@@ -265,11 +265,12 @@ SWEP.AutoSpawnable = false
 
 if engine.ActiveGamemode() == "terrortown" then
     SWEP.AutoSpawnable = false
-    SWEP.Kind = WEAPON_EQUIP2
+    SWEP.Kind = WEAPON_EQUIP
+    SWEP.Slot  = 6
     SWEP.CanBuy = { ROLE_TRAITOR }
     SWEP.EquipMenuData = {
         type = "Weapon",
-        desc = "Grenade launcher with many payload options.\nComes with 3 grenades.\n\nBeware: Others may be able to see this weapon\neven if you have it holstered!",
+        desc = "Low power grenade launcher. Variety of payload\noptions, but standard explosive grenades are weak.\nComes with 3 grenades.\n\nBEWARE: May be visible while holstered!",
     }
 
     function SWEP:TTTBought(buyer)

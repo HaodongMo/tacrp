@@ -100,6 +100,9 @@ function ENT:Initialize()
     self.dt = CurTime() + self.Life + self.BillowTime
 end
 
+local threshold = engine.ActiveGamemode() == "terrortown" and 60 or 25
+
+
 function ENT:Think()
 
     if SERVER then
@@ -143,6 +146,7 @@ function ENT:Think()
                 k:TakeDamageInfo(dmg)
                 if k:IsPlayer() then
                     k:ScreenFade( SCREENFADE.IN, Color(125, 150, 50, 100), 2 * delta, 0 )
+                    k:ViewPunch(Angle(math.Rand(-1, 1), math.Rand(-1, 1), math.Rand(-1, 1)))
 
                     local timername = "tacrp_gas_" .. k:EntIndex()
                     local reps = 6
@@ -151,16 +155,16 @@ function ENT:Think()
                         reps = math.Clamp(timer.RepsLeft(timername) + 3, reps, 20)
                         timer.Remove(timername)
                     end
-                    timer.Create(timername, 1.5, reps, function()
-                        if !IsValid(k) or !k:Alive() then
+                    timer.Create(timername, engine.ActiveGamemode() == "terrortown" and 5 or 1.5, reps, function()
+                        if !IsValid(k) or !k:Alive() or (engine.ActiveGamemode() == "terrortown" and (GetRoundState() == ROUND_PREP or GetRoundState() == ROUND_POST)) then
                             timer.Remove(timername)
                             return
                         end
-                        k:ScreenFade( SCREENFADE.IN, Color(125, 150, 50, 5), 0.1, 0 )
-                        if k:Health() > 1 then
+                        k:ScreenFade( SCREENFADE.IN, Color(125, 150, 50, 3), 0.1, 0 )
+                        if k:Health() > threshold then
                             local d = DamageInfo()
                             d:SetDamageType(DMG_NERVEGAS)
-                            d:SetDamage(math.random(1, 2))
+                            d:SetDamage(1)
                             d:SetInflictor(IsValid(self) and self or o)
                             d:SetAttacker(o)
                             d:SetDamageForce(k:GetForward())
@@ -170,12 +174,12 @@ function ENT:Think()
                         else
                             k:ViewPunch(Angle(math.Rand(-2, 2), 0, 0))
                         end
-                        if math.random() <= 0.3 then
+                        if engine.ActiveGamemode() == "terrortown" or math.random() <= 0.333 then
                             k:EmitSound("ambient/voices/cough" .. math.random(1, 4) .. ".wav", 80, math.Rand(95, 105))
                         end
                     end)
 
-                    if math.random() <= 0.3 then
+                    if engine.ActiveGamemode() == "terrortown" or math.random() <= 0.333 then
                         k:EmitSound("ambient/voices/cough" .. math.random(1, 4) .. ".wav", 80, math.Rand(95, 105))
                     end
                 end
@@ -202,8 +206,8 @@ hook.Add("EntityTakeDamage", "tacrp_gas", function(ent, dmg)
         local wep = ent:GetActiveWeapon()
         if IsValid(wep) and wep.ArcticTacRP and wep:GetValue("GasImmunity") then
             dmg:SetDamage(0)
-        elseif ent:Health() <= dmg:GetDamage() then
-            dmg:SetDamage(math.max(0, ent:Health() - 1))
+        elseif ent:Health() - dmg:GetDamage() <= threshold then
+            dmg:SetDamage(math.max(0, ent:Health() - threshold))
         end
         if dmg:GetDamage() <= 0 then return true end
     end

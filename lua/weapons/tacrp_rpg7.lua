@@ -221,11 +221,13 @@ addsound("TacInt_rpg7.flipup_sight", path .. "flipup_sight.wav")
 
 if engine.ActiveGamemode() == "terrortown" then
     SWEP.AutoSpawnable = false
-    SWEP.Kind = WEAPON_EQUIP2
+    SWEP.Kind = WEAPON_EQUIP
+    SWEP.Slot  = 6
     SWEP.CanBuy = { ROLE_TRAITOR }
+    SWEP.LimitedStock = true
     SWEP.EquipMenuData = {
         type = "Weapon",
-        desc = "Powerful rocket launcher, cannot detonate at point blank.\nComes with 2 rockets.\n\nBeware: Others may be able to see this weapon\neven if you have it holstered!",
+        desc = "Rocket launcher. Can't explode at point blank.\nComes with 2 rockets.\n\nBEWARE: May be visible while holstered!",
     }
 
     function SWEP:TTTBought(buyer)

@@ -12,4 +12,4 @@ ATT.Override_HolsterVisible = false
 
 // ATT.Mult_DeployTimeMult = 1.25
 
-ATT.Ignore = true
+ATT.Ignore = engine.ActiveGamemode() != "terrortown"

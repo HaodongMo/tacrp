@@ -103,7 +103,6 @@ function ENT:OnTakeDamage(dmg)
     if self.ExplodeOnDamage then
         if IsValid(self:GetOwner()) and IsValid(dmg:GetAttacker()) then self:SetOwner(dmg:GetAttacker())
         else self.Attacker = dmg:GetAttacker() or self.Attacker end
-
         self:PreDetonate()
     elseif self.DefuseOnDamage and dmg:GetDamageType() != DMG_BLAST then
         self:EmitSound("physics/plastic/plastic_box_break" .. math.random(1, 2) .. ".wav", 75, math.Rand(95, 105))
@@ -148,7 +147,7 @@ function ENT:PhysicsCollide(data, collider)
             self:SetPos(data.HitPos)
             self:PreDetonate()
         end
-    elseif IsValid(data.HitEntity) then
+    elseif IsValid(data.HitEntity) and (engine.ActiveGamemode() != "terrortown" or !data.HitEntity:IsPlayer()) then
         local dmg = DamageInfo()
         dmg:SetAttacker(IsValid(self:GetOwner()) and self:GetOwner() or self.Attacker)
         dmg:SetInflictor(self)

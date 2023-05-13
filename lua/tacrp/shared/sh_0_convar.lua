@@ -319,6 +319,7 @@ local conVars = {
         client = true,
     },
 
+
     {
         name = "dev_benchgun",
         default = "0",
@@ -517,6 +518,14 @@ local conVars = {
         default = "0",
         notify = true,
         replicated = true,
+        min = 0,
+        max = 1,
+    },
+    {
+        name = "ttt_shortname",
+        default = "1",
+        replicated = true,
+        notify = true,
         min = 0,
         max = 1,
     },

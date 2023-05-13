@@ -78,6 +78,10 @@ function SWEP:Melee(alt)
     dmginfo:SetDamageForce(dir * dmg * 500)
     dmginfo:SetDamagePosition(tr.HitPos)
     dmginfo:SetDamageType(self:GetValue("MeleeDamageType"))
+    if dmginfo:GetDamageType() == DMG_GENERIC and engine.ActiveGamemode() == "terrortown" then
+        dmginfo:SetDamageType(DMG_CLUB) -- use CLUB so TTT can assign DNA (it does not leave DNA on generic damage)
+    end
+
     dmginfo:SetAttacker(self:GetOwner())
     dmginfo:SetInflictor(self)
 

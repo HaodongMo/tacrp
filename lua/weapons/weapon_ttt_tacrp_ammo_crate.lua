@@ -26,7 +26,7 @@ Can be checked for DNA samples of its users.]])
       desc = "tacrp_ammocrate_desc"
    };
 
-   SWEP.Icon                = "entities/tacrp_ammo_crate.png"
+   SWEP.Icon                = "vgui/ttt/tacrp_ammo_crate"
 end
 
 SWEP.Base                   = "weapon_tttbase"
@@ -49,7 +49,7 @@ SWEP.Secondary.Delay        = 1.0
 -- This is special equipment
 SWEP.Kind                   = WEAPON_EQUIP
 SWEP.CanBuy                 = {ROLE_DETECTIVE, ROLE_TRAITOR}
-SWEP.LimitedStock           = true -- only buyable once
+SWEP.LimitedStock           = false -- only buyable once
 
 SWEP.AllowDrop              = false
 SWEP.NoSights               = true

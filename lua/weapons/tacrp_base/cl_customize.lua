@@ -88,7 +88,7 @@ function SWEP:CreateCustomizeHUD()
             return
         end
 
-        local name_txt = self:GetValue("PrintName")
+        local name_txt = self:GetValue("FullName") or self:GetValue("PrintName")
 
         surface.SetFont("TacRP_Myriad_Pro_32")
         local name_w = surface.GetTextSize(name_txt)

@@ -11,7 +11,7 @@ SWEP.Category = "Tactical RP (Special)"
 SWEP.SubCatTier = "9Special"
 SWEP.SubCatType = "9Equipment"
 
-SWEP.Description = "Compact pack of medical supplies for fixing anything from gunshot wounds to broken bones and bruises. Supplies regenerate over time."
+SWEP.Description = "Compact pack of medical supplies for treating wounds.\nCan self heal, but is more effective when used on others.\nSupplies regenerate over time."
 
 SWEP.ViewModel = "models/weapons/tacint/v_medkit.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_medkit.mdl"
@@ -237,7 +237,7 @@ function SWEP:Initialize()
 
     self:SetCharge(false)
 
-    timer.Create("medkit_ammo" .. self:EntIndex(), 1, 0, function()
+    timer.Create("medkit_ammo" .. self:EntIndex(), ent.ActiveGamemode() == "terrortown" and 2 or 1, 0, function()
         if !IsValid(self) then
             if self.LoopSound then
                 self.LoopSound:Stop()
@@ -259,15 +259,17 @@ function SWEP:Initialize()
 end
 
 if engine.ActiveGamemode() == "terrortown" then
+    SWEP.HolsterVisible = false
     SWEP.AutoSpawnable = false
     SWEP.Kind = WEAPON_EQUIP2
+    SWEP.Slot  = 6
     SWEP.CanBuy = { ROLE_DETECTIVE, ROLE_TRAITOR }
+    SWEP.LimitedStock = true
     SWEP.EquipMenuData = {
         type = "Weapon",
         desc = "Medical supplies for treating wounds.\nMore efficient when used on others.\nCharge regenrates slowly while weapon is out.",
     }
 
     function SWEP:TTTBought(buyer)
-        buyer:GiveAmmo(2, "SMG1_Grenade")
     end
 end

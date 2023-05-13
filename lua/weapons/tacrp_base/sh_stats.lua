@@ -4,6 +4,7 @@ SWEP.StatScoreCache = {} -- used by cust menu
 SWEP.MiscCache = {}
 
 SWEP.ExcludeFromRawStats = {
+    ["FullName"] = true,
     ["PrintName"] = true,
     ["Description"] = true,
 }

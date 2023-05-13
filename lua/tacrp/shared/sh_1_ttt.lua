@@ -96,6 +96,11 @@ local function setupttt()
             continue
         end
 
+        if GetConVar("tacrp_ttt_shortname"):GetBool() and wep.AbbrevName then
+            wep.FullName = wep.PrintName
+            wep.PrintName = wep.AbbrevName
+        end
+
         if wep.AmmoTTT then
             wep.Ammo = wep.AmmoTTT
         elseif TacRP.AmmoToTTT[wep.Ammo] then
@@ -164,6 +169,10 @@ local function setupttt()
             wep.Icon = "entities/npc_headcrab.png"
         end
 
+        if CLIENT then
+            local lang = TTT2 and "en" or "english"
+            LANG.AddToLanguage(lang, "tacrp_search_dmg_buckshot", "This terrorist was blasted to shreds by buckshot.")
+        end
     end
 end
 hook.Add("OnGamemodeLoaded", "TacRP_TTT", setupttt)

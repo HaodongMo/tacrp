@@ -32,7 +32,11 @@ function ENT:Detonate()
 
     local mult = self.NPCDamage and 0.25 or 1
 
-    util.BlastDamage(self, attacker, self:GetPos(), 160, 80 * mult)
+    if engine.ActiveGamemode() == "terrortown" then
+        util.BlastDamage(self, attacker, self:GetPos(), 150, 15)
+    else
+        util.BlastDamage(self, attacker, self:GetPos(), 160, 80 * mult)
+    end
 
     local fx = EffectData()
     fx:SetOrigin(self:GetPos())

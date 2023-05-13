@@ -21,7 +21,7 @@ SWEP.BalanceStats = {
         MoveSpeedMult = 0.8,
     },
     [TacRP.BALANCE_TTT] = {
-        MoveSpeedMult = 0.9,
+        MoveSpeedMult = 0.75,
     },
 }
 
@@ -295,7 +295,6 @@ hook.Add("EntityTakeDamage", "TacRP_RiotShield", function(ent, dmginfo)
     and ((dmginfo:GetDamagePosition() - ent:EyePos()):GetNormalized():Dot(ent:EyeAngles():Forward()) < 0.5) then return end
     if dmginfo:IsExplosionDamage() or dmginfo:GetInflictor():GetClass() == "entityflame" then return end
 
-    -- block melee... kind of
     if dmginfo:IsDamageType(DMG_GENERIC) or dmginfo:IsDamageType(DMG_CLUB) or dmginfo:IsDamageType(DMG_CRUSH) or dmginfo:IsDamageType(DMG_SLASH) or dmginfo:GetDamageType() == 0 then
         return true
     end
@@ -304,3 +303,20 @@ hook.Add("EntityTakeDamage", "TacRP_RiotShield", function(ent, dmginfo)
 end)
 
 SWEP.AutoSpawnable = false
+
+
+if engine.ActiveGamemode() == "terrortown" then
+    SWEP.Kind = WEAPON_EQUIP2
+    SWEP.Slot  = 6
+    SWEP.CanBuy = { ROLE_DETECTIVE, ROLE_TRAITOR }
+    SWEP.LimitedStock = true
+    SWEP.HolsterVisible = false
+    SWEP.EquipMenuData = {
+        type = "Weapon",
+        desc = "Blocks bullets and melee attacks from the front.\nSlows the user while held.",
+    }
+
+    function SWEP:TTTBought(buyer)
+        buyer:GiveAmmo(1, "RPG_Round")
+    end
+end

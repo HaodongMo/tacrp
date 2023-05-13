@@ -334,6 +334,7 @@ function SWEP:PrimaryAttack()
             damage:SetDamageForce(dir:Forward() * self:GetValue("Num"))
 
             damage:ScaleDamage(self:GetBodyDamageMultipliers()[HITGROUP_HEAD])
+            -- self:GetOwner():SetLastHitGroup(HITGROUP_HEAD)
 
             self:GetOwner():TakeDamageInfo(damage)
         end)
@@ -447,7 +448,7 @@ function SWEP:AfterShotFunction(tr, dmg, range, penleft, alreadypenned, forced)
     end
 
     if self:IsShotgun() then
-        dmg:SetDamageType(DMG_BUCKSHOT)
+        dmg:SetDamageType(DMG_BUCKSHOT + (engine.ActiveGamemode() == "terrortown" and DMG_BULLET or 0))
     end
 
     if SERVER and IsValid(tr.Entity) and !tr.Entity.TacRP_DoorBusted
