@@ -206,12 +206,12 @@ function TacRP.CreateNewsPanel(open)
         is_workshop = steamworks.ShouldMountAddon(2588031232)
     end)
 
-    local w_news, h_news = ScreenScale(384), ScreenScale(256)
+    local w_news, h_news = TacRP.SS(384), TacRP.SS(256)
 
-    local h_bottom = ScreenScale(8)
-    local h_title = ScreenScale(24)
-    local w_list = ScreenScale(96)
-    local h_entry = ScreenScale(18)
+    local h_bottom = TacRP.SS(8)
+    local h_title = TacRP.SS(24)
+    local w_list = TacRP.SS(96)
+    local h_entry = TacRP.SS(18)
 
     TacRP.NewsPanel = vgui.Create("DFrame")
     TacRP.NewsPanel:SetTitle("")
@@ -225,8 +225,8 @@ function TacRP.CreateNewsPanel(open)
     end
 
     local close = vgui.Create("DButton", TacRP.NewsPanel)
-    close:SetSize(ScreenScale(8), ScreenScale(8))
-    close:SetPos(w_news - ScreenScale(10), 0)
+    close:SetSize(TacRP.SS(8), TacRP.SS(8))
+    close:SetPos(w_news - TacRP.SS(10), 0)
     close:SetText("")
     function close.Paint(self, w, h)
         local c_bg, c_cnr, c_txt = TacRP.GetPanelColors(self:IsHovered() and !self:IsDown(), self:IsDown())
@@ -240,8 +240,8 @@ function TacRP.CreateNewsPanel(open)
     end
 
     local cvarbox = vgui.Create("DCheckBox", TacRP.NewsPanel)
-    cvarbox:SetSize(ScreenScale(8), ScreenScale(8))
-    cvarbox:SetPos(ScreenScale(2), 0)
+    cvarbox:SetSize(TacRP.SS(8), TacRP.SS(8))
+    cvarbox:SetPos(TacRP.SS(2), 0)
     cvarbox:SetText("")
     cvarbox:SetConVar("tacrp_news_majoronly")
     function cvarbox.Paint(self, w, h)
@@ -254,8 +254,8 @@ function TacRP.CreateNewsPanel(open)
         end
     end
     local cvarback = vgui.Create("DPanel", TacRP.NewsPanel)
-    cvarback:SetPos(ScreenScale(11), 0)
-    cvarback:SetSize(ScreenScale(110), ScreenScale(8))
+    cvarback:SetPos(TacRP.SS(11), 0)
+    cvarback:SetSize(TacRP.SS(110), TacRP.SS(8))
     function cvarback.Paint(self, w, h)
         surface.SetDrawColor(0, 0, 0, 100)
         surface.DrawRect(0, 0, w, h)
@@ -264,7 +264,7 @@ function TacRP.CreateNewsPanel(open)
         draw.SimpleText("Only notify on major news/updates", "TacRP_Myriad_Pro_8", w / 2, h / 2, color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
     end
 
-    local y_title = ScreenScale(2)
+    local y_title = TacRP.SS(2)
     local title = vgui.Create("DPanel", TacRP.NewsPanel)
     title:SetSize(w_news, h_title)
     title:Dock(TOP)
@@ -273,7 +273,7 @@ function TacRP.CreateNewsPanel(open)
         surface.SetDrawColor(c_bg)
         surface.DrawRect(0, y_title, w, h - y_title)
         TacRP.DrawCorneredBox(0, y_title, w, h - y_title)
-        draw.SimpleText("Tactical RP Newsletter", "TacRP_Myriad_Pro_20", w / 2, ScreenScale(2), color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_TOP)
+        draw.SimpleText("Tactical RP Newsletter", "TacRP_Myriad_Pro_20", w / 2, TacRP.SS(2), color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_TOP)
     end
 
     local bottom = vgui.Create("DPanel", TacRP.NewsPanel)
@@ -293,17 +293,17 @@ function TacRP.CreateNewsPanel(open)
         end
 
         if text then
-            draw.SimpleText(text, "TacRP_Myriad_Pro_6", ScreenScale(4), h / 2, color_white, TEXT_ALIGN_LEFT, TEXT_ALIGN_CENTER)
+            draw.SimpleText(text, "TacRP_Myriad_Pro_6", TacRP.SS(4), h / 2, color_white, TEXT_ALIGN_LEFT, TEXT_ALIGN_CENTER)
         end
 
-        draw.SimpleText("GMod Branch: " .. tostring(BRANCH), "TacRP_Myriad_Pro_6", w - ScreenScale(4), h / 2, color_white, TEXT_ALIGN_RIGHT, TEXT_ALIGN_CENTER)
+        draw.SimpleText("GMod Branch: " .. tostring(BRANCH), "TacRP_Myriad_Pro_6", w - TacRP.SS(4), h / 2, color_white, TEXT_ALIGN_RIGHT, TEXT_ALIGN_CENTER)
 
         draw.SimpleText(TacRP.NewsResult, "TacRP_Myriad_Pro_6", w  / 2, h / 2, color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
     end
 
     local newspanel = vgui.Create("DScrollPanel", TacRP.NewsPanel)
     newspanel:SetSize(w_list, h_news - h_title)
-    newspanel:DockMargin(0, ScreenScale(2), 0, ScreenScale(2))
+    newspanel:DockMargin(0, TacRP.SS(2), 0, TacRP.SS(2))
     newspanel:Dock(LEFT)
     function newspanel.Paint(self, w, h)
         local c_bg = TacRP.GetPanelColor("bg")
@@ -332,7 +332,7 @@ function TacRP.CreateNewsPanel(open)
     local newslist = vgui.Create("DIconLayout", newspanel)
     newslist:Dock(FILL)
     newslist:SetLayoutDir(TOP)
-    newslist:SetSpaceY(ScreenScale(2))
+    newslist:SetSpaceY(TacRP.SS(2))
 
     local buttons = {}
     function TacRP.NewsPanel.PopulateNews(self2)
@@ -341,8 +341,8 @@ function TacRP.CreateNewsPanel(open)
             local data = v
             local btn = newslist:Add("DButton")
             if data.Summary then
-                btn.TextLines = TacRP.MultiLineText(data.Summary, w_list - ScreenScale(4), "TacRP_Myriad_Pro_6")
-                btn:SetSize(w_list, h_entry + #btn.TextLines * ScreenScale(6.5))
+                btn.TextLines = TacRP.MultiLineText(data.Summary, w_list - TacRP.SS(4), "TacRP_Myriad_Pro_6")
+                btn:SetSize(w_list, h_entry + #btn.TextLines * TacRP.SS(6.5))
             else
                 btn:SetSize(w_list, h_entry)
             end
@@ -360,15 +360,15 @@ function TacRP.CreateNewsPanel(open)
 
                 if !TacRP.NewsRead[data.Key] then
                     local c_glow = TacRP.GetPanelColor("text_glow", self3:IsHovered() and !down, down)
-                    draw.SimpleText(data.Title, "TacRP_Myriad_Pro_8_Glow", ScreenScale(2), ScreenScale(2), c_glow, TEXT_ALIGN_LEFT, TEXT_ALIGN_TOP)
+                    draw.SimpleText(data.Title, "TacRP_Myriad_Pro_8_Glow", TacRP.SS(2), TacRP.SS(2), c_glow, TEXT_ALIGN_LEFT, TEXT_ALIGN_TOP)
                 end
-                draw.SimpleText(data.Title, "TacRP_Myriad_Pro_8", ScreenScale(2), ScreenScale(2), c_txt, TEXT_ALIGN_LEFT, TEXT_ALIGN_TOP)
-                draw.SimpleText(data.Date or "Unknown Date", "TacRP_Myriad_Pro_6", w - ScreenScale(2), ScreenScale(9.5), c_txt, TEXT_ALIGN_RIGHT, TEXT_ALIGN_TOP)
-                draw.SimpleText((data.Type or "Article") .. ((data.Link or data.Hyperlink) and " (Web)" or ""), "TacRP_Myriad_Pro_6", ScreenScale(2), ScreenScale(9.5), c_txt, TEXT_ALIGN_LEFT, TEXT_ALIGN_TOP)
+                draw.SimpleText(data.Title, "TacRP_Myriad_Pro_8", TacRP.SS(2), TacRP.SS(2), c_txt, TEXT_ALIGN_LEFT, TEXT_ALIGN_TOP)
+                draw.SimpleText(data.Date or "Unknown Date", "TacRP_Myriad_Pro_6", w - TacRP.SS(2), TacRP.SS(9.5), c_txt, TEXT_ALIGN_RIGHT, TEXT_ALIGN_TOP)
+                draw.SimpleText((data.Type or "Article") .. ((data.Link or data.Hyperlink) and " (Web)" or ""), "TacRP_Myriad_Pro_6", TacRP.SS(2), TacRP.SS(9.5), c_txt, TEXT_ALIGN_LEFT, TEXT_ALIGN_TOP)
 
                 if btn.TextLines then
                     for j, text in ipairs(btn.TextLines) do
-                        draw.SimpleText(text, "TacRP_Myriad_Pro_6", ScreenScale(2), ScreenScale(16) + (j - 1) * ScreenScale(6.5), c_txt, TEXT_ALIGN_LEFT, TEXT_ALIGN_TOP)
+                        draw.SimpleText(text, "TacRP_Myriad_Pro_6", TacRP.SS(2), TacRP.SS(16) + (j - 1) * TacRP.SS(6.5), c_txt, TEXT_ALIGN_LEFT, TEXT_ALIGN_TOP)
                     end
                 end
             end
@@ -381,7 +381,7 @@ function TacRP.CreateNewsPanel(open)
     local page = vgui.Create("DPanel", TacRP.NewsPanel)
     TacRP.NewsPanel.Page = page
     page:Dock(FILL)
-    page:DockMargin(ScreenScale(2), ScreenScale(2), 0, ScreenScale(2))
+    page:DockMargin(TacRP.SS(2), TacRP.SS(2), 0, TacRP.SS(2))
     page:InvalidateParent(true)
 
     function page:SetPageIndex(i)
@@ -403,19 +403,19 @@ function TacRP.CreateNewsPanel(open)
 
         local pagelink = data.Hyperlink or data.Link
         if pagelink then
-            self:SetSize(w_news - w_list - ScreenScale(2), h_news - h_title - h_bottom - ScreenScale(16))
+            self:SetSize(w_news - w_list - TacRP.SS(2), h_news - h_title - h_bottom - TacRP.SS(16))
 
             local topbar = vgui.Create("DPanel", self)
             topbar:Dock(TOP)
-            topbar:SetTall(ScreenScale(8))
+            topbar:SetTall(TacRP.SS(8))
             function topbar.Paint(self2, w, h)
             end
 
             local homebutton = vgui.Create("DButton", topbar)
             homebutton:SetText("")
             homebutton:Dock(LEFT)
-            homebutton:SetSize(ScreenScale(16), ScreenScale(8))
-            homebutton:DockMargin(ScreenScale(2), 0, ScreenScale(2), 0)
+            homebutton:SetSize(TacRP.SS(16), TacRP.SS(8))
+            homebutton:DockMargin(TacRP.SS(2), 0, TacRP.SS(2), 0)
             homebutton:SetMouseInputEnabled(true)
             function homebutton.Paint(self2, w, h)
                 local hover = self2:IsHovered()
@@ -446,8 +446,8 @@ function TacRP.CreateNewsPanel(open)
                     draw.SimpleText(self2.Hyperlink, "TacRP_Myriad_Pro_6", w / 2, h / 2, c, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
 
                     DisableClipping(true)
-                    draw.SimpleText("Embedded browers do not work on your branch of GMod.", "TacRP_Myriad_Pro_8", w / 2, h + ScreenScale(96), color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
-                    draw.SimpleText("Click here to open the tab in the overlay.", "TacRP_Myriad_Pro_8", w / 2, h + ScreenScale(106), color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+                    draw.SimpleText("Embedded browers do not work on your branch of GMod.", "TacRP_Myriad_Pro_8", w / 2, h + TacRP.SS(96), color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+                    draw.SimpleText("Click here to open the tab in the overlay.", "TacRP_Myriad_Pro_8", w / 2, h + TacRP.SS(106), color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
                     DisableClipping(false)
                 end
                 function linkbutton.DoClick(self2)
@@ -469,7 +469,7 @@ function TacRP.CreateNewsPanel(open)
                     draw.SimpleText(self2.Hyperlink, "TacRP_Myriad_Pro_6", w / 2, h / 2, c, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
 
                     DisableClipping(true)
-                    draw.SimpleText("If the page does not load, click the link at the top to open externally.", "TacRP_Myriad_Pro_8", w / 2, h + ScreenScale(96), color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+                    draw.SimpleText("If the page does not load, click the link at the top to open externally.", "TacRP_Myriad_Pro_8", w / 2, h + TacRP.SS(96), color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
                     DisableClipping(false)
                 end
                 function linkbutton.DoClick(self2)
@@ -504,13 +504,13 @@ function TacRP.CreateNewsPanel(open)
             page_title:SetTextColor(c_txt)
             page_title:SetText(data.Title)
             page_title:SizeToContents()
-            page_title:DockMargin(ScreenScale(4), ScreenScale(2), 0, 0)
+            page_title:DockMargin(TacRP.SS(4), TacRP.SS(2), 0, 0)
             page_title:Dock(TOP)
 
             local page_subtitle = vgui.Create("DPanel", self)
-            page_subtitle:DockMargin(ScreenScale(4), 0, ScreenScale(4), ScreenScale(2))
+            page_subtitle:DockMargin(TacRP.SS(4), 0, TacRP.SS(4), TacRP.SS(2))
             page_subtitle:Dock(TOP)
-            page_subtitle:SetTall(ScreenScale(14))
+            page_subtitle:SetTall(TacRP.SS(14))
             page_subtitle.Paint = function(self2, w, h)
                 surface.SetDrawColor(255, 255, 255, 255)
                 surface.DrawLine(0, h - 1, w, h - 1)

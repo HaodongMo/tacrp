@@ -23,14 +23,14 @@ function ATT.TacticalDraw(self)
     local scrw = ScrW()
     local scrh = ScrH()
 
-    local w = ScreenScale(60)
-    local h = ScreenScale(30)
+    local w = TacRP.SS(60)
+    local h = TacRP.SS(30)
 
     local x = (scrw - w) / 2
     local y = (scrh - h) * 5.5 / 6
 
     -- if self:GetSightDelta() > 0 then
-    --     y = y - self:GetSightDelta() ^ 0.5 * ScreenScale(24)
+    --     y = y - self:GetSightDelta() ^ 0.5 * TacRP.SS(24)
     -- end
 
     surface.SetMaterial(mat_spread)
@@ -43,7 +43,7 @@ function ATT.TacticalDraw(self)
     local spread_txt1 = tostring(spread1)
     surface.SetFont("TacRP_HD44780A00_5x8_6")
     surface.SetTextColor(0, 0, 0)
-    surface.SetTextPos(x + ScreenScale(22), y + ScreenScale(2.5))
+    surface.SetTextPos(x + TacRP.SS(22), y + TacRP.SS(2.5))
     if spread < 10 then
         surface.SetTextColor(0, 0, 0, 100)
         surface.DrawText("00")
@@ -60,7 +60,7 @@ function ATT.TacticalDraw(self)
     local recoil = self:GetRecoilAmount()
     local recoil_pct = math.Round(recoil / self:GetValue("RecoilMaximum") * 100)
     local recoil_txt = tostring(recoil_pct)
-    surface.SetTextPos(x + ScreenScale(22), y + ScreenScale(11.5))
+    surface.SetTextPos(x + TacRP.SS(22), y + TacRP.SS(11.5))
     surface.SetTextColor(0, 0, 0)
 
     if recoil_pct < 10 then
@@ -89,9 +89,9 @@ function ATT.TacticalDraw(self)
     surface.SetMaterial(mat_spread_text)
     surface.DrawTexturedRect(x, y, w, h)
 
-    local w_cone = ScreenScale(40)
+    local w_cone = TacRP.SS(40)
     local x2 = (scrw - w_cone) / 2
-    local y2 = y - w_cone - ScreenScale(4)
+    local y2 = y - w_cone - TacRP.SS(4)
 
     surface.SetMaterial(mat_cone)
     surface.SetDrawColor(255, 255, 255, 100)
@@ -101,7 +101,7 @@ function ATT.TacticalDraw(self)
     surface.DrawTexturedRect(x2, y2, w_cone, w_cone)
 
     local acc_size = math.max(TacRP.GetFOVAcc(self), 1)
-    local a = math.Clamp(1 - (acc_size - ScreenScale(15)) / ScreenScale(5), 0, 1) ^ 0.5
+    local a = math.Clamp(1 - (acc_size - TacRP.SS(15)) / TacRP.SS(5), 0, 1) ^ 0.5
     surface.DrawCircle(x2 + w_cone / 2, y2 + w_cone / 2, acc_size - 1, 0, 0, 0, a * 200)
     surface.DrawCircle(x2 + w_cone / 2, y2 + w_cone / 2, acc_size + 1, 0, 0, 0, a * 200)
 
@@ -112,12 +112,12 @@ function ATT.TacticalDraw(self)
 
     surface.SetFont("TacRP_HD44780A00_5x8_6")
     surface.SetTextColor(0, 0, 0)
-    surface.SetTextPos(x2 + ScreenScale(17), y2 + ScreenScale(2))
+    surface.SetTextPos(x2 + TacRP.SS(17), y2 + TacRP.SS(2))
     surface.DrawText(fov_mult1 .. "." .. fov_mult2 .. "x")
     local sway_pct = math.Clamp(math.Round((self:IsSwayEnabled() and self:GetSwayAmount() or self:GetForcedSwayAmount()) * 100), 0, 999)
     local sway_txt = sway_pct .. "%"
     local sway_w = surface.GetTextSize("100%") -- same width per char so its ok
-    surface.SetTextPos(x2 + ScreenScale(23) - sway_w, y2 + w_cone - ScreenScale(8.5))
+    surface.SetTextPos(x2 + TacRP.SS(23) - sway_w, y2 + w_cone - TacRP.SS(8.5))
     if sway_pct < 10 then
         surface.SetTextColor(0, 0, 0, 100)
         surface.DrawText("00")

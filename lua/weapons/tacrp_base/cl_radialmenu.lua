@@ -75,9 +75,9 @@ function SWEP:DrawGrenadeHUD()
     local nades = self:GetAvailableGrenades(false)
     local scrw = ScrW()
     local scrh = ScrH()
-    local r = ScreenScale(128)
-    local r2 = ScreenScale(40)
-    local sg = ScreenScale(32)
+    local r = TacRP.SS(128)
+    local r2 = TacRP.SS(40)
+    local sg = TacRP.SS(32)
     local ri = r * 0.667
     local arcdegrees = 360 / math.max(1, #nades)
     local d = 360
@@ -143,7 +143,7 @@ function SWEP:DrawGrenadeHUD()
         local nadetext = "NO GRENADES AVAILABLE"
         surface.SetFont("TacRP_HD44780A00_5x8_8")
         local nadetextw = surface.GetTextSize(nadetext)
-        surface.SetTextPos(scrw / 2 - nadetextw * 0.5, scrh / 2 + ScreenScale(6))
+        surface.SetTextPos(scrw / 2 - nadetextw * 0.5, scrh / 2 + TacRP.SS(6))
         surface.DrawText(nadetext)
         return
     end
@@ -192,12 +192,12 @@ function SWEP:DrawGrenadeHUD()
 
         if nade.Icon then
             surface.SetMaterial(nade.Icon)
-            surface.DrawTexturedRect(nadex - sg * 0.5, nadey - sg * 0.5 - ScreenScale(8), sg, sg)
+            surface.DrawTexturedRect(nadex - sg * 0.5, nadey - sg * 0.5 - TacRP.SS(8), sg, sg)
         end
         local nadetext = nade.PrintName .. (qty and ("x" .. qty) or "")
         surface.SetFont("TacRP_HD44780A00_5x8_8")
         local nadetextw = surface.GetTextSize(nadetext)
-        surface.SetTextPos(nadex - nadetextw * 0.5, nadey + ScreenScale(6))
+        surface.SetTextPos(nadex - nadetextw * 0.5, nadey + TacRP.SS(6))
         surface.DrawText(nadetext)
 
         d = d - arcdegrees
@@ -208,13 +208,13 @@ function SWEP:DrawGrenadeHUD()
     if nade.Icon then
         surface.SetMaterial(nade.Icon)
         surface.SetDrawColor(255, 255, 255, a * 255)
-        surface.DrawTexturedRect(scrw / 2 - sg * 0.5, scrh / 2 - sg * 0.5 - ScreenScale(8), sg, sg)
+        surface.DrawTexturedRect(scrw / 2 - sg * 0.5, scrh / 2 - sg * 0.5 - TacRP.SS(8), sg, sg)
     end
 
     local nadetext = nade.PrintName
     surface.SetFont("TacRP_HD44780A00_5x8_8")
     local nadetextw = surface.GetTextSize(nadetext)
-    surface.SetTextPos(scrw / 2 - nadetextw * 0.5, scrh / 2 + ScreenScale(6))
+    surface.SetTextPos(scrw / 2 - nadetextw * 0.5, scrh / 2 + TacRP.SS(6))
     surface.SetTextColor(255, 255, 255, a * 255)
     surface.DrawText(nadetext)
 
@@ -227,7 +227,7 @@ function SWEP:DrawGrenadeHUD()
         end
         surface.SetFont("TacRP_HD44780A00_5x8_8")
         local qtyw = surface.GetTextSize(qty)
-        surface.SetTextPos(scrw / 2 - qtyw * 0.5, scrh / 2 + ScreenScale(16))
+        surface.SetTextPos(scrw / 2 - qtyw * 0.5, scrh / 2 + TacRP.SS(16))
         surface.SetTextColor(255, 255, 255, a * 255)
         surface.DrawText(qty)
     end
@@ -235,13 +235,13 @@ function SWEP:DrawGrenadeHUD()
     -- description box is blocked in customize
     if self:GetCustomize() then return end
 
-    local w, h = ScreenScale(96), ScreenScale(128)
-    local tx, ty = scrw / 2 + r + ScreenScale(16), scrh / 2
+    local w, h = TacRP.SS(96), TacRP.SS(128)
+    local tx, ty = scrw / 2 + r + TacRP.SS(16), scrh / 2
 
     -- full name
 
     surface.SetDrawColor(0, 0, 0, 200 * a)
-    TacRP.DrawCorneredBox(tx, ty - h * 0.5 - ScreenScale(28), w, ScreenScale(24), col)
+    TacRP.DrawCorneredBox(tx, ty - h * 0.5 - TacRP.SS(28), w, TacRP.SS(24), col)
     surface.SetTextColor(255, 255, 255, a * 255)
 
     local name = nade.FullName or nade.PrintName
@@ -251,7 +251,7 @@ function SWEP:DrawGrenadeHUD()
         surface.SetFont("TacRP_Myriad_Pro_14")
         name_w, name_h = surface.GetTextSize(name)
     end
-    surface.SetTextPos(tx + w / 2 - name_w / 2, ty - h * 0.5 - ScreenScale(28) + ScreenScale(12) - name_h / 2)
+    surface.SetTextPos(tx + w / 2 - name_w / 2, ty - h * 0.5 - TacRP.SS(28) + TacRP.SS(12) - name_h / 2)
     surface.DrawText(name)
 
 
@@ -261,26 +261,26 @@ function SWEP:DrawGrenadeHUD()
     TacRP.DrawCorneredBox(tx, ty - h * 0.5, w, h, col)
 
     surface.SetFont("TacRP_Myriad_Pro_8")
-    surface.SetTextPos(tx + ScreenScale(4), ty - h / 2 + ScreenScale(2))
+    surface.SetTextPos(tx + TacRP.SS(4), ty - h / 2 + TacRP.SS(2))
     surface.DrawText("FUSE:")
 
     surface.SetFont("TacRP_Myriad_Pro_8")
-    surface.SetTextPos(tx + ScreenScale(4), ty - h / 2 + ScreenScale(10))
+    surface.SetTextPos(tx + TacRP.SS(4), ty - h / 2 + TacRP.SS(10))
     surface.DrawText(nade.DetType or "")
 
     surface.SetFont("TacRP_Myriad_Pro_8")
-    surface.SetTextPos(tx + ScreenScale(4), ty - h / 2 + ScreenScale(22))
+    surface.SetTextPos(tx + TacRP.SS(4), ty - h / 2 + TacRP.SS(22))
     surface.DrawText("DESCRIPTION:")
 
     surface.SetFont("TacRP_Myriad_Pro_8")
 
     if nade.Description then
-        nade.DescriptionMultiLine = TacRP.MultiLineText(nade.Description or "", w - ScreenScale(7), "TacRP_Myriad_Pro_8")
+        nade.DescriptionMultiLine = TacRP.MultiLineText(nade.Description or "", w - TacRP.SS(7), "TacRP_Myriad_Pro_8")
     end
 
     surface.SetTextColor(255, 255, 255, a * 255)
     for i, text in ipairs(nade.DescriptionMultiLine) do
-        surface.SetTextPos(tx + ScreenScale(4), ty - h / 2 + ScreenScale(30) + (i - 1) * ScreenScale(8))
+        surface.SetTextPos(tx + TacRP.SS(4), ty - h / 2 + TacRP.SS(30) + (i - 1) * TacRP.SS(8))
         surface.DrawText(text)
     end
 
@@ -297,31 +297,31 @@ function SWEP:DrawGrenadeHUD()
 
         local binded = input.LookupBinding("grenade1")
 
-        TacRP.DrawCorneredBox(tx, ty + h * 0.5 + ScreenScale(2), w, ScreenScale(binded and 36 or 28), col)
+        TacRP.DrawCorneredBox(tx, ty + h * 0.5 + TacRP.SS(2), w, TacRP.SS(binded and 36 or 28), col)
 
-        surface.SetTextPos(tx + ScreenScale(4), ty + h / 2 + ScreenScale(4))
+        surface.SetTextPos(tx + TacRP.SS(4), ty + h / 2 + TacRP.SS(4))
         surface.DrawText("[LMB] - Throw Overhand")
-        surface.SetTextPos(tx + ScreenScale(4), ty + h / 2 + ScreenScale(12))
+        surface.SetTextPos(tx + TacRP.SS(4), ty + h / 2 + TacRP.SS(12))
         surface.DrawText("[RMB] - Throw Underhand")
         if binded then
-            surface.SetTextPos(tx + ScreenScale(4), ty + h / 2 + ScreenScale(20))
+            surface.SetTextPos(tx + TacRP.SS(4), ty + h / 2 + TacRP.SS(20))
             surface.DrawText("Hold/Tap [" .. TacRP.GetBind("grenade1") .. "] - Over/Under")
         end
         if TacRP.AreTheGrenadeAnimsReadyYet then
-            surface.SetTextPos(tx + ScreenScale(4), ty + h / 2 + ScreenScale(28))
+            surface.SetTextPos(tx + TacRP.SS(4), ty + h / 2 + TacRP.SS(28))
             surface.DrawText("[MMB] - Pull Out Grenade")
         end
     else
 
-        TacRP.DrawCorneredBox(tx, ty + h * 0.5 + ScreenScale(2), w, ScreenScale(28), col)
+        TacRP.DrawCorneredBox(tx, ty + h * 0.5 + TacRP.SS(2), w, TacRP.SS(28), col)
 
-        surface.SetTextPos(tx + ScreenScale(4), ty + h / 2 + ScreenScale(4))
+        surface.SetTextPos(tx + TacRP.SS(4), ty + h / 2 + TacRP.SS(4))
         surface.DrawText("Hold [" .. TacRP.GetBind("grenade1") .. "] - Throw Overhand")
-        surface.SetTextPos(tx + ScreenScale(4), ty + h / 2 + ScreenScale(12))
+        surface.SetTextPos(tx + TacRP.SS(4), ty + h / 2 + TacRP.SS(12))
         surface.DrawText("Tap [" .. TacRP.GetBind("grenade1") .. "] - Throw Underhand")
 
         if TacRP.AreTheGrenadeAnimsReadyYet then
-            surface.SetTextPos(tx + ScreenScale(4), ty + h / 2 + ScreenScale(20))
+            surface.SetTextPos(tx + TacRP.SS(4), ty + h / 2 + TacRP.SS(20))
             surface.DrawText("[MMB] - Pull Out Grenade")
         end
     end
@@ -536,9 +536,9 @@ function SWEP:DrawBlindFireHUD()
     local ft = FrameTime()
     local scrw = ScrW()
     local scrh = ScrH()
-    local r = ScreenScale(72)
-    local r2 = ScreenScale(24)
-    local sg = ScreenScale(32)
+    local r = TacRP.SS(72)
+    local r2 = TacRP.SS(24)
+    local sg = TacRP.SS(32)
     local ri = r * 0.667
     local s = 45
 
@@ -656,13 +656,13 @@ function SWEP:DrawBlindFireHUD()
     if !nocenter then
         surface.SetDrawColor(255, 255, 255, a * 255)
         surface.SetMaterial(mat_none)
-        surface.DrawTexturedRectRotated(scrw / 2, scrh / 2, ScreenScale(28), ScreenScale(28), 0)
+        surface.DrawTexturedRectRotated(scrw / 2, scrh / 2, TacRP.SS(28), TacRP.SS(28), 0)
     end
 
     if !nosuicide and currentind == 2 then
 
-        local w, h = ScreenScale(132), ScreenScale(24)
-        local tx, ty = scrw / 2, scrh / 2 + r + ScreenScale(4)
+        local w, h = TacRP.SS(132), TacRP.SS(24)
+        local tx, ty = scrw / 2, scrh / 2 + r + TacRP.SS(4)
 
         surface.SetDrawColor(0, 0, 0, 200 * a)
         TacRP.DrawCorneredBox(tx - w / 2, ty, w, h, col)
@@ -672,7 +672,7 @@ function SWEP:DrawBlindFireHUD()
         surface.SetTextColor(255, 255, 255, 255 * a)
         local t1 = "Shoot Yourself"
         local t1_w = surface.GetTextSize(t1)
-        surface.SetTextPos(tx - t1_w / 2, ty + ScreenScale(2))
+        surface.SetTextPos(tx - t1_w / 2, ty + TacRP.SS(2))
         surface.DrawText(t1)
 
         surface.SetFont("TacRP_Myriad_Pro_6")
@@ -684,7 +684,7 @@ function SWEP:DrawBlindFireHUD()
             bf_funnyline = bf_lines[math.random(1, #bf_lines)]
         end
         local t2_w, t2_h = surface.GetTextSize(t2)
-        surface.SetTextPos(tx - t2_w / 2, ty + ScreenScale(18) - t2_h / 2)
+        surface.SetTextPos(tx - t2_w / 2, ty + TacRP.SS(18) - t2_h / 2)
         surface.DrawText(t2)
 
     end

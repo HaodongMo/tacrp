@@ -102,8 +102,8 @@ function ATT.TacticalDraw(self)
     local scrw = ScrW()
     local scrh = ScrH()
 
-    local w = ScreenScale(100)
-    local h = ScreenScale(50)
+    local w = TacRP.SS(100)
+    local h = TacRP.SS(50)
 
     local x = (scrw - w) / 2
     local y = (scrh - h) * 5 / 6
@@ -114,12 +114,12 @@ function ATT.TacticalDraw(self)
 
     surface.SetFont("TacRP_HD44780A00_5x8_10")
     -- local tw = surface.GetTextSize(txt)
-    surface.SetTextPos(x + ScreenScale(3), y + ScreenScale(12))
+    surface.SetTextPos(x + TacRP.SS(3), y + TacRP.SS(12))
     surface.SetTextColor(0, 0, 0)
     surface.DrawText(txt)
 
     -- local tw2 = surface.GetTextSize(txt2)
-    surface.SetTextPos(x + ScreenScale(3), y + ScreenScale(22))
+    surface.SetTextPos(x + TacRP.SS(3), y + TacRP.SS(22))
     surface.SetTextColor(0, 0, 0)
     surface.DrawText(txt2)
 end

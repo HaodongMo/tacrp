@@ -33,12 +33,12 @@ local function bodydamagetext(name, dmg, num, mult, x, y, hover)
 
     surface.SetDrawColor(255, 255, 255, 255)
     surface.SetTextColor(255, 255, 255, 255)
-    surface.DrawLine(ScreenScale(2), y, x, y)
+    surface.DrawLine(TacRP.SS(2), y, x, y)
 
     surface.SetFont("TacRP_Myriad_Pro_6")
-    surface.SetTextPos(ScreenScale(2), y)
+    surface.SetTextPos(TacRP.SS(2), y)
     -- surface.DrawText(name)
-    -- surface.SetTextPos(ScreenScale(1), y + ScreenScale(6))
+    -- surface.SetTextPos(TacRP.SS(1), y + TacRP.SS(6))
     if hover then
         surface.DrawText(stk .. (num > 1 and " PTK" or " STK"))
     else
@@ -69,8 +69,8 @@ function SWEP:CreateCustomizeHUD()
     local scrw = ScrW()
     local scrh = ScrH()
 
-    local airgap = ScreenScale(8)
-    local smallgap = ScreenScale(4)
+    local airgap = TacRP.SS(8)
+    local smallgap = TacRP.SS(4)
 
     bg:SetPos(0, 0)
     bg:SetSize(ScrW(), ScrH())
@@ -95,10 +95,10 @@ function SWEP:CreateCustomizeHUD()
         local name_w = surface.GetTextSize(name_txt)
 
         surface.SetDrawColor(0, 0, 0, 150)
-        surface.DrawRect(w - name_w - ScreenScale(20), airgap, name_w + ScreenScale(12), ScreenScale(34))
-        TacRP.DrawCorneredBox(w - name_w - ScreenScale(20), airgap, name_w + ScreenScale(12), ScreenScale(34))
+        surface.DrawRect(w - name_w - TacRP.SS(20), airgap, name_w + TacRP.SS(12), TacRP.SS(34))
+        TacRP.DrawCorneredBox(w - name_w - TacRP.SS(20), airgap, name_w + TacRP.SS(12), TacRP.SS(34))
 
-        surface.SetTextPos(w - name_w - ScreenScale(14), airgap)
+        surface.SetTextPos(w - name_w - TacRP.SS(14), airgap)
         surface.SetTextColor(255, 255, 255)
         surface.DrawText(name_txt)
 
@@ -109,10 +109,10 @@ function SWEP:CreateCustomizeHUD()
             local ammo_w = surface.GetTextSize(ammo_txt)
 
             surface.SetDrawColor(0, 0, 0, 150)
-            surface.DrawRect(w - name_w - ammo_w - ScreenScale(32) - smallgap, airgap + ScreenScale(20), ammo_w + ScreenScale(12), ScreenScale(14))
-            TacRP.DrawCorneredBox(w - name_w - ammo_w - ScreenScale(32) - smallgap, airgap + ScreenScale(20), ammo_w + ScreenScale(12), ScreenScale(14))
+            surface.DrawRect(w - name_w - ammo_w - TacRP.SS(32) - smallgap, airgap + TacRP.SS(20), ammo_w + TacRP.SS(12), TacRP.SS(14))
+            TacRP.DrawCorneredBox(w - name_w - ammo_w - TacRP.SS(32) - smallgap, airgap + TacRP.SS(20), ammo_w + TacRP.SS(12), TacRP.SS(14))
 
-            surface.SetTextPos(w - name_w - ammo_w - ScreenScale(30), airgap + ScreenScale(21))
+            surface.SetTextPos(w - name_w - ammo_w - TacRP.SS(30), airgap + TacRP.SS(21))
             surface.SetTextColor(255, 255, 255)
             surface.DrawText(ammo_txt)
         end
@@ -126,22 +126,22 @@ function SWEP:CreateCustomizeHUD()
             local type_w = surface.GetTextSize(type_txt)
 
             surface.SetDrawColor(0, 0, 0, 150)
-            surface.DrawRect(w - name_w - type_w - ScreenScale(32) - smallgap, airgap, type_w + ScreenScale(12), ScreenScale(18))
-            TacRP.DrawCorneredBox(w - name_w - type_w - ScreenScale(32) - smallgap, airgap, type_w + ScreenScale(12), ScreenScale(18))
+            surface.DrawRect(w - name_w - type_w - TacRP.SS(32) - smallgap, airgap, type_w + TacRP.SS(12), TacRP.SS(18))
+            TacRP.DrawCorneredBox(w - name_w - type_w - TacRP.SS(32) - smallgap, airgap, type_w + TacRP.SS(12), TacRP.SS(18))
 
-            surface.SetTextPos(w - name_w - type_w - ScreenScale(30), airgap + ScreenScale(3))
+            surface.SetTextPos(w - name_w - type_w - TacRP.SS(30), airgap + TacRP.SS(3))
             surface.SetTextColor(255, 255, 255)
             surface.DrawText(type_txt)
         end
 
     end
 
-    local stack = airgap + ScreenScale(34)
+    local stack = airgap + TacRP.SS(34)
 
     if !self:GetValue("NoRanger") then
         local ranger = vgui.Create("DPanel", bg)
-        ranger:SetPos(scrw - ScreenScale(128) - airgap, stack + smallgap)
-        ranger:SetSize(ScreenScale(128), ScreenScale(64))
+        ranger:SetPos(scrw - TacRP.SS(128) - airgap, stack + smallgap)
+        ranger:SetSize(TacRP.SS(128), TacRP.SS(64))
         ranger.Paint = function(self2, w, h)
             if !IsValid(self) then return end
 
@@ -222,7 +222,7 @@ function SWEP:CreateCustomizeHUD()
                 surface.SetFont("TacRP_Myriad_Pro_8")
                 surface.SetTextColor(255, 255, 255)
                 local txt_dmg1_w = surface.GetTextSize(txt_dmg1)
-                surface.SetTextPos((w / 3) - txt_dmg1_w - (ScreenScale(2)), ScreenScale(1))
+                surface.SetTextPos((w / 3) - txt_dmg1_w - (TacRP.SS(2)), TacRP.SS(1))
                 surface.DrawText(txt_dmg1)
 
                 local txt_range1 = self:RangeUnitize(range)
@@ -230,7 +230,7 @@ function SWEP:CreateCustomizeHUD()
                 surface.SetFont("TacRP_Myriad_Pro_8")
                 surface.SetTextColor(255, 255, 255)
                 local txt_range1_w = surface.GetTextSize(txt_range1)
-                surface.SetTextPos((w / 3) - txt_range1_w - (ScreenScale(2)), ScreenScale(1 + 8))
+                surface.SetTextPos((w / 3) - txt_range1_w - (TacRP.SS(2)), TacRP.SS(1 + 8))
                 surface.DrawText(txt_range1)
 
                 draw_rangetext = false
@@ -247,7 +247,7 @@ function SWEP:CreateCustomizeHUD()
                 surface.SetFont("TacRP_Myriad_Pro_8")
                 surface.SetTextColor(255, 255, 255)
                 local txt_dmg1_w = surface.GetTextSize(txt_dmg1)
-                surface.SetTextPos((w / 3) - txt_dmg1_w - (ScreenScale(2)), ScreenScale(1))
+                surface.SetTextPos((w / 3) - txt_dmg1_w - (TacRP.SS(2)), TacRP.SS(1))
                 surface.DrawText(txt_dmg1)
 
                 local txt_range1 = self:RangeUnitize(range_min)
@@ -255,7 +255,7 @@ function SWEP:CreateCustomizeHUD()
                 surface.SetFont("TacRP_Myriad_Pro_8")
                 surface.SetTextColor(255, 255, 255)
                 local txt_range1_w = surface.GetTextSize(txt_range1)
-                surface.SetTextPos((w / 3) - txt_range1_w - (ScreenScale(2)), ScreenScale(1 + 8))
+                surface.SetTextPos((w / 3) - txt_range1_w - (TacRP.SS(2)), TacRP.SS(1 + 8))
                 surface.DrawText(txt_range1)
 
                 local txt_dmg2 = tostring(math.Round(dmg_min)) .. " DMG"
@@ -266,21 +266,21 @@ function SWEP:CreateCustomizeHUD()
 
                 surface.SetFont("TacRP_Myriad_Pro_8")
                 surface.SetTextColor(255, 255, 255)
-                surface.SetTextPos(2 * (w / 3) + (ScreenScale(2)), ScreenScale(1))
+                surface.SetTextPos(2 * (w / 3) + (TacRP.SS(2)), TacRP.SS(1))
                 surface.DrawText(txt_dmg2)
 
                 local txt_range2 = self:RangeUnitize(range_max)
 
                 surface.SetFont("TacRP_Myriad_Pro_8")
                 surface.SetTextColor(255, 255, 255)
-                surface.SetTextPos(2 * (w / 3) + (ScreenScale(2)), ScreenScale(1 + 8))
+                surface.SetTextPos(2 * (w / 3) + (TacRP.SS(2)), TacRP.SS(1 + 8))
                 surface.DrawText(txt_range2)
             end
         end
 
         local bodychart = vgui.Create("DPanel", bg)
-        bodychart:SetPos(scrw - ScreenScale(128 + 44) - airgap, stack + smallgap)
-        bodychart:SetSize(ScreenScale(40), ScreenScale(64))
+        bodychart:SetPos(scrw - TacRP.SS(128 + 44) - airgap, stack + smallgap)
+        bodychart:SetSize(TacRP.SS(40), TacRP.SS(64))
         bodychart:SetZPos(100)
         bodychart.Paint = function(self2, w, h)
             if !IsValid(self) then return end
@@ -289,9 +289,9 @@ function SWEP:CreateCustomizeHUD()
             surface.DrawRect(0, 0, w, h)
             TacRP.DrawCorneredBox(0, 0, w, h)
 
-            local h2 = h - ScreenScale(4)
+            local h2 = h - TacRP.SS(4)
             local w2 = math.ceil(h2 * (136 / 370))
-            local x2, y2 = w - w2 - ScreenScale(2), ScreenScale(2)
+            local x2, y2 = w - w2 - TacRP.SS(2), TacRP.SS(2)
             surface.SetDrawColor(255, 255, 255, 255)
             surface.SetMaterial(body)
             surface.DrawTexturedRect(x2, y2, w2, h2)
@@ -308,25 +308,25 @@ function SWEP:CreateCustomizeHUD()
 
             local upperbody = mult[HITGROUP_STOMACH] == mult[HITGROUP_CHEST]
 
-            bodydamagetext("Head", dmg, num, mult[HITGROUP_HEAD], w - ScreenScale(16), upperbody and ScreenScale(6) or ScreenScale(4), hover)
+            bodydamagetext("Head", dmg, num, mult[HITGROUP_HEAD], w - TacRP.SS(16), upperbody and TacRP.SS(6) or TacRP.SS(4), hover)
             surface.SetMaterial(body_head)
             surface.DrawTexturedRect(x2, y2, w2, h2)
 
-            bodydamagetext("Chest", dmg, num, mult[HITGROUP_CHEST], w - ScreenScale(16), upperbody and ScreenScale(18) or ScreenScale(14), hover)
+            bodydamagetext("Chest", dmg, num, mult[HITGROUP_CHEST], w - TacRP.SS(16), upperbody and TacRP.SS(18) or TacRP.SS(14), hover)
             surface.SetMaterial(body_chest)
             surface.DrawTexturedRect(x2, y2, w2, h2)
 
             if !upperbody then
-                bodydamagetext("Stomach", dmg, num, mult[HITGROUP_STOMACH], w - ScreenScale(16), ScreenScale(24), hover)
+                bodydamagetext("Stomach", dmg, num, mult[HITGROUP_STOMACH], w - TacRP.SS(16), TacRP.SS(24), hover)
             end
             surface.SetMaterial(body_stomach)
             surface.DrawTexturedRect(x2, y2, w2, h2)
 
-            bodydamagetext("Arms", dmg, num, mult[HITGROUP_LEFTARM], w - ScreenScale(22), upperbody and ScreenScale(30) or ScreenScale(34), hover)
+            bodydamagetext("Arms", dmg, num, mult[HITGROUP_LEFTARM], w - TacRP.SS(22), upperbody and TacRP.SS(30) or TacRP.SS(34), hover)
             surface.SetMaterial(body_arms)
             surface.DrawTexturedRect(x2, y2, w2, h2)
 
-            bodydamagetext("Legs", dmg, num, mult[HITGROUP_LEFTLEG], w - ScreenScale(18), upperbody and ScreenScale(42) or ScreenScale(44), hover)
+            bodydamagetext("Legs", dmg, num, mult[HITGROUP_LEFTLEG], w - TacRP.SS(18), upperbody and TacRP.SS(42) or TacRP.SS(44), hover)
             surface.SetMaterial(body_legs)
             surface.DrawTexturedRect(x2, y2, w2, h2)
 
@@ -335,31 +335,31 @@ function SWEP:CreateCustomizeHUD()
             surface.SetFont("TacRP_Myriad_Pro_8")
             local txt = self:RangeUnitize(range)
             --local tw, th = surface.GetTextSize(txt)
-            --surface.DrawRect(ScreenScale(1), h - ScreenScale(10), tw + ScreenScale(1), th)
-            surface.SetTextPos(ScreenScale(2) + 2, h - ScreenScale(10) + 2)
+            --surface.DrawRect(TacRP.SS(1), h - TacRP.SS(10), tw + TacRP.SS(1), th)
+            surface.SetTextPos(TacRP.SS(2) + 2, h - TacRP.SS(10) + 2)
             surface.SetTextColor(0, 0, 0, 150)
             surface.DrawText(txt)
             surface.SetTextColor(255, 255, 255, 255)
-            surface.SetTextPos(ScreenScale(2), h - ScreenScale(10))
+            surface.SetTextPos(TacRP.SS(2), h - TacRP.SS(10))
             surface.DrawText(txt)
             if num > 1 then
                 local txt2 = "×" .. math.floor(num)
                 local tw2 = surface.GetTextSize(txt2)
-                --surface.DrawRect(w - tw2 - ScreenScale(2), h - ScreenScale(10), tw2 + ScreenScale(1), th2)
+                --surface.DrawRect(w - tw2 - TacRP.SS(2), h - TacRP.SS(10), tw2 + TacRP.SS(1), th2)
 
-                surface.SetTextPos(w - tw2 - ScreenScale(2) + 2, h - ScreenScale(10) + 2)
+                surface.SetTextPos(w - tw2 - TacRP.SS(2) + 2, h - TacRP.SS(10) + 2)
                 surface.SetTextColor(0, 0, 0, 150)
                 surface.DrawText(txt2)
                 surface.SetTextColor(255, 255, 255, 255)
-                surface.SetTextPos(w - tw2 - ScreenScale(2), h - ScreenScale(10))
+                surface.SetTextPos(w - tw2 - TacRP.SS(2), h - TacRP.SS(10))
                 surface.DrawText(txt2)
             end
         end
 
         local armorbtn = vgui.Create("DLabel", bg)
         armorbtn:SetText("")
-        armorbtn:SetPos(scrw - ScreenScale(128 + 44 - 32) - airgap, stack + smallgap + ScreenScale(2))
-        armorbtn:SetSize(ScreenScale(6), ScreenScale(6))
+        armorbtn:SetPos(scrw - TacRP.SS(128 + 44 - 32) - airgap, stack + smallgap + TacRP.SS(2))
+        armorbtn:SetSize(TacRP.SS(6), TacRP.SS(6))
         armorbtn:SetZPos(110)
         armorbtn:SetMouseInputEnabled(true)
         armorbtn:MoveToFront()
@@ -383,14 +383,14 @@ function SWEP:CreateCustomizeHUD()
             enable_armor = !enable_armor
         end
 
-        stack = stack + ScreenScale(64) + smallgap
+        stack = stack + TacRP.SS(64) + smallgap
     end
 
     if self:GetValue("PrimaryGrenade") then
         local desc_box = vgui.Create("DPanel", bg)
-        desc_box:SetSize(ScreenScale(172), ScreenScale(108))
-        desc_box:SetPos(scrw - ScreenScale(172) - airgap, stack + smallgap)
-        stack = stack + ScreenScale(48) + smallgap
+        desc_box:SetSize(TacRP.SS(172), TacRP.SS(108))
+        desc_box:SetPos(scrw - TacRP.SS(172) - airgap, stack + smallgap)
+        stack = stack + TacRP.SS(48) + smallgap
         desc_box.Paint = function(self2, w, h)
             if !IsValid(self) then return end
 
@@ -401,34 +401,34 @@ function SWEP:CreateCustomizeHUD()
             local nade = TacRP.QuickNades[self:GetValue("PrimaryGrenade")]
 
             surface.SetFont("TacRP_Myriad_Pro_8")
-            surface.SetTextPos(ScreenScale(6), ScreenScale(4))
+            surface.SetTextPos(TacRP.SS(6), TacRP.SS(4))
             surface.DrawText("FUSE:")
 
             surface.SetFont("TacRP_Myriad_Pro_8")
-            surface.SetTextPos(ScreenScale(4), ScreenScale(12))
+            surface.SetTextPos(TacRP.SS(4), TacRP.SS(12))
             surface.DrawText(nade.DetType or "")
 
             surface.SetFont("TacRP_Myriad_Pro_8")
             surface.SetTextColor(255, 255, 255)
-            surface.SetTextPos(ScreenScale(6), ScreenScale(24))
+            surface.SetTextPos(TacRP.SS(6), TacRP.SS(24))
             surface.DrawText("DESCRIPTION:")
 
             if !self.MiscCache["cust_desc"] then
-                self.MiscCache["cust_desc"] = TacRP.MultiLineText(nade.Description, w - ScreenScale(8), "TacRP_Myriad_Pro_8")
+                self.MiscCache["cust_desc"] = TacRP.MultiLineText(nade.Description, w - TacRP.SS(8), "TacRP_Myriad_Pro_8")
             end
 
             for i, k in ipairs(self.MiscCache["cust_desc"]) do
                 surface.SetFont("TacRP_Myriad_Pro_8")
                 surface.SetTextColor(255, 255, 255)
-                surface.SetTextPos(ScreenScale(4), ScreenScale(32) + (ScreenScale(8 * (i - 1))))
+                surface.SetTextPos(TacRP.SS(4), TacRP.SS(32) + (TacRP.SS(8 * (i - 1))))
                 surface.DrawText(k)
             end
         end
     else
         local desc_box = vgui.Create("DPanel", bg)
-        desc_box:SetSize(ScreenScale(172), ScreenScale(48))
-        desc_box:SetPos(scrw - ScreenScale(172) - airgap, stack + smallgap)
-        stack = stack + ScreenScale(48) + smallgap
+        desc_box:SetSize(TacRP.SS(172), TacRP.SS(48))
+        desc_box:SetPos(scrw - TacRP.SS(172) - airgap, stack + smallgap)
+        stack = stack + TacRP.SS(48) + smallgap
         desc_box.Paint = function(self2, w, h)
             if !IsValid(self) then return end
 
@@ -438,17 +438,17 @@ function SWEP:CreateCustomizeHUD()
 
             surface.SetFont("TacRP_Myriad_Pro_8")
             surface.SetTextColor(255, 255, 255)
-            surface.SetTextPos(ScreenScale(6), ScreenScale(4))
+            surface.SetTextPos(TacRP.SS(6), TacRP.SS(4))
             surface.DrawText("DESCRIPTION:")
 
             if !self.MiscCache["cust_desc"] then
-                self.MiscCache["cust_desc"] = TacRP.MultiLineText(self:GetValue("Description"), w - ScreenScale(8), "TacRP_Myriad_Pro_8")
+                self.MiscCache["cust_desc"] = TacRP.MultiLineText(self:GetValue("Description"), w - TacRP.SS(8), "TacRP_Myriad_Pro_8")
             end
 
             for i, k in pairs(self.MiscCache["cust_desc"]) do
                 surface.SetFont("TacRP_Myriad_Pro_8")
                 surface.SetTextColor(255, 255, 255)
-                surface.SetTextPos(ScreenScale(4), ScreenScale(4 + 8 + 1) + (ScreenScale(8 * (i - 1))))
+                surface.SetTextPos(TacRP.SS(4), TacRP.SS(4 + 8 + 1) + (TacRP.SS(8 * (i - 1))))
                 surface.DrawText(k)
             end
         end
@@ -456,16 +456,16 @@ function SWEP:CreateCustomizeHUD()
 
     if !self:GetValue("NoStatBox") then
 
-        local tabs_h = ScreenScale(10)
+        local tabs_h = TacRP.SS(10)
 
         local group_box = vgui.Create("DPanel", bg)
         group_box.PrintName = "Rating"
-        group_box:SetSize(ScreenScale(164), ScreenScale(172))
-        group_box:SetPos(scrw - ScreenScale(164) - airgap - smallgap, stack + smallgap * 2 + tabs_h)
+        group_box:SetSize(TacRP.SS(164), TacRP.SS(172))
+        group_box:SetPos(scrw - TacRP.SS(164) - airgap - smallgap, stack + smallgap * 2 + tabs_h)
         group_box.Paint = function(self2)
             if !IsValid(self) then return end
 
-            local w, h = ScreenScale(172), ScreenScale(16)
+            local w, h = TacRP.SS(172), TacRP.SS(16)
             local x, y = 0, 0
 
             local hovered = false
@@ -494,33 +494,33 @@ function SWEP:CreateCustomizeHUD()
                 local f = scorecache[1][1] / 100
                 local f_base = scorecache[2][1] / 100
 
-                local w2, h2 = ScreenScale(95), ScreenScale(8)
+                local w2, h2 = TacRP.SS(95), TacRP.SS(8)
                 surface.SetDrawColor(0, 0, 0, 150)
                 surface.DrawRect(x, y, w, h)
                 TacRP.DrawCorneredBox(x, y, w, h)
 
-                draw.SimpleText(v.Name, "TacRP_Myriad_Pro_10", x + ScreenScale(4), y + ScreenScale(8), color_white, TEXT_ALIGN_LEFT, TEXT_ALIGN_CENTER)
+                draw.SimpleText(v.Name, "TacRP_Myriad_Pro_10", x + TacRP.SS(4), y + TacRP.SS(8), color_white, TEXT_ALIGN_LEFT, TEXT_ALIGN_CENTER)
 
                 surface.SetDrawColor(75, 75, 75, 100)
-                surface.DrawRect(x + ScreenScale(64), y + ScreenScale(4), w2, h2)
+                surface.DrawRect(x + TacRP.SS(64), y + TacRP.SS(4), w2, h2)
 
                 surface.SetDrawColor(Lerp(f, 200, 0), Lerp(f, 0, 200), 0, 150)
-                surface.DrawRect(x + ScreenScale(64), y + ScreenScale(4), w2 * f, h2)
+                surface.DrawRect(x + TacRP.SS(64), y + TacRP.SS(4), w2 * f, h2)
 
                 surface.SetDrawColor(0, 0, 0, 0)
-                TacRP.DrawCorneredBox(x + ScreenScale(64), y + ScreenScale(4), w2, h2)
+                TacRP.DrawCorneredBox(x + TacRP.SS(64), y + TacRP.SS(4), w2, h2)
 
                 for j = 1, 4 do
                     surface.SetDrawColor(255, 255, 255, 125)
-                    surface.DrawRect(x + ScreenScale(64) + w2 * (j / 5) - 0.5, y + h2 - ScreenScale(1.5), 1, ScreenScale(3))
+                    surface.DrawRect(x + TacRP.SS(64) + w2 * (j / 5) - 0.5, y + h2 - TacRP.SS(1.5), 1, TacRP.SS(3))
                 end
 
                 surface.SetDrawColor(255, 255, 255, 20)
-                surface.DrawRect(x + ScreenScale(64), y + ScreenScale(2.5) + h2 / 2, w2 * f_base, ScreenScale(3))
+                surface.DrawRect(x + TacRP.SS(64), y + TacRP.SS(2.5) + h2 / 2, w2 * f_base, TacRP.SS(3))
 
                 local grade = self.StatGroupGrades[scorecache[1][2]]
                 if grade then
-                    draw.SimpleText(grade[2], "TacRP_HD44780A00_5x8_8", x + ScreenScale(61), y + ScreenScale(7.5), grade[3], TEXT_ALIGN_RIGHT, TEXT_ALIGN_CENTER)
+                    draw.SimpleText(grade[2], "TacRP_HD44780A00_5x8_8", x + TacRP.SS(61), y + TacRP.SS(7.5), grade[3], TEXT_ALIGN_RIGHT, TEXT_ALIGN_CENTER)
                 end
 
                 local mx, my = self2:CursorPos()
@@ -530,7 +530,7 @@ function SWEP:CreateCustomizeHUD()
                     hoverscore = scorecache[1][1]
                 end
 
-                y = y + ScreenScale(18)
+                y = y + TacRP.SS(18)
             end
 
             if hovered then
@@ -540,38 +540,38 @@ function SWEP:CreateCustomizeHUD()
                 local col_corner = Color(255, 255, 255)
                 local col_text = Color(255, 255, 255)
                 local rx, ry = self2:CursorPos()
-                rx = rx + ScreenScale(16)
-                ry = ry + ScreenScale(16)
+                rx = rx + TacRP.SS(16)
+                ry = ry + TacRP.SS(16)
 
                 local desc = v.Description or {""}
                 if isstring(desc) then
                     desc = {desc}
                 end
 
-                if self2:GetY() + ry >= ScreenScale(280) then
-                    ry = ry - ScreenScale(60)
+                if self2:GetY() + ry >= TacRP.SS(280) then
+                    ry = ry - TacRP.SS(60)
                 end
 
-                if self2:GetX() + rx + ScreenScale(160) >= ScrW() then
-                    rx = rx - ScreenScale(160)
+                if self2:GetX() + rx + TacRP.SS(160) >= ScrW() then
+                    rx = rx - TacRP.SS(160)
                 end
 
-                local bw, bh = ScreenScale(160), ScreenScale(12 + (6 * #desc))
+                local bw, bh = TacRP.SS(160), TacRP.SS(12 + (6 * #desc))
                 surface.SetDrawColor(col_bg)
                 TacRP.DrawCorneredBox(rx, ry, bw, bh, col_corner)
 
                 local txt = v.Name
                 surface.SetTextColor(col_text)
                 surface.SetFont("TacRP_Myriad_Pro_10")
-                surface.SetTextPos(rx + ScreenScale(2), ry + ScreenScale(1))
+                surface.SetTextPos(rx + TacRP.SS(2), ry + TacRP.SS(1))
                 surface.DrawText(txt)
 
                 local scoretxt = "(Rating: " .. math.Round(hoverscore) .. " / 100)"
-                draw.SimpleText(scoretxt, "TacRP_Myriad_Pro_8", rx + bw - ScreenScale(2), ry + ScreenScale(2), col_text, TEXT_ALIGN_RIGHT, TEXT_ALIGN_TOP)
+                draw.SimpleText(scoretxt, "TacRP_Myriad_Pro_8", rx + bw - TacRP.SS(2), ry + TacRP.SS(2), col_text, TEXT_ALIGN_RIGHT, TEXT_ALIGN_TOP)
 
                 surface.SetFont("TacRP_Myriad_Pro_6")
                 for j, k in pairs(desc) do
-                    surface.SetTextPos(rx + ScreenScale(2), ry + ScreenScale(1 + 8 + 2) + (ScreenScale(6 * (j - 1))))
+                    surface.SetTextPos(rx + TacRP.SS(2), ry + TacRP.SS(1 + 8 + 2) + (TacRP.SS(6 * (j - 1))))
                     surface.DrawText(k)
                 end
 
@@ -579,10 +579,10 @@ function SWEP:CreateCustomizeHUD()
             end
         end
 
-        local w_statbox = ScreenScale(164)
-        local x_3 = w_statbox - ScreenScale(32)
-        local x_2 = x_3 - ScreenScale(32)
-        local x_1 = x_2 - ScreenScale(32)
+        local w_statbox = TacRP.SS(164)
+        local x_3 = w_statbox - TacRP.SS(32)
+        local x_2 = x_3 - TacRP.SS(32)
+        local x_1 = x_2 - TacRP.SS(32)
 
         local function updatestat(i, k)
             local value = self:GetValue(k.Value)
@@ -696,7 +696,7 @@ function SWEP:CreateCustomizeHUD()
                 if !self.MiscCache["statbox"][i] then continue end
 
                 local row = layout:Add("DPanel")
-                row:SetSize(w_statbox, ScreenScale(8))
+                row:SetSize(w_statbox, TacRP.SS(8))
                 row.StatIndex = i
                 row.Paint = function(self2, w, h)
                     if !IsValid(self) then return end
@@ -710,10 +710,10 @@ function SWEP:CreateCustomizeHUD()
                     end
                     surface.SetFont("TacRP_Myriad_Pro_8")
                     surface.SetTextColor(255, 255, 255)
-                    surface.SetTextPos(ScreenScale(3), 0)
+                    surface.SetTextPos(TacRP.SS(3), 0)
                     surface.DrawText(k.Name .. ":")
 
-                    surface.SetTextPos(x_1 + ScreenScale(4), 0)
+                    surface.SetTextPos(x_1 + TacRP.SS(4), 0)
                     surface.DrawText(sicache[1])
 
                     if sicache[3] then
@@ -726,11 +726,11 @@ function SWEP:CreateCustomizeHUD()
                         surface.SetTextColor(255, 255, 255)
                     end
 
-                    surface.SetTextPos(x_2 + ScreenScale(4), 0)
+                    surface.SetTextPos(x_2 + TacRP.SS(4), 0)
                     surface.DrawText(sicache[2])
 
                     if sicache[5] then
-                        surface.SetTextPos(x_3 + ScreenScale(4), 0)
+                        surface.SetTextPos(x_3 + TacRP.SS(4), 0)
                         surface.DrawText(sicache[5])
                     end
                 end
@@ -740,7 +740,7 @@ function SWEP:CreateCustomizeHUD()
 
         local stat_box = vgui.Create("DPanel", bg)
         stat_box.PrintName = "Stats"
-        stat_box:SetSize(w_statbox, ScreenScale(172))
+        stat_box:SetSize(w_statbox, TacRP.SS(172))
         stat_box:SetPos(scrw - w_statbox - airgap - smallgap, stack + smallgap * 2 + tabs_h)
         stat_box.Paint = function(self2, w, h)
             if !IsValid(self) then return end
@@ -753,31 +753,31 @@ function SWEP:CreateCustomizeHUD()
             surface.DrawLine(x_1, 0, x_1, h)
             surface.DrawLine(x_2, 0, x_2, h)
             surface.DrawLine(x_3, 0, x_3, h)
-            surface.DrawLine(0, ScreenScale(2 + 8 + 1), w, ScreenScale(2 + 8 + 1))
+            surface.DrawLine(0, TacRP.SS(2 + 8 + 1), w, TacRP.SS(2 + 8 + 1))
 
             surface.SetFont("TacRP_Myriad_Pro_8")
             surface.SetTextColor(255, 255, 255)
-            surface.SetTextPos(ScreenScale(4), ScreenScale(2))
+            surface.SetTextPos(TacRP.SS(4), TacRP.SS(2))
             surface.DrawText("STAT")
 
             surface.SetFont("TacRP_Myriad_Pro_8")
             surface.SetTextColor(255, 255, 255)
-            surface.SetTextPos(x_1 + ScreenScale(4), ScreenScale(2))
+            surface.SetTextPos(x_1 + TacRP.SS(4), TacRP.SS(2))
             surface.DrawText("BASE")
 
             surface.SetFont("TacRP_Myriad_Pro_8")
             surface.SetTextColor(255, 255, 255)
-            surface.SetTextPos(x_2 + ScreenScale(4), ScreenScale(2))
+            surface.SetTextPos(x_2 + TacRP.SS(4), TacRP.SS(2))
             surface.DrawText("CURR")
 
             surface.SetFont("TacRP_Myriad_Pro_8")
             surface.SetTextColor(255, 255, 255)
-            surface.SetTextPos(x_3 + ScreenScale(4), ScreenScale(2))
+            surface.SetTextPos(x_3 + TacRP.SS(4), TacRP.SS(2))
             surface.DrawText("DIFF")
         end
         local stat_scroll = vgui.Create("DScrollPanel", stat_box)
         stat_scroll:Dock(FILL)
-        stat_scroll:DockMargin(0, ScreenScale(12), 0, 0)
+        stat_scroll:DockMargin(0, TacRP.SS(12), 0, 0)
         local sbar = stat_scroll:GetVBar()
         function sbar:Paint(w, h)
         end
@@ -799,7 +799,7 @@ function SWEP:CreateCustomizeHUD()
         local stat_layout = vgui.Create("DIconLayout", stat_scroll)
         stat_layout:Dock(FILL)
         stat_layout:SetLayoutDir(TOP)
-        -- stat_layout:SetSpaceY(ScreenScale(2))
+        -- stat_layout:SetSpaceY(TacRP.SS(2))
         populate_stats(stat_layout)
 
         stat_box.PaintOver = function(self2, w, h)
@@ -812,35 +812,35 @@ function SWEP:CreateCustomizeHUD()
                 local col_corner = Color(255, 255, 255)
                 local col_text = Color(255, 255, 255)
                 local rx, ry = self2:CursorPos()
-                rx = rx + ScreenScale(16)
-                ry = ry + ScreenScale(16)
+                rx = rx + TacRP.SS(16)
+                ry = ry + TacRP.SS(16)
 
                 local desc = stat.Description or {""}
                 if isstring(desc) then
                     desc = {desc}
                 end
 
-                if self2:GetY() + ry >= ScreenScale(280) then
-                    ry = ry - ScreenScale(60)
+                if self2:GetY() + ry >= TacRP.SS(280) then
+                    ry = ry - TacRP.SS(60)
                 end
 
-                if self2:GetX() + rx + ScreenScale(160) >= ScrW() then
-                    rx = rx - ScreenScale(160)
+                if self2:GetX() + rx + TacRP.SS(160) >= ScrW() then
+                    rx = rx - TacRP.SS(160)
                 end
 
-                local bw, bh = ScreenScale(160), ScreenScale(12 + (6 * #desc))
+                local bw, bh = TacRP.SS(160), TacRP.SS(12 + (6 * #desc))
                 surface.SetDrawColor(col_bg)
                 TacRP.DrawCorneredBox(rx, ry, bw, bh, col_corner)
 
                 local txt = stat.Name
                 surface.SetTextColor(col_text)
                 surface.SetFont("TacRP_Myriad_Pro_10")
-                surface.SetTextPos(rx + ScreenScale(2), ry + ScreenScale(1))
+                surface.SetTextPos(rx + TacRP.SS(2), ry + TacRP.SS(1))
                 surface.DrawText(txt)
 
                 surface.SetFont("TacRP_Myriad_Pro_6")
                 for i, k in pairs(desc) do
-                    surface.SetTextPos(rx + ScreenScale(2), ry + ScreenScale(1 + 8 + 2) + (ScreenScale(6 * (i - 1))))
+                    surface.SetTextPos(rx + TacRP.SS(2), ry + TacRP.SS(1 + 8 + 2) + (TacRP.SS(6 * (i - 1))))
                     surface.DrawText(k)
                 end
 
@@ -851,8 +851,8 @@ function SWEP:CreateCustomizeHUD()
         --[[]
         local stat_box = vgui.Create("DPanel", bg)
         stat_box.PrintName = "Stats"
-        stat_box:SetSize(ScreenScale(128), ScreenScale(172))
-        stat_box:SetPos(scrw - ScreenScale(128) - airgap, stack + smallgap * 2 + tabs_h)
+        stat_box:SetSize(TacRP.SS(128), TacRP.SS(172))
+        stat_box:SetPos(scrw - TacRP.SS(128) - airgap, stack + smallgap * 2 + tabs_h)
         stat_box.Paint = function(self2, w, h)
             if !IsValid(self) then return end
 
@@ -863,22 +863,22 @@ function SWEP:CreateCustomizeHUD()
             surface.DrawRect(0, 0, w, h)
             TacRP.DrawCorneredBox(0, 0, w, h)
 
-            local x_1 = w - ScreenScale(64)
-            local x_2 = w - ScreenScale(32)
+            local x_1 = w - TacRP.SS(64)
+            local x_2 = w - TacRP.SS(32)
 
             surface.SetDrawColor(255, 255, 255, 100)
             surface.DrawLine(x_1, 0, x_1, h)
             surface.DrawLine(x_2, 0, x_2, h)
-            surface.DrawLine(0, ScreenScale(2 + 8 + 1), w, ScreenScale(2 + 8 + 1))
+            surface.DrawLine(0, TacRP.SS(2 + 8 + 1), w, TacRP.SS(2 + 8 + 1))
 
             surface.SetFont("TacRP_Myriad_Pro_8")
             surface.SetTextColor(255, 255, 255)
-            surface.SetTextPos(x_1 + ScreenScale(4), ScreenScale(2))
+            surface.SetTextPos(x_1 + TacRP.SS(4), TacRP.SS(2))
             surface.DrawText("BASE")
 
             surface.SetFont("TacRP_Myriad_Pro_8")
             surface.SetTextColor(255, 255, 255)
-            surface.SetTextPos(x_2 + ScreenScale(4), ScreenScale(2))
+            surface.SetTextPos(x_2 + TacRP.SS(4), TacRP.SS(2))
             surface.DrawText("CURR")
 
             -- if hovered try to figure out what stat we're hovering over
@@ -914,7 +914,7 @@ function SWEP:CreateCustomizeHUD()
 
                 surface.SetFont("TacRP_Myriad_Pro_8")
                 surface.SetTextColor(255, 255, 255)
-                surface.SetTextPos(ScreenScale(2), ScreenScale(8 + 4 + 1) + (ScreenScale(8 * i2)))
+                surface.SetTextPos(TacRP.SS(2), TacRP.SS(8 + 4 + 1) + (TacRP.SS(8 * i2)))
                 surface.DrawText(k.Name .. ":")
 
                 local txt_base = tostring(stat_base)
@@ -941,7 +941,7 @@ function SWEP:CreateCustomizeHUD()
 
                 surface.SetTextColor(255, 255, 255)
                 surface.SetFont("TacRP_Myriad_Pro_8")
-                surface.SetTextPos(x_1 + ScreenScale(3), ScreenScale(8 + 4 + 1) + (ScreenScale(8 * i2)))
+                surface.SetTextPos(x_1 + TacRP.SS(3), TacRP.SS(8 + 4 + 1) + (TacRP.SS(8 * i2)))
                 surface.DrawText(txt_base .. (k.Unit or ""))
 
                 local good = false
@@ -973,12 +973,12 @@ function SWEP:CreateCustomizeHUD()
                     surface.SetTextColor(255, 255, 255)
                 end
 
-                surface.SetTextPos(x_2 + ScreenScale(3), ScreenScale(8 + 4 + 1) + (ScreenScale(8 * i2)))
+                surface.SetTextPos(x_2 + TacRP.SS(3), TacRP.SS(8 + 4 + 1) + (TacRP.SS(8 * i2)))
                 surface.DrawText(txt_curr .. (k.Unit or ""))
 
                 local mx, my = self2:CursorPos()
                 if mx > 0 and mx < w then
-                    if my > ScreenScale(8 + 4 + 1) + (ScreenScale(8 * i2)) and my < ScreenScale(8 + 4 + 1) + (ScreenScale(8 * i2)) + ScreenScale(8) then
+                    if my > TacRP.SS(8 + 4 + 1) + (TacRP.SS(8 * i2)) and my < TacRP.SS(8 + 4 + 1) + (TacRP.SS(8 * i2)) + TacRP.SS(8) then
                         hovered = true
                         hoverindex = i
                     end
@@ -993,8 +993,8 @@ function SWEP:CreateCustomizeHUD()
                 local col_corner = Color(255, 255, 255)
                 local col_text = Color(255, 255, 255)
                 local rx, ry = self2:CursorPos()
-                rx = rx + ScreenScale(16)
-                ry = ry + ScreenScale(16)
+                rx = rx + TacRP.SS(16)
+                ry = ry + TacRP.SS(16)
                 local stat = stats[hoverindex]
 
                 local desc = stat.Description or {""}
@@ -1002,27 +1002,27 @@ function SWEP:CreateCustomizeHUD()
                     desc = {desc}
                 end
 
-                if self2:GetY() + ry >= ScreenScale(280) then
-                    ry = ry - ScreenScale(60)
+                if self2:GetY() + ry >= TacRP.SS(280) then
+                    ry = ry - TacRP.SS(60)
                 end
 
-                if self2:GetX() + rx + ScreenScale(160) >= ScrW() then
-                    rx = rx - ScreenScale(160)
+                if self2:GetX() + rx + TacRP.SS(160) >= ScrW() then
+                    rx = rx - TacRP.SS(160)
                 end
 
-                local bw, bh = ScreenScale(160), ScreenScale(12 + (6 * #desc))
+                local bw, bh = TacRP.SS(160), TacRP.SS(12 + (6 * #desc))
                 surface.SetDrawColor(col_bg)
                 TacRP.DrawCorneredBox(rx, ry, bw, bh, col_corner)
 
                 local txt = stat.Name
                 surface.SetTextColor(col_text)
                 surface.SetFont("TacRP_Myriad_Pro_10")
-                surface.SetTextPos(rx + ScreenScale(2), ry + ScreenScale(1))
+                surface.SetTextPos(rx + TacRP.SS(2), ry + TacRP.SS(1))
                 surface.DrawText(txt)
 
                 surface.SetFont("TacRP_Myriad_Pro_6")
                 for i, k in pairs(desc) do
-                    surface.SetTextPos(rx + ScreenScale(2), ry + ScreenScale(1 + 8 + 2) + (ScreenScale(6 * (i - 1))))
+                    surface.SetTextPos(rx + TacRP.SS(2), ry + TacRP.SS(1 + 8 + 2) + (TacRP.SS(6 * (i - 1))))
                     surface.DrawText(k)
                 end
 
@@ -1035,12 +1035,12 @@ function SWEP:CreateCustomizeHUD()
         self.ActiveTab = self.ActiveTab or 1
 
         -- local tab_list = vgui.Create("DPanel", bg)
-        -- tab_list:SetSize(ScreenScale(172), tabs_h)
-        -- tab_list:SetPos(scrw - ScreenScale(172) - airgap, stack + smallgap)
+        -- tab_list:SetSize(TacRP.SS(172), tabs_h)
+        -- tab_list:SetPos(scrw - TacRP.SS(172) - airgap, stack + smallgap)
         -- tab_list:SetMouseInputEnabled(false)
         -- tab_list.Paint = function() return end
 
-        local tabs_w = ScreenScale(172) / #tabs - #tabs * ScreenScale(0.5)
+        local tabs_w = TacRP.SS(172) / #tabs - #tabs * TacRP.SS(0.5)
         for i = 1, #tabs do
             if i != self.ActiveTab then
                 tabs[i]:Hide()
@@ -1049,7 +1049,7 @@ function SWEP:CreateCustomizeHUD()
             local tab_button = vgui.Create("DLabel", bg)
             tab_button.TabIndex = i
             tab_button:SetSize(tabs_w, tabs_h)
-            tab_button:SetPos(scrw - ScreenScale(172) - airgap + (ScreenScale(2) + tabs_w) * (i - 1), stack + smallgap)
+            tab_button:SetPos(scrw - TacRP.SS(172) - airgap + (TacRP.SS(2) + tabs_w) * (i - 1), stack + smallgap)
             tab_button:SetText("")
             tab_button:SetMouseInputEnabled(true)
             tab_button:MoveToFront()
@@ -1100,7 +1100,7 @@ function SWEP:CreateCustomizeHUD()
 
     local attachment_slots = {}
 
-    local offset = (scrh - (ScreenScale(34 + 8) * table.Count(self.Attachments))) / 2
+    local offset = (scrh - (TacRP.SS(34 + 8) * table.Count(self.Attachments))) / 2
 
     self.Attachments["BaseClass"] = nil
 
@@ -1110,8 +1110,8 @@ function SWEP:CreateCustomizeHUD()
         attachment_slots[slot] = {}
 
         local slot_name = vgui.Create("DPanel", bg)
-        slot_name:SetPos(airgap, offset + airgap - ScreenScale(8) + ((slot - 1) * ScreenScale(34 + 8)))
-        slot_name:SetSize(ScreenScale(128), ScreenScale(8))
+        slot_name:SetPos(airgap, offset + airgap - TacRP.SS(8) + ((slot - 1) * TacRP.SS(34 + 8)))
+        slot_name:SetSize(TacRP.SS(128), TacRP.SS(8))
         slot_name.Paint = function(self2, w, h)
             if !IsValid(self) then return end
 
@@ -1146,8 +1146,8 @@ function SWEP:CreateCustomizeHUD()
         end)
 
         local prosconspanel = vgui.Create("DPanel", bg)
-        prosconspanel:SetPos(airgap + ((table.Count(atts)) * ScreenScale(34)), offset + airgap + ((slot - 1) * ScreenScale(34 + 8)))
-        prosconspanel:SetSize(ScreenScale(128), ScreenScale(34))
+        prosconspanel:SetPos(airgap + ((table.Count(atts)) * TacRP.SS(34)), offset + airgap + ((slot - 1) * TacRP.SS(34 + 8)))
+        prosconspanel:SetSize(TacRP.SS(128), TacRP.SS(34))
         prosconspanel.Paint = function(self2, w, h)
             if !IsValid(self) then return end
 
@@ -1165,7 +1165,7 @@ function SWEP:CreateCustomizeHUD()
             for i, pro in pairs(pros) do
                 surface.SetFont("TacRP_Myriad_Pro_8")
                 surface.SetTextColor(Color(50, 255, 50))
-                surface.SetTextPos(0, ScreenScale(c * 8))
+                surface.SetTextPos(0, TacRP.SS(c * 8))
                 surface.DrawText("+" .. pro)
 
                 c = c + 1
@@ -1174,7 +1174,7 @@ function SWEP:CreateCustomizeHUD()
             for i, con in pairs(cons) do
                 surface.SetFont("TacRP_Myriad_Pro_8")
                 surface.SetTextColor(Color(255, 50, 50))
-                surface.SetTextPos(0, ScreenScale(c * 8))
+                surface.SetTextPos(0, TacRP.SS(c * 8))
                 surface.DrawText("-" .. con)
 
                 c = c + 1
@@ -1188,8 +1188,8 @@ function SWEP:CreateCustomizeHUD()
             table.insert(attachment_slots[slot], slot_panel)
             slot_panel:SetText("")
             slot_panel:SetMouseInputEnabled(true)
-            slot_panel:SetPos(airgap + ((i - 1) * ScreenScale(34)), offset + airgap + ((slot - 1) * ScreenScale(34 + 8)))
-            slot_panel:SetSize(ScreenScale(32), ScreenScale(32))
+            slot_panel:SetPos(airgap + ((i - 1) * TacRP.SS(34)), offset + airgap + ((slot - 1) * TacRP.SS(34 + 8)))
+            slot_panel:SetSize(TacRP.SS(32), TacRP.SS(32))
             slot_panel.DoClick = function(self2)
                 if !TacRP.NearBench(LocalPlayer()) then
                     flash_end = CurTime() + 1
@@ -1281,10 +1281,10 @@ function SWEP:CreateCustomizeHUD()
 
                 if col_text == Color(0, 0, 0) then
                     surface.SetDrawColor(255, 255, 255, 50)
-                    surface.DrawRect(w / 2 - (t_w + ScreenScale(2)) / 2, h - ScreenScale(6), t_w + ScreenScale(2), ScreenScale(6))
+                    surface.DrawRect(w / 2 - (t_w + TacRP.SS(2)) / 2, h - TacRP.SS(6), t_w + TacRP.SS(2), TacRP.SS(6))
                 end
 
-                surface.SetTextPos((w - t_w) / 2, h - ScreenScale(6))
+                surface.SetTextPos((w - t_w) / 2, h - TacRP.SS(6))
                 surface.DrawText(txt)
 
                 if shownum then
@@ -1293,7 +1293,7 @@ function SWEP:CreateCustomizeHUD()
                     surface.SetFont("TacRP_Myriad_Pro_6")
                     surface.SetTextColor(col_text)
                     local nt_w = surface.GetTextSize(numtxt)
-                    surface.SetTextPos(w - nt_w - ScreenScale(2), ScreenScale(1))
+                    surface.SetTextPos(w - nt_w - TacRP.SS(2), TacRP.SS(1))
                     surface.DrawText(numtxt)
                 end
 
@@ -1306,45 +1306,45 @@ function SWEP:CreateCustomizeHUD()
                     local col_text_pro = Color(0, 130, 0, 230)
                     local col_text_con = Color(130, 0, 0, 230)
                     local rx, ry = self2:CursorPos()
-                    rx = rx + ScreenScale(16)
-                    ry = ry + ScreenScale(16)
-                    local gap = ScreenScale(18)
-                    local firstoff = ScreenScale(20)
-                    local statjump = ScreenScale(12)
+                    rx = rx + TacRP.SS(16)
+                    ry = ry + TacRP.SS(16)
+                    local gap = TacRP.SS(18)
+                    local firstoff = TacRP.SS(20)
+                    local statjump = TacRP.SS(12)
                     local statted = false
 
-                    if self2:GetY() + ry >= ScreenScale(280) then
-                        ry = ry - ScreenScale(60)
+                    if self2:GetY() + ry >= TacRP.SS(280) then
+                        ry = ry - TacRP.SS(60)
                     end
 
-                    local bw, bh = ScreenScale(160), ScreenScale(18)
+                    local bw, bh = TacRP.SS(160), TacRP.SS(18)
                     surface.SetDrawColor(col_bg)
                     TacRP.DrawCorneredBox(rx, ry, bw, bh, col_corner)
 
                     local txt = atttbl.FullName or atttbl.PrintName
                     surface.SetTextColor(col_text)
                     surface.SetFont("TacRP_Myriad_Pro_10")
-                    surface.SetTextPos(rx + ScreenScale(2), ry + ScreenScale(1))
+                    surface.SetTextPos(rx + TacRP.SS(2), ry + TacRP.SS(1))
                     surface.DrawText(txt)
 
                     txt = atttbl.Description or ""
                     surface.SetFont("TacRP_Myriad_Pro_6")
-                    surface.SetTextPos(rx + ScreenScale(2), ry + ScreenScale(1 + 8 + 2))
+                    surface.SetTextPos(rx + TacRP.SS(2), ry + TacRP.SS(1 + 8 + 2))
                     surface.DrawText(txt)
 
                     local bump = firstoff
-                    local txjy = ScreenScale(1)
-                    local rump = ScreenScale(9)
+                    local txjy = TacRP.SS(1)
+                    local rump = TacRP.SS(9)
                     if atttbl.Pros then for aa, ab in ipairs(atttbl.Pros) do
                         surface.SetDrawColor(col_text_pro)
-                        TacRP.DrawCorneredBox( rx, ry + bump, bw, ScreenScale(10) )
+                        TacRP.DrawCorneredBox( rx, ry + bump, bw, TacRP.SS(10) )
                         surface.SetFont("TacRP_Myriad_Pro_8")
                         surface.SetTextColor(col_text)
                         surface.SetTextPos(rx + rump, ry + bump + txjy)
                         surface.DrawText(ab)
 
                         surface.SetFont("TacRP_Myriad_Pro_8")
-                        surface.SetTextPos(rx + ScreenScale(3), ry + bump + txjy)
+                        surface.SetTextPos(rx + TacRP.SS(3), ry + bump + txjy)
                         surface.DrawText("+")
 
                         bump = bump + statjump
@@ -1352,14 +1352,14 @@ function SWEP:CreateCustomizeHUD()
                     end end
                     if atttbl.Cons then for aa, ab in ipairs(atttbl.Cons) do
                         surface.SetDrawColor(col_text_con)
-                        TacRP.DrawCorneredBox( rx, ry + bump, bw, ScreenScale(10) )
+                        TacRP.DrawCorneredBox( rx, ry + bump, bw, TacRP.SS(10) )
                         surface.SetFont("TacRP_Myriad_Pro_8")
                         surface.SetTextColor(col_text)
                         surface.SetTextPos(rx + rump, ry + bump + txjy)
                         surface.DrawText(ab)
 
                         surface.SetFont("TacRP_Myriad_Pro_8")
-                        surface.SetTextPos(rx + ScreenScale(3.8), ry + bump + txjy)
+                        surface.SetTextPos(rx + TacRP.SS(3.8), ry + bump + txjy)
                         surface.DrawText("-")
 
                         bump = bump + statjump
@@ -1374,9 +1374,9 @@ function SWEP:CreateCustomizeHUD()
                     local can, reason = TacRP.CanCustomize(self:GetOwner(), self, att, attslot)
                     if !can then
                         reason = reason or "Restricted"
-                        local reasonx, reasonw = rx + ScreenScale(14), bw - ScreenScale(14)
+                        local reasonx, reasonw = rx + TacRP.SS(14), bw - TacRP.SS(14)
                         surface.SetDrawColor(25, 0, 0, 240)
-                        TacRP.DrawCorneredBox(reasonx, ry + bump, reasonw, ScreenScale(12), col_text_con)
+                        TacRP.DrawCorneredBox(reasonx, ry + bump, reasonw, TacRP.SS(12), col_text_con)
                         surface.SetFont("TacRP_Myriad_Pro_12")
                         if flash_end > CurTime() then
                             local c = 255 - (flash_end - CurTime()) * 255
@@ -1388,7 +1388,7 @@ function SWEP:CreateCustomizeHUD()
                         end
 
                         surface.SetMaterial(lock)
-                        surface.DrawTexturedRect(rx, ry + bump, ScreenScale(12), ScreenScale(12))
+                        surface.DrawTexturedRect(rx, ry + bump, TacRP.SS(12), TacRP.SS(12))
 
                         local tw = surface.GetTextSize(reason)
                         surface.SetTextPos(reasonx + reasonw / 2 - tw / 2, ry + bump)

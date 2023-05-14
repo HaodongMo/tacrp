@@ -86,8 +86,8 @@ function ATT.TacticalDraw(self)
     local scrw = ScrW()
     local scrh = ScrH()
 
-    local w = ScreenScale(128)
-    local h = ScreenScale(8)
+    local w = TacRP.SS(128)
+    local h = TacRP.SS(8)
 
     local x = (scrw - w) / 2
     local y = (scrh - h) * 7 / 8
@@ -95,10 +95,10 @@ function ATT.TacticalDraw(self)
     surface.SetDrawColor(0, 0, 0, 100)
     TacRP.DrawCorneredBox(x, y, w, h)
 
-    x = x + ScreenScale(1)
-    y = y + ScreenScale(1)
-    w = w - ScreenScale(2)
-    h = h - ScreenScale(2)
+    x = x + TacRP.SS(1)
+    y = y + TacRP.SS(1)
+    w = w - TacRP.SS(2)
+    h = h - TacRP.SS(2)
 
     local c = math.Clamp(self:GetOwner():GetNWFloat("TacRPDashCharge", 0), 0, 1)
 

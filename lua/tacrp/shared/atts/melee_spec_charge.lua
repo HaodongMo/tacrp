@@ -258,8 +258,8 @@ function ATT.TacticalDraw(self)
     local scrw = ScrW()
     local scrh = ScrH()
 
-    local w = ScreenScale(128)
-    local h = ScreenScale(8)
+    local w = TacRP.SS(128)
+    local h = TacRP.SS(8)
 
     local x = (scrw - w) / 2
     local y = (scrh - h) * 7 / 8
@@ -267,30 +267,30 @@ function ATT.TacticalDraw(self)
     surface.SetDrawColor(0, 0, 0, 100)
     TacRP.DrawCorneredBox(x, y, w, h)
 
-    x = x + ScreenScale(1)
-    y = y + ScreenScale(1)
-    w = w - ScreenScale(2)
-    h = h - ScreenScale(2)
+    x = x + TacRP.SS(1)
+    y = y + TacRP.SS(1)
+    w = w - TacRP.SS(2)
+    h = h - TacRP.SS(2)
 
     local chargin = incharge(ply)
 
     local curmode = ply:GetNWInt("TacRPChargeMode", 0)
     if !chargin and ply:KeyDown(IN_WALK) then
 
-        local w_mode = w / modecount - ScreenScale(0.5) * (modecount - 1)
+        local w_mode = w / modecount - TacRP.SS(0.5) * (modecount - 1)
         for i = 0, modecount - 1 do
             local c_bg, c_cnr, c_txt = TacRP.GetPanelColors(curmode == i, curmode == i)
             surface.SetDrawColor(c_bg)
-            TacRP.DrawCorneredBox(x + (i / modecount * w) + (i * ScreenScale(0.5)), y - ScreenScale(45), w_mode, ScreenScale(6), c_cnr)
-            draw.SimpleText(modes[i][1], "TacRP_HD44780A00_5x8_4", x + (i / modecount * w) + (i * ScreenScale(0.5)) + w_mode / 2, y - ScreenScale(45 - 3), c_txt, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+            TacRP.DrawCorneredBox(x + (i / modecount * w) + (i * TacRP.SS(0.5)), y - TacRP.SS(45), w_mode, TacRP.SS(6), c_cnr)
+            draw.SimpleText(modes[i][1], "TacRP_HD44780A00_5x8_4", x + (i / modecount * w) + (i * TacRP.SS(0.5)) + w_mode / 2, y - TacRP.SS(45 - 3), c_txt, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
         end
 
         surface.SetDrawColor(0, 0, 0, 240)
-        TacRP.DrawCorneredBox(x, y - ScreenScale(38), w, ScreenScale(24))
+        TacRP.DrawCorneredBox(x, y - TacRP.SS(38), w, TacRP.SS(24))
 
-        local desc = TacRP.MultiLineText(modes[curmode][2], w - ScreenScale(6), "TacRP_Myriad_Pro_6")
+        local desc = TacRP.MultiLineText(modes[curmode][2], w - TacRP.SS(6), "TacRP_Myriad_Pro_6")
         for j, text in ipairs(desc or {}) do
-            draw.SimpleText(text, "TacRP_Myriad_Pro_6", x + ScreenScale(3), y - ScreenScale(38 - 2) + (j - 1) * ScreenScale(6.5), color_white, TEXT_ALIGN_LEFT, TEXT_ALIGN_TOP)
+            draw.SimpleText(text, "TacRP_Myriad_Pro_6", x + TacRP.SS(3), y - TacRP.SS(38 - 2) + (j - 1) * TacRP.SS(6.5), color_white, TEXT_ALIGN_LEFT, TEXT_ALIGN_TOP)
         end
     end
 
@@ -299,8 +299,8 @@ function ATT.TacticalDraw(self)
 
     local c_bg, c_cnr, c_txt = TacRP.GetPanelColors(chargin, chargin)
     surface.SetDrawColor(c_bg)
-    TacRP.DrawCorneredBox(x + w / 2 - w / 6, y - ScreenScale(12), w / 3, ScreenScale(9), c_cnr)
-    draw.SimpleText(modes[curmode][1], "TacRP_HD44780A00_5x8_6", x + w / 2, y - ScreenScale(8), c_txt, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+    TacRP.DrawCorneredBox(x + w / 2 - w / 6, y - TacRP.SS(12), w / 3, TacRP.SS(9), c_cnr)
+    draw.SimpleText(modes[curmode][1], "TacRP_HD44780A00_5x8_6", x + w / 2, y - TacRP.SS(8), c_txt, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
 
 
     if chargin then

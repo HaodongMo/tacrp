@@ -25,8 +25,8 @@ function ATT.TacticalDraw(self)
     local scrw = ScrW()
     local scrh = ScrH()
 
-    local w = ScreenScale(100)
-    local h = ScreenScale(100)
+    local w = TacRP.SS(100)
+    local h = TacRP.SS(100)
 
     local x = (scrw - w) / 2
     local y = (scrh - h) * 0.99
@@ -78,19 +78,19 @@ function ATT.TacticalDraw(self)
     surface.DrawTexturedRect(x, y, w, h)
     -- surface.SetDrawColor(255, 255, 255, 255)
 
-    local ds = ScreenScale(4)
+    local ds = TacRP.SS(4)
 
     for _, dot in ipairs(radarpositions) do
         local dx = x + (dot.x * TacRP.HUToM * w * (36 / 40) / 100) + (w / 2)
         local dy = y + (dot.y * TacRP.HUToM * h * (36 / 40) / 100) + (h / 2)
 
-        local gs = ScreenScale(8)
+        local gs = TacRP.SS(8)
 
         dx = math.Round(dx / (w / gs)) * (w / gs)
         dy = math.Round(dy / (h / gs)) * (h / gs)
 
-        dx = dx - ScreenScale(0.5)
-        dy = dy - ScreenScale(0.5)
+        dx = dx - TacRP.SS(0.5)
+        dy = dy - TacRP.SS(0.5)
 
         if math.abs(dot.z) > 128 then
             surface.SetMaterial(mat_tri)

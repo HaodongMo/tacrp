@@ -38,7 +38,7 @@ local function generatefonts()
 
             surface.CreateFont( "TacRP_" .. fontname .. "_" .. tostring(i), {
                 font = font,
-                size = ScreenScale(i),
+                size = TacRP.SS(i),
                 weight = 0,
                 antialias = true,
                 extended = true, -- Required for non-latin fonts
@@ -46,7 +46,7 @@ local function generatefonts()
 
             surface.CreateFont( "TacRP_" .. fontname .. "_" .. tostring(i) .. "_Glow", {
                 font = font,
-                size = ScreenScale(i),
+                size = TacRP.SS(i),
                 weight = 0,
                 antialias = true,
                 blursize = 6,
@@ -79,6 +79,7 @@ function TacRP.Regen(full)
 end
 
 hook.Add( "OnScreenSizeChanged", "TacRP.Regen", function() TacRP.Regen(true) end)
+cvars.AddChangeCallback("tacrp_hudscale", function() TacRP.Regen(true) end, "tacrp_hudscale")
 
 function TacRP.MultiLineText(text, maxw, font)
     local content = {}

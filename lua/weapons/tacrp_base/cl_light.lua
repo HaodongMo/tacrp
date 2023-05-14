@@ -213,7 +213,7 @@ function SWEP:DrawFlashlightGlare(pos, ang, strength, dot)
             s = s + math.Clamp(1 - diff:Length() / 4096, 0, 1) ^ 1.2 * wep:GetSightAmount() * dot * 3000 * math.Rand(0.95, 1.05)
         end
         if tr.Fraction == 1 then
-            s = ScreenScale(s)
+            s = TacRP.SS(s)
             local toscreen = pos:ToScreen()
             cam.Start2D()
                 surface.SetMaterial(flaremat)

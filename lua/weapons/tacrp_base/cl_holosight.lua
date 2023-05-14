@@ -53,7 +53,7 @@ function SWEP:DoHolosight(mdl)
         -- local x = toscreen.x
         -- local y = toscreen.y
 
-        -- local ss = ScreenScale(32)
+        -- local ss = TacRP.SS(32)
         -- local sx = x - (ss / 2)
         -- local sy = y - (ss / 2)
 

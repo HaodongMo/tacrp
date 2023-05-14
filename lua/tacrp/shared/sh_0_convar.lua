@@ -318,7 +318,11 @@ local conVars = {
         default = "1",
         client = true,
     },
-
+    {
+        name = "hudscale",
+        default = "1",
+        client = true,
+    },
 
     {
         name = "dev_benchgun",
@@ -630,6 +634,14 @@ local function menu_client_ti(panel)
         command = "tacrp_vignette"
     })
     panel:ControlHelp("Vignette intensity is based on amount of accumulated recoil.")
+    panel:AddControl("slider", {
+        label = "HUD Scale",
+        command = "tacrp_hudscale",
+        type = "float",
+        min = 0.25,
+        max = 1.5,
+    })
+    panel:ControlHelp("HUD is already scaled to screen width; this slider may help ultrawide users or people with a vertical setup.")
 
     header(panel, "\nHints")
     panel:AddControl("checkbox", {

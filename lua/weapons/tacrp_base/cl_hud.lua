@@ -149,13 +149,13 @@ function SWEP:DrawHints()
 
     local clr_w = Color(255, 255, 255, a * 255)
 
-    local x, y = ScreenScale(4), ScrH() / 2
-    local row = ScreenScale(12)
-    local glyphsize = ScreenScale(8)
-    local w, h = ScreenScale(100), table.Count(caps) * row
+    local x, y = TacRP.SS(4), ScrH() / 2
+    local row = TacRP.SS(12)
+    local glyphsize = TacRP.SS(8)
+    local w, h = TacRP.SS(100), table.Count(caps) * row
     surface.SetDrawColor(0, 0, 0, 150 * a)
     TacRP.DrawCorneredBox(x, y - h / 2, w, h, clr_w)
-    local x2, x3 = ScreenScale(6), ScreenScale(30)
+    local x2, x3 = TacRP.SS(6), TacRP.SS(30)
     local y2 = y - h / 2
     for k, v in SortedPairsByMemberValue(self.CachedCapabilities, "so") do
         local keys = string.Explode("/", k, false)
@@ -166,21 +166,21 @@ function SWEP:DrawHints()
             local key = TacRP.GetBindKey(keys[i])
             if glyphs[key] then
                 surface.SetMaterial(glyphs[key])
-                surface.DrawTexturedRect(x + x_glyph, y_glyph - glyphsize / 2, ScreenScale(8), glyphsize)
+                surface.DrawTexturedRect(x + x_glyph, y_glyph - glyphsize / 2, TacRP.SS(8), glyphsize)
                 -- surface.DrawOutlinedRect(x + x_glyph, y_glyph - glyphsize / 2, glyphsize, glyphsize, 2)
                 x_glyph = x_glyph + glyphsize
             else
                 key = rename[key] or key
-                local addw = string.len(key) * ScreenScale(3.5) + ScreenScale(5)
+                local addw = string.len(key) * TacRP.SS(3.5) + TacRP.SS(5)
                 surface.DrawOutlinedRect(x + x_glyph, y_glyph - glyphsize / 2, addw, glyphsize, 1)
                 draw.SimpleText(key, "TacRP_HD44780A00_5x8_5", x + x_glyph + addw / 2, y_glyph, clr_w, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
                 x_glyph = x_glyph + addw
             end
 
             if i < #keys then
-                x_glyph = x_glyph + ScreenScale(2)
+                x_glyph = x_glyph + TacRP.SS(2)
             else
-                x_glyph = x_glyph + ScreenScale(4)
+                x_glyph = x_glyph + TacRP.SS(4)
             end
         end
 
@@ -258,7 +258,7 @@ function SWEP:DoDrawCrosshair(x, y)
         tacfunc(self, truepos and x2 or x, truepos and y2 or y, spread, sway)
     end
 
-    spread = math.Round( math.max(spread, 2) + ScreenScale(sway * math.pi))
+    spread = math.Round( math.max(spread, 2) + TacRP.SS(sway * math.pi))
 
     if !dev and self.CrosshairAlpha <= 0 then return true end
 
@@ -380,8 +380,8 @@ function SWEP:DrawBottomBar(x, y, w, h)
             surface.SetMaterial(self:GetFiremodeMat(self:GetCurrentFiremode()))
         end
         surface.SetDrawColor(col)
-        local sfm = ScreenScale(14)
-        surface.DrawTexturedRect(x + w - sfm - ScreenScale(1 + 10), y + h - sfm - ScreenScale(1), sfm, sfm)
+        local sfm = TacRP.SS(14)
+        surface.DrawTexturedRect(x + w - sfm - TacRP.SS(1 + 10), y + h - sfm - TacRP.SS(1), sfm, sfm)
     end
 
     if self:GetFiremodeAmount() > 1 and !self:GetSafe() then
@@ -390,13 +390,13 @@ function SWEP:DrawBottomBar(x, y, w, h)
         surface.SetTextColor(col)
         surface.SetFont("TacRP_HD44780A00_5x8_4")
         local tw = surface.GetTextSize(nextfm)
-        surface.SetTextPos(x + w - tw - ScreenScale(2), y + h - ScreenScale(14))
+        surface.SetTextPos(x + w - tw - TacRP.SS(2), y + h - TacRP.SS(14))
         surface.DrawText(nextfm)
 
         surface.SetMaterial(self:GetFiremodeMat(self:GetNextFiremode()))
         surface.SetDrawColor(col)
-        local nfm = ScreenScale(8)
-        surface.DrawTexturedRect(x + w - nfm - ScreenScale(4), y + h - nfm - ScreenScale(1), nfm, nfm)
+        local nfm = TacRP.SS(8)
+        surface.DrawTexturedRect(x + w - nfm - TacRP.SS(4), y + h - nfm - TacRP.SS(1), nfm, nfm)
     end
 
     if self:GetValue("CanQuickNade") then
@@ -410,16 +410,16 @@ function SWEP:DrawBottomBar(x, y, w, h)
             qty = self:GetOwner():GetAmmoCount(nade.Ammo)
         end
 
-        local sg = ScreenScale(14)
+        local sg = TacRP.SS(14)
 
         if nade.Icon then
             surface.SetMaterial(nade.Icon)
             surface.SetDrawColor(255, 255, 255)
-            surface.DrawTexturedRect(x + ScreenScale(2), y + h - sg - ScreenScale(1), sg, sg)
+            surface.DrawTexturedRect(x + TacRP.SS(2), y + h - sg - TacRP.SS(1), sg, sg)
         end
 
         local nadetext = nade.PrintName .. (qty and ("x" .. qty) or "")
-        surface.SetTextPos(x + ScreenScale(4) + sg, y + h - sg + ScreenScale(1))
+        surface.SetTextPos(x + TacRP.SS(4) + sg, y + h - sg + TacRP.SS(1))
         surface.SetFont("TacRP_HD44780A00_5x8_8")
         surface.SetTextColor(col)
         surface.DrawText(nadetext)
@@ -431,12 +431,12 @@ function SWEP:DrawBottomBar(x, y, w, h)
             mat = mat_radial
         end
 
-        local nsg = ScreenScale(10)
+        local nsg = TacRP.SS(10)
 
         if mat then
             surface.SetMaterial(mat)
             surface.SetDrawColor(255, 255, 255)
-            surface.DrawTexturedRect(x + w - ScreenScale(41), y + h - nsg - ScreenScale(1), nsg, nsg)
+            surface.DrawTexturedRect(x + w - TacRP.SS(41), y + h - nsg - TacRP.SS(1), nsg, nsg)
         end
 
         local nextnadetxt = TacRP.GetBind("grenade2")
@@ -444,7 +444,7 @@ function SWEP:DrawBottomBar(x, y, w, h)
         surface.SetTextColor(col)
         surface.SetFont("TacRP_HD44780A00_5x8_4")
         local tw = surface.GetTextSize(nextnadetxt)
-        surface.SetTextPos(x + w - ScreenScale(36) - (tw / 2), y + h - nsg - ScreenScale(4))
+        surface.SetTextPos(x + w - TacRP.SS(36) - (tw / 2), y + h - nsg - TacRP.SS(4))
         surface.DrawText(nextnadetxt)
     end
 end
@@ -482,22 +482,22 @@ function SWEP:DrawHUDBackground()
 
         if GetConVar("tacrp_drawhud"):GetBool() and engine.ActiveGamemode() != "terrortown" then
 
-            local w = ScreenScale(110)
-            local h = ScreenScale(40)
-            local x = ScrW() - w - ScreenScale(8)
-            local y = ScrH() - h - ScreenScale(8)
+            local w = TacRP.SS(110)
+            local h = TacRP.SS(40)
+            local x = ScrW() - w - TacRP.SS(8)
+            local y = ScrH() - h - TacRP.SS(8)
 
             surface.SetDrawColor(0, 0, 0, 150)
             TacRP.DrawCorneredBox(x, y, w, h, col)
 
             surface.SetFont("TacRP_HD44780A00_5x8_8")
             local tw = surface.GetTextSize(self.PrintName)
-            surface.SetTextPos(x + ScreenScale(3), y + ScreenScale(1))
+            surface.SetTextPos(x + TacRP.SS(3), y + TacRP.SS(1))
             if tw > w then
                 surface.SetFont("TacRP_HD44780A00_5x8_6")
                 tw = surface.GetTextSize(self.PrintName)
-            elseif tw > w - ScreenScale(3) then
-                surface.SetTextPos(x + ScreenScale(1.5), y + ScreenScale(1))
+            elseif tw > w - TacRP.SS(3) then
+                surface.SetTextPos(x + TacRP.SS(1.5), y + TacRP.SS(1))
             end
             surface.SetTextColor(col)
             surface.DrawText(self.PrintName)
@@ -512,12 +512,12 @@ function SWEP:DrawHUDBackground()
                     local t = math.max(0, self:Clip1()) .. " /" .. self.Primary.ClipSize
                     local tw = surface.GetTextSize(t)
                     surface.SetTextColor(col)
-                    surface.SetTextPos(x + w - tw - ScreenScale(40), y + ScreenScale(12))
+                    surface.SetTextPos(x + w - tw - TacRP.SS(40), y + TacRP.SS(12))
                     surface.DrawText(t)
                 else
-                    local sb = ScreenScale(4)
-                    local xoffset = ScreenScale(77)
-                    -- local pw = ScreenScale(1)
+                    local sb = TacRP.SS(4)
+                    local xoffset = TacRP.SS(77)
+                    -- local pw = TacRP.SS(1)
 
                     local row1_bullets = 0
                     local row2_bullets = 0
@@ -556,10 +556,10 @@ function SWEP:DrawHUDBackground()
 
                     if rackrisetime + 0.2 > CurTime() then
                         local rackrisedelta = ((rackrisetime + 0.2) - CurTime()) / 0.2
-                        rackrise = rackrisedelta * (sb + ScreenScale(1))
+                        rackrise = rackrisedelta * (sb + TacRP.SS(1))
                     end
 
-                    render.SetScissorRect(x, y, x + w, y + ScreenScale(12) + sb + sb + 3, true)
+                    render.SetScissorRect(x, y, x + w, y + TacRP.SS(12) + sb + sb + 3, true)
 
                     for i = 1, row1_size do
                         if i == row1_bullets then
@@ -571,7 +571,7 @@ function SWEP:DrawHUDBackground()
                         else
                             surface.SetDrawColor(col)
                         end
-                        surface.DrawRect(x + xoffset - (i * (sb + ScreenScale(1))), y + ScreenScale(12) + rackrise, sb, sb)
+                        surface.DrawRect(x + xoffset - (i * (sb + TacRP.SS(1))), y + TacRP.SS(12) + rackrise, sb, sb)
                     end
 
                     for i = 1, row2_size do
@@ -591,14 +591,14 @@ function SWEP:DrawHUDBackground()
                                 m = 2
                             end
 
-                            surface.DrawRect(x + xoffset - (i * (sb * m + ScreenScale(1))), y + ScreenScale(12 + 1) + sb * (2 - m) / 2, sb * m, sb * m)
+                            surface.DrawRect(x + xoffset - (i * (sb * m + TacRP.SS(1))), y + TacRP.SS(12 + 1) + sb * (2 - m) / 2, sb * m, sb * m)
                         -- elseif row > 2 and i <= row - 2 then
-                        --     surface.DrawRect(x + xoffset - (i * (sb + ScreenScale(1))), y + ScreenScale(12 + 1) + sb + rackrise, sb, sb)
+                        --     surface.DrawRect(x + xoffset - (i * (sb + TacRP.SS(1))), y + TacRP.SS(12 + 1) + sb + rackrise, sb, sb)
                         --     surface.SetDrawColor(col_hi)
-                        --     surface.DrawRect(x + xoffset - (i * (sb + ScreenScale(1))) + sb / 2 - pw / 2, y + ScreenScale(12 + 1) + sb + rackrise, pw, sb)
-                        --     surface.DrawRect(x + xoffset - (i * (sb + ScreenScale(1))), y + ScreenScale(12 + 1) + sb + rackrise + sb / 2 - pw / 2, sb, pw)
+                        --     surface.DrawRect(x + xoffset - (i * (sb + TacRP.SS(1))) + sb / 2 - pw / 2, y + TacRP.SS(12 + 1) + sb + rackrise, pw, sb)
+                        --     surface.DrawRect(x + xoffset - (i * (sb + TacRP.SS(1))), y + TacRP.SS(12 + 1) + sb + rackrise + sb / 2 - pw / 2, sb, pw)
                         else
-                            surface.DrawRect(x + xoffset - (i * (sb + ScreenScale(1))), y + ScreenScale(12 + 1) + sb + rackrise, sb, sb)
+                            surface.DrawRect(x + xoffset - (i * (sb + TacRP.SS(1))), y + TacRP.SS(12 + 1) + sb + rackrise, sb, sb)
                         end
                     end
                 end
@@ -611,7 +611,7 @@ function SWEP:DrawHUDBackground()
                     clips = "---"
                 elseif self.Primary.ClipSize > 0 then
                     surface.SetTextColor(col)
-                    surface.SetTextPos(x + w - ScreenScale(31), y + ScreenScale(16))
+                    surface.SetTextPos(x + w - TacRP.SS(31), y + TacRP.SS(16))
                     surface.SetFont("TacRP_HD44780A00_5x8_6")
                     surface.DrawText("+")
                     if (self:GetValue("PrimaryGrenade") and TacRP.IsGrenadeInfiniteAmmo(self:GetValue("PrimaryGrenade"))) or (!self:GetValue("PrimaryGrenade") and self:GetInfiniteAmmo()) then
@@ -620,7 +620,7 @@ function SWEP:DrawHUDBackground()
                 end
 
                 surface.SetTextColor(col)
-                surface.SetTextPos(x + w - ScreenScale(25), y + ScreenScale(12))
+                surface.SetTextPos(x + w - TacRP.SS(25), y + TacRP.SS(12))
                 surface.SetFont("TacRP_HD44780A00_5x8_10")
                 surface.DrawText(clips)
             else
@@ -634,19 +634,19 @@ function SWEP:DrawHUDBackground()
                 if self:GetValue("PrimaryGrenade") then
                     local nade = TacRP.QuickNades[self:GetValue("PrimaryGrenade")]
                     if nade.Icon then
-                        local sg = ScreenScale(32)
+                        local sg = TacRP.SS(32)
                         surface.SetMaterial(nade.Icon)
                         surface.SetDrawColor(255, 255, 255)
-                        surface.DrawTexturedRect(x + ScreenScale(4), y + h - sg + ScreenScale(1), sg, sg)
+                        surface.DrawTexturedRect(x + TacRP.SS(4), y + h - sg + TacRP.SS(1), sg, sg)
                     end
 
                     surface.SetTextColor(col)
-                    surface.SetTextPos(x + ScreenScale(36), y + h - ScreenScale(20))
+                    surface.SetTextPos(x + TacRP.SS(36), y + h - TacRP.SS(20))
                     surface.SetFont("TacRP_HD44780A00_5x8_14")
                     surface.DrawText("x" .. clips)
                 else
                     surface.SetTextColor(col)
-                    surface.SetTextPos(x + ScreenScale(36), y + ScreenScale(12))
+                    surface.SetTextPos(x + TacRP.SS(36), y + TacRP.SS(12))
                     surface.SetFont("TacRP_HD44780A00_5x8_10")
                     surface.DrawText(clips)
                 end
@@ -654,22 +654,22 @@ function SWEP:DrawHUDBackground()
 
             if self:ShouldDrawBottomBar() then
                 surface.SetDrawColor(col)
-                surface.DrawLine(x + ScreenScale(2), y + ScreenScale(24), x + w - ScreenScale(2), y + ScreenScale(24))
+                surface.DrawLine(x + TacRP.SS(2), y + TacRP.SS(24), x + w - TacRP.SS(2), y + TacRP.SS(24))
                 self:DrawBottomBar(x, y, w, h)
             end
 
 
-            local l_w = ScreenScale(80)
-            local l_h = ScreenScale(40)
-            local l_x = ScreenScale(8)
-            local l_y = ScrH() - l_h - ScreenScale(8)
+            local l_w = TacRP.SS(80)
+            local l_h = TacRP.SS(40)
+            local l_x = TacRP.SS(8)
+            local l_y = ScrH() - l_h - TacRP.SS(8)
 
             local perc = LocalPlayer():Health() / LocalPlayer():GetMaxHealth()
 
             surface.SetDrawColor(0, 0, 0, 150)
             TacRP.DrawCorneredBox(l_x, l_y, l_w, l_h, col)
 
-            surface.SetTextPos(l_x + ScreenScale(4), l_y + ScreenScale(1))
+            surface.SetTextPos(l_x + TacRP.SS(4), l_y + TacRP.SS(1))
             surface.SetFont("TacRP_HD44780A00_5x8_10")
 
             if perc <= 0.2 then
@@ -686,10 +686,10 @@ function SWEP:DrawHUDBackground()
 
             surface.DrawText("♥")
 
-            local hpb_x = l_x + ScreenScale(14)
-            local hpb_y = l_y + ScreenScale(4)
-            local hpb_w = ScreenScale(2)
-            local hpb_h = ScreenScale(8)
+            local hpb_x = l_x + TacRP.SS(14)
+            local hpb_y = l_y + TacRP.SS(4)
+            local hpb_w = TacRP.SS(2)
+            local hpb_h = TacRP.SS(8)
 
             local hpb_can = math.ceil(20 * perc)
 
@@ -702,15 +702,15 @@ function SWEP:DrawHUDBackground()
                     surface.SetDrawColor(col)
                 end
                 if hpb_can >= i then
-                    surface.DrawRect(hpb_x + (i * (hpb_w + ScreenScale(1))), hpb_y, hpb_w, hpb_h)
+                    surface.DrawRect(hpb_x + (i * (hpb_w + TacRP.SS(1))), hpb_y, hpb_w, hpb_h)
                 else
-                    surface.DrawOutlinedRect(hpb_x + (i * (hpb_w + ScreenScale(1))), hpb_y, hpb_w, hpb_h)
+                    surface.DrawOutlinedRect(hpb_x + (i * (hpb_w + TacRP.SS(1))), hpb_y, hpb_w, hpb_h)
                 end
             end
 
             surface.SetDrawColor(col)
 
-            surface.DrawLine(l_x + ScreenScale(2), l_y + ScreenScale(15), l_x + l_w - ScreenScale(2), l_y + ScreenScale(15))
+            surface.DrawLine(l_x + TacRP.SS(2), l_y + TacRP.SS(15), l_x + l_w - TacRP.SS(2), l_y + TacRP.SS(15))
 
             local face = "-_-"
 
@@ -822,7 +822,7 @@ function SWEP:DrawHUDBackground()
                 end
             end
 
-            surface.SetTextPos(l_x + ScreenScale(4), l_y + ScreenScale(22))
+            surface.SetTextPos(l_x + TacRP.SS(4), l_y + TacRP.SS(22))
             surface.SetFont("TacRP_HD44780A00_5x8_10")
             surface.SetTextColor(col)
             surface.DrawText(face)
@@ -831,8 +831,8 @@ function SWEP:DrawHUDBackground()
 
             local armor = self:GetOwner():Armor()
 
-            local asq = ScreenScale(8)
-            local ss = ScreenScale(4)
+            local asq = TacRP.SS(8)
+            local ss = TacRP.SS(4)
 
             local function drawarmorsquare(level, x, y)
                 if level == 1 then
@@ -850,12 +850,12 @@ function SWEP:DrawHUDBackground()
                 end
             end
 
-            local cx1 = l_x + l_w - ScreenScale(20)
-            local cy1 = l_y + ScreenScale(19)
+            local cx1 = l_x + l_w - TacRP.SS(20)
+            local cy1 = l_y + TacRP.SS(19)
             local cx2 = cx1 + asq + 2
             local cy2 = cy1 + asq + 2
 
-            surface.SetTextPos(cx1 - ScreenScale(10), cy1 + ScreenScale(3))
+            surface.SetTextPos(cx1 - TacRP.SS(10), cy1 + TacRP.SS(3))
             surface.SetFont("TacRP_HD44780A00_5x8_10")
             surface.SetTextColor(col)
             surface.DrawText("⌂")
@@ -892,10 +892,10 @@ function SWEP:DrawHUDBackground()
                 drawarmorsquare(1, cx1, cy2)
             end
         elseif GetConVar("tacrp_minhud"):GetBool() and self:ShouldDrawBottomBar() then
-            local w = ScreenScale(110)
-            local h = ScreenScale(16)
+            local w = TacRP.SS(110)
+            local h = TacRP.SS(16)
             local x = ScrW() / 2 - w / 2
-            local y = ScrH() - h - ScreenScale(8)
+            local y = ScrH() - h - TacRP.SS(8)
 
             surface.SetDrawColor(0, 0, 0, 150)
             TacRP.DrawCorneredBox(x, y, w, h, col)

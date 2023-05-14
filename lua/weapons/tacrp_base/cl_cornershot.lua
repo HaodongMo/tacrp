@@ -156,8 +156,8 @@ function SWEP:DoCornershot()
 
     if !self:GetBlindFire() then lastblindfire = false return end
 
-    local w = ScreenScale(640 / 4)
-    local h = ScreenScale(480 / 4)
+    local w = TacRP.SS(640 / 4)
+    local h = TacRP.SS(480 / 4)
     local x = (ScrW() - w) / 2
     local y = (ScrH() - h) / 2
     y = y + (ScrH() / 4)

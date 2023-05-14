@@ -150,11 +150,11 @@ function ATT.TacticalDraw(self)
     local scrw = ScrW()
     local scrh = ScrH()
 
-    local w = ScreenScale(16)
-    local h = ScreenScale(16)
+    local w = TacRP.SS(16)
+    local h = TacRP.SS(16)
 
     local x = (scrw - w) / 2
-    local y = (scrh - h) - ScreenScale(8)
+    local y = (scrh - h) - TacRP.SS(8)
 
     surface.SetDrawColor(0, 0, 0, 200)
     TacRP.DrawCorneredBox(x, y, w, h)
