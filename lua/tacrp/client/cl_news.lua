@@ -35,6 +35,53 @@ TacRP.News = {
 <b>8Z, the gmod hyperealist</b></p>
 </body>]]
     },
+    {
+        Title = "Interops Update",
+        Type = "Announcement",
+        Date = "2023-05-14",
+        Author = "8Z",
+        Major = true,
+        Summary = "Major update and expansion! It's here!!!",
+        Contents = [[<body style="font-family:'Myriad Pro';color:white;font-size:150%;">
+<p>It's here!<br></p>
+
+<p>Alongside the release of thirty-one new weapons in the Interops pack, a long list of changes have also dropped. They've been sneakily updated (sorry) but I've finally bothered to write the patch notes for them now.</p>
+
+<p>Without being too verbose, here is a shortlist of all the changes up until this point.</p>
+
+<h3>Armor Penetration</h3>
+<p>Combat can get really awkward with HL2 armor absorbing 80% of all damage. Now, TacRP braves the unknown to become the second addon to ever challenge this status quo! (The first being, of course, my own Danger Zone Entities. #humblebrag)<br>
+Every weapon has an Armor Piercing and Armor Shredding value. The former dictates how much damage is blocked by armor and the latter determines how much damage armor takes.
+All weapons have naturally been balanced to use these numbers, so you can expect a tactical experience even with armor.</p>
+<p>Of course, TacRP is fully compatible with Danger Zone Entities' armor, and will use the weapons' AP value for them.</p>
+
+<h3>TTT Support</h3>
+<p>It's a match made in heaven! TacRP will now natively support TTT, and using it is as easy as installing and opening the game. In addition to compatibility, a new set of stats have been made for the mode in particular so that the weapons' balance is similar to vanilla TTT.<br>
+Several guns are added as buyable equipment, like the launchers, anti-materiel snipers, and the riot shield.<br>
+There's also two buyable equipment, an attachment bench (if you restrict customization), and an ammo box.</p>
+
+<h3>Rebalance... Again</h3>
+<p>I just can't help it. The default "Tactical" balance mode has been rewritten to be less slow (considering reduced movement speed in most roleplay modes), and higher-tiered weapons are less overpowered, albeit still stronger on average.<br>
+With the addition of new weapons to round out the set, some category changes have also been made.</p>
+
+<h3>Hints</h3>
+<p>You can do so many things with these guns it's hard to keep track. Now, you don't have to!<br>
+Hints will show up reminding you what contextually relevant buttons you can press. It'll also nag you to bind your grenade input.</p>
+
+<h3>Stats Menu Rework</h3>
+<p>The stats menu finally has a scroll bar to scroll through all those numbers. They also now show the change in difference as a percentage.</p>
+
+<h3>Held Grenades</h3>
+<p>Relevant to TTT, you can now pull out grenades as weapons. Unfortunately I was not able to get custom viewmodels for them, so bear with the CSS placeholders for a bit.<br>
+Also, if you have Danger Zone Entities, you can quickthrow and switch to Bump Mines.</p>
+<br>
+<p>Anyways, I hope all of you have as much fun with the Interops weapons as speedonerd and I had making them. It's a pleasure seeing these old models come to life again.<br>
+Be sure to check out the Interops workshop page as well as Danger Zone Entities.</p>
+
+<p>Yours,<br>
+<b>8Z, the gmod hyperealist</b></p>
+</body>]],
+    }
 }
 TacRP.NewsRead = {}
 TacRP.NewsLoaded = nil
