@@ -1,3 +1,8 @@
+local hudscale = GetConVar("tacrp_hudscale")
+function TacRP.SS(i)
+    return ScrW() / 640 * i * hudscale:GetFloat()
+end
+
 local sizes_to_make = {
     4,
     5,
