@@ -8,8 +8,11 @@ function SWEP:PrimeGrenade()
     if self:StillWaiting(nil, true) then return end
     if self:GetPrimedGrenade() then return end
 
-    if engine.ActiveGamemode() == "terrortown" and !self:GetValue("PrimaryGrenade") and !self:CheckGrenade(nil, true) then
-        self:SelectGrenade(nil, true)
+    if engine.ActiveGamemode() == "terrortown" then
+        if GetRoundState() == ROUND_PREP and GetConVar("ttt_no_nade_throw_during_prep"):GetBool() then return end
+        if !self:GetValue("PrimaryGrenade") and !self:CheckGrenade(nil, true) then
+            self:SelectGrenade(nil, true)
+        end
     end
 
     -- if self:SprintLock() then return end

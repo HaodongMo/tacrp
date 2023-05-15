@@ -70,6 +70,10 @@ end
 
 function SWEP:PrimaryAttack()
 
+    if engine.ActiveGamemode() == "terrortown" and GetRoundState() == ROUND_PREP and GetConVar("ttt_no_nade_throw_during_prep"):GetBool() then
+        return
+    end
+
     self.Primary.Automatic = false
     self.Secondary.Automatic = false
     self.GrenadeDownKey = IN_ATTACK
@@ -99,6 +103,10 @@ function SWEP:PrimaryAttack()
 end
 
 function SWEP:SecondaryAttack()
+
+    if engine.ActiveGamemode() == "terrortown" and GetRoundState() == ROUND_PREP and GetConVar("ttt_no_nade_throw_during_prep"):GetBool() then
+        return
+    end
 
     self.Primary.Automatic = false
     self.Secondary.Automatic = false
