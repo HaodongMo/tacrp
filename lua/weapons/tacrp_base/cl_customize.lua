@@ -1181,6 +1181,7 @@ function SWEP:CreateCustomizeHUD()
             end
         end
 
+        local isself = self:GetOwner() == LocalPlayer()
         for i, att in pairs(atts) do
             local atttbl = TacRP.GetAttTable(att)
 
@@ -1191,6 +1192,7 @@ function SWEP:CreateCustomizeHUD()
             slot_panel:SetPos(airgap + ((i - 1) * TacRP.SS(34)), offset + airgap + ((slot - 1) * TacRP.SS(34 + 8)))
             slot_panel:SetSize(TacRP.SS(32), TacRP.SS(32))
             slot_panel.DoClick = function(self2)
+                if !isself then return end
                 if !TacRP.NearBench(LocalPlayer()) then
                     flash_end = CurTime() + 1
                 end
@@ -1206,6 +1208,7 @@ function SWEP:CreateCustomizeHUD()
                 end
             end
             slot_panel.DoRightClick = function(self2)
+                if !isself then return end
                 if !TacRP.NearBench(LocalPlayer()) then
                     flash_end = CurTime() + 1
                 end
@@ -1289,7 +1292,7 @@ function SWEP:CreateCustomizeHUD()
 
                 if shownum then
                     local numtxt = has
-                    if !GetConVar("tacrp_free_atts"):GetBool() and engine.ActiveGamemode() == "terrortown" and GetConVar("tacrp_ttt_bench_freeatts"):GetBool() then
+                    if !GetConVar("tacrp_free_atts"):GetBool() and engine.ActiveGamemode() == "terrortown" and GetConVar("tacrp_ttt_bench_freeatts"):GetBool() and TacRP.NearBench(self:GetOwner()) then
                         numtxt = "*"
                     end
 
