@@ -532,8 +532,8 @@ SWEP.StatDisplay = {
         end,
     },
     {
-        Name = "Armor Piercing",
-        Description = {"How much damage the weapon can retain against body armor.", "Higher value indicates less damage to armor and more to health.", "At 100%, armor is ignored entirely. At 0%, armor will block all damage."},
+        Name = "Armor Penetration",
+        Description = {"Multiplier for health damage done when hitting armor.", "Higher value indicates less damage to armor and more to health.", "At 100%, armor is ignored entirely. At 0%, armor will block all damage."},
         Value = "ArmorPenetration",
         AggregateFunction = function(self, base, val)
             return math.max(math.Round(val * 100, 1), 0)
@@ -542,7 +542,7 @@ SWEP.StatDisplay = {
     },
     {
         Name = "Armor Shredding",
-        Description = {"Multiplier for damage dealt against armor after penetration.", "High AP weapons will shred less armor due to most of the damage being", "dealt directly to health. At 100% AP, no armor damage will be dealt."},
+        Description = {"Multiplier for armor damage done when hitting armor.", "High AP weapons will shred less armor due to most of the damage being", "dealt directly to health. At 100% AP, no armor damage will be dealt."},
         Value = "ArmorBonus",
         AggregateFunction = function(self, base, val)
             return math.Round(val * 100, 1)
