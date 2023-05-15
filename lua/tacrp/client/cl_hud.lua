@@ -157,3 +157,23 @@ hook.Add("TTTRenderEntityInfo", "TacRP_TTT", function(tData)
         end
     end
 end)
+
+hook.Add("RenderScreenspaceEffects", "TacRP_Gas", function()
+    if LocalPlayer():GetNWFloat("TacRPGasEnd", 0) > CurTime() then
+        local delta = math.Clamp((LocalPlayer():GetNWFloat("TacRPGasEnd", 0) - CurTime()) / 2, 0, 1) ^ 1.5
+
+        DrawMaterialOverlay("effects/water_warp01", delta * 0.1)
+        DrawMotionBlur(0.5 * delta, 0.75 * delta, 0.01)
+        DrawColorModify({
+            [ "$pp_colour_addr" ] = 0.125 * delta,
+            [ "$pp_colour_addg" ] = 0.2 * delta,
+            [ "$pp_colour_addb" ] = 0.05 * delta,
+            [ "$pp_colour_brightness" ] = -0.2 * delta,
+            [ "$pp_colour_contrast" ] = 1 - delta * 0.1,
+            [ "$pp_colour_colour" ] = 1 - delta * 0.75,
+            [ "$pp_colour_mulr" ] = 0,
+            [ "$pp_colour_mulg" ] = 0,
+            [ "$pp_colour_mulb" ] = 0,
+        })
+    end
+end )

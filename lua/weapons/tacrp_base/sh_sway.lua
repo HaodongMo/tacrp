@@ -24,8 +24,8 @@ end
 function SWEP:GetForcedSwayAmount()
     local sway = 0
 
-    if self:GetOwner():GetNWFloat("TacRPGasEnd") > CurTime() then
-        sway = sway + GetConVar("tacrp_gas_sway"):GetFloat() * Lerp(self:GetSightAmount(), 1, 0.25) * math.Clamp((self:GetOwner():GetNWFloat("TacRPGasEnd") - CurTime()) / 3, 0, 1) ^ 1.5
+    if self:GetOwner():GetNWFloat("TacRPGasEnd", 0) > CurTime() then
+        sway = sway + GetConVar("tacrp_gas_sway"):GetFloat() * Lerp(self:GetSightAmount(), 1, 0.25) * math.Clamp((self:GetOwner():GetNWFloat("TacRPGasEnd") - CurTime()) / 2, 0, 1)
     end
 
     return sway

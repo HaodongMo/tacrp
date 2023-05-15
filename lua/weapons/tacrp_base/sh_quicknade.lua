@@ -50,7 +50,7 @@ function SWEP:PrimeGrenade()
     self:GetOwner():DoAnimationEvent(ACT_GMOD_GESTURE_ITEM_THROW)
 
     if !nade.NoSounds then
-        self:EmitSound(nade.PullSound or ("TacRP/weapons/grenade/pullpin-" .. math.random(1, 2) .. ".wav"))
+        self:EmitSound(nade.PullSound or ("TacRP/weapons/grenade/pullpin-" .. math.random(1, 2) .. ".wav"), 65)
     end
 
     if CLIENT then return end
@@ -156,7 +156,7 @@ function SWEP:ThrowGrenade()
         end
 
         if !nade.NoSounds then
-            self:EmitSound(nade.ThrowSound or ("tacrp/weapons/grenade/throw-" .. math.random(1, 2) .. ".wav"))
+            self:EmitSound(nade.ThrowSound or ("tacrp/weapons/grenade/throw-" .. math.random(1, 2) .. ".wav"), 65)
         end
 
         if !nade.Singleton and !TacRP.IsGrenadeInfiniteAmmo(nade) then

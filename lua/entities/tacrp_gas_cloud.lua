@@ -100,8 +100,6 @@ function ENT:Initialize()
     self.dt = CurTime() + self.Life + self.BillowTime
 end
 
-local threshold = engine.ActiveGamemode() == "terrortown" and 60 or 25
-
 
 function ENT:Think()
 
@@ -110,6 +108,9 @@ function ENT:Think()
 
         local o = self:GetOwner()
         local origin = self:GetPos() + Vector(0, 0, 16)
+
+        local ttt = TacRP.GetBalanceMode() == TacRP.BALANCE_TTT
+        local threshold = ttt and 50 or 25
 
         local dmg = DamageInfo()
         dmg:SetAttacker(self:GetOwner())
@@ -142,12 +143,9 @@ function ENT:Think()
                 local delta = dist / 320
 
                 dmg:SetDamage(k:IsPlayer() and math.Rand(4, 8) or math.Rand(5, 15))
-
                 k:TakeDamageInfo(dmg)
-                if k:IsPlayer() then
-                    k:ScreenFade( SCREENFADE.IN, Color(125, 150, 50, 100), 2 * delta, 0 )
-                    k:ViewPunch(Angle(math.Rand(-1, 1), math.Rand(-1, 1), math.Rand(-1, 1)))
 
+                if k:IsPlayer() then
                     local timername = "tacrp_gas_" .. k:EntIndex()
                     local reps = 6
 
@@ -155,7 +153,7 @@ function ENT:Think()
                         reps = math.Clamp(timer.RepsLeft(timername) + 3, reps, 20)
                         timer.Remove(timername)
                     end
-                    timer.Create(timername, engine.ActiveGamemode() == "terrortown" and 5 or 1.5, reps, function()
+                    timer.Create(timername, ttt and 5 or 1.5, reps, function()
                         if !IsValid(k) or !k:Alive() or (engine.ActiveGamemode() == "terrortown" and (GetRoundState() == ROUND_PREP or GetRoundState() == ROUND_POST)) then
                             timer.Remove(timername)
                             return
@@ -174,14 +172,10 @@ function ENT:Think()
                         else
                             k:ViewPunch(Angle(math.Rand(-2, 2), 0, 0))
                         end
-                        if engine.ActiveGamemode() == "terrortown" or math.random() <= 0.333 then
+                        if ttt or math.random() <= 0.333 then
                             k:EmitSound("ambient/voices/cough" .. math.random(1, 4) .. ".wav", 80, math.Rand(95, 105))
                         end
                     end)
-
-                    if engine.ActiveGamemode() == "terrortown" or math.random() <= 0.333 then
-                        k:EmitSound("ambient/voices/cough" .. math.random(1, 4) .. ".wav", 80, math.Rand(95, 105))
-                    end
                 end
             end
         end
@@ -203,21 +197,34 @@ end
 -- cs gas strips armor and will try not deal lethal damage
 hook.Add("EntityTakeDamage", "tacrp_gas", function(ent, dmg)
     if ent:IsPlayer() and dmg:GetDamageType() == DMG_NERVEGAS and bit.band(dmg:GetDamageCustom(), 1024) == 1024 then
+        local threshold = TacRP.GetBalanceMode() == TacRP.BALANCE_TTT and 50 or 25
         local wep = ent:GetActiveWeapon()
         if IsValid(wep) and wep.ArcticTacRP and wep:GetValue("GasImmunity") then
             dmg:SetDamage(0)
         elseif ent:Health() - dmg:GetDamage() <= threshold then
             dmg:SetDamage(math.max(0, ent:Health() - threshold))
         end
-        if dmg:GetDamage() <= 0 then return true end
+        if dmg:GetDamage() <= 0 then
+            ent.TacRPGassed = true
+        end
     end
 end)
 
 hook.Add("PostEntityTakeDamage", "tacrp_gas", function(ent, dmg, took)
-    if took and ent:IsPlayer() and dmg:GetDamageType() == DMG_NERVEGAS and bit.band(dmg:GetDamageCustom(), 1024) == 1024 and dmg:GetDamage() > 0 then
+    if ent:IsPlayer() and dmg:GetDamageType() == DMG_NERVEGAS and bit.band(dmg:GetDamageCustom(), 1024) == 1024 then
         ent:SetArmor(math.max(0, ent:Armor() - dmg:GetDamage()))
-        if IsValid(dmg:GetInflictor()) and (dmg:GetInflictor():GetClass() == "tacrp_gas_cloud" or dmg:GetInflictor():GetClass() == "tacrp_smoke_cloud_ninja") and dmg:GetInflictor():GetPos():Distance(ent:GetPos()) <= 350 then
-            ent:SetNWFloat("TacRPGasEnd", CurTime() + 10)
+        if ent.TacRPGassed or (dmg:GetDamage() > 0 and IsValid(dmg:GetInflictor()) and (dmg:GetInflictor():GetClass() == "tacrp_gas_cloud" or dmg:GetInflictor():GetClass() == "tacrp_smoke_cloud_ninja")) then
+            local distsqr = dmg:GetInflictor():GetPos():DistToSqr(ent:GetPos())
+            if distsqr <= 350 * 350 then
+                ent:SetNWFloat("TacRPGasEnd", CurTime() + 10)
+                ent.TacRPGassed = nil
+                ent:ScreenFade( SCREENFADE.IN, Color(125, 150, 50, 100), 0.5, 0 )
+                ent:ViewPunch(Angle(math.Rand(-1, 1), math.Rand(-1, 1), math.Rand(-1, 1)))
+                local ttt = TacRP.GetBalanceMode() == TacRP.BALANCE_TTT
+                if ttt or math.random() <= 0.333 then
+                    ent:EmitSound("ambient/voices/cough" .. math.random(1, 4) .. ".wav", 80, math.Rand(95, 105))
+                end
+            end
         end
     end
 end)

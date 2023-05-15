@@ -36,7 +36,7 @@ function ENT:Detonate()
     dmg:SetDamageType(engine.ActiveGamemode() == "terrortown" and DMG_DIRECT or DMG_SONIC)
     dmg:SetDamagePosition(self:GetPos())
     dmg:SetDamage(5)
-    util.BlastDamageInfo(dmg, self:GetPos(), 512)
+    util.BlastDamageInfo(dmg, self:GetPos(), 728)
 
     local fx = EffectData()
     fx:SetOrigin(self:GetPos())
@@ -49,7 +49,7 @@ function ENT:Detonate()
         util.Effect("TacRP_flashexplosion", fx)
     end
 
-    TacRP.Flashbang(self, self:GetPos(), 1024, 3, 0.25, 0.5)
+    TacRP.Flashbang(self, self:GetPos(), 728, 3, 0.25, 0.5)
 
     self:EmitSound(table.Random(self.ExplodeSounds), 125)
 
