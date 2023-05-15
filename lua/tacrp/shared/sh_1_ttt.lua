@@ -195,11 +195,13 @@ hook.Add( "OnEntityCreated", "TacRP_TTT_Spawn", function(ent)
                 wpnent:SetPos(ent:GetPos())
                 wpnent:SetAngles(ent:GetAngles())
                 wpnent:Spawn()
-
                 timer.Simple(0, function()
                     if !ent:IsValid() then return end
                     -- wpnent:OnDrop(true)
                     ent:Remove()
+                    if IsValid(wpnent) then
+                        wpnent:NetworkWeapon()
+                    end
                 end)
             end
         end)

@@ -105,7 +105,7 @@ function ENT:OnTakeDamage(dmg)
         else self.Attacker = dmg:GetAttacker() or self.Attacker end
         self:PreDetonate()
     elseif self.DefuseOnDamage and dmg:GetDamageType() != DMG_BLAST then
-        self:EmitSound("physics/plastic/plastic_box_break" .. math.random(1, 2) .. ".wav", 75, math.Rand(95, 105))
+        self:EmitSound("physics/plastic/plastic_box_break" .. math.random(1, 2) .. ".wav", 70, math.Rand(95, 105))
         local fx = EffectData()
         fx:SetOrigin(self:GetPos())
         fx:SetNormal(self:GetAngles():Forward())
@@ -172,7 +172,7 @@ function ENT:PhysicsCollide(data, collider)
             self:SetParent(data.HitEntity)
         end
 
-        self:EmitSound("TacRP/weapons/plant_bomb.wav")
+        self:EmitSound("TacRP/weapons/plant_bomb.wav", 65)
 
         self.Attacker = self:GetOwner()
         self:SetOwner(NULL)

@@ -50,7 +50,8 @@ end
 
 function ENT:Detonate()
     local attacker = IsValid(self.Attacker) and self.Attacker or self:GetOwner()
-    util.BlastDamage(self, attacker, self:GetPos(), 150, 300)
+    local ttt = TacRP.GetBalanceMode() == TacRP.BALANCE_TTT
+    util.BlastDamage(self, attacker, self:GetPos(), ttt and 200 or 150, ttt and 150 or 300)
 
     local fx = EffectData()
     fx:SetOrigin(self:GetPos())
@@ -62,7 +63,7 @@ function ENT:Detonate()
         util.Effect("HelicopterMegaBomb", fx)
     end
 
-    self:EmitSound(table.Random(self.ExplodeSounds), 115)
+    self:EmitSound(table.Random(self.ExplodeSounds), ttt and 90 or 115)
 
     local door = self:GetParent()
     self:SetParent(NULL)
@@ -76,7 +77,6 @@ function ENT:Detonate()
             end
         end
         TacRP.DoorBust(door, vel, attacker)
-
     end
 
     self:Remove()
@@ -85,10 +85,11 @@ end
 function ENT:Stuck()
     self:SetArmTime(CurTime())
     if !self:GetRemote() then
-        self:EmitSound("weapons/c4/c4_beep1.wav", 80, 110)
+        local ttt = TacRP.GetBalanceMode() == TacRP.BALANCE_TTT
+        self:EmitSound("weapons/c4/c4_beep1.wav", ttt and 60 or 80, 110)
         timer.Create("breachbeep_" .. self:EntIndex(), 0.25, 7, function()
             if !IsValid(self) then return end
-            self:EmitSound("weapons/c4/c4_beep1.wav", 80, 110)
+            self:EmitSound("weapons/c4/c4_beep1.wav", ttt and 60 or 80, 110)
         end)
     end
 
