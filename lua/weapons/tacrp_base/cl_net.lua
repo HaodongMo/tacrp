@@ -13,6 +13,8 @@ function SWEP:ReceiveWeapon()
     self:SetupModel(false)
 
     self:InvalidateCache()
+
+    self.CertainAboutAtts = true
 end
 
 function SWEP:RequestWeapon()
