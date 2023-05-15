@@ -216,7 +216,12 @@ hook.Add("TTTPrepareRound", "TacRP_TTT", function()
     for _, ply in pairs(player.GetAll()) do
         ply.TacRP_AttInv = {}
         for i = 1, give do
-            TacRP:PlayerGiveAtt(ply, TacRP.Attachments_Index[math.random(1, TacRP.Attachments_Count)], 1)
+            local id
+            for j = 1, 5 do -- up to 5 random attempts
+                id = TacRP.Attachments_Index[math.random(1, TacRP.Attachments_Count)]
+                if !TacRP.Attachments[id].InvAtt and (!ply.TacRP_AttInv or ply.TacRP_AttInv[id] == 0) then break end
+            end
+            TacRP:PlayerGiveAtt(ply, id, 1)
         end
         TacRP:PlayerSendAttInv(ply)
     end
