@@ -24,13 +24,11 @@ function SWEP:DoBodygroups(wm, custom_wm)
     for i, k in pairs(eles) do
         if wm then
             for _, j in pairs(k.BGs_WM or {}) do
-                if istable(j) then continue end // lua table inheritance
                 mdl:SetBodygroup(j[1], j[2] or 0)
             end
             if k.Skin_WM ~= nil then sk = k.Skin_WM end
         else
             for _, j in pairs(k.BGs_VM or {}) do
-                if istable(j) then continue end
                 mdl:SetBodygroup(j[1] or 0, j[2] or 0)
             end
             if k.Skin_VM ~= nil then sk = k.Skin_VM end
