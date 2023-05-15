@@ -54,9 +54,13 @@ if !TTT2 then
         local dgui1 = vgui.Create("DForm", panellist)
         dgui1:SetName("Server - Main")
         dgui1:Help("This menu only works if you are the host of a listen server.")
+
         dgui1:CheckBox("Free Attachments", "tacrp_free_atts")
         dgui1:CheckBox("Infinite Ammo", "tacrp_infiniteammo")
         dgui1:CheckBox("Infinite Grenades", "tacrp_infinitegrenades")
+        dgui1:CheckBox("Magazines Leave DNA", "tacrp_ttt_magazine_dna")
+        dgui1:Help("Dropped magazines and grenade spoons don't disappear and contain user's DNA.")
+
         panellist:AddItem(dgui1)
 
         local dgui2 = vgui.Create("DForm", panellist)
@@ -90,6 +94,8 @@ if !TTT2 then
 
         local dgui3 = vgui.Create("DForm", panellist)
         dgui3:SetName("Server - Mechanics")
+        dgui1:CheckBox("Magazines Leave DNA", "tacrp_ttt_magazine_dna")
+        dgui1:Help("Dropped magazines and grenade spoons don't disappear and contain user's DNA.")
         dgui3:CheckBox("Enable Sway", "tacrp_sway")
         dgui3:CheckBox("Enable Free Aim", "tacrp_freeaim")
         dgui3:CheckBox("Enable Penetration", "tacrp_penetration")

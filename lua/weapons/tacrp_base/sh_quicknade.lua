@@ -148,7 +148,7 @@ function SWEP:ThrowGrenade()
                     local phys2 = mag:GetPhysicsObject()
 
                     if IsValid(phys2) then
-                        phys2:ApplyForceCenter(ang:Forward() * force * 0.25 + VectorRand() * 50)
+                        phys2:ApplyForceCenter(ang:Forward() * force * 0.25 + VectorRand() * 25)
                         phys2:AddAngleVelocity(Vector(math.Rand(-300, 300), math.Rand(-300, 300), math.Rand(-300, 300)))
                     end
                 end

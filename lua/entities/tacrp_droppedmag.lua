@@ -10,6 +10,7 @@ ENT.Category                 = ""
 ENT.Spawnable                = false
 ENT.Model                    = ""
 ENT.FadeTime = 5
+ENT.CanHavePrints = true -- TTT
 
 ENT.ImpactSounds = {
     ["pistol"] = {
@@ -66,6 +67,13 @@ function ENT:Initialize()
     end
 
     self.SpawnTime = CurTime()
+    if engine.ActiveGamemode() == "terrortown" and GetConVar("tacrp_ttt_magazine_dna"):GetBool() then
+        self.FadeTime = 600
+        if SERVER then
+            self.fingerprints = {}
+            table.insert(self.fingerprints, self:GetOwner())
+        end
+    end
 end
 
 function ENT:PhysicsCollide(colData, collider)
