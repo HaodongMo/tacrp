@@ -237,7 +237,7 @@ function SWEP:Initialize()
 
     self:SetCharge(false)
 
-    timer.Create("medkit_ammo" .. self:EntIndex(), game.ActiveGamemode() == "terrortown" and 2 or 1, 0, function()
+    timer.Create("medkit_ammo" .. self:EntIndex(), engine.ActiveGamemode() == "terrortown" and 2 or 1, 0, function()
         if !IsValid(self) then
             if self.LoopSound then
                 self.LoopSound:Stop()
