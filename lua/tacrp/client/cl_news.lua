@@ -42,7 +42,7 @@ TacRP.News = {
         Author = "8Z",
         Major = true,
         Summary = "Major update and expansion! It's here!!!",
-        Contents = [[<body style="font-family:'Myriad Pro';color:white;font-size:150%;">
+        Contents = [[<body style="font-family:'Myriad Pro';color:white;font-size:125%;">
 <p>It's here!<br></p>
 
 <p>Alongside the release of thirty-one new weapons in the Interops pack, a long list of changes have also dropped. They've been sneakily updated (sorry) but I've finally bothered to write the patch notes for them now.</p>
@@ -81,7 +81,36 @@ Be sure to check out the Interops workshop page as well as Danger Zone Entities.
 <p>Yours,<br>
 <b>8Z, the gmod hyperealist</b></p>
 </body>]],
-    }
+    },
+    {
+        Title = "Version 8",
+        Type = "Patch Notes",
+        Date = "2023-05-15",
+        Author = "8Z",
+        Major = false,
+        Summary = "Post release fixes because it keeps happening.",
+        Contents = [[<body style="font-family:'Myriad Pro';color:white;font-size:125%;">
+<p>No update survives first contact. As is tradition, things immediately break when I push updates. Even if the version number is my lucky number.</p>
+<p>In addition to some fixes, I've also added a few small but cool things, like the ability to pick up DNA from dropped magazines in TTT, and gas effects.</p>
+<ul>
+<li><b>Added:</b> Overlay, motion blur and color modification when affected by gas directly (but not lingering damage).
+<li><b>Added:</b> (TTT) Dropped magazines (including grenade spoons) contain DNA of the dropper and no longer fade.
+<li><b>Added:</b> (TTT) Customization Bench allows you to freely customize (equivalent to free atts).
+<li><b>Balance:</b> Sticky sounds (Breaching Charges, C4) and quickthrow sounds are less loud.
+<li><b>Balance:</b> (TTT) Breaching Charges have a bigger blast radius, slightly lower damage and much quieter beeps.
+<li><b>Balance:</b> Gas grenades no longer do damage when exploding.
+<li><b>Balance:</b> Flashbang blast and effect radius now 728 (previously 512 and 1024).
+<li><b>Changed:</b> (TTT) Random attachments will try to avoid duplicates and respect InvAtt.
+<li><b>Fixed:</b> Various issues with the Medkit.
+<li><b>Fixed:</b> Bodygroup related errors.
+<li><b>Fixed:</b> Quicknade and grenade weapons do not respect ttt_no_nade_throw_during_prep.
+<li><b>Fixed:</b> (TTT) Weapons don't network themselves when created causing attachment desync.
+<li><b>Fixed:</b> Gas grenade doesn't cause sway and coughing when below health threshold.
+</ul>
+<p>I'm sure I've missed some more, so send any issues or suggestions my way!</p>
+<p>Yours,<br>
+<b>8Z, the gmod hyperealist</b></p>]],
+    },
 }
 TacRP.NewsRead = {}
 TacRP.NewsLoaded = nil
