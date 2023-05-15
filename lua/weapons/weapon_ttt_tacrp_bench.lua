@@ -15,8 +15,8 @@ if CLIENT then
    LANG.AddToLanguage("english", "tacrp_bench_name", "Customization Bench")
    LANG.AddToLanguage("english", "tacrp_bench_help", "{primaryfire} places the Customization Bench.")
    LANG.AddToLanguage("english", "tacrp_bench_desc", [[
-When near, allows for weapon customization if disabled.
-Not very helpful if it's not restricted...]])
+When near, allows for free weapon customization.
+Attachments won't be required.]])
 
    SWEP.EquipMenuData = {
       type = "item_weapon",

@@ -1,14 +1,15 @@
 function TacRP:PlayerGetAtts(ply, att)
     if !IsValid(ply) then return 0 end
-    if GetConVar("TacRP_free_atts"):GetBool() then return 999 end
+    if GetConVar("TacRP_free_atts"):GetBool() then return 9999 end
+    if engine.ActiveGamemode() == "terrortown" and GetConVar("tacrp_ttt_bench_freeatts"):GetBool() and TacRP.NearBench(ply) then return 9999 end
 
-    if att == "" then return 999 end
+    if att == "" then return 9999 end
 
     local atttbl = TacRP.GetAttTable(att)
 
     if !atttbl then return 0 end
 
-    if atttbl.Free then return 999 end
+    if atttbl.Free then return 9999 end
 
     if !IsValid(ply) then return 0 end
 

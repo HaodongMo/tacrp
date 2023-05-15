@@ -541,6 +541,14 @@ local conVars = {
         min = 0,
         max = 1,
     },
+    {
+        name = "ttt_bench_freeatts",
+        default = "1",
+        replicated = true,
+        notify = true,
+        min = 0,
+        max = 1,
+    },
 }
 
 local prefix = "tacrp_"

@@ -1289,6 +1289,9 @@ function SWEP:CreateCustomizeHUD()
 
                 if shownum then
                     local numtxt = has
+                    if !GetConVar("tacrp_free_atts"):GetBool() and engine.ActiveGamemode() == "terrortown" and GetConVar("tacrp_ttt_bench_freeatts"):GetBool() then
+                        numtxt = "*"
+                    end
 
                     surface.SetFont("TacRP_Myriad_Pro_6")
                     surface.SetTextColor(col_text)
@@ -1390,6 +1393,17 @@ function SWEP:CreateCustomizeHUD()
                         surface.SetMaterial(lock)
                         surface.DrawTexturedRect(rx, ry + bump, TacRP.SS(12), TacRP.SS(12))
 
+                        local tw = surface.GetTextSize(reason)
+                        surface.SetTextPos(reasonx + reasonw / 2 - tw / 2, ry + bump)
+                        surface.DrawText(reason)
+                    elseif engine.ActiveGamemode() == "terrortown" and TacRP.NearBench(self:GetOwner()) then
+                        local reasonx, reasonw = rx, bw
+                        reason = "Free Customization At Bench"
+                        surface.SetDrawColor(0, 0, 0, 200)
+                        TacRP.DrawCorneredBox(reasonx, ry + bump, reasonw, TacRP.SS(10), col_text_con)
+                        surface.SetFont("TacRP_Myriad_Pro_10")
+                        surface.SetTextColor(255, 255, 255)
+                        surface.SetDrawColor(255, 255, 255)
                         local tw = surface.GetTextSize(reason)
                         surface.SetTextPos(reasonx + reasonw / 2 - tw / 2, ry + bump)
                         surface.DrawText(reason)
