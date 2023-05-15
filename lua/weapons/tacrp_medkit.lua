@@ -144,8 +144,7 @@ function SWEP:OnRemove()
 end
 
 function SWEP:SecondaryAttack()
-    if self:StillWaiting() then return end
-    if self:GetCharge() then return end
+    if self:StillWaiting() or !IsFirstTimePredicted() or self:GetCharge() then return end
 
     if self:GetOwner():Health() >= self:GetOwner():GetMaxHealth() then return end
 
@@ -273,3 +272,6 @@ if engine.ActiveGamemode() == "terrortown" then
     function SWEP:TTTBought(buyer)
     end
 end
+
+function SWEP:Reload()
+end // do nothing
