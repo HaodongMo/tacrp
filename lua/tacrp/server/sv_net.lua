@@ -109,7 +109,7 @@ net.Receive("tacrp_attach", function(len, ply)
         attid = net.ReadUInt(TacRP.Attachments_Bits)
     end
 
-    if !wpn.ArcticTacRP then return end
+    if ply:GetActiveWeapon() != wpn or !wpn.ArcticTacRP then return end
 
     if attach then
         local att = TacRP.Attachments_Index[attid]
