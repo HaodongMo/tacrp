@@ -96,6 +96,7 @@ Be sure to check out the Interops workshop page as well as Danger Zone Entities.
 <li><b>Added:</b> Overlay, motion blur and color modification when affected by gas directly (but not lingering damage).
 <li><b>Added:</b> (TTT) Dropped magazines (including grenade spoons) contain DNA of the dropper and no longer fade.
 <li><b>Added:</b> (TTT) Customization Bench allows you to freely customize (equivalent to free atts).
+<li><b>Added:</b> (TTT) Picking up a grenade will make the player select it as a quicknade if the current selection isn't valid.
 <li><b>Balance:</b> Sticky sounds (Breaching Charges, C4) and quickthrow sounds are less loud.
 <li><b>Balance:</b> (TTT) Breaching Charges have a bigger blast radius, slightly lower damage and much quieter beeps.
 <li><b>Balance:</b> Gas grenades no longer do damage when exploding.
@@ -104,8 +105,8 @@ Be sure to check out the Interops workshop page as well as Danger Zone Entities.
 <li><b>Fixed:</b> Various issues with the Medkit.
 <li><b>Fixed:</b> Bodygroup related errors.
 <li><b>Fixed:</b> Quicknade and grenade weapons do not respect ttt_no_nade_throw_during_prep.
-<li><b>Fixed:</b> (TTT) Weapons don't network themselves when created causing attachment desync.
 <li><b>Fixed:</b> Gas grenade doesn't cause sway and coughing when below health threshold.
+<li><b>Fixed:</b> Attachments do not sync properly if weapon is out of PVS initially (such as spawning in TTT).t
 </ul>
 <p>I'm sure I've missed some more, so send any issues or suggestions my way!</p>
 <p>Yours,<br>

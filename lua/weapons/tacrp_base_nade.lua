@@ -46,6 +46,13 @@ SWEP.Sway = 0
 
 SWEP.QuickNadeTimeMult = 0.6
 
+function SWEP:Equip()
+    local wep = self:GetOwner():GetActiveWeapon()
+    if self:GetOwner():IsPlayer() and wep != self and wep.ArcticTacRP and !wep:CheckGrenade(nil, true) then
+        self:GetOwner():SetNWInt("ti_nade", TacRP.QuickNades[self.PrimaryGrenade].Index)
+    end
+end
+
 function SWEP:ThinkSprint()
 end
 
