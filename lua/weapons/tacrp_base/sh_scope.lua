@@ -156,7 +156,7 @@ end
 function SWEP:ThinkSights()
     if !IsValid(self:GetOwner()) then return end
 
-    if self:GetOwner():KeyDown(IN_USE) and self:GetOwner():KeyPressed(IN_ATTACK2) then
+    if IsFirstTimePredicted() and self:GetOwner():KeyDown(IN_USE) and self:GetOwner():KeyPressed(IN_ATTACK2) then
         self:ToggleSafety()
         return
     end
