@@ -1,6 +1,4 @@
 -- local customizedelta = 0
-local bench_need = Color(255, 0, 0)
-local bench_have = Color(0, 255, 0)
 local flash_end = 0
 local range = 0
 
@@ -118,9 +116,9 @@ function SWEP:CreateCustomizeHUD()
         end
 
         if self.SubCatTier and self.SubCatType then
-            local type_txt = string.sub(self.SubCatType, 2)
+            local type_txt = TacRP:TryTranslate(self.SubCatType)
             if TacRP.UseTiers() and self.SubCatTier != "9Special" then
-                type_txt = string.sub(self.SubCatTier, 2) .. " Grade " .. type_txt
+                type_txt = TacRP:GetPhrase("cust.type_tier", {tier = TacRP:TryTranslate(self.SubCatTier), type = type_txt})
             end
             surface.SetFont("TacRP_Myriad_Pro_12")
             local type_w = surface.GetTextSize(type_txt)
@@ -411,7 +409,7 @@ function SWEP:CreateCustomizeHUD()
             surface.SetFont("TacRP_Myriad_Pro_8")
             surface.SetTextColor(255, 255, 255)
             surface.SetTextPos(TacRP.SS(6), TacRP.SS(24))
-            surface.DrawText("DESCRIPTION:")
+            surface.DrawText(TacRP:GetPhrase("cust.description"))
 
             if !self.MiscCache["cust_desc"] then
                 self.MiscCache["cust_desc"] = TacRP.MultiLineText(nade.Description, w - TacRP.SS(8), "TacRP_Myriad_Pro_8")
@@ -439,7 +437,7 @@ function SWEP:CreateCustomizeHUD()
             surface.SetFont("TacRP_Myriad_Pro_8")
             surface.SetTextColor(255, 255, 255)
             surface.SetTextPos(TacRP.SS(6), TacRP.SS(4))
-            surface.DrawText("DESCRIPTION:")
+            surface.DrawText(TacRP:GetPhrase("cust.description"))
 
             if !self.MiscCache["cust_desc"] then
                 self.MiscCache["cust_desc"] = TacRP.MultiLineText(self:GetValue("Description"), w - TacRP.SS(8), "TacRP_Myriad_Pro_8")
@@ -459,7 +457,7 @@ function SWEP:CreateCustomizeHUD()
         local tabs_h = TacRP.SS(10)
 
         local group_box = vgui.Create("DPanel", bg)
-        group_box.PrintName = "Rating"
+        group_box.PrintName = TacRP:GetPhrase("cust.rating")
         group_box:SetSize(TacRP.SS(164), TacRP.SS(172))
         group_box:SetPos(scrw - TacRP.SS(164) - airgap - smallgap, stack + smallgap * 2 + tabs_h)
         group_box.Paint = function(self2)
@@ -499,7 +497,7 @@ function SWEP:CreateCustomizeHUD()
                 surface.DrawRect(x, y, w, h)
                 TacRP.DrawCorneredBox(x, y, w, h)
 
-                draw.SimpleText(v.Name, "TacRP_Myriad_Pro_10", x + TacRP.SS(4), y + TacRP.SS(8), color_white, TEXT_ALIGN_LEFT, TEXT_ALIGN_CENTER)
+                draw.SimpleText(TacRP:GetPhrase(v.Name) or v.Name, "TacRP_Myriad_Pro_10", x + TacRP.SS(4), y + TacRP.SS(8), color_white, TEXT_ALIGN_LEFT, TEXT_ALIGN_CENTER)
 
                 surface.SetDrawColor(75, 75, 75, 100)
                 surface.DrawRect(x + TacRP.SS(64), y + TacRP.SS(4), w2, h2)
@@ -543,10 +541,8 @@ function SWEP:CreateCustomizeHUD()
                 rx = rx + TacRP.SS(16)
                 ry = ry + TacRP.SS(16)
 
-                local desc = v.Description or {""}
-                if isstring(desc) then
-                    desc = {desc}
-                end
+                local desc = TacRP:GetPhrase(v.Description) or v.Description or ""
+                desc = string.Explode("\n", desc)
 
                 if self2:GetY() + ry >= TacRP.SS(280) then
                     ry = ry - TacRP.SS(60)
@@ -560,13 +556,13 @@ function SWEP:CreateCustomizeHUD()
                 surface.SetDrawColor(col_bg)
                 TacRP.DrawCorneredBox(rx, ry, bw, bh, col_corner)
 
-                local txt = v.Name
+                local txt = TacRP:GetPhrase(v.Name) or v.Name
                 surface.SetTextColor(col_text)
                 surface.SetFont("TacRP_Myriad_Pro_10")
                 surface.SetTextPos(rx + TacRP.SS(2), ry + TacRP.SS(1))
                 surface.DrawText(txt)
 
-                local scoretxt = "(Rating: " .. math.Round(hoverscore) .. " / 100)"
+                local scoretxt = TacRP:GetPhrase("rating.score", {score = math.Round(hoverscore, 1), max = 100})
                 draw.SimpleText(scoretxt, "TacRP_Myriad_Pro_8", rx + bw - TacRP.SS(2), ry + TacRP.SS(2), col_text, TEXT_ALIGN_RIGHT, TEXT_ALIGN_TOP)
 
                 surface.SetFont("TacRP_Myriad_Pro_6")
@@ -711,7 +707,8 @@ function SWEP:CreateCustomizeHUD()
                     surface.SetFont("TacRP_Myriad_Pro_8")
                     surface.SetTextColor(255, 255, 255)
                     surface.SetTextPos(TacRP.SS(3), 0)
-                    surface.DrawText(k.Name .. ":")
+                    local name = TacRP:GetPhrase(k.Name) or k.Name
+                    surface.DrawText(name .. ":")
 
                     surface.SetTextPos(x_1 + TacRP.SS(4), 0)
                     surface.DrawText(sicache[1])
@@ -739,7 +736,7 @@ function SWEP:CreateCustomizeHUD()
         end
 
         local stat_box = vgui.Create("DPanel", bg)
-        stat_box.PrintName = "Stats"
+        stat_box.PrintName = TacRP:GetPhrase("cust.stats")
         stat_box:SetSize(w_statbox, TacRP.SS(172))
         stat_box:SetPos(scrw - w_statbox - airgap - smallgap, stack + smallgap * 2 + tabs_h)
         stat_box.Paint = function(self2, w, h)
@@ -758,22 +755,22 @@ function SWEP:CreateCustomizeHUD()
             surface.SetFont("TacRP_Myriad_Pro_8")
             surface.SetTextColor(255, 255, 255)
             surface.SetTextPos(TacRP.SS(4), TacRP.SS(2))
-            surface.DrawText("STAT")
+            surface.DrawText(TacRP:GetPhrase("stat.table.stat"))
 
             surface.SetFont("TacRP_Myriad_Pro_8")
             surface.SetTextColor(255, 255, 255)
             surface.SetTextPos(x_1 + TacRP.SS(4), TacRP.SS(2))
-            surface.DrawText("BASE")
+            surface.DrawText(TacRP:GetPhrase("stat.table.base"))
 
             surface.SetFont("TacRP_Myriad_Pro_8")
             surface.SetTextColor(255, 255, 255)
             surface.SetTextPos(x_2 + TacRP.SS(4), TacRP.SS(2))
-            surface.DrawText("CURR")
+            surface.DrawText(TacRP:GetPhrase("stat.table.curr"))
 
             surface.SetFont("TacRP_Myriad_Pro_8")
             surface.SetTextColor(255, 255, 255)
             surface.SetTextPos(x_3 + TacRP.SS(4), TacRP.SS(2))
-            surface.DrawText("DIFF")
+            surface.DrawText(TacRP:GetPhrase("stat.table.diff"))
         end
         local stat_scroll = vgui.Create("DScrollPanel", stat_box)
         stat_scroll:Dock(FILL)
@@ -815,9 +812,9 @@ function SWEP:CreateCustomizeHUD()
                 rx = rx + TacRP.SS(16)
                 ry = ry + TacRP.SS(16)
 
-                local desc = stat.Description or {""}
+                local desc = istable(stat.Description) and stat.Description or TacRP:GetPhrase(stat.Description) or stat.Description or ""
                 if isstring(desc) then
-                    desc = {desc}
+                    desc = string.Explode("\n", desc)
                 end
 
                 if self2:GetY() + ry >= TacRP.SS(280) then
@@ -832,7 +829,7 @@ function SWEP:CreateCustomizeHUD()
                 surface.SetDrawColor(col_bg)
                 TacRP.DrawCorneredBox(rx, ry, bw, bh, col_corner)
 
-                local txt = stat.Name
+                local txt = TacRP:GetPhrase(stat.Name) or stat.Name
                 surface.SetTextColor(col_text)
                 surface.SetFont("TacRP_Myriad_Pro_10")
                 surface.SetTextPos(rx + TacRP.SS(2), ry + TacRP.SS(1))
@@ -847,189 +844,6 @@ function SWEP:CreateCustomizeHUD()
                 DisableClipping(todo)
             end
         end
-
-        --[[]
-        local stat_box = vgui.Create("DPanel", bg)
-        stat_box.PrintName = "Stats"
-        stat_box:SetSize(TacRP.SS(128), TacRP.SS(172))
-        stat_box:SetPos(scrw - TacRP.SS(128) - airgap, stack + smallgap * 2 + tabs_h)
-        stat_box.Paint = function(self2, w, h)
-            if !IsValid(self) then return end
-
-            local hovered = false
-            local hoverindex = 0
-
-            surface.SetDrawColor(0, 0, 0, 150)
-            surface.DrawRect(0, 0, w, h)
-            TacRP.DrawCorneredBox(0, 0, w, h)
-
-            local x_1 = w - TacRP.SS(64)
-            local x_2 = w - TacRP.SS(32)
-
-            surface.SetDrawColor(255, 255, 255, 100)
-            surface.DrawLine(x_1, 0, x_1, h)
-            surface.DrawLine(x_2, 0, x_2, h)
-            surface.DrawLine(0, TacRP.SS(2 + 8 + 1), w, TacRP.SS(2 + 8 + 1))
-
-            surface.SetFont("TacRP_Myriad_Pro_8")
-            surface.SetTextColor(255, 255, 255)
-            surface.SetTextPos(x_1 + TacRP.SS(4), TacRP.SS(2))
-            surface.DrawText("BASE")
-
-            surface.SetFont("TacRP_Myriad_Pro_8")
-            surface.SetTextColor(255, 255, 255)
-            surface.SetTextPos(x_2 + TacRP.SS(4), TacRP.SS(2))
-            surface.DrawText("CURR")
-
-            -- if hovered try to figure out what stat we're hovering over
-
-            local i2 = 0
-            for i, k in pairs(stats) do
-                local value = self:GetValue(k.Value)
-                local orig = self:GetBaseValue(k.Value)
-
-                if k.HideIfSame and orig == value then continue end
-
-                if k.ConVarCheck then
-                    if !k.ConVar then k.ConVar = GetConVar(k.ConVarCheck) end
-                    if k.ConVar:GetBool() == tobool(k.ConVarInvert) then continue end
-                end
-
-                if k.ValueCheck and self:GetValue(k.ValueCheck) != !k.ValueInvert then
-                    continue
-                end
-
-                local stat_base = 0
-                local stat_curr = 0
-
-                if k.AggregateFunction then
-                    stat_base = k.AggregateFunction(true, orig)
-                    stat_curr = k.AggregateFunction(false, value)
-                else
-                    stat_base = math.Round(orig, 4)
-                    stat_curr = math.Round(value, 4)
-                end
-
-                if stat_base == nil and stat_cur == nil then continue end
-
-                surface.SetFont("TacRP_Myriad_Pro_8")
-                surface.SetTextColor(255, 255, 255)
-                surface.SetTextPos(TacRP.SS(2), TacRP.SS(8 + 4 + 1) + (TacRP.SS(8 * i2)))
-                surface.DrawText(k.Name .. ":")
-
-                local txt_base = tostring(stat_base)
-                local txt_curr = tostring(stat_curr)
-
-                if isbool(stat_base) then
-                    if stat_base then
-                        txt_base = "YES"
-                    else
-                        txt_base = "NO"
-                    end
-
-                    if stat_curr then
-                        txt_curr = "YES"
-                    else
-                        txt_curr = "NO"
-                    end
-                end
-
-                if k.DisplayFunction then
-                    txt_base = k.DisplayFunction(true, orig)
-                    txt_curr = k.DisplayFunction(false, value)
-                end
-
-                surface.SetTextColor(255, 255, 255)
-                surface.SetFont("TacRP_Myriad_Pro_8")
-                surface.SetTextPos(x_1 + TacRP.SS(3), TacRP.SS(8 + 4 + 1) + (TacRP.SS(8 * i2)))
-                surface.DrawText(txt_base .. (k.Unit or ""))
-
-                local good = false
-                local goodorbad = false
-
-                if k.BetterFunction then
-                    goodorbad, good = k.BetterFunction(orig, value)
-                elseif stat_base != stat_curr then
-                    if isnumber(stat_curr) then
-                        good = stat_curr > stat_base
-                        goodorbad = true
-                    elseif isbool(stat_curr) then
-                        good = !stat_base and stat_curr
-                        goodorbad = true
-                    end
-                end
-
-                if k.LowerIsBetter then
-                    good = !good
-                end
-
-                if goodorbad then
-                    if good then
-                        surface.SetTextColor(175, 255, 175)
-                    else
-                        surface.SetTextColor(255, 175, 175)
-                    end
-                else
-                    surface.SetTextColor(255, 255, 255)
-                end
-
-                surface.SetTextPos(x_2 + TacRP.SS(3), TacRP.SS(8 + 4 + 1) + (TacRP.SS(8 * i2)))
-                surface.DrawText(txt_curr .. (k.Unit or ""))
-
-                local mx, my = self2:CursorPos()
-                if mx > 0 and mx < w then
-                    if my > TacRP.SS(8 + 4 + 1) + (TacRP.SS(8 * i2)) and my < TacRP.SS(8 + 4 + 1) + (TacRP.SS(8 * i2)) + TacRP.SS(8) then
-                        hovered = true
-                        hoverindex = i
-                    end
-                end
-
-                i2 = i2 + 1
-            end
-
-            if hovered then
-                local todo = DisableClipping(true)
-                local col_bg = Color(0, 0, 0, 254)
-                local col_corner = Color(255, 255, 255)
-                local col_text = Color(255, 255, 255)
-                local rx, ry = self2:CursorPos()
-                rx = rx + TacRP.SS(16)
-                ry = ry + TacRP.SS(16)
-                local stat = stats[hoverindex]
-
-                local desc = stat.Description or {""}
-                if isstring(desc) then
-                    desc = {desc}
-                end
-
-                if self2:GetY() + ry >= TacRP.SS(280) then
-                    ry = ry - TacRP.SS(60)
-                end
-
-                if self2:GetX() + rx + TacRP.SS(160) >= ScrW() then
-                    rx = rx - TacRP.SS(160)
-                end
-
-                local bw, bh = TacRP.SS(160), TacRP.SS(12 + (6 * #desc))
-                surface.SetDrawColor(col_bg)
-                TacRP.DrawCorneredBox(rx, ry, bw, bh, col_corner)
-
-                local txt = stat.Name
-                surface.SetTextColor(col_text)
-                surface.SetFont("TacRP_Myriad_Pro_10")
-                surface.SetTextPos(rx + TacRP.SS(2), ry + TacRP.SS(1))
-                surface.DrawText(txt)
-
-                surface.SetFont("TacRP_Myriad_Pro_6")
-                for i, k in pairs(desc) do
-                    surface.SetTextPos(rx + TacRP.SS(2), ry + TacRP.SS(1 + 8 + 2) + (TacRP.SS(6 * (i - 1))))
-                    surface.DrawText(k)
-                end
-
-                DisableClipping(todo)
-            end
-        end
-        ]]
 
         local tabs = {group_box, stat_box}
         self.ActiveTab = self.ActiveTab or 1
@@ -1115,12 +929,13 @@ function SWEP:CreateCustomizeHUD()
         slot_name.Paint = function(self2, w, h)
             if !IsValid(self) then return end
 
-            local txt = attslot.PrintName or ""
-
-            surface.SetFont("TacRP_Myriad_Pro_8")
-            surface.SetTextColor(Color(255, 255, 255))
-            surface.SetTextPos(0, 0)
-            surface.DrawText(txt)
+            local txt = TacRP:TryTranslate(attslot.PrintName or "Slot")
+            if txt then
+                surface.SetFont("TacRP_Myriad_Pro_8")
+                surface.SetTextColor(Color(255, 255, 255))
+                surface.SetTextPos(0, 0)
+                surface.DrawText(txt)
+            end
         end
 
         table.sort(atts, function(a, b)

@@ -1,28 +1,24 @@
 local ammotypes = {
-    ["ti_flashbang"] = "Flashbangs",
-    ["ti_thermite"] = "Thermite Grenades",
-    ["ti_smoke"] = "Smoke Grenades",
-    ["ti_c4"] = "C4 Charges",
-    ["ti_gas"] = "CS Gas Grenades",
-    ["ti_nuke"] = "Nuclear Devices",
-    ["ti_charge"] = "Breaching Charge",
+    "ti_flashbang",
+    "ti_thermite",
+    "ti_smoke",
+    "ti_c4",
+    "ti_gas",
+    "ti_nuke",
+    "ti_charge",
+    "ti_sniper",
 }
 
-for i, k in pairs(ammotypes) do
+for _, i in pairs(ammotypes) do
     game.AddAmmoType({
         name = i
     })
 
     if CLIENT then
-        language.Add(i .. "_ammo", k)
+        language.Add(i .. "_ammo", TacRP:GetPhrase(i) or i)
     end
 end
 
 if engine.ActiveGamemode() == "terrortown" then
-    game.AddAmmoType({
-        name = "ti_sniper",
-    })
-    if CLIENT then
-        language.Add("ti_sniper_ammo", "Anti-Materiel Ammo")
-    end
+
 end

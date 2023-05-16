@@ -323,7 +323,11 @@ local conVars = {
         default = "1",
         client = true,
     },
-
+    {
+        name = "language",
+        default = "",
+        replicated = true,
+    },
     {
         name = "dev_benchgun",
         default = "0",

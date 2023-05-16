@@ -118,8 +118,8 @@ SWEP.StatGroupGrades = {
 
 SWEP.StatGroups = {
     {
-        Name = "Lethality",
-        Description = {"How easily and quickly the weapon can take out a single target.", "Affected by Damage and RPM."},
+        Name = "rating.lethality",
+        Description = "rating.lethality.desc",
         RatingFunction = function(self, base)
             -- local score = 0
             local valfunc = base and self.GetBaseValue or self.GetValue
@@ -170,8 +170,8 @@ SWEP.StatGroups = {
         end,
     },
     {
-        Name = "Suppression",
-        Description = {"How much damage the weapon can output over a long period of time.", "Affected by Damage, RPM, Capacity and Reload Time."},
+        Name = "rating.suppression",
+        Description = "rating.suppression.desc",
         RatingFunction = function(self, base)
             local valfunc = base and self.GetBaseValue or self.GetValue
 
@@ -211,8 +211,8 @@ SWEP.StatGroups = {
         end,
     },
     {
-        Name = "Range",
-        Description = {"How well the weapon gains or loses damage over long distances.", "Affected by Minimum Range, Maximum Range, and damage falloff."},
+        Name = "rating.range",
+        Description = "rating.range.desc",
         RatingFunction = function(self, base)
             local score = 0
             local valfunc = base and self.GetBaseValue or self.GetValue
@@ -243,8 +243,8 @@ SWEP.StatGroups = {
         end,
     },
     {
-        Name = "Precision",
-        Description = {"How accurate the weapon is when firing single shots or short bursts.", "Affected by Spread and various Recoil stats."},
+        Name = "rating.precision",
+        Description = "rating.precision.desc",
         RatingFunction = function(self, base)
             local score = 0
             local valfunc = base and self.GetBaseValue or self.GetValue
@@ -291,8 +291,8 @@ SWEP.StatGroups = {
         end,
     },
     {
-        Name = "Control",
-        Description = {"How managable the weapon's recoil and spread is under sustained fire.", "Affected by RPM and various Recoil stats."},
+        Name = "rating.control",
+        Description = "rating.control.desc",
         RatingFunction = function(self, base)
             local score = 0
             local valfunc = base and self.GetBaseValue or self.GetValue
@@ -357,8 +357,8 @@ SWEP.StatGroups = {
         end,
     },
     {
-        Name = "Handling",
-        Description = {"How quickly this weapon readies from sprinting, aiming and deploying.", "Affected by Aim Down Sights Time, Sprint To Fire Time, and Deploy Time."},
+        Name = "rating.handling",
+        Description = "rating.handling.desc",
         RatingFunction = function(self, base)
             local score = 0
             local valfunc = base and self.GetBaseValue or self.GetValue
@@ -376,8 +376,8 @@ SWEP.StatGroups = {
         end,
     },
     {
-        Name = "Maneuvering",
-        Description = {"How well the weapon performs while moving around and not aiming.", "Affected by Hipfire, Moving and Mid-air Spread, as well as Peeking Penalty.", "If Free Aim or Sway is enabled, they will also be scored."},
+        Name = "rating.maneuvering",
+        Description = "rating.maneuvering.desc",
         RatingFunction = function(self, base)
             local score = 0
             local valfunc = base and self.GetBaseValue or self.GetValue
@@ -415,8 +415,8 @@ SWEP.StatGroups = {
         end,
     },
     {
-        Name = "Mobility",
-        Description = {"How fast the user can move while using this weapon.", "Affected by various Speed stats, such as Sighted Speed."},
+        Name = "rating.mobility",
+        Description = "rating.mobility.desc",
         RatingFunction = function(self, base)
             local score = 0
             local valfunc = base and self.GetBaseValue or self.GetValue
@@ -453,8 +453,8 @@ SWEP.StatGroups = {
         end,
     },
     {
-        Name = "Stability",
-        Description = {"How much the weapon's point of aim will move around.", "Affected by various Sway stats.", "NOTE: No difference if Sway is disabled in the options."},
+        Name = "rating.stability",
+        Description = "rating.stability.desc",
         RatingFunction = function(self, base)
             local score = 0
             local valfunc = base and self.GetBaseValue or self.GetValue
@@ -482,8 +482,8 @@ SWEP.StatDisplay = {
     --     Unit = ""
     -- }
     {
-        Name = "Raw DPS",
-        Description = {"Calculated damage output of the weapon with no damage falloff.", "Does not consider hitgroup damage multipliers or armor penetration."},
+        Name = "stat.raw_dps",
+        Description = "stat.raw_dps.desc",
         Value = "",
         AggregateFunction = function(self, base, val)
             local valfunc = base and self.GetBaseValue or self.GetValue
@@ -508,8 +508,8 @@ SWEP.StatDisplay = {
         end,
     },
     {
-        Name = "Minimum TTK",
-        Description = {"Calculated time needed to kill a target starting from the second shot.", "Assumes no damage falloff and an unarmored target at 100 health.", "Does not consider hitgroup damage multipliers."},
+        Name = "stat.min_ttk",
+        Description = "stat.min_ttk.desc",
         Value = "",
         Unit = "s",
         LowerIsBetter = true,
