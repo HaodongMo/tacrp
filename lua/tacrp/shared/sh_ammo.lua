@@ -25,6 +25,6 @@ TacRP.AmmoJamMSB = {
     ["smg1"] = 25,
     ["ar2"] = 20,
     ["357"] = 10,
-    ["buckshot"] = 8,
-    ["SniperPenetratedRound"] = 8,
+    ["buckshot"] = 15, -- most are pump/bolt, be nice
+    ["SniperPenetratedRound"] = 15,
 }

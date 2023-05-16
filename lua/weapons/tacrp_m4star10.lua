@@ -170,6 +170,8 @@ SWEP.ShotgunReload = true
 
 SWEP.ReloadTimeMult = 1.15
 
+SWEP.JamBaseMSB = 9
+
 // sounds
 
 // local path = "tacrp/weapons/m4star10/"

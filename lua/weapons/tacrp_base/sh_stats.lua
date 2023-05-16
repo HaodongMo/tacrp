@@ -82,6 +82,7 @@ function SWEP:GetValue(val, static, invert)
 
     local stat = nil
 
+
     -- Generate a cache if it doesn't exist already
     if !self.StatCache[val] or !self.StatCache[val][cachei] then
 

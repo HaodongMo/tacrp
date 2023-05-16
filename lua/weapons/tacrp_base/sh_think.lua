@@ -76,7 +76,7 @@ function SWEP:Think()
     -- end
 
     if self:GetJammed() and !self:StillWaiting() then
-        self:PlayAnimation("jam", 1, true, true)
+        self:PlayAnimation("jam", 0.75, true, true)
         self:SetJammed(false)
     end
 
