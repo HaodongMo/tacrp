@@ -59,15 +59,15 @@ function SWEP:Penetrate(tr, range, penleft, alreadypenned)
     local trent = tr.Entity
 
     local penmult     = TacRP.PenTable[tr.MatType] or 1
+
     local pentracelen = math.max(penleft * penmult / 8, 1)
     local curr_ent    = trent
 
     if !tr.HitWorld then penmult = penmult * 0.5 end
-
-    if trent.mmRHAe then penmult = trent.mmRHAe end
     if trent.Impenetrable then penmult = 100000 end
+    if trent.mmRHAe then penmult = trent.mmRHAe end
 
-    penmult = penmult * math.Rand(0.9, 1.1) * math.Rand(0.9, 1.1)
+    -- penmult = penmult * math.Rand(0.9, 1.1) * math.Rand(0.9, 1.1)
 
     local endpos = hitpos
 

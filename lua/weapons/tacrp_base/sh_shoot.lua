@@ -421,11 +421,13 @@ function SWEP:AfterShotFunction(tr, dmg, range, penleft, alreadypenned, forced)
 
         TacRP.CancelBodyDamage(tr.Entity, dmg, tr.HitGroup)
 
+        local matpen = self:GetValue("Penetration")
+
         if self:GetOwner():IsNPC() and !GetConVar("TacRP_npc_equality"):GetBool() then
             dmg:ScaleDamage(0.25)
         elseif !self:GetOwner():IsNPC() then
-            local pendelta = self:GetValue("Penetration") > 0 and penleft / self:GetValue("Penetration") or 1
-            pendelta = math.Clamp(pendelta, 0.1, 1)
+            local pendelta = matpen > 0 and penleft / matpen or 1
+            pendelta = Lerp(pendelta, math.Clamp(matpen * 0.005, 0.1, 0.25), 1)
             dmg:ScaleDamage(pendelta)
         end
         alreadypenned[tr.Entity] = true

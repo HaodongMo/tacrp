@@ -56,6 +56,8 @@ end)
 net.Receive("tacrp_addshieldmodel", function(len, ply)
     local wpn = net.ReadEntity()
     local mdl = net.ReadEntity()
+    mdl.mmRHAe = net.ReadFloat()
+    mdl.TacRPShield = true
 
     if !IsValid(wpn) or !wpn.ArcticTacRP then return end
 

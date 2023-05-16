@@ -11,7 +11,7 @@ SWEP.Category = "Tactical RP (Special)" // "Tactical RP (Arctic)"
 SWEP.SubCatTier = "9Special"
 SWEP.SubCatType = "8Melee Weapon"
 
-SWEP.Description = "Metal-framed plastic shield, capable of stopping all incoming bullets, no matter how big. Somehow."
+SWEP.Description = "Lightweight shield. Despite its plastic-looking core, it is capable of stopping almost all rifle caliber rounds.\nAble to sprint and melee attack without compromising the user's safety, but slows down move speed slightly."
 
 SWEP.ViewModel = "models/weapons/tacint/v_riot_shield-2.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_riot_shield_2.mdl"
@@ -21,7 +21,7 @@ SWEP.BalanceStats = {
         MoveSpeedMult = 0.8,
     },
     [TacRP.BALANCE_TTT] = {
-        MoveSpeedMult = 0.75,
+        MoveSpeedMult = 0.85,
     },
 }
 
@@ -100,7 +100,7 @@ SWEP.ShieldProps = {
         Model = "models/weapons/tacint/w_riot_shield_2.mdl",
         Pos = Vector(5, -5, 30),
         Ang = Angle(0, 0, 180 - 15),
-        Resistance = 1000
+        Resistance = 3.5
     }
 }
 
@@ -194,7 +194,7 @@ function SWEP:SetupShields()
         end
 
         shield.mmRHAe = k.Resistance
-        shield.Impenetrable = true
+        // shield.Impenetrable = true
 
         shield:SetModel( k.Model )
         shield:FollowBone( self:GetOwner(), boneindex )
@@ -204,6 +204,7 @@ function SWEP:SetupShields()
         shield:SetCollisionGroup(COLLISION_GROUP_DEBRIS)
         -- shield:SetModelScale(1.1, 0.00001)
         shield.Weapon = self
+        shield.TacRPShield = true
         if GetConVar("developer"):GetBool() then
             shield:SetColor( Color(0, 0, 0, 255) )
             shield:SetMaterial("models/wireframe")
@@ -223,6 +224,7 @@ function SWEP:SetupShields()
             net.Start("tacrp_addshieldmodel")
                 net.WriteEntity(self)
                 net.WriteEntity(shield)
+                net.WriteFloat(shield.mmRHAe)
             net.SendPVS(shield:GetPos())
         end)
 
@@ -313,7 +315,7 @@ if engine.ActiveGamemode() == "terrortown" then
     SWEP.HolsterVisible = false
     SWEP.EquipMenuData = {
         type = "Weapon",
-        desc = "Blocks bullets and melee attacks from the front.\nSlows the user while held.",
+        desc = "Blocks most bullets and melee attacks from the front.\nSlows the user while held.",
     }
 
     function SWEP:TTTBought(buyer)
