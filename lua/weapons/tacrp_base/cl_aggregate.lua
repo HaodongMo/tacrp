@@ -560,8 +560,8 @@ SWEP.StatDisplay = {
         Unit = "\""
     },
     {
-        Name = "Spread",
-        Description = "Base accuracy of the weapon.",
+        Name = "stat.spread",
+        Description = "stat.spread.desc",
         AggregateFunction = function(self, base, val)
             return math.Round(math.deg(val), 2)
         end,
@@ -570,34 +570,46 @@ SWEP.StatDisplay = {
         LowerIsBetter = true,
     },
     {
-        Name = "RPM",
-        Description = "Rate of fire of the weapon.",
+        Name = "stat.rpm",
+        Description = "stat.rpm.desc",
         Value = "RPM"
     },
     {
-        Name = "Capacity",
-        Description = "Amount of ammo this weapon can spend before reloading.",
+        Name = "stat.shotstofail",
+        Description = "stat.shotstofail.desc",
+        AggregateFunction = function(self, base, val)
+            return math.Round(1 / self:GetJamChance(base), 0)
+        end,
+        DisplayFunction = function(self, base, val)
+            if val == 0 then return "∞" end
+            return math.Round(1 / self:GetJamChance(base), 0)
+        end,
+        HideIfSame = true,
+        Value = "JamFactor",
+    },
+    {
+        Name = "stat.clipsize",
+        Description = "stat.clipsize.desc",
         Value = "ClipSize",
     },
     {
-        Name = "Sprint To Fire",
-        Description = "Time required to transition from fully sprinting to being able to fire.",
-
+        Name = "stat.sprinttofire",
+        Description = "stat.sprinttofire.desc",
         Value = "SprintToFireTime",
         Unit = "s",
         LowerIsBetter = true,
     },
     {
-        Name = "Aim Down Sights",
-        Description = "Time required to transition from hipfiring to aiming.",
+        Name = "stat.aimdownsights",
+        Description = "stat.aimdownsights.desc",
         Value = "AimDownSightsTime",
         Unit = "s",
         LowerIsBetter = true,
         ValueCheck = "Scope",
     },
     {
-        Name = "Muzzle Velocity",
-        Description = {"How fast the projectile travels in the world.", "Also controls the distance threshold below which bullets become hitscan."},
+        Name = "stat.muzzlevelocity",
+        Description = "stat.muzzlevelocity.desc",
         AggregateFunction = function(self, base, val)
             return math.Round(self:GetMuzzleVelocity(base), 2)
         end,
@@ -607,15 +619,14 @@ SWEP.StatDisplay = {
         Unit = "m/s",
     },
     {
-        Name = "Recoil Kick",
-        Description = "Strength of \"felt recoil\" that throws off your aim.",
+        Name = "stat.recoilkick",
+        Description = "stat.recoilkick.desc",
         Value = "RecoilKick",
         LowerIsBetter = true,
     },
     {
-        Name = "Recoil Spread",
-        Description = {"Inaccuracy per unit of recoil. Larger value means the weapon becomes",
-        "inaccurate faster while continuous firing."},
+        Name = "stat.recoilspread",
+        Description = "stat.recoilspread.desc",
         AggregateFunction = function(self, base, val)
             return math.Round(math.deg(val), 3)
         end,
@@ -624,10 +635,8 @@ SWEP.StatDisplay = {
         LowerIsBetter = true,
     },
     {
-        Name = "Recoil Recovery",
-        Description = {"Rate at which accumulated recoil disspiates, in shots per second.",
-        "Larger value means the effects of recoil disappear faster",
-        "after the reset time."},
+        Name = "stat.recoildissipation",
+        Description = "stat.recoildissipation.desc",
         AggregateFunction = function(self, base, val)
             return math.Round(val, 2)
             --return math.Round(math.deg(val * (base and self:GetTable().RecoilSpreadPenalty or self:GetValue("RecoilSpreadPenalty"))), 1)
@@ -636,23 +645,20 @@ SWEP.StatDisplay = {
         Value = "RecoilDissipationRate",
     },
     {
-        Name = "Recoil Reset Time",
-        Description = {"Duration of delay before recoil can start to dissipate.",
-        "Larger value means you must wait longer between shots until recoil can",
-        "go down."},
+        Name = "stat.recoilresettime",
+        Description = "stat.recoilresettime.desc",
         Value = "RecoilResetTime",
         LowerIsBetter = true,
     },
     {
-        Name = "Maximum Recoil",
-        Description = "Maximum amount of inaccuracy from continuous firing.",
+        Name = "stat.recoilmaximum",
+        Description = "stat.recoilmaximum.desc",
         Value = "RecoilMaximum",
         LowerIsBetter = true,
     },
     {
-        Name = "First Shot Recoil",
-        Description = {"Recoil multiplier when firing the first shot in a burst. Resets after all recoil dissipates.",
-        "Does not affect recoil kick."},
+        Name = "stat.recoilfirstshot",
+        Description = "stat.recoilfirstshot.desc",
         Value = "RecoilFirstShotMult",
         AggregateFunction = function(self, base, val)
             return math.Round(val * 100)
@@ -661,8 +667,8 @@ SWEP.StatDisplay = {
         LowerIsBetter = true,
     },
     {
-        Name = "Recoil Gain",
-        Description = {"How much units of recoil is added per shot, typically 1.", "Larger value increases inaccuracy faster and takes longer to recover."},
+        Name = "stat.recoilpershot",
+        Description = "stat.recoilpershot.desc",
         AggregateFunction = function(self, base, val)
             return math.Round(val, 2)
         end,
@@ -671,8 +677,8 @@ SWEP.StatDisplay = {
         LowerIsBetter = true,
     },
     {
-        Name = "Crouching Recoil",
-        Description = "Recoil multiplier when crouched and not moving.",
+        Name = "stat.recoilcrouch",
+        Description = "stat.recoilcrouch.desc",
         AggregateFunction = function(self, base, val)
             return math.min(100, math.Round(val * 100, 0))
         end,
@@ -682,9 +688,8 @@ SWEP.StatDisplay = {
         -- HideIfSame = true,
     },
     {
-        Name = "Move Speed",
-        Description = {"Speed multiplier while the weapon is held up.",
-        "Has no effect when weapon is in safety."},
+        Name = "stat.movespeed",
+        Description = "stat.movespeed.desc",
         AggregateFunction = function(self, base, val)
             return math.min(100, math.Round(val * 100, 0))
         end,
@@ -692,9 +697,8 @@ SWEP.StatDisplay = {
         Value = "MoveSpeedMult"
     },
     {
-        Name = "Shooting Speed",
-        Description = {"Speed multiplier from firing the weapon.",
-        "Accumulating recoil increases slowdown intensity."},
+        Name = "stat.shootingspeed",
+        Description = "stat.shootingspeed.desc",
         AggregateFunction = function(self, base, val)
             return math.min(100, math.Round(val * 100, 0))
         end,
@@ -702,8 +706,8 @@ SWEP.StatDisplay = {
         Value = "ShootingSpeedMult"
     },
     {
-        Name = "Sighted Speed",
-        Description = "Speed multiplier while the weapon is aiming.",
+        Name = "stat.sightedspeed",
+        Description = "stat.sightedspeed.desc",
         AggregateFunction = function(self, base, val)
             return math.min(100, math.Round(val * 100, 0))
         end,
@@ -712,8 +716,8 @@ SWEP.StatDisplay = {
         ValueCheck = "Scope",
     },
     {
-        Name = "Reload Speed",
-        Description = "Speed multiplier while reloading.",
+        Name = "stat.reloadspeed",
+        Description = "stat.reloadspeed.desc",
         AggregateFunction = function(self, base, val)
             return math.min(100, math.Round(val * 100, 0))
         end,
@@ -721,8 +725,8 @@ SWEP.StatDisplay = {
         Value = "ReloadSpeedMult",
     },
     {
-        Name = "Reload Time",
-        Description = "Amount of time required to perform a reload.",
+        Name = "stat.reloadtime",
+        Description = "stat.reloadtime.desc",
         AggregateFunction = function(self, base, val)
             return math.Round(self:GetReloadTime(base), 2)
         end,
@@ -731,8 +735,8 @@ SWEP.StatDisplay = {
         Unit = "s"
     },
     {
-        Name = "Deploy Time",
-        Description = "Amount of time required to bring up the weapon. Holstering is instant.",
+        Name = "stat.deploytime",
+        Description = "stat.deploytime.desc",
         AggregateFunction = function(self, base, val)
             return math.Round(self:GetDeployTime(base), 2)
         end,
@@ -742,26 +746,24 @@ SWEP.StatDisplay = {
         Unit = "s"
     },
     {
-        Name = "Sway",
-        Description = {"Amount of sway in hipfire. Sway affects your firing direction",
-        "without changing your aiming direction."},
+        Name = "stat.sway",
+        Description = "stat.sway.desc",
 
         Value = "Sway",
         LowerIsBetter = true,
         ConVarCheck = "tacrp_sway",
     },
     {
-        Name = "Sway In Sights",
-        Description = {"Amount of sway while aiming. Sway affects your firing direction",
-        "without changing your aiming direction."},
+        Name = "stat.scopedsway",
+        Description = "stat.scopedsway.desc",
         Value = "ScopedSway",
         LowerIsBetter = true,
         ConVarCheck = "tacrp_sway",
         ValueCheck = "Scope",
     },
     {
-        Name = "Crouching Sway",
-        Description = "Sway multiplier when crouched and not moving.",
+        Name = "stat.swaycrouch",
+        Description = "stat.swaycrouch.desc",
         Value = "SwayCrouchMult",
         AggregateFunction = function(self, base, val)
             return math.min(100, math.Round(val * 100, 0))
@@ -772,8 +774,8 @@ SWEP.StatDisplay = {
         ConVarCheck = "tacrp_sway",
     },
     {
-        Name = "Mid-Air Spread",
-        Description = {"Amount of inaccuracy caused by not standing on solid ground.", "Applied at half intensity while swimming and climbing ladders."},
+        Name = "stat.midairspread",
+        Description = "stat.midairspread.desc",
         AggregateFunction = function(self, base, val)
             return math.Round(math.deg(val), 2)
         end,
@@ -800,8 +802,8 @@ SWEP.StatDisplay = {
         HideIfSame = true,
     },
     {
-        Name = "Firemode",
-        Description = "The weapon's firing capabilities.",
+        Name = "stat.firemode",
+        Description = "stat.firemode.desc",
         AggregateFunction = function(self, base, val)
             if !val then
                 val = {base and self:GetTable()["Firemode"] or self:GetValue("Firemode")}
@@ -880,25 +882,12 @@ SWEP.StatDisplay = {
         -- HideIfSame = true,
     },
     {
-        Name = "Free Aim Angle",
-        Description = "Maximum amount of deviation from the aim direction while hipfiring.",
+        Name = "stat.freeaimangle",
+        Description = "stat.freeaimangle.desc",
         Unit = "°",
         Value = "FreeAimMaxAngle",
         LowerIsBetter = true,
         -- HideIfSame = true,
         ConVarCheck = "tacrp_freeaim",
-    },
-    {
-        Name = "Mean Shots To Fail",
-        Description = "The average number of shots that will be fired before the weapon jams.",
-        AggregateFunction = function(self, base, val)
-            return math.Round(1 / self:GetJamChance(base), 0)
-        end,
-        DisplayFunction = function(self, base, val)
-            if val == 0 then return "∞" end
-            return math.Round(1 / self:GetJamChance(base), 0)
-        end,
-        -- HideIfSame = true,
-        Value = "JamFactor",
     },
 }
