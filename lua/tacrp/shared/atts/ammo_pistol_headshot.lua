@@ -7,7 +7,7 @@ ATT.Cons = {"Limb damage", "Armor Shredding"}
 
 ATT.Category = "ammo_pistol"
 
-ATT.SortOrder = 1
+ATT.SortOrder = 1.75
 
 ATT.Mult_Spread = 0.85
 ATT.Mult_ArmorBonus = 0.5

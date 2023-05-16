@@ -8,7 +8,7 @@ ATT.Cons = {"Damage", "Recoil Kick"}
 
 ATT.Category = "ammo_pistol"
 
-ATT.SortOrder = 1.5
+ATT.SortOrder = 1
 
 ATT.Mult_Damage_Max = 0.9
 ATT.Mult_Damage_Min = 0.9
