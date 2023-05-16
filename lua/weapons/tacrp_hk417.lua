@@ -100,7 +100,6 @@ SWEP.Spread = 0.0005
 
 SWEP.ShootTimeMult = 0.4
 
-
 SWEP.RecoilPerShot = 1
 SWEP.RecoilMaximum = 8
 SWEP.RecoilResetTime = 0.15
@@ -130,6 +129,8 @@ SWEP.SprintToFireTime = 0.42
 
 SWEP.Sway = 1.5
 SWEP.ScopedSway = 0.1
+
+SWEP.FreeAimMaxAngle = 5.5
 
 // hold types
 

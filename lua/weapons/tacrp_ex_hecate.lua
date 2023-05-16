@@ -96,7 +96,7 @@ SWEP.RPM = 25
 
 SWEP.Spread = 0
 
-SWEP.HipFireSpreadPenalty = 0.1
+SWEP.HipFireSpreadPenalty = 0.06
 SWEP.PeekPenaltyFraction = 0.15
 
 SWEP.RecoilPerShot = 1
@@ -127,6 +127,8 @@ SWEP.SprintToFireTime = 0.6
 
 SWEP.Sway = 5
 SWEP.ScopedSway = 0.2
+
+SWEP.FreeAimMaxAngle = 9
 
 // hold types
 

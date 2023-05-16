@@ -73,6 +73,8 @@ SWEP.Firemodes = false
 
 SWEP.ClipSize = 30
 
+SWEP.FreeAimMaxAngle = 3.25
+
 SWEP.Attachments = {
     [1] = {
         PrintName = "Optic",

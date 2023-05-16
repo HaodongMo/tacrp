@@ -168,6 +168,8 @@ SWEP.DropMagazineImpact = "metal"
 SWEP.ReloadUpInTime = 1.65
 SWEP.DropMagazineTime = 0.65
 
+SWEP.FreeAimMaxAngle = 4.5
+
 // sounds
 
 local path = "tacrp/weapons/ak47/ak47_"

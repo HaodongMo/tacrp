@@ -20,6 +20,7 @@ ATT.Mult_HipFireSpreadPenalty = 0.85
 
 ATT.Add_ScopedSway = 0.1
 ATT.Mult_Sway = 0.9
+ATT.Add_FreeAimMaxAngle = -0.5
 
 ATT.InstalledElements = {"foldstock"}
 

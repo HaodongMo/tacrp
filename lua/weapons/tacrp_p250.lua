@@ -113,8 +113,6 @@ SWEP.Spread = 0.001
 
 SWEP.ShootTimeMult = 0.5
 
-
-
 SWEP.RecoilPerShot = 1
 SWEP.RecoilMaximum = 5
 SWEP.RecoilResetTime = 0.2
@@ -139,6 +137,11 @@ SWEP.ReloadSpeedMult = 0.75
 
 SWEP.AimDownSightsTime = 0.25
 SWEP.SprintToFireTime = 0.25
+
+SWEP.Sway = 1
+SWEP.ScopedSway = 0.5
+
+SWEP.FreeAimMaxAngle = 3
 
 // hold types
 
@@ -168,9 +171,6 @@ SWEP.HolsterVisible = true
 SWEP.HolsterSlot = TacRP.HOLSTER_SLOT_PISTOL
 SWEP.HolsterPos = Vector(0, 3, -4)
 SWEP.HolsterAng = Angle(90, 0, 0)
-
-SWEP.Sway = 1
-SWEP.ScopedSway = 0.5
 
 // reload
 

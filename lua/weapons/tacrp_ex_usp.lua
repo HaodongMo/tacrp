@@ -119,7 +119,6 @@ SWEP.RecoilFirstShotMult = 0.9
 SWEP.RecoilVisualKick = 2.5
 SWEP.RecoilKick = 7
 
-
 SWEP.CanBlindFire = true
 
 // handling
@@ -135,6 +134,8 @@ SWEP.SprintToFireTime = 0.25
 
 SWEP.Sway = 1
 SWEP.ScopedSway = 0.5
+
+SWEP.FreeAimMaxAngle = 3.25
 
 // hold types
 

@@ -100,6 +100,11 @@ SWEP.ReloadSpeedMult = 0.5
 SWEP.AimDownSightsTime = 0.35
 SWEP.SprintToFireTime = 0.35 // multiplies how long it takes to recover from sprinting
 
+SWEP.Sway = 1
+SWEP.ScopedSway = 0.2
+
+SWEP.FreeAimMaxAngle = 6
+
 // hold types
 
 SWEP.HoldType = "smg"

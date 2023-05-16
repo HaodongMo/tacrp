@@ -80,7 +80,9 @@ SWEP.RPM = 700
 
 SWEP.RecoilKick = 1.5
 
-SWEP.ClipSize = 15
+SWEP.ClipSize = 20
+
+SWEP.FreeAimMaxAngle = 3.75
 
 SWEP.Attachments = {
     [1] = {

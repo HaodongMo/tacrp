@@ -20,7 +20,7 @@ SWEP.Slot = 2
 SWEP.BalanceStats = {
     [TacRP.BALANCE_SBOX] = {
         Damage_Max = 26,
-        Damage_Min = 7,
+        Damage_Min = 9,
 
         MoveSpeedMult = 0.9,
         ShootingSpeedMult = 0.8,
@@ -120,10 +120,12 @@ SWEP.SightedSpeedMult = 0.7
 SWEP.ReloadSpeedMult = 0.5
 
 SWEP.AimDownSightsTime = 0.33
-SWEP.SprintToFireTime = 0.33
+SWEP.SprintToFireTime = 0.35
 
 SWEP.Sway = 0.75
 SWEP.ScopedSway = 0.25
+
+SWEP.FreeAimMaxAngle = 4.5
 
 // hold types
 

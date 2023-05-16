@@ -83,7 +83,7 @@ Be sure to check out the Interops workshop page as well as Danger Zone Entities.
 </body>]],
     },
     {
-        Title = "Version 8",
+        Title = "Update 8",
         Type = "Patch Notes",
         Date = "2023-05-15",
         Author = "8Z",
@@ -106,14 +106,56 @@ Be sure to check out the Interops workshop page as well as Danger Zone Entities.
 <li><b>Fixed:</b> Bodygroup related errors.
 <li><b>Fixed:</b> Quicknade and grenade weapons do not respect ttt_no_nade_throw_during_prep.
 <li><b>Fixed:</b> Gas grenade doesn't cause sway and coughing when below health threshold.
-<li><b>Fixed:</b> Attachments do not sync properly if weapon is out of PVS initially (such as spawning in TTT).t
+<li><b>Fixed:</b> Attachments do not sync properly if weapon is out of PVS initially (such as spawning in TTT).
 </ul>
 <p>I'm sure I've missed some more, so send any issues or suggestions my way!</p>
 <p>Yours,<br>
 <b>8Z, the gmod hyperealist</b></p>]],
     },
+    {
+        Title = "Update 9",
+        Type = "Patch Notes",
+        Date = "2023-05-16",
+        Author = "8Z",
+        Major = false,
+        Summary = "Jamming rework, penetration tweaks, localization, and other humble but nice things.",
+        Contents = [[<body style="font-family:'Myriad Pro';color:white;font-size:125%;">
+<p>A humble update.</p>
+
+<h3>Free Aim Rework</h3>
+<p>Free Aim was one of those features that nobody liked - admittedly, not even myself. But I couldn't not give it another chance.</p>
+<ul>
+<li>All weapons now have their own Free Aim Angle, typically between 2-9 degrees. Generally speaking, pistols, SMGs and stockless weapons have little free aim.
+<li>Overall free aim value is much lower. Most rifles will have 4-5 degrees, and only cumbersome weapons like snipers and machine guns will have high values.
+<li>Free aim point of aim moves across the screen slower.
+<li>
+</ul>
+
+<h3>Changelist</h3>
+<ul>
+<li><b>Major Change:</b>Free Aim rework.
+<li><b>Added:</b> Steel Core Rounds for pistols, basically the oppposite of Hollowpoints.
+<li><b>Added:</b> Localization system. Currently only Chinese Simplified is available.
+<li><b>Added:</b> Surplus Ammo and Surplus Bolt gained unique behavior. They still jam though.
+<li><b>Balance:</b> (Arcade) Most pistols are no longer lethal on headshot without Hollowpoints/Skullsplitter.
+<li><b>Balance:</b> Dual MTX has reduced spread and fires in runaway burst.
+<li><b>Balance:</b> Riot Shield can now be penetrated with sufficient Material Penetration (around 30).
+<li><b>Balance:</b> TMJ now gives flat penetration increase of 8" (generally lower than before).
+<li><b>Balance:</b> AS-50 and Hecate II got more penetration.
+<li><b>Balance:</b> Auto-Burst trigger no longer has downsides (it's now easy to get optimal ROF with improved buffering).
+<li><b>Balance:</b> Sniper rifles have lower hip spread penalty (to compensate for free aim).
+<li><b>Changed:</b> Jam chance is now dependent on ammo type. A jam will also remove the bullet.
+<li><b>Changed:</b> Adjusted thresholds and criteria for some ratings.
+<li><b>Changed:</b> Click buffering for burst fire now works during the whole burst and not just after the last shot.
+<li><b>Changed:</b> Renamed Penetration to Material Penetration, and Armor Piercing to Armor Penetration.
+<li><b>Changed:</b> Some descriptions for stats and ratings.
+<li><b>(Hopefully) Fixed:</b> Safety desync causing gun able to shoot while apparently in safety.
+</ul>
+<p>Yours,<br>
+<b>8Z, the gmod hyperealist</b></p>]],
+    },
 }
-TacRP.NewsRead = {}
+TacRP.NewsRead = TacRP.NewsRead or {}
 TacRP.NewsLoaded = nil
 TacRP.NewsResult = "Uninitialized"
 
@@ -423,7 +465,7 @@ function TacRP.CreateNewsPanel(open)
 
         if !TacRP.NewsRead[ind] then
             timer.Remove("tacrp_news")
-            timer.Create("tacrp_news", 1.5, 1, function()
+            timer.Create("tacrp_news", 0.5, 1, function()
                 if TacRP.NewsPanel and TacRP.NewsPanel.Index == i then
                     TacRP.NewsRead[ind] = true
                     TacRP.SaveReadData()

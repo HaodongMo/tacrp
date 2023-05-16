@@ -21,9 +21,10 @@ SWEP.BalanceStats = {
     [TacRP.BALANCE_SBOX] = {
         Damage_Max = 15,
         Damage_Min = 6,
-
         Range_Min = 200,
         Range_Max = 3500,
+
+        FreeAimMaxAngle = 3.5,
 
         MoveSpeedMult = 0.9,
         ShootingSpeedMult = 0.8,
@@ -43,6 +44,7 @@ SWEP.BalanceStats = {
         RecoilSpreadPenalty = 0.0005,
         HipFireSpreadPenalty = 0.015,
         RecoilMaximum = 15,
+        FreeAimMaxAngle = 3.5,
 
         BodyDamageMultipliers = {
             [HITGROUP_HEAD] = 2,
@@ -133,6 +135,8 @@ SWEP.SprintToFireTime = 0.3
 
 SWEP.Sway = 0.75
 SWEP.ScopedSway = 0.25
+
+SWEP.FreeAimMaxAngle = 2.5
 
 // hold types
 

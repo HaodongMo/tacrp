@@ -20,6 +20,7 @@ SWEP.SlotAlt = 3
 
 SWEP.BalanceStats = {
     [TacRP.BALANCE_SBOX] = {
+        FreeAimMaxAngle = 5,
         MoveSpeedMult = 0.8,
         ShootingSpeedMult = 0.6,
         SightedSpeedMult = 0.8,
@@ -38,6 +39,7 @@ SWEP.BalanceStats = {
         ShotgunPelletSpread = 0.02,
         HipFireSpreadPenalty = 0.025,
         RecoilSpreadPenalty = 0.02,
+        FreeAimMaxAngle = 4,
 
         BodyDamageMultipliers = {
             [HITGROUP_HEAD] = 2,
@@ -93,8 +95,8 @@ SWEP.FiremodeName = "Pump-Action" // only used externally for firemode name dist
 
 SWEP.RPM = 40
 
-SWEP.Spread = 0.04
-SWEP.ShotgunPelletSpread = 0.02
+SWEP.Spread = 0.03
+SWEP.ShotgunPelletSpread = 0.015
 
 SWEP.ShootTimeMult = 1.25
 
@@ -130,6 +132,11 @@ SWEP.AimDownSightsTime = 0.35
 SWEP.SprintToFireTime = 0.32
 
 SWEP.ReloadTimeMult = 0.8
+
+SWEP.Sway = 1.5
+SWEP.ScopedSway = 0.5
+
+SWEP.FreeAimMaxAngle = 3
 
 // hold types
 

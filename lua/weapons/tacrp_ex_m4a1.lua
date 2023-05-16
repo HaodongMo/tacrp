@@ -122,6 +122,8 @@ SWEP.SprintToFireTime = 0.38 // multiplies how long it takes to recover from spr
 SWEP.Sway = 1.25
 SWEP.ScopedSway = 0.15
 
+SWEP.FreeAimMaxAngle = 4.5
+
 // hold types
 
 SWEP.HoldType = "ar2"

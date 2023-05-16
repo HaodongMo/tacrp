@@ -130,6 +130,11 @@ SWEP.ReloadSpeedMult = 0.5
 SWEP.AimDownSightsTime = 0.32
 SWEP.SprintToFireTime = 0.38
 
+SWEP.Sway = 1.25
+SWEP.ScopedSway = 0.15
+
+SWEP.FreeAimMaxAngle = 4.5
+
 // hold types
 
 SWEP.HoldType = "smg"
@@ -158,11 +163,6 @@ SWEP.HolsterVisible = true
 SWEP.HolsterSlot = TacRP.HOLSTER_SLOT_BACK
 SWEP.HolsterPos = Vector(5, 0, -6)
 SWEP.HolsterAng = Angle(0, 0, 0)
-
-// sway
-
-SWEP.Sway = 1.25
-SWEP.ScopedSway = 0.15
 
 SWEP.ClipSize = 30
 SWEP.Ammo = "ar2"

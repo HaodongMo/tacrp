@@ -122,8 +122,10 @@ SWEP.HolsterAng = Angle(0, 0, 0)
 
 // sway
 
-SWEP.Sway = 5
+SWEP.Sway = 3
 SWEP.ScopedSway = 0.25
+
+SWEP.FreeAimMaxAngle = 10
 
 // melee
 

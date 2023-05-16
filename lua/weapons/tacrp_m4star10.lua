@@ -24,6 +24,8 @@ SWEP.BalanceStats = {
         Damage_Max = 10,
         Damage_Min = 5,
 
+        FreeAimMaxAngle = 5,
+
         MoveSpeedMult = 0.9,
         ShootingSpeedMult = 0.7,
         SightedSpeedMult = 0.9,
@@ -36,6 +38,8 @@ SWEP.BalanceStats = {
         Range_Min = 300,
         Range_Max = 2000,
         RPM = 180,
+
+        FreeAimMaxAngle = 5,
 
         RecoilSpreadPenalty = 0.02,
 
@@ -159,8 +163,10 @@ SWEP.HolsterSlot = TacRP.HOLSTER_SLOT_BACK2
 SWEP.HolsterPos = Vector(5, 0, -6)
 SWEP.HolsterAng = Angle(0, 0, 0)
 
-SWEP.Sway = 1
-SWEP.ScopedSway = 0.1
+SWEP.Sway = 0.8
+SWEP.ScopedSway = 0.25
+
+SWEP.FreeAimMaxAngle = 3.5
 
 // reload
 

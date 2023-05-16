@@ -26,6 +26,7 @@ SWEP.BalanceStats = {
         RecoilSpreadPenalty = 0.004,
         HipFireSpreadPenalty = 0.025,
         RecoilKick = 8,
+        FreeAimMaxAngle = 4,
 
         MoveSpeedMult = 0.95,
         ShootingSpeedMult = 0.8,
@@ -41,6 +42,7 @@ SWEP.BalanceStats = {
         RPM = 700,
 
         Spread = 0.0125,
+        FreeAimMaxAngle = 4,
 
         HipFireSpreadPenalty = 0.035,
         RecoilSpreadPenalty = 0.0065,
@@ -128,6 +130,8 @@ SWEP.SprintToFireTime = 0.25
 
 SWEP.Sway = 1
 SWEP.ScopedSway = 0.5
+
+SWEP.FreeAimMaxAngle = 3
 
 // hold types
 

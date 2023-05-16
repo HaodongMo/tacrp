@@ -128,6 +128,8 @@ SWEP.CanBlindFire = true
 SWEP.Sway = 0.5
 SWEP.ScopedSway = 0.5
 
+SWEP.FreeAimMaxAngle = 2
+
 // handling
 
 SWEP.MoveSpeedMult = 0.95
