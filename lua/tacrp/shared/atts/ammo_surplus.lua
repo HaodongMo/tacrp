@@ -6,7 +6,7 @@ ATT.Pros = {"Supply Limit"}
 ATT.Cons = {"Unreliable"}
 ATT.Category = {"ammo_rifle", "ammo_sniper", "ammo_pistol", "ammo_amr", "ammo_shotgun"}
 
-ATT.SortOrder = 1.5
+ATT.SortOrder = -1
 
 ATT.Mult_SupplyLimit = 2
 ATT.Mult_ShootChance = 0.98
