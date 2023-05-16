@@ -23,6 +23,17 @@ SWEP.BalanceStats = {
         Damage_Min = 6,
         RPM = 550,
 
+        BodyDamageMultipliers = {
+            [HITGROUP_HEAD] = 3.25, // still able to one-shot before falloff
+            [HITGROUP_CHEST] = 1,
+            [HITGROUP_STOMACH] = 1.25,
+            [HITGROUP_LEFTARM] = 1,
+            [HITGROUP_RIGHTARM] = 1,
+            [HITGROUP_LEFTLEG] = 0.75,
+            [HITGROUP_RIGHTLEG] = 0.75,
+            [HITGROUP_GEAR] = 0.9
+        },
+
         MoveSpeedMult = 1,
         ShootingSpeedMult = 1,
         SightedSpeedMult = 1,

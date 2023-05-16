@@ -21,6 +21,19 @@ SWEP.BalanceStats = {
     [TacRP.BALANCE_SBOX] = {
         Damage_Max = 26,
         Damage_Min = 12,
+        RPM = 500,
+        RecoilKick = 4,
+
+        BodyDamageMultipliers = {
+            [HITGROUP_HEAD] = 3.75,
+            [HITGROUP_CHEST] = 1,
+            [HITGROUP_STOMACH] = 1,
+            [HITGROUP_LEFTARM] = 1,
+            [HITGROUP_RIGHTARM] = 1,
+            [HITGROUP_LEFTLEG] = 0.75,
+            [HITGROUP_RIGHTLEG] = 0.75,
+            [HITGROUP_GEAR] = 0.9
+        },
 
         MoveSpeedMult = 1,
         ShootingSpeedMult = 1,

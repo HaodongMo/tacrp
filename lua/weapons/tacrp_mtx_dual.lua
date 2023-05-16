@@ -21,9 +21,20 @@ SWEP.BalanceStats = {
     [TacRP.BALANCE_SBOX] = {
         Damage_Max = 24,
         Damage_Min = 12,
-        RPM = 700,
+        RPM = 750,
 
-        Spread = 0.025,
+        BodyDamageMultipliers = {
+            [HITGROUP_HEAD] = 3.75,
+            [HITGROUP_CHEST] = 1,
+            [HITGROUP_STOMACH] = 1,
+            [HITGROUP_LEFTARM] = 0.9,
+            [HITGROUP_RIGHTARM] = 0.9,
+            [HITGROUP_LEFTLEG] = 0.75,
+            [HITGROUP_RIGHTLEG] = 0.75,
+            [HITGROUP_GEAR] = 0.9
+        },
+
+        Spread = 0.02,
 
         MoveSpeedMult = 0.95,
         ShootingSpeedMult = 0.8,
@@ -38,7 +49,7 @@ SWEP.BalanceStats = {
         Range_Max = 1500,
         RPM = 600,
 
-        Spread = 0.025,
+        Spread = 0.02,
 
         BodyDamageMultipliers = {
             [HITGROUP_HEAD] = 2.5,
@@ -75,7 +86,7 @@ SWEP.ArmorPenetration = 0.6
 SWEP.MuzzleVelocity = 9500
 
 SWEP.BodyDamageMultipliers = {
-    [HITGROUP_HEAD] = 4,
+    [HITGROUP_HEAD] = 4.5,
     [HITGROUP_CHEST] = 1,
     [HITGROUP_STOMACH] = 1,
     [HITGROUP_LEFTARM] = 0.9,
@@ -89,18 +100,20 @@ SWEP.BodyDamageMultipliers = {
 
 SWEP.Firemodes = {-2}
 SWEP.Firemode = -2
+SWEP.RunawayBurst = true
+SWEP.PostBurstDelay = 0.07
 
 SWEP.RPM = 750
 
 SWEP.Spread = 0.015
 
 SWEP.MoveSpreadPenalty = 0
-SWEP.MidAirSpreadPenalty = 0.08
+SWEP.MidAirSpreadPenalty = 0.075
 SWEP.HipFireSpreadPenalty = 0
 
 SWEP.RecoilPerShot = 1
-SWEP.RecoilMaximum = 15
-SWEP.RecoilResetTime = 0.25
+SWEP.RecoilMaximum = 20
+SWEP.RecoilResetTime = 0.15
 SWEP.RecoilDissipationRate = 20
 SWEP.RecoilFirstShotMult = 1 // multiplier for the first shot's recoil amount
 
