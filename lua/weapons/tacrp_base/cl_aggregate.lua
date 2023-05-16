@@ -58,12 +58,12 @@ function SWEP:GetMuzzleVelocity(base)
     return math.ceil(0.3048 * basetime / 12)
 end
 
-function SWEP:GetMeanShotsToFail(base)
-    local valfunc = base and self.GetBaseValue or self.GetValue
-    local shootchance = valfunc(self, "ShootChance")
+-- function SWEP:GetMeanShotsToFail(base)
+--     local valfunc = base and self.GetBaseValue or self.GetValue
+--     local shootchance = valfunc(self, "ShootChance")
 
-    return 1 / (1 - shootchance)
-end
+--     return 1 / (1 - shootchance)
+-- end
 
 function SWEP:GetBestFiremode(base)
     local valfunc = base and self.GetBaseValue or self.GetValue
@@ -108,8 +108,8 @@ local mssd_scoring_ttt = {
 
 
 SWEP.StatGroupGrades = {
-    {90, "S", Color(230, 60, 60)},
-    {77, "A", Color(230, 180, 60)},
+    {88, "S", Color(230, 60, 60)},
+    {75, "A", Color(230, 180, 60)},
     {60, "B", Color(230, 230, 60)},
     {40, "C", Color(60, 230, 60)},
     {20, "D", Color(60, 60, 230)},
@@ -335,9 +335,10 @@ SWEP.StatGroups = {
             -- print(rrec_s, mspr_s)
 
             -- [30] recoil kick over 1s
+            local score_rk1 = 30
             local shots = math.ceil(erpm / 60 * 1)
-            score = score + math.Clamp(1 - rk * shots * rrt / 15, 0, 1) * 30
-            --print("rk1", rk * shots * rrt, math.Clamp(1 - rk * shots * rrt / 15, 0, 1) * 25)
+            score = score + math.Clamp(1 - (rk * shots * rrt - 3) / 12, 0, 1) * score_rk1
+            -- print("rk1", rk * shots * rrt, math.Clamp(1 - rk * shots * rrt / 15, 0, 1) * score_rk1)
 
             -- [30] spread over 1s (or 2 bursts)
             local score_sg = 30
@@ -345,12 +346,12 @@ SWEP.StatGroups = {
                 local rbb = math.max(0, pbd - rrt) * rdr -- recovery between bursts
                 local rpb = -bfm * rps - (-bfm - 1) * rbs - rbb -- recoil per full burst
                 score = score + math.Clamp(1 - (rpb * rsp * 2) / 0.04, 0, 1) ^ 0.75 * score_sg
-                --print("spb", rpb * rsp, math.Clamp(1 - (rpb * rsp * 3) / 0.04, 0, 1) ^ 2 * score_sg)
+                -- print("spb", rpb * rsp, math.Clamp(1 - (rpb * rsp * 3) / 0.04, 0, 1) ^ 2 * score_sg)
             else
                 local sg = math.min(shots, math.ceil(rmax / rsp))
                 local sot = math.min(rmax, fss - rbs + sg * (rps - rbs)) * rsp
-                --print("sot", sot, math.Clamp(1 - sot / 0.04, 0, 1) ^ 2 * score_sg)
-                score = score + math.Clamp(1 - sot / 0.04, 0, 1) ^ 0.75 * score_sg
+                -- print("sot", sot, math.Clamp(1 - (sot - 0.01) / 0.03, 0, 1) ^ 0.75 * score_sg)
+                score = score + math.Clamp(1 - (sot - 0.01) / 0.03, 0, 1) ^ 0.75 * score_sg
             end
 
             return score
@@ -397,19 +398,22 @@ SWEP.StatGroups = {
                 bonus = 0
             end
             if bonus == 0 then
-                score = score + math.max(freeaim_s, sway_s) * 22 + math.min(freeaim_s, sway_s) * 8
+                score = score + math.max(freeaim_s, sway_s) * 20 + math.min(freeaim_s, sway_s) * 10
             end
 
-            local diff = valfunc(self, "HipFireSpreadPenalty") / math.Clamp(self:GetBaseValue("Spread"), 0.015, 0.03)
+            -- local diff = valfunc(self, "HipFireSpreadPenalty") / math.Clamp(self:GetBaseValue("Spread"), 0.015, 0.03)
+            local hipspread = valfunc(self, "Spread") + valfunc(self, "HipFireSpreadPenalty")
 
-            -- [20] peeking
-            score = score + math.Clamp(1 - (diff * valfunc(self, "PeekPenaltyFraction")) / 1.5, 0, 1) * (20 + bonus * 0.25)
+            -- [15] peeking
+            -- score = score + math.Clamp(1 - (diff * valfunc(self, "PeekPenaltyFraction")) / 1.5, 0, 1) * (20 + bonus * 0.25)
+            score = score + math.Clamp(1 - (hipspread * valfunc(self, "PeekPenaltyFraction") - 0.01) / 0.015, 0, 1) * (15 + bonus * 0.25)
 
-            -- [40] hip spread
-            score = score + math.Clamp(1 - (diff - 1) / 4, 0, 1) ^ 0.9 * (40 + bonus * 0.5)
+            -- [50] hip spread + spread
+            -- score = score + math.Clamp(1 - (diff - 1) / 4, 0, 1) ^ 0.9 * (40 + bonus * 0.5)
+            score = score + math.Clamp(1 - (hipspread - 0.01) / 0.06, 0, 1) * (50 + bonus * 0.5)
 
-            -- [15] mid-air/moving spread
-            score = score + math.Clamp(1 - (valfunc(self, "MidAirSpreadPenalty") * 0.3 + valfunc(self, "MoveSpreadPenalty") * 0.7) / 0.15, 0, 1) * (15 + bonus * 0.25)
+            -- [10] mid-air/moving spread
+            score = score + math.Clamp(1 - (valfunc(self, "MidAirSpreadPenalty") ) / 0.1, 0, 1) * (10 + bonus * 0.25)
 
             return score
         end,
@@ -532,8 +536,8 @@ SWEP.StatDisplay = {
         end,
     },
     {
-        Name = "Armor Penetration",
-        Description = {"Multiplier for health damage done when hitting armor.", "Higher value indicates less damage to armor and more to health.", "At 100%, armor is ignored entirely. At 0%, armor will block all damage."},
+        Name = "stat.armorpenetration",
+        Description = "stat.armorpenetration.desc",
         Value = "ArmorPenetration",
         AggregateFunction = function(self, base, val)
             return math.max(math.Round(val * 100, 1), 0)
@@ -541,8 +545,8 @@ SWEP.StatDisplay = {
         Unit = "%",
     },
     {
-        Name = "Armor Shredding",
-        Description = {"Multiplier for armor damage done when hitting armor.", "High AP weapons will shred less armor due to most of the damage being", "dealt directly to health. At 100% AP, no armor damage will be dealt."},
+        Name = "stat.armorbonus",
+        Description = {},
         Value = "ArmorBonus",
         AggregateFunction = function(self, base, val)
             return math.Round(val * 100, 1)
@@ -550,9 +554,8 @@ SWEP.StatDisplay = {
         Unit = "%",
     },
     {
-        Name = "Penetration",
-        Description = {"Thickness of metal this weapon can penetrate.",
-        "Actual penetration is material-dependent."},
+        Name = "stat.penetration",
+        Description = "stat.penetration.desc",
         Value = "Penetration",
         Unit = "\""
     },
@@ -889,13 +892,13 @@ SWEP.StatDisplay = {
         Name = "Mean Shots To Fail",
         Description = "The average number of shots that will be fired before the weapon jams.",
         AggregateFunction = function(self, base, val)
-            return math.Round(self:GetMeanShotsToFail(base), 0)
+            return math.Round(1 / self:GetJamChance(base), 0)
         end,
         DisplayFunction = function(self, base, val)
-            if val == 1 then return "∞" end
-            return math.Round(self:GetMeanShotsToFail(base), 0)
+            if val == 0 then return "∞" end
+            return math.Round(1 / self:GetJamChance(base), 0)
         end,
         -- HideIfSame = true,
-        Value = "ShootChance",
+        Value = "JamFactor",
     },
 }

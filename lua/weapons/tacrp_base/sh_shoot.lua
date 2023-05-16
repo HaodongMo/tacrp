@@ -57,9 +57,10 @@ function SWEP:PrimaryAttack()
         end
     end
 
-    if self:GetValue("ShootChance") < util.SharedRandom("tacRP_shootChance", 0, 1) then
+    if util.SharedRandom("tacRP_shootChance", 0, 1) <= self:GetJamChance(false) then
         local ret = self:RunHook("Hook_PreJam")
         if ret ~= true then
+            self:TakePrimaryAmmo(self:GetValue("AmmoPerShot"))
             if self:GetBurstCount() == 0 then -- dryfire anim is snapping so don't interrupt fire anim for it
                 self.Primary.Automatic = false
                 if self:GetBlindFire() then
@@ -72,7 +73,9 @@ function SWEP:PrimaryAttack()
             self:SetBurstCount(0)
             self:SetNextPrimaryFire(CurTime() + self:GetValue("JamWaitTime"))
             self:SetNextSecondaryFire(CurTime() + self:GetValue("JamWaitTime"))
-            self:SetJammed(true)
+            if self:Clip1() > 0 and !self:GetValue("JamSkipFix") then
+                self:SetJammed(true)
+            end
             self:RunHook("Hook_PostJam")
             return
         end
@@ -669,4 +672,14 @@ function SWEP:IsShotgun(base)
     else
         return self:GetValue("Num") > 1
     end
+end
+
+function SWEP:GetJamChance(base)
+    local valfunc = base and self.GetBaseValue or self.GetValue
+    local factor = valfunc(self, "JamFactor")
+    if factor <= 0 then return 0 end
+
+    local msb = (TacRP.AmmoJamMSB[valfunc(self, "Ammo")] or 15) / math.sqrt(factor)
+
+    return 1 / msb
 end

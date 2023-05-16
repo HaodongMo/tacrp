@@ -19,6 +19,12 @@ for _, i in pairs(ammotypes) do
     end
 end
 
-if engine.ActiveGamemode() == "terrortown" then
-
-end
+-- mean shots between jams
+TacRP.AmmoJamMSB = {
+    ["pistol"] = 30,
+    ["smg1"] = 25,
+    ["ar2"] = 20,
+    ["357"] = 10,
+    ["buckshot"] = 8,
+    ["SniperPenetratedRound"] = 8,
+}

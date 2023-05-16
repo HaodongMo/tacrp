@@ -82,8 +82,10 @@ SWEP.Spread = 0.01
 
 SWEP.ShootTimeMult = 1
 
-SWEP.ShootChance = 1
-SWEP.JamWaitTime = 0.5
+// SWEP.ShootChance = 1
+SWEP.JamWaitTime = 0.25
+SWEP.JamFactor = 0 // higher = more frequent jams. no jams at 0
+SWEP.JamSkipFix = false // only do dryfire and the initial delay. use on revolvers mostly
 
 // Spread penalties are in spread units and are additive
 SWEP.MoveSpreadPenalty = 0 // spread penalty while travelling at max. 250 u/s

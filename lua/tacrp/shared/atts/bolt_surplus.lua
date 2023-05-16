@@ -9,7 +9,8 @@ ATT.Category = {"bolt_manual", "bolt_automatic"}
 
 ATT.SortOrder = 999
 
-ATT.Mult_ShootChance = 0.96
+ATT.Add_JamFactor = 0.6
+-- ATT.Mult_ShootChance = 0.96
 
 ATT.Hook_PostShoot = function(wep)
     if CLIENT then return end
