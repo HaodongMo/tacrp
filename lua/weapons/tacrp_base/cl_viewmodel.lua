@@ -94,18 +94,22 @@ function SWEP:DrawCustomModel(wm, custom_wm)
         bpos = bonemat:GetTranslation()
         bang = bonemat:GetAngles()
 
-        local apos, aang
+        local apos, aang = bpos, bang
 
-        apos = bpos + bang:Forward() * offset_pos.x
-        apos = apos + bang:Right() * offset_pos.y
-        apos = apos + bang:Up() * offset_pos.z
+        if offset_pos then
+            apos = bpos + bang:Forward() * offset_pos.x
+            apos = apos + bang:Right() * offset_pos.y
+            apos = apos + bang:Up() * offset_pos.z
+        end
 
-        aang = Angle()
-        aang:Set(bang)
+        if offset_ang then
+            aang = Angle()
+            aang:Set(bang)
 
-        aang:RotateAroundAxis(aang:Right(), offset_ang.p)
-        aang:RotateAroundAxis(aang:Up(), offset_ang.y)
-        aang:RotateAroundAxis(aang:Forward(), offset_ang.r)
+            aang:RotateAroundAxis(aang:Right(), offset_ang.p)
+            aang:RotateAroundAxis(aang:Up(), offset_ang.y)
+            aang:RotateAroundAxis(aang:Forward(), offset_ang.r)
+        end
 
         local moffset = (atttbl.ModelOffset or Vector(0, 0, 0)) * (slottbl.VMScale or 1)
 
