@@ -383,36 +383,34 @@ SWEP.StatGroups = {
             local score = 0
             local valfunc = base and self.GetBaseValue or self.GetValue
 
-            -- [25] free aim + sway (if both are disabled, score goes to other 2)
-            local bonus = 30
+            -- [50] free aim + sway (if both are disabled, score goes to other 2)
+            local bonus = 50
             local freeaim_s = 1
             if GetConVar("tacrp_freeaim"):GetBool() then
                 if valfunc(self, "FreeAim") then
-                    freeaim_s = math.Clamp(1 - (valfunc(self, "FreeAimMaxAngle") - 5) / 5, 0, 1)
+                    freeaim_s = math.Clamp(1 - (valfunc(self, "FreeAimMaxAngle") - 2) / 8, 0, 1) ^ 0.8
                 end
                 bonus = 0
             end
             local sway_s = 1
             if GetConVar("tacrp_sway"):GetBool() then
-                sway_s = math.Clamp(1 - (valfunc(self, "Sway") ) / 4, 0, 1) ^ 0.6
+                sway_s = math.Clamp(1 - (valfunc(self, "Sway") - 0.75) / 2.25, 0, 1)
                 bonus = 0
             end
             if bonus == 0 then
-                score = score + math.max(freeaim_s, sway_s) * 20 + math.min(freeaim_s, sway_s) * 10
+                score = score + math.min(freeaim_s, sway_s) * 30 + math.max(freeaim_s, sway_s) * 20
             end
 
             -- local diff = valfunc(self, "HipFireSpreadPenalty") / math.Clamp(self:GetBaseValue("Spread"), 0.015, 0.03)
             local hipspread = valfunc(self, "Spread") + valfunc(self, "HipFireSpreadPenalty")
 
-            -- [15] peeking
-            -- score = score + math.Clamp(1 - (diff * valfunc(self, "PeekPenaltyFraction")) / 1.5, 0, 1) * (20 + bonus * 0.25)
-            score = score + math.Clamp(1 - (hipspread * valfunc(self, "PeekPenaltyFraction") - 0.01) / 0.015, 0, 1) * (15 + bonus * 0.25)
+            -- [0] peeking
+            -- score = score + math.Clamp(1 - (hipspread * valfunc(self, "PeekPenaltyFraction") - 0.01) / 0.015, 0, 1) * (10 + bonus * 0.25)
 
-            -- [50] hip spread + spread
-            -- score = score + math.Clamp(1 - (diff - 1) / 4, 0, 1) ^ 0.9 * (40 + bonus * 0.5)
-            score = score + math.Clamp(1 - (hipspread - 0.01) / 0.06, 0, 1) * (50 + bonus * 0.5)
+            -- [40] hip spread + spread
+            score = score + math.Clamp(1 - (hipspread - 0.015) / 0.05, 0, 1) * (40 + bonus * 0.75)
 
-            -- [10] mid-air/moving spread
+            -- [10] mid-air spread
             score = score + math.Clamp(1 - (valfunc(self, "MidAirSpreadPenalty") ) / 0.1, 0, 1) * (10 + bonus * 0.25)
 
             return score
@@ -439,17 +437,17 @@ SWEP.StatGroups = {
                 -- [20] reload
                 score = score + math.Clamp((valfunc(self, "ReloadSpeedMult") - 0.4) / 0.6, 0, 1) * 20
             else
-                -- [40] move
-                score = score + math.Clamp((valfunc(self, "MoveSpeedMult") - 0.4) / 0.6, 0, 1) * 40
+                -- [50] move
+                score = score + math.Clamp((math.min(1, valfunc(self, "MoveSpeedMult")) - 0.6) / 0.4, 0, 1) ^ 2 * 50
 
-                -- [30] sighted
-                score = score + math.Clamp((valfunc(self, "SightedSpeedMult") - 0.2) / 0.8, 0, 1) * 30
+                -- [25] sighted
+                score = score + math.Clamp((math.min(1, valfunc(self, "SightedSpeedMult")) - 0.3) / 0.7, 0, 1) * 25
 
-                -- [30] shooting
-                score = score + math.Clamp((valfunc(self, "ShootingSpeedMult") - 0.2) / 0.8, 0, 1) * 30
+                -- [25] shooting
+                score = score + math.Clamp((math.min(1, valfunc(self, "ShootingSpeedMult")) - 0.4) / 0.6, 0, 1) * 25
 
                 -- [-20] reload
-                score = score - math.Clamp(1 - (valfunc(self, "ReloadSpeedMult") - 0.4) / 0.6, 0, 1) * 20
+                score = score - math.Clamp(1 - (math.min(1, valfunc(self, "ReloadSpeedMult")) - 0.4) / 0.6, 0, 1) * 20
             end
 
 
@@ -515,7 +513,7 @@ SWEP.StatDisplay = {
         Name = "stat.min_ttk",
         Description = "stat.min_ttk.desc",
         Value = "",
-        Unit = "s",
+        Unit = "unit.second",
         LowerIsBetter = true,
         AggregateFunction = function(self, base, val)
             local valfunc = base and self.GetBaseValue or self.GetValue
@@ -596,14 +594,14 @@ SWEP.StatDisplay = {
         Name = "stat.sprinttofire",
         Description = "stat.sprinttofire.desc",
         Value = "SprintToFireTime",
-        Unit = "s",
+        Unit = "unit.second",
         LowerIsBetter = true,
     },
     {
         Name = "stat.aimdownsights",
         Description = "stat.aimdownsights.desc",
         Value = "AimDownSightsTime",
-        Unit = "s",
+        Unit = "unit.second",
         LowerIsBetter = true,
         ValueCheck = "Scope",
     },
@@ -616,7 +614,7 @@ SWEP.StatDisplay = {
         ConVarCheck = "tacrp_physbullet",
         Value = "MuzzleVelocity",
         LowerIsBetter = false,
-        Unit = "m/s",
+        Unit = "unit.mps",
     },
     {
         Name = "stat.recoilkick",
@@ -641,7 +639,7 @@ SWEP.StatDisplay = {
             return math.Round(val, 2)
             --return math.Round(math.deg(val * (base and self:GetTable().RecoilSpreadPenalty or self:GetValue("RecoilSpreadPenalty"))), 1)
         end,
-        Unit = "/s",
+        Unit = "unit.persecond",
         Value = "RecoilDissipationRate",
     },
     {

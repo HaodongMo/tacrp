@@ -24,7 +24,7 @@ SWEP.BalanceStats = {
     [TacRP.BALANCE_SBOX] = {
         MoveSpeedMult = 0.8,
         ShootingSpeedMult = 0.5,
-        SightedSpeedMult = 1,
+        SightedSpeedMult = 0.5,
         MeleeSpeedMult = 1,
         ReloadSpeedMult = 0.8,
     },
