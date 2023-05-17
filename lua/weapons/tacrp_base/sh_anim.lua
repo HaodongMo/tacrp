@@ -83,4 +83,6 @@ function SWEP:Idle()
             self:PlayAnimation("idle")
         end
     end
+
+    self:SetReady(true)
 end

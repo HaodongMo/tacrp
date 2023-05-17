@@ -476,6 +476,7 @@ function SWEP:SetupDataTables()
     self:NetworkVar("Bool", 9, "Peeking")
     self:NetworkVar("Bool", 10, "BlindFireRight") // bleh, but actually less networking load than using an integer (32 bit)
     self:NetworkVar("Bool", 11, "Jammed")
+    self:NetworkVar("Bool", 12, "Ready")
 
     self:NetworkVar("Angle", 0, "FreeAimAngle")
     self:NetworkVar("Angle", 1, "LastAimAngle")
@@ -486,7 +487,12 @@ function SWEP:SetupDataTables()
     self:SetLastAimAngle(Angle(0, 0, 0))
     self:SetFiremode(1)
     self:SetTactical(true)
+    self:SetReady(false)
 end
+
+function SWEP:OnDrop()
+    self:SetReady(false)
+ end
 
 function SWEP:SecondaryAttack()
     self:RunHook("Hook_SecondaryAttack")
