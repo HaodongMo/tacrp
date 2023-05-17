@@ -72,9 +72,9 @@ L["rating.handling.desc"] = "武器快速进入准备状态的能力。\n相关�
 L["rating.maneuvering"] = "机动性"
 L["rating.maneuvering.desc"] = "武器不瞄准时保持精准的能力。\n相关属性：腰射散射，空中散射，自由准心，摇晃。"
 L["rating.mobility"] = "总体移速"
-L["rating.mobility.desc"] = "How fast the user can move while using this weapon.\nAffected by various Speed stats, such as Sighted Speed."
+L["rating.mobility.desc"] = "使用武器时保持移动速度的能力。\n相关属性：各类移动属性。"
 L["rating.stability"] = "稳定性"
-L["rating.stability.desc"] = "How much the weapon's point of aim will move around.\nAffected by various Sway stats.\nNOTE: No difference if Sway is disabled in the options."
+L["rating.stability.desc"] = "武器瞄准点的随机移动程度。\n相关属性：各类摇晃属性。"
 
 L["stat.table.stat"] = "属性名"
 L["stat.table.base"] = "基础值"

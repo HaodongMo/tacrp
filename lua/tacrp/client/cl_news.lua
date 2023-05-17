@@ -118,9 +118,16 @@ Be sure to check out the Interops workshop page as well as Danger Zone Entities.
         Date = "2023-05-16",
         Author = "8Z",
         Major = false,
-        Summary = "Jamming rework, penetration tweaks, localization, and other humble but nice things.",
+        Summary = "The biggest changes tend to slip under the hood.",
         Contents = [[<body style="font-family:'Myriad Pro';color:white;font-size:125%;">
-<p>A humble update.</p>
+<p>A humble update. Aside from a lot of internal changes, some systems have been reworked and a new ammo attachment for pistols is added.</p>
+
+<h3>Jamming Rework</h3>
+<p>Arctic added jamming for fun and neither of us really knew what to do with it. We didn't want to just slap it on all guns just because, but there also seemed to not be any good reason to put it anywhere.
+In lieu of a better idea, I've elected to give the surplus attachments some dubious upside that at the very least may be interesting.</p>
+
+<p>Furthermore, the chance to jam is now based on ammo type, with attachments adding a "Jam Factor" instead of modifying percentage chances directly. This should help prevent pistols, shotguns and snipers from jamming too infrequently compared to automatic high fire rate guns.</p>
+
 
 <h3>Free Aim Rework</h3>
 <p>Free Aim was one of those features that nobody liked - admittedly, not even myself. But I couldn't not give it another chance.</p>
@@ -128,31 +135,34 @@ Be sure to check out the Interops workshop page as well as Danger Zone Entities.
 <li>All weapons now have their own Free Aim Angle, typically between 2-9 degrees. Generally speaking, pistols, SMGs and stockless weapons have little free aim.
 <li>Overall free aim value is much lower. Most rifles will have 4-5 degrees, and only cumbersome weapons like snipers and machine guns will have high values.
 <li>Free aim point of aim moves across the screen slower.
-<li>
 </ul>
+
+<h3>Mr. Worldwide</h3>
+<p>Ported over the localization system used in ARC9. As of now, there are no other languages, so if you are interested in contributing your language, please contact me or make a pull request!<br>
+An additional benefit is that a lot of the attachments now use consistent wording due to switching to phrases.</p>
 
 <h3>Changelist</h3>
 <ul>
 <li><b>Major Change:</b> Free Aim rework.
+<li><b>Major Change:</b> Jamming rework.
+<li><b>Added:</b> Surplus Ammo and Surplus Bolt gained unique behavior. They still jam though.
 <li><b>Added:</b> Steel Core Rounds for pistols, basically the oppposite of Hollowpoints.
 <li><b>Added:</b> Localization system. Currently only Chinese Simplified is available.
-<li><b>Added:</b> Surplus Ammo and Surplus Bolt gained unique behavior. They still jam though.
-<li><b>Balance:</b> (Arcade) Most pistols are no longer lethal on headshot without Hollowpoints/Skullsplitter.
-<li><b>Balance:</b> Dual MTX has reduced spread and fires in runaway burst.
-<li><b>Balance:</b> Riot Shield can now be penetrated with sufficient Material Penetration (around 30).
-<li><b>Balance:</b> TMJ now gives flat penetration increase of 8" (generally lower than before).
-<li><b>Balance:</b> AS-50 and Hecate II got more penetration.
-<li><b>Balance:</b> Auto-Burst trigger no longer has downsides (it's now easy to get optimal ROF with improved buffering).
-<li><b>Balance:</b> Sniper rifles have lower hip spread penalty (to compensate for free aim).
-<li><b>Changed:</b> Jam chance is now dependent on ammo type. A jam will also remove the bullet.
+<li><b>Rebalance:</b> (Arcade) Most pistols are no longer lethal on headshot without Hollowpoints/Skullsplitter.
+<li><b>Rebalance:</b> Dual MTX has reduced spread and fires in runaway burst.
+<li><b>Rebalance:</b> Riot Shield can now be penetrated with sufficient Material Penetration (around 30).
+<li><b>Rebalance:</b> TMJ now gives flat penetration increase of 8" (generally lower than before).
+<li><b>Rebalance:</b> AS-50 and Hecate II got more penetration.
+<li><b>Rebalance:</b> Auto-Burst trigger no longer has downsides (it's now easy to get optimal ROF with improved buffering).
+<li><b>Rebalance:</b> Sniper rifles have lower hip spread penalty (to compensate for free aim).
+<li><b>Rebalance:</b> Juice up UMP45 with less recoil kick and spread.
 <li><b>Changed:</b> Adjusted thresholds and criteria for some ratings.
 <li><b>Changed:</b> Click buffering for burst fire now works during the whole burst and not just after the last shot.
 <li><b>Changed:</b> Renamed Penetration to Material Penetration, and Armor Piercing to Armor Penetration.
 <li><b>Changed:</b> Some descriptions for stats and ratings.
-<li><b>(Hopefully) Fixed:</b> Safety desync causing gun able to shoot while apparently in safety.
-</ul>
-<p>Yours,<br>
-<b>8Z, the gmod hyperealist</b></p>]],
+<li><b>Fixed:</b> When both Free Aim and Sway are on, point of aim shakes intensely while recovering from recoil.
+<li><b>Fixed:</b> Safety desync causing gun able to shoot while apparently in safety.
+</ul>]],
     },
 }
 TacRP.NewsRead = TacRP.NewsRead or {}

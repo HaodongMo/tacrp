@@ -105,7 +105,7 @@ L["rating.maneuvering.desc"] = "How accurate the weapon is while not aiming.\nAf
 L["rating.mobility"] = "Mobility"
 L["rating.mobility.desc"] = "How fast the user can move while using this weapon.\nAffected by various Speed stats."
 L["rating.stability"] = "Stability"
-L["rating.stability.desc"] = "How much the weapon's point of aim will move around.\nAffected by various Sway stats.\nNOTE: No difference if Sway is disabled in the options."
+L["rating.stability.desc"] = "How much the weapon's point of aim will move around.\nAffected by various Sway stats."
 
 L["stat.table.stat"] = "STAT"
 L["stat.table.base"] = "BASE"

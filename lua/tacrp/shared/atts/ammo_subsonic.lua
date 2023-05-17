@@ -10,7 +10,7 @@ ATT.Category = {"ammo_rifle", "ammo_pistol"}
 ATT.SortOrder = 2
 
 ATT.Mult_RecoilKick = 0.75
-ATT.Mult_RecoilSpreadPenalty = 0.5
+ATT.Mult_RecoilSpreadPenalty = 0.75
 ATT.TracerNum = 0
 ATT.Mult_MuzzleVelocity = 0.75
 ATT.Mult_Vol_Shoot = 0.9
