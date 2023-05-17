@@ -2,10 +2,10 @@ ATT.PrintName = "Surplus"
 ATT.FullName = "Surplus Bolt"
 ATT.Icon = Material("entities/tacrp_att_bolt_surplus.png", "mips smooth")
 ATT.Description = "Rust has eaten most of it away, but it still kinda works."
-ATT.Pros = {"Shoots faster sometimes"}
-ATT.Cons = {"Also shoots uncontrollably", "Unreliable"}
+ATT.Pros = {"att.procon.surplusboost1"}
+ATT.Cons = {"att.procon.surplusboost2", "att.procon.unreliable"}
 
-ATT.Category = {"bolt_manual", "bolt_automatic"}
+ATT.Category = {"bolt_automatic"}
 
 ATT.SortOrder = 999
 

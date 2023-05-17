@@ -98,16 +98,16 @@ SWEP.Spread = 0.004
 SWEP.ShootTimeMult = 0.5
 
 SWEP.RecoilPerShot = 1
-SWEP.RecoilMaximum = 10
+SWEP.RecoilMaximum = 12
 SWEP.RecoilResetTime = 0.12 // time after you stop shooting for recoil to start dissipating
 SWEP.RecoilDissipationRate = 16
 SWEP.RecoilFirstShotMult = 1
 
 SWEP.RecoilVisualKick = 0.5
 
-SWEP.RecoilKick = 5
+SWEP.RecoilKick = 4
 
-SWEP.RecoilSpreadPenalty = 0.0022
+SWEP.RecoilSpreadPenalty = 0.0015
 
 SWEP.CanBlindFire = true
 

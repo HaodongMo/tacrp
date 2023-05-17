@@ -2,8 +2,8 @@ ATT.PrintName = "Ratshot"
 ATT.FullName = "RPG-7 Ratshot Warhead"
 ATT.Icon = Material("entities/tacrp_att_ammo_rpg_ratshot.png", "mips smooth")
 ATT.Description = "For rodents of unacceptable size."
-ATT.Pros = {"Airburst"}
-ATT.Cons = {"Timed fuse"}
+ATT.Pros = {"att.procon.airburst"}
+ATT.Cons = {"att.procon.timedfuse"}
 
 ATT.Category = "ammo_rpg"
 

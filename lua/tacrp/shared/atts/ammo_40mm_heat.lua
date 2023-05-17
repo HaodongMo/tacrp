@@ -3,8 +3,8 @@ ATT.FullName = "40mm Flechette Grenades"
 
 ATT.Icon = Material("entities/tacrp_att_ammo_40mm_heat.png", "mips smooth")
 ATT.Description = "Flat-top grenade packing accurate flechette darts."
-ATT.Pros = {"Direct fire", "Accuracy"}
-ATT.Cons = {"No explosion"}
+ATT.Pros = {"att.procon.direct", "stat.spread"}
+ATT.Cons = {"att.procon.noexp"}
 
 ATT.Category = "ammo_40mm"
 

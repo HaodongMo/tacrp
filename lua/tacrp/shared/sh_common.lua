@@ -156,3 +156,12 @@ end
 function TacRP.UseTiers()
     return TacRP.GetBalanceMode() == TacRP.BALANCE_RP
 end
+
+TacRP.AmmoJamMSB = {
+    ["pistol"] = 30,
+    ["smg1"] = 25,
+    ["ar2"] = 20,
+    ["357"] = 10,
+    ["buckshot"] = 15,
+    ["SniperPenetratedRound"] = 15,
+}

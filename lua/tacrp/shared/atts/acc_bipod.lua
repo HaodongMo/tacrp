@@ -1,7 +1,7 @@
 ATT.PrintName = "Bipod"
 ATT.Icon = Material("entities/tacrp_att_acc_bipod.png", "mips smooth")
 ATT.Description = "Foldable support that stabilizes the weapon when deployed."
-ATT.Pros = {"Crouching Recoil", "Crouching Sway"}
+ATT.Pros = {"stat.recoilcrouch", "stat.swaycrouch"}
 
 ATT.Category = "acc_bipod"
 

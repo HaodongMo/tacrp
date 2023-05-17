@@ -2,8 +2,8 @@ ATT.PrintName = "Subsonic"
 ATT.FullName = "Subsonic Rounds"
 ATT.Icon = Material("entities/tacrp_att_acc_subsonic.png", "mips smooth")
 ATT.Description = "Bullets with reduced powder load."
-ATT.Pros = {"Hidden tracers", "Recoil"}
-ATT.Cons = {"Muzzle Velocity", "Range"}
+ATT.Pros = {"att.procon.notracer", "stat.recoil"}
+ATT.Cons = {"stat.muzzlevelocity", "stat.range"}
 
 ATT.Category = {"ammo_rifle", "ammo_pistol"}
 

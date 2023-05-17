@@ -2,8 +2,8 @@ ATT.PrintName = "Ratshot"
 ATT.FullName = "40mm Ratshot Grenades"
 ATT.Icon = Material("entities/tacrp_att_ammo_40mm_ratshot.png", "mips smooth")
 ATT.Description = "For rodents of unbelievable size."
-ATT.Pros = {"Airburst"}
-ATT.Cons = {"Timed fuse"}
+ATT.Pros = {"att.procon.airburst"}
+ATT.Cons = {"att.procon.timedfuse"}
 
 ATT.Category = "ammo_40mm"
 

@@ -2,7 +2,7 @@ ATT.PrintName = "Quickdraw"
 ATT.FullName = "Quickdraw Holster"
 ATT.Icon = Material("entities/tacrp_att_acc_quickdraw.png", "mips smooth")
 ATT.Description = "Strapless holster with magazine pouches for quick drawing and loading."
-ATT.Pros = {"Deploy Time", "Reload Time"}
+ATT.Pros = {"stat.deploytime", "stat.reloadtime"}
 
 ATT.Category = "acc_holster"
 

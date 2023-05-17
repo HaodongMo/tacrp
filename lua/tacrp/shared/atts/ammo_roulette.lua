@@ -3,7 +3,7 @@ ATT.FullName = "Russian Roulette"
 ATT.Icon = Material("entities/tacrp_att_acc_roulette.png", "mips smooth")
 ATT.Description = "A lethal game of chance. Spin the cylinder while loaded to reset the odds."
 ATT.Pros = {}
-ATT.Cons = {"One bullet"}
+ATT.Cons = {"att.procon.onebullet"}
 ATT.Category = {"ammo_roulette"}
 
 ATT.SortOrder = -1

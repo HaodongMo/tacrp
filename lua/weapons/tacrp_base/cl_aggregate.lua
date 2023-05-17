@@ -725,25 +725,13 @@ SWEP.StatDisplay = {
         Value = "ReloadSpeedMult",
     },
     {
-        Name = "stat.reloadtime",
-        Description = "stat.reloadtime.desc",
-        AggregateFunction = function(self, base, val)
-            return math.Round(self:GetReloadTime(base), 2)
-        end,
-        Value = "ReloadTimeMult",
-        LowerIsBetter = true,
-        Unit = "s"
-    },
-    {
-        Name = "stat.deploytime",
-        Description = "stat.deploytime.desc",
-        AggregateFunction = function(self, base, val)
-            return math.Round(self:GetDeployTime(base), 2)
-        end,
-        Value = "DeployTimeMult",
+        Name = "stat.freeaimangle",
+        Description = "stat.freeaimangle.desc",
+        Unit = "°",
+        Value = "FreeAimMaxAngle",
         LowerIsBetter = true,
         -- HideIfSame = true,
-        Unit = "s"
+        ConVarCheck = "tacrp_freeaim",
     },
     {
         Name = "stat.sway",
@@ -785,8 +773,8 @@ SWEP.StatDisplay = {
         -- HideIfSame = true,
     },
     {
-        Name = "Hipfire Spread",
-        Description = "Amount of additional inaccuracy while hipfiring.",
+        Name = "stat.hipfirespread",
+        Description = "stat.hipfirespread.desc",
         AggregateFunction = function(self, base, val)
             return math.Round(math.deg(val), 2)
         end,
@@ -796,10 +784,25 @@ SWEP.StatDisplay = {
         -- HideIfSame = true,
     },
     {
-        Name = "Melee Damage",
-        Description = "Damage dealt when bashing.",
-        Value = "MeleeDamage",
-        HideIfSame = true,
+        Name = "stat.reloadtime",
+        Description = "stat.reloadtime.desc",
+        AggregateFunction = function(self, base, val)
+            return math.Round(self:GetReloadTime(base), 2)
+        end,
+        Value = "ReloadTimeMult",
+        LowerIsBetter = true,
+        Unit = "s"
+    },
+    {
+        Name = "stat.deploytime",
+        Description = "stat.deploytime.desc",
+        AggregateFunction = function(self, base, val)
+            return math.Round(self:GetDeployTime(base), 2)
+        end,
+        Value = "DeployTimeMult",
+        LowerIsBetter = true,
+        -- HideIfSame = true,
+        Unit = "s"
     },
     {
         Name = "stat.firemode",
@@ -882,12 +885,9 @@ SWEP.StatDisplay = {
         -- HideIfSame = true,
     },
     {
-        Name = "stat.freeaimangle",
-        Description = "stat.freeaimangle.desc",
-        Unit = "°",
-        Value = "FreeAimMaxAngle",
-        LowerIsBetter = true,
-        -- HideIfSame = true,
-        ConVarCheck = "tacrp_freeaim",
+        Name = "stat.meleedamage",
+        Description = "stat.meleedamage.desc",
+        Value = "MeleeDamage",
+        HideIfSame = true,
     },
 }

@@ -18,13 +18,3 @@ for _, i in pairs(ammotypes) do
         language.Add(i .. "_ammo", TacRP:GetPhrase(i) or i)
     end
 end
-
--- mean shots between jams
-TacRP.AmmoJamMSB = {
-    ["pistol"] = 30,
-    ["smg1"] = 25,
-    ["ar2"] = 20,
-    ["357"] = 10,
-    ["buckshot"] = 15, -- most are pump/bolt, be nice
-    ["SniperPenetratedRound"] = 15,
-}

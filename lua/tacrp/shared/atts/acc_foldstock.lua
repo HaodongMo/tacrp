@@ -1,8 +1,8 @@
 ATT.PrintName = "Fold Stock"
 ATT.Icon = Material("entities/tacrp_att_acc_foldstock.png", "mips smooth")
 ATT.Description = "Keep stock folded, improving handling significantly at the cost of recoil."
-ATT.Pros = {"Handling", "Hipfire Spread"}
-ATT.Cons = {"Recoil Kick", "Scoped Sway"}
+ATT.Pros = {"rating.handling", "rating.maneuvering"}
+ATT.Cons = {"stat.recoilkick", "stat.scopedsway"}
 
 ATT.Free = true
 

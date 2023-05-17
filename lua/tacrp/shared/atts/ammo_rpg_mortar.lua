@@ -2,8 +2,8 @@ ATT.PrintName = "Mortar"
 ATT.FullName = "RPG-7 Mortar Warhead"
 ATT.Icon = Material("entities/tacrp_att_ammo_rpg_mortar.png", "mips smooth")
 ATT.Description = "A mortar with a booster stuck to it, for \"indirect fire\". Needs time to prime."
-ATT.Pros = {"Blast Radius"}
-ATT.Cons = {"Weak if not primed"}
+ATT.Pros = {"att.procon.radius"}
+ATT.Cons = {"att.procon.needprime"}
 
 ATT.Category = "ammo_rpg"
 

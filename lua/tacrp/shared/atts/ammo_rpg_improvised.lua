@@ -2,8 +2,8 @@ ATT.PrintName = "Improvised"
 ATT.FullName = "RPG-7 Improvised Warhead"
 ATT.Icon = Material("entities/tacrp_att_ammo_rpg_improvised.png", "mips smooth")
 ATT.Description = "Straight from the bargain bin."
-ATT.Pros = {"No safety fuse", "Mobility"}
-ATT.Cons = {"Random trajectory and damage", "Chance of dramatic failure"}
+ATT.Pros = {"att.procon.nosafety", "rating.mobility"}
+ATT.Cons = {"att.procon.projrng", "att.procon.failrng"}
 
 ATT.Category = "ammo_rpg"
 

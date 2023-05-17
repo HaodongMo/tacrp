@@ -48,23 +48,7 @@ function TacRP:TryTranslate(str)
     if TacRP.STPTable[string.lower(str)] then
         return TacRP:GetPhrase(TacRP.STPTable[string.lower(str)])
     end
-    return str
-end
-
---[[
-    Return the localized string of a phrase for an attachment.
-    Language table entries take precedence over the hardcoded name.
-]]
-function TacRP:GetPhraseForAtt(att, phrase, format)
-    local atttbl = TacRP.Attachments[att]
-    if !atttbl then return "" end
-
-    local attphrase = att .. "." .. phrase
-
-    local p = TacRP:GetPhrase(attphrase)
-    if p then return p end
-
-    return atttbl[phrase]
+    return TacRP:GetPhrase(str) or str
 end
 
 -- client languages aren't loaded through lua anymore. use gmod's stock localization system instead

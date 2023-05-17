@@ -1,8 +1,8 @@
-ATT.PrintName = "Compensator"
+ATT.PrintName = "att.muzz_pistol_comp.name"
 ATT.Icon = Material("entities/tacrp_att_muzz_pistol_comp.png", "mips smooth")
-ATT.Description = "Muzzle device which reduces recoil impact."
-ATT.Pros = {"Recoil"}
-ATT.Cons = {"Fire rate"}
+ATT.Description = "att.muzz_pistol_comp.desc"
+ATT.Pros = {"stat.recoil"}
+ATT.Cons = {"stat.rpm"}
 
 ATT.Model = "models/weapons/tacint/addons/pistol_comp.mdl"
 ATT.Scale = 2

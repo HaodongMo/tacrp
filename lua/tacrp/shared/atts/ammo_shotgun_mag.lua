@@ -2,8 +2,8 @@ ATT.PrintName = "Magnum Buck"
 ATT.FullName = "Magnum Buckshot"
 ATT.Icon = Material("entities/tacrp_att_acc_magnum.png", "mips smooth")
 ATT.Description = "High yield powder improves damage retention past point blank."
-ATT.Pros = {"Minimum Range", "Muzzle Velocity"}
-ATT.Cons = {"Recoil", "Mobility"}
+ATT.Pros = {"stat.range_min", "stat.muzzlevelocity"}
+ATT.Cons = {"stat.recoil", "rating.mobility"}
 
 ATT.Category = {"ammo_shotgun", "ammo_shotgun2"}
 

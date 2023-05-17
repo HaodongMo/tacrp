@@ -2,8 +2,8 @@ ATT.PrintName = "Rugged"
 ATT.FullName = "Rugged Bolt"
 ATT.Icon = Material("entities/tacrp_att_bolt_rough.png", "mips smooth")
 ATT.Description = "Recoil increases slower, but recovery rate is also slower."
-ATT.Pros = {"Recoil Gain"}
-ATT.Cons = {"Recoil Recovery"}
+ATT.Pros = {"stat.recoilpershot"}
+ATT.Cons = {"stat.recoildissipation"}
 
 ATT.Category = "bolt_automatic"
 

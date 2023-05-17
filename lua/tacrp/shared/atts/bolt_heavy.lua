@@ -2,8 +2,8 @@ ATT.PrintName = "Heavy"
 ATT.FullName = "Heavy Bolt"
 ATT.Icon = Material("entities/tacrp_att_bolt_heavy.png", "mips smooth")
 ATT.Description = "Reduce recoil at the cost of fire rate."
-ATT.Pros = {"Recoil"}
-ATT.Cons = {"Fire rate"}
+ATT.Pros = {"stat.recoilkick", "stat.recoilspread"}
+ATT.Cons = {"stat.rpm"}
 
 ATT.Category = "bolt_automatic"
 

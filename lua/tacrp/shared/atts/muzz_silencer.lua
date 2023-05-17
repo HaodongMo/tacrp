@@ -1,8 +1,8 @@
 ATT.PrintName = "Silencer"
 ATT.Icon = Material("entities/tacrp_att_muzz_silencer.png", "mips smooth")
 ATT.Description = "Muzzle device that reduces audible report and recoil."
-ATT.Pros = {"Report", "Recoil"}
-ATT.Cons = {"Range"}
+ATT.Pros = {"stat.vol_shoot", "stat.recoil"}
+ATT.Cons = {"stat.range"}
 
 ATT.Model = "models/weapons/tacint/addons/silencer.mdl"
 ATT.Scale = 0.35

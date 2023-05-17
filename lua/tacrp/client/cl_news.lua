@@ -133,7 +133,7 @@ Be sure to check out the Interops workshop page as well as Danger Zone Entities.
 
 <h3>Changelist</h3>
 <ul>
-<li><b>Major Change:</b>Free Aim rework.
+<li><b>Major Change:</b> Free Aim rework.
 <li><b>Added:</b> Steel Core Rounds for pistols, basically the oppposite of Hollowpoints.
 <li><b>Added:</b> Localization system. Currently only Chinese Simplified is available.
 <li><b>Added:</b> Surplus Ammo and Surplus Bolt gained unique behavior. They still jam though.

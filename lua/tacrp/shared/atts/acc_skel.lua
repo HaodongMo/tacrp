@@ -8,5 +8,15 @@ ATT.Category = "acc"
 
 ATT.SortOrder = 2.1
 
-ATT.Add_SightedSpeedMult = 0.08
-ATT.Mult_SprintToFireTime = 0.85
+
+
+if engine.ActiveGamemode() == "terrortown" then
+    ATT.Pros = {"stat.sightedspeed"}
+
+    ATT.Add_SightedSpeedMult = 0.12
+else
+    ATT.Pros = {"stat.sightedspeed", "stat.sprinttofire"}
+
+    ATT.Add_SightedSpeedMult = 0.08
+    ATT.Mult_SprintToFireTime = 0.85
+end

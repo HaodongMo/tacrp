@@ -3,8 +3,8 @@ ATT.FullName = "Steel Core Rounds"
 
 ATT.Icon = Material("entities/tacrp_att_ammo_pistol_ap.png", "mips smooth")
 ATT.Description = "Hardened bullets penetrate much better but have less stopping power."
-ATT.Pros = {"Armor Penetration", "Material Penetration"}
-ATT.Cons = {"Damage", "Recoil Kick"}
+ATT.Pros = {"att.procon.armor", "stat.penetration"}
+ATT.Cons = {"stat.damage", "stat.recoilkick"}
 
 ATT.Category = "ammo_pistol"
 

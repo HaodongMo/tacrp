@@ -3,8 +3,8 @@ ATT.FullName = "40mm Cluster Grenades"
 
 ATT.Icon = Material("entities/tacrp_att_ammo_40mm_3gl.png", "mips smooth")
 ATT.Description = "Three weak cluster grenades, fired at once."
-ATT.Pros = {"Multiple projectiles"}
-ATT.Cons = {"Spread", "Muzzle Velocity"}
+ATT.Pros = {"att.procon.moreproj"}
+ATT.Cons = {"stat.spread", "stat.muzzlevelocity"}
 
 ATT.Category = "ammo_40mm"
 

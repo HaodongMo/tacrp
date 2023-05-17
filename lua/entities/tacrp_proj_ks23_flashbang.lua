@@ -27,7 +27,7 @@ ENT.AudioLoop = ""
 ENT.SmokeTrail = false
 
 function ENT:Detonate()
-    util.BlastDamage(self, self:GetOwner(), self:GetPos(), 150, 25)
+    // util.BlastDamage(self, self:GetOwner(), self:GetPos(), 150, 25)
 
     local fx = EffectData()
     fx:SetOrigin(self:GetPos())
@@ -40,7 +40,7 @@ function ENT:Detonate()
         util.Effect("TacRP_flashexplosion", fx)
     end
 
-    TacRP.Flashbang(self, self:GetPos(), 512, 1, 0.1, 0.3)
+    TacRP.Flashbang(self, self:GetPos(), 328, 1, 0.1, 0.3)
 
     self:EmitSound(table.Random(self.ExplodeSounds), 125)
 

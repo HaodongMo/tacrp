@@ -2,8 +2,8 @@ ATT.PrintName = "Surplus"
 ATT.FullName = "Surplus Rounds"
 ATT.Icon = Material("entities/tacrp_att_acc_surplus.png", "mips smooth")
 ATT.Description = "Unreliable old ammo, yet you keep finding them everywhere."
-ATT.Pros = {"High chance to refund ammo"}
-ATT.Cons = {"Unreliable"}
+ATT.Pros = {"att.procon.refund"}
+ATT.Cons = {"att.procon.unreliable"}
 ATT.Category = {"ammo_rifle", "ammo_sniper", "ammo_pistol", "ammo_amr", "ammo_shotgun", "ammo_shotgun2"}
 
 ATT.SortOrder = 999

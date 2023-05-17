@@ -1,9 +1,9 @@
-ATT.PrintName = "Slugs"
-ATT.FullName = "Slug Shells"
+ATT.PrintName = "att.ammo_shotgun_slugs.name"
+ATT.FullName = "att.ammo_shotgun_slugs.name.full"
 ATT.Icon = Material("entities/tacrp_att_acc_slugs.png", "mips smooth")
-ATT.Description = "Fire a single projectile for medium range shooting."
-ATT.Pros = {"Spread", "Range"}
-ATT.Cons = {"One projectile", "Hipfire Spread"}
+ATT.Description = "att.ammo_shotgun_slugs.desc"
+ATT.Pros = {"stat.spread", "stat.range"}
+ATT.Cons = {"att.procon.1proj", "stat.hipfirespread"}
 
 ATT.Category = "ammo_shotgun"
 

@@ -87,7 +87,7 @@ function SWEP:CreateCustomizeHUD()
             return
         end
 
-        local name_txt = self:GetValue("FullName") or self:GetValue("PrintName")
+        local name_txt = TacRP:GetPhrase("wep." .. self:GetClass() .. "name.full") or TacRP:GetPhrase("wep." .. self:GetClass() .. "name") or self:GetValue("FullName") or self:GetValue("PrintName")
 
         surface.SetFont("TacRP_Myriad_Pro_32")
         local name_w = surface.GetTextSize(name_txt)
@@ -981,7 +981,7 @@ function SWEP:CreateCustomizeHUD()
                 surface.SetFont("TacRP_Myriad_Pro_8")
                 surface.SetTextColor(Color(50, 255, 50))
                 surface.SetTextPos(0, TacRP.SS(c * 8))
-                surface.DrawText("+" .. pro)
+                surface.DrawText("+" .. TacRP:TryTranslate(pro))
 
                 c = c + 1
             end
@@ -990,7 +990,7 @@ function SWEP:CreateCustomizeHUD()
                 surface.SetFont("TacRP_Myriad_Pro_8")
                 surface.SetTextColor(Color(255, 50, 50))
                 surface.SetTextPos(0, TacRP.SS(c * 8))
-                surface.DrawText("-" .. con)
+                surface.DrawText("-" .. TacRP:TryTranslate(con))
 
                 c = c + 1
             end
@@ -1091,7 +1091,7 @@ function SWEP:CreateCustomizeHUD()
                 surface.SetMaterial(atttbl.Icon)
                 surface.DrawTexturedRect(0, 0, w, h)
 
-                local txt = atttbl.PrintName
+                local txt = TacRP:GetPhrase("att." .. att .. ".name") or TacRP:TryTranslate(atttbl.PrintName)
 
                 surface.SetFont("TacRP_Myriad_Pro_6")
                 surface.SetTextColor(col_text)
@@ -1142,13 +1142,13 @@ function SWEP:CreateCustomizeHUD()
                     surface.SetDrawColor(col_bg)
                     TacRP.DrawCorneredBox(rx, ry, bw, bh, col_corner)
 
-                    local txt = atttbl.FullName or atttbl.PrintName
+                    txt = TacRP:GetPhrase("att." .. att .. ".name.full") or TacRP:GetPhrase("att." .. att .. ".name") or TacRP:GetPhrase(atttbl.FullName) or TacRP:TryTranslate(atttbl.FullName or atttbl.PrintName)
                     surface.SetTextColor(col_text)
                     surface.SetFont("TacRP_Myriad_Pro_10")
                     surface.SetTextPos(rx + TacRP.SS(2), ry + TacRP.SS(1))
                     surface.DrawText(txt)
 
-                    txt = atttbl.Description or ""
+                    txt = TacRP:GetPhrase("att." .. att .. ".desc") or TacRP:TryTranslate(atttbl.Description or "")
                     surface.SetFont("TacRP_Myriad_Pro_6")
                     surface.SetTextPos(rx + TacRP.SS(2), ry + TacRP.SS(1 + 8 + 2))
                     surface.DrawText(txt)
@@ -1162,7 +1162,7 @@ function SWEP:CreateCustomizeHUD()
                         surface.SetFont("TacRP_Myriad_Pro_8")
                         surface.SetTextColor(col_text)
                         surface.SetTextPos(rx + rump, ry + bump + txjy)
-                        surface.DrawText(ab)
+                        surface.DrawText(TacRP:TryTranslate(ab))
 
                         surface.SetFont("TacRP_Myriad_Pro_8")
                         surface.SetTextPos(rx + TacRP.SS(3), ry + bump + txjy)
@@ -1177,7 +1177,7 @@ function SWEP:CreateCustomizeHUD()
                         surface.SetFont("TacRP_Myriad_Pro_8")
                         surface.SetTextColor(col_text)
                         surface.SetTextPos(rx + rump, ry + bump + txjy)
-                        surface.DrawText(ab)
+                        surface.DrawText(TacRP:TryTranslate(ab))
 
                         surface.SetFont("TacRP_Myriad_Pro_8")
                         surface.SetTextPos(rx + TacRP.SS(3.8), ry + bump + txjy)

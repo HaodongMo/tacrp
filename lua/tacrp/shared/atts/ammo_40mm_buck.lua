@@ -2,8 +2,8 @@ ATT.PrintName = "Buckshot"
 ATT.FullName = "40mm Buckshot Grenades"
 ATT.Icon = Material("entities/tacrp_att_ammo_40mm_buck.png", "mips smooth")
 ATT.Description = "Flat-top grenade firing pellets like a shotgun."
-ATT.Pros = {"Direct fire", "Door breach"}
-ATT.Cons = {"No explosion"}
+ATT.Pros = {"att.procon.direct", "att.procon.doorbreach"}
+ATT.Cons = {"att.procon.noexp"}
 
 ATT.Category = "ammo_40mm"
 

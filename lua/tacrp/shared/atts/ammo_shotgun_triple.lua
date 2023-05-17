@@ -1,9 +1,9 @@
-ATT.PrintName = "Triple Hit"
-ATT.FullName = "Triple Hit Shells"
+ATT.PrintName = "att.ammo_shotgun_triple.name"
+ATT.FullName = "att.ammo_shotgun_triple.name.full"
 ATT.Icon = Material("entities/tacrp_att_acc_triple.png", "mips smooth")
-ATT.Description = "Fire three smaller slugs for improved accuracy."
-ATT.Pros = {"Spread"}
-ATT.Cons = {"Three projectiles", "Hipfire Spread"}
+ATT.Description = "att.ammo_shotgun_triple.desc"
+ATT.Pros = {"stat.spread"}
+ATT.Cons = {"att.procon.3proj", "Hipfire Spread"}
 
 ATT.Category = "ammo_shotgun"
 
