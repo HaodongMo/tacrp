@@ -2,7 +2,7 @@ ATT.PrintName = "Skullsplitter"
 ATT.FullName = "Skullsplitter Rounds"
 ATT.Icon = Material("entities/tacrp_att_acc_skullsplitter.png", "mips smooth")
 ATT.Description = "Specialized rounds that do more damage to vital body parts."
-ATT.Pros = {"att.procon.head", "att.spread"}
+ATT.Pros = {"att.procon.head", "stat.spread"}
 ATT.Cons = {"att.procon.limb", "stat.armorbonus"}
 
 ATT.Category = "ammo_pistol"

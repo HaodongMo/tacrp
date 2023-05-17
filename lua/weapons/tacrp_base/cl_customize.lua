@@ -38,7 +38,7 @@ local function bodydamagetext(name, dmg, num, mult, x, y, hover)
     -- surface.DrawText(name)
     -- surface.SetTextPos(TacRP.SS(1), y + TacRP.SS(6))
     if hover then
-        surface.DrawText(stk .. (num > 1 and " PTK" or " STK"))
+        surface.DrawText(stk .. TacRP:GetPhrase(num > 1 and "unit.ptk" or "unit.stk"))
     else
         surface.DrawText(math.floor(dmg * mult)) --  .. (num > 1 and ("×" .. num) or "")
     end
@@ -208,7 +208,7 @@ function SWEP:CreateCustomizeHUD()
 
                 local dmg = self:GetDamageAtRange(range)
 
-                local txt_dmg1 = tostring(math.Round(dmg)) .. " DMG"
+                local txt_dmg1 = tostring(math.Round(dmg)) .. TacRP:GetPhrase("unit.damage")
 
                 if self:GetValue("Num") > 1 then
                     txt_dmg1 = math.Round(dmg * self:GetValue("Num")) .. "-" .. txt_dmg1
@@ -236,7 +236,7 @@ function SWEP:CreateCustomizeHUD()
 
 
             if draw_rangetext then
-                local txt_dmg1 = tostring(math.Round(dmg_max)) .. " DMG"
+                local txt_dmg1 = tostring(math.Round(dmg_max)) .. TacRP:GetPhrase("unit.damage")
 
                 if self:GetValue("Num") > 1 then
                     txt_dmg1 = math.Round(dmg_max * self:GetValue("Num")) .. "-" .. txt_dmg1
@@ -256,7 +256,7 @@ function SWEP:CreateCustomizeHUD()
                 surface.SetTextPos((w / 3) - txt_range1_w - (TacRP.SS(2)), TacRP.SS(1 + 8))
                 surface.DrawText(txt_range1)
 
-                local txt_dmg2 = tostring(math.Round(dmg_min)) .. " DMG"
+                local txt_dmg2 = tostring(math.Round(dmg_min)) .. TacRP:GetPhrase("unit.damage")
 
                 if self:GetValue("Num") > 1 then
                     txt_dmg2 = math.Round(dmg_min * self:GetValue("Num")) .. "-" .. txt_dmg2
@@ -647,8 +647,9 @@ function SWEP:CreateCustomizeHUD()
             end
 
             if k.Unit then
-                txt_base = txt_base .. k.Unit
-                txt_curr = txt_curr .. k.Unit
+                local unit = TacRP:TryTranslate(k.Unit)
+                txt_base = txt_base .. unit
+                txt_curr = txt_curr .. unit
             end
 
             local good = false

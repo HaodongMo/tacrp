@@ -57,6 +57,15 @@ L["cust.stats"] = "Stats"
 L["cust.description"] = "DESCRIPTION:"
 L["cust.type_tier"] = "{tier} Grade {type}"
 
+L["unit.hu"] = " HU" -- hammer unit
+L["unit.meter"] = "m"
+L["unit.second"] = "s"
+L["unit.persecond"] = "/s"
+L["unit.mps"] = "m/s" -- meters per second
+L["unit.damage"] = " DMG"
+L["unit.stk"] = " STK" -- shots to kill
+L["unit.ptk"] = " PTK" -- pellets to kill
+
 L["slot.default"] = "Slot"
 L["slot.optic"] = "Optic"
 L["slot.muzzle"] = "Muzzle"
@@ -92,9 +101,9 @@ L["rating.control.desc"] = "How managable the weapon's recoil and spread is unde
 L["rating.handling"] = "Handling"
 L["rating.handling.desc"] = "How quickly this weapon readies from sprinting, aiming and deploying.\nAffected by Aim Down Sights Time, Sprint To Fire Time, and Deploy Time."
 L["rating.maneuvering"] = "Maneuvering"
-L["rating.maneuvering.desc"] = "How accurate the weapon is while not aiming.\nAffected by Hipfire and Mid-air Spread, and` Peeking Penalty.\nIf Free Aim or Sway is enabled, they will also be scored."
+L["rating.maneuvering.desc"] = "How accurate the weapon is while not aiming.\nAffected by Hipfire Spread, Mid-air Spread, Sway, and Free Aim Angle."
 L["rating.mobility"] = "Mobility"
-L["rating.mobility.desc"] = "How fast the user can move while using this weapon.\nAffected by various Speed stats, such as Sighted Speed."
+L["rating.mobility.desc"] = "How fast the user can move while using this weapon.\nAffected by various Speed stats."
 L["rating.stability"] = "Stability"
 L["rating.stability.desc"] = "How much the weapon's point of aim will move around.\nAffected by various Sway stats.\nNOTE: No difference if Sway is disabled in the options."
 
@@ -115,7 +124,7 @@ L["stat.penetration"] = "Material Penetration"
 L["stat.penetration.desc"] = "Amount of metal this weapon can shoot through.\nDepending on surface type, actual penetration depth will vary."
 L["stat.spread"] = "Spread"
 L["stat.spread.desc"] = "Base accuracy of the weapon."
-L["stat.rpm"] = "RPM"
+L["stat.rpm"] = "Fire Rate"
 L["stat.rpm.desc"] = "Rate of fire of the weapon, in rounds per minute."
 L["stat.clipsize"] = "Capacity"
 L["stat.clipsize.desc"] = "Amount of ammo the weapon can hold at once."

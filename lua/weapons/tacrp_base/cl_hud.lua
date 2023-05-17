@@ -951,9 +951,9 @@ end
 
 function SWEP:RangeUnitize(range)
     if GetConVar("tacrp_metricunit"):GetBool() then
-        return tostring(math.Round(range * TacRP.HUToM)) .. "m"
+        return tostring(math.Round(range * TacRP.HUToM)) .. TacRP:GetPhrase("unit.meter")
     else
-        return tostring(math.Round(range)) .. " HU"
+        return tostring(math.Round(range)) .. TacRP:GetPhrase("unit.hu")
     end
 end
 
