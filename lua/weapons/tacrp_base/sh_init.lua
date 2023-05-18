@@ -8,11 +8,12 @@ function SWEP:DoDeployAnimation()
         if self:GetValue("TryUnholster") then
             self:PlayAnimation("unholster", self:GetValue("DeployTimeMult"), true, true)
         else
-            if self:GetReady() then
-                self:PlayAnimation("unholster", self:GetValue("DeployTimeMult"), true, true)
-            else
-                self:PlayAnimation("deploy", self:GetValue("DeployTimeMult"), true, true)
-            end
+            -- if self:GetReady() then
+            --     self:PlayAnimation("unholster", self:GetValue("DeployTimeMult"), true, true)
+            -- else
+            --     self:PlayAnimation("deploy", self:GetValue("DeployTimeMult"), true, true)
+            -- end
+            self:PlayAnimation("deploy", self:GetValue("DeployTimeMult"), true, true)
         end
     end
 end
