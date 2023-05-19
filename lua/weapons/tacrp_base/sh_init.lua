@@ -6,7 +6,7 @@ function SWEP:DoDeployAnimation()
     else
         self:SetReloading(false)
         if self:GetValue("TryUnholster") then
-            self:PlayAnimation("unholster", self:GetValue("DeployTimeMult"), true, true)
+            self:PlayAnimation("unholster", self:GetValue("DeployTimeMult") * self:GetValue("UnholsterTimeMult"), true, true)
         else
             -- if self:GetReady() then
             --     self:PlayAnimation("unholster", self:GetValue("DeployTimeMult"), true, true)

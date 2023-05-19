@@ -245,6 +245,7 @@ SWEP.ReloadUpInTime = nil // time to restore ammo, if unset restores at end of a
 SWEP.ReloadTimeMult = 1
 SWEP.DeployTimeMult = 1
 SWEP.HolsterTimeMult = 1
+SWEP.UnholsterTimeMult = 1
 SWEP.DropMagazineModel = false
 SWEP.DropMagazineImpact = "pistol" // available: "pistol", "plastic", "metal", "bullet", "shotgun"
 SWEP.DropMagazineAmount = 1
