@@ -11,7 +11,8 @@ local ammotypes = {
 
 for _, i in pairs(ammotypes) do
     game.AddAmmoType({
-        name = i
+        name = i,
+        max = "tacrp_max_grenades",
     })
 
     if CLIENT then

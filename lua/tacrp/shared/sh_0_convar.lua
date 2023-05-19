@@ -407,6 +407,11 @@ local conVars = {
         min = 0,
         max = 2,
     },
+    {
+        name = "max_grenades",
+        default = "9999",
+        min = 0,
+    },
 
     {
         name = "hud_ammo_number",
