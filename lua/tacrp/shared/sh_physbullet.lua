@@ -171,6 +171,7 @@ function TacRP:ProgressPhysBullet(bullet, timestep)
     local spd = bullet.Vel:Length() * timestep
     local drag = bullet.Drag * spd * spd * (1 / 150000)
     local gravity = timestep * (bullet.Gravity or 1) * 600
+    local first = math.abs(bullet.StartTime - CurTime()) <= 0.001
 
     local attacker = bullet.Attacker or NULL
     local weapon = bullet.Weapon
@@ -203,7 +204,7 @@ function TacRP:ProgressPhysBullet(bullet, timestep)
         bullet.Vel = newvel
         bullet.Travelled = bullet.Travelled + spd
     else
-        if attacker:IsPlayer() then
+        if !first and attacker:IsPlayer() then
             attacker:LagCompensation(true)
         end
 
@@ -214,7 +215,7 @@ function TacRP:ProgressPhysBullet(bullet, timestep)
             mask = MASK_SHOT
         })
 
-        if attacker:IsPlayer() then
+        if !first and attacker:IsPlayer() then
             attacker:LagCompensation(false)
         end
 
@@ -245,7 +246,7 @@ function TacRP:ProgressPhysBullet(bullet, timestep)
             bullet.Pos = tr.HitPos
             -- if we're the client, we'll get the bullet back when it exits.
 
-            if attacker:IsPlayer() then
+            if !first and attacker:IsPlayer() then
                 attacker:LagCompensation(true)
             end
 
@@ -309,7 +310,7 @@ function TacRP:ProgressPhysBullet(bullet, timestep)
                 end
             end
 
-            if attacker:IsPlayer() then
+            if !first and attacker:IsPlayer() then
                 attacker:LagCompensation(false)
             end
         else
