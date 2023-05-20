@@ -1,8 +1,8 @@
 ATT.PrintName = "Light Barrel"
 ATT.Icon = Material("entities/tacrp_att_muzz_lbar.png", "mips smooth")
 ATT.Description = "Lightweight barrel more accurate and effective at long range."
-ATT.Pros = {"Spread", "Range"}
-ATT.Cons = {"Sway", "Recoil"}
+ATT.Pros = {"stat.spread", "stat.range"}
+ATT.Cons = {"stat.sway", "stat.recoil"}
 
 ATT.Category = {"silencer", "barrel"}
 

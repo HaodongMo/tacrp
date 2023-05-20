@@ -1,7 +1,7 @@
 ATT.PrintName = "Short Dot"
 ATT.Icon = Material("entities/tacrp_att_optic_shortdot.png", "mips smooth")
 ATT.Description = "Compact optic scope with decent magnification."
-ATT.Pros = {"5x Zoom"}
+ATT.Pros = {"att.zoom.5"}
 
 -- model: gamebanana
 -- scope texture: ins2

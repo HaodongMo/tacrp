@@ -1,5 +1,5 @@
 ATT.PrintName = "att.acc_extmag.name"
-ATT.FullName = "att.acc_extmag.fullname"
+ATT.FullName = "att.acc_extmag.name.full"
 ATT.Icon = Material("entities/tacrp_att_acc_extmag_sniper.png", "mips smooth")
 ATT.Description = "att.acc_extmag.desc"
 ATT.Pros = {"stat.clipsize"}

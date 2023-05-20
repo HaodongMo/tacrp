@@ -1,7 +1,7 @@
 ATT.PrintName = "Telescopic"
 ATT.Icon = Material("entities/tacrp_att_optic_8x.png", "mips smooth")
 ATT.Description = "Long-range sniper optic."
-ATT.Pros = {"8x Zoom"}
+ATT.Pros = {"att.zoom.8"}
 
 ATT.Model = "models/weapons/tacint/addons/8x.mdl"
 ATT.Scale = 1

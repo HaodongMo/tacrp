@@ -1,7 +1,7 @@
 ATT.PrintName = "RMR"
 ATT.Icon = Material("entities/tacrp_att_optic_rmr.png", "mips smooth")
 ATT.Description = "Low profile optic sight for pistols."
-ATT.Pros = {"1.25x Sight"}
+ATT.Pros = {"att.sight.1"}
 
 ATT.Model = "models/weapons/tacint/addons/optic_rmr_hq.mdl"
 ATT.Scale =  1
@@ -12,7 +12,7 @@ ATT.SortOrder = 1
 
 ATT.Override_Scope = true
 ATT.Override_ScopeOverlay = false
-ATT.Override_ScopeFOV = 90 / 1.25
+ATT.Override_ScopeFOV = 90 / 1.1
 ATT.Override_ScopeLevels = 1
 ATT.Override_ScopeHideWeapon = false
 

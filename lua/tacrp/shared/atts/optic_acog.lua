@@ -1,7 +1,7 @@
 ATT.PrintName = "ACOG"
 ATT.Icon = Material("entities/tacrp_att_optic_acog.png", "mips smooth")
 ATT.Description = "Medium range combat scope."
-ATT.Pros = {"4x Zoom"}
+ATT.Pros = {"att.zoom.4"}
 
 ATT.Model = "models/weapons/tacint/addons/acog.mdl"
 ATT.Scale = 0.3

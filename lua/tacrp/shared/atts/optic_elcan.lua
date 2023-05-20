@@ -1,7 +1,7 @@
 ATT.PrintName = "ELCAN"
 ATT.Icon = Material("entities/tacrp_att_optic_elcan.png", "mips smooth")
 ATT.Description = "Low power combat scope."
-ATT.Pros = {"3x Zoom"}
+ATT.Pros = {"att.zoom.3"}
 
 -- model: https://gamebanana.com/mods/210646
 -- scope texture: ins2
