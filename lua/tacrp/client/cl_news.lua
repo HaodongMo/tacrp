@@ -156,6 +156,8 @@ An additional benefit is that a lot of the attachments now use consistent wordin
 <li><b>Rebalance:</b> Auto-Burst trigger no longer has downsides (it's now easy to get optimal ROF with improved buffering).
 <li><b>Rebalance:</b> Sniper rifles have lower hip spread penalty (to compensate for free aim).
 <li><b>Rebalance:</b> Juice up UMP45 with less recoil kick and spread.
+<li><b>Rebalance:</b> Burst trigger on semi-auto guns increase RPM further and no longer increase recoil spread. Burst is now runaway and semi mode is removed.
+<li><b>Rebalance:</b> Competition/Weighted trigger no longer change recoil kick.
 <li><b>Changed:</b> Adjusted thresholds and criteria for some ratings.
 <li><b>Changed:</b> Click buffering for burst fire now works during the whole burst and not just after the last shot.
 <li><b>Changed:</b> Renamed Penetration to Material Penetration, and Armor Piercing to Armor Penetration.
