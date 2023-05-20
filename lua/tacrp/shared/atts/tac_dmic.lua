@@ -1,8 +1,8 @@
 ATT.PrintName = "Radar"
 ATT.Icon = Material("entities/tacrp_att_tac_dmic.png", "mips smooth")
 ATT.Description = "Detects the position of nearby targets, but emits sound."
-ATT.Pros = {"Display nearby targets"}
-ATT.Cons = {"Audible to others"}
+ATT.Pros = {"att.procon.dmic"}
+ATT.Cons = {"att.procon.audible"}
 
 ATT.Model = "models/weapons/tacint/addons/dmic_mounted.mdl"
 ATT.Scale = 1

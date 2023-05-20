@@ -1,7 +1,7 @@
 ATT.PrintName = "Deadeye"
 ATT.Icon = Material("entities/tacrp_att_acc_aim.png", "mips smooth")
 ATT.Description = "Improves weapon performance while sighted."
-ATT.Pros = {"Sighted Zoom", "Sighted Sway", "Sighted Speed", "Quickscope Penalty"}
+ATT.Pros = {"stat.zoom", "stat.scopedsway", "stat.sightedspeed", "stat.quickscope"}
 
 ATT.Category = "perk_shooting"
 

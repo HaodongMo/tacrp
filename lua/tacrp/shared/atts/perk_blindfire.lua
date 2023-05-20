@@ -2,7 +2,7 @@ ATT.PrintName = "Point Shoot"
 ATT.FullName = "Point Shooter"
 ATT.Icon = Material("entities/tacrp_att_acc_blindfire.png", "mips smooth")
 ATT.Description = "Improves blindfire and peeking."
-ATT.Pros = {"Peeking Spread Penalty", "Blindfire Sway", "stat.freeaimangle"}
+ATT.Pros = {"stat.peekpenalty", "stat.blindfiresway", "stat.freeaimangle"}
 
 ATT.Category = {"perk"}
 

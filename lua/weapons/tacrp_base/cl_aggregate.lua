@@ -38,6 +38,7 @@ function SWEP:GetDeployTime(base)
 
     if valfunc(self, "TryUnholster") then
         anim = "unholster"
+        mult = mult * valfunc(self, "UnholsterTimeMult")
     end
 
     local seq = vm:LookupSequence(self:TranslateSequence(anim))

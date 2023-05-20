@@ -1,7 +1,7 @@
 ATT.PrintName = "Quickload"
 ATT.Icon = Material("entities/tacrp_att_acc_reload.png", "mips smooth")
 ATT.Description = "Improves reloading speed."
-ATT.Pros = {"Reload Time"}
+ATT.Pros = {"stat.reloadtime"}
 
 ATT.Category = "perk_reload"
 

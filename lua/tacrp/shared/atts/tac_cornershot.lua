@@ -1,7 +1,7 @@
 ATT.PrintName = "Corner-Cam"
 ATT.Icon = Material("entities/tacrp_att_tac_cornershot.png", "mips smooth")
 ATT.Description = "Displays point of aim while blindfiring."
-ATT.Pros = {"Corner vision"}
+ATT.Pros = {"att.procon.cornershot"}
 
 ATT.Model = "models/weapons/tacint/addons/cornershot_mounted.mdl"
 ATT.Scale = 1

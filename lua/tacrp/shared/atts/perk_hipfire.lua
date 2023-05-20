@@ -1,7 +1,7 @@
 ATT.PrintName = "Rambo"
 ATT.Icon = Material("entities/tacrp_att_acc_hipfire.png", "mips smooth")
 ATT.Description = "Improves weapon accuracy while not aiming."
-ATT.Pros = {"Sway", "Hipfire Spread", "Mid-Air Spread"}
+ATT.Pros = {"stat.sway", "stat.hipfirespread", "stat.midairspread"}
 
 ATT.Category = "perk"
 

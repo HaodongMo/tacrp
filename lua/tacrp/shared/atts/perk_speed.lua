@@ -1,7 +1,7 @@
 ATT.PrintName = "Agility"
 ATT.Icon = Material("entities/tacrp_att_acc_speed.png", "mips smooth")
 ATT.Description = "Improves weapon mobility, especially while reloading."
-ATT.Pros = {"Move Speed", "Reloading Speed"}
+ATT.Pros = {"stat.movespeed", "stat.reloadspeed"}
 
 ATT.Category = "perk"
 
