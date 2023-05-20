@@ -14,5 +14,5 @@ ATT.Override_RunawayBurst = true
 ATT.Mult_RecoilSpreadPenalty = 0.75
 ATT.Mult_RecoilVisualKick = 0.85
 ATT.Mult_RecoilKick = 0.75
-ATT.Override_PostBurstDelay = 0.15
+ATT.Override_PostBurstDelay = 0.1
 ATT.Mult_RPM = 1.15
