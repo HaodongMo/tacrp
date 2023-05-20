@@ -2,8 +2,8 @@ ATT.PrintName = "Slamfire"
 ATT.FullName = "Slamfire Trigger"
 ATT.Icon = Material("entities/tacrp_att_trigger_frcd.png", "mips smooth")
 ATT.Description = "Trigger that emulates automatic fire but with poor performance."
-ATT.Pros = {"Fire rate", "Automatic fire"}
-ATT.Cons = {"Spread", "Mobility"}
+ATT.Pros = {"stat.rpm", "att.procon.auto"}
+ATT.Cons = {"stat.spread", "rating.mobility"}
 
 ATT.Category = "trigger_pump2"
 ATT.InvAtt = "trigger_slam"

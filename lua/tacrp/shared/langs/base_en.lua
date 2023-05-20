@@ -252,8 +252,10 @@ L["att.procon.rf1"] = "Display distance and damage at range"
 L["att.procon.rf2"] = "Bullet drop visualization in sights"
 L["att.procon.gauge1"] = "Display recoil, sway and spread"
 L["att.procon.gauge2"] = "Spread visualization in sights"
-
-
+L["att.procon.auto"] = "Automatic fire"
+L["att.procon.burst"] = "Burst fire"
+L["att.procon.semi"] = "Semi-automatic fire"
+L["att.procon.autoburst"] = "Automatic Burst"
 
 L["att.sight.1"] = "1x Sight"
 L["att.sight.1.25"] = "1.25x Sight"

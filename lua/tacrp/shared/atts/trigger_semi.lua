@@ -3,8 +3,8 @@ ATT.FullName = "Marksman Trigger"
 
 ATT.Icon = Material("entities/tacrp_att_trigger_semi.png", "mips smooth")
 ATT.Description = "Trigger that sacrfices automatic fire for precision."
-ATT.Pros = {"Spread", "Recoil"}
-ATT.Cons = {"Semi-automatic fire"}
+ATT.Pros = {"stat.spread", "stat.recoil"}
+ATT.Cons = {"att.procon.semi"}
 
 ATT.Category = {"trigger_auto", "trigger_burst"}
 

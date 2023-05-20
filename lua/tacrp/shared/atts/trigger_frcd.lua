@@ -2,8 +2,8 @@ ATT.PrintName = "Forced Reset"
 ATT.FullName = "Forced Reset Trigger"
 ATT.Icon = Material("entities/tacrp_att_trigger_frcd.png", "mips smooth")
 ATT.Description = "Trigger that emulates automatic fire but with poor performance."
-ATT.Pros = {"Automatic fire"}
-ATT.Cons = {"Recoil"} -- "Fire rate",
+ATT.Pros = {"att.procon.auto"}
+ATT.Cons = {"stat.recoilkick", "stat.recoilspread"} -- "Fire rate",
 
 ATT.Category = "trigger_semi"
 

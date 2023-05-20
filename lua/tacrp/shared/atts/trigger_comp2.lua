@@ -2,8 +2,8 @@ ATT.PrintName = "Competition"
 ATT.FullName = "Competition Trigger"
 ATT.Icon = Material("entities/tacrp_att_trigger_comp.png", "mips smooth")
 ATT.Description = "Lightweight trigger that recovers from accuracy faster."
-ATT.Pros = {"Recoil Recovery"}
-ATT.Cons = {"Shooting Speed"}
+ATT.Pros = {"stat.recoildissipation"}
+ATT.Cons = {"stat.shootingspeed"}
 
 ATT.InvAtt = "trigger_comp"
 

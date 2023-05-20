@@ -2,7 +2,7 @@ ATT.PrintName = "Auto-Burst"
 ATT.FullName = "Auto-Burst Trigger"
 ATT.Icon = Material("entities/tacrp_att_trigger_burstauto.png", "mips smooth")
 ATT.Description = "Trigger that allows continuous burst fire while held."
-ATT.Pros = {"Automatic Burst"}
+ATT.Pros = {"att.procon.autoburst"}
 ATT.Cons = {}
 
 ATT.Category = {"trigger_burst", "trigger_burstauto"}
