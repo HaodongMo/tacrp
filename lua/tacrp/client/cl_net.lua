@@ -3,7 +3,18 @@ net.Receive("TacRP_networkweapon", function()
 
     if !wpn.ArcticTacRP then return end
 
+
     wpn:ReceiveWeapon()
+    local ply = wpn:GetOwner()
+    if IsValid(ply) and ply:IsPlayer() and ply:GetActiveWeapon() != wpn then
+        local visible = wpn:GetValue("HolsterVisible")
+        local slot = wpn:GetValue("HolsterSlot")
+
+        if visible and slot then
+            ply.TacRP_Holster = ply.TacRP_Holster or {}
+            ply.TacRP_Holster[slot] = wpn
+        end
+    end
 end)
 
 net.Receive("TacRP_updateholster", function()
@@ -13,9 +24,10 @@ net.Receive("TacRP_updateholster", function()
 
     if !IsValid(item) or !item.GetValue then return end
 
+    local visible = item:GetValue("HolsterVisible")
     local slot = item:GetValue("HolsterSlot")
 
-    if IsValid(item) and slot then
+    if visible and slot then
         ply.TacRP_Holster = ply.TacRP_Holster or {}
         if !IsValid(item) then
             ply.TacRP_Holster[slot] = nil

@@ -132,23 +132,11 @@ function SWEP:Holster(wep)
         self:SetReloadFinishTime(0)
 
         local holster = self:GetValue("HolsterVisible")
-        if holster then
-            local holsterslot = self:GetValue("HolsterSlot")
-            if game.SinglePlayer() or CLIENT then
-                self:GetOwner().TacRP_Holster = self:GetOwner().TacRP_Holster or {}
-                self:GetOwner().TacRP_Holster[holsterslot] = self
-                if game.SinglePlayer() then -- not run clientside in singleplayer. lol
-                    net.Start("TacRP_updateholster")
-                        net.WriteEntity(self:GetOwner())
-                        net.WriteEntity(self)
-                    net.Send(self:GetOwner())
-                end
-            else
-                net.Start("TacRP_updateholster")
-                    net.WriteEntity(self:GetOwner())
-                    net.WriteEntity(self)
-                net.SendOmit(self:GetOwner())
-            end
+        if SERVER and holster then
+            net.Start("TacRP_updateholster")
+                net.WriteEntity(self:GetOwner())
+                net.WriteEntity(self)
+            net.Broadcast()
         end
 
         if game.SinglePlayer() then
