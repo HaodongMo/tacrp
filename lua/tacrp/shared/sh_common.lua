@@ -165,3 +165,10 @@ TacRP.AmmoJamMSB = {
     ["buckshot"] = 15,
     ["SniperPenetratedRound"] = 15,
 }
+
+TacRP.HoldTypeSightedLookup = {
+    ["revolver"] = "revolver",
+    ["smg"] = "rpg",
+    ["ar2"] = "rpg",
+    ["shotgun"] = "rpg",
+}
