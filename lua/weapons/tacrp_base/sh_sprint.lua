@@ -43,10 +43,10 @@ function SWEP:EnterSprint()
     if !self:CanShootInSprint() then
         self:ToggleBlindFire(TacRP.BLINDFIRE_NONE)
     end
-    if !self:CanReloadInSprint() and self:GetReloading() then
-        self:CancelReload()
-        self:Idle()
-    end
+    -- if !self:CanReloadInSprint() and self:GetReloading() then
+    --     self:CancelReload()
+    --     self:Idle()
+    -- end
     self:ScopeToggle(0)
 
     self:SetShouldHoldType()
