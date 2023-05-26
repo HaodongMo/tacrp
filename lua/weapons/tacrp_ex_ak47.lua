@@ -30,10 +30,8 @@ SWEP.BalanceStats = {
 
         Damage_Max = 20,
         Damage_Min = 15,
-
         Range_Min = 750,
         Range_Max = 2500,
-
         RPM = 500,
 
         RecoilSpreadPenalty = 0.005,
@@ -57,6 +55,19 @@ SWEP.BalanceStats = {
         MeleeSpeedMult = 1,
         SightedSpeedMult = 0.55,
         ReloadSpeedMult = 0.65,
+    },
+    [TacRP.BALANCE_PVE] = {
+        Damage_Max = 15,
+        Damage_Min = 10,
+        Range_Min = 750,
+        Range_Max = 2500,
+        RPM = 500,
+
+        MoveSpeedMult = 0.85,
+        ShootingSpeedMult = 0.75,
+        SightedSpeedMult = 0.75,
+        MeleeSpeedMult = 1,
+        ReloadSpeedMult = 1,
     },
 }
 

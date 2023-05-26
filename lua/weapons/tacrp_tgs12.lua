@@ -65,6 +65,30 @@ SWEP.BalanceStats = {
         SightedSpeedMult = 0.8,
         ReloadSpeedMult = 0.5,
     },
+    [TacRP.BALANCE_PVE] = {
+        Description = "Compact pistol grip shotgun effective at very close range.",
+        Damage_Max = 12,
+        Damage_Min = 3,
+        Range_Min = 100,
+        Range_Max = 1200,
+
+        BodyDamageMultipliers = {
+            [HITGROUP_HEAD] = 1.5,
+            [HITGROUP_CHEST] = 1,
+            [HITGROUP_STOMACH] = 1,
+            [HITGROUP_LEFTARM] = 0.75,
+            [HITGROUP_RIGHTARM] = 0.75,
+            [HITGROUP_LEFTLEG] = 0.5,
+            [HITGROUP_RIGHTLEG] = 0.5,
+            [HITGROUP_GEAR] = 0.9
+        },
+
+        MoveSpeedMult = 0.9,
+        ShootingSpeedMult = 0.8,
+        SightedSpeedMult = 0.9,
+        MeleeSpeedMult = 1,
+        ReloadSpeedMult = 1,
+    },
 }
 
 SWEP.TTTReplace = TacRP.TTTReplacePreset.Shotgun

@@ -129,6 +129,8 @@ SWEP.StatGroups = {
             local rrpm = valfunc(self, "RPM")
             local pbd = valfunc(self, "PostBurstDelay")
             local ttt = TacRP.GetBalanceMode() == TacRP.BALANCE_TTT
+            local pve = TacRP.GetBalanceMode() == TacRP.BALANCE_PVE
+            local health = pve and 50 or 100
 
             local num = valfunc(self, "Num")
             local bdm = self:GetBodyDamageMultipliers(base)
@@ -144,14 +146,18 @@ SWEP.StatGroups = {
             -- max single shot damage
             local mssd = 0
             for k, v in pairs(ttt and mssd_scoring_ttt or mssd_scoring) do
-                local stk = math.ceil(100 / (dmg_max * (bdm[k] or 1) * (1 + (num - 1) * v[2])))
+                local stk = math.ceil(health / (dmg_max * (bdm[k] or 1) * (1 + (num - 1) * v[2])))
                 mssd = mssd + (v[3][stk] or 0) * v[1]
                 -- print(bdm[k], stk, (mssd_scoring[k][stk] or 0))
             end
-            mssd = ttt and mssd ^ 0.75 or mssd
+            if pve then
+                mssd = mssd ^ 1
+            elseif ttt then
+                mssd = mssd ^ 0.75
+            end
 
             -- avg time to kill
-            local stk = math.ceil(100 / (dmg_avg * num))
+            local stk = math.ceil(health / (dmg_avg * num))
             local ttk_s
             if stk == 1 then
                 ttk_s = math.Clamp(rrpm / 120, 0, 1) ^ 0.75
@@ -160,7 +166,13 @@ SWEP.StatGroups = {
                 if bfm < 0 then
                     ttk = ttk + math.floor(ttk / -bfm) * pbd
                 end
-                ttk_s = math.Clamp(1 - ttk / (ttt and 3 or 1.5), 0, 1) ^ (ttt and 3 or 1.5)
+                if pve then
+                    ttk_s = math.Clamp(1 - ttk / 2, 0, 1) ^ 2
+                elseif ttt then
+                    ttk_s = math.Clamp(1 - ttk / 3, 0, 1) ^ 3
+                else
+                    ttk_s = math.Clamp(1 - ttk / 1.5, 0, 1) ^ 1.5
+                end
             end
 
             local scores = {mssd, ttk_s}
@@ -181,6 +193,7 @@ SWEP.StatGroups = {
             local erpm = rrpm
             local pbd = valfunc(self, "PostBurstDelay")
             local ttt = TacRP.GetBalanceMode() == TacRP.BALANCE_TTT
+            local pve = TacRP.GetBalanceMode() == TacRP.BALANCE_PVE
 
             if bfm == 1 then
                 erpm = math.min(rrpm, 600) + math.max(rrpm - 600, 0) ^ 0.75 -- you can't click *that* fast
@@ -201,14 +214,24 @@ SWEP.StatGroups = {
 
             -- raw dps
             local dps = dmg_avg * num * erpm / 60
-            local tttm = ttt and 0.5 or 1
-            local dps_s = math.Clamp((dps - 50 * tttm) / (400 * tttm), 0, 1) ^ (ttt and 1 or 0.9)
-
             -- average dps over time
             local dot = dmg_avg * num / (60 / erpm + self:GetReloadTime(base) / valfunc(self, "ClipSize"))
-            local dot_s = math.Clamp((dot - 20 * tttm) / (200 * tttm), 0, 1) ^ (ttt and 1 or 0.9)
+            local dps_s, dot_s
+            if pve then
+                dps_s = math.Clamp((dps - 12.5) / 150, 0, 1)
+                dot_s = math.Clamp((dot - 5) / 100, 0, 1) ^ 0.9
+            elseif ttt then
+                dps_s = math.Clamp((dps - 25) / 200, 0, 1)
+                dot_s = math.Clamp((dot - 10) / 100, 0, 1)
+            else
+                dps_s = math.Clamp((dps - 50) / 400, 0, 1) ^ 0.9
+                dot_s = math.Clamp((dot - 20) / 200, 0, 1) ^ 0.9
+            end
 
-            return dps_s * 30 + dot_s * 70
+            local scores = {dps_s, dot_s}
+            table.sort(scores)
+
+            return scores[2] * 70 + scores[1] * 30
         end,
     },
     {

@@ -137,6 +137,7 @@ TacRP.BALANCE_AUTO = -1
 TacRP.BALANCE_RP = 0
 TacRP.BALANCE_SBOX = 1
 TacRP.BALANCE_TTT = 2
+TacRP.BALANCE_PVE = 3
 
 function TacRP.GetBalanceMode()
     local i = GetConVar("tacrp_balance"):GetInt()
@@ -153,8 +154,28 @@ function TacRP.GetBalanceMode()
     end
 end
 
+TacRP.BalanceUseTiers = {
+    [TacRP.BALANCE_RP] = true,
+    [TacRP.BALANCE_PVE] = true,
+}
+
+TacRP.BalanceDefaults = {
+    [TacRP.BALANCE_PVE] = {
+        BodyDamageMultipliers = {
+            [HITGROUP_HEAD] = 2,
+            [HITGROUP_CHEST] = 1,
+            [HITGROUP_STOMACH] = 1,
+            [HITGROUP_LEFTARM] = 1,
+            [HITGROUP_RIGHTARM] = 1,
+            [HITGROUP_LEFTLEG] = 0.75,
+            [HITGROUP_RIGHTLEG] = 0.75,
+            [HITGROUP_GEAR] = 0.75
+        }
+    }
+}
+
 function TacRP.UseTiers()
-    return TacRP.GetBalanceMode() == TacRP.BALANCE_RP
+    return TacRP.BalanceUseTiers[TacRP.GetBalanceMode()]
 end
 
 TacRP.AmmoJamMSB = {

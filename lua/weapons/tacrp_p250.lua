@@ -76,6 +76,19 @@ SWEP.BalanceStats = {
         SightedSpeedMult = 0.75,
         ReloadSpeedMult = 0.9,
     },
+    [TacRP.BALANCE_PVE] = {
+        Damage_Max = 18,
+        Damage_Min = 12,
+        Range_Min = 900,
+        Range_Max = 2800,
+        RPM = 450,
+
+        MoveSpeedMult = 1,
+        ShootingSpeedMult = 1,
+        SightedSpeedMult = 1,
+        MeleeSpeedMult = 1,
+        ReloadSpeedMult = 1,
+    },
 }
 
 SWEP.TTTReplace = TacRP.TTTReplacePreset.Pistol

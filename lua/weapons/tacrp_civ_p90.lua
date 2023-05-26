@@ -62,6 +62,22 @@ SWEP.BalanceStats = {
         SightedSpeedMult = 0.6,
         ReloadSpeedMult = 0.7,
     },
+    [TacRP.BALANCE_PVE] = {
+        Description = "Semi-automatic model of a futuristic PDW. Fine tuned for precision shooting.",
+
+        Damage_Max = 10,
+        Damage_Min = 8,
+        RPM = 600,
+
+        Recoil_Kick = 0.5,
+        Spread = 0.001,
+
+        MoveSpeedMult = 0.9,
+        ShootingSpeedMult = 0.8,
+        SightedSpeedMult = 0.85,
+        MeleeSpeedMult = 1,
+        ReloadSpeedMult = 1,
+    },
 }
 
 SWEP.TTTReplace = {}

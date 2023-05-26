@@ -70,6 +70,30 @@ SWEP.BalanceStats = {
         SightedSpeedMult = 0.75,
         ReloadSpeedMult = 0.9,
     },
+    [TacRP.BALANCE_PVE] = {
+        Damage_Max = 9,
+        Damage_Min = 4,
+        RPM = 420,
+
+        HipFireSpreadPenalty = 0.015,
+
+        BodyDamageMultipliers = {
+            [HITGROUP_HEAD] = 2,
+            [HITGROUP_CHEST] = 1,
+            [HITGROUP_STOMACH] = 1,
+            [HITGROUP_LEFTARM] = 1,
+            [HITGROUP_RIGHTARM] = 1,
+            [HITGROUP_LEFTLEG] = 0.75,
+            [HITGROUP_RIGHTLEG] = 0.75,
+            [HITGROUP_GEAR] = 0.9
+        },
+
+        MoveSpeedMult = 1,
+        ShootingSpeedMult = 1,
+        SightedSpeedMult = 1,
+        MeleeSpeedMult = 1,
+        ReloadSpeedMult = 1,
+    }
 }
 
 SWEP.TTTReplace = TacRP.TTTReplacePreset.Pistol

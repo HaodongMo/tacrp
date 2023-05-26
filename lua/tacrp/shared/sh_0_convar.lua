@@ -293,7 +293,7 @@ local conVars = {
         name = "balance",
         default = "-1",
         min = -1,
-        max = 2,
+        max = 3,
         replicated = true,
         notify = true,
     },
@@ -859,15 +859,18 @@ local function menu_balance_ti(panel)
     panel:Help("Adjust weapon attributes to suit your gameplay needs.\nAutomatic sets balance to TTT in TTT, Tactical for DarkRP/Helix, and Arcade otherwise.")
     local cb_balance, lb_balance = panel:ComboBox("Weapon Balance", "tacrp_balance")
     cb_balance:AddChoice("Automatic", "-1")
-    cb_balance:AddChoice("Tactical", "0")
-    cb_balance:AddChoice("Arcade", "1")
-    cb_balance:AddChoice("TTT", "2")
+    cb_balance:AddChoice("0 - Tactical", "0")
+    cb_balance:AddChoice("1 - Arcade", "1")
+    cb_balance:AddChoice("2 - TTT", "2")
+    cb_balance:AddChoice("3 - PvE", "3")
     cb_balance:DockMargin(8, 0, 0, 0)
     lb_balance:SizeToContents()
 
-    panel:Help("Tactical: Balanced for reduced move speed. Medium TTK. Weapons are divided into 4 tiers.")
+    panel:Help("Tactical: Balanced for reduced move speed. Medium TTK.")
     panel:Help("Arcade: Balanced for Sandbox move speed. Low TTK. Snipers/DMRs have damage rampup.")
-    panel:Help("TTT: Balanced for TTT. High TTK, reloads slow you down and take longer. Some weapons have lower fire rate.")
+    panel:Help("TTT: High TTK, reloads slow you down and take longer. Some weapons have lower fire rate.")
+    panel:Help("PvE: For HL2 campaign or co-op maps. Damage comparable to HL2 weapons, reduced spread.")
+    panel:Help("(Tactical and PvE separate weapons into 4 tiers, with higher tiers having slightly better damage output.)")
 
     header(panel, "\nAmmo & Reloading")
     panel:AddControl("checkbox", {

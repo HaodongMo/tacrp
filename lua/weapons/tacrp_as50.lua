@@ -65,6 +65,20 @@ SWEP.BalanceStats = {
         SightedSpeedMult = 0.4,
         ReloadSpeedMult = 0.25,
     },
+    [TacRP.BALANCE_PVE] = {
+        Description = "Semi-automatic anti-materiel rifle with integral bipod.\nEquipped with a 12x scope by default.",
+
+        Damage_Max = 120,
+        Damage_Min = 92,
+        Range_Min = 4000,
+        Range_Max = 8000,
+
+        MoveSpeedMult = 0.7,
+        ShootingSpeedMult = 0.5,
+        SightedSpeedMult = 0.55,
+        MeleeSpeedMult = 1,
+        ReloadSpeedMult = 1,
+    },
 }
 
 // "ballistics"

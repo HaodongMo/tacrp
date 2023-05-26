@@ -64,6 +64,20 @@ SWEP.BalanceStats = {
         SightedSpeedMult = 0.65,
         ReloadSpeedMult = 0.65,
     },
+    [TacRP.BALANCE_PVE] = {
+        Damage_Max = 10,
+        Damage_Min = 4,
+
+        RPM = 450,
+        RecoilSpreadPenalty = 0.003,
+        HipFireSpreadPenalty = 0.008,
+
+        MoveSpeedMult = 0.95,
+        ShootingSpeedMult = 0.85,
+        SightedSpeedMult = 0.9,
+        MeleeSpeedMult = 1,
+        ReloadSpeedMult = 1,
+    },
 }
 
 SWEP.TTTReplace = TacRP.TTTReplacePreset.AssaultRifle
@@ -127,7 +141,7 @@ SWEP.AimDownSightsTime = 0.28
 SWEP.SprintToFireTime = 0.32
 
 SWEP.Sway = 1
-SWEP.ScopedSway = 0.25
+SWEP.ScopedSway = 0.12
 
 SWEP.FreeAimMaxAngle = 2
 
@@ -217,6 +231,21 @@ SWEP.AnimationTranslationTable = {
     ["fire4"] = "fire4_M",
     ["fire5"] = "fire5_M",
     ["melee"] = {"melee1", "melee2"}
+}
+
+SWEP.ProceduralIronFire = {
+    vm_pos = Vector(0, -0.5, -0.05),
+    vm_ang = Angle(0, 0.2, 0),
+    t = 0.15,
+    tmax = 0.25,
+    bones = {
+        {
+            bone = "bolt_handle",
+            pos = Vector(0, 0, -3),
+            t0 = 0.05,
+            t1 = 0.25,
+        },
+    },
 }
 
 // attachments

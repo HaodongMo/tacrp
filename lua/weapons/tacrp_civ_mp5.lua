@@ -66,6 +66,28 @@ SWEP.BalanceStats = {
         SightedSpeedMult = 0.6,
         ReloadSpeedMult = 0.7,
     },
+    [TacRP.BALANCE_PVE] = {
+        Description = "Semi-automatic carbine variant of a legendary submachine gun. Fine tuned for precision shooting.",
+
+        Damage_Max = 11,
+        Damage_Min = 6,
+        RPM = 360,
+
+        ClipSize = 15,
+
+        Spread = 0.004,
+        RecoilResetTime = 0.125,
+        RecoilMaximum = 8,
+        RecoilDissipationRate = 6,
+        RecoilSpreadPenalty = 0.002,
+        HipFireSpreadPenalty = 0.02,
+
+        MoveSpeedMult = 0.9,
+        ShootingSpeedMult = 0.8,
+        SightedSpeedMult = 0.85,
+        MeleeSpeedMult = 1,
+        ReloadSpeedMult = 1,
+    },
 }
 
 SWEP.Range_Min = 1750

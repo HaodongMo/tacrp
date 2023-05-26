@@ -15,5 +15,5 @@ ATT.Override_Firemodes = {-3}
 ATT.Override_RunawayBurst = true
 -- ATT.Mult_RecoilSpreadPenalty = 1.1
 ATT.Override_PostBurstDelay = 0.15
-ATT.Mult_RPM = 1.2
+ATT.Mult_RPM = 1.25
 ATT.Mult_RecoilKick = 1.25

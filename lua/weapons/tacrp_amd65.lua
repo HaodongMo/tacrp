@@ -64,6 +64,21 @@ SWEP.BalanceStats = {
         SightedSpeedMult = 0.6,
         ReloadSpeedMult = 0.75,
     },
+    [TacRP.BALANCE_PVE] = {
+        Damage_Max = 12,
+        Damage_Min = 7,
+
+        RecoilKick = 6,
+
+        HipFireSpreadPenalty = 0.03,
+        RecoilSpreadPenalty = 0.003,
+
+        MoveSpeedMult = 0.85,
+        ShootingSpeedMult = 0.75,
+        SightedSpeedMult = 0.75,
+        MeleeSpeedMult = 1,
+        ReloadSpeedMult = 1,
+    },
 }
 
 SWEP.TTTReplace = TacRP.TTTReplacePreset.AssaultRifle
@@ -110,7 +125,7 @@ SWEP.RecoilResetTime = 0.15 // time after you stop shooting for recoil to start 
 SWEP.RecoilDissipationRate = 13
 SWEP.RecoilFirstShotMult = 1 // multiplier for the first shot's recoil amount
 
-SWEP.RecoilVisualKick = 2
+SWEP.RecoilVisualKick = 1.5
 
 SWEP.RecoilKick = 7
 
