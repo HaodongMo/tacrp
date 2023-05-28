@@ -57,8 +57,12 @@ function SWEP:DrawLaser(pos, ang, strength, thirdperson)
     local delta = behavior and 1 or 0
 
     if IsValid(vm) and GetConVar("tacrp_true_laser"):GetBool() and (self:GetBlindFireMode() <= 1) and !self:GetCustomize() and !behavior then
-        local d1 = (CurTime() - self:GetNextPrimaryFire()) / 0.5
-        d1 = math.min(d1, (CurTime() - self:GetNextSecondaryFire()) / 2)
+        local d1 = 1
+        if GetConVar("tacrp_laser_beam"):GetBool() then
+            d1 = math.min((CurTime() - self:GetNextPrimaryFire()) / 2, (CurTime() - self:GetNextSecondaryFire()) / 2)
+        elseif self:GetValue("RPM") < 120 then
+            d1 = math.min(d1, (CurTime() - self:GetNextPrimaryFire()) / 0.5)
+        end
 
         local d2 = (curr_seq == "reload_start") and 0 or 1
         local d3 = (1 - math.min(self:GetAnimLockTime() - CurTime()) / vm:SequenceDuration(vm:GetSequence()))
@@ -67,6 +71,7 @@ function SWEP:DrawLaser(pos, ang, strength, thirdperson)
         d3 = math.max(d3 - cutoff, 0) / (1 - cutoff)
 
         delta = math.Clamp(self:GetReloading() and 0 or math.min(d1, d2, d3, d4), 0, 1)
+
     end
 
     local pos_tr = self:GetMuzzleOrigin()
@@ -94,10 +99,12 @@ function SWEP:DrawLaser(pos, ang, strength, thirdperson)
         pos = pos - (ang:Forward() * 256)
     end
 
-    local width = math.Rand(0.1, 0.2) * strength
-    render.SetMaterial(lasermat)
-    render.DrawBeam(pos, laser_pos, width * 0.3, 0, 1, Color(200, 200, 200))
-    render.DrawBeam(pos, laser_pos, width, 0, 1, Color(255, 0, 0))
+    if GetConVar("tacrp_laser_beam"):GetBool() then
+        local width = math.Rand(0.1, 0.2) * strength
+        render.SetMaterial(lasermat)
+        render.DrawBeam(pos, laser_pos, width * 0.3, 0, 1, Color(200, 200, 200))
+        render.DrawBeam(pos, laser_pos, width, 0, 1, Color(255, 0, 0))
+    end
 
     if tr.Hit and !tr.HitSky then
         local mul = strength

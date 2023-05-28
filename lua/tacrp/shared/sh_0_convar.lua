@@ -558,6 +558,14 @@ local conVars = {
         min = 0,
         max = 1,
     },
+
+    {
+        name = "laser_beam",
+        default = "0",
+        replicated = true,
+        min = 0,
+        max = 1,
+    },
 }
 
 local prefix = "tacrp_"
@@ -962,6 +970,11 @@ local function menu_atts_ti(panel)
         command = "tacrp_flashlight_blind"
     })
     panel:ControlHelp("Flashlight glare will obscure vision based on distance and viewing angle. Effect is more significant on scopes. If disabled, glare sprite will be visible but not grow in size.")
+    panel:AddControl("checkbox", {
+        label = "Laser Beam",
+        command = "tacrp_laser_beam"
+    })
+    panel:ControlHelp("If disabled, laser has no beam and only a dot, like Insurgency: Sandstorm. The dot remains static on high RPM weapons to help aiming.")
 
     header(panel, "\nAttachment Balance")
     panel:AddControl("slider", {
