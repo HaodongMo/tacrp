@@ -28,6 +28,11 @@ end
 function SWEP:RunHook(val, data)
     if !self.HookCache[val] then
         self.HookCache[val] = {}
+
+        if self:GetTable()[val] then
+            table.insert(self.HookCache[val], self:GetTable()[val])
+        end
+
         for slot, slottbl in pairs(self.Attachments) do
             if !slottbl.Installed then continue end
 
