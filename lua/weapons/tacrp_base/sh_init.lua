@@ -266,7 +266,7 @@ function SWEP:SetBaseSettings()
         self.Primary.DefaultClip = math.ceil(self.Primary.ClipSize * GetConVar("tacrp_defaultammo"):GetFloat())
     end
 
-    if SERVER and IsValid(self:GetOwner()) and self:GetCapacity() > 0 and self:Clip1() > self:GetCapacity() then
+    if SERVER and IsValid(self:GetOwner()) and self:GetOwner():IsPlayer() and self:GetCapacity() > 0 and self:Clip1() > self:GetCapacity() then
         self:GetOwner():GiveAmmo(self:Clip1() - self:GetCapacity(), self:GetValue("Ammo"))
         self:SetClip1(self:GetCapacity())
     end
