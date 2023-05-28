@@ -53,6 +53,8 @@ function SWEP:DoBodygroups(wm, custom_wm)
             end
         end
     end
+
+    self:RunHook("Hook_PostDoBodygroups")
 end
 
 function SWEP:GetElements(holster)
