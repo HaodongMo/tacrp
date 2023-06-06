@@ -231,9 +231,6 @@ SWEP.AttachmentElements = {
     ["foldstock"] = {
         BGs_VM = {
             {1, 1}
-        },
-        BGs_WM = {
-            {1, 1}
         }
     },
     ["tactical"] = {

@@ -531,7 +531,7 @@ hook.Add("FinishMove", "TacRP_Charge", function(ply, mv)
                     exitcharge(ply)
 
                     if !game.SinglePlayer() and CLIENT then
-                        if (ent:IsNPC() or ent:IsPlayer() or ent:IsNextBot()) then
+                        if IsValid(ent) and (ent:IsNPC() or ent:IsPlayer() or ent:IsNextBot()) then
                             if d >= 0.5 then
                                 ply:EmitSound("TacRP.Charge.HitFlesh_Range", 80)
                             else
