@@ -45,6 +45,7 @@ function TacRP:GetPhrase(phrase, format)
 end
 
 function TacRP:TryTranslate(str)
+    if str == nil then return str end
     if TacRP.STPTable[string.lower(str)] then
         return TacRP:GetPhrase(TacRP.STPTable[string.lower(str)])
     end
