@@ -144,7 +144,7 @@ function ENT:PhysicsCollide(data, collider)
         end
 
         if self.Delay == 0 or self.ExplodeOnImpact then
-            self:SetPos(data.HitPos)
+            -- self:SetPos(data.HitPos) -- Changing collision rules within a callback is likely to cause crashes!
             self:PreDetonate()
         end
     elseif IsValid(data.HitEntity) and (engine.ActiveGamemode() != "terrortown" or !data.HitEntity:IsPlayer()) then
