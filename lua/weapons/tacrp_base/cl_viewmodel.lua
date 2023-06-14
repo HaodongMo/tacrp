@@ -145,18 +145,31 @@ function SWEP:PreDrawViewModel()
         render.SetBlend(0)
     end
 
-    -- cam.Start3D(nil, nil, 70)
+    -- Apparently setting this will fix the viewmodel position and angle going all over the place in benchgun.
+    self.ViewModelFOV = self:GetViewModelFOV()
 
-    --cam.Start3D(nil, nil, self.ViewModelFOV, nil, nil, nil, nil, 0.1, nil)
     cam.IgnoreZ(true)
-    -- self:DrawEjectedShells()
 end
 
 function SWEP:PostDrawViewModel()
-    --cam.End3D()
     cam.IgnoreZ(false)
 
     if self:GetValue("ScopeHideWeapon") and self:IsInScope() then
         render.SetBlend(1)
     end
+end
+
+SWEP.SmoothedViewModelFOV = nil
+function SWEP:GetViewModelFOV()
+    local target = self.ViewModelFOV
+
+    if TacRP.ConVars["dev_benchgun"]:GetBool() then
+        target = self:GetOwner():GetFOV()
+    end
+
+    self.SmoothedViewModelFOV = self.SmoothedViewModelFOV or target
+    local diff = math.abs(target - self.SmoothedViewModelFOV)
+    self.SmoothedViewModelFOV = math.Approach(self.SmoothedViewModelFOV, target, diff * FrameTime() / 0.25)
+
+    return self.SmoothedViewModelFOV
 end

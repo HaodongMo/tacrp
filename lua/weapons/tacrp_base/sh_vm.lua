@@ -28,7 +28,6 @@ local function LerpMod(usrobj, to, dlt, clamp_ang)
     end
 end
 
-local benchgun = TacRP.ConVars["dev_benchgun"]
 SWEP.BenchPos = SWEP.BenchPos or Vector(0, 0, 0)
 SWEP.BenchAng = SWEP.BenchAng or Angle(0, 0, 0)
 
@@ -40,7 +39,7 @@ function SWEP:GetViewModelPosition(pos, ang)
         return Vector(0, 0, 0), Angle(0, 0, 0)
     end
 
-    if benchgun:GetBool() then
+    if TacRP.ConVars["dev_benchgun"]:GetBool() then
         return self.BenchPos, self.BenchAng
     end
     self.BenchPos = pos
@@ -351,4 +350,8 @@ function SWEP:GetViewModelPosition(pos, ang)
 
     self.LastSysTime = SysTime()
     return pos, ang
+end
+
+function SWEP:TranslateFOV(fov)
+    return fov
 end
