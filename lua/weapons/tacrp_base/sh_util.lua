@@ -33,6 +33,10 @@ function SWEP:OnReloaded()
     self:InvalidateCache()
     self:SetBaseSettings()
 
+    if CLIENT then
+        self:GenerateAutoSight()
+    end
+
     hook.Run("TacRP_WeaponReloaded", self)
 end
 
