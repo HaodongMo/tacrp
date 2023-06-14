@@ -166,6 +166,23 @@ An additional benefit is that a lot of the attachments now use consistent wordin
 <li><b>Fixed:</b> Safety desync causing gun able to shoot while apparently in safety.
 </ul>]],
     },
+    {
+        Title = "Update 10",
+        Type = "Patch Notes",
+        Date = "2023-06-14",
+        Author = "8Z",
+        Major = false,
+        Summary = "Minor performance and PVE Balance.",
+        Contents = [[<body style="font-family:'Myriad Pro';color:white;font-size:125%;">
+
+<h3>Changelist</h3>
+<ul>
+<li><b>Major Change:</b> PvE balance mode..
+<li><b>Changed:</b> ConVars are now cached, which should increase performance.
+<li><b>Changed:</b> Hold type while aiming.
+<li><b>Changed:</b> Lasers now draw only a dot and not the beam. They are also more consistent.
+</ul>]],
+    },
 }
 TacRP.NewsRead = TacRP.NewsRead or {}
 TacRP.NewsLoaded = nil
