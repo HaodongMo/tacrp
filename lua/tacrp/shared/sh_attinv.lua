@@ -1,7 +1,7 @@
 function TacRP:PlayerGetAtts(ply, att)
     if !IsValid(ply) then return 0 end
-    if GetConVar("TacRP_free_atts"):GetBool() then return 9999 end
-    if engine.ActiveGamemode() == "terrortown" and GetConVar("tacrp_ttt_bench_freeatts"):GetBool() and TacRP.NearBench(ply) then return 9999 end
+    if TacRP.ConVars["free_atts"]:GetBool() then return 9999 end
+    if engine.ActiveGamemode() == "terrortown" and TacRP.ConVars["ttt_bench_freeatts"]:GetBool() and TacRP.NearBench(ply) then return 9999 end
 
     if att == "" then return 9999 end
 
@@ -43,7 +43,7 @@ function TacRP:PlayerGiveAtt(ply, att, amt)
 
     if atttbl.InvAtt then att = atttbl.InvAtt end
 
-    if GetConVar("TacRP_lock_atts"):GetBool() then
+    if TacRP.ConVars["lock_atts"]:GetBool() then
         if ply.TacRP_AttInv[att] == 1 then return end
         ply.TacRP_AttInv[att] = 1
     else
@@ -55,7 +55,7 @@ end
 function TacRP:PlayerTakeAtt(ply, att, amt)
     amt = amt or 1
 
-    if GetConVar("TacRP_lock_atts"):GetBool() then return end
+    if TacRP.ConVars["lock_atts"]:GetBool() then return end
 
     if !IsValid(ply) then return end
 
@@ -101,12 +101,12 @@ end)
 elseif SERVER then
 
 hook.Add("PlayerDeath", "TacRP_DeathAttInv", function(ply)
-    -- if GetConVar("TacRP_loseattsondie"):GetBool() then
+    -- if TacRP.ConVars["loseattsondie"]:GetBool() then
     --     ply.TacRP_AttInv = ply.TacRP_AttInv or {}
     -- end
     -- if table.Count(ply.TacRP_AttInv) > 0
-    --         and GetConVar("TacRP_attinv_loseondie"):GetInt() >= 2
-    --         and !GetConVar("TacRP_free_atts"):GetBool() then
+    --         and TacRP.ConVars["attinv_loseondie"]:GetInt() >= 2
+    --         and !TacRP.ConVars["free_atts"]:GetBool() then
     --     local boxEnt = ents.Create("TacRP_att_dropped")
     --     boxEnt:SetPos(ply:GetPos() + Vector(0, 0, 4))
     --     boxEnt.GiveAttachments = ply.TacRP_AttInv
@@ -121,7 +121,7 @@ end)
 hook.Add("PlayerSpawn", "TacRP_SpawnAttInv", function(ply, trans)
     if trans then return end
 
-    if engine.ActiveGamemode() != "terrortown" and GetConVar("TacRP_loseattsondie"):GetInt() >= 1 then
+    if engine.ActiveGamemode() != "terrortown" and TacRP.ConVars["loseattsondie"]:GetInt() >= 1 then
         ply.TacRP_AttInv = {}
 
         TacRP:PlayerSendAttInv(ply)
@@ -129,7 +129,7 @@ hook.Add("PlayerSpawn", "TacRP_SpawnAttInv", function(ply, trans)
 end)
 
 function TacRP:PlayerSendAttInv(ply)
-    if GetConVar("TacRP_free_atts"):GetBool() then return end
+    if TacRP.ConVars["free_atts"]:GetBool() then return end
 
     if !IsValid(ply) then return end
 

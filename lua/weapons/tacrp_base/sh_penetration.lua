@@ -41,7 +41,7 @@ local function IsPenetrating(ptr, ptrent)
 end
 
 function SWEP:Penetrate(tr, range, penleft, alreadypenned)
-    if !GetConVar("TacRP_penetration"):GetBool() then return end
+    if !TacRP.ConVars["penetration"]:GetBool() then return end
 
     if !IsValid(self:GetOwner()) then return end
 

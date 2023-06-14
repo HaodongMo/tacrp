@@ -2,7 +2,7 @@ hook.Add("PostPlayerDraw", "TacRP_Holster", function(ply, flags)
     if !ply.TacRP_Holster or bit.band(flags, STUDIO_RENDER) != STUDIO_RENDER then return end
     if ply == LocalPlayer() and !LocalPlayer():ShouldDrawLocalPlayer() then return end
 
-    if !GetConVar("tacrp_drawholsters"):GetBool() or !GetConVar("tacrp_visibleholster"):GetBool() then return end
+    if !TacRP.ConVars["drawholsters"]:GetBool() or !TacRP.ConVars["visibleholster"]:GetBool() then return end
 
     ply.TacRP_HolsterModels = ply.TacRP_HolsterModels or {}
     for i, v in ipairs(TacRP.HolsterBones) do
@@ -84,7 +84,7 @@ hook.Add( "HUDDrawTargetID", "TacRP_FlashlightGlint", function()
     if LocalPlayer():GetNWFloat("TacRPStunStart", 0) +  LocalPlayer():GetNWFloat("TacRPStunDur", 0) > CurTime() then return false end
 
     -- Flashlight glint
-    if ply:IsPlayer() and GetConVar("tacrp_flashlight_blind"):GetBool() then
+    if ply:IsPlayer() and TacRP.ConVars["flashlight_blind"]:GetBool() then
         local wep = ply:GetActiveWeapon()
         if IsValid(wep) and wep.ArcticTacRP and wep:GetValue("Flashlight") then
 

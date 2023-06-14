@@ -96,7 +96,7 @@ local function setupttt()
             continue
         end
 
-        if GetConVar("tacrp_ttt_shortname"):GetBool() and wep.AbbrevName then
+        if TacRP.ConVars["ttt_shortname"]:GetBool() and wep.AbbrevName then
             wep.FullName = wep.PrintName
             wep.PrintName = wep.AbbrevName
         end
@@ -180,9 +180,9 @@ hook.Add("TacRP_LoadAtts", "TacRP_TTT", setupttt)
 
 hook.Add( "OnEntityCreated", "TacRP_TTT_Spawn", function(ent)
     if CLIENT then return end
-    if GetConVar("tacrp_ttt_weapon_include"):GetBool()
+    if TacRP.ConVars["ttt_weapon_include"]:GetBool()
             and TacRP.TTTReplaceLookup[ent:GetClass()]
-            and math.random() <= GetConVar("tacrp_ttt_weapon_replace"):GetFloat() then
+            and math.random() <= TacRP.ConVars["ttt_weapon_replace"]:GetFloat() then
 
         timer.Simple(0, function()
             if !IsValid(ent) or IsValid(ent:GetOwner()) then return end
@@ -210,7 +210,7 @@ end)
 
 hook.Add("TTTPrepareRound", "TacRP_TTT", function()
     if CLIENT then return end
-    local give = GetConVar("tacrp_ttt_atts_giveonspawn"):GetInt()
+    local give = TacRP.ConVars["ttt_atts_giveonspawn"]:GetInt()
     if give <= 0 then return end
 
     for _, ply in pairs(player.GetAll()) do

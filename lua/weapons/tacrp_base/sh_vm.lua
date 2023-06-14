@@ -28,6 +28,10 @@ local function LerpMod(usrobj, to, dlt, clamp_ang)
     end
 end
 
+local benchgun = TacRP.ConVars["dev_benchgun"]
+SWEP.BenchPos = SWEP.BenchPos or Vector(0, 0, 0)
+SWEP.BenchAng = SWEP.BenchAng or Angle(0, 0, 0)
+
 SWEP.ViewModelPos = Vector(0, 0, 0)
 SWEP.ViewModelAng = Angle(0, 0, 0)
 
@@ -36,20 +40,11 @@ function SWEP:GetViewModelPosition(pos, ang)
         return Vector(0, 0, 0), Angle(0, 0, 0)
     end
 
-    if GetConVar("tacrp_dev_benchgun"):GetBool() then
-        if GetConVar("tacrp_dev_benchgun_custom"):GetString() then
-            local bgc = GetConVar("tacrp_dev_benchgun_custom"):GetString()
-            if string.Left(bgc, 6) != "setpos" then return vector_origin, angle_zero end
-
-            bgc = string.TrimLeft(bgc, "setpos ")
-            bgc = string.Replace(bgc, ";setang", "")
-            bgc = string.Explode(" ", bgc)
-
-            return Vector(bgc[1], bgc[2], bgc[3]), Angle(bgc[4], bgc[5], bgc[6])
-        else
-            return vector_origin, angle_zero
-        end
+    if benchgun:GetBool() then
+        return self.BenchPos, self.BenchAng
     end
+    self.BenchPos = pos
+    self.BenchAng = ang
 
     local vm = self:GetOwner():GetViewModel()
     local FT = self:DeltaSysTime() -- FrameTime()

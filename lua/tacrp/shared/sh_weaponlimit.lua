@@ -8,8 +8,8 @@ local whitelist = {
 }
 
 local function check(ply, wep)
-    local limit = GetConVar("tacrp_slot_limit"):GetInt()
-    local countall = GetConVar("tacrp_slot_countall"):GetBool()
+    local limit = TacRP.ConVars["slot_limit"]:GetInt()
+    local countall = TacRP.ConVars["slot_countall"]:GetBool()
     local slot = (wep.GetSlot and wep:GetSlot()) or wep.Slot
     local weps = {}
     if limit > 0 and wep.ArcticTacRP then
@@ -45,8 +45,8 @@ local slot = {
 hook.Add("PlayerGiveSWEP", "TacRP_Pickup", function(ply, wepname, weptbl)
     local _, weps = check(ply, weapons.Get(wepname) or {Slot = slot[wepname]})
     if weps and !ply:HasWeapon(wepname) then
-        local mode = GetConVar("tacrp_slot_action"):GetInt()
-        local limit = GetConVar("tacrp_slot_limit"):GetInt()
+        local mode = TacRP.ConVars["slot_action"]:GetInt()
+        local limit = TacRP.ConVars["slot_limit"]:GetInt()
 
         if mode == 0 then
             ply:ChatPrint("[TacRP] Couldn't spawn " .. weptbl.PrintName .. " due to the slot limit (max " .. limit .. ").")
@@ -74,7 +74,7 @@ hook.Add("PlayerGiveSWEP", "TacRP_Pickup", function(ply, wepname, weptbl)
 end)
 
 local function slotty()
-    local ahh = GetConVar("tacrp_slot_hl2"):GetBool()
+    local ahh = TacRP.ConVars["slot_hl2"]:GetBool()
     for _, wpn in pairs(weapons.GetList()) do
 
         -- weapons.GetStored does not contain inherited values (like ArcticTacRP)

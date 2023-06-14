@@ -92,5 +92,5 @@ function SWEP:CanShootInSprint(base)
 end
 
 function SWEP:CanReloadInSprint(base)
-    return GetConVar("tacrp_sprint_reload"):GetBool()
+    return TacRP.ConVars["sprint_reload"]:GetBool()
 end

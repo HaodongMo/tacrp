@@ -334,11 +334,6 @@ local conVars = {
         client = true,
         noarchive = true,
     },
-    {
-        name = "dev_benchgun_custom",
-        default = "",
-        client = true,
-    },
 
     // --------------------------- Hints
     {
@@ -568,6 +563,8 @@ local conVars = {
     },
 }
 
+TacRP.ConVars = {}
+
 local prefix = "tacrp_"
 
 local flags = {
@@ -579,11 +576,11 @@ for _, var in pairs(conVars) do
     local convar_name = prefix .. var.name
 
     if var.client and CLIENT then
-        CreateClientConVar(convar_name, var.default, !var.noarchive, var.userinfo)
+        TacRP.ConVars[var.name] = CreateClientConVar(convar_name, var.default, !var.noarchive, var.userinfo)
     elseif !var.client then
         local flag = FCVAR_ARCHIVE
         for k, v in pairs(flags) do if var[k] then flag = flag + v end end
-        CreateConVar(convar_name, var.default, flag, var.help, var.min, var.max)
+        TacRP.ConVars[var.name] = CreateConVar(convar_name, var.default, flag, var.help, var.min, var.max)
     end
 end
 

@@ -223,7 +223,7 @@ end
 
 function SWEP:ThinkPeek()
     local down = input.IsKeyDown(input.GetKeyCode(input.LookupBinding("menu_context") or "???"))
-    if !GetConVar("tacrp_togglepeek"):GetBool() and self:GetPeeking() ~= down then
+    if !TacRP.ConVars["togglepeek"]:GetBool() and self:GetPeeking() ~= down then
         net.Start("tacrp_togglepeek")
         net.WriteBool(down)
         net.SendToServer()
@@ -284,7 +284,7 @@ end
 
 -- function SWEP:CheckFlashlightPointing()
 --     if game.SinglePlayer() then return 0 end
---     if !GetConVar("tacrp_flashlight_blind"):GetBool() then return 0 end
+--     if !TacRP.ConVars["flashlight_blind"]:GetBool() then return 0 end
 --     if self.FlashlightPointingCache and self.FlashlightPointingCache[2] == CurTime() then return self.FlashlightPointingCache[1] end
 --     local src0 = self:GetOwner():EyePos()
 --     local v = 0

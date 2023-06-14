@@ -8,7 +8,7 @@ function TacRP.Move(ply, mv, cmd)
     local totalmult = 1
 
     if ply:GetNWFloat("TacRPLastBashed", 0) + 2 > CurTime() then
-        local slow = GetConVar("tacrp_melee_slow"):GetFloat()
+        local slow = TacRP.ConVars["melee_slow"]:GetFloat()
         local mult = slow
         if ply:GetNWFloat("TacRPLastBashed", 0) + 1.4 < CurTime() then
             mult = Lerp((CurTime() - ply:GetNWFloat("TacRPLastBashed", 0) - 1.4) / (2 - 1.4), slow, 1)
@@ -22,7 +22,7 @@ function TacRP.Move(ply, mv, cmd)
 
     local stunstart, stundur = ply:GetNWFloat("TacRPStunStart", 0), ply:GetNWFloat("TacRPStunDur", 0)
     if stunstart + stundur > CurTime() then
-        local slow = GetConVar("tacrp_flash_slow"):GetFloat()
+        local slow = TacRP.ConVars["flash_slow"]:GetFloat()
         local mult = slow
         if stunstart + stundur * 0.7 < CurTime() then
             mult = Lerp((CurTime() - stunstart - stundur * 0.7) / (stundur * 0.3), slow, 1)

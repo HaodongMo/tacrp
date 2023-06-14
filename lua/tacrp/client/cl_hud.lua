@@ -37,7 +37,7 @@ hook.Add("HUDShouldDraw", "TacRP_HideHUD", function(name)
     local wpn = LocalPlayer():GetActiveWeapon()
 
     if IsValid(wpn) and wpn.ArcticTacRP and
-            ((GetConVar("tacrp_drawhud"):GetBool() and GetConVar("tacrp_hud"):GetBool()) or wpn:GetCustomize()) and hide[name]  then
+            ((TacRP.ConVars["drawhud"]:GetBool() and TacRP.ConVars["hud"]:GetBool()) or wpn:GetCustomize()) and hide[name]  then
         return false
     end
 end)
@@ -50,7 +50,7 @@ local names = {
 }
 
 hook.Add("PreGamemodeLoaded", "TacRP_AmmoName", function()
-    if GetConVar("tacrp_ammonames"):GetBool() then
+    if TacRP.ConVars["ammonames"]:GetBool() then
         for k, v in pairs(names) do
             language.Add(k .. "_ammo", v)
         end

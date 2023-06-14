@@ -275,7 +275,7 @@ function TacRP.IsGrenadeInfiniteAmmo(i)
     if !nade.Ammo then return true end
 
     -- non-admin nades are affected by infinite grenades cvar
-    if !nade.AdminOnly and GetConVar("tacrp_infinitegrenades"):GetBool() then return true end
+    if !nade.AdminOnly and TacRP.ConVars["infinitegrenades"]:GetBool() then return true end
 
     return false
 end

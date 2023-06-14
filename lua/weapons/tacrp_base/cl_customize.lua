@@ -74,7 +74,7 @@ function SWEP:CreateCustomizeHUD()
     bg:SetSize(ScrW(), ScrH())
     bg.OnRemove = function(self2)
         if !IsValid(self) then return end
-        if GetConVar("tacrp_autosave"):GetBool() and GetConVar("tacrp_free_atts"):GetBool() then
+        if TacRP.ConVars["autosave"]:GetBool() and TacRP.ConVars["free_atts"]:GetBool() then
             self:SavePreset()
         end
     end
@@ -1048,7 +1048,7 @@ function SWEP:CreateCustomizeHUD()
 
                 local has = TacRP:PlayerGetAtts(self:GetOwner(), att)
 
-                local shownum = !GetConVar("TacRP_lock_atts"):GetBool() and !GetConVar("TacRP_free_atts"):GetBool() and !atttbl.Free
+                local shownum = !TacRP.ConVars["lock_atts"]:GetBool() and !TacRP.ConVars["free_atts"]:GetBool() and !atttbl.Free
 
                 if attached then
                     col_bg = Color(150, 150, 150, 150)
@@ -1062,7 +1062,7 @@ function SWEP:CreateCustomizeHUD()
                         col_image = Color(255, 255, 255)
                     end
                 else
-                    if GetConVar("TacRP_free_atts"):GetBool() or has > 0 then
+                    if TacRP.ConVars["free_atts"]:GetBool() or has > 0 then
                         if hover then
                             col_bg = Color(255, 255, 255)
                             col_corner = Color(0, 0, 0)
@@ -1108,7 +1108,7 @@ function SWEP:CreateCustomizeHUD()
 
                 if shownum then
                     local numtxt = has
-                    if !GetConVar("tacrp_free_atts"):GetBool() and engine.ActiveGamemode() == "terrortown" and GetConVar("tacrp_ttt_bench_freeatts"):GetBool() and TacRP.NearBench(self:GetOwner()) then
+                    if !TacRP.ConVars["free_atts"]:GetBool() and engine.ActiveGamemode() == "terrortown" and TacRP.ConVars["ttt_bench_freeatts"]:GetBool() and TacRP.NearBench(self:GetOwner()) then
                         numtxt = "*"
                     end
 

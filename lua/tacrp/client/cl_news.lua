@@ -697,9 +697,9 @@ local function notifynews()
         end
 
         if ind then
-            if major and !GetConVar("tacrp_news_majoronly"):GetBool() then
+            if major and !TacRP.ConVars["news_majoronly"]:GetBool() then
                 TacRP.CreateNewsPanel(ind)
-            elseif major or !GetConVar("tacrp_news_majoronly"):GetBool() then
+            elseif major or !TacRP.ConVars["news_majoronly"]:GetBool() then
                 chat.AddText(color_white, "------------- Tactical RP -------------")
                 chat.AddText(color_white, "A new " .. string.lower(TacRP.NewsLoaded[ind].Type or "article") .. " was released!")
                 chat.AddText(color_white, "Use command 'tacrp_news' or type '/tacrp_news' to view it and suppress this message.")
@@ -712,7 +712,7 @@ concommand.Add("tacrp_news_check", notifynews)
 
 hook.Add("InitPostEntity", "tacrp_news", function()
     timer.Simple(5, function()
-        if !GetConVar("tacrp_checknews"):GetBool() then return end
+        if !TacRP.ConVars["checknews"]:GetBool() then return end
         notifynews()
     end)
 end)

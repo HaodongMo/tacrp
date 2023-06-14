@@ -20,7 +20,7 @@ hook.Add("PlayerBindPress", "TacRP_Binds", function(ply, bind, pressed, code)
             net.Start("TacRP_togglecustomize")
             net.WriteBool(!wpn:GetCustomize())
             net.SendToServer()
-        elseif !GetConVar("tacrp_togglepeek"):GetBool() then
+        elseif !TacRP.ConVars["togglepeek"]:GetBool() then
             net.Start("tacrp_togglepeek")
             net.WriteBool(true) -- release is handled in sh_scope
             net.SendToServer()
@@ -33,7 +33,7 @@ hook.Add("PlayerBindPress", "TacRP_Binds", function(ply, bind, pressed, code)
         return true
     end
 
-    if GetConVar("tacrp_toggletactical"):GetBool() and bind == "impulse 100" and wpn:GetValue("CanToggle") then
+    if TacRP.ConVars["toggletactical"]:GetBool() and bind == "impulse 100" and wpn:GetValue("CanToggle") then
         net.Start("tacrp_toggletactical")
         net.SendToServer()
         wpn:SetTactical(!wpn:GetTactical())

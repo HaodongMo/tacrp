@@ -183,10 +183,10 @@ ENT.ExtraModels = {
 
 function ENT:Initialize()
     if SERVER then
-        if util.IsValidModel(GetConVar("tacrp_rock_funny"):GetString()) then
-            self:SetModel(GetConVar("tacrp_rock_funny"):GetString())
-        elseif math.random() <= GetConVar("tacrp_rock_funny"):GetFloat() then
-            local i = math.min(GetConVar("tacrp_rock_funny"):GetFloat() > 1 and GetConVar("tacrp_rock_funny"):GetInt() - 1 or math.random(1, #self.ExtraModels), #self.ExtraModels)
+        if util.IsValidModel(TacRP.ConVars["rock_funny"]:GetString()) then
+            self:SetModel(TacRP.ConVars["rock_funny"]:GetString())
+        elseif math.random() <= TacRP.ConVars["rock_funny"]:GetFloat() then
+            local i = math.min(TacRP.ConVars["rock_funny"]:GetFloat() > 1 and TacRP.ConVars["rock_funny"]:GetInt() - 1 or math.random(1, #self.ExtraModels), #self.ExtraModels)
             local mdl = self.ExtraModels[i]
             self:SetModel(util.IsValidModel(mdl) and mdl or self.Model)
         else
@@ -219,7 +219,7 @@ function ENT:Initialize()
 
     self.SpawnTime = CurTime()
 
-    self.NPCDamage = IsValid(self:GetOwner()) and self:GetOwner():IsNPC() and !GetConVar("tacrp_npc_equality"):GetBool()
+    self.NPCDamage = IsValid(self:GetOwner()) and self:GetOwner():IsNPC() and !TacRP.ConVars["npc_equality"]:GetBool()
 
     if self.AudioLoop then
         self.LoopSound = CreateSound(self, self.AudioLoop)

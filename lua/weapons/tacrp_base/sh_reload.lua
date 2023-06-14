@@ -213,7 +213,7 @@ function SWEP:ThinkReload()
 end
 
 function SWEP:GetInfiniteAmmo()
-    return GetConVar("tacrp_infiniteammo"):GetBool() or self:GetValue("InfiniteAmmo")
+    return TacRP.ConVars["infiniteammo"]:GetBool() or self:GetValue("InfiniteAmmo")
 end
 
 function SWEP:GetCapacity(base)

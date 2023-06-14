@@ -91,7 +91,7 @@ function SWEP:Think()
         if !self.LoadedPreset then
             self.LoadedPreset = true
 
-            if GetConVar("tacrp_autosave"):GetBool() and GetConVar("tacrp_free_atts"):GetBool() then
+            if TacRP.ConVars["autosave"]:GetBool() and TacRP.ConVars["free_atts"]:GetBool() then
                 self:LoadPreset()
                 self:DoDeployAnimation()
             end

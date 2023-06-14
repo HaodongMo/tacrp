@@ -1,6 +1,6 @@
 hook.Add("PopulateWeapons", "zzz_TacRP_SubCategories", function(pnlContent, tree, anode)
 
-    local cvar = GetConVar("tacrp_subcats"):GetInt()
+    local cvar = TacRP.ConVars["subcats"]:GetInt()
     if cvar == 0 then return end
 
     timer.Simple(0, function()

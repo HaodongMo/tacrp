@@ -68,7 +68,7 @@ local currentind
 local lastmenu
 function SWEP:DrawGrenadeHUD()
 
-    if !GetConVar("tacrp_nademenu"):GetBool() then return end
+    if !TacRP.ConVars["nademenu"]:GetBool() then return end
     if !self:GetValue("CanQuickNade") then return end
 
     -- adapted from tfa vox radial menu
@@ -288,12 +288,12 @@ function SWEP:DrawGrenadeHUD()
     surface.SetDrawColor(0, 0, 0, 200 * a)
 
     -- Only use the old bind hints if current hint is disabled
-    if GetConVar("tacrp_hints"):GetBool() then
+    if TacRP.ConVars["hints"]:GetBool() then
         self.LastHintLife = CurTime()
         return
     end
 
-    if GetConVar("tacrp_nademenu_click"):GetBool() then
+    if TacRP.ConVars["nademenu_click"]:GetBool() then
 
         local binded = input.LookupBinding("grenade1")
 
@@ -615,9 +615,9 @@ local function canhighlight(self, slice)
 end
 
 function SWEP:DrawBlindFireHUD()
-    if !GetConVar("tacrp_blindfiremenu"):GetBool() then return end
-    local nocenter = GetConVar("tacrp_blindfiremenu_nocenter"):GetBool()
-    local nosuicide = nocenter or GetConVar("tacrp_idunwannadie"):GetBool()
+    if !TacRP.ConVars["blindfiremenu"]:GetBool() then return end
+    local nocenter = TacRP.ConVars["blindfiremenu_nocenter"]:GetBool()
+    local nosuicide = nocenter or TacRP.ConVars["idunwannadie"]:GetBool()
 
     -- adapted from tfa vox radial menu
     local ft = FrameTime()
@@ -781,7 +781,7 @@ hook.Add("VGUIMousePressed", "tacrp_grenademenu", function(pnl, mousecode)
     local wpn = LocalPlayer():GetActiveWeapon()
     if !(LocalPlayer():Alive() and IsValid(wpn) and wpn.ArcticTacRP and !wpn:StillWaiting(nil, true)) then return end
     if wpn.GrenadeMenuAlpha == 1 then
-        if !GetConVar("tacrp_nademenu_click"):GetBool() or !currentnade then return end
+        if !TacRP.ConVars["nademenu_click"]:GetBool() or !currentnade then return end
         if mousecode == MOUSE_MIDDLE and TacRP.AreTheGrenadeAnimsReadyYet then
             local nadewep = currentnade.GrenadeWep
             if !nadewep or !wpn:CheckGrenade(currentnade.Index, true) then return end

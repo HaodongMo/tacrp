@@ -1,7 +1,7 @@
 TacRP.PhraseTable = TacRP.PhraseTable or {}
 TacRP.STPTable = TacRP.STPTable or {}
 
-local lang_cvar = GetConVar("tacrp_language")
+local lang_cvar = TacRP.ConVars["language"]
 local gmod_language = GetConVar("gmod_language")
 
 function TacRP:GetLanguage()

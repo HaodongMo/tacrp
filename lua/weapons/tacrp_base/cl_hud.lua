@@ -41,7 +41,7 @@ function SWEP:GetHintCapabilities()
     -- hopefully you don't need me to tell you how to shoot a gun
 
     if self:GetScopeLevel() != 0 then
-        if GetConVar("tacrp_togglepeek"):GetBool() then
+        if TacRP.ConVars["togglepeek"]:GetBool() then
             self.CachedCapabilities["+menu_context"] = {so = 1, str = "Toggle Peek"}
         else
             self.CachedCapabilities["+menu_context"] = {so = 1, str = "Peek"}
@@ -67,13 +67,13 @@ function SWEP:GetHintCapabilities()
         self.CachedCapabilities["+use/+attack"] = {so = 30, str = "Quick Melee"}
     end
 
-    if self:GetValue("CanToggle") and GetConVar("tacrp_toggletactical"):GetBool() then
+    if self:GetValue("CanToggle") and TacRP.ConVars["toggletactical"]:GetBool() then
         self.CachedCapabilities["impulse 100"] = {so = 31, str = "Toggle " .. (self:GetValue("TacticalName") or "Tactical")}
     end
 
     -- blindfire / quickthrow
     if self:GetValue("CanBlindFire") and self:GetScopeLevel() == 0 and !self:GetSafe() then
-        if GetConVar("tacrp_blindfiremenu"):GetBool() then
+        if TacRP.ConVars["blindfiremenu"]:GetBool() then
             self.CachedCapabilities["+zoom"] = {so = 39, str = "Blindfire Menu"}
         else
             if self:GetOwner():KeyDown(IN_ZOOM) then
@@ -82,7 +82,7 @@ function SWEP:GetHintCapabilities()
                 self.CachedCapabilities["+zoom/+moveleft"] = {so = 39.1, str = "Blindfire Left"}
                 self.CachedCapabilities["+zoom/+moveright"] = {so = 39.2, str = "Blindfire Right"}
                 self.CachedCapabilities["+zoom/+back"] = {so = 39.3, str = "Blindfire Cancel"}
-                if !GetConVar("tacrp_idunwannadie"):GetBool() then
+                if !TacRP.ConVars["idunwannadie"]:GetBool() then
                     self.CachedCapabilities["+zoom/+speed/+walk"] = {so = 39.4, str = "Suicide"}
                 end
                 return self.CachedCapabilities
@@ -98,8 +98,8 @@ function SWEP:GetHintCapabilities()
             self.CachedCapabilities["+grenade1"] = {so = 35, str = "Quickthrow"}
         end
         if bound2 then
-            if GetConVar("tacrp_nademenu"):GetBool() then
-                if GetConVar("tacrp_nademenu_click"):GetBool() and self.GrenadeMenuAlpha == 1 then
+            if TacRP.ConVars["nademenu"]:GetBool() then
+                if TacRP.ConVars["nademenu_click"]:GetBool() and self.GrenadeMenuAlpha == 1 then
                     self.CachedCapabilities = {}
                     self.CachedCapabilities["+grenade2"] = {so = 36, str = "Prepare Grenade"}
                     self.CachedCapabilities["+grenade2/+attack"] = {so = 36.1, str = "Throw Overhand"}
@@ -140,10 +140,10 @@ SWEP.LastHintLife = 0
 
 function SWEP:DrawHints()
 
-    local a = GetConVar("tacrp_hints_always"):GetBool() and 1 or math.Clamp(((self.LastHintLife + 4) - CurTime()) / 1, 0, 1)
+    local a = TacRP.ConVars["hints_always"]:GetBool() and 1 or math.Clamp(((self.LastHintLife + 4) - CurTime()) / 1, 0, 1)
     if a <= 0 then return end
 
-    local font = GetConVar("tacrp_hints_altfont"):GetBool() and "TacRP_Myriad_Pro_8" or "TacRP_HD44780A00_5x8_5"
+    local font = TacRP.ConVars["hints_altfont"]:GetBool() and "TacRP_Myriad_Pro_8" or "TacRP_HD44780A00_5x8_5"
 
     local caps = self:GetHintCapabilities()
 
@@ -191,7 +191,7 @@ function SWEP:DrawHints()
 end
 
 function SWEP:ShouldDrawCrosshair()
-    if !GetConVar("tacrp_crosshair"):GetBool() then
+    if !TacRP.ConVars["crosshair"]:GetBool() then
         return self:DoLowerIrons() and self:GetSightAmount() > 0 and !self:GetPeeking() and !self:GetReloading()
     end
     return  !self:GetReloading()
@@ -263,7 +263,7 @@ function SWEP:DoDrawCrosshair(x, y)
     if !dev and self.CrosshairAlpha <= 0 then return true end
 
     local clr
-    if GetConVar("tacrp_ttt_rolecrosshair") and GetConVar("tacrp_ttt_rolecrosshair"):GetBool() then
+    if TacRP.ConVars["ttt_rolecrosshair"] and TacRP.ConVars["ttt_rolecrosshair"]:GetBool() then
         if GetRoundState() == ROUND_PREP or GetRoundState() == ROUND_POST then
             clr = Color(255, 255, 255)
         elseif ply.GetRoleColor and ply:GetRoleColor() then
@@ -284,7 +284,7 @@ function SWEP:DoDrawCrosshair(x, y)
 
         surface.SetDrawColor(0, 0, 0, clr.a * self.CrosshairAlpha * self:GetSightAmount() * 0.5)
         surface.DrawOutlinedRect(x - 2, y - 2, 5, 5, 1)
-    elseif GetConVar("tacrp_crosshair"):GetBool() then
+    elseif TacRP.ConVars["crosshair"]:GetBool() then
         clr = clr or Color(50, 255, 50)
         surface.SetDrawColor(clr.r, clr.g, clr.b, clr.a * self.CrosshairAlpha)
 
@@ -425,7 +425,7 @@ function SWEP:DrawBottomBar(x, y, w, h)
         surface.DrawText(nadetext)
 
         local mat = nil
-        if !GetConVar("tacrp_nademenu"):GetBool() then
+        if !TacRP.ConVars["nademenu"]:GetBool() then
             mat = self:GetNextGrenade().Icon
         else
             mat = mat_radial
@@ -456,7 +456,7 @@ function SWEP:DrawHUDBackground()
 
     -- draw a vignette effect around the screen based on recoil
     local recoil = self:GetRecoilAmount()
-    if recoil > 0 and GetConVar("tacrp_vignette"):GetBool() then
+    if recoil > 0 and TacRP.ConVars["vignette"]:GetBool() then
         local recoil_pct = math.Clamp(recoil / self:GetValue("RecoilMaximum"), 0, 1) ^ 1.25
         local delta = self:Curve(recoil_pct)
         surface.SetDrawColor(0, 0, 0, 200 * delta)
@@ -474,13 +474,13 @@ function SWEP:DrawHUDBackground()
 
     self:DrawCustomizeHUD()
 
-    if !self:GetCustomize() and GetConVar("tacrp_hints"):GetBool() then
+    if !self:GetCustomize() and TacRP.ConVars["hints"]:GetBool() then
         self:DrawHints()
     end
 
-    if !self:GetCustomize() and GetConVar("tacrp_hud"):GetBool() then
+    if !self:GetCustomize() and TacRP.ConVars["hud"]:GetBool() then
 
-        if GetConVar("tacrp_drawhud"):GetBool() and engine.ActiveGamemode() != "terrortown" then
+        if TacRP.ConVars["drawhud"]:GetBool() and engine.ActiveGamemode() != "terrortown" then
 
             local w = TacRP.SS(110)
             local h = TacRP.SS(40)
@@ -507,7 +507,7 @@ function SWEP:DrawHUDBackground()
 
             if self.Primary.ClipSize > 0 then
 
-                if GetConVar("tacrp_hud_ammo_number"):GetBool() then
+                if TacRP.ConVars["hud_ammo_number"]:GetBool() then
                     surface.SetFont("TacRP_HD44780A00_5x8_10")
                     local t = math.max(0, self:Clip1()) .. " /" .. self.Primary.ClipSize
                     local tw = surface.GetTextSize(t)
@@ -891,7 +891,7 @@ function SWEP:DrawHUDBackground()
             else
                 drawarmorsquare(1, cx1, cy2)
             end
-        elseif GetConVar("tacrp_minhud"):GetBool() and self:ShouldDrawBottomBar() then
+        elseif TacRP.ConVars["minhud"]:GetBool() and self:ShouldDrawBottomBar() then
             local w = TacRP.SS(110)
             local h = TacRP.SS(16)
             local x = ScrW() / 2 - w / 2
@@ -950,7 +950,7 @@ function SWEP:DrawWeaponSelection(x, y, w, h, a)
 end
 
 function SWEP:RangeUnitize(range)
-    if GetConVar("tacrp_metricunit"):GetBool() then
+    if TacRP.ConVars["metricunit"]:GetBool() then
         return tostring(math.Round(range * TacRP.HUToM)) .. TacRP:GetPhrase("unit.meter")
     else
         return tostring(math.Round(range)) .. TacRP:GetPhrase("unit.hu")

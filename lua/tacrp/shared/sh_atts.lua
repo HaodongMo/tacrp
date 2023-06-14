@@ -39,7 +39,7 @@ function TacRP.LoadAtts()
         TacRP.Attachments[shortname] = ATT
         TacRP.Attachments_Index[TacRP.Attachments_Count] = shortname
 
-        if GetConVar("tacrp_generateattentities"):GetBool() and !ATT.DoNotRegister and !ATT.InvAtt and !ATT.Free then
+        if TacRP.ConVars["generateattentities"]:GetBool() and !ATT.DoNotRegister and !ATT.InvAtt and !ATT.Free then
             local attent = {}
             attent.Base = "tacrp_att"
             attent.Icon = ATT.Icon
@@ -154,22 +154,22 @@ function TacRP.CanCustomize(ply, wep, att, slot)
         local role = ply:GetTraitor() or ply:IsDetective()
 
         // disabled across role
-        if (role and !GetConVar("tacrp_ttt_cust_role_allow"):GetBool()) or (!role and !GetConVar("tacrp_ttt_cust_inno_allow"):GetBool()) then
+        if (role and !TacRP.ConVars["ttt_cust_role_allow"]:GetBool()) or (!role and !TacRP.ConVars["ttt_cust_inno_allow"]:GetBool()) then
             return false, "Restricted for role"
         end
 
         // disabled during round
-        if GetRoundState() == ROUND_ACTIVE and ((role and !GetConVar("tacrp_ttt_cust_role_round"):GetBool()) or (!role and !GetConVar("tacrp_ttt_cust_inno_round"):GetBool())) then
+        if GetRoundState() == ROUND_ACTIVE and ((role and !TacRP.ConVars["ttt_cust_role_round"]:GetBool()) or (!role and !TacRP.ConVars["ttt_cust_inno_round"]:GetBool())) then
             return false, "Restricted during round"
         end
 
         // disabled when not near bench
-        if ((role and GetConVar("tacrp_ttt_cust_role_needbench"):GetBool()) or (!role and GetConVar("tacrp_ttt_cust_inno_needbench"):GetBool())) and !TacRP.NearBench(ply) then
+        if ((role and TacRP.ConVars["ttt_cust_role_needbench"]:GetBool()) or (!role and TacRP.ConVars["ttt_cust_inno_needbench"]:GetBool())) and !TacRP.NearBench(ply) then
             return false, "Requires Customization Bench"
         end
     else
         // check bench
-        if GetConVar("tacrp_rp_requirebench"):GetBool() and !TacRP.NearBench(ply) then
+        if TacRP.ConVars["rp_requirebench"]:GetBool() and !TacRP.NearBench(ply) then
             return false, "Restricted during round"
         end
     end

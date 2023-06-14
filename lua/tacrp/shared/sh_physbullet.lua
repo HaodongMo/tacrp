@@ -57,7 +57,7 @@ function TacRP:ShootPhysBullet(wep, pos, vel, tbl)
         bullet.Underwater = true
     end
 
-    local add = game.SinglePlayer() or !GetConVar("tacrp_client_damage"):GetBool() or CLIENT
+    local add = game.SinglePlayer() or !TacRP.ConVars["client_damage"]:GetBool() or CLIENT
     if add then
         table.insert(TacRP.PhysBullets, bullet)
     end
@@ -269,7 +269,7 @@ function TacRP:ProgressPhysBullet(bullet, timestep)
                         Damage = 0,
                         IgnoreEntity = attacker,
                         Callback = function(att, btr, dmg)
-                            if GetConVar("tacrp_client_damage"):GetBool() then
+                            if TacRP.ConVars["client_damage"]:GetBool() then
                                 net.Start("tacrp_clientdamage")
                                     net.WriteEntity(weapon)
                                     net.WriteEntity(btr.Entity)
@@ -292,7 +292,7 @@ function TacRP:ProgressPhysBullet(bullet, timestep)
             elseif SERVER then
                 bullet.Damaged[eid] = true
                 bullet.Dead = true
-                if game.SinglePlayer() or !GetConVar("tacrp_client_damage"):GetBool() then
+                if game.SinglePlayer() or !TacRP.ConVars["client_damage"]:GetBool() then
                     bullet.Attacker:FireBullets({
                         Damage = 1, -- weapon:GetValue("Damage_Max"),
                         Force = 8,

@@ -37,7 +37,7 @@ function EFFECT:Init(data)
 
     if !tacrp then
         self.Speed = 15000
-    elseif GetConVar("tacrp_physbullet"):GetBool() then
+    elseif TacRP.ConVars["physbullet"]:GetBool() then
         self.Speed = math.max(wep:GetValue("MuzzleVelocity") or data:GetScale(), 5000)
     else
         self.Speed = math.max(wep:GetValue("MuzzleVelocity") or data:GetScale(), dist / 0.4)

@@ -44,7 +44,7 @@ function SWEP:ThinkFreeAim()
 end
 
 function SWEP:GetFreeAimOffset()
-    if !GetConVar("tacrp_freeaim"):GetBool() or !self:GetValue("FreeAim") then return Angle(0, 0, 0) end
+    if !TacRP.ConVars["freeaim"]:GetBool() or !self:GetValue("FreeAim") then return Angle(0, 0, 0) end
     if CLIENT then
         return self.ClientFreeAimAng
     else

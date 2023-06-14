@@ -208,8 +208,8 @@ function SWEP:PrimaryAttack()
     self:DoEffects()
 
     local num = self:GetValue("Num")
-    local fixed_spread = self:IsShotgun() and GetConVar("tacrp_fixedspread"):GetBool()
-    local pellet_spread = self:IsShotgun() and self:GetValue("ShotgunPelletSpread") > 0 and GetConVar("tacrp_pelletspread"):GetBool()
+    local fixed_spread = self:IsShotgun() and TacRP.ConVars["fixedspread"]:GetBool()
+    local pellet_spread = self:IsShotgun() and self:GetValue("ShotgunPelletSpread") > 0 and TacRP.ConVars["pelletspread"]:GetBool()
 
     local spread = self:GetSpread()
 
@@ -222,7 +222,7 @@ function SWEP:PrimaryAttack()
     else
         if IsFirstTimePredicted() then
 
-            local hitscan = !GetConVar("tacrp_physbullet"):GetBool()
+            local hitscan = !TacRP.ConVars["physbullet"]:GetBool()
 
             local dist = 100000
 
@@ -370,7 +370,7 @@ function SWEP:GetShotgunPattern(i, d)
     local num = self:GetValue("Num")
     if num == 1 then return 0, 0 end
 
-    local pelspread = self:GetValue("ShotgunPelletSpread") > 0 and GetConVar("tacrp_pelletspread"):GetBool()
+    local pelspread = self:GetValue("ShotgunPelletSpread") > 0 and TacRP.ConVars["pelletspread"]:GetBool()
     if pelspread then
         ring_spread = ring_spread - self:GetValue("ShotgunPelletSpread")
     else
@@ -434,7 +434,7 @@ function SWEP:AfterShotFunction(tr, dmg, range, penleft, alreadypenned, forced)
 
         local matpen = self:GetValue("Penetration")
 
-        if self:GetOwner():IsNPC() and !GetConVar("TacRP_npc_equality"):GetBool() then
+        if self:GetOwner():IsNPC() and !TacRP.ConVars["npc_equality"]:GetBool() then
             dmg:ScaleDamage(0.25)
         elseif !self:GetOwner():IsNPC() then
             local pendelta = matpen > 0 and penleft / matpen or 1
@@ -592,7 +592,7 @@ function SWEP:GetSpread(baseline)
     if baseline then return spread end
 
     local hippenalty = self:GetValue("HipFireSpreadPenalty")
-    -- if GetConVar("tacrp_sway"):GetBool() then
+    -- if TacRP.ConVars["sway"]:GetBool() then
     --     hippenalty = hippenalty / (1 + math.Clamp(self:GetBaseValue("Sway"), 0, 3))
     -- end
 

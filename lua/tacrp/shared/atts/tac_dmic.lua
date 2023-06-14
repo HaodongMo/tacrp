@@ -14,7 +14,7 @@ ATT.CanToggle = true
 
 ATT.TacticalName = "Radar"
 
-local scantime = GetConVar("tacrp_att_radartime")
+local scantime = TacRP.ConVars["att_radartime"]
 local lastradar = 0
 local cache_lastradarpositions
 local mat_radar = Material("tacrp/hud/radar.png", "smooth")
@@ -68,7 +68,7 @@ function ATT.TacticalDraw(self)
         lastradar = CurTime()
         cache_lastradarpositions = radarpositions
 
-        if !GetConVar("tacrp_radar_quiet"):GetBool() then
+        if !TacRP.ConVars["radar_quiet"]:GetBool() then
             LocalPlayer():EmitSound("plats/elevbell1.wav", 60, 95 + math.min(i, 3) * 5, 0.1 + math.min(i, 3) * 0.05)
         end
     end

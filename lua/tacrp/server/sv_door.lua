@@ -1,7 +1,7 @@
 function TacRP.DoorBust(ent, vel, attacker)
     if !string.find(ent:GetClass(), "door") then return end
-    local cvar = 1 --GetConVar("TacRP_doorbust"):GetInt()
-    local t = 300 -- GetConVar("TacRP_doorbust_time"):GetFloat()
+    local cvar = 1 --TacRP.ConVars["doorbust"]:GetInt()
+    local t = 300 -- TacRP.ConVars["doorbust_time"]:GetFloat()
     if cvar == 0 or ent.TacRP_DoorBusted then return end
     ent.TacRP_DoorBusted = true
 

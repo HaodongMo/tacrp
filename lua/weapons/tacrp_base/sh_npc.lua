@@ -156,7 +156,7 @@ function SWEP:NPC_Initialize()
     if CLIENT then return end
     // auto attachment
 
-    if GetConVar("TacRP_npc_atts"):GetBool() then
+    if TacRP.ConVars["npc_atts"]:GetBool() then
         for i, slot in pairs(self.Attachments) do
             local atts = TacRP.GetAttsForCats(slot.Category or "")
 

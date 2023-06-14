@@ -67,7 +67,7 @@ function ENT:Initialize()
     end
 
     self.SpawnTime = CurTime()
-    if engine.ActiveGamemode() == "terrortown" and GetConVar("tacrp_ttt_magazine_dna"):GetBool() then
+    if engine.ActiveGamemode() == "terrortown" and TacRP.ConVars["ttt_magazine_dna"]:GetBool() then
         self.FadeTime = 600
         if SERVER then
             self.fingerprints = {}

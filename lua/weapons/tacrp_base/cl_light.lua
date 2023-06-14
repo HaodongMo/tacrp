@@ -205,7 +205,7 @@ function SWEP:DrawFlashlightGlare(pos, ang, strength, dot)
     local diff = EyePos() - pos
     local wep = LocalPlayer():GetActiveWeapon()
     --local dot = math.Clamp((-ang:Forward():Dot(EyeAngles():Forward()) - 0.707) / (1 - 0.707), 0, 1) ^ 2
-    if GetConVar("tacrp_flashlight_blind"):GetBool() then
+    if TacRP.ConVars["flashlight_blind"]:GetBool() then
         dot = dot ^ 4
         local tr = util.QuickTrace(pos, diff, {self:GetOwner(), LocalPlayer()})
         local s = math.Clamp(1 - diff:Length() / 328, 0, 1) ^ 1 * dot * 2000 * math.Rand(0.95, 1.05)
@@ -270,7 +270,7 @@ local glintmat = Material("effects/blueflare1")
 local glintmat2 = Material("tacrp/scope_flare")
 function SWEP:DoScopeGlint()
     --if self:GetOwner() == LocalPlayer() then return end
-    if !GetConVar("tacrp_glint"):GetBool() then return end
+    if !TacRP.ConVars["glint"]:GetBool() then return end
     if !self:GetValue("ScopeOverlay") then return end
     local src, dir = self:GetTracerOrigin(), self:GetShootDir()
 

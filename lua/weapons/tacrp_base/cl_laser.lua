@@ -1,52 +1,6 @@
 local lasermat = Material("effects/laser1")
 local flaremat = Material("effects/whiteflare")
 
--- stolen from gmod wiki
-local function FormatViewModelAttachment(nFOV, vOrigin, bFrom)
-    local vEyePos = EyePos()
-    local aEyesRot = EyeAngles()
-    local vOffset = vOrigin - vEyePos
-    local vForward = aEyesRot:Forward()
-    local nViewX = math.tan(nFOV * math.pi / 360)
-
-    if nViewX == 0 then
-        vForward:Mul(vForward:Dot(vOffset))
-        vEyePos:Add(vForward)
-
-        return vEyePos
-    end
-
-    -- FIXME: LocalPlayer():GetFOV() should be replaced with EyeFOV() when it's binded
-    local nWorldX = math.tan(LocalPlayer():GetFOV() * math.pi / 360)
-
-    if nWorldX == 0 then
-        vForward:Mul(vForward:Dot(vOffset))
-        vEyePos:Add(vForward)
-
-        return vEyePos
-    end
-
-    local vRight = aEyesRot:Right()
-    local vUp = aEyesRot:Up()
-
-    if bFrom then
-        local nFactor = nWorldX / nViewX
-        vRight:Mul(vRight:Dot(vOffset) * nFactor)
-        vUp:Mul(vUp:Dot(vOffset) * nFactor)
-    else
-        local nFactor = nViewX / nWorldX
-        vRight:Mul(vRight:Dot(vOffset) * nFactor)
-        vUp:Mul(vUp:Dot(vOffset) * nFactor)
-    end
-
-    vForward:Mul(vForward:Dot(vOffset))
-    vEyePos:Add(vRight)
-    vEyePos:Add(vUp)
-    vEyePos:Add(vForward)
-
-    return vEyePos
-end
-
 function SWEP:DrawLaser(pos, ang, strength, thirdperson)
     strength = strength or 1
 
@@ -56,9 +10,9 @@ function SWEP:DrawLaser(pos, ang, strength, thirdperson)
 
     local delta = behavior and 1 or 0
 
-    if IsValid(vm) and GetConVar("tacrp_true_laser"):GetBool() and (self:GetBlindFireMode() <= 1) and !self:GetCustomize() and !behavior then
+    if IsValid(vm) and TacRP.ConVars["true_laser"]:GetBool() and (self:GetBlindFireMode() <= 1) and !self:GetCustomize() and !behavior then
         local d1 = 1
-        if GetConVar("tacrp_laser_beam"):GetBool() then
+        if TacRP.ConVars["laser_beam"]:GetBool() then
             d1 = math.min((CurTime() - self:GetNextPrimaryFire()) / 2, (CurTime() - self:GetNextSecondaryFire()) / 2)
         elseif self:GetValue("RPM") < 120 then
             d1 = math.min(d1, (CurTime() - self:GetNextPrimaryFire()) / 0.5)
@@ -91,7 +45,7 @@ function SWEP:DrawLaser(pos, ang, strength, thirdperson)
 
     if tr.StartSolid then return end
     local laser_pos = tr.HitPos + tr.HitNormal
-    local adjusted_pos = thirdperson and laser_pos or FormatViewModelAttachment(self.ViewModelFOV, laser_pos, false)
+    local adjusted_pos = thirdperson and laser_pos or TacRP.FormatViewModelAttachment(self.ViewModelFOV, laser_pos, false)
     laser_pos = LerpVector(delta, laser_pos, adjusted_pos)
 
     if behavior then
@@ -99,7 +53,7 @@ function SWEP:DrawLaser(pos, ang, strength, thirdperson)
         pos = pos - (ang:Forward() * 256)
     end
 
-    if GetConVar("tacrp_laser_beam"):GetBool() then
+    if TacRP.ConVars["laser_beam"]:GetBool() then
         local width = math.Rand(0.1, 0.2) * strength
         render.SetMaterial(lasermat)
         render.DrawBeam(pos, laser_pos, width * 0.3, 0, 1, Color(200, 200, 200))

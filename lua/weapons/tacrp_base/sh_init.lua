@@ -124,7 +124,7 @@ function SWEP:Holster(wep)
 
     if self:GetHolsterTime() > CurTime() then return false end -- or self:GetPrimedGrenade()
 
-    if !GetConVar("TacRP_holster"):GetBool() or (self:GetHolsterTime() != 0 and self:GetHolsterTime() <= CurTime()) or !IsValid(wep) then
+    if !TacRP.ConVars["holster"]:GetBool() or (self:GetHolsterTime() != 0 and self:GetHolsterTime() <= CurTime()) or !IsValid(wep) then
         -- Do the final holster request
         -- Picking up props try to switch to NULL, by the way
         self:SetHolsterTime(0)
@@ -221,7 +221,7 @@ function SWEP:ClientInitialize()
         self:CallOnClient("ClientInitialize")
     end
 
-    if !LocalPlayer().TacRPGreet and !GetConVar("tacrp_shutup"):GetBool() then
+    if !LocalPlayer().TacRPGreet and !TacRP.ConVars["shutup"]:GetBool() then
         LocalPlayer().TacRPGreet = true
         -- LocalPlayer():PrintMessage(HUD_PRINTTALK, "Check Q menu -> Options/Tactical RP/Control Guide to see the controls!")
         if !input.LookupBinding("grenade1") and !input.LookupBinding("grenade2") then
@@ -263,7 +263,7 @@ function SWEP:SetBaseSettings()
     else
         self.Primary.ClipSize = self:GetCapacity()
         self.Primary.Ammo = self:GetValue("Ammo")
-        self.Primary.DefaultClip = math.ceil(self.Primary.ClipSize * GetConVar("tacrp_defaultammo"):GetFloat())
+        self.Primary.DefaultClip = math.ceil(self.Primary.ClipSize * TacRP.ConVars["defaultammo"]:GetFloat())
     end
 
     if SERVER and IsValid(self:GetOwner()) and self:GetOwner():IsPlayer() and self:GetCapacity() > 0 and self:Clip1() > self:GetCapacity() then
@@ -317,6 +317,6 @@ function SWEP:EquipAmmo(ply)
     local ammotype = self.Primary.Ammo
     if ammotype == "" then return end
 
-    local supplyamount = self.GaveDefaultAmmo and self:Clip1() or math.ceil(math.max(1, self.Primary.ClipSize) * GetConVar("tacrp_defaultammo"):GetFloat())
+    local supplyamount = self.GaveDefaultAmmo and self:Clip1() or math.ceil(math.max(1, self.Primary.ClipSize) * TacRP.ConVars["defaultammo"]:GetFloat())
     ply:GiveAmmo(supplyamount, ammotype)
 end

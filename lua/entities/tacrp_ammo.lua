@@ -80,7 +80,7 @@ function ENT:ApplyAmmo(ply)
             max = 1
         end
 
-        if GetConVar("tacrp_resupply_grenades"):GetBool() then
+        if TacRP.ConVars["resupply_grenades"]:GetBool() then
             local nade = wpn:GetGrenade()
 
             if nade.Ammo then

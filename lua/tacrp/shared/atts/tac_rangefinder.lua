@@ -33,7 +33,7 @@ function ATT.TacticalDraw(self)
 
         rawdist = (tr.HitPos - tr.StartPos):Length()
         local dist
-        if GetConVar("tacrp_metricunit"):GetBool() then
+        if TacRP.ConVars["metricunit"]:GetBool() then
             dist = math.min(math.Round(rawdist * TacRP.HUToM, 0), 99999)
             txt = tostring(dist) .. "m"
         else
@@ -41,14 +41,14 @@ function ATT.TacticalDraw(self)
             txt = tostring(dist) .. "HU"
         end
 
-        if GetConVar("tacrp_physbullet"):GetBool() then
+        if TacRP.ConVars["physbullet"]:GetBool() then
             -- Not totally accurate due to hitscan kicking in up close
             local t = math.Round(rawdist / self:GetValue("MuzzleVelocity"), 2)
             txt2 = tostring(math.Round(rawdist / self:GetValue("MuzzleVelocity"), 2)) .. "s"
             if t > 0 and t < 1 then txt2 = string.sub(txt2, 2) end
         else
             -- Not totally accurate due to hitscan kicking in up close
-            if !GetConVar("tacrp_metricunit"):GetBool() then
+            if !TacRP.ConVars["metricunit"]:GetBool() then
                 txt2 = tostring(math.min(math.Round(rawdist * TacRP.HUToM, 0), 99999)) .. "m"
             else
                 txt2 = tostring(math.min(math.Round(rawdist, 0), 99999)) .. "HU"
@@ -154,7 +154,7 @@ function ATT.TacticalCrosshair(self, x, y, spread, sway)
     surface.DrawLine(x - 16, y, x + 16, y)
     surface.DrawLine(x, y + 16, x, y - 16)
 
-    if !GetConVar("tacrp_physbullet"):GetBool() then return end
+    if !TacRP.ConVars["physbullet"]:GetBool() then return end
 
     if last_laze_time + laze_interval <= CurTime() then
         last_laze_time = CurTime()

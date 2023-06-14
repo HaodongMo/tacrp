@@ -33,12 +33,12 @@ end
 function ENT:GiveAtt(ply)
     if !self.AttToGive then return end
 
-    if GetConVar("TacRP_free_atts"):GetBool() then
+    if TacRP.ConVars["free_atts"]:GetBool() then
         ply:PrintMessage(HUD_PRINTTALK, "All attachments are free! This is not necessary!")
         return
     end
 
-    if GetConVar("TacRP_lock_atts"):GetBool() and TacRP:PlayerGetAtts(ply, self.AttToGive) > 0 then
+    if TacRP.ConVars["lock_atts"]:GetBool() and TacRP:PlayerGetAtts(ply, self.AttToGive) > 0 then
         ply:PrintMessage(HUD_PRINTTALK, "You already have this attachment!")
         return
     end

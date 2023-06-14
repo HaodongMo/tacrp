@@ -129,7 +129,7 @@ end
 TacRP.AreTheGrenadeAnimsReadyYet = true
 
 function TacRP.ShouldWeFunny()
-    local i = GetConVar("tacrp_funny_loudnoises"):GetInt()
+    local i = TacRP.ConVars["funny_loudnoises"]:GetInt()
     return i == 2 or (i == 1 and (os.date("%m-%d") == "04-01" or math.random() <= 0.01))
 end
 
@@ -140,7 +140,7 @@ TacRP.BALANCE_TTT = 2
 TacRP.BALANCE_PVE = 3
 
 function TacRP.GetBalanceMode()
-    local i = GetConVar("tacrp_balance"):GetInt()
+    local i = TacRP.ConVars["balance"]:GetInt()
     if i == TacRP.BALANCE_AUTO then
         if engine.ActiveGamemode() == "terrortown" then
             return TacRP.BALANCE_TTT

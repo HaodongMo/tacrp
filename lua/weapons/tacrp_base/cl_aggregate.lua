@@ -410,14 +410,14 @@ SWEP.StatGroups = {
             -- [50] free aim + sway (if both are disabled, score goes to other 2)
             local bonus = 50
             local freeaim_s = 1
-            if GetConVar("tacrp_freeaim"):GetBool() then
+            if TacRP.ConVars["freeaim"]:GetBool() then
                 if valfunc(self, "FreeAim") then
                     freeaim_s = math.Clamp(1 - (valfunc(self, "FreeAimMaxAngle") - 2) / 8, 0, 1) ^ 0.8
                 end
                 bonus = 0
             end
             local sway_s = 1
-            if GetConVar("tacrp_sway"):GetBool() then
+            if TacRP.ConVars["sway"]:GetBool() then
                 sway_s = math.Clamp(1 - (valfunc(self, "Sway") - 0.75) / 2.25, 0, 1)
                 bonus = 0
             end

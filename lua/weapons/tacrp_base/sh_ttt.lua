@@ -101,8 +101,8 @@ function SWEP:TTT_Init()
         self.fingerprints = {}
     end
 
-    local att_chance = GetConVar("tacrp_ttt_atts_random"):GetFloat()
-    local att_max = GetConVar("tacrp_ttt_atts_max"):GetFloat()
+    local att_chance = TacRP.ConVars["ttt_atts_random"]:GetFloat()
+    local att_max = TacRP.ConVars["ttt_atts_max"]:GetFloat()
     local added = 0
 
     if att_chance > 0 then
