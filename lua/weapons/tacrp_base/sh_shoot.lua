@@ -113,9 +113,9 @@ function SWEP:PrimaryAttack()
         end
 
         if self:GetValue("LastShot") then
-            if self:Clip1() == 0 then
+            if self:Clip1() == self:GetValue("AmmoPerShot") then
                 seq = seq .. "_lastshot"
-            elseif self:Clip1() == 1 then
+            elseif self:Clip1() == self:GetValue("AmmoPerShot") * 2 then
                 seq = seq .. "_second_2_lastshot"
             end
         end
