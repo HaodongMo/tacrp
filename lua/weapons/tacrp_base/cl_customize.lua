@@ -919,93 +919,189 @@ function SWEP:CreateCustomizeHUD()
 
     self.Attachments["BaseClass"] = nil
 
-    for slot, attslot in pairs(self.Attachments) do
-        local atts = TacRP.GetAttsForCats(attslot.Category or "")
+    if TacRP.ConVars["cust_legacy"]:GetBool() then
 
-        attachment_slots[slot] = {}
+        for slot, attslot in pairs(self.Attachments) do
+            local atts = TacRP.GetAttsForCats(attslot.Category or "")
 
-        local slot_name = vgui.Create("DPanel", bg)
-        slot_name:SetPos(airgap, offset + airgap - TacRP.SS(8) + ((slot - 1) * TacRP.SS(34 + 8)))
-        slot_name:SetSize(TacRP.SS(128), TacRP.SS(8))
-        slot_name.Paint = function(self2, w, h)
-            if !IsValid(self) then return end
+            attachment_slots[slot] = {}
 
-            local txt = TacRP:TryTranslate(attslot.PrintName or "Slot")
-            if txt then
-                surface.SetFont("TacRP_Myriad_Pro_8")
-                surface.SetTextColor(Color(255, 255, 255))
-                surface.SetTextPos(0, 0)
-                surface.DrawText(txt)
+            local slot_name = vgui.Create("DPanel", bg)
+            slot_name:SetPos(airgap, offset + airgap - TacRP.SS(8) + ((slot - 1) * TacRP.SS(34 + 8)))
+            slot_name:SetSize(TacRP.SS(128), TacRP.SS(8))
+            slot_name.Paint = function(self2, w, h)
+                if !IsValid(self) then return end
+
+                local txt = TacRP:TryTranslate(attslot.PrintName or "Slot")
+                if txt then
+                    surface.SetFont("TacRP_Myriad_Pro_8")
+                    surface.SetTextColor(Color(255, 255, 255))
+                    surface.SetTextPos(0, 0)
+                    surface.DrawText(txt)
+                end
+            end
+
+            table.sort(atts, function(a, b)
+                a = a or ""
+                b = b or ""
+
+                if a == "" or b == "" then return true end
+
+                local atttbl_a = TacRP.GetAttTable(a)
+                local atttbl_b = TacRP.GetAttTable(b)
+
+                local order_a = 0
+                local order_b = 0
+
+                order_a = atttbl_a.SortOrder or order_a
+                order_b = atttbl_b.SortOrder or order_b
+
+                if order_a == order_b then
+                    return (atttbl_a.PrintName or "") < (atttbl_b.PrintName or "")
+                end
+
+                return order_a < order_b
+            end)
+
+            local prosconspanel = vgui.Create("DPanel", bg)
+            prosconspanel:SetPos(airgap + ((table.Count(atts)) * TacRP.SS(34)), offset + airgap + ((slot - 1) * TacRP.SS(34 + 8)))
+            prosconspanel:SetSize(TacRP.SS(128), TacRP.SS(34))
+            prosconspanel.Paint = function(self2, w, h)
+                if !IsValid(self) then return end
+
+                local installed = attslot.Installed
+
+                if !installed then return end
+
+                local atttbl = TacRP.GetAttTable(installed)
+
+                local pros = atttbl.Pros or {}
+                local cons = atttbl.Cons or {}
+
+                local c = 0
+
+                for i, pro in pairs(pros) do
+                    surface.SetFont("TacRP_Myriad_Pro_8")
+                    surface.SetTextColor(Color(50, 255, 50))
+                    surface.SetTextPos(0, TacRP.SS(c * 8))
+                    surface.DrawText("+" .. TacRP:TryTranslate(pro))
+
+                    c = c + 1
+                end
+
+                for i, con in pairs(cons) do
+                    surface.SetFont("TacRP_Myriad_Pro_8")
+                    surface.SetTextColor(Color(255, 50, 50))
+                    surface.SetTextPos(0, TacRP.SS(c * 8))
+                    surface.DrawText("-" .. TacRP:TryTranslate(con))
+
+                    c = c + 1
+                end
+            end
+
+            for i, att in pairs(atts) do
+                local slot_panel = vgui.Create("TacRPAttSlot", bg)
+                table.insert(attachment_slots[slot], slot_panel)
+                slot_panel:SetSlot(slot)
+                slot_panel:SetShortName(att)
+                slot_panel:SetWeapon(self)
+                slot_panel:SetPos(airgap + ((i - 1) * TacRP.SS(34)), offset + airgap + ((slot - 1) * TacRP.SS(34 + 8)))
+                slot_panel:SetSize(TacRP.SS(32), TacRP.SS(32))
             end
         end
 
-        table.sort(atts, function(a, b)
-            a = a or ""
-            b = b or ""
+    else
 
-            if a == "" or b == "" then return true end
+        local rows = 1
+        local cnt = table.Count(self.Attachments)
+        if cnt > 5 then cnt = math.ceil(cnt / 2) rows = 2 end
+        local ph = TacRP.SS((42 + 6) * cnt)
 
-            local atttbl_a = TacRP.GetAttTable(a)
-            local atttbl_b = TacRP.GetAttTable(b)
+        local layout = vgui.Create("DIconLayout", bg)
+        layout:SetSize(TacRP.SS(32 * rows + 6 * (rows - 1)), ph)
+        layout:SetPos(airgap, scrh / 2 - ph / 2)
+        layout:SetSpaceX(TacRP.SS(6))
+        layout:SetSpaceY(TacRP.SS(6))
+        layout:SetLayoutDir(LEFT)
 
-            local order_a = 0
-            local order_b = 0
+        local scroll = vgui.Create("DScrollPanel", bg)
+        scroll:SetSize(TacRP.SS(36), scrh * 0.9)
+        scroll:SetPos(airgap * 2 + layout:GetWide(), scrh * 0.05)
+        scroll:SetVisible(false)
 
-            order_a = atttbl_a.SortOrder or order_a
-            order_b = atttbl_b.SortOrder or order_b
+        local slotlayout = vgui.Create("TacRPAttSlotLayout", scroll)
+        slotlayout:SetSize(TacRP.SS(36), scrh)
+        slotlayout:SetWeapon(self)
+        slotlayout:SetScroll(scroll)
+        slotlayout:SetSpaceY(TacRP.SS(4))
+        slotlayout:SetLayoutDir(TOP)
+        if self.LastCustomizeSlot then
+            slotlayout:SetSlot(self.LastCustomizeSlot)
+        end
+        -- slotlayout:Dock(FILL)
 
-            if order_a == order_b then
-                return (atttbl_a.PrintName or "") < (atttbl_b.PrintName or "")
+        for slot, attslot in pairs(self.Attachments) do
+            attachment_slots[slot] = {}
+
+            local slot_bg = vgui.Create("DPanel", layout)
+            slot_bg:SetSize(TacRP.SS(32), TacRP.SS(42))
+            slot_bg.Paint = function() end
+
+            local slot_icon = vgui.Create("TacRPAttSlot", slot_bg)
+            slot_icon:SetSlot(slot)
+            if (attslot.Installed or "") != "" then
+                slot_icon:SetShortName(attslot.Installed)
             end
+            slot_icon:SetWeapon(self)
+            slot_icon:SetIsMenu(true)
+            slot_icon:SetSlotLayout(slotlayout)
+            slot_icon:SetPos(0, TacRP.SS(10))
+            slot_icon:SetSize(TacRP.SS(32), TacRP.SS(32))
 
-            return order_a < order_b
+
+            local slot_name = vgui.Create("DPanel", slot_bg)
+            slot_name:SetSize(TacRP.SS(32), TacRP.SS(8))
+            slot_name.Paint = function(self2, w, h)
+                if !IsValid(self) then return end
+                local col_bg, col_corner, col_text = slot_icon:GetColors()
+
+                surface.SetDrawColor(col_bg)
+                surface.DrawRect(0, 0, w, h)
+                TacRP.DrawCorneredBox(0, 0, w, h, col_corner)
+
+                local txt = TacRP:TryTranslate(attslot.PrintName or "Slot")
+                if txt then
+                    draw.SimpleText(txt, "TacRP_Myriad_Pro_8", w / 2, h / 2, col_text, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+                end
+            end
+        end
+    end
+
+    local cvarbox = vgui.Create("DCheckBox", bg)
+    cvarbox:SetSize(TacRP.SS(8), TacRP.SS(8))
+    cvarbox:SetPos(airgap, scrh - TacRP.SS(10))
+    cvarbox:SetText("")
+    cvarbox:SetConVar("tacrp_cust_legacy")
+    function cvarbox.Paint(self2, w, h)
+        local c_bg, c_cnr, c_txt = TacRP.GetPanelColors(self2:IsHovered(), self2:GetChecked())
+        surface.SetDrawColor(c_bg)
+        surface.DrawRect(0, 0, w, h)
+        TacRP.DrawCorneredBox(0, 0, w, h, c_cnr)
+        if self2:GetChecked() then
+            draw.SimpleText("O", "TacRP_HD44780A00_5x8_4", w / 2, h / 2, c_txt, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+        end
+        local todo = DisableClipping(true)
+
+        draw.SimpleText("Legacy Menu", "TacRP_Myriad_Pro_8", w + TacRP.SS(2), h / 2, color_white, TEXT_ALIGN_LEFT, TEXT_ALIGN_CENTER)
+
+
+        DisableClipping(todo)
+    end
+    function cvarbox.DoClick(self2)
+        self2:Toggle()
+        timer.Simple(0, function()
+            self:CreateCustomizeHUD()
         end)
-
-        local prosconspanel = vgui.Create("DPanel", bg)
-        prosconspanel:SetPos(airgap + ((table.Count(atts)) * TacRP.SS(34)), offset + airgap + ((slot - 1) * TacRP.SS(34 + 8)))
-        prosconspanel:SetSize(TacRP.SS(128), TacRP.SS(34))
-        prosconspanel.Paint = function(self2, w, h)
-            if !IsValid(self) then return end
-
-            local installed = attslot.Installed
-
-            if !installed then return end
-
-            local atttbl = TacRP.GetAttTable(installed)
-
-            local pros = atttbl.Pros or {}
-            local cons = atttbl.Cons or {}
-
-            local c = 0
-
-            for i, pro in pairs(pros) do
-                surface.SetFont("TacRP_Myriad_Pro_8")
-                surface.SetTextColor(Color(50, 255, 50))
-                surface.SetTextPos(0, TacRP.SS(c * 8))
-                surface.DrawText("+" .. TacRP:TryTranslate(pro))
-
-                c = c + 1
-            end
-
-            for i, con in pairs(cons) do
-                surface.SetFont("TacRP_Myriad_Pro_8")
-                surface.SetTextColor(Color(255, 50, 50))
-                surface.SetTextPos(0, TacRP.SS(c * 8))
-                surface.DrawText("-" .. TacRP:TryTranslate(con))
-
-                c = c + 1
-            end
-        end
-
-        for i, att in pairs(atts) do
-            local slot_panel = vgui.Create("TacRPAttSlot", bg)
-            table.insert(attachment_slots[slot], slot_panel)
-            slot_panel:SetSlot(slot)
-            slot_panel:SetShortName(att)
-            slot_panel:SetWeapon(self)
-            slot_panel:SetPos(airgap + ((i - 1) * TacRP.SS(34)), offset + airgap + ((slot - 1) * TacRP.SS(34 + 8)))
-            slot_panel:SetSize(TacRP.SS(32), TacRP.SS(32))
-        end
     end
 end
 

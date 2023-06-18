@@ -3,6 +3,19 @@ AccessorFunc(PANEL, "ShortName", "ShortName", FORCE_STRING)
 AccessorFunc(PANEL, "Weapon", "Weapon")
 AccessorFunc(PANEL, "Slot", "Slot")
 
+AccessorFunc(PANEL, "IsMenu", "IsMenu")
+AccessorFunc(PANEL, "SlotLayout", "SlotLayout")
+
+function PANEL:GetInstalled()
+    if self:GetIsMenu() then
+        local installed = self:GetWeapon().Attachments[self:GetSlot()].Installed
+        if installed == "" then return nil end
+        return installed
+    else
+        return self:GetShortName()
+    end
+end
+
 function PANEL:Init()
 
     self:SetText("")
@@ -22,13 +35,21 @@ end
 
 function PANEL:PerformLayout(w, h)
 
-    local atttbl = TacRP.GetAttTable(self:GetShortName())
+    local atttbl = TacRP.GetAttTable(self:GetInstalled())
+    local empty = self:GetInstalled() == nil
 
     self.Icon:Dock(FILL)
-    self.Icon:SetMaterial(atttbl.Icon)
+
+    if empty then
+        self.Icon:SetVisible(false)
+        self.Title:SetText("N/A")
+    else
+        self.Icon:SetVisible(true)
+        self.Icon:SetMaterial(atttbl.Icon)
+        self.Title:SetText(TacRP:GetAttName(self:GetInstalled()))
+    end
 
     self.Title:SetSize(w, ScreenScale(6))
-    self.Title:SetText(TacRP:GetAttName(self:GetShortName()))
     self.Title:SetFont("TacRP_Myriad_Pro_6")
     self.Title:SizeToContentsX(8)
     if self.Title:GetWide() >= w then
@@ -36,29 +57,27 @@ function PANEL:PerformLayout(w, h)
     end
     self.Title:SetContentAlignment(2)
     self.Title:SetPos(w / 2 - self.Title:GetWide() / 2, h - ScreenScale(6))
+
 end
 
-function PANEL:Paint(w, h)
+function PANEL:GetColors()
 
     local wep = self:GetWeapon()
     local att = self:GetShortName()
     local atttbl = TacRP.GetAttTable(att)
-
+    local empty = self:GetInstalled() == nil
     local hover = self:IsHovered()
     local attached = IsValid(wep) and self:GetSlot()
             and wep.Attachments[self:GetSlot()].Installed == att
     self:SetDrawOnTop(hover)
+    local has = empty and 0 or TacRP:PlayerGetAtts(wep:GetOwner(), att)
 
     local col_bg = Color(0, 0, 0, 150)
     local col_corner = Color(255, 255, 255)
     local col_text = Color(255, 255, 255)
     local col_image = Color(255, 255, 255)
 
-    local has = TacRP:PlayerGetAtts(wep:GetOwner(), att)
-
-    local shownum = !TacRP.ConVars["lock_atts"]:GetBool() and !TacRP.ConVars["free_atts"]:GetBool() and !atttbl.Free
-
-    if attached then
+    if (attached and !self:GetIsMenu()) or (self:GetIsMenu() and self:GetSlotLayout():GetActiveSlot() == self:GetSlot()) then
         col_bg = Color(150, 150, 150, 150)
         col_corner = Color(50, 50, 255)
         col_text = Color(0, 0, 0)
@@ -70,7 +89,7 @@ function PANEL:Paint(w, h)
             col_image = Color(255, 255, 255)
         end
     else
-        if TacRP.ConVars["free_atts"]:GetBool() or has > 0 then
+        if self:GetIsMenu() or TacRP.ConVars["free_atts"]:GetBool() or has > 0 then
             if hover then
                 col_bg = Color(255, 255, 255)
                 col_corner = Color(0, 0, 0)
@@ -92,6 +111,25 @@ function PANEL:Paint(w, h)
         end
     end
 
+    return col_bg, col_corner, col_text, col_image
+end
+
+function PANEL:Paint(w, h)
+
+    local wep = self:GetWeapon()
+    local att = self:GetShortName()
+    local atttbl = TacRP.GetAttTable(att)
+    local empty = self:GetInstalled() == nil
+
+    if !IsValid(wep) then return end
+
+    local hover = self:IsHovered()
+    self:SetDrawOnTop(hover)
+    local has = empty and 0 or TacRP:PlayerGetAtts(wep:GetOwner(), att)
+
+    local col_bg, col_corner, col_text, col_image = self:GetColors()
+
+
     surface.SetDrawColor(col_bg)
     surface.DrawRect(0, 0, w, h)
     TacRP.DrawCorneredBox(0, 0, w, h, col_corner)
@@ -99,7 +137,7 @@ function PANEL:Paint(w, h)
     self.Title:SetTextColor(col_text)
     self.Icon:SetImageColor(col_image)
 
-    if shownum then
+    if !self:GetIsMenu() and !TacRP.ConVars["lock_atts"]:GetBool() and !TacRP.ConVars["free_atts"]:GetBool() and !atttbl.Free then
         local numtxt = has
         if !TacRP.ConVars["free_atts"]:GetBool() and engine.ActiveGamemode() == "terrortown" and TacRP.ConVars["ttt_bench_freeatts"]:GetBool() and TacRP.NearBench(self:GetOwner()) then
             numtxt = "*"
@@ -115,7 +153,7 @@ end
 
 function PANEL:PaintOver(w, h)
     -- thank u fesiug
-    if self:IsHovered() then
+    if self:IsHovered() and self:GetShortName() != nil then
 
         local wep = self:GetWeapon()
         local att = self:GetShortName()
@@ -234,6 +272,15 @@ function PANEL:PaintOver(w, h)
     end
 end
 
+function PANEL:Think()
+    if self:GetIsMenu() then
+        if self.LastInstalled and self.LastInstalled != self:GetInstalled() then
+            self:InvalidateLayout(true)
+        end
+        self.LastInstalled = self:GetInstalled()
+    end
+end
+
 function PANEL:DoClick()
     local wep = self:GetWeapon()
     if !IsValid(wep) or wep:GetOwner() != LocalPlayer() then return end
@@ -241,7 +288,13 @@ function PANEL:DoClick()
     local slot = self:GetSlot()
     local attslot = wep.Attachments[slot]
 
-    if attslot.Installed then
+    if self:GetIsMenu() then
+        if self:GetSlotLayout():GetActiveSlot() == slot then
+            self:GetSlotLayout():SetSlot(0)
+        else
+            self:GetSlotLayout():SetSlot(slot)
+        end
+    elseif attslot.Installed then
         if attslot.Installed == att then
             wep:Detach(slot)
         else

@@ -177,10 +177,28 @@ An additional benefit is that a lot of the attachments now use consistent wordin
 
 <h3>Changelist</h3>
 <ul>
-<li><b>Major Change:</b> PvE balance mode..
+<li><b>Major Change:</b> PvE balance mode.
 <li><b>Changed:</b> ConVars are now cached, which should increase performance.
 <li><b>Changed:</b> Hold type while aiming.
 <li><b>Changed:</b> Lasers now draw only a dot and not the beam. They are also more consistent.
+</ul>]],
+    },
+    {
+        Title = "Update 11",
+        Type = "Patch Notes",
+        Date = "2023-06-14",
+        Author = "8Z",
+        Major = false,
+        Summary = "New customization menu.",
+        Contents = [[<body style="font-family:'Myriad Pro';color:white;font-size:125%;">
+<p>The customization menu is getting a little cramped with all the tactical customization going on. The new UI should be way more concise, hiding all the options behind a click but still allowing you to see all your choices at a glance.</p>
+
+<p>If you're not a fan, the legacy menu option can be toggled back with the checkbox in the bottom left.</p>
+
+<h3>Changelist</h3>
+<ul>
+<li><b>Major Change:</b> Customization menu rework.
+<li><b>Fixed:</b> Akimbo pistols use last shot animation correctly.
 </ul>]],
     },
 }

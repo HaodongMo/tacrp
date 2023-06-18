@@ -561,6 +561,15 @@ local conVars = {
         min = 0,
         max = 1,
     },
+
+    {
+        name = "cust_legacy",
+        default = "0",
+        replicated = true,
+        min = 0,
+        max = 1,
+    },
+
 }
 
 TacRP.ConVars = {}
