@@ -52,6 +52,25 @@ function TacRP:TryTranslate(str)
     return TacRP:GetPhrase(str) or str
 end
 
+function TacRP:GetAttName(att, full)
+    local atttbl = TacRP.GetAttTable(att)
+    if atttbl == {} then return "INVALID ATT" end
+    if full then
+        return TacRP:GetPhrase("att." .. att .. ".name.full")
+                or TacRP:GetPhrase("att." .. att .. ".name")
+                or TacRP:GetPhrase(atttbl.FullName)
+                or TacRP:TryTranslate(atttbl.FullName or atttbl.PrintName)
+    else
+        return TacRP:GetPhrase("att." .. att .. ".name") or TacRP:TryTranslate(atttbl.PrintName)
+    end
+end
+
+function TacRP:GetAttDesc(att)
+    local atttbl = TacRP.GetAttTable(att)
+    if atttbl == {} then return "INVALID ATT" end
+    return TacRP:GetPhrase("att." .. att .. ".desc") or TacRP:TryTranslate(atttbl.Description)
+end
+
 -- client languages aren't loaded through lua anymore. use gmod's stock localization system instead
 
 function TacRP:LoadLanguage(lang)

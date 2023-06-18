@@ -16,6 +16,13 @@ for _, v in pairs(file.Find(searchdir .. "client/*", "LUA")) do
     end
 end
 
+for _, v in pairs(file.Find(searchdir .. "client/vgui/*", "LUA")) do
+    AddCSLuaFile(searchdir .. "client/vgui/" .. v)
+    if CLIENT then
+        include(searchdir .. "client/vgui/" .. v)
+    end
+end
+
 if SERVER or game.SinglePlayer() then
     for _, v in pairs(file.Find(searchdir .. "server/*", "LUA")) do
         include(searchdir .. "server/" .. v)
