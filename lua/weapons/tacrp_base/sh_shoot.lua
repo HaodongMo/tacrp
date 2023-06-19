@@ -60,7 +60,7 @@ function SWEP:PrimaryAttack()
     if util.SharedRandom("tacRP_shootChance", 0, 1) <= self:GetJamChance(false) then
         local ret = self:RunHook("Hook_PreJam")
         if ret ~= true then
-            self:TakePrimaryAmmo(self:GetValue("AmmoPerShot"))
+            -- self:TakePrimaryAmmo(self:GetValue("AmmoPerShot"))
             if self:GetBurstCount() == 0 then -- dryfire anim is snapping so don't interrupt fire anim for it
                 self.Primary.Automatic = false
                 if self:GetBlindFire() then

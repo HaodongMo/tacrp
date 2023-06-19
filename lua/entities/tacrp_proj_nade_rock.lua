@@ -271,7 +271,7 @@ function ENT:PhysicsCollide(data, collider)
         if self:GetModel() != self.Model then
             dmg:ScaleDamage(2)
         end
-        dmg:SetDamageType(DMG_CRUSH)
+        dmg:SetDamageType(DMG_CRUSH + DMG_CLUB)
         dmg:SetDamageForce(data.OurOldVelocity)
         dmg:SetDamagePosition(data.HitPos)
         data.HitEntity:TakeDamageInfo(dmg)

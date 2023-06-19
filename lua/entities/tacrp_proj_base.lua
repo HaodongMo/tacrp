@@ -28,12 +28,16 @@ ENT.RemoteFuse = false // allow this projectile to be triggered by remote detona
 ENT.ImpactFuse = false // projectile explodes on impact.
 ENT.StickyFuse = false // projectile becomes timed after sticking.
 
+ENT.RemoveOnImpact = false
 ENT.ExplodeOnImpact = false
 ENT.ExplodeOnDamage = false // projectile explodes when it takes damage.
 ENT.ExplodeUnderwater = false // projectile explodes when it enters water
 
 ENT.Defusable = false // press E on the projectile to defuse it
 ENT.DefuseOnDamage = false
+
+ENT.ImpactDamage = 25
+ENT.ImpactDamageSpeed = 1000
 
 ENT.Delay = 5 // after being triggered and this amount of time has passed, the projectile will explode.
 
@@ -46,14 +50,20 @@ ENT.AudioLoop = nil
 
 ENT.BounceSounds = nil
 
+ENT.CollisionSphere = nil
+
 function ENT:Initialize()
     if SERVER then
         self:SetModel(self.Model)
         self:SetMaterial(self.Material or "")
-
-        self:PhysicsInit(SOLID_VPHYSICS)
+        if self.CollisionSphere then
+            self:PhysicsInitSphere(self.CollisionSphere)
+        else
+            self:PhysicsInit(SOLID_VPHYSICS)
+        end
         self:SetMoveType(MOVETYPE_VPHYSICS)
         self:SetSolid(SOLID_VPHYSICS)
+
         self:SetCollisionGroup(COLLISION_GROUP_PROJECTILE)
         if self.Defusable then
             self:SetUseType(SIMPLE_USE)
@@ -147,12 +157,12 @@ function ENT:PhysicsCollide(data, collider)
             self:SetPos(data.HitPos)
             self:PreDetonate()
         end
-    elseif IsValid(data.HitEntity) and (engine.ActiveGamemode() != "terrortown" or !data.HitEntity:IsPlayer()) then
+    elseif self.ImpactDamage > 0 and IsValid(data.HitEntity) and (engine.ActiveGamemode() != "terrortown" or !data.HitEntity:IsPlayer()) then
         local dmg = DamageInfo()
         dmg:SetAttacker(IsValid(self:GetOwner()) and self:GetOwner() or self.Attacker)
         dmg:SetInflictor(self)
-        dmg:SetDamage(Lerp((data.OurOldVelocity:Length() - 600) / 400, 1, 10))
-        dmg:SetDamageType(DMG_CRUSH)
+        dmg:SetDamage(Lerp((data.OurOldVelocity:Length() - 0.6 * self.ImpactDamageSpeed) / 0.4 * self.ImpactDamageSpeed, self.ImpactDamage / 5, self.ImpactDamage))
+        dmg:SetDamageType(DMG_CRUSH + DMG_CLUB)
         dmg:SetDamageForce(data.OurOldVelocity)
         dmg:SetDamagePosition(data.HitPos)
         data.HitEntity:TakeDamageInfo(dmg)
@@ -304,3 +314,10 @@ function ENT:Draw()
         render.DrawSprite(self:GetPos() + (self:GetAngles():Forward() * -16), math.Rand(200, 250), math.Rand(200, 250), self.FlareColor)
     end
 end
+
+hook.Add("EntityTakeDamage", "tacrp_proj_collision", function(ent, dmginfo)
+    -- print(dmginfo:GetInflictor(), dmginfo:GetDamage(), dmginfo:GetDamageType() == DMG_CRUSH)
+    if IsValid(dmginfo:GetInflictor())
+            and scripted_ents.IsBasedOn(dmginfo:GetInflictor():GetClass(), "tacrp_proj_base")
+            and dmginfo:GetDamageType() == DMG_CRUSH then return true end
+end)
