@@ -166,6 +166,8 @@ function ENT:PhysicsCollide(data, collider)
         dmg:SetDamageForce(data.OurOldVelocity)
         dmg:SetDamagePosition(data.HitPos)
         data.HitEntity:TakeDamageInfo(dmg)
+    elseif !self.ImpactFuse then
+        self:Impact(data, collider)
     end
 
     if self.Sticky then
