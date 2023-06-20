@@ -109,8 +109,8 @@ SWEP.Spread = 0.01
 SWEP.ShootTimeMult = 0.5
 
 SWEP.RecoilPerShot = 1
-SWEP.RecoilMaximum = 35
-SWEP.RecoilResetTime = 0.175
+SWEP.RecoilMaximum = 25
+SWEP.RecoilResetTime = 0.15
 SWEP.RecoilDissipationRate = 35
 SWEP.RecoilFirstShotMult = 2 // multiplier for the first shot's recoil amount
 
