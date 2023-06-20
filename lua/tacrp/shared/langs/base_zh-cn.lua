@@ -213,6 +213,8 @@ L["att.procon.auto"] = "全自动射击"
 L["att.procon.burst"] = "三连发射击"
 L["att.procon.semi"] = "半自动射击"
 L["att.procon.autoburst"] = "全自动三连发"
+L["att.procon.explosive"] = "爆炸效果"
+L["att.procon.reliability"] = "可靠度"
 
 L["att.sight.1"] = "1倍缩放"
 L["att.sight.1.25"] = "1.25倍缩放"
