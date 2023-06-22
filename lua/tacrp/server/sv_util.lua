@@ -1,3 +1,5 @@
+if CLIENT then return end -- workaround
+
 function TacRP.Flashbang(ent, pos, radius, time_max, time_min, time_stunadd)
     time_stunadd = time_stunadd or 0.5
     for _, k in ipairs(ents.FindInSphere(pos, radius)) do

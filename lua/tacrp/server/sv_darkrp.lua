@@ -1,3 +1,6 @@
+if CLIENT then return end -- workaround
+
+
 util.AddNetworkString("tacrp_spawnedwepatts")
 
 hook.Add("onDarkRPWeaponDropped", "TacRP", function(ply, ent, wep)

@@ -1,3 +1,5 @@
+if CLIENT then return end -- workaround
+
 TacRP.ShieldPropPile    = {} -- { {Model = NULL, Weapon = NULL} }
 
 local function SV_TacRP_CollectGarbage()

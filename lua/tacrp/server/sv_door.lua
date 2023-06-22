@@ -1,3 +1,5 @@
+if CLIENT then return end -- workaround
+
 function TacRP.DoorBust(ent, vel, attacker)
     if !string.find(ent:GetClass(), "door") then return end
     local cvar = 1 --TacRP.ConVars["doorbust"]:GetInt()
