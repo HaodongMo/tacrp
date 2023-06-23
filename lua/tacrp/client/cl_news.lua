@@ -191,7 +191,7 @@ An additional benefit is that a lot of the attachments now use consistent wordin
         Major = false,
         Summary = "New customization menu.",
         Contents = [[<body style="font-family:'Myriad Pro';color:white;font-size:125%;">
-<p>The customization menu is getting a little cramped with all the tactical customization going on. The new UI should be way more concise, hiding all the options behind a click but still allowing you to see all your choices at a glance.</p>
+<p>The customization menu is getting a little cramped with all the tactical customization going on. The new UI should be way more concise, hiding all the options behind a click but still allowing you to see all your current choices at a glance.</p>
 
 <p>If you're not a fan, the legacy menu option can be toggled back with the checkbox in the bottom left.</p>
 
@@ -200,7 +200,11 @@ An additional benefit is that a lot of the attachments now use consistent wordin
 <li><b>Major Change:</b> Customization menu rework.
 <li><b>Added:</b> Lightweight Silencer. Reduces spread, lower penalty compared to the default silencer (now Tactical Silencer).
 <li><b>Rebalance:</b> Tactical Silencer reduces more recoil kick (15%) and also reduces recoil spread penalty (5%).
+<li><b>Rebalance:</b> Akimbo trigger has weaker RPM penalty (10%).
+<li><b>Rebalance:</b> Reduced recoil spread on several assault rifles.
+<li><b>Fixed:</b> Adjusted silencer positions on some guns.
 <li><b>Fixed:</b> Akimbo pistols use last shot animation correctly.
+<li><b>Fixed:</b> Pre-emptively fix an upcoming issue in the June 2023 update related to loading server files in Singleplayer.
 </ul>]],
     },
 }

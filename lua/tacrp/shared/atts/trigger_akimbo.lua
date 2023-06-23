@@ -11,7 +11,6 @@ ATT.Category = "trigger_akimbo" // can be "string" or {"list", "of", "strings"}
 
 ATT.SortOrder = 0.5
 
-ATT.Override_Firemodes = {2, -2}
-ATT.Mult_RPM = 600 / 700
+ATT.Override_Firemodes = {2}
+ATT.Mult_RPM = 0.9
 ATT.Mult_RecoilKick = 0.75
-ATT.Mult_RecoilVisualKick = 1.25
