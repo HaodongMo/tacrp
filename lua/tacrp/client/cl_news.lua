@@ -198,6 +198,8 @@ An additional benefit is that a lot of the attachments now use consistent wordin
 <h3>Changelist</h3>
 <ul>
 <li><b>Major Change:</b> Customization menu rework.
+<li><b>Added:</b> Lightweight Silencer. Reduces spread, lower penalty compared to the default silencer (now Tactical Silencer).
+<li><b>Rebalance:</b> Tactical Silencer reduces more recoil kick (15%) and also reduces recoil spread penalty (5%).
 <li><b>Fixed:</b> Akimbo pistols use last shot animation correctly.
 </ul>]],
     },

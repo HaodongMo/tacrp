@@ -14,6 +14,7 @@ ATT.SortOrder = 4
 
 ATT.Add_Vol_Shoot = -20
 ATT.Mult_RecoilKick = 0.85
+ATT.Mult_RecoilSpreadPenalty = 0.95
 ATT.Mult_Range_Max = 0.75
 ATT.Mult_Range_Min = 0.75
 ATT.Mult_MuzzleVelocity = 0.85
