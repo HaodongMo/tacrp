@@ -186,23 +186,26 @@ An additional benefit is that a lot of the attachments now use consistent wordin
     {
         Title = "Update 11",
         Type = "Patch Notes",
-        Date = "2023-06-14",
+        Date = "2023-06-24",
         Author = "8Z",
         Major = false,
-        Summary = "New customization menu.",
+        Summary = "New customization menu, and more suppressors!",
         Contents = [[<body style="font-family:'Myriad Pro';color:white;font-size:125%;">
 <p>The customization menu is getting a little cramped with all the tactical customization going on. The new UI should be way more concise, hiding all the options behind a click but still allowing you to see all your current choices at a glance.</p>
 
 <p>If you're not a fan, the legacy menu option can be toggled back with the checkbox in the bottom left.</p>
 
+<p>Besides that, there's also 2 more suppressor options to make the Muzzle slot a little less lonely. Also, they're suppressors and not silencers now.</p>
+
 <h3>Changelist</h3>
 <ul>
 <li><b>Major Change:</b> Customization menu rework.
-<li><b>Added:</b> Lightweight Suppressor. Reduces spread, lower penalty compared to the Silencer (now Tactical Suppressor).
+<li><b>Added:</b> Compact Suppressor. Reduces spread, lower penalty compared to the Silencer (now Tactical Suppressor).
 <li><b>Added:</b> Weighted Suppressor. Increases range and reduces recoil, but worsens ADS and sprint time.
 <li><b>Rebalance:</b> Tactical Suppressor also reduces recoil spread penalty (5%).
 <li><b>Rebalance:</b> Akimbo trigger has weaker RPM penalty (10%).
 <li><b>Rebalance:</b> Reduced recoil spread on several assault rifles.
+<li><b>Changed:</b> Adjusted shooting volume on some weapons for consistency. Pistol caliber weapons have ~110dB, carbines ~120dB, and the rest are ~130dB.
 <li><b>Fixed:</b> Adjusted suppressor positions on some guns.
 <li><b>Fixed:</b> Akimbo pistols use last shot animation correctly.
 <li><b>Fixed:</b> Pre-emptively fix an upcoming issue in the June 2023 update related to loading server files in Singleplayer.

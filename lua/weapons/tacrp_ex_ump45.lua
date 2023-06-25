@@ -186,7 +186,7 @@ local path2 = "tacrp_extras/ump45/ump45_"
 SWEP.Sound_Shoot = "^" .. path2 .. "1.wav"
 SWEP.Sound_Shoot_Silenced = "TacRP/weapons/superv/fire_silenced-1.wav"
 
-SWEP.Vol_Shoot = 130
+SWEP.Vol_Shoot = 110
 SWEP.ShootPitchVariance = 2.5 // amount to vary pitch by each shot
 
 // effects

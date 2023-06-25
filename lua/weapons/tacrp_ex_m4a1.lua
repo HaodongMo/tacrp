@@ -188,7 +188,7 @@ local path2 = "tacrp_extras/m4a1/m4a1_"
 SWEP.Sound_Shoot = "^" .. path2 .. "fire-1.wav"
 SWEP.Sound_Shoot_Silenced = path2 .. "fire_silenced-1.wav"
 
-SWEP.Vol_Shoot = 130
+SWEP.Vol_Shoot = 120
 SWEP.ShootPitchVariance = 2.5 // amount to vary pitch by each shot
 
 // effects
