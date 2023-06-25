@@ -1,7 +1,7 @@
 ATT.PrintName = "C. Suppressor"
 ATT.FullName = "Compact Suppressor"
 ATT.Icon = Material("entities/tacrp_att_muzz_supp_compact.png", "mips smooth")
-ATT.Description = "Muzzle device reducing spread and audible report with reduced penalty."
+ATT.Description = "Short suppressor improving accuracy with low impact to effective range."
 ATT.Pros = {"stat.vol_shoot", "stat.spread"}
 ATT.Cons = {"stat.range", "stat.muzzlevelocity"}
 

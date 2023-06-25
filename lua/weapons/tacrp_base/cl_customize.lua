@@ -615,7 +615,7 @@ function SWEP:CreateCustomizeHUD()
                 if stat_curr == stat_base then
                     diff = ""
                 else
-                    diff = math.Round((stat_curr / stat_base - 1) * 100, 1)
+                    diff = math.Round((stat_curr / stat_base - 1) * 100)
                     if diff > 0 then
                         diff = "+" .. tostring(diff) .. "%"
                     else

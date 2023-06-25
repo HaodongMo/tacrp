@@ -1,8 +1,8 @@
 ATT.PrintName = "T. Suppressor"
 ATT.FullName = "Tactical Suppressor"
 ATT.Icon = Material("entities/tacrp_att_muzz_silencer.png", "mips smooth")
-ATT.Description = "Muzzle device that reduces audible report and recoil."
-ATT.Pros = {"stat.vol_shoot", "stat.recoilkick", "stat.recoilspread"}
+ATT.Description = "Balanced suppressor that reduces recoil and effective range."
+ATT.Pros = {"stat.vol_shoot", "stat.recoil"}
 ATT.Cons = {"stat.range", "stat.muzzlevelocity"}
 
 ATT.Model = "models/weapons/tacint/addons/silencer.mdl"
