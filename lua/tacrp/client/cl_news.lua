@@ -206,6 +206,7 @@ An additional benefit is that a lot of the attachments now use consistent wordin
 <li><b>Rebalance:</b> Tactical Suppressor also reduces recoil spread penalty (5%).
 <li><b>Rebalance:</b> Akimbo trigger has weaker RPM penalty (10%).
 <li><b>Rebalance:</b> Reduced recoil spread on several assault rifles.
+<li><b>Rebalance:</b> Reduced recoil on the RPG-7 drastically.
 <li><b>Changed:</b> Adjusted shooting volume on some weapons for consistency. Pistol caliber weapons have ~110dB, carbines ~120dB, and the rest are ~130dB.
 <li><b>Changed:</b> Stat differences are now rounded to the whole percent (due to rounding errors in the values, the extra precision is meaningless).
 <li><b>Fixed:</b> Adjusted suppressor positions on some guns.
