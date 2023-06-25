@@ -7,7 +7,7 @@ AccessorFunc(PANEL, "IsMenu", "IsMenu")
 AccessorFunc(PANEL, "SlotLayout", "SlotLayout")
 
 function PANEL:GetInstalled()
-    if self:GetIsMenu() then
+    if self:GetIsMenu() and IsValid(self:GetWeapon()) and self:GetWeapon().Attachments then
         local installed = self:GetWeapon().Attachments[self:GetSlot()].Installed
         if installed == "" then return nil end
         return installed
