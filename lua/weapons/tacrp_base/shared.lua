@@ -398,6 +398,7 @@ SWEP.Primary.DefaultClip = 0
 SWEP.Secondary.Automatic = true
 SWEP.Secondary.ClipSize = -1
 SWEP.Secondary.Ammo = ""
+SWEP.Secondary.DefaultClip = 0
 
 SWEP.GaveDefaultAmmo = false
 

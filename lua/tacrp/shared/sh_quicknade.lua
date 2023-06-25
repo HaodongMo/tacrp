@@ -8,6 +8,7 @@ TacRP.QuickNades = {
         Model = "models/weapons/tacint/v_quicknade_frag.mdl",
         Spoon = true,
         Icon = Material("TacRP/grenades/frag.png", "mips smooth"),
+        -- Texture = "tacrp/grenades/frag",
         CanSetImpact = true,
 
         FullName = "Frag Grenade",
@@ -26,6 +27,7 @@ TacRP.QuickNades = {
         Model = "models/weapons/tacint/v_quicknade_flashbang.mdl",
         Spoon = true,
         Icon = Material("TacRP/grenades/flashbang.png", "mips smooth"),
+        Texture = "tacrp/grenades/flashbang",
         CanSetImpact = true,
 
         FullName = "Flashbang",
@@ -43,6 +45,7 @@ TacRP.QuickNades = {
         Model = "models/weapons/tacint/v_quicknade_smoke.mdl",
         Spoon = true,
         Icon = Material("TacRP/grenades/smoke.png", "mips smooth"),
+        Texture = "tacrp/grenades/smoke",
         CanSetImpact = true,
 
         FullName = "Smoke Grenade",
@@ -61,6 +64,7 @@ TacRP.QuickNades = {
         Spoon = true,
         Material = "models/tacint/weapons/v_models/smoke/gas-1",
         Icon = Material("TacRP/grenades/gas.png", "mips smooth"),
+        Texture = "tacrp/grenades/gas",
         CanSetImpact = true,
 
         FullName = "CS Gas Grenade",
@@ -79,6 +83,7 @@ TacRP.QuickNades = {
         Spoon = true,
         Material = "models/tacint/weapons/v_models/smoke/thermite-1",
         Icon = Material("TacRP/grenades/thermite.png", "mips smooth"),
+        Texture = "tacrp/grenades/thermite",
         CanSetImpact = true,
 
         FullName = "Thermite Grenade",
@@ -99,6 +104,7 @@ TacRP.QuickNades = {
         Secret = true,
         SecretWeapon = "tacrp_c4_detonator",
         Icon = Material("TacRP/grenades/c4.png", "mips smooth"),
+        Texture = "tacrp/grenades/c4",
 
         FullName = "C4 Charge",
         DetType = "Remote",
@@ -117,6 +123,8 @@ TacRP.QuickNades = {
         Secret = true,
         AdminOnly = true,
         Icon = Material("TacRP/grenades/nuke.png", "mips smooth"),
+        Texture = "tacrp/grenades/nuke",
+
         NoSounds = false,
         PullSound = "tacrp/weapons/grenade/deploy-1.wav",
 
@@ -137,6 +145,7 @@ TacRP.QuickNades = {
         OverhandOnly = true,
         Spoon = false,
         Icon = Material("TacRP/grenades/breach.png", "mips smooth"),
+        Texture = "tacrp/grenades/breach",
 
         FullName = "Breaching Charge",
         DetType = "Timed - 2 seconds OR Remote",
@@ -155,6 +164,7 @@ TacRP.QuickNades = {
         Spoon = false,
         NoSounds = true,
         Icon = Material("TacRP/grenades/rock.png", "mips smooth"),
+        Texture = "tacrp/grenades/rock",
         RequireStat = "ThrowRocks",
 
         FullName = "Rock",
@@ -196,6 +206,7 @@ TacRP.QuickNades = {
         Model = "models/weapons/tacint/v_quicknade_smoke.mdl",
         Spoon = false,
         Icon = Material("TacRP/grenades/smoke.png", "mips smooth"),
+        Texture = "tacrp/grenades/smoke",
 
         Singleton = true,
         TTTTimer = 2,
@@ -214,6 +225,7 @@ TacRP.QuickNades = {
         Model = "models/weapons/tacint/v_quicknade_frag.mdl",
         Spoon = false,
         Icon = Material("TacRP/grenades/frag.png", "mips smooth"),
+        Texture = "tacrp/grenades/frag",
 
         Singleton = true,
         TTTTimer = 3,
@@ -233,6 +245,7 @@ TacRP.QuickNades = {
         Material = "models/tacint/weapons/v_models/smoke/thermite-1",
         Spoon = false,
         Icon = Material("TacRP/grenades/thermite.png", "mips smooth"),
+        Texture = "tacrp/grenades/thermite",
 
         Singleton = true,
         TTTTimer = 3,

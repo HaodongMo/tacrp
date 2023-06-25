@@ -216,6 +216,7 @@ function SWEP:GetNextGrenade(ind)
 end
 
 function SWEP:SelectGrenade(index, requireammo)
+    if !self:GetValue("CanQuickNade") then return end
     if !IsFirstTimePredicted() then return end
     if self:GetPrimedGrenade() then return end
 
@@ -237,14 +238,15 @@ function SWEP:SelectGrenade(index, requireammo)
         ind = TacRP.QuickNades_Count
     end
 
-    if self:CheckGrenade(ind, requireammo) then
-        self:GetOwner():SetNWInt("ti_nade", ind)
-    else
+    if !self:CheckGrenade(ind, requireammo) then
         local nades = self:GetAvailableGrenades(requireammo)
         if #nades > 0 then
-            self:GetOwner():SetNWInt("ti_nade", nades[1].Index)
+            ind = nades[1].Index
         end
     end
+
+    self:GetOwner():SetNWInt("ti_nade", ind)
+    self.Secondary.Ammo = self:GetGrenade().Ammo or "none"
 end
 
 function SWEP:CheckGrenade(index, checkammo)

@@ -121,6 +121,7 @@ function SWEP:DrawGrenadeHUD()
                 net.WriteUInt(currentnade.Index, 4)
                 net.WriteBool(false)
                 net.SendToServer()
+                self.Secondary.Ammo = currentnade.Ammo or "none"
             end
             lastmenu = false
         end
@@ -802,6 +803,7 @@ hook.Add("VGUIMousePressed", "tacrp_grenademenu", function(pnl, mousecode)
                 net.WriteBool(true)
                 net.WriteBool(wpn.GrenadeThrowOverride)
             net.SendToServer()
+            wpn.Secondary.Ammo = currentnade.Ammo or "none"
         end
     elseif wpn.BlindFireMenuAlpha == 1 then
         if mousecode == MOUSE_LEFT and currentind == 2 then

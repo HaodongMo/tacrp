@@ -266,6 +266,12 @@ function SWEP:SetBaseSettings()
         self.Primary.DefaultClip = math.ceil(self.Primary.ClipSize * TacRP.ConVars["defaultammo"]:GetFloat())
     end
 
+    if self:GetValue("CanQuickNade") then
+        self.Secondary.Ammo = self:GetGrenade().Ammo or "grenade"
+    else
+        self.Secondary.Ammo = "none"
+    end
+
     if SERVER and IsValid(self:GetOwner()) and self:GetOwner():IsPlayer() and self:GetCapacity() > 0 and self:Clip1() > self:GetCapacity() then
         self:GetOwner():GiveAmmo(self:Clip1() - self:GetCapacity(), self:GetValue("Ammo"))
         self:SetClip1(self:GetCapacity())

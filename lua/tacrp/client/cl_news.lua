@@ -200,6 +200,7 @@ An additional benefit is that a lot of the attachments now use consistent wordin
 <h3>Changelist</h3>
 <ul>
 <li><b>Major Change:</b> Customization menu rework.
+<li><b>Added:</b> Support for DynaMetR's Customizable HL2 HUD. Secondary ammo will display the type and amount of the currently selected quicknade, and ammo pickup will also display correctly.
 <li><b>Added:</b> Compact Suppressor. Reduces spread, lower penalty compared to the Silencer (now Tactical Suppressor).
 <li><b>Added:</b> Weighted Suppressor. Increases range and reduces recoil, but worsens ADS and sprint time.
 <li><b>Added:</b> Akimbo variants for some attachments.
