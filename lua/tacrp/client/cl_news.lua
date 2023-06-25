@@ -198,11 +198,12 @@ An additional benefit is that a lot of the attachments now use consistent wordin
 <h3>Changelist</h3>
 <ul>
 <li><b>Major Change:</b> Customization menu rework.
-<li><b>Added:</b> Lightweight Silencer. Reduces spread, lower penalty compared to the default silencer (now Tactical Silencer).
-<li><b>Rebalance:</b> Tactical Silencer reduces more recoil kick (15%) and also reduces recoil spread penalty (5%).
+<li><b>Added:</b> Lightweight Suppressor. Reduces spread, lower penalty compared to the Silencer (now Tactical Suppressor).
+<li><b>Added:</b> Weighted Suppressor. Increases range and reduces recoil, but worsens ADS and sprint time.
+<li><b>Rebalance:</b> Tactical Suppressor also reduces recoil spread penalty (5%).
 <li><b>Rebalance:</b> Akimbo trigger has weaker RPM penalty (10%).
 <li><b>Rebalance:</b> Reduced recoil spread on several assault rifles.
-<li><b>Fixed:</b> Adjusted silencer positions on some guns.
+<li><b>Fixed:</b> Adjusted suppressor positions on some guns.
 <li><b>Fixed:</b> Akimbo pistols use last shot animation correctly.
 <li><b>Fixed:</b> Pre-emptively fix an upcoming issue in the June 2023 update related to loading server files in Singleplayer.
 </ul>]],
