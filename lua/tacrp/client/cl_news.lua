@@ -186,7 +186,7 @@ An additional benefit is that a lot of the attachments now use consistent wordin
     {
         Title = "Update 11",
         Type = "Patch Notes",
-        Date = "2023-06-24",
+        Date = "2023-06-27",
         Author = "8Z",
         Major = false,
         Summary = "New customization menu, and more suppressors!",
@@ -204,6 +204,7 @@ An additional benefit is that a lot of the attachments now use consistent wordin
 <li><b>Added:</b> Compact Suppressor. Reduces spread, lower penalty compared to the Silencer (now Tactical Suppressor).
 <li><b>Added:</b> Weighted Suppressor. Increases range and reduces recoil, but worsens ADS and sprint time.
 <li><b>Added:</b> Akimbo variants for some attachments.
+<li><b>Added:</b> Icons for PS90 and HK94 (thanks speedonerd).
 <li><b>Rebalance:</b> Tactical Suppressor also reduces recoil spread penalty (5%).
 <li><b>Rebalance:</b> Akimbo trigger has weaker RPM penalty (10%).
 <li><b>Rebalance:</b> Reduced recoil spread on several assault rifles.
