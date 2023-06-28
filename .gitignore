@@ -1,2 +1,3 @@
 *.cmd
 *.code-workspace
+.vscode
