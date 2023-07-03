@@ -139,7 +139,7 @@ function PANEL:Paint(w, h)
 
     if !self:GetIsMenu() and !TacRP.ConVars["lock_atts"]:GetBool() and !TacRP.ConVars["free_atts"]:GetBool() and !atttbl.Free then
         local numtxt = has
-        if !TacRP.ConVars["free_atts"]:GetBool() and engine.ActiveGamemode() == "terrortown" and TacRP.ConVars["ttt_bench_freeatts"]:GetBool() and TacRP.NearBench(self:GetOwner()) then
+        if !TacRP.ConVars["free_atts"]:GetBool() and engine.ActiveGamemode() == "terrortown" and TacRP.ConVars["ttt_bench_freeatts"]:GetBool() and TacRP.NearBench(wep:GetOwner()) then
             numtxt = "*"
         end
 
