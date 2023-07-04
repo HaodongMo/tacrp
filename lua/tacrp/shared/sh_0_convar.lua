@@ -334,6 +334,14 @@ local conVars = {
         client = true,
         noarchive = true,
     },
+    {
+        name = "sprint_lower",
+        default = "1",
+        replicated = true,
+        notify = true,
+        min = 0,
+        max = 1,
+    },
 
     // --------------------------- Hints
     {
@@ -797,25 +805,6 @@ local function menu_server_ti(panel)
     lb_irons_lower:SizeToContents()
     panel:ControlHelp("While aiming with ironsights, lower the weapon and draw a dot where the point of aim is (even when Enable Crosshair is off). The dot does not display weapon sway or spread.")
 
-    header(panel, "\nAttachments")
-    panel:AddControl("checkbox", {
-        label = "Free Attachments",
-        command = "TacRP_free_atts"
-    })
-    panel:AddControl("checkbox", {
-        label = "Attachment Locking",
-        command = "TacRP_lock_atts"
-    })
-    panel:ControlHelp("In Locking mode, owning one attachment allows you to use it on multiple weapons.")
-    panel:AddControl("checkbox", {
-        label = "Lose Attachments On Death",
-        command = "TacRP_loseattsondie"
-    })
-    panel:AddControl("checkbox", {
-        label = "Attachment Entities in Spawnmenu",
-        command = "TacRP_generateattentities"
-    })
-
     header(panel, "\nWeapon Slot Restriction")
     panel:ControlHelp("Restrict TacRP weapons for pickup/spawning based on their weapon slot.")
     panel:AddControl("slider", {
@@ -946,6 +935,9 @@ local function menu_balance_ti(panel)
         command = "tacrp_armorpenetration"
     })
     panel:ControlHelp("Weapons use defined piercing and shredding stats to calculate damage when hitting players with HL2 suit armor, instead of using the standard 20% damage. This generally increases the weapons' effectiveness against armor.\nCompatible with Danger Zone Entities' armor.")
+    panel:AddControl("checkbox", {
+        label = "Sprinting Lowers Weapon",
+        command = "tacrp_sprint_lower"})
 
     header(panel, "\nSliders")
     panel:AddControl("slider", {
@@ -965,7 +957,26 @@ local function menu_balance_ti(panel)
 end
 
 local function menu_atts_ti(panel)
-    header(panel, "Attachment Mechanics")
+    header(panel, "Attachment Inventory")
+    panel:AddControl("checkbox", {
+        label = "Free Attachments",
+        command = "TacRP_free_atts"
+    })
+    panel:AddControl("checkbox", {
+        label = "Attachment Locking",
+        command = "TacRP_lock_atts"
+    })
+    panel:ControlHelp("In Locking mode, owning one attachment allows you to use it on multiple weapons, a-la CW2.0.")
+    panel:AddControl("checkbox", {
+        label = "Lose Attachments On Death",
+        command = "TacRP_loseattsondie"
+    })
+    panel:AddControl("checkbox", {
+        label = "Attachment Entities in Spawnmenu",
+        command = "TacRP_generateattentities"
+    })
+
+    header(panel, "\nAttachment Mechanics")
     panel:AddControl("checkbox", {
         label = "Enable Scope Glint",
         command = "tacrp_glint"
@@ -1000,9 +1011,6 @@ local function menu_atts_ti(panel)
 end
 
 local clientmenus_ti = {
-    -- {
-    --     text = "Control Guide", func = menu_guide_ti
-    -- },
     {
         text = "Client", func = menu_client_ti
     },

@@ -20,7 +20,7 @@ function SWEP:DrawLaser(pos, ang, strength, thirdperson)
 
         local d2 = (curr_seq == "reload_start") and 0 or 1
         local d3 = (1 - math.min(self:GetAnimLockTime() - CurTime()) / vm:SequenceDuration(vm:GetSequence()))
-        local d4 = (1 - self:GetSprintDelta()) ^ 2
+        local d4 = self:CanShootInSprint() and 1 or (1 - self:GetSprintDelta()) ^ 2
         local cutoff = 0.85
         d3 = math.max(d3 - cutoff, 0) / (1 - cutoff)
 

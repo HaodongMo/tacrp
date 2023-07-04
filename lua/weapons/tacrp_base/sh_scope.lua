@@ -39,7 +39,7 @@ function SWEP:ScopeToggle(setlevel)
         level = self:GetValue("ScopeLevels")
     end
 
-    if self:SprintLock() or self:GetCustomize() or self:GetLastMeleeTime() + 1 > CurTime() then
+    if self:SprintLock(true) or self:GetCustomize() or self:GetLastMeleeTime() + 1 > CurTime() then
         level = 0
     end
 

@@ -250,7 +250,7 @@ function SWEP:GetViewModelPosition(pos, ang)
     end
 
     -- local sprintdelta = self:Curve(self:GetSprintDelta())
-    if self.LastWasSprinting and !self:GetCustomize() then
+    if self.LastWasSprinting and !self:GetCustomize() and !self:CanShootInSprint() then
         if self:GetLastMeleeTime() + 0.5 > CurTime() or self:GetStartPrimedGrenadeTime() + 0.8 > CurTime() then
             sprintdelta = m_appor(sprintdelta, 0, FT / 0.05)
         else
