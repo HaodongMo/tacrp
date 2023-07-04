@@ -1,5 +1,3 @@
-if CLIENT then return end
-
 util.AddNetworkString("tacrp_toggleblindfire")
 util.AddNetworkString("tacrp_togglecustomize")
 util.AddNetworkString("tacrp_reloadatts")

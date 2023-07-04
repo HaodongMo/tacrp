@@ -1,5 +1,3 @@
-if CLIENT then return end -- workaround
-
 -- affects how much armor is reduced from damage
 local armorbonus = 1.0
 -- affects what fraction of damage is converted to armor damage (1 means none)

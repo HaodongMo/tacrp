@@ -1,8 +1,7 @@
 function SWEP:Think()
     local owner = self:GetOwner()
 
-    if !game.SinglePlayer() and CLIENT and
-            !self.CertainAboutAtts and !self.AskedAboutAtts then
+    if CLIENT and !self.CertainAboutAtts and !self.AskedAboutAtts then
         self.AskedAboutAtts = true
         self:RequestWeapon()
     end
