@@ -581,7 +581,7 @@ local conVars = {
     {
         name = "cust_legacy",
         default = "0",
-        replicated = true,
+        client = true,
         min = 0,
         max = 1,
     },
