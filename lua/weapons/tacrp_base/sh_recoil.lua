@@ -1,25 +1,26 @@
 function SWEP:ThinkRecoil()
-    if ((IsFirstTimePredicted() and CLIENT) or game.SinglePlayer()) and self:GetRecoilAmount() > 0 then
-        local kick = self:GetValue("RecoilKick")
 
-        if self:GetOwner():Crouching() and !(self:GetOwner():KeyDown(IN_FORWARD) or self:GetOwner():KeyDown(IN_MOVELEFT) or self:GetOwner():KeyDown(IN_MOVERIGHT) or self:GetOwner():KeyDown(IN_BACK)) then
-            kick = kick * self:GetValue("RecoilCrouchMult")
-        end
 
-        -- local rec = math.min(self:GetRecoilAmount(), 1)
-        -- local sightdelta = self:GetSightDelta()
+    -- if ((IsFirstTimePredicted() and CLIENT) or game.SinglePlayer()) and self:GetRecoilAmount() > 0 then
+    --     local kick = self:GetValue("RecoilKick")
 
-        -- local aim_kick_v = rec * kick * math.sin((CurTime() - kick) * 15) * FrameTime() * (1 - sightdelta)
-        -- local aim_kick_h = rec * kick * math.sin(CurTime() * 12.2) * FrameTime() * (1 - sightdelta)
+    --     if self:GetOwner():Crouching() and !(self:GetOwner():KeyDown(IN_FORWARD) or self:GetOwner():KeyDown(IN_MOVELEFT) or self:GetOwner():KeyDown(IN_MOVERIGHT) or self:GetOwner():KeyDown(IN_BACK)) then
+    --         kick = kick * self:GetValue("RecoilCrouchMult")
+    --     end
 
-        -- self:SetFreeAimAngle(self:GetFreeAimAngle() - Angle(aim_kick_v, aim_kick_h, 0))
-    end
+    --     -- local rec = math.min(self:GetRecoilAmount(), 1)
+    --     -- local sightdelta = self:GetSightDelta()
+
+    --     -- local aim_kick_v = rec * kick * math.sin((CurTime() - kick) * 15) * FrameTime() * (1 - sightdelta)
+    --     -- local aim_kick_h = rec * kick * math.sin(CurTime() * 12.2) * FrameTime() * (1 - sightdelta)
+
+    --     -- self:SetFreeAimAngle(self:GetFreeAimAngle() - Angle(aim_kick_v, aim_kick_h, 0))
+    -- end
 
     if self:GetLastRecoilTime() + self:GetValue("RecoilResetTime") < CurTime() then
         local rec = self:GetRecoilAmount()
 
         rec = rec - (FrameTime() * self:GetValue("RecoilDissipationRate"))
-
         rec = math.Clamp(rec, 0, self:GetValue("RecoilMaximum"))
 
         self:SetRecoilAmount(rec)

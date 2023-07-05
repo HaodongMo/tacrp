@@ -180,6 +180,11 @@ function TacRP.StartCommand(ply, cmd)
         local recoildir = wpn:GetRecoilDirection()
         local rec = math.Clamp(wpn:GetRecoilAmount(), 0, 1)
 
+        if TacRP.ConVars["altrecoil"]:GetBool() then
+            local recgain = wpn:GetRecoilAmount() / wpn:GetValue("RecoilMaximum") * wpn:GetValue("RecoilSpreadPenalty") * 250
+            kick = kick * (1 + recgain)
+        end
+
         local eyeang = cmd:GetViewAngles()
 
         local uprec = math.sin(math.rad(recoildir)) * FrameTime() * rec * kick

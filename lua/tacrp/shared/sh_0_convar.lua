@@ -306,6 +306,14 @@ local conVars = {
         max = 1,
     },
     {
+        name = "sprint_lower",
+        default = "1",
+        replicated = true,
+        notify = true,
+        min = 0,
+        max = 1,
+    },
+    {
         name = "armorpenetration",
         default = "1",
         replicated = true,
@@ -335,8 +343,8 @@ local conVars = {
         noarchive = true,
     },
     {
-        name = "sprint_lower",
-        default = "1",
+        name = "altrecoil",
+        default = "0",
         replicated = true,
         notify = true,
         min = 0,

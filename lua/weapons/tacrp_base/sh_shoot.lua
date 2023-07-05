@@ -598,7 +598,9 @@ function SWEP:GetSpread(baseline)
 
     spread = spread + Lerp(self:GetSightAmount() - (self:GetPeeking() and self:GetValue("PeekPenaltyFraction") or 0), hippenalty, 0)
 
-    spread = spread + (self:GetRecoilAmount() * self:GetValue("RecoilSpreadPenalty"))
+    if !TacRP.ConVars["altrecoil"]:GetBool() then
+        spread = spread + (self:GetRecoilAmount() * self:GetValue("RecoilSpreadPenalty"))
+    end
 
     local spd = math.min(ply:GetAbsVelocity():Length(), 250)
 
