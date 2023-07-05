@@ -665,6 +665,19 @@ SWEP.StatDisplay = {
         Unit = "°",
         Value = "RecoilSpreadPenalty",
         LowerIsBetter = true,
+        ConVarCheck = "tacrp_altrecoil",
+        ConVarInvert = true,
+    },
+    {
+        Name = "stat.recoilspread",
+        Description = "stat.recoilspread.desc",
+        AggregateFunction = function(self, base, val)
+            return math.Round(val * 200, 3)
+        end,
+        Value = "RecoilSpreadPenalty",
+        LowerIsBetter = true,
+        ConVarCheck = "tacrp_altrecoil",
+        ConVarInvert = false,
     },
     {
         Name = "stat.recoildissipation",

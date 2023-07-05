@@ -10,7 +10,7 @@ SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 SWEP.SubCatTier = "4Consumer"
 SWEP.SubCatType = "2Machine Pistol"
 
-SWEP.Description = "Light machine pistol with good range, recoil and spread, but low capacity."
+SWEP.Description = "Light machine pistol with good range, recoil and spread."
 
 SWEP.ViewModel = "models/weapons/tacint/v_skorpion.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_skorpion.mdl"
@@ -19,8 +19,12 @@ SWEP.Slot = 1
 
 SWEP.BalanceStats = {
     [TacRP.BALANCE_SBOX] = {
-        Damage_Max = 20,
-        Damage_Min = 12,
+        Damage_Max = 17,
+        Damage_Min = 9,
+        ArmorPenetration = 0.65,
+
+        ClipSize = 30,
+        DefaultBodygroups = "0000",
 
         MoveSpeedMult = 1,
         ShootingSpeedMult = 0.9,
@@ -29,11 +33,14 @@ SWEP.BalanceStats = {
         ReloadSpeedMult = 1,
     },
     [TacRP.BALANCE_TTT] = {
-        Damage_Max = 10,
+        Damage_Max = 9,
         Damage_Min = 5,
         Range_Min = 500,
         Range_Max = 2500,
         RPM = 850,
+
+        ClipSize = 30,
+        DefaultBodygroups = "0000",
 
         BodyDamageMultipliers = {
             [HITGROUP_HEAD] = 2,
