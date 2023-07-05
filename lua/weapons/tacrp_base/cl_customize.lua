@@ -1015,13 +1015,13 @@ function SWEP:CreateCustomizeHUD()
         local rows = 1
         local cnt = table.Count(self.Attachments)
         if cnt > 5 then cnt = math.ceil(cnt / 2) rows = 2 end
-        local ph = TacRP.SS((42 + 6) * cnt)
+        local ph = math.min(scrh, TacRP.SS((42 + 6) * cnt))
 
         local layout = vgui.Create("DIconLayout", bg)
         layout:SetSize(TacRP.SS(32 * rows + 6 * (rows - 1)), ph)
         layout:SetPos(airgap, scrh / 2 - ph / 2)
-        layout:SetSpaceX(TacRP.SS(6))
-        layout:SetSpaceY(TacRP.SS(6))
+        layout:SetSpaceX(math.floor(TacRP.SS(6)))
+        layout:SetSpaceY(math.floor(TacRP.SS(6)))
         layout:SetLayoutDir(LEFT)
 
         local scroll = vgui.Create("DScrollPanel", bg)
@@ -1057,7 +1057,6 @@ function SWEP:CreateCustomizeHUD()
             slot_icon:SetSlotLayout(slotlayout)
             slot_icon:SetPos(0, TacRP.SS(10))
             slot_icon:SetSize(TacRP.SS(32), TacRP.SS(32))
-
 
             local slot_name = vgui.Create("DPanel", slot_bg)
             slot_name:SetSize(TacRP.SS(32), TacRP.SS(8))
