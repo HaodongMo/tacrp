@@ -27,7 +27,7 @@ SWEP.BalanceStats = {
 
         HipFireSpreadPenalty = 0.025,
 
-        RecoilKick = 3,
+        RecoilKick = 3.5,
 
         MoveSpeedMult = 0.9,
         ShootingSpeedMult = 0.8,
@@ -125,8 +125,8 @@ SWEP.RecoilDissipationRate = 16
 SWEP.RecoilFirstShotMult = 0.75
 
 SWEP.RecoilVisualKick = 0.5
-
-SWEP.RecoilKick = 2.5
+SWEP.RecoilKick = 3
+SWEP.RecoilStability = 0.4
 
 SWEP.RecoilSpreadPenalty = 0.0022
 SWEP.HipFireSpreadPenalty = 0.025

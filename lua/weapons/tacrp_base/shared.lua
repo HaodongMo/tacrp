@@ -89,7 +89,7 @@ SWEP.JamSkipFix = false // only do dryfire and the initial delay. use on revolve
 SWEP.JamBaseMSB = nil // use this number as the base value instead of being based on ammo.
 
 // Spread penalties are in spread units and are additive
-SWEP.MoveSpreadPenalty = 0 // spread penalty while travelling at max. 250 u/s
+SWEP.MoveSpreadPenalty = 0.01 // spread penalty while travelling at max. 250 u/s
 SWEP.MidAirSpreadPenalty = 0.1 // spread penalty for being in the air
 SWEP.HipFireSpreadPenalty = 0.02 // spread penalty for not being scoped in
 SWEP.ScopedSpreadPenalty = 0 // spread penalty for... being scoped in?
@@ -97,19 +97,19 @@ SWEP.BlindFireSpreadPenalty = 0 // spread penalty for blind firing
 SWEP.CrouchSpreadPenalty = 0
 SWEP.PeekPenaltyFraction = 0.3 // percentage of hipfire penalty to use while peeking in sights
 
+// Technically does not affect recoil at all, but affects spread (now called "bloom")
 SWEP.RecoilPerShot = 1
 SWEP.RecoilMaximum = 10
 SWEP.RecoilResetTime = 0 // time after you stop shooting for recoil to start dissipating
 SWEP.RecoilDissipationRate = 2
 SWEP.RecoilFirstShotMult = 1 // multiplier for the first shot's recoil amount
-
 SWEP.RecoilCrouchMult = 0.85 // multiplier for when crouched
+SWEP.RecoilSpreadPenalty = 0.001 // extra spread per one unit of recoil
 
 SWEP.RecoilVisualKick = 0.1
-
 SWEP.RecoilKick = 0.25
+SWEP.RecoilStability = 0 // Direction of recoil kick, 1 is completely vertical and 0 is 180deg cone
 
-SWEP.RecoilSpreadPenalty = 0.001 // extra spread per one unit of recoil
 
 SWEP.ShotgunPelletSpread = 0 // per-pellet spread for shotguns (if enabled). Otherwise just adds to spread
 

@@ -647,6 +647,16 @@ SWEP.StatDisplay = {
         LowerIsBetter = true,
     },
     {
+        Name = "stat.recoilstability",
+        Description = "stat.recoilstability.desc",
+        Value = "RecoilStability",
+        AggregateFunction = function(self, base, val)
+            return math.Round(val * 100)
+        end,
+        Unit = "%",
+        LowerIsBetter = true,
+    },
+    {
         Name = "stat.recoilspread",
         Description = "stat.recoilspread.desc",
         AggregateFunction = function(self, base, val)

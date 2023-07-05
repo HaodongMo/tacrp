@@ -178,11 +178,12 @@ function TacRP.StartCommand(ply, cmd)
     if wpn:GetLastRecoilTime() + wpn:RecoilDuration() > CurTime() then
         local kick = wpn:GetValue("RecoilKick")
         local recoildir = wpn:GetRecoilDirection()
-        local rec = math.Clamp(wpn:GetRecoilAmount(), 0, 1)
+        local rec = 1
 
         if TacRP.ConVars["altrecoil"]:GetBool() then
-            local recgain = wpn:GetRecoilAmount() / wpn:GetValue("RecoilMaximum") * wpn:GetValue("RecoilSpreadPenalty") * 250
-            kick = kick * (1 + recgain)
+            rec = 1 + math.Clamp((wpn:GetRecoilAmount() - 1) / wpn:GetValue("RecoilMaximum"), 0, 1) * wpn:GetValue("RecoilSpreadPenalty") * 200
+            -- local recgain = rec * wpn:GetValue("RecoilSpreadPenalty") * 250
+            -- kick = kick + recgain
         end
 
         local eyeang = cmd:GetViewAngles()

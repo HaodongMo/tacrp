@@ -10,7 +10,7 @@ SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 SWEP.SubCatTier = "4Consumer"
 SWEP.SubCatType = "2Machine Pistol"
 
-SWEP.Description = "Light machine pistol with good range, recoil and spread."
+SWEP.Description = "Light machine pistol with good range, recoil and spread, but low capacity."
 
 SWEP.ViewModel = "models/weapons/tacint/v_skorpion.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_skorpion.mdl"
@@ -19,10 +19,8 @@ SWEP.Slot = 1
 
 SWEP.BalanceStats = {
     [TacRP.BALANCE_SBOX] = {
-        Damage_Max = 19,
+        Damage_Max = 20,
         Damage_Min = 12,
-
-        ClipSize = 30,
 
         MoveSpeedMult = 1,
         ShootingSpeedMult = 0.9,
@@ -31,13 +29,11 @@ SWEP.BalanceStats = {
         ReloadSpeedMult = 1,
     },
     [TacRP.BALANCE_TTT] = {
-        Damage_Max = 9,
+        Damage_Max = 10,
         Damage_Min = 5,
         Range_Min = 500,
         Range_Max = 2500,
         RPM = 850,
-
-        ClipSize = 30,
 
         BodyDamageMultipliers = {
             [HITGROUP_HEAD] = 2,
@@ -62,8 +58,6 @@ SWEP.BalanceStats = {
         Damage_Max = 5,
         Damage_Min = 3,
 
-        DefaultBodygroups = "0010",
-
         MoveSpeedMult = 1,
         ShootingSpeedMult = 0.9,
         SightedSpeedMult = 1,
@@ -75,6 +69,8 @@ SWEP.BalanceStats = {
 SWEP.TTTReplace = TacRP.TTTReplacePreset.MachinePistol
 
 // "ballistics"
+
+SWEP.DefaultBodygroups = "0010"
 
 SWEP.Damage_Max = 16
 SWEP.Damage_Min = 11
@@ -106,21 +102,21 @@ SWEP.Firemodes = {
 
 SWEP.RPM = 850
 
-SWEP.Spread = 0.008
-SWEP.RecoilSpreadPenalty = 0.001
-SWEP.HipFireSpreadPenalty = 0.02
+SWEP.Spread = 0.009
+SWEP.RecoilSpreadPenalty = 0.0018
+SWEP.HipFireSpreadPenalty = 0.011
 
 SWEP.ShootTimeMult = 0.5
 
 SWEP.RecoilPerShot = 1
-SWEP.RecoilMaximum = 20
+SWEP.RecoilMaximum = 8
 SWEP.RecoilResetTime = 0.1 // time after you stop shooting for recoil to start dissipating
-SWEP.RecoilDissipationRate = 20
+SWEP.RecoilDissipationRate = 24
 SWEP.RecoilFirstShotMult = 1 // multiplier for the first shot's recoil amount
 
-SWEP.RecoilVisualKick = 0.4
-
-SWEP.RecoilKick = 1
+SWEP.RecoilVisualKick = 0.5
+SWEP.RecoilKick = 1.5
+SWEP.RecoilStability = 0.75
 
 SWEP.CanBlindFire = true
 

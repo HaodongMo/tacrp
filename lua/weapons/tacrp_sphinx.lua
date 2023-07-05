@@ -114,7 +114,7 @@ SWEP.Firemode = 1
 
 SWEP.RPM = 750
 
-SWEP.Spread = 0.0012
+SWEP.Spread = 0.0035
 
 SWEP.RecoilPerShot = 1
 SWEP.RecoilMaximum = 8
@@ -123,8 +123,8 @@ SWEP.RecoilDissipationRate = 18
 SWEP.RecoilFirstShotMult = 0.6
 
 SWEP.RecoilVisualKick = 1
-
-SWEP.RecoilKick = 3.5
+SWEP.RecoilKick = 4
+SWEP.RecoilStability = 0.6
 
 SWEP.RecoilSpreadPenalty = 0.0045
 

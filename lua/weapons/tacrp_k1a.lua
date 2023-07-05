@@ -112,9 +112,8 @@ SWEP.RecoilDissipationRate = 15
 SWEP.RecoilFirstShotMult = 1 // multiplier for the first shot's recoil amount
 
 SWEP.RecoilVisualKick = 0.75
-SWEP.RecoilVisualShake = 0.25
-
 SWEP.RecoilKick = 2
+SWEP.RecoilStability = 0.3
 
 SWEP.RecoilSpreadPenalty = 0.002
 SWEP.HipFireSpreadPenalty = 0.02
@@ -259,13 +258,13 @@ SWEP.AttachmentElements = {
 SWEP.Attachments = {
     [1] = {
         PrintName = "Optic",
-        Category = {"optic_cqb", "optic_medium", "optic_sniper"},
+        Category = {"optic_cqb", "optic_medium"}, //, "optic_sniper"
         Bone = "ValveBiped._ROOT_K1a",
         WMBone = "Box01",
         AttachSound = "tacrp/weapons/optic_on.wav",
         DetachSound = "tacrp/weapons/optic_off.wav",
-        VMScale = 0.75,
-        Pos_VM = Vector(-5.15, 0.22, 6),
+        VMScale = 1,
+        Pos_VM = Vector(-5.25, 0.22, 6),
         Pos_WM = Vector(0, 5, 1.4),
         Ang_VM = Angle(90, 0, 0),
         Ang_WM = Angle(0, -90, 0),

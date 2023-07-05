@@ -44,7 +44,8 @@ function SWEP:ApplyRecoil()
 
     rec = math.Clamp(rec, 0, self:GetValue("RecoilMaximum"))
 
-    self:SetRecoilDirection(util.SharedRandom("tacrp_recoildir", -180, 0))
+    local stab = math.Clamp(self:GetValue("RecoilStability"), 0, 1)
+    self:SetRecoilDirection(util.SharedRandom("tacrp_recoildir", -180 + stab * 90, -stab * 90))
     -- self:SetRecoilDirection(-90)
     self:SetRecoilAmount(rec)
     self:SetLastRecoilTime(CurTime())
