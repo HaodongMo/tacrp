@@ -109,7 +109,7 @@ SWEP.RecoilSpreadPenalty = 0.001 // extra spread per one unit of recoil
 SWEP.RecoilVisualKick = 0.1
 SWEP.RecoilKick = 0.25
 SWEP.RecoilStability = 0 // Direction of recoil kick, 1 is completely vertical and 0 is 180deg cone
-
+SWEP.RecoilAltMultiplier = 200 // Multiplier to RecoilSpreadPenalty when using alternative recoil mode.
 
 SWEP.ShotgunPelletSpread = 0 // per-pellet spread for shotguns (if enabled). Otherwise just adds to spread
 

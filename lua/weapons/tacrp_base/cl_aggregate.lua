@@ -668,11 +668,12 @@ SWEP.StatDisplay = {
         ConVarCheck = "tacrp_altrecoil",
         ConVarInvert = true,
     },
+    -- For use in alt recoil mode
     {
-        Name = "stat.recoilspread",
-        Description = "stat.recoilspread.desc",
+        Name = "stat.recoilspread2",
+        Description = "stat.recoilspread2.desc",
         AggregateFunction = function(self, base, val)
-            return math.Round(val * 200, 3)
+            return math.Round(val * (base and self:GetBaseValue("RecoilAltMultiplier") or self:GetValue("RecoilAltMultiplier")), 1)
         end,
         Value = "RecoilSpreadPenalty",
         LowerIsBetter = true,

@@ -181,7 +181,8 @@ function TacRP.StartCommand(ply, cmd)
         local rec = 1
 
         if TacRP.ConVars["altrecoil"]:GetBool() then
-            rec = 1 + math.Clamp((wpn:GetRecoilAmount() - 1) / wpn:GetValue("RecoilMaximum"), 0, 1) * wpn:GetValue("RecoilSpreadPenalty") * 200
+            rec = 1 + math.Clamp((wpn:GetRecoilAmount() - 1) / (wpn:GetValue("RecoilMaximum") - 1), 0, 1)
+            kick = kick + wpn:GetValue("RecoilSpreadPenalty") * wpn:GetValue("RecoilAltMultiplier")
             -- local recgain = rec * wpn:GetValue("RecoilSpreadPenalty") * 250
             -- kick = kick + recgain
         end
