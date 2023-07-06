@@ -21,7 +21,7 @@ function SWEP:DoBodygroups(wm, custom_wm)
 
     local eles = self:GetElements()
 
-    for i, k in pairs(eles) do
+    for i, k in ipairs(eles) do
         if wm then
             for _, j in pairs(k.BGs_WM or {}) do
                 mdl:SetBodygroup(j[1], j[2] or 0)

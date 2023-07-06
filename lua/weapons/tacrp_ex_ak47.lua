@@ -245,13 +245,25 @@ SWEP.AttachmentElements = {
             {2, 1}
         },
     },
+    ["akmount"] = {
+        BGs_VM = {
+            {2, 0}
+        },
+        AttPosMods = {
+            [1] = {
+                Pos_VM = Vector(-5.3, 0.4, 3),
+                Pos_WM = Vector(-0.4, 2, 0.5),
+            }
+        },
+        SortOrder = 2,
+    },
 }
 
 
 SWEP.Attachments = {
     [1] = {
         PrintName = "Optic",
-        Category = {"optic_cqb", "optic_medium", "optic_sniper"},
+        Category = {"optic_cqb", "optic_medium", "optic_sniper", "optic_ak"},
         Bone = "ValveBiped.AK47_rootbone",
         WMBone = "Box01",
         InstalledElements = {"tactical"},

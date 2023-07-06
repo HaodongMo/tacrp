@@ -238,7 +238,7 @@ SWEP.AnimationTranslationTable = {
 SWEP.AttachmentElements = {
     ["sights"] = {
         BGs_VM = {
-            {2, 1}
+            {1, 1}
         },
         BGs_WM = {
             {1, 1}
@@ -246,7 +246,7 @@ SWEP.AttachmentElements = {
     },
     ["chmount"] = {
         BGs_VM = {
-            {2, 0}
+            {1, 0}
         },
         BGs_WM = {
             {1, 0}
@@ -254,7 +254,7 @@ SWEP.AttachmentElements = {
         AttPosMods = {
             [1] = {
                 Pos_VM = Vector(-7.7, -0.05, 4),
-                Pos_WM = Vector(0.75, 3, 1.15),
+                Pos_WM = Vector(0.4, 3, 3.5),
             }
         },
         SortOrder = 2,
@@ -273,7 +273,7 @@ SWEP.Attachments = {
         DetachSound = "TacRP/weapons/optic_off.wav",
         VMScale = 1,
         Pos_VM = Vector(-5.5, -0.05, 4),
-        Pos_WM = Vector(0.75, 3, 1.15),
+        Pos_WM = Vector(0.4, 3, 1.15),
         Ang_VM = Angle(90, 0, 0),
         Ang_WM = Angle(0, -90 + 3.5, 0),
     },
