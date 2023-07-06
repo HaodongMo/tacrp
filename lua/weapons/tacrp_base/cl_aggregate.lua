@@ -606,7 +606,7 @@ SWEP.StatDisplay = {
             if val == 0 then return "∞" end
             return math.Round(1 / self:GetJamChance(base), 0)
         end,
-        HideIfSame = true,
+        HideIfZero = true,
         Value = "JamFactor",
     },
     {

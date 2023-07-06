@@ -82,6 +82,26 @@ function SWEP:DrawCustomModel(wm, custom_wm)
             end
         end
 
+        local slot = model.Slot
+        for _, ele in ipairs(self:GetElements()) do
+            if !ele.AttPosMods or !ele.AttPosMods[slot] then continue end
+            if wm then
+                if ele.AttPosMods[slot].Pos_WM then
+                    offset_pos = ele.AttPosMods[slot].Pos_WM
+                end
+                if ele.AttPosMods[slot].Ang_WM then
+                    offset_ang = ele.AttPosMods[slot].Ang_WM
+                end
+            else
+                if ele.AttPosMods[slot].Pos_VM then
+                    offset_pos = ele.AttPosMods[slot].Pos_VM
+                end
+                if ele.AttPosMods[slot].Ang_VM then
+                    offset_ang = ele.AttPosMods[slot].Ang_VM
+                end
+            end
+        end
+
         if !bone then continue end
 
         local boneindex = parentmdl:LookupBone(bone)

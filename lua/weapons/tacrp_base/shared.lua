@@ -346,7 +346,9 @@ SWEP.Akimbo = false
 
 // attachments
 
-SWEP.AttachmentElements = {
+SWEP.AttachmentElements = nil
+/*
+{
     ["bg_name"] = {
         BGs_VM = {
             {1, 1}
@@ -354,8 +356,18 @@ SWEP.AttachmentElements = {
         BGs_WM = {
             {1, 1}
         },
+        AttPosMods = {
+            [1] = {
+                Pos_VM = Vector(),
+                Pos_WM = Vector(),
+                Ang_VM = Angle(),
+                Ang_WM = Angle(),
+            },
+        },
+        SortOrder = 1, // defaults to 1, higher value means process later
     }
 }
+*/
 
 SWEP.Attachments = nil
 // {
