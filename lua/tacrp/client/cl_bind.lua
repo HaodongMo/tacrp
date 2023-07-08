@@ -88,3 +88,13 @@ function TacRP.GetKey(bind)
 
     return key and input.GetKeyCode(key)
 end
+
+TacRP.KeyPressed_Melee = false
+
+concommand.Add("+tacrp_melee", function()
+    TacRP.KeyPressed_Melee = true
+end)
+
+concommand.Add("-tacrp_melee", function()
+    TacRP.KeyPressed_Melee = false
+end)

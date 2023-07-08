@@ -13,4 +13,8 @@ hook.Add("CreateMove", "TacRP_CreateMove", function(cmd)
             cmd:SetButtons(buttons)
         end
     end
+
+    if TacRP.KeyPressed_Melee then
+        cmd:AddKey(TacRP.IN_MELEE)
+    end
 end)
