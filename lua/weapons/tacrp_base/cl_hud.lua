@@ -64,7 +64,11 @@ function SWEP:GetHintCapabilities()
     end
 
     if self:GetValue("CanMeleeAttack") and !self:GetValue("PrimaryMelee") then
-        self.CachedCapabilities["+use/+attack"] = {so = 30, str = "Quick Melee"}
+        local bind = "+use/+attack"
+        if TacRP.GetKeyIsBound("+tacrp_melee") then
+            bind = TacRP.GetBindKey("+tacrp_melee")
+        end
+        self.CachedCapabilities[bind] = {so = 30, str = "Quick Melee"}
     end
 
     if self:GetValue("CanToggle") and TacRP.ConVars["toggletactical"]:GetBool() then

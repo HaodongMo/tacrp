@@ -59,6 +59,8 @@ TacRP.HOLSTER_SLOT_PISTOL = 3
 TacRP.HOLSTER_SLOT_GEAR = 4
 TacRP.HOLSTER_SLOT_SPECIAL = 5
 
+TacRP.IN_MELEE = IN_WEAPON1
+
 TacRP.HolsterBones = {
     [TacRP.HOLSTER_SLOT_BACK] = {
         "ValveBiped.Bip01_Spine2",

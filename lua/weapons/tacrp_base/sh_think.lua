@@ -60,6 +60,11 @@ function SWEP:Think()
 
     self:ProcessTimers()
 
+    if self:GetValue("Melee") and self:GetOwner():KeyPressed(TacRP.IN_MELEE) then
+        self:Melee()
+        return
+    end
+
     if IsValid(self:GetOwner()) and self:GetOwner():IsPlayer() and self:GetValue("TacticalThink") and self:GetTactical() then
         self:GetValue("TacticalThink")(self)
     end
