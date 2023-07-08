@@ -286,27 +286,37 @@ SWEP.StatGroups = {
             local dt = math.max(0, delay - rrt)
             local rbs = dt * rdr -- amount of recoil we can recover between shots even if fired ASAP
 
-            -- [50] base spread
-            local tgt = 0.015
-            if num > 2 then tgt = 0.04 end
-            score = score + math.Clamp(1 - spread / tgt, 0, 1) * 50
-
-            -- [25] first shot spread
-            local fss = valfunc(self, "RecoilFirstShotMult") * rps
-            score = score + math.Clamp(1 - (spread + fss * rsp - rbs) / tgt, 0, 1) * 25
-
-            -- [25] spread over 0.3s (or one burst)
-            local shots = math.min(math.ceil(rpm / 60 * 0.3), math.floor(self:GetBaseValue("ClipSize") * 0.5))
-            if bfm < 0 then
-                shots = -bfm
-            end
-            if rbs <= fss then
-                local so1 = (fss - rbs + shots * (rps - rbs)) * rsp
-                score = score + math.Clamp(1 - so1 / 0.03, 0, 1) ^ 1.25 * 25
+            if TacRP.ConVars["altrecoil"]:GetBool() then
+                local min = 0.001
+                local tgt = 0.015
+                if num > 2 then tgt = 0.04 end
+                score = math.Clamp(1 - (spread - min) / tgt, 0, 1) * 100
             else
-                -- delay is so long we always get first shot
-                score = score + 25
+                -- [50] base spread
+                local min = 0.002
+                local tgt = 0.015
+                if num > 2 then tgt = 0.04 end
+                score = score + math.Clamp(1 - (spread - min) / tgt, 0, 1) * 50
+
+                -- [25] first shot spread
+                local fss = valfunc(self, "RecoilFirstShotMult") * rps
+                score = score + math.Clamp(1 - (spread + fss * rsp - rbs) / tgt, 0, 1) * 25
+
+                -- [25] spread over 0.3s (or one burst)
+                local shots = math.min(math.ceil(rpm / 60 * 0.3), math.floor(self:GetBaseValue("ClipSize") * 0.5))
+                if bfm < 0 then
+                    shots = -bfm
+                end
+                if rbs <= fss then
+                    local so1 = (fss - rbs + shots * (rps - rbs)) * rsp
+                    score = score + math.Clamp(1 - so1 / 0.03, 0, 1) ^ 1.25 * 25
+                else
+                    -- delay is so long we always get first shot
+                    score = score + 25
+                end
             end
+
+
 
             -- recoil reset time
             -- score = score + math.Clamp(1 - math.max(0, rrt - delay) / 0.25, 0, 1) * 10
