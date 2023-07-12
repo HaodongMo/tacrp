@@ -26,12 +26,12 @@ function SWEP:DoBodygroups(wm, custom_wm)
             for _, j in pairs(k.BGs_WM or {}) do
                 mdl:SetBodygroup(j[1], j[2] or 0)
             end
-            if k.Skin_WM ~= nil then sk = k.Skin_WM end
+            if k.Skin_WM != nil then sk = k.Skin_WM end
         else
             for _, j in pairs(k.BGs_VM or {}) do
                 mdl:SetBodygroup(j[1] or 0, j[2] or 0)
             end
-            if k.Skin_VM ~= nil then sk = k.Skin_VM end
+            if k.Skin_VM != nil then sk = k.Skin_VM end
         end
     end
 
@@ -82,7 +82,7 @@ function SWEP:GetElements(holster)
     end
 
     -- Hack: Always fold stock when weapon is holstered
-    if IsValid(self:GetOwner()) and self:GetOwner():GetActiveWeapon() != self and !foldstock and self.AttachmentElements["foldstock"] then
+    if IsValid(self:GetOwner()) and self:GetOwner():GetActiveWeapon() != self and !foldstock and self.AttachmentElements and self.AttachmentElements["foldstock"] then
         table.insert(eleatts, self.AttachmentElements["foldstock"])
     end
 
