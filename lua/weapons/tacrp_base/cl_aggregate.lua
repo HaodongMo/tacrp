@@ -578,7 +578,7 @@ SWEP.StatDisplay = {
     },
     {
         Name = "stat.armorbonus",
-        Description = {},
+        Description = "stat.armorbonus.desc",
         Value = "ArmorBonus",
         AggregateFunction = function(self, base, val)
             return math.Round(val * 100, 1)

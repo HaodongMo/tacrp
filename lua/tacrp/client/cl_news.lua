@@ -216,6 +216,37 @@ An additional benefit is that a lot of the attachments now use consistent wordin
 <li><b>Fixed:</b> Pre-emptively fix an upcoming issue in the June 2023 update related to loading server files in Singleplayer.
 </ul>]],
     },
+    {
+        Title = "Update 12",
+        Type = "Patch Notes",
+        Date = "2023-07-18",
+        Author = "8Z",
+        Major = false,
+        Summary = "AR Expansion, and recoil system overhaul.",
+        Contents = [[<body style="font-family:'Myriad Pro';color:white;font-size:125%;">
+
+<p>The AR Expansion Pack is out now! Get 5 new guns by clicking this (not a rickroll): <input type='submit' value='Open Workshop Page' onclick='console.log("RUNLUA:gui.OpenURL(\"https://steamcommunity.com/sharedfiles/filedetails/?id=3006376475\")")' /></p>
+
+<p>This update introduces changes to how recoil and spread works. Before, most "Recoil" stats were actually affecting spread, and Recoil Kick was the only actual recoil stat. These stats are now renamed to Bloom, and their behavior has changed as well.</p>
+
+<p>Under the new system, instead of your gun magically becoming less accurate as you shoot, the recoil becomes stronger instead. If you wish to revert to old behavior, untick "Bloom Modifies Recoil" in the Mechanics setting page.</p>
+
+<p>Recoil Stability is a new stat that makes recoil go more straight up. Previously, recoil could go anywhere within a 180 degree half circle - this is equivalent to 0% stability now. Certain guns, especially high recoil rifles, have increased stability to make their recoil manageable.</p>
+
+<p>The intent of the overall change is to improve the viability of high recoil weapons and to make medium to long range combat more viable on non-sniper rifles.</p>
+
+<h3>Changelist</h3>
+<ul>
+<li><b>Major Change:</b> Alternate Recoil Mode.
+<li><b>Major Change:</b> Recoil Stability stat.
+<li><b>Added:</b> All weapons gain a 0.01 moving spread penalty.
+<li><b>Added:</b> You can now bind +tacrp_melee to any button to quick melee. E+LMB will still work.
+<li><b>Added:</b> ConVar to allow firing while sprinting, in case you're a boomer shooter enthuasist.
+<li><b>Rebalance:</b> Fold Stock and Adjust Stock reduce ADS and sprint time by 0.08/0.04 seconds instead of a percentage, and recoil is reduced.
+<li><b>Changed:</b> Some "Recoil" stats are now named Bloom. Their functionality remains identical.
+<li><b>Fixed:</b> Certain lower resolutions unable to display attachments properly.
+</ul>]],
+    },
 }
 TacRP.NewsRead = TacRP.NewsRead or {}
 TacRP.NewsLoaded = nil
@@ -430,7 +461,10 @@ function TacRP.CreateNewsPanel(open)
             draw.SimpleText(text, "TacRP_Myriad_Pro_6", TacRP.SS(4), h / 2, color_white, TEXT_ALIGN_LEFT, TEXT_ALIGN_CENTER)
         end
 
-        draw.SimpleText("GMod Branch: " .. tostring(BRANCH), "TacRP_Myriad_Pro_6", w - TacRP.SS(4), h / 2, color_white, TEXT_ALIGN_RIGHT, TEXT_ALIGN_CENTER)
+        local branch = tostring(BRANCH)
+        if branch == "unknown" then branch = "main" end
+
+        draw.SimpleText("GMod Branch: " .. branch, "TacRP_Myriad_Pro_6", w - TacRP.SS(4), h / 2, color_white, TEXT_ALIGN_RIGHT, TEXT_ALIGN_CENTER)
 
         draw.SimpleText(TacRP.NewsResult, "TacRP_Myriad_Pro_6", w  / 2, h / 2, color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
     end

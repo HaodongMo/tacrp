@@ -344,7 +344,7 @@ local conVars = {
     },
     {
         name = "altrecoil",
-        default = "0",
+        default = "1",
         replicated = true,
         notify = true,
         min = 0,
@@ -946,6 +946,11 @@ local function menu_balance_ti(panel)
     panel:AddControl("checkbox", {
         label = "Sprinting Lowers Weapon",
         command = "tacrp_sprint_lower"})
+    panel:AddControl("checkbox", {
+        label = "Bloom Modifies Recoil",
+        command = "tacrp_altrecoil"
+    })
+    panel:ControlHelp("If enabled, gaining bloom intensifies recoil but does not modify spread.\nIf disabled, gaining bloom increases spread but does not modify recoil kick (old behavior).\nBloom is gained when firing consecutive shots.")
 
     header(panel, "\nSliders")
     panel:AddControl("slider", {
