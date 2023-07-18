@@ -45,7 +45,9 @@ function SWEP:Attach(slot, att, silent)
         self:SetTactical(true)
     end
 
-    self:SetFiremode(1)
+    if self:GetFiremode() > self:GetFiremodeAmount() then
+        self:SetFiremode(1)
+    end
 
     local inf_new = self:GetValue("InfiniteAmmo")
     if SERVER then
