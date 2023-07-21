@@ -102,9 +102,31 @@ function ENT:Stuck()
             self:GetParent():EmitSound("vo/npc/male01/no0" .. math.random(1, 2) .. ".wav")
         end
     end
+
+    if VJ then
+        self.Zombies = {}
+        for _, x in ipairs(ents.FindInSphere(self:GetPos(), 512)) do
+            if x:IsNPC() and string.find(x:GetClass(),"npc_vj_l4d_com_") and x.Zombie_CanHearPipe == true and x.Zombie_NextPipBombT < CurTime() then
+                x.Zombie_NextPipBombT = CurTime() + 3
+                table.insert(x.VJ_AddCertainEntityAsEnemy,self)
+                x:AddEntityRelationship(self, D_HT, 99)
+                x.MyEnemy = self
+                x:SetEnemy(self)
+                table.insert(self.Zombies, x)
+            end
+        end
+    end
 end
 
 function ENT:OnThink()
+    if VJ and self.Zombies then
+        for _, v in ipairs(self.Zombies) do
+            if IsValid(v) then
+                v:SetLastPosition(self:GetPos())
+                v:VJ_TASK_GOTO_LASTPOS()
+            end
+        end
+    end
 end
 
 local clr_timed = Color(255, 0, 0)
