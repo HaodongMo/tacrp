@@ -27,18 +27,25 @@ function SWEP:Think()
     --     end
     -- end
 
-    if self:GetValue("RunawayBurst") and self:GetCurrentFiremode() < 0 then
-        if self:GetBurstCount() >= -self:GetCurrentFiremode() then
+    local cfm = self:GetCurrentFiremode()
+    if self:GetValue("RunawayBurst") and cfm < 0 then
+        if self:GetBurstCount() >= -cfm then
             self:SetBurstCount(0)
             self:SetNextPrimaryFire(CurTime() + self:GetValue("PostBurstDelay"))
-        elseif self:GetBurstCount() > 0 and self:GetBurstCount() < -self:GetCurrentFiremode() then
+        elseif self:GetBurstCount() > 0 and self:GetBurstCount() < -cfm then
             self:PrimaryAttack()
         end
     else
-        if (owner:KeyReleased(IN_ATTACK) or (self:GetCurrentFiremode() < 0 and self:GetBurstCount() >= -self:GetCurrentFiremode())) then
-            if self:GetCurrentFiremode() < 0 and self:GetBurstCount() > 1 then
-                self.Primary.Automatic = false
-                self:SetNextPrimaryFire(CurTime() + self:GetValue("PostBurstDelay"))
+        if (owner:KeyReleased(IN_ATTACK) or (cfm < 0 and self:GetBurstCount() >= -cfm)) then
+            if cfm < 0 and self:GetBurstCount() > 1 then
+                if !self:GetValue("AutoBurst") then
+                    self.Primary.Automatic = false
+                end
+                local add = 0
+                if self:GetBurstCount() >= -cfm then
+                    add = 60 / self:GetValue("RPM")
+                end
+                self:SetNextPrimaryFire(CurTime() + self:GetValue("PostBurstDelay") + add)
             end
             self:SetBurstCount(0)
         end

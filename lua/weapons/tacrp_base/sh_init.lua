@@ -243,12 +243,8 @@ function SWEP:SetBaseSettings()
 
     local fm = self:GetCurrentFiremode()
     if fm != 1 then
-        if self:GetValue("RunawayBurst") and fm < 0 then
-            if self:GetValue("AutoBurst") then
-                self.Primary.Automatic = true
-            else
-                self.Primary.Automatic = false
-            end
+        if self:GetValue("RunawayBurst") and fm < 0 and !self:GetValue("AutoBurst") then
+            self.Primary.Automatic = false
         else
             self.Primary.Automatic = true
         end
