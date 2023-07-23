@@ -664,7 +664,7 @@ SWEP.StatDisplay = {
             return math.Round(val * 100)
         end,
         Unit = "%",
-        LowerIsBetter = true,
+        LowerIsBetter = false,
     },
     {
         Name = "stat.recoilspread",
