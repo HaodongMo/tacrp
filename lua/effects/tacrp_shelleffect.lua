@@ -8,60 +8,16 @@ EFFECT.AlreadyPlayedSound = false
 EFFECT.ShellTime = 0.5
 EFFECT.SpawnTime = 0
 
-EFFECT.TypeSettings = {
-    [1] = {
-        Model = "models/tacint/shells/pistol_shell.mdl",
-        Sounds = {
-            "TacRP/shells/shell_drop-1.wav",
-            "TacRP/shells/shell_drop-2.wav",
-            "TacRP/shells/shell_drop-3.wav",
-            "TacRP/shells/shell_drop-4.wav",
-            "TacRP/shells/shell_drop-5.wav",
-        }
-    },
-    [2] = {
-        Model = "models/tacint/shells/rifle_shell.mdl",
-        Sounds = {
-            "TacRP/shells/shell_drop-1.wav",
-            "TacRP/shells/shell_drop-2.wav",
-            "TacRP/shells/shell_drop-3.wav",
-            "TacRP/shells/shell_drop-4.wav",
-            "TacRP/shells/shell_drop-5.wav",
-        }
-    },
-    [3] = {
-        Model = "models/tacint/shells/shotgun_shell.mdl",
-        Sounds = {
-            "TacRP/shells/shotshell_drop-1.wav",
-            "TacRP/shells/shotshell_drop-2.wav",
-            "TacRP/shells/shotshell_drop-3.wav",
-            "TacRP/shells/shotshell_drop-4.wav",
-            "TacRP/shells/shotshell_drop-5.wav",
-        }
-    },
-    [4] = {
-        Model = "models/tacint/shells/ks23_shell.mdl",
-        Sounds = {
-            "TacRP/shells/shotshell_drop-1.wav",
-            "TacRP/shells/shotshell_drop-2.wav",
-            "TacRP/shells/shotshell_drop-3.wav",
-            "TacRP/shells/shotshell_drop-4.wav",
-            "TacRP/shells/shotshell_drop-5.wav",
-        }
-    },
-}
-
 EFFECT.VMContext = true
 
 function EFFECT:Init(data)
 
     local att = data:GetAttachment()
     local ent = data:GetEntity()
-    local type = data:GetFlags()
 
-    self.Type = type or self.Type
+    self.Type = data:GetFlags() or self.Type
 
-    local typetbl = self.TypeSettings[self.Type]
+    local typetbl = TacRP.ShellTypes[self.Type]
 
     if !IsValid(ent) then self:Remove() return end
     if !IsValid(ent:GetOwner()) then self:Remove() return end

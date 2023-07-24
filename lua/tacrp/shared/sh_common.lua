@@ -195,3 +195,49 @@ TacRP.HoldTypeSightedLookup = {
     ["ar2"] = "rpg",
     ["shotgun"] = "rpg",
 }
+
+TacRP.ShellTypes = {
+    [1] = {
+        Model = "models/tacint/shells/pistol_shell.mdl",
+        Sounds = {
+            "TacRP/shells/shell_drop-1.wav",
+            "TacRP/shells/shell_drop-2.wav",
+            "TacRP/shells/shell_drop-3.wav",
+            "TacRP/shells/shell_drop-4.wav",
+            "TacRP/shells/shell_drop-5.wav",
+        }
+    },
+    [2] = {
+        Model = "models/tacint/shells/rifle_shell.mdl",
+        Sounds = {
+            "TacRP/shells/shell_drop-1.wav",
+            "TacRP/shells/shell_drop-2.wav",
+            "TacRP/shells/shell_drop-3.wav",
+            "TacRP/shells/shell_drop-4.wav",
+            "TacRP/shells/shell_drop-5.wav",
+        }
+    },
+    [3] = {
+        Model = "models/tacint/shells/shotgun_shell.mdl",
+        Sounds = {
+            "TacRP/shells/shotshell_drop-1.wav",
+            "TacRP/shells/shotshell_drop-2.wav",
+            "TacRP/shells/shotshell_drop-3.wav",
+            "TacRP/shells/shotshell_drop-4.wav",
+            "TacRP/shells/shotshell_drop-5.wav",
+        }
+    },
+    [4] = {
+        Model = "models/tacint/shells/ks23_shell.mdl",
+        Sounds = {
+            "TacRP/shells/shotshell_drop-1.wav",
+            "TacRP/shells/shotshell_drop-2.wav",
+            "TacRP/shells/shotshell_drop-3.wav",
+            "TacRP/shells/shotshell_drop-4.wav",
+            "TacRP/shells/shotshell_drop-5.wav",
+        }
+    },
+}
+hook.Add("InitPostEntity", "tacrp_shelleffect", function()
+    hook.Run("TacRP_LoadShellEffects", TacRP.ShellTypes)
+end)
