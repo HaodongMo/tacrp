@@ -220,10 +220,27 @@ SWEP.QuickNadeTimeMult = 1
 // melee
 
 SWEP.CanMeleeAttack = true
+
 SWEP.MeleeDamage = 25
 SWEP.MeleeAttackTime = 0.7 // time between swings
 SWEP.MeleeRange = 96
 SWEP.MeleeDamageType = DMG_GENERIC
+
+SWEP.MeleeDelay = 0.25
+
+// secondary attack, used on knives
+SWEP.Melee2Damage = nil
+SWEP.Melee2AttackTime = nil
+SWEP.Melee2Range = nil
+SWEP.Melee2AttackMissTime = nil
+SWEP.Melee2Delay = nil
+
+// used on knife throw attachment
+SWEP.MeleeThrowDamage = nil
+SWEP.MeleeThrowForce = 3000
+SWEP.MeleeThrowTime = nil // cooldown time, also controls animation speed
+SWEP.MeleeThrowTimeWait = nil // delay until deploy animation is played; does not affect actual cooldown
+
 
 // reload
 
