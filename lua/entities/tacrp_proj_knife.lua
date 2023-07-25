@@ -18,10 +18,18 @@ ENT.ExplodeUnderwater = true
 ENT.Delay = 0
 
 ENT.SmokeTrail = false
-ENT.BounceSounds = {
-    "TacRP/weapons/grenade/flashbang_bounce-1.wav",
-    "TacRP/weapons/grenade/flashbang_bounce-2.wav",
-    "TacRP/weapons/grenade/flashbang_bounce-3.wav",
+local path = "tacrp/weapons/knife/"
+ENT.Sound_MeleeHit = {
+    path .. "/scrape_metal-1.wav",
+    path .. "/scrape_metal-2.wav",
+    path .. "/scrape_metal-3.wav",
+}
+ENT.Sound_MeleeHitBody = {
+    path .. "/flesh_hit-1.wav",
+    path .. "/flesh_hit-2.wav",
+    path .. "/flesh_hit-3.wav",
+    path .. "/flesh_hit-4.wav",
+    path .. "/flesh_hit-5.wav",
 }
 
 ENT.Damage = 35
@@ -90,7 +98,9 @@ function ENT:Impact(data, collider)
                 data.HitEntity:EmitSound("player/headshot" .. math.random(1, 2) .. ".wav", 80, 105)
                 tgtpos = headpos
             end
-            self:EmitSound("tacrp/weapons/knife/flesh_hit-" .. math.random(1, 5) .. ".wav", 80, 110, 1)
+
+            self:EmitSound(self.Sound_MeleeHitBody[math.random(1, #self.Sound_MeleeHitBody)], 80, 110, 1)
+            -- self:EmitSound("tacrp/weapons/knife/flesh_hit-" .. math.random(1, 5) .. ".wav", 80, 110, 1)
 
             -- local ang = data.OurOldVelocity:Angle()
             -- local fx = EffectData()
@@ -111,7 +121,8 @@ function ENT:Impact(data, collider)
             fx:SetNormal(-ang:Forward())
             fx:SetAngles(-ang)
             util.Effect("ManhackSparks", fx)
-            self:EmitSound("tacrp/weapons/knife/scrape_metal-" .. math.random(2, 3) .. ".wav", 80, 100, 0.75)
+            self:EmitSound(self.Sound_MeleeHit[math.random(1, #self.Sound_MeleeHit)], 80, 110, 1)
+            -- self:EmitSound("tacrp/weapons/knife/scrape_metal-" .. math.random(2, 3) .. ".wav", 80, 100, 0.75)
         end
 
         -- data.HitEntity:TakeDamageInfo(dmg)
@@ -131,7 +142,8 @@ function ENT:Impact(data, collider)
         fx:SetNormal(-ang:Forward())
         fx:SetAngles(-ang)
         util.Effect("ManhackSparks", fx)
-        self:EmitSound("tacrp/weapons/knife/scrape_metal-" .. math.random(2, 3) .. ".wav", 80, 110, 0.75)
+        self:EmitSound(self.Sound_MeleeHit[math.random(1, #self.Sound_MeleeHit)], 80, 110, 1)
+        -- self:EmitSound("tacrp/weapons/knife/scrape_metal-" .. math.random(2, 3) .. ".wav", 80, 110, 0.75)
 
         -- leave a bullet hole. Also may be able to hit things it can't collide with (like stuck C4)
         self:FireBullets({
