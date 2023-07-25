@@ -1,7 +1,7 @@
 ATT.PrintName = "Ninja"
 ATT.Icon = Material("entities/tacrp_att_melee_spec_ninja.png", "mips smooth")
 ATT.Description = "Disrupt your enemies and strike with the element of surprise."
-ATT.Pros = {"RELOAD: Palm Strike / Climb", "RELOAD (Mid-air + Crouch): Dive Kick","RELOAD (Ground + Crouch): Smokescreen", "Silent Footsteps"}
+ATT.Pros = {"RELOAD: Palm Strike / Climb", "RELOAD (Mid-air + Crouch): Dive Kick","RELOAD (Ground + Crouch): Backhop", "Silent Footsteps"}
 
 ATT.Category = {"melee_spec"}
 
@@ -12,7 +12,7 @@ ATT.SilentFootstep = true
 ATT.Hook_GetHintCapabilities = function(self, tbl)
     tbl["+reload"] = {so = 0.4, str = "Palm Strike"}
     if self:GetOwner():IsOnGround() then
-        tbl["+duck/+reload"] = {so = 0.5, str = "Smokescreen"}
+        tbl["+duck/+reload"] = {so = 0.5, str = "Backhop"}
     else
         tbl["+duck/+reload"] = {so = 0.5, str = "Dive Kick"}
     end
@@ -42,21 +42,24 @@ ATT.Hook_PreReload = function(wep)
     if !ply:KeyPressed(IN_RELOAD) then return end
 
     if ply:IsOnGround() and ply:Crouching() then
-        if ply:GetNWFloat("TacRPNinjaSmoke", 0) > CurTime() or ply:GetNWFloat("TacRPDiveTime", 0) + 1 > CurTime() then return true end
-        if SERVER then
+        if ply:GetNWFloat("TacRPDiveTime", 0) + 1 > CurTime() then return true end
+        if ply:GetNWFloat("TacRPNinjaSmoke", 0) <= CurTime() and SERVER then
             makesmokesound(ply, 110)
             local cloud = ents.Create( "tacrp_smoke_cloud_ninja" )
             if !IsValid(cloud) then return end
             cloud:SetPos(ply:GetPos())
             cloud:SetOwner(ply)
             cloud:Spawn()
+            ply:SetNWFloat("TacRPNinjaSmoke", CurTime() + smokedelay)
+        else
+            wep:EmitSound("npc/fast_zombie/claw_miss1.wav", 75, 105, 1)
         end
-        ply:SetNWFloat("TacRPNinjaSmoke", CurTime() + smokedelay)
         local ang = ply:GetAngles()
         if ang.p >= -15 then
             ang.p = math.Clamp(ang.p, 45, 180 - 45)
-            ply:SetVelocity(ang:Forward() * -500)
+            ply:SetVelocity(ang:Forward() * -math.max(100, 600 - ply:GetVelocity():Length()))
         end
+        ply:SetNWFloat("TacRPDiveTime", CurTime())
     elseif !ply:IsOnGround() and ply:Crouching() then
         if ply:GetMoveType() != MOVETYPE_NOCLIP and !ply:GetNWBool("TacRPNinjaDive") and ply:GetNWFloat("TacRPDiveTime", 0) + 1 < CurTime() and ply:EyeAngles():Forward():Dot(Vector(0, 0, 1)) < -0.25 then
             ply:SetNWBool("TacRPNinjaDive", true)

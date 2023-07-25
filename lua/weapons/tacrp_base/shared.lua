@@ -225,8 +225,8 @@ SWEP.MeleeDamage = 25
 SWEP.MeleeAttackTime = 0.7 // time between swings
 SWEP.MeleeRange = 96
 SWEP.MeleeDamageType = DMG_GENERIC
+SWEP.MeleeDelay = 0.25 // delay between swing start and trace
 
-SWEP.MeleeDelay = 0.25
 
 // secondary attack, used on knives
 SWEP.Melee2Damage = nil
