@@ -37,8 +37,8 @@ ATT.Hook_SecondaryAttack = function(self)
         rocket.Model = self.ThrownKnifeModel or self.WorldModel
         rocket.Damage = self:GetValue("MeleeThrowDamage") or self:GetValue("MeleeDamage")
         rocket.Inflictor = self
-        rocket.Sound_MeleeHit = table.Copy(self.Sound_MeleeHit)
-        rocket.Sound_MeleeHitBody = table.Copy(self.Sound_MeleeHitBody)
+        rocket.Sound_MeleeHit = istable(self.Sound_MeleeHit) and table.Copy(self.Sound_MeleeHit) or self.Sound_MeleeHit
+        rocket.Sound_MeleeHitBody = istable(self.Sound_MeleeHitBody) and table.Copy(self.Sound_MeleeHitBody) or self.Sound_MeleeHitBody
 
         rocket:SetPos(src)
         rocket:SetOwner(self:GetOwner())

@@ -93,13 +93,13 @@ function ENT:Impact(data, collider)
                 end
             end
 
-            if bhg == HITGROUP_HEAD or (hdot >= 0.9 and hdist < 2304) then
+            if bhg == HITGROUP_HEAD or (hdot >= 0.85 and hdist < 2500) then
                 dmg:ScaleDamage(2.5)
                 data.HitEntity:EmitSound("player/headshot" .. math.random(1, 2) .. ".wav", 80, 105)
                 tgtpos = headpos
             end
 
-            self:EmitSound(self.Sound_MeleeHitBody[math.random(1, #self.Sound_MeleeHitBody)], 80, 110, 1)
+            self:EmitSound(istable(self.Sound_MeleeHitBody) and self.Sound_MeleeHitBody[math.random(1, #self.Sound_MeleeHitBody)] or self.Sound_MeleeHitBody, 80, 110, 1)
             -- self:EmitSound("tacrp/weapons/knife/flesh_hit-" .. math.random(1, 5) .. ".wav", 80, 110, 1)
 
             -- local ang = data.OurOldVelocity:Angle()
@@ -121,7 +121,7 @@ function ENT:Impact(data, collider)
             fx:SetNormal(-ang:Forward())
             fx:SetAngles(-ang)
             util.Effect("ManhackSparks", fx)
-            self:EmitSound(self.Sound_MeleeHit[math.random(1, #self.Sound_MeleeHit)], 80, 110, 1)
+            self:EmitSound(istable(self.Sound_MeleeHit) and self.Sound_MeleeHit[math.random(1, #self.Sound_MeleeHit)] or self.Sound_MeleeHit, 80, 110, 1)
             -- self:EmitSound("tacrp/weapons/knife/scrape_metal-" .. math.random(2, 3) .. ".wav", 80, 100, 0.75)
         end
 
@@ -142,7 +142,7 @@ function ENT:Impact(data, collider)
         fx:SetNormal(-ang:Forward())
         fx:SetAngles(-ang)
         util.Effect("ManhackSparks", fx)
-        self:EmitSound(self.Sound_MeleeHit[math.random(1, #self.Sound_MeleeHit)], 80, 110, 1)
+        self:EmitSound(istable(self.Sound_MeleeHit) and self.Sound_MeleeHit[math.random(1, #self.Sound_MeleeHit)] or self.Sound_MeleeHit, 80, 110, 1)
         -- self:EmitSound("tacrp/weapons/knife/scrape_metal-" .. math.random(2, 3) .. ".wav", 80, 110, 0.75)
 
         -- leave a bullet hole. Also may be able to hit things it can't collide with (like stuck C4)
