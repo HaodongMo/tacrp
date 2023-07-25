@@ -88,3 +88,71 @@ hook.Add("PostEntityTakeDamage", "TacRP", function(ply, dmginfo, took)
     end
     ply.TacRPPendingArmor = nil
 end)
+
+hook.Add("DoPlayerDeath", "TacRP_DropGrenade", function(ply, attacker, dmginfo)
+    local wep = ply:GetActiveWeapon()
+    if !IsValid(wep) or !wep.ArcticTacRP or !wep:GetPrimedGrenade() then return end
+    local nade = wep:GetValue("PrimaryGrenade") and TacRP.QuickNades[wep:GetValue("PrimaryGrenade")] or wep:GetGrenade()
+    if nade then
+        local force = nade.ThrowForce
+        local ent = nade.GrenadeEnt
+        local src = ply:EyePos()
+        local ang = ply:EyeAngles()
+        local rocket = ents.Create(ent or "")
+
+        if !IsValid(rocket) then return end
+
+        rocket:SetPos(src)
+        rocket:SetOwner(ply)
+        rocket:SetAngles(ang)
+        rocket:Spawn()
+        rocket:SetPhysicsAttacker(ply, 10)
+
+        if TacRP.IsGrenadeInfiniteAmmo(nade) then
+            rocket.PickupAmmo = nil
+            rocket.WeaponClass = nil -- dz ents
+        end
+
+        if wep:GetValue("QuickNadeTryImpact") and nade.CanSetImpact then
+            rocket.InstantFuse = false
+            rocket.Delay = 0
+            rocket.Armed = false
+            rocket.ImpactFuse = true
+        end
+
+        if nade.TTTTimer then
+            rocket:SetGravity(0.4)
+            rocket:SetFriction(0.2)
+            rocket:SetElasticity(0.45)
+            rocket:SetDetonateExact(CurTime() + nade.TTTTimer)
+            rocket:SetThrower(ply)
+        end
+
+        local phys = rocket:GetPhysicsObject()
+
+        if phys:IsValid() then
+            phys:ApplyForceCenter(ply:GetVelocity() + VectorRand() * 50)
+            phys:AddAngleVelocity(VectorRand() * 500)
+        end
+
+        if nade.Spoon then
+            local mag = ents.Create("TacRP_droppedmag")
+
+            if mag then
+                mag:SetPos(src)
+                mag:SetAngles(ang)
+                mag.Model = "models/weapons/tacint/flashbang_spoon.mdl"
+                mag.ImpactType = "spoon"
+                mag:SetOwner(ply)
+                mag:Spawn()
+
+                local phys2 = mag:GetPhysicsObject()
+
+                if IsValid(phys2) then
+                    phys2:ApplyForceCenter(VectorRand() * 25)
+                    phys2:AddAngleVelocity(Vector(math.Rand(-300, 300), math.Rand(-300, 300), math.Rand(-300, 300)))
+                end
+            end
+        end
+    end
+end)
