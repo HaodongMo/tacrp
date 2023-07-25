@@ -56,7 +56,7 @@ function TacRP.CancelBodyDamage(ent, dmginfo, hitgroup)
 
     -- Lambda Players call ScalePlayerDamage and cancel out hitgroup damage... except on the head
     if IsValid(ent) and ent.IsLambdaPlayer and hitgroup == HITGROUP_HEAD then
-        dmginfo:ScaleDamage(1 / TacRP.CancelMultipliers[hitgroup])
+        dmginfo:ScaleDamage(1 / TacRP.CancelMultipliers[1][hitgroup])
     end
 
     return dmginfo
