@@ -54,7 +54,8 @@ ATT.Hook_SecondaryAttack = function(self)
         end
     end)
 
-    self:SetTimer(self:GetValue("MeleeThrowTimeWait"), function()
+    local throwtimewait = self:GetValue("MeleeThrowTimeWait")
+    self:SetTimer(throwtimewait, function()
         self:PlayAnimation("deploy", 1, false, true)
     end)
 
