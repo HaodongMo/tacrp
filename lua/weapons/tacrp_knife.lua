@@ -45,6 +45,8 @@ SWEP.MeleeDamageType = DMG_SLASH
 SWEP.MeleeThrowTime = 1.1
 SWEP.MeleeThrowTimeWait = 0.3
 
+SWEP.MeleeDashChargeTime = 7.5
+
 SWEP.Firemode = 0
 
 SWEP.RPM = 120

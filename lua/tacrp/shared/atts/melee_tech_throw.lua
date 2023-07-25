@@ -30,7 +30,7 @@ ATT.Hook_SecondaryAttack = function(self)
 
         local src, ang = self:GetOwner():GetShootPos(), self:GetShootDir() --+ Angle(-1, 0, 0)
         local spread = 0
-        local force = self:GetValue("MeleeThrowForce") or 3000
+        local force = (self:GetValue("MeleeThrowForce") or 3000) + math.max(0, ang:Forward():Dot(self:GetOwner():GetVelocity()))
         local dispersion = Angle(math.Rand(-1, 1), math.Rand(-1, 1), 0)
         dispersion = dispersion * spread * 36
 

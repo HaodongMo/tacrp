@@ -227,7 +227,6 @@ SWEP.MeleeRange = 96
 SWEP.MeleeDamageType = DMG_GENERIC
 SWEP.MeleeDelay = 0.25 // delay between swing start and trace
 
-
 // secondary attack, used on knives
 SWEP.Melee2Damage = nil
 SWEP.Melee2AttackTime = nil
@@ -240,6 +239,8 @@ SWEP.MeleeThrowDamage = nil
 SWEP.MeleeThrowForce = 3000
 SWEP.MeleeThrowTime = nil // cooldown time, also controls animation speed
 SWEP.MeleeThrowTimeWait = nil // delay until deploy animation is played; does not affect actual cooldown
+// used on some knife attachments
+SWEP.MeleeDashChargeTime = 7.5 // time taken to fully charge dash meter, lower is faster charge
 
 
 // reload

@@ -218,9 +218,9 @@ ATT.Hook_PreReload = function(wep)
         return true
     end
 
-    if incharge(ply) or !ply:KeyPressed(IN_RELOAD) or ply:GetMoveType() != MOVETYPE_WALK or ply:GetNWFloat("TacRPCharge", 0) < 1 then return end
+    if incharge(ply) or !ply:KeyPressed(IN_RELOAD) or ply:GetMoveType() != MOVETYPE_WALK or ply:GetNWFloat("TacRPDashCharge", 0) < 1 then return end
 
-    ply:SetNWFloat("TacRPCharge", 0)
+    ply:SetNWFloat("TacRPDashCharge", 0)
     ply:SetNWFloat("TacRPChargeTime", CurTime())
     ply:SetNWEntity("TacRPChargeWeapon", wep)
 
@@ -249,7 +249,7 @@ end
 ATT.Hook_PostThink = function(wep)
     local ply = wep:GetOwner()
     if (game.SinglePlayer() or IsFirstTimePredicted()) and !incharge(ply) then
-        ply:SetNWFloat("TacRPCharge", math.min(1, ply:GetNWFloat("TacRPCharge", 0) + FrameTime() / 9))
+        ply:SetNWFloat("TacRPDashCharge", math.min(1, ply:GetNWFloat("TacRPDashCharge", 0) + FrameTime() / (wep:GetValue("MeleeDashChargeTime") or 7.5)))
     end
 end
 
@@ -294,7 +294,7 @@ function ATT.TacticalDraw(self)
         end
     end
 
-    local c = math.Clamp(ply:GetNWFloat("TacRPCharge", 0), 0, 1)
+    local c = math.Clamp(ply:GetNWFloat("TacRPDashCharge", 0), 0, 1)
     local d = 1
 
     local c_bg, c_cnr, c_txt = TacRP.GetPanelColors(chargin, chargin)
@@ -604,7 +604,7 @@ hook.Add("PostEntityTakeDamage", "TacRP_Charge", function(ent, dmginfo, took)
             and (ent:IsNPC() or ent:IsPlayer() or ent:IsNextBot()) and ent != ply
             and ply:IsPlayer() and ply:GetNWInt("TacRPChargeMode", 0) == 1
             and incharge(ply) then
-        ply:SetNWFloat("TacRPCharge", math.min(1, ply:GetNWFloat("TacRPCharge", 0) + dmginfo:GetDamage() * (ent:IsPlayer() and 0.01 or 0.005)))
+        ply:SetNWFloat("TacRPDashCharge", math.min(1, ply:GetNWFloat("TacRPDashCharge", 0) + dmginfo:GetDamage() * (ent:IsPlayer() and 0.01 or 0.005)))
     end
     ]]
     if took and dmginfo:GetAttacker() != ent and !dmginfo:IsFallDamage() and ent:IsPlayer() and incharge(ent) and ent:GetNWInt("TacRPChargeMode", 0) == 1 then
