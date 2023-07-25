@@ -238,7 +238,7 @@ SWEP.Melee2Delay = nil
 SWEP.MeleeThrowDamage = nil
 SWEP.MeleeThrowForce = 3000
 SWEP.MeleeThrowTime = nil // cooldown time, also controls animation speed
-SWEP.MeleeThrowTimeWait = nil // delay until deploy animation is played; does not affect actual cooldown
+SWEP.MeleeThrowTimeWait = 0.3 // delay until deploy animation is played; does not affect actual cooldown
 // used on some knife attachments
 SWEP.MeleeDashChargeTime = 7.5 // time taken to fully charge dash meter, lower is faster charge
 
