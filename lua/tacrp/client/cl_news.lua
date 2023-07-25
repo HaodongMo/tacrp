@@ -247,6 +247,30 @@ An additional benefit is that a lot of the attachments now use consistent wordin
 <li><b>Fixed:</b> Certain lower resolutions unable to display attachments properly.
 </ul>]],
     },
+    {
+        Title = "Update 13",
+        Type = "Patch Notes",
+        Date = "2023-07-18",
+        Author = "8Z",
+        Major = false,
+        Summary = "Small compatability additions and balance tweaks.",
+        Contents = [[<body style="font-family:'Myriad Pro';color:white;font-size:125%;">
+
+<p>The Special Delivery expansion is out - get 21 extra special weapons for TacRP today!: <input type='submit' value='Open Workshop Page' onclick='console.log("RUNLUA:gui.OpenURL(\"https://steamcommunity.com/sharedfiles/filedetails/?id=3007840813\")")' /></p>
+
+<p>This is a small update with mostly minor changes.</p>
+
+<h3>Changelist</h3>
+<ul>
+<li><b>Added:</b> Breach Charges will attract VJ L4D Common Infected like a pipe bomb. Why? Why not?
+<li><b>Added:</b> Expansion addons can now add shell ejections (used by Special Delivery for the Super X3)
+<li><b>Rebalance:</b> Buffed DSA-58.
+<li><b>Rebalance:</b> Some adjustments to akimbo attachments.
+<li><b>Rebalance:</b> Buffed burst trigger fire rate.
+<li><b>Changed:</b> When using Sliding Ability's slide, you aren't considered sprinting and can fire your gun.
+<li><b>Fixed:</b> Auto-Burst doesn't work with non-runaway bursts.
+</ul>]],
+    },
 }
 TacRP.NewsRead = TacRP.NewsRead or {}
 TacRP.NewsLoaded = nil
