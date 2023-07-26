@@ -27,21 +27,23 @@ ATT.Hook_PreReload = function(wep)
 
     wep:EmitSound("tacrp/sandman/bat_baseball_hit" .. math.random(1, 2) .. ".wav")
 
-    local src, ang = ply:GetShootPos(), wep:GetShootDir() --+ Angle(-1, 0, 0)
-    local force = 2000
-    local rocket = ents.Create("tacrp_proj_ball")
-    rocket.Inflictor = wep
-    rocket:SetPos(src)
-    rocket:SetOwner(ply)
-    rocket:SetAngles(ang)
-    rocket:Spawn()
-    rocket:SetPhysicsAttacker(ply, 10)
+    if SERVER then
+        local src, ang = ply:GetShootPos(), wep:GetShootDir() --+ Angle(-1, 0, 0)
+        local force = 2000
+        local rocket = ents.Create("tacrp_proj_ball")
+        rocket.Inflictor = wep
+        rocket:SetPos(src)
+        rocket:SetOwner(ply)
+        rocket:SetAngles(ang)
+        rocket:Spawn()
+        rocket:SetPhysicsAttacker(ply, 10)
 
-    local phys = rocket:GetPhysicsObject()
+        local phys = rocket:GetPhysicsObject()
 
-    if phys:IsValid() then
-        phys:AddVelocity(ang:Forward() * force)
-        phys:SetAngleVelocityInstantaneous(VectorRand() * 500)
+        if phys:IsValid() then
+            phys:AddVelocity(ang:Forward() * force)
+            phys:SetAngleVelocityInstantaneous(VectorRand() * 500)
+        end
     end
 
     return true
