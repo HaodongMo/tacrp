@@ -96,7 +96,7 @@ function ENT:Impact(data, collider)
             end
 
             if bhg == HITGROUP_HEAD or (hdot >= 0.85 and hdist < 2500) then
-                dmg:ScaleDamage(1.5)
+                dmg:ScaleDamage(2)
                 data.HitEntity:EmitSound("player/headshot" .. math.random(1, 2) .. ".wav", 80, 105)
                 tgtpos = headpos
             end
