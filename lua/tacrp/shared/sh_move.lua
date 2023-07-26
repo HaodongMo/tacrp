@@ -7,11 +7,11 @@ function TacRP.Move(ply, mv, cmd)
 
     local totalmult = 1
 
-    if ply:GetNWFloat("TacRPLastBashed", 0) + 2 > CurTime() then
+    if ply:GetNWFloat("TacRPLastBashed", 0) + 3 > CurTime() then
         local slow = TacRP.ConVars["melee_slow"]:GetFloat()
         local mult = slow
-        if ply:GetNWFloat("TacRPLastBashed", 0) + 1.4 < CurTime() then
-            mult = Lerp((CurTime() - ply:GetNWFloat("TacRPLastBashed", 0) - 1.4) / (2 - 1.4), slow, 1)
+        if ply:GetNWFloat("TacRPLastBashed", 0) + 1.5 < CurTime() then
+            mult = Lerp((CurTime() - ply:GetNWFloat("TacRPLastBashed", 0) - 1.5) / (3 - 1.5), slow, 1)
         end
 
         -- local basespd = math.min((Vector(cmd:GetForwardMove(), cmd:GetUpMove(), cmd:GetSideMove())):Length(), mv:GetMaxClientSpeed())

@@ -163,7 +163,7 @@ local function chargemelee(self)
             self:EmitSound(self:ChooseSound(self:GetValue("Sound_MeleeHit")), 75, 100, 1, CHAN_ITEM)
         end
 
-        if IsValid(tr.Entity) and tr.Entity:IsPlayer() and self:GetValue("MeleeSlow") then
+        if IsValid(tr.Entity) and self:GetValue("MeleeSlow") then
             tr.Entity.TacRPBashSlow = true
         end
 

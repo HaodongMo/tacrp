@@ -262,8 +262,8 @@ hook.Add("PostEntityTakeDamage", "TacRP_GoombaStomp", function(ent, dmginfo, too
 
     if took and ent.PalmPunched and dmginfo:GetDamageType() == DMG_CLUB + DMG_SONIC then
         ent.PalmPunched = false
+        ent:SetNWFloat("TacRPLastBashed", CurTime())
         if ent:IsPlayer() then
-            ent:SetNWFloat("TacRPLastBashed", CurTime())
             net.Start("tacrp_flashbang")
                 net.WriteFloat(0.5)
             net.Send(ent)

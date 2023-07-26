@@ -250,7 +250,7 @@ An additional benefit is that a lot of the attachments now use consistent wordin
     {
         Title = "Update 13",
         Type = "Patch Notes",
-        Date = "2023-07-18",
+        Date = "2023-07-24",
         Author = "8Z",
         Major = false,
         Summary = "Small compatability additions and balance tweaks.",
@@ -269,6 +269,31 @@ An additional benefit is that a lot of the attachments now use consistent wordin
 <li><b>Rebalance:</b> Buffed burst trigger fire rate.
 <li><b>Changed:</b> When using Sliding Ability's slide, you aren't considered sprinting and can fire your gun.
 <li><b>Fixed:</b> Auto-Burst doesn't work with non-runaway bursts.
+</ul>]],
+    },
+    {
+        Title = "Update 14",
+        Type = "Patch Notes",
+        Date = "2023-07-25",
+        Author = "8Z",
+        Major = false,
+        Summary = "Melee update.",
+        Contents = [[<body style="font-family:'Myriad Pro';color:white;font-size:125%;">
+
+<p>Even if you run out of bullets, you'll never run out of bullets. Brute Force, a melee weapon expansion for TacRP, is out now!: <input type='submit' value='Open Workshop Page' onclick='console.log("RUNLUA:gui.OpenURL(\"https://steamcommunity.com/sharedfiles/filedetails/?id=3007840813\")")' /></p>
+
+<p>Accompanying Brute Force is a list of updates to melee weapons, as well as a new perk.</p>
+
+<h3>Changelist</h3>
+<ul>
+<li><b>Added:</b> Melee Special attachment Scout. Gain a double jump and bat balls into others to slow them.
+<li><b>Added:</b> Melee bashes and delays have a small delay before the hit connects. (0.25s for bash, 0.15s for knives)
+<li><b>Rebalance:</b> Charge special use same meter as other mobility specials and charge the same rate.
+<li><b>Rebalance:</b> Melee weapons now have varied throwing damage, velocity, and mobility recharge time.
+<li><b>Rebalance:</b> Ninja can backhop regardless of whether the smoke bomb is ready.
+<li><b>Rebalance:</b> Knife throw headshot detection is slightly more generous.
+<li><b>Rebalance:</b> Knife throw does double damage on stunned/slowed targets, and no longer on mid-air targets.
+<li><b>Rebalance:</b> Slow total duration increased from 2s to 3s, fade start time unchanged.
 </ul>]],
     },
 }

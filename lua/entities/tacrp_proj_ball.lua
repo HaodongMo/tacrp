@@ -83,7 +83,7 @@ function ENT:PhysicsCollide(data, collider)
         dmg:SetDamageForce(d * 10000)
         dmg:SetDamagePosition(data.HitPos)
 
-        if (data.HitEntity:IsPlayer() and dist > 200) then
+        if dist > 200 then
             data.HitEntity.TacRPBashSlow = true
         end
 
