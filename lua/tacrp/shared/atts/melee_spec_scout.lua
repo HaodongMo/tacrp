@@ -29,7 +29,7 @@ ATT.Hook_PreReload = function(wep)
 
     if SERVER then
         local src, ang = ply:GetShootPos(), wep:GetShootDir() --+ Angle(-1, 0, 0)
-        local force = 2000
+        local force = 1500
         local rocket = ents.Create("tacrp_proj_ball")
         rocket.Inflictor = wep
         rocket:SetPos(src)

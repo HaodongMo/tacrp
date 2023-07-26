@@ -15,8 +15,8 @@ end
 ENT.Particles = nil
 ENT.SmokeRadius = 256
 ENT.SmokeColor = Color(220, 220, 220)
-ENT.BillowTime = 1
-ENT.Life = 12
+ENT.BillowTime = 0.5
+ENT.Life = 8
 
 AddCSLuaFile()
 
