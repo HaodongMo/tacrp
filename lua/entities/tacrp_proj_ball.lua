@@ -73,7 +73,7 @@ function ENT:PhysicsCollide(data, collider)
 
         local tgtpos = data.HitPos
         local dist = (tgtpos - self.StartPos):Length()
-        self.Damage = Lerp(math.Clamp(dist / 1500, 0, 1) ^ 1.5, 10, 100) * (data.HitEntity:IsPlayer() and 1 or 1.5)
+        self.Damage = Lerp(math.Clamp(dist / 1500, 0, 1) ^ 1.5, 10, 70) * (data.HitEntity:IsPlayer() and 1 or 1.5)
 
         local dmg = DamageInfo()
         dmg:SetAttacker(attacker)
