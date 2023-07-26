@@ -16,6 +16,7 @@ ENT.ExplodeOnDamage = false
 ENT.ExplodeUnderwater = true
 
 ENT.Delay = 0
+ENT.ImpactDamage = 0
 
 ENT.SmokeTrail = false
 local path = "tacrp/weapons/knife/"

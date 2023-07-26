@@ -318,8 +318,8 @@ function ENT:Draw()
 end
 
 hook.Add("EntityTakeDamage", "tacrp_proj_collision", function(ent, dmginfo)
-    -- print(dmginfo:GetInflictor(), dmginfo:GetDamage(), dmginfo:GetDamageType() == DMG_CRUSH)
+    print(dmginfo:GetInflictor(), dmginfo:GetDamage(), dmginfo:GetDamageType())
     if IsValid(dmginfo:GetInflictor())
             and scripted_ents.IsBasedOn(dmginfo:GetInflictor():GetClass(), "tacrp_proj_base")
-            and dmginfo:GetDamageType() == DMG_CRUSH then return true end
+            and dmginfo:GetDamageType() == DMG_CRUSH then dmginfo:SetDamage(0) return true end
 end)
