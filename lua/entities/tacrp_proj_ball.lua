@@ -73,7 +73,7 @@ function ENT:PhysicsCollide(data, collider)
 
         local tgtpos = data.HitPos
         local dist = (tgtpos - self.StartPos):Length()
-        self.Damage = Lerp(math.Clamp(dist / 1500, 0, 1) ^ 1.5, 10, 100) * (data.HitEntity:IsPlayer() and 1 or 2)
+        self.Damage = Lerp(math.Clamp(dist / 1500, 0, 1) ^ 1.5, 10, 100) * (data.HitEntity:IsPlayer() and 1 or 1.5)
 
         local dmg = DamageInfo()
         dmg:SetAttacker(attacker)
@@ -95,6 +95,13 @@ function ENT:PhysicsCollide(data, collider)
             end
         else
             data.HitEntity:EmitSound("tacrp/sandman/baseball_hitworld" .. math.random(1, 3) .. ".wav", 90)
+        end
+
+        if data.HitEntity:IsNPC() or data.HitEntity:IsNextBot() then
+            data.HitEntity:SetVelocity(Vector(0, 0, 200))
+            if data.HitEntity:IsNPC() then
+                data.HitEntity:SetSchedule(SCHED_FLINCH_PHYSICS)
+            end
         end
 
         local atktr = util.TraceLine({
