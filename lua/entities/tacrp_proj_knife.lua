@@ -61,8 +61,8 @@ function ENT:Impact(data, collider)
 
         local tgtpos = data.HitPos
         if (data.HitEntity:IsPlayer() or data.HitEntity:IsNPC() or data.HitEntity:IsNextBot()) then
-            if (data.HitEntity:GetNWFloat("TacRPLastBashed", 0) + 3 <= CurTime()
-                    or (data.HitEntity:GetNWFloat("TacRPStunStart", 0) + data.HitEntity:GetNWFloat("TacRPStunDur", 0) <= CurTime())) then
+            if (data.HitEntity:GetNWFloat("TacRPLastBashed", 0) + 3 >= CurTime()
+                    or (data.HitEntity:GetNWFloat("TacRPStunStart", 0) + data.HitEntity:GetNWFloat("TacRPStunDur", 0) >= CurTime())) then
                 dmg:ScaleDamage(2)
                 data.HitEntity:EmitSound("weapons/crossbow/bolt_skewer1.wav", 80, 110)
             end
