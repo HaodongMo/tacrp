@@ -280,7 +280,7 @@ An additional benefit is that a lot of the attachments now use consistent wordin
         Summary = "Melee update.",
         Contents = [[<body style="font-family:'Myriad Pro';color:white;font-size:125%;">
 
-<p>Even if you run out of bullets, you'll never run out of bullets. Brute Force, a melee weapon expansion for TacRP, is out now!: <input type='submit' value='Open Workshop Page' onclick='console.log("RUNLUA:gui.OpenURL(\"https://steamcommunity.com/sharedfiles/filedetails/?id=3007840813\")")' /></p>
+<p>Even if you run out of bullets, you'll never run out of bullets. Brute Force, a melee weapon expansion for TacRP, is out now!: <input type='submit' value='Open Workshop Page' onclick='console.log("RUNLUA:gui.OpenURL(\"https://steamcommunity.com/sharedfiles/filedetails/?id=3009874388\")")' /></p>
 
 <p>Accompanying Brute Force is a list of updates to melee weapons, as well as a new perk.</p>
 
