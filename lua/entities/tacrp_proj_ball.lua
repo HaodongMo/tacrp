@@ -111,6 +111,7 @@ function ENT:PhysicsCollide(data, collider)
         })
 
         TacRP.CancelBodyDamage(data.HitEntity, dmg, atktr.HitGroup)
+        data.HitEntity:SetPhysicsAttacker(attacker, 3)
         data.HitEntity:DispatchTraceAttack(dmg, atktr)
 
         self:SetOwner(nil)

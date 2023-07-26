@@ -48,6 +48,7 @@ ATT.Hook_PreReload = function(wep)
 end
 
 local ballicon = Material("TacRP/grenades/baseball.png", "mips smooth")
+local lastc = 0
 function ATT.TacticalDraw(self)
     local scrw = ScrW()
     local scrh = ScrH()
@@ -64,6 +65,11 @@ function ATT.TacticalDraw(self)
     local c = math.Clamp((self:GetOwner():GetNWFloat("TacRPScoutBall", 0) - CurTime()) / balldelay, 0, 1)
     surface.SetDrawColor(150, 150, 150, 75)
     surface.DrawRect(x, y + h * (1 - c), w, h * c)
+
+    if c == 0 and lastc > 0 then
+        LocalPlayer():EmitSound("tacrp/sandman/recharged.wav")
+    end
+    lastc = c
 
     local clr = c > 0 and 200 or 255
     surface.SetDrawColor(clr, clr, clr, 255)
