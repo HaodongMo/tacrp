@@ -63,7 +63,7 @@ function ENT:Impact(data, collider)
         if (data.HitEntity:IsPlayer() or data.HitEntity:IsNPC() or data.HitEntity:IsNextBot()) then
             if (data.HitEntity:GetNWFloat("TacRPLastBashed", 0) + 3 >= CurTime()
                     or (data.HitEntity:GetNWFloat("TacRPStunStart", 0) + data.HitEntity:GetNWFloat("TacRPStunDur", 0) >= CurTime())) then
-                dmg:ScaleDamage(2)
+                dmg:ScaleDamage(1.5)
                 data.HitEntity:EmitSound("weapons/crossbow/bolt_skewer1.wav", 80, 110)
             end
 
@@ -95,7 +95,7 @@ function ENT:Impact(data, collider)
             end
 
             if bhg == HITGROUP_HEAD or (hdot >= 0.85 and hdist < 2500) then
-                dmg:ScaleDamage(2)
+                dmg:ScaleDamage(1.5)
                 data.HitEntity:EmitSound("player/headshot" .. math.random(1, 2) .. ".wav", 80, 105)
                 tgtpos = headpos
             end
