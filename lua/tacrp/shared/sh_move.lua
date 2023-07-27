@@ -126,7 +126,7 @@ function TacRP.Move(ply, mv, cmd)
             and wpn:StillWaiting() and !wpn:GetReloading() and !wpn:GetCustomize() and wpn:Clip1() >= wpn:GetValue("AmmoPerShot")
             and wpn:GetNextSecondaryFire() < CurTime() and (wpn:GetNextPrimaryFire() - CurTime()) < 0.15 then
         wpn:SetCharge(true)
-    elseif !wpn.NoBuffer and wpn:GetCharge() and !wpn:StillWaiting() and !owner and !mv:KeyDown(IN_ATTACK) then
+    elseif !wpn.NoBuffer and wpn:GetCharge() and !wpn:StillWaiting() and !owner then
         wpn:SetCharge(false)
         wpn:PrimaryAttack()
     end
