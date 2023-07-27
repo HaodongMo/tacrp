@@ -586,7 +586,7 @@ function SWEP:CreateCustomizeHUD()
             local diff = nil
 
             if k.HideIfSame and orig == value then return end
-            if k.HideIfZero and value == 0 and orig == 0 then return end
+            if k.DefaultValue != nil and value == k.DefaultValue and orig == k.DefaultValue then return end
 
             if k.ConVarCheck then
                 if !k.ConVar then k.ConVar = GetConVar(k.ConVarCheck) end

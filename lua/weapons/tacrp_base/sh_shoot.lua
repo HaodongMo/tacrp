@@ -190,7 +190,7 @@ function SWEP:PrimaryAttack()
     end
 
 
-    local delay = 60 / self:GetValue("RPM")
+    local delay = 60 / self:GetRPM()
 
     local curatt = self:GetNextPrimaryFire()
     local diff = CurTime() - curatt
@@ -685,4 +685,16 @@ function SWEP:GetJamChance(base)
     local msb = (valfunc(self, "JamBaseMSB") or default) / math.sqrt(factor)
 
     return 1 / msb
+end
+
+function SWEP:GetRPM(base, fm)
+    fm = fm or self:GetCurrentFiremode()
+    local valfunc = base and self.GetBaseValue or self.GetValue
+    local rpm = valfunc(self, "RPM")
+    if fm == 1 then
+        rpm = rpm * valfunc(self, "RPMMultSemi")
+    elseif fm < 0 then
+        rpm = rpm * valfunc(self, "RPMMultBurst")
+    end
+    return rpm
 end

@@ -9,11 +9,13 @@ ATT.Category = {"trigger_auto"}
 
 ATT.SortOrder = 1.1
 
+ATT.Add_PostBurstDelay = 0.1
+ATT.Add_RPMMultBurst = 0.35
 ATT.Override_Firemodes = {-3, 1}
 ATT.Override_RunawayBurst = true
+
 ATT.Mult_RecoilSpreadPenalty = 0.75
 ATT.Mult_RecoilVisualKick = 0.85
 ATT.Mult_RecoilKick = 0.75
-ATT.Override_PostBurstDelay = 0.1
-ATT.Mult_RPM = 1.35
+
 ATT.Mult_RecoilStability = 1.25

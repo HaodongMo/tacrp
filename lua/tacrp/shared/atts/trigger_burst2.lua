@@ -11,10 +11,10 @@ ATT.Category = {"trigger_semi"}
 
 ATT.SortOrder = 1.1
 
-ATT.Override_Firemodes = {-3}
+ATT.Override_Firemodes = {-3, 1}
+ATT.Add_RPMMultBurst = 0.4
 ATT.Override_RunawayBurst = true
--- ATT.Mult_RecoilSpreadPenalty = 1.1
-ATT.Override_PostBurstDelay = 0.12
-ATT.Mult_RPM = 1.35
+ATT.Add_PostBurstDelay = 0.14
+
 ATT.Mult_RecoilKick = 1.25
 ATT.Mult_RecoilStability = 0.75

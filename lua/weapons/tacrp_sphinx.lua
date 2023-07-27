@@ -10,7 +10,7 @@ SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
 SWEP.SubCatTier = "2Operator"
 SWEP.SubCatType = "1Sidearm"
 
-SWEP.Description = "Competition pistol with low recoil and a crisp trigger."
+SWEP.Description = "Competition pistol with low recoil and a high cyclic rate."
 
 SWEP.ViewModel = "models/weapons/tacint/v_sphinx.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_sphinx.mdl"
@@ -43,8 +43,6 @@ SWEP.BalanceStats = {
         Damage_Max = 14,
         Damage_Min = 6,
         RPM = 500,
-
-        Description = "Competition pistol with high capacity and low recoil.\nCan be fired quickly, but becomes inaccurate past the first few shots.",
 
         RecoilMaximum = 7,
         RecoilResetTime = 0.12,
@@ -113,6 +111,8 @@ SWEP.BodyDamageMultipliers = {
 SWEP.Firemode = 1
 
 SWEP.RPM = 750
+SWEP.RPMMultBurst = 1.2
+SWEP.PostBurstDelay = 0.06
 
 SWEP.Spread = 0.0035
 

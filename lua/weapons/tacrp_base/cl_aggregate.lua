@@ -126,7 +126,7 @@ SWEP.StatGroups = {
             local valfunc = base and self.GetBaseValue or self.GetValue
 
             local bfm = self:GetBestFiremode(base)
-            local rrpm = valfunc(self, "RPM")
+            local rrpm = self:GetRPM(base, bfm)
             local pbd = valfunc(self, "PostBurstDelay")
             local ttt = TacRP.GetBalanceMode() == TacRP.BALANCE_TTT
             local pve = TacRP.GetBalanceMode() == TacRP.BALANCE_PVE
@@ -189,7 +189,7 @@ SWEP.StatGroups = {
             local valfunc = base and self.GetBaseValue or self.GetValue
 
             local bfm = self:GetBestFiremode(base)
-            local rrpm = valfunc(self, "RPM")
+            local rrpm = self:GetRPM(base, bfm)
             local erpm = rrpm
             local pbd = valfunc(self, "PostBurstDelay")
             local ttt = TacRP.GetBalanceMode() == TacRP.BALANCE_TTT
@@ -525,7 +525,7 @@ SWEP.StatDisplay = {
             local valfunc = base and self.GetBaseValue or self.GetValue
 
             local bfm = self:GetBestFiremode(base)
-            local rrpm = valfunc(self, "RPM")
+            local rrpm = self:GetRPM(base, bfm)
             local erpm = rrpm
             local pbd = valfunc(self, "PostBurstDelay")
 
@@ -553,7 +553,7 @@ SWEP.StatDisplay = {
             local valfunc = base and self.GetBaseValue or self.GetValue
 
             local bfm = self:GetBestFiremode(base)
-            local rpm = valfunc(self, "RPM")
+            local rpm = self:GetRPM(base, bfm)
 
             local num = valfunc(self, "Num")
             local dmg = math.max(valfunc(self, "Damage_Max"), valfunc(self, "Damage_Min"))
@@ -604,7 +604,30 @@ SWEP.StatDisplay = {
     {
         Name = "stat.rpm",
         Description = "stat.rpm.desc",
-        Value = "RPM"
+        Value = "RPM",
+        AggregateFunction = function(self, base, val)
+            return math.Round(val, 0)
+        end,
+    },
+    {
+        Name = "stat.rpm_burst",
+        Description = "stat.rpm_burst.desc",
+        Value = "RPMMultBurst",
+        AggregateFunction = function(self, base, val)
+            local valfunc = base and self.GetBaseValue or self.GetValue
+            return math.Round(val * valfunc(self, "RPM"), 0)
+        end,
+        DefaultValue = 1,
+    },
+    {
+        Name = "stat.rpm_semi",
+        Description = "stat.rpm_semi.desc",
+        Value = "RPMMultSemi",
+        AggregateFunction = function(self, base, val)
+            local valfunc = base and self.GetBaseValue or self.GetValue
+            return math.Round(val * valfunc(self, "RPM"), 0)
+        end,
+        DefaultValue = 1,
     },
     {
         Name = "stat.shotstofail",
@@ -616,7 +639,7 @@ SWEP.StatDisplay = {
             if val == 0 then return "∞" end
             return math.Round(1 / self:GetJamChance(base), 0)
         end,
-        HideIfZero = true,
+        DefaultValue = 0,
         Value = "JamFactor",
     },
     {
