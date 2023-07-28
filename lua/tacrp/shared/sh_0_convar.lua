@@ -585,7 +585,13 @@ local conVars = {
         min = 0,
         max = 1,
     },
-
+    {
+        name = "muzzlelight",
+        default = "1",
+        client = true,
+        min = 0,
+        max = 1
+    },
 }
 
 TacRP.ConVars = {}
@@ -746,6 +752,11 @@ local function menu_client_ti(panel)
     panel:ControlHelp("This mutes your own radar sound for yourself only. Others can still hear your radar, and you can still hear others' radars.")
 
     header(panel, "\nMiscellaneous")
+    panel:AddControl("checkbox", {
+        label = "Muzzle Light",
+        command = "tacrp_muzzlelight"
+    })
+    panel:ControlHelp("Emits a brief projected light when you shoot (but not for others).")
     panel:AddControl("checkbox", {
         label = "Near Walling",
         command = "tacrp_nearwall"

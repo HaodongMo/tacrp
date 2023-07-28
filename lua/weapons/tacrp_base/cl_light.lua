@@ -265,7 +265,6 @@ function SWEP:DrawFlashlightGlares()
     end
 end
 
-
 local glintmat = Material("effects/blueflare1")
 local glintmat2 = Material("tacrp/scope_flare")
 function SWEP:DoScopeGlint()
@@ -295,4 +294,25 @@ function SWEP:DoScopeGlint()
         render.SetMaterial(glintmat2)
         render.DrawSprite(src, rad * 1.5, rad * 1.5, color_white)
     end
+end
+
+function SWEP:DoMuzzleLight()
+    if !TacRP.ConVars["muzzlelight"]:GetBool() then return end
+    local lamp = ProjectedTexture()
+    lamp:SetTexture("tacrp/muzzleflash_light")
+    if self:GetValue("Silencer") then
+        lamp:SetBrightness(math.Rand(0.25, 0.5))
+    else
+        lamp:SetBrightness(math.Rand(2, 3))
+    end
+
+    lamp:SetFarZ(600)
+    lamp:SetFOV(math.Rand(115, 120))
+    lamp:SetPos(self:GetMuzzleOrigin())
+    lamp:SetAngles(self:GetShootDir() + Angle(math.Rand(-1, 1), math.Rand(-1, 1), math.Rand(0, 360)))
+    lamp:Update()
+
+    timer.Simple(0.02, function()
+        if IsValid(lamp) then lamp:Remove() end
+    end)
 end

@@ -351,6 +351,12 @@ function SWEP:PrimaryAttack()
         end)
     end
 
+    if CLIENT and self:GetOwner() == LocalPlayer() then
+        self:DoMuzzleLight()
+    elseif game.SinglePlayer() then
+        self:CallOnClient("DoMuzzleLight")
+    end
+
     self:RunHook("Hook_PostShoot")
 end
 
