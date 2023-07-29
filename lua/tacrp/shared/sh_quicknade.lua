@@ -199,7 +199,7 @@ TacRP.QuickNades = {
     },
 
     ["ttt_smoke"] = {
-        PrintName = "SMOKE",
+        PrintName = "T-SMK",
         GrenadeEnt = "ttt_smokegrenade_proj",
         GrenadeWep = "weapon_ttt_smokegrenade",
         ThrowForce = 4000,
@@ -218,7 +218,7 @@ TacRP.QuickNades = {
         SortOrder = 0,
     },
     ["ttt_conf"] = {
-        PrintName = "CONCUSS",
+        PrintName = "T-DCB",
         GrenadeEnt = "ttt_confgrenade_proj",
         GrenadeWep = "weapon_ttt_confgrenade",
         ThrowForce = 4000,
@@ -237,7 +237,7 @@ TacRP.QuickNades = {
         SortOrder = 0,
     },
     ["ttt_fire"] = {
-        PrintName = "FIRE",
+        PrintName = "T-INC",
         GrenadeEnt = "ttt_firegrenade_proj",
         GrenadeWep = "weapon_zm_molotov",
         ThrowForce = 4000,

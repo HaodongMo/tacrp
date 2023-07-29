@@ -46,10 +46,35 @@ SWEP.Sway = 0
 
 SWEP.QuickNadeTimeMult = 0.6
 
-function SWEP:Equip()
+function SWEP:Equip(newowner)
     local wep = self:GetOwner():GetActiveWeapon()
     if self:GetOwner():IsPlayer() and wep != self and wep.ArcticTacRP and !wep:CheckGrenade(nil, true) then
         self:GetOwner():SetNWInt("ti_nade", TacRP.QuickNades[self.PrimaryGrenade].Index)
+    end
+
+    if engine.ActiveGamemode() == "terrortown" and SERVER then
+        if self:IsOnFire() then
+            self:Extinguish()
+        end
+
+        self.fingerprints = self.fingerprints or {}
+
+        if !table.HasValue(self.fingerprints, newowner) then
+            table.insert(self.fingerprints, newowner)
+        end
+
+        if self:HasSpawnFlags(SF_WEAPON_START_CONSTRAINED) then
+            -- If this weapon started constrained, unset that spawnflag, or the
+            -- weapon will be re-constrained and float
+            local flags = self:GetSpawnFlags()
+            local newflags = bit.band(flags, bit.bnot(SF_WEAPON_START_CONSTRAINED))
+            self:SetKeyValue("spawnflags", newflags)
+        end
+    end
+
+    if engine.ActiveGamemode() == "terrortown" and SERVER and IsValid(newowner) and (self.StoredAmmo or 0) > 0 and self.Primary.Ammo != "none" then
+        newowner:GiveAmmo(self.StoredAmmo, self.Primary.Ammo)
+        self.StoredAmmo = 0
     end
 end
 
@@ -139,4 +164,14 @@ function SWEP:SecondaryAttack()
 end
 
 function SWEP:Reload()
+end
+
+function SWEP:PreDrop()
+    if SERVER and IsValid(self:GetOwner()) and self.Primary.Ammo != "" and self.Primary.Ammo != "none" then
+        local ammo = self:Ammo1()
+        if ammo > 0 then
+            self.StoredAmmo = 1
+            self:GetOwner():RemoveAmmo(1, self.Primary.Ammo)
+        end
+    end
 end

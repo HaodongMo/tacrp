@@ -140,3 +140,33 @@ end
 --- TTT2 uses this to populate custom convars in the equip menu
 function SWEP:AddToSettingsMenu(parent)
 end
+
+function SWEP:Equip(newowner)
+    if engine.ActiveGamemode() == "terrortown" and SERVER then
+        if self:IsOnFire() then
+            self:Extinguish()
+        end
+
+        self.fingerprints = self.fingerprints or {}
+
+        if !table.HasValue(self.fingerprints, newowner) then
+            table.insert(self.fingerprints, newowner)
+        end
+
+        if self:HasSpawnFlags(SF_WEAPON_START_CONSTRAINED) then
+            -- If this weapon started constrained, unset that spawnflag, or the
+            -- weapon will be re-constrained and float
+            local flags = self:GetSpawnFlags()
+            local newflags = bit.band(flags, bit.bnot(SF_WEAPON_START_CONSTRAINED))
+            self:SetKeyValue("spawnflags", newflags)
+        end
+    end
+
+    if engine.ActiveGamemode() == "terrortown" and SERVER and IsValid(newowner) and (self.StoredAmmo or 0) > 0 and self.Primary.Ammo != "none" then
+        local ammo = newowner:GetAmmoCount(self.Primary.Ammo)
+        local given = math.min(self.StoredAmmo, self.Primary.ClipMax - ammo)
+        print(ammo, given)
+        newowner:GiveAmmo(given, self.Primary.Ammo)
+        self.StoredAmmo = 0
+    end
+end
