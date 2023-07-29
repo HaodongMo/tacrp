@@ -271,7 +271,7 @@ SWEP.AutoSpawnable = false
 if engine.ActiveGamemode() == "terrortown" then
     SWEP.AutoSpawnable = false
     SWEP.Kind = WEAPON_EQUIP
-    SWEP.Slot  = 6
+    SWEP.Slot = 6
     SWEP.CanBuy = { ROLE_TRAITOR }
     SWEP.EquipMenuData = {
         type = "Weapon",

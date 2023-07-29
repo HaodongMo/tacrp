@@ -147,3 +147,20 @@ function SWEP:SecondaryAttack()
 end
 
 SWEP.AutoSpawnable = false
+
+if engine.ActiveGamemode() == "terrortown" then
+    SWEP.AutoSpawnable = false
+    SWEP.HolsterVisible = false
+    SWEP.Kind = WEAPON_EQUIP
+    SWEP.Slot = 6
+    SWEP.CanBuy = { ROLE_TRAITOR }
+    SWEP.EquipMenuData = {
+        type = "Weapon",
+        desc = "A remote detonator for C4s and Breaching Charges.\nComes with 1 C4 and 3 Breaching Charges.",
+    }
+
+    function SWEP:TTTBought(buyer)
+        buyer:GiveAmmo(1, "ti_c4")
+        buyer:GiveAmmo(3, "ti_charge")
+    end
+end

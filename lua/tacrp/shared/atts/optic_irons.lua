@@ -1,8 +1,8 @@
 ATT.PrintName = "Iron Sights"
 ATT.Icon = Material("entities/tacrp_att_optic_irons.png", "mips smooth")
 ATT.Description = "Basic sights for added mobility."
-ATT.Pros = {"Handling"}
-ATT.Cons = {"No zoom"}
+ATT.Pros = {"rating.handling"}
+ATT.Cons = {"att.procon.noscope"}
 
 ATT.Free = true
 
@@ -17,5 +17,5 @@ ATT.Override_ScopeOverlay = false // Material("path/to/overlay")
 ATT.Override_ScopeFOV = 90 / 1.1
 ATT.Override_ScopeLevels = 1 // 2 = like CS:S
 
-ATT.Mult_AimDownSightsTime = 0.95
-ATT.Mult_SprintToFireTime = 0.95
+ATT.Add_AimDownSightsTime = -0.03
+ATT.Add_SprintToFireTime = -0.03

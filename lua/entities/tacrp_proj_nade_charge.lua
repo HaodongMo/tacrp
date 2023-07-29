@@ -51,7 +51,7 @@ end
 function ENT:Detonate()
     local attacker = IsValid(self.Attacker) and self.Attacker or self:GetOwner()
     local ttt = TacRP.GetBalanceMode() == TacRP.BALANCE_TTT
-    util.BlastDamage(self, attacker, self:GetPos(), ttt and 200 or 150, ttt and 150 or 300)
+    util.BlastDamage(self, attacker, self:GetPos(), ttt and 200 or 150, ttt and 250 or 500)
 
     local fx = EffectData()
     fx:SetOrigin(self:GetPos())

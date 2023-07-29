@@ -30,7 +30,12 @@ ENT.ExplodeSounds = {
 
 function ENT:Detonate()
     local attacker = self.Attacker or self:GetOwner() or self
-    util.BlastDamage(self, attacker, self:GetPos(), 512, 200)
+
+    local ttt = TacRP.GetBalanceMode() == TacRP.BALANCE_TTT
+    local dmg = ttt and 200 or 400
+
+    util.BlastDamage(self, attacker, self:GetPos(), 256, dmg)
+    util.BlastDamage(self, attacker, self:GetPos(), 512, dmg * 0.5)
 
     local fx = EffectData()
     fx:SetOrigin(self:GetPos())

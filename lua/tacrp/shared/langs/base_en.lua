@@ -266,6 +266,7 @@ L["att.procon.semi"] = "Semi-automatic fire"
 L["att.procon.autoburst"] = "Automatic Burst"
 L["att.procon.explosive"] = "Explosive"
 L["att.procon.reliability"] = "Reliability"
+L["att.procon.noscope"] = "No Scope"
 
 L["att.sight.1"] = "1x Sight"
 L["att.sight.1.25"] = "1.25x Sight"
