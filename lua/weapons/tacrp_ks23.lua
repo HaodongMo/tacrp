@@ -171,8 +171,8 @@ SWEP.BlindFirePos = Vector(4, -2, -4)
 SWEP.SprintAng = Angle(30, -15, 0)
 SWEP.SprintPos = Vector(5, 0, -2)
 
-SWEP.SightAng = Angle(-0.57, 0.5, 0)
-SWEP.SightPos = Vector(-3.31, -1, -3.2)
+SWEP.SightAng = Angle(-0.55, 0.1, 0.75)
+SWEP.SightPos = Vector(-3.4, -2, -3.25)
 
 SWEP.CorrectivePos = Vector(0.275, 0, -0.2)
 SWEP.CorrectiveAng = Angle(1.21, 0.1, 0)
@@ -192,13 +192,13 @@ SWEP.ReloadTimeMult = 1.25
 
 // sounds
 
-local path = "TacRP/weapons/bekas/"
+local path = "TacRP/weapons/ks23/ks23_"
 
-SWEP.Sound_Shoot = "^tacrp/weapons/fp6/fp6_fire-1.wav"
+SWEP.Sound_Shoot = "tacrp/weapons/ks23/ks23_fire1.wav"
 SWEP.Sound_Shoot_Silenced = "TacRP/weapons/sg551/sg551_fire_silenced-1.wav"
 
 SWEP.Vol_Shoot = 130
-SWEP.Pitch_Shoot = 90
+SWEP.Pitch_Shoot = 95
 SWEP.ShootPitchVariance = 0 // amount to vary pitch by each shot
 
 // effects
@@ -252,7 +252,7 @@ SWEP.Attachments = {
         AttachSound = "TacRP/weapons/optic_on.wav",
         DetachSound = "TacRP/weapons/optic_off.wav",
         VMScale = 0.75,
-        Pos_VM = Vector(-3.2, 0, 8),
+        Pos_VM = Vector(-3.4, 0, 8),
         Ang_VM = Angle(90, 0, 0),
         Pos_WM = Vector(9, 0.85, -7),
         Ang_WM = Angle(-25, 3.5, 180),
@@ -264,10 +264,10 @@ SWEP.Attachments = {
         AttachSound = "TacRP/weapons/flashlight_on.wav",
         DetachSound = "TacRP/weapons/flashlight_off.wav",
         InstalledElements = {"tactical"},
-        VMScale = 1.25,
-        Pos_VM = Vector(-1.75, -0.3, 22),
+        VMScale = 1.15,
+        Pos_VM = Vector(-2, -0.3, 22),
         Ang_VM = Angle(90, 0, -90),
-        Pos_WM = Vector(22, 0, -11),
+        Pos_WM = Vector(22, 0.5, -11),
         Ang_WM = Angle(-25, 3.5, 90),
     },
     [3] = {
@@ -311,7 +311,7 @@ local function addsound(name, spath)
     })
 end
 
-addsound("TacInt_Bekas.Insertshell", path .. "insertshell-1.wav")
-addsound("TacInt_Bekas.Movement", path .. "movement-1.wav")
-addsound("TacInt_Bekas.PumpBack", path .. "pump_backward-1.wav")
-addsound("TacInt_Bekas.PumpForward", path .. "pump_forward-1.wav")
+addsound("TacInt_Bekas.Insertshell", "tacrp/weapons/bekas/insertshell-1.wav")
+addsound("TacInt_Bekas.Movement", "tacrp/weapons/bekas/movement-1.wav")
+addsound("TacInt_Bekas.PumpBack", path .. "pump_back.wav")
+addsound("TacInt_Bekas.PumpForward", path .. "pump_forward.wav")
