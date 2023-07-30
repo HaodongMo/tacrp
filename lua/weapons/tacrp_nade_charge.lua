@@ -9,14 +9,16 @@ SWEP.IconOverride = "entities/tacrp_ammo_charge.png"
 SWEP.PrintName = "Breaching Charge"
 SWEP.Category = "Tactical RP (Special)" // "Tactical RP (Arctic)"
 
-SWEP.ViewModel = "models/weapons/cstrike/c_eq_fraggrenade.mdl"
-SWEP.WorldModel = "models/weapons/w_eq_fraggrenade.mdl"
+SWEP.ViewModel = "models/weapons/tacint/v_throwable_breach.mdl"
+SWEP.WorldModel = "models/weapons/tacint/w_frag.mdl"
 
 SWEP.ViewModelFOV = 65
 
 SWEP.Slot = 4
 
 SWEP.PrimaryGrenade = "charge"
+
+SWEP.FiremodeName = "Throw"
 
 SWEP.AnimationTranslationTable = {
     ["prime_grenade"] = "pullpin",
@@ -27,3 +29,7 @@ SWEP.AnimationTranslationTable = {
 SWEP.TTTReplace = {} // {["weapon_ttt_confgrenade"] = 0.5}
 
 SWEP.Attachments = {}
+
+SWEP.HoldType = "melee"
+SWEP.HoldTypeSprint = "normal"
+SWEP.HoldTypeBlindFire = false

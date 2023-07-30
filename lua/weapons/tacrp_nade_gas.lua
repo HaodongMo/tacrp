@@ -8,14 +8,16 @@ SWEP.IconOverride = "entities/tacrp_ammo_gas.png"
 SWEP.PrintName = "CS Gas Grenade"
 SWEP.Category = "Tactical RP (Special)" // "Tactical RP (Arctic)"
 
-SWEP.ViewModel = "models/weapons/cstrike/c_eq_smokegrenade.mdl"
-SWEP.WorldModel = "models/weapons/w_eq_smokegrenade.mdl"
+SWEP.ViewModel = "models/weapons/tacint/v_throwable_smoke.mdl"
+SWEP.WorldModel = "models/weapons/tacint/w_smoke.mdl"
 
 SWEP.ViewModelFOV = 65
 
 SWEP.Slot = 4
 
 SWEP.PrimaryGrenade = "gas"
+
+SWEP.FiremodeName = "Throw"
 
 SWEP.AnimationTranslationTable = {
     ["prime_grenade"] = "pullpin",
@@ -27,3 +29,7 @@ SWEP.AnimationTranslationTable = {
 SWEP.TTTReplace = {["weapon_ttt_smokegrenade"] = 0.25, ["weapon_zm_molotov"] = 0.25}
 
 SWEP.Attachments = {}
+
+SWEP.HoldType = "melee"
+SWEP.HoldTypeSprint = "normal"
+SWEP.HoldTypeBlindFire = false
