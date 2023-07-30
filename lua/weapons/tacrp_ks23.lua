@@ -311,7 +311,7 @@ local function addsound(name, spath)
     })
 end
 
-addsound("TacInt_Bekas.Insertshell", "tacrp/weapons/bekas/insertshell-1.wav")
-addsound("TacInt_Bekas.Movement", "tacrp/weapons/bekas/movement-1.wav")
-addsound("TacInt_Bekas.PumpBack", path .. "pump_back.wav")
-addsound("TacInt_Bekas.PumpForward", path .. "pump_forward.wav")
+addsound("tacint_ks23.Insertshell", "tacrp/weapons/bekas/insertshell-1.wav")
+addsound("tacint_ks23.Movement", "tacrp/weapons/bekas/movement-1.wav")
+addsound("tacint_ks23.PumpBack", path .. "pump_back.wav")
+addsound("tacint_ks23.PumpForward", path .. "pump_forward.wav")
