@@ -8,7 +8,7 @@ SWEP.AdminOnly = false
 
 // names and stuff
 SWEP.PrintName = "Arctic's Tactical RP Base Grenade"
-SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
+SWEP.Category = "Tactical RP"
 
 SWEP.SubCatTier = "9Special"
 SWEP.SubCatType = "9Throwable"

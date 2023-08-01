@@ -6,7 +6,7 @@ SWEP.IconOverride = "entities/tacrp_ammo_frag.png"
 
 // names and stuff
 SWEP.PrintName = "Frag Grenade"
-SWEP.Category = "Tactical RP (Special)" // "Tactical RP (Arctic)"
+SWEP.Category = "Tactical RP (Special)"
 
 SWEP.ViewModel = "models/weapons/tacint/v_throwable_frag.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_frag.mdl"

@@ -4,7 +4,7 @@ SWEP.AdminOnly = false
 
 // names and stuff
 SWEP.PrintName = "Arctic's Tactical RP Base"
-SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
+SWEP.Category = "Tactical RP"
 
 SWEP.Description = ""
 
@@ -314,7 +314,6 @@ SWEP.EjectDelay = 0
 SWEP.EjectScale = 1
 
 // anims
-
 // VM:
 // idle
 // fire

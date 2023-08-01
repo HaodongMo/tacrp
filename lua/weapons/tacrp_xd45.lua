@@ -6,7 +6,7 @@ AddCSLuaFile()
 // names and stuff
 SWEP.PrintName = "Springfield XD-45"
 SWEP.AbbrevName = "XD-45"
-SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
+SWEP.Category = "Tactical RP"
 
 SWEP.SubCatTier = "1Elite"
 SWEP.SubCatType = "2Machine Pistol"
@@ -209,25 +209,6 @@ SWEP.MuzzleEffect = "muzzleflash_1"
 
 // anims
 
-// VM:
-// idle
-// fire
-// fire1, fire2...
-// dryfire
-// melee
-// reload
-// midreload
-// prime_grenade
-// throw_grenade
-// throw_grenade_underhand
-// deploy
-// blind_idle
-// blind_fire
-// blind_fire1, blind_fire2...
-// blind_dryfire
-
-// WM:
-// attack1
 SWEP.AnimationTranslationTable = {
     ["deploy"] = "draw",
     ["fire"] = {"shoot1", "shoot2", "shoot3"},
