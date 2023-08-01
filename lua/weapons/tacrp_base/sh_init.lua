@@ -41,6 +41,7 @@ function SWEP:Deploy()
     self:SetPrimedGrenade(false)
     self:SetBlindFireFinishTime(0)
     self:SetJammed(false)
+    self:SetCharge(false)
 
     self:SetBurstCount(0)
     self:SetScopeLevel(0)
