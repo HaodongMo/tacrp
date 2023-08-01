@@ -13,6 +13,10 @@ function SWEP:GetIsSprinting()
         return false
     end
 
+    if TacRP.ConVars["sprint_counts_midair"]:GetBool() and !owner:IsOnGround() and !self:GetReloading() then
+        return true
+    end
+
     if owner.TacRP_SprintBlock then return false end
     if owner:GetNWBool("TacRPChargeState", false) then return true end
     if owner:GetNWBool("SlidingAbilityIsSliding", false) then return false end
