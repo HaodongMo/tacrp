@@ -9,6 +9,10 @@ function SWEP:GetIsSprinting()
         return false
     end
 
+    if self:GetOwner():IsNextBot() then
+        return false
+    end
+
     if owner.TacRP_SprintBlock then return false end
     if owner:GetNWBool("TacRPChargeState", false) then return true end
     if owner:GetNWBool("SlidingAbilityIsSliding", false) then return false end
