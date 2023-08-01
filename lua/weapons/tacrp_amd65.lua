@@ -131,7 +131,7 @@ SWEP.RecoilKick = 7
 SWEP.RecoilStability = 0.65
 SWEP.RecoilAltMultiplier = 150
 
-SWEP.RecoilSpreadPenalty = 0.0045
+SWEP.RecoilSpreadPenalty = 0.0035
 SWEP.HipFireSpreadPenalty = 0.04
 
 SWEP.CanBlindFire = true
@@ -170,8 +170,8 @@ SWEP.BlindFirePos = Vector(3, -2, -5)
 SWEP.SprintAng = Angle(30, -15, 0)
 SWEP.SprintPos = Vector(5, 0, -2)
 
-SWEP.SightAng = Angle(-0.265, -0.9, 0)
-SWEP.SightPos = Vector(-4.54, -7.5, -2.9)
+SWEP.SightAng = Angle(-0.265, -0.5, -1)
+SWEP.SightPos = Vector(-4.475, -7.5, -3.2)
 
 SWEP.CorrectivePos = Vector(0.05, 0, 0.05)
 SWEP.CorrectiveAng = Angle(0.64, 0.1, 0)
@@ -275,6 +275,21 @@ SWEP.AttachmentElements = {
             }
         },
         SortOrder = 2,
+    },
+}
+
+SWEP.ProceduralIronFire = {
+    vm_pos = Vector(0, -1.5, -0.4),
+    vm_ang = Angle(0, 1, 0),
+    t = 0.25,
+    tmax = 0.25,
+    bones = {
+        {
+            bone = "ValveBiped.bolt_cover",
+            pos = Vector(0, 0, -3),
+            t0 = 0.03,
+            t1 = 0.2,
+        },
     },
 }
 
