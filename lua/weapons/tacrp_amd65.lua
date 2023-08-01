@@ -188,8 +188,8 @@ SWEP.ReloadTimeMult = 1
 SWEP.DropMagazineModel = "models/weapons/tacint/magazines/ak47.mdl"
 SWEP.DropMagazineImpact = "metal"
 
-SWEP.ReloadUpInTime = 1.4
-SWEP.DropMagazineTime = 0.4
+SWEP.ReloadUpInTime = 1.35
+SWEP.DropMagazineTime = 0.45
 
 // sounds
 
