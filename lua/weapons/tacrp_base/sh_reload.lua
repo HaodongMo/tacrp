@@ -18,7 +18,7 @@ function SWEP:Reload()
     end
 
     if self:StillWaiting(true) then return end
-    -- if !self:CanReloadInSprint() and self:GetIsSprinting() then return end
+    if !self:CanReloadInSprint() and self:GetIsSprinting() then return end
     if self:GetCapacity() <= 0 then return end
     if self:Clip1() >= self:GetCapacity() then return end
     if self:Ammo1() <= 0 and !self:GetInfiniteAmmo() then return end
