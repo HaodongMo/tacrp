@@ -10,7 +10,7 @@ SWEP.Category = "Tactical RP"
 SWEP.SubCatTier = "1Elite"
 SWEP.SubCatType = "5Shotgun"
 
-SWEP.Description = "Made from recycled aircraft gun barrels, this shotgun is hard to handle but devestating when fired."
+SWEP.Description = "Made from recycled aircraft gun barrels, this heavy shotgun fires shells with twice the diameter of typical shotshells and can easily tear apart anything it's vaguely pointed at. Able to breach doors."
 
 SWEP.ViewModel = "models/weapons/tacint/v_ks23.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_ks23.mdl"
@@ -20,7 +20,8 @@ SWEP.SlotAlt = 3
 
 SWEP.BalanceStats = {
     [TacRP.BALANCE_SBOX] = {
-        FreeAimMaxAngle = 4,
+        Damage_Max = 16,
+        Damage_Min = 11,
 
         MoveSpeedMult = 0.8,
         ShootingSpeedMult = 0.6,
@@ -40,7 +41,7 @@ SWEP.BalanceStats = {
         ShotgunPelletSpread = 0.02,
         HipFireSpreadPenalty = 0.025,
         RecoilSpreadPenalty = 0.02,
-        FreeAimMaxAngle = 4,
+        FreeAimMaxAngle = 5,
 
         BodyDamageMultipliers = {
             [HITGROUP_HEAD] = 2,
@@ -83,12 +84,13 @@ SWEP.TTTReplace = TacRP.TTTReplacePreset.Shotgun
 // "ballistics"
 
 SWEP.Damage_Max = 18
-SWEP.Damage_Min = 8
+SWEP.Damage_Min = 14
 SWEP.Range_Min = 600 // distance for which to maintain maximum damage
 SWEP.Range_Max = 3000 // distance at which we drop to minimum damage
-SWEP.Penetration = 2 // units of metal this weapon can penetrate
+SWEP.Penetration = 4 // units of metal this weapon can penetrate
 SWEP.Num = 20
 SWEP.ArmorPenetration = 0.35
+SWEP.ArmorBonus = 1.5
 
 SWEP.MuzzleVelocity = 10000
 
@@ -98,9 +100,9 @@ SWEP.BodyDamageMultipliers = {
     [HITGROUP_STOMACH] = 1,
     [HITGROUP_LEFTARM] = 1,
     [HITGROUP_RIGHTARM] = 1,
-    [HITGROUP_LEFTLEG] = 0.9,
-    [HITGROUP_RIGHTLEG] = 0.9,
-    [HITGROUP_GEAR] = 0.9
+    [HITGROUP_LEFTLEG] = 1,
+    [HITGROUP_RIGHTLEG] = 1,
+    [HITGROUP_GEAR] = 1
 }
 
 // misc. shooting
@@ -112,7 +114,7 @@ SWEP.FiremodeName = "Pump-Action" // only used externally for firemode name dist
 SWEP.RPM = 45
 
 SWEP.Spread = 0.03
-SWEP.ShotgunPelletSpread = 0.015
+SWEP.ShotgunPelletSpread = 0.02
 
 SWEP.ShootTimeMult = 1
 
@@ -123,35 +125,36 @@ SWEP.ScopedSpreadPenalty = 0
 
 SWEP.RecoilPerShot = 1
 SWEP.RecoilMaximum = 3
-SWEP.RecoilResetTime = 0.3
+SWEP.RecoilResetTime = 0.35
 SWEP.RecoilDissipationRate = 1
-SWEP.RecoilFirstShotMult = 2
+SWEP.RecoilFirstShotMult = 1.5
 
 SWEP.RecoilVisualKick = 2
-SWEP.RecoilKick = 35
+SWEP.RecoilKick = 25
 SWEP.RecoilStability = 0.65
 
-SWEP.RecoilSpreadPenalty = 0.03
+SWEP.RecoilSpreadPenalty = 0.02
 
 SWEP.CanBlindFire = true
 
+SWEP.DoorBreach = true
+SWEP.DoorBreachThreshold = 100
+
 // handling
 
-SWEP.MoveSpeedMult = 0.875
-SWEP.ShootingSpeedMult = 0.6
+SWEP.MoveSpeedMult = 0.85
+SWEP.ShootingSpeedMult = 0.5
 SWEP.SightedSpeedMult = 0.6
 
 SWEP.ReloadSpeedMult = 0.5
 
-SWEP.AimDownSightsTime = 0.35
-SWEP.SprintToFireTime = 0.32
-
-SWEP.ReloadTimeMult = 0.8
+SWEP.AimDownSightsTime = 0.37
+SWEP.SprintToFireTime = 0.4
 
 SWEP.Sway = 1.5
-SWEP.ScopedSway = 0.5
+SWEP.ScopedSway = 0.65
 
-SWEP.FreeAimMaxAngle = 3
+SWEP.FreeAimMaxAngle = 4
 
 // hold types
 
