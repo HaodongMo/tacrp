@@ -19,7 +19,13 @@ function SWEP:DoDeployAnimation()
 end
 
 function SWEP:Deploy()
-    if self:GetOwner():IsNPC() then
+    if self:GetOwner():IsNPC() or self:GetOwner():IsNextBot() then
+        if SERVER then
+            self:NetworkWeapon()
+        end
+        if CLIENT then
+            self:SetupModel(true)
+        end
         return
     end
 
@@ -36,17 +42,17 @@ function SWEP:Deploy()
     self:SetBlindFireFinishTime(0)
     self:SetJammed(false)
 
+    self:SetBurstCount(0)
+    self:SetScopeLevel(0)
+    self:SetLoadedRounds(self:Clip1())
+    self:SetCustomize(false)
+
     self.PreviousZoom = self:GetOwner():GetCanZoom()
     if IsValid(self:GetOwner()) and self:GetOwner():IsPlayer() then
         self:GetOwner():SetCanZoom(false)
     end
 
     self:DoDeployAnimation()
-
-    self:SetBurstCount(0)
-    self:SetScopeLevel(0)
-    self:SetLoadedRounds(self:Clip1())
-    self:SetCustomize(false)
 
     self:GetOwner():DoAnimationEvent(ACT_HL2MP_GESTURE_RANGE_ATTACK_KNIFE)
 
@@ -195,15 +201,19 @@ end)
 function SWEP:Initialize()
     self:SetShouldHoldType()
 
+    self:SetBaseSettings()
+
+    self:SetLastMeleeTime(0)
+    self:SetNthShot(0)
+
     if self:GetOwner():IsNPC() then
         self:NPC_Initialize()
         return
     end
 
-    self:SetBaseSettings()
-
-    self:SetLastMeleeTime(0)
-    self:SetNthShot(0)
+    if self:GetOwner():IsNextBot() then
+        return
+    end
 
     self.m_WeaponDeploySpeed = 4
 

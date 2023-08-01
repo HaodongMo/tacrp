@@ -3,7 +3,9 @@ function SWEP:NPC_PrimaryAttack()
 
     local enemy = self:GetOwner():GetEnemy()
 
-    if self:Clip1() <= 0 then
+    local aps = self:GetValue("AmmoPerShot")
+
+    if self:Clip1() < aps then
         if !IsValid(enemy) or !IsValid(enemy:GetActiveWeapon()) or table.HasValue({"weapon_crowbar", "weapon_stunstick"}, enemy:GetActiveWeapon():GetClass()) then
             // do not attempt to find cover if enemy does not have a ranged weapon
             self:GetOwner():SetSchedule(SCHED_RELOAD)
@@ -32,7 +34,7 @@ function SWEP:NPC_PrimaryAttack()
 
     self:EmitSound(sshoot, self:GetValue("Vol_Shoot"), self:GetValue("Pitch_Shoot") + math.Rand(-pvar, pvar), 1, CHAN_WEAPON)
 
-    self:SetClip1(self:Clip1() - 1)
+    self:SetClip1(self:Clip1() - aps)
 
     local delay = 60 / self:GetValue("RPM")
     self:SetNextPrimaryFire(CurTime() + delay)
