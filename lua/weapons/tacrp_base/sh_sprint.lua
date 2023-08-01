@@ -13,7 +13,7 @@ function SWEP:GetIsSprinting()
         return false
     end
 
-    if TacRP.ConVars["sprint_counts_midair"]:GetBool() and !owner:IsOnGround() and !self:GetReloading() then
+    if TacRP.ConVars["sprint_counts_midair"]:GetBool() and owner:GetMoveType() != MOVETYPE_NOCLIP and !owner:IsOnGround() and !self:GetReloading() then
         return true
     end
 
