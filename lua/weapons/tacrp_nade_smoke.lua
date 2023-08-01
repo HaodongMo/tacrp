@@ -8,14 +8,16 @@ SWEP.IconOverride = "entities/tacrp_ammo_smoke.png"
 SWEP.PrintName = "Smoke Grenade"
 SWEP.Category = "Tactical RP (Special)" // "Tactical RP (Arctic)"
 
-SWEP.ViewModel = "models/weapons/cstrike/c_eq_smokegrenade.mdl"
-SWEP.WorldModel = "models/weapons/w_eq_smokegrenade.mdl"
+SWEP.ViewModel = "models/weapons/tacint/v_throwable_smoke.mdl"
+SWEP.WorldModel = "models/weapons/tacint/w_smoke.mdl"
 
 SWEP.ViewModelFOV = 65
 
 SWEP.Slot = 4
 
 SWEP.PrimaryGrenade = "smoke"
+
+SWEP.FiremodeName = "Throw"
 
 SWEP.AnimationTranslationTable = {
     ["prime_grenade"] = "pullpin",
@@ -26,3 +28,7 @@ SWEP.AnimationTranslationTable = {
 SWEP.TTTReplace = {["weapon_ttt_smokegrenade"] = 1}
 
 SWEP.Attachments = {}
+
+SWEP.HoldType = "melee"
+SWEP.HoldTypeSprint = "normal"
+SWEP.HoldTypeBlindFire = false
