@@ -15,3 +15,4 @@ ATT.Mult_Spread = 0.5
 ATT.Mult_RecoilSpreadPenalty = 0.75
 ATT.Mult_RecoilKick = 0.6
 ATT.Mult_RecoilVisualKick = 0.5
+ATT.Mult_RecoilStability = 1.25

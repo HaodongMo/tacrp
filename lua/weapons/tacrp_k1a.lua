@@ -35,7 +35,6 @@ SWEP.BalanceStats = {
         Damage_Min = 10,
         Range_Min = 600,
         Range_Max = 2000,
-        RPM = 800,
         PostBurstDelay = 0.25,
 
         RecoilSpreadPenalty = 0.0025,
@@ -101,7 +100,8 @@ SWEP.Firemodes = {-3, 1}
 SWEP.RunawayBurst = true
 SWEP.PostBurstDelay = 0.16
 
-SWEP.RPM = 800
+SWEP.RPM = 700
+SWEP.RPMMultBurst = 800 / 700
 
 SWEP.Spread = 0.0025
 

@@ -101,7 +101,8 @@ SWEP.Firemodes = {
     1
 }
 
-SWEP.RPM = 900
+SWEP.RPM = 750
+SWEP.RPMMultBurst = 900 / 750
 
 SWEP.Spread = 0.0008
 

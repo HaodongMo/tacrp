@@ -683,7 +683,7 @@ SWEP.StatDisplay = {
         Description = "stat.recoilstability.desc",
         Value = "RecoilStability",
         AggregateFunction = function(self, base, val)
-            return math.Round(val * 100)
+            return math.Clamp(math.Round(val * 100), 0, 90)
         end,
         Unit = "%",
         LowerIsBetter = false,
@@ -807,6 +807,9 @@ SWEP.StatDisplay = {
         Description = "stat.freeaimangle.desc",
         Unit = "°",
         Value = "FreeAimMaxAngle",
+        AggregateFunction = function(self, base, val)
+            return math.max(0, math.Round(val, 1))
+        end,
         LowerIsBetter = true,
         -- HideIfSame = true,
         ConVarCheck = "tacrp_freeaim",
