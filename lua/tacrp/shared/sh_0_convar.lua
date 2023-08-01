@@ -977,7 +977,7 @@ local function menu_balance_ti(panel)
         command = "tacrp_sprint_lower"})
     panel:AddControl("checkbox", {
         label = "Lower Weapon While Airborne",
-        command = "sprint_counts_midair"})
+        command = "tacrp_sprint_counts_midair"})
     panel:ControlHelp("Requires \"Lower Weapon While Sprinting\" to be enabled.")
 
     header(panel, "\nSliders")
