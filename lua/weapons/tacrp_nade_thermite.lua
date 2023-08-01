@@ -8,7 +8,7 @@ SWEP.IconOverride = "entities/tacrp_ammo_fire.png"
 SWEP.PrintName = "Thermite Grenade"
 SWEP.Category = "Tactical RP (Special)" // "Tactical RP (Arctic)"
 
-SWEP.ViewModel = "models/weapons/tacint/v_throwable_flashbang.mdl"
+SWEP.ViewModel = "models/weapons/tacint/v_throwable_thermite.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_flashbang.mdl"
 
 SWEP.ViewModelFOV = 65
