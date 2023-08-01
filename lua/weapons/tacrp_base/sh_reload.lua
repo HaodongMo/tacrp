@@ -113,8 +113,8 @@ function SWEP:RestoreClip(amt)
     return self:Clip1() - lastclip1
 end
 
-function SWEP:Unload()
-    self:GetOwner():GiveAmmo(self:Clip1(), self.Primary.Ammo)
+function SWEP:Unload(ammotype)
+    self:GetOwner():GiveAmmo(self:Clip1(), ammotype or self.Primary.Ammo)
     self:SetClip1(0)
 end
 
