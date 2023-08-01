@@ -20,7 +20,8 @@ SWEP.SlotAlt = 3
 
 SWEP.BalanceStats = {
     [TacRP.BALANCE_SBOX] = {
-        FreeAimMaxAngle = 5,
+        FreeAimMaxAngle = 4,
+
         MoveSpeedMult = 0.8,
         ShootingSpeedMult = 0.6,
         SightedSpeedMult = 0.8,
@@ -81,7 +82,7 @@ SWEP.TTTReplace = TacRP.TTTReplacePreset.Shotgun
 
 // "ballistics"
 
-SWEP.Damage_Max = 20
+SWEP.Damage_Max = 18
 SWEP.Damage_Min = 8
 SWEP.Range_Min = 600 // distance for which to maintain maximum damage
 SWEP.Range_Max = 3000 // distance at which we drop to minimum damage
@@ -108,12 +109,12 @@ SWEP.Firemode = 1
 
 SWEP.FiremodeName = "Pump-Action" // only used externally for firemode name distinction
 
-SWEP.RPM = 40
+SWEP.RPM = 45
 
 SWEP.Spread = 0.03
 SWEP.ShotgunPelletSpread = 0.015
 
-SWEP.ShootTimeMult = 1.25
+SWEP.ShootTimeMult = 1
 
 SWEP.HipFireSpreadPenalty = 0.025
 SWEP.MidAirSpreadPenalty = 0
@@ -189,7 +190,7 @@ SWEP.Ammo = "buckshot"
 SWEP.ShotgunReload = true
 
 SWEP.ReloadTimeMult = 1.25
-
+SWEP.ShotgunThreeload = false
 // sounds
 
 local path = "TacRP/weapons/ks23/ks23_"

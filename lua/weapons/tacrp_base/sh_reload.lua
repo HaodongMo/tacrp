@@ -135,7 +135,9 @@ function SWEP:EndReload()
         else
             local t = self:PlayAnimation("reload", self:GetValue("ReloadTimeMult"), true)
 
-            local res = math.min(math.min(3, self:GetCapacity() - self:Clip1()), self:GetInfiniteAmmo() and math.huge or self:Ammo1())
+            local res = self:GetValue("ShotgunThreeload") and
+                    math.min(math.min(3, self:GetCapacity() - self:Clip1()), self:GetInfiniteAmmo() and math.huge or self:Ammo1())
+                    or 1
 
             local delay = 0.9
             for i = 1, res do
