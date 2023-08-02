@@ -19,6 +19,8 @@ ENT.Ticks = 0
 AddCSLuaFile()
 
 function ENT:Initialize()
+    self.SpawnTime = CurTime()
+
     if SERVER then
         self:SetModel( self.Model )
         self:SetMoveType( MOVETYPE_VPHYSICS )
@@ -34,19 +36,19 @@ function ENT:Initialize()
             phys:SetBuoyancyRatio(0)
         end
 
-        self.SpawnTime = CurTime()
         self:Detonate()
 
-        self.FireTime = self.FireTime * math.Rand(0.8, 1.2)
+        -- self.FireTime = self.FireTime * math.Rand(0.8, 1.2)
+        -- self:SetNWFloat("FireTime", CurTime() + self.FireTime)
 
         self:SetCollisionGroup(COLLISION_GROUP_PROJECTILE)
     end
 end
 
 function ENT:Think()
-    if !self.SpawnTime then self.SpawnTime = CurTime() end
-
     if CLIENT then
+        local d = Lerp((self.SpawnTime + self.FireTime - CurTime()) / 8, 1, 0.000001) ^ 2
+
         if !self.Light then
             self.Light = DynamicLight(self:EntIndex())
             if (self.Light) then
@@ -55,8 +57,8 @@ function ENT:Think()
                 self.Light.g = 135
                 self.Light.b = 0
                 self.Light.Brightness = 5
-                self.Light.Size = 256
-                self.Light.DieTime = CurTime() + 10
+                self.Light.Size = 328
+                self.Light.DieTime = CurTime() + self.FireTime
             end
         else
             self.Light.Pos = self:GetPos()
@@ -67,19 +69,19 @@ function ENT:Think()
         if !self:IsValid() or self:WaterLevel() > 2 then return end
         if !IsValid(emitter) then return end
 
-        if self.Ticks % 5 == 0 then
-            local fire = emitter:Add("particles/smokey", self:GetPos())
-            fire:SetVelocity( (VectorRand() * 25) + (self:GetAngles():Up() * 300) )
+        if self.Ticks % math.ceil(2 + d * 8) == 0 then
+            local fire = emitter:Add("particles/smokey", self:GetPos() + Vector(math.Rand(-32, 32), math.Rand(-32, 32), 0))
+            fire:SetVelocity( (VectorRand() * 500) + (self:GetAngles():Up() * 300) )
             fire:SetGravity( Vector(0, 0, 1500) )
             fire:SetDieTime( math.Rand(0.5, 1) )
-            fire:SetStartAlpha( 255 )
+            fire:SetStartAlpha( 100 )
             fire:SetEndAlpha( 0 )
             fire:SetStartSize( 10 )
             fire:SetEndSize( 150 )
             fire:SetRoll( math.Rand(-180, 180) )
             fire:SetRollDelta( math.Rand(-0.2,0.2) )
             fire:SetColor( 255, 255, 255 )
-            fire:SetAirResistance( 150 )
+            fire:SetAirResistance( 250 )
             fire:SetPos( self:GetPos() )
             fire:SetLighting( false )
             fire:SetCollide(true)
@@ -101,8 +103,8 @@ function ENT:Think()
             end )
         end
 
-        if self.Ticks % 10 == 0 then
-            local fire = emitter:Add("effects/spark", self:GetPos())
+        if self.Ticks % math.ceil(1 + d * 6)  == 0 then
+            local fire = emitter:Add("effects/spark", self:GetPos() + Vector(math.Rand(-32, 32), math.Rand(-32, 32), 0))
             fire:SetVelocity( VectorRand() * 750 )
             fire:SetGravity( Vector(math.Rand(-5, 5), math.Rand(-5, 5), -2000) )
             fire:SetDieTime( math.Rand(0.5, 1) )
@@ -211,7 +213,7 @@ function ENT:Think()
 
         local dmg = DamageInfo()
         dmg:SetDamageType(DMG_BURN)
-        dmg:SetDamage(30)
+        dmg:SetDamage(Lerp((self.SpawnTime + self.FireTime - CurTime()) / self.FireTime, 35, 20))
         dmg:SetInflictor(self)
         dmg:SetAttacker(self:GetOwner())
         util.BlastDamageInfo(dmg, self:GetPos(), 200)
@@ -238,10 +240,12 @@ function ENT:Detonate()
 
     if self.Order and self.Order != 1 then return end
 
-    self.FireSound = CreateSound(self, "tacrp_extras/grenades/fire_loop_1.wav")
+    -- self.FireSound = CreateSound(self, "tacrp_extras/grenades/fire_loop_1.wav")
+    self.FireSound = CreateSound(self, "ambient/gas/steam2.wav")
     self.FireSound:Play()
+    self.FireSound:ChangePitch(120)
 
-    self.FireSound:ChangePitch(80, self.FireTime)
+    self.FireSound:ChangePitch(100, self.FireTime)
 
     timer.Simple(self.FireTime - 1, function()
         if !IsValid(self) then return end
@@ -262,3 +266,36 @@ function ENT:Draw()
     --     render.DrawSprite( self:GetPos(), math.random(200, 250), math.random(200, 250), Color(255, 255, 255) ) -- Draw the sprite in the middle of the map, at 16x16 in it's original colour with full alpha.
     -- cam.End3D()
 end
+
+local directfiredamage = {
+    ["npc_zombie"] = true,
+    ["npc_zombie_torso"] = true,
+    ["npc_fastzombie"] = true,
+    ["npc_fastzombie_torso"] = true,
+    ["npc_poisonzombie"] = true,
+    ["npc_zombine"] = true,
+    ["npc_headcrab"] = true,
+    ["npc_headcrab_fast"] = true,
+    ["npc_headcrab_black"] = true,
+    ["npc_headcrab_poison"] = true,
+}
+
+hook.Add("EntityTakeDamage", "tacrp_fire_cloud", function(ent, dmginfo)
+    if IsValid(dmginfo:GetInflictor()) and dmginfo:GetInflictor():GetClass() == "tacrp_fire_cloud" and dmginfo:GetDamageType() == DMG_BURN then
+        if ent:IsNPC() then
+            if directfiredamage[ent:GetClass()] then
+                dmginfo:SetDamageType(DMG_SLOWBURN) -- DMG_BURN does not hurt HL2 zombies and instead turns them black.
+            end
+        elseif !ent:IsNextBot() and !ent:IsPlayer() then
+            dmginfo:SetDamageType(DMG_DIRECT) -- some props like to burn slowly against DMG_BURN or DMG_SLOWBURN. don't.
+            dmginfo:ScaleDamage(3) -- tremendous damage to props
+        end
+        dmginfo:SetDamageForce(Vector()) -- fire does not push things around. still applies to players, but that can't be helped.
+    end
+end)
+
+hook.Add("PostEntityTakeDamage", "tacrp_fire_cloud", function(ent, dmginfo, took)
+    if took and IsValid(dmginfo:GetInflictor()) and dmginfo:GetInflictor():GetClass() == "tacrp_fire_cloud" and !ent:IsPlayer() then
+        ent:Ignite(math.Rand(3, 5))
+    end
+end)

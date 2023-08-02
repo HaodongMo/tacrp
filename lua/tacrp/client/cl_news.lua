@@ -296,6 +296,34 @@ An additional benefit is that a lot of the attachments now use consistent wordin
 <li><b>Rebalance:</b> Slow total duration increased from 2s to 3s, fade start time unchanged.
 </ul>]],
     },
+    {
+        Title = "Update 15",
+        Type = "Patch Notes",
+        Date = "",
+        Author = "8Z",
+        Major = false,
+        Summary = "",
+        Contents = [[<body style="font-family:'Myriad Pro';color:white;font-size:125%;">
+
+<h3>Changelist</h3>
+<ul>
+<li><b>Added:</b> Grenade viewmodels rigged to CS:S animations by speedonerd.
+<li><b>Added:</b> New KS-23 Model and sounds (from FA:S 2).
+<li><b>Added:</b> RPM Burst and Semi multipliers.
+<li><b>Added:</b> "Lower Weapon While Airborne" config (default off), because bhopping is not tactical.
+<li><b>Rebalance:</b> Triggers now affect Recoil Stability.
+<li><b>Rebalance:</b> Burst trigger has increased RPM for burst fire mode only.
+<li><b>Rebalance:</b> Scope glint is slightly more visible and starts being visible closer.
+<li><b>Rebalance:</b> Frag grenades, C4s and Breach Charges do more damage.
+<li><b>Rebalance:</b> Buffed AMD-65 and FB Beryl 96.
+<li><b>Rebalance:</b> Adjusted burst fire weapons to accomdate for RPM Burst multipliers.
+<li><b>Changed:</b> When "Allow Reload While Sprinting" is disabled, sprinting cancels reload (unless ammo is already replenished).
+<li><b>Changed:</b> Shuffled around some options in Mechanics menu.
+<li><b>Changed:</b> Adjusted thermite effects and removed initial explosion. Thermite now ignites non-players.
+<li><b>Changed:</b> Adjusted some rating rules.
+<li><b>Fixed:</b> Error when trying to pick up weapon in DarkRP caused by incorrect hook usage.
+</ul>]],
+    },
 }
 TacRP.NewsRead = TacRP.NewsRead or {}
 TacRP.NewsLoaded = nil
@@ -336,6 +364,8 @@ local function loadlocalandsort()
     table.sort(TacRP.NewsLoaded, function(a, b)
         local a_y, a_m, a_d = string.match(a.Date, date_pattern)
         local b_y, b_m, b_d = string.match(b.Date, date_pattern)
+        if !a_y or !a_m or !a_d then return true end
+        if !b_y or !b_y or !b_y then return false end
         if (a_y > b_y) or (a_y == b_y and a_m > b_m) or (a_y == b_y and a_m == b_m and a_d > b_d) then
             return true
         end
