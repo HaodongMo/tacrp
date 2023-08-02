@@ -318,6 +318,7 @@ An additional benefit is that a lot of the attachments now use consistent wordin
 <li><b>Rebalance:</b> Scope glint is slightly more visible and starts being visible closer.
 <li><b>Rebalance:</b> Frag grenades, C4s and Breach Charges do more damage.
 <li><b>Rebalance:</b> Buffed AMD-65 and FB Beryl 96.
+<li><b>Rebalance:</b> Mag Extender slows reload by 3-5% (weapon type dependent).
 <li><b>Rebalance:</b> Adjusted burst fire weapons to accomdate for RPM Burst multipliers.
 <li><b>Changed:</b> When "Allow Reload While Sprinting" is disabled, sprinting cancels reload (unless ammo is already replenished).
 <li><b>Changed:</b> Shuffled around some options in Mechanics menu.
@@ -325,6 +326,7 @@ An additional benefit is that a lot of the attachments now use consistent wordin
 <li><b>Changed:</b> Adjusted some rating rules.
 <li><b>Fixed:</b> Error when trying to pick up weapon in DarkRP caused by incorrect hook usage.
 <li><b>Fixed:</b> Should fix situation where removed smokes still block targetid.
+<li><b>Fixed:</b> Firing buffer does not trigger when weapon is locked in animation (shotgun reload finishing).
 </ul>]],
     },
 }

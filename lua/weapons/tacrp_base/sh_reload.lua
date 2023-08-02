@@ -204,7 +204,6 @@ function SWEP:CancelReload(doanims, keeptime)
                 self:SetReloadFinishTime(0)
             end
         end
-
     end
 end
 
