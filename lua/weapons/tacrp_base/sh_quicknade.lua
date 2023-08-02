@@ -92,6 +92,11 @@ function SWEP:ThrowGrenade()
     self.GrenadeDownKey = IN_GRENADE1
 
     if SERVER then
+        if (self.GrenadeThrowCharge or 0) > 0 then
+            force = force * (1 + self.GrenadeThrowCharge)
+        end
+        self.GrenadeThrowCharge = nil
+
         for i = 1, amount do
 
             local rocket = ents.Create(ent or "")

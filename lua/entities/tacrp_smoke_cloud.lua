@@ -12,6 +12,7 @@ local function GetSmokeImage()
     return smokeimages[math.random(#smokeimages)]
 end
 
+ENT.TacRPSmoke = true
 ENT.Particles = nil
 ENT.SmokeRadius = 300
 ENT.SmokeColor = Color(150, 150, 150)
@@ -103,18 +104,20 @@ end
 function ENT:Think()
 
     if SERVER then
+        if self.dt < CurTime() then
+            SafeRemoveEntity(self)
+            return
+        end
+
         local targets = ents.FindInSphere(self:GetPos(), self.SmokeRadius)
         for _, k in pairs(targets) do
             if k:IsNPC() then
                 k:SetSchedule(SCHED_STANDOFF)
             end
         end
-    end
 
-    if self.dt < CurTime() then
-        if SERVER then
-            SafeRemoveEntity(self)
-        end
+        self:NextThink(CurTime() + 0.5)
+        return true
     end
 end
 

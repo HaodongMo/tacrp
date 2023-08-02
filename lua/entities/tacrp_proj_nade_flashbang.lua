@@ -35,7 +35,7 @@ function ENT:Detonate()
     dmg:SetInflictor(self)
     dmg:SetDamageType(engine.ActiveGamemode() == "terrortown" and DMG_DIRECT or DMG_SONIC)
     dmg:SetDamagePosition(self:GetPos())
-    dmg:SetDamage(5)
+    dmg:SetDamage(3)
     util.BlastDamageInfo(dmg, self:GetPos(), 728)
 
     local fx = EffectData()

@@ -12,6 +12,7 @@ local function GetSmokeImage()
     return smokeimages[math.random(#smokeimages)]
 end
 
+ENT.TacRPSmoke = true
 ENT.Particles = nil
 ENT.SmokeRadius = 256
 ENT.SmokeColor = Color(220, 220, 220)

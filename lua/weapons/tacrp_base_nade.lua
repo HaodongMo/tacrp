@@ -64,8 +64,6 @@ function SWEP:Equip(newowner)
         end
 
         if self:HasSpawnFlags(SF_WEAPON_START_CONSTRAINED) then
-            -- If this weapon started constrained, unset that spawnflag, or the
-            -- weapon will be re-constrained and float
             local flags = self:GetSpawnFlags()
             local newflags = bit.band(flags, bit.bnot(SF_WEAPON_START_CONSTRAINED))
             self:SetKeyValue("spawnflags", newflags)
@@ -85,9 +83,13 @@ function SWEP:ThinkSights()
 end
 
 function SWEP:ThinkGrenade()
-    if self:GetPrimedGrenade() and self:GetAnimLockTime() < CurTime() and !self:GetOwner():KeyDown(self.GrenadeDownKey) then
-        self:ThrowGrenade()
-        self:SetPrimedGrenade(false)
+    if self:GetPrimedGrenade() and self:GetAnimLockTime() < CurTime() then
+        if !self:GetOwner():KeyDown(self.GrenadeDownKey) then
+            self:ThrowGrenade()
+            self:SetPrimedGrenade(false)
+        elseif SERVER and self.GrenadeDownKey == IN_ATTACK then
+            self.GrenadeThrowCharge = math.Clamp(CurTime() - self:GetAnimLockTime(), 0, 0.25) * 2
+        end
     elseif !self:GetPrimedGrenade() then
         local nade = TacRP.QuickNades[self:GetValue("PrimaryGrenade")]
         if !TacRP.IsGrenadeInfiniteAmmo(nade) and self:GetOwner():GetAmmoCount(nade.Ammo) == 0 then
@@ -110,6 +112,7 @@ function SWEP:PrimaryAttack()
     self.Secondary.Automatic = false
     self.GrenadeDownKey = IN_ATTACK
     self.GrenadeThrowOverride = false
+    self.GrenadeThrowCharge = 0
 
     if self:GetValue("Melee") and self:GetOwner():KeyDown(IN_USE) then
         self:Melee()

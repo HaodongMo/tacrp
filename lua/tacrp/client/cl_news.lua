@@ -308,9 +308,11 @@ An additional benefit is that a lot of the attachments now use consistent wordin
 <h3>Changelist</h3>
 <ul>
 <li><b>Added:</b> Grenade viewmodels rigged to CS:S animations by speedonerd.
+<li><b>Added:</b> Holding overhand throw for pulled out grenades increases throw velocity by up to 50% over 0.25s.
 <li><b>Added:</b> New KS-23 Model and sounds (from FA:S 2).
 <li><b>Added:</b> RPM Burst and Semi multipliers.
 <li><b>Added:</b> "Lower Weapon While Airborne" config (default off), because bhopping is not tactical.
+<li><b>Added:</b> Flashbangs will now disable human type NPCs.
 <li><b>Rebalance:</b> Triggers now affect Recoil Stability.
 <li><b>Rebalance:</b> Burst trigger has increased RPM for burst fire mode only.
 <li><b>Rebalance:</b> Scope glint is slightly more visible and starts being visible closer.
@@ -322,6 +324,7 @@ An additional benefit is that a lot of the attachments now use consistent wordin
 <li><b>Changed:</b> Adjusted thermite effects and removed initial explosion. Thermite now ignites non-players.
 <li><b>Changed:</b> Adjusted some rating rules.
 <li><b>Fixed:</b> Error when trying to pick up weapon in DarkRP caused by incorrect hook usage.
+<li><b>Fixed:</b> Should fix situation where removed smokes still block targetid.
 </ul>]],
     },
 }
