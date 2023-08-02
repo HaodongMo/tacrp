@@ -10,7 +10,7 @@ ATT.Category = {"trigger_auto"}
 ATT.SortOrder = 1.1
 
 ATT.Add_PostBurstDelay = 0.1
-ATT.Add_RPMMultBurst = 0.35
+ATT.Add_RPMMultBurst = 0.25
 ATT.Override_Firemodes = {-3, 1}
 ATT.Override_RunawayBurst = true
 

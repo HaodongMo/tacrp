@@ -94,7 +94,6 @@ hook.Add("DoPlayerDeath", "TacRP_DropGrenade", function(ply, attacker, dmginfo)
     if !IsValid(wep) or !wep.ArcticTacRP or !wep:GetPrimedGrenade() then return end
     local nade = wep:GetValue("PrimaryGrenade") and TacRP.QuickNades[wep:GetValue("PrimaryGrenade")] or wep:GetGrenade()
     if nade then
-        local force = nade.ThrowForce
         local ent = nade.GrenadeEnt
         local src = ply:EyePos()
         local ang = ply:EyeAngles()
@@ -131,7 +130,7 @@ hook.Add("DoPlayerDeath", "TacRP_DropGrenade", function(ply, attacker, dmginfo)
         local phys = rocket:GetPhysicsObject()
 
         if phys:IsValid() then
-            phys:ApplyForceCenter(ply:GetVelocity() + VectorRand() * 50)
+            phys:ApplyForceCenter(ply:GetVelocity() + VectorRand() * 50 + Vector(0, 0, math.Rand(25, 50)))
             phys:AddAngleVelocity(VectorRand() * 500)
         end
 

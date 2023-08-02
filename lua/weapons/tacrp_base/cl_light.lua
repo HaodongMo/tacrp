@@ -279,21 +279,21 @@ function SWEP:DoScopeGlint()
     local dot2 = dir:Forward():Dot(diff:GetNormalized())
     dot = math.max(0, (dot + dot2) / 2) ^ 1.5
 
-    local strength = dot * math.Clamp((diff:Length() - 2048) / 3072, 0, 3) * math.Clamp(90 / self:GetValue("ScopeFOV") / 10, 0, 1)
+    local strength = dot * math.Clamp((diff:Length() - 1024) / 3072, 0, 3) * math.Clamp(90 / self:GetValue("ScopeFOV") / 10, 0, 1)
 
-    local rad = strength * 128 * (self:GetSightAmount() * 0.6 + 0.4)
+    local rad = strength * 128 * (self:GetSightAmount() * 0.5 + 0.5)
 
     src = src + dir:Up() * 4 + diff:GetNormalized() * math.Clamp(diff:Length() / 2048, 0, 1) * 16
 
-    local a = 120 + self:GetSightAmount() * 70
+    local a = math.min(255, strength * 200 + 100)
 
     render.SetMaterial(glintmat)
     render.DrawSprite(src, rad, rad, Color(a, a, a))
 
-    if self:GetSightAmount() > 0 then
+    -- if self:GetSightAmount() > 0 then
         render.SetMaterial(glintmat2)
-        render.DrawSprite(src, rad * 1.5, rad * 1.5, color_white)
-    end
+        render.DrawSprite(src, rad * 2, rad * 2, color_white)
+    -- end
 end
 
 function SWEP:DoMuzzleLight()

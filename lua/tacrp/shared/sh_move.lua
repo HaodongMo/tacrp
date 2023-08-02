@@ -247,8 +247,8 @@ function TacRP.StartCommand(ply, cmd)
         (wpn:GetBurstCount() > 0 and wpn:GetValue("RunawayBurst"))
         -- Stunned by a flashbang and cannot sprint
         or (ply:GetNWFloat("TacRPStunStart", 0) + ply:GetNWFloat("TacRPStunDur", 0) > CurTime())
-        -- Cannot reload and sprint
-        or (!wpn:CanReloadInSprint() and wpn:GetReloading())
+        -- Cannot reload and sprint (now sprint takes priority)
+        -- or (!wpn:CanReloadInSprint() and wpn:GetReloading())
     ) then
         cmd:SetButtons(cmd:GetButtons() - IN_SPEED)
         ply.TacRP_SprintBlock = true -- for some reason KeyDown(IN_SPEED) doesn't seem to see the modified buttons, so we set this

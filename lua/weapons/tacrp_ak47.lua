@@ -5,7 +5,7 @@ AddCSLuaFile()
 
 // names and stuff
 SWEP.PrintName = "FB Beryl 96"
-SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
+SWEP.Category = "Tactical RP"
 
 SWEP.SubCatTier = "4Consumer"
 SWEP.SubCatType = "4Assault Rifle"
@@ -22,6 +22,7 @@ SWEP.BalanceStats = {
         Damage_Max = 25,
         Damage_Min = 15,
 
+        RecoilSpreadPenalty = 0.0015,
         RecoilKick = 2,
 
         MoveSpeedMult = 0.85,
@@ -120,8 +121,8 @@ SWEP.RecoilVisualKick = 0.75
 SWEP.RecoilKick = 4
 SWEP.RecoilStability = 0.35
 
-SWEP.RecoilSpreadPenalty = 0.002
-SWEP.HipFireSpreadPenalty = 0.03
+SWEP.RecoilSpreadPenalty = 0.0018
+SWEP.HipFireSpreadPenalty = 0.025
 
 SWEP.CanBlindFire = true
 
@@ -133,8 +134,8 @@ SWEP.SightedSpeedMult = 0.65
 
 SWEP.ReloadSpeedMult = 0.5
 
-SWEP.AimDownSightsTime = 0.4
-SWEP.SprintToFireTime = 0.4
+SWEP.AimDownSightsTime = 0.35
+SWEP.SprintToFireTime = 0.38
 
 SWEP.Sway = 1.25
 SWEP.ScopedSway = 0.15
@@ -203,25 +204,6 @@ SWEP.EjectEffect = 2
 
 // anims
 
-// VM:
-// idle
-// fire
-// fire1, fire2...
-// dryfire
-// melee
-// reload
-// midreload
-// prime_grenade
-// throw_grenade
-// throw_grenade_underhand
-// deploy
-// blind_idle
-// blind_fire
-// blind_fire1, blind_fire2...
-// blind_dryfire
-
-// WM:
-// attack1
 SWEP.AnimationTranslationTable = {
     ["deploy"] = "deploy",
     ["fire_iron"] = "fire1_M",

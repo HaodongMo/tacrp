@@ -351,10 +351,10 @@ SWEP.StatGroups = {
 
             local rk = math.abs(valfunc(self, "RecoilKick"))
 
-            if rbs > fss or rsp == 0 then
-                -- judge solely on recoil kick and reset time, as spread is not a factor
-                return math.Clamp(1 - rk * rrt / 4, 0, 1) * 100
-            end
+            -- if rbs > fss or rsp == 0 then
+            --     -- judge solely on recoil kick and reset time, as spread is not a factor
+            --     return math.Clamp(1 - rk * rrt / 4, 0, 1) * 70 + 30
+            -- end
 
             -- recoil recovery
             local rrec_s = math.Clamp(rdr / rps / 30, 0, 1) ^ 0.9
@@ -366,7 +366,6 @@ SWEP.StatGroups = {
 
             -- 40 scaled between max spread and recovery
             score = score + math.max(rrec_s, mspr_s) * 30 + math.min(rrec_s, mspr_s) * 10
-            -- print(rrec_s, mspr_s)
 
             -- [30] recoil kick over 1s
             local score_rk1 = 30
@@ -684,7 +683,7 @@ SWEP.StatDisplay = {
         Description = "stat.recoilstability.desc",
         Value = "RecoilStability",
         AggregateFunction = function(self, base, val)
-            return math.Round(val * 100)
+            return math.Clamp(math.Round(val * 100), 0, 90)
         end,
         Unit = "%",
         LowerIsBetter = false,
@@ -808,6 +807,9 @@ SWEP.StatDisplay = {
         Description = "stat.freeaimangle.desc",
         Unit = "°",
         Value = "FreeAimMaxAngle",
+        AggregateFunction = function(self, base, val)
+            return math.max(0, math.Round(val, 1))
+        end,
         LowerIsBetter = true,
         -- HideIfSame = true,
         ConVarCheck = "tacrp_freeaim",

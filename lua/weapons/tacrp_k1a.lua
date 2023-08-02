@@ -5,7 +5,7 @@ AddCSLuaFile()
 
 // names and stuff
 SWEP.PrintName = "Daewoo K1A"
-SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
+SWEP.Category = "Tactical RP"
 
 SWEP.SubCatTier = "4Consumer"
 SWEP.SubCatType = "4Assault Rifle"
@@ -35,7 +35,6 @@ SWEP.BalanceStats = {
         Damage_Min = 10,
         Range_Min = 600,
         Range_Max = 2000,
-        RPM = 800,
         PostBurstDelay = 0.25,
 
         RecoilSpreadPenalty = 0.0025,
@@ -101,7 +100,8 @@ SWEP.Firemodes = {-3, 1}
 SWEP.RunawayBurst = true
 SWEP.PostBurstDelay = 0.16
 
-SWEP.RPM = 800
+SWEP.RPM = 700
+SWEP.RPMMultBurst = 800 / 700
 
 SWEP.Spread = 0.0025
 
@@ -198,25 +198,6 @@ SWEP.EjectEffect = 2
 
 // anims
 
-// VM:
-// idle
-// fire
-// fire1, fire2...
-// dryfire
-// melee
-// reload
-// midreload
-// prime_grenade
-// throw_grenade
-// throw_grenade_underhand
-// deploy
-// blind_idle
-// blind_fire
-// blind_fire1, blind_fire2...
-// blind_dryfire
-
-// WM:
-// attack1
 SWEP.AnimationTranslationTable = {
     ["fire1"] = "fire1_M",
     ["fire2"] = "fire2_M",

@@ -5,7 +5,7 @@ AddCSLuaFile()
 
 // names and stuff
 SWEP.PrintName = "Steyr AUG"
-SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
+SWEP.Category = "Tactical RP"
 
 SWEP.SubCatTier = "2Operator"
 SWEP.SubCatType = "4Assault Rifle"
@@ -101,7 +101,8 @@ SWEP.Firemodes = {
     1
 }
 
-SWEP.RPM = 900
+SWEP.RPM = 750
+SWEP.RPMMultBurst = 900 / 750
 
 SWEP.Spread = 0.0008
 
@@ -204,25 +205,6 @@ SWEP.EjectEffect = 2
 
 // anims
 
-// VM:
-// idle
-// fire
-// fire1, fire2...
-// dryfire
-// melee
-// reload
-// midreload
-// prime_grenade
-// throw_grenade
-// throw_grenade_underhand
-// deploy
-// blind_idle
-// blind_fire
-// blind_fire1, blind_fire2...
-// blind_dryfire
-
-// WM:
-// attack1
 SWEP.AnimationTranslationTable = {
     ["fire_iron"] = "dryfire",
     ["fire1"] = "fire1_M",

@@ -306,6 +306,14 @@ local conVars = {
         max = 1,
     },
     {
+        name = "sprint_counts_midair",
+        default = "0",
+        replicated = true,
+        notify = true,
+        min = 0,
+        max = 1,
+    },
+    {
         name = "sprint_lower",
         default = "1",
         replicated = true,
@@ -894,7 +902,7 @@ local function menu_balance_ti(panel)
     panel:Help("PvE: For HL2 campaign or co-op maps. Damage comparable to HL2 weapons, reduced spread.")
     panel:Help("(Tactical and PvE separate weapons into 4 tiers, with higher tiers having slightly better damage output.)")
 
-    header(panel, "\nAmmo & Reloading")
+    header(panel, "\nAmmunition")
     panel:AddControl("checkbox", {
         label = "Infinite Ammo",
         command = "tacrp_infiniteammo"
@@ -904,10 +912,6 @@ local function menu_balance_ti(panel)
         label = "Infinite Grenades",
         command = "tacrp_infinitegrenades"
     })
-    panel:AddControl("checkbox", {
-        label = "Allow Reload while Sprinting",
-        command = "tacrp_sprint_reload"
-    })
     panel:AddControl("slider", {
         label = "Default Clip Multiplier",
         command = "tacrp_defaultammo",
@@ -916,7 +920,7 @@ local function menu_balance_ti(panel)
         max = 10,
     })
 
-    header(panel, "\nFeatures")
+    header(panel, "\nHandling")
     panel:AddControl("checkbox", {
         label = "Enable Sway",
         command = "tacrp_sway"
@@ -926,6 +930,18 @@ local function menu_balance_ti(panel)
         command = "tacrp_freeaim"
     })
     panel:AddControl("checkbox", {
+        label = "Enable Holstering",
+        command = "TacRP_holster"
+    })
+    panel:ControlHelp("Play a holster animation before pulling out another weapon. If disabled, holstering is instant.")
+    panel:AddControl("checkbox", {
+        label = "Bloom Modifies Recoil",
+        command = "tacrp_altrecoil"
+    })
+    panel:ControlHelp("If enabled, gaining bloom intensifies recoil but does not modify spread.\nIf disabled, gaining bloom increases spread but does not modify recoil kick (old behavior).\nBloom is gained when firing consecutive shots.")
+
+    header(panel, "\nBallistics")
+    panel:AddControl("checkbox", {
         label = "Enable Penetration",
         command = "TacRP_penetration"
     })
@@ -934,11 +950,6 @@ local function menu_balance_ti(panel)
         command = "TacRP_physbullet"
     })
     panel:ControlHelp("Bullets will be hitscan up to a certain range depending on muzzle velocity.")
-    panel:AddControl("checkbox", {
-        label = "Enable Holstering",
-        command = "TacRP_holster"
-    })
-    panel:ControlHelp("Play a holster animation before pulling out another weapon. If disabled, holstering is instant.")
     panel:AddControl("checkbox", {
         label = "Enable Shotgun Patterns",
         command = "tacrp_fixedspread"
@@ -953,15 +964,21 @@ local function menu_balance_ti(panel)
         label = "Custom Armor Penetration",
         command = "tacrp_armorpenetration"
     })
-    panel:ControlHelp("Weapons use defined piercing and shredding stats to calculate damage when hitting players with HL2 suit armor, instead of using the standard 20% damage. This generally increases the weapons' effectiveness against armor.\nCompatible with Danger Zone Entities' armor.")
+    panel:ControlHelp("Use AP stats against players with HL2 suit armor. This generally increases weapon damage against armor.\nCompatible with Danger Zone Entities.")
+
+    header(panel, "\nMovement")
     panel:AddControl("checkbox", {
-        label = "Sprinting Lowers Weapon",
+        label = "Allow Reload while Sprinting",
+        command = "tacrp_sprint_reload"
+    })
+    panel:ControlHelp("If disabled, starting a sprint will cancel an unfinished reload.")
+    panel:AddControl("checkbox", {
+        label = "Lower Weapon While Sprinting",
         command = "tacrp_sprint_lower"})
     panel:AddControl("checkbox", {
-        label = "Bloom Modifies Recoil",
-        command = "tacrp_altrecoil"
-    })
-    panel:ControlHelp("If enabled, gaining bloom intensifies recoil but does not modify spread.\nIf disabled, gaining bloom increases spread but does not modify recoil kick (old behavior).\nBloom is gained when firing consecutive shots.")
+        label = "Lower Weapon While Airborne",
+        command = "tacrp_sprint_counts_midair"})
+    panel:ControlHelp("Requires \"Lower Weapon While Sprinting\" to be enabled.")
 
     header(panel, "\nSliders")
     panel:AddControl("slider", {

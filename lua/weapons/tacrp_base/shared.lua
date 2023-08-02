@@ -4,7 +4,7 @@ SWEP.AdminOnly = false
 
 // names and stuff
 SWEP.PrintName = "Arctic's Tactical RP Base"
-SWEP.Category = "Tactical RP" // "Tactical RP (Arctic)"
+SWEP.Category = "Tactical RP"
 
 SWEP.Description = ""
 
@@ -85,6 +85,7 @@ SWEP.ShootTimeMult = 1
 // SWEP.ShootChance = 1
 SWEP.JamWaitTime = 0.3
 SWEP.JamFactor = 0 // higher = more frequent jams. no jams at 0
+SWEP.JamTakesRound = false // consume ammo on jam
 SWEP.JamSkipFix = false // only do dryfire and the initial delay. use on revolvers mostly
 SWEP.JamBaseMSB = nil // use this number as the base value instead of being based on ammo.
 
@@ -313,7 +314,6 @@ SWEP.EjectDelay = 0
 SWEP.EjectScale = 1
 
 // anims
-
 // VM:
 // idle
 // fire

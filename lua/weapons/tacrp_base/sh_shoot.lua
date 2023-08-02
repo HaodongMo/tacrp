@@ -73,6 +73,9 @@ function SWEP:PrimaryAttack()
             self:SetBurstCount(0)
             self:SetNextPrimaryFire(CurTime() + self:GetValue("JamWaitTime"))
             self:SetNextSecondaryFire(CurTime() + self:GetValue("JamWaitTime"))
+            if self:GetValue("JamTakesRound") then
+                self:TakePrimaryAmmo(self:GetValue("AmmoPerShot"))
+            end
             if self:Clip1() > 0 and !self:GetValue("JamSkipFix") then
                 self:SetJammed(true)
             end

@@ -102,8 +102,8 @@ function SWEP:CreateCustomizeHUD()
 
         surface.SetFont("TacRP_Myriad_Pro_12")
 
-        if self.Ammo != "" then
-            local ammo_txt = language.GetPhrase(string.lower(self.Ammo) .. "_ammo")
+        if self:GetValue("Ammo") != "" then
+            local ammo_txt = language.GetPhrase(string.lower(self:GetValue("Ammo")) .. "_ammo")
             local ammo_w = surface.GetTextSize(ammo_txt)
 
             surface.SetDrawColor(0, 0, 0, 150)
@@ -686,6 +686,7 @@ function SWEP:CreateCustomizeHUD()
         end
 
         local function populate_stats(layout)
+            if !IsValid(self) then return end
             layout:Clear()
             self.MiscCache["statbox"] = {}
             self.StatRows = {}
@@ -802,6 +803,7 @@ function SWEP:CreateCustomizeHUD()
         populate_stats(stat_layout)
 
         stat_box.PaintOver = function(self2, w, h)
+            if !IsValid(self) then return end
             local panel = vgui.GetHoveredPanel()
             if self.StatRows[panel] then
                 local stat = self.StatDisplay[self.StatRows[panel]]

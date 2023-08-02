@@ -18,7 +18,7 @@ function SWEP:Reload()
     end
 
     if self:StillWaiting(true) then return end
-    -- if !self:CanReloadInSprint() and self:GetIsSprinting() then return end
+    if !self:CanReloadInSprint() and self:GetIsSprinting() then return end
     if self:GetCapacity() <= 0 then return end
     if self:Clip1() >= self:GetCapacity() then return end
     if self:Ammo1() <= 0 and !self:GetInfiniteAmmo() then return end
@@ -113,8 +113,8 @@ function SWEP:RestoreClip(amt)
     return self:Clip1() - lastclip1
 end
 
-function SWEP:Unload()
-    self:GetOwner():GiveAmmo(self:Clip1(), self.Primary.Ammo)
+function SWEP:Unload(ammotype)
+    self:GetOwner():GiveAmmo(self:Clip1(), ammotype or self.Primary.Ammo)
     self:SetClip1(0)
 end
 
@@ -135,7 +135,9 @@ function SWEP:EndReload()
         else
             local t = self:PlayAnimation("reload", self:GetValue("ReloadTimeMult"), true)
 
-            local res = math.min(math.min(3, self:GetCapacity() - self:Clip1()), self:GetInfiniteAmmo() and math.huge or self:Ammo1())
+            local res = self:GetValue("ShotgunThreeload") and
+                    math.min(math.min(3, self:GetCapacity() - self:Clip1()), self:GetInfiniteAmmo() and math.huge or self:Ammo1())
+                    or 1
 
             local delay = 0.9
             for i = 1, res do

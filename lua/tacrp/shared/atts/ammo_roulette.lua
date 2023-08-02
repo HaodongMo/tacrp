@@ -10,16 +10,18 @@ ATT.SortOrder = -1
 
 --ATT.Mult_ShootChance = 1 / 6
 ATT.Override_ClipSize = 1
+ATT.Override_AmmoPerShot = 1
 
 ATT.Hook_PreReload = function(wep)
     if wep:StillWaiting(true) then return end
-    if wep:Clip1() == 0 then return end
+    if wep:Clip1() < 1 then return end
     if wep:Ammo1() <= 0 and !wep:GetValue("InfiniteAmmo") then return end
 
-    wep:PlayAnimation("jam", 1, true, true)
-    wep:SetNextPrimaryFire(CurTime() + 1)
     if SERVER then
         wep:SetNWInt("TacRP_RouletteShot", math.random(1, wep:GetBaseValue("ClipSize")))
+        wep:PlayAnimation("jam", 1, true, true)
+        wep:SetNextPrimaryFire(CurTime() + 1)
+        wep:GetOwner():DoAnimationEvent(ACT_HL2MP_GESTURE_RANGE_ATTACK_SLAM)
     end
     return true
 end
@@ -45,7 +47,8 @@ ATT.Hook_PreShoot = function(wep)
         wep:EmitSound(wep:GetValue("Sound_DryFire"), 75, 100, 1, CHAN_BODY)
         wep:SetBurstCount(0)
         wep:SetNthShot(wep:GetNthShot() + 1)
-        wep:SetNextPrimaryFire(CurTime() + 0.5)
+        wep:SetNextPrimaryFire(CurTime() + (60 / wep:GetValue("RPM")))
+        wep:GetOwner():DoAnimationEvent(ACT_HL2MP_GESTURE_RANGE_ATTACK_PISTOL)
 
         return true
     end
