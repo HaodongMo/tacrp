@@ -99,6 +99,11 @@ function SWEP:Think()
 
         self:ThinkNearWall()
 
+        if IsValid(self.MuzzleLight) and (self.MuzzleLightEnd or 0) < UnPredictedCurTime() then
+            self.MuzzleLight:Remove()
+            self.MuzzleLight = nil
+        end
+
         if !self.LoadedPreset then
             self.LoadedPreset = true
 

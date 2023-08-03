@@ -307,14 +307,15 @@ An additional benefit is that a lot of the attachments now use consistent wordin
 
 <h3>Changelist</h3>
 <ul>
+<li><b>Added:</b> Muzzle Light feature: brief flash of projected light when firing, like L4D2. Only visible on self, can be disabled.
 <li><b>Added:</b> You can now aim the weapon while exiting sprint state, albeit at a slower speed.
 <li><b>Added:</b> Client config "Aiming Stops Sprinting" (default on).
+<li><b>Added:</b> "Lower Weapon While Airborne" config (default off), because bhopping is not tactical.
 <li><b>Added:</b> Grenade viewmodels rigged to CS:S animations by speedonerd.
 <li><b>Added:</b> Holding overhand throw for pulled out grenades increases throw velocity by up to 50% over 0.25s.
 <li><b>Added:</b> New KS-23 Model and sounds (from FA:S 2).
 <li><b>Added:</b> RPM Burst and Semi multipliers.
-<li><b>Added:</b> "Lower Weapon While Airborne" config (default off), because bhopping is not tactical.
-<li><b>Added:</b> Flashbangs will now disable human type NPCs.
+<li><b>Added:</b> Flashbangs will now stun human type NPCs.
 <li><b>Rebalance:</b> Triggers now affect Recoil Stability.
 <li><b>Rebalance:</b> Burst trigger has increased RPM for burst fire mode only.
 <li><b>Rebalance:</b> Scope glint is slightly more visible and starts being visible closer.
