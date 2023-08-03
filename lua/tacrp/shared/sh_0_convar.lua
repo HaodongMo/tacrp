@@ -232,6 +232,14 @@ local conVars = {
         userinfo = true,
     },
     {
+        name = "aim_cancels_sprint",
+        default = "1",
+        client = true,
+        userinfo = true,
+        min = 0,
+        max = 1,
+    },
+    {
         name = "holster",
         default = "1",
         replicated = true,
@@ -625,42 +633,10 @@ end
 
 if CLIENT then
 
-TacRP.ControlGuide = [[
-TacRP Controls:
-
-Blind Fire: +zoom & +forward / +moveleft / +moveright (B + W/A/D)
-
-Suicide: +zoom & +speed & +walk (B + SHIFT + ALT)
-
-Quick Melee: +use & +attack (E + MOUSE1)
-
-Change Firemode: +use & +reload (E + R)
-
-Safe: +use & +attack2 (E + MOUSE2)
-
-Customize: +menu_context (C)
-
-Peek: +menu_context (C) while aiming
-
-Throw Grenade: +grenade1 (Not bound by default! Do 'bind g +grenade1' in console!)
-
-Change Grenade: +grenade2 (Not bound by default! Do 'bind h +grenade2' in console!)
-]]
-
 local function header(panel, text)
     local ctrl = panel:Help(text)
     ctrl:SetFont("DermaDefaultBold")
     return ctrl
-end
-
-local function menu_guide_ti(panel)
-    panel:AddControl("label", {
-        text = TacRP.ControlGuide,
-    })
-    panel:AddControl("checkbox", {
-        label = "Hide Control Guide Message On Startup",
-        command = "tacrp_shutup"
-    })
 end
 
 local function menu_client_ti(panel)
@@ -740,6 +716,11 @@ local function menu_client_ti(panel)
         label = "Toggle Peeking",
         command = "tacrp_togglepeek"
     })
+    panel:AddControl("checkbox", {
+        label = "Aiming Stops Sprinting",
+        command = "tacrp_aim_cancels_sprint"
+    })
+    panel:ControlHelp("When holding both Sprint and Aim buttons, aim the weapon and prevent sprinting.")
     panel:AddControl("checkbox", {
         label = "Auto-Save Weapon",
         command = "TacRP_autosave"

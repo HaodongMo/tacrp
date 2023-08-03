@@ -1,15 +1,7 @@
-function SWEP:GetSprintToFireTime()
-    return self:GetValue("SprintToFireTime")
-end
-
 function SWEP:GetIsSprinting()
     local owner = self:GetOwner()
 
-    if !self:GetOwner():IsValid() or self:GetOwner():IsNPC() then
-        return false
-    end
-
-    if self:GetOwner():IsNextBot() then
+    if !owner:IsValid() or owner:IsNPC() or owner:IsNextBot() then
         return false
     end
 
@@ -38,10 +30,21 @@ function SWEP:GetIsSprinting()
     return true
 end
 
-if CLIENT then
+function SWEP:CanStopSprinting()
+    local owner = self:GetOwner()
+    if !owner:IsValid() or owner:IsNPC() or owner:IsNextBot() then
+        return false
+    end
 
-SWEP.LocalInterpolatedSprintDelta = 0
+    if TacRP.ConVars["sprint_counts_midair"]:GetBool() and owner:GetMoveType() != MOVETYPE_NOCLIP and !owner:OnGround() and !self:GetReloading() then
+        return false
+    end
 
+    if owner:GetNWBool("TacRPChargeState", false) then
+        return false
+    end
+
+    return true
 end
 
 function SWEP:GetSprintDelta()
@@ -67,7 +70,7 @@ end
 
 function SWEP:ExitSprint()
     local amt = self:GetSprintAmount()
-    self:SetSprintLockTime(CurTime() + (self:GetSprintToFireTime() * amt))
+    self:SetSprintLockTime(CurTime() + (self:GetValue("SprintToFireTime") * amt))
 
     self:SetShouldHoldType()
 end
@@ -88,9 +91,9 @@ function SWEP:ThinkSprint()
     self.LastWasSprinting = sprinting
 
     if sprinting then
-        amt = math.Approach(amt, 1, FrameTime() / self:GetSprintToFireTime())
+        amt = math.Approach(amt, 1, FrameTime() / self:GetValue("SprintToFireTime"))
     else
-        amt = math.Approach(amt, 0, FrameTime() / self:GetSprintToFireTime())
+        amt = math.Approach(amt, 0, FrameTime() / self:GetValue("SprintToFireTime"))
     end
 
     self:SetSprintAmount(amt)

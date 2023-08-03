@@ -63,22 +63,21 @@ function SWEP:GetViewModelPosition(pos, ang)
     -- local cor_val = (self.ViewModelFOV / self:GetShouldFOV())
     local cor_val = 0.75
 
+    ---------------------------------------------
+    -- Blindfire
+    ---------------------------------------------
     local bfmode = self:GetBlindFireMode()
     local bfl = bfmode == TacRP.BLINDFIRE_LEFT
     local bfr = bfmode == TacRP.BLINDFIRE_RIGHT
     local bfs = bfmode == TacRP.BLINDFIRE_KYS
-
     blindfiredelta = math.Approach(blindfiredelta, self:GetBlindFire() and 1 or 0, FT / 0.3)
-
     blindfiredeltaleft = math.Approach(blindfiredeltaleft, bfl and 1 or 0, FT / (bfr and 0.45 or 0.3))
     blindfiredeltaright = math.Approach(blindfiredeltaright, bfr and 1 or 0, FT / (bfl and 0.45 or 0.3))
     blindfiredeltakys = math.Approach(blindfiredeltakys, bfs and 1 or 0, FT / (bfs and 0.75 or 0.3))
-
     local curvedblindfiredelta = self:Curve(blindfiredelta)
     local curvedblindfiredeltaleft = self:Curve(blindfiredeltaleft)
     local curvedblindfiredeltaright = self:Curve(blindfiredeltaright)
     local curvedblindfiredeltakys = self:Curve(blindfiredeltakys)
-
     if blindfiredelta > 0 then
         offsetpos = LerpVector(curvedblindfiredelta, offsetpos, self:GetValue("BlindFirePos"))
         offsetang = LerpAngle(curvedblindfiredelta, offsetang, self:GetValue("BlindFireAng"))
@@ -99,11 +98,17 @@ function SWEP:GetViewModelPosition(pos, ang)
         end
     end
 
-    --local sightdelta = self:Curve(self:GetSightDelta())
+    ---------------------------------------------
+    -- Aiming & Peeking
+    ---------------------------------------------
+    local ads = self:GetValue("AimDownSightsTime")
     if self:GetScopeLevel() > 0 then
-        sightdelta = m_appor(sightdelta, 1, FT / self:GetValue("AimDownSightsTime"))
+        if self:GetSprintLockTime() > CurTime() then
+            ads = ads + self:GetValue("SprintToFireTime")
+        end
+        sightdelta = m_appor(sightdelta, 1, FT / ads)
     else
-        sightdelta = m_appor(sightdelta, 0, FT / self:GetValue("AimDownSightsTime"))
+        sightdelta = m_appor(sightdelta, 0, FT / ads)
     end
 
     if self:GetPeeking() then
@@ -117,8 +122,8 @@ function SWEP:GetViewModelPosition(pos, ang)
 
     -- cor_val = Lerp(sightdelta, cor_val, 1)
 
-    local ppos = Vector(self.PeekPos) * curvedpeekdelta
-    local pang = Angle(self.PeekAng) * curvedpeekdelta
+    local ppos = Vector(self:GetValue("PeekPos")) * curvedpeekdelta
+    local pang = Angle(self:GetValue("PeekAng")) * curvedpeekdelta
 
     if sightdelta > 0 then
         local sightpos, sightang = self:GetSightPositions()
@@ -134,6 +139,18 @@ function SWEP:GetViewModelPosition(pos, ang)
         -- LerpMod(offsetang, sightang + pang, curvedpeekdelta, true)
     end
 
+    local eepos, eeang = self:GetExtraSightPosition()
+    local im = self:GetValue("SightMidPoint")
+    local midpoint = curvedsightdelta * math.cos(curvedsightdelta * (math.pi / 2)) * (1 - curvedpeekdelta)
+    local joffset = (im and im.Pos or Vector(0, 0, 0) + ppos) * midpoint
+    local jaffset = (im and im.Ang or Angle(0, 0, 0) + pang) * midpoint
+
+    LerpMod(extra_offsetpos, -eepos + joffset, curvedsightdelta)
+    LerpMod(extra_offsetang, -eeang + jaffset, curvedsightdelta)
+
+    ---------------------------------------------
+    -- Procedural Firing
+    ---------------------------------------------
     local dt = math.max(0, CurTime() - self:GetLastProceduralFireTime())
     if IsValid(vm) and self.ProceduralIronFire then
         if dt <= self.ProceduralIronFire.tmax then
@@ -183,19 +200,9 @@ function SWEP:GetViewModelPosition(pos, ang)
         end
     end
 
-    local eepos, eeang = self:GetExtraSightPosition()
-
-    local im = self:GetValue("SightMidPoint")
-
-
-    local midpoint = curvedsightdelta * math.cos(curvedsightdelta * (math.pi / 2)) * (1 - curvedpeekdelta)
-
-    local joffset = (im and im.Pos or Vector(0, 0, 0) + ppos) * midpoint
-    local jaffset = (im and im.Ang or Angle(0, 0, 0) + pang) * midpoint
-
-    LerpMod(extra_offsetpos, -eepos + joffset, curvedsightdelta)
-    LerpMod(extra_offsetang, -eeang + jaffset, curvedsightdelta)
-
+    ---------------------------------------------
+    -- Free Aim & Sway
+    ---------------------------------------------
     extra_offsetang.y = extra_offsetang.y - (self:GetSwayAngles().p * cor_val)
     extra_offsetang.p = extra_offsetang.p + (self:GetSwayAngles().y * cor_val)
 
@@ -210,16 +217,15 @@ function SWEP:GetViewModelPosition(pos, ang)
     extra_offsetang.y = extra_offsetang.y - (freeaim_p * cor_val)
     extra_offsetang.p = extra_offsetang.p + (freeaim_y * cor_val)
 
-    --if game.SinglePlayer() or IsFirstTimePredicted() then
-        if self:GetCustomize() then
-            customizedelta = m_appor(customizedelta, 1, FT * 1 / 0.15)
-        else
-            customizedelta = m_appor(customizedelta, 0, FT * 1 / 0.15)
-        end
-    --end
-
+    ---------------------------------------------
+    -- Customization
+    ---------------------------------------------
+    if self:GetCustomize() then
+        customizedelta = m_appor(customizedelta, 1, FT * 1 / 0.15)
+    else
+        customizedelta = m_appor(customizedelta, 0, FT * 1 / 0.15)
+    end
     local curvedcustomizedelta = self:Curve(customizedelta)
-
     if customizedelta > 0 then
         LerpMod(offsetpos, self:GetValue("CustomizePos"), curvedcustomizedelta)
         LerpMod(offsetang, self:GetValue("CustomizeAng"), curvedcustomizedelta)
@@ -249,35 +255,40 @@ function SWEP:GetViewModelPosition(pos, ang)
         -- end
     end
 
-    -- local sprintdelta = self:Curve(self:GetSprintDelta())
+    ---------------------------------------------
+    -- Sprinting
+    ---------------------------------------------
+    local stf = self:GetValue("SprintToFireTime")
     if self.LastWasSprinting and !self:GetCustomize() and !self:CanShootInSprint() then
         if self:GetLastMeleeTime() + 0.5 > CurTime() or self:GetStartPrimedGrenadeTime() + 0.8 > CurTime() then
-            sprintdelta = m_appor(sprintdelta, 0, FT / 0.05)
+            sprintdelta = m_appor(sprintdelta, 0, FT / 0.2)
         else
-            sprintdelta = m_appor(sprintdelta, 1, FT / self:GetSprintToFireTime())
+            sprintdelta = m_appor(sprintdelta, 1, FT / stf)
         end
     else
-        sprintdelta = m_appor(sprintdelta, 0, FT / self:GetSprintToFireTime())
+        -- not accurate to how sprint progress works but looks much smoother
+        if self:GetScopeLevel() > 0 and self:GetSprintLockTime() > UnPredictedCurTime() then
+            stf = stf + self:GetValue("AimDownSightsTime") * 0.5
+        end
+        sprintdelta = m_appor(sprintdelta, 0, FT / stf)
     end
     local curvedsprintdelta = self:Curve(sprintdelta)
-
     if curvedsprintdelta > 0 then
         LerpMod(offsetpos, self:GetValue("SprintPos"), curvedsprintdelta)
         LerpMod(offsetang, self:GetValue("SprintAng"), curvedsprintdelta)
-
         LerpMod(extra_offsetang, angle_zero, curvedsprintdelta, true)
     end
 
     local sim = self:GetValue("SprintMidPoint")
-
     local spr_midpoint = curvedsprintdelta * math.cos(curvedsprintdelta * (math.pi / 2))
     local spr_joffset = (sim and sim.Pos or Vector(0, 0, 0)) * spr_midpoint
     local spr_jaffset = (sim and sim.Ang or Angle(0, 0, 0)) * spr_midpoint
-
     extra_offsetpos:Add(spr_joffset)
     extra_offsetang:Add(spr_jaffset)
 
-    -- local nearwalldelta = self:Curve(self:GetNearWallAmount()) - curvedcustomizedelta
+    ---------------------------------------------
+    -- Near Walling
+    ---------------------------------------------
     nearwalldelta = m_appor(nearwalldelta, self:GetNearWallAmount(), FT / 0.3)
     local curvednearwalldelta = self:Curve(nearwalldelta) - curvedcustomizedelta - curvedsightdelta
     if curvednearwalldelta > 0 then

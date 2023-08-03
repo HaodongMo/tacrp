@@ -39,8 +39,16 @@ function SWEP:ScopeToggle(setlevel)
         level = self:GetValue("ScopeLevels")
     end
 
-    if self:SprintLock(true) or self:GetCustomize() or self:GetLastMeleeTime() + 1 > CurTime() then
+    if self:GetCustomize() or self:GetLastMeleeTime() + 1 > CurTime() then -- self:SprintLock(true)
         level = 0
+    end
+
+    if self:GetIsSprinting() and level > 0 then
+        if self:GetOwner():GetInfoNum("tacrp_aim_cancels_sprint", 0) > 0 and self:CanStopSprinting() then
+            self:GetOwner().TacRP_SprintBlock = true
+        else
+            level = 0
+        end
     end
 
     if level == self:GetScopeLevel() then return end
@@ -171,10 +179,15 @@ function SWEP:ThinkSights()
 
     local amt = self:GetSightAmount()
 
+    local adst = self:GetValue("AimDownSightsTime")
+
     if sighted then
-        amt = math.Approach(amt, 1, FT / self:GetValue("AimDownSightsTime"))
+        if self:GetSprintLockTime() > CurTime() then
+            adst = adst + self:GetValue("SprintToFireTime")
+        end
+        amt = math.Approach(amt, 1, FT / adst)
     else
-        amt = math.Approach(amt, 0, FT / self:GetValue("AimDownSightsTime"))
+        amt = math.Approach(amt, 0, FT / adst)
     end
 
     self:SetSightDelta(amt)

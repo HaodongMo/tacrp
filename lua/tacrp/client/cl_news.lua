@@ -307,6 +307,8 @@ An additional benefit is that a lot of the attachments now use consistent wordin
 
 <h3>Changelist</h3>
 <ul>
+<li><b>Added:</b> You can now aim the weapon while exiting sprint state, albeit at a slower speed.
+<li><b>Added:</b> Client config "Aiming Stops Sprinting" (default on).
 <li><b>Added:</b> Grenade viewmodels rigged to CS:S animations by speedonerd.
 <li><b>Added:</b> Holding overhand throw for pulled out grenades increases throw velocity by up to 50% over 0.25s.
 <li><b>Added:</b> New KS-23 Model and sounds (from FA:S 2).

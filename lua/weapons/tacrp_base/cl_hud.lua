@@ -336,6 +336,16 @@ function SWEP:DoDrawCrosshair(x, y)
         local tw2 = surface.GetTextSize(damage_txt)
         surface.SetTextPos(x2 + 256 - tw2, y2 - 34)
         surface.DrawText(damage_txt)
+
+        local sprint_txt = math.Round(self:GetSprintAmount() * 100) .. "%"
+        local tw3 = surface.GetTextSize(sprint_txt)
+        surface.SetTextPos(x2 - tw3 * 0.5, y2 + 256)
+        surface.DrawText(sprint_txt)
+
+        local sight_txt = math.Round(self:GetSightAmount() * 100) .. "%"
+        local tw4 = surface.GetTextSize(sight_txt)
+        surface.SetTextPos(x2 - tw4 * 0.5, y2 + 256 + 32)
+        surface.DrawText(sight_txt)
     end
 
     return true

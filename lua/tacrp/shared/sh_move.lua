@@ -245,10 +245,15 @@ function TacRP.StartCommand(ply, cmd)
     if cmd:KeyDown(IN_SPEED) and (
         -- Sprint cannot interrupt a runaway burst
         (wpn:GetBurstCount() > 0 and wpn:GetValue("RunawayBurst"))
+
         -- Stunned by a flashbang and cannot sprint
         or (ply:GetNWFloat("TacRPStunStart", 0) + ply:GetNWFloat("TacRPStunDur", 0) > CurTime())
+
         -- Cannot reload and sprint (now sprint takes priority)
-        -- or (!wpn:CanReloadInSprint() and wpn:GetReloading())
+        -- or (!wpn:CanReloadInSprint() and wpn:GetReloading())\
+
+        -- Trying to aim disables sprinting if option is set
+        or ((ply:KeyDown(IN_ATTACK2) or wpn:GetScopeLevel() > 0) and ply:GetInfoNum("tacrp_aim_cancels_sprint", 0) > 0 and wpn:CanStopSprinting())
     ) then
         cmd:SetButtons(cmd:GetButtons() - IN_SPEED)
         ply.TacRP_SprintBlock = true -- for some reason KeyDown(IN_SPEED) doesn't seem to see the modified buttons, so we set this

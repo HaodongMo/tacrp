@@ -55,8 +55,8 @@ ATT.Hook_PreShoot = function(wep)
 end
 
 if engine.ActiveGamemode() == "terrortown" then
-    ATT.Pros = {"Explosive bullet"}
+    ATT.Pros = {"att.procon.explosive"}
     ATT.ExplosiveEffect = "HelicopterMegaBomb"
-    ATT.ExplosiveDamage = 35
-    ATT.ExplosiveRadius = 200
+    ATT.ExplosiveDamage = 60
+    ATT.ExplosiveRadius = 256
 end
