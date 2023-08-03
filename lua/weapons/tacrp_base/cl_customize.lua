@@ -693,9 +693,10 @@ function SWEP:CreateCustomizeHUD()
             for i, k in ipairs(self.StatDisplay) do
                 updatestat(i, k)
                 if !self.MiscCache["statbox"][i] then continue end
+                local spacer = k.Spacer
 
                 local row = layout:Add("DPanel")
-                row:SetSize(w_statbox, TacRP.SS(8))
+                row:SetSize(w_statbox, TacRP.SS(k.Spacer and 12 or 9))
                 row.StatIndex = i
                 row.Paint = function(self2, w, h)
                     if !IsValid(self) then return end
@@ -707,32 +708,37 @@ function SWEP:CreateCustomizeHUD()
                         self2:Remove()
                         return
                     end
-                    surface.SetFont("TacRP_Myriad_Pro_8")
+                    surface.SetFont(k.Spacer and "TacRP_Myriad_Pro_11" or "TacRP_Myriad_Pro_8")
                     surface.SetTextColor(255, 255, 255)
                     surface.SetTextPos(TacRP.SS(3), 0)
                     local name = TacRP:GetPhrase(k.Name) or k.Name
-                    surface.DrawText(name .. ":")
+                    surface.DrawText(name .. (k.Spacer and "" or ":"))
 
                     surface.SetTextPos(x_1 + TacRP.SS(4), 0)
                     surface.DrawText(sicache[1])
 
-                    if sicache[3] then
-                        if sicache[4] then
-                            surface.SetTextColor(175, 255, 175)
+                    if !k.Spacer then
+                        if sicache[3] then
+                            if sicache[4] then
+                                surface.SetTextColor(175, 255, 175)
+                            else
+                                surface.SetTextColor(255, 175, 175)
+                            end
                         else
-                            surface.SetTextColor(255, 175, 175)
+                            surface.SetTextColor(255, 255, 255)
                         end
-                    else
-                        surface.SetTextColor(255, 255, 255)
-                    end
 
-                    surface.SetTextPos(x_2 + TacRP.SS(4), 0)
-                    surface.DrawText(sicache[2])
+                        surface.SetTextPos(x_2 + TacRP.SS(4), 0)
+                        surface.DrawText(sicache[2])
 
-                    if sicache[5] then
-                        surface.SetTextPos(x_3 + TacRP.SS(4), 0)
-                        surface.DrawText(sicache[5])
+                        if sicache[5] then
+                            surface.SetTextPos(x_3 + TacRP.SS(4), 0)
+                            surface.DrawText(sicache[5])
+                        end
                     end
+                    surface.SetDrawColor(255, 255, 255, k.Spacer and 125 or 5)
+                    local um, umm = k.Spacer and 3 or 1, k.Spacer and 2 or 1
+                    surface.DrawRect( 0, h-um, w, umm )
                 end
                 self.StatRows[row] = i
             end
@@ -750,9 +756,9 @@ function SWEP:CreateCustomizeHUD()
             TacRP.DrawCorneredBox(0, 0, w, h)
 
             surface.SetDrawColor(255, 255, 255, 100)
-            surface.DrawLine(x_1, 0, x_1, h)
-            surface.DrawLine(x_2, 0, x_2, h)
-            surface.DrawLine(x_3, 0, x_3, h)
+            --surface.DrawLine(x_1, 0, x_1, h)
+            --surface.DrawLine(x_2, 0, x_2, h)
+            --surface.DrawLine(x_3, 0, x_3, h)
             surface.DrawLine(0, TacRP.SS(2 + 8 + 1), w, TacRP.SS(2 + 8 + 1))
 
             surface.SetFont("TacRP_Myriad_Pro_8")

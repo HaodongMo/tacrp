@@ -508,6 +508,7 @@ SWEP.StatGroups = {
     },
 }
 
+local empfunc = function() return "" end
 SWEP.StatDisplay = {
     -- {
     --     Name = "",
@@ -516,6 +517,12 @@ SWEP.StatDisplay = {
     --     AggregateFunction = nil,
     --     Unit = ""
     -- }
+    {
+        Name = "Calculations",
+        Spacer = true,
+        Value = "",
+        AggregateFunction = empfunc
+    },
     {
         Name = "stat.raw_dps",
         Description = "stat.raw_dps.desc",
@@ -567,38 +574,10 @@ SWEP.StatDisplay = {
         end,
     },
     {
-        Name = "stat.armorpenetration",
-        Description = "stat.armorpenetration.desc",
-        Value = "ArmorPenetration",
-        AggregateFunction = function(self, base, val)
-            return math.max(math.Round(val * 100, 1), 0)
-        end,
-        Unit = "%",
-    },
-    {
-        Name = "stat.armorbonus",
-        Description = "stat.armorbonus.desc",
-        Value = "ArmorBonus",
-        AggregateFunction = function(self, base, val)
-            return math.Round(val * 100, 1)
-        end,
-        Unit = "%",
-    },
-    {
-        Name = "stat.penetration",
-        Description = "stat.penetration.desc",
-        Value = "Penetration",
-        Unit = "\""
-    },
-    {
-        Name = "stat.spread",
-        Description = "stat.spread.desc",
-        AggregateFunction = function(self, base, val)
-            return math.Round(math.deg(val), 2)
-        end,
-        Unit = "°",
-        Value = "Spread",
-        LowerIsBetter = true,
+        Name = "Ballistics",
+        Spacer = true,
+        Value = "",
+        AggregateFunction = empfunc
     },
     {
         Name = "stat.rpm",
@@ -642,24 +621,39 @@ SWEP.StatDisplay = {
         Value = "JamFactor",
     },
     {
+        Name = "Material Penetration",
+        Spacer = true,
+        Value = "",
+        AggregateFunction = empfunc
+    },
+    {
+        Name = "stat.armorpenetration",
+        Description = "stat.armorpenetration.desc",
+        Value = "ArmorPenetration",
+        AggregateFunction = function(self, base, val)
+            return math.max(math.Round(val * 100, 1), 0)
+        end,
+        Unit = "%",
+    },
+    {
+        Name = "stat.armorbonus",
+        Description = "stat.armorbonus.desc",
+        Value = "ArmorBonus",
+        AggregateFunction = function(self, base, val)
+            return math.Round(val * 1, 2)
+        end,
+        Unit = "x",
+    },
+    {
+        Name = "stat.penetration",
+        Description = "stat.penetration.desc",
+        Value = "Penetration",
+        Unit = "\""
+    },
+    {
         Name = "stat.clipsize",
         Description = "stat.clipsize.desc",
         Value = "ClipSize",
-    },
-    {
-        Name = "stat.sprinttofire",
-        Description = "stat.sprinttofire.desc",
-        Value = "SprintToFireTime",
-        Unit = "unit.second",
-        LowerIsBetter = true,
-    },
-    {
-        Name = "stat.aimdownsights",
-        Description = "stat.aimdownsights.desc",
-        Value = "AimDownSightsTime",
-        Unit = "unit.second",
-        LowerIsBetter = true,
-        ValueCheck = "Scope",
     },
     {
         Name = "stat.muzzlevelocity",
@@ -687,6 +681,44 @@ SWEP.StatDisplay = {
         end,
         Unit = "%",
         LowerIsBetter = false,
+    },
+    {
+        Name = "Recoil",
+        Spacer = true,
+        Value = "",
+        AggregateFunction = empfunc
+    },
+    {
+        Name = "stat.spread",
+        Description = "stat.spread.desc",
+        AggregateFunction = function(self, base, val)
+            return math.Round(math.deg(val), 2)
+        end,
+        Unit = "°",
+        Value = "Spread",
+        LowerIsBetter = true,
+    },
+    {
+        Name = "stat.midairspread",
+        Description = "stat.midairspread.desc",
+        AggregateFunction = function(self, base, val)
+            return math.Round(math.deg(val), 2)
+        end,
+        Unit = "°",
+        Value = "MidAirSpreadPenalty",
+        LowerIsBetter = true,
+        -- HideIfSame = true,
+    },
+    {
+        Name = "stat.hipfirespread",
+        Description = "stat.hipfirespread.desc",
+        AggregateFunction = function(self, base, val)
+            return math.Round(math.deg(val), 2)
+        end,
+        Unit = "°",
+        Value = "HipFireSpreadPenalty",
+        LowerIsBetter = true,
+        -- HideIfSame = true,
     },
     {
         Name = "stat.recoilspread",
@@ -766,6 +798,12 @@ SWEP.StatDisplay = {
         -- HideIfSame = true,
     },
     {
+        Name = "Movement",
+        Spacer = true,
+        Value = "",
+        AggregateFunction = empfunc
+    },
+    {
         Name = "stat.movespeed",
         Description = "stat.movespeed.desc",
         AggregateFunction = function(self, base, val)
@@ -814,6 +852,13 @@ SWEP.StatDisplay = {
         -- HideIfSame = true,
         ConVarCheck = "tacrp_freeaim",
     },
+    
+    {
+        Name = "Sway",
+        Spacer = true,
+        Value = "",
+        AggregateFunction = empfunc
+    },
     {
         Name = "stat.sway",
         Description = "stat.sway.desc",
@@ -843,26 +888,10 @@ SWEP.StatDisplay = {
         ConVarCheck = "tacrp_sway",
     },
     {
-        Name = "stat.midairspread",
-        Description = "stat.midairspread.desc",
-        AggregateFunction = function(self, base, val)
-            return math.Round(math.deg(val), 2)
-        end,
-        Unit = "°",
-        Value = "MidAirSpreadPenalty",
-        LowerIsBetter = true,
-        -- HideIfSame = true,
-    },
-    {
-        Name = "stat.hipfirespread",
-        Description = "stat.hipfirespread.desc",
-        AggregateFunction = function(self, base, val)
-            return math.Round(math.deg(val), 2)
-        end,
-        Unit = "°",
-        Value = "HipFireSpreadPenalty",
-        LowerIsBetter = true,
-        -- HideIfSame = true,
+        Name = "Handling",
+        Spacer = true,
+        Value = "",
+        AggregateFunction = empfunc
     },
     {
         Name = "stat.reloadtime",
@@ -884,6 +913,21 @@ SWEP.StatDisplay = {
         LowerIsBetter = true,
         -- HideIfSame = true,
         Unit = "s"
+    },
+    {
+        Name = "stat.sprinttofire",
+        Description = "stat.sprinttofire.desc",
+        Value = "SprintToFireTime",
+        Unit = "unit.second",
+        LowerIsBetter = true,
+    },
+    {
+        Name = "stat.aimdownsights",
+        Description = "stat.aimdownsights.desc",
+        Value = "AimDownSightsTime",
+        Unit = "unit.second",
+        LowerIsBetter = true,
+        ValueCheck = "Scope",
     },
     {
         Name = "stat.firemode",
