@@ -232,7 +232,9 @@ ATT.Hook_PreReload = function(wep)
         wep:SetShouldHoldType()
     end, "holdtype")
 
-    ply:EmitSound("TacRP.Charge.Windup", 80)
+    if SERVER then
+        ply:EmitSound("TacRP.Charge.Windup", 80)
+    end
 
     -- so client can draw the effect. blehhhh
     if game.SinglePlayer() and SERVER then wep:CallOnClient("Reload") end

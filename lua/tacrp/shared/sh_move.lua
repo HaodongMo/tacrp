@@ -253,7 +253,7 @@ function TacRP.StartCommand(ply, cmd)
         -- or (!wpn:CanReloadInSprint() and wpn:GetReloading())\
 
         -- Trying to aim disables sprinting if option is set
-        or ((ply:KeyDown(IN_ATTACK2) or wpn:GetScopeLevel() > 0) and ply:GetInfoNum("tacrp_aim_cancels_sprint", 0) > 0 and wpn:CanStopSprinting())
+        or (wpn:GetValue("Scope") and (ply:KeyDown(IN_ATTACK2) or wpn:GetScopeLevel() > 0) and ply:GetInfoNum("tacrp_aim_cancels_sprint", 0) > 0 and wpn:CanStopSprinting())
     ) then
         cmd:SetButtons(cmd:GetButtons() - IN_SPEED)
         ply.TacRP_SprintBlock = true -- for some reason KeyDown(IN_SPEED) doesn't seem to see the modified buttons, so we set this

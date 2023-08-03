@@ -633,6 +633,14 @@ end
 
 if CLIENT then
 
+local function reset_cvars()
+    for _, cvar in pairs(TacRP.ConVars) do
+        if bit.band(cvar:GetFlags(), FCVAR_LUA_CLIENT) != 0 then
+            cvar:Revert()
+        end
+    end
+end
+
 local function header(panel, text)
     local ctrl = panel:Help(text)
     ctrl:SetFont("DermaDefaultBold")
@@ -640,6 +648,22 @@ local function header(panel, text)
 end
 
 local function menu_client_ti(panel)
+
+    local btn_reset = vgui.Create("DButton")
+    btn_reset:Dock(TOP)
+    btn_reset:SetText("Apply Default Client Settings")
+    function btn_reset.DoClick(self)
+        Derma_Query(
+            "Are you sure you want to reset ALL client settings to default values? This is irreversible!",
+            "TacRP",
+            "Yes",
+            function()
+                reset_cvars()
+            end,
+            "No"
+        )
+    end
+    panel:AddPanel(btn_reset)
 
     header(panel, "Interface")
     panel:AddControl("checkbox", {

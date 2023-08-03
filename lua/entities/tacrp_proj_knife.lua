@@ -123,8 +123,9 @@ function ENT:Impact(data, collider)
             fx:SetNormal(-ang:Forward())
             fx:SetAngles(-ang)
             util.Effect("ManhackSparks", fx)
-            self:EmitSound(istable(self.Sound_MeleeHit) and self.Sound_MeleeHit[math.random(1, #self.Sound_MeleeHit)] or self.Sound_MeleeHit, 80, 110, 1)
-            -- self:EmitSound("tacrp/weapons/knife/scrape_metal-" .. math.random(2, 3) .. ".wav", 80, 100, 0.75)
+            if SERVER then
+                self:EmitSound(istable(self.Sound_MeleeHit) and self.Sound_MeleeHit[math.random(1, #self.Sound_MeleeHit)] or self.Sound_MeleeHit, 80, 110, 1)
+            end
         end
 
         -- data.HitEntity:TakeDamageInfo(dmg)
@@ -144,8 +145,9 @@ function ENT:Impact(data, collider)
         fx:SetNormal(-ang:Forward())
         fx:SetAngles(-ang)
         util.Effect("ManhackSparks", fx)
-        self:EmitSound(istable(self.Sound_MeleeHit) and self.Sound_MeleeHit[math.random(1, #self.Sound_MeleeHit)] or self.Sound_MeleeHit, 80, 110, 1)
-        -- self:EmitSound("tacrp/weapons/knife/scrape_metal-" .. math.random(2, 3) .. ".wav", 80, 110, 0.75)
+        if SERVER then
+            self:EmitSound(istable(self.Sound_MeleeHit) and self.Sound_MeleeHit[math.random(1, #self.Sound_MeleeHit)] or self.Sound_MeleeHit, 80, 110, 1)
+        end
 
         -- leave a bullet hole. Also may be able to hit things it can't collide with (like stuck C4)
         self:FireBullets({
