@@ -303,12 +303,15 @@ function SWEP:DoMuzzleLight()
 
     local lamp = ProjectedTexture()
     lamp:SetTexture("tacrp/muzzleflash_light")
+    local val1, val2
     if self:GetValue("Silencer") then
-        lamp:SetBrightness(math.Rand(0.2, 0.4))
-        lamp:SetFOV(math.Rand(100, 105))
+        val1, val2 = math.Rand(0.2, 0.4), math.Rand(100, 105)
+        lamp:SetBrightness(val1)
+        lamp:SetFOV(val2)
     else
-        lamp:SetBrightness(math.Rand(2, 3))
-        lamp:SetFOV(math.Rand(115, 120))
+        val1, val2 = math.Rand(2, 3), math.Rand(115, 120)
+        lamp:SetBrightness(val1)
+        lamp:SetFOV(val2)
     end
 
     lamp:SetFarZ(600)
@@ -317,11 +320,14 @@ function SWEP:DoMuzzleLight()
     lamp:Update()
 
     self.MuzzleLight = lamp
-    self.MuzzleLightEnd = UnPredictedCurTime() + 0.03
+    self.MuzzleLightStart = UnPredictedCurTime()
+    self.MuzzleLightEnd = UnPredictedCurTime() + 0.06
+    self.MuzzleLightBrightness = val1
+    self.MuzzleLightFOV = val2
 
     -- In multiplayer the timer will last longer than intended - sh_think should kill the light first.
     -- This is a failsafe for when the weapon stops thinking before light is killed (holstered, removed etc.).
-    timer.Simple(0.03, function()
+    timer.Simple(0.06, function()
         if IsValid(lamp) then lamp:Remove() end
     end)
 end

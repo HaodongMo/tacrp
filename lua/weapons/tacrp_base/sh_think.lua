@@ -99,9 +99,15 @@ function SWEP:Think()
 
         self:ThinkNearWall()
 
-        if IsValid(self.MuzzleLight) and (self.MuzzleLightEnd or 0) < UnPredictedCurTime() then
-            self.MuzzleLight:Remove()
-            self.MuzzleLight = nil
+        if IsValid(self.MuzzleLight) then
+            if (self.MuzzleLightEnd or 0) < UnPredictedCurTime() then
+                self.MuzzleLight:Remove()
+                self.MuzzleLight = nil
+            else
+                self.MuzzleLight:SetBrightness( math.Remap( UnPredictedCurTime(), self.MuzzleLightStart, self.MuzzleLightEnd, self.MuzzleLightBrightness, 0 ) )
+                self.MuzzleLight:SetFOV( math.Remap( UnPredictedCurTime(), self.MuzzleLightStart, self.MuzzleLightEnd, self.MuzzleLightFOV, 60 ) )
+                self.MuzzleLight:Update()
+            end
         end
 
         if !self.LoadedPreset then
