@@ -309,6 +309,7 @@ An additional benefit is that a lot of the attachments now use consistent wordin
 <ul>
 <li><b>Added:</b> Muzzle Light feature: brief flash of projected light when firing, like L4D2. Only visible on self, can be disabled.
 <li><b>Added:</b> You can now aim the weapon while exiting sprint state, albeit at a slower speed.
+<li><b>Added:</b> Shotgun reloading can be instantly cancelled (configurable, default on).
 <li><b>Added:</b> Client config "Aiming Stops Sprinting" (default on).
 <li><b>Added:</b> "Lower Weapon While Airborne" config (default off), because bhopping is not tactical.
 <li><b>Added:</b> You can now reset all client configs in the menu with a button.

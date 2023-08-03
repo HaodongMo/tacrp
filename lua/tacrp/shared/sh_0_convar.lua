@@ -330,6 +330,14 @@ local conVars = {
         max = 1,
     },
     {
+        name = "reload_sg_cancel",
+        default = "1",
+        replicated = true,
+        notify = true,
+        min = 0,
+        max = 1,
+    },
+    {
         name = "armorpenetration",
         default = "1",
         replicated = true,
@@ -944,6 +952,11 @@ local function menu_balance_ti(panel)
         command = "tacrp_altrecoil"
     })
     panel:ControlHelp("If enabled, gaining bloom intensifies recoil but does not modify spread.\nIf disabled, gaining bloom increases spread but does not modify recoil kick (old behavior).\nBloom is gained when firing consecutive shots.")
+    panel:AddControl("checkbox", {
+        label = "Shotgun Reload Cancel",
+        command = "tacrp_reload_sg_cancel"
+    })
+    panel:ControlHelp("Instantly fire out of a shotgun reload. If disabled, the finishing part of the animation must play out.")
 
     header(panel, "\nBallistics")
     panel:AddControl("checkbox", {

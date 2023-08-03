@@ -29,7 +29,12 @@ function SWEP:PrimaryAttack()
     end
 
     if self:GetReloading() and self:GetValue("ShotgunReload") then
-        self:CancelReload(true)
+        if TacRP.ConVars["reload_sg_cancel"]:GetBool() then
+            self:CancelReload(false)
+            self:Idle()
+        else
+            self:CancelReload(true)
+        end
     end
 
     if self:StillWaiting() then
