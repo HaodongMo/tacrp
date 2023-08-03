@@ -15,15 +15,17 @@ local body_arms = Material("tacrp/hud/body_arms.png", "mips smooth")
 local body_legs = Material("tacrp/hud/body_legs.png", "mips smooth")
 
 local stk_clr = {
-    [1] = Color(75, 25, 25),
-    [2] = Color(40, 20, 20),
-    [3] = Color(60, 50, 50),
-    [4] = Color(80, 75, 75),
-    [5] = Color(100, 100, 100),
-    [6] = Color(120, 120, 120),
-    [7] = Color(140, 140, 140),
-    [8] = Color(160, 160, 160),
-    [9] = Color(200, 200, 200),
+    [1] = Color(255, 75, 75),
+    [2] = Color(120, 20, 20),
+    [3] = Color(130, 90, 90),
+    [4] = Color(60, 35, 35),
+    [5] = Color(80, 80, 80),
+    [6] = Color(160, 160, 160),
+    [7] = Color(180, 180, 180),
+    [8] = Color(200, 200, 200),
+    [9] = Color(220, 220, 220),
+    [10] = Color(240, 240, 240),
+    [11] = Color(255, 255, 255),
 }
 local function bodydamagetext(name, dmg, num, mult, x, y, hover)
 
@@ -43,7 +45,7 @@ local function bodydamagetext(name, dmg, num, mult, x, y, hover)
         surface.DrawText(math.floor(dmg * mult)) --  .. (num > 1 and ("×" .. num) or "")
     end
 
-    local c = stk_clr[math.Clamp(num > 1 and math.floor(stk / num * 3.5) or stk, 1, 9)]
+    local c = stk_clr[math.Clamp(num > 1 and math.ceil(stk / num) or stk, 1, 11)]
     if enable_armor then
         surface.SetDrawColor(c.b, c.g, c.r - (c.r - c.g) * 0.25, 255)
     else
@@ -286,6 +288,22 @@ function SWEP:CreateCustomizeHUD()
             surface.SetDrawColor(0, 0, 0, 150)
             surface.DrawRect(0, 0, w, h)
             TacRP.DrawCorneredBox(0, 0, w, h)
+
+            local za = TacRP.SS(1)
+            for i=1, 7 do
+                local c = stk_clr[i]
+                if enable_armor then
+                    surface.SetDrawColor( c.b, c.g, c.r - (c.r - c.g) * 0.25, 255 )
+                else
+                    surface.SetDrawColor( c.r, c.g, c.b, 255 )
+                end
+                surface.DrawRect( math.Round(w - (za*5) - za*2), math.Round(h - (za*5*i) - za*2), math.Round(za*5), math.Round(za*5) )
+                
+                surface.SetTextColor( 255, 255, 255, 127 )
+                surface.SetFont("TacRP_Myriad_Pro_5")
+                surface.SetTextPos( math.Round(w - za*5 - za*0.7), math.Round(h - (za*5*i) - za*2))
+                surface.DrawText(i)
+            end
 
             local h2 = h - TacRP.SS(4)
             local w2 = math.ceil(h2 * (136 / 370))
