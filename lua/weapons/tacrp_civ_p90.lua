@@ -21,7 +21,7 @@ SWEP.BalanceStats = {
     [TacRP.BALANCE_SBOX] = {
         Description = "Semi-automatic model of a futuristic PDW. Fine tuned for precision shooting.",
 
-        Damage_Max = 16,
+        Damage_Max = 17,
         Damage_Min = 14,
 
         Recoil_Kick = 0.5,

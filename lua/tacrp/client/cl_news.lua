@@ -322,7 +322,7 @@ An additional benefit is that a lot of the attachments now use consistent wordin
 <li><b>Rebalance:</b> Burst trigger has increased RPM for burst fire mode only.
 <li><b>Rebalance:</b> Scope glint is slightly more visible and starts being visible closer.
 <li><b>Rebalance:</b> Frag grenades, C4s and Breach Charges do more damage.
-<li><b>Rebalance:</b> Buffed AMD-65 and FB Beryl 96.
+<li><b>Rebalance:</b> Buffed AMD-65, FB Beryl 96, HK94 and PS90.
 <li><b>Rebalance:</b> Mag Extender slows reload by 3-5% (weapon type dependent).
 <li><b>Rebalance:</b> Adjusted burst fire weapons to accomdate for RPM Burst multipliers.
 <li><b>Changed:</b> When "Allow Reload While Sprinting" is disabled, sprinting cancels reload (unless ammo is already replenished).

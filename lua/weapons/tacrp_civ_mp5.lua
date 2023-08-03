@@ -22,10 +22,10 @@ SWEP.BalanceStats = {
     [TacRP.BALANCE_SBOX] = {
         Description = "Semi-automatic model of a legendary submachine gun. Fine tuned for precision shooting.",
 
-        Damage_Max = 15,
-        Damage_Min = 7,
+        Damage_Max = 22,
+        Damage_Min = 15,
 
-        Recoil_Kick = 1,
+        RecoilKick = 2,
         Spread = 0.001,
 
         MoveSpeedMult = 0.9,
@@ -98,7 +98,7 @@ SWEP.TTTReplace = {}
 SWEP.Firemode = 1
 SWEP.Firemodes = false
 
-SWEP.RPM = 700
+SWEP.RPM = 650
 
 SWEP.RecoilKick = 1.5
 
@@ -125,7 +125,7 @@ SWEP.Attachments = {
         Bone = "ValveBiped.mp5_rootbone",
         AttachSound = "TacRP/weapons/silencer_on.wav",
         DetachSound = "TacRP/weapons/silencer_off.wav",
-        Pos_VM = Vector(-4.25, -0.2, 26),
+        Pos_VM = Vector(-4.32, -0.3, 28),
         Pos_WM = Vector(24, 2.5, -5.25),
         Ang_VM = Angle(90, 0, 0),
         Ang_WM = Angle(0, -3.5, 180),
