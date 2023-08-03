@@ -160,16 +160,6 @@ function SWEP:PrimaryAttack()
         self:PlayAnimation(seq, mult, false, idle)
     end
 
-    local ejectdelay = self:GetValue("EjectDelay")
-
-    if ejectdelay == 0 then
-        self:DoEject()
-    else
-        self:SetTimer(ejectdelay, function()
-            self:DoEject()
-        end)
-    end
-
     self:GetOwner():DoAnimationEvent(self:GetValue("GestureShoot"))
 
     local pvar = self:GetValue("ShootPitchVariance")
@@ -213,7 +203,29 @@ function SWEP:PrimaryAttack()
 
     self:SetNthShot(self:GetNthShot() + 1)
 
+    local ejectdelay = self:GetValue("EjectDelay")
+    if ejectdelay == 0 then
+        self:DoEject()
+    else
+        self:SetTimer(ejectdelay, function()
+            self:DoEject()
+        end)
+    end
+
     self:DoEffects()
+
+    if self:GetValue("AkimboBoth") then
+        self:SetNthShot(self:GetNthShot() + 1)
+        self:DoEffects()
+        if ejectdelay == 0 then
+            self:DoEject()
+        else
+            self:SetTimer(ejectdelay, function()
+                self:DoEject()
+            end)
+        end
+        self:SetNthShot(self:GetNthShot() - 1)
+    end
 
     local num = self:GetValue("Num")
     local fixed_spread = self:IsShotgun() and TacRP.ConVars["fixedspread"]:GetBool()
@@ -684,9 +696,9 @@ end
 
 function SWEP:IsShotgun(base)
     if base then
-        return self:GetBaseValue("Num") > 1
+        return self:GetBaseValue("Num") > 1 and !self:GetBaseValue("NotShotgun")
     else
-        return self:GetValue("Num") > 1
+        return self:GetValue("Num") > 1 and !self:GetValue("NotShotgun")
     end
 end
 

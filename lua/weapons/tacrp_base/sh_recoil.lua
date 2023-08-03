@@ -36,7 +36,7 @@ function SWEP:ApplyRecoil()
         rps = rps * self:GetValue("RecoilFirstShotMult")
     end
 
-    if self:GetOwner():Crouching() and !(self:GetOwner():KeyDown(IN_FORWARD) or self:GetOwner():KeyDown(IN_MOVELEFT) or self:GetOwner():KeyDown(IN_MOVERIGHT) or self:GetOwner():KeyDown(IN_BACK)) then
+    if self:GetOwner():Crouching() and self:GetOwner():OnGround() then
         rps = rps * self:GetValue("RecoilCrouchMult")
     end
 

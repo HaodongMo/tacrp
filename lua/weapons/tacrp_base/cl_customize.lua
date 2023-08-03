@@ -599,17 +599,21 @@ function SWEP:CreateCustomizeHUD()
         local x_1 = x_2 - TacRP.SS(32)
 
         local function updatestat(i, k)
+            if k.ConVarCheck then
+                if !k.ConVar then k.ConVar = GetConVar(k.ConVarCheck) end
+                if k.ConVar:GetBool() == tobool(k.ConVarInvert) then return end
+            end
+
+            if k.Spacer then
+                self.MiscCache["statbox"][i] = {}
+                return
+            end
             local value = self:GetValue(k.Value)
             local orig = self:GetBaseValue(k.Value)
             local diff = nil
 
             if k.HideIfSame and orig == value then return end
             if k.DefaultValue != nil and value == k.DefaultValue and orig == k.DefaultValue then return end
-
-            if k.ConVarCheck then
-                if !k.ConVar then k.ConVar = GetConVar(k.ConVarCheck) end
-                if k.ConVar:GetBool() == tobool(k.ConVarInvert) then return end
-            end
 
             if k.ValueCheck and self:GetValue(k.ValueCheck) != !k.ValueInvert then
                 return
@@ -714,7 +718,7 @@ function SWEP:CreateCustomizeHUD()
                 local spacer = k.Spacer
 
                 local row = layout:Add("DPanel")
-                row:SetSize(w_statbox, TacRP.SS(k.Spacer and 12 or 9))
+                row:SetSize(w_statbox, TacRP.SS(spacer and 12 or 9))
                 row.StatIndex = i
                 row.Paint = function(self2, w, h)
                     if !IsValid(self) then return end
@@ -726,16 +730,15 @@ function SWEP:CreateCustomizeHUD()
                         self2:Remove()
                         return
                     end
-                    surface.SetFont(k.Spacer and "TacRP_Myriad_Pro_11" or "TacRP_Myriad_Pro_8")
+                    surface.SetFont(spacer and "TacRP_Myriad_Pro_11" or "TacRP_Myriad_Pro_8")
                     surface.SetTextColor(255, 255, 255)
                     surface.SetTextPos(TacRP.SS(3), 0)
                     local name = TacRP:GetPhrase(k.Name) or k.Name
-                    surface.DrawText(name .. (k.Spacer and "" or ":"))
+                    surface.DrawText(name .. (spacer and "" or ":"))
 
-                    surface.SetTextPos(x_1 + TacRP.SS(4), 0)
-                    surface.DrawText(sicache[1])
-
-                    if !k.Spacer then
+                    if !spacer then
+                        surface.SetTextPos(x_1 + TacRP.SS(4), 0)
+                        surface.DrawText(sicache[1])
                         if sicache[3] then
                             if sicache[4] then
                                 surface.SetTextColor(175, 255, 175)

@@ -47,6 +47,23 @@ function SWEP:GetDeployTime(base)
     return basetime * mult
 end
 
+function SWEP:GetHolsterTime(base)
+    local vm = self:GetVM()
+    local valfunc = base and self.GetBaseValue or self.GetValue
+
+    local anim = "holster"
+    if valfunc(self, "NoHolsterAnimation") then
+        anim = "deploy"
+    end
+
+    local mult = valfunc(self, "HolsterTimeMult")
+
+    local seq = vm:LookupSequence(self:TranslateSequence(anim))
+    local basetime = vm:SequenceDuration(seq)
+
+    return basetime * mult
+end
+
 function SWEP:GetMuzzleVelocity(base)
     local valfunc = base and self.GetBaseValue or self.GetValue
 
@@ -495,20 +512,19 @@ SWEP.StatGroups = {
             local valfunc = base and self.GetBaseValue or self.GetValue
 
             -- [30] sway
-            score = score + math.Clamp(1 - valfunc(self, "Sway") / 5, 0, 1) ^ 0.75 * 30
+            score = score + math.Clamp(1 - valfunc(self, "Sway") / 5, 0, 1) ^ 0.75 * 40
 
             -- [60] sighted sway
             score = score + math.Clamp(1 - valfunc(self, "ScopedSway") / 2, 0, 1) ^ 1.5 * 60
 
             -- [10] blindfire sway
-            score = score + math.Clamp(1 - valfunc(self, "BlindFireSway") / 2, 0, 1) * 10
+            -- score = score + math.Clamp(1 - valfunc(self, "BlindFireSway") / 2, 0, 1) * 10
 
             return score
         end,
     },
 }
 
-local empfunc = function() return "" end
 SWEP.StatDisplay = {
     -- {
     --     Name = "",
@@ -518,10 +534,54 @@ SWEP.StatDisplay = {
     --     Unit = ""
     -- }
     {
-        Name = "Calculations",
+        Name = "spacer.damage",
+        Description = "spacer.damage.desc",
         Spacer = true,
-        Value = "",
-        AggregateFunction = empfunc
+    },
+    {
+        Name = "stat.damage",
+        Description = "stat.damage.desc",
+        Value = "Damage_Max",
+        AggregateFunction = function(self, base, val)
+            if !self:IsDamageConstant(base) then return end
+            return math.Round(val, 0)
+        end,
+    },
+    {
+        Name = "stat.damage_max",
+        Description = "stat.damage_max.desc",
+        Value = "Damage_Max",
+        AggregateFunction = function(self, base, val)
+            if self:IsDamageConstant(base) then return end
+            return math.Round(val, 0)
+        end,
+    },
+    {
+        Name = "stat.damage_min",
+        Description = "stat.damage_min.desc",
+        Value = "Damage_Min",
+        AggregateFunction = function(self, base, val)
+            if self:IsDamageConstant(base) then return end
+            return math.Round(val, 0)
+        end,
+    },
+    {
+        Name = "stat.range_min",
+        Description = "stat.range_min.desc",
+        Value = "Range_Min",
+        AggregateFunction = function(self, base, val)
+            if self:IsDamageConstant(base) then return end
+            return self:RangeUnitize(val)
+        end,
+    },
+    {
+        Name = "stat.range_max",
+        Description = "stat.range_max.desc",
+        Value = "Range_Max",
+        AggregateFunction = function(self, base, val)
+            if self:IsDamageConstant(base) then return end
+            return self:RangeUnitize(val)
+        end,
     },
     {
         Name = "stat.raw_dps",
@@ -574,10 +634,14 @@ SWEP.StatDisplay = {
         end,
     },
     {
-        Name = "Ballistics",
+        Name = "spacer.action",
+        Description = "spacer.action.desc",
         Spacer = true,
-        Value = "",
-        AggregateFunction = empfunc
+    },
+    {
+        Name = "stat.clipsize",
+        Description = "stat.clipsize.desc",
+        Value = "ClipSize",
     },
     {
         Name = "stat.rpm",
@@ -592,6 +656,7 @@ SWEP.StatDisplay = {
         Description = "stat.rpm_burst.desc",
         Value = "RPMMultBurst",
         AggregateFunction = function(self, base, val)
+            if !self:HasFiremode(-1) then return end
             local valfunc = base and self.GetBaseValue or self.GetValue
             return math.Round(val * valfunc(self, "RPM"), 0)
         end,
@@ -602,6 +667,7 @@ SWEP.StatDisplay = {
         Description = "stat.rpm_semi.desc",
         Value = "RPMMultSemi",
         AggregateFunction = function(self, base, val)
+            if !self:HasFiremode(1) then return end
             local valfunc = base and self.GetBaseValue or self.GetValue
             return math.Round(val * valfunc(self, "RPM"), 0)
         end,
@@ -621,313 +687,16 @@ SWEP.StatDisplay = {
         Value = "JamFactor",
     },
     {
-        Name = "Material Penetration",
-        Spacer = true,
-        Value = "",
-        AggregateFunction = empfunc
-    },
-    {
-        Name = "stat.armorpenetration",
-        Description = "stat.armorpenetration.desc",
-        Value = "ArmorPenetration",
+        Name = "stat.postburstdelay",
+        Description = "stat.postburstdelay.desc",
+        Value = "PostBurstDelay",
         AggregateFunction = function(self, base, val)
-            return math.max(math.Round(val * 100, 1), 0)
-        end,
-        Unit = "%",
-    },
-    {
-        Name = "stat.armorbonus",
-        Description = "stat.armorbonus.desc",
-        Value = "ArmorBonus",
-        AggregateFunction = function(self, base, val)
-            return math.Round(val * 1, 2)
-        end,
-        Unit = "x",
-    },
-    {
-        Name = "stat.penetration",
-        Description = "stat.penetration.desc",
-        Value = "Penetration",
-        Unit = "\""
-    },
-    {
-        Name = "stat.clipsize",
-        Description = "stat.clipsize.desc",
-        Value = "ClipSize",
-    },
-    {
-        Name = "stat.muzzlevelocity",
-        Description = "stat.muzzlevelocity.desc",
-        AggregateFunction = function(self, base, val)
-            return math.Round(self:GetMuzzleVelocity(base), 2)
-        end,
-        ConVarCheck = "tacrp_physbullet",
-        Value = "MuzzleVelocity",
-        LowerIsBetter = false,
-        Unit = "unit.mps",
-    },
-    {
-        Name = "stat.recoilkick",
-        Description = "stat.recoilkick.desc",
-        Value = "RecoilKick",
-        LowerIsBetter = true,
-    },
-    {
-        Name = "stat.recoilstability",
-        Description = "stat.recoilstability.desc",
-        Value = "RecoilStability",
-        AggregateFunction = function(self, base, val)
-            return math.Clamp(math.Round(val * 100), 0, 90)
-        end,
-        Unit = "%",
-        LowerIsBetter = false,
-    },
-    {
-        Name = "Recoil",
-        Spacer = true,
-        Value = "",
-        AggregateFunction = empfunc
-    },
-    {
-        Name = "stat.spread",
-        Description = "stat.spread.desc",
-        AggregateFunction = function(self, base, val)
-            return math.Round(math.deg(val), 2)
-        end,
-        Unit = "°",
-        Value = "Spread",
-        LowerIsBetter = true,
-    },
-    {
-        Name = "stat.midairspread",
-        Description = "stat.midairspread.desc",
-        AggregateFunction = function(self, base, val)
-            return math.Round(math.deg(val), 2)
-        end,
-        Unit = "°",
-        Value = "MidAirSpreadPenalty",
-        LowerIsBetter = true,
-        -- HideIfSame = true,
-    },
-    {
-        Name = "stat.hipfirespread",
-        Description = "stat.hipfirespread.desc",
-        AggregateFunction = function(self, base, val)
-            return math.Round(math.deg(val), 2)
-        end,
-        Unit = "°",
-        Value = "HipFireSpreadPenalty",
-        LowerIsBetter = true,
-        -- HideIfSame = true,
-    },
-    {
-        Name = "stat.recoilspread",
-        Description = "stat.recoilspread.desc",
-        AggregateFunction = function(self, base, val)
-            return math.Round(math.deg(val), 3)
-        end,
-        Unit = "°",
-        Value = "RecoilSpreadPenalty",
-        LowerIsBetter = true,
-        ConVarCheck = "tacrp_altrecoil",
-        ConVarInvert = true,
-    },
-    -- For use in alt recoil mode
-    {
-        Name = "stat.recoilspread2",
-        Description = "stat.recoilspread2.desc",
-        AggregateFunction = function(self, base, val)
-            return math.Round(val * (base and self:GetBaseValue("RecoilAltMultiplier") or self:GetValue("RecoilAltMultiplier")), 1)
-        end,
-        Value = "RecoilSpreadPenalty",
-        LowerIsBetter = true,
-        ConVarCheck = "tacrp_altrecoil",
-        ConVarInvert = false,
-    },
-    {
-        Name = "stat.recoildissipation",
-        Description = "stat.recoildissipation.desc",
-        AggregateFunction = function(self, base, val)
-            return math.Round(val, 2)
-            --return math.Round(math.deg(val * (base and self:GetTable().RecoilSpreadPenalty or self:GetValue("RecoilSpreadPenalty"))), 1)
-        end,
-        Unit = "unit.persecond",
-        Value = "RecoilDissipationRate",
-    },
-    {
-        Name = "stat.recoilresettime",
-        Description = "stat.recoilresettime.desc",
-        Value = "RecoilResetTime",
-        LowerIsBetter = true,
-    },
-    {
-        Name = "stat.recoilmaximum",
-        Description = "stat.recoilmaximum.desc",
-        Value = "RecoilMaximum",
-        LowerIsBetter = true,
-    },
-    {
-        Name = "stat.recoilfirstshot",
-        Description = "stat.recoilfirstshot.desc",
-        Value = "RecoilFirstShotMult",
-        AggregateFunction = function(self, base, val)
-            return math.Round(val * 100)
-        end,
-        Unit = "%",
-        LowerIsBetter = true,
-    },
-    {
-        Name = "stat.recoilpershot",
-        Description = "stat.recoilpershot.desc",
-        AggregateFunction = function(self, base, val)
+            if !self:HasFiremode(-1) then return end
             return math.Round(val, 2)
         end,
-        Value = "RecoilPerShot",
-        HideIfSame = true,
-        LowerIsBetter = true,
-    },
-    {
-        Name = "stat.recoilcrouch",
-        Description = "stat.recoilcrouch.desc",
-        AggregateFunction = function(self, base, val)
-            return math.min(100, math.Round(val * 100, 0))
-        end,
-        Unit = "%",
-        Value = "RecoilCrouchMult",
-        LowerIsBetter = true,
-        -- HideIfSame = true,
-    },
-    {
-        Name = "Movement",
-        Spacer = true,
-        Value = "",
-        AggregateFunction = empfunc
-    },
-    {
-        Name = "stat.movespeed",
-        Description = "stat.movespeed.desc",
-        AggregateFunction = function(self, base, val)
-            return math.min(100, math.Round(val * 100, 0))
-        end,
-        Unit = "%",
-        Value = "MoveSpeedMult"
-    },
-    {
-        Name = "stat.shootingspeed",
-        Description = "stat.shootingspeed.desc",
-        AggregateFunction = function(self, base, val)
-            return math.min(100, math.Round(val * 100, 0))
-        end,
-        Unit = "%",
-        Value = "ShootingSpeedMult"
-    },
-    {
-        Name = "stat.sightedspeed",
-        Description = "stat.sightedspeed.desc",
-        AggregateFunction = function(self, base, val)
-            return math.min(100, math.Round(val * 100, 0))
-        end,
-        Unit = "%",
-        Value = "SightedSpeedMult",
-        ValueCheck = "Scope",
-    },
-    {
-        Name = "stat.reloadspeed",
-        Description = "stat.reloadspeed.desc",
-        AggregateFunction = function(self, base, val)
-            return math.min(100, math.Round(val * 100, 0))
-        end,
-        Unit = "%",
-        Value = "ReloadSpeedMult",
-    },
-    {
-        Name = "stat.freeaimangle",
-        Description = "stat.freeaimangle.desc",
-        Unit = "°",
-        Value = "FreeAimMaxAngle",
-        AggregateFunction = function(self, base, val)
-            return math.max(0, math.Round(val, 1))
-        end,
-        LowerIsBetter = true,
-        -- HideIfSame = true,
-        ConVarCheck = "tacrp_freeaim",
-    },
-    
-    {
-        Name = "Sway",
-        Spacer = true,
-        Value = "",
-        AggregateFunction = empfunc
-    },
-    {
-        Name = "stat.sway",
-        Description = "stat.sway.desc",
-
-        Value = "Sway",
-        LowerIsBetter = true,
-        ConVarCheck = "tacrp_sway",
-    },
-    {
-        Name = "stat.scopedsway",
-        Description = "stat.scopedsway.desc",
-        Value = "ScopedSway",
-        LowerIsBetter = true,
-        ConVarCheck = "tacrp_sway",
-        ValueCheck = "Scope",
-    },
-    {
-        Name = "stat.swaycrouch",
-        Description = "stat.swaycrouch.desc",
-        Value = "SwayCrouchMult",
-        AggregateFunction = function(self, base, val)
-            return math.min(100, math.Round(val * 100, 0))
-        end,
-        Unit = "%",
-        LowerIsBetter = true,
-        -- HideIfSame = true,
-        ConVarCheck = "tacrp_sway",
-    },
-    {
-        Name = "Handling",
-        Spacer = true,
-        Value = "",
-        AggregateFunction = empfunc
-    },
-    {
-        Name = "stat.reloadtime",
-        Description = "stat.reloadtime.desc",
-        AggregateFunction = function(self, base, val)
-            return math.Round(self:GetReloadTime(base), 2)
-        end,
-        Value = "ReloadTimeMult",
-        LowerIsBetter = true,
-        Unit = "s"
-    },
-    {
-        Name = "stat.deploytime",
-        Description = "stat.deploytime.desc",
-        AggregateFunction = function(self, base, val)
-            return math.Round(self:GetDeployTime(base), 2)
-        end,
-        Value = "DeployTimeMult",
-        LowerIsBetter = true,
-        -- HideIfSame = true,
-        Unit = "s"
-    },
-    {
-        Name = "stat.sprinttofire",
-        Description = "stat.sprinttofire.desc",
-        Value = "SprintToFireTime",
         Unit = "unit.second",
         LowerIsBetter = true,
-    },
-    {
-        Name = "stat.aimdownsights",
-        Description = "stat.aimdownsights.desc",
-        Value = "AimDownSightsTime",
-        Unit = "unit.second",
-        LowerIsBetter = true,
-        ValueCheck = "Scope",
+        DefaultValue = 0,
     },
     {
         Name = "stat.firemode",
@@ -1008,6 +777,326 @@ SWEP.StatDisplay = {
         end,
         Value = "Firemodes",
         -- HideIfSame = true,
+    },
+    {
+        Name = "stat.reloadtime",
+        Description = "stat.reloadtime.desc",
+        AggregateFunction = function(self, base, val)
+            return math.Round(self:GetReloadTime(base), 2)
+        end,
+        Value = "ReloadTimeMult",
+        LowerIsBetter = true,
+        Unit = "unit.second",
+    },
+    {
+        Name = "spacer.handling",
+        Description = "spacer.handling.desc",
+        Spacer = true,
+    },
+    {
+        Name = "stat.sprinttofire",
+        Description = "stat.sprinttofire.desc",
+        Value = "SprintToFireTime",
+        Unit = "unit.second",
+        LowerIsBetter = true,
+    },
+    {
+        Name = "stat.aimdownsights",
+        Description = "stat.aimdownsights.desc",
+        Value = "AimDownSightsTime",
+        Unit = "unit.second",
+        LowerIsBetter = true,
+        ValueCheck = "Scope",
+    },
+    {
+        Name = "spacer.ballistics",
+        Description = "spacer.ballistics.desc",
+        Spacer = true,
+    },
+    {
+        Name = "stat.spread",
+        Description = "stat.spread.desc",
+        AggregateFunction = function(self, base, val)
+            return math.Round(math.deg(val), 2)
+        end,
+        Unit = "°",
+        Value = "Spread",
+        LowerIsBetter = true,
+    },
+    {
+        Name = "stat.muzzlevelocity",
+        Description = "stat.muzzlevelocity.desc",
+        AggregateFunction = function(self, base, val)
+            return math.Round(self:GetMuzzleVelocity(base), 2)
+        end,
+        ConVarCheck = "tacrp_physbullet",
+        Value = "MuzzleVelocity",
+        LowerIsBetter = false,
+        Unit = "unit.mps",
+    },
+    {
+        Name = "stat.penetration",
+        Description = "stat.penetration.desc",
+        Value = "Penetration",
+        Unit = "\""
+    },
+    {
+        Name = "stat.armorpenetration",
+        Description = "stat.armorpenetration.desc",
+        Value = "ArmorPenetration",
+        AggregateFunction = function(self, base, val)
+            return math.max(math.Round(val * 100, 1), 0)
+        end,
+        Unit = "%",
+    },
+    {
+        Name = "stat.armorbonus",
+        Description = "stat.armorbonus.desc",
+        Value = "ArmorBonus",
+        AggregateFunction = function(self, base, val)
+            return math.Round(val * 1, 2)
+        end,
+        Unit = "x",
+    },
+    {
+        Name = "spacer.recoilbloom",
+        Description = "spacer.recoilbloom.desc",
+        Spacer = true,
+    },
+    {
+        Name = "stat.recoilkick",
+        Description = "stat.recoilkick.desc",
+        Value = "RecoilKick",
+        LowerIsBetter = true,
+    },
+    {
+        Name = "stat.recoilstability",
+        Description = "stat.recoilstability.desc",
+        Value = "RecoilStability",
+        AggregateFunction = function(self, base, val)
+            return math.Clamp(math.Round(val * 100), 0, 90)
+        end,
+        Unit = "%",
+        LowerIsBetter = false,
+    },
+    {
+        Name = "stat.recoilspread",
+        Description = "stat.recoilspread.desc",
+        AggregateFunction = function(self, base, val)
+            return math.Round(math.deg(val), 3)
+        end,
+        Unit = "°",
+        Value = "RecoilSpreadPenalty",
+        LowerIsBetter = true,
+        ConVarCheck = "tacrp_altrecoil",
+        ConVarInvert = true,
+    },
+    -- For use in alt recoil mode
+    {
+        Name = "stat.recoilspread2",
+        Description = "stat.recoilspread2.desc",
+        AggregateFunction = function(self, base, val)
+            return math.Round(val * (base and self:GetBaseValue("RecoilAltMultiplier") or self:GetValue("RecoilAltMultiplier")), 1)
+        end,
+        Value = "RecoilSpreadPenalty",
+        LowerIsBetter = true,
+        ConVarCheck = "tacrp_altrecoil",
+        ConVarInvert = false,
+    },
+    {
+        Name = "stat.recoildissipation",
+        Description = "stat.recoildissipation.desc",
+        AggregateFunction = function(self, base, val)
+            return math.Round(val, 2)
+            --return math.Round(math.deg(val * (base and self:GetTable().RecoilSpreadPenalty or self:GetValue("RecoilSpreadPenalty"))), 1)
+        end,
+        Unit = "unit.persecond",
+        Value = "RecoilDissipationRate",
+    },
+    {
+        Name = "stat.recoilresettime",
+        Description = "stat.recoilresettime.desc",
+        Value = "RecoilResetTime",
+        LowerIsBetter = true,
+    },
+    {
+        Name = "stat.recoilmaximum",
+        Description = "stat.recoilmaximum.desc",
+        Value = "RecoilMaximum",
+        LowerIsBetter = true,
+    },
+    {
+        Name = "stat.recoilfirstshot",
+        Description = "stat.recoilfirstshot.desc",
+        Value = "RecoilFirstShotMult",
+        AggregateFunction = function(self, base, val)
+            return math.Round(val * 100)
+        end,
+        Unit = "%",
+        DefaultValue = 1,
+        LowerIsBetter = true,
+    },
+    {
+        Name = "stat.recoilpershot",
+        Description = "stat.recoilpershot.desc",
+        AggregateFunction = function(self, base, val)
+            return math.Round(val, 2)
+        end,
+        Value = "RecoilPerShot",
+        HideIfSame = true,
+        LowerIsBetter = true,
+    },
+    {
+        Name = "stat.recoilcrouch",
+        Description = "stat.recoilcrouch.desc",
+        AggregateFunction = function(self, base, val)
+            return math.min(100, math.Round(val * 100, 0))
+        end,
+        Unit = "%",
+        Value = "RecoilCrouchMult",
+        LowerIsBetter = true,
+        -- HideIfSame = true,
+    },
+    {
+        Name = "spacer.mobility",
+        Description = "spacer.mobility.desc",
+        Spacer = true,
+    },
+    {
+        Name = "stat.movespeed",
+        Description = "stat.movespeed.desc",
+        AggregateFunction = function(self, base, val)
+            return math.min(100, math.Round(val * 100, 0))
+        end,
+        Unit = "%",
+        Value = "MoveSpeedMult"
+    },
+    {
+        Name = "stat.shootingspeed",
+        Description = "stat.shootingspeed.desc",
+        AggregateFunction = function(self, base, val)
+            return math.min(100, math.Round(val * 100, 0))
+        end,
+        Unit = "%",
+        Value = "ShootingSpeedMult"
+    },
+    {
+        Name = "stat.sightedspeed",
+        Description = "stat.sightedspeed.desc",
+        AggregateFunction = function(self, base, val)
+            return math.min(100, math.Round(val * 100, 0))
+        end,
+        Unit = "%",
+        Value = "SightedSpeedMult",
+        ValueCheck = "Scope",
+    },
+    {
+        Name = "stat.reloadspeed",
+        Description = "stat.reloadspeed.desc",
+        AggregateFunction = function(self, base, val)
+            return math.min(100, math.Round(val * 100, 0))
+        end,
+        Unit = "%",
+        Value = "ReloadSpeedMult",
+    },
+    {
+        Name = "spacer.maneuvering",
+        Description = "spacer.maneuvering.desc",
+        Spacer = true,
+    },
+    {
+        Name = "stat.freeaimangle",
+        Description = "stat.freeaimangle.desc",
+        Unit = "°",
+        Value = "FreeAimMaxAngle",
+        AggregateFunction = function(self, base, val)
+            return math.max(0, math.Round(val, 1))
+        end,
+        LowerIsBetter = true,
+        -- HideIfSame = true,
+        ConVarCheck = "tacrp_freeaim",
+    },
+    {
+        Name = "stat.midairspread",
+        Description = "stat.midairspread.desc",
+        AggregateFunction = function(self, base, val)
+            return math.Round(math.deg(val), 2)
+        end,
+        Unit = "°",
+        Value = "MidAirSpreadPenalty",
+        LowerIsBetter = true,
+        -- HideIfSame = true,
+    },
+    {
+        Name = "stat.hipfirespread",
+        Description = "stat.hipfirespread.desc",
+        AggregateFunction = function(self, base, val)
+            return math.Round(math.deg(val), 2)
+        end,
+        Unit = "°",
+        Value = "HipFireSpreadPenalty",
+        LowerIsBetter = true,
+        -- HideIfSame = true,
+    },
+    {
+        Name = "spacer.sway",
+        Description = "spacer.sway.desc",
+        Spacer = true,
+    },
+    {
+        Name = "stat.sway",
+        Description = "stat.sway.desc",
+
+        Value = "Sway",
+        LowerIsBetter = true,
+        ConVarCheck = "tacrp_sway",
+    },
+    {
+        Name = "stat.scopedsway",
+        Description = "stat.scopedsway.desc",
+        Value = "ScopedSway",
+        LowerIsBetter = true,
+        ConVarCheck = "tacrp_sway",
+        ValueCheck = "Scope",
+    },
+    {
+        Name = "stat.swaycrouch",
+        Description = "stat.swaycrouch.desc",
+        Value = "SwayCrouchMult",
+        AggregateFunction = function(self, base, val)
+            return math.min(100, math.Round(val * 100, 0))
+        end,
+        Unit = "%",
+        LowerIsBetter = true,
+        -- HideIfSame = true,
+        ConVarCheck = "tacrp_sway",
+    },
+    {
+        Name = "spacer.misc",
+        Description = "spacer.misc.desc",
+        Spacer = true,
+    },
+    {
+        Name = "stat.deploytime",
+        Description = "stat.deploytime.desc",
+        AggregateFunction = function(self, base, val)
+            return math.Round(self:GetDeployTime(base), 2)
+        end,
+        Value = "DeployTimeMult",
+        LowerIsBetter = true,
+        -- HideIfSame = true,
+        Unit = "unit.second",
+    },
+    {
+        Name = "stat.holstertime",
+        Description = "stat.holstertime.desc",
+        AggregateFunction = function(self, base, val)
+            return math.Round(self:GetHolsterTime(base), 2)
+        end,
+        Value = "HolsterTimeMult",
+        LowerIsBetter = true,
+        Unit = "unit.second",
+        ConVarCheck = "tacrp_holster",
     },
     {
         Name = "stat.meleedamage",

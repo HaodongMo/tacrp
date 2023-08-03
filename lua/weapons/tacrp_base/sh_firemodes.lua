@@ -79,3 +79,16 @@ function SWEP:GetFiremodeMat(mode)
         return mat_1 // epic fail
     end
 end
+
+function SWEP:HasFiremode(mode, base)
+    local valfunc = base and self.GetBaseValue or self.GetValue
+
+    if valfunc(self, "Firemodes") then
+        for _, v in pairs(valfunc(self, "Firemodes")) do
+            if v == mode or (mode < 0 and v < 0) then return true end
+        end
+        return false
+    else
+        return valfunc(self, "Firemode") == mode or (mode < 0 and valfunc(self, "Firemode") < 0)
+    end
+end

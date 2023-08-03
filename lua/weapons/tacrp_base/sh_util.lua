@@ -62,3 +62,8 @@ end
 function SWEP:GetMaxClip1()
     return self:GetCapacity()
 end
+
+function SWEP:IsDamageConstant(base)
+    local valfunc = base and self.GetBaseValue or self.GetValue
+    return valfunc(self, "Damage_Min") == valfunc(self, "Damage_Max")
+end
