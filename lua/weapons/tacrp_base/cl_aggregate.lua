@@ -47,7 +47,7 @@ function SWEP:GetDeployTime(base)
     return basetime * mult
 end
 
-function SWEP:GetHolsterTime(base)
+function SWEP:CalcHolsterTime(base)
     local vm = self:GetVM()
     local valfunc = base and self.GetBaseValue or self.GetValue
 
@@ -1091,7 +1091,7 @@ SWEP.StatDisplay = {
         Name = "stat.holstertime",
         Description = "stat.holstertime.desc",
         AggregateFunction = function(self, base, val)
-            return math.Round(self:GetHolsterTime(base), 2)
+            return math.Round(self:CalcHolsterTime(base), 2)
         end,
         Value = "HolsterTimeMult",
         LowerIsBetter = true,
