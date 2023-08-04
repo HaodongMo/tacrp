@@ -319,8 +319,11 @@ function SWEP:DoDrawCrosshair(x, y)
         surface.SetTextColor(255, 255, 255, 255)
         surface.SetTextPos(x2 - 256, y2)
         surface.DrawText(recoil_txt)
-        local spread_txt = tostring("Cone: " .. math.Round(self:GetSpread(), 5))
+        local spread_txt = tostring("Cone: " .. math.Round(math.deg(self:GetSpread()), 3)) .. " deg"
         surface.SetTextPos(x2 - 256, y2 - 34)
+        surface.DrawText(spread_txt)
+        local spread_txt = tostring(math.Round( math.deg(self:GetSpread())*60, 3)) .. "MOA"
+        surface.SetTextPos(x2 - 256, y2 - 66)
         surface.DrawText(spread_txt)
         -- local tw = surface.GetTextSize(spread_txt)
         -- surface.SetTextPos(x2 + 256 - tw, y2)

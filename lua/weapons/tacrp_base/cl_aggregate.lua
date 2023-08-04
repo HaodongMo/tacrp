@@ -817,6 +817,28 @@ SWEP.StatDisplay = {
         ValueCheck = "Scope",
     },
     {
+        Name = "stat.deploytime",
+        Description = "stat.deploytime.desc",
+        AggregateFunction = function(self, base, val)
+            return math.Round(self:GetDeployTime(base), 2)
+        end,
+        Value = "DeployTimeMult",
+        LowerIsBetter = true,
+        -- HideIfSame = true,
+        Unit = "unit.second",
+    },
+    {
+        Name = "stat.holstertime",
+        Description = "stat.holstertime.desc",
+        AggregateFunction = function(self, base, val)
+            return math.Round(self:CalcHolsterTime(base), 2)
+        end,
+        Value = "HolsterTimeMult",
+        LowerIsBetter = true,
+        Unit = "unit.second",
+        ConVarCheck = "tacrp_holster",
+    },
+    {
         Name = "spacer.ballistics",
         Description = "spacer.ballistics.desc",
         Spacer = true,
@@ -825,9 +847,9 @@ SWEP.StatDisplay = {
         Name = "stat.spread",
         Description = "stat.spread.desc",
         AggregateFunction = function(self, base, val)
-            return math.Round(math.deg(val), 2)
+            return math.Round(math.deg(val)*60, 2)
         end,
-        Unit = "°",
+        Unit = "′",
         Value = "Spread",
         LowerIsBetter = true,
     },
@@ -887,25 +909,27 @@ SWEP.StatDisplay = {
         Unit = "%",
         LowerIsBetter = false,
     },
+    -- For use when bloom is modifying spread. (default)
     {
         Name = "stat.recoilspread",
         Description = "stat.recoilspread.desc",
         AggregateFunction = function(self, base, val)
-            return math.Round(math.deg(val), 3)
+            return math.Round(math.deg(val)*60, 1)
         end,
-        Unit = "°",
+        Unit = "′",
         Value = "RecoilSpreadPenalty",
         LowerIsBetter = true,
         ConVarCheck = "tacrp_altrecoil",
         ConVarInvert = true,
     },
-    -- For use in alt recoil mode
+    -- For use when in "Bloom Modifies Recoil"
     {
         Name = "stat.recoilspread2",
         Description = "stat.recoilspread2.desc",
         AggregateFunction = function(self, base, val)
-            return math.Round(val * (base and self:GetBaseValue("RecoilAltMultiplier") or self:GetValue("RecoilAltMultiplier")), 1)
+            return math.Round(val * (base and self:GetBaseValue("RecoilAltMultiplier") or self:GetValue("RecoilAltMultiplier")) * 100, 0)
         end,
+        Unit = "%",
         Value = "RecoilSpreadPenalty",
         LowerIsBetter = true,
         ConVarCheck = "tacrp_altrecoil",
@@ -938,9 +962,9 @@ SWEP.StatDisplay = {
         Description = "stat.recoilfirstshot.desc",
         Value = "RecoilFirstShotMult",
         AggregateFunction = function(self, base, val)
-            return math.Round(val * 100)
+            return math.Round(val, 2)
         end,
-        Unit = "%",
+        Unit = "x",
         DefaultValue = 1,
         LowerIsBetter = true,
     },
@@ -950,6 +974,7 @@ SWEP.StatDisplay = {
         AggregateFunction = function(self, base, val)
             return math.Round(val, 2)
         end,
+        Unit = "x",
         Value = "RecoilPerShot",
         HideIfSame = true,
         LowerIsBetter = true,
@@ -1028,7 +1053,7 @@ SWEP.StatDisplay = {
         Name = "stat.midairspread",
         Description = "stat.midairspread.desc",
         AggregateFunction = function(self, base, val)
-            return math.Round(math.deg(val), 2)
+            return math.Round(math.deg(val), 1)
         end,
         Unit = "°",
         Value = "MidAirSpreadPenalty",
@@ -1039,7 +1064,7 @@ SWEP.StatDisplay = {
         Name = "stat.hipfirespread",
         Description = "stat.hipfirespread.desc",
         AggregateFunction = function(self, base, val)
-            return math.Round(math.deg(val), 2)
+            return math.Round(math.deg(val), 1)
         end,
         Unit = "°",
         Value = "HipFireSpreadPenalty",
@@ -1083,28 +1108,6 @@ SWEP.StatDisplay = {
         Name = "spacer.misc",
         Description = "spacer.misc.desc",
         Spacer = true,
-    },
-    {
-        Name = "stat.deploytime",
-        Description = "stat.deploytime.desc",
-        AggregateFunction = function(self, base, val)
-            return math.Round(self:GetDeployTime(base), 2)
-        end,
-        Value = "DeployTimeMult",
-        LowerIsBetter = true,
-        -- HideIfSame = true,
-        Unit = "unit.second",
-    },
-    {
-        Name = "stat.holstertime",
-        Description = "stat.holstertime.desc",
-        AggregateFunction = function(self, base, val)
-            return math.Round(self:CalcHolsterTime(base), 2)
-        end,
-        Value = "HolsterTimeMult",
-        LowerIsBetter = true,
-        Unit = "unit.second",
-        ConVarCheck = "tacrp_holster",
     },
     {
         Name = "stat.meleedamage",

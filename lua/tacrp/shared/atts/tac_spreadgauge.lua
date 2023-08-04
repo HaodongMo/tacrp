@@ -37,7 +37,7 @@ function ATT.TacticalDraw(self)
     surface.SetDrawColor(255, 255, 255, 100)
     surface.DrawTexturedRect(x, y, w, h)
 
-    local spread = math.Clamp(self:GetSpread() / 0.00092592592, 0, 999.9)
+    local spread = math.Clamp(math.deg(self:GetSpread())*60, 0, 999.9)
     local spread1 = math.floor(spread)
     local spread2 = math.floor((spread - spread1) * 10)
     local spread_txt1 = tostring(spread1)
