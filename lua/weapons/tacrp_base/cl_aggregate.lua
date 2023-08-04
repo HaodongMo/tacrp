@@ -797,48 +797,6 @@ SWEP.StatDisplay = {
         Unit = "unit.second",
     },
     {
-        Name = "spacer.handling",
-        Description = "spacer.handling.desc",
-        Spacer = true,
-    },
-    {
-        Name = "stat.sprinttofire",
-        Description = "stat.sprinttofire.desc",
-        Value = "SprintToFireTime",
-        Unit = "unit.second",
-        LowerIsBetter = true,
-    },
-    {
-        Name = "stat.aimdownsights",
-        Description = "stat.aimdownsights.desc",
-        Value = "AimDownSightsTime",
-        Unit = "unit.second",
-        LowerIsBetter = true,
-        ValueCheck = "Scope",
-    },
-    {
-        Name = "stat.deploytime",
-        Description = "stat.deploytime.desc",
-        AggregateFunction = function(self, base, val)
-            return math.Round(self:GetDeployTime(base), 2)
-        end,
-        Value = "DeployTimeMult",
-        LowerIsBetter = true,
-        -- HideIfSame = true,
-        Unit = "unit.second",
-    },
-    {
-        Name = "stat.holstertime",
-        Description = "stat.holstertime.desc",
-        AggregateFunction = function(self, base, val)
-            return math.Round(self:CalcHolsterTime(base), 2)
-        end,
-        Value = "HolsterTimeMult",
-        LowerIsBetter = true,
-        Unit = "unit.second",
-        ConVarCheck = "tacrp_holster",
-    },
-    {
         Name = "spacer.ballistics",
         Description = "spacer.ballistics.desc",
         Spacer = true,
@@ -1031,6 +989,48 @@ SWEP.StatDisplay = {
         end,
         Unit = "%",
         Value = "ReloadSpeedMult",
+    },
+    {
+        Name = "spacer.handling",
+        Description = "spacer.handling.desc",
+        Spacer = true,
+    },
+    {
+        Name = "stat.sprinttofire",
+        Description = "stat.sprinttofire.desc",
+        Value = "SprintToFireTime",
+        Unit = "unit.second",
+        LowerIsBetter = true,
+    },
+    {
+        Name = "stat.aimdownsights",
+        Description = "stat.aimdownsights.desc",
+        Value = "AimDownSightsTime",
+        Unit = "unit.second",
+        LowerIsBetter = true,
+        ValueCheck = "Scope",
+    },
+    {
+        Name = "stat.deploytime",
+        Description = "stat.deploytime.desc",
+        AggregateFunction = function(self, base, val)
+            return math.Round(self:GetDeployTime(base), 2)
+        end,
+        Value = "DeployTimeMult",
+        LowerIsBetter = true,
+        -- HideIfSame = true,
+        Unit = "unit.second",
+    },
+    {
+        Name = "stat.holstertime",
+        Description = "stat.holstertime.desc",
+        AggregateFunction = function(self, base, val)
+            return math.Round(self:CalcHolsterTime(base), 2)
+        end,
+        Value = "HolsterTimeMult",
+        LowerIsBetter = true,
+        Unit = "unit.second",
+        ConVarCheck = "tacrp_holster",
     },
     {
         Name = "spacer.maneuvering",
