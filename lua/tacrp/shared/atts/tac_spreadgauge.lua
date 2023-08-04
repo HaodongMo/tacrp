@@ -1,6 +1,6 @@
 ATT.PrintName = "Spread Gauge"
 ATT.Icon = Material("entities/tacrp_att_tac_rangefinder.png", "mips smooth")
-ATT.Description = "Measures weapon stability from sway and recoil."
+ATT.Description = "Measures weapon stability from sway and bloom."
 ATT.Pros = {"att.procon.gauge1", "att.procon.gauge2"}
 
 ATT.Model = "models/weapons/tacint/addons/rangefinder_mounted.mdl"
@@ -58,23 +58,33 @@ function ATT.TacticalDraw(self)
     surface.DrawText(spread2)
 
     local recoil = self:GetRecoilAmount()
-    local recoil_pct = math.Round(recoil / self:GetValue("RecoilMaximum") * 100)
-    local recoil_txt = tostring(recoil_pct)
+    local recoil_pct = math.Round( recoil, 2 )
+    local recoil_per = recoil / self:GetValue("RecoilMaximum")
     surface.SetTextPos(x + TacRP.SS(22), y + TacRP.SS(11.5))
     surface.SetTextColor(0, 0, 0)
 
     if recoil_pct < 10 then
         surface.SetTextColor(0, 0, 0, 100)
-        surface.DrawText("00")
-        surface.SetTextColor(0, 0, 0)
-    elseif recoil_pct < 100 then
-        surface.SetTextColor(0, 0, 0, 100)
         surface.DrawText("0")
         surface.SetTextColor(0, 0, 0)
-    elseif math.sin(SysTime() * 30) > 0 then
+    elseif recoil_per == 1 and math.sin(SysTime() * 60) > 0 then
         surface.SetTextColor(0, 0, 0, 150)
     end
-    surface.DrawText(recoil_txt)
+    surface.DrawText(recoil_pct)
+    
+    local bleh = math.ceil(recoil_pct) - recoil_pct
+    bleh = tostring(bleh)
+    if (recoil_per == 1 and math.sin(SysTime() * 60) > 0) then
+        surface.SetTextColor(0, 0, 0, 150)
+    else
+        surface.SetTextColor(0, 0, 0)
+    end
+    if #bleh == 1 then
+        surface.DrawText(".00")
+    elseif #bleh == 3 then
+        surface.SetTextColor(0, 0, 0)
+        surface.DrawText("0")
+    end
 
     local last_fire = math.Clamp((self:GetNextPrimaryFire() - CurTime()) / (60 / self:GetValue("RPM")), 0, 1)
     surface.SetDrawColor(255, 255, 255, last_fire * 255)
