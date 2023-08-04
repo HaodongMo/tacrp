@@ -571,6 +571,10 @@ SWEP.StatDisplay = {
         Value = "Range_Min",
         AggregateFunction = function(self, base, val)
             if self:IsDamageConstant(base) then return end
+            return val
+        end,
+        DisplayFunction = function(self, base, val)
+            if val == 0 then return "∞" end
             return self:RangeUnitize(val)
         end,
     },
@@ -580,6 +584,10 @@ SWEP.StatDisplay = {
         Value = "Range_Max",
         AggregateFunction = function(self, base, val)
             if self:IsDamageConstant(base) then return end
+            return val
+        end,
+        DisplayFunction = function(self, base, val)
+            if val == 0 then return "∞" end
             return self:RangeUnitize(val)
         end,
     },
