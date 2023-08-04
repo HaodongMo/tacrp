@@ -65,6 +65,7 @@ function SWEP:CreateCustomizeHUD()
     local bg = vgui.Create("DPanel")
 
     self.CustomizeHUD = bg
+    self.StaticStats = true
 
     local scrw = ScrW()
     local scrh = ScrH()
@@ -491,6 +492,7 @@ function SWEP:CreateCustomizeHUD()
             for i, v in ipairs(self.StatGroups) do
 
                 if !self.StatScoreCache[i] then
+                    self.StaticStats = true
                     local sb = v.RatingFunction(self, true)
                     local sc = v.RatingFunction(self, false)
 
@@ -505,6 +507,7 @@ function SWEP:CreateCustomizeHUD()
                     end
 
                     self.StatScoreCache[i] = {{math.min(sc or 0, 100), ic}, {math.min(sb or 0, 100), ib}}
+                    self.StaticStats = false
                 end
                 local scorecache = self.StatScoreCache[i]
                 local f = scorecache[1][1] / 100
@@ -709,6 +712,7 @@ function SWEP:CreateCustomizeHUD()
 
         local function populate_stats(layout)
             if !IsValid(self) then return end
+            self.StaticStats = true
             layout:Clear()
             self.MiscCache["statbox"] = {}
             self.StatRows = {}
@@ -763,6 +767,7 @@ function SWEP:CreateCustomizeHUD()
                 end
                 self.StatRows[row] = i
             end
+            self.StaticStats = false
         end
 
         local stat_box = vgui.Create("DPanel", bg)
@@ -1132,6 +1137,8 @@ function SWEP:CreateCustomizeHUD()
             self:CreateCustomizeHUD()
         end)
     end
+
+    self.StaticStats = false
 end
 
 function SWEP:RemoveCustomizeHUD()

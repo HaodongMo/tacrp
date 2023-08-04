@@ -88,6 +88,10 @@ function SWEP:GetValue(val, static, invert)
 
     local cachei = invert and 2 or 1
 
+    if static == nil then
+        static = self.StaticStats
+    end
+
     local stat = nil
 
 
