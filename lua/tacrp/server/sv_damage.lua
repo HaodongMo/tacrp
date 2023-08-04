@@ -13,12 +13,13 @@ local function calcarmor(dmginfo, armor, flBonus, flRatio)
     flRatio = flRatio or 0.2
 
     local dmg = dmginfo:GetDamage()
-    if dmginfo:IsDamageType(DMG_BLAST) and !game.SinglePlayer() then
-        flBonus = flBonus * 2
-    end
+    local origdmg = dmg
+    -- if dmginfo:IsDamageType(DMG_BLAST) and !game.SinglePlayer() then
+    --     flBonus = flBonus * 2
+    -- end
     if armor > 0 then
         local flNew = dmg * flRatio
-        local flArmor = (dmg - flNew) * flBonus
+        local flArmor = math.max(0, dmg - flNew) * flBonus
 
         if !old and flArmor == 0 then
             flArmor = 1
@@ -36,6 +37,11 @@ local function calcarmor(dmginfo, armor, flBonus, flRatio)
         end
 
         dmg = flNew
+
+        if dmg > origdmg and armor > 0 then
+            armor = math.max(0, armor - (dmg - origdmg) * flBonus)
+            dmg = origdmg
+        end
     end
     return dmg, armor
 end

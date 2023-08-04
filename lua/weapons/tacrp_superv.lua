@@ -25,6 +25,7 @@ SWEP.BalanceStats = {
         Range_Max = 3500,
 
         FreeAimMaxAngle = 3.5,
+        RPM = 1100,
 
         MoveSpeedMult = 0.9,
         ShootingSpeedMult = 0.8,
@@ -90,8 +91,8 @@ SWEP.Damage_Min = 8
 SWEP.Range_Min = 500 // distance for which to maintain maximum damage
 SWEP.Range_Max = 3500 // distance at which we drop to minimum damage
 SWEP.Penetration = 3 // units of metal this weapon can penetrate
-SWEP.ArmorPenetration = 0.3
-SWEP.ArmorBonus = 2
+SWEP.ArmorPenetration = 0.35
+SWEP.ArmorBonus = 1
 
 SWEP.BodyDamageMultipliers = {
     [HITGROUP_HEAD] = 2,
