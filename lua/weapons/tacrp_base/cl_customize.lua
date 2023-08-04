@@ -749,12 +749,9 @@ function SWEP:CreateCustomizeHUD()
                             else
                                 surface.SetTextColor(255, 175, 175)
                             end
-                        else
-                            surface.SetTextColor(255, 255, 255)
+                            surface.SetTextPos(x_2 + TacRP.SS(4), 0)
+                            surface.DrawText(sicache[2])
                         end
-
-                        surface.SetTextPos(x_2 + TacRP.SS(4), 0)
-                        surface.DrawText(sicache[2])
 
                         if sicache[5] then
                             surface.SetTextPos(x_3 + TacRP.SS(4), 0)
