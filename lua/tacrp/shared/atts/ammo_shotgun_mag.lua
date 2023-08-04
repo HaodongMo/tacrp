@@ -7,7 +7,7 @@ ATT.Cons = {"stat.recoil", "rating.mobility"}
 
 ATT.Category = {"ammo_shotgun", "ammo_shotgun2"}
 
-ATT.SortOrder = 1
+ATT.SortOrder = 3
 
 ATT.Add_Range_Min = 250
 

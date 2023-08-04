@@ -8,7 +8,7 @@ ATT.Cons = {"att.procon.1proj", "stat.hipfirespread"}
 ATT.Category = "ammo_shotgun2"
 ATT.InvAtt = "ammo_shotgun_slugs"
 
-ATT.SortOrder = 1
+ATT.SortOrder = 4
 
 ATT.Add_ArmorPenetration = 0.15
 

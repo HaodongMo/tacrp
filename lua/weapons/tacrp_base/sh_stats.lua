@@ -101,6 +101,7 @@ function SWEP:GetValue(val, static, invert)
         local modifiers = {
             ["stat"] = nil, -- return this unless hook is set
             ["hook"] = nil, -- if set, always call hook and use the following values
+            ["func"] = {}, -- modifying functions
             ["set"] = stat, -- override and no prefix
             ["prio"] = 0, -- override priority
             ["add"] = 0,
@@ -154,6 +155,10 @@ function SWEP:GetValue(val, static, invert)
                     modifiers.mul = modifiers.mul * atttbl["Mult_" .. val]
                 end
             end
+
+            if atttbl["Func_" .. val] then
+                table.insert(modifiers.func, atttbl["Func_" .. val])
+            end
         end
 
         -- Check for stat hooks. If any exist, we must call it whenever we try to get the stat.
@@ -180,12 +185,20 @@ function SWEP:GetValue(val, static, invert)
     end
 
     local cache = self.StatCache[val][cachei]
-    if !static and cache.hook then
+    if !static and (cache.hook or #cache.func > 0) then
         -- Run the hook
         -- Hooks are expected to modify "set", "prio", "add" and "mul", so we can do all calculations in the right order.
         local modifiers = {set = nil, prio = 0, add = 0, mul = 1}
-        hook.Run("TacRP_Stat_" .. val, self, modifiers)
-        if !istable(modifiers) then modifiers = {set = nil, prio = 0, add = 0, mul = 1} end -- some hook isn't cooperating!
+
+        if #cache.func > 0 then
+            for _, f in ipairs(cache.func) do
+                f(self, modifiers)
+            end
+        end
+        if cache.hook then
+            hook.Run("TacRP_Stat_" .. val, self, modifiers)
+            if !istable(modifiers) then modifiers = {set = nil, prio = 0, add = 0, mul = 1} end -- some hook isn't cooperating!
+        end
 
         if modifiers.prio > cache.prio then
             stat = modifiers.set

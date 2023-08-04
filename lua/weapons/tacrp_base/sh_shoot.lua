@@ -197,10 +197,6 @@ function SWEP:PrimaryAttack()
         curatt = CurTime()
     end
 
-    self:SetNextPrimaryFire(curatt + delay)
-
-    self:TakePrimaryAmmo(self:GetValue("AmmoPerShot"))
-
     self:SetNthShot(self:GetNthShot() + 1)
 
     local ejectdelay = self:GetValue("EjectDelay")
@@ -346,8 +342,10 @@ function SWEP:PrimaryAttack()
 
     self:ApplyRecoil()
 
-    self:SetBurstCount(self:GetBurstCount() + 1)
+    self:SetNextPrimaryFire(curatt + delay)
+    self:TakePrimaryAmmo(self:GetValue("AmmoPerShot"))
 
+    self:SetBurstCount(self:GetBurstCount() + 1)
     self:DoBulletBodygroups()
 
     if self:Clip1() == 0 then self.Primary.Automatic = false end

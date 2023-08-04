@@ -6,7 +6,7 @@ ATT.Cons = {"Spread"}
 
 ATT.Category = {"ammo_shotgun", "ammo_shotgun2"}
 
-ATT.SortOrder = 1
+ATT.SortOrder = 2
 
 ATT.Add_ArmorPenetration = -0.1
 
