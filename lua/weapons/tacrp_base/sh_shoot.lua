@@ -210,17 +210,17 @@ function SWEP:PrimaryAttack()
 
     self:DoEffects()
 
-    if self:GetValue("AkimboBoth") then
-        self:SetNthShot(self:GetNthShot() + 1)
-        self:DoEffects()
+    if self:GetValue("EffectsDoubled") then
+        -- self:SetNthShot(self:GetNthShot() + 1)
+        self:DoEffects(true)
         if ejectdelay == 0 then
-            self:DoEject()
+            self:DoEject(true)
         else
             self:SetTimer(ejectdelay, function()
-                self:DoEject()
+                self:DoEject(true)
             end)
         end
-        self:SetNthShot(self:GetNthShot() - 1)
+        -- self:SetNthShot(self:GetNthShot() - 1)
     end
 
     local num = self:GetValue("Num")

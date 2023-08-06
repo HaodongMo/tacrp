@@ -302,12 +302,14 @@ SWEP.Sound_MeleeSwing = ""
 
 // effects
 
-// the .qc attachment for the muzzle
+SWEP.EffectsAlternate = false // Effects will alternate using L and R attachments.
+SWEP.EffectsDoubled = false // Per shot, play effects a second time on the other attachment.
+
+// .qc attachment for muzzle flash and eject when EffectsAlternate is NOT true.
 SWEP.QCA_Muzzle = 1
-// ditto for shell
 SWEP.QCA_Eject = 2
 
-// .qc attachments when Akimbo is set to true.
+// .qc attachments when EffectsAlternate is set to true.
 SWEP.QCA_MuzzleL = 3
 SWEP.QCA_MuzzleR = 4
 SWEP.QCA_EjectL = 6
@@ -367,9 +369,9 @@ SWEP.ProceduralIronFire = nil // procedurally animate the viewmodel and bones wh
 SWEP.NoHolsterAnimation = false // Will play draw reversed instead
 SWEP.LastShot = false
 
-SWEP.Akimbo = false // Use alternating eject/muzzle effects
-SWEP.AkimboBoth = false // Play both left/right effects per shot
-
+// Use special animation setup for akimbo pistols.
+// Does not adjust effects - set AlternatingEffects separately.
+SWEP.Akimbo = false
 
 // attachments
 

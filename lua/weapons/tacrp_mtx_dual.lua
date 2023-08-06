@@ -227,6 +227,7 @@ SWEP.AnimationTranslationTable = {
 
 SWEP.LastShot = true
 SWEP.Akimbo = true
+SWEP.EffectsAlternate = true
 
 // attachments
 

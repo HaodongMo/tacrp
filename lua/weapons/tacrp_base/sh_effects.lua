@@ -1,6 +1,6 @@
-function SWEP:DoEffects()
+function SWEP:DoEffects(alt)
     if !IsFirstTimePredicted() then return end
-    local muzz_qca = self:GetQCAMuzzle()
+    local muzz_qca = self:GetQCAMuzzle(alt)
 
     local data = EffectData()
     data:SetEntity(self)
@@ -9,9 +9,9 @@ function SWEP:DoEffects()
     util.Effect( "TacRP_muzzleeffect", data )
 end
 
-function SWEP:GetQCAMuzzle()
-    if self:GetValue("Akimbo") then
-        if self:GetNthShot() % 2 == 0 then
+function SWEP:GetQCAMuzzle(alt)
+    if self:GetValue("EffectsAlternate") then
+        if self:GetNthShot() % 2 == (alt and 1 or 0) then
             return self:GetValue("QCA_MuzzleR")
         else
             return self:GetValue("QCA_MuzzleL")
@@ -21,9 +21,9 @@ function SWEP:GetQCAMuzzle()
     end
 end
 
-function SWEP:GetQCAEject()
-    if self:GetValue("Akimbo") then
-        if self:GetNthShot() % 2 == 0 then
+function SWEP:GetQCAEject(alt)
+    if self:GetValue("EffectsAlternate") then
+        if self:GetNthShot() % 2 == (alt and 1 or 0) then
             return self:GetValue("QCA_EjectR")
         else
             return self:GetValue("QCA_EjectL")
@@ -35,11 +35,11 @@ end
 
 SWEP.EjectedShells = {}
 
-function SWEP:DoEject()
+function SWEP:DoEject(alt)
     if !IsFirstTimePredicted() then return end
     if self:GetValue("EjectEffect") == 0 then return end
 
-    local eject_qca = self:GetQCAEject()
+    local eject_qca = self:GetQCAEject(alt)
 
     local data = EffectData()
     data:SetEntity(self)
