@@ -232,7 +232,7 @@ SWEP.StatGroups = {
             -- raw dps
             local dps = dmg_avg * num * erpm / 60
             -- average dps over time
-            local dot = dmg_avg * num / (60 / erpm + self:GetReloadTime(base) / valfunc(self, "ClipSize"))
+            local dot = dmg_avg * num / (60 / erpm + self:GetReloadTime(base) / (valfunc(self, "ClipSize") / valfunc(self, "AmmoPerShot")))
             local dps_s, dot_s
             if pve then
                 dps_s = math.Clamp((dps - 12.5) / 150, 0, 1)
@@ -544,7 +544,8 @@ SWEP.StatDisplay = {
         Value = "Damage_Max",
         AggregateFunction = function(self, base, val)
             if !self:IsDamageConstant(base) then return end
-            return math.Round(val, 0)
+            local valfunc = base and self.GetBaseValue or self.GetValue
+            return math.Round(val * valfunc(self, "Num"), 0)
         end,
     },
     {
@@ -553,7 +554,8 @@ SWEP.StatDisplay = {
         Value = "Damage_Max",
         AggregateFunction = function(self, base, val)
             if self:IsDamageConstant(base) then return end
-            return math.Round(val, 0)
+            local valfunc = base and self.GetBaseValue or self.GetValue
+            return math.Round(val * valfunc(self, "Num"), 0)
         end,
     },
     {
@@ -562,8 +564,15 @@ SWEP.StatDisplay = {
         Value = "Damage_Min",
         AggregateFunction = function(self, base, val)
             if self:IsDamageConstant(base) then return end
-            return math.Round(val, 0)
+            local valfunc = base and self.GetBaseValue or self.GetValue
+            return math.Round(val * valfunc(self, "Num"), 0)
         end,
+    },
+    {
+        Name = "stat.num",
+        Description = "stat.num.desc",
+        Value = "Num",
+        DefaultValue = 1,
     },
     {
         Name = "stat.range_min",
@@ -650,6 +659,12 @@ SWEP.StatDisplay = {
         Name = "stat.clipsize",
         Description = "stat.clipsize.desc",
         Value = "ClipSize",
+    },
+    {
+        Name = "stat.ammopershot",
+        Description = "stat.ammopershot.desc",
+        Value = "AmmoPerShot",
+        DefaultValue = 1,
     },
     {
         Name = "stat.rpm",
@@ -805,7 +820,7 @@ SWEP.StatDisplay = {
         Name = "stat.spread",
         Description = "stat.spread.desc",
         AggregateFunction = function(self, base, val)
-            return math.Round(math.deg(val)*60, 2)
+            return math.Round(math.deg(val) * 60, 2)
         end,
         Unit = "′",
         Value = "Spread",
@@ -872,7 +887,7 @@ SWEP.StatDisplay = {
         Name = "stat.recoilspread",
         Description = "stat.recoilspread.desc",
         AggregateFunction = function(self, base, val)
-            return math.Round(math.deg(val)*60, 1)
+            return math.Round(math.deg(val) * 60, 1)
         end,
         Unit = "′",
         Value = "RecoilSpreadPenalty",

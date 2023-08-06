@@ -307,6 +307,8 @@ An additional benefit is that a lot of the attachments now use consistent wordin
 
 <h3>Changelist</h3>
 <ul>
+<li><b>Major Change:</b> Stat menu rework.
+<li><b>Major Change:</b> New KS-23 Model and sounds (from FA:S 2). New KS-23 attachment: Top-loaded Zvezda shells.
 <li><b>Added:</b> Muzzle Light feature: brief flash of projected light when firing, like L4D2. Only visible on self, can be disabled.
 <li><b>Added:</b> You can now aim the weapon while exiting sprint state, albeit at a slower speed.
 <li><b>Added:</b> Shotgun reloading can be instantly cancelled (configurable, default on).
@@ -315,7 +317,6 @@ An additional benefit is that a lot of the attachments now use consistent wordin
 <li><b>Added:</b> You can now reset all client configs in the menu with a button.
 <li><b>Added:</b> Grenade viewmodels rigged to CS:S animations by speedonerd.
 <li><b>Added:</b> Holding overhand throw for pulled out grenades increases throw velocity by up to 50% over 0.25s.
-<li><b>Added:</b> New KS-23 Model and sounds (from FA:S 2).
 <li><b>Added:</b> RPM Burst and Semi multipliers.
 <li><b>Added:</b> Flashbangs will now stun human type NPCs.
 <li><b>Rebalance:</b> Triggers now affect Recoil Stability.
@@ -332,6 +333,7 @@ An additional benefit is that a lot of the attachments now use consistent wordin
 <li><b>Fixed:</b> Error when trying to pick up weapon in DarkRP caused by incorrect hook usage.
 <li><b>Fixed:</b> Should fix situation where removed smokes still block targetid.
 <li><b>Fixed:</b> Firing buffer does not trigger when weapon is locked in animation (shotgun reload finishing).
+<li><b>Fixed:</b> Weapon withs >100% AP deal more damage than normal and restores armor.
 </ul>]],
     },
 }
