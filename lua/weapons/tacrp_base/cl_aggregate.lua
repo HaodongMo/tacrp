@@ -544,8 +544,9 @@ SWEP.StatDisplay = {
         Value = "Damage_Max",
         AggregateFunction = function(self, base, val)
             if !self:IsDamageConstant(base) then return end
-            local valfunc = base and self.GetBaseValue or self.GetValue
-            return math.Round(val * valfunc(self, "Num"), 0)
+            -- local valfunc = base and self.GetBaseValue or self.GetValue
+            -- return math.Round(val * valfunc(self, "Num"), 0)
+            return math.floor(val)
         end,
     },
     {
@@ -554,8 +555,9 @@ SWEP.StatDisplay = {
         Value = "Damage_Max",
         AggregateFunction = function(self, base, val)
             if self:IsDamageConstant(base) then return end
-            local valfunc = base and self.GetBaseValue or self.GetValue
-            return math.Round(val * valfunc(self, "Num"), 0)
+            -- local valfunc = base and self.GetBaseValue or self.GetValue
+            -- return math.Round(val * valfunc(self, "Num"), 0)
+            return math.floor(val)
         end,
     },
     {
@@ -564,8 +566,9 @@ SWEP.StatDisplay = {
         Value = "Damage_Min",
         AggregateFunction = function(self, base, val)
             if self:IsDamageConstant(base) then return end
-            local valfunc = base and self.GetBaseValue or self.GetValue
-            return math.Round(val * valfunc(self, "Num"), 0)
+            -- local valfunc = base and self.GetBaseValue or self.GetValue
+            -- return math.Round(val * valfunc(self, "Num"), 0)
+            return math.floor(val)
         end,
     },
     {
