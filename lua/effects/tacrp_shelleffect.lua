@@ -34,7 +34,7 @@ function EFFECT:Init(data)
     else
         if LocalPlayer():ShouldDrawLocalPlayer() or ent:GetOwner() != LocalPlayer() then
             mdl = ent
-            att = 2
+            att = data:GetHitBox()
             self.VMContext = false
         else
             mdl = LocalPlayer():GetViewModel()

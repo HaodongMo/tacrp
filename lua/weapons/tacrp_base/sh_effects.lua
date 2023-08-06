@@ -1,10 +1,11 @@
 function SWEP:DoEffects(alt)
     if !IsFirstTimePredicted() then return end
-    local muzz_qca = self:GetQCAMuzzle(alt)
+    local muzz_qca, muzz_qca_wm = self:GetQCAMuzzle(alt)
 
     local data = EffectData()
     data:SetEntity(self)
     data:SetAttachment(muzz_qca)
+    data:SetHitBox(muzz_qca_wm or muzz_qca) // unused field (integer between 0-2047)
 
     util.Effect( "TacRP_muzzleeffect", data )
 end
@@ -12,24 +13,24 @@ end
 function SWEP:GetQCAMuzzle(alt)
     if self:GetValue("EffectsAlternate") then
         if self:GetNthShot() % 2 == (alt and 1 or 0) then
-            return self:GetValue("QCA_MuzzleR")
+            return self:GetValue("QCA_MuzzleR"), self:GetValue("WM_QCA_MuzzleR")
         else
-            return self:GetValue("QCA_MuzzleL")
+            return self:GetValue("QCA_MuzzleL"), self:GetValue("WM_QCA_MuzzleL")
         end
     else
-        return self:GetValue("QCA_Muzzle")
+        return self:GetValue("QCA_Muzzle"), self:GetValue("WM_QCA_Muzzle")
     end
 end
 
 function SWEP:GetQCAEject(alt)
     if self:GetValue("EffectsAlternate") then
         if self:GetNthShot() % 2 == (alt and 1 or 0) then
-            return self:GetValue("QCA_EjectR")
+            return self:GetValue("QCA_EjectR"), self:GetValue("WM_QCA_EjectR")
         else
-            return self:GetValue("QCA_EjectL")
+            return self:GetValue("QCA_EjectL"), self:GetValue("WM_QCA_EjectL")
         end
     else
-        return self:GetValue("QCA_Eject")
+        return self:GetValue("QCA_Eject"), self:GetValue("WM_QCA_Eject")
     end
 end
 
@@ -39,12 +40,13 @@ function SWEP:DoEject(alt)
     if !IsFirstTimePredicted() then return end
     if self:GetValue("EjectEffect") == 0 then return end
 
-    local eject_qca = self:GetQCAEject(alt)
+    local eject_qca, eject_qca_wm = self:GetQCAEject(alt)
 
     local data = EffectData()
     data:SetEntity(self)
     data:SetFlags(self:GetValue("EjectEffect"))
     data:SetAttachment(eject_qca)
+    data:SetHitBox(eject_qca_wm or eject_qca) // unused field (integer between 0-2047)
     data:SetScale(self:GetValue("EjectScale"))
 
     util.Effect( "TacRP_shelleffect", data )

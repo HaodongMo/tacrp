@@ -315,6 +315,15 @@ SWEP.QCA_MuzzleR = 4
 SWEP.QCA_EjectL = 6
 SWEP.QCA_EjectR = 7
 
+// ditto but for worldmodel
+SWEP.WM_QCA_Muzzle = 1
+SWEP.WM_QCA_Eject = 2
+
+SWEP.WM_QCA_MuzzleL = 1
+SWEP.WM_QCA_MuzzleR = 2
+SWEP.WM_QCA_EjectL = 3
+SWEP.WM_QCA_EjectR = 4
+
 SWEP.MuzzleEffect = "muzzleflash_pistol"
 
 SWEP.EjectEffect = 1 // 1 = pistol, 2 = rifle, 3 = shotgun

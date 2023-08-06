@@ -19,7 +19,7 @@ function EFFECT:Init(data)
 
     if (LocalPlayer():ShouldDrawLocalPlayer() or wpn.Owner != LocalPlayer()) then
         wm = true
-        att = 1
+        att = data:GetHitBox()
     end
 
     local parent = wpn
