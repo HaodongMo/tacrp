@@ -686,6 +686,23 @@ SWEP.StatDisplay = {
         DefaultValue = 1,
     },
     {
+        Name = "stat.rpm_burst_peak",
+        Description = "stat.rpm_burst_peak.desc",
+        Value = "PostBurstDelay",
+        AggregateFunction = function(self, base, val)
+            if !self:HasFiremode(-1) then return end
+            local valfunc = base and self.GetBaseValue or self.GetValue
+            local cfm = -self:GetCurrentFiremode()
+            local nerd = 60 / ( valfunc(self, "RPM") * valfunc(self, "RPMMultBurst") ) -- delay
+            nerd = nerd * cfm
+            nerd = nerd + valfunc(self, "PostBurstDelay")
+            nerd = nerd / cfm
+            nerd = 60 / nerd
+            return math.Round( nerd )
+        end,
+        --DefaultValue = 0,
+    },
+    {
         Name = "stat.rpm_semi",
         Description = "stat.rpm_semi.desc",
         Value = "RPMMultSemi",
