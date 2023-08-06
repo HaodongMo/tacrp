@@ -12,9 +12,9 @@ end
 function SWEP:GetQCAMuzzle()
     if self:GetValue("Akimbo") then
         if self:GetNthShot() % 2 == 0 then
-            return 4
+            return self:GetValue("QCA_MuzzleR")
         else
-            return 3
+            return self:GetValue("QCA_MuzzleL")
         end
     else
         return self:GetValue("QCA_Muzzle")
@@ -24,9 +24,9 @@ end
 function SWEP:GetQCAEject()
     if self:GetValue("Akimbo") then
         if self:GetNthShot() % 2 == 0 then
-            return 6
+            return self:GetValue("QCA_EjectR")
         else
-            return 7
+            return self:GetValue("QCA_EjectL")
         end
     else
         return self:GetValue("QCA_Eject")

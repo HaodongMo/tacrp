@@ -307,6 +307,12 @@ SWEP.QCA_Muzzle = 1
 // ditto for shell
 SWEP.QCA_Eject = 2
 
+// .qc attachments when Akimbo is set to true.
+SWEP.QCA_MuzzleL = 3
+SWEP.QCA_MuzzleR = 4
+SWEP.QCA_EjectL = 6
+SWEP.QCA_EjectR = 7
+
 SWEP.MuzzleEffect = "muzzleflash_pistol"
 
 SWEP.EjectEffect = 1 // 1 = pistol, 2 = rifle, 3 = shotgun
@@ -360,7 +366,10 @@ SWEP.ProceduralIronFire = nil // procedurally animate the viewmodel and bones wh
 
 SWEP.NoHolsterAnimation = false // Will play draw reversed instead
 SWEP.LastShot = false
-SWEP.Akimbo = false
+
+SWEP.Akimbo = false // Use alternating eject/muzzle effects
+SWEP.AkimboBoth = false // Play both left/right effects per shot
+
 
 // attachments
 
