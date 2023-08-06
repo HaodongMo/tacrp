@@ -298,7 +298,7 @@ L["att.zoom.8"] = "8x Zoom"
 L["att.zoom.10"] = "10x Zoom"
 L["att.zoom.12"] = "12x Zoom"
 
-L["spacer.damage"] = "Lethality"
+L["spacer.damage"] = "Terminal Effect"
 L["spacer.damage.desc"] = "Stats related to the weapon's damage output and effective range."
 L["spacer.action"] = "Action"
 L["spacer.action.desc"] = "Stats related to the weapon's loading and cycling."

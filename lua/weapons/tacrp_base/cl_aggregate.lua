@@ -781,14 +781,14 @@ SWEP.StatDisplay = {
             local oldbest, newbest = 0, 0
             for i = 1, #old do
                 local v = math.abs(old[i])
-                if v > oldbest or v == 2 then
-                    oldbest = (v == 2 and math.huge) or v
+                if math.abs(old[i]) > oldbest or old[i] == 2 then
+                    oldbest = (old[i] == 2 and math.huge) or v
                 end
             end
             for i = 1, #new do
                 local v = math.abs(new[i])
-                if v > newbest or v == 2 then
-                    newbest = (v == 2 and math.huge) or v
+                if v > newbest or new[i] == 2 then
+                    newbest = (new[i] == 2 and math.huge) or v
                 end
             end
             if oldbest == newbest then

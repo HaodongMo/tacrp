@@ -299,11 +299,30 @@ An additional benefit is that a lot of the attachments now use consistent wordin
     {
         Title = "Update 15",
         Type = "Patch Notes",
-        Date = "",
+        Date = "2023-08-06",
         Author = "8Z",
         Major = false,
         Summary = "",
         Contents = [[<body style="font-family:'Myriad Pro';color:white;font-size:125%;">
+<p>With so many updates on the list, I'm starting to run out of quirky hooks to put in front of patch notes. Ah well, nobody reads this anyways.</p>
+
+<h3>A Twenty-Three Millimeter Shotgun</h3>
+<p>The old model was the first re-rigged weapon for TacRP and had quite a few flaws. It's been replaced with the model from FA:S2, complete with actual sounds, visible shells during reloading and cycling, and a slight buff.</p>
+
+<p>In addition, the Zvezda flash shell has a new variant which only loads the top shell as a flashbang, for more practical applications.</p>
+
+<h3>Stat Menu Expansion</h3>
+<p>Number lovers rejoice, for there's been a heap of changes to the stat menu. The whole thing has been reorganized and spacers are added to group stats into (mostly) sensible categories. Furthermore, a couple of missing stats have now been added.</p>
+
+<h3>Smooth like Tactical Butter</h3>
+<p>Previously, leaving sprint was an awkward action that prevented you from doing what you want: aiming down sights. Not anymore! You can start aiming as soon as you let go of sprint; however, this will be slower than normal and you still cannot fire for the Sprint to Fire duration.</p>
+
+<p>Shotguns can now also immediately cancel reloading to fire, making them more useful in a pinch.</p>
+
+<h3>Grenade View Models</h3>
+<p>Speedonerd very kindly rigged the grenades to CSS viewmodels so you don't have to pretend you're using our grenades anymore.</p>
+
+<hr>
 
 <h3>Changelist</h3>
 <ul>
@@ -313,6 +332,7 @@ An additional benefit is that a lot of the attachments now use consistent wordin
 <li><b>Added:</b> You can now aim the weapon while exiting sprint state, albeit at a slower speed.
 <li><b>Added:</b> Shotgun reloading can be instantly cancelled (configurable, default on).
 <li><b>Added:</b> Akimbo pistols now use the correct worldmodel attachments and drop magazines from both hands.
+<li><b>Added:</b> Better effects system to allow for double ejects and muzzles on certain expansion guns.
 <li><b>Added:</b> Client config "Aiming Stops Sprinting" (default on).
 <li><b>Added:</b> "Lower Weapon While Airborne" config (default off), because bhopping is not tactical.
 <li><b>Added:</b> You can now reset all client configs in the menu with a button.

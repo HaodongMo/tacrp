@@ -741,14 +741,19 @@ function SWEP:CreateCustomizeHUD()
                     surface.DrawText(name .. (spacer and "" or ":"))
 
                     if !spacer then
+                        surface.SetDrawColor(255, 255, 255)
                         surface.SetTextPos(x_1 + TacRP.SS(4), 0)
                         surface.DrawText(sicache[1])
+
                         if sicache[3] then
                             if sicache[4] then
                                 surface.SetTextColor(175, 255, 175)
                             else
                                 surface.SetTextColor(255, 175, 175)
                             end
+                        end
+
+                        if sicache[2] != sicache[1] then
                             surface.SetTextPos(x_2 + TacRP.SS(4), 0)
                             surface.DrawText(sicache[2])
                         end
@@ -758,6 +763,7 @@ function SWEP:CreateCustomizeHUD()
                             surface.DrawText(sicache[5])
                         end
                     end
+
                     surface.SetDrawColor(255, 255, 255, k.Spacer and 125 or 5)
                     local um, umm = k.Spacer and 3 or 1, k.Spacer and 2 or 1
                     surface.DrawRect( 0, h-um, w, umm )
