@@ -104,8 +104,6 @@ SWEP.BodyDamageMultipliers = {
 SWEP.Firemode = 1
 
 SWEP.RPM = 700
-SWEP.RPMMultBurst = 1.25
-SWEP.PostBurstDelay = 0.075
 
 SWEP.Spread = 0.008
 
