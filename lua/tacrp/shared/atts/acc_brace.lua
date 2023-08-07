@@ -1,6 +1,6 @@
 ATT.PrintName = "Pistol Brace"
 ATT.Icon = Material("entities/tacrp_att_acc_brace.png", "mips smooth")
-ATT.Description = "The ATF is gonna get your ass."
+ATT.Description = "Turns your pistol into a rifle. The ATF is gonna get your ass."
 ATT.Pros = {"rating.control", "rating.stability"}
 ATT.Cons = {"rating.handling", "rating.maneuvering"}
 
