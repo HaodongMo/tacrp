@@ -6,7 +6,6 @@ SWEP.ViewModelAng = Angle(0, 0, 0)
 
 SWEP.SwayCT = 0
 
-SWEP.LastEyeAng = Angle(0, 0, 0)
 SWEP.EyeDiffP = 0
 SWEP.EyeDiffY = 0
 
@@ -18,8 +17,9 @@ function SWEP:GetViewModelSway(pos, ang)
     local FT = self:DeltaSysTime() * 1 --FrameTime()
     local CT = UnPredictedCurTime() -- CurTime()
 
-    local lea = self.LastEyeAng
     local ea = self:GetOwner():EyeAngles()
+    if !self.LastEyeAng then self.LastEyeAng = Angle( ea.p, ea.y, 0 ) end
+    local lea = self.LastEyeAng
     local diff = Angle()
 
     self.EyeDiffP = self.EyeDiffP - math.AngleDifference( lea.p, ea.p )
@@ -34,10 +34,10 @@ function SWEP:GetViewModelSway(pos, ang)
     local bpos, bang = Vector(), Angle()
     --bpos.z = bpos.z - diff.p
     
-    bang.p = bang.p + ( diff.p * 2 )
+    bang.p = bang.p + ( diff.p * -2 )
     bang.y = bang.y + ( diff.y * 1 )
 
-    bpos.z = bpos.z - ( diff.p / 2 )
+    bpos.z = bpos.z - ( diff.p / -2 )
     bpos.x = bpos.x - ( diff.y / 4 )
 
     bang.r = bang.r + ( diff.y * -0.5 )
@@ -115,6 +115,8 @@ function SWEP:GetViewModelBob(pos, ang)
     local runs = self:GetOwner():GetRunSpeed()
 
     local sprints = walks + math.max(runs - walks, walks)
+    local runsauce = math.TimeFraction( walks, runs, v )
+    runsauce = math.Clamp( runsauce, 0, 1 )
 
     v = math.Clamp(v, 0, sprints)
     self.ViewModelSpeed = math.Approach( self.ViewModelSpeed, v, (FrameTime()/0.6) * 320 )
@@ -131,9 +133,11 @@ function SWEP:GetViewModelBob(pos, ang)
 
     local vmng = self.ViewModelNotOnGround
 
-    bpos.x = bpos.x + ( math.sin( CT * math.pi * 2.5 ) * d * 0.5 )
+    bpos.x = bpos.x + ( math.sin( CT * math.pi * 2.5 ) * d * 0.5 * (1+runsauce*5) )
+    bpos.z = bpos.z + ( math.sin( CT * math.pi * 2.5 ) * d * 0.5 * (runsauce*1) )
+
     bpos.z = bpos.z - ( d * Lerp(self:GetSightDelta(), 0.25, -0.5) )
-    bpos.z = bpos.z - ( math.abs( math.sin( (CT-0.25) * math.pi * 2.5 ) ) * d * 0.7 )
+    bpos.z = bpos.z - ( math.ease.InCirc( math.abs( math.sin( (CT-0.25) * math.pi * 2.5 ) ) ) * d * 0.7 )
     bpos.y = bpos.y - ( math.abs( math.sin( (CT-0.25) * math.pi * 2.5/2 ) ) * d * 0.4 )
 
     bang.y = bang.y + ( math.sin( CT * math.pi * 2.5 ) * d * Lerp(self:GetSightDelta(), 1, -1) )
