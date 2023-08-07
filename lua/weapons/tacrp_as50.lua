@@ -139,8 +139,8 @@ SWEP.ReloadSpeedMult = 0.2
 SWEP.AimDownSightsTime = 0.75
 SWEP.SprintToFireTime = 0.65 // multiplies how long it takes to recover from sprinting
 
-SWEP.Sway = 5
-SWEP.ScopedSway = 0.25
+SWEP.Sway = 3
+SWEP.ScopedSway = 0.4
 SWEP.SwayCrouchMult = 0.15
 
 SWEP.FreeAimMaxAngle = 10
