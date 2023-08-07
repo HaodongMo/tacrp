@@ -698,10 +698,9 @@ SWEP.StatDisplay = {
             local cfm = -self:GetCurrentFiremode()
             local delay = 60 / ( valfunc(self, "RPM") * valfunc(self, "RPMMultBurst") ) -- delay
             local nerd = 0
-            nerd = nerd + delay
-            nerd = nerd + delay
+            nerd = nerd + (delay*(cfm-1))
             nerd = nerd + math.max( delay, valfunc(self, "PostBurstDelay") )
-            nerd = nerd / 3
+            nerd = nerd / cfm
             nerd = 60 / nerd
             return math.Round( nerd )
         end,
