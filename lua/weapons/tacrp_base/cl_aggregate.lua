@@ -696,10 +696,12 @@ SWEP.StatDisplay = {
             if !self:HasFiremode(-1) then return end
             local valfunc = base and self.GetBaseValue or self.GetValue
             local cfm = -self:GetCurrentFiremode()
-            local nerd = 60 / ( valfunc(self, "RPM") * valfunc(self, "RPMMultBurst") ) -- delay
-            nerd = nerd * cfm
-            nerd = nerd + valfunc(self, "PostBurstDelay")
-            nerd = nerd / cfm
+            local delay = 60 / ( valfunc(self, "RPM") * valfunc(self, "RPMMultBurst") ) -- delay
+            local nerd = 0
+            nerd = nerd + delay
+            nerd = nerd + delay
+            nerd = nerd + math.max( delay, valfunc(self, "PostBurstDelay") )
+            nerd = nerd / 3
             nerd = 60 / nerd
             return math.Round( nerd )
         end,
