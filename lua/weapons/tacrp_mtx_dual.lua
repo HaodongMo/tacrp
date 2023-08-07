@@ -10,7 +10,7 @@ SWEP.Category = "Tactical RP"
 SWEP.SubCatTier = "1Elite"
 SWEP.SubCatType = "1Sidearm"
 
-SWEP.Description = "An indulgent pair of high capacity, high damage pistols.\nWith firepower like this, who needs aiming?"
+SWEP.Description = "An indulgent pair of high capacity, high damage, high quality compact pistols.\nWith firepower like this, who needs aiming?"
 
 SWEP.ViewModel = "models/weapons/tacint/v_mtx_dual.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_mtx.mdl"
@@ -21,7 +21,7 @@ SWEP.BalanceStats = {
     [TacRP.BALANCE_SBOX] = {
         Damage_Max = 24,
         Damage_Min = 12,
-        RPM = 750,
+        RPM = 650,
 
         BodyDamageMultipliers = {
             [HITGROUP_HEAD] = 3.75,
@@ -116,7 +116,7 @@ SWEP.Firemode = -2
 SWEP.RunawayBurst = true
 SWEP.PostBurstDelay = 0.07
 
-SWEP.RPM = 750
+SWEP.RPM = 650
 
 SWEP.Spread = 0.015
 
