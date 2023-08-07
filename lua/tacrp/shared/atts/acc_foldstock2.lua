@@ -29,3 +29,4 @@ ATT.Add_FreeAimMaxAngle = -0.5
 ATT.InstalledElements = {"foldstock"}
 
 ATT.TryUnholster = true
+ATT.Mult_HolsterTimeMult = 0.75
