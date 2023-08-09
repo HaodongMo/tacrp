@@ -6,6 +6,7 @@ SWEP.ViewModelAng = Angle(0, 0, 0)
 
 SWEP.SwayCT = 0
 
+SWEP.LastEyeAng = Angle(0, 0, 0)
 SWEP.EyeDiffP = 0
 SWEP.EyeDiffY = 0
 
@@ -17,9 +18,8 @@ function SWEP:GetViewModelSway(pos, ang)
     local FT = self:DeltaSysTime() * 1 --FrameTime()
     local CT = UnPredictedCurTime() -- CurTime()
 
-    local ea = self:GetOwner():EyeAngles()
-    if !self.LastEyeAng then self.LastEyeAng = Angle( ea.p, ea.y, 0 ) end
     local lea = self.LastEyeAng
+    local ea = self:GetOwner():EyeAngles()
     local diff = Angle()
 
     self.EyeDiffP = self.EyeDiffP - math.AngleDifference( lea.p, ea.p )
