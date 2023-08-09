@@ -206,6 +206,10 @@ function SWEP:GetViewModelPosition(pos, ang)
     extra_offsetang.y = extra_offsetang.y - (self:GetSwayAngles().p * cor_val)
     extra_offsetang.p = extra_offsetang.p + (self:GetSwayAngles().y * cor_val)
 
+    local idlesway = Lerp(self:GetSightDelta(), 1/3, 0 )
+    extra_offsetpos.x = extra_offsetpos.x + (self:GetSwayAngles().y * cor_val * idlesway)
+    extra_offsetpos.z = extra_offsetpos.z + (self:GetSwayAngles().p * cor_val * idlesway)
+
     -- extra_offsetang.y = extra_offsetang.y - (self:GetFreeAimOffset().p * cor_val)
     -- extra_offsetang.p = extra_offsetang.p + (self:GetFreeAimOffset().y * cor_val)
 
