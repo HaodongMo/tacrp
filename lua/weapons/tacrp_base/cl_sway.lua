@@ -6,55 +6,18 @@ SWEP.ViewModelAng = Angle(0, 0, 0)
 
 SWEP.SwayCT = 0
 
-SWEP.LastEyeAng = Angle(0, 0, 0)
-SWEP.EyeDiffP = 0
-SWEP.EyeDiffY = 0
-
 function SWEP:GetViewModelSway(pos, ang)
-    local d = Lerp(self:GetSightDelta(), 1, 1)
+    local d = Lerp(self:GetSightDelta(), 1, 0.02)
     local v = 1
     local steprate = 1
 
     local FT = self:DeltaSysTime() * 1 --FrameTime()
     local CT = UnPredictedCurTime() -- CurTime()
 
-    local lea = self.LastEyeAng
-    local ea = self:GetOwner():EyeAngles()
-    local diff = Angle()
+    d = d * 0.25
 
-    self.EyeDiffP = self.EyeDiffP - math.AngleDifference( lea.p, ea.p )
-    self.EyeDiffY = self.EyeDiffY - math.AngleDifference( lea.y, ea.y )
-
-    local lp = self.EyeDiffP
-    local ly = self.EyeDiffY
-    diff.p = lp
-    diff.y = ly
-    diff:Mul( 0.04 * (1-self:GetSightDelta()) )
-
-    local bpos, bang = Vector(), Angle()
-    --bpos.z = bpos.z - diff.p
-    
-    bang.p = bang.p + ( diff.p * 2 )
-    bang.y = bang.y + ( diff.y * 1 )
-
-    bpos.z = bpos.z - ( diff.p / 2 )
-    bpos.x = bpos.x - ( diff.y / 4 )
-
-    bang.r = bang.r + ( diff.y * -0.5 )
-    bpos.x = bpos.x - ( diff.y * 0.2 )
-    bpos.y = bpos.y - math.abs( diff.y * 0.2 )
-
-
-    ang:RotateAroundAxis( ang:Right(),   bang.p )
-    ang:RotateAroundAxis( ang:Up(),      bang.y )
-    ang:RotateAroundAxis( ang:Forward(), bang.r )
-    pos = pos - ang:Right() *            bpos.x
-    pos = pos + ang:Forward() *          bpos.y
-    pos = pos + ang:Up() *               bpos.z
-
-    self.EyeDiffP = self.EyeDiffP*(1-(FT)) - self.EyeDiffP*((FT)) --math.Approach(self.EyeDiffP, 0, 90 * FrameTime())
-    self.EyeDiffY = self.EyeDiffY*(1-(FT)) - self.EyeDiffY*((FT)) --math.Approach(self.EyeDiffY, 0, 90 * FrameTime())
-    lea:Set( ea )
+    pos = pos + (ang:Up() * (math.sin(self.SwayCT * 0.311 * v) + math.cos(self.SwayCT * 0.44 * v)) * math.sin(CT * 0.8) * d)
+    pos = pos + (ang:Right() * (math.sin(self.SwayCT * 0.324 * v) + math.cos(self.SwayCT * 0.214 * v)) * math.sin(CT * 0.76) * d)
 
     --if IsFirstTimePredicted() then
         self.SwayCT = self.SwayCT + (FT * steprate)
@@ -101,8 +64,6 @@ SWEP.ViewModelNotOnGround = 0
 
 SWEP.BobCT = 0
 
-SWEP.ViewModelSpeed = 0
-
 function SWEP:GetViewModelBob(pos, ang)
     local step = 10
     local mag = 1
@@ -110,42 +71,32 @@ function SWEP:GetViewModelBob(pos, ang)
     local FT = self:DeltaSysTime() * 1 --FrameTime()
     local CT = UnPredictedCurTime() -- CurTime()
 
-    local v = self:GetOwner():GetVelocity():Length2D()
+    local v = self:GetOwner():GetVelocity():Length()
     local walks = self:GetOwner():GetWalkSpeed()
     local runs = self:GetOwner():GetRunSpeed()
 
     local sprints = walks + math.max(runs - walks, walks)
 
     v = math.Clamp(v, 0, sprints)
-    self.ViewModelSpeed = math.Approach( self.ViewModelSpeed, v, (FrameTime()/0.6) * 320 )
-    v = self.ViewModelSpeed
     self.ViewModelBobVelocity = math.Approach(self.ViewModelBobVelocity, v, FT * 2400)
     local d = math.Clamp(self.ViewModelBobVelocity / sprints, 0, 1)
 
-    self.ViewModelNotOnGround = math.Approach(self.ViewModelNotOnGround, self:GetOwner():OnGround() and 0 or 1, FT / 0.1)
+    if self:GetOwner():OnGround() then
+        self.ViewModelNotOnGround = math.Approach(self.ViewModelNotOnGround, 0, FT / 1)
+    else
+        self.ViewModelNotOnGround = math.Approach(self.ViewModelNotOnGround, 1, FT / 1)
+    end
 
-    local ds = d * Lerp(self:GetSightDelta(), 1, 0)
-    d = d * Lerp(self:GetSightDelta(), 1, 0.05)
+    d = d * Lerp(self:GetSightDelta(), 1, 0.1)
+    mag = d * 2
+    step = 10
 
-    local bpos, bang = Vector(), Angle()
-
-    local vmng = self.ViewModelNotOnGround
-
-    bpos.x = bpos.x + ( math.sin( CT * math.pi * 2.5 ) * d * 0.5 )
-    bpos.z = bpos.z - ( d * Lerp(self:GetSightDelta(), 0.25, -0.5) )
-    bpos.z = bpos.z - ( math.abs( math.sin( (CT-0.25) * math.pi * 2.5 ) ) * d * 0.7 )
-    bpos.y = bpos.y - ( math.abs( math.sin( (CT-0.25) * math.pi * 2.5/2 ) ) * d * 0.4 )
-
-    bang.y = bang.y + ( math.sin( CT * math.pi * 2.5 ) * d * Lerp(self:GetSightDelta(), 1, -1) )
-    bang.p = bang.p + ( math.abs( math.sin( (CT-0.25) * math.pi * 2.5 ) ) * d * 0.5 )
-    
-
-    ang:RotateAroundAxis( ang:Right(),   bang.p )
-    ang:RotateAroundAxis( ang:Up(),      bang.y )
-    ang:RotateAroundAxis( ang:Forward(), bang.r )
-    pos = pos - ang:Right() *            bpos.x
-    pos = pos + ang:Forward() *          bpos.y
-    pos = pos + ang:Up() *               bpos.z
+    local m = 0.2
+    ang:RotateAroundAxis(ang:Forward(), math.sin(self.BobCT * step * 0.5) * ((math.sin(CT * 6.151) * m) + 1) * 4.5 * d)
+    ang:RotateAroundAxis(ang:Right(), math.sin(self.BobCT * step * 0.12) * ((math.sin(CT * 1.521) * m) + 1) * 2.11 * d)
+    pos = pos - (ang:Up() * math.sin(self.BobCT * step) * 0.11 * ((math.sin(CT * 3.515) * m) + 1) * mag)
+    pos = pos + (ang:Forward() * math.sin(self.BobCT * step * 0.5) * 0.11 * ((math.sin(CT * 1.615) * m) + 1) * mag)
+    pos = pos + (ang:Right() * (math.sin(self.BobCT * step * 0.3) + (math.cos(self.BobCT * step * 0.3332))) * 0.16 * mag)
 
     local steprate = Lerp(d, 1, 2.5)
 
