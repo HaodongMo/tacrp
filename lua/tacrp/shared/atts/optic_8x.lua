@@ -5,7 +5,7 @@ ATT.Pros = {"att.zoom.8"}
 
 ATT.Model = "models/weapons/tacint/addons/8x.mdl"
 ATT.Scale = 1
-ATT.ModelOffset = Vector(-1.5, 0, -0.3)
+ATT.ModelOffset = Vector(-1, 0, -0.3)
 
 ATT.Category = "optic_sniper"
 

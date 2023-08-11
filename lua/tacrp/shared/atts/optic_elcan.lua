@@ -7,7 +7,7 @@ ATT.Pros = {"att.zoom.3.4"}
 -- scope texture: ins2
 ATT.Model = "models/weapons/tacint_extras/addons/elcan.mdl"
 ATT.Scale = 1
-ATT.ModelOffset = Vector(-1.7, 0, -0.3)
+ATT.ModelOffset = Vector(0, 0, -0.3)
 
 ATT.Category = "optic_medium"
 

@@ -5,7 +5,7 @@ ATT.Pros = {"att.zoom.4"}
 
 ATT.Model = "models/weapons/tacint/addons/acog.mdl"
 ATT.Scale = 0.3
-ATT.ModelOffset = Vector(-1.5, 0, 0.7)
+ATT.ModelOffset = Vector(-1, 0, 0.7)
 
 ATT.Category = "optic_medium"
 

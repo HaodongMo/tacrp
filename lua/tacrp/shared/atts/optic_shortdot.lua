@@ -7,7 +7,7 @@ ATT.Pros = {"att.zoom.5"}
 -- scope texture: ins2
 ATT.Model = "models/weapons/tacint_extras/addons/schd.mdl"
 ATT.Scale = 1
-ATT.ModelOffset = Vector(-2, 0, -0.3)
+ATT.ModelOffset = Vector(-1, 0, -0.3)
 
 ATT.Category = "optic_medium"
 
