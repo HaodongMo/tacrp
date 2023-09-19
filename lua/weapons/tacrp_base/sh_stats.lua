@@ -61,11 +61,11 @@ function SWEP:GetBaseValue(val)
 
     local b = TacRP.GetBalanceMode()
     if b > 0 and self.BalanceStats != nil then
-        if TacRP.BalanceDefaults[b] and TacRP.BalanceDefaults[b][val] then
+        if TacRP.BalanceDefaults[b] and TacRP.BalanceDefaults[b][val] != nil then
             stat = TacRP.BalanceDefaults[b][val]
         end
         for j = b, 1, -1 do
-            if self.BalanceStats[b] and self.BalanceStats[b][val] then
+            if self.BalanceStats[b] and self.BalanceStats[b][val] != nil then
                 stat = self.BalanceStats[b][val]
                 break
             end
@@ -93,7 +93,6 @@ function SWEP:GetValue(val, static, invert)
     end
 
     local stat = nil
-
 
     -- Generate a cache if it doesn't exist already
     if !self.StatCache[val] or !self.StatCache[val][cachei] then
