@@ -67,6 +67,9 @@ SWEP.BalanceStats = {
         MeleeSpeedMult = 1,
         ReloadSpeedMult = 1,
     },
+    [TacRP.BALANCE_OLDSCHOOL] = {
+        RecoilDissipationRate = 2
+    }
 }
 
 SWEP.TTTReplace = TacRP.TTTReplacePreset.Magnum

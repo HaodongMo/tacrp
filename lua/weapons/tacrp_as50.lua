@@ -18,7 +18,6 @@ SWEP.WorldModel = "models/weapons/tacint/w_as50.mdl"
 SWEP.Slot = 2
 SWEP.SlotAlt = 3
 
-
 SWEP.BalanceStats = {
     [TacRP.BALANCE_SBOX] = {
         Description = "Semi-automatic anti-materiel rifle with integral bipod.\nCan kill in up to 2 shots regardless of distance.\nEquipped with a 12x scope by default.",
@@ -79,6 +78,13 @@ SWEP.BalanceStats = {
         MeleeSpeedMult = 1,
         ReloadSpeedMult = 1,
     },
+    [TacRP.BALANCE_OLDSCHOOL] = {
+        RecoilDissipationRate = 1,
+        RecoilMaximum = 20,
+        RecoilSpreadPenalty = 0.035,
+
+        HipFireSpreadPenalty = 0.025,
+    }
 }
 
 // "ballistics"

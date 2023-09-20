@@ -301,7 +301,7 @@ local conVars = {
         name = "balance",
         default = "-1",
         min = -1,
-        max = 3,
+        max = 4,
         replicated = true,
         notify = true,
     },
@@ -906,6 +906,7 @@ local function menu_balance_ti(panel)
     cb_balance:AddChoice("1 - Arcade", "1")
     cb_balance:AddChoice("2 - TTT", "2")
     cb_balance:AddChoice("3 - PvE", "3")
+    cb_balance:AddChoice("4 - Old School", "4")
     cb_balance:DockMargin(8, 0, 0, 0)
     lb_balance:SizeToContents()
 
@@ -913,6 +914,7 @@ local function menu_balance_ti(panel)
     panel:Help("Arcade: Balanced for Sandbox move speed. Low TTK. Snipers/DMRs have damage rampup.")
     panel:Help("TTT: High TTK, reloads slow you down and take longer. Some weapons have lower fire rate.")
     panel:Help("PvE: For HL2 campaign or co-op maps. Damage comparable to HL2 weapons, reduced spread.")
+    panel:Help("Old School: Novelty mode that emphasizes movement and penalizes long sprays. No ironsights, tight hipfire and moving spread, more intense bloom.")
     panel:Help("(Tactical and PvE separate weapons into 4 tiers, ranging from Consumer, Security, Operator, and Elite, with each higher tier having slightly better damage output.)")
 
     header(panel, "\nAmmunition")

@@ -51,6 +51,10 @@ function SWEP:ScopeToggle(setlevel)
         end
     end
 
+    if TacRP.GetBalanceMode() == TacRP.BALANCE_OLDSCHOOL and (!self:GetValue("ScopeOverlay") and !self:GetValue("Holosight")) and level > 0 then
+        level = 0
+    end
+
     if level == self:GetScopeLevel() then return end
 
     if IsFirstTimePredicted() then
