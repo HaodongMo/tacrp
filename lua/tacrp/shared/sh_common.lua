@@ -177,6 +177,7 @@ TacRP.BalanceDefaults = {
     },
     [TacRP.BALANCE_OLDSCHOOL] = {
         RecoilDissipationRate = 30,
+		RecoilVisualKick = 0.5,
 
         MoveSpreadPenalty = 0,
         HipFireSpreadPenalty = 0.007,
