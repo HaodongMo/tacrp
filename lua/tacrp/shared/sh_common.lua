@@ -183,7 +183,7 @@ TacRP.BalanceDefaults = {
 
         MeleeSpeedMult = 1,
         ShootingSpeedMult = 1,
-        SightedSpeedMult = 0.9,
+        SightedSpeedMult = 1,
         ReloadSpeedMult = 1,
     },
 }
