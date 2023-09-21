@@ -81,7 +81,9 @@ SWEP.BalanceStats = {
         ReloadSpeedMult = 1,
     },
     [TacRP.BALANCE_OLDSCHOOL] = {
-        HipFireSpreadPenalty = 0.015
+        HipFireSpreadPenalty = 0.015,
+		RecoilSpreadPenalty = 0.01,
+		RecoilMaximum = 10
     }
 }
 
