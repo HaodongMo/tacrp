@@ -914,7 +914,7 @@ local function menu_balance_ti(panel)
     panel:Help("Arcade: Balanced for Sandbox move speed. Low TTK. Snipers/DMRs have damage rampup.")
     panel:Help("TTT: High TTK, reloads slow you down and take longer. Some weapons have lower fire rate.")
     panel:Help("PvE: For HL2 campaign or co-op maps. Damage comparable to HL2 weapons, reduced spread.")
-    panel:Help("Old School: Novelty mode that alters gameplay to feel a bit more retro, emphasizing movement and spray control. No ironsights, tight hipfire and moving spread, more intense bloom.")
+    panel:Help("Old School: Novelty mode that alters gameplay to feel a bit more retro, emphasizing movement and spray control. No ironsights, tight hipfire, no moving spread, more intense bloom.")
     panel:Help("(Tactical and PvE separate weapons into 4 tiers, ranging from Consumer, Security, Operator, and Elite, with each higher tier having slightly better damage output.)")
 
     header(panel, "\nAmmunition")
