@@ -72,9 +72,6 @@ SWEP.BalanceStats = {
         MeleeSpeedMult = 1,
         ReloadSpeedMult = 1,
     },
-    [TacRP.BALANCE_OLDSCHOOL] = {
-        HipFireSpreadPenalty = 0.03,
-    }
 }
 
 SWEP.TTTReplace = TacRP.TTTReplacePreset.Pistol
