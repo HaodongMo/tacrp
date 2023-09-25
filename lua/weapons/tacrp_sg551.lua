@@ -87,6 +87,9 @@ SWEP.BalanceStats = {
         MeleeSpeedMult = 1,
         ReloadSpeedMult = 1,
     },
+    [TacRP.BALANCE_OLDSCHOOL] = {
+        RecoilMaximum = 20
+    }
 }
 
 SWEP.TTTReplace = TacRP.TTTReplacePreset.AssaultRifle

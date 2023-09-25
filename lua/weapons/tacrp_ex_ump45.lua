@@ -68,6 +68,9 @@ SWEP.BalanceStats = {
         MeleeSpeedMult = 1,
         ReloadSpeedMult = 1,
     },
+    [TacRP.BALANCE_OLDSCHOOL] = {
+        RecoilMaximum = 25
+    }
 }
 
 SWEP.TTTReplace = TacRP.TTTReplacePreset.SMG
@@ -161,7 +164,7 @@ SWEP.SprintPos = Vector(8, -1, -2)
 SWEP.SightAng = Angle(-0, 0, 0)
 SWEP.SightPos = Vector(-4.5, -7.5, -3.26)
 
-SWEP.CorrectivePos = Vector(0, 0, 0)
+SWEP.CorrectivePos = Vector(0.04, 0, 0.1)
 SWEP.CorrectiveAng = Angle(0, 0, 0)
 
 SWEP.HolsterVisible = true

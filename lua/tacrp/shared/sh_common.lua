@@ -140,6 +140,7 @@ TacRP.BALANCE_RP = 0
 TacRP.BALANCE_SBOX = 1
 TacRP.BALANCE_TTT = 2
 TacRP.BALANCE_PVE = 3
+TacRP.BALANCE_OLDSCHOOL = 4
 
 function TacRP.GetBalanceMode()
     local i = TacRP.ConVars["balance"]:GetInt()
@@ -173,7 +174,18 @@ TacRP.BalanceDefaults = {
             [HITGROUP_RIGHTLEG] = 0.75,
             [HITGROUP_GEAR] = 0.75
         }
-    }
+    },
+    [TacRP.BALANCE_OLDSCHOOL] = {
+		RecoilVisualKick = 0.5,
+
+        MoveSpreadPenalty = 0,
+        HipFireSpreadPenalty = 0.007,
+
+        MeleeSpeedMult = 1,
+        ShootingSpeedMult = 1,
+        SightedSpeedMult = 1,
+        ReloadSpeedMult = 1,
+    },
 }
 
 function TacRP.UseTiers()

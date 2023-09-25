@@ -88,6 +88,11 @@ SWEP.BalanceStats = {
         SightedSpeedMult = 1,
         MeleeSpeedMult = 1,
         ReloadSpeedMult = 1,
+    },
+    [TacRP.BALANCE_OLDSCHOOL] = {
+        RecoilPerShot = 2,
+        RecoilDissipationRate = 15,
+        RecoilSpreadPenalty = 0.006,
     }
 }
 
