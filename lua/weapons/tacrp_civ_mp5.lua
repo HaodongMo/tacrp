@@ -88,6 +88,12 @@ SWEP.BalanceStats = {
         MeleeSpeedMult = 1,
         ReloadSpeedMult = 1,
     },
+    [TacRP.BALANCE_OLDSCHOOL] = {
+        RecoilDissipationRate = 20,
+        RecoilMaximum = 20,
+        RecoilSpreadPenalty = 0.005,
+        HipFireSpreadPenalty = 0.007,
+    }
 }
 
 SWEP.Range_Min = 1750
