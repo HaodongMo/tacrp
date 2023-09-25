@@ -47,7 +47,7 @@ function SWEP:PrimaryAttack()
 
     if self:Clip1() < self:GetValue("AmmoPerShot") then
         local ret = self:RunHook("Hook_PreDryfire")
-        if ret ~= true then
+        if ret != true then
             self.Primary.Automatic = false
             if self:GetBlindFire() then
                 self:PlayAnimation("blind_dryfire")
@@ -64,7 +64,7 @@ function SWEP:PrimaryAttack()
 
     if util.SharedRandom("tacRP_shootChance", 0, 1) <= self:GetJamChance(false) then
         local ret = self:RunHook("Hook_PreJam")
-        if ret ~= true then
+        if ret != true then
             -- self:TakePrimaryAmmo(self:GetValue("AmmoPerShot"))
             if self:GetBurstCount() == 0 then -- dryfire anim is snapping so don't interrupt fire anim for it
                 self.Primary.Automatic = false
@@ -244,8 +244,8 @@ function SWEP:PrimaryAttack()
 
             -- If the bullet is going to hit something very close in front, use hitscan bullets instead
             -- This uses the aim direction without random spread, which may result in hitscan bullets in distances where it shouldn't be.
-            if !hitscan then
-                dist = math.max(self:GetValue("MuzzleVelocity"), 15000) * engine.TickInterval() * (num == 1 and 4 or 2)
+            if !hitscan and (!TacRP.ConVars["client_damage"]:GetBool()) then
+                dist = math.max(self:GetValue("MuzzleVelocity"), 15000) * engine.TickInterval() * (num == 1 and 2 or 1) * (game.IsDedicated() and 1 or 2)
                 local threshold = dir:Forward() * dist
                 local inst_tr = util.TraceLine({
                     start = self:GetMuzzleOrigin(),

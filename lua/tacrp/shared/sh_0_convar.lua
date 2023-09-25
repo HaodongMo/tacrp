@@ -111,6 +111,8 @@ local conVars = {
     {
         name = "client_damage",
         default = "0",
+        replicated = true,
+        notify = true,
     },
     {
         name = "rp_requirebench",

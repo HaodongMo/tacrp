@@ -273,11 +273,9 @@ function TacRP:ProgressPhysBullet(bullet, timestep)
                                 net.Start("tacrp_clientdamage")
                                     net.WriteEntity(weapon)
                                     net.WriteEntity(btr.Entity)
-                                    net.WriteVector(oldpos)
                                     net.WriteVector(dir)
-                                    net.WriteVector(btr.Entity:GetPos())
-                                    -- net.WriteVector(btr.Entity:WorldToLocal(btr.HitPos))
-
+                                    net.WriteVector(btr.Entity:WorldToLocal(btr.HitPos))
+                                    net.WriteUInt(btr.HitGroup, 8)
                                     net.WriteFloat(bullet.Travelled)
                                     net.WriteFloat(bullet.Penleft)
                                     net.WriteUInt(#bullet.Damaged, 4)
@@ -443,11 +441,9 @@ if SERVER then
     net.Receive("tacrp_clientdamage", function(len, ply)
         local weapon = net.ReadEntity()
         local tgt = net.ReadEntity()
-        local pos = net.ReadVector()
         local dir = net.ReadVector()
-        local oldpos = net.ReadVector()
-        local diff = (tgt:GetPos() - oldpos)
-        --local hitpos = tgt:LocalToWorld(net.ReadVector())
+        local hitpos = tgt:LocalToWorld(net.ReadVector())
+        local hitgroup = net.ReadUInt(8)
         local range = net.ReadFloat()
         local penleft = net.ReadFloat()
         local count = net.ReadUInt(3)
@@ -456,27 +452,43 @@ if SERVER then
             table.insert(damaged, net.ReadEntity())
         end
 
-        if !IsValid(weapon) or weapon:GetOwner() != ply then return end
-        --if math.abs(ply:GetPos():DistToSqr(hitpos) - ply:GetPos():DistToSqr(tgt:GetPos())) > 64 * 64 then return end
+        if !ply:Alive() or !IsValid(weapon) or weapon:GetOwner() != ply then return end
+        -- if math.abs(ply:GetPos():DistToSqr(hitpos) - ply:GetPos():DistToSqr(tgt:GetPos())) > 64 * 64 then return end
+
         local suppress = !(tgt:IsNPC() or tgt:IsNextBot())
         if suppress then
             SuppressHostEvents(ply)
         end
-        ply:FireBullets({
-            Damage = weapon:GetValue("Damage_Max"),
-            Force = 8,
-            Tracer = 0,
-            Num = 1,
-            Dir = dir,
-            Src = pos - diff,
-            Spread = Vector(0, 0, 0),
-            Callback = function(att, btr, dmg)
-                weapon:AfterShotFunction(btr, dmg, range, penleft, damaged, true)
-            end
+
+        local dmg = DamageInfo()
+        dmg:SetAttacker(ply)
+        dmg:SetInflictor(ply)
+        dmg:SetDamagePosition(hitpos)
+        local btr = util.TraceLine({
+            start = hitpos - dir * 2,
+            endpos = hitpos,
+            mask = MASK_SHOT,
         })
+        btr.Entity = tgt
+        btr.HitGroup = hitgroup
+        weapon:AfterShotFunction(btr, dmg, range, penleft, damaged, true)
+        tgt:DispatchTraceAttack(dmg, btr, dir)
+
+        -- ply:FireBullets({
+        --     Damage = weapon:GetValue("Damage_Max"),
+        --     Force = 8,
+        --     Tracer = 0,
+        --     Num = 1,
+        --     Dir = dir * 2,
+        --     Src = hitpos - dir * 1,
+        --     Spread = Vector(0, 0, 0),
+        --     Callback = function(att, btr, dmg)
+        --         debugoverlay.Line(btr.StartPos, btr.HitPos, 3, btr.Entity == tgt and Color(0, 255, 0) or Color(255, 255, 0))
+        --         weapon:AfterShotFunction(btr, dmg, range, penleft, damaged, true)
+        --     end
+        -- })
         if suppress then
             SuppressHostEvents()
         end
-        debugoverlay.Line(pos + diff, pos + diff + dir * 16, 5, Color(0, 255, 255), true)
     end)
 end
