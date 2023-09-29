@@ -5,12 +5,42 @@ TacRP.Attachments_Count = 0
 
 TacRP.Attachments_Bits = 16
 
+function TacRP.LoadAtt(atttbl, shortname, id)
+    if !id then
+        TacRP.Attachments_Count = TacRP.Attachments_Count + 1
+        id = TacRP.Attachments_Count
+    end
+
+    atttbl.ShortName = shortname
+    atttbl.ID = id
+
+    TacRP.Attachments[shortname] = atttbl
+    TacRP.Attachments_Index[id] = shortname
+
+    if TacRP.ConVars["generateattentities"]:GetBool() and !atttbl.DoNotRegister and !atttbl.InvAtt and !atttbl.Free then
+        local attent = {}
+        attent.Base = "tacrp_att"
+        attent.Icon = atttbl.Icon
+        if attent.Icon then
+            attent.IconOverride = string.Replace( attent.Icon:GetTexture( "$basetexture" ):GetName() .. ".png", "0001010", "" )
+        end
+        attent.PrintName = atttbl.FullName or atttbl.PrintName or shortname
+        attent.Spawnable = true
+        attent.AdminOnly = atttbl.AdminOnly or false
+        attent.AttToGive = shortname
+        attent.Category = "Tactical RP - Attachments"
+
+        scripted_ents.Register(attent, "tacrp_att_" .. shortname)
+    end
+end
+
 function TacRP.LoadAtts()
     TacRP.Attachments_Count = 0
     TacRP.Attachments = {}
     TacRP.Attachments_Index = {}
 
-    local searchdir = "TacRP/shared/atts/"
+    local searchdir = "tacrp/shared/atts/"
+    local searchdir_bulk = "tacrp/shared/atts_bulk/"
 
     local files = file.Find(searchdir .. "/*.lua", "LUA")
 
@@ -31,41 +61,27 @@ function TacRP.LoadAtts()
 
         if ATT.Ignore then continue end
 
-        TacRP.Attachments_Count = TacRP.Attachments_Count + 1
+        TacRP.LoadAtt(ATT, shortname)
+    end
 
-        ATT.ShortName = shortname
-        ATT.ID = TacRP.Attachments_Count
+    local bulkfiles = file.Find(searchdir_bulk .. "/*.lua", "LUA")
 
-        TacRP.Attachments[shortname] = ATT
-        TacRP.Attachments_Index[TacRP.Attachments_Count] = shortname
+    for _, filename in pairs(bulkfiles) do
+        AddCSLuaFile(searchdir_bulk .. filename)
+    end
 
-        if TacRP.ConVars["generateattentities"]:GetBool() and !ATT.DoNotRegister and !ATT.InvAtt and !ATT.Free then
-            local attent = {}
-            attent.Base = "tacrp_att"
-            attent.Icon = ATT.Icon
-            if attent.Icon then
-                attent.IconOverride = string.Replace( attent.Icon:GetTexture( "$basetexture" ):GetName() .. ".png", "0001010", "" )
-            end
-            attent.PrintName = ATT.FullName or ATT.PrintName or shortname
-            attent.Spawnable = true
-            attent.AdminOnly = ATT.AdminOnly or false
-            attent.AttToGive = shortname
-            attent.Category = "Tactical RP - Attachments"
+    bulkfiles = file.Find(searchdir_bulk .. "/*.lua", "LUA")
 
-            // print("Registering entity for " .. shortname)
+    for _, filename in pairs(bulkfiles) do
+        if filename == "default.lua" then continue end
 
-            scripted_ents.Register(attent, "tacrp_att_" .. shortname)
-        end
+        include(searchdir_bulk .. filename)
     end
 
     TacRP.Attachments_Bits = math.min(math.ceil(math.log(TacRP.Attachments_Count + 1, 2)), 32)
     hook.Run("TacRP_LoadAtts")
 
-    for _, e in pairs(ents.GetAll() or {}) do
-        if IsValid(e) and e:IsWeapon() and e.ArcticTacRP then
-            e:InvalidateCache()
-        end
-    end
+    TacRP.InvalidateCache()
 end
 
 function TacRP.GetAttTable(name)
