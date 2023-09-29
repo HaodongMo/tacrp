@@ -5,6 +5,15 @@ TacRP.Attachments_Count = 0
 
 TacRP.Attachments_Bits = 16
 
+function TacRP.InvalidateCache()
+    for _, e in pairs(ents.GetAll()) do
+        if e:IsWeapon() and e.ArcticTacRP then
+            e:InvalidateCache()
+            e:SetBaseSettings()
+        end
+    end
+end
+
 function TacRP.LoadAtt(atttbl, shortname, id)
     if !id then
         TacRP.Attachments_Count = TacRP.Attachments_Count + 1
@@ -196,12 +205,3 @@ function TacRP.CanCustomize(ply, wep, att, slot)
 end
 
 TacRP.LoadAtts()
-
-function TacRP.InvalidateCache()
-    for _, e in pairs(ents.GetAll()) do
-        if e:IsWeapon() and e.ArcticTacRP then
-            e:InvalidateCache()
-            e:SetBaseSettings()
-        end
-    end
-end
