@@ -163,6 +163,10 @@ TacRP.BalanceUseTiers = {
 }
 
 TacRP.BalanceDefaults = {
+    [TacRP.BALANCE_SBOX] = {
+        MeleeSpeedMult = 1,
+        ReloadSpeedMult = 1,
+    },
     [TacRP.BALANCE_PVE] = {
         BodyDamageMultipliers = {
             [HITGROUP_HEAD] = 1.5,
@@ -176,7 +180,7 @@ TacRP.BalanceDefaults = {
         }
     },
     [TacRP.BALANCE_OLDSCHOOL] = {
-		RecoilVisualKick = 0.5,
+        RecoilVisualKick = 0.5,
 
         MoveSpreadPenalty = 0,
         HipFireSpreadPenalty = 0.007,

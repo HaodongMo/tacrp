@@ -51,7 +51,7 @@ function SWEP:ScopeToggle(setlevel)
         end
     end
 
-    if TacRP.GetBalanceMode() == TacRP.BALANCE_OLDSCHOOL and (!self:GetValue("ScopeOverlay") and !self:GetValue("Holosight")) and level > 0 then
+    if self:DoOldSchoolScopeBehavior() then
         level = 0
     end
 
@@ -199,11 +199,13 @@ function SWEP:ThinkSights()
     if CLIENT then
         self:ThinkPeek()
     end
-
     local toggle = self:GetOwner():GetInfoNum("tacrp_toggleaim", 0) == 1
     local press, down = self:GetOwner():KeyPressed(IN_ATTACK2), self:GetOwner():KeyDown(IN_ATTACK2)
 
-    if sighted and ((toggle and press) or (!toggle and !down)) then
+    if self:DoOldSchoolScopeBehavior() and press then
+        self.Primary.Automatic = false
+        self:Melee()
+    elseif sighted and ((toggle and press) or (!toggle and !down)) then
         self:ScopeToggle(0)
     elseif !sighted and ((toggle and press) or (!toggle and down)) then
         self:ScopeToggle(1)
@@ -297,6 +299,10 @@ function SWEP:GetCorVal()
     local fov = self:GetShouldFOV()
 
     return vmfov / (fov * 1.33333)
+end
+
+function SWEP:DoOldSchoolScopeBehavior()
+    return TacRP.GetBalanceMode() == TacRP.BALANCE_OLDSCHOOL and (!self:GetValue("ScopeOverlay") and !self:GetValue("Holosight"))
 end
 
 -- function SWEP:CheckFlashlightPointing()

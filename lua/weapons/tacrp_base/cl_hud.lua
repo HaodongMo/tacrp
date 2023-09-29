@@ -67,6 +67,8 @@ function SWEP:GetHintCapabilities()
         local bind = "+use/+attack"
         if TacRP.GetKeyIsBound("+tacrp_melee") then
             bind = TacRP.GetBindKey("+tacrp_melee")
+        elseif self:DoOldSchoolScopeBehavior() then
+            bind = "+attack2"
         end
         self.CachedCapabilities[bind] = {so = 30, str = "Quick Melee"}
     end
