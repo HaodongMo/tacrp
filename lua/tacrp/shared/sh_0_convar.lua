@@ -306,6 +306,14 @@ local conVars = {
         max = 4,
         replicated = true,
         notify = true,
+        callback = function(convar, old, new)
+            if old != new and SERVER then
+                TacRP.LoadAtts()
+                TacRP.InvalidateCache()
+                net.Start("tacrp_reloadatts")
+                net.Broadcast()
+            end
+        end,
     },
     {
         name = "sprint_reload",
@@ -638,6 +646,10 @@ for _, var in pairs(conVars) do
         local flag = FCVAR_ARCHIVE
         for k, v in pairs(flags) do if var[k] then flag = flag + v end end
         TacRP.ConVars[var.name] = CreateConVar(convar_name, var.default, flag, var.help, var.min, var.max)
+    end
+
+    if var.callback then
+        cvars.AddChangeCallback(convar_name, var.callback, "tacrp")
     end
 end
 

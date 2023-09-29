@@ -117,6 +117,7 @@ end)
 
 net.Receive("tacrp_reloadatts", function(len, ply)
     TacRP.LoadAtts()
+    TacRP.InvalidateCache()
 end)
 
 elseif SERVER then
@@ -125,6 +126,7 @@ net.Receive("tacrp_reloadatts", function(len, ply)
     if !ply:IsSuperAdmin() then return end
 
     TacRP.LoadAtts()
+    TacRP.InvalidateCache()
 
     net.Start("tacrp_reloadatts")
     net.Broadcast()
@@ -177,19 +179,13 @@ function TacRP.CanCustomize(ply, wep, att, slot)
     return true
 end
 
-// Unfortunately this only runs when the GAMEMODE is reloaded, not each attachment
-local last_reload = 0
-hook.Add("OnReloaded", "TacRP_ReloadAtts", function()
-    if last_reload != CurTime() then
-        last_reload = CurTime()
-        TacRP.LoadAtts()
+TacRP.LoadAtts()
 
-        for _, e in pairs(ents.GetAll()) do
-            if e:IsWeapon() and e.ArcticTacRP then
-                e:InvalidateCache()
-            end
+function TacRP.InvalidateCache()
+    for _, e in pairs(ents.GetAll()) do
+        if e:IsWeapon() and e.ArcticTacRP then
+            e:InvalidateCache()
+            e:SetBaseSettings()
         end
     end
-end)
-
-TacRP.LoadAtts()
+end
