@@ -17,6 +17,10 @@ function SWEP:CalcView(ply, pos, ang, fov)
 
     local mag = self:GetMagnification()
 
+    if self:GetHoldBreathAmount() > 0 then
+        mag = mag * (1 + self:GetHoldBreathAmount() * 0.15)
+    end
+
     local diff = math.abs(self.SmoothedMagnification - mag)
 
     self.SmoothedMagnification = math.Approach(self.SmoothedMagnification, mag, FrameTime() * diff * (self.SmoothedMagnification > mag and 10 or 5))

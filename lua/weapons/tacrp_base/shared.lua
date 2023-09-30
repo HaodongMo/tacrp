@@ -210,6 +210,9 @@ SWEP.ScopedSway = 0.1
 SWEP.BlindFireSway = 2
 SWEP.SwayCrouchMult = 0.75
 
+SWEP.BreathRecovery = 1
+SWEP.BreathDrain = 1
+
 SWEP.FreeAim = true
 SWEP.FreeAimMaxAngle = 3.5
 
@@ -509,6 +512,7 @@ function SWEP:SetupDataTables()
     self:NetworkVar("Float", 13, "BlindFireFinishTime")
     self:NetworkVar("Float", 14, "HolsterTime")
     self:NetworkVar("Float", 15, "NWLastProceduralFireTime")
+    self:NetworkVar("Float", 16, "NWHoldBreathAmount")
 
     self:NetworkVar("Int", 0, "BurstCount")
     self:NetworkVar("Int", 1, "ScopeLevel")
@@ -571,3 +575,4 @@ clunpredictvar(SWEP, "Tactical", "NWTactical", true)
 clunpredictvar(SWEP, "SightAmount", "NWSightAmount", 0)
 clunpredictvar(SWEP, "SprintAmount", "NWSprintAmount", 0)
 clunpredictvar(SWEP, "LastProceduralFireTime", "NWLastProceduralFireTime", 0)
+clunpredictvar(SWEP, "HoldBreathAmount", "NWHoldBreathAmount", 0)

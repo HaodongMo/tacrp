@@ -281,6 +281,12 @@ local conVars = {
         userinfo = true,
     },
     {
+        name = "toggleholdbreath",
+        default = "0",
+        client = true,
+        userinfo = true,
+    },
+    {
         name = "flashlight_blind",
         default = "1",
         replicated = true,

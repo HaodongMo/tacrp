@@ -29,6 +29,8 @@ function SWEP:GetIsSprinting()
     if curspeed <= 0 then return false end
     if !owner:OnGround() then return false end
 
+    if self:GetOwner():GetInfoNum("tacrp_aim_cancels_sprint", 0) > 0 and self:GetScopeLevel() > 0 then return false end
+
     return true
 end
 

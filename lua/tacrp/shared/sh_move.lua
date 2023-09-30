@@ -256,6 +256,7 @@ function TacRP.StartCommand(ply, cmd)
         or (wpn:GetValue("Scope") and !wpn:DoOldSchoolScopeBehavior() and (ply:KeyDown(IN_ATTACK2) or wpn:GetScopeLevel() > 0) and ply:GetInfoNum("tacrp_aim_cancels_sprint", 0) > 0 and wpn:CanStopSprinting())
     ) then
         cmd:SetButtons(cmd:GetButtons() - IN_SPEED)
+        cmd:SetButtons(bit.bor(cmd:GetButtons(), IN_RUN)) -- Abuse unused IN_ enum
         ply.TacRP_SprintBlock = true -- for some reason KeyDown(IN_SPEED) doesn't seem to see the modified buttons, so we set this
     else
         ply.TacRP_SprintBlock = false

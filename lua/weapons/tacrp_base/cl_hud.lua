@@ -42,9 +42,13 @@ function SWEP:GetHintCapabilities()
 
     if self:GetScopeLevel() != 0 then
         if TacRP.ConVars["togglepeek"]:GetBool() then
-            self.CachedCapabilities["+menu_context"] = {so = 1, str = "Toggle Peek"}
+            self.CachedCapabilities["+menu_context"] = {so = 2, str = "Toggle Peek"}
         else
-            self.CachedCapabilities["+menu_context"] = {so = 1, str = "Peek"}
+            self.CachedCapabilities["+menu_context"] = {so = 2, str = "Peek"}
+        end
+
+        if self:CanHoldBreath() then
+            self.CachedCapabilities["+speed"] = {so = 1, str = "Hold Breath"}
         end
     elseif #self.Attachments > 0 then
         self.CachedCapabilities["+menu_context"] = {so = 1, str = "Customize"}
@@ -466,6 +470,38 @@ function SWEP:DrawBottomBar(x, y, w, h)
         surface.SetTextPos(x + w - TacRP.SS(36) - (tw / 2), y + h - nsg - TacRP.SS(4))
         surface.DrawText(nextnadetxt)
     end
+end
+
+local breath_a = 0
+local last = 1
+local lastt = 0
+function SWEP:DrawBreathBar(x, y, w, h)
+    if CurTime() > lastt + 1 then
+        breath_a = math.Approach(breath_a, 0, FrameTime() * 2)
+    elseif breath_a < 1 then
+        breath_a = math.Approach(breath_a, 1, FrameTime())
+    end
+    if last != self:GetBreath() then
+        lastt = CurTime()
+        last = self:GetBreath()
+    end
+    if breath_a == 0 then return end
+
+    x = x - w / 2
+    y = y - h / 2
+
+    surface.SetDrawColor(90, 90, 90, 200 * breath_a)
+    surface.DrawOutlinedRect(x - 1, y - 1, w + 2, h + 2, 1)
+    surface.SetDrawColor(0, 0, 0, 75 * breath_a)
+    surface.DrawRect(x, y, w, h)
+
+    if self:GetOutOfBreath() then
+        surface.SetDrawColor(255, 255 * self:GetBreath() ^ 0.5, 255 * self:GetBreath(), 150 * breath_a)
+    else
+        surface.SetDrawColor(255, 255, 255, 150 * breath_a)
+    end
+
+    surface.DrawRect(x, y, w * self:GetBreath(), h)
 end
 
 function SWEP:DrawHUDBackground()
@@ -923,21 +959,7 @@ function SWEP:DrawHUDBackground()
         end
     end
 
-    -- local ft = FrameTime()
-    -- if self:GetOwner():KeyDown(IN_GRENADE2) then
-    --     self.GrenadeMenuAlpha = math.Approach(self.GrenadeMenuAlpha, 1, 5 * ft)
-    --     if !self.GrenadeHUD then
-    --         self:CreateGrenadeHUD()
-    --     end
-    -- else
-    --     self.GrenadeMenuAlpha = math.Approach(self.GrenadeMenuAlpha, 0, -10 * ft)
-    --     if self:GetOwner():KeyDownLast(IN_GRENADE2) then
-    --         gui.EnableScreenClicker(false)
-    --         -- todo check grneade
-    --     elseif self.GrenadeMenuAlpha == 0 and self.GrenadeHUD then
-    --         self:RemoveGrenadeHUD()
-    --     end
-    -- end
+    self:DrawBreathBar(ScrW() * 0.5, ScrH() * 0.6, TacRP.SS(64), TacRP.SS(4))
 
     self:DrawGrenadeHUD()
 

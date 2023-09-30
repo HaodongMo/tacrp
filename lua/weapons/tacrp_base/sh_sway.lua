@@ -6,6 +6,11 @@ function SWEP:GetSwayAmount(pure)
     local d = self:GetSightDelta() - (self:GetPeeking() and self:GetValue("PeekPenaltyFraction") or 0)
     sway = Lerp(d, sway, self:GetValue("ScopedSway"))
 
+    if self:GetBreath() < 1 then
+        sway = sway + (1 * (1 - self:GetBreath()) * (self:GetOutOfBreath() and 1 or 0.5))
+    end
+    sway = Lerp(self:GetHoldBreathAmount() ^ 0.75, sway, 0)
+
     if self:GetBlindFire() then
         sway = sway + self:GetValue("BlindFireSway")
     end
@@ -48,4 +53,87 @@ end
 
 function SWEP:IsSwayEnabled()
     return TacRP.ConVars["sway"]:GetBool()
+end
+
+function SWEP:ThinkHoldBreath()
+    local owner = self:GetOwner()
+    if !owner:IsPlayer() then return end
+
+    if self:HoldingBreath() then
+
+        self:SetBreath(self:GetBreath() - FrameTime() * self:GetBreathDrain() * (self:HasOptic() and 1 or 0.75) * (self:GetRecoilAmount() > 0 and 1.5 or 1))
+
+        if self:GetBreath() <= 0 then
+            self:SetOutOfBreath(true)
+        end
+
+        if self:GetHoldBreathAmount() < 1 then
+            self:SetHoldBreathAmount(math.min(1, self:GetHoldBreathAmount() + FrameTime() * self:GetBreathSpeed()))
+        end
+    else
+        if self:GetHoldBreathAmount() > 0 then
+            self:SetHoldBreathAmount(math.max(0, self:GetHoldBreathAmount() - FrameTime() * self:GetBreathSpeed() * 2))
+        end
+
+        if self:GetOutOfBreath() and self:GetBreath() >= 1 then
+            self:SetOutOfBreath(false)
+        end
+
+        self:SetBreath(self:GetBreath() + FrameTime() * self:GetValue("BreathRecovery") * (self:GetOutOfBreath() and 0.2 or 0.25))
+    end
+end
+
+function SWEP:CanHoldBreath()
+    return self:GetValue("Scope") and TacRP.ConVars["sway"]:GetBool() and self:GetScopeLevel() > 0
+end
+
+function SWEP:NotOutOfBreath()
+    return self:GetBreath() > 0 and !self:GetOutOfBreath()
+end
+
+local lastpressed = false
+SWEP.IsHoldingBreath = false
+function SWEP:HoldingBreath()
+    local holding = self:GetOwner():KeyDown(IN_SPEED) or self:GetOwner():KeyDown(IN_RUN)
+    if self:GetOwner():GetInfoNum("tacrp_toggleholdbreath", 0) == 1 then
+        if holding and !lastpressed then
+            self.IsHoldingBreath = !self.IsHoldingBreath
+        end
+    else
+        self.IsHoldingBreath = holding
+    end
+
+    lastpressed = holding
+
+    return self:CanHoldBreath() and self:GetSightAmount() >= 1 and self:NotOutOfBreath() and self.IsHoldingBreath
+end
+
+function SWEP:GetBreathDrain()
+    if self.MiscCache["breath_cost"] == nil then
+        self.MiscCache["breath_cost"] = 1 * (math.Clamp(self:GetValue("ScopedSway"), 0.1, 0.3) ^ 0.75)
+    end
+    return self.MiscCache["breath_cost"] * self:GetValue("BreathDrain")
+end
+
+function SWEP:GetBreathSpeed()
+    if self.MiscCache["breath_rate"] == nil then
+        self.MiscCache["breath_rate"] = (math.Clamp(self:GetValue("ScopedSway"), 0.1, 0.5) ^ 0.5) / 0.3
+    end
+    return self.MiscCache["breath_rate"]
+end
+
+function SWEP:GetBreath()
+    return self:GetOwner():GetNWFloat("TacRPBreath", 1)
+end
+
+function SWEP:SetBreath(v)
+    self:GetOwner():SetNWFloat("TacRPBreath", math.Clamp(v, 0, 1))
+end
+
+function SWEP:GetOutOfBreath()
+    return self:GetOwner():GetNWBool("TacRPBreathEmpty", false)
+end
+
+function SWEP:SetOutOfBreath(v)
+    self:GetOwner():SetNWBool("TacRPBreathEmpty", v)
 end

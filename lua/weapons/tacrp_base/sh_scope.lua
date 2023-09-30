@@ -82,16 +82,18 @@ end
 function SWEP:GetShouldFOV(ignorepeek)
     local level = self:GetScopeLevel()
 
+    local base = 90
+
     if level > 0 and (ignorepeek or !self:GetPeeking()) then
         local fov = self:GetValue("ScopeFOV")
 
-        fov = Lerp(level / self:GetValue("ScopeLevels"), 90, fov)
+        fov = Lerp(level / self:GetValue("ScopeLevels"), base, fov)
 
         return fov
     elseif !ignorepeek and self:GetPeeking() then
-        return 90 / peekzoom
+        return base / peekzoom
     else
-        return 90
+        return base
     end
 end
 
@@ -210,7 +212,6 @@ function SWEP:ThinkSights()
     elseif !sighted and ((toggle and press) or (!toggle and down)) then
         self:ScopeToggle(1)
     end
-
 end
 
 function SWEP:GetMagnification()
@@ -301,8 +302,12 @@ function SWEP:GetCorVal()
     return vmfov / (fov * 1.33333)
 end
 
+function SWEP:HasOptic()
+    return self:GetValue("Scope") and (self:GetValue("ScopeOverlay") or self:GetValue("Holosight"))
+end
+
 function SWEP:DoOldSchoolScopeBehavior()
-    return TacRP.GetBalanceMode() == TacRP.BALANCE_OLDSCHOOL and (!self:GetValue("ScopeOverlay") and !self:GetValue("Holosight"))
+    return TacRP.GetBalanceMode() == TacRP.BALANCE_OLDSCHOOL and !self:HasOptic()
 end
 
 -- function SWEP:CheckFlashlightPointing()

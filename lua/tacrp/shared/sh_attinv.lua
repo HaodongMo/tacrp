@@ -121,6 +121,9 @@ end)
 hook.Add("PlayerSpawn", "TacRP_SpawnAttInv", function(ply, trans)
     if trans then return end
 
+    ply:SetNWBool("TacRPBreathEmpty", false)
+    ply:SetNWFloat("TacRPBreath", 1)
+
     if engine.ActiveGamemode() != "terrortown" and TacRP.ConVars["loseattsondie"]:GetInt() >= 1 then
         ply.TacRP_AttInv = {}
 
