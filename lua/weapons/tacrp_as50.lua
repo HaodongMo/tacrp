@@ -194,7 +194,7 @@ SWEP.ScopeFOV = 90 / 12
 SWEP.ScopeLevels = 1 // 2 = like CS:S
 SWEP.ScopeHideWeapon = true
 
-SWEP.Melee = false
+SWEP.CanMeleeAttack = false
 
 // reload
 
