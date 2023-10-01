@@ -10,7 +10,7 @@ SWEP.Category = "Tactical RP"
 SWEP.SubCatTier = "1Elite"
 SWEP.SubCatType = "7Sniper Rifle"
 
-SWEP.Description = "Semi-automatic anti-materiel rifle that can easily decimate any person at any distance.\nEquipped with a 12x scope by default."
+SWEP.Description = "Semi-automatic anti-materiel rifle that can easily decimate any person at any distance.\nEquipped with a 12x scope by default. \nFar to heavy to swing, so bashing is out of the question."
 
 SWEP.ViewModel = "models/weapons/tacint/v_as50_hq.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_as50.mdl"
