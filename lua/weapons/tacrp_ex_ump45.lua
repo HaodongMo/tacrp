@@ -69,7 +69,9 @@ SWEP.BalanceStats = {
         ReloadSpeedMult = 1,
     },
     [TacRP.BALANCE_OLDSCHOOL] = {
-        RecoilMaximum = 25
+        RecoilMaximum = 25,
+		RecoilDissipationRate = 22,
+		RecoilSpreadPenalty = 0.003
     }
 }
 

@@ -10,7 +10,7 @@ SWEP.Category = "Tactical RP"
 SWEP.SubCatTier = "1Elite"
 SWEP.SubCatType = "4Assault Rifle"
 
-SWEP.Description = "Assault rifle with all around excellent performance."
+SWEP.Description = "Assault rifle with all around excellent performance, offset by a lower magazine capacity."
 
 SWEP.ViewModel = "models/weapons/tacint/v_sg551.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_sg551.mdl"
@@ -88,7 +88,8 @@ SWEP.BalanceStats = {
         ReloadSpeedMult = 1,
     },
     [TacRP.BALANCE_OLDSCHOOL] = {
-        RecoilMaximum = 20
+        RecoilMaximum = 20,
+		RecoilDissipationRate = 18
     }
 }
 

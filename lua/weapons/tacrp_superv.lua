@@ -81,8 +81,9 @@ SWEP.BalanceStats = {
         ReloadSpeedMult = 1,
     },
     [TacRP.BALANCE_OLDSCHOOL] = {
-        RecoilSpreadPenalty = 0.002,
-        HipFireSpreadPenalty = 0.02
+		Description = "Close-range SMG with an insane rate of fire and basically no recoil, but very poor accuracy.",
+        RecoilSpreadPenalty = 0.003,
+        HipFireSpreadPenalty = 0.01
     }
 }
 
