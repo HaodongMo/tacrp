@@ -189,6 +189,7 @@ TacRP.BalanceDefaults = {
         ShootingSpeedMult = 1,
         SightedSpeedMult = 1,
         ReloadSpeedMult = 1,
+		MidAirSpreadPenalty = 0.025
     },
 }
 
