@@ -80,7 +80,7 @@ SWEP.BalanceStats = {
         RecoilDissipationRate = 5,
         RecoilMaximum = 12,
         RecoilSpreadPenalty = 0.01,
-        HipFireSpreadPenalty = 0.02,
+        HipFireSpreadPenalty = 0.015,
     }
 }
 
