@@ -73,8 +73,10 @@ SWEP.BalanceStats = {
         ReloadSpeedMult = 1,
     },
     [TacRP.BALANCE_OLDSCHOOL] = {
-        RecoilSpreadPenalty = 0.0015,
-        ReloadTimeMult = 1.15
+		Description = "Balanced light machine gun that can put down some serious firepower.",
+		ClipSize = 75,
+        RecoilSpreadPenalty = 0.0013,
+        ReloadTimeMult = 1.1
     }
 }
 

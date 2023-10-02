@@ -73,7 +73,8 @@ SWEP.BalanceStats = {
         ReloadSpeedMult = 1,
     },
     [TacRP.BALANCE_OLDSCHOOL] = {
-        HipFireSpreadPenalty = 0.015,
+		Description = "Lightweight polymer handgun with a high fire rate but below-average spread.",
+        HipFireSpreadPenalty = 0.01,
     }
 }
 
