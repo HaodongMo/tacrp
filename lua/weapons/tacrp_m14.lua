@@ -127,9 +127,10 @@ SWEP.RecoilResetTime = 0.25 // time after you stop shooting for recoil to start 
 SWEP.RecoilDissipationRate = 6
 SWEP.RecoilFirstShotMult = 0.5
 
-SWEP.RecoilVisualKick = 2
-SWEP.RecoilKick = 5
+SWEP.RecoilVisualKick = 1
+SWEP.RecoilKick = 4.5
 SWEP.RecoilStability = 0.75
+SWEP.RecoilAltMultiplier = 50
 
 SWEP.RecoilSpreadPenalty = 0.005
 SWEP.HipFireSpreadPenalty = 0.075
