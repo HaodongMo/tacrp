@@ -68,7 +68,7 @@ SWEP.BalanceStats = {
         ReloadSpeedMult = 1,
     },
     [TacRP.BALANCE_OLDSCHOOL] = {
-        RecoilDissipationRate = 2
+        RecoilDissipationRate = 4
     }
 }
 
