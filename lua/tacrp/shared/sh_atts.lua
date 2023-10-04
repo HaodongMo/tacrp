@@ -15,6 +15,8 @@ function TacRP.InvalidateCache()
 end
 
 function TacRP.LoadAtt(atttbl, shortname, id)
+    if atttbl.Ignore then return end
+
     if !id then
         TacRP.Attachments_Count = TacRP.Attachments_Count + 1
         id = TacRP.Attachments_Count
