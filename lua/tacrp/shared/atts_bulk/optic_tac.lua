@@ -839,10 +839,16 @@ function ATT.TacticalDraw(self)
     surface.SetDrawColor(255, 255, 255, 255)
     surface.DrawTexturedRect(x2, y2, w_cone, w_cone)
 
-    local acc_size = math.max(TacRP.GetFOVAcc(self), 1)
-    local a = math.Clamp(1 - (acc_size - TacRP.SS(15)) / TacRP.SS(5), 0, 1) ^ 0.5
-    surface.DrawCircle(x2 + w_cone / 2, y2 + w_cone / 2, acc_size - 1, 0, 0, 0, a * 200)
-    surface.DrawCircle(x2 + w_cone / 2, y2 + w_cone / 2, acc_size + 1, 0, 0, 0, a * 200)
+    local acc_size = math.ceil(spread * 0.125) --math.max(TacRP.GetFOVAcc(self), 1)
+    local a = math.Clamp(1 - (acc_size - TacRP.SS(15)) / TacRP.SS(5), 0.05, 1) ^ 0.5
+    surface.DrawCircle(x2 + w_cone / 2, y2 + w_cone / 2, math.min(TacRP.SS(16), acc_size), 0, 0, 0, a * 150)
+    surface.DrawCircle(x2 + w_cone / 2, y2 + w_cone / 2, math.min(TacRP.SS(16), acc_size) + 0.5, 0, 0, 0, a * 200)
+    surface.DrawCircle(x2 + w_cone / 2, y2 + w_cone / 2, math.min(TacRP.SS(16), acc_size) + 1, 0, 0, 0, a * 150)
+
+    if spread < 101 then
+        acc_size = math.ceil(spread * 0.625)
+        surface.DrawCircle(x2 + w_cone / 2, y2 + w_cone / 2, acc_size, 0, 0, 0, a * 200)
+    end
 
     local fov_mult = LocalPlayer():GetFOV() / math.max(self.TacRPLastFOV or 90, 0.00001)
     local fov_mult1 = math.floor(fov_mult)
