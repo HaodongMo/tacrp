@@ -112,7 +112,7 @@ ATT.ModelOffset = Vector(0, 0.05, 0)
 
 ATT.Category = "optic_cqb"
 
-ATT.SortOrder = 1.1
+ATT.SortOrder = 1.5
 
 ATT.Override_Scope = true
 ATT.Override_ScopeOverlay = false
@@ -209,7 +209,7 @@ ATT.Category = "optic_cqb"
 ATT.Scale = 1.5
 ATT.ModelOffset = Vector(-2, 0, -0.3)
 
-ATT.SortOrder = 1
+ATT.SortOrder = 1.25
 
 ATT.Override_Scope = true
 ATT.Override_ScopeOverlay = false
@@ -243,7 +243,7 @@ ATT.ModelOffset = Vector(0, 0, 1.2)
 
 ATT.Category = "optic_cqb"
 
-ATT.SortOrder = 1.2
+ATT.SortOrder = 1.75
 
 ATT.Override_Scope = true
 ATT.Override_ScopeOverlay = false
