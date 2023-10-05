@@ -84,7 +84,7 @@ function SWEP:ThinkHoldBreath()
 end
 
 function SWEP:CanHoldBreath()
-    return self:GetValue("Scope") and TacRP.ConVars["sway"]:GetBool() and self:GetScopeLevel() > 0
+    return self:GetValue("Scope") and TacRP.ConVars["sway"]:GetBool() and self:GetScopeLevel() > 0 and !self:GetReloading()
 end
 
 function SWEP:NotOutOfBreath()
@@ -110,14 +110,14 @@ end
 
 function SWEP:GetBreathDrain()
     if self.MiscCache["breath_cost"] == nil then
-        self.MiscCache["breath_cost"] = 1 * (math.Clamp(self:GetValue("ScopedSway"), 0.1, 0.3) ^ 0.75)
+        self.MiscCache["breath_cost"] = 1 * (math.Clamp(self:GetValue("ScopedSway"), 0.1, 0.3) ^ 0.75) * (1 - 0.3 * math.Clamp((4 - 90 / self:GetValue("ScopeFOV")) / 3, 0, 1))
     end
     return self.MiscCache["breath_cost"] * self:GetValue("BreathDrain")
 end
 
 function SWEP:GetBreathSpeed()
     if self.MiscCache["breath_rate"] == nil then
-        self.MiscCache["breath_rate"] = (math.Clamp(self:GetValue("ScopedSway"), 0.1, 0.5) ^ 0.5) / 0.3
+        self.MiscCache["breath_rate"] = (math.Clamp(self:GetValue("ScopedSway"), 0.1, 0.5) ^ 0.5) / 0.3 + (0.5 * math.Clamp((4 - 90 / self:GetValue("ScopeFOV")) / 3, 0, 1))
     end
     return self.MiscCache["breath_rate"]
 end
