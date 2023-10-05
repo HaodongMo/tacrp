@@ -66,7 +66,7 @@ ATT = {}
 ATT.PrintName = "Cheek Rest"
 ATT.Icon = Material("entities/tacrp_att_acc_cheekrest.png", "mips smooth")
 ATT.Description = "Stabilizes your head while aiming down sights, reducing sway."
-ATT.Pros = {"stat.scopedsway", "stat.recoilspread"}
+ATT.Pros = {"stat.scopedsway", "stat.bloomintensity"}
 
 ATT.Category = "acc_sling"
 

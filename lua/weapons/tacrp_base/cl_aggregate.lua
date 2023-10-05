@@ -921,9 +921,9 @@ SWEP.StatDisplay = {
         Name = "stat.recoilspread2",
         Description = "stat.recoilspread2.desc",
         AggregateFunction = function(self, base, val)
-            return math.Round(val * (base and self:GetBaseValue("RecoilAltMultiplier") or self:GetValue("RecoilAltMultiplier")) * 100, 0)
+            return math.Round(val * (base and self:GetBaseValue("RecoilAltMultiplier") or self:GetValue("RecoilAltMultiplier")), 2)
         end,
-        Unit = "%",
+        Unit = nil,
         Value = "RecoilSpreadPenalty",
         LowerIsBetter = true,
         ConVarCheck = "tacrp_altrecoil",
@@ -944,6 +944,7 @@ SWEP.StatDisplay = {
         Description = "stat.recoilresettime.desc",
         Value = "RecoilResetTime",
         LowerIsBetter = true,
+        Unit = "s",
     },
     {
         Name = "stat.recoilmaximum",
@@ -956,9 +957,8 @@ SWEP.StatDisplay = {
         Description = "stat.recoilfirstshot.desc",
         Value = "RecoilFirstShotMult",
         AggregateFunction = function(self, base, val)
-            return math.Round(val, 2)
+            return math.Round(val * (base and self:GetBaseValue("RecoilPerShot") or self:GetValue("RecoilPerShot")), 2)
         end,
-        Unit = "x",
         DefaultValue = 1,
         LowerIsBetter = true,
     },
@@ -996,7 +996,7 @@ SWEP.StatDisplay = {
             return math.min(100, math.Round(val * 100, 0))
         end,
         Unit = "%",
-        Value = "MoveSpeedMult"
+        Value = "MoveSpeedMult",
     },
     {
         Name = "stat.shootingspeed",
@@ -1005,7 +1005,7 @@ SWEP.StatDisplay = {
             return math.min(100, math.Round(val * 100, 0))
         end,
         Unit = "%",
-        Value = "ShootingSpeedMult"
+        Value = "ShootingSpeedMult",
     },
     {
         Name = "stat.sightedspeed",
@@ -1025,6 +1025,17 @@ SWEP.StatDisplay = {
         end,
         Unit = "%",
         Value = "ReloadSpeedMult",
+        DefaultValue = 1,
+    },
+    {
+        Name = "stat.meleespeed",
+        Description = "stat.meleespeed.desc",
+        AggregateFunction = function(self, base, val)
+            return math.min(100, math.Round(val * 100, 0))
+        end,
+        Unit = "%",
+        Value = "MeleeSpeedMult",
+        DefaultValue = 1,
     },
     {
         Name = "spacer.handling",

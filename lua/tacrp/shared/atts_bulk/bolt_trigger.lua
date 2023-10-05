@@ -10,7 +10,7 @@ ATT = {}
 ATT.PrintName = "Refined"
 ATT.FullName = "Refined Bolt"
 ATT.Icon = Material("entities/tacrp_att_bolt_fine.png", "mips smooth")
-ATT.Description = "Recoil recovers faster, but also increases faster."
+ATT.Description = "A delicate bolt suitable for short bursts."
 ATT.Pros = {"stat.recoildissipation"}
 ATT.Cons = {"stat.recoilpershot"}
 
@@ -62,7 +62,7 @@ ATT.PrintName = "Heavy"
 ATT.FullName = "Heavy Bolt"
 ATT.Icon = Material("entities/tacrp_att_bolt_heavy.png", "mips smooth")
 ATT.Description = "Reduce recoil at the cost of fire rate."
-ATT.Pros = {"stat.recoilkick", "stat.recoilspread"}
+ATT.Pros = {"stat.recoilkick", "stat.bloomintensity"}
 ATT.Cons = {"stat.rpm"}
 
 ATT.Category = "bolt_automatic"
@@ -86,7 +86,7 @@ ATT.FullName = "Light Bolt"
 ATT.Icon = Material("entities/tacrp_att_bolt_light.png", "mips smooth")
 ATT.Description = "Increase fire rate at the cost of recoil."
 ATT.Pros = {"stat.rpm"}
-ATT.Cons = {"stat.recoilkick", "stat.recoilspread"}
+ATT.Cons = {"stat.recoilkick", "stat.bloomintensity"}
 
 ATT.Category = "bolt_automatic"
 
@@ -107,7 +107,7 @@ ATT = {}
 ATT.PrintName = "Rugged"
 ATT.FullName = "Rugged Bolt"
 ATT.Icon = Material("entities/tacrp_att_bolt_rough.png", "mips smooth")
-ATT.Description = "Recoil increases slower, but recovery rate is also slower."
+ATT.Description = "A durable bolt suitable for long bursts."
 ATT.Pros = {"stat.recoilpershot"}
 ATT.Cons = {"stat.recoildissipation"}
 
@@ -367,7 +367,7 @@ ATT.FullName = "Forced Reset Trigger"
 ATT.Icon = Material("entities/tacrp_att_trigger_frcd.png", "mips smooth")
 ATT.Description = "Trigger that emulates automatic fire but with poor performance."
 ATT.Pros = {"att.procon.auto"}
-ATT.Cons = {"stat.recoilkick", "stat.recoilspread", "stat.recoilstability"}
+ATT.Cons = {"stat.recoilkick", "stat.bloomintensity", "stat.recoilstability"}
 
 ATT.Category = "trigger_semi"
 
@@ -392,7 +392,7 @@ ATT.FullName = "Forced Reset Trigger"
 ATT.Icon = Material("entities/tacrp_att_trigger_frcd.png", "mips smooth")
 ATT.Description = "Trigger that emulates automatic fire but with poor performance."
 ATT.Pros = {"att.procon.auto"}
-ATT.Cons = {"stat.recoilkick", "stat.recoilspread", "stat.recoilstability"}
+ATT.Cons = {"stat.recoilkick", "stat.bloomintensity", "stat.recoilstability"}
 
 ATT.InvAtt = "trigger_frcd"
 
@@ -574,7 +574,7 @@ ATT.PrintName = "Straight"
 ATT.FullName = "Straight Trigger"
 ATT.Icon = Material("entities/tacrp_att_trigger_straight.png", "mips smooth")
 ATT.Description = "Narrow trigger with superior recoil performance."
-ATT.Pros = {"stat.recoilspread", "stat.recoildissipation"}
+ATT.Pros = {"stat.bloomintensity", "stat.recoildissipation"}
 ATT.Cons = {"stat.recoilresettime", "stat.shootingspeed"}
 
 ATT.Category = {"trigger_auto", "trigger_straight"}

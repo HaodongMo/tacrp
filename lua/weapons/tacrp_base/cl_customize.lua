@@ -299,7 +299,7 @@ function SWEP:CreateCustomizeHUD()
                     surface.SetDrawColor( c.r, c.g, c.b, 255 )
                 end
                 surface.DrawRect( math.Round(w - (za*5) - za*2), math.Round(h - (za*5*i) - za*2), math.Round(za*5), math.Round(za*5) )
-                
+
                 surface.SetTextColor( 255, 255, 255, 127 )
                 surface.SetFont("TacRP_Myriad_Pro_5")
                 surface.SetTextPos( math.Round(w - za*5 - za*0.7), math.Round(h - (za*5*i) - za*2))
