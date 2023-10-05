@@ -167,15 +167,19 @@ function PANEL:PaintOver(w, h)
         local col_text_pro = Color(0, 130, 0, 230)
         local col_text_con = Color(130, 0, 0, 230)
         local rx, ry = self:CursorPos()
-        rx = rx + TacRP.SS(16)
-        ry = ry + TacRP.SS(16)
+        rx = rx + TacRP.SS(12)
+        --ry = ry + TacRP.SS(16)
         local gap = TacRP.SS(18)
         local firstoff = TacRP.SS(20)
         local statjump = TacRP.SS(12)
         local statted = false
 
-        if self:GetY() + ry >= TacRP.SS(280) then
-            ry = ry - TacRP.SS(60)
+        local vertsize = firstoff + gap + TacRP.SS(4)
+        if atttbl.Pros then vertsize = vertsize + statjump * #atttbl.Pros end
+        if atttbl.Cons then vertsize = vertsize + statjump * #atttbl.Cons end
+
+        if self:GetY() + ry >= ScrH() - vertsize then
+            ry = ry + (ScrH() - vertsize - (self:GetY() + ry))
         end
 
         local bw, bh = TacRP.SS(160), TacRP.SS(18)
