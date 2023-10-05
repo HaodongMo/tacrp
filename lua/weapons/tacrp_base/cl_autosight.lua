@@ -57,6 +57,25 @@ function SWEP:GenerateAutoSight()
     local offset_pos = slottbl.Pos_VM
     local offset_ang = slottbl.Ang_VM
 
+    for _, ele in ipairs(self:GetElements()) do
+        if !ele.AttPosMods or !ele.AttPosMods[slot] then continue end
+        if wm then
+            if ele.AttPosMods[slot].Pos_WM then
+                offset_pos = ele.AttPosMods[slot].Pos_WM
+            end
+            if ele.AttPosMods[slot].Ang_WM then
+                offset_ang = ele.AttPosMods[slot].Ang_WM
+            end
+        else
+            if ele.AttPosMods[slot].Pos_VM then
+                offset_pos = ele.AttPosMods[slot].Pos_VM
+            end
+            if ele.AttPosMods[slot].Ang_VM then
+                offset_ang = ele.AttPosMods[slot].Ang_VM
+            end
+        end
+    end
+
     local apos, aang
 
     apos = bpos + bang:Forward() * offset_pos.x
