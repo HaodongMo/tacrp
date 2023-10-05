@@ -511,13 +511,13 @@ SWEP.StatGroups = {
             local score = 0
             local valfunc = base and self.GetBaseValue or self.GetValue
 
-            -- [30] sway
-            score = score + math.Clamp(1 - valfunc(self, "Sway") / 5, 0, 1) ^ 0.75 * 40
+            -- [40] sway
+            score = score + math.Clamp(1 - valfunc(self, "Sway") / 2.5, 0, 1) ^ 0.8 * 40
 
             -- [60] sighted sway
-            score = score + math.Clamp(1 - valfunc(self, "ScopedSway") / 2, 0, 1) ^ 1.5 * 60
+            score = score + math.Clamp(1 - valfunc(self, "ScopedSway") / 1, 0, 1) ^ 1.5 * 60
 
-            -- [10] blindfire sway
+            -- blindfire sway
             -- score = score + math.Clamp(1 - valfunc(self, "BlindFireSway") / 2, 0, 1) * 10
 
             return score
@@ -698,7 +698,7 @@ SWEP.StatDisplay = {
             local cfm = -self:GetCurrentFiremode()
             local delay = 60 / ( valfunc(self, "RPM") * valfunc(self, "RPMMultBurst") ) -- delay
             local nerd = 0
-            nerd = nerd + (delay*(cfm-1))
+            nerd = nerd + (delay * (cfm-1))
             nerd = nerd + math.max( delay, valfunc(self, "PostBurstDelay") )
             nerd = nerd / cfm
             nerd = 60 / nerd
