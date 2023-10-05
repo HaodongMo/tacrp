@@ -101,7 +101,7 @@ ATT.Category = "perk_reload"
 
 ATT.SortOrder = 2
 
-ATT.Mult_ReloadTimeMult = 0.85
+ATT.Mult_ReloadTimeMult = 0.88
 
 TacRP.LoadAtt(ATT, "perk_reload")
 -- #endregion
