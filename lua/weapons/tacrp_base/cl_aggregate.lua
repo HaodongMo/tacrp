@@ -1149,6 +1149,25 @@ SWEP.StatDisplay = {
         Name = "stat.meleedamage",
         Description = "stat.meleedamage.desc",
         Value = "MeleeDamage",
-        HideIfSame = true,
+        HideIfSame = false,
+    },
+    {
+        Name = "stat.peekpenalty",
+        Description = "stat.peekpenalty.desc",
+        Value = "PeekPenaltyFraction",
+        AggregateFunction = function(self, base, val)
+            return math.min(100, math.Round(val * 100, 0))
+        end,
+        Unit = "%",
+    },
+    {
+        Name = "stat.quickscope",
+        Description = "stat.quickscope.desc",
+        Value = "QuickScopeSpreadPenalty",
+        AggregateFunction = function(self, base, val)
+            return math.Round(math.deg(val) * 60, 1)
+        end,
+        Unit = "′",
+        LowerIsBetter = true,
     },
 }

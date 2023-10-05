@@ -650,7 +650,7 @@ function SWEP:GetSpread(baseline)
 
     local quickscopetime = CurTime() - self:GetLastScopeTime()
 
-    local qsd = (quickscopetime / self:GetValue("QuickScopeTime")) ^ 2
+    local qsd = (quickscopetime / self:GetValue("QuickScopeTime")) ^ 4
 
     if qsd < 1 then
         spread = spread + Lerp(qsd, self:GetValue("QuickScopeSpreadPenalty"), 0)
