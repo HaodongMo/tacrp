@@ -25,8 +25,8 @@ SWEP.BalanceStats = {
         RecoilSpreadPenalty = 0.0015,
         RecoilKick = 2,
 
-        MoveSpeedMult = 0.85,
-        ShootingSpeedMult = 0.75,
+        MoveSpeedMult = 0.87,
+        ShootingSpeedMult = 0.85,
         SightedSpeedMult = 0.75,
         MeleeSpeedMult = 1,
         ReloadSpeedMult = 1,
