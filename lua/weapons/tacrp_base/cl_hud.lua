@@ -420,6 +420,11 @@ function SWEP:DrawBottomBar(x, y, w, h)
         surface.SetDrawColor(col)
         local nfm = TacRP.SS(8)
         surface.DrawTexturedRect(x + w - nfm - TacRP.SS(4), y + h - nfm - TacRP.SS(1), nfm, nfm)
+    elseif self:GetSafe() then
+        surface.SetMaterial(self:GetFiremodeMat(self:GetCurrentFiremode()))
+        surface.SetDrawColor(col)
+        local nfm = TacRP.SS(8)
+        surface.DrawTexturedRect(x + w - nfm - TacRP.SS(4), y + h - nfm - TacRP.SS(1), nfm, nfm)
     end
 
     if self:GetValue("CanQuickNade") then

@@ -24,6 +24,7 @@ function SWEP:PrimaryAttack()
 
     if self:GetValue("Melee") and self:GetOwner():KeyDown(IN_USE) and !(self:GetValue("RunawayBurst") and self:GetBurstCount() > 0) then
         self.Primary.Automatic = false
+        self:SetSafe(false)
         self:Melee()
         return
     end
