@@ -297,7 +297,7 @@ function SWEP:DoScopeGlint()
 end
 
 function SWEP:DoMuzzleLight()
-    if !IsFirstTimePredicted() or !TacRP.ConVars["muzzlelight"]:GetBool() then return end
+    if (!IsFirstTimePredicted() and !game.SinglePlayer()) or !TacRP.ConVars["muzzlelight"]:GetBool() then return end
 
     if IsValid(self.MuzzleLight) then self.MuzzleLight:Remove() end
 
