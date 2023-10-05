@@ -165,7 +165,16 @@ function SWEP:PreDrawViewModel()
     end
 
     -- Apparently setting this will fix the viewmodel position and angle going all over the place in benchgun.
-    self.ViewModelFOV = self:GetViewModelFOV()
+    if TacRP.ConVars["dev_benchgun"]:GetBool() then
+        if self.OriginalViewModelFOV == nil then
+            self.OriginalViewModelFOV = self.ViewModelFOV
+        end
+        self.ViewModelFOV = self:GetOwner():GetFOV()
+    elseif self.OriginalViewModelFOV then
+        self.ViewModelFOV = self.OriginalViewModelFOV
+        self.OriginalViewModelFOV = nil
+    end
+    -- self.ViewModelFOV = self:GetViewModelFOV()
 
     cam.IgnoreZ(true)
 end
@@ -178,6 +187,7 @@ function SWEP:PostDrawViewModel()
     end
 end
 
+--[[
 SWEP.SmoothedViewModelFOV = nil
 function SWEP:GetViewModelFOV()
     local target = self.ViewModelFOV
@@ -192,3 +202,4 @@ function SWEP:GetViewModelFOV()
 
     return self.SmoothedViewModelFOV
 end
+]]
