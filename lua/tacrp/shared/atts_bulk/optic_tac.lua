@@ -206,8 +206,8 @@ ATT.Pros = {"att.sight.1.25"}
 ATT.Model = "models/weapons/tacint/addons/okp7.mdl"
 
 ATT.Category = "optic_cqb"
-ATT.Scale = 1.5
-ATT.ModelOffset = Vector(-2, 0, -0.3)
+ATT.Scale = 1.1
+ATT.ModelOffset = Vector(-2, 0, -0.45)
 
 ATT.SortOrder = 1.25
 
@@ -217,7 +217,7 @@ ATT.Override_ScopeFOV = 90 / 1.25
 ATT.Override_ScopeLevels = 1
 ATT.Override_ScopeHideWeapon = false
 
-ATT.SightPos = Vector(0, -15, 1.4)
+ATT.SightPos = Vector(0, -15, 1)
 ATT.SightAng = Angle(0, 0, 0)
 
 ATT.Holosight = Material("tacrp/hud/okp7.png", "smooth")
