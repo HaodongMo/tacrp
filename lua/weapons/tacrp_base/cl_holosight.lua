@@ -44,7 +44,7 @@ function SWEP:DoHolosight(mdl)
         -- cam.Start3D()
 
         render.SetMaterial(img)
-        render.DrawQuadEasy(pos, -dir, 512, 512, Color(255, 255, 255))
+        render.DrawQuadEasy(pos, -dir, 512, 512, Color(255, 255, 255), 180)
 
         -- cam.End3D()
 
