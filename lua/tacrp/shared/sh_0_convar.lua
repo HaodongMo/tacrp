@@ -634,7 +634,7 @@ local conVars = {
     },
     {
         name = "recoilpattern",
-        default = "0",
+        default = "1",
         replicated = true,
         notify = true,
         min = 0,
