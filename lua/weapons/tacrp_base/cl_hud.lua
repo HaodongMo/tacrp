@@ -964,7 +964,7 @@ function SWEP:DrawHUDBackground()
         end
     end
 
-    self:DrawBreathBar(ScrW() * 0.5, ScrH() * 0.6, TacRP.SS(64), TacRP.SS(4))
+    self:DrawBreathBar(ScrW() * 0.5, ScrH() * 0.75, TacRP.SS(64), TacRP.SS(4))
 
     self:DrawGrenadeHUD()
 
