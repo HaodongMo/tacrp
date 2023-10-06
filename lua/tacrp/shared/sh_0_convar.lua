@@ -632,6 +632,15 @@ local conVars = {
         min = 0,
         max = 1
     },
+    {
+        name = "recoilpattern",
+        default = "0",
+        replicated = true,
+        notify = true,
+        min = 0,
+        max = 1,
+    },
+
 }
 
 TacRP.ConVars = {}
@@ -979,6 +988,12 @@ local function menu_balance_ti(panel)
         command = "tacrp_reload_sg_cancel"
     })
     panel:ControlHelp("Instantly fire out of a shotgun reload. If disabled, the finishing part of the animation must play out.")
+    panel:AddControl("checkbox", {
+        label = "Recoil Patterns",
+        command = "tacrp_recoilpattern"
+    })
+    panel:ControlHelp("Recoil follows a weapon-specific pattern, reset when bloom disappears.\nPattern fades away in long bursts, but reduces vertical recoil.")
+
 
     header(panel, "\nBallistics")
     panel:AddControl("checkbox", {

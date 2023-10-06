@@ -133,7 +133,6 @@ function SWEP:Melee(alt)
 
     self:SetLastMeleeTime(CurTime())
     self:SetNextSecondaryFire(CurTime() + t)
-
 end
 
 hook.Add("PostEntityTakeDamage", "tacrp_melee", function(ent, dmg, took)

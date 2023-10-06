@@ -114,6 +114,9 @@ SWEP.RecoilAltMultiplier = 200 // Multiplier to RecoilSpreadPenalty when using a
 
 SWEP.ShotgunPelletSpread = 0 // per-pellet spread for shotguns (if enabled). Otherwise just adds to spread
 
+SWEP.NoRecoilPattern = false // set true to not use recoil patterns for this gun
+SWEP.RecoilPatternSeed = nil // custom seed. Defaults to weapon class
+
 SWEP.CanBlindFire = true
 
 // handling
@@ -226,7 +229,7 @@ SWEP.QuickNadeTimeMult = 1
 SWEP.CanMeleeAttack = true
 
 SWEP.MeleeDamage = 25
-SWEP.MeleeAttackTime = 0.7 // time between swings
+SWEP.MeleeAttackTime = 0.8 // time between swings
 SWEP.MeleeRange = 96
 SWEP.MeleeDamageType = DMG_GENERIC
 SWEP.MeleeDelay = 0.25 // delay between swing start and trace
@@ -519,6 +522,7 @@ function SWEP:SetupDataTables()
     self:NetworkVar("Int", 2, "NthShot")
     self:NetworkVar("Int", 3, "LoadedRounds")
     self:NetworkVar("Int", 4, "Firemode")
+    self:NetworkVar("Int", 5, "PatternCount")
 
     self:NetworkVar("Bool", 0, "Customize")
     self:NetworkVar("Bool", 1, "Reloading")

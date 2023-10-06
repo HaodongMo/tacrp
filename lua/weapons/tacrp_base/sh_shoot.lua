@@ -77,6 +77,7 @@ function SWEP:PrimaryAttack()
             end
             self:EmitSound(self:GetValue("Sound_Jam"), 75, 100, 1, CHAN_ITEM)
             self:SetBurstCount(0)
+            self:SetPatternCount(0)
             self:SetNextPrimaryFire(CurTime() + self:GetValue("JamWaitTime"))
             self:SetNextSecondaryFire(CurTime() + self:GetValue("JamWaitTime"))
             if self:GetValue("JamTakesRound") then
@@ -347,6 +348,7 @@ function SWEP:PrimaryAttack()
     self:TakePrimaryAmmo(self:GetValue("AmmoPerShot"))
 
     self:SetBurstCount(self:GetBurstCount() + 1)
+    self:SetPatternCount(self:GetPatternCount() + 1)
     self:DoBulletBodygroups()
 
     if self:Clip1() == 0 then self.Primary.Automatic = false end
@@ -554,7 +556,7 @@ function SWEP:GetShootDir(nosway)
         dir.y = dir.y - 75
     end
 
-    local u, r, f = dir:Up(), dir:Right(), dir:Forward()
+    local u, r = dir:Up(), dir:Right()
 
     local oa = self:GetFreeAimOffset()
     if !nosway then

@@ -189,7 +189,15 @@ function TacRP.StartCommand(ply, cmd)
 
         local eyeang = cmd:GetViewAngles()
 
-        local uprec = math.sin(math.rad(recoildir)) * FrameTime() * rec * kick
+        local suppressfactor = 1
+
+        if wpn:UseRecoilPatterns() then
+            local stab = math.Clamp(wpn:GetValue("RecoilStability"), 0, 0.9)
+            local max = wpn:GetBaseValue("RPM") / 60 * (0.75 + stab * 0.833)
+            suppressfactor = math.min(4, 1 + (wpn:GetPatternCount() / max))
+        end
+
+        local uprec = math.sin(math.rad(recoildir)) * FrameTime() * rec * kick / suppressfactor
         local siderec = math.cos(math.rad(recoildir)) * FrameTime() * rec * kick
 
         eyeang.p = eyeang.p + uprec

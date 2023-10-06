@@ -44,8 +44,13 @@ function SWEP:ApplyRecoil()
 
     rec = math.Clamp(rec, 0, self:GetValue("RecoilMaximum"))
 
-    local stab = math.Clamp(self:GetValue("RecoilStability"), 0, 0.9)
-    self:SetRecoilDirection(util.SharedRandom("tacrp_recoildir", -180 + stab * 90, -stab * 90))
+    if self:UseRecoilPatterns() then
+        self:SetRecoilDirection(self:GetRecoilPatternDirection(self:GetPatternCount()))
+    else
+        local stab = math.Clamp(self:GetValue("RecoilStability"), 0, 0.9)
+        self:SetRecoilDirection(util.SharedRandom("tacrp_recoildir", -180 + stab * 90, -stab * 90))
+    end
+
     -- self:SetRecoilDirection(-90)
     self:SetRecoilAmount(rec)
     self:SetLastRecoilTime(CurTime())
@@ -68,4 +73,56 @@ end
 function SWEP:RecoilDuration()
     -- return self:GetValue("RecoilResetTime")
     return 0.04 + math.Clamp(math.abs(self:GetValue("RecoilKick")) ^ 0.5, 0, 4) * 0.04
+end
+
+function SWEP:UseRecoilPatterns()
+    if !TacRP.ConVars["recoilpattern"]:GetBool() then return false end
+    if self:GetValue("ShootEnt") or self:GetValue("NoRecoilPattern") then return false end
+    if self:IsShotgun() then return false end
+
+    return true
+end
+
+SWEP.RecoilPatternCache = {}
+SWEP.RecoilPatternSeedCache = nil
+function SWEP:GetRecoilPatternDirection(shot)
+    local dir = 0
+
+    if !self.RecoilPatternSeedCache then
+        local cacheseed = self.RecoilPatternSeed or self:GetClass()
+        if isstring(cacheseed) then
+            local numseed = 0
+            for _, i in ipairs(string.ToTable(cacheseed)) do
+                numseed = numseed + string.byte(i)
+            end
+            numseed = numseed % 16777216
+            cacheseed = numseed
+        end
+        self.RecoilPatternSeedCache = cacheseed
+    end
+
+    local seed = self.RecoilPatternSeedCache + shot
+
+    if self.RecoilPatternCache[shot] then
+        dir = self.RecoilPatternCache[shot]
+    else
+        self.RecoilPatternCache[1] = 0
+        if self.RecoilPatternCache[shot - 1] then
+            --dir = self.RecoilPatternCache[shot - 1]
+            math.randomseed(seed)
+            local stab = math.Clamp(self:GetValue("RecoilStability"), 0, 0.9)
+            local max = self:GetBaseValue("RPM") / 60 * (1 + stab * 1)
+            local cap = math.Clamp(30 + shot * (90 / max), 30, 120)
+            --dir = dir + math.Rand(-stab * 90, stab * 90)
+            dir = Lerp(0.55 + (shot / max) * 0.45, self.RecoilPatternCache[shot - 1], math.Rand(-(1 - stab) * cap, (1 - stab) * cap))
+            dir = Lerp(shot / max, dir, math.Clamp(dir * 2, -cap, cap))
+            math.randomseed(CurTime() + self:EntIndex())
+            self.RecoilPatternCache[shot] = dir
+            -- print(shot, cap, max, dir)
+        else
+            dir = 0
+        end
+    end
+
+    return math.NormalizeAngle(dir - 90)
 end

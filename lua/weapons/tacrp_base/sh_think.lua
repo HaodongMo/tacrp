@@ -51,6 +51,10 @@ function SWEP:Think()
         end
     end
 
+    if self:GetPatternCount() > 0 and (self:GetRecoilAmount() == 0 or self:GetReloading()) then
+        self:SetPatternCount(0)
+    end
+
     self:ThinkRecoil()
 
     self:ThinkSprint()

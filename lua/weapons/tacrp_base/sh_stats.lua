@@ -23,6 +23,7 @@ function SWEP:InvalidateCache()
     self.HookCache = {}
     self.StatScoreCache = {}
     self.MiscCache = {}
+    self.RecoilPatternCache = {}
 end
 
 function SWEP:RunHook(val, data)
