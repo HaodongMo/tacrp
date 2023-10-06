@@ -79,6 +79,7 @@ function SWEP:UseRecoilPatterns()
     if !TacRP.ConVars["recoilpattern"]:GetBool() then return false end
     if self:GetValue("ShootEnt") or self:GetValue("NoRecoilPattern") then return false end
     if self:GetValue("RPM") <= 100 then return false end
+    if self:GetCurrentFiremode() < 0 then return false end
 
     return true
 end
