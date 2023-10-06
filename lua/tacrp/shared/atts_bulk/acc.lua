@@ -229,13 +229,15 @@ ATT = {}
 ATT.PrintName = "Box Extender"
 ATT.Icon = Material("entities/tacrp_att_acc_extendedbelt.png", "mips smooth")
 ATT.Description = "Increase ammo capacity for machine guns significantly."
-ATT.Pros = {"Capacity"}
+ATT.Pros = {"stat.clipsize"}
+ATT.Cons = {"stat.reloadtime"}
 
 ATT.Category = "extendedbelt"
 
 ATT.SortOrder = 1
 
 ATT.Add_ClipSize = 25
+ATT.Mult_ReloadTimeMult = 1.05
 
 TacRP.LoadAtt(ATT, "acc_extendedbelt")
 -- #endregion
