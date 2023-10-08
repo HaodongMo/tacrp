@@ -21,10 +21,10 @@ SWEP.BalanceStats = {
     [TacRP.BALANCE_SBOX] = {
         Damage_Max = 24,
         Damage_Min = 12,
-        RPM = 650,
+        RPM = 700,
 
         BodyDamageMultipliers = {
-            [HITGROUP_HEAD] = 3.75,
+            [HITGROUP_HEAD] = 3,
             [HITGROUP_CHEST] = 1,
             [HITGROUP_STOMACH] = 1,
             [HITGROUP_LEFTARM] = 0.9,
@@ -96,11 +96,12 @@ SWEP.TTTReplace = {["weapon_zm_pistol"] = 0.5, ["weapon_ttt_glock"] = 0.5}
 SWEP.Damage_Max = 28
 SWEP.Damage_Min = 15
 SWEP.Range_Min = 1000 // distance for which to maintain maximum damage
-SWEP.Range_Max = 3000 // distance at which we drop to minimum damage
-SWEP.Penetration = 1 // units of metal this weapon can penetrate
-SWEP.ArmorPenetration = 0.6
+SWEP.Range_Max = 4000 // distance at which we drop to minimum damage
+SWEP.Penetration = 3 // units of metal this weapon can penetrate
+SWEP.ArmorPenetration = 0.65
+SWEP.ArmorBonus = 1.5
 
-SWEP.MuzzleVelocity = 9500
+SWEP.MuzzleVelocity = 11500
 
 SWEP.BodyDamageMultipliers = {
     [HITGROUP_HEAD] = 4.5,
@@ -135,8 +136,8 @@ SWEP.RecoilDissipationRate = 20
 SWEP.RecoilFirstShotMult = 1 // multiplier for the first shot's recoil amount
 
 SWEP.RecoilVisualKick = 1
-
 SWEP.RecoilKick = 5
+SWEP.RecoilStability = 0.1
 
 SWEP.RecoilSpreadPenalty = 0.002
 

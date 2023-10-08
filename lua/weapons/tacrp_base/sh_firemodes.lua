@@ -7,6 +7,9 @@ function SWEP:SwitchFiremode()
         fm = 1
     end
 
+    -- Since pattern is firemode dependent, it has to be reset when firemode switchs
+    self.RecoilPatternCache = {}
+
     self:SetFiremode(fm)
 end
 
