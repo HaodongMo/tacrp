@@ -372,6 +372,7 @@ end
 
 local mat_vignette = Material("tacrp/hud/vignette.png", "mips smooth")
 local mat_radial = Material("tacrp/grenades/radial.png", "mips smooth")
+local mat_bipod = Material("tacrp/hud/bipod.png", "mips smooth")
 
 local rackrisetime = 0
 local lastrow = 0
@@ -507,6 +508,31 @@ function SWEP:DrawBreathBar(x, y, w, h)
     end
 
     surface.DrawRect(x, y, w * self:GetBreath(), h)
+end
+
+function SWEP:DrawBipodHint(x, y, s)
+    surface.SetDrawColor(0, 0, 0, 150)
+    TacRP.DrawCorneredBox(x, y - s / 2, s, s, color_white)
+    if self:CanBipod() then
+        if self:GetInBipod() then
+            surface.SetDrawColor(255, 255, 255, 255)
+        else
+            local c = math.sin(CurTime() * 8) * 25 + 175
+            surface.SetDrawColor(c, c, c, 255)
+        end
+        surface.SetMaterial(mat_bipod)
+        surface.DrawTexturedRect(x, y - s / 2, s, s)
+
+        if !self:GetInBipod() then
+            surface.SetDrawColor(255, 255, 255, 255)
+            surface.SetMaterial(glyphs["MOUSE2"])
+            surface.DrawTexturedRect(x + s * 0.3333, y + s * 0.15, s / 3, s / 3)
+        end
+    else
+        surface.SetDrawColor(100, 100, 100, 255)
+        surface.SetMaterial(mat_bipod)
+        surface.DrawTexturedRect(x, y - s / 2, s, s)
+    end
 end
 
 function SWEP:DrawHUDBackground()
@@ -716,6 +742,10 @@ function SWEP:DrawHUDBackground()
                 surface.SetDrawColor(col)
                 surface.DrawLine(x + TacRP.SS(2), y + TacRP.SS(24), x + w - TacRP.SS(2), y + TacRP.SS(24))
                 self:DrawBottomBar(x, y, w, h)
+            end
+
+            if self:GetValue("Bipod") then
+                self:DrawBipodHint(x - h / 2 - TacRP.SS(4), y + h - TacRP.SS(10), h / 2)
             end
 
 
@@ -964,7 +994,7 @@ function SWEP:DrawHUDBackground()
         end
     end
 
-    self:DrawBreathBar(ScrW() * 0.5, ScrH() * 0.75, TacRP.SS(64), TacRP.SS(4))
+    self:DrawBreathBar(ScrW() * 0.5, ScrH() * 0.65, TacRP.SS(64), TacRP.SS(4))
 
     self:DrawGrenadeHUD()
 

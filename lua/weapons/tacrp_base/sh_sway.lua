@@ -23,6 +23,15 @@ function SWEP:GetSwayAmount(pure)
         sway = sway + self:GetForcedSwayAmount()
     end
 
+    if self:GetValue("Bipod") then
+        local f = self:Curve(math.Clamp((CurTime() - self.LastBipodTime) / 0.15, 0, 1))
+        if self:GetInBipod() then
+            sway = Lerp(f, sway, 0)
+        else
+            sway = Lerp(f, 0, sway)
+        end
+    end
+
     return sway
 end
 

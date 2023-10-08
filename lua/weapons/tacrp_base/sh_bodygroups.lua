@@ -1,6 +1,9 @@
 function SWEP:DoBodygroups(wm, custom_wm)
-    if !wm and !IsValid(self:GetOwner()) then return end
-    if !wm and self:GetOwner():IsNPC() then return end
+    if wm == nil then
+        wm = false
+        self:DoBodygroups(true)
+    end
+    if !wm and (!IsValid(self:GetOwner()) or self:GetOwner():IsNPC()) then return end
 
     local dbg = self:GetValue("DefaultBodygroups")
 
@@ -58,6 +61,7 @@ function SWEP:DoBodygroups(wm, custom_wm)
 end
 
 function SWEP:GetElements(holster)
+    if !self.AttachmentElements then return {} end
     local eles = {}
 
     for i, k in pairs(self.Attachments) do
@@ -75,16 +79,21 @@ function SWEP:GetElements(holster)
 
     local foldstock = false
     for i, k in pairs(eles) do
-        if self.AttachmentElements then
+        if self.AttachmentElements[k] then
             table.insert(eleatts, self.AttachmentElements[k])
             foldstock = foldstock or k == "foldstock"
         end
     end
 
+    -- Bipod bodygroup
+    if self:GetInBipod() and self.AttachmentElements["bipod"] then
+        table.insert(eleatts, self.AttachmentElements["bipod"])
+    end
+
     -- Hack: Always fold stock when weapon is holstered
     if IsValid(self:GetOwner()) and self:GetOwner():IsPlayer()
             and self:GetOwner():GetActiveWeapon() != self and !foldstock
-            and self.AttachmentElements and self.AttachmentElements["foldstock"] then
+            and self.AttachmentElements["foldstock"] then
         table.insert(eleatts, self.AttachmentElements["foldstock"])
     end
 

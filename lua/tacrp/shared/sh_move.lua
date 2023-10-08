@@ -41,7 +41,7 @@ function TacRP.Move(ply, mv, cmd)
 
     -- Remember last weapon to keep applying slowdown on shooting and melee
     if !wpn.ArcticTacRP then
-        if !IsValid(ply.LastTacRPWeapon) or ply.LastTacRPWeapon:GetOwner() ~= ply then
+        if !IsValid(ply.LastTacRPWeapon) or ply.LastTacRPWeapon:GetOwner() != ply then
             return
         else
             wpn = ply.LastTacRPWeapon
@@ -187,10 +187,13 @@ function TacRP.StartCommand(ply, cmd)
             -- kick = kick + recgain
         end
 
+        if wpn:GetInBipod() then
+            kick = kick * math.min(1, wpn:GetValue("BipodKick"))
+        end
+
         local eyeang = cmd:GetViewAngles()
 
         local suppressfactor = 1
-
         if wpn:UseRecoilPatterns() and wpn:GetCurrentFiremode() != 1 then
             local stab = math.Clamp(wpn:GetValue("RecoilStability"), 0, 0.9)
             local max = wpn:GetBaseValue("RPM") / 60 * (0.75 + stab * 0.833)

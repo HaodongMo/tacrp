@@ -82,6 +82,10 @@ SWEP.Spread = 0.01
 
 SWEP.ShootTimeMult = 1
 
+SWEP.Bipod = false // Weapon can deploy bipod
+SWEP.BipodRecoil = 0.35 // Recoil Amount multiplier per shot
+SWEP.BipodKick = 0.25 // Recoil Kick multiplier
+
 // SWEP.ShootChance = 1
 SWEP.JamWaitTime = 0.3
 SWEP.JamFactor = 0 // higher = more frequent jams. no jams at 0
@@ -303,6 +307,9 @@ SWEP.Sound_ScopeIn = ""
 SWEP.Sound_MeleeAttack = ""
 SWEP.Sound_DryFire = "TacRP/weapons/dryfire_pistol-1.wav"
 SWEP.Sound_Jam = "TacRP/malfunction.wav"
+
+SWEP.Sound_BipodDown = "tacrp/bipod_down.wav"
+SWEP.Sound_BipodUp = "tacrp/bipod_up.wav"
 
 SWEP.Sound_MeleeSwing = ""
 
@@ -537,9 +544,13 @@ function SWEP:SetupDataTables()
     self:NetworkVar("Bool", 10, "BlindFireRight") // bleh, but actually less networking load than using an integer (32 bit)
     self:NetworkVar("Bool", 11, "Jammed")
     self:NetworkVar("Bool", 12, "Ready")
+    self:NetworkVar("Bool", 13, "InBipod")
 
     self:NetworkVar("Angle", 0, "FreeAimAngle")
     self:NetworkVar("Angle", 1, "LastAimAngle")
+    self:NetworkVar("Angle", 2, "BipodAngle")
+
+    self:NetworkVar("Vector", 0, "BipodPos")
 
     self:NetworkVar("Entity", 0, "HolsterEntity")
 

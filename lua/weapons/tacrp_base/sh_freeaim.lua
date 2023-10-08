@@ -17,6 +17,15 @@ function SWEP:ThinkFreeAim()
             max = max * 0.25
         end
 
+        if self:GetValue("Bipod") then
+            local f = self:Curve(math.Clamp((CurTime() - self.LastBipodTime) / 0.25, 0, 1))
+            if self:GetInBipod() then
+                max = Lerp(f, max, 0)
+            else
+                max = Lerp(f, 0, max)
+            end
+        end
+
         diff.p = math.NormalizeAngle(diff.p)
         diff.y = math.NormalizeAngle(diff.y)
 

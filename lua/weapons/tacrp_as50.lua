@@ -20,7 +20,7 @@ SWEP.SlotAlt = 3
 
 SWEP.BalanceStats = {
     [TacRP.BALANCE_SBOX] = {
-        Description = "Semi-automatic anti-materiel rifle with integral bipod.\nCan kill in up to 2 shots regardless of distance.\nEquipped with a 12x scope by default.",
+        Description = "Semi-automatic anti-materiel rifle with integral bipod.\nEquipped with a 12x scope by default.",
 
         Damage_Max = 70,
         Damage_Min = 140,
@@ -126,7 +126,7 @@ SWEP.RecoilMaximum = 2
 SWEP.RecoilResetTime = 0.25
 SWEP.RecoilDissipationRate = 1.5
 SWEP.RecoilFirstShotMult = 0.8
-SWEP.RecoilCrouchMult = 0.25
+// SWEP.RecoilCrouchMult = 0.25
 
 SWEP.RecoilVisualKick = 4
 SWEP.RecoilKick = 12
@@ -147,9 +147,13 @@ SWEP.SprintToFireTime = 0.65 // multiplies how long it takes to recover from spr
 
 SWEP.Sway = 3
 SWEP.ScopedSway = 0.25
-SWEP.SwayCrouchMult = 0.15
+// SWEP.SwayCrouchMult = 0.15
 
 SWEP.FreeAimMaxAngle = 10
+
+SWEP.Bipod = true
+SWEP.BipodRecoil = 0.25
+SWEP.BipodKick = 0.35
 
 // hold types
 

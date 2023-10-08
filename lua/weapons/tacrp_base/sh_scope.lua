@@ -177,6 +177,11 @@ function SWEP:ThinkSights()
         return
     end
 
+    if IsFirstTimePredicted() and self:GetValue("Bipod") and self:GetOwner():KeyPressed(IN_ATTACK2) and !self:GetInBipod() and self:CanBipod() then
+        self:EnterBipod()
+        return
+    end
+
     local FT = FrameTime()
 
     if self:GetSafe() then return end

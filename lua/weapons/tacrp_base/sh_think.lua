@@ -101,6 +101,10 @@ function SWEP:Think()
         self:Idle()
     end
 
+    if self:GetValue("Bipod") and self:GetInBipod() and !self:CanBipod() then
+        self:ExitBipod()
+    end
+
     if CLIENT then
 
         self:ThinkNearWall()
@@ -124,6 +128,8 @@ function SWEP:Think()
                 self:DoDeployAnimation()
             end
         end
+
+        self:CanBipod()
     end
 
     self:RunHook("Hook_PostThink")

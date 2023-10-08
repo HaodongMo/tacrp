@@ -6,6 +6,7 @@ local ATT = {}
 -- #region acc_bipod
 ------------------------------
 ATT = {}
+ATT.Ignore = true
 
 ATT.PrintName = "Bipod"
 ATT.Icon = Material("entities/tacrp_att_acc_bipod.png", "mips smooth")
@@ -13,6 +14,7 @@ ATT.Description = "Foldable support that stabilizes the weapon when deployed."
 ATT.Pros = {"stat.recoilcrouch", "stat.swaycrouch"}
 
 ATT.Category = "acc_bipod"
+
 
 ATT.SortOrder = 5.5
 

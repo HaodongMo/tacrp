@@ -10,7 +10,7 @@ SWEP.Category = "Tactical RP"
 SWEP.SubCatTier = "3Security"
 SWEP.SubCatType = "6Precision Rifle"
 
-SWEP.Description = "Battle rifle with slow fire rate but very high damage and armor penetration."
+SWEP.Description = "Battle rifle with slow fire rate but very high damage and armor penetration. Has a grippod that provides some stability if deployed."
 
 SWEP.ViewModel = "models/weapons/tacint/v_dsa58.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_dsa58.mdl"
@@ -153,6 +153,10 @@ SWEP.Sway = 1.5
 SWEP.ScopedSway = 0.1
 
 SWEP.FreeAimMaxAngle = 6
+
+SWEP.Bipod = true
+SWEP.BipodRecoil = 0.5
+SWEP.BipodKick = 0.4
 
 // hold types
 

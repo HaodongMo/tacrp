@@ -146,6 +146,10 @@ SWEP.ScopedSway = 0.75
 
 SWEP.FreeAimMaxAngle = 7
 
+SWEP.Bipod = true
+SWEP.BipodRecoil = 0.35
+SWEP.BipodKick = 0.25
+
 // hold types
 
 SWEP.HoldType = "ar2"
@@ -245,7 +249,15 @@ SWEP.AttachmentElements = {
         BGs_VM = {
             {2, 1}
         },
-    }
+    },
+    ["bipod"] = {
+        BGs_VM = {
+            {3, 1}
+        },
+        BGs_WM = {
+            {3, 1}
+        },
+    },
 }
 
 //ValveBiped.MG4_root

@@ -40,6 +40,10 @@ function SWEP:ApplyRecoil()
         rps = rps * self:GetValue("RecoilCrouchMult")
     end
 
+    if self:GetInBipod() then
+        rps = rps * math.min(1, self:GetValue("BipodRecoil"))
+    end
+
     rec = rec + rps
 
     rec = math.Clamp(rec, 0, self:GetValue("RecoilMaximum"))
@@ -60,6 +64,11 @@ function SWEP:ApplyRecoil()
 
     vis_kick = vis_kick
     vis_shake = 0
+
+    if self:GetInBipod() then
+        vis_kick = vis_kick * math.min(1, self:GetValue("BipodKick"))
+        vis_shake = math.max(0, 1 - self:GetValue("BipodKick"))
+    end
 
     local vis_kick_v = vis_kick * 1
     local vis_kick_h = vis_kick * util.SharedRandom("tacrp_vis_kick_h", -1, 1)
