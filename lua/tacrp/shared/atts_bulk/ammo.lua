@@ -461,7 +461,8 @@ ATT.Add_RecoilKick = 0.25
 ATT.Mult_RecoilKick = 1.15
 ATT.Mult_Spread = 1.15
 ATT.Mult_MuzzleVelocity = 1.25
-ATT.Mult_Range_Min = 1.5
+ATT.Add_Range_Min = 250
+ATT.Mult_Range_Min = 1.25
 
 TacRP.LoadAtt(ATT, "ammo_magnum")
 -- #endregion
@@ -538,18 +539,16 @@ ATT.FullName = "Hollowpoint Rounds"
 ATT.Icon = Material("entities/tacrp_att_acc_hollowpoints.png", "mips smooth")
 ATT.Description = "Bullets that expand on hit, improving damage to flesh targets and limbs."
 ATT.Pros = {"att.procon.limb"}
-ATT.Cons = {"att.procon.armor", "stat.penetration", "stat.range"}
+ATT.Cons = {"att.procon.armor", "stat.penetration"}
 
 ATT.Category = "ammo_pistol"
 
 ATT.SortOrder = 1
 
-ATT.Mult_Range_Max = 0.85
-
 ATT.Mult_Penetration = 0.2
 
 ATT.Mult_ArmorPenetration = 0.8
-ATT.Mult_ArmorBonus = 0.75
+ATT.Mult_ArmorBonus = 0.5
 
 ATT.Override_BodyDamageMultipliersExtra = {
     [HITGROUP_LEFTARM] = -1,
@@ -563,12 +562,44 @@ TacRP.LoadAtt(ATT, "ammo_pistol_hollowpoints")
 -- #endregion
 
 ------------------------------
+-- #region ammo_pistol_match
+------------------------------
+ATT = {}
+
+ATT.PrintName = "Match"
+ATT.FullName = "Pistol Match Rounds"
+ATT.Icon = Material("entities/tacrp_att_ammo_pistol_match.png", "mips smooth")
+ATT.Description = "Bullets with improved range and accuracy."
+ATT.Pros = {"stat.spread", "stat.range_max"}
+ATT.Cons = {"stat.hipfirespread", "stat.peekpenalty"}
+
+ATT.Category = "ammo_pistol"
+
+ATT.SortOrder = 4.5
+
+ATT.Mult_Spread = 0.5
+ATT.Add_Range_Max = 1000
+ATT.Add_HipFireSpreadPenalty = 0.01
+ATT.Add_PeekPenaltyFraction = 0.05
+
+ATT.Override_BodyDamageMultipliersExtra = {
+    [HITGROUP_LEFTARM] = 0.95,
+    [HITGROUP_RIGHTARM] = 0.95,
+    [HITGROUP_LEFTLEG] = 0.85,
+    [HITGROUP_RIGHTLEG] = 0.85,
+    [HITGROUP_GEAR] = 0.85,
+}
+
+TacRP.LoadAtt(ATT, "ammo_pistol_match")
+-- #endregion
+
+------------------------------
 -- #region ammo_rifle_match
 ------------------------------
 ATT = {}
 
 ATT.PrintName = "Match"
-ATT.FullName = "Match Rounds"
+ATT.FullName = "Rifle Match Rounds"
 ATT.Icon = Material("entities/tacrp_att_acc_match.png", "mips smooth")
 ATT.Description = "Bullets with greatly improved accuracy."
 ATT.Pros = {"stat.spread", "stat.muzzlevelocity", "stat.bloomintensity"}

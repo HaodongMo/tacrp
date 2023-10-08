@@ -1170,6 +1170,7 @@ SWEP.StatDisplay = {
             return math.min(100, math.Round(val * 100, 0))
         end,
         Unit = "%",
+        LowerIsBetter = true,
     },
     {
         Name = "stat.quickscope",
