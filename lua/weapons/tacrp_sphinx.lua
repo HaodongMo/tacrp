@@ -40,13 +40,15 @@ SWEP.BalanceStats = {
         ReloadSpeedMult = 1,
     },
     [TacRP.BALANCE_TTT] = {
-        Damage_Max = 14,
+        Damage_Max = 15,
         Damage_Min = 6,
         RPM = 500,
+        RPMMultBurst = 2.5,
+        PostBurstDelay = 0.35,
 
-        RecoilMaximum = 7,
-        RecoilResetTime = 0.12,
-        RecoilDissipationRate = 7,
+        RecoilMaximum = 6,
+        RecoilResetTime = 0.11,
+        RecoilDissipationRate = 12,
         RecoilFirstShotMult = 0.6,
         RecoilSpreadPenalty = 0.008,
 

@@ -22,6 +22,8 @@ SWEP.BalanceStats = {
         Damage_Max = 12,
         Damage_Min = 10,
 
+        RecoilKick = 2,
+
         MoveSpeedMult = 0.9,
         ShootingSpeedMult = 0.8,
         SightedSpeedMult = 0.85,
@@ -112,9 +114,10 @@ SWEP.RecoilResetTime = 0.2
 SWEP.RecoilDissipationRate = 30
 SWEP.RecoilFirstShotMult = 1
 
-SWEP.RecoilVisualKick = 0.5
+SWEP.RecoilVisualKick = 0.75
 
-SWEP.RecoilKick = 1
+SWEP.RecoilKick = 1.5
+SWEP.RecoilStability = 0.1
 
 SWEP.RecoilSpreadPenalty = 0.0012
 
