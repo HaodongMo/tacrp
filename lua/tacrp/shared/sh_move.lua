@@ -191,7 +191,7 @@ function TacRP.StartCommand(ply, cmd)
 
         local suppressfactor = 1
 
-        if wpn:UseRecoilPatterns() then
+        if wpn:UseRecoilPatterns() and wpn:GetCurrentFiremode() != 1 then
             local stab = math.Clamp(wpn:GetValue("RecoilStability"), 0, 0.9)
             local max = wpn:GetBaseValue("RPM") / 60 * (0.75 + stab * 0.833)
             suppressfactor = math.min(3, 1 + (wpn:GetPatternCount() / max))

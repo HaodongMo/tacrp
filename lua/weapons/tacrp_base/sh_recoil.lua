@@ -116,7 +116,9 @@ function SWEP:GetRecoilPatternDirection(shot)
             local cap = 120 --math.Clamp(30 + shot * (90 / max), 30, 120)
             --dir = dir + math.Rand(-stab * 90, stab * 90)
             dir = Lerp(0.4 + (shot / max) * 0.6, self.RecoilPatternCache[shot - 1], math.Rand(-(1 - stab) * cap, (1 - stab) * cap))
-            dir = Lerp(shot / max, dir, math.Clamp(dir * 1.667, -cap, cap))
+            if self:GetCurrentFiremode() != 1 then
+                dir = Lerp(shot / max, dir, math.Clamp(dir * 1.667, -cap, cap))
+            end
             math.randomseed(CurTime() + self:EntIndex())
             self.RecoilPatternCache[shot] = dir
             -- print(shot, cap, max, dir)
