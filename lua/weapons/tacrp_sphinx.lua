@@ -10,7 +10,7 @@ SWEP.Category = "Tactical RP"
 SWEP.SubCatTier = "2Operator"
 SWEP.SubCatType = "1Sidearm"
 
-SWEP.Description = "Competition pistol with low recoil and a high cyclic rate."
+SWEP.Description = "Burst fire pistol with high firerate but long burst delay."
 
 SWEP.ViewModel = "models/weapons/tacint/v_sphinx.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_sphinx.mdl"
@@ -23,7 +23,7 @@ SWEP.BalanceStats = {
         Damage_Min = 14,
 
         BodyDamageMultipliers = {
-            [HITGROUP_HEAD] = 4.25,
+            [HITGROUP_HEAD] = 5,
             [HITGROUP_CHEST] = 1,
             [HITGROUP_STOMACH] = 1,
             [HITGROUP_LEFTARM] = 1,
@@ -90,8 +90,8 @@ SWEP.Damage_Min = 11
 SWEP.Range_Min = 1000 // distance for which to maintain maximum damage
 SWEP.Range_Max = 4000 // distance at which we drop to minimum damage
 SWEP.Penetration = 3 // units of metal this weapon can penetrate
-SWEP.ArmorPenetration = 0.6
-SWEP.ArmorBonus = 1.25
+SWEP.ArmorPenetration = 0.65
+SWEP.ArmorBonus = 1.5
 
 SWEP.MuzzleVelocity = 17500
 
@@ -108,11 +108,12 @@ SWEP.BodyDamageMultipliers = {
 
 // misc. shooting
 
-SWEP.Firemode = 1
+SWEP.Firemodes = {-3, 1}
+SWEP.RunawayBurst = true
 
 SWEP.RPM = 750
-SWEP.RPMMultBurst = 1.2
-SWEP.PostBurstDelay = 0.06
+SWEP.RPMMultBurst = 1.5
+SWEP.PostBurstDelay = 0.3
 
 SWEP.Spread = 0.0035
 
@@ -319,7 +320,7 @@ SWEP.Attachments = {
     },
     [6] = {
         PrintName = "Trigger",
-        Category = {"trigger_semi"},
+        Category = {"trigger_burst"},
         AttachSound = "TacRP/weapons/flashlight_on.wav",
         DetachSound = "TacRP/weapons/flashlight_off.wav",
     },
