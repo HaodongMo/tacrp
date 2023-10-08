@@ -475,9 +475,9 @@ ATT.PrintName = "Steel Core"
 ATT.FullName = "Steel Core Rounds"
 
 ATT.Icon = Material("entities/tacrp_att_ammo_pistol_ap.png", "mips smooth")
-ATT.Description = "Hardened bullets shatter and penetrate armor, but lower controlability."
+ATT.Description = "Hardened bullets shatter and penetrate armor, but destabilize recoil."
 ATT.Pros = {"att.procon.armor", "stat.penetration"}
-ATT.Cons = {"stat.recoilkick"}
+ATT.Cons = {"stat.recoilkick", "stat.recoilstability"}
 
 ATT.Category = "ammo_pistol"
 
@@ -487,10 +487,11 @@ ATT.SortOrder = 1
 -- ATT.Mult_Damage_Min = 0.9
 
 ATT.Add_Penetration = 5
-ATT.Add_ArmorPenetration = 0.4
-ATT.Add_ArmorBonus = 0.5
+ATT.Add_ArmorPenetration = 0.25
+ATT.Add_ArmorBonus = 0.25
 
 ATT.Add_RecoilKick = 1
+ATT.Mult_RecoilStability = 0.75
 
 TacRP.LoadAtt(ATT, "ammo_pistol_ap")
 -- #endregion
