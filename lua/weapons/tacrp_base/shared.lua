@@ -8,6 +8,15 @@ SWEP.Category = "Tactical RP"
 
 SWEP.Description = ""
 
+SWEP.Trivia_Caliber = nil
+SWEP.Trivia_Manufacturer = nil
+SWEP.Trivia_Year = nil // Production Year
+
+SWEP.Faction = TacRP.FACTION_NEUTRAL // Only used in trivia for now
+// Valid values: TacRP.FACTION_NEUTRAL, TacRP.FACTION_COALITION, TacRP.FACTION_MILITIA
+
+SWEP.Credits = nil // Multiline string like Description
+
 SWEP.ViewModel = ""
 SWEP.WorldModel = ""
 

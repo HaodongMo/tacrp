@@ -100,6 +100,17 @@ function SWEP:GetBestFiremode(base)
     end
 end
 
+function SWEP:GetSubClassName(tier)
+    if self.SubCatType then
+        local type_txt = TacRP:TryTranslate(self.SubCatType)
+        if tier and self.SubCatTier and self.SubCatTier != "9Special" then
+            type_txt = TacRP:GetPhrase("cust.type_tier", {tier = TacRP:TryTranslate(self.SubCatTier), type = type_txt})
+        end
+        return type_txt
+    end
+    return "Weapon"
+end
+
 local hitgroups = {
     [HITGROUP_HEAD] = 0.1,
     [HITGROUP_CHEST] = 0.2,

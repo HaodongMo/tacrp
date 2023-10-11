@@ -321,3 +321,13 @@ L["spacer.sway"] = "Sway"
 L["spacer.sway.desc"] = "Stats related to the weapon's deviation from point of aim."
 L["spacer.misc"] = "Miscellaneous"
 L["spacer.misc.desc"] = "Stats that do not belong in any major category."
+
+L["trivia.year"] = "Production Year"
+L["trivia.caliber"] = "Caliber"
+L["trivia.manufacturer"] = "Manufacturer"
+L["trivia.faction"] = "Faction"
+L["trivia.unknown"] = "Unknown"
+
+L["faction.coalition"] = "Coalition" -- "Counter-Terrorists"
+L["faction.militia"] = "Militia" -- "Terrorists"
+L["faction.neutral"] = "Non-Aligned" -- non-faction specific

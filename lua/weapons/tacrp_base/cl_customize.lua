@@ -119,10 +119,7 @@ function SWEP:CreateCustomizeHUD()
         end
 
         if self.SubCatTier and self.SubCatType then
-            local type_txt = TacRP:TryTranslate(self.SubCatType)
-            if TacRP.UseTiers() and self.SubCatTier != "9Special" then
-                type_txt = TacRP:GetPhrase("cust.type_tier", {tier = TacRP:TryTranslate(self.SubCatTier), type = type_txt})
-            end
+            local type_txt = self:GetSubClassName(TacRP.UseTiers())
             surface.SetFont("TacRP_Myriad_Pro_12")
             local type_w = surface.GetTextSize(type_txt)
 
@@ -442,10 +439,12 @@ function SWEP:CreateCustomizeHUD()
             end
         end
     else
+        local tabs_h = TacRP.SS(8)
+
         local desc_box = vgui.Create("DPanel", bg)
-        desc_box:SetSize(TacRP.SS(172), TacRP.SS(48))
-        desc_box:SetPos(scrw - TacRP.SS(172) - airgap, stack + smallgap)
-        stack = stack + TacRP.SS(48) + smallgap
+        desc_box.PrintName = "Description"
+        desc_box:SetSize(TacRP.SS(172), TacRP.SS(36))
+        desc_box:SetPos(scrw - TacRP.SS(172) - airgap, stack + smallgap + tabs_h + TacRP.SS(2))
         desc_box.Paint = function(self2, w, h)
             if !IsValid(self) then return end
 
@@ -453,10 +452,10 @@ function SWEP:CreateCustomizeHUD()
             surface.DrawRect(0, 0, w, h)
             TacRP.DrawCorneredBox(0, 0, w, h)
 
-            surface.SetFont("TacRP_Myriad_Pro_8")
-            surface.SetTextColor(255, 255, 255)
-            surface.SetTextPos(TacRP.SS(6), TacRP.SS(4))
-            surface.DrawText(TacRP:GetPhrase("cust.description"))
+            -- surface.SetFont("TacRP_Myriad_Pro_8")
+            -- surface.SetTextColor(255, 255, 255)
+            -- surface.SetTextPos(TacRP.SS(6), TacRP.SS(4))
+            -- surface.DrawText(TacRP:GetPhrase("cust.description"))
 
             if !self.MiscCache["cust_desc"] then
                 self.MiscCache["cust_desc"] = TacRP.MultiLineText(self:GetValue("Description"), w - TacRP.SS(8), "TacRP_Myriad_Pro_8")
@@ -465,10 +464,147 @@ function SWEP:CreateCustomizeHUD()
             for i, k in pairs(self.MiscCache["cust_desc"]) do
                 surface.SetFont("TacRP_Myriad_Pro_8")
                 surface.SetTextColor(255, 255, 255)
-                surface.SetTextPos(TacRP.SS(4), TacRP.SS(4 + 8 + 1) + (TacRP.SS(8 * (i - 1))))
+                surface.SetTextPos(TacRP.SS(4), TacRP.SS(2) + (TacRP.SS(8 * (i - 1))))
                 surface.DrawText(k)
             end
         end
+
+        local trivia_box = vgui.Create("DPanel", bg)
+        trivia_box.PrintName = "Trivia"
+        trivia_box:SetSize(TacRP.SS(172), TacRP.SS(36))
+        trivia_box:SetPos(scrw - TacRP.SS(172) - airgap, stack + smallgap + tabs_h + TacRP.SS(2))
+        trivia_box.Paint = function(self2, w, h)
+            if !IsValid(self) then return end
+
+            surface.SetDrawColor(0, 0, 0, 150)
+            surface.DrawRect(0, 0, w, h)
+            TacRP.DrawCorneredBox(0, 0, w, h)
+
+            surface.SetFont("TacRP_Myriad_Pro_10")
+            surface.SetTextColor(255, 255, 255)
+
+            surface.SetTextPos(TacRP.SS(4), TacRP.SS(6))
+            surface.DrawText(TacRP:TryTranslate(self:GetValue("Trivia_Manufacturer")) or TacRP:GetPhrase("trivia.unknown"))
+
+            surface.SetTextPos(TacRP.SS(4), TacRP.SS(22))
+            surface.DrawText(TacRP:TryTranslate(self:GetValue("Trivia_Year")) or TacRP:GetPhrase("trivia.unknown"))
+
+            surface.SetTextPos(w / 2, TacRP.SS(6))
+            surface.DrawText(TacRP:TryTranslate(self:GetValue("Trivia_Caliber")) or TacRP:GetPhrase("trivia.unknown"))
+
+            surface.SetTextPos(w / 2, TacRP.SS(22))
+            surface.DrawText(TacRP:GetPhrase(TacRP.FactionToPhrase[self:GetValue("Faction")]))
+
+            surface.SetFont("TacRP_Myriad_Pro_6")
+            surface.SetTextColor(255, 255, 255)
+
+            surface.SetTextPos(TacRP.SS(4), TacRP.SS(2))
+            surface.DrawText(TacRP:GetPhrase("trivia.manufacturer"))
+
+            surface.SetTextPos(TacRP.SS(4), TacRP.SS(18))
+            surface.DrawText(TacRP:GetPhrase("trivia.year"))
+
+            surface.SetTextPos(w / 2, TacRP.SS(2))
+            surface.DrawText(TacRP:GetPhrase("trivia.caliber"))
+
+            surface.SetTextPos(w / 2, TacRP.SS(18))
+            surface.DrawText(TacRP:GetPhrase("trivia.faction"))
+        end
+
+        local credits_box = vgui.Create("DPanel", bg)
+        credits_box.PrintName = "Credits"
+        credits_box:SetSize(TacRP.SS(172), TacRP.SS(36))
+        credits_box:SetPos(scrw - TacRP.SS(172) - airgap, stack + smallgap + tabs_h + TacRP.SS(2))
+        credits_box.Paint = function(self2, w, h)
+            if !IsValid(self) or !self.Credits then return end
+
+            surface.SetDrawColor(0, 0, 0, 150)
+            surface.DrawRect(0, 0, w, h)
+            TacRP.DrawCorneredBox(0, 0, w, h)
+
+            if !self.MiscCache["cust_credits"] then
+                self.MiscCache["cust_credits"] = TacRP.MultiLineText(self.Credits, w - TacRP.SS(8), "TacRP_Myriad_Pro_8")
+            end
+
+            for i, k in ipairs(self.MiscCache["cust_credits"]) do
+                surface.SetFont("TacRP_Myriad_Pro_8")
+                surface.SetTextColor(255, 255, 255)
+                surface.SetTextPos(TacRP.SS(4), TacRP.SS(2) + TacRP.SS(8 * (i - 1)))
+                surface.DrawText(k)
+            end
+        end
+
+        local tabs = {desc_box}
+        if self.Trivia_Caliber or self.Trivia_Manufacturer or self.Trivia_Year then
+            table.insert(tabs, trivia_box)
+        else
+            trivia_box:Hide()
+        end
+        if self.Credits then
+            table.insert(tabs, credits_box)
+        else
+            trivia_box:Hide()
+        end
+        self.ActiveDescTab = self.ActiveDescTab or 1
+
+        local tabs_w = TacRP.SS(172) / #tabs - #tabs * TacRP.SS(0.5)
+        for i = 1, #tabs do
+            if i != self.ActiveDescTab then
+                tabs[i]:Hide()
+            end
+
+            local tab_button = vgui.Create("DLabel", bg)
+            tab_button.TabIndex = i
+            tab_button:SetSize(tabs_w, tabs_h)
+            tab_button:SetPos(scrw - TacRP.SS(172) - airgap + (TacRP.SS(2) + tabs_w) * (i - 1), stack + smallgap)
+            tab_button:SetText("")
+            tab_button:SetMouseInputEnabled(true)
+            tab_button:MoveToFront()
+            tab_button.Paint = function(self2, w2, h2)
+                if !IsValid(self) then return end
+
+                local hover = #tabs > 1 and self2:IsHovered()
+                local selected = #tabs > 1 and self.ActiveDescTab == i
+
+                local col_bg = Color(0, 0, 0, 150)
+                local col_corner = Color(255, 255, 255)
+                local col_text = Color(255, 255, 255)
+
+                if selected then
+                    col_bg = Color(150, 150, 150, 150)
+                    col_corner = Color(50, 50, 255)
+                    col_text = Color(0, 0, 0)
+                    if hover then
+                        col_bg = Color(255, 255, 255)
+                        col_corner = Color(150, 150, 255)
+                        col_text = Color(0, 0, 0)
+                    end
+                elseif hover then
+                    col_bg = Color(255, 255, 255)
+                    col_corner = Color(0, 0, 0)
+                    col_text = Color(0, 0, 0)
+                end
+
+                surface.SetDrawColor(col_bg)
+                surface.DrawRect(0, 0, w2, h2)
+                TacRP.DrawCorneredBox(0, 0, w2, h2, col_corner)
+
+                draw.SimpleText(tabs[i].PrintName, "TacRP_Myriad_Pro_8", w2 / 2, h2 / 2, col_text, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+            end
+            tab_button.DoClick = function(self2)
+                if self2.TabIndex == self.ActiveDescTab then return end
+                self.ActiveDescTab = self2.TabIndex
+                for j = 1, #tabs do
+                    if j != self.ActiveDescTab then
+                        tabs[j]:Hide()
+                    else
+                        tabs[j]:Show()
+                    end
+                end
+            end
+        end
+
+        stack = stack + TacRP.SS(48) + smallgap
     end
 
     if !self:GetValue("NoStatBox") then

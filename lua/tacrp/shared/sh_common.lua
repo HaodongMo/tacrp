@@ -130,6 +130,16 @@ end
 
 TacRP.AreTheGrenadeAnimsReadyYet = true
 
+TacRP.FACTION_NEUTRAL = 0
+TacRP.FACTION_COALITION = 1
+TacRP.FACTION_MILITIA = 2
+
+TacRP.FactionToPhrase = {
+    [TacRP.FACTION_NEUTRAL] = "faction.neutral",
+    [TacRP.FACTION_COALITION] = "faction.coalition",
+    [TacRP.FACTION_MILITIA] = "faction.militia",
+}
+
 function TacRP.ShouldWeFunny()
     local i = TacRP.ConVars["funny_loudnoises"]:GetInt()
     return i == 2 or (i == 1 and (os.date("%m-%d") == "04-01" or math.random() <= 0.01))
@@ -189,7 +199,7 @@ TacRP.BalanceDefaults = {
         ShootingSpeedMult = 1,
         SightedSpeedMult = 1,
         ReloadSpeedMult = 1,
-		MidAirSpreadPenalty = 0.025
+        MidAirSpreadPenalty = 0.025
     },
 }
 
