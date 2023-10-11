@@ -20,11 +20,11 @@ SWEP.Slot = 2
 
 SWEP.BalanceStats = {
     [TacRP.BALANCE_SBOX] = {
-        Damage_Max = 30,
-        Damage_Min = 50,
-
+        Damage_Max = 32,
+        Damage_Min = 55,
         Range_Min = 1200,
         Range_Max = 3000,
+        ArmorPenetration = 0.95,
 
         MoveSpeedMult = 0.8,
         ShootingSpeedMult = 0.6,
@@ -82,8 +82,8 @@ SWEP.BalanceStats = {
     },
     [TacRP.BALANCE_OLDSCHOOL] = {
         HipFireSpreadPenalty = 0.015,
-		RecoilSpreadPenalty = 0.01,
-		RecoilMaximum = 10
+        RecoilSpreadPenalty = 0.01,
+        RecoilMaximum = 10
     }
 }
 
@@ -235,6 +235,21 @@ SWEP.AnimationTranslationTable = {
     ["deploy"] = "draw",
     ["fire"] = {"shoot1", "shoot2"},
     ["blind_fire"] = "blind_shoot1"
+}
+
+SWEP.ProceduralIronFire = {
+    vm_pos = Vector(0, -0.75, -0.12),
+    vm_ang = Angle(0, 0.3, 0),
+    t = 0.25,
+    tmax = 0.25,
+    bones = {
+        {
+            bone = "ValveBiped.bolt_handle",
+            pos = Vector(0, 0, -3),
+            t0 = 0.05,
+            t1 = 0.2,
+        },
+    },
 }
 
 // attachments
