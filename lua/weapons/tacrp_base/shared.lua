@@ -7,6 +7,7 @@ SWEP.PrintName = "Arctic's Tactical RP Base"
 SWEP.Category = "Tactical RP"
 
 SWEP.Description = ""
+SWEP.Description_Quote = nil // Italics, always on last line. Make sure to save some space for it (may overlap)
 
 SWEP.Trivia_Caliber = nil
 SWEP.Trivia_Manufacturer = nil

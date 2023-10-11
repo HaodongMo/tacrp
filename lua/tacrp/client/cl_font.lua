@@ -17,6 +17,10 @@ local sizes_to_make = {
     32
 }
 
+local italic_sizes_to_make = {
+    8,
+}
+
 local unscaled_sizes_to_make = {
     24,
     32,
@@ -60,7 +64,17 @@ local function generatefonts()
                 blursize = 6,
                 extended = true,
             } )
+        end
 
+        for _, i in pairs(italic_sizes_to_make) do
+            surface.CreateFont( "TacRP_" .. fontname .. "_" .. tostring(i) .. "_Italic", {
+                font = font,
+                size = TacRP.SS(i),
+                weight = 0,
+                antialias = true,
+                extended = true,
+                italic = true,
+            } )
         end
 
         for _, i in pairs(unscaled_sizes_to_make) do

@@ -10,7 +10,8 @@ SWEP.Category = "Tactical RP" // "Tactical RP (Extras)"
 SWEP.SubCatTier = "2Operator"
 SWEP.SubCatType = "4Assault Rifle"
 
-SWEP.Description = "High damage assault rifle able to one-tap through armor.\nAn insurgent's greatest ally and a terrorist's best friend."
+SWEP.Description = "Iconic Soviet assault rifle. A rugged and simple design that inspired countless clones and derivatives."
+SWEP.Description_Quote = "The quintessential bad guy gun."
 
 SWEP.ViewModel = "models/weapons/tacint_extras/v_ak47.mdl"
 SWEP.WorldModel = "models/weapons/tacint_extras/w_ak47.mdl"
@@ -26,8 +27,6 @@ SWEP.BalanceStats = {
         ReloadSpeedMult = 1,
     },
     [TacRP.BALANCE_TTT] = {
-        Description = "Classic high damage assault rifle.\nAn insurgent's greatest ally and a terrorist's best friend.",
-
         Damage_Max = 20,
         Damage_Min = 15,
         Range_Min = 750,
@@ -83,7 +82,7 @@ SWEP.Damage_Min = 22
 SWEP.Range_Min = 1200 // distance for which to maintain maximum damage
 SWEP.Range_Max = 4500 // distance at which we drop to minimum damage
 SWEP.Penetration = 11 // units of metal this weapon can penetrate
-SWEP.ArmorPenetration = 0.775
+SWEP.ArmorPenetration = 0.8
 SWEP.ArmorBonus = 1.25
 
 SWEP.BodyDamageMultipliers = {

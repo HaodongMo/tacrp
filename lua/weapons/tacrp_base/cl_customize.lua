@@ -467,6 +467,13 @@ function SWEP:CreateCustomizeHUD()
                 surface.SetTextPos(TacRP.SS(4), TacRP.SS(2) + (TacRP.SS(8 * (i - 1))))
                 surface.DrawText(k)
             end
+
+            if self.Description_Quote then
+                surface.SetFont("TacRP_Myriad_Pro_8_Italic")
+                surface.SetTextColor(255, 255, 255)
+                surface.SetTextPos(TacRP.SS(4), TacRP.SS(26))
+                surface.DrawText(self.Description_Quote)
+            end
         end
 
         local trivia_box = vgui.Create("DPanel", bg)
