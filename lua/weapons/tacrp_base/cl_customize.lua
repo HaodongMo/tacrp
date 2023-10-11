@@ -442,7 +442,7 @@ function SWEP:CreateCustomizeHUD()
         local tabs_h = TacRP.SS(8)
 
         local desc_box = vgui.Create("DPanel", bg)
-        desc_box.PrintName = "Description"
+        desc_box.PrintName = TacRP:GetPhrase("cust.description2")
         desc_box:SetSize(TacRP.SS(172), TacRP.SS(36))
         desc_box:SetPos(scrw - TacRP.SS(172) - airgap, stack + smallgap + tabs_h + TacRP.SS(2))
         desc_box.Paint = function(self2, w, h)
@@ -470,7 +470,7 @@ function SWEP:CreateCustomizeHUD()
         end
 
         local trivia_box = vgui.Create("DPanel", bg)
-        trivia_box.PrintName = "Trivia"
+        trivia_box.PrintName = TacRP:GetPhrase("cust.trivia")
         trivia_box:SetSize(TacRP.SS(172), TacRP.SS(36))
         trivia_box:SetPos(scrw - TacRP.SS(172) - airgap, stack + smallgap + tabs_h + TacRP.SS(2))
         trivia_box.Paint = function(self2, w, h)
@@ -512,7 +512,7 @@ function SWEP:CreateCustomizeHUD()
         end
 
         local credits_box = vgui.Create("DPanel", bg)
-        credits_box.PrintName = "Credits"
+        credits_box.PrintName = TacRP:GetPhrase("cust.credits")
         credits_box:SetSize(TacRP.SS(172), TacRP.SS(36))
         credits_box:SetPos(scrw - TacRP.SS(172) - airgap, stack + smallgap + tabs_h + TacRP.SS(2))
         credits_box.Paint = function(self2, w, h)

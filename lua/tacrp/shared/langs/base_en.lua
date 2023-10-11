@@ -54,8 +54,11 @@ L["type.throwable"] = "Throwable"
 
 L["cust.rating"] = "Rating"
 L["cust.stats"] = "Stats"
-L["cust.description"] = "DESCRIPTION:"
+L["cust.description"] = "DESCRIPTION:" -- used in-line in text boxes
 L["cust.type_tier"] = "{tier} Grade {type}"
+L["cust.trivia"] = "Trivia"
+L["cust.credits"] = "Credits"
+L["cust.description2"] = "Description" -- used as title
 
 L["unit.hu"] = " HU" -- hammer unit
 L["unit.meter"] = "m"
