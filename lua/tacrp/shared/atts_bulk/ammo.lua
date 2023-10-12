@@ -1074,7 +1074,7 @@ ATT.PrintName = "Surplus"
 ATT.FullName = "Surplus Rounds"
 ATT.Icon = Material("entities/tacrp_att_acc_surplus.png", "mips smooth")
 ATT.Description = "Unreliable old ammo, yet you keep finding them everywhere."
-ATT.Pros = {"att.procon.refund"}
+ATT.Pros = {"att.procon.refund", "stat.recoil"}
 ATT.Cons = {"att.procon.unreliable"}
 ATT.Category = {"ammo_rifle", "ammo_sniper", "ammo_pistol", "ammo_amr", "ammo_shotgun", "ammo_shotgun2"}
 
@@ -1083,7 +1083,10 @@ ATT.SortOrder = 999
 -- ATT.Mult_SupplyLimit = 2
 -- ATT.Mult_ShootChance = 0.98
 
-ATT.Add_JamFactor = 0.4
+ATT.Mult_RecoilSpreadPenalty = 0.9
+ATT.Mult_RecoilKick = 0.85
+
+ATT.Add_JamFactor = 0.2
 ATT.Add_ShootPitchVariance = 2
 
 ATT.Hook_PostShoot = function(wep)

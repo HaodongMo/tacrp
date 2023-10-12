@@ -131,14 +131,17 @@ ATT.PrintName = "Surplus"
 ATT.FullName = "Surplus Bolt"
 ATT.Icon = Material("entities/tacrp_att_bolt_surplus.png", "mips smooth")
 ATT.Description = "Rust has eaten most of it away, but it still kinda works."
-ATT.Pros = {"att.procon.surplusboost1"}
+ATT.Pros = {"att.procon.surplusboost1", "stat.recoil"}
 ATT.Cons = {"att.procon.surplusboost2", "att.procon.unreliable"}
 
 ATT.Category = {"bolt_automatic"}
 
 ATT.SortOrder = 999
 
-ATT.Add_JamFactor = 0.6
+ATT.Mult_RecoilSpreadPenalty = 0.8
+ATT.Mult_RecoilKick = 0.75
+
+ATT.Add_JamFactor = 0.4
 -- ATT.Mult_ShootChance = 0.96
 
 ATT.Hook_PostShoot = function(wep)
