@@ -19,7 +19,7 @@ SWEP.Trivia_Year = "1987"
 SWEP.Faction = TacRP.FACTION_NEUTRAL // This is older military kit so it's not uncommon to see some captured examples in the hands of bad guys.
 SWEP.Credits = [[
 Model/Texture: Twinke Masta, DMG
-Sound: strelok
+Sound: Teh Strelok
 Animation: Tactical Intervention
 ]]
 
