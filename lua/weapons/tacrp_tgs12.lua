@@ -4,7 +4,7 @@ SWEP.Spawnable = true
 AddCSLuaFile()
 
 // names and stuff
-SWEP.PrintName = "Molot Bekas-12M"
+SWEP.PrintName = "TGS-12"
 SWEP.Category = "Tactical RP"
 
 SWEP.SubCatTier = "3Security"
@@ -13,8 +13,8 @@ SWEP.SubCatType = "5Shotgun"
 SWEP.Description = "Pistol grip shotgun with high recoil and mobility."
 
 SWEP.Trivia_Caliber = "12 Gauge"
-SWEP.Trivia_Manufacturer = "Molot"
-SWEP.Trivia_Year = "1999"
+SWEP.Trivia_Manufacturer = "Unknown"
+SWEP.Trivia_Year = "Unknown"
 
 SWEP.Faction = TacRP.FACTION_NEUTRAL
 SWEP.Credits = "Assets: Tactical Intervention"
