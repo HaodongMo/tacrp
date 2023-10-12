@@ -11,7 +11,7 @@ SWEP.SubCatTier = "3Security"
 SWEP.SubCatType = "1Sidearm"
 
 SWEP.Description = "Tactical pistol with good damage and range for its capacity."
-SWEP.Description_Quote = "\"Alright, let's move out.\""
+SWEP.Description_Quote = "The weapon of choice for free men."
 
 SWEP.Trivia_Caliber = ".40 S&W"
 SWEP.Trivia_Manufacturer = "Heckler & Koch"
