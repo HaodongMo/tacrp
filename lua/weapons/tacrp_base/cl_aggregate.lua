@@ -315,13 +315,13 @@ SWEP.StatGroups = {
             local rbs = dt * rdr -- amount of recoil we can recover between shots even if fired ASAP
 
             if TacRP.ConVars["altrecoil"]:GetBool() then
-                local min = 0.001
+                local min = 0.0001
                 local tgt = 0.015
                 if num > 2 then tgt = 0.04 end
                 score = math.Clamp(1 - (spread - min) / tgt, 0, 1) * 100
             else
                 -- [50] base spread
-                local min = 0.002
+                local min = 0.001
                 local tgt = 0.015
                 if num > 2 then tgt = 0.04 end
                 score = score + math.Clamp(1 - (spread - min) / tgt, 0, 1) * 50
@@ -426,13 +426,13 @@ SWEP.StatGroups = {
             local valfunc = base and self.GetBaseValue or self.GetValue
 
             -- [40] sprint
-            score = score + math.Clamp(1 - (valfunc(self, "SprintToFireTime") - 0.2) / 0.6, 0, 1) * 40
+            score = score + math.Clamp(1 - (valfunc(self, "SprintToFireTime") - 0.15) / 0.5, 0, 1) * 40
 
-            -- [40] ads
-            score = score + math.Clamp(1 - (valfunc(self, "AimDownSightsTime") - 0.2) / 0.6, 0, 1) * 40
+            -- [45] ads
+            score = score + math.Clamp(1 - (valfunc(self, "AimDownSightsTime") - 0.15) / 0.5, 0, 1) * 45
 
-            -- [20] deploy
-            score = score + math.Clamp(1 - (self:GetDeployTime(base) - 0.5) / 1.5, 0, 1) * 20
+            -- [15] deploy
+            score = score + math.Clamp(1 - (self:GetDeployTime(base) - 0.5) / 1.5, 0, 1) * 15
 
             return score
         end,
