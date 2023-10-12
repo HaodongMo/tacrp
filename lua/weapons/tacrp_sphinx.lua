@@ -8,7 +8,7 @@ SWEP.PrintName = "Sphinx 2000"
 SWEP.Category = "Tactical RP"
 
 SWEP.SubCatTier = "2Operator"
-SWEP.SubCatType = "1Sidearm"
+SWEP.SubCatType = "2Machine Pistol"
 
 SWEP.Description = "Burst fire pistol with high firerate but long burst delay."
 
