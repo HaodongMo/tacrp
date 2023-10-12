@@ -13,7 +13,7 @@ SWEP.SubCatType = "2Machine Pistol"
 SWEP.Description = "Light machine pistol with good range, recoil and spread."
 
 SWEP.Trivia_Caliber = ".32 ACP"
-SWEP.Trivia_Manufacturer = "CZUB"
+SWEP.Trivia_Manufacturer = "CZ Uherský Brod"
 SWEP.Trivia_Year = "1963"
 
 SWEP.Faction = TacRP.FACTION_MILITIA
