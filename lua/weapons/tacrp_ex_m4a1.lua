@@ -13,7 +13,7 @@ SWEP.SubCatType = "4Assault Rifle"
 SWEP.Description = "A true American classic boasting high fire rate and balanced performance."
 
 SWEP.Trivia_Caliber = "5.56x45mm"
-SWEP.Trivia_Manufacturer = "Various"
+SWEP.Trivia_Manufacturer = "Colt"
 SWEP.Trivia_Year = "1987"
 
 SWEP.Faction = TacRP.FACTION_NEUTRAL -- This is older military kit so it's not uncommon to see some captured examples in the hands of bad guys.
