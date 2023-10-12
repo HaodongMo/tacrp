@@ -143,7 +143,7 @@ function SWEP:PrimaryAttack()
         end
     elseif self:HasSequence(seq .. "1") then
         local seq1 = seq .. "1"
-        if self:GetScopeLevel() < 1 or self:GetPeeking() then
+        if !self:GetInBipod() and (self:GetScopeLevel() < 1 or self:GetPeeking()) then
             seq1 = seq .. tostring(self:GetBurstCount() + 1)
         end
 
@@ -619,11 +619,15 @@ function SWEP:GetSpread(baseline)
     if baseline then return spread end
 
     local hippenalty = self:GetValue("HipFireSpreadPenalty")
-    -- if TacRP.ConVars["sway"]:GetBool() then
-    --     hippenalty = hippenalty / (1 + math.Clamp(self:GetBaseValue("Sway"), 0, 3))
+    -- if TacRP.ConVars["freeaim"]:GetBool() then
+    --     hippenalty = hippenalty / (1 + math.Clamp(self:GetBaseValue("FreeAimMaxAngle") / 6, 0, 2))
     -- end
 
-    spread = spread + Lerp(self:GetSightAmount() - (self:GetPeeking() and self:GetValue("PeekPenaltyFraction") or 0), hippenalty, 0)
+    if self:GetInBipod() and self:GetScopeLevel() == 0 then
+        spread = spread + Lerp(1 - self:GetValue("PeekPenaltyFraction"), hippenalty, 0)
+    else
+        spread = spread + Lerp(self:GetSightAmount() - (self:GetPeeking() and self:GetValue("PeekPenaltyFraction") or 0), hippenalty, 0)
+    end
 
     if !TacRP.ConVars["altrecoil"]:GetBool() then
         spread = spread + (self:GetRecoilAmount() * self:GetValue("RecoilSpreadPenalty"))

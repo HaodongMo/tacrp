@@ -10,7 +10,8 @@ SWEP.Category = "Tactical RP"
 SWEP.SubCatTier = "1Elite"
 SWEP.SubCatType = "5Shotgun"
 
-SWEP.Description = "Semi-automatic shotgun with very high damage.\nThere's nothing seven 12 Gauge rounds can't solve."
+SWEP.Description = "Semi-automatic shotgun with very high damage output. Reloading may be a chore."
+SWEP.Description_Quote = "There's nothing seven 12 Gauge shotshells can't solve."
 
 SWEP.Trivia_Caliber = "12 Gauge"
 SWEP.Trivia_Manufacturer = "Benelli Armi S.p.A."

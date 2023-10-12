@@ -10,7 +10,8 @@ SWEP.Category = "Tactical RP" // "Tactical RP (Extras)"
 SWEP.SubCatTier = "3Security"
 SWEP.SubCatType = "3Submachine Gun"
 
-SWEP.Description = "SMG designed to be a cheaper alternative to the MP5.\nHigh damage up close, but range and rate of fire is low."
+SWEP.Description = "Boxy SMG developed with low production costs in mind.\nHigh damage up close, but range and rate of fire is low."
+SWEP.Description_Quote = "Flat as a cutting board, but keep that to yourself."
 
 SWEP.Trivia_Caliber = ".45 ACP"
 SWEP.Trivia_Manufacturer = "Heckler & Koch"

@@ -15,7 +15,7 @@ function SWEP:CalcView(ply, pos, ang, fov)
         ang.r = ang.r + (math.sin(CurTime() * 70.151) * rec)
     end
 
-    local mag = self:GetMagnification()
+    local mag = Lerp(self:GetSightAmount() ^ 3, 1, self:GetMagnification())
 
     if self:GetHoldBreathAmount() > 0 then
         mag = mag * (1 + self:GetHoldBreathAmount() * 0.15)
