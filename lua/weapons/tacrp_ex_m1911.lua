@@ -17,7 +17,11 @@ SWEP.Trivia_Manufacturer = "Colt"
 SWEP.Trivia_Year = "1911"
 
 SWEP.Faction = TacRP.FACTION_MILITIA
-SWEP.Credits = "Assets: DMG & Twinke Masta \nSource: Gamebanana"
+SWEP.Credits = [[
+Model/Texture: Twinke Masta, DMG
+Sound: xLongWayHome, Strelok, Vunsunta
+Animation: Tactical Intervention
+]]
 
 SWEP.ViewModel = "models/weapons/tacint_extras/v_m1911.mdl"
 SWEP.WorldModel = "models/weapons/tacint_extras/w_m1911.mdl"

@@ -16,8 +16,12 @@ SWEP.Trivia_Caliber = "5.56x45mm"
 SWEP.Trivia_Manufacturer = "Colt"
 SWEP.Trivia_Year = "1987"
 
-SWEP.Faction = TacRP.FACTION_NEUTRAL -- This is older military kit so it's not uncommon to see some captured examples in the hands of bad guys.
-SWEP.Credits = "Assets: Twinke Masta \nSource: Gamebanana"
+SWEP.Faction = TacRP.FACTION_NEUTRAL // This is older military kit so it's not uncommon to see some captured examples in the hands of bad guys.
+SWEP.Credits = [[
+Model/Texture: Twinke Masta, DMG
+Sound: strelok
+Animation: Tactical Intervention
+]]
 
 SWEP.ViewModel = "models/weapons/tacint_extras/v_m4a1.mdl"
 SWEP.WorldModel = "models/weapons/tacint_extras/w_m4a1.mdl"
@@ -116,7 +120,7 @@ SWEP.Firemodes = {
 
 SWEP.RPM = 800
 
-SWEP.Spread = 0.004
+SWEP.Spread = 0.0069
 
 SWEP.ShootTimeMult = 0.5
 
@@ -131,7 +135,7 @@ SWEP.RecoilVisualKick = 0.75
 SWEP.RecoilKick = 4.5
 SWEP.RecoilStability = 0.25
 
-SWEP.RecoilSpreadPenalty = 0.0025
+SWEP.RecoilSpreadPenalty = 0.0024
 SWEP.HipFireSpreadPenalty = 0.04
 SWEP.PeekPenaltyFraction = 0.2
 

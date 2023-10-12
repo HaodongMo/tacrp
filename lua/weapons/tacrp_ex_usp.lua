@@ -13,12 +13,17 @@ SWEP.SubCatType = "1Sidearm"
 SWEP.Description = "Tactical pistol with good damage and range for its capacity."
 SWEP.Description_Quote = "\"Alright, let's move out.\""
 
-SWEP.Trivia_Caliber = ".45 ACP"
+SWEP.Trivia_Caliber = ".40 S&W"
 SWEP.Trivia_Manufacturer = "Heckler & Koch"
 SWEP.Trivia_Year = "1993"
 
 SWEP.Faction = TacRP.FACTION_COALITION
-SWEP.Credits = "Assets: Thanez, Racer445 & fxdarkloki \nSource: Gamebanana"
+SWEP.Credits = [[
+Model: Thanez, Racer445
+Textures: Thanez, fxdarkloki
+Sounds: Vunsunta, BlitzBoaR
+Animation: Tactical Intervention
+]]
 
 SWEP.ViewModel = "models/weapons/tacint_extras/v_usp.mdl"
 SWEP.WorldModel = "models/weapons/tacint_extras/w_usp.mdl"
@@ -29,7 +34,7 @@ SWEP.Slot = 1
 SWEP.BalanceStats = {
     [TacRP.BALANCE_SBOX] = {
         Damage_Max = 32,
-        Damage_Min = 9,
+        Damage_Min = 14,
         RPM = 450,
 
         BodyDamageMultipliers = {
