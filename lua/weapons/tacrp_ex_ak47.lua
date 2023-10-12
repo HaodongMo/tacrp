@@ -18,7 +18,11 @@ SWEP.Trivia_Manufacturer = "Kalashnikov Concern"
 SWEP.Trivia_Year = "1948"
 
 SWEP.Faction = TacRP.FACTION_MILITIA
-SWEP.Credits = "Assets: PoisonHeadcrab, Twinke Masta, Millenia, IppE & FxDarkloki \nSource: Gamebanana"
+SWEP.Credits = [[
+Model: Twinke Masta, PoisonHeadcrab, Steelbeast
+Texture: Millenia, IppE, FxDarkloki, Pete
+Sound: CC5, modderfreak, .exe
+Animation: Tactical Intervention]]
 
 SWEP.ViewModel = "models/weapons/tacint_extras/v_ak47.mdl"
 SWEP.WorldModel = "models/weapons/tacint_extras/w_ak47.mdl"

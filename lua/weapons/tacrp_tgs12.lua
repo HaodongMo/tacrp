@@ -4,13 +4,13 @@ SWEP.Spawnable = true
 AddCSLuaFile()
 
 // names and stuff
-SWEP.PrintName = "Molot Bekas-12M"
+SWEP.PrintName = "Molot TGS-12"
 SWEP.Category = "Tactical RP"
 
 SWEP.SubCatTier = "3Security"
 SWEP.SubCatType = "5Shotgun"
 
-SWEP.Description = "Pistol grip shotgun with high recoil and mobility."
+SWEP.Description = "Short barrel pistol grip shotgun. High mobility and recoil, and most effective at close range."
 
 SWEP.Trivia_Caliber = "12 Gauge"
 SWEP.Trivia_Manufacturer = "Molot"
@@ -27,8 +27,6 @@ SWEP.SlotAlt = 3
 
 SWEP.BalanceStats = {
     [TacRP.BALANCE_SBOX] = {
-        Description = "Compact pistol grip shotgun effective at very close range.",
-
         Damage_Max = 18,
         Damage_Min = 5,
         ClipSize = 5,
@@ -40,8 +38,6 @@ SWEP.BalanceStats = {
         ReloadSpeedMult = 1,
     },
     [TacRP.BALANCE_TTT] = {
-        Description = "Compact pistol grip shotgun effective at very close range.",
-
         Damage_Max = 10,
         Damage_Min = 2,
         Range_Min = 300,
@@ -73,7 +69,6 @@ SWEP.BalanceStats = {
         ReloadSpeedMult = 0.5,
     },
     [TacRP.BALANCE_PVE] = {
-        Description = "Compact pistol grip shotgun effective at very close range.",
         Damage_Max = 12,
         Damage_Min = 3,
         Range_Min = 100,
@@ -155,7 +150,7 @@ SWEP.RecoilKick = 16
 SWEP.RecoilStability = 0.25
 
 SWEP.RecoilSpreadPenalty = 0.02
-SWEP.HipFireSpreadPenalty = 0.02
+SWEP.HipFireSpreadPenalty = 0.015
 
 SWEP.CanBlindFire = true
 

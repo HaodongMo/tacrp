@@ -461,9 +461,9 @@ function SWEP:CreateCustomizeHUD()
                 self.MiscCache["cust_desc"] = TacRP.MultiLineText(self:GetValue("Description"), w - TacRP.SS(8), "TacRP_Myriad_Pro_8")
             end
 
+            surface.SetFont("TacRP_Myriad_Pro_8")
+            surface.SetTextColor(255, 255, 255)
             for i, k in pairs(self.MiscCache["cust_desc"]) do
-                surface.SetFont("TacRP_Myriad_Pro_8")
-                surface.SetTextColor(255, 255, 255)
                 surface.SetTextPos(TacRP.SS(4), TacRP.SS(2) + (TacRP.SS(8 * (i - 1))))
                 surface.DrawText(k)
             end
@@ -491,15 +491,30 @@ function SWEP:CreateCustomizeHUD()
             surface.SetTextColor(255, 255, 255)
 
             surface.SetTextPos(TacRP.SS(4), TacRP.SS(6))
-            surface.DrawText(TacRP:TryTranslate(self:GetValue("Trivia_Manufacturer")) or TacRP:GetPhrase("trivia.unknown"))
+            local manu_str = TacRP:TryTranslate(self:GetValue("Trivia_Manufacturer")) or TacRP:GetPhrase("trivia.unknown")
+            local manu_w = surface.GetTextSize(manu_str)
+            if manu_w + TacRP.SS(6) >= w / 2 then
+                surface.SetFont("TacRP_Myriad_Pro_8")
+                if !self.MiscCache["cust_manufacturer"] then
+                    self.MiscCache["cust_manufacturer"] = TacRP.MultiLineText(manu_str, w / 2 - TacRP.SS(2), "TacRP_Myriad_Pro_8")
+                end
+                for i, k in pairs(self.MiscCache["cust_manufacturer"]) do
+                    surface.SetTextPos(TacRP.SS(4), TacRP.SS(7) + (TacRP.SS(6 * (i - 1))))
+                    surface.DrawText(k)
+                end
+            else
+                surface.DrawText(manu_str)
+            end
 
-            surface.SetTextPos(TacRP.SS(4), TacRP.SS(22))
+            surface.SetFont("TacRP_Myriad_Pro_10")
+
+            surface.SetTextPos(TacRP.SS(4), TacRP.SS(24))
             surface.DrawText(TacRP:TryTranslate(self:GetValue("Trivia_Year")) or TacRP:GetPhrase("trivia.unknown"))
 
             surface.SetTextPos(w / 2, TacRP.SS(6))
             surface.DrawText(TacRP:TryTranslate(self:GetValue("Trivia_Caliber")) or TacRP:GetPhrase("trivia.unknown"))
 
-            surface.SetTextPos(w / 2, TacRP.SS(22))
+            surface.SetTextPos(w / 2, TacRP.SS(24))
             surface.DrawText(TacRP:GetPhrase(TacRP.FactionToPhrase[self:GetValue("Faction")]))
 
             surface.SetFont("TacRP_Myriad_Pro_6")
@@ -508,13 +523,13 @@ function SWEP:CreateCustomizeHUD()
             surface.SetTextPos(TacRP.SS(4), TacRP.SS(2))
             surface.DrawText(TacRP:GetPhrase("trivia.manufacturer"))
 
-            surface.SetTextPos(TacRP.SS(4), TacRP.SS(18))
+            surface.SetTextPos(TacRP.SS(4), TacRP.SS(20))
             surface.DrawText(TacRP:GetPhrase("trivia.year"))
 
             surface.SetTextPos(w / 2, TacRP.SS(2))
             surface.DrawText(TacRP:GetPhrase("trivia.caliber"))
 
-            surface.SetTextPos(w / 2, TacRP.SS(18))
+            surface.SetTextPos(w / 2, TacRP.SS(20))
             surface.DrawText(TacRP:GetPhrase("trivia.faction"))
         end
 

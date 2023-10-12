@@ -17,7 +17,10 @@ SWEP.Trivia_Manufacturer = "Military Armament Corporation"
 SWEP.Trivia_Year = "1970"
 
 SWEP.Faction = TacRP.FACTION_MILITIA
-SWEP.Credits = "Assets: Enron \nSource: Gamebanana"
+SWEP.Credits = [[
+Model/Texture: Enron
+Sounds: Vunsunta,  Erick F
+Animations: Tactical Intervention]]
 
 SWEP.ViewModel = "models/weapons/tacint_extras/v_mac10.mdl"
 SWEP.WorldModel = "models/weapons/tacint_extras/w_mac10.mdl"
@@ -86,7 +89,7 @@ SWEP.BalanceStats = {
     },
     [TacRP.BALANCE_OLDSCHOOL] = {
         RecoilSpreadPenalty = 0.004,
-		RecoilMaximum = 25
+        RecoilMaximum = 25
     }
 }
 
@@ -201,7 +204,7 @@ SWEP.DropMagazineTime = 0.3
 
 local path = "tacrp_extras/mac10/"
 
-SWEP.Sound_Shoot = "^" .. path .. "mac10-1.wav"
+SWEP.Sound_Shoot = "^" .. path .. "mac10-2.wav"
 SWEP.Sound_Shoot_Silenced = path .. "mac10-suppressed-1.wav"
 
 SWEP.Vol_Shoot = 110
