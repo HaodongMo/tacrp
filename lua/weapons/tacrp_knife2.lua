@@ -12,6 +12,9 @@ SWEP.SubCatType = "8Melee Weapon"
 
 SWEP.Description = "Very edgy looking knife. Light, partially skeletized blade makes it faster to swing but do less damage."
 
+SWEP.Faction = TacRP.FACTION_MILITIA
+SWEP.Credits = "Assets: Tactical Intervention (unused)"
+
 SWEP.ViewModel = "models/weapons/tacint/v_knife2.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_knife2.mdl"
 

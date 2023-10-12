@@ -12,6 +12,13 @@ SWEP.SubCatType = "5Sporter Carbine"
 
 SWEP.Description = "Semi-automatic model of a legendary submachine gun.\nUses reduced capacity magazines."
 
+SWEP.Trivia_Caliber = "9x19mm"
+SWEP.Trivia_Manufacturer = "Heckler & Koch"
+SWEP.Trivia_Year = "1983"
+
+SWEP.Faction = TacRP.FACTION_NEUTRAL
+SWEP.Credits = "Assets: Tactical Intervention \nModel Edit: speedonerd (it was sooooo hard lol)"
+
 SWEP.ViewModel = "models/weapons/tacint/v_hk94.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_mp5.mdl"
 

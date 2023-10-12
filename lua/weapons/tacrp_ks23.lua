@@ -12,6 +12,13 @@ SWEP.SubCatType = "5Shotgun"
 
 SWEP.Description = "Made from recycled aircraft gun barrels, this heavy shotgun fires shells with twice the diameter of typical shotshells and can easily tear apart anything it's vaguely pointed at. Able to breach doors."
 
+SWEP.Trivia_Caliber = "23x75mmR"
+SWEP.Trivia_Manufacturer = "Tula Arms Plant"
+SWEP.Trivia_Year = "1971"
+
+SWEP.Faction = TacRP.FACTION_MILITIA
+SWEP.Credits = "Assets: Firearms: Source"
+
 SWEP.ViewModel = "models/weapons/tacint/v_ks23.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_ks23.mdl"
 

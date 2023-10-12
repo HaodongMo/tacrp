@@ -12,6 +12,9 @@ SWEP.SubCatType = "8Melee Weapon"
 
 SWEP.Description = "A multi-purpose flip knife, although most of the purposes involving stabbing someone."
 
+SWEP.Faction = TacRP.FACTION_COALITION
+SWEP.Credits = "Assets: Tactical Intervention"
+
 SWEP.ViewModel = "models/weapons/tacint/v_knife.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_knife.mdl"
 

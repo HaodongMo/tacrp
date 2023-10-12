@@ -12,6 +12,13 @@ SWEP.SubCatType = "1Sidearm"
 
 SWEP.Description = "Magnum revolver with good handling and stopping power. Accurate, but hard to fire rapidly."
 
+SWEP.Trivia_Caliber = ".357 Magnum"
+SWEP.Trivia_Manufacturer = "Chapuis Armes"
+SWEP.Trivia_Year = "1996"
+
+SWEP.Faction = TacRP.FACTION_COALITION
+SWEP.Credits = "Assets: Tactical Intervention"
+
 SWEP.ViewModel = "models/weapons/tacint/v_mr96.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_mr96.mdl"
 

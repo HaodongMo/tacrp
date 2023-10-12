@@ -4,13 +4,20 @@ SWEP.Spawnable = true
 AddCSLuaFile()
 
 // names and stuff
-SWEP.PrintName = "Molot Bekas"
+SWEP.PrintName = "Molot Bekas-16M"
 SWEP.Category = "Tactical RP"
 
 SWEP.SubCatTier = "4Consumer"
 SWEP.SubCatType = "5Shotgun"
 
 SWEP.Description = "Accurate hunting shotgun with a low fire rate.\nLimited effectiveness against armor."
+
+SWEP.Trivia_Caliber = "16 Gauge"
+SWEP.Trivia_Manufacturer = "Molot"
+SWEP.Trivia_Year = "1999"
+
+SWEP.Faction = TacRP.FACTION_MILITIA
+SWEP.Credits = "Assets: Tactical Intervention"
 
 SWEP.ViewModel = "models/weapons/tacint/v_bekas.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_bekas.mdl"

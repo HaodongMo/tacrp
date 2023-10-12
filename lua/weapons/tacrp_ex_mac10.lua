@@ -12,6 +12,13 @@ SWEP.SubCatType = "2Machine Pistol"
 
 SWEP.Description = "A bullet hose best used for point blank spray-and-pray. Low power cartridge performs very poorly against armor."
 
+SWEP.Trivia_Caliber = "9x19mm"
+SWEP.Trivia_Manufacturer = "Military Armament Corporation"
+SWEP.Trivia_Year = "1970"
+
+SWEP.Faction = TacRP.FACTION_MILITIA
+SWEP.Credits = "Assets: Enron \nSource: Gamebanana"
+
 SWEP.ViewModel = "models/weapons/tacint_extras/v_mac10.mdl"
 SWEP.WorldModel = "models/weapons/tacint_extras/w_mac10.mdl"
 

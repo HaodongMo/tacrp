@@ -12,6 +12,13 @@ SWEP.SubCatType = "1Sidearm"
 
 SWEP.Description = "Powerful handgun that exchanges capacity for damage and precision."
 
+SWEP.Trivia_Caliber = ".357 SIG"
+SWEP.Trivia_Manufacturer = "SIG Sauer, Inc."
+SWEP.Trivia_Year = "2007"
+
+SWEP.Faction = TacRP.FACTION_COALITION
+SWEP.Credits = "Assets: Tactical Intervention"
+
 SWEP.ViewModel = "models/weapons/tacint/v_p250.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_p250.mdl"
 

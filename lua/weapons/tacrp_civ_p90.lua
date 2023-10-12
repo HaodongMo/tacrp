@@ -12,6 +12,13 @@ SWEP.SubCatType = "5Sporter Carbine"
 
 SWEP.Description = "Semi-automatic variation of a futuristic PDW.\nUses reduced capacity magazines."
 
+SWEP.Trivia_Caliber = "5.7x28mm"
+SWEP.Trivia_Manufacturer = "FN Herstal"
+SWEP.Trivia_Year = "1990"
+
+SWEP.Faction = TacRP.FACTION_NEUTRAL
+SWEP.Credits = "Assets: Tactical Intervention \nModel Edit: speedonerd (it was sooooo hard lol)"
+
 SWEP.ViewModel = "models/weapons/tacint/v_ps90.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_p90.mdl"
 

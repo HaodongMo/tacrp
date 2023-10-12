@@ -14,6 +14,13 @@ SWEP.SubCatType = "3Submachine Gun"
 
 SWEP.Description = "Compact polymer submachine gun packing lots of firepower in a small package."
 
+SWEP.Trivia_Caliber = "9x19mm"
+SWEP.Trivia_Manufacturer = "Brügger & Thomet"
+SWEP.Trivia_Year = "2001"
+
+SWEP.Faction = TacRP.FACTION_COALITION
+SWEP.Credits = "Assets: Logger & The Expert \nSource: Gamebanana"
+
 SWEP.ViewModel = "models/weapons/tacint_extras/v_mp9.mdl"
 SWEP.WorldModel = "models/weapons/tacint_extras/w_mp9.mdl"
 
