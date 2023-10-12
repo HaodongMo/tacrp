@@ -12,6 +12,13 @@ SWEP.SubCatType = "7Sniper Rifle"
 
 SWEP.Description = "Lightweight sniper rifle with good damage and high mobility.\nEquipped with a 10x scope by default."
 
+SWEP.Trivia_Caliber = "7.62x51mm"
+SWEP.Trivia_Manufacturer = "PGM Précision"
+SWEP.Trivia_Year = "2000"
+
+SWEP.Faction = TacRP.FACTION_COALITION
+SWEP.Credits = "Assets: Tactical Intervention"
+
 SWEP.ViewModel = "models/weapons/tacint/v_uratio.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_uratio.mdl"
 

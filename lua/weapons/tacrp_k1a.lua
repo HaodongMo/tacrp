@@ -12,6 +12,13 @@ SWEP.SubCatType = "4Assault Rifle"
 
 SWEP.Description = "Burst rifle with minimal recoil and good hip firing accuracy."
 
+SWEP.Trivia_Caliber = ".223 Remington" -- Pre-2014 K1A's were chambered for .223, TacInt originally released in 2013.  Cool trivia fact!
+SWEP.Trivia_Manufacturer = "Daewoo Precision"
+SWEP.Trivia_Year = "1981"
+
+SWEP.Faction = TacRP.FACTION_MILITIA
+SWEP.Credits = "Assets: Tactical Intervention"
+
 SWEP.ViewModel = "models/weapons/tacint/v_k1a_2.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_k1a.mdl"
 

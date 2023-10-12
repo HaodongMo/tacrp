@@ -12,6 +12,13 @@ SWEP.SubCatType = "9Equipment"
 
 SWEP.Description = "Soviet rocket launcher with powerful explosion.\nSafety fuse prevents point blank detonations."
 
+SWEP.Trivia_Caliber = "40mm Rockets"
+SWEP.Trivia_Manufacturer = "NPO Bazalt"
+SWEP.Trivia_Year = "1961"
+
+SWEP.Faction = TacRP.FACTION_NEUTRAL
+SWEP.Credits = "Assets: Tactical Intervention"
+
 SWEP.ViewModel = "models/weapons/tacint/v_rpg7.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_rpg7.mdl"
 

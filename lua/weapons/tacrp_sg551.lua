@@ -12,6 +12,13 @@ SWEP.SubCatType = "4Assault Rifle"
 
 SWEP.Description = "Assault rifle with all around excellent performance, offset by a lower magazine capacity."
 
+SWEP.Trivia_Caliber = "5.56x45mm"
+SWEP.Trivia_Manufacturer = "SIG Sauer AG"
+SWEP.Trivia_Year = "1986"
+
+SWEP.Faction = TacRP.FACTION_COALITION
+SWEP.Credits = "Assets: Tactical Intervention"
+
 SWEP.ViewModel = "models/weapons/tacint/v_sg551.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_sg551.mdl"
 

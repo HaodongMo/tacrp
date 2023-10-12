@@ -12,6 +12,13 @@ SWEP.SubCatType = "1Sidearm"
 
 SWEP.Description = "Polymer pistol with large capacity and fire rate."
 
+SWEP.Trivia_Caliber = "9x19mm"
+SWEP.Trivia_Manufacturer = "Glock Ges.m.b.H"
+SWEP.Trivia_Year = "1982"
+
+SWEP.Faction = TacRP.FACTION_NEUTRAL
+SWEP.Credits = "Assets: Counter-Strike: Source, retextured by Teh Snake \nSource: Gamebanana"
+
 SWEP.ViewModel = "models/weapons/tacint_extras/v_glock.mdl"
 SWEP.WorldModel = "models/weapons/tacint_extras/w_glock.mdl"
 

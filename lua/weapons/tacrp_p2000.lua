@@ -11,6 +11,14 @@ SWEP.SubCatTier = "3Security"
 SWEP.SubCatType = "1Sidearm"
 
 SWEP.Description = "Well-rounded handgun."
+SWEP.Description_Quote = "It's so fucking boring."
+
+SWEP.Trivia_Caliber = "9x19mm"
+SWEP.Trivia_Manufacturer = "Heckler & Koch"
+SWEP.Trivia_Year = "2002"
+
+SWEP.Faction = TacRP.FACTION_COALITION
+SWEP.Credits = "Assets: Tactical Intervention"
 
 SWEP.ViewModel = "models/weapons/tacint/v_p2000.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_p2000.mdl"

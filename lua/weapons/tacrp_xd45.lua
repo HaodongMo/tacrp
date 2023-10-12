@@ -13,6 +13,13 @@ SWEP.SubCatType = "2Machine Pistol"
 
 SWEP.Description = "Automatic machine pistol with incredible close range power."
 
+SWEP.Trivia_Caliber = ".45 ACP"
+SWEP.Trivia_Manufacturer = "Springfield Armory"
+SWEP.Trivia_Year = "2002"
+
+SWEP.Faction = TacRP.FACTION_NEUTRAL
+SWEP.Credits = "Assets: Tactical Intervention"
+
 SWEP.ViewModel = "models/weapons/tacint/v_xd45.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_xd45.mdl"
 

@@ -12,6 +12,13 @@ SWEP.SubCatType = "3Submachine Gun"
 
 SWEP.Description = "SMG designed to be a cheaper alternative to the MP5.\nHigh damage up close, but range and rate of fire is low."
 
+SWEP.Trivia_Caliber = ".45 ACP"
+SWEP.Trivia_Manufacturer = "Heckler & Koch"
+SWEP.Trivia_Year = "2000"
+
+SWEP.Faction = TacRP.FACTION_COALITION
+SWEP.Credits = "Assets: Hellspike, Logger & Cyper \nSource: Gamebanana"
+
 SWEP.ViewModel = "models/weapons/tacint_extras/v_ump45.mdl"
 SWEP.WorldModel = "models/weapons/tacint_extras/w_ump45.mdl"
 

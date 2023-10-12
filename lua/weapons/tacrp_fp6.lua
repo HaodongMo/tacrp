@@ -12,6 +12,13 @@ SWEP.SubCatType = "5Shotgun"
 
 SWEP.Description = "Combat shotgun with high fire rate and capacity."
 
+SWEP.Trivia_Caliber = "12 Gauge"
+SWEP.Trivia_Manufacturer = "FABARM S.p.A."
+SWEP.Trivia_Year = "1998"
+
+SWEP.Faction = TacRP.FACTION_COALITION
+SWEP.Credits = "Assets: Tactical Intervention"
+
 SWEP.ViewModel = "models/weapons/tacint/v_fp6.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_fp6.mdl"
 

@@ -12,6 +12,13 @@ SWEP.SubCatType = "4Assault Rifle"
 
 SWEP.Description = "Assault rifle with high muzzle velocity. Well suited for medium range sustained fire.\nEquipped with a 2x scope by default."
 
+SWEP.Trivia_Caliber = "5.56x45mm"
+SWEP.Trivia_Manufacturer = "Heckler & Koch"
+SWEP.Trivia_Year = "1996"
+
+SWEP.Faction = TacRP.FACTION_COALITION
+SWEP.Credits = "Assets: Tactical Intervention"
+
 SWEP.ViewModel = "models/weapons/tacint/v_g36k_hq.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_g36k.mdl"
 

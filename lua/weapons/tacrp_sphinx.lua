@@ -12,6 +12,13 @@ SWEP.SubCatType = "1Sidearm"
 
 SWEP.Description = "Burst fire pistol with high firerate but long burst delay."
 
+SWEP.Trivia_Caliber = "9x19mm"
+SWEP.Trivia_Manufacturer = "Sphinx Systems"
+SWEP.Trivia_Year = "1976"
+
+SWEP.Faction = TacRP.FACTION_NEUTRAL
+SWEP.Credits = "Assets: Tactical Intervention"
+
 SWEP.ViewModel = "models/weapons/tacint/v_sphinx.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_sphinx.mdl"
 

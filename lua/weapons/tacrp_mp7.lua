@@ -12,6 +12,13 @@ SWEP.SubCatType = "3Submachine Gun"
 
 SWEP.Description = "PDW with superb handling and close range effectiveness.\nHigh velocity rounds retain effectiveness at range and pierces armor easily."
 
+SWEP.Trivia_Caliber = "4.6x30mm"
+SWEP.Trivia_Manufacturer = "Heckler & Koch"
+SWEP.Trivia_Year = "2001"
+
+SWEP.Faction = TacRP.FACTION_COALITION
+SWEP.Credits = "Assets: Tactical Intervention"
+
 SWEP.ViewModel = "models/weapons/tacint/v_mp7.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_mp7.mdl"
 

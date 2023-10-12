@@ -12,6 +12,13 @@ SWEP.SubCatType = "7Sniper Rifle"
 
 SWEP.Description = "Heavy anti-materiel rifle that can kill in one shot.\nDoes not fire phantom bullets.\nEquipped with a 10x scope by default."
 
+SWEP.Trivia_Caliber = ".50 BMG"
+SWEP.Trivia_Manufacturer = "PGM Précision"
+SWEP.Trivia_Year = "1993"
+
+SWEP.Faction = TacRP.FACTION_MILITIA
+SWEP.Credits = "Assets: Toby Burnside \nSource: Fallout 4: New Vegas Project"
+
 SWEP.ViewModel = "models/weapons/tacint_extras/v_hecate.mdl"
 SWEP.WorldModel = "models/weapons/tacint_extras/w_hecate.mdl"
 

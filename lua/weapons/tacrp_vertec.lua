@@ -4,13 +4,20 @@ SWEP.Spawnable = true
 AddCSLuaFile()
 
 // names and stuff
-SWEP.PrintName = "Beretta M92FS"
+SWEP.PrintName = "Beretta 92FS Vertec" -- Real variant, even though it sounds like a fake name Gooseman would come up with.
 SWEP.Category = "Tactical RP"
 
 SWEP.SubCatTier = "4Consumer"
 SWEP.SubCatType = "1Sidearm"
 
 SWEP.Description = "Italian pistol with above average range and accuracy."
+
+SWEP.Trivia_Caliber = "9x19mm"
+SWEP.Trivia_Manufacturer = "Pietro Beretta"
+SWEP.Trivia_Year = "2002"
+
+SWEP.Faction = TacRP.FACTION_NEUTRAL
+SWEP.Credits = "Assets: Tactical Intervention"
 
 SWEP.ViewModel = "models/weapons/tacint/v_vertec.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_vertec.mdl"

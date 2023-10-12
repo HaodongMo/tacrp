@@ -12,6 +12,13 @@ SWEP.SubCatType = "5Sporter Carbine"
 
 SWEP.Description = "Lightweight rifle with no stock or optic mount.\nGood hip-fire accuracy among rifles, but range is low."
 
+SWEP.Trivia_Caliber = ".223 Remington"
+SWEP.Trivia_Manufacturer = "Sturm, Ruger & Co."
+SWEP.Trivia_Year = "1973"
+
+SWEP.Faction = TacRP.FACTION_MILITIA
+SWEP.Credits = "Assets: Tactical Intervention"
+
 SWEP.ViewModel = "models/weapons/tacint/v_m1.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_m1.mdl"
 

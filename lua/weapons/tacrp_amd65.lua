@@ -12,6 +12,13 @@ SWEP.SubCatType = "4Assault Rifle"
 
 SWEP.Description = "Hungarian AK clone with integrated grip and wire stock. High damage, but lower range than most rifles."
 
+SWEP.Trivia_Caliber = "7.62x39mm"
+SWEP.Trivia_Manufacturer = "Fegyver- és Gépgyár"
+SWEP.Trivia_Year = "1965"
+
+SWEP.Faction = TacRP.FACTION_MILITIA
+SWEP.Credits = "Assets: Tactical Intervention"
+
 SWEP.ViewModel = "models/weapons/tacint/v_amd65.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_amd65.mdl"
 

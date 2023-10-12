@@ -12,6 +12,13 @@ SWEP.SubCatType = "7Sniper Rifle"
 
 SWEP.Description = "Semi-automatic anti-materiel rifle that can easily decimate any person at any distance.\nEquipped with a 12x scope by default.\nFar too heavy to swing, so bashing is out of the question."
 
+SWEP.Trivia_Caliber = ".50 BMG"
+SWEP.Trivia_Manufacturer = "Accuracy International"
+SWEP.Trivia_Year = "2005"
+
+SWEP.Faction = TacRP.FACTION_COALITION
+SWEP.Credits = "Assets: Tactical Intervention"
+
 SWEP.ViewModel = "models/weapons/tacint/v_as50_hq.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_as50.mdl"
 

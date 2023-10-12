@@ -12,6 +12,13 @@ SWEP.SubCatType = "1Sidearm"
 
 SWEP.Description = "An indulgent pair of high capacity, high damage, high quality compact pistols.\nWith firepower like this, who needs aiming?"
 
+SWEP.Trivia_Caliber = ".45 ACP"
+SWEP.Trivia_Manufacturer = "Detonics Defense"
+SWEP.Trivia_Year = "2011"
+
+SWEP.Faction = TacRP.FACTION_NEUTRAL
+SWEP.Credits = "Assets: Tactical Intervention"
+
 SWEP.ViewModel = "models/weapons/tacint/v_mtx_dual.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_mtx.mdl"
 

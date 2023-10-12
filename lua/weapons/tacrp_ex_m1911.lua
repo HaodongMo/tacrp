@@ -12,6 +12,13 @@ SWEP.SubCatType = "1Sidearm"
 
 SWEP.Description = "Surplus pistol from an era before tactical attachments and pistol optics, yet still hits quite hard."
 
+SWEP.Trivia_Caliber = ".45 ACP"
+SWEP.Trivia_Manufacturer = "Colt"
+SWEP.Trivia_Year = "1911"
+
+SWEP.Faction = TacRP.FACTION_MILITIA
+SWEP.Credits = "Assets: DMG & Twinke Masta \nSource: Gamebanana"
+
 SWEP.ViewModel = "models/weapons/tacint_extras/v_m1911.mdl"
 SWEP.WorldModel = "models/weapons/tacint_extras/w_m1911.mdl"
 

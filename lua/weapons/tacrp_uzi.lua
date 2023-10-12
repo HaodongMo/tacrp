@@ -12,6 +12,13 @@ SWEP.SubCatType = "2Machine Pistol"
 
 SWEP.Description = "Balanced machine pistol with a controllable rate of fire."
 
+SWEP.Trivia_Caliber = "9x19mm"
+SWEP.Trivia_Manufacturer = "Israel Weapon Industries"
+SWEP.Trivia_Year = "1980"
+
+SWEP.Faction = TacRP.FACTION_MILITIA
+SWEP.Credits = "Assets: Tactical Intervention"
+
 SWEP.ViewModel = "models/weapons/tacint/v_uzi.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_uzi.mdl"
 

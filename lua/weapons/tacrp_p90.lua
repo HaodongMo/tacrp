@@ -12,6 +12,13 @@ SWEP.SubCatType = "3Submachine Gun"
 
 SWEP.Description = "Bullpup PDW with a generous top-loaded magazine and controllable spread. Perfect for rushing bombsites.\nHigh velocity rounds retain effectiveness at range and pierces armor easily."
 
+SWEP.Trivia_Caliber = "5.7x28mm"
+SWEP.Trivia_Manufacturer = "FN Herstal"
+SWEP.Trivia_Year = "1990"
+
+SWEP.Faction = TacRP.FACTION_COALITION
+SWEP.Credits = "Assets: Tactical Intervention"
+
 SWEP.ViewModel = "models/weapons/tacint/v_p90.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_p90.mdl"
 

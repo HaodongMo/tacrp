@@ -12,6 +12,13 @@ SWEP.SubCatType = "6Precision Rifle"
 
 SWEP.Description = "Battle rifle with superb damage, fire rate and precision. Capable of automatic fire, although it is very unstable."
 
+SWEP.Trivia_Caliber = "7.62x51mm"
+SWEP.Trivia_Manufacturer = "Heckler & Koch"
+SWEP.Trivia_Year = "2006"
+
+SWEP.Faction = TacRP.FACTION_COALITION
+SWEP.Credits = "Assets: Tactical Intervention"
+
 SWEP.ViewModel = "models/weapons/tacint/v_hk417.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_hk417.mdl"
 

@@ -4,14 +4,21 @@ SWEP.Spawnable = true
 AddCSLuaFile()
 
 // names and stuff
-SWEP.PrintName = "Remington 700 SPR"
-SWEP.AbbrevName = "R700 SPR"
+SWEP.PrintName = "Remington 700 SPS"
+SWEP.AbbrevName = "R700 SPS"
 SWEP.Category = "Tactical RP"
 
 SWEP.SubCatTier = "4Consumer"
 SWEP.SubCatType = "7Sniper Rifle"
 
 SWEP.Description = "Medium range hunting rifle with a fast cycle speed.\nEquipped with a 6x scope by default."
+
+SWEP.Trivia_Caliber = ".308 Winchester"
+SWEP.Trivia_Manufacturer = "Remington Arms"
+SWEP.Trivia_Year = "1962"
+
+SWEP.Faction = TacRP.FACTION_NEUTRAL
+SWEP.Credits = "Assets: Tactical Intervention"
 
 SWEP.ViewModel = "models/weapons/tacint/v_spr.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_spr.mdl"
