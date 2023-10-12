@@ -10,7 +10,8 @@ SWEP.Category = "Tactical RP"
 SWEP.SubCatTier = "1Elite"
 SWEP.SubCatType = "5Shotgun"
 
-SWEP.Description = "Semi-automatic shotgun with very high damage.\nThere's nothing seven 12 Gauge rounds can't solve."
+SWEP.Description = "Semi-automatic shotgun with very high damage output. Reloading may be a chore."
+SWEP.Description_Quote = "There's nothing seven 12 Gauge shotshells can't solve."
 
 SWEP.ViewModel = "models/weapons/tacint/v_m4star10.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_m4star10.mdl"

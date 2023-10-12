@@ -10,7 +10,8 @@ SWEP.Category = "Tactical RP" // "Tactical RP (Extras)"
 SWEP.SubCatTier = "2Operator"
 SWEP.SubCatType = "7Sniper Rifle"
 
-SWEP.Description = "Heavy anti-materiel rifle that can kill in one shot.\nDoes not fire phantom bullets.\nEquipped with a 10x scope by default."
+SWEP.Description = "Heavy anti-materiel rifle that can kill in one shot.\nEquipped with a 12x scope by default."
+SWEP.Description_Quote = "Does not fire phantom bullets."
 
 SWEP.ViewModel = "models/weapons/tacint_extras/v_hecate.mdl"
 SWEP.WorldModel = "models/weapons/tacint_extras/w_hecate.mdl"
@@ -112,13 +113,14 @@ SWEP.RPM = 25
 SWEP.Spread = 0
 
 SWEP.HipFireSpreadPenalty = 0.06
-SWEP.PeekPenaltyFraction = 0.15
+SWEP.PeekPenaltyFraction = 0.2
 
 SWEP.RecoilPerShot = 1
 SWEP.RecoilMaximum = 1
 SWEP.RecoilResetTime = 0.25
-SWEP.RecoilDissipationRate = 1
+SWEP.RecoilDissipationRate = 1.25
 SWEP.RecoilFirstShotMult = 1
+SWEP.RecoilCrouchMult = 1
 
 SWEP.RecoilVisualKick = 5
 SWEP.RecoilKick = 10
@@ -137,12 +139,16 @@ SWEP.SightedSpeedMult = 0.5
 SWEP.ReloadSpeedMult = 0.3
 
 SWEP.AimDownSightsTime = 0.7
-SWEP.SprintToFireTime = 0.6
+SWEP.SprintToFireTime = 0.7
 
-SWEP.Sway = 5
+SWEP.Sway = 2.5
 SWEP.ScopedSway = 0.2
 
 SWEP.FreeAimMaxAngle = 9
+
+SWEP.Bipod = true
+SWEP.BipodRecoil = 1
+SWEP.BipodKick = 0.25
 
 // hold types
 
@@ -186,7 +192,7 @@ SWEP.HolsterAng = Angle(0, 0, 0)
 
 SWEP.Scope = true
 SWEP.ScopeOverlay = Material("tacrp/scopes/sniper.png", "mips smooth") // Material("path/to/overlay")
-SWEP.ScopeFOV = 90 / 10
+SWEP.ScopeFOV = 90 / 12
 SWEP.ScopeLevels = 1 // 2 = like CS:S
 SWEP.ScopeHideWeapon = true
 SWEP.ScopeOverlaySize = 0.75
@@ -208,11 +214,11 @@ SWEP.DropMagazineTime = 0.8
 
 local path = "tacrp_extras/hecate/ax308_"
 
-SWEP.Sound_Shoot = {"^" .. path .. "fire_1.wav", "^" .. path .. "fire_2.wav", "^" .. path .. "fire_3.wav"}
+SWEP.Sound_Shoot = "^tacrp_extras/hecate/amr-1.wav"
 SWEP.Sound_Shoot_Silenced = "TacRP/weapons/ak47/ak47_fire_silenced-1.wav"
 
 SWEP.Vol_Shoot = 130
-SWEP.ShootPitchVariance = 2.5 // amount to vary pitch by each shot
+SWEP.ShootPitchVariance = 1 // amount to vary pitch by each shot
 
 // effects
 
@@ -223,7 +229,7 @@ SWEP.QCA_Eject = 2
 
 SWEP.MuzzleEffect = "muzzleflash_1"
 SWEP.EjectEffect = 2
-SWEP.EjectDelay = 0.9
+SWEP.EjectDelay = 1.1
 
 // anims
 
@@ -240,13 +246,22 @@ SWEP.AnimationTranslationTable = {
 SWEP.AttachmentElements = {
     ["optic"] = {
         BGs_VM = {
+            {1, 2}
+        },
+        BGs_WM = {
+            {1, 2}
+        },
+    },
+    ["irons"] = {
+        BGs_VM = {
             {1, 1}
         },
         BGs_WM = {
             {1, 1}
         },
+        SortOrder = 2,
     },
-    ["irons"] = {
+    ["tactical"] = {
         BGs_VM = {
             {2, 1}
         },
@@ -254,7 +269,7 @@ SWEP.AttachmentElements = {
             {2, 1}
         },
     },
-    ["tactical"] = {
+    ["bipod"] = {
         BGs_VM = {
             {3, 1}
         },
@@ -273,7 +288,8 @@ SWEP.Attachments = {
         AttachSound = "TacRP/weapons/optic_on.wav",
         DetachSound = "TacRP/weapons/optic_off.wav",
         InstalledElements = {"optic"},
-        Pos_VM = Vector(-5.5, 0, 5),
+        VMScale = 0.9,
+        Pos_VM = Vector(-5.75, 0, 5),
         Ang_VM = Angle(90, 0, 0),
         Pos_WM = Vector(0, 5.5, 2.2),
         Ang_WM = Angle(0, -90, 0),
@@ -298,8 +314,8 @@ SWEP.Attachments = {
         AttachSound = "TacRP/weapons/flashlight_on.wav",
         DetachSound = "TacRP/weapons/flashlight_off.wav",
         InstalledElements = {"tactical"},
-        Pos_VM = Vector(-2.25, 0, 20),
-        Ang_VM = Angle(90, 0, 180),
+        Pos_VM = Vector(-3.9, -1.5, 19.25),
+        Ang_VM = Angle(90, 0, 270),
         Pos_WM = Vector(0, 23.75, -2),
         Ang_WM = Angle(0, -90, 180),
     },

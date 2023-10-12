@@ -11,6 +11,7 @@ SWEP.SubCatTier = "3Security"
 SWEP.SubCatType = "1Sidearm"
 
 SWEP.Description = "Tactical pistol with good damage and range for its capacity."
+SWEP.Description_Quote = "\"Alright, let's move out.\""
 
 SWEP.ViewModel = "models/weapons/tacint_extras/v_usp.mdl"
 SWEP.WorldModel = "models/weapons/tacint_extras/w_usp.mdl"
