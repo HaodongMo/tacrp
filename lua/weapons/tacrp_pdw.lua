@@ -13,7 +13,7 @@ SWEP.SubCatType = "3Submachine Gun"
 SWEP.Description = "Carbine caliber subcompact PDW. The perfect blend of rifle and submachine gun."
 
 SWEP.Trivia_Caliber = "6mm Whisper"
-SWEP.Trivia_Manufacturer = "Knight's Armament Company"
+SWEP.Trivia_Manufacturer = "Knight's Armament"
 SWEP.Trivia_Year = "2006"
 
 SWEP.Faction = TacRP.FACTION_COALITION
