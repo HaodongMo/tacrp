@@ -43,7 +43,7 @@ ATT.Pros = {"att.zoom.4"}
 
 ATT.Model = "models/weapons/tacint/addons/acog.mdl"
 ATT.Scale = 0.3
-ATT.ModelOffset = Vector(-1, 0, 0.7)
+ATT.ModelOffset = Vector(-1, 0, 0.5)
 
 ATT.Category = "optic_medium"
 
@@ -77,7 +77,7 @@ ATT.Pros = {"att.zoom.3.4"}
 -- scope texture: ins2
 ATT.Model = "models/weapons/tacint_extras/addons/elcan.mdl"
 ATT.Scale = 1
-ATT.ModelOffset = Vector(0, 0, -0.3)
+ATT.ModelOffset = Vector(-0.5, 0, -0.4)
 
 ATT.Category = "optic_medium"
 
@@ -200,14 +200,14 @@ ATT = {}
 
 ATT.PrintName = "OKP-7"
 ATT.Icon = Material("entities/tacrp_att_optic_okp7.png", "mips smooth")
-ATT.Description = "Russian-made reflex sight."
+ATT.Description = "Low profile reflex sight with minimal zoom."
 ATT.Pros = {"att.sight.1.25"}
 
 ATT.Model = "models/weapons/tacint/addons/okp7.mdl"
 
 ATT.Category = "optic_cqb"
 ATT.Scale = 1.1
-ATT.ModelOffset = Vector(-2, 0, -0.45)
+ATT.ModelOffset = Vector(-2, 0, -0.55)
 
 ATT.SortOrder = 1.25
 
@@ -239,7 +239,7 @@ ATT.Pros = {"att.sight.1.75"}
 
 ATT.Model = "models/weapons/tacint/addons/reddot_hq.mdl"
 ATT.Scale = 0.35
-ATT.ModelOffset = Vector(0, 0, 1.2)
+ATT.ModelOffset = Vector(0, 0, 1)
 
 ATT.Category = "optic_cqb"
 
@@ -307,8 +307,8 @@ ATT.Pros = {"att.zoom.5"}
 -- model: gamebanana
 -- scope texture: ins2
 ATT.Model = "models/weapons/tacint_extras/addons/schd.mdl"
-ATT.Scale = 1
-ATT.ModelOffset = Vector(-1, 0, -0.4)
+ATT.Scale = 1.15
+ATT.ModelOffset = Vector(-1, 0, -0.45)
 
 ATT.Category = "optic_medium"
 
