@@ -582,14 +582,6 @@ ATT.Add_Range_Max = 1000
 ATT.Add_HipFireSpreadPenalty = 0.01
 ATT.Add_PeekPenaltyFraction = 0.05
 
-ATT.Override_BodyDamageMultipliersExtra = {
-    [HITGROUP_LEFTARM] = 0.95,
-    [HITGROUP_RIGHTARM] = 0.95,
-    [HITGROUP_LEFTLEG] = 0.85,
-    [HITGROUP_RIGHTLEG] = 0.85,
-    [HITGROUP_GEAR] = 0.85,
-}
-
 TacRP.LoadAtt(ATT, "ammo_pistol_match")
 -- #endregion
 
