@@ -221,7 +221,7 @@ SWEP.DropMagazineTime = 0.8
 
 local path = "tacrp_extras/hecate/ax308_"
 
-SWEP.Sound_Shoot = "^tacrp_extras/hecate/amr-1.wav"
+SWEP.Sound_Shoot = "^tacrp_extras/hecate/ax308_fire_1.wav"
 SWEP.Sound_Shoot_Silenced = "TacRP/weapons/ak47/ak47_fire_silenced-1.wav"
 
 SWEP.Vol_Shoot = 130
