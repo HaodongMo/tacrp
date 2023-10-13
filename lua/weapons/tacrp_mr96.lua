@@ -8,7 +8,7 @@ SWEP.PrintName = "Manurhin MR96"
 SWEP.Category = "Tactical RP"
 
 SWEP.SubCatTier = "2Operator"
-SWEP.SubCatType = "1Sidearm"
+SWEP.SubCatType = "2Magnum Pistol"
 
 SWEP.Description = "Magnum revolver with good handling and stopping power. Accurate, but hard to fire rapidly."
 
