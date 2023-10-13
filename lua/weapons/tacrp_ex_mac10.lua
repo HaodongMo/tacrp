@@ -19,7 +19,7 @@ SWEP.Trivia_Year = "1970"
 SWEP.Faction = TacRP.FACTION_MILITIA
 SWEP.Credits = [[
 Model/Texture: Enron
-Sounds: Vunsunta,  Erick F
+Sound: Vunsunta,  Erick F
 Animations: Tactical Intervention]]
 
 SWEP.ViewModel = "models/weapons/tacint_extras/v_mac10.mdl"

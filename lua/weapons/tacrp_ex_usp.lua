@@ -20,8 +20,8 @@ SWEP.Trivia_Year = "1993"
 SWEP.Faction = TacRP.FACTION_COALITION
 SWEP.Credits = [[
 Model: Thanez, Racer445
-Textures: Thanez, fxdarkloki
-Sounds: Vunsunta, BlitzBoaR
+Texture: Thanez, fxdarkloki
+Sound: Vunsunta, BlitzBoaR
 Animation: Tactical Intervention
 ]]
 
