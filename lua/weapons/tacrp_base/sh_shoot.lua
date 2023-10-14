@@ -69,11 +69,11 @@ function SWEP:PrimaryAttack()
             -- self:TakePrimaryAmmo(self:GetValue("AmmoPerShot"))
             if self:GetBurstCount() == 0 then -- dryfire anim is snapping so don't interrupt fire anim for it
                 self.Primary.Automatic = false
-                if self:GetBlindFire() then
-                    self:PlayAnimation("blind_dryfire")
-                else
-                    self:PlayAnimation("dryfire")
-                end
+                -- if self:GetBlindFire() then
+                --     self:PlayAnimation("blind_dryfire")
+                -- else
+                --     self:PlayAnimation("dryfire")
+                -- end
             end
             self:EmitSound(self:GetValue("Sound_Jam"), 75, 100, 1, CHAN_ITEM)
             self:SetBurstCount(0)
