@@ -10,7 +10,7 @@ SWEP.Category = "Tactical RP" // "Tactical RP (Extras)"
 SWEP.SubCatTier = "4Consumer"
 SWEP.SubCatType = "2Machine Pistol"
 
-SWEP.Description = "A bullet hose best used for point blank spray-and-pray. Low power cartridge performs very poorly against armor."
+SWEP.Description = "A bullet hose best used for point blank spray-and-pray. High capacity and fire rate, but performs very poorly against armor."
 
 SWEP.Trivia_Caliber = "9x19mm"
 SWEP.Trivia_Manufacturer = "Military Armament Corporation"
@@ -29,10 +29,10 @@ SWEP.Slot = 1
 
 SWEP.BalanceStats = {
     [TacRP.BALANCE_SBOX] = {
-        Damage_Max = 18,
-        Damage_Min = 6,
+        Damage_Max = 19,
+        Damage_Min = 5,
 
-        RecoilKick = 3,
+        RecoilKick = 4,
 
         MoveSpeedMult = 0.95,
         ShootingSpeedMult = 0.8,
@@ -153,7 +153,7 @@ SWEP.ReloadSpeedMult = 0.6
 SWEP.AimDownSightsTime = 0.275
 SWEP.SprintToFireTime = 0.30
 
-SWEP.Sway = 1.3
+SWEP.Sway = 0.9
 SWEP.ScopedSway = 0.4
 
 SWEP.FreeAimMaxAngle = 4
@@ -226,6 +226,39 @@ SWEP.AnimationTranslationTable = {
     ["fire"] = {"shoot1", "shoot2", "shoot3"},
     ["blind_fire"] = {"blind_shoot1", "blind_shoot2", "blind_shoot3"},
     ["melee"] = {"melee1", "melee2"}
+}
+
+SWEP.ProceduralIronFire = {
+    vm_pos = Vector(0, -0.5, -0.15),
+    vm_ang = Angle(0, 1, 0),
+    t = 0.2,
+    tmax = 0.2,
+    bones = {
+        {
+            bone = "xd45_rig.slide",
+            pos = Vector(0, 0, -3),
+            t0 = 0,
+            t1 = 0.1,
+        },
+        {
+            bone = "xd45_rig.hammer",
+            ang = Angle(-15, 0, 0),
+            t0 = 0,
+            t1 = 0.15,
+        },
+        {
+            bone = "ValveBiped.Bip01_R_Finger1",
+            ang = Angle(0, -15, 0),
+            t0 = 0,
+            t1 = 0.2,
+        },
+        {
+            bone = "ValveBiped.Bip01_R_Finger11",
+            ang = Angle(-35, 0, 0),
+            t0 = 0,
+            t1 = 0.15,
+        },
+    },
 }
 
 SWEP.ShootTimeMult = 0.5

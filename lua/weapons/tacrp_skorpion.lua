@@ -30,6 +30,8 @@ SWEP.BalanceStats = {
         Damage_Min = 9,
         ArmorPenetration = 0.65,
 
+        RecoilKick = 1,
+
         ClipSize = 30,
         DefaultBodygroups = "0000",
 
@@ -226,6 +228,33 @@ SWEP.AnimationTranslationTable = {
     ["fire4"] = "fire4_M",
     ["fire5"] = "fire5_M",
     ["melee"] = {"melee1", "melee2"}
+}
+
+SWEP.ProceduralIronFire = {
+    vm_pos = Vector(0, -0.3, -0.15),
+    vm_ang = Angle(0, 0.5, 0),
+    t = 0.1,
+    tmax = 0.2,
+    bones = {
+        {
+            bone = "bolt_handle",
+            pos = Vector(0, 0, -3),
+            t0 = 0,
+            t1 = 0.1,
+        },
+        {
+            bone = "ValveBiped.Bip01_R_Finger1",
+            ang = Angle(0, -15, 0),
+            t0 = 0,
+            t1 = 0.2,
+        },
+        {
+            bone = "ValveBiped.Bip01_R_Finger11",
+            ang = Angle(-35, 0, 0),
+            t0 = 0,
+            t1 = 0.2,
+        },
+    },
 }
 
 // attachments
