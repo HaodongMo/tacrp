@@ -104,7 +104,8 @@ end
 
 function SWEP:PrimaryAttack()
 
-    if engine.ActiveGamemode() == "terrortown" and GetRoundState() == ROUND_PREP and GetConVar("ttt_no_nade_throw_during_prep"):GetBool() then
+    if engine.ActiveGamemode() == "terrortown" and GetRoundState() == ROUND_PREP and
+    ((TTT2 and !GetConVar("ttt_nade_throw_during_prep"):GetBool()) or (!TTT2 and GetConVar("ttt_no_nade_throw_during_prep"):GetBool())) then
         return
     end
 
