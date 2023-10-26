@@ -255,7 +255,7 @@ function TacRP.StartCommand(ply, cmd)
 
     if cmd:KeyDown(IN_SPEED) and (
         -- Sprint cannot interrupt a runaway burst
-        (wpn:GetBurstCount() > 0 and wpn:GetValue("RunawayBurst"))
+        (!wpn:CanShootInSprint() and wpn:GetBurstCount() > 0 and wpn:GetValue("RunawayBurst"))
 
         -- Stunned by a flashbang and cannot sprint
         or (ply:GetNWFloat("TacRPStunStart", 0) + ply:GetNWFloat("TacRPStunDur", 0) > CurTime())
