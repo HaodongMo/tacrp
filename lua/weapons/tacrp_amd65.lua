@@ -131,11 +131,12 @@ SWEP.ShootTimeMult = 0.5
 
 SWEP.MuzzleVelocity = 25000
 
+SWEP.RecoilResetInstant = false
 SWEP.RecoilPerShot = 1
-SWEP.RecoilMaximum = 10
-SWEP.RecoilResetTime = 0.15 // time after you stop shooting for recoil to start dissipating
-SWEP.RecoilDissipationRate = 13
-SWEP.RecoilFirstShotMult = 1 // multiplier for the first shot's recoil amount
+SWEP.RecoilMaximum = 6
+SWEP.RecoilResetTime = 0
+SWEP.RecoilDissipationRate = 24
+SWEP.RecoilFirstShotMult = 1.25
 
 SWEP.RecoilVisualKick = 1.5
 

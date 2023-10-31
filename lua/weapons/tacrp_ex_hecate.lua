@@ -18,7 +18,7 @@ SWEP.Trivia_Manufacturer = "PGM Précision"
 SWEP.Trivia_Year = "1993"
 
 SWEP.Faction = TacRP.FACTION_MILITIA
-SWEP.Credits = "Assets: Toby Burnside \nSource: Fallout 4: New Vegas Project"
+SWEP.Credits = "Assets: Toby Burnside\nSource: Fallout 4: New Vegas Project"
 
 SWEP.ViewModel = "models/weapons/tacint_extras/v_hecate.mdl"
 SWEP.WorldModel = "models/weapons/tacint_extras/w_hecate.mdl"

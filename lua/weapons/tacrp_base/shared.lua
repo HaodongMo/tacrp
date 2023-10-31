@@ -120,6 +120,7 @@ SWEP.RecoilDissipationRate = 2
 SWEP.RecoilFirstShotMult = 1 // multiplier for the first shot's recoil amount
 SWEP.RecoilCrouchMult = 0.75 // multiplier for when crouched
 SWEP.RecoilSpreadPenalty = 0.001 // extra spread per one unit of recoil
+SWEP.RecoilResetInstant = true // Set false to account for RPM.
 
 SWEP.RecoilVisualKick = 0.1
 SWEP.RecoilKick = 0.25

@@ -12,7 +12,7 @@ SWEP.SubCatType = "4Assault Rifle"
 
 SWEP.Description = "Burst rifle with minimal recoil and good hip firing accuracy."
 
-SWEP.Trivia_Caliber = ".223 Remington" -- Pre-2014 K1A's were chambered for .223, TacInt originally released in 2013.  Cool trivia fact!
+SWEP.Trivia_Caliber = ".223 Remington" // Pre-2014 K1A's were chambered for .223, TacInt originally released in 2013. Cool trivia fact!
 SWEP.Trivia_Manufacturer = "Daewoo Precision"
 SWEP.Trivia_Year = "1981"
 
@@ -26,10 +26,10 @@ SWEP.Slot = 2
 
 SWEP.BalanceStats = {
     [TacRP.BALANCE_SBOX] = {
-        Damage_Max = 20,
-        Damage_Min = 9,
+        Damage_Max = 23,
+        Damage_Min = 10,
 
-        RecoilKick = 1,
+        RecoilKick = 1.5,
 
         MoveSpeedMult = 0.85,
         ShootingSpeedMult = 0.8,
@@ -115,19 +115,19 @@ SWEP.RPM = 700
 SWEP.RPMMultBurst = 800 / 700
 
 SWEP.Spread = 0.0025
-
-SWEP.RecoilPerShot = 1
-SWEP.RecoilMaximum = 12
-SWEP.RecoilResetTime = 0.25
-SWEP.RecoilDissipationRate = 15
-SWEP.RecoilFirstShotMult = 1 // multiplier for the first shot's recoil amount
-
-SWEP.RecoilVisualKick = 0.75
-SWEP.RecoilKick = 2
-SWEP.RecoilStability = 0.3
-
 SWEP.RecoilSpreadPenalty = 0.002
 SWEP.HipFireSpreadPenalty = 0.02
+
+SWEP.RecoilResetInstant = false
+SWEP.RecoilPerShot = 1
+SWEP.RecoilMaximum = 10
+SWEP.RecoilResetTime = 0.06
+SWEP.RecoilDissipationRate = 35
+SWEP.RecoilFirstShotMult = 2
+
+SWEP.RecoilVisualKick = 0.75
+SWEP.RecoilKick = 2.5
+SWEP.RecoilStability = 0.3
 
 SWEP.CanBlindFire = true
 

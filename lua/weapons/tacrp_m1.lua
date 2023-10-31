@@ -50,7 +50,6 @@ SWEP.BalanceStats = {
         Spread = 0.0075,
         HipFireSpreadPenalty = 0.005,
         RecoilSpreadPenalty = 0.005,
-        RecoilDissipationRate = 6,
 
         BodyDamageMultipliers = {
             [HITGROUP_HEAD] = 3,
@@ -85,9 +84,9 @@ SWEP.BalanceStats = {
         MeleeSpeedMult = 1,
         ReloadSpeedMult = 1,
     },
-	[TacRP.BALANCE_OLDSCHOOL] = {
-		RecoilSpreadPenalty = 0.007
-	},
+    [TacRP.BALANCE_OLDSCHOOL] = {
+        RecoilSpreadPenalty = 0.007
+    },
 }
 
 SWEP.TTTReplace = TacRP.TTTReplacePreset.AssaultRifle
@@ -121,20 +120,21 @@ SWEP.Firemode = 1
 
 SWEP.RPM = 450
 
-SWEP.Spread = 0.0035
-SWEP.HipFireSpreadPenalty = 0.0065
+SWEP.Spread = 0.0045
+SWEP.RecoilSpreadPenalty = 0.003
+SWEP.HipFireSpreadPenalty = 0.0055
 
+SWEP.RecoilResetInstant = false
 SWEP.RecoilPerShot = 1
 SWEP.RecoilMaximum = 6
-SWEP.RecoilResetTime = 0.12 // time after you stop shooting for recoil to start dissipating
-SWEP.RecoilDissipationRate = 10
-SWEP.RecoilFirstShotMult = 0.8
+SWEP.RecoilResetTime = 0.01
+SWEP.RecoilDissipationRate = 18
+SWEP.RecoilFirstShotMult = 1.25
 
 SWEP.RecoilVisualKick = 1
 SWEP.RecoilKick = 5
 SWEP.RecoilStability = 0.25
 
-SWEP.RecoilSpreadPenalty = 0.003 // extra spread per one unit of recoil
 
 SWEP.CanBlindFire = true
 

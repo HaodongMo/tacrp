@@ -32,7 +32,7 @@ SWEP.BalanceStats = {
         ArmorPenetration = 0.6,
 
         BodyDamageMultipliers = {
-            [HITGROUP_HEAD] = 3.75, // barely enough for hollowpoints to 1tap head
+            [HITGROUP_HEAD] = 3.75,
             [HITGROUP_CHEST] = 1,
             [HITGROUP_STOMACH] = 1,
             [HITGROUP_LEFTARM] = 1,
@@ -140,17 +140,18 @@ SWEP.Spread = 0.002
 
 SWEP.ShootTimeMult = 0.5
 
+SWEP.RecoilResetInstant = false
 SWEP.RecoilPerShot = 1
-SWEP.RecoilMaximum = 7
-SWEP.RecoilResetTime = 0.25
-SWEP.RecoilDissipationRate = 7
+SWEP.RecoilMaximum = 5
+SWEP.RecoilResetTime = 0
+SWEP.RecoilDissipationRate = 18
 SWEP.RecoilFirstShotMult = 1
 
 SWEP.RecoilVisualKick = 1.5
 SWEP.RecoilKick = 4
 SWEP.RecoilStability = 0.25
 
-SWEP.RecoilSpreadPenalty = 0.0016
+SWEP.RecoilSpreadPenalty = 0.003
 
 SWEP.CanBlindFire = true
 

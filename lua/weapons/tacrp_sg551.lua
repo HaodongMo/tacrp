@@ -26,10 +26,8 @@ SWEP.Slot = 2
 
 SWEP.BalanceStats = {
     [TacRP.BALANCE_SBOX] = {
-        Description = "Low capacity assault rifle with elite performance.",
-
         Damage_Max = 22,
-        Damage_Min = 13,
+        Damage_Min = 10,
 
         BodyDamageMultipliers = {
             [HITGROUP_HEAD] = 6,
@@ -51,8 +49,6 @@ SWEP.BalanceStats = {
         ReloadSpeedMult = 1,
     },
     [TacRP.BALANCE_TTT] = {
-        Description = "Low capacity assault rifle with elite performance.",
-
         Damage_Max = 16,
         Damage_Min = 12,
         Range_Min = 800,
@@ -86,8 +82,6 @@ SWEP.BalanceStats = {
         Damage_Max = 12,
         Damage_Min = 9,
 
-        ClipSize = 25,
-
         MoveSpeedMult = 0.85,
         ShootingSpeedMult = 0.75,
         SightedSpeedMult = 0.75,
@@ -96,7 +90,7 @@ SWEP.BalanceStats = {
     },
     [TacRP.BALANCE_OLDSCHOOL] = {
         RecoilMaximum = 20,
-		RecoilDissipationRate = 18
+        RecoilDissipationRate = 18
     }
 }
 
@@ -132,17 +126,18 @@ SWEP.RPM = 850
 
 SWEP.Spread = 0.001
 
+SWEP.RecoilResetInstant = false
 SWEP.RecoilPerShot = 1
-SWEP.RecoilMaximum = 15
-SWEP.RecoilResetTime = 0.15
-SWEP.RecoilDissipationRate = 17
+SWEP.RecoilMaximum = 8
+SWEP.RecoilResetTime = 0.02
+SWEP.RecoilDissipationRate = 32
 SWEP.RecoilFirstShotMult = 1 // multiplier for the first shot's recoil amount
 
 SWEP.RecoilVisualKick = 1
 SWEP.RecoilKick = 3
 SWEP.RecoilStability = 0.4
 
-SWEP.RecoilSpreadPenalty = 0.0023
+SWEP.RecoilSpreadPenalty = 0.0025
 SWEP.HipFireSpreadPenalty = 0.035
 
 SWEP.CanBlindFire = true
@@ -234,6 +229,21 @@ SWEP.AnimationTranslationTable = {
     ["fire4"] = "fire4_M",
     ["fire5"] = "fire5_M",
     ["melee"] = {"melee1", "melee2"}
+}
+
+SWEP.ProceduralIronFire = {
+    vm_pos = Vector(0, -0.3, -0.2),
+    vm_ang = Angle(0, 0.5, 0),
+    t = 0.2,
+    tmax = 0.2,
+    bones = {
+        {
+            bone = "ValveBiped.bolt_cover",
+            pos = Vector(0, 0, -3),
+            t0 = 0.01,
+            t1 = 0.1,
+        },
+    },
 }
 
 // attachments

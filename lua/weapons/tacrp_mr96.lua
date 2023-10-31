@@ -115,17 +115,18 @@ SWEP.Spread = 0.001
 
 SWEP.ShootTimeMult = 1
 
+SWEP.RecoilResetInstant = false
 SWEP.RecoilPerShot = 1
-SWEP.RecoilMaximum = 2.5
-SWEP.RecoilResetTime = 0.35
-SWEP.RecoilDissipationRate = 4
-SWEP.RecoilFirstShotMult = 0.75 // multiplier for the first shot's recoil amount
+SWEP.RecoilMaximum = 2
+SWEP.RecoilResetTime = 0
+SWEP.RecoilDissipationRate = 9
+SWEP.RecoilFirstShotMult = 0.9
 
 SWEP.RecoilVisualKick = 5
 SWEP.RecoilKick = 9
 SWEP.RecoilStability = 0.5
 
-SWEP.RecoilSpreadPenalty = 0.02
+SWEP.RecoilSpreadPenalty = 0.018
 
 SWEP.CanBlindFire = true
 
@@ -221,20 +222,20 @@ SWEP.AnimationTranslationTable = {
 SWEP.ProceduralIronFire = {
     vm_pos = Vector(0, -3, -4.5),
     vm_ang = Angle(0, 15, 0),
-    t = 0.3,
-    tmax = 0.3,
+    t = 0.5,
+    tmax = 0.5,
     bones = {
         {
             bone = "ValveBiped.cylinder",
             ang = Angle(-60, 0, 0),
             t0 = 0,
-            t1 = 0.2,
+            t1 = 0.25,
         },
         {
             bone = "ValveBiped.hammer",
             ang = Angle(35, 0, 0),
-            t0 = 0,
-            t1 = 0.1,
+            t0 = 0.05,
+            t1 = 0.15,
         },
         {
             bone = "ValveBiped.Bip01_R_Finger1",

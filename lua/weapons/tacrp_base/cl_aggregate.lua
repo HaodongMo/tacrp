@@ -111,6 +111,8 @@ function SWEP:GetSubClassName(tier)
     return "Weapon"
 end
 
+
+
 local hitgroups = {
     [HITGROUP_HEAD] = 0.1,
     [HITGROUP_CHEST] = 0.2,
@@ -134,7 +136,6 @@ local mssd_scoring_ttt = {
     [HITGROUP_LEFTARM] = {0.15, 1,    {1, 1.00, 0.80, 0.70, 0.50, 0.30, 0.25, 0.15, 0.10, 0.05, 0.025}},
     [HITGROUP_LEFTLEG] = {0.10, 1,    {1, 1.00, 0.90, 0.75, 0.60, 0.50, 0.40, 0.30, 0.25, 0.20, 0.15, 0.10, 0.05}},
 }
-
 
 SWEP.StatGroupGrades = {
     {88, "S", Color(230, 60, 60)},
@@ -306,12 +307,11 @@ SWEP.StatGroups = {
 
             local num = valfunc(self, "Num")
             local spread = valfunc(self, "Spread")
-            local delay = 60 / rpm
             local rps = valfunc(self, "RecoilPerShot")
             local rsp = valfunc(self, "RecoilSpreadPenalty")
-            local rrt = valfunc(self, "RecoilResetTime")
+            local rrt = self:GetRecoilResetTime(base)
             local rdr = valfunc(self, "RecoilDissipationRate")
-            local dt = math.max(0, delay - rrt)
+            local dt = math.max(0, -rrt)
             local rbs = dt * rdr -- amount of recoil we can recover between shots even if fired ASAP
 
             if TacRP.ConVars["altrecoil"]:GetBool() then
@@ -326,25 +326,22 @@ SWEP.StatGroups = {
                 if num > 2 then tgt = 0.04 end
                 score = score + math.Clamp(1 - (spread - min) / tgt, 0, 1) * 50
 
-                -- [25] first shot spread
                 local fss = valfunc(self, "RecoilFirstShotMult") * rps
-                score = score + math.Clamp(1 - (spread + fss * rsp - rbs) / tgt, 0, 1) * 25
+                -- score = score + math.Clamp(1 - (spread + fss * rsp - rbs) / tgt, 0, 1) * 25
 
-                -- [25] spread over 0.3s (or one burst)
+                -- [50] spread over 0.3s (or one burst)
                 local shots = math.min(math.ceil(rpm / 60 * 0.3), math.floor(self:GetBaseValue("ClipSize") * 0.5))
                 if bfm < 0 then
                     shots = -bfm
                 end
                 if rbs <= fss then
                     local so1 = (fss - rbs + shots * (rps - rbs)) * rsp
-                    score = score + math.Clamp(1 - so1 / 0.03, 0, 1) ^ 1.25 * 25
+                    score = score + math.Clamp(1 - so1 / 0.03, 0, 1) ^ 1.25 * 50
                 else
                     -- delay is so long we always get first shot
-                    score = score + 25
+                    score = score + 50
                 end
             end
-
-
 
             -- recoil reset time
             -- score = score + math.Clamp(1 - math.max(0, rrt - delay) / 0.25, 0, 1) * 10
@@ -367,52 +364,38 @@ SWEP.StatGroups = {
             elseif bfm < 0 then
                 erpm = 60 / ((1 / (erpm / 60)) + (pbd / -bfm))
             end
-            local delay = 60 / valfunc(self, "RPM")
             local rps = valfunc(self, "RecoilPerShot")
             local rsp = valfunc(self, "RecoilSpreadPenalty")
-            local rrt = valfunc(self, "RecoilResetTime")
+            local rrt = self:GetRecoilResetTime(base)
             local rdr = valfunc(self, "RecoilDissipationRate")
-            local dt = math.max(0, delay - rrt)
+            local dt = math.max(0, -rrt)
             local rbs = dt * rdr -- amount of recoil we can recover between shots even if fired ASAP
-            local fss = valfunc(self, "RecoilFirstShotMult") * rps
+            local fss = valfunc(self, "RecoilFirstShotMult")
             local rmax = valfunc(self, "RecoilMaximum")
-
             local rk = math.abs(valfunc(self, "RecoilKick"))
 
-            -- if rbs > fss or rsp == 0 then
-            --     -- judge solely on recoil kick and reset time, as spread is not a factor
-            --     return math.Clamp(1 - rk * rrt / 4, 0, 1) * 70 + 30
-            -- end
+            -- local rrec_s = math.Clamp(rdr / rps / rmax / 5, 0, 1) ^ 0.9
+            -- local mspr_s = math.Clamp(1 - rmax * rsp / 0.04, 0, 1)
+            -- score = score + mspr_s * 20
 
-            -- recoil recovery
-            local rrec_s = math.Clamp(rdr / rps / 30, 0, 1) ^ 0.9
-            -- print("rrec", rdr / rps, math.Clamp(math.max(0, (rdr / rps) - 4) / 16, 0, 1) * 30)
-
-            -- maximum spread
-            local mspr_s = math.Clamp(1 - rmax * rsp / 0.1, 0, 1) ^ 0.9
-            -- score = score + math.Clamp(1 - rmax * rsp / 0.1, 0, 1) * 15
-
-            -- 40 scaled between max spread and recovery
-            score = score + math.max(rrec_s, mspr_s) * 30 + math.min(rrec_s, mspr_s) * 10
-
-            -- [30] recoil kick over 1s
-            local score_rk1 = 30
+            -- [50] recoil kick over 1s
+            local score_rk1 = 50
             local shots = math.ceil(erpm / 60 * 1)
             score = score + math.Clamp(1 - (rk * shots * rrt - 3) / 12, 0, 1) * score_rk1
             -- print("rk1", rk * shots * rrt, math.Clamp(1 - rk * shots * rrt / 15, 0, 1) * score_rk1)
 
-            -- [30] spread over 1s (or 2 bursts)
-            local score_sg = 30
+            -- [50] bloom over 1s
+            local score_sg = 50
             if bfm < 0 then
                 local rbb = math.max(0, pbd - rrt) * rdr -- recovery between bursts
                 local rpb = -bfm * rps - (-bfm - 1) * rbs - rbb -- recoil per full burst
-                score = score + math.Clamp(1 - (rpb * rsp * 2) / 0.04, 0, 1) ^ 0.75 * score_sg
+                score = score + math.Clamp(1 - (rpb * rsp * 2) / 0.03, 0, 1) ^ 1.5 * score_sg
                 -- print("spb", rpb * rsp, math.Clamp(1 - (rpb * rsp * 3) / 0.04, 0, 1) ^ 2 * score_sg)
             else
-                local sg = math.min(shots, math.ceil(rmax / rsp))
-                local sot = math.min(rmax, fss - rbs + sg * (rps - rbs)) * rsp
+                -- local sg = math.min(shots, math.ceil(rmax / rsp))
+                local sot = math.min(rmax, fss - rbs + (shots - 1) * (rps - rbs)) * rsp
                 -- print("sot", sot, math.Clamp(1 - (sot - 0.01) / 0.03, 0, 1) ^ 0.75 * score_sg)
-                score = score + math.Clamp(1 - (sot - 0.01) / 0.03, 0, 1) ^ 0.75 * score_sg
+                score = score + math.Clamp(1 - (sot - 0.01) / 0.02, 0, 1) ^ 1.5 * score_sg
             end
 
             return score

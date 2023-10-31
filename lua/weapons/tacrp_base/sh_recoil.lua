@@ -1,6 +1,12 @@
+function SWEP:GetRecoilResetTime(base)
+    if base then
+        return (self:GetBaseValue("RecoilResetInstant") and 0 or math.min(0.5, 60 / self:GetBaseValue("RPM"))) + self:GetBaseValue("RecoilResetTime")
+    else
+        return (self:GetValue("RecoilResetInstant") and 0 or math.min(0.5, 60 / self:GetValue("RPM"))) + self:GetValue("RecoilResetTime")
+    end
+end
+
 function SWEP:ThinkRecoil()
-
-
     -- if ((IsFirstTimePredicted() and CLIENT) or game.SinglePlayer()) and self:GetRecoilAmount() > 0 then
     --     local kick = self:GetValue("RecoilKick")
 
@@ -17,7 +23,7 @@ function SWEP:ThinkRecoil()
     --     -- self:SetFreeAimAngle(self:GetFreeAimAngle() - Angle(aim_kick_v, aim_kick_h, 0))
     -- end
 
-    if self:GetLastRecoilTime() + self:GetValue("RecoilResetTime") < CurTime() then
+    if self:GetLastRecoilTime() + engine.TickInterval() + self:GetRecoilResetTime() < CurTime() then
         local rec = self:GetRecoilAmount()
 
         rec = rec - (FrameTime() * self:GetValue("RecoilDissipationRate"))

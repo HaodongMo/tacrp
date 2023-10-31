@@ -34,19 +34,8 @@ SWEP.Slot = 1
 SWEP.BalanceStats = {
     [TacRP.BALANCE_SBOX] = {
         Damage_Max = 32,
-        Damage_Min = 14,
+        Damage_Min = 12,
         RPM = 450,
-
-        BodyDamageMultipliers = {
-            [HITGROUP_HEAD] = 3,
-            [HITGROUP_CHEST] = 1,
-            [HITGROUP_STOMACH] = 1,
-            [HITGROUP_LEFTARM] = 1,
-            [HITGROUP_RIGHTARM] = 1,
-            [HITGROUP_LEFTLEG] = 0.75,
-            [HITGROUP_RIGHTLEG] = 0.75,
-            [HITGROUP_GEAR] = 0.9
-        },
 
         MoveSpeedMult = 1,
         ShootingSpeedMult = 1,
@@ -61,6 +50,7 @@ SWEP.BalanceStats = {
         Range_Max = 2200,
         RPM = 250,
 
+        RecoilResetInstant = true,
         RecoilMaximum = 5,
         RecoilResetTime = 0.2,
         RecoilDissipationRate = 6,
@@ -91,6 +81,7 @@ SWEP.BalanceStats = {
         Damage_Min = 6,
         RPM = 320,
 
+        RecoilResetInstant = true,
         RecoilMaximum = 4,
         RecoilResetTime = 0.15,
         RecoilDissipationRate = 5,
@@ -110,17 +101,17 @@ SWEP.TTTReplace = TacRP.TTTReplacePreset.Pistol
 // "ballistics"
 
 SWEP.Damage_Max = 27
-SWEP.Damage_Min = 5
+SWEP.Damage_Min = 10
 SWEP.Range_Min = 700 // distance for which to maintain maximum damage
 SWEP.Range_Max = 3500 // distance at which we drop to minimum damage
 SWEP.Penetration = 5 // units of metal this weapon can penetrate
-SWEP.ArmorPenetration = 0.575
-SWEP.ArmorBonus = 0.5
+SWEP.ArmorPenetration = 0.625
+SWEP.ArmorBonus = 0.75
 
 SWEP.MuzzleVelocity = 9000
 
 SWEP.BodyDamageMultipliers = {
-    [HITGROUP_HEAD] = 3.5,
+    [HITGROUP_HEAD] = 3,
     [HITGROUP_CHEST] = 1,
     [HITGROUP_STOMACH] = 1.25,
     [HITGROUP_LEFTARM] = 1,
@@ -137,16 +128,17 @@ SWEP.Firemode = 1
 SWEP.RPM = 400
 
 SWEP.Spread = 0.004
-SWEP.RecoilSpreadPenalty = 0.004
+SWEP.RecoilSpreadPenalty = 0.006
 SWEP.HipFireSpreadPenalty = 0.021
 
+SWEP.RecoilResetInstant = false
 SWEP.RecoilPerShot = 1
-SWEP.RecoilMaximum = 6
-SWEP.RecoilResetTime = 0.2
-SWEP.RecoilDissipationRate = 7
-SWEP.RecoilFirstShotMult = 0.9
+SWEP.RecoilMaximum = 4
+SWEP.RecoilResetTime = 0.01
+SWEP.RecoilDissipationRate = 18
+SWEP.RecoilFirstShotMult = 0.8
 
-SWEP.RecoilVisualKick = 2
+SWEP.RecoilVisualKick = 1.5
 SWEP.RecoilKick = 7
 SWEP.RecoilStability = 0.5
 

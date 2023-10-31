@@ -121,17 +121,18 @@ SWEP.Firemodes = {
 
 SWEP.RPM = 850
 
-SWEP.Spread = 0.009
-SWEP.RecoilSpreadPenalty = 0.0018
+SWEP.Spread = 0.0075
+SWEP.RecoilSpreadPenalty = 0.0014
 SWEP.HipFireSpreadPenalty = 0.011
 
 SWEP.ShootTimeMult = 0.5
 
+SWEP.RecoilResetInstant = false
 SWEP.RecoilPerShot = 1
-SWEP.RecoilMaximum = 8
-SWEP.RecoilResetTime = 0.1 // time after you stop shooting for recoil to start dissipating
-SWEP.RecoilDissipationRate = 24
-SWEP.RecoilFirstShotMult = 1 // multiplier for the first shot's recoil amount
+SWEP.RecoilMaximum = 9
+SWEP.RecoilResetTime = 0.01
+SWEP.RecoilDissipationRate = 40
+SWEP.RecoilFirstShotMult = 1.25
 
 SWEP.RecoilVisualKick = 0.5
 SWEP.RecoilKick = 1.5

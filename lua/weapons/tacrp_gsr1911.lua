@@ -4,7 +4,7 @@ SWEP.Spawnable = true
 AddCSLuaFile()
 
 // names and stuff
-SWEP.PrintName = "SIG 1911 TACOPS" -- The model isn't actually a GSR + TACOPS sounds so badass
+SWEP.PrintName = "SIG 1911 TACOPS" // The model isn't actually a GSR + TACOPS sounds so badass
 SWEP.Category = "Tactical RP"
 
 SWEP.SubCatTier = "3Security"
@@ -56,6 +56,7 @@ SWEP.BalanceStats = {
 
         Spread = 0.007,
 
+        RecoilResetInstant = true,
         RecoilMaximum = 3.5,
         RecoilResetTime = 0.24,
         RecoilDissipationRate = 6,
@@ -86,6 +87,7 @@ SWEP.BalanceStats = {
         Damage_Min = 6,
         RPM = 300,
 
+        RecoilResetInstant = true,
         HipFireSpreadPenalty = 0.015,
         RecoilSpreadPenalty = 0.005,
         RecoilMaximum = 3,
@@ -138,11 +140,12 @@ SWEP.HipFireSpreadPenalty = 0.01
 
 SWEP.ShootTimeMult = 0.5
 
+SWEP.RecoilResetInstant = false
 SWEP.RecoilPerShot = 1
-SWEP.RecoilMaximum = 5
-SWEP.RecoilResetTime = 0.15
-SWEP.RecoilDissipationRate = 8
-SWEP.RecoilFirstShotMult = 0.75
+SWEP.RecoilMaximum = 4
+SWEP.RecoilResetTime = 0.01
+SWEP.RecoilDissipationRate = 18
+SWEP.RecoilFirstShotMult = 0.8
 
 SWEP.RecoilVisualKick = 2
 

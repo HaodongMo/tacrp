@@ -131,8 +131,8 @@ SWEP.PeekPenaltyFraction = 0.2
 SWEP.RecoilPerShot = 1
 SWEP.RecoilMaximum = 2
 SWEP.RecoilResetTime = 0.25
-SWEP.RecoilDissipationRate = 1.5
-SWEP.RecoilFirstShotMult = 0.8
+SWEP.RecoilDissipationRate = 3
+SWEP.RecoilFirstShotMult = 1
 // SWEP.RecoilCrouchMult = 0.25
 
 SWEP.RecoilVisualKick = 4

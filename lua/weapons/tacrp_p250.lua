@@ -26,8 +26,8 @@ SWEP.Slot = 1
 
 SWEP.BalanceStats = {
     [TacRP.BALANCE_SBOX] = {
-        Damage_Max = 29,
-        Damage_Min = 22,
+        Damage_Max = 32,
+        Damage_Min = 20,
         Range_Min = 900,
         Range_Max = 2800,
         ArmorPenetration = 0.65,
@@ -58,6 +58,7 @@ SWEP.BalanceStats = {
         Range_Max = 2000,
         RPM = 200,
 
+        RecoilResetInstant = true,
         RecoilMaximum = 5,
         RecoilResetTime = 0.2,
         RecoilDissipationRate = 5.5,
@@ -133,17 +134,18 @@ SWEP.Spread = 0.004
 
 SWEP.ShootTimeMult = 0.5
 
+SWEP.RecoilResetInstant = false
 SWEP.RecoilPerShot = 1
-SWEP.RecoilMaximum = 5
-SWEP.RecoilResetTime = 0.2
-SWEP.RecoilDissipationRate = 7
+SWEP.RecoilMaximum = 3
+SWEP.RecoilResetTime = 0.02
+SWEP.RecoilDissipationRate = 12
 SWEP.RecoilFirstShotMult = 1
 
-SWEP.RecoilVisualKick = 2
+SWEP.RecoilVisualKick = 1.5
 SWEP.RecoilKick = 5
 SWEP.RecoilStability = 0.6
 
-SWEP.RecoilSpreadPenalty = 0.003
+SWEP.RecoilSpreadPenalty = 0.0065
 
 SWEP.CanBlindFire = true
 

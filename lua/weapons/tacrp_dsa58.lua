@@ -42,6 +42,7 @@ SWEP.BalanceStats = {
         Range_Max = 4000,
         RPM = 240,
 
+        RecoilResetInstant = true,
         RecoilResetTime = 0.1,
         RecoilDissipationRate = 3,
         RecoilMaximum = 3,
@@ -128,20 +129,21 @@ SWEP.RPM = 420
 
 SWEP.Spread = 0.002
 
+SWEP.RecoilResetInstant = false
 SWEP.RecoilPerShot = 1
 SWEP.RecoilMaximum = 5
-SWEP.RecoilResetTime = 0.13
-SWEP.RecoilDissipationRate = 10
-SWEP.RecoilFirstShotMult = 0.5
+SWEP.RecoilResetTime = 0
+SWEP.RecoilDissipationRate = 20
+SWEP.RecoilFirstShotMult = 0.85
 
-SWEP.RecoilVisualKick = 1.5
+SWEP.RecoilVisualKick = 1.25
 
 SWEP.RecoilKick = 8
 SWEP.RecoilStability = 0.75
 
 SWEP.RecoilSpreadPenalty = 0.005
-SWEP.HipFireSpreadPenalty = 0.08
-SWEP.PeekPenaltyFraction = 0.2
+SWEP.HipFireSpreadPenalty = 0.05
+SWEP.PeekPenaltyFraction = 0.25
 
 SWEP.CanBlindFire = true
 

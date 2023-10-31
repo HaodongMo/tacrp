@@ -10,7 +10,7 @@ SWEP.Category = "Tactical RP"
 SWEP.SubCatTier = "3Security"
 SWEP.SubCatType = "1Sidearm"
 
-SWEP.Description = "Well-rounded handgun."
+SWEP.Description = "Well-rounded police handgun."
 SWEP.Description_Quote = "It's so fucking boring."
 
 SWEP.Trivia_Caliber = "9x19mm"
@@ -33,7 +33,7 @@ SWEP.BalanceStats = {
         RecoilKick = 4,
 
         BodyDamageMultipliers = {
-            [HITGROUP_HEAD] = 3.75,
+            [HITGROUP_HEAD] = 3,
             [HITGROUP_CHEST] = 1,
             [HITGROUP_STOMACH] = 1,
             [HITGROUP_LEFTARM] = 1,
@@ -56,6 +56,7 @@ SWEP.BalanceStats = {
         Range_Max = 2000,
         RPM = 420,
 
+        RecoilResetInstant = true,
         RecoilMaximum = 8,
         RecoilResetTime = 0.22,
         RecoilDissipationRate = 10,
@@ -108,7 +109,7 @@ SWEP.ArmorPenetration = 0.55
 SWEP.MuzzleVelocity = 11500
 
 SWEP.BodyDamageMultipliers = {
-    [HITGROUP_HEAD] = 4.5,
+    [HITGROUP_HEAD] = 4,
     [HITGROUP_CHEST] = 1,
     [HITGROUP_STOMACH] = 1,
     [HITGROUP_LEFTARM] = 1,
@@ -126,11 +127,12 @@ SWEP.RPM = 450
 
 SWEP.Spread = 0.0055
 
+SWEP.RecoilResetInstant = false
 SWEP.RecoilPerShot = 1
-SWEP.RecoilMaximum = 7
-SWEP.RecoilResetTime = 0.2
-SWEP.RecoilDissipationRate = 8
-SWEP.RecoilFirstShotMult = 1 // multiplier for the first shot's recoil amount
+SWEP.RecoilMaximum = 4
+SWEP.RecoilResetTime = 0.02
+SWEP.RecoilDissipationRate = 16
+SWEP.RecoilFirstShotMult = 1
 
 SWEP.RecoilVisualKick = 1
 SWEP.RecoilKick = 4.5

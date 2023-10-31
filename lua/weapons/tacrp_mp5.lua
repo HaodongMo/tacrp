@@ -88,7 +88,7 @@ SWEP.BalanceStats = {
     },
     [TacRP.BALANCE_OLDSCHOOL] = {
         RecoilMaximum = 20,
-		RecoilDissipationRate = 25
+        RecoilDissipationRate = 25
     }
 }
 
@@ -129,17 +129,18 @@ SWEP.Spread = 0.001
 
 SWEP.ShootTimeMult = 0.5
 
+SWEP.RecoilResetInstant = false
 SWEP.RecoilPerShot = 1
 SWEP.RecoilMaximum = 12
-SWEP.RecoilResetTime = 0.12  // time after you stop shooting for recoil to start dissipating
-SWEP.RecoilDissipationRate = 16
-SWEP.RecoilFirstShotMult = 0.75
+SWEP.RecoilResetTime = 0
+SWEP.RecoilDissipationRate = 40
+SWEP.RecoilFirstShotMult = 0.9
 
 SWEP.RecoilVisualKick = 0.5
 SWEP.RecoilKick = 3
 SWEP.RecoilStability = 0.4
 
-SWEP.RecoilSpreadPenalty = 0.0022
+SWEP.RecoilSpreadPenalty = 0.002
 SWEP.HipFireSpreadPenalty = 0.025
 
 SWEP.CanBlindFire = true

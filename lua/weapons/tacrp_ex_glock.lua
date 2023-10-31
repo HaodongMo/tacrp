@@ -28,7 +28,7 @@ SWEP.BalanceStats = {
     [TacRP.BALANCE_SBOX] = {
         Damage_Max = 24,
         Damage_Min = 10,
-        RecoilKick = 2.5,
+        RecoilKick = 3,
 
         MoveSpeedMult = 1,
         ShootingSpeedMult = 1,
@@ -80,7 +80,7 @@ SWEP.BalanceStats = {
         ReloadSpeedMult = 1,
     },
     [TacRP.BALANCE_OLDSCHOOL] = {
-		Description = "Lightweight polymer handgun with a high fire rate but below-average spread.",
+        Description = "Lightweight polymer handgun with a high fire rate but below-average spread.",
         HipFireSpreadPenalty = 0.01,
     }
 }
@@ -114,17 +114,18 @@ SWEP.BodyDamageMultipliers = {
 
 SWEP.Firemode = 1
 
-SWEP.RPM = 700
+SWEP.RPM = 600
 
 SWEP.Spread = 0.008
 
+SWEP.RecoilResetInstant = false
 SWEP.RecoilPerShot = 1
-SWEP.RecoilMaximum = 8
-SWEP.RecoilResetTime = 0.1
-SWEP.RecoilDissipationRate = 14
+SWEP.RecoilMaximum = 4
+SWEP.RecoilResetTime = 0.035
+SWEP.RecoilDissipationRate = 16
 SWEP.RecoilFirstShotMult = 1 // multiplier for the first shot's recoil amount
 
-SWEP.RecoilVisualKick = 1.5
+SWEP.RecoilVisualKick = 1.25
 SWEP.RecoilKick = 4
 SWEP.RecoilStability = 0.25
 

@@ -88,7 +88,7 @@ SWEP.BalanceStats = {
         ReloadSpeedMult = 1,
     },
     [TacRP.BALANCE_OLDSCHOOL] = {
-		Description = "Close-range SMG with an insane rate of fire and basically no recoil, but very poor accuracy.",
+        Description = "Close-range SMG with an insane rate of fire and basically no recoil, but very poor accuracy.",
         RecoilSpreadPenalty = 0.003,
         HipFireSpreadPenalty = 0.01
     }
@@ -129,23 +129,24 @@ SWEP.Firemodes = {
 
 SWEP.RPM = 1200
 
-SWEP.Spread = 0.012
+SWEP.Spread = 0.01
 
 SWEP.HipFireSpreadPenalty = 0.012
 
 SWEP.ShootTimeMult = 0.5
 
+SWEP.RecoilResetInstant = false
 SWEP.RecoilPerShot = 1
-SWEP.RecoilMaximum = 20
-SWEP.RecoilResetTime = 0.14
-SWEP.RecoilDissipationRate = 40
+SWEP.RecoilMaximum = 15
+SWEP.RecoilResetTime = 0.04
+SWEP.RecoilDissipationRate = 60
 SWEP.RecoilFirstShotMult = 1 // multiplier for the first shot's recoil amount
 
 SWEP.RecoilVisualKick = 0.25
 
 SWEP.RecoilKick = 1
 
-SWEP.RecoilSpreadPenalty = 0.0008
+SWEP.RecoilSpreadPenalty = 0.0012
 
 SWEP.CanBlindFire = true
 

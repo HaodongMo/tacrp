@@ -80,8 +80,8 @@ SWEP.BalanceStats = {
         ReloadSpeedMult = 1,
     },
     [TacRP.BALANCE_OLDSCHOOL] = {
-		Description = "Balanced light machine gun that can put down some serious firepower.",
-		ClipSize = 75,
+        Description = "Balanced light machine gun that can put down some serious firepower.",
+        ClipSize = 75,
         RecoilSpreadPenalty = 0.0013,
         ReloadTimeMult = 1.1
     }
@@ -124,8 +124,8 @@ SWEP.ShootTimeMult = 0.5
 SWEP.RecoilPerShot = 1
 SWEP.RecoilMaximum = 25
 SWEP.RecoilResetTime = 0.15
-SWEP.RecoilDissipationRate = 35
-SWEP.RecoilFirstShotMult = 2 // multiplier for the first shot's recoil amount
+SWEP.RecoilDissipationRate = 40
+SWEP.RecoilFirstShotMult = 2
 
 SWEP.RecoilVisualKick = 1
 
