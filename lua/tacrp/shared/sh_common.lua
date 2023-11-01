@@ -179,8 +179,8 @@ TacRP.BalanceDefaults = {
         ReloadSpeedMult = 1,
     },
     [TacRP.BALANCE_PVE] = {
+		RecoilVisualKick = 0.75,
         BodyDamageMultipliers = {
-			RecoilVisualKick = 0.75,
             [HITGROUP_HEAD] = 1.5,
             [HITGROUP_CHEST] = 1,
             [HITGROUP_STOMACH] = 1,
