@@ -10,16 +10,16 @@ SWEP.Category = "Tactical RP" // "Tactical RP (Extras)"
 SWEP.SubCatTier = "4Consumer"
 SWEP.SubCatType = "1Sidearm"
 
-SWEP.Description = "Polymer pistol with large capacity and fire rate."
+SWEP.Description = "Polymer pistol with larger-than-standard capacity and a fast fire rate."
 
 SWEP.Trivia_Caliber = "9x19mm"
 SWEP.Trivia_Manufacturer = "Glock Ges.m.b.H"
 SWEP.Trivia_Year = "1982"
 
 SWEP.Faction = TacRP.FACTION_NEUTRAL
-SWEP.Credits = "Assets: Counter-Strike: Source, retextured by Teh Snake \nSource: Gamebanana"
+SWEP.Credits = "Assets: Twinke Masta \nAnimations: Tactical Intervention"
 
-SWEP.ViewModel = "models/weapons/tacint_extras/v_glock.mdl"
+SWEP.ViewModel = "models/weapons/tacint_extras/v_glock_new.mdl"
 SWEP.WorldModel = "models/weapons/tacint_extras/w_glock.mdl"
 
 SWEP.Slot = 1
@@ -27,7 +27,7 @@ SWEP.Slot = 1
 SWEP.BalanceStats = {
     [TacRP.BALANCE_SBOX] = {
         Damage_Max = 24,
-        Damage_Min = 10,
+        Damage_Min = 11,
         RecoilKick = 3,
 
         MoveSpeedMult = 1,
@@ -37,7 +37,7 @@ SWEP.BalanceStats = {
         ReloadSpeedMult = 1,
     },
     [TacRP.BALANCE_TTT] = {
-        Damage_Max = 12,
+        Damage_Max = 13,
         Damage_Min = 5,
         Range_Min = 500,
         Range_Max = 1750,
@@ -67,7 +67,7 @@ SWEP.BalanceStats = {
         ReloadSpeedMult = 0.9,
     },
     [TacRP.BALANCE_PVE] = {
-        Damage_Max = 6,
+        Damage_Max = 7,
         Damage_Min = 3,
 
         HipFireSpreadPenalty = 0.012,
@@ -89,7 +89,7 @@ SWEP.TTTReplace = TacRP.TTTReplacePreset.Pistol
 
 // "ballistics"
 
-SWEP.Damage_Max = 15
+SWEP.Damage_Max = 16
 SWEP.Damage_Min = 7
 SWEP.Range_Min = 900 // distance for which to maintain maximum damage
 SWEP.Range_Max = 2500 // distance at which we drop to minimum damage
@@ -170,8 +170,8 @@ SWEP.BlindFireSuicidePos = Vector(25, 12, -5)
 SWEP.SprintAng = Angle(0, 30, 0)
 SWEP.SprintPos = Vector(2, 0, -12)
 
-SWEP.SightAng = Angle(-0.01, 0.75, 0)
-SWEP.SightPos = Vector(-3.3, 0, -3.65)
+SWEP.SightAng = Angle(-0.01, 0.35, 0)
+SWEP.SightPos = Vector(-3.3, 0, -3.35)
 
 SWEP.CorrectivePos = Vector(0.02, -1, 0)
 SWEP.CorrectiveAng = Angle(0.05, -0.05, 0)
@@ -183,7 +183,7 @@ SWEP.HolsterAng = Angle(90, 0, 0)
 
 // reload
 
-SWEP.ClipSize = 20
+SWEP.ClipSize = 18
 SWEP.Ammo = "pistol"
 
 SWEP.ReloadTimeMult = 1.4
@@ -273,7 +273,7 @@ SWEP.Attachments = {
         DetachSound = "tacrp/weapons/optic_off.wav",
         VMScale = 1,
         WMScale = 1.2,
-        Pos_VM = Vector(0.21, 0, -0.2),
+        Pos_VM = Vector(0.21, 0, -0.15),
         Ang_VM = Angle(0, 90, 180),
         Pos_WM = Vector(0, -3, -1),
         Ang_WM = Angle(0, -90, 0),
@@ -285,9 +285,9 @@ SWEP.Attachments = {
         WMBone = "Box01",
         AttachSound = "tacrp/weapons/silencer_on.wav",
         DetachSound = "tacrp/weapons/silencer_off.wav",
-        VMScale = 0.5,
+        VMScale = 0.6,
         WMScale = 0.6,
-        Pos_VM = Vector(-0.5, 0.25, 7),
+        Pos_VM = Vector(-0.5, 0.25, 7.25),
         Ang_VM = Angle(90, 0, 0),
         Pos_WM = Vector(0, 8.4, -1.5),
         Ang_WM = Angle(0, -90, 0),
@@ -299,9 +299,9 @@ SWEP.Attachments = {
         WMBone = "Box01",
         AttachSound = "tacrp/weapons/flashlight_on.wav",
         DetachSound = "tacrp/weapons/flashlight_off.wav",
-        VMScale = 1.1,
+        VMScale = 1,
         WMScale = 1.3,
-        Pos_VM = Vector(-2, -0.21, 6.8),
+        Pos_VM = Vector(-2.1, -0.21, 6.5),
         Ang_VM = Angle(90, 0, 180),
         Pos_WM = Vector(0, 5, -2.75),
         Ang_WM = Angle(0, -90, 180),
