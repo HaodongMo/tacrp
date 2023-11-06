@@ -20,7 +20,7 @@ SWEP.Faction = TacRP.FACTION_NEUTRAL
 SWEP.Credits = "Assets: Twinke Masta \nAnimations: Tactical Intervention"
 
 SWEP.ViewModel = "models/weapons/tacint_extras/v_glock_new.mdl"
-SWEP.WorldModel = "models/weapons/tacint_extras/w_glock.mdl"
+SWEP.WorldModel = "models/weapons/tacint_extras/w_glock_new.mdl"
 
 SWEP.Slot = 1
 
@@ -188,7 +188,7 @@ SWEP.Ammo = "pistol"
 
 SWEP.ReloadTimeMult = 1.4
 
-SWEP.DropMagazineModel = "models/weapons/tacint_extras/magazines/glock.mdl"
+SWEP.DropMagazineModel = "models/weapons/tacint_extras/magazines/glock_new.mdl"
 SWEP.DropMagazineImpact = "pistol"
 
 SWEP.ReloadUpInTime = 0.85
@@ -272,7 +272,7 @@ SWEP.Attachments = {
         AttachSound = "tacrp/weapons/optic_on.wav",
         DetachSound = "tacrp/weapons/optic_off.wav",
         VMScale = 1,
-        WMScale = 1.2,
+        WMScale = 1.4,
         Pos_VM = Vector(0.21, 0, -0.15),
         Ang_VM = Angle(0, 90, 180),
         Pos_WM = Vector(0, -3, -1),
@@ -289,7 +289,7 @@ SWEP.Attachments = {
         WMScale = 0.6,
         Pos_VM = Vector(-0.5, 0.25, 7.25),
         Ang_VM = Angle(90, 0, 0),
-        Pos_WM = Vector(0, 8.4, -1.5),
+        Pos_WM = Vector(0.05, 8.6, -1.7),
         Ang_WM = Angle(0, -90, 0),
     },
     [3] = {
@@ -303,7 +303,7 @@ SWEP.Attachments = {
         WMScale = 1.3,
         Pos_VM = Vector(-2.1, -0.21, 6.5),
         Ang_VM = Angle(90, 0, 180),
-        Pos_WM = Vector(0, 5, -2.75),
+        Pos_WM = Vector(0.1, 5, -2.75),
         Ang_WM = Angle(0, -90, 180),
     },
     [4] = {
