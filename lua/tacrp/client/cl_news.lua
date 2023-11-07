@@ -357,6 +357,77 @@ An additional benefit is that a lot of the attachments now use consistent wordin
 <li><b>Fixed:</b> Weapon withs >100% AP deal more damage than normal and restores armor.
 </ul>]],
     },
+    {
+        Title = "Update 16",
+        Type = "Patch Notes",
+        Date = "2023-11-06",
+        Author = "8Z",
+        Major = false,
+        Summary = "",
+        Contents = [[<body style="font-family:'Myriad Pro';color:white;font-size:125%;">
+<p>What is Tactical may never die. Is that how the saying goes?
+<br>Here's an update that's been cooking for a while. We've got a bit of everything: cool new features that enhance gameplay, visual reworks to some old models, performance update, it's all here.</p>
+
+<h2>Shots 1-5: Clearly Missed</h2>
+<p>Not enough skill issue in your Garry's Mod weapon addon? Now, instead of complaining about random recoil spread, you're gonna have to complain about something else, cause it's no longer random.</p>
+
+<p>Similar to CS:GO (I guess it's now CS2)'s implementation, weapon recoil will follow a consistent pattern, typically going upwards until reaching a "suppression threshold", after which recoil becomes mostly horizontal.</p>
+
+<p>Best used with "Bloom Modifies Recoil". Guns that have low RPM (<100), are burst fire, or shoot entities do not use patterns.</p>
+
+<h2>I'll take "Useless Firearm Knowledge" for 500, Alex</h2>
+<p>Want to know more about all the guns we have? No? Damn, cause we wasted a lot of hours putting in trivia and credits for</p>
+
+<p><i>Every. Single. Gun.</i> There's like over a hundred. Yeah.</p>
+
+<p>There's also now a credits page, so you know who to thank for the pretty models in all of our packs!</p>
+
+<p>For additional realism, some guns have their names changed. The exception is the TGS-12, which we're almost certain Gooseman made up and is just a Bekas decked with aftermarket parts.</p>
+
+<h2>Pod means legs, Bi means two</h2>
+<p>The previous iteration of bipod was like pretending to use a bipod. It was not very fun. So I went ahead and implemented a proper bipod system.</p>
+
+<p>Now, you can deploy bipod on any surface by aiming down sights when the prompt shows up. While deployed, you can enjoy significantly reduced bloom gain and recoil kick, zero sway and free aim, and reduced hip spread (based on peeking bonus).</p>
+
+<p>AS50, MG4, Hecate and SA58 come with a bipod in the base pack. They are now innate and no longer take up your Accessory slot (the Bipod attachment is deprecated). Plus, the bipod will unfold while deployed and fold up when it's not. Neat!</p>
+
+<h2>Steady, Steady...</h2>
+<p>Sway is kinda annoying when you want to snipe. Now, you can hold your breath to stop swaying for a little bit, like most modern games.</p>
+
+<p>The amount of breath meter drained is dependent on Scoped Sway. Iron sights and low magnification optics are easier to hold still with. Careful not to hold too long, as running low or out will increase sway significantly!</p>
+
+<h2>Facelifts</h2>
+<p>The Glock 17 model has been swapped out for the cooler one from Twinke Masta.
+<br>Also, the Hecate II now has its original scope and bipod models.</p>
+
+<hr>
+
+<h3>Changelist</h3>
+<ul>
+<li><b>Major Change:</b> Trivia and Credits tab.
+<li><b>Major Change:</b> Bipod.
+<li><b>Major Change:</b> Hold Breath.
+<li><b>Major Change:</b> Recoil Patterns.
+<li><b>Added:</b> Glock 17 model replaced.
+<li><b>Added:</b> Hecate II model touch up - added scope and bipod from original model.
+<li><b>Added:</b> Bulk attachment files. This should speed up loading noticeably.
+<li><b>Changed:</b> Spread gauge is no longer FOV dependent. Outer (thin) circle is ~17MOA per tick and inner (thick) circle is ~83MOA per tick.
+<li><b>Changed:</b> Phrasing changes for Speed, Bloom and Duration stats.
+<li><b>Changed:</b> MAC-10 firing sounds.
+<li><b>Changed:</b> Adjusted some weapon names and descriptions.
+<li><b>Changed:</b> Magnum Pistols are now its own category.
+<li><b>Rebalance:</b> Significantly increased bloom recovery and reduced maximum bloom on most guns.
+<li><b>Rebalance:</b> Surplus attachments now reduce recoil.
+<li><b>Rebalance:</b> Mag Extenders slows down reload slightly.
+<li><b>Rebalance:</b> Buffs to Beryl and M1A.
+<li><b>Rebalance:</b> Sphinx 2000 is now a 3-round burst Machine Pistol (again).
+<li><b>Rebalance:</b> Increased P90 recoil.
+<li><b>Fixed:</b> Firemode resetting when detaching attachment.
+<li><b>Fixed:</b> Minor alignment issues with optics.
+<li><b>Fixed:</b> Some TTT2 related issues.
+<li><b>Fixed:</b> Runaway Burst interactions with "Lower Weapon While Sprinting" off.
+</ul>]],
+    },
 }
 TacRP.NewsRead = TacRP.NewsRead or {}
 TacRP.NewsLoaded = nil
