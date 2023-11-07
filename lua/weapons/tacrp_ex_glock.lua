@@ -17,7 +17,7 @@ SWEP.Trivia_Manufacturer = "Glock Ges.m.b.H"
 SWEP.Trivia_Year = "1982"
 
 SWEP.Faction = TacRP.FACTION_NEUTRAL
-SWEP.Credits = "Assets: Twinke Masta \nAnimations: Tactical Intervention"
+SWEP.Credits = "Assets: Twinke Masta \nSounds: Vunsunta \nAnimations: Tactical Intervention"
 
 SWEP.ViewModel = "models/weapons/tacint_extras/v_glock_new.mdl"
 SWEP.WorldModel = "models/weapons/tacint_extras/w_glock_new.mdl"
@@ -199,7 +199,7 @@ SWEP.DropMagazineTime = 0.2
 local path = "tacrp/weapons/p2000/p2000_"
 local path2 = "tacrp_extras/glock/"
 
-SWEP.Sound_Shoot = "^" .. path2 .. "fire-1.wav"
+SWEP.Sound_Shoot = "^" .. path2 .. "fire-1new.wav"
 SWEP.Sound_Shoot_Silenced = path2 .. "fire_silenced-1.wav"
 
 SWEP.Vol_Shoot = 110
