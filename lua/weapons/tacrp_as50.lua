@@ -210,7 +210,7 @@ SWEP.CanMeleeAttack = false
 // reload
 
 SWEP.ClipSize = 5
-SWEP.Ammo = "SniperPenetratedRound"
+SWEP.Ammo = "357"
 
 SWEP.ReloadTimeMult = 1
 SWEP.DropMagazineImpact = "metal"

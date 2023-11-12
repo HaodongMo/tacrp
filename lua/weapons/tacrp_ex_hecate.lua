@@ -207,7 +207,7 @@ SWEP.ScopeOverlaySize = 0.75
 // reload
 
 SWEP.ClipSize = 7
-SWEP.Ammo = "SniperPenetratedRound"
+SWEP.Ammo = "357"
 SWEP.AmmoTTT = "ti_sniper"
 
 SWEP.ReloadTimeMult = 1.4
