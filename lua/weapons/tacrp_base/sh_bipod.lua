@@ -5,7 +5,7 @@ function SWEP:InBipod()
     --     self:ExitBipod()
     -- end
 
-    if IsValid(self:GetOwner()) and self:GetBipodPos() != self:GetOwner():EyePos() then
+    if IsValid(self:GetOwner()) and (self:GetOwner():GetVelocity():LengthSqr() >= 100 or self:GetSprintAmount() > 0) then
         self:ExitBipod()
     end
 
@@ -20,6 +20,7 @@ function SWEP:CanBipod()
     if !self:GetValue("Bipod") then return false end
 
     if self:GetOwner():InVehicle() then return false end
+    if self:GetSprintAmount() > 0 then return false end
 
     if self.CachedCanBipodTime >= CurTime() then return tobool(self.CachedCanBipod), self.CachedCanBipod end
 
@@ -91,15 +92,16 @@ function SWEP:EnterBipod(sp)
     if SERVER and game.SinglePlayer() then self:CallOnClient("EnterBipod", "true") end
     self.LastBipodTime = CurTime()
 
-    local bipodang = tr.HitNormal:Cross(self:GetOwner():EyeAngles():Right()):Angle()
+    local owner = self:GetOwner()
+
+    local bipodang = tr.HitNormal:Cross(owner:EyeAngles():Right()):Angle()
 
     debugoverlay.Axis(tr.HitPos, tr.HitNormal:Angle(), 16, 5, true)
     debugoverlay.Line(tr.HitPos, tr.HitPos + bipodang:Forward() * 32, 5, color_white, true)
-    debugoverlay.Line(tr.HitPos, tr.HitPos + self:GetOwner():EyeAngles():Forward() * 32, 5, Color(255, 255, 0), true)
+    debugoverlay.Line(tr.HitPos, tr.HitPos + owner:EyeAngles():Forward() * 32, 5, Color(255, 255, 0), true)
 
-    self:SetBipodPos(self:GetOwner():EyePos())
+    self:SetBipodPos(owner:EyePos() + (owner:EyeAngles():Forward() * 2) - Vector(0, 0, 3))
     self:SetBipodAngle(bipodang)
-    self.BipodStartAngle = self:GetOwner():EyeAngles()
 
     if game.SinglePlayer() and CLIENT then return end
 
@@ -113,7 +115,6 @@ function SWEP:ExitBipod(sp)
 
     if SERVER and game.SinglePlayer() then self:CallOnClient("ExitBipod", "true") end
     self.LastBipodTime = CurTime()
-
     if game.SinglePlayer() and CLIENT then return end
 
     self:EmitSound(self.Sound_BipodUp, 70, 100, 1, CHAN_ITEM)

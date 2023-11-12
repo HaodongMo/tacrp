@@ -190,6 +190,9 @@ SWEP.SightPos = Vector(0, 1, 1)
 SWEP.PeekAng = Angle(0, 0, -7)
 SWEP.PeekPos = Vector(3, 2, -1.5)
 
+SWEP.BipodAng = Angle(0, 0, 0)
+SWEP.BipodPos = Vector(0, 0, 0)
+
 SWEP.HolsterVisible = false
 SWEP.HolsterSlot = TacRP.HOLSTER_SLOT_BACK
 SWEP.HolsterPos = Vector(0, 0, 0)

@@ -221,15 +221,9 @@ function TacRP.StartCommand(ply, cmd)
     end
 
     local ping = 0
-
     if !game.SinglePlayer() then
         ping = ply:Ping()
     end
-
-    -- if wpn:GetCurrentFiremode() != 1 then
-    --     delay_extra = 60 / wpn:GetValue("RPM")
-    -- end
-
     if wpn:GetLastRecoilTime() + wpn:RecoilDuration() - (ping * 0.5) < CurTime() and wpn:GetRecoilAmount() == 0 then
         recrise = TacRP.RecoilRise
 
@@ -249,6 +243,29 @@ function TacRP.StartCommand(ply, cmd)
         cmd:SetViewAngles(eyeang)
 
         TacRP.RecoilRise = recrise
+    end
+
+    if wpn:GetInBipod() then
+        local bipang = wpn:GetBipodAngle()
+        local eyeang = cmd:GetViewAngles()
+
+        if math.AngleDifference(bipang.y, eyeang.y) < -60 then
+            eyeang.y = bipang.y + 60
+        elseif math.AngleDifference(bipang.y, eyeang.y) > 60 then
+            eyeang.y = bipang.y - 60
+        end
+
+        if math.AngleDifference(bipang.p, eyeang.p) > 45 then
+            eyeang.p = bipang.p - 45
+        elseif math.AngleDifference(bipang.p, eyeang.p) < -45 then
+            eyeang.p = bipang.p + 45
+        end
+
+        cmd:SetViewAngles(eyeang)
+
+        if game.SinglePlayer() then
+            ply:SetEyeAngles(eyeang)
+        end
     end
 
     TacRP.LastEyeAngles = cmd:GetViewAngles()

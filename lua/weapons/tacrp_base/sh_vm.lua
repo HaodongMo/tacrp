@@ -2,6 +2,7 @@ local customizedelta = 0
 local sightdelta = 0
 local sprintdelta = 0
 local peekdelta = 0
+local bipoddelta = 0
 local blindfiredelta, blindfiredeltaleft, blindfiredeltaright, blindfiredeltakys = 0, 0, 0, 0
 local freeaim_p, freeaim_y = 0, 0
 local nearwalldelta = 0
@@ -147,6 +148,19 @@ function SWEP:GetViewModelPosition(pos, ang)
 
     LerpMod(extra_offsetpos, -eepos + joffset, curvedsightdelta)
     LerpMod(extra_offsetang, -eeang + jaffset, curvedsightdelta)
+
+    ---------------------------------------------
+    -- Bipod
+    ---------------------------------------------
+    local amt = math.Clamp(self:GetBipodPos():Distance(self:GetOwner():EyePos()) / 60, 0.15, 0.3)
+    bipoddelta = math.Approach(bipoddelta, self:GetInBipod() and 1 or 0, FT / (self:GetInBipod() and 0.4 or amt))
+    local curvedbipoddelta = self:Curve(bipoddelta)
+    if curvedbipoddelta > 0 then
+        pos = LerpVector(math.Clamp(curvedbipoddelta - curvedsightdelta, 0, 1), pos, self:GetBipodPos())
+        -- local bipodpos, bipodang = self:GetValue("BipodPos"), self:GetValue("BipodAng")
+        -- offsetpos:Add(bipodpos * curvedbipoddelta)
+        -- offsetang:Add(bipodang * curvedbipoddelta)
+    end
 
     ---------------------------------------------
     -- Procedural Firing
