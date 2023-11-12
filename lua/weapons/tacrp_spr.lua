@@ -220,7 +220,7 @@ SWEP.ScopeHideWeapon = true
 // reload
 
 SWEP.ClipSize = 5
-SWEP.Ammo = "SniperPenetratedRound"
+SWEP.Ammo = "357"
 
 SWEP.ReloadTimeMult = 1
 SWEP.ShootTimeMult = 0.75
