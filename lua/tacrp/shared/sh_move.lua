@@ -249,16 +249,18 @@ function TacRP.StartCommand(ply, cmd)
         local bipang = wpn:GetBipodAngle()
         local eyeang = cmd:GetViewAngles()
 
-        if math.AngleDifference(bipang.y, eyeang.y) < -60 then
+        local dy, dp = math.AngleDifference(bipang.y, eyeang.y), math.AngleDifference(bipang.p, eyeang.p)
+
+        if dy < -60 then
             eyeang.y = bipang.y + 60
-        elseif math.AngleDifference(bipang.y, eyeang.y) > 60 then
+        elseif dy > 60 then
             eyeang.y = bipang.y - 60
         end
 
-        if math.AngleDifference(bipang.p, eyeang.p) > 45 then
-            eyeang.p = bipang.p - 45
-        elseif math.AngleDifference(bipang.p, eyeang.p) < -45 then
-            eyeang.p = bipang.p + 45
+        if dp > 20 then
+            eyeang.p = bipang.p - 20
+        elseif dp < -20 then
+            eyeang.p = bipang.p + 20
         end
 
         cmd:SetViewAngles(eyeang)

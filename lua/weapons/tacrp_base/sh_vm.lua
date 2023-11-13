@@ -157,9 +157,6 @@ function SWEP:GetViewModelPosition(pos, ang)
     local curvedbipoddelta = self:Curve(bipoddelta)
     if curvedbipoddelta > 0 then
         pos = LerpVector(math.Clamp(curvedbipoddelta - curvedsightdelta, 0, 1), pos, self:GetBipodPos())
-        -- local bipodpos, bipodang = self:GetValue("BipodPos"), self:GetValue("BipodAng")
-        -- offsetpos:Add(bipodpos * curvedbipoddelta)
-        -- offsetang:Add(bipodang * curvedbipoddelta)
     end
 
     ---------------------------------------------

@@ -49,10 +49,10 @@ function SWEP:CanBipod()
         return false
     end
 
-    local maxs = Vector(8, 8, 16)
-    local mins = Vector(-8, -8, 0)
+    local maxs = Vector(10, 10, 16)
+    local mins = Vector(-10, -10, 0)
 
-    angle.p = angle.p + 60
+    angle.p = angle.p + 45
 
     tr = util.TraceHull({
         start = pos,
@@ -95,12 +95,13 @@ function SWEP:EnterBipod(sp)
     local owner = self:GetOwner()
 
     local bipodang = tr.HitNormal:Cross(owner:EyeAngles():Right()):Angle()
+    -- bipodang.p = math.ApproachAngle(bipodang.p, owner:EyeAngles().p, 10)
 
     debugoverlay.Axis(tr.HitPos, tr.HitNormal:Angle(), 16, 5, true)
     debugoverlay.Line(tr.HitPos, tr.HitPos + bipodang:Forward() * 32, 5, color_white, true)
     debugoverlay.Line(tr.HitPos, tr.HitPos + owner:EyeAngles():Forward() * 32, 5, Color(255, 255, 0), true)
 
-    self:SetBipodPos(owner:EyePos() + (owner:EyeAngles():Forward() * 2) - Vector(0, 0, 3))
+    self:SetBipodPos(owner:EyePos() + (owner:EyeAngles():Forward() * 4) - Vector(0, 0, 3))
     self:SetBipodAngle(bipodang)
 
     if game.SinglePlayer() and CLIENT then return end
