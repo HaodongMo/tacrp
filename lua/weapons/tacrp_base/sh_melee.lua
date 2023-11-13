@@ -1,8 +1,12 @@
-SWEP.Sound_MeleeHit = {
+SWEP.Sound_MeleeHit = nil
+SWEP.Sound_MeleeHitBody = nil
+
+-- Don't you love lua table inheritance??
+SWEP._Sound_MeleeHit = {
     "TacRP/weapons/melee_hit-1.wav",
     "TacRP/weapons/melee_hit-2.wav"
 }
-SWEP.Sound_MeleeHitBody = {
+SWEP._Sound_MeleeHitBody = {
     "TacRP/weapons/melee_body_hit-1.wav",
     "TacRP/weapons/melee_body_hit-2.wav",
     "TacRP/weapons/melee_body_hit-3.wav",
@@ -95,7 +99,7 @@ function SWEP:Melee(alt)
             TacRP.CancelBodyDamage(tr.Entity, dmginfo, tr.HitGroup)
 
             if IsValid(tr.Entity) and (tr.Entity:IsNPC() or tr.Entity:IsPlayer() or tr.Entity:IsNextBot()) then
-                self:EmitSound(self:ChooseSound(self:GetValue("Sound_MeleeHitBody")), 75, 100, 1, CHAN_ITEM)
+                self:EmitSound(self:ChooseSound(self:GetValue("Sound_MeleeHitBody") or self:GetValue("_Sound_MeleeHitBody")), 75, 100, 1, CHAN_ITEM)
 
                 if self:GetValue("MeleeBackstab") then
                     local ang = math.NormalizeAngle(self:GetOwner():GetAngles().y - tr.Entity:GetAngles().y)
@@ -105,7 +109,7 @@ function SWEP:Melee(alt)
                     end
                 end
             else
-                self:EmitSound(self:ChooseSound(self:GetValue("Sound_MeleeHit")), 75, 100, 1, CHAN_ITEM)
+                self:EmitSound(self:ChooseSound(self:GetValue("Sound_MeleeHit") or self:GetValue("_Sound_MeleeHit")), 75, 100, 1, CHAN_ITEM)
             end
 
             if IsValid(tr.Entity) and self:GetValue("MeleeSlow") then
