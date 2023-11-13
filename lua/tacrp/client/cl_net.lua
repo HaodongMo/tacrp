@@ -1,20 +1,31 @@
-net.Receive("TacRP_networkweapon", function()
+net.Receive("TacRP_networkweapon", function(len)
     local wpn = net.ReadEntity()
 
-    if !wpn.ArcticTacRP then return end
+    -- When the server immediately calls NetworkWeapon on a new weapon,
+    -- the client will not see a properly initialized entity for a bit.
+    if !wpn.PrintName then
+        local tname = tostring(wpn) .. "_wait"
 
-
-    wpn:ReceiveWeapon()
-    local ply = wpn:GetOwner()
-    if IsValid(ply) and ply:IsPlayer() and ply:GetActiveWeapon() != wpn then
-        local visible = wpn:GetValue("HolsterVisible")
-        local slot = wpn:GetValue("HolsterSlot")
-
-        if visible and slot then
-            ply.TacRP_Holster = ply.TacRP_Holster or {}
-            ply.TacRP_Holster[slot] = wpn
+        -- Read bits now (can't do it in a timer)
+        local ids = {}
+        for i = 1, #weapons.Get(wpn:GetClass()).Attachments do
+            table.insert(ids, net.ReadUInt(TacRP.Attachments_Bits))
         end
+
+        -- Wait until entity properly exists to pass on attachment info.
+        timer.Create(tname, 0, 100, function()
+            if !wpn.ArcticTacRP then return end
+
+            wpn:ReceiveWeapon(ids)
+            wpn:UpdateHolster()
+
+            timer.Remove(tname)
+        end)
+    else
+        wpn:ReceiveWeapon()
+        wpn:UpdateHolster()
     end
+
 end)
 
 net.Receive("TacRP_updateholster", function()
