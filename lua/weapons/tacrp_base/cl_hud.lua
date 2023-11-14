@@ -610,6 +610,7 @@ function SWEP:DrawHUDBackground()
                     local rackrise = 0
                     local cs = self:GetCapacity()
                     local c1 = self:Clip1()
+                    local aps = self:GetValue("AmmoPerShot")
 
                     local row_size = 15
                     if cs == 20 then
@@ -626,6 +627,8 @@ function SWEP:DrawHUDBackground()
                         if row == maxrow then
                             row1_size = cs - row_size * (maxrow - 1)
                             row1_bullets = c1 - row_size * (maxrow - 1)
+                        elseif c1 % row_size == 0 then
+                            row1_bullets = row_size
                         else
                             row1_bullets = c1 % row_size
                         end
@@ -648,7 +651,7 @@ function SWEP:DrawHUDBackground()
                     render.SetScissorRect(x, y, x + w, y + TacRP.SS(12) + sb + sb + 3, true)
 
                     for i = 1, row1_size do
-                        if i == row1_bullets then
+                        if i >= row1_bullets - aps + 1 and i <= row1_bullets then
                             surface.SetDrawColor(col_hi)
                         elseif i > row1_bullets then
                             surface.SetDrawColor(col_dark)
@@ -660,8 +663,9 @@ function SWEP:DrawHUDBackground()
                         surface.DrawRect(x + xoffset - (i * (sb + TacRP.SS(1))), y + TacRP.SS(12) + rackrise, sb, sb)
                     end
 
+                    local hi_left = math.max(0, aps - row1_bullets)
                     for i = 1, row2_size do
-                        if i == row2_bullets and row1_bullets <= 0 then
+                        if (i >= row2_bullets - aps + 1 and i <= row2_bullets and row1_bullets <= 0) or (row1_bullets > 0 and hi_left > 0 and i >= row2_bullets - hi_left + 1 and i <= row2_bullets) then
                             surface.SetDrawColor(col_hi)
                         elseif i > row2_bullets then
                             surface.SetDrawColor(col_dark)
