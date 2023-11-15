@@ -2,19 +2,22 @@ net.Receive("TacRP_networkweapon", function(len)
     local wpn = net.ReadEntity()
 
     -- When the server immediately calls NetworkWeapon on a new weapon,
-    -- the client will not see a properly initialized entity for a bit.
-    if !wpn.PrintName then
-        local tname = tostring(wpn) .. "_wait"
+    -- the client entity may not be valid or correct instantly.
+    -- (in SP, the entity will appear valid but the functions/variables will all be nil.)
+    if !IsValid(wpn) or !wpn.ArcticTacRP then
+        local tname = "wait" .. engine.TickCount() .. math.random(100, 999)
 
         -- Read bits now (can't do it in a timer)
+        -- WriteEntity always uses 13 bits, so we can derive amount of attachments
         local ids = {}
-        for i = 1, #weapons.Get(wpn:GetClass()).Attachments do
+        for i = 1, (len - 13) / TacRP.Attachments_Bits do
             table.insert(ids, net.ReadUInt(TacRP.Attachments_Bits))
         end
 
         -- Wait until entity properly exists to pass on attachment info.
+        -- Usually won't take more than 1 tick but ping may cause issues
         timer.Create(tname, 0, 100, function()
-            if !wpn.ArcticTacRP then return end
+            if !IsValid(wpn) or !wpn.ArcticTacRP then return end
 
             wpn:ReceiveWeapon(ids)
             wpn:UpdateHolster()
