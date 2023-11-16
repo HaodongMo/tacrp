@@ -291,6 +291,9 @@ function TacRP.StartCommand(ply, cmd)
     else
         ply.TacRP_SprintBlock = false
     end
+
+    -- Used for sprint checking
+    ply.TacRP_Moving = cmd:GetForwardMove() != 0 or cmd:GetSideMove() != 0
 end
 
 hook.Add("StartCommand", "TacRP_StartCommand", TacRP.StartCommand)

@@ -24,7 +24,7 @@ function SWEP:GetIsSprinting()
     -- TTT sets runspeed to curspeed, so this will disable it unless sprint addons exist (who ideally sets runspeed. i didn't check)
     if runspeed <= walkspeed then return false end
 
-    if !owner:KeyDown(IN_FORWARD) and !owner:KeyDown(IN_BACK) and !owner:KeyDown(IN_MOVELEFT) and !owner:KeyDown(IN_MOVERIGHT) then return false end
+    if !owner.TacRP_Moving then return false end -- Don't check IN_ move keys because 1) controllers and 2) bots
     if !owner:KeyDown(IN_SPEED) then return false end -- SetButtons does not seem to affect this?
     if curspeed <= 0 then return false end
     if !owner:OnGround() then return false end
