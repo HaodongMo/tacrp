@@ -49,7 +49,13 @@ end
 local bitflags_blockable = DMG_BULLET + DMG_BUCKSHOT + DMG_BLAST
 hook.Add("EntityTakeDamage", "Z_TacRP", function(ply, dmginfo)
     if !TacRP.ConVars["armorpenetration"]:GetBool() then return end
+    if isfunction(GAMEMODE.HandlePlayerArmorReduction) then return end -- in dev branch right now
     if !ply:IsPlayer() or dmginfo:IsFallDamage() or dmginfo:GetDamage() < 1 then return end
+
+    -- if danger zone armor wants to handle it, don't do it
+    if DZ_ENTS and ply:Armor() > 0 and (GetConVar("dzents_armor_enabled"):GetInt() == 2 or (GetConVar("dzents_armor_enabled"):GetInt() == 1 and ply:DZ_ENTS_HasArmor())) then
+        return
+    end
 
     local wep = dmginfo:GetInflictor()
     if wep:IsPlayer() then wep = wep:GetActiveWeapon() end
@@ -67,11 +73,6 @@ hook.Add("EntityTakeDamage", "Z_TacRP", function(ply, dmginfo)
         return
     end
 
-    -- if danger zone armor wants to handle it, don't do it
-    if DZ_ENTS and ply:Armor() > 0 and (GetConVar("dzents_armor_enabled"):GetInt() == 2 or (GetConVar("dzents_armor_enabled"):GetInt() == 1 and ply:DZ_ENTS_HasArmor())) then
-        return
-    end
-
     local ap = wep:GetValue("ArmorPenetration")
     local ab = wep:GetValue("ArmorBonus")
 
@@ -84,6 +85,7 @@ end)
 
 hook.Add("PostEntityTakeDamage", "TacRP", function(ply, dmginfo, took)
     if !TacRP.ConVars["armorpenetration"]:GetBool() then return end
+    if isfunction(GAMEMODE.HandlePlayerArmorReduction) then return end
     if !ply:IsPlayer() then return end
     if ply.TacRPPendingArmor then
         ply:SetArmor(ply.TacRPPendingArmor)
@@ -160,4 +162,46 @@ hook.Add("DoPlayerDeath", "TacRP_DropGrenade", function(ply, attacker, dmginfo)
             end
         end
     end
+end)
+
+hook.Add("HandlePlayerArmorReduction", "TacRP", function(ply, dmginfo)
+    if !TacRP.ConVars["armorpenetration"]:GetBool() then return end
+    if dmginfo:IsFallDamage() or dmginfo:GetDamage() < 1 then return end
+
+    if DZ_ENTS and ply:Armor() > 0 and (GetConVar("dzents_armor_enabled"):GetInt() == 2 or (GetConVar("dzents_armor_enabled"):GetInt() == 1 and ply:DZ_ENTS_HasArmor())) then
+        return
+    end
+
+    local wep = dmginfo:GetInflictor()
+    if wep:IsPlayer() then wep = wep:GetActiveWeapon() end
+    if !IsValid(wep) or !wep.ArcticTacRP then return end
+
+    if ply:Armor() <= 0 or bit.band(dmginfo:GetDamageType(), DMG_FALL + DMG_DROWN + DMG_POISON + DMG_RADIATION) ~= 0 then return end
+    local flBonus = 1.0 * wep:GetValue("ArmorBonus")
+    local flRatio = wep:GetValue("ArmorPenetration")
+
+    if GetConVar("player_old_armor"):GetBool() then
+        flBonus = 0.5 * wep:GetValue("ArmorBonus")
+    end
+
+    local flNew = dmginfo:GetDamage() * flRatio
+    local flArmor = (dmginfo:GetDamage() - flNew) * flBonus
+
+    if !GetConVar("player_old_armor"):GetBool() then
+        if flArmor < 1.0 then
+            flArmor = 1.0
+        end
+    end
+
+    if flArmor > ply:Armor() then
+        flArmor = ply:Armor() * (1 / flBonus)
+        flNew = dmginfo:GetDamage() - flArmor
+        ply:SetArmor(0)
+    else
+        ply:SetArmor(ply:Armor() - flArmor)
+    end
+
+    dmginfo:SetDamage(flNew)
+
+    return true
 end)
