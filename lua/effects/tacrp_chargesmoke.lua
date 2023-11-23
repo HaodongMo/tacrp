@@ -1,5 +1,6 @@
 function EFFECT:Init(data)
     self.TrailEnt = data:GetEntity()
+    if !IsValid(self.TrailEnt) then self:Remove() return end
 
     local pos = data:GetOrigin() + Vector(0, 0, 4)
     local dir = data:GetNormal()

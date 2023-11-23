@@ -4,6 +4,7 @@ function EFFECT:Init(data)
 
     self.EndTime = CurTime() + 0.25
     self.TrailEnt = data:GetEntity()
+    if !IsValid(self.TrailEnt) then self:Remove() return end
 
     local emitter = ParticleEmitter(pos)
     local amt = 16

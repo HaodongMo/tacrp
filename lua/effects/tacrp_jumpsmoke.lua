@@ -2,6 +2,7 @@ function EFFECT:Init(data)
     local pos = data:GetOrigin()
     local dir = data:GetNormal()
     self.TrailEnt = data:GetEntity()
+    if !IsValid(self.TrailEnt) then self:Remove() return end
 
     local emitter = ParticleEmitter(pos)
     local amt = 16

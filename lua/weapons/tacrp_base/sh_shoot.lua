@@ -258,7 +258,7 @@ function SWEP:PrimaryAttack()
                 if inst_tr.Hit and !inst_tr.HitSky then
                     hitscan = true
                 end
-                debugoverlay.Line(self:GetMuzzleOrigin(), self:GetMuzzleOrigin() + threshold, 2, hitscan and Color(255, 0, 255) or Color(255, 255, 255))
+                -- debugoverlay.Line(self:GetMuzzleOrigin(), self:GetMuzzleOrigin() + threshold, 2, hitscan and Color(255, 0, 255) or Color(255, 255, 255))
             end
 
             self:GetOwner():LagCompensation(true)
@@ -293,11 +293,11 @@ function SWEP:PrimaryAttack()
                                 local range = (btr.HitPos - btr.StartPos):Length()
 
                                 self:AfterShotFunction(btr, dmg, range, self:GetValue("Penetration"), {})
-                                if SERVER then
-                                    debugoverlay.Cross(btr.HitPos, 4, 5, Color(255, 0, 0), false)
-                                else
-                                    debugoverlay.Cross(btr.HitPos, 4, 5, Color(255, 255, 255), false)
-                                end
+                                -- if SERVER then
+                                --     debugoverlay.Cross(btr.HitPos, 4, 5, Color(255, 0, 0), false)
+                                -- else
+                                --     debugoverlay.Cross(btr.HitPos, 4, 5, Color(255, 255, 255), false)
+                                -- end
                             end
                         })
                     else

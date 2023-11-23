@@ -51,7 +51,6 @@ function TacRP:PlayerGiveAtt(ply, att, amt)
     end
 end
 
-
 function TacRP:PlayerTakeAtt(ply, att, amt)
     amt = amt or 1
 
@@ -119,10 +118,11 @@ hook.Add("PlayerDeath", "TacRP_DeathAttInv", function(ply)
 end)
 
 hook.Add("PlayerSpawn", "TacRP_SpawnAttInv", function(ply, trans)
-    if trans then return end
 
     ply:SetNWBool("TacRPBreathEmpty", false)
     ply:SetNWFloat("TacRPBreath", 1)
+
+    if trans then return end
 
     if engine.ActiveGamemode() != "terrortown" and TacRP.ConVars["loseattsondie"]:GetInt() >= 1 then
         ply.TacRP_AttInv = {}
