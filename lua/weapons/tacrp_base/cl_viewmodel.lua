@@ -116,9 +116,9 @@ function SWEP:DrawCustomModel(wm, custom_wm)
         local apos, aang = bpos, bang
 
         if offset_pos then
-            apos = bpos + bang:Forward() * offset_pos.x
-            apos = apos + bang:Right() * offset_pos.y
-            apos = apos + bang:Up() * offset_pos.z
+            apos:Add(bang:Forward() * offset_pos.x)
+            apos:Add(bang:Right() * offset_pos.y)
+            apos:Add(bang:Up() * offset_pos.z)
         end
 
         if offset_ang then
@@ -131,10 +131,17 @@ function SWEP:DrawCustomModel(wm, custom_wm)
         end
 
         local moffset = (atttbl.ModelOffset or Vector(0, 0, 0)) * (slottbl.VMScale or 1)
+        -- Although this is the correct behavior, it would break many weapons' wm offsets...
+        -- Damn you arctic
+        -- if wm then
+        --     moffset = moffset * (slottbl.VMScale or 1)
+        -- else
+        --     moffset = moffset * (slottbl.WMScale or 1)
+        -- end
 
-        apos = apos + aang:Forward() * moffset.x
-        apos = apos + aang:Right() * moffset.y
-        apos = apos + aang:Up() * moffset.z
+        apos:Add(aang:Forward() * moffset.x)
+        apos:Add(aang:Right() * moffset.y)
+        apos:Add(aang:Up() * moffset.z)
 
         model:SetPos(apos)
         model:SetAngles(aang)
