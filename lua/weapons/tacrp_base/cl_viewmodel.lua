@@ -122,22 +122,17 @@ function SWEP:DrawCustomModel(wm, custom_wm)
         end
 
         if offset_ang then
-            aang = Angle()
-            aang:Set(bang)
-
             aang:RotateAroundAxis(aang:Right(), offset_ang.p)
             aang:RotateAroundAxis(aang:Up(), offset_ang.y)
             aang:RotateAroundAxis(aang:Forward(), offset_ang.r)
         end
 
         local moffset = (atttbl.ModelOffset or Vector(0, 0, 0)) * (slottbl.VMScale or 1)
-        -- Although this is the correct behavior, it would break many weapons' wm offsets...
-        -- Damn you arctic
-        -- if wm then
-        --     moffset = moffset * (slottbl.VMScale or 1)
-        -- else
-        --     moffset = moffset * (slottbl.WMScale or 1)
-        -- end
+        if wm then
+            moffset = moffset * (slottbl.VMScale or 1)
+        else
+            moffset = moffset * (slottbl.WMScale or 1)
+        end
 
         apos:Add(aang:Forward() * moffset.x)
         apos:Add(aang:Right() * moffset.y)
