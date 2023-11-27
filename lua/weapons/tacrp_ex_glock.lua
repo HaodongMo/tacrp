@@ -27,7 +27,7 @@ SWEP.Slot = 1
 SWEP.BalanceStats = {
     [TacRP.BALANCE_SBOX] = {
         Damage_Max = 24,
-        Damage_Min = 11,
+        Damage_Min = 12,
         RecoilKick = 3,
 
         MoveSpeedMult = 1,
@@ -89,10 +89,10 @@ SWEP.TTTReplace = TacRP.TTTReplacePreset.Pistol
 
 // "ballistics"
 
-SWEP.Damage_Max = 16
-SWEP.Damage_Min = 7
-SWEP.Range_Min = 900 // distance for which to maintain maximum damage
-SWEP.Range_Max = 2500 // distance at which we drop to minimum damage
+SWEP.Damage_Max = 18
+SWEP.Damage_Min = 10
+SWEP.Range_Min = 400 // distance for which to maintain maximum damage
+SWEP.Range_Max = 1800 // distance at which we drop to minimum damage
 SWEP.Penetration = 3 // units of metal this weapon can penetrate
 SWEP.ArmorPenetration = 0.45
 SWEP.ArmorBonus = 1.1

@@ -83,10 +83,10 @@ SWEP.TTTReplace = TacRP.TTTReplacePreset.Magnum
 
 // "ballistics"
 
-SWEP.Damage_Max = 52 // damage at minimum range
+SWEP.Damage_Max = 54 // damage at minimum range
 SWEP.Damage_Min = 28 // damage at maximum range
-SWEP.Range_Min = 400 // distance for which to maintain maximum damage
-SWEP.Range_Max = 4000 // distance at which we drop to minimum damage
+SWEP.Range_Min = 300 // distance for which to maintain maximum damage
+SWEP.Range_Max = 2500 // distance at which we drop to minimum damage
 SWEP.Penetration = 6 // units of metal this weapon can penetrate
 SWEP.ArmorPenetration = 0.9
 

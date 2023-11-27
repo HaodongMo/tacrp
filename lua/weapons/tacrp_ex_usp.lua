@@ -100,10 +100,10 @@ SWEP.TTTReplace = TacRP.TTTReplacePreset.Pistol
 
 // "ballistics"
 
-SWEP.Damage_Max = 27
-SWEP.Damage_Min = 10
-SWEP.Range_Min = 700 // distance for which to maintain maximum damage
-SWEP.Range_Max = 3500 // distance at which we drop to minimum damage
+SWEP.Damage_Max = 28
+SWEP.Damage_Min = 9
+SWEP.Range_Min = 450 // distance for which to maintain maximum damage
+SWEP.Range_Max = 1900 // distance at which we drop to minimum damage
 SWEP.Penetration = 5 // units of metal this weapon can penetrate
 SWEP.ArmorPenetration = 0.625
 SWEP.ArmorBonus = 0.75

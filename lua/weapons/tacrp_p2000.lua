@@ -30,7 +30,6 @@ SWEP.BalanceStats = {
         Damage_Max = 26,
         Damage_Min = 12,
         RPM = 500,
-        RecoilKick = 4,
 
         BodyDamageMultipliers = {
             [HITGROUP_HEAD] = 3,
@@ -99,10 +98,10 @@ SWEP.TTTReplace = TacRP.TTTReplacePreset.Pistol
 
 // "ballistics"
 
-SWEP.Damage_Max = 21
-SWEP.Damage_Min = 10 // 100 / 7 // damage at maximum range
-SWEP.Range_Min = 1000 // distance for which to maintain maximum damage
-SWEP.Range_Max = 2800 // distance at which we drop to minimum damage
+SWEP.Damage_Max = 24
+SWEP.Damage_Min = 10
+SWEP.Range_Min = 500
+SWEP.Range_Max = 2000
 SWEP.Penetration = 3 // units of metal this weapon can penetrate
 SWEP.ArmorPenetration = 0.55
 
@@ -135,7 +134,7 @@ SWEP.RecoilDissipationRate = 16
 SWEP.RecoilFirstShotMult = 1
 
 SWEP.RecoilVisualKick = 1
-SWEP.RecoilKick = 4.5
+SWEP.RecoilKick = 4
 SWEP.RecoilStability = 0.4
 
 SWEP.RecoilSpreadPenalty = 0.003

@@ -100,10 +100,10 @@ SWEP.TTTReplace = {["weapon_zm_pistol"] = 0.5, ["weapon_ttt_glock"] = 0.5}
 
 // "ballistics"
 
-SWEP.Damage_Max = 28
-SWEP.Damage_Min = 15
-SWEP.Range_Min = 1000 // distance for which to maintain maximum damage
-SWEP.Range_Max = 4000 // distance at which we drop to minimum damage
+SWEP.Damage_Max = 30
+SWEP.Damage_Min = 12
+SWEP.Range_Min = 500 // distance for which to maintain maximum damage
+SWEP.Range_Max = 2200 // distance at which we drop to minimum damage
 SWEP.Penetration = 3 // units of metal this weapon can penetrate
 SWEP.ArmorPenetration = 0.65
 SWEP.ArmorBonus = 1.5

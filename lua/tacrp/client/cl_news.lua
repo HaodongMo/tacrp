@@ -422,6 +422,7 @@ An additional benefit is that a lot of the attachments now use consistent wordin
 <li><b>Rebalance:</b> Buffs to Beryl and M1A.
 <li><b>Rebalance:</b> Sphinx 2000 is now a 3-round burst Machine Pistol (again).
 <li><b>Rebalance:</b> Increased P90 recoil.
+<li><b>Rebalance:</b> Reduced range on all pistols.
 <li><b>Fixed:</b> Mini Uzi worldmodel doesn't fold stock.
 <li><b>Fixed:</b> Firemode resetting when detaching attachment.
 <li><b>Fixed:</b> Minor alignment issues with optics.

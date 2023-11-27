@@ -4,7 +4,7 @@ SWEP.Spawnable = true
 AddCSLuaFile()
 
 // names and stuff
-SWEP.PrintName = "Beretta 92FS Vertec" -- Real variant, even though it sounds like a fake name Gooseman would come up with.
+SWEP.PrintName = "Beretta 92FS Vertec" // Real variant, even though it sounds like a fake name Gooseman would come up with.
 SWEP.Category = "Tactical RP"
 
 SWEP.SubCatTier = "4Consumer"
@@ -27,7 +27,7 @@ SWEP.Slot = 1
 SWEP.BalanceStats = {
     [TacRP.BALANCE_SBOX] = {
         Damage_Max = 25,
-        Damage_Min = 18,
+        Damage_Min = 14,
         RPM = 420,
         ArmorPenetration = 0.6,
 
@@ -111,9 +111,9 @@ SWEP.TTTReplace = TacRP.TTTReplacePreset.Pistol
 // "ballistics"
 
 SWEP.Damage_Max = 20
-SWEP.Damage_Min = 14
-SWEP.Range_Min = 1200
-SWEP.Range_Max = 3000
+SWEP.Damage_Min = 12
+SWEP.Range_Min = 800
+SWEP.Range_Max = 2000
 SWEP.Penetration = 3
 SWEP.ArmorPenetration = 0.575
 
