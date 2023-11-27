@@ -127,11 +127,11 @@ function SWEP:DrawCustomModel(wm, custom_wm)
             aang:RotateAroundAxis(aang:Forward(), offset_ang.r)
         end
 
-        local moffset = (atttbl.ModelOffset or Vector(0, 0, 0)) * (slottbl.VMScale or 1)
+        local moffset = (atttbl.ModelOffset or Vector(0, 0, 0))
         if wm then
-            moffset = moffset * (slottbl.VMScale or 1)
-        else
             moffset = moffset * (slottbl.WMScale or 1)
+        else
+            moffset = moffset * (slottbl.VMScale or 1)
         end
 
         apos:Add(aang:Forward() * moffset.x)
