@@ -50,7 +50,7 @@ function SWEP:GenerateAutoSight()
     local boneid = mdl:LookupBone(bone)
 
     local bpos = mdl:GetBoneMatrix(boneid):GetTranslation()
-    local bang = mdl:GetBoneMatrix(boneid):GetAngles()
+    local bang = self.CorrectiveBoneAng and Angle(self.CorrectiveBoneAng) or mdl:GetBoneMatrix(boneid):GetAngles()
 
     SafeRemoveEntity(mdl)
 
@@ -76,14 +76,11 @@ function SWEP:GenerateAutoSight()
         end
     end
 
-    local apos, aang
+    local apos, aang = bpos, bang
 
-    apos = bpos + bang:Forward() * offset_pos.x
-    apos = apos + bang:Right() * offset_pos.y
-    apos = apos + bang:Up() * offset_pos.z
-
-    aang = Angle()
-    aang:Set(bang)
+    apos:Add(bang:Forward() * offset_pos.x)
+    apos:Add(bang:Right() * offset_pos.y)
+    apos:Add(bang:Up() * offset_pos.z)
 
     aang:RotateAroundAxis(aang:Right(), offset_ang.p)
     aang:RotateAroundAxis(aang:Up(), offset_ang.y)
@@ -91,9 +88,9 @@ function SWEP:GenerateAutoSight()
 
     local moffset = (atttbl.ModelOffset or Vector(0, 0, 0)) * (slottbl.VMScale or 1)
 
-    apos = apos + aang:Forward() * moffset.x
-    apos = apos + aang:Right() * moffset.y
-    apos = apos + aang:Up() * moffset.z
+    apos:Add(aang:Forward() * moffset.x)
+    apos:Add(aang:Right() * moffset.y)
+    apos:Add(aang:Up() * moffset.z)
 
     local vpos, vang = WorldToLocal(apos, aang, Vector(0, 0, 0), Angle(0, 0, 0))
 
