@@ -173,9 +173,9 @@ function SWEP:GetViewModelPosition(pos, ang)
 
                     local f = 1
                     if v.t0 == 0 then
-                        f = v.t1 and self:Curve(math.Clamp(1 - dt / v.t1, 0, 1)) or 0
+                        f = v.t1 and math.Clamp(1 - dt / v.t1, 0, 1) or 0
                     else
-                        f = v.t1 and (dt > v.t0 and self:Curve(math.Clamp(1 - (dt - v.t0) / (v.t1 - v.t0), 0, 1)) or (dt / v.t0)) or (dt > v.t0 and 1 or (dt / v.t0))
+                        f = v.t1 and (dt > v.t0 and math.Clamp(1 - (dt - v.t0) / (v.t1 - v.t0), 0, 1) or (dt / v.t0)) or (dt > v.t0 and 1 or (dt / v.t0))
                     end
                     if v.pos then
                         local offset = LerpVector(f, vector_origin, v.pos)
@@ -188,7 +188,7 @@ function SWEP:GetViewModelPosition(pos, ang)
                 end
             end
 
-            local dtc = self:Curve(1 - math.Clamp(dt / self.ProceduralIronFire.t, 0, 1))
+            local dtc = math.ease.InQuad(math.Clamp(1 - dt / self.ProceduralIronFire.t, 0, 1))
 
             if dtc > 0 and self.ProceduralIronFire.vm_pos then
                 LerpMod(offsetpos, offsetpos + self.ProceduralIronFire.vm_pos, dtc)

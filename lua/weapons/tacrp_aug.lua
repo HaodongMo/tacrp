@@ -230,6 +230,13 @@ SWEP.AnimationTranslationTable = {
     ["melee"] = {"melee1", "melee2"}
 }
 
+SWEP.ProceduralIronFire = {
+    vm_pos = Vector(0, -0.2, -0.04),
+    vm_ang = Angle(0, 0.25, 0),
+    t = 0.1,
+    tmax = 0.1,
+}
+
 // attachments
 
 SWEP.AttachmentElements = {
