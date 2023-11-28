@@ -98,8 +98,8 @@ SWEP.TTTReplace = TacRP.TTTReplacePreset.SMG
 
 SWEP.Damage_Max = 18
 SWEP.Damage_Min = 10
-SWEP.Range_Min = 1200 // distance for which to maintain maximum damage
-SWEP.Range_Max = 3500 // distance at which we drop to minimum damage
+SWEP.Range_Min = 800 // distance for which to maintain maximum damage
+SWEP.Range_Max = 2500 // distance at which we drop to minimum damage
 SWEP.Penetration = 6 // units of metal this weapon can penetrate
 SWEP.ArmorPenetration = 0.7
 

@@ -93,6 +93,9 @@ SWEP.BalanceStats = {
 
 SWEP.TTTReplace = {}
 
+SWEP.Range_Min = 1200
+SWEP.Range_Max = 4000
+
 SWEP.RPM = 700
 
 SWEP.Firemode = 1

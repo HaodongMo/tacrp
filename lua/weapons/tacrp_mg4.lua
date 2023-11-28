@@ -10,7 +10,7 @@ SWEP.Category = "Tactical RP"
 SWEP.SubCatTier = "1Elite"
 SWEP.SubCatType = "4Machine Gun"
 
-SWEP.Description = "Machine gun with huge volume of fire, but is really, really, really heavy."
+SWEP.Description = "Machine gun with huge volume of fire, but is difficult to use without bipod deployed."
 
 SWEP.Trivia_Caliber = "5.56x45mm"
 SWEP.Trivia_Manufacturer = "Heckler & Koch"
@@ -90,9 +90,9 @@ SWEP.BalanceStats = {
 SWEP.TTTReplace = TacRP.TTTReplacePreset.MachineGun
 
 SWEP.BodyDamageMultipliers = {
-    [HITGROUP_HEAD] = 4,
+    [HITGROUP_HEAD] = 3,
     [HITGROUP_CHEST] = 1,
-    [HITGROUP_STOMACH] = 1.25,
+    [HITGROUP_STOMACH] = 1,
     [HITGROUP_LEFTARM] = 0.9,
     [HITGROUP_RIGHTARM] = 0.9,
     [HITGROUP_LEFTLEG] = 0.75,
@@ -102,11 +102,11 @@ SWEP.BodyDamageMultipliers = {
 
 // "ballistics"
 
-SWEP.Damage_Max = 32
-SWEP.Damage_Min = 27
-SWEP.Range_Min = 2000 // distance for which to maintain maximum damage
-SWEP.Range_Max = 6000 // distance at which we drop to minimum damage
-SWEP.Penetration = 10 // units of metal this weapon can penetrate
+SWEP.Damage_Max = 35
+SWEP.Damage_Min = 25
+SWEP.Range_Min = 1200
+SWEP.Range_Max = 4000
+SWEP.Penetration = 10
 SWEP.ArmorPenetration = 0.8
 
 SWEP.MuzzleVelocity = 17500
@@ -129,10 +129,11 @@ SWEP.RecoilFirstShotMult = 2
 
 SWEP.RecoilVisualKick = 1
 
-SWEP.RecoilKick = 4
+SWEP.RecoilKick = 5
 
 SWEP.HipFireSpreadPenalty = 0.025
 SWEP.RecoilSpreadPenalty = 0.0009
+SWEP.PeekPenaltyFraction = 0.125
 
 SWEP.CanBlindFire = true
 

@@ -90,8 +90,8 @@ SWEP.TTTReplace = TacRP.TTTReplacePreset.AssaultRifle
 
 SWEP.Damage_Max = 22
 SWEP.Damage_Min = 13
-SWEP.Range_Min = 1800
-SWEP.Range_Max = 4000
+SWEP.Range_Min = 1500
+SWEP.Range_Max = 3500
 SWEP.Penetration = 7
 SWEP.ArmorPenetration = 0.8
 

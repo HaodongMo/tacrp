@@ -85,9 +85,9 @@ SWEP.TTTReplace = TacRP.TTTReplacePreset.AssaultRifle
 
 // "ballistics"
 
-SWEP.Damage_Max = 16
+SWEP.Damage_Max = 18
 SWEP.Damage_Min = 12
-SWEP.Range_Min = 1100 // distance for which to maintain maximum damage
+SWEP.Range_Min = 1000 // distance for which to maintain maximum damage
 SWEP.Range_Max = 3200 // distance at which we drop to minimum damage
 SWEP.Penetration = 7 // units of metal this weapon can penetrate
 SWEP.ArmorPenetration = 0.75
@@ -111,10 +111,10 @@ SWEP.Firemodes = {-3, 1}
 SWEP.RunawayBurst = true
 SWEP.PostBurstDelay = 0.16
 
-SWEP.RPM = 700
-SWEP.RPMMultBurst = 800 / 700
+SWEP.RPM = 650
+SWEP.RPMMultBurst = 800 / 650
 
-SWEP.Spread = 0.0025
+SWEP.Spread = 0.004
 SWEP.RecoilSpreadPenalty = 0.002
 SWEP.HipFireSpreadPenalty = 0.02
 

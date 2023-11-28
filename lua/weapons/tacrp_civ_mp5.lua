@@ -103,8 +103,8 @@ SWEP.BalanceStats = {
     }
 }
 
-SWEP.Range_Min = 1750
-SWEP.Range_Max = 4500
+SWEP.Range_Min = 1000
+SWEP.Range_Max = 3000
 
 SWEP.TTTReplace = {}
 

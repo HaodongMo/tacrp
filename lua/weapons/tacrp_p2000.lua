@@ -102,13 +102,13 @@ SWEP.Damage_Max = 24
 SWEP.Damage_Min = 10
 SWEP.Range_Min = 500
 SWEP.Range_Max = 2000
-SWEP.Penetration = 3 // units of metal this weapon can penetrate
+SWEP.Penetration = 3
 SWEP.ArmorPenetration = 0.55
 
 SWEP.MuzzleVelocity = 11500
 
 SWEP.BodyDamageMultipliers = {
-    [HITGROUP_HEAD] = 4,
+    [HITGROUP_HEAD] = 3,
     [HITGROUP_CHEST] = 1,
     [HITGROUP_STOMACH] = 1,
     [HITGROUP_LEFTARM] = 1,

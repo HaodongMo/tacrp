@@ -76,10 +76,10 @@ SWEP.TTTReplace = TacRP.TTTReplacePreset.SMG
 
 // "ballistics"
 
-SWEP.Damage_Max = 18
+SWEP.Damage_Max = 20
 SWEP.Damage_Min = 8
-SWEP.Range_Min = 500 // distance for which to maintain maximum damage
-SWEP.Range_Max = 2500 // distance at which we drop to minimum damage
+SWEP.Range_Min = 700
+SWEP.Range_Max = 2200
 SWEP.Penetration = 3 // units of metal this weapon can penetrate
 SWEP.ArmorPenetration = 0.6
 
@@ -88,7 +88,7 @@ SWEP.MuzzleVelocity = 16000
 SWEP.BodyDamageMultipliers = {
     [HITGROUP_HEAD] = 2,
     [HITGROUP_CHEST] = 1,
-    [HITGROUP_STOMACH] = 1.25,
+    [HITGROUP_STOMACH] = 1,
     [HITGROUP_LEFTARM] = 1,
     [HITGROUP_RIGHTARM] = 1,
     [HITGROUP_LEFTLEG] = 0.9,
@@ -292,7 +292,7 @@ SWEP.Attachments = {
     },
     [7] = {
         PrintName = "Ammo",
-        Category = {"ammo_rifle"},
+        Category = {"ammo_pistol"},
         AttachSound = "TacRP/weapons/flashlight_on.wav",
         DetachSound = "TacRP/weapons/flashlight_off.wav",
     },

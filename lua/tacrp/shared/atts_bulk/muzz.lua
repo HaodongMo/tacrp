@@ -152,11 +152,11 @@ ATT.Category = "silencer"
 
 ATT.SortOrder = 4
 
-ATT.Add_Vol_Shoot = -20
+ATT.Add_Vol_Shoot = -25
 ATT.Mult_RecoilKick = 0.9
 ATT.Mult_RecoilSpreadPenalty = 0.95
-ATT.Mult_Range_Max = 0.75
-ATT.Mult_Range_Min = 0.75
+ATT.Mult_Range_Max = 0.8
+ATT.Mult_Range_Min = 0.8
 ATT.Mult_MuzzleVelocity = 0.85
 
 ATT.Silencer = true
@@ -186,10 +186,10 @@ ATT.Category = "silencer"
 
 ATT.SortOrder = 5
 
-ATT.Add_Vol_Shoot = -15
-ATT.Mult_Spread = 0.75
-ATT.Mult_Range_Max = 0.8
-ATT.Mult_Range_Min = 0.8
+ATT.Add_Vol_Shoot = -20
+ATT.Mult_Spread = 0.8
+ATT.Mult_Range_Max = 0.9
+ATT.Mult_Range_Min = 0.9
 ATT.Mult_MuzzleVelocity = 0.9
 
 ATT.Add_Pitch_Shoot = 7.5
@@ -221,14 +221,14 @@ ATT.Category = "silencer"
 
 ATT.SortOrder = 6
 
-ATT.Add_Vol_Shoot = -25
+ATT.Add_Vol_Shoot = -30
 ATT.Mult_RecoilKick = 0.75
 ATT.Mult_RecoilSpreadPenalty = 0.9
 
-ATT.Mult_Range_Max = 1.25
-ATT.Mult_Range_Min = 1.25
+ATT.Mult_Range_Max = 1.15
+ATT.Mult_Range_Min = 1.15
 
-ATT.Add_SprintToFireTime = 0.03
+ATT.Add_SprintToFireTime = 0.02
 ATT.Add_AimDownSightsTime = 0.03
 
 ATT.Add_FreeAimMaxAngle = 0.5

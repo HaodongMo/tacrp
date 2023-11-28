@@ -459,10 +459,10 @@ ATT.SortOrder = 5
 
 ATT.Add_RecoilKick = 0.25
 ATT.Mult_RecoilKick = 1.15
-ATT.Mult_Spread = 1.15
+ATT.Mult_Spread = 1.25
 ATT.Mult_MuzzleVelocity = 1.25
-ATT.Add_Range_Min = 250
-ATT.Mult_Range_Min = 1.25
+ATT.Add_Range_Min = 400
+-- ATT.Mult_Range_Min = 1.25
 
 TacRP.LoadAtt(ATT, "ammo_magnum")
 -- #endregion
@@ -482,7 +482,7 @@ ATT.Cons = {"stat.recoilkick", "stat.recoilstability"}
 
 ATT.Category = "ammo_pistol"
 
-ATT.SortOrder = 1
+ATT.SortOrder = 1.5
 
 -- ATT.Mult_Damage_Max = 0.9
 -- ATT.Mult_Damage_Min = 0.9
@@ -511,7 +511,7 @@ ATT.Cons = {"att.procon.limb", "stat.armorbonus"}
 
 ATT.Category = "ammo_pistol"
 
-ATT.SortOrder = 1.75
+ATT.SortOrder = 1.25
 
 ATT.Mult_Spread = 0.85
 ATT.Mult_ArmorBonus = 0.5
@@ -538,19 +538,19 @@ ATT.FullName = "Hollowpoint Rounds"
 
 ATT.Icon = Material("entities/tacrp_att_acc_hollowpoints.png", "mips smooth")
 ATT.Description = "Bullets that expand on hit, improving damage to flesh targets and limbs."
-ATT.Pros = {"att.procon.limb"}
+ATT.Pros = {"att.procon.chest", "att.procon.limb"}
 ATT.Cons = {"att.procon.armor", "stat.penetration"}
 
 ATT.Category = "ammo_pistol"
 
 ATT.SortOrder = 1
 
-ATT.Mult_Penetration = 0.2
-
-ATT.Mult_ArmorPenetration = 0.8
-ATT.Mult_ArmorBonus = 0.5
+ATT.Mult_Penetration = 0.25
+ATT.Mult_ArmorPenetration = 0.85
+ATT.Mult_ArmorBonus = 0.75
 
 ATT.Override_BodyDamageMultipliersExtra = {
+    [HITGROUP_CHEST] = 1.15,
     [HITGROUP_LEFTARM] = -1,
     [HITGROUP_RIGHTARM] = -1,
     [HITGROUP_LEFTLEG] = -1,
@@ -577,8 +577,8 @@ ATT.Category = "ammo_pistol"
 
 ATT.SortOrder = 4.5
 
-ATT.Mult_Spread = 0.5
-ATT.Add_Range_Max = 1000
+ATT.Mult_Spread = 0.667
+ATT.Add_Range_Max = 750
 ATT.Add_HipFireSpreadPenalty = 0.01
 ATT.Add_PeekPenaltyFraction = 0.05
 
@@ -1040,7 +1040,7 @@ ATT.FullName = "Subsonic Rounds"
 ATT.Icon = Material("entities/tacrp_att_acc_subsonic.png", "mips smooth")
 ATT.Description = "Bullets with reduced powder load."
 ATT.Pros = {"att.procon.notracer", "stat.recoil"}
-ATT.Cons = {"stat.muzzlevelocity", "stat.range"}
+ATT.Cons = {"stat.muzzlevelocity", "stat.range_max"}
 
 ATT.Category = {"ammo_rifle", "ammo_pistol"}
 
@@ -1052,7 +1052,6 @@ ATT.TracerNum = 0
 ATT.Mult_MuzzleVelocity = 0.75
 ATT.Mult_Vol_Shoot = 0.9
 ATT.Mult_Range_Max = 0.75
--- ATT.Mult_Range_Min = 0.75
 
 TacRP.LoadAtt(ATT, "ammo_subsonic")
 -- #endregion

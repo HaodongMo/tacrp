@@ -92,9 +92,9 @@ SWEP.TTTReplace = TacRP.TTTReplacePreset.MachinePistol
 SWEP.DefaultBodygroups = "0010"
 
 SWEP.Damage_Max = 16
-SWEP.Damage_Min = 11
+SWEP.Damage_Min = 10
 SWEP.Range_Min = 500
-SWEP.Range_Max = 2500
+SWEP.Range_Max = 2000
 SWEP.Penetration = 2 // units of metal this weapon can penetrate
 SWEP.ArmorPenetration = 0.55
 SWEP.ArmorBonus = 0.9

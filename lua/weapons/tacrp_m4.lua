@@ -90,9 +90,9 @@ SWEP.TTTReplace = TacRP.TTTReplacePreset.AssaultRifle
 
 SWEP.Damage_Max = 22
 SWEP.Damage_Min = 15
-SWEP.Range_Min = 1600
-SWEP.Range_Max = 3500
-SWEP.Penetration = 8 // units of metal this weapon can penetrate
+SWEP.Range_Min = 1200
+SWEP.Range_Max = 2800
+SWEP.Penetration = 7 // units of metal this weapon can penetrate
 SWEP.ArmorPenetration = 0.7
 
 SWEP.BodyDamageMultipliers = {
