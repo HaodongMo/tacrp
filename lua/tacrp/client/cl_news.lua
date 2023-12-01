@@ -444,7 +444,7 @@ An additional benefit is that a lot of the attachments now use consistent wordin
 
 <h2>Iron Curtain <i>(New!)</i></h2>
 <p><input type='submit' value='Open Workshop' onclick='console.log("RUNLUA:gui.OpenURL(\"https://steamcommunity.com/sharedfiles/filedetails/?id=0000000000\")")' /></p>
-The Soviet/AK themed expansion starring 9 AK variants and guns with that Kalashnikov heritage.
+The Soviet/AK themed expansion starring 9 weapons, including well-known AK variants, weapons descended from the Kalashnikov design and the SVD (which isn't actually an AK, sorry for the false advertising).
 <ul>
 <li>AEK-971
 <li>AK-12
@@ -452,7 +452,7 @@ The Soviet/AK themed expansion starring 9 AK variants and guns with that Kalashn
 <li>AK-74U
 <li>AN-94
 <li>Galil ARM (LMG configuration)
-<li>Galil Sniper
+<li>Galil Sniper (a.k.a. The Galatz)
 <li>RK-95
 <li>SVD (we're really playing it loose with this one)
 </ul>
@@ -460,7 +460,8 @@ The Soviet/AK themed expansion starring 9 AK variants and guns with that Kalashn
 <h2>InterOps</h2>
 <input type='submit' value='Open Workshop' onclick='console.log("RUNLUA:gui.OpenURL(\"https://steamcommunity.com/sharedfiles/filedetails/?id=2975992869\")")' />
 <ul>
-<li>Model fixes to SCAR-H, MX4/CX4, Remington 870 SPMM, and M14 SOPMOD.
+<li>Model fixes to MX4/CX4, Remington 870 SPMM, and M14 SOPMOD.
+<li>Reworked SCAR-H model with fixes and new animations.
 <li>Replaced Desert Eagle textures.
 </ul>
 
@@ -472,12 +473,19 @@ The Soviet/AK themed expansion starring 9 AK variants and guns with that Kalashn
 <li>G3SG1 changed to G3A3, replaced model and reworked stats.
 <li>Groza is now integrally suppressed, and has a different set of animations.
 <li>Groza and FAMAS now have a rail mount for scopes.
+<li>Animation touch-ups across the board. Some anims will look significantly less jank now.
 </ul>
 
 <h2>ArmaLite Revolution</h2>
 <input type='submit' value='Open Workshop' onclick='console.log("RUNLUA:gui.OpenURL(\"https://steamcommunity.com/sharedfiles/filedetails/?id=3006376475\")")' />
 <ul>
 <li><b>New weapon:</b> AR-15 Compact.
+</ul>
+
+<h2>Brute Force</h2>
+<input type='submit' value='Open Workshop' onclick='console.log("RUNLUA:gui.OpenURL(\"https://steamcommunity.com/sharedfiles/filedetails/?id=3009874388\")")' />
+<ul>
+<li><b>New weapons:</b> The shovel and frying pan, for all you slapstick comedy fans.
 </ul>
 
 ]],
