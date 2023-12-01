@@ -473,7 +473,8 @@ The Soviet/AK themed expansion starring 9 weapons, including well-known AK varia
 <li>G3SG1 changed to G3A3, replaced model and reworked stats.
 <li>Groza is now integrally suppressed, and has a different set of animations.
 <li>Groza and FAMAS now have a rail mount for scopes.
-<li>Animation touch-ups across the board. Some anims will look significantly less jank now.
+<li>Added unique firing sound for De Lisle Carbine.
+<li>Animation touch-ups across the board. Some animations will look significantly less jank now.
 </ul>
 
 <h2>ArmaLite Revolution</h2>
