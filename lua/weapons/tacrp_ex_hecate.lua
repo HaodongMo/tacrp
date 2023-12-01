@@ -236,16 +236,20 @@ SWEP.QCA_Eject = 2
 
 SWEP.MuzzleEffect = "muzzleflash_1"
 SWEP.EjectEffect = 2
-SWEP.EjectDelay = 1.1
+SWEP.EjectDelay = 1.15
 
 // anims
 
 SWEP.AnimationTranslationTable = {
     ["deploy"] = "unholster",
-    ["fire"] = {"shoot1", "shoot2"},
+    ["fire"] = "shoot1",
     ["blind_idle"] = "idle",
     ["blind_fire"] = "shoot1",
-    ["reload"] = "reload2",
+    ["reload"] = "reload",
+}
+
+SWEP.BulletBodygroups = {
+    [1] = {4, 1},
 }
 
 // attachments
