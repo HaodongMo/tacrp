@@ -360,9 +360,9 @@ An additional benefit is that a lot of the attachments now use consistent wordin
     {
         Title = "Update 16",
         Type = "Patch Notes",
-        Date = "2023-11-06",
+        Date = "2023-12-01",
         Author = "8Z",
-        Major = false,
+        Major = true,
         Summary = "",
         Contents = [[<body style="font-family:'Myriad Pro';color:white;font-size:125%;">
 <p>What is Tactical may never die. Is that how the saying goes?
@@ -429,6 +429,58 @@ An additional benefit is that a lot of the attachments now use consistent wordin
 <li><b>Fixed:</b> Some TTT2 related issues.
 <li><b>Fixed:</b> Runaway Burst interactions with "Lower Weapon While Sprinting" off.
 </ul>]],
+    },
+    {
+        Title = "U16 Expansions",
+        Type = "Patch Notes",
+        Date = "2023-12-01",
+        Author = "8Z",
+        Major = true,
+        Summary = "",
+        Contents = [[<body style="font-family:'Myriad Pro';color:white;font-size:125%;">
+<p>As TacRP grows richer in features, the expansion addons also receive additions and touchups. Previously only documented in the steam page, the patch notes for them are now being added to the newsletter for ease of access.</p>
+
+<hr>
+
+<h2>Iron Curtain <i>(New!)</i></h2>
+<p><input type='submit' value='Open Workshop' onclick='console.log("RUNLUA:gui.OpenURL(\"https://steamcommunity.com/sharedfiles/filedetails/?id=0000000000\")")' /></p>
+The Soviet/AK themed expansion starring 9 AK variants and guns with that Kalashnikov heritage.
+<ul>
+<li>AEK-971
+<li>AK-12
+<li>AK-74
+<li>AK-74U
+<li>AN-94
+<li>Galil ARM (LMG configuration)
+<li>Galil Sniper
+<li>RK-95
+<li>SVD (we're really playing it loose with this one)
+</ul>
+
+<h2>InterOps</h2>
+<input type='submit' value='Open Workshop' onclick='console.log("RUNLUA:gui.OpenURL(\"https://steamcommunity.com/sharedfiles/filedetails/?id=2975992869\")")' />
+<ul>
+<li>Model fixes to SCAR-H, MX4/CX4, Remington 870 SPMM, and M14 SOPMOD.
+<li>Replaced Desert Eagle textures.
+</ul>
+
+<h2>Special Delivery</h2>
+<input type='submit' value='Open Workshop' onclick='console.log("RUNLUA:gui.OpenURL(\"https://steamcommunity.com/sharedfiles/filedetails/?id=3007840813\")")' />
+<ul>
+<li><b>New weapons:</b> M1A1 Thompson, M1 Carbine, T/C G2 Contender.
+<li>Replaced model for PP-19 Bizon.
+<li>G3SG1 changed to G3A3, replaced model and reworked stats.
+<li>Groza is now integrally suppressed, and has a different set of animations.
+<li>Groza and FAMAS now have a rail mount for scopes.
+</ul>
+
+<h2>ArmaLite Revolution</h2>
+<input type='submit' value='Open Workshop' onclick='console.log("RUNLUA:gui.OpenURL(\"https://steamcommunity.com/sharedfiles/filedetails/?id=3006376475\")")' />
+<ul>
+<li><b>New weapon:</b> AR-15 Compact.
+</ul>
+
+]],
     },
 }
 TacRP.NewsRead = TacRP.NewsRead or {}
