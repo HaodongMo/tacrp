@@ -363,7 +363,7 @@ An additional benefit is that a lot of the attachments now use consistent wordin
         Date = "2023-12-01",
         Author = "8Z",
         Major = true,
-        Summary = "",
+        Summary = "A flurry of new features: Trivia, Recoil patterns, Bipods, Breath holding.",
         Contents = [[<body style="font-family:'Myriad Pro';color:white;font-size:125%;">
 <p>What is Tactical may never die. Is that how the saying goes?
 <br>Here's an update that's been cooking for a while. We've got a bit of everything: cool new features that enhance gameplay, visual reworks to some old models, performance update, it's all here.</p>
@@ -397,8 +397,8 @@ An additional benefit is that a lot of the attachments now use consistent wordin
 <p>The amount of breath meter drained is dependent on Scoped Sway. Iron sights and low magnification optics are easier to hold still with. Careful not to hold too long, as running low or out will increase sway significantly!</p>
 
 <h2>Facelifts</h2>
-<p>The Glock 17 model has been swapped out for the cooler one from Twinke Masta.
-<br>Also, the Hecate II now has its original scope and bipod models.</p>
+<p>The Glock 17 model has been swapped out for the cooler one by Twinke Masta.
+<br>The Hecate II now has its original scope and bipod models, and the animations have been improved a little.</p>
 
 <hr>
 
@@ -417,13 +417,13 @@ An additional benefit is that a lot of the attachments now use consistent wordin
 <li><b>Changed:</b> Adjusted some weapon names and descriptions.
 <li><b>Changed:</b> Magnum Pistols are now its own category.
 <li><b>Rebalance:</b> Significantly increased bloom recovery and reduced maximum bloom on most guns.
+<li><b>Rebalance:</b> Significantly reduced range on all weapons.
 <li><b>Rebalance:</b> Surplus attachments now reduce recoil.
 <li><b>Rebalance:</b> Mag Extenders slows down reload slightly.
 <li><b>Rebalance:</b> Buffs to Beryl and M1A.
 <li><b>Rebalance:</b> Sphinx 2000 is now a 3-round burst Machine Pistol (again).
 <li><b>Rebalance:</b> Increased P90 recoil.
-<li><b>Rebalance:</b> Reduced range on all weapons.
-<li><b>Fixed:</b> Mini Uzi worldmodel doesn't fold stock.
+<li><b>Fixed:</b> Some worldmodels not having a folded stock bodygroup.
 <li><b>Fixed:</b> Firemode resetting when detaching attachment.
 <li><b>Fixed:</b> Minor alignment issues with optics.
 <li><b>Fixed:</b> Some TTT2 related issues.
@@ -436,7 +436,7 @@ An additional benefit is that a lot of the attachments now use consistent wordin
         Date = "2023-12-01",
         Author = "8Z",
         Major = true,
-        Summary = "",
+        Summary = "New expansion, new weapons, and many model touchups among the expanded TacRP family.",
         Contents = [[<body style="font-family:'Myriad Pro';color:white;font-size:125%;">
 <p>As TacRP grows richer in features, the expansion addons also receive additions and touchups. Previously only documented in the steam page, the patch notes for them are now being added to the newsletter for ease of access.</p>
 
@@ -493,6 +493,7 @@ The Soviet/AK themed expansion starring 9 weapons, including well-known AK varia
     },
 }
 TacRP.NewsRead = TacRP.NewsRead or {}
+TacRP.NewsFirstLoad = false
 TacRP.NewsLoaded = nil
 TacRP.NewsResult = "Uninitialized"
 
@@ -508,6 +509,11 @@ local date_pattern = "(%d+)-(%d+)-(%d+)"
 function TacRP.LoadReadData()
     local tbl = util.JSONToTable(file.Read(TacRP.PresetPath .. "tacrp_news.txt", "DATA") or "") or {}
     TacRP.NewsRead = {}
+
+    if #tbl == 0 then
+        TacRP.NewsFirstLoad = true
+    end
+
     for _, i in ipairs(tbl) do
         TacRP.NewsRead[i] = true
     end
@@ -777,7 +783,7 @@ function TacRP.CreateNewsPanel(open)
                     draw.SimpleText(data.Title, "TacRP_Myriad_Pro_8_Glow", TacRP.SS(2), TacRP.SS(2), c_glow, TEXT_ALIGN_LEFT, TEXT_ALIGN_TOP)
                 end
                 draw.SimpleText(data.Title, "TacRP_Myriad_Pro_8", TacRP.SS(2), TacRP.SS(2), c_txt, TEXT_ALIGN_LEFT, TEXT_ALIGN_TOP)
-                draw.SimpleText(data.Date or "Unknown Date", "TacRP_Myriad_Pro_6", w - TacRP.SS(2), TacRP.SS(9.5), c_txt, TEXT_ALIGN_RIGHT, TEXT_ALIGN_TOP)
+                draw.SimpleText(data.Date or "Unknown Date", "TacRP_Myriad_Pro_6", w - TacRP.SS(2) - 12, TacRP.SS(9.5), c_txt, TEXT_ALIGN_RIGHT, TEXT_ALIGN_TOP)
                 draw.SimpleText((data.Type or "Article") .. ((data.Link or data.Hyperlink) and " (Web)" or ""), "TacRP_Myriad_Pro_6", TacRP.SS(2), TacRP.SS(9.5), c_txt, TEXT_ALIGN_LEFT, TEXT_ALIGN_TOP)
 
                 if btn.TextLines then
@@ -999,7 +1005,9 @@ concommand.Add("tacrp_news", function()
                 ind = i
                 major = v.Major
             end
-            if major then break end
+            if TacRP.NewsFirstLoad then -- if no read articles exist, mark all as read!
+                TacRP.NewsRead[v.Key] = true
+            elseif major then break end
         end
 
         TacRP.CreateNewsPanel(ind)
@@ -1010,6 +1018,7 @@ concommand.Add("tacrp_news_reset", function()
     file.Delete(TacRP.PresetPath .. "tacrp_news.txt")
     TacRP.NewsRead = {}
     TacRP.NewsLoaded = nil
+    TacRP.NewsFirstLoad = true
     TacRP.NewsResult = "Uninitialized"
 end)
 
@@ -1018,12 +1027,16 @@ local function notifynews()
 
     fetchnews(function()
         local ind, major
+
         for i, v in ipairs(TacRP.NewsLoaded) do
             if !TacRP.NewsRead[v.Key] and (!ind or !major) then
                 ind = i
                 major = v.Major
             end
-            if major then break end
+            if TacRP.NewsFirstLoad then -- if no read articles exist, mark all as read!
+                TacRP.NewsRead[v.Key] = true
+            elseif major then break end
+            -- if major then break end
         end
 
         if ind then
@@ -1031,7 +1044,7 @@ local function notifynews()
                 TacRP.CreateNewsPanel(ind)
             elseif major or !TacRP.ConVars["news_majoronly"]:GetBool() then
                 chat.AddText(color_white, "------------- Tactical RP -------------")
-                chat.AddText(color_white, "A new " .. string.lower(TacRP.NewsLoaded[ind].Type or "article") .. " was released!")
+                chat.AddText(color_white, "New " .. string.lower(TacRP.NewsLoaded[ind].Type or "article") .. " released!")
                 chat.AddText(color_white, "Use command 'tacrp_news' or type '/tacrp_news' to view it and suppress this message.")
                 chat.AddText(color_white, "---------------------------------------")
             end
