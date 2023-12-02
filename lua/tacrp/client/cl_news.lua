@@ -419,6 +419,7 @@ An additional benefit is that a lot of the attachments now use consistent wordin
 <li><b>Changed:</b> Newsletter now appears when a TacRP weapon is drawn, instead of on load.
 <li><b>Rebalance:</b> Significantly increased bloom recovery and reduced maximum bloom on most guns.
 <li><b>Rebalance:</b> Significantly reduced range on all weapons.
+<li><b>Rebalance:</b> Snipers now use Magnum Ammo (357) instead of Sniper Ammo (SniperPenetratedRound).
 <li><b>Rebalance:</b> Surplus attachments now reduce recoil.
 <li><b>Rebalance:</b> Mag Extenders slows down reload slightly.
 <li><b>Rebalance:</b> Buffs to Beryl and M1A.
