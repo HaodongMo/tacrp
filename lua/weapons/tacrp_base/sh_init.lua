@@ -67,6 +67,11 @@ function SWEP:Deploy()
         self.LastHintLife = CurTime()
     end
 
+    if (game.SinglePlayer() or CLIENT) and !TacRP.NewsPopup and TacRP.ConVars["checknews"]:GetBool() then
+        TacRP.NewsPopup = true
+        RunConsoleCommand("tacrp_news_check")
+    end
+
     self:ToggleBlindFire(TacRP.BLINDFIRE_NONE)
 
     self:SetShouldHoldType()

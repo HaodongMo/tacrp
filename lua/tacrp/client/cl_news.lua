@@ -416,6 +416,7 @@ An additional benefit is that a lot of the attachments now use consistent wordin
 <li><b>Changed:</b> MAC-10 firing sounds.
 <li><b>Changed:</b> Adjusted some weapon names and descriptions.
 <li><b>Changed:</b> Magnum Pistols are now its own category.
+<li><b>Changed:</b> Newsletter now appears when a TacRP weapon is drawn, instead of on load.
 <li><b>Rebalance:</b> Significantly increased bloom recovery and reduced maximum bloom on most guns.
 <li><b>Rebalance:</b> Significantly reduced range on all weapons.
 <li><b>Rebalance:</b> Surplus attachments now reduce recoil.
@@ -496,6 +497,7 @@ TacRP.NewsRead = TacRP.NewsRead or {}
 TacRP.NewsFirstLoad = false
 TacRP.NewsLoaded = nil
 TacRP.NewsResult = "Uninitialized"
+TacRP.NewsPopup = nil
 
 function TacRP.SaveReadData()
     local tbl = {}
@@ -615,6 +617,11 @@ local html_failed = [[<body style="font-family:'Myriad Pro';text-align:center;co
 TacRP.NewsPanel = TacRP.NewsPanel or nil
 function TacRP.CreateNewsPanel(open)
     TacRP.RemoveNewsPanel()
+
+    if TacRP.NewsFirstLoad then
+        TacRP.SaveReadData()
+        TacRP.NewsFirstLoad = false
+    end
 
     local is_workshop = nil
     local last_update = nil
@@ -1019,6 +1026,7 @@ concommand.Add("tacrp_news_reset", function()
     TacRP.NewsRead = {}
     TacRP.NewsLoaded = nil
     TacRP.NewsFirstLoad = true
+    TacRP.NewsPopup = nil
     TacRP.NewsResult = "Uninitialized"
 end)
 
@@ -1053,12 +1061,12 @@ local function notifynews()
 end
 concommand.Add("tacrp_news_check", notifynews)
 
-hook.Add("InitPostEntity", "tacrp_news", function()
-    timer.Simple(5, function()
-        if !TacRP.ConVars["checknews"]:GetBool() then return end
-        notifynews()
-    end)
-end)
+-- hook.Add("InitPostEntity", "tacrp_news", function()
+--     timer.Simple(5, function()
+--         if !TacRP.ConVars["checknews"]:GetBool() then return end
+--         notifynews()
+--     end)
+-- end)
 
 hook.Add("OnPlayerChat", "tacrp_news", function(ply, txt)
     if ply == LocalPlayer() and string.lower(txt) == "/tacrp_news" then
