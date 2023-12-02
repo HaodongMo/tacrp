@@ -360,7 +360,7 @@ An additional benefit is that a lot of the attachments now use consistent wordin
     {
         Title = "Update 16",
         Type = "Patch Notes",
-        Date = "2023-12-01",
+        Date = "2023-12-02",
         Author = "8Z",
         Major = true,
         Summary = "A flurry of new features: Trivia, Recoil patterns, Bipods, Breath holding.",
@@ -435,7 +435,7 @@ An additional benefit is that a lot of the attachments now use consistent wordin
     {
         Title = "U16 Expansions",
         Type = "Patch Notes",
-        Date = "2023-12-01",
+        Date = "2023-12-02",
         Author = "8Z",
         Major = true,
         Summary = "New expansion, new weapons, and many model touchups among the expanded TacRP family.",
@@ -445,7 +445,7 @@ An additional benefit is that a lot of the attachments now use consistent wordin
 <hr>
 
 <h2>Iron Curtain <i>(New!)</i></h2>
-<p><input type='submit' value='Open Workshop' onclick='console.log("RUNLUA:gui.OpenURL(\"https://steamcommunity.com/sharedfiles/filedetails/?id=0000000000\")")' /></p>
+<p><input type='submit' value='Open Workshop' onclick='console.log("RUNLUA:gui.OpenURL(\"https://steamcommunity.com/sharedfiles/filedetails/?id=3102297293\")")' /></p>
 The Soviet/AK themed expansion starring 9 weapons, including well-known AK variants, weapons descended from the Kalashnikov design and the SVD (which isn't actually an AK, sorry for the false advertising).
 <ul>
 <li>AEK-971
