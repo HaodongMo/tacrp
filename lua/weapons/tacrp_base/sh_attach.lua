@@ -32,9 +32,8 @@ function SWEP:Attach(slot, att, silent)
         if !silent then
             surface.PlaySound(slottbl.AttachSound or "")
         end
-    else
+    elseif SERVER and !silent then
         self:NetworkWeapon()
-
         TacRP:PlayerSendAttInv(self:GetOwner())
     end
 
@@ -87,9 +86,8 @@ function SWEP:Detach(slot, silent)
         if !silent then
             surface.PlaySound(slottbl.DetachSound or "")
         end
-    else
+    elseif !silent then
         self:NetworkWeapon()
-
         TacRP:PlayerSendAttInv(self:GetOwner())
     end
 

@@ -122,7 +122,6 @@ end)
 net.Receive("tacrp_receivepreset", function(len, ply)
     local wpn = net.ReadEntity()
 
-    if !wpn.ArcticTacRP then return end
-
+    if !wpn.ArcticTacRP or wpn:GetOwner() != ply then return end
     wpn:ReceivePreset()
 end)

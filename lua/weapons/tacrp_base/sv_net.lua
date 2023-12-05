@@ -34,13 +34,16 @@ function SWEP:ReceivePreset()
 
             if !atttbl then continue end
 
-            if TacRP:PlayerGetAtts(self:GetOwner(), att) > 0 then
-                slottbl.Installed = att
+            if slottbl.Installed then
+                self:Detach(slot, true)
             end
+
+            self:Attach(slot, att, true)
         end
     end
 
     self:NetworkWeapon()
+    TacRP:PlayerSendAttInv(self:GetOwner())
 
     self.StatCache = {}
     self.HookCache = {}

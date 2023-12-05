@@ -57,10 +57,6 @@ function SWEP:Deploy()
 
     self:GetOwner():DoAnimationEvent(ACT_HL2MP_GESTURE_RANGE_ATTACK_KNIFE)
 
-    if SERVER then
-        self:NetworkWeapon()
-    end
-
     if CLIENT then
         self:SetupModel(true)
         self:SetupModel(false)
@@ -228,6 +224,17 @@ function SWEP:Initialize()
     end
 
     self:ClientInitialize()
+
+    if SERVER then
+        -- If we have any pre-existing attachments, network it
+        local empty = true
+        for slot, slottbl in pairs(self.Attachments) do
+            if slottbl.Installed then empty = false break end
+        end
+        if !empty then
+            self:NetworkWeapon()
+        end
+    end
 end
 
 function SWEP:ClientInitialize()

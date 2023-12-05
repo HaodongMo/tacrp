@@ -28,7 +28,6 @@ net.Receive("TacRP_networkweapon", function(len)
         wpn:ReceiveWeapon()
         wpn:UpdateHolster()
     end
-
 end)
 
 net.Receive("TacRP_updateholster", function()

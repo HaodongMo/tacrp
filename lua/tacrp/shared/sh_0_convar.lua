@@ -19,7 +19,8 @@ local conVars = {
     {
         name = "autosave",
         default = "1",
-        client = true
+        client = true,
+        userinfo = true,
     },
     {
         name = "subcats",

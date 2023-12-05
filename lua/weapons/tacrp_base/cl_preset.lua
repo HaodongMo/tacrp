@@ -21,8 +21,7 @@ end
 function SWEP:LoadPreset(filename)
     if LocalPlayer() != self:GetOwner() then return end
 
-    filename = "autosave"
-    filename = TacRP.PresetPath .. self:GetClass() .. "/" .. filename .. ".txt"
+    filename = TacRP.PresetPath .. self:GetClass() .. "/" .. "autosave" .. ".txt"
 
     if !file.Exists(filename, "DATA") then return end
 
