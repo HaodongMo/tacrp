@@ -167,7 +167,7 @@ function SWEP:GetViewModelPosition(pos, ang)
         if dt <= self.ProceduralIronFire.tmax then
             self.ProceduralIronCleanup = false
             if !(self:GetValue("LastShot") and self:Clip1() == 0) then
-                for k, v in pairs(self.ProceduralIronFire.bones) do
+                for k, v in pairs(self.ProceduralIronFire.bones or {}) do
                     local bone = vm:LookupBone(v.bone or "")
                     if !bone then continue end
 
@@ -198,7 +198,7 @@ function SWEP:GetViewModelPosition(pos, ang)
             end
         elseif !self.ProceduralIronCleanup then
             self.ProceduralIronCleanup = true
-            for k, v in pairs(self.ProceduralIronFire.bones) do
+            for k, v in pairs(self.ProceduralIronFire.bones or {}) do
                 local bone = vm:LookupBone(v.bone or "")
                 if !bone then continue end
                 if v.pos then
