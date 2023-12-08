@@ -115,6 +115,18 @@ if !TTT2 then
         dgui3:CheckBox("Enable Blinding Flashlights", "tacrp_flashlight_blind")
         dgui3:Help("Flashlight glare will obscure vision based on distance and viewing angle. Effect is more significant on scopes. If disabled, glare sprite will be visible but not grow in size.")
         dgui3:CheckBox("Allow Reload while Sprinting", "tacrp_sprint_reload")
+		
+
+		dgui3:CheckBox("Movement Penalty", "tacrp_penalty_move")
+		dgui3:ControlHelp("Penalty when weapon is up.\nDoes not apply in safety.")
+		dgui3:CheckBox("Firing Movement Penalty", "tacrp_penalty_firing")
+		dgui3:ControlHelp("Penalty from firing the weapon.")
+		dgui3:CheckBox("Aiming Movement Penalty", "tacrp_penalty_aiming")
+		dgui3:ControlHelp("Penalty while aiming the weapon.")
+		dgui3:CheckBox("Reload Movement Penalty", "tacrp_penalty_reload")
+		dgui3:ControlHelp("Penalty while reloading.")
+		dgui3:CheckBox("Melee Movement Penalty", "tacrp_penalty_melee")
+		dgui3:ControlHelp("Penalty from melee bashing.")
 
         panellist:AddItem(dgui3)
 

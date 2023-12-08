@@ -409,6 +409,43 @@ local conVars = {
         client = true,
     },
 
+    // --------------------------- Movement Penalties
+
+    {
+        name = "penalty_move",
+        default = "1",
+        replicated = true,
+        notify = true,
+    },
+
+    {
+        name = "penalty_firing",
+        default = "1",
+        replicated = true,
+        notify = true,
+    },
+
+    {
+        name = "penalty_aiming",
+        default = "1",
+        replicated = true,
+        notify = true,
+    },
+
+    {
+        name = "penalty_reload",
+        default = "1",
+        replicated = true,
+        notify = true,
+    },
+
+    {
+        name = "penalty_melee",
+        default = "1",
+        replicated = true,
+        notify = true,
+    },
+
     // --------------------------- Ammo
     {
         name = "defaultammo",
@@ -1033,6 +1070,32 @@ local function menu_balance_ti(panel)
         label = "Lower Weapon While Airborne",
         command = "tacrp_sprint_counts_midair"})
     panel:ControlHelp("Requires \"Lower Weapon While Sprinting\" to be enabled.")
+
+    panel:AddControl("checkbox", {
+        label = "Movement Penalty",
+        command = "tacrp_penalty_move"
+    })
+    panel:ControlHelp("Penalty when weapon is up.\nDoes not apply in safety.")
+    panel:AddControl("checkbox", {
+        label = "Firing Movement Penalty",
+        command = "tacrp_penalty_firing"
+    })
+    panel:ControlHelp("Penalty from firing the weapon.")
+    panel:AddControl("checkbox", {
+        label = "Aiming Movement Penalty",
+        command = "tacrp_penalty_aiming"
+    })
+    panel:ControlHelp("Penalty while aiming the weapon.")
+    panel:AddControl("checkbox", {
+        label = "Reload Movement Penalty",
+        command = "tacrp_penalty_reload"
+    })
+    panel:ControlHelp("Penalty while reloading.")
+    panel:AddControl("checkbox", {
+        label = "Melee Movement Penalty",
+        command = "tacrp_penalty_melee"
+    })
+    panel:ControlHelp("Penalty from melee bashing.")
 
     header(panel, "\nSliders")
     panel:AddControl("slider", {
