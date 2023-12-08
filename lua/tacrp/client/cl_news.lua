@@ -510,6 +510,25 @@ The Soviet/AK themed expansion starring 9 weapons, including well-known AK varia
 <li><b>Changed:</b> Quick melee can now be held down to fire immediately or continue meleeing.
 </ul>]],
     },
+	{
+        Title = "Update 16 Hotfix 2",
+        Type = "Patch Notes",
+        Date = "2023-12-08",
+        Author = "speedonerd",
+        Major = false,
+        Summary = "Last minute additions and little fixes.",
+        Contents = [[<body style="font-family:'Myriad Pro';color:white;font-size:125%;">
+<p>This is speedonerd speaking! I'm the other guy who works on this mess, and I'm here with a quick update for TacRP expansions that add some last minute things we couldn't fit in to Update 16 proper.</p>
+<h3>Changelist</h3>
+<ul>
+<li><b>Added:</b> CVars for toggling movement penalties on & off. Courtesy of Fesiug.
+<li><b>Added:</b> Old School balance mode. This was an experiment created during U16 and Iron Curtain's development that didn't really pan out, but we left it in regardless. Technically it's been in the base since U16 but now we're telling you about it. You're welcome! Type "tacrp_balance 4" in console to activate.
+<li><b>Fixed:</b> Customization slot icon flash behavior causing errors.
+<li><b>Fixed:</b> Corner cam display being the incorrect aspect ratio. Courtesy of Fesiug.
+<li><b>Changed:</b> (Special Delivery) Gyrojet now has uses a shotgun style reload, just like its real-life counterpart, complete with quick and dirty animations by yours truly.
+<li><b>Changed:</b> (InterOps) Adjust Chinalake screen position so it doesnt take up all of your view.
+</ul>]],
+    },
 }
 TacRP.NewsRead = TacRP.NewsRead or {}
 TacRP.NewsFirstLoad = false
