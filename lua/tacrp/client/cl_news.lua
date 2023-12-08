@@ -506,6 +506,7 @@ The Soviet/AK themed expansion starring 9 weapons, including well-known AK varia
 <li><b>Fixed:</b> Autosave desyncing in singleplayer, causing attachments to not show up.
 <li><b>Fixed:</b> Autosave not checking for slot validity or take from attachment inventory.
 <li><b>Fixed:</b> AUG procedural irons issue.
+<li><b>Fixed:</b> Exiting sprint disables shooting even if "Lower Weapon While Sprinting" is off.
 <li><b>Changed:</b> Quick melee can now be held down to fire immediately or continue meleeing.
 </ul>]],
     },
