@@ -1,5 +1,4 @@
 -- local customizedelta = 0
-local flash_end = 0
 local range = 0
 
 local enable_armor = false

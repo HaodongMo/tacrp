@@ -6,6 +6,8 @@ AccessorFunc(PANEL, "Slot", "Slot")
 AccessorFunc(PANEL, "IsMenu", "IsMenu")
 AccessorFunc(PANEL, "SlotLayout", "SlotLayout")
 
+local flash_end = 0
+
 function PANEL:GetInstalled()
     if self:GetIsMenu() and IsValid(self:GetWeapon()) and self:GetWeapon().Attachments then
         local installed = self:GetWeapon().Attachments[self:GetSlot()].Installed
