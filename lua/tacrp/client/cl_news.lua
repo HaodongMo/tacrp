@@ -493,6 +493,22 @@ The Soviet/AK themed expansion starring 9 weapons, including well-known AK varia
 
 ]],
     },
+    {
+        Title = "Update 16 Hotfix",
+        Type = "Patch Notes",
+        Date = "2023-12-05",
+        Author = "8Z",
+        Major = false,
+        Summary = "i broke autosave sry",
+        Contents = [[<body style="font-family:'Myriad Pro';color:white;font-size:125%;">
+<h3>Changelist</h3>
+<ul>
+<li><b>Fixed:</b> Autosave desyncing in singleplayer, causing attachments to not show up.
+<li><b>Fixed:</b> Autosave not checking for slot validity or take from attachment inventory.
+<li><b>Fixed:</b> AUG procedural irons issue.
+<li><b>Changed:</b> Quick melee can now be held down to fire immediately or continue meleeing.
+</ul>]],
+    },
 }
 TacRP.NewsRead = TacRP.NewsRead or {}
 TacRP.NewsFirstLoad = false
