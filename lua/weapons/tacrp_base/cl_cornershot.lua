@@ -61,6 +61,7 @@ function SWEP:DoRT()
         y = 0,
         w = rt_w,
         h = rt_h,
+        aspect = 4/3,
         angles = angles,
         origin = origin,
         drawviewmodel = false,
