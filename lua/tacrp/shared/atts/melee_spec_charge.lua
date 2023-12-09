@@ -513,7 +513,7 @@ hook.Add("FinishMove", "TacRP_Charge", function(ply, mv)
                                 ply:EmitSound("TacRP.Charge.HitWorld", 80)
                             elseif (ent.TacRPNextChargeHit or 0) <= CurTime() then
                                 dmginfo:SetDamage(math.max(vel, chargestats(ply, stat_vel) * 0.5))
-                                dmginfo:SetDamageType(DMG_CRUSH)
+                                dmginfo:SetDamageType(DMG_CLUB)
                                 mv:SetVelocity(ply:GetForward() * chargestats(ply, stat_vel) * 0.75)
                             end
                         end
