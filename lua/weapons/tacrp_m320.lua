@@ -16,7 +16,7 @@ SWEP.Trivia_Caliber = "40mm Grenades"
 SWEP.Trivia_Manufacturer = "Heckler & Koch"
 SWEP.Trivia_Year = "2008"
 
-SWEP.Faction = TacRP.FACTION_COALITION
+SWEP.Faction = TacRP.FACTION_NEUTRAL
 SWEP.Credits = "Assets: Tactical Intervention"
 
 SWEP.ViewModel = "models/weapons/tacint/v_m320.mdl"
