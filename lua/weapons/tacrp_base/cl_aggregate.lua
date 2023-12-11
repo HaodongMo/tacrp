@@ -143,7 +143,7 @@ SWEP.StatGroupGrades = {
     {60, "B", Color(230, 230, 60)},
     {40, "C", Color(60, 230, 60)},
     {20, "D", Color(60, 60, 230)},
-    { 0, "F", Color(150, 150, 150)},
+    { -math.huge, "F", Color(150, 150, 150)},
 }
 
 SWEP.StatGroups = {
