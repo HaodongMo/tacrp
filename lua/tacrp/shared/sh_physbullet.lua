@@ -115,7 +115,7 @@ net.Receive("TacRP_sendbullet", function(len, ply)
         Drag = drag,
         Gravity = grav,
         Weapon = weapon,
-        Filter = {LocalPlayer()},
+        Filter = {weapon:GetOwner()},
     }
 
     if !weapon:IsValid() or !weapon.GetValue then return end
