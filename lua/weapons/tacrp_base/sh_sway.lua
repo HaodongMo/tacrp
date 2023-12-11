@@ -68,29 +68,29 @@ function SWEP:ThinkHoldBreath()
     local owner = self:GetOwner()
     if !owner:IsPlayer() then return end
 
-    if !IsFirstTimePredicted() then return end
+    local ft = FrameTime()
 
     if self:HoldingBreath() then
 
-        self:SetBreath(self:GetBreath() - FrameTime() * self:GetBreathDrain() * (self:HasOptic() and 1 or 0.75) * (self:GetRecoilAmount() > 0 and 1.5 or 1))
+        self:SetBreath(math.max(0, self:GetBreath() - ft * self:GetBreathDrain() * (self:HasOptic() and 1 or 0.75) * (self:GetRecoilAmount() > 0 and 1.5 or 1)))
 
         if self:GetBreath() <= 0 then
             self:SetOutOfBreath(true)
         end
 
         if self:GetHoldBreathAmount() < 1 then
-            self:SetHoldBreathAmount(math.min(1, self:GetHoldBreathAmount() + FrameTime() * self:GetBreathSpeed()))
+            self:SetHoldBreathAmount(math.min(1, self:GetHoldBreathAmount() + ft * self:GetBreathSpeed()))
         end
     else
         if self:GetHoldBreathAmount() > 0 then
-            self:SetHoldBreathAmount(math.max(0, self:GetHoldBreathAmount() - FrameTime() * self:GetBreathSpeed() * 2))
+            self:SetHoldBreathAmount(math.max(0, self:GetHoldBreathAmount() - ft * self:GetBreathSpeed() * 2))
         end
 
         if self:GetOutOfBreath() and self:GetBreath() >= 1 then
             self:SetOutOfBreath(false)
         end
 
-        self:SetBreath(self:GetBreath() + FrameTime() * self:GetValue("BreathRecovery") * (self:GetOutOfBreath() and 0.2 or 0.25))
+        self:SetBreath(math.min(1, self:GetBreath() + ft * self:GetValue("BreathRecovery") * (self:GetOutOfBreath() and 0.2 or 0.25)))
     end
 end
 
@@ -133,18 +133,18 @@ function SWEP:GetBreathSpeed()
     return self.MiscCache["breath_rate"]
 end
 
-function SWEP:GetBreath()
-    return self:GetOwner():GetNWFloat("TacRPBreath", 1)
-end
+-- function SWEP:GetBreath()
+--     return self:GetOwner():GetNWFloat("TacRPBreath", 1)
+-- end
 
-function SWEP:SetBreath(v)
-    self:GetOwner():SetNWFloat("TacRPBreath", math.Clamp(v, 0, 1))
-end
+-- function SWEP:SetBreath(v)
+--     self:GetOwner():SetNWFloat("TacRPBreath", math.Clamp(v, 0, 1))
+-- end
 
-function SWEP:GetOutOfBreath()
-    return self:GetOwner():GetNWBool("TacRPBreathEmpty", false)
-end
+-- function SWEP:GetOutOfBreath()
+--     return self:GetOwner():GetNWBool("TacRPBreathEmpty", false)
+-- end
 
-function SWEP:SetOutOfBreath(v)
-    self:GetOwner():SetNWBool("TacRPBreathEmpty", v)
-end
+-- function SWEP:SetOutOfBreath(v)
+--     self:GetOwner():SetNWBool("TacRPBreathEmpty", v)
+-- end

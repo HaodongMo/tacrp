@@ -487,9 +487,10 @@ function SWEP:DrawBreathBar(x, y, w, h)
     elseif breath_a < 1 then
         breath_a = math.Approach(breath_a, 1, FrameTime())
     end
+    local breath = self:GetBreath()
     if last != self:GetBreath() then
         lastt = CurTime()
-        last = self:GetBreath()
+        last = breath
     end
     if breath_a == 0 then return end
 
@@ -502,7 +503,7 @@ function SWEP:DrawBreathBar(x, y, w, h)
     surface.DrawRect(x, y, w, h)
 
     if self:GetOutOfBreath() then
-        surface.SetDrawColor(255, 255 * self:GetBreath() ^ 0.5, 255 * self:GetBreath(), 150 * breath_a)
+        surface.SetDrawColor(255, 255 * breath ^ 0.5, 255 * breath, 150 * breath_a)
     else
         surface.SetDrawColor(255, 255, 255, 150 * breath_a)
     end
