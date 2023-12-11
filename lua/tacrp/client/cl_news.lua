@@ -510,7 +510,7 @@ The Soviet/AK themed expansion starring 9 weapons, including well-known AK varia
 <li><b>Changed:</b> Quick melee can now be held down to fire immediately or continue meleeing.
 </ul>]],
     },
-	{
+    {
         Title = "Update 17",
         Type = "Patch Notes",
         Date = "2023-12-10",
@@ -534,9 +534,11 @@ The Soviet/AK themed expansion starring 9 weapons, including well-known AK varia
 <li><b>Added:</b> CVars for toggling movement penalties on & off.
 <li><b>Fixed:</b> Customization slot icon flash behavior causing errors.
 <li><b>Fixed:</b> Corner cam display being the incorrect aspect ratio.
+<li><b>Fixed:</b> Multiplayer attachment bodygroup networking issue.
+<li><b>Fixed:</b> Multiplayer hold breath meter jitteryness.
 </ul>]],
     },
-	{
+    {
         Title = "U17 Expansions",
         Type = "Patch Notes",
         Date = "2023-12-10",
