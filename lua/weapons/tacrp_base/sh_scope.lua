@@ -263,33 +263,57 @@ function SWEP:GetCCIP(pos, ang)
     ang = ang or sa
 
     local v = self:GetValue("MuzzleVelocity")
-    local g = 1
+    local g = Vector(0, 0, -600)
     local d = 1
+    local h = 0
+
+    if self:GetValue("ShootEnt") then
+        v = self:GetValue("ShootEntForce")
+        d = 0
+        g = physenv.GetGravity()
+        h = 4
+    end
 
     local vel = ang:Forward() * v
     local maxiter = 100
     local timestep = 1 / 15
+    local gravity = timestep * g
+
+    local steps = {}
 
     for i = 1, maxiter do
         local dir = vel:GetNormalized()
         local spd = vel:Length() * timestep
         local drag = d * spd * spd * (1 / 150000)
-        local gravity = timestep * g * 600
 
         if spd <= 0.001 then return nil end
 
         local newpos = pos + (vel * timestep)
-        local newvel = vel - (dir * drag) - Vector(0, 0, gravity)
+        local newvel = vel - (dir * drag) + gravity
 
-        local tr = util.TraceLine({
-            start = pos,
-            endpos = newpos,
-            filter = self:GetOwner(),
-            mask = MASK_SHOT
-        })
+        local tr
+        if h > 0 then
+            tr = util.TraceHull({
+                start = pos,
+                endpos = newpos,
+                filter = self:GetOwner(),
+                mask = MASK_SHOT,
+                mins = Vector(-h, -h, -h),
+                maxs = Vector(h, h, h),
+            })
+        else
+            tr = util.TraceLine({
+                start = pos,
+                endpos = newpos,
+                filter = self:GetOwner(),
+                mask = MASK_SHOT
+            })
+        end
+        table.insert(steps, 0, tr.HitPos)
 
         if tr.Hit then
-            return tr, i * timestep
+            debugoverlay.Sphere(tr.HitPos, 8, 0.25, color_white, true)
+            return tr, i * timestep, steps
         else
             pos = newpos
             vel = newvel
