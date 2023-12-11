@@ -68,6 +68,8 @@ function SWEP:ThinkHoldBreath()
     local owner = self:GetOwner()
     if !owner:IsPlayer() then return end
 
+    if !IsFirstTimePredicted() then return end
+
     if self:HoldingBreath() then
 
         self:SetBreath(self:GetBreath() - FrameTime() * self:GetBreathDrain() * (self:HasOptic() and 1 or 0.75) * (self:GetRecoilAmount() > 0 and 1.5 or 1))
