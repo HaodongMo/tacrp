@@ -125,7 +125,7 @@ function SWEP:Think()
 
             if TacRP.ConVars["autosave"]:GetBool() and TacRP.ConVars["free_atts"]:GetBool() then
                 self:LoadPreset()
-                self:DoDeployAnimation()
+                -- self:DoDeployAnimation()
             end
         end
 

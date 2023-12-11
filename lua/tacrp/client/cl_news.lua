@@ -536,6 +536,7 @@ The Soviet/AK themed expansion starring 9 weapons, including well-known AK varia
 <li><b>Fixed:</b> Corner cam display being the incorrect aspect ratio.
 <li><b>Fixed:</b> Multiplayer attachment bodygroup networking issue.
 <li><b>Fixed:</b> Multiplayer hold breath meter jitteryness.
+<li><b>Fixed:</b> Multiplayer autosave playing deploy animation twice.
 </ul>]],
     },
     {
