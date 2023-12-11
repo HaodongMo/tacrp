@@ -564,10 +564,11 @@ The Soviet/AK themed expansion starring 9 weapons, including well-known AK varia
 
 <h3>Changelist</h3>
 <ul>
-<li><b>Changed:</b> (Special Delivery) Gyrojet now has a round-by-round reload as opposed to the bastardized removable mag it had before, complete with quick and dirty animations by yours truly.
+<li><b>Fixed:</b> (Brute Force) M9 Bayonet misaligned worldmodel.
+<li><b>Changed:</b> (InterOps) Colt SMG restricted to using Colt 3x20 scope only.
+<li><b>Changed:</b> (Special Delivery) Gyrojet now has a round-by-round reload as opposed to the bastardized removable mag it had before.
 <li><b>Changed:</b> (Special Delivery) WA2000 animation improvements.
 <li><b>Changed:</b> (Special Delivery) Added sounds for ejected shells hitting the ground to the Double Defense.
-<li><b>Changed:</b> (InterOps) Adjust Chinalake screen position so it doesnt take up all of your view.
 </ul>]],
     },
 }
