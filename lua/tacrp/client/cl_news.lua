@@ -532,6 +532,8 @@ The Soviet/AK themed expansion starring 9 weapons, including well-known AK varia
 <ul>
 <li><b>Added:</b> Old School balance mode. Enter "tacrp_balance 4" in console to access.
 <li><b>Added:</b> CVars for toggling movement penalties on & off.
+<li><b>Changed:</b> RPG rockets can now penetrate LVS vehicles and damage Combine Helicopter NPCs on a direct hit.
+<li><b>Rebalance:</b> RPG rockets do more direct impact damage.
 <li><b>Fixed:</b> Customization slot icon flash behavior causing errors.
 <li><b>Fixed:</b> Corner cam display being the incorrect aspect ratio.
 <li><b>Fixed:</b> Multiplayer attachment bodygroup networking issue.
