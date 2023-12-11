@@ -38,7 +38,7 @@ function SWEP:ReceivePreset()
                 self:Detach(slot, true)
             end
 
-            self:Attach(slot, att, true)
+            self:Attach(slot, att, true, true)
         end
     end
 

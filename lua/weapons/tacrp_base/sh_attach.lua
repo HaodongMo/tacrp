@@ -1,4 +1,4 @@
-function SWEP:Attach(slot, att, silent)
+function SWEP:Attach(slot, att, silent, suppress)
     local slottbl = self.Attachments[slot]
     if slottbl.Installed then return end
 
@@ -26,13 +26,15 @@ function SWEP:Attach(slot, att, silent)
         net.WriteUInt(attid, TacRP.Attachments_Bits)
         net.SendToServer()
 
-        self:SetupModel(true)
-        self:SetupModel(false)
+        if game.SinglePlayer() then -- Due to bodygroups also being networked by engine, this will cause bodygroup "flickering"
+            self:SetupModel(true)
+            self:SetupModel(false)
+        end
 
         if !silent then
             surface.PlaySound(slottbl.AttachSound or "")
         end
-    elseif SERVER and !silent then
+    elseif SERVER and !suppress then
         self:NetworkWeapon()
         TacRP:PlayerSendAttInv(self:GetOwner())
     end
@@ -60,7 +62,7 @@ function SWEP:Attach(slot, att, silent)
     end
 end
 
-function SWEP:Detach(slot, silent)
+function SWEP:Detach(slot, silent, suppress)
     local slottbl = self.Attachments[slot]
     if !slottbl.Installed then return end
 
@@ -80,13 +82,15 @@ function SWEP:Detach(slot, silent)
         net.WriteUInt(slot, 8)
         net.SendToServer()
 
-        self:SetupModel(true)
-        self:SetupModel(false)
+        if game.SinglePlayer() then -- Due to bodygroups also being networked by engine, this will cause bodygroup "flickering"
+            self:SetupModel(true)
+            self:SetupModel(false)
+        end
 
         if !silent then
             surface.PlaySound(slottbl.DetachSound or "")
         end
-    elseif !silent then
+    elseif SERVER and !suppress then
         self:NetworkWeapon()
         TacRP:PlayerSendAttInv(self:GetOwner())
     end

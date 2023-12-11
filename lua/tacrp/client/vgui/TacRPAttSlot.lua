@@ -304,7 +304,7 @@ function PANEL:DoClick()
         if attslot.Installed == att then
             wep:Detach(slot)
         else
-            wep:Detach(slot, true)
+            wep:Detach(slot, true, true)
             wep:Attach(slot, att)
         end
     else
