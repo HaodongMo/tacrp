@@ -511,21 +511,59 @@ The Soviet/AK themed expansion starring 9 weapons, including well-known AK varia
 </ul>]],
     },
 	{
-        Title = "Update 16 Hotfix 2",
+        Title = "Update 17",
         Type = "Patch Notes",
-        Date = "2023-12-08",
+        Date = "2023-12-10",
         Author = "speedonerd",
         Major = false,
-        Summary = "Last minute additions and little fixes.",
+        Summary = "A few small things for the new year.",
         Contents = [[<body style="font-family:'Myriad Pro';color:white;font-size:125%;">
-<p>This is speedonerd speaking! I'm the other guy who works on this mess, and I'm here with a quick update for TacRP expansions that add some last minute things we couldn't fit in to Update 16 proper.</p>
+<p>This is speedonerd speaking! I'm the other guy who works on this mess, mainly spending nights in Blender assigning vertex groups and moving keyframes around while working with nearly-20-year-old models from Gamebanana. We have a quick 'n' dirty update with a couple of changes and additions, mostly under the hood to give the user more freedom to customize the experience and address major network issues.</p>
+
+<h2>Back in my day we didn't need no stinkin' ironsights!</h2>
+<p>Do you yearn for the good old days, when shooters were fun because they didn't have depth or good game balance? I did for a brief period, and it compelled me to quickly integrate a new balance mode that removed ironsights and tightened up weapon spread. It didn't really pan out how I had hoped—TacRP is built around so many modern mechanics and systems that it's hard to make it "old school" without stripping away nearly all of them. Regardless, what I ended up with before abandoning it is still accessible via the console for preservation's sake, if you're interested.
+
+<h2>It's like wading through molasses.</h2>
+<p>In case you don't like how a certain balancing scheme punishes movement, there are now convars for each of the movement penalties that let you turn them off individually if you don't like them. They can all be found under Movement in the Mechanics tab.
+
+<hr>
+
 <h3>Changelist</h3>
 <ul>
-<li><b>Added:</b> CVars for toggling movement penalties on & off. Courtesy of Fesiug.
-<li><b>Added:</b> Old School balance mode. This was an experiment created during U16 and Iron Curtain's development that didn't really pan out, but we left it in regardless. Technically it's been in the base since U16 but now we're telling you about it. You're welcome! Type "tacrp_balance 4" in console to activate.
+<li><b>Added:</b> Old School balance mode. Enter "tacrp_balance 4" in console to access.
+<li><b>Added:</b> CVars for toggling movement penalties on & off.
 <li><b>Fixed:</b> Customization slot icon flash behavior causing errors.
-<li><b>Fixed:</b> Corner cam display being the incorrect aspect ratio. Courtesy of Fesiug.
-<li><b>Changed:</b> (Special Delivery) Gyrojet now has uses a shotgun style reload, just like its real-life counterpart, complete with quick and dirty animations by yours truly.
+<li><b>Fixed:</b> Corner cam display being the incorrect aspect ratio.
+</ul>]],
+    },
+	{
+        Title = "U17 Expansions",
+        Type = "Patch Notes",
+        Date = "2023-12-10",
+        Author = "speedonerd",
+        Major = false,
+        Summary = "Another new pack, plus some touch ups to existing ones.",
+        Contents = [[<body style="font-family:'Myriad Pro';color:white;font-size:125%;">
+<p>My creative spark refuses to die and the weapon list only grows (we'll probably hit 200 before the end of 2024), so out comes yet another expansion, along with further touch ups to existing ones.
+
+<hr>
+
+<h2>Heavy Ops <i>New!</i></h2>
+<p><input type='submit' value='Open Workshop' onclick='console.log("RUNLUA:gui.OpenURL(\"https://steamcommunity.com/sharedfiles/filedetails/?id=3102297293\")")' /></p>
+<p>A much smaller pack, more niche in its focus, with 5 brand new, ridiculously powerful weapons.
+<ul>
+<li>Pancor Jackhammer
+<li>H&K XM25 CDTE
+<li>Holland & Holland .600 Nitro Double Rifle
+<li>Franchi SPAS-12
+<li>SSK .950 JDJ "Fat Mac"
+</ul>
+
+<h3>Changelist</h3>
+<ul>
+<li><b>Changed:</b> (Special Delivery) Gyrojet now has a round-by-round reload as opposed to the bastardized removable mag it had before, complete with quick and dirty animations by yours truly.
+<li><b>Changed:</b> (Special Delivery) WA2000 animation improvements.
+<li><b>Changed:</b> (Special Delivery) Added sounds for ejected shells hitting the ground to the Double Defense.
 <li><b>Changed:</b> (InterOps) Adjust Chinalake screen position so it doesnt take up all of your view.
 </ul>]],
     },
