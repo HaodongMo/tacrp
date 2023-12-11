@@ -75,6 +75,7 @@ function ENT:Initialize()
             return
         end
 
+        phys:EnableDrag(false)
         phys:SetDragCoefficient(0)
         phys:SetBuoyancyRatio(0)
         phys:Wake()
