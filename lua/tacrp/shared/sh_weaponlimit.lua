@@ -16,7 +16,7 @@ function TacRP:CheckWeaponLimit(weplist, wep)
     local slot = (wep.GetSlot and wep:GetSlot()) or wep.Slot
     local weps = {}
     for k, v in pairs(weplist) do
-        if !whitelist[v:GetClass()] and (countall or v.ArcticTacRP) and (v:GetSlot() == slot) then
+        if !whitelist[v:GetClass()] and (countall or v.ArcticTacRP) and (v:GetSlot() == slot) and !(v.ArcticTacRP and v:GetValue("PrimaryGrenade")) then
             table.insert(weps, v)
         end
     end
