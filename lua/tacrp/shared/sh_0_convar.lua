@@ -679,6 +679,30 @@ local conVars = {
         max = 1,
     },
 
+    {
+        name = "allowdrop",
+        default = "1",
+        replicated = true,
+        notify = true,
+        min = 0,
+        max = 1,
+    },
+
+    {
+        name = "cust_drop",
+        default = "1",
+        client = true,
+        min = 0,
+        max = 1,
+    },
+    {
+        name = "pickup_use",
+        default = "1",
+        client = true,
+        userinfo = true,
+        min = 0,
+        max = 1,
+    },
 }
 
 TacRP.ConVars = {}
@@ -778,6 +802,10 @@ local function menu_client_ti(panel)
         command = "tacrp_vignette"
     })
     panel:ControlHelp("Vignette intensity is based on amount of accumulated recoil.")
+    panel:AddControl("checkbox", {
+        label = "Show \"Drop Weapon\" Button",
+        command = "tacrp_cust_drop"
+    })
     panel:AddControl("slider", {
         label = "HUD Scale",
         command = "tacrp_hudscale",
@@ -838,6 +866,11 @@ local function menu_client_ti(panel)
         command = "tacrp_radar_quiet"
     })
     panel:ControlHelp("This mutes your own radar sound for yourself only. Others can still hear your radar, and you can still hear others' radars.")
+    panel:AddControl("checkbox", {
+        label = "Pickup Requires +USE",
+        command = "tacrp_pickup_use"
+    })
+    panel:ControlHelp("This option only affects TacRP weapons.")
 
     header(panel, "\nMiscellaneous")
     panel:AddControl("checkbox", {
@@ -895,6 +928,10 @@ local function menu_server_ti(panel)
         command = "tacrp_checknews"
     })
     panel:ControlHelp("If turned off, newsletter popup/notification will not happen. Players can still open the newsletter page manually.")
+    panel:AddControl("checkbox", {
+        label = "Allow Dropping & Swapping",
+        command = "tacrp_allowdrop"
+    })
 
     local cb_irons_procedural, lb_irons_procedural = panel:ComboBox("Use Procedural Ironsights", "tacrp_irons_procedural")
     cb_irons_procedural:AddChoice("0 - Never", "0")

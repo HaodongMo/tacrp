@@ -7,25 +7,59 @@ local whitelist = {
     gmod_camera = true,
 }
 
-local function check(ply, wep)
+-- return true if within limit
+-- wep is not guaranteed to be an Entity! it could be the weapon table from weapons.Get
+function TacRP:CheckWeaponLimit(weplist, wep)
     local limit = TacRP.ConVars["slot_limit"]:GetInt()
+    if limit == 0 then return true end
     local countall = TacRP.ConVars["slot_countall"]:GetBool()
     local slot = (wep.GetSlot and wep:GetSlot()) or wep.Slot
     local weps = {}
-    if limit > 0 and wep.ArcticTacRP then
-        for k, v in pairs( ply:GetWeapons() ) do
-            if !whitelist[v:GetClass()] and (countall or v.ArcticTacRP) and (v:GetSlot() == slot) then
-                table.insert(weps, v)
-            end
-        end
-
-        if #weps >= limit then
-            return false, weps
+    for k, v in pairs(weplist) do
+        if !whitelist[v:GetClass()] and (countall or v.ArcticTacRP) and (v:GetSlot() == slot) then
+            table.insert(weps, v)
         end
     end
+
+    if #weps >= limit then
+        return false, weps
+    end
+    return true
 end
 
-hook.Add("PlayerCanPickupWeapon", "TacRP_Pickup", check)
+hook.Add("PlayerCanPickupWeapon", "TacRP_Pickup", function(ply, wep)
+    if !IsValid(wep) or !wep.ArcticTacRP then return end
+    local limit, weps = TacRP:CheckWeaponLimit(ply:GetWeapons(), wep)
+
+    if !limit then
+        if TacRP.ConVars["allowdrop"]:GetBool() and ply:KeyDown(IN_USE) and !ply:KeyDown(IN_WALK) and ply:GetEyeTrace().Entity == wep then
+            if weps[1] == ply:GetActiveWeapon() then
+                timer.Simple(0, function()
+                    if IsValid(ply) and IsValid(wep) and wep:GetOwner() == ply then
+                        ply:SelectWeapon(wep)
+                    end
+                end)
+            end
+            ply:DropWeapon(weps[1], wep:GetPos())
+            return
+        else
+            return false
+        end
+    end
+
+    if ply:GetInfoNum("tacrp_pickup_use", 0) == 1
+            and wep:GetPos() ~= ply:GetPos() -- received through ply:Give()
+            and (!ply:KeyDown(IN_USE) or ply:KeyDown(IN_WALK) or ply:GetEyeTrace().Entity ~= wep) then
+        return false
+    end
+end)
+
+hook.Add("AllowPlayerPickup", "TacRP_Pickup", function(ply, ent)
+    if ent.ArcticTacRP and ply:GetInfoNum("tacrp_pickup_use", 0) == 1 and !ply:KeyDown(IN_WALK) then
+        return false -- This prevents +USE physics pickup, to avoid awkward situations where you want to equip a weapon but
+    end
+end)
+
 local slot = {
     weapon_physgun = 0,
     weapon_crowbar = 0,
@@ -43,7 +77,7 @@ local slot = {
     weapon_bugbait = 5
 }
 hook.Add("PlayerGiveSWEP", "TacRP_Pickup", function(ply, wepname, weptbl)
-    local _, weps = check(ply, weapons.Get(wepname) or {Slot = slot[wepname]})
+    local _, weps = TacRP:CheckWeaponLimit(ply:GetWeapons(), weapons.Get(wepname) or {Slot = slot[wepname]})
     if weps and !ply:HasWeapon(wepname) then
         local mode = TacRP.ConVars["slot_action"]:GetInt()
         local limit = TacRP.ConVars["slot_limit"]:GetInt()
@@ -104,6 +138,68 @@ hook.Add("InitPostEntity", "TacRP_Slot", function()
     end, "slotty")
 end)
 
+concommand.Add("tacrp_drop", function(ply, cmd, args, argStr)
+    if !TacRP.ConVars["allowdrop"]:GetBool() then return end
+    local wep = ply:GetActiveWeapon()
+    if !IsValid(wep) or !wep.ArcticTacRP then return end
+
+    if wep:GetValue("PrimaryGrenade") then
+        -- Grenades don't have a clip size. this would mean players can constantly generate and drop nade sweps that do nothing.
+        local nade = TacRP.QuickNades[wep:GetValue("PrimaryGrenade")]
+        if TacRP.IsGrenadeInfiniteAmmo(nade) then
+            return -- Disallow dropping nades when its infinite
+        elseif nade.Singleton then
+            ply:DropWeapon(wep)
+        elseif nade.AmmoEnt and ply:GetAmmoCount(nade.Ammo) > 0 then
+            ply:RemoveAmmo(1, nade.Ammo)
+            local ent = ents.Create(nade.AmmoEnt)
+            ent:SetPos(ply:EyePos() - Vector(0, 0, 4))
+            ent:SetAngles(AngleRand())
+            ent:Spawn()
+            if IsValid(ent:GetPhysicsObject()) then
+                ent:GetPhysicsObject():SetVelocityInstantaneous(ply:EyeAngles():Forward() * 200)
+            end
+            if ply:GetAmmoCount(nade.Ammo) == 0 then
+                wep:Remove()
+            end
+        end
+    else
+        ply:DropWeapon(wep)
+    end
+
+end, "Drops the currently held TacRP weapon.")
+
+
 if CLIENT then
     net.Receive("tacrp_updateslot", slotty)
+
+    hook.Add("HUDPaint", "TacRP_WeaponLimit", function()
+        local wep = LocalPlayer():GetEyeTrace().Entity
+        if !IsValid(wep) or !wep.ArcticTacRP or wep:GetPos():DistToSqr(EyePos()) >= 96 * 96 then return end
+
+        local limit, weps = TacRP:CheckWeaponLimit(LocalPlayer():GetWeapons(), wep)
+
+        local text = nil
+
+        if !limit then
+            text = "[" .. TacRP.GetBindKey("+use") .. "] "
+                    .. TacRP:GetPhrase("hint.swap", {weapon = TacRP:GetPhrase("wep." .. weps[1]:GetClass() .. "name") or weps[1].PrintName})
+        elseif TacRP.ConVars["pickup_use"]:GetBool() then
+            text = "[" .. TacRP.GetBindKey("+use") .. "] "
+            .. TacRP:GetPhrase("hint.pickup", {weapon = TacRP:GetPhrase("wep." .. wep:GetClass() .. "name") or wep.PrintName})
+        end
+
+        if text then
+            local font = "TacRP_HD44780A00_5x8_4"
+            surface.SetFont(font)
+            local w, h = surface.GetTextSize(text)
+            w = w + TacRP.SS(8)
+            h = h + TacRP.SS(4)
+
+            surface.SetDrawColor(0, 0, 0, 200)
+            TacRP.DrawCorneredBox(ScrW() / 2 - w / 2, ScrH() / 2 + TacRP.SS(32), w, h)
+
+            draw.SimpleText(text, font, ScrW() / 2, ScrH() / 2 + TacRP.SS(32) + h / 2, color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+        end
+    end)
 end

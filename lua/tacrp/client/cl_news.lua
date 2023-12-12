@@ -530,6 +530,7 @@ The Soviet/AK themed expansion starring 9 weapons, including well-known AK varia
 
 <h3>Changelist</h3>
 <ul>
+<li><b>Added:</b> Weapon dropping and swapping. TacRP weapons will now require pressing +USE to pick up - this can be disabled.
 <li><b>Added:</b> Old School balance mode. Enter "tacrp_balance 4" in console to access.
 <li><b>Added:</b> CVars for toggling movement penalties on & off.
 <li><b>Changed:</b> RPG rockets can now penetrate LVS vehicles and damage Combine Helicopter NPCs on a direct hit.

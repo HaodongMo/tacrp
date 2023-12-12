@@ -61,6 +61,8 @@ L["cust.type_tier"] = "{tier} Grade {type}"
 L["cust.trivia"] = "Trivia"
 L["cust.credits"] = "Credits"
 L["cust.description2"] = "Description" -- used as title
+L["cust.drop_wep"] = "Drop Weapon"
+L["cust.drop_nade"] = "Drop Grenade"
 
 L["unit.hu"] = " HU" -- hammer unit
 L["unit.meter"] = "m"
@@ -337,3 +339,6 @@ L["trivia.unknown"] = "Unknown"
 L["faction.coalition"] = "Coalition" -- "Counter-Terrorists"
 L["faction.militia"] = "Militia" -- "Terrorists"
 L["faction.neutral"] = "Non-Aligned" -- non-faction specific
+
+L["hint.swap"] = "Swap with {weapon}"
+L["hint.pickup"] = "Pick up {weapon}"

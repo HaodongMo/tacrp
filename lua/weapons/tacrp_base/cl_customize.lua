@@ -1298,6 +1298,28 @@ function SWEP:CreateCustomizeHUD()
         end)
     end
 
+    -- tacrp_drop
+    local primarygrenade = self:GetValue("PrimaryGrenade")
+    if TacRP.ConVars["allowdrop"]:GetBool() and TacRP.ConVars["cust_drop"]:GetBool() and (!primarygrenade or !TacRP.IsGrenadeInfiniteAmmo(primarygrenade)) then
+        local phrase = primarygrenade and "cust.drop_nade" or "cust.drop_wep"
+        local dropbox = vgui.Create("DButton", bg)
+        local bw, bh = TacRP.SS(52), TacRP.SS(10)
+        dropbox:SetSize(bw, bh)
+        dropbox:SetPos(ScrW() / 2 - bw / 2, scrh - bh - smallgap / 2)
+        dropbox:SetText("")
+        function dropbox.Paint(self2, w, h)
+            local c_bg, c_cnr, c_txt = TacRP.GetPanelColors(self2:IsHovered(), self2:IsDown())
+            surface.SetDrawColor(c_bg)
+            -- surface.DrawRect(0, 0, w, h)
+            TacRP.DrawCorneredBox(0, 0, w, h, c_cnr)
+            draw.SimpleText(TacRP:GetPhrase(phrase), "TacRP_Myriad_Pro_8", w / 2, h / 2, c_txt, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+
+        end
+        function dropbox.DoClick(self2)
+            LocalPlayer():ConCommand("tacrp_drop")
+        end
+    end
+
     self.StaticStats = false
 end
 
