@@ -1047,8 +1047,10 @@ function SWEP:CustomAmmoDisplay()
     end
 
     if self.Primary.ClipSize <= 0 and self.Primary.Ammo != "" then
-        self.AmmoDisplay.PrimaryClip = self:GetInfiniteAmmo() and 9999 or self:Ammo1()
+        self.AmmoDisplay.PrimaryClip = self:Ammo1()
         self.AmmoDisplay.PrimaryAmmo = -1
+    elseif self.Primary.ClipSize <= 0 then
+        self.AmmoDisplay.PrimaryClip = -1
     else
         self.AmmoDisplay.PrimaryClip = self:Clip1()
         self.AmmoDisplay.PrimaryAmmo = self:GetInfiniteAmmo() and 9999 or self:Ammo1()
