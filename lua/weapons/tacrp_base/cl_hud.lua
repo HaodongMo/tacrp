@@ -1043,7 +1043,7 @@ function SWEP:CustomAmmoDisplay()
     self.AmmoDisplay.Draw = true
 
     if TacRP.IsGrenadeInfiniteAmmo(self:GetGrenadeIndex()) then
-        self.AmmoDisplay.SecondaryAmmo = 99
+        self.AmmoDisplay.SecondaryAmmo = -1
     end
 
     if self.Primary.ClipSize <= 0 and self.Primary.Ammo != "" then
