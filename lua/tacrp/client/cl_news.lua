@@ -568,8 +568,8 @@ The Soviet/AK themed expansion starring 9 weapons, including well-known AK varia
 <li>H&K XM25 CDTE
 <li>Holland & Holland .600 Nitro Double Rifle
 <li>Franchi SPAS-12
-<li> Taurus Raging Judge "Executioner"
-<li>SSK .950 JDJ "Fat Mac" (you can shoulder fire it because you got an adamantium arm transplant)
+<li>Taurus Raging Judge "Executioner"
+<li>SSK .950 JDJ "Fat Mac" (you can shoulder fire it because video gane)
 </ul>
 
 <hr>
