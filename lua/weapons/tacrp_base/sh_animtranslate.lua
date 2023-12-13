@@ -1,4 +1,6 @@
 function SWEP:TranslateSequence(seq)
+    seq = self:RunHook("Hook_TranslateSequence", seq)
+
     seq = self.AnimationTranslationTable[seq] or seq
 
     if istable(seq) then
