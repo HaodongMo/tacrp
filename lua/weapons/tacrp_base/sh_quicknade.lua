@@ -199,7 +199,7 @@ function SWEP:GetGrenade(index)
 end
 
 function SWEP:GetGrenadeIndex()
-    return self:GetOwner():GetNWInt("ti_nade", 1)
+    return IsValid(self:GetOwner()) and self:GetOwner():GetNWInt("ti_nade", 1) or 1
 end
 
 function SWEP:GetNextGrenade(ind)
