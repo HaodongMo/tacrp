@@ -8,7 +8,7 @@ SWEP.PrintName = "HK M320"
 SWEP.Category = "Tactical RP (Special)"
 
 SWEP.SubCatTier = "9Special"
-SWEP.SubCatType = "9Equipment"
+SWEP.SubCatType = "6Launcher"
 
 SWEP.Description = "Grenade launcher capable of firing a variety of payloads."
 
