@@ -540,6 +540,8 @@ The Soviet/AK themed expansion starring 9 weapons, including well-known AK varia
 <li><b>Added:</b> Old School balance mode. Enter "tacrp_balance 4" in console to access.
 <li><b>Added:</b> CVars for toggling movement penalties on & off.
 <li><b>Changed:</b> RPG rockets can now penetrate LVS vehicles and damage Combine Helicopter NPCs on a direct hit.
+<li><b>Changed:</b> RPG-7 & M320 moved to separate launchers weapon category.
+<li><b>Changed:</b> Added "Special Weapon" category for unorthodox weapons that don't fit any other category (currently only used by expansion weapons).
 <li><b>Rebalance:</b> RPG rockets do more direct impact damage.
 <li><b>Fixed:</b> Customization slot icon flash behavior causing errors.
 <li><b>Fixed:</b> Corner cam display being the incorrect aspect ratio.
@@ -578,7 +580,8 @@ The Soviet/AK themed expansion starring 9 weapons, including well-known AK varia
 <ul>
 <li><b>Fixed:</b> (Brute Force) M9 Bayonet misaligned worldmodel.
 <li><b>Changed:</b> (InterOps) Colt SMG restricted to using Colt 3x20 scope only.
-<li><b>Changed:</b> (Special Delivery) Gyrojet now has a round-by-round reload as opposed to the bastardized removable mag it had before.
+<li><b>Changed:</b> (InterOps) Chinalake now in launcher category.
+<li><b>Changed:</b> (Special Delivery) Gyrojet updates - New firing sound, new animations, now in the "Special Weapon" category along with the Fat Mac.
 <li><b>Changed:</b> (Special Delivery) WA2000 animation improvements.
 <li><b>Changed:</b> (Special Delivery) Added sounds for ejected shells hitting the ground to the Double Defense.
 </ul>]],

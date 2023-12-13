@@ -8,7 +8,7 @@ SWEP.PrintName = "RPG-7"
 SWEP.Category = "Tactical RP (Special)"
 
 SWEP.SubCatTier = "9Special"
-SWEP.SubCatType = "9Equipment"
+SWEP.SubCatType = "6Launcher"
 
 SWEP.Description = "Soviet rocket launcher with powerful explosion.\nSafety fuse prevents point blank detonations."
 
