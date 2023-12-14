@@ -16,10 +16,10 @@ function SWEP:NetworkWeapon(sendto)
         net.SendPVS(self:GetPos())
     end
 
+    self:InvalidateCache()
+
     self:DoBodygroups(true)
     self:DoBodygroups(false)
-
-    self:InvalidateCache()
 end
 
 function SWEP:ReceivePreset()
