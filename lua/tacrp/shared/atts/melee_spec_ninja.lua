@@ -74,16 +74,16 @@ ATT.Hook_PreReload = function(wep)
         local ang = ply:GetAngles()
         if ang.p >= -15 then
             ang.p = math.Clamp(ang.p, 45, 180 - 45)
-            ply:SetVelocity(ang:Forward() * -math.max(100, 400 + 500 * wep:GetValue("MeleePerkAgi") - ply:GetVelocity():Length()))
+            ply:SetVelocity(ang:Forward() * -math.max(100, 400 + 400 * wep:GetValue("MeleePerkAgi") - ply:GetVelocity():Length()))
         end
         ply:SetNWFloat("TacRPDiveTime", CurTime())
     elseif !ply:IsOnGround() and ply:Crouching() then
         if ply:GetMoveType() != MOVETYPE_NOCLIP and !ply:GetNWBool("TacRPNinjaDive") and ply:GetNWFloat("TacRPDiveTime", 0) + 0.5 < CurTime() and ply:EyeAngles():Forward():Dot(Vector(0, 0, 1)) < -0.25 then
             ply:SetNWBool("TacRPNinjaDive", true)
             ply:SetNWFloat("TacRPDiveTime", CurTime())
-            ply:SetNWVector("TacRPDiveDir", ply:EyeAngles():Forward() * Lerp(getcharge(wep) ^ 2, 30000, 120000) * Lerp(wep:GetValue("MeleePerkAgi"), 0.6, 1.4))
+            ply:SetNWVector("TacRPDiveDir", ply:EyeAngles():Forward() * Lerp(getcharge(wep), 30000, 100000) * Lerp(wep:GetValue("MeleePerkAgi"), 0.6, 1.4))
             wep:EmitSound("weapons/mortar/mortar_fire1.wav", 65, 120, 0.5)
-            setcharge(wep, 0)
+            setcharge(wep, getcharge(wep) / 2)
         end
     elseif !wep:StillWaiting() and getcharge(wep) >= cost then
         wep:SetNextSecondaryFire(CurTime() + 0.4)
