@@ -40,7 +40,7 @@ DEFINE_BASECLASS(ENT.Base)
 function ENT:Initialize()
     BaseClass.Initialize(self)
     if SERVER then
-        self:GetPhysicsObject():SetDragCoefficient(5)
+        self:GetPhysicsObject():SetDragCoefficient(2)
     end
 end
 

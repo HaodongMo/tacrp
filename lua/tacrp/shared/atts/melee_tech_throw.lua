@@ -30,12 +30,12 @@ ATT.Hook_SecondaryAttack = function(self)
 
         local src, ang = self:GetOwner():GetShootPos(), self:GetShootDir() --+ Angle(-1, 0, 0)
         local spread = 0
-        local force = self:GetValue("MeleeThrowForce") or 3000
+        local force = self:GetValue("MeleeThrowForce") * (math.min(0.5, self:GetValue("MeleePerkInt")) * 2 + math.max(0, (self:GetValue("MeleePerkInt") - 0.5) * 2) * 2)
         local dispersion = Angle(math.Rand(-1, 1), math.Rand(-1, 1), 0)
         dispersion = dispersion * spread * 36
 
         rocket.Model = self.ThrownKnifeModel or self.WorldModel
-        rocket.Damage = self:GetValue("MeleeThrowDamage") or self:GetValue("MeleeDamage")
+        rocket.Damage = self:GetValue("MeleeDamage") * Lerp(self:GetValue("MeleePerkStr"), 0.75, 1.5)
         rocket.Inflictor = self
         rocket.Sound_MeleeHit = istable(self.Sound_MeleeHit) and table.Copy(self.Sound_MeleeHit) or self.Sound_MeleeHit
         rocket.Sound_MeleeHitBody = istable(self.Sound_MeleeHitBody) and table.Copy(self.Sound_MeleeHitBody) or self.Sound_MeleeHitBody

@@ -9,9 +9,15 @@ ATT.Category = {"melee_tech"}
 
 ATT.SortOrder = 2
 
-ATT.Melee2AttackTime = 0.5
--- ATT.Melee2Damage = 70
+ATT.MeleeBlock = true
 
+local function hold(wep)
+    return wep:GetOwner():KeyDown(IN_ATTACK2)
+            and wep:GetHoldBreathAmount() > 0
+            and wep:GetNextSecondaryFire() < CurTime()
+end
+
+--[[]
 ATT.Hook_SecondaryAttack = function(wep)
     -- if wep:StillWaiting() then return end
     if wep:GetNWFloat("TacRPNextBlock", 0) > CurTime() then return end
@@ -29,28 +35,95 @@ ATT.Hook_SecondaryAttack = function(wep)
         end, "BlockReset")
     end
 end
+]]
 
 ATT.Hook_PreShoot = function(wep)
     if wep:GetNWFloat("TacRPKnifeCounter", 0) > CurTime() then
+        wep:SetHoldBreathAmount(math.max(0, wep:GetHoldBreathAmount() - 0.5))
         wep:Melee(true)
+        wep:SetOutOfBreath(false)
         wep:SetNWFloat("TacRPKnifeCounter", 0)
-        wep:SetNWFloat("TacRPNextBlock", 0)
         return true
     end
+    if wep:GetOutOfBreath() then return true end
 end
 
--- cancel attack post swing into block since SecondaryAttack won't be called at all otherwise
 ATT.Hook_PostThink = function(wep)
-    if wep:GetOwner():KeyDown(IN_ATTACK2) and wep:GetNextSecondaryFire() - CurTime() <= 0.25 and wep:GetNWFloat("TacRPNextBlock", 0) <= CurTime() then
-        wep:SetNextSecondaryFire(CurTime())
+    local canhold = hold(wep)
+    if !wep:GetOutOfBreath() then
+        if canhold and wep:GetHoldBreathAmount() > 0.1 then
+            if IsFirstTimePredicted() then
+                wep:SetHoldBreathAmount(wep:GetHoldBreathAmount() - 0.1)
+                wep:SetOutOfBreath(true)
+                wep:SetNextIdle(math.huge)
+            end
+            wep:PlayAnimation("idle_defend", 1)
+            wep:SetHoldType("magic")
+        else
+            wep:SetHoldBreathAmount(math.min(1, wep:GetHoldBreathAmount() + FrameTime() * Lerp(wep:GetValue("MeleePerkInt"), 0.1, 0.5)))
+        end
+    else
+        if !canhold then
+            if IsFirstTimePredicted() then
+                wep:SetOutOfBreath(false)
+            end
+            wep:SetNextIdle(CurTime())
+            wep:SetShouldHoldType()
+            wep:SetNextSecondaryFire(CurTime() + 0.1)
+        else
+            wep:SetHoldBreathAmount(math.max(0, wep:GetHoldBreathAmount() - FrameTime() * Lerp(wep:GetValue("MeleePerkStr"), 0.6, 0.2)))
+        end
     end
+
+    -- cancel attack post swing into block since SecondaryAttack won't be called at all otherwise
+    -- if wep:GetOwner():KeyDown(IN_ATTACK2) and wep:GetNextSecondaryFire() - CurTime() <= 0.25 and wep:GetNWFloat("TacRPNextBlock", 0) <= CurTime() then
+    --     wep:SetNextSecondaryFire(CurTime())
+    -- end
+end
+
+local breath_a = 0
+local last = 1
+local lastt = 0
+function ATT.TacticalDraw(self)
+    local scrw = ScrW()
+    local scrh = ScrH()
+
+    local w = TacRP.SS(48)
+    local h = TacRP.SS(4)
+
+    local x = scrw / 2
+    local y = scrh * 0.65 + TacRP.SS(6)
+
+    if CurTime() > lastt + 1 then
+        breath_a = math.Approach(breath_a, 0, FrameTime() * 2)
+    elseif breath_a < 1 then
+        breath_a = math.Approach(breath_a, 1, FrameTime())
+    end
+    local breath = self:GetHoldBreathAmount()
+    if last != breath then
+        lastt = CurTime()
+        last = breath
+    end
+    if breath_a == 0 then return end
+
+    x = x - w / 2
+    y = y - h / 2
+
+    surface.SetDrawColor(90, 90, 90, 200 * breath_a)
+    surface.DrawOutlinedRect(x - 1, y - 1, w + 2, h + 2, 1)
+    surface.SetDrawColor(0, 0, 0, 75 * breath_a)
+    surface.DrawRect(x, y, w, h)
+
+    surface.SetDrawColor(255, 255, 255, 150 * breath_a)
+
+    surface.DrawRect(x, y, w * breath, h)
 end
 
 hook.Add("EntityTakeDamage", "TacRP_Block", function(ent, dmginfo)
     if !IsValid(dmginfo:GetAttacker()) or !ent:IsPlayer() then return end
     local wep = ent:GetActiveWeapon()
 
-    if !IsValid(wep) or !wep.ArcticTacRP or wep:GetNWFloat("TacRPKnifeParry", 0) < CurTime() then return end
+    if !IsValid(wep) or !wep.ArcticTacRP or !wep:GetValue("MeleeBlock") or !wep:GetOutOfBreath() then return end
     if !(dmginfo:IsDamageType(DMG_GENERIC) or dmginfo:IsDamageType(DMG_CLUB) or dmginfo:IsDamageType(DMG_CRUSH) or dmginfo:IsDamageType(DMG_SLASH) or dmginfo:GetDamageType() == 0) then return end
     -- if dmginfo:GetAttacker():GetPos():DistToSqr(ent:GetPos()) >= 22500 then return end
     if (dmginfo:GetAttacker():GetPos() - ent:EyePos()):GetNormalized():Dot(ent:EyeAngles():Forward()) < 0.5 and ((dmginfo:GetDamagePosition() - ent:EyePos()):GetNormalized():Dot(ent:EyeAngles():Forward()) < 0.5) then return end
@@ -76,19 +149,19 @@ hook.Add("EntityTakeDamage", "TacRP_Block", function(ent, dmginfo)
     ent:EmitSound("physics/metal/metal_solid_impact_hard5.wav", 90, math.Rand(105, 110))
     ent:ViewPunch(AngleRand(-1, 1) * (dmginfo:GetDamage() ^ 0.5))
 
-    wep:SetNextSecondaryFire(CurTime())
-
-    wep:KillTimer("BlockReset")
-    wep:SetNWFloat("TacRPNextBlock", CurTime() + 0.75)
+    -- wep:SetNextSecondaryFire(CurTime())
     wep:SetNWFloat("TacRPKnifeCounter", CurTime() + 1)
-    wep:PlayAnimation("idle_defend", 1)
-    wep:SetNWFloat("TacRPKnifeParry", CurTime() + 1)
-    wep:SetNextIdle(CurTime() + 1)
-    if SERVER then
-        wep:SetTimer(1, function()
-            wep:SetShouldHoldType()
-        end, "BlockReset")
-    end
+
+    -- wep:KillTimer("BlockReset")
+    -- wep:SetNWFloat("TacRPNextBlock", CurTime() + 0.75)
+    -- wep:PlayAnimation("idle_defend", 1)
+    -- wep:SetNWFloat("TacRPKnifeParry", CurTime() + 1)
+    -- wep:SetNextIdle(CurTime() + 1)
+    -- if SERVER then
+    --     wep:SetTimer(1, function()
+    --         wep:SetShouldHoldType()
+    --     end, "BlockReset")
+    -- end
 
     local inflictor = dmginfo:GetInflictor()
     timer.Simple(0, function()

@@ -145,7 +145,6 @@ SWEP.StatGroupGrades = {
     {20, "D", Color(60, 60, 230)},
     { -math.huge, "F", Color(150, 150, 150)},
 }
-
 SWEP.StatGroups = {
     {
         Name = "rating.lethality",
@@ -1176,4 +1175,62 @@ SWEP.StatDisplay = {
         Unit = "′",
         LowerIsBetter = true,
     },
+}
+
+SWEP.StatGroupsMelee = {
+    {
+        Name = "Power",
+        Description = "Attack damage.",
+        RatingFunction = function(self, base)
+            local valfunc = base and self.GetBaseValue or self.GetValue
+
+            return Lerp((valfunc(self, "MeleeDamage")) / 60, 0, 100)
+        end,
+    },
+    {
+        Name = "Haste",
+        Description = "Attack speed.",
+        RatingFunction = function(self, base)
+            local valfunc = base and self.GetBaseValue or self.GetValue
+
+            return Lerp(1 - (valfunc(self, "MeleeAttackTime") - 0.15) / 0.55, 0, 100)
+        end,
+    },
+    -- {
+    --     Name = "Reach",
+    --     Description = "Attack distance.",
+    --     RatingFunction = function(self, base)
+    --         local valfunc = base and self.GetBaseValue or self.GetValue
+
+    --         return Lerp((valfunc(self, "MeleeRange") - 64) / 128, 0, 100)
+    --     end,
+    -- },
+    {
+        Name = "Brawn",
+        Description = "Boosts perk damage and knockback.",
+        RatingFunction = function(self, base)
+            local valfunc = base and self.GetBaseValue or self.GetValue
+            return Lerp(valfunc(self, "MeleePerkStr"), 0, 100)
+
+        end,
+    },
+    {
+        Name = "Dexterity",
+        Description = "Boosts perk movement power and attack speed.",
+        RatingFunction = function(self, base)
+            local valfunc = base and self.GetBaseValue or self.GetValue
+            return Lerp(valfunc(self, "MeleePerkAgi"), 0, 100)
+        end,
+    },
+    {
+        Name = "Proficiency",
+        Description = "Boosts perk recharge speed and projectile force.",
+        RatingFunction = function(self, base)
+            local valfunc = base and self.GetBaseValue or self.GetValue
+            return Lerp(valfunc(self, "MeleePerkInt"), 0, 100)
+        end,
+    },
+}
+
+SWEP.StatDisplayMelee = {
 }

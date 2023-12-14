@@ -2,7 +2,7 @@ ATT.PrintName = "Scout"
 ATT.FullName = "jerma tf2"
 ATT.Icon = Material("entities/tacrp_att_melee_spec_scout.png", "mips smooth")
 ATT.Description = "Grass grows, sun shines, birds fly, and brotha' - I hurt people."
-ATT.Pros = {"RELOAD: Launch ball (slow on hit)", "Ball damage scales with distance", "Double Jump"}
+ATT.Pros = {"RELOAD: Launch ball (slow on hit)", "Ball damage scales with distance", "Multi Jump"}
 
 ATT.Category = {"melee_spec"}
 
@@ -13,6 +13,10 @@ ATT.DoubleJump = true
 ATT.Hook_GetHintCapabilities = function(self, tbl)
     tbl["+reload"] = {so = 0.4, str = "Launch Ball"}
 end
+
+local jumpcost = 1 / 5
+ATT.Override_BreathSegmentSize = jumpcost
+
 
 local balldelay = 5
 
@@ -59,7 +63,7 @@ function ATT.TacticalDraw(self)
     local h = TacRP.SS(16)
 
     local x = (scrw - w) / 2
-    local y = (scrh - h) - TacRP.SS(8)
+    local y = (scrh - h) * 7 / 8
 
     surface.SetDrawColor(0, 0, 0, 200)
     TacRP.DrawCorneredBox(x, y, w, h)
@@ -105,21 +109,30 @@ local function GetMoveVector(mv)
     return vec
 end
 hook.Add("SetupMove", "tacrp_melee_spec_scout", function(ply, mv)
-    if !IsValid(ply:GetActiveWeapon()) or !ply:GetActiveWeapon().ArcticTacRP or !ply:GetActiveWeapon():GetValue("DoubleJump") then return end
+    local wep = ply:GetActiveWeapon()
+    if !IsValid(wep) or !wep.ArcticTacRP or !wep:GetValue("DoubleJump") then return end
     if ply:OnGround() or ply:GetMoveType() != MOVETYPE_WALK then
         ply:SetNWBool("TacRPDoubleJump", true)
         return
     end
 
-    if !mv:KeyPressed(IN_JUMP) or !ply:GetNWBool("TacRPDoubleJump") then
+    if !mv:KeyPressed(IN_JUMP) then
         return
     end
 
-    ply:SetNWBool("TacRPDoubleJump", false)
+    local add = Lerp(wep:GetValue("MeleePerkAgi"), 0.8, 1.4)
+    if IsFirstTimePredicted() then
+        if !ply:GetNWBool("TacRPDoubleJump") then
+            if wep:GetBreath() < jumpcost then return end
+            wep:SetBreath(wep:GetBreath() - jumpcost)
+        else
+            ply:SetNWBool("TacRPDoubleJump", false)
+        end
+    end
 
     local vel = GetMoveVector(mv)
 
-    vel.z = ply:GetJumpPower() * 1.1
+    vel.z = ply:GetJumpPower() * add
 
     mv:SetVelocity(vel)
 
@@ -131,3 +144,7 @@ hook.Add("SetupMove", "tacrp_melee_spec_scout", function(ply, mv)
     eff:SetEntity(ply)
     util.Effect("tacrp_jumpsmoke", eff)
 end)
+
+ATT.Hook_Recharge = function(wep)
+    if !wep:GetOwner():GetNWBool("TacRPDoubleJump") then return true end
+end

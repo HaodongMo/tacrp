@@ -36,14 +36,21 @@ function SWEP:Melee(alt)
         self:PlayAnimation("melee2", 1, false, true)
         self:GetOwner():DoAnimationEvent(self:GetValue("GestureBash2") or self:GetValue("GestureBash"))
         range = self:GetValue("Melee2Range") or range
-        dmg = self:GetValue("Melee2Damage") or dmg
+        dmg = self:GetValue("Melee2Damage") or dmg * (1.4 + self:GetMeleePerkDamage())
         delay = self:GetValue("Melee2Delay") or delay
     else
         self:PlayAnimation("melee", 1, false, true)
         self:GetOwner():DoAnimationEvent(self:GetValue("GestureBash"))
     end
 
-    local t = (alt and self:GetValue("Melee2AttackTime") or self:GetValue("MeleeAttackTime"))
+    local t = self:GetValue("MeleeAttackTime")
+    if alt then
+        if self:GetValue("Melee2AttackTime") then
+            t = self:GetValue("Melee2AttackTime")
+        else
+            t = t * self:GetMeleePerkCooldown() * 1.6
+        end
+    end
 
     self:SetTimer(delay, function()
         self:GetOwner():LagCompensation(true)
@@ -127,8 +134,8 @@ function SWEP:Melee(alt)
         else
             if !alt and self:GetValue("MeleeAttackMissTime") then
                 t = self:GetValue("MeleeAttackMissTime")
-            elseif alt and self:GetValue("Melee2AttackMissTime") then
-                t = self:GetValue("Melee2AttackMissTime")
+            elseif alt then
+                t = self:GetValue("Melee2AttackMissTime") or self:GetValue("MeleeAttackMissTime") * self:GetMeleePerkCooldown() * 1.6
             end
         end
 
@@ -137,6 +144,24 @@ function SWEP:Melee(alt)
 
     self:SetLastMeleeTime(CurTime())
     self:SetNextSecondaryFire(CurTime() + t)
+end
+
+function SWEP:GetMeleePerkDamage(base)
+    local valfunc = base and self.GetBaseValue or self.GetValue
+    if !valfunc(self, "PrimaryMelee") then return 0 end
+    local stat = valfunc(self, "MeleePerkStr")
+    if stat >= 0.5 then
+        return 0.5 + (stat - 0.5) * 2
+    else
+        return stat
+    end
+end
+
+function SWEP:GetMeleePerkCooldown(base)
+    local valfunc = base and self.GetBaseValue or self.GetValue
+    if !valfunc(self, "PrimaryMelee") then return 1 end
+    local stat = valfunc(self, "MeleePerkAgi")
+    return Lerp(stat, 1.4, 0.6)
 end
 
 hook.Add("PostEntityTakeDamage", "tacrp_melee", function(ent, dmg, took)

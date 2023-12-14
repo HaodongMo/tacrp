@@ -630,6 +630,9 @@ function SWEP:CreateCustomizeHUD()
 
     if !self:GetValue("NoStatBox") then
 
+        local statgroup = self:GetValue("PrimaryMelee") and self.StatGroupsMelee or self.StatGroups
+        local statdisplay = self:GetValue("PrimaryMelee") and self.StatDisplayMelee or self.StatDisplay
+
         local tabs_h = TacRP.SS(10)
 
         local group_box = vgui.Create("DPanel", bg)
@@ -646,7 +649,7 @@ function SWEP:CreateCustomizeHUD()
             local hoverindex = 0
             local hoverscore = 0
 
-            for i, v in ipairs(self.StatGroups) do
+            for i, v in ipairs(statgroup) do
 
                 if !self.StatScoreCache[i] then
                     self.StaticStats = true
@@ -655,10 +658,10 @@ function SWEP:CreateCustomizeHUD()
 
                     local ib, ic = 0, 0
                     for j = 1, #self.StatGroupGrades do
-                        if ib == 0 and sb >= self.StatGroupGrades[j][1] then
+                        if ib == 0 and sb > self.StatGroupGrades[j][1] then
                             ib = j
                         end
-                        if ic == 0 and sc >= self.StatGroupGrades[j][1] then
+                        if ic == 0 and sc > self.StatGroupGrades[j][1] then
                             ic = j
                         end
                     end
@@ -710,7 +713,7 @@ function SWEP:CreateCustomizeHUD()
             end
 
             if hovered then
-                local v = self.StatGroups[hoverindex]
+                local v = statgroup[hoverindex]
                 local todo = DisableClipping(true)
                 local col_bg = Color(0, 0, 0, 254)
                 local col_corner = Color(255, 255, 255)
@@ -873,7 +876,7 @@ function SWEP:CreateCustomizeHUD()
             layout:Clear()
             self.MiscCache["statbox"] = {}
             self.StatRows = {}
-            for i, k in ipairs(self.StatDisplay) do
+            for i, k in ipairs(statdisplay) do
                 updatestat(i, k)
                 if !self.MiscCache["statbox"][i] then continue end
                 local spacer = k.Spacer
@@ -998,7 +1001,7 @@ function SWEP:CreateCustomizeHUD()
             if !IsValid(self) then return end
             local panel = vgui.GetHoveredPanel()
             if self.StatRows[panel] then
-                local stat = self.StatDisplay[self.StatRows[panel]]
+                local stat = statdisplay[self.StatRows[panel]]
 
                 local todo = DisableClipping(true)
                 local col_bg = Color(0, 0, 0, 254)

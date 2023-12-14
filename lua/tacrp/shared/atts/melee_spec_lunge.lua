@@ -15,6 +15,15 @@ ATT.Hook_GetHintCapabilities = function(self, tbl)
 end
 
 local chargeamt = 0.5
+ATT.Override_BreathSegmentSize = chargeamt
+
+local function getcharge(wep)
+    return wep:GetBreath()
+end
+
+local function setcharge(wep, f)
+    wep:SetBreath(math.Clamp(f, 0, 1))
+end
 
 local function makesound(ent, pitch)
     if TacRP.ShouldWeFunny() then
@@ -27,11 +36,14 @@ end
 ATT.Hook_PreReload = function(wep)
     local ply = wep:GetOwner()
 
-    if !ply:KeyPressed(IN_RELOAD) or ply:GetMoveType() == MOVETYPE_NOCLIP or ply:GetNWFloat("TacRPDashCharge", 0) < chargeamt or (ply.TacRPNextLunge or 0) > CurTime() then return end
+    if !ply:KeyPressed(IN_RELOAD) or ply:GetMoveType() == MOVETYPE_NOCLIP
+            or getcharge(wep) < chargeamt --ply:GetNWFloat("TacRPDashCharge", 0) < chargeamt
+            or (ply.TacRPNextLunge or 0) > CurTime() then return end
 
     ply.TacRPNextLunge = CurTime() + 1.5
-    ply:SetNWFloat("TacRPDashCharge", ply:GetNWFloat("TacRPDashCharge", 0) - chargeamt)
+    -- ply:SetNWFloat("TacRPDashCharge", ply:GetNWFloat("TacRPDashCharge", 0) - chargeamt)
     ply:SetNWFloat("TacRPLastLeap", CurTime())
+    setcharge(wep, getcharge(wep) - chargeamt)
 
     local ang = Angle(0, ply:GetAngles().y, 0)
     local vel
@@ -61,7 +73,7 @@ ATT.Hook_PreReload = function(wep)
 
     ply:DoCustomAnimEvent(PLAYERANIMEVENT_JUMP, -1)
 
-    ply:SetVelocity(vel)
+    ply:SetVelocity(vel * Lerp(wep:GetValue("MeleePerkAgi"), 0.6, 1.4))
 
     -- so client can draw the effect. blehhhh
     if game.SinglePlayer() and SERVER then wep:CallOnClient("Reload") end
@@ -82,6 +94,7 @@ ATT.Hook_PostThink = function(wep)
     end
 end
 
+--[[]
 function ATT.TacticalDraw(self)
     local scrw = ScrW()
     local scrh = ScrH()
@@ -108,3 +121,4 @@ function ATT.TacticalDraw(self)
     surface.SetDrawColor(255, 255, 255, 200)
     surface.DrawLine(x + w * chargeamt, y, x + w * chargeamt, y + h)
 end
+]]

@@ -11,6 +11,8 @@ ATT.SortOrder = 5
 
 ATT.MeleeCharge = true
 
+ATT.Override_NoBreathBar = true
+
 ATT.Hook_GetHintCapabilities = function(self, tbl)
     tbl["+reload"] = {so = 0.4, str = "Charge"}
     tbl["+walk/+reload"] = {so = 0.5, str = "Toggle Charge"}
@@ -70,6 +72,10 @@ local function exitcharge(ply, nohit)
     ply:SetNWFloat("TacRPChargeTime", 0)
     ply:SetNWFloat("TacRPChargeEnd", CurTime())
 
+    if IsValid(ply:GetNWEntity("TacRPChargeWeapon")) then
+        ply:GetNWEntity("TacRPChargeWeapon"):SetBreath(0)
+    end
+
     if !nohit then
         ply:SetNWFloat("TacRPChargeFollowup", CurTime() + followup)
     end
@@ -97,7 +103,9 @@ local function chargemelee(self)
 
     self:GetOwner():LagCompensation(true)
 
-    local dmg = self:GetValue("Melee2Damage") * (1 + self:GetOwner():GetNWFloat("TacRPChargeStrength", 0) ^ 1.5 * 2)
+    local dmg = self:GetValue("MeleeDamage")
+        * (1 + self:GetMeleePerkDamage())
+        * (1 + self:GetOwner():GetNWFloat("TacRPChargeStrength", 0) ^ 1.5 * 2)
     local range = 200
     self:GetOwner():DoAnimationEvent(ACT_HL2MP_GESTURE_RANGE_ATTACK_MELEE2)
     self:PlayAnimation("melee2", 1, false, true)
@@ -137,16 +145,15 @@ local function chargemelee(self)
 
     local dmginfo = DamageInfo()
     dmginfo:SetDamage(dmg)
-    dmginfo:SetDamageForce(dir * dmg * 1000)
+    dmginfo:SetDamageForce(dir * dmg * (1000 + 500 * self:GetMeleePerkDamage()))
     dmginfo:SetDamagePosition(tr.HitPos)
     dmginfo:SetDamageType(self:GetValue("MeleeDamageType"))
     dmginfo:SetAttacker(self:GetOwner())
     dmginfo:SetInflictor(self)
 
-    local t = self.Melee2AttackTime
+    local t = self:GetValue("MeleeAttackTime") * 2
 
     if tr.Fraction < 1 then
-
         TacRP.CancelBodyDamage(tr.Entity, dmginfo, tr.HitGroup)
 
         if IsValid(tr.Entity) and (tr.Entity:IsNPC() or tr.Entity:IsPlayer() or tr.Entity:IsNextBot()) then
@@ -171,8 +178,6 @@ local function chargemelee(self)
             --tr.Entity:TakeDamageInfo(dmginfo)
             tr.Entity:DispatchTraceAttack(dmginfo, tr)
         end
-    else
-        t = self.Melee2AttackMissTime
     end
 
     self:GetOwner():LagCompensation(false)
@@ -218,9 +223,11 @@ ATT.Hook_PreReload = function(wep)
         return true
     end
 
-    if incharge(ply) or !ply:KeyPressed(IN_RELOAD) or ply:GetMoveType() != MOVETYPE_WALK or ply:GetNWFloat("TacRPDashCharge", 0) < 1 then return end
+    if incharge(ply) or !ply:KeyPressed(IN_RELOAD) or ply:GetMoveType() != MOVETYPE_WALK
+    or wep:GetBreath() < 1 then return end
 
-    ply:SetNWFloat("TacRPDashCharge", 0)
+    wep:SetBreath(0)
+    -- ply:SetNWFloat("TacRPDashCharge", 0)
     ply:SetNWFloat("TacRPChargeTime", CurTime())
     ply:SetNWEntity("TacRPChargeWeapon", wep)
 
@@ -248,12 +255,14 @@ ATT.Hook_PreReload = function(wep)
     return true
 end
 
+--[[]
 ATT.Hook_PostThink = function(wep)
     local ply = wep:GetOwner()
     if (game.SinglePlayer() or IsFirstTimePredicted()) and !incharge(ply) then
         ply:SetNWFloat("TacRPDashCharge", math.min(1, ply:GetNWFloat("TacRPDashCharge", 0) + FrameTime() / (wep:GetValue("MeleeDashChargeTime") or 7.5)))
     end
 end
+]]
 
 function ATT.TacticalDraw(self)
     local ply = self:GetOwner()
@@ -296,14 +305,14 @@ function ATT.TacticalDraw(self)
         end
     end
 
-    local c = math.Clamp(ply:GetNWFloat("TacRPDashCharge", 0), 0, 1)
+
+    local c = self:GetBreath() -- math.Clamp(ply:GetNWFloat("TacRPDashCharge", 0), 0, 1)
     local d = 1
 
     local c_bg, c_cnr, c_txt = TacRP.GetPanelColors(chargin, chargin)
     surface.SetDrawColor(c_bg)
     TacRP.DrawCorneredBox(x + w / 2 - w / 6, y - TacRP.SS(12), w / 3, TacRP.SS(9), c_cnr)
     draw.SimpleText(modes[curmode][1], "TacRP_HD44780A00_5x8_6", x + w / 2, y - TacRP.SS(8), c_txt, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
-
 
     if chargin then
         c = math.Clamp((ply:GetNWFloat("TacRPChargeTime", 0) + chargestats(ply, stat_dur) - CurTime()) / chargestats(ply, stat_dur), 0, 1)
@@ -315,9 +324,8 @@ function ATT.TacticalDraw(self)
         surface.SetDrawColor(255, 255, 255, 150)
     end
 
-
-
     surface.DrawRect(x, y, w * c, h)
+
 end
 
 hook.Add("StartCommand", "TacRP_Charge", function(ply, cmd)
@@ -476,9 +484,10 @@ hook.Add("FinishMove", "TacRP_Charge", function(ply, mv)
                 local grace = false
                 if IsValid(ent) and ent:GetOwner() != ply then
                     if SERVER then
+                        local df = math.max(0.25, d) * (1 + wep:GetMeleePerkDamage())
                         local dmgscale = chargestats(ply, stat_dmg)
                         local dmginfo = DamageInfo()
-                        dmginfo:SetDamageForce(ply:GetForward() * 5000)
+                        dmginfo:SetDamageForce(ply:GetForward() * 5000 * df)
                         dmginfo:SetDamagePosition(tr.HitPos)
                         dmginfo:SetDamageType(DMG_CLUB)
                         dmginfo:SetAttacker(ply)
@@ -486,9 +495,9 @@ hook.Add("FinishMove", "TacRP_Charge", function(ply, mv)
 
                         local phys = ent:GetPhysicsObject()
                         if ent:IsPlayer() or ent:IsNPC() or ent:IsNextBot() then
-                            dmginfo:SetDamage((IsValid(wep) and wep:GetValue("MeleeDamage") or 25) * d)
+                            dmginfo:SetDamage((IsValid(wep) and wep:GetValue("MeleeDamage") or 25) * df)
 
-                            ent:SetVelocity(ply:GetForward() * 300 * d + Vector(0, 0, 100 + 150 * d))
+                            ent:SetVelocity(ply:GetForward() * 500 * df + Vector(0, 0, 100 + 150 * d))
                             ent:SetGroundEntity(NULL)
 
                             -- we may be able to kill the target and go through them
