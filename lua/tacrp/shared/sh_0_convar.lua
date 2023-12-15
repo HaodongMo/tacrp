@@ -154,11 +154,6 @@ local conVars = {
         client = true
     },
     {
-        name = "font3",
-        default = "",
-        client = true
-    },
-    {
         name = "drawholsters",
         default = "1",
         client = true,
