@@ -987,15 +987,22 @@ function SWEP:DrawHUDBackground()
                 drawarmorsquare(1, cx1, cy2)
             end
         elseif TacRP.ConVars["minhud"]:GetBool() and self:ShouldDrawBottomBar() then
+            local bipod = self:GetValue("Bipod")
             local w = TacRP.SS(110)
             local h = TacRP.SS(16)
             local x = ScrW() / 2 - w / 2
             local y = ScrH() - h - TacRP.SS(8)
 
+            if bipod then x = x - h / 2 - TacRP.SS(2) end
+
             surface.SetDrawColor(0, 0, 0, 150)
             TacRP.DrawCorneredBox(x, y, w, h, col)
 
             self:DrawBottomBar(x, y, w, h)
+
+            if bipod then
+                self:DrawBipodHint(x + w + TacRP.SS(4), y + h / 2, h)
+            end
         end
     end
 

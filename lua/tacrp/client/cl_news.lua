@@ -536,14 +536,18 @@ The Soviet/AK themed expansion starring 9 weapons, including well-known AK varia
 
 <h3>Changelist</h3>
 <ul>
+<li><b>Added:</b> New icons for Deadeye and Grenadier.
 <li><b>Added:</b> Weapon dropping and swapping. TacRP weapons will now require pressing +USE to pick up - this can be disabled.
 <li><b>Added:</b> Old School balance mode. Enter "tacrp_balance 4" in console to access.
 <li><b>Added:</b> CVars for toggling movement penalties on & off.
+<li><b>Added:</b> Concealment attachment is available outside TTT again.
+<li><b>Added:</b> Bipod hint will now draw with backup HUD.
 <li><b>Changed:</b> RPG rockets can now penetrate LVS vehicles and damage Combine Helicopter NPCs on a direct hit.
 <li><b>Changed:</b> RPG-7 & M320 moved to separate launchers weapon category.
 <li><b>Changed:</b> Added "Special Weapon" category for unorthodox weapons that don't fit any other category (currently only used by expansion weapons).
 <li><b>Changed:</b> Dual MTX tactical attachment slot, attached to the right gun.
 <li><b>Rebalance:</b> RPG rockets do more direct impact damage.
+<li><b>Rebalance:</b> Deadeye increases aim zoom again now.
 <li><b>Fixed:</b> Customization slot icon flash behavior causing errors.
 <li><b>Fixed:</b> Corner cam display being the incorrect aspect ratio.
 <li><b>Fixed:</b> Multiplayer attachment bodygroup networking issue.
