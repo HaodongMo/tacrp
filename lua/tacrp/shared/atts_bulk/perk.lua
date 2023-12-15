@@ -9,17 +9,17 @@ ATT = {}
 
 ATT.PrintName = "Deadeye"
 ATT.Icon = Material("entities/tacrp_att_acc_aim.png", "mips smooth")
-ATT.Description = "Improves weapon performance while sighted."
-ATT.Pros = {"stat.scopedsway", "stat.sightedspeed", "stat.quickscope"}
+ATT.Description = "Zooms in your aim and makes it easier to fire while sighted."
+ATT.Pros = {"stat.zoom", "stat.scopedsway", "stat.quickscope", "stat.movespread"}
 
 ATT.Category = "perk_shooting"
 
 ATT.SortOrder = 2
 
--- ATT.Mult_ScopeFOV = 0.75
+ATT.Mult_ScopeFOV = 0.75
 ATT.Mult_ScopedSway = 0.5
-ATT.Add_SightedSpeedMult = 0.05
-ATT.Mult_QuickScopeSpreadPenalty = 0.75
+ATT.Mult_QuickScopeSpreadPenalty = 0.66667
+ATT.Mult_MoveSpreadPenalty = 0.75
 
 TacRP.LoadAtt(ATT, "perk_aim")
 -- #endregion
