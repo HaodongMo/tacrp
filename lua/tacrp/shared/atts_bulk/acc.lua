@@ -87,8 +87,8 @@ ATT = {}
 
 ATT.PrintName = "Concealment"
 ATT.Icon = Material("entities/tacrp_att_acc_conceal.png", "mips smooth")
-ATT.Description = "Make weapon not visible on your body."
-ATT.Pros = {"Weapon hidden while holstered"}
+ATT.Description = "Carry the weapon discretely, hiding it from view when not held."
+ATT.Pros = {"att.procon.conceal"}
 
 ATT.Category = "acc_holster"
 
@@ -96,7 +96,7 @@ ATT.SortOrder = 8
 
 ATT.Override_HolsterVisible = false
 
-ATT.Ignore = engine.ActiveGamemode() != "terrortown"
+ATT.Ignore = false -- engine.ActiveGamemode() != "terrortown"
 
 TacRP.LoadAtt(ATT, "acc_conceal")
 -- #endregion
