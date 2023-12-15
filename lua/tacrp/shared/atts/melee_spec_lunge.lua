@@ -1,13 +1,13 @@
 ATT.PrintName = "Frenzy"
 ATT.Icon = Material("entities/tacrp_att_melee_spec_lunge.png", "mips smooth")
 ATT.Description = "Close the distance and overwhelm your enemies."
-ATT.Pros = {"RELOAD (Ground): Pounce", "RELOAD (Ground + Crouch): Super Jump", "RELOAD (Mid-Air): Lunge", "Heal on hit"}
+ATT.Pros = {"RELOAD (Ground): Pounce", "RELOAD (Ground + Crouch): Super Jump", "RELOAD (Mid-Air): Lunge"}
 
 ATT.Category = {"melee_spec"}
 
 ATT.SortOrder = 3
 
-ATT.Lifesteal = 1 / 4
+-- ATT.Lifesteal = 1 / 4
 
 ATT.Hook_GetHintCapabilities = function(self, tbl)
     tbl["+reload"] = {so = 0.4, str = "Pounce / Lunge"}

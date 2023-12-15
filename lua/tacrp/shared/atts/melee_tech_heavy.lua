@@ -8,6 +8,8 @@ ATT.Category = {"melee_tech"}
 
 ATT.SortOrder = 1
 
+ATT.HeavyAttack = true
+
 ATT.MeleeBackstab = true
 ATT.MeleeBackstabMult = 2
 

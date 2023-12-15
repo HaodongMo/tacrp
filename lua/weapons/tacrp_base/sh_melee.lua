@@ -27,7 +27,6 @@ function SWEP:Melee(alt)
     self:ToggleBlindFire(TacRP.BLINDFIRE_NONE)
     self:ScopeToggle(0)
 
-    self:EmitSound(self:ChooseSound(self:GetValue("Sound_MeleeSwing")), 75, 100, 1)
 
     local dmg = self:GetValue("MeleeDamage")
     local range = self:GetValue("MeleeRange")
@@ -35,21 +34,17 @@ function SWEP:Melee(alt)
     if alt then
         self:PlayAnimation("melee2", 1, false, true)
         self:GetOwner():DoAnimationEvent(self:GetValue("GestureBash2") or self:GetValue("GestureBash"))
-        range = self:GetValue("Melee2Range") or range
-        dmg = self:GetValue("Melee2Damage") or dmg * (1.4 + self:GetMeleePerkDamage())
-        delay = self:GetValue("Melee2Delay") or delay
+        -- range = self:GetValue("Melee2Range") or range
+        dmg = self:GetHeavyAttackDamage()
     else
         self:PlayAnimation("melee", 1, false, true)
         self:GetOwner():DoAnimationEvent(self:GetValue("GestureBash"))
     end
 
-    local t = self:GetValue("MeleeAttackTime")
-    if alt then
-        if self:GetValue("Melee2AttackTime") then
-            t = self:GetValue("Melee2AttackTime")
-        else
-            t = t * self:GetMeleePerkCooldown() * 1.8
-        end
+    local t = alt and self:GetHeavyAttackTime() or self:GetValue("MeleeAttackTime")
+
+    if delay > 0 then
+        self:EmitSound(self:ChooseSound(self:GetValue("Sound_MeleeSwing")), 75, 100, 1)
     end
 
     self:SetTimer(delay, function()
@@ -127,15 +122,31 @@ function SWEP:Melee(alt)
                 dmginfo:ScaleDamage(1.25)
             end
 
-            if IsValid(tr.Entity) and !tr.HitWorld then
+            if IsValid(tr.Entity) then
                 --tr.Entity:TakeDamageInfo(dmginfo)
                 tr.Entity:DispatchTraceAttack(dmginfo, tr)
             end
+
+            self:FireBullets({
+                Attacker = self:GetOwner(),
+                Damage = 0,
+                Force = 0,
+                Distance = range + 8,
+                HullSize = 0,
+                Tracer = 0,
+                Dir = (tr.HitPos - start):GetNormalized(),
+                Src = start,
+            })
         else
+            local tmiss = 0
             if !alt and self:GetValue("MeleeAttackMissTime") then
-                t = self:GetValue("MeleeAttackMissTime")
+                tmiss = self:GetValue("MeleeAttackMissTime")
             elseif alt then
-                t = self:GetValue("Melee2AttackMissTime") or self:GetValue("MeleeAttackMissTime") * self:GetMeleePerkCooldown() * 1.6
+                tmiss = self:GetHeavyAttackTime(true, false)
+            end
+            self:SetNextSecondaryFire(CurTime() + (tmiss - delay))
+            if delay == 0 then
+                self:EmitSound(self:ChooseSound(self:GetValue("Sound_MeleeSwing")), 75, 100, 1)
             end
         end
 
@@ -146,22 +157,50 @@ function SWEP:Melee(alt)
     self:SetNextSecondaryFire(CurTime() + t)
 end
 
+function SWEP:GetHeavyAttackDamage(base)
+    local valfunc = base and self.GetBaseValue or self.GetValue
+    return valfunc(self, "Melee2Damage") or valfunc(self, "MeleeDamage") * self:GetMeleePerkDamage(base) * 1.5
+end
+
+function SWEP:GetHeavyAttackTime(miss, base)
+    local valfunc = base and self.GetBaseValue or self.GetValue
+    if miss then
+        return (valfunc(self, "Melee2AttackMissTime") or (valfunc(self, "MeleeAttackMissTime") * 1.6))
+        * self:GetMeleePerkCooldown(base)
+    else
+        return (valfunc(self, "Melee2AttackTime") or (valfunc(self, "MeleeAttackTime") * 1.6))
+        * self:GetMeleePerkCooldown(base)
+    end
+end
+
 function SWEP:GetMeleePerkDamage(base)
     local valfunc = base and self.GetBaseValue or self.GetValue
-    if !valfunc(self, "PrimaryMelee") then return 0 end
     local stat = valfunc(self, "MeleePerkStr")
     if stat >= 0.5 then
-        return 0.5 + (stat - 0.5) * 2
+        return Lerp((stat - 0.5) * 2, 1, 2)
     else
-        return stat
+        return Lerp(stat * 2, 0.7, 1)
     end
 end
 
 function SWEP:GetMeleePerkCooldown(base)
     local valfunc = base and self.GetBaseValue or self.GetValue
-    if !valfunc(self, "PrimaryMelee") then return 1 end
     local stat = valfunc(self, "MeleePerkAgi")
-    return Lerp(stat, 1.4, 0.6)
+    if stat >= 0.5 then
+        return Lerp((stat - 0.5) * 2, 1, 0.7)
+    else
+        return Lerp(stat * 2, 1.5, 1)
+    end
+end
+
+function SWEP:GetMeleePerkVelocity(base)
+    local valfunc = base and self.GetBaseValue or self.GetValue
+    local stat = valfunc(self, "MeleePerkInt")
+    if stat >= 0.5 then
+        return Lerp((stat - 0.5) * 2, 1, 3) * valfunc(self, "MeleeThrowForce")
+    else
+        return Lerp(stat * 2, 0.5, 1) * valfunc(self, "MeleeThrowForce")
+    end
 end
 
 hook.Add("PostEntityTakeDamage", "tacrp_melee", function(ent, dmg, took)
@@ -174,8 +213,13 @@ hook.Add("PostEntityTakeDamage", "tacrp_melee", function(ent, dmg, took)
 
     local wep = dmg:GetInflictor()
     if (!IsValid(wep) or !wep:IsWeapon()) and IsValid(dmg:GetAttacker()) and dmg:GetAttacker():IsPlayer() then wep = dmg:GetAttacker():GetActiveWeapon() end
-    if took and (ent:IsPlayer() or ent:IsNPC() or ent:IsNextBot()) and IsValid(wep) and wep.ArcticTacRP and wep:GetValue("Lifesteal") then
-        local v = dmg:GetDamage() * wep:GetValue("Lifesteal")
-        wep:GetOwner():SetHealth(math.min(wep:GetOwner():GetMaxHealth(), wep:GetOwner():Health() + v))
+    if took and (ent:IsPlayer() or ent:IsNPC() or ent:IsNextBot()) and IsValid(wep) and wep.ArcticTacRP then
+        if (wep:GetValue("Lifesteal") or 0) > 0 then
+            wep:GetOwner():SetHealth(math.min(math.max(wep:GetOwner():GetMaxHealth(), wep:GetOwner():Health()),
+            wep:GetOwner():Health() + dmg:GetDamage() * wep:GetValue("Lifesteal")))
+        end
+        if (wep:GetValue("DamageCharge") or 0) > 0 then
+            wep:SetBreath(math.min(1, wep:GetBreath() + dmg:GetDamage() * wep:GetValue("DamageCharge")))
+        end
     end
 end)

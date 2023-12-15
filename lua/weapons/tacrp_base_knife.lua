@@ -24,7 +24,7 @@ SWEP.PrimaryMelee = true
 
 SWEP.MeleeDamage = 35
 SWEP.MeleeAttackTime = 0.4
-SWEP.MeleeRange = 128
+SWEP.MeleeRange = 72
 SWEP.MeleeAttackMissTime = 0.5
 SWEP.MeleeDelay = 0.15
 
@@ -32,14 +32,12 @@ SWEP.MeleeThrowForce = 2000
 
 SWEP.MeleeDamageType = DMG_SLASH
 
-SWEP.MeleeThrowTime = 1
-SWEP.MeleeThrowTimeWait = 0.25
-
-SWEP.MeleeDashChargeTime = 7.5
-
 SWEP.MeleePerkStr = 0.5
 SWEP.MeleePerkAgi = 0.5
 SWEP.MeleePerkInt = 0.5
+
+SWEP.Lifesteal = 0
+SWEP.DamageCharge = 0
 
 SWEP.Firemode = 0
 

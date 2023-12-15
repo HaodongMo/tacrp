@@ -256,11 +256,7 @@ SWEP.Melee2Range = nil
 SWEP.Melee2AttackMissTime = nil
 SWEP.Melee2Delay = nil
 
-// used on knife throw attachment
-SWEP.MeleeThrowDamage = nil
 SWEP.MeleeThrowForce = 3000
-SWEP.MeleeThrowTime = nil // cooldown time, also controls animation speed
-SWEP.MeleeThrowTimeWait = 0.3 // delay until deploy animation is played; does not affect actual cooldown
 
 // used on knife perks
 SWEP.MeleePerkStr = 0.5

@@ -1179,8 +1179,8 @@ SWEP.StatDisplay = {
 
 SWEP.StatGroupsMelee = {
     {
-        Name = "Power",
-        Description = "Attack damage.",
+        Name = "stat.damage",
+        Description = "stat.damage.desc_melee",
         RatingFunction = function(self, base)
             local valfunc = base and self.GetBaseValue or self.GetValue
 
@@ -1188,8 +1188,8 @@ SWEP.StatGroupsMelee = {
         end,
     },
     {
-        Name = "Haste",
-        Description = "Attack speed.",
+        Name = "rating.meleeattacktime",
+        Description = "rating.meleeattacktime.desc",
         RatingFunction = function(self, base)
             local valfunc = base and self.GetBaseValue or self.GetValue
 
@@ -1206,8 +1206,8 @@ SWEP.StatGroupsMelee = {
     --     end,
     -- },
     {
-        Name = "Brawn",
-        Description = "Boosts perk damage and knockback.",
+        Name = "stat.meleeperkstr",
+        Description = "stat.meleeperkstr.desc",
         RatingFunction = function(self, base)
             local valfunc = base and self.GetBaseValue or self.GetValue
             return Lerp(valfunc(self, "MeleePerkStr"), 0, 100)
@@ -1215,22 +1215,168 @@ SWEP.StatGroupsMelee = {
         end,
     },
     {
-        Name = "Dexterity",
-        Description = "Boosts perk movement power and attack speed.",
+        Name = "stat.meleeperkagi",
+        Description = "stat.meleeperkagi.desc",
         RatingFunction = function(self, base)
             local valfunc = base and self.GetBaseValue or self.GetValue
             return Lerp(valfunc(self, "MeleePerkAgi"), 0, 100)
         end,
     },
     {
-        Name = "Proficiency",
-        Description = "Boosts perk recharge speed and projectile force.",
+        Name = "stat.meleeperkint",
+        Description = "stat.meleeperkint.desc",
         RatingFunction = function(self, base)
             local valfunc = base and self.GetBaseValue or self.GetValue
             return Lerp(valfunc(self, "MeleePerkInt"), 0, 100)
         end,
     },
 }
+-- self:GetHeavyAttackDamage()
 
 SWEP.StatDisplayMelee = {
+    {
+        Name = "stat.damage",
+        Description = "stat.damage.desc_melee",
+        Value = "MeleeDamage",
+        AggregateFunction = function(self, base, val)
+            return math.floor(val)
+        end,
+    },
+    {
+        Name = "stat.meleeattacktime",
+        Description = "stat.meleeattacktime.desc",
+        Value = "MeleeAttackTime",
+        Unit = "unit.second",
+        LowerIsBetter = true,
+    },
+    {
+        Name = "stat.meleeattackmisstime",
+        Description = "stat.meleeattackmisstime.desc",
+        Value = "MeleeAttackMissTime",
+        Unit = "unit.second",
+        LowerIsBetter = true,
+    },
+    {
+        Name = "stat.meleerange",
+        Description = "stat.meleerange.desc",
+        Value = "MeleeRange",
+        DisplayFunction = function(self, base, val)
+            return self:RangeUnitize(val)
+        end,
+    },
+    {
+        Name = "stat.meleedelay",
+        Description = "stat.meleedelay.desc",
+        Value = "MeleeDelay",
+        Unit = "unit.second",
+        LowerIsBetter = true,
+    },
+    {
+        Name = "stat.meleeperkstr",
+        Description = "stat.meleeperkstr.desc",
+        Value = "MeleePerkStr",
+        AggregateFunction = function(self, base, val)
+            return math.floor(val * 100)
+        end,
+    },
+    {
+        Name = "stat.meleeperkagi",
+        Description = "stat.meleeperkagi.desc",
+        Value = "MeleePerkAgi",
+        AggregateFunction = function(self, base, val)
+            return math.floor(val * 100)
+        end,
+    },
+    {
+        Name = "stat.meleeperkint",
+        Description = "stat.meleeperkint.desc",
+        Value = "MeleePerkInt",
+        AggregateFunction = function(self, base, val)
+            return math.floor(val * 100)
+        end,
+    },
+
+
+    {
+        Name = "stat.melee2damage",
+        Description = "stat.melee2damage.desc",
+        Value = "Melee2Damage",
+        ValueCheck = "HeavyAttack",
+        AggregateFunction = function(self, base, val)
+            return math.Round(self:GetHeavyAttackDamage(base))
+        end,
+    },
+    {
+        Name = "stat.melee2attacktime",
+        Description = "stat.melee2attacktime.desc",
+        Value = "Melee2AttackTime",
+        ValueCheck = "HeavyAttack",
+        AggregateFunction = function(self, base, val)
+            return math.Round(self:GetHeavyAttackTime(false, base), 2)
+        end,
+        Unit = "unit.second",
+        LowerIsBetter = true,
+    },
+    {
+        Name = "stat.melee2attackmisstime",
+        Description = "stat.melee2attackmisstime.desc",
+        Value = "Melee2AttackMissTime",
+        ValueCheck = "HeavyAttack",
+        AggregateFunction = function(self, base, val)
+            return math.Round(self:GetHeavyAttackTime(true, base), 2)
+        end,
+        Unit = "unit.second",
+        LowerIsBetter = true,
+    },
+    {
+        Name = "stat.meleethrowdamage",
+        Description = "stat.meleethrowdamage.desc",
+        Value = "MeleeDamage",
+        ValueCheck = "ThrowAttack",
+        AggregateFunction = function(self, base, val)
+            return math.floor(val * self:GetMeleePerkDamage(base))
+        end,
+    },
+    {
+        Name = "stat.meleethrowvelocity",
+        Description = "stat.meleethrowvelocity.desc",
+        Value = "MeleeThrowForce",
+        ValueCheck = "ThrowAttack",
+        AggregateFunction = function(self, base, val)
+            return math.Round(0.3048 * self:GetMeleePerkVelocity(base) / 12, 1)
+        end,
+        Unit = "unit.mps",
+    },
+    {
+        Name = "stat.meleethrowtime",
+        Description = "stat.meleethrowtime.desc",
+        Value = "MeleeAttackTime",
+        ValueCheck = "ThrowAttack",
+        AggregateFunction = function(self, base, val)
+            return math.Round(val * 3 * self:GetMeleePerkCooldown(base), 2)
+        end,
+        Unit = "unit.second",
+        LowerIsBetter = true,
+    },
+
+    {
+        Name = "stat.lifesteal",
+        Description = "stat.lifesteal.desc",
+        Value = "Lifesteal",
+        DefaultValue = 0,
+        AggregateFunction = function(self, base, val)
+            return math.Round(val * 100, 2)
+        end,
+        Unit = "%",
+    },
+    {
+        Name = "stat.damagecharge",
+        Description = "stat.damagecharge.desc",
+        Value = "DamageCharge",
+        DefaultValue = 0,
+        AggregateFunction = function(self, base, val)
+            return math.Round(val * 10000, 2)
+        end,
+        Unit = "%",
+    },
 }

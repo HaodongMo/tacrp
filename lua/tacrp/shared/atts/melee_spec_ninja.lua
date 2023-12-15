@@ -49,6 +49,10 @@ end
 --     end
 -- end
 
+ATT.Hook_Recharge = function(wep)
+    if wep:GetOwner():GetNWBool("TacRPNinjaDive") then return true end
+end
+
 ATT.Hook_PreReload = function(wep)
     wep.LastHintLife = CurTime()
     local ply = wep:GetOwner()
@@ -86,7 +90,7 @@ ATT.Hook_PreReload = function(wep)
             setcharge(wep, getcharge(wep) / 2)
         end
     elseif !wep:StillWaiting() and getcharge(wep) >= cost then
-        wep:SetNextSecondaryFire(CurTime() + 0.4)
+        wep:SetNextSecondaryFire(CurTime() + 0.8)
         wep:PlayAnimation("halt", 0.4, false, true)
         -- wep:EmitSound("ambient/energy/weld2.wav", 75, 110, 0.5)
         wep:GetOwner():DoAnimationEvent(ACT_HL2MP_GESTURE_RANGE_ATTACK_FIST)
@@ -157,6 +161,8 @@ ATT.Hook_PreReload = function(wep)
                 --tr.Entity:TakeDamageInfo(dmginfo)
                 tr.Entity:DispatchTraceAttack(dmginfo, tr)
             end
+
+            wep:SetNextSecondaryFire(CurTime() + 0.4)
         end
 
         -- local dir = ply:EyeAngles():Forward()

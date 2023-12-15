@@ -219,6 +219,10 @@ L["stat.meleeattackmisstime"] = "Delay On Miss"
 L["stat.meleeattackmisstime.desc"] = "Amount of time between each attack if it didn't hit anything."
 L["stat.meleerange"] = "Attack Range"
 L["stat.meleerange.desc"] = "How far away the weapon can reach for an attack."
+L["stat.meleedelay"] = "Windup"
+L["stat.meleedelay.desc"] = "Delay between an attack starting and landing."
+
+
 
 L["stat.melee2damage"] = "Damage (Heavy)"
 L["stat.melee2damage.desc"] = "Damage dealt by heavy attacks."

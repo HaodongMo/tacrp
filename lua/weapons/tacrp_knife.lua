@@ -22,7 +22,6 @@ SWEP.Slot = 0
 
 SWEP.MeleeDamage = 35
 SWEP.MeleeAttackTime = 0.4
-SWEP.MeleeRange = 128
 SWEP.MeleeAttackMissTime = 0.5
 SWEP.MeleeDelay = 0.15
 
