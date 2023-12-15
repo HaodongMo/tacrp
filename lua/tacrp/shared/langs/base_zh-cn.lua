@@ -1,7 +1,6 @@
 L = {}
 
-L["font.1"] = "Microsoft YaHei Bold"
-L["font.2"] = "Microsoft YaHei"
+L["font.1"] = "Microsoft YaHei"
 
 L["tier.1"] = "民用"
 L["tier.2"] = "警备"

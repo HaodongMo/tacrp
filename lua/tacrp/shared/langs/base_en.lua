@@ -1,9 +1,8 @@
 L = {}
 STL = {}
 
-L["font.1"] = "LondonBetween"
-L["font.2"] = "Myriad Pro"
-L["font.3"] = "HD44780A00 5x8"
+L["font.1"] = "Myriad Pro"
+L["font.2"] = "HD44780A00 5x8"
 
 STL["tier.1"] = "4Consumer"
 STL["tier.2"] = "3Security"
@@ -203,6 +202,41 @@ L["stat.freeaimangle"] = "Free Aim Angle"
 L["stat.freeaimangle.desc"] = "Maximum amount of deviation from the aim direction while hipfiring."
 L["stat.shotstofail"] = "Mean Shots To Fail"
 L["stat.shotstofail.desc"] = "The average number of shots that will be fired before the weapon jams."
+
+L["stat.meleeperkstr"] = "Brawn"
+L["stat.meleeperkstr.desc"] = "Melee attribute influencing Techniques and Specials.\nAffects perk damage and knockback."
+L["stat.meleeperkagi"] = "Dexterity"
+L["stat.meleeperkagi.desc"] = "Melee attribute influencing Techniques and Specials.\nAffects perk movement power and attack interval."
+L["stat.meleeperkint"] = "Strategy"
+L["stat.meleeperkint.desc"] = "Melee attribute influencing Techniques and Specials.\nAffects perk recharge speed and projectile force."
+
+L["rating.meleeattacktime"] = "Haste"
+L["rating.meleeattacktime.desc"] = "How quickly the weapon can attack."
+L["stat.damage.desc_melee"] = "Damage dealt by primary attacks." -- used on melee damage
+L["stat.meleeattacktime"] = "Delay On Hit"
+L["stat.meleeattacktime.desc"] = "Amount of time between each attack if it hit something."
+L["stat.meleeattackmisstime"] = "Delay On Miss"
+L["stat.meleeattackmisstime.desc"] = "Amount of time between each attack if it didn't hit anything."
+L["stat.meleerange"] = "Attack Range"
+L["stat.meleerange.desc"] = "How far away the weapon can reach for an attack."
+
+L["stat.melee2damage"] = "Damage (Heavy)"
+L["stat.melee2damage.desc"] = "Damage dealt by heavy attacks."
+L["stat.melee2attacktime"] = "Delay On Hit (Heavy)"
+L["stat.melee2attacktime.desc"] = "Amount of time between each heavy attack if it hit something."
+L["stat.melee2attackmisstime"] = "Delay On Miss (Heavy)"
+L["stat.melee2attackmisstime.desc"] = "Amount of time between each heavy attack if it didn't hit anything."
+L["stat.meleethrowdamage"] = "Damage (Throw)"
+L["stat.meleethrowdamage.desc"] = "Damage dealt by thrown weapons."
+L["stat.meleethrowvelocity"] = "Throw Velocity"
+L["stat.meleethrowvelocity.desc"] = "Travel speed of thrown weapons."
+L["stat.meleethrowtime"] = "Throw Delay"
+L["stat.meleethrowtime.desc"] = "Amount of time between each weapon throw."
+L["stat.lifesteal"] = "Health From Damage"
+L["stat.lifesteal.desc"] = "Fraction of damage dealt that is converted into health."
+L["stat.damagecharge"] = "Charge From Damage"
+L["stat.damagecharge.desc"] = "Fraction of damage dealt that is converted into perk charge."
+
 
 L["stat.damage"] = "Damage"
 L["stat.damage_max.desc"] = "Damage per bullet at all ranges."

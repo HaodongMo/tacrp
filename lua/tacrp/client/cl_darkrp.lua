@@ -114,7 +114,8 @@ hook.Add("onDrawSpawnedWeapon", "TacRP", function(ent)
         ang:RotateAroundAxis(ang:Up(), 90)
 
         cam.Start3D2D(ent:WorldSpaceCenter() + Vector(0, 0, (ent:OBBMaxs().z - ent:OBBMins().z) * 0.5 + 8) , ang, 0.1)
-            surface.SetFont("TacRP_LondonBetween_32_Unscaled")
+            -- surface.SetFont("TacRP_LondonBetween_32_Unscaled")
+            surface.SetFont("TacRP_Myriad_Pro_32_Unscaled")
 
             local name = wep_tbl.PrintName .. (ent:Getamount() > 1 and (" ×" .. ent:Getamount()) or "")
             local w = surface.GetTextSize(name)
