@@ -48,7 +48,7 @@ function SWEP:Melee(alt)
         if self:GetValue("Melee2AttackTime") then
             t = self:GetValue("Melee2AttackTime")
         else
-            t = t * self:GetMeleePerkCooldown() * 1.6
+            t = t * self:GetMeleePerkCooldown() * 1.8
         end
     end
 
