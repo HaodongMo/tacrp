@@ -472,6 +472,11 @@ function SWEP:AfterShotFunction(tr, dmg, range, penleft, alreadypenned, forced)
             dmg:ScaleDamage(pendelta)
         end
         alreadypenned[tr.Entity] = true
+
+        if tr.Entity.LVS and !self:IsShotgun() then
+            dmg:SetDamageForce(dmg:GetDamageForce():GetNormalized() * matpen * 50)
+            dmg:SetDamageType(DMG_AIRBOAT)
+        end
     end
 
     if self:GetValue("ExplosiveDamage") > 0 then

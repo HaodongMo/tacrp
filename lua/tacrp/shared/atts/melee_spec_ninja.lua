@@ -9,6 +9,19 @@ ATT.SortOrder = 2
 
 ATT.SilentFootstep = true
 
+local cost = 1 / 5
+ATT.Override_BreathSegmentSize = cost
+
+local function getcharge(wep)
+    -- return ply:GetNWFloat("TacRPDashCharge", 0)
+    return wep:GetBreath()
+end
+
+local function setcharge(wep, f)
+    -- ply:SetNWFloat("TacRPDashCharge", f)
+    wep:SetBreath(math.Clamp(f, 0, 1))
+end
+
 ATT.Hook_GetHintCapabilities = function(self, tbl)
     tbl["+reload"] = {so = 0.4, str = "Palm Strike"}
     if self:GetOwner():IsOnGround() then
@@ -28,13 +41,13 @@ local function makehitsound(ent)
     end
 end
 
-local function makesmokesound(ent, pitch)
-    if TacRP.ShouldWeFunny() then
-        ent:EmitSound("tacrp/fart-with-reverb.mp3", 75, pitch)
-    else
-        ent:EmitSound("TacRP/weapons/grenade/smoke_explode-1.wav", 75, pitch)
-    end
-end
+-- local function makesmokesound(ent, pitch)
+--     if TacRP.ShouldWeFunny() then
+--         ent:EmitSound("tacrp/fart-with-reverb.mp3", 75, pitch)
+--     else
+--         ent:EmitSound("TacRP/weapons/grenade/smoke_explode-1.wav", 75, pitch)
+--     end
+-- end
 
 ATT.Hook_PreReload = function(wep)
     wep.LastHintLife = CurTime()
@@ -42,7 +55,8 @@ ATT.Hook_PreReload = function(wep)
     if !ply:KeyPressed(IN_RELOAD) then return end
 
     if ply:IsOnGround() and ply:Crouching() then
-        if ply:GetNWFloat("TacRPDiveTime", 0) + 1 > CurTime() then return true end
+        if ply:GetNWFloat("TacRPDiveTime", 0) + 1 > CurTime() or getcharge(wep) < cost * 1.5 then return true end
+        --[[]
         if ply:GetNWFloat("TacRPNinjaSmoke", 0) <= CurTime() and SERVER then
             makesmokesound(ply, 110)
             local cloud = ents.Create( "tacrp_smoke_cloud_ninja" )
@@ -54,30 +68,32 @@ ATT.Hook_PreReload = function(wep)
         else
             wep:EmitSound("npc/fast_zombie/claw_miss1.wav", 75, 105, 1)
         end
+        ]]
+        setcharge(wep, getcharge(wep) - cost * 1.5)
+        wep:EmitSound("npc/fast_zombie/claw_miss1.wav", 75, 105, 1)
         local ang = ply:GetAngles()
         if ang.p >= -15 then
             ang.p = math.Clamp(ang.p, 45, 180 - 45)
-            ply:SetVelocity(ang:Forward() * -math.max(100, 600 - ply:GetVelocity():Length()))
+            ply:SetVelocity(ang:Forward() * -math.max(100, 400 + 400 * wep:GetValue("MeleePerkAgi") - ply:GetVelocity():Length()))
         end
         ply:SetNWFloat("TacRPDiveTime", CurTime())
     elseif !ply:IsOnGround() and ply:Crouching() then
-        if ply:GetMoveType() != MOVETYPE_NOCLIP and !ply:GetNWBool("TacRPNinjaDive") and ply:GetNWFloat("TacRPDiveTime", 0) + 1 < CurTime() and ply:EyeAngles():Forward():Dot(Vector(0, 0, 1)) < -0.25 then
+        if ply:GetMoveType() != MOVETYPE_NOCLIP and !ply:GetNWBool("TacRPNinjaDive") and ply:GetNWFloat("TacRPDiveTime", 0) + 0.5 < CurTime() and ply:EyeAngles():Forward():Dot(Vector(0, 0, 1)) < -0.25 then
             ply:SetNWBool("TacRPNinjaDive", true)
             ply:SetNWFloat("TacRPDiveTime", CurTime())
-            ply:SetNWVector("TacRPDiveDir", ply:EyeAngles():Forward())
+            ply:SetNWVector("TacRPDiveDir", ply:EyeAngles():Forward() * Lerp(getcharge(wep), 30000, 100000) * Lerp(wep:GetValue("MeleePerkAgi"), 0.6, 1.4))
             wep:EmitSound("weapons/mortar/mortar_fire1.wav", 65, 120, 0.5)
+            setcharge(wep, getcharge(wep) / 2)
         end
-    elseif !wep:StillWaiting() then
-        if (wep.NextPalmPunch or 0) > CurTime() then return end
-        wep.NextPalmPunch = CurTime() + 1
-        wep:SetNextSecondaryFire(CurTime() + 0.25)
+    elseif !wep:StillWaiting() and getcharge(wep) >= cost then
+        wep:SetNextSecondaryFire(CurTime() + 0.4)
         wep:PlayAnimation("halt", 0.4, false, true)
         -- wep:EmitSound("ambient/energy/weld2.wav", 75, 110, 0.5)
         wep:GetOwner():DoAnimationEvent(ACT_HL2MP_GESTURE_RANGE_ATTACK_FIST)
         wep:EmitSound("npc/fast_zombie/claw_miss1.wav", 75, 90, 1)
 
         local dmg = 20
-        local range = 64
+        local range = 72
         local filter = {wep:GetOwner()}
 
         local start = wep:GetOwner():GetShootPos()
@@ -91,7 +107,7 @@ ATT.Hook_PreReload = function(wep)
 
         -- weapon_hl2mpbasebasebludgeon.cpp: do a hull trace if not hit
         if tr.Fraction == 1 or !IsValid(tr.Entity) then
-            local dim = 32
+            local dim = 48
             local pos2 = tr.HitPos - dir * (dim * 1.732)
             local tr2 = util.TraceHull({
                 start = start,
@@ -122,13 +138,18 @@ ATT.Hook_PreReload = function(wep)
             TacRP.CancelBodyDamage(tr.Entity, dmginfo, tr.HitGroup)
 
             if tr.Entity:IsNPC() or tr.Entity:IsPlayer() or tr.Entity:IsNextBot() then
+                setcharge(wep, getcharge(wep) - cost)
                 makehitsound(wep)
                 tr.Entity.PalmPunched = true
             else
-                local vel = ply:GetVelocity():Length()
+                local vel = ply:GetVelocity().z --:Length()
                 wep:EmitSound("tacrp/weapons/melee_hit-" .. math.random(1, 2) .. ".wav", 75, 100, 1, CHAN_ITEM)
-                if ply:IsOnGround() and math.abs(tr.HitNormal:Dot(Vector(0, 0, 1))) <= 0.25 and (tr.Normal:Dot(ply:GetAimVector())) >= 0.5 and vel <= 250 then
-                    ply:SetVelocity(Vector(0, 0, Lerp(vel / 250, 500, 250)))
+                -- if ply:IsOnGround() and math.abs(tr.HitNormal:Dot(Vector(0, 0, 1))) <= 0.25 and (tr.Normal:Dot(ply:GetAimVector())) >= 0.5 and vel <= 250 then
+                --     ply:SetVelocity(Vector(0, 0, Lerp(vel / 250, 500, 250)))
+                -- end
+                if math.abs(tr.HitNormal:Dot(Vector(0, 0, 1))) <= 0.25 and (tr.Normal:Dot(ply:GetAimVector())) >= 0.5 then
+                    setcharge(wep, getcharge(wep) - cost)
+                    ply:SetVelocity(Vector(0, 0, Lerp(vel / 200, 400, 200) * Lerp(wep:GetValue("MeleePerkAgi"), 0.75, 1.25)))
                 end
             end
 
@@ -148,6 +169,7 @@ ATT.Hook_PreReload = function(wep)
     return true
 end
 
+--[[]
 local smokeicon = Material("TacRP/grenades/smoke.png", "mips smooth")
 function ATT.TacticalDraw(self)
     local scrw = ScrW()
@@ -171,6 +193,7 @@ function ATT.TacticalDraw(self)
     surface.SetMaterial(smokeicon)
     surface.DrawTexturedRect(x, y, w, h)
 end
+]]
 
 
 hook.Add("FinishMove", "TacRP_Ninja", function(ply, mv)
@@ -183,7 +206,7 @@ hook.Add("FinishMove", "TacRP_Ninja", function(ply, mv)
             mv:SetVelocity(mv:GetAngles():Forward() * mv:GetVelocity():Length() * 2)
             ply.TacRPNinjaGroundTime = nil
         elseif ply:GetNWFloat("TacRPDiveTime", 0) + 0.1 > CurTime() then
-            mv:SetVelocity(ply:GetNWVector("TacRPDiveDir") * 50000 * FrameTime())
+            mv:SetVelocity(ply:GetNWVector("TacRPDiveDir") * FrameTime())
 
             -- do it here to get around reload not called clientside in SP
             if (ply.TacRPDiveEffect or 0) != ply:GetNWFloat("TacRPDiveTime", -1) then

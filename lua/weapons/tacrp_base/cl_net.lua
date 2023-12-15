@@ -9,10 +9,10 @@ function SWEP:ReceiveWeapon(ids)
         end
     end
 
+    self:InvalidateCache()
+
     self:SetupModel(true)
     self:SetupModel(false)
-
-    self:InvalidateCache()
 
     self.CertainAboutAtts = true
 end

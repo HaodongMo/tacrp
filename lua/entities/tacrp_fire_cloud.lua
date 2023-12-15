@@ -287,7 +287,9 @@ hook.Add("EntityTakeDamage", "tacrp_fire_cloud", function(ent, dmginfo)
                 dmginfo:SetDamageType(DMG_SLOWBURN) -- DMG_BURN does not hurt HL2 zombies and instead turns them black.
             end
         elseif !ent:IsNextBot() and !ent:IsPlayer() then
-            dmginfo:SetDamageType(DMG_DIRECT) -- some props like to burn slowly against DMG_BURN or DMG_SLOWBURN. don't.
+            if ent:GetClass() == "prop_physics" then
+                dmginfo:SetDamageType(DMG_DIRECT) -- some props like to burn slowly against DMG_BURN or DMG_SLOWBURN. don't.
+            end
             dmginfo:ScaleDamage(3) -- tremendous damage to props
         end
         dmginfo:SetDamageForce(Vector()) -- fire does not push things around. still applies to players, but that can't be helped.

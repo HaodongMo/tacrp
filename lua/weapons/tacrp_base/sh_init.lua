@@ -61,6 +61,9 @@ function SWEP:Deploy()
         self:SetupModel(true)
         self:SetupModel(false)
         self.LastHintLife = CurTime()
+    elseif !game.SinglePlayer() then
+        self:DoBodygroups(true) -- Not sure why this is necessary
+        self:DoBodygroups(false)
     end
 
     if (game.SinglePlayer() or CLIENT) and !TacRP.NewsPopup and TacRP.ConVars["checknews"]:GetBool() then
