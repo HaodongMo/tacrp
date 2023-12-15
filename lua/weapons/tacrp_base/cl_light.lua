@@ -29,7 +29,7 @@ function SWEP:CreateFlashlights()
                 att = i,
                 light = ProjectedTexture(),
                 col = Color(255, 255, 255),
-                br = 8,
+                br = 4,
             }
             total_lights = total_lights + 1
 
@@ -47,7 +47,7 @@ function SWEP:CreateFlashlights()
 
             l:SetColor(Color(255, 255, 255))
             l:SetTexture("effects/flashlight001")
-            l:SetBrightness(8)
+            l:SetBrightness(4)
             l:SetEnableShadows(true)
             l:Update()
 
