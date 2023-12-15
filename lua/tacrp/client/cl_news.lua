@@ -516,21 +516,29 @@ The Soviet/AK themed expansion starring 9 weapons, including well-known AK varia
         Date = "2023-12-10",
         Author = "speedonerd",
         Major = false,
-        Summary = "A few small things for the new year.",
+        Summary = "New Years update!",
         Contents = [[<body style="font-family:'Myriad Pro';color:white;font-size:125%;">
 <p>This is speedonerd speaking! I'm the other guy who works on this mess, mainly spending nights in Blender assigning vertex groups and moving keyframes around while working with nearly-20-year-old models from Gamebanana. We have a quick 'n' dirty update with a couple of changes and additions, mostly under the hood, to give the user more freedom to customize the experience and address major network issues.</p>
 
 <h2>drop me avp plz</h2>
-<p>There's now a dedicated button in the customization menu to drop your current weapon, with dropped weapons able to be picked up with your 'use' key. This synergizes with weapon slot restrictions, allowing you to replace your current weapon with any gun you find lying around with the press of a button.
+<p>There's now a dedicated button in the customization menu to drop your current weapon, with dropped weapons able to be picked up with your 'use' key. 
+<p>This synergizes with weapon slot restrictions, allowing you to swap weapons with any gun you find lying around with the press of a button.
 
-<h2>Back in my day we didn't need no stinkin' ironsights!</h2>
-<p>Do you yearn for the good old days, when shooters were fun because they didn't have depth or good game balance? I did for a brief period, and it compelled me to quickly integrate a new balance mode that removed ironsights and tightened up weapon spread. It didn't really pan out how I had hoped—TacRP is built around so many modern mechanics and systems that it's hard to make it "old school" without stripping away nearly all of them. Regardless, what I ended up with before abandoning it is still accessible via the console for preservation's sake, if you're interested.
+<h2>You kids today don't know how to circlestrafe!</h2>
+<p>Do you yearn for the good old days, when shooters were fun because they didn't have depth or good game balance? I did for a brief period, and it compelled me to quickly integrate a new balance mode that removed ironsights and tightened up weapon spread. 
+<p>It didn't really pan out how I had hoped—TacRP is built around so many modern mechanics and systems that it's hard to make it "old school" without stripping away nearly all of them. Regardless, what I ended up with before abandoning it is still accessible via the console for preservation's sake, if you're interested.
 
 <h2>It's like wading through molasses.</h2>
-<p>In case you don't like how a certain balancing scheme punishes movement, there are now convars for each of the movement penalties that let you turn them off individually if you don't like them. They can all be found under Movement in the Mechanics tab.
+<p>In case you don't like how a certain balancing scheme punishes movement, there are now convars for each of the movement penalties that let you turn them off individually. 
+<p>They can all be found under Movement in the Mechanics tab.
 
-<h2>Crocket!</h2>
-<p>The RPG-7's rockets have been overhauled to interact with vehicles better. Rockets can penetrate into LVS vehicles and the Combine Hunter Chopper's notorious hardcoded immunity to everything but airboat gun damage has been circumvented, allowing you to damage them with a direct hit. 
+<h2>What happened to my freakin' car?!</h2>
+<p>Fighting against vehicles with TacRP will now be a lot less infuriating thanks to some hackery and workarounds to make infantry-to-vehicle combat functional.
+<p>LVS vehicles (both land and air) can now be damaged with gunfire and penetrated by RPG rockets. Combine Hunter Choppers, infamous for their hardcoded immunity to everything but airboat gun damage, can now take damage from direct hits with RPG rockets.
+
+<h2>Now this...is a knife.</h2>
+<p>TacRP's melee system has been very superficial for a while now with little statistical difference between weapons (which is especially prominent if you have Brute Force installed) and were more goofy than they were actually viable. 
+<p>We've reworked the melee system with a host of new features, including actual weapon stats and a new attachment slot: Boost, which allows you to affect the stats of your weapon in different ways. 
 
 <hr>
 
@@ -539,15 +547,17 @@ The Soviet/AK themed expansion starring 9 weapons, including well-known AK varia
 <li><b>Added:</b> New icons for Deadeye and Grenadier.
 <li><b>Added:</b> Weapon dropping and swapping. TacRP weapons will now require pressing +USE to pick up - this can be disabled.
 <li><b>Added:</b> Old School balance mode. Enter "tacrp_balance 4" in console to access.
-<li><b>Added:</b> CVars for toggling movement penalties on & off.
-<li><b>Added:</b> Concealment attachment is available outside TTT again.
+<li><b>Added:</b> CVars for toggling specific movement penalties.
+<li><b>Added:</b> Restored concealment accessory. Hides weapon when holstered.
+<li><b>Changed:</b> TacRP weapons can now damage armored LVS vehicles, using Material Penetration for penetration power.
 <li><b>Added:</b> Bipod hint will now draw with backup HUD.
 <li><b>Changed:</b> RPG rockets can now penetrate LVS vehicles and damage Combine Helicopter NPCs on a direct hit.
 <li><b>Changed:</b> RPG-7 & M320 moved to separate launchers weapon category.
 <li><b>Changed:</b> Added "Special Weapon" category for unorthodox weapons that don't fit any other category (currently only used by expansion weapons).
 <li><b>Changed:</b> Dual MTX tactical attachment slot, attached to the right gun.
+<li><b>Changed:</b> New Deadeye and Grenadier icons.
 <li><b>Rebalance:</b> RPG rockets do more direct impact damage.
-<li><b>Rebalance:</b> Deadeye increases aim zoom again now.
+<li><b>Rebalance:</b> Deadeye grants increased zoom distance (again).
 <li><b>Fixed:</b> Customization slot icon flash behavior causing errors.
 <li><b>Fixed:</b> Corner cam display being the incorrect aspect ratio.
 <li><b>Fixed:</b> Multiplayer attachment bodygroup networking issue.
@@ -569,12 +579,13 @@ The Soviet/AK themed expansion starring 9 weapons, including well-known AK varia
 
 <h2>Heavy Metal<i>(New!)</i></h2>
 <p><input type='submit' value='Open Workshop' onclick='console.log("RUNLUA:gui.OpenURL(\"https://steamcommunity.com/sharedfiles/filedetails/?id=3102297293\")")' /></p>
-<p>A pack born out of a spontaneous idea, more niche in its focus, with 6 brand new, ridiculously powerful weapons for when standard power weaponry just isn't enough.
+<p>A pack born out of a spontaneous idea, more niche in its focus, with 7 brand new, ridiculously powerful weapons for when standard weaponry just isn't enough.
 <ul>
 <li>Pancor Jackhammer
 <li>H&K XM25 CDTE
 <li>Holland & Holland .600 Nitro Double Rifle
 <li>Franchi SPAS-12
+<li>Franchi SPAS-15
 <li>Taurus Raging Judge "Executioner"
 <li>SSK .950 JDJ "Fat Mac" (you can shoulder fire it because video gane)
 </ul>
@@ -583,13 +594,15 @@ The Soviet/AK themed expansion starring 9 weapons, including well-known AK varia
 
 <h3>Changelist</h3>
 <ul>
-<li><b>Added:</b> (Special Delivery) Sounds for ejected shells hitting the ground to the Double Defense.
+<li><b>Added:</b> (ArmaLite Revolution) M16A1 refurbished bolt.
+<li><b>Added:</b> (Special Delivery) Double Defense ejected shells sound.
 <li><b>Fixed:</b> (Brute Force) M9 Bayonet misaligned worldmodel.
 <li><b>Changed:</b> (InterOps) Colt SMG restricted to using Colt 3x20 scope only.
 <li><b>Changed:</b> (InterOps) Chinalake now in launcher category.
+<li><b>Changed:</b> (InterOps) Automag animation touch-ups.
 <li><b>Changed:</b> (Special Delivery) Gyrojet updates - New firing sound, new animations, now in the "Special Weapon" category along with the Fat Mac.
 <li><b>Changed:</b> (Special Delivery) WA2000 animation improvements.
-<li><b>Changed:</b> (Special Delivery) Dual Berettas, USPs, 1911's & Deagles tactical attachment slot.
+<li><b>Changed:</b> (Special Delivery) Dual Berettas, USPs, 1911s & Deagles tactical attachment slot.
 </ul>]],
     },
 }
