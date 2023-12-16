@@ -193,6 +193,16 @@ function SWEP:GetMeleePerkCooldown(base)
     end
 end
 
+function SWEP:GetMeleePerkSpeed(base)
+    local valfunc = base and self.GetBaseValue or self.GetValue
+    local stat = valfunc(self, "MeleePerkAgi")
+    if stat >= 0.5 then
+        return Lerp((stat - 0.5) * 2, 1, 1.5)
+    else
+        return Lerp(stat * 2, 0.5, 1)
+    end
+end
+
 function SWEP:GetMeleePerkVelocity(base)
     local valfunc = base and self.GetBaseValue or self.GetValue
     local stat = valfunc(self, "MeleePerkInt")

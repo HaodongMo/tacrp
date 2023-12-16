@@ -47,23 +47,24 @@ ATT.Hook_PreReload = function(wep)
 
     local ang = Angle(0, ply:GetAngles().y, 0)
     local vel
+    local mult = wep:GetMeleePerkSpeed()
 
     if ply:IsOnGround() and ply:Crouching() then
         local ang2 = ply:GetAngles()
         ang2.p = math.min(-70, ang2.p)
-        vel = ang2:Forward() * 800
+        vel = ang2:Forward() * mult * 800
         if SERVER then
             ply:EmitSound("physics/concrete/boulder_impact_hard" .. math.random(1, 4) .. ".wav", 70, 120, 0.5)
             makesound(ply, 100)
         end
     elseif ply:IsOnGround() then
-        vel = ang:Forward() * (400 + math.max(0, 500 - ang:Forward():Dot(ply:GetVelocity()))) + Vector(0, 0, 300)
+        vel = ang:Forward() * mult * (400 + math.max(0, 500 - ang:Forward():Dot(ply:GetVelocity()))) + Vector(0, 0, 300)
         if SERVER then
             makesound(ply, 92)
         end
     else
         local int = math.Clamp(ply:GetVelocity():Dot(ply:GetAngles():Forward()) ^ 0.9, 0, 500)
-        vel = ply:GetVelocity() * -1 + ply:GetAngles():Forward() * (int + 600)
+        vel = ply:GetVelocity() * -1 + ply:GetAngles():Forward() * mult * (int + 600)
         if SERVER then
             makesound(ply, 110)
         end
@@ -73,7 +74,7 @@ ATT.Hook_PreReload = function(wep)
 
     ply:DoCustomAnimEvent(PLAYERANIMEVENT_JUMP, -1)
 
-    ply:SetVelocity(vel * Lerp(wep:GetValue("MeleePerkAgi"), 0.6, 1.4))
+    ply:SetVelocity(vel)
 
     -- so client can draw the effect. blehhhh
     if game.SinglePlayer() and SERVER then wep:CallOnClient("Reload") end
@@ -87,12 +88,12 @@ ATT.Hook_PreReload = function(wep)
     return true
 end
 
-ATT.Hook_PostThink = function(wep)
-    local ply = wep:GetOwner()
-    if (game.SinglePlayer() or IsFirstTimePredicted()) and ply:GetNWFloat("TacRPLastLeap", 0) + 1 < CurTime() then
-        ply:SetNWFloat("TacRPDashCharge", math.min(1, ply:GetNWFloat("TacRPDashCharge", 0) + FrameTime() / (wep:GetValue("MeleeDashChargeTime") or 7.5)))
-    end
-end
+-- ATT.Hook_PostThink = function(wep)
+--     local ply = wep:GetOwner()
+--     if (game.SinglePlayer() or IsFirstTimePredicted()) and ply:GetNWFloat("TacRPLastLeap", 0) + 1 < CurTime() then
+--         ply:SetNWFloat("TacRPDashCharge", math.min(1, ply:GetNWFloat("TacRPDashCharge", 0) + FrameTime() / (wep:GetValue("MeleeDashChargeTime") or 7.5)))
+--     end
+-- end
 
 --[[]
 function ATT.TacticalDraw(self)

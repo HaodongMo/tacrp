@@ -167,7 +167,7 @@ function ENT:Impact(data, collider)
         })
     end
 
-    self:SetCollisionGroup(COLLISION_GROUP_DEBRIS)
+    -- self:SetCollisionGroup(COLLISION_GROUP_DEBRIS)
 
     if self.DamageType == DMG_SLASH and (tgt:IsWorld() or (IsValid(tgt) and tgt:GetPhysicsObject():IsValid())) then
         local angles = data.OurOldVelocity:Angle()
@@ -175,7 +175,6 @@ function ENT:Impact(data, collider)
         self:GetPhysicsObject():Sleep()
 
         timer.Simple(0, function()
-            self:SetCollisionGroup(COLLISION_GROUP_DEBRIS)
             if tgt:IsWorld() or (IsValid(tgt) and (!(tgt:IsNPC() or tgt:IsPlayer()) or tgt:Health() > 0)) then
                 self:SetSolid(SOLID_NONE)
                 self:SetMoveType(MOVETYPE_NONE)
