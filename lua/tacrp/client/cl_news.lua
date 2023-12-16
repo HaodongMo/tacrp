@@ -566,7 +566,14 @@ The Soviet/AK themed expansion starring 9 weapons, including well-known AK varia
 <li><b>Fixed:</b> Multiplayer attachment bodygroup networking issue.
 <li><b>Fixed:</b> Multiplayer hold breath meter jitteryness.
 <li><b>Fixed:</b> Multiplayer autosave playing deploy animation twice.
-</ul>]],
+</ul>
+
+<hr>
+
+<p>For those wanting to follow TacRP more closely, as well as anything else I or 8Z are working on, we now have our own Discord server! Join GMod Hyperrealism today!
+<p><input type='submit' value='Join Server' onclick='console.log("RUNLUA:gui.OpenURL(\"https://discord.gg/w4n4FZmDtF\")")' /></p>
+
+]],
     },
     {
         Title = "U17 Expansions",
