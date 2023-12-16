@@ -513,12 +513,13 @@ The Soviet/AK themed expansion starring 9 weapons, including well-known AK varia
     {
         Title = "Update 17",
         Type = "Patch Notes",
-        Date = "2023-12-10",
+        Date = "2023-12-16",
         Author = "speedonerd",
         Major = false,
         Summary = "New Years update!",
         Contents = [[<body style="font-family:'Myriad Pro';color:white;font-size:125%;">
-<p>This is speedonerd speaking! I'm the other guy who works on this mess, mainly spending nights in Blender assigning vertex groups and moving keyframes around while working with nearly-20-year-old models from Gamebanana. We have a quick 'n' dirty update with a couple of changes and additions, mostly under the hood, to give the user more freedom to customize the experience and address major network issues.</p>
+<p>This is speedonerd speaking! I'm the other guy who works on this mess, mainly spending nights in Blender assigning vertex groups and moving keyframes around while working with nearly-20-year-old models from Gamebanana.
+<p>We've got quite the update here, one that brought on more things than we initially anticipated adding, including a bunch of new configuration options and a total melee system rework.
 
 <h2>drop me avp plz</h2>
 <p>There's now a dedicated button in the customization menu to drop your current weapon, with dropped weapons able to be picked up with your 'use' key. 
@@ -533,12 +534,14 @@ The Soviet/AK themed expansion starring 9 weapons, including well-known AK varia
 <p>They can all be found under Movement in the Mechanics tab.
 
 <h2>What happened to my freakin' car?!</h2>
-<p>Fighting against vehicles with TacRP will now be a lot less infuriating thanks to some hackery and workarounds to make infantry-to-vehicle combat functional.
-<p>LVS vehicles (both land and air) can now be damaged with gunfire and penetrated by RPG rockets. Combine Hunter Choppers, infamous for their hardcoded immunity to everything but airboat gun damage, can now take damage from direct hits with RPG rockets.
+<p>Fighting against vehicles with TacRP will now be a lot more interesting thanks to some hackery and workarounds to make infantry-to-vehicle combat functional.
+<p>TacRP now uses LVS' armor penetration system, allowing gunfire, shot grenades and RPG rockets to pierce vehicle armor and deal damage based on the amount they pentrate (calculated via projectile velocity). 
+<p>Combine Hunter Choppers, infamous for their hardcoded immunity to everything but airboat gun damage, can now take damage from direct hits with RPG rockets.
 
 <h2>Now this...is a knife.</h2>
 <p>TacRP's melee system has been very superficial for a while now with little statistical difference between weapons (which is especially prominent if you have Brute Force installed) and were more goofy than they were actually viable. 
-<p>We've reworked the melee system with a host of new features, including actual weapon stats and a new attachment slot: Boost, which allows you to affect the stats of your weapon in different ways. 
+<p>As such, we've remade the melee system with a host of new features, including actual weapon stats and a new attachment slot: Boost, which acts as a perk slot with various passive benefits from simple stat boosts to unique effects like regaining health. 
+<p>The base pack's knives and every weapon from Brute Force have been updated to use this new system.
 
 <hr>
 
@@ -568,7 +571,7 @@ The Soviet/AK themed expansion starring 9 weapons, including well-known AK varia
     {
         Title = "U17 Expansions",
         Type = "Patch Notes",
-        Date = "2023-12-10",
+        Date = "2023-12-16",
         Author = "speedonerd",
         Major = false,
         Summary = "Another new pack, plus some touch ups to existing ones.",
@@ -597,6 +600,7 @@ The Soviet/AK themed expansion starring 9 weapons, including well-known AK varia
 <li><b>Added:</b> (ArmaLite Revolution) M16A1 refurbished bolt.
 <li><b>Added:</b> (Special Delivery) Double Defense ejected shells sound.
 <li><b>Fixed:</b> (Brute Force) M9 Bayonet misaligned worldmodel.
+<li><b>Rebalance:</b> (Brute Force) All weapons have been updated to make use of the new melee stat system.
 <li><b>Changed:</b> (InterOps) Colt SMG restricted to using Colt 3x20 scope only.
 <li><b>Changed:</b> (InterOps) Chinalake now in launcher category.
 <li><b>Changed:</b> (InterOps) Automag animation touch-ups.
