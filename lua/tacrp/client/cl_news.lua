@@ -552,8 +552,8 @@ The Soviet/AK themed expansion starring 9 weapons, including well-known AK varia
 <li><b>Added:</b> Old School balance mode. Enter "tacrp_balance 4" in console to access.
 <li><b>Added:</b> CVars for toggling specific movement penalties.
 <li><b>Added:</b> Restored concealment accessory. Hides weapon when holstered.
-<li><b>Changed:</b> TacRP weapons can now damage armored LVS vehicles, using Material Penetration for penetration power.
 <li><b>Added:</b> Bipod hint will now draw with backup HUD.
+<li><b>Changed:</b> Gunfire can now penetrate LVS vehicles.
 <li><b>Changed:</b> RPG rockets can now penetrate LVS vehicles and damage Combine Helicopter NPCs on a direct hit.
 <li><b>Changed:</b> RPG-7 & M320 moved to separate launchers weapon category.
 <li><b>Changed:</b> Added "Special Weapon" category for unorthodox weapons that don't fit any other category (currently only used by expansion weapons).
@@ -570,7 +570,7 @@ The Soviet/AK themed expansion starring 9 weapons, including well-known AK varia
 
 <hr>
 
-<p>For those wanting to follow TacRP more closely, as well as anything else I or 8Z are working on, we now have our own Discord server! Join GMod Hyperrealism today!
+<p>For those wanting to follow TacRP, as well as anything else I or 8Z are working on, we now have our own Discord server! Join GMod Hyperrealism today!
 <p><input type='submit' value='Join Server' onclick='console.log("RUNLUA:gui.OpenURL(\"https://discord.gg/w4n4FZmDtF\")")' /></p>
 
 ]],
@@ -581,7 +581,7 @@ The Soviet/AK themed expansion starring 9 weapons, including well-known AK varia
         Date = "2023-12-16",
         Author = "speedonerd",
         Major = false,
-        Summary = "Another new pack, plus some touch ups to existing ones.",
+        Summary = "New Year, New Weapons.",
         Contents = [[<body style="font-family:'Myriad Pro';color:white;font-size:125%;">
 <p>My creative spark refuses to die and the weapon list only grows (we'll probably hit 200 before the end of 2024), so out comes yet another expansion, along with further touch ups to existing ones.
 
