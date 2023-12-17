@@ -518,7 +518,7 @@ The Soviet/AK themed expansion starring 9 weapons, including well-known AK varia
         Major = false,
         Summary = "New Years update!",
         Contents = [[<body style="font-family:'Myriad Pro';color:white;font-size:125%;">
-<p>This is speedonerd speaking! I'm the other guy who works on this mess, mainly spending nights in Blender assigning vertex groups and moving keyframes around while working with nearly-20-year-old models from Gamebanana.
+<p>This is speedonerd speaking! I'm one of the other people working on this mess, mainly in the asset department (models, sounds, animations).
 <p>We've got quite the update here, one that brought on more things than we initially anticipated adding, including a bunch of new configuration options and a total melee system rework.
 
 <h2>drop me avp plz</h2>
@@ -559,6 +559,7 @@ The Soviet/AK themed expansion starring 9 weapons, including well-known AK varia
 <li><b>Changed:</b> Added "Special Weapon" category for unorthodox weapons that don't fit any other category (currently only used by expansion weapons).
 <li><b>Changed:</b> Dual MTX tactical attachment slot, attached to the right gun.
 <li><b>Changed:</b> New Deadeye and Grenadier icons.
+<li><b>Changed:</b> New trigger category for 4-position FCG weapons (weapons with auto, burst & semi modes). Blocks the Forced Reset and Burst triggers.
 <li><b>Rebalance:</b> RPG rockets do more direct impact damage.
 <li><b>Rebalance:</b> Deadeye grants increased zoom distance (again).
 <li><b>Fixed:</b> Customization slot icon flash behavior causing errors.
@@ -608,6 +609,7 @@ The Soviet/AK themed expansion starring 9 weapons, including well-known AK varia
 <li><b>Added:</b> (Special Delivery) Double Defense ejected shells sound.
 <li><b>Fixed:</b> (Brute Force) M9 Bayonet misaligned worldmodel.
 <li><b>Rebalance:</b> (Brute Force) All weapons have been updated to make use of the new melee stat system.
+<li><b>Changed:</b> (InterOps) Replaced Five-Seven model and firing sounds.
 <li><b>Changed:</b> (InterOps) Colt SMG restricted to using Colt 3x20 scope only.
 <li><b>Changed:</b> (InterOps) Chinalake now in launcher category.
 <li><b>Changed:</b> (InterOps) Automag animation touch-ups.
