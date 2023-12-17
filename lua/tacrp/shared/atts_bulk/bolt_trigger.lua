@@ -301,7 +301,7 @@ ATT.Description = "Trigger that allows continuous burst fire while held."
 ATT.Pros = {"att.procon.autoburst"}
 ATT.Cons = {}
 
-ATT.Category = {"trigger_burst", "trigger_burstauto"}
+ATT.Category = {"trigger_burst", "trigger_burstauto", "trigger_4pos"}
 
 ATT.SortOrder = 4
 
@@ -324,7 +324,7 @@ ATT.Description = "Lightweight trigger for sports shooting."
 ATT.Pros = {"stat.recoilfirstshot", "stat.recoilstability"}
 ATT.Cons = {"stat.recoilmaximum"}
 
-ATT.Category = {"trigger_semi", "trigger_auto", "trigger_burst", "trigger_akimbo", "trigger_revolver", "trigger"}
+ATT.Category = {"trigger_semi", "trigger_auto", "trigger_burst", "trigger_akimbo", "trigger_revolver", "trigger", "trigger_4pos"}
 
 ATT.SortOrder = 2
 
@@ -448,7 +448,7 @@ ATT.Description = "Heavy trigger for sustained fire."
 ATT.Pros = {"stat.recoilmaximum"}
 ATT.Cons = {"stat.recoilfirstshot", "stat.recoilstability"}
 
-ATT.Category = {"trigger_semi", "trigger_auto", "trigger_burst", "trigger_akimbo", "trigger_revolver", "trigger"}
+ATT.Category = {"trigger_semi", "trigger_auto", "trigger_burst", "trigger_akimbo", "trigger_revolver", "trigger", "trigger_4pos"}
 
 ATT.SortOrder = 3
 
@@ -497,7 +497,7 @@ ATT.Description = "Trigger that sacrfices automatic fire for precision."
 ATT.Pros = {"stat.spread", "stat.recoil"}
 ATT.Cons = {"att.procon.semi"}
 
-ATT.Category = {"trigger_auto", "trigger_burst"}
+ATT.Category = {"trigger_auto", "trigger_burst", "trigger_4pos"}
 
 ATT.SortOrder = 1
 
@@ -580,7 +580,7 @@ ATT.Description = "Narrow trigger with superior recoil performance."
 ATT.Pros = {"stat.bloomintensity", "stat.recoildissipation"}
 ATT.Cons = {"stat.recoilresettime", "stat.shootingspeed"}
 
-ATT.Category = {"trigger_auto", "trigger_straight"}
+ATT.Category = {"trigger_auto", "trigger_straight", "trigger_4pos"}
 
 ATT.SortOrder = 5.5
 
