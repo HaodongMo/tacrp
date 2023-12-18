@@ -16,7 +16,7 @@ SWEP.Trivia_Caliber = "40mm Rockets"
 SWEP.Trivia_Manufacturer = "NPO Bazalt"
 SWEP.Trivia_Year = "1961"
 
-SWEP.Faction = TacRP.FACTION_NEUTRAL
+SWEP.Faction = TacRP.FACTION_MILITIA
 SWEP.Credits = "Assets: Tactical Intervention"
 
 SWEP.ViewModel = "models/weapons/tacint/v_rpg7.mdl"
