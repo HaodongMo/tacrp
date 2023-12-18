@@ -513,7 +513,7 @@ The Soviet/AK themed expansion starring 9 weapons, including well-known AK varia
     {
         Title = "Update 17",
         Type = "Patch Notes",
-        Date = "2023-12-16",
+        Date = "2023-12-18",
         Author = "speedonerd",
         Major = false,
         Summary = "New Years update!",
@@ -525,23 +525,25 @@ The Soviet/AK themed expansion starring 9 weapons, including well-known AK varia
 <p>There's now a dedicated button in the customization menu to drop your current weapon, with dropped weapons able to be picked up with your 'use' key. 
 <p>This synergizes with weapon slot restrictions, allowing you to swap weapons with any gun you find lying around with the press of a button.
 
-<h2>You kids today don't know how to circlestrafe!</h2>
-<p>Do you yearn for the good old days, when shooters were fun because they didn't have depth or good game balance? I did for a brief period, and it compelled me to quickly integrate a new balance mode that removed ironsights and tightened up weapon spread. 
-<p>It didn't really pan out how I had hoped—TacRP is built around so many modern mechanics and systems that it's hard to make it "old school" without stripping away nearly all of them. Regardless, what I ended up with before abandoning it is still accessible via the console for preservation's sake, if you're interested.
-
 <h2>It's like wading through molasses.</h2>
 <p>In case you don't like how a certain balancing scheme punishes movement, there are now convars for each of the movement penalties that let you turn them off individually. 
 <p>They can all be found under Movement in the Mechanics tab.
 
 <h2>What happened to my freakin' car?!</h2>
 <p>Fighting against vehicles with TacRP will now be a lot more interesting thanks to some hackery and workarounds to make infantry-to-vehicle combat functional.
-<p>TacRP now uses LVS' armor penetration system, allowing gunfire, shot grenades and RPG rockets to pierce vehicle armor and deal damage based on the amount they pentrate (calculated via projectile velocity). 
-<p>Combine Hunter Choppers, infamous for their hardcoded immunity to everything but airboat gun damage, can now take damage from direct hits with RPG rockets.
+<p>TacRP now works with LVS' armor penetration system, allowing gunfire, launched grenades and rockets to pierce vehicle armor. 
+<p>Combine Hunter Choppers, infamous for their hardcoded immunity to everything but airboat gun damage, can now take damage from direct hits with rockets.
 
 <h2>Now this...is a knife.</h2>
 <p>TacRP's melee system has been very superficial for a while now with little statistical difference between weapons (which is especially prominent if you have Brute Force installed) and were more goofy than they were actually viable. 
 <p>As such, we've remade the melee system with a host of new features, including actual weapon stats and a new attachment slot: Boost, which acts as a perk slot with various passive benefits from simple stat boosts to unique effects like regaining health. 
 <p>The base pack's knives and every weapon from Brute Force have been updated to use this new system.
+
+<h2>You kids today don't know how to circlestrafe!</h2>
+<p>Do you yearn for the good old days, when shooters were fun because they didn't have depth or good game balance? I did for a brief period, and it compelled me to quickly integrate a new balance mode that removed ironsights and tightened up weapon spread. 
+<p>It didn't really pan out how I had hoped—TacRP is built around so many modern mechanics and systems that it's hard to make it "old school" without stripping away nearly all of them. 
+<p>Regardless, what I ended up with before abandoning it is still accessible via the console for preservation's sake, if you're interested.
+
 
 <hr>
 
@@ -549,10 +551,11 @@ The Soviet/AK themed expansion starring 9 weapons, including well-known AK varia
 <ul>
 <li><b>Added:</b> New icons for Deadeye and Grenadier.
 <li><b>Added:</b> Weapon dropping and swapping. TacRP weapons will now require pressing +USE to pick up - this can be disabled.
-<li><b>Added:</b> Old School balance mode. Enter "tacrp_balance 4" in console to access.
+<li><b>Added:</b> Unfinished Old School balance mode. Enter "tacrp_balance 4" in console to access.
 <li><b>Added:</b> CVars for toggling specific movement penalties.
 <li><b>Added:</b> Restored concealment accessory. Hides weapon when holstered.
 <li><b>Added:</b> Bipod hint will now draw with backup HUD.
+<li><b>Added:</b> 40mm grenade casing eject effect.
 <li><b>Changed:</b> Gunfire can now penetrate LVS vehicles.
 <li><b>Changed:</b> RPG rockets can now penetrate LVS vehicles and damage Combine Helicopter NPCs on a direct hit.
 <li><b>Changed:</b> RPG-7 & M320 moved to separate launchers weapon category.
@@ -579,7 +582,7 @@ The Soviet/AK themed expansion starring 9 weapons, including well-known AK varia
     {
         Title = "U17 Expansions",
         Type = "Patch Notes",
-        Date = "2023-12-16",
+        Date = "2023-12-18",
         Author = "speedonerd",
         Major = false,
         Summary = "New Year, New Weapons.",
@@ -590,11 +593,12 @@ The Soviet/AK themed expansion starring 9 weapons, including well-known AK varia
 
 <h2>Heavy Metal<i>(New!)</i></h2>
 <p><input type='submit' value='Open Workshop' onclick='console.log("RUNLUA:gui.OpenURL(\"https://steamcommunity.com/sharedfiles/filedetails/?id=3102297293\")")' /></p>
-<p>A pack born out of a spontaneous idea, more niche in its focus, with 7 brand new, ridiculously powerful weapons for when standard weaponry just isn't enough.
+<p>A pack born out of a spontaneous idea, more niche in its focus, with 8 brand new, ridiculously powerful weapons for when standard weaponry just isn't enough.
 <ul>
 <li>Pancor Jackhammer
 <li>H&K XM25 CDTE
-<li>Holland & Holland .600 Nitro Double Rifle
+<li>Mk 153 SMAW
+<li>CheyTac M200 Intervention
 <li>Franchi SPAS-12
 <li>Franchi SPAS-15
 <li>Taurus Raging Judge "Executioner"
@@ -611,9 +615,9 @@ The Soviet/AK themed expansion starring 9 weapons, including well-known AK varia
 <li><b>Rebalance:</b> (Brute Force) All weapons have been updated to make use of the new melee stat system.
 <li><b>Changed:</b> (InterOps) Replaced Five-Seven model and firing sounds.
 <li><b>Changed:</b> (InterOps) Colt SMG restricted to using Colt 3x20 scope only.
-<li><b>Changed:</b> (InterOps) Chinalake now in launcher category.
+<li><b>Changed:</b> (InterOps) China Lake revamp - Touched up animations, now ejects spent casings.
 <li><b>Changed:</b> (InterOps) Automag animation touch-ups.
-<li><b>Changed:</b> (Special Delivery) Gyrojet updates - New firing sound, new animations, now in the "Special Weapon" category along with the Fat Mac.
+<li><b>Changed:</b> (Special Delivery) Gyrojet revamp - New firing sound, new animations, now in the "Special Weapon" category along with the Fat Mac.
 <li><b>Changed:</b> (Special Delivery) WA2000 animation improvements.
 <li><b>Changed:</b> (Special Delivery) Dual Berettas, USPs, 1911s & Deagles tactical attachment slot.
 </ul>]],
