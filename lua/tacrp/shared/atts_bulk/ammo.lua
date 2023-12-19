@@ -50,24 +50,25 @@ ATT.Category = "ammo_40mm"
 
 ATT.SortOrder = 2
 
-ATT.ShootEnt = false
+ATT.Override_ShootEnt = false
 
 ATT.NoRanger = false
 
-ATT.Damage_Max = 10
-ATT.Damage_Min = 3
-ATT.Num = 24
-ATT.Range_Min = 100
-ATT.Range_Max = 1500
-ATT.PenetrationOverride = 0
+ATT.Override_Damage_Max = 10
+ATT.Override_Damage_Min = 3
+ATT.Override_Num = 24
+ATT.Override_Range_Min = 100
+ATT.Override_Range_Max = 1500
 
-ATT.Spread = 0.05
-ATT.ShotgunPelletSpread = 0.015
+ATT.Override_Spread = 0.06
+ATT.Override_ShotgunPelletSpread = 0.04
 
-ATT.MuzzleVelocity = 9500
+ATT.Override_HipFireSpreadPenalty = 0
+
+ATT.Override_MuzzleVelocity = 9500
 
 ATT.Override_Sound_ShootAdd = "^TacRP/weapons/m4star10/fire-2.wav"
-ATT.Pitch_Shoot = 95
+ATT.Override_Pitch_Shoot = 95
 
 ATT.DoorBreach = true
 ATT.DoorBreachThreshold = 120
@@ -126,26 +127,29 @@ ATT.Category = "ammo_40mm"
 
 ATT.SortOrder = 2.5
 
-ATT.ShootEnt = false
+ATT.Override_ShootEnt = false
 
 ATT.InstalledElements = {"buck"} --{"heat"}
 
-ATT.NoRanger = false
+ATT.Override_NoRanger = false
 
-ATT.Damage_Max = 34
-ATT.Damage_Min = 5
-ATT.Num = 8
-ATT.Range_Min = 250
-ATT.Range_Max = 2000
-ATT.Penetration = 6
+ATT.Override_Damage_Max = 30
+ATT.Override_Damage_Min = 6
+ATT.Override_Num = 8
+ATT.Override_Range_Min = 400
+ATT.Override_Range_Max = 2000
+ATT.Override_Penetration = 6
 
-ATT.Spread = 0.015
-ATT.ShotgunPelletSpread = 0.01
+ATT.Override_Spread = 0.015
+ATT.Override_ShotgunPelletSpread = 0.01
+
+ATT.Override_HipFireSpreadPenalty = 0.03
+
 
 ATT.MuzzleVelocity = 15000
 
 ATT.Override_Sound_ShootAdd = "^tacrp/weapons/m4star10/fire-2.wav"
-ATT.Pitch_Shoot = 110
+ATT.Override_Pitch_Shoot = 110
 
 if engine.ActiveGamemode() == "terrortown" then
     ATT.Free = true
