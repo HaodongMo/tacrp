@@ -23,15 +23,15 @@ SWEP.NoStatBox = false
 SWEP.Slot = 0
 
 SWEP.MeleeDamage = 30
-SWEP.MeleeAttackTime = 0.35
+SWEP.MeleeAttackTime = 0.37
 SWEP.MeleeAttackMissTime = 0.45
 SWEP.MeleeDelay = 0.12
 
 SWEP.MeleeDamageType = DMG_SLASH
 
-SWEP.MeleePerkStr = 0.3
+SWEP.MeleePerkStr = 0.5
 SWEP.MeleePerkAgi = 0.6
-SWEP.MeleePerkInt = 0.6
+SWEP.MeleePerkInt = 0.65
 
 // hold types
 
