@@ -37,6 +37,13 @@ SWEP.DrawCrosshair = true
 SWEP.DrawCrosshairInSprint = true
 SWEP.CrosshairStatic = true
 
+SWEP.MeleeDamage = 25
+SWEP.MeleeAttackTime = 0.8
+SWEP.MeleeAttackMissTime = 1
+SWEP.MeleeRange = 72
+SWEP.MeleeDamageType = DMG_GENERIC
+SWEP.MeleeDelay = 0.25
+
 // misc. shooting
 
 SWEP.Ammo = ""
@@ -105,15 +112,15 @@ SWEP.ShieldProps = {
 }
 
 // attachments
-
-SWEP.Attachments = {
+SWEP.Attachments = {}
+--[[]
     [1] = {
         PrintName = "Perk",
         Category = {"perk_melee", "perk_throw"},
         AttachSound = "TacRP/weapons/flashlight_on.wav",
         DetachSound = "TacRP/weapons/flashlight_off.wav",
     }
-}
+]]
 
 function SWEP:PrimaryAttack()
     self.Primary.Automatic = true
@@ -317,8 +324,4 @@ if engine.ActiveGamemode() == "terrortown" then
         type = "Weapon",
         desc = "Blocks most bullets and melee attacks from the front.\nSlows the user while held.",
     }
-
-    function SWEP:TTTBought(buyer)
-        buyer:GiveAmmo(1, "RPG_Round")
-    end
 end
