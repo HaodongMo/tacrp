@@ -1184,7 +1184,7 @@ SWEP.StatGroupsMelee = {
         RatingFunction = function(self, base)
             local valfunc = base and self.GetBaseValue or self.GetValue
 
-            return Lerp((valfunc(self, "MeleeDamage")) / 60, 0, 100)
+            return Lerp((valfunc(self, "MeleeDamage") - 10) / 50, 0, 100)
         end,
     },
     {
