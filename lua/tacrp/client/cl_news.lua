@@ -513,7 +513,7 @@ The Soviet/AK themed expansion starring 9 weapons, including well-known AK varia
     {
         Title = "Update 17",
         Type = "Patch Notes",
-        Date = "2023-12-18",
+        Date = "2023-12-20",
         Author = "speedonerd",
         Major = false,
         Summary = "New Years update!",
@@ -582,7 +582,7 @@ The Soviet/AK themed expansion starring 9 weapons, including well-known AK varia
     {
         Title = "U17 Expansions",
         Type = "Patch Notes",
-        Date = "2023-12-18",
+        Date = "2023-12-20",
         Author = "speedonerd",
         Major = false,
         Summary = "New Year, New Weapons.",
@@ -600,7 +600,7 @@ The Soviet/AK themed expansion starring 9 weapons, including well-known AK varia
 <li>Mk 153 SMAW
 <li>CheyTac M200 Intervention
 <li>Franchi SPAS-12
-<li>Franchi SPAS-15
+<li>AMT Hardballer Longslide
 <li>Taurus Raging Judge "Executioner"
 <li>SSK .950 JDJ "Fat Mac" (you can shoulder fire it because video gane)
 </ul>
