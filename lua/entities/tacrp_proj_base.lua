@@ -54,6 +54,10 @@ ENT.BounceSounds = nil
 
 ENT.CollisionSphere = nil
 
+function ENT:SetupDataTables()
+    self:NetworkVar("Entity", 0, "Weapon")
+end
+
 function ENT:Initialize()
     if SERVER then
         self:SetModel(self.Model)

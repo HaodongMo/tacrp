@@ -30,6 +30,7 @@ ENT.ExplodeSounds = {
 }
 
 function ENT:SetupDataTables()
+    self:NetworkVar("Entity", 0, "Weapon")
     self:NetworkVar("Bool", 0, "Remote")
     self:NetworkVar("Float", 0, "ArmTime")
 end

@@ -598,6 +598,9 @@ function SWEP:ShootRocket(dir)
     end
     rocket.Inflictor = self
     rocket:SetAngles(dir)
+    if isfunction(rocket.SetWeapon) then
+        rocket:SetWeapon(self)
+    end
     rocket:Spawn()
 
     local phys = rocket:GetPhysicsObject()

@@ -28,6 +28,7 @@ ENT.FlareColor = Color(255, 50, 0)
 DEFINE_BASECLASS(ENT.Base)
 
 function ENT:SetupDataTables()
+    self:NetworkVar("Entity", 0, "Weapon")
     self:NetworkVar("Bool", 0, "NoBooster")
 end
 

@@ -29,6 +29,7 @@ DEFINE_BASECLASS(ENT.Base)
 
 function ENT:SetupDataTables()
     self:NetworkVar("Bool", 0, "NoBooster")
+    self:NetworkVar("Entity", 0, "Weapon")
 end
 
 function ENT:Initialize()
