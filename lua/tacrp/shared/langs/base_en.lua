@@ -275,6 +275,7 @@ L["stat.blindfiresway"] = "Blindfire Sway"
 L["stat.zoom"] = "Aim Zoom"
 L["stat.bloomintensity"] = "Bloom Intensity"
 
+
 L["att.acc_extmag.name"] = "Mag Extender"
 L["att.acc_extmag.name.full"] = "Extended Magazine"
 L["att.acc_extmag.desc"] = "Slightly increase weapon capacity."
@@ -340,6 +341,11 @@ L["att.procon.explosive"] = "Explosive"
 L["att.procon.reliability"] = "Reliability"
 L["att.procon.noscope"] = "No Scope"
 L["att.procon.conceal"] = "Hide weapon while holstered"
+L["att.procon.armdelay"] = "Arming Delay"
+
+L["att.procon.rocket.speed"] = "Rocket Top Speed"
+L["att.procon.rocket.steer"] = "Rocket Steering"
+L["att.procon.rocket.payload"] = "Payload Effectiveness"
 
 L["att.sight.1"] = "1x Sight"
 L["att.sight.1.25"] = "1.25x Sight"

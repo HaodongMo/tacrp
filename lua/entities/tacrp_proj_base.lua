@@ -45,6 +45,8 @@ ENT.Armed = false
 
 ENT.SmokeTrail = false // leaves trail of smoke
 ENT.FlareColor = nil
+ENT.FlareSizeMin = 200
+ENT.FlareSizeMax = 250
 
 ENT.AudioLoop = nil
 
@@ -98,6 +100,8 @@ function ENT:Initialize()
         self.ArmTime = CurTime()
         self.Armed = true
     end
+
+    self:OnInitialize()
 end
 
 function ENT:OnRemove()
@@ -209,6 +213,9 @@ end
 function ENT:OnThink()
 end
 
+function ENT:OnInitialize()
+end
+
 function ENT:Think()
     if !IsValid(self) or self:GetNoDraw() then return end
 
@@ -314,7 +321,7 @@ function ENT:Draw()
 
     if self.FlareColor then
         render.SetMaterial(mat)
-        render.DrawSprite(self:GetPos() + (self:GetAngles():Forward() * -16), math.Rand(200, 250), math.Rand(200, 250), self.FlareColor)
+        render.DrawSprite(self:GetPos() + (self:GetAngles():Forward() * -16), math.Rand(self.FlareSizeMin, self.FlareSizeMax), math.Rand(self.FlareSizeMin, self.FlareSizeMax), self.FlareColor)
     end
 end
 
