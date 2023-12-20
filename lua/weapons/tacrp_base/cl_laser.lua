@@ -4,15 +4,18 @@ local flaremat = Material("effects/whiteflare")
 function SWEP:DrawLaser(pos, ang, strength, thirdperson)
     strength = strength or 1
 
+    local alwaysacc = self:GetValue("LaserAlwaysAccurate")
     local behavior = (self:GetValue("ScopeHideWeapon") and self:IsInScope())
     local vm = self:GetOwner():IsPlayer() and self:GetOwner():GetViewModel()
     local curr_seq = IsValid(vm) and vm:GetSequenceName(vm:GetSequence())
 
     local delta = behavior and 1 or 0
 
-    if IsValid(vm) and TacRP.ConVars["true_laser"]:GetBool() and (self:GetBlindFireMode() <= 1) and !self:GetCustomize() and !behavior then
+    if IsValid(vm) and (alwaysacc or TacRP.ConVars["true_laser"]:GetBool()) and (self:GetBlindFireMode() <= 1) and !self:GetCustomize() and !behavior then
         local d1 = 1
-        if TacRP.ConVars["laser_beam"]:GetBool() then
+        if alwaysacc then
+            d1 = 1
+        elseif TacRP.ConVars["laser_beam"]:GetBool() then
             d1 = math.min((CurTime() - self:GetNextPrimaryFire()) / 2, (CurTime() - self:GetNextSecondaryFire()) / 2)
         elseif self:GetValue("RPM") < 120 then
             d1 = math.min(d1, (CurTime() - self:GetNextPrimaryFire()) / 0.5)
@@ -78,6 +81,20 @@ end
 
 function SWEP:DrawLasers(wm)
     wm = wm or false
+
+    if self.Laser and self:GetTactical() then
+        local power = self.LaserPower or 2
+        if wm then
+            self:DrawLaser(self:GetMuzzleOrigin(), self:GetShootDir(), power, true)
+        elseif IsValid(self:GetOwner():GetViewModel()) then
+            local vm = self:GetOwner():GetViewModel()
+            local att = vm:GetAttachment(self.LaserQCAttachment or 0)
+            if att then
+                local pos = TacRP.FormatViewModelAttachment(self.ViewModelFOV, att.Pos, false)
+                self:DrawLaser(pos, att.Ang, power)
+            end
+        end
+    end
 
     for i, k in pairs(self.Attachments) do
         if !k.Installed then continue end

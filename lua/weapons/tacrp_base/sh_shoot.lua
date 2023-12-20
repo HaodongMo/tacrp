@@ -609,6 +609,7 @@ function SWEP:ShootRocket(dir)
         else
             rocket.Attacker = self:GetOwner()
         end
+        rocket.Inflictor = self
         rocket:SetAngles(dir + dispersion)
         rocket:Spawn()
 
