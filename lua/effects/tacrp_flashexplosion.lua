@@ -11,13 +11,13 @@ function EFFECT:Init(data)
 
     local emitter = ParticleEmitter( self.Origin + Vector( 0, 0, 16 ) )
 
-    for i = 0,5 do
+    for i = 0, 5 do
         local particle = emitter:Add( TableRandomChoice(images_smoke) , self.Origin )
         local scol = math.Rand( 200, 225 )
 
         particle:SetVelocity( 250 * VectorRand() )
         particle:SetDieTime( math.Rand(1.5, 5) )
-        particle:SetStartAlpha( 150 )
+        particle:SetStartAlpha( 50 )
         particle:SetEndAlpha( 0 )
         particle:SetStartSize( math.Rand(100,200) )
         particle:SetEndSize( math.Rand(300,400) )
@@ -48,7 +48,7 @@ function EFFECT:Init(data)
         fire:SetStartAlpha( 255 )
         fire:SetEndAlpha( 0 )
         fire:SetEndSize( 0 )
-        fire:SetStartSize( 800 )
+        fire:SetStartSize( data:GetRadius() )
         fire:SetRoll( math.Rand(180,480) )
         fire:SetRollDelta( math.Rand(-1,1) )
         fire:SetColor( 255, 255, 255 )
@@ -59,9 +59,9 @@ function EFFECT:Init(data)
         light.r = 255
         light.g = 255
         light.b = 255
-        light.Brightness = 9
+        light.Brightness = 10 * data:GetScale()
         light.Decay = 2500
-        light.Size = 512
+        light.Size = data:GetRadius()
         light.DieTime = CurTime() + 0.1
     end
 

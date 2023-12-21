@@ -46,6 +46,7 @@ function ENT:Detonate()
         self:Remove()
         return
     else
+        fx:SetRadius(728)
         util.Effect("TacRP_flashexplosion", fx)
     end
 

@@ -45,6 +45,7 @@ function ENT:Detonate()
     if self:WaterLevel() > 0 then
         util.Effect("WaterSurfaceExplosion", fx)
     else
+        fx:SetRadius(512)
         util.Effect("TacRP_flashexplosion", fx)
         util.Effect("HelicopterMegaBomb", fx)
     end
