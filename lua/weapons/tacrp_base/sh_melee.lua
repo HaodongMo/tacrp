@@ -138,13 +138,15 @@ function SWEP:Melee(alt)
                 Src = start,
             })
         else
-            local tmiss = 0
+            local tmiss
             if !alt and self:GetValue("MeleeAttackMissTime") then
                 tmiss = self:GetValue("MeleeAttackMissTime")
             elseif alt then
                 tmiss = self:GetHeavyAttackTime(true, false)
             end
-            self:SetNextSecondaryFire(CurTime() + (tmiss - delay))
+            if tmiss then
+                self:SetNextSecondaryFire(CurTime() + (tmiss - delay))
+            end
             if delay == 0 then
                 self:EmitSound(self:ChooseSound(self:GetValue("Sound_MeleeSwing")), 75, 100, 1)
             end
