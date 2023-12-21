@@ -54,7 +54,7 @@ SWEP.Range_Max = 7000
 SWEP.Range_Min = 4000
 
 SWEP.ShootEnt = "tacrp_proj_rpg7"
-SWEP.ShootEntForce = 10000
+SWEP.ShootEntForce = 6000
 
 SWEP.Num = 1
 

@@ -698,6 +698,13 @@ local conVars = {
         min = 0,
         max = 1,
     },
+    {
+        name = "phystweak",
+        default = "1",
+        min = 0,
+        max = 1,
+        replicated = true,
+    },
 }
 
 TacRP.ConVars = {}

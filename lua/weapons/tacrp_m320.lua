@@ -53,7 +53,7 @@ SWEP.Range_Max = 4000
 SWEP.Range_Min = 1000
 
 SWEP.ShootEnt = "tacrp_proj_40mm_he"
-SWEP.ShootEntForce = 7000
+SWEP.ShootEntForce = 4000
 
 SWEP.BodyDamageMultipliers = {
     [HITGROUP_HEAD] = 1,

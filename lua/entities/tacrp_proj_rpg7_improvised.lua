@@ -61,8 +61,8 @@ function ENT:Initialize()
             end
             phys:AddAngleVelocity(VectorRand() * 180)
         else
-            self.BoostTime = math.Rand(1, 5)
-            phys:SetVelocityInstantaneous(self:GetForward() * math.Rand(1500, 4000))
+            self.BoostTime = math.Rand(1, 3)
+            phys:SetVelocityInstantaneous(self:GetForward() * math.Rand(3000, 6000))
         end
     end
 end
@@ -152,7 +152,7 @@ end
 function ENT:PhysicsUpdate(phys)
     if self:GetNoBooster() then return end
     local len = phys:GetVelocity():Length()
-    local f = math.Clamp(len / 4000, 0, 1)
+    local f = math.Clamp(len / 5000, 0, 1)
     if phys:IsGravityEnabled() then
         phys:AddVelocity(self:GetForward() * math.Rand(0, Lerp(f, 100, 10)))
         phys:AddAngleVelocity(VectorRand() * Lerp(f, 8, 2))

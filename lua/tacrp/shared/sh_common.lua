@@ -269,4 +269,13 @@ TacRP.ShellTypes = {
 }
 hook.Add("InitPostEntity", "tacrp_shelleffect", function()
     hook.Run("TacRP_LoadShellEffects", TacRP.ShellTypes)
+
+    if GetConVar("tacrp_phystweak"):GetBool() then
+        local v = physenv.GetPerformanceSettings().MaxVelocity
+        if v < 10000 then
+            physenv.SetPerformanceSettings({MaxVelocity = 10000})
+            print("[TacRP] Increasing MaxVelocity for projectiles to behave as intended! (" .. v .. "-> 10000)")
+            print("[TacRP] Disable this behavior with 'tacrp_phystweak 0'.")
+        end
+    end
 end)

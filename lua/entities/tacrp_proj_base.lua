@@ -136,7 +136,6 @@ function ENT:OnTakeDamage(dmg)
 end
 
 function ENT:PhysicsCollide(data, collider)
-
     if IsValid(data.HitEntity) and data.HitEntity:GetClass() == "func_breakable_surf" then
         self:FireBullets({
             Attacker = self:GetOwner(),
@@ -163,7 +162,6 @@ function ENT:PhysicsCollide(data, collider)
         end
 
         if self.Delay == 0 or self.ExplodeOnImpact then
-            self:SetPos(data.HitPos)
             self:PreDetonate()
         end
     elseif self.ImpactDamage > 0 and IsValid(data.HitEntity) and (engine.ActiveGamemode() != "terrortown" or !data.HitEntity:IsPlayer()) then

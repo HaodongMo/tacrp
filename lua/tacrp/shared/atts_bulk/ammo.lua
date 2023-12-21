@@ -741,7 +741,7 @@ ATT.Override_ShootEnt = "tacrp_proj_rpg7_mortar"
 ATT.Add_ShootingSpeedMult = 0.3
 ATT.Add_ReloadSpeedMult = 0.15
 
-ATT.Override_ShootEntForce = 5000
+ATT.Override_ShootEntForce = 3000
 
 if engine.ActiveGamemode() == "terrortown" then
     ATT.Free = true
@@ -767,7 +767,7 @@ ATT.Category = "ammo_rpg"
 ATT.SortOrder = 2
 
 ATT.Override_ShootEnt = "tacrp_proj_rpg7_ratshot"
-ATT.Override_ShootEntForce = 2000
+ATT.Override_ShootEntForce = 1000
 
 if engine.ActiveGamemode() == "terrortown" then
     ATT.Free = true
