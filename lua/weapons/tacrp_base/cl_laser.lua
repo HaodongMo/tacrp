@@ -84,11 +84,14 @@ function SWEP:DrawLasers(wm)
 
     if self.Laser and self:GetTactical() then
         local power = self.LaserPower or 2
-        if wm then
-            self:DrawLaser(self:GetMuzzleOrigin(), self:GetShootDir(), power, true)
-        elseif IsValid(self:GetOwner():GetViewModel()) then
+        if wm and self.LaserQCAttachmentWM then
+            local att = wm:GetAttachment(self.LaserQCAttachmentWM)
+            if att then
+                self:DrawLaser(att.Pos, att.Ang, power, true)
+            end
+        elseif IsValid(self:GetOwner():GetViewModel()) and self.LaserQCAttachmentVM then
             local vm = self:GetOwner():GetViewModel()
-            local att = vm:GetAttachment(self.LaserQCAttachment or 0)
+            local att = vm:GetAttachment(self.LaserQCAttachmentVM)
             if att then
                 local pos = TacRP.FormatViewModelAttachment(self.ViewModelFOV, att.Pos, false)
                 self:DrawLaser(pos, att.Ang, power)
@@ -101,17 +104,33 @@ function SWEP:DrawLasers(wm)
 
         local atttbl = TacRP.GetAttTable(k.Installed)
 
-        local power = 2
+        local power = atttbl.LaserPower or 2
 
         if atttbl.Laser and self:GetTactical() then
-            if wm and IsValid(k.WModel) then
-                if self:GetOwner():IsPlayer() then
-                    self:DrawLaser(k.WModel:GetPos(), self:GetShootDir(), power, true)
-                else
-                    self:DrawLaser(k.WModel:GetPos(), k.WModel:GetAngles(), power, true)
+            if wm then
+                if atttbl.LaserQCAttachmentWM then
+                    local att = self:GetAttachment(atttbl.LaserQCAttachmentWM)
+                    if att then
+                        self:DrawLaser(att.Pos, self:GetOwner():IsPlayer() and self:GetShootDir() or att.Ang, power, true)
+                    end
+                elseif IsValid(k.WModel) then
+                    if self:GetOwner():IsPlayer() then
+                        self:DrawLaser(k.WModel:GetPos(), self:GetShootDir(), power, true)
+                    else
+                        self:DrawLaser(k.WModel:GetPos(), k.WModel:GetAngles(), power, true)
+                    end
                 end
-            elseif IsValid(k.VModel) then
-                self:DrawLaser(k.VModel:GetPos() + (k.VModel:GetAngles():Up() * 0.75), k.VModel:GetAngles(), power)
+            else
+                if IsValid(self:GetOwner():GetViewModel()) and atttbl.LaserQCAttachmentVM then
+                    local vm = self:GetOwner():GetViewModel()
+                    local att = vm:GetAttachment(atttbl.LaserQCAttachmentVM)
+                    if att then
+                        local pos = TacRP.FormatViewModelAttachment(self.ViewModelFOV, att.Pos, false)
+                        self:DrawLaser(pos, att.Ang, power)
+                    end
+                elseif IsValid(k.VModel) then
+                    self:DrawLaser(k.VModel:GetPos() + (k.VModel:GetAngles():Up() * 0.75), k.VModel:GetAngles(), power)
+                end
             end
         end
     end
