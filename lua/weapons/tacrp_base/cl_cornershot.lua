@@ -30,7 +30,7 @@ local lastrendertime = 0
 local fps = 30
 
 function SWEP:DoRT()
-    if !self:GetBlindFire() and !IsValid(self.CornershotEntity) then lastblindfire = false return end
+    if !self:GetBlindFire() and !IsValid(self:GetCornershotEntity()) then lastblindfire = false return end
     if TacRP.OverDraw then return end
 
     if !lastblindfire then
@@ -42,9 +42,9 @@ function SWEP:DoRT()
     local angles = self:GetShootDir()
     local origin = self:GetMuzzleOrigin()
 
-    if IsValid(self.CornershotEntity) then
-        origin = self.CornershotEntity:LocalToWorld(self.CornershotOffset)
-        angles = self.CornershotEntity:LocalToWorldAngles(self.CornershotAngles)
+    if IsValid(self:GetCornershotEntity()) then
+        origin = self:GetCornershotEntity():LocalToWorld(self:GetCornershotEntity().CornershotOffset)
+        angles = self:GetCornershotEntity():LocalToWorldAngles(self:GetCornershotEntity().CornershotAngles)
         TacRP.CornerCamDrawSelf = true
     elseif self:GetBlindFireMode() == TacRP.BLINDFIRE_KYS then
         local bone = self:GetOwner():LookupBone("ValveBiped.Bip01_R_Hand")
@@ -159,7 +159,7 @@ end
 
 function SWEP:DoCornershot()
 
-    if !self:GetBlindFire() and !IsValid(self.CornershotEntity) then lastblindfire = false return end
+    if !self:GetBlindFire() and !IsValid(self:GetCornershotEntity()) then lastblindfire = false return end
 
     local w = TacRP.SS(640 / 4)
     local h = TacRP.SS(480 / 4)
@@ -229,10 +229,4 @@ end
 
 function SWEP:ThinkNearWall()
     self:GetNearWallAmount()
-end
-
-function SWEP:CornershotTrack(ent, pos, ang)
-    self.CornershotEntity = ent
-    self.CornershotOffset = pos or Vector()
-    self.CornershotAngles = ang or Angle()
 end
