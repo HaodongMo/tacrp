@@ -564,6 +564,7 @@ function SWEP:SetupDataTables()
     self:NetworkVar("Vector", 0, "BipodPos")
 
     self:NetworkVar("Entity", 0, "HolsterEntity")
+    self:NetworkVar("Entity", 1, "CornershotEntity")
 
     self:SetFreeAimAngle(Angle(0, 0, 0))
     self:SetLastAimAngle(Angle(0, 0, 0))
