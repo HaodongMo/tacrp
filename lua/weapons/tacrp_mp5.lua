@@ -12,7 +12,7 @@ SWEP.SubCatType = "3Submachine Gun"
 
 SWEP.Description = "Well-balanced submachine gun known for its precision."
 
-SWEP.Trivia_Caliber = "5.56x45mm"
+SWEP.Trivia_Caliber = "9x19mm"
 SWEP.Trivia_Manufacturer = "Heckler & Koch"
 SWEP.Trivia_Year = "1966"
 
