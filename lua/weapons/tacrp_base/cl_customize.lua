@@ -1341,19 +1341,15 @@ end
 function SWEP:DrawCustomizeHUD()
 
     local customize = self:GetCustomize()
-
-    if self:GetOwner():KeyDown( IN_WALK ) then
-        if customize and !lastcustomize then
+    if customize and !lastcustomize then
+        if self:GetOwner():KeyDown( IN_WALK ) then
             self:CreateCustomizeHUD()
-        elseif !customize and lastcustomize then
-            self:RemoveCustomizeHUD()
-        end
-    else
-        if customize and !lastcustomize then
+        else
             self:C2_Open()
-        elseif !customize and lastcustomize then
-            self:C2_Close()
         end
+    elseif !customize and lastcustomize then
+        self:C2_Close()
+        self:RemoveCustomizeHUD()
     end
     
     lastcustomize = self:GetCustomize()
