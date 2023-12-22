@@ -1343,9 +1343,11 @@ function SWEP:DrawCustomizeHUD()
     local customize = self:GetCustomize()
 
     if customize and !lastcustomize then
-        self:CreateCustomizeHUD()
+        self:C2_Open()
+		--self:CreateCustomizeHUD()
     elseif !customize and lastcustomize then
-        self:RemoveCustomizeHUD()
+        self:C2_Close()
+		--self:RemoveCustomizeHUD()
     end
 
     lastcustomize = self:GetCustomize()
