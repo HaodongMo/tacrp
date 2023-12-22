@@ -24,7 +24,14 @@ ATT.Num = 3
 
 ATT.InstalledElements = {"3gl"}
 
-ATT.Add_Spread = 0.02
+ATT.Override_Damage_Max = 60
+ATT.Override_Damage_Min = 60
+
+ATT.Override_Spread = 0.05
+ATT.Override_ShotgunPelletSpread = 0.025
+ATT.Override_MidAirSpreadPenalty = 0
+ATT.Override_HipFireSpreadPenalty = 0
+
 ATT.Mult_ShootEntForce = 0.85
 
 if engine.ActiveGamemode() == "terrortown" then
@@ -221,20 +228,25 @@ ATT.PrintName = "Ratshot"
 ATT.FullName = "40mm Ratshot Grenades"
 ATT.Icon = Material("entities/tacrp_att_ammo_40mm_ratshot.png", "mips smooth")
 ATT.Description = "For rodents of unbelievable size."
-ATT.Pros = {"att.procon.airburst"}
-ATT.Cons = {"att.procon.timedfuse"}
+ATT.Pros = {"att.procon.radius", "att.procon.proxfuse"}
+ATT.Cons = {"stat.damage", "stat.muzzlevelocity"}
 
 ATT.Category = "ammo_40mm"
 
 ATT.SortOrder = 2.9
 
+ATT.Override_Damage_Max = 80
+ATT.Override_Damage_Min = 80
+
 ATT.ShootEnt = "tacrp_proj_40mm_ratshot"
-ATT.Mult_ShootEntForce = 0.25
+ATT.Mult_ShootEntForce = 0.75
 
 ATT.InstalledElements = {"smoke"}
 
 if engine.ActiveGamemode() == "terrortown" then
     ATT.Free = true
+    ATT.Override_Damage_Max = 60
+    ATT.Override_Damage_Min = 60
 end
 
 TacRP.LoadAtt(ATT, "ammo_40mm_ratshot")

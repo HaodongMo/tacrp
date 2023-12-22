@@ -6,18 +6,14 @@ ENT.Spawnable                = false
 
 ENT.Model                    = "models/weapons/tacint/grenade_40mm.mdl"
 
-ENT.IsRocket = false // projectile has a booster and will not drop.
+ENT.InstantFuse = false
+ENT.RemoteFuse = false
+ENT.ImpactFuse = true
 
-ENT.InstantFuse = true // projectile is armed immediately after firing.
-ENT.RemoteFuse = false // allow this projectile to be triggered by remote detonator.
-ENT.ImpactFuse = true // projectile explodes on impact.
-ENT.TimeFuse = false
+ENT.Delay = 0
 
 ENT.ExplodeOnDamage = true
 ENT.ExplodeUnderwater = true
-
-ENT.Delay = 0.15
-ENT.SafetyFuse = 0
 
 ENT.ExplodeSounds = {
     "^TacRP/weapons/grenade/frag_explode-1.wav",
@@ -25,61 +21,27 @@ ENT.ExplodeSounds = {
     "^TacRP/weapons/grenade/frag_explode-3.wav",
 }
 
-ENT.SmokeTrail = true
 
-function ENT:PhysicsCollide(data, collider)
-    if self:Impact(data, collider) then
-        return
+DEFINE_BASECLASS(ENT.Base)
+
+function ENT:Initialize()
+    BaseClass.Initialize(self)
+    if SERVER then
+        self:SetTrigger(true)
+        self:UseTriggerBounds(true, 72)
     end
-
-    BaseClass.PhysicsCollide(self, data, collider)
 end
 
-function ENT:Impact(data, collider)
-    if self.Impacted then return true end
-    self.Impacted = true
-
-    local attacker = self.Attacker or self:GetOwner() or self
-
-    if !self.NPCDamage then
-        local ang = data.OurOldVelocity:Angle()
-        local fx = EffectData()
-        fx:SetOrigin(data.HitPos)
-        fx:SetNormal(-ang:Forward())
-        fx:SetAngles(-ang)
-        util.Effect("ManhackSparks", fx)
-
-        if IsValid(data.HitEntity) then
-            local dmginfo = DamageInfo()
-            dmginfo:SetAttacker(attacker)
-            dmginfo:SetInflictor(self)
-            dmginfo:SetDamageType(DMG_CRUSH)
-            dmginfo:SetDamage(120 * (self.NPCDamage and 0.5 or 1))
-            dmginfo:SetDamageForce(data.OurOldVelocity * 25)
-            dmginfo:SetDamagePosition(data.HitPos)
-            data.HitEntity:TakeDamageInfo(dmginfo)
-        end
-
-        self:EmitSound("weapons/rpg/shotdown.wav", 80)
-
-        local prop = ents.Create("prop_physics")
-        prop:SetPos(self:GetPos())
-        prop:SetAngles(self:GetAngles())
-        prop:SetModel("models/weapons/tacint/grenade_40mm.mdl")
-        prop:Spawn()
-        prop:GetPhysicsObject():SetVelocityInstantaneous(data.OurNewVelocity * 0.5 + VectorRand() * 75)
-        prop:SetCollisionGroup(COLLISION_GROUP_DEBRIS)
-
-        SafeRemoveEntityDelayed(prop, 3)
-        self:Remove()
-        return true
+function ENT:StartTouch(ent)
+    if SERVER and ent ~= self:GetOwner() and (ent:IsNPC() or ent:IsPlayer() or ent:IsNextBot()) then
+        self:Detonate()
     end
 end
 
 function ENT:Detonate()
     local dir = self:GetForward()
     local attacker = self.Attacker or self:GetOwner() or self
-    local src = self:GetPos() - dir * 64
+    local src = self:GetPos()
     local fx = EffectData()
     fx:SetOrigin(src)
 
@@ -91,56 +53,70 @@ function ENT:Detonate()
         fx:SetRadius(4)
         fx:SetNormal(dir)
         util.Effect("Sparks", fx)
-
-        local tr = util.TraceHull({
-            start = src,
-            endpos = src + dir * 2048,
-            filter = self,
-            mins = Vector(-16, -16, -8),
-            maxs = Vector(16, 16, 8)
-        })
-        fx:SetMagnitude(2)
-        fx:SetScale(1)
-        fx:SetRadius(1)
-        fx:SetNormal(dir)
-        for i = 1, math.floor(tr.Fraction * 6) do
-            fx:SetOrigin(tr.StartPos + tr.Normal * (i / 6) * 2048)
-            util.Effect("Sparks", fx)
-        end
+        util.Effect("HelicopterMegaBomb", fx)
     end
 
-    self:FireBullets({
-        Attacker = attacker,
-        Damage = 5,
-        Force = 1,
-        Distance = 2048,
-        HullSize = 16,
-        Num = 48,
-        Tracer = 1,
-        Src = src,
-        Dir = dir,
-        Spread = Vector(1, 1, 0),
-        IgnoreEntity = self,
-    })
-    local dmg = DamageInfo()
-    dmg:SetAttacker(attacker)
-    dmg:SetDamageType(DMG_BULLET + DMG_BLAST)
-    dmg:SetInflictor(self)
-    dmg:SetDamageForce(self:GetVelocity() * 100)
-    dmg:SetDamagePosition(src)
-    for _, ent in pairs(ents.FindInCone(src, dir, 2048, 0.707)) do
-        local tr = util.QuickTrace(src, ent:GetPos() - src, {self, ent})
-        if tr.Fraction == 1 then
-            dmg:SetDamage(120 * math.Rand(0.75, 1) * Lerp((ent:GetPos():DistToSqr(src) / 4194304) ^ 0.5, 1, 0.2) * (self.NPCDamage and 0.5 or 1))
-            if !ent:IsOnGround() then dmg:ScaleDamage(1.5) end
-            ent:TakeDamageInfo(dmg)
-        end
-    end
+    local damage = 80
+    if engine.ActiveGamemode() == "terrortown" then damage = 60 end
 
-    util.BlastDamage(self, attacker, src, 196, 35)
+    util.BlastDamage(self, attacker, src, 256, damage)
 
-    self:EmitSound(table.Random(self.ExplodeSounds), 125)
-    self:EmitSound("physics/metal/metal_box_break1.wav", 100, 190)
+    self:EmitSound(table.Random(self.ExplodeSounds), 115, 105)
+    self:EmitSound("physics/metal/metal_box_break1.wav", 100, 190, 0.5)
 
     self:Remove()
+end
+
+ENT.SmokeTrail = true
+
+local smokeimages = {"particle/smokesprites_0001", "particle/smokesprites_0002", "particle/smokesprites_0003", "particle/smokesprites_0004", "particle/smokesprites_0005", "particle/smokesprites_0006", "particle/smokesprites_0007", "particle/smokesprites_0008", "particle/smokesprites_0009", "particle/smokesprites_0010", "particle/smokesprites_0011", "particle/smokesprites_0012", "particle/smokesprites_0013", "particle/smokesprites_0014", "particle/smokesprites_0015", "particle/smokesprites_0016"}
+local function GetSmokeImage()
+    return smokeimages[math.random(#smokeimages)]
+end
+
+function ENT:DoSmokeTrail()
+    if CLIENT and self.SmokeTrail then
+        local emitter = ParticleEmitter(self:GetPos())
+
+        local smoke = emitter:Add(GetSmokeImage(), self:GetPos())
+
+        smoke:SetStartAlpha(50)
+        smoke:SetEndAlpha(0)
+
+        smoke:SetStartSize(10)
+        smoke:SetEndSize(math.Rand(20, 40))
+
+        smoke:SetRoll(math.Rand(-180, 180))
+        smoke:SetRollDelta(math.Rand(-1, 1))
+
+        smoke:SetVelocity(-self:GetAngles():Forward() * 400 + (VectorRand() * 10))
+
+        smoke:SetColor(200, 200, 200)
+        smoke:SetLighting(true)
+
+        smoke:SetDieTime(math.Rand(0.5, 1))
+        smoke:SetGravity(Vector(0, 0, 0))
+
+        local spark = emitter:Add("effects/spark", self:GetPos())
+
+        spark:SetStartAlpha(255)
+        spark:SetEndAlpha(255)
+
+        spark:SetStartSize(4)
+        spark:SetEndSize(0)
+
+        spark:SetRoll(math.Rand(-180, 180))
+        spark:SetRollDelta(math.Rand(-1, 1))
+
+        spark:SetVelocity(-self:GetAngles():Forward() * 300 + (VectorRand() * 100))
+
+        spark:SetColor(255, 255, 255)
+        spark:SetLighting(false)
+
+        spark:SetDieTime(math.Rand(0.1, 0.3))
+
+        spark:SetGravity(Vector(0, 0, 10))
+
+        emitter:Finish()
+    end
 end

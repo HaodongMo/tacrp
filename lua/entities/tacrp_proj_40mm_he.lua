@@ -25,8 +25,6 @@ ENT.ExplodeSounds = {
 
 ENT.AudioLoop = "TacRP/weapons/rpg7/rocket_flight-1.wav"
 
-ENT.SmokeTrail = true
-
 function ENT:Detonate()
     local attacker = self.Attacker or self:GetOwner() or self
     local mult = self.NPCDamage and 0.5 or 1
@@ -34,7 +32,22 @@ function ENT:Detonate()
     if engine.ActiveGamemode() == "terrortown" then
         util.BlastDamage(self, attacker, self:GetPos(), 256, 35)
     else
-        util.BlastDamage(self, attacker, self:GetPos(), 300, 100 * mult)
+        util.BlastDamage(self, attacker, self:GetPos(), 300, 150 * mult)
+
+        self:FireBullets({
+            Attacker = attacker,
+            Damage = 200 * mult,
+            Tracer = 0,
+            Src = self:GetPos(),
+            Dir = self:GetForward(),
+            HullSize = 0,
+            Distance = 32,
+            IgnoreEntity = self,
+            Callback = function(atk, btr, dmginfo)
+                dmginfo:SetDamageType(DMG_AIRBOAT + DMG_BLAST) // airboat damage for helicopters and LVS vehicles
+                dmginfo:SetDamageForce(self:GetForward() * 7000) // LVS uses this to calculate penetration!
+            end,
+        })
     end
 
     local fx = EffectData()

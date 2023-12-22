@@ -47,7 +47,7 @@ SWEP.BalanceStats = {
 
 // "ballistics"
 
-SWEP.Damage_Max = 200 // just to fool the ratings
+SWEP.Damage_Max = 150
 SWEP.Damage_Min = 150
 SWEP.Range_Max = 4000
 SWEP.Range_Min = 1000

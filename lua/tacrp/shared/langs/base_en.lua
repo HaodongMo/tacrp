@@ -342,6 +342,7 @@ L["att.procon.reliability"] = "Reliability"
 L["att.procon.noscope"] = "No Scope"
 L["att.procon.conceal"] = "Hide weapon while holstered"
 L["att.procon.armdelay"] = "Arming Delay"
+L["att.procon.proxfuse"] = "Proximity fuse"
 
 L["att.procon.rocket.speed"] = "Rocket Top Speed"
 L["att.procon.rocket.steer"] = "Rocket Steering"
