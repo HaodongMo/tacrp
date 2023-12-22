@@ -60,24 +60,39 @@ local pages = {
 				surface.SetDrawColor( color_black )
 				surface.DrawRect( 0, 0, w, h )
 
-				draw.SimpleText( "Walther PPK", "C2_1", s(24), s(6), color_white )
-				local ts = surface.GetTextSize( "Walther PPK" )
-				draw.SimpleText( "Handgun", "C2_2", w - s(24), s(6), color_white, TEXT_ALIGN_RIGHT )
-				draw.SimpleText( ".380 ACP", "C2_2", w - s(24), s(6+18), color_white, TEXT_ALIGN_RIGHT )
+				draw.SimpleText( c.w:GetPrintName(), "C2_1", s(24), s(6), color_white )
+				draw.SimpleText( c.w:GetSubClassName(TacRP.UseTiers()), "C2_2", w - s(24), s(6), color_white, TEXT_ALIGN_RIGHT )
+				draw.SimpleText( c.w:GetValue("Trivia_Caliber"), "C2_2", w - s(24), s(6+18), color_white, TEXT_ALIGN_RIGHT )
 				return
 			end
 
 			local footer = self:Add( "DPanel" )
-			local f_w, f_h = s(400), s(12+(12*4)+12)
+			local f_w, f_h = s(400), s(12+(12*1)+12)
 			footer:SetSize( f_w, f_h )
 			footer:SetPos( self:GetWide()/2 - f_w/2, self:GetTall() - f_h - s(12) )
 			function footer:Paint( w, h )
 				surface.SetDrawColor( color_black )
 				surface.DrawRect( 0, 0, w, h )
 
-				draw.SimpleText( "This gun was used by Louis de Francis XXIV.", "C2_3", s(24), s(12), color_white )
-				draw.SimpleText( "It fires at 1,200,000 rounds per minute.", "C2_3", s(24), s(12+(12*1)), color_white )
-				draw.SimpleText( "'Mucho bueno.'", "C2_3I", s(24), s(12+(12*3)), color_white )
+				local desc = TacRP.MultiLineText( c.w.Description, w - s(48), "C2_3" )
+
+				local lines = 0
+				for i, v in ipairs( desc ) do
+					draw.SimpleText( v, "C2_3", s(24), s(12+(12*(i-1))), color_white )
+					lines = i
+				end
+				draw.SimpleText( c.w.Description_Quote, "C2_3I", s(24), s(12+(12*(lines+1))), color_white )
+			end
+
+			local preself = self
+			function footer:PerformLayout( w, h )
+				local desc = TacRP.MultiLineText( c.w.Description, w - s(48), "C2_3" )
+				local lines = #desc
+				if c.w.Description_Quote then lines = lines + 2 end
+				f_h = s(12+(12*lines)+12)
+
+				self:SetSize( f_w, f_h )
+				self:SetPos( preself:GetWide()/2 - f_w/2, preself:GetTall() - f_h - s(12) )
 			end
 		end,
 		Paint = function( self, w, h, c )
@@ -162,7 +177,7 @@ function SWEP:C2_Open()
 		page.Num = i
 		c2.Pages[i] = page
 
-		v.Initialize( page, c2, { s=s, sw=sw, sh=sh } )
+		v.Initialize( page, c2, { w=w, s=s, sw=sw, sh=sh } )
 
 		function page:Paint( w, h )
 			surface.SetDrawColor( 0, 0, 0, 255 )
@@ -171,7 +186,7 @@ function SWEP:C2_Open()
 			-- surface.SetDrawColor( 0, 0, 0, 222 )
 			-- surface.DrawOutlinedRect( 0, 0, w, h, s(16) )
 
-			v.Paint( page, w, h, { s=s, sw=sw, sh=sh } )
+			v.Paint( page, w, h, { w=w, s=s, sw=sw, sh=sh } )
 			return
 		end
 
