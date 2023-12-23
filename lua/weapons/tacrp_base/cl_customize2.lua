@@ -30,19 +30,103 @@ local pages = {
 	{
 		Name = "Customize",
 		Initialize = function( self, par, c )
+			local s = c.s
+			for slotnum, slottab in ipairs( c.w.Attachments ) do
+				local slot = self:Add( "DButton" )
+				slot:SetSize( s(90), s(44) )
+				slot:SetPos( s(24), s(24 + (44) + (slotnum-1) * (44 + 4) ) )
+
+				function slot:Paint( w, h )
+					surface.SetDrawColor( color_black )
+					surface.DrawRect( 0, 0, w, h )
+					surface.SetDrawColor( color_white )
+					surface.DrawOutlinedRect( 0, 0, w, h, s(1) )
+
+					draw.SimpleText( slottab.PrintName, "C2_3", s(10), s(10-2), color_white )
+					surface.SetDrawColor( color_white )
+					surface.DrawRect( s(8), s(10+12), w - s(8*2), s(1) )
+					if slottab.Installed then
+						local ati = TacRP.GetAttTable( slottab.Installed )
+						local attname = "none"
+						if ati then
+							attname = TacRP:TryTranslate( ati.PrintName )
+						end
+						draw.SimpleText( attname, "C2_3", s(10), s(10+12+2), color_white )
+					end
+					return true
+				end
+
+				function slot:DoRightClick()
+					if slottab.Installed then
+						c.w:Detach( slotnum )
+					end
+				end
+
+				function slot:DoClick()
+					if IsValid(selecta) then selecta:Remove() end
+					selecta = vgui.Create( "DFrame" )
+					selecta:SetSize( s(120), s(240) )
+					selecta:Center()
+					selecta:MakePopup()
+					selecta:SetKeyboardInputEnabled( false )
+					function selecta:Paint( w, h )
+						surface.SetDrawColor( color_black )
+						surface.DrawRect( 0, 0, w, h )
+						surface.SetDrawColor( color_white )
+						surface.DrawOutlinedRect( 0, 0, w, h, s(1) )
+						return true
+					end
+
+					local atts = TacRP.GetAttsForCats( slottab.Category or "" )
+
+					for _, att in pairs( atts ) do
+						local ati = TacRP.GetAttTable( att )
+						local button = selecta:Add( "DButton" )
+						button:SetSize( 0, s(24) )
+						button:Dock( TOP )
+						button:DockMargin( 0, 0, 0, s(4) )
+						function button:Paint( w, h )
+							surface.SetDrawColor( color_black )
+							surface.DrawRect( 0, 0, w, h )
+							surface.SetDrawColor( color_white )
+							surface.DrawOutlinedRect( 0, 0, w, h, s(1) )
+							draw.SimpleText( TacRP:TryTranslate( ati.PrintName ), "C2_3", s(6), s(6), color_white )
+							if slottab.Installed == att then
+								draw.SimpleText( "installed", "C2_4", s(6), s(2), color_white )
+							end
+							return true
+						end
+
+						function button:DoClick()
+							if slottab.Installed then
+								if slottab.Installed == att then
+									c.w:Detach( slotnum )
+								else
+									c.w:Detach( slotnum, true, true )
+									c.w:Attach( slotnum, att )
+								end
+							else
+								c.w:Attach( slotnum, att )
+							end
+							selecta:Remove()
+						end
+
+						function button:DoRightClick()
+							if slottab.Installed == att then
+								c.w:Detach( slotnum )
+								selecta:Remove()
+							end
+						end
+			
+					end
+				end
+			end
 		end,
 		Paint = function( self, w, h, c )
 		end,
 	},
 	{
 		Name = "Statistics",
-		Initialize = function( self, par, c )
-		end,
-		Paint = function( self, w, h, c )
-		end,
-	},
-	{
-		Name = "Inspect",
 		Initialize = function( self, par, c )
 		end,
 		Paint = function( self, w, h, c )
@@ -112,9 +196,21 @@ local pages = {
 		Paint = function( self, w, h, c )
 		end,
 	},
+	{
+		Name = "Inspect",
+		Initialize = function( self, par, c )
+		end,
+		Paint = function( self, w, h, c )
+		end,
+	},
 }
 
 local uio = Material( "uio/shadow.png", "" )
+
+
+
+local c2_Currentpage = 1
+local c2_Desire = 1
 
 function SWEP:C2_Open()
 	if IsValid( c2 ) then c2:Remove() return end
@@ -133,6 +229,9 @@ function SWEP:C2_Open()
 		return
 	end
 
+	function c2:OnRemove()
+		if IsValid( selecta ) then selecta:Remove() end
+	end
 
 	local p = LocalPlayer()
 	local w = self
@@ -147,9 +246,6 @@ function SWEP:C2_Open()
 		return
 	end
 
-	c2.Currentpage = 4
-	c2.Desire = 4
-
 	c2.Pages = {}
 
 	for i, v in ipairs( pages ) do
@@ -158,7 +254,7 @@ function SWEP:C2_Open()
 		mbutton:SetPos( s(24)+s((i-1)*(64+4)), s(6) )
 		mbutton:SetText( v.Name )
 		function mbutton:DoClick()
-			c2.Desire = i
+			c2_Desire = i
 		end
 		function mbutton:Paint( w, h )
 			surface.SetDrawColor( color_black )
@@ -210,19 +306,19 @@ function SWEP:C2_Open()
 		end
 	
 		if input.IsKeyDown( KEY_1 ) then
-			self.Desire = 1
+			c2_Desire = 1
 		elseif input.IsKeyDown( KEY_2 ) then
-			self.Desire = 2
+			c2_Desire = 2
 		elseif input.IsKeyDown( KEY_3 ) then
-			self.Desire = 3
+			c2_Desire = 3
 		elseif input.IsKeyDown( KEY_4 ) then
-			self.Desire = 4
+			c2_Desire = 4
 		end
 
-		self.Currentpage = math.Approach( self.Currentpage, self.Desire, FrameTime() / 0.2 )
+		c2_Currentpage = math.Approach( c2_Currentpage, c2_Desire, FrameTime() / 0.1 )
 
 		for i, v in ipairs( self.Pages ) do
-			v:SetPos( math.floor( (v.Num-self.Currentpage) * (sw) ) )
+			v:SetPos( math.floor( (v.Num-c2_Currentpage) * (sw) ) )
 		end
 	end
 end
