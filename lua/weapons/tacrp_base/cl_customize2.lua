@@ -31,10 +31,14 @@ local pages = {
 		Name = "Customize",
 		Initialize = function( self, par, c )
 			local s = c.s
+			local slotlist = {}
+			local slotlistt = {}
 			for slotnum, slottab in ipairs( c.w.Attachments ) do
 				local slot = self:Add( "DButton" )
-				slot:SetSize( s(90), s(44) )
-				slot:SetPos( s(24), s(24 + (44) + (slotnum-1) * (44 + 4) ) )
+				slotlist[slotnum] = slot
+				slotlistt[slotnum] = slottab
+				slot:SetSize( s(90), 0 )
+				slot:SetPos( s(24), 0 )
 
 				function slot:Paint( w, h )
 					surface.SetDrawColor( color_black )
@@ -43,9 +47,9 @@ local pages = {
 					surface.DrawOutlinedRect( 0, 0, w, h, s(1) )
 
 					draw.SimpleText( slottab.PrintName, "C2_3", s(10), s(10-2), color_white )
-					surface.SetDrawColor( color_white )
-					surface.DrawRect( s(8), s(10+12), w - s(8*2), s(1) )
 					if slottab.Installed then
+						surface.SetDrawColor( color_white )
+						surface.DrawRect( s(8), s(10+12), w - s(8*2), s(1) )
 						local ati = TacRP.GetAttTable( slottab.Installed )
 						local attname = "none"
 						if ati then
@@ -56,9 +60,11 @@ local pages = {
 					return true
 				end
 
+				local preself = self
 				function slot:DoRightClick()
 					if slottab.Installed then
 						c.w:Detach( slotnum )
+						preself:InvalidateLayout()
 					end
 				end
 
@@ -97,6 +103,7 @@ local pages = {
 							return true
 						end
 
+						local preself = preself
 						function button:DoClick()
 							if slottab.Installed then
 								if slottab.Installed == att then
@@ -108,17 +115,33 @@ local pages = {
 							else
 								c.w:Attach( slotnum, att )
 							end
+							preself:InvalidateLayout()
 							selecta:Remove()
 						end
 
 						function button:DoRightClick()
 							if slottab.Installed == att then
 								c.w:Detach( slotnum )
+								preself:InvalidateLayout()
 								selecta:Remove()
 							end
 						end
 			
 					end
+				end
+			end
+			function self:PerformLayout()
+				local obump = 0
+				for i, v in ipairs( slotlist ) do
+					local tall = slotlistt[i].Installed and s(8+12+4+12+8) or s(8+12+8)
+					obump = obump + tall + (i!=#slotlist and s(4) or 0)
+				end
+				local bump = self:GetTall()/2 - obump/2
+				for i, v in ipairs( slotlist ) do
+					local tall = slotlistt[i].Installed and s(8+12+4+12+8) or s(8+12+8)
+					v:SetTall( tall )
+					v:SetY( bump )
+					bump = bump + tall + s(4)
 				end
 			end
 		end,
@@ -220,6 +243,7 @@ function SWEP:C2_Open()
 	c2:SetSize( sw, sh )
 	c2:Center()
 	c2:MakePopup()
+	c2:SetPopupStayAtBack( true )
 	c2:SetKeyboardInputEnabled( false )
 	c2.btnMaxim:SetVisible( false )
 	c2.btnMinim:SetVisible( false )
