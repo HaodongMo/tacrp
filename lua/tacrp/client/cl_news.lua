@@ -516,12 +516,14 @@ The Soviet/AK themed expansion starring 9 weapons, including well-known AK varia
         Date = "2023-12-20",
         Author = "speedonerd",
         Major = false,
-        Summary = "New Years update!",
+        Summary = "A holly jolly update",
         Contents = [[<body style="font-family:'Myriad Pro';color:white;font-size:125%;">
 <p>This is speedonerd speaking! I'm one of the other people working on this mess, mainly in the asset department (models, sounds, animations).
 <p>We've got quite the update here, one that brought on more things than we initially anticipated adding, including a bunch of new configuration options and a total melee system rework.
 
-<p>SPEEDO ADD NEWS ABOUT NPC WEAPON DROPDOWN HERE!!!</p>
+<h2>They have guns...lots of guns...</h2>
+<p>NPC support now has a new dropdown menu, sorted by weapon type so you can easily find whatever weapon you're looking for. Within each category you can specify a certain weapon or have NPCs pick a random weapon from each quality tier.
+<p>And for those who enjoy chaos, we've included an option for NPCs to spawn with <i>any</i> weapon randomly. Enjoy a random rebel with no sense of self-preservation facerocketing you!
 
 <h2>drop me avp plz</h2>
 <p>There's now a dedicated button in the customization menu to drop your current weapon, with dropped weapons able to be picked up with your 'use' key. 
@@ -594,16 +596,18 @@ The Soviet/AK themed expansion starring 9 weapons, including well-known AK varia
 
 <hr>
 
-<h2>Heavy Metal<i>(New!)</i></h2>
+<h2>Heavy Metal <i>(New!)</i></h2>
 <p><input type='submit' value='Open Workshop' onclick='console.log("RUNLUA:gui.OpenURL(\"https://steamcommunity.com/sharedfiles/filedetails/?id=3102297293\")")' /></p>
-<p>A pack born out of a spontaneous idea, more niche in its focus, with 8 brand new, ridiculously powerful weapons for when standard weaponry just isn't enough.
+<p>A pack born out of a spontaneous idea, more niche in its focus, with 10 brand new, ridiculously powerful weapons for when standard weaponry just isn't enough.
 <ul>
 <li>Pancor Jackhammer
 <li>H&K XM25 CDTE
 <li>Mk 153 SMAW
 <li>CheyTac M200 Intervention
+<li>Holland & Holland .600 Nitro Double Rifle
 <li>Franchi SPAS-12
 <li>AMT Hardballer Longslide
+<li>Dual Hardballers
 <li>Taurus Raging Judge "Executioner"
 <li>SSK .950 JDJ "Fat Mac" (you can shoulder fire it because video gane)
 </ul>
