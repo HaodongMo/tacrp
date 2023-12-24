@@ -90,14 +90,14 @@ ATT = {}
 ATT.PrintName = "Momentum"
 ATT.Icon = Material("entities/tacrp_att_melee_boost_momentum.png", "mips smooth")
 ATT.Description = "Restore perk charge by dealing damage."
-ATT.Pros = {"stat.lifesteal"}
+ATT.Pros = {"stat.damagecharge"}
 ATT.Cons = {"stat.meleeperkint"}
 
 ATT.Category = "melee_boost"
 
 ATT.SortOrder = 11
 
-ATT.Add_DamageCharge = 0.008
+ATT.Add_DamageCharge = 0.01
 ATT.Add_MeleePerkInt = -0.08
 
 TacRP.LoadAtt(ATT, "melee_boost_momentum")
