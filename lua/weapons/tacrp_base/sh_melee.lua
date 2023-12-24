@@ -191,7 +191,7 @@ function SWEP:GetMeleePerkCooldown(base)
     if stat >= 0.5 then
         return Lerp((stat - 0.5) * 2, 1, 0.7)
     else
-        return Lerp(stat * 2, 1.5, 1)
+        return Lerp(stat * 2, 1.3, 1)
     end
 end
 
