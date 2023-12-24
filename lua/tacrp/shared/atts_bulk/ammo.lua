@@ -326,22 +326,22 @@ ATT.SortOrder = 5
 
 ATT.Mult_MuzzleVelocity = 0.75
 
-ATT.Num = 20
-ATT.Override_Damage_Max = 5
-ATT.Override_Damage_Min = 2
+ATT.Override_Num = 16
+ATT.Override_Damage_Max = 6
+ATT.Override_Damage_Min = 4
 ATT.Override_Penetration = 1
 
 ATT.Mult_HipFireSpreadPenalty = 0.5
 
-ATT.Add_Spread = 0.012
-ATT.Add_ShotgunPelletSpread = 0.006
+ATT.Add_Spread = 0.01
+ATT.Add_ShotgunPelletSpread = 0.015
 
 ATT.Override_BodyDamageMultipliers = {
-    [HITGROUP_HEAD] = 3,
+    [HITGROUP_HEAD] = 2,
     [HITGROUP_CHEST] = 1,
-    [HITGROUP_STOMACH] = 1.25,
-    [HITGROUP_LEFTARM] = 0.9,
-    [HITGROUP_RIGHTARM] = 0.9,
+    [HITGROUP_STOMACH] = 1,
+    [HITGROUP_LEFTARM] = 1,
+    [HITGROUP_RIGHTARM] = 1,
     [HITGROUP_LEFTLEG] = 0.75,
     [HITGROUP_RIGHTLEG] = 0.75,
     [HITGROUP_GEAR] = 0.75

@@ -146,8 +146,10 @@ function SWEP:CreateCustomizeHUD()
             surface.DrawRect(0, 0, w, h)
             TacRP.DrawCorneredBox(0, 0, w, h)
 
-            local dmg_max = self:GetValue("Damage_Max")
-            local dmg_min = self:GetValue("Damage_Min")
+            local exp = self:GetValue("ExplosiveDamage")
+
+            local dmg_max = self:GetValue("Damage_Max") + exp
+            local dmg_min = self:GetValue("Damage_Min") + exp
 
             local range_min, range_max = self:GetMinMaxRange()
 
@@ -205,7 +207,7 @@ function SWEP:CreateCustomizeHUD()
                     range_m_x = mouse_x
                 end
 
-                local dmg = self:GetDamageAtRange(range)
+                local dmg = self:GetDamageAtRange(range) + self:GetValue("ExplosiveDamage")
 
                 local txt_dmg1 = tostring(math.Round(dmg)) .. TacRP:GetPhrase("unit.damage")
 
@@ -309,7 +311,7 @@ function SWEP:CreateCustomizeHUD()
             surface.SetMaterial(body)
             surface.DrawTexturedRect(x2, y2, w2, h2)
 
-            local dmg = self:GetDamageAtRange(range, true)
+            local dmg = self:GetDamageAtRange(range, true) + self:GetValue("ExplosiveDamage")
 
             if enable_armor then
                 dmg = dmg * math.Clamp(self:GetValue("ArmorPenetration"), 0, 1)
