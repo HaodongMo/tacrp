@@ -32,6 +32,8 @@ SWEP.MeleeThrowForce = 2000
 
 SWEP.MeleeDamageType = DMG_SLASH
 
+SWEP.MeleeRechargeRate = 1
+
 SWEP.MeleePerkStr = 0.5
 SWEP.MeleePerkAgi = 0.5
 SWEP.MeleePerkInt = 0.5
@@ -142,7 +144,7 @@ function SWEP:ThinkHoldBreath()
     local ret = self:RunHook("Hook_Recharge")
     if ret then return end
     local f = 10 - math.min(self:GetValue("MeleePerkInt"), 0.5) * 2 - math.max((self:GetValue("MeleePerkInt") - 0.5) * 2, 0) * 6
-    self:SetBreath(math.min(1, self:GetBreath() + FrameTime() / f))
+    self:SetBreath(math.min(1, self:GetBreath() + FrameTime() / f * self:GetValue("MeleeRechargeRate")))
 end
 
 SWEP.NoBreathBar = false
