@@ -348,11 +348,6 @@ L["att.procon.conceal"] = "Hide weapon while holstered"
 L["att.procon.armdelay"] = "Arming Delay"
 L["att.procon.proxfuse"] = "Proximity fuse"
 
-L["att.procon.rocket.speed"] = "Rocket Top Speed"
-L["att.procon.rocket.steer"] = "Rocket Steering"
-L["att.procon.rocket.payload"] = "Explosive Power"
-L["att.procon.rocket.impact"] = "Impact Damage"
-
 L["att.sight.1"] = "1x Sight"
 L["att.sight.1.25"] = "1.25x Sight"
 L["att.sight.1.5"] = "1.5x Sight"
