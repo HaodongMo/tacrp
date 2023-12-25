@@ -3,7 +3,7 @@ local ATT = {}
 ATT = {}
 
 ATT.PrintName = "Level Up"
-ATT.Icon = Material("entities/npc_combine_s.png", "mips smooth")
+ATT.Icon = Material("entities/tacrp_att_melee_boost_all.png", "mips smooth")
 ATT.Description = "Small boost to all attributes."
 ATT.Pros = {"stat.meleeperkstr", "stat.meleeperkagi", "stat.meleeperkint"}
 
@@ -19,7 +19,7 @@ TacRP.LoadAtt(ATT, "melee_boost_all")
 
 ATT = {}
 ATT.PrintName = "Bulk Up"
-ATT.Icon = Material("entities/npc_combine_s.png", "mips smooth")
+ATT.Icon = Material("entities/tacrp_att_melee_boost_str.png", "mips smooth")
 ATT.Description = "Increase Brawn significantly at the cost of other attributes."
 ATT.Pros = {"stat.meleeperkstr"}
 ATT.Cons = {"stat.meleeperkagi", "stat.meleeperkint"}
@@ -36,7 +36,7 @@ TacRP.LoadAtt(ATT, "melee_boost_str")
 
 ATT = {}
 ATT.PrintName = "Catch Up"
-ATT.Icon = Material("entities/npc_combine_s.png", "mips smooth")
+ATT.Icon = Material("entities/tacrp_att_melee_boost_agi.png", "mips smooth")
 ATT.Description = "Increase Dexterity significantly at the cost of other attributes."
 ATT.Pros = {"stat.meleeperkagi"}
 ATT.Cons = {"stat.meleeperkstr", "stat.meleeperkint"}
@@ -53,7 +53,7 @@ TacRP.LoadAtt(ATT, "melee_boost_agi")
 
 ATT = {}
 ATT.PrintName = "Wise Up"
-ATT.Icon = Material("entities/npc_combine_s.png", "mips smooth")
+ATT.Icon = Material("entities/tacrp_att_melee_boost_int.png", "mips smooth")
 ATT.Description = "Increase Strategy significantly at the cost of other attributes."
 ATT.Pros = {"stat.meleeperkint"}
 ATT.Cons = {"stat.meleeperkstr", "stat.meleeperkagi"}
@@ -71,7 +71,7 @@ TacRP.LoadAtt(ATT, "melee_boost_int")
 
 ATT = {}
 ATT.PrintName = "Lifestealer"
-ATT.Icon = Material("entities/npc_combine_s.png", "mips smooth")
+ATT.Icon = Material("entities/tacrp_att_melee_boost_lifesteal.png", "mips smooth")
 ATT.Description = "Restore health by dealing damage."
 ATT.Pros = {"stat.lifesteal"}
 ATT.Cons = {"stat.meleeperkstr", "stat.meleeperkagi"}
@@ -88,23 +88,23 @@ TacRP.LoadAtt(ATT, "melee_boost_lifesteal")
 
 ATT = {}
 ATT.PrintName = "Momentum"
-ATT.Icon = Material("entities/npc_combine_s.png", "mips smooth")
+ATT.Icon = Material("entities/tacrp_att_melee_boost_momentum.png", "mips smooth")
 ATT.Description = "Restore perk charge by dealing damage."
-ATT.Pros = {"stat.lifesteal"}
+ATT.Pros = {"stat.damagecharge"}
 ATT.Cons = {"stat.meleeperkint"}
 
 ATT.Category = "melee_boost"
 
 ATT.SortOrder = 11
 
-ATT.Add_DamageCharge = 0.008
+ATT.Add_DamageCharge = 0.01
 ATT.Add_MeleePerkInt = -0.08
 
 TacRP.LoadAtt(ATT, "melee_boost_momentum")
 
 ATT = {}
 ATT.PrintName = "Afterimage"
-ATT.Icon = Material("entities/npc_combine_s.png", "mips smooth")
+ATT.Icon = Material("entities/tacrp_att_melee_boost_afterimage.png", "mips smooth")
 ATT.Description = "Swing your weapon in a flash, landing the attack instantly."
 ATT.Pros = {"stat.meleedelay"}
 ATT.Cons = {"stat.meleeattackmisstime"}

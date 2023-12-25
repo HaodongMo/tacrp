@@ -513,13 +513,17 @@ The Soviet/AK themed expansion starring 9 weapons, including well-known AK varia
     {
         Title = "Update 17",
         Type = "Patch Notes",
-        Date = "2023-12-20",
+        Date = "2023-12-24",
         Author = "speedonerd",
         Major = false,
-        Summary = "New Years update!",
+        Summary = "A holly jolly update",
         Contents = [[<body style="font-family:'Myriad Pro';color:white;font-size:125%;">
 <p>This is speedonerd speaking! I'm one of the other people working on this mess, mainly in the asset department (models, sounds, animations).
 <p>We've got quite the update here, one that brought on more things than we initially anticipated adding, including a bunch of new configuration options and a total melee system rework.
+
+<h2>They have guns...lots of guns...</h2>
+<p>NPC support now has a new dropdown menu, sorted by weapon type so you can easily find whatever weapon you're looking for. Within each category you can specify a certain weapon or have NPCs pick a random weapon from each quality tier.
+<p>And for those who enjoy chaos, we've included an option for NPCs to spawn with <i>any</i> weapon randomly. Enjoy a random rebel with no sense of self-preservation facerocketing you!
 
 <h2>drop me avp plz</h2>
 <p>There's now a dedicated button in the customization menu to drop your current weapon, with dropped weapons able to be picked up with your 'use' key. 
@@ -544,24 +548,24 @@ The Soviet/AK themed expansion starring 9 weapons, including well-known AK varia
 <p>It didn't really pan out how I had hoped—TacRP is built around so many modern mechanics and systems that it's hard to make it "old school" without stripping away nearly all of them. 
 <p>Regardless, what I ended up with before abandoning it is still accessible via the console for preservation's sake, if you're interested.
 
-
 <hr>
 
 <h3>Changelist</h3>
 <ul>
+<li><b>Major Change:</b> Melee attributes & boost perks.
+<li><b>Major Change:</b> NPC weapon dropdown with random roll option.
+<li><b>Major Change:</b> Weapon dropping and swapping. TacRP weapons will now require pressing +USE to pick up - this can be disabled.
 <li><b>Added:</b> New icons for Deadeye and Grenadier.
-<li><b>Added:</b> Weapon dropping and swapping. TacRP weapons will now require pressing +USE to pick up - this can be disabled.
 <li><b>Added:</b> Unfinished Old School balance mode. Enter "tacrp_balance 4" in console to access.
 <li><b>Added:</b> CVars for toggling specific movement penalties.
 <li><b>Added:</b> Restored concealment accessory. Hides weapon when holstered.
 <li><b>Added:</b> Bipod hint will now draw with backup HUD.
 <li><b>Added:</b> 40mm grenade casing eject effect.
+<li><b>Added:</b> Dual MTX tactical attachment slot, attached to the right gun.
 <li><b>Changed:</b> Gunfire can now penetrate LVS vehicles.
 <li><b>Changed:</b> RPG rockets can now penetrate LVS vehicles and damage Combine Helicopter NPCs on a direct hit.
 <li><b>Changed:</b> RPG-7 & M320 moved to separate launchers weapon category.
 <li><b>Changed:</b> Added "Special Weapon" category for unorthodox weapons that don't fit any other category (currently only used by expansion weapons).
-<li><b>Changed:</b> Dual MTX tactical attachment slot, attached to the right gun.
-<li><b>Changed:</b> New Deadeye and Grenadier icons.
 <li><b>Changed:</b> New trigger category for 4-position FCG weapons (weapons with auto, burst & semi modes). Blocks the Forced Reset and Burst triggers.
 <li><b>Rebalance:</b> RPG rockets do more direct impact damage.
 <li><b>Rebalance:</b> Deadeye grants increased zoom distance (again).
@@ -582,31 +586,11 @@ The Soviet/AK themed expansion starring 9 weapons, including well-known AK varia
     {
         Title = "U17 Expansions",
         Type = "Patch Notes",
-        Date = "2023-12-20",
+        Date = "2023-12-24",
         Author = "speedonerd",
         Major = false,
-        Summary = "New Year, New Weapons.",
+        Summary = "Touchups to existing packs.",
         Contents = [[<body style="font-family:'Myriad Pro';color:white;font-size:125%;">
-<p>My creative spark refuses to die and the weapon list only grows (we'll probably hit 200 before the end of 2024), so out comes yet another expansion, along with further touch ups to existing ones.
-
-<hr>
-
-<h2>Heavy Metal<i>(New!)</i></h2>
-<p><input type='submit' value='Open Workshop' onclick='console.log("RUNLUA:gui.OpenURL(\"https://steamcommunity.com/sharedfiles/filedetails/?id=3102297293\")")' /></p>
-<p>A pack born out of a spontaneous idea, more niche in its focus, with 8 brand new, ridiculously powerful weapons for when standard weaponry just isn't enough.
-<ul>
-<li>Pancor Jackhammer
-<li>H&K XM25 CDTE
-<li>Mk 153 SMAW
-<li>CheyTac M200 Intervention
-<li>Franchi SPAS-12
-<li>AMT Hardballer Longslide
-<li>Taurus Raging Judge "Executioner"
-<li>SSK .950 JDJ "Fat Mac" (you can shoulder fire it because video gane)
-</ul>
-
-<hr>
-
 <h3>Changelist</h3>
 <ul>
 <li><b>Added:</b> (ArmaLite Revolution) M16A1 refurbished bolt.

@@ -565,6 +565,21 @@ SWEP.StatDisplay = {
         end,
     },
     {
+        Name = "stat.explosivedamage",
+        Description = "stat.explosivedamage.desc",
+        Value = "ExplosiveDamage",
+        DefaultValue = 0,
+    },
+    {
+        Name = "stat.explosiveradius",
+        Description = "stat.explosiveradius.desc",
+        Value = "ExplosiveRadius",
+        DefaultValue = 0,
+        DisplayFunction = function(self, base, val)
+            return self:RangeUnitize(val)
+        end,
+    },
+    {
         Name = "stat.num",
         Description = "stat.num.desc",
         Value = "Num",

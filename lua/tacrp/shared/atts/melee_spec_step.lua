@@ -1,11 +1,17 @@
 ATT.PrintName = "Airdash"
 ATT.Icon = Material("entities/tacrp_att_melee_spec_step.png", "mips smooth")
 ATT.Description = "Mobility tool used by blood-fueled robots and transgender women."
-ATT.Pros = {"RELOAD: Dash in movement direction", "Invulnerable during dash"}
+ATT.Pros = {"RELOAD: Dash in movement direction", "CROUCH (Mid-air + Looka down): Fastfall", "Invulnerable during dash", "No fall damage"}
 
 ATT.Category = {"melee_spec"}
 
 ATT.SortOrder = 1
+
+ATT.Airdash = true
+
+-- ATT.Add_MeleeRechargeRate = 0.5
+
+local duration = 0.25
 
 local cost = 1 / 3
 ATT.Override_BreathSegmentSize = cost
@@ -33,7 +39,6 @@ local function setcharge(wep, f)
     wep:SetBreath(math.Clamp(f, 0, 1))
 end
 
-
 ATT.Hook_PreReload = function(wep)
     local ply = wep:GetOwner()
 
@@ -46,7 +51,8 @@ ATT.Hook_PreReload = function(wep)
     -- ply:SetNWFloat("TacRPDashCharge", ply:GetNWFloat("TacRPDashCharge", 0) - 1 / 3)
     ply:SetNWVector("TacRPDashDir", Vector())
     ply:SetNWFloat("TacRPDashTime", CurTime())
-    ply:SetNWFloat("TacRPDashSpeed", 2 + wep:GetValue("MeleePerkAgi") * 4)
+    ply:SetNWFloat("TacRPDashSpeed", 1.5 + wep:GetValue("MeleePerkAgi") * 1)
+    ply:SetNWBool("TacRPDashFall", false)
 
     if SERVER then
         makedashsound(ply, 95)
@@ -55,51 +61,20 @@ ATT.Hook_PreReload = function(wep)
     return true
 end
 
--- ATT.Hook_Recharge = function(wep)
---     if wep:GetOwner():GetNWFloat("TacRPDashTime", 0) + 0.25 > CurTime() then return true end
--- end
-
---[[]
 ATT.Hook_PostThink = function(wep)
     local ply = wep:GetOwner()
-    if (game.SinglePlayer() or IsFirstTimePredicted()) and ply:GetNWFloat("TacRPDashTime", 0) + 0.3 < CurTime() then
-        ply:SetNWFloat("TacRPDashCharge", math.min(1, ply:GetNWFloat("TacRPDashCharge", 0) + FrameTime() / (wep:GetValue("MeleeDashChargeTime") or 7.5)))
+    if IsFirstTimePredicted() and ply:KeyPressed(IN_DUCK) and !ply:IsOnGround() and !ply:GetNWBool("TacRPDashFall") then
+        local dot = ply:GetAimVector():Dot(Vector(0, 0, -1))
+        if dot > 0.707 then
+            ply:SetVelocity(-Vector(0, 0, ply:GetVelocity().z + 500 + wep:GetValue("MeleePerkAgi") * 500))
+            ply:SetNWBool("TacRPDashFall", true)
+        end
     end
 end
 
-function ATT.TacticalDraw(self)
-    local scrw = ScrW()
-    local scrh = ScrH()
-
-    local w = TacRP.SS(128)
-    local h = TacRP.SS(8)
-
-    local x = (scrw - w) / 2
-    local y = (scrh - h) * 7 / 8
-
-    surface.SetDrawColor(0, 0, 0, 100)
-    TacRP.DrawCorneredBox(x, y, w, h)
-
-    x = x + TacRP.SS(1)
-    y = y + TacRP.SS(1)
-    w = w - TacRP.SS(2)
-    h = h - TacRP.SS(2)
-
-    -- local c = math.Clamp(self:GetOwner():GetNWFloat("TacRPDashCharge", 0), 0, 1)
-    local c = getcharge(self)
-
-    surface.SetDrawColor(255, 255, 255, 100)
-    surface.DrawRect(x, y, w * c, h)
-
-    surface.SetDrawColor(255, 255, 255, 200)
-    surface.DrawLine(x + w / 3, y, x + w / 3, y + h)
-    surface.DrawLine(x + w / 3 * 2, y, x + w / 3 * 2, y + h)
-end
-]]
-
 hook.Add("SetupMove", "TacRP_Quickstep", function(ply, mv, cmd)
     if !IsFirstTimePredicted() then return end
-    if ply:GetNWFloat("TacRPDashTime", 0) + 0.1 > CurTime() then
+    if ply:GetNWFloat("TacRPDashTime", 0) + duration > CurTime() then
         if !ply.TacRPDashDir and !ply.TacRPDashCancel then
             ply.TacRPDashDir = TacRP.GetCmdVector(cmd, true)
             ply.TacRPDashStored = ply:GetVelocity():Length()
@@ -112,7 +87,7 @@ hook.Add("SetupMove", "TacRP_Quickstep", function(ply, mv, cmd)
 
             ply:ViewPunch(Angle(f / 2500, s / -5000, s / 2500))
 
-            ply:SetVelocity(ply.TacRPDashDir * ply:GetRunSpeed() * ply:GetNWFloat("TacRPDashSpeed", 4))
+            ply:SetVelocity(ply.TacRPDashDir * ply:GetRunSpeed() * ply:GetNWFloat("TacRPDashSpeed", 4) * (ply:IsOnGround() and 3 or 1))
 
             local eff = EffectData()
             eff:SetOrigin(ply:GetPos())
@@ -122,27 +97,29 @@ hook.Add("SetupMove", "TacRP_Quickstep", function(ply, mv, cmd)
         end
 
         if ply.TacRPDashGrounded and ply.TacRPDashCancel == nil and cmd:KeyDown(IN_JUMP) then
-            --ply:SetVelocity(ply.TacRPDashDir * ply:GetRunSpeed() * 1 + Vector(0, 0, 5 * ply:GetJumpPower()))
+            -- ply:SetVelocity(ply.TacRPDashDir * ply:GetRunSpeed() * 1 + Vector(0, 0, 5 * ply:GetJumpPower()))
             ply.TacRPDashGrounded = false
             ply.TacRPDashCancel = CurTime()
             ply:SetNWFloat("TacRPDashTime", 0)
         end
-    elseif ply:GetNWFloat("TacRPDashTime", 0) + 0.1 <= CurTime() then
+    elseif ply:GetNWFloat("TacRPDashTime", 0) + duration <= CurTime() then
         if ply.TacRPDashCancel != nil and CurTime() - ply.TacRPDashCancel > 0 and !ply:IsOnGround() then
-            ply:SetVelocity(ply:GetVelocity():GetNegated() + ply.TacRPDashDir * ply:GetRunSpeed() * (ply:GetNWFloat("TacRPDashSpeed", 4) / 3) + Vector(0, 0, 2 * ply:GetJumpPower()))
+            ply:SetVelocity(ply:GetVelocity():GetNegated() + ply.TacRPDashDir * ply:GetRunSpeed() * 2.5 + Vector(0, 0, 2 * ply:GetJumpPower()))
             ply.TacRPDashCancel = nil
             ply.TacRPDashDir = nil
         elseif ply.TacRPDashDir and ply.TacRPDashCancel == nil then
             ply.TacRPDashDir = nil
             if !ply:IsOnGround() then
-                ply:SetVelocity(ply:GetVelocity():GetNegated() / (ply:GetNWFloat("TacRPDashSpeed", 4) / 3))
+                ply:SetVelocity(ply:GetVelocity():GetNegated() / 1.5)
             end
+        elseif ply:IsOnGround() and ply:GetNWBool("TacRPDashFall") then
+            ply:SetNWBool("TacRPDashFall", false)
         end
     end
 end)
 
 hook.Add("FinishMove", "TacRP_Quickstep", function(ply, mv)
-    if ply:GetNWFloat("TacRPDashTime", 0) + 0.1 > CurTime() and ply.TacRPDashCancel == nil then
+    if ply:GetNWFloat("TacRPDashTime", 0) + duration > CurTime() and ply.TacRPDashCancel == nil then
         local v = mv:GetVelocity()
         v.z = 0
         mv:SetVelocity(v)
@@ -150,7 +127,7 @@ hook.Add("FinishMove", "TacRP_Quickstep", function(ply, mv)
 end)
 
 hook.Add("EntityTakeDamage", "TacRP_Quickstep", function(ent, dmginfo)
-    if !ent:IsPlayer() or ent:GetNWFloat("TacRPDashTime", 0) + 0.15 <= CurTime() then return end
+    if !ent:IsPlayer() or ent:GetNWFloat("TacRPDashTime", 0) + duration <= CurTime() then return end
     ent:EmitSound("weapons/fx/nearmiss/bulletltor0" .. math.random(3, 4) .. ".wav")
     local eff = EffectData()
     eff:SetOrigin(dmginfo:GetDamagePosition())
@@ -161,19 +138,10 @@ end)
 
 hook.Add("PlayerSpawn", "TacRP_Quickstep", function(ply, trans)
     if trans then return end
-    -- ply:SetNWFloat("TacRPDashCharge", 1)
-    ply:SetNWFloat("TacRPNinjaSmoke", 0)
-    ply:SetNWFloat("TacRPCharge", 1)
-    ply:SetNWFloat("TacRPChargeTime", 0)
     ply:SetNWFloat("TacRPDashTime", 0)
 end)
 
--- local clr = Color(255, 255, 255, 100)
--- hook.Add("PreDrawHalos", "TacRP_Quickstep", function()
---     for _, ply in pairs(player.GetAll()) do
---         if ply:Alive() and ply:GetNWFloat("TacRPDashTime", 0) + 0.15 > CurTime() then
---             local f = Lerp((CurTime() - ply:GetNWFloat("TacRPDashTime", 0)) / 0.15, 2, 1)
---             halo.Add({ply}, clr, f, f, 1)
---         end
---     end
--- end)
+hook.Add("GetFallDamage", "TacRP_Quickstep", function(ply, speed)
+    local wep = ply:GetActiveWeapon()
+    if IsValid(wep) and wep.ArcticTacRP and wep:GetValue("Airdash") then return true end
+end)
