@@ -1,7 +1,7 @@
 ATT.PrintName = "Airdash"
 ATT.Icon = Material("entities/tacrp_att_melee_spec_step.png", "mips smooth")
 ATT.Description = "Mobility tool used by blood-fueled robots and transgender women."
-ATT.Pros = {"RELOAD: Dash in movement direction", "CROUCH (Mid-air): Fastfall", "Invulnerable during dash", "No fall damage"}
+ATT.Pros = {"RELOAD: Dash in movement direction", "CROUCH (Mid-air + Looka down): Fastfall", "Invulnerable during dash", "No fall damage"}
 
 ATT.Category = {"melee_spec"}
 
@@ -9,7 +9,7 @@ ATT.SortOrder = 1
 
 ATT.Airdash = true
 
-ATT.Add_MeleeRechargeRate = 0.5
+-- ATT.Add_MeleeRechargeRate = 0.5
 
 local duration = 0.25
 
@@ -52,6 +52,7 @@ ATT.Hook_PreReload = function(wep)
     ply:SetNWVector("TacRPDashDir", Vector())
     ply:SetNWFloat("TacRPDashTime", CurTime())
     ply:SetNWFloat("TacRPDashSpeed", 1.5 + wep:GetValue("MeleePerkAgi") * 1)
+    ply:SetNWBool("TacRPDashFall", false)
 
     if SERVER then
         makedashsound(ply, 95)
@@ -63,8 +64,11 @@ end
 ATT.Hook_PostThink = function(wep)
     local ply = wep:GetOwner()
     if IsFirstTimePredicted() and ply:KeyPressed(IN_DUCK) and !ply:IsOnGround() and !ply:GetNWBool("TacRPDashFall") then
-        ply:SetVelocity(-Vector(0, 0, ply:GetVelocity().z + 500 + wep:GetValue("MeleePerkAgi") * 500))
-        ply:SetNWBool("TacRPDashFall", true)
+        local dot = ply:GetAimVector():Dot(Vector(0, 0, -1))
+        if dot > 0.707 then
+            ply:SetVelocity(-Vector(0, 0, ply:GetVelocity().z + 500 + wep:GetValue("MeleePerkAgi") * 500))
+            ply:SetNWBool("TacRPDashFall", true)
+        end
     end
 end
 
