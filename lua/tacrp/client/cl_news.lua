@@ -513,7 +513,7 @@ The Soviet/AK themed expansion starring 9 weapons, including well-known AK varia
     {
         Title = "Update 17",
         Type = "Patch Notes",
-        Date = "2023-12-20",
+        Date = "2023-12-24",
         Author = "speedonerd",
         Major = false,
         Summary = "A holly jolly update",
@@ -547,7 +547,6 @@ The Soviet/AK themed expansion starring 9 weapons, including well-known AK varia
 <p>Do you yearn for the good old days, when shooters were fun because they didn't have depth or good game balance? I did for a brief period, and it compelled me to quickly integrate a new balance mode that removed ironsights and tightened up weapon spread. 
 <p>It didn't really pan out how I had hoped—TacRP is built around so many modern mechanics and systems that it's hard to make it "old school" without stripping away nearly all of them. 
 <p>Regardless, what I ended up with before abandoning it is still accessible via the console for preservation's sake, if you're interested.
-
 
 <hr>
 
@@ -587,33 +586,11 @@ The Soviet/AK themed expansion starring 9 weapons, including well-known AK varia
     {
         Title = "U17 Expansions",
         Type = "Patch Notes",
-        Date = "2023-12-20",
+        Date = "2023-12-24",
         Author = "speedonerd",
         Major = false,
-        Summary = "New Year, New Weapons.",
+        Summary = "Touchups to existing packs.",
         Contents = [[<body style="font-family:'Myriad Pro';color:white;font-size:125%;">
-<p>My creative spark refuses to die and the weapon list only grows (we'll probably hit 200 before the end of 2024), so out comes yet another expansion, along with further touch ups to existing ones.
-
-<hr>
-
-<h2>Heavy Metal <i>(New!)</i></h2>
-<p><input type='submit' value='Open Workshop' onclick='console.log("RUNLUA:gui.OpenURL(\"https://steamcommunity.com/sharedfiles/filedetails/?id=3102297293\")")' /></p>
-<p>A pack born out of a spontaneous idea, more niche in its focus, with 10 brand new, ridiculously powerful weapons for when standard weaponry just isn't enough.
-<ul>
-<li>Pancor Jackhammer
-<li>H&K XM25 CDTE
-<li>Mk 153 SMAW
-<li>CheyTac M200 Intervention
-<li>Holland & Holland .600 Nitro Double Rifle
-<li>Franchi SPAS-12
-<li>AMT Hardballer Longslide
-<li>Dual Hardballers
-<li>Taurus Raging Judge "Executioner"
-<li>SSK .950 JDJ "Fat Mac" (you can shoulder fire it because video gane)
-</ul>
-
-<hr>
-
 <h3>Changelist</h3>
 <ul>
 <li><b>Added:</b> (ArmaLite Revolution) M16A1 refurbished bolt.
