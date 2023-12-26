@@ -11,6 +11,7 @@ SWEP.SubCatTier = "4Consumer"
 SWEP.SubCatType = "1Sidearm"
 
 SWEP.Description = "Surplus pistol from an era before tactical attachments and pistol optics, yet still hits quite hard."
+SWEP.Description_Quote = "Two world wars"
 
 SWEP.Trivia_Caliber = ".45 ACP"
 SWEP.Trivia_Manufacturer = "Colt"
