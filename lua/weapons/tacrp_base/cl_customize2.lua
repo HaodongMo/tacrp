@@ -207,8 +207,10 @@ local pages = {
 				header:SetPos( s(24), s(24) )
 
 				function header:Paint( w, h )
-					surface.SetDrawColor( color_black )
+					surface.SetDrawColor( cb )
 					surface.DrawRect( 0, 0, w, h )
+					surface.SetDrawColor( color_black )
+					surface.DrawOutlinedRect( 0, 0, w, h, s(1) )
 
 					draw.SimpleText( c.w:GetPrintName(), "C2_1", s(24), s(6), color_white )
 					draw.SimpleText( c.w:GetSubClassName(TacRP.UseTiers()), "C2_2", w - s(24), s(6), color_white, TEXT_ALIGN_RIGHT )
@@ -224,8 +226,10 @@ local pages = {
 				footer:SetSize( f_w, f_h )
 				footer:SetPos( self:GetWide()/2 - f_w/2, self:GetTall() - f_h - s(12) )
 				function footer:Paint( w, h )
-					surface.SetDrawColor( color_black )
+					surface.SetDrawColor( cb )
 					surface.DrawRect( 0, 0, w, h )
+					surface.SetDrawColor( color_black )
+					surface.DrawOutlinedRect( 0, 0, w, h, s(1) )
 
 					local desc = TacRP.MultiLineText( c.w.Description, w - s(48), "C2_3" )
 
@@ -255,8 +259,11 @@ local pages = {
 				footer:SetSize( self:GetWide()/2 - s(400)/2 - s(24+12), f_h )
 				footer:SetPos( s(24), c.sh - f_h - s(12) )
 				function footer:Paint( w, h )
-					surface.SetDrawColor( color_black )
+					surface.SetDrawColor( cb )
 					surface.DrawRect( 0, 0, w, h )
+					surface.SetDrawColor( color_black )
+					surface.DrawOutlinedRect( 0, 0, w, h, s(1) )
+
 					local bump = 0
 					local old = DisableClipping( true )
 					for i, v in pairs( weh ) do
@@ -415,9 +422,9 @@ function SWEP:C2_Open()
 		v.Initialize( page, c2, { w=w, s=s, sw=sw, sh=sh } )
 
 		function page:Paint( w, h )
-			surface.SetDrawColor( 0, 0, 0, 255 )
-			surface.SetMaterial( uio )
-			surface.DrawTexturedRect( 0, 0, w, h )
+			--surface.SetDrawColor( 0, 0, 0, 255 )
+			--surface.SetMaterial( uio )
+			--surface.DrawTexturedRect( 0, 0, w, h )
 
 			v.Paint( page, w, h, { w=w, s=s, sw=sw, sh=sh } )
 			return
@@ -455,12 +462,12 @@ function SWEP:C2_Open()
 					v:Hide()
 				else
 					v:Show()
-					v:SetPos( math.floor( ((sake+1)*sw)-sw ) )
+					v:SetY( math.floor( ((sake+1)*sh)-sh ) )
 				end
 			end
 			if i == c2.TTo then
 				v:Show()
-				v:SetPos( math.floor( (sake*sw)-sw ) )
+				v:SetY( math.floor( (sake*sh)-sh ) )
 			end
 		end
 	end
@@ -489,5 +496,28 @@ hook.Add( "PlayerBindPress", "TacRP_C2_PlayerBindPress", function( ply, bind, pr
 			c2_Desire = blocklist[bind]
 		end
 		return true
+	end
+end)
+
+local hide = {
+    ["CHudHealth"] = true,
+    ["CHudBattery"] = true,
+    ["CHudAmmo"] = true,
+    ["CHudSecondaryAmmo"] = true,
+    ["CHudGMod"] = true,
+}
+
+hook.Add("HUDShouldDraw", "TacRP_C2_HideHUD", function(name)
+    if !IsValid(LocalPlayer()) then return end
+
+	local p = LocalPlayer()
+	local w = p:GetActiveWeapon()
+	if IsValid( w ) and w.ArcticTacRP then
+	else
+		w = false
+	end
+
+	if w:GetCustomize() then
+		if hide[name] then return false end
 	end
 end)
