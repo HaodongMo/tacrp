@@ -40,6 +40,68 @@ surface.CreateFont( "C2_5B", {
 
 local cb = Color( 0, 0, 0, 127 )
 
+local function genselecta( c, host, slotnum, slottab )
+	if IsValid(selecta) then selecta:Remove() end
+	local s = c.s
+	selecta = vgui.Create( "DFrame" )
+	selecta:SetSize( s(120), s(320) )
+	selecta:Center()
+	selecta:MakePopup()
+	selecta:SetKeyboardInputEnabled( false )
+	function selecta:Paint( w, h )
+		surface.SetDrawColor( color_black )
+		surface.DrawRect( 0, 0, w, h )
+		surface.SetDrawColor( color_white )
+		surface.DrawOutlinedRect( 0, 0, w, h, s(1) )
+		return true
+	end
+
+	local atts = TacRP.GetAttsForCats( slottab.Category or "" )
+
+	for _, att in pairs( atts ) do
+		local ati = TacRP.GetAttTable( att )
+		local button = selecta:Add( "DButton" )
+		button:SetSize( 0, s(24) )
+		button:Dock( TOP )
+		button:DockMargin( 0, 0, 0, s(4) )
+		function button:Paint( w, h )
+			surface.SetDrawColor( color_black )
+			surface.DrawRect( 0, 0, w, h )
+			surface.SetDrawColor( color_white )
+			surface.DrawOutlinedRect( 0, 0, w, h, s(1) )
+			draw.SimpleText( TacRP:TryTranslate( ati.PrintName ), "C2_3", s(6), s(6), color_white )
+			if slottab.Installed == att then
+				draw.SimpleText( "installed", "C2_4", s(6), s(2), color_white )
+			end
+			return true
+		end
+
+		function button:DoClick()
+			if slottab.Installed then
+				if slottab.Installed == att then
+					c.w:Detach( slotnum )
+				else
+					c.w:Detach( slotnum, true, true )
+					c.w:Attach( slotnum, att )
+				end
+			else
+				c.w:Attach( slotnum, att )
+			end
+			host:InvalidateLayout()
+			selecta:Remove()
+		end
+
+		function button:DoRightClick()
+			if slottab.Installed == att then
+				c.w:Detach( slotnum )
+				host:InvalidateLayout()
+				selecta:Remove()
+			end
+		end
+
+	end
+end
+
 local pages = {
 	{
 		Name = "Customize",
@@ -89,65 +151,7 @@ local pages = {
 				end
 
 				function slot:DoClick()
-					if IsValid(selecta) then selecta:Remove() end
-					selecta = vgui.Create( "DFrame" )
-					selecta:SetSize( s(120), s(320) )
-					selecta:Center()
-					selecta:MakePopup()
-					selecta:SetKeyboardInputEnabled( false )
-					function selecta:Paint( w, h )
-						surface.SetDrawColor( color_black )
-						surface.DrawRect( 0, 0, w, h )
-						surface.SetDrawColor( color_white )
-						surface.DrawOutlinedRect( 0, 0, w, h, s(1) )
-						return true
-					end
-
-					local atts = TacRP.GetAttsForCats( slottab.Category or "" )
-
-					for _, att in pairs( atts ) do
-						local ati = TacRP.GetAttTable( att )
-						local button = selecta:Add( "DButton" )
-						button:SetSize( 0, s(24) )
-						button:Dock( TOP )
-						button:DockMargin( 0, 0, 0, s(4) )
-						function button:Paint( w, h )
-							surface.SetDrawColor( color_black )
-							surface.DrawRect( 0, 0, w, h )
-							surface.SetDrawColor( color_white )
-							surface.DrawOutlinedRect( 0, 0, w, h, s(1) )
-							draw.SimpleText( TacRP:TryTranslate( ati.PrintName ), "C2_3", s(6), s(6), color_white )
-							if slottab.Installed == att then
-								draw.SimpleText( "installed", "C2_4", s(6), s(2), color_white )
-							end
-							return true
-						end
-
-						local preself = preself
-						function button:DoClick()
-							if slottab.Installed then
-								if slottab.Installed == att then
-									c.w:Detach( slotnum )
-								else
-									c.w:Detach( slotnum, true, true )
-									c.w:Attach( slotnum, att )
-								end
-							else
-								c.w:Attach( slotnum, att )
-							end
-							preself:InvalidateLayout()
-							selecta:Remove()
-						end
-
-						function button:DoRightClick()
-							if slottab.Installed == att then
-								c.w:Detach( slotnum )
-								preself:InvalidateLayout()
-								selecta:Remove()
-							end
-						end
-			
-					end
+					genselecta( c, preself, slotnum, slottab )
 				end
 			end
 			function self:PerformLayout()
