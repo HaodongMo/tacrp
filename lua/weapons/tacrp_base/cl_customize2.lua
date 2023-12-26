@@ -288,6 +288,11 @@ function SWEP:C2_Open()
 	c2.btnMinim:SetVisible( false )
 	c2.lblTitle:SetVisible( false )
 
+	c2.TFrom = 1
+	c2.TTo = c2_Desire
+	c2.Prog = 1
+	c2.Lastdesire = c2_Desire
+
 	function c2:Paint( w, h )
 		return
 	end
@@ -367,17 +372,10 @@ function SWEP:C2_Open()
 			surface.SetDrawColor( 0, 0, 0, 255 )
 			surface.SetMaterial( uio )
 			surface.DrawTexturedRect( 0, 0, w, h )
-			-- surface.SetDrawColor( 0, 0, 0, 222 )
-			-- surface.DrawOutlinedRect( 0, 0, w, h, s(16) )
 
 			v.Paint( page, w, h, { w=w, s=s, sw=sw, sh=sh } )
 			return
 		end
-
-		-- local label = page:Add( "DButton" )
-		-- label:SetSize( s(120), s(30) )
-		-- label:SetText( v.Name )
-		-- label:Center()
 	end
 
 	function c2:Think()
@@ -393,10 +391,31 @@ function SWEP:C2_Open()
 			return
 		end
 	
-		c2_Currentpage = math.Approach( c2_Currentpage, c2_Desire, FrameTime() / 0.05 )
+		if c2.Lastdesire != c2_Desire then
+			c2.Prog = 0
+			c2.TFrom = c2.Lastdesire
+			c2.TTo = c2_Desire
+			c2.Lastdesire = c2_Desire
+		end
+		c2.Prog = math.Approach( c2.Prog, 1, FrameTime() / 0.3 )
+		local sake = math.ease.OutExpo( c2.Prog )
 
 		for i, v in ipairs( self.Pages ) do
-			v:SetPos( math.floor( (v.Num-c2_Currentpage) * (sw) ) )
+			if i != c2.TFrom and i!= c2.TTo then
+				v:Hide()
+			end
+			if i == c2.TFrom then
+				if sake == 1 then
+					v:Hide()
+				else
+					v:Show()
+					v:SetPos( math.floor( ((sake+1)*sw)-sw ) )
+				end
+			end
+			if i == c2.TTo then
+				v:Show()
+				v:SetPos( math.floor( (sake*sw)-sw ) )
+			end
 		end
 	end
 end
