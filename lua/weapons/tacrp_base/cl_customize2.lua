@@ -26,6 +26,8 @@ surface.CreateFont( "C2_4", {
 	weight = 0,
 })
 
+local cb = Color( 0, 0, 0, 127 )
+
 local pages = {
 	{
 		Name = "Customize",
@@ -41,21 +43,25 @@ local pages = {
 				slot:SetPos( s(24), 0 )
 
 				function slot:Paint( w, h )
-					surface.SetDrawColor( color_black )
+					surface.SetDrawColor( cb )
 					surface.DrawRect( 0, 0, w, h )
 					surface.SetDrawColor( color_white )
 					surface.DrawOutlinedRect( 0, 0, w, h, s(1) )
 
-					draw.SimpleText( slottab.PrintName, "C2_3", s(10), s(10-2), color_white )
+					draw.SimpleText( slottab.PrintName, "C2_3", s(10), slottab.Installed and s(10-2) or s(4), color_white )
 					if slottab.Installed then
 						surface.SetDrawColor( color_white )
-						surface.DrawRect( s(8), s(10+12), w - s(8*2), s(1) )
+						surface.DrawRect( s(8), s(10+12), s(90) - s(8*2), s(1) )
 						local ati = TacRP.GetAttTable( slottab.Installed )
 						local attname = "none"
 						if ati then
 							attname = TacRP:TryTranslate( ati.PrintName )
 						end
 						draw.SimpleText( attname, "C2_3", s(10), s(10+12+2), color_white )
+
+						surface.SetMaterial( ati.Icon )
+						surface.SetDrawColor( 255, 255, 255, 255 )
+						surface.DrawTexturedRect( s(90), s(4), s(36), s(36) )
 					end
 					return true
 				end
@@ -133,14 +139,17 @@ local pages = {
 			function self:PerformLayout()
 				local obump = 0
 				for i, v in ipairs( slotlist ) do
-					local tall = slotlistt[i].Installed and s(8+12+4+12+8) or s(8+12+8)
+					local ins = slotlistt[i].Installed
+					local tall = ins and s(8+12+4+12+8) or s(8+5+8)
 					obump = obump + tall + (i!=#slotlist and s(4) or 0)
 				end
 				local bump = self:GetTall()/2 - obump/2
 				for i, v in ipairs( slotlist ) do
-					local tall = slotlistt[i].Installed and s(8+12+4+12+8) or s(8+12+8)
+					local ins = slotlistt[i].Installed
+					local tall = ins and s(8+12+4+12+8) or s(8+5+8)
 					v:SetTall( tall )
 					v:SetY( bump )
+					v:SetWide( ins and s(90+32+8) or s(90) )
 					bump = bump + tall + s(4)
 				end
 			end
@@ -270,12 +279,32 @@ function SWEP:C2_Open()
 		return
 	end
 
-	c2.Pages = {}
+	-- Back and forth
+	for i=1, 2 do
+		local mbutton = c2:Add("DButton")
+		mbutton:SetSize( s(20), sh*(0.7) )
+		mbutton:SetPos( i==2 and math.ceil( sw-s(20) ), sh*(1-0.7)/2 )
+		mbutton:SetText( "MEOW" )
+		function mbutton:DoClick()
+			c2_Desire = math.Clamp( c2_Desire+(i==1 and -1 or 1), 1, #pages )
+		end
+		mbutton.Glow = 0
+		function mbutton:Paint( w, h )
+			surface.SetDrawColor( 255, 255, 255, self.Glow*127 )
+			surface.DrawRect( 0, 0, w, h )
+			return true
+		end
+		function mbutton:Think()
+			self.Glow = math.Approach( self.Glow, self:IsHovered() and 1 or 0, FrameTime()/0.1 )
+		end
+	end
 
+	-- Tabs row
+	local totallength = s((#pages*64)+(#pages-1)*4)
 	for i, v in ipairs( pages ) do
 		local mbutton = c2:Add("DButton")
 		mbutton:SetSize( s(64), s(14) )
-		mbutton:SetPos( s(24)+s((i-1)*(64+4)), s(6) )
+		mbutton:SetPos( sw/2 - totallength/2 + s((i-1)*(64+4)), s(6) )
 		mbutton:SetText( v.Name )
 		function mbutton:DoClick()
 			c2_Desire = i
@@ -289,7 +318,11 @@ function SWEP:C2_Open()
 			draw.SimpleText( v.Name, "C2_4", w/2, h/2, color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER )
 			return true
 		end
+	end
 
+	-- Generate pages
+	c2.Pages = {}
+	for i, v in ipairs( pages ) do
 		local page = c2:Add( "DPanel" )
 		page:SetSize( sw, sh )
 		page:MoveToBack()
