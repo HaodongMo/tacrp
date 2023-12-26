@@ -23,7 +23,7 @@ surface.CreateFont( "C2_3I", {
 })
 surface.CreateFont( "C2_4", {
 	font = fn,
-	size = ScreenScaleH(8),
+	size = ScreenScaleH(10),
 	weight = 0,
 })
 surface.CreateFont( "C2_5A", {
@@ -259,11 +259,11 @@ local uio = Material( "uio/shadow.png", "" )
 
 
 
-local c2_Currentpage = 1
-local c2_Desire = 1
+local c2_Currentpage = 3
+local c2_Desire = 3
 
 function SWEP:C2_Open()
-	if IsValid( c2 ) then c2:Remove() return end
+	if IsValid( c2 ) then c2:Remove() end
 	local s = ScreenScaleH
 	local sw, sh = ScrW(), ScrH()
 	c2 = vgui.Create( "DFrame" )
@@ -318,11 +318,11 @@ function SWEP:C2_Open()
 	end
 
 	-- Tabs row
-	local totallength = s((#pages*64)+(#pages-1)*4)
+	local totallength = s((#pages*72)+(#pages-1)*4)
 	for i, v in ipairs( pages ) do
 		local mbutton = c2:Add("DButton")
-		mbutton:SetSize( s(64), s(14) )
-		mbutton:SetPos( sw/2 - totallength/2 + s((i-1)*(64+4)), s(6) )
+		mbutton:SetSize( s(72), s(18) )
+		mbutton:SetPos( sw/2 - totallength/2 + s((i-1)*(72+4)), s(24/2 - 18/2) )
 		mbutton:SetText( v.Name )
 		function mbutton:DoClick()
 			c2_Desire = i
@@ -390,7 +390,7 @@ function SWEP:C2_Open()
 			c2_Desire = 4
 		end
 
-		c2_Currentpage = math.Approach( c2_Currentpage, c2_Desire, FrameTime() / 0.1 )
+		c2_Currentpage = math.Approach( c2_Currentpage, c2_Desire, FrameTime() / 0.05 )
 
 		for i, v in ipairs( self.Pages ) do
 			v:SetPos( math.floor( (v.Num-c2_Currentpage) * (sw) ) )
