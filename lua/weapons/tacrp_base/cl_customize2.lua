@@ -1,28 +1,40 @@
 
+local fn = "Myriad Pro"--"Bahnschrift"
 surface.CreateFont( "C2_1", {
-	font = "Bahnschrift",
+	font = fn,
 	size = ScreenScaleH(36),
 	weight = 0,
 })
 surface.CreateFont( "C2_2", {
-	font = "Bahnschrift",
+	font = fn,
 	size = ScreenScaleH(18),
 	weight = 0,
 })
 surface.CreateFont( "C2_3", {
-	font = "Bahnschrift",
+	font = fn,
 	size = ScreenScaleH(12),
 	weight = 0,
 })
 surface.CreateFont( "C2_3I", {
-	font = "Bahnschrift",
+	font = fn,
 	size = ScreenScaleH(12),
 	italic = true,
 	weight = 0,
 })
 surface.CreateFont( "C2_4", {
-	font = "Bahnschrift",
+	font = fn,
 	size = ScreenScaleH(8),
+	weight = 0,
+})
+surface.CreateFont( "C2_5A", {
+	font = fn,
+	size = ScreenScaleH(12),
+	weight = 0,
+	italic = true,
+})
+surface.CreateFont( "C2_5B", {
+	font = fn,
+	size = ScreenScaleH(16),
 	weight = 0,
 })
 
@@ -43,25 +55,27 @@ local pages = {
 				slot:SetPos( s(24), 0 )
 
 				function slot:Paint( w, h )
+					local ins = slottab.Installed
 					surface.SetDrawColor( cb )
 					surface.DrawRect( 0, 0, w, h )
 					surface.SetDrawColor( color_white )
 					surface.DrawOutlinedRect( 0, 0, w, h, s(1) )
 
-					draw.SimpleText( slottab.PrintName, "C2_3", s(10), slottab.Installed and s(10-2) or s(4), color_white )
-					if slottab.Installed then
+					draw.SimpleText( slottab.PrintName, "C2_5A", s(10), s(ins and 4 or 2), color_white )
+					local tx = surface.GetTextSize( slottab.PrintName )
+					if ins then
 						surface.SetDrawColor( color_white )
-						surface.DrawRect( s(8), s(10+12), s(90) - s(8*2), s(1) )
-						local ati = TacRP.GetAttTable( slottab.Installed )
+						surface.DrawRect( s(11), s(15), tx+s(0), s(1) )
+						local ati = TacRP.GetAttTable( ins )
 						local attname = "none"
 						if ati then
 							attname = TacRP:TryTranslate( ati.PrintName )
 						end
-						draw.SimpleText( attname, "C2_3", s(10), s(10+12+2), color_white )
+						draw.SimpleText( attname, "C2_5B", s(10), s(4+(12-2)), color_white )
 
 						surface.SetMaterial( ati.Icon )
 						surface.SetDrawColor( 255, 255, 255, 255 )
-						surface.DrawTexturedRect( s(90), s(4), s(36), s(36) )
+						surface.DrawTexturedRect( w-h-s(4), 0, h, h )
 					end
 					return true
 				end
@@ -77,7 +91,7 @@ local pages = {
 				function slot:DoClick()
 					if IsValid(selecta) then selecta:Remove() end
 					selecta = vgui.Create( "DFrame" )
-					selecta:SetSize( s(120), s(240) )
+					selecta:SetSize( s(120), s(320) )
 					selecta:Center()
 					selecta:MakePopup()
 					selecta:SetKeyboardInputEnabled( false )
@@ -140,16 +154,16 @@ local pages = {
 				local obump = 0
 				for i, v in ipairs( slotlist ) do
 					local ins = slotlistt[i].Installed
-					local tall = ins and s(8+12+4+12+8) or s(8+5+8)
+					local tall = ins and s(4+(12-2)+16+2+4) or s(2+(12)+2)
 					obump = obump + tall + (i!=#slotlist and s(4) or 0)
 				end
 				local bump = self:GetTall()/2 - obump/2
 				for i, v in ipairs( slotlist ) do
 					local ins = slotlistt[i].Installed
-					local tall = ins and s(8+12+4+12+8) or s(8+5+8)
+					local tall = ins and s(4+(12-2)+16+2+4) or s(2+(12)+2)
 					v:SetTall( tall )
 					v:SetY( bump )
-					v:SetWide( ins and s(90+32+8) or s(90) )
+					v:SetWide( ins and s(90+4+4)+tall+s(4) or s(90) )
 					bump = bump + tall + s(4)
 				end
 			end
