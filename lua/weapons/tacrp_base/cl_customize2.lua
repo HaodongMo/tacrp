@@ -342,9 +342,9 @@ function SWEP:C2_Open()
 	c2.btnMinim:SetVisible( false )
 	c2.lblTitle:SetVisible( false )
 
-	c2.TFrom = 1
+	c2.TFrom = 0
 	c2.TTo = c2_Desire
-	c2.Prog = 1
+	c2.Prog = 0
 	c2.Lastdesire = c2_Desire
 
 	local p = LocalPlayer()
