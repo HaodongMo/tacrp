@@ -114,6 +114,11 @@ local weh = {
 	end,
 }
 
+local function DST( text, font, x, y, color, drop, xalign, yalign )
+	draw.SimpleText( text, font, x, y+drop, color_black, xalign, yalign )
+	return draw.SimpleText( text, font, x, y, color, xalign, yalign )
+end
+
 local pages = {
 	{
 		Name = "Customize",
@@ -212,9 +217,9 @@ local pages = {
 					surface.SetDrawColor( color_black )
 					surface.DrawOutlinedRect( 0, 0, w, h, s(1) )
 
-					draw.SimpleText( c.w:GetPrintName(), "C2_1", s(24), s(6), color_white )
-					draw.SimpleText( c.w:GetSubClassName(TacRP.UseTiers()), "C2_2", w - s(24), s(6), color_white, TEXT_ALIGN_RIGHT )
-					draw.SimpleText( c.w:GetValue("Trivia_Caliber"), "C2_2", w - s(24), s(6+18), color_white, TEXT_ALIGN_RIGHT )
+					DST( c.w:GetPrintName(), "C2_1", s(24), s(6), color_white, s(2) )
+					DST( c.w:GetSubClassName(TacRP.UseTiers()), "C2_2", w - s(24), s(6), color_white, s(1), TEXT_ALIGN_RIGHT )
+					DST( c.w:GetValue("Trivia_Caliber"), "C2_2", w - s(24), s(6+18), color_white, s(1), TEXT_ALIGN_RIGHT )
 
 					return true
 				end
@@ -235,9 +240,11 @@ local pages = {
 
 					local lines = 0
 					for i, v in ipairs( desc ) do
+						draw.SimpleText( v, "C2_3", s(24), s(12+(12*(i-1))+1), color_black )
 						draw.SimpleText( v, "C2_3", s(24), s(12+(12*(i-1))), color_white )
 						lines = i
 					end
+					draw.SimpleText( c.w.Description_Quote, "C2_3I", s(24), s(12+(12*(lines+1))+1), color_black )
 					draw.SimpleText( c.w.Description_Quote, "C2_3I", s(24), s(12+(12*(lines+1))), color_white )
 				end
 
@@ -269,13 +276,15 @@ local pages = {
 					for i, v in pairs( weh ) do
 						draw.SimpleText( i, "C2_4", s(8), s(12+4)+bump, color_white, TEXT_ALIGN_LEFT, TEXT_ALIGN_BOTTOM )
 						local txt = isfunction(v) and v(c.w) or c.w:GetValue(v)
+						DST( i, "C2_4", s(8), s(12+4)+bump, color_white, s(1), TEXT_ALIGN_LEFT, TEXT_ALIGN_BOTTOM )
+						local txt = isfunction(v) and v(c.w) or c.w:GetValue(v) or "?"
 						local ftu = "C2_3"
 						surface.SetFont(ftu)
 						local tx = surface.GetTextSize(txt)
 						if tx > s(180-8-8-64) then
 							ftu = "C2_4"
 						end
-						draw.SimpleText( txt, ftu, w-s(8), s(12+4)+bump, color_white, TEXT_ALIGN_RIGHT, TEXT_ALIGN_BOTTOM )
+						DST( txt, ftu, w-s(8), s(12+4)+bump, color_white, s(1), TEXT_ALIGN_RIGHT, TEXT_ALIGN_BOTTOM )
 						bump = bump + s(12)
 					end
 					DisableClipping( old )
@@ -291,8 +300,7 @@ local pages = {
 		end,
 		Paint = function( self, w, h, c )
 			local s = c.s
-			draw.SimpleText( "Terminal Effect panel goes here.", "C2_1", w/2 + s(1), h/2 + s(1), color_black, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER )
-			draw.SimpleText( "Terminal Effect panel goes here.", "C2_1", w/2, h/2, color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER )
+			DST( "Terminal Effect panel goes here.", "C2_1", w/2, h/2, color_white, s(1), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER )
 		end,
 	},
 	{
@@ -301,8 +309,7 @@ local pages = {
 		end,
 		Paint = function( self, w, h, c )
 			local s = c.s
-			draw.SimpleText( "Newsletter panel goes here.", "C2_1", w/2 + s(1), h/2 + s(1), color_black, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER )
-			draw.SimpleText( "Newsletter panel goes here.", "C2_1", w/2, h/2, color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER )
+			DST( "Newsletter panel goes here.", "C2_1", w/2, h/2, color_white, s(1), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER )
 		end,
 	},
 	{
@@ -311,8 +318,7 @@ local pages = {
 		end,
 		Paint = function( self, w, h, c )
 			local s = c.s
-			draw.SimpleText( "Inspect panel goes here.", "C2_1", w/2 + s(1), h/2 + s(1), color_black, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER )
-			draw.SimpleText( "Inspect panel goes here.", "C2_1", w/2, h/2, color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER )
+			DST( "Inspect panel goes here.", "C2_1", w/2, h/2, color_white, s(1), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER )
 		end,
 	},
 }
@@ -517,7 +523,7 @@ hook.Add("HUDShouldDraw", "TacRP_C2_HideHUD", function(name)
 		w = false
 	end
 
-	if w:GetCustomize() then
+	if w and w:GetCustomize() then
 		if hide[name] then return false end
 	end
 end)
