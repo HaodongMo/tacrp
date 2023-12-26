@@ -180,6 +180,9 @@ local pages = {
 		Initialize = function( self, par, c )
 		end,
 		Paint = function( self, w, h, c )
+			local s = c.s
+			draw.SimpleText( "Statistics panel goes here.", "C2_1", w/2 + s(1), h/2 + s(1), color_black, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER )
+			draw.SimpleText( "Statistics panel goes here.", "C2_1", w/2, h/2, color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER )
 		end,
 	},
 	{
@@ -237,6 +240,9 @@ local pages = {
 		Initialize = function( self, par, c )
 		end,
 		Paint = function( self, w, h, c )
+			local s = c.s
+			draw.SimpleText( "Terminal Effect panel goes here.", "C2_1", w/2 + s(1), h/2 + s(1), color_black, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER )
+			draw.SimpleText( "Terminal Effect panel goes here.", "C2_1", w/2, h/2, color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER )
 		end,
 	},
 	{
@@ -244,6 +250,9 @@ local pages = {
 		Initialize = function( self, par, c )
 		end,
 		Paint = function( self, w, h, c )
+			local s = c.s
+			draw.SimpleText( "Newsletter panel goes here.", "C2_1", w/2 + s(1), h/2 + s(1), color_black, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER )
+			draw.SimpleText( "Newsletter panel goes here.", "C2_1", w/2, h/2, color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER )
 		end,
 	},
 	{
@@ -251,6 +260,9 @@ local pages = {
 		Initialize = function( self, par, c )
 		end,
 		Paint = function( self, w, h, c )
+			local s = c.s
+			draw.SimpleText( "Inspect panel goes here.", "C2_1", w/2 + s(1), h/2 + s(1), color_black, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER )
+			draw.SimpleText( "Inspect panel goes here.", "C2_1", w/2, h/2, color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER )
 		end,
 	},
 }
