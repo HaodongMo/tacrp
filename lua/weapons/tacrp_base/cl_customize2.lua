@@ -44,28 +44,27 @@ local function genselecta( c, host, slotnum, slottab )
 	if IsValid(selecta) then selecta:Remove() end
 	local s = c.s
 	selecta = vgui.Create( "DFrame" )
-	selecta:SetSize( s(120), s(320) )
+	selecta:SetSize( s(180), s(380) )
 	selecta:Center()
 	selecta:MakePopup()
 	selecta:SetKeyboardInputEnabled( false )
 	function selecta:Paint( w, h )
-		surface.SetDrawColor( color_black )
-		surface.DrawRect( 0, 0, w, h )
-		surface.SetDrawColor( color_white )
-		surface.DrawOutlinedRect( 0, 0, w, h, s(1) )
 		return true
 	end
+
+	local sp = selecta:Add("DScrollPanel")
+	sp:Dock( FILL )
 
 	local atts = TacRP.GetAttsForCats( slottab.Category or "" )
 
 	for _, att in pairs( atts ) do
 		local ati = TacRP.GetAttTable( att )
-		local button = selecta:Add( "DButton" )
-		button:SetSize( 0, s(24) )
+		local button = sp:Add( "DButton" )
+		button:SetSize( 0, s(48) )
 		button:Dock( TOP )
 		button:DockMargin( 0, 0, 0, s(4) )
 		function button:Paint( w, h )
-			surface.SetDrawColor( color_black )
+			surface.SetDrawColor( cb )
 			surface.DrawRect( 0, 0, w, h )
 			surface.SetDrawColor( color_white )
 			surface.DrawOutlinedRect( 0, 0, w, h, s(1) )
@@ -73,6 +72,11 @@ local function genselecta( c, host, slotnum, slottab )
 			if slottab.Installed == att then
 				draw.SimpleText( "installed", "C2_4", s(6), s(2), color_white )
 			end
+
+			surface.SetDrawColor( 255, 255, 255, 255 )
+			surface.SetMaterial( ati.Icon )
+			surface.DrawRect( w-h-s(4), 0, h, h )
+			surface.DrawTexturedRect( w-h-s(4), 0, h, h )
 			return true
 		end
 
