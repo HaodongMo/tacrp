@@ -290,7 +290,6 @@ local pages = {
 			do
 				local footer = self:Add( "DPanel" )
 				local multiline = TacRP.MultiLineText( c.w.Credits, math.huge, "C2_3" )
-				print(multiline[#multiline])
 				if multiline[#multiline] == " " then
 					multiline[#multiline] = nil
 				end
@@ -314,8 +313,14 @@ local pages = {
 							end
 							reassemble = reassemble .. v
 						end
+						local ftu = "C2_3"
+						surface.SetFont(ftu)
+						local tx = surface.GetTextSize(reassemble)
+						if tx > (w-s(4+4+32)) then
+							ftu = "C2_4"
+						end
 						DST( mweh[1], "C2_4", s(4), s(4+(i)*12), color_white, s(1), TEXT_ALIGN_LEFT, TEXT_ALIGN_BOTTOM )
-						DST( reassemble, "C2_3", w-s(4), s(4+(i)*12), color_white, s(1), TEXT_ALIGN_RIGHT, TEXT_ALIGN_BOTTOM )
+						DST( reassemble, ftu, w-s(4), s(4+(i)*12), color_white, s(1), TEXT_ALIGN_RIGHT, TEXT_ALIGN_BOTTOM )
 					end
 				end
 			end
