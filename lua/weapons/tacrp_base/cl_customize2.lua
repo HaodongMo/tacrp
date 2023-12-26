@@ -274,8 +274,6 @@ local pages = {
 					local bump = 0
 					local old = DisableClipping( true )
 					for i, v in pairs( weh ) do
-						draw.SimpleText( i, "C2_4", s(8), s(12+4)+bump, color_white, TEXT_ALIGN_LEFT, TEXT_ALIGN_BOTTOM )
-						local txt = isfunction(v) and v(c.w) or c.w:GetValue(v)
 						DST( i, "C2_4", s(8), s(12+4)+bump, color_white, s(1), TEXT_ALIGN_LEFT, TEXT_ALIGN_BOTTOM )
 						local txt = isfunction(v) and v(c.w) or c.w:GetValue(v) or "?"
 						local ftu = "C2_3"
