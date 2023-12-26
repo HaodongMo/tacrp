@@ -345,6 +345,7 @@ function SWEP:C2_Open()
 			surface.SetDrawColor( color_white )
 			surface.DrawOutlinedRect( 0, 0, w, h, s(1) )
 			
+			draw.SimpleText( i, "C2_4", s(3), s(1), color_white )
 			draw.SimpleText( v.Name, "C2_4", w/2, h/2, color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER )
 			return true
 		end
@@ -392,16 +393,6 @@ function SWEP:C2_Open()
 			return
 		end
 	
-		if input.IsKeyDown( KEY_1 ) then
-			c2_Desire = 1
-		elseif input.IsKeyDown( KEY_2 ) then
-			c2_Desire = 2
-		elseif input.IsKeyDown( KEY_3 ) then
-			c2_Desire = 3
-		elseif input.IsKeyDown( KEY_4 ) then
-			c2_Desire = 4
-		end
-
 		c2_Currentpage = math.Approach( c2_Currentpage, c2_Desire, FrameTime() / 0.05 )
 
 		for i, v in ipairs( self.Pages ) do
@@ -413,3 +404,25 @@ end
 function SWEP:C2_Close()
 	if IsValid( c2 ) then c2:Remove() return end
 end
+
+local blocklist = {
+	["slot1"] = 1,
+	["slot2"] = 2,
+	["slot3"] = 3,
+	["slot4"] = 4,
+	["slot5"] = 5,
+	["slot6"] = 6,
+	["slot7"] = 7,
+	["slot8"] = 8,
+	["slot9"] = 9,
+	["slot0"] = 0,
+}
+
+hook.Add( "PlayerBindPress", "TacRP_C2_PlayerBindPress", function( ply, bind, pressed )
+	if IsValid( c2 ) and blocklist[bind] then
+		if blocklist[bind] >= 1 and blocklist[bind] <= #pages then
+			c2_Desire = blocklist[bind]
+		end
+		return true
+	end
+end)
