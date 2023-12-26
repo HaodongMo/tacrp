@@ -262,8 +262,8 @@ local pages = {
 
 			do
 				local footer = self:Add( "DPanel" )
-				local f_w, f_h = c.sw, s(4+(12*3)+4)
-				footer:SetSize( self:GetWide()/2 - s(400)/2 - s(24+12), f_h )
+				local f_w, f_h = self:GetWide()/2 - s(400)/2 - s(24+12), s(4+(12*3)+4)
+				footer:SetSize( f_w, f_h )
 				footer:SetPos( s(24), c.sh - f_h - s(12) )
 				function footer:Paint( w, h )
 					surface.SetDrawColor( cb )
@@ -272,7 +272,6 @@ local pages = {
 					surface.DrawOutlinedRect( 0, 0, w, h, s(1) )
 
 					local bump = 0
-					local old = DisableClipping( true )
 					for i, v in pairs( weh ) do
 						DST( i, "C2_4", s(8), s(12+4)+bump, color_white, s(1), TEXT_ALIGN_LEFT, TEXT_ALIGN_BOTTOM )
 						local txt = isfunction(v) and v(c.w) or c.w:GetValue(v) or "?"
@@ -285,7 +284,39 @@ local pages = {
 						DST( txt, ftu, w-s(8), s(12+4)+bump, color_white, s(1), TEXT_ALIGN_RIGHT, TEXT_ALIGN_BOTTOM )
 						bump = bump + s(12)
 					end
-					DisableClipping( old )
+				end
+			end
+
+			do
+				local footer = self:Add( "DPanel" )
+				local multiline = TacRP.MultiLineText( c.w.Credits, math.huge, "C2_3" )
+				print(multiline[#multiline])
+				if multiline[#multiline] == " " then
+					multiline[#multiline] = nil
+				end
+				local f_w, f_h = self:GetWide()/2 - s(400)/2 - s(24+12), s(4+(12*(#multiline))+4)
+				footer:SetSize( f_w, f_h )
+				footer:SetPos( c.sw - f_w - s(24), c.sh - f_h - s(12) )
+				function footer:Paint( w, h )
+					surface.SetDrawColor( cb )
+					surface.DrawRect( 0, 0, w, h )
+					surface.SetDrawColor( color_black )
+					surface.DrawOutlinedRect( 0, 0, w, h, s(1) )
+
+					for i, line in ipairs( multiline ) do
+						-- If you can find out how to do this with Lua Patterns, that'd be nice.
+						local mweh = string.Explode( ": ", line )
+						local reassemble = ""
+						for i, v in ipairs( mweh ) do
+							if i==1 then continue end
+							if i!=2 then
+								reassemble = reassemble .. ": "
+							end
+							reassemble = reassemble .. v
+						end
+						DST( mweh[1], "C2_4", s(4), s(4+(i)*12), color_white, s(1), TEXT_ALIGN_LEFT, TEXT_ALIGN_BOTTOM )
+						DST( reassemble, "C2_3", w-s(4), s(4+(i)*12), color_white, s(1), TEXT_ALIGN_RIGHT, TEXT_ALIGN_BOTTOM )
+					end
 				end
 			end
 		end,
