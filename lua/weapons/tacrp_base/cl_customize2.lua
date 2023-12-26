@@ -106,6 +106,14 @@ local function genselecta( c, host, slotnum, slottab )
 	end
 end
 
+local weh = {
+	["Manufacturer"] = "Trivia_Manufacturer",
+	["Production Year"] = "Trivia_Year",
+	["Faction"] = function( w )
+		return (TacRP:GetPhrase(TacRP.FactionToPhrase[w:GetValue("Faction")]))
+	end,
+}
+
 local pages = {
 	{
 		Name = "Customize",
@@ -192,48 +200,79 @@ local pages = {
 	{
 		Name = "Information",
 		Initialize = function( self, par, c )
-			local header = self:Add( "DPanel" )
 			local s = c.s
-			header:SetSize( c.sw - s(48), s(48) )
-			header:SetPos( s(24), s(24) )
+			do
+				local header = self:Add( "DPanel" )
+				header:SetSize( c.sw - s(48), s(48) )
+				header:SetPos( s(24), s(24) )
 
-			function header:Paint( w, h )
-				surface.SetDrawColor( color_black )
-				surface.DrawRect( 0, 0, w, h )
+				function header:Paint( w, h )
+					surface.SetDrawColor( color_black )
+					surface.DrawRect( 0, 0, w, h )
 
-				draw.SimpleText( c.w:GetPrintName(), "C2_1", s(24), s(6), color_white )
-				draw.SimpleText( c.w:GetSubClassName(TacRP.UseTiers()), "C2_2", w - s(24), s(6), color_white, TEXT_ALIGN_RIGHT )
-				draw.SimpleText( c.w:GetValue("Trivia_Caliber"), "C2_2", w - s(24), s(6+18), color_white, TEXT_ALIGN_RIGHT )
-				return
-			end
+					draw.SimpleText( c.w:GetPrintName(), "C2_1", s(24), s(6), color_white )
+					draw.SimpleText( c.w:GetSubClassName(TacRP.UseTiers()), "C2_2", w - s(24), s(6), color_white, TEXT_ALIGN_RIGHT )
+					draw.SimpleText( c.w:GetValue("Trivia_Caliber"), "C2_2", w - s(24), s(6+18), color_white, TEXT_ALIGN_RIGHT )
 
-			local footer = self:Add( "DPanel" )
-			local f_w, f_h = s(400), s(12+(12*1)+12)
-			footer:SetSize( f_w, f_h )
-			footer:SetPos( self:GetWide()/2 - f_w/2, self:GetTall() - f_h - s(12) )
-			function footer:Paint( w, h )
-				surface.SetDrawColor( color_black )
-				surface.DrawRect( 0, 0, w, h )
-
-				local desc = TacRP.MultiLineText( c.w.Description, w - s(48), "C2_3" )
-
-				local lines = 0
-				for i, v in ipairs( desc ) do
-					draw.SimpleText( v, "C2_3", s(24), s(12+(12*(i-1))), color_white )
-					lines = i
+					return true
 				end
-				draw.SimpleText( c.w.Description_Quote, "C2_3I", s(24), s(12+(12*(lines+1))), color_white )
 			end
 
-			local preself = self
-			function footer:PerformLayout( w, h )
-				local desc = TacRP.MultiLineText( c.w.Description, w - s(48), "C2_3" )
-				local lines = #desc
-				if c.w.Description_Quote then lines = lines + 2 end
-				f_h = s(12+(12*lines)+12)
+			do
+				local footer = self:Add( "DPanel" )
+				local f_w, f_h = s(400), s(12+(12*1)+12)
+				footer:SetSize( f_w, f_h )
+				footer:SetPos( self:GetWide()/2 - f_w/2, self:GetTall() - f_h - s(12) )
+				function footer:Paint( w, h )
+					surface.SetDrawColor( color_black )
+					surface.DrawRect( 0, 0, w, h )
 
-				self:SetSize( f_w, f_h )
-				self:SetPos( preself:GetWide()/2 - f_w/2, preself:GetTall() - f_h - s(12) )
+					local desc = TacRP.MultiLineText( c.w.Description, w - s(48), "C2_3" )
+
+					local lines = 0
+					for i, v in ipairs( desc ) do
+						draw.SimpleText( v, "C2_3", s(24), s(12+(12*(i-1))), color_white )
+						lines = i
+					end
+					draw.SimpleText( c.w.Description_Quote, "C2_3I", s(24), s(12+(12*(lines+1))), color_white )
+				end
+
+				local preself = self
+				function footer:PerformLayout( w, h )
+					local desc = TacRP.MultiLineText( c.w.Description, w - s(48), "C2_3" )
+					local lines = #desc
+					if c.w.Description_Quote then lines = lines + 2 end
+					f_h = s(12+(12*lines)+12)
+
+					self:SetSize( f_w, f_h )
+					self:SetPos( preself:GetWide()/2 - f_w/2, preself:GetTall() - f_h - s(12) )
+				end
+			end
+
+			do
+				local footer = self:Add( "DPanel" )
+				local f_w, f_h = c.sw, s(4+(12*3)+4)
+				footer:SetSize( self:GetWide()/2 - s(400)/2 - s(24+12), f_h )
+				footer:SetPos( s(24), c.sh - f_h - s(12) )
+				function footer:Paint( w, h )
+					surface.SetDrawColor( color_black )
+					surface.DrawRect( 0, 0, w, h )
+					local bump = 0
+					local old = DisableClipping( true )
+					for i, v in pairs( weh ) do
+						draw.SimpleText( i, "C2_4", s(8), s(12+4)+bump, color_white, TEXT_ALIGN_LEFT, TEXT_ALIGN_BOTTOM )
+						local txt = isfunction(v) and v(c.w) or c.w:GetValue(v)
+						local ftu = "C2_3"
+						surface.SetFont(ftu)
+						local tx = surface.GetTextSize(txt)
+						if tx > s(180-8-8-64) then
+							ftu = "C2_4"
+						end
+						draw.SimpleText( txt, ftu, w-s(8), s(12+4)+bump, color_white, TEXT_ALIGN_RIGHT, TEXT_ALIGN_BOTTOM )
+						bump = bump + s(12)
+					end
+					DisableClipping( old )
+				end
 			end
 		end,
 		Paint = function( self, w, h, c )
