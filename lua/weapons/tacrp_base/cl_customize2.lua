@@ -293,16 +293,19 @@ function SWEP:C2_Open()
 	c2.Prog = 1
 	c2.Lastdesire = c2_Desire
 
+	local p = LocalPlayer()
+	local w = self
+
 	function c2:Paint( w, h )
 		return
 	end
 
 	function c2:OnRemove()
 		if IsValid( selecta ) then selecta:Remove() end
+		if IsValid(w) and TacRP.ConVars["autosave"]:GetBool() and TacRP.ConVars["free_atts"]:GetBool() then
+			w:SavePreset()
+		end
 	end
-
-	local p = LocalPlayer()
-	local w = self
 	if !IsValid(p) then
 		print("TACRP C2: the LocalPlayer is invalid")
 		c2:Remove()
@@ -439,7 +442,7 @@ local blocklist = {
 
 hook.Add( "PlayerBindPress", "TacRP_C2_PlayerBindPress", function( ply, bind, pressed )
 	if IsValid( c2 ) and blocklist[bind] then
-		if blocklist[bind] >= 1 and blocklist[bind] <= #pages then
+		if pressed and blocklist[bind] >= 1 and blocklist[bind] <= #pages then
 			c2_Desire = blocklist[bind]
 		end
 		return true
