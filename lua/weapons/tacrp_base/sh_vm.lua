@@ -328,7 +328,7 @@ function SWEP:GetViewModelPosition(pos, ang)
 
     -- self.BobScale = Lerp(sprintdelta, 1, 3)
     -- self.BobScale = Lerp(sightdelta, self.BobScale, 0.1)
-    self.SwayScale = f_lerp(sightdelta, 1, 0.1)
+    self.SwayScale = 0--f_lerp(sightdelta, 1, 0.1)
     self.BobScale = 0
 
     -- if game.SinglePlayer() or IsFirstTimePredicted() then
@@ -368,7 +368,7 @@ function SWEP:GetViewModelPosition(pos, ang)
     -- pos, ang = self:GetMidAirBob(pos, ang)
     -- pos, ang = self:GetViewModelLeftRight(pos, ang)
     -- pos, ang = self:GetViewModelInertia(pos, ang)
-    pos, ang = self:GetViewModelSway(pos, ang)
+    --pos, ang = self:GetViewModelSway(pos, ang)
     -- pos, ang = self:GetViewModelSmooth(pos, ang)
 
     self.ViewModelPos = pos
