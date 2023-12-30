@@ -113,6 +113,7 @@ elseif SERVER then
             wpn = weapons.Get(class)
         end
 
+        if !wpn then return end
         if wpn and wpn.AdminOnly and !ply:IsPlayer() then return end
 
         local cap = ent:CapabilitiesGet()
