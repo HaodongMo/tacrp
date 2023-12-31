@@ -606,6 +606,19 @@ The Soviet/AK themed expansion starring 9 weapons, including well-known AK varia
 <li><b>Changed:</b> (Special Delivery) Dual Berettas, USPs, 1911s & Deagles tactical attachment slot.
 </ul>]],
     },
+    {
+        Title = "Update 17 Hotfix",
+        Type = "Patch Notes",
+        Date = "2023-12-31",
+        Author = "8Z",
+        Major = false,
+        Summary = "Quick fix for NPC issue.",
+        Contents = [[<body style="font-family:'Myriad Pro';color:white;font-size:125%;">
+<h3>Changelist</h3>
+<ul>
+<li><b>Fixed:</b> Error when spawning NPC with default weapon.
+</ul>]],
+    },
 }
 TacRP.NewsRead = TacRP.NewsRead or {}
 TacRP.NewsFirstLoad = false
