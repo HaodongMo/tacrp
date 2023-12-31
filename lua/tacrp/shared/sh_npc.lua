@@ -98,10 +98,7 @@ elseif SERVER then
         local class = net.ReadString()
         local ent = ply.TacRP_LastSpawnedNPC
 
-        if !ent then return end
-        if !IsValid(ent) then return end
-        if !ent:IsNPC() then return end
-        if !class then return end
+        if !IsValid(ent) or !ent:IsNPC() or (class or "") == "" then return end
 
         local wpn
         if string.Left(class, 6) == "!tacrp" then
@@ -113,7 +110,7 @@ elseif SERVER then
             wpn = weapons.Get(class)
         end
 
-        if wpn and wpn.AdminOnly and !ply:IsPlayer() then return end
+        if !wpn or (wpn.AdminOnly and !ply:IsPlayer()) then return end
 
         local cap = ent:CapabilitiesGet()
 
