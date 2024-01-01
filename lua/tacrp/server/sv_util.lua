@@ -69,10 +69,12 @@ function TacRP.GetWeaponList(subcat, tier)
 
         for i, wep in pairs(weapons.GetList()) do
             local weap = weapons.Get(wep.ClassName)
-            if !weap or !weap.ArcticTacRP or wep.ClassName == "tacrp_base" or wep.ClassName == "tacrp_base_nade"
-                    or !wep.Spawnable
-                    or (subcat != "" and subcat != wep.SubCatType)
-                    or (tier != "" and tier != wep.SubCatTier) then
+            if !weap or !weap.ArcticTacRP
+                    or wep.ClassName == "tacrp_base" or wep.ClassName == "tacrp_base_nade" or wep.ClassName == "tacrp_base_melee"
+                    or !weap.Spawnable or weap.AdminOnly
+                    or (subcat == "npc" and !weap.NPCUsable)
+                    or (subcat != "" and subcat != "npc" and subcat != weap.SubCatType)
+                    or (tier != "" and tier != weap.SubCatTier) then
                 continue
             end
 
