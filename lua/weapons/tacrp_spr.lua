@@ -221,6 +221,7 @@ SWEP.ScopeHideWeapon = true
 
 SWEP.ClipSize = 5
 SWEP.Ammo = "357"
+SWEP.AmmoTTT = "357"
 
 SWEP.ReloadTimeMult = 1
 SWEP.ShootTimeMult = 0.75

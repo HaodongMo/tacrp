@@ -115,24 +115,51 @@ if !TTT2 then
         dgui3:CheckBox("Enable Blinding Flashlights", "tacrp_flashlight_blind")
         dgui3:Help("Flashlight glare will obscure vision based on distance and viewing angle. Effect is more significant on scopes. If disabled, glare sprite will be visible but not grow in size.")
         dgui3:CheckBox("Allow Reload while Sprinting", "tacrp_sprint_reload")
-		
 
-		dgui3:CheckBox("Movement Penalty", "tacrp_penalty_move")
-		dgui3:ControlHelp("Penalty when weapon is up.\nDoes not apply in safety.")
-		dgui3:CheckBox("Firing Movement Penalty", "tacrp_penalty_firing")
-		dgui3:ControlHelp("Penalty from firing the weapon.")
-		dgui3:CheckBox("Aiming Movement Penalty", "tacrp_penalty_aiming")
-		dgui3:ControlHelp("Penalty while aiming the weapon.")
-		dgui3:CheckBox("Reload Movement Penalty", "tacrp_penalty_reload")
-		dgui3:ControlHelp("Penalty while reloading.")
-		dgui3:CheckBox("Melee Movement Penalty", "tacrp_penalty_melee")
-		dgui3:ControlHelp("Penalty from melee bashing.")
+        dgui3:CheckBox("Movement Penalty", "tacrp_penalty_move")
+        dgui3:ControlHelp("Penalty when weapon is up.\nDoes not apply in safety.")
+        dgui3:CheckBox("Firing Movement Penalty", "tacrp_penalty_firing")
+        dgui3:ControlHelp("Penalty from firing the weapon.")
+        dgui3:CheckBox("Aiming Movement Penalty", "tacrp_penalty_aiming")
+        dgui3:ControlHelp("Penalty while aiming the weapon.")
+        dgui3:CheckBox("Reload Movement Penalty", "tacrp_penalty_reload")
+        dgui3:ControlHelp("Penalty while reloading.")
+        dgui3:CheckBox("Melee Movement Penalty", "tacrp_penalty_melee")
+        dgui3:ControlHelp("Penalty from melee bashing.")
 
         panellist:AddItem(dgui3)
 
         dtabs:AddSheet("TacRP", panellist, "icon16/gun.png", false, false, "TacRP")
     end)
 end
+
+hook.Add("TTTRenderEntityInfo", "TacRP_TTT", function(tData)
+    local client = LocalPlayer()
+    local ent = tData:GetEntity()
+
+
+    if !IsValid(client) or !client:IsTerror() or !client:Alive()
+    or !IsValid(ent) or tData:GetEntityDistance() > 100 or !ent:IsWeapon()
+    or !ent.ArcticTacRP or ent.PrimaryGrenade then
+        return
+    end
+
+    if tData:GetAmountDescriptionLines() > 0 then
+        tData:AddDescriptionLine()
+    end
+
+    if ent.Attachments and ent:CountAttachments() > 0 then
+        tData:AddDescriptionLine(tostring(ent:CountAttachments()) .. " Attachments:", nil)
+        for i, v in pairs(ent.Attachments) do
+            local attName = v.Installed
+            local attTbl = TacRP.GetAttTable(attName)
+            if attTbl and v.PrintName and attTbl.PrintName then
+                local printName = TacRP:GetAttName(attName)
+                tData:AddDescriptionLine(printName, nil, {attTbl.Icon})
+            end
+        end
+    end
+end)
 
 hook.Add("TTTBodySearchPopulate", "TacRP", function(processed, raw)
     if (weapons.Get(raw.wep or "") or {}).ArcticTacRP and bit.band(raw.dmg, DMG_BUCKSHOT) != 0 then

@@ -68,7 +68,7 @@ function SWEP:ThinkHoldBreath()
     local owner = self:GetOwner()
     if !owner:IsPlayer() then return end
 
-    local ft = FrameTime()
+    local ft = FrameTime() * (game.SinglePlayer() and 1 or 0.5)
 
     if self:HoldingBreath() then
 
@@ -121,7 +121,7 @@ end
 
 function SWEP:GetBreathDrain()
     if self.MiscCache["breath_cost"] == nil then
-        self.MiscCache["breath_cost"] = 1 * (math.Clamp(self:GetValue("ScopedSway"), 0.1, 0.3) ^ 0.75) * (1 - 0.3 * math.Clamp((4 - 90 / self:GetValue("ScopeFOV")) / 3, 0, 1))
+        self.MiscCache["breath_cost"] = (math.Clamp(self:GetValue("ScopedSway"), 0.1, 0.3) ^ 0.75) * (1 - 0.3 * math.Clamp((4 - 90 / self:GetValue("ScopeFOV")) / 3, 0, 1))
     end
     return self.MiscCache["breath_cost"] * self:GetValue("BreathDrain")
 end

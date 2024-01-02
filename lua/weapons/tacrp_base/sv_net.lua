@@ -45,9 +45,7 @@ function SWEP:ReceivePreset()
     self:NetworkWeapon()
     TacRP:PlayerSendAttInv(self:GetOwner())
 
-    self.StatCache = {}
-    self.HookCache = {}
-
+    self:InvalidateCache()
     self:SetBaseSettings()
 
     if self:GetValue("TryUnholster") then
