@@ -160,7 +160,7 @@ local conVars = {
     },
     {
         name = "crosshair",
-        default = "1",
+        default = "0",
         replicated = true,
         notify = true,
     },
