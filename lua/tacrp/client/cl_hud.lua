@@ -129,35 +129,6 @@ function TacRP.GetPanelColors(hvr, sel)
     return TacRP.PanelColors["bg2"][i], TacRP.PanelColors["corner"][i], TacRP.PanelColors["text"][i]
 end
 
-
-hook.Add("TTTRenderEntityInfo", "TacRP_TTT", function(tData)
-    local client = LocalPlayer()
-    local ent = tData:GetEntity()
-
-
-    if !IsValid(client) or !client:IsTerror() or !client:Alive()
-    or !IsValid(ent) or tData:GetEntityDistance() > 100 or !ent:IsWeapon()
-    or !ent.ArcticTacRP or ent.PrimaryGrenade then
-        return
-    end
-
-    if tData:GetAmountDescriptionLines() > 0 then
-        tData:AddDescriptionLine()
-    end
-
-    if ent.Attachments and ent:CountAttachments() > 0 then
-        tData:AddDescriptionLine(tostring(ent:CountAttachments()) .. " Attachments:", nil)
-        for i, v in pairs(ent.Attachments) do
-            local attName = v.Installed
-            local attTbl = TacRP.GetAttTable(attName)
-            if attTbl and v.PrintName and attTbl.PrintName then
-                local printName = attTbl.PrintName
-                tData:AddDescriptionLine(printName, nil, {attTbl.Icon})
-            end
-        end
-    end
-end)
-
 hook.Add("RenderScreenspaceEffects", "TacRP_Gas", function()
     if LocalPlayer():GetNWFloat("TacRPGasEnd", 0) > CurTime() then
         local delta = math.Clamp((LocalPlayer():GetNWFloat("TacRPGasEnd", 0) - CurTime()) / 2, 0, 1) ^ 1.5
