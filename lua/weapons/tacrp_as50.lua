@@ -211,6 +211,7 @@ SWEP.CanMeleeAttack = false
 
 SWEP.ClipSize = 5
 SWEP.Ammo = "357"
+SWEP.AmmoTTT = "ti_sniper"
 
 SWEP.ReloadTimeMult = 1
 SWEP.DropMagazineImpact = "metal"
