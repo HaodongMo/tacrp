@@ -9,7 +9,10 @@ function SWEP:PrimeGrenade()
     if self:GetPrimedGrenade() then return end
 
     if engine.ActiveGamemode() == "terrortown" then
-        if GetRoundState() == ROUND_PREP and GetConVar("ttt_no_nade_throw_during_prep"):GetBool() then return end
+        if GetRoundState() == ROUND_PREP and
+        ((TTT2 and !GetConVar("ttt_nade_throw_during_prep"):GetBool()) or (!TTT2 and GetConVar("ttt_no_nade_throw_during_prep"):GetBool())) then
+            return
+        end
         if !self:GetValue("PrimaryGrenade") and !self:CheckGrenade(nil, true) then
             self:SelectGrenade(nil, true)
         end
