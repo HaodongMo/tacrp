@@ -17,8 +17,12 @@ function SWEP:GetIsSprinting()
     if owner:GetNWBool("TacRPChargeState", false) then return true end
     if owner:GetNWBool("SlidingAbilityIsSliding", false) then return false end
 
-    if TTT2 and owner.isSprinting == true then
-        return (owner.sprintProgress or 0) > 0 and owner:KeyDown(IN_SPEED) and !owner:Crouching() and curspeed > walkspeed and owner:OnGround()
+    if TTT2 then
+        if SPRINT and SPRINT:IsSprinting(owner) then
+            return true
+        else
+            return owner.isSprinting == true and (owner.sprintProgress or 0) > 0 and owner:KeyDown(IN_SPEED) and !owner:Crouching() and curspeed > walkspeed and owner:OnGround()
+        end
     end
 
     -- TTT sets runspeed to curspeed, so this will disable it unless sprint addons exist (who ideally sets runspeed. i didn't check)
