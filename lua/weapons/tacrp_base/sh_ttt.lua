@@ -99,32 +99,33 @@ function SWEP:TTT_Init()
 
     if SERVER then
         self.fingerprints = {}
-    end
 
-    local att_chance = TacRP.ConVars["ttt_atts_random"]:GetFloat()
-    local att_max = TacRP.ConVars["ttt_atts_max"]:GetFloat()
-    local added = 0
 
-    if att_chance > 0 then
-        for i, slot in pairs(self.Attachments) do
-            if math.random() > att_chance then continue end
+        local att_chance = TacRP.ConVars["ttt_atts_random"]:GetFloat()
+        local att_max = TacRP.ConVars["ttt_atts_max"]:GetFloat()
+        local added = 0
 
-            local atts = TacRP.GetAttsForCats(slot.Category or "")
-            local ind = math.random(1, #atts)
-            slot.Installed = atts[ind]
-            added = added + 1
+        if att_chance > 0 then
+            for i, slot in pairs(self.Attachments) do
+                if math.random() > att_chance then continue end
 
-            if att_max > 0 and added >= att_max then break end
+                local atts = TacRP.GetAttsForCats(slot.Category or "")
+                local ind = math.random(1, #atts)
+                slot.Installed = atts[ind]
+                added = added + 1
+
+                if att_max > 0 and added >= att_max then break end
+            end
+
+            self:InvalidateCache()
         end
 
-        self:InvalidateCache()
-    end
-
-    if SERVER and added > 0 then
-        timer.Simple(0.25, function()
-            if !IsValid(self) then return end
-            self:NetworkWeapon()
-        end)
+        if added > 0 then
+            timer.Simple(0.1, function()
+                if !IsValid(self) then return end
+                self:NetworkWeapon()
+            end)
+        end
     end
 
     if self.PrimaryGrenade then
@@ -165,7 +166,6 @@ function SWEP:Equip(newowner)
     if engine.ActiveGamemode() == "terrortown" and SERVER and IsValid(newowner) and (self.StoredAmmo or 0) > 0 and self.Primary.Ammo != "none" then
         local ammo = newowner:GetAmmoCount(self.Primary.Ammo)
         local given = math.min(self.StoredAmmo, self.Primary.ClipMax - ammo)
-        print(ammo, given)
         newowner:GiveAmmo(given, self.Primary.Ammo)
         self.StoredAmmo = 0
     end
