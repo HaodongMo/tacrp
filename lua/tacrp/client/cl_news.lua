@@ -515,7 +515,7 @@ The Soviet/AK themed expansion starring 9 weapons, including well-known AK varia
         Type = "Patch Notes",
         Date = "2023-12-24",
         Author = "speedonerd",
-        Major = false,
+        Major = true,
         Summary = "A holly jolly update",
         Contents = [[<body style="font-family:'Myriad Pro';color:white;font-size:125%;">
 <p>This is speedonerd speaking! I'm one of the other people working on this mess, mainly in the asset department (models, sounds, animations).
@@ -643,7 +643,7 @@ The Soviet/AK themed expansion starring 9 weapons, including well-known AK varia
         Type = "Patch Notes",
         Date = "2024-1-3",
         Author = "speedonerd",
-        Major = false,
+        Major = true,
         Summary = "New expansion and a new weapon for InterOps",
         Contents = [[<body style="font-family:'Myriad Pro';color:white;font-size:125%;">
 <p>Yet another new expansion. Originally intended to release in time for Christmas, we missed the mark a bit but hope you'll enjoy it all the same.
