@@ -619,6 +619,75 @@ The Soviet/AK themed expansion starring 9 weapons, including well-known AK varia
 <li><b>Fixed:</b> Error when spawning NPC with default weapon.
 </ul>]],
     },
+	{
+        Title = "Update 17 Hotfix 2",
+        Type = "Patch Notes",
+        Date = "2024-1-3",
+        Author = "speedonerd",
+        Major = false,
+        Summary = "Small additions",
+        Contents = [[<body style="font-family:'Myriad Pro';color:white;font-size:125%;">
+<p>Small update with a few fixes to compliment the new expansion.
+<h3>Changelist</h3>
+<ul>
+<li><b>Added:</b> Bind for HL2 flashlight when a tactical attachment is fitted (ALT + F).
+<li><b>Added:</b> Random any weapon option for NPCs.
+<li><b>Changed:</b> (TTT) Snipers now use 357 ammo instead of Deagle ammo.
+<li><b>Changed:</b> (TTT) New TTT2 sprint functionality.
+<li><b>Fixed:</b> (TTT) Quicknade convar errors in TTT2.
+<li><b>Fixed:</b> (TTT) General TTT2 networking improvements and fixes.
+</ul>]],
+    },
+	{
+        Title = "Heavy Duty Release",
+        Type = "Patch Notes",
+        Date = "2024-1-3",
+        Author = "speedonerd",
+        Major = false,
+        Summary = "New expansion and a new weapon for InterOps",
+        Contents = [[<body style="font-family:'Myriad Pro';color:white;font-size:125%;">
+<p>Yet another new expansion. Originally intended to release in time for Christmas, we missed the mark a bit but hope you'll enjoy it all the same.
+
+<h2>Heavy Duty <i>(New!)</i></h2>
+<p><input type='submit' value='Open Workshop' onclick='console.log("RUNLUA:gui.OpenURL(\"https://steamcommunity.com/sharedfiles/filedetails/?id=3102297293\")")' /></p>
+The heavy weaponry expansion, sporting 10 new weapons including autoshotties, guided rockets and an 80's cinema icon.
+<ul>
+<li>AMT Hardballer
+<li>Dual Hardballers
+<li>CheyTac M200 Intervention
+<li>Franchi SPAS-12
+<li>HK XM25 CDTE
+<li>Holland & Holland Double Rifle
+<li>Mk 153 SMAW
+<li>Pancor Jackhammer
+<li>SSK Industries .950 JDJ "Fat Mac"
+<li>Taurus Raging Judge
+</ul>
+
+<h2>InterOps</h2>
+<p><input type='submit' value='Open Workshop' onclick='console.log("RUNLUA:gui.OpenURL(\"https://steamcommunity.com/sharedfiles/filedetails/?id=2975992869\")")' /></p>
+<ul>
+<li><b>New weapon:</b> SIG SG 550-2 SP.
+</ul>
+
+<h2>ArmaLite Revolution</h2>
+<input type='submit' value='Open Workshop' onclick='console.log("RUNLUA:gui.OpenURL(\"https://steamcommunity.com/sharedfiles/filedetails/?id=3006376475\")")' />
+<ul>
+<li><b>New weapon:</b> KAC SR-25 EMR.
+</ul>
+
+<hr>
+
+<h3>Changelist</h3>
+<ul>
+<li><b>Changed:</b> (InterOps) SG 550-1 burst mode changed to automatic.
+<li><b>Changed:</b> (Iron Curtain) SVD stat tweaks.
+</ul>
+
+<hr>
+
+<p>Have a tactical 2024, gamers!]],
+    },
 }
 TacRP.NewsRead = TacRP.NewsRead or {}
 TacRP.NewsFirstLoad = false
