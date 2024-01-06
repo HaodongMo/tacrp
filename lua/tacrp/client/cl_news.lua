@@ -646,7 +646,7 @@ The Soviet/AK themed expansion starring 9 weapons, including well-known AK varia
         Major = true,
         Summary = "New expansion and a new weapon for InterOps",
         Contents = [[<body style="font-family:'Myriad Pro';color:white;font-size:125%;">
-<p>Yet another new expansion. Originally intended to release in time for Christmas, we missed the mark a bit but hope you'll enjoy it all the same.
+<p>Yet another new expansion. Originally intended to release in time for Christmas, we missed the mark a bit but hope you'll enjoy it all the same. We've also pushed some extra goodies to existing expansions.
 
 <h2>Heavy Duty <i>(New!)</i></h2>
 <p><input type='submit' value='Open Workshop' onclick='console.log("RUNLUA:gui.OpenURL(\"https://steamcommunity.com/sharedfiles/filedetails/?id=3102297293\")")' /></p>
@@ -667,20 +667,22 @@ The heavy weaponry expansion, sporting 10 new weapons including autoshotties, gu
 <h2>InterOps</h2>
 <p><input type='submit' value='Open Workshop' onclick='console.log("RUNLUA:gui.OpenURL(\"https://steamcommunity.com/sharedfiles/filedetails/?id=2975992869\")")' /></p>
 <ul>
-<li><b>New weapon:</b> SIG SG 550-2 SP.
+<li><b>New weapon:</b> SIG SG 550-2 SP. A semi auto-only, non-sniper SIG in the Sporter Carbines category.
 </ul>
 
 <h2>ArmaLite Revolution</h2>
 <input type='submit' value='Open Workshop' onclick='console.log("RUNLUA:gui.OpenURL(\"https://steamcommunity.com/sharedfiles/filedetails/?id=3006376475\")")' />
 <ul>
-<li><b>New weapon:</b> KAC SR-25 EMR.
+<li><b>New weapon:</b> KAC SR-25 EMR. A high-power, low-capacity AR-based marksman rifle.
 </ul>
 
 <hr>
 
 <h3>Changelist</h3>
 <ul>
-<li><b>Changed:</b> (InterOps) SG 550-1 burst mode changed to automatic.
+<li><b>Changed:</b> (InterOps) Updated XM8 LMG model. Added bipod and now has correct barrel length.
+<li><b>Changed:</b> (InterOps) SG 550-1 burst mode changed to automatic, redone stats.
+<li><b>Changed:</b> (Brute Force) Replaced crowbar and pipe wrench models with new ones from CSO2.
 <li><b>Changed:</b> (Iron Curtain) SVD stat tweaks.
 </ul>
 
