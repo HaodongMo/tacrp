@@ -631,6 +631,7 @@ The Soviet/AK themed expansion starring 9 weapons, including well-known AK varia
 
 <h3>Changelist</h3>
 <ul>
+<li><b>Added:</b> News button in customization page.
 <li><b>Added:</b> Bind for HL2 flashlight when a tactical attachment is fitted (ALT + F).
 <li><b>Added:</b> Random any weapon option for NPCs.
 <li><b>Changed:</b> (TTT) Snipers now use 357 ammo instead of Deagle ammo.
