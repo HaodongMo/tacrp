@@ -29,7 +29,14 @@ if CLIENT then
             wpns:AddCVar( "#menubar.npcs.defaultweapon", "gmod_npcweapon", "" )
             wpns:AddCVar( "#menubar.npcs.noweapon", "gmod_npcweapon", "none" )
 
-            wpns:AddCVar("[Random TacRP Weapon]", "gmod_npcweapon", "!tacrp||")
+            local random = wpns:AddSubMenu("Random...")
+            random:SetDeleteSelf(false)
+
+            random:AddCVar("[Any TacRP Weapon]", "gmod_npcweapon", "!tacrp|npc|")
+            random:AddCVar("[Consumer Tier]", "gmod_npcweapon", "!tacrp|npc|4Consumer")
+            random:AddCVar("[Security Tier]", "gmod_npcweapon", "!tacrp|npc|3Security")
+            random:AddCVar("[Operator Tier]", "gmod_npcweapon", "!tacrp|npc|2Operator")
+            random:AddCVar("[Elite Tier]", "gmod_npcweapon", "!tacrp|npc|1Elite")
 
             wpns:AddSpacer()
 
@@ -100,11 +107,14 @@ elseif SERVER then
 
         if !IsValid(ent) or !ent:IsNPC() or (class or "") == "" then return end
 
+        local cap = ent:CapabilitiesGet()
+        if bit.band(cap, CAP_USE_WEAPONS) != CAP_USE_WEAPONS then return end
+
         local wpn
         if string.Left(class, 6) == "!tacrp" then
             local args = string.Explode("|", class, false)
-            class = TacRP.GetRandomWeapon(args[2], args[3]) or ""
-            wpn = weapons.Get(class)
+            class = TacRP.GetRandomWeapon(args[2], args[3])
+            wpn = weapons.Get(class or "")
             if !class or !wpn then return end
         else
             wpn = weapons.Get(class)
@@ -112,11 +122,7 @@ elseif SERVER then
 
         if !wpn or (wpn.AdminOnly and !ply:IsPlayer()) then return end
 
-        local cap = ent:CapabilitiesGet()
-
-        if bit.band(cap, CAP_USE_WEAPONS) != CAP_USE_WEAPONS then return end
-
-        if wpn.ArcticTacRP and (wpn.NPCUsable != false) and wpn.Spawnable and (!wpn.AdminOnly or ply:IsAdmin()) then
+        if wpn.ArcticTacRP and wpn.NPCUsable and wpn.Spawnable and (!wpn.AdminOnly or ply:IsAdmin()) then
             ent:Give(class)
         end
     end)

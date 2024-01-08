@@ -12,13 +12,13 @@ function SWEP:DrawLaser(pos, ang, strength, thirdperson)
     local delta = behavior and 1 or 0
 
     if IsValid(vm) and (alwaysacc or TacRP.ConVars["true_laser"]:GetBool()) and (self:GetBlindFireMode() <= 1) and !self:GetCustomize() and !behavior then
-        local d1 = 1
+        local d1 = (CurTime() - self:GetNextSecondaryFire()) / 1
         if alwaysacc then
             d1 = 1
         elseif TacRP.ConVars["laser_beam"]:GetBool() then
-            d1 = math.min((CurTime() - self:GetNextPrimaryFire()) / 2, (CurTime() - self:GetNextSecondaryFire()) / 2)
+            d1 = math.min((CurTime() - self:GetNextPrimaryFire()) / 2, (CurTime() - self:GetNextSecondaryFire()) / 1)
         elseif self:GetValue("RPM") < 120 then
-            d1 = math.min(d1, (CurTime() - self:GetNextPrimaryFire()) / 0.5)
+            d1 = math.min((CurTime() - self:GetNextPrimaryFire()) / 0.5, (CurTime() - self:GetNextSecondaryFire()) / 1)
         end
 
         local d2 = (curr_seq == "reload_start") and 0 or 1

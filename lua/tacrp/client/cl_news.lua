@@ -515,7 +515,7 @@ The Soviet/AK themed expansion starring 9 weapons, including well-known AK varia
         Type = "Patch Notes",
         Date = "2023-12-24",
         Author = "speedonerd",
-        Major = false,
+        Major = true,
         Summary = "A holly jolly update",
         Contents = [[<body style="font-family:'Myriad Pro';color:white;font-size:125%;">
 <p>This is speedonerd speaking! I'm one of the other people working on this mess, mainly in the asset department (models, sounds, animations).
@@ -605,6 +605,91 @@ The Soviet/AK themed expansion starring 9 weapons, including well-known AK varia
 <li><b>Changed:</b> (Special Delivery) WA2000 animation improvements.
 <li><b>Changed:</b> (Special Delivery) Dual Berettas, USPs, 1911s & Deagles tactical attachment slot.
 </ul>]],
+    },
+    {
+        Title = "Update 17 Hotfix",
+        Type = "Patch Notes",
+        Date = "2023-12-31",
+        Author = "8Z",
+        Major = false,
+        Summary = "Quick fix for NPC issue.",
+        Contents = [[<body style="font-family:'Myriad Pro';color:white;font-size:125%;">
+<h3>Changelist</h3>
+<ul>
+<li><b>Fixed:</b> Error when spawning NPC with default weapon.
+</ul>]],
+    },
+	{
+        Title = "Update 17 Hotfix 2",
+        Type = "Patch Notes",
+        Date = "2024-1-3",
+        Author = "speedonerd",
+        Major = false,
+        Summary = "Small additions",
+        Contents = [[<body style="font-family:'Myriad Pro';color:white;font-size:125%;">
+<p>Small update with a few fixes to compliment the new expansion.
+
+<h3>Changelist</h3>
+<ul>
+<li><b>Added:</b> Bind for HL2 flashlight when a tactical attachment is fitted (ALT + F).
+<li><b>Added:</b> Random any weapon option for NPCs.
+<li><b>Changed:</b> (TTT) Snipers now use 357 ammo instead of Deagle ammo.
+<li><b>Changed:</b> (TTT) New TTT2 sprint functionality.
+<li><b>Fixed:</b> (TTT) Quicknade convar errors in TTT2.
+<li><b>Fixed:</b> (TTT) General TTT2 networking improvements and fixes.
+</ul>]],
+    },
+	{
+        Title = "Heavy Duty Release",
+        Type = "Patch Notes",
+        Date = "2024-1-3",
+        Author = "speedonerd",
+        Major = true,
+        Summary = "New expansion and a new weapon for InterOps",
+        Contents = [[<body style="font-family:'Myriad Pro';color:white;font-size:125%;">
+<p>Yet another new expansion. Originally intended to release in time for Christmas, we missed the mark a bit but hope you'll enjoy it all the same. We've also pushed some extra goodies to existing expansions.
+
+<h2>Heavy Duty <i>(New!)</i></h2>
+<p><input type='submit' value='Open Workshop' onclick='console.log("RUNLUA:gui.OpenURL(\"https://steamcommunity.com/sharedfiles/filedetails/?id=3102297293\")")' /></p>
+The heavy weaponry expansion, sporting 10 new weapons including autoshotties, guided rockets and an 80's cinema icon.
+<ul>
+<li>AMT Hardballer
+<li>Dual Hardballers
+<li>CheyTac M200 Intervention
+<li>Franchi SPAS-12
+<li>HK XM25 CDTE
+<li>Holland & Holland Double Rifle
+<li>Mk 153 SMAW
+<li>Pancor Jackhammer
+<li>SSK Industries .950 JDJ "Fat Mac"
+<li>Taurus Raging Judge
+</ul>
+
+<h2>InterOps</h2>
+<p><input type='submit' value='Open Workshop' onclick='console.log("RUNLUA:gui.OpenURL(\"https://steamcommunity.com/sharedfiles/filedetails/?id=2975992869\")")' /></p>
+<ul>
+<li><b>New weapon:</b> SIG SG 550-2 SP. A semi auto-only, non-sniper SIG in the Sporter Carbines category.
+</ul>
+
+<h2>ArmaLite Revolution</h2>
+<input type='submit' value='Open Workshop' onclick='console.log("RUNLUA:gui.OpenURL(\"https://steamcommunity.com/sharedfiles/filedetails/?id=3006376475\")")' />
+<ul>
+<li><b>New weapon:</b> KAC SR-25 EMR. A high-power, low-capacity AR-based marksman rifle.
+</ul>
+
+<hr>
+
+<h3>Changelist</h3>
+<ul>
+<li><b>Changed:</b> (InterOps) Updated XM8 LMG model. Added bipod and now has correct barrel length.
+<li><b>Changed:</b> (InterOps) SG 550-1 burst mode changed to automatic, redone stats.
+<li><b>Changed:</b> (Brute Force) Replaced crowbar and pipe wrench models with new ones from CSO2.
+<li><b>Changed:</b> (Iron Curtain) SVD stat tweaks.
+</ul>
+
+<hr>
+
+<p>Have a tactical 2024, gamers!]],
     },
 }
 TacRP.NewsRead = TacRP.NewsRead or {}

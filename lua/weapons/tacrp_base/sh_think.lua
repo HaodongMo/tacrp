@@ -9,24 +9,6 @@ function SWEP:Think()
     local stop = self:RunHook("Hook_PreThink")
     if stop then return end
 
-    -- if owner:KeyReleased(IN_ATTACK) then
-    --     if !self:GetValue("RunawayBurst") then
-    --         self:SetBurstCount(0)
-    --     end
-    --     if self:GetCurrentFiremode() < 0 and !self:GetValue("RunawayBurst") and self:GetBurstCount() > 0 then
-    --         self:SetNextPrimaryFire(CurTime() + self:GetValue("PostBurstDelay"))
-    --     end
-    -- end
-
-    -- if self:GetValue("RunawayBurst") then
-    --     if self:GetBurstCount() > -self:GetCurrentFiremode() then
-    --         self:SetBurstCount(0)
-    --         self:SetNextPrimaryFire(CurTime() + self:GetValue("PostBurstDelay"))
-    --     elseif self:GetBurstCount() > 0 then
-    --         self:PrimaryAttack()
-    --     end
-    -- end
-
     local cfm = self:GetCurrentFiremode()
     if self:GetValue("RunawayBurst") and cfm < 0 then
         if self:GetBurstCount() >= -cfm then

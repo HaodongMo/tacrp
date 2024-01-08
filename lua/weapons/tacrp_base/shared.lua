@@ -572,6 +572,7 @@ function SWEP:SetupDataTables()
     self:SetTactical(true)
     self:SetReady(false)
     self:SetBreath(1)
+    self:SetHoldBreathAmount(0)
 end
 
 function SWEP:OnDrop()

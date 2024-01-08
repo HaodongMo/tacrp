@@ -160,7 +160,7 @@ local conVars = {
     },
     {
         name = "crosshair",
-        default = "1",
+        default = "0",
         replicated = true,
         notify = true,
     },
@@ -386,7 +386,11 @@ local conVars = {
         min = 0,
         max = 1,
     },
-
+    {
+        name = "flashlight_alt",
+        default = "0",
+        client = true,
+    },
     // --------------------------- Hints
     {
         name = "hints",
@@ -873,6 +877,11 @@ local function menu_client_ti(panel)
         command = "tacrp_pickup_use"
     })
     panel:ControlHelp("This option only affects TacRP weapons.")
+    panel:AddControl("checkbox", {
+        label = "Toggle Tactical with +WALK",
+        command = "tacrp_flashlight_alt"
+    })
+    panel:ControlHelp("If disabled, ALT+F toggles HL2 flashlight and F toggles tactical;\nif enabled, F toggles HL2 flashlight and ALT+F toggles tactical.")
 
     header(panel, "\nMiscellaneous")
     panel:AddControl("checkbox", {

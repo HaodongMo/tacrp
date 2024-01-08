@@ -228,7 +228,7 @@ function SWEP:Initialize()
 
     self:ClientInitialize()
 
-    if SERVER then
+    if SERVER and engine.ActiveGamemode() != "terrortown" then
         -- If we have any pre-existing attachments, network it
         local empty = true
         for slot, slottbl in pairs(self.Attachments) do
