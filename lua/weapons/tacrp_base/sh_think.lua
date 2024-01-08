@@ -87,7 +87,7 @@ function SWEP:Think()
         self:ExitBipod()
     end
 
-    if CLIENT then
+    if CLIENT and (IsFirstTimePredicted() or game.SinglePlayer()) then
 
         self:ThinkNearWall()
 
