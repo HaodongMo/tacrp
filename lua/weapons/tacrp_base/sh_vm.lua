@@ -13,7 +13,7 @@ local vector_origin = Vector(0, 0, 0)
 local peekvector = Vector(0, 0, -2)
 
 local m_appor = math.Approach
-local f_lerp = Lerp
+local f_lerp = function(dlt, from, to) return from + (to - from) * dlt end
 local function ApproachMod(usrobj, to, dlt)
     usrobj[1] = m_appor(usrobj[1], to[1], dlt)
     usrobj[2] = m_appor(usrobj[2], to[2], dlt)
