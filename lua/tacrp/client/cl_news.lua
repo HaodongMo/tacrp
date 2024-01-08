@@ -627,11 +627,10 @@ The Soviet/AK themed expansion starring 9 weapons, including well-known AK varia
         Major = false,
         Summary = "Small additions",
         Contents = [[<body style="font-family:'Myriad Pro';color:white;font-size:125%;">
-<p>Small update with a few fixes to compliment the new expansion, plus a brand new base weapon made on a whim.
+<p>Small update with a few fixes to compliment the new expansion.
 
 <h3>Changelist</h3>
 <ul>
-<li><b>Added:</b> AR2 Overwatch Standard-Issue Pulse Rifle.
 <li><b>Added:</b> Bind for HL2 flashlight when a tactical attachment is fitted (ALT + F).
 <li><b>Added:</b> Random any weapon option for NPCs.
 <li><b>Changed:</b> (TTT) Snipers now use 357 ammo instead of Deagle ammo.
