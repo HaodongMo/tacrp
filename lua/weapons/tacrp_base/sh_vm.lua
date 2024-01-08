@@ -271,14 +271,14 @@ function SWEP:GetViewModelPosition(pos, ang)
         LerpMod(offsetpos, self:GetValue("SprintPos"), curvedsprintdelta)
         LerpMod(offsetang, self:GetValue("SprintAng"), curvedsprintdelta)
         LerpMod(extra_offsetang, angle_zero, curvedsprintdelta, true)
-    end
 
-    local sim = self:GetValue("SprintMidPoint")
-    local spr_midpoint = curvedsprintdelta * math.cos(curvedsprintdelta * (math.pi / 2))
-    local spr_joffset = (sim and sim.Pos or Vector(0, 0, 0)) * spr_midpoint
-    local spr_jaffset = (sim and sim.Ang or Angle(0, 0, 0)) * spr_midpoint
-    extra_offsetpos:Add(spr_joffset)
-    extra_offsetang:Add(spr_jaffset)
+        local sim = self:GetValue("SprintMidPoint")
+        local spr_midpoint = curvedsprintdelta * math.cos(curvedsprintdelta * (math.pi / 2))
+        local spr_joffset = (sim and sim.Pos or Vector(0, 0, 0)) * spr_midpoint
+        local spr_jaffset = (sim and sim.Ang or Angle(0, 0, 0)) * spr_midpoint
+        extra_offsetpos:Add(spr_joffset)
+        extra_offsetang:Add(spr_jaffset)
+    end
 
     ---------------------------------------------
     -- Near Walling
