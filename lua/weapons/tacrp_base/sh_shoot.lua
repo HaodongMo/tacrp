@@ -451,6 +451,13 @@ end
 
 function SWEP:AfterShotFunction(tr, dmg, range, penleft, alreadypenned, forced)
     if !forced and !IsFirstTimePredicted() and !game.SinglePlayer() then return end
+
+    if self:GetValue("DamageType") then
+        dmg:SetDamageType(self:GetValue("DamageType"))
+    elseif self:IsShotgun() then
+        dmg:SetDamageType(DMG_BUCKSHOT + (engine.ActiveGamemode() == "terrortown" and DMG_BULLET or 0))
+    end
+
     if tr.Entity and alreadypenned[tr.Entity] then
         dmg:SetDamage(0)
     elseif IsValid(tr.Entity) then
@@ -475,8 +482,10 @@ function SWEP:AfterShotFunction(tr, dmg, range, penleft, alreadypenned, forced)
         alreadypenned[tr.Entity] = true
 
         if tr.Entity.LVS and !self:IsShotgun() then
-            dmg:SetDamageForce(dmg:GetDamageForce():GetNormalized() * matpen * 50)
+            dmg:ScaleDamage(0.8)
+            dmg:SetDamageForce(dmg:GetDamageForce():GetNormalized() * matpen * 80)
             dmg:SetDamageType(DMG_AIRBOAT)
+            penleft = 0
         end
     end
 
@@ -494,10 +503,6 @@ function SWEP:AfterShotFunction(tr, dmg, range, penleft, alreadypenned, forced)
         else
             util.Effect(self:GetValue("ExplosiveEffect"), fx, true)
         end
-    end
-
-    if self:IsShotgun() then
-        dmg:SetDamageType(DMG_BUCKSHOT + (engine.ActiveGamemode() == "terrortown" and DMG_BULLET or 0))
     end
 
     if SERVER and IsValid(tr.Entity) and !tr.Entity.TacRP_DoorBusted
