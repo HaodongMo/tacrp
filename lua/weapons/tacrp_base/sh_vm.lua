@@ -356,7 +356,7 @@ function SWEP:GetViewModelPosition(pos, ang)
     ang:RotateAroundAxis(oldang:Right(), extra_offsetang[2])
     ang:RotateAroundAxis(oldang:Forward(), extra_offsetang[3])
 
-    if !IsFirstTimePredicted() then
+    if IsFirstTimePredicted() then
         pos, ang = self:GetViewModelBob(pos, ang)
         pos, ang = self:GetViewModelSway(pos, ang)
     end
