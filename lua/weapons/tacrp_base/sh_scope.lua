@@ -170,12 +170,15 @@ end
 function SWEP:ThinkSights()
     if !IsValid(self:GetOwner()) then return end
 
-    if IsFirstTimePredicted() and self:GetOwner():KeyDown(IN_USE) and self:GetOwner():KeyPressed(IN_ATTACK2) then
+    local ftp = IsFirstTimePredicted()
+
+    if ftp and self:GetOwner():KeyDown(IN_USE) and self:GetOwner():KeyPressed(IN_ATTACK2) then
         self:ToggleSafety()
         return
     end
 
-    if IsFirstTimePredicted() and self:GetValue("Bipod") and self:GetOwner():KeyPressed(IN_ATTACK2) and !self:GetInBipod() and self:CanBipod() then
+    if ftp and self:GetValue("Bipod") and self:GetOwner():KeyPressed(IN_ATTACK2)
+            and !self:GetInBipod() and self:CanBipod() then
         self:EnterBipod()
     end
 
@@ -208,9 +211,9 @@ function SWEP:ThinkSights()
 
     if (!self:GetValue("Scope") or self:DoOldSchoolScopeBehavior()) and down then
         self:Melee()
-    elseif sighted and ((toggle and press) or (!toggle and !down)) then
+    elseif sighted and ((toggle and press and ftp) or (!toggle and !down)) then
         self:ScopeToggle(0)
-    elseif !sighted and ((toggle and press) or (!toggle and down)) then
+    elseif !sighted and ((toggle and press and ftp) or (!toggle and down)) then
         self:ScopeToggle(1)
     end
 end
