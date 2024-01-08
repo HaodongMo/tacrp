@@ -39,21 +39,21 @@ function SWEP:Think()
 
     self:ThinkRecoil()
 
-    self:ThinkSprint()
+    // self:ThinkSprint()
 
-    self:ThinkGrenade()
+    // self:ThinkGrenade()
 
     self:ThinkReload()
 
-    self:ThinkSights()
+    // self:ThinkSights()
 
-    self:ThinkFreeAim()
+    // self:ThinkFreeAim()
 
-    self:ThinkBlindFire()
+    // self:ThinkBlindFire()
 
     self:ProcessTimers()
 
-    self:ThinkHoldBreath()
+    // self:ThinkHoldBreath()
 
     if self:GetValue("Melee") and self:GetOwner():KeyPressed(TacRP.IN_MELEE) then
         self:Melee()
