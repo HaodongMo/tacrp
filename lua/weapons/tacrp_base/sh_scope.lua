@@ -57,9 +57,7 @@ function SWEP:ScopeToggle(setlevel)
 
     if level == self:GetScopeLevel() then return end
 
-    if IsFirstTimePredicted() then
-        self:SetScopeLevel(level)
-    end
+    self:SetScopeLevel(level)
 
     if level > 0 then
         self:ToggleBlindFire(TacRP.BLINDFIRE_NONE)
@@ -69,7 +67,7 @@ function SWEP:ScopeToggle(setlevel)
         self:SetLastScopeTime(CurTime())
     end
 
-    if CLIENT then
+    if CLIENT and (IsFirstTimePredicted() or game.SinglePlayer()) then
         self:GenerateAutoSight()
         self.LastHintLife = CurTime()
     end
