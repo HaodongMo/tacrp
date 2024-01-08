@@ -48,7 +48,7 @@ function SWEP:GetHintCapabilities()
         end
 
         if self:CanHoldBreath() then
-            self.CachedCapabilities["+speed"] = {so = 1, str = "Hold Breath"}
+            self.CachedCapabilities["+speed"] = {so = 2.1, str = "Hold Breath"}
         end
     elseif #self.Attachments > 0 then
         self.CachedCapabilities["+menu_context"] = {so = 1, str = "Customize"}
@@ -78,7 +78,13 @@ function SWEP:GetHintCapabilities()
     end
 
     if self:GetValue("CanToggle") and TacRP.ConVars["toggletactical"]:GetBool() then
-        self.CachedCapabilities["impulse 100"] = {so = 31, str = "Toggle " .. (self:GetValue("TacticalName") or "Tactical")}
+        if TacRP.ConVars["flashlight_alt"]:GetBool() then
+            self.CachedCapabilities["+walk/impulse 100"] = {so = 31, str = "Toggle " .. (self:GetValue("TacticalName") or "Tactical")}
+            self.CachedCapabilities["impulse 100"] = {so = 32, str = "Suit Flashlight"}
+        else
+            self.CachedCapabilities["impulse 100"] = {so = 31, str = "Toggle " .. (self:GetValue("TacticalName") or "Tactical")}
+            self.CachedCapabilities["+walk/impulse 100"] = {so = 32, str = "Suit Flashlight"}
+        end
     end
 
     -- blindfire / quickthrow
