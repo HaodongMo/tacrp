@@ -226,3 +226,8 @@ function SWEP:GetCapacity(base)
         return self:GetValue("ClipSize")
     end
 end
+
+-- Override to disable auto-reload for one reason or another.
+function SWEP:ShouldAutoReload()
+    return true
+end
