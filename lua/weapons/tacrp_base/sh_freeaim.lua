@@ -44,7 +44,7 @@ function SWEP:ThinkFreeAim()
 
         self:SetFreeAimAngle(freeaimang)
 
-        if CLIENT then
+        if CLIENT and (IsFirstTimePredicted() or game.SinglePlayer()) then
             self.ClientFreeAimAng = freeaimang
         end
     end
