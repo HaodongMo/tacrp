@@ -90,12 +90,10 @@ function SWEP:ThinkSprint()
 
     local amt = self:GetSprintAmount()
 
-    if SERVER or IsFirstTimePredicted() then
-        if self.LastWasSprinting and !sprinting then
-            self:ExitSprint()
-        elseif !self.LastWasSprinting and sprinting then
-            self:EnterSprint()
-        end
+    if self.LastWasSprinting and !sprinting then
+        self:ExitSprint()
+    elseif !self.LastWasSprinting and sprinting then
+        self:EnterSprint()
     end
 
     self.LastWasSprinting = sprinting
