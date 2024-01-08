@@ -67,3 +67,9 @@ function SWEP:IsDamageConstant(base)
     local valfunc = base and self.GetBaseValue or self.GetValue
     return valfunc(self, "Damage_Min") == valfunc(self, "Damage_Max")
 end
+
+function SWEP:GetPingOffsetScale()
+    if game.SinglePlayer() then return 0 end
+
+    return (self:GetOwner():Ping() - 5) / 1000
+end

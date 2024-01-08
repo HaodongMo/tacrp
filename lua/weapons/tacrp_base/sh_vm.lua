@@ -331,14 +331,6 @@ function SWEP:GetViewModelPosition(pos, ang)
     self.SwayScale = f_lerp(sightdelta, 1, 0.1)
     self.BobScale = 0
 
-    -- if game.SinglePlayer() or IsFirstTimePredicted() then
-    --     self.ViewModelPos = LerpVector(0.8, offsetpos, self.ViewModelPos)
-    --     self.ViewModelAng = LerpAngle(0.8, offsetang, self.ViewModelAng)
-    -- end
-
-    -- offsetpos = self.ViewModelPos
-    -- offsetang = self.ViewModelAng
-
     local speed = 15 * FT * (game.SinglePlayer() and 1 or 2)
 
     LerpMod(self.ViewModelPos, offsetpos, speed)
@@ -364,12 +356,10 @@ function SWEP:GetViewModelPosition(pos, ang)
     ang:RotateAroundAxis(oldang:Right(), extra_offsetang[2])
     ang:RotateAroundAxis(oldang:Forward(), extra_offsetang[3])
 
-    pos, ang = self:GetViewModelBob(pos, ang)
-    -- pos, ang = self:GetMidAirBob(pos, ang)
-    -- pos, ang = self:GetViewModelLeftRight(pos, ang)
-    -- pos, ang = self:GetViewModelInertia(pos, ang)
-    pos, ang = self:GetViewModelSway(pos, ang)
-    -- pos, ang = self:GetViewModelSmooth(pos, ang)
+    if !IsFirstTimePredicted() then
+        pos, ang = self:GetViewModelBob(pos, ang)
+        pos, ang = self:GetViewModelSway(pos, ang)
+    end
 
     self.ViewModelPos = pos
     self.ViewModelAng = ang
