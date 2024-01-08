@@ -619,19 +619,19 @@ The Soviet/AK themed expansion starring 9 weapons, including well-known AK varia
 <li><b>Fixed:</b> Error when spawning NPC with default weapon.
 </ul>]],
     },
-	{
+    {
         Title = "Update 17 Hotfix 2",
         Type = "Patch Notes",
-        Date = "2024-1-3",
+        Date = "2024-01-03",
         Author = "speedonerd",
         Major = false,
-        Summary = "Small additions",
+        Summary = "Small additions.",
         Contents = [[<body style="font-family:'Myriad Pro';color:white;font-size:125%;">
-<p>Small update with a few fixes to compliment the new expansion, plus a brand new base weapon made on a whim.
+<p>Small update with a few fixes to compliment the new expansion.
 
 <h3>Changelist</h3>
 <ul>
-<li><b>Added:</b> AR2 Overwatch Standard-Issue Pulse Rifle.
+<li><b>Added:</b> News button in customization page.
 <li><b>Added:</b> Bind for HL2 flashlight when a tactical attachment is fitted (ALT + F).
 <li><b>Added:</b> Random any weapon option for NPCs.
 <li><b>Changed:</b> (TTT) Snipers now use 357 ammo instead of Deagle ammo.
@@ -640,10 +640,10 @@ The Soviet/AK themed expansion starring 9 weapons, including well-known AK varia
 <li><b>Fixed:</b> (TTT) General TTT2 networking improvements and fixes.
 </ul>]],
     },
-	{
+    {
         Title = "Heavy Duty Release",
-        Type = "Patch Notes",
-        Date = "2024-1-3",
+        Type = "Expansion Release",
+        Date = "2024-01-07",
         Author = "speedonerd",
         Major = true,
         Summary = "New expansion and a new weapon for InterOps",
@@ -748,7 +748,7 @@ local function loadlocalandsort()
     end)
 end
 
-local function fetchnews(callback)
+function TacRP.FetchNews(callback)
     if TacRP.NewsLoaded then
         if callback then
             callback()
@@ -797,7 +797,7 @@ local function fetchnews(callback)
         end
     end)
 end
-
+local fetchnews = TacRP.FetchNews
 
 local html_head = [[<head>
 <style>
@@ -1250,11 +1250,11 @@ local function notifynews()
         if ind then
             if major and !TacRP.ConVars["news_majoronly"]:GetBool() then
                 TacRP.CreateNewsPanel(ind)
-            elseif major or !TacRP.ConVars["news_majoronly"]:GetBool() then
-                chat.AddText(color_white, "------------- Tactical RP -------------")
-                chat.AddText(color_white, "New " .. string.lower(TacRP.NewsLoaded[ind].Type or "article") .. " released!")
-                chat.AddText(color_white, "Use command 'tacrp_news' or type '/tacrp_news' to view it and suppress this message.")
-                chat.AddText(color_white, "---------------------------------------")
+            -- elseif major or !TacRP.ConVars["news_majoronly"]:GetBool() then
+            --     chat.AddText(color_white, "------------- Tactical RP -------------")
+            --     chat.AddText(color_white, "New " .. string.lower(TacRP.NewsLoaded[ind].Type or "article") .. " released!")
+            --     chat.AddText(color_white, "Use command 'tacrp_news' or type '/tacrp_news' to view it and suppress this message.")
+            --     chat.AddText(color_white, "---------------------------------------")
             end
         end
     end)
