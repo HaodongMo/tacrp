@@ -132,19 +132,3 @@ function SWEP:GetBreathSpeed()
     end
     return self.MiscCache["breath_rate"]
 end
-
--- function SWEP:GetBreath()
---     return self:GetOwner():GetNWFloat("TacRPBreath", 1)
--- end
-
--- function SWEP:SetBreath(v)
---     self:GetOwner():SetNWFloat("TacRPBreath", math.Clamp(v, 0, 1))
--- end
-
--- function SWEP:GetOutOfBreath()
---     return self:GetOwner():GetNWBool("TacRPBreathEmpty", false)
--- end
-
--- function SWEP:SetOutOfBreath(v)
---     self:GetOwner():SetNWBool("TacRPBreathEmpty", v)
--- end

@@ -1,7 +1,7 @@
 function SWEP:Think()
     local owner = self:GetOwner()
 
-    if CLIENT and !self.CertainAboutAtts and !self.AskedAboutAtts then
+    if CLIENT and !self.CertainAboutAtts and !self.AskedAboutAtts and (IsFirstTimePredicted() or game.SinglePlayer()) then
         self.AskedAboutAtts = true
         self:RequestWeapon()
     end
@@ -39,21 +39,21 @@ function SWEP:Think()
 
     self:ThinkRecoil()
 
-    self:ThinkSprint()
+    // self:ThinkSprint()
 
-    self:ThinkGrenade()
+    // self:ThinkGrenade()
 
-    self:ThinkReload()
+    // self:ThinkReload()
 
     self:ThinkSights()
 
-    self:ThinkFreeAim()
+    // self:ThinkFreeAim()
 
-    self:ThinkBlindFire()
+    // self:ThinkBlindFire()
 
     self:ProcessTimers()
 
-    self:ThinkHoldBreath()
+    // self:ThinkHoldBreath()
 
     if self:GetValue("Melee") and self:GetOwner():KeyPressed(TacRP.IN_MELEE) then
         self:Melee()
