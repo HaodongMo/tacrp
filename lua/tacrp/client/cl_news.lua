@@ -620,9 +620,9 @@ The Soviet/AK themed expansion starring 9 weapons, including well-known AK varia
 </ul>]],
     },
     {
-        Title = "Update 17 Hotfix 2",
+        Title = "Update 18",
         Type = "Patch Notes",
-        Date = "2024-01-03",
+        Date = "2024-01-07",
         Author = "speedonerd",
         Major = false,
         Summary = "Small additions.",
