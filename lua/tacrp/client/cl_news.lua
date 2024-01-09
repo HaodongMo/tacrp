@@ -651,7 +651,7 @@ The Soviet/AK themed expansion starring 9 weapons, including well-known AK varia
 <p>Yet another new expansion. Originally intended to release in time for Christmas, we missed the mark a bit but hope you'll enjoy it all the same. We've also pushed some extra goodies to existing expansions.
 
 <h2>Heavy Duty <i>(New!)</i></h2>
-<p><input type='submit' value='Open Workshop' onclick='console.log("RUNLUA:gui.OpenURL(\"https://steamcommunity.com/sharedfiles/filedetails/?id=3102297293\")")' /></p>
+<p><input type='submit' value='Open Workshop' onclick='console.log("RUNLUA:gui.OpenURL(\"https://steamcommunity.com/sharedfiles/filedetails/?id=3134547969\")")' /></p>
 The heavy weaponry expansion, sporting 10 new weapons including autoshotties, guided rockets and an 80's cinema icon.
 <ul>
 <li>AMT Hardballer
