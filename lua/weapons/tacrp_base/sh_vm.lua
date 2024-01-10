@@ -38,7 +38,7 @@ SWEP.ViewModelAng = Angle(0, 0, 0)
 function SWEP:GetViewModelPosition(pos, ang)
     if !IsValid(self:GetOwner()) then
         return Vector(0, 0, 0), Angle(0, 0, 0)
-    end 
+    end
 
     if TacRP.ConVars["dev_benchgun"]:GetBool() then
         return self.BenchPos, self.BenchAng

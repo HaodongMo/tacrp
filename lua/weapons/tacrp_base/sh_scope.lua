@@ -67,7 +67,13 @@ function SWEP:ScopeToggle(setlevel)
         self:SetLastScopeTime(CurTime())
     end
 
-    if CLIENT and (IsFirstTimePredicted() or game.SinglePlayer()) then
+    -- HACK: In singleplayer, SWEP:Think is called on client but IsFirstTimePredicted is NEVER true.
+    -- This causes ScopeToggle to NOT be called on client in singleplayer...
+    -- GenerateAutoSight needs to run clientside or scopes will break. Good old CallOnClient it is.
+
+    if SERVER and game.SinglePlayer() then
+        self:CallOnClient("GenerateAutoSight")
+    elseif CLIENT and (IsFirstTimePredicted() or game.SinglePlayer()) then
         self:GenerateAutoSight()
         self.LastHintLife = CurTime()
     end
