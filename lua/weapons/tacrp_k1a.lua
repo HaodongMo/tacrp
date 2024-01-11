@@ -12,7 +12,7 @@ SWEP.SubCatType = "4Assault Rifle"
 
 SWEP.Description = "Burst rifle with minimal recoil and good hip firing accuracy."
 
-SWEP.Trivia_Caliber = ".223 Remington" // Pre-2014 K1A's were chambered for .223, TacInt originally released in 2013. Cool trivia fact!
+SWEP.Trivia_Caliber = "5.56x45mm"
 SWEP.Trivia_Manufacturer = "Daewoo Precision"
 SWEP.Trivia_Year = "1981"
 
@@ -107,12 +107,12 @@ SWEP.MuzzleVelocity = 25000
 
 // misc. shooting
 
-SWEP.Firemodes = {-3, 1}
+SWEP.Firemodes = {-3, 2, 1}
 SWEP.RunawayBurst = true
 SWEP.PostBurstDelay = 0.16
 
-SWEP.RPM = 650
-SWEP.RPMMultBurst = 800 / 650
+SWEP.RPM = 675
+SWEP.RPMMultBurst = 800 / 675
 
 SWEP.Spread = 0.004
 SWEP.RecoilSpreadPenalty = 0.002
@@ -299,7 +299,7 @@ SWEP.Attachments = {
     },
     [6] = {
         PrintName = "Trigger",
-        Category = {"trigger_burst"},
+        Category = {"trigger_4pos"},
         AttachSound = "TacRP/weapons/flashlight_on.wav",
         DetachSound = "TacRP/weapons/flashlight_off.wav",
     },
