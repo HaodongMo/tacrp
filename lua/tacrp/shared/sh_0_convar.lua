@@ -1074,6 +1074,14 @@ local function menu_balance_ti(panel)
     -- panel:Help("(Tactical and PvE separate weapons into 4 tiers, ranging from Consumer, Security, Operator, and Elite, with each higher tier having slightly better damage output.)")
 
     panel:AddControl("slider", {
+        label = "Bullet Damage",
+        command = "tacrp_mult_damage",
+        type = "float",
+        min = 0.1,
+        max = 5,
+    })
+    panel:ControlHelp("\"Bullet Damage\" does not affect Shotguns and Sniper Rifles.")
+    panel:AddControl("slider", {
         label = "Shotgun Damage",
         command = "tacrp_mult_damage_shotgun",
         type = "float",
@@ -1090,13 +1098,6 @@ local function menu_balance_ti(panel)
     panel:AddControl("slider", {
         label = "Explosive Damage",
         command = "tacrp_mult_damage_explosive",
-        type = "float",
-        min = 0.1,
-        max = 5,
-    })
-    panel:AddControl("slider", {
-        label = "Other Damage",
-        command = "tacrp_mult_damage",
         type = "float",
         min = 0.1,
         max = 5,
