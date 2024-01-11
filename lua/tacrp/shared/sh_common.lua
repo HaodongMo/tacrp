@@ -174,9 +174,6 @@ TacRP.BalanceUseTiers = {
 
 TacRP.BalanceDefaults = {
     [TacRP.BALANCE_SBOX] = {
-        RecoilVisualKick = 0.85,
-        MeleeSpeedMult = 1,
-        ReloadSpeedMult = 1,
     },
     [TacRP.BALANCE_PVE] = {
         RecoilVisualKick = 0.75,
