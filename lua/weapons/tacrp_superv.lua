@@ -33,12 +33,6 @@ SWEP.BalanceStats = {
 
         FreeAimMaxAngle = 3.5,
         RPM = 1100,
-
-        MoveSpeedMult = 0.9,
-        ShootingSpeedMult = 0.8,
-        SightedSpeedMult = 0.85,
-        MeleeSpeedMult = 1,
-        ReloadSpeedMult = 1,
     },
     [TacRP.BALANCE_TTT] = {
         Description = "Close range SMG with extremely high fire rate. Practically no recoil, but accuracy is very poor.",
@@ -66,12 +60,6 @@ SWEP.BalanceStats = {
         },
 
         ReloadTimeMult = 1.25,
-
-        MoveSpeedMult = 0.95,
-        ShootingSpeedMult = 0.85,
-        MeleeSpeedMult = 1,
-        SightedSpeedMult = 0.6,
-        ReloadSpeedMult = 0.7,
     },
     [TacRP.BALANCE_PVE] = {
         Damage_Max = 9,
@@ -80,12 +68,6 @@ SWEP.BalanceStats = {
         Range_Max = 3500,
 
         Spread = 0.012,
-
-        MoveSpeedMult = 0.9,
-        ShootingSpeedMult = 0.8,
-        SightedSpeedMult = 0.85,
-        MeleeSpeedMult = 1,
-        ReloadSpeedMult = 1,
     },
     [TacRP.BALANCE_OLDSCHOOL] = {
         Description = "Close-range SMG with an insane rate of fire and basically no recoil, but very poor accuracy.",

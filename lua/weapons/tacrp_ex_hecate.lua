@@ -32,12 +32,6 @@ SWEP.BalanceStats = {
         Damage_Min = 150,
         Range_Min = 700,
         Range_Max = 5000,
-
-        MoveSpeedMult = 0.7,
-        ShootingSpeedMult = 0.5,
-        SightedSpeedMult = 0.55,
-        MeleeSpeedMult = 1,
-        ReloadSpeedMult = 1,
     },
     [TacRP.BALANCE_TTT] = { // this is a buyable weapon in TTT
         Damage_Max = 80,
@@ -60,24 +54,12 @@ SWEP.BalanceStats = {
         },
 
         ReloadTimeMult = 1.75,
-
-        MoveSpeedMult = 0.8,
-        ShootingSpeedMult = 0.25,
-        MeleeSpeedMult = 1,
-        SightedSpeedMult = 0.4,
-        ReloadSpeedMult = 0.25,
     },
     [TacRP.BALANCE_PVE] = {
         Damage_Max = 90,
         Damage_Min = 75,
         Range_Min = 4000,
         Range_Max = 8000,
-
-        MoveSpeedMult = 0.7,
-        ShootingSpeedMult = 0.5,
-        SightedSpeedMult = 0.55,
-        MeleeSpeedMult = 1,
-        ReloadSpeedMult = 1,
     },
     [TacRP.BALANCE_OLDSCHOOL] = {
         HipFireSpreadPenalty = 0.025,

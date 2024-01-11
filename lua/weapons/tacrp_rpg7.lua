@@ -29,20 +29,9 @@ SWEP.SlotAlt = 4
 
 SWEP.BalanceStats = {
     [TacRP.BALANCE_SBOX] = {
-        MoveSpeedMult = 0.8,
-        ShootingSpeedMult = 0.5,
-        SightedSpeedMult = 0.5,
-        MeleeSpeedMult = 1,
-        ReloadSpeedMult = 0.8,
     },
     [TacRP.BALANCE_TTT] = {
         ReloadTimeMult = 1.1,
-
-        MoveSpeedMult = 0.8,
-        ShootingSpeedMult = 0.5,
-        SightedSpeedMult = 0.5,
-        MeleeSpeedMult = 1,
-        ReloadSpeedMult = 0.25,
     },
 }
 

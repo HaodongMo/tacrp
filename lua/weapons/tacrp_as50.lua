@@ -34,12 +34,6 @@ SWEP.BalanceStats = {
 
         Range_Min = 900,
         Range_Max = 5000,
-
-        MoveSpeedMult = 0.7,
-        ShootingSpeedMult = 0.5,
-        SightedSpeedMult = 0.5,
-        MeleeSpeedMult = 1,
-        ReloadSpeedMult = 1,
     },
     [TacRP.BALANCE_TTT] = { // this is a buyable weapon in TTT
         Description = "Semi-automatic anti-materiel rifle with integral bipod.\nCan kill in up to 2 shots regardless of distance.\nEquipped with a 12x scope by default.",
@@ -64,12 +58,6 @@ SWEP.BalanceStats = {
         },
 
         ReloadTimeMult = 1.25,
-
-        MoveSpeedMult = 0.8,
-        ShootingSpeedMult = 0.25,
-        MeleeSpeedMult = 1,
-        SightedSpeedMult = 0.4,
-        ReloadSpeedMult = 0.25,
     },
     [TacRP.BALANCE_PVE] = {
         Description = "Semi-automatic anti-materiel rifle with integral bipod.\nEquipped with a 12x scope by default.",
@@ -78,12 +66,6 @@ SWEP.BalanceStats = {
         Damage_Min = 92,
         Range_Min = 4000,
         Range_Max = 8000,
-
-        MoveSpeedMult = 0.7,
-        ShootingSpeedMult = 0.5,
-        SightedSpeedMult = 0.55,
-        MeleeSpeedMult = 1,
-        ReloadSpeedMult = 1,
     },
     [TacRP.BALANCE_OLDSCHOOL] = {
         RecoilDissipationRate = 3,
