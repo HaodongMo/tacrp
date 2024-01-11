@@ -292,7 +292,7 @@ function TacRP:ProgressPhysBullet(bullet, timestep)
                 bullet.Dead = true
                 if game.SinglePlayer() or !TacRP.ConVars["client_damage"]:GetBool() then
                     bullet.Attacker:FireBullets({
-                        Damage = 1, -- weapon:GetValue("Damage_Max"),
+                        Damage = weapon:GetValue("Damage_Max"),
                         Force = 8,
                         Tracer = 0,
                         Num = 1,

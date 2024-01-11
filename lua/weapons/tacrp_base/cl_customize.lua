@@ -148,8 +148,8 @@ function SWEP:CreateCustomizeHUD()
 
             local exp = self:GetValue("ExplosiveDamage")
 
-            local dmg_max = self:GetValue("Damage_Max") + exp
-            local dmg_min = self:GetValue("Damage_Min") + exp
+            local dmg_max = (self:GetValue("Damage_Max") + exp) * self:GetConfigDamageMultiplier()
+            local dmg_min = (self:GetValue("Damage_Min") + exp) * self:GetConfigDamageMultiplier()
 
             local range_min, range_max = self:GetMinMaxRange()
 
@@ -207,7 +207,7 @@ function SWEP:CreateCustomizeHUD()
                     range_m_x = mouse_x
                 end
 
-                local dmg = self:GetDamageAtRange(range) + self:GetValue("ExplosiveDamage")
+                local dmg = self:GetDamageAtRange(range) + exp * self:GetConfigDamageMultiplier()
 
                 local txt_dmg1 = tostring(math.Round(dmg)) .. TacRP:GetPhrase("unit.damage")
 

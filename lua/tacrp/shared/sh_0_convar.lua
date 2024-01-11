@@ -709,6 +709,51 @@ local conVars = {
         max = 1,
         replicated = true,
     },
+
+    {
+        name = "mult_damage",
+        default = "1",
+        min = 0.01,
+        replicated = true,
+    },
+    {
+        name = "mult_damage_shotgun",
+        default = "1",
+        min = 0.01,
+        replicated = true,
+    },
+    {
+        name = "mult_damage_sniper",
+        default = "1",
+        min = 0.01,
+        replicated = true,
+    },
+    {
+        name = "mult_damage_explosive",
+        default = "1",
+        min = 0.01,
+        replicated = true,
+    },
+    {
+        name = "mult_recoil_kick",
+        default = "1",
+        min = 0,
+        replicated = true,
+    },
+    {
+        name = "mult_recoil_vis",
+        default = "1",
+        min = 0,
+        replicated = true,
+    },
+
+    {
+        name = "recoilreset",
+        default = "0",
+        min = 0,
+        max = 1,
+        replicated = true,
+    },
 }
 
 TacRP.ConVars = {}
@@ -1013,23 +1058,94 @@ local function menu_server_ti(panel)
 end
 
 local function menu_balance_ti(panel)
-    header(panel, "Balance")
-    panel:Help("Adjust weapon attributes to suit your gameplay needs.\nAutomatic sets balance to TTT in TTT, Tactical for DarkRP/Helix, and Arcade otherwise.")
+    header(panel, "Damage")
+    panel:Help("Adjust weapon attributes to suit your gameplay needs.")
     local cb_balance, lb_balance = panel:ComboBox("Weapon Balance", "tacrp_balance")
-    cb_balance:AddChoice("Automatic", "-1")
-    cb_balance:AddChoice("0 - Tactical", "0")
-    cb_balance:AddChoice("1 - Arcade", "1")
-    cb_balance:AddChoice("2 - TTT", "2")
-    cb_balance:AddChoice("3 - PvE", "3")
+    cb_balance:AddChoice("[Automatic]", "-1")
+    cb_balance:AddChoice("Tactical", "0")
+    cb_balance:AddChoice("Arcade", "1")
+    cb_balance:AddChoice("TTT", "2")
     cb_balance:DockMargin(8, 0, 0, 0)
     lb_balance:SizeToContents()
+    -- panel:Help("Tactical: Balanced for reduced move speed. Medium TTK.")
+    -- panel:Help("Arcade: Balanced for Sandbox move speed. Low TTK. Snipers/DMRs have damage rampup.")
+    -- panel:Help("TTT: High TTK, reloads slow you down and take longer. Some weapons have lower fire rate.")
+    -- panel:Help("PvE: For HL2 campaign or co-op maps. Damage comparable to HL2 weapons, reduced spread.")
+    -- panel:Help("(Tactical and PvE separate weapons into 4 tiers, ranging from Consumer, Security, Operator, and Elite, with each higher tier having slightly better damage output.)")
 
-    panel:Help("Tactical: Balanced for reduced move speed. Medium TTK.")
-    panel:Help("Arcade: Balanced for Sandbox move speed. Low TTK. Snipers/DMRs have damage rampup.")
-    panel:Help("TTT: High TTK, reloads slow you down and take longer. Some weapons have lower fire rate.")
-    panel:Help("PvE: For HL2 campaign or co-op maps. Damage comparable to HL2 weapons, reduced spread.")
-    panel:Help("(Tactical and PvE separate weapons into 4 tiers, ranging from Consumer, Security, Operator, and Elite, with each higher tier having slightly better damage output.)")
+    panel:AddControl("slider", {
+        label = "Shotgun Damage",
+        command = "tacrp_mult_damage_shotgun",
+        type = "float",
+        min = 0.1,
+        max = 5,
+    })
+    panel:AddControl("slider", {
+        label = "Sniper Damage",
+        command = "tacrp_mult_damage_sniper",
+        type = "float",
+        min = 0.1,
+        max = 5,
+    })
+    panel:AddControl("slider", {
+        label = "Explosive Damage",
+        command = "tacrp_mult_damage_explosive",
+        type = "float",
+        min = 0.1,
+        max = 5,
+    })
+    panel:AddControl("slider", {
+        label = "Other Damage",
+        command = "tacrp_mult_damage",
+        type = "float",
+        min = 0.1,
+        max = 5,
+    })
 
+    header(panel, "\nRecoil")
+    panel:AddControl("checkbox", {
+        label = "Bloom Modifies Recoil",
+        command = "tacrp_altrecoil"
+    })
+    panel:ControlHelp("If enabled, gaining bloom intensifies recoil but does not modify spread.\nIf disabled, gaining bloom increases spread but does not modify recoil kick (old behavior).\nBloom is gained when firing consecutive shots.")
+    panel:AddControl("checkbox", {
+        label = "Recoil Patterns",
+        command = "tacrp_recoilpattern"
+    })
+    panel:ControlHelp("Recoil follows a weapon-specific pattern, reset when bloom disappears.\nPattern fades away in long bursts, but reduces vertical recoil.")
+    panel:AddControl("slider", {
+        label = "Recoil Kick",
+        command = "tacrp_mult_recoil_kick",
+        type = "float",
+        min = 0,
+        max = 2,
+    })
+    panel:AddControl("slider", {
+        label = "Visual Recoil",
+        command = "tacrp_mult_recoil_vis",
+        type = "float",
+        min = 0,
+        max = 2,
+    })
+
+    header(panel, "\nMiscellaneous")
+    panel:AddControl("slider", {
+        label = "Flashbang Slow",
+        command = "tacrp_flash_slow",
+        type = "float",
+        min = 0,
+        max = 1,
+    })
+    panel:AddControl("slider", {
+        label = "CS Gas Sway",
+        command = "tacrp_gas_sway",
+        type = "float",
+        min = 0,
+        max = 10,
+    })
+end
+
+local function menu_mechanics_ti(panel)
     header(panel, "\nAmmunition")
     panel:AddControl("checkbox", {
         label = "Infinite Ammo",
@@ -1063,21 +1179,10 @@ local function menu_balance_ti(panel)
     })
     panel:ControlHelp("Play a holster animation before pulling out another weapon. If disabled, holstering is instant.")
     panel:AddControl("checkbox", {
-        label = "Bloom Modifies Recoil",
-        command = "tacrp_altrecoil"
-    })
-    panel:ControlHelp("If enabled, gaining bloom intensifies recoil but does not modify spread.\nIf disabled, gaining bloom increases spread but does not modify recoil kick (old behavior).\nBloom is gained when firing consecutive shots.")
-    panel:AddControl("checkbox", {
         label = "Shotgun Reload Cancel",
         command = "tacrp_reload_sg_cancel"
     })
     panel:ControlHelp("Instantly fire out of a shotgun reload. If disabled, the finishing part of the animation must play out.")
-    panel:AddControl("checkbox", {
-        label = "Recoil Patterns",
-        command = "tacrp_recoilpattern"
-    })
-    panel:ControlHelp("Recoil follows a weapon-specific pattern, reset when bloom disappears.\nPattern fades away in long bursts, but reduces vertical recoil.")
-
 
     header(panel, "\nBallistics")
     panel:AddControl("checkbox", {
@@ -1144,22 +1249,6 @@ local function menu_balance_ti(panel)
         command = "tacrp_penalty_melee"
     })
     panel:ControlHelp("Penalty from melee bashing.")
-
-    header(panel, "\nSliders")
-    panel:AddControl("slider", {
-        label = "Flashbang Slow",
-        command = "tacrp_flash_slow",
-        type = "float",
-        min = 0,
-        max = 1,
-    })
-    panel:AddControl("slider", {
-        label = "CS Gas Sway",
-        command = "tacrp_gas_sway",
-        type = "float",
-        min = 0,
-        max = 10,
-    })
 end
 
 local function menu_atts_ti(panel)
@@ -1224,10 +1313,13 @@ local clientmenus_ti = {
         text = "Server", func = menu_server_ti
     },
     {
-        text = "Mechanics", func = menu_balance_ti
+        text = "Mechanics", func = menu_mechanics_ti
     },
     {
         text = "Attachments", func = menu_atts_ti
+    },
+    {
+        text = "Balance", func = menu_balance_ti
     },
 }
 

@@ -195,6 +195,8 @@ function TacRP.StartCommand(ply, cmd)
             kick = kick * math.min(1, wpn:GetValue("BipodKick"))
         end
 
+        kick = kick * TacRP.ConVars["mult_recoil_kick"]:GetFloat()
+
         local eyeang = cmd:GetViewAngles()
 
         local suppressfactor = 1
@@ -228,7 +230,10 @@ function TacRP.StartCommand(ply, cmd)
     if !game.SinglePlayer() then
         ping = ply:Ping()
     end
-    if wpn:GetLastRecoilTime() + wpn:RecoilDuration() - (ping * 0.5) < CurTime() and wpn:GetRecoilAmount() == 0 then
+    if TacRP.ConVars["recoilreset"]:GetBool()
+            and wpn:GetLastRecoilTime() + wpn:RecoilDuration() - (ping * 0.5) < CurTime()
+            and wpn:GetRecoilAmount() == 0 then
+
         recrise = TacRP.RecoilRise
 
         local recreset = recrise * FrameTime() * 6

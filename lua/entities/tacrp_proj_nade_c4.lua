@@ -32,7 +32,7 @@ function ENT:Detonate()
     local attacker = self.Attacker or self:GetOwner() or self
 
     local ttt = TacRP.GetBalanceMode() == TacRP.BALANCE_TTT
-    local dmg = ttt and 200 or 400
+    local dmg = (ttt and 200 or 400) * TacRP.ConVars["mult_damage_explosive"]:GetFloat()
 
     util.BlastDamage(self, attacker, self:GetPos(), 256, dmg)
     util.BlastDamage(self, attacker, self:GetPos(), 512, dmg * 0.5)

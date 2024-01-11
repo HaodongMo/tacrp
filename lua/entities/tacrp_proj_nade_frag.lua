@@ -31,8 +31,8 @@ ENT.ExplodeSounds = {
 
 function ENT:Detonate()
     local attacker = self.Attacker or self:GetOwner() or self
-    local ttt = TacRP.GetBalanceMode() == TacRP.BALANCE_TTT
-    local dmg = ttt and 100 or 150
+
+    local dmg = 150 * TacRP.ConVars["mult_damage_explosive"]:GetFloat()
     if self.ImpactFuse then dmg = dmg * 0.5 end
 
     util.BlastDamage(self, attacker, self:GetPos(), 350, dmg)

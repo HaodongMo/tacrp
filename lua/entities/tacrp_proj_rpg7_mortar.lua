@@ -92,13 +92,15 @@ function ENT:Detonate()
     local fx = EffectData()
     fx:SetOrigin(self:GetPos())
 
+    local mult = TacRP.ConVars["mult_damage_explosive"]:GetFloat()
+
     if self.NPCDamage then
         if self:WaterLevel() > 0 then
             util.Effect("WaterSurfaceExplosion", fx)
         else
             util.Effect("HelicopterMegaBomb", fx)
         end
-        util.BlastDamage(self, attacker, self:GetPos(), 512, 150)
+        util.BlastDamage(self, attacker, self:GetPos(), 512, 150 * mult)
     else
         if self.SpawnTime + self.SafetyFuse >= CurTime() then
             if self:WaterLevel() > 0 then
@@ -106,7 +108,7 @@ function ENT:Detonate()
             else
                 util.Effect("HelicopterMegaBomb", fx)
             end
-            util.BlastDamage(self, attacker, self:GetPos(), 256, 100)
+            util.BlastDamage(self, attacker, self:GetPos(), 256, 100 * mult)
         else
             if self:WaterLevel() > 0 then
                 util.Effect("WaterSurfaceExplosion", fx)
@@ -114,9 +116,9 @@ function ENT:Detonate()
                 util.Effect("Explosion", fx)
             end
             self:EmitSound("^ambient/explosions/explode_3.wav", 100, 90, 0.75, CHAN_AUTO)
-            util.BlastDamage(self, attacker, self:GetPos(), 200, 1000)
-            util.BlastDamage(self, attacker, self:GetPos(), 328, 250)
-            util.BlastDamage(self, attacker, self:GetPos(), 768, 100)
+            util.BlastDamage(self, attacker, self:GetPos(), 200, 300 * mult)
+            util.BlastDamage(self, attacker, self:GetPos(), 328, 120 * mult)
+            util.BlastDamage(self, attacker, self:GetPos(), 768, 80 * mult)
             local count = 8
             for i = 1, count do
                 local tr = util.TraceLine({

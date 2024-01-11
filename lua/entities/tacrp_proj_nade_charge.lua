@@ -51,8 +51,9 @@ end
 
 function ENT:Detonate()
     local attacker = IsValid(self.Attacker) and self.Attacker or self:GetOwner()
-    local ttt = TacRP.GetBalanceMode() == TacRP.BALANCE_TTT
-    util.BlastDamage(self, attacker, self:GetPos(), ttt and 200 or 150, ttt and 250 or 500)
+
+    util.BlastDamage(self, attacker, self:GetPos(), 200,
+            500 * TacRP.ConVars["mult_damage_explosive"]:GetFloat())
 
     local fx = EffectData()
     fx:SetOrigin(self:GetPos())
@@ -64,7 +65,7 @@ function ENT:Detonate()
         util.Effect("HelicopterMegaBomb", fx)
     end
 
-    self:EmitSound(table.Random(self.ExplodeSounds), ttt and 90 or 115)
+    self:EmitSound(table.Random(self.ExplodeSounds), 110)
 
     local door = self:GetParent()
     self:SetParent(NULL)

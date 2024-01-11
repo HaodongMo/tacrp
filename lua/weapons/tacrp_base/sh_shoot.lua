@@ -364,7 +364,7 @@ function SWEP:PrimaryAttack()
             local damage = DamageInfo()
             damage:SetAttacker(self:GetOwner())
             damage:SetInflictor(self)
-            damage:SetDamage(self:GetValue("Damage_Max") * self:GetValue("Num"))
+            damage:SetDamage(self:GetValue("Damage_Max") * self:GetValue("Num") * self:GetConfigDamageMultiplier())
             damage:SetDamageType(self:IsShotgun() and DMG_BUCKSHOT or DMG_BULLET)
             damage:SetDamagePosition(self:GetMuzzleOrigin())
             damage:SetDamageForce(dir:Forward() * self:GetValue("Num"))
@@ -474,8 +474,8 @@ function SWEP:AfterShotFunction(tr, dmg, range, penleft, alreadypenned, forced)
 
         if self:GetOwner():IsNPC() and !TacRP.ConVars["npc_equality"]:GetBool() then
             dmg:ScaleDamage(0.25)
-        elseif !self:GetOwner():IsNPC() then
-            local pendelta = matpen > 0 and penleft / matpen or 1
+        elseif matpen > 0 and TacRP.ConVars["penetration"]:GetBool() and !self:GetOwner():IsNPC() then
+            local pendelta = penleft / matpen
             pendelta = Lerp(pendelta, math.Clamp(matpen * 0.005, 0.1, 0.25), 1)
             dmg:ScaleDamage(pendelta)
         end
@@ -548,7 +548,7 @@ function SWEP:GetDamageAtRange(range, noround)
         d = (range - r_min) / (r_max - r_min)
     end
 
-    local dmgv = Lerp(d, self:GetValue("Damage_Max"), self:GetValue("Damage_Min"))
+    local dmgv = Lerp(d, self:GetValue("Damage_Max"), self:GetValue("Damage_Min")) * self:GetConfigDamageMultiplier()
 
     if !noround then
         dmgv = math.ceil(dmgv)
@@ -669,6 +669,25 @@ function SWEP:GetSpread(baseline)
     spread = math.max(spread, 0)
 
     return spread
+end
+
+local type_to_cvar = {
+    ["5Shotgun"] = "mult_damage_shotgun",
+    ["7Sniper Rifle"] = "mult_damage_sniper",
+
+    ["6Launcher"] = "",
+    ["7Special Weapon"] = "",
+    ["8Melee Weapon"] = "",
+    ["9Equipment"] = "",
+    ["9Throwable"] = "",
+}
+function SWEP:GetConfigDamageMultiplier()
+    local cvar = type_to_cvar[self.SubCatType] or "mult_damage"
+    if TacRP.ConVars[cvar] then
+        return TacRP.ConVars[cvar]:GetFloat()
+    else
+        return 1
+    end
 end
 
 function SWEP:GetBodyDamageMultipliers(base)

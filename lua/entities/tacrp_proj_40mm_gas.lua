@@ -25,8 +25,6 @@ function ENT:Detonate()
     if self:WaterLevel() > 0 then self:Remove() return end
     local attacker = self.Attacker or self:GetOwner() or self
 
-    util.BlastDamage(self, attacker, self:GetPos(), 300, 25)
-
     self:EmitSound(table.Random(self.ExplodeSounds), 75)
 
     local cloud = ents.Create( "TacRP_gas_cloud" )
