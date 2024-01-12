@@ -729,6 +729,12 @@ local conVars = {
         replicated = true,
     },
     {
+        name = "mult_damage_magnum",
+        default = "1",
+        min = 0.01,
+        replicated = true,
+    },
+    {
         name = "mult_damage_explosive",
         default = "1",
         min = 0.01,
@@ -1072,35 +1078,41 @@ local function menu_balance_ti(panel)
     -- panel:Help("TTT: High TTK, reloads slow you down and take longer. Some weapons have lower fire rate.")
     -- panel:Help("PvE: For HL2 campaign or co-op maps. Damage comparable to HL2 weapons, reduced spread.")
     -- panel:Help("(Tactical and PvE separate weapons into 4 tiers, ranging from Consumer, Security, Operator, and Elite, with each higher tier having slightly better damage output.)")
-
     panel:AddControl("slider", {
-        label = "Bullet Damage",
+        label = "Overall Damage",
         command = "tacrp_mult_damage",
         type = "float",
         min = 0.1,
-        max = 5,
+        max = 3,
     })
-    panel:ControlHelp("\"Bullet Damage\" does not affect Shotguns and Sniper Rifles.")
+    panel:ControlHelp("Only affects bullets. Type-specific damage multipliers takes priority and doesn't stack.")
     panel:AddControl("slider", {
         label = "Shotgun Damage",
         command = "tacrp_mult_damage_shotgun",
         type = "float",
         min = 0.1,
-        max = 5,
+        max = 3,
     })
     panel:AddControl("slider", {
-        label = "Sniper Damage",
+        label = "Sniper Rifle Damage",
         command = "tacrp_mult_damage_sniper",
         type = "float",
         min = 0.1,
-        max = 5,
+        max = 3,
+    })
+    panel:AddControl("slider", {
+        label = "Magnum Pistol Damage",
+        command = "tacrp_mult_damage_magnum",
+        type = "float",
+        min = 0.1,
+        max = 3,
     })
     panel:AddControl("slider", {
         label = "Explosive Damage",
         command = "tacrp_mult_damage_explosive",
         type = "float",
         min = 0.1,
-        max = 5,
+        max = 3,
     })
 
     header(panel, "\nRecoil")

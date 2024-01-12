@@ -672,8 +672,9 @@ function SWEP:GetSpread(baseline)
 end
 
 local type_to_cvar = {
-    ["5Shotgun"] = "mult_damage_shotgun",
+    ["2Magnum Pistol"] = "mult_damage_magnum",
     ["7Sniper Rifle"] = "mult_damage_sniper",
+    -- ["5Shotgun"] = "mult_damage_shotgun",
 
     ["6Launcher"] = "",
     ["7Special Weapon"] = "",
@@ -682,11 +683,11 @@ local type_to_cvar = {
     ["9Throwable"] = "",
 }
 function SWEP:GetConfigDamageMultiplier()
-    local cvar = type_to_cvar[self.SubCatType] or "mult_damage"
-    if TacRP.ConVars[cvar] then
-        return TacRP.ConVars[cvar]:GetFloat()
+    if self:IsShotgun() then
+        return TacRP.ConVars["mult_damage_shotgun"]:GetFloat()
     else
-        return 1
+        local cvar = type_to_cvar[self.SubCatType] or "mult_damage"
+        return TacRP.ConVars[cvar] and TacRP.ConVars[cvar]:GetFloat() or 1
     end
 end
 
