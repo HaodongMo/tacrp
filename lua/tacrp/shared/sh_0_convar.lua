@@ -686,6 +686,14 @@ local conVars = {
         min = 0,
         max = 1,
     },
+    {
+        name = "oldschool",
+        default = "0",
+        replicated = true,
+        notify = true,
+        min = 0,
+        max = 1,
+    },
 
     {
         name = "cust_drop",
@@ -1179,13 +1187,20 @@ local function menu_mechanics_ti(panel)
 
     header(panel, "\nHandling")
     panel:AddControl("checkbox", {
+        label = "Old School Scopes",
+        command = "tacrp_oldschool"
+    })
+    panel:ControlHelp("Weapons without a scope or holosight cannot aim down sights.\nHip-fire spread is reduced and moving spread is increased based on scope magnification.\nEnabling the crosshair with this enabled is strongly encouraged.")
+    panel:AddControl("checkbox", {
         label = "Enable Sway",
         command = "tacrp_sway"
     })
+    panel:ControlHelp("Weapon point of aim will move around gently. While aiming, hold sprint key to hold breath and steady aim.")
     panel:AddControl("checkbox", {
         label = "Enable Free Aim",
         command = "tacrp_freeaim"
     })
+    panel:ControlHelp("While not aiming, moving around will cause the crosshair to move off center.")
     panel:AddControl("checkbox", {
         label = "Enable Holstering",
         command = "TacRP_holster"

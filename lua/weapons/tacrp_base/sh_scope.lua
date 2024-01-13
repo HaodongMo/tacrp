@@ -341,7 +341,8 @@ function SWEP:HasOptic()
 end
 
 function SWEP:DoOldSchoolScopeBehavior()
-    return TacRP.GetBalanceMode() == TacRP.BALANCE_OLDSCHOOL and !self:HasOptic()
+    return (TacRP.ConVars["oldschool"]:GetBool() or TacRP.GetBalanceMode() == TacRP.BALANCE_OLDSCHOOL)
+            and !self:HasOptic()
 end
 
 -- function SWEP:CheckFlashlightPointing()

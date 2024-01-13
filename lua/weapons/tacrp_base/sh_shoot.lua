@@ -622,9 +622,11 @@ function SWEP:GetSpread(baseline)
     if baseline then return spread end
 
     local hippenalty = self:GetValue("HipFireSpreadPenalty")
-    -- if TacRP.ConVars["freeaim"]:GetBool() then
-    --     hippenalty = hippenalty / (1 + math.Clamp(self:GetBaseValue("FreeAimMaxAngle") / 6, 0, 2))
-    -- end
+    local movepenalty = self:GetValue("MoveSpreadPenalty")
+    if TacRP.ConVars["oldschool"]:GetBool() or TacRP.GetBalanceMode() == TacRP.BALANCE_OLDSCHOOL then
+        movepenalty = movepenalty + hippenalty * 0.25
+        hippenalty = hippenalty * Lerp(12 / (self:GetValue("ScopeFOV") - 1.1), 0.05, 0.5)
+    end
 
     if self:GetInBipod() and self:GetScopeLevel() == 0 then
         spread = spread + Lerp(1 - self:GetValue("PeekPenaltyFraction"), hippenalty, 0)
@@ -636,11 +638,10 @@ function SWEP:GetSpread(baseline)
         spread = spread + (self:GetRecoilAmount() * self:GetValue("RecoilSpreadPenalty"))
     end
 
-    local spd = math.min(ply:GetAbsVelocity():Length(), 250)
+    local v = ply:GetAbsVelocity()
+    local spd = math.min(math.sqrt(v.x * v.x + v.y * v.y) / 250, 1)
 
-    spd = spd / 250
-
-    spread = spread + (spd * self:GetValue("MoveSpreadPenalty"))
+    spread = spread + (spd * movepenalty)
 
     local groundtime = CurTime() - (ply.TacRP_LastOnGroundTime or 0)
     local gd = math.Clamp(!ply:IsOnGround() and 0 or groundtime / math.Clamp((ply.TacRP_LastAirDuration or 0) - 0.25, 0.1, 1.5), 0, 1) ^ 0.75
