@@ -73,6 +73,10 @@ function SWEP:Deploy()
 
     self:ToggleBlindFire(TacRP.BLINDFIRE_NONE)
 
+    if TacRP.ConVars["deploysafety"]:GetBool() then
+        self:SetSafe(true)
+    end
+
     self:SetShouldHoldType()
 
     if self:GetValue("PrimaryGrenade") then

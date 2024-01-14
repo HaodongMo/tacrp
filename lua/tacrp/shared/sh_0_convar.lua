@@ -694,6 +694,15 @@ local conVars = {
         min = 0,
         max = 1,
     },
+    {
+        name = "deploysafety",
+        default = "0",
+        replicated = true,
+        notify = true,
+        min = 0,
+        max = 1,
+    },
+
 
     {
         name = "cust_drop",
@@ -990,7 +999,7 @@ local function menu_server_ti(panel)
         command = "tacrp_hud"
     })
     panel:AddControl("checkbox", {
-        label = "Draw Holstered Weapons",
+        label = "Holstered Weapon Models",
         command = "tacrp_visibleholster"
     })
     panel:AddControl("checkbox", {
@@ -1001,6 +1010,10 @@ local function menu_server_ti(panel)
     panel:AddControl("checkbox", {
         label = "Allow Dropping & Swapping",
         command = "tacrp_allowdrop"
+    })
+    panel:AddControl("checkbox", {
+        label = "Enable Safety On Deploy",
+        command = "tacrp_deploysafety"
     })
 
     local cb_irons_procedural, lb_irons_procedural = panel:ComboBox("Use Procedural Ironsights", "tacrp_irons_procedural")
