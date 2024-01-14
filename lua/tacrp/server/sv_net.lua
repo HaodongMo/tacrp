@@ -20,6 +20,7 @@ util.AddNetworkString("tacrp_updateslot")
 util.AddNetworkString("tacrp_givenadewep")
 util.AddNetworkString("tacrp_reloadlangs")
 util.AddNetworkString("tacrp_npcweapon")
+util.AddNetworkString("tacrp_applyconfig")
 
 net.Receive("tacrp_togglepeek", function(len, ply)
     local bf = net.ReadBool()
