@@ -104,7 +104,7 @@ end
 function SWEP:IsInScope()
     local sightdelta = self:Curve(self:GetSightDelta())
 
-    return (SERVER or !self:GetPeeking()) and ((self:GetScopeLevel() > 0 and sightdelta > 0.5) or (sightdelta > 0.9))
+    return (SERVER or !self:GetPeeking()) and !self:GetSafe() and ((self:GetScopeLevel() > 0 and sightdelta > 0.5) or (sightdelta > 0.9))
 end
 
 function SWEP:DoScope()
@@ -190,8 +190,6 @@ function SWEP:ThinkSights()
 
     local FT = FrameTime()
 
-    if self:GetSafe() then return end
-
     local sighted = self:GetScopeLevel() > 0
 
     local amt = self:GetSightAmount()
@@ -208,6 +206,8 @@ function SWEP:ThinkSights()
     end
 
     self:SetSightDelta(amt)
+
+    if self:GetSafe() then return end
 
     if CLIENT then
         self:ThinkPeek()

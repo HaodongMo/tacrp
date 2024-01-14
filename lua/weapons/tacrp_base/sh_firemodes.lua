@@ -56,6 +56,7 @@ function SWEP:ToggleSafety(onoff)
 
     if onoff == true then
         self:ToggleBlindFire(TacRP.BLINDFIRE_NONE)
+        self:ScopeToggle(0)
     end
 
     if CLIENT then self.LastHintLife = CurTime() end
