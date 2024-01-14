@@ -727,6 +727,7 @@ local conVars = {
         replicated = true,
     },
 
+    // --------------------------- Multipliers
     {
         name = "mult_damage",
         default = "1",
@@ -767,6 +768,12 @@ local conVars = {
         name = "mult_recoil_vis",
         default = "1",
         min = 0,
+        replicated = true,
+    },
+    {
+        name = "mult_reloadspeed",
+        default = "1",
+        min = 0.1,
         replicated = true,
     },
 
@@ -1087,18 +1094,16 @@ end
 local function menu_balance_ti(panel)
     header(panel, "Damage")
     panel:Help("Adjust weapon attributes to suit your gameplay needs.")
-    local cb_balance, lb_balance = panel:ComboBox("Weapon Balance", "tacrp_balance")
+    local cb_balance, lb_balance = panel:ComboBox("Weapon Tiers", "tacrp_balance")
     cb_balance:AddChoice("[Automatic]", "-1")
-    cb_balance:AddChoice("Tactical", "0")
-    cb_balance:AddChoice("Arcade", "1")
-    cb_balance:AddChoice("TTT", "2")
+    cb_balance:AddChoice("0 - Tiered", "0")
+    cb_balance:AddChoice("1 - Untiered", "1")
+    cb_balance:AddChoice("2 - TTT", "2")
     cb_balance:DockMargin(8, 0, 0, 0)
     lb_balance:SizeToContents()
-    -- panel:Help("Tactical: Balanced for reduced move speed. Medium TTK.")
-    -- panel:Help("Arcade: Balanced for Sandbox move speed. Low TTK. Snipers/DMRs have damage rampup.")
-    -- panel:Help("TTT: High TTK, reloads slow you down and take longer. Some weapons have lower fire rate.")
-    -- panel:Help("PvE: For HL2 campaign or co-op maps. Damage comparable to HL2 weapons, reduced spread.")
-    -- panel:Help("(Tactical and PvE separate weapons into 4 tiers, ranging from Consumer, Security, Operator, and Elite, with each higher tier having slightly better damage output.)")
+    panel:Help("Weapon are divided into 4 tiers, with higher tiers having slightly better overall performance.\nDisable to adjust weapon performance to around the same level.")
+    panel:Help("TTT option is untiered, and has lower RPM and high time to kill close to vanilla TTT weapons.")
+
     panel:AddControl("slider", {
         label = "Overall Damage",
         command = "tacrp_mult_damage",
@@ -1162,7 +1167,31 @@ local function menu_balance_ti(panel)
         max = 2,
     })
 
+    header(panel, "\nAiming")
+    panel:AddControl("checkbox", {
+        label = "Old School Scopes",
+        command = "tacrp_oldschool"
+    })
+    panel:ControlHelp("Weapons without a scope or holosight cannot aim down sights.\nHip-fire spread is reduced and moving spread is increased based on scope magnification.\nEnabling the crosshair with this enabled is strongly encouraged.")
+    panel:AddControl("checkbox", {
+        label = "Enable Sway",
+        command = "tacrp_sway"
+    })
+    panel:ControlHelp("Weapon point of aim will move around gently. While aiming, hold sprint key to hold breath and steady aim.")
+    panel:AddControl("checkbox", {
+        label = "Enable Free Aim",
+        command = "tacrp_freeaim"
+    })
+    panel:ControlHelp("While not aiming, moving around will cause the crosshair to move off center.")
+
     header(panel, "\nMiscellaneous")
+    panel:AddControl("slider", {
+        label = "Reload Speed",
+        command = "tacrp_mult_reloadspeed",
+        type = "float",
+        min = 0.5,
+        max = 1.5,
+    })
     panel:AddControl("slider", {
         label = "Flashbang Slow",
         command = "tacrp_flash_slow",
@@ -1197,33 +1226,6 @@ local function menu_mechanics_ti(panel)
         min = 0,
         max = 10,
     })
-
-    header(panel, "\nHandling")
-    panel:AddControl("checkbox", {
-        label = "Old School Scopes",
-        command = "tacrp_oldschool"
-    })
-    panel:ControlHelp("Weapons without a scope or holosight cannot aim down sights.\nHip-fire spread is reduced and moving spread is increased based on scope magnification.\nEnabling the crosshair with this enabled is strongly encouraged.")
-    panel:AddControl("checkbox", {
-        label = "Enable Sway",
-        command = "tacrp_sway"
-    })
-    panel:ControlHelp("Weapon point of aim will move around gently. While aiming, hold sprint key to hold breath and steady aim.")
-    panel:AddControl("checkbox", {
-        label = "Enable Free Aim",
-        command = "tacrp_freeaim"
-    })
-    panel:ControlHelp("While not aiming, moving around will cause the crosshair to move off center.")
-    panel:AddControl("checkbox", {
-        label = "Enable Holstering",
-        command = "TacRP_holster"
-    })
-    panel:ControlHelp("Play a holster animation before pulling out another weapon. If disabled, holstering is instant.")
-    panel:AddControl("checkbox", {
-        label = "Shotgun Reload Cancel",
-        command = "tacrp_reload_sg_cancel"
-    })
-    panel:ControlHelp("Instantly fire out of a shotgun reload. If disabled, the finishing part of the animation must play out.")
 
     header(panel, "\nBallistics")
     panel:AddControl("checkbox", {
@@ -1290,6 +1292,18 @@ local function menu_mechanics_ti(panel)
         command = "tacrp_penalty_melee"
     })
     panel:ControlHelp("Penalty from melee bashing.")
+
+    header(panel, "\nMiscellaneous")
+    panel:AddControl("checkbox", {
+        label = "Delayed Holstering",
+        command = "tacrp_holster"
+    })
+    panel:ControlHelp("Play a holster animation before pulling out another weapon. If disabled, holstering is instant.")
+    panel:AddControl("checkbox", {
+        label = "Shotgun Reload Cancel",
+        command = "tacrp_reload_sg_cancel"
+    })
+    panel:ControlHelp("Instantly fire out of a shotgun reload. If disabled, the finishing part of the animation must play out.")
 end
 
 local function menu_atts_ti(panel)
