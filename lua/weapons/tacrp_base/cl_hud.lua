@@ -210,8 +210,7 @@ function SWEP:ShouldDrawCrosshair()
     if !TacRP.ConVars["crosshair"]:GetBool() then
         return self:DoLowerIrons() and self:GetSightAmount() > 0 and !self:GetPeeking() and !self:GetReloading()
     end
-    return  !self:GetReloading()
-        and !self:GetCustomize()
+    return  !self:GetReloading() and !self:GetCustomize() and !self:GetSafe()
         and !(self:SprintLock() and !self.DrawCrosshairInSprint)
         and (self:GetSightAmount() <= 0.5 or self:GetPeeking() or self:DoLowerIrons())
         and !(self:GetValue("CanQuickNade") and tobool(self:GetOwner():GetInfo("tacrp_nademenu")) and self:GetOwner():KeyDown(IN_GRENADE2))
