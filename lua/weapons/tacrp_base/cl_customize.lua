@@ -1307,7 +1307,7 @@ function SWEP:CreateCustomizeHUD()
 
     -- tacrp_drop
     local primarygrenade = self:GetValue("PrimaryGrenade")
-    if TacRP.ConVars["allowdrop"]:GetBool() and TacRP.ConVars["cust_drop"]:GetBool() and (!primarygrenade or !TacRP.IsGrenadeInfiniteAmmo(primarygrenade)) then
+    if (engine.ActiveGamemode() == "terrortown" or TacRP.ConVars["allowdrop"]:GetBool()) and TacRP.ConVars["cust_drop"]:GetBool() and (!primarygrenade or !TacRP.IsGrenadeInfiniteAmmo(primarygrenade)) then
         local phrase = primarygrenade and "cust.drop_nade" or "cust.drop_wep"
         local dropbox = vgui.Create("DButton", bg)
         local bw, bh = TacRP.SS(52), TacRP.SS(10)
@@ -1323,7 +1323,11 @@ function SWEP:CreateCustomizeHUD()
 
         end
         function dropbox.DoClick(self2)
-            LocalPlayer():ConCommand("tacrp_drop")
+            if engine.ActiveGamemode() == "terrortown" then
+                LocalPlayer():ConCommand("ttt_dropweapon")
+            else
+                LocalPlayer():ConCommand("tacrp_drop")
+            end
         end
     end
 
