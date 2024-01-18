@@ -85,7 +85,7 @@ function SWEP:DrawLasers(wm)
     if self.Laser and self:GetTactical() then
         local power = self.LaserPower or 2
         if wm and self.LaserQCAttachmentWM then
-            local att = wm:GetAttachment(self.LaserQCAttachmentWM)
+            local att = self:GetAttachment(self.LaserQCAttachmentWM)
             if att then
                 self:DrawLaser(att.Pos, att.Ang, power, true)
             end
