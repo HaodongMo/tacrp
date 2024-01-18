@@ -214,6 +214,13 @@ function TacRP.StartCommand(ply, cmd)
 
         recrise = TacRP.RecoilRise
 
+        if TacRP.ConVars["freeaim"]:GetBool() and wpn:GetValue("FreeAim") and wpn:GetScopeLevel() == 0 then
+            local freeaimang = wpn:GetFreeAimAngle()
+            siderec = siderec * 0.5
+            freeaimang:Add(Angle(0, siderec, 0))
+            wpn:SetFreeAimAngle(freeaimang)
+        end
+
         recrise = recrise + Angle(uprec, siderec, 0)
 
         TacRP.RecoilRise = recrise
