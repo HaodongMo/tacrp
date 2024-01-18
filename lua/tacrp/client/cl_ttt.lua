@@ -162,7 +162,7 @@ hook.Add("TTTRenderEntityInfo", "TacRP_TTT", function(tData)
 end)
 
 hook.Add("TTTBodySearchPopulate", "TacRP", function(processed, raw)
-    if (weapons.Get(raw.wep or "") or {}).ArcticTacRP and bit.band(raw.dmg, DMG_BUCKSHOT) != 0 then
+    if (weapons.Get(raw.wep or "") or {}).ArcticTacRP and bit.band(raw.dmg or 0, DMG_BUCKSHOT) != 0 then
         processed.dmg.text = LANG.GetTranslation("tacrp_search_dmg_buckshot")
         processed.dmg.img = "tacrp/ttt/kill_buckshot.png"
     end
