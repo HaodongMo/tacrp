@@ -11,7 +11,6 @@ function SWEP:GetIsSprinting()
 
     local walkspeed = owner:GetWalkSpeed()
     local runspeed = owner:GetRunSpeed()
-    -- local curspeed = owner:GetVelocity():Length()
 
     if owner.TacRP_SprintBlock then return false end
     if owner:GetNWBool("TacRPChargeState", false) then return true end
@@ -21,7 +20,7 @@ function SWEP:GetIsSprinting()
         if SPRINT and SPRINT:IsSprinting(owner) then
             return true
         else
-            return owner.isSprinting == true and (owner.sprintProgress or 0) > 0 and owner:KeyDown(IN_SPEED) and !owner:Crouching() and curspeed > walkspeed and owner:OnGround()
+            return owner.isSprinting == true and (owner.sprintProgress or 0) > 0 and owner:KeyDown(IN_SPEED) and !owner:Crouching() and owner:OnGround()
         end
     end
 
