@@ -342,6 +342,7 @@ function SWEP:OnRemove()
     end
     if CLIENT and (self:GetCustomize() or (self.GrenadeMenuAlpha or 0) > 0 or (self.BlindFireMenuAlpha or 0) > 0) then
         gui.EnableScreenClicker(false)
+        TacRP.CursorEnabled = false
     end
 end
 

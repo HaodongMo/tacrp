@@ -1,6 +1,12 @@
 hook.Add("CreateMove", "TacRP_CreateMove", function(cmd)
     local wpn = LocalPlayer():GetActiveWeapon()
 
+    -- In TTT ScreenClicker isn't disabled for some reason
+    if TacRP.CursorEnabled and !LocalPlayer():Alive() then
+        TacRP.CursorEnabled = false
+        gui.EnableScreenClicker(false)
+    end
+
     if !IsValid(wpn) then return end
     if !wpn.ArcticTacRP then return end
 

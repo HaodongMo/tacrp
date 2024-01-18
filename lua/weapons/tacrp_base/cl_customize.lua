@@ -60,6 +60,7 @@ function SWEP:CreateCustomizeHUD()
     self:RemoveCustomizeHUD()
 
     gui.EnableScreenClicker(true)
+    TacRP.CursorEnabled = true
 
     local bg = vgui.Create("DPanel")
 
@@ -85,6 +86,7 @@ function SWEP:CreateCustomizeHUD()
             self2:Remove()
             if (self.GrenadeMenuAlpha or 0) != 1 then
                 gui.EnableScreenClicker(false)
+                TacRP.CursorEnabled = false
             end
             return
         end
@@ -1372,6 +1374,7 @@ function SWEP:RemoveCustomizeHUD()
 
         if (self.GrenadeMenuAlpha or 0) != 1 and (self.BlindFireMenuAlpha or 0) != 1 then
             gui.EnableScreenClicker(false)
+            TacRP.CursorEnabled = false
         end
 
         self.LastHintLife = CurTime()
