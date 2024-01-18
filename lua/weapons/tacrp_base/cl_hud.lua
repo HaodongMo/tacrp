@@ -777,7 +777,9 @@ function SWEP:DrawHUDBackground()
         end
     end
 
-    self:DrawBreathBar(ScrW() * 0.5, ScrH() * 0.65, TacRP.SS(64), TacRP.SS(4))
+    if self:GetValue("Scope") or self:GetValue("PrimaryMelee") then
+        self:DrawBreathBar(ScrW() * 0.5, ScrH() * 0.65, TacRP.SS(64), TacRP.SS(4))
+    end
 
     self:DrawGrenadeHUD()
 
