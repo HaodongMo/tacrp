@@ -123,13 +123,11 @@ function SWEP:TTT_Init()
             end
 
             self:InvalidateCache()
-        end
+            self:SetBaseSettings()
 
-        if added > 0 then
-            timer.Simple(0.1, function()
-                if !IsValid(self) then return end
+            if added > 0 then
                 self:NetworkWeapon()
-            end)
+            end
         end
     end
 

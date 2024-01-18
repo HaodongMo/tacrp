@@ -1,11 +1,6 @@
 function SWEP:Think()
     local owner = self:GetOwner()
 
-    if CLIENT and !self.CertainAboutAtts and !self.AskedAboutAtts and (IsFirstTimePredicted() or game.SinglePlayer()) then
-        self.AskedAboutAtts = true
-        self:RequestWeapon()
-    end
-
     local stop = self:RunHook("Hook_PreThink")
     if stop then return end
 

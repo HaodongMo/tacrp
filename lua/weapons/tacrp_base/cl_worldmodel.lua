@@ -1,4 +1,14 @@
 function SWEP:DrawWorldModel()
+
+    if CLIENT and !self.CertainAboutAtts and !self.AskedAboutAtts then
+        if !self:GetValue("PrimaryGrenade") and !self:GetValue("PrimaryMelee") then
+            self:RequestWeapon()
+            -- debugoverlay.Sphere(self:GetPos(), 16, 5, color_white, true)
+        end
+        self.AskedAboutAtts = true
+    end
+
+
     self:DrawCustomModel(true)
 
     if self:GetValue("Laser") and self:GetTactical() then

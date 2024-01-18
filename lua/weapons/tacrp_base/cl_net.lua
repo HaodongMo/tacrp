@@ -31,7 +31,7 @@ function SWEP:UpdateHolster()
 end
 
 function SWEP:RequestWeapon()
-    net.Start("TacRP_networkweapon")
+    net.Start("tacrp_networkweapon")
     net.WriteEntity(self)
     net.SendToServer()
 end
