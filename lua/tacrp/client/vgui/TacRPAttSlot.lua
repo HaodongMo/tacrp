@@ -7,6 +7,7 @@ AccessorFunc(PANEL, "IsMenu", "IsMenu")
 AccessorFunc(PANEL, "SlotLayout", "SlotLayout")
 
 local flash_end = 0
+local lock = Material("tacrp/hud/mark_lock.png", "mips smooth")
 
 function PANEL:GetInstalled()
     if self:GetIsMenu() and IsValid(self:GetWeapon()) and self:GetWeapon().Attachments then
