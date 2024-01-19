@@ -115,7 +115,7 @@ function SWEP:GetSightPositions()
         return apos, aang
     elseif self:GetOwner() != LocalPlayer() then
         self:GenerateAutoSight() -- Not generated for spectators so must be done here
-        return self.AutoSightPos, self.AutoSightAng
+        return self.AutoSightPos or self.SightPos, self.AutoSightAng or self.SightAng
     else
         return self.SightPos, self.SightAng
     end
