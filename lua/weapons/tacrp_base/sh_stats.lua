@@ -24,6 +24,9 @@ function SWEP:InvalidateCache()
     self.StatScoreCache = {}
     self.MiscCache = {}
     self.RecoilPatternCache = {}
+
+    self.AutoSightPos = nil
+    self.AutoSightAng = nil
 end
 
 function SWEP:RunHook(val, data)

@@ -1,6 +1,6 @@
-function SWEP:DrawWorldModel()
+function SWEP:DrawWorldModel(flags)
 
-    if CLIENT and !self.CertainAboutAtts and !self.AskedAboutAtts then
+    if !self.CertainAboutAtts and !self.AskedAboutAtts then
         if !self:GetValue("PrimaryGrenade") and !self:GetValue("PrimaryMelee") then
             self:RequestWeapon()
             -- debugoverlay.Sphere(self:GetPos(), 16, 5, color_white, true)
@@ -8,8 +8,10 @@ function SWEP:DrawWorldModel()
         self.AskedAboutAtts = true
     end
 
-
-    self:DrawCustomModel(true)
+    -- Ugly workaround: OBS_MODE_IN_EYE spectate seems to call DrawWorldModel but doesn't actually render it?
+    if LocalPlayer():GetObserverTarget() != self:GetOwner() or LocalPlayer():GetObserverMode() != OBS_MODE_IN_EYE then
+        self:DrawCustomModel(true)
+    end
 
     if self:GetValue("Laser") and self:GetTactical() then
         self:SetRenderBounds(Vector(-16, -16, -16), Vector(16, 16, 15000))

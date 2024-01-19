@@ -156,7 +156,7 @@ end
 
 SWEP.LastHintLife = 0
 function SWEP:DrawHints()
-
+    if LocalPlayer() != self:GetOwner() then return end
     local a = TacRP.ConVars["hints_always"]:GetBool() and 1 or math.Clamp(((self.LastHintLife + 4) - CurTime()) / 1, 0, 1)
     if a <= 0 then return end
 
