@@ -786,7 +786,7 @@ local conVars = {
     },
     {
         name = "reload_dump",
-        default = "1",
+        default = "0",
         min = 0,
         max = 1,
         replicated = true,
