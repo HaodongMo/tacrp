@@ -33,11 +33,11 @@ SWEP.BalanceStats = {
 
         Description = "Battle rifle with high rate of fire.",
 
-        Damage_Max = 20,
-        Damage_Min = 14,
-        Range_Min = 750,
-        Range_Max = 3000,
-        RPM = 700,
+        Damage_Max = 28,
+        Damage_Min = 20,
+        Range_Min = 600,
+        Range_Max = 2500,
+        RPM = 360,
 
         RecoilResetInstant = true,
         RecoilResetTime = 0.15,

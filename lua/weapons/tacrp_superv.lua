@@ -37,10 +37,12 @@ SWEP.BalanceStats = {
     [TacRP.BALANCE_TTT] = {
         Description = "Close range SMG with extremely high fire rate. Practically no recoil, but accuracy is very poor.",
 
-        Damage_Max = 12,
-        Damage_Min = 4,
-        Range_Min = 100,
-        Range_Max = 2000,
+        Damage_Max = 10,
+        Damage_Min = 5,
+        Range_Min = 250,
+        Range_Max = 1000,
+
+        ClipSize = 24,
 
         Spread = 0.014,
         RecoilSpreadPenalty = 0.0005,

@@ -37,11 +37,11 @@ SWEP.BalanceStats = {
 
         Description = "Semi-automatic rifle with excellent accuracy and a lethal headshot at long range.\nEquipped with a 6x scope by default.",
 
-        Damage_Max = 22,
-        Damage_Min = 35,
-        Range_Min = 1200,
-        Range_Max = 3000,
-        RPM = 180,
+        Damage_Max = 25,
+        Damage_Min = 34,
+        Range_Min = 500,
+        Range_Max = 2200,
+        RPM = 150,
 
         RecoilResetInstant = true,
         RecoilResetTime = 0.18,

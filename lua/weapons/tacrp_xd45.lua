@@ -38,9 +38,9 @@ SWEP.BalanceStats = {
     [TacRP.BALANCE_TTT] = {
         Damage_Max = 20,
         Damage_Min = 5,
-        Range_Min = 300,
-        Range_Max = 1600,
-        RPM = 700,
+        Range_Min = 200,
+        Range_Max = 1200,
+        RPM = 650,
 
         Spread = 0.0125,
         FreeAimMaxAngle = 4,

@@ -30,8 +30,8 @@ SWEP.BalanceStats = {
         Damage_Min = 12,
     },
     [TacRP.BALANCE_TTT] = {
-        Damage_Max = 13,
-        Damage_Min = 9,
+        Damage_Max = 14,
+        Damage_Min = 10,
         Range_Min = 400,
         Range_Max = 1800,
         PostBurstDelay = 0.2,

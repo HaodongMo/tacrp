@@ -37,10 +37,10 @@ SWEP.BalanceStats = {
 
         Description = "Lightweight sniper rifle with high mobility and good damage at distance.\nEquipped with a 10x scope by default.",
 
-        Damage_Max = 25,
+        Damage_Max = 30,
         Damage_Min = 65,
-        Range_Min = 900,
-        Range_Max = 3000,
+        Range_Min = 600,
+        Range_Max = 1800,
 
         RPM = 35,
         ShootTimeMult = 1.1,
