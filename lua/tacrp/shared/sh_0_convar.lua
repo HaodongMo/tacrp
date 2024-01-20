@@ -784,6 +784,13 @@ local conVars = {
         max = 1,
         replicated = true,
     },
+    {
+        name = "reload_dump",
+        default = "1",
+        min = 0,
+        max = 1,
+        replicated = true,
+    },
 }
 
 TacRP.ConVars = {}
@@ -1188,32 +1195,7 @@ local function menu_balance_ti(panel)
     })
     panel:ControlHelp("While not aiming, moving around will cause the crosshair to move off center.")
 
-    header(panel, "\nMiscellaneous")
-    panel:AddControl("slider", {
-        label = "Reload Speed",
-        command = "tacrp_mult_reloadspeed",
-        type = "float",
-        min = 0.5,
-        max = 1.5,
-    })
-    panel:AddControl("slider", {
-        label = "Flashbang Slow",
-        command = "tacrp_flash_slow",
-        type = "float",
-        min = 0,
-        max = 1,
-    })
-    panel:AddControl("slider", {
-        label = "CS Gas Sway",
-        command = "tacrp_gas_sway",
-        type = "float",
-        min = 0,
-        max = 10,
-    })
-end
-
-local function menu_mechanics_ti(panel)
-    header(panel, "\nAmmunition")
+    header(panel, "\nAmmo & Reloading")
     panel:AddControl("checkbox", {
         label = "Infinite Ammo",
         command = "tacrp_infiniteammo"
@@ -1223,6 +1205,11 @@ local function menu_mechanics_ti(panel)
         label = "Infinite Grenades",
         command = "tacrp_infinitegrenades"
     })
+    panel:AddControl("checkbox", {
+        label = "Dump Ammo In Magazines",
+        command = "tacrp_reload_dump"
+    })
+    panel:ControlHelp("Dropping a magazine during a reload will also drop all ammo in the gun. The dropped magazine can be retrieved (unless Infinite Ammo is enabled).")
     panel:AddControl("slider", {
         label = "Default Clip Multiplier",
         command = "tacrp_defaultammo",
@@ -1230,7 +1217,16 @@ local function menu_mechanics_ti(panel)
         min = 0,
         max = 10,
     })
+    panel:AddControl("slider", {
+        label = "Reload Speed",
+        command = "tacrp_mult_reloadspeed",
+        type = "float",
+        min = 0.5,
+        max = 1.5,
+    })
+end
 
+local function menu_mechanics_ti(panel)
     header(panel, "\nBallistics")
     panel:AddControl("checkbox", {
         label = "Enable Penetration",
@@ -1308,6 +1304,20 @@ local function menu_mechanics_ti(panel)
         command = "tacrp_reload_sg_cancel"
     })
     panel:ControlHelp("Instantly fire out of a shotgun reload. If disabled, the finishing part of the animation must play out.")
+    panel:AddControl("slider", {
+        label = "Flashbang Slow",
+        command = "tacrp_flash_slow",
+        type = "float",
+        min = 0,
+        max = 1,
+    })
+    panel:AddControl("slider", {
+        label = "CS Gas Sway",
+        command = "tacrp_gas_sway",
+        type = "float",
+        min = 0,
+        max = 10,
+    })
 end
 
 local function menu_atts_ti(panel)

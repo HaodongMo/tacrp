@@ -69,10 +69,12 @@ end
 function SWEP:DropMagazine()
     -- if !IsFirstTimePredicted() and !game.SinglePlayer() then return end
     if self:GetValue("DropMagazineModel") then
+        local dropamt = math.floor(self:Clip1() / self:GetValue("DropMagazineAmount"))
+        local clip1 = self:Clip1()
         for i = 1, self:GetValue("DropMagazineAmount") do
             local mag = ents.Create("TacRP_droppedmag")
 
-            if mag then
+            if IsValid(mag) then
                 local bone = "ValveBiped.Bip01_R_Hand"
                 if i == 2 then bone = "ValveBiped.Bip01_L_Hand" end
                 local matrix = self:GetOwner():GetBoneMatrix(self:GetOwner():LookupBone(bone) or -1)
@@ -90,6 +92,15 @@ function SWEP:DropMagazine()
                 mag.Model = self:GetValue("DropMagazineModel")
                 mag.ImpactType = self:GetValue("DropMagazineImpact")
                 mag:SetOwner(self:GetOwner())
+                if clip1 > 0 and TacRP.ConVars["reload_dump"]:GetBool() then
+                    local amt = (i == self:GetValue("DropMagazineAmount") and clip1) or dropamt
+                    clip1 = clip1 - amt
+
+                    if !self:GetInfiniteAmmo() then
+                        mag.AmmoType = self:GetValue("Ammo")
+                        mag.AmmoCount = amt
+                    end
+                end
                 mag:Spawn()
 
                 local phys = mag:GetPhysicsObject()
@@ -99,6 +110,7 @@ function SWEP:DropMagazine()
                 end
             end
         end
+        self:SetClip1(clip1)
     end
 end
 
