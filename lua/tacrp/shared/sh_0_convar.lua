@@ -1183,7 +1183,7 @@ local function menu_balance_ti(panel)
         label = "Old Blood Mode",
         command = "tacrp_oldschool"
     })
-    panel:ControlHelp("Hip-fire spread is reduced and moving spread is increased based on scope magnification. \nAiming becomes more of a choice than a requirement in combat. \nEnabling the crosshair is highly recommended with this mode.")
+    panel:ControlHelp("Hipfire spread is significantly reduced and both it and moving spread scale based on scope magnification. \nEnabling the crosshair is highly recommended with this mode.")
     panel:AddControl("checkbox", {
         label = "Enable Sway",
         command = "tacrp_sway"

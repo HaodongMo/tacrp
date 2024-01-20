@@ -625,7 +625,7 @@ function SWEP:GetSpread(baseline)
     local movepenalty = self:GetValue("MoveSpreadPenalty")
     if TacRP.ConVars["oldschool"]:GetBool() or TacRP.GetBalanceMode() == TacRP.BALANCE_OLDSCHOOL then
         movepenalty = movepenalty + hippenalty * 0.25
-        hippenalty = hippenalty * Lerp(12 / (self:GetValue("ScopeFOV") - 1.1), 0.05, 0.5)
+        hippenalty = hippenalty * Lerp(12 / (self:GetValue("ScopeFOV") - 1.1), 0.1, 1)
     end
 
     if self:GetInBipod() and self:GetScopeLevel() == 0 then
