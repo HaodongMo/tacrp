@@ -97,7 +97,7 @@ function SWEP:Think()
             end
         end
 
-        if !self.LoadedPreset and self.CertainAboutAtts then
+        if !self.LoadedPreset then
             self.LoadedPreset = true
 
             if TacRP.ConVars["autosave"]:GetBool() and TacRP.ConVars["free_atts"]:GetBool() then
