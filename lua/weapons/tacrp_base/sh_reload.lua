@@ -103,7 +103,7 @@ function SWEP:DropMagazine()
                     end
                 end
 				
-				if TacRP.ConVars["reload_dump"]:GetBool() and !self:GetOwner():KeyDown(IN_RELOAD) then
+				if clip1 > 0 and TacRP.ConVars["reload_dump"]:GetBool() and !self:GetOwner():KeyDown(IN_RELOAD) then
 					return 
 				end
 				
