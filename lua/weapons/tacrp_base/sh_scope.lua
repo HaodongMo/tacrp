@@ -51,9 +51,9 @@ function SWEP:ScopeToggle(setlevel)
         end
     end
 
-    if self:DoOldSchoolScopeBehavior() then
-        level = 0
-    end
+    --if self:DoOldSchoolScopeBehavior() then
+        --level = 0
+    --end
 
     if level == self:GetScopeLevel() then return end
 
@@ -215,9 +215,9 @@ function SWEP:ThinkSights()
     local toggle = self:GetOwner():GetInfoNum("tacrp_toggleaim", 0) == 1
     local press, down = self:GetOwner():KeyPressed(IN_ATTACK2), self:GetOwner():KeyDown(IN_ATTACK2)
 
-    if (!self:GetValue("Scope") or self:DoOldSchoolScopeBehavior()) and down then
-        self:Melee()
-    elseif sighted and ((toggle and press and ftp) or (!toggle and !down)) then
+    --if (!self:GetValue("Scope") or self:DoOldSchoolScopeBehavior()) and down then
+        --self:Melee()
+    if sighted and ((toggle and press and ftp) or (!toggle and !down)) then
         self:ScopeToggle(0)
     elseif !sighted and ((toggle and press and ftp) or (!toggle and down)) then
         self:ScopeToggle(1)
@@ -340,10 +340,10 @@ function SWEP:HasOptic()
     return self:GetValue("Scope") and (self:GetValue("ScopeOverlay") or self:GetValue("Holosight"))
 end
 
-function SWEP:DoOldSchoolScopeBehavior()
-    return (TacRP.ConVars["oldschool"]:GetBool() or TacRP.GetBalanceMode() == TacRP.BALANCE_OLDSCHOOL)
-            and !self:HasOptic()
-end
+--function SWEP:DoOldSchoolScopeBehavior()
+    --return (TacRP.ConVars["oldschool"]:GetBool() or TacRP.GetBalanceMode() == TacRP.BALANCE_OLDSCHOOL)
+            --and !self:HasOptic()
+--end
 
 -- function SWEP:CheckFlashlightPointing()
 --     if game.SinglePlayer() then return 0 end
