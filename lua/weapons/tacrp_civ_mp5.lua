@@ -56,8 +56,6 @@ SWEP.BalanceStats = {
             [HITGROUP_RIGHTLEG] = 0.75,
             [HITGROUP_GEAR] = 0.9
         },
-
-        ReloadTimeMult = 1,
     },
     [TacRP.BALANCE_PVE] = {
         Description = "Semi-automatic carbine variant of a legendary submachine gun. Fine tuned for precision shooting.",

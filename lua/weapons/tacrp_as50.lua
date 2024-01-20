@@ -56,8 +56,6 @@ SWEP.BalanceStats = {
             [HITGROUP_RIGHTLEG] = 0.675,
             [HITGROUP_GEAR] = 0.6
         },
-
-        ReloadTimeMult = 1.25,
     },
     [TacRP.BALANCE_PVE] = {
         Description = "Semi-automatic anti-materiel rifle with integral bipod.\nEquipped with a 12x scope by default.",
