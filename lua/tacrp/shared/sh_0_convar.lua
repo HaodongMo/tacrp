@@ -1206,10 +1206,10 @@ local function menu_balance_ti(panel)
         command = "tacrp_infinitegrenades"
     })
     panel:AddControl("checkbox", {
-        label = "Dump Ammo In Magazines",
+        label = "Magazine Retention System",
         command = "tacrp_reload_dump"
     })
-    panel:ControlHelp("Dropping a magazine during a reload will also drop all ammo in the gun. The dropped magazine can be retrieved (unless Infinite Ammo is enabled).")
+    panel:ControlHelp("Holding the reload key reloads faster but drops all remaing ammo in the magazine. \nTapping the key reloads slower but ammo is retained. \nDropped magazines can be picked up to retrieve lost ammo.")
     panel:AddControl("slider", {
         label = "Default Clip Multiplier",
         command = "tacrp_defaultammo",
