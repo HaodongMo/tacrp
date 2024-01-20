@@ -1,4 +1,5 @@
 # To-do, planned features list and wishlist.
+# Update 19
 
 ## To-do (content & features in-progress):
 
@@ -11,6 +12,11 @@
 - Tactical attachments arcade mode (affects weapon stats)
 
 
-## Wishlist
+## Wishlist (no formal plans to implement as of yet):
 
 - Retention reload system (does not need new anims)
+
+
+## Finished:
+
+- Ammo dropping with magazine
