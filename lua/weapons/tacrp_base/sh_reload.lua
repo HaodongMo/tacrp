@@ -31,15 +31,15 @@ function SWEP:Reload()
 
     if self:GetValue("ShotgunReload") then
         anim = "reload_start"
-    else
-        self:SetTimer(self:GetValue("LoadInTime") * mult, function()
-            self:SetLoadedRounds(math.min(self:GetCapacity(), self:Clip1() + self:Ammo1()))
-            self:DoBulletBodygroups()
-        end, "SetLoadedRounds")
+	else
+		self:SetTimer(self:GetValue("LoadInTime") * mult, function()
+		self:SetLoadedRounds(math.min(self:GetCapacity(), self:Clip1() + self:Ammo1()))
+        self:DoBulletBodygroups()
+    end, "SetLoadedRounds")
         if self.ReloadUpInTime then
             self:SetTimer(self.ReloadUpInTime * mult, function()
-                self:RestoreClip(self:GetCapacity())
-                self:SetNthShot(0)
+            self:RestoreClip(self:GetCapacity())
+            self:SetNthShot(0)
             end, "ReloadUpIn")
         end
     end
@@ -69,6 +69,7 @@ end
 function SWEP:DropMagazine()
     -- if !IsFirstTimePredicted() and !game.SinglePlayer() then return end
     if self:GetValue("DropMagazineModel") then
+
         local dropamt = math.floor(self:Clip1() / self:GetValue("DropMagazineAmount"))
         local clip1 = self:Clip1()
         for i = 1, self:GetValue("DropMagazineAmount") do
@@ -92,7 +93,7 @@ function SWEP:DropMagazine()
                 mag.Model = self:GetValue("DropMagazineModel")
                 mag.ImpactType = self:GetValue("DropMagazineImpact")
                 mag:SetOwner(self:GetOwner())
-                if clip1 > 0 and TacRP.ConVars["reload_dump"]:GetBool() then
+                if clip1 > 0 and TacRP.ConVars["reload_dump"]:GetBool() and self:GetOwner():KeyDown(IN_RELOAD) then
                     local amt = (i == self:GetValue("DropMagazineAmount") and clip1) or dropamt
                     clip1 = clip1 - amt
 
@@ -101,6 +102,11 @@ function SWEP:DropMagazine()
                         mag.AmmoCount = amt
                     end
                 end
+				
+				if TacRP.ConVars["reload_dump"]:GetBool() and !self:GetOwner():KeyDown(IN_RELOAD) then
+					return 
+				end
+				
                 mag:Spawn()
 
                 local phys = mag:GetPhysicsObject()
