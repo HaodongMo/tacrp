@@ -1169,7 +1169,11 @@ local function menu_balance_ti(panel)
 
     header(panel, "\nAiming")
     panel:AddControl("checkbox", {
-        label = "Old School Scopes",
+        label = "Enable Crosshair",
+        command = "tacrp_crosshair"
+    })
+    panel:AddControl("checkbox", {
+        label = "Enable Old School Scopes",
         command = "tacrp_oldschool"
     })
     panel:ControlHelp("Weapons without a scope or holosight cannot aim down sights.\nHip-fire spread is reduced and moving spread is increased based on scope magnification.\nEnabling the crosshair with this enabled is strongly encouraged.")
