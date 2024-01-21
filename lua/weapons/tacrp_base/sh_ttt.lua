@@ -47,6 +47,7 @@ end
 SWEP.StoredAmmo = 0
 
 -- Picked up by player. Transfer of stored ammo and such.
+
 function SWEP:Equip(newowner)
     if SERVER then
         if self:IsOnFire() then
@@ -74,6 +75,10 @@ function SWEP:Equip(newowner)
         newowner:GiveAmmo(given, self.Primary.Ammo)
         self.StoredAmmo = 0
     end
+
+    self:SetHolsterTime(0)
+    self:SetHolsterEntity(NULL)
+    self:SetReloadFinishTime(0)
 end
 
 -- other guns may use this function to setup stuff
@@ -118,13 +123,11 @@ function SWEP:TTT_Init()
             end
 
             self:InvalidateCache()
-        end
+            self:SetBaseSettings()
 
-        if added > 0 then
-            timer.Simple(0.1, function()
-                if !IsValid(self) then return end
+            if added > 0 then
                 self:NetworkWeapon()
-            end)
+            end
         end
     end
 
@@ -140,33 +143,4 @@ end
 
 --- TTT2 uses this to populate custom convars in the equip menu
 function SWEP:AddToSettingsMenu(parent)
-end
-
-function SWEP:Equip(newowner)
-    if engine.ActiveGamemode() == "terrortown" and SERVER then
-        if self:IsOnFire() then
-            self:Extinguish()
-        end
-
-        self.fingerprints = self.fingerprints or {}
-
-        if !table.HasValue(self.fingerprints, newowner) then
-            table.insert(self.fingerprints, newowner)
-        end
-
-        if self:HasSpawnFlags(SF_WEAPON_START_CONSTRAINED) then
-            -- If this weapon started constrained, unset that spawnflag, or the
-            -- weapon will be re-constrained and float
-            local flags = self:GetSpawnFlags()
-            local newflags = bit.band(flags, bit.bnot(SF_WEAPON_START_CONSTRAINED))
-            self:SetKeyValue("spawnflags", newflags)
-        end
-    end
-
-    if engine.ActiveGamemode() == "terrortown" and SERVER and IsValid(newowner) and (self.StoredAmmo or 0) > 0 and self.Primary.Ammo != "none" then
-        local ammo = newowner:GetAmmoCount(self.Primary.Ammo)
-        local given = math.min(self.StoredAmmo, self.Primary.ClipMax - ammo)
-        newowner:GiveAmmo(given, self.Primary.Ammo)
-        self.StoredAmmo = 0
-    end
 end

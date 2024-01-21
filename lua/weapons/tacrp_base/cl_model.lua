@@ -64,7 +64,7 @@ function SWEP:SetupModel(wm, custom_wm)
         self.WModel = {}
     end
 
-    if !wm and self:GetOwner() != LocalPlayer() then return end
+    if !wm and self:GetOwner() != LocalPlayer() and self:GetOwner() != LocalPlayer():GetObserverTarget() then return end
 
     self:DoBodygroups(wm)
 

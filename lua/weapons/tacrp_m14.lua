@@ -32,22 +32,16 @@ SWEP.BalanceStats = {
         Range_Min = 1200,
         Range_Max = 3000,
         ArmorPenetration = 0.95,
-
-        MoveSpeedMult = 0.8,
-        ShootingSpeedMult = 0.6,
-        SightedSpeedMult = 0.75,
-        MeleeSpeedMult = 1,
-        ReloadSpeedMult = 1,
     },
     [TacRP.BALANCE_TTT] = {
 
         Description = "Semi-automatic rifle with excellent accuracy and a lethal headshot at long range.\nEquipped with a 6x scope by default.",
 
-        Damage_Max = 22,
-        Damage_Min = 35,
-        Range_Min = 1200,
-        Range_Max = 3000,
-        RPM = 180,
+        Damage_Max = 25,
+        Damage_Min = 34,
+        Range_Min = 500,
+        Range_Max = 2200,
+        RPM = 150,
 
         RecoilResetInstant = true,
         RecoilResetTime = 0.18,
@@ -66,14 +60,6 @@ SWEP.BalanceStats = {
             [HITGROUP_RIGHTLEG] = 0.5,
             [HITGROUP_GEAR] = 0.5
         },
-
-        ReloadTimeMult = 1.25,
-
-        MoveSpeedMult = 0.85,
-        ShootingSpeedMult = 0.75,
-        MeleeSpeedMult = 1,
-        SightedSpeedMult = 0.5,
-        ReloadSpeedMult = 0.5,
     },
     [TacRP.BALANCE_PVE] = {
         Damage_Max = 15,
@@ -81,12 +67,6 @@ SWEP.BalanceStats = {
         Range_Min = 1200,
         Range_Max = 3000,
         RPM = 200,
-
-        MoveSpeedMult = 0.8,
-        ShootingSpeedMult = 0.6,
-        SightedSpeedMult = 0.75,
-        MeleeSpeedMult = 1,
-        ReloadSpeedMult = 1,
     },
     [TacRP.BALANCE_OLDSCHOOL] = {
         HipFireSpreadPenalty = 0.015,

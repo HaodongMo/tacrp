@@ -63,11 +63,12 @@ end
 SWEP.GrenadeMenuAlpha = 0
 SWEP.BlindFireMenuAlpha = 0
 
+TacRP.CursorEnabled = false
+
 local currentnade
 local currentind
 local lastmenu
 function SWEP:DrawGrenadeHUD()
-
     if !TacRP.ConVars["nademenu"]:GetBool() then return end
     if !self:GetValue("CanQuickNade") then return end
 
@@ -95,6 +96,7 @@ function SWEP:DrawGrenadeHUD()
         self.GrenadeMenuAlpha = math.Approach(self.GrenadeMenuAlpha, 1, 15 * ft)
         if !lastmenu then
             gui.EnableScreenClicker(true)
+            TacRP.CursorEnabled = true
             lastmenu = true
         end
 
@@ -112,6 +114,7 @@ function SWEP:DrawGrenadeHUD()
         if lastmenu then
             if !self:GetCustomize() then
                 gui.EnableScreenClicker(false)
+                TacRP.CursorEnabled = false
             end
             if currentnade then
                 if currentnade.Index != self:GetGrenade().Index then
@@ -658,6 +661,7 @@ function SWEP:DrawBlindFireHUD()
         self.BlindFireMenuAlpha = math.Approach(self.BlindFireMenuAlpha, 1, 15 * ft)
         if !lastmenu_bf then
             gui.EnableScreenClicker(true)
+            TacRP.CursorEnabled = true
             lastmenu_bf = true
             if self:GetBlindFireMode() == TacRP.BLINDFIRE_KYS then
                 bf_suicidelock = 0
@@ -678,6 +682,7 @@ function SWEP:DrawBlindFireHUD()
         if lastmenu_bf then
             if !self:GetCustomize() then
                 gui.EnableScreenClicker(false)
+                TacRP.CursorEnabled = false
             end
             if (!nocenter or currentind > 0) and (nosuicide or bf_suicidelock == 0 or currentind != 2) then
                 net.Start("tacrp_toggleblindfire")
@@ -788,6 +793,7 @@ hook.Add("VGUIMousePressed", "tacrp_grenademenu", function(pnl, mousecode)
             if !nadewep or !wpn:CheckGrenade(currentnade.Index, true) then return end
             wpn.GrenadeMenuAlpha = 0
             gui.EnableScreenClicker(false)
+            TacRP.CursorEnabled = false
             if LocalPlayer():HasWeapon(nadewep) then
                 input.SelectWeapon(LocalPlayer():GetWeapon(nadewep))
             else

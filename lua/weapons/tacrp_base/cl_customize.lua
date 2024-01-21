@@ -5,7 +5,7 @@ local enable_armor = false
 local armor = Material("tacrp/hud/armor.png", "mip smooth")
 
 local body = Material("tacrp/hud/body.png", "mips smooth")
-local lock = Material("tacrp/hud/mark_lock.png", "mips smooth")
+local news = Material("tacrp/hud/news.png", "mips smooth")
 
 local body_head = Material("tacrp/hud/body_head.png", "mips smooth")
 local body_chest = Material("tacrp/hud/body_chest.png", "mips smooth")
@@ -60,6 +60,7 @@ function SWEP:CreateCustomizeHUD()
     self:RemoveCustomizeHUD()
 
     gui.EnableScreenClicker(true)
+    TacRP.CursorEnabled = true
 
     local bg = vgui.Create("DPanel")
 
@@ -85,6 +86,7 @@ function SWEP:CreateCustomizeHUD()
             self2:Remove()
             if (self.GrenadeMenuAlpha or 0) != 1 then
                 gui.EnableScreenClicker(false)
+                TacRP.CursorEnabled = false
             end
             return
         end
@@ -148,8 +150,8 @@ function SWEP:CreateCustomizeHUD()
 
             local exp = self:GetValue("ExplosiveDamage")
 
-            local dmg_max = self:GetValue("Damage_Max") + exp
-            local dmg_min = self:GetValue("Damage_Min") + exp
+            local dmg_max = (self:GetValue("Damage_Max") + exp) * self:GetConfigDamageMultiplier()
+            local dmg_min = (self:GetValue("Damage_Min") + exp) * self:GetConfigDamageMultiplier()
 
             local range_min, range_max = self:GetMinMaxRange()
 
@@ -207,7 +209,7 @@ function SWEP:CreateCustomizeHUD()
                     range_m_x = mouse_x
                 end
 
-                local dmg = self:GetDamageAtRange(range) + self:GetValue("ExplosiveDamage")
+                local dmg = self:GetDamageAtRange(range) + exp * self:GetConfigDamageMultiplier()
 
                 local txt_dmg1 = tostring(math.Round(dmg)) .. TacRP:GetPhrase("unit.damage")
 
@@ -1305,7 +1307,7 @@ function SWEP:CreateCustomizeHUD()
 
     -- tacrp_drop
     local primarygrenade = self:GetValue("PrimaryGrenade")
-    if TacRP.ConVars["allowdrop"]:GetBool() and TacRP.ConVars["cust_drop"]:GetBool() and (!primarygrenade or !TacRP.IsGrenadeInfiniteAmmo(primarygrenade)) then
+    if (engine.ActiveGamemode() == "terrortown" or TacRP.ConVars["allowdrop"]:GetBool()) and TacRP.ConVars["cust_drop"]:GetBool() and (!primarygrenade or !TacRP.IsGrenadeInfiniteAmmo(primarygrenade)) then
         local phrase = primarygrenade and "cust.drop_nade" or "cust.drop_wep"
         local dropbox = vgui.Create("DButton", bg)
         local bw, bh = TacRP.SS(52), TacRP.SS(10)
@@ -1321,9 +1323,51 @@ function SWEP:CreateCustomizeHUD()
 
         end
         function dropbox.DoClick(self2)
-            LocalPlayer():ConCommand("tacrp_drop")
+            if engine.ActiveGamemode() == "terrortown" then
+                LocalPlayer():ConCommand("ttt_dropweapon")
+            else
+                LocalPlayer():ConCommand("tacrp_drop")
+            end
         end
     end
+
+    local news_s = TacRP.SS(12)
+    local news_i = TacRP.SS(8)
+    local newsbutton = vgui.Create("DButton", bg)
+    newsbutton:SetSize(news_s, news_s)
+    newsbutton:SetPos(smallgap, smallgap / 2)
+    newsbutton:SetText("")
+    function newsbutton.Paint(self2, w, h)
+        local c_bg, c_cnr, c_txt = TacRP.GetPanelColors(self2:IsHovered(), self2:IsDown())
+        surface.SetDrawColor(c_bg)
+        TacRP.DrawCorneredBox(0, 0, w, h, c_cnr)
+
+        if self2.flash then
+            local todo = DisableClipping(true)
+            draw.NoTexture()
+            surface.SetDrawColor(c_bg)
+            draw.SimpleTextOutlined(string.upper(self2.flash), "TacRP_HD44780A00_5x8_6", w + smallgap, h / 2, color_white, TEXT_ALIGN_LEFT, TEXT_ALIGN_CENTER, 2, Color(0, 0, 0, 150))
+            DisableClipping(todo)
+            local c = (math.sin(SysTime() * 10)) * 30 + (self2:IsHovered() and 50 or 225)
+            surface.SetDrawColor(c, c, c, 255)
+        else
+            surface.SetDrawColor(c_txt)
+        end
+
+        surface.SetMaterial(news)
+        surface.DrawTexturedRect((news_s - news_i) / 2, (news_s - news_i) / 2, news_i,news_i)
+    end
+    function newsbutton.DoClick(self2)
+        LocalPlayer():ConCommand("tacrp_news")
+    end
+    TacRP.FetchNews(function()
+        for i, v in ipairs(TacRP.NewsLoaded) do
+            if !TacRP.NewsRead[v.Key] then
+                newsbutton.flash = v.Type or "article"
+                break
+            end
+        end
+    end)
 
     self.StaticStats = false
 end
@@ -1334,6 +1378,7 @@ function SWEP:RemoveCustomizeHUD()
 
         if (self.GrenadeMenuAlpha or 0) != 1 and (self.BlindFireMenuAlpha or 0) != 1 then
             gui.EnableScreenClicker(false)
+            TacRP.CursorEnabled = false
         end
 
         self.LastHintLife = CurTime()

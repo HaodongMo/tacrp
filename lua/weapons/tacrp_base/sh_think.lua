@@ -1,11 +1,6 @@
 function SWEP:Think()
     local owner = self:GetOwner()
 
-    if CLIENT and !self.CertainAboutAtts and !self.AskedAboutAtts then
-        self.AskedAboutAtts = true
-        self:RequestWeapon()
-    end
-
     local stop = self:RunHook("Hook_PreThink")
     if stop then return end
 
@@ -87,7 +82,7 @@ function SWEP:Think()
         self:ExitBipod()
     end
 
-    if CLIENT then
+    if CLIENT and (IsFirstTimePredicted() or game.SinglePlayer()) then
 
         self:ThinkNearWall()
 
@@ -102,7 +97,7 @@ function SWEP:Think()
             end
         end
 
-        if !self.LoadedPreset and self.CertainAboutAtts then
+        if !self.LoadedPreset then
             self.LoadedPreset = true
 
             if TacRP.ConVars["autosave"]:GetBool() and TacRP.ConVars["free_atts"]:GetBool() then

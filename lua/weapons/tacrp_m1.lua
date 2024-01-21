@@ -32,18 +32,12 @@ SWEP.BalanceStats = {
         RPM = 600,
         RecoilSpreadPenalty = 0.003,
         HipFireSpreadPenalty = 0.008,
-
-        MoveSpeedMult = 0.95,
-        ShootingSpeedMult = 0.85,
-        SightedSpeedMult = 0.9,
-        MeleeSpeedMult = 1,
-        ReloadSpeedMult = 1,
     },
     [TacRP.BALANCE_TTT] = {
 
-        Damage_Max = 18,
+        Damage_Max = 20,
         Damage_Min = 12,
-        Range_Min = 600,
+        Range_Min = 500,
         Range_Max = 1500,
         RPM = 300,
 
@@ -61,14 +55,6 @@ SWEP.BalanceStats = {
             [HITGROUP_RIGHTLEG] = 0.75,
             [HITGROUP_GEAR] = 0.9
         },
-
-        ReloadTimeMult = 1.25,
-
-        MoveSpeedMult = 0.9,
-        ShootingSpeedMult = 0.8,
-        MeleeSpeedMult = 1,
-        SightedSpeedMult = 0.65,
-        ReloadSpeedMult = 0.65,
     },
     [TacRP.BALANCE_PVE] = {
         Damage_Max = 10,
@@ -77,12 +63,6 @@ SWEP.BalanceStats = {
         RPM = 450,
         RecoilSpreadPenalty = 0.003,
         HipFireSpreadPenalty = 0.008,
-
-        MoveSpeedMult = 0.95,
-        ShootingSpeedMult = 0.85,
-        SightedSpeedMult = 0.9,
-        MeleeSpeedMult = 1,
-        ReloadSpeedMult = 1,
     },
     [TacRP.BALANCE_OLDSCHOOL] = {
         RecoilSpreadPenalty = 0.007

@@ -47,6 +47,8 @@ SWEP.Penetration = 0 // units of metal this weapon can penetrate
 SWEP.ArmorPenetration = 0.5 // How good the weapon can penetrate body armor.
 SWEP.ArmorBonus = 1 // multiplier on armor damage
 
+SWEP.DamageType = nil // override damage type
+
 SWEP.ShootEnt = false
 SWEP.ShootEntForce = 10000
 
@@ -566,8 +568,8 @@ function SWEP:SetupDataTables()
     self:NetworkVar("Entity", 0, "HolsterEntity")
     self:NetworkVar("Entity", 1, "CornershotEntity")
 
-    self:SetFreeAimAngle(Angle(0, 0, 0))
-    self:SetLastAimAngle(Angle(0, 0, 0))
+    self:SetFreeAimAngle(Angle())
+    self:SetLastAimAngle(Angle())
     self:SetFiremode(1)
     self:SetTactical(true)
     self:SetReady(false)

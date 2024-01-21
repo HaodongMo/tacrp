@@ -31,7 +31,7 @@ function ENT:Detonate()
     if self:WaterLevel() > 0 then self:Remove() return end
     local attacker = self.Attacker or self:GetOwner() or self
 
-    util.BlastDamage(self, attacker, self:GetPos(), 150, 25)
+    util.BlastDamage(self, attacker, self:GetPos(), 150, 25 * TacRP.ConVars["mult_damage_explosive"]:GetFloat())
 
     self:EmitSound(table.Random(self.ExplodeSounds), 75)
 

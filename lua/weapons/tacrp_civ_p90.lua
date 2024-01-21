@@ -33,22 +33,16 @@ SWEP.BalanceStats = {
 
         Recoil_Kick = 0.5,
         Spread = 0.001,
-
-        MoveSpeedMult = 0.9,
-        ShootingSpeedMult = 0.8,
-        SightedSpeedMult = 0.85,
-        MeleeSpeedMult = 1,
-        ReloadSpeedMult = 1,
     },
     [TacRP.BALANCE_TTT] = {
         Description = "Semi-automatic model of a futuristic PDW. Fine tuned for precision shooting.",
 
-        Damage_Max = 10,
-        Damage_Min = 8,
-        Range_Min = 1200,
-        Range_Max = 3500,
+        Damage_Max = 16,
+        Damage_Min = 14,
+        Range_Min = 1500,
+        Range_Max = 2500,
 
-        RPM = 600,
+        RPM = 330,
 
         BodyDamageMultipliers = {
             [HITGROUP_HEAD] = 3,
@@ -60,14 +54,6 @@ SWEP.BalanceStats = {
             [HITGROUP_RIGHTLEG] = 0.75,
             [HITGROUP_GEAR] = 0.9
         },
-
-        ReloadTimeMult = 1,
-
-        MoveSpeedMult = 0.95,
-        ShootingSpeedMult = 0.85,
-        MeleeSpeedMult = 1,
-        SightedSpeedMult = 0.6,
-        ReloadSpeedMult = 0.7,
     },
     [TacRP.BALANCE_PVE] = {
         Description = "Semi-automatic model of a futuristic PDW. Fine tuned for precision shooting.",
@@ -78,12 +64,6 @@ SWEP.BalanceStats = {
 
         Recoil_Kick = 0.5,
         Spread = 0.001,
-
-        MoveSpeedMult = 0.9,
-        ShootingSpeedMult = 0.8,
-        SightedSpeedMult = 0.85,
-        MeleeSpeedMult = 1,
-        ReloadSpeedMult = 1,
     },
     [TacRP.BALANCE_OLDSCHOOL] = {
         RecoilMaximum = 20,

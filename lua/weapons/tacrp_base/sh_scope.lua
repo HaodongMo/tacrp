@@ -57,9 +57,7 @@ function SWEP:ScopeToggle(setlevel)
 
     if level == self:GetScopeLevel() then return end
 
-    if IsFirstTimePredicted() then
-        self:SetScopeLevel(level)
-    end
+    self:SetScopeLevel(level)
 
     if level > 0 then
         self:ToggleBlindFire(TacRP.BLINDFIRE_NONE)
@@ -69,7 +67,13 @@ function SWEP:ScopeToggle(setlevel)
         self:SetLastScopeTime(CurTime())
     end
 
-    if CLIENT then
+    -- HACK: In singleplayer, SWEP:Think is called on client but IsFirstTimePredicted is NEVER true.
+    -- This causes ScopeToggle to NOT be called on client in singleplayer...
+    -- GenerateAutoSight needs to run clientside or scopes will break. Good old CallOnClient it is.
+
+    if SERVER and game.SinglePlayer() then
+        self:CallOnClient("GenerateAutoSight")
+    elseif CLIENT and (IsFirstTimePredicted() or game.SinglePlayer()) then
         self:GenerateAutoSight()
         self.LastHintLife = CurTime()
     end
@@ -100,7 +104,7 @@ end
 function SWEP:IsInScope()
     local sightdelta = self:Curve(self:GetSightDelta())
 
-    return (SERVER or !self:GetPeeking()) and ((self:GetScopeLevel() > 0 and sightdelta > 0.5) or (sightdelta > 0.9))
+    return (SERVER or !self:GetPeeking()) and !self:GetSafe() and ((self:GetScopeLevel() > 0 and sightdelta > 0.5) or (sightdelta > 0.9))
 end
 
 function SWEP:DoScope()
@@ -172,18 +176,19 @@ end
 function SWEP:ThinkSights()
     if !IsValid(self:GetOwner()) then return end
 
-    if IsFirstTimePredicted() and self:GetOwner():KeyDown(IN_USE) and self:GetOwner():KeyPressed(IN_ATTACK2) then
+    local ftp = IsFirstTimePredicted()
+
+    if ftp and self:GetOwner():KeyDown(IN_USE) and self:GetOwner():KeyPressed(IN_ATTACK2) then
         self:ToggleSafety()
         return
     end
 
-    if IsFirstTimePredicted() and self:GetValue("Bipod") and self:GetOwner():KeyPressed(IN_ATTACK2) and !self:GetInBipod() and self:CanBipod() then
+    if ftp and self:GetValue("Bipod") and self:GetOwner():KeyPressed(IN_ATTACK2)
+            and !self:GetInBipod() and self:CanBipod() then
         self:EnterBipod()
     end
 
     local FT = FrameTime()
-
-    if self:GetSafe() then return end
 
     local sighted = self:GetScopeLevel() > 0
 
@@ -202,18 +207,19 @@ function SWEP:ThinkSights()
 
     self:SetSightDelta(amt)
 
+    if self:GetSafe() then return end
+
     if CLIENT then
         self:ThinkPeek()
     end
     local toggle = self:GetOwner():GetInfoNum("tacrp_toggleaim", 0) == 1
     local press, down = self:GetOwner():KeyPressed(IN_ATTACK2), self:GetOwner():KeyDown(IN_ATTACK2)
 
-    if self:DoOldSchoolScopeBehavior() and press then
-        self.Primary.Automatic = false
+    if (!self:GetValue("Scope") or self:DoOldSchoolScopeBehavior()) and down then
         self:Melee()
-    elseif sighted and ((toggle and press) or (!toggle and !down)) then
+    elseif sighted and ((toggle and press and ftp) or (!toggle and !down)) then
         self:ScopeToggle(0)
-    elseif !sighted and ((toggle and press) or (!toggle and down)) then
+    elseif !sighted and ((toggle and press and ftp) or (!toggle and down)) then
         self:ScopeToggle(1)
     end
 end
@@ -335,7 +341,8 @@ function SWEP:HasOptic()
 end
 
 function SWEP:DoOldSchoolScopeBehavior()
-    return TacRP.GetBalanceMode() == TacRP.BALANCE_OLDSCHOOL and !self:HasOptic()
+    return (TacRP.ConVars["oldschool"]:GetBool() or TacRP.GetBalanceMode() == TacRP.BALANCE_OLDSCHOOL)
+            and !self:HasOptic()
 end
 
 -- function SWEP:CheckFlashlightPointing()

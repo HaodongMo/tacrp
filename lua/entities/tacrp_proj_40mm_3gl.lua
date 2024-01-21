@@ -34,14 +34,29 @@ end
 
 function ENT:Detonate()
     local attacker = self.Attacker or self:GetOwner() or self
-
-    local mult = self.NPCDamage and 0.25 or 1
-
+    local mult = TacRP.ConVars["mult_damage_explosive"]:GetFloat() * (self.NPCDamage and 0.5 or 1)
+    local dmg = 55
     if engine.ActiveGamemode() == "terrortown" then
-        util.BlastDamage(self, attacker, self:GetPos(), 150, 25)
-    else
-        util.BlastDamage(self, attacker, self:GetPos(), 200, 60 * mult)
+        dmg = 25
     end
+
+    util.BlastDamage(self, attacker, self:GetPos(), 200, dmg * mult)
+    self:FireBullets({
+        Attacker = attacker,
+        Damage = dmg * mult,
+        Tracer = 0,
+        Src = self:GetPos(),
+        Dir = self:GetForward(),
+        HullSize = 0,
+        Distance = 32,
+        IgnoreEntity = self,
+        Callback = function(atk, btr, dmginfo)
+            dmginfo:SetDamageType(DMG_AIRBOAT + DMG_BLAST) // airboat damage for helicopters and LVS vehicles
+            dmginfo:SetDamageForce(self:GetForward() * 7000) // LVS uses this to calculate penetration!
+        end,
+    })
+
+
 
     local fx = EffectData()
     fx:SetOrigin(self:GetPos())

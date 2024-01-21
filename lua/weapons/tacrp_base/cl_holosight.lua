@@ -1,6 +1,6 @@
 function SWEP:DoHolosight(mdl)
     if TacRP.OverDraw then return end
-    if self:GetOwner() != LocalPlayer() then return end
+    -- if self:GetOwner() != LocalPlayer() then return end
 
     local ref = 64
 

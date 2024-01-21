@@ -686,6 +686,23 @@ local conVars = {
         min = 0,
         max = 1,
     },
+    {
+        name = "oldschool",
+        default = "0",
+        replicated = true,
+        notify = true,
+        min = 0,
+        max = 1,
+    },
+    {
+        name = "deploysafety",
+        default = "0",
+        replicated = true,
+        notify = true,
+        min = 0,
+        max = 1,
+    },
+
 
     {
         name = "cust_drop",
@@ -705,6 +722,71 @@ local conVars = {
     {
         name = "phystweak",
         default = "1",
+        min = 0,
+        max = 1,
+        replicated = true,
+    },
+
+    // --------------------------- Multipliers
+    {
+        name = "mult_damage",
+        default = "1",
+        min = 0.01,
+        replicated = true,
+    },
+    {
+        name = "mult_damage_shotgun",
+        default = "1",
+        min = 0.01,
+        replicated = true,
+    },
+    {
+        name = "mult_damage_sniper",
+        default = "1",
+        min = 0.01,
+        replicated = true,
+    },
+    {
+        name = "mult_damage_magnum",
+        default = "1",
+        min = 0.01,
+        replicated = true,
+    },
+    {
+        name = "mult_damage_explosive",
+        default = "1",
+        min = 0.01,
+        replicated = true,
+    },
+    {
+        name = "mult_recoil_kick",
+        default = "1",
+        min = 0,
+        replicated = true,
+    },
+    {
+        name = "mult_recoil_vis",
+        default = "1",
+        min = 0,
+        replicated = true,
+    },
+    {
+        name = "mult_reloadspeed",
+        default = "1",
+        min = 0.1,
+        replicated = true,
+    },
+
+    {
+        name = "recoilreset",
+        default = "0",
+        min = 0,
+        max = 1,
+        replicated = true,
+    },
+    {
+        name = "reload_dump",
+        default = "0",
         min = 0,
         max = 1,
         replicated = true,
@@ -931,7 +1013,7 @@ local function menu_server_ti(panel)
         command = "tacrp_hud"
     })
     panel:AddControl("checkbox", {
-        label = "Draw Holstered Weapons",
+        label = "Holstered Weapon Models",
         command = "tacrp_visibleholster"
     })
     panel:AddControl("checkbox", {
@@ -942,6 +1024,10 @@ local function menu_server_ti(panel)
     panel:AddControl("checkbox", {
         label = "Allow Dropping & Swapping",
         command = "tacrp_allowdrop"
+    })
+    panel:AddControl("checkbox", {
+        label = "Enable Safety On Deploy",
+        command = "tacrp_deploysafety"
     })
 
     local cb_irons_procedural, lb_irons_procedural = panel:ComboBox("Use Procedural Ironsights", "tacrp_irons_procedural")
@@ -1013,24 +1099,103 @@ local function menu_server_ti(panel)
 end
 
 local function menu_balance_ti(panel)
-    header(panel, "Balance")
-    panel:Help("Adjust weapon attributes to suit your gameplay needs.\nAutomatic sets balance to TTT in TTT, Tactical for DarkRP/Helix, and Arcade otherwise.")
-    local cb_balance, lb_balance = panel:ComboBox("Weapon Balance", "tacrp_balance")
-    cb_balance:AddChoice("Automatic", "-1")
-    cb_balance:AddChoice("0 - Tactical", "0")
-    cb_balance:AddChoice("1 - Arcade", "1")
+    header(panel, "Damage")
+    panel:Help("Adjust weapon attributes to suit your gameplay needs.")
+    local cb_balance, lb_balance = panel:ComboBox("Weapon Tiers", "tacrp_balance")
+    cb_balance:AddChoice("[Automatic]", "-1")
+    cb_balance:AddChoice("0 - Tiered", "0")
+    cb_balance:AddChoice("1 - Untiered", "1")
     cb_balance:AddChoice("2 - TTT", "2")
-    cb_balance:AddChoice("3 - PvE", "3")
     cb_balance:DockMargin(8, 0, 0, 0)
     lb_balance:SizeToContents()
+    panel:Help("Weapon are divided into 4 tiers, with higher tiers having slightly better overall performance.\nDisable to adjust weapon performance to around the same level.")
+    panel:Help("TTT option is untiered, and has lower RPM and high time to kill close to vanilla TTT weapons.")
 
-    panel:Help("Tactical: Balanced for reduced move speed. Medium TTK.")
-    panel:Help("Arcade: Balanced for Sandbox move speed. Low TTK. Snipers/DMRs have damage rampup.")
-    panel:Help("TTT: High TTK, reloads slow you down and take longer. Some weapons have lower fire rate.")
-    panel:Help("PvE: For HL2 campaign or co-op maps. Damage comparable to HL2 weapons, reduced spread.")
-    panel:Help("(Tactical and PvE separate weapons into 4 tiers, ranging from Consumer, Security, Operator, and Elite, with each higher tier having slightly better damage output.)")
+    panel:AddControl("slider", {
+        label = "Overall Damage",
+        command = "tacrp_mult_damage",
+        type = "float",
+        min = 0.1,
+        max = 3,
+    })
+    panel:ControlHelp("Only affects bullets. Type-specific damage multipliers takes priority and doesn't stack.")
+    panel:AddControl("slider", {
+        label = "Shotgun Damage",
+        command = "tacrp_mult_damage_shotgun",
+        type = "float",
+        min = 0.1,
+        max = 3,
+    })
+    panel:AddControl("slider", {
+        label = "Sniper Rifle Damage",
+        command = "tacrp_mult_damage_sniper",
+        type = "float",
+        min = 0.1,
+        max = 3,
+    })
+    panel:AddControl("slider", {
+        label = "Magnum Pistol Damage",
+        command = "tacrp_mult_damage_magnum",
+        type = "float",
+        min = 0.1,
+        max = 3,
+    })
+    panel:AddControl("slider", {
+        label = "Explosive Damage",
+        command = "tacrp_mult_damage_explosive",
+        type = "float",
+        min = 0.1,
+        max = 3,
+    })
 
-    header(panel, "\nAmmunition")
+    header(panel, "\nRecoil")
+    panel:AddControl("checkbox", {
+        label = "Bloom Modifies Recoil",
+        command = "tacrp_altrecoil"
+    })
+    panel:ControlHelp("If enabled, gaining bloom intensifies recoil but does not modify spread.\nIf disabled, gaining bloom increases spread but does not modify recoil kick (old behavior).\nBloom is gained when firing consecutive shots.")
+    panel:AddControl("checkbox", {
+        label = "Recoil Patterns",
+        command = "tacrp_recoilpattern"
+    })
+    panel:ControlHelp("Recoil follows a weapon-specific pattern, reset when bloom disappears.\nPattern fades away in long bursts, but reduces vertical recoil.")
+    panel:AddControl("slider", {
+        label = "Recoil Kick",
+        command = "tacrp_mult_recoil_kick",
+        type = "float",
+        min = 0,
+        max = 2,
+    })
+    panel:AddControl("slider", {
+        label = "Visual Recoil",
+        command = "tacrp_mult_recoil_vis",
+        type = "float",
+        min = 0,
+        max = 2,
+    })
+
+    header(panel, "\nAiming")
+    panel:AddControl("checkbox", {
+        label = "Enable Crosshair",
+        command = "tacrp_crosshair"
+    })
+    panel:AddControl("checkbox", {
+        label = "Enable Old School Scopes",
+        command = "tacrp_oldschool"
+    })
+    panel:ControlHelp("Weapons without a scope or holosight cannot aim down sights.\nHip-fire spread is reduced and moving spread is increased based on scope magnification.\nEnabling the crosshair with this enabled is strongly encouraged.")
+    panel:AddControl("checkbox", {
+        label = "Enable Sway",
+        command = "tacrp_sway"
+    })
+    panel:ControlHelp("Weapon point of aim will move around gently. While aiming, hold sprint key to hold breath and steady aim.")
+    panel:AddControl("checkbox", {
+        label = "Enable Free Aim",
+        command = "tacrp_freeaim"
+    })
+    panel:ControlHelp("While not aiming, moving around will cause the crosshair to move off center.")
+
+    header(panel, "\nAmmo & Reloading")
     panel:AddControl("checkbox", {
         label = "Infinite Ammo",
         command = "tacrp_infiniteammo"
@@ -1040,6 +1205,11 @@ local function menu_balance_ti(panel)
         label = "Infinite Grenades",
         command = "tacrp_infinitegrenades"
     })
+    panel:AddControl("checkbox", {
+        label = "Dump Ammo In Magazines",
+        command = "tacrp_reload_dump"
+    })
+    panel:ControlHelp("Dropping a magazine during a reload will also drop all ammo in the gun. The dropped magazine can be retrieved (unless Infinite Ammo is enabled).")
     panel:AddControl("slider", {
         label = "Default Clip Multiplier",
         command = "tacrp_defaultammo",
@@ -1047,38 +1217,16 @@ local function menu_balance_ti(panel)
         min = 0,
         max = 10,
     })
+    panel:AddControl("slider", {
+        label = "Reload Speed",
+        command = "tacrp_mult_reloadspeed",
+        type = "float",
+        min = 0.5,
+        max = 1.5,
+    })
+end
 
-    header(panel, "\nHandling")
-    panel:AddControl("checkbox", {
-        label = "Enable Sway",
-        command = "tacrp_sway"
-    })
-    panel:AddControl("checkbox", {
-        label = "Enable Free Aim",
-        command = "tacrp_freeaim"
-    })
-    panel:AddControl("checkbox", {
-        label = "Enable Holstering",
-        command = "TacRP_holster"
-    })
-    panel:ControlHelp("Play a holster animation before pulling out another weapon. If disabled, holstering is instant.")
-    panel:AddControl("checkbox", {
-        label = "Bloom Modifies Recoil",
-        command = "tacrp_altrecoil"
-    })
-    panel:ControlHelp("If enabled, gaining bloom intensifies recoil but does not modify spread.\nIf disabled, gaining bloom increases spread but does not modify recoil kick (old behavior).\nBloom is gained when firing consecutive shots.")
-    panel:AddControl("checkbox", {
-        label = "Shotgun Reload Cancel",
-        command = "tacrp_reload_sg_cancel"
-    })
-    panel:ControlHelp("Instantly fire out of a shotgun reload. If disabled, the finishing part of the animation must play out.")
-    panel:AddControl("checkbox", {
-        label = "Recoil Patterns",
-        command = "tacrp_recoilpattern"
-    })
-    panel:ControlHelp("Recoil follows a weapon-specific pattern, reset when bloom disappears.\nPattern fades away in long bursts, but reduces vertical recoil.")
-
-
+local function menu_mechanics_ti(panel)
     header(panel, "\nBallistics")
     panel:AddControl("checkbox", {
         label = "Enable Penetration",
@@ -1145,7 +1293,17 @@ local function menu_balance_ti(panel)
     })
     panel:ControlHelp("Penalty from melee bashing.")
 
-    header(panel, "\nSliders")
+    header(panel, "\nMiscellaneous")
+    panel:AddControl("checkbox", {
+        label = "Delayed Holstering",
+        command = "tacrp_holster"
+    })
+    panel:ControlHelp("Play a holster animation before pulling out another weapon. If disabled, holstering is instant.")
+    panel:AddControl("checkbox", {
+        label = "Shotgun Reload Cancel",
+        command = "tacrp_reload_sg_cancel"
+    })
+    panel:ControlHelp("Instantly fire out of a shotgun reload. If disabled, the finishing part of the animation must play out.")
     panel:AddControl("slider", {
         label = "Flashbang Slow",
         command = "tacrp_flash_slow",
@@ -1224,10 +1382,13 @@ local clientmenus_ti = {
         text = "Server", func = menu_server_ti
     },
     {
-        text = "Mechanics", func = menu_balance_ti
+        text = "Mechanics", func = menu_mechanics_ti
     },
     {
         text = "Attachments", func = menu_atts_ti
+    },
+    {
+        text = "Balance", func = menu_balance_ti
     },
 }
 

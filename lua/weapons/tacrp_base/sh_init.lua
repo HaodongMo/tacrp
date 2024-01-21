@@ -73,6 +73,10 @@ function SWEP:Deploy()
 
     self:ToggleBlindFire(TacRP.BLINDFIRE_NONE)
 
+    if TacRP.ConVars["deploysafety"]:GetBool() then
+        self:SetSafe(true)
+    end
+
     self:SetShouldHoldType()
 
     if self:GetValue("PrimaryGrenade") then
@@ -193,7 +197,7 @@ local holsteranticrash = false
 hook.Add("StartCommand", "TacRP_Holster", function(ply, ucmd)
     local wep = ply:GetActiveWeapon()
 
-    if IsValid(wep) and wep.ArcticTacRP and wep:GetHolsterTime() != 0 and wep:GetHolsterTime() <= CurTime() and IsValid(wep:GetHolsterEntity()) then
+    if IsValid(wep) and wep.ArcticTacRP and wep:GetHolsterTime() != 0 and wep:GetHolsterTime() - wep:GetPingOffsetScale() <= CurTime() and IsValid(wep:GetHolsterEntity()) then
         wep:SetHolsterTime(-math.huge) -- Pretty much force it to work
         if !holsteranticrash then
             holsteranticrash = true
@@ -338,6 +342,7 @@ function SWEP:OnRemove()
     end
     if CLIENT and (self:GetCustomize() or (self.GrenadeMenuAlpha or 0) > 0 or (self.BlindFireMenuAlpha or 0) > 0) then
         gui.EnableScreenClicker(false)
+        TacRP.CursorEnabled = false
     end
 end
 

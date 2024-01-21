@@ -59,7 +59,7 @@ function ENT:Detonate()
     local damage = 80
     if engine.ActiveGamemode() == "terrortown" then damage = 60 end
 
-    util.BlastDamage(self, attacker, src, 256, damage)
+    util.BlastDamage(self, attacker, src, 256, TacRP.ConVars["mult_damage_explosive"]:GetFloat() * damage)
 
     self:EmitSound(table.Random(self.ExplodeSounds), 115, 105)
     self:EmitSound("physics/metal/metal_box_break1.wav", 100, 190, 0.5)

@@ -32,21 +32,15 @@ SWEP.BalanceStats = {
 
         Range_Min = 1000,
         Range_Max = 3500,
-
-        MoveSpeedMult = 0.8,
-        ShootingSpeedMult = 0.55,
-        SightedSpeedMult = 0.75,
-        MeleeSpeedMult = 1,
-        ReloadSpeedMult = 1,
     },
     [TacRP.BALANCE_TTT] = {
 
         Description = "Lightweight sniper rifle with high mobility and good damage at distance.\nEquipped with a 10x scope by default.",
 
-        Damage_Max = 25,
+        Damage_Max = 30,
         Damage_Min = 65,
-        Range_Min = 900,
-        Range_Max = 3000,
+        Range_Min = 600,
+        Range_Max = 1800,
 
         RPM = 35,
         ShootTimeMult = 1.1,
@@ -61,26 +55,12 @@ SWEP.BalanceStats = {
             [HITGROUP_RIGHTLEG] = 0.5,
             [HITGROUP_GEAR] = 0.5
         },
-
-        ReloadTimeMult = 1.25,
-
-        MoveSpeedMult = 0.9,
-        ShootingSpeedMult = 0.65,
-        MeleeSpeedMult = 1,
-        SightedSpeedMult = 0.6,
-        ReloadSpeedMult = 0.55,
     },
     [TacRP.BALANCE_PVE] = {
         Damage_Max = 25,
         Damage_Min = 55,
         Range_Min = 1000,
         Range_Max = 3500,
-
-        MoveSpeedMult = 0.8,
-        ShootingSpeedMult = 0.55,
-        SightedSpeedMult = 0.75,
-        MeleeSpeedMult = 1,
-        ReloadSpeedMult = 1,
     },
     [TacRP.BALANCE_OLDSCHOOL] = {
         HipFireSpreadPenalty = 0.024

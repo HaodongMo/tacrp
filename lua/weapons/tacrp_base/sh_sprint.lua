@@ -11,7 +11,6 @@ function SWEP:GetIsSprinting()
 
     local walkspeed = owner:GetWalkSpeed()
     local runspeed = owner:GetRunSpeed()
-    local curspeed = owner:GetVelocity():Length()
 
     if owner.TacRP_SprintBlock then return false end
     if owner:GetNWBool("TacRPChargeState", false) then return true end
@@ -21,7 +20,7 @@ function SWEP:GetIsSprinting()
         if SPRINT and SPRINT:IsSprinting(owner) then
             return true
         else
-            return owner.isSprinting == true and (owner.sprintProgress or 0) > 0 and owner:KeyDown(IN_SPEED) and !owner:Crouching() and curspeed > walkspeed and owner:OnGround()
+            return owner.isSprinting == true and (owner.sprintProgress or 0) > 0 and owner:KeyDown(IN_SPEED) and !owner:Crouching() and owner:OnGround()
         end
     end
 
@@ -30,7 +29,7 @@ function SWEP:GetIsSprinting()
 
     if !owner.TacRP_Moving then return false end -- Don't check IN_ move keys because 1) controllers and 2) bots
     if !owner:KeyDown(IN_SPEED) then return false end -- SetButtons does not seem to affect this?
-    if curspeed <= 0 then return false end
+    -- if curspeed <= 0 then return false end -- Unfortunately this is not predictible
     if !owner:OnGround() then return false end
 
     if self:GetOwner():GetInfoNum("tacrp_aim_cancels_sprint", 0) > 0 and self:GetScopeLevel() > 0 then return false end

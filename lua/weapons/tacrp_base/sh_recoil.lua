@@ -68,7 +68,7 @@ function SWEP:ApplyRecoil()
     local vis_kick = self:GetValue("RecoilVisualKick")
     local vis_shake = 0
 
-    vis_kick = vis_kick
+    vis_kick = vis_kick * TacRP.ConVars["mult_recoil_vis"]:GetFloat()
     vis_shake = 0
 
     if self:GetInBipod() then

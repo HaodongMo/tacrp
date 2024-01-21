@@ -27,28 +27,27 @@ ENT.AudioLoop = "TacRP/weapons/rpg7/rocket_flight-1.wav"
 
 function ENT:Detonate()
     local attacker = self.Attacker or self:GetOwner() or self
-    local mult = self.NPCDamage and 0.5 or 1
-
+    local mult = TacRP.ConVars["mult_damage_explosive"]:GetFloat() * (self.NPCDamage and 0.5 or 1)
+    local dmg = 150
     if engine.ActiveGamemode() == "terrortown" then
-        util.BlastDamage(self, attacker, self:GetPos(), 256, 35)
-    else
-        util.BlastDamage(self, attacker, self:GetPos(), 300, 150 * mult)
-
-        self:FireBullets({
-            Attacker = attacker,
-            Damage = 200 * mult,
-            Tracer = 0,
-            Src = self:GetPos(),
-            Dir = self:GetForward(),
-            HullSize = 0,
-            Distance = 32,
-            IgnoreEntity = self,
-            Callback = function(atk, btr, dmginfo)
-                dmginfo:SetDamageType(DMG_AIRBOAT + DMG_BLAST) // airboat damage for helicopters and LVS vehicles
-                dmginfo:SetDamageForce(self:GetForward() * 7000) // LVS uses this to calculate penetration!
-            end,
-        })
+        dmg = 55
     end
+
+    util.BlastDamage(self, attacker, self:GetPos(), 300, dmg * mult)
+    self:FireBullets({
+        Attacker = attacker,
+        Damage = dmg * mult,
+        Tracer = 0,
+        Src = self:GetPos(),
+        Dir = self:GetForward(),
+        HullSize = 0,
+        Distance = 32,
+        IgnoreEntity = self,
+        Callback = function(atk, btr, dmginfo)
+            dmginfo:SetDamageType(DMG_AIRBOAT + DMG_BLAST) // airboat damage for helicopters and LVS vehicles
+            dmginfo:SetDamageForce(self:GetForward() * 7000) // LVS uses this to calculate penetration!
+        end,
+    })
 
     local fx = EffectData()
     fx:SetOrigin(self:GetPos())

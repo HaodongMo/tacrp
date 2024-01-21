@@ -1,4 +1,4 @@
-net.Receive("TacRP_networkweapon", function(len)
+net.Receive("tacrp_networkweapon", function(len)
     local wpn = net.ReadEntity()
 
     -- When the server immediately calls NetworkWeapon on a new weapon,

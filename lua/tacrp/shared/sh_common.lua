@@ -1,4 +1,4 @@
-TacRP.Version = "17" // 2023-12-24
+TacRP.Version = "18" // 2024-01-07
 
 TacRP.PenTable = {
     [MAT_ANTLION]     = 0.1,
@@ -174,9 +174,6 @@ TacRP.BalanceUseTiers = {
 
 TacRP.BalanceDefaults = {
     [TacRP.BALANCE_SBOX] = {
-        RecoilVisualKick = 0.85,
-        MeleeSpeedMult = 1,
-        ReloadSpeedMult = 1,
     },
     [TacRP.BALANCE_PVE] = {
         RecoilVisualKick = 0.75,

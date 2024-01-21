@@ -5,7 +5,7 @@ function SWEP:GetReloadTime(base)
     if !valfunc(self, "ShotgunReload") then
         local seq = vm:LookupSequence(self:TranslateSequence("reload"))
         local basetime = vm:SequenceDuration(seq)
-        local mult = valfunc(self, "ReloadTimeMult")
+        local mult = valfunc(self, "ReloadTimeMult") / TacRP.ConVars["mult_reloadspeed"]:GetFloat()
 
         return basetime * mult
     else
@@ -17,7 +17,7 @@ function SWEP:GetReloadTime(base)
         local time_2 = vm:SequenceDuration(seq2)
         local time_3 = vm:SequenceDuration(seq3)
 
-        local mult = valfunc(self, "ReloadTimeMult")
+        local mult = valfunc(self, "ReloadTimeMult") / TacRP.ConVars["mult_reloadspeed"]:GetFloat()
 
         local basetime = time_1 + (time_2 * valfunc(self, "ClipSize")) + time_3
 

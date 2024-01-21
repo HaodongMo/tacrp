@@ -27,7 +27,9 @@ function SWEP:ReceivePreset()
         local attid = net.ReadUInt(TacRP.Attachments_Bits)
 
         if attid == 0 then
-            slottbl.Installed = nil
+            if slottbl.Installed then
+                self:Detach(slot, true)
+            end
         else
             local att = TacRP.Attachments_Index[attid]
             local atttbl = TacRP.GetAttTable(att)

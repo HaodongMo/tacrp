@@ -25,15 +25,8 @@ SWEP.BalanceStats = {
 
         Damage_Max = 22,
         Damage_Min = 15,
-
         Recoil_Kick = 1.5,
         Spread = 0.001,
-
-        MoveSpeedMult = 0.85,
-        ShootingSpeedMult = 0.75,
-        SightedSpeedMult = 0.75,
-        MeleeSpeedMult = 1,
-        ReloadSpeedMult = 1,
     },
     [TacRP.BALANCE_TTT] = {
         Description = "Semi-automatic model of an ubiquitous American rifle. Fine tuned for precision shooting.",
@@ -60,14 +53,6 @@ SWEP.BalanceStats = {
             [HITGROUP_RIGHTLEG] = 0.75,
             [HITGROUP_GEAR] = 0.9
         },
-
-        ReloadTimeMult = 1.25,
-
-        MoveSpeedMult = 0.9,
-        ShootingSpeedMult = 0.8,
-        MeleeSpeedMult = 1,
-        SightedSpeedMult = 0.55,
-        ReloadSpeedMult = 0.65,
     },
 }
 

@@ -290,7 +290,7 @@ hook.Add("EntityTakeDamage", "tacrp_fire_cloud", function(ent, dmginfo)
             if ent:GetClass() == "prop_physics" then
                 dmginfo:SetDamageType(DMG_DIRECT) -- some props like to burn slowly against DMG_BURN or DMG_SLOWBURN. don't.
             end
-            dmginfo:ScaleDamage(3) -- tremendous damage to props
+            dmginfo:ScaleDamage(2) -- tremendous damage to props
         end
         dmginfo:SetDamageForce(Vector()) -- fire does not push things around. still applies to players, but that can't be helped.
     end

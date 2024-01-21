@@ -49,6 +49,9 @@ ENT.ImpactSounds = {
 
 ENT.ImpactType = "pistol"
 
+ENT.AmmoType = nil
+ENT.AmmoCount = nil
+
 function ENT:Initialize()
     self:SetModel(self.Model)
 
@@ -57,6 +60,7 @@ function ENT:Initialize()
         self:SetMoveType(MOVETYPE_VPHYSICS)
         self:SetSolid(SOLID_VPHYSICS)
         self:SetCollisionGroup(COLLISION_GROUP_DEBRIS)
+        self:SetUseType(SIMPLE_USE)
 
         self:PhysWake()
 
@@ -73,6 +77,11 @@ function ENT:Initialize()
             self.fingerprints = {}
             table.insert(self.fingerprints, self:GetOwner())
         end
+    end
+
+    if self.AmmoType and self.AmmoCount then
+        self.FadeTime = math.max(self.FadeTime, 120)
+        self:SetOwner(NULL) -- Owner can't +USE their own entities
     end
 end
 
@@ -95,7 +104,7 @@ function ENT:Think()
         self.SpawnTime = CurTime()
     end
 
-    if (self.SpawnTime + self.FadeTime) <= CurTime() then
+    if SERVER and (self.SpawnTime + self.FadeTime) <= CurTime() then
 
         self:SetRenderFX( kRenderFxFadeFast )
 
@@ -111,6 +120,16 @@ function ENT:Think()
                     return
                 end
             end
+        end
+    end
+end
+
+function ENT:Use(ply)
+    if self.AmmoType and (self.AmmoCount or 0) > 0 and (self.SpawnTime + 0.5 <= CurTime()) then
+        local given = ply:GiveAmmo(self.AmmoCount, self.AmmoType)
+        self.AmmoCount = self.AmmoCount - given
+        if self.AmmoCount <= 0 then
+            self:Remove()
         end
     end
 end

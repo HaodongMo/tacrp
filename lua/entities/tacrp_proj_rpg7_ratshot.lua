@@ -135,6 +135,8 @@ function ENT:Detonate()
         end
     end
 
+    local mult = TacRP.ConVars["mult_damage_explosive"]:GetFloat()
+
     self:FireBullets({
         Attacker = attacker,
         Damage = 5,
@@ -157,13 +159,13 @@ function ENT:Detonate()
     for _, ent in pairs(ents.FindInCone(src, dir, 2048, 0.707)) do
         local tr = util.QuickTrace(src, ent:GetPos() - src, {self, ent})
         if tr.Fraction == 1 then
-            dmg:SetDamage(130 * math.Rand(0.75, 1) * Lerp((ent:GetPos():DistToSqr(src) / 4194304) ^ 0.5, 1, 0.25) * (self.NPCDamage and 0.5 or 1))
+            dmg:SetDamage(130 * math.Rand(0.75, 1) * Lerp((ent:GetPos():DistToSqr(src) / 4194304) ^ 0.5, 1, 0.25) * (self.NPCDamage and 0.5 or 1) * mult)
             if !ent:IsOnGround() then dmg:ScaleDamage(1.5) end
             ent:TakeDamageInfo(dmg)
         end
     end
 
-    util.BlastDamage(self, attacker, src, 256, 50)
+    util.BlastDamage(self, attacker, src, 256, 50 * mult)
 
     self:EmitSound("TacRP/weapons/rpg7/explode.wav", 125, 100)
     self:EmitSound("physics/metal/metal_box_break1.wav", 100, 200)

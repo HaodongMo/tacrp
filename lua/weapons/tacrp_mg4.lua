@@ -31,12 +31,6 @@ SWEP.BalanceStats = {
         Damage_Min = 22,
 
         ClipSize = 75,
-
-        MoveSpeedMult = 0.75,
-        ShootingSpeedMult = 0.5,
-        SightedSpeedMult = 0.75,
-        MeleeSpeedMult = 1,
-        ReloadSpeedMult = 1,
     },
     [TacRP.BALANCE_TTT] = {
 
@@ -58,26 +52,12 @@ SWEP.BalanceStats = {
             [HITGROUP_RIGHTLEG] = 0.75,
             [HITGROUP_GEAR] = 0.9
         },
-
-        ReloadTimeMult = 1.2,
-
-        MoveSpeedMult = 0.85,
-        ShootingSpeedMult = 0.4,
-        MeleeSpeedMult = 1,
-        SightedSpeedMult = 0.5,
-        ReloadSpeedMult = 0.4,
     },
     [TacRP.BALANCE_PVE] = {
         Damage_Max = 19,
         Damage_Min = 14,
 
         ClipSize = 100,
-
-        MoveSpeedMult = 0.75,
-        ShootingSpeedMult = 0.5,
-        SightedSpeedMult = 0.75,
-        MeleeSpeedMult = 1,
-        ReloadSpeedMult = 1,
     },
     [TacRP.BALANCE_OLDSCHOOL] = {
         Description = "Balanced light machine gun that can put down some serious firepower.",
