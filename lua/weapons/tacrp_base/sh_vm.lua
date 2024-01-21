@@ -103,10 +103,10 @@ function SWEP:GetViewModelPosition(pos, ang)
     ---------------------------------------------
     -- Aiming & Peeking
     ---------------------------------------------
-    local ads = self:GetValue("AimDownSightsTime")
+    local ads = self:GetAimDownSightsTime()
     if self:GetScopeLevel() > 0 then
         if self:GetSprintLockTime() > CurTime() then
-            ads = ads + self:GetValue("SprintToFireTime")
+            ads = ads + self:GetSprintToFireTime()
         end
         sightdelta = m_appor(sightdelta, 1, FT / ads)
     else
@@ -218,7 +218,7 @@ function SWEP:GetViewModelPosition(pos, ang)
     extra_offsetang.y = extra_offsetang.y - (swayang.p * cor_val)
     extra_offsetang.p = extra_offsetang.p + (swayang.y * cor_val)
 
-    local idlesway = Lerp(self:GetSightDelta(), 1 / 3, 0 )
+    local idlesway = Lerp(self:GetSightDelta(), 1 / 3, 0)
     extra_offsetpos.x = extra_offsetpos.x + (swayang.y * cor_val * idlesway)
     extra_offsetpos.z = extra_offsetpos.z + (swayang.p * cor_val * idlesway)
 
@@ -252,7 +252,7 @@ function SWEP:GetViewModelPosition(pos, ang)
     ---------------------------------------------
     -- Sprinting
     ---------------------------------------------
-    local stf = self:GetValue("SprintToFireTime")
+    local stf = self:GetSprintToFireTime()
     if self.LastWasSprinting and !self:GetCustomize() and !self:CanShootInSprint() then
         if self:GetLastMeleeTime() + 0.5 > CurTime() or self:GetStartPrimedGrenadeTime() + 0.8 > CurTime() then
             sprintdelta = m_appor(sprintdelta, 0, FT / 0.2)
@@ -262,7 +262,7 @@ function SWEP:GetViewModelPosition(pos, ang)
     else
         -- not accurate to how sprint progress works but looks much smoother
         if self:GetScopeLevel() > 0 and self:GetSprintLockTime() > UnPredictedCurTime() then
-            stf = stf + self:GetValue("AimDownSightsTime") * 0.5
+            stf = stf + self:GetAimDownSightsTime() * 0.5
         end
         sprintdelta = m_appor(sprintdelta, 0, FT / stf)
     end

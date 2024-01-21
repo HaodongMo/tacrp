@@ -194,11 +194,11 @@ function SWEP:ThinkSights()
 
     local amt = self:GetSightAmount()
 
-    local adst = self:GetValue("AimDownSightsTime")
+    local adst = self:GetAimDownSightsTime()
 
     if sighted then
         if self:GetSprintLockTime() > CurTime() then
-            adst = adst + self:GetValue("SprintToFireTime")
+            adst = adst + self:GetSprintToFireTime()
         end
         amt = math.Approach(amt, 1, FT / adst)
     else
@@ -345,33 +345,19 @@ function SWEP:DoOldSchoolScopeBehavior()
             and !self:HasOptic()
 end
 
--- function SWEP:CheckFlashlightPointing()
---     if game.SinglePlayer() then return 0 end
---     if !TacRP.ConVars["flashlight_blind"]:GetBool() then return 0 end
---     if self.FlashlightPointingCache and self.FlashlightPointingCache[2] == CurTime() then return self.FlashlightPointingCache[1] end
---     local src0 = self:GetOwner():EyePos()
---     local v = 0
---     for _, ply in pairs(player.GetAll()) do
---         if ply == self:GetOwner() or !ply:Alive() or !IsValid(ply:GetActiveWeapon()) or !ply:GetActiveWeapon().ArcticTacRP then continue end
---         --  !ply:GetActiveWeapon():GetValue("Flashlight") or !ply:GetActiveWeapon():GetTactical()
---         local src, dir = ply:GetActiveWeapon():GetMuzzleOrigin(), ply:GetActiveWeapon():GetShootDir():Forward()
---         local diff = src - src0
 
---         local add = 1
+function SWEP:GetAimDownSightsTime(base)
+    if base then
+        return self:GetBaseValue("AimDownSightsTime") * TacRP.ConVars["mult_aimdownsights"]:GetFloat()
+    else
+        return self:GetValue("AimDownSightsTime") * TacRP.ConVars["mult_aimdownsights"]:GetFloat()
+    end
+end
 
---         local dot = -dir:Dot(EyeAngles():Forward())
---         if dot < 0.707 then continue end
---         add = add * math.Clamp((dot - 0.707) / (1 - 0.707), 0, 1)
-
---         local distsqr = diff:LengthSqr()
---         add = add * (1 - math.Clamp(distsqr / 4194304, 0, 1)) ^ 1.25
-
---         local tr = util.QuickTrace(src, self:GetOwner():EyePos() - src, {self:GetOwner(), ply})
---         if tr.Fraction < 1 then continue end
-
---         v = v + add
---     end
-
---     self.FlashlightPointingCache = {v, CurTime()}
---     return v
--- end
+function SWEP:GetSprintToFireTime(base)
+    if base then
+        return self:GetBaseValue("SprintToFireTime") * TacRP.ConVars["mult_sprinttofire"]:GetFloat()
+    else
+        return self:GetValue("SprintToFireTime") * TacRP.ConVars["mult_sprinttofire"]:GetFloat()
+    end
+end

@@ -794,6 +794,19 @@ local conVars = {
         min = 0.1,
         replicated = true,
     },
+    {
+        name = "mult_aimdownsights",
+        default = "1",
+        min = 0.1,
+        replicated = true,
+    },
+    {
+        name = "mult_sprinttofire",
+        default = "1",
+        min = 0.1,
+        replicated = true,
+    },
+
 
     {
         name = "recoilreset",
@@ -1212,6 +1225,21 @@ local function menu_balance_ti(panel)
         command = "tacrp_freeaim"
     })
     panel:ControlHelp("While not aiming, moving around will cause the crosshair to move off center.")
+    panel:AddControl("slider", {
+        label = "Aim Down Sights Time",
+        command = "tacrp_mult_aimdownsights",
+        type = "float",
+        min = 0.5,
+        max = 1.5,
+    })
+    panel:AddControl("slider", {
+        label = "Sprint To Fire Time",
+        command = "tacrp_mult_sprinttofire",
+        type = "float",
+        min = 0.5,
+        max = 1.5,
+    })
+
 
     header(panel, "\nAmmo & Reloading")
     panel:AddControl("checkbox", {
