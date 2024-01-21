@@ -253,18 +253,27 @@ function SWEP:GetViewModelPosition(pos, ang)
     -- Sprinting
     ---------------------------------------------
     local stf = self:GetSprintToFireTime()
-    if self.LastWasSprinting and !self:GetCustomize() and !self:CanShootInSprint() then
-        if self:GetLastMeleeTime() + 0.5 > CurTime() or self:GetStartPrimedGrenadeTime() + 0.8 > CurTime() then
-            sprintdelta = m_appor(sprintdelta, 0, FT / 0.2)
-        else
-            sprintdelta = m_appor(sprintdelta, 1, FT / stf)
-        end
-    else
+    if !self.LastWasSprinting and !(self:GetCustomize() or self:CanShootInSprint()) then
         -- not accurate to how sprint progress works but looks much smoother
         if self:GetScopeLevel() > 0 and self:GetSprintLockTime() > UnPredictedCurTime() then
             stf = stf + self:GetAimDownSightsTime() * 0.5
         end
         sprintdelta = m_appor(sprintdelta, 0, FT / stf)
+        self.LastReloadEnd = nil
+    elseif self:GetReloading() then
+        if self.LastWasSprinting and self:GetEndReload() then
+            self.LastReloadEnd = self.LastReloadEnd or (self:GetReloadFinishTime() - UnPredictedCurTime())
+            sprintdelta = 1 - self:Curve((self:GetReloadFinishTime() - UnPredictedCurTime()) / self.LastReloadEnd)
+        else
+            sprintdelta = m_appor(sprintdelta, 0, FT / 0.5)
+        end
+    else
+        if self:GetLastMeleeTime() + 0.5 > CurTime() or self:GetStartPrimedGrenadeTime() + 0.8 > CurTime() then
+            sprintdelta = m_appor(sprintdelta, 0, FT / 0.2)
+        else
+            sprintdelta = m_appor(sprintdelta, 1, FT / stf)
+        end
+        self.LastReloadEnd = nil
     end
     local curvedsprintdelta = self:Curve(sprintdelta)
     if curvedsprintdelta > 0 then
