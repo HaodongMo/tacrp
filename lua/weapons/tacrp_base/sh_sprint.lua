@@ -9,6 +9,10 @@ function SWEP:GetIsSprinting()
         return true
     end
 
+    if self:DoForceSightsBehavior() and self:GetScopeLevel() == 0 then
+        return true
+    end
+
     local walkspeed = owner:GetWalkSpeed()
     local runspeed = owner:GetRunSpeed()
 
@@ -117,4 +121,8 @@ end
 
 function SWEP:CanReloadInSprint(base)
     return TacRP.ConVars["sprint_reload"]:GetBool()
+end
+
+function SWEP:DoForceSightsBehavior()
+    return TacRP.ConVars["sightsonly"]:GetBool() and self:GetValue("Scope")
 end

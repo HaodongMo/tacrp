@@ -693,6 +693,24 @@ local conVars = {
         notify = true,
         min = 0,
         max = 1,
+        callback = function(convar, old, new)
+            if tonumber(new) == 1 and SERVER then
+                TacRP.ConVars["sightsonly"]:SetBool(false)
+            end
+        end,
+    },
+    {
+        name = "sightsonly",
+        default = "0",
+        replicated = true,
+        notify = true,
+        min = 0,
+        max = 1,
+        callback = function(convar, old, new)
+            if tonumber(new) == 1 and SERVER then
+                TacRP.ConVars["oldschool"]:SetBool(false)
+            end
+        end,
     },
     {
         name = "deploysafety",
@@ -1266,6 +1284,11 @@ local function menu_mechanics_ti(panel)
         label = "Lower Weapon While Airborne",
         command = "tacrp_sprint_counts_midair"})
     panel:ControlHelp("Requires \"Lower Weapon While Sprinting\" to be enabled.")
+    panel:AddControl("checkbox", {
+        label = "Lower Weapon While Not Aiming",
+        command = "tacrp_sightsonly"
+    })
+    panel:ControlHelp("Weapons can only be fired when aiming, like DarkRP weapons. Doesn't affect weapons that cannot aim.\nDisables safety and can't use with Old School Scopes.")
 
     panel:AddControl("checkbox", {
         label = "Movement Penalty",

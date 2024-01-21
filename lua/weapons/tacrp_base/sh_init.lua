@@ -74,7 +74,7 @@ function SWEP:Deploy()
     self:ToggleBlindFire(TacRP.BLINDFIRE_NONE)
 
     if TacRP.ConVars["deploysafety"]:GetBool() then
-        self:SetSafe(true)
+        self:ToggleSafety(true)
     end
 
     self:SetShouldHoldType()
