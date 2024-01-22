@@ -253,7 +253,7 @@ function SWEP:GetViewModelPosition(pos, ang)
     -- Sprinting
     ---------------------------------------------
     local stf = self:GetSprintToFireTime()
-    if !self.LastWasSprinting and !(self:GetCustomize() or self:CanShootInSprint()) then
+    if !self.LastWasSprinting or self:GetCustomize() or self:CanShootInSprint() then
         -- not accurate to how sprint progress works but looks much smoother
         if self:GetScopeLevel() > 0 and self:GetSprintLockTime() > UnPredictedCurTime() then
             stf = stf + self:GetAimDownSightsTime() * 0.5
