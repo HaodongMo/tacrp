@@ -8,7 +8,7 @@ SWEP.PrintName = "PGM Hécate II"
 SWEP.Category = "Tactical RP" // "Tactical RP (Extras)"
 
 SWEP.SubCatTier = "2Operator"
-SWEP.SubCatType = "7Sniper Rifle"
+SWEP.SubCatType = "9Anti-Materiel Rifle"
 
 SWEP.Description = "Heavy anti-materiel rifle that can kill in one shot.\nEquipped with a 12x scope by default."
 SWEP.Description_Quote = "Does not fire phantom bullets."
