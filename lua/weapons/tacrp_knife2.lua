@@ -7,7 +7,7 @@ SWEP.PrintName = "Jackal Knife"
 SWEP.Category = "Tactical RP (Special)"
 
 SWEP.SubCatTier = "9Special"
-SWEP.SubCatType = "8Melee Weapon"
+SWEP.SubCatType = "8Bladed Melee"
 
 SWEP.Description = "Very edgy looking knife. Light, partially skeletized blade makes it faster to swing but do less damage."
 
