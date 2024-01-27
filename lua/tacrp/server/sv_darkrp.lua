@@ -22,7 +22,7 @@ hook.Add("onDarkRPWeaponDropped", "TacRP", function(ply, ent, wep)
 end)
 
 hook.Add("PlayerPickupDarkRPWeapon", "TacRP", function(ply, ent, wep)
-    if wep.ArcticTacRP and wep.Attachments and ent.Attachments then
+    if wep.ArcticTacRP and wep.Attachments then
         -- DarkRP will remove wep (created with ents.Create?) so we must make one ourselves here too
         if ply:HasWeapon(wep:GetClass()) or ply:KeyDown(IN_WALK) then
             ply:PickupObject(ent)
@@ -34,10 +34,12 @@ hook.Add("PlayerPickupDarkRPWeapon", "TacRP", function(ply, ent, wep)
         wep = ply:Give(class, true)
         wep.GaveDefaultAmmo = true -- did DefaultClip kill your father or something, arctic?
 
+        if ent.Attachments then
         for k, v in pairs(ent.Attachments) do
             wep.Attachments[k].Installed = TacRP.Attachments_Index[v]
         end
         wep:NetworkWeapon()
+        end
 
         ent.Attachments = nil -- Don't duplicate attachments
 
