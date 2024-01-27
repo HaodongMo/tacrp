@@ -405,13 +405,12 @@ SWEP.StatGroups = {
         Description = "rating.handling.desc",
         RatingFunction = function(self, base)
             local score = 0
-            local valfunc = base and self.GetBaseValue or self.GetValue
 
             -- [40] sprint
-            score = score + math.Clamp(1 - (valfunc(self, "SprintToFireTime") - 0.15) / 0.5, 0, 1) * 40
+            score = score + math.Clamp(1 - (self:GetSprintToFireTime(base) - 0.15) / 0.5, 0, 1) * 40
 
             -- [45] ads
-            score = score + math.Clamp(1 - (valfunc(self, "AimDownSightsTime") - 0.15) / 0.5, 0, 1) * 45
+            score = score + math.Clamp(1 - (self:GetAimDownSightsTime(base) - 0.15) / 0.5, 0, 1) * 45
 
             -- [15] deploy
             score = score + math.Clamp(1 - (self:GetDeployTime(base) - 0.5) / 1.5, 0, 1) * 15
@@ -1054,6 +1053,9 @@ SWEP.StatDisplay = {
         Name = "stat.sprinttofire",
         Description = "stat.sprinttofire.desc",
         Value = "SprintToFireTime",
+        AggregateFunction = function(self, base, val)
+            return math.Round(self:GetSprintToFireTime(base), 3)
+        end,
         Unit = "unit.second",
         LowerIsBetter = true,
     },
@@ -1061,6 +1063,9 @@ SWEP.StatDisplay = {
         Name = "stat.aimdownsights",
         Description = "stat.aimdownsights.desc",
         Value = "AimDownSightsTime",
+        AggregateFunction = function(self, base, val)
+            return math.Round(self:GetAimDownSightsTime(base), 3)
+        end,
         Unit = "unit.second",
         LowerIsBetter = true,
         ValueCheck = "Scope",

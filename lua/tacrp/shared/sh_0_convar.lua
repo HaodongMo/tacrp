@@ -693,6 +693,24 @@ local conVars = {
         notify = true,
         min = 0,
         max = 1,
+        callback = function(convar, old, new)
+            if tonumber(new) == 1 and SERVER then
+                TacRP.ConVars["sightsonly"]:SetBool(false)
+            end
+        end,
+    },
+    {
+        name = "sightsonly",
+        default = "0",
+        replicated = true,
+        notify = true,
+        min = 0,
+        max = 1,
+        callback = function(convar, old, new)
+            if tonumber(new) == 1 and SERVER then
+                TacRP.ConVars["oldschool"]:SetBool(false)
+            end
+        end,
     },
     {
         name = "deploysafety",
@@ -776,6 +794,19 @@ local conVars = {
         min = 0.1,
         replicated = true,
     },
+    {
+        name = "mult_aimdownsights",
+        default = "1",
+        min = 0.1,
+        replicated = true,
+    },
+    {
+        name = "mult_sprinttofire",
+        default = "1",
+        min = 0.1,
+        replicated = true,
+    },
+
 
     {
         name = "recoilreset",
@@ -1110,6 +1141,7 @@ local function menu_balance_ti(panel)
     lb_balance:SizeToContents()
     panel:Help("Weapon are divided into 4 tiers, with higher tiers having slightly better overall performance.\nDisable to adjust weapon performance to around the same level.")
     panel:Help("TTT option is untiered, and has lower RPM and high time to kill close to vanilla TTT weapons.")
+	panel:Help("Weapon tiers, best to worst: \n1 - Elite \n2 - Operator \n3 - Security \n4 - Consumer")
 
     panel:AddControl("slider", {
         label = "Overall Damage",
@@ -1194,6 +1226,21 @@ local function menu_balance_ti(panel)
         command = "tacrp_freeaim"
     })
     panel:ControlHelp("While not aiming, moving around will cause the crosshair to move off center.")
+    panel:AddControl("slider", {
+        label = "Aim Down Sights Time",
+        command = "tacrp_mult_aimdownsights",
+        type = "float",
+        min = 0.5,
+        max = 1.5,
+    })
+    panel:AddControl("slider", {
+        label = "Sprint To Fire Time",
+        command = "tacrp_mult_sprinttofire",
+        type = "float",
+        min = 0.5,
+        max = 1.5,
+    })
+
 
     header(panel, "\nAmmo & Reloading")
     panel:AddControl("checkbox", {
@@ -1266,6 +1313,11 @@ local function menu_mechanics_ti(panel)
         label = "Lower Weapon While Airborne",
         command = "tacrp_sprint_counts_midair"})
     panel:ControlHelp("Requires \"Lower Weapon While Sprinting\" to be enabled.")
+    panel:AddControl("checkbox", {
+        label = "Lower Weapon While Not Aiming",
+        command = "tacrp_sightsonly"
+    })
+    panel:ControlHelp("Weapons can only be fired when aiming, like DarkRP weapons. Doesn't affect weapons that cannot aim.\nDisables safety and can't use with Old School Scopes.")
 
     panel:AddControl("checkbox", {
         label = "Movement Penalty",

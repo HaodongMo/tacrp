@@ -61,7 +61,7 @@ function SWEP:GetHintCapabilities()
     if self:GetFiremodeAmount() > 1 and !self:GetSafe() then
         self.CachedCapabilities["+use/+reload"] = {so = 11, str = "Firemode"}
     end
-    if self:GetFiremodeAmount() > 0 then
+    if self:GetFiremodeAmount() > 0 and !self:DoForceSightsBehavior() then
         if self:GetSafe() then
             self.CachedCapabilities["+use/+attack2"] = {so = 12, str = "Disable Safety"}
         else

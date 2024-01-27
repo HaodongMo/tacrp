@@ -52,6 +52,8 @@ function SWEP:ToggleSafety(onoff)
     if self:GetValue("Firemode") == 0 then return end
     onoff = onoff or !self:GetSafe()
 
+    if onoff and self:DoForceSightsBehavior() then return end
+
     self:SetSafe(onoff)
 
     if onoff == true then

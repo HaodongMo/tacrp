@@ -32,6 +32,9 @@ function SWEP:PrimaryAttack()
         return
     end
 
+    if self:GetJammed() then return end
+    if self:GetCurrentFiremode() < 0 and self:GetBurstCount() >= -self:GetCurrentFiremode() then return end
+
     if self:GetReloading() and self:GetValue("ShotgunReload") then
         if TacRP.ConVars["reload_sg_cancel"]:GetBool() then
             self:CancelReload(false)
@@ -41,13 +44,9 @@ function SWEP:PrimaryAttack()
         end
     end
 
-    if self:StillWaiting() then
-        return
-    end
-
-    if self:GetJammed() then return end
-
-    if self:GetCurrentFiremode() < 0 and self:GetBurstCount() >= -self:GetCurrentFiremode() then return end
+    if self:SprintLock() then return end
+    if self:GetSafe() and !self:GetReloading() then self:ToggleSafety(false) return end
+    if self:StillWaiting() then return end
 
     if self:Clip1() < self:GetValue("AmmoPerShot") then
         local ret = self:RunHook("Hook_PreDryfire")
@@ -95,10 +94,6 @@ function SWEP:PrimaryAttack()
     end
 
     self:SetBaseSettings()
-
-    if self:SprintLock() then return end
-
-    if self:GetSafe() then self:ToggleSafety(false) return end
 
     local stop = self:RunHook("Hook_PreShoot")
     if stop then return end

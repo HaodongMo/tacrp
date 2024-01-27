@@ -40,6 +40,7 @@ function SWEP:Reload()
             self:SetTimer(self.ReloadUpInTime * mult, function()
                 self:RestoreClip(self:GetCapacity())
                 self:SetNthShot(0)
+                self:SetEndReload(true)
             end, "ReloadUpIn")
         end
     end
@@ -178,7 +179,7 @@ function SWEP:EndReload()
             self:SetNthShot(0)
         end
         self:SetReloading(false)
-
+        self:SetEndReload(false)
     end
 
     self:RunHook("Hook_EndReload")
