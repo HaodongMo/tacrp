@@ -60,9 +60,10 @@ function SWEP:DrawCustomModel(wm, custom_wm)
 
         if model.WMBase then
             parentmdl = self:GetOwner()
-            parentmdl:SetupBones()
-            parentmdl:InvalidateBoneCache()
         end
+
+        parentmdl:SetupBones()
+        parentmdl:InvalidateBoneCache()
 
         if !offset_pos or !offset_ang then
             local slot = model.Slot
