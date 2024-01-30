@@ -106,6 +106,12 @@ local function genselecta( c, host, slotnum, slottab )
 	end
 end
 
+local function rt( fu, w, h )
+	surface.SetDrawColor( 0, 0, 0, 63 )
+	surface.DrawRect( 0, 0, w, h )
+	return true
+end
+
 local weh = {
 	["Manufacturer"] = "Trivia_Manufacturer",
 	["Production Year"] = "Trivia_Year",
@@ -122,12 +128,28 @@ end
 local pages = {
 	{
 		Name = "Customize",
-		Initialize = function( self, par, c )
+		Initialize = function( page, par, c )
 			local s = c.s
+
+			local p_left = page:Add( "DPanel" )
+			p_left:SetTall( par:GetTall() )
+			p_left:SetWide( par:GetWide() )
+			p_left:SetMouseInputEnabled( true )
+			p_left.Paint = rt
+			local gapper = s(24+90+48+24)--+32+24+24)
+			function p_left:Paint( w, h )
+				-- surface.SetDrawColor( 25, 0, 0, 127 )
+				-- surface.DrawRect( 0, 0, gapper, h )
+				return true
+			end
+			function p_left:Think()
+				p_left:SetX( page.SlidePer * (gapper or self:GetWide()) )
+			end
+
 			local slotlist = {}
 			local slotlistt = {}
 			for slotnum, slottab in ipairs( c.w.Attachments ) do
-				local slot = self:Add( "DButton" )
+				local slot = p_left:Add( "DButton" )
 				slotlist[slotnum] = slot
 				slotlistt[slotnum] = slottab
 				slot:SetSize( s(90), 0 )
@@ -159,19 +181,18 @@ local pages = {
 					return true
 				end
 
-				local preself = self
 				function slot:DoRightClick()
 					if slottab.Installed then
 						c.w:Detach( slotnum )
-						preself:InvalidateLayout()
+						page:InvalidateLayout()
 					end
 				end
 
 				function slot:DoClick()
-					genselecta( c, preself, slotnum, slottab )
+					genselecta( c, page, slotnum, slottab )
 				end
 			end
-			function self:PerformLayout()
+			function page:PerformLayout()
 				local obump = 0
 				for i, v in ipairs( slotlist ) do
 					local ins = slotlistt[i].Installed
@@ -194,9 +215,9 @@ local pages = {
 	},
 	{
 		Name = "Statistics",
-		Initialize = function( self, par, c )
+		Initialize = function( page, par, c )
 		end,
-		Paint = function( self, w, h, c )
+		Paint = function( page, w, h, c )
 			local s = c.s
 			draw.SimpleText( "Statistics panel goes here.", "C2_1", w/2 + s(1), h/2 + s(1), color_black, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER )
 			draw.SimpleText( "Statistics panel goes here.", "C2_1", w/2, h/2, color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER )
@@ -204,10 +225,42 @@ local pages = {
 	},
 	{
 		Name = "Information",
-		Initialize = function( self, par, c )
+		Initialize = function( page, par, c )
 			local s = c.s
+			
+			local p_top = page:Add( "DPanel" )
+			p_top:SetTall( par:GetTall() )
+			p_top:SetWide( par:GetWide() )
+			p_top:SetMouseInputEnabled( true )
+			local gapper = s(48+24+24)
+			function p_top:Paint( w, h )
+				-- surface.SetDrawColor( 25, 0, 0, 127 )
+				-- surface.DrawRect( 0, 0, w, gapper )
+				return true
+			end
+			function p_top:Think()
+				p_top:SetY( page.SlidePer * (gapper or self:GetTall()) )
+			end
+			--p_top:Hide()
+
+			
+			local p_bottom = page:Add( "DPanel" )
+			p_bottom:SetTall( par:GetTall() )
+			p_bottom:SetWide( par:GetWide() )
+			p_bottom:SetMouseInputEnabled( true )
+			local gapper = s(48+24+24)
+			function p_bottom:Paint( w, h )
+				-- surface.SetDrawColor( 25, 0, 0, 127 )
+				-- surface.DrawRect( 0, h-gapper, w, gapper )
+				return true
+			end
+			function p_bottom:Think()
+				p_bottom:SetY( ( (1-page.SlidePer) * (gapper or self:GetTall()) ) - gapper )
+			end
+
+
 			do
-				local header = self:Add( "DPanel" )
+				local header = p_top:Add( "DPanel" )
 				header:SetSize( c.sw - s(48), s(48) )
 				header:SetPos( s(24), s(24) )
 
@@ -226,10 +279,10 @@ local pages = {
 			end
 
 			do
-				local footer = self:Add( "DPanel" )
+				local footer = p_bottom:Add( "DPanel" )
 				local f_w, f_h = s(400), s(12+(12*1)+12)
 				footer:SetSize( f_w, f_h )
-				footer:SetPos( self:GetWide()/2 - f_w/2, self:GetTall() - f_h - s(12) )
+				footer:SetPos( page:GetWide()/2 - f_w/2, page:GetTall() - f_h - s(12) )
 				function footer:Paint( w, h )
 					surface.SetDrawColor( cb )
 					surface.DrawRect( 0, 0, w, h )
@@ -248,7 +301,6 @@ local pages = {
 					draw.SimpleText( c.w.Description_Quote, "C2_3I", s(24), s(12+(12*(lines+1))), color_white )
 				end
 
-				local preself = self
 				function footer:PerformLayout( w, h )
 					local desc = TacRP.MultiLineText( c.w.Description, w - s(48), "C2_3" )
 					local lines = #desc
@@ -256,13 +308,14 @@ local pages = {
 					f_h = s(12+(12*lines)+12)
 
 					self:SetSize( f_w, f_h )
-					self:SetPos( preself:GetWide()/2 - f_w/2, preself:GetTall() - f_h - s(12) )
+					self:SetPos( page:GetWide()/2 - f_w/2, page:GetTall() - f_h - s(12) )
+					gapper = f_h+s(12+12)
 				end
 			end
 
 			do
-				local footer = self:Add( "DPanel" )
-				local f_w, f_h = self:GetWide()/2 - s(400)/2 - s(24+12), s(4+(12*3)+4)
+				local footer = p_bottom:Add( "DPanel" )
+				local f_w, f_h = page:GetWide()/2 - s(400)/2 - s(24+12), s(4+(12*3)+4)
 				footer:SetSize( f_w, f_h )
 				footer:SetPos( s(24), c.sh - f_h - s(12) )
 				function footer:Paint( w, h )
@@ -288,12 +341,12 @@ local pages = {
 			end
 
 			do
-				local footer = self:Add( "DPanel" )
+				local footer = p_bottom:Add( "DPanel" )
 				local multiline = TacRP.MultiLineText( c.w.Credits, math.huge, "C2_3" )
 				if multiline[#multiline] == " " then
 					multiline[#multiline] = nil
 				end
-				local f_w, f_h = self:GetWide()/2 - s(400)/2 - s(24+12), s(4+(12*(#multiline))+4)
+				local f_w, f_h = page:GetWide()/2 - s(400)/2 - s(24+12), s(4+(12*(#multiline))+4)
 				footer:SetSize( f_w, f_h )
 				footer:SetPos( c.sw - f_w - s(24), c.sh - f_h - s(12) )
 				function footer:Paint( w, h )
@@ -330,29 +383,32 @@ local pages = {
 	},
 	{
 		Name = "Terminal Effect",
-		Initialize = function( self, par, c )
+		Initialize = function( page, par, c )
 		end,
-		Paint = function( self, w, h, c )
+		Paint = function( page, w, h, c )
 			local s = c.s
-			DST( "Terminal Effect panel goes here.", "C2_1", w/2, h/2, color_white, s(1), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER )
+			local h = math.ceil( Lerp(1+page.SlidePer, -s(20), h/2) )
+			DST( "Terminal Effect panel goes here.", "C2_1", w/2, h, color_white, s(1), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER )
 		end,
 	},
 	{
 		Name = "Newsletter",
-		Initialize = function( self, par, c )
+		Initialize = function( page, par, c )
 		end,
-		Paint = function( self, w, h, c )
+		Paint = function( page, w, h, c )
 			local s = c.s
-			DST( "Newsletter panel goes here.", "C2_1", w/2, h/2, color_white, s(1), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER )
+			local h = math.ceil( Lerp(1+page.SlidePer, -s(20), h/2) )
+			DST( "Newsletter panel goes here.", "C2_1", w/2, h, color_white, s(1), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER )
 		end,
 	},
 	{
 		Name = "Inspect",
-		Initialize = function( self, par, c )
+		Initialize = function( page, par, c )
 		end,
-		Paint = function( self, w, h, c )
+		Paint = function( page, w, h, c )
 			local s = c.s
-			DST( "Inspect panel goes here.", "C2_1", w/2, h/2, color_white, s(1), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER )
+			local h = math.ceil( Lerp(1+page.SlidePer, -s(20), h/2) )
+			DST( "Inspect panel goes here.", "C2_1", w/2, h, color_white, s(1), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER )
 		end,
 	},
 }
@@ -364,6 +420,7 @@ local uio = Material( "uio/shadow.png", "" )
 local c2_Currentpage = 3
 local c2_Desire = 3
 
+if IsValid( c2 ) then c2:Remove() end
 function SWEP:C2_Open()
 	if IsValid( c2 ) then c2:Remove() end
 	local s = ScreenScaleH
@@ -374,6 +431,7 @@ function SWEP:C2_Open()
 	c2:MakePopup()
 	c2:SetPopupStayAtBack( true )
 	c2:SetKeyboardInputEnabled( false )
+	c2:ShowCloseButton( false )
 	c2.btnMaxim:SetVisible( false )
 	c2.btnMinim:SetVisible( false )
 	c2.lblTitle:SetVisible( false )
@@ -427,12 +485,53 @@ function SWEP:C2_Open()
 		end
 	end
 
+	-- Close button
+	do
+		local cl = c2:Add("DButton")
+		cl:SetSize( s(12), s(12) )
+		cl:SetPos( sw - s(24+12), s(24/2 - 12/2) )
+		function cl:DoClick()
+			-- Customizing is a predicted bind.
+			-- Consider if you really want it to.
+			c2:Remove()
+		end
+		function cl:Paint( w, h )
+			surface.SetDrawColor( color_black )
+			surface.DrawRect( 0, 0, w, h )
+			surface.SetDrawColor( color_white )
+			surface.DrawOutlinedRect( 0, 0, w, h, s(1) )
+			
+			draw.SimpleText( "x", "C2_4", w/2, h/2 - s(1), color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER )
+			return true
+		end
+	end
+
+	-- Drop Weapon
+	do
+		local cl = c2:Add("DButton")
+		cl:SetSize( s(58), s(12) )
+		cl:SetPos( sw - s(24+12+4+58), s(24/2 - 12/2) )
+		function cl:DoClick()
+			RunConsoleCommand("tacrp_drop")
+			c2:Remove()
+		end
+		function cl:Paint( w, h )
+			surface.SetDrawColor( color_black )
+			surface.DrawRect( 0, 0, w, h )
+			surface.SetDrawColor( color_white )
+			surface.DrawOutlinedRect( 0, 0, w, h, s(1) )
+			
+			draw.SimpleText( "Drop Weapon", "C2_4", w/2, h/2, color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER )
+			return true
+		end
+	end
 	-- Tabs row
 	local totallength = s((#pages*72)+(#pages-1)*4)
 	for i, v in ipairs( pages ) do
 		local mbutton = c2:Add("DButton")
 		mbutton:SetSize( s(72), s(18) )
-		mbutton:SetPos( sw/2 - totallength/2 + s((i-1)*(72+4)), s(24/2 - 18/2) )
+		--mbutton:SetPos( sw/2 - totallength/2 + s((i-1)*(72+4)), s(24/2 - 18/2) )
+		mbutton:SetPos( s(24) + s((i-1)*(72+4)), s(24/2 - 18/2) )
 		mbutton:SetText( v.Name )
 		function mbutton:DoClick()
 			c2_Desire = i
@@ -502,12 +601,16 @@ function SWEP:C2_Open()
 					v:Hide()
 				else
 					v:Show()
-					v:SetY( math.floor( ((sake+1)*sh)-sh ) )
+					v.SlidePer = math.Remap( sake, 0, 0.5, 0, 1 )---sake
+					v.SlidePer = math.Clamp( v.SlidePer, 0, 1 )
+					v.SlidePer = -v.SlidePer
 				end
 			end
 			if i == c2.TTo then
 				v:Show()
-				v:SetY( math.floor( (sake*sh)-sh ) )
+				v.SlidePer = math.Remap( sake, 0.5, 1, 0, 1 )--sake-1
+				v.SlidePer = math.Clamp( v.SlidePer, 0, 1 )
+				v.SlidePer = v.SlidePer-1
 			end
 		end
 	end
