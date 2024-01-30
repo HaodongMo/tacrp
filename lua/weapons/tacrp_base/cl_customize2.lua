@@ -134,7 +134,9 @@ local GLEEDARKTX = HSVToColor( 0, 0, 0.25 )
 GLEEDARKTX.a = 0.25*255
 
 local GLEEC1 = HSVToColor( 20, 0.4, 1 )
+GLEEC1.a = (1/32)*255
 local GLEEC2 = HSVToColor( 20, 0.6, 1 )
+GLEEC2.a = (1/32)*255
 local GLEEDARK2 = HSVToColor( 0, 0, 0.5 )
 
 local GLEEDARK4 = HSVToColor( 0, 0, 0.9 )
@@ -484,6 +486,16 @@ local uio = Material( "uio/shadow.png", "" )
 local c2_Currentpage = 3
 local c2_Desire = 3
 
+local c_1_h = CreateClientConVar( "tacrp_c2_1_h", 20, true, false )
+local c_1_s = CreateClientConVar( "tacrp_c2_1_s", 0.4, true, false )
+local c_1_v = CreateClientConVar( "tacrp_c2_1_v", 1, true, false )
+local c_1_a = CreateClientConVar( "tacrp_c2_1_a", (1/32), true, false )
+
+local c_2_h = CreateClientConVar( "tacrp_c2_2_h", 20, true, false )
+local c_2_s = CreateClientConVar( "tacrp_c2_2_s", 0.6, true, false )
+local c_2_v = CreateClientConVar( "tacrp_c2_2_v", 1, true, false )
+local c_2_a = CreateClientConVar( "tacrp_c2_2_a", (1/32), true, false )
+
 function SWEP:C2_Open()
 	if IsValid( c2 ) then c2:Remove() end
 	local s = ScreenScaleH
@@ -596,6 +608,15 @@ function SWEP:C2_Open()
 			
 			qd( s, i, "C2_4", s(3), s(1), color_white )
 			qd( s, v.Name, "C2_3", w/2, h/2, color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER )
+
+			if i == c2.TTo then
+				local olda = GLEEC2.a
+				GLEEC2.a = 255
+				surface.SetDrawColor( GLEEC2 )
+				GLEEC2.a = olda
+				surface.SetMaterial( grad )
+				surface.DrawTexturedRect( 0, h-s(2), w, s(2) )
+			end
 			return true
 		end
 	end
@@ -634,6 +655,12 @@ function SWEP:C2_Open()
 			c2:Remove()
 			return
 		end
+
+		GLEEC1 = HSVToColor( c_1_h:GetFloat(), c_1_s:GetFloat(), c_1_v:GetFloat() )
+		GLEEC1.a = c_1_a:GetFloat()*255
+		
+		GLEEC2 = HSVToColor( c_2_h:GetFloat(), c_2_s:GetFloat(), c_2_v:GetFloat() )
+		GLEEC2.a = c_2_a:GetFloat()*255
 	
 		if c2.Lastdesire != c2_Desire then
 			c2.Prog = 0
@@ -723,3 +750,17 @@ hook.Add("HUDShouldDraw", "TacRP_C2_HideHUD", function(name)
 		if hide[name] then return false end
 	end
 end)
+
+hook.Add( "PopulateToolMenu", "CustomMenuSettings", function()
+	spawnmenu.AddToolMenuOption( "Options", "Tactical RP Weapons", "Custom_Menu", "C2 Beta Software", "", "", function( panel )
+		panel:NumSlider( "Main Hue", "tacrp_c2_1_h", 0, 360, 0 )
+		panel:NumSlider( "Main Sat.", "tacrp_c2_1_s", 0, 1, 2 )
+		panel:NumSlider( "Main Value", "tacrp_c2_1_v", 0, 1, 2 )
+		panel:NumSlider( "Main Alpha", "tacrp_c2_1_a", 0, 1, 2 )
+
+		panel:NumSlider( "Accent Hue", "tacrp_c2_2_h", 0, 360, 0 )
+		panel:NumSlider( "Accent Sat.", "tacrp_c2_2_s", 0, 1, 2 )
+		panel:NumSlider( "Accent Value", "tacrp_c2_2_v", 0, 1, 2 )
+		panel:NumSlider( "Accent Alpha", "tacrp_c2_2_a", 0, 1, 2 )
+	end )
+end )
