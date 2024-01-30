@@ -272,8 +272,8 @@ local pages = {
 		end,
 		Paint = function( page, w, h, c )
 			local s = c.s
-			draw.SimpleText( "Statistics panel goes here.", "C2_1", w/2 + s(1), h/2 + s(1), color_black, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER )
-			draw.SimpleText( "Statistics panel goes here.", "C2_1", w/2, h/2, color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER )
+			local h = math.ceil( Lerp(1+page.SlidePer, -s(20), h/2) )
+			DST( "Statistics panel goes here.", "C2_1", w/2, h, color_white, s(1), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER )
 		end,
 	},
 	{
@@ -660,6 +660,7 @@ function SWEP:C2_Open()
 		GLEEC1.a = c_1_a:GetFloat()*255
 		
 		GLEEC2 = HSVToColor( c_2_h:GetFloat(), c_2_s:GetFloat(), c_2_v:GetFloat() )
+		--GLEEC2 = HSVToColor( ((CurTime()*360)-180)%360, 1, 1 )
 		GLEEC2.a = c_2_a:GetFloat()*255
 	
 		if c2.Lastdesire != c2_Desire then
@@ -751,13 +752,94 @@ hook.Add("HUDShouldDraw", "TacRP_C2_HideHUD", function(name)
 	end
 end)
 
+local pres = {
+	["Orange Peel"] = {
+		["tacrp_c2_1_h"]	= 0,
+		["tacrp_c2_1_s"]	= 0.4,
+		["tacrp_c2_1_v"]	= 1,
+		["tacrp_c2_1_a"]	= 0.10,
+		["tacrp_c2_2_h"]	= 20,
+		["tacrp_c2_2_s"]	= 0.6,
+		["tacrp_c2_2_v"]	= 1,
+		["tacrp_c2_2_a"]	= 0.10,
+	},
+	["Hot Red"] = {
+		["tacrp_c2_1_h"]	= 0,
+		["tacrp_c2_1_s"]	= 0.8,
+		["tacrp_c2_1_v"]	= 1,
+		["tacrp_c2_1_a"]	= 0.25,
+		["tacrp_c2_2_h"]	= 40,
+		["tacrp_c2_2_s"]	= 0.8,
+		["tacrp_c2_2_v"]	= 1,
+		["tacrp_c2_2_a"]	= 0.25,
+	},
+	["Pretty Fish"] = {
+		["tacrp_c2_1_h"]	= 40,
+		["tacrp_c2_1_s"]	= 0.8,
+		["tacrp_c2_1_v"]	= 1,
+		["tacrp_c2_1_a"]	= 0.25,
+		["tacrp_c2_2_h"]	= 180,
+		["tacrp_c2_2_s"]	= 0.8,
+		["tacrp_c2_2_v"]	= 1,
+		["tacrp_c2_2_a"]	= 0.25,
+	},
+	["Fresh Vapor"] = {
+		["tacrp_c2_1_h"]	= 285,
+		["tacrp_c2_1_s"]	= 0.61,
+		["tacrp_c2_1_v"]	= 1,
+		["tacrp_c2_1_a"]	= 0.1,
+		["tacrp_c2_2_h"]	= 200,
+		["tacrp_c2_2_s"]	= 0.61,
+		["tacrp_c2_2_v"]	= 0.85,
+		["tacrp_c2_2_a"]	= 0.2,
+	},
+	["Baby Blue"] = {
+		["tacrp_c2_1_h"]	= 180,
+		["tacrp_c2_1_s"]	= 0.8,
+		["tacrp_c2_1_v"]	= 1,
+		["tacrp_c2_1_a"]	= 0.1,
+		["tacrp_c2_2_h"]	= 230,
+		["tacrp_c2_2_s"]	= 0.8,
+		["tacrp_c2_2_v"]	= 1,
+		["tacrp_c2_2_a"]	= 0.1,
+	},
+	["Dark Dashboard"] = {
+		["tacrp_c2_1_h"]	= 180,
+		["tacrp_c2_1_s"]	= 0.8,
+		["tacrp_c2_1_v"]	= 1,
+		["tacrp_c2_1_a"]	= 0.01,
+		["tacrp_c2_2_h"]	= 230,
+		["tacrp_c2_2_s"]	= 0.8,
+		["tacrp_c2_2_v"]	= 1,
+		["tacrp_c2_2_a"]	= 0.1,
+	},
+}
+
 hook.Add( "PopulateToolMenu", "CustomMenuSettings", function()
 	spawnmenu.AddToolMenuOption( "Options", "Tactical RP Weapons", "Custom_Menu", "C2 Beta Software", "", "", function( panel )
+		panel:Help("Presets")
+		local pcom = vgui.Create( "DComboBox", panel )
+		pcom:Dock(TOP)
+		pcom:DockMargin( 10, 5, 10, 5 )
+		for i, data in SortedPairs( pres ) do
+			pcom:AddChoice( i )
+		end
+
+		function pcom:OnSelect( bleh, index )
+			if pres[index] then
+				for i, v in pairs( pres[index] ) do
+					GetConVar(i):SetFloat(v)
+				end
+			end
+		end
+
+		panel:Help("Main Color")
 		panel:NumSlider( "Main Hue", "tacrp_c2_1_h", 0, 360, 0 )
 		panel:NumSlider( "Main Sat.", "tacrp_c2_1_s", 0, 1, 2 )
 		panel:NumSlider( "Main Value", "tacrp_c2_1_v", 0, 1, 2 )
 		panel:NumSlider( "Main Alpha", "tacrp_c2_1_a", 0, 1, 2 )
-
+		
+		panel:Help("Accent Color")
 		panel:NumSlider( "Accent Hue", "tacrp_c2_2_h", 0, 360, 0 )
 		panel:NumSlider( "Accent Sat.", "tacrp_c2_2_s", 0, 1, 2 )
 		panel:NumSlider( "Accent Value", "tacrp_c2_2_v", 0, 1, 2 )
