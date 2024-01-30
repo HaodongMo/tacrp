@@ -374,7 +374,7 @@ local pages = {
 
 					self:SetSize( f_w, f_h )
 					self:SetPos( page:GetWide()/2 - f_w/2, page:GetTall() - f_h - s(12) )
-					gapper = f_h+s(6+6)
+					gapper = f_h+s(12+12+1+12)
 
 					for index, Taby in ipairs( tabz ) do
 						local tp = Taby.Panel
