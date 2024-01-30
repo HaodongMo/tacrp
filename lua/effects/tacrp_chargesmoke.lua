@@ -1,4 +1,6 @@
 function EFFECT:Init(data)
+    if CurTime() < 1 then self:Remove() return end
+
     self.TrailEnt = data:GetEntity()
     if !IsValid(self.TrailEnt) then self:Remove() return end
 

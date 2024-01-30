@@ -27,7 +27,7 @@ for _, i in pairs(ammotypes) do
     })
 
     if CLIENT then
-        language.Add(i .. "_ammo", TacRP:GetPhrase(i) or i)
+        language.Add(i .. "_ammo", TacRP:GetPhrase("ammo." .. i) or i)
     end
 end
 

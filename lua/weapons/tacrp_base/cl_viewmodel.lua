@@ -62,6 +62,9 @@ function SWEP:DrawCustomModel(wm, custom_wm)
             parentmdl = self:GetOwner()
         end
 
+        parentmdl:SetupBones()
+        parentmdl:InvalidateBoneCache()
+
         if !offset_pos or !offset_ang then
             local slot = model.Slot
             slottbl = self.Attachments[slot]

@@ -1,4 +1,6 @@
 function EFFECT:Init(data)
+    if CurTime() < 1 then self:Remove() return end
+
     local pos = data:GetOrigin()
     local dir = data:GetNormal()
 
