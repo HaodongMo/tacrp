@@ -125,6 +125,57 @@ local function DST( text, font, x, y, color, drop, xalign, yalign )
 	return draw.SimpleText( text, font, x, y, color, xalign, yalign )
 end
 
+local grad = Material("vgui/gradient-d")
+local grad2 = Material("vgui/gradient-u")
+
+local GLEEDARKTH = HSVToColor( 0, 0, 0.25 )
+GLEEDARKTH.a = 0.50*255
+local GLEEDARKTX = HSVToColor( 0, 0, 0.25 )
+GLEEDARKTX.a = 0.25*255
+
+local GLEEC1 = HSVToColor( 20, 0.4, 1 )
+local GLEEC2 = HSVToColor( 20, 0.6, 1 )
+local GLEEDARK2 = HSVToColor( 0, 0, 0.5 )
+
+local GLEEDARK4 = HSVToColor( 0, 0, 0.9 )
+local GLEEDARK5 = HSVToColor( 0, 0, 1 )
+
+function Gleemax( s, w, h )
+	GEM( s, 0, 0, w, h )
+end
+
+function GEM( s, x, y, w, h )
+	surface.SetDrawColor( GLEEC1 )
+	surface.DrawRect( x, y, w, h )
+	surface.SetDrawColor( GLEEC2 )
+	surface.SetMaterial( grad )
+	surface.DrawTexturedRect( x, y, w, h )
+	
+	surface.SetMaterial( grad2 )
+	surface.SetDrawColor( 255, 255, 255 )
+	surface.DrawTexturedRect( x, y, 1, h )
+	surface.DrawTexturedRect( x+w-1, y, 1, h )
+
+	surface.SetDrawColor( 255, 255, 255 )
+	surface.DrawRect( x, y, w, 1 )
+end
+
+
+function qd( s, t, f, x, y, c, ax, ay )
+	draw.SimpleText( t, f, x, y+1, GLEEDARKTH, ax, ay )
+	draw.SimpleText( t, f, x+1, y+1, GLEEDARKTH, ax, ay )
+	draw.SimpleText( t, f, x+1, y+2, GLEEDARKTH, ax, ay )
+
+	draw.SimpleText( t, f, x-1, y, GLEEDARKTX, ax, ay )
+	draw.SimpleText( t, f, x-1, y-1, GLEEDARKTX, ax, ay )
+	draw.SimpleText( t, f, x+1, y-1, GLEEDARKTX, ax, ay )
+
+	draw.SimpleText( t, f, x+2, y+2, GLEEDARKTX, ax, ay )
+	draw.SimpleText( t, f, x+2, y, GLEEDARKTX, ax, ay )
+
+	draw.SimpleText( t, f, x, y, c, ax, ay )
+end
+
 local pages = {
 	{
 		Name = "Customize",
@@ -241,7 +292,6 @@ local pages = {
 			function p_top:Think()
 				p_top:SetY( page.SlidePer * (gapper or self:GetTall()) )
 			end
-			--p_top:Hide()
 
 			
 			local p_bottom = page:Add( "DPanel" )
@@ -258,21 +308,19 @@ local pages = {
 				p_bottom:SetY( ( (1-page.SlidePer) * (gapper or self:GetTall()) ) - gapper )
 			end
 
+			local Margin_3 = 12
 
 			do
 				local header = p_top:Add( "DPanel" )
-				header:SetSize( c.sw - s(48), s(48) )
+				header:SetSize( c.sw - s(48), s(40) )
 				header:SetPos( s(24), s(24) )
 
 				function header:Paint( w, h )
-					surface.SetDrawColor( cb )
-					surface.DrawRect( 0, 0, w, h )
-					surface.SetDrawColor( color_black )
-					surface.DrawOutlinedRect( 0, 0, w, h, s(1) )
+					Gleemax( s, w, h )
 
-					DST( c.w:GetPrintName(), "C2_1", s(24), s(6), color_white, s(2) )
-					DST( c.w:GetSubClassName(TacRP.UseTiers()), "C2_2", w - s(24), s(6), color_white, s(1), TEXT_ALIGN_RIGHT )
-					DST( c.w:GetValue("Trivia_Caliber"), "C2_2", w - s(24), s(6+18), color_white, s(1), TEXT_ALIGN_RIGHT )
+					qd( s, c.w:GetPrintName(), "C2_1", s(Margin_3), h/2, color_white, nil, TEXT_ALIGN_CENTER )
+					qd( s, c.w:GetSubClassName(TacRP.UseTiers()), "C2_3", w - s(Margin_3), h/2 - s(6), color_white, TEXT_ALIGN_RIGHT, TEXT_ALIGN_CENTER )
+					qd( s, c.w:GetValue("Trivia_Caliber"), "C2_3", w - s(Margin_3), h/2 + s(6), color_white, TEXT_ALIGN_RIGHT, TEXT_ALIGN_CENTER )
 
 					return true
 				end
@@ -283,50 +331,70 @@ local pages = {
 				local f_w, f_h = s(400), s(12+(12*1)+12)
 				footer:SetSize( f_w, f_h )
 				footer:SetPos( page:GetWide()/2 - f_w/2, page:GetTall() - f_h - s(12) )
-				function footer:Paint( w, h )
-					surface.SetDrawColor( cb )
-					surface.DrawRect( 0, 0, w, h )
-					surface.SetDrawColor( color_black )
-					surface.DrawOutlinedRect( 0, 0, w, h, s(1) )
 
-					local desc = TacRP.MultiLineText( c.w.Description, w - s(48), "C2_3" )
+				local tabz = {
+					{ "Description" },
+					{ "Trivia" },
+					{ "Credits" },
+				}
+
+				for index, Taby in ipairs( tabz ) do
+					tb = p_bottom:Add( "DButton" )
+					Taby.Panel = tb
+					tb:SetSize( s(48), s(12) )
+					tb:SetPos( page:GetWide()/2 - f_w/2 + math.ceil( s((index-1))*(48+1)), page:GetTall() - f_h - s(12+1) )
+					function tb:Paint( w, h )
+						Gleemax( s, w, h )
+						qd( s, Taby[1], "C2_4", w/2, h/2, color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER )
+						return true
+					end
+
+				end
+
+				function footer:Paint( w, h )
+					Gleemax( s, w, h )
+
+					local desc = TacRP.MultiLineText( c.w.Description, w - s(12*2), "C2_3" )
 
 					local lines = 0
 					for i, v in ipairs( desc ) do
-						draw.SimpleText( v, "C2_3", s(24), s(12+(12*(i-1))+1), color_black )
-						draw.SimpleText( v, "C2_3", s(24), s(12+(12*(i-1))), color_white )
+						qd( s, v, "C2_3", s(12), s(6+(12*(i-1))), color_white )
 						lines = i
 					end
-					draw.SimpleText( c.w.Description_Quote, "C2_3I", s(24), s(12+(12*(lines+1))+1), color_black )
-					draw.SimpleText( c.w.Description_Quote, "C2_3I", s(24), s(12+(12*(lines+1))), color_white )
+					qd( s, c.w.Description_Quote, "C2_3I", s(12), s(6+(12*(lines+1))), color_white )
 				end
 
 				function footer:PerformLayout( w, h )
-					local desc = TacRP.MultiLineText( c.w.Description, w - s(48), "C2_3" )
+					local desc = TacRP.MultiLineText( c.w.Description, w - s(12*2), "C2_3" )
 					local lines = #desc
 					if c.w.Description_Quote then lines = lines + 2 end
-					f_h = s(12+(12*lines)+12)
+					f_h = s(6+(12*lines)+6)
 
 					self:SetSize( f_w, f_h )
 					self:SetPos( page:GetWide()/2 - f_w/2, page:GetTall() - f_h - s(12) )
-					gapper = f_h+s(12+12)
+					gapper = f_h+s(6+6)
+
+					for index, Taby in ipairs( tabz ) do
+						local tp = Taby.Panel
+						if tp then
+							tp:SetY( page:GetTall() - f_h - s(12+12+1) )
+						end
+					end
 				end
 			end
 
 			do
 				local footer = p_bottom:Add( "DPanel" )
+				footer:Hide()
 				local f_w, f_h = page:GetWide()/2 - s(400)/2 - s(24+12), s(4+(12*3)+4)
 				footer:SetSize( f_w, f_h )
 				footer:SetPos( s(24), c.sh - f_h - s(12) )
 				function footer:Paint( w, h )
-					surface.SetDrawColor( cb )
-					surface.DrawRect( 0, 0, w, h )
-					surface.SetDrawColor( color_black )
-					surface.DrawOutlinedRect( 0, 0, w, h, s(1) )
+					Gleemax( s, w, h )
 
 					local bump = 0
 					for i, v in pairs( weh ) do
-						DST( i, "C2_4", s(8), s(12+4)+bump, color_white, s(1), TEXT_ALIGN_LEFT, TEXT_ALIGN_BOTTOM )
+						qd( s, i, "C2_4", s(8), s(12+4)+bump, color_white, TEXT_ALIGN_LEFT, TEXT_ALIGN_BOTTOM )
 						local txt = isfunction(v) and v(c.w) or c.w:GetValue(v) or "?"
 						local ftu = "C2_3"
 						surface.SetFont(ftu)
@@ -334,7 +402,7 @@ local pages = {
 						if tx > s(180-8-8-64) then
 							ftu = "C2_4"
 						end
-						DST( txt, ftu, w-s(8), s(12+4)+bump, color_white, s(1), TEXT_ALIGN_RIGHT, TEXT_ALIGN_BOTTOM )
+						qd( s, txt, ftu, w-s(8), s(12+4)+bump, color_white, TEXT_ALIGN_RIGHT, TEXT_ALIGN_BOTTOM )
 						bump = bump + s(12)
 					end
 				end
@@ -342,6 +410,7 @@ local pages = {
 
 			do
 				local footer = p_bottom:Add( "DPanel" )
+				footer:Hide()
 				local multiline = TacRP.MultiLineText( c.w.Credits, math.huge, "C2_3" )
 				if multiline[#multiline] == " " then
 					multiline[#multiline] = nil
@@ -350,10 +419,7 @@ local pages = {
 				footer:SetSize( f_w, f_h )
 				footer:SetPos( c.sw - f_w - s(24), c.sh - f_h - s(12) )
 				function footer:Paint( w, h )
-					surface.SetDrawColor( cb )
-					surface.DrawRect( 0, 0, w, h )
-					surface.SetDrawColor( color_black )
-					surface.DrawOutlinedRect( 0, 0, w, h, s(1) )
+					Gleemax( s, w, h )
 
 					for i, line in ipairs( multiline ) do
 						-- If you can find out how to do this with Lua Patterns, that'd be nice.
@@ -372,8 +438,8 @@ local pages = {
 						if tx > (w-s(4+4+32)) then
 							ftu = "C2_4"
 						end
-						DST( mweh[1], "C2_4", s(4), s(4+(i)*12), color_white, s(1), TEXT_ALIGN_LEFT, TEXT_ALIGN_BOTTOM )
-						DST( reassemble, ftu, w-s(4), s(4+(i)*12), color_white, s(1), TEXT_ALIGN_RIGHT, TEXT_ALIGN_BOTTOM )
+						qd( s, mweh[1], "C2_4", s(4), s(4+(i)*12), color_white, TEXT_ALIGN_LEFT, TEXT_ALIGN_BOTTOM )
+						qd( s, reassemble, ftu, w-s(4), s(4+(i)*12), color_white, TEXT_ALIGN_RIGHT, TEXT_ALIGN_BOTTOM )
 					end
 				end
 			end
@@ -415,12 +481,9 @@ local pages = {
 
 local uio = Material( "uio/shadow.png", "" )
 
-
-
 local c2_Currentpage = 3
 local c2_Desire = 3
 
-if IsValid( c2 ) then c2:Remove() end
 function SWEP:C2_Open()
 	if IsValid( c2 ) then c2:Remove() end
 	local s = ScreenScaleH
@@ -496,12 +559,8 @@ function SWEP:C2_Open()
 			c2:Remove()
 		end
 		function cl:Paint( w, h )
-			surface.SetDrawColor( color_black )
-			surface.DrawRect( 0, 0, w, h )
-			surface.SetDrawColor( color_white )
-			surface.DrawOutlinedRect( 0, 0, w, h, s(1) )
-			
-			draw.SimpleText( "x", "C2_4", w/2, h/2 - s(1), color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER )
+			Gleemax( s, w, h )
+			qd( s, "×", "C2_3", w/2 - s(0.5), h/2 - s(1.5), color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER )
 			return true
 		end
 	end
@@ -516,34 +575,27 @@ function SWEP:C2_Open()
 			c2:Remove()
 		end
 		function cl:Paint( w, h )
-			surface.SetDrawColor( color_black )
-			surface.DrawRect( 0, 0, w, h )
-			surface.SetDrawColor( color_white )
-			surface.DrawOutlinedRect( 0, 0, w, h, s(1) )
-			
-			draw.SimpleText( "Drop Weapon", "C2_4", w/2, h/2, color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER )
+			Gleemax( s, w, h )
+			qd( s, "Drop Weapon", "C2_4", w/2, h/2, color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER )
 			return true
 		end
 	end
 	-- Tabs row
-	local totallength = s((#pages*72)+(#pages-1)*4)
+	local totallength = s((#pages*80)+(#pages-1)*4)
 	for i, v in ipairs( pages ) do
 		local mbutton = c2:Add("DButton")
-		mbutton:SetSize( s(72), s(18) )
+		mbutton:SetSize( s(80), s(16) )
 		--mbutton:SetPos( sw/2 - totallength/2 + s((i-1)*(72+4)), s(24/2 - 18/2) )
-		mbutton:SetPos( s(24) + s((i-1)*(72+4)), s(24/2 - 18/2) )
+		mbutton:SetPos( s(24) + s((i-1)*(80+4)), s(24/2 - 16/2) )
 		mbutton:SetText( v.Name )
 		function mbutton:DoClick()
 			c2_Desire = i
 		end
 		function mbutton:Paint( w, h )
-			surface.SetDrawColor( color_black )
-			surface.DrawRect( 0, 0, w, h )
-			surface.SetDrawColor( color_white )
-			surface.DrawOutlinedRect( 0, 0, w, h, s(1) )
+			Gleemax( s, w, h )
 			
-			draw.SimpleText( i, "C2_4", s(3), s(1), color_white )
-			draw.SimpleText( v.Name, "C2_4", w/2, h/2, color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER )
+			qd( s, i, "C2_4", s(3), s(1), color_white )
+			qd( s, v.Name, "C2_3", w/2, h/2, color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER )
 			return true
 		end
 	end
@@ -614,6 +666,13 @@ function SWEP:C2_Open()
 			end
 		end
 	end
+end
+if IsValid( c2 ) then
+	c2:Remove()
+	c2 = nil
+	timer.Simple( 0.1, function()
+		Entity(1):GetActiveWeapon():C2_Open()
+	end)
 end
 
 function SWEP:C2_Close()
