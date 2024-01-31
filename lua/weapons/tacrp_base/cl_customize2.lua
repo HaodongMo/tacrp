@@ -813,6 +813,26 @@ local pres = {
 		["tacrp_c2_2_v"]	= 1,
 		["tacrp_c2_2_a"]	= 0.1,
 	},
+	["Dew Green"] = {
+		["tacrp_c2_1_h"]	= 200,
+		["tacrp_c2_1_s"]	= 0.4,
+		["tacrp_c2_1_v"]	= 0.5,
+		["tacrp_c2_1_a"]	= 0.2,
+		["tacrp_c2_2_h"]	= 80,
+		["tacrp_c2_2_s"]	= 0.6,
+		["tacrp_c2_2_v"]	= 0.5,
+		["tacrp_c2_2_a"]	= 0.2,
+	},
+	["Grass Blade"] = {
+		["tacrp_c2_1_h"]	= 98,
+		["tacrp_c2_1_s"]	= 0.47,
+		["tacrp_c2_1_v"]	= 1,
+		["tacrp_c2_1_a"]	= 0.1,
+		["tacrp_c2_2_h"]	= 80,
+		["tacrp_c2_2_s"]	= 0.6,
+		["tacrp_c2_2_v"]	= 1,
+		["tacrp_c2_2_a"]	= 0.05,
+	},
 }
 
 hook.Add( "PopulateToolMenu", "CustomMenuSettings", function()
