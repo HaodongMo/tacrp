@@ -3,7 +3,12 @@ function SWEP:DrawHUD()
 	local sw, sh = ScrW(), ScrH()
 	local s = ScreenScaleH
 	local p = LocalPlayer()
+	self:DoScope()
 	self:DrawCustomizeHUD()
+
+	if self:GetValue("TacticalDraw") and self:GetTactical() then
+		self:GetValue("TacticalDraw")(self)
+	end
 
 	if !self:GetCustomize() then
 		if self:GetValue("BlindFireCamera") then
