@@ -10,8 +10,8 @@ SWEP.Category = "Tactical RP"
 SWEP.SubCatTier = "3Security"
 SWEP.SubCatType = "1Sidearm"
 
-SWEP.Description = "Well-rounded police handgun."
-SWEP.Description_Quote = "It's so fucking boring."
+SWEP.Description = "Well-rounded, run-of-the-mill police handgun."
+SWEP.Description_Quote = "\"Los! Los! Los!\""
 
 SWEP.Trivia_Caliber = "9x19mm"
 SWEP.Trivia_Manufacturer = "Heckler & Koch"
