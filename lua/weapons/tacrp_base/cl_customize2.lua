@@ -142,6 +142,18 @@ local GLEEDARK2 = HSVToColor( 0, 0, 0.5 )
 local GLEEDARK4 = HSVToColor( 0, 0, 0.9 )
 local GLEEDARK5 = HSVToColor( 0, 0, 1 )
 
+local c_1_h = CreateClientConVar( "tacrp_c2_1_h", 20, true, false )
+local c_1_s = CreateClientConVar( "tacrp_c2_1_s", 0.4, true, false )
+local c_1_v = CreateClientConVar( "tacrp_c2_1_v", 1, true, false )
+local c_1_a = CreateClientConVar( "tacrp_c2_1_a", (1/32), true, false )
+
+local c_2_h = CreateClientConVar( "tacrp_c2_2_h", 20, true, false )
+local c_2_s = CreateClientConVar( "tacrp_c2_2_s", 0.6, true, false )
+local c_2_v = CreateClientConVar( "tacrp_c2_2_v", 1, true, false )
+local c_2_a = CreateClientConVar( "tacrp_c2_2_a", (1/32), true, false )
+
+local c_2_gd = CreateClientConVar( "tacrp_c2_graddown", 0, true, false )
+
 function Gleemax( s, w, h )
 	GEM( s, 0, 0, w, h )
 end
@@ -150,7 +162,7 @@ function GEM( s, x, y, w, h )
 	surface.SetDrawColor( GLEEC1 )
 	surface.DrawRect( x, y, w, h )
 	surface.SetDrawColor( GLEEC2 )
-	surface.SetMaterial( grad )
+	surface.SetMaterial( (c_2_gd:GetBool() and grad2) or grad )
 	surface.DrawTexturedRect( x, y, w, h )
 	
 	surface.SetMaterial( grad2 )
@@ -515,16 +527,6 @@ local uio = Material( "uio/shadow.png", "" )
 local c2_Currentpage = 3
 local c2_Desire = 3
 
-local c_1_h = CreateClientConVar( "tacrp_c2_1_h", 20, true, false )
-local c_1_s = CreateClientConVar( "tacrp_c2_1_s", 0.4, true, false )
-local c_1_v = CreateClientConVar( "tacrp_c2_1_v", 1, true, false )
-local c_1_a = CreateClientConVar( "tacrp_c2_1_a", (1/32), true, false )
-
-local c_2_h = CreateClientConVar( "tacrp_c2_2_h", 20, true, false )
-local c_2_s = CreateClientConVar( "tacrp_c2_2_s", 0.6, true, false )
-local c_2_v = CreateClientConVar( "tacrp_c2_2_v", 1, true, false )
-local c_2_a = CreateClientConVar( "tacrp_c2_2_a", (1/32), true, false )
-
 function SWEP:C2_Open()
 	if IsValid( c2 ) then c2:Remove() end
 	local s = ScreenScaleH
@@ -644,7 +646,8 @@ function SWEP:C2_Open()
 				surface.SetDrawColor( GLEEC2 )
 				GLEEC2.a = olda
 				surface.SetMaterial( grad )
-				surface.DrawTexturedRect( 0, h-s(2), w, s(2) )
+				local cons = math.ceil(s(2))
+				surface.DrawTexturedRect( 0, h-cons, w, cons )
 			end
 			return true
 		end
@@ -791,6 +794,7 @@ local pres = {
 		["tacrp_c2_2_s"]	= 0.6,
 		["tacrp_c2_2_v"]	= 1,
 		["tacrp_c2_2_a"]	= 0.10,
+		["tacrp_c2_graddown"]	= true,
 	},
 	["Hot Red"] = {
 		["tacrp_c2_1_h"]	= 0,
@@ -801,6 +805,7 @@ local pres = {
 		["tacrp_c2_2_s"]	= 0.8,
 		["tacrp_c2_2_v"]	= 1,
 		["tacrp_c2_2_a"]	= 0.25,
+		["tacrp_c2_graddown"]	= true,
 	},
 	["Pretty Fish"] = {
 		["tacrp_c2_1_h"]	= 40,
@@ -811,6 +816,7 @@ local pres = {
 		["tacrp_c2_2_s"]	= 0.8,
 		["tacrp_c2_2_v"]	= 1,
 		["tacrp_c2_2_a"]	= 0.25,
+		["tacrp_c2_graddown"]	= false,
 	},
 	["Fresh Vapor"] = {
 		["tacrp_c2_1_h"]	= 285,
@@ -821,6 +827,7 @@ local pres = {
 		["tacrp_c2_2_s"]	= 0.61,
 		["tacrp_c2_2_v"]	= 0.85,
 		["tacrp_c2_2_a"]	= 0.2,
+		["tacrp_c2_graddown"]	= true,
 	},
 	["Baby Blue"] = {
 		["tacrp_c2_1_h"]	= 180,
@@ -831,6 +838,7 @@ local pres = {
 		["tacrp_c2_2_s"]	= 0.8,
 		["tacrp_c2_2_v"]	= 1,
 		["tacrp_c2_2_a"]	= 0.1,
+		["tacrp_c2_graddown"]	= false,
 	},
 	["Dark Dashboard"] = {
 		["tacrp_c2_1_h"]	= 180,
@@ -841,6 +849,7 @@ local pres = {
 		["tacrp_c2_2_s"]	= 0.8,
 		["tacrp_c2_2_v"]	= 1,
 		["tacrp_c2_2_a"]	= 0.1,
+		["tacrp_c2_graddown"]	= false,
 	},
 	["Dew Green"] = {
 		["tacrp_c2_1_h"]	= 200,
@@ -851,6 +860,7 @@ local pres = {
 		["tacrp_c2_2_s"]	= 0.6,
 		["tacrp_c2_2_v"]	= 0.5,
 		["tacrp_c2_2_a"]	= 0.2,
+		["tacrp_c2_graddown"]	= false,
 	},
 	["Grass Blade"] = {
 		["tacrp_c2_1_h"]	= 98,
@@ -861,6 +871,29 @@ local pres = {
 		["tacrp_c2_2_s"]	= 0.6,
 		["tacrp_c2_2_v"]	= 1,
 		["tacrp_c2_2_a"]	= 0.05,
+		["tacrp_c2_graddown"]	= false,
+	},
+	["Soft Pink"] = {
+		["tacrp_c2_1_h"]	= 360,
+		["tacrp_c2_1_s"]	= 0.3,
+		["tacrp_c2_1_v"]	= 1,
+		["tacrp_c2_1_a"]	= 0.07,
+		["tacrp_c2_2_h"]	= 304,
+		["tacrp_c2_2_s"]	= 0.4,
+		["tacrp_c2_2_v"]	= 1,
+		["tacrp_c2_2_a"]	= 0.07,
+		["tacrp_c2_graddown"]	= false,
+	},
+	["Cookie Cream"] = {
+		["tacrp_c2_1_h"]	= 0,
+		["tacrp_c2_1_s"]	= 0.0,
+		["tacrp_c2_1_v"]	= 0.0,
+		["tacrp_c2_1_a"]	= 0.5,
+		["tacrp_c2_2_h"]	= 43,
+		["tacrp_c2_2_s"]	= 0.2,
+		["tacrp_c2_2_v"]	= 1,
+		["tacrp_c2_2_a"]	= 0.0,
+		["tacrp_c2_graddown"]	= true,
 	},
 }
 
@@ -877,7 +910,11 @@ hook.Add( "PopulateToolMenu", "CustomMenuSettings", function()
 		function pcom:OnSelect( bleh, index )
 			if pres[index] then
 				for i, v in pairs( pres[index] ) do
-					GetConVar(i):SetFloat(v)
+					if v == true or v == false then
+						GetConVar(i):SetBool(v)
+					else
+						GetConVar(i):SetFloat(v)
+					end
 				end
 			end
 		end
@@ -889,6 +926,7 @@ hook.Add( "PopulateToolMenu", "CustomMenuSettings", function()
 		panel:NumSlider( "Main Alpha", "tacrp_c2_1_a", 0, 1, 2 )
 		
 		panel:Help("Accent Color")
+		panel:CheckBox( "Top-down Gradient", "tacrp_c2_graddown" )
 		panel:NumSlider( "Accent Hue", "tacrp_c2_2_h", 0, 360, 0 )
 		panel:NumSlider( "Accent Sat.", "tacrp_c2_2_s", 0, 1, 2 )
 		panel:NumSlider( "Accent Value", "tacrp_c2_2_v", 0, 1, 2 )
