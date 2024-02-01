@@ -42,7 +42,7 @@ end
 ATT.Hook_PreReload = function(wep)
     local ply = wep:GetOwner()
 
-    if ply:GetNWFloat("TacRPDashTime", 0) + 0.25 > CurTime()
+    if ply:GetNWFloat("TacRPDashTime", -1) + 0.25 > CurTime()
             or !ply:KeyPressed(IN_RELOAD)
             or ply:GetMoveType() == MOVETYPE_NOCLIP
             or getcharge(wep) < cost then return end
@@ -74,7 +74,7 @@ end
 
 hook.Add("SetupMove", "TacRP_Quickstep", function(ply, mv, cmd)
     if !IsFirstTimePredicted() then return end
-    if ply:GetNWFloat("TacRPDashTime", 0) + duration > CurTime() then
+    if ply:GetNWFloat("TacRPDashTime", -1) + duration > CurTime() then
         if !ply.TacRPDashDir and !ply.TacRPDashCancel then
             ply.TacRPDashDir = TacRP.GetCmdVector(cmd, true)
             ply.TacRPDashStored = ply:GetVelocity():Length()
@@ -100,9 +100,9 @@ hook.Add("SetupMove", "TacRP_Quickstep", function(ply, mv, cmd)
             -- ply:SetVelocity(ply.TacRPDashDir * ply:GetRunSpeed() * 1 + Vector(0, 0, 5 * ply:GetJumpPower()))
             ply.TacRPDashGrounded = false
             ply.TacRPDashCancel = CurTime()
-            ply:SetNWFloat("TacRPDashTime", 0)
+            ply:SetNWFloat("TacRPDashTime", -1)
         end
-    elseif ply:GetNWFloat("TacRPDashTime", 0) + duration <= CurTime() then
+    elseif ply:GetNWFloat("TacRPDashTime", -1) + duration <= CurTime() then
         if ply.TacRPDashCancel != nil and CurTime() - ply.TacRPDashCancel > 0 and !ply:IsOnGround() then
             ply:SetVelocity(ply:GetVelocity():GetNegated() + ply.TacRPDashDir * ply:GetRunSpeed() * 2.5 + Vector(0, 0, 2 * ply:GetJumpPower()))
             ply.TacRPDashCancel = nil
@@ -119,7 +119,7 @@ hook.Add("SetupMove", "TacRP_Quickstep", function(ply, mv, cmd)
 end)
 
 hook.Add("FinishMove", "TacRP_Quickstep", function(ply, mv)
-    if ply:GetNWFloat("TacRPDashTime", 0) + duration > CurTime() and ply.TacRPDashCancel == nil then
+    if ply:GetNWFloat("TacRPDashTime", -1) + duration > CurTime() and ply.TacRPDashCancel == nil then
         local v = mv:GetVelocity()
         v.z = 0
         mv:SetVelocity(v)
@@ -127,18 +127,13 @@ hook.Add("FinishMove", "TacRP_Quickstep", function(ply, mv)
 end)
 
 hook.Add("EntityTakeDamage", "TacRP_Quickstep", function(ent, dmginfo)
-    if !ent:IsPlayer() or ent:GetNWFloat("TacRPDashTime", 0) + duration <= CurTime() then return end
+    if !ent:IsPlayer() or ent:GetNWFloat("TacRPDashTime", -1) + duration <= CurTime() then return end
     ent:EmitSound("weapons/fx/nearmiss/bulletltor0" .. math.random(3, 4) .. ".wav")
     local eff = EffectData()
     eff:SetOrigin(dmginfo:GetDamagePosition())
     eff:SetNormal(-dmginfo:GetDamageForce():GetNormalized())
     util.Effect("StunstickImpact", eff)
     return true
-end)
-
-hook.Add("PlayerSpawn", "TacRP_Quickstep", function(ply, trans)
-    if trans then return end
-    ply:SetNWFloat("TacRPDashTime", 0)
 end)
 
 hook.Add("GetFallDamage", "TacRP_Quickstep", function(ply, speed)
