@@ -162,6 +162,12 @@ function GEM( s, x, y, w, h )
 	surface.DrawRect( x, y, w, 1 )
 end
 
+-- local cb = Color( 0, 0, 0, 127 )
+-- function GEM( s, x, y, w, h )
+--     surface.SetDrawColor( cb )
+--     return TacRP.DrawCorneredBox( x, y, w, h, color_white )
+-- end
+
 
 function qd( s, t, f, x, y, c, ax, ay )
 	draw.SimpleText( t, f, x, y+1, GLEEDARKTH, ax, ay )
@@ -272,8 +278,6 @@ local pages = {
 		end,
 		Paint = function( page, w, h, c )
 			local s = c.s
-			local h = math.ceil( Lerp(1+page.SlidePer, -s(20), h/2) )
-			DST( "Statistics panel goes here.", "C2_1", w/2, h, color_white, s(1), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER )
 		end,
 	},
 	{
@@ -452,11 +456,38 @@ local pages = {
 	{
 		Name = "Terminal Effect",
 		Initialize = function( page, par, c )
+			local s = c.s
+
+			local p_left = page:Add( "DPanel" )
+			p_left:SetTall( par:GetTall() )
+			p_left:SetWide( par:GetWide() )
+			p_left:SetMouseInputEnabled( true )
+			p_left.Paint = rt
+			local gapper = s(24+128+24)--+32+24+24)
+			function p_left:Paint( w, h )
+				surface.SetDrawColor( 25, 0, 0, 32 )
+				surface.DrawRect( 0, 0, gapper, h )
+				return true
+			end
+			function p_left:Think()
+				p_left:SetX( page.SlidePer * (gapper or self:GetWide()) )
+			end
+
+			do
+				local header = p_left:Add( "DPanel" )
+				header:SetSize( s(128), c.sh-s(40) )
+				header:SetPos( s(24), s(24) )
+
+				function header:Paint( w, h )
+					Gleemax( s, w, h )
+
+					qd( s, "Range", "C2_1", s(4), s(4), color_white )
+
+					return true
+				end
+			end
 		end,
 		Paint = function( page, w, h, c )
-			local s = c.s
-			local h = math.ceil( Lerp(1+page.SlidePer, -s(20), h/2) )
-			DST( "Terminal Effect panel goes here.", "C2_1", w/2, h, color_white, s(1), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER )
 		end,
 	},
 	{
@@ -475,8 +506,6 @@ local pages = {
 		end,
 		Paint = function( page, w, h, c )
 			local s = c.s
-			local h = math.ceil( Lerp(1+page.SlidePer, -s(20), h/2) )
-			DST( "Inspect panel goes here.", "C2_1", w/2, h, color_white, s(1), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER )
 		end,
 	},
 }
