@@ -28,7 +28,7 @@ SWEP.BalanceStats = {
     [TacRP.BALANCE_SBOX] = {
         Damage_Max = 32,
         Damage_Min = 6,
-        RPM = 550,
+        RPM = 380,
 
         BodyDamageMultipliers = {
             [HITGROUP_HEAD] = 3.25, // still able to one-shot before falloff
@@ -47,6 +47,7 @@ SWEP.BalanceStats = {
         Range_Min = 400,
         Range_Max = 1800,
         RPM = 200,
+        RPMMultSemi = 1,
 
         Spread = 0.007,
 
@@ -89,13 +90,13 @@ SWEP.TTTReplace = TacRP.TTTReplacePreset.Pistol
 
 // "ballistics"
 
-SWEP.Damage_Max = 28
+SWEP.Damage_Max = 30
 SWEP.Damage_Min = 9
 SWEP.Range_Min = 400 // distance for which to maintain maximum damage
 SWEP.Range_Max = 1800 // distance at which we drop to minimum damage
 SWEP.Penetration = 3 // units of metal this weapon can penetrate
 SWEP.ArmorPenetration = 0.55
-SWEP.ArmorBonus = 0.5
+SWEP.ArmorBonus = 0.25
 
 SWEP.MuzzleVelocity = 8000
 
@@ -114,7 +115,8 @@ SWEP.BodyDamageMultipliers = {
 
 SWEP.Firemode = 1
 
-SWEP.RPM = 400
+SWEP.RPM = 300
+SWEP.RPMMultSemi = 0.7
 
 SWEP.Spread = 0.005
 SWEP.RecoilSpreadPenalty = 0.006

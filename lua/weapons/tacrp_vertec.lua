@@ -48,6 +48,7 @@ SWEP.BalanceStats = {
         Range_Min = 600,
         Range_Max = 1800,
         RPM = 280,
+        RPMMultSemi = 1,
 
         RecoilSpreadPenalty = 0.0025,
         RecoilFirstShotMult = 0.75,
@@ -98,6 +99,7 @@ SWEP.Range_Min = 800
 SWEP.Range_Max = 1800
 SWEP.Penetration = 3
 SWEP.ArmorPenetration = 0.575
+SWEP.ArmorBonus = 0.5
 
 SWEP.MuzzleVelocity = 12000
 
@@ -117,6 +119,7 @@ SWEP.BodyDamageMultipliers = {
 SWEP.Firemode = 1
 
 SWEP.RPM = 480
+SWEP.RPMMultSemi = 0.7
 
 SWEP.Spread = 0.002
 

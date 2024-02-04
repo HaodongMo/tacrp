@@ -31,6 +31,7 @@ SWEP.BalanceStats = {
     [TacRP.BALANCE_SBOX] = {
         Damage_Max = 20,
         Damage_Min = 5,
+        ClipSize = 40,
 
         RecoilKick = 4,
     },
@@ -78,12 +79,12 @@ SWEP.TTTReplace = TacRP.TTTReplacePreset.MachinePistol
 // "ballistics"
 
 SWEP.Damage_Max = 18
-SWEP.Damage_Min = 4
+SWEP.Damage_Min = 5
 SWEP.Range_Min = 300
 SWEP.Range_Max = 1500
 SWEP.Penetration = 3
 SWEP.ArmorPenetration = 0.45
-SWEP.ArmorBonus = 0.75
+SWEP.ArmorBonus = 0.5
 
 SWEP.MuzzleVelocity = 10000
 
@@ -171,7 +172,7 @@ SWEP.HolsterAng = Angle(90, 0, 0)
 
 // reload
 
-SWEP.ClipSize = 40
+SWEP.ClipSize = 32
 SWEP.Ammo = "pistol"
 
 SWEP.ReloadTimeMult = 1.2
