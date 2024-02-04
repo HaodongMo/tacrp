@@ -24,13 +24,14 @@ Sounds: DMG, xLongWayHome, Leeroy Newman
 Animations: Tactical Intervention]]
 
 SWEP.ViewModel = "models/weapons/tacint_extras/v_hk45c.mdl"
-SWEP.WorldModel = "models/weapons/tacint/w_p250.mdl"
+SWEP.WorldModel = "models/weapons/tacint_extras/w_hk45c.mdl"
 
 SWEP.Slot = 1
 
 SWEP.BalanceStats = {
     [TacRP.BALANCE_SBOX] = {
         Range_Max = 1200,
+        RPM = 360,
         ClipSize = 8,
     },
     [TacRP.BALANCE_TTT] = {
@@ -97,7 +98,7 @@ SWEP.SightedSpeedMult = 0.8
 
 SWEP.ReloadSpeedMult = 0.75
 
-SWEP.AimDownSightsTime = 0.23
+SWEP.AimDownSightsTime = 0.25
 SWEP.SprintToFireTime = 0.25
 
 SWEP.Sway = 1
@@ -221,9 +222,9 @@ SWEP.Attachments = {
         DetachSound = "TacRP/weapons/optic_off.wav",
         VMScale = 1,
         WMScale = 1,
-        Pos_VM = Vector(0.01, 0, 0),
+        Pos_VM = Vector(0.01, 0, -0.1),
         Ang_VM = Angle(0, 90, 180),
-        Pos_WM = Vector(0, -1, -1),
+        Pos_WM = Vector(0.15, -1.5, -1),
         Ang_WM = Angle(0, -90, 0),
     },
     [2] = {
@@ -235,9 +236,9 @@ SWEP.Attachments = {
         DetachSound = "TacRP/weapons/silencer_off.wav",
         VMScale = 0.5,
         WMScale = 0.5,
-        Pos_VM = Vector(-0.6, 0.45, 6),
+        Pos_VM = Vector(-0.65, 0.4, 6),
         Ang_VM = Angle(90, 0, 0),
-        Pos_WM = Vector(0, 8, -1.5),
+        Pos_WM = Vector(0.1, 7.5, -1.5),
         Ang_WM = Angle(0, -90, 0),
     },
     [3] = {
@@ -247,11 +248,11 @@ SWEP.Attachments = {
         WMBone = "Box01",
         AttachSound = "TacRP/weapons/flashlight_on.wav",
         DetachSound = "TacRP/weapons/flashlight_off.wav",
-        VMScale = 1.1,
-        WMScale = 1.3,
-        Pos_VM = Vector(-2, 0, 5.25),
+        VMScale = 1,
+        WMScale = 1.1,
+        Pos_VM = Vector(-2, 0, 5.5),
         Ang_VM = Angle(90, 0, 180),
-        Pos_WM = Vector(0, 5, -2.75),
+        Pos_WM = Vector(0, 4.5, -2.75),
         Ang_WM = Angle(0, -90, 180),
     },
     [4] = {
