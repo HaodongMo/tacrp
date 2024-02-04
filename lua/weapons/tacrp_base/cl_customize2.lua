@@ -133,10 +133,10 @@ GLEEDARKTH.a = 0.50*255
 local GLEEDARKTX = HSVToColor( 0, 0, 0.25 )
 GLEEDARKTX.a = 0.25*255
 
-local GLEEC1 = HSVToColor( 20, 0.4, 1 )
-GLEEC1.a = (1/32)*255
-local GLEEC2 = HSVToColor( 20, 0.6, 1 )
-GLEEC2.a = (1/32)*255
+local GLEEC1 = HSVToColor( 100, 0.2, 1 )
+GLEEC1.a = 4
+local GLEEC2 = HSVToColor( 100, 0.4, 1 )
+GLEEC2.a = 10
 local GLEEDARK2 = HSVToColor( 0, 0, 0.5 )
 
 local GLEEDARK4 = HSVToColor( 0, 0, 0.9 )
@@ -154,25 +154,29 @@ local c_2_a = CreateClientConVar( "tacrp_c2_2_a", (1/32), true, false )
 
 local c_2_gd = CreateClientConVar( "tacrp_c2_graddown", 0, true, false )
 
-function Gleemax( s, w, h )
+function C2_PaintBox( s, w, h )
 	GEM( s, 0, 0, w, h )
 end
+Gleemax = C2_PaintBox
 
-function GEM( s, x, y, w, h )
+function C2_Outline( x, y, w, h )
+	surface.SetDrawColor( 255, 255, 255 )
+	surface.DrawRect( x, y, w, 1 )
+	surface.SetMaterial( grad2 )
+	surface.DrawTexturedRect( x, y, 1, h )
+	surface.DrawTexturedRect( x+w-1, y, 1, h )
+end
+
+function C2_FullBox( s, x, y, w, h )
 	surface.SetDrawColor( GLEEC1 )
 	surface.DrawRect( x, y, w, h )
 	surface.SetDrawColor( GLEEC2 )
 	surface.SetMaterial( (c_2_gd:GetBool() and grad2) or grad )
 	surface.DrawTexturedRect( x, y, w, h )
-	
-	surface.SetMaterial( grad2 )
-	surface.SetDrawColor( 255, 255, 255 )
-	surface.DrawTexturedRect( x, y, 1, h )
-	surface.DrawTexturedRect( x+w-1, y, 1, h )
 
-	surface.SetDrawColor( 255, 255, 255 )
-	surface.DrawRect( x, y, w, 1 )
+	C2_Outline( x, y, w, h )
 end
+GEM = C2_FullBox
 
 -- local cb = Color( 0, 0, 0, 127 )
 -- function GEM( s, x, y, w, h )

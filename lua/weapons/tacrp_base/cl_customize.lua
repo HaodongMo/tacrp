@@ -939,8 +939,8 @@ function SWEP:CreateCustomizeHUD()
 
         local stat_box = vgui.Create("DPanel", bg)
         stat_box.PrintName = TacRP:GetPhrase("cust.stats")
-        stat_box:SetSize(w_statbox, TacRP.SS(172))
-        stat_box:SetPos(scrw - w_statbox - airgap - smallgap, stack + smallgap * 2 + tabs_h)
+        stat_box:SetSize(w_statbox, scrh - TacRP.SS(20) )
+        stat_box:SetPos(scrw*0.25 - w_statbox/2, TacRP.SS(10) )
         stat_box.Paint = function(self2, w, h)
             if !IsValid(self) then return end
 
