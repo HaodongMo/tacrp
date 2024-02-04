@@ -90,10 +90,11 @@ SWEP.Firemode = 1
 SWEP.Firemodes = false
 
 SWEP.RPM = 600
+SWEP.RPMMultSemi = 0.7
 
 SWEP.RecoilKick = 1.5
 
-SWEP.ClipSize = 20
+SWEP.ClipSize = 15
 
 SWEP.FreeAimMaxAngle = 3.75
 

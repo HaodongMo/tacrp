@@ -83,17 +83,17 @@ SWEP.TTTReplace = {["weapon_zm_pistol"] = 0.5, ["weapon_ttt_glock"] = 0.5}
 SWEP.Damage_Max = 30
 SWEP.Damage_Min = 12
 SWEP.Range_Min = 500 // distance for which to maintain maximum damage
-SWEP.Range_Max = 2200 // distance at which we drop to minimum damage
+SWEP.Range_Max = 1800 // distance at which we drop to minimum damage
 SWEP.Penetration = 3 // units of metal this weapon can penetrate
 SWEP.ArmorPenetration = 0.65
-SWEP.ArmorBonus = 1.5
+SWEP.ArmorBonus = 1
 
 SWEP.MuzzleVelocity = 11500
 
 SWEP.BodyDamageMultipliers = {
     [HITGROUP_HEAD] = 4.5,
     [HITGROUP_CHEST] = 1,
-    [HITGROUP_STOMACH] = 1,
+    [HITGROUP_STOMACH] = 1.25,
     [HITGROUP_LEFTARM] = 0.9,
     [HITGROUP_RIGHTARM] = 0.9,
     [HITGROUP_LEFTLEG] = 0.75,
@@ -103,12 +103,12 @@ SWEP.BodyDamageMultipliers = {
 
 // misc. shooting
 
-SWEP.Firemodes = {-2}
-SWEP.Firemode = -2
-SWEP.RunawayBurst = true
+SWEP.Firemodes = false
+SWEP.Firemode = 1
+SWEP.RunawayBurst = false
 SWEP.PostBurstDelay = 0.07
 
-SWEP.RPM = 650
+SWEP.RPM = 450
 
 SWEP.Spread = 0.015
 
@@ -123,8 +123,8 @@ SWEP.RecoilDissipationRate = 20
 SWEP.RecoilFirstShotMult = 1 // multiplier for the first shot's recoil amount
 
 SWEP.RecoilVisualKick = 1
-SWEP.RecoilKick = 5
-SWEP.RecoilStability = 0.1
+SWEP.RecoilKick = 7
+SWEP.RecoilStability = 0.15
 
 SWEP.RecoilSpreadPenalty = 0.002
 
@@ -178,7 +178,7 @@ SWEP.HolsterAng = Angle(60, 5, 0)
 
 // reload
 
-SWEP.ClipSize = 30
+SWEP.ClipSize = 24
 SWEP.Ammo = "pistol"
 
 SWEP.ReloadTimeMult = 1

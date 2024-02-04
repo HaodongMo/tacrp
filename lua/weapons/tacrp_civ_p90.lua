@@ -76,7 +76,8 @@ SWEP.TTTReplace = {}
 SWEP.Range_Min = 1200
 SWEP.Range_Max = 4000
 
-SWEP.RPM = 700
+SWEP.RPM = 600
+SWEP.RPMMultSemi = 0.7
 
 SWEP.Firemode = 1
 SWEP.Firemodes = false
