@@ -179,9 +179,9 @@ hook.Add("HUDPaint", "TacRP_HUD2", function()
 			for i=1, MC do
 				local Dx, Dy = Hx + Hw - s(4+4) + Sx, Hy - s(4+1) + Sy
 				if i<= self:Clip1() then
-					surface.SetDrawColor( 32, 32, 32, 160 )
-					surface.DrawTexturedRectRotated( Dx + 1, Dy + 1, Buw, Buh, 14 )
-					surface.DrawTexturedRectRotated( Dx + 3, Dy + 2, Buw, Buh, 14 )
+					surface.SetDrawColor( 32, 32, 32, 80 )
+					surface.DrawTexturedRectRotated( Dx + 2, Dy + 1, Buw, Buh, 14 )
+					surface.DrawTexturedRectRotated( Dx + 2, Dy + 2, Buw, Buh, 14 )
 					if (i+aps) > self:Clip1() then
 						surface.SetDrawColor( 255, 200, 60 )
 					else
