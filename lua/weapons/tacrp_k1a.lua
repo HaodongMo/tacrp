@@ -87,7 +87,7 @@ SWEP.MuzzleVelocity = 25000
 
 // misc. shooting
 
-SWEP.Firemodes = {-3, 2, 1}
+SWEP.Firemodes = {-3, 1}
 SWEP.RunawayBurst = true
 SWEP.PostBurstDelay = 0.16
 
@@ -279,7 +279,7 @@ SWEP.Attachments = {
     },
     [6] = {
         PrintName = "Trigger",
-        Category = {"trigger_4pos"},
+        Category = {"trigger_burst"},
         AttachSound = "TacRP/weapons/flashlight_on.wav",
         DetachSound = "TacRP/weapons/flashlight_off.wav",
     },

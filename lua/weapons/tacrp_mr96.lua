@@ -90,7 +90,7 @@ SWEP.Firemode = 1
 
 SWEP.FiremodeName = "Double-Action" // only used externally for firemode name distinction
 
-SWEP.RPM = 150
+SWEP.RPM = 140
 
 SWEP.Spread = 0.001
 

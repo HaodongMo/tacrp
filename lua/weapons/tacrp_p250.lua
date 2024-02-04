@@ -51,6 +51,7 @@ SWEP.BalanceStats = {
         Range_Min = 800,
         Range_Max = 2000,
         RPM = 200,
+        RPMMultSemi = 1,
 
         RecoilResetInstant = true,
         RecoilMaximum = 5,
@@ -91,7 +92,7 @@ SWEP.Range_Min = 800 // distance for which to maintain maximum damage
 SWEP.Range_Max = 2500 // distance at which we drop to minimum damage
 SWEP.Penetration = 7 // units of metal this weapon can penetrate
 SWEP.ArmorPenetration = 0.775
-SWEP.ArmorBonus = 0.75
+SWEP.ArmorBonus = 1
 
 SWEP.MuzzleVelocity = 11000
 
@@ -111,6 +112,7 @@ SWEP.BodyDamageMultipliers = {
 SWEP.Firemode = 1
 
 SWEP.RPM = 500
+SWEP.RPMMultSemi = 0.7
 
 SWEP.Spread = 0.004
 
