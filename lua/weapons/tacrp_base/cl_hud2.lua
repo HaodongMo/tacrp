@@ -176,18 +176,30 @@ hook.Add("HUDPaint", "TacRP_HUD2", function()
 			end
 
 			surface.SetMaterial( Material("tacrp/h2/bullet.png", "mips smooth"))
+			local BANG = 14
 			for i=1, MC do
 				local Dx, Dy = Hx + Hw - s(4+4) + Sx, Hy - s(4+1) + Sy
 				if i<= self:Clip1() then
 					surface.SetDrawColor( 32, 32, 32, 80 )
-					surface.DrawTexturedRectRotated( Dx + 2, Dy + 1, Buw, Buh, 14 )
-					surface.DrawTexturedRectRotated( Dx + 2, Dy + 2, Buw, Buh, 14 )
-					if (i+aps) > self:Clip1() then
+					surface.DrawTexturedRectRotated( Dx + 2, Dy + 1, Buw, Buh, BANG )
+					surface.DrawTexturedRectRotated( Dx + 2, Dy + 2, Buw, Buh, BANG )
+					local c1 = self:Clip1()
+					local bl = self:GetCurrentFiremode()
+					local bc = self:GetBurstCount()
+					if bl < 0 then
+						bl = -bl
+					else
+						bl = 1
+						bc = 0
+					end
+					if ((i+aps) > self:Clip1()) then
 						surface.SetDrawColor( 255, 200, 60 )
+					elseif i > (c1-(bl*aps)+((bc)*aps)) then
+						surface.SetDrawColor( 255, 180, 120 )
 					else
 						surface.SetDrawColor( 255, 255, 255 )
 					end
-					surface.DrawTexturedRectRotated( Dx, Dy, Buw, Buh, 14 )
+					surface.DrawTexturedRectRotated( Dx, Dy, Buw, Buh, BANG )
 				else
 					if self:Clip1() == 0 and (CurTime()%0.4) > 0.3 then
 						surface.SetDrawColor( 255, 0, 0, 127 )
@@ -196,7 +208,7 @@ hook.Add("HUDPaint", "TacRP_HUD2", function()
 					else
 						surface.SetDrawColor( 32, 32, 32, 127 )
 					end
-					surface.DrawTexturedRectRotated( Dx, Dy, Buw, Buh, 14 )
+					surface.DrawTexturedRectRotated( Dx, Dy, Buw, Buh, BANG )
 				end
 				Sx = Sx - math.ceil(s(4))
 
