@@ -39,6 +39,8 @@ function SWEP:Attach(slot, att, silent, suppress)
         TacRP:PlayerSendAttInv(self:GetOwner())
     end
 
+    self:SetBurstCount(0)
+
     self:InvalidateCache()
 
     self:SetBaseSettings()
@@ -95,6 +97,8 @@ function SWEP:Detach(slot, silent, suppress)
         TacRP:PlayerSendAttInv(self:GetOwner())
     end
 
+    self:SetBurstCount(0)
+
     self:InvalidateCache()
 
     self:SetBaseSettings()
@@ -120,7 +124,7 @@ function SWEP:Detach(slot, silent, suppress)
 end
 
 function SWEP:ToggleCustomize(on)
-    if on == self:GetCustomize() or (self:GetValue("RunawayBurst") and self:GetBurstCount() > 0) then return end
+    if on == self:GetCustomize() or (on and self:GetValue("RunawayBurst") and self:GetBurstCount() > 0) then return end
 
     self:ScopeToggle(0)
     self:ToggleBlindFire(TacRP.BLINDFIRE_NONE)
