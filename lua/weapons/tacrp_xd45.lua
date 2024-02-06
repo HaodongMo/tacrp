@@ -79,12 +79,13 @@ SWEP.TTTReplace = TacRP.TTTReplacePreset.MachinePistol
 
 // "ballistics"
 
-SWEP.Damage_Max = 32
+SWEP.Damage_Max = 35
 SWEP.Damage_Min = 6
-SWEP.Range_Min = 500
+SWEP.Range_Min = 300
 SWEP.Range_Max = 1500
 SWEP.Penetration = 4
 SWEP.ArmorPenetration = 0.6
+SWEP.ArmorBonus = 0.5
 
 SWEP.MuzzleVelocity = 9000
 
@@ -118,7 +119,7 @@ SWEP.RecoilKick = 6
 SWEP.RecoilStability = 0.15
 
 SWEP.RecoilSpreadPenalty = 0.0025
-SWEP.HipFireSpreadPenalty = 0.02
+SWEP.HipFireSpreadPenalty = 0.03
 
 SWEP.CanBlindFire = true
 

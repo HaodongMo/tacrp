@@ -91,7 +91,7 @@ SWEP.RPM = 950
 
 SWEP.Spread = 0.008
 SWEP.RecoilSpreadPenalty = 0.0018
-SWEP.HipFireSpreadPenalty = 0.01
+SWEP.HipFireSpreadPenalty = 0.014
 
 SWEP.ShootTimeMult = 0.5
 
