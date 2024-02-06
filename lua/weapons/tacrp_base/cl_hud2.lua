@@ -184,10 +184,17 @@ hook.Add("HUDPaint", "TacRP_HUD2", function()
 					surface.DrawTexturedRectRotated( Dx + 2, Dy + 1, Buw, Buh, BANG )
 					surface.DrawTexturedRectRotated( Dx + 2, Dy + 2, Buw, Buh, BANG )
 					local c1 = self:Clip1()
-					local bl = self:GetCurrentFiremode()
-					local bc = self:GetBurstCount()
-					if bl < 0 then
-						bl = -bl
+					local bl
+					local bc
+					if self.GetCurrentFiremode then
+						bl = self:GetCurrentFiremode()
+						bc = self:GetBurstCount()
+						if bl < 0 then
+							bl = -bl
+						else
+							bl = 1
+							bc = 0
+						end
 					else
 						bl = 1
 						bc = 0

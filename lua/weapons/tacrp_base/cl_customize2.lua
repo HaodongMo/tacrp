@@ -734,8 +734,13 @@ end
 if IsValid( c2 ) then
 	c2:Remove()
 	c2 = nil
+	net.Start("TacRP_togglecustomize")
+		net.WriteBool(false)
+	net.SendToServer()
 	timer.Simple( 0.1, function()
-		Entity(1):GetActiveWeapon():C2_Open()
+	net.Start("TacRP_togglecustomize")
+		net.WriteBool(true)
+	net.SendToServer()
 	end)
 end
 
