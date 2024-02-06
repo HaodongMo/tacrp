@@ -26,21 +26,9 @@ SWEP.Slot = 1
 
 SWEP.BalanceStats = {
     [TacRP.BALANCE_SBOX] = {
-        Damage_Max = 24,
-        Damage_Min = 12,
-        RPM = 700,
-
-        BodyDamageMultipliers = {
-            [HITGROUP_HEAD] = 3,
-            [HITGROUP_CHEST] = 1,
-            [HITGROUP_STOMACH] = 1,
-            [HITGROUP_LEFTARM] = 0.9,
-            [HITGROUP_RIGHTARM] = 0.9,
-            [HITGROUP_LEFTLEG] = 0.75,
-            [HITGROUP_RIGHTLEG] = 0.75,
-            [HITGROUP_GEAR] = 0.9
-        },
-
+        Damage_Max = 30,
+        Damage_Min = 8,
+        RPM = 420,
         Spread = 0.02,
     },
     [TacRP.BALANCE_TTT] = {
@@ -80,20 +68,20 @@ SWEP.TTTReplace = {["weapon_zm_pistol"] = 0.5, ["weapon_ttt_glock"] = 0.5}
 
 // "ballistics"
 
-SWEP.Damage_Max = 30
-SWEP.Damage_Min = 12
+SWEP.Damage_Max = 32
+SWEP.Damage_Min = 10
 SWEP.Range_Min = 500 // distance for which to maintain maximum damage
 SWEP.Range_Max = 1800 // distance at which we drop to minimum damage
 SWEP.Penetration = 3 // units of metal this weapon can penetrate
-SWEP.ArmorPenetration = 0.65
-SWEP.ArmorBonus = 1
+SWEP.ArmorPenetration = 0.55
+SWEP.ArmorBonus = 0.5
 
 SWEP.MuzzleVelocity = 11500
 
 SWEP.BodyDamageMultipliers = {
-    [HITGROUP_HEAD] = 4.5,
+    [HITGROUP_HEAD] = 4,
     [HITGROUP_CHEST] = 1,
-    [HITGROUP_STOMACH] = 1.25,
+    [HITGROUP_STOMACH] = 1,
     [HITGROUP_LEFTARM] = 0.9,
     [HITGROUP_RIGHTARM] = 0.9,
     [HITGROUP_LEFTLEG] = 0.75,
@@ -103,12 +91,14 @@ SWEP.BodyDamageMultipliers = {
 
 // misc. shooting
 
-SWEP.Firemodes = false
-SWEP.Firemode = 1
+SWEP.Firemodes = {-2, 2}
+SWEP.Firemode = false
 SWEP.RunawayBurst = false
-SWEP.PostBurstDelay = 0.07
+SWEP.PostBurstDelay = 0.06
 
-SWEP.RPM = 450
+SWEP.RPM = 500
+SWEP.RPMMultBurst = 1.1
+SWEP.RPMMultSemi = 1.1
 
 SWEP.Spread = 0.015
 
@@ -123,7 +113,7 @@ SWEP.RecoilDissipationRate = 20
 SWEP.RecoilFirstShotMult = 1 // multiplier for the first shot's recoil amount
 
 SWEP.RecoilVisualKick = 1
-SWEP.RecoilKick = 7
+SWEP.RecoilKick = 5
 SWEP.RecoilStability = 0.15
 
 SWEP.RecoilSpreadPenalty = 0.002

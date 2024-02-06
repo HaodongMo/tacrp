@@ -218,6 +218,7 @@ ATT.Pros = {"att.procon.auto", "stat.recoilkick"}
 ATT.Cons = {"stat.rpm"}
 
 ATT.Free = true
+ATT.Ignore = true
 
 ATT.Category = "trigger_akimbo"
 
