@@ -33,7 +33,7 @@ SWEP.BalanceStats = {
     [TacRP.BALANCE_SBOX] = {
         Damage_Max = 35,
         Damage_Min = 10,
-        RPM = 360,
+        RPM = 370,
 
         BodyDamageMultipliers = {
             [HITGROUP_HEAD] = 3.25,

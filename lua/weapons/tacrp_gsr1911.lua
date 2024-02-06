@@ -26,8 +26,8 @@ SWEP.Slot = 1
 
 SWEP.BalanceStats = {
     [TacRP.BALANCE_SBOX] = {
-        Damage_Max = 32,
-        Damage_Min = 6,
+        Damage_Max = 34,
+        Damage_Min = 9,
         RPM = 380,
 
         BodyDamageMultipliers = {
@@ -90,7 +90,7 @@ SWEP.TTTReplace = TacRP.TTTReplacePreset.Pistol
 
 // "ballistics"
 
-SWEP.Damage_Max = 30
+SWEP.Damage_Max = 34
 SWEP.Damage_Min = 9
 SWEP.Range_Min = 400 // distance for which to maintain maximum damage
 SWEP.Range_Max = 1800 // distance at which we drop to minimum damage
