@@ -218,6 +218,7 @@ ATT.Pros = {"att.procon.auto", "stat.recoilkick"}
 ATT.Cons = {"stat.rpm"}
 
 ATT.Free = true
+ATT.Ignore = true
 
 ATT.Category = "trigger_akimbo"
 
@@ -246,7 +247,7 @@ ATT.Category = {"trigger_auto"}
 
 ATT.SortOrder = 1.1
 
-ATT.Add_PostBurstDelay = 0.1
+ATT.Add_PostBurstDelay = 0.15
 ATT.Add_RPMMultBurst = 0.25
 ATT.Override_Firemodes = {-3, 1}
 ATT.Override_RunawayBurst = true
@@ -279,9 +280,9 @@ ATT.Category = {"trigger_semi"}
 ATT.SortOrder = 1.1
 
 ATT.Override_Firemodes = {-3, 1}
-ATT.Add_RPMMultBurst = 0.4
+ATT.Add_RPMMultBurst = 0.3
 ATT.Override_RunawayBurst = true
-ATT.Add_PostBurstDelay = 0.14
+ATT.Add_PostBurstDelay = 0.22
 
 ATT.Mult_RecoilKick = 1.25
 ATT.Mult_RecoilStability = 0.75
@@ -422,16 +423,16 @@ ATT.FullName = "Feather Trigger"
 ATT.Icon = Material("entities/tacrp_att_trigger_hair.png", "mips smooth")
 ATT.Description = "Very sensitive trigger for rapid semi-automatic fire."
 ATT.Pros = {"stat.rpm"}
-ATT.Cons = {"stat.recoilresettime", "stat.recoilmaximum", "stat.recoilstability"}
+ATT.Cons = {"stat.recoilmaximum", "stat.recoilstability", "stat.hipfirespread"}
 
 ATT.Category = {"trigger_semi", "trigger_akimbo", "trigger_revolver"}
 
 ATT.SortOrder = 4
 
-ATT.Mult_RPM = 1.25
-ATT.Add_RecoilResetTime = 0.025
-ATT.Mult_RecoilMaximum = 1.15
+ATT.Mult_RPMMultSemi = 1.2
+ATT.Mult_RecoilMaximum = 1.25
 ATT.Mult_RecoilStability = 0.5
+ATT.Mult_HipFireSpreadPenalty = 1.15
 
 TacRP.LoadAtt(ATT, "trigger_hair")
 -- #endregion
@@ -507,6 +508,7 @@ ATT.Mult_RecoilSpreadPenalty = 0.75
 ATT.Mult_RecoilKick = 0.6
 ATT.Mult_RecoilVisualKick = 0.5
 ATT.Mult_RecoilStability = 1.25
+ATT.Mult_RPMMultSemi = 1.2
 
 TacRP.LoadAtt(ATT, "trigger_semi")
 -- #endregion
