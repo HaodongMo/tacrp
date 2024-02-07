@@ -128,7 +128,7 @@ hook.Add("HUDPaint", "TacRP_HUD2", function()
 
 			qd( s, self:GetPrintName(), "C2_5A", Hx + s(4), Hy + s(3), color_white, TEXT_ALIGN_LEFT )
 
-			if self.GetCurrentFiremode then
+			if self.ArcticTacRP then
 				local fm = self:GetCurrentFiremode()
 				if fm == 2 then
 					fm = "Full-auto"
@@ -186,7 +186,7 @@ hook.Add("HUDPaint", "TacRP_HUD2", function()
 					local c1 = self:Clip1()
 					local bl
 					local bc
-					if self.GetCurrentFiremode then
+					if self.ArcticTacRP then
 						bl = self:GetCurrentFiremode()
 						bc = self:GetBurstCount()
 						if bl < 0 then
