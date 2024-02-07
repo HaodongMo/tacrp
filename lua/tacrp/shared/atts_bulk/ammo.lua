@@ -504,7 +504,7 @@ ATT.SortOrder = 1.5
 -- ATT.Mult_Damage_Min = 0.9
 
 ATT.Add_Penetration = 5
-ATT.Add_ArmorPenetration = 0.25
+ATT.Add_ArmorPenetration = 0.1
 ATT.Add_ArmorBonus = 0.25
 
 ATT.Add_RecoilKick = 1
@@ -555,17 +555,18 @@ ATT.FullName = "Hollowpoint Rounds"
 ATT.Icon = Material("entities/tacrp_att_acc_hollowpoints.png", "mips smooth")
 ATT.Description = "Bullets that expand on hit, improving damage to flesh targets and limbs."
 ATT.Pros = {"att.procon.chest", "att.procon.limb"}
-ATT.Cons = {"att.procon.armor", "stat.penetration"}
+ATT.Cons = {"att.procon.head", "att.procon.armor", "stat.penetration"}
 
 ATT.Category = "ammo_pistol"
 
 ATT.SortOrder = 1
 
-ATT.Mult_Penetration = 0.25
-ATT.Mult_ArmorPenetration = 0.85
+ATT.Mult_Penetration = 0.2
+ATT.Mult_ArmorPenetration = 0.75
 ATT.Mult_ArmorBonus = 0.75
 
 ATT.Override_BodyDamageMultipliersExtra = {
+    [HITGROUP_HEAD] = 0.75,
     [HITGROUP_CHEST] = 1.15,
     [HITGROUP_LEFTARM] = -1,
     [HITGROUP_RIGHTARM] = -1,
