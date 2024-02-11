@@ -9,7 +9,7 @@ function SWEP:GetIsSprinting()
         return true
     end
 
-    if self:DoForceSightsBehavior() and self:GetScopeLevel() == 0 then
+    if self:DoForceSightsBehavior() and self:GetScopeLevel() == 0 and !self:GetInBipod() and self:GetBlindFireMode() == TacRP.BLINDFIRE_NONE then
         return true
     end
 
@@ -103,7 +103,7 @@ function SWEP:ThinkSprint()
 
     self.LastWasSprinting = sprinting
 
-    if sprinting then
+    if sprinting and !self:GetInBipod() then
         amt = math.Approach(amt, 1, FrameTime() / self:GetValue("SprintToFireTime"))
     else
         amt = math.Approach(amt, 0, FrameTime() / self:GetValue("SprintToFireTime"))
