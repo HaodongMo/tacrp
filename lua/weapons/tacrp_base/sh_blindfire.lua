@@ -224,7 +224,9 @@ function SWEP:ToggleBlindFire(bf)
     local kms = bf == TacRP.BLINDFIRE_KYS or bf == TacRP.BLINDFIRE_NONE
     if bf != TacRP.BLINDFIRE_NONE and (!self:CheckBlindFire(kms) or bf == self:GetBlindFireMode()) then return end
 
-    if bf != self:GetBlindFireMode() then
+    local diff = bf != self:GetBlindFireMode()
+
+    if diff then
         self:ToggleCustomize(false)
         self:ScopeToggle(0)
         self:SetBlindFireFinishTime(CurTime() + (bf == TacRP.BLINDFIRE_KYS and 1 or 0.3))
@@ -238,10 +240,12 @@ function SWEP:ToggleBlindFire(bf)
         self:GetOwner():EmitSound("tacrp/low-tier-god.mp3", 80, 100)
     end
 
-    if self:StillWaiting(true) then
-        self:IdleAtEndOfAnimation()
-    else
-        self:Idle()
+    if diff then
+        if self:StillWaiting(true) then
+            self:IdleAtEndOfAnimation()
+        else
+            self:Idle()
+        end
     end
 end
 

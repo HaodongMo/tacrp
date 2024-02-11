@@ -243,6 +243,7 @@ SWEP.ProceduralIronFire = {
 SWEP.ShootTimeMult = 0.5
 
 SWEP.LastShot = true
+SWEP.NoIdle = true
 
 // attachments
 
