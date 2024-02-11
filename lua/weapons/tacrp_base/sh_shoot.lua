@@ -10,9 +10,7 @@ function SWEP:StillWaiting(cust, reload)
 end
 
 function SWEP:SprintLock(shoot)
-    if (shoot or !self:CanShootInSprint())
-            and (self:GetSprintLockTime() > CurTime()
-            or self:GetIsSprinting()) then
+    if self:GetSprintLockTime() > CurTime() or self:GetIsSprinting() then
         return true
     end
 

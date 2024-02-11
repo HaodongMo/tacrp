@@ -1312,7 +1312,6 @@ local function menu_mechanics_ti(panel)
     panel:AddControl("checkbox", {
         label = "Lower Weapon While Airborne",
         command = "tacrp_sprint_counts_midair"})
-    panel:ControlHelp("Requires \"Lower Weapon While Sprinting\" to be enabled.")
     panel:AddControl("checkbox", {
         label = "Lower Weapon While Not Aiming",
         command = "tacrp_sightsonly"
