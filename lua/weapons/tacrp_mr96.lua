@@ -5,6 +5,7 @@ AddCSLuaFile()
 
 // names and stuff
 SWEP.PrintName = "Manurhin MR96"
+SWEP.AbbrevName = "MR96"
 SWEP.Category = "Tactical RP"
 
 SWEP.SubCatTier = "2Operator"

@@ -5,6 +5,7 @@ AddCSLuaFile()
 
 // names and stuff
 SWEP.PrintName = "PGM Ultima Ratio"
+SWEP.AbbrevName = "Ultima Ratio"
 SWEP.Category = "Tactical RP"
 
 SWEP.SubCatTier = "3Security"

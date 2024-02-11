@@ -5,6 +5,7 @@ AddCSLuaFile()
 
 // names and stuff
 SWEP.PrintName = "SIG 1911 TACOPS" // The model isn't actually a GSR + TACOPS sounds so badass
+SWEP.AbbrevName = "SIG 1911"
 SWEP.Category = "Tactical RP"
 
 SWEP.SubCatTier = "3Security"

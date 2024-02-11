@@ -5,6 +5,7 @@ AddCSLuaFile()
 
 // names and stuff
 SWEP.PrintName = "BT MP9"
+SWEP.AbbrevName = "MP9"
 SWEP.Category = "Tactical RP" // "Tactical RP (Extras)"
 
 // Assets: https://gamebanana.com/mods/208831

@@ -5,6 +5,7 @@ AddCSLuaFile()
 
 // names and stuff
 SWEP.PrintName = "Beretta 92FS Vertec" // Real variant, even though it sounds like a fake name Gooseman would come up with.
+SWEP.AbbrevName = "Vertec"
 SWEP.Category = "Tactical RP"
 
 SWEP.SubCatTier = "4Consumer"
