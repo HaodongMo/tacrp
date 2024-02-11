@@ -16,7 +16,7 @@ ENT.ExplodeOnDamage = true
 ENT.ExplodeUnderwater = true
 
 ENT.Delay = 0
-ENT.SafetyFuse = 0.75
+ENT.SafetyFuse = 0.7
 ENT.BoostTime = 0.25
 
 ENT.AudioLoop = "TacRP/weapons/rpg7/rocket_flight-1.wav"
