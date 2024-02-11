@@ -111,7 +111,7 @@ function SWEP:ThinkSprint()
 end
 
 function SWEP:CanShootInSprint(base)
-    if !TacRP.ConVars["sprint_lower"]:GetBool() then return true end
+    if !TacRP.ConVars["sprint_lower"]:GetBool() and !self:DoForceSightsBehavior() then return true end
     if base then
         return self:GetBaseValue("ShootWhileSprint")
     else
