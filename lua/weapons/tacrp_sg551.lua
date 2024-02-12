@@ -105,6 +105,8 @@ SWEP.Firemodes = {2, -3, 1}
 
 SWEP.RPM = 850
 
+SWEP.PostBurstDelay = 0.1
+
 SWEP.Spread = 0.001
 
 SWEP.RecoilResetInstant = false
