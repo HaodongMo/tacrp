@@ -31,6 +31,7 @@ function TacRP:PlayerGiveAtt(ply, att, amt)
     if atttbl.AdminOnly and !(ply:IsPlayer() and ply:IsAdmin()) then return false end
     if atttbl.InvAtt then att = atttbl.InvAtt end
 
+    if TacRP.ConVars["free_atts"]:GetBool() then return true end
     local ret = hook.Run("TacRP_PlayerGiveAtt", ply, att, amt)
     if ret != nil then return ret end
 
@@ -56,10 +57,9 @@ function TacRP:PlayerTakeAtt(ply, att, amt)
     if atttbl.Free then return true end
     if atttbl.InvAtt then att = atttbl.InvAtt end
 
+    if TacRP.ConVars["free_atts"]:GetBool() then return true end
     local ret = hook.Run("TacRP_PlayerTakeAtt", ply, att, amt)
     if ret != nil then return ret end
-
-    if TacRP.ConVars["free_atts"]:GetBool() then return true end
 
     if (ply.TacRP_AttInv[att] or 0) < (TacRP.ConVars["lock_atts"]:GetBool() and 1 or amt) then return false end
 
