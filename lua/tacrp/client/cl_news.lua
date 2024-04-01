@@ -692,6 +692,50 @@ The heavy weaponry expansion, sporting 10 new weapons including autoshotties, gu
 
 <p>Have a tactical 2024, gamers!]],
     },
+	    {
+        Title = "Update 20",
+        Type = "Patch Notes",
+        Date = "2024-04-01",
+        Author = "speedonerd",
+        Major = true,
+        Summary = "Not (quite) an April Fools update.",
+        Contents = [[<body style="font-family:'Myriad Pro';color:white;font-size:125%;">
+<p>Hey all! It's been a while since our last Workshop release and things over on the dev front have started to slow, owing to some real-life obligations from both me and 8Z. That's not to say we don't have anything new to share, as we've cooked up a few things in the past 2 months that we'll be dropping with this update.
+
+<h2>What is this, "balance," you speak of?</h2>
+<p>TacRP's various gameplay and balance settings have been, frankly, a total mess for a while. As we continued adding new tweakable options the menus started getting very cluttered, and as we continued adding new weapons we found that having to create 4 whole sets of stats for every single one became insanely arduous.
+<p>A balance revamp was well overdue so we've gone and done just that. Instead of the Arcade-Tactical-TTT-PvE modes we had before that mainly changed TTK speeds and speed penalties, we've reduced this to three new balance modes: Tiered, Untiered and TTT.
+<p>The main difference now is the utilization of the weapon tier system, with Tiered separating weapons into four tiers with higher tiers having better stats, and Untiered eliminating these tiers and making all weapons similar in stats. TTT mode still exists to cater to the specific gameplay flow of the mode.
+<p>Instead of balance schemes controlling speed and handling penalties, things like melee and sighted slowdowns are togglable options independent of the balancing scheme, and damage can now be fine tuned per weapontype to increase or decrease TTK. Sliders for various other things like ADS speed, reload speed and recoil kick have also been added.
+<p>These sliders and certain options that directly affect balance are under the Balance tab while mechanics that exist independent of balance scheme are under the Mechanics tab.
+
+<h2>Dwarves don't use ironsights.</h2>
+<p>Old School mode has been reworked into Old School Scopes; a balance mechanic independent of any one scheme. Like before, it disables ironsights and tightens hipfire, but spread will now be increased with an optic fitted. The higher an optic's magnification, the higher your spread penalty. 
+
+<h2>More options, more fun!</h2>
+<p>Some new minor gameplay options have been added for extra spice. 
+<p>'Dump ammo in magazines' does exactly what it says on the tin: any ammo left in your magazine when you reload will be dropped onto the ground. It is not lost, however, as dropped magazines can be picked up by the player to recover the lost ammo. (This mechanic was not inspired by any particular <i>democratic game</i> and was entirely of our own invention)
+<p>'Lower weapon while not aiming' forces weapons to always be lowered unless you're aiming them, similar to DarkRP.
+
+<h2>Animator? I barely know her!</h2>
+<p>Normally I wouldn't write something for an animation overhaul but this one is a special case. The K98 Sporter from InterOps has always been controversial as it's an iconic old-world bolt action that's been bastardized to use a box mag. The real reason for this was TacInt had no suitable animation set for a weapon like a Mauser rifle and we had to settle for what we had.
+<p>That was until recently when a friend of ours approached us with new animations for the rifle; the Hunting Rifle animations from Cry of Fear. As such, the K98 has been revamped with these new animations and no longer has that fugly Sako mag protruding out from it. Thanks Lazarus!
+<p>Oh yeah, the Double Defense from Special Delivery received new animations too, so that's neat.
+
+<hr>
+
+<h3>Changelog</h3>
+<ul>
+<li><b>Added:</b> (Base) HK45 Compact in Elite tier.
+<li><b>Added:</b> (Base) New balance scheme overhaul.
+<li><b>Changed:</b> (Base) RPG-7 projectiles have slightly shorter safety fuse.
+<li><b>Changed:</b> (InterOps) New Kar 98k animations from Cry of Fear. (Thanks Lazarus!)
+<li><b>Changed:</b> (InterOps) Rescaled FNC model.
+<li><b>Changed:</b> (Special Delivery) New Double Defense animations.
+<li><b>Changed:</b> (Brute Force) New baseball bat animations. (Thanks Lazarus!)
+
+]],
+    },
 }
 TacRP.NewsRead = TacRP.NewsRead or {}
 TacRP.NewsFirstLoad = false
