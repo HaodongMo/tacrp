@@ -731,6 +731,8 @@ The heavy weaponry expansion, sporting 10 new weapons including autoshotties, gu
 <li><b>Changed:</b> (Base) RPG-7 projectiles have slightly shorter safety fuse.
 <li><b>Changed:</b> (InterOps) New Kar 98k animations from Cry of Fear. (Thanks Lazarus!)
 <li><b>Changed:</b> (InterOps) Rescaled FNC model.
+<li><b>Changed:</b> (InterOps) Revised Honey Badger model and sounds.
+<li><b>Changed:</b> (InterOps) New STAR-15 sounds. (Thanks rzenith!)
 <li><b>Changed:</b> (Special Delivery) New Double Defense animations.
 <li><b>Changed:</b> (Brute Force) New baseball bat animations. (Thanks Lazarus!)
 <li><b>Fixed:</b> (Heavy Metal) Fixed laser beam origin on Hardballer.
