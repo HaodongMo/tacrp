@@ -375,6 +375,16 @@ function SWEP:PrimaryAttack()
         self:CallOnClient("DoMuzzleLight")
     end
 
+    -- Troll
+    if self:GetBurstCount() >= 8 and TacRP.ShouldWeFunny() and (self.NextTroll or 0) < CurTime() and math.random() <= 0.05 then
+        timer.Simple(math.Rand(0, 0.25), function()
+            if IsValid(self) then
+                self:EmitSound("tacrp/discord-notification.wav", nil, 100, math.Rand(0.1, 0.5), CHAN_BODY)
+            end
+        end)
+        self.NextTroll = CurTime() + 180
+    end
+
     self:RunHook("Hook_PostShoot")
 end
 
