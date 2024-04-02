@@ -692,8 +692,8 @@ The heavy weaponry expansion, sporting 10 new weapons including autoshotties, gu
 
 <p>Have a tactical 2024, gamers!]],
     },
-	    {
-        Title = "Update 20",
+        {
+        Title = "Update 19",
         Type = "Patch Notes",
         Date = "2024-04-01",
         Author = "speedonerd",

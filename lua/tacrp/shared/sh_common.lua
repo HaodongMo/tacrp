@@ -1,4 +1,4 @@
-TacRP.Version = "18" // 2024-01-07
+TacRP.Version = "19" // 2024-04-01
 
 TacRP.PenTable = {
     [MAT_ANTLION]     = 0.1,
