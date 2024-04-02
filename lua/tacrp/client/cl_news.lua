@@ -736,6 +736,7 @@ The heavy weaponry expansion, sporting 10 new weapons including autoshotties, gu
 <li><b>Changed:</b> (Special Delivery) New Double Defense animations.
 <li><b>Changed:</b> (Brute Force) New baseball bat animations. (Thanks Lazarus!)
 <li><b>Fixed:</b> (Heavy Metal) Fixed laser beam origin on Hardballer.
+<li><b>Fixed:</b> Some other stuff probably not worth documenting.
 ]],
     },
 }
