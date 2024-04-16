@@ -11,6 +11,7 @@ SWEP.SubCatTier = "4Consumer"
 SWEP.SubCatType = "1Sidearm"
 
 SWEP.Description = "Polymer pistol with larger-than-standard capacity and a fast fire rate."
+SWEP.Description_Quote = "\"I got a Glock in my 'Rari. 17 shots, no .38\""
 
 SWEP.Trivia_Caliber = "9x19mm"
 SWEP.Trivia_Manufacturer = "Glock Ges.m.b.H"
