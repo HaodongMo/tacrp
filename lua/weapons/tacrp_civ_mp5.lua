@@ -21,7 +21,7 @@ SWEP.Faction = TacRP.FACTION_NEUTRAL
 SWEP.Credits = "Assets: Tactical Intervention \nModel Edit: speedonerd (it was sooooo hard lol)"
 
 SWEP.ViewModel = "models/weapons/tacint/v_hk94.mdl"
-SWEP.WorldModel = "models/weapons/tacint/w_mp5.mdl"
+SWEP.WorldModel = "models/weapons/tacint/w_hk94.mdl"
 
 SWEP.Slot = 2
 
@@ -119,7 +119,7 @@ SWEP.Attachments = {
         AttachSound = "TacRP/weapons/silencer_on.wav",
         DetachSound = "TacRP/weapons/silencer_off.wav",
         Pos_VM = Vector(-4.32, -0.3, 28),
-        Pos_WM = Vector(24, 2.5, -5.25),
+        Pos_WM = Vector(31, 2.5, -5.25),
         Ang_VM = Angle(90, 0, 0),
         Ang_WM = Angle(0, -3.5, 180),
     },
