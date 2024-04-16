@@ -697,7 +697,7 @@ The heavy weaponry expansion, sporting 10 new weapons including autoshotties, gu
         Type = "Patch Notes",
         Date = "2024-04-01",
         Author = "speedonerd",
-        Major = true,
+        Major = false,
         Summary = "Not (quite) an April Fools update.",
         Contents = [[<body style="font-family:'Myriad Pro';color:white;font-size:125%;">
 <p>Hey all! It's been a while since our last Workshop release and things over on the dev front have started to slow, owing to some real-life obligations from both me and 8Z. That's not to say we don't have anything new to share, as we've cooked up a few things in the past 2 months that we'll be dropping with this update.
@@ -737,6 +737,38 @@ The heavy weaponry expansion, sporting 10 new weapons including autoshotties, gu
 <li><b>Changed:</b> (Brute Force) New baseball bat animations. (Thanks Lazarus!)
 <li><b>Fixed:</b> (Heavy Metal) Fixed laser beam origin on Hardballer.
 <li><b>Fixed:</b> Some other stuff probably not worth documenting.
+]],
+    },
+	{
+        Title = "Pistol Whips Release",
+        Type = "Expansion Release",
+        Date = "2024-04-16",
+        Author = "speedonerd",
+        Major = true,
+        Summary = "Sensational sidearms abound!",
+        Contents = [[<body style="font-family:'Myriad Pro';color:white;font-size:125%;">
+<p>A spur-of-the-moment idea completed in a few days to bolster the (already quite sizable) pool of sidearms in TacRP. 
+
+<h2>Pistol Whips <i>(New!)</i></h2>
+<p><input type='submit' value='Open Workshop' onclick='console.log("RUNLUA:gui.OpenURL(\"https://steamcommunity.com/sharedfiles/filedetails/?id=3134547969\")")' /></p>
+<p>Five brand new pistols, coming from cinema, anime and stuff that caught my eye.
+<ul>
+<li>H&K P7
+<li>Jericho 941
+<li>Walther P99
+<li>SIG P210
+<li>Beretta 93R
+</ul>
+
+<hr>
+
+<h3>Changelog</h3>
+<ul>
+<li><b>Changed:</b> (All packs) Updated a few descriptions and added/changed some quotes.
+<li><b>Changed:</b> (InterOps) Small balance tweaks to the P226.
+</ul>
+
+<p>Hopefully this small expansion can satisfy while we continue to cook up more substantial updates and content releases. Thanks again for your ongoing support!
 ]],
     },
 }
