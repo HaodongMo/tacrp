@@ -11,7 +11,8 @@ SWEP.Category = "Tactical RP"
 SWEP.SubCatTier = "2Operator"
 SWEP.SubCatType = "3Submachine Gun"
 
-SWEP.Description = "Bullpup PDW with a generous top-loaded magazine and controllable spread. Perfect for rushing bombsites.\nHigh velocity rounds retain effectiveness at range and pierces armor easily."
+SWEP.Description = "Bullpup PDW with a generous top-loaded magazine and controllable spread. High velocity rounds retain effectiveness at range and pierces armor easily."
+SWEP.Description_Quote = "\"This is a weapon of war, made to kill your enemy.\""
 
 SWEP.Trivia_Caliber = "5.7x28mm"
 SWEP.Trivia_Manufacturer = "FN Herstal"
