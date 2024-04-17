@@ -13,7 +13,7 @@ SWEP.SubCatTier = "2Operator"
 SWEP.SubCatType = "9Anti-Materiel Rifle"
 
 SWEP.Description = "Heavy anti-materiel rifle that can kill in one shot.\nEquipped with a 12x scope by default. \nLight enough for swing for melee."
-SWEP.Description_Quote = "Does not fire phantom bullets."
+SWEP.Description_Quote = "\"What in the goddamn...?\""
 
 SWEP.Trivia_Caliber = ".50 BMG"
 SWEP.Trivia_Manufacturer = "PGM Précision"
