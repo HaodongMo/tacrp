@@ -12,6 +12,7 @@ SWEP.SubCatTier = "3Security"
 SWEP.SubCatType = "6Precision Rifle"
 
 SWEP.Description = "Battle rifle with slow fire rate but very high damage and armor penetration. Has a grippod that provides some stability if deployed."
+SWEP.Description_Quote = "\"Shut up, clock in and load up.\""
 
 SWEP.Trivia_Caliber = "7.62x51mm"
 SWEP.Trivia_Manufacturer = "DS Arms"
@@ -106,7 +107,7 @@ SWEP.Firemodes = {
     1
 }
 
-SWEP.RPM = 420
+SWEP.RPM = 450
 
 SWEP.Spread = 0.002
 
