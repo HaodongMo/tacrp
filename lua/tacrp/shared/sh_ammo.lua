@@ -31,7 +31,7 @@ for _, i in pairs(ammotypes) do
     end
 end
 
-
+--[[]
 if CLIENT then
     hook.Add("InitPostEntity", "tacrp_hl2hud", function()
         if !HL2HUD then return end
@@ -61,3 +61,4 @@ if CLIENT then
         end
     end)
 end
+]]
