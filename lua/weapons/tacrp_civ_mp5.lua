@@ -12,6 +12,7 @@ SWEP.SubCatTier = "4Consumer"
 SWEP.SubCatType = "5Sporter Carbine"
 
 SWEP.Description = "Semi-automatic model of a legendary submachine gun.\nUses reduced capacity magazines."
+SWEP.Description_Quote = ""
 
 SWEP.Trivia_Caliber = "9x19mm"
 SWEP.Trivia_Manufacturer = "Heckler & Koch"
