@@ -12,6 +12,7 @@ SWEP.SubCatTier = "1Elite"
 SWEP.SubCatType = "4Assault Rifle"
 
 SWEP.Description = "Assault rifle with all around excellent performance, offset by a lower magazine capacity."
+SWEP.Description_Quote = "\"No questions, no answers. That's the business we're in.\""
 
 SWEP.Trivia_Caliber = "5.56x45mm"
 SWEP.Trivia_Manufacturer = "SIG Sauer AG"

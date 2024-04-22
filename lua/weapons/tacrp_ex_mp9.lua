@@ -14,6 +14,7 @@ SWEP.SubCatTier = "2Operator"
 SWEP.SubCatType = "3Submachine Gun"
 
 SWEP.Description = "Compact polymer submachine gun packing lots of firepower in a small package."
+SWEP.Description_Quote = "\"Your right hand comes off?\""
 
 SWEP.Trivia_Caliber = "9x19mm"
 SWEP.Trivia_Manufacturer = "Brügger & Thomet"
