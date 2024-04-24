@@ -74,7 +74,7 @@ function SWEP:Think()
         self:SetJammed(false)
     end
 
-    if self:GetNextIdle() < CurTime() then
+    if self:GetNextIdle() < CurTime() and (SERVER or !game.SinglePlayer()) then
         self:Idle()
     end
 
