@@ -4,7 +4,7 @@ SWEP.Spawnable = true
 AddCSLuaFile()
 
 // names and stuff
-SWEP.PrintName = "DSA FAL SA58"
+SWEP.PrintName = "DSA SA58 OSW"
 SWEP.AbbrevName = "SA58"
 SWEP.Category = "Tactical RP"
 
@@ -16,7 +16,7 @@ SWEP.Description_Quote = "\"Shut up, clock in and load up.\""
 
 SWEP.Trivia_Caliber = "7.62x51mm"
 SWEP.Trivia_Manufacturer = "DS Arms"
-SWEP.Trivia_Year = "1956"
+SWEP.Trivia_Year = "2003"
 
 SWEP.Faction = TacRP.FACTION_MILITIA
 SWEP.Credits = "Assets: Tactical Intervention"
