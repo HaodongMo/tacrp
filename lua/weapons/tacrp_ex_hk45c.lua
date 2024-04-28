@@ -9,7 +9,7 @@ SWEP.AbbrevName = "HK45C"
 SWEP.Category = "Tactical RP"
 
 SWEP.SubCatTier = "1Elite"
-SWEP.SubCatType = "1Sidearm"
+SWEP.SubCatType = "1Pistol"
 
 SWEP.Description = "Modern pistol with great firepower in a handy package."
 

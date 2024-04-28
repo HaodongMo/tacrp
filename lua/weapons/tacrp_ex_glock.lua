@@ -8,7 +8,7 @@ SWEP.PrintName = "Glock 17"
 SWEP.Category = "Tactical RP" // "Tactical RP (Extras)"
 
 SWEP.SubCatTier = "4Consumer"
-SWEP.SubCatType = "1Sidearm"
+SWEP.SubCatType = "1Pistol"
 
 SWEP.Description = "Polymer pistol with larger-than-standard capacity and a fast fire rate."
 SWEP.Description_Quote = "Does not show up on airport metal detectors."

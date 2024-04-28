@@ -9,7 +9,7 @@ SWEP.AbbrevName = "SIG 1911"
 SWEP.Category = "Tactical RP"
 
 SWEP.SubCatTier = "3Security"
-SWEP.SubCatType = "1Sidearm"
+SWEP.SubCatType = "1Pistol"
 
 SWEP.Description = "High damage pistol with low range and capacity.\nA tactical evolution, or some would call devolution, of a venerable classic."
 

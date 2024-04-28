@@ -9,7 +9,7 @@ SWEP.AbbrevName = "P250"
 SWEP.Category = "Tactical RP"
 
 SWEP.SubCatTier = "2Operator"
-SWEP.SubCatType = "1Sidearm"
+SWEP.SubCatType = "1Pistol"
 
 SWEP.Description = "Powerful handgun that exchanges capacity for damage and precision."
 

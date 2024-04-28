@@ -9,7 +9,7 @@ SWEP.AbbrevName = "USP"
 SWEP.Category = "Tactical RP" // "Tactical RP (Extras)"
 
 SWEP.SubCatTier = "3Security"
-SWEP.SubCatType = "1Sidearm"
+SWEP.SubCatType = "1Pistol"
 
 SWEP.Description = "Tactical pistol with good damage and range for its capacity."
 SWEP.Description_Quote = "The weapon of choice for free men."

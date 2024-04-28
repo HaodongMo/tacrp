@@ -9,7 +9,7 @@ SWEP.AbbrevName = "P2000"
 SWEP.Category = "Tactical RP"
 
 SWEP.SubCatTier = "3Security"
-SWEP.SubCatType = "1Sidearm"
+SWEP.SubCatType = "1Pistol"
 
 SWEP.Description = "Well-rounded, run-of-the-mill police handgun."
 SWEP.Description_Quote = "\"Los! Los! Los!\""

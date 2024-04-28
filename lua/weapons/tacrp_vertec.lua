@@ -9,7 +9,7 @@ SWEP.AbbrevName = "Vertec"
 SWEP.Category = "Tactical RP"
 
 SWEP.SubCatTier = "4Consumer"
-SWEP.SubCatType = "1Sidearm"
+SWEP.SubCatType = "1Pistol"
 
 SWEP.Description = "Italian pistol with above average range and accuracy."
 SWEP.Description_Quote = "\"Yippie ki-yay, motherf*cker!\""

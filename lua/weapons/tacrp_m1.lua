@@ -9,7 +9,7 @@ SWEP.AbbrevName = "Mini-14"
 SWEP.Category = "Tactical RP"
 
 SWEP.SubCatTier = "4Consumer"
-SWEP.SubCatType = "5Sporter Carbine"
+SWEP.SubCatType = "5Sporter"
 
 SWEP.Description = "Lightweight rifle with no stock or optic mount.\nGood hip-fire accuracy among rifles, but range is low."
 SWEP.Description_Quote = "\"The one with the gun gets to tell the truth.\""

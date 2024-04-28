@@ -9,7 +9,7 @@ SWEP.AbbrevName = "M1911"
 SWEP.Category = "Tactical RP" // "Tactical RP (Extras)"
 
 SWEP.SubCatTier = "4Consumer"
-SWEP.SubCatType = "1Sidearm"
+SWEP.SubCatType = "1Pistol"
 
 SWEP.Description = "Surplus pistol from an era before tactical attachments and pistol optics, yet still hits quite hard."
 SWEP.Description_Quote = "\"Hasta la vista, baby!\""
