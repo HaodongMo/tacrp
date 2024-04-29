@@ -11,7 +11,7 @@ SWEP.Category = "Tactical RP"
 SWEP.SubCatTier = "2Operator"
 SWEP.SubCatType = "3Submachine Gun"
 
-SWEP.Description = "PDW with superb handling and close range effectiveness.\nHigh velocity rounds retain effectiveness at range and pierces armor easily."
+SWEP.Description = "PDW with superb handling and close range effectiveness. High velocity rounds retain effectiveness at range and pierces armor easily."
 SWEP.Description_Quote = "\"You forgot to cock it, muthaf*cka!\""
 
 SWEP.Trivia_Caliber = "4.6x30mm"
