@@ -4,14 +4,14 @@ SWEP.Spawnable = true
 AddCSLuaFile()
 
 // names and stuff
-SWEP.PrintName = "Colt M4A1"
-SWEP.AbbrevName = "M4A1"
+SWEP.PrintName = "Colt M4 Carbine"
+SWEP.AbbrevName = "M4"
 SWEP.Category = "Tactical RP" // "Tactical RP (Extras)"
 
 SWEP.SubCatTier = "2Operator"
 SWEP.SubCatType = "4Assault Rifle"
 
-SWEP.Description = "A true American classic boasting high fire rate and balanced performance."
+SWEP.Description = "A true American classic boasting high fire rate, short burst delay and overall balanced performance."
 
 SWEP.Trivia_Caliber = "5.56x45mm"
 SWEP.Trivia_Manufacturer = "Colt"
@@ -96,9 +96,12 @@ SWEP.MuzzleVelocity = 25000
 // misc. shooting
 
 SWEP.Firemodes = {
-    2,
+    -3,
     1
 }
+
+SWEP.RunawayBurst = true
+SWEP.PostBurstDelay = 0.14
 
 SWEP.RPM = 800
 
@@ -297,7 +300,7 @@ SWEP.Attachments = {
     },
     [6] = {
         PrintName = "Trigger",
-        Category = {"trigger_auto"},
+        Category = {"trigger_burst"},
         AttachSound = "TacRP/weapons/flashlight_on.wav",
         DetachSound = "TacRP/weapons/flashlight_off.wav",
     },
