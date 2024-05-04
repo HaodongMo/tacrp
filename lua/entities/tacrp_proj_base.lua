@@ -201,6 +201,14 @@ function ENT:PhysicsCollide(data, collider)
         end
 
         self:Stuck()
+    else
+        if !self.Bounced then
+            self.Bounced = true
+            local dot = data.HitNormal:Dot(Vector(0, 0, 1))
+            if dot < 0 then
+                self:GetPhysicsObject():SetVelocityInstantaneous(data.OurNewVelocity * (1 + dot * 0.5))
+            end
+        end
     end
 
     if data.DeltaTime < 0.1 then return end
