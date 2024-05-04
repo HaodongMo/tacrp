@@ -215,7 +215,7 @@ function SWEP:ThinkSights()
     local toggle = self:GetOwner():GetInfoNum("tacrp_toggleaim", 0) == 1
     local press, down = self:GetOwner():KeyPressed(IN_ATTACK2), self:GetOwner():KeyDown(IN_ATTACK2)
 
-    if (!self:GetValue("Scope") or self:DoOldSchoolScopeBehavior()) and down then
+    if (!self:GetValue("Scope") or self:DoOldSchoolScopeBehavior()) and !self.NoSecondaryMelee and down then
         self:Melee()
     elseif sighted and ((toggle and press and ftp) or (!toggle and !down)) then
         self:ScopeToggle(0)
