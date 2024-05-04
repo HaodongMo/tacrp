@@ -74,12 +74,12 @@ function ENT:Detonate()
         util.BlastDamage(self, attacker, self:GetPos(), 350, 150 * mult)
         self:FireBullets({
             Attacker = attacker,
-            Damage = 1000 * mult,
+            Damage = 2000 * mult,
             Tracer = 0,
             Src = self:GetPos(),
             Dir = self:GetForward(),
             HullSize = 0,
-            Distance = 32,
+            Distance = 64,
             IgnoreEntity = self,
             Callback = function(atk, btr, dmginfo)
                 dmginfo:SetDamageType(DMG_AIRBOAT + DMG_BLAST) // airboat damage for helicopters and LVS vehicles
