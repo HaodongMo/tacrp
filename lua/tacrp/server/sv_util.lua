@@ -47,8 +47,9 @@ function TacRP.Flashbang(ent, pos, radius, time_max, time_min, time_stunadd)
                     k:SetSchedule(SCHED_COWER)
                     k:RestartGesture(ACT_COWER)
                     k:SetNPCState(NPC_STATE_NONE)
-                    k.TacRP_FlashEnd = CurTime() + time_max + time_stunadd - 0.01
-                    timer.Simple(time_max + time_stunadd, function()
+                    local t = time_max + time_stunadd + 1
+                    k.TacRP_FlashEnd = CurTime() + t - 0.01
+                    timer.Simple(t, function()
                         if IsValid(k) and k:IsNPC() and k.TacRP_FlashEnd <= CurTime() then
                             k:SetNPCState(NPC_STATE_ALERT)
                         end
