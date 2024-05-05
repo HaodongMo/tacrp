@@ -161,13 +161,14 @@ function SWEP:GetViewModelPosition(pos, ang)
     ---------------------------------------------
     -- Procedural Firing
     ---------------------------------------------
-    if IsValid(vm) and self.ProceduralIronFire then
+    local procdata = self:GetValue("ProceduralIronFire")
+    if IsValid(vm) and procdata then
         local dt = math.max(0, UnPredictedCurTime() - self:GetLastProceduralFireTime() + self:GetPingOffsetScale())
 
-        if dt <= self.ProceduralIronFire.tmax then
+        if dt <= procdata.tmax then
             self.ProceduralIronCleanup = false
             if !(self:GetValue("LastShot") and self:Clip1() == 0) then
-                for k, v in pairs(self.ProceduralIronFire.bones or {}) do
+                for k, v in pairs(procdata.bones or {}) do
                     local bone = vm:LookupBone(v.bone or "")
                     if !bone then continue end
 
@@ -188,17 +189,17 @@ function SWEP:GetViewModelPosition(pos, ang)
                 end
             end
 
-            local dtc = math.ease.InQuad(math.Clamp(1 - dt / self.ProceduralIronFire.t, 0, 1))
+            local dtc = math.ease.InQuad(math.Clamp(1 - dt / procdata.t, 0, 1))
 
-            if dtc > 0 and self.ProceduralIronFire.vm_pos then
-                LerpMod(offsetpos, offsetpos + self.ProceduralIronFire.vm_pos, dtc)
+            if dtc > 0 and procdata.vm_pos then
+                LerpMod(offsetpos, offsetpos + procdata.vm_pos, dtc)
             end
-            if dtc > 0 and self.ProceduralIronFire.vm_ang then
-                LerpMod(offsetang, offsetang + self.ProceduralIronFire.vm_ang, dtc, true)
+            if dtc > 0 and procdata.vm_ang then
+                LerpMod(offsetang, offsetang + procdata.vm_ang, dtc, true)
             end
         elseif !self.ProceduralIronCleanup then
             self.ProceduralIronCleanup = true
-            for k, v in pairs(self.ProceduralIronFire.bones or {}) do
+            for k, v in pairs(procdata.bones or {}) do
                 local bone = vm:LookupBone(v.bone or "")
                 if !bone then continue end
                 if v.pos then

@@ -44,7 +44,7 @@ end
 
 function SWEP:DoProceduralIrons()
     local i = TacRP.ConVars["irons_procedural"]:GetInt()
-    return self.ProceduralIronFire and (i == 2 or (i == 1 and self:GetValue("Holosight"))) --and (!self.LastShot or self:Clip1() > 1)
+    return self:GetValue("ProceduralIronFire") and (i == 2 or (i == 1 and self:GetValue("Holosight"))) --and (!self.LastShot or self:Clip1() > 1)
 end
 
 function SWEP:CountAttachments()
