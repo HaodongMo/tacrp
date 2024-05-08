@@ -264,6 +264,26 @@ TacRP.QuickNades = {
         Category = "TTT",
         SortOrder = 0,
     },
+    ["heal"] = {
+        PrintName = "HEAL",
+        GrenadeEnt = "tacrp_proj_nade_heal",
+        GrenadeWep = "tacrp_nade_heal",
+        ThrowForce = 1000,
+        Ammo = "ti_heal",
+        AmmoEnt = "tacrp_ammo_heal",
+        Model = "models/weapons/tacint/v_quicknade_smoke.mdl",
+        Material = "models/tacint/weapons/v_models/smoke/heal-1",
+        Spoon = true,
+        Icon = Material("TacRP/grenades/heal.png", "mips smooth"),
+        Texture = "tacrp/grenades/smoke",
+        CanSetImpact = true,
+
+        FullName = "Medi-Smoke Can",
+        DetType = "Timed - 5 seconds",
+        Description = "A canister of medical gas designed for extremely rapid trauma response.\n\nAll that is required to receive its effect is to breathe it in - the prototype medical nanites will do the rest.\n\nThere is no benefit to inhaling multiple grenades' worth of healing gas.",
+        Category = "UTILITY",
+        SortOrder = 5,
+    },
 }
 
 TacRP.QuickNades_Index = {}

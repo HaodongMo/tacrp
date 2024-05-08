@@ -105,6 +105,7 @@ L["ammo.ti_gas"] = "CS Gas Grenades"
 L["ammo.ti_nuke"] = "Nuclear Devices"
 L["ammo.ti_charge"] = "Breaching Charge"
 L["ammo.ti_sniper"] = "Anti-Materiel Ammo"
+L["ammo.ti_heal"] = "Medi-Smoke Canisters"
 
 L["rating.score"] = "(Score: {score}/{max})"
 L["rating.lethality"] = "Lethality"
