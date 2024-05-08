@@ -33,8 +33,6 @@ function SWEP:Think()
     end
 
     if owner:KeyPressed(TacRP.IN_CUSTOMIZE) then
-        print(self:GetScopeLevel())
-
         if self:GetScopeLevel() == 0 then
             self:ToggleCustomize(!self:GetCustomize())
         else
