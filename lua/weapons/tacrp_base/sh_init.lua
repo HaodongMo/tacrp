@@ -27,6 +27,8 @@ function SWEP:Deploy()
             self:SetupModel(true)
         end
         return
+    elseif SERVER and self:GetOwner():IsPlayer() then
+        self:GetOwner():SetSaveValue("m_flNextAttack", 0)
     end
 
     self:SetBaseSettings()
