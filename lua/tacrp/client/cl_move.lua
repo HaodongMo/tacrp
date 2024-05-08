@@ -39,8 +39,6 @@ hook.Add("CreateMove", "TacRP_CreateMove", function(cmd)
 
     local finalmovedir = movedir * maxspeed * finalmult
 
-    print(finalmult)
-
     cmd:SetForwardMove(finalmovedir[1])
     cmd:SetUpMove(finalmovedir[2])
     cmd:SetSideMove(finalmovedir[3])
