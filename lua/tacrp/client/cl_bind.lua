@@ -13,25 +13,13 @@ hook.Add("PlayerBindPress", "TacRP_Binds", function(ply, bind, pressed, code)
         wpn.LastHintLife = CurTime() -- ping the hints
     end
 
-    if !pressed then return end
-
-    if bind == "+menu_context" and !LocalPlayer():KeyDown(IN_USE) then
-        if wpn:GetScopeLevel() == 0 then
-            net.Start("TacRP_togglecustomize")
-            net.WriteBool(!wpn:GetCustomize())
-            net.SendToServer()
-        elseif !TacRP.ConVars["togglepeek"]:GetBool() then
-            net.Start("tacrp_togglepeek")
-            net.WriteBool(true) -- release is handled in sh_scope
-            net.SendToServer()
-        else
-            net.Start("tacrp_togglepeek")
-            net.WriteBool(!wpn:GetPeeking())
-            net.SendToServer()
-        end
+    if bind == "+menu_context" then
+        TacRP.KeyPressed_Customize = pressed
 
         return true
     end
+
+    if !pressed then return end
 
     if TacRP.ConVars["toggletactical"]:GetBool() and bind == "impulse 100" and wpn:GetValue("CanToggle") and (
                 !GetConVar("mp_flashlight"):GetBool() or (TacRP.ConVars["flashlight_alt"]:GetBool() and ply:KeyDown(IN_WALK))
@@ -97,4 +85,14 @@ end)
 
 concommand.Add("-tacrp_melee", function()
     TacRP.KeyPressed_Melee = false
+end)
+
+TacRP.KeyPressed_Customize = false
+
+concommand.Add("+tacrp_customize", function()
+    TacRP.KeyPressed_Customize = true
+end)
+
+concommand.Add("-tacrp_customize", function()
+    TacRP.KeyPressed_Customize = false
 end)

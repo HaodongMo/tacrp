@@ -36,6 +36,7 @@ local conVars = {
         name = "togglepeek",
         default = "1",
         client = true,
+        userinfo = true,
     },
     {
         name = "bodydamagecancel",

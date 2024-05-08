@@ -254,9 +254,7 @@ end
 function SWEP:ThinkPeek()
     local down = input.IsKeyDown(input.GetKeyCode(input.LookupBinding("menu_context") or "???"))
     if !TacRP.ConVars["togglepeek"]:GetBool() and self:GetPeeking() ~= down then
-        net.Start("tacrp_togglepeek")
-        net.WriteBool(down)
-        net.SendToServer()
+        RunConsoleCommand("-tacrp_customize")
     end
 end
 

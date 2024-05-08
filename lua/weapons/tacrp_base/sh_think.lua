@@ -32,6 +32,30 @@ function SWEP:Think()
         self:SetPatternCount(0)
     end
 
+    if owner:KeyPressed(TacRP.IN_CUSTOMIZE) then
+        print(self:GetScopeLevel())
+
+        if self:GetScopeLevel() == 0 then
+            self:ToggleCustomize(!self:GetCustomize())
+        else
+            local shouldpeek = !self:GetPeeking()
+
+            if !owner:GetInfoNum("tacrp_togglepeek", 0) then
+                shouldpeek = true
+            end
+
+            self:SetPeeking(shouldpeek)
+
+            if self:GetSightAmount() > 0 then
+                self:SetLastScopeTime(CurTime())
+            end
+        end
+    elseif owner:KeyReleased(TacRP.IN_CUSTOMIZE) then
+        if self:GetScopeLevel() == 0 and owner:GetInfoNum("tacrp_togglepeek", 0) then
+            self:SetPeeking(false)
+        end
+    end
+
     self:ThinkRecoil()
 
     self:ThinkSprint()

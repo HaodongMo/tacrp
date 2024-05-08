@@ -12,7 +12,6 @@ util.AddNetworkString("tacrp_clientdamage")
 util.AddNetworkString("tacrp_container")
 util.AddNetworkString("tacrp_toggletactical")
 util.AddNetworkString("tacrp_doorbust")
-util.AddNetworkString("tacrp_togglepeek")
 util.AddNetworkString("tacrp_flashbang")
 util.AddNetworkString("tacrp_togglenade")
 util.AddNetworkString("tacrp_addshieldmodel")
@@ -21,19 +20,6 @@ util.AddNetworkString("tacrp_givenadewep")
 util.AddNetworkString("tacrp_reloadlangs")
 util.AddNetworkString("tacrp_npcweapon")
 util.AddNetworkString("tacrp_applyconfig")
-
-net.Receive("tacrp_togglepeek", function(len, ply)
-    local bf = net.ReadBool()
-
-    local wpn = ply:GetActiveWeapon()
-
-    if !wpn or !IsValid(wpn) or !wpn.ArcticTacRP then return end
-
-    wpn:SetPeeking(bf)
-    if bf and wpn:GetSightAmount() > 0 then
-        wpn:SetLastScopeTime(CurTime())
-    end
-end)
 
 net.Receive("tacrp_togglenade", function(len, ply)
     local bf = net.ReadUInt(TacRP.QuickNades_Bits)
