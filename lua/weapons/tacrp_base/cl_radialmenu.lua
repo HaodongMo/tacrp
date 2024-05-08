@@ -481,7 +481,7 @@ local bf_lines = {
     "No tactical advantages whatsoever.",
     "The best is yet to come",
     "I know what you did, Mikey.",
-    "AMONG US AMONG US AMONG US AMONG US",
+    "AMONG US AMONG US AMONG US AMONG US AMONG US AMONG US AMONG US AMONG US AMONG US AMONG US AMONG US AMONG US",
     "What would your waifu think?",
     "You won't get to see her, you know.",
     "ez",
@@ -610,7 +610,44 @@ local bf_lines = {
     "But... I love you!",
     "Even now, the evil seed of what you have done germinates within you.",
     "How cliche.",
-    "Oh, you can do better than THAT."
+    "Oh, you can do better than THAT.",
+    "Become an hero.",
+    "A tragedy of the highest order.",
+    "What if you were the impostor all along?",
+    "Sorry. For everything.",
+    "I'm sorry I couldn't do more for you.",
+    "See you soon.",
+    "Say hi to the Devil for me.",
+    "The punishment for suicide is eternal damnation.",
+    "You can't walk back from this one.",
+    "This one is a blank; I just know it.",
+    "Try shooting the other guy instead.",
+    "God, are you watching?",
+    "The moment of truth.",
+    "Sponsored by Donghua Jinlong Glycine Chemical Co. LTD",
+    "Don't try this one at home.",
+    "Redecorate.",
+    "The Kurt Cobain haircut.",
+    "The closest thing to love you'll get to experience.",
+    "Wait! Before you die - subscribe to my other mods.",
+    "Yeah, you could say I have a dark sense of humor",
+    "That's all, folks.",
+    "Farewell and goodbye.",
+    "We hope you enjoyed your time with us tonight.",
+    "Show them who's boss. Go on.",
+    "This is actually what happened to that Boeing guy",
+    "You're making a big mistake.",
+    "The bullets enter the chamber in an unknown order.",
+    "Kill yourself, or die trying.",
+    "No. This is wrong.",
+    "But- you can't!",
+    "All the effort in the world would have gone to waste. Until- well. Let's just say your hour has... come again.",
+    "Become a Liveleak star.",
+    "Cha-cha real smooth.",
+    "The only way to defeat Them.",
+    "Ashes to ashes.",
+    "Death speedrun",
+    "You were gonna die eventually.",
 }
 
 local function canhighlight(self, slice)
@@ -618,8 +655,11 @@ local function canhighlight(self, slice)
     return true
 end
 
+local lastseenfunnyline = false
+local startseefunnylinetime = 0
+
 function SWEP:DrawBlindFireHUD()
-    if !TacRP.ConVars["blindfiremenu"]:GetBool() then return end
+    if !TacRP.ConVars["blindfiremenu"]:GetBool() then lastseenfunnyline = false return end
     local nocenter = TacRP.ConVars["blindfiremenu_nocenter"]:GetBool()
     local nosuicide = nocenter or TacRP.ConVars["idunwannadie"]:GetBool()
 
@@ -692,6 +732,11 @@ function SWEP:DrawBlindFireHUD()
 
             lastmenu_bf = false
         end
+    end
+
+    if self.BlindFireMenuAlpha < 1 then
+        bf_funnyline = nil
+        lastseenfunnyline = false
     end
 
     if self.BlindFireMenuAlpha <= 0 then
@@ -769,17 +814,31 @@ function SWEP:DrawBlindFireHUD()
         surface.DrawText(t1)
 
         surface.SetFont("TacRP_Myriad_Pro_6")
+
+        if !lastseenfunnyline then
+            startseefunnylinetime = CurTime()
+        end
+
+        lastseenfunnyline = true
+
         local t2 = bf_funnyline or ""
         if bf_suicidelock > 0 then
             surface.SetFont("TacRP_Myriad_Pro_8")
             t2 = "[" .. TacRP.GetBind("attack") .. "] - Unlock"
+            lastseenfunnyline = false
         elseif !bf_funnyline then
             bf_funnyline = bf_lines[math.random(1, #bf_lines)]
         end
         local t2_w, t2_h = surface.GetTextSize(t2)
-        surface.SetTextPos(tx - t2_w / 2, ty + TacRP.SS(18) - t2_h / 2)
+        if t2_w > w then
+            render.SetScissorRect(tx - w / 2, ty, tx + w / 2, ty + h, true)
+            surface.SetTextPos(tx - ((CurTime() - startseefunnylinetime + 2.5) * w * 0.3) % (t2_w * 2) + (t2_w / 2), ty + TacRP.SS(18) - t2_h / 2)
+        else
+            surface.SetTextPos(tx - t2_w / 2, ty + TacRP.SS(18) - t2_h / 2)
+        end
         surface.DrawText(t2)
 
+        render.SetScissorRect(0, 0, 0, 0, false)
     end
 end
 
