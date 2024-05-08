@@ -7,22 +7,6 @@ function SWEP:GetRecoilResetTime(base)
 end
 
 function SWEP:ThinkRecoil()
-    -- if ((IsFirstTimePredicted() and CLIENT) or game.SinglePlayer()) and self:GetRecoilAmount() > 0 then
-    --     local kick = self:GetValue("RecoilKick")
-
-    --     if self:GetOwner():Crouching() and !(self:GetOwner():KeyDown(IN_FORWARD) or self:GetOwner():KeyDown(IN_MOVELEFT) or self:GetOwner():KeyDown(IN_MOVERIGHT) or self:GetOwner():KeyDown(IN_BACK)) then
-    --         kick = kick * self:GetValue("RecoilCrouchMult")
-    --     end
-
-    --     -- local rec = math.min(self:GetRecoilAmount(), 1)
-    --     -- local sightdelta = self:GetSightDelta()
-
-    --     -- local aim_kick_v = rec * kick * math.sin((CurTime() - kick) * 15) * FrameTime() * (1 - sightdelta)
-    --     -- local aim_kick_h = rec * kick * math.sin(CurTime() * 12.2) * FrameTime() * (1 - sightdelta)
-
-    --     -- self:SetFreeAimAngle(self:GetFreeAimAngle() - Angle(aim_kick_v, aim_kick_h, 0))
-    -- end
-
     if self:GetLastRecoilTime() + engine.TickInterval() + self:GetRecoilResetTime() < CurTime() then
         local rec = self:GetRecoilAmount()
 

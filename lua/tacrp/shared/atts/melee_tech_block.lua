@@ -55,6 +55,7 @@ ATT.Hook_PostThink = function(wep)
             if IsFirstTimePredicted() then
                 wep:SetHoldBreathAmount(wep:GetHoldBreathAmount() - 0.1)
                 wep:SetOutOfBreath(true)
+                wep:SetHoldingBreath(false)
                 wep:SetNextIdle(math.huge)
             end
             wep:PlayAnimation("idle_defend", 1)

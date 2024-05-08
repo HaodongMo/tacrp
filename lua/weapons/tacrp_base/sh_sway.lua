@@ -68,14 +68,14 @@ function SWEP:ThinkHoldBreath()
     local owner = self:GetOwner()
     if !owner:IsPlayer() then return end
 
-    local ft = FrameTime() * (game.SinglePlayer() and 1 or 0.5)
+    local ft = FrameTime()
 
     if self:HoldingBreath() then
-
-        self:SetBreath(math.max(0, self:GetBreath() - ft * self:GetBreathDrain() * (self:HasOptic() and 1 or 0.75) * (self:GetRecoilAmount() > 0 and 1.5 or 1)))
+        self:SetBreath(self:GetBreath() - ft * (self:GetBreathDrain() * (self:HasOptic() and 1 or 0.75) * (self:GetRecoilAmount() > 0 and 1.5 or 1)))
 
         if self:GetBreath() <= 0 then
             self:SetOutOfBreath(true)
+            self:SetHoldingBreath(false)
         end
 
         if self:GetHoldBreathAmount() < 1 then
@@ -102,21 +102,19 @@ function SWEP:NotOutOfBreath()
     return self:GetBreath() > 0 and !self:GetOutOfBreath()
 end
 
-local lastpressed = false
-SWEP.IsHoldingBreath = false
 function SWEP:HoldingBreath()
     local holding = self:GetOwner():KeyDown(IN_SPEED) or self:GetOwner():KeyDown(IN_RUN)
     if self:GetOwner():GetInfoNum("tacrp_toggleholdbreath", 0) == 1 then
-        if holding and !lastpressed then
-            self.IsHoldingBreath = !self.IsHoldingBreath
+        if self:GetOwner():KeyPressed(IN_SPEED) or self:GetOwner():KeyPressed(IN_RUN) then
+            self:SetHoldingBreath(!self:GetHoldingBreath())
         end
     else
-        self.IsHoldingBreath = holding
+        self:SetHoldingBreath(holding)
     end
 
     lastpressed = holding
 
-    return self:CanHoldBreath() and self:GetSightAmount() >= 1 and self:NotOutOfBreath() and self.IsHoldingBreath
+    return self:CanHoldBreath() and self:GetSightAmount() >= 1 and self:NotOutOfBreath() and self:GetHoldingBreath()
 end
 
 function SWEP:GetBreathDrain()
