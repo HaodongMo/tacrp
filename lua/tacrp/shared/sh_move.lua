@@ -37,10 +37,15 @@ function TacRP.CalculateMaxMoveSpeed(ply)
         ply.LastTacRPWeapon = wpn
     end
 
-    -- mult1: lowest between move speed and shooting speed
     local mult = 1
     if iscurrent and (!wpn:GetSafe() or wpn:GetIsSprinting()) and TacRP.ConVars["penalty_move"]:GetBool() then
         mult = mult * math.Clamp(wpn:GetValue("MoveSpeedMult"), 0.0001, 1)
+    end
+
+    -- mult2: lowest between sighted, reloading, melee, shooting
+    local mult2 = 1
+    if iscurrent and wpn:GetScopeLevel() > 0 and TacRP.ConVars["penalty_aiming"]:GetBool() then
+        mult2 = math.Clamp(wpn:GetValue("SightedSpeedMult"), 0.0001, 1)
     end
 
     if TacRP.ConVars["penalty_firing"]:GetBool() then
@@ -56,13 +61,7 @@ function TacRP.CalculateMaxMoveSpeed(ply)
             shotdelta = Lerp((wpn:GetRecoilAmount() / (wpn:GetValue("RecoilMaximum") * 0.75)) ^ 1.5, 0.25, 1) * aftershottime
         end
         local shootmove = math.Clamp(wpn:GetValue("ShootingSpeedMult"), 0.0001, 1)
-        mult = math.min(mult, Lerp(shotdelta, 1, shootmove))
-    end
-
-    -- mult2: lowest between sighted, reloading, melee
-    local mult2 = 1
-    if iscurrent and wpn:GetScopeLevel() > 0 and TacRP.ConVars["penalty_aiming"]:GetBool() then
-        mult2 = math.Clamp(wpn:GetValue("SightedSpeedMult"), 0.0001, 1)
+        mult2 = math.min(mult2, Lerp(shotdelta, 1, shootmove))
     end
 
     if iscurrent and TacRP.ConVars["penalty_reload"]:GetBool() then
@@ -108,7 +107,7 @@ function TacRP.Move(ply, mv, cmd)
 
     if !iscurrent then return end
 
-    local finalmult = math.min(totalmult, mult, mult2)
+    local finalmult = math.min(totalmult, mult * mult2)
 
     mv:SetMaxSpeed(basespd * finalmult)
     mv:SetMaxClientSpeed(basespd * finalmult)

@@ -35,9 +35,11 @@ hook.Add("CreateMove", "TacRP_CreateMove", function(cmd)
     local maxspeed = basemove:Length()
     local movedir = basemove:GetNormalized()
 
-    local finalmult = math.min(totalmult, mult, mult2)
+    local finalmult = math.min(totalmult, mult * mult2)
 
     local finalmovedir = movedir * maxspeed * finalmult
+
+    print(finalmult)
 
     cmd:SetForwardMove(finalmovedir[1])
     cmd:SetUpMove(finalmovedir[2])

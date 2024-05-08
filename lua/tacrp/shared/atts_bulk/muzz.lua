@@ -245,3 +245,92 @@ ATT.Override_MuzzleEffect = "muzzleflash_suppressed"
 TacRP.LoadAtt(ATT, "muzz_supp_weighted")
 -- #endregion
 
+
+------------------------------
+-- #region muzz_brake_aggressor
+------------------------------
+-- UNFINISHED
+ATT = {}
+
+ATT.PrintName = "A. Brake"
+ATT.FullName = "Aggressor Brake"
+ATT.Icon = Material("entities/tacrp_att_muzz_brake_aggressor.png", "mips smooth")
+ATT.Description = "Muzzle brake designed to redirect vented gases away from the shooter."
+ATT.Pros = {"stat.shootingspeed"}
+ATT.Cons = {"stat.spread"}
+
+ATT.Model = "models/weapons/tacint_extras/addons/brake_aggressor.mdl"
+ATT.Scale = 1.25
+
+ATT.ModelOffset = Vector(-5.0, 0, 0)
+
+ATT.Category = {"silencer", "brake"}
+
+ATT.Mult_ShootingSpeedMult = 1.5
+ATT.Mult_Spread = 1.05
+
+ATT.SortOrder = 100
+
+TacRP.LoadAtt(ATT, "muzz_brake_aggressor")
+-- #endregion
+
+------------------------------
+-- #region muzz_brake_breaching
+------------------------------
+-- UNFINISHED
+ATT = {}
+
+ATT.PrintName = "B. Brake"
+ATT.FullName = "Breaching Brake"
+ATT.Icon = Material("entities/tacrp_att_muzz_brake_breaching.png", "mips smooth")
+ATT.Description = "Spiked muzzle brake designed for close combat."
+ATT.Pros = {"stat.meleedamage"}
+ATT.Cons = {"stat.spread"}
+
+ATT.Model = "models/weapons/tacint_extras/addons/brake_breacher.mdl"
+ATT.Scale = 1.25
+
+ATT.ModelOffset = Vector(-5.4, 0, 0)
+
+ATT.Category = {"silencer", "brake"}
+
+ATT.Mult_MeleeDamage = 2
+ATT.Mult_Spread = 1.05
+
+ATT.SortOrder = 101
+
+TacRP.LoadAtt(ATT, "muzz_brake_breaching")
+-- #endregion
+
+------------------------------
+-- #region muzz_brake_concussive
+------------------------------
+-- UNFINISHED
+ATT = {}
+
+ATT.PrintName = "C. Brake"
+ATT.FullName = "Concussive Brake"
+ATT.Icon = Material("entities/tacrp_att_muzz_brake_concussive.png", "mips smooth")
+ATT.Description = "Viciously loud, uncomfortable muzzle brake for extreme recoil control."
+ATT.Pros = {"stat.recoilkick", "stat.recoilstability"}
+ATT.Cons = {"stat.shootingspeed", "stat.spread", "stat.vol_shoot"}
+
+ATT.Model = "models/weapons/tacint_extras/addons/brake_concussive.mdl"
+ATT.Scale = 1.25
+
+ATT.ModelOffset = Vector(-5.4, 0, 0)
+
+ATT.Category = {"silencer", "brake"}
+
+ATT.Mult_RecoilKick = 0.1
+ATT.Mult_RecoilStability = 1.5
+
+ATT.Mult_ShootingSpeedMult = 0.002
+ATT.Mult_Spread = 1.05
+
+ATT.Add_Vol_Shoot = 15
+
+ATT.SortOrder = 102
+
+TacRP.LoadAtt(ATT, "muzz_brake_concussive")
+-- #endregion
