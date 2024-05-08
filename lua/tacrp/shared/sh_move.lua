@@ -1,9 +1,6 @@
-function TacRP.Move(ply, mv, cmd)
+function TacRP.CalculateMaxMoveSpeed(ply)
     local wpn = ply:GetActiveWeapon()
     local iscurrent = true
-
-    local origspeed = ply:GetMaxSpeed()
-    local basespd = math.min((Vector(cmd:GetForwardMove(), cmd:GetUpMove(), cmd:GetSideMove())):Length(), mv:GetMaxClientSpeed())
 
     local totalmult = 1
 
@@ -14,9 +11,6 @@ function TacRP.Move(ply, mv, cmd)
             mult = Lerp((CurTime() - ply:GetNWFloat("TacRPLastBashed", 0) - 1.5) / (3 - 1.5), slow, 1)
         end
 
-        -- local basespd = math.min((Vector(cmd:GetForwardMove(), cmd:GetUpMove(), cmd:GetSideMove())):Length(), mv:GetMaxClientSpeed())
-        -- mv:SetMaxSpeed(basespd * mult)
-        -- mv:SetMaxClientSpeed(basespd * mult)
         totalmult = totalmult * mult
     end
 
@@ -28,15 +22,7 @@ function TacRP.Move(ply, mv, cmd)
             mult = Lerp((CurTime() - stunstart - stundur * 0.7) / (stundur * 0.3), slow, 1)
         end
 
-        -- local basespd = math.min((Vector(cmd:GetForwardMove(), cmd:GetUpMove(), cmd:GetSideMove())):Length(), mv:GetMaxClientSpeed())
-        -- mv:SetMaxSpeed(basespd * mult)
-        -- mv:SetMaxClientSpeed(basespd * mult)
         totalmult = totalmult * mult
-    end
-
-    if totalmult < 1 then
-        mv:SetMaxSpeed(basespd * totalmult)
-        mv:SetMaxClientSpeed(basespd * totalmult)
     end
 
     -- Remember last weapon to keep applying slowdown on shooting and melee
@@ -50,10 +36,6 @@ function TacRP.Move(ply, mv, cmd)
     else
         ply.LastTacRPWeapon = wpn
     end
-
-    -- try not to apply slowdown on top of crouching or slowwalk speed
-    -- basespd = math.min((Vector(cmd:GetForwardMove(), cmd:GetUpMove(), cmd:GetSideMove())):Length(), mv:GetMaxClientSpeed())
-    basespd = math.min((Vector(cmd:GetForwardMove(), cmd:GetUpMove(), cmd:GetSideMove())):Length(), math.max(mv:GetMaxClientSpeed(), ply:GetWalkSpeed()))
 
     -- mult1: lowest between move speed and shooting speed
     local mult = 1
@@ -113,6 +95,26 @@ function TacRP.Move(ply, mv, cmd)
             -- mult = mult * Lerp(d, math.Clamp(wpn:GetValue("MeleeSpeedMult"), 0.0001, 1), 1)
         end
     end
+
+    return totalmult, mult, mult2
+end
+
+function TacRP.Move(ply, mv, cmd)
+    local wpn = ply:GetActiveWeapon()
+    local iscurrent = true
+
+    local basespd = math.min((Vector(cmd:GetForwardMove(), cmd:GetUpMove(), cmd:GetSideMove())):Length(), mv:GetMaxClientSpeed())
+
+    local totalmult, mult, mult2 = TacRP.CalculateMaxMoveSpeed(ply)
+
+    if totalmult < 1 then
+        mv:SetMaxSpeed(basespd * totalmult)
+        mv:SetMaxClientSpeed(basespd * totalmult)
+    end
+
+    -- try not to apply slowdown on top of crouching or slowwalk speed
+    -- basespd = math.min((Vector(cmd:GetForwardMove(), cmd:GetUpMove(), cmd:GetSideMove())):Length(), mv:GetMaxClientSpeed())
+    basespd = math.min((Vector(cmd:GetForwardMove(), cmd:GetUpMove(), cmd:GetSideMove())):Length(), math.max(mv:GetMaxClientSpeed(), ply:GetWalkSpeed()))
 
     local tgtspeed = basespd * mult * mult2
 

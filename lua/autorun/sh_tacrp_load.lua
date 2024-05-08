@@ -18,7 +18,7 @@ end
 
 for _, v in pairs(file.Find(searchdir .. "client/vgui/*", "LUA")) do
     AddCSLuaFile(searchdir .. "client/vgui/" .. v)
-    if CLIENT then 
+    if CLIENT then
         include(searchdir .. "client/vgui/" .. v)
     end
 end

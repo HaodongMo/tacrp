@@ -28,4 +28,28 @@ hook.Add("CreateMove", "TacRP_CreateMove", function(cmd)
     if TacRP.KeyPressed_Customize then
         cmd:AddKey(TacRP.IN_CUSTOMIZE)
     end
+
+    local totalmult, mult, mult2 = TacRP.CalculateMaxMoveSpeed(LocalPlayer())
+
+    local basemove = Vector(cmd:GetForwardMove(), cmd:GetUpMove(), cmd:GetSideMove())
+    local maxspeed = basemove:Length()
+    local movedir = basemove:GetNormalized()
+
+    if totalmult < 1 then
+        maxspeed = basespd * totalmult
+    end
+
+    local maxwalkspeed = math.min((Vector(cmd:GetForwardMove(), cmd:GetUpMove(), cmd:GetSideMove())):Length(), LocalPlayer():GetWalkSpeed())
+
+    local tgtspeed = maxspeed * mult * mult2
+
+    if mult * mult2 < 1 and tgtspeed < maxwalkspeed then
+        maxspeed = tgtspeed
+    end
+
+    local finalmovedir = movedir * maxspeed
+
+    cmd:SetForwardMove(finalmovedir[1])
+    cmd:SetUpMove(finalmovedir[2])
+    cmd:SetSideMove(finalmovedir[3])
 end)
