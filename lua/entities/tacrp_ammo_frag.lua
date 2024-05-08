@@ -17,6 +17,7 @@ function ENT:Initialize()
     self:SetModel(self.Model)
 
     if SERVER then
+        self:SetMaterial(self.Material or "")
 
         self:PhysicsInit(SOLID_VPHYSICS)
         self:SetMoveType(MOVETYPE_VPHYSICS)

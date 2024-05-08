@@ -12,3 +12,4 @@ ENT.Spawnable                = true
 ENT.Model                    = "models/weapons/tacint/smoke.mdl"
 
 ENT.Ammo = "ti_thermite"
+ENT.Material = "models/tacint/weapons/w_models/smoke/thermite-1"

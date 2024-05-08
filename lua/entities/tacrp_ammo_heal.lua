@@ -12,3 +12,4 @@ ENT.Spawnable                = true
 ENT.Model                    = "models/weapons/tacint/smoke.mdl"
 
 ENT.Ammo = "ti_heal"
+ENT.Material = "models/tacint/weapons/w_models/smoke/heal-1"
