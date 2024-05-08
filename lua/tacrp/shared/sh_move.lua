@@ -108,23 +108,10 @@ function TacRP.Move(ply, mv, cmd)
 
     if !iscurrent then return end
 
-    if totalmult < 1 then
-        mv:SetMaxSpeed(basespd * totalmult)
-        mv:SetMaxClientSpeed(basespd * totalmult)
-    end
+    local finalmult = math.min(totalmult, mult, mult2)
 
-    -- try not to apply slowdown on top of crouching or slowwalk speed
-    -- basespd = math.min((Vector(cmd:GetForwardMove(), cmd:GetUpMove(), cmd:GetSideMove())):Length(), mv:GetMaxClientSpeed())
-    basespd = math.min((Vector(cmd:GetForwardMove(), cmd:GetUpMove(), cmd:GetSideMove())):Length(), math.max(mv:GetMaxClientSpeed(), ply:GetWalkSpeed()))
-
-    local tgtspeed = basespd * mult * mult2
-
-    -- print(tgtspeed, mv:GetMaxClientSpeed(), mv:GetMaxSpeed())
-
-    if mult * mult2 < 1 and tgtspeed < mv:GetMaxSpeed() then
-        mv:SetMaxSpeed(tgtspeed)
-        mv:SetMaxClientSpeed(tgtspeed)
-    end
+    mv:SetMaxSpeed(basespd * finalmult)
+    mv:SetMaxClientSpeed(basespd * finalmult)
 
     -- Semi auto click buffer
     if !wpn.NoBuffer and !wpn:GetCharge() and (wpn:GetCurrentFiremode() <= 1) and mv:KeyPressed(IN_ATTACK)

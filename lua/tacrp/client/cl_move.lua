@@ -35,19 +35,9 @@ hook.Add("CreateMove", "TacRP_CreateMove", function(cmd)
     local maxspeed = basemove:Length()
     local movedir = basemove:GetNormalized()
 
-    if totalmult < 1 then
-        maxspeed = basespd * totalmult
-    end
+    local finalmult = math.min(totalmult, mult, mult2)
 
-    local maxwalkspeed = math.min((Vector(cmd:GetForwardMove(), cmd:GetUpMove(), cmd:GetSideMove())):Length(), LocalPlayer():GetWalkSpeed())
-
-    local tgtspeed = maxspeed * mult * mult2
-
-    if mult * mult2 < 1 and tgtspeed < maxwalkspeed then
-        maxspeed = tgtspeed
-    end
-
-    local finalmovedir = movedir * maxspeed
+    local finalmovedir = movedir * maxspeed * finalmult
 
     cmd:SetForwardMove(finalmovedir[1])
     cmd:SetUpMove(finalmovedir[2])
