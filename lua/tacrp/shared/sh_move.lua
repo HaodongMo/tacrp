@@ -96,16 +96,17 @@ function TacRP.CalculateMaxMoveSpeed(ply)
         end
     end
 
-    return totalmult, mult, mult2
+    return totalmult, mult, mult2, iscurrent
 end
 
 function TacRP.Move(ply, mv, cmd)
     local wpn = ply:GetActiveWeapon()
-    local iscurrent = true
 
     local basespd = math.min((Vector(cmd:GetForwardMove(), cmd:GetUpMove(), cmd:GetSideMove())):Length(), mv:GetMaxClientSpeed())
 
-    local totalmult, mult, mult2 = TacRP.CalculateMaxMoveSpeed(ply)
+    local totalmult, mult, mult2, iscurrent = TacRP.CalculateMaxMoveSpeed(ply)
+
+    if !iscurrent then return end
 
     if totalmult < 1 then
         mv:SetMaxSpeed(basespd * totalmult)
@@ -124,8 +125,6 @@ function TacRP.Move(ply, mv, cmd)
         mv:SetMaxSpeed(tgtspeed)
         mv:SetMaxClientSpeed(tgtspeed)
     end
-
-    if !iscurrent then return end
 
     -- Semi auto click buffer
     if !wpn.NoBuffer and !wpn:GetCharge() and (wpn:GetCurrentFiremode() <= 1) and mv:KeyPressed(IN_ATTACK)
