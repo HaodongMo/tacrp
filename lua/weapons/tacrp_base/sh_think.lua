@@ -38,7 +38,7 @@ function SWEP:Think()
         else
             local shouldpeek = !self:GetPeeking()
 
-            if !owner:GetInfoNum("tacrp_togglepeek", 0) then
+            if owner:GetInfoNum("tacrp_togglepeek", 0) == 0 then
                 shouldpeek = true
             end
 
@@ -48,10 +48,8 @@ function SWEP:Think()
                 self:SetLastScopeTime(CurTime())
             end
         end
-    elseif owner:KeyReleased(TacRP.IN_CUSTOMIZE) then
-        if self:GetScopeLevel() == 0 and owner:GetInfoNum("tacrp_togglepeek", 0) then
-            self:SetPeeking(false)
-        end
+    elseif owner:GetInfoNum("tacrp_togglepeek", 0) == 0 and self:GetPeeking() and owner:KeyReleased(TacRP.IN_CUSTOMIZE) then
+        self:SetPeeking(false)
     end
 
     self:ThinkRecoil()

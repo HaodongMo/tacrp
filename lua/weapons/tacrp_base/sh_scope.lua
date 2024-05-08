@@ -252,10 +252,6 @@ function SWEP:AdjustMouseSensitivity()
 end
 
 function SWEP:ThinkPeek()
-    local down = input.IsKeyDown(input.GetKeyCode(input.LookupBinding("menu_context") or "???"))
-    if !TacRP.ConVars["togglepeek"]:GetBool() and self:GetPeeking() ~= down then
-        RunConsoleCommand("-tacrp_customize")
-    end
 end
 
 function SWEP:GetCCIP(pos, ang)
