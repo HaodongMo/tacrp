@@ -44,9 +44,9 @@ function SWEP:ThinkFreeAim()
 
         self:SetFreeAimAngle(freeaimang)
 
-        if CLIENT and (IsFirstTimePredicted() or game.SinglePlayer()) then
-            self.ClientFreeAimAng = freeaimang
-        end
+        -- if CLIENT and (IsFirstTimePredicted() or game.SinglePlayer()) then
+        --     self.ClientFreeAimAng = freeaimang
+        -- end
     end
 
     self:SetLastAimAngle(self:GetOwner():EyeAngles())
@@ -54,9 +54,9 @@ end
 
 function SWEP:GetFreeAimOffset()
     if !TacRP.ConVars["freeaim"]:GetBool() or !self:GetValue("FreeAim") or self:GetOwner():IsBot() then return Angle(0, 0, 0) end
-    if CLIENT and LocalPlayer() == self:GetOwner() then
-        return self.ClientFreeAimAng
-    elseif CLIENT and LocalPlayer() != self:GetOwner() then
+    -- if CLIENT and LocalPlayer() == self:GetOwner() then
+    --     return self.ClientFreeAimAng
+    if CLIENT and LocalPlayer() != self:GetOwner() then
         local ang = self:GetFreeAimAngle()
         ang:Normalize() -- Angles are networked as unsigned or something, so normalization converts it to what we expect
         return ang
