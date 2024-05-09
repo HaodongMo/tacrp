@@ -490,6 +490,10 @@ ATT.Category = "tactical"
 ATT.SortOrder = 1
 
 ATT.Flashlight = true
+ATT.Blinding = true
+ATT.FlashlightFOV = 75
+ATT.FlashlightBrightness = 1.25
+
 ATT.CanToggle = true
 
 ATT.TacticalName = "Flashlight"
@@ -534,25 +538,28 @@ ATT = {}
 ATT.FullName = "Laser-Light Combo"
 ATT.PrintName = "Combo"
 ATT.Icon = Material("entities/tacrp_att_tac_combo.png", "mips smooth")
-ATT.Description = "Emits a green laser and flashlight."
+ATT.Description = "Emits a green laser and flashlight. The light is too weak to blind others."
 ATT.Pros = {"att.procon.laser", "att.procon.flashlight"}
 ATT.Cons = {"att.procon.visible"}
 
 ATT.Model = "models/weapons/tacint_extras/addons/anpeq.mdl"
-ATT.Scale = 0.9
+ATT.Scale = 0.6
 ATT.ModelAngleOffset = Angle(0, 0, 0)
 
 ATT.Category = "tactical"
 
-ATT.SortOrder = 1
+ATT.SortOrder = 2
 
 ATT.Laser = true
 ATT.Flashlight = true
+ATT.FlashlightFOV = 60
+ATT.FlashlightBrightness = 0.75
+ATT.LaserPower = 1
 ATT.CanToggle = true
 
 ATT.TacticalName = "Combo"
 
-ATT.Override_LaserColor = Color(0, 255, 0)
+ATT.Override_LaserColor = Color(0, 255, 0, 200)
 
 TacRP.LoadAtt(ATT, "tac_combo")
 -- #endregion
