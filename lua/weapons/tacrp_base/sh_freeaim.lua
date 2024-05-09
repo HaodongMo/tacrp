@@ -1,8 +1,15 @@
 SWEP.ClientFreeAimAng = Angle(0, 0, 0)
 
 function SWEP:ThinkFreeAim()
+    if !TacRP.ConVars["freeaim"]:GetBool() or self:GetOwner():IsBot() then return end
+
     if self:GetValue("FreeAim") then
-        local diff = self:GetOwner():EyeAngles() - self:GetLastAimAngle()
+        local diff = Angle(0, 0, 0)
+        if CLIENT then
+            diff = EyeAngles() - self:GetLastAimAngle()
+        else
+            diff = self:GetOwner():EyeAngles() - self:GetLastAimAngle()
+        end
         diff = LerpAngle(0.9, diff, angle_zero)
 
         local freeaimang = Angle(self:GetFreeAimAngle())
