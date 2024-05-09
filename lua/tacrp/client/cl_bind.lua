@@ -30,19 +30,30 @@ hook.Add("PlayerBindPress", "TacRP_Binds", function(ply, bind, pressed, code)
     end
 end)
 
-TacRP.Complaints = {}
+hook.Add("Think", "TacRP_BackupGrenadeBind", function()
+    local grenade1bind = input.LookupBinding("grenade1")
+
+    if !grenade1bind then
+        TacRP.KeyPressed_Grenade1 = input.IsKeyDown( KEY_G )
+    end
+
+    local grenade2bind = input.LookupBinding("grenade2")
+
+    if !grenade2bind then
+        TacRP.KeyPressed_Grenade2 = input.IsKeyDown( KEY_H )
+    end
+end)
 
 function TacRP.GetBind(binding)
     local bind = input.LookupBinding(binding)
 
     if !bind then
-        if !TacRP.Complaints[binding] then
-            TacRP.Complaints[binding] = true
-
-            if binding == "grenade1" or binding == "grenade2" then
-                LocalPlayer():PrintMessage(HUD_PRINTTALK, "Bind +grenade1 and +grenade2 to use TacRP quick grenades!")
-            end
+        if binding == "grenade1" then
+            return "G"
+        elseif binding == "grenade2" then
+            return "H"
         end
+
         return "!"
     end
 
@@ -73,6 +84,9 @@ function TacRP.GetKey(bind)
 
     return key and input.GetKeyCode(key)
 end
+
+TacRP.KeyPressed_Grenade1 = false
+TacRP.KeyPressed_Grenade2 = false
 
 TacRP.KeyPressed_Melee = false
 

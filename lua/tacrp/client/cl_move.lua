@@ -34,6 +34,14 @@ hook.Add("CreateMove", "TacRP_CreateMove", function(cmd)
         TacRP.KeyPressed_Tactical = false
     end
 
+    if TacRP.KeyPressed_Grenade1 then
+        cmd:AddKey(IN_GRENADE1)
+    end
+
+    if TacRP.KeyPressed_Grenade2 then
+        cmd:AddKey(IN_GRENADE2)
+    end
+
     local totalmult, mult, mult2 = TacRP.CalculateMaxMoveSpeed(LocalPlayer())
 
     local basemove = Vector(cmd:GetForwardMove(), cmd:GetUpMove(), cmd:GetSideMove())
