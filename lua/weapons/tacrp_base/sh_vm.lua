@@ -236,10 +236,12 @@ function SWEP:GetViewModelPosition(pos, ang)
     ---------------------------------------------
     -- Customization
     ---------------------------------------------
-    if self:GetCustomize() then
-        customizedelta = m_appor(customizedelta, 1, FT * 1 / 0.15)
-    else
-        customizedelta = m_appor(customizedelta, 0, FT * 1 / 0.15)
+    if IsFirstTimePredicted() then
+        if self:GetCustomize() then
+            customizedelta = m_appor(customizedelta, 1, FT * 1 / 0.15)
+        else
+            customizedelta = m_appor(customizedelta, 0, FT * 1 / 0.15)
+        end
     end
 
     if customizedelta > 0 then
