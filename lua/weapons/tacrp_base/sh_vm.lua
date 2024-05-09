@@ -238,9 +238,9 @@ function SWEP:GetViewModelPosition(pos, ang)
     ---------------------------------------------
     if IsFirstTimePredicted() then
         if self:GetCustomize() then
-            customizedelta = m_appor(customizedelta, 1, FT * 1 / 0.15)
+            customizedelta = m_appor(customizedelta, 1, RealFrameTime() * 1 / 0.15)
         else
-            customizedelta = m_appor(customizedelta, 0, FT * 1 / 0.15)
+            customizedelta = m_appor(customizedelta, 0, RealFrameTime() * 1 / 0.15)
         end
     end
 
