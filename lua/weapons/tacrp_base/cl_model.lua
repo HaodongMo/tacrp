@@ -94,5 +94,13 @@ function SWEP:SetupModel(wm, custom_wm)
 
     if !wm then
         self:CreateFlashlights()
+
+        local mat = self:GetValue("Material")
+
+        if mat then
+            local vm = self:GetOwner():GetViewModel()
+
+            vm:SetMaterial(mat)
+        end
     end
 end

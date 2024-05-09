@@ -256,7 +256,7 @@ ATT.FullName = "Aggressor Brake"
 ATT.Icon = Material("entities/tacrp_att_muzz_brake_aggressor.png", "mips smooth")
 ATT.Description = "Muzzle brake designed to redirect vented gases away from the shooter."
 ATT.Pros = {"stat.shootingspeed"}
-ATT.Cons = {"stat.spread"}
+ATT.Cons = {"stat.spread", "stat.vol_shoot"}
 
 ATT.Model = "models/weapons/tacint_extras/addons/brake_aggressor.mdl"
 ATT.Scale = 1.25
@@ -267,6 +267,7 @@ ATT.Category = {"silencer", "brake"}
 
 ATT.Mult_ShootingSpeedMult = 1.5
 ATT.Mult_Spread = 1.05
+ATT.Add_Vol_Shoot = 5
 
 ATT.SortOrder = 100
 
