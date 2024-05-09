@@ -668,6 +668,14 @@ local bf_lines = {
     "How beautiful life is now, when my time has come.", -- life eternal, mayhem
     "Can't really live, can't really endure.", -- everything ends, slipknot
     "What the fuck was I thinking? Anybody want to tell me I'm fine?", -- everything ends, slipknot
+    -- Translated and abridged excerpts from Kamikaze pilots' manual
+    "Breathe deeply three times. Say in your mind: \"Yah\" (field), \"Kyu\" (ball), \"Joh\" (all right) as you breathe deeply.",
+    "Be always pure-hearted and cheerful. A loyal fighting man is a pure-hearted and filial son.",
+    "If you feel nervous, piss.",
+    "You have lived for 20 years or more. You must exert your full might for the last time in your life. Exert supernatural strength.",
+    "Every deity and the spirits of your dead comrades are watching you intently. They will tell you what fun they had.",
+    "You may nod then, or wonder what happened. You may even hear a final sound like the breaking of crystal. Then you are no more.",
+    -- Kamikaze manual ends
 }
 
 local function canhighlight(self, slice)
