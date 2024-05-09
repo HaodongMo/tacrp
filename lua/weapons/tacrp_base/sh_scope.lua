@@ -174,7 +174,7 @@ function SWEP:SetSightDelta(d)
 end
 
 function SWEP:CanSight()
-    if self:GetReloading() then return false end
+    if self:GetReloading() and !TacRP.ConVars["ads_reload"]:GetBool() then return false end
 
     return true
 end

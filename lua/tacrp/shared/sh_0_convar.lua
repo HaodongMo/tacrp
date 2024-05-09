@@ -823,6 +823,13 @@ local conVars = {
         max = 1,
         replicated = true,
     },
+    {
+        name = "ads_reload",
+        default = "0",
+        min = 0,
+        max = 1,
+        replicated = true
+    }
 }
 
 TacRP.ConVars = {}
@@ -1356,6 +1363,10 @@ local function menu_mechanics_ti(panel)
         command = "tacrp_reload_sg_cancel"
     })
     panel:ControlHelp("Instantly fire out of a shotgun reload. If disabled, the finishing part of the animation must play out.")
+    panel:AddControl("checkbox", {
+        label = "Allow Aiming While Reloading",
+        command = "tacrp_ads_reload"
+    })
     panel:AddControl("slider", {
         label = "Flashbang Slow",
         command = "tacrp_flash_slow",
