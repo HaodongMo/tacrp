@@ -249,7 +249,6 @@ TacRP.LoadAtt(ATT, "muzz_supp_weighted")
 ------------------------------
 -- #region muzz_brake_aggressor
 ------------------------------
--- UNFINISHED
 ATT = {}
 
 ATT.PrintName = "A. Brake"
@@ -277,7 +276,6 @@ TacRP.LoadAtt(ATT, "muzz_brake_aggressor")
 ------------------------------
 -- #region muzz_brake_breaching
 ------------------------------
--- UNFINISHED
 ATT = {}
 
 ATT.PrintName = "B. Brake"
@@ -305,7 +303,6 @@ TacRP.LoadAtt(ATT, "muzz_brake_breaching")
 ------------------------------
 -- #region muzz_brake_concussive
 ------------------------------
--- UNFINISHED
 ATT = {}
 
 ATT.PrintName = "C. Brake"
@@ -329,8 +326,11 @@ ATT.Mult_ShootingSpeedMult = 0.002
 ATT.Mult_Spread = 1.05
 
 ATT.Add_Vol_Shoot = 15
+ATT.Mult_Pitch_Shoot = 0.9
 
 ATT.SortOrder = 102
+
+ATT.Override_MuzzleEffect = "muzzleflash_m3"
 
 TacRP.LoadAtt(ATT, "muzz_brake_concussive")
 -- #endregion
