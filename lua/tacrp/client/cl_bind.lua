@@ -16,7 +16,9 @@ hook.Add("PlayerBindPress", "TacRP_Binds", function(ply, bind, pressed, code)
     if bind == "+menu_context" then
         TacRP.KeyPressed_Customize = pressed
 
-        return true
+        if pressed and !LocalPlayer():KeyDown(IN_USE) then
+            return true
+        end
     end
 
     if !pressed then return end
