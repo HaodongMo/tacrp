@@ -36,9 +36,9 @@ function TacRP.GetBind(binding)
     local bind = input.LookupBinding(binding)
 
     if !bind then
-        if binding == "grenade1" then
+        if binding == "+grenade1" then
             return "G"
-        elseif binding == "grenade2" then
+        elseif binding == "+grenade2" then
             return "H"
         end
 
@@ -51,6 +51,12 @@ end
 function TacRP.GetBindKey(bind)
     local key = input.LookupBinding(bind)
     if !key then
+        if bind == "+grenade1" then
+            return "G"
+        elseif bind == "+grenade2" then
+            return "H"
+        end
+
         return bind
     else
         return string.upper(key)
@@ -61,6 +67,12 @@ function TacRP.GetKeyIsBound(bind)
     local key = input.LookupBinding(bind)
 
     if !key then
+        if bind == "+grenade1" then
+            return true
+        elseif bind == "+grenade2" then
+            return true
+        end
+
         return false
     else
         return true
@@ -70,7 +82,17 @@ end
 function TacRP.GetKey(bind)
     local key = input.LookupBinding(bind)
 
-    return key and input.GetKeyCode(key)
+    if !key then
+        if bind == "+grenade1" then
+            return KEY_G
+        elseif bind == "+grenade2" then
+            return KEY_H
+        end
+
+        return false
+    else
+        return input.GetKeyCode(key)
+    end
 end
 
 TacRP.KeyPressed_Melee = false

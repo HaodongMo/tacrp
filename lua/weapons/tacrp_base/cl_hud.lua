@@ -264,7 +264,7 @@ function SWEP:DrawBottomBar(x, y, w, h)
             surface.DrawTexturedRect(x + w - TacRP.SS(41), y + h - nsg - TacRP.SS(1), nsg, nsg)
         end
 
-        local nextnadetxt = TacRP.GetBind("grenade2")
+        local nextnadetxt = TacRP.GetBind("+grenade2")
 
         surface.SetTextColor(col)
         surface.SetFont("TacRP_HD44780A00_5x8_4")
