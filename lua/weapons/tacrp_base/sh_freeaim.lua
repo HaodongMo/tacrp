@@ -1,4 +1,5 @@
 SWEP.ClientFreeAimAng = Angle(0, 0, 0)
+SWEP.ClientLastAimAngle = Angle(0, 0, 0)
 
 function SWEP:ThinkFreeAim()
     if !TacRP.ConVars["freeaim"]:GetBool() or self:GetOwner():IsBot() then return Angle(0, 0, 0) end
