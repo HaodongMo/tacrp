@@ -48,6 +48,7 @@ function SWEP:GetViewModelPosition(pos, ang)
 
     local vm = self:GetOwner():GetViewModel()
     local FT = self:DeltaSysTime() -- FrameTime()
+    local RFT = RealFrameTime()
 
     ang = ang - (self:GetOwner():GetViewPunchAngles() * 0.5)
 
@@ -113,10 +114,12 @@ function SWEP:GetViewModelPosition(pos, ang)
         sightdelta = m_appor(sightdelta, 0, FT / ads)
     end
 
-    if self:GetPeeking() then
-        peekdelta = m_appor(peekdelta, 1, FT / 0.2)
-    else
-        peekdelta = m_appor(peekdelta, 0, FT / 0.2)
+    if IsFirstTimePredicted() then
+        if self:GetPeeking() then
+            peekdelta = m_appor(peekdelta, 1, FT / 0.2)
+        else
+            peekdelta = m_appor(peekdelta, 0, FT / 0.2)
+        end
     end
 
     local curvedsightdelta = self:Curve(sightdelta)
