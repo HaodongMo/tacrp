@@ -967,7 +967,7 @@ ATT = {}
 ATT.FullName = "Emergency Bullet"
 ATT.PrintName = "Emrg. Bullet"
 ATT.Icon = Material("entities/tacrp_att_tac_bullet.png", "mips smooth")
-ATT.Description = "Press the tactical key to quickly load a single bullet for emergency situations."
+ATT.Description = "Press the tactical key to quickly load a single bullet for emergencies."
 ATT.Pros = {}
 ATT.Cons = {}
 
