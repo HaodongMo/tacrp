@@ -178,7 +178,7 @@ function SWEP:ThinkSights()
 
     local ftp = IsFirstTimePredicted()
 
-    if ftp and self:GetOwner():KeyDown(IN_USE) and self:GetOwner():KeyPressed(IN_ATTACK2) then
+    if self:GetOwner():KeyDown(IN_USE) and self:GetOwner():KeyPressed(IN_ATTACK2) then
         self:ToggleSafety()
         return
     end
