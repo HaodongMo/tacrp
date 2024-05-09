@@ -37,9 +37,9 @@ function TacRP.GetBind(binding)
 
     if !bind then
         if binding == "+grenade1" then
-            return "G"
+            return string.upper(input.GetKeyName(TacRP.GRENADE1_Backup))
         elseif binding == "+grenade2" then
-            return "H"
+            return string.upper(input.GetKeyName(TacRP.GRENADE2_Backup))
         end
 
         return "!"
@@ -52,9 +52,9 @@ function TacRP.GetBindKey(bind)
     local key = input.LookupBinding(bind)
     if !key then
         if bind == "+grenade1" then
-            return "G"
+            return string.upper(input.GetKeyName(TacRP.GRENADE1_Backup))
         elseif bind == "+grenade2" then
-            return "H"
+            return string.upper(input.GetKeyName(TacRP.GRENADE2_Backup))
         end
 
         return bind
@@ -84,9 +84,9 @@ function TacRP.GetKey(bind)
 
     if !key then
         if bind == "+grenade1" then
-            return KEY_G
+            return TacRP.GRENADE1_Backup
         elseif bind == "+grenade2" then
-            return KEY_H
+            return TacRP.GRENADE2_Backup
         end
 
         return false

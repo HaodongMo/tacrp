@@ -92,7 +92,15 @@ function SWEP:DrawGrenadeHUD()
         mouseangle = mouseangle + 360
     end
 
-    if self:GetOwner():KeyDown(self.GrenadeMenuKey) and !self:GetPrimedGrenade() and self.BlindFireMenuAlpha == 0 and self:GetHolsterTime() == 0 then
+    local iskeydown = self:GetOwner():KeyDown(self.GrenadeMenuKey)
+
+    if self.GrenadeMenuKey == IN_GRENADE1 and !input.LookupBinding("+grenade1") then
+        iskeydown = input.IsKeyDown(TacRP.GRENADE1_Backup)
+    elseif self.GrenadeMenuKey == IN_GRENADE2 and !input.LookupBinding("+grenade2") then
+        iskeydown = input.IsKeyDown(TacRP.GRENADE2_Backup)
+    end
+
+    if iskeydown and !self:GetPrimedGrenade() and self.BlindFireMenuAlpha == 0 and self:GetHolsterTime() == 0 then
         self.GrenadeMenuAlpha = math.Approach(self.GrenadeMenuAlpha, 1, 15 * ft)
         if !lastmenu then
             gui.EnableScreenClicker(true)
