@@ -943,7 +943,7 @@ ATT.PrintName = "2x Zoom"
 ATT.FullName = "Variable Zoom Optic (2x)"
 ATT.Icon = Material("entities/tacrp_att_tac_magnifier.png", "mips smooth")
 ATT.Description = "Allows all optics to access a 2x zoom level, allowing them zoom in or out."
-ATT.Pros = {}
+ATT.Pros = {"att.procon.magnifier"}
 ATT.Cons = {}
 
 ATT.Category = "tactical"
@@ -968,7 +968,7 @@ ATT.FullName = "Emergency Bullet"
 ATT.PrintName = "Emrg. Bullet"
 ATT.Icon = Material("entities/tacrp_att_tac_bullet.png", "mips smooth")
 ATT.Description = "Press the tactical key to quickly load a single bullet for emergencies."
-ATT.Pros = {}
+ATT.Pros = {"att.procon.bullet"}
 ATT.Cons = {}
 
 ATT.Category = "tactical"

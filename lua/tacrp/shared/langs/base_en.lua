@@ -358,6 +358,8 @@ L["att.procon.noscope"] = "No Scope"
 L["att.procon.conceal"] = "Hide weapon while holstered"
 L["att.procon.armdelay"] = "Arming Delay"
 L["att.procon.proxfuse"] = "Proximity fuse"
+L["att.procon.magnifier"] = "Variable Magnification"
+L["att.procon.bullet"] = "Emergency Bullet"
 
 L["att.sight.1"] = "1x Sight"
 L["att.sight.1.25"] = "1.25x Sight"
