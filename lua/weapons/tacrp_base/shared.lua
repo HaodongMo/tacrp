@@ -324,6 +324,8 @@ SWEP.Sound_BipodUp = "tacrp/bipod_up.wav"
 
 SWEP.Sound_MeleeSwing = ""
 
+SWEP.Sound_ToggleTactical = "tacrp/firemode.wav"
+
 // effects
 
 SWEP.EffectsAlternate = false // Effects will alternate using L and R attachments.
@@ -552,7 +554,7 @@ function SWEP:SetupDataTables()
     self:NetworkVar("Bool", 4, "PrimedGrenade")
     self:NetworkVar("Bool", 5, "Safe")
     self:NetworkVar("Bool", 6, "BlindFireLeft")
-    self:NetworkVar("Bool", 7, "NWTactical")
+    self:NetworkVar("Bool", 7, "Tactical")
     self:NetworkVar("Bool", 8, "Charge")
     self:NetworkVar("Bool", 9, "Peeking")
     self:NetworkVar("Bool", 10, "BlindFireRight") // bleh, but actually less networking load than using an integer (32 bit)
@@ -608,7 +610,6 @@ local function clunpredictvar(tbl, name, varname, default)
     end
 end
 
-clunpredictvar(SWEP, "Tactical", "NWTactical", true)
 clunpredictvar(SWEP, "SightAmount", "NWSightAmount", 0)
 -- clunpredictvar(SWEP, "SprintAmount", "NWSprintAmount", 0)
 clunpredictvar(SWEP, "LastProceduralFireTime", "NWLastProceduralFireTime", 0)

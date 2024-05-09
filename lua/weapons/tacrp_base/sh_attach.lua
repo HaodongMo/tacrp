@@ -171,3 +171,11 @@ function SWEP:CanDetach(slot)
 
     return true
 end
+
+function SWEP:ToggleTactical()
+    self:EmitSound(self:GetValue("Sound_ToggleTactical"))
+
+    self:SetTactical(!self:GetTactical())
+
+    self:RunHook("Hook_ToggleTactical", self:GetTactical())
+end

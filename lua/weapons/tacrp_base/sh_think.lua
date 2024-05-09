@@ -56,6 +56,10 @@ function SWEP:Think()
         end
     end
 
+    if owner:KeyPressed(TacRP.IN_TACTICAL) then
+        self:ToggleTactical()
+    end
+
     self:ThinkRecoil()
 
     self:ThinkSprint()

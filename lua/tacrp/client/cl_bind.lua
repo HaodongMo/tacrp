@@ -24,13 +24,10 @@ hook.Add("PlayerBindPress", "TacRP_Binds", function(ply, bind, pressed, code)
     if TacRP.ConVars["toggletactical"]:GetBool() and bind == "impulse 100" and wpn:GetValue("CanToggle") and (
                 !GetConVar("mp_flashlight"):GetBool() or (TacRP.ConVars["flashlight_alt"]:GetBool() and ply:KeyDown(IN_WALK))
                 or (!TacRP.ConVars["flashlight_alt"]:GetBool() and !ply:KeyDown(IN_WALK))) then
-        net.Start("tacrp_toggletactical")
-        net.SendToServer()
-        wpn:SetTactical(!wpn:GetTactical())
+        TacRP.KeyPressed_Tactical = true
 
-        surface.PlaySound("tacrp/firemode.wav")
-        return true -- we dont want hl2 flashlight
-     end
+        return true
+    end
 end)
 
 TacRP.Complaints = {}
@@ -95,4 +92,14 @@ end)
 
 concommand.Add("-tacrp_customize", function()
     TacRP.KeyPressed_Customize = false
+end)
+
+TacRP.KeyPressed_Tactical = false
+
+concommand.Add("+tacrp_tactical", function()
+    TacRP.KeyPressed_Tactical = true
+end)
+
+concommand.Add("-tacrp_tactical", function()
+    TacRP.KeyPressed_Tactical = false
 end)

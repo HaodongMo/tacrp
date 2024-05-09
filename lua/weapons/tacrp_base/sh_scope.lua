@@ -237,6 +237,10 @@ function SWEP:GetMagnification()
 
         mag = 90 / self:GetValue("ScopeFOV")
 
+        if self:GetValue("VariableZoom") and self:GetTactical() then
+            mag = 90 / self:GetValue("VariableZoomFOV")
+        end
+
         mag = Lerp(level / self:GetValue("ScopeLevels"), 1, mag)
     end
 

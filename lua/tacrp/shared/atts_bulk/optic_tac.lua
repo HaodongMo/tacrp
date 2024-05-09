@@ -531,7 +531,8 @@ TacRP.LoadAtt(ATT, "tac_laser")
 ------------------------------
 ATT = {}
 
-ATT.PrintName = "Combo Device"
+ATT.FullName = "Laser-Light Combo"
+ATT.PrintName = "Combo"
 ATT.Icon = Material("entities/tacrp_att_tac_combo.png", "mips smooth")
 ATT.Description = "Emits a green laser and flashlight."
 ATT.Pros = {"att.procon.laser", "att.procon.flashlight"}
@@ -924,5 +925,69 @@ end
 ATT.TacticalCrosshairTruePos = true
 
 TacRP.LoadAtt(ATT, "tac_spreadgauge")
+-- #endregion
+
+------------------------------
+-- #region tac_magnifier
+------------------------------
+ATT = {}
+
+ATT.PrintName = "2x Zoom"
+ATT.FullName = "Variable Zoom Optic (2x)"
+ATT.Icon = Material("entities/tacrp_att_tac_magnifier.png", "mips smooth")
+ATT.Description = "Allows all optics to access a 2x zoom level, allowing them zoom in or out."
+ATT.Pros = {}
+ATT.Cons = {}
+
+ATT.Category = "tactical"
+
+ATT.SortOrder = 8
+
+ATT.CanToggle = true
+ATT.VariableZoom = true
+ATT.VariableZoomFOV = 90 / 2
+
+ATT.TacticalName = "Magnifier"
+
+TacRP.LoadAtt(ATT, "tac_magnifier")
+-- #endregion
+
+------------------------------
+-- #region tac_bullet
+------------------------------
+ATT = {}
+
+ATT.FullName = "Emergency Bullet"
+ATT.PrintName = "Emrg. Bullet"
+ATT.Icon = Material("entities/tacrp_att_tac_bullet.png", "mips smooth")
+ATT.Description = "Press the tactical key to quickly load a single bullet for emergency situations."
+ATT.Pros = {}
+ATT.Cons = {}
+
+ATT.Category = "tactical"
+
+ATT.SortOrder = 9
+
+ATT.Override_Sound_ToggleTactical = ""
+ATT.CanToggle = true
+
+ATT.TacticalName = "Emergency Bullet"
+
+ATT.Hook_ToggleTactical = function(wep, on)
+    if wep:GetReloading() then return end
+    if wep:StillWaiting() then return end
+
+    if wep:GetCapacity() <= 0 then return end
+    if wep:Clip1() >= wep:GetCapacity() then return end
+    if wep:Ammo1() <= 0 and !wep:GetInfiniteAmmo() then return end
+
+    wep:PlayAnimation("jam", 1, true, true)
+    wep:GetOwner():DoAnimationEvent(ACT_HL2MP_GESTURE_RELOAD_PISTOL)
+    wep:RestoreClip(1)
+
+    return false
+end
+
+TacRP.LoadAtt(ATT, "tac_bullet")
 -- #endregion
 
