@@ -978,7 +978,7 @@ ATT.SortOrder = 9
 ATT.Override_Sound_ToggleTactical = ""
 ATT.CanToggle = true
 
-ATT.TacticalName = "Emergency Bullet"
+ATT.CustomTacticalHint = "Load Single Round"
 
 ATT.Hook_ToggleTactical = function(wep, on)
     if wep:GetReloading() then return end
