@@ -1227,17 +1227,17 @@ function SWEP:CreateCustomizeHUD()
         layout:SetLayoutDir(LEFT)
 
         local scroll = vgui.Create("DScrollPanel", bg)
-        scroll:SetSize(TacRP.SS(120), scrh * 0.9)
+        scroll:SetSize(TacRP.SS(100), scrh * 0.9)
         scroll:SetPos(airgap * 2 + layout:GetWide(), scrh * 0.05)
         scroll:SetVisible(false)
 
         local slotlayout = vgui.Create("TacRPAttSlotLayout", scroll)
-        slotlayout:SetSize(TacRP.SS(120), scrh)
+        slotlayout:SetSize(TacRP.SS(100), scrh)
         slotlayout:SetWeapon(self)
         slotlayout:SetScroll(scroll)
         slotlayout:SetSpaceY(TacRP.SS(4))
         slotlayout:SetSpaceX(TacRP.SS(4))
-        slotlayout:SetLayoutDir(LEFT)
+        slotlayout:SetLayoutDir(TOP)
         if self.LastCustomizeSlot then
             slotlayout:SetSlot(self.LastCustomizeSlot)
         end
