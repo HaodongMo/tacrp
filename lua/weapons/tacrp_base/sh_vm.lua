@@ -114,7 +114,7 @@ function SWEP:GetViewModelPosition(pos, ang)
         sightdelta = m_appor(sightdelta, 0, FT / ads)
     end
 
-    if IsFirstTimePredicted() then
+    if IsFirstTimePredicted() or game.SinglePlayer() then
         if self:GetPeeking() then
             peekdelta = m_appor(peekdelta, 1, FT / 0.2)
         else
@@ -239,7 +239,7 @@ function SWEP:GetViewModelPosition(pos, ang)
     ---------------------------------------------
     -- Customization
     ---------------------------------------------
-    if IsFirstTimePredicted() then
+    if IsFirstTimePredicted() or game.SinglePlayer() then
         if self:GetCustomize() then
             customizedelta = m_appor(customizedelta, 1, RealFrameTime() * 1 / 0.15)
         else
