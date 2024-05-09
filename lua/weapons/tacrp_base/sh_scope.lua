@@ -173,6 +173,12 @@ function SWEP:SetSightDelta(d)
     self:SetSightAmount(d)
 end
 
+function SWEP:CanSight()
+    if self:GetReloading() then return false end
+
+    return true
+end
+
 function SWEP:ThinkSights()
     if !IsValid(self:GetOwner()) then return end
 
@@ -219,8 +225,10 @@ function SWEP:ThinkSights()
         self:Melee()
     elseif sighted and ((toggle and press and ftp) or (!toggle and !down)) then
         self:ScopeToggle(0)
-    elseif !sighted and ((toggle and press and ftp) or (!toggle and down)) then
+    elseif !sighted and ((toggle and press and ftp) or (!toggle and down)) and self:CanSight() then
         self:ScopeToggle(1)
+    elseif sighted and !self:CanSight() then
+        self:ScopeToggle(0)
     end
 end
 
