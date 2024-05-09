@@ -648,6 +648,26 @@ local bf_lines = {
     "Ashes to ashes.",
     "Death speedrun",
     "You were gonna die eventually.",
+    "'Cuz everybody's gotta die sometime.", -- a little piece of heaven, avenged sevenfold
+    "I've made the change; I won't see you tonight.", -- i won't see you tonight pt. 1, avenged sevenfold
+    "No more breath inside; essence left my heart tonight.", -- i won't see you tonight pt. 1, avenged sevenfold
+    "I know this can't be right, stuck in a dream, a nightmare full of sorrow.", -- i won't see you tonight pt. 2, avenged sevenfold
+    "I was me, but now he's gone.", -- fade to black, metallica
+    "Death greets me warm, now I will just say goodbye.", -- fade to black, metallica
+    "I have to laugh out loud; I wish I didn't like this.", -- wait and bleed, slipknot
+    "Lay away a place for me, 'cuz as soon as I'm done, I'll be on my way to live eternally.", -- so far away, avenged sevenfold
+    "Now, I think I understand how this world can overcome a man.", -- fiction, avenged sevenfold
+    "Heard there's peace just on the other side.", -- fiction, avenged sevenfold
+    "I hope you find your own way when I'm not with you tonight.", -- fiction, avenged sevenfold
+    "A truant finds home, and a wish to hold on.", -- immortality, pearl jam
+    "Makes much more sense to live in the present tense.", -- present tense, pearl jam
+    "Darkness comes in waves, tell me, why invite it to stay?", -- life wasted, pearl jam
+    "You flirt with suicide; sometimes, that's okay.", -- falling away from me, korn
+    "I flirt with suicide; sometimes, kill the pain.", -- falling away from me, korn
+    "Die, motherfucker, die!", -- creeping death, metallica
+    "How beautiful life is now, when my time has come.", -- life eternal, mayhem
+    "Can't really live, can't really endure.", -- everything ends, slipknot
+    "What the fuck was I thinking? Anybody want to tell me I'm fine?", -- everything ends, slipknot
 }
 
 local function canhighlight(self, slice)
