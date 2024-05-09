@@ -1,14 +1,16 @@
 SWEP.ClientFreeAimAng = Angle(0, 0, 0)
 
 function SWEP:ThinkFreeAim()
-    if !TacRP.ConVars["freeaim"]:GetBool() or self:GetOwner():IsBot() then return end
+    if !TacRP.ConVars["freeaim"]:GetBool() or self:GetOwner():IsBot() then return Angle(0, 0, 0) end
+
+    local eyeangles = self:GetOwner():EyeAngles()
 
     if self:GetValue("FreeAim") then
-        local diff = Angle(0, 0, 0)
-        if CLIENT then
-            diff = EyeAngles() - self:GetLastAimAngle()
+        local diff = eyeangles
+        if SERVER then
+            diff = diff - self:GetLastAimAngle()
         else
-            diff = self:GetOwner():EyeAngles() - self:GetLastAimAngle()
+            diff = diff - self.ClientLastAimAngle
         end
         diff = LerpAngle(0.9, diff, angle_zero)
 
@@ -49,14 +51,18 @@ function SWEP:ThinkFreeAim()
         freeaimang.p = mag2d * math.sin(ang2d)
         freeaimang.y = mag2d * math.cos(ang2d)
 
-        self:SetFreeAimAngle(freeaimang)
-
-        if CLIENT and (IsFirstTimePredicted() or game.SinglePlayer()) then
+        if CLIENT then
             self.ClientFreeAimAng = freeaimang
+        else
+            self:SetFreeAimAngle(freeaimang)
         end
     end
 
-    self:SetLastAimAngle(self:GetOwner():EyeAngles())
+    if SERVER then
+        self:SetLastAimAngle(eyeangles)
+    else
+        self.ClientLastAimAngle = eyeangles
+    end
 end
 
 function SWEP:GetFreeAimOffset()
