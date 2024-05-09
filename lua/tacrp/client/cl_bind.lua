@@ -30,20 +30,6 @@ hook.Add("PlayerBindPress", "TacRP_Binds", function(ply, bind, pressed, code)
     end
 end)
 
-hook.Add("Think", "TacRP_BackupGrenadeBind", function()
-    local grenade1bind = input.LookupBinding("grenade1")
-
-    if !grenade1bind then
-        TacRP.KeyPressed_Grenade1 = input.IsKeyDown( KEY_G )
-    end
-
-    local grenade2bind = input.LookupBinding("grenade2")
-
-    if !grenade2bind then
-        TacRP.KeyPressed_Grenade2 = input.IsKeyDown( KEY_H )
-    end
-end)
-
 function TacRP.GetBind(binding)
     local bind = input.LookupBinding(binding)
 
@@ -84,9 +70,6 @@ function TacRP.GetKey(bind)
 
     return key and input.GetKeyCode(key)
 end
-
-TacRP.KeyPressed_Grenade1 = false
-TacRP.KeyPressed_Grenade2 = false
 
 TacRP.KeyPressed_Melee = false
 
