@@ -47,7 +47,7 @@ function SWEP:CreateFlashlights()
 
             l:SetColor(Color(255, 255, 255))
             l:SetTexture("effects/flashlight001")
-            l:SetBrightness(4)
+            l:SetBrightness(1.5)
             l:SetEnableShadows(true)
             l:Update()
 

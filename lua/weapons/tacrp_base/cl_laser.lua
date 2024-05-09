@@ -56,11 +56,13 @@ function SWEP:DrawLaser(pos, ang, strength, thirdperson)
         pos = pos - (ang:Forward() * 256)
     end
 
+    local col = self:GetValue("LaserColor")
+
     if TacRP.ConVars["laser_beam"]:GetBool() then
         local width = math.Rand(0.1, 0.2) * strength
         render.SetMaterial(lasermat)
         render.DrawBeam(pos, laser_pos, width * 0.3, 0, 1, Color(200, 200, 200))
-        render.DrawBeam(pos, laser_pos, width, 0, 1, Color(255, 0, 0))
+        render.DrawBeam(pos, laser_pos, width, 0, 1, col)
     end
 
     if tr.Hit and !tr.HitSky then
@@ -68,10 +70,10 @@ function SWEP:DrawLaser(pos, ang, strength, thirdperson)
         local rad = math.Rand(4, 6) * mul
 
         render.SetMaterial(flaremat)
-        render.DrawSprite(laser_pos, rad, rad, Color(255, 0, 0))
+        render.DrawSprite(laser_pos, rad, rad, col)
         render.DrawSprite(laser_pos, rad * 0.3, rad * 0.3, Color(200, 200, 200))
 
-        debugoverlay.Cross(tr.HitPos, 4, FrameTime() * 2, Color(255, 0, 0))
+        debugoverlay.Cross(tr.HitPos, 4, FrameTime() * 2, col)
     end
 
     if behavior then

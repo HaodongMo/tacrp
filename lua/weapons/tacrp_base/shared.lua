@@ -481,6 +481,8 @@ SWEP.BounceWeaponIcon = false
 SWEP.SwayScale = 1
 SWEP.BobScale = 1
 
+SWEP.LaserColor = Color(255, 0, 0)
+
 SWEP.ActiveEffects = {}
 
 AddCSLuaFile()

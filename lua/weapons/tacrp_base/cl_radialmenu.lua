@@ -437,7 +437,7 @@ local bf_lines = {
     "At least take some cops with you",
     "Don't let them take you alive!",
     "Teleport to spawn!",
-    "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+    "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
     "THE VOICES TOLD ME TO DO IT",
     "Equestria awaits.",
     "Truck-Kun sends you to Heaven. Gun-San sends you to Hell.",

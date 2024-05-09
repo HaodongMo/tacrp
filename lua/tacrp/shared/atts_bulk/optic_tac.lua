@@ -520,7 +520,40 @@ ATT.CanToggle = true
 
 ATT.TacticalName = "Laser"
 
+ATT.Override_LaserColor = Color(255, 0, 0)
+
 TacRP.LoadAtt(ATT, "tac_laser")
+-- #endregion
+
+
+------------------------------
+-- #region tac_combo
+------------------------------
+ATT = {}
+
+ATT.PrintName = "Combo Device"
+ATT.Icon = Material("entities/tacrp_att_tac_combo.png", "mips smooth")
+ATT.Description = "Emits a green laser and flashlight."
+ATT.Pros = {"att.procon.laser", "att.procon.flashlight"}
+ATT.Cons = {"att.procon.visible"}
+
+ATT.Model = "models/weapons/tacint_extras/addons/anpeq.mdl"
+ATT.Scale = 0.9
+ATT.ModelAngleOffset = Angle(0, 0, 0)
+
+ATT.Category = "tactical"
+
+ATT.SortOrder = 1
+
+ATT.Laser = true
+ATT.Flashlight = true
+ATT.CanToggle = true
+
+ATT.TacticalName = "Combo"
+
+ATT.Override_LaserColor = Color(0, 255, 0)
+
+TacRP.LoadAtt(ATT, "tac_combo")
 -- #endregion
 
 ------------------------------
