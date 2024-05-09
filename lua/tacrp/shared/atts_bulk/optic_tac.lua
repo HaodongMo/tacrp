@@ -981,6 +981,11 @@ ATT.CanToggle = true
 ATT.CustomTacticalHint = "Load Single Round"
 
 ATT.Hook_ToggleTactical = function(wep, on)
+    if wep:GetMaxClip1() <= 2 then
+        wep:Reload(true)
+        return true
+    end
+
     if wep:GetReloading() then return end
     if wep:StillWaiting() then return end
 

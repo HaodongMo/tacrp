@@ -1,4 +1,6 @@
-function SWEP:Reload()
+function SWEP:Reload(force)
+    force = force or false
+
     if self:GetOwner():IsNPC() then
         self:NPC_Reload()
         return
@@ -13,7 +15,7 @@ function SWEP:Reload()
     local stop = self:RunHook("Hook_PreReload")
     if stop then return end
 
-    if !self:GetOwner():KeyPressed(IN_RELOAD) then
+    if !self:GetOwner():KeyPressed(IN_RELOAD) and !force then
         return
     end
 
