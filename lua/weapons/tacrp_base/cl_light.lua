@@ -38,16 +38,16 @@ function SWEP:CreateFlashlights()
 
             table.insert(self.Flashlights, newlight)
 
-            l:SetFOV(60)
+            l:SetFOV(atttbl.FlashlightFOV or 60)
 
-            l:SetFarZ(1024)
+            l:SetFarZ(atttbl.FlashlightFarZ or 1024)
             l:SetNearZ(4)
 
             l:SetQuadraticAttenuation(100)
 
-            l:SetColor(Color(255, 255, 255))
+            l:SetColor(atttbl.FlashlightColor or color_white)
             l:SetTexture("effects/flashlight001")
-            l:SetBrightness(1.5)
+            l:SetBrightness(atttbl.FlashlightBrightness or 1.5)
             l:SetEnableShadows(true)
             l:Update()
 
@@ -241,7 +241,7 @@ function SWEP:DrawFlashlightGlares()
         local atttbl = TacRP.GetAttTable(k.Installed)
 
         local src, dir
-        if atttbl.Flashlight and self:GetTactical() then
+        if atttbl.Blinding and self:GetTactical() then
             if IsValid(k.WModel) then
                 src, dir = k.WModel:GetPos(), self:GetShootDir()
             else
