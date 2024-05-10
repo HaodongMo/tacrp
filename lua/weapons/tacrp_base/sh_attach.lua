@@ -173,9 +173,9 @@ function SWEP:CanDetach(slot)
 end
 
 function SWEP:ToggleTactical()
-    self:EmitSound(self:GetValue("Sound_ToggleTactical"))
-
-    self:SetTactical(!self:GetTactical())
-
-    self:RunHook("Hook_ToggleTactical", self:GetTactical())
+    local ret = self:RunHook("Hook_ToggleTactical", self:GetTactical())
+    if !ret then
+        self:EmitSound(self:GetValue("Sound_ToggleTactical"))
+        self:SetTactical(!self:GetTactical())
+    end
 end

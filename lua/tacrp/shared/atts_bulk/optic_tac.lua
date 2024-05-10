@@ -993,13 +993,13 @@ ATT.Hook_ToggleTactical = function(wep, on)
     if wep:Clip1() >= wep:GetCapacity() then return end
     if wep:Ammo1() <= 0 and !wep:GetInfiniteAmmo() then return end
 
-    wep:SetNextPrimaryFire(CurTime() + 1)
-    wep:PlayAnimation("jam", 1, true, true)
+    -- wep:SetNextPrimaryFire(CurTime() + 1)
+    wep:PlayAnimation("jam", 0.667, true, true)
     wep:GetOwner():DoAnimationEvent(ACT_HL2MP_GESTURE_RELOAD_PISTOL)
     wep:RestoreClip(1)
     wep:DoBulletBodygroups()
 
-    return false
+    return true
 end
 
 TacRP.LoadAtt(ATT, "tac_bullet")
