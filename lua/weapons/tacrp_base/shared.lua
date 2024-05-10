@@ -281,6 +281,7 @@ SWEP.TryUnholster = false // if we have an "unholster" animation use it instead 
 SWEP.ShotgunReload = false
 SWEP.ShotgunThreeload = true // use those stupid 3 shot reload animations
 SWEP.ShotgunReloadCompleteStart = false // do not interrupt reload_start and instead wait for it to finish first. used on FP6 animations
+SWEP.ShotgunFullCancel = false // Ignore tacrp_reload_sg_cancel and force cancel animation
 SWEP.ReloadUpInTime = nil // time to restore ammo, if unset restores at end of animation
 SWEP.ReloadTimeMult = 1
 SWEP.DeployTimeMult = 1

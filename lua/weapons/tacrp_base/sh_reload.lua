@@ -152,6 +152,8 @@ function SWEP:EndReload()
             self:SetNthShot(0)
 
             self:DoBulletBodygroups()
+
+            self:RunHook("Hook_EndReload")
         else
             local t = self:PlayAnimation("reload", mult, true)
 
@@ -163,6 +165,7 @@ function SWEP:EndReload()
             for i = 1, res do
                 self:SetTimer(t * delay * ((i - 1) / 3) + 0.22, function()
                     self:RestoreClip(1)
+                    self:RunHook("Hook_InsertReload", res)
                 end, "ShotgunRestoreClip")
             end
 
@@ -182,13 +185,15 @@ function SWEP:EndReload()
         end
         self:SetReloading(false)
         self:SetEndReload(false)
-    end
 
-    self:RunHook("Hook_EndReload")
+        self:RunHook("Hook_EndReload")
+    end
 end
 
 function SWEP:CancelReload(doanims, keeptime)
     if self:GetReloading() then
+
+        self:RunHook("Hook_CancelReload")
 
         local stop = false
 

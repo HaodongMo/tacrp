@@ -34,7 +34,7 @@ function SWEP:PrimaryAttack()
     if self:GetCurrentFiremode() < 0 and self:GetBurstCount() >= -self:GetCurrentFiremode() then return end
 
     if self:GetReloading() and self:GetValue("ShotgunReload") then
-        if TacRP.ConVars["reload_sg_cancel"]:GetBool() then
+        if TacRP.ConVars["reload_sg_cancel"]:GetBool() and !self:GetValue("ShotgunFullCancel") then
             self:CancelReload(false)
             self:Idle()
         else

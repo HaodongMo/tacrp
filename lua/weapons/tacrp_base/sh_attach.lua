@@ -16,6 +16,10 @@ function SWEP:Attach(slot, att, silent, suppress)
 
     TacRP:PlayerTakeAtt(self:GetOwner(), att, 1)
 
+    if atttbl.OnAttach then
+        atttbl.OnAttach(self)
+    end
+
     if CLIENT then
         local attid = atttbl.ID
 
@@ -74,6 +78,12 @@ function SWEP:Detach(slot, silent, suppress)
 
     local inf_old = self:GetValue("InfiniteAmmo")
     local ammo_old = self:GetValue("Ammo")
+
+    local atttbl = TacRP.GetAttTable(att)
+
+    if atttbl and atttbl.OnDetach then
+        atttbl.OnDetach(self)
+    end
 
     slottbl.Installed = nil
 

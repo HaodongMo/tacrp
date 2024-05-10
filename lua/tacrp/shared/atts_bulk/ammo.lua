@@ -1129,3 +1129,93 @@ ATT.Add_ArmorPenetration = 0.05
 TacRP.LoadAtt(ATT, "ammo_tmj")
 -- #endregion
 
+
+------------------------------
+-- #region ammo_buckshot_roulette
+------------------------------
+ATT = {}
+
+ATT.PrintName = "B. Roulette"
+ATT.FullName = "Buckshot Roulette"
+ATT.Icon = Material("entities/tacrp_att_ammo_buckshot_roulette.png", "mips smooth")
+ATT.Description = "The shells enter the chamber in an unknown order."
+ATT.Cons = {"att.procon.nopartialreloads"}
+ATT.Category = "ammo_shotgun"
+
+ATT.SortOrder = -1
+
+ATT.ShotgunFullCancel = true
+
+ATT.OnAttach = function(wep)
+    if SERVER then
+        wep:SetNWInt("TacRP_RouletteBlanks", 0)
+        wep:Unload()
+    end
+end
+
+ATT.OnDetach = function(wep)
+    if SERVER then
+        wep:SetNWInt("TacRP_RouletteBlanks", 0)
+        wep:Unload()
+    end
+end
+
+ATT.Hook_PreReload = function(wep)
+    if wep:StillWaiting(true) then return end
+    if wep:Ammo1() <= 0 and !wep:GetValue("InfiniteAmmo") then return end
+
+    if wep:Clip1() > 0 then return true end
+
+    return
+end
+
+ATT.Hook_EndReload = function(wep)
+    if SERVER then
+        local blanks = math.random(1, wep:Clip1() - 1)
+        wep:SetNWInt("TacRP_RouletteBlanks", blanks)
+
+        wep:GetOwner():PrintMessage(HUD_PRINTCENTER, tostring(wep:Clip1() - blanks) .. " LIVE, " .. tostring(blanks) .. " BLANK.")
+    end
+end
+
+ATT.Hook_InsertReload = function(wep)
+    if SERVER then
+        local blanks = math.random(1, wep:Clip1() - 1)
+        wep:SetNWInt("TacRP_RouletteBlanks", blanks)
+    end
+end
+
+ATT.Hook_CancelReload = function(wep)
+    if SERVER then
+        local blanks = wep:GetNWInt("TacRP_RouletteBlanks")
+
+        wep:GetOwner():PrintMessage(HUD_PRINTCENTER, tostring(wep:Clip1() - blanks) .. " LIVE, " .. tostring(blanks) .. " BLANK.")
+    end
+end
+
+ATT.Hook_PreShoot = function(wep)
+    local chance = wep:GetNWInt("TacRP_RouletteBlanks") / wep:Clip1()
+
+    if util.SharedRandom("tacRP_blankChance", 0, 1) <= chance then
+        if SERVER then
+            wep:SetNWInt("TacRP_RouletteBlanks", wep:GetNWInt("TacRP_RouletteBlanks") - 1)
+        end
+
+        wep.Primary.Automatic = false
+        wep:PlayAnimation("jam")
+        wep:EmitSound(wep:GetValue("Sound_DryFire"), 75, 100, 1, CHAN_BODY)
+        wep:SetBurstCount(0)
+        wep:SetNthShot(wep:GetNthShot() + 1)
+        wep:SetNextPrimaryFire(CurTime() + math.max(60 / wep:GetValue("RPM"), 1))
+        wep:GetOwner():DoAnimationEvent(ACT_HL2MP_GESTURE_RANGE_ATTACK_PISTOL)
+
+        wep:TakePrimaryAmmo(wep:GetValue("AmmoPerShot"))
+
+        return true
+    else
+        return
+    end
+end
+
+TacRP.LoadAtt(ATT, "ammo_buckshotroulette")
+-- #endregion
