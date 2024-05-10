@@ -130,10 +130,13 @@ function EFFECT:Init(data)
     self.SpawnTime = CurTime()
 end
 
-function EFFECT:PhysicsCollide()
+function EFFECT:PhysicsCollide(colData)
     if self.AlreadyPlayedSound then return end
+    local phys = self:GetPhysicsObject()
+    phys:SetVelocityInstantaneous(colData.HitNormal * -150)
 
     sound.Play(self.Sounds[math.random(#self.Sounds)], self:GetPos(), 65, 100, 1)
+    self:StopSound("Default.ImpactHard")
     self.VMContext = false
     self:SetNoDraw(false)
 
@@ -142,6 +145,7 @@ end
 
 function EFFECT:Think()
     if self:GetVelocity():Length() > 0 then self.SpawnTime = CurTime() end
+    self:StopSound("Default.ScrapeRough")
 
     if (self.SpawnTime + self.ShellTime) <= CurTime() then
         if !IsValid(self) then return end
