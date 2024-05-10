@@ -67,6 +67,10 @@ function SWEP:ScopeToggle(setlevel)
         self:SetLastScopeTime(CurTime())
     end
 
+    if self:GetValue("AlwaysPeek") then
+        self:SetPeeking(true)
+    end
+
     -- HACK: In singleplayer, SWEP:Think is called on client but IsFirstTimePredicted is NEVER true.
     -- This causes ScopeToggle to NOT be called on client in singleplayer...
     -- GenerateAutoSight needs to run clientside or scopes will break. Good old CallOnClient it is.

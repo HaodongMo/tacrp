@@ -6,4 +6,8 @@ hook.Add("PreRender", "TACRP_PreRender", function()
     if wpn:GetValue("BlindFireCamera") then
         wpn:DoRT()
     end
+
+    if wpn:GetValue("ThermalCamera") then
+        wpn:DoThermalRT()
+    end
 end)

@@ -997,6 +997,7 @@ ATT.Hook_ToggleTactical = function(wep, on)
     wep:PlayAnimation("jam", 1, true, true)
     wep:GetOwner():DoAnimationEvent(ACT_HL2MP_GESTURE_RELOAD_PISTOL)
     wep:RestoreClip(1)
+    wep:DoBulletBodygroups()
 
     return false
 end
@@ -1004,3 +1005,21 @@ end
 TacRP.LoadAtt(ATT, "tac_bullet")
 -- #endregion
 
+------------------------------
+-- #region tac_thermal
+------------------------------
+ATT = {}
+
+ATT.PrintName = "Therm. Imager"
+ATT.FullName = "ZUMQFY Thermal Imaging Device"
+ATT.Icon = Material("entities/tacrp_att_tac_cornershot.png", "mips smooth")
+ATT.Description = "Display a thermal overlay which fuses with the main view while peeking."
+ATT.Pros = {"att.procon.thermal"}
+
+ATT.Model = "models/weapons/tacint/addons/cornershot_mounted.mdl"
+
+ATT.Category = "tactical"
+
+ATT.ThermalCamera = true
+
+TacRP.LoadAtt(ATT, "tac_thermal")
