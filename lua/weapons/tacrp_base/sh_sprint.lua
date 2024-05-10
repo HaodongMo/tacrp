@@ -36,7 +36,7 @@ function SWEP:GetIsSprinting()
     if !owner.TacRP_Moving then return false end -- Don't check IN_ move keys because 1) controllers and 2) bots
     if !owner:KeyDown(IN_SPEED) then return false end -- SetButtons does not seem to affect this?
     local curspeed = owner:GetVelocity():Length()
-    if curspeed <= owner:GetWalkSpeed() then return false end
+    if curspeed <= 50 then return false end
     if !owner:OnGround() then return false end
 
     if self:GetOwner():GetInfoNum("tacrp_aim_cancels_sprint", 0) > 0 and self:GetScopeLevel() > 0 then return false end
