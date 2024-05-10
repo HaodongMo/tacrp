@@ -1124,7 +1124,7 @@ function SWEP:CreateCustomizeHUD()
     if TacRP.ConVars["cust_legacy"]:GetBool() then
 
         for slot, attslot in pairs(self.Attachments) do
-            local atts = TacRP.GetAttsForCats(attslot.Category or "")
+            local atts = TacRP.GetAttsForCats(attslot.Category or "", self)
 
             attachment_slots[slot] = {}
 

@@ -109,7 +109,7 @@ function TacRP.GetAttTable(name)
     end
 end
 
-function TacRP.GetAttsForCats(cats)
+function TacRP.GetAttsForCats(cats, wpn)
     if !istable(cats) then
         cats = {cats}
     end
@@ -117,13 +117,25 @@ function TacRP.GetAttsForCats(cats)
     local atts = {}
 
     for i, k in pairs(TacRP.Attachments) do
+        if k.Compatibility then
+            local result = k.Compatibility(wpn)
+
+            if result == true then
+                table.insert(atts, k.ShortName)
+            elseif result == false then
+                continue
+            end
+        end
+
         local attcats = k.Category
+
         if !istable(attcats) then
             attcats = {attcats}
         end
 
         for _, cat in pairs(cats) do
             if table.HasValue(attcats, cat) then
+
                 table.insert(atts, k.ShortName)
                 break
             end

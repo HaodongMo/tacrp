@@ -17,6 +17,13 @@ ATT.ModelOffset = Vector(0, 0, 0)
 
 ATT.Category = "" // can be "string" or {"list", "of", "strings"}
 
+// Return true to FORCE compatibility
+// Return false to force deny compatibility
+// Return nil to use default behavior
+// Cats = Category of slot we're trying to mount to
+ATT.Compatibility = function(wpn, cats)
+end
+
 ATT.ActivateElements = {""}
 
 ATT.SortOrder = 0

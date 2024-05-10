@@ -12,7 +12,7 @@ function PANEL:LoadAttachments()
     end
 
     local attslot = self:GetWeapon().Attachments[self:GetActiveSlot()]
-    local atts = TacRP.GetAttsForCats(attslot.Category or "")
+    local atts = TacRP.GetAttsForCats(attslot.Category or "", self:GetWeapon())
 
     table.sort(atts, function(a, b)
         a = a or ""
