@@ -37,13 +37,13 @@ function TacRP.CalculateMaxMoveSpeed(ply)
         ply.LastTacRPWeapon = wpn
     end
 
-    local mult = 1
+    local mult = 1 * totalmult
     if iscurrent and (!wpn:GetSafe() or wpn:GetIsSprinting()) and TacRP.ConVars["penalty_move"]:GetBool() then
         mult = mult * math.Clamp(wpn:GetValue("MoveSpeedMult"), 0.0001, 1)
     end
 
     -- mult2: lowest between sighted, reloading, melee, shooting
-    local mult2 = 1
+    local mult2 = 1 * totalmult
     if iscurrent and wpn:GetScopeLevel() > 0 and TacRP.ConVars["penalty_aiming"]:GetBool() then
         mult2 = math.Clamp(wpn:GetValue("SightedSpeedMult"), 0.0001, 1)
     end
@@ -91,11 +91,10 @@ function TacRP.CalculateMaxMoveSpeed(ply)
             d = math.Clamp(d, 0, 1)
 
             mult2 = math.min(mult2, Lerp(d, math.Clamp(wpn:GetValue("MeleeSpeedMult"), 0.0001, 1), 1))
-            -- mult = mult * Lerp(d, math.Clamp(wpn:GetValue("MeleeSpeedMult"), 0.0001, 1), 1)
         end
     end
 
-    return totalmult, mult, mult2, iscurrent
+    return mult * mult2, iscurrent
 end
 
 function TacRP.Move(ply, mv, cmd)
@@ -103,14 +102,12 @@ function TacRP.Move(ply, mv, cmd)
 
     local basespd = math.min((Vector(cmd:GetForwardMove(), cmd:GetUpMove(), cmd:GetSideMove())):Length(), mv:GetMaxClientSpeed())
 
-    local totalmult, mult, mult2, iscurrent = TacRP.CalculateMaxMoveSpeed(ply)
+    local mult, iscurrent = TacRP.CalculateMaxMoveSpeed(ply)
 
     if !iscurrent then return end
 
-    local finalmult = math.min(totalmult, mult * mult2)
-
-    mv:SetMaxSpeed(basespd * finalmult)
-    mv:SetMaxClientSpeed(basespd * finalmult)
+    mv:SetMaxSpeed(basespd * mult)
+    mv:SetMaxClientSpeed(basespd * mult)
 
     -- Semi auto click buffer
     if !wpn.NoBuffer and !wpn:GetCharge() and (wpn:GetCurrentFiremode() <= 1) and mv:KeyPressed(IN_ATTACK)
