@@ -1,6 +1,5 @@
 function TacRP.CalculateMaxMoveSpeed(ply)
     local wpn = ply:GetActiveWeapon()
-    local speedcap = ply:GetRunSpeed()
     local iscurrent = true
 
     local totalmult = 1
@@ -95,9 +94,7 @@ function TacRP.CalculateMaxMoveSpeed(ply)
         end
     end
 
-    if mult2 < 1 then
-        speedcap = ply:GetWalkSpeed() * mult * mult2
-    end
+    local speedcap = ply:GetRunSpeed() * mult * mult2
 
     return mult * mult2, speedcap, iscurrent
 end
