@@ -326,6 +326,10 @@ function SWEP:DrawHUDBackground()
         self:DoCornershot()
     end
 
+    if self:GetValue("ThermalCamera") then
+        self:DoThermalCam()
+    end
+
     if self:GetValue("TacticalDraw") and self:GetTactical() then
         self:GetValue("TacticalDraw")(self)
     end
