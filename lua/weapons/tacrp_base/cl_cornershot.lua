@@ -13,6 +13,9 @@ local csm_boot_3 = Material("tacrp/hud/cornershot_boot_3.png", "mips smooth")
 local csm_1 = Material("tacrp/hud/cornershot_1.png", "mips smooth")
 local csm_2 = Material("tacrp/hud/cornershot_2.png", "mips smooth")
 
+local csm_n_1 = Material("tacrp/hud/cornershot_n_1.png", "mips smooth")
+local csm_n_2 = Material("tacrp/hud/cornershot_n_2.png", "mips smooth")
+
 local noise1 = Material("tacrp/hud/noise1.png")
 local noise2 = Material("tacrp/hud/noise2.png")
 local noise3 = Material("tacrp/hud/noise3.png")
@@ -83,17 +86,33 @@ function SWEP:DoRT()
 
     TacRP.CornerCamDrawSelf = false
 
-    DrawColorModify({
-        ["$pp_colour_addr"] = 0.25 * 132 / 255,
-        ["$pp_colour_addg"] = 0.25 * 169 / 255,
-        ["$pp_colour_addb"] = 0.25 * 154 / 255,
-        ["$pp_colour_brightness"] = 0.2,
-        ["$pp_colour_contrast"] = 0.85,
-        ["$pp_colour_colour"] = 0.95,
-        ["$pp_colour_mulr"] = 0,
-        ["$pp_colour_mulg"] = 0,
-        ["$pp_colour_mulb"] = 0
-    })
+    if self:GetTactical() then
+        DrawColorModify({
+            ["$pp_colour_addr"] = 0.25 * 132 / 255,
+            ["$pp_colour_addg"] = 0.25 * 169 / 255,
+            ["$pp_colour_addb"] = 0.25 * 154 / 255,
+            ["$pp_colour_brightness"] = 0.2,
+            ["$pp_colour_contrast"] = 0.85,
+            ["$pp_colour_colour"] = 0.95,
+            ["$pp_colour_mulr"] = 0,
+            ["$pp_colour_mulg"] = 0,
+            ["$pp_colour_mulb"] = 0
+        })
+    else
+        DrawColorModify({
+            ["$pp_colour_addr"] = 0.25 * 132 / 255,
+            ["$pp_colour_addg"] = 0.25 * 169 / 255,
+            ["$pp_colour_addb"] = 0.25 * 154 / 255,
+            ["$pp_colour_brightness"] = 0.1,
+            ["$pp_colour_contrast"] = 1.5,
+            ["$pp_colour_colour"] = 0,
+            ["$pp_colour_mulr"] = 0,
+            ["$pp_colour_mulg"] = 0,
+            ["$pp_colour_mulb"] = 0
+        })
+
+        DrawBloom(0.25, 0.5, 16, 8, 1, 1, 1, 1, 1)
+    end
 
     -- if blindfiretime < 0.33 then
     --     surface.SetMaterial(csm_boot_1)
@@ -138,10 +157,18 @@ function SWEP:DoRT()
     elseif blindfiretime < 0.6 then
         surface.SetMaterial(csm_boot_3)
     else
-        if math.sin(CurTime() * 3) > 0.5 then
-            surface.SetMaterial(csm_1)
+        if self:GetTactical() then
+            if math.sin(CurTime() * 3) > 0.5 then
+                surface.SetMaterial(csm_1)
+            else
+                surface.SetMaterial(csm_2)
+            end
         else
-            surface.SetMaterial(csm_2)
+            if math.sin(CurTime() * 3) > 0.5 then
+                surface.SetMaterial(csm_n_1)
+            else
+                surface.SetMaterial(csm_n_2)
+            end
         end
     end
 

@@ -342,6 +342,7 @@ ATT.Scale = 1
 
 ATT.Category = "tactical"
 
+ATT.CanToggle = true
 ATT.BlindFireCamera = true
 
 TacRP.LoadAtt(ATT, "tac_cornershot")

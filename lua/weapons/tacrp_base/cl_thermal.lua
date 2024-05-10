@@ -74,7 +74,7 @@ function SWEP:DoThermalRT()
         ["$pp_colour_mulb"] = 0
     })
 
-    DrawBloom(0.25, 0.5, 8, 8, 1, 1, 0, 0, 0)
+    DrawBloom(0.25, 0.5, 16, 8, 1, 1, 1, 1, 1)
 
     if thermaltime >= 0.75 then
         local thermalents = ents.FindInCone(origin, angles:Forward(), 10000, 0.939692620) // 20 degrees
