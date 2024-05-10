@@ -76,27 +76,20 @@ function SWEP:DoThermalRT()
 
     DrawBloom(0.25, 0.5, 8, 8, 1, 1, 0, 0, 0)
 
-    if self:GetTactical() then
-        render.PushRenderTarget(rtmat, 0, 0, rt_w, rt_h)
-            render.CopyTexture( rtmat, rtmat_spare )
-
-            render.Clear(255, 255, 255, 255, true, true)
-            render.OverrideBlend(true, BLEND_ONE, BLEND_ONE, BLENDFUNC_REVERSE_SUBTRACT)
-
-            render.DrawTextureToScreen(rtmat_spare)
-
-            render.OverrideBlend(false)
-        render.PopRenderTarget()
-    end
-
     if thermaltime >= 0.75 then
         local thermalents = ents.FindInCone(origin, angles:Forward(), 10000, 0.939692620) // 20 degrees
 
         render.SuppressEngineLighting(true)
         render.SetBlend(0.9)
-        render.SetColorModulation(255, 0, 0)
+        local col = Color(255, 0, 0)
+        if self:GetTactical() then
+            col = Color(0, 255, 255)
+        end
+        render.SetColorModulation(col.r, col.g, col.b)
 
         cam.Start3D(origin, angles, 20)
+
+        cam.IgnoreZ(false)
 
         for _, ent in ipairs(thermalents) do
             if ent == self:GetOwner() then continue end
@@ -116,6 +109,19 @@ function SWEP:DoThermalRT()
         render.SuppressEngineLighting(false)
         render.MaterialOverride()
         render.SetBlend(1)
+    end
+
+    if self:GetTactical() then
+        render.PushRenderTarget(rtmat, 0, 0, rt_w, rt_h)
+            render.CopyTexture( rtmat, rtmat_spare )
+
+            render.Clear(255, 255, 255, 255, true, true)
+            render.OverrideBlend(true, BLEND_ONE, BLEND_ONE, BLENDFUNC_REVERSE_SUBTRACT)
+
+            render.DrawTextureToScreen(rtmat_spare)
+
+            render.OverrideBlend(false)
+        render.PopRenderTarget()
     end
 
     cam.Start2D()
