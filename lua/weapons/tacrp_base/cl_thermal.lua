@@ -2,6 +2,7 @@ local rt_w = 240
 local rt_h = 240
 
 local rtmat = GetRenderTarget("tacrp_pipscope_thermal", rt_w, rt_h, false)
+local rtmat_spare = GetRenderTarget("tacrp_pipscope_thermal2", rt_w, rt_h, false)
 
 local lastthermalscope = false
 local thermaltime = 0
@@ -9,6 +10,7 @@ local thermaltime = 0
 local csm_boot_1 = Material("tacrp/hud/thermal_boot_1.png", "mips smooth")
 
 local csm_1 = Material("tacrp/hud/thermal_1.png", "mips smooth")
+local csm_2 = Material("tacrp/hud/thermal_2.png", "mips smooth")
 
 local noise1 = Material("tacrp/hud/noise1.png")
 local noise2 = Material("tacrp/hud/noise2.png")
@@ -72,12 +74,27 @@ function SWEP:DoThermalRT()
         ["$pp_colour_mulb"] = 0
     })
 
+    DrawBloom(0.25, 0.5, 8, 8, 1, 1, 0, 0, 0)
+
+    if self:GetTactical() then
+        render.PushRenderTarget(rtmat, 0, 0, rt_w, rt_h)
+            render.CopyTexture( rtmat, rtmat_spare )
+
+            render.Clear(255, 255, 255, 255, true, true)
+            render.OverrideBlend(true, BLEND_ONE, BLEND_ONE, BLENDFUNC_REVERSE_SUBTRACT)
+
+            render.DrawTextureToScreen(rtmat_spare)
+
+            render.OverrideBlend(false)
+        render.PopRenderTarget()
+    end
+
     if thermaltime >= 0.75 then
         local thermalents = ents.FindInCone(origin, angles:Forward(), 10000, 0.939692620) // 20 degrees
 
         render.SuppressEngineLighting(true)
         render.SetBlend(0.9)
-        render.SetColorModulation(250, 0, 0)
+        render.SetColorModulation(255, 0, 0)
 
         cam.Start3D(origin, angles, 20)
 
@@ -101,8 +118,6 @@ function SWEP:DoThermalRT()
         render.SetBlend(1)
     end
 
-    DrawBloom(0.25, 0.5, 8, 8, 1, 1, 0, 0, 0)
-
     cam.Start2D()
 
     render.ClearDepth()
@@ -115,7 +130,11 @@ function SWEP:DoThermalRT()
     if thermaltime < 0.45 then
         surface.SetMaterial(csm_boot_1)
     else
-        surface.SetMaterial(csm_1)
+        if self:GetTactical() then
+            surface.SetMaterial(csm_1)
+        else
+            surface.SetMaterial(csm_2)
+        end
     end
 
     surface.SetDrawColor(255, 255, 255)

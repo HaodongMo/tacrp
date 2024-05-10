@@ -1021,5 +1021,6 @@ ATT.Model = "models/weapons/tacint/addons/cornershot_mounted.mdl"
 ATT.Category = "tactical"
 
 ATT.ThermalCamera = true
+ATT.CanToggle = true
 
 TacRP.LoadAtt(ATT, "tac_thermal")
