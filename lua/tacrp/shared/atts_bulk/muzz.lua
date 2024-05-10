@@ -323,7 +323,7 @@ ATT.Category = {"silencer", "brake"}
 ATT.Mult_RecoilKick = 0.35
 ATT.Mult_RecoilStability = 1.25
 
-ATT.Mult_ShootingSpeedMult = 0.25
+ATT.Mult_ShootingSpeedMult = 0.5
 ATT.Mult_Spread = 1.05
 
 ATT.Add_Vol_Shoot = 15
