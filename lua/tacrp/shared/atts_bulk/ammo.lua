@@ -1241,7 +1241,6 @@ ATT.Mult_RecoilKick = 0.75
 ATT.Mult_ClipSize = 1.5
 
 ATT.Compatibility = function(wpn, cats)
-    print(wpn)
     if !wpn.ShotgunReload then return false end
 end
 
