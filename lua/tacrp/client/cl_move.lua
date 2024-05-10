@@ -50,13 +50,13 @@ hook.Add("CreateMove", "TacRP_CreateMove", function(cmd)
         TacRP.KeyPressed_Tactical = false
     end
 
-    local mult = TacRP.CalculateMaxMoveSpeed(LocalPlayer())
+    local mult, speedcap = TacRP.CalculateMaxMoveSpeed(LocalPlayer())
 
     local basemove = Vector(cmd:GetForwardMove(), cmd:GetUpMove(), cmd:GetSideMove())
     local maxspeed = basemove:Length()
     local movedir = basemove:GetNormalized()
 
-    local finalmovedir = movedir * maxspeed * mult
+    local finalmovedir = movedir * math.min(maxspeed * mult, speedcap)
 
     cmd:SetForwardMove(finalmovedir[1])
     cmd:SetUpMove(finalmovedir[2])
