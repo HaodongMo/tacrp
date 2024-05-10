@@ -1219,3 +1219,26 @@ end
 
 TacRP.LoadAtt(ATT, "ammo_buckshotroulette")
 -- #endregion
+
+------------------------------
+-- #region ammo_shotgun_minishell
+------------------------------
+ATT = {}
+
+ATT.PrintName = "Mini"
+ATT.FullName = "Minishells"
+ATT.Icon = Material("entities/tacrp_att_ammo_minishell.png", "mips smooth")
+ATT.Description = "Short shells increase ammo capacity but don't hit as hard."
+ATT.Pros = {"stat.clipsize", "stat.recoilkick"}
+ATT.Cons = {"stat.damage"}
+
+ATT.Category = "ammo_shotgun"
+
+ATT.SortOrder = 1
+
+ATT.Mult_Num = 0.666
+ATT.Mult_RecoilKick = 0.75
+ATT.Mult_ClipSize = 1.5
+
+TacRP.LoadAtt(ATT, "ammo_shotgun_minishell")
+-- #endregion
