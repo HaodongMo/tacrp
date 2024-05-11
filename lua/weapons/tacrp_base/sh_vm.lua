@@ -114,13 +114,13 @@ function SWEP:GetViewModelPosition(pos, ang)
         sightdelta = m_appor(sightdelta, 0, FT / ads)
     end
 
-    if IsFirstTimePredicted() or game.SinglePlayer() then
+    -- if IsFirstTimePredicted() or game.SinglePlayer() then
         if self:GetPeeking() then
             peekdelta = m_appor(peekdelta, 1, FT / 0.2)
         else
             peekdelta = m_appor(peekdelta, 0, FT / 0.2)
         end
-    end
+    -- end
 
     local curvedsightdelta = self:Curve(sightdelta)
     local curvedpeekdelta = self:Curve(peekdelta)
@@ -239,13 +239,13 @@ function SWEP:GetViewModelPosition(pos, ang)
     ---------------------------------------------
     -- Customization
     ---------------------------------------------
-    if IsFirstTimePredicted() or game.SinglePlayer() then
+    -- if IsFirstTimePredicted() or game.SinglePlayer() then
         if self:GetCustomize() then
             customizedelta = m_appor(customizedelta, 1, RealFrameTime() * 1 / 0.15)
         else
             customizedelta = m_appor(customizedelta, 0, RealFrameTime() * 1 / 0.15)
         end
-    end
+    -- end
 
     if customizedelta > 0 then
         local curvedcustomizedelta = self:Curve(customizedelta)

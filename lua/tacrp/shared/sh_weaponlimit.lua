@@ -138,58 +138,6 @@ hook.Add("InitPostEntity", "TacRP_Slot", function()
     end, "slotty")
 end)
 
-concommand.Add("tacrp_drop", function(ply, cmd, args, argStr)
-    if !TacRP.ConVars["allowdrop"]:GetBool() then return end
-    local wep = ply:GetActiveWeapon()
-    if !IsValid(wep) or !wep.ArcticTacRP then return end
-    if CLIENT then return end
-
-    if wep:GetValue("PrimaryGrenade") then
-        -- Grenades don't have a clip size. this would mean players can constantly generate and drop nade sweps that do nothing.
-        local nade = TacRP.QuickNades[wep:GetValue("PrimaryGrenade")]
-        if TacRP.IsGrenadeInfiniteAmmo(nade) then
-            return -- Disallow dropping nades when its infinite
-        elseif nade.Singleton then
-            if DarkRP then
-                local canDrop = hook.Call("canDropWeapon", GAMEMODE, ply, wep)
-                if !canDrop then
-                    DarkRP.notify(ply, 1, 4, DarkRP.getPhrase("cannot_drop_weapon"))
-                    return ""
-                end
-                ply:DoAnimationEvent(ACT_GMOD_GESTURE_ITEM_DROP)
-                ply:dropDRPWeapon(wep)
-            else
-                ply:DropWeapon(wep)
-            end
-        elseif nade.AmmoEnt and ply:GetAmmoCount(nade.Ammo) > 0 then
-            ply:RemoveAmmo(1, nade.Ammo)
-            local ent = ents.Create(nade.AmmoEnt)
-            ent:SetPos(ply:EyePos() - Vector(0, 0, 4))
-            ent:SetAngles(AngleRand())
-            ent:Spawn()
-            if IsValid(ent:GetPhysicsObject()) then
-                ent:GetPhysicsObject():SetVelocityInstantaneous(ply:EyeAngles():Forward() * 200)
-            end
-            if ply:GetAmmoCount(nade.Ammo) == 0 then
-                wep:Remove()
-            end
-        end
-    else
-        if DarkRP then
-            local canDrop = hook.Call("canDropWeapon", GAMEMODE, ply, wep)
-            if !canDrop then
-                DarkRP.notify(ply, 1, 4, DarkRP.getPhrase("cannot_drop_weapon"))
-                return ""
-            end
-            ply:DoAnimationEvent(ACT_GMOD_GESTURE_ITEM_DROP)
-            ply:dropDRPWeapon(wep)
-        else
-            ply:DropWeapon(wep)
-        end
-    end
-
-end, "Drops the currently held TacRP weapon.")
-
 
 if CLIENT then
     net.Receive("tacrp_updateslot", slotty)
@@ -223,4 +171,14 @@ if CLIENT then
             draw.SimpleText(text, font, ScrW() / 2, ScrH() / 2 + TacRP.SS(32) + h / 2, color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
         end
     end)
+
+
+    concommand.Add("tacrp_drop", function(ply, cmd, args, argStr)
+        if !TacRP.ConVars["allowdrop"]:GetBool() then return end
+        local wep = ply:GetActiveWeapon()
+        if !IsValid(wep) or !wep.ArcticTacRP then return end
+        if !ply:Alive() then return end
+        net.Start("tacrp_drop")
+        net.SendToServer()
+    end, "Drops the currently held TacRP weapon.")
 end
