@@ -1267,21 +1267,55 @@ ATT.FullName = "Dragon's Breath"
 ATT.Icon = Material("entities/tacrp_att_ammo_dragonsbreath.png", "mips smooth")
 ATT.Description = "Magnesium pellets set targets on fire, but have poor range and damage."
 ATT.Pros = {"att.procon.incendiary"}
-ATT.Cons = {"stat.damage", "stat.spread", "stat.muzzlevelocity"}
+ATT.Cons = {"stat.damage", "stat.muzzlevelocity", "stat.spread"}
 
 ATT.Category = {"ammo_shotgun", "ammo_shotgun2"}
 
 ATT.SortOrder = 6
-ATT.DamageType = DMG_BURN
 
 ATT.Mult_DamageMax = 0.5
 ATT.Mult_DamageMin = 0.5
-ATT.Mult_MuzzleVelocity = 0.45
-ATT.Mult_Spread = 3.5
+ATT.Mult_MuzzleVelocity = 0.75
+ATT.Mult_Spread = 0.5
 
 ATT.Override_ExplosiveEffect = "ManhackSparks"
 ATT.Add_ExplosiveDamage = 1
 ATT.Add_ExplosiveRadius = 16
+
+TacRP.LoadAtt(ATT, "ammo_shotgun_dragon")
+-- #endregion
+
+------------------------------
+-- #region ammo_shotgun_frag
+------------------------------
+ATT = {}
+
+ATT.PrintName = "Frag"
+ATT.FullName = "High Explosive Fragmentation"
+ATT.Icon = Material("entities/tacrp_att_ammo_frag12.png", "mips smooth")
+ATT.Description = "Explosive slugs deal area damage, but don't expect too much from them."
+ATT.Pros = {"att.procon.explosive"}
+ATT.Cons = {"stat.damage", "stat.spread"}
+
+ATT.Category = {"ammo_shotgun", "ammo_shotgun2"}
+
+ATT.SortOrder = 6
+
+ATT.Mult_Damage_Min = 1
+ATT.Mult_Damage_Max = 1
+
+ATT.Num = 1
+
+ATT.Mult_Spread = 0.6
+ATT.Mult_RecoilSpreadPenalty = 0.6
+
+ATT.Add_HipFireSpreadPenalty = 0.025
+
+ATT.Override_MuzzleEffect = "muzzleflash_slug"
+
+ATT.Override_ExplosiveEffect = "HelicopterMegaBomb"
+ATT.Add_ExplosiveDamage = 25
+ATT.Add_ExplosiveRadius = 128
 
 TacRP.LoadAtt(ATT, "ammo_shotgun_dragon")
 -- #endregion
