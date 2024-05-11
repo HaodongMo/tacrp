@@ -24,7 +24,7 @@ hook.Add("CreateMove", "TacRP_CreateMove", function(cmd)
     local grenade1bind = input.LookupBinding("+grenade1")
 
     if !grenade1bind then
-        if input.IsKeyDown( KEY_G ) then
+        if input.IsKeyDown( KEY_G ) and !LocalPlayer():IsTyping() then
             cmd:AddKey(IN_GRENADE1)
         end
     end
@@ -32,7 +32,7 @@ hook.Add("CreateMove", "TacRP_CreateMove", function(cmd)
     local grenade2bind = input.LookupBinding("+grenade2")
 
     if !grenade2bind then
-        if input.IsKeyDown( KEY_H ) then
+        if input.IsKeyDown( KEY_H ) and !LocalPlayer():IsTyping() then
             cmd:AddKey(IN_GRENADE2)
         end
     end
