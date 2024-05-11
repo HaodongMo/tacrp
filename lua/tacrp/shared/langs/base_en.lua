@@ -362,6 +362,7 @@ L["att.procon.proxfuse"] = "Proximity fuse"
 L["att.procon.magnifier"] = "Variable Magnification"
 L["att.procon.bullet"] = "Emergency Bullet"
 L["att.procon.nopartialreloads"] = "No partial reloads"
+L["att.procon.incendiary"] = "Ignite Targets"
 
 L["att.sight.1"] = "1x Sight"
 L["att.sight.1.25"] = "1.25x Sight"
