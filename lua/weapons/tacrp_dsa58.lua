@@ -9,7 +9,7 @@ SWEP.AbbrevName = "SA58"
 SWEP.Category = "Tactical RP"
 
 SWEP.SubCatTier = "3Security"
-SWEP.SubCatType = "6Battle Rifle"
+SWEP.SubCatType = "6Precision Rifle"
 
 SWEP.Description = "Battle rifle with slow fire rate but very high damage and armor penetration. Has a grippod that provides some stability if deployed."
 SWEP.Description_Quote = "\"Shut up, clock in and load up.\""

@@ -9,7 +9,7 @@ SWEP.AbbrevName = "M1A"
 SWEP.Category = "Tactical RP"
 
 SWEP.SubCatTier = "3Security"
-SWEP.SubCatType = "7Sniper Rifle"
+SWEP.SubCatType = "6Precision Rifle"
 
 SWEP.Description = "Semi-automatic rifle with a lethal headshot.\nEquipped with a 6x scope by default."
 

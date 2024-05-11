@@ -9,7 +9,7 @@ SWEP.AbbrevName = "HK94"
 SWEP.Category = "Tactical RP"
 
 SWEP.SubCatTier = "4Consumer"
-SWEP.SubCatType = "5Carbine"
+SWEP.SubCatType = "5Sporter"
 
 SWEP.Description = "Semi-automatic model of a legendary submachine gun.\nUses reduced capacity magazines."
 SWEP.Description_Quote = ""
