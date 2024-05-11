@@ -50,7 +50,7 @@ function SWEP:DoThermalRT()
         angles = angles,
         origin = origin,
         drawviewmodel = false,
-        fov = 20,
+        fov = 18.5,
         znear = 6
     }
 
