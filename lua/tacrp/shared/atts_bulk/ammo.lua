@@ -1317,5 +1317,5 @@ ATT.Override_ExplosiveEffect = "HelicopterMegaBomb"
 ATT.Add_ExplosiveDamage = 25
 ATT.Add_ExplosiveRadius = 128
 
-TacRP.LoadAtt(ATT, "ammo_shotgun_dragon")
+TacRP.LoadAtt(ATT, "ammo_shotgun_frag")
 -- #endregion
