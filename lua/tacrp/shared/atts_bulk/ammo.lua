@@ -1307,7 +1307,6 @@ ATT.Mult_Damage_Max = 1
 ATT.Num = 1
 
 ATT.Mult_Spread = 0.6
-ATT.Mult_RecoilSpreadPenalty = 0.6
 
 ATT.Add_HipFireSpreadPenalty = 0.025
 

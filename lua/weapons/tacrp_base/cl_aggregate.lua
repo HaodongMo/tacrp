@@ -168,6 +168,11 @@ SWEP.StatGroups = {
             end
 
             local d_max, d_min = valfunc(self, "Damage_Max"), valfunc(self, "Damage_Min")
+            local explosive_damage = valfunc(self, "ExplosiveDamage")
+
+            d_max = d_max + explosive_damage
+            d_min = d_min + explosive_damage
+
             local dmg_max = math.max(d_max, d_min)
             local dmg_avg = Lerp(0.2, math.max(d_max, d_min), math.min(d_max, d_min)) * bdm_add
 
@@ -239,6 +244,8 @@ SWEP.StatGroups = {
             local d_max, d_min = valfunc(self, "Damage_Max"), valfunc(self, "Damage_Min")
             local explosive_damage = valfunc(self, "ExplosiveDamage")
             local explosive_radius = valfunc(self, "ExplosiveRadius")
+
+            explosive_damage = explosive_damage * explosive_radius / 64 * 2
 
             d_max = d_max + explosive_damage
             d_min = d_min + explosive_damage
