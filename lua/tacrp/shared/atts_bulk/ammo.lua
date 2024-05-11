@@ -1276,11 +1276,13 @@ ATT.SortOrder = 6
 ATT.Mult_DamageMax = 0.5
 ATT.Mult_DamageMin = 0.5
 ATT.Mult_MuzzleVelocity = 0.75
-ATT.Mult_Spread = 0.5
+ATT.Mult_Spread = 3
 
 ATT.Override_ExplosiveEffect = "ManhackSparks"
 ATT.Add_ExplosiveDamage = 1
 ATT.Add_ExplosiveRadius = 16
+
+ATT.Override_DamageType = DMG_BURN
 
 TacRP.LoadAtt(ATT, "ammo_shotgun_dragon")
 -- #endregion
