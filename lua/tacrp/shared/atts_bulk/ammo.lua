@@ -1145,6 +1145,8 @@ ATT.Category = "ammo_shotgun"
 ATT.SortOrder = -1
 
 ATT.ShotgunFullCancel = true
+ATT.Override_Firemodes = {1}
+ATT.Override_Priority_Firemodes = 999
 
 ATT.OnPresetLoad = function(wep)
     if SERVER then

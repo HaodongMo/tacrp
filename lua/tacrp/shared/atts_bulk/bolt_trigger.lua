@@ -134,7 +134,7 @@ ATT.Description = "Rust has eaten most of it away, but it still kinda works."
 ATT.Pros = {"att.procon.surplusboost1", "stat.recoil"}
 ATT.Cons = {"att.procon.surplusboost2", "att.procon.unreliable"}
 
-ATT.Category = {"bolt_automatic"}
+ATT.Category = {"bolt_automatic", "bolt_manual"}
 
 ATT.SortOrder = 999
 
