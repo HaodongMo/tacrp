@@ -452,6 +452,12 @@ function SWEP:GetShotgunPattern(i, d)
     return x, y
 end
 
+local doorclasses = {
+    ["func_door_rotating"] = true,
+    ["prop_door_rotating"] = true,
+    ["prop_door_rotating_checkpoint"] = true
+}
+
 function SWEP:AfterShotFunction(tr, dmg, range, penleft, alreadypenned, forced)
     if !forced and !IsFirstTimePredicted() and !game.SinglePlayer() then return end
 
@@ -513,10 +519,11 @@ function SWEP:AfterShotFunction(tr, dmg, range, penleft, alreadypenned, forced)
     end
 
     if SERVER and IsValid(tr.Entity) and !tr.Entity.TacRP_DoorBusted
-            and string.find(tr.Entity:GetClass(), "door") and self:GetValue("DoorBreach") then
+            and doorclasses[tr.Entity:GetClass()] and self:GetValue("DoorBreach") then
         if !tr.Entity.TacRP_BreachThreshold or CurTime() - tr.Entity.TacRP_BreachThreshold[1] > 0.1 then
             tr.Entity.TacRP_BreachThreshold = {CurTime(), 0}
         end
+
         tr.Entity.TacRP_BreachThreshold[2] = tr.Entity.TacRP_BreachThreshold[2] + dmg:GetDamage()
         if tr.Entity.TacRP_BreachThreshold[2] > (self:GetValue("DoorBreachThreshold") or 100) then
             tr.Entity:EmitSound("ambient/materials/door_hit1.wav", 80, math.Rand(95, 105))

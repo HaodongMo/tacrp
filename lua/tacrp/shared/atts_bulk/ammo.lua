@@ -1338,7 +1338,7 @@ ATT.Category = {"ammo_shotgun", "ammo_shotgun2"}
 
 ATT.SortOrder = 10
 
-ATT.Override_Damage_Max = 20
+ATT.Mult_Damage_Max = 0.8
 ATT.Override_Damage_Min = 1
 ATT.Override_Num = 12
 
