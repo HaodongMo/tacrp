@@ -9,7 +9,7 @@ SWEP.AbbrevName = "HK243"
 SWEP.Category = "Tactical RP"
 
 SWEP.SubCatTier = "3Security"
-SWEP.SubCatType = "5Sporter"
+SWEP.SubCatType = "5Carbine"
 
 SWEP.Description = "Semi-automatic model of an iconic polymer rifle.\nUses reduced capacity magazines."
 
