@@ -2,15 +2,15 @@ function TacRP.DoorBust(ent, vel, attacker)
     if !string.find(ent:GetClass(), "door") then return end
     local cvar = 1 --TacRP.ConVars["doorbust"]:GetInt()
     local t = 300 -- TacRP.ConVars["doorbust_time"]:GetFloat()
-    if cvar == 0 or ent.TacRP_DoorBusted then return end
-    ent.TacRP_DoorBusted = true
 
     local oldSpeed = ent:GetInternalVariable("m_flSpeed")
     ent:Fire("SetSpeed", tostring(oldSpeed * 10), 0)
     ent:Fire("Open", "", 0)
     ent:Fire("SetSpeed", oldSpeed, 0.3)
 
-    if ent:GetPhysicsObject():IsValid() and cvar == 1 then
+    if ent:GetClass() == "prop_door_rotating" and ent:GetPhysicsObject():IsValid() and cvar == 1 then
+        if cvar == 0 or ent.TacRP_DoorBusted then return end
+        ent.TacRP_DoorBusted = true
 
         -- Don't remove the door, that's a silly thing to do
         ent:SetNoDraw(true)
