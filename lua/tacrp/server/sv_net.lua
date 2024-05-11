@@ -19,7 +19,7 @@ util.AddNetworkString("tacrp_updateslot")
 util.AddNetworkString("tacrp_givenadewep")
 util.AddNetworkString("tacrp_reloadlangs")
 util.AddNetworkString("tacrp_npcweapon")
-util.AddNetworkString("tacrp_applyconfig")
+util.AddNetworkString("tacrp_drop")
 
 net.Receive("tacrp_togglenade", function(len, ply)
     local bf = net.ReadUInt(TacRP.QuickNades_Bits)
@@ -112,4 +112,55 @@ net.Receive("tacrp_receivepreset", function(len, ply)
 
     if !wpn.ArcticTacRP or wpn:GetOwner() != ply then return end
     wpn:ReceivePreset()
+end)
+
+net.Receive("tacrp_drop", function(len, ply)
+    if !TacRP.ConVars["allowdrop"]:GetBool() then return end
+    local wep = ply:GetActiveWeapon()
+    if !IsValid(wep) or !wep.ArcticTacRP then return end
+    if !ply:Alive() then return end
+
+    if wep:GetValue("PrimaryGrenade") then
+        -- Grenades don't have a clip size. this would mean players can constantly generate and drop nade sweps that do nothing.
+        local nade = TacRP.QuickNades[wep:GetValue("PrimaryGrenade")]
+        if TacRP.IsGrenadeInfiniteAmmo(nade) then
+            return -- Disallow dropping nades when its infinite
+        elseif nade.Singleton then
+            if DarkRP then
+                local canDrop = hook.Call("canDropWeapon", GAMEMODE, ply, wep)
+                if !canDrop then
+                    DarkRP.notify(ply, 1, 4, DarkRP.getPhrase("cannot_drop_weapon"))
+                    return ""
+                end
+                ply:DoAnimationEvent(ACT_GMOD_GESTURE_ITEM_DROP)
+                ply:dropDRPWeapon(wep)
+            else
+                ply:DropWeapon(wep)
+            end
+        elseif nade.AmmoEnt and ply:GetAmmoCount(nade.Ammo) > 0 then
+            ply:RemoveAmmo(1, nade.Ammo)
+            local ent = ents.Create(nade.AmmoEnt)
+            ent:SetPos(ply:EyePos() - Vector(0, 0, 4))
+            ent:SetAngles(AngleRand())
+            ent:Spawn()
+            if IsValid(ent:GetPhysicsObject()) then
+                ent:GetPhysicsObject():SetVelocityInstantaneous(ply:EyeAngles():Forward() * 200)
+            end
+            if ply:GetAmmoCount(nade.Ammo) == 0 then
+                wep:Remove()
+            end
+        end
+    else
+        if DarkRP then
+            local canDrop = hook.Call("canDropWeapon", GAMEMODE, ply, wep)
+            if !canDrop then
+                DarkRP.notify(ply, 1, 4, DarkRP.getPhrase("cannot_drop_weapon"))
+                return ""
+            end
+            ply:DoAnimationEvent(ACT_GMOD_GESTURE_ITEM_DROP)
+            ply:dropDRPWeapon(wep)
+        else
+            ply:DropWeapon(wep)
+        end
+    end
 end)
