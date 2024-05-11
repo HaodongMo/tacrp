@@ -98,6 +98,8 @@ SWEP.Bipod = false // Weapon can deploy bipod
 SWEP.BipodRecoil = 0.35 // Recoil Amount multiplier per shot
 SWEP.BipodKick = 0.25 // Recoil Kick multiplier
 
+SWEP.TriggerDelay = 0.0
+
 // SWEP.ShootChance = 1
 SWEP.JamWaitTime = 0.3
 SWEP.JamFactor = 0 // higher = more frequent jams. no jams at 0
