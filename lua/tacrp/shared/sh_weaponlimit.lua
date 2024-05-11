@@ -142,6 +142,7 @@ concommand.Add("tacrp_drop", function(ply, cmd, args, argStr)
     if !TacRP.ConVars["allowdrop"]:GetBool() then return end
     local wep = ply:GetActiveWeapon()
     if !IsValid(wep) or !wep.ArcticTacRP then return end
+    if CLIENT then return end
 
     if wep:GetValue("PrimaryGrenade") then
         -- Grenades don't have a clip size. this would mean players can constantly generate and drop nade sweps that do nothing.
