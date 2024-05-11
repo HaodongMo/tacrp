@@ -1338,9 +1338,9 @@ ATT.Category = {"ammo_shotgun", "ammo_shotgun2"}
 
 ATT.SortOrder = 10
 
-ATT.Override_Damage_Max = 10
-ATT.Override_Damage_Min = 0
-ATT.Override_Num = 5
+ATT.Override_Damage_Max = 20
+ATT.Override_Damage_Min = 1
+ATT.Override_Num = 12
 
 ATT.Override_Range_Min = 32
 ATT.Override_Range_Max = 500
@@ -1348,7 +1348,7 @@ ATT.Override_Range_Max = 500
 ATT.Override_MuzzleVelocity = 9500
 
 ATT.DoorBreach = true
-ATT.DoorBreachThreshold = 40
+ATT.DoorBreachThreshold = 50
 
 ATT.Override_ClipSize = 1
 
