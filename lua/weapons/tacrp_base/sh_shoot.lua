@@ -358,7 +358,7 @@ function SWEP:PrimaryAttack()
             damage:SetAttacker(self:GetOwner())
             damage:SetInflictor(self)
             damage:SetDamage(self:GetValue("Damage_Max") * self:GetValue("Num") * self:GetConfigDamageMultiplier())
-            damage:SetDamageType(self:IsShotgun() and DMG_BUCKSHOT or DMG_BULLET)
+            damage:SetDamageType(self:GetValue("DamageType") or self:IsShotgun() and DMG_BUCKSHOT or DMG_BULLET)
             damage:SetDamagePosition(self:GetMuzzleOrigin())
             damage:SetDamageForce(dir:Forward() * self:GetValue("Num"))
 
@@ -489,6 +489,10 @@ function SWEP:AfterShotFunction(tr, dmg, range, penleft, alreadypenned, forced)
             dmg:SetDamageForce(dmg:GetDamageForce():GetNormalized() * matpen * 80)
             dmg:SetDamageType(DMG_AIRBOAT)
             penleft = 0
+        end
+
+        if self:GetValue("DamageType") == DMG_BURN then
+            tr.Entity:Ignite(1, 64)
         end
     end
 
