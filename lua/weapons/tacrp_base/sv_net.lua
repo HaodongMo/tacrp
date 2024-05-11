@@ -41,6 +41,10 @@ function SWEP:ReceivePreset()
             end
 
             self:Attach(slot, att, true, true)
+
+            if atttbl.OnPresetLoad then
+                atttbl.OnPresetLoad(self)
+            end
         end
     end
 

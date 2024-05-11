@@ -1146,6 +1146,15 @@ ATT.SortOrder = -1
 
 ATT.ShotgunFullCancel = true
 
+ATT.OnPresetLoad = function(wep)
+    if SERVER then
+        local blanks = math.random(1, wep:GetValue("ClipSize") - 1)
+        wep:SetNWInt("TacRP_RouletteBlanks", blanks)
+
+        wep:GetOwner():PrintMessage(HUD_PRINTCENTER, tostring(wep:GetValue("ClipSize") - blanks) .. " LIVE, " .. tostring(blanks) .. " BLANK.")
+    end
+end
+
 ATT.OnAttach = function(wep)
     if SERVER then
         wep:SetNWInt("TacRP_RouletteBlanks", 0)
