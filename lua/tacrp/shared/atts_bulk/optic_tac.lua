@@ -947,7 +947,7 @@ ATT.Description = "Allows all optics to access a 2x zoom level, allowing them zo
 ATT.Pros = {"att.procon.magnifier"}
 ATT.Cons = {}
 
-ATT.Category = "tactical"
+ATT.Category = "tactical_zoom"
 
 ATT.SortOrder = 8
 
@@ -972,7 +972,7 @@ ATT.Description = "Press the tactical key to quickly load a single bullet for em
 ATT.Pros = {"att.procon.bullet"}
 ATT.Cons = {}
 
-ATT.Category = "tactical"
+ATT.Category = "tactical_ebullet"
 
 ATT.SortOrder = 9
 
