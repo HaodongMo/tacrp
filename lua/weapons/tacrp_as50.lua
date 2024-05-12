@@ -9,7 +9,7 @@ SWEP.AbbrevName = "AS50"
 SWEP.Category = "Tactical RP"
 
 SWEP.SubCatTier = "1Elite"
-SWEP.SubCatType = "9Anti-Materiel Rifle"
+SWEP.SubCatType = "6Marksman Rifle"
 
 SWEP.Description = "Semi-automatic anti-materiel rifle that can easily decimate any person at any distance.\nEquipped with a 12x scope by default.\nFar too heavy to swing, so bashing is out of the question."
 

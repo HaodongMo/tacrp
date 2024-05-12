@@ -9,7 +9,7 @@ SWEP.AbbrevName = "Mini Uzi"
 SWEP.Category = "Tactical RP"
 
 SWEP.SubCatTier = "2Operator"
-SWEP.SubCatType = "2Machine Pistol"
+SWEP.SubCatType = "3Machine Pistol"
 
 SWEP.Description = "Balanced machine pistol with a controllable rate of fire."
 

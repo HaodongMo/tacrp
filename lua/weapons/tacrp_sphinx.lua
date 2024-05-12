@@ -9,7 +9,7 @@ SWEP.AbbrevName = "Sphinx"
 SWEP.Category = "Tactical RP"
 
 SWEP.SubCatTier = "2Operator"
-SWEP.SubCatType = "2Machine Pistol"
+SWEP.SubCatType = "3Machine Pistol"
 
 SWEP.Description = "Premium pistol modified to be 3-round burst. High firerate but long burst delay."
 

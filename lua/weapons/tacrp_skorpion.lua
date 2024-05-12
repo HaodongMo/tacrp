@@ -9,7 +9,7 @@ SWEP.AbbrevName = "Skorpion"
 SWEP.Category = "Tactical RP"
 
 SWEP.SubCatTier = "4Consumer"
-SWEP.SubCatType = "2Machine Pistol"
+SWEP.SubCatType = "3Machine Pistol"
 
 SWEP.Description = "Light machine pistol with good range, recoil and spread."
 

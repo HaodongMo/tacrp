@@ -9,7 +9,7 @@ SWEP.AbbrevName = "PS90"
 SWEP.Category = "Tactical RP"
 
 SWEP.SubCatTier = "3Security"
-SWEP.SubCatType = "5Sporter"
+SWEP.SubCatType = "9Sporter"
 
 SWEP.Description = "Semi-automatic variation of a futuristic PDW.\nUses reduced capacity magazines."
 SWEP.Description_Quote = ""

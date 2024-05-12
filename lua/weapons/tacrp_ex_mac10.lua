@@ -9,7 +9,7 @@ SWEP.AbbrevName = "MAC-10"
 SWEP.Category = "Tactical RP" // "Tactical RP (Extras)"
 
 SWEP.SubCatTier = "4Consumer"
-SWEP.SubCatType = "2Machine Pistol"
+SWEP.SubCatType = "3Machine Pistol"
 
 SWEP.Description = "A bullet hose best used for point blank spray-and-pray."
 SWEP.Description_Quote ="\"Give me the motherf*ckin' gun, Tre!\""

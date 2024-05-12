@@ -9,7 +9,7 @@ SWEP.AbbrevName = "MG4"
 SWEP.Category = "Tactical RP"
 
 SWEP.SubCatTier = "1Elite"
-SWEP.SubCatType = "4Machine Gun"
+SWEP.SubCatType = "5Machine Gun"
 
 SWEP.Description = "Machine gun with huge volume of fire, but is difficult to use without bipod deployed."
 

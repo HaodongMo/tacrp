@@ -9,7 +9,7 @@ SWEP.AbbrevName = "XD-45"
 SWEP.Category = "Tactical RP"
 
 SWEP.SubCatTier = "1Elite"
-SWEP.SubCatType = "2Machine Pistol"
+SWEP.SubCatType = "3Machine Pistol"
 
 SWEP.Description = "Automatic machine pistol with incredible close range power."
 
