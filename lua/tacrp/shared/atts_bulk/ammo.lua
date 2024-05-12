@@ -1299,7 +1299,7 @@ ATT.FullName = "High Explosive Fragmentation"
 ATT.Icon = Material("entities/tacrp_att_ammo_frag12.png", "mips smooth")
 ATT.Description = "Explosive slugs deal area damage, but don't expect too much from them."
 ATT.Pros = {"att.procon.explosive"}
-ATT.Cons = {"stat.damage", "stat.spread"}
+ATT.Cons = {"stat.damage", "stat.spread", "stat.muzzlevelocity"}
 
 ATT.Category = {"ammo_shotgun", "ammo_shotgun2"}
 
@@ -1313,6 +1313,8 @@ ATT.Num = 1
 ATT.Mult_Spread = 0.6
 
 ATT.Add_HipFireSpreadPenalty = 0.025
+
+ATT.Mult_MuzzleVelocity = 0.66667
 
 ATT.Override_MuzzleEffect = "muzzleflash_slug"
 

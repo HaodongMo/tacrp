@@ -256,7 +256,7 @@ ATT.FullName = "Aggressor Brake"
 ATT.Icon = Material("entities/tacrp_att_muzz_brake_aggressor.png", "mips smooth")
 ATT.Description = "Muzzle brake designed to redirect vented gases away from the shooter."
 ATT.Pros = {"stat.shootingspeed"}
-ATT.Cons = {"stat.spread", "stat.vol_shoot"}
+ATT.Cons = {"stat.recoilstability", "stat.spread", "stat.vol_shoot"}
 
 ATT.Model = "models/weapons/tacint_extras/addons/brake_aggressor.mdl"
 ATT.Scale = 1.25
@@ -265,8 +265,9 @@ ATT.ModelOffset = Vector(-5.0, 0, 0)
 
 ATT.Category = {"silencer", "brake"}
 
-ATT.Mult_ShootingSpeedMult = 1.5
-ATT.Mult_Spread = 1.05
+ATT.Add_ShootingSpeedMult = 0.05
+ATT.Mult_RecoilStability = 0.9
+ATT.Mult_Spread = 1.15
 ATT.Add_Vol_Shoot = 5
 
 ATT.SortOrder = 100
@@ -293,7 +294,7 @@ ATT.ModelOffset = Vector(-5.4, 0, 0)
 
 ATT.Category = {"silencer", "brake"}
 
-ATT.Mult_MeleeDamage = 2
+ATT.Mult_MeleeDamage = 1.5
 ATT.Mult_Spread = 1.05
 
 ATT.SortOrder = 101
@@ -310,7 +311,7 @@ ATT.PrintName = "C. Brake"
 ATT.FullName = "Concussive Brake"
 ATT.Icon = Material("entities/tacrp_att_muzz_brake_concussive.png", "mips smooth")
 ATT.Description = "Viciously loud, uncomfortable muzzle brake for extreme recoil control."
-ATT.Pros = {"stat.recoilkick", "stat.recoilstability"}
+ATT.Pros = {"stat.recoilkick"}
 ATT.Cons = {"stat.shootingspeed", "stat.spread", "stat.vol_shoot"}
 
 ATT.Model = "models/weapons/tacint_extras/addons/brake_concussive.mdl"
@@ -320,11 +321,11 @@ ATT.ModelOffset = Vector(-5.4, 0, 0)
 
 ATT.Category = {"silencer", "brake"}
 
-ATT.Mult_RecoilKick = 0.35
-ATT.Mult_RecoilStability = 1.25
+ATT.Mult_RecoilKick = 0.85
+-- ATT.Mult_RecoilStability = 1.1
 
-ATT.Mult_ShootingSpeedMult = 0.5
-ATT.Mult_Spread = 1.05
+ATT.Add_ShootingSpeedMult = -0.1
+ATT.Mult_Spread = 1.25
 
 ATT.Add_Vol_Shoot = 15
 ATT.Mult_Pitch_Shoot = 0.9
