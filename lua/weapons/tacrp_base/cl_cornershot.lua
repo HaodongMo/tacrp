@@ -192,7 +192,7 @@ function SWEP:DoCornershot()
     local h = TacRP.SS(480 / 4)
     local x = (ScrW() - w) / 2
     local y = (ScrH() - h) / 2
-    y = y + (ScrH() / 4)
+    -- y = y + (ScrH() / 4)
     render.DrawTextureToScreenRect(rtmat, x, y, w, h)
 end
 

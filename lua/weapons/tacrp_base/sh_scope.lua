@@ -112,14 +112,11 @@ function SWEP:IsInScope()
 end
 
 function SWEP:DoScope()
+    local h = ScrH()
+    local w = ScrW()
     if self:IsInScope() then
-
         local img = self:GetValue("ScopeOverlay")
-
         if img then
-            local h = ScrH()
-            local w = ScrW()
-
             -- assume players have a screen that is wider than it is tall because... that's stupid
 
             local pos = self:GetOwner():EyePos()
@@ -166,6 +163,12 @@ function SWEP:DoScope()
             --     surface.DrawRect(0, 0, w, h)
             -- end
         end
+    end
+
+    local blur_hook = self:RunHook("Hook_BlurScope")
+    if blur_hook then
+        if !istable(blur_hook) then blur_hook = {1, 1} end
+        drawBlurAt(0, 0, w, h, blur_hook[0], blur_hook[1])
     end
 end
 
