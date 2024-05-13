@@ -621,3 +621,39 @@ ATT.Add_AimDownSightsTime = 0.03
 TacRP.LoadAtt(ATT, "trigger_wide")
 -- #endregion
 
+------------------------------
+-- #region trigger_dualstage
+------------------------------
+ATT = {}
+
+ATT.PrintName = "D. Stage"
+ATT.FullName = "Dual Stage Trigger"
+ATT.Icon = Material("entities/tacrp_att_trigger_dualstage.png", "mips smooth")
+ATT.Description = "Trigger that reduces firerate while aiming for better control and accuracy."
+ATT.Pros = {"att.procon.aimrecoilkick", "att.procon.aimspread"}
+ATT.Cons = {"att.procon.aimrpm"}
+
+ATT.SortOrder = 10
+
+ATT.Category = {"trigger_auto"}
+
+ATT.Func_RPM = function(wep, data)
+    if wep:GetScopeLevel() > 0 and not wep:GetPeeking() then
+        data.mul = data.mul * 0.7
+    end
+end
+
+ATT.Func_RecoilKick = function(wep, data)
+    if wep:GetScopeLevel() > 0 and not wep:GetPeeking() then
+        data.mul = data.mul * 0.7
+    end
+end
+
+ATT.Func_Spread = function(wep, data)
+    if wep:GetScopeLevel() > 0 and not wep:GetPeeking() then
+        data.mul = data.mul * 0.7
+    end
+end
+
+TacRP.LoadAtt(ATT, "trigger_dualstage")
+-- #endregion
