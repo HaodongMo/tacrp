@@ -1149,7 +1149,7 @@ local function menu_balance_ti(panel)
     lb_balance:SizeToContents()
     panel:Help("Weapon are divided into 4 tiers, with higher tiers having slightly better overall performance.\nDisable to adjust weapon performance to around the same level.")
     panel:Help("TTT option is untiered, and has lower RPM and high time to kill close to vanilla TTT weapons.")
-	panel:Help("Weapon tiers, best to worst: \n1 - Elite \n2 - Operator \n3 - Security \n4 - Consumer")
+	panel:Help("Weapon tiers, best to worst: \n1 - Elite \n2 - Operator \n3 - Security \n4 - Consumer\n5 - Value")
 
     panel:AddControl("slider", {
         label = "Overall Damage",
