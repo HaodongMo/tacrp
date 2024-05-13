@@ -321,10 +321,10 @@ ATT.ModelOffset = Vector(-5.4, 0, 0)
 
 ATT.Category = {"silencer", "brake"}
 
-ATT.Mult_RecoilKick = 0.85
+ATT.Mult_RecoilKick = 0.6
 -- ATT.Mult_RecoilStability = 1.1
 
-ATT.Add_ShootingSpeedMult = -0.07
+ATT.Add_ShootingSpeedMult = -0.4
 ATT.Mult_Spread = 1.2
 
 ATT.Add_Vol_Shoot = 15
