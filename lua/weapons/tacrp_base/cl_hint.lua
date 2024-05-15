@@ -86,15 +86,15 @@ function SWEP:GetHintCapabilities()
 
     if self:GetValue("CanToggle") and TacRP.ConVars["toggletactical"]:GetBool() then
         local tactical_text = self:GetValue("CustomTacticalHint") or ("Toggle " .. (self:GetValue("TacticalName") or "Tactical"))
-        local bind = "impulse 100"
+        local bind = nil
         if TacRP.GetKeyIsBound("+tacrp_tactical") then
             bind = "+tacrp_tactical"
         end
         if TacRP.ConVars["flashlight_alt"]:GetBool() then
-            self.CachedCapabilities["+walk/impulse 100"] = {so = 31, str = tactical_text}
-            self.CachedCapabilities[bind] = {so = 32, str = "Suit Flashlight"}
+            self.CachedCapabilities[bind or "+walk/impulse 100"] = {so = 31, str = tactical_text}
+            self.CachedCapabilities["impulse 100"] = {so = 32, str = "Suit Flashlight"}
         else
-            self.CachedCapabilities[bind] = {so = 31, str = tactical_text}
+            self.CachedCapabilities[bind or "impulse 100"] = {so = 31, str = tactical_text}
             self.CachedCapabilities["+walk/impulse 100"] = {so = 32, str = "Suit Flashlight"}
         end
     end
