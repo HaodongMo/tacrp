@@ -947,7 +947,7 @@ ATT.Description = "Allows all optics to access a 2x zoom level, allowing them zo
 ATT.Pros = {"att.procon.magnifier"}
 ATT.Cons = {}
 
-ATT.Category = "tactical_zoom"
+ATT.Category = "tactical"
 
 ATT.SortOrder = 8
 
@@ -956,6 +956,10 @@ ATT.VariableZoom = true
 ATT.VariableZoomFOV = 90 / 2
 
 ATT.TacticalName = "Magnifier"
+
+ATT.Compatibility = function(wpn, cats)
+    if wpn.Akimbo then return false end
+end
 
 TacRP.LoadAtt(ATT, "tac_magnifier")
 -- #endregion
@@ -972,7 +976,7 @@ ATT.Description = "Press the tactical key to quickly load a single bullet for em
 ATT.Pros = {"att.procon.bullet"}
 ATT.Cons = {}
 
-ATT.Category = "tactical_ebullet"
+ATT.Category = "tactical"
 
 ATT.SortOrder = 9
 
@@ -980,6 +984,11 @@ ATT.Override_Sound_ToggleTactical = ""
 ATT.CanToggle = true
 
 ATT.CustomTacticalHint = "Load Single Round"
+
+ATT.Compatibility = function(wpn, cats)
+    if wpn.ShotgunReload then return false end
+	if wpn.ClipSize <= 3 then return false end
+end
 
 ATT.Hook_ToggleTactical = function(wep)
     if wep:GetMaxClip1() <= 2 then
