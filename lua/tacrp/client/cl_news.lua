@@ -740,24 +740,39 @@ The heavy weaponry expansion, sporting 10 new weapons including autoshotties, gu
 ]],
     },
 	{
-        Title = "Pistol Whips Release",
-        Type = "Expansion Release",
-        Date = "2024-04-16",
+        Title = "Update 20",
+        Type = "Patch Notes",
+        Date = "2024-05-15",
         Author = "speedonerd",
         Major = true,
-        Summary = "Sensational sidearms abound!",
+        Summary = "Expanded tactical attachments and ammotypes",
         Contents = [[<body style="font-family:'Myriad Pro';color:white;font-size:125%;">
-<p>A spur-of-the-moment idea completed in a few days to bolster the (already quite sizable) pool of sidearms in TacRP. 
+<p>Howdy all. We've been cooking up a pretty substantial update the past month or so with not one, but two massive content drops being developed concurrently. Unfortunately, they're still yet to be released, but we still have a decent-sized update to satiate you in the meantime. 
 
-<h2>Pistol Whips <i>(New!)</i></h2>
-<p><input type='submit' value='Open Workshop' onclick='console.log("RUNLUA:gui.OpenURL(\"https://steamcommunity.com/sharedfiles/filedetails/?id=3134547969\")")' /></p>
-<p>Five brand new pistols, coming from cinema, anime and stuff that caught my eye.
+<hr>
+
+<h2>"They were actually known cheaters who were using a lag switch."</h2>
+<p>The base has received updates to networking that should finally eliminate pesky jitter and inconsistencies at high ping. 
+<p>Movement code predicition has been almost completely rewritten and the breath holding mechanic should now work better and with less contrivances. Viewmodel jitter should also hopefully be a thing of the past.
+
+<h2>You Tactical?</h2>
+<p>The pool of tactical attachments has been expanded with a couple of new options and improvements to existing options.
 <ul>
-<li>H&K P7
-<li>Jericho 941
-<li>Walther P99
-<li>SIG P210
-<li>Beretta 93R
+<li><b>Emergency bullet:</b> For when you're in a pinch and just need that one extra round that'll do 'em in. Press your tactical button to quickly chamber-load a single round.
+<li><b>2x Zoom:</b> Gives every optic (even ironsights!) access to a 2x zoom level. Low power optics can now zoom in further and high-power sniper optics can now zoom out.
+<li><b>Thermal Imager:</b> You got this thing off AliExpress for about a dollar and it works, I guess. When peaking, a thermal overlay will highlight targets in red, though the rest of your vision is blurred.
+<li><b>Combo Module:</b> A 2-for-1 deal, now you can have a laser and a flashlight together. Does not blind targets like the standalone flashlight.
+</ul>
+<p>Corner Cam has also been given a new night mode that can be toggled for low-light environments.
+
+<h2>Sean's got the shotgun.</h2>
+<p>A slew of new ammotypes for shotguns have arrived.
+<ul>
+<li><b>Minishells:</b> Smaller shells with less power, but you can fit more of them into your magazine.
+<li><b>Dragon's Breath:</b> Specialty shells that can ignite targets.
+<li><b>Frag Shells:</b> Explosive shells with small splash damage.
+<li><b>Breaching Shells:</b> Trade off damage and range for the ability to knock down doors.
+<li><b>Buckshot Roulette:</b> The shells enter the chamber in an unknown order...
 </ul>
 
 <hr>
