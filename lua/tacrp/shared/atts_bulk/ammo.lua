@@ -497,7 +497,7 @@ ATT.Description = "Hardened bullets shatter and penetrate armor, but destabilize
 ATT.Pros = {"att.procon.armor", "stat.penetration"}
 ATT.Cons = {"stat.recoilkick", "stat.recoilstability"}
 
-ATT.Category = "ammo_pistol"
+ATT.Category = {"ammo_pistol", "ammo_pistol_sub"}
 
 ATT.SortOrder = 1.5
 
@@ -526,7 +526,7 @@ ATT.Description = "Specialized rounds that do more damage to vital body parts."
 ATT.Pros = {"att.procon.head", "stat.spread"}
 ATT.Cons = {"att.procon.limb", "stat.armorbonus"}
 
-ATT.Category = "ammo_pistol"
+ATT.Category = {"ammo_pistol", "ammo_pistol_sub"}
 
 ATT.SortOrder = 1.25
 
@@ -558,7 +558,7 @@ ATT.Description = "Bullets that expand on hit, improving damage to flesh targets
 ATT.Pros = {"att.procon.chest", "att.procon.limb"}
 ATT.Cons = {"att.procon.head", "att.procon.armor", "stat.penetration"}
 
-ATT.Category = "ammo_pistol"
+ATT.Category = {"ammo_pistol", "ammo_pistol_sub"}
 
 ATT.SortOrder = 1
 
@@ -591,7 +591,7 @@ ATT.Description = "Bullets with improved range and accuracy."
 ATT.Pros = {"stat.spread", "stat.range_max"}
 ATT.Cons = {"stat.hipfirespread", "stat.peekpenalty"}
 
-ATT.Category = "ammo_pistol"
+ATT.Category = {"ammo_pistol", "ammo_pistol_sub"}
 
 ATT.SortOrder = 4.5
 
@@ -615,7 +615,7 @@ ATT.Description = "Bullets with greatly improved accuracy."
 ATT.Pros = {"stat.spread", "stat.muzzlevelocity", "stat.bloomintensity"}
 ATT.Cons = {"stat.hipfirespread", "att.procon.limb"}
 
-ATT.Category = "ammo_rifle"
+ATT.Category = {"ammo_rifle", "ammo_rifle_sub"}
 
 ATT.SortOrder = 2
 
@@ -1085,7 +1085,7 @@ ATT.Icon = Material("entities/tacrp_att_acc_surplus.png", "mips smooth")
 ATT.Description = "Unreliable old ammo, yet you keep finding them everywhere."
 ATT.Pros = {"att.procon.refund", "stat.recoil"}
 ATT.Cons = {"att.procon.unreliable"}
-ATT.Category = {"ammo_rifle", "ammo_sniper", "ammo_pistol", "ammo_amr", "ammo_shotgun", "ammo_shotgun2"}
+ATT.Category = {"ammo_rifle", "ammo_sniper", "ammo_pistol", "ammo_amr", "ammo_shotgun", "ammo_shotgun2", "ammo_rifle_sub", "ammo_pistol_sub"}
 
 ATT.SortOrder = 999
 
@@ -1119,12 +1119,12 @@ ATT.Icon = Material("entities/tacrp_att_acc_tmj.png", "mips smooth")
 ATT.Description = "Bullets with improved penetration capability."
 ATT.Pros = {"att.procon.armor", "stat.penetration"}
 ATT.Cons = {"stat.recoilfirstshot"}
-ATT.Category = {"ammo_rifle", "ammo_sniper", "ammo_amr"}
+ATT.Category = {"ammo_rifle", "ammo_sniper", "ammo_amr", "ammo_rifle_sub"}
 
 ATT.SortOrder = 1.5
 
 ATT.Add_Penetration = 8
-ATT.Mult_RecoilFirstShotMult = 1.5
+ATT.Add_RecoilFirstShotMult = 1
 ATT.Add_ArmorPenetration = 0.05
 
 TacRP.LoadAtt(ATT, "ammo_tmj")
