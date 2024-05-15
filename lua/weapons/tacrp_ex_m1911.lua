@@ -254,6 +254,8 @@ SWEP.LastShot = true
 
 // attachments
 
+SWEP.NoTactical = true
+
 SWEP.Attachments = {
     [1] = {
         PrintName = "Muzzle",
@@ -277,7 +279,7 @@ SWEP.Attachments = {
     },
     [3] = {
         PrintName = "Tactical",
-        Category = {"tactical_zoom", "tactical_ebullet"},
+        Category = {},
         Bone = "sphinx_ROOT",
         WMBone = "Box01",
         AttachSound = "TacRP/weapons/flashlight_on.wav",

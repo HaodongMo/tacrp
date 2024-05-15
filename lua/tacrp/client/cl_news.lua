@@ -745,20 +745,22 @@ The heavy weaponry expansion, sporting 10 new weapons including autoshotties, gu
         Date = "2024-05-15",
         Author = "speedonerd",
         Major = true,
-        Summary = "Expanded tactical attachments and ammotypes",
+        Summary = "Expanded attachments and networking improvements",
         Contents = [[<body style="font-family:'Myriad Pro';color:white;font-size:125%;">
-<p>Howdy all. We've been cooking up a pretty substantial update the past month or so with not one, but two massive content drops being developed concurrently. Unfortunately, they're still yet to be released, but we still have a decent-sized update to satiate you in the meantime. 
+<p>Howdy all! It's a little crazy to think about, but May 14th (14 - 5 - 2024) marks exactly one year since TacRP InterOps launched on the Workshop. Since then TacRP's weapon selection has gone from 70-something weapons to over 200, and a myriad of new features have been added.
+<p>It's been quite a ride, and we appreciate all the support and kind words we've continued to receive throughout this year of development.
+<p>We've been cooking up a pretty substantial update the past month or so with not one, but two massive content drops being developed concurrently. Unfortunately, they're still yet to be released, but we still have a decent-sized update to satiate you in the meantime. 
 
 <hr>
 
 <h2>"They were actually known cheaters who were using a lag switch."</h2>
 <p>The base has received updates to networking that should finally eliminate pesky jitter and inconsistencies at high ping. 
-<p>Movement code prediction has been almost completely rewritten and the breath holding mechanic should now work better and with less contrivances. Viewmodel jitter should also hopefully be a thing of the past.
+<p>Movement code prediction has been almost completely rewritten and the breath holding mechanic should now actually work in multiplayer. Viewmodel jitter should also hopefully be a thing of the past.
 
 <h2>You Tactical?</h2>
 <p>The pool of tactical attachments has been expanded with a couple of new options and improvements to existing options.
 <ul>
-<li><b>Emergency bullet:</b> For when you're in a pinch and just need that one extra round that'll do 'em in. Press your tactical button to quickly chamber-load a single round.
+<li><b>Emergency Bullet:</b> For when you're in a pinch and just need that one extra round that'll do 'em in. Press your tactical button to quickly chamber-load a single round.
 <li><b>2x Zoom:</b> Gives every optic (even ironsights!) access to a 2x zoom level. Low power optics can now zoom in further and high-power sniper optics can now zoom out.
 <li><b>Thermal Imager:</b> You got this thing off AliExpress for about a dollar and it works, I guess. When peaking, a thermal overlay will highlight targets in red, though the rest of your vision is blurred.
 <li><b>Combo Module:</b> A 2-for-1 deal, now you can have a laser and a flashlight together. Does not blind targets like the standalone flashlight.
@@ -770,20 +772,38 @@ The heavy weaponry expansion, sporting 10 new weapons including autoshotties, gu
 <ul>
 <li><b>Minishells:</b> Smaller shells with less power, but you can fit more of them into your magazine.
 <li><b>Dragon's Breath:</b> Specialty shells that can ignite targets.
-<li><b>Frag Shells:</b> Explosive shells with small splash damage.
+<li><b>Frag Shells:</b> Explosive shells that deal splash damage in a small radius.
 <li><b>Breaching Shells:</b> Trade off damage and range for the ability to knock down doors.
 <li><b>Buckshot Roulette:</b> The shells enter the chamber in an unknown order...
 </ul>
+
+<h2>Brake hard and fast.</h2>
+<p>Three new muzzle attachments, finally giving most weapons some attachable muzzle brakes.
+<ul>
+<li><b>Agressor Brake:</b> Increases firing move speed by redirecting gasses away from the shooter.
+<li><b>Breaching Brake:</b> Sharp and pointy edges increase melee damage.
+<li><b>Concussive Brake:</b> Significantly reduces recoil kick at the cost of firing move speed.
+</ul>
+
+<hr>
+
+<p>You might notice a few weapons have received model updates. These have been byproducts of the coming content drops, at least one of which should be expected to launch some time before the end of the summer.
+<p>Thank you all for your continued support, and stay tactical.
 
 <hr>
 
 <h3>Changelog</h3>
 <ul>
+<li><b>Added:</b> (Base) Four new tactical attachments: Emergency Bullet, 2x Zoom, Thermal Imager, Combo Module.
+<li><b>Added:</b> (Base) Five new shotgun ammo types: Minishells, Dragon's Breath, Frag Shells, Breaching Shells, Buckshot Roulette.
+<li><b>Changed:</b> (Base) Reordered and redefined weapon subcategories. Anti-materiel rifles has been dissolved and Precision Rifles has been split up into Battle Rifles and Marksman Rifles.
 <li><b>Changed:</b> (All packs) Updated a few descriptions and added/changed some quotes.
-<li><b>Changed:</b> (InterOps) Small balance tweaks to the P226.
+<li><b>Changed:</b> (All packs) Balance tweaks and changes all-around. Far to many to list off here.
+<li><b>Changed:</b> (InterOps) New RPK model.
+<li><b>Changed:</b> (Special Delivery) New PKM model.
+<li><b>Fixed:</b> (Base) Significant networking improvements across the board.
+<li><b>Fixed:</b> (InterOps) Fixed twisted wrists on SG 550 rifles (at last).
 </ul>
-
-<p>Hopefully this small expansion can satisfy while we continue to cook up more substantial updates and content releases. Thanks again for your ongoing support!
 ]],
     },
 }
