@@ -317,8 +317,8 @@ ATT.PrintName = "Ratshot"
 ATT.FullName = "Ratshot Rounds"
 ATT.Icon = Material("entities/tacrp_att_ammo_amr_ratshot.png", "mips smooth")
 ATT.Description = "For rodents of unusual size."
-ATT.Pros = {"Extra projectiles", "Hipfire Spread"}
-ATT.Cons = {"Damage", "Spread"}
+ATT.Pros = {"att.procon.moreproj", "spacer.maneuvering"}
+ATT.Cons = {"rating.damage", "stat.spread"}
 
 ATT.Category = {"ammo_amr"}
 
@@ -332,9 +332,10 @@ ATT.Override_Damage_Min = 4
 ATT.Override_Penetration = 1
 
 ATT.Mult_HipFireSpreadPenalty = 0.5
+ATT.Mult_MidAirSpreadPenalty = 0.5
 
 ATT.Add_Spread = 0.01
-ATT.Add_ShotgunPelletSpread = 0.015
+ATT.Add_ShotgunPelletSpread = 0.02
 
 ATT.Override_BodyDamageMultipliers = {
     [HITGROUP_HEAD] = 2,
