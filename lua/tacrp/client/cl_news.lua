@@ -747,8 +747,8 @@ The heavy weaponry expansion, sporting 10 new weapons including autoshotties, gu
         Major = true,
         Summary = "Expanded attachments and networking improvements",
         Contents = [[<body style="font-family:'Myriad Pro';color:white;font-size:125%;">
-<p>Howdy all. It's a little crazy to think about, but May 14th (14 - 5 - 2024) marks exactly one year since TacRP InterOps launched on the Workshop. Since then TacRP's weapon selection has gone from 70-something weapons to over 200!
-<p>It's been quite a ride, and we appreciate all the support and kind words we've continued to receive throughout this year of development!
+<p>Howdy all! It's a little crazy to think about, but May 14th (14 - 5 - 2024) marks exactly one year since TacRP InterOps launched on the Workshop. Since then TacRP's weapon selection has gone from 70-something weapons to over 200, and a myriad of new features have been added.
+<p>It's been quite a ride, and we appreciate all the support and kind words we've continued to receive throughout this year of development.
 <p>We've been cooking up a pretty substantial update the past month or so with not one, but two massive content drops being developed concurrently. Unfortunately, they're still yet to be released, but we still have a decent-sized update to satiate you in the meantime. 
 
 <hr>
@@ -796,6 +796,7 @@ The heavy weaponry expansion, sporting 10 new weapons including autoshotties, gu
 <ul>
 <li><b>Added:</b> (Base) Four new tactical attachments: Emergency Bullet, 2x Zoom, Thermal Imager, Combo Module.
 <li><b>Added:</b> (Base) Five new shotgun ammo types: Minishells, Dragon's Breath, Frag Shells, Breaching Shells, Buckshot Roulette.
+<li><b>Changed:</b> (Base) Reordered and redefined weapon subcategories. Anti-materiel rifles has been dissolved and Precision Rifles has been split up into Battle Rifles and Marksman Rifles.
 <li><b>Changed:</b> (All packs) Updated a few descriptions and added/changed some quotes.
 <li><b>Changed:</b> (All packs) Balance tweaks and changes all-around. Far to many to list off here.
 <li><b>Changed:</b> (InterOps) New RPK model.
