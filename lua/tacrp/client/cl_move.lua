@@ -49,8 +49,6 @@ hook.Add("CreateMove", "TacRP_CreateMove", function(cmd)
         cmd:AddKey(TacRP.IN_TACTICAL)
     end
 
-    TacRP.KeyPressed_Tactical = false
-
     local mult = TacRP.CalculateMaxMoveSpeed(LocalPlayer())
 
     local basemove = Vector(cmd:GetForwardMove(), cmd:GetUpMove(), cmd:GetSideMove())

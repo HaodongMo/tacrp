@@ -299,6 +299,7 @@ SWEP.DefaultBodygroups = "0000000"
 SWEP.DefaultWMBodygroups = "0000000"
 SWEP.DefaultSkin = 0
 SWEP.BulletBodygroups = nil
+SWEP.BulletBodygroupsSetAll = false // Set all applicable bullet groups, rather than just the last
 
 /*
 {

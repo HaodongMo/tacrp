@@ -13,20 +13,14 @@ hook.Add("PlayerBindPress", "TacRP_Binds", function(ply, bind, pressed, code)
         wpn.LastHintLife = CurTime() -- ping the hints
     end
 
-    if bind == "+menu_context" then
+    if bind == "+menu_context" and !LocalPlayer():KeyDown(IN_USE) then
         TacRP.KeyPressed_Customize = pressed
 
-        if pressed and !LocalPlayer():KeyDown(IN_USE) then
-            return true
-        end
+        return true
     end
 
-    if !pressed then return end
-
-    if TacRP.ConVars["toggletactical"]:GetBool() and bind == "impulse 100" and wpn:GetValue("CanToggle") and (
-                !GetConVar("mp_flashlight"):GetBool() or (TacRP.ConVars["flashlight_alt"]:GetBool() and ply:KeyDown(IN_WALK))
-                or (!TacRP.ConVars["flashlight_alt"]:GetBool() and !ply:KeyDown(IN_WALK))) then
-        TacRP.KeyPressed_Tactical = true
+    if TacRP.ConVars["toggletactical"]:GetBool() and bind == "impulse 100" and wpn:GetValue("CanToggle") and (!GetConVar("mp_flashlight"):GetBool() or (TacRP.ConVars["flashlight_alt"]:GetBool() and ply:KeyDown(IN_WALK)) or (!TacRP.ConVars["flashlight_alt"]:GetBool() and !ply:KeyDown(IN_WALK))) then
+        TacRP.KeyPressed_Tactical = pressed
 
         return true
     end
