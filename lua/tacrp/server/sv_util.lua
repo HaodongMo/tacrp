@@ -92,3 +92,75 @@ function TacRP.GetRandomWeapon(subcat, tier)
     local tbl = TacRP.GetWeaponList(subcat, tier)
     return tbl[math.random(1, #tbl)]
 end
+
+local cats = {
+    ["ClassName"] = true,
+    ["PrintName"] = true,
+    ["SubCatTier"] = function(wep) return string.sub(wep.SubCatTier, 1) end,
+    ["SubCatType"] = function(wep) return string.sub(wep.SubCatType, 1) end,
+    ["Damage_Max"] = true,
+    ["Damage_Min"] = true,
+    ["Raw DPS"] = function(wep)
+        local valfunc = wep.GetBaseValue
+        local bfm = wep:GetBestFiremode(true)
+        local rrpm = wep:GetRPM(true, bfm)
+        local erpm = rrpm
+        local pbd = valfunc(wep, "PostBurstDelay")
+        if bfm < 0 then
+            erpm = 60 / ((1 / (rrpm / 60)) + (pbd / -bfm))
+        end
+        local num = valfunc(wep, "Num")
+        local dmg = math.max(valfunc(wep, "Damage_Max"), valfunc(wep, "Damage_Min"))
+        return math.Round(dmg * num * erpm / 60, 1)
+    end,
+
+    ["Range_Max"] = true,
+    ["Range_Min"] = true,
+
+    ["MuzzleVelocity"] = true,
+    ["ClipSize"] = true,
+    ["RPM"] = true,
+
+    ["RecoilKick"] = true,
+    ["RecoilStability"] = true,
+    ["Spread"] = true,
+    ["RecoilSpreadPenalty"] = true,
+    ["HipFireSpreadPenalty"] = true,
+
+    ["MoveSpeedMult"] = true,
+    ["ShootingSpeedMult"] = true,
+    ["SightedSpeedMult"] = true,
+    ["ReloadSpeedMult"] = true,
+    ["ReloadTime"] = function(wep) return math.Round(wep:GetReloadTime(true), 2) end,
+
+    ["AimDownSightsTime"] = true,
+    ["SprintToFireTime"] = true,
+}
+
+concommand.Add("tacrp_dev_dumpstats", function()
+    if !game.SinglePlayer() then return end
+    local str = ""
+    print("Dumping stats, this may lag a bit...")
+    -- headers
+    for k, v in pairs(cats) do
+        str = str .. k .. ","
+    end
+    str = string.sub(str, 0, -1) .. "\n"
+    timer.Simple(0.1, function()
+        local ply = Entity(1)
+        for _, class in SortedPairs(TacRP.GetWeaponList()) do
+            local wpn = ply:Give(class, true)
+            for k, v in pairs(cats) do
+                if v == true then
+                    str = str .. (wpn[k] or "") .. ","
+                else
+                    str = str .. v(wpn) .. ","
+                end
+            end
+            ply:StripWeapon(class)
+            str = string.sub(str, 0, -1) .. "\n"
+        end
+        file.Write("tacrp_dumpstats.csv", str)
+        print("Dumped stats to tacrp_dumpstats.csv")
+    end)
+end, nil, "Collects some stats and dumps them to a CSV file. Singleplayer only, may lag a bit.")

@@ -640,11 +640,6 @@ SWEP.StatDisplay = {
             end
 
             local num = valfunc(self, "Num")
-            -- local hi, lo = valfunc(self, "Damage_Max"), valfunc(self, "Damage_Min")
-            -- if lo > hi then
-            --     hi, lo = valfunc(self, "Damage_Min"), valfunc(self, "Damage_Max")
-            -- end
-            -- local dmg = Lerp(0.25, hi, lo)
             local dmg = math.max(valfunc(self, "Damage_Max"), valfunc(self, "Damage_Min"))
             return math.Round(dmg * num * erpm / 60, 1)
         end,
