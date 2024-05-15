@@ -12,7 +12,7 @@ SWEP.SubCatTier = "4Consumer"
 SWEP.SubCatType = "3Machine Pistol"
 
 SWEP.Description = "A bullet hose best used for point blank spray-and-pray."
-SWEP.Description_Quote ="\"Give me the motherf*ckin' gun, Tre!\""
+SWEP.Description_Quote = "\"Give me the motherf*ckin' gun, Tre!\""
 
 SWEP.Trivia_Caliber = "9x19mm"
 SWEP.Trivia_Manufacturer = "Military Armament Corporation"
@@ -120,7 +120,7 @@ SWEP.RecoilFirstShotMult = 1 // multiplier for the first shot's recoil amount
 
 SWEP.RecoilVisualKick = 1.5
 
-SWEP.RecoilKick = 2.5
+SWEP.RecoilKick = 5
 SWEP.RecoilStability = 0.15
 
 SWEP.RecoilSpreadPenalty = 0.002

@@ -77,7 +77,7 @@ SWEP.TTTReplace = TacRP.TTTReplacePreset.Pistol
 
 SWEP.Damage_Max = 25
 SWEP.Damage_Min = 12
-SWEP.Range_Min = 700
+SWEP.Range_Min = 750
 SWEP.Range_Max = 2200
 SWEP.Penetration = 3 // units of metal this weapon can penetrate
 SWEP.ArmorPenetration = 0.65
@@ -102,8 +102,8 @@ SWEP.Firemodes = {-3, 1}
 SWEP.RunawayBurst = true
 
 SWEP.RPM = 800
-SWEP.RPMMultBurst = 1.25
-SWEP.PostBurstDelay = 0.33
+SWEP.RPMMultBurst = 1.5
+SWEP.PostBurstDelay = 0.3
 
 SWEP.Spread = 0.0035
 
