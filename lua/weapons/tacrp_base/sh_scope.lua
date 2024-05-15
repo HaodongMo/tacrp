@@ -253,7 +253,7 @@ function SWEP:GetMagnification()
 
         mag = 90 / self:GetValue("ScopeFOV")
 
-        if self:GetValue("VariableZoom") and self:GetTactical() then
+        if self:GetValue("VariableZoom") and self:GetTactical() and self:GetValue("Scope") and (self:GetValue("ScopeOverlay") or self:GetValue("Holosight")) then
             mag = 90 / self:GetValue("VariableZoomFOV")
         end
 

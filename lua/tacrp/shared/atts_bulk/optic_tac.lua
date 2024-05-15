@@ -945,7 +945,7 @@ ATT.FullName = "Variable Zoom Optic (2x)"
 ATT.Icon = Material("entities/tacrp_att_tac_magnifier.png", "mips smooth")
 ATT.Description = "Allows all optics to access a 2x zoom level, allowing them zoom in or out."
 ATT.Pros = {"att.procon.magnifier"}
-ATT.Cons = {}
+ATT.Cons = {"att.procon.needscope"}
 
 ATT.Category = "tactical_zoom"
 
