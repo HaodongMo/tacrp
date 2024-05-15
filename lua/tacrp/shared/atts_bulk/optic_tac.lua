@@ -959,6 +959,7 @@ ATT.TacticalName = "Magnifier"
 
 ATT.Compatibility = function(wpn, cats)
     if wpn.Akimbo then return false end
+	if wpn.NoTactical then return true end
 end
 
 TacRP.LoadAtt(ATT, "tac_magnifier")
@@ -988,6 +989,7 @@ ATT.CustomTacticalHint = "Load Single Round"
 ATT.Compatibility = function(wpn, cats)
     if wpn.ShotgunReload then return false end
 	if wpn.ClipSize <= 3 then return false end
+	if wpn.NoTactical then return true end
 end
 
 ATT.Hook_ToggleTactical = function(wep)
