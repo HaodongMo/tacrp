@@ -753,7 +753,7 @@ The heavy weaponry expansion, sporting 10 new weapons including autoshotties, gu
 
 <h2>"They were actually known cheaters who were using a lag switch."</h2>
 <p>The base has received updates to networking that should finally eliminate pesky jitter and inconsistencies at high ping. 
-<p>Movement code predicition has been almost completely rewritten and the breath holding mechanic should now work better and with less contrivances. Viewmodel jitter should also hopefully be a thing of the past.
+<p>Movement code prediction has been almost completely rewritten and the breath holding mechanic should now work better and with less contrivances. Viewmodel jitter should also hopefully be a thing of the past.
 
 <h2>You Tactical?</h2>
 <p>The pool of tactical attachments has been expanded with a couple of new options and improvements to existing options.
