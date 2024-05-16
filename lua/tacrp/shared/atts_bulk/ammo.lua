@@ -1337,7 +1337,7 @@ ATT.FullName = "Breaching Shells"
 ATT.Icon = Material("entities/tacrp_att_ammo_breaching.png", "mips smooth")
 ATT.Description = "Packed lead powder allows door breaching at close range, but little else."
 ATT.Pros = {"att.procon.doorbreach"}
-ATT.Cons = {"stat.damage", "stat.range", "stat.clipsize"}
+ATT.Cons = {"stat.damage", "stat.range"}
 
 ATT.Category = {"ammo_shotgun", "ammo_shotgun2"}
 
@@ -1354,8 +1354,6 @@ ATT.Override_MuzzleVelocity = 9500
 
 ATT.DoorBreach = true
 ATT.DoorBreachThreshold = 50
-
-ATT.Override_ClipSize = 1
 
 TacRP.LoadAtt(ATT, "ammo_shotgun_breach")
 -- #endregion
