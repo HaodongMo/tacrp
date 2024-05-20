@@ -318,7 +318,7 @@ ATT.FullName = "Ratshot Rounds"
 ATT.Icon = Material("entities/tacrp_att_ammo_amr_ratshot.png", "mips smooth")
 ATT.Description = "For rodents of unusual size."
 ATT.Pros = {"att.procon.moreproj", "spacer.maneuvering"}
-ATT.Cons = {"rating.damage", "stat.spread"}
+ATT.Cons = {"stat.damage", "stat.spread"}
 
 ATT.Category = {"ammo_amr"}
 
