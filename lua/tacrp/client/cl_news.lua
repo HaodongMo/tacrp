@@ -739,10 +739,10 @@ The heavy weaponry expansion, sporting 10 new weapons including autoshotties, gu
 <li><b>Fixed:</b> Some other stuff probably not worth documenting.
 ]],
     },
-	{
+    {
         Title = "Update 20",
         Type = "Patch Notes",
-        Date = "2024-05-15",
+        Date = "2024-05-24",
         Author = "speedonerd",
         Major = true,
         Summary = "Expanded attachments and networking improvements",
@@ -785,10 +785,14 @@ The heavy weaponry expansion, sporting 10 new weapons including autoshotties, gu
 <li><b>Concussive Brake:</b> Significantly reduces recoil kick at the cost of firing move speed.
 </ul>
 
+
+<h2>Nanomachines, son.</h2>
+<p>A new grenade, the Medi-Smoke, has been added. This can of purple technology and probably drugs will restore your health as long as you stand in it!</p>
+
 <hr>
 
-<p>You might notice a few weapons have received model updates. These have been byproducts of the coming content drops, at least one of which should be expected to launch some time before the end of the summer.
-<p>Thank you all for your continued support, and stay tactical.
+<p>You might notice a few weapons have received model updates. These have been byproducts of the coming content drops, at least one of which should be expected to launch some time before the end of the summer.</p>
+<p>Thank you all for your continued support, and stay tactical.</p>
 
 <hr>
 
@@ -796,6 +800,10 @@ The heavy weaponry expansion, sporting 10 new weapons including autoshotties, gu
 <ul>
 <li><b>Added:</b> (Base) Four new tactical attachments: Emergency Bullet, 2x Zoom, Thermal Imager, Combo Module.
 <li><b>Added:</b> (Base) Five new shotgun ammo types: Minishells, Dragon's Breath, Frag Shells, Breaching Shells, Buckshot Roulette.
+<li><b>Added:</b> (Base) Corner-Cam now has a night-vision mode, toggle with Tactical keybind.
+<li><b>Added:</b> (Base) JHP ammo for rifles.
+<li><b>Added:</b> (Base) Healing Grenades.
+<li><b>Added:</b> (Base) Non-lethal grenades now have a distinctive trail.
 <li><b>Changed:</b> (Base) Reordered and redefined weapon subcategories. Anti-materiel rifles has been dissolved and Precision Rifles has been split up into Battle Rifles and Marksman Rifles.
 <li><b>Changed:</b> (All packs) Updated a few descriptions and added/changed some quotes.
 <li><b>Changed:</b> (All packs) Balance tweaks and changes all-around. Far to many to list off here.
@@ -803,6 +811,8 @@ The heavy weaponry expansion, sporting 10 new weapons including autoshotties, gu
 <li><b>Changed:</b> (Special Delivery) New PKM model.
 <li><b>Fixed:</b> (Base) Significant networking improvements across the board.
 <li><b>Fixed:</b> (InterOps) Fixed twisted wrists on SG 550 rifles (at last).
+<li><b>Rebalance:</b> (All packs) A lot of tweaks across the board.
+
 </ul>
 ]],
     },
