@@ -48,3 +48,36 @@ function ENT:Detonate()
 
     self:Remove()
 end
+
+ENT.SmokeTrail = true
+local smokeimages = {"particle/smokesprites_0001", "particle/smokesprites_0002", "particle/smokesprites_0003", "particle/smokesprites_0004", "particle/smokesprites_0005", "particle/smokesprites_0006", "particle/smokesprites_0007", "particle/smokesprites_0008", "particle/smokesprites_0009", "particle/smokesprites_0010", "particle/smokesprites_0011", "particle/smokesprites_0012", "particle/smokesprites_0013", "particle/smokesprites_0014", "particle/smokesprites_0015", "particle/smokesprites_0016"}
+local function GetSmokeImage()
+    return smokeimages[math.random(#smokeimages)]
+end
+function ENT:DoSmokeTrail()
+    if CLIENT and self.SmokeTrail then
+        local pos = self:GetPos() + self:GetUp() * 4
+        local emitter = ParticleEmitter(pos)
+        local smoke = emitter:Add(GetSmokeImage(), pos)
+
+        smoke:SetStartAlpha(50)
+        smoke:SetEndAlpha(0)
+
+        smoke:SetStartSize(2)
+        smoke:SetEndSize(math.Rand(16, 24))
+
+        smoke:SetRoll(math.Rand(-180, 180))
+        smoke:SetRollDelta(math.Rand(-1, 1))
+
+        smoke:SetVelocity(VectorRand() * 8 + self:GetUp() * 16)
+
+        smoke:SetColor(125, 25, 125)
+        smoke:SetLighting(false)
+
+        smoke:SetDieTime(math.Rand(1, 1.5))
+
+        smoke:SetGravity(Vector(0, 0, 15))
+
+        emitter:Finish()
+    end
+end
