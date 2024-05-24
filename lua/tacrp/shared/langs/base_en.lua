@@ -371,6 +371,7 @@ L["att.procon.blurpeek"] = "Blur when peeking"
 L["att.procon.aimrecoilkick"] = "Recoil Kick (while aiming)"
 L["att.procon.aimspread"] = "Spread (while aiming)"
 L["att.procon.aimrpm"] = "Fire Rate (while aiming)"
+L["att.procon.firstround"] = "First shot is a single less-lethal projectile"
 
 L["att.sight.1"] = "1x Sight"
 L["att.sight.1.25"] = "1.25x Sight"

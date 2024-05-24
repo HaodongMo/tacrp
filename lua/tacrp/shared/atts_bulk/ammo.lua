@@ -428,7 +428,7 @@ ATT.FullName = "KS-23 Zvezda Flash Shells (Top-loaded)"
 ATT.Icon = Material("entities/tacrp_att_ammo_ks23_flashbang.png", "mips smooth")
 ATT.Description = "Load the first round with flash rounds and the rest with standard shells."
 ATT.Pros = {"att.procon.flash"}
-ATT.Cons = {"att.procon.timedfuse", "att.procon.nonlethal"}
+ATT.Cons = {"att.procon.firstround"}
 
 ATT.SortOrder = 1.1
 ATT.Category = "ammo_ks23"
@@ -1369,28 +1369,37 @@ TacRP.LoadAtt(ATT, "ammo_shotgun_frag")
 ------------------------------
 ATT = {}
 
-ATT.PrintName = "Breaching"
-ATT.FullName = "Breaching Shells"
+ATT.PrintName = "Breach (Top)"
+ATT.FullName = "Breaching Shell (Top-loaded)"
 ATT.Icon = Material("entities/tacrp_att_ammo_breaching.png", "mips smooth")
-ATT.Description = "Packed lead powder allows door breaching at close range, but little else."
+ATT.Description = "Load the first round with a specialized breaching slug."
 ATT.Pros = {"att.procon.doorbreach"}
-ATT.Cons = {"stat.damage", "stat.range"}
+ATT.Cons = {"att.procon.firstround"}
 
 ATT.Category = {"ammo_shotgun", "ammo_shotgun2"}
 
 ATT.SortOrder = 10
 
-ATT.Mult_Damage_Max = 0.8
-ATT.Override_Damage_Min = 1
-ATT.Override_Num = 12
+ATT.ShootEntForce = 2000
 
-ATT.Override_Range_Min = 32
-ATT.Override_Range_Max = 500
-
-ATT.Override_MuzzleVelocity = 9500
-
-ATT.DoorBreach = true
-ATT.DoorBreachThreshold = 50
+ATT.Func_Num = function(wep, modifiers)
+    if wep:Clip1() == wep:GetMaxClip1() then
+        modifiers.set = 1
+        modifiers.prio = 10
+    end
+end
+ATT.Func_ShootEnt = function(wep, modifiers)
+    if wep:Clip1() == wep:GetMaxClip1() then
+        modifiers.set = "tacrp_proj_breach_slug"
+        modifiers.prio = 10
+    end
+end
+ATT.Func_Override_MuzzleEffect = function(wep, modifiers)
+    if wep:Clip1() == wep:GetMaxClip1() then
+        modifiers.set = "muzzleflash_smg"
+        modifiers.prio = 10
+    end
+end
 
 TacRP.LoadAtt(ATT, "ammo_shotgun_breach")
 -- #endregion
