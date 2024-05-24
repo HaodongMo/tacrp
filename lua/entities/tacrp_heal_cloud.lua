@@ -17,7 +17,7 @@ local SmokeColor = Color(125, 25, 125)
 ENT.Particles = nil
 ENT.SmokeRadius = 256
 ENT.SmokeColor = SmokeColor
-ENT.BillowTime = 5
+ENT.BillowTime = 2.5
 ENT.Life = 15
 
 ENT.TacRPSmoke = true
@@ -59,7 +59,7 @@ function ENT:Initialize()
             smoke:SetDieTime(smoke.ft)
             smoke.life = self.Life
             smoke.billowed = false
-            smoke.radius = self.SmokeRadius
+            smoke.radius = self.SmokeRadius / 2
             smoke.offset_r = math.Rand(0, 100)
             smoke.offset_g = math.Rand(0, 100)
             smoke.offset_b = math.Rand(0, 100)
@@ -98,8 +98,8 @@ function ENT:Initialize()
 
                 alph = math.Clamp(alph, 0, 1)
 
-                pa:SetStartAlpha(50 * alph)
-                pa:SetEndAlpha(50 * alph)
+                pa:SetStartAlpha(35 * alph)
+                pa:SetEndAlpha(35 * alph)
 
                 pa:SetNextThink( CurTime() + FrameTime() )
             end )
@@ -113,19 +113,14 @@ function ENT:Initialize()
     self.dt = CurTime() + self.Life + self.BillowTime
 end
 
-
 function ENT:Think()
 
     if SERVER then
         if !self:GetOwner():IsValid() then self:Remove() return end
-
-        local o = self:GetOwner()
         local origin = self:GetPos() + Vector(0, 0, 16)
 
-        local ttt = TacRP.GetBalanceMode() == TacRP.BALANCE_TTT
-
-        for i, k in pairs(ents.FindInSphere(origin, 300)) do
-            if k:IsPlayer() or k:IsNPC() or k:IsNextBot() then
+        for i, k in pairs(ents.FindInSphere(origin, self.SmokeRadius)) do
+            if (k:IsPlayer() or k:IsNPC() or k:IsNextBot()) then
                 local tr = util.TraceLine({
                     start = origin,
                     endpos = k:EyePos() or k:WorldSpaceCenter(),
@@ -133,18 +128,26 @@ function ENT:Think()
                     mask = MASK_SOLID_BRUSHONLY
                 })
                 if tr.Fraction < 1 then continue end
-                local dist = (tr.HitPos - tr.StartPos):Length()
-                local delta = dist / 320
-
-                if k:IsPlayer() then
-                    if (k.TacRPNextCanHealthGasTime or 0) > CurTime() then continue end
-                    k:SetHealth(math.min(k:Health() + 2, k:GetMaxHealth()))
-                    k.TacRPNextCanHealthGasTime = CurTime() + 1
+                if k:IsPlayer() and k:GetNWFloat("TacRPNextCanHealthGasTime", 0) <= CurTime() then
+                    local ply = k
+                    if ply:Health() < ply:GetMaxHealth() then
+                        ply:SetHealth(math.min(ply:Health() + 3, ply:GetMaxHealth()))
+                    elseif ply:Armor() > 0 and ply:Armor() <= ply:GetMaxArmor() then
+                        ply:SetArmor(math.min(ply:Armor() + 1, ply:GetMaxArmor()))
+                    end
+                    ply:SetNWFloat("TacRPNextCanHealthGasTime", CurTime() + 0.499)
+                elseif !k:IsPlayer() and (k.TacRPNextCanHealthGasTime or 0) <= CurTime() then
+                    if TacRP.EntityIsNecrotic(k) then
+                        k:TakeDamage(5, self:GetOwner() or self, self)
+                    elseif k:Health() < k:GetMaxHealth() then
+                        k:SetHealth(math.min(k:Health() + 3, k:GetMaxHealth()))
+                    end
+                    k.TacRPNextCanHealthGasTime = CurTime() + 0.499
                 end
             end
         end
 
-        self:NextThink(CurTime() + 1)
+        self:NextThink(CurTime() + 0.5)
 
         if self.dt < CurTime() then
             SafeRemoveEntity(self)
