@@ -550,8 +550,8 @@ TacRP.LoadAtt(ATT, "ammo_pistol_headshot")
 ------------------------------
 ATT = {}
 
-ATT.PrintName = "Hollowpoints"
-ATT.FullName = "Hollowpoint Rounds"
+ATT.PrintName = "Hollow-points"
+ATT.FullName = "Hollow-point Rounds"
 
 ATT.Icon = Material("entities/tacrp_att_acc_hollowpoints.png", "mips smooth")
 ATT.Description = "Bullets that expand on hit, improving damage to flesh targets and limbs."
@@ -577,6 +577,42 @@ ATT.Override_BodyDamageMultipliersExtra = {
 }
 
 TacRP.LoadAtt(ATT, "ammo_pistol_hollowpoints")
+-- #endregion
+
+
+------------------------------
+-- #region ammo_rifle_jhp
+------------------------------
+ATT = {}
+
+ATT.PrintName = "JHP"
+ATT.FullName = "Jacketed Hollow-point Rounds"
+ATT.Icon = Material("entities/tacrp_att_ammo_rifle_jhp.png", "mips smooth")
+ATT.Description = "Bullets that expand on hit, improving damage to flesh targets and limbs."
+ATT.Pros = {"att.procon.chest", "att.procon.limb"}
+ATT.Cons = {"stat.range", "att.procon.armor", "stat.penetration"}
+
+ATT.Category = {"ammo_rifle", "ammo_rifle_sub"}
+
+ATT.SortOrder = 1
+
+ATT.Mult_Range_Min = 0.5
+ATT.Mult_Range_Max = 0.85
+ATT.Mult_Penetration = 0.2
+ATT.Mult_ArmorPenetration = 0.75
+ATT.Mult_ArmorBonus = 0.5
+
+ATT.Override_BodyDamageMultipliersExtra = {
+    [HITGROUP_CHEST] = 1.25,
+    [HITGROUP_LEFTARM] = -1,
+    [HITGROUP_RIGHTARM] = -1,
+    [HITGROUP_LEFTLEG] = -1,
+    [HITGROUP_RIGHTLEG] = -1,
+    [HITGROUP_GEAR] = -1,
+}
+
+
+TacRP.LoadAtt(ATT, "ammo_rifle_jhp")
 -- #endregion
 
 ------------------------------
@@ -1118,13 +1154,14 @@ ATT.FullName = "Total Metal Jacket Rounds"
 ATT.Icon = Material("entities/tacrp_att_acc_tmj.png", "mips smooth")
 ATT.Description = "Bullets with improved penetration capability."
 ATT.Pros = {"att.procon.armor", "stat.penetration"}
-ATT.Cons = {"stat.recoilfirstshot"}
+ATT.Cons = {"stat.recoilfirstshot", "stat.recoilmaximum"}
 ATT.Category = {"ammo_rifle", "ammo_sniper", "ammo_amr", "ammo_rifle_sub"}
 
 ATT.SortOrder = 1.5
 
 ATT.Add_Penetration = 8
 ATT.Add_RecoilFirstShotMult = 1
+ATT.Add_RecoilMaximum = 2
 ATT.Add_ArmorPenetration = 0.05
 
 TacRP.LoadAtt(ATT, "ammo_tmj")
