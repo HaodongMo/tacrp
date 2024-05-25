@@ -448,8 +448,8 @@ ATT.Func_ShootEnt = function(wep, modifiers)
         modifiers.prio = 10
     end
 end
-ATT.Func_Override_MuzzleEffect = function(wep, modifiers)
-    if wep:Clip1() == wep:GetMaxClip1() then
+ATT.Func_MuzzleEffect = function(wep, modifiers)
+    if wep:Clip1() == wep:GetMaxClip1() - 1 then
         modifiers.set = "muzzleflash_smg"
         modifiers.prio = 10
     end
@@ -1394,8 +1394,8 @@ ATT.Func_ShootEnt = function(wep, modifiers)
         modifiers.prio = 10
     end
 end
-ATT.Func_Override_MuzzleEffect = function(wep, modifiers)
-    if wep:Clip1() == wep:GetMaxClip1() then
+ATT.Func_MuzzleEffect = function(wep, modifiers)
+    if wep:Clip1() == wep:GetMaxClip1() - 1 then
         modifiers.set = "muzzleflash_smg"
         modifiers.prio = 10
     end
