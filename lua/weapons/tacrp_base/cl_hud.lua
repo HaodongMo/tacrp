@@ -4,6 +4,7 @@ function SWEP:ShouldDrawCrosshair()
     end
     return !self:GetReloading() and !self:GetCustomize() and !self:GetSafe() and self:GetBlindFireMode() == TacRP.BLINDFIRE_NONE
         and !(self:SprintLock() and !self.DrawCrosshairInSprint)
+        and !(self:DoForceSightsBehavior() and !self:GetPeeking())
         and (self:GetSightAmount() <= 0.5 or (self:GetPeeking() and !self:GetValue("ThermalCamera")) or self:DoLowerIrons())
         and !(self:GetValue("CanQuickNade") and tobool(self:GetOwner():GetInfo("tacrp_nademenu")) and self:GetOwner():KeyDown(IN_GRENADE2))
         and !(self:GetValue("CanBlindFire") and tobool(self:GetOwner():GetInfo("tacrp_blindfiremenu")) and (self:GetOwner():KeyDown(IN_ZOOM) or self:GetOwner().TacRPBlindFireDown))
