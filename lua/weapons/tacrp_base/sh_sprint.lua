@@ -5,14 +5,6 @@ function SWEP:GetIsSprinting()
         return false
     end
 
-    if TacRP.ConVars["sprint_counts_midair"]:GetBool() and owner:GetMoveType() != MOVETYPE_NOCLIP and !owner:IsOnGround() then
-        return true
-    end
-
-    if self:DoForceSightsBehavior() and self:GetScopeLevel() == 0 and !self:GetInBipod() and self:GetBlindFireMode() == TacRP.BLINDFIRE_NONE then
-        return true
-    end
-
     if self:CanShootInSprint() then return false end
 
     local walkspeed = owner:GetWalkSpeed()
@@ -42,6 +34,24 @@ function SWEP:GetIsSprinting()
     if self:GetOwner():GetInfoNum("tacrp_aim_cancels_sprint", 0) > 0 and self:GetScopeLevel() > 0 then return false end
 
     return true
+end
+
+function SWEP:ShouldLowerWeapon()
+    local owner = self:GetOwner()
+
+    if !owner:IsValid() or owner:IsNPC() or owner:IsNextBot() then
+        return false
+    end
+
+    if TacRP.ConVars["sprint_counts_midair"]:GetBool() and owner:GetMoveType() != MOVETYPE_NOCLIP and !owner:IsOnGround() then
+        return true
+    end
+
+    if self:DoForceSightsBehavior() and self:GetScopeLevel() == 0 and !self:GetInBipod() and self:GetBlindFireMode() == TacRP.BLINDFIRE_NONE then
+        return true
+    end
+
+    return false
 end
 
 function SWEP:CanStopSprinting()
@@ -104,7 +114,7 @@ function SWEP:ThinkSprint()
 
     self.LastWasSprinting = sprinting
 
-    if sprinting and !self:GetInBipod() then
+    if (sprinting or (self:ShouldLowerWeapon() and !self:DoForceSightsBehavior())) and !self:GetInBipod() then
         amt = math.Approach(amt, 1, FrameTime() / self:GetValue("SprintToFireTime"))
     else
         amt = math.Approach(amt, 0, FrameTime() / self:GetValue("SprintToFireTime"))
@@ -114,7 +124,7 @@ function SWEP:ThinkSprint()
 end
 
 function SWEP:CanShootInSprint(base)
-    if !TacRP.ConVars["sprint_lower"]:GetBool() then return true end
+    if !TacRP.ConVars["sprint_lower"]:GetBool() and !self:DoForceSightsBehavior() then return true end
     if base then
         return self:GetBaseValue("ShootWhileSprint")
     else

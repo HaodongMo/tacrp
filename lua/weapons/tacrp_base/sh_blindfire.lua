@@ -210,7 +210,7 @@ end
 
 function SWEP:CheckBlindFire(suicide)
     if !self:GetValue("CanBlindFire") and (!suicide or !self:GetValue("CanSuicide")) then return false end
-    if ((self:GetIsSprinting() and !self:DoForceSightsBehavior())
+    if (self:GetIsSprinting()
             or self:GetAnimLockTime() > CurTime()
             or self:GetPrimedGrenade()
             or self:IsInScope()

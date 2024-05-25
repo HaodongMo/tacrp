@@ -10,7 +10,11 @@ function SWEP:StillWaiting(cust, reload)
 end
 
 function SWEP:SprintLock(shoot)
-    if self:GetSprintLockTime() > CurTime() or self:GetIsSprinting() then
+    if self:GetSprintLockTime() > CurTime() or self:GetIsSprinting() or self:ShouldLowerWeapon() then
+        return true
+    end
+
+    if shoot and self:DoForceSightsBehavior() and (self:GetSprintDelta() > 0 or self:GetSightDelta() < 0.75) then
         return true
     end
 
@@ -42,7 +46,7 @@ function SWEP:PrimaryAttack()
         end
     end
 
-    if self:SprintLock() then return end
+    if self:SprintLock(true) then return end
     if self:GetSafe() and !self:GetReloading() then self:ToggleSafety(false) return end
     if self:StillWaiting() then return end
 

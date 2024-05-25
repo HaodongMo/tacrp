@@ -308,7 +308,7 @@ function SWEP:SetShouldHoldType()
         return
     end
 
-    if self:GetIsSprinting() or self:GetSafe() and self:GetValue("HoldTypeSprint") then
+    if (self:GetIsSprinting() or self:ShouldLowerWeapon() or self:GetSafe()) and self:GetValue("HoldTypeSprint") then
         self:SetHoldType(self:GetValue("HoldTypeSprint"))
         return
     end

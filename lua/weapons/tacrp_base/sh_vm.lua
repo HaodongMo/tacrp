@@ -259,7 +259,7 @@ function SWEP:GetViewModelPosition(pos, ang)
     -- Sprinting
     ---------------------------------------------
     local stf = self:GetSprintToFireTime()
-    if self:GetCustomize() or self:GetInBipod() or (!self:GetSafe() and !self.LastWasSprinting) then
+    if self:GetCustomize() or self:GetInBipod() or (!self:GetSafe() and !self.LastWasSprinting and !self:ShouldLowerWeapon()) then
         -- not accurate to how sprint progress works but looks much smoother
         if self:GetScopeLevel() > 0 and self:GetSprintLockTime() > UnPredictedCurTime() then
             stf = stf + self:GetAimDownSightsTime() * 0.5
@@ -267,7 +267,7 @@ function SWEP:GetViewModelPosition(pos, ang)
         sprintdelta = m_appor(sprintdelta, 0, FT / stf)
         self.LastReloadEnd = nil
     elseif self:GetReloading() then
-        if self.LastWasSprinting and self:GetEndReload() then
+        if (self.LastWasSprinting or self:ShouldLowerWeapon()) and self:GetEndReload() then
             self.LastReloadEnd = self.LastReloadEnd or (self:GetReloadFinishTime() - UnPredictedCurTime())
             sprintdelta = 1 - self:Curve((self:GetReloadFinishTime() - UnPredictedCurTime()) / self.LastReloadEnd)
         else
