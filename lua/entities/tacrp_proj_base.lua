@@ -276,11 +276,8 @@ function ENT:Think()
         self:PreDetonate()
     end
 
--- Gunship + Chopper fix taken from ARC9 Black Ops Pack
--- This was supposed to fix Zippy's Extended AI Navigation breaking collision checks but ended up not doing anything. Keeping it here for posterity's sake.
     local gunship = {["npc_combinegunship"] = true, ["npc_combinedropship"] = true}
-
-    if self.GunshipWorkaround and (self.GunshipCheck or 0 < CurTime()) then
+    if SERVER and self.GunshipWorkaround and (self.GunshipCheck or 0 < CurTime()) then
             self.GunshipCheck = CurTime() + 0.33
             local tr = util.TraceLine({
                 start = self:GetPos(),
