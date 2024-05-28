@@ -82,7 +82,7 @@ SWEP.BodyDamageMultipliers = {
     [HITGROUP_GEAR] = 0.9
 }
 
-SWEP.MuzzleVelocity = 30000
+SWEP.MuzzleVelocity = 37000
 
 // misc. shooting
 
@@ -105,7 +105,7 @@ SWEP.RecoilDissipationRate = 40
 SWEP.RecoilFirstShotMult = 1
 
 SWEP.RecoilVisualKick = 0.8
-SWEP.RecoilKick = 4
+SWEP.RecoilKick = 3
 SWEP.RecoilStability = 0.5
 
 SWEP.RecoilSpreadPenalty = 0.0015
