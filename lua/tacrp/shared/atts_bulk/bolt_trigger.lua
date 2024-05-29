@@ -630,7 +630,7 @@ ATT.PrintName = "D. Stage"
 ATT.FullName = "Dual Stage Trigger"
 ATT.Icon = Material("entities/tacrp_att_trigger_dualstage.png", "mips smooth")
 ATT.Description = "Trigger that reduces firerate while aiming for better control and accuracy."
-ATT.Pros = {"att.procon.aimrecoilkick", "att.procon.aimspread"}
+ATT.Pros = {"att.procon.aimrecoil", "att.procon.aimspread"}
 ATT.Cons = {"att.procon.aimrpm"}
 
 ATT.SortOrder = 10
@@ -649,9 +649,15 @@ ATT.Func_RecoilKick = function(wep, data)
     end
 end
 
-ATT.Func_Spread = function(wep, data)
+ATT.Func_RecoilPerShot = function(wep, data)
     if wep:GetScopeLevel() > 0 and not wep:GetPeeking() then
         data.mul = data.mul * 0.7
+    end
+end
+
+ATT.Func_Spread = function(wep, data)
+    if wep:GetScopeLevel() > 0 and not wep:GetPeeking() then
+        data.mul = data.mul * 0.5
     end
 end
 
