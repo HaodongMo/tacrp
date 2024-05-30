@@ -194,7 +194,7 @@ SWEP.EjectEffect = 2
 // anims
 
 SWEP.AnimationTranslationTable = {
-    ["fire_iron"] = "dryfire",
+    ["fire_iron"] = "fire1_M",
     ["fire1"] = "fire1_M",
     ["fire2"] = "fire2_M",
     ["fire3"] = "fire3_M",

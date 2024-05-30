@@ -213,7 +213,7 @@ SWEP.MuzzleEffect = "muzzleflash_ak47"
 // anims
 
 SWEP.AnimationTranslationTable = {
-    ["fire_iron"] = "dryfire",
+    ["fire_iron"] = "fire2_M",
     ["fire1"] = "fire1_L",
     ["fire2"] = "fire2_L",
     ["fire3"] = "fire3_L",
