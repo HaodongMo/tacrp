@@ -54,22 +54,23 @@ local smokeimages = {"particle/smokesprites_0001", "particle/smokesprites_0002",
 local function GetSmokeImage()
     return smokeimages[math.random(#smokeimages)]
 end
+ENT.NextSmokeTime = 0
 function ENT:DoSmokeTrail()
-    if CLIENT and self.SmokeTrail then
+    if CLIENT and self.SmokeTrail and self.NextSmokeTime < CurTime() then
         local pos = self:GetPos() + self:GetUp() * 4
         local emitter = ParticleEmitter(pos)
         local smoke = emitter:Add(GetSmokeImage(), pos)
 
-        smoke:SetStartAlpha(50)
+        smoke:SetStartAlpha(75)
         smoke:SetEndAlpha(0)
 
-        smoke:SetStartSize(2)
-        smoke:SetEndSize(math.Rand(16, 24))
+        smoke:SetStartSize(10)
+        smoke:SetEndSize(math.Rand(16, 32))
 
         smoke:SetRoll(math.Rand(-180, 180))
         smoke:SetRollDelta(math.Rand(-1, 1))
 
-        smoke:SetVelocity(VectorRand() * 8 + self:GetUp() * 16)
+        smoke:SetVelocity(VectorRand() * 8 + self:GetUp() * 42)
 
         smoke:SetColor(125, 25, 125)
         smoke:SetLighting(false)
@@ -79,5 +80,7 @@ function ENT:DoSmokeTrail()
         smoke:SetGravity(Vector(0, 0, 15))
 
         emitter:Finish()
+
+        self.NextSmokeTime = CurTime() + 0.025
     end
 end
