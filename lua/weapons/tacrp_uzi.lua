@@ -4,8 +4,8 @@ SWEP.Spawnable = true
 AddCSLuaFile()
 
 // names and stuff
-SWEP.PrintName = "IMI Mini Uzi"
-SWEP.AbbrevName = "Mini Uzi"
+SWEP.PrintName = "IMI Uzi Pro"
+SWEP.AbbrevName = "Uzi Pro"
 SWEP.Category = "Tactical RP"
 
 SWEP.SubCatTier = "2Operator"
