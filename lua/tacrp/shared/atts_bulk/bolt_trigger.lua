@@ -635,7 +635,7 @@ ATT.Cons = {"att.procon.aimrpm"}
 
 ATT.SortOrder = 10
 
-ATT.Category = {"trigger_auto"}
+ATT.Category = {"trigger_auto", "trigger_semi", "trigger_burst", "trigger_4pos"}
 
 ATT.Func_RPM = function(wep, data)
     if wep:GetScopeLevel() > 0 and not wep:GetPeeking() then
