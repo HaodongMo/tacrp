@@ -110,7 +110,7 @@ ATT.Model = "models/weapons/tacint/addons/holosight_hq.mdl"
 ATT.Scale = 0.35
 ATT.ModelOffset = Vector(0, 0.05, 0)
 
-ATT.Category = "optic_cqb"
+ATT.Category = {"optic_cqb", "optic_cqb_nookp7"}
 
 ATT.SortOrder = 1.5
 
@@ -239,9 +239,9 @@ ATT.Pros = {"att.sight.1.25"}
 
 ATT.Model = "models/weapons/tacint/addons/rds2.mdl"
 ATT.Scale = 1.1
-ATT.ModelOffset = Vector(0, 0, -0.25)
+ATT.ModelOffset = Vector(0, 0, -0.5)
 
-ATT.Category = "optic_cqb"
+ATT.Category = {"optic_cqb", "optic_cqb_nookp7"}
 
 ATT.SortOrder = 1.25
 
@@ -275,7 +275,7 @@ ATT.Model = "models/weapons/tacint/addons/reddot_hq.mdl"
 ATT.Scale = 0.35
 ATT.ModelOffset = Vector(0, 0, 1)
 
-ATT.Category = "optic_cqb"
+ATT.Category = {"optic_cqb", "optic_cqb_nookp7"}
 
 ATT.SortOrder = 1.75
 

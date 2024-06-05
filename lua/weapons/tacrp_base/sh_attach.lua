@@ -149,6 +149,16 @@ function SWEP:CanAttach(slot, att)
 
     local slottbl = self.Attachments[slot]
 
+    if atttbl.Compatibility then
+        local result = atttbl.Compatibility(self)
+
+        if result == true then
+            return true
+        elseif result == false then
+            return false
+        end
+    end
+
     local cat = slottbl.Category
 
     if !istable(cat) then
