@@ -218,7 +218,7 @@ SWEP.AnimationTranslationTable = {
     ["fire2"] = "fire2_L",
     ["fire3"] = "fire3_L",
     ["fire4"] = "fire4_L",
-    ["fire5"] = {"fire5_M", "fire5_L", "fire5_R"},
+    ["fire5"] = {"fire4_M", "fire4_L", "fire4_R"},
     ["melee"] = {"melee1", "melee2"},
     ["jam"] = "deploy"
 }
