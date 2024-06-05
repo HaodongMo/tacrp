@@ -12,7 +12,7 @@ ATT.Icon = Material("entities/tacrp_att_optic_8x.png", "mips smooth")
 ATT.Description = "Long-range sniper optic."
 ATT.Pros = {"att.zoom.8"}
 
-ATT.Model = "models/weapons/tacint/addons/8x.mdl"
+ATT.Model = "models/weapons/tacint/addons/scope.mdl"
 ATT.Scale = 1
 ATT.ModelOffset = Vector(-1, 0, -0.35)
 
