@@ -836,6 +836,31 @@ TacRP.ConVars = {}
 
 local prefix = "tacrp_"
 
+function TacRP.NetworkConvar(convar, old_value, value)
+    if IsValid(LocalPlayer()) and !LocalPlayer():IsAdmin() then return end
+    if old_value == value then return end
+    if value == true or value == false then
+        value = value and 1 or 0
+    end
+    if IsColor(value) then
+        value = tostring(value.r) .. " " .. tostring(value.g) .. " " .. tostring(value.b) .. " " .. tostring(value.a)
+    end
+
+    local command = convar .. " " .. tostring(value)
+
+    local timername = "change" .. convar
+
+    if timer.Exists(timername) then
+        timer.Remove(timername)
+    end
+
+    timer.Create(timername, 0.25, 1, function()
+        net.Start("tacrp_sendconvar")
+        net.WriteString(command)
+        net.SendToServer()
+    end)
+end
+
 local flags = {
     ["replicated"] = FCVAR_REPLICATED,
     ["userinfo"] = FCVAR_USERINFO,
@@ -855,6 +880,8 @@ for _, var in pairs(conVars) do
     if var.callback then
         cvars.AddChangeCallback(convar_name, var.callback, "tacrp")
     end
+
+    cvars.AddChangeCallback(convar_name, TacRP.NetworkConvar, "tacrp_onchange")
 end
 
 if CLIENT then

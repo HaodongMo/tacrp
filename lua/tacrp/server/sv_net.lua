@@ -6,6 +6,7 @@ util.AddNetworkString("tacrp_attach")
 util.AddNetworkString("tacrp_receivepreset")
 util.AddNetworkString("tacrp_sendattinv")
 util.AddNetworkString("tacrp_sendbullet")
+util.AddNetworkString("tacrp_sendconvar")
 
 util.AddNetworkString("tacrp_updateholster")
 util.AddNetworkString("tacrp_clientdamage")
