@@ -1,0 +1,12 @@
+VertexLitGeneric
+{
+ $basetexture "models/tacint_extras/addons/rds2_glass"
+ $envmap env_cubemap
+ $normalmapalphaenvmapmask 1
+ $translucent 1
+
+// $envmapmaskscale "2.2"
+// $envmapcontrast "0.7"
+ //$envmapsaturation 2
+ $envmaptint "[0.01 0.01 0.01]"
+}

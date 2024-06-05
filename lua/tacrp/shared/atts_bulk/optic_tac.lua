@@ -228,11 +228,45 @@ TacRP.LoadAtt(ATT, "optic_okp7")
 -- #endregion
 
 ------------------------------
--- #region optic_rds
+-- #region optic_rds2
 ------------------------------
 ATT = {}
 
 ATT.PrintName = "Red Dot"
+ATT.Icon = Material("entities/tacrp_att_optic_rds2.png", "mips smooth")
+ATT.Description = "Open reflex sight with a clear view."
+ATT.Pros = {"att.sight.1.25"}
+
+ATT.Model = "models/weapons/tacint/addons/rds2.mdl"
+ATT.Scale = 1.1
+ATT.ModelOffset = Vector(0, 0, -0.25)
+
+ATT.Category = "optic_cqb"
+
+ATT.SortOrder = 1.25
+
+ATT.Override_Scope = true
+ATT.Override_ScopeOverlay = false
+ATT.Override_ScopeFOV = 90 / 1.25
+ATT.Override_ScopeLevels = 1
+ATT.Override_ScopeHideWeapon = false
+
+ATT.SightPos = Vector(0, -15, 1.4)
+ATT.SightAng = Angle(0, 0, 0)
+
+ATT.Holosight = Material("tacrp/hud/rds.png", "additive")
+
+ATT.Holosight:SetInt("$flags", 128)
+
+TacRP.LoadAtt(ATT, "optic_rds2")
+-- #endregion
+
+------------------------------
+-- #region optic_rds
+------------------------------
+ATT = {}
+
+ATT.PrintName = "Aimpoint"
 ATT.Icon = Material("entities/tacrp_att_optic_rds.png", "mips smooth")
 ATT.Description = "Tube optic that helps to improve mid-range aim."
 ATT.Pros = {"att.sight.1.75"}
