@@ -190,6 +190,31 @@ function SWEP:PostDrawViewModel()
     if self:GetValue("ScopeHideWeapon") and self:IsInScope() then
         render.SetBlend(1)
     end
+
+    local newmzpcfs = {}
+
+    for _, pcf in ipairs(self.MuzzPCFs) do
+        if IsValid(pcf) then
+            pcf:Render()
+            table.insert(newmzpcfs, pcf)
+        end
+    end
+
+    if !inrt then self.MuzzPCFs = newmzpcfs end
+
+    cam.Start3D()
+        cam.IgnoreZ(false)
+        local newpcfs = {}
+
+        for _, pcf in ipairs(self.PCFs) do
+            if IsValid(pcf) then
+                pcf:Render()
+                table.insert(newpcfs, pcf)
+            end
+        end
+
+        if !inrt then self.PCFs = newpcfs end
+    cam.End3D()
 end
 
 --[[

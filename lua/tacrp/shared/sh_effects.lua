@@ -26,3 +26,6 @@ PrecacheParticleSystem( "muzzleflash_3" )
 PrecacheParticleSystem( "muzzleflash_4" )
 PrecacheParticleSystem( "muzzleflash_5" )
 PrecacheParticleSystem( "muzzleflash_6" )
+
+PrecacheParticleSystem( "port_smoke" )
+PrecacheParticleSystem( "shellsmoke" )

@@ -491,6 +491,9 @@ SWEP.LaserColor = Color(255, 0, 0)
 
 SWEP.ActiveEffects = {}
 
+SWEP.PCFs = {}
+SWEP.MuzzPCFs = {}
+
 AddCSLuaFile()
 
 local searchdir = "weapons/tacrp_base"
