@@ -100,7 +100,7 @@ function EFFECT:Init(data)
 
     local smoke = true
 
-    if smoke then
+    if smoke and IsValid(mdl) then
         local pcf = CreateParticleSystem(mdl, "port_smoke", PATTACH_POINT_FOLLOW, att)
 
         if IsValid(pcf) then
