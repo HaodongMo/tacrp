@@ -881,7 +881,9 @@ for _, var in pairs(conVars) do
         cvars.AddChangeCallback(convar_name, var.callback, "tacrp")
     end
 
-    cvars.AddChangeCallback(convar_name, TacRP.NetworkConvar, "tacrp_onchange")
+    if CLIENT then
+        cvars.AddChangeCallback(convar_name, TacRP.NetworkConvar, "tacrp_onchange")
+    end
 end
 
 if CLIENT then
