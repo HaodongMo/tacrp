@@ -52,7 +52,9 @@ ENT.SteerSpeed = 60
 ENT.SeekerAngle = math.cos(35)
 ENT.LeadTarget = false
 ENT.SuperSteerTime = 0
+ENT.SuperSteerSpeed = 100
 ENT.BoostSpeed = 12000
+ENT.SoftLaunchTime = 0.5
 
 ENT.AudioLoop = nil
 
@@ -286,33 +288,47 @@ function ENT:Think()
     if SERVER then
         local target = self.LockOnEntity
         if IsValid(target) then
+            if self.SoftLaunchTime + self.SpawnTime < CurTime() then
+                local tpos = target:WorldSpaceCenter()
+
+                if self.LeadTarget then
+                    local dist = (tpos - self:GetPos()):Length()
+                    local time = dist / self:GetVelocity():Length()
+                    tpos = tpos + (target:GetVelocity() * time)
+                end
+
+                local dir = (tpos - self:GetPos()):GetNormalized()
+                local dot = dir:Dot(self:GetAngles():Forward())
+                local ang = dir:Angle()
+
+                if self.SuperSeeker or dot >= self.SeekerAngle or (self.SuperSteerTime + self.SpawnTime >= CurTime()) then
+                    local p = self:GetAngles().p
+                    local y = self:GetAngles().y
+
+                    local speed = self.SteerSpeed
+
+                    if self.SuperSteerTime + self.SpawnTime >= CurTime() then
+                        speed = self.SuperSteerSpeed
+                    end
+
+                    p = math.ApproachAngle(p, ang.p, FrameTime() * speed)
+                    y = math.ApproachAngle(y, ang.y, FrameTime() * speed)
+
+                    self:SetAngles(Angle(p, y, 0))
+                elseif self.NoReacquire then
+                    self.ShootEntData.Target = nil
+                end
+            end
+
             if target.UnTrackable then self.LockOnEntity = nil end
+        end
+    end
 
-            local tpos = target:WorldSpaceCenter()
+    if self.BoostSpeed > 0 then
+        local phys = self:GetPhysicsObject()
 
-            if self.LeadTarget then
-                local dist = (tpos - self:GetPos()):Length()
-                local time = dist / self:GetVelocity():Length()
-                tpos = tpos + (target:GetVelocity() * time)
-            end
-
-            local dir = (tpos - self:GetPos()):GetNormalized()
-            local dot = dir:Dot(self:GetAngles():Forward())
-            local ang = dir:Angle()
-
-            if self.SuperSeeker or dot >= self.SeekerAngle or !self.TopAttackReached or (self.SuperSteerTime + self.SpawnTime >= CurTime()) then
-                local p = self:GetAngles().p
-                local y = self:GetAngles().y
-
-                p = math.ApproachAngle(p, ang.p, FrameTime() * self.SteerSpeed)
-                y = math.ApproachAngle(y, ang.y, FrameTime() * self.SteerSpeed)
-
-                self:SetAngles(Angle(p, y, 0))
-                local phys = self:GetPhysicsObject()
-                phys:SetVelocity(dir * self.BoostSpeed)
-            elseif self.NoReacquire then
-                self.ShootEntData.Target = nil
-            end
+        if IsValid(phys) then
+            phys:SetVelocity(self:GetAngles():Forward() * self.BoostSpeed)
         end
     end
 

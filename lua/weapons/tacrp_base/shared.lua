@@ -162,7 +162,6 @@ SWEP.MeleeSpeedMultTime = 1 // seconds to apply slow down for
 SWEP.ReloadSpeedMult = 1
 SWEP.ReloadSpeedMultTime = 0.5 // duration for slowdown to fade out for AFTER RELOAD FINISHES
 
-
 SWEP.ShootWhileSprint = false
 
 SWEP.AimDownSightsTime = 0.25
@@ -251,6 +250,9 @@ SWEP.BreathDrain = 1
 
 SWEP.FreeAim = true
 SWEP.FreeAimMaxAngle = 3.5
+
+SWEP.ShootOffset = Vector(0, 0, 0)
+SWEP.ShootOffsetAngle = Angle(-45, 0, 0)
 
 // quicknade
 

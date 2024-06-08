@@ -603,6 +603,8 @@ function SWEP:GetShootDir(nosway)
     -- dir:RotateAroundAxis(r, oa.r)
     dir:RotateAroundAxis(r, -oa.p)
 
+    dir = dir + self:GetValue("ShootOffsetAngle")
+
     return dir
 end
 

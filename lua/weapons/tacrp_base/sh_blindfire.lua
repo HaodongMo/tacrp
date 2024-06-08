@@ -6,8 +6,9 @@ function SWEP:GetMuzzleOrigin()
         return SERVER and self:GetOwner():GetShootPos() or self:GetOwner():EyePos()
     end
 
+    local pos = self:GetOwner():EyePos()
+
     if self:GetBlindFire() then
-        local pos = self:GetOwner():EyePos()
         local eyeang = self:GetOwner():EyeAngles()
 
         local testpos = pos + eyeang:Up() * 24
@@ -22,10 +23,24 @@ function SWEP:GetMuzzleOrigin()
             filter = self:GetOwner()
         })
 
-        return tr.HitPos
-    else
-        return self:GetOwner():EyePos()
+        pos = tr.HitPos
     end
+
+    local offset = self:GetValue("ShootOffset")
+
+    if offset.x != 0 then
+        pos = pos + self:GetOwner():GetRight() * offset.x
+    end
+
+    if offset.y != 0 then
+        pos = pos + self:GetOwner():GetForward() * offset.y
+    end
+
+    if offset.z != 0 then
+        pos = pos + self:GetOwner():GetUp() * offset.z
+    end
+
+    return pos
 end
 
 /*

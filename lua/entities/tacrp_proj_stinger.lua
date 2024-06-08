@@ -1,7 +1,7 @@
 AddCSLuaFile()
 
 ENT.Base                     = "tacrp_proj_base"
-ENT.PrintName                = "RPG-7 Rocket"
+ENT.PrintName                = "FIM-92 Missile"
 ENT.Spawnable                = false
 
 ENT.Model                    = "models/weapons/tacint/rocket_deployed.mdl"
@@ -17,6 +17,15 @@ ENT.ExplodeUnderwater = true
 
 ENT.Delay = 0
 ENT.SafetyFuse = 0.15
+
+ENT.LockOnEntity = NULL
+ENT.SteerSpeed = 210
+ENT.SeekerAngle = math.cos(45)
+ENT.LeadTarget = false
+ENT.SuperSteerTime = 1.5
+ENT.SuperSteerSpeed = 1200
+ENT.BoostSpeed = 2000
+ENT.SoftLaunchTime = 0.5
 
 ENT.AudioLoop = "TacRP/weapons/rpg7/rocket_flight-1.wav"
 
@@ -39,7 +48,7 @@ function ENT:Impact(data, collider)
             dmginfo:SetAttacker(attacker)
             dmginfo:SetInflictor(self)
             dmginfo:SetDamageType(DMG_CRUSH + DMG_CLUB)
-            dmginfo:SetDamage(250 * (self.NPCDamage and 0.5 or 1))
+            dmginfo:SetDamage(100 * (self.NPCDamage and 0.5 or 1))
             dmginfo:SetDamageForce(data.OurOldVelocity * 25)
             dmginfo:SetDamagePosition(data.HitPos)
             data.HitEntity:TakeDamageInfo(dmginfo)
@@ -69,9 +78,9 @@ function ENT:Detonate()
 
     local mult = TacRP.ConVars["mult_damage_explosive"]:GetFloat()
     if self.NPCDamage then
-        util.BlastDamage(self, attacker, self:GetPos(), 350, 75 * mult)
+        util.BlastDamage(self, attacker, self:GetPos(), 250, 50 * mult)
     else
-        util.BlastDamage(self, attacker, self:GetPos(), 350, 150 * mult)
+        util.BlastDamage(self, attacker, self:GetPos(), 250, 100 * mult)
         self:FireBullets({
             Attacker = attacker,
             Damage = 2000 * mult,

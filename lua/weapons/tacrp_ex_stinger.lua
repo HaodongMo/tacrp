@@ -37,13 +37,13 @@ SWEP.BalanceStats = {
 
 // "ballistics"
 
-SWEP.Damage_Max = 200 // just to fool the ratings
-SWEP.Damage_Min = 200
+SWEP.Damage_Max = 100 // just to fool the ratings
+SWEP.Damage_Min = 100
 SWEP.Range_Max = 7000
 SWEP.Range_Min = 4000
 
-SWEP.ShootEnt = "tacrp_proj_rpg7"
-SWEP.ShootEntForce = 6000
+SWEP.ShootEnt = "tacrp_proj_stinger"
+SWEP.ShootEntForce = 2000
 
 SWEP.Num = 1
 
