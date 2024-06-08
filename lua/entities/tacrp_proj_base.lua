@@ -53,7 +53,7 @@ ENT.SeekerAngle = math.cos(35)
 ENT.LeadTarget = false
 ENT.SuperSteerTime = 0
 ENT.SuperSteerSpeed = 100
-ENT.BoostSpeed = 12000
+ENT.BoostSpeed = 0
 ENT.SoftLaunchTime = 0.5
 
 ENT.AudioLoop = nil
@@ -290,18 +290,19 @@ function ENT:Think()
         if IsValid(target) then
             if self.SoftLaunchTime + self.SpawnTime < CurTime() then
                 local tpos = target:WorldSpaceCenter()
-
-                if self.LeadTarget then
-                    local dist = (tpos - self:GetPos()):Length()
-                    local time = dist / self:GetVelocity():Length()
-                    tpos = tpos + (target:GetVelocity() * time)
-                end
-
                 local dir = (tpos - self:GetPos()):GetNormalized()
                 local dot = dir:Dot(self:GetAngles():Forward())
-                local ang = dir:Angle()
 
                 if self.SuperSeeker or dot >= self.SeekerAngle or (self.SuperSteerTime + self.SpawnTime >= CurTime()) then
+
+                    if self.LeadTarget then
+                        local dist = (tpos - self:GetPos()):Length()
+                        local time = dist / self:GetVelocity():Length()
+                        tpos = tpos + (target:GetVelocity() * time)
+                    end
+
+                    local ang = dir:Angle()
+
                     local p = self:GetAngles().p
                     local y = self:GetAngles().y
 

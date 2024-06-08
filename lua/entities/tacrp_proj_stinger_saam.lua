@@ -15,7 +15,7 @@ ENT.ImpactFuse = true // projectile explodes on impact.
 ENT.ExplodeOnDamage = true
 ENT.ExplodeUnderwater = true
 
-ENT.Delay = 0
+ENT.Delay = 15
 ENT.SafetyFuse = 0.15
 
 ENT.LockOnEntity = NULL
