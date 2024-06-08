@@ -321,6 +321,9 @@ function SWEP:SetShouldHoldType()
             self:SetHoldType(self:GetValue("HoldTypeBlindFire"))
             return
         end
+    elseif self:GetScopeLevel() > 0 and self:GetValue("HoldTypeSighted") then
+        self:SetHoldType(self:GetValue("HoldTypeSighted"))
+        return
     elseif self:GetScopeLevel() > 0 and TacRP.HoldTypeSightedLookup[self:GetValue("HoldType")] then
         self:SetHoldType(TacRP.HoldTypeSightedLookup[self:GetValue("HoldType")])
         return

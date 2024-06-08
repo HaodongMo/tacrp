@@ -22,7 +22,7 @@ SWEP.Faction = TacRP.FACTION_COALITION
 SWEP.Credits = "Assets: Modern Warfare 2\nAnimations: Tactical Intervention"
 
 SWEP.ViewModel = "models/weapons/tacint/v_stinger.mdl"
-SWEP.WorldModel = "models/weapons/tacint/w_rpg7.mdl"
+SWEP.WorldModel = "models/weapons/tacint/w_stinger.mdl"
 
 SWEP.NoRanger = true
 
@@ -107,8 +107,9 @@ SWEP.DeployTimeMult = 1.25
 
 // hold types
 
-SWEP.HoldType = "rpg"
+SWEP.HoldType = "passive"
 SWEP.HoldTypeSprint = "passive"
+SWEP.HoldTypeSighted = "rpg"
 SWEP.HoldTypeBlindFire = false
 SWEP.HoldTypeNPC = "ar2"
 
