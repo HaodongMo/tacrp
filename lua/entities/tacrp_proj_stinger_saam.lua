@@ -33,6 +33,20 @@ ENT.SmokeTrail = true
 
 ENT.FlareColor = Color(255, 255, 255)
 
+DEFINE_BASECLASS(ENT.Base)
+
+function ENT:Think()
+    if IsValid(self.LockOnEntity) and self.SoftLaunchTime + self.SpawnTime <= CurTime() then
+        local dist = self.LockOnEntity:WorldSpaceCenter():DistToSqr(self:GetPos())
+
+        if dist < math.pow(512, 2) then
+            self:PreDetonate()
+        end
+    end
+
+    BaseClass.Think(self)
+end
+
 function ENT:Impact(data, collider)
     if self.SpawnTime + self.SafetyFuse > CurTime() and !self.NPCDamage then
         local attacker = self.Attacker or self:GetOwner()
@@ -75,26 +89,29 @@ end
 
 function ENT:Detonate()
     local attacker = self.Attacker or self:GetOwner()
+    local dir = self:GetForward()
+    local src = self:GetPos() - dir * 64
 
     local mult = TacRP.ConVars["mult_damage_explosive"]:GetFloat()
     if self.NPCDamage then
         util.BlastDamage(self, attacker, self:GetPos(), 250, 50 * mult)
     else
         util.BlastDamage(self, attacker, self:GetPos(), 250, 100 * mult)
-        self:FireBullets({
-            Attacker = attacker,
-            Damage = 1400 * mult,
-            Tracer = 0,
-            Src = self:GetPos(),
-            Dir = self:GetForward(),
-            HullSize = 0,
-            Distance = 96,
-            IgnoreEntity = self,
-            Callback = function(atk, btr, dmginfo)
-                dmginfo:SetDamageType(DMG_AIRBOAT + DMG_BLAST) // airboat damage for helicopters and LVS vehicles
-                dmginfo:SetDamageForce(self:GetForward() * 12000) // LVS uses this to calculate penetration!
-            end,
-        })
+
+        local dmg = DamageInfo()
+        dmg:SetAttacker(attacker)
+        dmg:SetDamageType(DMG_BULLET + DMG_BLAST)
+        dmg:SetInflictor(self)
+        dmg:SetDamageForce(self:GetVelocity() * 100)
+        dmg:SetDamagePosition(src)
+        for _, ent in pairs(ents.FindInCone(src, dir, 1024, math.cos(45))) do
+            local tr = util.QuickTrace(src, ent:GetPos() - src, {self, ent})
+            if tr.Fraction == 1 then
+                dmg:SetDamage(1400 * math.Rand(0.75, 1) * Lerp((ent:GetPos():DistToSqr(src) / 4194304) ^ 0.5, 1, 0.25) * (self.NPCDamage and 0.5 or 1) * mult)
+                if !ent:IsOnGround() then dmg:ScaleDamage(1.5) end
+                ent:TakeDamageInfo(dmg)
+            end
+        end
     end
 
     local fx = EffectData()
