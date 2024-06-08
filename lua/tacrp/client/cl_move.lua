@@ -1,3 +1,5 @@
+TacRP.ShouldRelockTime = 0
+
 hook.Add("CreateMove", "TacRP_CreateMove", function(cmd)
     local wpn = LocalPlayer():GetActiveWeapon()
 
@@ -47,6 +49,16 @@ hook.Add("CreateMove", "TacRP_CreateMove", function(cmd)
 
     if TacRP.KeyPressed_Tactical then
         cmd:AddKey(TacRP.IN_TACTICAL)
+    end
+
+    local lockontarget = wpn.LockOnEntity
+
+    if lockontarget != wpn.LastLockOnEntity then
+        TacRP.ShouldRelockTime = CurTime() + 0.1
+    end
+
+    if TacRP.ShouldRelockTime > CurTime() then
+        cmd:AddKey(TacRP.IN_RELOCK)
     end
 
     local mult = TacRP.CalculateMaxMoveSpeed(LocalPlayer())

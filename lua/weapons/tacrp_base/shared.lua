@@ -152,6 +152,8 @@ SWEP.ProvideTargetData = true
 SWEP.AutoAimOutOfSights = false
 SWEP.AutoAimInSights = false
 
+SWEP.RequireLockOn = false // Cannot shoot without a lock
+
 // handling
 
 SWEP.MoveSpeedMult = 1
@@ -346,8 +348,8 @@ SWEP.Sound_MeleeSwing = ""
 
 SWEP.Sound_ToggleTactical = "tacrp/firemode.wav"
 
-SWEP.Sound_StartLockOn = ""
-SWEP.Sound_FinishLockOn = ""
+SWEP.Sound_StartLockOn = "tacrp/check1.wav"
+SWEP.Sound_FinishLockOn = "tacrp/locked1.wav"
 
 // effects
 

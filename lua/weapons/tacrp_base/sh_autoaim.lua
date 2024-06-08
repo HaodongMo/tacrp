@@ -2,6 +2,8 @@ SWEP.LockOnEntity = NULL
 
 SWEP.LastSearchTime = 0
 
+SWEP.PlayedLockOnSound = false
+
 function SWEP:ThinkLockOn()
     local owner = self:GetOwner()
     local lastlockonentity = self:GetLockOnEntity()
@@ -21,8 +23,12 @@ function SWEP:ThinkLockOn()
             self:SetLockOnEntity(self.LockOnEntity)
             should_autoaim_scan = false
         end
+
+        if !IsValid(self:GetLockOnEntity()) then
+            self.PlayedLockOnSound = false
+        end
     else
-        if owner:KeyPressed(IN_BULLRUSH) then
+        if owner:KeyPressed(TacRP.IN_RELOCK) then
             should_autoaim_scan = true
         end
 
@@ -34,7 +40,7 @@ function SWEP:ThinkLockOn()
 
     if not ((self:GetSightAmount() >= 1 and self:GetValue("AutoAimInSights")) or (self:GetSightAmount() < 1 and self:GetValue("AutoAimOutOfSights"))) then
         self:SetLockOnEntity(nil)
-        return
+        self:SetLockOnStartTime(CurTime())
     elseif should_autoaim_scan then
         local lockontargets = ents.FindInCone(owner:GetShootPos(), owner:GetAimVector(), self:GetValue("AutoAimRange"), self:GetValue("AutoAimAngle"))
 
@@ -85,17 +91,28 @@ function SWEP:ThinkLockOn()
         if lockontarget then
             if lastlockonentity != lockontarget then
                 self:SetLockOnStartTime(CurTime())
+                if CLIENT and (IsFirstTimePredicted() or game.SinglePlayer()) then
+                    self:EmitSound(self:GetValue("Sound_StartLockOn"))
+                end
+            elseif not self.PlayedLockOnSound and CurTime() > self:GetLockOnStartTime() + self:GetValue("LockOnTime") then
+                if CLIENT and (IsFirstTimePredicted() or game.SinglePlayer()) then
+                    self:EmitSound(self:GetValue("Sound_FinishLockOn"))
+                    self.PlayedLockOnSound = true
+                end
             end
             self:SetLockOnEntity(lockontarget)
             self.LockOnEntity = lockontarget
         else
             self:SetLockOnEntity(nil)
             self.LockOnEntity = nil
+            self.PlayedLockOnSound = false
+            self:SetLockOnStartTime(CurTime())
         end
 
     end
 
     if not IsValid(self:GetLockOnEntity()) then
         self:SetLockOnEntity(nil)
+        self:SetLockOnStartTime(CurTime())
     end
 end

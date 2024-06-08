@@ -11,14 +11,14 @@ SWEP.Category = "Tactical RP (Special)"
 SWEP.SubCatTier = "9Special"
 SWEP.SubCatType = "6Launcher"
 
-SWEP.Description = "Guided lock-on missile launcher. Requires a lock in order to fire. A hit is not guaranteed."
+SWEP.Description = "Guided lock-on missile launcher. Requires a lock-on in order to fire. A hit is not guaranteed."
 
 SWEP.Trivia_Caliber = "Infrared Homing Missile"
 SWEP.Trivia_Manufacturer = "Raytheon Missiles and Defense"
 SWEP.Trivia_Year = "1967"
 
 SWEP.Faction = TacRP.FACTION_COALITION
-SWEP.Credits = "Assets: Tactical Intervention"
+SWEP.Credits = "Assets: Modern Warfare 2\nAnimations: Tactical Intervention"
 
 SWEP.ViewModel = "models/weapons/tacint/v_stinger.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_rpg7.mdl"
@@ -79,13 +79,17 @@ SWEP.CannotHipFire = true
 SWEP.AutoAimAngle = math.cos(math.rad(5))
 SWEP.AutoAimRange = 40000
 
-SWEP.LockOnTime = 1.5
+SWEP.LockOnTime = 1
 
 SWEP.ProvideTargetData = true
 
 SWEP.AutoAimOutOfSights = false
 SWEP.AutoAimInSights = true
 
+SWEP.ShootOffset = Vector(0, 0, 0)
+SWEP.ShootOffsetAngle = Angle(-15, 0, 0)
+
+SWEP.RequireLockOn = true // Cannot shoot without a lock
 
 // handling
 
@@ -160,8 +164,8 @@ local path = "TacRP/weapons/rpg7/"
 
 SWEP.Sound_Shoot = "^" .. path .. "fire-1.wav"
 
-SWEP.Sound_StartLockOn = ""
-SWEP.Sound_FinishLockOn = ""
+SWEP.Sound_StartLockOn = "tacrp/check1.wav"
+SWEP.Sound_FinishLockOn = "tacrp/locked1.wav"
 
 SWEP.Vol_Shoot = 130
 SWEP.ShootPitchVariance = 2.5 // amount to vary pitch by each shot
@@ -188,7 +192,7 @@ SWEP.AnimationTranslationTable = {
 SWEP.Attachments = {
     [1] = {
         PrintName = "Ammo",
-        Category = {"ammo_rpg"},
+        Category = {"ammo_stinger"},
         AttachSound = "TacRP/weapons/flashlight_on.wav",
         DetachSound = "TacRP/weapons/flashlight_off.wav",
     },

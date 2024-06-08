@@ -54,6 +54,8 @@ function SWEP:PrimaryAttack()
     if self:GetSafe() and !self:GetReloading() then self:ToggleSafety(false) return end
     if self:StillWaiting() then return end
 
+    if self:GetValue("RequireLockOn") and !IsValid(self:GetLockOnEntity()) then return end
+
     if self:Clip1() < self:GetValue("AmmoPerShot") then
         local ret = self:RunHook("Hook_PreDryfire")
         if ret != true then
