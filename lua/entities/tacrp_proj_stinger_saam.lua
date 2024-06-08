@@ -1,7 +1,7 @@
 AddCSLuaFile()
 
 ENT.Base                     = "tacrp_proj_base"
-ENT.PrintName                = "FIM-92 Missile"
+ENT.PrintName                = "FIM-92 Missile (SAAM)"
 ENT.Spawnable                = false
 
 ENT.Model                    = "models/weapons/tacint/rocket_deployed.mdl"
@@ -19,8 +19,8 @@ ENT.Delay = 0
 ENT.SafetyFuse = 0.15
 
 ENT.LockOnEntity = NULL
-ENT.SteerSpeed = 250
-ENT.SeekerAngle = math.cos(45)
+ENT.SteerSpeed = 300
+ENT.SeekerAngle = math.cos(180)
 ENT.LeadTarget = false
 ENT.SuperSteerTime = 1.5
 ENT.SuperSteerSpeed = 300
@@ -83,7 +83,7 @@ function ENT:Detonate()
         util.BlastDamage(self, attacker, self:GetPos(), 250, 100 * mult)
         self:FireBullets({
             Attacker = attacker,
-            Damage = 800 * mult,
+            Damage = 1200 * mult,
             Tracer = 0,
             Src = self:GetPos(),
             Dir = self:GetForward(),
@@ -92,7 +92,7 @@ function ENT:Detonate()
             IgnoreEntity = self,
             Callback = function(atk, btr, dmginfo)
                 dmginfo:SetDamageType(DMG_AIRBOAT + DMG_BLAST) // airboat damage for helicopters and LVS vehicles
-                dmginfo:SetDamageForce(self:GetForward() * 9000) // LVS uses this to calculate penetration!
+                dmginfo:SetDamageForce(self:GetForward() * 12000) // LVS uses this to calculate penetration!
             end,
         })
     end
@@ -109,4 +109,15 @@ function ENT:Detonate()
     self:EmitSound("TacRP/weapons/rpg7/explode.wav", 125)
 
     self:Remove()
+end
+
+function ENT:OnThink()
+    self.LockOnEntity = nil
+
+    if !IsValid(self:GetOwner()) then return end
+    local wpn = self:GetOwner():GetActiveWeapon()
+    if !IsValid(wpn) then return end
+    if !wpn.ArcticTacRP then return end
+
+    self.LockOnEntity = wpn:GetLockOnEntity()
 end

@@ -316,7 +316,7 @@ function ENT:Think()
 
                     self:SetAngles(Angle(p, y, 0))
                 elseif self.NoReacquire then
-                    self.ShootEntData.Target = nil
+                    self.LockOnEntity = nil
                 end
             end
 

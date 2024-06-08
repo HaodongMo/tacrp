@@ -1,7 +1,7 @@
 AddCSLuaFile()
 
 ENT.Base                     = "tacrp_proj_base"
-ENT.PrintName                = "FIM-92 Missile"
+ENT.PrintName                = "FIM-92 Missile (4AAM)"
 ENT.Spawnable                = false
 
 ENT.Model                    = "models/weapons/tacint/rocket_deployed.mdl"
@@ -19,19 +19,19 @@ ENT.Delay = 0
 ENT.SafetyFuse = 0.15
 
 ENT.LockOnEntity = NULL
-ENT.SteerSpeed = 250
+ENT.SteerSpeed = 200
 ENT.SeekerAngle = math.cos(45)
 ENT.LeadTarget = false
 ENT.SuperSteerTime = 1.5
 ENT.SuperSteerSpeed = 300
-ENT.BoostSpeed = 2000
+ENT.BoostSpeed = 1400
 ENT.SoftLaunchTime = 0.5
 
 ENT.AudioLoop = "TacRP/weapons/rpg7/rocket_flight-1.wav"
 
 ENT.SmokeTrail = true
 
-ENT.FlareColor = Color(255, 255, 255)
+ENT.FlareColor = Color(255, 230, 200)
 
 function ENT:Impact(data, collider)
     if self.SpawnTime + self.SafetyFuse > CurTime() and !self.NPCDamage then
@@ -83,7 +83,7 @@ function ENT:Detonate()
         util.BlastDamage(self, attacker, self:GetPos(), 250, 100 * mult)
         self:FireBullets({
             Attacker = attacker,
-            Damage = 800 * mult,
+            Damage = 200 * mult,
             Tracer = 0,
             Src = self:GetPos(),
             Dir = self:GetForward(),
@@ -92,7 +92,7 @@ function ENT:Detonate()
             IgnoreEntity = self,
             Callback = function(atk, btr, dmginfo)
                 dmginfo:SetDamageType(DMG_AIRBOAT + DMG_BLAST) // airboat damage for helicopters and LVS vehicles
-                dmginfo:SetDamageForce(self:GetForward() * 9000) // LVS uses this to calculate penetration!
+                dmginfo:SetDamageForce(self:GetForward() * 3000) // LVS uses this to calculate penetration!
             end,
         })
     end

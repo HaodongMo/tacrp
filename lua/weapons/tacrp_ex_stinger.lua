@@ -12,6 +12,7 @@ SWEP.SubCatTier = "9Special"
 SWEP.SubCatType = "6Launcher"
 
 SWEP.Description = "Guided lock-on missile launcher. Requires a lock-on in order to fire. A hit is not guaranteed."
+SWEP.Description_Quote = "\"A cornered fox is more dangerous than a jackal!\""
 
 SWEP.Trivia_Caliber = "Infrared Homing Missile"
 SWEP.Trivia_Manufacturer = "Raytheon Missiles and Defense"
@@ -39,8 +40,8 @@ SWEP.BalanceStats = {
 
 SWEP.Damage_Max = 100 // just to fool the ratings
 SWEP.Damage_Min = 100
-SWEP.Range_Max = 7000
-SWEP.Range_Min = 4000
+SWEP.Range_Max = 30000
+SWEP.Range_Min = 5000
 
 SWEP.ShootEnt = "tacrp_proj_stinger"
 SWEP.ShootEntForce = 2000

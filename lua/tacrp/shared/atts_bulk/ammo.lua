@@ -1403,3 +1403,92 @@ end
 
 TacRP.LoadAtt(ATT, "ammo_shotgun_breach")
 -- #endregion
+
+
+------------------------------
+-- #region ammo_stinger_saam
+------------------------------
+ATT = {}
+
+ATT.PrintName = "Semi-Active"
+ATT.FullName = "Stinger Semi-Active Missile"
+ATT.Icon = Material("entities/tacrp_att_ammo_rpg_mortar.png", "mips smooth")
+ATT.Description = "Missiles that require constant guidance to hit targets. Locks rapidly."
+ATT.Pros = {"att.procon.locktime"}
+ATT.Cons = {"att.procon.semiactive"}
+
+ATT.Category = "ammo_stinger"
+
+ATT.SortOrder = 1
+
+ATT.Override_ShootEnt = "tacrp_proj_stinger_saam"
+
+ATT.Override_AutoAimAngle = math.cos(math.rad(15))
+ATT.Override_LockOnTime = 0.1
+
+if engine.ActiveGamemode() == "terrortown" then
+    ATT.Free = true
+end
+
+TacRP.LoadAtt(ATT, "ammo_stinger_saam")
+-- #endregion
+
+------------------------------
+-- #region ammo_stinger_qaam
+------------------------------
+ATT = {}
+
+ATT.PrintName = "Agile"
+ATT.FullName = "Stinger High Agility Missile"
+ATT.Icon = Material("entities/tacrp_att_ammo_rpg_mortar.png", "mips smooth")
+ATT.Description = "Highly maneuverable missile with a short range and long lock time."
+ATT.Pros = {"att.procon.maneuverability"}
+ATT.Cons = {"rating.range"}
+
+ATT.Category = "ammo_stinger"
+
+ATT.SortOrder = 2
+
+ATT.Override_ShootEnt = "tacrp_proj_stinger_qaam"
+
+ATT.Override_AutoAimRange = 12000
+ATT.Override_LockOnTime = 1.5
+ATT.Range_Max = 12000
+ATT.Range_Min = 1000
+
+if engine.ActiveGamemode() == "terrortown" then
+    ATT.Free = true
+end
+
+TacRP.LoadAtt(ATT, "ammo_stinger_qaam")
+-- #endregion
+
+------------------------------
+-- #region ammo_stinger_4aam
+------------------------------
+ATT = {}
+
+ATT.PrintName = "Quad"
+ATT.FullName = "Stinger 4x Missile"
+ATT.Icon = Material("entities/tacrp_att_ammo_rpg_mortar.png", "mips smooth")
+ATT.Description = "Guided cluster missiles maximize pressure to enemy pilots."
+ATT.Pros = {"stat.clipsize"}
+ATT.Cons = {"rating.lethality", "att.procon.maneuverability"}
+
+ATT.Category = "ammo_stinger"
+
+ATT.SortOrder = 3
+
+ATT.Override_ShootEnt = "tacrp_proj_stinger_4aam"
+
+ATT.Override_Num = 4
+ATT.Override_Spread = 0.1
+ATT.Override_Damage_Max = 75
+ATT.Override_Damage_Min = 75
+
+if engine.ActiveGamemode() == "terrortown" then
+    ATT.Free = true
+end
+
+TacRP.LoadAtt(ATT, "ammo_stinger_4aam")
+-- #endregion
