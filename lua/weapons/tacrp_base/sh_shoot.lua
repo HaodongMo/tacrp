@@ -632,8 +632,12 @@ function SWEP:ShootRocket(dir)
     if isfunction(rocket.SetWeapon) then
         rocket:SetWeapon(self)
     end
-    if IsValid(self:GetLockOnEntity()) and CurTime() >= self:GetValue("LockOnTime") + self:GetLockOnStartTime() then
-        rocket.LockOnEntity = self:GetLockOnEntity()
+    if self:GetOwner():IsNPC() then
+        rocket.LockOnEntity = self:GetOwner():GetTarget()
+    else
+        if IsValid(self:GetLockOnEntity()) and CurTime() >= self:GetValue("LockOnTime") + self:GetLockOnStartTime() then
+            rocket.LockOnEntity = self:GetLockOnEntity()
+        end
     end
     rocket:Spawn()
 

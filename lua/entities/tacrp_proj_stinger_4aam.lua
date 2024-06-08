@@ -22,8 +22,8 @@ ENT.LockOnEntity = NULL
 ENT.SteerSpeed = 600
 ENT.SeekerAngle = math.cos(55)
 ENT.LeadTarget = false
-ENT.SuperSteerTime = 2
-ENT.SuperSteerSpeed = 300
+ENT.SuperSteerTime = 5
+ENT.SuperSteerSpeed = 600
 ENT.BoostSpeed = 3000
 ENT.SoftLaunchTime = 1
 
@@ -93,26 +93,15 @@ function ENT:Detonate()
     local src = self:GetPos() - dir * 64
 
     local mult = TacRP.ConVars["mult_damage_explosive"]:GetFloat()
-    if self.NPCDamage then
-        util.BlastDamage(self, attacker, self:GetPos(), 250, 50 * mult)
-    else
-        util.BlastDamage(self, attacker, self:GetPos(), 250, 100 * mult)
 
-        local dmg = DamageInfo()
-        dmg:SetAttacker(attacker)
-        dmg:SetDamageType(DMG_BULLET + DMG_BLAST)
-        dmg:SetInflictor(self)
-        dmg:SetDamageForce(self:GetVelocity() * 100)
-        dmg:SetDamagePosition(src)
-        for _, ent in pairs(ents.FindInSphere(src, 1024)) do
-            local tr = util.QuickTrace(src, ent:GetPos() - src, {self, ent})
-            if tr.Fraction == 1 then
-                dmg:SetDamage(400 * math.Rand(0.75, 1) * Lerp((ent:GetPos():DistToSqr(src) / 4194304) ^ 0.5, 1, 0.25) * (self.NPCDamage and 0.5 or 1) * mult)
-                if !ent:IsOnGround() then dmg:ScaleDamage(1.5) end
-                ent:TakeDamageInfo(dmg)
-            end
-        end
-    end
+    local dmg = DamageInfo()
+    dmg:SetAttacker(attacker)
+    dmg:SetDamageType(DMG_AIRBOAT + DMG_BLAST)
+    dmg:SetInflictor(self)
+    dmg:SetDamageForce(self:GetVelocity() * 100)
+    dmg:SetDamagePosition(src)
+    dmg:SetDamage(300 * mult)
+    util.BlastDamageInfo(dmg, self:GetPos(), 512)
 
     local fx = EffectData()
     fx:SetOrigin(self:GetPos())
