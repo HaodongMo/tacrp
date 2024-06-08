@@ -69,3 +69,16 @@ function SWEP:GetPingOffsetScale()
 
     return (self:GetOwner():Ping() - 5) / 1000
 end
+
+function SWEP:ScaleFOVByWidthRatio(fovDegrees, ratio)
+    local halfAngleRadians = fovDegrees * (0.5 * math.pi / 180)
+    local t = math.tan(halfAngleRadians)
+    t = t * ratio
+    local retDegrees = (180 / math.pi) * math.atan(t)
+
+    return retDegrees * 2
+end
+
+function SWEP:WidescreenFix(target)
+    return self:ScaleFOVByWidthRatio(target, ((ScrW and ScrW() or 4) / (ScrH and ScrH() or 3)) / (4 / 3))
+end

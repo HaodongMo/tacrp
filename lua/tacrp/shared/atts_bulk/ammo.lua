@@ -1513,7 +1513,7 @@ ATT.Override_ShootEnt = "tacrp_proj_stinger_apers"
 
 ATT.Override_AutoAimRange = 6000
 ATT.Override_LockOnTime = 0.5
-ATT.Override_AutoAimAngle = math.cos(math.rad(45))
+ATT.Override_AutoAimAngle = math.cos(math.rad(20))
 
 ATT.Range_Max = 6000
 ATT.Range_Min = 1000

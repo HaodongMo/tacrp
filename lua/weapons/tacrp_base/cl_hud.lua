@@ -854,6 +854,31 @@ end
 local col2 = Color(50, 255, 50)
 
 function SWEP:DrawLockOnHUD()
+    local sx, sy = ScrW() / 2, ScrH() / 2
+    local ss = ScreenScale(1)
+
+    if self:GetPeeking() and self:GetScopeLevel() > 0 and self:GetValue("AutoAimInSights") then
+        surface.SetDrawColor(col2)
+
+        render.OverrideBlend(true, BLEND_ONE, BLEND_ONE, BLENDFUNC_ADD)
+
+        local trueFOV = self:WidescreenFix(self.TacRPLastFOV)
+
+        local circle = (ScrH() / trueFOV) * math.deg(math.acos(self:GetValue("AutoAimAngle"))) * 1.5 + ss
+        local offset = 0
+
+        for i = 0, 15 do
+            local angle = (i / 8) * math.pi
+            local x1 = sx + math.cos(angle + offset) * circle
+            local y1 = sy + math.sin(angle + offset) * circle
+            local x2 = sx + math.cos(angle + offset + (math.pi * 1 / 8)) * circle
+            local y2 = sy + math.sin(angle + offset + (math.pi * 1 / 8)) * circle
+            surface.DrawLine(x1, y1, x2, y2)
+        end
+
+        render.OverrideBlend(false, BLEND_ONE, BLEND_ONE, BLENDFUNC_ADD)
+    end
+
     if !IsValid(self:GetLockOnEntity()) then return end
 
     local pos = self:GetLockOnEntity():WorldSpaceCenter()
@@ -861,7 +886,6 @@ function SWEP:DrawLockOnHUD()
     cam.Start3D()
     local x, y = pos:ToScreen().x, pos:ToScreen().y
     cam.End3D()
-    local ss = ScreenScale(1)
 
     surface.SetDrawColor(col2)
 
@@ -883,7 +907,7 @@ function SWEP:DrawLockOnHUD()
         -- Target locked, draw a diamond
         local offset2 = 0
 
-        for i = 0, 3 do
+        for i = 0, 5 do
             local cross2 = cross * 0.7
             local angle = (i / 2) * math.pi
             local x1 = x + math.cos(angle + offset2) * cross2
