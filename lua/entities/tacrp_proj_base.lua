@@ -47,6 +47,13 @@ ENT.FlareColor = nil
 ENT.FlareSizeMin = 200
 ENT.FlareSizeMax = 250
 
+ENT.LockOnEntity = NULL
+ENT.SteerSpeed = 60
+ENT.SeekerAngle = math.cos(35)
+ENT.LeadTarget = false
+ENT.SuperSteerTime = 0
+ENT.BoostSpeed = 12000
+
 ENT.AudioLoop = nil
 
 ENT.BounceSounds = nil
@@ -274,6 +281,39 @@ function ENT:Think()
 
     if self.ExplodeUnderwater and self:WaterLevel() > 0 then
         self:PreDetonate()
+    end
+
+    if SERVER then
+        local target = self.LockOnEntity
+        if IsValid(target) then
+            if target.UnTrackable then self.LockOnEntity = nil end
+
+            local tpos = target:WorldSpaceCenter()
+
+            if self.LeadTarget then
+                local dist = (tpos - self:GetPos()):Length()
+                local time = dist / self:GetVelocity():Length()
+                tpos = tpos + (target:GetVelocity() * time)
+            end
+
+            local dir = (tpos - self:GetPos()):GetNormalized()
+            local dot = dir:Dot(self:GetAngles():Forward())
+            local ang = dir:Angle()
+
+            if self.SuperSeeker or dot >= self.SeekerAngle or !self.TopAttackReached or (self.SuperSteerTime + self.SpawnTime >= CurTime()) then
+                local p = self:GetAngles().p
+                local y = self:GetAngles().y
+
+                p = math.ApproachAngle(p, ang.p, FrameTime() * self.SteerSpeed)
+                y = math.ApproachAngle(y, ang.y, FrameTime() * self.SteerSpeed)
+
+                self:SetAngles(Angle(p, y, 0))
+                local phys = self:GetPhysicsObject()
+                phys:SetVelocity(dir * self.BoostSpeed)
+            elseif self.NoReacquire then
+                self.ShootEntData.Target = nil
+            end
+        end
     end
 
     local gunship = {["npc_combinegunship"] = true, ["npc_combinedropship"] = true}

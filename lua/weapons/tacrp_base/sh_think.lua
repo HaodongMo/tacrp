@@ -78,6 +78,8 @@ function SWEP:Think()
 
     self:ProcessTimers()
 
+    self:ThinkLockOn()
+
     self:ThinkHoldBreath()
 
     if self:GetValue("Melee") and self:GetOwner():KeyPressed(TacRP.IN_MELEE) then

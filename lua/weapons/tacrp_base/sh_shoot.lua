@@ -18,6 +18,10 @@ function SWEP:SprintLock(shoot)
         return true
     end
 
+    if self:GetValue("CannotHipFire") and self:GetSightAmount() < 1 and !self:GetBlindFire() and !self:GetPeeking() then
+        return true
+    end
+
     return false
 end
 
@@ -623,6 +627,9 @@ function SWEP:ShootRocket(dir)
     rocket:SetAngles(dir)
     if isfunction(rocket.SetWeapon) then
         rocket:SetWeapon(self)
+    end
+    if IsValid(self:GetLockOnEntity()) and CurTime() >= self:GetValue("LockOnTime") + self:GetLockOnStartTime() then
+        rocket.LockOnEntity = self:GetLockOnEntity()
     end
     rocket:Spawn()
 

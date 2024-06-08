@@ -331,6 +331,8 @@ function SWEP:DrawHUDBackground()
         self:DoThermalCam()
     end
 
+    self:DrawLockOnHUD()
+
     if self:GetValue("TacticalDraw") and self:GetTactical() then
         self:GetValue("TacticalDraw")(self)
     end
@@ -847,4 +849,50 @@ function SWEP:CustomAmmoDisplay()
         self.AmmoDisplay.PrimaryAmmo = self:GetInfiniteAmmo() and 9999 or self:Ammo1()
     end
     return self.AmmoDisplay
+end
+
+local col2 = Color(50, 255, 50)
+
+function SWEP:DrawLockOnHUD()
+    if !IsValid(self:GetLockOnEntity()) then return end
+
+    local pos = self:GetLockOnEntity():WorldSpaceCenter()
+
+    cam.Start3D()
+    local x, y = pos:ToScreen().x, pos:ToScreen().y
+    cam.End3D()
+    local ss = ScreenScale(1)
+
+    surface.SetDrawColor(col2)
+
+    render.OverrideBlend(true, BLEND_ONE, BLEND_ONE, BLENDFUNC_ADD)
+
+    local cross = ss * 10
+    local offset = (1 / 4) * math.pi
+
+    for i = 0, 3 do
+        local angle = (i / 2) * math.pi
+        local x1 = x + math.cos(angle + offset) * cross
+        local y1 = y + math.sin(angle + offset) * cross
+        local x2 = x + math.cos(angle + offset + (math.pi * 1 / 2)) * cross
+        local y2 = y + math.sin(angle + offset + (math.pi * 1 / 2)) * cross
+        surface.DrawLine(x1, y1, x2, y2)
+    end
+
+    if CurTime() >= self:GetValue("LockOnTime") + self:GetLockOnStartTime() then
+        -- Target locked, draw a diamond
+        local offset2 = 0
+
+        for i = 0, 3 do
+            local cross2 = cross * 0.7
+            local angle = (i / 2) * math.pi
+            local x1 = x + math.cos(angle + offset2) * cross2
+            local y1 = y + math.sin(angle + offset2) * cross2
+            local x2 = x + math.cos(angle + offset2 + (math.pi * 1 / 2)) * cross2
+            local y2 = y + math.sin(angle + offset2 + (math.pi * 1 / 2)) * cross2
+            surface.DrawLine(x1, y1, x2, y2)
+        end
+    end
+
+    render.OverrideBlend(false, BLEND_ONE, BLEND_ONE, BLENDFUNC_ADD)
 end

@@ -138,6 +138,20 @@ SWEP.RecoilPatternSeed = nil // custom seed. Defaults to weapon class
 
 SWEP.CanBlindFire = true
 
+SWEP.CannotHipFire = false
+
+// lockon
+
+SWEP.AutoAimAngle = math.cos(math.rad(5))
+SWEP.AutoAimRange = 3500
+
+SWEP.LockOnTime = 1.5
+
+SWEP.ProvideTargetData = true
+
+SWEP.AutoAimOutOfSights = false
+SWEP.AutoAimInSights = false
+
 // handling
 
 SWEP.MoveSpeedMult = 1
@@ -329,6 +343,9 @@ SWEP.Sound_BipodUp = "tacrp/bipod_up.wav"
 SWEP.Sound_MeleeSwing = ""
 
 SWEP.Sound_ToggleTactical = "tacrp/firemode.wav"
+
+SWEP.Sound_StartLockOn = ""
+SWEP.Sound_FinishLockOn = ""
 
 // effects
 
@@ -546,6 +563,7 @@ function SWEP:SetupDataTables()
     self:NetworkVar("Float", 15, "NWLastProceduralFireTime")
     self:NetworkVar("Float", 16, "NWHoldBreathAmount")
     self:NetworkVar("Float", 17, "Breath")
+    self:NetworkVar("Float", 18, "LockOnStartTime")
 
     self:NetworkVar("Int", 0, "BurstCount")
     self:NetworkVar("Int", 1, "ScopeLevel")
@@ -580,6 +598,7 @@ function SWEP:SetupDataTables()
 
     self:NetworkVar("Entity", 0, "HolsterEntity")
     self:NetworkVar("Entity", 1, "CornershotEntity")
+    self:NetworkVar("Entity", 2, "LockOnEntity")
 
     self:SetFreeAimAngle(Angle())
     self:SetLastAimAngle(Angle())
@@ -590,6 +609,8 @@ function SWEP:SetupDataTables()
     self:SetHoldBreathAmount(0)
     self:SetLastWasSprinting(false)
     self:SetHoldingBreath(false)
+    self:SetLockOnEntity(NULL)
+    self:SetLockOnStartTime(0)
 end
 
 function SWEP:OnDrop()
