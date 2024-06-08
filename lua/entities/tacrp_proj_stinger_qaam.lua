@@ -20,7 +20,7 @@ ENT.SafetyFuse = 0.15
 
 ENT.LockOnEntity = NULL
 ENT.SteerSpeed = 2000
-ENT.SeekerAngle = math.cos(65)
+ENT.SeekerAngle = math.cos(75)
 ENT.LeadTarget = false
 ENT.SuperSteerTime = 3
 ENT.SuperSteerSpeed = 3000

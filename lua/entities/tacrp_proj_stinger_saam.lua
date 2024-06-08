@@ -20,7 +20,7 @@ ENT.SafetyFuse = 0.15
 
 ENT.LockOnEntity = NULL
 ENT.SteerSpeed = 2000
-ENT.SeekerAngle = math.cos(55)
+ENT.SeekerAngle = math.cos(60)
 ENT.LeadTarget = false
 ENT.SuperSteerTime = 1.5
 ENT.SuperSteerSpeed = 1200
@@ -83,7 +83,7 @@ function ENT:Detonate()
         util.BlastDamage(self, attacker, self:GetPos(), 250, 100 * mult)
         self:FireBullets({
             Attacker = attacker,
-            Damage = 1200 * mult,
+            Damage = 1400 * mult,
             Tracer = 0,
             Src = self:GetPos(),
             Dir = self:GetForward(),

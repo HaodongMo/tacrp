@@ -8,15 +8,16 @@ ENT.Model                    = "models/weapons/tacint/rocket_deployed.mdl"
 
 ENT.IsRocket = true // projectile has a booster and will not drop.
 
-ENT.InstantFuse = false // projectile is armed immediately after firing.
+ENT.InstantFuse = true // projectile is armed immediately after firing.
 ENT.RemoteFuse = false // allow this projectile to be triggered by remote detonator.
 ENT.ImpactFuse = true // projectile explodes on impact.
+ENT.TimeFuse = false
 
 ENT.ExplodeOnDamage = true
 ENT.ExplodeUnderwater = true
 
-ENT.Delay = 0
-ENT.SafetyFuse = 0.15
+ENT.Delay = 0.2
+ENT.SafetyFuse = 0
 
 ENT.LockOnEntity = NULL
 ENT.SteerSpeed = 700
@@ -83,7 +84,7 @@ function ENT:Detonate()
         util.BlastDamage(self, attacker, self:GetPos(), 250, 100 * mult)
         self:FireBullets({
             Attacker = attacker,
-            Damage = 800 * mult,
+            Damage = 1000 * mult,
             Tracer = 0,
             Src = self:GetPos(),
             Dir = self:GetForward(),

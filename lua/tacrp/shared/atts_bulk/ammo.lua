@@ -1492,3 +1492,38 @@ end
 
 TacRP.LoadAtt(ATT, "ammo_stinger_4aam")
 -- #endregion
+
+------------------------------
+-- #region ammo_stinger_apers
+------------------------------
+ATT = {}
+
+ATT.PrintName = "Killer Bee"
+ATT.FullName = "Stinger Anti-Personnel Missile"
+ATT.Icon = Material("entities/tacrp_att_ammo_stinger_apers.png", "mips smooth")
+ATT.Description = "For rodents of unacceptable agility."
+ATT.Pros = {"att.procon.radius", "att.procon.proxfuse"}
+ATT.Cons = {"rating.range"}
+
+ATT.Category = "ammo_stinger"
+
+ATT.SortOrder = 4
+
+ATT.Override_ShootEnt = "tacrp_proj_stinger_apers"
+
+ATT.Override_AutoAimRange = 6000
+ATT.Override_LockOnTime = 0.5
+ATT.Override_AutoAimAngle = math.cos(math.rad(45))
+
+ATT.Range_Max = 6000
+ATT.Range_Min = 1000
+
+ATT.ShootOffsetAngle = Angle(-30, 0, 0)
+ATT.ShootEntForce = 3000
+
+if engine.ActiveGamemode() == "terrortown" then
+    ATT.Free = true
+end
+
+TacRP.LoadAtt(ATT, "ammo_stinger_apers")
+-- #endregion
