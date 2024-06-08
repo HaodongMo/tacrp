@@ -252,7 +252,7 @@ SWEP.FreeAim = true
 SWEP.FreeAimMaxAngle = 3.5
 
 SWEP.ShootOffset = Vector(0, 0, 0)
-SWEP.ShootOffsetAngle = Angle(-45, 0, 0)
+SWEP.ShootOffsetAngle = Angle(0, 0, 0)
 
 // quicknade
 
