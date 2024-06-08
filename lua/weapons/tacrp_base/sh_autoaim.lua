@@ -51,13 +51,14 @@ function SWEP:ThinkLockOn()
 
         for _, target in ipairs(lockontargets) do
             if not IsValid(target) then continue end
-            if not target:IsNPC() and not target:IsPlayer() and not target:IsNextBot() then continue end
             if target == owner then continue end
 
             local try_target = nil
             if target:IsPlayer() and target:Alive() then
                 try_target = target
             elseif (target:IsNPC() or target:IsNextBot()) and target:Health() > 0 then
+                try_target = target
+            elseif target.LVS then
                 try_target = target
             end
 

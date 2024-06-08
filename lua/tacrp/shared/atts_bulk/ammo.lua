@@ -1451,9 +1451,9 @@ ATT.SortOrder = 2
 
 ATT.Override_ShootEnt = "tacrp_proj_stinger_qaam"
 
-ATT.Override_AutoAimRange = 12000
+ATT.Override_AutoAimRange = 16000
 ATT.Override_LockOnTime = 1.5
-ATT.Range_Max = 12000
+ATT.Range_Max = 16000
 ATT.Range_Min = 1000
 
 if engine.ActiveGamemode() == "terrortown" then
