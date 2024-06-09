@@ -27,7 +27,7 @@ ENT.SuperSteerSpeed = 1200
 ENT.BoostSpeed = 3500
 ENT.SoftLaunchTime = 0.5
 ENT.NoReacquire = false
-ENT.FlareRedirectChance = 0.15
+ENT.FlareRedirectChance = 0.05
 
 ENT.AudioLoop = "TacRP/weapons/rpg7/rocket_flight-1.wav"
 
@@ -128,5 +128,5 @@ function ENT:OnThink()
     if !IsValid(wpn) then return end
     if !wpn.ArcticTacRP then return end
 
-    self.LockOnEntity = wpn:GetLockOnEntity()
+    self:SwitchTarget(wpn:GetLockOnEntity())
 end

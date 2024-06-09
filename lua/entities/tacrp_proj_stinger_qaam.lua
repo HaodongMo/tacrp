@@ -26,7 +26,7 @@ ENT.SuperSteerTime = 3
 ENT.SuperSteerSpeed = 3000
 ENT.BoostSpeed = 5500
 ENT.SoftLaunchTime = 0.3
-ENT.FlareRedirectChance = 0.1
+ENT.FlareRedirectChance = 0.03
 
 ENT.AudioLoop = "TacRP/weapons/rpg7/rocket_flight-1.wav"
 

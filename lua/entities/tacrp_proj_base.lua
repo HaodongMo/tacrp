@@ -102,11 +102,7 @@ function ENT:Initialize()
             phys:EnableGravity(false)
         end
 
-        if IsValid(self.LockOnEntity) then
-            if isfunction(self.LockOnEntity.OnLaserLock) then
-                self.LockOnEntity:OnLaserLock(true)
-            end
-        end
+        self:SwitchTarget(self.LockOnEntity)
     end
 
     self.SpawnTime = CurTime()
@@ -333,24 +329,12 @@ function ENT:Think()
 
             if target.UnTrackable then self.LockOnEntity = nil end
 
-            if self.FlareRedirectChance > 0 and self.NextFlareRedirectTime <= CurTime() and !TacRP.FlareEntities[self.LockOnEntity:GetClass()] then
+            if IsValid(target) and self.FlareRedirectChance > 0 and self.NextFlareRedirectTime <= CurTime() and !TacRP.FlareEntities[target:GetClass()] then
                 local flares = ents.FindInSphere(target:WorldSpaceCenter(), 1024)
 
                 for k, v in pairs(flares) do
                     if TacRP.FlareEntities[v:GetClass()] and math.Rand(0, 1) <= self.FlareRedirectChance then
-                        if IsValid(self.LockOnEntity) then
-                            if isfunction(self.LockOnEntity.OnLaserLock) then
-                                self.LockOnEntity:OnLaserLock(false)
-                            end
-                        end
-
-                        self.LockOnEntity = v
-
-                        if IsValid(self.LockOnEntity) then
-                            if isfunction(self.LockOnEntity.OnLaserLock) then
-                                self.LockOnEntity:OnLaserLock(true)
-                            end
-                        end
+                        self:SwitchTarget(v)
                         break
                     end
                 end
@@ -441,6 +425,22 @@ function ENT:Draw()
     if self.FlareColor then
         render.SetMaterial(mat)
         render.DrawSprite(self:GetPos() + (self:GetAngles():Forward() * -16), math.Rand(self.FlareSizeMin, self.FlareSizeMax), math.Rand(self.FlareSizeMin, self.FlareSizeMax), self.FlareColor)
+    end
+end
+
+function ENT:SwitchTarget(target)
+    if IsValid(self.LockOnEntity) then
+        if isfunction(self.LockOnEntity.OnLaserLock) then
+            self.LockOnEntity:OnLaserLock(false)
+        end
+    end
+
+    self.LockOnEntity = target
+
+    if IsValid(self.LockOnEntity) then
+        if isfunction(self.LockOnEntity.OnLaserLock) then
+            self.LockOnEntity:OnLaserLock(true)
+        end
     end
 end
 
