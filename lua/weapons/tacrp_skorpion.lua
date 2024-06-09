@@ -70,7 +70,7 @@ SWEP.TTTReplace = TacRP.TTTReplacePreset.MachinePistol
 
 // "ballistics"
 
-SWEP.DefaultBodygroups = "0010"
+SWEP.DefaultBodygroups = "0000"
 
 SWEP.Damage_Max = 18
 SWEP.Damage_Min = 9
