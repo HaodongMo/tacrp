@@ -333,7 +333,7 @@ function ENT:Think()
 
             if target.UnTrackable then self.LockOnEntity = nil end
 
-            if self.FlareRedirectChance > 0 and self.NextFlareRedirectTime <= CurTime() then
+            if self.FlareRedirectChance > 0 and self.NextFlareRedirectTime <= CurTime() and !TacRP.FlareEntities[self.LockOnEntity:GetClass()] then
                 local flares = ents.FindInSphere(target:WorldSpaceCenter(), 1024)
 
                 for k, v in pairs(flares) do
