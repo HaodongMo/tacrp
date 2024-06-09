@@ -21,10 +21,10 @@ ENT.SafetyFuse = 0.15
 ENT.LockOnEntity = NULL
 ENT.SteerSpeed = 600
 ENT.SeekerAngle = math.cos(55)
-ENT.LeadTarget = false
+ENT.LeadTarget = true
 ENT.SuperSteerTime = 5
 ENT.SuperSteerSpeed = 600
-ENT.BoostSpeed = 3000
+ENT.BoostSpeed = 3500
 ENT.SoftLaunchTime = 1
 
 ENT.AudioLoop = "TacRP/weapons/rpg7/rocket_flight-1.wav"
