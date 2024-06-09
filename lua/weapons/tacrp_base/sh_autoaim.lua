@@ -38,11 +38,11 @@ function SWEP:ThinkLockOn()
         end
     end
 
-    if not ((self:GetSightAmount() >= 1 and self:GetValue("AutoAimInSights")) or (self:GetSightAmount() < 1 and self:GetValue("AutoAimOutOfSights"))) then
+    if not ((self:GetSightAmount() >= 1 and self:GetValue("LockOnInSights")) or (self:GetSightAmount() < 1 and self:GetValue("LockOnOutOfSights"))) then
         self:SetLockOnEntity(nil)
         self:SetLockOnStartTime(CurTime())
     elseif should_autoaim_scan then
-        local lockontargets = ents.FindInCone(owner:GetShootPos(), owner:GetAimVector(), self:GetValue("AutoAimRange"), self:GetValue("AutoAimAngle"))
+        local lockontargets = ents.FindInCone(owner:GetShootPos(), owner:GetAimVector(), self:GetValue("LockOnRange"), self:GetValue("LockOnAngle"))
 
         local lockontarget = nil
         local angle = 90
@@ -102,10 +102,8 @@ function SWEP:ThinkLockOn()
                 end
             end
             self:SetLockOnEntity(lockontarget)
-            self.LockOnEntity = lockontarget
         else
             self:SetLockOnEntity(nil)
-            self.LockOnEntity = nil
             self.PlayedLockOnSound = false
             self:SetLockOnStartTime(CurTime())
         end

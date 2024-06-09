@@ -23,7 +23,7 @@ ENT.SteerSpeed = 700
 ENT.SeekerAngle = math.cos(55)
 ENT.LeadTarget = true
 ENT.SuperSteerTime = 1.5
-ENT.SuperSteerSpeed = 3000
+ENT.SuperSteerSpeed = 1500
 ENT.BoostSpeed = 4000
 ENT.SoftLaunchTime = 0.5
 

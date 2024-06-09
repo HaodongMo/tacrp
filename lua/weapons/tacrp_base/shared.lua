@@ -142,15 +142,15 @@ SWEP.CannotHipFire = false
 
 // lockon
 
-SWEP.AutoAimAngle = math.cos(math.rad(5))
-SWEP.AutoAimRange = 3500
+SWEP.LockOnAngle = math.cos(math.rad(5))
+SWEP.LockOnRange = 3500
 
 SWEP.LockOnTime = 1.5
 
 SWEP.ProvideTargetData = true
 
-SWEP.AutoAimOutOfSights = false
-SWEP.AutoAimInSights = false
+SWEP.LockOnOutOfSights = false
+SWEP.LockOnInSights = false
 
 SWEP.RequireLockOn = false // Cannot shoot without a lock
 

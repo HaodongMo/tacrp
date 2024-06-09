@@ -77,15 +77,15 @@ SWEP.CannotHipFire = true
 
 // lockon
 
-SWEP.AutoAimAngle = math.cos(math.rad(5))
-SWEP.AutoAimRange = 40000
+SWEP.LockOnAngle = math.cos(math.rad(5))
+SWEP.LockOnRange = 40000
 
 SWEP.LockOnTime = 1
 
 SWEP.ProvideTargetData = true
 
-SWEP.AutoAimOutOfSights = false
-SWEP.AutoAimInSights = true
+SWEP.LockOnOutOfSights = false
+SWEP.LockOnInSights = true
 
 SWEP.ShootOffset = Vector(0, 0, 0)
 SWEP.ShootOffsetAngle = Angle(-15, 0, 0)
@@ -239,4 +239,8 @@ if engine.ActiveGamemode() == "terrortown" then
     function SWEP:TTTBought(buyer)
         buyer:GiveAmmo(1, "RPG_Round")
     end
+end
+
+function SWEP:ShouldAutoReload()
+    return !self:GetValue("NoAutoReload")
 end

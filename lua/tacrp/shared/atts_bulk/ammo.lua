@@ -1414,7 +1414,7 @@ ATT.PrintName = "Semi-Active"
 ATT.FullName = "Stinger Semi-Active Missile"
 ATT.Icon = Material("entities/tacrp_att_ammo_stinger.png", "mips smooth")
 ATT.Description = "Missiles that require constant guidance to hit targets. Locks rapidly."
-ATT.Pros = {"att.procon.locktime"}
+ATT.Pros = {"att.procon.locktime", "rating.lethality"}
 ATT.Cons = {"att.procon.semiactive"}
 
 ATT.Category = "ammo_stinger"
@@ -1423,8 +1423,10 @@ ATT.SortOrder = 1
 
 ATT.Override_ShootEnt = "tacrp_proj_stinger_saam"
 
-ATT.Override_AutoAimAngle = math.cos(math.rad(15))
+ATT.Override_LockOnAngle = math.cos(math.rad(10))
 ATT.Override_LockOnTime = 0.1
+
+ATT.NoAutoReload = true
 
 if engine.ActiveGamemode() == "terrortown" then
     ATT.Free = true
@@ -1451,7 +1453,7 @@ ATT.SortOrder = 2
 
 ATT.Override_ShootEnt = "tacrp_proj_stinger_qaam"
 
-ATT.Override_AutoAimRange = 16000
+ATT.Override_LockOnRange = 16000
 ATT.Override_LockOnTime = 1.5
 ATT.Range_Max = 16000
 ATT.Range_Min = 1000
@@ -1522,9 +1524,9 @@ ATT.SortOrder = 4
 
 ATT.Override_ShootEnt = "tacrp_proj_stinger_apers"
 
-ATT.Override_AutoAimRange = 6000
+ATT.Override_LockOnRange = 6000
 ATT.Override_LockOnTime = 0.5
-ATT.Override_AutoAimAngle = math.cos(math.rad(20))
+ATT.Override_LockOnAngle = math.cos(math.rad(20))
 
 ATT.Range_Max = 6000
 ATT.Range_Min = 1000

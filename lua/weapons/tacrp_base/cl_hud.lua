@@ -854,17 +854,31 @@ end
 local col2 = Color(50, 255, 50)
 
 function SWEP:DrawLockOnHUD()
-    local sx, sy = ScrW() / 2, ScrH() / 2
+    local owner = self:GetOwner()
+    local dir = owner:GetAimVector(true)
+
+    local tr = util.TraceLine({
+        start = owner:GetShootPos(),
+        endpos = owner:GetShootPos() + (dir * 50000),
+        mask = MASK_SHOT,
+        filter = owner
+    })
+    cam.Start3D()
+        local w2s = tr.HitPos:ToScreen()
+        sx = math.Round(w2s.x)
+        sy = math.Round(w2s.y)
+    cam.End3D()
+
     local ss = ScreenScale(1)
 
-    if self:GetPeeking() and self:GetScopeLevel() > 0 and self:GetValue("AutoAimInSights") then
+    if (self:GetScopeLevel() > 0 and self:GetValue("LockOnInSights")) or (self:GetScopeLevel() <= 0 and self:GetValue("LockOnOutOfSights")) then
         surface.SetDrawColor(col2)
 
         render.OverrideBlend(true, BLEND_ONE, BLEND_ONE, BLENDFUNC_ADD)
 
         local trueFOV = self:WidescreenFix(self.TacRPLastFOV)
 
-        local circle = (ScrH() / trueFOV) * math.deg(math.acos(self:GetValue("AutoAimAngle"))) * 1.5 + ss
+        local circle = (ScrH() / trueFOV) * math.deg(math.acos(self:GetValue("LockOnAngle"))) * 1.5 + ss
         local offset = 0
 
         for i = 0, 15 do

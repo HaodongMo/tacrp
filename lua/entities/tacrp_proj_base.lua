@@ -55,6 +55,7 @@ ENT.SuperSteerTime = 0
 ENT.SuperSteerSpeed = 100
 ENT.BoostSpeed = 0
 ENT.SoftLaunchTime = 0.5
+ENT.NoReacquire = true
 
 ENT.AudioLoop = nil
 
