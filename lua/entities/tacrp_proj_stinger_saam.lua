@@ -21,7 +21,7 @@ ENT.SafetyFuse = 0.15
 ENT.LockOnEntity = NULL
 ENT.SteerSpeed = 2000
 ENT.SeekerAngle = math.cos(60)
-ENT.LeadTarget = false
+ENT.LeadTarget = true
 ENT.SuperSteerTime = 1.5
 ENT.SuperSteerSpeed = 1200
 ENT.BoostSpeed = 4500
@@ -81,10 +81,10 @@ function ENT:Impact(data, collider)
 
             SafeRemoveEntityDelayed(prop, 3)
         end
-
-        self:Remove()
-        return true
     end
+
+    self:Remove()
+    return true
 end
 
 function ENT:Detonate()

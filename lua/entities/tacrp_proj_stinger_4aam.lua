@@ -81,10 +81,10 @@ function ENT:Impact(data, collider)
 
             SafeRemoveEntityDelayed(prop, 3)
         end
-
-        self:Remove()
-        return true
     end
+
+    self:Remove()
+    return true
 end
 
 function ENT:Detonate()

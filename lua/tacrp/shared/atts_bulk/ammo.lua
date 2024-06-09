@@ -1491,7 +1491,8 @@ ATT.Hook_PreShoot = function(wep)
 end
 
 ATT.Hook_PreShootEnt = function(wep, ent)
-    ent.SoftLaunchTime = 0.5 + (wep.QuadShootIndex * 0.5)
+    ent.SoftLaunchTime = 0.5 + (wep.QuadShootIndex * 0.25)
+    ent.BoostSpeed = 1500 + (wep.QuadShootIndex * 250)
 
     wep.QuadShootIndex = wep.QuadShootIndex + 1
 end
@@ -1517,7 +1518,7 @@ ATT.Cons = {"rating.range"}
 
 ATT.Category = "ammo_stinger"
 
-ATT.SortOrder = 4
+ATT.SortOrder = 5
 
 ATT.Override_ShootEnt = "tacrp_proj_stinger_apers"
 
