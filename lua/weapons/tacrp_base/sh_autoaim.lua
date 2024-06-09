@@ -45,6 +45,7 @@ function SWEP:ThinkLockOn()
         local lockontargets = ents.FindInCone(owner:GetShootPos(), owner:GetAimVector(), self:GetValue("LockOnRange"), self:GetValue("LockOnAngle"))
 
         local lockontarget = nil
+        local targeted_flare = false
         local angle = 90
 
         local player_aim_vector = owner:GetAimVector()
@@ -54,12 +55,22 @@ function SWEP:ThinkLockOn()
             if target == owner then continue end
 
             local try_target = nil
-            if target:IsPlayer() and target:Alive() then
+
+            if TacRP.FlareEntities[target:GetClass()] then
                 try_target = target
-            elseif (target:IsNPC() or target:IsNextBot()) and target:Health() > 0 then
-                try_target = target
-            elseif target.LVS or target.Targetable then
-                try_target = target
+                targeted_flare = true
+            end
+
+            if not targeted_flare then
+                if target:IsPlayer() and target:Alive() then
+                    try_target = target
+                elseif (target:IsNPC() or target:IsNextBot()) and target:Health() > 0 then
+                    try_target = target
+                elseif target.LVS or target.Targetable then
+                    try_target = target
+                elseif TacRP.LockableEntities[target:GetClass()] then
+                    try_target = target
+                end
             end
 
             if try_target then

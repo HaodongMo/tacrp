@@ -67,6 +67,15 @@ TacRP.IN_CUSTOMIZE = IN_WEAPON2
 TacRP.IN_TACTICAL = IN_BULLRUSH
 TacRP.IN_RELOCK = IN_CANCEL
 
+TacRP.LockableEntities = {
+    ["unity_flare"] = true
+}
+
+TacRP.FlareEntities = {
+    ["unity_flare"] = true,
+    ["env_flare"] = true
+}
+
 TacRP.HolsterBones = {
     [TacRP.HOLSTER_SLOT_BACK] = {
         "ValveBiped.Bip01_Spine2",

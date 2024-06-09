@@ -56,6 +56,7 @@ ENT.SuperSteerSpeed = 100
 ENT.BoostSpeed = 0
 ENT.SoftLaunchTime = 0.5
 ENT.NoReacquire = true
+ENT.FlareRedirectChance = 0
 
 ENT.AudioLoop = nil
 
@@ -100,9 +101,16 @@ function ENT:Initialize()
         if self.IsRocket then
             phys:EnableGravity(false)
         end
+
+        if IsValid(self.LockOnEntity) then
+            if isfunction(self.LockOnEntity.OnLaserLock) then
+                self.LockOnEntity:OnLaserLock(true)
+            end
+        end
     end
 
     self.SpawnTime = CurTime()
+    self.NextFlareRedirectTime = 0
 
     self.NPCDamage = IsValid(self:GetOwner()) and self:GetOwner():IsNPC() and !TacRP.ConVars["npc_equality"]:GetBool()
 
@@ -324,6 +332,31 @@ function ENT:Think()
             end
 
             if target.UnTrackable then self.LockOnEntity = nil end
+
+            if self.FlareRedirectChance > 0 and self.NextFlareRedirectTime <= CurTime() then
+                local flares = ents.FindInSphere(target:WorldSpaceCenter(), 1024)
+
+                for k, v in pairs(flares) do
+                    if TacRP.FlareEntities[v:GetClass()] and math.Rand(0, 1) <= self.FlareRedirectChance then
+                        if IsValid(self.LockOnEntity) then
+                            if isfunction(self.LockOnEntity.OnLaserLock) then
+                                self.LockOnEntity:OnLaserLock(false)
+                            end
+                        end
+
+                        self.LockOnEntity = v
+
+                        if IsValid(self.LockOnEntity) then
+                            if isfunction(self.LockOnEntity.OnLaserLock) then
+                                self.LockOnEntity:OnLaserLock(true)
+                            end
+                        end
+                        break
+                    end
+                end
+
+                self.NextFlareRedirectTime = CurTime() + 0.5
+            end
         end
     end
 
@@ -394,7 +427,6 @@ function ENT:Impact()
 end
 
 function ENT:Stuck()
-
 end
 
 function ENT:DrawTranslucent()
