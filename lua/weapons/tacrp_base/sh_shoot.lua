@@ -18,7 +18,7 @@ function SWEP:SprintLock(shoot)
         return true
     end
 
-    if self:GetValue("CannotHipFire") and self:GetSightAmount() < 1 and !self:GetBlindFire() and !self:GetPeeking() then
+    if self:GetValue("CannotHipFire") and self:GetSightAmount() < 1 and !self:GetBlindFire() then
         return true
     end
 
@@ -242,8 +242,6 @@ function SWEP:PrimaryAttack()
     local tr = self:GetValue("TracerNum")
 
     local shootent = self:GetValue("ShootEnt")
-
-    self:RunHook("Hook_PreShoot")
 
     if IsFirstTimePredicted() then
 

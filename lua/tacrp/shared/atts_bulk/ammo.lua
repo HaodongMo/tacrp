@@ -1518,7 +1518,7 @@ ATT.Cons = {"rating.range"}
 
 ATT.Category = "ammo_stinger"
 
-ATT.SortOrder = 5
+ATT.SortOrder = 4
 
 ATT.Override_ShootEnt = "tacrp_proj_stinger_apers"
 
