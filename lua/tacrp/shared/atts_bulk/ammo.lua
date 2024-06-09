@@ -1486,6 +1486,16 @@ ATT.Override_Spread = 0.1
 ATT.Override_Damage_Max = 75
 ATT.Override_Damage_Min = 75
 
+ATT.Hook_PreShoot = function(wep)
+    wep.QuadShootIndex = 0
+end
+
+ATT.Hook_PreShootEnt = function(wep, ent)
+    ent.SoftLaunchTime = 0.5 + (wep.QuadShootIndex * 0.5)
+
+    wep.QuadShootIndex = wep.QuadShootIndex + 1
+end
+
 if engine.ActiveGamemode() == "terrortown" then
     ATT.Free = true
 end

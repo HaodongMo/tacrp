@@ -243,6 +243,7 @@ function SWEP:PrimaryAttack()
 
     local shootent = self:GetValue("ShootEnt")
 
+    self:RunHook("Hook_PreShoot")
 
     if IsFirstTimePredicted() then
 
@@ -639,7 +640,9 @@ function SWEP:ShootRocket(dir)
             rocket.LockOnEntity = self:GetLockOnEntity()
         end
     end
+    self:RunHook("Hook_PreShootEnt", rocket)
     rocket:Spawn()
+    self:RunHook("Hook_PostShootEnt", rocket)
 
     local phys = rocket:GetPhysicsObject()
 

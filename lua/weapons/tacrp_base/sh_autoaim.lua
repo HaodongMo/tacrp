@@ -58,7 +58,7 @@ function SWEP:ThinkLockOn()
                 try_target = target
             elseif (target:IsNPC() or target:IsNextBot()) and target:Health() > 0 then
                 try_target = target
-            elseif target.LVS then
+            elseif target.LVS or target.Targetable then
                 try_target = target
             end
 
