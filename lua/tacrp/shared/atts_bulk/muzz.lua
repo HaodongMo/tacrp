@@ -332,7 +332,7 @@ ATT.Mult_Pitch_Shoot = 0.9
 
 ATT.SortOrder = 102
 
-ATT.Override_MuzzleEffect = "muzzleflash_m3"
+ATT.Override_MuzzleEffect = "muzzleflash_pistol_deagle"
 
 TacRP.LoadAtt(ATT, "muzz_brake_concussive")
 -- #endregion
