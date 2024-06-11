@@ -372,6 +372,13 @@ local conVars = {
         name = "language",
         default = "",
         replicated = true,
+        callback = function()
+            if SERVER then
+                TacRP:LoadLanguages()
+                net.Start("tacrp_reloadlangs")
+                net.Broadcast()
+            end
+        end
     },
     {
         name = "dev_benchgun",

@@ -46,13 +46,13 @@ local names = {
     ["357"] = "Magnum Ammo",
     ["smg1"] = "Carbine Ammo",
     ["ar2"] = "Rifle Ammo",
-    ["sniperpenetratedround"] = "Sniper Ammo",
+    -- ["sniperpenetratedround"] = "Sniper Ammo",
 }
 
 hook.Add("PreGamemodeLoaded", "TacRP_AmmoName", function()
     if TacRP.ConVars["ammonames"]:GetBool() then
         for k, v in pairs(names) do
-            language.Add(k .. "_ammo", v)
+            language.Add(k .. "_ammo", TacRP:GetPhrase("ammo." .. k) or v)
         end
     end
 end)

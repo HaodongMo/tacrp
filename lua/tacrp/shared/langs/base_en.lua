@@ -1,45 +1,23 @@
 L = {}
-STL = {}
 
 L["font.1"] = "Myriad Pro"
 L["font.2"] = "HD44780A00 5x8"
 
-STL["tier.1"] = "4Consumer"
-STL["tier.2"] = "3Security"
-STL["tier.3"] = "2Operator"
-STL["tier.4"] = "1Elite"
-STL["tier.0"] = "5Value"
+--[[
+To localize an attachment (replace optic_acog with your attachment class):
+L["att.optic_acog.name"] = "Attachment Name"
+L["att.optic_acog.name.full"] = "Attachment Full Name"
+L["att.optic_acog.desc"] = "Attachment Description"
 
-STL["tier.spec"] = "9Special"
-STL["type.sidearm"] = "1Pistol"
-STL["type.magnum_pistol"] = "2Magnum Pistol"
-STL["type.machine_pistol"] = "3Machine Pistol"
-STL["type.dual_pistol"] = "3Akimbo"
-STL["type.submachine_gun"] = "3Submachine Gun"
-STL["type.assault_rifle"] = "4Assault Rifle"
-STL["type.machine_gun"] = "5Machine Gun"
-STL["type.shotgun"] = "5Shotgun"
-STL["type.sporter_carbine"] = "5Sporter"
-STL["type.battle_rifle"] = "5Battle Rifle"
-STL["type.dmr"] = "6Marksman Rifle"
-STL["type.sniper_rifle"] = "7Sniper Rifle"
---STL["type.amr"] = "9Anti-Materiel Rifle"
-STL["type.melee_sharp"] = "8Bladed Melee"
-STL["type.melee_blunt"] = "8Blunt Melee"
-STL["type.equipment"] = "9Equipment"
-STL["type.throwable"] = "9Throwable"
-STL["type.launcher"] = "6Launcher"
-STL["type.special_weapon"] = "7Special Weapon"
-STL["slot.optic"] = "Optic"
-STL["slot.muzzle"] = "Muzzle"
-STL["slot.tactical"] = "Tactical"
-STL["slot.accessory"] = "Accessory"
-STL["slot.bolt"] = "Bolt"
-STL["slot.trigger"] = "Trigger"
-STL["slot.ammo"] = "Ammo"
-STL["slot.perk"] = "Perk"
-STL["slot.melee_tech"] = "Technique"
-STL["slot.melee_spec"] = "Special"
+To localize a weapon (replace tacrp_vertec with your weapon class):
+L["wep.tacrp_vertec.name"] = "Weapon Name"
+L["wep.tacrp_vertec.name.full"] = "Weapon Full Name"
+L["wep.tacrp_vertec.desc"] = "Weapon Description"
+L["wep.tacrp_vertec.desc.quote"] = "Weapon Quote" -- this is the italics line at the bottom
+L["wep.tacrp_vertec.trivia.manufacturer"] = "Trivia Manufacturer"
+L["wep.tacrp_vertec.trivia.year"] = "Trivia Caliber"
+L["wep.tacrp_vertec.trivia.caliber"] = "Trivia Year"
+]]
 
 L["tier.1"] = "Consumer"
 L["tier.2"] = "Security"
@@ -260,7 +238,7 @@ L["stat.damagecharge.desc"] = "Fraction of damage dealt that is converted into p
 
 
 L["stat.damage"] = "Damage"
-L["stat.damage_max.desc"] = "Damage per bullet at all ranges."
+L["stat.damage.desc"] = "Damage per bullet at all ranges."
 L["stat.damage_max"] = "Close Range Damage"
 L["stat.damage_max.desc"] = "Damage per bullet at no range falloff or rampup."
 L["stat.damage_min"] = "Long Range Damage"
@@ -421,3 +399,47 @@ L["faction.neutral"] = "Non-Aligned" -- non-faction specific
 
 L["hint.swap"] = "Swap with {weapon}"
 L["hint.pickup"] = "Pick up {weapon}"
+
+-- used when tacrp_ammonames 1
+L["ammo.357"] = "Magnum Ammo"
+L["ammo.smg1"] = "Carbine Ammo"
+L["ammo.ar2"] = "Rifle Ammo"
+
+-- STL phrases are not needed for other languages. you can remove these when localizing
+STL = {}
+STL["tier.1"] = "4Consumer"
+STL["tier.2"] = "3Security"
+STL["tier.3"] = "2Operator"
+STL["tier.4"] = "1Elite"
+STL["tier.0"] = "5Value"
+
+STL["tier.spec"] = "9Special"
+STL["type.sidearm"] = "1Pistol"
+STL["type.magnum_pistol"] = "2Magnum Pistol"
+STL["type.machine_pistol"] = "3Machine Pistol"
+STL["type.dual_pistol"] = "3Akimbo"
+STL["type.submachine_gun"] = "3Submachine Gun"
+STL["type.assault_rifle"] = "4Assault Rifle"
+STL["type.machine_gun"] = "5Machine Gun"
+STL["type.shotgun"] = "5Shotgun"
+STL["type.sporter_carbine"] = "5Sporter"
+STL["type.battle_rifle"] = "5Battle Rifle"
+STL["type.dmr"] = "6Marksman Rifle"
+STL["type.sniper_rifle"] = "7Sniper Rifle"
+--STL["type.amr"] = "9Anti-Materiel Rifle"
+STL["type.melee_sharp"] = "8Bladed Melee"
+STL["type.melee_blunt"] = "8Blunt Melee"
+STL["type.equipment"] = "9Equipment"
+STL["type.throwable"] = "9Throwable"
+STL["type.launcher"] = "6Launcher"
+STL["type.special_weapon"] = "7Special Weapon"
+STL["slot.optic"] = "Optic"
+STL["slot.muzzle"] = "Muzzle"
+STL["slot.tactical"] = "Tactical"
+STL["slot.accessory"] = "Accessory"
+STL["slot.bolt"] = "Bolt"
+STL["slot.trigger"] = "Trigger"
+STL["slot.ammo"] = "Ammo"
+STL["slot.perk"] = "Perk"
+STL["slot.melee_tech"] = "Technique"
+STL["slot.melee_spec"] = "Special"
