@@ -355,17 +355,19 @@ function SWEP:DrawHUDBackground()
             surface.SetDrawColor(0, 0, 0, 150)
             TacRP.DrawCorneredBox(x, y, w, h, col)
 
+            local name_txt = TacRP:GetPhrase("wep." .. self:GetClass() .. ".name") or self:GetValue("PrintName")
+
             surface.SetFont("TacRP_HD44780A00_5x8_8")
-            local tw = surface.GetTextSize(self.PrintName)
+            local tw = surface.GetTextSize(name_txt)
             surface.SetTextPos(x + TacRP.SS(3), y + TacRP.SS(1))
             if tw > w then
                 surface.SetFont("TacRP_HD44780A00_5x8_6")
-                tw = surface.GetTextSize(self.PrintName)
+                tw = surface.GetTextSize(name_txt)
             elseif tw > w - TacRP.SS(3) then
                 surface.SetTextPos(x + TacRP.SS(1.5), y + TacRP.SS(1))
             end
             surface.SetTextColor(col)
-            surface.DrawText(self.PrintName)
+            surface.DrawText(name_txt)
 
             local ammotype = self:GetValue("PrimaryGrenade") and (TacRP.QuickNades[self:GetValue("PrimaryGrenade")].Ammo) or self:GetValue("Ammo")
             local clips = math.min(math.ceil(self:GetOwner():GetAmmoCount(ammotype)), 999)

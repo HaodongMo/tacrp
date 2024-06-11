@@ -91,7 +91,7 @@ function SWEP:CreateCustomizeHUD()
             return
         end
 
-        local name_txt = TacRP:GetPhrase("wep." .. self:GetClass() .. "name.full") or TacRP:GetPhrase("wep." .. self:GetClass() .. "name") or self:GetValue("FullName") or self:GetValue("PrintName")
+        local name_txt = TacRP:GetPhrase("wep." .. self:GetClass() .. ".name.full") or TacRP:GetPhrase("wep." .. self:GetClass() .. ".name") or self:GetValue("FullName") or self:GetValue("PrintName")
 
         surface.SetFont("TacRP_Myriad_Pro_32")
         local name_w = surface.GetTextSize(name_txt)
