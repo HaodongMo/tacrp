@@ -1,43 +1,9 @@
 -- Polish Localization by meerfi
 
 L = {}
-STL = {}
 
 L["font.1"] = "Myriad Pro"
 L["font.2"] = "HD44780A00 5x8"
-
-STL["tier.1"] = "Przemysłowa jakość"
-STL["tier.2"] = "Wojskowa jakość"
-STL["tier.3"] = "Poufny"
-STL["tier.4"] = "Elitarny"
-STL["tier.spec"] = "Specjalny"
-STL["type.sidearm"] = "Boczna Broń"
-STL["type.magnum_pistol"] = "Magnum Pistolet"
-STL["type.machine_pistol"] = "Maszynowy Pistolet"
-STL["type.submachine_gun"] = "Pistolet Maszynowy"
-STL["type.assault_rifle"] = "Karabin Szturmowy"
-STL["type.machine_gun"] = "Karabin Maszynowy"
-STL["type.shotgun"] = "Strzelba"
-STL["type.sporter_carbine"] = "Karabinek Sportowy"
-STL["type.precision_rifle"] = "Karabin Precyzyjny"
-STL["type.sniper_rifle"] = "Karabin Snajperski"
-STL["type.amr"] = "Karabin PrzeciwPancerny"
-STL["type.melee_sharp"] = "Broń Sieczna"
-STL["type.melee_blunt"] = "Broń Tępa"
-STL["type.equipment"] = "Sprzęt"
-STL["type.throwable"] = "Rzutka"
-STL["type.launcher"] = "Wyrzutnia"
-STL["type.special_weapon"] = "Broń Specjalna"
-STL["slot.optic"] = "Optyczny"
-STL["slot.muzzle"] = "Wylot"
-STL["slot.tactical"] = "Taktyczny"
-STL["slot.accessory"] = "Dodatek"
-STL["slot.bolt"] = "Zamek"
-STL["slot.trigger"] = "Spust"
-STL["slot.ammo"] = "Amunicja"
-STL["slot.perk"] = "Atut"
-STL["slot.melee_tech"] = "Technika"
-STL["slot.melee_spec"] = "Specjalny"
 
 L["tier.1"] = "Przemysłowa Jakość"
 L["tier.2"] = "Wojskowa Jakość"
