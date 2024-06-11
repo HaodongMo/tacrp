@@ -463,3 +463,7 @@ L["att.perk_speed.name"] = "身手敏捷"
 L["att.perk_speed.desc"] = "提高枪械的机动性，特别是在换弹时。"
 L["att.perk_throw.name"] = "掷弹兵"
 L["att.perk_throw.desc"] = "加快了快速投掷，并增加了投掷石块的选项。"
+
+L["wep.tacrp_vertec.name"] = "贝瑞塔 92FS"
+L["wep.tacrp_vertec.name.full"] = "贝瑞塔 92FS Vertec"
+L["wep.tacrp_vertec.desc"] = "意大利产手枪。射程和命中率较高。"
