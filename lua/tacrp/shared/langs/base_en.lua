@@ -238,7 +238,7 @@ L["stat.damagecharge.desc"] = "Fraction of damage dealt that is converted into p
 
 
 L["stat.damage"] = "Damage"
-L["stat.damage_max.desc"] = "Damage per bullet at all ranges."
+L["stat.damage.desc"] = "Damage per bullet at all ranges."
 L["stat.damage_max"] = "Close Range Damage"
 L["stat.damage_max.desc"] = "Damage per bullet at no range falloff or rampup."
 L["stat.damage_min"] = "Long Range Damage"
