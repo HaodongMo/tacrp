@@ -593,6 +593,7 @@ function SWEP:SetupDataTables()
     self:NetworkVar("Bool", 14, "OutOfBreath")
     self:NetworkVar("Bool", 15, "HoldingBreath")
     self:NetworkVar("Bool", 16, "LastWasSprinting")
+    self:NetworkVar("Bool", 17, "EmptyReload")
 
     self:NetworkVar("Angle", 0, "FreeAimAngle")
     self:NetworkVar("Angle", 1, "LastAimAngle")
