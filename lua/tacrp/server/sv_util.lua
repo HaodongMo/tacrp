@@ -140,6 +140,7 @@ local cats = {
 concommand.Add("tacrp_dev_dumpstats", function()
     if !game.SinglePlayer() then return end
     local str = ""
+    local str_l18n = ""
     print("Dumping stats, this may lag a bit...")
     -- headers
     for k, v in pairs(cats) do
@@ -150,6 +151,9 @@ concommand.Add("tacrp_dev_dumpstats", function()
         local ply = Entity(1)
         for _, class in SortedPairs(TacRP.GetWeaponList()) do
             local wpn = ply:Give(class, true)
+            str_l18n = str_l18n .. "L[\"wpn." .. class .. ".name\"] = [[" .. (wpn.PrintName or "") .. "]]" .. "\n"
+            str_l18n = str_l18n .. "L[\"wpn." .. class .. ".desc\"] = [[" .. (wpn.Description or "") .. "]]" .. "\n"
+            str_l18n = str_l18n .. "L[\"wpn." .. class .. ".desc.quote\"] = [[" .. (wpn.Description_Quote or "") .. "]]" .. "\n\n"
             for k, v in pairs(cats) do
                 if v == true then
                     str = str .. (wpn[k] or "") .. ","
@@ -161,6 +165,8 @@ concommand.Add("tacrp_dev_dumpstats", function()
             str = string.sub(str, 0, -1) .. "\n"
         end
         file.Write("tacrp_dumpstats.csv", str)
+        file.Write("tacrp_l18n.txt", str_l18n)
+
         print("Dumped stats to tacrp_dumpstats.csv")
     end)
 end, nil, "Collects some stats and dumps them to a CSV file. Singleplayer only, may lag a bit.")
