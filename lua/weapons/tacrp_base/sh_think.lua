@@ -101,7 +101,7 @@ function SWEP:Think()
     --     s:PlayEx(0.25, 105)
     -- end
 
-    if self:GetJammed() and !self:StillWaiting() then
+    if self:GetJammed() and !self:StillWaiting() and TacRP.ConVars["jam_autoclear"]:GetBool() then
         self:PlayAnimation("jam", 0.75, true, true)
         self:SetJammed(false)
     end

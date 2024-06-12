@@ -5,6 +5,7 @@ function SWEP:ShouldDrawCrosshair()
     return !self:GetReloading() and !self:GetCustomize() and !self:GetSafe() and self:GetBlindFireMode() == TacRP.BLINDFIRE_NONE
         and !(self:SprintLock() and !self.DrawCrosshairInSprint)
         and !(self:DoForceSightsBehavior() and !self:GetPeeking())
+        and !self:GetJammed()
         and (self:GetSightAmount() <= 0.5 or (self:GetPeeking() and !self:GetValue("ThermalCamera")) or self:DoLowerIrons())
         and !(self:GetValue("CanQuickNade") and tobool(self:GetOwner():GetInfo("tacrp_nademenu")) and self:GetOwner():KeyDown(IN_GRENADE2))
         and !(self:GetValue("CanBlindFire") and tobool(self:GetOwner():GetInfo("tacrp_blindfiremenu")) and (self:GetOwner():KeyDown(IN_ZOOM) or self:GetOwner().TacRPBlindFireDown))
@@ -344,6 +345,20 @@ function SWEP:DrawHUDBackground()
     end
 
     if !self:GetCustomize() and TacRP.ConVars["hud"]:GetBool() then
+
+        if !TacRP.ConVars["jam_autoclear"]:GetBool() and self:GetJammed() then
+            local text = "[" .. TacRP.GetBindKey("+reload") .. "] " .. TacRP:GetPhrase("hint.unjam")
+            local font = "TacRP_HD44780A00_5x8_4"
+            surface.SetFont(font)
+            local w, h = surface.GetTextSize(text)
+            w = w + TacRP.SS(8)
+            h = h + TacRP.SS(4)
+
+            surface.SetDrawColor(0, 0, 0, 200)
+            TacRP.DrawCorneredBox(ScrW() / 2 - w / 2, ScrH() / 2, w, h)
+
+            draw.SimpleText(text, font, ScrW() / 2, ScrH() / 2 + h / 2, color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+        end
 
         if TacRP.ConVars["drawhud"]:GetBool() and engine.ActiveGamemode() != "terrortown" then
 

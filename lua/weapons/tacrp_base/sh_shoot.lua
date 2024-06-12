@@ -38,7 +38,7 @@ function SWEP:PrimaryAttack()
         return
     end
 
-    if self:GetJammed() then return end
+    -- if self:GetJammed() then return end
     if self:GetCurrentFiremode() < 0 and self:GetBurstCount() >= -self:GetCurrentFiremode() then return end
 
     if self:GetReloading() and self:GetValue("ShotgunReload") then
@@ -56,7 +56,7 @@ function SWEP:PrimaryAttack()
 
     if self:GetValue("RequireLockOn") and !(IsValid(self:GetLockOnEntity()) and CurTime() > self:GetLockOnStartTime() + self:GetValue("LockOnTime")) then return end
 
-    if self:Clip1() < self:GetValue("AmmoPerShot") then
+    if self:Clip1() < self:GetValue("AmmoPerShot") or self:GetJammed() then
         local ret = self:RunHook("Hook_PreDryfire")
         if ret != true then
             self.Primary.Automatic = false
@@ -76,14 +76,8 @@ function SWEP:PrimaryAttack()
     if util.SharedRandom("tacRP_shootChance", 0, 1) <= self:GetJamChance(false) then
         local ret = self:RunHook("Hook_PreJam")
         if ret != true then
-            -- self:TakePrimaryAmmo(self:GetValue("AmmoPerShot"))
             if self:GetBurstCount() == 0 then -- dryfire anim is snapping so don't interrupt fire anim for it
                 self.Primary.Automatic = false
-                -- if self:GetBlindFire() then
-                --     self:PlayAnimation("blind_dryfire")
-                -- else
-                --     self:PlayAnimation("dryfire")
-                -- end
             end
             self:EmitSound(self:GetValue("Sound_Jam"), 75, 100, 1, CHAN_ITEM)
             self:SetBurstCount(0)
