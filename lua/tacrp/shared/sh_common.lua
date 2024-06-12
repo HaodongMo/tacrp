@@ -73,6 +73,7 @@ TacRP.LockableEntities = {
 
 TacRP.FlareEntities = {
     ["unity_flare"] = true,
+    ["sw_flare_v3"] = true,
     ["env_flare"] = true
 }
 
