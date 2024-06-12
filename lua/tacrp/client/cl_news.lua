@@ -740,9 +740,9 @@ The heavy weaponry expansion, sporting 10 new weapons including autoshotties, gu
 ]],
     },
     {
-        Title = "Update 20",
+        Title = "Update 21",
         Type = "Patch Notes",
-        Date = "2024-06-11",
+        Date = "2024-06-12",
         Author = "speedonerd, 8Z",
         Major = true,
         Summary = "Expanded attachments and networking improvements",
@@ -770,7 +770,7 @@ The heavy weaponry expansion, sporting 10 new weapons including autoshotties, gu
 <p>Corner Cam has also been given a new night mode that can be toggled for low-light environments.
 
 <h2>Buzz off!</h2>
-<p>Added the FIM-92 Stinger to the base. This lock-on only launcher is suitable for shooting down aircraft, but can lock onto other things too.</p>
+<p>Added the FIM-92 Stinger to the base pack. This lock-on only launcher is suitable for shooting down aircraft, but can lock onto other things too.</p>
 
 <h2>Sean's got the shotgun.</h2>
 <p>A slew of new ammotypes for shotguns have arrived.
@@ -809,15 +809,14 @@ The heavy weaponry expansion, sporting 10 new weapons including autoshotties, gu
 <li><b>Added:</b> (Base) JHP ammo for rifles.
 <li><b>Added:</b> (Base) Healing Grenades.
 <li><b>Added:</b> (Base) Non-lethal grenades now have a distinctive trail.
-<li><b>Added:</b> (Base) Localization improvements.
+<li><b>Added:</b> (Base) Polish localization and backend l18n improvements.
 <li><b>Changed:</b> (Base) Reordered and redefined weapon subcategories. Anti-materiel rifles has been dissolved and Precision Rifles has been split up into Battle Rifles and Marksman Rifles.
 <li><b>Changed:</b> (All packs) Updated a few descriptions and added/changed some quotes.
-<li><b>Changed:</b> (All packs) Balance tweaks and changes all-around. Far to many to list off here.
 <li><b>Changed:</b> (InterOps) New RPK model.
 <li><b>Changed:</b> (Special Delivery) New PKM model.
 <li><b>Fixed:</b> (Base) Significant networking improvements across the board.
 <li><b>Fixed:</b> (InterOps) Fixed twisted wrists on SG 550 rifles (at last).
-<li><b>Rebalance:</b> (All packs) A lot of tweaks across the board.
+<li><b>Rebalance:</b> (All packs) A lot of balance tweaks across the board.
 
 </ul>
 ]],
