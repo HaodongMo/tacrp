@@ -642,6 +642,8 @@ SWEP.StatDisplay = {
 
             local num = valfunc(self, "Num")
             local dmg = math.max(valfunc(self, "Damage_Max"), valfunc(self, "Damage_Min"))
+            dmg = dmg + valfunc(self, "ExplosiveDamage")
+
             return math.Round(dmg * num * erpm / 60, 1)
         end,
     },
