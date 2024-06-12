@@ -914,7 +914,7 @@ ATT.Mult_Range_Max = 1.5
 
 ATT.Num = 1
 
-ATT.Mult_Spread = 0.25
+ATT.Mult_Spread = 0.2
 ATT.Mult_RecoilSpreadPenalty = 0.25
 
 ATT.Add_HipFireSpreadPenalty = 0.025
@@ -964,7 +964,7 @@ ATT.Mult_Range_Max = 1.5
 
 ATT.Num = 1
 
-ATT.Mult_Spread = 0.25
+ATT.Mult_Spread = 0.2
 ATT.Mult_RecoilSpreadPenalty = 0.25
 
 ATT.Add_HipFireSpreadPenalty = 0.025
@@ -1010,8 +1010,8 @@ ATT.Mult_Damage_Min = 2.5
 
 ATT.Num = 3
 
-ATT.Mult_Spread = 0.4
-ATT.Mult_ShotgunPelletSpread = 0.4
+ATT.Mult_Spread = 0.33333
+ATT.Mult_ShotgunPelletSpread = 0.5
 
 ATT.Mult_RecoilSpreadPenalty = 0.5
 
@@ -1059,8 +1059,8 @@ ATT.Mult_Damage_Min = 2
 
 ATT.Num = 3
 
-ATT.Mult_Spread = 0.4
-ATT.Mult_ShotgunPelletSpread = 0.4
+ATT.Mult_Spread = 0.33333
+ATT.Mult_ShotgunPelletSpread = 0.5
 
 ATT.Mult_RecoilSpreadPenalty = 0.5
 
@@ -1343,8 +1343,8 @@ ATT.Category = {"ammo_shotgun", "ammo_shotgun2"}
 
 ATT.SortOrder = 6
 
-ATT.Mult_Damage_Min = 1
-ATT.Mult_Damage_Max = 1
+ATT.Override_Damage_Min = 5
+ATT.Override_Damage_Max = 5
 
 ATT.Num = 1
 
@@ -1352,13 +1352,13 @@ ATT.Mult_Spread = 0.6
 
 ATT.Add_HipFireSpreadPenalty = 0.025
 
-ATT.Mult_MuzzleVelocity = 0.66667
+ATT.Mult_MuzzleVelocity = 0.5
 
 ATT.Override_MuzzleEffect = "muzzleflash_slug"
 
 ATT.Override_ExplosiveEffect = "HelicopterMegaBomb"
-ATT.Add_ExplosiveDamage = 25
-ATT.Add_ExplosiveRadius = 128
+ATT.Add_ExplosiveDamage = 40
+ATT.Add_ExplosiveRadius = 150
 
 TacRP.LoadAtt(ATT, "ammo_shotgun_frag")
 -- #endregion
