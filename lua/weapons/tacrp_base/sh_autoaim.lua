@@ -118,7 +118,6 @@ function SWEP:ThinkLockOn()
             self.PlayedLockOnSound = false
             self:SetLockOnStartTime(CurTime())
         end
-
     end
 
     if not IsValid(self:GetLockOnEntity()) then
