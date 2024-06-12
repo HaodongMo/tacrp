@@ -742,14 +742,16 @@ The heavy weaponry expansion, sporting 10 new weapons including autoshotties, gu
     {
         Title = "Update 20",
         Type = "Patch Notes",
-        Date = "2024-05-24",
-        Author = "speedonerd",
+        Date = "2024-06-11",
+        Author = "speedonerd, 8Z",
         Major = true,
         Summary = "Expanded attachments and networking improvements",
         Contents = [[<body style="font-family:'Myriad Pro';color:white;font-size:125%;">
 <p>Howdy all! It's a little crazy to think about, but May 14th (14 - 5 - 2024) marks exactly one year since TacRP InterOps launched on the Workshop. Since then TacRP's weapon selection has gone from 70-something weapons to over 200, and a myriad of new features have been added.
 <p>It's been quite a ride, and we appreciate all the support and kind words we've continued to receive throughout this year of development.
 <p>We've been cooking up a pretty substantial update the past month or so with not one, but two massive content drops being developed concurrently. Unfortunately, they're still yet to be released, but we still have a decent-sized update to satiate you in the meantime. 
+
+<p>(8Z's Note: This news was written back when we were still not that far off from the anniversary date. Alas...)
 
 <hr>
 
@@ -766,6 +768,9 @@ The heavy weaponry expansion, sporting 10 new weapons including autoshotties, gu
 <li><b>Combo Module:</b> A 2-for-1 deal, now you can have a laser and a flashlight together. Does not blind targets like the standalone flashlight.
 </ul>
 <p>Corner Cam has also been given a new night mode that can be toggled for low-light environments.
+
+<h2>Buzz off!</h2>
+<p>Added the FIM-92 Stinger to the base. This lock-on only launcher is suitable for shooting down aircraft, but can lock onto other things too.</p>
 
 <h2>Sean's got the shotgun.</h2>
 <p>A slew of new ammotypes for shotguns have arrived.
@@ -785,7 +790,6 @@ The heavy weaponry expansion, sporting 10 new weapons including autoshotties, gu
 <li><b>Concussive Brake:</b> Significantly reduces recoil kick at the cost of firing move speed.
 </ul>
 
-
 <h2>Nanomachines, son.</h2>
 <p>A new grenade, the Medi-Smoke, has been added. This can of purple technology and probably drugs will restore your health as long as you stand in it!</p>
 
@@ -798,12 +802,14 @@ The heavy weaponry expansion, sporting 10 new weapons including autoshotties, gu
 
 <h3>Changelog</h3>
 <ul>
+<li><b>Added:</b> (Base) FIM-92 Stinger with 4 ammo attachments.
 <li><b>Added:</b> (Base) Four new tactical attachments: Emergency Bullet, 2x Zoom, Thermal Imager, Combo Module.
 <li><b>Added:</b> (Base) Five new shotgun ammo types: Minishells, Dragon's Breath, Frag Shells, Breaching Shells, Buckshot Roulette.
 <li><b>Added:</b> (Base) Corner-Cam now has a night-vision mode, toggle with Tactical keybind.
 <li><b>Added:</b> (Base) JHP ammo for rifles.
 <li><b>Added:</b> (Base) Healing Grenades.
 <li><b>Added:</b> (Base) Non-lethal grenades now have a distinctive trail.
+<li><b>Added:</b> (Base) Localization improvements.
 <li><b>Changed:</b> (Base) Reordered and redefined weapon subcategories. Anti-materiel rifles has been dissolved and Precision Rifles has been split up into Battle Rifles and Marksman Rifles.
 <li><b>Changed:</b> (All packs) Updated a few descriptions and added/changed some quotes.
 <li><b>Changed:</b> (All packs) Balance tweaks and changes all-around. Far to many to list off here.
