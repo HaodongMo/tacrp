@@ -191,17 +191,6 @@ function SWEP:PostDrawViewModel()
         render.SetBlend(1)
     end
 
-    local newmzpcfs = {}
-
-    for _, pcf in ipairs(self.MuzzPCFs) do
-        if IsValid(pcf) then
-            pcf:Render()
-            table.insert(newmzpcfs, pcf)
-        end
-    end
-
-    if !inrt then self.MuzzPCFs = newmzpcfs end
-
     cam.Start3D()
         cam.IgnoreZ(false)
         local newpcfs = {}
@@ -214,6 +203,17 @@ function SWEP:PostDrawViewModel()
         end
 
         if !inrt then self.PCFs = newpcfs end
+
+        local newmzpcfs = {}
+
+        for _, pcf in ipairs(self.MuzzPCFs) do
+            if IsValid(pcf) then
+                pcf:Render()
+                table.insert(newmzpcfs, pcf)
+            end
+        end
+
+        if !inrt then self.MuzzPCFs = newmzpcfs end
     cam.End3D()
 end
 
