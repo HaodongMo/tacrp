@@ -399,6 +399,7 @@ L["faction.neutral"] = "Non-Aligned" -- non-faction specific
 
 L["hint.swap"] = "Swap with {weapon}"
 L["hint.pickup"] = "Pick up {weapon}"
+L["hint.unjam"] = "Unjam Weapon"
 
 -- used when tacrp_ammonames 1
 L["ammo.357"] = "Magnum Ammo"

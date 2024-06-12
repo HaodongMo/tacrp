@@ -20,6 +20,18 @@ function SWEP:Reload(force)
     end
 
     if self:StillWaiting(true) then return end
+
+   if self:GetJammed() and !self:StillWaiting() then
+        if math.random() <= 0.5 then
+            self:PlayAnimation("jam", 0.75, true, true)
+            self:SetJammed(false)
+        else
+            self:EmitSound(self:GetValue("Sound_Jam"), 75, math.Rand(92, 108), 1, CHAN_ITEM)
+            self:SetNextPrimaryFire(CurTime() + 0.1)
+        end
+        return
+    end
+
     if !self:CanReloadInSprint() and self:GetIsSprinting() then return end
     if self:GetCapacity() <= 0 then return end
     if self:Clip1() >= self:GetCapacity() then return end
