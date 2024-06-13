@@ -340,14 +340,17 @@ end
 function SWEP:OnRemove()
     if IsValid(self:GetOwner()) then
         self:ToggleBoneMods(TacRP.BLINDFIRE_NONE)
+
+        if CLIENT then
+            local vm = self:GetOwner():GetViewModel()
+            if IsValid(vm) then
+                vm:SetMaterial() -- Quick and dirty fix for grenade materials persisting on VM when stripped
+            end
+        end
     end
     if CLIENT and (self:GetCustomize() or (self.GrenadeMenuAlpha or 0) > 0 or (self.BlindFireMenuAlpha or 0) > 0) then
         gui.EnableScreenClicker(false)
         TacRP.CursorEnabled = false
-    end
-    if CLIENT then
-        local vm = self:GetOwner():GetViewModel()
-        vm:SetMaterial() -- Quick and dirty fix for grenade materials persisting on VM when stripped
     end
 end
 
