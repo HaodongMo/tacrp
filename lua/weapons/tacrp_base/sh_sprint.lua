@@ -114,10 +114,12 @@ function SWEP:ThinkSprint()
 
     self.LastWasSprinting = sprinting
 
-    if (sprinting or (self:ShouldLowerWeapon() and !self:DoForceSightsBehavior())) and !self:GetInBipod() then
-        amt = math.Approach(amt, 1, FrameTime() / self:GetValue("SprintToFireTime"))
-    else
-        amt = math.Approach(amt, 0, FrameTime() / self:GetValue("SprintToFireTime"))
+    if IsFirstTimePredicted() or game.SinglePlayer() then
+        if (sprinting or (self:ShouldLowerWeapon() and !self:DoForceSightsBehavior())) and !self:GetInBipod() then
+            amt = math.Approach(amt, 1, FrameTime() / self:GetValue("SprintToFireTime"))
+        else
+            amt = math.Approach(amt, 0, FrameTime() / self:GetValue("SprintToFireTime"))
+        end
     end
 
     self:SetSprintAmount(amt)

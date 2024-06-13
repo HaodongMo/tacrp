@@ -210,13 +210,15 @@ function SWEP:ThinkSights()
 
     local adst = self:GetAimDownSightsTime()
 
-    if sighted then
-        if self:GetSprintLockTime() > CurTime() then
-            adst = adst + self:GetSprintToFireTime()
+    if ftp or game.SinglePlayer() then
+        if sighted then
+            if self:GetSprintLockTime() > CurTime() then
+                adst = adst + self:GetSprintToFireTime()
+            end
+            amt = math.Approach(amt, 1, FT / adst)
+        else
+            amt = math.Approach(amt, 0, FT / adst)
         end
-        amt = math.Approach(amt, 1, FT / adst)
-    else
-        amt = math.Approach(amt, 0, FT / adst)
     end
 
     self:SetSightDelta(amt)
