@@ -377,7 +377,7 @@ SWEP.WM_QCA_EjectR = 4
 
 SWEP.MuzzleEffect = "muzzleflash_pistol"
 
-SWEP.EjectEffect = 1 // 1 = pistol, 2 = rifle, 3 = shotgun
+SWEP.EjectEffect = 0 // 1 = pistol, 2 = rifle, 3 = shotgun
 SWEP.EjectDelay = 0
 SWEP.EjectScale = 1
 
