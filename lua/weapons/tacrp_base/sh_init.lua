@@ -345,6 +345,10 @@ function SWEP:OnRemove()
         gui.EnableScreenClicker(false)
         TacRP.CursorEnabled = false
     end
+    if CLIENT then
+        local vm = self:GetOwner():GetViewModel()
+        vm:SetMaterial() -- Quick and dirty fix for grenade materials persisting on VM when stripped
+    end
 end
 
 function SWEP:EquipAmmo(ply)
