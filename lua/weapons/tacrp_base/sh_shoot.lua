@@ -14,7 +14,7 @@ function SWEP:SprintLock(shoot)
         return true
     end
 
-    if shoot and self:DoForceSightsBehavior() and (self:GetSprintDelta() > 0 or self:GetSightDelta() < 0.75) then
+    if shoot and self:DoForceSightsBehavior() and (self:GetSprintDelta() > 0 or self:GetSightDelta() < 0.75) and !self:GetBlindFire() then
         return true
     end
 
