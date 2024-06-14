@@ -151,9 +151,9 @@ concommand.Add("tacrp_dev_dumpstats", function()
         local ply = Entity(1)
         for _, class in SortedPairs(TacRP.GetWeaponList()) do
             local wpn = ply:Give(class, true)
-            str_l18n = str_l18n .. "L[\"wpn." .. class .. ".name\"] = [[" .. (wpn.PrintName or "") .. "]]" .. "\n"
-            str_l18n = str_l18n .. "L[\"wpn." .. class .. ".desc\"] = [[" .. (wpn.Description or "") .. "]]" .. "\n"
-            str_l18n = str_l18n .. "L[\"wpn." .. class .. ".desc.quote\"] = [[" .. (wpn.Description_Quote or "") .. "]]" .. "\n\n"
+            str_l18n = str_l18n .. "L[\"wep." .. class .. ".name\"] = [[" .. (wpn.PrintName or "") .. "]]" .. "\n"
+            str_l18n = str_l18n .. "L[\"wep." .. class .. ".desc\"] = [[" .. (wpn.Description or "") .. "]]" .. "\n"
+            str_l18n = str_l18n .. "L[\"wep." .. class .. ".desc.quote\"] = [[" .. (wpn.Description_Quote or "") .. "]]" .. "\n\n"
             for k, v in pairs(cats) do
                 if v == true then
                     str = str .. (wpn[k] or "") .. ","
