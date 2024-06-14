@@ -806,6 +806,7 @@ The heavy weaponry expansion, sporting 10 new weapons including autoshotties, gu
 <li><b>Added:</b> (Base) Four new tactical attachments: Emergency Bullet, 2x Zoom, Thermal Imager, Combo Module.
 <li><b>Added:</b> (Base) Five new shotgun ammo types: Minishells, Dragon's Breath, Frag Shells, Breaching Shells, Buckshot Roulette.
 <li><b>Added:</b> (Base) Corner-Cam now has a night-vision mode, toggle with Tactical keybind.
+<li><b>Added:</b> (Base) Jammed weapons requires pressing reload key to unjam by default.
 <li><b>Added:</b> (Base) JHP ammo for rifles.
 <li><b>Added:</b> (Base) Healing Grenades.
 <li><b>Added:</b> (Base) Non-lethal grenades now have a distinctive trail.
@@ -818,6 +819,26 @@ The heavy weaponry expansion, sporting 10 new weapons including autoshotties, gu
 <li><b>Fixed:</b> (InterOps) Fixed twisted wrists on SG 550 rifles (at last).
 <li><b>Rebalance:</b> (All packs) A lot of balance tweaks across the board.
 
+</ul>
+]],
+    },
+    {
+        Title = "Update 21 HotFix",
+        Type = "Patch Notes",
+        Date = "2024-06-14",
+        Author = "8Z",
+        Major = false,
+        Summary = "Some hotfixes",
+        Contents = [[<body style="font-family:'Myriad Pro';color:white;font-size:125%;">
+
+<h3>Changelog</h3>
+<ul>
+<li><b>Fixed:</b> Value tier added NPC weapon selection.
+<li><b>Fixed:</b> Updated localization strings.
+<li><b>Fixed:</b> Fixed Stinger missile in multiplayer.
+<li><b>Fixed:</b> "Lower weapon when not aiming" option related fixes.
+<li><b>Fixed:</b> Sprint/Sight progress is now properly predicted in multiplayer.
+<li><b>Fixed:</b> Grenade material carrying over to other viewmodels if stripped (such as throwing last grenade).
 </ul>
 ]],
     },
