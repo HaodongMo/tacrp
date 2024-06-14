@@ -33,6 +33,7 @@ if CLIENT then
             random:SetDeleteSelf(false)
 
             random:AddCVar("[Any TacRP Weapon]", "gmod_npcweapon", "!tacrp|npc|")
+            random:AddCVar("[Value Tier]", "gmod_npcweapon", "!tacrp|npc|5Value")
             random:AddCVar("[Consumer Tier]", "gmod_npcweapon", "!tacrp|npc|4Consumer")
             random:AddCVar("[Security Tier]", "gmod_npcweapon", "!tacrp|npc|3Security")
             random:AddCVar("[Operator Tier]", "gmod_npcweapon", "!tacrp|npc|2Operator")
@@ -72,6 +73,7 @@ if CLIENT then
 
                 cats[cat]:AddCVar("[Random]", "gmod_npcweapon", "!tacrp|" .. cat .. "|")
                 if !no_tiered_random[cat] then
+                    cats[cat]:AddCVar("[Value Tier]", "gmod_npcweapon", "!tacrp|" .. cat .. "|5Value")
                     cats[cat]:AddCVar("[Consumer Tier]", "gmod_npcweapon", "!tacrp|" .. cat .. "|4Consumer")
                     cats[cat]:AddCVar("[Security Tier]", "gmod_npcweapon", "!tacrp|" .. cat .. "|3Security")
                     cats[cat]:AddCVar("[Operator Tier]", "gmod_npcweapon", "!tacrp|" .. cat .. "|2Operator")

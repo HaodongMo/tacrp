@@ -244,3 +244,7 @@ end
 function SWEP:ShouldAutoReload()
     return !self:GetValue("NoAutoReload")
 end
+
+function SWEP:DoOldSchoolScopeBehavior()
+    return false
+end
