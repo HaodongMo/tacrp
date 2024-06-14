@@ -338,7 +338,7 @@ function SWEP:SetShouldHoldType()
 end
 
 function SWEP:OnRemove()
-    if IsValid(self:GetOwner()) then
+    if IsValid(self:GetOwner()) and self:GetOwner():IsPlayer() then
         self:ToggleBoneMods(TacRP.BLINDFIRE_NONE)
 
         if CLIENT then
