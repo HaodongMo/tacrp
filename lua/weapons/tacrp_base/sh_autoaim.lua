@@ -11,7 +11,7 @@ function SWEP:ThinkLockOn()
     local should_autoaim_scan = false
 
     if CLIENT then
-        if self.LastSearchTime + 0.1 < CurTime() then
+        if self.LastSearchTime + 0.1 + engine.TickInterval() < CurTime() then
             should_autoaim_scan = true
             self.LastSearchTime = CurTime()
         end
@@ -32,7 +32,7 @@ function SWEP:ThinkLockOn()
             should_autoaim_scan = true
         end
 
-        if self.LastSearchTime + 0.25 < CurTime() then
+        if self.LastSearchTime + 0.25 + engine.TickInterval() < CurTime() then
             should_autoaim_scan = true
             self.LastSearchTime = CurTime()
         end
@@ -100,7 +100,7 @@ function SWEP:ThinkLockOn()
             end
         end
 
-        if lockontarget then
+        if lockontarget and IsValid(lockontarget) then
             if lastlockonentity != lockontarget then
                 self:SetLockOnStartTime(CurTime())
                 if CLIENT and (IsFirstTimePredicted() or game.SinglePlayer()) then
@@ -113,6 +113,7 @@ function SWEP:ThinkLockOn()
                 end
             end
             self:SetLockOnEntity(lockontarget)
+            self.LockOnEntity = lockontarget
         else
             self:SetLockOnEntity(nil)
             self.PlayedLockOnSound = false
