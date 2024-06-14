@@ -26,8 +26,10 @@ SWEP.Slot = 2
 
 SWEP.BalanceStats = {
     [TacRP.BALANCE_SBOX] = {
-        Damage_Max = 22,
+        Damage_Max = 20,
         Damage_Min = 9,
+
+        Range_Min = 1000,
 
         RecoilKick = 5,
     },
@@ -76,7 +78,7 @@ SWEP.ArmorPenetration = 0.7
 SWEP.BodyDamageMultipliers = {
     [HITGROUP_HEAD] = 4,
     [HITGROUP_CHEST] = 1,
-    [HITGROUP_STOMACH] = 1,
+    [HITGROUP_STOMACH] = 1.25,
     [HITGROUP_LEFTARM] = 1,
     [HITGROUP_RIGHTARM] = 1,
     [HITGROUP_LEFTLEG] = 0.75,
