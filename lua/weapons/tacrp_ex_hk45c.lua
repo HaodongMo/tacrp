@@ -36,7 +36,32 @@ SWEP.BalanceStats = {
         ClipSize = 8,
     },
     [TacRP.BALANCE_TTT] = {
-        // TODO
+        Damage_Max = 34,
+        Damage_Min = 10,
+        Range_Min = 300,
+        Range_Max = 1200,
+        RPM = 260,
+        RPMMultSemi = 1,
+        ClipSize = 8,
+
+        RecoilResetInstant = true,
+        RecoilMaximum = 3,
+        RecoilResetTime = 0.2,
+        RecoilDissipationRate = 9,
+        RecoilSpreadPenalty = 0.006,
+
+        BodyDamageMultipliers = {
+            [HITGROUP_HEAD] = 2.5,
+            [HITGROUP_CHEST] = 1,
+            [HITGROUP_STOMACH] = 1,
+            [HITGROUP_LEFTARM] = 0.9,
+            [HITGROUP_RIGHTARM] = 0.9,
+            [HITGROUP_LEFTLEG] = 0.75,
+            [HITGROUP_RIGHTLEG] = 0.75,
+            [HITGROUP_GEAR] = 0.9
+        },
+
+        ReloadTimeMult = 1.15 * 1.25,
     },
 }
 

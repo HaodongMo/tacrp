@@ -48,7 +48,7 @@ SWEP.BalanceStats = {
         Damage_Min = 10,
         Range_Min = 500,
         Range_Max = 2000,
-        RPM = 420,
+        RPM = 360,
         RPMMultSemi = 1,
 
         RecoilResetInstant = true,
@@ -129,7 +129,7 @@ SWEP.CanBlindFire = true
 
 // handling
 
-SWEP.MoveSpeedMult = 1
+SWEP.MoveSpeedMult = 0.975
 SWEP.ShootingSpeedMult = 0.9
 SWEP.SightedSpeedMult = 0.8
 
