@@ -79,7 +79,7 @@ function SWEP:Detach(slot, silent, suppress)
     local inf_old = self:GetValue("InfiniteAmmo")
     local ammo_old = self:GetValue("Ammo")
 
-    local atttbl = TacRP.GetAttTable(att)
+    local atttbl = TacRP.GetAttTable(slottbl.Installed)
 
     if atttbl and atttbl.OnDetach then
         atttbl.OnDetach(self)

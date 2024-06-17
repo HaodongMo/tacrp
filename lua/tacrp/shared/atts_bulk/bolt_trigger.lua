@@ -136,7 +136,7 @@ ATT.Cons = {"att.procon.surplusboost2", "att.procon.unreliable"}
 
 ATT.Category = {"bolt_automatic", "bolt_manual"}
 
-ATT.SortOrder = 999
+ATT.SortOrder = 9
 
 ATT.Mult_RecoilSpreadPenalty = 0.8
 ATT.Mult_RecoilKick = 0.75
@@ -203,6 +203,35 @@ ATT.Mult_RecoilKick = 0.7
 ATT.Mult_MuzzleVelocity = 1.15
 
 TacRP.LoadAtt(ATT, "bolt_tactical")
+-- #endregion
+
+------------------------------
+-- #region bolt_refurbished
+------------------------------
+ATT = {}
+
+ATT.PrintName = "Refurbished"
+ATT.FullName = "Refurbished Bolt"
+ATT.Icon = Material("entities/tacrp_att_bolt_refurbished.png", "mips smooth")
+ATT.Description = "Fix the weapon's innate reliability with some armory tweaks."
+ATT.Pros = {"att.procon.reliability"}
+ATT.Cons = {"stat.rpm", "stat.spread"}
+
+ATT.Category = "bolt_jammable"
+
+ATT.SortOrder = 10
+
+ATT.Override_JamFactor = 0 -- This intentionally does not prevent surplus ammo from jamming!
+ATT.Add_RPM = -75
+ATT.Add_Spread = 0.003
+
+ATT.Compatibility = function(wep)
+    if wep:GetBaseValue("JamFactor") == 0 then
+        return false
+    end
+end
+
+TacRP.LoadAtt(ATT, "bolt_refurbished")
 -- #endregion
 
 ------------------------------
