@@ -33,7 +33,7 @@ SWEP.BalanceStats = {
         RPM = 450,
 
         BodyDamageMultipliers = {
-            [HITGROUP_HEAD] = 3,
+            [HITGROUP_HEAD] = 5,
             [HITGROUP_CHEST] = 1,
             [HITGROUP_STOMACH] = 1,
             [HITGROUP_LEFTARM] = 1,
