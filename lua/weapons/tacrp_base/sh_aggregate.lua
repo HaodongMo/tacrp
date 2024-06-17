@@ -290,11 +290,11 @@ SWEP.StatGroups = {
             local r_mid = r_min + (r_max - r_min) / 2
             local d_diff = math.abs(d_max - d_min) / math.max(d_max, d_min)
             if d_max > d_min then
-                -- [60] 50% damage falloff range
-                score = score + math.Clamp((r_mid - (ttt and 400 or 800)) / (ttt and 1500 or 3000), 0, 1) * 60
+                -- [100] 50% damage falloff range
+                score = score + math.Clamp((r_mid - 500) / (ttt and 2500 or 3000), 0, 1) ^ 0.75 * 100
 
-                -- [40] damage reduction from range
-                score = score + math.Clamp(1 - d_diff, 0, 1) ^ 1.5 * 40
+                -- [0] damage reduction from range
+                -- score = score + math.Clamp(1 - d_diff, 0, 1) ^ 1.5 * 0
             else
                 -- [40] free points
                 -- [40] 50% damage rampup range
