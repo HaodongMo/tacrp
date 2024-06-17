@@ -110,9 +110,9 @@ function SWEP:DoDrawCrosshair(x, y)
     if dev then
 
         if self:StillWaiting() then
-            surface.SetDrawColor(150, 150, 150, 255)
+            surface.SetDrawColor(150, 150, 150, 150)
         else
-            surface.SetDrawColor(255, 50, 50, 255)
+            surface.SetDrawColor(255, 50, 50, 150)
         end
         surface.DrawLine(x2, y2 - 256, x2, y2 + 256)
         surface.DrawLine(x2 - 256, y2, x2 + 256, y2)
