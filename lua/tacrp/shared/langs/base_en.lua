@@ -261,12 +261,14 @@ L["stat.peekpenalty"] = "Peeking Penalty"
 L["stat.peekpenalty.desc"] = "Amount of hipfire spread and sway applied while peeking."
 L["stat.quickscope"] = "Quickscope Penalty"
 L["stat.quickscope.desc"] = "Amount of inaccuracy applied while switching in and out of aiming.\nPenalty fades away over 0.2 seconds."
+L["stat.vol_shoot"] = "Loudness"
+L["stat.vol_shoot.desc"] = "How audible the weapon's firing sound is."
+
 
 -- not in stats page but attachments may use
 L["stat.swaycrouch"] = "Crouched Sway"
 L["stat.recoil"] = "Recoil"
 L["stat.range"] = "Range"
-L["stat.vol_shoot"] = "Loudness"
 L["stat.blindfiresway"] = "Blindfire Sway"
 L["stat.zoom"] = "Aim Zoom"
 L["stat.bloomintensity"] = "Bloom Intensity"

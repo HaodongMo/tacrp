@@ -1206,6 +1206,16 @@ SWEP.StatDisplay = {
         Unit = "′",
         LowerIsBetter = true,
     },
+    {
+        Name = "stat.vol_shoot",
+        Description = "stat.vol_shoot.desc",
+        Value = "Vol_Shoot",
+        AggregateFunction = function(self, base, val)
+            return math.Round(val, 1)
+        end,
+        Unit = "dB",
+        LowerIsBetter = true,
+    },
 }
 
 SWEP.StatGroupsMelee = {
