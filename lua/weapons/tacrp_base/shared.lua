@@ -126,6 +126,10 @@ SWEP.RecoilCrouchMult = 0.75 // multiplier for when crouched
 SWEP.RecoilSpreadPenalty = 0.001 // extra spread per one unit of recoil
 SWEP.RecoilResetInstant = true // Set false to account for RPM.
 
+// Controls alternate bloom behavior, defaults to convar
+SWEP.AlwaysAltRecoil = nil
+SWEP.NeverAltRecoil = nil
+
 SWEP.RecoilVisualKick = 0.1
 SWEP.RecoilKick = 0.25
 SWEP.RecoilStability = 0 // Direction of recoil kick, 1 is completely vertical and 0 is 180deg cone

@@ -82,3 +82,10 @@ end
 function SWEP:WidescreenFix(target)
     return self:ScaleFOVByWidthRatio(target, ((ScrW and ScrW() or 4) / (ScrH and ScrH() or 3)) / (4 / 3))
 end
+
+function SWEP:UseAltRecoil(base)
+    local valfunc = base and self.GetBaseValue or self.GetValue
+    if valfunc(self, "AlwaysAltRecoil") then return true end
+    if valfunc(self, "NeverAltRecoil") then return false end
+    return TacRP.ConVars["altrecoil"]:GetBool()
+end

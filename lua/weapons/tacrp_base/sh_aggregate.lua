@@ -327,7 +327,7 @@ SWEP.StatGroups = {
             local dt = math.max(0, -rrt)
             local rbs = dt * rdr -- amount of recoil we can recover between shots even if fired ASAP
 
-            if TacRP.ConVars["altrecoil"]:GetBool() then
+            if self:UseAltRecoil() then
                 local min = 0.0001
                 local tgt = 0.015
                 if num > 2 then tgt = 0.04 end
@@ -926,26 +926,28 @@ SWEP.StatDisplay = {
         Name = "stat.recoilspread",
         Description = "stat.recoilspread.desc",
         AggregateFunction = function(self, base, val)
+            if self:UseAltRecoil(base) then return end
             return math.Round(math.deg(val) * 60, 1)
         end,
         Unit = "′",
         Value = "RecoilSpreadPenalty",
         LowerIsBetter = true,
-        ConVarCheck = "tacrp_altrecoil",
-        ConVarInvert = true,
+        -- ConVarCheck = "tacrp_altrecoil",
+        -- ConVarInvert = true,
     },
     -- For use when in "Bloom Modifies Recoil"
     {
         Name = "stat.recoilspread2",
         Description = "stat.recoilspread2.desc",
         AggregateFunction = function(self, base, val)
+            if !self:UseAltRecoil(base) then return end
             return math.Round(val * (base and self:GetBaseValue("RecoilAltMultiplier") or self:GetValue("RecoilAltMultiplier")), 2)
         end,
         Unit = nil,
         Value = "RecoilSpreadPenalty",
         LowerIsBetter = true,
-        ConVarCheck = "tacrp_altrecoil",
-        ConVarInvert = false,
+        -- ConVarCheck = "tacrp_altrecoil",
+        -- ConVarInvert = false,
     },
     {
         Name = "stat.recoildissipation",

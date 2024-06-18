@@ -662,7 +662,7 @@ function SWEP:GetSpread(baseline)
         spread = spread + Lerp(self:GetSightAmount() - (self:GetPeeking() and self:GetValue("PeekPenaltyFraction") or 0), hippenalty, 0)
     end
 
-    if !TacRP.ConVars["altrecoil"]:GetBool() then
+    if !self:UseAltRecoil() then
         spread = spread + (self:GetRecoilAmount() * self:GetValue("RecoilSpreadPenalty"))
     end
 
