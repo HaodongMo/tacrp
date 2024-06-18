@@ -222,7 +222,7 @@ ATT.Category = "bolt_jammable"
 ATT.SortOrder = 10
 
 ATT.Override_JamFactor = 0 -- This intentionally does not prevent surplus ammo from jamming!
-ATT.Add_RPM = -75
+ATT.Add_RPM = -50
 ATT.Add_Spread = 0.003
 
 ATT.Compatibility = function(wep)
