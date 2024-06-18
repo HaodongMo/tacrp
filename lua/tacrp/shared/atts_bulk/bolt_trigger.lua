@@ -210,10 +210,10 @@ TacRP.LoadAtt(ATT, "bolt_tactical")
 ------------------------------
 ATT = {}
 
-ATT.PrintName = "Refurbished"
-ATT.FullName = "Refurbished Bolt"
+ATT.PrintName = "att.bolt_refurbished.name"
+ATT.FullName = "att.bolt_refurbished.name.full"
 ATT.Icon = Material("entities/tacrp_att_bolt_refurbished.png", "mips smooth")
-ATT.Description = "Fix the weapon's innate reliability with some armory tweaks."
+ATT.Description = "att.bolt_refurbished.desc"
 ATT.Pros = {"att.procon.reliability"}
 ATT.Cons = {"stat.rpm", "stat.spread"}
 
