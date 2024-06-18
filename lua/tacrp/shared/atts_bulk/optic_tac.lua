@@ -155,7 +155,7 @@ ATT.Override_ScopeFOV = 90 / 1.1
 ATT.Override_ScopeLevels = 1
 
 ATT.Add_AimDownSightsTime = -0.03
-ATT.Add_SprintToFireTime = -0.03
+-- ATT.Add_SprintToFireTime = -0.03
 
 TacRP.LoadAtt(ATT, "optic_irons")
 -- #endregion
