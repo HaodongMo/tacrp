@@ -31,7 +31,7 @@ SWEP.BalanceStats = {
         Damage_Min = 14,
 
         BodyDamageMultipliers = {
-            [HITGROUP_HEAD] = 5,
+            [HITGROUP_HEAD] = 4,
             [HITGROUP_CHEST] = 1,
             [HITGROUP_STOMACH] = 1,
             [HITGROUP_LEFTARM] = 1,

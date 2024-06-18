@@ -272,7 +272,7 @@ SWEP.Attachments = {
         WMScale = 0.6,
         Pos_VM = Vector(-0.5, 0.25, 7.25),
         Ang_VM = Angle(90, 0, 0),
-        Pos_WM = Vector(0.05, 8.6, -1.7),
+        Pos_WM = Vector(0.05, 8.9, -1.7),
         Ang_WM = Angle(0, -90, 0),
     },
     [3] = {
