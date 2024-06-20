@@ -82,7 +82,7 @@ function ENT:Detonate()
             Distance = 96,
             IgnoreEntity = self,
             Callback = function(atk, btr, dmginfo)
-                dmginfo:SetDamageType(DMG_AIRBOAT + DMG_BLAST) // airboat damage for helicopters and LVS vehicles
+                dmginfo:SetDamageType(DMG_AIRBOAT + DMG_SNIPER + DMG_BLAST) // airboat damage for helicopters and LVS vehicles
                 dmginfo:SetDamageForce(self:GetForward() * 20000) // LVS uses this to calculate penetration!
             end,
         })
