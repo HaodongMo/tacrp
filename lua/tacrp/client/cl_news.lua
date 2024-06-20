@@ -842,6 +842,69 @@ The heavy weaponry expansion, sporting 10 new weapons including autoshotties, gu
 </ul>
 ]],
     },
+    {
+        Title = "Update 22 / ExoOps Release",
+        Type = "Patch Notes",
+        Date = "2024-06-20",
+        Author = "8Z",
+        Major = true,
+        Summary = "New expansion release!",
+        Contents = [[<body style="font-family:'Myriad Pro';color:white;font-size:125%;">
+
+<h2>ExoOps<i> (New!)</i></h2>
+<p><input type='submit' value='Open Workshop' onclick='console.log("RUNLUA:gui.OpenURL(\"https://steamcommunity.com/sharedfiles/filedetails/?id=3271554982\")")' /></p>
+The third major expansion pack featuring 38 weapons of all kinds.
+<ul>
+<li>Jericho 941
+<li>HK P7
+<li>Walther P99
+<li>SIG P210
+<li>S&W Mk 22 Mod. 0 "Hush Puppy"
+<li>Star Megastar
+<li>Browning Hi-Power
+<li>Chiappa Rhino 20DS
+<li>S&W Model 29 "Satan"
+<li>Dueling Demons (Dual M29 Satan)
+<li>Mauser M712 Schnellfeuer
+<li>Beretta 93R
+<li>Calico M950A
+<li>SIG MPX
+<li>HK MP5SD
+<li>HK MP5K
+<li>Magpul Masada
+<li>Bushmaster ACR
+<li>Colt Model 733
+<li>Enfield L85A2
+<li>HK G36C
+<li>Beretta AR70 (AR70/223)
+<li>FN F2000
+<li>SCAR-L
+<li>AUG A1
+<li>Benelli M3 Super 90
+<li>HK CAWS
+<li>SPAS-15
+<li>MG42
+<li>M60
+<li>Winchester M1873
+<li>FN FAL (Israeli Pattern)
+<li>SIG Stgw 57 (SG 510)
+<li>Howa Type 64
+<li>FN FAL (StG 58)
+<li>SIG MCX SPEAR
+<li>Steyr Scout
+<li>HK PSG-1
+</ul>
+
+<h3>Changelog</h3>
+<ul>
+<li><b>Added:</b> (InterOps) New Weapon: FAMAS G2.
+<li><b>Added:</b> Refurbished Bolt attachment. Only available for weapons that innately jam, will remove jam chance but decrease RPM and accuracy.
+<li><b>Changed:</b> Tweaked some stat and rating displays.
+<li><b>Fixed:</b> LVS damage type interactions.
+<li><b>Rebalance:</b> Minor changes to some weapons and attachments.
+</ul>
+]],
+    },
 }
 TacRP.NewsRead = TacRP.NewsRead or {}
 TacRP.NewsFirstLoad = false
