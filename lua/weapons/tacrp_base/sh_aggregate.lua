@@ -713,7 +713,7 @@ SWEP.StatDisplay = {
         AggregateFunction = function(self, base, val)
             if !self:HasFiremode(-1) then return end
             local valfunc = base and self.GetBaseValue or self.GetValue
-            local cfm = -self:GetCurrentFiremode()
+            local cfm = self:GetFiremodeBurstLength()
             local delay = 60 / ( valfunc(self, "RPM") * valfunc(self, "RPMMultBurst") ) -- delay
             local nerd = 0
             nerd = nerd + (delay * (cfm-1))
