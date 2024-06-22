@@ -204,6 +204,7 @@ SWEP.ShootPitchVariance = 3
 SWEP.QCA_Muzzle = 1
 
 SWEP.MuzzleEffect = "muzzleflash_pistol"
+SWEP.EjectEffect = 1
 
 // anims
 

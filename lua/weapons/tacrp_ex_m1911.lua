@@ -207,6 +207,7 @@ SWEP.DropMagazineTime = 0.2
 SWEP.QCA_Muzzle = 4
 
 SWEP.MuzzleEffect = "muzzleflash_pistol"
+SWEP.EjectEffect = 1
 
 // anims
 

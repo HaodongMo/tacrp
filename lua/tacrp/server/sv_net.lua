@@ -159,7 +159,7 @@ net.Receive("tacrp_drop", function(len, ply)
                 return ""
             end
             ply:DoAnimationEvent(ACT_GMOD_GESTURE_ITEM_DROP)
-            ply:dropDRPWeapon(wep)
+            ply:DropWeapon(wep)
         else
             ply:DropWeapon(wep)
         end
