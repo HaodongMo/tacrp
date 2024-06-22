@@ -32,7 +32,7 @@ hook.Add("PlayerCanPickupWeapon", "TacRP_Pickup", function(ply, wep)
     local limit, weps = TacRP:CheckWeaponLimit(ply:GetWeapons(), wep)
 
     if !limit then
-        if TacRP.ConVars["allowdrop"]:GetBool() and ply:KeyDown(IN_USE) and !ply:KeyDown(IN_WALK) and ply:GetEyeTrace().Entity == wep then
+        if TacRP.ConVars["allowdrop"]:GetBool() and ((ply:KeyDown(IN_USE) and !ply:KeyDown(IN_WALK) and ply:GetEyeTrace().Entity == wep) or wep:GetPos() == ply:GetPos()) then
             if weps[1] == ply:GetActiveWeapon() then
                 timer.Simple(0, function()
                     if IsValid(ply) and IsValid(wep) and wep:GetOwner() == ply then
