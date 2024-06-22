@@ -24,7 +24,7 @@ function TacRP.DoorBust(ent, vel, attacker)
         prop:SetAngles(ent:GetAngles())
         prop:SetSkin(ent:GetSkin() or 0)
         for i = 0, ent:GetNumBodyGroups() do
-            prop:SetBodygroup(i, ent:GetBodygroup(i))
+            prop:SetBodygroup(i, ent:GetBodygroup(i) or 0)
         end
         prop:Spawn()
         prop:SetPhysicsAttacker(attacker, 3)
