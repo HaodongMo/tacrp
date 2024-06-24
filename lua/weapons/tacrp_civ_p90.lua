@@ -87,7 +87,7 @@ SWEP.RPMMultSemi = 0.75
 SWEP.Firemode = 1
 SWEP.Firemodes = false
 
-SWEP.ClipSize = 30
+SWEP.ClipSize = 50
 
 SWEP.HipFireSpreadPenalty = 0.015
 

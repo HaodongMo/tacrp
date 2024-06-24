@@ -96,7 +96,7 @@ SWEP.RPMMultSemi = 0.7
 
 SWEP.RecoilKick = 2
 
-SWEP.ClipSize = 15
+SWEP.ClipSize = 30
 
 SWEP.HipFireSpreadPenalty = 0.018
 

@@ -11,7 +11,7 @@ SWEP.Category = "Tactical RP"
 SWEP.SubCatTier = "3Security"
 SWEP.SubCatType = "5Sporter"
 
-SWEP.Description = "Semi-automatic model of an ubiquitous American rifle.\nUses reduced capacity magazines."
+SWEP.Description = "Semi-automatic model of an ubiquitous American rifle.\n"
 
 SWEP.ViewModel = "models/weapons/tacint/v_m4.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_m4.mdl"
@@ -63,7 +63,7 @@ SWEP.RPM = 650
 SWEP.Firemode = 1
 SWEP.Firemodes = false
 
-SWEP.ClipSize = 15
+SWEP.ClipSize = 30
 
 SWEP.Attachments = {
     [1] = {

@@ -60,7 +60,7 @@ SWEP.Firemodes = false
 
 SWEP.RPM = 600
 
-SWEP.ClipSize = 20
+SWEP.ClipSize = 30
 
 SWEP.Attachments = {
     [1] = {
