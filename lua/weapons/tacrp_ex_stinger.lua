@@ -88,7 +88,7 @@ SWEP.LockOnOutOfSights = false
 SWEP.LockOnInSights = true
 
 SWEP.ShootOffset = Vector(0, 0, 0)
-SWEP.ShootOffsetAngle = Angle(-15, 0, 0)
+SWEP.ShootOffsetAngle = Angle(0, 0, 0)
 
 SWEP.RequireLockOn = true // Cannot shoot without a lock
 
