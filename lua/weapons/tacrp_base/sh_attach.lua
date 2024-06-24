@@ -72,7 +72,7 @@ function SWEP:Detach(slot, silent, suppress)
     local slottbl = self.Attachments[slot]
     if !slottbl.Installed then return end
 
-    if !self:CanDetach(slot) then return end
+    if !self:CanDetach(slot, slottbl.Installed) then return end
 
     TacRP:PlayerGiveAtt(self:GetOwner(), slottbl.Installed, 1)
 
@@ -182,12 +182,12 @@ function SWEP:CanAttach(slot, att)
     return false
 end
 
-function SWEP:CanDetach(slot)
+function SWEP:CanDetach(slot, att)
     local slottbl = self.Attachments[slot]
 
     if slottbl.Integral then return false end
 
-    if !TacRP.CanCustomize(self:GetOwner(), self, att, slot) then return false end
+    if !TacRP.CanCustomize(self:GetOwner(), self, att, slot, true) then return false end
 
     return true
 end

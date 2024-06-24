@@ -189,7 +189,7 @@ function TacRP.NearBench(ply)
     return true
 end
 
-function TacRP.CanCustomize(ply, wep, att, slot)
+function TacRP.CanCustomize(ply, wep, att, slot, detach)
 
     if engine.ActiveGamemode() == "terrortown" then
         local role = ply:GetTraitor() or ply:IsDetective()
@@ -215,7 +215,7 @@ function TacRP.CanCustomize(ply, wep, att, slot)
         end
     end
 
-    local reason = hook.Run("TacRP_CanCustomize", ply, wep, att, slot)
+    local reason = hook.Run("TacRP_CanCustomize", ply, wep, att, slot, detach)
     if reason then
         return false, reason
     end
