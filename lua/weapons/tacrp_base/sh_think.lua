@@ -1,5 +1,6 @@
 function SWEP:Think()
     local owner = self:GetOwner()
+    if !IsValid(owner) then return end
 
     local stop = self:RunHook("Hook_PreThink")
     if stop then return end
