@@ -3,11 +3,11 @@ L = {}
 L["font.1"] = "Myriad Pro"
 L["font.2"] = "HD44780A00 5x8"
 
-L["tier.1"] = "Consumidor"
-L["tier.2"] = "Seguridad"
-L["tier.3"] = "Operador"
-L["tier.4"] = "Élite"
-L["tier.0"] = "Ganga" -- NOTE: how to even translate "Value store" like Walmart?
+L["tier.1"] = "para consumidor"
+L["tier.2"] = "de seguridad"
+L["tier.3"] = "de operador"
+L["tier.4"] = "de élite"
+L["tier.0"] = "de tienda" -- NOTE: how to even translate "Value" from "Value store" like Walmart?
 
 L["tier.spec"] = "Especial"
 L["type.sidearm"] = "Pistola"
@@ -32,7 +32,7 @@ L["type.special_weapon"] = "Arma especial"
 L["cust.rating"] = "Calificación"
 L["cust.stats"] = "Estadísticas"
 L["cust.description"] = "DESCRIPCIÓN:"
-L["cust.type_tier"] = "{tier} de grado {type}"
+L["cust.type_tier"] = "{type} {tier}"
 L["cust.trivia"] = "Curiosidades"
 L["cust.credits"] = "Créditos"
 L["cust.description2"] = "Descripción"
