@@ -51,6 +51,7 @@ function SWEP:PrimaryAttack()
     end
 
     if self:SprintLock(true) then return end
+    if DarkRP and self:GetNWBool("TacRP_PoliceBiocode") and !self:GetOwner():isCP() then return end
     if self:GetSafe() and !self:GetReloading() then self:ToggleSafety(false) return end
     if self:StillWaiting() then return end
 

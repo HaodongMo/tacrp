@@ -53,6 +53,7 @@ function SWEP:ToggleSafety(onoff)
     onoff = onoff or !self:GetSafe()
 
     if onoff and self:DoForceSightsBehavior() then return end
+    if DarkRP and self:GetNWBool("TacRP_PoliceBiocode") and !self:GetOwner():isCP() then onoff = true end
 
     self:SetSafe(onoff)
 
