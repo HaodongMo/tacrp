@@ -378,6 +378,8 @@ function SWEP:PrimaryAttack()
         self:CallOnClient("DoMuzzleLight")
     end
 
+    self:SetCharge(false)
+
     -- Troll
     if self:GetBurstCount() >= 8 and TacRP.ShouldWeFunny() and (self.NextTroll or 0) < CurTime() and math.random() <= 0.05 then
         timer.Simple(math.Rand(0, 0.25), function()
