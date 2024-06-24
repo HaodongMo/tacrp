@@ -30,8 +30,8 @@ SWEP.BalanceStats = {
     [TacRP.BALANCE_SBOX] = {
         Description = "Semi-automatic model of a futuristic PDW. Fine tuned for precision shooting.",
 
-        Damage_Max = 17,
-        Damage_Min = 14,
+        Damage_Max = 18,
+        Damage_Min = 15,
 
         Recoil_Kick = 0.5,
         Spread = 0.001,
@@ -75,16 +75,21 @@ SWEP.BalanceStats = {
 
 SWEP.TTTReplace = {}
 
+SWEP.Damage_Max = 16
+SWEP.Damage_Min = 12
+
 SWEP.Range_Min = 1200
 SWEP.Range_Max = 4000
 
-SWEP.RPM = 600
-SWEP.RPMMultSemi = 0.8
+SWEP.RPM = 750
+SWEP.RPMMultSemi = 0.75
 
 SWEP.Firemode = 1
 SWEP.Firemodes = false
 
 SWEP.ClipSize = 30
+
+SWEP.HipFireSpreadPenalty = 0.015
 
 SWEP.FreeAimMaxAngle = 3.25
 

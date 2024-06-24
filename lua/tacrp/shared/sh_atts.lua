@@ -189,7 +189,12 @@ function TacRP.NearBench(ply)
     return true
 end
 
-function TacRP.CanCustomize(ply, wep, att, slot)
+function TacRP.CanCustomize(ply, wep, att, slot, detach)
+
+    local can, reason = hook.Run("TacRP_CanCustomize", ply, wep, att, slot, detach)
+    if can ~= nil then
+        return can, reason
+    end
 
     if engine.ActiveGamemode() == "terrortown" then
         local role = ply:GetTraitor() or ply:IsDetective()
@@ -211,7 +216,7 @@ function TacRP.CanCustomize(ply, wep, att, slot)
     else
         // check bench
         if TacRP.ConVars["rp_requirebench"]:GetBool() and !TacRP.NearBench(ply) then
-            return false, "Restricted during round"
+            return false, "Requires Customization Bench"
         end
     end
 
