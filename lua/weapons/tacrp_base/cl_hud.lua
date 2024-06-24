@@ -344,22 +344,34 @@ function SWEP:DrawHUDBackground()
         self:DrawHints()
     end
 
+    if !self:GetCustomize() and !TacRP.ConVars["jam_autoclear"]:GetBool() and self:GetJammed() then
+        local text = "[" .. TacRP.GetBindKey("+reload") .. "] " .. TacRP:GetPhrase("hint.unjam")
+        local font = "TacRP_HD44780A00_5x8_4"
+        surface.SetFont(font)
+        local w, h = surface.GetTextSize(text)
+        w = w + TacRP.SS(8)
+        h = h + TacRP.SS(4)
+
+        surface.SetDrawColor(0, 0, 0, 200)
+        TacRP.DrawCorneredBox(ScrW() / 2 - w / 2, ScrH() / 2, w, h)
+
+        draw.SimpleText(text, font, ScrW() / 2, ScrH() / 2 + h / 2, color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+    elseif DarkRP and TacRP.ConVars["rp_biocode_cp"]:GetBool() and self:GetNWBool("TacRP_PoliceBiocode") and !LocalPlayer():isCP() then
+        local text = TacRP:GetPhrase("hint.rp_biocode_cp")
+        local font = "TacRP_HD44780A00_5x8_4"
+        surface.SetFont(font)
+        local w, h = surface.GetTextSize(text)
+        w = w + TacRP.SS(8)
+        h = h + TacRP.SS(4)
+
+        surface.SetDrawColor(0, 0, 0, 200)
+        TacRP.DrawCorneredBox(ScrW() / 2 - w / 2, ScrH() / 2, w, h)
+
+        draw.SimpleText(text, font, ScrW() / 2, ScrH() / 2 + h / 2, color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+    end
+
+
     if !self:GetCustomize() and TacRP.ConVars["hud"]:GetBool() then
-
-        if !TacRP.ConVars["jam_autoclear"]:GetBool() and self:GetJammed() then
-            local text = "[" .. TacRP.GetBindKey("+reload") .. "] " .. TacRP:GetPhrase("hint.unjam")
-            local font = "TacRP_HD44780A00_5x8_4"
-            surface.SetFont(font)
-            local w, h = surface.GetTextSize(text)
-            w = w + TacRP.SS(8)
-            h = h + TacRP.SS(4)
-
-            surface.SetDrawColor(0, 0, 0, 200)
-            TacRP.DrawCorneredBox(ScrW() / 2 - w / 2, ScrH() / 2, w, h)
-
-            draw.SimpleText(text, font, ScrW() / 2, ScrH() / 2 + h / 2, color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
-        end
-
         if TacRP.ConVars["drawhud"]:GetBool() and engine.ActiveGamemode() != "terrortown" then
 
             local w = TacRP.SS(110)

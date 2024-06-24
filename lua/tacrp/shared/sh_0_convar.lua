@@ -117,10 +117,6 @@ local conVars = {
         notify = true,
     },
     {
-        name = "rp_requirebench",
-        default = "0",
-    },
-    {
         name = "true_laser",
         default = "1",
         client = true,
@@ -656,6 +652,20 @@ local conVars = {
         notify = true,
         min = 0,
         max = 1,
+    },
+
+    // Roleplay
+    {
+        name = "rp_requirebench",
+        default = "0",
+        replicated = true,
+        notify = true,
+    },
+    {
+        name = "rp_biocode_cp",
+        default = "0",
+        replicated = true,
+        notify = true,
     },
 
     {

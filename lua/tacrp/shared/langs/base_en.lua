@@ -405,6 +405,7 @@ L["faction.neutral"] = "Non-Aligned" -- non-faction specific
 L["hint.swap"] = "Swap with {weapon}"
 L["hint.pickup"] = "Pick up {weapon}"
 L["hint.unjam"] = "Unjam Weapon"
+L["hint.rp_biocode_cp"] = "Biocoded - Police Use Only"
 
 -- used when tacrp_ammonames 1
 L["ammo.357"] = "Magnum Ammo"

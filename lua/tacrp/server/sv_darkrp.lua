@@ -1,3 +1,5 @@
+if !DarkRP then return end
+
 util.AddNetworkString("tacrp_spawnedwepatts")
 
 hook.Add("onDarkRPWeaponDropped", "TacRP", function(ply, ent, wep)
@@ -65,3 +67,25 @@ local function hack()
 end
 hook.Add("InitPostEntity", "TacRP_SpawnedWeaponHack", hack)
 hack()
+
+hook.Add("PlayerLoadout", "TacRP_PoliceBiocode", function(ply)
+    if !TacRP.ConVars["rp_biocode_cp"]:GetBool() or !ply:isCP() then return end
+    timer.Simple(0.001, function()
+        if !IsValid(ply) then return end
+        local jobTable = ply:getJobTable()
+        for _, v in pairs(jobTable.weapons or {}) do
+            local wep = ply:GetWeapon(v)
+            if IsValid(wep) then
+                wep:SetNWBool("TacRP_PoliceBiocode", true)
+            end
+        end
+    end)
+end)
+
+hook.Add("TacRP_Hook_PreShoot", "TacRP_PoliceBiocode", function(wep)
+    local ply = wep:GetOwner()
+    if !TacRP.ConVars["rp_biocode_cp"]:GetBool() or !ply:IsPlayer() or ply:isCP() then return end
+    if wep:GetNWBool("TacRP_PoliceBiocode") then
+        return true
+    end
+end)
