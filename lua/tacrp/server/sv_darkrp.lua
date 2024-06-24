@@ -19,6 +19,9 @@ hook.Add("onDarkRPWeaponDropped", "TacRP", function(ply, ent, wep)
             ent.Attachments = atts
         end
     end
+    if wep:GetNWBool("TacRP_PoliceBiocode", false) then
+        ent:SetNWBool("TacRP_PoliceBiocode", true)
+    end
 end)
 
 hook.Add("PlayerPickupDarkRPWeapon", "TacRP", function(ply, ent, wep)
@@ -30,9 +33,13 @@ hook.Add("PlayerPickupDarkRPWeapon", "TacRP", function(ply, ent, wep)
         end -- block duplicate pickups
 
         local class = wep:GetClass()
+        local biocoded = ent:GetNWBool("TacRP_PoliceBiocode")
         wep:Remove()
         wep = ply:Give(class, true)
         wep.GaveDefaultAmmo = true -- did DefaultClip kill your father or something, arctic?
+        if biocoded then
+            wep:SetNWBool("TacRP_PoliceBiocode", true)
+        end
 
         if ent.Attachments then
         for k, v in pairs(ent.Attachments) do
@@ -48,6 +55,12 @@ hook.Add("PlayerPickupDarkRPWeapon", "TacRP", function(ply, ent, wep)
         ent:DecreaseAmount()
 
         return true
+    end
+end)
+
+hook.Add("canPocket", "TacRP_PoliceBiocode", function(ply, wep)
+    if wep:GetNWBool("TacRP_PoliceBiocode") then
+        return false, "Cannot pocket a biocoded weapon!"
     end
 end)
 

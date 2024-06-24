@@ -356,7 +356,7 @@ function SWEP:DrawHUDBackground()
         TacRP.DrawCorneredBox(ScrW() / 2 - w / 2, ScrH() / 2, w, h)
 
         draw.SimpleText(text, font, ScrW() / 2, ScrH() / 2 + h / 2, color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
-    elseif DarkRP and TacRP.ConVars["rp_biocode_cp"]:GetBool() and self:GetNWBool("TacRP_PoliceBiocode") and !LocalPlayer():isCP() then
+    elseif DarkRP and TacRP.ConVars["rp_biocode_cp"]:GetBool() and self:GetNWBool("TacRP_PoliceBiocode") then
         local text = TacRP:GetPhrase("hint.rp_biocode_cp")
         local font = "TacRP_HD44780A00_5x8_4"
         surface.SetFont(font)
@@ -364,12 +364,16 @@ function SWEP:DrawHUDBackground()
         w = w + TacRP.SS(8)
         h = h + TacRP.SS(4)
 
-        surface.SetDrawColor(0, 0, 0, 200)
-        TacRP.DrawCorneredBox(ScrW() / 2 - w / 2, ScrH() / 2, w, h)
-
-        draw.SimpleText(text, font, ScrW() / 2, ScrH() / 2 + h / 2, color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+        if !LocalPlayer():isCP() then
+            surface.SetDrawColor(0, 0, 0, 200)
+            TacRP.DrawCorneredBox(ScrW() / 2 - w / 2, ScrH() / 2, w, h)
+            draw.SimpleText(text, font, ScrW() / 2, ScrH() / 2 + h / 2, color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+        elseif self:GetCustomize() then
+            surface.SetDrawColor(0, 0, 0, 200)
+            TacRP.DrawCorneredBox(ScrW() / 2 - w / 2, ScrH() - TacRP.SS(24), w, h)
+            draw.SimpleText(text, font, ScrW() / 2, ScrH() - TacRP.SS(24) + h / 2, color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+        end
     end
-
 
     if !self:GetCustomize() and TacRP.ConVars["hud"]:GetBool() then
         if TacRP.ConVars["drawhud"]:GetBool() and engine.ActiveGamemode() != "terrortown" then
