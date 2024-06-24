@@ -211,8 +211,13 @@ function TacRP.CanCustomize(ply, wep, att, slot)
     else
         // check bench
         if TacRP.ConVars["rp_requirebench"]:GetBool() and !TacRP.NearBench(ply) then
-            return false, "Restricted during round"
+            return false, "Requires Customization Bench"
         end
+    end
+
+    local reason = hook.Run("TacRP_CanCustomize", ply, wep, att, slot)
+    if reason then
+        return false, reason
     end
 
     return true
