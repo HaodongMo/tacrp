@@ -87,6 +87,14 @@ function ENT:PhysicsCollide(data, collider)
             data.HitEntity.TacRPBashSlow = true
         end
 
+        if data.HitEntity:IsPlayer() then
+            local wep = data.HitEntity:GetActiveWeapon()
+            if IsValid(wep) and wep.ArcticTacRP then
+                wep:SetBreath(0)
+                wep:SetOutOfBreath(true)
+            end
+        end
+
         if data.HitEntity:IsPlayer() or data.HitEntity:IsNPC() or data.HitEntity:IsNextBot() then
             if dist >= 1500 then
                 data.HitEntity:EmitSound("tacrp/sandman/pl_impact_stun_range.wav", 100)
