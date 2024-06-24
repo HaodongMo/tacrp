@@ -102,7 +102,7 @@ ATT.Description = "Grenade containing crowd control chemicals that deal lingerin
 ATT.Pros = {"att.procon.crowd"}
 ATT.Cons = {"att.procon.noexp", "att.procon.nonlethal"}
 
-ATT.Category = "ammo_40mm"
+ATT.Category = {"ammo_40mm", "ammo_40mm_civ"}
 
 ATT.SortOrder = 3.5
 
@@ -176,7 +176,7 @@ ATT.Description = ""
 ATT.Pros = {"Infinite ammo"}
 ATT.Cons = {"Impact only"}
 
-ATT.Category = "ammo_40mm"
+ATT.Category = {"ammo_40mm", "ammo_40mm_civ"}
 
 ATT.ShootEnt = "tacrp_proj_40mm_impact"
 ATT.Mult_ShootEntForce = 1
@@ -203,7 +203,7 @@ ATT.Description = "Low velocity grenade made to incapacitate targets with indire
 ATT.Pros = {"att.procon.detdelay", "att.procon.flash"}
 ATT.Cons = {"stat.muzzlevelocity", "stat.damage"}
 
-ATT.Category = "ammo_40mm"
+ATT.Category = {"ammo_40mm", "ammo_40mm_civ"}
 
 ATT.SortOrder = 3
 
@@ -265,7 +265,7 @@ ATT.Description = "Grenade that produces a concealing smokescreen on impact."
 ATT.Pros = {"att.procon.smoke"}
 ATT.Cons = {"att.procon.noexp"}
 
-ATT.Category = "ammo_40mm"
+ATT.Category = {"ammo_40mm", "ammo_40mm_civ"}
 
 ATT.SortOrder = 4
 
