@@ -21,6 +21,7 @@ hook.Add("onDarkRPWeaponDropped", "TacRP", function(ply, ent, wep)
     end
     if wep:GetNWBool("TacRP_PoliceBiocode", false) then
         ent:SetNWBool("TacRP_PoliceBiocode", true)
+        ent.TacRP_PoliceBiocode = true -- NWVars aren't saved in pocket but this is?? But we also need client to know so it's awkward
     end
 end)
 
@@ -42,10 +43,10 @@ hook.Add("PlayerPickupDarkRPWeapon", "TacRP", function(ply, ent, wep)
         end
 
         if ent.Attachments then
-        for k, v in pairs(ent.Attachments) do
-            wep.Attachments[k].Installed = TacRP.Attachments_Index[v]
-        end
-        wep:NetworkWeapon()
+            for k, v in pairs(ent.Attachments) do
+                wep.Attachments[k].Installed = TacRP.Attachments_Index[v]
+            end
+            timer.Simple(0.1, function() if IsValid(wep) then wep:NetworkWeapon() end end)
         end
 
         ent.Attachments = nil -- Don't duplicate attachments
@@ -58,9 +59,21 @@ hook.Add("PlayerPickupDarkRPWeapon", "TacRP", function(ply, ent, wep)
     end
 end)
 
-hook.Add("canPocket", "TacRP_PoliceBiocode", function(ply, wep)
-    if wep:GetNWBool("TacRP_PoliceBiocode") then
-        return false, "Cannot pocket a biocoded weapon!"
+hook.Add("onPocketItemDropped", "TacRP_DarkRP", function(wep, ent, item, id)
+    if ent:GetClass() ~= "spawned_weapon" then return end
+    if ent.TacRP_PoliceBiocode then
+        ent:SetNWBool("TacRP_PoliceBiocode", true)
+    end
+    local atts = ent.Attachments or {}
+    if table.Count(atts) > 0 then
+        net.Start("tacrp_spawnedwepatts")
+            net.WriteUInt(ent:EntIndex(), 12) -- ent won't exist on client when message arrives
+            net.WriteUInt(table.Count(atts), 4)
+            for k, v in pairs(atts) do
+                net.WriteUInt(k, 4)
+                net.WriteUInt(v, TacRP.Attachments_Bits)
+            end
+        net.Broadcast()
     end
 end)
 
@@ -86,17 +99,10 @@ local function hack()
                     local wep = ply:GetWeapon(v)
                     if IsValid(wep) then
                         wep:SetNWBool("TacRP_PoliceBiocode", true)
+                        wep.TacRP_PoliceBiocode = true
                     end
                 end
             end)
-        end)
-        
-        hook.Add("TacRP_Hook_PreShoot", "TacRP_PoliceBiocode", function(wep)
-            local ply = wep:GetOwner()
-            if !TacRP.ConVars["rp_biocode_cp"]:GetBool() or !ply:IsPlayer() or ply:isCP() then return end
-            if wep:GetNWBool("TacRP_PoliceBiocode") then
-                return true
-            end
         end)
     end
 end
