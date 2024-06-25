@@ -12,3 +12,4 @@ ENT.Spawnable                = true
 ENT.Model                    = "models/weapons/tacint/smoke.mdl"
 
 ENT.Ammo = "ti_smoke"
+ENT.GrenadeProxy = "tacrp_nade_smoke"

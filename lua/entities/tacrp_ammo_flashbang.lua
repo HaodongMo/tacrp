@@ -12,3 +12,4 @@ ENT.Spawnable                = true
 ENT.Model                    = "models/weapons/tacint/flashbang.mdl"
 
 ENT.Ammo = "ti_flashbang"
+ENT.GrenadeProxy = "tacrp_nade_flashbang"

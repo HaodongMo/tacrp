@@ -13,3 +13,4 @@ ENT.Model                    = "models/weapons/tacint/smoke.mdl"
 
 ENT.Ammo = "ti_gas"
 ENT.Material = "models/tacint/weapons/w_models/smoke/gas-1"
+ENT.GrenadeProxy = "tacrp_nade_gas"
