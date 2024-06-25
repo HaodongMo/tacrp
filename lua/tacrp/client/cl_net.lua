@@ -1,5 +1,6 @@
 net.Receive("tacrp_networkweapon", function(len)
-    local wpn = net.ReadEntity()
+    local wpn_index = net.ReadUInt(13)
+    local wpn = Entity(wpn_index)
 
     -- When the server immediately calls NetworkWeapon on a new weapon,
     -- the client entity may not be valid or correct instantly.
@@ -17,6 +18,7 @@ net.Receive("tacrp_networkweapon", function(len)
         -- Wait until entity properly exists to pass on attachment info.
         -- Usually won't take more than 1 tick but ping may cause issues
         timer.Create(tname, 0, 100, function()
+            local wpn = Entity(wpn_index)
             if !IsValid(wpn) or !wpn.ArcticTacRP then return end
 
             wpn:ReceiveWeapon(ids)
