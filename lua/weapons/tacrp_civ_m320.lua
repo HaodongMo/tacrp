@@ -11,7 +11,7 @@ SWEP.Category = "Tactical RP (Special)"
 SWEP.SubCatTier = "9Special"
 SWEP.SubCatType = "6Launcher"
 
-SWEP.Description = "Law Enforcement version of the M320 suitable only for less-lethal, low pressure loads. Fires beanbag rounds."
+SWEP.Description = "Law Enforcement version of the M320 sanctioned for less-lethal munitions. Fires beanbag rounds that incapacitate on direct hit."
 
 SWEP.Trivia_Caliber = "40mm Grenades"
 SWEP.Trivia_Manufacturer = "Heckler & Koch"
@@ -42,7 +42,9 @@ SWEP.Range_Max = 2000
 SWEP.Range_Min = 800
 
 SWEP.ShootEnt = "tacrp_proj_40mm_beanbag"
-SWEP.ShootEntForce = 6000
+SWEP.ShootEntForce = 7000
+
+SWEP.Spread = 0.01
 
 SWEP.BodyDamageMultipliers = {
     [HITGROUP_HEAD] = 1,
