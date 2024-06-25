@@ -8,7 +8,8 @@ function TacRP.DoorBust(ent, vel, attacker)
     ent:Fire("Open", "", 0)
     ent:Fire("SetSpeed", oldSpeed, 0.3)
 
-    if vel:Length() >= 1 and ent:GetPhysicsObject():IsValid() and cvar == 1 then -- ent:GetClass() == "prop_door_rotating" and
+    -- I still can't figure out what exactly crashes on brush doors
+    if vel:Length() >= 1 and ent:GetPhysicsObject():IsValid() and cvar == 1 and ent:GetClass() == "prop_door_rotating" then
         if cvar == 0 or ent.TacRP_DoorBusted then return end
         ent.TacRP_DoorBusted = true
 
