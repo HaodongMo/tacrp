@@ -63,14 +63,6 @@ function ENT:Impact(data, collider)
         end
     else
         local ang = data.OurOldVelocity:Angle()
-        local fx = EffectData()
-        fx:SetOrigin(data.HitPos)
-        fx:SetNormal(-ang:Forward())
-        fx:SetAngles(-ang)
-        util.Effect("ManhackSparks", fx)
-        if SERVER then
-            self:EmitSound(istable(self.Sound_MeleeHit) and self.Sound_MeleeHit[math.random(1, #self.Sound_MeleeHit)] or self.Sound_MeleeHit, 80, 110, 1)
-        end
 
         -- leave a bullet hole. Also may be able to hit things it can't collide with (like stuck C4)
         self:FireBullets({
@@ -86,6 +78,18 @@ function ENT:Impact(data, collider)
             Callback = function(atk, tr, dmginfo)
                 dmginfo:SetDamageType(DMG_SLASH)
                 dmginfo:SetInflictor(attacker)
+                if tr.HitSky then
+                    SafeRemoveEntity(self)
+                else
+                    local fx = EffectData()
+                    fx:SetOrigin(data.HitPos)
+                    fx:SetNormal(-ang:Forward())
+                    fx:SetAngles(-ang)
+                    util.Effect("ManhackSparks", fx)
+                    if SERVER then
+                        self:EmitSound(istable(self.Sound_MeleeHit) and self.Sound_MeleeHit[math.random(1, #self.Sound_MeleeHit)] or self.Sound_MeleeHit, 80, 110, 1)
+                    end
+                end
             end
         })
     end
@@ -95,7 +99,7 @@ function ENT:Impact(data, collider)
         self:GetPhysicsObject():Sleep()
 
         timer.Simple(0, function()
-            if tgt:IsWorld() or (IsValid(tgt) and (!(tgt:IsNPC() or tgt:IsPlayer()) or tgt:Health() > 0)) then
+            if IsValid(self) and tgt:IsWorld() or (IsValid(tgt) and (!(tgt:IsNPC() or tgt:IsPlayer()) or tgt:Health() > 0)) then
                 self:SetSolid(SOLID_NONE)
                 self:SetMoveType(MOVETYPE_NONE)
 
@@ -129,7 +133,7 @@ function ENT:Impact(data, collider)
                         self:SetParent(tgt)
                     end
                 end
-            else
+            elseif IsValid(self) then
                 self:GetPhysicsObject():SetVelocity(data.OurOldVelocity * 0.75)
                 self:GetPhysicsObject():SetAngleVelocity(data.OurOldAngularVelocity)
                 self.Armed = false

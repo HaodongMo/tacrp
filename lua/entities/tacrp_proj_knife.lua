@@ -140,17 +140,8 @@ function ENT:Impact(data, collider)
         TacRP.CancelBodyDamage(tgt, dmg, atktr.HitGroup)
         tgt:DispatchTraceAttack(dmg, atktr)
     else
-        local ang = data.OurOldVelocity:Angle()
-        local fx = EffectData()
-        fx:SetOrigin(data.HitPos)
-        fx:SetNormal(-ang:Forward())
-        fx:SetAngles(-ang)
-        util.Effect("ManhackSparks", fx)
-        if SERVER then
-            self:EmitSound(istable(self.Sound_MeleeHit) and self.Sound_MeleeHit[math.random(1, #self.Sound_MeleeHit)] or self.Sound_MeleeHit, 80, 110, 1)
-        end
-
         -- leave a bullet hole. Also may be able to hit things it can't collide with (like stuck C4)
+        local ang = data.OurOldVelocity:Angle()
         self:FireBullets({
             Attacker = attacker,
             Damage = self.Damage,
@@ -163,6 +154,18 @@ function ENT:Impact(data, collider)
             IgnoreEntity = self,
             Callback = function(atk, tr, dmginfo)
                 dmginfo:SetInflictor(IsValid(self.Inflictor) and self.Inflictor or self)
+                if tr.HitSky then
+                    SafeRemoveEntity(self)
+                else
+                    local fx = EffectData()
+                    fx:SetOrigin(data.HitPos)
+                    fx:SetNormal(-ang:Forward())
+                    fx:SetAngles(-ang)
+                    util.Effect("ManhackSparks", fx)
+                    if SERVER then
+                        self:EmitSound(istable(self.Sound_MeleeHit) and self.Sound_MeleeHit[math.random(1, #self.Sound_MeleeHit)] or self.Sound_MeleeHit, 80, 110, 1)
+                    end
+                end
             end
         })
     end
@@ -175,7 +178,7 @@ function ENT:Impact(data, collider)
         self:GetPhysicsObject():Sleep()
 
         timer.Simple(0, function()
-            if tgt:IsWorld() or (IsValid(tgt) and (!(tgt:IsNPC() or tgt:IsPlayer()) or tgt:Health() > 0)) then
+            if IsValid(self) and tgt:IsWorld() or (IsValid(tgt) and (!(tgt:IsNPC() or tgt:IsPlayer()) or tgt:Health() > 0)) then
                 self:SetSolid(SOLID_NONE)
                 self:SetMoveType(MOVETYPE_NONE)
 
@@ -209,7 +212,7 @@ function ENT:Impact(data, collider)
                         self:SetParent(tgt)
                     end
                 end
-            else
+            elseif IsValid(self) then
                 self:GetPhysicsObject():SetVelocityInstantaneous(data.OurNewVelocity * 0.5)
                 self:GetPhysicsObject():SetAngleVelocityInstantaneous(data.OurOldAngularVelocity * 0.5)
             end
