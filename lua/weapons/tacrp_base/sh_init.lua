@@ -191,6 +191,9 @@ function SWEP:Holster(wep)
         self:GetOwner():SetFOV(0, 0.1)
         self:SetLastProceduralFireTime(0)
 
+        self:GetOwner():DoAnimationEvent(ACT_GMOD_GESTURE_MELEE_SHOVE_1HAND)
+        self:SetShouldHoldType()
+
     end
 end
 
@@ -305,6 +308,11 @@ end
 function SWEP:SetShouldHoldType()
     if self:GetOwner():IsNPC() then
         self:SetHoldType(self:GetValue("HoldTypeNPC") or self:GetValue("HoldType"))
+        return
+    end
+
+    if self:GetHolsterTime() > CurTime() then
+        self:SetHoldType("passive")
         return
     end
 
