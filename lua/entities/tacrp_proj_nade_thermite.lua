@@ -20,9 +20,9 @@ ENT.ExplodeUnderwater = true
 ENT.Delay = 2
 
 ENT.ExplodeSounds = {
-    "TacRP/weapons/grenade/frag_explode-1.wav",
-    "TacRP/weapons/grenade/frag_explode-2.wav",
-    "TacRP/weapons/grenade/frag_explode-3.wav",
+    "^TacRP/weapons/grenade/frag_explode-1.wav",
+    "^TacRP/weapons/grenade/frag_explode-2.wav",
+    "^TacRP/weapons/grenade/frag_explode-3.wav",
 }
 
 function ENT:Detonate()
