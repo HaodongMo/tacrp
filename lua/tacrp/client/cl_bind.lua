@@ -118,3 +118,17 @@ end)
 concommand.Add("-tacrp_tactical", function()
     TacRP.KeyPressed_Tactical = false
 end)
+
+concommand.Add("tacrp_dev_listanims", function()
+    local wep = LocalPlayer():GetActiveWeapon()
+    if !wep then return end
+    local vm = LocalPlayer():GetViewModel()
+    if !vm then return end
+    local alist = vm:GetSequenceList()
+
+    for i = 0, #alist do
+        MsgC(clr_b, i, " --- ")
+        MsgC(color_white, "\t", alist[i], "\n     [")
+        MsgC(clr_r, "\t", vm:SequenceDuration(i), "\n")
+    end
+end)
