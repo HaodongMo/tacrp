@@ -152,7 +152,10 @@ if CLIENT then
 
         if !limit then
             text = "[" .. TacRP.GetBindKey("+use") .. "] "
-                    .. TacRP:GetPhrase("hint.swap", {weapon = TacRP:GetPhrase("wep." .. weps[1]:GetClass() .. "name") or weps[1].PrintName})
+                    .. TacRP:GetPhrase("hint.swap", {
+                        weapon = TacRP:GetPhrase("wep." .. weps[1]:GetClass() .. "name") or weps[1].PrintName,
+                        weapon2 = TacRP:GetPhrase("wep." .. wep:GetClass() .. "name") or wep.PrintName
+                    })
         elseif TacRP.ConVars["pickup_use"]:GetBool() then
             text = "[" .. TacRP.GetBindKey("+use") .. "] "
             .. TacRP:GetPhrase("hint.pickup", {weapon = TacRP:GetPhrase("wep." .. wep:GetClass() .. "name") or wep.PrintName})

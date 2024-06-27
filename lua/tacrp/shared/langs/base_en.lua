@@ -402,7 +402,7 @@ L["faction.coalition"] = "Coalition" -- "Counter-Terrorists"
 L["faction.militia"] = "Militia" -- "Terrorists"
 L["faction.neutral"] = "Non-Aligned" -- non-faction specific
 
-L["hint.swap"] = "Swap with {weapon}"
+L["hint.swap"] = "Swap {weapon} for {weapon2}"
 L["hint.pickup"] = "Pick up {weapon}"
 L["hint.unjam"] = "Unjam Weapon"
 L["hint.rp_biocode_cp"] = "Biocoded - Police Use Only"
