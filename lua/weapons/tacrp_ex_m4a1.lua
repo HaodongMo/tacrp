@@ -214,8 +214,8 @@ SWEP.AnimationTranslationTable = {
 }
 
 SWEP.ProceduralIronFire = {
-    vm_pos = Vector(0, -1, -0.1),
-    vm_ang = Angle(0, 0.4, 0),
+    vm_pos = Vector(0, -1.5, -0.1),
+    vm_ang = Angle(0, 0.1, 0),
     t = 0.25,
     tmax = 0.25,
 }
@@ -252,7 +252,7 @@ SWEP.AttachmentElements = {
 SWEP.Attachments = {
     [1] = {
         PrintName = "Optic",
-        Category = {"optic_cqb", "optic_medium", "optic_sniper", "optic_ar"},
+        Category = {"optic_cqb_verytall", "optic_medium", "optic_sniper", "optic_ar"},
         InstalledElements = {"sights"},
         Bone = "ValveBiped.m4_rootbone",
         WMBone = "Box01",
