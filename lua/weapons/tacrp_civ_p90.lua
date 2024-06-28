@@ -12,7 +12,7 @@ SWEP.SubCatTier = "3Security"
 SWEP.SubCatType = "5Sporter"
 
 SWEP.Description = "Semi-automatic variation of a futuristic PDW.\nUses reduced capacity magazines."
-SWEP.Description_Quote = ""
+SWEP.Description_Quote = nil
 
 SWEP.Trivia_Caliber = "5.7x28mm"
 SWEP.Trivia_Manufacturer = "FN Herstal"
