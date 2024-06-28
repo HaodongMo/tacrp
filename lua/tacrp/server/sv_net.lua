@@ -115,12 +115,7 @@ net.Receive("tacrp_receivepreset", function(len, ply)
     wpn:ReceivePreset()
 end)
 
-net.Receive("tacrp_drop", function(len, ply)
-    if !TacRP.ConVars["allowdrop"]:GetBool() then return end
-    local wep = ply:GetActiveWeapon()
-    if !IsValid(wep) or !wep.ArcticTacRP then return end
-    if !ply:Alive() then return end
-
+function TacRP.DropWeapon(ply, wep)
     if wep:GetValue("PrimaryGrenade") then
         -- Grenades don't have a clip size. this would mean players can constantly generate and drop nade sweps that do nothing.
         local nade = TacRP.QuickNades[wep:GetValue("PrimaryGrenade")]
@@ -165,4 +160,13 @@ net.Receive("tacrp_drop", function(len, ply)
             ply:DropWeapon(wep)
         end
     end
+end
+
+net.Receive("tacrp_drop", function(len, ply)
+    if !TacRP.ConVars["allowdrop"]:GetBool() then return end
+    local wep = ply:GetActiveWeapon()
+    if !IsValid(wep) or !wep.ArcticTacRP then return end
+    if !ply:Alive() then return end
+
+    TacRP.DropWeapon(ply, wep)
 end)

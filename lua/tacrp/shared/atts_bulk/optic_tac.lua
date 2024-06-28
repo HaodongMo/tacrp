@@ -329,6 +329,41 @@ TacRP.LoadAtt(ATT, "optic_rmr")
 -- #endregion
 
 ------------------------------
+-- #region optic_rmr_rifle
+------------------------------
+ATT = {}
+
+ATT.PrintName = "RMR"
+ATT.Icon = Material("entities/tacrp_att_optic_rmr.png", "mips smooth")
+ATT.Description = "Low profile optic sight."
+ATT.Pros = {"att.sight.1"}
+
+ATT.Model = "models/weapons/tacint/addons/optic_rmr_hq.mdl"
+ATT.Scale =  1
+ATT.ModelOffset = Vector(0, -0.025, -0.4)
+
+ATT.Category = "optic_cqb"
+ATT.InvAtt = "optic_rmr"
+
+ATT.SortOrder = 1
+
+ATT.Override_Scope = true
+ATT.Override_ScopeOverlay = false
+ATT.Override_ScopeFOV = 90 / 1.1
+ATT.Override_ScopeLevels = 1
+ATT.Override_ScopeHideWeapon = false
+
+ATT.SightPos = Vector(0, -10, 0.45)
+ATT.SightAng = Angle(0, 0, 0)
+
+ATT.Holosight = Material("tacrp/hud/rds.png", "additive")
+
+ATT.Holosight:SetInt("$flags", 128)
+
+TacRP.LoadAtt(ATT, "optic_rmr_rifle")
+-- #endregion
+
+------------------------------
 -- #region optic_shortdot
 ------------------------------
 ATT = {}

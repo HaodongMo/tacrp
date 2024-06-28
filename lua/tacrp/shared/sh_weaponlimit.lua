@@ -40,7 +40,7 @@ hook.Add("PlayerCanPickupWeapon", "TacRP_Pickup", function(ply, wep)
                     end
                 end)
             end
-            ply:DropWeapon(weps[1], wep:GetPos())
+            TacRP.DropWeapon(ply, weps[1])
             return
         else
             return false
@@ -96,7 +96,7 @@ hook.Add("PlayerGiveSWEP", "TacRP_Pickup", function(ply, wepname, weptbl)
                 if mode == 1 then
                     ply:StripWeapon(e:GetClass())
                 else
-                    ply:DropWeapon(e, nil, ply:GetForward() * 50)
+                    TacRP.DropWeapon(ply, e)
                 end
                 amt = amt - 1
                 if amt <= 0 then break end
@@ -144,7 +144,14 @@ if CLIENT then
 
     hook.Add("HUDPaint", "TacRP_WeaponLimit", function()
         local wep = LocalPlayer():GetEyeTrace().Entity
-        if !IsValid(wep) or !wep.ArcticTacRP or wep:GetPos():DistToSqr(EyePos()) >= 96 * 96 then return end
+        if !IsValid(wep) or wep:GetPos():DistToSqr(EyePos()) >= 96 * 96 then return end
+        local wepclass = wep:GetClass()
+        if wep.IsSpawnedWeapon then
+            wepclass = wep:GetWeaponClass()
+            wep = weapons.Get(wepclass)
+        elseif !wep.ArcticTacRP then
+            return
+        end
 
         local limit, weps = TacRP:CheckWeaponLimit(LocalPlayer():GetWeapons(), wep)
 
@@ -154,11 +161,11 @@ if CLIENT then
             text = "[" .. TacRP.GetBindKey("+use") .. "] "
                     .. TacRP:GetPhrase("hint.swap", {
                         weapon = TacRP:GetPhrase("wep." .. weps[1]:GetClass() .. "name") or weps[1].PrintName,
-                        weapon2 = TacRP:GetPhrase("wep." .. wep:GetClass() .. "name") or wep.PrintName
+                        weapon2 = TacRP:GetPhrase("wep." .. wepclass .. "name") or wep.PrintName
                     })
         elseif TacRP.ConVars["pickup_use"]:GetBool() then
             text = "[" .. TacRP.GetBindKey("+use") .. "] "
-            .. TacRP:GetPhrase("hint.pickup", {weapon = TacRP:GetPhrase("wep." .. wep:GetClass() .. "name") or wep.PrintName})
+            .. TacRP:GetPhrase("hint.pickup", {weapon = TacRP:GetPhrase("wep." .. wepclass .. "name") or wep.PrintName})
         end
 
         if text then
