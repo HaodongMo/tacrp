@@ -57,6 +57,28 @@ local function genselecta( c, host, slotnum, slottab )
 
 	local atts = TacRP.GetAttsForCats( slottab.Category or "" )
 
+	table.sort(atts, function(a, b)
+		a = a or ""
+		b = b or ""
+
+		if a == "" or b == "" then return true end
+
+		local atttbl_a = TacRP.GetAttTable(a)
+		local atttbl_b = TacRP.GetAttTable(b)
+
+		local order_a = 0
+		local order_b = 0
+
+		order_a = atttbl_a.SortOrder or order_a
+		order_b = atttbl_b.SortOrder or order_b
+
+		if order_a == order_b then
+			return (atttbl_a.PrintName or "") < (atttbl_b.PrintName or "")
+		end
+
+		return order_a < order_b
+	end)
+
 	for _, att in pairs( atts ) do
 		local ati = TacRP.GetAttTable( att )
 		local button = sp:Add( "DButton" )
@@ -474,30 +496,30 @@ local pages = {
 		Initialize = function( page, par, c )
 			local s = c.s
 
-			local p_left = page:Add( "DPanel" )
-			p_left:SetTall( par:GetTall() )
-			p_left:SetWide( par:GetWide() )
-			p_left:SetMouseInputEnabled( true )
-			p_left.Paint = rt
-			local gapper = s(24+128+24)--+32+24+24)
-			function p_left:Paint( w, h )
+			local p_top = page:Add( "DPanel" )
+			p_top:SetTall( par:GetTall() )
+			p_top:SetWide( par:GetWide() )
+			p_top:SetMouseInputEnabled( true )
+			p_top.Paint = rt
+			local gapper = s(24+64+24)--+32+24+24)
+			function p_top:Paint( w, h )
 				surface.SetDrawColor( 25, 0, 0, 32 )
-				surface.DrawRect( 0, 0, gapper, h )
+				surface.DrawRect( 0, 0, w, gapper )
 				return true
 			end
-			function p_left:Think()
-				p_left:SetX( page.SlidePer * (gapper or self:GetWide()) )
+			function p_top:Think()
+				p_top:SetY( page.SlidePer * (gapper or self:GetTall()) )
 			end
 
 			do
-				local header = p_left:Add( "DPanel" )
-				header:SetSize( s(128), c.sh-s(40) )
+				local header = p_top:Add( "DPanel" )
+				header:SetSize( c.sw-s(48), s(64) )
 				header:SetPos( s(24), s(24) )
 
 				function header:Paint( w, h )
 					Gleemax( s, w, h )
 
-					qd( s, "Range", "C2_1", s(4), s(4), color_white )
+					qd( s, "DAMAGE AT RANGE", "C2_4", s(4), s(4), color_white )
 
 					return true
 				end
