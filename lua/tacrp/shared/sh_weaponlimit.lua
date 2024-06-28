@@ -144,7 +144,14 @@ if CLIENT then
 
     hook.Add("HUDPaint", "TacRP_WeaponLimit", function()
         local wep = LocalPlayer():GetEyeTrace().Entity
-        if !IsValid(wep) or !wep.ArcticTacRP or wep:GetPos():DistToSqr(EyePos()) >= 96 * 96 then return end
+        if !IsValid(wep) or wep:GetPos():DistToSqr(EyePos()) >= 96 * 96 then return end
+        local wepclass = wep:GetClass()
+        if wep.IsSpawnedWeapon then
+            wepclass = wep:GetWeaponClass()
+            wep = weapons.Get(wepclass)
+        elseif !wep.ArcticTacRP then
+            return
+        end
 
         local limit, weps = TacRP:CheckWeaponLimit(LocalPlayer():GetWeapons(), wep)
 
@@ -154,11 +161,11 @@ if CLIENT then
             text = "[" .. TacRP.GetBindKey("+use") .. "] "
                     .. TacRP:GetPhrase("hint.swap", {
                         weapon = TacRP:GetPhrase("wep." .. weps[1]:GetClass() .. "name") or weps[1].PrintName,
-                        weapon2 = TacRP:GetPhrase("wep." .. wep:GetClass() .. "name") or wep.PrintName
+                        weapon2 = TacRP:GetPhrase("wep." .. wepclass .. "name") or wep.PrintName
                     })
         elseif TacRP.ConVars["pickup_use"]:GetBool() then
             text = "[" .. TacRP.GetBindKey("+use") .. "] "
-            .. TacRP:GetPhrase("hint.pickup", {weapon = TacRP:GetPhrase("wep." .. wep:GetClass() .. "name") or wep.PrintName})
+            .. TacRP:GetPhrase("hint.pickup", {weapon = TacRP:GetPhrase("wep." .. wepclass .. "name") or wep.PrintName})
         end
 
         if text then
