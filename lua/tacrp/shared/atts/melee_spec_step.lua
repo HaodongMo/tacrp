@@ -8,6 +8,7 @@ ATT.Category = {"melee_spec"}
 ATT.SortOrder = 1
 
 ATT.Airdash = true
+ATT.NoFallDamage = true
 
 -- ATT.Add_MeleeRechargeRate = 0.5
 
@@ -138,5 +139,5 @@ end)
 
 hook.Add("GetFallDamage", "TacRP_Quickstep", function(ply, speed)
     local wep = ply:GetActiveWeapon()
-    if IsValid(wep) and wep.ArcticTacRP and wep:GetValue("Airdash") then return true end
+    if IsValid(wep) and wep.ArcticTacRP and (wep:GetValue("NoFallDamage")) then return true end
 end)

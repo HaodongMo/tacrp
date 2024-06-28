@@ -50,13 +50,18 @@ end
 
 ATT.Hook_PostThink = function(wep)
     local canhold = hold(wep)
+
+    local ft = FrameTime()
+
+    if !IsFirstTimePredicted() then return end
+
+
     if !wep:GetOutOfBreath() then
         if canhold and wep:GetHoldBreathAmount() > 0.1 then
-            if IsFirstTimePredicted() then
-                wep:SetHoldBreathAmount(wep:GetHoldBreathAmount() - 0.1)
-                wep:SetOutOfBreath(true)
-                wep:SetNextIdle(math.huge)
-            end
+            wep:SetHoldBreathAmount(wep:GetHoldBreathAmount() - 0.1)
+            wep:SetOutOfBreath(true)
+            wep:SetHoldingBreath(false)
+            wep:SetNextIdle(math.huge)
             wep:PlayAnimation("idle_defend", 1)
             wep:SetHoldType("magic")
         else
@@ -64,9 +69,7 @@ ATT.Hook_PostThink = function(wep)
         end
     else
         if !canhold then
-            if IsFirstTimePredicted() then
                 wep:SetOutOfBreath(false)
-            end
             wep:SetNextIdle(CurTime())
             wep:SetShouldHoldType()
             wep:SetNextSecondaryFire(CurTime() + 0.1)

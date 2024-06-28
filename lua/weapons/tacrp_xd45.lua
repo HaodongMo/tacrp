@@ -9,7 +9,7 @@ SWEP.AbbrevName = "XD-45"
 SWEP.Category = "Tactical RP"
 
 SWEP.SubCatTier = "1Elite"
-SWEP.SubCatType = "2Machine Pistol"
+SWEP.SubCatType = "3Machine Pistol"
 
 SWEP.Description = "Automatic machine pistol with incredible close range power."
 
@@ -197,12 +197,17 @@ SWEP.ShootPitchVariance = 2.5 // amount to vary pitch by each shot
 SWEP.QCA_Muzzle = 1
 
 SWEP.MuzzleEffect = "muzzleflash_1"
+SWEP.EjectEffect = 1
 
 // anims
 
 SWEP.AnimationTranslationTable = {
     ["deploy"] = "draw",
-    ["fire"] = {"shoot1", "shoot2", "shoot3"},
+    ["fire1"] = "shoot1",
+    ["fire2"] = "shoot2",
+    ["fire3"] = "shoot3",
+    ["fire4"] = "shoot4",
+    ["fire5"] = {"shoot5", "shoot5L", "shoot5R"},
     ["blind_fire"] = {"blind_shoot1", "blind_shoot2", "blind_shoot3"},
     ["melee"] = {"melee1", "melee2"}
 }
@@ -243,6 +248,7 @@ SWEP.ProceduralIronFire = {
 SWEP.ShootTimeMult = 0.5
 
 SWEP.LastShot = true
+SWEP.NoIdle = true
 
 // attachments
 
@@ -277,7 +283,7 @@ SWEP.Attachments = {
     },
     [3] = {
         PrintName = "Tactical",
-        Category = "tactical",
+        Category = {"tactical", "tactical_zoom", "tactical_ebullet"},
         Bone = "xd45_rig.xd45_ROOT",
         WMBone = "Box01",
         AttachSound = "tacrp/weapons/flashlight_on.wav",

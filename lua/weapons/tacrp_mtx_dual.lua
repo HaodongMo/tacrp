@@ -8,7 +8,7 @@ SWEP.PrintName = "Dual MTX"
 SWEP.Category = "Tactical RP"
 
 SWEP.SubCatTier = "1Elite"
-SWEP.SubCatType = "1Sidearm"
+SWEP.SubCatType = "3Akimbo"
 
 SWEP.Description = "An indulgent pair of high capacity, high damage, high quality compact pistols.\nWith firepower like this, who needs aiming?"
 
@@ -195,6 +195,7 @@ SWEP.ShootPitchVariance = 2.5 // amount to vary pitch by each shot
 SWEP.QCA_Muzzle = 4
 
 SWEP.MuzzleEffect = "muzzleflash_pistol"
+SWEP.EjectEffect = 1
 
 // anims
 
@@ -216,7 +217,7 @@ SWEP.EffectsAlternate = true
 SWEP.Attachments = {
     [1] = {
         PrintName = "Tactical",
-        Category = "tactical",
+        Category = {"tactical", "tactical_ebullet"},
         Bone = "ValveBiped.mtx_root2",
         WMBone = "Box01",
         AttachSound = "TacRP/weapons/flashlight_on.wav",

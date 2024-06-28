@@ -2,9 +2,11 @@ function SWEP:ShouldDrawCrosshair()
     if !TacRP.ConVars["crosshair"]:GetBool() then
         return self:DoLowerIrons() and self:GetSightAmount() > 0 and !self:GetPeeking() and !self:GetReloading()
     end
-    return  !self:GetReloading() and !self:GetCustomize() and !self:GetSafe()
+    return !self:GetReloading() and !self:GetCustomize() and !self:GetSafe() and self:GetBlindFireMode() == TacRP.BLINDFIRE_NONE
         and !(self:SprintLock() and !self.DrawCrosshairInSprint)
-        and (self:GetSightAmount() <= 0.5 or self:GetPeeking() or self:DoLowerIrons())
+        and !(self:DoForceSightsBehavior() and !self:GetPeeking())
+        and !self:GetJammed()
+        and (self:GetSightAmount() <= 0.5 or (self:GetPeeking() and !self:GetValue("ThermalCamera")) or self:DoLowerIrons())
         and !(self:GetValue("CanQuickNade") and tobool(self:GetOwner():GetInfo("tacrp_nademenu")) and self:GetOwner():KeyDown(IN_GRENADE2))
         and !(self:GetValue("CanBlindFire") and tobool(self:GetOwner():GetInfo("tacrp_blindfiremenu")) and (self:GetOwner():KeyDown(IN_ZOOM) or self:GetOwner().TacRPBlindFireDown))
 end
@@ -108,9 +110,9 @@ function SWEP:DoDrawCrosshair(x, y)
     if dev then
 
         if self:StillWaiting() then
-            surface.SetDrawColor(150, 150, 150, 255)
+            surface.SetDrawColor(150, 150, 150, 150)
         else
-            surface.SetDrawColor(255, 50, 50, 255)
+            surface.SetDrawColor(255, 50, 50, 150)
         end
         surface.DrawLine(x2, y2 - 256, x2, y2 + 256)
         surface.DrawLine(x2 - 256, y2, x2 + 256, y2)
@@ -264,7 +266,7 @@ function SWEP:DrawBottomBar(x, y, w, h)
             surface.DrawTexturedRect(x + w - TacRP.SS(41), y + h - nsg - TacRP.SS(1), nsg, nsg)
         end
 
-        local nextnadetxt = TacRP.GetBind("grenade2")
+        local nextnadetxt = TacRP.GetBind("+grenade2")
 
         surface.SetTextColor(col)
         surface.SetFont("TacRP_HD44780A00_5x8_4")
@@ -326,6 +328,12 @@ function SWEP:DrawHUDBackground()
         self:DoCornershot()
     end
 
+    if self:GetValue("ThermalCamera") then
+        self:DoThermalCam()
+    end
+
+    self:DrawLockOnHUD()
+
     if self:GetValue("TacticalDraw") and self:GetTactical() then
         self:GetValue("TacticalDraw")(self)
     end
@@ -336,8 +344,38 @@ function SWEP:DrawHUDBackground()
         self:DrawHints()
     end
 
-    if !self:GetCustomize() and TacRP.ConVars["hud"]:GetBool() then
+    if !self:GetCustomize() and !TacRP.ConVars["jam_autoclear"]:GetBool() and self:GetJammed() then
+        local text = "[" .. TacRP.GetBindKey("+reload") .. "] " .. TacRP:GetPhrase("hint.unjam")
+        local font = "TacRP_HD44780A00_5x8_4"
+        surface.SetFont(font)
+        local w, h = surface.GetTextSize(text)
+        w = w + TacRP.SS(8)
+        h = h + TacRP.SS(4)
 
+        surface.SetDrawColor(0, 0, 0, 200)
+        TacRP.DrawCorneredBox(ScrW() / 2 - w / 2, ScrH() / 2, w, h)
+
+        draw.SimpleText(text, font, ScrW() / 2, ScrH() / 2 + h / 2, color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+    elseif DarkRP and TacRP.ConVars["rp_biocode_cp"]:GetBool() and self:GetNWBool("TacRP_PoliceBiocode") then
+        local text = TacRP:GetPhrase("hint.rp_biocode_cp")
+        local font = "TacRP_HD44780A00_5x8_4"
+        surface.SetFont(font)
+        local w, h = surface.GetTextSize(text)
+        w = w + TacRP.SS(8)
+        h = h + TacRP.SS(4)
+
+        if !LocalPlayer():isCP() then
+            surface.SetDrawColor(0, 0, 0, 200)
+            TacRP.DrawCorneredBox(ScrW() / 2 - w / 2, ScrH() / 2, w, h)
+            draw.SimpleText(text, font, ScrW() / 2, ScrH() / 2 + h / 2, color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+        elseif self:GetCustomize() then
+            surface.SetDrawColor(0, 0, 0, 200)
+            TacRP.DrawCorneredBox(ScrW() / 2 - w / 2, ScrH() - TacRP.SS(24), w, h)
+            draw.SimpleText(text, font, ScrW() / 2, ScrH() - TacRP.SS(24) + h / 2, color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+        end
+    end
+
+    if !self:GetCustomize() and TacRP.ConVars["hud"]:GetBool() then
         if TacRP.ConVars["drawhud"]:GetBool() and engine.ActiveGamemode() != "terrortown" then
 
             local w = TacRP.SS(110)
@@ -348,17 +386,19 @@ function SWEP:DrawHUDBackground()
             surface.SetDrawColor(0, 0, 0, 150)
             TacRP.DrawCorneredBox(x, y, w, h, col)
 
+            local name_txt = TacRP:GetPhrase("wep." .. self:GetClass() .. ".name") or self:GetValue("PrintName")
+
             surface.SetFont("TacRP_HD44780A00_5x8_8")
-            local tw = surface.GetTextSize(self.PrintName)
+            local tw = surface.GetTextSize(name_txt)
             surface.SetTextPos(x + TacRP.SS(3), y + TacRP.SS(1))
             if tw > w then
                 surface.SetFont("TacRP_HD44780A00_5x8_6")
-                tw = surface.GetTextSize(self.PrintName)
+                tw = surface.GetTextSize(name_txt)
             elseif tw > w - TacRP.SS(3) then
                 surface.SetTextPos(x + TacRP.SS(1.5), y + TacRP.SS(1))
             end
             surface.SetTextColor(col)
-            surface.DrawText(self.PrintName)
+            surface.DrawText(name_txt)
 
             local ammotype = self:GetValue("PrimaryGrenade") and (TacRP.QuickNades[self:GetValue("PrimaryGrenade")].Ammo) or self:GetValue("Ammo")
             local clips = math.min(math.ceil(self:GetOwner():GetAmmoCount(ammotype)), 999)
@@ -842,4 +882,88 @@ function SWEP:CustomAmmoDisplay()
         self.AmmoDisplay.PrimaryAmmo = self:GetInfiniteAmmo() and 9999 or self:Ammo1()
     end
     return self.AmmoDisplay
+end
+
+local col2 = Color(50, 255, 50)
+
+function SWEP:DrawLockOnHUD()
+    local owner = self:GetOwner()
+    local dir = owner:GetAimVector(true)
+
+    local tr = util.TraceLine({
+        start = owner:GetShootPos(),
+        endpos = owner:GetShootPos() + (dir * 50000),
+        mask = MASK_SHOT,
+        filter = owner
+    })
+    cam.Start3D()
+        local w2s = tr.HitPos:ToScreen()
+        sx = math.Round(w2s.x)
+        sy = math.Round(w2s.y)
+    cam.End3D()
+
+    local ss = ScreenScale(1)
+
+    if (self:GetScopeLevel() > 0 and self:GetValue("LockOnInSights")) or (self:GetScopeLevel() <= 0 and self:GetValue("LockOnOutOfSights")) then
+        surface.SetDrawColor(col2)
+
+        render.OverrideBlend(true, BLEND_ONE, BLEND_ONE, BLENDFUNC_ADD)
+
+        local trueFOV = self:WidescreenFix(self.TacRPLastFOV)
+
+        local circle = (ScrH() / trueFOV) * math.deg(math.acos(self:GetValue("LockOnAngle"))) * 1.5 + ss
+        local offset = 0
+
+        for i = 0, 15 do
+            local angle = (i / 8) * math.pi
+            local x1 = sx + math.cos(angle + offset) * circle
+            local y1 = sy + math.sin(angle + offset) * circle
+            local x2 = sx + math.cos(angle + offset + (math.pi * 1 / 8)) * circle
+            local y2 = sy + math.sin(angle + offset + (math.pi * 1 / 8)) * circle
+            surface.DrawLine(x1, y1, x2, y2)
+        end
+
+        render.OverrideBlend(false, BLEND_ONE, BLEND_ONE, BLENDFUNC_ADD)
+    end
+
+    if !IsValid(self:GetLockOnEntity()) then return end
+
+    local pos = self:GetLockOnEntity():WorldSpaceCenter()
+
+    cam.Start3D()
+    local x, y = pos:ToScreen().x, pos:ToScreen().y
+    cam.End3D()
+
+    surface.SetDrawColor(col2)
+
+    render.OverrideBlend(true, BLEND_ONE, BLEND_ONE, BLENDFUNC_ADD)
+
+    local cross = ss * 10
+    local offset = (1 / 4) * math.pi
+
+    for i = 0, 3 do
+        local angle = (i / 2) * math.pi
+        local x1 = x + math.cos(angle + offset) * cross
+        local y1 = y + math.sin(angle + offset) * cross
+        local x2 = x + math.cos(angle + offset + (math.pi * 1 / 2)) * cross
+        local y2 = y + math.sin(angle + offset + (math.pi * 1 / 2)) * cross
+        surface.DrawLine(x1, y1, x2, y2)
+    end
+
+    if CurTime() >= self:GetValue("LockOnTime") + self:GetLockOnStartTime() then
+        -- Target locked, draw a diamond
+        local offset2 = 0
+
+        for i = 0, 5 do
+            local cross2 = cross * 0.7
+            local angle = (i / 2) * math.pi
+            local x1 = x + math.cos(angle + offset2) * cross2
+            local y1 = y + math.sin(angle + offset2) * cross2
+            local x2 = x + math.cos(angle + offset2 + (math.pi * 1 / 2)) * cross2
+            local y2 = y + math.sin(angle + offset2 + (math.pi * 1 / 2)) * cross2
+            surface.DrawLine(x1, y1, x2, y2)
+        end
+    end
+
+    render.OverrideBlend(false, BLEND_ONE, BLEND_ONE, BLENDFUNC_ADD)
 end

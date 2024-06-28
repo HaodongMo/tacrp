@@ -67,6 +67,10 @@ function SWEP:ScopeToggle(setlevel)
         self:SetLastScopeTime(CurTime())
     end
 
+    if self:GetValue("AlwaysPeek") then
+        self:SetPeeking(true)
+    end
+
     -- HACK: In singleplayer, SWEP:Think is called on client but IsFirstTimePredicted is NEVER true.
     -- This causes ScopeToggle to NOT be called on client in singleplayer...
     -- GenerateAutoSight needs to run clientside or scopes will break. Good old CallOnClient it is.
@@ -108,14 +112,11 @@ function SWEP:IsInScope()
 end
 
 function SWEP:DoScope()
+    local h = ScrH()
+    local w = ScrW()
     if self:IsInScope() then
-
         local img = self:GetValue("ScopeOverlay")
-
         if img then
-            local h = ScrH()
-            local w = ScrW()
-
             -- assume players have a screen that is wider than it is tall because... that's stupid
 
             local pos = self:GetOwner():EyePos()
@@ -163,6 +164,12 @@ function SWEP:DoScope()
             -- end
         end
     end
+
+    local blur_hook = self:RunHook("Hook_BlurScope")
+    if blur_hook then
+        if !istable(blur_hook) then blur_hook = {1, 1} end
+        drawBlurAt(0, 0, w, h, blur_hook[0], blur_hook[1])
+    end
 end
 
 function SWEP:GetSightDelta()
@@ -173,18 +180,25 @@ function SWEP:SetSightDelta(d)
     self:SetSightAmount(d)
 end
 
+function SWEP:CanSight()
+    if self:GetReloading() and !TacRP.ConVars["ads_reload"]:GetBool() then return false end
+
+    return true
+end
+
 function SWEP:ThinkSights()
     if !IsValid(self:GetOwner()) then return end
 
     local ftp = IsFirstTimePredicted()
+    local ftsp = IsFirstTimePredicted() or !game.SinglePlayer()
 
-    if ftp and self:GetOwner():KeyDown(IN_USE) and self:GetOwner():KeyPressed(IN_ATTACK2) then
+    if self:GetOwner():KeyDown(IN_USE) and self:GetOwner():KeyPressed(IN_ATTACK2) and ftsp then
         self:ToggleSafety()
         return
     end
 
     if ftp and self:GetValue("Bipod") and self:GetOwner():KeyPressed(IN_ATTACK2)
-            and !self:GetInBipod() and self:CanBipod() then
+            and !self:GetInBipod() and self:CanBipod() and ftsp then
         self:EnterBipod()
     end
 
@@ -196,13 +210,15 @@ function SWEP:ThinkSights()
 
     local adst = self:GetAimDownSightsTime()
 
-    if sighted then
-        if self:GetSprintLockTime() > CurTime() then
-            adst = adst + self:GetSprintToFireTime()
+    if ftp or game.SinglePlayer() then
+        if sighted then
+            if self:GetSprintLockTime() > CurTime() then
+                adst = adst + self:GetSprintToFireTime()
+            end
+            amt = math.Approach(amt, 1, FT / adst)
+        else
+            amt = math.Approach(amt, 0, FT / adst)
         end
-        amt = math.Approach(amt, 1, FT / adst)
-    else
-        amt = math.Approach(amt, 0, FT / adst)
     end
 
     self:SetSightDelta(amt)
@@ -215,12 +231,14 @@ function SWEP:ThinkSights()
     local toggle = self:GetOwner():GetInfoNum("tacrp_toggleaim", 0) == 1
     local press, down = self:GetOwner():KeyPressed(IN_ATTACK2), self:GetOwner():KeyDown(IN_ATTACK2)
 
-    if (!self:GetValue("Scope") or self:DoOldSchoolScopeBehavior()) and down then
+    if (!self:GetValue("Scope") or self:DoOldSchoolScopeBehavior()) and !self.NoSecondaryMelee and down then
         self:Melee()
     elseif sighted and ((toggle and press and ftp) or (!toggle and !down)) then
         self:ScopeToggle(0)
-    elseif !sighted and ((toggle and press and ftp) or (!toggle and down)) then
+    elseif !sighted and ((toggle and press and ftp) or (!toggle and down)) and self:CanSight() then
         self:ScopeToggle(1)
+    elseif sighted and !self:CanSight() then
+        self:ScopeToggle(0)
     end
 end
 
@@ -237,6 +255,10 @@ function SWEP:GetMagnification()
 
         mag = 90 / self:GetValue("ScopeFOV")
 
+        if self:GetValue("VariableZoom") and self:GetTactical() and self:GetValue("Scope") and (self:GetValue("ScopeOverlay") or self:GetValue("Holosight")) then
+            mag = 90 / self:GetValue("VariableZoomFOV")
+        end
+
         mag = Lerp(level / self:GetValue("ScopeLevels"), 1, mag)
     end
 
@@ -252,12 +274,6 @@ function SWEP:AdjustMouseSensitivity()
 end
 
 function SWEP:ThinkPeek()
-    local down = input.IsKeyDown(input.GetKeyCode(input.LookupBinding("menu_context") or "???"))
-    if !TacRP.ConVars["togglepeek"]:GetBool() and self:GetPeeking() ~= down then
-        net.Start("tacrp_togglepeek")
-        net.WriteBool(down)
-        net.SendToServer()
-    end
 end
 
 function SWEP:GetCCIP(pos, ang)

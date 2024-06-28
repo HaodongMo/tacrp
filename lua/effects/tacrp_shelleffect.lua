@@ -69,13 +69,6 @@ function EFFECT:Init(data)
 
     self:SetNoDraw(true)
 
-
-    -- if !LocalPlayer():ShouldDrawLocalPlayer() and ent:GetOwner() == LocalPlayer() then
-    --     self:SetNoDraw(true)
-    -- end
-
-    -- table.insert(ent.EjectedShells, self)
-
     self.Sounds = typetbl.Sounds
 
     local pb_vert = 2
@@ -105,35 +98,40 @@ function EFFECT:Init(data)
     phys:AddAngleVelocity(VectorRand() * 100)
     phys:AddAngleVelocity(ang:Up() * -2500 * math.Rand(0.75, 1.25))
 
-    -- local emitter = ParticleEmitter(origin)
+    local smoke = true
 
-    -- for i = 1, 3 do
-    --     local particle = emitter:Add("particles/smokey", origin + (dir * 2))
+    if smoke and IsValid(mdl) then
+        local pcf = CreateParticleSystem(mdl, "port_smoke", PATTACH_POINT_FOLLOW, att)
 
-    --     if (particle) then
-    --         particle:SetVelocity(VectorRand() * 10 + (dir * i * math.Rand(48, 64)) + plyvel)
-    --         particle:SetLifeTime(0)
-    --         particle:SetDieTime(math.Rand(0.05, 0.15))
-    --         particle:SetStartAlpha(math.Rand(40, 60))
-    --         particle:SetEndAlpha(0)
-    --         particle:SetStartSize(0)
-    --         particle:SetEndSize(math.Rand(18, 24))
-    --         particle:SetRoll(math.rad(math.Rand(0, 360)))
-    --         particle:SetRollDelta(math.Rand(-1, 1))
-    --         particle:SetLighting(true)
-    --         particle:SetAirResistance(96)
-    --         particle:SetGravity(Vector(-7, 3, 20))
-    --         particle:SetColor(150, 150, 150)
-    --     end
-    -- end
+        if IsValid(pcf) then
+            pcf:StartEmission()
+        end
+
+        local smkpcf = CreateParticleSystem(self, "shellsmoke", PATTACH_ABSORIGIN_FOLLOW, 0)
+
+        if IsValid(smkpcf) then
+            smkpcf:StartEmission()
+        end
+
+        if self.VMContext then
+            table.insert(ent.PCFs, pcf)
+            table.insert(ent.PCFs, smkpcf)
+
+            pcf:SetShouldDraw(false)
+            smkpcf:SetShouldDraw(false)
+        end
+    end
 
     self.SpawnTime = CurTime()
 end
 
-function EFFECT:PhysicsCollide()
+function EFFECT:PhysicsCollide(colData)
     if self.AlreadyPlayedSound then return end
+    local phys = self:GetPhysicsObject()
+    phys:SetVelocityInstantaneous(colData.HitNormal * -150)
 
     sound.Play(self.Sounds[math.random(#self.Sounds)], self:GetPos(), 65, 100, 1)
+    self:StopSound("Default.ImpactHard")
     self.VMContext = false
     self:SetNoDraw(false)
 
@@ -142,6 +140,7 @@ end
 
 function EFFECT:Think()
     if self:GetVelocity():Length() > 0 then self.SpawnTime = CurTime() end
+    self:StopSound("Default.ScrapeRough")
 
     if (self.SpawnTime + self.ShellTime) <= CurTime() then
         if !IsValid(self) then return end

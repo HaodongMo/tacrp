@@ -1,6 +1,6 @@
 function SWEP:DoHolosight(mdl)
     if TacRP.OverDraw then return end
-    -- if self:GetOwner() != LocalPlayer() then return end
+    if self:GetSightAmount() <= 0 then return end
 
     local ref = 64
 
@@ -42,6 +42,10 @@ function SWEP:DoHolosight(mdl)
         pos = pos + dir * 9000
 
         -- cam.Start3D()
+
+        local eyedist = WorldToLocal(mdl:GetPos(), mdl:GetAngles(), EyePos(), EyeAngles()).x
+
+        render.DepthRange(0, 0.005 + (0.0005 * eyedist / 20))
 
         render.SetMaterial(img)
         render.DrawQuadEasy(pos, -dir, 512, 512, Color(255, 255, 255), 180)

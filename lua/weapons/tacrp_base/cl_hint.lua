@@ -42,20 +42,25 @@ function SWEP:GetHintCapabilities()
     end
     -- hopefully you don't need me to tell you how to shoot a gun
 
+    local bind_customize = "+menu_context"
+    if TacRP.GetKeyIsBound("+tacrp_customize") then
+        bind_customize = "+tacrp_customize"
+    end
+
     if self:GetScopeLevel() != 0 then
         if TacRP.ConVars["togglepeek"]:GetBool() then
-            self.CachedCapabilities["+menu_context"] = {so = 2, str = "Toggle Peek"}
+            self.CachedCapabilities[bind_customize] = {so = 2, str = "Toggle Peek"}
         else
-            self.CachedCapabilities["+menu_context"] = {so = 2, str = "Peek"}
+            self.CachedCapabilities[bind_customize] = {so = 2, str = "Peek"}
         end
 
         if self:CanHoldBreath() then
             self.CachedCapabilities["+speed"] = {so = 2.1, str = "Hold Breath"}
         end
     elseif #self.Attachments > 0 then
-        self.CachedCapabilities["+menu_context"] = {so = 1, str = "Customize"}
+        self.CachedCapabilities[bind_customize] = {so = 1, str = "Customize"}
     else
-        self.CachedCapabilities["+menu_context"] = {so = 1, str = "Inspect"}
+        self.CachedCapabilities[bind_customize] = {so = 1, str = "Inspect"}
     end
 
     if self:GetFiremodeAmount() > 1 and !self:GetSafe() then
@@ -80,11 +85,16 @@ function SWEP:GetHintCapabilities()
     end
 
     if self:GetValue("CanToggle") and TacRP.ConVars["toggletactical"]:GetBool() then
+        local tactical_text = self:GetValue("CustomTacticalHint") or ("Toggle " .. (self:GetValue("TacticalName") or "Tactical"))
+        local bind = nil
+        if TacRP.GetKeyIsBound("+tacrp_tactical") then
+            bind = "+tacrp_tactical"
+        end
         if TacRP.ConVars["flashlight_alt"]:GetBool() then
-            self.CachedCapabilities["+walk/impulse 100"] = {so = 31, str = "Toggle " .. (self:GetValue("TacticalName") or "Tactical")}
+            self.CachedCapabilities[bind or "+walk/impulse 100"] = {so = 31, str = tactical_text}
             self.CachedCapabilities["impulse 100"] = {so = 32, str = "Suit Flashlight"}
         else
-            self.CachedCapabilities["impulse 100"] = {so = 31, str = "Toggle " .. (self:GetValue("TacticalName") or "Tactical")}
+            self.CachedCapabilities[bind or "impulse 100"] = {so = 31, str = tactical_text}
             self.CachedCapabilities["+walk/impulse 100"] = {so = 32, str = "Suit Flashlight"}
         end
     end

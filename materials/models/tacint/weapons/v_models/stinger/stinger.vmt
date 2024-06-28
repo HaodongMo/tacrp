@@ -1,0 +1,27 @@
+
+VertexLitGeneric
+{
+
+	$baseTexture models/tacint/weapons/v_models/stinger/stinger_d
+	$bumpmap models/tacint/weapons/v_models/stinger/stinger_b
+	$detail models/tacint/weapons/v_models/stinger/stinger_de
+
+	$detailscale 1
+	$detailblendfactor 0.2
+	$detailblendmode 1
+
+	$normalmapalphaenvmapmask 1
+	$phong 1
+	$phongboost "0.600000"
+	$phongfresnelranges "[.5 10 35]"
+	$phongexponent 40
+	$phongalbedotint 1
+	$rimlight 0
+	$rimlightexponent 55
+	$rimlightboost "0.300000"
+	$halflambert 0
+	$envmapfresnel 0
+	$envmapfresnelminmaxexp "[0 0 0]"
+	$envmaptint "[.03 .03 .03]"
+	$envmapsaturation 1
+}

@@ -24,3 +24,5 @@ ENT.CollisionSoundsSoft = {
     "physics/metal/metal_box_impact_soft2.wav",
     "physics/metal/metal_box_impact_soft3.wav",
 }
+
+ENT.GrenadeProxy = false

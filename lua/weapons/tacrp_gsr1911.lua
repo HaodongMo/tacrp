@@ -5,10 +5,11 @@ AddCSLuaFile()
 
 // names and stuff
 SWEP.PrintName = "SIG 1911 TACOPS" // The model isn't actually a GSR + TACOPS sounds so badass
+SWEP.AbbrevName = "SIG 1911"
 SWEP.Category = "Tactical RP"
 
 SWEP.SubCatTier = "3Security"
-SWEP.SubCatType = "1Sidearm"
+SWEP.SubCatType = "1Pistol"
 
 SWEP.Description = "High damage pistol with low range and capacity.\nA tactical evolution, or some would call devolution, of a venerable classic."
 
@@ -57,8 +58,6 @@ SWEP.BalanceStats = {
             [HITGROUP_RIGHTLEG] = 0.75,
             [HITGROUP_GEAR] = 0.9
         },
-
-        ReloadTimeMult = 1.05 * 1.25,
     },
     [TacRP.BALANCE_PVE] = {
         Damage_Max = 15,
@@ -104,8 +103,8 @@ SWEP.BodyDamageMultipliers = {
 
 SWEP.Firemode = 1
 
-SWEP.RPM = 420
-SWEP.RPMMultSemi = 0.8
+SWEP.RPM = 400
+SWEP.RPMMultSemi = 0.75
 
 SWEP.Spread = 0.005
 SWEP.RecoilSpreadPenalty = 0.006
@@ -201,6 +200,7 @@ SWEP.ShootPitchVariance = 2.5 // amount to vary pitch by each shot
 SWEP.QCA_Muzzle = 4
 
 SWEP.MuzzleEffect = "muzzleflash_pistol"
+SWEP.EjectEffect = 1
 
 // anims
 
@@ -279,7 +279,7 @@ SWEP.Attachments = {
     },
     [3] = {
         PrintName = "Tactical",
-        Category = "tactical",
+        Category = {"tactical", "tactical_zoom", "tactical_ebullet"},
         Bone = "ValveBiped.GSR1911_rootbone",
         WMBone = "Box01",
         AttachSound = "TacRP/weapons/flashlight_on.wav",

@@ -5,6 +5,7 @@ AddCSLuaFile()
 
 // names and stuff
 SWEP.PrintName = "Daewoo K1A"
+SWEP.AbbrevName = "K1A"
 SWEP.Category = "Tactical RP"
 
 SWEP.SubCatTier = "4Consumer"
@@ -193,8 +194,7 @@ SWEP.AnimationTranslationTable = {
     ["fire1"] = "fire1_M",
     ["fire2"] = "fire2_M",
     ["fire3"] = "fire3_M",
-    ["fire4"] = "fire4_M",
-    ["fire5"] = "fire5_M",
+    ["fire4"] = {"fire4_M", "fire4_L", "fire4_R"},
     ["melee"] = {"melee1", "melee2"}
 }
 
@@ -255,7 +255,7 @@ SWEP.Attachments = {
     },
     [3] = {
         PrintName = "Tactical",
-        Category = "tactical",
+        Category = {"tactical", "tactical_zoom", "tactical_ebullet"},
         Bone = "ValveBiped._ROOT_K1a",
         WMBone = "Box01",
         AttachSound = "tacrp/weapons/flashlight_on.wav",

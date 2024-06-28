@@ -8,9 +8,10 @@ SWEP.PrintName = "Glock 17"
 SWEP.Category = "Tactical RP" // "Tactical RP (Extras)"
 
 SWEP.SubCatTier = "4Consumer"
-SWEP.SubCatType = "1Sidearm"
+SWEP.SubCatType = "1Pistol"
 
 SWEP.Description = "Polymer pistol with larger-than-standard capacity and a fast fire rate."
+SWEP.Description_Quote = "Does not show up on airport metal detectors."
 
 SWEP.Trivia_Caliber = "9x19mm"
 SWEP.Trivia_Manufacturer = "Glock Ges.m.b.H"
@@ -52,8 +53,6 @@ SWEP.BalanceStats = {
             [HITGROUP_RIGHTLEG] = 0.75,
             [HITGROUP_GEAR] = 0.9
         },
-
-        ReloadTimeMult = 1.25 * 1.25,
     },
     [TacRP.BALANCE_PVE] = {
         Damage_Max = 7,
@@ -195,6 +194,7 @@ SWEP.ShootPitchVariance = 2.5 // amount to vary pitch by each shot
 SWEP.QCA_Muzzle = 1
 
 SWEP.MuzzleEffect = "muzzleflash_pistol"
+SWEP.EjectEffect = 1
 
 // anims
 
@@ -273,12 +273,12 @@ SWEP.Attachments = {
         WMScale = 0.6,
         Pos_VM = Vector(-0.5, 0.25, 7.25),
         Ang_VM = Angle(90, 0, 0),
-        Pos_WM = Vector(0.05, 8.6, -1.7),
+        Pos_WM = Vector(0.05, 8.9, -1.7),
         Ang_WM = Angle(0, -90, 0),
     },
     [3] = {
         PrintName = "Tactical",
-        Category = "tactical",
+        Category = {"tactical", "tactical_zoom", "tactical_ebullet"},
         Bone = "ValveBiped.p2000_rootbone",
         WMBone = "Box01",
         AttachSound = "tacrp/weapons/flashlight_on.wav",

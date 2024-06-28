@@ -10,9 +10,15 @@ function SWEP:StillWaiting(cust, reload)
 end
 
 function SWEP:SprintLock(shoot)
-    if (shoot or !self:CanShootInSprint())
-            and (self:GetSprintLockTime() > CurTime()
-            or self:GetIsSprinting()) then
+    if self:GetSprintLockTime() > CurTime() or self:GetIsSprinting() or self:ShouldLowerWeapon() then
+        return true
+    end
+
+    if shoot and self:DoForceSightsBehavior() and (self:GetSprintDelta() > 0 or self:GetSightDelta() < 0.75) and !self:GetBlindFire() then
+        return true
+    end
+
+    if self:GetValue("CannotHipFire") and self:GetSightAmount() < 1 and !self:GetBlindFire() then
         return true
     end
 
@@ -32,11 +38,11 @@ function SWEP:PrimaryAttack()
         return
     end
 
-    if self:GetJammed() then return end
+    -- if self:GetJammed() then return end
     if self:GetCurrentFiremode() < 0 and self:GetBurstCount() >= -self:GetCurrentFiremode() then return end
 
     if self:GetReloading() and self:GetValue("ShotgunReload") then
-        if TacRP.ConVars["reload_sg_cancel"]:GetBool() then
+        if TacRP.ConVars["reload_sg_cancel"]:GetBool() and !self:GetValue("ShotgunFullCancel") then
             self:CancelReload(false)
             self:Idle()
         else
@@ -44,11 +50,14 @@ function SWEP:PrimaryAttack()
         end
     end
 
-    if self:SprintLock() then return end
+    if self:SprintLock(true) then return end
+    if DarkRP and self:GetNWBool("TacRP_PoliceBiocode") and !self:GetOwner():isCP() then return end
     if self:GetSafe() and !self:GetReloading() then self:ToggleSafety(false) return end
     if self:StillWaiting() then return end
 
-    if self:Clip1() < self:GetValue("AmmoPerShot") then
+    if self:GetValue("RequireLockOn") and !(IsValid(self:GetLockOnEntity()) and CurTime() > self:GetLockOnStartTime() + self:GetValue("LockOnTime")) then return end
+
+    if self:Clip1() < self:GetValue("AmmoPerShot") or self:GetJammed() then
         local ret = self:RunHook("Hook_PreDryfire")
         if ret != true then
             self.Primary.Automatic = false
@@ -68,14 +77,8 @@ function SWEP:PrimaryAttack()
     if util.SharedRandom("tacRP_shootChance", 0, 1) <= self:GetJamChance(false) then
         local ret = self:RunHook("Hook_PreJam")
         if ret != true then
-            -- self:TakePrimaryAmmo(self:GetValue("AmmoPerShot"))
             if self:GetBurstCount() == 0 then -- dryfire anim is snapping so don't interrupt fire anim for it
                 self.Primary.Automatic = false
-                -- if self:GetBlindFire() then
-                --     self:PlayAnimation("blind_dryfire")
-                -- else
-                --     self:PlayAnimation("dryfire")
-                -- end
             end
             self:EmitSound(self:GetValue("Sound_Jam"), 75, 100, 1, CHAN_ITEM)
             self:SetBurstCount(0)
@@ -187,8 +190,8 @@ function SWEP:PrimaryAttack()
         self:EmitSound(sshoot, self:GetValue("Vol_Shoot"), self:GetValue("Pitch_Shoot") + util.SharedRandom("TacRP_sshoot", -pvar, pvar), self:GetValue("Loudness_Shoot"), CHAN_WEAPON)
     end
 
-
     local delay = 60 / self:GetRPM()
+    -- local delay = 60 / self:GetRPM()
 
     local curatt = self:GetNextPrimaryFire()
     local diff = CurTime() - curatt
@@ -234,7 +237,6 @@ function SWEP:PrimaryAttack()
     local tr = self:GetValue("TracerNum")
 
     local shootent = self:GetValue("ShootEnt")
-
 
     if IsFirstTimePredicted() then
 
@@ -360,7 +362,7 @@ function SWEP:PrimaryAttack()
             damage:SetAttacker(self:GetOwner())
             damage:SetInflictor(self)
             damage:SetDamage(self:GetValue("Damage_Max") * self:GetValue("Num") * self:GetConfigDamageMultiplier())
-            damage:SetDamageType(self:IsShotgun() and DMG_BUCKSHOT or DMG_BULLET)
+            damage:SetDamageType(self:GetValue("DamageType") or self:IsShotgun() and DMG_BUCKSHOT or DMG_BULLET)
             damage:SetDamagePosition(self:GetMuzzleOrigin())
             damage:SetDamageForce(dir:Forward() * self:GetValue("Num"))
 
@@ -375,6 +377,18 @@ function SWEP:PrimaryAttack()
         self:DoMuzzleLight()
     elseif game.SinglePlayer() then
         self:CallOnClient("DoMuzzleLight")
+    end
+
+    self:SetCharge(false)
+
+    -- Troll
+    if self:GetBurstCount() >= 8 and TacRP.ShouldWeFunny(true) and (self.NextTroll or 0) < CurTime() and math.random() <= 0.02 then
+        timer.Simple(math.Rand(0, 0.25), function()
+            if IsValid(self) then
+                self:EmitSound("tacrp/discord-notification.wav", nil, 100, math.Rand(0.1, 0.5), CHAN_BODY)
+            end
+        end)
+        self.NextTroll = CurTime() + 180
     end
 
     self:RunHook("Hook_PostShoot")
@@ -444,6 +458,12 @@ function SWEP:GetShotgunPattern(i, d)
     return x, y
 end
 
+local doorclasses = {
+    ["func_door_rotating"] = true,
+    ["prop_door_rotating"] = true,
+    ["prop_door_rotating_checkpoint"] = true
+}
+
 function SWEP:AfterShotFunction(tr, dmg, range, penleft, alreadypenned, forced)
     if !forced and !IsFirstTimePredicted() and !game.SinglePlayer() then return end
 
@@ -482,6 +502,10 @@ function SWEP:AfterShotFunction(tr, dmg, range, penleft, alreadypenned, forced)
             dmg:SetDamageType(DMG_AIRBOAT)
             penleft = 0
         end
+
+        if self:GetValue("DamageType") == DMG_BURN then
+            tr.Entity:Ignite(1, 64)
+        end
     end
 
     if self:GetValue("ExplosiveDamage") > 0 then
@@ -501,10 +525,11 @@ function SWEP:AfterShotFunction(tr, dmg, range, penleft, alreadypenned, forced)
     end
 
     if SERVER and IsValid(tr.Entity) and !tr.Entity.TacRP_DoorBusted
-            and string.find(tr.Entity:GetClass(), "door") and self:GetValue("DoorBreach") then
+            and doorclasses[tr.Entity:GetClass()] and self:GetValue("DoorBreach") then
         if !tr.Entity.TacRP_BreachThreshold or CurTime() - tr.Entity.TacRP_BreachThreshold[1] > 0.1 then
             tr.Entity.TacRP_BreachThreshold = {CurTime(), 0}
         end
+
         tr.Entity.TacRP_BreachThreshold[2] = tr.Entity.TacRP_BreachThreshold[2] + dmg:GetDamage()
         if tr.Entity.TacRP_BreachThreshold[2] > (self:GetValue("DoorBreachThreshold") or 100) then
             tr.Entity:EmitSound("ambient/materials/door_hit1.wav", 80, math.Rand(95, 105))
@@ -576,6 +601,8 @@ function SWEP:GetShootDir(nosway)
     -- dir:RotateAroundAxis(r, oa.r)
     dir:RotateAroundAxis(r, -oa.p)
 
+    dir = dir + self:GetValue("ShootOffsetAngle")
+
     return dir
 end
 
@@ -601,7 +628,16 @@ function SWEP:ShootRocket(dir)
     if isfunction(rocket.SetWeapon) then
         rocket:SetWeapon(self)
     end
+    if self:GetOwner():IsNPC() then
+        rocket.LockOnEntity = self:GetOwner():GetTarget()
+    else
+        if IsValid(self:GetLockOnEntity()) and CurTime() >= self:GetValue("LockOnTime") + self:GetLockOnStartTime() then
+            rocket.LockOnEntity = self:GetLockOnEntity()
+        end
+    end
+    self:RunHook("Hook_PreShootEnt", rocket)
     rocket:Spawn()
+    self:RunHook("Hook_PostShootEnt", rocket)
 
     local phys = rocket:GetPhysicsObject()
 
@@ -629,7 +665,7 @@ function SWEP:GetSpread(baseline)
         spread = spread + Lerp(self:GetSightAmount() - (self:GetPeeking() and self:GetValue("PeekPenaltyFraction") or 0), hippenalty, 0)
     end
 
-    if !TacRP.ConVars["altrecoil"]:GetBool() then
+    if !self:UseAltRecoil() then
         spread = spread + (self:GetRecoilAmount() * self:GetValue("RecoilSpreadPenalty"))
     end
 

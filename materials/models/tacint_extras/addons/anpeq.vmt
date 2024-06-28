@@ -1,0 +1,7 @@
+"VertexLitGeneric"
+{
+	"$baseTexture" "models\tacint_extras\addons\anpeq"
+	"$bumpmap" "models\tacint_extras\addons\anpeq_n"
+	"$envmap" "env_cubemap"
+	"$envmaptint" "[ 0.02 0.02 0.02 ]"
+}

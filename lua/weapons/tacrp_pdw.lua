@@ -26,8 +26,11 @@ SWEP.Slot = 2
 
 SWEP.BalanceStats = {
     [TacRP.BALANCE_SBOX] = {
-        Damage_Max = 22,
-        Damage_Min = 9,
+        Damage_Max = 20,
+        Damage_Min = 10,
+
+        Range_Min = 1000,
+        Range_Max = 3000,
 
         RecoilKick = 5,
     },
@@ -76,7 +79,7 @@ SWEP.ArmorPenetration = 0.7
 SWEP.BodyDamageMultipliers = {
     [HITGROUP_HEAD] = 4,
     [HITGROUP_CHEST] = 1,
-    [HITGROUP_STOMACH] = 1,
+    [HITGROUP_STOMACH] = 1.25,
     [HITGROUP_LEFTARM] = 1,
     [HITGROUP_RIGHTARM] = 1,
     [HITGROUP_LEFTLEG] = 0.75,
@@ -197,13 +200,19 @@ SWEP.EjectEffect = 2
 // anims
 
 SWEP.AnimationTranslationTable = {
-    ["fire_iron"] = "dryfire",
+    ["fire_iron"] = "fire2_L",
     ["fire1"] = "fire1_M",
     ["fire2"] = "fire2_M",
     ["fire3"] = "fire3_M",
-    ["fire4"] = "fire4_M",
-    ["fire5"] = "fire5_M",
+    ["fire4"] = {"fire4_M", "fire4_L", "fire4_R"},
     ["melee"] = {"melee1", "melee2"}
+}
+
+SWEP.ProceduralIronFire = {
+    vm_pos = Vector(0, -1, -0.1),
+    vm_ang = Angle(0, 0.4, 0),
+    t = 0.25,
+    tmax = 0.25,
 }
 
 // attachments
@@ -249,14 +258,14 @@ SWEP.Attachments = {
         Bone = "pdw_ROOT",
         AttachSound = "TacRP/weapons/silencer_on.wav",
         DetachSound = "TacRP/weapons/silencer_off.wav",
-        Pos_VM = Vector(-3.25, -0.1, 19),
+        Pos_VM = Vector(-3.25, -0.1, 21.6),
         Pos_WM = Vector(24, 2.5, -5),
         Ang_VM = Angle(90, 0, 0),
         Ang_WM = Angle(0, -3.5, 180),
     },
     [3] = {
         PrintName = "Tactical",
-        Category = "tactical",
+        Category = {"tactical", "tactical_zoom", "tactical_ebullet"},
         Bone = "pdw_ROOT",
         AttachSound = "TacRP/weapons/flashlight_on.wav",
         DetachSound = "TacRP/weapons/flashlight_off.wav",

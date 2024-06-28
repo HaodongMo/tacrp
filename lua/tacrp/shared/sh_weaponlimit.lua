@@ -32,7 +32,7 @@ hook.Add("PlayerCanPickupWeapon", "TacRP_Pickup", function(ply, wep)
     local limit, weps = TacRP:CheckWeaponLimit(ply:GetWeapons(), wep)
 
     if !limit then
-        if TacRP.ConVars["allowdrop"]:GetBool() and ply:KeyDown(IN_USE) and !ply:KeyDown(IN_WALK) and ply:GetEyeTrace().Entity == wep then
+        if TacRP.ConVars["allowdrop"]:GetBool() and ((ply:KeyDown(IN_USE) and !ply:KeyDown(IN_WALK) and ply:GetEyeTrace().Entity == wep) or wep:GetPos() == ply:GetPos()) then
             if weps[1] == ply:GetActiveWeapon() then
                 timer.Simple(0, function()
                     if IsValid(ply) and IsValid(wep) and wep:GetOwner() == ply then
@@ -138,57 +138,6 @@ hook.Add("InitPostEntity", "TacRP_Slot", function()
     end, "slotty")
 end)
 
-concommand.Add("tacrp_drop", function(ply, cmd, args, argStr)
-    if !TacRP.ConVars["allowdrop"]:GetBool() then return end
-    local wep = ply:GetActiveWeapon()
-    if !IsValid(wep) or !wep.ArcticTacRP then return end
-
-    if wep:GetValue("PrimaryGrenade") then
-        -- Grenades don't have a clip size. this would mean players can constantly generate and drop nade sweps that do nothing.
-        local nade = TacRP.QuickNades[wep:GetValue("PrimaryGrenade")]
-        if TacRP.IsGrenadeInfiniteAmmo(nade) then
-            return -- Disallow dropping nades when its infinite
-        elseif nade.Singleton then
-            if DarkRP then
-                local canDrop = hook.Call("canDropWeapon", GAMEMODE, ply, wep)
-                if !canDrop then
-                    DarkRP.notify(ply, 1, 4, DarkRP.getPhrase("cannot_drop_weapon"))
-                    return ""
-                end
-                ply:DoAnimationEvent(ACT_GMOD_GESTURE_ITEM_DROP)
-                ply:dropDRPWeapon(wep)
-            else
-                ply:DropWeapon(wep)
-            end
-        elseif nade.AmmoEnt and ply:GetAmmoCount(nade.Ammo) > 0 then
-            ply:RemoveAmmo(1, nade.Ammo)
-            local ent = ents.Create(nade.AmmoEnt)
-            ent:SetPos(ply:EyePos() - Vector(0, 0, 4))
-            ent:SetAngles(AngleRand())
-            ent:Spawn()
-            if IsValid(ent:GetPhysicsObject()) then
-                ent:GetPhysicsObject():SetVelocityInstantaneous(ply:EyeAngles():Forward() * 200)
-            end
-            if ply:GetAmmoCount(nade.Ammo) == 0 then
-                wep:Remove()
-            end
-        end
-    else
-        if DarkRP then
-            local canDrop = hook.Call("canDropWeapon", GAMEMODE, ply, wep)
-            if !canDrop then
-                DarkRP.notify(ply, 1, 4, DarkRP.getPhrase("cannot_drop_weapon"))
-                return ""
-            end
-            ply:DoAnimationEvent(ACT_GMOD_GESTURE_ITEM_DROP)
-            ply:dropDRPWeapon(wep)
-        else
-            ply:DropWeapon(wep)
-        end
-    end
-
-end, "Drops the currently held TacRP weapon.")
-
 
 if CLIENT then
     net.Receive("tacrp_updateslot", slotty)
@@ -203,7 +152,10 @@ if CLIENT then
 
         if !limit then
             text = "[" .. TacRP.GetBindKey("+use") .. "] "
-                    .. TacRP:GetPhrase("hint.swap", {weapon = TacRP:GetPhrase("wep." .. weps[1]:GetClass() .. "name") or weps[1].PrintName})
+                    .. TacRP:GetPhrase("hint.swap", {
+                        weapon = TacRP:GetPhrase("wep." .. weps[1]:GetClass() .. "name") or weps[1].PrintName,
+                        weapon2 = TacRP:GetPhrase("wep." .. wep:GetClass() .. "name") or wep.PrintName
+                    })
         elseif TacRP.ConVars["pickup_use"]:GetBool() then
             text = "[" .. TacRP.GetBindKey("+use") .. "] "
             .. TacRP:GetPhrase("hint.pickup", {weapon = TacRP:GetPhrase("wep." .. wep:GetClass() .. "name") or wep.PrintName})
@@ -222,4 +174,14 @@ if CLIENT then
             draw.SimpleText(text, font, ScrW() / 2, ScrH() / 2 + TacRP.SS(32) + h / 2, color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
         end
     end)
+
+
+    concommand.Add("tacrp_drop", function(ply, cmd, args, argStr)
+        if !TacRP.ConVars["allowdrop"]:GetBool() then return end
+        local wep = ply:GetActiveWeapon()
+        if !IsValid(wep) or !wep.ArcticTacRP then return end
+        if !ply:Alive() then return end
+        net.Start("tacrp_drop")
+        net.SendToServer()
+    end, "Drops the currently held TacRP weapon.")
 end

@@ -12,3 +12,4 @@ ENT.Spawnable                = true
 ENT.Model                    = "models/weapons/tacint/c4_charge-1.mdl"
 
 ENT.Ammo = "ti_c4"
+ENT.GrenadeProxy = "tacrp_c4_detonator"

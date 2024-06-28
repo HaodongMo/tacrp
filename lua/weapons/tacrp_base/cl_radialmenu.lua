@@ -92,7 +92,15 @@ function SWEP:DrawGrenadeHUD()
         mouseangle = mouseangle + 360
     end
 
-    if self:GetOwner():KeyDown(self.GrenadeMenuKey) and !self:GetPrimedGrenade() and self.BlindFireMenuAlpha == 0 and self:GetHolsterTime() == 0 then
+    local iskeydown = self:GetOwner():KeyDown(self.GrenadeMenuKey)
+
+    if self.GrenadeMenuKey == IN_GRENADE1 and !input.LookupBinding("+grenade1") then
+        iskeydown = input.IsKeyDown(TacRP.GRENADE1_Backup)
+    elseif self.GrenadeMenuKey == IN_GRENADE2 and !input.LookupBinding("+grenade2") then
+        iskeydown = input.IsKeyDown(TacRP.GRENADE2_Backup)
+    end
+
+    if iskeydown and !self:GetPrimedGrenade() and self.BlindFireMenuAlpha == 0 and self:GetHolsterTime() == 0 then
         self.GrenadeMenuAlpha = math.Approach(self.GrenadeMenuAlpha, 1, 15 * ft)
         if !lastmenu then
             gui.EnableScreenClicker(true)
@@ -437,7 +445,7 @@ local bf_lines = {
     "At least take some cops with you",
     "Don't let them take you alive!",
     "Teleport to spawn!",
-    "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+    "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
     "THE VOICES TOLD ME TO DO IT",
     "Equestria awaits.",
     "Truck-Kun sends you to Heaven. Gun-San sends you to Hell.",
@@ -481,7 +489,7 @@ local bf_lines = {
     "No tactical advantages whatsoever.",
     "The best is yet to come",
     "I know what you did, Mikey.",
-    "AMONG US AMONG US AMONG US AMONG US",
+    "AMONG US AMONG US AMONG US AMONG US AMONG US AMONG US AMONG US AMONG US AMONG US AMONG US AMONG US AMONG US",
     "What would your waifu think?",
     "You won't get to see her, you know.",
     "ez",
@@ -610,7 +618,72 @@ local bf_lines = {
     "But... I love you!",
     "Even now, the evil seed of what you have done germinates within you.",
     "How cliche.",
-    "Oh, you can do better than THAT."
+    "Oh, you can do better than THAT.",
+    "Become an hero.",
+    "A tragedy of the highest order.",
+    "What if you were the impostor all along?",
+    "Sorry. For everything.",
+    "I'm sorry I couldn't do more for you.",
+    "See you soon.",
+    "Say hi to the Devil for me.",
+    "The punishment for suicide is eternal damnation.",
+    "You can't walk back from this one.",
+    "This one is a blank; I just know it.",
+    "Try shooting the other guy instead.",
+    "God, are you watching?",
+    "The moment of truth.",
+    "Sponsored by Donghua Jinlong Glycine Chemical Co. LTD",
+    "Don't try this one at home.",
+    "Redecorate.",
+    "The Kurt Cobain haircut.",
+    "The closest thing to love you'll get to experience.",
+    "Wait! Before you die - subscribe to my other mods.",
+    "Yeah, you could say I have a dark sense of humor",
+    "That's all, folks.",
+    "Farewell and goodbye.",
+    "We hope you enjoyed your time with us tonight.",
+    "Show them who's boss. Go on.",
+    "This is actually what happened to that Boeing guy",
+    "You're making a big mistake.",
+    "The bullets enter the chamber in an unknown order.",
+    "Kill yourself, or die trying.",
+    "No. This is wrong.",
+    "But- you can't!",
+    "All the effort in the world would have gone to waste. Until- well. Let's just say your hour has... come again.",
+    "Become a Liveleak star.",
+    "Cha-cha real smooth.",
+    "The only way to defeat Them.",
+    "Ashes to ashes.",
+    "Death speedrun",
+    "You were gonna die eventually.",
+    "'Cuz everybody's gotta die sometime.", -- a little piece of heaven, avenged sevenfold
+    "I've made the change; I won't see you tonight.", -- i won't see you tonight pt. 1, avenged sevenfold
+    "No more breath inside; essence left my heart tonight.", -- i won't see you tonight pt. 1, avenged sevenfold
+    "I know this can't be right, stuck in a dream, a nightmare full of sorrow.", -- i won't see you tonight pt. 2, avenged sevenfold
+    "I was me, but now he's gone.", -- fade to black, metallica
+    "Death greets me warm, now I will just say goodbye.", -- fade to black, metallica
+    "I have to laugh out loud; I wish I didn't like this.", -- wait and bleed, slipknot
+    "Lay away a place for me, 'cuz as soon as I'm done, I'll be on my way to live eternally.", -- so far away, avenged sevenfold
+    "Now, I think I understand how this world can overcome a man.", -- fiction, avenged sevenfold
+    "Heard there's peace just on the other side.", -- fiction, avenged sevenfold
+    "I hope you find your own way when I'm not with you tonight.", -- fiction, avenged sevenfold
+    "A truant finds home, and a wish to hold on.", -- immortality, pearl jam
+    "Makes much more sense to live in the present tense.", -- present tense, pearl jam
+    "Darkness comes in waves, tell me, why invite it to stay?", -- life wasted, pearl jam
+    "You flirt with suicide; sometimes, that's okay.", -- falling away from me, korn
+    "I flirt with suicide; sometimes, kill the pain.", -- falling away from me, korn
+    "Die, motherfucker, die!", -- creeping death, metallica
+    "How beautiful life is now, when my time has come.", -- life eternal, mayhem
+    "Can't really live, can't really endure.", -- everything ends, slipknot
+    "What the fuck was I thinking? Anybody want to tell me I'm fine?", -- everything ends, slipknot
+    -- Translated and abridged excerpts from Kamikaze pilots' manual
+    "Breathe deeply three times. Say in your mind: \"Yah\" (field), \"Kyu\" (ball), \"Joh\" (all right) as you breathe deeply.",
+    "Be always pure-hearted and cheerful. A loyal fighting man is a pure-hearted and filial son.",
+    "If you feel nervous, piss.",
+    "You have lived for 20 years or more. You must exert your full might for the last time in your life. Exert supernatural strength.",
+    "Every deity and the spirits of your dead comrades are watching you intently. They will tell you what fun they had.",
+    "You may nod then, or wonder what happened. You may even hear a final sound like the breaking of crystal. Then you are no more.",
+    -- Kamikaze manual ends
 }
 
 local function canhighlight(self, slice)
@@ -618,8 +691,11 @@ local function canhighlight(self, slice)
     return true
 end
 
+local lastseenfunnyline = false
+local startseefunnylinetime = 0
+
 function SWEP:DrawBlindFireHUD()
-    if !TacRP.ConVars["blindfiremenu"]:GetBool() then return end
+    if !TacRP.ConVars["blindfiremenu"]:GetBool() then lastseenfunnyline = false return end
     local nocenter = TacRP.ConVars["blindfiremenu_nocenter"]:GetBool()
     local nosuicide = nocenter or TacRP.ConVars["idunwannadie"]:GetBool()
 
@@ -692,6 +768,11 @@ function SWEP:DrawBlindFireHUD()
 
             lastmenu_bf = false
         end
+    end
+
+    if self.BlindFireMenuAlpha < 1 then
+        bf_funnyline = nil
+        lastseenfunnyline = false
     end
 
     if self.BlindFireMenuAlpha <= 0 then
@@ -769,17 +850,31 @@ function SWEP:DrawBlindFireHUD()
         surface.DrawText(t1)
 
         surface.SetFont("TacRP_Myriad_Pro_6")
+
+        if !lastseenfunnyline then
+            startseefunnylinetime = CurTime()
+        end
+
+        lastseenfunnyline = true
+
         local t2 = bf_funnyline or ""
         if bf_suicidelock > 0 then
             surface.SetFont("TacRP_Myriad_Pro_8")
             t2 = "[" .. TacRP.GetBind("attack") .. "] - Unlock"
+            lastseenfunnyline = false
         elseif !bf_funnyline then
             bf_funnyline = bf_lines[math.random(1, #bf_lines)]
         end
         local t2_w, t2_h = surface.GetTextSize(t2)
-        surface.SetTextPos(tx - t2_w / 2, ty + TacRP.SS(18) - t2_h / 2)
+        if t2_w > w then
+            render.SetScissorRect(tx - w / 2, ty, tx + w / 2, ty + h, true)
+            surface.SetTextPos(tx - ((CurTime() - startseefunnylinetime + 2.5) * w * 0.3) % (t2_w * 2) + (t2_w / 2), ty + TacRP.SS(18) - t2_h / 2)
+        else
+            surface.SetTextPos(tx - t2_w / 2, ty + TacRP.SS(18) - t2_h / 2)
+        end
         surface.DrawText(t2)
 
+        render.SetScissorRect(0, 0, 0, 0, false)
     end
 end
 

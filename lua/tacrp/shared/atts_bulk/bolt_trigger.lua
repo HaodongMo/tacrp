@@ -134,9 +134,9 @@ ATT.Description = "Rust has eaten most of it away, but it still kinda works."
 ATT.Pros = {"att.procon.surplusboost1", "stat.recoil"}
 ATT.Cons = {"att.procon.surplusboost2", "att.procon.unreliable"}
 
-ATT.Category = {"bolt_automatic"}
+ATT.Category = {"bolt_automatic", "bolt_manual"}
 
-ATT.SortOrder = 999
+ATT.SortOrder = 9
 
 ATT.Mult_RecoilSpreadPenalty = 0.8
 ATT.Mult_RecoilKick = 0.75
@@ -193,16 +193,45 @@ ATT.Category = "bolt_manual"
 
 ATT.SortOrder = 2
 
-ATT.Mult_RPM = 0.85
-ATT.Mult_ShootTimeMult = 1 / 0.85
+ATT.Mult_RPM = 0.9
+ATT.Mult_ShootTimeMult = 1 / 0.9
 
 ATT.Add_ShootingSpeedMult = 0.15
 ATT.Add_SightedSpeedMult = 0.05
-ATT.Mult_RecoilKick = 0.6
+ATT.Mult_RecoilKick = 0.7
 
 ATT.Mult_MuzzleVelocity = 1.15
 
 TacRP.LoadAtt(ATT, "bolt_tactical")
+-- #endregion
+
+------------------------------
+-- #region bolt_refurbished
+------------------------------
+ATT = {}
+
+ATT.PrintName = "att.bolt_refurbished.name"
+ATT.FullName = "att.bolt_refurbished.name.full"
+ATT.Icon = Material("entities/tacrp_att_bolt_refurbished.png", "mips smooth")
+ATT.Description = "att.bolt_refurbished.desc"
+ATT.Pros = {"att.procon.reliability"}
+ATT.Cons = {"stat.rpm", "stat.spread"}
+
+ATT.Category = "bolt_jammable"
+
+ATT.SortOrder = 10
+
+ATT.Override_JamFactor = 0 -- This intentionally does not prevent surplus ammo from jamming!
+ATT.Add_RPM = -50
+ATT.Add_Spread = 0.003
+
+ATT.Compatibility = function(wep)
+    if wep:GetBaseValue("JamFactor") == 0 then
+        return false
+    end
+end
+
+TacRP.LoadAtt(ATT, "bolt_refurbished")
 -- #endregion
 
 ------------------------------
@@ -495,7 +524,7 @@ ATT.FullName = "Marksman Trigger"
 
 ATT.Icon = Material("entities/tacrp_att_trigger_semi.png", "mips smooth")
 ATT.Description = "Trigger that sacrfices automatic fire for precision."
-ATT.Pros = {"stat.spread", "stat.recoil"}
+ATT.Pros = {"stat.spread", "stat.recoil", "stat.rpm"}
 ATT.Cons = {"att.procon.semi"}
 
 ATT.Category = {"trigger_auto", "trigger_burst", "trigger_4pos"}
@@ -504,11 +533,12 @@ ATT.SortOrder = 1
 
 ATT.Override_Firemodes = {1}
 ATT.Mult_Spread = 0.5
+ATT.Mult_ShotgunPelletSpread = 0.5
 ATT.Mult_RecoilSpreadPenalty = 0.75
 ATT.Mult_RecoilKick = 0.6
 ATT.Mult_RecoilVisualKick = 0.5
 ATT.Mult_RecoilStability = 1.25
-ATT.Mult_RPMMultSemi = 1.2
+ATT.Add_RPM = 50
 
 TacRP.LoadAtt(ATT, "trigger_semi")
 -- #endregion
@@ -621,3 +651,45 @@ ATT.Add_AimDownSightsTime = 0.03
 TacRP.LoadAtt(ATT, "trigger_wide")
 -- #endregion
 
+------------------------------
+-- #region trigger_dualstage
+------------------------------
+ATT = {}
+
+ATT.PrintName = "D. Stage"
+ATT.FullName = "Dual Stage Trigger"
+ATT.Icon = Material("entities/tacrp_att_trigger_dualstage.png", "mips smooth")
+ATT.Description = "Trigger that reduces firerate while aiming for better control and accuracy."
+ATT.Pros = {"att.procon.aimrecoil", "att.procon.aimspread"}
+ATT.Cons = {"att.procon.aimrpm"}
+
+ATT.SortOrder = 10
+
+ATT.Category = {"trigger_auto", "trigger_semi", "trigger_burst", "trigger_4pos"}
+
+ATT.Func_RPM = function(wep, data)
+    if wep:GetScopeLevel() > 0 and not wep:GetPeeking() then
+        data.mul = data.mul * 0.7
+    end
+end
+
+ATT.Func_RecoilKick = function(wep, data)
+    if wep:GetScopeLevel() > 0 and not wep:GetPeeking() then
+        data.mul = data.mul * 0.7
+    end
+end
+
+ATT.Func_RecoilPerShot = function(wep, data)
+    if wep:GetScopeLevel() > 0 and not wep:GetPeeking() then
+        data.mul = data.mul * 0.7
+    end
+end
+
+ATT.Func_Spread = function(wep, data)
+    if wep:GetScopeLevel() > 0 and not wep:GetPeeking() then
+        data.mul = data.mul * 0.5
+    end
+end
+
+TacRP.LoadAtt(ATT, "trigger_dualstage")
+-- #endregion

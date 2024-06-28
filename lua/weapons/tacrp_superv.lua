@@ -5,6 +5,7 @@ AddCSLuaFile()
 
 // names and stuff
 SWEP.PrintName = "Kriss Vector"
+SWEP.AbbrevName = "Vector"
 SWEP.Category = "Tactical RP"
 
 SWEP.SubCatTier = "1Elite"
@@ -208,18 +209,25 @@ SWEP.QCA_Muzzle = 1
 SWEP.QCA_Eject = 2
 
 SWEP.MuzzleEffect = "muzzleflash_ak47"
+SWEP.EjectEffect = 1
 
 // anims
 
 SWEP.AnimationTranslationTable = {
-    ["fire_iron"] = "dryfire",
+    ["fire_iron"] = "fire2_M",
     ["fire1"] = "fire1_L",
     ["fire2"] = "fire2_L",
     ["fire3"] = "fire3_L",
-    ["fire4"] = "fire4_L",
-    ["fire5"] = "fire5_L",
+    ["fire4"] = {"fire4_M", "fire4_L", "fire4_R"},
     ["melee"] = {"melee1", "melee2"},
     ["jam"] = "deploy"
+}
+
+SWEP.ProceduralIronFire = {
+    vm_pos = Vector(0, -1, -0.1),
+    vm_ang = Angle(0, 0.4, 0),
+    t = 0.25,
+    tmax = 0.25,
 }
 
 // attachments
@@ -271,7 +279,7 @@ SWEP.Attachments = {
     },
     [3] = {
         PrintName = "Tactical",
-        Category = "tactical",
+        Category = {"tactical", "tactical_zoom", "tactical_ebullet"},
         Bone = "superv_rig.SuperV_ROOT",
         AttachSound = "TacRP/weapons/flashlight_on.wav",
         DetachSound = "TacRP/weapons/flashlight_off.wav",

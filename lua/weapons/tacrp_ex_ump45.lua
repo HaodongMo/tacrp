@@ -5,13 +5,14 @@ AddCSLuaFile()
 
 // names and stuff
 SWEP.PrintName = "HK UMP45"
+SWEP.AbbrevName = "UMP45"
 SWEP.Category = "Tactical RP" // "Tactical RP (Extras)"
 
 SWEP.SubCatTier = "3Security"
 SWEP.SubCatType = "3Submachine Gun"
 
 SWEP.Description = "Boxy SMG developed with low production costs in mind.\nHigh damage up close, but range and rate of fire is low."
-SWEP.Description_Quote = "Flat as a cutting board, but keep that to yourself."
+SWEP.Description_Quote = "\"The f*ck are these, cocktail guns?\""
 
 SWEP.Trivia_Caliber = ".45 ACP"
 SWEP.Trivia_Manufacturer = "Heckler & Koch"
@@ -27,8 +28,11 @@ SWEP.Slot = 2
 
 SWEP.BalanceStats = {
     [TacRP.BALANCE_SBOX] = {
-        Damage_Max = 26,
+        Damage_Max = 28,
         Damage_Min = 9,
+
+        Range_Min = 200,
+        Range_Max = 2200,
     },
     [TacRP.BALANCE_TTT] = {
         Damage_Max = 18,
@@ -67,9 +71,9 @@ SWEP.TTTReplace = TacRP.TTTReplacePreset.SMG
 
 // "ballistics"
 
-SWEP.Damage_Max = 24
+SWEP.Damage_Max = 25
 SWEP.Damage_Min = 7
-SWEP.Range_Min = 600
+SWEP.Range_Min = 500
 SWEP.Range_Max = 1800
 SWEP.Penetration = 4 // units of metal this weapon can penetrate
 SWEP.ArmorPenetration = 0.55
@@ -104,17 +108,17 @@ SWEP.ShootTimeMult = 0.5
 
 SWEP.RecoilResetInstant = false
 SWEP.RecoilPerShot = 1
-SWEP.RecoilMaximum = 6
+SWEP.RecoilMaximum = 7
 SWEP.RecoilResetTime = 0.03
-SWEP.RecoilDissipationRate = 24
+SWEP.RecoilDissipationRate = 32
 SWEP.RecoilFirstShotMult = 0.8
 
 SWEP.RecoilVisualKick = 0.5
 SWEP.RecoilKick = 4
 SWEP.RecoilStability = 0.35
-SWEP.RecoilAltMultiplier = 150
+SWEP.RecoilAltMultiplier = 120
 
-SWEP.RecoilSpreadPenalty = 0.0022
+SWEP.RecoilSpreadPenalty = 0.0018
 
 SWEP.CanBlindFire = true
 
@@ -194,6 +198,7 @@ SWEP.QCA_Muzzle = 1
 SWEP.QCA_Eject = 2
 
 SWEP.MuzzleEffect = "muzzleflash_ak47"
+SWEP.EjectEffect = 1
 
 // anims
 
@@ -202,9 +207,15 @@ SWEP.AnimationTranslationTable = {
     ["fire1"] = "fire1_M",
     ["fire2"] = "fire2_M",
     ["fire3"] = "fire3_M",
-    ["fire4"] = "fire4_M",
-    ["fire5"] = "fire5_M",
+    ["fire4"] = {"fire4_M", "fire4_L", "fire4_R"},
     ["melee"] = {"melee1", "melee2"}
+}
+
+SWEP.ProceduralIronFire = {
+    vm_pos = Vector(0, -1, -0.1),
+    vm_ang = Angle(0, 0.4, 0),
+    t = 0.25,
+    tmax = 0.25,
 }
 
 // attachments
@@ -257,7 +268,7 @@ SWEP.Attachments = {
     },
     [3] = {
         PrintName = "Tactical",
-        Category = "tactical",
+        Category = {"tactical", "tactical_zoom", "tactical_ebullet"},
         Bone = "ValveBiped.mp5_rootbone",
         AttachSound = "TacRP/weapons/flashlight_on.wav",
         DetachSound = "TacRP/weapons/flashlight_off.wav",

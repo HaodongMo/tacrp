@@ -5,6 +5,7 @@ AddCSLuaFile()
 
 // names and stuff
 SWEP.PrintName = "Manurhin MR96"
+SWEP.AbbrevName = "MR96"
 SWEP.Category = "Tactical RP"
 
 SWEP.SubCatTier = "2Operator"
@@ -74,7 +75,7 @@ SWEP.ArmorPenetration = 0.9
 SWEP.MuzzleVelocity = 12500
 
 SWEP.BodyDamageMultipliers = {
-    [HITGROUP_HEAD] = 2.5,
+    [HITGROUP_HEAD] = 3,
     [HITGROUP_CHEST] = 1,
     [HITGROUP_STOMACH] = 1.25,
     [HITGROUP_LEFTARM] = 0.9,
@@ -147,6 +148,8 @@ SWEP.SprintPos = Vector(2, 0, -12)
 
 SWEP.SightAng = Angle(-0.15, 1, 0)
 SWEP.SightPos = Vector(-3.5, 0, -3.7)
+
+SWEP.CorrectivePos = Vector(0, 0, 0.1)
 
 SWEP.HolsterVisible = true
 SWEP.HolsterSlot = TacRP.HOLSTER_SLOT_PISTOL
@@ -243,7 +246,7 @@ SWEP.Attachments = {
         WMBone = "Box01",
         AttachSound = "TacRP/weapons/optic_on.wav",
         DetachSound = "TacRP/weapons/optic_off.wav",
-        VMScale = 1,
+        VMScale = 0.8,
         WMScale = 1,
         Pos_VM = Vector(-3.9, -0.125, 6.5),
         Ang_VM = Angle(90, 0, 0),
@@ -252,7 +255,7 @@ SWEP.Attachments = {
     },
     [2] = {
         PrintName = "Tactical",
-        Category = "tactical",
+        Category = {"tactical", "tactical_zoom", "tactical_ebullet"},
         Bone = "ValveBiped.mr96_rootbone",
         WMBone = "Box01",
         AttachSound = "TacRP/weapons/flashlight_on.wav",

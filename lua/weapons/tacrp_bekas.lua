@@ -5,6 +5,7 @@ AddCSLuaFile()
 
 // names and stuff
 SWEP.PrintName = "Molot Bekas-16M"
+SWEP.AbbrevName = "Bekas-16M"
 SWEP.Category = "Tactical RP"
 
 SWEP.SubCatTier = "4Consumer"
@@ -27,6 +28,10 @@ SWEP.SlotAlt = 3
 
 SWEP.BalanceStats = {
     [TacRP.BALANCE_SBOX] = {
+        Damage_Max = 24,
+        Damage_Min = 10,
+        Range_Min = 1200,
+        ClipSize = 6,
     },
     [TacRP.BALANCE_TTT] = {
         Damage_Max = 14,
@@ -34,6 +39,8 @@ SWEP.BalanceStats = {
         Range_Min = 400,
         Range_Max = 2500,
         Num = 6,
+
+        ClipSize = 6,
 
         BodyDamageMultipliers = {
             [HITGROUP_HEAD] = 2.5,
@@ -76,15 +83,15 @@ SWEP.TTTReplace = TacRP.TTTReplacePreset.Shotgun
 
 // "ballistics"
 
-SWEP.Damage_Max = 17
-SWEP.Damage_Min = 8
-SWEP.Range_Min = 1250 // distance for which to maintain maximum damage
-SWEP.Range_Max = 3500 // distance at which we drop to minimum damage
+SWEP.Damage_Max = 18
+SWEP.Damage_Min = 6
+SWEP.Range_Min = 600 // distance for which to maintain maximum damage
+SWEP.Range_Max = 2800 // distance at which we drop to minimum damage
 SWEP.Penetration = 1 // units of metal this weapon can penetrate
 SWEP.ArmorPenetration = 0.47
 SWEP.ArmorBonus = 1.25
 
-SWEP.Num = 8
+SWEP.Num = 6
 
 SWEP.MuzzleVelocity = 11000
 
@@ -109,10 +116,10 @@ SWEP.RPM = 60
 
 SWEP.ShootTimeMult = 0.85
 
-SWEP.Spread = 0.02
+SWEP.Spread = 0.015
 SWEP.ShotgunPelletSpread = 0.005
 
-SWEP.HipFireSpreadPenalty = 0.01
+SWEP.HipFireSpreadPenalty = 0.02
 SWEP.MidAirSpreadPenalty = 0
 
 SWEP.ScopedSpreadPenalty = 0
@@ -133,14 +140,14 @@ SWEP.CanBlindFire = true
 
 // handling
 
-SWEP.MoveSpeedMult = 0.925
-SWEP.ShootingSpeedMult = 0.85
+SWEP.MoveSpeedMult = 0.9
+SWEP.ShootingSpeedMult = 0.7
 SWEP.SightedSpeedMult = 0.7
 
 SWEP.ReloadSpeedMult = 0.5
 
-SWEP.AimDownSightsTime = 0.34
-SWEP.SprintToFireTime = 0.38
+SWEP.AimDownSightsTime = 0.36
+SWEP.SprintToFireTime = 0.4
 
 SWEP.Sway = 1
 SWEP.ScopedSway = 0.2
@@ -179,7 +186,7 @@ SWEP.HolsterAng = Angle(0, 0, 0)
 
 // reload
 
-SWEP.ClipSize = 6
+SWEP.ClipSize = 5
 SWEP.Ammo = "buckshot"
 SWEP.ShotgunReload = true
 
@@ -220,7 +227,7 @@ SWEP.AnimationTranslationTable = {
 SWEP.Attachments = {
     [1] = {
         PrintName = "Optic",
-        Category = {"optic_cqb", "optic_medium"},
+        Category = {"optic_cqb_nookp7", "optic_medium"},
         Bone = "ValveBiped.bekas_rootbone",
         WMBone = "ValveBiped.Bip01_R_Hand",
         InstalledElements = {"sights"},
@@ -234,7 +241,7 @@ SWEP.Attachments = {
     },
     [2] = {
         PrintName = "Tactical",
-        Category = "tactical",
+        Category = {"tactical", "tactical_zoom"},
         Bone = "ValveBiped.bekas_rootbone",
         AttachSound = "TacRP/weapons/flashlight_on.wav",
         DetachSound = "TacRP/weapons/flashlight_off.wav",

@@ -62,6 +62,14 @@ function TacRP.CancelBodyDamage(ent, dmginfo, hitgroup)
     return dmginfo
 end
 
+function TacRP.EntityIsNecrotic(ent)
+    if ent:IsNPC() and ent:Classify() == CLASS_ZOMBIE then return true end
+    if ent.VJ_NPC_Class == "CLASS_ZOMBIE" or (istable(ent.VJ_NPC_Class) and table.HasValue(ent.VJ_NPC_Class,  "CLASS_ZOMBIE")) then return true end
+    local ret = hook.Run("TacRP_EntityIsNecrotic", ent)
+    if ret != nil then return ret end
+    return false
+end
+
 if CLIENT then
     -- From GMod wiki
     function TacRP.FormatViewModelAttachment(nFOV, vOrigin, bFrom)

@@ -56,3 +56,32 @@ function ENT:Detonate()
 
     self:Remove()
 end
+
+ENT.SmokeTrail = true
+function ENT:DoSmokeTrail()
+    if CLIENT and self.SmokeTrail and (self.Tick or 0) % 5 == 0 then
+        local pos = self:GetPos() + VectorRand() * 2
+        local emitter = ParticleEmitter(pos)
+
+        local smoke = emitter:Add("effects/spark", pos)
+
+        smoke:SetVelocity( VectorRand() * 32 )
+        smoke:SetStartAlpha( 255 )
+        smoke:SetEndAlpha( 0 )
+        smoke:SetStartSize( 2 )
+        smoke:SetEndSize( 0 )
+        smoke:SetRoll( math.Rand(-180, 180) )
+        smoke:SetRollDelta( math.Rand(-32, 32) )
+        smoke:SetColor( 255, 255, 255 )
+        smoke:SetAirResistance( 125 )
+        smoke:SetPos( pos )
+        smoke:SetCollide( true )
+        smoke:SetBounce( 1 )
+        smoke:SetLighting( false )
+        smoke:SetDieTime(math.Rand(2, 3))
+        smoke:SetGravity(Vector(0, 0, 4))
+
+        emitter:Finish()
+    end
+    self.Tick = (self.Tick or 0) + 1
+end

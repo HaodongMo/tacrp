@@ -5,6 +5,7 @@ AddCSLuaFile()
 
 // names and stuff
 SWEP.PrintName = "FB Beryl 96"
+SWEP.AbbrevName = "Beryl 96"
 SWEP.Category = "Tactical RP"
 
 SWEP.SubCatTier = "4Consumer"
@@ -201,8 +202,7 @@ SWEP.AnimationTranslationTable = {
     ["fire1"] = "fire1_M",
     ["fire2"] = "fire2_M",
     ["fire3"] = "fire3_M",
-    ["fire4"] = "fire4_M",
-    ["fire5"] = "fire5_M",
+    ["fire4"] = {"fire4_M", "fire4_L", "fire4_R"},
     ["melee"] = {"melee1", "melee2"},
     ["jam"] = "mid_reload"
 }
@@ -269,7 +269,7 @@ SWEP.Attachments = {
     },
     [3] = {
         PrintName = "Tactical",
-        Category = "tactical",
+        Category = {"tactical", "tactical_zoom", "tactical_ebullet"},
         Bone = "ValveBiped.AK47_rootbone",
         WMBone = "Box01",
         AttachSound = "tacrp/weapons/flashlight_on.wav",

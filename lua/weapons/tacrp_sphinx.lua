@@ -5,12 +5,13 @@ AddCSLuaFile()
 
 // names and stuff
 SWEP.PrintName = "Sphinx 2000"
+SWEP.AbbrevName = "Sphinx"
 SWEP.Category = "Tactical RP"
 
 SWEP.SubCatTier = "2Operator"
-SWEP.SubCatType = "2Machine Pistol"
+SWEP.SubCatType = "3Machine Pistol"
 
-SWEP.Description = "Burst fire pistol with high firerate but long burst delay."
+SWEP.Description = "Premium pistol modified to be 3-round burst. High firerate but long burst delay."
 
 SWEP.Trivia_Caliber = "9x19mm"
 SWEP.Trivia_Manufacturer = "Sphinx Systems"
@@ -30,7 +31,7 @@ SWEP.BalanceStats = {
         Damage_Min = 14,
 
         BodyDamageMultipliers = {
-            [HITGROUP_HEAD] = 5,
+            [HITGROUP_HEAD] = 4,
             [HITGROUP_CHEST] = 1,
             [HITGROUP_STOMACH] = 1,
             [HITGROUP_LEFTARM] = 1,
@@ -76,7 +77,7 @@ SWEP.TTTReplace = TacRP.TTTReplacePreset.Pistol
 
 SWEP.Damage_Max = 25
 SWEP.Damage_Min = 12
-SWEP.Range_Min = 700
+SWEP.Range_Min = 750
 SWEP.Range_Max = 2200
 SWEP.Penetration = 3 // units of metal this weapon can penetrate
 SWEP.ArmorPenetration = 0.65
@@ -101,8 +102,8 @@ SWEP.Firemodes = {-3, 1}
 SWEP.RunawayBurst = true
 
 SWEP.RPM = 800
-SWEP.RPMMultBurst = 1.25
-SWEP.PostBurstDelay = 0.33
+SWEP.RPMMultBurst = 1.5
+SWEP.PostBurstDelay = 0.3
 
 SWEP.Spread = 0.0035
 
@@ -198,6 +199,7 @@ SWEP.ShootPitchVariance = 2.5 // amount to vary pitch by each shot
 SWEP.QCA_Muzzle = 4
 
 SWEP.MuzzleEffect = "muzzleflash_pistol"
+SWEP.EjectEffect = 1
 
 // anims
 
@@ -284,7 +286,7 @@ SWEP.Attachments = {
     },
     [3] = {
         PrintName = "Tactical",
-        Category = "tactical",
+        Category = {"tactical", "tactical_zoom", "tactical_ebullet"},
         Bone = "sphinx_ROOT",
         WMBone = "Box01",
         AttachSound = "tacrp/weapons/flashlight_on.wav",

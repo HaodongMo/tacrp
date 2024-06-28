@@ -5,6 +5,7 @@ AddCSLuaFile()
 
 // names and stuff
 SWEP.PrintName = "HK M320"
+SWEP.AbbrevName = "M320"
 SWEP.Category = "Tactical RP (Special)"
 
 SWEP.SubCatTier = "9Special"
@@ -69,7 +70,7 @@ SWEP.RPM = 60
 SWEP.Spread = 0.025
 
 SWEP.RecoilPerShot = 1
-SWEP.RecoilMaximum = 2
+SWEP.RecoilMaximum = 1
 SWEP.RecoilResetTime = 0.2 // time after you stop shooting for recoil to start dissipating
 SWEP.RecoilDissipationRate = 1
 SWEP.RecoilFirstShotMult = 1 // multiplier for the first shot's recoil amount
@@ -92,8 +93,8 @@ SWEP.SightedSpeedMult = 0.7
 
 SWEP.ReloadSpeedMult = 0.5
 
-SWEP.AimDownSightsTime = 0.35
-SWEP.SprintToFireTime = 0.35 // multiplies how long it takes to recover from sprinting
+SWEP.AimDownSightsTime = 0.25
+SWEP.SprintToFireTime = 0.32 // multiplies how long it takes to recover from sprinting
 
 SWEP.Sway = 1
 SWEP.ScopedSway = 0.2

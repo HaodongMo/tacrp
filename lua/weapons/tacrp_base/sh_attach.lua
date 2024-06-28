@@ -16,6 +16,10 @@ function SWEP:Attach(slot, att, silent, suppress)
 
     TacRP:PlayerTakeAtt(self:GetOwner(), att, 1)
 
+    if atttbl.OnAttach then
+        atttbl.OnAttach(self)
+    end
+
     if CLIENT then
         local attid = atttbl.ID
 
@@ -68,12 +72,18 @@ function SWEP:Detach(slot, silent, suppress)
     local slottbl = self.Attachments[slot]
     if !slottbl.Installed then return end
 
-    if !self:CanDetach(slot) then return end
+    if !self:CanDetach(slot, slottbl.Installed) then return end
 
     TacRP:PlayerGiveAtt(self:GetOwner(), slottbl.Installed, 1)
 
     local inf_old = self:GetValue("InfiniteAmmo")
     local ammo_old = self:GetValue("Ammo")
+
+    local atttbl = TacRP.GetAttTable(slottbl.Installed)
+
+    if atttbl and atttbl.OnDetach then
+        atttbl.OnDetach(self)
+    end
 
     slottbl.Installed = nil
 
@@ -139,6 +149,16 @@ function SWEP:CanAttach(slot, att)
 
     local slottbl = self.Attachments[slot]
 
+    if atttbl.Compatibility then
+        local result = atttbl.Compatibility(self)
+
+        if result == true then
+            return true
+        elseif result == false then
+            return false
+        end
+    end
+
     local cat = slottbl.Category
 
     if !istable(cat) then
@@ -162,12 +182,20 @@ function SWEP:CanAttach(slot, att)
     return false
 end
 
-function SWEP:CanDetach(slot)
+function SWEP:CanDetach(slot, att)
     local slottbl = self.Attachments[slot]
 
     if slottbl.Integral then return false end
 
-    if !TacRP.CanCustomize(self:GetOwner(), self, att, slot) then return false end
+    if !TacRP.CanCustomize(self:GetOwner(), self, att, slot, true) then return false end
 
     return true
+end
+
+function SWEP:ToggleTactical()
+    local ret = self:RunHook("Hook_ToggleTactical")
+    if !ret then
+        self:EmitSound(self:GetValue("Sound_ToggleTactical"))
+        self:SetTactical(!self:GetTactical())
+    end
 end

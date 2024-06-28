@@ -36,6 +36,7 @@ local conVars = {
         name = "togglepeek",
         default = "1",
         client = true,
+        userinfo = true,
     },
     {
         name = "bodydamagecancel",
@@ -114,10 +115,6 @@ local conVars = {
         default = "0",
         replicated = true,
         notify = true,
-    },
-    {
-        name = "rp_requirebench",
-        default = "0",
     },
     {
         name = "true_laser",
@@ -371,6 +368,13 @@ local conVars = {
         name = "language",
         default = "",
         replicated = true,
+        callback = function()
+            if SERVER then
+                TacRP:LoadLanguages()
+                net.Start("tacrp_reloadlangs")
+                net.Broadcast()
+            end
+        end
     },
     {
         name = "dev_benchgun",
@@ -479,12 +483,14 @@ local conVars = {
         name = "slot_limit",
         default = "0",
         notify = true,
+        replicated = true,
         min = 0,
     },
     {
         name = "slot_countall",
         default = "0",
         notify = true,
+        replicated = true,
         min = 0,
         max = 1,
     },
@@ -492,6 +498,7 @@ local conVars = {
         name = "slot_action",
         default = "1",
         notify = true,
+        replicated = true,
         min = 0,
         max = 2,
     },
@@ -645,6 +652,20 @@ local conVars = {
         notify = true,
         min = 0,
         max = 1,
+    },
+
+    // Roleplay
+    {
+        name = "rp_requirebench",
+        default = "0",
+        replicated = true,
+        notify = true,
+    },
+    {
+        name = "rp_biocode_cp",
+        default = "0",
+        replicated = true,
+        notify = true,
     },
 
     {
@@ -822,11 +843,50 @@ local conVars = {
         max = 1,
         replicated = true,
     },
+    {
+        name = "ads_reload",
+        default = "0",
+        min = 0,
+        max = 1,
+        replicated = true
+    },
+    {
+        name = "jam_autoclear",
+        default = "0",
+        min = 0,
+        max = 1,
+        replicated = true
+    }
 }
 
 TacRP.ConVars = {}
 
 local prefix = "tacrp_"
+
+function TacRP.NetworkConvar(convar, old_value, value)
+    if IsValid(LocalPlayer()) and !LocalPlayer():IsAdmin() then return end
+    if old_value == value then return end
+    if value == true or value == false then
+        value = value and 1 or 0
+    end
+    if IsColor(value) then
+        value = tostring(value.r) .. " " .. tostring(value.g) .. " " .. tostring(value.b) .. " " .. tostring(value.a)
+    end
+
+    local command = convar .. " " .. tostring(value)
+
+    local timername = "change" .. convar
+
+    if timer.Exists(timername) then
+        timer.Remove(timername)
+    end
+
+    timer.Create(timername, 0.25, 1, function()
+        net.Start("tacrp_sendconvar")
+        net.WriteString(command)
+        net.SendToServer()
+    end)
+end
 
 local flags = {
     ["replicated"] = FCVAR_REPLICATED,
@@ -846,6 +906,10 @@ for _, var in pairs(conVars) do
 
     if var.callback then
         cvars.AddChangeCallback(convar_name, var.callback, "tacrp")
+    end
+
+    if CLIENT then
+        cvars.AddChangeCallback(convar_name, TacRP.NetworkConvar, "tacrp_onchange")
     end
 end
 
@@ -1141,7 +1205,7 @@ local function menu_balance_ti(panel)
     lb_balance:SizeToContents()
     panel:Help("Weapon are divided into 4 tiers, with higher tiers having slightly better overall performance.\nDisable to adjust weapon performance to around the same level.")
     panel:Help("TTT option is untiered, and has lower RPM and high time to kill close to vanilla TTT weapons.")
-	panel:Help("Weapon tiers, best to worst: \n1 - Elite \n2 - Operator \n3 - Security \n4 - Consumer")
+    panel:Help("Weapon tiers, best to worst: \n1 - Elite \n2 - Operator \n3 - Security \n4 - Consumer\n5 - Value")
 
     panel:AddControl("slider", {
         label = "Overall Damage",
@@ -1257,6 +1321,10 @@ local function menu_balance_ti(panel)
         command = "tacrp_reload_dump"
     })
     panel:ControlHelp("Dropping a magazine during a reload will also drop all ammo in the gun. The dropped magazine can be retrieved (unless Infinite Ammo is enabled).")
+    panel:AddControl("checkbox", {
+        label = "Automatically Clear Jams",
+        command = "tacrp_jam_autoclear"
+    })
     panel:AddControl("slider", {
         label = "Default Clip Multiplier",
         command = "tacrp_defaultammo",
@@ -1312,7 +1380,6 @@ local function menu_mechanics_ti(panel)
     panel:AddControl("checkbox", {
         label = "Lower Weapon While Airborne",
         command = "tacrp_sprint_counts_midair"})
-    panel:ControlHelp("Requires \"Lower Weapon While Sprinting\" to be enabled.")
     panel:AddControl("checkbox", {
         label = "Lower Weapon While Not Aiming",
         command = "tacrp_sightsonly"
@@ -1356,6 +1423,10 @@ local function menu_mechanics_ti(panel)
         command = "tacrp_reload_sg_cancel"
     })
     panel:ControlHelp("Instantly fire out of a shotgun reload. If disabled, the finishing part of the animation must play out.")
+    panel:AddControl("checkbox", {
+        label = "Allow Aiming While Reloading",
+        command = "tacrp_ads_reload"
+    })
     panel:AddControl("slider", {
         label = "Flashbang Slow",
         command = "tacrp_flash_slow",

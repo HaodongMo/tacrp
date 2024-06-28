@@ -43,11 +43,12 @@ function ENT:GiveAtt(ply)
         return
     end
 
-    TacRP:PlayerGiveAtt(ply, self.AttToGive, 1)
-    TacRP:PlayerSendAttInv(ply)
-
-    self:EmitSound("TacRP/weapons/flashlight_on.wav")
-    self:Remove()
+    local given = TacRP:PlayerGiveAtt(ply, self.AttToGive, 1)
+    if given then
+        TacRP:PlayerSendAttInv(ply)
+        self:EmitSound("TacRP/weapons/flashlight_on.wav")
+        self:Remove()
+    end
 end
 
 ENT.CollisionSoundsHard = {

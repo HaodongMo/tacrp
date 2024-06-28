@@ -5,12 +5,14 @@ AddCSLuaFile()
 
 // names and stuff
 SWEP.PrintName = "HK HK94"
+SWEP.AbbrevName = "HK94"
 SWEP.Category = "Tactical RP"
 
 SWEP.SubCatTier = "4Consumer"
-SWEP.SubCatType = "5Sporter Carbine"
+SWEP.SubCatType = "5Sporter"
 
 SWEP.Description = "Semi-automatic model of a legendary submachine gun.\nUses reduced capacity magazines."
+SWEP.Description_Quote = ""
 
 SWEP.Trivia_Caliber = "9x19mm"
 SWEP.Trivia_Manufacturer = "Heckler & Koch"
@@ -20,7 +22,7 @@ SWEP.Faction = TacRP.FACTION_NEUTRAL
 SWEP.Credits = "Assets: Tactical Intervention \nModel Edit: speedonerd (it was sooooo hard lol)"
 
 SWEP.ViewModel = "models/weapons/tacint/v_hk94.mdl"
-SWEP.WorldModel = "models/weapons/tacint/w_mp5.mdl"
+SWEP.WorldModel = "models/weapons/tacint/w_hk94.mdl"
 
 SWEP.Slot = 2
 
@@ -92,16 +94,18 @@ SWEP.Firemodes = false
 SWEP.RPM = 600
 SWEP.RPMMultSemi = 0.7
 
-SWEP.RecoilKick = 1.5
+SWEP.RecoilKick = 2
 
-SWEP.ClipSize = 15
+SWEP.ClipSize = 30
+
+SWEP.HipFireSpreadPenalty = 0.018
 
 SWEP.FreeAimMaxAngle = 3.75
 
 SWEP.Attachments = {
     [1] = {
         PrintName = "Optic",
-        Category = {"optic_cqb", "optic_medium"},
+        Category = {"optic_cqb_nookp7", "optic_medium"},
         Bone = "ValveBiped.mp5_rootbone",
         AttachSound = "TacRP/weapons/optic_on.wav",
         DetachSound = "TacRP/weapons/optic_off.wav",
@@ -118,13 +122,13 @@ SWEP.Attachments = {
         AttachSound = "TacRP/weapons/silencer_on.wav",
         DetachSound = "TacRP/weapons/silencer_off.wav",
         Pos_VM = Vector(-4.32, -0.3, 28),
-        Pos_WM = Vector(24, 2.5, -5.25),
+        Pos_WM = Vector(31, 2.5, -5.25),
         Ang_VM = Angle(90, 0, 0),
         Ang_WM = Angle(0, -3.5, 180),
     },
     [3] = {
         PrintName = "Tactical",
-        Category = "tactical",
+        Category = {"tactical", "tactical_zoom", "tactical_ebullet"},
         Bone = "ValveBiped.mp5_rootbone",
         AttachSound = "TacRP/weapons/flashlight_on.wav",
         DetachSound = "TacRP/weapons/flashlight_off.wav",

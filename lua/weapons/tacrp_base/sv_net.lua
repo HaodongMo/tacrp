@@ -1,6 +1,6 @@
 function SWEP:NetworkWeapon(sendto)
     net.Start("TacRP_networkweapon")
-    net.WriteEntity(self)
+    net.WriteUInt(self:EntIndex(), 13)
 
     for slot, slottbl in pairs(self.Attachments) do
         if !slottbl.Installed then net.WriteUInt(0, TacRP.Attachments_Bits) continue end
@@ -41,6 +41,10 @@ function SWEP:ReceivePreset()
             end
 
             self:Attach(slot, att, true, true)
+
+            if atttbl.OnPresetLoad then
+                atttbl.OnPresetLoad(self)
+            end
         end
     end
 

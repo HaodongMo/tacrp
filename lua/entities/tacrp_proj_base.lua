@@ -47,11 +47,24 @@ ENT.FlareColor = nil
 ENT.FlareSizeMin = 200
 ENT.FlareSizeMax = 250
 
+ENT.LockOnEntity = NULL
+ENT.SteerSpeed = 60
+ENT.SeekerAngle = math.cos(35)
+ENT.LeadTarget = false
+ENT.SuperSteerTime = 0
+ENT.SuperSteerSpeed = 100
+ENT.BoostSpeed = 0
+ENT.SoftLaunchTime = 0.5
+ENT.NoReacquire = true
+ENT.FlareRedirectChance = 0
+
 ENT.AudioLoop = nil
 
 ENT.BounceSounds = nil
 
 ENT.CollisionSphere = nil
+
+ENT.GunshipWorkaround = true
 
 function ENT:SetupDataTables()
     self:NetworkVar("Entity", 0, "Weapon")
@@ -88,9 +101,12 @@ function ENT:Initialize()
         if self.IsRocket then
             phys:EnableGravity(false)
         end
+
+        self:SwitchTarget(self.LockOnEntity)
     end
 
     self.SpawnTime = CurTime()
+    self.NextFlareRedirectTime = 0
 
     self.NPCDamage = IsValid(self:GetOwner()) and self:GetOwner():IsNPC() and !TacRP.ConVars["npc_equality"]:GetBool()
 
@@ -201,6 +217,14 @@ function ENT:PhysicsCollide(data, collider)
         end
 
         self:Stuck()
+    else
+        if !self.Bounced then
+            self.Bounced = true
+            local dot = data.HitNormal:Dot(Vector(0, 0, 1))
+            if dot < 0 then
+                self:GetPhysicsObject():SetVelocityInstantaneous(data.OurNewVelocity * (1 + dot * 0.5))
+            end
+        end
     end
 
     if data.DeltaTime < 0.1 then return end
@@ -266,6 +290,83 @@ function ENT:Think()
         self:PreDetonate()
     end
 
+    if SERVER then
+        local target = self.LockOnEntity
+        if IsValid(target) then
+            if self.SoftLaunchTime + self.SpawnTime < CurTime() then
+                local tpos = target:WorldSpaceCenter()
+
+                if self.LeadTarget then
+                    local dist = (tpos - self:GetPos()):Length()
+                    local time = dist / self:GetVelocity():Length()
+                    tpos = tpos + (target:GetVelocity() * time)
+                end
+
+                local dir = (tpos - self:GetPos()):GetNormalized()
+                local dot = dir:Dot(self:GetAngles():Forward())
+
+                if self.SuperSeeker or dot >= self.SeekerAngle or (self.SuperSteerTime + self.SpawnTime >= CurTime()) then
+
+                    local ang = dir:Angle()
+
+                    local p = self:GetAngles().p
+                    local y = self:GetAngles().y
+
+                    local speed = self.SteerSpeed
+
+                    if self.SuperSteerTime + self.SpawnTime >= CurTime() then
+                        speed = self.SuperSteerSpeed
+                    end
+
+                    p = math.ApproachAngle(p, ang.p, FrameTime() * speed)
+                    y = math.ApproachAngle(y, ang.y, FrameTime() * speed)
+
+                    self:SetAngles(Angle(p, y, 0))
+                elseif self.NoReacquire then
+                    self.LockOnEntity = nil
+                end
+            end
+
+            if target.UnTrackable then self.LockOnEntity = nil end
+
+            if IsValid(target) and self.FlareRedirectChance > 0 and self.NextFlareRedirectTime <= CurTime() and !TacRP.FlareEntities[target:GetClass()] then
+                local flares = ents.FindInSphere(self:GetPos(), 2048)
+
+                for k, v in pairs(flares) do
+                    if TacRP.FlareEntities[v:GetClass()] and math.Rand(0, 1) <= self.FlareRedirectChance then
+                        self:SwitchTarget(v)
+                        break
+                    end
+                end
+
+                self.NextFlareRedirectTime = CurTime() + 0.5
+            end
+        end
+    end
+
+    if self.BoostSpeed > 0 then
+        local phys = self:GetPhysicsObject()
+
+        if IsValid(phys) then
+            phys:SetVelocity(self:GetAngles():Forward() * self.BoostSpeed)
+        end
+    end
+
+    local gunship = {["npc_combinegunship"] = true, ["npc_combinedropship"] = true}
+    if SERVER and self.GunshipWorkaround and (self.GunshipCheck or 0 < CurTime()) then
+            self.GunshipCheck = CurTime() + 0.33
+            local tr = util.TraceLine({
+                start = self:GetPos(),
+                endpos = self:GetPos() + (self:GetVelocity() * 6 * engine.TickInterval()),
+                filter = self,
+                mask = MASK_SHOT
+            })
+        if IsValid(tr.Entity) and gunship[tr.Entity:GetClass()] then
+            self:SetPos(tr.HitPos)
+            self:Detonate()
+        end
+    end
+
     self:DoSmokeTrail()
 
     self:OnThink()
@@ -310,7 +411,6 @@ function ENT:Impact()
 end
 
 function ENT:Stuck()
-
 end
 
 function ENT:DrawTranslucent()
@@ -325,6 +425,22 @@ function ENT:Draw()
     if self.FlareColor then
         render.SetMaterial(mat)
         render.DrawSprite(self:GetPos() + (self:GetAngles():Forward() * -16), math.Rand(self.FlareSizeMin, self.FlareSizeMax), math.Rand(self.FlareSizeMin, self.FlareSizeMax), self.FlareColor)
+    end
+end
+
+function ENT:SwitchTarget(target)
+    if IsValid(self.LockOnEntity) then
+        if isfunction(self.LockOnEntity.OnLaserLock) then
+            self.LockOnEntity:OnLaserLock(false)
+        end
+    end
+
+    self.LockOnEntity = target
+
+    if IsValid(self.LockOnEntity) then
+        if isfunction(self.LockOnEntity.OnLaserLock) then
+            self.LockOnEntity:OnLaserLock(true)
+        end
     end
 end
 

@@ -20,7 +20,7 @@ function SWEP:CanBipod()
     if !self:GetValue("Bipod") then return false end
 
     if self:GetOwner():InVehicle() then return false end
-    if self:GetSprintAmount() > 0 then return false end
+    if self:GetSprintAmount() > 0 and !self:DoForceSightsBehavior() then return false end
 
     if self.CachedCanBipodTime >= CurTime() then return tobool(self.CachedCanBipod), self.CachedCanBipod end
 

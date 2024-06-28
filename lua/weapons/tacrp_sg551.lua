@@ -5,12 +5,14 @@ AddCSLuaFile()
 
 // names and stuff
 SWEP.PrintName = "SIG SG 551"
+SWEP.AbbrevName = "SG 551"
 SWEP.Category = "Tactical RP"
 
 SWEP.SubCatTier = "1Elite"
 SWEP.SubCatType = "4Assault Rifle"
 
 SWEP.Description = "Assault rifle with all around excellent performance, offset by a lower magazine capacity."
+SWEP.Description_Quote = "\"No questions, no answers. That's the business we're in.\""
 
 SWEP.Trivia_Caliber = "5.56x45mm"
 SWEP.Trivia_Manufacturer = "SIG Sauer AG"
@@ -103,6 +105,8 @@ SWEP.MuzzleVelocity = 22000
 SWEP.Firemodes = {2, -3, 1}
 
 SWEP.RPM = 850
+
+SWEP.PostBurstDelay = 0.1
 
 SWEP.Spread = 0.001
 
@@ -206,8 +210,7 @@ SWEP.AnimationTranslationTable = {
     ["fire1"] = "fire1_M",
     ["fire2"] = "fire2_M",
     ["fire3"] = "fire3_M",
-    ["fire4"] = "fire4_M",
-    ["fire5"] = "fire5_M",
+    ["fire4"] = {"fire4_M", "fire4_L", "fire4_R"},
     ["melee"] = {"melee1", "melee2"}
 }
 
@@ -250,7 +253,7 @@ SWEP.AttachmentElements = {
 SWEP.Attachments = {
     [1] = {
         PrintName = "Optic",
-        Category = {"optic_cqb", "optic_medium"},
+        Category = {"optic_cqb_nookp7", "optic_medium"},
         InstalledElements = {"sights"},
         Bone = "ValveBiped.sg551_rootbone",
         WMBone = "Box01",
@@ -276,7 +279,7 @@ SWEP.Attachments = {
     },
     [3] = {
         PrintName = "Tactical",
-        Category = "tactical",
+        Category = {"tactical", "tactical_zoom", "tactical_ebullet"},
         InstalledElements = {"tactical"},
         Bone = "ValveBiped.sg551_rootbone",
         WMBone = "Box01",

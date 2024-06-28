@@ -1,16 +1,17 @@
 function TacRP.DoorBust(ent, vel, attacker)
     if !string.find(ent:GetClass(), "door") then return end
     local cvar = 1 --TacRP.ConVars["doorbust"]:GetInt()
-    local t = 300 -- TacRP.ConVars["doorbust_time"]:GetFloat()
-    if cvar == 0 or ent.TacRP_DoorBusted then return end
-    ent.TacRP_DoorBusted = true
+    local t = 180 -- TacRP.ConVars["doorbust_time"]:GetFloat()
 
     local oldSpeed = ent:GetInternalVariable("m_flSpeed")
     ent:Fire("SetSpeed", tostring(oldSpeed * 10), 0)
     ent:Fire("Open", "", 0)
     ent:Fire("SetSpeed", oldSpeed, 0.3)
 
-    if ent:GetPhysicsObject():IsValid() and cvar == 1 then
+    -- I still can't figure out what exactly crashes on brush doors
+    if vel:Length() >= 1 and ent:GetPhysicsObject():IsValid() and cvar == 1 and ent:GetClass() == "prop_door_rotating" then
+        if cvar == 0 or ent.TacRP_DoorBusted then return end
+        ent.TacRP_DoorBusted = true
 
         -- Don't remove the door, that's a silly thing to do
         ent:SetNoDraw(true)
@@ -23,33 +24,36 @@ function TacRP.DoorBust(ent, vel, attacker)
         prop:SetPos(ent:GetPos())
         prop:SetAngles(ent:GetAngles())
         prop:SetSkin(ent:GetSkin() or 0)
-        prop:Spawn()
-
-        -- Shrink the door collision a little so it will slide through the door frame. Only do it to brush doors or the hl2 one in case some of them have custom collision
-        if prop:GetModel() == "models/props_c17/door01_left.mdl" or string.Left(prop:GetModel(), 1) == "*" then
-            local mins, maxs = prop:GetCollisionBounds()
-            prop:PhysicsInitBox(mins + Vector(2, 2, 2), maxs - Vector(2, 2, 2))
+        for i = 0, ent:GetNumBodyGroups() do
+            prop:SetBodygroup(i, ent:GetBodygroup(i) or 0)
         end
-
-        prop:GetPhysicsObject():SetVelocityInstantaneous(vel)
+        prop:Spawn()
         prop:SetPhysicsAttacker(attacker, 3)
+        prop:GetPhysicsObject():SetVelocityInstantaneous(vel)
 
         -- This is necessary to set the render bounds of func doors
         timer.Simple(0, function()
+
+            -- Shrink the door collision a little so it will slide through the door frame. Only do it to brush doors or the hl2 one in case some of them have custom collision
+            -- if prop:GetModel() == "models/props_c17/door01_left.mdl" or string.Left(prop:GetModel(), 1) == "*" then
+            --     local mins, maxs = prop:GetCollisionBounds()
+            --     prop:PhysicsInitBox(mins + Vector(2, 2, 2), maxs - Vector(2, 2, 2))
+            -- end
+
             net.Start("tacrp_doorbust")
                 net.WriteEntity(prop)
             net.Broadcast()
         end)
 
         -- Make it not collide with players after a bit cause that's annoying
-        timer.Create("TacRP_DoorBust_" .. prop:EntIndex(), 2, 1, function()
-            if IsValid(prop) then
-                prop:SetCollisionGroup(COLLISION_GROUP_WEAPON)
-                local c = prop:GetColor()
-                prop:SetRenderMode(RENDERMODE_TRANSALPHA)
-                prop:SetColor(Color(c.r, c.g, c.b, c.a * 0.8))
-            end
-        end)
+        -- timer.Create("TacRP_DoorBust_" .. prop:EntIndex(), 2, 1, function()
+        --     if IsValid(prop) then
+        --         prop:SetCollisionGroup(COLLISION_GROUP_WEAPON)
+        --         local c = prop:GetColor()
+        --         prop:SetRenderMode(RENDERMODE_TRANSALPHA)
+        --         prop:SetColor(Color(c.r, c.g, c.b, c.a * 0.8))
+        --     end
+        -- end)
 
         -- Reset it after a while
         timer.Simple(1, function()

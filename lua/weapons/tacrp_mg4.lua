@@ -5,10 +5,11 @@ AddCSLuaFile()
 
 // names and stuff
 SWEP.PrintName = "HK MG4"
+SWEP.AbbrevName = "MG4"
 SWEP.Category = "Tactical RP"
 
 SWEP.SubCatTier = "1Elite"
-SWEP.SubCatType = "4Machine Gun"
+SWEP.SubCatType = "5Machine Gun"
 
 SWEP.Description = "Machine gun with huge volume of fire, but is difficult to use without bipod deployed."
 
@@ -217,8 +218,7 @@ SWEP.AnimationTranslationTable = {
     ["fire1"] = "fire1_L",
     ["fire2"] = "fire2_L",
     ["fire3"] = "fire3_L",
-    ["fire4"] = "fire4_L",
-    ["fire5"] = "fire5_L",
+    ["fire4"] = {"fire4_M", "fire4_L", "fire4_R"},
     ["melee"] = {"melee1", "melee2"}
 }
 
@@ -277,7 +277,7 @@ SWEP.Attachments = {
     },
     [3] = {
         PrintName = "Tactical",
-        Category = "tactical",
+        Category = {"tactical", "tactical_zoom", "tactical_ebullet"},
         Bone = "ValveBiped.MG4_root",
         AttachSound = "TacRP/weapons/flashlight_on.wav",
         DetachSound = "TacRP/weapons/flashlight_off.wav",

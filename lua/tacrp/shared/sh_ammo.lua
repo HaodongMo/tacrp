@@ -6,6 +6,7 @@ local ammotypes = {
     "ti_gas",
     "ti_nuke",
     "ti_charge",
+    "ti_heal"
     -- "ti_sniper",
 }
 
@@ -17,6 +18,7 @@ local materials = {
     ["ti_gas"] = "tacrp/grenades/gas",
     ["ti_nuke"] = "tacrp/grenades/nuke",
     ["ti_charge"] = "tacrp/grenades/breach",
+    ["ti_heal"] = "tacrp/grenades/heal",
     ["SniperPenetratedRound"] = "tacrp/grenades/sniper",
 }
 
@@ -31,7 +33,7 @@ for _, i in pairs(ammotypes) do
     end
 end
 
-
+--[[]
 if CLIENT then
     hook.Add("InitPostEntity", "tacrp_hl2hud", function()
         if !HL2HUD then return end
@@ -61,3 +63,4 @@ if CLIENT then
         end
     end)
 end
+]]

@@ -5,13 +5,14 @@ AddCSLuaFile()
 
 // names and stuff
 SWEP.PrintName = "Colt M1911"
+SWEP.AbbrevName = "M1911"
 SWEP.Category = "Tactical RP" // "Tactical RP (Extras)"
 
 SWEP.SubCatTier = "4Consumer"
-SWEP.SubCatType = "1Sidearm"
+SWEP.SubCatType = "1Pistol"
 
 SWEP.Description = "Surplus pistol from an era before tactical attachments and pistol optics, yet still hits quite hard."
-SWEP.Description_Quote = "Two world wars"
+SWEP.Description_Quote = "\"Hasta la vista, baby!\""
 
 SWEP.Trivia_Caliber = ".45 ACP"
 SWEP.Trivia_Manufacturer = "Colt"
@@ -108,7 +109,7 @@ SWEP.BodyDamageMultipliers = {
 
 SWEP.Firemode = 1
 
-SWEP.RPM = 400
+SWEP.RPM = 380
 SWEP.RPMMultSemi = 0.75
 
 SWEP.Spread = 0.007
@@ -206,6 +207,7 @@ SWEP.DropMagazineTime = 0.2
 SWEP.QCA_Muzzle = 4
 
 SWEP.MuzzleEffect = "muzzleflash_pistol"
+SWEP.EjectEffect = 1
 
 // anims
 
@@ -253,6 +255,8 @@ SWEP.LastShot = true
 
 // attachments
 
+SWEP.NoTactical = true
+
 SWEP.Attachments = {
     [1] = {
         PrintName = "Muzzle",
@@ -275,24 +279,38 @@ SWEP.Attachments = {
         DetachSound = "TacRP/weapons/flashlight_off.wav",
     },
     [3] = {
+        PrintName = "Tactical",
+        Category = {"tactical_ebullet"},
+        Bone = "sphinx_ROOT",
+        WMBone = "Box01",
+        AttachSound = "TacRP/weapons/flashlight_on.wav",
+        DetachSound = "TacRP/weapons/flashlight_off.wav",
+        VMScale = 1.1,
+        WMScale = 1.3,
+        Pos_VM = Vector(-2, 0.1, 6.5),
+        Ang_VM = Angle(90, 0, 180),
+        Pos_WM = Vector(0, 5.5, -2.75),
+        Ang_WM = Angle(0, -90, 180),
+    },
+    [4] = {
         PrintName = "Bolt",
         Category = {"bolt_automatic"},
         AttachSound = "TacRP/weapons/flashlight_on.wav",
         DetachSound = "TacRP/weapons/flashlight_off.wav",
     },
-    [4] = {
+    [5] = {
         PrintName = "Trigger",
         Category = {"trigger_semi"},
         AttachSound = "TacRP/weapons/flashlight_on.wav",
         DetachSound = "TacRP/weapons/flashlight_off.wav",
     },
-    [5] = {
+    [6] = {
         PrintName = "Ammo",
         Category = {"ammo_pistol"},
         AttachSound = "TacRP/weapons/flashlight_on.wav",
         DetachSound = "TacRP/weapons/flashlight_off.wav",
     },
-    [6] = {
+    [7] = {
         PrintName = "Perk",
         Category = {"perk", "perk_melee", "perk_shooting", "perk_reload"},
         AttachSound = "tacrp/weapons/flashlight_on.wav",

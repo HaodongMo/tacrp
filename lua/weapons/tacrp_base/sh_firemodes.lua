@@ -53,6 +53,7 @@ function SWEP:ToggleSafety(onoff)
     onoff = onoff or !self:GetSafe()
 
     if onoff and self:DoForceSightsBehavior() then return end
+    if DarkRP and self:GetNWBool("TacRP_PoliceBiocode") and !self:GetOwner():isCP() then onoff = true end
 
     self:SetSafe(onoff)
 
@@ -96,5 +97,17 @@ function SWEP:HasFiremode(mode, base)
         return false
     else
         return valfunc(self, "Firemode") == mode or (mode < 0 and valfunc(self, "Firemode") < 0)
+    end
+end
+
+function SWEP:GetFiremodeBurstLength(base)
+    local valfunc = base and self.GetBaseValue or self.GetValue
+    if valfunc(self, "Firemodes") then
+        for _, v in pairs(valfunc(self, "Firemodes")) do
+            if v < 0 then return -v end
+        end
+        return false
+    else
+        return valfunc(self, "Firemode") < 0 and -valfunc(self, "Firemode") or false
     end
 end

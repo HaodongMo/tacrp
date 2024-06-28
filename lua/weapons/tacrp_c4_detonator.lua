@@ -50,6 +50,7 @@ SWEP.MeleeSpeedMultTime = 2 // seconds to apply slow down for
 SWEP.SprintToFireTime = 0.25
 
 SWEP.Scope = false
+SWEP.NoSecondaryMelee = true
 
 // hold types
 
@@ -140,8 +141,8 @@ end
 
 function SWEP:SecondaryAttack()
     local nade = self:GetOwner():GetNWInt("ti_nade")
-    if nade != 11 and nade != 6 then
-        self:GetOwner():SetNWInt("ti_nade", 11)
+    if nade != 12 and nade != 6 then
+        self:GetOwner():SetNWInt("ti_nade", 12)
     end
     self:PrimeGrenade()
 end

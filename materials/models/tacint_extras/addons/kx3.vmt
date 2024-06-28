@@ -1,0 +1,11 @@
+"VertexLitGeneric"
+{
+	"$baseTexture" "models\tacint_extras\addons\kx3"
+	$phong 1
+	$phongboost "0.600000"
+	$phongfresnelranges "[.2 9 35]"
+	$phongexponent 35
+	$rimlight 0
+	$rimlightexponent 55
+	$rimlightboost "0.350000"
+}

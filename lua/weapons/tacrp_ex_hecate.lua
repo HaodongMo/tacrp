@@ -5,13 +5,15 @@ AddCSLuaFile()
 
 // names and stuff
 SWEP.PrintName = "PGM Hécate II"
+SWEP.AbbrevName = "Hécate II"
+
 SWEP.Category = "Tactical RP" // "Tactical RP (Extras)"
 
 SWEP.SubCatTier = "2Operator"
-SWEP.SubCatType = "9Anti-Materiel Rifle"
+SWEP.SubCatType = "7Sniper Rifle"
 
 SWEP.Description = "Heavy anti-materiel rifle that can kill in one shot.\nEquipped with a 12x scope by default. \nLight enough for swing for melee."
-SWEP.Description_Quote = "Does not fire phantom bullets."
+SWEP.Description_Quote = "Gun Runner tested, NCR approved."
 
 SWEP.Trivia_Caliber = ".50 BMG"
 SWEP.Trivia_Manufacturer = "PGM Précision"
@@ -299,7 +301,7 @@ SWEP.Attachments = {
     },
     [3] = {
         PrintName = "Tactical",
-        Category = "tactical",
+        Category = {"tactical", "tactical_zoom", "tactical_ebullet"},
         WMBone = "Box01",
         Bone = "ValveBiped.uratio_rootbone",
         AttachSound = "TacRP/weapons/flashlight_on.wav",

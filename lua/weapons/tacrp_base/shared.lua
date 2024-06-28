@@ -98,6 +98,8 @@ SWEP.Bipod = false // Weapon can deploy bipod
 SWEP.BipodRecoil = 0.35 // Recoil Amount multiplier per shot
 SWEP.BipodKick = 0.25 // Recoil Kick multiplier
 
+SWEP.TriggerDelay = 0.0
+
 // SWEP.ShootChance = 1
 SWEP.JamWaitTime = 0.3
 SWEP.JamFactor = 0 // higher = more frequent jams. no jams at 0
@@ -124,6 +126,10 @@ SWEP.RecoilCrouchMult = 0.75 // multiplier for when crouched
 SWEP.RecoilSpreadPenalty = 0.001 // extra spread per one unit of recoil
 SWEP.RecoilResetInstant = true // Set false to account for RPM.
 
+// Controls alternate bloom behavior, defaults to convar
+SWEP.AlwaysAltRecoil = nil
+SWEP.NeverAltRecoil = nil
+
 SWEP.RecoilVisualKick = 0.1
 SWEP.RecoilKick = 0.25
 SWEP.RecoilStability = 0 // Direction of recoil kick, 1 is completely vertical and 0 is 180deg cone
@@ -136,16 +142,31 @@ SWEP.RecoilPatternSeed = nil // custom seed. Defaults to weapon class
 
 SWEP.CanBlindFire = true
 
+SWEP.CannotHipFire = false
+
+// lockon
+
+SWEP.LockOnAngle = math.cos(math.rad(5))
+SWEP.LockOnRange = 3500
+
+SWEP.LockOnTime = 1.5
+
+SWEP.ProvideTargetData = true
+
+SWEP.LockOnOutOfSights = false
+SWEP.LockOnInSights = false
+
+SWEP.RequireLockOn = false // Cannot shoot without a lock
+
 // handling
 
 SWEP.MoveSpeedMult = 1
 SWEP.ShootingSpeedMult = 0.5 // slow down applied while shooting
 SWEP.SightedSpeedMult = 0.5
-SWEP.MeleeSpeedMult = 0.85
+SWEP.MeleeSpeedMult = 0.75
 SWEP.MeleeSpeedMultTime = 1 // seconds to apply slow down for
 SWEP.ReloadSpeedMult = 1
 SWEP.ReloadSpeedMultTime = 0.5 // duration for slowdown to fade out for AFTER RELOAD FINISHES
-
 
 SWEP.ShootWhileSprint = false
 
@@ -236,6 +257,9 @@ SWEP.BreathDrain = 1
 SWEP.FreeAim = true
 SWEP.FreeAimMaxAngle = 3.5
 
+SWEP.ShootOffset = Vector(0, 0, 0)
+SWEP.ShootOffsetAngle = Angle(0, 0, 0)
+
 // quicknade
 
 SWEP.CanQuickNade = true
@@ -281,6 +305,7 @@ SWEP.TryUnholster = false // if we have an "unholster" animation use it instead 
 SWEP.ShotgunReload = false
 SWEP.ShotgunThreeload = true // use those stupid 3 shot reload animations
 SWEP.ShotgunReloadCompleteStart = false // do not interrupt reload_start and instead wait for it to finish first. used on FP6 animations
+SWEP.ShotgunFullCancel = false // Ignore tacrp_reload_sg_cancel and force cancel animation
 SWEP.ReloadUpInTime = nil // time to restore ammo, if unset restores at end of animation
 SWEP.ReloadTimeMult = 1
 SWEP.DeployTimeMult = 1
@@ -296,6 +321,7 @@ SWEP.DefaultBodygroups = "0000000"
 SWEP.DefaultWMBodygroups = "0000000"
 SWEP.DefaultSkin = 0
 SWEP.BulletBodygroups = nil
+SWEP.BulletBodygroupsSetAll = false // Set all applicable bullet groups, rather than just the last
 
 /*
 {
@@ -324,6 +350,11 @@ SWEP.Sound_BipodUp = "tacrp/bipod_up.wav"
 
 SWEP.Sound_MeleeSwing = ""
 
+SWEP.Sound_ToggleTactical = "tacrp/firemode.wav"
+
+SWEP.Sound_StartLockOn = "tacrp/check1.wav"
+SWEP.Sound_FinishLockOn = "tacrp/locked1.wav"
+
 // effects
 
 SWEP.EffectsAlternate = false // Effects will alternate using L and R attachments.
@@ -350,7 +381,7 @@ SWEP.WM_QCA_EjectR = 4
 
 SWEP.MuzzleEffect = "muzzleflash_pistol"
 
-SWEP.EjectEffect = 1 // 1 = pistol, 2 = rifle, 3 = shotgun
+SWEP.EjectEffect = 0 // 1 = pistol, 2 = rifle, 3 = shotgun
 SWEP.EjectDelay = 0
 SWEP.EjectScale = 1
 
@@ -481,7 +512,12 @@ SWEP.BounceWeaponIcon = false
 SWEP.SwayScale = 1
 SWEP.BobScale = 1
 
+SWEP.LaserColor = Color(255, 0, 0)
+
 SWEP.ActiveEffects = {}
+
+SWEP.PCFs = {}
+SWEP.MuzzPCFs = {}
 
 AddCSLuaFile()
 
@@ -522,7 +558,7 @@ function SWEP:SetupDataTables()
     self:NetworkVar("Float", 2, "NextIdle")
     self:NetworkVar("Float", 3, "LastRecoilTime")
     self:NetworkVar("Float", 4, "RecoilDirection")
-    self:NetworkVar("Float", 5, "NWSprintAmount")
+    self:NetworkVar("Float", 5, "SprintAmount")
     self:NetworkVar("Float", 6, "SprintLockTime")
     self:NetworkVar("Float", 7, "LastScopeTime")
     self:NetworkVar("Float", 8, "LastMeleeTime")
@@ -534,7 +570,8 @@ function SWEP:SetupDataTables()
     self:NetworkVar("Float", 14, "HolsterTime")
     self:NetworkVar("Float", 15, "NWLastProceduralFireTime")
     self:NetworkVar("Float", 16, "NWHoldBreathAmount")
-    self:NetworkVar("Float", 17, "NWBreath")
+    self:NetworkVar("Float", 17, "Breath")
+    self:NetworkVar("Float", 18, "LockOnStartTime")
 
     self:NetworkVar("Int", 0, "BurstCount")
     self:NetworkVar("Int", 1, "ScopeLevel")
@@ -550,7 +587,7 @@ function SWEP:SetupDataTables()
     self:NetworkVar("Bool", 4, "PrimedGrenade")
     self:NetworkVar("Bool", 5, "Safe")
     self:NetworkVar("Bool", 6, "BlindFireLeft")
-    self:NetworkVar("Bool", 7, "NWTactical")
+    self:NetworkVar("Bool", 7, "Tactical")
     self:NetworkVar("Bool", 8, "Charge")
     self:NetworkVar("Bool", 9, "Peeking")
     self:NetworkVar("Bool", 10, "BlindFireRight") // bleh, but actually less networking load than using an integer (32 bit)
@@ -558,6 +595,9 @@ function SWEP:SetupDataTables()
     self:NetworkVar("Bool", 12, "Ready")
     self:NetworkVar("Bool", 13, "InBipod")
     self:NetworkVar("Bool", 14, "OutOfBreath")
+    self:NetworkVar("Bool", 15, "HoldingBreath")
+    self:NetworkVar("Bool", 16, "LastWasSprinting")
+    self:NetworkVar("Bool", 17, "EmptyReload")
 
     self:NetworkVar("Angle", 0, "FreeAimAngle")
     self:NetworkVar("Angle", 1, "LastAimAngle")
@@ -567,6 +607,7 @@ function SWEP:SetupDataTables()
 
     self:NetworkVar("Entity", 0, "HolsterEntity")
     self:NetworkVar("Entity", 1, "CornershotEntity")
+    self:NetworkVar("Entity", 2, "LockOnEntity")
 
     self:SetFreeAimAngle(Angle())
     self:SetLastAimAngle(Angle())
@@ -575,6 +616,10 @@ function SWEP:SetupDataTables()
     self:SetReady(false)
     self:SetBreath(1)
     self:SetHoldBreathAmount(0)
+    self:SetLastWasSprinting(false)
+    self:SetHoldingBreath(false)
+    self:SetLockOnEntity(NULL)
+    self:SetLockOnStartTime(0)
 end
 
 function SWEP:OnDrop()
@@ -602,9 +647,7 @@ local function clunpredictvar(tbl, name, varname, default)
     end
 end
 
-clunpredictvar(SWEP, "Tactical", "NWTactical", true)
 clunpredictvar(SWEP, "SightAmount", "NWSightAmount", 0)
-clunpredictvar(SWEP, "SprintAmount", "NWSprintAmount", 0)
+-- clunpredictvar(SWEP, "SprintAmount", "NWSprintAmount", 0)
 clunpredictvar(SWEP, "LastProceduralFireTime", "NWLastProceduralFireTime", 0)
 clunpredictvar(SWEP, "HoldBreathAmount", "NWHoldBreathAmount", 0)
-clunpredictvar(SWEP, "Breath", "NWBreath", 0)

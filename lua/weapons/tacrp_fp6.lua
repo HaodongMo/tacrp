@@ -5,6 +5,7 @@ AddCSLuaFile()
 
 // names and stuff
 SWEP.PrintName = "HK FABARM FP6"
+SWEP.AbbrevName = "FABARM FP6"
 SWEP.Category = "Tactical RP"
 
 SWEP.SubCatTier = "2Operator"
@@ -227,7 +228,7 @@ SWEP.Attachments = {
     },
     [2] = {
         PrintName = "Tactical",
-        Category = "tactical",
+        Category = {"tactical", "tactical_zoom"},
         Bone = "ValveBiped.FP6_base",
         AttachSound = "TacRP/weapons/flashlight_on.wav",
         DetachSound = "TacRP/weapons/flashlight_off.wav",

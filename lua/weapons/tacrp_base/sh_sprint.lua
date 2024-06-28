@@ -5,13 +5,7 @@ function SWEP:GetIsSprinting()
         return false
     end
 
-    if TacRP.ConVars["sprint_counts_midair"]:GetBool() and owner:GetMoveType() != MOVETYPE_NOCLIP and !owner:IsOnGround() and !self:GetReloading() then
-        return true
-    end
-
-    if self:DoForceSightsBehavior() and self:GetScopeLevel() == 0 then
-        return true
-    end
+    if self:CanShootInSprint() then return false end
 
     local walkspeed = owner:GetWalkSpeed()
     local runspeed = owner:GetRunSpeed()
@@ -33,12 +27,31 @@ function SWEP:GetIsSprinting()
 
     if !owner.TacRP_Moving then return false end -- Don't check IN_ move keys because 1) controllers and 2) bots
     if !owner:KeyDown(IN_SPEED) then return false end -- SetButtons does not seem to affect this?
-    -- if curspeed <= 0 then return false end -- Unfortunately this is not predictible
+    local curspeed = owner:GetVelocity():Length()
+    if curspeed <= 0 then return false end
     if !owner:OnGround() then return false end
 
     if self:GetOwner():GetInfoNum("tacrp_aim_cancels_sprint", 0) > 0 and self:GetScopeLevel() > 0 then return false end
 
     return true
+end
+
+function SWEP:ShouldLowerWeapon()
+    local owner = self:GetOwner()
+
+    if !owner:IsValid() or owner:IsNPC() or owner:IsNextBot() then
+        return false
+    end
+
+    if TacRP.ConVars["sprint_counts_midair"]:GetBool() and owner:GetMoveType() != MOVETYPE_NOCLIP and !owner:IsOnGround() then
+        return true
+    end
+
+    if self:DoForceSightsBehavior() and self:GetScopeLevel() == 0 and !self:GetInBipod() and self:GetBlindFireMode() == TacRP.BLINDFIRE_NONE then
+        return true
+    end
+
+    return false
 end
 
 function SWEP:CanStopSprinting()
@@ -101,17 +114,19 @@ function SWEP:ThinkSprint()
 
     self.LastWasSprinting = sprinting
 
-    if sprinting then
-        amt = math.Approach(amt, 1, FrameTime() / self:GetValue("SprintToFireTime"))
-    else
-        amt = math.Approach(amt, 0, FrameTime() / self:GetValue("SprintToFireTime"))
+    if IsFirstTimePredicted() or game.SinglePlayer() then
+        if (sprinting or (self:ShouldLowerWeapon() and !self:DoForceSightsBehavior())) and !self:GetInBipod() then
+            amt = math.Approach(amt, 1, FrameTime() / self:GetValue("SprintToFireTime"))
+        else
+            amt = math.Approach(amt, 0, FrameTime() / self:GetValue("SprintToFireTime"))
+        end
     end
 
     self:SetSprintAmount(amt)
 end
 
 function SWEP:CanShootInSprint(base)
-    if !TacRP.ConVars["sprint_lower"]:GetBool() then return true end
+    if !TacRP.ConVars["sprint_lower"]:GetBool() and !self:DoForceSightsBehavior() then return true end
     if base then
         return self:GetBaseValue("ShootWhileSprint")
     else

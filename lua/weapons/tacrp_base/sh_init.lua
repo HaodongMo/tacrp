@@ -27,6 +27,8 @@ function SWEP:Deploy()
             self:SetupModel(true)
         end
         return
+    elseif SERVER and self:GetOwner():IsPlayer() then
+        self:GetOwner():SetSaveValue("m_flNextAttack", 0)
     end
 
     self:SetBaseSettings()
@@ -40,7 +42,7 @@ function SWEP:Deploy()
     self:SetLastScopeTime(0)
     self:SetPrimedGrenade(false)
     self:SetBlindFireFinishTime(0)
-    self:SetJammed(false)
+    -- self:SetJammed(false)
     self:SetCharge(false)
 
     self:SetBurstCount(0)
@@ -189,6 +191,9 @@ function SWEP:Holster(wep)
         self:GetOwner():SetFOV(0, 0.1)
         self:SetLastProceduralFireTime(0)
 
+        self:GetOwner():DoAnimationEvent(ACT_GMOD_GESTURE_MELEE_SHOVE_1HAND)
+        self:SetShouldHoldType()
+
     end
 end
 
@@ -253,10 +258,6 @@ function SWEP:ClientInitialize()
 
     if !LocalPlayer().TacRPGreet and !TacRP.ConVars["shutup"]:GetBool() then
         LocalPlayer().TacRPGreet = true
-        -- LocalPlayer():PrintMessage(HUD_PRINTTALK, "Check Q menu -> Options/Tactical RP/Control Guide to see the controls!")
-        if !input.LookupBinding("grenade1") and !input.LookupBinding("grenade2") then
-            LocalPlayer():PrintMessage(HUD_PRINTTALK, "Bind +grenade1 and +grenade2 to use TacRP quick grenades!")
-        end
     end
 
     -- local mat = Material("entities/" .. self:GetClass() .. ".png")
@@ -310,7 +311,12 @@ function SWEP:SetShouldHoldType()
         return
     end
 
-    if self:GetIsSprinting() or self:GetSafe() and self:GetValue("HoldTypeSprint") then
+    if self:GetHolsterTime() > CurTime() then
+        self:SetHoldType("passive")
+        return
+    end
+
+    if (self:GetIsSprinting() or self:ShouldLowerWeapon() or self:GetSafe()) and self:GetValue("HoldTypeSprint") then
         self:SetHoldType(self:GetValue("HoldTypeSprint"))
         return
     end
@@ -323,6 +329,9 @@ function SWEP:SetShouldHoldType()
             self:SetHoldType(self:GetValue("HoldTypeBlindFire"))
             return
         end
+    elseif self:GetScopeLevel() > 0 and self:GetValue("HoldTypeSighted") then
+        self:SetHoldType(self:GetValue("HoldTypeSighted"))
+        return
     elseif self:GetScopeLevel() > 0 and TacRP.HoldTypeSightedLookup[self:GetValue("HoldType")] then
         self:SetHoldType(TacRP.HoldTypeSightedLookup[self:GetValue("HoldType")])
         return
@@ -337,8 +346,15 @@ function SWEP:SetShouldHoldType()
 end
 
 function SWEP:OnRemove()
-    if IsValid(self:GetOwner()) then
+    if IsValid(self:GetOwner()) and self:GetOwner():IsPlayer() then
         self:ToggleBoneMods(TacRP.BLINDFIRE_NONE)
+
+        if CLIENT then
+            local vm = self:GetOwner():GetViewModel()
+            if IsValid(vm) then
+                vm:SetMaterial() -- Quick and dirty fix for grenade materials persisting on VM when stripped
+            end
+        end
     end
     if CLIENT and (self:GetCustomize() or (self.GrenadeMenuAlpha or 0) > 0 or (self.BlindFireMenuAlpha or 0) > 0) then
         gui.EnableScreenClicker(false)

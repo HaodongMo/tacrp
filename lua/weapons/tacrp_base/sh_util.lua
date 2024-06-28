@@ -44,7 +44,7 @@ end
 
 function SWEP:DoProceduralIrons()
     local i = TacRP.ConVars["irons_procedural"]:GetInt()
-    return self.ProceduralIronFire and (i == 2 or (i == 1 and self:GetValue("Holosight"))) --and (!self.LastShot or self:Clip1() > 1)
+    return self:GetValue("ProceduralIronFire") and (i == 2 or (i == 1 and self:GetValue("Holosight"))) --and (!self.LastShot or self:Clip1() > 1)
 end
 
 function SWEP:CountAttachments()
@@ -68,4 +68,24 @@ function SWEP:GetPingOffsetScale()
     if game.SinglePlayer() then return 0 end
 
     return (self:GetOwner():Ping() - 5) / 1000
+end
+
+function SWEP:ScaleFOVByWidthRatio(fovDegrees, ratio)
+    local halfAngleRadians = fovDegrees * (0.5 * math.pi / 180)
+    local t = math.tan(halfAngleRadians)
+    t = t * ratio
+    local retDegrees = (180 / math.pi) * math.atan(t)
+
+    return retDegrees * 2
+end
+
+function SWEP:WidescreenFix(target)
+    return self:ScaleFOVByWidthRatio(target, ((ScrW and ScrW() or 4) / (ScrH and ScrH() or 3)) / (4 / 3))
+end
+
+function SWEP:UseAltRecoil(base)
+    local valfunc = base and self.GetBaseValue or self.GetValue
+    if valfunc(self, "AlwaysAltRecoil") then return true end
+    if valfunc(self, "NeverAltRecoil") then return false end
+    return TacRP.ConVars["altrecoil"]:GetBool()
 end

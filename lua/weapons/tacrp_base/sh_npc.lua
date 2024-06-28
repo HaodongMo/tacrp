@@ -160,7 +160,7 @@ function SWEP:NPC_Initialize()
 
     if TacRP.ConVars["npc_atts"]:GetBool() then
         for i, slot in pairs(self.Attachments) do
-            local atts = TacRP.GetAttsForCats(slot.Category or "")
+            local atts = TacRP.GetAttsForCats(slot.Category or "", self)
 
             local ind = math.random(0, #atts)
 

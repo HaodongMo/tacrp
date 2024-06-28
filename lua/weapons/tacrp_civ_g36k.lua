@@ -5,10 +5,11 @@ AddCSLuaFile()
 
 // names and stuff
 SWEP.PrintName = "HK HK243" // technically HK243 is the sporter version of the G36, not the G36K. too lazy to model edit
+SWEP.AbbrevName = "HK243"
 SWEP.Category = "Tactical RP"
 
 SWEP.SubCatTier = "3Security"
-SWEP.SubCatType = "5Sporter Carbine"
+SWEP.SubCatType = "5Sporter"
 
 SWEP.Description = "Semi-automatic model of an iconic polymer rifle.\nUses reduced capacity magazines."
 
@@ -59,7 +60,7 @@ SWEP.Firemodes = false
 
 SWEP.RPM = 600
 
-SWEP.ClipSize = 20
+SWEP.ClipSize = 30
 
 SWEP.Attachments = {
     [1] = {
@@ -90,7 +91,7 @@ SWEP.Attachments = {
     },
     [3] = {
         PrintName = "Tactical",
-        Category = "tactical",
+        Category = {"tactical", "tactical_zoom", "tactical_ebullet"},
         Bone = "ValveBiped.g36k_rootbone",
         WMBone = "Box01",
         AttachSound = "TacRP/weapons/flashlight_on.wav",

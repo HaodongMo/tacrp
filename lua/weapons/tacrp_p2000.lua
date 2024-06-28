@@ -5,10 +5,11 @@ AddCSLuaFile()
 
 // names and stuff
 SWEP.PrintName = "HK P2000"
+SWEP.AbbrevName = "P2000"
 SWEP.Category = "Tactical RP"
 
 SWEP.SubCatTier = "3Security"
-SWEP.SubCatType = "1Sidearm"
+SWEP.SubCatType = "1Pistol"
 
 SWEP.Description = "Well-rounded, run-of-the-mill police handgun."
 SWEP.Description_Quote = "\"Los! Los! Los!\""
@@ -32,7 +33,7 @@ SWEP.BalanceStats = {
         RPM = 450,
 
         BodyDamageMultipliers = {
-            [HITGROUP_HEAD] = 3,
+            [HITGROUP_HEAD] = 5,
             [HITGROUP_CHEST] = 1,
             [HITGROUP_STOMACH] = 1,
             [HITGROUP_LEFTARM] = 1,
@@ -47,7 +48,7 @@ SWEP.BalanceStats = {
         Damage_Min = 10,
         Range_Min = 500,
         Range_Max = 2000,
-        RPM = 420,
+        RPM = 360,
         RPMMultSemi = 1,
 
         RecoilResetInstant = true,
@@ -66,8 +67,6 @@ SWEP.BalanceStats = {
             [HITGROUP_RIGHTLEG] = 0.75,
             [HITGROUP_GEAR] = 0.9
         },
-
-        ReloadTimeMult = 1.2 * 1.25,
     },
     [TacRP.BALANCE_PVE] = {
         Damage_Max = 9,
@@ -128,9 +127,9 @@ SWEP.CanBlindFire = true
 
 // handling
 
-SWEP.MoveSpeedMult = 1
-SWEP.ShootingSpeedMult = 0.5
-SWEP.SightedSpeedMult = 0.5
+SWEP.MoveSpeedMult = 0.975
+SWEP.ShootingSpeedMult = 0.9
+SWEP.SightedSpeedMult = 0.8
 
 SWEP.ReloadSpeedMult = 0.75
 
@@ -203,6 +202,7 @@ SWEP.ShootPitchVariance = 2.5 // amount to vary pitch by each shot
 SWEP.QCA_Muzzle = 4
 
 SWEP.MuzzleEffect = "muzzleflash_pistol"
+SWEP.EjectEffect = 1
 
 // anims
 
@@ -286,7 +286,7 @@ SWEP.Attachments = {
     },
     [3] = {
         PrintName = "Tactical",
-        Category = "tactical",
+        Category = {"tactical", "tactical_zoom", "tactical_ebullet"},
         Bone = "ValveBiped.p2000_rootbone",
         WMBone = "Box01",
         AttachSound = "tacrp/weapons/flashlight_on.wav",

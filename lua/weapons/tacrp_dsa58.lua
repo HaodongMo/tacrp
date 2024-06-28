@@ -4,17 +4,19 @@ SWEP.Spawnable = true
 AddCSLuaFile()
 
 // names and stuff
-SWEP.PrintName = "DSA FAL SA58"
+SWEP.PrintName = "DSA SA58 OSW"
+SWEP.AbbrevName = "SA58"
 SWEP.Category = "Tactical RP"
 
 SWEP.SubCatTier = "3Security"
-SWEP.SubCatType = "6Precision Rifle"
+SWEP.SubCatType = "5Battle Rifle"
 
 SWEP.Description = "Battle rifle with slow fire rate but very high damage and armor penetration. Has a grippod that provides some stability if deployed."
+SWEP.Description_Quote = "\"Shut up, clock in and load up.\""
 
 SWEP.Trivia_Caliber = "7.62x51mm"
 SWEP.Trivia_Manufacturer = "DS Arms"
-SWEP.Trivia_Year = "1956"
+SWEP.Trivia_Year = "2003"
 
 SWEP.Faction = TacRP.FACTION_MILITIA
 SWEP.Credits = "Assets: Tactical Intervention"
@@ -105,7 +107,7 @@ SWEP.Firemodes = {
     1
 }
 
-SWEP.RPM = 420
+SWEP.RPM = 450
 
 SWEP.Spread = 0.002
 
@@ -215,9 +217,15 @@ SWEP.AnimationTranslationTable = {
     ["fire1"] = "fire1_M",
     ["fire2"] = "fire2_M",
     ["fire3"] = "fire3_M",
-    ["fire4"] = "fire4_M",
-    ["fire5"] = "fire5_M",
+    ["fire4"] = {"fire4_M", "fire4_L", "fire4_R"},
     ["melee"] = {"melee1", "melee2"}
+}
+
+SWEP.ProceduralIronFire = {
+    vm_pos = Vector(0, -1, -0.1),
+    vm_ang = Angle(0, 0.4, 0),
+    t = 0.25,
+    tmax = 0.25,
 }
 
 // attachments
@@ -250,7 +258,7 @@ SWEP.Attachments = {
     },
     [3] = {
         PrintName = "Tactical",
-        Category = "tactical",
+        Category = {"tactical", "tactical_zoom", "tactical_ebullet"},
         Bone = "ValveBiped.dsa58_rootbone",
         WMBone = "Box01",
         AttachSound = "TacRP/weapons/flashlight_on.wav",

@@ -5,10 +5,11 @@ AddCSLuaFile()
 
 // names and stuff
 SWEP.PrintName = "AI AS50"
+SWEP.AbbrevName = "AS50"
 SWEP.Category = "Tactical RP"
 
 SWEP.SubCatTier = "1Elite"
-SWEP.SubCatType = "9Anti-Materiel Rifle"
+SWEP.SubCatType = "7Sniper Rifle"
 
 SWEP.Description = "Semi-automatic anti-materiel rifle that can easily decimate any person at any distance.\nEquipped with a 12x scope by default.\nFar too heavy to swing, so bashing is out of the question."
 
@@ -275,7 +276,7 @@ SWEP.Attachments = {
     },
     [3] = {
         PrintName = "Tactical",
-        Category = "tactical",
+        Category = {"tactical", "tactical_zoom", "tactical_ebullet"},
         Bone = "ValveBiped._ROOT_AS50",
         WMBone = "Box01",
         AttachSound = "TacRP/weapons/flashlight_on.wav",

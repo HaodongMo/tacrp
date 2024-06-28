@@ -5,12 +5,14 @@ AddCSLuaFile()
 
 // names and stuff
 SWEP.PrintName = "FN P90"
+SWEP.AbbrevName = "P90"
 SWEP.Category = "Tactical RP"
 
 SWEP.SubCatTier = "2Operator"
 SWEP.SubCatType = "3Submachine Gun"
 
-SWEP.Description = "Bullpup PDW with a generous top-loaded magazine and controllable spread. Perfect for rushing bombsites.\nHigh velocity rounds retain effectiveness at range and pierces armor easily."
+SWEP.Description = "Bullpup PDW with a generous top-loaded magazine and controllable spread. High velocity rounds retain effectiveness at range and pierces armor easily."
+SWEP.Description_Quote = "\"This is a weapon of war, made to kill your enemy.\""
 
 SWEP.Trivia_Caliber = "5.7x28mm"
 SWEP.Trivia_Manufacturer = "FN Herstal"
@@ -26,8 +28,8 @@ SWEP.Slot = 2
 
 SWEP.BalanceStats = {
     [TacRP.BALANCE_SBOX] = {
-        Damage_Max = 12,
-        Damage_Min = 10,
+        Damage_Max = 14,
+        Damage_Min = 12,
 
         RecoilKick = 2,
     },
@@ -67,7 +69,7 @@ SWEP.TTTReplace = TacRP.TTTReplacePreset.SMG
 SWEP.Damage_Max = 15
 SWEP.Damage_Min = 12
 SWEP.Range_Min = 1000 // distance for which to maintain maximum damage
-SWEP.Range_Max = 3500 // distance at which we drop to minimum damage
+SWEP.Range_Max = 5000 // distance at which we drop to minimum damage
 SWEP.Penetration = 10 // units of metal this weapon can penetrate
 SWEP.ArmorPenetration = 0.875
 SWEP.ArmorBonus = 2
@@ -192,12 +194,11 @@ SWEP.EjectEffect = 2
 // anims
 
 SWEP.AnimationTranslationTable = {
-    ["fire_iron"] = "dryfire",
+    ["fire_iron"] = "fire1_M",
     ["fire1"] = "fire1_M",
     ["fire2"] = "fire2_M",
     ["fire3"] = "fire3_M",
-    ["fire4"] = "fire4_M",
-    ["fire5"] = "fire5_M",
+    ["fire4"] = {"fire4_M", "fire4_L", "fire4_R"},
     ["melee"] = {"melee1", "melee2"}
 }
 
@@ -237,7 +238,7 @@ SWEP.Attachments = {
     },
     [3] = {
         PrintName = "Tactical",
-        Category = "tactical",
+        Category = {"tactical", "tactical_zoom", "tactical_ebullet"},
         Bone = "p90_ROOT",
         AttachSound = "tacrp/weapons/flashlight_on.wav",
         DetachSound = "tacrp/weapons/flashlight_off.wav",

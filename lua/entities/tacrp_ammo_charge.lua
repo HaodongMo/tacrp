@@ -12,3 +12,4 @@ ENT.Spawnable                = true
 ENT.Model                    = "models/weapons/tacint/door_charge-1.mdl"
 
 ENT.Ammo = "ti_charge"
+ENT.GrenadeProxy = "tacrp_nade_charge"

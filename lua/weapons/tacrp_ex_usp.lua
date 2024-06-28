@@ -5,10 +5,11 @@ AddCSLuaFile()
 
 // names and stuff
 SWEP.PrintName = "HK USP"
+SWEP.AbbrevName = "USP"
 SWEP.Category = "Tactical RP" // "Tactical RP (Extras)"
 
 SWEP.SubCatTier = "3Security"
-SWEP.SubCatType = "1Sidearm"
+SWEP.SubCatType = "1Pistol"
 
 SWEP.Description = "Tactical pistol with good damage and range for its capacity."
 SWEP.Description_Quote = "The weapon of choice for free men."
@@ -62,8 +63,6 @@ SWEP.BalanceStats = {
             [HITGROUP_RIGHTLEG] = 0.75,
             [HITGROUP_GEAR] = 0.9
         },
-
-        ReloadTimeMult = 1.25 * 1.25,
     },
     [TacRP.BALANCE_PVE] = {
         Damage_Max = 15,
@@ -83,10 +82,10 @@ SWEP.TTTReplace = TacRP.TTTReplacePreset.Pistol
 
 // "ballistics"
 
-SWEP.Damage_Max = 30
-SWEP.Damage_Min = 10
-SWEP.Range_Min = 450 // distance for which to maintain maximum damage
-SWEP.Range_Max = 1900 // distance at which we drop to minimum damage
+SWEP.Damage_Max = 28
+SWEP.Damage_Min = 12
+SWEP.Range_Min = 600 // distance for which to maintain maximum damage
+SWEP.Range_Max = 1800 // distance at which we drop to minimum damage
 SWEP.Penetration = 5 // units of metal this weapon can penetrate
 SWEP.ArmorPenetration = 0.575
 SWEP.ArmorBonus = 0.4
@@ -299,7 +298,7 @@ SWEP.Attachments = {
     },
     [3] = {
         PrintName = "Tactical",
-        Category = "tactical",
+        Category = {"tactical", "tactical_zoom", "tactical_ebullet"},
         Bone = "ValveBiped.p2000_rootbone",
         WMBone = "Box01",
         AttachSound = "tacrp/weapons/flashlight_on.wav",

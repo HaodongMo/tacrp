@@ -13,51 +13,29 @@ hook.Add("PlayerBindPress", "TacRP_Binds", function(ply, bind, pressed, code)
         wpn.LastHintLife = CurTime() -- ping the hints
     end
 
-    if !pressed then return end
-
     if bind == "+menu_context" and !LocalPlayer():KeyDown(IN_USE) then
-        if wpn:GetScopeLevel() == 0 then
-            net.Start("TacRP_togglecustomize")
-            net.WriteBool(!wpn:GetCustomize())
-            net.SendToServer()
-        elseif !TacRP.ConVars["togglepeek"]:GetBool() then
-            net.Start("tacrp_togglepeek")
-            net.WriteBool(true) -- release is handled in sh_scope
-            net.SendToServer()
-        else
-            net.Start("tacrp_togglepeek")
-            net.WriteBool(!wpn:GetPeeking())
-            net.SendToServer()
-        end
+        TacRP.KeyPressed_Customize = pressed
 
         return true
     end
 
-    if TacRP.ConVars["toggletactical"]:GetBool() and bind == "impulse 100" and wpn:GetValue("CanToggle") and (
-                !GetConVar("mp_flashlight"):GetBool() or (TacRP.ConVars["flashlight_alt"]:GetBool() and ply:KeyDown(IN_WALK))
-                or (!TacRP.ConVars["flashlight_alt"]:GetBool() and !ply:KeyDown(IN_WALK))) then
-        net.Start("tacrp_toggletactical")
-        net.SendToServer()
-        wpn:SetTactical(!wpn:GetTactical())
+    if TacRP.ConVars["toggletactical"]:GetBool() and bind == "impulse 100" and wpn:GetValue("CanToggle") and (!GetConVar("mp_flashlight"):GetBool() or (TacRP.ConVars["flashlight_alt"]:GetBool() and ply:KeyDown(IN_WALK)) or (!TacRP.ConVars["flashlight_alt"]:GetBool() and !ply:KeyDown(IN_WALK))) then
+        TacRP.KeyPressed_Tactical = pressed
 
-        surface.PlaySound("tacrp/firemode.wav")
-        return true -- we dont want hl2 flashlight
-     end
+        return true
+    end
 end)
-
-TacRP.Complaints = {}
 
 function TacRP.GetBind(binding)
     local bind = input.LookupBinding(binding)
 
     if !bind then
-        if !TacRP.Complaints[binding] then
-            TacRP.Complaints[binding] = true
-
-            if binding == "grenade1" or binding == "grenade2" then
-                LocalPlayer():PrintMessage(HUD_PRINTTALK, "Bind +grenade1 and +grenade2 to use TacRP quick grenades!")
-            end
+        if binding == "+grenade1" then
+            return string.upper(input.GetKeyName(TacRP.GRENADE1_Backup))
+        elseif binding == "+grenade2" then
+            return string.upper(input.GetKeyName(TacRP.GRENADE2_Backup))
         end
+
         return "!"
     end
 
@@ -67,6 +45,12 @@ end
 function TacRP.GetBindKey(bind)
     local key = input.LookupBinding(bind)
     if !key then
+        if bind == "+grenade1" then
+            return string.upper(input.GetKeyName(TacRP.GRENADE1_Backup))
+        elseif bind == "+grenade2" then
+            return string.upper(input.GetKeyName(TacRP.GRENADE2_Backup))
+        end
+
         return bind
     else
         return string.upper(key)
@@ -77,6 +61,12 @@ function TacRP.GetKeyIsBound(bind)
     local key = input.LookupBinding(bind)
 
     if !key then
+        if bind == "+grenade1" then
+            return true
+        elseif bind == "+grenade2" then
+            return true
+        end
+
         return false
     else
         return true
@@ -86,7 +76,17 @@ end
 function TacRP.GetKey(bind)
     local key = input.LookupBinding(bind)
 
-    return key and input.GetKeyCode(key)
+    if !key then
+        if bind == "+grenade1" then
+            return TacRP.GRENADE1_Backup
+        elseif bind == "+grenade2" then
+            return TacRP.GRENADE2_Backup
+        end
+
+        return false
+    else
+        return input.GetKeyCode(key)
+    end
 end
 
 TacRP.KeyPressed_Melee = false
@@ -97,4 +97,38 @@ end)
 
 concommand.Add("-tacrp_melee", function()
     TacRP.KeyPressed_Melee = false
+end)
+
+TacRP.KeyPressed_Customize = false
+
+concommand.Add("+tacrp_customize", function()
+    TacRP.KeyPressed_Customize = true
+end)
+
+concommand.Add("-tacrp_customize", function()
+    TacRP.KeyPressed_Customize = false
+end)
+
+TacRP.KeyPressed_Tactical = false
+
+concommand.Add("+tacrp_tactical", function()
+    TacRP.KeyPressed_Tactical = true
+end)
+
+concommand.Add("-tacrp_tactical", function()
+    TacRP.KeyPressed_Tactical = false
+end)
+
+concommand.Add("tacrp_dev_listanims", function()
+    local wep = LocalPlayer():GetActiveWeapon()
+    if !wep then return end
+    local vm = LocalPlayer():GetViewModel()
+    if !vm then return end
+    local alist = vm:GetSequenceList()
+
+    for i = 0, #alist do
+        MsgC(clr_b, i, " --- ")
+        MsgC(color_white, "\t", alist[i], "\n     [")
+        MsgC(clr_r, "\t", vm:SequenceDuration(i), "\n")
+    end
 end)

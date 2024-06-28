@@ -5,12 +5,14 @@ AddCSLuaFile()
 
 // names and stuff
 SWEP.PrintName = "Beretta 92FS Vertec" // Real variant, even though it sounds like a fake name Gooseman would come up with.
+SWEP.AbbrevName = "Vertec"
 SWEP.Category = "Tactical RP"
 
 SWEP.SubCatTier = "4Consumer"
-SWEP.SubCatType = "1Sidearm"
+SWEP.SubCatType = "1Pistol"
 
 SWEP.Description = "Italian pistol with above average range and accuracy."
+SWEP.Description_Quote = "\"Yippie ki-yay, motherf*cker!\""
 
 SWEP.Trivia_Caliber = "9x19mm"
 SWEP.Trivia_Manufacturer = "Pietro Beretta"
@@ -63,8 +65,6 @@ SWEP.BalanceStats = {
             [HITGROUP_RIGHTLEG] = 0.75,
             [HITGROUP_GEAR] = 0.9
         },
-
-        ReloadTimeMult = 1.15 * 1.25,
     },
     [TacRP.BALANCE_PVE] = {
         Damage_Max = 9,
@@ -215,6 +215,7 @@ SWEP.ShootPitchVariance = 2.5 // amount to vary pitch by each shot
 SWEP.QCA_Muzzle = 4
 
 SWEP.MuzzleEffect = "muzzleflash_pistol"
+SWEP.EjectEffect = 1
 
 // anims
 
@@ -295,7 +296,7 @@ SWEP.Attachments = {
     },
     [3] = {
         PrintName = "Tactical",
-        Category = "tactical",
+        Category = {"tactical", "tactical_zoom", "tactical_ebullet"},
         Bone = "ValveBiped.vertec_rootbone",
         WMBone = "Box01",
         AttachSound = "TacRP/weapons/flashlight_on.wav",

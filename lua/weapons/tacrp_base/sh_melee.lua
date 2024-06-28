@@ -17,6 +17,7 @@ SWEP._Sound_MeleeHitBody = {
 function SWEP:Melee(alt)
     if !self:GetValue("CanMeleeAttack") then return end
     if self:StillWaiting(false, true) then return end
+    if DarkRP and self:GetNWBool("TacRP_PoliceBiocode") and !self:GetOwner():isCP() then return end
     -- if self:SprintLock() then return end
 
     self.Primary.Automatic = true
@@ -100,10 +101,10 @@ function SWEP:Melee(alt)
 
             TacRP.CancelBodyDamage(tr.Entity, dmginfo, tr.HitGroup)
 
-            if IsValid(tr.Entity) and (tr.Entity:IsNPC() or tr.Entity:IsPlayer() or tr.Entity:IsNextBot()) then
+            if IsValid(tr.Entity) and (tr.Entity:IsNPC() or tr.Entity:IsPlayer() or tr.Entity:IsNextBot() or tr.Entity:IsRagdoll()) then
                 self:EmitSound(self:ChooseSound(self:GetValue("Sound_MeleeHitBody") or self:GetValue("_Sound_MeleeHitBody")), 75, 100, 1, CHAN_ITEM)
 
-                if self:GetValue("MeleeBackstab") then
+                if !tr.Entity:IsRagdoll() and self:GetValue("MeleeBackstab") then
                     local ang = math.NormalizeAngle(self:GetOwner():GetAngles().y - tr.Entity:GetAngles().y)
                     if ang <= 60 and ang >= -60 then
                         dmginfo:ScaleDamage(self:GetValue("MeleeBackstabMult"))

@@ -1,12 +1,13 @@
 ATT.PrintName = "Ninja"
 ATT.Icon = Material("entities/tacrp_att_melee_spec_ninja.png", "mips smooth")
 ATT.Description = "Disrupt your enemies and strike with the element of surprise."
-ATT.Pros = {"RELOAD: Palm Strike / Climb", "RELOAD (Mid-air + Crouch): Dive Kick","RELOAD (Ground + Crouch): Backhop", "Silent Footsteps"}
+ATT.Pros = {"RELOAD: Palm Strike / Climb", "RELOAD (Mid-air + Crouch): Dive Kick","RELOAD (Ground + Crouch): Backhop", "Silent Footsteps", "No fall damage"}
 
 ATT.Category = {"melee_spec"}
 
 ATT.SortOrder = 2
 
+ATT.NoFallDamage = true
 ATT.SilentFootstep = true
 
 local cost = 1 / 5
@@ -87,7 +88,7 @@ ATT.Hook_PreReload = function(wep)
             ply:SetNWFloat("TacRPDiveTime", CurTime())
             ply:SetNWVector("TacRPDiveDir", ply:EyeAngles():Forward() * Lerp(getcharge(wep), 30000, 100000) * Lerp(wep:GetValue("MeleePerkAgi"), 0.6, 1.4))
             wep:EmitSound("weapons/mortar/mortar_fire1.wav", 65, 120, 0.5)
-            setcharge(wep, getcharge(wep) / 2)
+            setcharge(wep, 0)
         end
     elseif !wep:StillWaiting() and getcharge(wep) >= cost then
         wep:SetNextSecondaryFire(CurTime() + 0.8)

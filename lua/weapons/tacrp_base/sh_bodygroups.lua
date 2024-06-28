@@ -52,7 +52,9 @@ function SWEP:DoBodygroups(wm, custom_wm)
         for c, bgs in pairs(bbg) do
             if amt < c then
                 mdl:SetBodygroup(bgs[1], bgs[2])
-                break
+                if !self.BulletBodygroupsSetAll then
+                    break
+                end
             end
         end
     end

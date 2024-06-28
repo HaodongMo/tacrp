@@ -692,6 +692,219 @@ The heavy weaponry expansion, sporting 10 new weapons including autoshotties, gu
 
 <p>Have a tactical 2024, gamers!]],
     },
+        {
+        Title = "Update 19",
+        Type = "Patch Notes",
+        Date = "2024-04-01",
+        Author = "speedonerd",
+        Major = false,
+        Summary = "Not (quite) an April Fools update.",
+        Contents = [[<body style="font-family:'Myriad Pro';color:white;font-size:125%;">
+<p>Hey all! It's been a while since our last Workshop release and things over on the dev front have started to slow, owing to some real-life obligations from both me and 8Z. That's not to say we don't have anything new to share, as we've cooked up a few things in the past 2 months that we'll be dropping with this update.
+
+<h2>What is this, "balance," you speak of?</h2>
+<p>TacRP's various gameplay and balance settings have been, frankly, a total mess for a while. As we continued adding new tweakable options the menus started getting very cluttered, and as we continued adding new weapons we found that having to create 4 whole sets of stats for every single one became insanely arduous.
+<p>A balance revamp was well overdue so we've gone and done just that. Instead of the Arcade-Tactical-TTT-PvE modes we had before that mainly changed TTK speeds and speed penalties, we've reduced this to three new balance modes: Tiered, Untiered and TTT.
+<p>The main difference now is the utilization of the weapon tier system, with Tiered separating weapons into four tiers with higher tiers having better stats, and Untiered eliminating these tiers and making all weapons similar in stats. TTT mode still exists to cater to the specific gameplay flow of the mode.
+<p>Instead of balance schemes controlling speed and handling penalties, things like melee and sighted slowdowns are togglable options independent of the balancing scheme, and damage can now be fine tuned per weapontype to increase or decrease TTK. Sliders for various other things like ADS speed, reload speed and recoil kick have also been added.
+<p>These sliders and certain options that directly affect balance are under the Balance tab while mechanics that exist independent of balance scheme are under the Mechanics tab.
+
+<h2>Dwarves don't use ironsights.</h2>
+<p>Old School mode has been reworked into Old School Scopes; a balance mechanic independent of any one scheme. Like before, it disables ironsights and tightens hipfire, but spread will now be increased with an optic fitted. The higher an optic's magnification, the higher your spread penalty. 
+
+<h2>More options, more fun!</h2>
+<p>Some new minor gameplay options have been added for extra spice. 
+<p>'Dump ammo in magazines' does exactly what it says on the tin: any ammo left in your magazine when you reload will be dropped onto the ground. It is not lost, however, as dropped magazines can be picked up by the player to recover the lost ammo. (This mechanic was not inspired by any particular <i>democratic game</i> and was entirely of our own invention)
+<p>'Lower weapon while not aiming' forces weapons to always be lowered unless you're aiming them, similar to DarkRP.
+
+<h2>Animator? I barely know her!</h2>
+<p>Normally I wouldn't write something for an animation overhaul but this one is a special case. The K98 Sporter from InterOps has always been controversial as it's an iconic old-world bolt action that's been bastardized to use a box mag. The real reason for this was TacInt had no suitable animation set for a weapon like a Mauser rifle and we had to settle for what we had.
+<p>That was until recently when a friend of ours approached us with new animations for the rifle; the Hunting Rifle animations from Cry of Fear. As such, the K98 has been revamped with these new animations and no longer has that fugly Sako mag protruding out from it. Thanks Lazarus!
+<p>Oh yeah, the Double Defense from Special Delivery received new animations too, so that's neat.
+
+<hr>
+
+<h3>Changelog</h3>
+<ul>
+<li><b>Added:</b> (Base) HK45 Compact in Elite tier.
+<li><b>Added:</b> (Base) New balance scheme overhaul.
+<li><b>Changed:</b> (Base) RPG-7 projectiles have slightly shorter safety fuse.
+<li><b>Changed:</b> (InterOps) New Kar 98k animations from Cry of Fear. (Thanks Lazarus!)
+<li><b>Changed:</b> (InterOps) Rescaled FNC model.
+<li><b>Changed:</b> (InterOps) Revised Honey Badger model and sounds.
+<li><b>Changed:</b> (InterOps) New STAR-15 sounds. (Thanks rzenith!)
+<li><b>Changed:</b> (Special Delivery) New Double Defense animations.
+<li><b>Changed:</b> (Brute Force) New baseball bat animations. (Thanks Lazarus!)
+<li><b>Fixed:</b> (Heavy Metal) Fixed laser beam origin on Hardballer.
+<li><b>Fixed:</b> Some other stuff probably not worth documenting.
+]],
+    },
+    {
+        Title = "Update 21",
+        Type = "Patch Notes",
+        Date = "2024-06-12",
+        Author = "speedonerd, 8Z",
+        Major = true,
+        Summary = "Expanded attachments and networking improvements",
+        Contents = [[<body style="font-family:'Myriad Pro';color:white;font-size:125%;">
+<p>Howdy all! It's a little crazy to think about, but May 14th (14 - 5 - 2024) marks exactly one year since TacRP InterOps launched on the Workshop. Since then TacRP's weapon selection has gone from 70-something weapons to over 200, and a myriad of new features have been added.
+<p>It's been quite a ride, and we appreciate all the support and kind words we've continued to receive throughout this year of development.
+<p>We've been cooking up a pretty substantial update the past month or so with not one, but two massive content drops being developed concurrently. Unfortunately, they're still yet to be released, but we still have a decent-sized update to satiate you in the meantime. 
+
+<p>(8Z's Note: This news was written back when we were still not that far off from the anniversary date. Alas...)
+
+<hr>
+
+<h2>"They were actually known cheaters who were using a lag switch."</h2>
+<p>The base has received updates to networking that should finally eliminate pesky jitter and inconsistencies at high ping. 
+<p>Movement code prediction has been almost completely rewritten and the breath holding mechanic should now actually work in multiplayer. Viewmodel jitter should also hopefully be a thing of the past.
+
+<h2>You Tactical?</h2>
+<p>The pool of tactical attachments has been expanded with a couple of new options and improvements to existing options.
+<ul>
+<li><b>Emergency Bullet:</b> For when you're in a pinch and just need that one extra round that'll do 'em in. Press your tactical button to quickly chamber-load a single round.
+<li><b>2x Zoom:</b> Gives every optic (even ironsights!) access to a 2x zoom level. Low power optics can now zoom in further and high-power sniper optics can now zoom out.
+<li><b>Thermal Imager:</b> You got this thing off AliExpress for about a dollar and it works, I guess. When peaking, a thermal overlay will highlight targets in red, though the rest of your vision is blurred.
+<li><b>Combo Module:</b> A 2-for-1 deal, now you can have a laser and a flashlight together. Does not blind targets like the standalone flashlight.
+</ul>
+<p>Corner Cam has also been given a new night mode that can be toggled for low-light environments.
+
+<h2>Buzz off!</h2>
+<p>Added the FIM-92 Stinger to the base pack. This lock-on only launcher is suitable for shooting down aircraft, but can lock onto other things too.</p>
+
+<h2>Sean's got the shotgun.</h2>
+<p>A slew of new ammotypes for shotguns have arrived.
+<ul>
+<li><b>Minishells:</b> Smaller shells with less power, but you can fit more of them into your magazine.
+<li><b>Dragon's Breath:</b> Specialty shells that can ignite targets.
+<li><b>Frag Shells:</b> Explosive shells that deal splash damage in a small radius.
+<li><b>Breaching Shells:</b> Trade off damage and range for the ability to knock down doors.
+<li><b>Buckshot Roulette:</b> The shells enter the chamber in an unknown order...
+</ul>
+
+<h2>Brake hard and fast.</h2>
+<p>Three new muzzle attachments, finally giving most weapons some attachable muzzle brakes.
+<ul>
+<li><b>Agressor Brake:</b> Increases firing move speed by redirecting gasses away from the shooter.
+<li><b>Breaching Brake:</b> Sharp and pointy edges increase melee damage.
+<li><b>Concussive Brake:</b> Significantly reduces recoil kick at the cost of firing move speed.
+</ul>
+
+<h2>Nanomachines, son.</h2>
+<p>A new grenade, the Medi-Smoke, has been added. This can of purple technology and probably drugs will restore your health as long as you stand in it!</p>
+
+<hr>
+
+<p>You might notice a few weapons have received model updates. These have been byproducts of the coming content drops, at least one of which should be expected to launch some time before the end of the summer.</p>
+<p>Thank you all for your continued support, and stay tactical.</p>
+
+<hr>
+
+<h3>Changelog</h3>
+<ul>
+<li><b>Added:</b> (Base) FIM-92 Stinger with 4 ammo attachments.
+<li><b>Added:</b> (Base) Four new tactical attachments: Emergency Bullet, 2x Zoom, Thermal Imager, Combo Module.
+<li><b>Added:</b> (Base) Five new shotgun ammo types: Minishells, Dragon's Breath, Frag Shells, Breaching Shells, Buckshot Roulette.
+<li><b>Added:</b> (Base) Corner-Cam now has a night-vision mode, toggle with Tactical keybind.
+<li><b>Added:</b> (Base) Jammed weapons requires pressing reload key to unjam by default.
+<li><b>Added:</b> (Base) JHP ammo for rifles.
+<li><b>Added:</b> (Base) Healing Grenades.
+<li><b>Added:</b> (Base) Non-lethal grenades now have a distinctive trail.
+<li><b>Added:</b> (Base) Polish localization and backend l18n improvements.
+<li><b>Changed:</b> (Base) Reordered and redefined weapon subcategories. Anti-materiel rifles has been dissolved and Precision Rifles has been split up into Battle Rifles and Marksman Rifles.
+<li><b>Changed:</b> (All packs) Updated a few descriptions and added/changed some quotes.
+<li><b>Changed:</b> (InterOps) New RPK model.
+<li><b>Changed:</b> (Special Delivery) New PKM model.
+<li><b>Fixed:</b> (Base) Significant networking improvements across the board.
+<li><b>Fixed:</b> (InterOps) Fixed twisted wrists on SG 550 rifles (at last).
+<li><b>Rebalance:</b> (All packs) A lot of balance tweaks across the board.
+
+</ul>
+]],
+    },
+    {
+        Title = "Update 21 HotFix",
+        Type = "Patch Notes",
+        Date = "2024-06-14",
+        Author = "8Z",
+        Major = false,
+        Summary = "Some hotfixes",
+        Contents = [[<body style="font-family:'Myriad Pro';color:white;font-size:125%;">
+
+<h3>Changelog</h3>
+<ul>
+<li><b>Fixed:</b> Value tier added NPC weapon selection.
+<li><b>Fixed:</b> Updated localization strings.
+<li><b>Fixed:</b> Fixed Stinger missile in multiplayer.
+<li><b>Fixed:</b> "Lower weapon when not aiming" option related fixes.
+<li><b>Fixed:</b> Sprint/Sight progress is now properly predicted in multiplayer.
+<li><b>Fixed:</b> Grenade material carrying over to other viewmodels if stripped (such as throwing last grenade).
+</ul>
+]],
+    },
+    {
+        Title = "Update 22 / ExoOps Release",
+        Type = "Patch Notes",
+        Date = "2024-06-20",
+        Author = "8Z",
+        Major = true,
+        Summary = "New expansion release!",
+        Contents = [[<body style="font-family:'Myriad Pro';color:white;font-size:125%;">
+
+<h2>ExoOps<i> (New!)</i></h2>
+<p><input type='submit' value='Open Workshop' onclick='console.log("RUNLUA:gui.OpenURL(\"https://steamcommunity.com/sharedfiles/filedetails/?id=3271554982\")")' /></p>
+The third major expansion pack featuring 38 weapons of all kinds.
+<ul>
+<li>Jericho 941
+<li>HK P7
+<li>Walther P99
+<li>SIG P210
+<li>S&W Mk 22 Mod. 0 "Hush Puppy"
+<li>Star Megastar
+<li>Browning Hi-Power
+<li>Chiappa Rhino 20DS
+<li>S&W Model 29 "Satan"
+<li>Dueling Demons (Dual M29 Satan)
+<li>Mauser M712 Schnellfeuer
+<li>Beretta 93R
+<li>Calico M950A
+<li>SIG MPX
+<li>HK MP5SD
+<li>HK MP5K
+<li>Magpul Masada
+<li>Bushmaster ACR
+<li>Colt Model 733
+<li>Enfield L85A2
+<li>HK G36C
+<li>Beretta AR70 (AR70/223)
+<li>FN F2000
+<li>SCAR-L
+<li>AUG A1
+<li>Benelli M3 Super 90
+<li>HK CAWS
+<li>SPAS-15
+<li>MG42
+<li>M60
+<li>Winchester M1873
+<li>FN FAL (Israeli Pattern)
+<li>SIG Stgw 57 (SG 510)
+<li>Howa Type 64
+<li>FN FAL (StG 58)
+<li>SIG MCX SPEAR
+<li>Steyr Scout
+<li>HK PSG-1
+</ul>
+
+<h3>Changelog</h3>
+<ul>
+<li><b>Added:</b> (InterOps) New Weapon: FAMAS G2.
+<li><b>Added:</b> Refurbished Bolt attachment. Only available for weapons that innately jam, will remove jam chance but decrease RPM and accuracy.
+<li><b>Changed:</b> Tweaked some stat and rating displays.
+<li><b>Fixed:</b> LVS damage type interactions.
+<li><b>Rebalance:</b> Minor changes to some weapons and attachments.
+</ul>
+]],
+    },
 }
 TacRP.NewsRead = TacRP.NewsRead or {}
 TacRP.NewsFirstLoad = false

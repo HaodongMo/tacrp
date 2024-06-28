@@ -4,11 +4,12 @@ SWEP.Spawnable = true
 AddCSLuaFile()
 
 // names and stuff
-SWEP.PrintName = "IMI Mini Uzi"
+SWEP.PrintName = "IMI Uzi Pro"
+SWEP.AbbrevName = "Uzi Pro"
 SWEP.Category = "Tactical RP"
 
 SWEP.SubCatTier = "2Operator"
-SWEP.SubCatType = "2Machine Pistol"
+SWEP.SubCatType = "3Machine Pistol"
 
 SWEP.Description = "Balanced machine pistol with a controllable rate of fire."
 
@@ -143,6 +144,8 @@ SWEP.SprintPos = Vector(5, 0, -2)
 SWEP.SightAng = Angle(0.275, 0.1, 1)
 SWEP.SightPos = Vector(-3.65, -6.5, -3.4)
 
+SWEP.CorrectivePos = Vector(0.04, 0, 0.15)
+
 SWEP.HolsterVisible = true
 SWEP.HolsterSlot = TacRP.HOLSTER_SLOT_PISTOL
 SWEP.HolsterPos = Vector(0, 3, -4)
@@ -183,17 +186,32 @@ SWEP.QCA_Muzzle = 1
 SWEP.QCA_Eject = 2
 
 SWEP.MuzzleEffect = "muzzleflash_smg"
+SWEP.EjectEffect = 1
 
 // anims
 
 SWEP.AnimationTranslationTable = {
-    ["fire_iron"] = "dryfire",
+    ["fire_iron"] = "fire1_M",
     ["fire1"] = "fire1_M",
     ["fire2"] = "fire2_M",
     ["fire3"] = "fire3_M",
-    ["fire4"] = "fire4_M",
-    ["fire5"] = "fire5_M",
+    ["fire4"] = {"fire4_M", "fire4_L", "fire4_R"},
     ["melee"] = {"melee1", "melee2"}
+}
+
+SWEP.ProceduralIronFire = {
+    vm_pos = Vector(0, -1, -0.1),
+    vm_ang = Angle(0, 0.4, 0),
+    t = 0.1,
+    tmax = 0.1,
+    bones = {
+        {
+            bone = "ValveBiped.bolt_handle",
+            pos = Vector(0, 0, -2),
+            t0 = 0.05,
+            t1 = 0.2,
+        },
+    },
 }
 
 // attachments
@@ -243,7 +261,7 @@ SWEP.Attachments = {
 
     [3] = {
         PrintName = "Tactical",
-        Category = "tactical",
+        Category = {"tactical", "tactical_zoom", "tactical_ebullet"},
         Bone = "ValveBiped.uzi_rootbone",
         AttachSound = "TacRP/weapons/flashlight_on.wav",
         DetachSound = "TacRP/weapons/flashlight_off.wav",

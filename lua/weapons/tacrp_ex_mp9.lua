@@ -5,6 +5,7 @@ AddCSLuaFile()
 
 // names and stuff
 SWEP.PrintName = "BT MP9"
+SWEP.AbbrevName = "MP9"
 SWEP.Category = "Tactical RP" // "Tactical RP (Extras)"
 
 // Assets: https://gamebanana.com/mods/208831
@@ -13,6 +14,7 @@ SWEP.SubCatTier = "2Operator"
 SWEP.SubCatType = "3Submachine Gun"
 
 SWEP.Description = "Compact polymer submachine gun packing lots of firepower in a small package."
+SWEP.Description_Quote = "\"Your right hand comes off?\""
 
 SWEP.Trivia_Caliber = "9x19mm"
 SWEP.Trivia_Manufacturer = "Brügger & Thomet"
@@ -28,6 +30,7 @@ SWEP.Slot = 2
 
 SWEP.BalanceStats = {
     [TacRP.BALANCE_SBOX] = {
+        Range_Min = 400,
     },
     [TacRP.BALANCE_TTT] = {
         Damage_Max = 12,
@@ -184,6 +187,7 @@ SWEP.QCA_Muzzle = 1
 SWEP.QCA_Eject = 2
 
 SWEP.MuzzleEffect = "muzzleflash_ak47"
+SWEP.EjectEffect = 1
 
 // anims
 
@@ -191,8 +195,7 @@ SWEP.AnimationTranslationTable = {
     ["fire1"] = "fire1_M",
     ["fire2"] = "fire2_M",
     ["fire3"] = "fire3_M",
-    ["fire4"] = "fire4_M",
-    ["fire5"] = "fire5_M",
+    ["fire4"] = {"fire4_M", "fire4_L", "fire4_R"},
     ["melee"] = {"melee1", "melee2"},
     ["deploy"] = "deploy",
 }
@@ -246,7 +249,7 @@ SWEP.Attachments = {
     },
     [3] = {
         PrintName = "Tactical",
-        Category = "tactical",
+        Category = {"tactical", "tactical_zoom", "tactical_ebullet"},
         Bone = "ValveBiped.mp7_rootbone",
         AttachSound = "tacrp/weapons/flashlight_on.wav",
         DetachSound = "tacrp/weapons/flashlight_off.wav",

@@ -114,7 +114,7 @@ function SWEP:TTT_Init()
             for i, slot in pairs(self.Attachments) do
                 if math.random() > att_chance then continue end
 
-                local atts = TacRP.GetAttsForCats(slot.Category or "")
+                local atts = TacRP.GetAttsForCats(slot.Category or "", self)
                 local ind = math.random(1, #atts)
                 slot.Installed = atts[ind]
                 added = added + 1

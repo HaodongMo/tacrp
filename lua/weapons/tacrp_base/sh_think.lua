@@ -32,6 +32,36 @@ function SWEP:Think()
         self:SetPatternCount(0)
     end
 
+    if owner:KeyPressed(TacRP.IN_CUSTOMIZE) then
+        if self:GetScopeLevel() == 0 then
+            self:ToggleCustomize(!self:GetCustomize())
+        else
+            if !self:GetValue("AlwaysPeek") then
+                local shouldpeek = !self:GetPeeking()
+
+                if owner:GetInfoNum("tacrp_togglepeek", 0) == 0 then
+                    shouldpeek = true
+                end
+
+                self:SetPeeking(shouldpeek)
+
+                if self:GetSightAmount() > 0 then
+                    self:SetLastScopeTime(CurTime())
+                end
+            end
+        end
+    elseif !self:GetValue("AlwaysPeek") and owner:GetInfoNum("tacrp_togglepeek", 0) == 0 and self:GetPeeking() and owner:KeyReleased(TacRP.IN_CUSTOMIZE) then
+        self:SetPeeking(false)
+
+        if self:GetSightAmount() > 0 then
+            self:SetLastScopeTime(CurTime())
+        end
+    end
+
+    if owner:KeyPressed(TacRP.IN_TACTICAL) then
+        self:ToggleTactical()
+    end
+
     self:ThinkRecoil()
 
     self:ThinkSprint()
@@ -47,6 +77,8 @@ function SWEP:Think()
     self:ThinkBlindFire()
 
     self:ProcessTimers()
+
+    self:ThinkLockOn()
 
     self:ThinkHoldBreath()
 
@@ -69,12 +101,12 @@ function SWEP:Think()
     --     s:PlayEx(0.25, 105)
     -- end
 
-    if self:GetJammed() and !self:StillWaiting() then
+    if self:GetJammed() and !self:StillWaiting() and TacRP.ConVars["jam_autoclear"]:GetBool() then
         self:PlayAnimation("jam", 0.75, true, true)
         self:SetJammed(false)
     end
 
-    if self:GetNextIdle() < CurTime() then
+    if self:GetNextIdle() < CurTime() and (SERVER or !game.SinglePlayer()) then
         self:Idle()
     end
 

@@ -4,13 +4,15 @@ SWEP.Spawnable = true
 AddCSLuaFile()
 
 // names and stuff
-SWEP.PrintName = "Steyr AUG"
+SWEP.PrintName = "Steyr AUG A2"
+SWEP.AbbrevName = "AUG A2"
 SWEP.Category = "Tactical RP"
 
 SWEP.SubCatTier = "2Operator"
 SWEP.SubCatType = "4Assault Rifle"
 
 SWEP.Description = "Burst bullpup rifle with a generous magazine capacity and great handling."
+SWEP.Description_Quote = "\"I want blood!\" \"And you'll have it.\""
 
 SWEP.Trivia_Caliber = "5.56x45mm"
 SWEP.Trivia_Manufacturer = "Steyr Arms"
@@ -205,16 +207,15 @@ SWEP.AnimationTranslationTable = {
     ["fire1"] = "fire1_M",
     ["fire2"] = "fire2_M",
     ["fire3"] = "fire3_M",
-    ["fire4"] = "fire4_M",
-    ["fire5"] = "fire5_M",
+    ["fire4"] = {"fire4_M", "fire4_L", "fire4_R"},
     ["melee"] = {"melee1", "melee2"}
 }
 
 SWEP.ProceduralIronFire = {
-    vm_pos = Vector(0, -0.2, -0.04),
-    vm_ang = Angle(0, 0.25, 0),
-    t = 0.1,
-    tmax = 0.1,
+    vm_pos = Vector(0, -1, -0.1),
+    vm_ang = Angle(0, 0.4, 0),
+    t = 0.25,
+    tmax = 0.25,
 }
 
 // attachments
@@ -224,9 +225,6 @@ SWEP.AttachmentElements = {
         BGs_VM = {
             {1, 1}
         },
-        BGs_WM = {
-            {1, 1}
-        }
     },
 }
 
@@ -258,7 +256,7 @@ SWEP.Attachments = {
     },
     [3] = {
         PrintName = "Tactical",
-        Category = "tactical",
+        Category = {"tactical", "tactical_zoom", "tactical_ebullet"},
         Bone = "ValveBiped.AUG_rootbone",
         AttachSound = "tacrp/weapons/flashlight_on.wav",
         DetachSound = "tacrp/weapons/flashlight_off.wav",

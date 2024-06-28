@@ -32,7 +32,7 @@ function TacRP.LoadAtt(atttbl, shortname, id)
         local attent = {}
         attent.Base = "tacrp_att"
         attent.Icon = atttbl.Icon
-        if attent.Icon then
+        if attent.Icon and attent.Icon.GetTexture and attent.Icon:GetTexture( "$basetexture" ) then
             attent.IconOverride = string.Replace( attent.Icon:GetTexture( "$basetexture" ):GetName() .. ".png", "0001010", "" )
         end
         attent.PrintName = atttbl.FullName or atttbl.PrintName or shortname
@@ -109,7 +109,7 @@ function TacRP.GetAttTable(name)
     end
 end
 
-function TacRP.GetAttsForCats(cats)
+function TacRP.GetAttsForCats(cats, wpn)
     if !istable(cats) then
         cats = {cats}
     end
@@ -117,13 +117,25 @@ function TacRP.GetAttsForCats(cats)
     local atts = {}
 
     for i, k in pairs(TacRP.Attachments) do
+        if k.Compatibility then
+            local result = k.Compatibility(wpn)
+
+            if result == true then
+                table.insert(atts, k.ShortName)
+            elseif result == false then
+                continue
+            end
+        end
+
         local attcats = k.Category
+
         if !istable(attcats) then
             attcats = {attcats}
         end
 
         for _, cat in pairs(cats) do
             if table.HasValue(attcats, cat) then
+
                 table.insert(atts, k.ShortName)
                 break
             end
@@ -177,7 +189,12 @@ function TacRP.NearBench(ply)
     return true
 end
 
-function TacRP.CanCustomize(ply, wep, att, slot)
+function TacRP.CanCustomize(ply, wep, att, slot, detach)
+
+    local can, reason = hook.Run("TacRP_CanCustomize", ply, wep, att, slot, detach)
+    if can ~= nil then
+        return can, reason
+    end
 
     if engine.ActiveGamemode() == "terrortown" then
         local role = ply:GetTraitor() or ply:IsDetective()
@@ -199,7 +216,7 @@ function TacRP.CanCustomize(ply, wep, att, slot)
     else
         // check bench
         if TacRP.ConVars["rp_requirebench"]:GetBool() and !TacRP.NearBench(ply) then
-            return false, "Restricted during round"
+            return false, "Requires Customization Bench"
         end
     end
 

@@ -5,12 +5,14 @@ AddCSLuaFile()
 
 // names and stuff
 SWEP.PrintName = "HK MP7"
+SWEP.AbbrevName = "MP7"
 SWEP.Category = "Tactical RP"
 
 SWEP.SubCatTier = "2Operator"
 SWEP.SubCatType = "3Submachine Gun"
 
-SWEP.Description = "PDW with superb handling and close range effectiveness.\nHigh velocity rounds retain effectiveness at range and pierces armor easily."
+SWEP.Description = "PDW with superb handling and close range effectiveness. High velocity rounds retain effectiveness at range and pierces armor easily."
+SWEP.Description_Quote = "\"You forgot to cock it, muthaf*cka!\""
 
 SWEP.Trivia_Caliber = "4.6x30mm"
 SWEP.Trivia_Manufacturer = "Heckler & Koch"
@@ -26,8 +28,6 @@ SWEP.Slot = 2
 
 SWEP.BalanceStats = {
     [TacRP.BALANCE_SBOX] = {
-        Damage_Max = 14,
-        Damage_Min = 10,
     },
     [TacRP.BALANCE_TTT] = {
         Damage_Max = 12,
@@ -67,9 +67,9 @@ SWEP.TTTReplace = TacRP.TTTReplacePreset.SMG
 // "ballistics"
 
 SWEP.Damage_Max = 16
-SWEP.Damage_Min = 12
+SWEP.Damage_Min = 13
 SWEP.Range_Min = 800 // distance for which to maintain maximum damage
-SWEP.Range_Max = 3200 // distance at which we drop to minimum damage
+SWEP.Range_Max = 4500 // distance at which we drop to minimum damage
 SWEP.Penetration = 10 // units of metal this weapon can penetrate
 SWEP.ArmorPenetration = 0.85
 SWEP.ArmorBonus = 2
@@ -188,6 +188,7 @@ SWEP.QCA_Muzzle = 1
 SWEP.QCA_Eject = 2
 
 SWEP.MuzzleEffect = "muzzleflash_ak47"
+SWEP.EjectEffect = 1
 
 // anims
 
@@ -195,9 +196,15 @@ SWEP.AnimationTranslationTable = {
     ["fire1"] = "fire1_M",
     ["fire2"] = "fire2_M",
     ["fire3"] = "fire3_M",
-    ["fire4"] = "fire4_M",
-    ["fire5"] = "fire5_M",
+    ["fire4"] = {"fire4_M", "fire4_L", "fire4_R"},
     ["melee"] = {"melee1", "melee2"}
+}
+
+SWEP.ProceduralIronFire = {
+    vm_pos = Vector(0, -1, -0.1),
+    vm_ang = Angle(0, 0.4, 0),
+    t = 0.25,
+    tmax = 0.25,
 }
 
 // attachments
@@ -223,7 +230,7 @@ SWEP.AttachmentElements = {
 SWEP.Attachments = {
     [1] = {
         PrintName = "Optic",
-        Category = {"optic_cqb", "optic_medium"},
+        Category = {"optic_cqb_nookp7", "optic_medium"},
         Bone = "ValveBiped.mp7_rootbone",
         AttachSound = "tacrp/weapons/optic_on.wav",
         DetachSound = "tacrp/weapons/optic_off.wav",
@@ -247,7 +254,7 @@ SWEP.Attachments = {
     },
     [3] = {
         PrintName = "Tactical",
-        Category = "tactical",
+        Category = {"tactical", "tactical_zoom", "tactical_ebullet"},
         Bone = "ValveBiped.mp7_rootbone",
         AttachSound = "tacrp/weapons/flashlight_on.wav",
         DetachSound = "tacrp/weapons/flashlight_off.wav",

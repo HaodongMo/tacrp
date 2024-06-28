@@ -1,4 +1,4 @@
-TacRP.Version = "18" // 2024-01-07
+TacRP.Version = "22" // 2024-06-20
 
 TacRP.PenTable = {
     [MAT_ANTLION]     = 0.1,
@@ -59,7 +59,23 @@ TacRP.HOLSTER_SLOT_PISTOL = 3
 TacRP.HOLSTER_SLOT_GEAR = 4
 TacRP.HOLSTER_SLOT_SPECIAL = 5
 
+TacRP.GRENADE1_Backup = KEY_G
+TacRP.GRENADE2_Backup = KEY_H
+
 TacRP.IN_MELEE = IN_WEAPON1
+TacRP.IN_CUSTOMIZE = IN_WEAPON2
+TacRP.IN_TACTICAL = IN_BULLRUSH
+TacRP.IN_RELOCK = IN_CANCEL
+
+TacRP.LockableEntities = {
+    ["unity_flare"] = true
+}
+
+TacRP.FlareEntities = {
+    ["unity_flare"] = true,
+    ["sw_flare_v3"] = true,
+    ["env_flare"] = true
+}
 
 TacRP.HolsterBones = {
     [TacRP.HOLSTER_SLOT_BACK] = {
@@ -140,9 +156,9 @@ TacRP.FactionToPhrase = {
     [TacRP.FACTION_MILITIA] = "faction.militia",
 }
 
-function TacRP.ShouldWeFunny()
+function TacRP.ShouldWeFunny(never_odds)
     local i = TacRP.ConVars["funny_loudnoises"]:GetInt()
-    return i == 2 or (i == 1 and (os.date("%m-%d") == "04-01" or math.random() <= 0.01))
+    return i == 2 or (i == 1 and (os.date("%m-%d") == "04-01" or (!never_odds and math.random() <= 0.01)))
 end
 
 TacRP.BALANCE_AUTO = -1

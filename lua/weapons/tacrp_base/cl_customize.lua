@@ -91,7 +91,7 @@ function SWEP:CreateCustomizeHUD()
             return
         end
 
-        local name_txt = TacRP:GetPhrase("wep." .. self:GetClass() .. "name.full") or TacRP:GetPhrase("wep." .. self:GetClass() .. "name") or self:GetValue("FullName") or self:GetValue("PrintName")
+        local name_txt = TacRP:GetPhrase("wep." .. self:GetClass() .. ".name.full") or TacRP:GetPhrase("wep." .. self:GetClass() .. ".name") or self:GetValue("FullName") or self:GetValue("PrintName")
 
         surface.SetFont("TacRP_Myriad_Pro_32")
         local name_w = surface.GetTextSize(name_txt)
@@ -461,7 +461,8 @@ function SWEP:CreateCustomizeHUD()
             -- surface.DrawText(TacRP:GetPhrase("cust.description"))
 
             if !self.MiscCache["cust_desc"] then
-                self.MiscCache["cust_desc"] = TacRP.MultiLineText(self:GetValue("Description"), w - TacRP.SS(8), "TacRP_Myriad_Pro_8")
+                local phrase = TacRP:GetPhrase("wep." .. self:GetClass() .. ".desc") or self.Description
+                self.MiscCache["cust_desc"] = TacRP.MultiLineText(phrase, w - TacRP.SS(8), "TacRP_Myriad_Pro_8")
             end
 
             surface.SetFont("TacRP_Myriad_Pro_8")
@@ -471,11 +472,12 @@ function SWEP:CreateCustomizeHUD()
                 surface.DrawText(k)
             end
 
-            if self.Description_Quote then
+            local phrase_quote = TacRP:GetPhrase("wep." .. self:GetClass() .. ".desc.quote") or self.Description_Quote
+            if phrase_quote then
                 surface.SetFont("TacRP_Myriad_Pro_8_Italic")
                 surface.SetTextColor(255, 255, 255)
                 surface.SetTextPos(TacRP.SS(4), TacRP.SS(26))
-                surface.DrawText(self.Description_Quote)
+                surface.DrawText(phrase_quote)
             end
         end
 
@@ -494,7 +496,9 @@ function SWEP:CreateCustomizeHUD()
             surface.SetTextColor(255, 255, 255)
 
             surface.SetTextPos(TacRP.SS(4), TacRP.SS(6))
-            local manu_str = TacRP:TryTranslate(self:GetValue("Trivia_Manufacturer")) or TacRP:GetPhrase("trivia.unknown")
+            local manu_str = TacRP:GetPhrase("wep." .. self:GetClass() .. ".trivia.manufacturer")
+                    or TacRP:TryTranslate(self:GetValue("Trivia_Manufacturer"))
+                    or TacRP:GetPhrase("trivia.unknown")
             local manu_w = surface.GetTextSize(manu_str)
             if manu_w + TacRP.SS(6) >= w / 2 then
                 surface.SetFont("TacRP_Myriad_Pro_8")
@@ -512,10 +516,14 @@ function SWEP:CreateCustomizeHUD()
             surface.SetFont("TacRP_Myriad_Pro_10")
 
             surface.SetTextPos(TacRP.SS(4), TacRP.SS(24))
-            surface.DrawText(TacRP:TryTranslate(self:GetValue("Trivia_Year")) or TacRP:GetPhrase("trivia.unknown"))
+            surface.DrawText(TacRP:GetPhrase("wep." .. self:GetClass() .. ".trivia.year")
+                    or TacRP:TryTranslate(self:GetValue("Trivia_Year"))
+                    or TacRP:GetPhrase("trivia.unknown"))
 
             surface.SetTextPos(w / 2, TacRP.SS(6))
-            surface.DrawText(TacRP:TryTranslate(self:GetValue("Trivia_Caliber")) or TacRP:GetPhrase("trivia.unknown"))
+            surface.DrawText(TacRP:GetPhrase("wep." .. self:GetClass() .. ".trivia.caliber")
+                    or TacRP:TryTranslate(self:GetValue("Trivia_Caliber"))
+                    or TacRP:GetPhrase("trivia.unknown"))
 
             surface.SetTextPos(w / 2, TacRP.SS(24))
             surface.DrawText(TacRP:GetPhrase(TacRP.FactionToPhrase[self:GetValue("Faction")]))
@@ -1124,7 +1132,7 @@ function SWEP:CreateCustomizeHUD()
     if TacRP.ConVars["cust_legacy"]:GetBool() then
 
         for slot, attslot in pairs(self.Attachments) do
-            local atts = TacRP.GetAttsForCats(attslot.Category or "")
+            local atts = TacRP.GetAttsForCats(attslot.Category or "", self)
 
             attachment_slots[slot] = {}
 
@@ -1227,15 +1235,16 @@ function SWEP:CreateCustomizeHUD()
         layout:SetLayoutDir(LEFT)
 
         local scroll = vgui.Create("DScrollPanel", bg)
-        scroll:SetSize(TacRP.SS(36), scrh * 0.9)
+        scroll:SetSize(TacRP.SS(100), scrh * 0.9)
         scroll:SetPos(airgap * 2 + layout:GetWide(), scrh * 0.05)
         scroll:SetVisible(false)
 
         local slotlayout = vgui.Create("TacRPAttSlotLayout", scroll)
-        slotlayout:SetSize(TacRP.SS(36), scrh)
+        slotlayout:SetSize(TacRP.SS(100), scrh)
         slotlayout:SetWeapon(self)
         slotlayout:SetScroll(scroll)
         slotlayout:SetSpaceY(TacRP.SS(4))
+        slotlayout:SetSpaceX(TacRP.SS(4))
         slotlayout:SetLayoutDir(TOP)
         if self.LastCustomizeSlot then
             slotlayout:SetSlot(self.LastCustomizeSlot)
@@ -1361,6 +1370,8 @@ function SWEP:CreateCustomizeHUD()
         LocalPlayer():ConCommand("tacrp_news")
     end
     TacRP.FetchNews(function()
+        if !self.CustomizeHUD then return end
+
         for i, v in ipairs(TacRP.NewsLoaded) do
             if !TacRP.NewsRead[v.Key] then
                 newsbutton.flash = v.Type or "article"

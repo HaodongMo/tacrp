@@ -5,12 +5,14 @@ AddCSLuaFile()
 
 // names and stuff
 SWEP.PrintName = "Ruger Mini-14"
+SWEP.AbbrevName = "Mini-14"
 SWEP.Category = "Tactical RP"
 
 SWEP.SubCatTier = "4Consumer"
-SWEP.SubCatType = "5Sporter Carbine"
+SWEP.SubCatType = "5Sporter"
 
 SWEP.Description = "Lightweight rifle with no stock or optic mount.\nGood hip-fire accuracy among rifles, but range is low."
+SWEP.Description_Quote = "\"The one with the gun gets to tell the truth.\""
 
 SWEP.Trivia_Caliber = ".223 Remington"
 SWEP.Trivia_Manufacturer = "Sturm, Ruger & Co."
@@ -212,8 +214,7 @@ SWEP.AnimationTranslationTable = {
     ["fire1"] = "fire1_M",
     ["fire2"] = "fire2_M",
     ["fire3"] = "fire3_M",
-    ["fire4"] = "fire4_M",
-    ["fire5"] = "fire5_M",
+    ["fire4"] = {"fire4_M", "fire4_L", "fire4_R"},
     ["melee"] = {"melee1", "melee2"}
 }
 
@@ -267,7 +268,7 @@ SWEP.Attachments = {
     },
     [2] = {
         PrintName = "Tactical",
-        Category = "tactical",
+        Category = {"tactical", "tactical_zoom", "tactical_ebullet"},
         Bone = "m1_root",
         WMBone = "Box01",
         AttachSound = "tacrp/weapons/flashlight_on.wav",

@@ -5,12 +5,14 @@ AddCSLuaFile()
 
 // names and stuff
 SWEP.PrintName = "Ingram MAC-10"
+SWEP.AbbrevName = "MAC-10"
 SWEP.Category = "Tactical RP" // "Tactical RP (Extras)"
 
 SWEP.SubCatTier = "4Consumer"
-SWEP.SubCatType = "2Machine Pistol"
+SWEP.SubCatType = "3Machine Pistol"
 
 SWEP.Description = "A bullet hose best used for point blank spray-and-pray."
+SWEP.Description_Quote = "\"Give me the motherf*ckin' gun, Tre!\""
 
 SWEP.Trivia_Caliber = "9x19mm"
 SWEP.Trivia_Manufacturer = "Military Armament Corporation"
@@ -118,7 +120,7 @@ SWEP.RecoilFirstShotMult = 1 // multiplier for the first shot's recoil amount
 
 SWEP.RecoilVisualKick = 1.5
 
-SWEP.RecoilKick = 2.5
+SWEP.RecoilKick = 5
 SWEP.RecoilStability = 0.15
 
 SWEP.RecoilSpreadPenalty = 0.002
@@ -202,12 +204,17 @@ SWEP.ShootPitchVariance = 3
 SWEP.QCA_Muzzle = 1
 
 SWEP.MuzzleEffect = "muzzleflash_pistol"
+SWEP.EjectEffect = 1
 
 // anims
 
 SWEP.AnimationTranslationTable = {
     ["deploy"] = "draw",
-    ["fire"] = {"shoot1", "shoot2", "shoot3"},
+    ["fire1"] = "shoot1",
+    ["fire2"] = "shoot2",
+    ["fire3"] = "shoot3",
+    ["fire4"] = "shoot4",
+    ["fire5"] = {"shoot5", "shoot5L", "shoot5R"},
     ["blind_fire"] = {"blind_shoot1", "blind_shoot2", "blind_shoot3"},
     ["melee"] = {"melee1", "melee2"}
 }
@@ -287,7 +294,7 @@ SWEP.Attachments = {
     },
     [2] = {
         PrintName = "Tactical",
-        Category = "tactical",
+        Category = {"tactical", "tactical_zoom", "tactical_ebullet"},
         Bone = "xd45_rig.xd45_ROOT",
         WMBone = "Box01",
         AttachSound = "tacrp/weapons/flashlight_on.wav",

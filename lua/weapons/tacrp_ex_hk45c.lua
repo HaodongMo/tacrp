@@ -5,10 +5,11 @@ AddCSLuaFile()
 
 // names and stuff
 SWEP.PrintName = "HK HK45 Compact"
+SWEP.AbbrevName = "HK45C"
 SWEP.Category = "Tactical RP"
 
 SWEP.SubCatTier = "1Elite"
-SWEP.SubCatType = "1Sidearm"
+SWEP.SubCatType = "1Pistol"
 
 SWEP.Description = "Modern pistol with great firepower in a handy package."
 
@@ -35,7 +36,30 @@ SWEP.BalanceStats = {
         ClipSize = 8,
     },
     [TacRP.BALANCE_TTT] = {
-        // TODO
+        Damage_Max = 34,
+        Damage_Min = 10,
+        Range_Min = 300,
+        Range_Max = 1200,
+        RPM = 260,
+        RPMMultSemi = 1,
+        ClipSize = 8,
+
+        RecoilResetInstant = true,
+        RecoilMaximum = 3,
+        RecoilResetTime = 0.2,
+        RecoilDissipationRate = 9,
+        RecoilSpreadPenalty = 0.006,
+
+        BodyDamageMultipliers = {
+            [HITGROUP_HEAD] = 2.5,
+            [HITGROUP_CHEST] = 1,
+            [HITGROUP_STOMACH] = 1,
+            [HITGROUP_LEFTARM] = 0.9,
+            [HITGROUP_RIGHTARM] = 0.9,
+            [HITGROUP_LEFTLEG] = 0.75,
+            [HITGROUP_RIGHTLEG] = 0.75,
+            [HITGROUP_GEAR] = 0.9
+        },
     },
 }
 
@@ -165,6 +189,7 @@ SWEP.ShootPitchVariance = 2.5 // amount to vary pitch by each shot
 SWEP.QCA_Muzzle = 4
 
 SWEP.MuzzleEffect = "muzzleflash_pistol"
+SWEP.EjectEffect = 1
 
 // anims
 
@@ -243,7 +268,7 @@ SWEP.Attachments = {
     },
     [3] = {
         PrintName = "Tactical",
-        Category = "tactical",
+        Category = {"tactical", "tactical_zoom", "tactical_ebullet"},
         Bone = "ValveBiped.p250_rootbone",
         WMBone = "Box01",
         AttachSound = "TacRP/weapons/flashlight_on.wav",

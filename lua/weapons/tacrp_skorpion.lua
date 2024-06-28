@@ -5,10 +5,11 @@ AddCSLuaFile()
 
 // names and stuff
 SWEP.PrintName = "Skorpion vz. 61"
+SWEP.AbbrevName = "Skorpion"
 SWEP.Category = "Tactical RP"
 
 SWEP.SubCatTier = "4Consumer"
-SWEP.SubCatType = "2Machine Pistol"
+SWEP.SubCatType = "3Machine Pistol"
 
 SWEP.Description = "Light machine pistol with good range, recoil and spread."
 
@@ -69,7 +70,7 @@ SWEP.TTTReplace = TacRP.TTTReplacePreset.MachinePistol
 
 // "ballistics"
 
-SWEP.DefaultBodygroups = "0010"
+SWEP.DefaultBodygroups = "0000"
 
 SWEP.Damage_Max = 18
 SWEP.Damage_Min = 9
@@ -198,16 +199,17 @@ SWEP.QCA_Muzzle = 1
 SWEP.QCA_Eject = 2
 
 SWEP.MuzzleEffect = "muzzleflash_pistol"
+SWEP.EjectEffect = 1
 
 // anims
 
 SWEP.AnimationTranslationTable = {
     ["fire_iron"] = "fire2_M",
-    ["fire1"] = "fire1_M",
-    ["fire2"] = "fire2_M",
-    ["fire3"] = "fire3_M",
-    ["fire4"] = "fire4_M",
-    ["fire5"] = "fire5_M",
+    ["fire1"] = "fire1_L",
+    ["fire2"] = "fire2_L",
+    ["fire3"] = "fire3_L",
+    ["fire4"] = "fire4_L",
+    ["fire5"] = "fire5_L",
     ["melee"] = {"melee1", "melee2"}
 }
 
@@ -295,7 +297,7 @@ SWEP.Attachments = {
     },
     [3] = {
         PrintName = "Tactical",
-        Category = "tactical",
+        Category = {"tactical", "tactical_zoom", "tactical_ebullet"},
         Bone = "Skorpion_ROOT",
         WMBone = "Bone02",
         AttachSound = "TacRP/weapons/flashlight_on.wav",

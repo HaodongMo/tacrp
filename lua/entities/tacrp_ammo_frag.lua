@@ -12,11 +12,13 @@ ENT.Spawnable                = true
 ENT.Model                    = "models/weapons/tacint/frag.mdl"
 
 ENT.Ammo = "grenade"
+ENT.GrenadeProxy = "tacrp_nade_frag"
 
 function ENT:Initialize()
     self:SetModel(self.Model)
 
     if SERVER then
+        self:SetMaterial(self.Material or "")
 
         self:PhysicsInit(SOLID_VPHYSICS)
         self:SetMoveType(MOVETYPE_VPHYSICS)
@@ -65,6 +67,9 @@ if SERVER then
     function ENT:Use(ply)
         if !ply:IsPlayer() then return end
         self:ApplyAmmo(ply)
+        if self.GrenadeProxy then
+            ply:Give(self.GrenadeProxy, true)
+        end
     end
 
 elseif CLIENT then

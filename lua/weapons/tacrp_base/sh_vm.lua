@@ -48,6 +48,7 @@ function SWEP:GetViewModelPosition(pos, ang)
 
     local vm = self:GetOwner():GetViewModel()
     local FT = self:DeltaSysTime() -- FrameTime()
+    local RFT = RealFrameTime()
 
     ang = ang - (self:GetOwner():GetViewPunchAngles() * 0.5)
 
@@ -113,11 +114,13 @@ function SWEP:GetViewModelPosition(pos, ang)
         sightdelta = m_appor(sightdelta, 0, FT / ads)
     end
 
-    if self:GetPeeking() then
-        peekdelta = m_appor(peekdelta, 1, FT / 0.2)
-    else
-        peekdelta = m_appor(peekdelta, 0, FT / 0.2)
-    end
+    -- if IsFirstTimePredicted() or game.SinglePlayer() then
+        if self:GetPeeking() then
+            peekdelta = m_appor(peekdelta, 1, FT / 0.2)
+        else
+            peekdelta = m_appor(peekdelta, 0, FT / 0.2)
+        end
+    -- end
 
     local curvedsightdelta = self:Curve(sightdelta)
     local curvedpeekdelta = self:Curve(peekdelta)
@@ -161,13 +164,14 @@ function SWEP:GetViewModelPosition(pos, ang)
     ---------------------------------------------
     -- Procedural Firing
     ---------------------------------------------
-    if IsValid(vm) and self.ProceduralIronFire then
+    local procdata = self:GetValue("ProceduralIronFire")
+    if IsValid(vm) and procdata then
         local dt = math.max(0, UnPredictedCurTime() - self:GetLastProceduralFireTime() + self:GetPingOffsetScale())
 
-        if dt <= self.ProceduralIronFire.tmax then
+        if dt <= procdata.tmax then
             self.ProceduralIronCleanup = false
             if !(self:GetValue("LastShot") and self:Clip1() == 0) then
-                for k, v in pairs(self.ProceduralIronFire.bones or {}) do
+                for k, v in pairs(procdata.bones or {}) do
                     local bone = vm:LookupBone(v.bone or "")
                     if !bone then continue end
 
@@ -188,17 +192,17 @@ function SWEP:GetViewModelPosition(pos, ang)
                 end
             end
 
-            local dtc = math.ease.InQuad(math.Clamp(1 - dt / self.ProceduralIronFire.t, 0, 1))
+            local dtc = math.ease.InQuad(math.Clamp(1 - dt / procdata.t, 0, 1))
 
-            if dtc > 0 and self.ProceduralIronFire.vm_pos then
-                LerpMod(offsetpos, offsetpos + self.ProceduralIronFire.vm_pos, dtc)
+            if dtc > 0 and procdata.vm_pos then
+                LerpMod(offsetpos, offsetpos + procdata.vm_pos, dtc)
             end
-            if dtc > 0 and self.ProceduralIronFire.vm_ang then
-                LerpMod(offsetang, offsetang + self.ProceduralIronFire.vm_ang, dtc, true)
+            if dtc > 0 and procdata.vm_ang then
+                LerpMod(offsetang, offsetang + procdata.vm_ang, dtc, true)
             end
         elseif !self.ProceduralIronCleanup then
             self.ProceduralIronCleanup = true
-            for k, v in pairs(self.ProceduralIronFire.bones or {}) do
+            for k, v in pairs(procdata.bones or {}) do
                 local bone = vm:LookupBone(v.bone or "")
                 if !bone then continue end
                 if v.pos then
@@ -235,11 +239,13 @@ function SWEP:GetViewModelPosition(pos, ang)
     ---------------------------------------------
     -- Customization
     ---------------------------------------------
-    if self:GetCustomize() then
-        customizedelta = m_appor(customizedelta, 1, FT * 1 / 0.15)
-    else
-        customizedelta = m_appor(customizedelta, 0, FT * 1 / 0.15)
-    end
+    -- if IsFirstTimePredicted() or game.SinglePlayer() then
+        if self:GetCustomize() then
+            customizedelta = m_appor(customizedelta, 1, RealFrameTime() * 1 / 0.15)
+        else
+            customizedelta = m_appor(customizedelta, 0, RealFrameTime() * 1 / 0.15)
+        end
+    -- end
 
     if customizedelta > 0 then
         local curvedcustomizedelta = self:Curve(customizedelta)
@@ -253,7 +259,7 @@ function SWEP:GetViewModelPosition(pos, ang)
     -- Sprinting
     ---------------------------------------------
     local stf = self:GetSprintToFireTime()
-    if !self.LastWasSprinting or self:GetCustomize() or self:CanShootInSprint() then
+    if self:GetCustomize() or self:GetInBipod() or (!self:GetSafe() and !self.LastWasSprinting and !self:ShouldLowerWeapon()) then
         -- not accurate to how sprint progress works but looks much smoother
         if self:GetScopeLevel() > 0 and self:GetSprintLockTime() > UnPredictedCurTime() then
             stf = stf + self:GetAimDownSightsTime() * 0.5
@@ -261,7 +267,7 @@ function SWEP:GetViewModelPosition(pos, ang)
         sprintdelta = m_appor(sprintdelta, 0, FT / stf)
         self.LastReloadEnd = nil
     elseif self:GetReloading() then
-        if self.LastWasSprinting and self:GetEndReload() then
+        if (self.LastWasSprinting or self:ShouldLowerWeapon()) and self:GetEndReload() then
             self.LastReloadEnd = self.LastReloadEnd or (self:GetReloadFinishTime() - UnPredictedCurTime())
             sprintdelta = 1 - self:Curve((self:GetReloadFinishTime() - UnPredictedCurTime()) / self.LastReloadEnd)
         else

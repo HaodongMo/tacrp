@@ -122,15 +122,15 @@ function ENT:Detonate()
         util.BlastDamage(self, attacker, self:GetPos(), 400, math.Rand(100, 150) * mult)
         self:FireBullets({
             Attacker = attacker,
-            Damage = math.Rand(500, 1000) * mult,
+            Damage = math.Rand(800, 2400) * mult,
             Tracer = 0,
             Src = self:GetPos(),
             Dir = self:GetForward(),
             HullSize = 0,
-            Distance = 32,
+            Distance = 96,
             IgnoreEntity = self,
             Callback = function(atk, btr, dmginfo)
-                dmginfo:SetDamageType(DMG_AIRBOAT + DMG_BLAST) // airboat damage for helicopters and LVS vehicles
+                dmginfo:SetDamageType(DMG_AIRBOAT + DMG_SNIPER + DMG_BLAST) // airboat damage for helicopters and LVS vehicles
                 dmginfo:SetDamageForce(self:GetForward() * math.Rand(10000, 20000)) // LVS uses this to calculate penetration!
             end,
         })

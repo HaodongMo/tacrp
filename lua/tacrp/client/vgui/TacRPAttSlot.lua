@@ -239,7 +239,7 @@ function PANEL:PaintOver(w, h)
             surface.DrawLine(rx, ry + gap, rx + bw, ry + gap)
         end
 
-        local can, reason = TacRP.CanCustomize(wep:GetOwner(), self, att, attslot)
+        local can, reason = TacRP.CanCustomize(wep:GetOwner(), wep, att, attslot)
         if !can then
             reason = reason or "Restricted"
             local reasonx, reasonw = rx + TacRP.SS(14), bw - TacRP.SS(14)

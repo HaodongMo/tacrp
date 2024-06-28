@@ -1,9 +1,6 @@
-function TacRP.Move(ply, mv, cmd)
+function TacRP.CalculateMaxMoveSpeed(ply)
     local wpn = ply:GetActiveWeapon()
     local iscurrent = true
-
-    local origspeed = ply:GetMaxSpeed()
-    local basespd = math.min((Vector(cmd:GetForwardMove(), cmd:GetUpMove(), cmd:GetSideMove())):Length(), mv:GetMaxClientSpeed())
 
     local totalmult = 1
 
@@ -14,9 +11,6 @@ function TacRP.Move(ply, mv, cmd)
             mult = Lerp((CurTime() - ply:GetNWFloat("TacRPLastBashed", 0) - 1.5) / (3 - 1.5), slow, 1)
         end
 
-        -- local basespd = math.min((Vector(cmd:GetForwardMove(), cmd:GetUpMove(), cmd:GetSideMove())):Length(), mv:GetMaxClientSpeed())
-        -- mv:SetMaxSpeed(basespd * mult)
-        -- mv:SetMaxClientSpeed(basespd * mult)
         totalmult = totalmult * mult
     end
 
@@ -28,15 +22,7 @@ function TacRP.Move(ply, mv, cmd)
             mult = Lerp((CurTime() - stunstart - stundur * 0.7) / (stundur * 0.3), slow, 1)
         end
 
-        -- local basespd = math.min((Vector(cmd:GetForwardMove(), cmd:GetUpMove(), cmd:GetSideMove())):Length(), mv:GetMaxClientSpeed())
-        -- mv:SetMaxSpeed(basespd * mult)
-        -- mv:SetMaxClientSpeed(basespd * mult)
         totalmult = totalmult * mult
-    end
-
-    if totalmult < 1 then
-        mv:SetMaxSpeed(basespd * totalmult)
-        mv:SetMaxClientSpeed(basespd * totalmult)
     end
 
     -- Remember last weapon to keep applying slowdown on shooting and melee
@@ -51,38 +37,16 @@ function TacRP.Move(ply, mv, cmd)
         ply.LastTacRPWeapon = wpn
     end
 
-    -- try not to apply slowdown on top of crouching or slowwalk speed
-    -- basespd = math.min((Vector(cmd:GetForwardMove(), cmd:GetUpMove(), cmd:GetSideMove())):Length(), mv:GetMaxClientSpeed())
-    basespd = math.min((Vector(cmd:GetForwardMove(), cmd:GetUpMove(), cmd:GetSideMove())):Length(), math.max(mv:GetMaxClientSpeed(), ply:GetWalkSpeed()))
-
-    -- mult1: lowest between move speed and shooting speed
-    local mult = 1
-    if iscurrent and (!wpn:GetSafe() or wpn:GetIsSprinting()) and TacRP.ConVars["penalty_move"]:GetBool() then
+    local mult = 1 * totalmult
+    if iscurrent and (!wpn:GetSafe() or wpn:GetIsSprinting() or wpn:ShouldLowerWeapon()) and TacRP.ConVars["penalty_move"]:GetBool() then
         mult = mult * math.Clamp(wpn:GetValue("MoveSpeedMult"), 0.0001, 1)
     end
 
-    if TacRP.ConVars["penalty_firing"]:GetBool() then
-        local shotdelta = 0 -- how close should we be to the shoot speed mult
-        local rpmd = wpn:GetValue("RPM") / 900
-        local fulldur = Lerp(rpmd, 1, 0.25) -- time considered "during shot". cant be just primary fire since it hurts slow guns too much
-        local delay = Lerp(rpmd, 0.25, 0.5)
-        local shottime = wpn:GetNextPrimaryFire() - (60 / wpn:GetValue("RPM")) - CurTime() + fulldur
-
-        -- slowdown based on recoil intensity (firing longer means heavier slowdown)
-        if shottime > -delay then
-            local aftershottime = math.Clamp(1 + shottime / delay, 0, 1)
-            shotdelta = Lerp((wpn:GetRecoilAmount() / (wpn:GetValue("RecoilMaximum") * 0.75)) ^ 1.5, 0.25, 1) * aftershottime
-        end
-        local shootmove = math.Clamp(wpn:GetValue("ShootingSpeedMult"), 0.0001, 1)
-        mult = math.min(mult, Lerp(shotdelta, 1, shootmove))
-    end
-
-    -- mult2: lowest between sighted, reloading, melee
+    -- mult2: sighted or reloading
     local mult2 = 1
     if iscurrent and wpn:GetScopeLevel() > 0 and TacRP.ConVars["penalty_aiming"]:GetBool() then
         mult2 = math.Clamp(wpn:GetValue("SightedSpeedMult"), 0.0001, 1)
     end
-
     if iscurrent and TacRP.ConVars["penalty_reload"]:GetBool() then
         local rsmt = wpn:GetValue("ReloadSpeedMultTime")
 
@@ -100,6 +64,24 @@ function TacRP.Move(ply, mv, cmd)
         end
     end
 
+    -- mult3: shooting and melee
+    local mult3 = 1
+    if TacRP.ConVars["penalty_firing"]:GetBool() then
+        local shotdelta = 0 -- how close should we be to the shoot speed mult
+        local rpmd = wpn:GetValue("RPM") / 900
+        local fulldur = Lerp(rpmd, 1, 0.25) -- time considered "during shot". cant be just primary fire since it hurts slow guns too much
+        local delay = Lerp(rpmd, 0.25, 0.5)
+        local shottime = wpn:GetNextPrimaryFire() - (60 / wpn:GetValue("RPM")) - CurTime() + fulldur
+
+        -- slowdown based on recoil intensity (firing longer means heavier slowdown)
+        if shottime > -delay then
+            local aftershottime = math.Clamp(1 + shottime / delay, 0, 1)
+            shotdelta = Lerp((wpn:GetRecoilAmount() / (wpn:GetValue("RecoilMaximum") * 0.75)) ^ 1.5, 0.25, 1) * aftershottime
+        end
+        local shootmove = math.Clamp(wpn:GetValue("ShootingSpeedMult"), 0.0001, 1)
+        mult3 = Lerp(shotdelta, 1, shootmove)
+    end
+
     if TacRP.ConVars["penalty_melee"]:GetBool() then
         local msmt = wpn:GetValue("MeleeSpeedMultTime")
 
@@ -107,31 +89,33 @@ function TacRP.Move(ply, mv, cmd)
             local mt = CurTime() - wpn:GetLastMeleeTime()
             local d = mt / msmt
 
-            d = math.Clamp(d, 0, 1)
+            d = math.Clamp(d, 0, 1) ^ 4
 
-            mult2 = math.min(mult2, Lerp(d, math.Clamp(wpn:GetValue("MeleeSpeedMult"), 0.0001, 1), 1))
-            -- mult = mult * Lerp(d, math.Clamp(wpn:GetValue("MeleeSpeedMult"), 0.0001, 1), 1)
+            mult3 = math.min(mult3,  Lerp(d, math.Clamp(wpn:GetValue("MeleeSpeedMult"), 0.0001, 1), 1))
         end
     end
 
-    local tgtspeed = basespd * mult * mult2
+    return mult * mult2 * mult3, iscurrent
+end
 
-    -- print(tgtspeed, mv:GetMaxClientSpeed(), mv:GetMaxSpeed())
+function TacRP.Move(ply, mv, cmd)
+    local wpn = ply:GetActiveWeapon()
 
-    if mult * mult2 < 1 and tgtspeed < mv:GetMaxSpeed() then
-        mv:SetMaxSpeed(tgtspeed)
-        mv:SetMaxClientSpeed(tgtspeed)
-    end
+    local basespd = math.min((Vector(cmd:GetForwardMove(), cmd:GetUpMove(), cmd:GetSideMove())):Length(), mv:GetMaxClientSpeed())
+
+    local mult, iscurrent = TacRP.CalculateMaxMoveSpeed(ply)
 
     if !iscurrent then return end
 
+    mv:SetMaxSpeed(basespd * mult)
+    mv:SetMaxClientSpeed(basespd * mult)
+
     -- Semi auto click buffer
-    if !wpn.NoBuffer and !wpn:GetCharge() and (wpn:GetCurrentFiremode() <= 1) and mv:KeyPressed(IN_ATTACK)
+    if !wpn.NoBuffer and !wpn:GetCharge() and (wpn:GetCurrentFiremode() <= 1) and mv:KeyPressed(IN_ATTACK) and !wpn:GetJammed()
             and wpn:StillWaiting() and !wpn:GetReloading() and !wpn:GetCustomize() and wpn:Clip1() >= wpn:GetValue("AmmoPerShot")
             and wpn:GetNextSecondaryFire() < CurTime() and wpn:GetAnimLockTime() < CurTime() and (wpn:GetNextPrimaryFire() - CurTime()) < 0.15 then
         wpn:SetCharge(true)
-    elseif !wpn.NoBuffer and wpn:GetCharge() and !wpn:StillWaiting() and !owner then
-        wpn:SetCharge(false)
+    elseif !wpn.NoBuffer and wpn:GetCharge() and !wpn:StillWaiting() and !wpn:GetJammed() then
         wpn:PrimaryAttack()
     end
 end
@@ -184,7 +168,7 @@ function TacRP.StartCommand(ply, cmd)
         local recoildir = wpn:GetRecoilDirection()
         local rec = 1
 
-        if TacRP.ConVars["altrecoil"]:GetBool() then
+        if wpn:UseAltRecoil() then
             rec = 1 + math.Clamp((wpn:GetRecoilAmount() - 1) / (wpn:GetValue("RecoilMaximum") - 1), 0, 1)
             kick = kick + wpn:GetValue("RecoilSpreadPenalty") * wpn:GetValue("RecoilAltMultiplier")
             -- local recgain = rec * wpn:GetValue("RecoilSpreadPenalty") * 250

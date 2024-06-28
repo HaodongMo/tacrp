@@ -12,7 +12,7 @@ ATT.Icon = Material("entities/tacrp_att_optic_8x.png", "mips smooth")
 ATT.Description = "Long-range sniper optic."
 ATT.Pros = {"att.zoom.8"}
 
-ATT.Model = "models/weapons/tacint/addons/8x.mdl"
+ATT.Model = "models/weapons/tacint/addons/scope.mdl"
 ATT.Scale = 1
 ATT.ModelOffset = Vector(-1, 0, -0.35)
 
@@ -110,7 +110,7 @@ ATT.Model = "models/weapons/tacint/addons/holosight_hq.mdl"
 ATT.Scale = 0.35
 ATT.ModelOffset = Vector(0, 0.05, 0)
 
-ATT.Category = "optic_cqb"
+ATT.Category = {"optic_cqb", "optic_cqb_nookp7", "optic_cqb_verytall"}
 
 ATT.SortOrder = 1.5
 
@@ -155,7 +155,7 @@ ATT.Override_ScopeFOV = 90 / 1.1
 ATT.Override_ScopeLevels = 1
 
 ATT.Add_AimDownSightsTime = -0.03
-ATT.Add_SprintToFireTime = -0.03
+-- ATT.Add_SprintToFireTime = -0.03
 
 TacRP.LoadAtt(ATT, "optic_irons")
 -- #endregion
@@ -228,11 +228,45 @@ TacRP.LoadAtt(ATT, "optic_okp7")
 -- #endregion
 
 ------------------------------
--- #region optic_rds
+-- #region optic_rds2
 ------------------------------
 ATT = {}
 
 ATT.PrintName = "Red Dot"
+ATT.Icon = Material("entities/tacrp_att_optic_rds2.png", "mips smooth")
+ATT.Description = "Open reflex sight with a clear view."
+ATT.Pros = {"att.sight.1.25"}
+
+ATT.Model = "models/weapons/tacint/addons/rds2.mdl"
+ATT.Scale = 1.1
+ATT.ModelOffset = Vector(0, 0, -0.5)
+
+ATT.Category = {"optic_cqb", "optic_cqb_nookp7"}
+
+ATT.SortOrder = 1.25
+
+ATT.Override_Scope = true
+ATT.Override_ScopeOverlay = false
+ATT.Override_ScopeFOV = 90 / 1.25
+ATT.Override_ScopeLevels = 1
+ATT.Override_ScopeHideWeapon = false
+
+ATT.SightPos = Vector(0, -15, 1.4)
+ATT.SightAng = Angle(0, 0, 0)
+
+ATT.Holosight = Material("tacrp/hud/rds.png", "additive")
+
+ATT.Holosight:SetInt("$flags", 128)
+
+TacRP.LoadAtt(ATT, "optic_rds2")
+-- #endregion
+
+------------------------------
+-- #region optic_rds
+------------------------------
+ATT = {}
+
+ATT.PrintName = "Aimpoint"
 ATT.Icon = Material("entities/tacrp_att_optic_rds.png", "mips smooth")
 ATT.Description = "Tube optic that helps to improve mid-range aim."
 ATT.Pros = {"att.sight.1.75"}
@@ -241,7 +275,7 @@ ATT.Model = "models/weapons/tacint/addons/reddot_hq.mdl"
 ATT.Scale = 0.35
 ATT.ModelOffset = Vector(0, 0, 1)
 
-ATT.Category = "optic_cqb"
+ATT.Category = {"optic_cqb", "optic_cqb_nookp7", "optic_cqb_verytall"}
 
 ATT.SortOrder = 1.75
 
@@ -342,6 +376,7 @@ ATT.Scale = 1
 
 ATT.Category = "tactical"
 
+ATT.CanToggle = true
 ATT.BlindFireCamera = true
 
 TacRP.LoadAtt(ATT, "tac_cornershot")
@@ -490,6 +525,10 @@ ATT.Category = "tactical"
 ATT.SortOrder = 1
 
 ATT.Flashlight = true
+ATT.Blinding = true
+ATT.FlashlightFOV = 75
+ATT.FlashlightBrightness = 1.25
+
 ATT.CanToggle = true
 
 ATT.TacticalName = "Flashlight"
@@ -520,7 +559,44 @@ ATT.CanToggle = true
 
 ATT.TacticalName = "Laser"
 
+ATT.Override_LaserColor = Color(255, 0, 0)
+
 TacRP.LoadAtt(ATT, "tac_laser")
+-- #endregion
+
+
+------------------------------
+-- #region tac_combo
+------------------------------
+ATT = {}
+
+ATT.FullName = "Laser-Light Combo"
+ATT.PrintName = "Combo"
+ATT.Icon = Material("entities/tacrp_att_tac_combo.png", "mips smooth")
+ATT.Description = "Emits a green laser and flashlight. The light is too weak to blind others."
+ATT.Pros = {"att.procon.laser", "att.procon.flashlight"}
+ATT.Cons = {"att.procon.visible"}
+
+ATT.Model = "models/weapons/tacint_extras/addons/anpeq.mdl"
+ATT.Scale = 0.6
+ATT.ModelAngleOffset = Angle(0, 0, 0)
+
+ATT.Category = "tactical"
+
+ATT.SortOrder = 2
+
+ATT.Laser = true
+ATT.Flashlight = true
+ATT.FlashlightFOV = 60
+ATT.FlashlightBrightness = 0.75
+ATT.LaserPower = 1
+ATT.CanToggle = true
+
+ATT.TacticalName = "Combo"
+
+ATT.Override_LaserColor = Color(0, 255, 0, 200)
+
+TacRP.LoadAtt(ATT, "tac_combo")
 -- #endregion
 
 ------------------------------
@@ -893,3 +969,101 @@ ATT.TacticalCrosshairTruePos = true
 TacRP.LoadAtt(ATT, "tac_spreadgauge")
 -- #endregion
 
+------------------------------
+-- #region tac_magnifier
+------------------------------
+ATT = {}
+
+ATT.PrintName = "2x Zoom"
+ATT.FullName = "Variable Zoom Optic (2x)"
+ATT.Icon = Material("entities/tacrp_att_tac_magnifier.png", "mips smooth")
+ATT.Description = "Allows all optics to access a 2x zoom level, allowing them zoom in or out."
+ATT.Pros = {"att.procon.magnifier"}
+ATT.Cons = {"att.procon.needscope"}
+
+ATT.Category = "tactical_zoom"
+
+ATT.SortOrder = 8
+
+ATT.CanToggle = true
+ATT.VariableZoom = true
+ATT.VariableZoomFOV = 90 / 2
+
+ATT.TacticalName = "Magnifier"
+
+TacRP.LoadAtt(ATT, "tac_magnifier")
+-- #endregion
+
+------------------------------
+-- #region tac_bullet
+------------------------------
+ATT = {}
+
+ATT.FullName = "Emergency Bullet"
+ATT.PrintName = "Emrg. Bullet"
+ATT.Icon = Material("entities/tacrp_att_tac_bullet.png", "mips smooth")
+ATT.Description = "Press the tactical key to quickly load a single bullet for emergencies."
+ATT.Pros = {"att.procon.bullet"}
+ATT.Cons = {}
+
+ATT.Category = "tactical_ebullet"
+
+ATT.SortOrder = 9
+
+ATT.Override_Sound_ToggleTactical = ""
+ATT.CanToggle = true
+
+ATT.CustomTacticalHint = "Load Single Round"
+
+ATT.Hook_ToggleTactical = function(wep)
+    if wep:GetMaxClip1() <= 2 then
+        wep:Reload(true)
+        return true
+    end
+
+    if wep:GetReloading() then return end
+    if wep:StillWaiting() then return end
+
+    if wep:GetCapacity() <= 0 then return end
+    if wep:Clip1() >= wep:GetCapacity() then return end
+    if wep:Ammo1() <= 0 and !wep:GetInfiniteAmmo() then return end
+
+    -- wep:SetNextPrimaryFire(CurTime() + 1)
+    wep:PlayAnimation("jam", 0.667, true, true)
+    wep:GetOwner():DoAnimationEvent(ACT_HL2MP_GESTURE_RELOAD_PISTOL)
+    wep:RestoreClip(1)
+    wep:DoBulletBodygroups()
+
+    return true
+end
+
+TacRP.LoadAtt(ATT, "tac_bullet")
+-- #endregion
+
+------------------------------
+-- #region tac_thermal
+------------------------------
+ATT = {}
+
+ATT.PrintName = "Therm. Imager"
+ATT.FullName = "ZUMQFY Thermal Imaging Device"
+ATT.Icon = Material("entities/tacrp_att_tac_cornershot.png", "mips smooth")
+ATT.Description = "Display a thermal overlay which fuses with the main view while peeking."
+ATT.Pros = {"att.procon.thermal"}
+ATT.Cons = {"att.procon.blurpeek"}
+
+ATT.Model = "models/weapons/tacint/addons/cornershot_mounted.mdl"
+
+ATT.Category = "tactical"
+
+ATT.ThermalCamera = true
+ATT.CanToggle = true
+
+ATT.Hook_BlurScope = function(wep)
+    if wep:GetScopeLevel() > 0 and wep:GetPeeking() then
+        local d = wep:GetSightAmount()
+        return {d * 0.25, d}
+    end
+end
+
+TacRP.LoadAtt(ATT, "tac_thermal")

@@ -37,7 +37,22 @@ function EFFECT:Init(data)
     -- if !IsValid(parent) then return end
 
     if muzzle then
-        ParticleEffectAttach(muzzle, PATTACH_POINT_FOLLOW, parent, att)
+        if !istable(muzzle) then
+            muzzle = {muzzle}
+        end
+
+        for _, muzzleeffect in ipairs(muzzle) do
+            local pcf = CreateParticleSystem(muz or parent, muzzleeffect, PATTACH_POINT_FOLLOW, att)
+
+            if IsValid(pcf) then
+                pcf:StartEmission()
+
+                if (muz or parent) != vm and !wm then
+                    pcf:SetShouldDraw(false)
+                    table.insert(wpn.MuzzPCFs, pcf)
+                end
+            end
+        end
     end
 end
 

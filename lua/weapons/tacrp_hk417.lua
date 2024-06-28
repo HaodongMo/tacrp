@@ -5,10 +5,11 @@ AddCSLuaFile()
 
 // names and stuff
 SWEP.PrintName = "HK HK417"
+SWEP.AbbrevName = "HK417"
 SWEP.Category = "Tactical RP"
 
 SWEP.SubCatTier = "1Elite"
-SWEP.SubCatType = "6Precision Rifle"
+SWEP.SubCatType = "5Battle Rifle"
 
 SWEP.Description = "Battle rifle with superb damage, fire rate and precision. Capable of automatic fire, although it is very unstable."
 
@@ -28,6 +29,9 @@ SWEP.BalanceStats = {
     [TacRP.BALANCE_SBOX] = {
         Damage_Max = 38,
         Damage_Min = 25,
+
+        ShootingSpeedMult = 0.5,
+        RecoilStability = 0.5,
     },
     [TacRP.BALANCE_TTT] = {
 
@@ -101,16 +105,16 @@ SWEP.ShootTimeMult = 0.4
 
 SWEP.RecoilResetInstant  = false
 SWEP.RecoilPerShot = 1
-SWEP.RecoilMaximum = 5
+SWEP.RecoilMaximum = 7
 SWEP.RecoilResetTime = 0.04
 SWEP.RecoilDissipationRate = 13
 SWEP.RecoilFirstShotMult = 0.75
 
 SWEP.RecoilVisualKick = 1.5
 SWEP.RecoilKick = 8
-SWEP.RecoilStability = 0.5
+SWEP.RecoilStability = 0.7
 
-SWEP.RecoilSpreadPenalty = 0.0065
+SWEP.RecoilSpreadPenalty = 0.005
 SWEP.HipFireSpreadPenalty = 0.06
 SWEP.PeekPenaltyFraction = 0.2
 
@@ -119,7 +123,7 @@ SWEP.CanBlindFire = true
 // handling
 
 SWEP.MoveSpeedMult = 0.875
-SWEP.ShootingSpeedMult = 0.8
+SWEP.ShootingSpeedMult = 0.75
 SWEP.SightedSpeedMult = 0.6
 
 SWEP.ReloadSpeedMult = 0.4
@@ -200,9 +204,15 @@ SWEP.AnimationTranslationTable = {
     ["fire1"] = "fire1_M",
     ["fire2"] = "fire2_M",
     ["fire3"] = "fire3_M",
-    ["fire4"] = "fire4_M",
-    ["fire5"] = "fire5_M",
+    ["fire4"] = {"fire4_M", "fire4_L", "fire4_R"},
     ["melee"] = {"melee1", "melee2"}
+}
+
+SWEP.ProceduralIronFire = {
+    vm_pos = Vector(0, -1, -0.1),
+    vm_ang = Angle(0, 0.4, 0),
+    t = 0.25,
+    tmax = 0.25,
 }
 
 // attachments
@@ -251,7 +261,7 @@ SWEP.Attachments = {
     },
     [3] = {
         PrintName = "Tactical",
-        Category = "tactical",
+        Category = {"tactical", "tactical_zoom", "tactical_ebullet"},
         Bone = "ValveBiped._ROOT_HK417",
         AttachSound = "tacrp/weapons/flashlight_on.wav",
         DetachSound = "tacrp/weapons/flashlight_off.wav",

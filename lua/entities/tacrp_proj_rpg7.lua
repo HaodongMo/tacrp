@@ -16,7 +16,7 @@ ENT.ExplodeOnDamage = true
 ENT.ExplodeUnderwater = true
 
 ENT.Delay = 0
-ENT.SafetyFuse = 0.2
+ENT.SafetyFuse = 0.15
 
 ENT.AudioLoop = "TacRP/weapons/rpg7/rocket_flight-1.wav"
 
@@ -74,15 +74,15 @@ function ENT:Detonate()
         util.BlastDamage(self, attacker, self:GetPos(), 350, 150 * mult)
         self:FireBullets({
             Attacker = attacker,
-            Damage = 1000 * mult,
+            Damage = 2000 * mult,
             Tracer = 0,
             Src = self:GetPos(),
             Dir = self:GetForward(),
             HullSize = 0,
-            Distance = 32,
+            Distance = 96,
             IgnoreEntity = self,
             Callback = function(atk, btr, dmginfo)
-                dmginfo:SetDamageType(DMG_AIRBOAT + DMG_BLAST) // airboat damage for helicopters and LVS vehicles
+                dmginfo:SetDamageType(DMG_AIRBOAT + DMG_SNIPER + DMG_BLAST) // airboat damage for helicopters and LVS vehicles
                 dmginfo:SetDamageForce(self:GetForward() * 20000) // LVS uses this to calculate penetration!
             end,
         })

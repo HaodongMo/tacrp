@@ -9,7 +9,7 @@ SWEP.AbbrevName = "M1A"
 SWEP.Category = "Tactical RP"
 
 SWEP.SubCatTier = "3Security"
-SWEP.SubCatType = "6Precision Rifle"
+SWEP.SubCatType = "6Marksman Rifle"
 
 SWEP.Description = "Semi-automatic rifle with a lethal headshot.\nEquipped with a 6x scope by default."
 
@@ -283,7 +283,7 @@ SWEP.Attachments = {
     },
     [3] = {
         PrintName = "Tactical",
-        Category = "tactical",
+        Category = {"tactical", "tactical_zoom", "tactical_ebullet"},
         Bone = "ValveBiped.m14_rootbone",
         AttachSound = "TacRP/weapons/flashlight_on.wav",
         DetachSound = "TacRP/weapons/flashlight_off.wav",

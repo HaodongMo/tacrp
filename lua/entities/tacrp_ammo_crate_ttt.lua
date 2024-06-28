@@ -32,9 +32,9 @@ ENT.CollisionSoundsSoft = {
 }
 
 ENT.ExplodeSounds = {
-    "TacRP/weapons/grenade/frag_explode-1.wav",
-    "TacRP/weapons/grenade/frag_explode-2.wav",
-    "TacRP/weapons/grenade/frag_explode-3.wav",
+    "^TacRP/weapons/grenade/frag_explode-1.wav",
+    "^TacRP/weapons/grenade/frag_explode-2.wav",
+    "^TacRP/weapons/grenade/frag_explode-3.wav",
 }
 
 ENT.AmmoInfo = {
