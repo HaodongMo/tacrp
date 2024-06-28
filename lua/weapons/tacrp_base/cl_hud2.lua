@@ -142,21 +142,24 @@ hook.Add("HUDPaint", "TacRP_HUD2", function()
 				if self:GetSafe() then
 					fm = "Safety -- " .. fm
 				end
-				qd( s, fm, "H2_FiremodeC", Hx + Hw - s(4+1), Hy + s(2), color_white, TEXT_ALIGN_RIGHT )
-				local fm = self:GetNextFiremode()
-				if fm == 2 then
-					fm = "Full-auto"
-				elseif fm == 1 then
-					fm = "Semi-auto"
-				elseif fm == 0 then
-					fm = "Safety"
-				elseif fm <= 0 then
-					fm = (-fm) .. "-burst"
+				local samed = self:GetCurrentFiremode() == self:GetNextFiremode()
+				qd( s, fm, "H2_FiremodeC", Hx + Hw - s(4+1), Hy + Hh/2 + (samed and 0 or s(-3.5)), color_white, TEXT_ALIGN_RIGHT, TEXT_ALIGN_CENTER )
+				if !samed then
+					local fm = self:GetNextFiremode()
+					if fm == 2 then
+						fm = "Full-auto"
+					elseif fm == 1 then
+						fm = "Semi-auto"
+					elseif fm == 0 then
+						fm = "Safety"
+					elseif fm <= 0 then
+						fm = (-fm) .. "-burst"
+					end
+					if self:GetSafe() then
+						fm = "Safety -- " .. fm
+					end
+					qd( s, "[E+R] " .. fm, "H2_FiremodeN", Hx + Hw - s(4+1), Hy + s(2+7), color_white, TEXT_ALIGN_RIGHT )
 				end
-				if self:GetSafe() then
-					fm = "Safety -- " .. fm
-				end
-				qd( s, "[E+R] " .. fm, "H2_FiremodeN", Hx + Hw - s(4+1), Hy + s(2+8), color_white, TEXT_ALIGN_RIGHT )
 			end
 
 			local MC = self:GetMaxClip1()
@@ -211,7 +214,7 @@ hook.Add("HUDPaint", "TacRP_HUD2", function()
 					if self:Clip1() == 0 and (CurTime()%0.4) > 0.3 then
 						surface.SetDrawColor( 255, 0, 0, 127 )
 					elseif (self:Clip1() <= self:GetMaxClip1()*0.5) and (CurTime()%0.4) < 0.1 then
-						surface.SetDrawColor( 127, 0, 0, 127 )
+						surface.SetDrawColor( 255, 0, 0, 127 )
 					else
 						surface.SetDrawColor( 32, 32, 32, 127 )
 					end

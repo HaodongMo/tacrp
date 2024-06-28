@@ -55,7 +55,7 @@ local function genselecta( c, host, slotnum, slottab )
 	local sp = selecta:Add("DScrollPanel")
 	sp:Dock( FILL )
 
-	local atts = TacRP.GetAttsForCats( slottab.Category or "" )
+	local atts = TacRP.GetAttsForCats( slottab.Category or "", c.w )
 
 	table.sort(atts, function(a, b)
 		a = a or ""
@@ -263,7 +263,7 @@ local pages = {
 					local tx = surface.GetTextSize( slottab.PrintName )
 					if ins then
 						surface.SetDrawColor( color_white )
-						surface.DrawRect( s(11), s(15), tx+s(0), s(1) )
+						surface.DrawRect( s(11), s(15), tx, s(1) )
 						local ati = TacRP.GetAttTable( ins )
 						local attname = "none"
 						if ati then
@@ -313,6 +313,22 @@ local pages = {
 	{
 		Name = "Statistics",
 		Initialize = function( page, par, c )
+			local s = c.s
+
+			local p_right = page:Add( "DPanel" )
+			p_right:SetTall( par:GetTall() )
+			p_right:SetWide( par:GetWide() )
+			p_right:SetMouseInputEnabled( true )
+			p_right.Paint = rt
+			local gapper = s(24+90+48+24)--+32+24+24)
+			function p_right:Paint( w, h )
+				surface.SetDrawColor( 25, 0, 0, 127 )
+				surface.DrawRect( 0, 0, gapper, h )
+				return true
+			end
+			function p_right:Think()
+				p_right:SetX( ( (1-page.SlidePer) * (gapper or self:GetWide()) ) + (page:GetWide()-gapper-gapper) )
+			end
 		end,
 		Paint = function( page, w, h, c )
 			local s = c.s
@@ -344,12 +360,12 @@ local pages = {
 			p_bottom:SetMouseInputEnabled( true )
 			local gapper = s(48+24+24)
 			function p_bottom:Paint( w, h )
-				-- surface.SetDrawColor( 25, 0, 0, 127 )
-				-- surface.DrawRect( 0, h-gapper, w, gapper )
+				--surface.SetDrawColor( 25, 0, 0, 127 )
+				--surface.DrawRect( 0, 0, w, gapper )
 				return true
 			end
 			function p_bottom:Think()
-				p_bottom:SetY( ( (1-page.SlidePer) * (gapper or self:GetTall()) ) - gapper )
+				p_bottom:SetY( ( (1-page.SlidePer) * (gapper or self:GetTall()) ) + (page:GetTall()-gapper-gapper) )
 			end
 
 			local Margin_3 = 12
@@ -374,7 +390,7 @@ local pages = {
 				local footer = p_bottom:Add( "DPanel" )
 				local f_w, f_h = s(400), s(12+(12*1)+12)
 				footer:SetSize( f_w, f_h )
-				footer:SetPos( page:GetWide()/2 - f_w/2, page:GetTall() - f_h - s(12) )
+				footer:SetPos( page:GetWide()/2 - f_w/2, f_h - s(12) )
 
 				local tabz = {
 					{ "Description" },
@@ -386,7 +402,7 @@ local pages = {
 					tb = p_bottom:Add( "DButton" )
 					Taby.Panel = tb
 					tb:SetSize( s(48), s(12) )
-					tb:SetPos( page:GetWide()/2 - f_w/2 + math.ceil( s((index-1))*(48+1)), page:GetTall() - f_h - s(12+1) )
+					tb:SetPos( page:GetWide()/2 - f_w/2 + math.ceil( s((index-1))*(48+1)), 0 )
 					function tb:Paint( w, h )
 						Gleemax( s, w, h )
 						qd( s, Taby[1], "C2_4", w/2, h/2, color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER )
@@ -415,15 +431,8 @@ local pages = {
 					f_h = s(6+(12*lines)+6)
 
 					self:SetSize( f_w, f_h )
-					self:SetPos( page:GetWide()/2 - f_w/2, page:GetTall() - f_h - s(12) )
-					gapper = f_h+s(12+12+1+12)
-
-					for index, Taby in ipairs( tabz ) do
-						local tp = Taby.Panel
-						if tp then
-							tp:SetY( page:GetTall() - f_h - s(12+12+1) )
-						end
-					end
+					self:SetPos( page:GetWide()/2 - f_w/2, s(1+12) )
+					gapper = f_h+s(1+12+6)
 				end
 			end
 
