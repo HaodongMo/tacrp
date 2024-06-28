@@ -143,7 +143,7 @@ hook.Add("HUDPaint", "TacRP_HUD2", function()
 					fm = "Safety -- " .. fm
 				end
 				local samed = self:GetCurrentFiremode() == self:GetNextFiremode()
-				qd( s, fm, "H2_FiremodeC", Hx + Hw - s(4+1), Hy + Hh/2 + (samed and 0 or s(-3.5)), color_white, TEXT_ALIGN_RIGHT, TEXT_ALIGN_CENTER )
+				qd( s, fm, "H2_FiremodeC", Hx + Hw - s(4+1), Hy + Hh/2 + (samed and s(-0.5) or s(-3.5)), color_white, TEXT_ALIGN_RIGHT, TEXT_ALIGN_CENTER )
 				if !samed then
 					local fm = self:GetNextFiremode()
 					if fm == 2 then
