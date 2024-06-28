@@ -40,7 +40,7 @@ hook.Add("PlayerCanPickupWeapon", "TacRP_Pickup", function(ply, wep)
                     end
                 end)
             end
-            ply:DropWeapon(weps[1], wep:GetPos())
+            TacRP.DropWeapon(ply, weps[1])
             return
         else
             return false
@@ -96,7 +96,7 @@ hook.Add("PlayerGiveSWEP", "TacRP_Pickup", function(ply, wepname, weptbl)
                 if mode == 1 then
                     ply:StripWeapon(e:GetClass())
                 else
-                    ply:DropWeapon(e, nil, ply:GetForward() * 50)
+                    TacRP.DropWeapon(ply, e)
                 end
                 amt = amt - 1
                 if amt <= 0 then break end
