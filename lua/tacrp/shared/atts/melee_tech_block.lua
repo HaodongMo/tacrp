@@ -39,7 +39,7 @@ end
 
 ATT.Hook_PreShoot = function(wep)
     if wep:GetNWFloat("TacRPKnifeCounter", 0) > CurTime() then
-        wep:SetHoldBreathAmount(math.max(0, wep:GetHoldBreathAmount() - 0.5))
+        -- wep:SetHoldBreathAmount(math.max(0, wep:GetHoldBreathAmount() - 0.5))
         wep:Melee(true)
         wep:SetOutOfBreath(false)
         wep:SetNWFloat("TacRPKnifeCounter", 0)
@@ -58,7 +58,7 @@ ATT.Hook_PostThink = function(wep)
 
     if !wep:GetOutOfBreath() then
         if canhold and wep:GetHoldBreathAmount() > 0.1 then
-            wep:SetHoldBreathAmount(wep:GetHoldBreathAmount() - 0.1)
+            -- wep:SetHoldBreathAmount(wep:GetHoldBreathAmount() - 0.1)
             wep:SetOutOfBreath(true)
             wep:SetHoldingBreath(false)
             wep:SetNextIdle(math.huge)
