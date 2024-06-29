@@ -106,31 +106,31 @@ hook.Add("onDrawSpawnedWeapon", "TacRP", function(ent)
         end
     end
 
-    if (EyePos() - ent:GetPos()):LengthSqr() <= 262144 then -- 512^2
-        local ang = LocalPlayer():EyeAngles()
+    -- if (EyePos() - ent:GetPos()):LengthSqr() <= 262144 then -- 512^2
+    --     local ang = LocalPlayer():EyeAngles()
 
-        ang:RotateAroundAxis(ang:Forward(), 180)
-        ang:RotateAroundAxis(ang:Right(), 90)
-        ang:RotateAroundAxis(ang:Up(), 90)
+    --     ang:RotateAroundAxis(ang:Forward(), 180)
+    --     ang:RotateAroundAxis(ang:Right(), 90)
+    --     ang:RotateAroundAxis(ang:Up(), 90)
 
-        cam.Start3D2D(ent:WorldSpaceCenter() + Vector(0, 0, (ent:OBBMaxs().z - ent:OBBMins().z) * 0.5 + 8) , ang, 0.1)
-            -- surface.SetFont("TacRP_LondonBetween_32_Unscaled")
-            surface.SetFont("TacRP_Myriad_Pro_32_Unscaled")
+    --     cam.Start3D2D(ent:WorldSpaceCenter() + Vector(0, 0, (ent:OBBMaxs().z - ent:OBBMins().z) * 0.5 + 8) , ang, 0.1)
+    --         -- surface.SetFont("TacRP_LondonBetween_32_Unscaled")
+    --         surface.SetFont("TacRP_Myriad_Pro_32_Unscaled")
 
-            local name = wep_tbl.PrintName .. (ent:Getamount() > 1 and (" ×" .. ent:Getamount()) or "")
-            local w = surface.GetTextSize(name)
-            surface.SetTextPos(-w / 2, 0)
-            surface.SetTextColor(255, 255, 255, 255)
-            surface.DrawText(name)
-            if count > 0 then
-                local str = count .. " Attachments"
-                local w2 = surface.GetTextSize(str)
-                surface.SetTextPos(-w2 / 2, 32)
-                surface.SetTextColor(255, 255, 255, 255)
-                surface.DrawText(str)
-            end
-        cam.End3D2D()
-    end
+    --         local name = wep_tbl.PrintName .. (ent:Getamount() > 1 and (" ×" .. ent:Getamount()) or "")
+    --         local w = surface.GetTextSize(name)
+    --         surface.SetTextPos(-w / 2, 0)
+    --         surface.SetTextColor(255, 255, 255, 255)
+    --         surface.DrawText(name)
+    --         if count > 0 then
+    --             local str = count .. " Attachments"
+    --             local w2 = surface.GetTextSize(str)
+    --             surface.SetTextPos(-w2 / 2, 32)
+    --             surface.SetTextColor(255, 255, 255, 255)
+    --             surface.DrawText(str)
+    --         end
+    --     cam.End3D2D()
+    -- end
 
     return true
 end)
