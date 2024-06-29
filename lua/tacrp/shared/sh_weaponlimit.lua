@@ -153,6 +153,8 @@ if CLIENT then
             return
         end
 
+        if !GetConVar("tacrp_pickuphint"):GetBool() then return end
+
         local limit, weps = TacRP:CheckWeaponLimit(LocalPlayer():GetWeapons(), wep)
 
         local text = nil

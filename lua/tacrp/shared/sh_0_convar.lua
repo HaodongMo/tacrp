@@ -2,6 +2,11 @@
 
 local conVars = {
     {
+        name = "pickuphint",
+        default = "1",
+        client = true
+    },
+    {
         name = "drawhud",
         default = "1",
         client = true
