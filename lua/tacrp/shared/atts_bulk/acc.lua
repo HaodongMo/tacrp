@@ -502,7 +502,7 @@ ATT.Category = "acc_foldstock"
 
 ATT.SortOrder = 0.5
 
-ATT.Mult_VisualRecoilKick = 2
+ATT.Mult_RecoilVisualKick = 2
 
 ATT.Mult_SightedSpeedMult = 1.25
 ATT.Mult_HipFireSpreadPenalty = 0.7
@@ -545,7 +545,7 @@ ATT.Category = "acc_foldstock2"
 
 ATT.SortOrder = 0.5
 
-ATT.Mult_VisualRecoilKick = 1.65
+ATT.Mult_RecoilVisualKick = 1.65
 ATT.Mult_SightedSpeedMult = 1.125
 ATT.Mult_HipFireSpreadPenalty = 0.85
 
@@ -583,7 +583,7 @@ ATT.Category = "acc_sling"
 
 ATT.SortOrder = 6
 
-ATT.Mult_VisualRecoilKick = 0.9
+ATT.Mult_RecoilVisualKick = 0.9
 
 ATT.Add_RecoilKick = -0.5
 ATT.Mult_RecoilKick = 0.95
