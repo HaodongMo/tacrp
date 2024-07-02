@@ -185,7 +185,7 @@ ATT = {}
 ATT.PrintName = "Tactical"
 ATT.FullName = "Tactical Bolt"
 ATT.Icon = Material("entities/tacrp_att_bolt_tactical.png", "mips smooth")
-ATT.Description = "Heavier bolt makes cycling slower but generously improves overall control."
+ATT.Description = "Heavier bolt trades cycling speed for superb control of the weapon."
 ATT.Pros = {"stat.recoil", "stat.quickscope", "rating.mobility", "stat.muzzlevelocity"}
 ATT.Cons = {"stat.rpm"}
 
