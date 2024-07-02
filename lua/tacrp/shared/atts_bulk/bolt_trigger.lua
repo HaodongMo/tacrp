@@ -185,7 +185,7 @@ ATT = {}
 ATT.PrintName = "Tactical"
 ATT.FullName = "Tactical Bolt"
 ATT.Icon = Material("entities/tacrp_att_bolt_tactical.png", "mips smooth")
-ATT.Description = "Heavier bolt makes cycling slower but generously improves overall control."
+ATT.Description = "Heavier bolt trades cycling speed for superb control of the weapon."
 ATT.Pros = {"stat.recoil", "stat.quickscope", "rating.mobility", "stat.muzzlevelocity"}
 ATT.Cons = {"stat.rpm"}
 
@@ -487,7 +487,7 @@ ATT.Category = {"trigger_semi", "trigger_auto", "trigger_burst", "trigger_akimbo
 ATT.SortOrder = 3
 
 ATT.Mult_RecoilFirstShotMult = 1.5
-ATT.Mult_RecoilMaximum = 0.85
+ATT.Mult_RecoilMaximum = 0.75
 ATT.Add_RecoilStability = -0.1
 
 TacRP.LoadAtt(ATT, "trigger_heavy")
