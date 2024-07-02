@@ -487,7 +487,7 @@ ATT.Category = {"trigger_semi", "trigger_auto", "trigger_burst", "trigger_akimbo
 ATT.SortOrder = 3
 
 ATT.Mult_RecoilFirstShotMult = 1.5
-ATT.Mult_RecoilMaximum = 0.85
+ATT.Mult_RecoilMaximum = 0.75
 ATT.Add_RecoilStability = -0.1
 
 TacRP.LoadAtt(ATT, "trigger_heavy")
