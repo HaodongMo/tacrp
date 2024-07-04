@@ -11,7 +11,7 @@ SWEP.Category = "Tactical RP"
 SWEP.SubCatTier = "1Elite"
 SWEP.SubCatType = "1Pistol"
 
-SWEP.Description = "Modern pistol with great firepower in a handy package."
+SWEP.Description = "Modern high-caliber pistol with great firepower in a handy package."
 
 SWEP.Trivia_Caliber = ".45 ACP"
 SWEP.Trivia_Manufacturer = "Heckler & Koch"
