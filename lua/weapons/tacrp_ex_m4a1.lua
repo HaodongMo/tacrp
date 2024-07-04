@@ -150,13 +150,13 @@ SWEP.GestureShoot = ACT_HL2MP_GESTURE_RANGE_ATTACK_AR2
 SWEP.GestureReload = ACT_HL2MP_GESTURE_RELOAD_SMG1
 
 SWEP.PassiveAng = Angle(0, 0, 0)
-SWEP.PassivePos = Vector(0, -2, -6)
+SWEP.PassivePos = Vector(0, -4, -6)
 
 SWEP.BlindFireAng = Angle(0, 5, 0)
 SWEP.BlindFirePos = Vector(3, -2, -5)
 
 SWEP.SprintAng = Angle(30, -15, 0)
-SWEP.SprintPos = Vector(5, 0, -2)
+SWEP.SprintPos = Vector(5, -4, -3)
 
 SWEP.SightAng = Angle(0.1, 0, 0)
 SWEP.SightPos = Vector(-4.154, -7.5, -4.45)

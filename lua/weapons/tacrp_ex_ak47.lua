@@ -153,7 +153,7 @@ SWEP.BlindFireAng = Angle(0, 5, 0)
 SWEP.BlindFirePos = Vector(3, -2, -5)
 
 SWEP.SprintAng = Angle(30, -15, 0)
-SWEP.SprintPos = Vector(5, 0, -2)
+SWEP.SprintPos = Vector(5, -4, -3)
 
 SWEP.SightAng = Angle(0.05, -0.4, 0)
 SWEP.SightPos = Vector(-4.66, -7.5, -2.9)
