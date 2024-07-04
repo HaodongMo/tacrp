@@ -313,7 +313,7 @@ local function addsound(name, spath)
     })
 end
 
-addsound("tacint_uzi.insert_clip", path .. "insert_clip.wav")
-addsound("tacint_uzi.remove_clip", path .. "remove_clip.wav")
-addsound("tacint_uzi.bolt_action", path .. "bolt_action.wav")
-addsound("tacint_uzi.foldingstock_back", path .. "foldingstock_back.wav")
+addsound("tacint_miniuzi.insert_clip", path .. "insert_clip.wav")
+addsound("tacint_miniuzi.remove_clip", path .. "remove_clip.wav")
+addsound("tacint_miniuzi.bolt_action", path .. "bolt_action.wav")
+addsound("tacint_miniuzi.foldingstock_back", path .. "foldingstock_back.wav")
