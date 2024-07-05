@@ -96,7 +96,7 @@ SWEP.Firemodes = {
 
 SWEP.RPM = 850
 
-SWEP.Spread = 0.008
+SWEP.Spread = 0.006
 
 SWEP.RecoilResetInstant = false
 SWEP.RecoilPerShot = 1
