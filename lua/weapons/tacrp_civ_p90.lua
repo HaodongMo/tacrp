@@ -75,8 +75,8 @@ SWEP.Damage_Min = 12
 SWEP.Range_Min = 1200
 SWEP.Range_Max = 4000
 
-SWEP.RPM = 750
-SWEP.RPMMultSemi = 0.75
+SWEP.RPM = 550
+SWEP.RPMMultSemi = 400/550
 
 SWEP.Firemode = 1
 SWEP.Firemodes = false
