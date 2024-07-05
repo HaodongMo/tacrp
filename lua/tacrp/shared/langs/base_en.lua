@@ -87,6 +87,17 @@ L["ammo.ti_nuke"] = "Nuclear Devices"
 L["ammo.ti_charge"] = "Breaching Charge"
 L["ammo.ti_sniper"] = "Anti-Materiel Ammo"
 L["ammo.ti_heal"] = "Medi-Smoke Canisters"
+L["ammo.ti_pistol_light"] = "Light Pistol Ammo"
+L["ammo.ti_pistol_heavy"] = "Heavy Pistol Ammo"
+L["ammo.ti_pdw"] = "PDW Ammo"
+L["ammo.ti_rifle"] = "Heavy Rifle Ammo"
+L["ammo.ti_sniper"] = "Sniper Ammo"
+
+-- used when tacrp_ammonames 1
+L["ammo.357"] = "Magnum Ammo"
+L["ammo.smg1"] = "Carbine Ammo"
+L["ammo.ar2"] = "Rifle Ammo"
+
 
 L["rating.score"] = "(Score: {score}/{max})"
 L["rating.lethality"] = "Lethality"
@@ -407,10 +418,6 @@ L["hint.pickup"] = "Pick up {weapon}"
 L["hint.unjam"] = "Unjam Weapon"
 L["hint.rp_biocode_cp"] = "Biocoded - Police Use Only"
 
--- used when tacrp_ammonames 1
-L["ammo.357"] = "Magnum Ammo"
-L["ammo.smg1"] = "Carbine Ammo"
-L["ammo.ar2"] = "Rifle Ammo"
 
 -- STL phrases are not needed for other languages. you can remove these when localizing
 STL = {}

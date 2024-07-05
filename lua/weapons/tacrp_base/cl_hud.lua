@@ -400,7 +400,7 @@ function SWEP:DrawHUDBackground()
             surface.SetTextColor(col)
             surface.DrawText(name_txt)
 
-            local ammotype = self:GetValue("PrimaryGrenade") and (TacRP.QuickNades[self:GetValue("PrimaryGrenade")].Ammo) or self:GetValue("Ammo")
+            local ammotype = self:GetValue("PrimaryGrenade") and (TacRP.QuickNades[self:GetValue("PrimaryGrenade")].Ammo) or self:GetAmmoType()
             local clips = math.min(math.ceil(self:GetOwner():GetAmmoCount(ammotype)), 999)
 
             if self.Primary.ClipSize > 0 then

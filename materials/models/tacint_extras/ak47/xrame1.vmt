@@ -1,5 +1,15 @@
 "VertexLitGeneric"
 {	"$no_draw" "0"
 	"$baseTexture" "models\tacint_extras\ak47\frame1"
+	$envmap env_cubemap
+	$envmapsaturation "0.350000"
+	$envmaptint "[0.02 0.02 0.02]"
+	$phong 1
+	$phongboost 1
+	$phongfresnelranges "[0.5 5 35]"
+	$phongexponent 20
+	$rimlight 0
+	$rimlightexponent 62
+	$rimlightboost "0.300000"
 }
 	

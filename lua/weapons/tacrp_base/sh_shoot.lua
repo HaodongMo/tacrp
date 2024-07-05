@@ -767,7 +767,7 @@ function SWEP:GetJamChance(base)
     local factor = valfunc(self, "JamFactor")
     if factor <= 0 then return 0 end
 
-    local default = TacRP.AmmoJamMSB[valfunc(self, "Ammo")] or 15
+    local default = TacRP.AmmoJamMSB[self:GetAmmoType(base)] or 15
     local msb = (valfunc(self, "JamBaseMSB") or default) / math.sqrt(factor)
 
     return 1 / msb

@@ -13,7 +13,7 @@ SWEP.SubCatType = "7Sniper Rifle"
 
 SWEP.Description = "Lightweight sniper rifle with good damage and high mobility.\nEquipped with a 10x scope by default."
 
-SWEP.Trivia_Caliber = "7.62x51mm"
+SWEP.Trivia_Caliber = "6.5mm Creedmoor" -- "7.62x51mm" is more common but also too lightweight of a caliber
 SWEP.Trivia_Manufacturer = "PGM Précision"
 SWEP.Trivia_Year = "2000"
 
@@ -183,6 +183,7 @@ SWEP.ScopeOverlaySize = 0.75
 SWEP.ClipSize = 6
 SWEP.Ammo = "357"
 SWEP.AmmoTTT = "357"
+SWEP.Ammo_Expanded = "ti_rifle"
 
 SWEP.ReloadTimeMult = 1
 SWEP.DropMagazineImpact = "metal"

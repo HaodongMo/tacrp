@@ -46,7 +46,6 @@ local names = {
     ["357"] = "Magnum Ammo",
     ["smg1"] = "Carbine Ammo",
     ["ar2"] = "Rifle Ammo",
-    -- ["sniperpenetratedround"] = "Sniper Ammo",
 }
 
 hook.Add("PreGamemodeLoaded", "TacRP_AmmoName", function()
