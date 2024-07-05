@@ -106,8 +106,8 @@ function SWEP:CreateCustomizeHUD()
 
         surface.SetFont("TacRP_Myriad_Pro_12")
 
-        if self:GetValue("Ammo") != "" then
-            local ammo_txt = language.GetPhrase(string.lower(self:GetValue("Ammo")) .. "_ammo")
+        if self:GetAmmoType() != "" then
+            local ammo_txt = language.GetPhrase(string.lower(self:GetAmmoType()) .. "_ammo")
             local ammo_w = surface.GetTextSize(ammo_txt)
 
             surface.SetDrawColor(0, 0, 0, 150)

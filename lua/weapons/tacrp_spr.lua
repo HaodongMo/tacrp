@@ -201,6 +201,7 @@ SWEP.ScopeHideWeapon = true
 SWEP.ClipSize = 5
 SWEP.Ammo = "357"
 SWEP.AmmoTTT = "357"
+SWEP.Ammo_Expanded = "ti_rifle"
 
 SWEP.ReloadTimeMult = 1
 SWEP.ShootTimeMult = 0.75

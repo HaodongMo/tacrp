@@ -114,7 +114,7 @@ function SWEP:DropMagazine()
                     clip1 = clip1 - amt
 
                     if !self:GetInfiniteAmmo() then
-                        mag.AmmoType = self:GetValue("Ammo")
+                        mag.AmmoType = self:GetAmmoType()
                         mag.AmmoCount = amt
                     end
                 end
@@ -263,6 +263,15 @@ function SWEP:GetCapacity(base)
         return self:GetBaseValue("ClipSize")
     else
         return self:GetValue("ClipSize")
+    end
+end
+
+function SWEP:GetAmmoType(base)
+    local valfunc = base and self.GetBaseValue or self.GetValue
+    if self.Ammo_Expanded and TacRP.ConVars["expandedammotypes"]:GetBool() then
+        return valfunc(self, "Ammo_Expanded") or valfunc(self, "Ammo")
+    else
+        return valfunc(self, "Ammo")
     end
 end
 

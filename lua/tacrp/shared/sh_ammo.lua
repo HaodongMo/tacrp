@@ -1,15 +1,66 @@
 local ammotypes = {
-    "ti_flashbang",
-    "ti_thermite",
-    "ti_smoke",
-    "ti_c4",
-    "ti_gas",
-    "ti_nuke",
-    "ti_charge",
-    "ti_heal"
-    -- "ti_sniper",
+    ["ti_flashbang"] = {
+        max = "tacrp_max_grenades",
+    },
+    ["ti_thermite"] = {
+        max = "tacrp_max_grenades",
+    },
+    ["ti_smoke"] = {
+        max = "tacrp_max_grenades",
+    },
+    ["ti_c4"] = {
+        max = "tacrp_max_grenades",
+    },
+    ["ti_gas"] = {
+        max = "tacrp_max_grenades",
+    },
+    ["ti_nuke"] = {
+        max = "tacrp_max_grenades",
+    },
+    ["ti_charge"] = {
+        max = "tacrp_max_grenades",
+    },
+    ["ti_heal"] = {
+        max = "tacrp_max_grenades",
+    },
+
+    -- Only used when tacrp_expandedammotypes 1
+    ["ti_pistol_light"] = { -- .22LR, .380 ACP etc.
+        expanded = true,
+        max = "sk_max_pistol",
+    },
+    ["ti_pistol_heavy"] = { -- .45 ACP, 10mm etc.
+        expanded = true,
+        max = "sk_max_pistol",
+    },
+    ["ti_pdw"] = { -- 4.6mm, 5.7mm etc.
+        expanded = true,
+        max = "sk_max_smg1",
+    },
+    ["ti_rifle"] = { -- above 7.62mm but below sniper caliber
+        expanded = true,
+        max = "sk_max_ar2",
+    },
+    ["ti_sniper"] = { -- sniper, amr calibers
+        expanded = true,
+        max = "sk_max_357",
+    },
 }
 
+local expanded = TacRP.ConVars["expandedammotypes"]:GetBool()
+for k, v in SortedPairs(ammotypes) do
+    if v.expanded and not expanded then continue end
+    game.AddAmmoType({
+        name = k,
+        max = v.max
+    })
+
+    if CLIENT then
+        language.Add(k .. "_ammo", TacRP:GetPhrase("ammo." .. k) or k)
+    end
+end
+
+--[[]
 local materials = {
     ["ti_flashbang"] = "tacrp/grenades/flashbang",
     ["ti_thermite"] = "tacrp/grenades/thermite",
@@ -22,18 +73,6 @@ local materials = {
     ["SniperPenetratedRound"] = "tacrp/grenades/sniper",
 }
 
-for _, i in pairs(ammotypes) do
-    game.AddAmmoType({
-        name = i,
-        max = "tacrp_max_grenades",
-    })
-
-    if CLIENT then
-        language.Add(i .. "_ammo", TacRP:GetPhrase("ammo." .. i) or i)
-    end
-end
-
---[[]
 if CLIENT then
     hook.Add("InitPostEntity", "tacrp_hl2hud", function()
         if !HL2HUD then return end

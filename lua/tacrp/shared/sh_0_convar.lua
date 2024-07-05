@@ -861,7 +861,14 @@ local conVars = {
         min = 0,
         max = 1,
         replicated = true
-    }
+    },
+    {
+        name = "expandedammotypes",
+        default = "0",
+        min = 0,
+        notify = true,
+        replicated = true,
+    },
 }
 
 TacRP.ConVars = {}
@@ -1330,6 +1337,11 @@ local function menu_balance_ti(panel)
         label = "Automatically Clear Jams",
         command = "tacrp_jam_autoclear"
     })
+    panel:AddControl("checkbox", {
+        label = "Expanded Ammo Types (Requires map reload)",
+        command = "tacrp_expandedammotypes"
+    })
+    panel:ControlHelp("Adds new ammo types to diversify ammo economy. Weapon performance is unchanged.")
     panel:AddControl("slider", {
         label = "Default Clip Multiplier",
         command = "tacrp_defaultammo",
