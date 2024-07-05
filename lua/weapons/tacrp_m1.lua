@@ -8,7 +8,7 @@ SWEP.PrintName = "Ruger Mini-14"
 SWEP.AbbrevName = "Mini-14"
 SWEP.Category = "Tactical RP"
 
-SWEP.SubCatTier = "4Consumer"
+SWEP.SubCatTier = "5Value"
 SWEP.SubCatType = "5Sporter"
 
 SWEP.Description = "Lightweight rifle with no stock or optic mount.\nGood hip-fire accuracy among rifles, but range is low."
@@ -90,7 +90,7 @@ SWEP.TTTReplace = TacRP.TTTReplacePreset.AssaultRifle
 
 SWEP.Damage_Max = 22
 SWEP.Damage_Min = 12
-SWEP.Range_Min = 800
+SWEP.Range_Min = 600
 SWEP.Range_Max = 2500
 SWEP.Penetration = 7
 SWEP.ArmorPenetration = 0.775
@@ -107,7 +107,7 @@ SWEP.BodyDamageMultipliers = {
     [HITGROUP_GEAR] = 0.9
 }
 
-SWEP.MuzzleVelocity = 22000
+SWEP.MuzzleVelocity = 20000
 
 // misc. shooting
 

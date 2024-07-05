@@ -4,7 +4,7 @@ SWEP.Spawnable = true // deprecated by ST AR-15
 AddCSLuaFile()
 
 // names and stuff
-SWEP.PrintName = "AR-15"
+SWEP.PrintName = "Diemaco AR-15"
 SWEP.AbbrevName = "AR-15"
 SWEP.Category = "Tactical RP"
 
