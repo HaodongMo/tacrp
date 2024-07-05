@@ -29,15 +29,12 @@ SWEP.Slot = 2
 
 SWEP.BalanceStats = {
     [TacRP.BALANCE_SBOX] = {
-        Description = "Semi-automatic model of a legendary submachine gun. Fine tuned for precision shooting.",
         Damage_Max = 22,
         Damage_Min = 15,
         RecoilKick = 2,
         Spread = 0.001,
     },
     [TacRP.BALANCE_TTT] = {
-        Description = "Semi-automatic model of a legendary submachine gun. Fine tuned for precision shooting.",
-
         Damage_Max = 15,
         Damage_Min = 8,
 
@@ -60,13 +57,9 @@ SWEP.BalanceStats = {
         },
     },
     [TacRP.BALANCE_PVE] = {
-        Description = "Semi-automatic carbine variant of a legendary submachine gun. Fine tuned for precision shooting.",
-
         Damage_Max = 11,
         Damage_Min = 6,
         RPM = 360,
-
-        ClipSize = 15,
 
         Spread = 0.004,
         RecoilResetTime = 0.125,
@@ -91,12 +84,12 @@ SWEP.TTTReplace = {}
 SWEP.Firemode = 1
 SWEP.Firemodes = false
 
-SWEP.RPM = 600
-SWEP.RPMMultSemi = 0.7
+SWEP.RPM = 550
+SWEP.RPMMultSemi = 400/550
 
 SWEP.RecoilKick = 2
 
-SWEP.ClipSize = 30
+SWEP.ClipSize = 15
 
 SWEP.HipFireSpreadPenalty = 0.018
 

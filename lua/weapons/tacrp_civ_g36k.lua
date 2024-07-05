@@ -1,5 +1,5 @@
 SWEP.Base = "tacrp_g36k"
-SWEP.Spawnable = false // deprecated since SL8 is a thing now
+SWEP.Spawnable = true // deprecated since SL8 is a thing now
 
 AddCSLuaFile()
 

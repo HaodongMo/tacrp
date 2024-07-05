@@ -28,8 +28,8 @@ SWEP.SlotAlt = 3
 
 SWEP.BalanceStats = {
     [TacRP.BALANCE_SBOX] = {
-        Damage_Max = 28,
-        Damage_Min = 22,
+        Damage_Max = 26,
+        Damage_Min = 18,
 
         ClipSize = 75,
     },
@@ -71,9 +71,9 @@ SWEP.BalanceStats = {
 SWEP.TTTReplace = TacRP.TTTReplacePreset.MachineGun
 
 SWEP.BodyDamageMultipliers = {
-    [HITGROUP_HEAD] = 3,
+    [HITGROUP_HEAD] = 4,
     [HITGROUP_CHEST] = 1,
-    [HITGROUP_STOMACH] = 1,
+    [HITGROUP_STOMACH] = 1.25,
     [HITGROUP_LEFTARM] = 0.9,
     [HITGROUP_RIGHTARM] = 0.9,
     [HITGROUP_LEFTLEG] = 0.75,
@@ -83,9 +83,9 @@ SWEP.BodyDamageMultipliers = {
 
 // "ballistics"
 
-SWEP.Damage_Max = 35
-SWEP.Damage_Min = 25
-SWEP.Range_Min = 1200
+SWEP.Damage_Max = 28
+SWEP.Damage_Min = 20
+SWEP.Range_Min = 800
 SWEP.Range_Max = 4000
 SWEP.Penetration = 10
 SWEP.ArmorPenetration = 0.8
@@ -98,7 +98,7 @@ SWEP.Firemode = 2
 
 SWEP.RPM = 750
 
-SWEP.Spread = 0.01
+SWEP.Spread = 0.005
 
 SWEP.ShootTimeMult = 0.5
 
@@ -111,6 +111,7 @@ SWEP.RecoilFirstShotMult = 2
 SWEP.RecoilVisualKick = 1
 
 SWEP.RecoilKick = 5
+SWEP.RecoilStability = 0.1
 
 SWEP.HipFireSpreadPenalty = 0.025
 SWEP.RecoilSpreadPenalty = 0.0009
@@ -127,8 +128,8 @@ SWEP.SightedSpeedMult = 0.5
 SWEP.ReloadSpeedMult = 0.1
 SWEP.ReloadSpeedMultTime = 1
 
-SWEP.AimDownSightsTime = 0.5
-SWEP.SprintToFireTime = 0.5
+SWEP.AimDownSightsTime = 0.44
+SWEP.SprintToFireTime = 0.48
 
 SWEP.Sway = 2
 SWEP.ScopedSway = 0.75

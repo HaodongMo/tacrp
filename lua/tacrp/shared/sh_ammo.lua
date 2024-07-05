@@ -60,7 +60,7 @@ for k, v in SortedPairs(ammotypes) do
     end
 end
 
---[[]
+
 local materials = {
     ["ti_flashbang"] = "tacrp/grenades/flashbang",
     ["ti_thermite"] = "tacrp/grenades/thermite",
@@ -76,8 +76,8 @@ local materials = {
 if CLIENT then
     hook.Add("InitPostEntity", "tacrp_hl2hud", function()
         if !HL2HUD then return end
-        local tbl = HL2HUD.scheme.GetDefault().HudTextures.AmmoInv
-        local tbl2 = HL2HUD.scheme.GetDefault().HudTextures.Ammo
+        local tbl = HL2HUD.scheme.DefaultSettings().HudTextures.AmmoInv
+        local tbl2 = HL2HUD.scheme.DefaultSettings().HudTextures.Ammo
 
         for k, v in pairs(materials) do
             local info = {
@@ -100,6 +100,6 @@ if CLIENT then
                 tbl2[k] = info
             end
         end
+        HL2HUD.settings.ReloadScheme()
     end)
 end
-]]

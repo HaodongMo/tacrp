@@ -4,17 +4,17 @@ SWEP.Spawnable = true
 AddCSLuaFile()
 
 // names and stuff
-SWEP.PrintName = "Ingram MAC-10"
-SWEP.AbbrevName = "MAC-10"
+SWEP.PrintName = "Ingram MAC-11"
+SWEP.AbbrevName = "MAC-11"
 SWEP.Category = "Tactical RP" // "Tactical RP (Extras)"
 
-SWEP.SubCatTier = "4Consumer"
+SWEP.SubCatTier = "5Value"
 SWEP.SubCatType = "3Machine Pistol"
 
 SWEP.Description = "A bullet hose best used for point blank spray-and-pray."
 SWEP.Description_Quote = "\"Give me the motherf*ckin' gun, Tre!\""
 
-SWEP.Trivia_Caliber = "9x19mm"
+SWEP.Trivia_Caliber = ".380 ACP"
 SWEP.Trivia_Manufacturer = "Military Armament Corporation"
 SWEP.Trivia_Year = "1970"
 
@@ -80,12 +80,12 @@ SWEP.TTTReplace = TacRP.TTTReplacePreset.MachinePistol
 
 // "ballistics"
 
-SWEP.Damage_Max = 18
-SWEP.Damage_Min = 5
-SWEP.Range_Min = 300
-SWEP.Range_Max = 1500
+SWEP.Damage_Max = 16
+SWEP.Damage_Min = 6
+SWEP.Range_Min = 500
+SWEP.Range_Max = 1600
 SWEP.Penetration = 3
-SWEP.ArmorPenetration = 0.45
+SWEP.ArmorPenetration = 0.7
 SWEP.ArmorBonus = 0.25
 
 SWEP.MuzzleVelocity = 10000
@@ -177,6 +177,7 @@ SWEP.HolsterAng = Angle(90, 0, 0)
 
 SWEP.ClipSize = 32
 SWEP.Ammo = "pistol"
+SWEP.Ammo_Expanded = "ti_pistol_light"
 
 SWEP.ReloadTimeMult = 1.2
 
