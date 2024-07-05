@@ -11,17 +11,15 @@ SWEP.Category = "Tactical RP"
 SWEP.SubCatTier = "3Security"
 SWEP.SubCatType = "5Sporter"
 
-SWEP.Description = "Semi-automatic model of an iconic polymer rifle.\nUses reduced capacity magazines."
+SWEP.Description = "Customized semi-automatic model of an iconic polymer rifle.\nUses reduced capacity magazines."
 
-SWEP.ViewModel = "models/weapons/tacint/v_g36k_hq.mdl"
+SWEP.ViewModel = "models/weapons/tacint/v_hk243.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_g36k.mdl"
 
 SWEP.Slot = 2
 
 SWEP.BalanceStats = {
     [TacRP.BALANCE_SBOX] = {
-        Description = "Semi-automatic model of an iconic polymer rifle. Fine tuned for precision shooting.",
-
         Damage_Max = 22,
         Damage_Min = 18,
 
@@ -29,8 +27,6 @@ SWEP.BalanceStats = {
         Spread = 0.001,
     },
     [TacRP.BALANCE_TTT] = {
-        Description = "Semi-automatic model of an iconic polymer rifle. Fine tuned for precision shooting.",
-
         Damage_Max = 16,
         Damage_Min = 13,
         Range_Min = 500,
@@ -58,21 +54,52 @@ SWEP.TTTReplace = {}
 SWEP.Firemode = 1
 SWEP.Firemodes = false
 
-SWEP.RPM = 600
+SWEP.RPM = 550
+SWEP.RPMMultSemi = 400/550
 
-SWEP.ClipSize = 30
+SWEP.ClipSize = 15
+
+SWEP.SightAng = Angle(0, 0.2, 0)
+SWEP.SightPos = Vector(-4.02, -7.5, -3.97)
+
+SWEP.Scope = true
+SWEP.ScopeOverlay = false 
+SWEP.ScopeFOV = 90 / 1.1
+SWEP.ScopeLevels = 1 // 2 = like CS:S
+SWEP.ScopeHideWeapon = false
+
+SWEP.AttachmentElements = {
+    ["foldstock"] = {
+        BGs_VM = {
+            {1, 1}
+        },
+        BGs_WM = {
+            {1, 1}
+        }
+    },
+    ["tactical"] = {
+        BGs_VM = {
+            {2, 1}, -- inheritance
+        },
+    },
+    ["irons"] = {
+        BGs_VM = {
+            {3, 1}
+        },
+    },
+}
 
 SWEP.Attachments = {
     [1] = {
         PrintName = "Optic",
-        Category = {"ironsights", "optic_cqb", "optic_medium"},
+        Category = {"optic_cqb_nookp7", "optic_medium"},
         Bone = "ValveBiped.g36k_rootbone",
         WMBone = "Box01",
         InstalledElements = {"irons"},
         AttachSound = "TacRP/weapons/optic_on.wav",
         DetachSound = "TacRP/weapons/optic_off.wav",
         VMScale = 1,
-        Pos_VM = Vector(-6.4, 0.14, 7),
+        Pos_VM = Vector(-5.9, 0.14, 3.2),
         Pos_WM = Vector(0, 0, 2.75),
         Ang_VM = Angle(90, 0, 0),
         Ang_WM = Angle(0, -90, 0),

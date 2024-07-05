@@ -239,7 +239,7 @@ ATT.Pros = {"att.sight.1.25"}
 
 ATT.Model = "models/weapons/tacint/addons/rds2.mdl"
 ATT.Scale = 1.1
-ATT.ModelOffset = Vector(0, 0, -0.5)
+ATT.ModelOffset = Vector(-1.5, 0, -0.5)
 
 ATT.Category = {"optic_cqb", "optic_cqb_nookp7"}
 
