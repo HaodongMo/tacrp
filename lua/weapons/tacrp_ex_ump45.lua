@@ -8,7 +8,7 @@ SWEP.PrintName = "HK UMP45"
 SWEP.AbbrevName = "UMP45"
 SWEP.Category = "Tactical RP" // "Tactical RP (Extras)"
 
-SWEP.SubCatTier = "3Security"
+SWEP.SubCatTier = "4Consumer"
 SWEP.SubCatType = "3Submachine Gun"
 
 SWEP.Description = "Boxy SMG developed with low production costs in mind.\nHigh damage up close, but range and rate of fire is low."
@@ -72,9 +72,9 @@ SWEP.TTTReplace = TacRP.TTTReplacePreset.SMG
 // "ballistics"
 
 SWEP.Damage_Max = 25
-SWEP.Damage_Min = 7
-SWEP.Range_Min = 500
-SWEP.Range_Max = 1800
+SWEP.Damage_Min = 6
+SWEP.Range_Min = 300
+SWEP.Range_Max = 2000
 SWEP.Penetration = 4 // units of metal this weapon can penetrate
 SWEP.ArmorPenetration = 0.55
 
