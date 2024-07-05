@@ -1021,6 +1021,7 @@ SWEP.StatDisplay = {
         end,
         Unit = "%",
         Value = "MoveSpeedMult",
+        ConVarCheck = "tacrp_penalty_move"
     },
     {
         Name = "stat.shootingspeed",
@@ -1030,6 +1031,7 @@ SWEP.StatDisplay = {
         end,
         Unit = "%",
         Value = "ShootingSpeedMult",
+        ConVarCheck = "tacrp_penalty_firing"
     },
     {
         Name = "stat.sightedspeed",
@@ -1040,6 +1042,7 @@ SWEP.StatDisplay = {
         Unit = "%",
         Value = "SightedSpeedMult",
         ValueCheck = "Scope",
+        ConVarCheck = "tacrp_penalty_aiming"
     },
     {
         Name = "stat.reloadspeed",
@@ -1050,6 +1053,7 @@ SWEP.StatDisplay = {
         Unit = "%",
         Value = "ReloadSpeedMult",
         DefaultValue = 1,
+        ConVarCheck = "tacrp_penalty_reload"
     },
     {
         Name = "stat.meleespeed",
@@ -1060,6 +1064,7 @@ SWEP.StatDisplay = {
         Unit = "%",
         Value = "MeleeSpeedMult",
         DefaultValue = 1,
+        ConVarCheck = "tacrp_penalty_melee"
     },
     {
         Name = "spacer.handling",
