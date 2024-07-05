@@ -1,6 +1,6 @@
 
 local fn = "Myriad Pro"--"Bahnschrift"
-local sizes = {32, 24, 16, 12}
+local sizes = {32, 24, 20, 16, 12}
 for i, v in ipairs(sizes) do
 	surface.CreateFont( "TacRP_S2_"..v, {
 		font = fn,
@@ -32,7 +32,7 @@ end
 
 local rtc = {
 	["Value"]			= Color( 109,		101,	101 ),
-	["Consumer"]		= Color( 99,		133,	188 ),
+	["Consumer"]		= Color( 99,		143,	188 ),
 	["Security"]		= Color( 144,		95,		223 ),
 	["Operator"]		= Color( 220,		107,	157 ),
 	["Elite"]			= Color( 255,		77,		77 ),
@@ -40,61 +40,81 @@ local rtc = {
 }
 
 local filtergroups = {
-	{
-		["Name"] = "Tactical Intervention",
-		["Filters"] = {
-			"tacrp_"
+	["tacrp"] = {
+		Name = "Tactical Intervention",
+		SortOrder = 1,
+		Filters = {}
+	},
+	["extras"] = {
+		Name = "TacRP Extras",
+		SortOrder = 2,
+		Filters = {
+			"tacrp_ex_",
+			"tacrp_civ_",
+			"tacrp_ar15",
+			"tacrp_ks23"
 		},
 	},
-	{
-		["Name"] = "TacRP Extras",
-		["Filters"] = {
-			"tacrp_ex_"
-		},
-	},
-	{
-		["Name"] = "Interops",
-		["Filters"] = {
+	["interops"] = {
+		Name = "Interops",
+		SortOrder = 3,
+		Filters = {
 			"tacrp_io_",
 		},
 	},
-	{
-		["Name"] = "ArmaLite Revolution",
-		["Filters"] = {
+	["armaliterevolution"] = {
+		Name = "ArmaLite Revolution",
+		SortOrder = 4,
+		Filters = {
 			"tacrp_ar_"
 		},
 	},
-	{
-		["Name"] = "Special Delivery",
-		["Filters"] = {
+	["specialdelivery"] = {
+		Name = "Special Delivery",
+		SortOrder = 5,
+		Filters = {
 			"tacrp_sd_"
 		},
 	},
-	{
-		["Name"] = "Iron Curtain",
-		["Filters"] = {
+	["bruteforce"] = {
+		Name = "Brute Force",
+		SortOrder = 6,
+		Filters = {
+			"tacrp_m_"
+		},
+	},
+	["ironcurtain"] = {
+		Name = "Iron Curtain",
+		SortOrder = 7,
+		Filters = {
 			"tacrp_ak_"
 		},
 	},
-	{
-		["Name"] = "Heavy Duty",
-		["Filters"] = {
+	["heavyduty"] = {
+		Name = "Heavy Duty",
+		SortOrder = 8,
+		Filters = {
 			"tacrp_h_"
 		},
 	},
-	{
-		["Name"] = "Exo-ops",
-		["Filters"] = {
+	["exoops"] = {
+		Name = "Exo-ops",
+		SortOrder = 9,
+		Filters = {
 			"tacrp_eo_"
 		},
 	},
-	{
-		["Name"] = "Post-apocolypse",
-		["Filters"] = {
-			"tacrp_h_"
+	["postapocolypse"] = {
+		Name = "Post-apocolypse",
+		SortOrder = 10,
+		Filters = {
+			"tacrp_pa_"
 		},
 	},
 }
+
+local filteredicon_col = Color( 0, 0, 0, 63 )
+local filtered_col = Color( 61, 51, 51, 63 )
 
 hook.Add("PopulateWeapons", "zzz_TacRP_SubCategories", function(pnlContent, tree, anode)
 	local cvar = TacRP.ConVars["subcats"]:GetInt()
@@ -171,25 +191,118 @@ hook.Add("PopulateWeapons", "zzz_TacRP_SubCategories", function(pnlContent, tree
 
 				self.FilterBar = vgui.Create("DPanel", self.GodPanel)
 				self.FilterBar:Dock(TOP)
+				self.FilterBar:SetTall(20)
+				function self.FilterBar:Paint() return end
 
 				self.Filter_TextEntry = vgui.Create("DTextEntry", self.FilterBar)
 				self.Filter_TextEntry:Dock(FILL)
-
-				self.Filter_Options = vgui.Create("DButton", self.FilterBar)
-				self.Filter_Options:Dock(RIGHT)
-
-				function self.Filter_Options:DoClick()
-					local Menu = DermaMenu()
-						for i, v in ipairs(filtergroups) do
-							local opt = Menu:AddOption( v.Name )
-							opt:SetIsCheckable(true)
-						end
-					Menu:Open()
-				end
+				self.Filter_TextEntry:SetPlaceholderText("Filter...")
+				local TextInEntry = false
 
 				-- Create the container panel
 				self.PropPanel = vgui.Create("DScrollPanel", self.GodPanel)
 				self.PropPanel:Dock(FILL)
+
+				local enabled = {}
+
+				for i, v in pairs(filtergroups) do
+					enabled[i] = true
+				end
+
+				local function filtered( class, s2 )
+					local tval = self.Filter_TextEntry:GetValue():lower()
+					if TextInEntry and tval != "" then
+						if string.find(class:lower(), tval, nil, true) or string.find(s2.WepTable.PrintName:lower(), tval, nil, true) or (s2.WepTable.AbbrevName and string.find(s2.WepTable.AbbrevName:lower(), tval, nil, true)) then
+							return false
+						else
+							return true
+						end
+					end
+					local From = "tacrp"
+					--local lol
+					--lol = "tacrp_h_"  if class:Left(#lol) == lol then	From = "heavyduty"			end
+					--lol = "tacrp_eo_" if class:Left(#lol) == lol then	From = "exoops"				end
+					--lol = "tacrp_io_" if class:Left(#lol) == lol then	From = "interops"			end
+					--lol = "tacrp_ex_" if class:Left(#lol) == lol then	From = "extras"				end
+					--lol = "tacrp_sd_" if class:Left(#lol) == lol then	From = "specialdelivery"	end
+					--lol = "tacrp_m_"  if class:Left(#lol) == lol then	From = "bruteforce"			end
+					--lol = "tacrp_ak_" if class:Left(#lol) == lol then	From = "ironcurtain"		end
+					--lol = "tacrp_ar_" if class:Left(#lol) == lol then	From = "armaliterevolution"	end
+					--lol = "tacrp_pa_" if class:Left(#lol) == lol then	From = "postapocolypse"		end
+					for FilterName, FilterData in pairs(filtergroups) do
+						for _, ToFilter in ipairs(FilterData.Filters) do
+							if class:Left(#ToFilter) == ToFilter then
+								From = FilterName
+								break
+							end
+						end
+					end
+					for FilterName, FilterData in pairs(filtergroups) do
+						if !enabled[FilterName] and From == FilterName then
+							return true
+						end
+					end
+					return false
+					--return (From!="tacrp" and From!="extras")
+				end
+
+				self.Filter_Options = vgui.Create("DButton", self.FilterBar)
+				self.Filter_Options:Dock(RIGHT)
+				self.Filter_Options:DockMargin( 5, 0, 0, 0 )
+				self.Filter_Options:SetText("Filter")
+
+				local AllButtons = {}
+				local AllCategories = {}
+				local HideIcon = false
+
+				local function UpdateAll()
+					for i, v in ipairs(AllCategories) do
+						v.ItemCountFiltered = 0
+					end
+					for i, v in ipairs(AllButtons) do
+						local Filtered = !filtered( v.S2.ClassName, v.S2 )
+						v:SetVisible( (TextInEntry and Filtered) or (HideIcon and Filtered) or (!TextInEntry and !HideIcon and true) )
+						if Filtered then
+							v.Grid.Cate.ItemCountFiltered = v.Grid.Cate.ItemCountFiltered + 1
+						end
+					end
+					for i, v in ipairs(AllCategories) do
+						local anyonevisible = false
+						for i, v in ipairs( v.Grid:GetChildren() ) do
+							if v:IsVisible() then anyonevisible = true break end
+						end
+						v:SetVisible( anyonevisible )
+					end
+					self.PropPanel:InvalidateChildren( true )
+				end
+
+				function self.Filter_Options:DoClick()
+					local Menu = DermaMenu()
+						for i, v in SortedPairsByMemberValue(filtergroups, "SortOrder") do
+							local opt = Menu:AddOption( v.Name )
+							opt:SetIsCheckable(true)
+							opt.m_bChecked = (enabled[i] or false)
+							function opt:OnChecked( value )
+								enabled[i] = value
+								UpdateAll()
+							end
+						end
+						Menu:AddSpacer()
+						local opt = Menu:AddOption("Hide Filtered")
+						opt:SetIsCheckable(true)
+						opt.m_bChecked = (HideIcon or false)
+						function opt:OnChecked( value )
+							HideIcon = value
+							UpdateAll()
+						end
+					Menu:Open()
+				end
+				
+				self.Filter_TextEntry:SetUpdateOnType(true)
+				function self.Filter_TextEntry:OnValueChange(value)
+					TextInEntry = value and (value!="")
+					UpdateAll()
+				end
 
 				function self.PropPanel:PaintOver(w, h)
 					if vgui.GetHoveredPanel() and vgui.GetHoveredPanel().S2 then
@@ -306,6 +419,9 @@ hook.Add("PopulateWeapons", "zzz_TacRP_SubCategories", function(pnlContent, tree
 						label:Dock(TOP)
 						label:DockMargin( 0, 0, 5, 0 )
 						label.Header:SetTall( 32+5 )
+						label.ItemCount = 0
+
+						table.insert( AllCategories, label )
 
 						function label:Paint(w, h)
 							surface.SetFont("TacRP_S2_32I")
@@ -314,12 +430,21 @@ hook.Add("PopulateWeapons", "zzz_TacRP_SubCategories", function(pnlContent, tree
 							surface.DrawRect( 0, 2, 4+tns+4+4, 32 )
 			
 							qt( self.TypeName, "TacRP_S2_32I", 4, 2 )
+
+							local additional = ""
+							if self.ItemCountFiltered and self.ItemCountFiltered > 0 and self.ItemCount != self.ItemCountFiltered then
+								additional = " -- " .. self.ItemCountFiltered .. " shown"
+							end
+							qt( self.ItemCount .. " total" .. additional, "TacRP_S2_20I", 4 + tns + 4 + 4 + 4, 2 + 16, nil, TEXT_ALIGN_CENTER )
 						end
 						grid = vgui.Create("DGrid", label)
 						grid:Dock( TOP )
 						grid:SetCols( 4 )
 						grid:SetColWide( 150+5 )
 						grid:SetRowHeight( 75+5 )
+
+						label.Grid = grid
+						grid.Cate = label
 
 						local ccatp = label.PerformLayout
 						function label:PerformLayout(w, h)
@@ -356,7 +481,10 @@ hook.Add("PopulateWeapons", "zzz_TacRP_SubCategories", function(pnlContent, tree
 						local weapon = vgui.Create("DButton")
 						weapon:SetSize( 150, 75 )
 						grid:AddItem(weapon)
+						grid.Cate.ItemCount = grid.Cate.ItemCount + 1
+						table.insert( AllButtons, weapon )
 						weapon.S2 = ent
+						weapon.Grid = grid
 
 						local Text_Name = ent.PrintName
 						local Text_Color = rtc[ent.WepTable.SubCatTier:Right(-2)] or color_white
@@ -368,16 +496,18 @@ hook.Add("PopulateWeapons", "zzz_TacRP_SubCategories", function(pnlContent, tree
 						local Text_Faction = ent.WepTable.Faction
 
 						function weapon:Paint(w, h)
-							if TacRP.UseTiers() then
+							local filtered = filtered( ent.ClassName, ent )
+							if filtered then
+								surface.SetDrawColor( filtered_col )
+							elseif TacRP.UseTiers() then
 								surface.SetDrawColor( Text_Color.r, Text_Color.g, Text_Color.b, 255 )
-								surface.SetMaterial(Material("vgui/gradient-u", "mips smooth"))
-								surface.DrawTexturedRect( 0, 0, w, h )
 							else
 								surface.SetDrawColor( 255, 255, 255, 32 )
-								surface.DrawRect( 0, 0, w, h )
 							end
+							surface.SetMaterial(Material("vgui/gradient-u", "mips smooth"))
+							surface.DrawTexturedRect( 0, 0, w, h )
 
-							surface.SetDrawColor( 255, 255, 255 )
+							surface.SetDrawColor( filtered and filteredicon_col or color_white )
 							local themat = Material( ent.IconOverride or "entities/" .. ent.ClassName .. ".png" )
 							surface.SetMaterial( themat, "mips smooth" )
 						
@@ -386,7 +516,7 @@ hook.Add("PopulateWeapons", "zzz_TacRP_SubCategories", function(pnlContent, tree
 		
 							surface.SetFont("TacRP_S2_16")
 							local tns = surface.GetTextSize(Text_Name)
-							surface.SetDrawColor( 0, 0, 0, 200 )
+							surface.SetDrawColor( 0, 0, 0, filtered and 100 or 200 )
 							surface.DrawRect( 0, h - 20, 4+tns+4, 20 )
 						
 							-- name
