@@ -1,19 +1,20 @@
 SWEP.Base = "tacrp_m4"
-SWEP.Spawnable = false // deprecated by ST AR-15
+SWEP.Spawnable = true // deprecated by ST AR-15
 
 AddCSLuaFile()
 
 // names and stuff
-SWEP.PrintName = "Colt Canada AR-15"
+SWEP.PrintName = "AR-15"
 SWEP.AbbrevName = "AR-15"
 SWEP.Category = "Tactical RP"
 
-SWEP.SubCatTier = "3Security"
+SWEP.SubCatTier = "4Consumer"
 SWEP.SubCatType = "5Sporter"
 
-SWEP.Description = "Semi-automatic model of an ubiquitous American rifle.\n"
+SWEP.Description = "Customized semi-automatic model of an ubiquitous American rifle."
+SWEP.Description_Quote = "\"One of the most beloved and most vilified rifles in the country\""
 
-SWEP.ViewModel = "models/weapons/tacint/v_m4.mdl"
+SWEP.ViewModel = "models/weapons/tacint/v_ar15.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_m4.mdl"
 
 SWEP.Slot = 2
@@ -58,12 +59,16 @@ SWEP.BalanceStats = {
 
 SWEP.TTTReplace = {}
 
-SWEP.RPM = 650
+SWEP.RPM = 550
+SWEP.RPMMultSemi = 400/550
 
 SWEP.Firemode = 1
 SWEP.Firemodes = false
 
-SWEP.ClipSize = 30
+SWEP.ClipSize = 15
+
+SWEP.SightAng = Angle(0.22, -0.1, 0)
+SWEP.SightPos = Vector(-4.15, -7.5, -4.14)
 
 SWEP.Attachments = {
     [1] = {
