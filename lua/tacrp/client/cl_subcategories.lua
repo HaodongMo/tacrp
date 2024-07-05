@@ -31,12 +31,69 @@ local function qt( text, font, w, h, alignx, aligny )
 end
 
 local rtc = {
-	["Value"]			= Color( 85,		84,		86 ),
-	["Consumer"]		= Color( 100,		116,	134 ),
-	["Security"]		= Color( 79,		143,	228 ),
-	["Operator"]		= Color( 100,		20,		220 ),
-	["Elite"]			= Color( 240,		44,		44 ),
+	["Value"]			= Color( 109,		101,	101 ),
+	["Consumer"]		= Color( 99,		133,	188 ),
+	["Security"]		= Color( 144,		95,		223 ),
+	["Operator"]		= Color( 220,		107,	157 ),
+	["Elite"]			= Color( 255,		77,		77 ),
 	["Special"]			= Color( 155,		126,	110 ),
+}
+
+local filtergroups = {
+	{
+		["Name"] = "Tactical Intervention",
+		["Filters"] = {
+			"tacrp_"
+		},
+	},
+	{
+		["Name"] = "TacRP Extras",
+		["Filters"] = {
+			"tacrp_ex_"
+		},
+	},
+	{
+		["Name"] = "Interops",
+		["Filters"] = {
+			"tacrp_io_",
+		},
+	},
+	{
+		["Name"] = "ArmaLite Revolution",
+		["Filters"] = {
+			"tacrp_ar_"
+		},
+	},
+	{
+		["Name"] = "Special Delivery",
+		["Filters"] = {
+			"tacrp_sd_"
+		},
+	},
+	{
+		["Name"] = "Iron Curtain",
+		["Filters"] = {
+			"tacrp_ak_"
+		},
+	},
+	{
+		["Name"] = "Heavy Duty",
+		["Filters"] = {
+			"tacrp_h_"
+		},
+	},
+	{
+		["Name"] = "Exo-ops",
+		["Filters"] = {
+			"tacrp_eo_"
+		},
+	},
+	{
+		["Name"] = "Post-apocolypse",
+		["Filters"] = {
+			"tacrp_h_"
+		},
+	},
 }
 
 hook.Add("PopulateWeapons", "zzz_TacRP_SubCategories", function(pnlContent, tree, anode)
@@ -112,8 +169,23 @@ hook.Add("PopulateWeapons", "zzz_TacRP_SubCategories", function(pnlContent, tree
 				function self.GodPanel:Paint(w, h)
 				end
 
-				self.FilterBar = vgui.Create("DTextEntry", self.GodPanel)
+				self.FilterBar = vgui.Create("DPanel", self.GodPanel)
 				self.FilterBar:Dock(TOP)
+
+				self.Filter_TextEntry = vgui.Create("DTextEntry", self.FilterBar)
+				self.Filter_TextEntry:Dock(FILL)
+
+				self.Filter_Options = vgui.Create("DButton", self.FilterBar)
+				self.Filter_Options:Dock(RIGHT)
+
+				function self.Filter_Options:DoClick()
+					local Menu = DermaMenu()
+						for i, v in ipairs(filtergroups) do
+							local opt = Menu:AddOption( v.Name )
+							opt:SetIsCheckable(true)
+						end
+					Menu:Open()
+				end
 
 				-- Create the container panel
 				self.PropPanel = vgui.Create("DScrollPanel", self.GodPanel)
@@ -288,6 +360,11 @@ hook.Add("PopulateWeapons", "zzz_TacRP_SubCategories", function(pnlContent, tree
 
 						local Text_Name = ent.PrintName
 						local Text_Color = rtc[ent.WepTable.SubCatTier:Right(-2)] or color_white
+						--do
+						--	local h,s,v = ColorToHSV( Text_Color )
+						--	s = s * 0.75
+						--	Text_Color = HSVToColor( h,s,v )
+						--end
 						local Text_Faction = ent.WepTable.Faction
 
 						function weapon:Paint(w, h)

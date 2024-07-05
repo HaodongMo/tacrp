@@ -432,8 +432,8 @@ local pages = {
 			p_right.Paint = rt
 			local gapper = s(24+140+24)--+32+24+24)
 			function p_right:Paint( w, h )
-				surface.SetDrawColor( 25, 0, 0, 127 )
-				surface.DrawRect( 0, 0, gapper, h )
+				--surface.SetDrawColor( 25, 0, 0, 127 )
+				--surface.DrawRect( 0, 0, gapper, h )
 
 				return true
 			end
