@@ -1,44 +1,26 @@
 
+local s = ScreenScaleH
 local fn = "Myriad Pro"--"Bahnschrift"
-surface.CreateFont( "C2_1", {
-	font = fn,
-	size = ScreenScaleH(36),
-	weight = 0,
-})
-surface.CreateFont( "C2_2", {
-	font = fn,
-	size = ScreenScaleH(18),
-	weight = 0,
-})
-surface.CreateFont( "C2_3", {
-	font = fn,
-	size = ScreenScaleH(12),
-	weight = 0,
-})
-surface.CreateFont( "C2_3I", {
-	font = fn,
-	size = ScreenScaleH(12),
-	italic = true,
-	weight = 0,
-})
-surface.CreateFont( "C2_4", {
-	font = fn,
-	size = ScreenScaleH(10),
-	weight = 0,
-})
-surface.CreateFont( "C2_5A", {
-	font = fn,
-	size = ScreenScaleH(12),
-	weight = 0,
-	italic = true,
-})
-surface.CreateFont( "C2_5B", {
-	font = fn,
-	size = ScreenScaleH(16),
-	weight = 0,
-})
+local sizes = {36, 18, 16, 14, 12, 10, 8, 6}
+for i, v in ipairs(sizes) do
+	surface.CreateFont( "TacRP_C2_"..v, {
+		font = fn,
+		size = s(v),
+		weight = 0,
+	})
+	surface.CreateFont( "TacRP_C2_"..v.."I", {
+		font = fn,
+		size = s(v),
+		italic = true,
+		weight = 0,
+	})
+end
 
 local cb = Color( 0, 0, 0, 127 )
+local dCol = Color( 200, 200, 200 )
+
+local COLOR_POSITIVE = Color( 120, 255, 120 )
+local COLOR_NEGATIVE = Color( 255, 200, 200 )
 
 local function genselecta( c, host, slotnum, slottab )
 	if IsValid(selecta) then selecta:Remove() end
@@ -90,9 +72,9 @@ local function genselecta( c, host, slotnum, slottab )
 			surface.DrawRect( 0, 0, w, h )
 			surface.SetDrawColor( color_white )
 			surface.DrawOutlinedRect( 0, 0, w, h, s(1) )
-			draw.SimpleText( TacRP:TryTranslate( ati.PrintName ), "C2_3", s(6), s(6), color_white )
+			draw.SimpleText( TacRP:TryTranslate( ati.PrintName ), "TacRP_C2_12", s(6), s(6), color_white )
 			if slottab.Installed == att then
-				draw.SimpleText( "installed", "C2_4", s(6), s(2), color_white )
+				draw.SimpleText( "installed", "TacRP_C2_10", s(6), s(2), color_white )
 			end
 
 			surface.SetDrawColor( 255, 255, 255, 255 )
@@ -222,6 +204,134 @@ function qd( s, t, f, x, y, c, ax, ay )
 	draw.SimpleText( t, f, x, y, c, ax, ay )
 end
 
+
+function qRect( x, y, ax, ay, c )
+	surface.SetDrawColor( GLEEDARKTX )
+	surface.DrawRect( x, y+1, ax, ay )
+	surface.DrawRect( x+1, y+1, ax, ay )
+	surface.DrawRect( x+1, y+2, ax, ay )
+
+	surface.DrawRect( x-1, y, ax, ay )
+	surface.DrawRect( x-1, y-1, ax, ay )
+	surface.DrawRect( x+1, y-1, ax, ay )
+
+	surface.DrawRect( x+2, y+2, ax, ay )
+	surface.DrawRect( x+2, y, ax, ay )
+
+	surface.SetDrawColor( c )
+	surface.DrawRect( x, y, ax, ay )
+end
+
+local function updatestat(self, i, k)
+	if k.ConVarCheck then
+		if !k.ConVar then k.ConVar = GetConVar(k.ConVarCheck) end
+		if k.ConVar:GetBool() == tobool(k.ConVarInvert) then return end
+	end
+
+	if k.Spacer then
+		self.MiscCache["statbox"][i] = {}
+		return
+	end
+	local value = self:GetValue(k.Value)
+	local orig = self:GetBaseValue(k.Value)
+	local diff = nil
+
+	if k.HideIfSame and orig == value then return end
+	if k.DefaultValue != nil and value == k.DefaultValue and orig == k.DefaultValue then return end
+
+	if k.ValueCheck and self:GetValue(k.ValueCheck) != !k.ValueInvert then
+		return
+	end
+
+	local stat_base = 0
+	local stat_curr = 0
+
+	if k.AggregateFunction then
+		stat_base = k.AggregateFunction(self, true, orig)
+		stat_curr = k.AggregateFunction(self, false, value)
+	else
+		stat_base = math.Round(orig, 4)
+		stat_curr = math.Round(value, 4)
+	end
+
+	if stat_base == nil and stat_cur == nil then return end
+
+	if k.DifferenceFunction then
+		diff = k.DifferenceFunction(self, orig, value)
+	elseif isnumber(stat_base) and isnumber(stat_curr) then
+		if stat_curr == stat_base then
+			diff = ""
+		else
+			diff = math.Round((stat_curr / stat_base - 1) * 100)
+			if diff > 0 then
+				diff = "+" .. tostring(diff) .. "%"
+			else
+				diff = tostring(diff) .. "%"
+			end
+		end
+	end
+
+	local txt_base = tostring(stat_base)
+	local txt_curr = tostring(stat_curr)
+
+	if isbool(stat_base) then
+		if stat_base then
+			txt_base = "YES"
+		else
+			txt_base = "NO"
+		end
+
+		if stat_curr then
+			txt_curr = "YES"
+		else
+			txt_curr = "NO"
+		end
+	end
+
+	if k.DisplayFunction then
+		txt_base = k.DisplayFunction(self, true, orig)
+		txt_curr = k.DisplayFunction(self, false, value)
+	end
+
+	if k.Unit then
+		local unit = TacRP:TryTranslate(k.Unit)
+		txt_base = txt_base .. unit
+		txt_curr = txt_curr .. unit
+	end
+
+	local good = false
+	local goodorbad = false
+
+	if k.BetterFunction then
+		goodorbad, good = k.BetterFunction(self, orig, value)
+	elseif stat_base != stat_curr then
+		if isnumber(stat_curr) then
+			good = stat_curr > stat_base
+			goodorbad = true
+		elseif isbool(stat_curr) then
+			good = !stat_base and stat_curr
+			goodorbad = true
+		end
+	end
+
+	if k.LowerIsBetter then
+		good = !good
+	end
+
+	if goodorbad then
+		if good then
+			surface.SetTextColor(175, 255, 175)
+		else
+			surface.SetTextColor(255, 175, 175)
+		end
+	else
+		surface.SetTextColor(255, 255, 255)
+	end
+
+	self.MiscCache["statbox"][i] = {txt_base, txt_curr, goodorbad, good, diff}
+end
+
+
 local pages = {
 	{
 		Name = "Customize",
@@ -259,7 +369,7 @@ local pages = {
 					surface.SetDrawColor( color_white )
 					surface.DrawOutlinedRect( 0, 0, w, h, s(1) )
 
-					draw.SimpleText( slottab.PrintName, "C2_5A", s(10), s(ins and 4 or 2), color_white )
+					draw.SimpleText( slottab.PrintName, "TacRP_C2_12I", s(10), s(ins and 4 or 2), color_white )
 					local tx = surface.GetTextSize( slottab.PrintName )
 					if ins then
 						surface.SetDrawColor( color_white )
@@ -269,7 +379,7 @@ local pages = {
 						if ati then
 							attname = TacRP:TryTranslate( ati.PrintName )
 						end
-						draw.SimpleText( attname, "C2_5B", s(10), s(4+(12-2)), color_white )
+						draw.SimpleText( attname, "TacRP_C2_16", s(10), s(4+(12-2)), color_white )
 
 						surface.SetMaterial( ati.Icon )
 						surface.SetDrawColor( 255, 255, 255, 255 )
@@ -317,17 +427,101 @@ local pages = {
 
 			local p_right = page:Add( "DPanel" )
 			p_right:SetTall( par:GetTall() )
-			p_right:SetWide( par:GetWide() )
+			p_right:SetWide( s(24+140+24) )
 			p_right:SetMouseInputEnabled( true )
 			p_right.Paint = rt
-			local gapper = s(24+90+48+24)--+32+24+24)
+			local gapper = s(24+140+24)--+32+24+24)
 			function p_right:Paint( w, h )
 				surface.SetDrawColor( 25, 0, 0, 127 )
 				surface.DrawRect( 0, 0, gapper, h )
+
 				return true
 			end
 			function p_right:Think()
 				p_right:SetX( ( (1-page.SlidePer) * (gapper or self:GetWide()) ) + (page:GetWide()-gapper-gapper) )
+			end
+
+			local rside = p_right:Add( "DScrollPanel" )
+			rside:SetY( s(24) )
+			rside:SetTall( par:GetTall() - s(24+24) )
+			rside:SetX( s(24) )
+			rside:SetWide( s(140) )
+
+			rside.pnlCanvas:DockPadding(1, 1+s(2), 1, s(4))
+
+			rside.VBar:SetWide(4)
+			rside.VBar:SetHideButtons(true)
+
+			function rside.VBar:Paint(w, h)
+			end
+			function rside.VBar.btnGrip:Paint(w, h)
+				local todo = DisableClipping( true )
+					surface.SetDrawColor( 255, 255, 255 )
+					surface.DrawRect( 0, 1, 2, h-2	 )
+				DisableClipping( todo )
+			end
+
+
+			function rside:Paint( w, h )
+				Gleemax( s, w, h )
+			end
+
+			c.w.MiscCache["statbox"] = {}
+			c.w.StatRows = {}
+
+			for i, k in ipairs(c.w.StatDisplay) do
+				updatestat( c.w, i, k )
+			end
+			
+			--if !c.w.MiscCache["statbox"] then
+			----	populate_stats(layout)
+			--end
+
+			local Floop = false
+			for _, k in ipairs(c.w.StatDisplay) do
+				local cache = c.w.MiscCache["statbox"][_]
+				if !cache then continue end
+
+				local stat = rside:Add( "DPanel" )
+				stat:Dock(TOP)
+				stat:SetTall(k.Spacer and s(18) or s(18))
+				stat.Floop = Floop
+				Floop = !Floop
+
+				function stat:Paint(w, h)
+					--surface.SetDrawColor( 0, 0, 0, (self.Floop and 30 or 70) )
+					--surface.DrawRect( 0, 0, w, h )
+					local tn = TacRP:TryTranslate(k.Name)
+					if k.Spacer then
+						surface.SetFont("TacRP_C2_16")
+						local tns = surface.GetTextSize(tn)
+						qRect( s(4), s(15), tns+s(4), s(1), color_white )
+						qd( s, tn, k.Spacer and "TacRP_C2_16", k.Spacer and s(4), 0, color_white )
+					else
+						qd( s, tn, "TacRP_C2_8", s(4+4), 0, color_white )
+					end
+
+					if !k.Spacer then
+						-- Base Value
+						local DifferentValue = cache[2] != cache[1]
+						local col = cache[4] and COLOR_POSITIVE or COLOR_NEGATIVE -- Good Change
+						if DifferentValue then -- Current Value
+							qd( s, cache[2], "TacRP_C2_14", s(4+4+8), s(4), col )
+							
+							if cache[3] then -- Good Or Bad Change
+								surface.SetFont("TacRP_C2_14")
+								local tns = surface.GetTextSize(cache[2])
+								qd( s, "(" .. cache[5] .. ")", "TacRP_C2_10", s(4+4+8+2)+tns, s(6.5), col )
+								local bleh = s(4+4+8+2)+tns
+								local tns = surface.GetTextSize("(" .. cache[5] .. ")")
+								qd( s, cache[1], "TacRP_C2_10", bleh+s(2)+tns, s(6.5), dCol )
+							end
+						else
+							qd( s, cache[1], "TacRP_C2_14", s(4+4+8), s(4), color_white )
+						end
+					end
+					return
+				end
 			end
 		end,
 		Paint = function( page, w, h, c )
@@ -378,9 +572,9 @@ local pages = {
 				function header:Paint( w, h )
 					Gleemax( s, w, h )
 
-					qd( s, c.w:GetPrintName(), "C2_1", s(Margin_3), h/2, color_white, nil, TEXT_ALIGN_CENTER )
-					qd( s, c.w:GetSubClassName(TacRP.UseTiers()), "C2_3", w - s(Margin_3), h/2 - s(6), color_white, TEXT_ALIGN_RIGHT, TEXT_ALIGN_CENTER )
-					qd( s, c.w:GetValue("Trivia_Caliber"), "C2_3", w - s(Margin_3), h/2 + s(6), color_white, TEXT_ALIGN_RIGHT, TEXT_ALIGN_CENTER )
+					qd( s, c.w:GetPrintName(), "TacRP_C2_36", s(Margin_3), h/2, color_white, nil, TEXT_ALIGN_CENTER )
+					qd( s, c.w:GetSubClassName(TacRP.UseTiers()), "TacRP_C2_12", w - s(Margin_3), h/2 - s(6), color_white, TEXT_ALIGN_RIGHT, TEXT_ALIGN_CENTER )
+					qd( s, c.w:GetValue("Trivia_Caliber"), "TacRP_C2_12", w - s(Margin_3), h/2 + s(6), color_white, TEXT_ALIGN_RIGHT, TEXT_ALIGN_CENTER )
 
 					return true
 				end
@@ -405,7 +599,7 @@ local pages = {
 					tb:SetPos( page:GetWide()/2 - f_w/2 + math.ceil( s((index-1))*(48+1)), 0 )
 					function tb:Paint( w, h )
 						Gleemax( s, w, h )
-						qd( s, Taby[1], "C2_4", w/2, h/2, color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER )
+						qd( s, Taby[1], "TacRP_C2_10", w/2, h/2, color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER )
 						return true
 					end
 
@@ -414,18 +608,18 @@ local pages = {
 				function footer:Paint( w, h )
 					Gleemax( s, w, h )
 
-					local desc = TacRP.MultiLineText( c.w.Description, w - s(12*2), "C2_3" )
+					local desc = TacRP.MultiLineText( c.w.Description, w - s(12*2), "TacRP_C2_12" )
 
 					local lines = 0
 					for i, v in ipairs( desc ) do
-						qd( s, v, "C2_3", s(12), s(6+(12*(i-1))), color_white )
+						qd( s, v, "TacRP_C2_12", s(12), s(6+(12*(i-1))), color_white )
 						lines = i
 					end
-					qd( s, c.w.Description_Quote, "C2_3I", s(12), s(6+(12*(lines+1))), color_white )
+					qd( s, c.w.Description_Quote, "TacRP_C2_12I", s(12), s(6+(12*(lines+1))), color_white )
 				end
 
 				function footer:PerformLayout( w, h )
-					local desc = TacRP.MultiLineText( c.w.Description, w - s(12*2), "C2_3" )
+					local desc = TacRP.MultiLineText( c.w.Description, w - s(12*2), "TacRP_C2_12" )
 					local lines = #desc
 					if c.w.Description_Quote then lines = lines + 2 end
 					f_h = s(6+(12*lines)+6)
@@ -447,13 +641,13 @@ local pages = {
 
 					local bump = 0
 					for i, v in pairs( weh ) do
-						qd( s, i, "C2_4", s(8), s(12+4)+bump, color_white, TEXT_ALIGN_LEFT, TEXT_ALIGN_BOTTOM )
+						qd( s, i, "TacRP_C2_10", s(8), s(12+4)+bump, color_white, TEXT_ALIGN_LEFT, TEXT_ALIGN_BOTTOM )
 						local txt = isfunction(v) and v(c.w) or c.w:GetValue(v) or "?"
-						local ftu = "C2_3"
+						local ftu = "TacRP_C2_12"
 						surface.SetFont(ftu)
 						local tx = surface.GetTextSize(txt)
 						if tx > s(180-8-8-64) then
-							ftu = "C2_4"
+							ftu = "TacRP_C2_10"
 						end
 						qd( s, txt, ftu, w-s(8), s(12+4)+bump, color_white, TEXT_ALIGN_RIGHT, TEXT_ALIGN_BOTTOM )
 						bump = bump + s(12)
@@ -464,7 +658,7 @@ local pages = {
 			do
 				local footer = p_bottom:Add( "DPanel" )
 				footer:Hide()
-				local multiline = TacRP.MultiLineText( c.w.Credits, math.huge, "C2_3" )
+				local multiline = TacRP.MultiLineText( c.w.Credits, math.huge, "TacRP_C2_12" )
 				if multiline[#multiline] == " " then
 					multiline[#multiline] = nil
 				end
@@ -485,13 +679,13 @@ local pages = {
 							end
 							reassemble = reassemble .. v
 						end
-						local ftu = "C2_3"
+						local ftu = "TacRP_C2_12"
 						surface.SetFont(ftu)
 						local tx = surface.GetTextSize(reassemble)
 						if tx > (w-s(4+4+32)) then
-							ftu = "C2_4"
+							ftu = "TacRP_C2_10"
 						end
-						qd( s, mweh[1], "C2_4", s(4), s(4+(i)*12), color_white, TEXT_ALIGN_LEFT, TEXT_ALIGN_BOTTOM )
+						qd( s, mweh[1], "TacRP_C2_10", s(4), s(4+(i)*12), color_white, TEXT_ALIGN_LEFT, TEXT_ALIGN_BOTTOM )
 						qd( s, reassemble, ftu, w-s(4), s(4+(i)*12), color_white, TEXT_ALIGN_RIGHT, TEXT_ALIGN_BOTTOM )
 					end
 				end
@@ -528,7 +722,7 @@ local pages = {
 				function header:Paint( w, h )
 					Gleemax( s, w, h )
 
-					qd( s, "DAMAGE AT RANGE", "C2_4", s(4), s(4), color_white )
+					qd( s, "DAMAGE AT RANGE", "TacRP_C2_10", s(4), s(4), color_white )
 
 					return true
 				end
@@ -544,7 +738,7 @@ local pages = {
 		Paint = function( page, w, h, c )
 			local s = c.s
 			local h = math.ceil( Lerp(1+page.SlidePer, -s(20), h/2) )
-			DST( "Newsletter panel goes here.", "C2_1", w/2, h, color_white, s(1), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER )
+			DST( "Newsletter panel goes here.", "TacRP_C2_36", w/2, h, color_white, s(1), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER )
 		end,
 	},
 	{
@@ -559,8 +753,8 @@ local pages = {
 
 local uio = Material( "uio/shadow.png", "" )
 
-local c2_Currentpage = 3
-local c2_Desire = 3
+local c2_Currentpage = 2
+local c2_Desire = 2
 
 function SWEP:C2_Open()
 	if IsValid( c2 ) then c2:Remove() end
@@ -638,7 +832,7 @@ function SWEP:C2_Open()
 		end
 		function cl:Paint( w, h )
 			Gleemax( s, w, h )
-			qd( s, "×", "C2_3", w/2 - s(0.5), h/2 - s(1.5), color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER )
+			qd( s, "×", "TacRP_C2_12", w/2 - s(0.5), h/2 - s(1.5), color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER )
 			return true
 		end
 	end
@@ -654,7 +848,7 @@ function SWEP:C2_Open()
 		end
 		function cl:Paint( w, h )
 			Gleemax( s, w, h )
-			qd( s, "Drop Weapon", "C2_4", w/2, h/2, color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER )
+			qd( s, "Drop Weapon", "TacRP_C2_10", w/2, h/2, color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER )
 			return true
 		end
 	end
@@ -672,8 +866,8 @@ function SWEP:C2_Open()
 		function mbutton:Paint( w, h )
 			Gleemax( s, w, h )
 			
-			qd( s, i, "C2_4", s(3), s(1), color_white )
-			qd( s, v.Name, "C2_3", w/2, h/2, color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER )
+			qd( s, i, "TacRP_C2_10", s(3), s(1), color_white )
+			qd( s, v.Name, "TacRP_C2_12", w/2, h/2, color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER )
 
 			if i == c2.TTo then
 				local olda = GLEEC2.a

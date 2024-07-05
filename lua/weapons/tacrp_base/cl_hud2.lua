@@ -126,7 +126,7 @@ hook.Add("HUDPaint", "TacRP_HUD2", function()
 				S_AMMO = -1
 			end
 
-			qd( s, self:GetPrintName(), "C2_5A", Hx + s(4), Hy + s(3), color_white, TEXT_ALIGN_LEFT )
+			qd( s, self:GetPrintName(), "TacRP_C2_12I", Hx + s(4), Hy + s(3), color_white, TEXT_ALIGN_LEFT )
 
 			if self.ArcticTacRP then
 				local fm = self:GetCurrentFiremode()
