@@ -93,7 +93,7 @@ SWEP.Firemodes = {
 
 SWEP.RPM = 750
 
-SWEP.Spread = 0.0025
+SWEP.Spread = 0.0018
 
 SWEP.ShootTimeMult = 0.5
 
@@ -109,7 +109,7 @@ SWEP.RecoilKick = 3
 SWEP.RecoilStability = 0.5
 
 SWEP.RecoilSpreadPenalty = 0.0015
-SWEP.HipFireSpreadPenalty = 0.035
+SWEP.HipFireSpreadPenalty = 0.05
 
 SWEP.CanBlindFire = true
 
