@@ -1,13 +1,13 @@
 ATT.PrintName = "Ninja"
 ATT.Icon = Material("entities/tacrp_att_melee_spec_ninja.png", "mips smooth")
 ATT.Description = "Disrupt your enemies and strike with the element of surprise."
-ATT.Pros = {"RELOAD: Palm Strike / Climb", "RELOAD (Mid-air + Crouch): Dive Kick","RELOAD (Ground + Crouch): Backhop", "Silent Footsteps", "No fall damage"}
+ATT.Pros = {"RELOAD: Palm Strike / Climb", "RELOAD (Mid-air + Crouch): Dive Kick","RELOAD (Ground + Crouch): Backhop", "Silent Footsteps"}
 
 ATT.Category = {"melee_spec"}
 
 ATT.SortOrder = 2
 
-ATT.NoFallDamage = true
+ATT.NoFallDamage = false
 ATT.SilentFootstep = true
 
 local cost = 1 / 5
