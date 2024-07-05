@@ -113,6 +113,14 @@ local filtergroups = {
 	},
 }
 
+local filtergrades = {
+	["1Elite"] = true,
+	["2Operator"] = true,
+	["3Security"] = true,
+	["4Consumer"] = true,
+	["5Value"] = true,
+}
+
 local filteredicon_col = Color( 0, 0, 0, 63 )
 local filtered_col = Color( 61, 51, 51, 63 )
 
@@ -178,6 +186,8 @@ hook.Add("PopulateWeapons", "zzz_TacRP_SubCategories", function(pnlContent, tree
 		for _, node in pairs(tree:Root():GetChildNodes()) do
 			if !TacRPCats[node:GetText()] then continue end
 
+			local SPECIALMODE = (node:GetText() == "Tactical RP (Special)")
+
 			-- Get the subcategories registered in this category
 			local catSubcats = Categorised[node:GetText()]
 
@@ -204,9 +214,13 @@ hook.Add("PopulateWeapons", "zzz_TacRP_SubCategories", function(pnlContent, tree
 				self.PropPanel:Dock(FILL)
 
 				local enabled = {}
-
 				for i, v in pairs(filtergroups) do
 					enabled[i] = true
+				end
+
+				local enabled_grades = {}
+				for i, v in pairs(filtergrades) do
+					enabled_grades[i] = true
 				end
 
 				local function filtered( class, s2 )
@@ -219,16 +233,13 @@ hook.Add("PopulateWeapons", "zzz_TacRP_SubCategories", function(pnlContent, tree
 						end
 					end
 					local From = "tacrp"
-					--local lol
-					--lol = "tacrp_h_"  if class:Left(#lol) == lol then	From = "heavyduty"			end
-					--lol = "tacrp_eo_" if class:Left(#lol) == lol then	From = "exoops"				end
-					--lol = "tacrp_io_" if class:Left(#lol) == lol then	From = "interops"			end
-					--lol = "tacrp_ex_" if class:Left(#lol) == lol then	From = "extras"				end
-					--lol = "tacrp_sd_" if class:Left(#lol) == lol then	From = "specialdelivery"	end
-					--lol = "tacrp_m_"  if class:Left(#lol) == lol then	From = "bruteforce"			end
-					--lol = "tacrp_ak_" if class:Left(#lol) == lol then	From = "ironcurtain"		end
-					--lol = "tacrp_ar_" if class:Left(#lol) == lol then	From = "armaliterevolution"	end
-					--lol = "tacrp_pa_" if class:Left(#lol) == lol then	From = "postapocolypse"		end
+					if !SPECIALMODE then
+						for FilterName, _ in pairs(filtergrades) do
+							if !enabled_grades[FilterName] and FilterName == s2.WepTable.SubCatTier then
+								return true
+							end
+						end
+					end
 					for FilterName, FilterData in pairs(filtergroups) do
 						for _, ToFilter in ipairs(FilterData.Filters) do
 							if class:Left(#ToFilter) == ToFilter then
@@ -243,7 +254,6 @@ hook.Add("PopulateWeapons", "zzz_TacRP_SubCategories", function(pnlContent, tree
 						end
 					end
 					return false
-					--return (From!="tacrp" and From!="extras")
 				end
 
 				self.Filter_Options = vgui.Create("DButton", self.FilterBar)
@@ -278,13 +288,25 @@ hook.Add("PopulateWeapons", "zzz_TacRP_SubCategories", function(pnlContent, tree
 
 				function self.Filter_Options:DoClick()
 					local Menu = DermaMenu()
-						for i, v in SortedPairsByMemberValue(filtergroups, "SortOrder") do
-							local opt = Menu:AddOption( v.Name )
+						for filter_id, data in SortedPairsByMemberValue(filtergroups, "SortOrder") do
+							local opt = Menu:AddOption( data.Name )
 							opt:SetIsCheckable(true)
-							opt.m_bChecked = (enabled[i] or false)
+							opt.m_bChecked = (enabled[filter_id] or false)
 							function opt:OnChecked( value )
-								enabled[i] = value
+								enabled[filter_id] = value
 								UpdateAll()
+							end
+						end
+						if !SPECIALMODE then
+							Menu:AddSpacer()
+							for gradename, _ in SortedPairs(filtergrades) do
+								local opt = Menu:AddOption( gradename:Right(-2) )
+								opt:SetIsCheckable(true)
+								opt.m_bChecked = (enabled_grades[gradename] or false)
+								function opt:OnChecked( value )
+									enabled_grades[gradename] = value
+									UpdateAll()
+								end
 							end
 						end
 						Menu:AddSpacer()
