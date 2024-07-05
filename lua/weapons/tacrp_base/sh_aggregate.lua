@@ -691,6 +691,7 @@ SWEP.StatDisplay = {
         Name = "stat.rpm",
         Description = "stat.rpm.desc",
         Value = "RPM",
+        Unit = "rpm",
         AggregateFunction = function(self, base, val)
             return math.Round(val, 0)
         end,
@@ -699,6 +700,7 @@ SWEP.StatDisplay = {
         Name = "stat.rpm_burst",
         Description = "stat.rpm_burst.desc",
         Value = "RPMMultBurst",
+        Unit = "rpm",
         AggregateFunction = function(self, base, val)
             if !self:HasFiremode(-1) then return end
             local valfunc = base and self.GetBaseValue or self.GetValue
@@ -710,6 +712,7 @@ SWEP.StatDisplay = {
         Name = "stat.rpm_burst_peak",
         Description = "stat.rpm_burst_peak.desc",
         Value = "PostBurstDelay",
+        Unit = "rpm",
         AggregateFunction = function(self, base, val)
             if !self:HasFiremode(-1) then return end
             local valfunc = base and self.GetBaseValue or self.GetValue
@@ -728,6 +731,7 @@ SWEP.StatDisplay = {
         Name = "stat.rpm_semi",
         Description = "stat.rpm_semi.desc",
         Value = "RPMMultSemi",
+        Unit = "rpm",
         AggregateFunction = function(self, base, val)
             if !self:HasFiremode(1) then return end
             local valfunc = base and self.GetBaseValue or self.GetValue
@@ -859,7 +863,7 @@ SWEP.StatDisplay = {
         Name = "stat.spread",
         Description = "stat.spread.desc",
         AggregateFunction = function(self, base, val)
-            return math.Round(math.deg(val) * 60, 2)
+            return math.Round(math.deg(val) * 60, 1)
         end,
         Unit = "′",
         Value = "Spread",
@@ -1148,6 +1152,7 @@ SWEP.StatDisplay = {
         Name = "spacer.sway",
         Description = "spacer.sway.desc",
         Spacer = true,
+        ConVarCheck = "tacrp_sway",
     },
     {
         Name = "stat.sway",
