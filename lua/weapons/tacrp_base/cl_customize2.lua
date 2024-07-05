@@ -416,14 +416,6 @@ local pages = {
 					bump = bump + tall + s(4)
 				end
 			end
-		end,
-		Paint = function( self, w, h, c )
-		end,
-	},
-	{
-		Name = "Statistics",
-		Initialize = function( page, par, c )
-			local s = c.s
 
 			local p_right = page:Add( "DPanel" )
 			p_right:SetTall( par:GetTall() )
@@ -509,12 +501,18 @@ local pages = {
 							qd( s, cache[2], "TacRP_C2_14", s(4+4+8), s(4), col )
 							
 							if cache[3] then -- Good Or Bad Change
-								surface.SetFont("TacRP_C2_14")
-								local tns = surface.GetTextSize(cache[2])
-								qd( s, "(" .. cache[5] .. ")", "TacRP_C2_10", s(4+4+8+2)+tns, s(6.5), col )
-								local bleh = s(4+4+8+2)+tns
-								local tns = surface.GetTextSize("(" .. cache[5] .. ")")
-								qd( s, cache[1], "TacRP_C2_10", bleh+s(2)+tns, s(6.5), dCol )
+								if cache[5] then
+									surface.SetFont("TacRP_C2_14")
+									local tns = surface.GetTextSize(cache[2])
+									qd( s, "(" .. cache[5] .. ")", "TacRP_C2_10", s(4+4+8+2)+tns, s(6.5), col )
+									local bleh = s(4+4+8+2)+tns
+									local tns = surface.GetTextSize("(" .. cache[5] .. ")")
+									qd( s, cache[1], "TacRP_C2_10", bleh+s(2)+tns, s(6.5), dCol )
+								else
+									surface.SetFont("TacRP_C2_14")
+									local tns = surface.GetTextSize(cache[2])
+									qd( s, cache[1], "TacRP_C2_10", s(4+4+8+2)+tns, s(6.5), dCol )
+								end
 							end
 						else
 							qd( s, cache[1], "TacRP_C2_14", s(4+4+8), s(4), color_white )
@@ -523,11 +521,20 @@ local pages = {
 					return
 				end
 			end
+
 		end,
-		Paint = function( page, w, h, c )
-			local s = c.s
+		Paint = function( self, w, h, c )
 		end,
 	},
+	--{
+	--	Name = "Statistics",
+	--	Initialize = function( page, par, c )
+	--		local s = c.s
+	--	end,
+	--	Paint = function( page, w, h, c )
+	--		local s = c.s
+	--	end,
+	--},
 	{
 		Name = "Information",
 		Initialize = function( page, par, c )
@@ -753,8 +760,8 @@ local pages = {
 
 local uio = Material( "uio/shadow.png", "" )
 
-local c2_Currentpage = 2
-local c2_Desire = 2
+local c2_Currentpage = 1
+local c2_Desire = 1
 
 function SWEP:C2_Open()
 	if IsValid( c2 ) then c2:Remove() end
