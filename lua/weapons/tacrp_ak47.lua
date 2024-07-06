@@ -197,14 +197,14 @@ SWEP.EjectEffect = 2
 // anims
 
 SWEP.AnimationTranslationTable = {
-    ["deploy"] = "deploy",
     ["fire_iron"] = "fire1_M",
+    ["deploy"] = "deploy",
     ["fire1"] = "fire1_M",
     ["fire2"] = "fire2_M",
     ["fire3"] = "fire3_M",
-    ["fire4"] = {"fire4_M", "fire4_L", "fire4_R"},
-    ["melee"] = {"melee1", "melee2"},
-    ["jam"] = "mid_reload"
+    ["fire4"] = "fire4_M",
+    ["fire5"] = {"fire5_M", "fire5_L", "fire5_R"},
+    ["melee"] = {"melee1", "melee2"}
 }
 
 // attachments

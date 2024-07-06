@@ -110,13 +110,17 @@ SWEP.Spread = 0.003
 SWEP.ClipSize = 10
 SWEP.Ammo = "ar2"
 
+SWEP.SightAng = Angle(-0.265, -0.55, -1)
+SWEP.SightPos = Vector(-4.475, -7.5, -3.2)
+
 SWEP.AnimationTranslationTable = {
     ["fire_iron"] = "fire1_M",
     ["deploy"] = "deploy",
     ["fire1"] = "fire1_M",
     ["fire2"] = "fire2_M",
     ["fire3"] = "fire3_M",
-    ["fire4"] = {"fire4_M", "fire4_L", "fire4_R"},
+    ["fire4"] = "fire4_M",
+    ["fire5"] = {"fire5_M", "fire5_L", "fire5_R"},
     ["melee"] = {"melee1", "melee2"}
 }
 
@@ -226,7 +230,7 @@ SWEP.Attachments = {
     },
     [6] = {
         PrintName = "Trigger",
-        Category = {"trigger_auto"},
+        Category = {"trigger_semi"},
         AttachSound = "TacRP/weapons/flashlight_on.wav",
         DetachSound = "TacRP/weapons/flashlight_off.wav",
     },
