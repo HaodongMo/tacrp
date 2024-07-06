@@ -11,7 +11,7 @@ SWEP.Category = "Tactical RP"
 SWEP.SubCatTier = "3Security"
 SWEP.SubCatType = "5Sporter"
 
-SWEP.Description = "American semi-automatic AK pattern rifle, customized with an AR-15 style stock and Hungarian handguard. The magazine is a 10-rounder for the sake of public safety."
+SWEP.Description = "American semi-automatic AK pattern rifle, customized with an AR-15 style stock and Hungarian handguard. In the interest of public safety, the magazine is limited to 10 rounds."
 
 SWEP.Trivia_Caliber = "7.62x39mm"
 SWEP.Trivia_Manufacturer = "Arsenal Inc"
@@ -21,7 +21,7 @@ SWEP.Faction = TacRP.FACTION_MILITIA
 SWEP.Credits = "Assets: Tactical Intervention"
 
 SWEP.ViewModel = "models/weapons/tacint/v_civ_amd65.mdl"
-SWEP.WorldModel = "models/weapons/tacint/w_amd65.mdl"
+SWEP.WorldModel = "models/weapons/tacint/w_civ_amd65.mdl"
 
 SWEP.Slot = 2
 
@@ -32,6 +32,7 @@ SWEP.BalanceStats = {
         Range_Min = 800,
         Range_Max = 3200,
         ArmorPenetration = 0.675,
+        Spread = 0.002,
 
         RecoilKick = 7.5,
 
@@ -105,7 +106,7 @@ SWEP.Firemodes = false
 SWEP.RPM = 600
 SWEP.RPMMultSemi = 300 / 600
 
-SWEP.Spread = 0.003
+SWEP.Spread = 0.005
 
 SWEP.ClipSize = 10
 SWEP.Ammo = "ar2"
@@ -123,6 +124,8 @@ SWEP.AnimationTranslationTable = {
     ["fire5"] = {"fire5_M", "fire5_L", "fire5_R"},
     ["melee"] = {"melee1", "melee2"}
 }
+
+SWEP.DropMagazineModel = "models/weapons/tacint/magazines/amd65_civ.mdl"
 
 // attachments
 
@@ -199,7 +202,7 @@ SWEP.Attachments = {
         AttachSound = "TacRP/weapons/silencer_on.wav",
         DetachSound = "TacRP/weapons/silencer_off.wav",
         Pos_VM = Vector(-2.65, 0.25, 26.75),
-        Pos_WM = Vector(0, 24.5, -1.25),
+        Pos_WM = Vector(0, 25.5, -1.25),
         Ang_VM = Angle(90, 0, 0),
         Ang_WM = Angle(0, -90, 0),
     },
