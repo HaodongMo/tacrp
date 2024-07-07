@@ -205,6 +205,8 @@ L["stat.peekpenalty"] = "半瞄准效率"
 L["stat.peekpenalty.desc"] = "半瞄准时附加的腰射散射和摇晃强弱。"
 L["stat.quickscope"] = "快瞄散射"
 L["stat.quickscope.desc"] = "切换瞄准时的临时散射\n散射在 0.2 瞄内逐渐消失。"
+L["stat.damagemultnpc"] = "NPC 伤害倍率"
+L["stat.damagemultnpc.desc"] = "武器对非玩家角色的伤害倍率（不包括近战）。"
 
 -- not in stats page but attachments may use
 L["stat.swaycrouch"] = "蹲伏扩散"

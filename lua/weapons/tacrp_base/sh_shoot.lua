@@ -483,6 +483,10 @@ function SWEP:AfterShotFunction(tr, dmg, range, penleft, alreadypenned, forced)
             dmg:ScaleDamage(bodydamage[tr.HitGroup])
         end
 
+        if tr.Entity:IsNextBot() or tr.Entity:IsNPC() then
+            dmg:ScaleDamage(self:GetValue("DamageMultNPC"))
+        end
+
         TacRP.CancelBodyDamage(tr.Entity, dmg, tr.HitGroup)
 
         local matpen = self:GetValue("Penetration")

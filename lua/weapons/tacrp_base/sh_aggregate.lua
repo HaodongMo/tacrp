@@ -593,6 +593,16 @@ SWEP.StatDisplay = {
         end,
     },
     {
+        Name = "stat.damagemultnpc",
+        Description = "stat.damagemultnpc.desc",
+        Value = "DamageMultNPC",
+        DefaultValue = 1,
+        AggregateFunction = function(self, base, val)
+            return math.Round(val * 100, 1)
+        end,
+        Unit = "%",
+    },
+    {
         Name = "stat.num",
         Description = "stat.num.desc",
         Value = "Num",

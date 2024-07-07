@@ -47,6 +47,7 @@ SWEP.Penetration = 0 // units of metal this weapon can penetrate
 SWEP.ArmorPenetration = 0.5 // How good the weapon can penetrate body armor.
 SWEP.ArmorBonus = 1 // multiplier on armor damage
 
+SWEP.DamageMultNPC = 1 // Damage multiplier against NPCs and Nextbots
 SWEP.DamageType = nil // override damage type
 
 SWEP.ShootEnt = false

@@ -274,7 +274,8 @@ L["stat.quickscope"] = "Quickscope Penalty"
 L["stat.quickscope.desc"] = "Amount of inaccuracy applied while switching in and out of aiming.\nPenalty fades away over 0.2 seconds."
 L["stat.vol_shoot"] = "Loudness"
 L["stat.vol_shoot.desc"] = "How audible the weapon's firing sound is."
-
+L["stat.damagemultnpc"] = "NPC Damage"
+L["stat.damagemultnpc.desc"] = "Non-melee damage against NPCs and Nextbots is multiplied by this value."
 
 -- not in stats page but attachments may use
 L["stat.swaycrouch"] = "Crouched Sway"
