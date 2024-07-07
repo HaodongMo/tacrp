@@ -47,23 +47,25 @@ local ammotypes = {
     },
 }
 
-local expanded = TacRP.ConVars["expandedammotypes"]:GetBool()
-for k, v in SortedPairs(ammotypes) do
-    if v.expanded and not expanded then continue end
-    local maxcvar = v.max
-    if isnumber(v.max) then
-        maxcvar = "sk_max_" .. k
-        CreateConVar(maxcvar, v.max, FCVAR_REPLICATED + FCVAR_ARCHIVE)
-    end
-    game.AddAmmoType({
-        name = k,
-        maxcarry = maxcvar
-    })
+hook.Add("Initialize", "tacrp_ammo", function()
+    local expanded = TacRP.ConVars["expandedammotypes"]:GetBool()
+    for k, v in SortedPairs(ammotypes) do
+        if v.expanded and not expanded then continue end
+        local maxcvar = v.max
+        if isnumber(v.max) then
+            maxcvar = "sk_max_" .. k
+            CreateConVar(maxcvar, v.max, FCVAR_REPLICATED + FCVAR_ARCHIVE)
+        end
+        game.AddAmmoType({
+            name = k,
+            maxcarry = maxcvar
+        })
 
-    if CLIENT then
-        language.Add(k .. "_ammo", TacRP:GetPhrase("ammo." .. k) or k)
+        if CLIENT then
+            language.Add(k .. "_ammo", TacRP:GetPhrase("ammo." .. k) or k)
+        end
     end
-end
+end)
 
 
 local materials = {
