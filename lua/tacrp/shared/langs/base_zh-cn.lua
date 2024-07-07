@@ -2,7 +2,7 @@ L = {}
 
 L["font.1"] = "Microsoft YaHei"
 
-L["tier.1"] = "民用"
+L["tier.1"] = "零售"
 L["tier.2"] = "警备"
 L["tier.3"] = "特遣"
 L["tier.4"] = "精英"
@@ -17,7 +17,7 @@ L["type.submachine_gun"] = "冲锋枪"
 L["type.assault_rifle"] = "突击步枪"
 L["type.machine_gun"] = "机枪"
 L["type.shotgun"] = "霰弹枪"
-L["type.sporter_carbine"] = "枪"
+L["type.sporter_carbine"] = "民用枪械"
 L["type.precision_rifle"] = "精准步枪"
 L["type.battle_rifle"] = "战斗步枪"
 L["type.dmr"] = "射手步枪"
