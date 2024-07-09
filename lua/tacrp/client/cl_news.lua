@@ -905,6 +905,55 @@ The third major expansion pack featuring 38 weapons of all kinds.
 </ul>
 ]],
     },
+    {
+        Title = "Update 23",
+        Type = "Patch Notes",
+        Date = "2024-07-09",
+        Author = "8Z",
+        Major = false,
+        Summary = "Civvie guns and balance tweaks.",
+        Contents = [[<body style="font-family:'Myriad Pro';color:white;font-size:125%;">
+
+<h2>Citizens aren't supposed to - wait we did this joke already.</h2>
+<p>Some sporter weapons join the gang, including two returning members.</p>
+
+The <b>Arsenal SAM7SF</b> is a new addition, kitbashed by Arctic and based on the AMD-65.<br>
+The <b>Diemaco AR-15</b> and <b>HK HK243</b> got a facelift by Fesiug and is now available in the spawnmenu again.<br>
+Additionally, a civilian/non-lethal version of the M320 has been added. Use it to fire beanbags at people.<br>
+
+<h2>DEMOTION</h2>
+<p>Some guns have lowered grades to better round out representation across all the tiers.
+Notably, some weapons in the base pack are now Value grade, a new lowest grade that was previously only in expansion weapons.</p>
+
+<h3>Changelist</h3>
+<ul>
+<li><b>Major Addition:</b> New Weapon: Arsenal SAM7SF (Sporter AK/AMD), Diemaco AR-15, HK HK243, HK M320LE.
+<li><b>Added:</b> RPG-7 Shovel ammo.
+<li><b>Added:</b> Thirdperson holstering animation.
+<li><b>Added:</b> Grenade ammo entities will give their respective weapons on pickup.
+<li><b>Added:</b> Expanded Ammo Types option for a spicier ammo economy (ammo entities not included).
+<li><b>Changed:</b> Minor cosmetic and compression improvements to some weapon textures.
+<li><b>Changed:</b> Thrown melee projectiles will now disappear when hitting skybox.
+<li><b>Fixed:</b> Various DarkRP spawned_weapon related interactions.
+<li><b>Fixed:</b> Quirky networking bug.
+<li><b>Rebalance:</b> MAC-10 -> MAC-11 (smaller caliber), and is now Value grade.
+<li><b>Rebalance:</b> Mini-14 is now Value grade.
+<li><b>Rebalance:</b> HK UMP45 is now Consumer grade.
+<li><b>Rebalance:</b> Buffed Heavy Bolt, Weighted Trigger, Tactical Bolt, Block.
+<li><b>Rebalance:</b> Ninja will now consume full meter on divekick.
+</ul>
+
+<h3>Expansion Changelist</h3>
+<ul>
+<li><b>Major Addition:</b> (Heavy Duty) New Weapon: HK HK21E.
+<li><b>Changed:</b> Some melee weapons now use Lazarus's two-handed animations.
+<li><b>Fixed:</b> Rhino 20DS being too shiny.
+<li><b>Rebalance:</b> AR70, FAL, LR-300, FNC and MX4 are now Consumer tier.
+<li><b>Rebalance:</b> Groza is now Security tier.
+<li><b>Rebalance:</b> Nerfed M16A1 and Thompson.
+</ul>
+]],
+    },
 }
 TacRP.NewsRead = TacRP.NewsRead or {}
 TacRP.NewsFirstLoad = false

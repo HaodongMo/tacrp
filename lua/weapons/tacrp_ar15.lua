@@ -11,11 +11,13 @@ SWEP.Category = "Tactical RP"
 SWEP.SubCatTier = "4Consumer"
 SWEP.SubCatType = "5Sporter"
 
-SWEP.Description = "Customized semi-automatic model of an ubiquitous American rifle."
+SWEP.Description = "Customized semi-automatic model of an ubiquitous American rifle. Uses reduced capacity magazines."
 SWEP.Description_Quote = "\"Weapons of war do not belong on our streets!\""
 
 SWEP.ViewModel = "models/weapons/tacint/v_ar15.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_m4.mdl"
+
+SWEP.Credits = "Assets: Tactical Intervention\nModel Edit: Fesiug"
 
 SWEP.Slot = 2
 

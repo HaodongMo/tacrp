@@ -1294,7 +1294,6 @@ SWEP.StatGroupsMelee = {
         end,
     },
 }
--- self:GetHeavyAttackDamage()
 
 SWEP.StatDisplayMelee = {
     {

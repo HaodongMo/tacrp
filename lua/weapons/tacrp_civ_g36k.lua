@@ -16,6 +16,8 @@ SWEP.Description = "Customized semi-automatic model of an iconic polymer rifle.\
 SWEP.ViewModel = "models/weapons/tacint/v_hk243.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_g36k.mdl"
 
+SWEP.Credits = "Assets: Tactical Intervention\nModel Edit: Fesiug"
+
 SWEP.Slot = 2
 
 SWEP.BalanceStats = {

@@ -18,7 +18,7 @@ SWEP.Trivia_Manufacturer = "Arsenal Inc"
 SWEP.Trivia_Year = "1998"
 
 SWEP.Faction = TacRP.FACTION_MILITIA
-SWEP.Credits = "Assets: Tactical Intervention"
+SWEP.Credits = "Assets: Tactical Intervention\nModel Edit: Arctic"
 
 SWEP.ViewModel = "models/weapons/tacint/v_civ_amd65.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_civ_amd65.mdl"
