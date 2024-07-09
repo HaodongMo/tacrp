@@ -3,7 +3,7 @@ ATT.FullName = "High Guard"
 
 ATT.Icon = Material("entities/tacrp_att_melee_tech_block.png", "mips smooth")
 ATT.Description = "Defense is the best offense. It is, coinicidently, also the best defense."
-ATT.Pros = {"ALT-FIRE: Block melee attacks or projectiles", "Gain disarming counter-attack on block"}
+ATT.Pros = {"ALT-FIRE: Block melee attacks or projectiles", "Heavy Counterattack after blocking a hit"}
 
 ATT.Category = {"melee_tech"}
 
@@ -11,11 +11,14 @@ ATT.SortOrder = 2
 
 ATT.MeleeBlock = true
 
+ATT.HeavyAttack = true
+
 local function hold(wep)
     return wep:GetOwner():KeyDown(IN_ATTACK2)
             and wep:GetHoldBreathAmount() > 0
             and wep:GetNextSecondaryFire() < CurTime()
 end
+
 
 --[[]
 ATT.Hook_SecondaryAttack = function(wep)
@@ -39,6 +42,7 @@ end
 
 ATT.Hook_PreShoot = function(wep)
     if wep:GetNWFloat("TacRPKnifeCounter", 0) > CurTime() then
+        wep:EmitSound("common/warning.wav", 70, 120, 1, CHAN_AUTO)
         -- wep:SetHoldBreathAmount(math.max(0, wep:GetHoldBreathAmount() - 0.5))
         wep:Melee(true)
         wep:SetOutOfBreath(false)
@@ -57,7 +61,7 @@ ATT.Hook_PostThink = function(wep)
 
 
     if !wep:GetOutOfBreath() then
-        if canhold and wep:GetHoldBreathAmount() > 0.1 then
+        if canhold and wep:GetHoldBreathAmount() > 0.05 then
             -- wep:SetHoldBreathAmount(wep:GetHoldBreathAmount() - 0.1)
             wep:SetOutOfBreath(true)
             wep:SetHoldingBreath(false)
@@ -65,16 +69,20 @@ ATT.Hook_PostThink = function(wep)
             wep:PlayAnimation("idle_defend", 1)
             wep:SetHoldType("magic")
         else
-            wep:SetHoldBreathAmount(math.min(1, wep:GetHoldBreathAmount() + FrameTime() * Lerp(wep:GetValue("MeleePerkInt"), 0.1, 0.5)))
+            wep:SetHoldBreathAmount(math.min(1, wep:GetHoldBreathAmount() + FrameTime() * Lerp(wep:GetValue("MeleePerkInt"), 0.075, 0.2)))
         end
     else
         if !canhold then
-                wep:SetOutOfBreath(false)
+            wep:SetOutOfBreath(false)
             wep:SetNextIdle(CurTime())
             wep:SetShouldHoldType()
-            wep:SetNextSecondaryFire(CurTime() + 0.1)
+            if wep:GetNWFloat("TacRPKnifeCounter", 0) < CurTime() then
+                wep:SetNextSecondaryFire(CurTime() + 0.5)
+            else
+                wep:SetNextSecondaryFire(CurTime() + 0.15)
+            end
         else
-            wep:SetHoldBreathAmount(math.max(0, wep:GetHoldBreathAmount() - FrameTime() * Lerp(wep:GetValue("MeleePerkStr"), 0.6, 0.2)))
+            wep:SetHoldBreathAmount(math.max(0, wep:GetHoldBreathAmount() - FrameTime() * 0.1))
         end
     end
 
@@ -138,6 +146,8 @@ hook.Add("EntityTakeDamage", "TacRP_Block", function(ent, dmginfo)
         return
     end
 
+    wep:SetHoldBreathAmount(wep:GetHoldBreathAmount() - math.Clamp(0.05 + dmginfo:GetDamage() / (wep:GetValue("MeleeDamage") * 2), 0.1, 0.5))
+
     local ang = ent:EyeAngles()
     local fx = EffectData()
     fx:SetOrigin(ent:EyePos())
@@ -152,8 +162,7 @@ hook.Add("EntityTakeDamage", "TacRP_Block", function(ent, dmginfo)
     ent:EmitSound("physics/metal/metal_solid_impact_hard5.wav", 90, math.Rand(105, 110))
     ent:ViewPunch(AngleRand(-1, 1) * (dmginfo:GetDamage() ^ 0.5))
 
-    -- wep:SetNextSecondaryFire(CurTime())
-    wep:SetNWFloat("TacRPKnifeCounter", CurTime() + 1)
+    wep:SetNWFloat("TacRPKnifeCounter", CurTime() + 0.6)
 
     -- wep:KillTimer("BlockReset")
     -- wep:SetNWFloat("TacRPNextBlock", CurTime() + 0.75)
@@ -174,9 +183,16 @@ hook.Add("EntityTakeDamage", "TacRP_Block", function(ent, dmginfo)
         end
     end)
 
+    if wep:GetHoldBreathAmount() <= 0 then
+        ent:SetActiveWeapon(NULL)
+        ent:DropWeapon(wep, dmginfo:GetAttacker():GetPos())
+        ent:EmitSound("physics/metal/metal_box_break1.wav", 80, 110)
+    end
+
     return true
 end)
 
+--[[
 hook.Add("EntityTakeDamage", "TacRP_Counter", function(ent, dmginfo)
     if !IsValid(dmginfo:GetAttacker()) or !dmginfo:GetAttacker():IsPlayer() then return end
     local wep = dmginfo:GetAttacker():GetActiveWeapon()
@@ -225,6 +241,7 @@ hook.Add("EntityTakeDamage", "TacRP_Counter", function(ent, dmginfo)
         ent:DropWeapon(dropwep, dmginfo:GetAttacker():GetPos())
     end
 end)
+]]
 
 ATT.Hook_GetHintCapabilities = function(self, tbl)
     tbl["+attack2"] = {so = 0.1, str = "Block"}
