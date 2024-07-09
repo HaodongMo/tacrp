@@ -750,7 +750,7 @@ ATT.PrintName = "Improvised"
 ATT.FullName = "RPG-7 Improvised Warhead"
 ATT.Icon = Material("entities/tacrp_att_ammo_rpg_improvised.png", "mips smooth")
 ATT.Description = "Straight from the bargain bin."
-ATT.Pros = {"att.procon.nosafety", "rating.mobility"}
+ATT.Pros = {"att.procon.refund", "att.procon.nosafety", "rating.mobility"}
 ATT.Cons = {"att.procon.projrng", "att.procon.failrng"}
 
 ATT.Category = "ammo_rpg"
@@ -765,6 +765,13 @@ ATT.Override_ShootEntForce = 0
 
 if engine.ActiveGamemode() == "terrortown" then
     ATT.Free = true
+end
+
+ATT.Hook_PostShootEnt = function(wep)
+    if CLIENT then return end
+    if wep:GetOwner():IsPlayer() and !wep:GetInfiniteAmmo() and math.random() <= 0.3 then
+        wep:GetOwner():GiveAmmo(math.random(1, wep:GetValue("AmmoPerShot")), wep:GetPrimaryAmmoType(), true)
+    end
 end
 
 TacRP.LoadAtt(ATT, "ammo_rpg_improvised")
