@@ -82,7 +82,7 @@ ATT.Hook_PostThink = function(wep)
                 wep:SetNextSecondaryFire(CurTime() + 0.15)
             end
         else
-            wep:SetHoldBreathAmount(math.max(0, wep:GetHoldBreathAmount() - FrameTime() * 0.1))
+            wep:SetHoldBreathAmount(math.max(0, wep:GetHoldBreathAmount() - FrameTime() * 0.25))
         end
     end
 

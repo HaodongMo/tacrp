@@ -288,6 +288,7 @@ L["att.procon.firstround"] = "首发射出非致命破门弹头"
 L["att.procon.locktime"] = "锁定时间"
 L["att.procon.semiactive"] = "需要保持锁定"
 L["att.procon.maneuverability"] = "飞弹机动性"
+L["att.procon.shovel"] = "发射铲子"
 
 L["att.sight.1"] = "1倍缩放"
 L["att.sight.1.25"] = "1.25倍缩放"

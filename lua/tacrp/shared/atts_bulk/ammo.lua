@@ -830,26 +830,34 @@ TacRP.LoadAtt(ATT, "ammo_rpg_ratshot")
 ------------------------------
 ATT = {}
 
-ATT.PrintName = "Harpoon"
-ATT.FullName = "RPG-7 Harpoon Warhead"
+ATT.PrintName = "Shovel"
+ATT.FullName = "RPG-7 Shovel Warhead"
 ATT.Icon = Material("entities/tacrp_att_ammo_rpg_improvised.png", "mips smooth")
-ATT.Description = "Shoot a spectacular but non-explosive flaming harpoon to impale targets."
-ATT.Pros = {"att.procon.incendiary", "rating.mobility", "stat.spread", "stat.reloadtime"}
-ATT.Cons = {"att.procon.noexp"}
+ATT.Description = "Fire shovels, somehow. Either you're crazy, out of rockets, or both."
+ATT.Pros = {"att.procon.shovel"}
+ATT.Cons = {"att.procon.shovel"}
 
 ATT.Category = "ammo_rpg"
+ATT.Free = true
 
-ATT.SortOrder = 1
+ATT.SortOrder = 9
 
-ATT.Mult_Spread = 0.5
 ATT.Mult_HipFireSpreadPenalty = 0.5
 
 ATT.Override_ShootEnt = "tacrp_proj_rpg7_harpoon"
 ATT.Add_ShootingSpeedMult = 0.3
 ATT.Add_ReloadSpeedMult = 0.15
-ATT.Mult_ShootEntForce = 1.3
+
+ATT.Add_RPM = 60
+
+ATT.ReloadTimeMult = 0.9
+
+ATT.Mult_ShootEntForce = 0.85
 
 ATT.Override_Sound_Shoot = "weapons/crossbow/fire1.wav"
+
+ATT.Override_DefaultBodygroups = "02"
+ATT.Override_DefaultWMBodygroups = "02"
 
 ATT.Ammo = "xbowbolt"
 
