@@ -371,6 +371,7 @@ L["att.procon.locktime"] = "Lock-on time"
 L["att.procon.semiactive"] = "Constant guidance required"
 L["att.procon.maneuverability"] = "Missile Maneuverability"
 L["att.procon.shovel"] = "Shoots shovels"
+L["att.procon.heal"] = "Healing effect"
 
 L["att.sight.1"] = "1x Sight"
 L["att.sight.1.25"] = "1.25x Sight"

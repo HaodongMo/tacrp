@@ -281,6 +281,34 @@ TacRP.LoadAtt(ATT, "ammo_40mm_smoke")
 -- #endregion
 
 ------------------------------
+-- #region ammo_40mm_heal
+------------------------------
+ATT = {}
+
+ATT.PrintName = "Medi-Smoke"
+ATT.FullName = "40mm Medi-Smoke Grenades"
+
+ATT.Icon = Material("entities/tacrp_att_ammo_40mm_smoke.png", "mips smooth")
+ATT.Description = "Grenade that produces a cloud of restorative gas on impact."
+ATT.Pros = {"att.procon.heal"}
+ATT.Cons = {"att.procon.noexp"}
+
+ATT.Category = {"ammo_40mm", "ammo_40mm_civ"}
+
+ATT.SortOrder = 4.1
+
+ATT.ShootEnt = "tacrp_proj_40mm_heal"
+
+ATT.InstalledElements = {"smoke"}
+
+if engine.ActiveGamemode() == "terrortown" then
+    ATT.Free = true
+end
+
+TacRP.LoadAtt(ATT, "ammo_40mm_heal")
+-- #endregion
+
+------------------------------
 -- #region ammo_amr_hv
 ------------------------------
 ATT = {}
