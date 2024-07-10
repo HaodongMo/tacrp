@@ -103,7 +103,7 @@ ATT = {}
 
 ATT.PrintName = "Holographic"
 ATT.Icon = Material("entities/tacrp_att_optic_holographic.png", "mips smooth")
-ATT.Description = "Boxy optic that helps to improve mid-range aim."
+ATT.Description = "Boxy optic to assist aiming at close range."
 ATT.Pros = {"att.sight.1.5"}
 
 ATT.Model = "models/weapons/tacint/addons/holosight_hq.mdl"
@@ -268,7 +268,7 @@ ATT = {}
 
 ATT.PrintName = "Aimpoint"
 ATT.Icon = Material("entities/tacrp_att_optic_rds.png", "mips smooth")
-ATT.Description = "Tube optic that helps to improve mid-range aim."
+ATT.Description = "Tube optic to assist aiming at close range."
 ATT.Pros = {"att.sight.1.75"}
 
 ATT.Model = "models/weapons/tacint/addons/reddot_hq.mdl"
