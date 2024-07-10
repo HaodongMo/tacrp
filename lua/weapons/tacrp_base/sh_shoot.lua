@@ -535,7 +535,8 @@ function SWEP:AfterShotFunction(tr, dmg, range, penleft, alreadypenned, forced)
         fx:SetNormal(tr.HitNormal)
 
         if bit.band(util.PointContents(tr.HitPos), CONTENTS_WATER) == CONTENTS_WATER then
-            util.Effect("WaterSurfaceExplosion", fx, true)
+            fx:SetScale(5)
+            util.Effect("WaterSplash", fx, true)
         else
             util.Effect(self:GetValue("ExplosiveEffect"), fx, true)
         end
