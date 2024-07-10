@@ -25,6 +25,16 @@ function SWEP:SprintLock(shoot)
     return false
 end
 
+local function anglerotate(main, off)
+    local forward, up, right = main:Forward(), main:Up(), main:Right()
+
+    main:RotateAroundAxis(right, off.p)
+    main:RotateAroundAxis(up, off.y)
+    main:RotateAroundAxis(forward, off.r)
+
+    return main
+end
+
 function SWEP:PrimaryAttack()
     if self:GetOwner():IsNPC() then
         self:NPC_PrimaryAttack()
@@ -269,12 +279,15 @@ function SWEP:PrimaryAttack()
                 local new_dir = Angle(dir)
                 if fixed_spread then
                     local sgp_x, sgp_y = self:GetShotgunPattern(i, d)
-                    new_dir:Add(Angle(sgp_x, sgp_y, 0) * 36 * 1.4142135623730)
+                    // new_dir:Add(Angle(sgp_x, sgp_y, 0) * 36 * 1.4142135623730)
+                    new_dir = anglerotate(new_dir, Angle(sgp_x, sgp_y, 0) * 36 * 1.4142135623730)
                     if pellet_spread then
-                        new_dir:Add(self:RandomSpread(self:GetValue("ShotgunPelletSpread"), i))
+                        // new_dir:Add(self:RandomSpread(self:GetValue("ShotgunPelletSpread"), i))
+                        new_dir = anglerotate(new_dir, self:RandomSpread(self:GetValue("ShotgunPelletSpread"), i))
                     end
                 else
-                    new_dir:Add(self:RandomSpread(spread, i))
+                    // new_dir:Add(self:RandomSpread(spread, i))
+                    new_dir = anglerotate(new_dir, self:RandomSpread(spread, i))
                 end
 
                 if shootent then
