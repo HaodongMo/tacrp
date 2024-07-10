@@ -908,13 +908,13 @@ The third major expansion pack featuring 38 weapons of all kinds.
     {
         Title = "Update 23",
         Type = "Patch Notes",
-        Date = "2024-07-09",
+        Date = "2024-07-10",
         Author = "8Z",
         Major = false,
         Summary = "Civvie guns and balance tweaks.",
         Contents = [[<body style="font-family:'Myriad Pro';color:white;font-size:125%;">
 
-<h2>Citizens aren't supposed to - wait we did this joke already.</h2>
+<h2>Citizens aren't supposed to have guns... or do they?</h2>
 <p>Some sporter weapons join the gang, including two returning members.</p>
 
 The <b>Arsenal SAM7SF</b> is a new addition, kitbashed by Arctic and based on the AMD-65.<br>
