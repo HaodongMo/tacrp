@@ -1373,7 +1373,7 @@ function SWEP:CreateCustomizeHUD()
         if !self.CustomizeHUD then return end
 
         for i, v in ipairs(TacRP.NewsLoaded) do
-            if !TacRP.NewsRead[v.Key] then
+            if newsbutton and !TacRP.NewsRead[v.Key] then
                 newsbutton.flash = v.Type or "article"
                 break
             end
