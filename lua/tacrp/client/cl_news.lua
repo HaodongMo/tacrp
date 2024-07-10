@@ -925,6 +925,10 @@ Additionally, a civilian/non-lethal version of the M320 has been added. Use it t
 <p>Some guns have lowered grades to better round out representation across all the tiers.
 Notably, some weapons in the base pack are now Value grade, a new lowest grade that was previously only in expansion weapons.</p>
 
+
+<h2>Heavy Machine Gun!</h2>
+<p>The HK21E has been added to Heavy Duty, courtsey of Fesiug's animation work.</p>
+
 <h3>Changelist</h3>
 <ul>
 <li><b>Major Addition:</b> New Weapon: Arsenal SAM7SF (Sporter AK/AMD), Diemaco AR-15, HK HK243, HK M320LE.
@@ -934,6 +938,7 @@ Notably, some weapons in the base pack are now Value grade, a new lowest grade t
 <li><b>Added:</b> Expanded Ammo Types option for a spicier ammo economy (ammo entities not included).
 <li><b>Changed:</b> Minor cosmetic and compression improvements to some weapon textures.
 <li><b>Changed:</b> Thrown melee projectiles will now disappear when hitting skybox.
+<li><b>Fixed:</b> Spread becoming a straight line when aiming very high or very low.
 <li><b>Fixed:</b> Various DarkRP spawned_weapon related interactions.
 <li><b>Fixed:</b> Quirky networking bug.
 <li><b>Rebalance:</b> MAC-10 -> MAC-11 (smaller caliber), and is now Value grade.
