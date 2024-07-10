@@ -41,7 +41,7 @@ function ENT:Detonate()
         Src = self:GetPos(),
         Dir = self:GetForward(),
         HullSize = 0,
-        Distance = 32,
+        Distance = 128,
         IgnoreEntity = self,
         Callback = function(atk, btr, dmginfo)
             dmginfo:SetDamageType(DMG_AIRBOAT + DMG_SNIPER + DMG_BLAST) // airboat damage for helicopters and LVS vehicles
