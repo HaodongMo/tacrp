@@ -925,14 +925,18 @@ Additionally, a civilian/non-lethal version of the M320 has been added. Use it t
 <p>Some guns have lowered grades to better round out representation across all the tiers.
 Notably, some weapons in the base pack are now Value grade, a new lowest grade that was previously only in expansion weapons.</p>
 
-
 <h2>Heavy Machine Gun!</h2>
 <p>The HK21E has been added to Heavy Duty, courtsey of Fesiug's animation work.</p>
+
+<h2>(im)Practical Projectiles</h2>
+<p>The notorious RPG-7 shovel has now become reality. Launch dull working tools at your enemies!</p>
+
+<p>Grenade launchers can also now launch Medi-Smoke grenades.</p>
 
 <h3>Changelist</h3>
 <ul>
 <li><b>Major Addition:</b> New Weapon: Arsenal SAM7SF (Sporter AK/AMD), Diemaco AR-15, HK HK243, HK M320LE.
-<li><b>Added:</b> RPG-7 Shovel ammo.
+<li><b>Added:</b> RPG-7 Shovel ammo, 40mm Medi-Smoke ammo.
 <li><b>Added:</b> Thirdperson holstering animation.
 <li><b>Added:</b> Grenade ammo entities will give their respective weapons on pickup.
 <li><b>Added:</b> Expanded Ammo Types option for a spicier ammo economy (ammo entities not included).
@@ -951,6 +955,7 @@ Notably, some weapons in the base pack are now Value grade, a new lowest grade t
 <h3>Expansion Changelist</h3>
 <ul>
 <li><b>Major Addition:</b> (Heavy Duty) New Weapon: HK HK21E.
+<li><b>Changed:</b> LR-300 remodel, now uses the real handguard.
 <li><b>Changed:</b> Some melee weapons now use Lazarus's two-handed animations.
 <li><b>Fixed:</b> Rhino 20DS being too shiny.
 <li><b>Rebalance:</b> AR70, FAL, LR-300, FNC and MX4 are now Consumer tier.
