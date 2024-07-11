@@ -926,7 +926,7 @@ Additionally, a civilian/non-lethal version of the M320 has been added. Use it t
 Notably, some weapons in the base pack are now Value grade, a new lowest grade that was previously only in expansion weapons.</p>
 
 <h2>Heavy Machine Gun!</h2>
-<p>The HK21E has been added to Heavy Duty, courtsey of Fesiug's animation work.</p>
+<p>The HK21E has been added to Heavy Duty, courtesy of Fesiug's animation work.</p>
 
 <h2>(im)Practical Projectiles</h2>
 <p>The notorious RPG-7 shovel has now become reality. Launch dull working tools at your enemies!</p>
