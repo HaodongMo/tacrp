@@ -206,11 +206,11 @@ SWEP.EjectEffect = 1
 
 SWEP.AnimationTranslationTable = {
     ["fire_iron"] = "fire2_M",
-    ["fire1"] = "fire1_L",
-    ["fire2"] = "fire2_L",
-    ["fire3"] = "fire3_L",
-    ["fire4"] = "fire4_L",
-    ["fire5"] = "fire5_L",
+    ["fire1"] = {"fire1_L", "fire1_M"},
+    ["fire2"] = {"fire2_M", "fire2_R"},
+    ["fire3"] = {"fire3_L", "fire3_M"},
+    ["fire4"] = {"fire4_M", "fire4_R"},
+    ["fire5"] = {"fire5_L", "fire5_M", "fire5_R"},
     ["melee"] = {"melee1", "melee2"}
 }
 
