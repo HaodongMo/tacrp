@@ -12,6 +12,7 @@ SWEP.SubCatTier = "3Security"
 SWEP.SubCatType = "5Sporter"
 
 SWEP.Description = "Customized semi-automatic model of an iconic polymer rifle.\nUses reduced capacity magazines."
+SWEP.Description_Quote = "\"Weapons of war do not belong on our streets!\""
 
 SWEP.ViewModel = "models/weapons/tacint/v_hk243.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_g36k.mdl"
