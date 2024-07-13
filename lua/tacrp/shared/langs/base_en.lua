@@ -274,7 +274,8 @@ L["stat.quickscope"] = "Quickscope Penalty"
 L["stat.quickscope.desc"] = "Amount of inaccuracy applied while switching in and out of aiming.\nPenalty fades away over 0.2 seconds."
 L["stat.vol_shoot"] = "Loudness"
 L["stat.vol_shoot.desc"] = "How audible the weapon's firing sound is."
-
+L["stat.damagemultnpc"] = "NPC Damage"
+L["stat.damagemultnpc.desc"] = "Non-melee damage against NPCs and Nextbots is multiplied by this value."
 
 -- not in stats page but attachments may use
 L["stat.swaycrouch"] = "Crouched Sway"
@@ -369,6 +370,8 @@ L["att.procon.firstround"] = "First shot is a single less-lethal projectile"
 L["att.procon.locktime"] = "Lock-on time"
 L["att.procon.semiactive"] = "Constant guidance required"
 L["att.procon.maneuverability"] = "Missile Maneuverability"
+L["att.procon.shovel"] = "Shoots shovels"
+L["att.procon.heal"] = "Healing effect"
 
 L["att.sight.1"] = "1x Sight"
 L["att.sight.1.25"] = "1.25x Sight"

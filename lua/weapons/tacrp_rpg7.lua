@@ -132,7 +132,7 @@ SWEP.ClipSize = 1
 SWEP.Ammo = "rpg_round"
 
 SWEP.BulletBodygroups = {
-    [1] = {5, 1}
+    [1] = {1, 1}
 }
 
 // sounds

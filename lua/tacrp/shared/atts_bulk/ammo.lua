@@ -281,6 +281,34 @@ TacRP.LoadAtt(ATT, "ammo_40mm_smoke")
 -- #endregion
 
 ------------------------------
+-- #region ammo_40mm_heal
+------------------------------
+ATT = {}
+
+ATT.PrintName = "Medi-Smoke"
+ATT.FullName = "40mm Medi-Smoke Grenades"
+
+ATT.Icon = Material("entities/tacrp_att_ammo_40mm_smoke.png", "mips smooth")
+ATT.Description = "Grenade that produces a cloud of restorative gas on impact."
+ATT.Pros = {"att.procon.heal"}
+ATT.Cons = {"att.procon.noexp"}
+
+ATT.Category = {"ammo_40mm", "ammo_40mm_civ"}
+
+ATT.SortOrder = 4.1
+
+ATT.ShootEnt = "tacrp_proj_40mm_heal"
+
+ATT.InstalledElements = {"smoke"}
+
+if engine.ActiveGamemode() == "terrortown" then
+    ATT.Free = true
+end
+
+TacRP.LoadAtt(ATT, "ammo_40mm_heal")
+-- #endregion
+
+------------------------------
 -- #region ammo_amr_hv
 ------------------------------
 ATT = {}
@@ -750,7 +778,7 @@ ATT.PrintName = "Improvised"
 ATT.FullName = "RPG-7 Improvised Warhead"
 ATT.Icon = Material("entities/tacrp_att_ammo_rpg_improvised.png", "mips smooth")
 ATT.Description = "Straight from the bargain bin."
-ATT.Pros = {"att.procon.nosafety", "rating.mobility"}
+ATT.Pros = {"att.procon.refund", "att.procon.nosafety", "rating.mobility"}
 ATT.Cons = {"att.procon.projrng", "att.procon.failrng"}
 
 ATT.Category = "ammo_rpg"
@@ -765,6 +793,13 @@ ATT.Override_ShootEntForce = 0
 
 if engine.ActiveGamemode() == "terrortown" then
     ATT.Free = true
+end
+
+ATT.Hook_PostShootEnt = function(wep)
+    if CLIENT then return end
+    if wep:GetOwner():IsPlayer() and !wep:GetInfiniteAmmo() and math.random() <= 0.3 then
+        wep:GetOwner():GiveAmmo(math.random(1, wep:GetValue("AmmoPerShot")), wep:GetPrimaryAmmoType(), true)
+    end
 end
 
 TacRP.LoadAtt(ATT, "ammo_rpg_improvised")
@@ -830,26 +865,34 @@ TacRP.LoadAtt(ATT, "ammo_rpg_ratshot")
 ------------------------------
 ATT = {}
 
-ATT.PrintName = "Harpoon"
-ATT.FullName = "RPG-7 Harpoon Warhead"
+ATT.PrintName = "Shovel"
+ATT.FullName = "RPG-7 Shovel Warhead"
 ATT.Icon = Material("entities/tacrp_att_ammo_rpg_improvised.png", "mips smooth")
-ATT.Description = "Shoot a spectacular but non-explosive flaming harpoon to impale targets."
-ATT.Pros = {"att.procon.incendiary", "rating.mobility", "stat.spread", "stat.reloadtime"}
-ATT.Cons = {"att.procon.noexp"}
+ATT.Description = "Fire shovels, somehow. Either you're crazy, out of rockets, or both."
+ATT.Pros = {"att.procon.shovel"}
+ATT.Cons = {"att.procon.shovel"}
 
 ATT.Category = "ammo_rpg"
+ATT.Free = true
 
-ATT.SortOrder = 1
+ATT.SortOrder = 9
 
-ATT.Mult_Spread = 0.5
 ATT.Mult_HipFireSpreadPenalty = 0.5
 
 ATT.Override_ShootEnt = "tacrp_proj_rpg7_harpoon"
 ATT.Add_ShootingSpeedMult = 0.3
 ATT.Add_ReloadSpeedMult = 0.15
-ATT.Mult_ShootEntForce = 1.3
+
+ATT.Add_RPM = 60
+
+ATT.ReloadTimeMult = 0.9
+
+ATT.Mult_ShootEntForce = 0.85
 
 ATT.Override_Sound_Shoot = "weapons/crossbow/fire1.wav"
+
+ATT.Override_DefaultBodygroups = "02"
+ATT.Override_DefaultWMBodygroups = "02"
 
 ATT.Ammo = "xbowbolt"
 

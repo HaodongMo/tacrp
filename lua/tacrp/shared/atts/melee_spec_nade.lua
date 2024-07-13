@@ -3,10 +3,10 @@ ATT.FullName = "Bombardier"
 ATT.Icon = Material("entities/tacrp_att_melee_spec_nade.png", "mips smooth")
 ATT.Description = "Use jury rigged impact grenades to ruin someone's day."
 ATT.Pros = {"RELOAD: Toggle Grenade", "Grenades explode on impact"}
-ATT.Cons = {"Slower Quickthrow", "Grenade Damage"}
+ATT.Cons = {"Grenade Damage"}
 
 ATT.Category = {"melee_spec"}
-ATT.Free = true
+ATT.Free = false
 
 ATT.SortOrder = 4
 

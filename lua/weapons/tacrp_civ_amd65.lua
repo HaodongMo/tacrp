@@ -1,26 +1,27 @@
-SWEP.Base = "tacrp_base"
+SWEP.Base = "tacrp_amd65"
 SWEP.Spawnable = true
 
 AddCSLuaFile()
 
 // names and stuff
-SWEP.PrintName = "AMD-65"
+SWEP.PrintName = "Arsenal SAM7SF"
+SWEP.AbbrevName = "SAM7"
 SWEP.Category = "Tactical RP"
 
 SWEP.SubCatTier = "3Security"
-SWEP.SubCatType = "4Assault Rifle"
+SWEP.SubCatType = "5Sporter"
 
-SWEP.Description = "Hungarian AK clone with integrated grip and wire stock. High damage, but lower range than most rifles."
+SWEP.Description = "American semi-automatic AK pattern rifle, customized with an AR-15 style stock and Hungarian handguard. In the interest of public safety, the magazine is limited to 10 rounds."
 
 SWEP.Trivia_Caliber = "7.62x39mm"
-SWEP.Trivia_Manufacturer = "Fegyver- és Gépgyár"
-SWEP.Trivia_Year = "1965"
+SWEP.Trivia_Manufacturer = "Arsenal Inc"
+SWEP.Trivia_Year = "1998"
 
 SWEP.Faction = TacRP.FACTION_MILITIA
-SWEP.Credits = "Assets: Tactical Intervention"
+SWEP.Credits = "Assets: Tactical Intervention\nModel Edit: Arctic"
 
-SWEP.ViewModel = "models/weapons/tacint/v_amd65.mdl"
-SWEP.WorldModel = "models/weapons/tacint/w_amd65.mdl"
+SWEP.ViewModel = "models/weapons/tacint/v_civ_amd65.mdl"
+SWEP.WorldModel = "models/weapons/tacint/w_civ_amd65.mdl"
 
 SWEP.Slot = 2
 
@@ -31,6 +32,7 @@ SWEP.BalanceStats = {
         Range_Min = 800,
         Range_Max = 3200,
         ArmorPenetration = 0.675,
+        Spread = 0.002,
 
         RecoilKick = 7.5,
 
@@ -98,113 +100,19 @@ SWEP.BodyDamageMultipliers = {
 
 // misc. shooting
 
-SWEP.Firemodes = {
-    2,
-    1
-}
+SWEP.Firemode = 1
+SWEP.Firemodes = false
 
 SWEP.RPM = 600
+SWEP.RPMMultSemi = 300 / 600
 
-SWEP.Spread = 0.006
+SWEP.Spread = 0.005
 
-SWEP.ShootTimeMult = 0.5
-
-SWEP.MuzzleVelocity = 25000
-
-SWEP.RecoilResetInstant = false
-SWEP.RecoilPerShot = 1
-SWEP.RecoilMaximum = 6
-SWEP.RecoilResetTime = 0
-SWEP.RecoilDissipationRate = 24
-SWEP.RecoilFirstShotMult = 1.25
-
-SWEP.RecoilVisualKick = 1.5
-
-SWEP.RecoilKick = 7
-SWEP.RecoilStability = 0.6
-SWEP.RecoilAltMultiplier = 150
-
-SWEP.RecoilSpreadPenalty = 0.0035
-SWEP.HipFireSpreadPenalty = 0.04
-
-SWEP.CanBlindFire = true
-
-// handling
-
-SWEP.MoveSpeedMult = 0.9
-SWEP.ShootingSpeedMult = 0.75
-SWEP.SightedSpeedMult = 0.6
-
-SWEP.ReloadSpeedMult = 0.5
-
-SWEP.AimDownSightsTime = 0.32
-SWEP.SprintToFireTime = 0.38
-
-SWEP.Sway = 1.1
-SWEP.ScopedSway = 0.175
-
-SWEP.FreeAimMaxAngle = 4.5
-
-// hold types
-
-SWEP.HoldType = "smg"
-SWEP.HoldTypeSprint = "passive"
-SWEP.HoldTypeBlindFire = false
-
-SWEP.GestureShoot = ACT_HL2MP_GESTURE_RANGE_ATTACK_AR2
-SWEP.GestureReload = ACT_HL2MP_GESTURE_RELOAD_SMG1
-
-SWEP.PassiveAng = Angle(0, 0, 0)
-SWEP.PassivePos = Vector(0, -2, -5.5)
-
-SWEP.BlindFireAng = Angle(0, 5, 0)
-SWEP.BlindFirePos = Vector(3, -2, -5)
-
-SWEP.SprintAng = Angle(30, -15, 0)
-SWEP.SprintPos = Vector(5, 0, -2)
-
-SWEP.SightAng = Angle(-0.265, -0.5, -1)
-SWEP.SightPos = Vector(-4.475, -7.5, -3.2)
-
-SWEP.CorrectivePos = Vector(0.05, 0, 0.05)
-SWEP.CorrectiveAng = Angle(0.64, 0.1, 0)
-
-SWEP.HolsterVisible = true
-SWEP.HolsterSlot = TacRP.HOLSTER_SLOT_BACK
-SWEP.HolsterPos = Vector(5, 0, -6)
-SWEP.HolsterAng = Angle(0, 0, 0)
-
-SWEP.ClipSize = 30
+SWEP.ClipSize = 10
 SWEP.Ammo = "ar2"
 
-SWEP.ReloadTimeMult = 1
-SWEP.DropMagazineModel = "models/weapons/tacint/magazines/ak47.mdl"
-SWEP.DropMagazineImpact = "metal"
-
-SWEP.ReloadUpInTime = 1.35
-SWEP.DropMagazineTime = 0.45
-
-// sounds
-
-local path = "TacRP/weapons/amd65/"
-
-SWEP.Sound_Shoot = "^" .. path .. "fire-1.wav"
-SWEP.Sound_Shoot_Silenced = "TacRP/weapons/ak47/ak47_fire_silenced-1.wav"
-
-SWEP.Vol_Shoot = 130
-SWEP.ShootPitchVariance = 2.5 // amount to vary pitch by each shot
-
-// effects
-
-// the .qc attachment for the muzzle
-SWEP.QCA_Muzzle = 1
-// ditto for shell
-SWEP.QCA_Eject = 2
-
-SWEP.MuzzleEffect = "muzzleflash_ak47"
-SWEP.EjectEffect = 2
-
-// anims
+SWEP.SightAng = Angle(-0.265, -0.55, -1)
+SWEP.SightPos = Vector(-4.475, -7.5, -3.2)
 
 SWEP.AnimationTranslationTable = {
     ["fire_iron"] = "fire1_M",
@@ -216,6 +124,8 @@ SWEP.AnimationTranslationTable = {
     ["fire5"] = {"fire5_M", "fire5_L", "fire5_R"},
     ["melee"] = {"melee1", "melee2"}
 }
+
+SWEP.DropMagazineModel = "models/weapons/tacint/magazines/amd65_civ.mdl"
 
 // attachments
 
@@ -267,6 +177,7 @@ SWEP.ProceduralIronFire = {
     },
 }
 
+local path = "TacRP/weapons/amd65/"
 
 SWEP.Attachments = {
     [1] = {
@@ -290,8 +201,8 @@ SWEP.Attachments = {
         WMBone = "Box01",
         AttachSound = "TacRP/weapons/silencer_on.wav",
         DetachSound = "TacRP/weapons/silencer_off.wav",
-        Pos_VM = Vector(-2.65, 0.25, 25.75),
-        Pos_WM = Vector(0, 24.5, -1.25),
+        Pos_VM = Vector(-2.65, 0.25, 26.75),
+        Pos_WM = Vector(0, 25.5, -1.25),
         Ang_VM = Angle(90, 0, 0),
         Ang_WM = Angle(0, -90, 0),
     },
@@ -322,7 +233,7 @@ SWEP.Attachments = {
     },
     [6] = {
         PrintName = "Trigger",
-        Category = {"trigger_auto"},
+        Category = {"trigger_semi"},
         AttachSound = "TacRP/weapons/flashlight_on.wav",
         DetachSound = "TacRP/weapons/flashlight_off.wav",
     },

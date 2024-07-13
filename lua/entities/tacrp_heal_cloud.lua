@@ -138,7 +138,12 @@ function ENT:Think()
                     ply:SetNWFloat("TacRPNextCanHealthGasTime", CurTime() + 0.499)
                 elseif !k:IsPlayer() and (k.TacRPNextCanHealthGasTime or 0) <= CurTime() then
                     if TacRP.EntityIsNecrotic(k) then
-                        k:TakeDamage(10, self:GetOwner() or self, self)
+                        local dmginfo = DamageInfo()
+                        dmginfo:SetAttacker(self:GetOwner() or self)
+                        dmginfo:SetInflictor(self)
+                        dmginfo:SetDamageType(DMG_NERVEGAS)
+                        dmginfo:SetDamage(15)
+                        k:TakeDamageInfo(dmginfo)
                     elseif k:Health() < k:GetMaxHealth() then
                         k:SetHealth(math.min(k:Health() + 3, k:GetMaxHealth()))
                     end

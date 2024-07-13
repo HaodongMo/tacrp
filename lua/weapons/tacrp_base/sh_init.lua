@@ -191,7 +191,7 @@ function SWEP:Holster(wep)
         self:GetOwner():SetFOV(0, 0.1)
         self:SetLastProceduralFireTime(0)
 
-        self:GetOwner():DoAnimationEvent(ACT_GMOD_GESTURE_MELEE_SHOVE_1HAND)
+        self:GetOwner():DoAnimationEvent(ACT_HL2MP_GESTURE_RANGE_ATTACK_SLAM)
         self:SetShouldHoldType()
 
     end

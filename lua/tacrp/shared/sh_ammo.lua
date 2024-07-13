@@ -27,38 +27,45 @@ local ammotypes = {
     -- Only used when tacrp_expandedammotypes 1
     ["ti_pistol_light"] = { -- .22LR, .380 ACP etc.
         expanded = true,
-        max = "sk_max_pistol",
+        max = 200,
     },
     ["ti_pistol_heavy"] = { -- .45 ACP, 10mm etc.
         expanded = true,
-        max = "sk_max_pistol",
+        max = 120,
     },
     ["ti_pdw"] = { -- 4.6mm, 5.7mm etc.
         expanded = true,
-        max = "sk_max_smg1",
+        max = 225,
     },
     ["ti_rifle"] = { -- above 7.62mm but below sniper caliber
         expanded = true,
-        max = "sk_max_ar2",
+        max = 50,
     },
     ["ti_sniper"] = { -- sniper, amr calibers
         expanded = true,
-        max = "sk_max_357",
+        max = 10,
     },
 }
 
-local expanded = TacRP.ConVars["expandedammotypes"]:GetBool()
-for k, v in SortedPairs(ammotypes) do
-    if v.expanded and not expanded then continue end
-    game.AddAmmoType({
-        name = k,
-        max = v.max
-    })
+hook.Add("Initialize", "tacrp_ammo", function()
+    local expanded = TacRP.ConVars["expandedammotypes"]:GetBool()
+    for k, v in SortedPairs(ammotypes) do
+        if v.expanded and not expanded then continue end
+        local maxcvar = v.max
+        if isnumber(v.max) then
+            maxcvar = "sk_max_" .. k
+            CreateConVar(maxcvar, v.max, FCVAR_REPLICATED + FCVAR_ARCHIVE)
+        end
+        game.AddAmmoType({
+            name = k,
+            maxcarry = maxcvar
+        })
 
-    if CLIENT then
-        language.Add(k .. "_ammo", TacRP:GetPhrase("ammo." .. k) or k)
+        if CLIENT then
+            language.Add(k .. "_ammo", TacRP:GetPhrase("ammo." .. k) or k)
+        end
     end
-end
+end)
 
 
 local materials = {
