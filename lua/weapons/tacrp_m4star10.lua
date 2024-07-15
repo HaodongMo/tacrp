@@ -31,7 +31,9 @@ SWEP.BalanceStats = {
     [TacRP.BALANCE_SBOX] = {
         Damage_Max = 10,
         Damage_Min = 5,
+        RPM = 260,
 
+        RecoilStability = 0.5,
         FreeAimMaxAngle = 5,
     },
     [TacRP.BALANCE_TTT] = {
@@ -40,6 +42,7 @@ SWEP.BalanceStats = {
         Range_Min = 300,
         Range_Max = 2000,
         RPM = 180,
+        RPMMultSemi = 1,
 
         FreeAimMaxAngle = 5,
 
@@ -60,6 +63,7 @@ SWEP.BalanceStats = {
         Damage_Max = 11,
         Damage_Min = 7,
         RPM = 240,
+        RPMMultSemi = 1,
 
         RecoilKick = 8,
         RecoilSpreadPenalty = 0.0075,
@@ -116,7 +120,8 @@ SWEP.BodyDamageMultipliers = {
 
 SWEP.Firemode = 1
 
-SWEP.RPM = 240
+SWEP.RPM = 280
+SWEP.RPMMultSemi = 0.9
 
 SWEP.Spread = 0.03
 SWEP.ShotgunPelletSpread = 0.01
@@ -131,8 +136,9 @@ SWEP.RecoilDissipationRate = 3.5
 SWEP.RecoilFirstShotMult = 1 // multiplier for the first shot's recoil amount
 
 SWEP.RecoilVisualKick = 1.5
-SWEP.RecoilKick = 10
-SWEP.RecoilStability = 0.1
+SWEP.RecoilKick = 8
+SWEP.RecoilStability = 0.4
+SWEP.NoRecoilPattern = true
 
 SWEP.RecoilSpreadPenalty = 0.025
 
