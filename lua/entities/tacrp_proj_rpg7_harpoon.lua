@@ -35,12 +35,12 @@ function ENT:OnInitialize()
         self:GetPhysicsObject():SetMass(50)
         self:GetPhysicsObject():SetDragCoefficient(5)
     end
-    self.Attacker = self:GetOwner()
+    self.Attacker = self.Attacker or self:GetOwner()
 end
 
 function ENT:Impact(data, collider)
     local tgt = data.HitEntity
-    local attacker = self.Attacker or self:GetOwner() or self
+    local attacker = self.Attacker or (IsValid(self:GetOwner()) and self:GetOwner()) or self
     local d = data.OurOldVelocity:GetNormalized()
     local ang = data.OurOldVelocity:Angle()
 
