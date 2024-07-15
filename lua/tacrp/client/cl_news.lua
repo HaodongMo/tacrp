@@ -950,6 +950,7 @@ Notably, some weapons in the base pack are now Value grade, a new lowest grade t
 <li><b>Rebalance:</b> HK UMP45 is now Consumer grade.
 <li><b>Rebalance:</b> Buffed Heavy Bolt, Weighted Trigger, Tactical Bolt, Block.
 <li><b>Rebalance:</b> Ninja will now consume full meter on divekick.
+<li><b>Rebalance:</b> Automatic shotguns no longer use recoil patterns.
 </ul>
 
 <h3>Expansion Changelist</h3>
