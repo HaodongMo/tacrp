@@ -908,7 +908,7 @@ The third major expansion pack featuring 38 weapons of all kinds.
     {
         Title = "Update 23",
         Type = "Patch Notes",
-        Date = "2024-07-10",
+        Date = "2024-07-15",
         Author = "8Z",
         Major = false,
         Summary = "Civvie guns and balance tweaks.",
@@ -945,6 +945,7 @@ Notably, some weapons in the base pack are now Value grade, a new lowest grade t
 <li><b>Fixed:</b> Spread becoming a straight line when aiming very high or very low.
 <li><b>Fixed:</b> Various DarkRP spawned_weapon related interactions.
 <li><b>Fixed:</b> Quirky networking bug.
+<li><b>Fixed:</b> Stinger collision issue.
 <li><b>Rebalance:</b> MAC-10 -> MAC-11 (smaller caliber), and is now Value grade.
 <li><b>Rebalance:</b> Mini-14 is now Value grade.
 <li><b>Rebalance:</b> HK UMP45 is now Consumer grade.
