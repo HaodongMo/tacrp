@@ -2,6 +2,8 @@
 function SWEP:DrawHUD()
 end
 
+local h2_enabled = CreateClientConVar( "tacrp_h2", 1, true, false )
+
 local hide = {
 	["CHudHealth"] = true,
 	["CHudBattery"] = true,
@@ -10,7 +12,7 @@ local hide = {
 }
 
 hook.Add( "HUDShouldDraw", "TacRP_HUD2_HUDShouldDraw", function( name )
-	if ( hide[ name ] ) then return false end
+	if h2_enabled:GetBool() and ( hide[ name ] ) then return false end
 end )
 
 
@@ -58,7 +60,6 @@ local function qtl( t, f )
 end
 
 hook.Add("HUDPaint", "TacRP_HUD2", function()
-    --do return end
 	local sw, sh = ScrW(), ScrH()
 	local s = ScreenScaleH
 	local p = LocalPlayer()
@@ -73,6 +74,9 @@ hook.Add("HUDPaint", "TacRP_HUD2", function()
 			self:GetValue("TacticalDraw")(self)
 		end
 	end
+
+    if !h2_enabled:GetBool() then return end
+    C2_UpdateColors()
 
 	if (self.ArcticTacRP and !self:GetCustomize()) or true then
 		if self.ArcticTacRP then

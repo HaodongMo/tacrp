@@ -158,6 +158,15 @@ local c_2_a = CreateClientConVar( "tacrp_c2_2_a", (1/32), true, false )
 
 local c_2_gd = CreateClientConVar( "tacrp_c2_graddown", 0, true, false )
 
+function C2_UpdateColors()
+	GLEEC1 = HSVToColor( c_1_h:GetFloat(), c_1_s:GetFloat(), c_1_v:GetFloat() )
+	GLEEC1.a = c_1_a:GetFloat()*255
+	
+	GLEEC2 = HSVToColor( c_2_h:GetFloat(), c_2_s:GetFloat(), c_2_v:GetFloat() )
+	--GLEEC2 = HSVToColor( ((CurTime()*360)-180)%360, 1, 1 )
+	GLEEC2.a = c_2_a:GetFloat()*255
+end
+
 function C2_PaintBox( s, w, h )
 	GEM( s, 0, 0, w, h )
 end
@@ -924,12 +933,7 @@ function SWEP:C2_Open()
 			return
 		end
 
-		GLEEC1 = HSVToColor( c_1_h:GetFloat(), c_1_s:GetFloat(), c_1_v:GetFloat() )
-		GLEEC1.a = c_1_a:GetFloat()*255
-		
-		GLEEC2 = HSVToColor( c_2_h:GetFloat(), c_2_s:GetFloat(), c_2_v:GetFloat() )
-		--GLEEC2 = HSVToColor( ((CurTime()*360)-180)%360, 1, 1 )
-		GLEEC2.a = c_2_a:GetFloat()*255
+		C2_UpdateColors()
 	
 		if c2.Lastdesire != c2_Desire then
 			c2.Prog = 0
@@ -1139,7 +1143,7 @@ local pres = {
 }
 
 hook.Add( "PopulateToolMenu", "CustomMenuSettings", function()
-	spawnmenu.AddToolMenuOption( "Options", "Tactical RP Weapons", "Custom_Menu", "C2 Beta Software", "", "", function( panel )
+	spawnmenu.AddToolMenuOption( "Options", "Tactical RP Weapons", "TacRP_C2", "Beta: Customize 2", "", "", function( panel )
 		panel:Help("Presets")
 		local pcom = vgui.Create( "DComboBox", panel )
 		pcom:Dock(TOP)
@@ -1172,5 +1176,8 @@ hook.Add( "PopulateToolMenu", "CustomMenuSettings", function()
 		panel:NumSlider( "Accent Sat.", "tacrp_c2_2_s", 0, 1, 2 )
 		panel:NumSlider( "Accent Value", "tacrp_c2_2_v", 0, 1, 2 )
 		panel:NumSlider( "Accent Alpha", "tacrp_c2_2_a", 0, 1, 2 )
+	end )
+	spawnmenu.AddToolMenuOption( "Options", "Tactical RP Weapons", "TacRP_H2", "Beta: HUD 2", "", "", function( panel )
+		panel:CheckBox( "Enable HUD", "tacrp_h2" )
 	end )
 end )

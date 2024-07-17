@@ -181,6 +181,7 @@ hook.Add("PopulateWeapons", "zzz_TacRP_SubCategories", function(pnlContent, tree
 			table.insert(Categorised[Category][SubCategory], weapon)
 			TacRPCats[Category] = true
 		end
+		local IconCache = {}
 
 		-- Iterate through each category in the weapons table
 		for _, node in pairs(tree:Root():GetChildNodes()) do
@@ -530,7 +531,10 @@ hook.Add("PopulateWeapons", "zzz_TacRP_SubCategories", function(pnlContent, tree
 							surface.DrawTexturedRect( 0, 0, w, h )
 
 							surface.SetDrawColor( filtered and filteredicon_col or color_white )
-							local themat = Material( ent.IconOverride or "entities/" .. ent.ClassName .. ".png" )
+							if !IconCache[ent.ClassName] then
+								IconCache[ent.ClassName] = Material( ent.IconOverride or "entities/" .. ent.ClassName .. ".png" )
+							end
+							local themat = IconCache[ent.ClassName]
 							surface.SetMaterial( themat, "mips smooth" )
 						
 							local blep = h*2
