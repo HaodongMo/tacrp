@@ -908,9 +908,9 @@ The third major expansion pack featuring 38 weapons of all kinds.
     {
         Title = "Update 23",
         Type = "Patch Notes",
-        Date = "2024-07-10",
+        Date = "2024-07-15",
         Author = "8Z",
-        Major = false,
+        Major = true,
         Summary = "Civvie guns and balance tweaks.",
         Contents = [[<body style="font-family:'Myriad Pro';color:white;font-size:125%;">
 
@@ -925,9 +925,6 @@ Additionally, a civilian/non-lethal version of the M320 has been added. Use it t
 <p>Some guns have lowered grades to better round out representation across all the tiers.
 Notably, some weapons in the base pack are now Value grade, a new lowest grade that was previously only in expansion weapons.</p>
 
-<h2>Heavy Machine Gun!</h2>
-<p>The HK21E has been added to Heavy Duty, courtesy of Fesiug's animation work.</p>
-
 <h2>(im)Practical Projectiles</h2>
 <p>The notorious RPG-7 shovel has now become reality. Launch dull working tools at your enemies!</p>
 
@@ -935,7 +932,7 @@ Notably, some weapons in the base pack are now Value grade, a new lowest grade t
 
 <h3>Changelist</h3>
 <ul>
-<li><b>Major Addition:</b> New Weapon: Arsenal SAM7SF (Sporter AK/AMD), Diemaco AR-15, HK HK243, HK M320LE.
+<li><b>Major Addition:</b> New Weapons: Arsenal SAM7SF (Sporter AK/AMD), Diemaco AR-15, HK HK243, HK M320LE.
 <li><b>Added:</b> RPG-7 Shovel ammo, 40mm Medi-Smoke ammo.
 <li><b>Added:</b> Thirdperson holstering animation.
 <li><b>Added:</b> Grenade ammo entities will give their respective weapons on pickup.
@@ -945,16 +942,17 @@ Notably, some weapons in the base pack are now Value grade, a new lowest grade t
 <li><b>Fixed:</b> Spread becoming a straight line when aiming very high or very low.
 <li><b>Fixed:</b> Various DarkRP spawned_weapon related interactions.
 <li><b>Fixed:</b> Quirky networking bug.
+<li><b>Fixed:</b> Stinger collision issue.
 <li><b>Rebalance:</b> MAC-10 -> MAC-11 (smaller caliber), and is now Value grade.
 <li><b>Rebalance:</b> Mini-14 is now Value grade.
 <li><b>Rebalance:</b> HK UMP45 is now Consumer grade.
 <li><b>Rebalance:</b> Buffed Heavy Bolt, Weighted Trigger, Tactical Bolt, Block.
 <li><b>Rebalance:</b> Ninja will now consume full meter on divekick.
+<li><b>Rebalance:</b> Automatic shotguns no longer use recoil patterns.
 </ul>
 
 <h3>Expansion Changelist</h3>
 <ul>
-<li><b>Major Addition:</b> (Heavy Duty) New Weapon: HK HK21E.
 <li><b>Changed:</b> LR-300 remodel, now uses the real handguard.
 <li><b>Changed:</b> Some melee weapons now use Lazarus's two-handed animations.
 <li><b>Fixed:</b> Rhino 20DS being too shiny.
