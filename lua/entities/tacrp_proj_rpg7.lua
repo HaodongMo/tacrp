@@ -78,7 +78,7 @@ function ENT:Detonate()
             Tracer = 0,
             Src = self:GetPos(),
             Dir = self:GetForward(),
-            HullSize = 0,
+            HullSize = 16,
             Distance = 128,
             IgnoreEntity = self,
             Callback = function(atk, btr, dmginfo)
