@@ -913,8 +913,8 @@ ATT = {}
 ATT.PrintName = "Birdshot"
 ATT.Icon = Material("entities/tacrp_att_acc_bird.png", "mips smooth")
 ATT.Description = "Fire smaller pellets in a larger spread."
-ATT.Pros = {"Extra projectiles", "Recoil"}
-ATT.Cons = {"Spread"}
+ATT.Pros = {"att.procon.moreproj", "stat.recoil"}
+ATT.Cons = {"stat.spread"}
 
 ATT.Category = {"ammo_shotgun", "ammo_shotgun2"}
 
@@ -1076,7 +1076,7 @@ ATT.FullName = "att.ammo_shotgun_triple.name.full"
 ATT.Icon = Material("entities/tacrp_att_acc_triple.png", "mips smooth")
 ATT.Description = "att.ammo_shotgun_triple.desc"
 ATT.Pros = {"stat.spread"}
-ATT.Cons = {"att.procon.3proj", "Hipfire Spread"}
+ATT.Cons = {"att.procon.3proj", "stat.hipfirespread"}
 
 ATT.Category = "ammo_shotgun"
 
@@ -1358,14 +1358,14 @@ ATT.FullName = "Minishells"
 ATT.Icon = Material("entities/tacrp_att_ammo_minishell.png", "mips smooth")
 ATT.Description = "Short shells increase ammo capacity but don't hit as hard."
 ATT.Pros = {"stat.clipsize", "stat.recoilkick"}
-ATT.Cons = {"stat.damage"}
+ATT.Cons = {"att.procon.lessproj"}
 
 ATT.Category = "ammo_shotgun"
 
 ATT.SortOrder = 1
 
-ATT.Mult_Num = 0.666
-ATT.Mult_RecoilKick = 0.75
+ATT.Mult_Num = 0.6667
+ATT.Mult_RecoilKick = 0.85
 ATT.Mult_ClipSize = 1.5
 
 ATT.Compatibility = function(wpn, cats)
@@ -1392,10 +1392,11 @@ ATT.Category = {"ammo_shotgun", "ammo_shotgun2"}
 
 ATT.SortOrder = 6
 
-ATT.Mult_DamageMax = 0.5
-ATT.Mult_DamageMin = 0.1
+ATT.Mult_Damage_Max = 0.75
+ATT.Mult_Damage_Min = 0.5
 ATT.Mult_MuzzleVelocity = 0.75
-ATT.Mult_Spread = 3
+ATT.Add_Spread = 0.03
+ATT.Add_ShotgunPelletSpread = 0.03
 
 ATT.Override_ExplosiveEffect = "ManhackSparks"
 ATT.Add_ExplosiveDamage = 1

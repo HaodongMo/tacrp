@@ -304,6 +304,7 @@ L["att.bolt_refurbished.desc"] = "Fix the gun's reliability problems with some a
 
 L["att.procon.3proj"] = "Three projectiles"
 L["att.procon.moreproj"] = "More projectiles"
+L["att.procon.lessproj"] = "Fewer projectiles"
 L["att.procon.1proj"] = "One projectile"
 L["att.procon.noexp"] = "No explosion"
 L["att.procon.direct"] = "Direct fire"
@@ -436,7 +437,6 @@ L["hint.inspect"] = "Inspect"
 L["hint.firemode"] = "Firemode"
 L["hint.safety.turn_off"] = "Disable Safety"
 L["hint.safety.turn_on"] = "Enable Safety"
-L["hint.firemode"] = "Firemode"
 L["hint.hl2_flashlight"] = "Suit Flashlight"
 L["hint.toggle_tactical"] = "Toggle {1}"
 L["hint.blindfire"] = "Blindfire"
@@ -451,7 +451,6 @@ L["hint.quicknade.under"] = "Underhand Throw"
 L["hint.quicknade.throw"] = "Quickthrow"
 L["hint.quicknade.pull_out"] = "Pull Out Grenade"
 L["hint.quicknade.menu"] = "Quickthrow Menu"
-L["hint.quicknade.throw"] = "Quickthrow"
 L["hint.quicknade.next"] = "Next Grenade"
 L["hint.quicknade.prev"] = "Previous Grenade"
 L["hint.ttt.radio"] = "TTT Radio"
@@ -481,7 +480,7 @@ L["hint.melee_charge.0.desc"] = "Standard mode with average turn control.\nBash 
 L["hint.melee_charge.1.name"] = "Mastery"
 L["hint.melee_charge.1.desc"] = "Significantly increased turn control.\nLow damage resistance and bash damage.\nTaking damage shortens charge duration."
 L["hint.melee_charge.2.name"] = "Tenacity"
-L["hint.melee_charge.2.desc"] = "Increased charge speed, reduced turn control.\nVery high damage resistance and bash damage\nGains knockback immunity during charge."
+L["hint.melee_charge.2.desc"] = "Increased charge speed, reduced turn control.\nVery high damage resistance and bash damage.\nGains knockback immunity during charge."
 
 
 -- STL phrases are not needed for other languages. you can remove these when localizing
