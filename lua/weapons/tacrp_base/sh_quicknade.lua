@@ -230,7 +230,7 @@ function SWEP:SelectGrenade(index, requireammo)
 
     if index then
         ind = index
-    else
+    elseif !requireammo then
         if self:GetOwner():KeyDown(IN_WALK) then
             ind = ind - 1
         else
