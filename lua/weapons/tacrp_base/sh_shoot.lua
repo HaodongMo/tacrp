@@ -520,7 +520,7 @@ function SWEP:AfterShotFunction(tr, dmg, range, penleft, alreadypenned, forced)
             penleft = 0
         end
 
-        if self:GetValue("DamageType") == DMG_BURN then
+        if SERVER and self:GetValue("DamageType") == DMG_BURN and IsValid(tr.Entity) then
             tr.Entity:Ignite(1, 64)
         end
     end
@@ -535,8 +535,7 @@ function SWEP:AfterShotFunction(tr, dmg, range, penleft, alreadypenned, forced)
         fx:SetNormal(tr.HitNormal)
 
         if bit.band(util.PointContents(tr.HitPos), CONTENTS_WATER) == CONTENTS_WATER then
-            fx:SetScale(5)
-            util.Effect("WaterSplash", fx, true)
+            util.Effect("WaterSurfaceExplosion", fx, true)
         else
             util.Effect(self:GetValue("ExplosiveEffect"), fx, true)
         end
