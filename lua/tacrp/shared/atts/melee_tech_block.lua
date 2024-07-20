@@ -10,8 +10,9 @@ ATT.Category = {"melee_tech"}
 ATT.SortOrder = 2
 
 ATT.MeleeBlock = true
-
 ATT.HeavyAttack = true
+
+ATT.Free = true
 
 local function hold(wep)
     return wep:GetOwner():KeyDown(IN_ATTACK2)
@@ -244,5 +245,5 @@ end)
 ]]
 
 ATT.Hook_GetHintCapabilities = function(self, tbl)
-    tbl["+attack2"] = {so = 0.1, str = "Block"}
+    tbl["+attack2"] = {so = 0.1, str = "hint.melee.block"}
 end

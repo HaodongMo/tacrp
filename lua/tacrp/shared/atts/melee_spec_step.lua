@@ -1,14 +1,14 @@
 ATT.PrintName = "Airdash"
 ATT.Icon = Material("entities/tacrp_att_melee_spec_step.png", "mips smooth")
 ATT.Description = "Mobility tool used by blood-fueled robots and transgender women."
-ATT.Pros = {"RELOAD: Dash in movement direction", "CROUCH (Mid-air + Looka down): Fastfall", "Invulnerable during dash", "No fall damage"}
+ATT.Pros = {"RELOAD: Dash in movement direction", "Invulnerable during dash"}
 
 ATT.Category = {"melee_spec"}
 
 ATT.SortOrder = 1
 
 ATT.Airdash = true
-ATT.NoFallDamage = true
+ATT.NoFallDamage = false
 
 -- ATT.Add_MeleeRechargeRate = 0.5
 
@@ -27,7 +27,7 @@ local function makedashsound(ent, pitch)
 end
 
 ATT.Hook_GetHintCapabilities = function(self, tbl)
-    tbl["+reload"] = {so = 0.4, str = "Airdash"}
+    tbl["+reload"] = {so = 0.4, str = "hint.melee_step"}
 end
 
 local function getcharge(wep)
@@ -62,16 +62,16 @@ ATT.Hook_PreReload = function(wep)
     return true
 end
 
-ATT.Hook_PostThink = function(wep)
-    local ply = wep:GetOwner()
-    if IsFirstTimePredicted() and ply:KeyPressed(IN_DUCK) and !ply:IsOnGround() and !ply:GetNWBool("TacRPDashFall") then
-        local dot = ply:GetAimVector():Dot(Vector(0, 0, -1))
-        if dot > 0.707 then
-            ply:SetVelocity(-Vector(0, 0, ply:GetVelocity().z + 500 + wep:GetValue("MeleePerkAgi") * 500))
-            ply:SetNWBool("TacRPDashFall", true)
-        end
-    end
-end
+-- ATT.Hook_PostThink = function(wep)
+--     local ply = wep:GetOwner()
+--     if IsFirstTimePredicted() and ply:KeyPressed(IN_DUCK) and !ply:IsOnGround() and !ply:GetNWBool("TacRPDashFall") then
+--         local dot = ply:GetAimVector():Dot(Vector(0, 0, -1))
+--         if dot > 0.707 then
+--             ply:SetVelocity(-Vector(0, 0, ply:GetVelocity().z + 500 + wep:GetValue("MeleePerkAgi") * 500))
+--             ply:SetNWBool("TacRPDashFall", true)
+--         end
+--     end
+-- end
 
 hook.Add("SetupMove", "TacRP_Quickstep", function(ply, mv, cmd)
     if !IsFirstTimePredicted() then return end
@@ -111,10 +111,10 @@ hook.Add("SetupMove", "TacRP_Quickstep", function(ply, mv, cmd)
         elseif ply.TacRPDashDir and ply.TacRPDashCancel == nil then
             ply.TacRPDashDir = nil
             if !ply:IsOnGround() then
-                ply:SetVelocity(ply:GetVelocity():GetNegated() / 1.5)
+                ply:SetVelocity(ply:GetVelocity():GetNegated() / 2)
             end
-        elseif ply:IsOnGround() and ply:GetNWBool("TacRPDashFall") then
-            ply:SetNWBool("TacRPDashFall", false)
+        -- elseif ply:IsOnGround() and ply:GetNWBool("TacRPDashFall") then
+        --     ply:SetNWBool("TacRPDashFall", false)
         end
     end
 end)

@@ -35,10 +35,10 @@ function SWEP:GetHintCapabilities()
     self.CachedCapabilities = {}
 
     if self:GetValue("PrimaryMelee") then
-        self.CachedCapabilities["+attack"] = {so = 0, str = "Melee Attack"}
+        self.CachedCapabilities["+attack"] = {so = 0, str = "hint.melee"}
     elseif self:GetValue("PrimaryGrenade") then
-        self.CachedCapabilities["+attack"] = {so = 0, str = "Throw Overhand"}
-        self.CachedCapabilities["+attack2"] = {so = 0.1, str = "Throw Underhand"}
+        self.CachedCapabilities["+attack"] = {so = 0, str = "hint.quicknade.over"}
+        self.CachedCapabilities["+attack2"] = {so = 0.1, str = "hint.quicknade.under"}
     end
     -- hopefully you don't need me to tell you how to shoot a gun
 
@@ -49,28 +49,28 @@ function SWEP:GetHintCapabilities()
 
     if self:GetScopeLevel() != 0 then
         if TacRP.ConVars["togglepeek"]:GetBool() then
-            self.CachedCapabilities[bind_customize] = {so = 2, str = "Toggle Peek"}
+            self.CachedCapabilities[bind_customize] = {so = 2, str = "hint.peek.toggle"}
         else
-            self.CachedCapabilities[bind_customize] = {so = 2, str = "Peek"}
+            self.CachedCapabilities[bind_customize] = {so = 2, str = "hint.peek.hold"}
         end
 
         if self:CanHoldBreath() then
-            self.CachedCapabilities["+speed"] = {so = 2.1, str = "Hold Breath"}
+            self.CachedCapabilities["+speed"] = {so = 2.1, str = "hint.hold_breath"}
         end
     elseif #self.Attachments > 0 then
-        self.CachedCapabilities[bind_customize] = {so = 1, str = "Customize"}
+        self.CachedCapabilities[bind_customize] = {so = 1, str = "hint.customize"}
     else
-        self.CachedCapabilities[bind_customize] = {so = 1, str = "Inspect"}
+        self.CachedCapabilities[bind_customize] = {so = 1, str = "hint.inspect"}
     end
 
     if self:GetFiremodeAmount() > 1 and !self:GetSafe() then
-        self.CachedCapabilities["+use/+reload"] = {so = 11, str = "Firemode"}
+        self.CachedCapabilities["+use/+reload"] = {so = 11, str = "hint.firemode"}
     end
     if self:GetFiremodeAmount() > 0 and !self:DoForceSightsBehavior() then
         if self:GetSafe() then
-            self.CachedCapabilities["+use/+attack2"] = {so = 12, str = "Disable Safety"}
+            self.CachedCapabilities["+use/+attack2"] = {so = 12, str = "hint.safety.turn_off"}
         else
-            self.CachedCapabilities["+use/+attack2"] = {so = 12, str = "Enable Safety"}
+            self.CachedCapabilities["+use/+attack2"] = {so = 12, str = "hint.safety.turn_on"}
         end
     end
 
@@ -81,41 +81,41 @@ function SWEP:GetHintCapabilities()
         elseif self:DoOldSchoolScopeBehavior() then
             bind = "+attack2"
         end
-        self.CachedCapabilities[bind] = {so = 30, str = "Quick Melee"}
+        self.CachedCapabilities[bind] = {so = 30, str = "hint.melee"}
     end
 
     if self:GetValue("CanToggle") and TacRP.ConVars["toggletactical"]:GetBool() then
-        local tactical_text = self:GetValue("CustomTacticalHint") or ("Toggle " .. (self:GetValue("TacticalName") or "Tactical"))
+        local tactical_text = self:GetValue("CustomTacticalHint") or TacRP:GetPhrase("hint.toggle_tactical", {TacRP:TryTranslate(self:GetValue("TacticalName") or "hint.tac")})
         local bind = nil
         if TacRP.GetKeyIsBound("+tacrp_tactical") then
             bind = "+tacrp_tactical"
         end
         if TacRP.ConVars["flashlight_alt"]:GetBool() then
             self.CachedCapabilities[bind or "+walk/impulse 100"] = {so = 31, str = tactical_text}
-            self.CachedCapabilities["impulse 100"] = {so = 32, str = "Suit Flashlight"}
+            self.CachedCapabilities["impulse 100"] = {so = 32, str = "hint.hl2_flashlight"}
         else
             self.CachedCapabilities[bind or "impulse 100"] = {so = 31, str = tactical_text}
-            self.CachedCapabilities["+walk/impulse 100"] = {so = 32, str = "Suit Flashlight"}
+            self.CachedCapabilities["+walk/impulse 100"] = {so = 32, str = "hint.hl2_flashlight"}
         end
     end
 
     -- blindfire / quickthrow
     if self:GetValue("CanBlindFire") and self:GetScopeLevel() == 0 and !self:GetSafe() then
         if TacRP.ConVars["blindfiremenu"]:GetBool() then
-            self.CachedCapabilities["+zoom"] = {so = 39, str = "Blindfire Menu"}
+            self.CachedCapabilities["+zoom"] = {so = 39, str = "hint.blindfire.menu"}
         else
             if self:GetOwner():KeyDown(IN_ZOOM) then
                 self.CachedCapabilities = {}
-                self.CachedCapabilities["+zoom/+forward"] = {so = 39, str = "Blindfire Up"}
-                self.CachedCapabilities["+zoom/+moveleft"] = {so = 39.1, str = "Blindfire Left"}
-                self.CachedCapabilities["+zoom/+moveright"] = {so = 39.2, str = "Blindfire Right"}
-                self.CachedCapabilities["+zoom/+back"] = {so = 39.3, str = "Blindfire Cancel"}
+                self.CachedCapabilities["+zoom/+forward"] = {so = 39, str = "hint.blindfire.up"}
+                self.CachedCapabilities["+zoom/+moveleft"] = {so = 39.1, str = "hint.blindfire.left"}
+                self.CachedCapabilities["+zoom/+moveright"] = {so = 39.2, str = "hint.blindfire.right"}
+                self.CachedCapabilities["+zoom/+back"] = {so = 39.3, str = "hint.blindfire.cancel"}
                 if !TacRP.ConVars["idunwannadie"]:GetBool() then
-                    self.CachedCapabilities["+zoom/+speed/+walk"] = {so = 39.4, str = "Suicide"}
+                    self.CachedCapabilities["+zoom/+speed/+walk"] = {so = 39.4, str = "hint.blindfire.kys"}
                 end
                 return self.CachedCapabilities
             else
-                self.CachedCapabilities["+zoom"] = {so = 39, str = "Blindfire"}
+                self.CachedCapabilities["+zoom"] = {so = 39, str = "hint.blindfire"}
             end
         end
     end
@@ -123,17 +123,17 @@ function SWEP:GetHintCapabilities()
     if self:GetValue("CanQuickNade") then
         local bound1, bound2 = TacRP.GetKeyIsBound("+grenade1"), TacRP.GetKeyIsBound("+grenade2")
         if bound1 then
-            self.CachedCapabilities["+grenade1"] = {so = 35, str = "Quickthrow"}
+            self.CachedCapabilities["+grenade1"] = {so = 35, str = "hint.quicknade.throw"}
         end
         if bound2 then
             if TacRP.ConVars["nademenu"]:GetBool() then
                 if TacRP.ConVars["nademenu_click"]:GetBool() and self.GrenadeMenuAlpha == 1 then
                     self.CachedCapabilities = {}
-                    self.CachedCapabilities["+grenade2"] = {so = 36, str = "Prepare Grenade"}
-                    self.CachedCapabilities["+grenade2/+attack"] = {so = 36.1, str = "Throw Overhand"}
-                    self.CachedCapabilities["+grenade2/+attack2"] = {so = 36.2, str = "Throw Underhand"}
+                    self.CachedCapabilities["+grenade2"] = {so = 36, str = "hint.quicknade.menu"}
+                    self.CachedCapabilities["+grenade2/+attack"] = {so = 36.1, str = "hint.quicknade.over"}
+                    self.CachedCapabilities["+grenade2/+attack2"] = {so = 36.2, str = "hint.quicknade.under"}
                     if TacRP.AreTheGrenadeAnimsReadyYet then
-                        self.CachedCapabilities["+grenade2/MOUSE3"] = {so = 36.3, str = "Pull Out Grenade"}
+                        self.CachedCapabilities["+grenade2/MOUSE3"] = {so = 36.3, str = "hint.quicknade.pull_out"}
                     end
                     -- if TacRP.GetKeyIsBound("+grenade1") then
                     --     self.CachedCapabilities["+grenade1"] = {so = 36.4, str = "Quickthrow"}
@@ -141,22 +141,21 @@ function SWEP:GetHintCapabilities()
 
                     return self.CachedCapabilities
                 else
-                    self.CachedCapabilities["+grenade2"] = {so = 36, str = "Quickthrow Menu"}
+                    self.CachedCapabilities["+grenade2"] = {so = 36, str = "hint.quicknade.menu"}
                 end
             else
-                self.CachedCapabilities["+grenade2"] = {so = 36, str = "Quickthrow Next"}
-                self.CachedCapabilities["+walk/+grenade2"] = {so = 37, str = "Quickthrow Prev"}
-
+                self.CachedCapabilities["+grenade2"] = {so = 36, str = "hint.quicknade.next"}
+                self.CachedCapabilities["+walk/+grenade2"] = {so = 37, str = "hint.quicknade.prev"}
             end
         end
         if !bound2 and !bound1 then
-            self.CachedCapabilities["+grenade1"] = {so = 36, str = "Quickthrow"}
+            self.CachedCapabilities["+grenade1"] = {so = 36, str = "hint.quicknade.throw"}
         end
     end
 
     if engine.ActiveGamemode() == "terrortown" then
-        self.CachedCapabilities["+use/+zoom"] = {so = 1001, str = "TTT Radio"}
-        self.CachedCapabilities["+use/+menu_context"] = {so = 1002, str = "TTT Shop"}
+        self.CachedCapabilities["+use/+zoom"] = {so = 1001, str = "hint.ttt.radio"}
+        self.CachedCapabilities["+use/+menu_context"] = {so = 1002, str = "hint.ttt.shop"}
     end
 
     self:RunHook("Hook_GetHintCapabilities", self.CachedCapabilities)
@@ -211,7 +210,7 @@ function SWEP:DrawHints()
             end
         end
 
-        draw.SimpleText(v.str, font, x + math.max(x3, x_glyph), y2 + row / 2, clr_w, TEXT_ALIGN_LEFT, TEXT_ALIGN_CENTER)
+        draw.SimpleText(TacRP:TryTranslate(v.str), font, x + math.max(x3, x_glyph), y2 + row / 2, clr_w, TEXT_ALIGN_LEFT, TEXT_ALIGN_CENTER)
 
         y2 = y2 + row
     end

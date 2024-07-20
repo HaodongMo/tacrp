@@ -414,6 +414,8 @@ ATT.Category = "tactical"
 ATT.CanToggle = true
 ATT.BlindFireCamera = true
 
+ATT.TacticalName = "hint.tac.cam_mode"
+
 TacRP.LoadAtt(ATT, "tac_cornershot")
 -- #endregion
 
@@ -436,7 +438,7 @@ ATT.Category = "tactical"
 ATT.Minimap = true
 ATT.CanToggle = true
 
-ATT.TacticalName = "Radar"
+ATT.TacticalName = "hint.tac.radar"
 
 local scantime = TacRP.ConVars["att_radartime"]
 local lastradar = 0
@@ -566,7 +568,7 @@ ATT.FlashlightBrightness = 1.25
 
 ATT.CanToggle = true
 
-ATT.TacticalName = "Flashlight"
+ATT.TacticalName = "hint.tac.flashlight"
 
 TacRP.LoadAtt(ATT, "tac_flashlight")
 -- #endregion
@@ -592,7 +594,7 @@ ATT.SortOrder = 1
 ATT.Laser = true
 ATT.CanToggle = true
 
-ATT.TacticalName = "Laser"
+ATT.TacticalName = "hint.tac.laser"
 
 ATT.Override_LaserColor = Color(255, 0, 0)
 
@@ -627,7 +629,7 @@ ATT.FlashlightBrightness = 0.75
 ATT.LaserPower = 1
 ATT.CanToggle = true
 
-ATT.TacticalName = "Combo"
+ATT.TacticalName = "hint.tac.combo"
 
 ATT.Override_LaserColor = Color(0, 255, 0, 200)
 
@@ -652,7 +654,7 @@ ATT.Category = "tactical"
 ATT.Rangefinder = true
 ATT.CanToggle = true
 
-ATT.TacticalName = "Ranger"
+ATT.TacticalName = "hint.tac.rangefinder"
 
 local lastrangefinder = 0
 local rftime = 1 / 10
@@ -851,7 +853,7 @@ ATT.Category = "tactical"
 ATT.SpreadGauge = true
 ATT.CanToggle = true
 
-ATT.TacticalName = "Gauge"
+ATT.TacticalName = "hint.tac.spread_gauge"
 
 local mat_spread = Material("tacrp/hud/spreadgauge.png", "smooth")
 local mat_spread_fire = Material("tacrp/hud/spreadgauge_fire.png", "")
@@ -1024,7 +1026,7 @@ ATT.CanToggle = true
 ATT.VariableZoom = true
 ATT.VariableZoomFOV = 90 / 2
 
-ATT.TacticalName = "Magnifier"
+ATT.TacticalName = "hint.tac.magnifier"
 
 TacRP.LoadAtt(ATT, "tac_magnifier")
 -- #endregion
@@ -1048,7 +1050,7 @@ ATT.SortOrder = 9
 ATT.Override_Sound_ToggleTactical = ""
 ATT.CanToggle = true
 
-ATT.CustomTacticalHint = "Load Single Round"
+ATT.CustomTacticalHint = "hint.tac.load_one"
 
 ATT.Hook_ToggleTactical = function(wep)
     if wep:GetMaxClip1() <= 2 then
@@ -1093,6 +1095,8 @@ ATT.Category = "tactical"
 
 ATT.ThermalCamera = true
 ATT.CanToggle = true
+
+ATT.TacticalName = "hint.tac.cam_mode"
 
 ATT.Hook_BlurScope = function(wep)
     if wep:GetScopeLevel() > 0 and wep:GetPeeking() then

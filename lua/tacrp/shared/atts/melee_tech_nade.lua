@@ -12,6 +12,8 @@ ATT.InvAtt = "perk_throw"
 ATT.ThrowRocks = true
 ATT.Mult_QuickNadeTimeMult = 0.65
 
+ATT.Free = true
+
 ATT.Hook_SecondaryAttack = function(self)
     self.GrenadeDownKey = IN_ATTACK2
     self:PrimeGrenade()
@@ -28,5 +30,5 @@ end
 ]]
 
 ATT.Hook_GetHintCapabilities = function(self, tbl)
-    tbl["+attack2"] = {so = 0.1, str = "Quickthrow"}
+    tbl["+attack2"] = {so = 0.1, str = "hint.quicknade.throw"}
 end

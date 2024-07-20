@@ -14,18 +14,18 @@ ATT.MeleeCharge = true
 ATT.Override_NoBreathBar = true
 
 ATT.Hook_GetHintCapabilities = function(self, tbl)
-    tbl["+reload"] = {so = 0.4, str = "Charge"}
-    tbl["+walk/+reload"] = {so = 0.5, str = "Toggle Charge"}
+    tbl["+reload"] = {so = 0.4, str = "hint.melee_charge"}
+    tbl["+walk/+reload"] = {so = 0.5, str = "hint.melee_charge.menu"}
 end
 
 local followup = 0.75
 
 local modecount = 3
 local modes = {
-    -- name, desc, {speed, duration, turnrate, damagemult, resistance}
-    [0] = {"Bravery", "Standard mode with average turn control.\nPrimary attack during charge or after impact to gain bonus damage from charge length, ending the charge.", {750, 1.5, 240, 1, 0.5}},
-    [1] = {"Mastery", "Significantly increased turn control.\nLow damage resistance and damage output.\nTaking damage shortens charge duration.", {750, 1.5, 960, 0.75, 0.25}},
-    [2] = {"Tenacity", "Increased charge speed, reduced turn control.\nVery high damage resistance and damage output.\nGains knockback immunity during charge.", {850, 1.5, 90, 2, 0.75}},
+    --  {speed, duration, turnrate, damagemult, resistance}
+    [0] = {700, 1.5, 240, 1, 0.25},
+    [1] = {700, 1.5, 960, 0.75, 0},
+    [2] = {800, 1.5, 90, 1.25, 0.5},
 }
 
 local stat_vel = 1
@@ -37,9 +37,9 @@ local function chargestats(ply, i)
     local mode = ply:GetNWInt("TacRPChargeMode", 0)
     if modes[mode] then
         if i then
-            return modes[mode][3][i] or 0
+            return modes[mode][i] or 0
         else
-            return modes[mode][3]
+            return modes[mode]
         end
     else
         return 0
@@ -293,13 +293,13 @@ function ATT.TacticalDraw(self)
             local c_bg, c_cnr, c_txt = TacRP.GetPanelColors(curmode == i, curmode == i)
             surface.SetDrawColor(c_bg)
             TacRP.DrawCorneredBox(x + (i / modecount * w) + (i * TacRP.SS(0.5)), y - TacRP.SS(45), w_mode, TacRP.SS(6), c_cnr)
-            draw.SimpleText(modes[i][1], "TacRP_HD44780A00_5x8_4", x + (i / modecount * w) + (i * TacRP.SS(0.5)) + w_mode / 2, y - TacRP.SS(45 - 3), c_txt, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+            draw.SimpleText(TacRP:GetPhrase("hint.melee_charge." .. i .. ".name"), "TacRP_HD44780A00_5x8_4", x + (i / modecount * w) + (i * TacRP.SS(0.5)) + w_mode / 2, y - TacRP.SS(45 - 3), c_txt, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
         end
 
         surface.SetDrawColor(0, 0, 0, 240)
         TacRP.DrawCorneredBox(x, y - TacRP.SS(38), w, TacRP.SS(24))
 
-        local desc = TacRP.MultiLineText(modes[curmode][2], w - TacRP.SS(6), "TacRP_Myriad_Pro_6")
+        local desc = TacRP.MultiLineText(TacRP:GetPhrase("hint.melee_charge." .. curmode .. ".desc"), w - TacRP.SS(6), "TacRP_Myriad_Pro_6")
         for j, text in ipairs(desc or {}) do
             draw.SimpleText(text, "TacRP_Myriad_Pro_6", x + TacRP.SS(3), y - TacRP.SS(38 - 2) + (j - 1) * TacRP.SS(6.5), color_white, TEXT_ALIGN_LEFT, TEXT_ALIGN_TOP)
         end
@@ -312,7 +312,7 @@ function ATT.TacticalDraw(self)
     local c_bg, c_cnr, c_txt = TacRP.GetPanelColors(chargin, chargin)
     surface.SetDrawColor(c_bg)
     TacRP.DrawCorneredBox(x + w / 2 - w / 6, y - TacRP.SS(12), w / 3, TacRP.SS(9), c_cnr)
-    draw.SimpleText(modes[curmode][1], "TacRP_HD44780A00_5x8_6", x + w / 2, y - TacRP.SS(8), c_txt, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+    draw.SimpleText(TacRP:GetPhrase("hint.melee_charge." .. curmode .. ".name"), "TacRP_HD44780A00_5x8_6", x + w / 2, y - TacRP.SS(8), c_txt, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
 
     if chargin then
         c = math.Clamp((ply:GetNWFloat("TacRPChargeTime", 0) + chargestats(ply, stat_dur) - CurTime()) / chargestats(ply, stat_dur), 0, 1)

@@ -24,11 +24,11 @@ local function setcharge(wep, f)
 end
 
 ATT.Hook_GetHintCapabilities = function(self, tbl)
-    tbl["+reload"] = {so = 0.4, str = "Palm Strike"}
+    tbl["+reload"] = {so = 0.4, str = "hint.melee_ninja.palm"}
     if self:GetOwner():IsOnGround() then
-        tbl["+duck/+reload"] = {so = 0.5, str = "Backhop"}
+        tbl["+duck/+reload"] = {so = 0.5, str = "hint.melee_ninja.backhop"}
     else
-        tbl["+duck/+reload"] = {so = 0.5, str = "Dive Kick"}
+        tbl["+duck/+reload"] = {so = 0.5, str = "hint.melee_ninja.divekick"}
     end
 end
 

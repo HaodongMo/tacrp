@@ -179,7 +179,9 @@ function ENT:Impact(data, collider)
 
         timer.Simple(0, function()
             if IsValid(self) and tgt:IsWorld() or (IsValid(tgt) and (!(tgt:IsNPC() or tgt:IsPlayer()) or tgt:Health() > 0)) then
-                self:SetSolid(SOLID_NONE)
+                if !tgt:IsWorld() then
+                    self:SetSolid(SOLID_NONE)
+                end
                 self:SetMoveType(MOVETYPE_NONE)
 
                 local f = {self, self:GetOwner()}
@@ -218,6 +220,13 @@ function ENT:Impact(data, collider)
             end
         end)
     end
+
+    if self.HasAmmo then
+        self:SetTrigger(true)
+        self:SetOwner(NULL)
+    end
+    self:SetCollisionGroup(COLLISION_GROUP_DEBRIS)
+
     timer.Simple(5, function()
         if IsValid(self) then
             self:SetRenderMode(RENDERMODE_TRANSALPHA)
@@ -227,6 +236,14 @@ function ENT:Impact(data, collider)
     SafeRemoveEntityDelayed(self, 7)
 
     return true
+end
+
+function ENT:Touch(ent)
+    if self.HasAmmo and ent:IsPlayer() and (IsValid(self.Inflictor) and ent == self.Inflictor:GetOwner()) then
+        self.HasAmmo = false
+        ent:GiveAmmo(1, "xbowbolt")
+        self:Remove()
+    end
 end
 
 hook.Add("PostEntityTakeDamage", "TacRP_KnifeProj", function(ent)
