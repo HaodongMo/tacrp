@@ -711,6 +711,8 @@ ATT.Pros = {}
 ATT.Cons = {"att.procon.onebullet"}
 ATT.Category = {"ammo_roulette"}
 
+ATT.Free = true
+
 ATT.SortOrder = -1
 
 --ATT.Mult_ShootChance = 1 / 6
@@ -1260,6 +1262,8 @@ ATT.Cons = {"att.procon.nopartialreloads"}
 ATT.Category = "ammo_shotgun"
 
 ATT.SortOrder = -1
+
+ATT.Free = true
 
 ATT.ShotgunFullCancel = true
 ATT.Override_Firemodes = {1}
