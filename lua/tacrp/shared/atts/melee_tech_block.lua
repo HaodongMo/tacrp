@@ -75,7 +75,7 @@ ATT.Hook_PostThink = function(wep)
     else
         if !canhold then
             wep:SetOutOfBreath(false)
-            wep:SetNextIdle(CurTime())
+            wep:PlayAnimation("idle", 1)
             wep:SetShouldHoldType()
             if wep:GetNWFloat("TacRPKnifeCounter", 0) < CurTime() then
                 wep:SetNextSecondaryFire(CurTime() + 0.5)
