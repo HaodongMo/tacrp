@@ -66,10 +66,10 @@ ENT.CollisionSoundsSoft = {
 function ENT:PhysicsCollide(data)
     if data.DeltaTime < 0.1 then return end
 
-    if data.Speed > 25 then
-        self:EmitSound(self.CollisionSoundsHard[math.random(#self.CollisionSoundsHard)])
+    if data.Speed > 40 then
+        self:EmitSound(self.CollisionSoundsHard[math.random(#self.CollisionSoundsHard)], 70, 100, data.Speed / 100)
     else
-        self:EmitSound(self.CollisionSoundsSoft[math.random(#self.CollisionSoundsSoft)])
+        self:EmitSound(self.CollisionSoundsSoft[math.random(#self.CollisionSoundsSoft)], 70, 100, data.Speed / 100)
     end
 end
 
@@ -94,7 +94,7 @@ elseif CLIENT then
             -- surface.SetFont("TacRP_LondonBetween_24_Unscaled")
 
             if !self.PrintLines then
-                self.PrintLines = TacRP.MultiLineText(self.PrintName, 328, font)
+                self.PrintLines = TacRP.MultiLineText(TacRP:GetAttName(self.AttToGive), 328, font)
             end
             for j, text in ipairs(self.PrintLines or {}) do
                 draw.SimpleTextOutlined(text, font, 0, -40 + j * 40, Color(255, 255, 255, alpha * 255), TEXT_ALIGN_CENTER, TEXT_ALIGN_TOP, 2, Color(0, 0, 0, alpha * 75))
