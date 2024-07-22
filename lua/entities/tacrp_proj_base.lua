@@ -299,7 +299,7 @@ function ENT:PhysicsUpdate(phys)
 
         self:SetAngles(Angle(newang.p, newang.y, 0))
         phys:SetVelocityInstantaneous(self:GetForward() * math.Clamp(v:Length() + (self.Acceleration - brake) * FrameTime(), self.MinSpeed, self.MaxSpeed))
-    else
+    elseif self.Acceleration > 0 then
         phys:SetVelocityInstantaneous(self:GetForward() * math.Clamp(phys:GetVelocity():Length() + self.Acceleration * FrameTime(), self.MinSpeed, self.MaxSpeed))
     end
 end
