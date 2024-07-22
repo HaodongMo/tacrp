@@ -8,7 +8,7 @@ ENT.Model                    = "models/weapons/tacint/rocket_deployed.mdl"
 
 ENT.IsRocket = true // projectile has a booster and will not drop.
 
-ENT.InstantFuse = true // projectile is armed immediately after firing.
+ENT.InstantFuse = false // projectile is armed immediately after firing.
 ENT.RemoteFuse = false // allow this projectile to be triggered by remote detonator.
 ENT.ImpactFuse = true // projectile explodes on impact.
 ENT.TimeFuse = false
@@ -16,17 +16,20 @@ ENT.TimeFuse = false
 ENT.ExplodeOnDamage = true
 ENT.ExplodeUnderwater = true
 
-ENT.Delay = 5
+ENT.Delay = 0
 ENT.SafetyFuse = 0
 
-ENT.LockOnEntity = NULL
-ENT.SteerSpeed = 2000
-ENT.SeekerAngle = math.cos(180)
-ENT.LeadTarget = false
+ENT.SteerSpeed = 45
+ENT.SeekerAngle = 180
+
+ENT.LeadTarget = true
 ENT.SuperSteerTime = 2
-ENT.SuperSteerSpeed = 1500
-ENT.BoostSpeed = 2000
-ENT.SoftLaunchTime = 0.5
+ENT.SuperSteerSpeed = 360
+
+ENT.MaxSpeed = 2000
+ENT.Acceleration = 3000
+
+ENT.SteerDelay = 1
 ENT.FlareRedirectChance = 0.1
 
 ENT.AudioLoop = "TacRP/weapons/rpg7/rocket_flight-1.wav"
@@ -46,58 +49,16 @@ function ENT:PhysicsCollide(data, collider)
     BaseClass.PhysicsCollide(self, data, collider)
 end
 
-function ENT:Think()
-    if IsValid(self.LockOnEntity) and self.SoftLaunchTime + self.SpawnTime <= CurTime() then
-        local dist = self.LockOnEntity:WorldSpaceCenter():DistToSqr(self:GetPos())
-
-        if dist < math.pow(1024, 2) then
-            self:PreDetonate()
+function ENT:OnThink()
+    if IsValid(self.LockOnEntity) and self.SteerDelay + self.SpawnTime <= CurTime() then
+        local dot = (self.LockOnEntity:WorldSpaceCenter() - self:GetPos()):GetNormalized():Dot(self:GetForward())
+        if dot >= 0.5 then
+            local dist = self.LockOnEntity:WorldSpaceCenter():DistToSqr(self:GetPos())
+            if dist < 728 ^ 2 then
+                self:PreDetonate()
+            end
         end
     end
-
-    BaseClass.Think(self)
-end
-
-function ENT:Impact(data, collider)
-    if self.Impacted then return true end
-    self.Impacted = true
-
-    local attacker = self.Attacker or self:GetOwner() or self
-
-    local ang = data.OurOldVelocity:Angle()
-    local fx = EffectData()
-    fx:SetOrigin(data.HitPos)
-    fx:SetNormal(-ang:Forward())
-    fx:SetAngles(-ang)
-    util.Effect("ManhackSparks", fx)
-
-    if IsValid(data.HitEntity) then
-        local dmginfo = DamageInfo()
-        dmginfo:SetAttacker(attacker)
-        dmginfo:SetInflictor(self)
-        dmginfo:SetDamageType(DMG_CRUSH + DMG_CLUB)
-        dmginfo:SetDamage(250 * (self.NPCDamage and 0.25 or 1))
-        dmginfo:SetDamageForce(data.OurOldVelocity * 25)
-        dmginfo:SetDamagePosition(data.HitPos)
-        data.HitEntity:TakeDamageInfo(dmginfo)
-    end
-
-    self:EmitSound("weapons/rpg/shotdown.wav", 80)
-
-    for i = 1, 4 do
-        local prop = ents.Create("prop_physics")
-        prop:SetPos(self:GetPos())
-        prop:SetAngles(self:GetAngles())
-        prop:SetModel("models/weapons/tacint/rpg7_shrapnel_p" .. i .. ".mdl")
-        prop:Spawn()
-        prop:GetPhysicsObject():SetVelocityInstantaneous(data.OurNewVelocity * 0.5 + VectorRand() * 75)
-        prop:SetCollisionGroup(COLLISION_GROUP_DEBRIS)
-
-        SafeRemoveEntityDelayed(prop, 3)
-    end
-
-    self:Remove()
-    return true
 end
 
 function ENT:Detonate()

@@ -67,24 +67,6 @@ function ENT:Initialize()
     end
 end
 
-function ENT:Impact(data, collider)
-    if self.Impacted then return end
-    self.Impacted = true
-
-    local attacker = self.Attacker or self:GetOwner() or self
-    if IsValid(data.HitEntity) then
-        local dmginfo = DamageInfo()
-        dmginfo:SetAttacker(attacker)
-        dmginfo:SetInflictor(self)
-        dmginfo:SetDamageType(DMG_CRUSH + DMG_CLUB)
-        dmginfo:SetDamage(250 * (self.NPCDamage and 0.5 or 1))
-        dmginfo:SetDamageForce(data.OurOldVelocity * 25)
-        dmginfo:SetDamagePosition(data.HitPos)
-        data.HitEntity:TakeDamageInfo(dmginfo)
-    end
-end
-
-
 function ENT:Detonate()
     local attacker = self.Attacker or self:GetOwner()
 

@@ -18,14 +18,17 @@ ENT.ExplodeUnderwater = true
 ENT.Delay = 10
 ENT.SafetyFuse = 0.15
 
-ENT.LockOnEntity = NULL
-ENT.SteerSpeed = 700
-ENT.SeekerAngle = math.cos(55)
+ENT.SteerSpeed = 120
+ENT.SeekerAngle = 55
+
 ENT.LeadTarget = true
-ENT.SuperSteerTime = 1.5
-ENT.SuperSteerSpeed = 1500
-ENT.BoostSpeed = 4000
-ENT.SoftLaunchTime = 0.5
+ENT.SuperSteerTime = 1
+ENT.SuperSteerSpeed = 240
+
+ENT.MaxSpeed = 5000
+ENT.Acceleration = 4000
+
+ENT.SteerDelay = 0.5
 ENT.FlareRedirectChance = 0.05
 
 ENT.AudioLoop = "TacRP/weapons/rpg7/rocket_flight-1.wav"
@@ -36,57 +39,13 @@ ENT.FlareColor = Color(255, 255, 255)
 
 DEFINE_BASECLASS(ENT.Base)
 
-function ENT:Think()
-    if IsValid(self.LockOnEntity) and self.SoftLaunchTime + self.SpawnTime <= CurTime() then
+function ENT:OnThink()
+    if IsValid(self.LockOnEntity) and self.SteerDelay + self.SpawnTime <= CurTime() then
         local dist = self.LockOnEntity:WorldSpaceCenter():DistToSqr(self:GetPos())
 
         if dist < math.pow(512, 2) then
             self:PreDetonate()
         end
-    end
-
-    BaseClass.Think(self)
-end
-
-function ENT:Impact(data, collider)
-    if self.SpawnTime + self.SafetyFuse > CurTime() and !self.NPCDamage then
-        local attacker = self.Attacker or self:GetOwner()
-        local ang = data.OurOldVelocity:Angle()
-        local fx = EffectData()
-        fx:SetOrigin(data.HitPos)
-        fx:SetNormal(-ang:Forward())
-        fx:SetAngles(-ang)
-        util.Effect("ManhackSparks", fx)
-
-        if IsValid(data.HitEntity) then
-            local dmginfo = DamageInfo()
-            dmginfo:SetAttacker(attacker)
-            dmginfo:SetInflictor(self)
-            dmginfo:SetDamageType(DMG_CRUSH + DMG_CLUB)
-            dmginfo:SetDamage(100 * (self.NPCDamage and 0.5 or 1))
-            dmginfo:SetDamageForce(data.OurOldVelocity * 25)
-            dmginfo:SetDamagePosition(data.HitPos)
-            data.HitEntity:TakeDamageInfo(dmginfo)
-        end
-
-        self:EmitSound("weapons/rpg/shotdown.wav", 80)
-
-        for i = 1, 4 do
-            local prop = ents.Create("prop_physics")
-            prop:SetPos(self:GetPos())
-            prop:SetAngles(self:GetAngles())
-            prop:SetModel("models/weapons/tacint/rpg7_shrapnel_p" .. i .. ".mdl")
-            prop:Spawn()
-            prop:GetPhysicsObject():SetVelocityInstantaneous(data.OurNewVelocity * 0.5 + VectorRand() * 75)
-            prop:SetCollisionGroup(COLLISION_GROUP_DEBRIS)
-
-            SafeRemoveEntityDelayed(prop, 3)
-        end
-
-        self:Remove()
-        return true
-    else
-        self:PreDetonate()
     end
 end
 

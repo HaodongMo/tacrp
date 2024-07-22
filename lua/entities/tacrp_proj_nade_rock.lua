@@ -233,8 +233,6 @@ function ENT:Initialize()
 end
 
 function ENT:Impact(data, collider)
-
-
     return true
 end
 

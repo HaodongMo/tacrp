@@ -1498,7 +1498,7 @@ ATT.PrintName = "Semi-Active"
 ATT.FullName = "Stinger Semi-Active Missile"
 ATT.Icon = Material("entities/tacrp_att_ammo_stinger.png", "mips smooth")
 ATT.Description = "Missiles that require constant guidance to hit targets. Locks rapidly."
-ATT.Pros = {"att.procon.locktime", "rating.lethality"}
+ATT.Pros = {"att.procon.locktime", "stat.damage"}
 ATT.Cons = {"att.procon.semiactive"}
 
 ATT.Category = "ammo_stinger"
@@ -1528,8 +1528,8 @@ ATT.PrintName = "Agile"
 ATT.FullName = "Stinger High Agility Missile"
 ATT.Icon = Material("entities/tacrp_att_ammo_stinger_qaam.png", "mips smooth")
 ATT.Description = "Highly maneuverable missile with a short range and long lock time."
-ATT.Pros = {"att.procon.maneuverability"}
-ATT.Cons = {"rating.range"}
+ATT.Pros = {"att.procon.proj.turn"}
+ATT.Cons = {"att.procon.locktime"}
 
 ATT.Category = "ammo_stinger"
 
@@ -1558,8 +1558,8 @@ ATT.PrintName = "Quad"
 ATT.FullName = "Stinger 4x Missile"
 ATT.Icon = Material("entities/tacrp_att_ammo_stinger_4aam.png", "mips smooth")
 ATT.Description = "Guided cluster missiles maximize pressure to enemy pilots."
-ATT.Pros = {"stat.clipsize"}
-ATT.Cons = {"rating.lethality", "att.procon.maneuverability"}
+ATT.Pros = {"att.procon.moreproj"}
+ATT.Cons = {"stat.damage", "att.procon.proj.turn"}
 
 ATT.Category = "ammo_stinger"
 
@@ -1600,7 +1600,7 @@ ATT.FullName = "Stinger Anti-Personnel Missile"
 ATT.Icon = Material("entities/tacrp_att_ammo_stinger_apers.png", "mips smooth")
 ATT.Description = "For rodents of unacceptable agility."
 ATT.Pros = {"att.procon.radius", "att.procon.proxfuse"}
-ATT.Cons = {"rating.range"}
+ATT.Cons = {"stat.damage", "att.procon.armdelay"}
 
 ATT.Category = "ammo_stinger"
 
