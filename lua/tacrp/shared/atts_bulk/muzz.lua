@@ -284,7 +284,7 @@ ATT.PrintName = "B. Brake"
 ATT.FullName = "Breaching Brake"
 ATT.Icon = Material("entities/tacrp_att_muzz_brake_breaching.png", "mips smooth")
 ATT.Description = "Spiked muzzle brake designed for close combat."
-ATT.Pros = {"stat.meleedamage"}
+ATT.Pros = {"stat.meleedamage", "stat.recoilstability"}
 ATT.Cons = {"stat.spread"}
 
 ATT.Model = "models/weapons/tacint_extras/addons/brake_breacher.mdl"
@@ -294,8 +294,9 @@ ATT.ModelOffset = Vector(-5.4, 0, 0)
 
 ATT.Category = {"silencer", "brake"}
 
-ATT.Mult_MeleeDamage = 1.5
-ATT.Mult_Spread = 1.05
+ATT.Mult_MeleeDamage = 1.4
+ATT.Mult_Spread = 1.25
+ATT.Mult_RecoilStability = 1.15
 
 ATT.SortOrder = 101
 
