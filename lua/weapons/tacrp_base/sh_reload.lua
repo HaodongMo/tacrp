@@ -217,7 +217,7 @@ function SWEP:CancelReload(doanims, keeptime)
 
                 if self.CurrentAnimation == "reload_start" and self.ShotgunReloadCompleteStart then
                     self:SetEndReload(true)
-                elseif self:Clip1() == self:GetLoadedRounds() then
+                elseif self:Clip1() == self:GetLoadedRounds() and !self:GetValue("ShotgunNoReverseStart") then
                     self:PlayAnimation("reload_start", -0.75 * mult, true, true)
                     stop = true
                 else
