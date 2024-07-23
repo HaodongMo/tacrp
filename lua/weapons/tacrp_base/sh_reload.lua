@@ -155,7 +155,7 @@ function SWEP:EndReload()
     if self:GetValue("ShotgunReload") then
         local mult = self:GetValue("ReloadTimeMult") / TacRP.ConVars["mult_reloadspeed"]:GetFloat()
         if self:Clip1() >= self:GetCapacity() or (!self:GetInfiniteAmmo() and self:Ammo1() == 0) or self:GetEndReload() then
-            if self:Clip1() == self:GetLoadedRounds() or !self:GetEmptyReload() then
+            if !self.ShotgunNoReverseStart and (self:Clip1() == self:GetLoadedRounds() or !self:GetEmptyReload()) then
                 self:PlayAnimation("reload_start", -0.75 * mult, true, true)
             else
                 self:PlayAnimation("reload_finish", mult, true, true)
@@ -175,7 +175,7 @@ function SWEP:EndReload()
                     math.min(math.min(3, self:GetCapacity() - self:Clip1()), self:GetInfiniteAmmo() and math.huge or self:Ammo1())
                     or 1
 
-            local delay = 0.9
+            local delay = self:GetValue("ShotgunUpInTime")
             for i = 1, res do
                 self:SetTimer(t * delay * ((i - 1) / 3) + 0.22, function()
                     self:RestoreClip(1)
@@ -183,7 +183,7 @@ function SWEP:EndReload()
                 end, "ShotgunRestoreClip")
             end
 
-            self:SetTimer(t * delay * (res / 3) + 0.22, function()
+            self:SetTimer(t * self:GetValue("ShotgunLoadInTime") * (res / 3), function()
                 self:SetLoadedRounds(self:GetLoadedRounds() + res)
                 self:DoBulletBodygroups()
             end, "SetLoadedRounds")
@@ -217,7 +217,7 @@ function SWEP:CancelReload(doanims, keeptime)
 
                 if self.CurrentAnimation == "reload_start" and self.ShotgunReloadCompleteStart then
                     self:SetEndReload(true)
-                elseif self:Clip1() == self:GetLoadedRounds() and !self:GetValue("ShotgunNoReverseStart") then
+                elseif self:Clip1() == self:GetLoadedRounds() and !self.ShotgunNoReverseStart then
                     self:PlayAnimation("reload_start", -0.75 * mult, true, true)
                     stop = true
                 else
