@@ -44,7 +44,8 @@ ATT.SortOrder = 1
 ATT.Mult_RPM = 1.15
 ATT.Mult_ShootTimeMult = 1 / 1.15
 
-ATT.Mult_RecoilKick = 1.25
+ATT.Add_RecoilVisualKick = 1
+ATT.Mult_RecoilKick = 1.5
 ATT.Add_ShootingSpeedMult = -0.1
 ATT.Add_SightedSpeedMult = -0.05
 
@@ -197,9 +198,9 @@ ATT.SortOrder = 2
 ATT.Mult_RPM = 0.85
 ATT.Mult_ShootTimeMult = 1 / 0.85
 
-ATT.Add_ShootingSpeedMult = 0.15
-ATT.Add_SightedSpeedMult = 0.05
-ATT.Mult_RecoilKick = 0.5
+ATT.Add_ShootingSpeedMult = 0.2
+ATT.Add_SightedSpeedMult = 0.08
+ATT.Mult_RecoilKick = 0.4
 ATT.Mult_RecoilVisualKick = 0.5
 
 ATT.Mult_MuzzleVelocity = 1.15
