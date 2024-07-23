@@ -220,22 +220,22 @@ L["stat.meleeperkint.desc"] = "Melee attribute influencing Techniques and Specia
 L["rating.meleeattacktime"] = "Haste"
 L["rating.meleeattacktime.desc"] = "How quickly the weapon can attack."
 L["stat.damage.desc_melee"] = "Damage dealt by primary attacks." -- used on melee damage
-L["stat.meleeattacktime"] = "Delay On Hit"
+L["stat.meleeattacktime"] = "Melee Attack Delay"
 L["stat.meleeattacktime.desc"] = "Amount of time between each attack if it hit something."
-L["stat.meleeattackmisstime"] = "Delay On Miss"
+L["stat.meleeattackmisstime"] = "Melee Miss Delay"
 L["stat.meleeattackmisstime.desc"] = "Amount of time between each attack if it didn't hit anything."
-L["stat.meleerange"] = "Attack Range"
+L["stat.meleerange"] = "Melee Range"
 L["stat.meleerange.desc"] = "How far away the weapon can reach for an attack."
-L["stat.meleedelay"] = "Windup"
+L["stat.meleedelay"] = "Melee Windup"
 L["stat.meleedelay.desc"] = "Delay between an attack starting and landing."
 
 
 
 L["stat.melee2damage"] = "Damage (Heavy)"
 L["stat.melee2damage.desc"] = "Damage dealt by heavy attacks."
-L["stat.melee2attacktime"] = "Delay On Hit (Heavy)"
+L["stat.melee2attacktime"] = "Melee Attack Delay (Heavy)"
 L["stat.melee2attacktime.desc"] = "Amount of time between each heavy attack if it hit something."
-L["stat.melee2attackmisstime"] = "Delay On Miss (Heavy)"
+L["stat.melee2attackmisstime"] = "Melee Miss Delay (Heavy)"
 L["stat.melee2attackmisstime.desc"] = "Amount of time between each heavy attack if it didn't hit anything."
 L["stat.meleethrowdamage"] = "Damage (Throw)"
 L["stat.meleethrowdamage.desc"] = "Damage dealt by thrown weapons."
