@@ -21,14 +21,10 @@ function SWEP:Reload(force)
 
     if self:StillWaiting(true) then return end
 
-   if self:GetJammed() and !self:StillWaiting() then
-        if math.random() <= 0.5 then
-            self:PlayAnimation("jam", 0.75, true, true)
-            self:SetJammed(false)
-        else
-            self:EmitSound(self:GetValue("Sound_Jam"), 75, math.Rand(92, 108), 1, CHAN_ITEM)
-            self:SetNextPrimaryFire(CurTime() + 0.1)
-        end
+    if self:GetJammed() then
+        self:PlayAnimation("jam", 0.75, true, true)
+        self:SetJammed(false)
+        self:SetCharge(false)
         return
     end
 
