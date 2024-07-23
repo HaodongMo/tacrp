@@ -74,7 +74,7 @@ function SWEP:Reload(force)
     self:SetReloading(true)
     self:SetEndReload(false)
 
-    self:SetEmptyReload(self:Clip1() == 0)
+    self:SetEmptyReload(self:GetValue("ShotgunNoReverseStart") or self:Clip1() == 0)
 
     self:DoBulletBodygroups()
 
