@@ -87,8 +87,13 @@ function SWEP:PrimaryAttack()
     if util.SharedRandom("tacRP_shootChance", 0, 1) <= self:GetJamChance(false) then
         local ret = self:RunHook("Hook_PreJam")
         if ret != true then
-            if self:GetBurstCount() == 0 then -- dryfire anim is snapping so don't interrupt fire anim for it
+            if self:GetBurstCount() == 0 then
                 self.Primary.Automatic = false
+            end
+            if self:GetBlindFire() then
+                self:PlayAnimation("blind_dryfire")
+            else
+                self:PlayAnimation("dryfire")
             end
             self:EmitSound(self:GetValue("Sound_Jam"), 75, 100, 1, CHAN_ITEM)
             self:SetBurstCount(0)
