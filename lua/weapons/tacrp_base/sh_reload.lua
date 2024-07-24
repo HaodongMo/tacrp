@@ -151,10 +151,13 @@ function SWEP:EndReload()
     if self:GetValue("ShotgunReload") then
         local mult = self:GetValue("ReloadTimeMult") / TacRP.ConVars["mult_reloadspeed"]:GetFloat()
         if self:Clip1() >= self:GetCapacity() or (!self:GetInfiniteAmmo() and self:Ammo1() == 0) or self:GetEndReload() then
+
+            local cancellable = TacRP.ConVars["reload_sg_cancel"]:GetBool() and !self:GetValue("ShotgunFullCancel")
+
             if !self.ShotgunNoReverseStart and (self:Clip1() == self:GetLoadedRounds() or !self:GetEmptyReload()) then
-                self:PlayAnimation("reload_start", -0.75 * mult, true, true)
+                self:PlayAnimation("reload_start", -0.75 * mult, !cancellable, true)
             else
-                self:PlayAnimation("reload_finish", mult, true, true)
+                self:PlayAnimation("reload_finish", mult, !cancellable, true)
             end
 
             self:SetReloading(false)
