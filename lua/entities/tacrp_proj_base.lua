@@ -177,12 +177,14 @@ function ENT:PhysicsCollide(data, collider)
         return
     end
 
-    if self.ImpactFuse and !self.Armed then
-        self.ArmTime = CurTime()
-        self.Armed = true
+    if self.ImpactFuse then
+        if !self.Armed then
+            self.ArmTime = CurTime()
+            self.Armed = true
 
-        if self:Impact(data, collider) then
-            return
+            if self:Impact(data, collider) then
+                return
+            end
         end
 
         if self.Delay == 0 or self.ExplodeOnImpact then
