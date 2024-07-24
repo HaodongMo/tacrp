@@ -962,6 +962,40 @@ Notably, some weapons in the base pack are now Value grade, a new lowest grade t
 </ul>
 ]],
     },
+    {
+        Title = "Update 24",
+        Type = "Patch Notes",
+        Date = "2024-07-24",
+        Author = "8Z",
+        Major = true,
+        Summary = "",
+        Contents = [[<body style="font-family:'Myriad Pro';color:white;font-size:125%;">
+
+<h3>Changelist</h3>
+<ul>
+<li><b>Added:</b> Quotes for various weapons.
+<li><b>Added:</b> Additional localization.
+<li><b>Changed:</b> Reworked missile logic for the Stinger and SMAW.
+<li><b>Changed:</b> Melee Techinques are now free attachments.
+<li><b>Changed:</b> Removed chance to fail an unjam attempt.
+<li><b>Changed:</b> Disabled shotgun reversing their starting animation on non-empty reload.
+<li><b>Fixed:</b> 40mm Healing grenades not healing.
+<li><b>Fixed:</b> Some sight issues with RMR being on guns it should not.
+<li><b>Rebalance:</b> Breaching Brake gives slight increase in recoil stability.
+<li><b>Rebalance:</b> P250 minor damage increase.
+<li><b>Rebalance:</b> Grease bolt has more recoil, Tactical Bolt increases more mobility.
+<li><b>Rebalance:</b> Melee Throw now consumes crossbow bolt ammo.
+<li><b>Rebalance:</b> Various nerfs to melee Special attachments and Momentum.
+</ul>
+
+<h3>Expansion Changelist</h3>
+<ul>
+<li><b>Added:</b> SMAW Hummingbird rockets, XM25 flechettes.
+<li><b>Changed:</b> Tweaked Kar98k reload behavior.
+<li><b>Rebalance:</b> Buff PSG-1, Amphibian; nerf SR-25; tweaked Kar98k.
+</ul>
+]],
+    },
 }
 TacRP.NewsRead = TacRP.NewsRead or {}
 TacRP.NewsFirstLoad = false

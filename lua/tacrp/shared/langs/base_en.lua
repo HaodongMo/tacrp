@@ -231,11 +231,11 @@ L["stat.meleedelay.desc"] = "Delay between an attack starting and landing."
 
 
 
-L["stat.melee2damage"] = "Damage (Heavy)"
+L["stat.melee2damage"] = "Damage (H)"
 L["stat.melee2damage.desc"] = "Damage dealt by heavy attacks."
-L["stat.melee2attacktime"] = "Melee Attack Delay (Heavy)"
+L["stat.melee2attacktime"] = "Melee Attack Delay (H)"
 L["stat.melee2attacktime.desc"] = "Amount of time between each heavy attack if it hit something."
-L["stat.melee2attackmisstime"] = "Melee Miss Delay (Heavy)"
+L["stat.melee2attackmisstime"] = "Melee Miss Delay (H)"
 L["stat.melee2attackmisstime.desc"] = "Amount of time between each heavy attack if it didn't hit anything."
 L["stat.meleethrowdamage"] = "Damage (Throw)"
 L["stat.meleethrowdamage.desc"] = "Damage dealt by thrown weapons."
