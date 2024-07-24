@@ -19,7 +19,7 @@ ENT.FlareSizeMin = 150
 ENT.FlareSizeMax = 200
 
 ENT.Delay = 0
-ENT.SafetyFuse = 0.15
+ENT.SafetyFuse = 0.1
 
 ENT.SteerSpeed = 180
 ENT.SeekerAngle = 55

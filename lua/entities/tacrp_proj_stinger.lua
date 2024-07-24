@@ -16,7 +16,7 @@ ENT.ExplodeOnDamage = true
 ENT.ExplodeUnderwater = true
 
 ENT.Delay = 10
-ENT.SafetyFuse = 0.15
+ENT.SafetyFuse = 0.1
 
 ENT.SteerSpeed = 120
 ENT.SeekerAngle = 55

@@ -181,10 +181,10 @@ function ENT:PhysicsCollide(data, collider)
         if !self.Armed then
             self.ArmTime = CurTime()
             self.Armed = true
+        end
 
-            if self:Impact(data, collider) then
-                return
-            end
+        if self:Impact(data, collider) then
+            return
         end
 
         if self.Delay == 0 or self.ExplodeOnImpact then
@@ -472,8 +472,9 @@ function ENT:Draw()
     self:DrawModel()
 
     if self.FlareColor then
+        local mult = self.SafetyFuse and math.Clamp((CurTime() - (self.SpawnTime + self.SafetyFuse)) / self.SafetyFuse, 0.1, 1) or 1
         render.SetMaterial(mat)
-        render.DrawSprite(self:GetPos() + (self:GetAngles():Forward() * -16), math.Rand(self.FlareSizeMin, self.FlareSizeMax), math.Rand(self.FlareSizeMin, self.FlareSizeMax), self.FlareColor)
+        render.DrawSprite(self:GetPos() + (self:GetAngles():Forward() * -16), mult * math.Rand(self.FlareSizeMin, self.FlareSizeMax), mult * math.Rand(self.FlareSizeMin, self.FlareSizeMax), self.FlareColor)
     end
 end
 
