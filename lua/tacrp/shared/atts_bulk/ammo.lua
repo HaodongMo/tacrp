@@ -71,6 +71,7 @@ ATT.Override_Spread = 0.06
 ATT.Override_ShotgunPelletSpread = 0.04
 
 ATT.Override_HipFireSpreadPenalty = 0
+ATT.Override_MidAirSpreadPenalty = 0
 
 ATT.Override_MuzzleVelocity = 9500
 
@@ -151,6 +152,7 @@ ATT.Override_Spread = 0.015
 ATT.Override_ShotgunPelletSpread = 0.01
 
 ATT.Override_HipFireSpreadPenalty = 0.03
+ATT.Override_MidAirSpreadPenalty = 0
 
 
 ATT.MuzzleVelocity = 15000
