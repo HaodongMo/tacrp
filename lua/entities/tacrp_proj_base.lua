@@ -51,7 +51,7 @@ ENT.FlareSizeMax = 250
 
 
 // Guided projectile related
-ENT.SteerDelay = 0.5 // Delay before steering logic kicks in
+ENT.SteerDelay = 0 // Delay before steering logic kicks in
 ENT.SteerSpeed = 60 // Turn rate in degrees per second
 ENT.SteerBrake = 0 // Amount of speed to slow down by when turning
 ENT.SeekerAngle = 180 // Angle difference (degrees) above which projectile loses target
