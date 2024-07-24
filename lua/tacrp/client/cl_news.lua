@@ -973,6 +973,7 @@ Notably, some weapons in the base pack are now Value grade, a new lowest grade t
 
 <h3>Changelist</h3>
 <ul>
+<li><b>Added:</b> USP 9mm conversion attachment (using HL2 sounds).
 <li><b>Added:</b> Quotes for various weapons.
 <li><b>Added:</b> Additional localization.
 <li><b>Changed:</b> Reworked missile logic for the Stinger and SMAW.

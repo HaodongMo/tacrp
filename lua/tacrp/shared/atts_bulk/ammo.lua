@@ -1624,3 +1624,42 @@ end
 
 TacRP.LoadAtt(ATT, "ammo_stinger_apers")
 -- #endregion
+
+
+------------------------------
+-- #region ammo_usp_9mm
+------------------------------
+ATT = {}
+
+ATT.PrintName = "9x19mm"
+ATT.FullName = "USP 9x19mm Conversion"
+ATT.Icon = Material("entities/tacrp_ex_usp.png", "mips smooth")
+ATT.Description = "Fire a smaller caliber round with higher capacity and firerate."
+ATT.Pros = {"stat.clipsize", "stat.rpm", "stat.recoil"}
+ATT.Cons = {"stat.damage"}
+
+ATT.SortOrder = 0
+
+ATT.Category = "ammo_usp"
+
+ATT.Override_Ammo_Expanded = "pistol"
+
+ATT.Mult_RPM = 1.15
+
+ATT.Add_ClipSize = 3
+ATT.Mult_RecoilSpreadPenalty = 0.85
+ATT.Mult_RecoilKick = 0.5
+
+ATT.Mult_Damage_Max = 24 / 28
+ATT.Mult_Damage_Min = 10 / 12
+
+ATT.Override_Sound_Shoot = "weapons/pistol/pistol_fire2.wav" -- maximum gordon freeman
+ATT.Override_Sound_Shoot_Silenced = "tacrp/weapons/p2000/p2000_fire_silenced-1.wav"
+ATT.Override_ShootPitchVariance = 2
+
+if engine.ActiveGamemode() == "terrortown" then
+    ATT.Free = true
+end
+
+TacRP.LoadAtt(ATT, "ammo_usp_9mm")
+-- #endregion
