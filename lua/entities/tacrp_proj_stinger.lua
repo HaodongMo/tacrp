@@ -43,7 +43,8 @@ function ENT:OnThink()
     if IsValid(self.LockOnEntity) and self.SteerDelay + self.SpawnTime <= CurTime() then
         local dist = self.LockOnEntity:WorldSpaceCenter():DistToSqr(self:GetPos())
 
-        if dist < math.pow(512, 2) then
+        if dist < 256 ^ 2 then
+            self:SetPos(self.LockOnEntity:GetPos())
             self:PreDetonate()
         end
     end
