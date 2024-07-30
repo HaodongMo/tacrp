@@ -21,15 +21,15 @@ ENT.FlareSizeMax = 200
 ENT.Delay = 0
 ENT.SafetyFuse = 0.1
 
-ENT.SteerSpeed = 180
-ENT.SeekerAngle = 55
+ENT.SteerSpeed = 200
+ENT.SeekerAngle = 90
 
 ENT.LeadTarget = true
 ENT.SuperSteerTime = 0.5
 ENT.SuperSteerSpeed = -90 // yes this is intentionally negative
 
 ENT.MaxSpeed = 6000
-ENT.Acceleration = 3000
+ENT.Acceleration = 2000
 
 ENT.SteerDelay = 0
 ENT.FlareRedirectChance = 0.1
@@ -65,12 +65,12 @@ function ENT:Detonate()
 
     local dmg = DamageInfo()
     dmg:SetAttacker(attacker)
-    dmg:SetDamageType(DMG_AIRBOAT + DMG_SNIPER + DMG_BLAST)
+    dmg:SetDamageType(DMG_BLAST)
     dmg:SetInflictor(self)
     dmg:SetDamageForce(self:GetVelocity() * 100)
     dmg:SetDamagePosition(src)
-    dmg:SetDamage(200 * mult)
-    util.BlastDamageInfo(dmg, self:GetPos(), 512)
+    dmg:SetDamage(150 * mult)
+    util.BlastDamageInfo(dmg, self:GetPos(), 256)
 
     local fx = EffectData()
     fx:SetOrigin(self:GetPos())

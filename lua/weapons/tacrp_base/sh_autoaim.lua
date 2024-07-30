@@ -66,7 +66,7 @@ function SWEP:ThinkLockOn()
                     try_target = target
                 elseif (target:IsNPC() or target:IsNextBot()) and target:Health() > 0 then
                     try_target = target
-                elseif target.LVS or target.Targetable then
+                elseif (target.LVS and target:GetHP() > 0) or target.Targetable then
                     try_target = target
                 elseif TacRP.LockableEntities[target:GetClass()] then
                     try_target = target
@@ -84,10 +84,9 @@ function SWEP:ThinkLockOn()
                         endpos = try_target:WorldSpaceCenter(),
                         mask = MASK_SHOT,
                         filter = function(ent)
-                            if ent == try_target then return false end
-                            if ent == owner then return false end
-                            if ent:GetOwner() == try_target then return false end
+                            if ent == try_target or ent == owner or ent:GetOwner() == try_target then return false end
                             if ent:IsVehicle() and ent:GetDriver() == owner then return false end
+                            if ent:GetClass() == "lvs_wheeldrive_wheel" then return false end
                             return true
                         end
                     })

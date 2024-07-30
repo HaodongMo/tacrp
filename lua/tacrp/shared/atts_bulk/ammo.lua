@@ -1558,8 +1558,8 @@ ATT.PrintName = "Quad"
 ATT.FullName = "Stinger 4x Missile"
 ATT.Icon = Material("entities/tacrp_att_ammo_stinger_4aam.png", "mips smooth")
 ATT.Description = "Guided cluster missiles maximize pressure to enemy pilots."
-ATT.Pros = {"att.procon.moreproj"}
-ATT.Cons = {"stat.damage", "att.procon.proj.turn"}
+ATT.Pros = {"att.procon.moreproj", "att.procon.proj.turn"}
+ATT.Cons = {"stat.damage", "stat.spread", "att.procon.armdelay"}
 
 ATT.Category = "ammo_stinger"
 
@@ -1571,14 +1571,15 @@ ATT.Override_Num = 4
 ATT.Override_Spread = 0.1
 ATT.Override_Damage_Max = 75
 ATT.Override_Damage_Min = 75
+ATT.Override_LockOnAngle = math.cos(math.rad(15))
 
 ATT.Hook_PreShoot = function(wep)
     wep.QuadShootIndex = 0
 end
 
 ATT.Hook_PreShootEnt = function(wep, ent)
-    ent.SoftLaunchTime = 0.5 + (wep.QuadShootIndex * 0.25)
-    ent.BoostSpeed = 1500 + (wep.QuadShootIndex * 250)
+    -- ent.SuperSteerTime = 0.25 + (wep.QuadShootIndex * 0.25)
+    ent.Acceleration = 1500 + (wep.QuadShootIndex * 250)
 
     wep.QuadShootIndex = wep.QuadShootIndex + 1
 end
@@ -1610,7 +1611,7 @@ ATT.Override_ShootEnt = "tacrp_proj_stinger_apers"
 
 ATT.Override_LockOnRange = 6000
 ATT.Override_LockOnTime = 0.5
-ATT.Override_LockOnAngle = math.cos(math.rad(20))
+ATT.Override_LockOnAngle = math.cos(math.rad(10))
 
 ATT.Range_Max = 6000
 ATT.Range_Min = 1000

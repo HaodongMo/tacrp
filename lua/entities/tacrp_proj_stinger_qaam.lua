@@ -1,6 +1,6 @@
 AddCSLuaFile()
 
-ENT.Base                     = "tacrp_proj_base"
+ENT.Base                     = "tacrp_proj_stinger"
 ENT.PrintName                = "FIM-92 Missile (QAAM)"
 ENT.Spawnable                = false
 
@@ -36,49 +36,3 @@ ENT.AudioLoop = "TacRP/weapons/rpg7/rocket_flight-1.wav"
 ENT.SmokeTrail = true
 
 ENT.FlareColor = Color(175, 175, 255)
-
-DEFINE_BASECLASS(ENT.Base)
-
-function ENT:OnThink()
-    if IsValid(self.LockOnEntity) and self.SteerDelay + self.SpawnTime <= CurTime() then
-        local dot = (self.LockOnEntity:WorldSpaceCenter() - self:GetPos()):GetNormalized():Dot(self:GetForward())
-        if dot >= 0.5 then
-            local dist = self.LockOnEntity:WorldSpaceCenter():DistToSqr(self:GetPos())
-
-            if dist < 256 ^ 2 then
-                self:SetPos(self.LockOnEntity:GetPos())
-                self:PreDetonate()
-            end
-        end
-    end
-end
-
-function ENT:Detonate()
-    local attacker = self.Attacker or self:GetOwner()
-    local dir = self:GetForward()
-    local src = self:GetPos() - dir * 64
-
-    local mult = TacRP.ConVars["mult_damage_explosive"]:GetFloat()
-
-    local dmg = DamageInfo()
-    dmg:SetAttacker(attacker)
-    dmg:SetDamageType(DMG_AIRBOAT + DMG_SNIPER + DMG_BLAST)
-    dmg:SetInflictor(self)
-    dmg:SetDamageForce(self:GetVelocity() * 100)
-    dmg:SetDamagePosition(src)
-    dmg:SetDamage(800 * mult)
-    util.BlastDamageInfo(dmg, self:GetPos(), 512)
-
-    local fx = EffectData()
-    fx:SetOrigin(self:GetPos())
-
-    if self:WaterLevel() > 0 then
-        util.Effect("WaterSurfaceExplosion", fx)
-    else
-        util.Effect("Explosion", fx)
-    end
-
-    self:EmitSound("TacRP/weapons/rpg7/explode.wav", 125)
-
-    self:Remove()
-end

@@ -11,7 +11,7 @@ SWEP.Category = "Tactical RP (Special)"
 SWEP.SubCatTier = "9Special"
 SWEP.SubCatType = "6Launcher"
 
-SWEP.Description = "Guided lock-on missile launcher. Requires a lock-on in order to fire. A hit is not guaranteed."
+SWEP.Description = "Homing anti-air missile launcher. High blast damage but limited effect on armored targets.\nRequires a lock-on in order to fire."
 SWEP.Description_Quote = "\"A cornered fox is more dangerous than a jackal!\""
 
 SWEP.Trivia_Caliber = "Infrared Homing Missile"
