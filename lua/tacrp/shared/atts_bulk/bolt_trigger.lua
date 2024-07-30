@@ -460,7 +460,7 @@ ATT.Description = "Very sensitive trigger for rapid semi-automatic fire."
 ATT.Pros = {"stat.rpm"}
 ATT.Cons = {"stat.recoilmaximum", "stat.recoilstability", "stat.hipfirespread"}
 
-ATT.Category = {"trigger_semi", "trigger_akimbo", "trigger_revolver"}
+ATT.Category = {"trigger_semi", "trigger_revolver"}
 
 ATT.SortOrder = 4
 
@@ -471,6 +471,33 @@ ATT.Mult_HipFireSpreadPenalty = 1.15
 
 TacRP.LoadAtt(ATT, "trigger_hair")
 -- #endregion
+
+------------------------------
+-- #region trigger_hair_akimbo
+------------------------------
+ATT = {}
+
+ATT.PrintName = "Feather"
+ATT.FullName = "Feather Trigger"
+ATT.Icon = Material("entities/tacrp_att_trigger_hair.png", "mips smooth")
+ATT.Description = "Very sensitive trigger for rapid akimbo fire."
+ATT.Pros = {"stat.rpm", "stat.postburstdelay"}
+ATT.Cons = {"stat.recoilmaximum", "stat.recoil"}
+
+ATT.Category = {"trigger_akimbo"}
+ATT.InvATt = "trigger_hair"
+
+ATT.SortOrder = 4
+
+ATT.Mult_PostBurstDelay = 0.5
+
+ATT.Mult_RPMMultSemi = 1.2
+ATT.Mult_RPMMultBurst = 1.2
+ATT.Mult_RecoilMaximum = 1.25
+ATT.Mult_RecoilStability = 0.5
+ATT.Mult_RecoilKick = 1.2
+
+TacRP.LoadAtt(ATT, "trigger_hair_akimbo")
 
 ------------------------------
 -- #region trigger_heavy

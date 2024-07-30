@@ -31,6 +31,7 @@ SWEP.BalanceStats = {
         RPM = 420,
         Spread = 0.02,
 
+        ShootingSpeedMult = 0.75,
         RecoilKick = 9,
     },
     [TacRP.BALANCE_TTT] = {
@@ -130,7 +131,7 @@ SWEP.ShootTimeMult = 0.6
 // handling
 
 SWEP.MoveSpeedMult = 0.975
-SWEP.ShootingSpeedMult = 0.9
+SWEP.ShootingSpeedMult = 0.8
 SWEP.SightedSpeedMult = 1
 
 SWEP.ReloadSpeedMult = 0.6
