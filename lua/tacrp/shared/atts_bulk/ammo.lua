@@ -1497,7 +1497,7 @@ ATT = {}
 ATT.PrintName = "Semi-Active"
 ATT.FullName = "Stinger Semi-Active Missile"
 ATT.Icon = Material("entities/tacrp_att_ammo_stinger.png", "mips smooth")
-ATT.Description = "Missiles that require constant guidance to hit targets. Locks rapidly."
+ATT.Description = "Powerful missiles that lock rapidly but require constant guidance."
 ATT.Pros = {"att.procon.locktime", "stat.damage"}
 ATT.Cons = {"att.procon.semiactive"}
 
@@ -1578,9 +1578,6 @@ ATT.Hook_PreShoot = function(wep)
 end
 
 ATT.Hook_PreShootEnt = function(wep, ent)
-    -- ent.SuperSteerTime = 0.25 + (wep.QuadShootIndex * 0.25)
-    ent.Acceleration = 1500 + (wep.QuadShootIndex * 250)
-
     wep.QuadShootIndex = wep.QuadShootIndex + 1
 end
 
@@ -1611,7 +1608,7 @@ ATT.Override_ShootEnt = "tacrp_proj_stinger_apers"
 
 ATT.Override_LockOnRange = 6000
 ATT.Override_LockOnTime = 0.5
-ATT.Override_LockOnAngle = math.cos(math.rad(10))
+ATT.Override_LockOnAngle = math.cos(math.rad(20))
 
 ATT.Range_Max = 6000
 ATT.Range_Min = 1000

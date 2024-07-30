@@ -1,6 +1,6 @@
 AddCSLuaFile()
 
-ENT.Base                     = "tacrp_proj_base"
+ENT.Base                     = "tacrp_proj_stinger"
 ENT.PrintName                = "FIM-92 Missile (4AAM)"
 ENT.Spawnable                = false
 
@@ -49,7 +49,13 @@ function ENT:OnThink()
             local dist = self.LockOnEntity:WorldSpaceCenter():DistToSqr(self:GetPos())
 
             if dist < 256 ^ 2 then
-                self:SetPos(self.LockOnEntity:GetPos())
+                local tr = util.TraceLine({
+                    start = self:GetPos(),
+                    endpos = self.LockOnEntity:GetPos(),
+                    filter = self,
+                    mask = MASK_SOLID,
+                })
+                self:SetPos(tr.HitPos)
                 self:PreDetonate()
             end
         end

@@ -77,25 +77,23 @@ function SWEP:ThinkLockOn()
                 // Dot product
                 local target_angle = math.deg(math.acos(player_aim_vector:Dot((try_target:WorldSpaceCenter() - owner:GetShootPos()):GetNormalized())))
 
-                if target_angle < angle then
+                if target_angle >= angle then continue end
 
-                    local occlusion_tr = util.TraceLine({
-                        start = owner:GetShootPos(),
-                        endpos = try_target:WorldSpaceCenter(),
-                        mask = MASK_SHOT,
-                        filter = function(ent)
-                            if ent == try_target or ent == owner or ent:GetOwner() == try_target then return false end
-                            if ent:IsVehicle() and ent:GetDriver() == owner then return false end
-                            if ent:GetClass() == "lvs_wheeldrive_wheel" then return false end
-                            return true
-                        end
-                    })
+                local occlusion_tr = util.TraceLine({
+                    start = owner:GetShootPos(),
+                    endpos = try_target:WorldSpaceCenter(),
+                    mask = MASK_SHOT,
+                    filter = function(ent)
+                        if ent == try_target or ent == owner or ent:GetOwner() == try_target then return false end
+                        if ent:IsVehicle() and ent:GetDriver() == owner then return false end
+                        if ent:GetClass() == "lvs_wheeldrive_wheel" or scripted_ents.IsBasedOn(ent:GetClass(), "tacrp_proj_base") then return false end
+                        return true
+                    end
+                })
+                if occlusion_tr.Hit then continue end
 
-                    if occlusion_tr.Hit then continue end
-
-                    lockontarget = try_target
-                    angle = target_angle
-                end
+                lockontarget = try_target
+                angle = target_angle
             end
         end
 

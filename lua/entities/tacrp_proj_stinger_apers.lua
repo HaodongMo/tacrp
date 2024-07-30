@@ -1,6 +1,6 @@
 AddCSLuaFile()
 
-ENT.Base                     = "tacrp_proj_base"
+ENT.Base                     = "tacrp_proj_stinger"
 ENT.PrintName                = "FIM-92 Missile (APERS)"
 ENT.Spawnable                = false
 
@@ -37,17 +37,6 @@ ENT.AudioLoop = "TacRP/weapons/rpg7/rocket_flight-1.wav"
 ENT.SmokeTrail = true
 
 ENT.FlareColor = Color(255, 255, 255)
-
-
-DEFINE_BASECLASS(ENT.Base)
-
-function ENT:PhysicsCollide(data, collider)
-    if self:Impact(data, collider) then
-        return
-    end
-
-    BaseClass.PhysicsCollide(self, data, collider)
-end
 
 function ENT:OnThink()
     if IsValid(self.LockOnEntity) and self.SteerDelay + self.SpawnTime <= CurTime() then
