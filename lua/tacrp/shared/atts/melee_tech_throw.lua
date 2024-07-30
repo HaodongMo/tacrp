@@ -41,7 +41,7 @@ ATT.Hook_SecondaryAttack = function(self)
         dispersion = dispersion * spread * 36
 
         rocket.Model = self.ThrownKnifeModel or self.WorldModel
-        rocket.Damage = self:GetValue("MeleeDamage") * self:GetMeleePerkDamage()
+        rocket.Damage = self:GetValue("MeleeDamage") * self:GetMeleePerkDamage() * self:GetConfigDamageMultiplier()
         rocket.Inflictor = self
         rocket.DamageType = self:GetValue("MeleeDamageType")
         rocket.Sound_MeleeHit = istable(self.Sound_MeleeHit) and table.Copy(self.Sound_MeleeHit) or self.Sound_MeleeHit

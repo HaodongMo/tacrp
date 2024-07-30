@@ -973,6 +973,7 @@ Notably, some weapons in the base pack are now Value grade, a new lowest grade t
 
 <h3>Changelist</h3>
 <ul>
+<li><b>Added:</b> ConVar multipliers for Headshot Damage and Melee Weapon Damage.
 <li><b>Added:</b> USP 9mm conversion attachment (using HL2 sounds).
 <li><b>Added:</b> Quotes for various weapons.
 <li><b>Added:</b> Additional localization.
@@ -996,7 +997,8 @@ Notably, some weapons in the base pack are now Value grade, a new lowest grade t
 <ul>
 <li><b>Added:</b> SMAW Hummingbird rockets, XM25 flechettes.
 <li><b>Changed:</b> Tweaked Kar98k reload behavior.
-<li><b>Rebalance:</b> Buff PSG-1, Amphibian; nerf SR-25; tweaked Kar98k.
+<li><b>Fixed:</b> SMAW projectiles not obeying explosive damage scaling.
+<li><b>Rebalance:</b> Buff PSG-1, Amphibian, P210; nerf SR-25; tweaked Kar98k.
 </ul>
 ]],
     },

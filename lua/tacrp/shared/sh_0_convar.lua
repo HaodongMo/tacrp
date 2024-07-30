@@ -832,7 +832,18 @@ local conVars = {
         min = 0.1,
         replicated = true,
     },
-
+    {
+        name = "mult_headshot",
+        default = "1",
+        min = 0,
+        replicated = true,
+    },
+    {
+        name = "mult_damage_melee",
+        default = "1",
+        min = 0.01,
+        replicated = true,
+    },
 
     {
         name = "recoilreset",
@@ -1255,6 +1266,23 @@ local function menu_balance_ti(panel)
         min = 0.1,
         max = 3,
     })
+    panel:AddControl("slider", {
+        label = "Melee Weapon Damage",
+        command = "tacrp_mult_damage_melee",
+        type = "float",
+        min = 0.1,
+        max = 3,
+    })
+    panel:ControlHelp("Does not affect Quick Melee / bashing.")
+    panel:AddControl("slider", {
+        label = "Headshot Multiplier",
+        command = "tacrp_mult_headshot",
+        type = "float",
+        min = 0,
+        max = 2,
+    })
+    panel:ControlHelp("If set to 0, headshots will not do any bonus damage.")
+
 
     header(panel, "\nRecoil")
     panel:AddControl("checkbox", {

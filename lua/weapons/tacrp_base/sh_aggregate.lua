@@ -1246,7 +1246,6 @@ SWEP.StatGroupsMelee = {
         Description = "stat.damage.desc_melee",
         RatingFunction = function(self, base)
             local valfunc = base and self.GetBaseValue or self.GetValue
-
             return Lerp((valfunc(self, "MeleeDamage") - 10) / 50, 0, 100)
         end,
     },
@@ -1301,7 +1300,7 @@ SWEP.StatDisplayMelee = {
         Description = "stat.damage.desc_melee",
         Value = "MeleeDamage",
         AggregateFunction = function(self, base, val)
-            return math.floor(val)
+            return math.floor(val * self:GetConfigDamageMultiplier())
         end,
     },
     {
@@ -1365,7 +1364,7 @@ SWEP.StatDisplayMelee = {
         Value = "Melee2Damage",
         ValueCheck = "HeavyAttack",
         AggregateFunction = function(self, base, val)
-            return math.Round(self:GetHeavyAttackDamage(base))
+            return math.Round(self:GetHeavyAttackDamage(base) * self:GetConfigDamageMultiplier())
         end,
     },
     {
@@ -1396,7 +1395,7 @@ SWEP.StatDisplayMelee = {
         Value = "MeleeDamage",
         ValueCheck = "ThrowAttack",
         AggregateFunction = function(self, base, val)
-            return math.floor(val * self:GetMeleePerkDamage(base))
+            return math.floor(val * self:GetMeleePerkDamage(base) * self:GetConfigDamageMultiplier())
         end,
     },
     {

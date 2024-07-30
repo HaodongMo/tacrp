@@ -739,6 +739,8 @@ local type_to_cvar = {
 function SWEP:GetConfigDamageMultiplier()
     if self:IsShotgun() then
         return TacRP.ConVars["mult_damage_shotgun"]:GetFloat()
+    elseif self:GetValue("PrimaryMelee") then
+        return TacRP.ConVars["mult_damage_melee"]:GetFloat()
     else
         local cvar = type_to_cvar[self.SubCatType] or "mult_damage"
         return TacRP.ConVars[cvar] and TacRP.ConVars[cvar]:GetFloat() or 1
@@ -747,6 +749,7 @@ end
 
 function SWEP:GetBodyDamageMultipliers(base)
     local valfunc = base and self.GetBaseValue or self.GetValue
+
     local btbl = table.Copy(valfunc(self, "BodyDamageMultipliers"))
 
     for k, v in pairs(valfunc(self, "BodyDamageMultipliersExtra") or {}) do
@@ -755,6 +758,15 @@ function SWEP:GetBodyDamageMultipliers(base)
         else
             btbl[k] = btbl[k] * v
         end
+    end
+
+    local mult = TacRP.ConVars["mult_headshot"]:GetFloat()
+    if mult <= 0 then
+        btbl[HITGROUP_HEAD] = 1
+    elseif mult <= 1 then
+        btbl[HITGROUP_HEAD] = Lerp(mult, 1, btbl[HITGROUP_HEAD])
+    else
+        btbl[HITGROUP_HEAD] = btbl[HITGROUP_HEAD] * mult
     end
 
     return btbl
