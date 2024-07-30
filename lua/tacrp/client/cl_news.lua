@@ -965,10 +965,10 @@ Notably, some weapons in the base pack are now Value grade, a new lowest grade t
     {
         Title = "Update 24",
         Type = "Patch Notes",
-        Date = "2024-07-24",
+        Date = "2024-07-30",
         Author = "8Z",
-        Major = true,
-        Summary = "",
+        Major = false,
+        Summary = "Small list of fixes.",
         Contents = [[<body style="font-family:'Myriad Pro';color:white;font-size:125%;">
 
 <h3>Changelist</h3>
@@ -982,7 +982,10 @@ Notably, some weapons in the base pack are now Value grade, a new lowest grade t
 <li><b>Changed:</b> Disabled shotgun reversing their starting animation on non-empty reload.
 <li><b>Fixed:</b> 40mm Healing grenades not healing.
 <li><b>Fixed:</b> Some sight issues with RMR being on guns it should not.
+<li><b>Fixed:</b> Missing accessory slot for some akimbos.
+<li><b>Fixed:</b> Missing sling and other accessory attachments on some guns.
 <li><b>Rebalance:</b> Breaching Brake gives slight increase in recoil stability.
+<li><b>Rebalance:</b> Dual MTX minor damage buff and recoil increase.
 <li><b>Rebalance:</b> P250 minor damage increase.
 <li><b>Rebalance:</b> Grease bolt has more recoil, Tactical Bolt increases more mobility.
 <li><b>Rebalance:</b> Melee Throw now consumes crossbow bolt ammo.
