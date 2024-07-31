@@ -4,7 +4,7 @@ SWEP.Spawnable = true
 AddCSLuaFile()
 
 // names and stuff
-SWEP.PrintName = "HK P2000"
+SWEP.PrintName = "P2000"
 SWEP.AbbrevName = "P2000"
 SWEP.Category = "Tactical RP"
 
@@ -175,7 +175,7 @@ SWEP.HolsterAng = Angle(90, 0, 0)
 
 // reload
 
-SWEP.ClipSize = 15 // 13 not realism :(
+SWEP.ClipSize = 13
 SWEP.Ammo = "pistol"
 
 SWEP.ReloadUpInTime = 0.85

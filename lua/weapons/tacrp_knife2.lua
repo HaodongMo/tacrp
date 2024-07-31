@@ -4,10 +4,10 @@ SWEP.Spawnable = true
 AddCSLuaFile()
 
 SWEP.PrintName = "Jackal Knife"
-SWEP.Category = "Tactical RP (Special)"
+SWEP.Category = "Tactical RP"
 
 SWEP.SubCatTier = "9Special"
-SWEP.SubCatType = "8Bladed Melee"
+SWEP.SubCatType = "8Melee"
 
 SWEP.Description = "Very edgy looking knife. Light, partially skeletized blade makes it faster to swing but do less damage."
 

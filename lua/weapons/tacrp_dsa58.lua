@@ -4,12 +4,12 @@ SWEP.Spawnable = true
 AddCSLuaFile()
 
 // names and stuff
-SWEP.PrintName = "DSA SA58 OSW"
+SWEP.PrintName = "SA58 OSW"
 SWEP.AbbrevName = "SA58"
 SWEP.Category = "Tactical RP"
 
 SWEP.SubCatTier = "3Security"
-SWEP.SubCatType = "5Battle Rifle"
+SWEP.SubCatType = "4Assault Rifle"
 
 SWEP.Description = "Battle rifle with slow fire rate but very high damage and armor penetration. Has a grippod that provides some stability if deployed."
 SWEP.Description_Quote = "\"Shut up, clock in and load up.\""

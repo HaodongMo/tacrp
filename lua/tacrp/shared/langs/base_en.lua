@@ -40,11 +40,11 @@ L["type.dmr"] = "Marksman Rifle" -- precision-oritented rifles for intermediate 
 L["type.sniper_rifle"] = "Sniper Rifle" -- precision rifles strictly for long range
 -- the difference between marksman and sniper can get a little arbitrary sorry
 --L["type.amr"] = "Anti-Materiel Rifle" -- 50 cal or thereabouts
-L["type.melee_sharp"] = "Bladed Melee Weapon" -- sharp
+L["type.8melee"] = "Melee" -- sharp
 L["type.melee_blunt"] = "Blunt Melee Weapon" -- not sharp
 L["type.equipment"] = "Equipment" -- not a gun, or really a weapon
 L["type.throwable"] = "Throwable" -- baseball
-L["type.launcher"] = "Launcher" -- shoots splodey thing
+L["type.8launcher"] = "Launcher" -- shoots splodey thing
 L["type.special_weapon"] = "Special Weapon" -- weapons so unique they dont really fit in any other category (also good for containing weapons you dont want to show up in the regular mix)
 
 L["cust.rating"] = "Rating"
@@ -508,11 +508,11 @@ STL["type.battle_rifle"] = "5Battle Rifle"
 STL["type.dmr"] = "6Marksman Rifle"
 STL["type.sniper_rifle"] = "7Sniper Rifle"
 --STL["type.amr"] = "9Anti-Materiel Rifle"
-STL["type.melee_sharp"] = "8Bladed Melee"
+STL["type.8melee"] = "8Melee"
 STL["type.melee_blunt"] = "8Blunt Melee"
 STL["type.equipment"] = "9Equipment"
 STL["type.throwable"] = "9Throwable"
-STL["type.launcher"] = "6Launcher"
+STL["type.8launcher"] = "8Launcher"
 STL["type.special_weapon"] = "7Special Weapon"
 STL["slot.optic"] = "Optic"
 STL["slot.muzzle"] = "Muzzle"

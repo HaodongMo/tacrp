@@ -4,12 +4,12 @@ SWEP.Spawnable = true
 AddCSLuaFile()
 
 // names and stuff
-SWEP.PrintName = "IMI Uzi Pro"
-SWEP.AbbrevName = "Uzi Pro"
+SWEP.PrintName = "Mini Uzi"
+SWEP.AbbrevName = "Mini Uzi"
 SWEP.Category = "Tactical RP"
 
 SWEP.SubCatTier = "2Operator"
-SWEP.SubCatType = "3Machine Pistol"
+SWEP.SubCatType = "3Submachine Gun"
 
 SWEP.Description = "Balanced machine pistol with a controllable rate of fire."
 

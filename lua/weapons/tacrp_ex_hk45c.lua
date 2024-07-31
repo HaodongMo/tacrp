@@ -4,7 +4,7 @@ SWEP.Spawnable = true
 AddCSLuaFile()
 
 // names and stuff
-SWEP.PrintName = "HK HK45 Compact"
+SWEP.PrintName = "HK45C"
 SWEP.AbbrevName = "HK45C"
 SWEP.Category = "Tactical RP"
 

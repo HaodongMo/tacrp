@@ -4,12 +4,12 @@ SWEP.Spawnable = true
 AddCSLuaFile()
 
 // names and stuff
-SWEP.PrintName = "Skorpion vz. 61"
+SWEP.PrintName = "Skorpion"
 SWEP.AbbrevName = "Skorpion"
 SWEP.Category = "Tactical RP"
 
 SWEP.SubCatTier = "4Consumer"
-SWEP.SubCatType = "3Machine Pistol"
+SWEP.SubCatType = "3Submachine Gun"
 
 SWEP.Description = "Light machine pistol with good range, recoil and spread."
 

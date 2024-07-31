@@ -4,7 +4,7 @@ SWEP.Spawnable = true
 AddCSLuaFile()
 
 // names and stuff
-SWEP.PrintName = "PGM Ultima Ratio"
+SWEP.PrintName = "Ultima Ratio"
 SWEP.AbbrevName = "Ultima Ratio"
 SWEP.Category = "Tactical RP"
 

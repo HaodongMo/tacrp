@@ -5,10 +5,10 @@ AddCSLuaFile()
 
 // names and stuff
 SWEP.PrintName = "Flip Knife"
-SWEP.Category = "Tactical RP (Special)"
+SWEP.Category = "Tactical RP"
 
 SWEP.SubCatTier = "9Special"
-SWEP.SubCatType = "8Bladed Melee"
+SWEP.SubCatType = "8Melee"
 
 SWEP.Description = "A multi-purpose flip knife, although most of the purposes involving stabbing someone."
 

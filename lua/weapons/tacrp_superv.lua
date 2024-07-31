@@ -4,7 +4,7 @@ SWEP.Spawnable = true
 AddCSLuaFile()
 
 // names and stuff
-SWEP.PrintName = "Kriss Vector"
+SWEP.PrintName = "Super V"
 SWEP.AbbrevName = "Vector"
 SWEP.Category = "Tactical RP"
 

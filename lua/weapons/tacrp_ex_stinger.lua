@@ -4,12 +4,12 @@ SWEP.Spawnable = true
 AddCSLuaFile()
 
 // names and stuff
-SWEP.PrintName = "FIM-92 Stinger"
+SWEP.PrintName = "Stinger"
 SWEP.AbbrevName = "Stinger"
-SWEP.Category = "Tactical RP (Special)"
+SWEP.Category = "Tactical RP"
 
 SWEP.SubCatTier = "9Special"
-SWEP.SubCatType = "6Launcher"
+SWEP.SubCatType = "8Launcher"
 
 SWEP.Description = "Homing anti-air missile launcher. High blast damage but limited effect on armored targets.\nRequires a lock-on in order to fire."
 SWEP.Description_Quote = "\"A cornered fox is more dangerous than a jackal!\""

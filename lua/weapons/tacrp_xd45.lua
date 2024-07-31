@@ -4,12 +4,12 @@ SWEP.Spawnable = true
 AddCSLuaFile()
 
 // names and stuff
-SWEP.PrintName = "Springfield XD-45"
+SWEP.PrintName = "XD45 Auto"
 SWEP.AbbrevName = "XD-45"
 SWEP.Category = "Tactical RP"
 
 SWEP.SubCatTier = "1Elite"
-SWEP.SubCatType = "3Machine Pistol"
+SWEP.SubCatType = "1Pistol"
 
 SWEP.Description = "Automatic machine pistol with incredible close range power."
 

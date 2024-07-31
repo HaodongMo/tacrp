@@ -4,12 +4,12 @@ SWEP.Spawnable = true
 AddCSLuaFile()
 
 // names and stuff
-SWEP.PrintName = "Springfield M1A"
+SWEP.PrintName = "M14"
 SWEP.AbbrevName = "M1A"
 SWEP.Category = "Tactical RP"
 
 SWEP.SubCatTier = "3Security"
-SWEP.SubCatType = "6Marksman Rifle"
+SWEP.SubCatType = "7Sniper Rifle"
 
 SWEP.Description = "Semi-automatic rifle with a lethal headshot.\nEquipped with a 6x scope by default."
 

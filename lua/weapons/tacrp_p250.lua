@@ -4,7 +4,7 @@ SWEP.Spawnable = true
 AddCSLuaFile()
 
 // names and stuff
-SWEP.PrintName = "SIG P250"
+SWEP.PrintName = "P250"
 SWEP.AbbrevName = "P250"
 SWEP.Category = "Tactical RP"
 
@@ -179,7 +179,7 @@ SWEP.HolsterAng = Angle(90, 0, 0)
 
 // reload
 
-SWEP.ClipSize = 12
+SWEP.ClipSize = 13
 SWEP.Ammo = "pistol"
 SWEP.Ammo_Expanded = "ti_pistol_heavy"
 

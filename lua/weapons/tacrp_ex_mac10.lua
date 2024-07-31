@@ -4,12 +4,12 @@ SWEP.Spawnable = true
 AddCSLuaFile()
 
 // names and stuff
-SWEP.PrintName = "Ingram MAC-11"
+SWEP.PrintName = "MAC-11"
 SWEP.AbbrevName = "MAC-11"
 SWEP.Category = "Tactical RP" // "Tactical RP (Extras)"
 
 SWEP.SubCatTier = "5Value"
-SWEP.SubCatType = "3Machine Pistol"
+SWEP.SubCatType = "3Submachine Gun"
 
 SWEP.Description = "A bullet hose best used for point blank spray-and-pray."
 SWEP.Description_Quote = "\"Give me the motherf*ckin' gun, Tre!\""

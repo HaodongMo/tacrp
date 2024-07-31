@@ -8,7 +8,7 @@ SWEP.PrintName = "Dual MTX"
 SWEP.Category = "Tactical RP"
 
 SWEP.SubCatTier = "1Elite"
-SWEP.SubCatType = "3Akimbo"
+SWEP.SubCatType = "1Pistol"
 
 SWEP.Description = "An indulgent pair of high capacity, high damage, high quality compact pistols.\nWith firepower like this, who needs aiming?"
 

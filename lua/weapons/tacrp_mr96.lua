@@ -4,12 +4,12 @@ SWEP.Spawnable = true
 AddCSLuaFile()
 
 // names and stuff
-SWEP.PrintName = "Manurhin MR96"
+SWEP.PrintName = "MR96"
 SWEP.AbbrevName = "MR96"
 SWEP.Category = "Tactical RP"
 
 SWEP.SubCatTier = "2Operator"
-SWEP.SubCatType = "2Magnum Pistol"
+SWEP.SubCatType = "1Pistol"
 
 SWEP.Description = "Magnum revolver with good handling and stopping power. Accurate, but hard to fire rapidly."
 

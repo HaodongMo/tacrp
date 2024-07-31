@@ -7,7 +7,7 @@ SWEP.IconOverride = "entities/tacrp_ammo_charge.png"
 
 // names and stuff
 SWEP.PrintName = "Breaching Charge"
-SWEP.Category = "Tactical RP (Special)"
+SWEP.Category = "Tactical RP"
 
 SWEP.ViewModel = "models/weapons/tacint/v_throwable_breach.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_frag.mdl"

@@ -4,12 +4,12 @@ SWEP.Spawnable = true
 AddCSLuaFile()
 
 // names and stuff
-SWEP.PrintName = "Ruger Mini-14"
+SWEP.PrintName = "Mini-14"
 SWEP.AbbrevName = "Mini-14"
 SWEP.Category = "Tactical RP"
 
 SWEP.SubCatTier = "5Value"
-SWEP.SubCatType = "5Sporter"
+SWEP.SubCatType = "4Assault Rifle"
 
 SWEP.Description = "Lightweight rifle with no stock or optic mount.\nGood hip-fire accuracy among rifles, but range is low."
 SWEP.Description_Quote = "\"The one with the gun gets to tell the truth.\""
@@ -111,10 +111,10 @@ SWEP.MuzzleVelocity = 20000
 
 // misc. shooting
 
-SWEP.Firemode = 1
+SWEP.Firemodes = {2, 1}
 
-SWEP.RPM = 450
-SWEP.RPMMultSemi = 0.75
+SWEP.RPM = 600
+SWEP.RPMMultSemi = 0.6
 
 SWEP.Spread = 0.0045
 SWEP.RecoilSpreadPenalty = 0.003

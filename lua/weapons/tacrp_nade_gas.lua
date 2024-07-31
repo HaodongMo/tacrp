@@ -6,7 +6,7 @@ SWEP.IconOverride = "entities/tacrp_ammo_gas.png"
 
 // names and stuff
 SWEP.PrintName = "CS Gas Grenade"
-SWEP.Category = "Tactical RP (Special)"
+SWEP.Category = "Tactical RP"
 
 SWEP.ViewModel = "models/weapons/tacint/v_throwable_csgas.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_smoke.mdl"
