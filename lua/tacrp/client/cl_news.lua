@@ -983,6 +983,7 @@ Notably, some weapons in the base pack are now Value grade, a new lowest grade t
 <li><b>Changed:</b> Disabled shotgun reversing their starting animation on non-empty reload.
 <li><b>Changed:</b> Rangefinder now displays range as a percentage on the point of aim.
 <li><b>Changed:</b> Thermal Imager renamed, no longer blurs when peeking.
+<li><b>Changed:</b> SAPHE can now damage Combine Helicopters and LVS vehicles.
 <li><b>Fixed:</b> 40mm Healing grenades not healing.
 <li><b>Fixed:</b> Some sight issues with RMR being on guns it should not.
 <li><b>Fixed:</b> Missing accessory slot for some akimbos.
@@ -999,6 +1000,7 @@ Notably, some weapons in the base pack are now Value grade, a new lowest grade t
 <ul>
 <li><b>Added:</b> SMAW Hummingbird rockets, XM25 flechettes and HEAT grenades.
 <li><b>Changed:</b> Tweaked Kar98k reload behavior.
+<li><b>Changed:</b> Intervention MLG sound now an ammo type. Does what you would expect.
 <li><b>Fixed:</b> SMAW projectiles not obeying explosive damage scaling.
 <li><b>Rebalance:</b> Buff PSG-1, Amphibian, P210; nerf SR-25; tweaked Kar98k.
 </ul>

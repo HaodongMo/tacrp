@@ -389,7 +389,6 @@ function ENT:Think()
                 filter = self,
                 mask = MASK_SHOT
             })
-            print(tr.Entity)
             if IsValid(tr.Entity) and gunship[tr.Entity:GetClass()] then
                 self:SetPos(tr.HitPos)
                 self:Detonate()
