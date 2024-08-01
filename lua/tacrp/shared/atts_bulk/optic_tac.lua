@@ -1090,7 +1090,7 @@ ATT.FullName = "ZUMQFY Thermal Imaging Device"
 ATT.Icon = Material("entities/tacrp_att_tac_cornershot.png", "mips smooth")
 ATT.Description = "Display a thermal overlay which fuses with the main view while peeking."
 ATT.Pros = {"att.procon.thermal"}
-ATT.Cons = {"att.procon.blurpeek"}
+ATT.Cons = {} --{"att.procon.blurpeek"}
 
 ATT.Model = "models/weapons/tacint/addons/cornershot_mounted.mdl"
 
@@ -1101,11 +1101,11 @@ ATT.CanToggle = true
 
 ATT.TacticalName = "hint.tac.cam_mode"
 
-ATT.Hook_BlurScope = function(wep)
-    if wep:GetScopeLevel() > 0 and wep:GetPeeking() then
-        local d = wep:GetSightAmount()
-        return {d * 0.25, d}
-    end
-end
+-- ATT.Hook_BlurScope = function(wep)
+--     if wep:GetScopeLevel() > 0 and wep:GetPeeking() then
+--         local d = wep:GetSightAmount()
+--         return {d * 0.25, d}
+--     end
+-- end
 
 TacRP.LoadAtt(ATT, "tac_thermal")
