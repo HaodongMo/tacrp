@@ -300,11 +300,16 @@ hook.Add("EntityTakeDamage", "TacRP_RiotShield", function(ent, dmginfo)
     local wep = ent:GetActiveWeapon()
 
     if !IsValid(wep) or wep:GetClass() != "tacrp_riot_shield" then return end
+
+    local dir = (dmginfo:GetDamagePosition() - ent:EyePos()):GetNormalized()
+
     if (dmginfo:GetAttacker():GetPos() - ent:EyePos()):GetNormalized():Dot(ent:EyeAngles():Forward()) < 0.5
-    and ((dmginfo:GetDamagePosition() - ent:EyePos()):GetNormalized():Dot(ent:EyeAngles():Forward()) < 0.5) then return end
+    and (dir:Dot(ent:EyeAngles():Forward()) < 0.5) then return end
     if dmginfo:IsExplosionDamage() or dmginfo:GetInflictor():GetClass() == "entityflame" then return end
 
-    if dmginfo:IsDamageType(DMG_GENERIC) or dmginfo:IsDamageType(DMG_CLUB) or dmginfo:IsDamageType(DMG_CRUSH) or dmginfo:IsDamageType(DMG_SLASH) or dmginfo:GetDamageType() == 0 then
+    if !wep:StillWaiting() and (dmginfo:IsDamageType(DMG_CLUB) or dmginfo:IsDamageType(DMG_CRUSH) or dmginfo:IsDamageType(DMG_SLASH) or dmginfo:GetDamageType() == DMG_GENERIC) then
+        wep:GetOwner():ViewPunch(AngleRand(-1, 1) * math.Clamp(dmginfo:GetDamage() ^ 0.5, 1, 15))
+        wep:GetOwner():SetVelocity(dir * -200 * math.Clamp(dmginfo:GetDamage() ^ 0.25, 1, 4))
         return true
     end
 
