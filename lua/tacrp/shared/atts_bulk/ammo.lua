@@ -408,11 +408,11 @@ ATT.Category = "ammo_amr"
 ATT.SortOrder = 4
 
 ATT.ExplosiveEffect = "HelicopterMegaBomb"
-ATT.ExplosiveDamage = 70
+ATT.ExplosiveDamage = 60
 ATT.ExplosiveRadius = 200
 
-ATT.Add_Damage_Max = -70
-ATT.Add_Damage_Min = -70
+ATT.Add_Damage_Max = -60
+ATT.Add_Damage_Min = -60
 
 ATT.Mult_MuzzleVelocity = 0.667
 
