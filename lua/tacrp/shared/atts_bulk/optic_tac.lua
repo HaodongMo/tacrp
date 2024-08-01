@@ -1085,7 +1085,7 @@ TacRP.LoadAtt(ATT, "tac_bullet")
 ------------------------------
 ATT = {}
 
-ATT.PrintName = "Therm. Imager"
+ATT.PrintName = "Thermal-Cam"
 ATT.FullName = "ZUMQFY Thermal Imaging Device"
 ATT.Icon = Material("entities/tacrp_att_tac_cornershot.png", "mips smooth")
 ATT.Description = "Display a thermal overlay which fuses with the main view while peeking."
