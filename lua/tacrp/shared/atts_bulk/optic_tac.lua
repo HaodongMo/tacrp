@@ -792,10 +792,12 @@ function ATT.TacticalCrosshair(self, x, y, spread, sway)
     frac = math.Clamp((rawdist - self:GetValue("Range_Min")) / (self:GetValue("Range_Max") - self:GetValue("Range_Min")), 0, 1)
     if self:GetValue("Damage_Min") <= self:GetValue("Damage_Max") then frac = 1 - frac end
 
-    surface.DrawCircle(x, y, 16, 255, 255, 255, dropalpha * 80)
-    surface.SetDrawColor(255, 255, 255, dropalpha * 60 * frac + 20)
+    -- surface.DrawCircle(x, y, 16, 255, 255, 255, dropalpha * 80)
+    surface.SetDrawColor(255, 255, 255, dropalpha * 150)
     surface.DrawLine(x - 16, y, x + 16, y)
     surface.DrawLine(x, y + 16, x, y - 16)
+    surface.SetFont("DermaDefault")
+    draw.SimpleText(math.Round(frac * 100) .. "%", "DermaDefault", x, y - 16, surface.GetDrawColor(), TEXT_ALIGN_CENTER, TEXT_ALIGN_BOTTOM)
 
     if !TacRP.ConVars["physbullet"]:GetBool() then return end
 

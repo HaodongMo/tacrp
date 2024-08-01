@@ -981,6 +981,8 @@ Notably, some weapons in the base pack are now Value grade, a new lowest grade t
 <li><b>Changed:</b> Melee Techinques are now free attachments.
 <li><b>Changed:</b> Removed chance to fail an unjam attempt.
 <li><b>Changed:</b> Disabled shotgun reversing their starting animation on non-empty reload.
+<li><b>Changed:</b> Rangefinder now displays range as a percentage on the point of aim.
+<li><b>Changed:</b> Thermal Imager renamed, no longer blurs when peeking.
 <li><b>Fixed:</b> 40mm Healing grenades not healing.
 <li><b>Fixed:</b> Some sight issues with RMR being on guns it should not.
 <li><b>Fixed:</b> Missing accessory slot for some akimbos.
