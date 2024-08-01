@@ -491,6 +491,8 @@ function SWEP:AfterShotFunction(tr, dmg, range, penleft, alreadypenned, forced)
         dmg:SetDamageType(DMG_BUCKSHOT + (engine.ActiveGamemode() == "terrortown" and DMG_BULLET or 0))
     end
 
+    local matpen = self:GetValue("Penetration")
+
     if tr.Entity and alreadypenned[tr.Entity] then
         dmg:SetDamage(0)
     elseif IsValid(tr.Entity) then
@@ -507,8 +509,6 @@ function SWEP:AfterShotFunction(tr, dmg, range, penleft, alreadypenned, forced)
 
         TacRP.CancelBodyDamage(tr.Entity, dmg, tr.HitGroup)
 
-        local matpen = self:GetValue("Penetration")
-
         if self:GetOwner():IsNPC() and !TacRP.ConVars["npc_equality"]:GetBool() then
             dmg:ScaleDamage(0.25)
         elseif matpen > 0 and TacRP.ConVars["penetration"]:GetBool() and !self:GetOwner():IsNPC() then
@@ -519,9 +519,9 @@ function SWEP:AfterShotFunction(tr, dmg, range, penleft, alreadypenned, forced)
         alreadypenned[tr.Entity] = true
 
         if tr.Entity.LVS and !self:IsShotgun() then
-            dmg:ScaleDamage(0.8)
-            dmg:SetDamageForce(dmg:GetDamageForce():GetNormalized() * matpen * 80)
-            dmg:SetDamageType(DMG_AIRBOAT)
+            dmg:ScaleDamage(0.5)
+            dmg:SetDamageForce(dmg:GetDamageForce():GetNormalized() * matpen * 75)
+            dmg:SetDamageType(DMG_AIRBOAT + DMG_SNIPER)
             penleft = 0
         end
 
@@ -531,7 +531,19 @@ function SWEP:AfterShotFunction(tr, dmg, range, penleft, alreadypenned, forced)
     end
 
     if self:GetValue("ExplosiveDamage") > 0 then
-        util.BlastDamage(self, self:GetOwner(), tr.HitPos, self:GetValue("ExplosiveRadius"), self:GetValue("ExplosiveDamage"))
+        -- Add DMG_AIRBOAT to hit helicopters
+        -- Need a timer here because only one DamageInfo can exist at a time
+        timer.Simple(0, function()
+            if !IsValid(self) then return end
+            local dmginfo = DamageInfo()
+            dmginfo:SetAttacker(self:GetOwner())
+            dmginfo:SetInflictor(self)
+            dmginfo:SetDamageType(DMG_BLAST + DMG_AIRBOAT)
+            dmginfo:SetDamage(self:GetValue("ExplosiveDamage"))
+            util.BlastDamageInfo(dmginfo, tr.HitPos, self:GetValue("ExplosiveRadius"))
+        end)
+        penleft = 0
+        --util.BlastDamage(self, self:GetOwner(), tr.HitPos, self:GetValue("ExplosiveRadius"), self:GetValue("ExplosiveDamage"))
     end
 
     if self:GetValue("ExplosiveEffect") then

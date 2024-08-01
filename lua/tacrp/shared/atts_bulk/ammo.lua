@@ -397,25 +397,26 @@ TacRP.LoadAtt(ATT, "ammo_amr_ratshot")
 ATT = {}
 
 ATT.PrintName = "SAPHE"
+ATT.FullName = "Semi-Armor-Piercing High-Explosive Rounds"
 ATT.Icon = Material("entities/tacrp_att_acc_saphe.png", "mips smooth")
-ATT.Description = "High explosive rounds."
-ATT.Pros = {"att.procon.explosive"}
-ATT.Cons = {"stat.damage", "stat.clipsize", "stat.rpm"}
+ATT.Description = "Explosive rounds effective against both armor and personnel."
+ATT.Pros = {"att.procon.explosive", "stat.penetration"}
+ATT.Cons = {"stat.rpm", "stat.clipsize", "stat.muzzlevelocity"}
 
 ATT.Category = "ammo_amr"
 
 ATT.SortOrder = 4
 
-ATT.ExplosiveEffect = "Explosion"
-ATT.ExplosiveDamage = 50
-ATT.ExplosiveRadius = 256
+ATT.ExplosiveEffect = "HelicopterMegaBomb"
+ATT.ExplosiveDamage = 70
+ATT.ExplosiveRadius = 200
 
-ATT.Add_Damage_Max = -50
-ATT.Add_Damage_Min = -25
+ATT.Add_Damage_Max = -70
+ATT.Add_Damage_Min = -70
 
 ATT.Mult_MuzzleVelocity = 0.667
 
-ATT.Mult_Penetration = 0
+ATT.Mult_Penetration = 1.5
 
 ATT.Mult_ClipSize = 0.51
 
@@ -1246,7 +1247,7 @@ ATT.Category = {"ammo_rifle", "ammo_sniper", "ammo_amr", "ammo_rifle_sub"}
 
 ATT.SortOrder = 1.5
 
-ATT.Add_Penetration = 8
+ATT.Add_Penetration = 10
 ATT.Add_RecoilFirstShotMult = 1
 ATT.Add_RecoilMaximum = 2
 ATT.Add_ArmorPenetration = 0.05
@@ -1409,8 +1410,8 @@ ATT.Add_Spread = 0.03
 ATT.Add_ShotgunPelletSpread = 0.03
 
 ATT.Override_ExplosiveEffect = "ManhackSparks"
-ATT.Add_ExplosiveDamage = 1
-ATT.Add_ExplosiveRadius = 16
+-- ATT.Add_ExplosiveDamage = 1
+-- ATT.Add_ExplosiveRadius = 16
 
 ATT.Override_DamageType = DMG_BURN
 
