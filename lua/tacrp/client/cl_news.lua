@@ -965,7 +965,7 @@ Notably, some weapons in the base pack are now Value grade, a new lowest grade t
     {
         Title = "Update 24",
         Type = "Patch Notes",
-        Date = "2024-07-30",
+        Date = "2024-08-01",
         Author = "8Z",
         Major = false,
         Summary = "Small list of fixes.",
@@ -997,7 +997,7 @@ Notably, some weapons in the base pack are now Value grade, a new lowest grade t
 
 <h3>Expansion Changelist</h3>
 <ul>
-<li><b>Added:</b> SMAW Hummingbird rockets, XM25 flechettes.
+<li><b>Added:</b> SMAW Hummingbird rockets, XM25 flechettes and HEAT grenades.
 <li><b>Changed:</b> Tweaked Kar98k reload behavior.
 <li><b>Fixed:</b> SMAW projectiles not obeying explosive damage scaling.
 <li><b>Rebalance:</b> Buff PSG-1, Amphibian, P210; nerf SR-25; tweaked Kar98k.
