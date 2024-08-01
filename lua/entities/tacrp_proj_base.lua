@@ -488,6 +488,8 @@ end
 local mat = Material("effects/ar2_altfire1b")
 
 function ENT:Draw()
+    if self:GetOwner() == LocalPlayer() and (self.SpawnTime + 0.05) > CurTime() then return end
+
     self:DrawModel()
 
     if self.FlareColor then
