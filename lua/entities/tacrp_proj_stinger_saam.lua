@@ -15,8 +15,8 @@ ENT.ImpactFuse = true // projectile explodes on impact.
 ENT.ExplodeOnDamage = true
 ENT.ExplodeUnderwater = true
 
-ENT.Delay = 0
 ENT.SafetyFuse = 0.1
+ENT.ImpactDamage = 150
 
 ENT.SteerSpeed = 60
 ENT.SeekerAngle = 55
@@ -69,22 +69,6 @@ function ENT:Detonate()
 end
 
 function ENT:OnThink()
-    if IsValid(self.LockOnEntity) and self.SteerDelay + self.SpawnTime <= CurTime() then
-        local dist = self.LockOnEntity:WorldSpaceCenter():DistToSqr(self:GetPos())
-
-        if dist < 256 ^ 2 then
-            local tr = util.TraceLine({
-                start = self:GetPos(),
-                endpos = self.LockOnEntity:GetPos(),
-                filter = self,
-                mask = MASK_SOLID,
-            })
-            self:SetPos(tr.HitPos)
-            self:PreDetonate()
-            return
-        end
-    end
-
     if IsValid(self:GetOwner()) and IsValid(self:GetOwner():GetActiveWeapon())
             and self:GetOwner():GetActiveWeapon().ArcticTacRP then
         self.LockOnEntity = self:GetOwner():GetActiveWeapon():GetLockOnEntity()

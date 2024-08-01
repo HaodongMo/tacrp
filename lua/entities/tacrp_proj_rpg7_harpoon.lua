@@ -8,11 +8,7 @@ ENT.Model                    =  "models/props_junk/Shovel01a.mdl"
 
 ENT.ImpactDamage = 0
 
-ENT.IsRocket = false // projectile has a booster and will not drop.
-
-ENT.InstantFuse = false // projectile is armed immediately after firing.
-ENT.RemoteFuse = false // allow this projectile to be triggered by remote detonator.
-ENT.ImpactFuse = true // projectile explodes on impact.
+ENT.ImpactFuse = true
 
 ENT.SmokeTrail = false
 

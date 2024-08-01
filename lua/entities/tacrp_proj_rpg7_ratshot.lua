@@ -16,25 +16,15 @@ ENT.TimeFuse = false
 ENT.ExplodeOnDamage = true
 ENT.ExplodeUnderwater = true
 
-ENT.Delay = 0.4
-ENT.SafetyFuse = 0
+ENT.Delay = 0.3
+ENT.SafetyFuse = 0.3
+ENT.ImpactDamage = 150
 
 ENT.AudioLoop = "TacRP/weapons/rpg7/rocket_flight-1.wav"
 
 ENT.SmokeTrail = true
 
 ENT.FlareColor = Color(75, 175, 255)
-
-
-DEFINE_BASECLASS(ENT.Base)
-
-function ENT:PhysicsCollide(data, collider)
-    if self:Impact(data, collider) then
-        return
-    end
-
-    BaseClass.PhysicsCollide(self, data, collider)
-end
 
 function ENT:Detonate()
     local dir = self:GetForward()

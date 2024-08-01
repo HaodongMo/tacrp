@@ -15,8 +15,8 @@ ENT.ImpactFuse = true // projectile explodes on impact.
 ENT.ExplodeOnDamage = true
 ENT.ExplodeUnderwater = true
 
-ENT.Delay = 0
 ENT.SafetyFuse = 0.1
+ENT.ImpactDamage = 150
 
 ENT.SteerSpeed = 30
 ENT.SeekerAngle = 75

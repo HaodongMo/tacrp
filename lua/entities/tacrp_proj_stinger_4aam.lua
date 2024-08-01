@@ -18,8 +18,8 @@ ENT.ExplodeUnderwater = true
 ENT.FlareSizeMin = 150
 ENT.FlareSizeMax = 200
 
-ENT.Delay = 0
 ENT.SafetyFuse = 0.1
+ENT.ImpactDamage = 150
 
 ENT.SteerSpeed = 200
 ENT.SeekerAngle = 90
@@ -41,26 +41,6 @@ ENT.SmokeTrail = true
 ENT.FlareColor = Color(255, 230, 200)
 
 DEFINE_BASECLASS(ENT.Base)
-
-function ENT:OnThink()
-    if IsValid(self.LockOnEntity) and self.SteerDelay + self.SpawnTime <= CurTime() then
-        local dot = (self.LockOnEntity:WorldSpaceCenter() - self:GetPos()):GetNormalized():Dot(self:GetForward())
-        if dot >= 0.5 then
-            local dist = self.LockOnEntity:WorldSpaceCenter():DistToSqr(self:GetPos())
-
-            if dist < 256 ^ 2 then
-                local tr = util.TraceLine({
-                    start = self:GetPos(),
-                    endpos = self.LockOnEntity:GetPos(),
-                    filter = self,
-                    mask = MASK_SOLID,
-                })
-                self:SetPos(tr.HitPos)
-                self:PreDetonate()
-            end
-        end
-    end
-end
 
 function ENT:Detonate()
     local attacker = self.Attacker or self:GetOwner()
