@@ -8,6 +8,7 @@ ENT.Model                    =  "models/props_junk/Shovel01a.mdl"
 
 ENT.ImpactDamage = 0
 
+ENT.InstantFuse = false
 ENT.ImpactFuse = true
 
 ENT.SmokeTrail = false

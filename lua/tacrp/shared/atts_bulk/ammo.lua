@@ -49,11 +49,13 @@ ATT = {}
 ATT.PrintName = "Buckshot"
 ATT.FullName = "40mm Buckshot Grenades"
 ATT.Icon = Material("entities/tacrp_att_ammo_40mm_buck.png", "mips smooth")
-ATT.Description = "Flat-top grenade firing pellets like a shotgun."
+ATT.Description = "Flat-top grenade firing shotgun pellets. Weak due to low pressure curve."
 ATT.Pros = {"att.procon.direct", "att.procon.doorbreach"}
 ATT.Cons = {"att.procon.noexp"}
 
 ATT.Category = "ammo_40mm"
+
+ATT.Override_Ammo = "buckshot" -- extremely not realism
 
 ATT.SortOrder = 2
 
@@ -61,14 +63,14 @@ ATT.Override_ShootEnt = false
 
 ATT.NoRanger = false
 
-ATT.Override_Damage_Max = 10
-ATT.Override_Damage_Min = 3
-ATT.Override_Num = 24
-ATT.Override_Range_Min = 100
-ATT.Override_Range_Max = 1500
+ATT.Override_Damage_Max = 9
+ATT.Override_Damage_Min = 2
+ATT.Override_Num = 18
+ATT.Override_Range_Min = 50
+ATT.Override_Range_Max = 1200
 
-ATT.Override_Spread = 0.06
-ATT.Override_ShotgunPelletSpread = 0.04
+ATT.Override_Spread = 0.05
+ATT.Override_ShotgunPelletSpread = 0.05
 
 ATT.Override_HipFireSpreadPenalty = 0
 ATT.Override_MidAirSpreadPenalty = 0
@@ -128,10 +130,12 @@ ATT.FullName = "40mm Flechette Grenades"
 
 ATT.Icon = Material("entities/tacrp_att_ammo_40mm_heat.png", "mips smooth")
 ATT.Description = "Flat-top grenade packing accurate flechette darts."
-ATT.Pros = {"att.procon.direct", "stat.spread"}
+ATT.Pros = {"att.procon.direct", "stat.spread", "stat.armorpenetration"}
 ATT.Cons = {"att.procon.noexp"}
 
 ATT.Category = "ammo_40mm"
+
+ATT.Override_Ammo = "buckshot" -- extremely not realism
 
 ATT.SortOrder = 2.5
 
@@ -141,15 +145,17 @@ ATT.InstalledElements = {"buck"} --{"heat"}
 
 ATT.Override_NoRanger = false
 
-ATT.Override_Damage_Max = 30
+ATT.Override_Damage_Max = 14
 ATT.Override_Damage_Min = 6
 ATT.Override_Num = 8
-ATT.Override_Range_Min = 400
+ATT.Override_Range_Min = 500
 ATT.Override_Range_Max = 2000
 ATT.Override_Penetration = 6
 
+ATT.Override_ArmorPenetration = 0.8
+
 ATT.Override_Spread = 0.015
-ATT.Override_ShotgunPelletSpread = 0.01
+ATT.Override_ShotgunPelletSpread = 0.02
 
 ATT.Override_HipFireSpreadPenalty = 0.03
 ATT.Override_MidAirSpreadPenalty = 0
@@ -882,8 +888,8 @@ ATT.SortOrder = 9
 ATT.Mult_HipFireSpreadPenalty = 0.5
 
 ATT.Override_ShootEnt = "tacrp_proj_rpg7_harpoon"
-ATT.Add_ShootingSpeedMult = 0.3
-ATT.Add_ReloadSpeedMult = 0.15
+ATT.Add_ShootingSpeedMult = 0.6
+ATT.Add_ReloadSpeedMult = 0.4
 
 ATT.Add_RPM = 60
 
