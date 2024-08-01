@@ -312,7 +312,7 @@ function ENT:PhysicsUpdate(phys)
     end
 end
 
-local gunship = {["npc_combinegunship"] = true, ["npc_combinedropship"] = true}
+local gunship = {["npc_combinegunship"] = true, ["npc_combinedropship"] = true, ["npc_helicopter"] = true}
 
 function ENT:Think()
     if !IsValid(self) or self:GetNoDraw() then return end
@@ -382,13 +382,14 @@ function ENT:Think()
         end
 
         if self.GunshipWorkaround and (self.GunshipCheck or 0 < CurTime()) then
-                self.GunshipCheck = CurTime() + 0.33
-                local tr = util.TraceLine({
-                    start = self:GetPos(),
-                    endpos = self:GetPos() + (self:GetVelocity() * 6 * engine.TickInterval()),
-                    filter = self,
-                    mask = MASK_SHOT
-                })
+            self.GunshipCheck = CurTime() + 0.33
+            local tr = util.TraceLine({
+                start = self:GetPos(),
+                endpos = self:GetPos() + (self:GetVelocity() * 6 * engine.TickInterval()),
+                filter = self,
+                mask = MASK_SHOT
+            })
+            print(tr.Entity)
             if IsValid(tr.Entity) and gunship[tr.Entity:GetClass()] then
                 self:SetPos(tr.HitPos)
                 self:Detonate()

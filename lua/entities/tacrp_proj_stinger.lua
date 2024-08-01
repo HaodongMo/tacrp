@@ -15,6 +15,8 @@ ENT.ImpactFuse = true // projectile explodes on impact.
 ENT.ExplodeOnDamage = true
 ENT.ExplodeUnderwater = true
 
+ENT.GunshipWorkaround = false
+
 ENT.Delay = 0
 ENT.SafetyFuse = 0.1
 ENT.ImpactDamage = 150
@@ -48,7 +50,7 @@ function ENT:Detonate()
     local mult = TacRP.ConVars["mult_damage_explosive"]:GetFloat()
     local dmg = DamageInfo()
     dmg:SetAttacker(attacker)
-    dmg:SetDamageType(DMG_BLAST)
+    dmg:SetDamageType(DMG_BLAST + DMG_AIRBOAT)
     dmg:SetInflictor(self)
     dmg:SetDamageForce(self:GetVelocity() * 100)
     dmg:SetDamagePosition(src)

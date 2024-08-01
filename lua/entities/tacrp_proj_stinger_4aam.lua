@@ -15,6 +15,8 @@ ENT.ImpactFuse = true // projectile explodes on impact.
 ENT.ExplodeOnDamage = false
 ENT.ExplodeUnderwater = true
 
+ENT.GunshipWorkaround = false
+
 ENT.FlareSizeMin = 150
 ENT.FlareSizeMax = 200
 
@@ -51,7 +53,7 @@ function ENT:Detonate()
 
     local dmg = DamageInfo()
     dmg:SetAttacker(attacker)
-    dmg:SetDamageType(DMG_BLAST)
+    dmg:SetDamageType(DMG_BLAST + DMG_AIRBOAT)
     dmg:SetInflictor(self)
     dmg:SetDamageForce(self:GetVelocity() * 100)
     dmg:SetDamagePosition(src)
