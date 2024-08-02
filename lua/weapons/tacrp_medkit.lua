@@ -185,7 +185,7 @@ function SWEP:SecondaryAttack()
 end
 
 function SWEP:Think()
-    if self:GetCharge() and self:GetNextPrimaryFire() < CurTime() then
+    if IsFirstTimePredicted() and self:GetCharge() and self:GetNextPrimaryFire() < CurTime() then
         if !IsValid(self.HealTarget) or
         self:Clip1() <= 0 or
         (self.HealTarget:GetPos() - self:GetOwner():GetPos()):Length() > 64
