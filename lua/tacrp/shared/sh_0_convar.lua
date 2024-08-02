@@ -880,6 +880,55 @@ local conVars = {
         notify = true,
         replicated = true,
     },
+
+    // --------------------------- Medkit
+    {
+        name = "medkit_clipsize",
+        default = "30",
+        min = 1,
+        replicated = true,
+    },
+    {
+        name = "medkit_regen_activeonly",
+        default = "0",
+        min = 0,
+        max = 1,
+        replicated = true,
+    },
+    {
+        name = "medkit_regen_delay",
+        default = "2",
+        min = 0,
+        replicated = true,
+    },
+    {
+        name = "medkit_regen_amount",
+        default = "1",
+        min = 0,
+        replicated = true,
+        notify = true,
+    },
+    {
+        name = "medkit_heal_self",
+        default = "4",
+        min = 0,
+        replicated = true,
+        notify = true,
+    },
+    {
+        name = "medkit_heal_others",
+        default = "4",
+        min = 0,
+        replicated = true,
+        notify = true,
+    },
+    {
+        name = "medkit_interval",
+        default = "0.2",
+        min = 0,
+        replicated = true,
+        notify = true,
+    },
 }
 
 TacRP.ConVars = {}
@@ -1542,6 +1591,61 @@ local function menu_atts_ti(panel)
     })
 end
 
+
+local function menu_equipment_ti(panel)
+    header(panel, "Medkit")
+    panel:AddControl("checkbox", {
+        label = "Only Regen Charge When Held",
+        command = "tacrp_medkit_regen_activeonly"
+    })
+    panel:AddControl("slider", {
+        label = "Max Charge",
+        command = "tacrp_medkit_clipsize",
+        type = "int",
+        min = 10,
+        max = 100,
+    })
+    panel:AddControl("slider", {
+        label = "Charge Regen Delay",
+        command = "tacrp_medkit_regen_delay",
+        type = "float",
+        min = 0.01,
+        max = 5,
+    })
+    panel:AddControl("slider", {
+        label = "Charge Regen Amount",
+        command = "tacrp_medkit_regen_amount",
+        type = "int",
+        min = 0,
+        max = 3,
+    })
+    panel:ControlHelp("When set to 0, the medkit is consumed when all charge is spent.")
+
+    panel:AddControl("slider", {
+        label = "Self Heal Per Charge",
+        command = "tacrp_medkit_heal_self",
+        type = "int",
+        min = 0,
+        max = 10,
+    })
+    panel:ControlHelp("When set to 0, the medkit cannot be used on yourself.")
+    panel:AddControl("slider", {
+        label = "Heal Per Charge",
+        command = "tacrp_medkit_heal_others",
+        type = "int",
+        min = 0,
+        max = 10,
+    })
+    panel:ControlHelp("When set to 0, the medkit cannot be used on others.")
+    panel:AddControl("slider", {
+        label = "Charge Interval",
+        command = "tacrp_medkit_interval",
+        type = "float",
+        min = 0.01,
+        max = 1,
+    })
+end
+
 local clientmenus_ti = {
     {
         text = "Client", func = menu_client_ti
@@ -1557,6 +1661,9 @@ local clientmenus_ti = {
     },
     {
         text = "Balance", func = menu_balance_ti
+    },
+    {
+        text = "Equipment", func = menu_equipment_ti
     },
 }
 

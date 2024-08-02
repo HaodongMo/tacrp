@@ -35,13 +35,17 @@ SWEP.ClipSize = 30
 
 SWEP.NoBuffer = true
 
-SWEP.Firemode = 1
+SWEP.Firemode = 0
 
 SWEP.MoveSpeedMult = 1
 
 SWEP.MeleeSpeedMultTime = 2 // seconds to apply slow down for
 
 SWEP.SprintToFireTime = 0.25
+
+SWEP.MidAirSpreadPenalty = 0
+SWEP.MoveSpreadPenalty = 0
+SWEP.HipFireSpreadPenalty = 0
 
 SWEP.Scope = false
 SWEP.NoSecondaryMelee = true
@@ -104,6 +108,7 @@ function SWEP:PrimaryAttack()
 
     if self:StillWaiting() then return end
     if self:GetCharge() then return end
+    if TacRP.ConVars["medkit_heal_others"]:GetInt() <= 0 then return end
 
     local tr = util.TraceLine({
         start = self:GetOwner():EyePos(),
@@ -148,6 +153,7 @@ function SWEP:SecondaryAttack()
     if self:StillWaiting() or !IsFirstTimePredicted() or self:GetCharge() then return end
 
     if self:GetOwner():Health() >= self:GetOwner():GetMaxHealth() then return end
+    if TacRP.ConVars["medkit_heal_self"]:GetInt() <= 0 then return end
 
     self.HealTarget = self:GetOwner()
 
@@ -185,15 +191,10 @@ function SWEP:Think()
             end
         else
             local selfheal = self.HealTarget == self:GetOwner()
-            if engine.ActiveGamemode() == "terrortown" then
-                self:SetClip1(self:Clip1() - 1)
-                self.HealTarget:SetHealth(math.min(self.HealTarget:Health() + (selfheal and 2 or 3), self.HealTarget:GetMaxHealth()))
-                self:SetNextPrimaryFire(CurTime() + (selfheal and 0.5 or 0.25))
-            else
-                self:SetClip1(self:Clip1() - 1)
-                self.HealTarget:SetHealth(math.min(self.HealTarget:Health() + 4, self.HealTarget:GetMaxHealth()))
-                self:SetNextPrimaryFire(CurTime() + (selfheal and 0.2 or 0.15))
-            end
+            local amt = TacRP.ConVars[selfheal and "medkit_heal_self" or "medkit_heal_others"]:GetInt()
+            self:SetClip1(self:Clip1() - 1)
+            self.HealTarget:SetHealth(math.min(self.HealTarget:Health() + amt, self.HealTarget:GetMaxHealth()))
+            self:SetNextPrimaryFire(CurTime() + TacRP.ConVars["medkit_interval"]:GetFloat())
         end
     end
 
@@ -203,8 +204,16 @@ end
 function SWEP:Regenerate()
     if CLIENT then return end
     if self:GetNextPrimaryFire() + 0.1 > CurTime() then return end
-    if engine.ActiveGamemode() == "terrortown" and (!IsValid(self:GetOwner()) or self:GetOwner():GetActiveWeapon() != self) then return end
-    self:SetClip1(math.min(self:Clip1() + 1, 30))
+    local amt = TacRP.ConVars["medkit_regen_amount"]:GetInt()
+    if amt == 0 then
+        if self:Clip1() == 0 then
+            self:Remove()
+        end
+        return
+    end
+    if TacRP.ConVars["medkit_regen_activeonly"]:GetBool()
+            and (!IsValid(self:GetOwner()) or self:GetOwner():GetActiveWeapon() != self) then return end
+    self:SetClip1(math.min(self:Clip1() + amt, self:GetValue("ClipSize")))
 end
 
 function SWEP:Holster(wep)
@@ -233,11 +242,14 @@ function SWEP:OnRemove()
 end
 
 function SWEP:Initialize()
-    self:SetClip1(30)
+
+    self.ClipSize = TacRP.ConVars["medkit_clipsize"]:GetInt()
+
+    self:SetClip1(self:GetValue("ClipSize"))
 
     self:SetCharge(false)
 
-    timer.Create("medkit_ammo" .. self:EntIndex(), engine.ActiveGamemode() == "terrortown" and 2 or 1, 0, function()
+    timer.Create("medkit_ammo" .. self:EntIndex(), TacRP.ConVars["medkit_regen_delay"]:GetFloat(), 0, function()
         if !IsValid(self) then
             if self.LoopSound then
                 self.LoopSound:Stop()
@@ -253,7 +265,7 @@ function SWEP:Initialize()
             end
         end
         self:Regenerate()
-    end )
+    end)
 
     return BaseClass.Initialize(self)
 end
@@ -267,7 +279,7 @@ if engine.ActiveGamemode() == "terrortown" then
     SWEP.LimitedStock = true
     SWEP.EquipMenuData = {
         type = "Weapon",
-        desc = "Medical supplies for treating wounds.\nMore efficient when used on others.\nCharge regenrates slowly while weapon is out.",
+        desc = "Medical supplies for treating wounds.\nCharge regenrates over time.",
     }
 
     function SWEP:TTTBought(buyer)
