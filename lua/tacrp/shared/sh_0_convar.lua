@@ -770,6 +770,19 @@ local conVars = {
         max = 1,
         replicated = true,
     },
+    {
+        name = "doorbust",
+        default = "1",
+        min = 0,
+        max = 1,
+        replicated = true,
+    },
+    {
+        name = "doorbust_time",
+        default = "180",
+        min = 1,
+        replicated = true,
+    },
 
     // --------------------------- Multipliers
     {
@@ -1291,6 +1304,20 @@ local function menu_server_ti(panel)
         command = "TacRP_bodydamagecancel"
     })
     panel:ControlHelp("Only disable this if another addon or gamemode is also modifying default hitgroup damage multipliers.")
+    panel:AddControl("checkbox", {
+        label = "Door Busting",
+        command = "tacrp_doorbust"
+    })
+    panel:ControlHelp("Blow doors off their hinges, even locked ones. If disabled, only unlocked doors can be knocked open, and they won't be blown off.")
+
+    panel:AddControl("slider", {
+        label = "Door Respawn Time",
+        command = "tacrp_doorbust_time",
+        type = "int",
+        min = 10,
+        max = 600,
+    })
+
 end
 
 local function menu_balance_ti(panel)
