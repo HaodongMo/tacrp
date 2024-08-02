@@ -201,15 +201,15 @@ function SWEP:Think()
                 self.LoopSound = nil
             end
         else
-            local selfheal = self.HealTarget == self:GetOwner()
-            local amt = TacRP.ConVars[selfheal and "medkit_heal_self" or "medkit_heal_others"]:GetInt()
-
-            local ret = hook.Run("TacRP_MedkitHeal", self, self:GetOwner(), self.HealTarget, {amt})
-            amt = ret and ret[1] or amt
-            if amt == 0 then return end
-
-            self:SetClip1(self:Clip1() - 1)
-            self.HealTarget:SetHealth(math.min(self.HealTarget:Health() + amt, self.HealTarget:GetMaxHealth()))
+            if SERVER then
+                local selfheal = self.HealTarget == self:GetOwner()
+                local amt = TacRP.ConVars[selfheal and "medkit_heal_self" or "medkit_heal_others"]:GetInt()
+                local ret = {amt}
+                hook.Run("TacRP_MedkitHeal", self, self:GetOwner(), self.HealTarget, ret)
+                amt = ret and ret[1] or amt
+                self:SetClip1(self:Clip1() - 1)
+                self.HealTarget:SetHealth(math.min(self.HealTarget:Health() + amt, self.HealTarget:GetMaxHealth()))
+            end
             self:SetNextPrimaryFire(CurTime() + TacRP.ConVars["medkit_interval"]:GetFloat())
         end
     end
