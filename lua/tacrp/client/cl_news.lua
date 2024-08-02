@@ -965,19 +965,20 @@ Notably, some weapons in the base pack are now Value grade, a new lowest grade t
     {
         Title = "Update 24",
         Type = "Patch Notes",
-        Date = "2024-08-01",
+        Date = "2024-08-03",
         Author = "8Z",
         Major = false,
-        Summary = "Small list of fixes.",
+        Summary = "Fixes and more configurations.",
         Contents = [[<body style="font-family:'Myriad Pro';color:white;font-size:125%;">
 
 <h3>Changelist</h3>
 <ul>
-<li><b>Added:</b> ConVars for tweaking Medkit behavior, in Equipment tab.
+<li><b>Added:</b> ConVars for tweaking Medkit and Riot Shield behavior, in Equipment tab.
 <li><b>Added:</b> ConVar multipliers for Headshot Damage and Melee Weapon Damage.
 <li><b>Added:</b> USP 9mm conversion attachment (using HL2 sounds).
 <li><b>Added:</b> Quotes for various weapons.
 <li><b>Added:</b> Additional localization.
+<li><b>Added:</b> Credits for Medkit and Riot Shield animations. (thanks to Lazarus and Arqu!)
 <li><b>Changed:</b> Reworked missile logic for the Stinger and SMAW.
 <li><b>Changed:</b> Melee Techinques are now free attachments.
 <li><b>Changed:</b> Removed chance to fail an unjam attempt.
@@ -985,9 +986,9 @@ Notably, some weapons in the base pack are now Value grade, a new lowest grade t
 <li><b>Changed:</b> Rangefinder now displays range as a percentage on the point of aim.
 <li><b>Changed:</b> Thermal Imager renamed, no longer blurs when peeking.
 <li><b>Changed:</b> SAPHE can now damage Combine Helicopters and LVS vehicles.
-<li><b>Changed:</b> Riot shield user will now be knocked back by melee attacks, and can't block melee attacks when attacking.
+<li><b>Changed:</b> Riot Shield can't block melee attacks when attacking.
 <li><b>Fixed:</b> 40mm Healing grenades not healing.
-<li><b>Fixed:</b> Some sight issues with RMR being on guns it should not.
+<li><b>Fixed:</b> RMR being on guns it should not.
 <li><b>Fixed:</b> Missing accessory slot for some akimbos.
 <li><b>Fixed:</b> Missing sling and other accessory attachments on some guns.
 <li><b>Rebalance:</b> Breaching Brake gives slight increase in recoil stability.

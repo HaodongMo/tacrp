@@ -929,6 +929,34 @@ local conVars = {
         replicated = true,
         notify = true,
     },
+
+    // --------------------------- Riot Shield
+    {
+        name = "shield_melee",
+        default = "1",
+        min = 0,
+        max = 1,
+        replicated = true,
+    },
+    {
+        name = "shield_knockback",
+        default = "1",
+        min = 0,
+        max = 1,
+        replicated = true,
+    },
+    {
+        name = "shield_riot_resistance",
+        default = "3.5",
+        min = 0,
+        replicated = true,
+    },
+    {
+        name = "shield_riot_hp",
+        default = "0",
+        min = 0,
+        replicated = true,
+    },
 }
 
 TacRP.ConVars = {}
@@ -1606,7 +1634,7 @@ local function menu_equipment_ti(panel)
         max = 100,
     })
     panel:AddControl("slider", {
-        label = "Charge Regen Delay",
+        label = "Charge Regen Interval",
         command = "tacrp_medkit_regen_delay",
         type = "float",
         min = 0.01,
@@ -1644,6 +1672,34 @@ local function menu_equipment_ti(panel)
         min = 0.01,
         max = 1,
     })
+    panel:ControlHelp("Delay between charges. For example, 0.1 interval means 10 charge per second.")
+
+    header(panel, "\nRiot Shield")
+    panel:AddControl("checkbox", {
+        label = "Allow Quick Melee",
+        command = "tacrp_shield_melee"
+    })
+    panel:AddControl("checkbox", {
+        label = "Knockback On Melee Block",
+        command = "tacrp_shield_knockback"
+    })
+    panel:AddControl("slider", {
+        label = "Penetration Resistance",
+        command = "tacrp_shield_riot_resistance",
+        type = "float",
+        min = 0,
+        max = 5,
+    })
+    panel:ControlHelp("Higher value is harder to penetrate.")
+    panel:AddControl("slider", {
+        label = "Durability",
+        command = "tacrp_shield_riot_hp",
+        type = "int",
+        min = 0,
+        max = 9999,
+    })
+    panel:ControlHelp("When set to 0, the shield will never break.")
+
 end
 
 local clientmenus_ti = {

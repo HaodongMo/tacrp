@@ -403,8 +403,23 @@ function SWEP:DrawHUDBackground()
             local ammotype = self:GetValue("PrimaryGrenade") and (TacRP.QuickNades[self:GetValue("PrimaryGrenade")].Ammo) or self:GetAmmoType()
             local clips = math.min(math.ceil(self:GetOwner():GetAmmoCount(ammotype)), 999)
 
-            if self.Primary.ClipSize > 0 then
+            if self:GetValue("HUDAmmoMeter") then
+                local boxes = 25
+                local bw, bh = TacRP.SS(2), TacRP.SS(10)
+                local frac = math.Clamp(math.ceil(boxes * self:Clip1() / self:GetValue("ClipSize")), 0, boxes)
+                for i = 1, boxes do
+                    if i - 1 > (boxes - frac) then
+                        surface.SetDrawColor(col)
+                    elseif i - 1 == (boxes - frac) then
+                        surface.SetDrawColor(col_hi)
+                    else
+                        surface.SetDrawColor(col_dark)
+                    end
+                    surface.DrawRect(x + (i * (bw + TacRP.SS(1))), y + TacRP.SS(12), bw, bh)
+                end
 
+                draw.SimpleText(self:Clip1(), "TacRP_HD44780A00_5x8_10", x + TacRP.SS(93), y + TacRP.SS(17), col, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+            elseif self.Primary.ClipSize > 0 then
                 if TacRP.ConVars["hud_ammo_number"]:GetBool() then
                     surface.SetFont("TacRP_HD44780A00_5x8_10")
                     local t = math.max(0, self:Clip1()) .. " /" .. self.Primary.ClipSize

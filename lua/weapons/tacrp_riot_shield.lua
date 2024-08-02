@@ -28,6 +28,7 @@ SWEP.BalanceStats = {
 
 SWEP.NoRanger = true
 SWEP.NoStatBox = true
+SWEP.HUDAmmoMeter = true
 
 SWEP.NPCUsable = false
 
@@ -108,7 +109,7 @@ SWEP.ShieldProps = {
         Model = "models/weapons/tacint/w_riot_shield_2.mdl",
         Pos = Vector(5, -5, 30),
         Ang = Angle(0, 0, 180 - 15),
-        Resistance = 3.5
+        Resistance = "shield_riot_resistance"
     }
 }
 
@@ -123,7 +124,23 @@ SWEP.Attachments = {}
     }
 ]]
 
+
+function SWEP:Initialize()
+
+    self.CanMeleeAttack = TacRP.ConVars["shield_melee"]:GetBool()
+
+    local dur = TacRP.ConVars["shield_riot_hp"]:GetInt()
+    if dur > 0 then
+        self.ClipSize = dur
+        self.Primary.ClipSize = dur
+        self:SetClip1(dur)
+    end
+
+    return BaseClass.Initialize(self)
+end
+
 function SWEP:PrimaryAttack()
+    if !self.CanMeleeAttack then return end
     self.Primary.Automatic = true
     self:Melee()
 end
@@ -201,7 +218,7 @@ function SWEP:SetupShields()
             continue
         end
 
-        shield.mmRHAe = k.Resistance
+        shield.mmRHAe = TacRP.ConVars[k.Resistance]:GetFloat()
         // shield.Impenetrable = true
 
         shield:SetModel( k.Model )
@@ -296,6 +313,16 @@ end
 function SWEP:ThinkSprint()
 end
 
+function SWEP:Think()
+
+    if SERVER and self.ClipSize > 0 and self:Clip1() <= 0 then
+        self:Remove()
+        return
+    end
+
+    return BaseClass.Think(self)
+end
+
 hook.Add("EntityTakeDamage", "TacRP_RiotShield", function(ent, dmginfo)
     if !IsValid(dmginfo:GetAttacker()) or !ent:IsPlayer() then return end
     local wep = ent:GetActiveWeapon()
@@ -306,15 +333,30 @@ hook.Add("EntityTakeDamage", "TacRP_RiotShield", function(ent, dmginfo)
 
     if (dmginfo:GetAttacker():GetPos() - ent:EyePos()):GetNormalized():Dot(ent:EyeAngles():Forward()) < 0.5
     and (dir:Dot(ent:EyeAngles():Forward()) < 0.5) then return end
-    if dmginfo:IsExplosionDamage() or dmginfo:GetInflictor():GetClass() == "entityflame" then return end
+    if dmginfo:IsExplosionDamage() or (IsValid(dmginfo:GetInflictor()) and dmginfo:GetInflictor():GetClass() == "entityflame") then return end
 
     if !wep:StillWaiting() and (dmginfo:IsDamageType(DMG_CLUB) or dmginfo:IsDamageType(DMG_CRUSH) or dmginfo:IsDamageType(DMG_SLASH) or dmginfo:GetDamageType() == DMG_GENERIC) then
-        wep:GetOwner():ViewPunch(AngleRand(-1, 1) * math.Clamp(dmginfo:GetDamage() ^ 0.5, 1, 15))
-        wep:GetOwner():SetVelocity(dir * -200 * math.Clamp(dmginfo:GetDamage() ^ 0.25, 1, 4))
+        if TacRP.ConVars["shield_knockback"]:GetBool() then
+            wep:GetOwner():ViewPunch(AngleRand(-1, 1) * math.Clamp(dmginfo:GetDamage() ^ 0.5, 1, 15))
+            wep:GetOwner():SetVelocity(dir * -200 * math.Clamp(dmginfo:GetDamage() ^ 0.25, 1, 4))
+        end
+
+        if wep.ClipSize > 0 then
+            wep:SetClip1(math.max(wep:Clip1() - dmginfo:GetDamage(), 0))
+        end
+
         return true
     end
 
     dmginfo:ScaleDamage(0.5)
+end)
+
+hook.Add("PostEntityTakeDamage", "TacRP_RiotShield", function(ent, dmginfo)
+    if !ent.TacRPShield or !IsValid(ent.Weapon) then return end
+    local wep = ent.Weapon
+    if wep.ClipSize > 0 then
+        wep:SetClip1(math.max(0, wep:Clip1() - dmginfo:GetDamage()))
+    end
 end)
 
 SWEP.AutoSpawnable = false

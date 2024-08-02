@@ -19,6 +19,7 @@ SWEP.WorldModel = "models/weapons/tacint/w_medkit.mdl"
 
 SWEP.NoRanger = true
 SWEP.NoStatBox = true
+SWEP.HUDAmmoMeter = true
 
 SWEP.Slot = 4
 

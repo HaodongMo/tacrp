@@ -739,3 +739,5 @@ L["wep.tacrp_vertec.desc"] = "意大利产手枪。射程和命中率较高。"
 
 L["wep.tacrp_medkit.name"] = "急救包"
 L["wep.tacrp_medkit.desc"] = "装满医疗补给的小包，治疗伤口用。"
+L["wep.tacrp_riot_shield.name"] = "防暴盾"
+L["wep.tacrp_riot_shield.desc"] = "轻型护盾。\n虽然看上去是塑料的，但能格挡大部分步枪口径子弹。\n能冲刺时攻击且不暴露自己，但会稍微降低移动速度。"
