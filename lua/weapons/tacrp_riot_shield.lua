@@ -12,6 +12,7 @@ SWEP.SubCatTier = "9Special"
 SWEP.SubCatType = "9Equipment"
 
 SWEP.Description = "Lightweight shield. Despite its plastic-looking core, it is capable of stopping almost all rifle caliber rounds.\nAble to sprint and melee attack without compromising the user's safety, but slows down move speed slightly."
+SWEP.Credits = "Model/Texture: Tactical Intervention\nAnimation: Arqu"
 
 SWEP.ViewModel = "models/weapons/tacint/v_riot_shield-2.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_riot_shield_2.mdl"

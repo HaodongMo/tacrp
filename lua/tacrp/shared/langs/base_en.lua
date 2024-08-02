@@ -475,6 +475,9 @@ L["hint.melee_ninja.palm"] = "Palm Strike"
 L["hint.melee_ninja.backhop"] = "Backhop"
 L["hint.melee_ninja.divekick"] = "Divekick"
 
+L["hint.medkit.self"] = "Heal Self"
+L["hint.medkit.others"] = "Heal Others"
+
 -- For demoknight charge attachment
 L["hint.melee_charge"] = "Charge"
 L["hint.melee_charge.menu"] = "Charge Type"

@@ -11,7 +11,8 @@ SWEP.Category = "Tactical RP (Special)"
 SWEP.SubCatTier = "9Special"
 SWEP.SubCatType = "9Equipment"
 
-SWEP.Description = "Compact pack of medical supplies for treating wounds.\nCan self heal, but is more effective when used on others.\nSupplies regenerate over time."
+SWEP.Description = "Compact pack of medical supplies for treating wounds."
+SWEP.Credits = "Model/Texture: Left 4 Dead 2\nAnimation: Lazarus"
 
 SWEP.ViewModel = "models/weapons/tacint/v_medkit.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_medkit.mdl"
@@ -94,6 +95,15 @@ SWEP.Attachments = {
         DetachSound = "TacRP/weapons/flashlight_off.wav",
     }
 }
+
+function SWEP:Hook_GetHintCapabilities(tbl)
+    if TacRP.ConVars["medkit_heal_others"]:GetInt() > 0 then
+        tbl["+attack"] = {so = 0, str = "hint.medkit.others"}
+    end
+    if TacRP.ConVars["medkit_heal_self"]:GetInt() > 0 then
+        tbl["+attack2"] = {so = 0.1, str = "hint.medkit.self"}
+    end
+end
 
 SWEP.HealTarget = nil
 

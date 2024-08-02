@@ -393,6 +393,9 @@ L["hint.melee_ninja.palm"] = "掌击"
 L["hint.melee_ninja.backhop"] = "后跳"
 L["hint.melee_ninja.divekick"] = "飞踢"
 
+L["hint.medkit.self"] = "治疗自己"
+L["hint.medkit.others"] = "治疗他人"
+
 -- For demoknight charge attachment
 L["hint.melee_charge"] = "冲锋"
 L["hint.melee_charge.menu"] = "冲锋模式"
@@ -733,3 +736,6 @@ L["att.perk_throw.name"] = "掷弹兵"
 L["att.perk_throw.desc"] = "加快了快速投掷，并增加了投掷石块的选项。"
 
 L["wep.tacrp_vertec.desc"] = "意大利产手枪。射程和命中率较高。"
+
+L["wep.tacrp_medkit.name"] = "急救包"
+L["wep.tacrp_medkit.desc"] = "装满医疗补给的小包，治疗伤口用。"
