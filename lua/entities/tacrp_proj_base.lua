@@ -517,7 +517,7 @@ function ENT:ImpactTraceAttack(ent, damage, pen)
         dmginfo:SetInflictor(self)
         dmginfo:SetDamagePosition(self:GetPos())
         dmginfo:SetDamageForce(self:GetForward() * pen)
-        dmginfo:SetDamageType(DMG_AIRBOAT + DMG_SNIPER + DMG_BLAST)
+        dmginfo:SetDamageType(DMG_AIRBOAT + DMG_SNIPER)
         dmginfo:SetDamage(damage)
         ent:DispatchTraceAttack(dmginfo, tr, self:GetForward())
     end
