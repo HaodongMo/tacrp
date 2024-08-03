@@ -36,9 +36,6 @@ function ENT:Detonate(ent)
     local attacker = self.Attacker or self:GetOwner() or self
     local mult = TacRP.ConVars["mult_damage_explosive"]:GetFloat() * (self.NPCDamage and 0.5 or 1)
     local dmg = 55
-    if engine.ActiveGamemode() == "terrortown" then
-        dmg = 25
-    end
 
     util.BlastDamage(self, attacker, self:GetPos(), 200, dmg * mult)
     self:ImpactTraceAttack(ent, dmg * mult, 50)

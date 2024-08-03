@@ -993,7 +993,7 @@ Notably, some weapons in the base pack are now Value grade, a new lowest grade t
 <li><b>Fixed:</b> RMR being on guns it should not.
 <li><b>Fixed:</b> Missing accessory slot for some akimbos.
 <li><b>Fixed:</b> Missing sling and other accessory attachments on some guns.
-<li><b>Rebalance:</b> Tweaked explosive damage and radius.
+<li><b>Rebalance:</b> Tweaked explosive damage and radius. TTT gamemode no longer reduces explosive damage.
 <li><b>Rebalance:</b> Breaching Brake gives slight increase in recoil stability.
 <li><b>Rebalance:</b> Dual MTX minor damage buff and recoil increase.
 <li><b>Rebalance:</b> P250 minor damage increase.
@@ -1007,6 +1007,7 @@ Notably, some weapons in the base pack are now Value grade, a new lowest grade t
 <li><b>Added:</b> SMAW Hummingbird rockets, XM25 flechettes and HEAT grenades.
 <li><b>Changed:</b> Tweaked Kar98k reload behavior.
 <li><b>Changed:</b> Intervention MLG sound now an ammo type. Does what you would expect.
+<li><b>Changed:</b> Improved Groza animations.
 <li><b>Fixed:</b> SMAW projectiles not obeying explosive damage scaling.
 <li><b>Rebalance:</b> Buff PSG-1, Amphibian, P210; nerf SR-25; tweaked Kar98k.
 </ul>

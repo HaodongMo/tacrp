@@ -56,8 +56,8 @@ function ENT:Detonate()
         util.Effect("HelicopterMegaBomb", fx)
     end
 
-    local damage = 75
-    util.BlastDamage(self, attacker, src, 328, TacRP.ConVars["mult_damage_explosive"]:GetFloat() * damage)
+    local mult = (self.NPCDamage and 0.25 or 1) * TacRP.ConVars["mult_damage_explosive"]:GetFloat()
+    util.BlastDamage(self, attacker, src, 328, 90 * mult)
 
     self:EmitSound(table.Random(self.ExplodeSounds), 115, 105)
     self:EmitSound("physics/metal/metal_box_break1.wav", 100, 190, 0.5)
