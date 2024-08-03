@@ -12,7 +12,7 @@ SWEP.SubCatTier = "9Special"
 SWEP.SubCatType = "9Equipment"
 
 SWEP.Description = "Compact pack of medical supplies for treating wounds."
-SWEP.Credits = "Model/Texture: Left 4 Dead 2\nAnimation: Lazarus"
+SWEP.Credits = "Model/Texture: Left 4 Dead 2\nAnimation: Arqu"
 
 SWEP.ViewModel = "models/weapons/tacint/v_medkit.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_medkit.mdl"

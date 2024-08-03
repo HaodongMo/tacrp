@@ -979,7 +979,7 @@ Notably, some weapons in the base pack are now Value grade, a new lowest grade t
 <li><b>Added:</b> USP 9mm conversion attachment (using HL2 sounds).
 <li><b>Added:</b> Quotes for various weapons.
 <li><b>Added:</b> Additional localization.
-<li><b>Added:</b> Credits for Medkit and Riot Shield animations. (thanks to Lazarus and Arqu!)
+<li><b>Added:</b> Credits for Medkit and Riot Shield animations. (thanks Arqu!)
 <li><b>Changed:</b> Reworked missile logic for the Stinger and SMAW.
 <li><b>Changed:</b> Melee Techinques are now free attachments.
 <li><b>Changed:</b> Removed chance to fail an unjam attempt.
