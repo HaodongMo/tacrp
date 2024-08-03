@@ -77,6 +77,9 @@ ENT.BounceSounds = nil
 ENT.CollisionSphere = nil
 ENT.GunshipWorkaround = true
 
+// Tell LVS to not ricochet us
+ENT.DisableBallistics = true
+
 function ENT:SetupDataTables()
     self:NetworkVar("Entity", 0, "Weapon")
 end
@@ -482,6 +485,7 @@ function ENT:ImpactTraceAttack(ent, damage, pen)
     if !IsValid(ent) then return end
     if ent.LVS then
         // LVS only does its penetration logic on FireBullets, so we must fire a bullet to trigger it
+        self:SetCollisionGroup(COLLISION_GROUP_DEBRIS) // The projectile blocks the penetration decal?!
         self:FireBullets({
             Attacker = self.Attacker or self:GetOwner(),
             Damage = damage,
@@ -492,8 +496,8 @@ function ENT:ImpactTraceAttack(ent, damage, pen)
             Distance = 128,
             IgnoreEntity = self,
             Callback = function(atk, btr, dmginfo)
-                dmginfo:SetDamageType(DMG_AIRBOAT + DMG_SNIPER + DMG_BLAST) // airboat damage for helicopters and LVS vehicles
-                dmginfo:SetDamageForce(self:GetForward() * pen) // LVS uses this to calculate penetration!
+                dmginfo:SetDamageType(DMG_AIRBOAT + DMG_SNIPER) // LVS wants this
+                dmginfo:SetDamageForce(self:GetForward() * pen) // penetration strength
             end,
         })
     else
