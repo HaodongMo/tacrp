@@ -479,7 +479,7 @@ function ENT:SafetyImpact(data, collider)
 end
 
 function ENT:ImpactTraceAttack(ent, damage, pen)
-    print(ent, ent.LVS)
+    if !IsValid(ent) then return end
     if ent.LVS then
         // LVS only does its penetration logic on FireBullets, so we must fire a bullet to trigger it
         self:FireBullets({
