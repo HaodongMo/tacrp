@@ -194,7 +194,7 @@ function ENT:PhysicsCollide(data, collider)
         end
 
         if self.Delay == 0 or self.ExplodeOnImpact then
-            self:PreDetonate()
+            self:PreDetonate(data.HitEntity)
         end
     elseif self.ImpactDamage > 0 and IsValid(data.HitEntity) and (engine.ActiveGamemode() != "terrortown" or !data.HitEntity:IsPlayer()) then
         local dmg = DamageInfo()
@@ -370,7 +370,7 @@ function ENT:Think()
                     if self.SeekerExplodeSnapPosition then
                         self:SetPos(tr.HitPos)
                     end
-                    self:PreDetonate()
+                    self:PreDetonate(target)
                 end
             elseif self.NoReacquire then
                 self.LockOnEntity = nil
@@ -423,7 +423,7 @@ function ENT:RemoteDetonate()
     self.Armed = true
 end
 
-function ENT:PreDetonate()
+function ENT:PreDetonate(ent)
     if CLIENT then return end
 
     if !self.Detonated then
@@ -431,11 +431,11 @@ function ENT:PreDetonate()
 
         if !IsValid(self.Attacker) and !IsValid(self:GetOwner()) then self.Attacker = game.GetWorld() end
 
-        self:Detonate()
+        self:Detonate(ent)
     end
 end
 
-function ENT:Detonate()
+function ENT:Detonate(ent)
     // fill this in :)
 end
 
@@ -476,6 +476,25 @@ function ENT:SafetyImpact(data, collider)
             SafeRemoveEntityDelayed(prop, 3)
         end
     end
+end
+
+function ENT:ImpactTraceAttack(ent, damage, pen)
+    local tr = util.TraceLine({
+        start = self:GetPos(),
+        endpos = self:GetPos() + self:GetForward() * 256,
+        filter = ent,
+        whitelist = true,
+        ignoreworld = true,
+        mask = MASK_ALL,
+    })
+    local dmginfo = DamageInfo()
+    dmginfo:SetAttacker(self.Attacker or self:GetOwner())
+    dmginfo:SetInflictor(self)
+    dmginfo:SetDamagePosition(self:GetPos())
+    dmginfo:SetDamageForce(self:GetForward() * pen)
+    dmginfo:SetDamageType(DMG_AIRBOAT + DMG_SNIPER + DMG_BLAST)
+    dmginfo:SetDamage(damage)
+    ent:DispatchTraceAttack(dmginfo, tr, self:GetForward())
 end
 
 function ENT:Stuck()

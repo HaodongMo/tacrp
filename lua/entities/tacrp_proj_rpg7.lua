@@ -24,7 +24,7 @@ ENT.SmokeTrail = true
 
 ENT.FlareColor = Color(255, 255, 255)
 
-function ENT:Detonate()
+function ENT:Detonate(ent)
     local attacker = self.Attacker or self:GetOwner()
 
     local mult = TacRP.ConVars["mult_damage_explosive"]:GetFloat()
@@ -32,20 +32,9 @@ function ENT:Detonate()
         util.BlastDamage(self, attacker, self:GetPos(), 350, 75 * mult)
     else
         util.BlastDamage(self, attacker, self:GetPos(), 350, 150 * mult)
-        self:FireBullets({
-            Attacker = attacker,
-            Damage = 2000 * mult,
-            Tracer = 0,
-            Src = self:GetPos(),
-            Dir = self:GetForward(),
-            HullSize = 16,
-            Distance = 128,
-            IgnoreEntity = self,
-            Callback = function(atk, btr, dmginfo)
-                dmginfo:SetDamageType(DMG_AIRBOAT + DMG_SNIPER + DMG_BLAST) // airboat damage for helicopters and LVS vehicles
-                dmginfo:SetDamageForce(self:GetForward() * 20000) // LVS uses this to calculate penetration!
-            end,
-        })
+        if IsValid(ent) then
+            self:ImpactTraceAttack(ent, 2000 * mult, 20000)
+        end
     end
 
     local fx = EffectData()
