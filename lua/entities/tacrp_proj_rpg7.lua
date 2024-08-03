@@ -27,15 +27,9 @@ ENT.FlareColor = Color(255, 255, 255)
 function ENT:Detonate(ent)
     local attacker = self.Attacker or self:GetOwner()
 
-    local mult = TacRP.ConVars["mult_damage_explosive"]:GetFloat()
-    if self.NPCDamage then
-        util.BlastDamage(self, attacker, self:GetPos(), 350, 75 * mult)
-    else
-        util.BlastDamage(self, attacker, self:GetPos(), 350, 150 * mult)
-        if IsValid(ent) then
-            self:ImpactTraceAttack(ent, 2000 * mult, 20000)
-        end
-    end
+    local mult = TacRP.ConVars["mult_damage_explosive"]:GetFloat() * (self.NPCDamage and 0.25 or 1)
+    util.BlastDamage(self, attacker, self:GetPos(), 350, 200 * mult)
+    self:ImpactTraceAttack(ent, 1000 * mult, 15000)
 
     local fx = EffectData()
     fx:SetOrigin(self:GetPos())

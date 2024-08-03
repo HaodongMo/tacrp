@@ -391,7 +391,7 @@ function ENT:Think()
             })
             if IsValid(tr.Entity) and gunship[tr.Entity:GetClass()] then
                 self:SetPos(tr.HitPos)
-                self:Detonate()
+                self:PreDetonate(tr.Entity)
             end
         end
     end
@@ -479,22 +479,44 @@ function ENT:SafetyImpact(data, collider)
 end
 
 function ENT:ImpactTraceAttack(ent, damage, pen)
-    local tr = util.TraceLine({
-        start = self:GetPos(),
-        endpos = self:GetPos() + self:GetForward() * 256,
-        filter = ent,
-        whitelist = true,
-        ignoreworld = true,
-        mask = MASK_ALL,
-    })
-    local dmginfo = DamageInfo()
-    dmginfo:SetAttacker(self.Attacker or self:GetOwner())
-    dmginfo:SetInflictor(self)
-    dmginfo:SetDamagePosition(self:GetPos())
-    dmginfo:SetDamageForce(self:GetForward() * pen)
-    dmginfo:SetDamageType(DMG_AIRBOAT + DMG_SNIPER + DMG_BLAST)
-    dmginfo:SetDamage(damage)
-    ent:DispatchTraceAttack(dmginfo, tr, self:GetForward())
+    print(ent, ent.LVS)
+    if ent.LVS then
+        // LVS only does its penetration logic on FireBullets, so we must fire a bullet to trigger it
+        self:FireBullets({
+            Attacker = self.Attacker or self:GetOwner(),
+            Damage = damage,
+            Tracer = 0,
+            Src = self:GetPos(),
+            Dir = self:GetForward(),
+            HullSize = 16,
+            Distance = 128,
+            IgnoreEntity = self,
+            Callback = function(atk, btr, dmginfo)
+                dmginfo:SetDamageType(DMG_AIRBOAT + DMG_SNIPER + DMG_BLAST) // airboat damage for helicopters and LVS vehicles
+                dmginfo:SetDamageForce(self:GetForward() * pen) // LVS uses this to calculate penetration!
+            end,
+        })
+    else
+        // This is way more consistent because the damage always lands
+        local tr = util.TraceHull({
+            start = self:GetPos(),
+            endpos = self:GetPos() + self:GetForward() * 256,
+            filter = ent,
+            whitelist = true,
+            ignoreworld = true,
+            mask = MASK_ALL,
+            mins = Vector( -8, -8, -8 ),
+            maxs = Vector( 8, 8, 8 ),
+        })
+        local dmginfo = DamageInfo()
+        dmginfo:SetAttacker(self.Attacker or self:GetOwner())
+        dmginfo:SetInflictor(self)
+        dmginfo:SetDamagePosition(self:GetPos())
+        dmginfo:SetDamageForce(self:GetForward() * pen)
+        dmginfo:SetDamageType(DMG_AIRBOAT + DMG_SNIPER + DMG_BLAST)
+        dmginfo:SetDamage(damage)
+        ent:DispatchTraceAttack(dmginfo, tr, self:GetForward())
+    end
 end
 
 function ENT:Stuck()

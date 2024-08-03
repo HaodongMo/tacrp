@@ -988,10 +988,12 @@ Notably, some weapons in the base pack are now Value grade, a new lowest grade t
 <li><b>Changed:</b> Thermal Imager renamed, no longer blurs when peeking.
 <li><b>Changed:</b> SAPHE can now damage Combine Helicopters and LVS vehicles.
 <li><b>Changed:</b> Riot Shield can't block melee attacks when attacking.
+<li><b>Fixed:</b> Improved projectile impact damage consistency.
 <li><b>Fixed:</b> 40mm Healing grenades not healing.
 <li><b>Fixed:</b> RMR being on guns it should not.
 <li><b>Fixed:</b> Missing accessory slot for some akimbos.
 <li><b>Fixed:</b> Missing sling and other accessory attachments on some guns.
+<li><b>Rebalance:</b> Tweaked explosive damage and radius.
 <li><b>Rebalance:</b> Breaching Brake gives slight increase in recoil stability.
 <li><b>Rebalance:</b> Dual MTX minor damage buff and recoil increase.
 <li><b>Rebalance:</b> P250 minor damage increase.

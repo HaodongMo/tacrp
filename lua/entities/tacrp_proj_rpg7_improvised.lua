@@ -68,7 +68,7 @@ function ENT:Initialize()
     end
 end
 
-function ENT:Detonate()
+function ENT:Detonate(ent)
     local attacker = self.Attacker or self:GetOwner()
 
     if math.random() <= 0.05 then
@@ -101,22 +101,8 @@ function ENT:Detonate()
     if self.NPCDamage then
         util.BlastDamage(self, attacker, self:GetPos(), 350, 100)
     else
-        // util.BlastDamage(self, attacker, self:GetPos(), 128, math.Rand(300, 700))
-        util.BlastDamage(self, attacker, self:GetPos(), 400, math.Rand(100, 150) * mult)
-        self:FireBullets({
-            Attacker = attacker,
-            Damage = math.Rand(800, 2400) * mult,
-            Tracer = 0,
-            Src = self:GetPos(),
-            Dir = self:GetForward(),
-            HullSize = 16,
-            Distance = 128,
-            IgnoreEntity = self,
-            Callback = function(atk, btr, dmginfo)
-                dmginfo:SetDamageType(DMG_AIRBOAT + DMG_SNIPER + DMG_BLAST) // airboat damage for helicopters and LVS vehicles
-                dmginfo:SetDamageForce(self:GetForward() * math.Rand(10000, 20000)) // LVS uses this to calculate penetration!
-            end,
-        })
+        util.BlastDamage(self, attacker, self:GetPos(), 350, math.Rand(150, 250) * mult)
+        self:ImpactTraceAttack(ent, math.Rand(750, 1500) * mult, math.Rand(7500, 20000))
     end
 
     local fx = EffectData()

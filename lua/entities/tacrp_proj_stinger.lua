@@ -42,7 +42,7 @@ ENT.FlareColor = Color(255, 255, 255)
 
 DEFINE_BASECLASS(ENT.Base)
 
-function ENT:Detonate()
+function ENT:Detonate(ent)
     local attacker = self.Attacker or self:GetOwner()
     local dir = self:GetForward()
     local src = self:GetPos() - dir * 64
@@ -54,8 +54,9 @@ function ENT:Detonate()
     dmg:SetInflictor(self)
     dmg:SetDamageForce(self:GetVelocity() * 100)
     dmg:SetDamagePosition(src)
-    dmg:SetDamage(600 * mult)
-    util.BlastDamageInfo(dmg, self:GetPos(), 328)
+    dmg:SetDamage(100 * mult)
+    util.BlastDamageInfo(dmg, self:GetPos(), 256)
+    self:ImpactTraceAttack(ent, 500 * mult, 100)
 
     local fx = EffectData()
     fx:SetOrigin(self:GetPos())

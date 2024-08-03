@@ -75,7 +75,7 @@ function ENT:Detonate()
                 util.Effect("Explosion", fx)
             end
             self:EmitSound("^ambient/explosions/explode_3.wav", 100, 90, 0.75, CHAN_AUTO)
-            util.BlastDamage(self, attacker, self:GetPos(), 200, 300 * mult)
+            util.BlastDamage(self, attacker, self:GetPos(), 128, 500 * mult)
             util.BlastDamage(self, attacker, self:GetPos(), 328, 120 * mult)
             util.BlastDamage(self, attacker, self:GetPos(), 768, 80 * mult)
             local count = 8

@@ -59,7 +59,7 @@ function ENT:Detonate()
         end
     end
 
-    local mult = TacRP.ConVars["mult_damage_explosive"]:GetFloat()
+    local mult = TacRP.ConVars["mult_damage_explosive"]:GetFloat() * (self.NPCDamage and 0.25 or 1)
 
     self:FireBullets({
         Attacker = attacker,
@@ -83,7 +83,7 @@ function ENT:Detonate()
     for _, ent in pairs(ents.FindInCone(src, dir, 2048, 0.707)) do
         local tr = util.QuickTrace(src, ent:GetPos() - src, {self, ent})
         if tr.Fraction == 1 then
-            dmg:SetDamage(130 * math.Rand(0.75, 1) * Lerp((ent:GetPos():DistToSqr(src) / 4194304) ^ 0.5, 1, 0.25) * (self.NPCDamage and 0.5 or 1) * mult)
+            dmg:SetDamage(130 * math.Rand(0.75, 1) * Lerp((ent:GetPos():DistToSqr(src) / 4194304) ^ 0.5, 1, 0.25) * mult)
             if !ent:IsOnGround() then dmg:ScaleDamage(1.5) end
             ent:TakeDamageInfo(dmg)
         end
