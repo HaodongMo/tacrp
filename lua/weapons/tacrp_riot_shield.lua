@@ -28,7 +28,7 @@ SWEP.BalanceStats = {
 
 SWEP.NoRanger = true
 SWEP.NoStatBox = true
-SWEP.HUDAmmoMeter = true
+SWEP.HUDAmmoMeter = false
 
 SWEP.NPCUsable = false
 
@@ -131,6 +131,7 @@ function SWEP:Initialize()
 
     local dur = TacRP.ConVars["shield_riot_hp"]:GetInt()
     if dur > 0 then
+        self.HUDAmmoMeter = true
         self.ClipSize = dur
         self.Primary.ClipSize = dur
         self:SetClip1(dur)
