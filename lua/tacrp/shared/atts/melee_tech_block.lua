@@ -147,7 +147,7 @@ hook.Add("EntityTakeDamage", "TacRP_Block", function(ent, dmginfo)
         return
     end
 
-    wep:SetHoldBreathAmount(wep:GetHoldBreathAmount() - math.Clamp(0.05 + dmginfo:GetDamage() / (wep:GetValue("MeleeDamage") * 2), 0.1, 0.5))
+    wep:SetHoldBreathAmount(wep:GetHoldBreathAmount() - math.Clamp(0.05 + dmginfo:GetDamage() / ent:GetMaxHealth(), 0.05, 0.5))
 
     local ang = ent:EyeAngles()
     local fx = EffectData()
