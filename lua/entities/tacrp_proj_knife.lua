@@ -221,12 +221,12 @@ function ENT:Impact(data, collider)
         end)
     end
 
-    if self.HasAmmo then
-        self:SetTrigger(true)
-        self:SetOwner(NULL)
-    end
     timer.Simple(0.01, function()
         self:SetCollisionGroup(COLLISION_GROUP_DEBRIS)
+        if self.HasAmmo then
+            self:SetTrigger(true)
+            self:SetOwner(NULL)
+        end
     end)
 
     timer.Simple(5, function()
