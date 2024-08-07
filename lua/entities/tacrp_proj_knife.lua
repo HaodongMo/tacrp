@@ -177,7 +177,7 @@ function ENT:Impact(data, collider)
         angles:RotateAroundAxis(self:GetRight(), -90)
         self:GetPhysicsObject():Sleep()
 
-        timer.Simple(0, function()
+        timer.Simple(0.01, function()
             if IsValid(self) and tgt:IsWorld() or (IsValid(tgt) and (!(tgt:IsNPC() or tgt:IsPlayer()) or tgt:Health() > 0)) then
                 if !tgt:IsWorld() then
                     self:SetSolid(SOLID_NONE)
@@ -225,7 +225,9 @@ function ENT:Impact(data, collider)
         self:SetTrigger(true)
         self:SetOwner(NULL)
     end
-    self:SetCollisionGroup(COLLISION_GROUP_DEBRIS)
+    timer.Simple(0.01, function()
+        self:SetCollisionGroup(COLLISION_GROUP_DEBRIS)
+    end)
 
     timer.Simple(5, function()
         if IsValid(self) then
