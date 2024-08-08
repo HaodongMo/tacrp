@@ -441,6 +441,7 @@ if SERVER then
     net.Receive("tacrp_clientdamage", function(len, ply)
         local weapon = net.ReadEntity()
         local tgt = net.ReadEntity()
+        if not IsValid(tgt) then return end
         local dir = net.ReadVector()
         local hitpos = tgt:LocalToWorld(net.ReadVector())
         local hitgroup = net.ReadUInt(8)

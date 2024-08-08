@@ -276,7 +276,8 @@ function SWEP:PrimaryAttack()
             -- debugoverlay.Line(self:GetMuzzleOrigin(), self:GetMuzzleOrigin() + threshold, 2, hitscan and Color(255, 0, 255) or Color(255, 255, 255))
         end
 
-        self:GetOwner():LagCompensation(true)
+        -- Firebullets already does this so this is just placebo
+        -- self:GetOwner():LagCompensation(true)
 
         if shootent or !hitscan or fixed_spread then
             local d = math.random() -- self:GetNthShot() / self:GetCapacity()
@@ -348,7 +349,25 @@ function SWEP:PrimaryAttack()
                 Callback = function(att, btr, dmg)
                     local range = (btr.HitPos - btr.StartPos):Length()
 
-                    self:AfterShotFunction(btr, dmg, range, self:GetValue("Penetration"), {})
+                    if IsValid(btr.Entity) and TacRP.ConVars["client_damage"]:GetBool() then
+                        if CLIENT then
+                            net.Start("tacrp_clientdamage")
+                                net.WriteEntity(self)
+                                net.WriteEntity(btr.Entity)
+                                net.WriteVector(btr.Normal)
+                                net.WriteVector(btr.Entity:WorldToLocal(btr.HitPos))
+                                net.WriteUInt(btr.HitGroup, 8)
+                                net.WriteFloat(range)
+                                net.WriteFloat(self:GetValue("Penetration"))
+                                net.WriteUInt(0, 4)
+                            net.SendToServer()
+                        else
+                            self:AfterShotFunction(btr, dmg, range, self:GetValue("Penetration"), {btr.Entity})
+                        end
+                    else
+                        self:AfterShotFunction(btr, dmg, range, self:GetValue("Penetration"), {})
+                    end
+
                     if SERVER then
                         debugoverlay.Cross(btr.HitPos, 4, 5, Color(255, 0, 0), false)
                     else
@@ -358,7 +377,7 @@ function SWEP:PrimaryAttack()
             })
         end
 
-        self:GetOwner():LagCompensation(false)
+        -- self:GetOwner():LagCompensation(false)
     end
 
     self:ApplyRecoil()
