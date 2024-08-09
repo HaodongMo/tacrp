@@ -893,6 +893,14 @@ local conVars = {
         notify = true,
         replicated = true,
     },
+    {
+        name = "dropmagazinemodel",
+        default = "1",
+        min = 0,
+        max = 1,
+        notify = true,
+        replicated = true,
+    },
 
     // --------------------------- Medkit
     {
@@ -1295,6 +1303,10 @@ local function menu_server_ti(panel)
 
 
     header(panel, "\nMiscellaneous")
+    panel:AddControl("checkbox", {
+        label = "Drop Magazine Models",
+        command = "tacrp_dropmagazinemodel"
+    })
     panel:AddControl("checkbox", {
         label = "Supply Boxes Resupply Grenades",
         command = "TacRP_resupply_grenades"

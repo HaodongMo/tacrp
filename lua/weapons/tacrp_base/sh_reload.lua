@@ -81,7 +81,7 @@ end
 
 function SWEP:DropMagazine()
     -- if !IsFirstTimePredicted() and !game.SinglePlayer() then return end
-    if self:GetValue("DropMagazineModel") then
+    if self:GetValue("DropMagazineModel") and TacRP.ConVars["dropmagazinemodel"]:GetBool() then
         local dropamt = math.floor(self:Clip1() / self:GetValue("DropMagazineAmount"))
         local clip1 = self:Clip1()
         for i = 1, self:GetValue("DropMagazineAmount") do

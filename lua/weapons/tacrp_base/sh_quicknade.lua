@@ -140,7 +140,7 @@ function SWEP:ThrowGrenade()
                 phys:AddAngleVelocity(VectorRand() * 1000)
             end
 
-            if nade.Spoon then
+            if nade.Spoon and TacRP.ConVars["dropmagazinemodel"]:GetBool() then
                 local mag = ents.Create("TacRP_droppedmag")
 
                 if mag then
