@@ -330,10 +330,9 @@ hook.Add("EntityTakeDamage", "TacRP_RiotShield", function(ent, dmginfo)
 
     if !IsValid(wep) or wep:GetClass() != "tacrp_riot_shield" then return end
 
-    local dir = (dmginfo:GetDamagePosition() - ent:EyePos()):GetNormalized()
+    local dir = (dmginfo:GetDamagePosition() - ent:GetPos()):GetNormalized()
 
-    if (dmginfo:GetAttacker():GetPos() - ent:EyePos()):GetNormalized():Dot(ent:EyeAngles():Forward()) < 0.5
-    and (dir:Dot(ent:EyeAngles():Forward()) < 0.5) then return end
+    if (dir:Dot(ent:EyeAngles():Forward()) < 0.25) then return end
     if dmginfo:IsExplosionDamage() or (IsValid(dmginfo:GetInflictor()) and dmginfo:GetInflictor():GetClass() == "entityflame") then return end
 
     if !wep:StillWaiting() and (dmginfo:IsDamageType(DMG_CLUB) or dmginfo:IsDamageType(DMG_CRUSH) or dmginfo:IsDamageType(DMG_SLASH) or dmginfo:GetDamageType() == DMG_GENERIC) then

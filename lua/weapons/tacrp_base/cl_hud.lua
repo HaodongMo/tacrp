@@ -206,6 +206,8 @@ function SWEP:DrawBottomBar(x, y, w, h)
         surface.DrawTexturedRect(x + w - sfm - TacRP.SS(1 + 10), y + h - sfm - TacRP.SS(1), sfm, sfm)
     end
 
+    local fmoffset = TacRP.SS(25)
+
     if self:GetFiremodeAmount() > 1 and !self:GetSafe() then
         local nextfm = TacRP.GetBind("use") .. "+" .. TacRP.GetBind("reload")
 
@@ -224,6 +226,8 @@ function SWEP:DrawBottomBar(x, y, w, h)
         surface.SetDrawColor(col)
         local nfm = TacRP.SS(8)
         surface.DrawTexturedRect(x + w - nfm - TacRP.SS(4), y + h - nfm - TacRP.SS(1), nfm, nfm)
+    elseif self:GetFiremodeAmount() == 0 then
+        fmoffset = 0
     end
 
     if self:GetValue("CanQuickNade") then
@@ -263,7 +267,7 @@ function SWEP:DrawBottomBar(x, y, w, h)
         if mat then
             surface.SetMaterial(mat)
             surface.SetDrawColor(255, 255, 255)
-            surface.DrawTexturedRect(x + w - TacRP.SS(41), y + h - nsg - TacRP.SS(1), nsg, nsg)
+            surface.DrawTexturedRect(x + w - fmoffset - TacRP.SS(5) - nsg, y + h - nsg, nsg, nsg)
         end
 
         local nextnadetxt = TacRP.GetBind("+grenade2")
@@ -271,7 +275,7 @@ function SWEP:DrawBottomBar(x, y, w, h)
         surface.SetTextColor(col)
         surface.SetFont("TacRP_HD44780A00_5x8_4")
         local tw = surface.GetTextSize(nextnadetxt)
-        surface.SetTextPos(x + w - TacRP.SS(36) - (tw / 2), y + h - nsg - TacRP.SS(4))
+        surface.SetTextPos(x + w - fmoffset - (tw / 2) - nsg, y + h - nsg - TacRP.SS(4))
         surface.DrawText(nextnadetxt)
     end
 end
@@ -375,8 +379,8 @@ function SWEP:DrawHUDBackground()
         end
     end
 
-    if !self:GetCustomize() and TacRP.ConVars["hud"]:GetBool() then
-        if TacRP.ConVars["drawhud"]:GetBool() and engine.ActiveGamemode() != "terrortown" then
+    if !self:GetCustomize() then
+        if TacRP.ConVars["hud"]:GetBool() and TacRP.ConVars["drawhud"]:GetBool() and engine.ActiveGamemode() != "terrortown" then
 
             local w = TacRP.SS(110)
             local h = TacRP.SS(40)

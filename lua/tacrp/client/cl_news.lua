@@ -1013,6 +1013,27 @@ Notably, some weapons in the base pack are now Value grade, a new lowest grade t
 </ul>
 ]],
     },
+    {
+        Title = "Update 25",
+        Type = "Patch Notes",
+        Date = "2024-08-03",
+        Author = "8Z",
+        Major = false,
+        Summary = "Grenade configurations.",
+        Contents = [[<body style="font-family:'Myriad Pro';color:white;font-size:125%;">
+
+<h3>Changelist</h3>
+<ul>
+<li><b>Added:</b> Client Authoratitive Hit Registration, to improve multiplayer hitreg.
+<li><b>Added:</b> ConVars for tweaking attributes of various grenades, in Equipment tab.
+<li><b>Added:</b> ConVar to disable magazine dropping.
+<li><b>Changed:</b> tacrp_hud will no longer disable minimal HUD.
+<li><b>Changed:</b> Thermite grenade and the thermite cloud will now stick to whatever it hits.
+<li><b>Fixed:</b> Flashbang will now properly stun all kinds of NPCs.
+<li><b>Rebalance:</b> Melee block meter consumption on hit is now based on your max health.
+</ul>
+]],
+    },
 }
 TacRP.NewsRead = TacRP.NewsRead or {}
 TacRP.NewsFirstLoad = false

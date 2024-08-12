@@ -34,8 +34,9 @@ function TacRP.Flashbang(ent, pos, radius, time_max, time_min, time_stunadd)
                 net.WriteFloat(time)
             net.Send(k)
         elseif k:IsNPC() and TacRP.ConVars["flash_affectnpcs"]:GetBool() and (k.TacRP_FlashEnd or 0) < CurTime() then
+            local ret = hook.Run("TacRP_StunNPC", k, ent)
+            if ret then continue end
             local t = time_max
-
             -- stun them if they have a good cower sequence. this doesn't affect npcs like antlion guards, manhacks etc.
             if badseqs[k:GetSequenceName(ACT_COWER)] != true then
                 local tr = util.TraceLine({

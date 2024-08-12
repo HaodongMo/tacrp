@@ -1299,7 +1299,7 @@ local function menu_server_ti(panel)
         command = "tacrp_crosshair"
     })
     panel:AddControl("checkbox", {
-        label = "Enable HUD (and Minimal HUD)",
+        label = "Enable HUD",
         command = "tacrp_hud"
     })
     panel:AddControl("checkbox", {
@@ -1667,20 +1667,6 @@ local function menu_mechanics_ti(panel)
         label = "Allow Aiming While Reloading",
         command = "tacrp_ads_reload"
     })
-    panel:AddControl("slider", {
-        label = "Flashbang Slow",
-        command = "tacrp_flash_slow",
-        type = "float",
-        min = 0,
-        max = 1,
-    })
-    panel:AddControl("slider", {
-        label = "CS Gas Sway",
-        command = "tacrp_gas_sway",
-        type = "float",
-        min = 0,
-        max = 10,
-    })
 end
 
 local function menu_atts_ti(panel)
@@ -1747,6 +1733,13 @@ local function menu_equipment_ti(panel)
     panel:AddControl("checkbox", {
         label = "Flashbang Affects NPCs",
         command = "tacrp_flash_affectnpcs"
+    })
+    panel:AddControl("slider", {
+        label = "Flashbang Slow",
+        command = "tacrp_flash_slow",
+        type = "float",
+        min = 0,
+        max = 1,
     })
     panel:AddControl("slider", {
         label = "Frag Grenade Damage",
@@ -1835,6 +1828,13 @@ local function menu_equipment_ti(panel)
         max = 100,
     })
     panel:ControlHelp("Medi-Smoke damage is applied to anything considered a zombie.")
+    panel:AddControl("slider", {
+        label = "CS Gas Sway",
+        command = "tacrp_gas_sway",
+        type = "float",
+        min = 0,
+        max = 10,
+    })
 
     header(panel, "\nMedkit")
     panel:AddControl("checkbox", {

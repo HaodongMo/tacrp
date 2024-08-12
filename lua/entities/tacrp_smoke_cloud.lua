@@ -113,6 +113,8 @@ function ENT:Think()
         local targets = ents.FindInSphere(self:GetPos(), self.SmokeRadius)
         for _, k in pairs(targets) do
             if k:IsNPC() then
+                local ret = hook.Run("TacRP_StunNPC", k, self)
+                if ret then continue end
                 k:SetSchedule(SCHED_STANDOFF)
             end
         end
