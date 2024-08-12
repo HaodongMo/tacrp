@@ -92,8 +92,8 @@ TacRP.QuickNades = {
         CanSetImpact = true,
 
         FullName = "Thermite Grenade",
-        DetType = "Timed - 2 seconds",
-        Description = "Burns intensely for about 8 seconds, dealing damage within a small radius.\n\nWhile thermite is typically used to burn through materiel, it is also useful for area denial.",
+        DetType = "Timed - 3 seconds",
+        Description = "Sticks to targets and burns intensely for about 8 seconds, dealing damage within a small radius.\n\nWhile thermite is typically used to burn through materiel, it is also useful for area denial.",
         Category = "LETHAL",
         SortOrder = 2,
     },
