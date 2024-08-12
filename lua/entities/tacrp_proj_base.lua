@@ -199,7 +199,7 @@ function ENT:PhysicsCollide(data, collider)
         if self.Delay == 0 or self.ExplodeOnImpact then
             self:PreDetonate(data.HitEntity)
         end
-    elseif self.ImpactDamage > 0 and IsValid(data.HitEntity) and (engine.ActiveGamemode() != "terrortown" or !data.HitEntity:IsPlayer()) then
+    elseif self.ImpactDamage > 0 and data.Speed >= 10 and IsValid(data.HitEntity) and (engine.ActiveGamemode() != "terrortown" or !data.HitEntity:IsPlayer()) then
         local dmg = DamageInfo()
         dmg:SetAttacker(IsValid(self:GetOwner()) and self:GetOwner() or self.Attacker)
         dmg:SetInflictor(self)

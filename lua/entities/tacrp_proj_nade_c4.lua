@@ -20,6 +20,8 @@ ENT.ExplodeUnderwater = false
 ENT.Defusable = true
 ENT.DefuseOnDamage = true
 
+ENT.ImpactDamage = 0
+
 ENT.Delay = 0.5
 
 ENT.PickupAmmo = "ti_c4"
