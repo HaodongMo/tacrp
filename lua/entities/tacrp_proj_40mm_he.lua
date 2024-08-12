@@ -25,7 +25,7 @@ ENT.ExplodeSounds = {
 
 ENT.AudioLoop = "TacRP/weapons/rpg7/rocket_flight-1.wav"
 
-function ENT:Detonate()
+function ENT:Detonate(ent)
     local attacker = self.Attacker or self:GetOwner() or self
     local mult = TacRP.ConVars["mult_damage_explosive"]:GetFloat() * (self.NPCDamage and 0.25 or 1)
     local dmg = 150
