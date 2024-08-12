@@ -109,6 +109,7 @@ function ENT:Think()
             return
         end
 
+        if !TacRP.ConVars["smoke_affectnpcs"]:GetBool() then return end
         local targets = ents.FindInSphere(self:GetPos(), self.SmokeRadius)
         for _, k in pairs(targets) do
             if k:IsNPC() then

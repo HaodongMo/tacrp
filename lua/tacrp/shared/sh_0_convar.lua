@@ -978,6 +978,20 @@ local conVars = {
         min = 0,
         replicated = true,
     },
+
+    // --------------------------- Grenades
+    {
+        name = "smoke_affectnpcs",
+        default = "1",
+        min = 0,
+        max = 1,
+    },
+    {
+        name = "flashbang_affectnpcs",
+        default = "1",
+        min = 0,
+        max = 1,
+    },
 }
 
 TacRP.ConVars = {}
