@@ -142,7 +142,7 @@ hook.Add("DoPlayerDeath", "TacRP_DropGrenade", function(ply, attacker, dmginfo)
             phys:AddAngleVelocity(VectorRand() * 500)
         end
 
-        if nade.Spoon then
+        if nade.Spoon and TacRP.ConVars["dropmagazinemodel"]:GetBool() then
             local mag = ents.Create("TacRP_droppedmag")
 
             if mag then

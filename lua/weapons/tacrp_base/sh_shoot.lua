@@ -372,6 +372,7 @@ function SWEP:PrimaryAttack()
                         debugoverlay.Cross(btr.HitPos, 4, 5, Color(255, 0, 0), false)
                     else
                         debugoverlay.Cross(btr.HitPos, 4, 5, Color(255, 255, 255), false)
+
                     end
                 end
             })

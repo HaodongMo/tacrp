@@ -96,7 +96,7 @@ function ENT:Impact(data, collider)
 
     self:GetPhysicsObject():SetVelocityInstantaneous(data.OurNewVelocity * 0.5)
 
-    timer.Simple(0, function()
+    timer.Simple(0.01, function()
         if IsValid(self) then
             self:SetOwner(NULL) -- lol
             self:SetCollisionGroup(COLLISION_GROUP_INTERACTIVE)
