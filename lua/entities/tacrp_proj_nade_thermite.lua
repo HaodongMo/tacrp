@@ -16,6 +16,7 @@ ENT.ImpactFuse = false // projectile explodes on impact.
 
 ENT.ExplodeOnDamage = false // projectile explodes when it takes damage.
 ENT.ExplodeUnderwater = true
+ENT.DefuseOnDamage = true
 
 ENT.ImpactDamage = 1
 

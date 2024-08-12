@@ -293,6 +293,8 @@ hook.Add("EntityTakeDamage", "tacrp_fire_cloud", function(ent, dmginfo)
         elseif !ent:IsNextBot() and !ent:IsPlayer() then
             if ent:GetClass() == "prop_physics" then
                 dmginfo:SetDamageType(DMG_DIRECT) -- some props like to burn slowly against DMG_BURN or DMG_SLOWBURN. don't.
+            elseif ent:GetClass() == "tacrp_proj_nade_thermite" then
+                return true -- don't burn other thermite grenades
             end
             dmginfo:ScaleDamage(2) -- tremendous damage to props
         end
