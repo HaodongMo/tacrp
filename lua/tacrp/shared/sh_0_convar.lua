@@ -1304,6 +1304,11 @@ local function menu_server_ti(panel)
 
     header(panel, "\nMiscellaneous")
     panel:AddControl("checkbox", {
+        label = "Client Authoratitive Hitreg",
+        command = "tacrp_client_damage"
+    })
+    panel:ControlHelp("Dramatically improve multiplayer hit registration by letting the client declare when damage is dealt.\nMay be abusable by exploiters, so usage in public servers is not recommended.")
+    panel:AddControl("checkbox", {
         label = "Drop Magazine Models",
         command = "tacrp_dropmagazinemodel"
     })
@@ -1321,7 +1326,6 @@ local function menu_server_ti(panel)
         command = "tacrp_doorbust"
     })
     panel:ControlHelp("Blow doors off their hinges, even locked ones. If disabled, only unlocked doors can be knocked open, and they won't be blown off.")
-
     panel:AddControl("slider", {
         label = "Door Respawn Time",
         command = "tacrp_doorbust_time",
