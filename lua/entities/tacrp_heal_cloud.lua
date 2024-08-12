@@ -128,31 +128,39 @@ function ENT:Think()
                     mask = MASK_SOLID_BRUSHONLY
                 })
                 if tr.Fraction < 1 then continue end
-                if k:IsPlayer() and k:GetNWFloat("TacRPNextCanHealthGasTime", 0) <= CurTime() then
+                if k:IsPlayer() and (k.TacRPNextCanHealthGasTime or 0) <= CurTime() then
                     local ply = k
                     if ply:Health() < ply:GetMaxHealth() then
-                        ply:SetHealth(math.min(ply:Health() + 3, ply:GetMaxHealth()))
-                    elseif ply:Armor() > 0 and ply:Armor() <= ply:GetMaxArmor() then
-                        ply:SetArmor(math.min(ply:Armor() + 1, ply:GetMaxArmor()))
+                        local amt = TacRP.ConVars["healnade_heal"]:GetInt()
+                        local ret = {amt}
+                        hook.Run("TacRP_MedkitHeal", self, self:GetOwner(), ply, ret)
+                        amt = ret and ret[1] or amt
+                        ply:SetHealth(math.min(ply:Health() + amt, ply:GetMaxHealth()))
+                    elseif ply:Armor() > 0 and ply:Armor() <= ply:GetMaxArmor() and TacRP.ConVars["healnade_armor"]:GetInt() > 0 then
+                        ply:SetArmor(math.min(ply:Armor() + TacRP.ConVars["healnade_armor"]:GetInt(), ply:GetMaxArmor()))
                     end
-                    ply:SetNWFloat("TacRPNextCanHealthGasTime", CurTime() + 0.499)
+                    k.TacRPNextCanHealthGasTime = CurTime() + 0.19
                 elseif !k:IsPlayer() and (k.TacRPNextCanHealthGasTime or 0) <= CurTime() then
                     if TacRP.EntityIsNecrotic(k) then
                         local dmginfo = DamageInfo()
                         dmginfo:SetAttacker(self:GetOwner() or self)
                         dmginfo:SetInflictor(self)
                         dmginfo:SetDamageType(DMG_NERVEGAS)
-                        dmginfo:SetDamage(15)
+                        dmginfo:SetDamage(TacRP.ConVars["healnade_damage"]:GetInt())
                         k:TakeDamageInfo(dmginfo)
                     elseif k:Health() < k:GetMaxHealth() then
-                        k:SetHealth(math.min(k:Health() + 3, k:GetMaxHealth()))
+                        local amt = TacRP.ConVars["healnade_heal"]:GetInt()
+                        local ret = {amt}
+                        hook.Run("TacRP_MedkitHeal", self, self:GetOwner(), k, ret)
+                        amt = ret and ret[1] or amt
+                        k:SetHealth(math.min(k:Health() + amt, k:GetMaxHealth()))
                     end
-                    k.TacRPNextCanHealthGasTime = CurTime() + 0.499
+                    k.TacRPNextCanHealthGasTime = CurTime() + 0.19
                 end
             end
         end
 
-        self:NextThink(CurTime() + 0.5)
+        self:NextThink(CurTime() + 0.2)
 
         if self.dt < CurTime() then
             SafeRemoveEntity(self)

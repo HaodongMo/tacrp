@@ -1,6 +1,7 @@
 local badseqs = {
     ["Unknown"] = true, -- no cower sequence
     ["head_pitch"] = true, -- antlion guards
+    ["Walk_Neutral_South"] = true, -- l4d2 common inf
 }
 
 function TacRP.Flashbang(ent, pos, radius, time_max, time_min, time_stunadd)
@@ -32,7 +33,9 @@ function TacRP.Flashbang(ent, pos, radius, time_max, time_min, time_stunadd)
             net.Start("tacrp_flashbang")
                 net.WriteFloat(time)
             net.Send(k)
-        elseif k:IsNPC() and TacRP.ConVars["flashbang_affectnpcs"]:GetBool() then
+        elseif k:IsNPC() and TacRP.ConVars["flash_affectnpcs"]:GetBool() and (k.TacRP_FlashEnd or 0) < CurTime() then
+            local t = time_max
+
             -- stun them if they have a good cower sequence. this doesn't affect npcs like antlion guards, manhacks etc.
             if badseqs[k:GetSequenceName(ACT_COWER)] != true then
                 local tr = util.TraceLine({
@@ -45,16 +48,27 @@ function TacRP.Flashbang(ent, pos, radius, time_max, time_min, time_stunadd)
                     k:SetSchedule(SCHED_COWER)
                     k:RestartGesture(ACT_COWER)
                     k:SetNPCState(NPC_STATE_NONE)
-                    local t = time_max + time_stunadd + 1
                     k.TacRP_FlashEnd = CurTime() + t - 0.01
                     timer.Simple(t, function()
-                        if IsValid(k) and k:IsNPC() and k.TacRP_FlashEnd <= CurTime() then
+                        if IsValid(k) then
                             k:SetNPCState(NPC_STATE_ALERT)
                         end
                     end)
                 end
             else
-                k:SetSchedule(SCHED_STANDOFF)
+                local tr = util.TraceLine({
+                    start = pos,
+                    endpos = k:EyePos(),
+                    mask = MASK_SOLID,
+                    filter = {ent, k}
+                })
+                if tr.Fraction == 1 then
+                    k.TacRP_FlashEnd = CurTime() + t - 0.01
+                    timer.Create("tacrp_flash_" .. k:EntIndex(), 0.5, math.ceil(t / 0.5), function()
+                        if IsValid(k) then k:SetSchedule(SCHED_STANDOFF) end
+                    end)
+                    k:SetSchedule(SCHED_STANDOFF)
+                end
             end
         end
     end

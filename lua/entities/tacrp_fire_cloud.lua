@@ -57,7 +57,7 @@ function ENT:Think()
                 self.Light.g = 135
                 self.Light.b = 0
                 self.Light.Brightness = 5
-                self.Light.Size = 328
+                self.Light.Size = math.Clamp(TacRP.ConVars["thermite_radius"]:GetFloat(), 128, 512) * 1.5
                 self.Light.DieTime = CurTime() + self.FireTime
             end
         else
@@ -213,14 +213,16 @@ function ENT:Think()
 
         local dmg = DamageInfo()
         dmg:SetDamageType(DMG_BURN)
-        dmg:SetDamage(Lerp((self.SpawnTime + self.FireTime - CurTime()) / self.FireTime, 40, 20) * TacRP.ConVars["mult_damage_explosive"]:GetFloat())
+        dmg:SetDamage(Lerp((self.SpawnTime + self.FireTime - CurTime()) / self.FireTime, TacRP.ConVars["thermite_damage_max"]:GetFloat(), TacRP.ConVars["thermite_damage_min"]:GetFloat()))
         dmg:SetInflictor(self)
         dmg:SetAttacker(self:GetOwner())
-        util.BlastDamageInfo(dmg, self:GetPos(), 200)
-
-        self.NextDamageTick = CurTime() + 0.15
+        util.BlastDamageInfo(dmg, IsValid(self:GetParent()) and self:GetParent():GetPos() or self:GetPos(), TacRP.ConVars["thermite_radius"]:GetFloat())
 
         if self.SpawnTime + self.FireTime <= CurTime() then self:Remove() return end
+
+        self.NextDamageTick = CurTime() + 0.2
+        self:NextThink(self.NextDamageTick)
+        return true
     end
 end
 

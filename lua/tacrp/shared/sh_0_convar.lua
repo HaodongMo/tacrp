@@ -987,10 +987,70 @@ local conVars = {
         max = 1,
     },
     {
-        name = "flashbang_affectnpcs",
+        name = "flash_affectnpcs",
         default = "1",
         min = 0,
         max = 1,
+    },
+    {
+        name = "thermite_damage_min",
+        default = "20",
+        min = 0,
+    },
+    {
+        name = "thermite_damage_max",
+        default = "40",
+        min = 0,
+    },
+    {
+        name = "thermite_radius",
+        default = "200",
+        min = 0,
+    },
+    {
+        name = "frag_damage",
+        default = "150",
+        min = 0,
+    },
+    {
+        name = "frag_radius",
+        default = "350",
+        min = 0,
+    },
+    {
+        name = "charge_damage",
+        default = "500",
+        min = 0,
+    },
+    {
+        name = "charge_radius",
+        default = "200",
+        min = 0,
+    },
+    {
+        name = "c4_damage",
+        default = "300",
+        min = 0,
+    },
+    {
+        name = "c4_radius",
+        default = "400",
+        min = 0,
+    },
+    {
+        name = "healnade_heal",
+        default = "3",
+        min = 0,
+    },
+    {
+        name = "healnade_armor",
+        default = "1",
+        min = 0,
+    },
+    {
+        name = "healnade_damage",
+        default = "20",
+        min = 0,
     },
 }
 
@@ -1398,8 +1458,9 @@ local function menu_balance_ti(panel)
         command = "tacrp_mult_damage_explosive",
         type = "float",
         min = 0.1,
-        max = 3,
+        max = 10,
     })
+    panel:ControlHelp("Does not affect quicknades.")
     panel:AddControl("slider", {
         label = "Melee Weapon Damage",
         command = "tacrp_mult_damage_melee",
@@ -1407,7 +1468,7 @@ local function menu_balance_ti(panel)
         min = 0.1,
         max = 3,
     })
-    panel:ControlHelp("Does not affect Quick Melee / bashing.")
+    panel:ControlHelp("Does not affect quick melee / bashing.")
     panel:AddControl("slider", {
         label = "Headshot Multiplier",
         command = "tacrp_mult_headshot",
@@ -1678,7 +1739,104 @@ end
 
 
 local function menu_equipment_ti(panel)
-    header(panel, "Medkit")
+    header(panel, "Grenades")
+    panel:AddControl("checkbox", {
+        label = "Smoke Affects NPCs",
+        command = "tacrp_smoke_affectnpcs"
+    })
+    panel:AddControl("checkbox", {
+        label = "Flashbang Affects NPCs",
+        command = "tacrp_flash_affectnpcs"
+    })
+    panel:AddControl("slider", {
+        label = "Frag Grenade Damage",
+        command = "tacrp_frag_damage",
+        type = "int",
+        min = 50,
+        max = 500,
+    })
+    panel:AddControl("slider", {
+        label = "Frag Grenade Radius",
+        command = "tacrp_frag_radius",
+        type = "int",
+        min = 64,
+        max = 512,
+    })
+    panel:AddControl("slider", {
+        label = "Thermite Starting Damage",
+        command = "tacrp_thermite_damage_min",
+        type = "int",
+        min = 1,
+        max = 100,
+    })
+    panel:AddControl("slider", {
+        label = "Thermite Maximum Damage",
+        command = "tacrp_thermite_damage_max",
+        type = "int",
+        min = 1,
+        max = 100,
+    })
+    panel:AddControl("slider", {
+        label = "Thermite Radius",
+        command = "tacrp_thermite_radius",
+        type = "int",
+        min = 64,
+        max = 512,
+    })
+    panel:ControlHelp("Thermite damage is dealt every 0.2s and falls off with distance.")
+    panel:AddControl("slider", {
+        label = "Door Charge Damage",
+        command = "tacrp_charge_damage",
+        type = "int",
+        min = 100,
+        max = 1000,
+    })
+    panel:AddControl("slider", {
+        label = "Door Charge Radius",
+        command = "tacrp_charge_radius",
+        type = "int",
+        min = 64,
+        max = 512,
+    })
+    panel:AddControl("slider", {
+        label = "C4 Damage",
+        command = "tacrp_c4_damage",
+        type = "int",
+        min = 100,
+        max = 1000,
+    })
+    panel:AddControl("slider", {
+        label = "C4 Radius",
+        command = "tacrp_c4_radius",
+        type = "int",
+        min = 64,
+        max = 512,
+    })
+    panel:ControlHelp("C4 does its damage a second time with half the radius.")
+    panel:AddControl("slider", {
+        label = "Medi-Smoke Health",
+        command = "tacrp_healnade_heal",
+        type = "int",
+        min = 0,
+        max = 20,
+    })
+    panel:AddControl("slider", {
+        label = "Medi-Smoke Armor",
+        command = "tacrp_healnade_heal",
+        type = "int",
+        min = 0,
+        max = 20,
+    })
+    panel:AddControl("slider", {
+        label = "Medi-Smoke Damage",
+        command = "tacrp_healnade_damage",
+        type = "int",
+        min = 0,
+        max = 100,
+    })
+    panel:ControlHelp("Medi-Smoke damage is applied to anything considered a zombie.")
+
+    header(panel, "\nMedkit")
     panel:AddControl("checkbox", {
         label = "Only Regen Charge When Held",
         command = "tacrp_medkit_regen_activeonly"
