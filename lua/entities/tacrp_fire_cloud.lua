@@ -285,6 +285,8 @@ hook.Add("EntityTakeDamage", "tacrp_fire_cloud", function(ent, dmginfo)
         if ent:IsNPC() then
             if directfiredamage[ent:GetClass()] then
                 dmginfo:SetDamageType(DMG_SLOWBURN) -- DMG_BURN does not hurt HL2 zombies and instead turns them black.
+            elseif ent.Immune_Fire then
+                dmginfo:SetDamageType(DMG_DIRECT) -- Bitch
             end
         elseif !ent:IsNextBot() and !ent:IsPlayer() then
             if ent:GetClass() == "prop_physics" then
