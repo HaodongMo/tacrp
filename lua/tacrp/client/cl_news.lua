@@ -1034,6 +1034,20 @@ Notably, some weapons in the base pack are now Value grade, a new lowest grade t
 </ul>
 ]],
     },
+    {
+        Title = "Update 25 Patch 1",
+        Type = "Patch Notes",
+        Date = "2024-09-08",
+        Author = "8Z",
+        Major = false,
+        Summary = "",
+        Contents = [[<body style="font-family:'Myriad Pro';color:white;font-size:125%;">
+<h3>Changelist</h3>
+<ul>
+<li><b>Fixed:</b> Missing casings on various pistols.
+</ul>
+]],
+    },
 }
 TacRP.NewsRead = TacRP.NewsRead or {}
 TacRP.NewsFirstLoad = false

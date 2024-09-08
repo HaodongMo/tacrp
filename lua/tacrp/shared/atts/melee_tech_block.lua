@@ -156,25 +156,10 @@ hook.Add("EntityTakeDamage", "TacRP_Block", function(ent, dmginfo)
     fx:SetAngles(ang)
     util.Effect("ManhackSparks", fx)
 
-    if dmginfo:GetAttacker():IsNPC() and dmginfo:GetAttacker():GetClass() != "npc_antlionguard" and dmginfo:GetAttacker():GetPos():DistToSqr(ent:GetPos()) < 22500 then
-        dmginfo:GetAttacker():SetSchedule(SCHED_FLINCH_PHYSICS)
-    end
-
     ent:EmitSound("physics/metal/metal_solid_impact_hard5.wav", 90, math.Rand(105, 110))
     ent:ViewPunch(AngleRand(-1, 1) * (dmginfo:GetDamage() ^ 0.5))
 
     wep:SetNWFloat("TacRPKnifeCounter", CurTime() + 0.6)
-
-    -- wep:KillTimer("BlockReset")
-    -- wep:SetNWFloat("TacRPNextBlock", CurTime() + 0.75)
-    -- wep:PlayAnimation("idle_defend", 1)
-    -- wep:SetNWFloat("TacRPKnifeParry", CurTime() + 1)
-    -- wep:SetNextIdle(CurTime() + 1)
-    -- if SERVER then
-    --     wep:SetTimer(1, function()
-    --         wep:SetShouldHoldType()
-    --     end, "BlockReset")
-    -- end
 
     local inflictor = dmginfo:GetInflictor()
     timer.Simple(0, function()
