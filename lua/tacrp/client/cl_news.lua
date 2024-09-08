@@ -1044,7 +1044,9 @@ Notably, some weapons in the base pack are now Value grade, a new lowest grade t
         Contents = [[<body style="font-family:'Myriad Pro';color:white;font-size:125%;">
 <h3>Changelist</h3>
 <ul>
+<li><b>Changed:</b> Melee block no longer flinches NPCs (this was causing issues on most SNPCS).
 <li><b>Fixed:</b> Missing casings on various pistols.
+<li><b>Fixed:</b> Client-authoratitive hitreg doing double damage on listen servers.
 </ul>
 ]],
     },

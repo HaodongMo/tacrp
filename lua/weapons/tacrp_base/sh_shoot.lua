@@ -362,7 +362,7 @@ function SWEP:PrimaryAttack()
                                 net.WriteUInt(0, 4)
                             net.SendToServer()
                         else
-                            self:AfterShotFunction(btr, dmg, range, self:GetValue("Penetration"), {btr.Entity})
+                            self:AfterShotFunction(btr, dmg, range, self:GetValue("Penetration"), {[btr.Entity] = true})
                         end
                     else
                         self:AfterShotFunction(btr, dmg, range, self:GetValue("Penetration"), {})
