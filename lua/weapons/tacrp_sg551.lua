@@ -239,7 +239,9 @@ SWEP.AttachmentElements = {
     },
     ["sights"] = {
         BGs_VM = {
-            {2, 1}
+            {2, 1},
+			{4, 1},
+			{5, 1}
         },
     },
     ["tactical"] = {
@@ -249,11 +251,13 @@ SWEP.AttachmentElements = {
     },
 }
 
+SWEP.NoRMR = true
+
 
 SWEP.Attachments = {
     [1] = {
         PrintName = "Optic",
-        Category = {"optic_cqb_nookp7", "optic_medium", "optic_sniper"},
+        Category = {"optic_cqb", "optic_medium", "optic_sniper"},
         InstalledElements = {"sights"},
         Bone = "ValveBiped.sg551_rootbone",
         WMBone = "Box01",
