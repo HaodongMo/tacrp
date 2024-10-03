@@ -4,8 +4,8 @@ SWEP.Spawnable = true
 AddCSLuaFile()
 
 // names and stuff
-SWEP.PrintName = "Molot TGS-12"
-SWEP.AbbrevName = "TGS-12"
+SWEP.PrintName = "Tomahawk Matador" -- https://www.tomahawk.com.tr/older.html#lg=1&slide=3
+SWEP.AbbrevName = "Matador"
 SWEP.Category = "Tactical RP"
 
 SWEP.SubCatTier = "3Security"
@@ -14,8 +14,8 @@ SWEP.SubCatType = "5Shotgun"
 SWEP.Description = "Short barrel pistol grip shotgun. High mobility and recoil, and most effective at close range."
 
 SWEP.Trivia_Caliber = "12 Gauge"
-SWEP.Trivia_Manufacturer = "Molot"
-SWEP.Trivia_Year = "1999"
+SWEP.Trivia_Manufacturer = "Tomahawk Shotguns"
+SWEP.Trivia_Year = "2006"
 
 SWEP.Faction = TacRP.FACTION_NEUTRAL
 SWEP.Credits = "Assets: Tactical Intervention"
