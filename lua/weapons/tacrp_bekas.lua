@@ -224,17 +224,25 @@ SWEP.AnimationTranslationTable = {
 
 // attachments
 
+SWEP.AttachmentElements = {
+    ["optic"] = {
+        BGs_VM = {
+            {5, 1}
+        },
+    },
+}
+
 SWEP.Attachments = {
     [1] = {
         PrintName = "Optic",
-        Category = {"optic_cqb_nookp7", "optic_medium"},
+        Category = {"optic_cqb", "optic_medium"},
         Bone = "ValveBiped.bekas_rootbone",
         WMBone = "ValveBiped.Bip01_R_Hand",
-        InstalledElements = {"sights"},
+        InstalledElements = {"optic"},
         AttachSound = "TacRP/weapons/optic_on.wav",
         DetachSound = "TacRP/weapons/optic_off.wav",
         VMScale = 0.75,
-        Pos_VM = Vector(-2.75, 0, 7),
+        Pos_VM = Vector(-3.2, 0, 8),
         Ang_VM = Angle(90, 0, 0),
         Pos_WM = Vector(11, 0.85, -7),
         Ang_WM = Angle(-25, 3.5, 180),
