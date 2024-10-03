@@ -360,7 +360,7 @@ ATT.Holosight = Material("tacrp/hud/rds.png", "additive")
 
 ATT.Holosight:SetInt("$flags", 128)
 
-ATT.Compatibility = function(wpn, cats)
+ATT.Compatibility = function(wpn, cats) -- Allows a weapon to have the OKP-7 but not the RMR
     if wpn.NoRMR then return false end
 end
 

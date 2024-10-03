@@ -226,11 +226,12 @@ SWEP.AttachmentElements = {
     },
 }
 
+SWEP.NoRMR = true
 
 SWEP.Attachments = {
     [1] = {
         PrintName = "Optic",
-        Category = {"optic_cqb_nookp7", "optic_medium"}, //, "optic_sniper"
+        Category = {"optic_cqb", "optic_medium"}, //, "optic_sniper"
         Bone = "ValveBiped._ROOT_K1a",
         WMBone = "Box01",
         AttachSound = "tacrp/weapons/optic_on.wav",

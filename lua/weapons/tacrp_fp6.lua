@@ -212,8 +212,6 @@ SWEP.AnimationTranslationTable = {
 
 // attachments
 
-SWEP.NoRMR = true
-
 SWEP.Attachments = {
     [1] = {
         PrintName = "Optic",

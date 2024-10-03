@@ -157,7 +157,7 @@ SWEP.SprintPos = Vector(5, 0, -2)
 SWEP.SightAng = Angle(-0.95, -1.1, 1)
 SWEP.SightPos = Vector(-4.78, -7.5, -3.45)
 
-SWEP.CorrectivePos = Vector(0.55, 0, -0.55)
+SWEP.CorrectivePos = Vector(0.52, 0, -0.55)
 SWEP.CorrectiveAng = Angle(2.5, 0.45, 0)
 
 SWEP.HolsterVisible = true
@@ -239,10 +239,12 @@ SWEP.AttachmentElements = {
     },
 }
 
+SWEP.NoRMR = true
+
 SWEP.Attachments = {
     [1] = {
         PrintName = "Optic",
-        Category = {"optic_cqb_nookp7", "optic_okp7", "optic_medium"},
+        Category = {"optic_cqb", "optic_medium", "optic_sniper"},
         Bone = "pdw_ROOT",
         AttachSound = "TacRP/weapons/optic_on.wav",
         DetachSound = "TacRP/weapons/optic_off.wav",
