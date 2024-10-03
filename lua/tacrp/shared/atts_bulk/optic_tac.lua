@@ -360,6 +360,10 @@ ATT.Holosight = Material("tacrp/hud/rds.png", "additive")
 
 ATT.Holosight:SetInt("$flags", 128)
 
+ATT.Compatibility = function(wpn, cats)
+    if wpn.NoRMR then return false end
+end
+
 TacRP.LoadAtt(ATT, "optic_rmr_rifle")
 -- #endregion
 
