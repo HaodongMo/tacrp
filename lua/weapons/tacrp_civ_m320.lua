@@ -22,6 +22,7 @@ SWEP.Credits = "Assets: Tactical Intervention"
 
 SWEP.ViewModel = "models/weapons/tacint/v_m320.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_m320.mdl"
+SWEP.DefaultSkin = 1
 
 SWEP.NoRanger = true
 
