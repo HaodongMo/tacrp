@@ -12,6 +12,7 @@ SWEP.SubCatTier = "3Security"
 SWEP.SubCatType = "5Shotgun"
 
 SWEP.Description = "Short barrel pistol grip shotgun. High mobility and recoil, and most effective at close range."
+SWEP.Description_Quote = "For years, its true identity was a mystery."
 
 SWEP.Trivia_Caliber = "12 Gauge"
 SWEP.Trivia_Manufacturer = "Tomahawk Shotguns"
