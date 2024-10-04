@@ -930,7 +930,7 @@ function SWEP:DrawLockOnHUD()
 
         local trueFOV = self:WidescreenFix(self.TacRPLastFOV)
 
-        local circle = (ScrH() / trueFOV) * math.deg(math.atan2(self:GetValue("LockOnHull"), self:GetValue("LockOnRange") / 4)) * 1.5 + ss
+        local circle = (ScrH() / trueFOV) * self:GetValue("LockOnTrackAngle") + ss
         local offset = 0
 
         for i = 0, 15 do
@@ -940,6 +940,20 @@ function SWEP:DrawLockOnHUD()
             local x2 = sx + math.cos(angle + offset + (math.pi * 1 / 8)) * circle
             local y2 = sy + math.sin(angle + offset + (math.pi * 1 / 8)) * circle
             surface.DrawLine(x1, y1, x2, y2)
+        end
+
+        if !IsValid(self:GetLockOnEntity()) then
+            local circle2 = (ScrH() / trueFOV) * 1 + ss
+            local offset2 = 0
+
+            for i = 0, 15 do
+                local angle = (i / 8) * math.pi
+                local x1 = sx + math.cos(angle + offset2) * circle2
+                local y1 = sy + math.sin(angle + offset2) * circle2
+                local x2 = sx + math.cos(angle + offset2 + (math.pi * 1 / 8)) * circle2
+                local y2 = sy + math.sin(angle + offset2 + (math.pi * 1 / 8)) * circle2
+                surface.DrawLine(x1, y1, x2, y2)
+            end
         end
 
         render.OverrideBlend(false, BLEND_ONE, BLEND_ONE, BLENDFUNC_ADD)
