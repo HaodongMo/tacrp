@@ -1106,9 +1106,11 @@ The fourth major expansion, featuring 27 weapons themed around the apocalypse, z
 <li><b>Changed:</b> (InterOps) SG550-2 SP irons are removed when equipping an optic, same as the 551.
 <li><b>Changed:</b> (InterOps) Fixed clipping bolt and forend on the Chinalake.
 <li><b>Changed:</b> (Special Delivery) Added optic rails to the MP40 and Thompson.
+<li><b>Changed:</b> (Special Delivery) Revised both FAMAS variants' animations.
 <li><b>Changed:</b> (Heavy Duty) Tweaked Intervention ironsights.
 <li><b>Changed:</b> (Exo Ops) Added an optic rail to the L85.
 <li><b>Changed:</b> (Exo Ops) Revised MCX SPEAR animations.
+<li><b>Changed:</b> (Exo Ops) Revised HK CAWS animations.
 <li><b>Changed:</b> (Exo Ops) Revised Winchester M1873 animations.
 <li><b>Fixed:</b> (Exo Ops) Broken bipod bodygroup on MG42.
 <li><b>Fixed:</b> (Exo Ops) PSG-1 bolt not moving far enough back when reloading.
