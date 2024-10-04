@@ -34,7 +34,7 @@ ENT.MaxSpeed = 6000
 ENT.Acceleration = 2000
 
 ENT.SteerDelay = 0
-ENT.FlareRedirectChance = 0.1
+ENT.FlareRedirectChance = 0.4
 
 ENT.AudioLoop = "TacRP/weapons/rpg7/rocket_flight-1.wav"
 
