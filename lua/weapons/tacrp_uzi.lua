@@ -4,7 +4,7 @@ SWEP.Spawnable = true
 AddCSLuaFile()
 
 // names and stuff
-SWEP.PrintName = "IMI Uzi Pro"
+SWEP.PrintName = "IMI Uzi Pro" -- The ingame model seems to be partially referenced from an Ekol ASI, a Turkish blank-firing gun based on the Uzi.
 SWEP.AbbrevName = "Uzi Pro"
 SWEP.Category = "Tactical RP"
 

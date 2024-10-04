@@ -12,7 +12,7 @@ SWEP.SubCatTier = "3Security"
 SWEP.SubCatType = "1Pistol"
 
 SWEP.Description = "Well-rounded, run-of-the-mill police handgun."
-SWEP.Description_Quote = "\"Los! Los! Los!\""
+SWEP.Description_Quote = "\"Raus! Raus! Raus!\""
 
 SWEP.Trivia_Caliber = "9x19mm"
 SWEP.Trivia_Manufacturer = "Heckler & Koch"
