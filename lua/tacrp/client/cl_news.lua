@@ -1060,7 +1060,7 @@ Notably, some weapons in the base pack are now Value grade, a new lowest grade t
         Contents = [[<body style="font-family:'Myriad Pro';color:white;font-size:125%;">
 <h2>Scavenger's Spoils<i> (New!)</i></h2>
 <p><input type='submit' value='Open Workshop' onclick='console.log("RUNLUA:gui.OpenURL(\"https://steamcommunity.com/sharedfiles/filedetails/?id=3271554982\")")' /></p>
-The fourth major expansion, featuring 26 weapons themed around zombies and the post-apocalypse. 
+The fourth major expansion, featuring 27 weapons themed around the apocalypse, zombies and the wasteland. All you have out here is whatever you can get your hands on, scavenger. 
 <ul>
 <li>Colt Woodsman
 <li>Fort-12
@@ -1073,11 +1073,12 @@ The fourth major expansion, featuring 26 weapons themed around zombies and the p
 <li>PP-9 "Klin"
 <li>IMI Uzi
 <li>Madsen M-50
+<li>PPSh-41
 <li>Tokarev SVT-40
 <li>FN MAG
 <li>Lewis Gun
 <li>Browning Auto-5
-<li>Ihaca 37
+<li>Ithaca 37
 <li>Serbu Super Shorty
 <li>TOZ-106
 <li>TOZ-34
@@ -1098,7 +1099,7 @@ The fourth major expansion, featuring 26 weapons themed around zombies and the p
 
 <h3>Asset Updates</h3>
 <ul>
-<li><b>Changed:</b> (All packs) Removed the RMR and/or OKP-7 from applicable weapons where their sight pictures are blocked.
+<li><b>Changed:</b> (All packs) Removed the RMR and/or OKP-7 from weapons where their sight pictures are blocked.
 <li><b>Changed:</b> (Base) SG551 irons are removed when equipping an optic for a better sight picture.
 <li><b>Changed:</b> (Base) Added an optic rail to the Bekas.
 <li><b>Changed:</b> (Base) M320 LE now sports a yellow frame to distinguish it from its lethal counterpart.
@@ -1108,6 +1109,7 @@ The fourth major expansion, featuring 26 weapons themed around zombies and the p
 <li><b>Changed:</b> (Heavy Duty) Tweaked Intervention ironsights.
 <li><b>Changed:</b> (Exo Ops) Added an optic rail to the L85.
 <li><b>Changed:</b> (Exo Ops) Revised MCX SPEAR animations.
+<li><b>Changed:</b> (Exo Ops) Revised Winchester M1873 animations.
 <li><b>Fixed:</b> (Exo Ops) Broken bipod bodygroup on MG42.
 <li><b>Fixed:</b> (Exo Ops) PSG-1 bolt not moving far enough back when reloading.
 </ul>
