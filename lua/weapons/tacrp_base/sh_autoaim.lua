@@ -50,22 +50,21 @@ function SWEP:ThinkLockOn()
             local player_aim_vector = owner:GetAimVector()
             local target_angle = math.deg(math.acos(player_aim_vector:Dot((lastlockonentity:WorldSpaceCenter() - owner:GetShootPos()):GetNormalized())))
 
-            if target_angle < self:GetValue("LockOnTrackAngle") then
+            local dist = (lastlockonentity:WorldSpaceCenter() - owner:GetShootPos()):Length()
+
+            if target_angle < self:GetValue("LockOnTrackAngle") and dist < self:GetValue("LockOnRange") then
                 lockontarget = lastlockonentity
             end
         else
-            local v1 = Vector(1, 1, 1)
-            local tr = util.TraceHull(
+            local tr = util.TraceLine(
                 {
                     start = owner:GetShootPos(),
                     endpos = owner:GetShootPos() + owner:GetAimVector() * self:GetValue("LockOnRange"),
-                    mins = v1 * -self:GetValue("LockOnHull"),
-                    maxs = v1 * self:GetValue("LockOnHull"),
                     ignoreworld = true,
                     filter = function(target)
                         if target == owner then return false end
-                        if target:IsPlayer() and target:IsAlive() then return true end
-                        if (target:IsNPC() or target:IsNextBot()) and target:Health() > 0 then return true end
+                        if target:IsPlayer() then return true end
+                        if (target:IsNPC() or target:IsNextBot()) then return true end
                         if (target.LVS and target:GetHP() > 0) or target.Targetable then return true end
                         if TacRP.LockableEntities[target:GetClass()] then return true end
                         if TacRP.FlareEntities[target:GetClass()] then return true end

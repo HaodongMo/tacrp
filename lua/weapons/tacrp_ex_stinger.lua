@@ -78,7 +78,6 @@ SWEP.CannotHipFire = true
 // lockon
 
 // SWEP.LockOnAngle = math.cos(math.rad(5))
-SWEP.LockOnHull = 32
 SWEP.LockOnTrackAngle = 5
 SWEP.LockOnRange = 40000
 
