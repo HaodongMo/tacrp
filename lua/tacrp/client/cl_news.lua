@@ -897,7 +897,7 @@ The third major expansion pack featuring 38 weapons of all kinds.
 
 <h3>Changelog</h3>
 <ul>
-<li><b>Added:</b> (InterOps) New Weapon: FAMAS G2.
+<li><b>Added:</b> (Special Delivery) New Weapon: FAMAS G2.
 <li><b>Added:</b> Refurbished Bolt attachment. Only available for weapons that innately jam, will remove jam chance but decrease RPM and accuracy.
 <li><b>Changed:</b> Tweaked some stat and rating displays.
 <li><b>Fixed:</b> LVS damage type interactions.
@@ -1049,6 +1049,69 @@ Notably, some weapons in the base pack are now Value grade, a new lowest grade t
 <li><b>Fixed:</b> Client-authoratitive hitreg doing double damage on listen servers.
 </ul>
 ]],
+    },
+	{
+        Title = "Scavenger's Spoils release!",
+        Type = "Update",
+        Date = "2024-10-4",
+		Author = "speedonerd",
+        Major = true,
+        Summary = "New expansion release!", 
+        Contents = [[<body style="font-family:'Myriad Pro';color:white;font-size:125%;">
+<h2>Scavenger's Spoils<i> (New!)</i></h2>
+<p><input type='submit' value='Open Workshop' onclick='console.log("RUNLUA:gui.OpenURL(\"https://steamcommunity.com/sharedfiles/filedetails/?id=3271554982\")")' /></p>
+The fourth major expansion, featuring 26 weapons themed around zombies and the post-apocalypse. 
+<ul>
+<li>Colt Woodsman
+<li>Fort-12
+<li>Makarov PM
+<li>Olympic Arms OA-93
+<li>Colt Python
+<li>Remington M700 Obrez
+<li>Smith & Wesson 686
+<li>OTs-33 Pernach
+<li>PP-9 "Klin"
+<li>IMI Uzi
+<li>Madsen M-50
+<li>Tokarev SVT-40
+<li>FN MAG
+<li>Lewis Gun
+<li>Browning Auto-5
+<li>Ihaca 37
+<li>Serbu Super Shorty
+<li>TOZ-106
+<li>TOZ-34
+<li>Hi-Point Model 995 Carbine
+<li>Mosin-Nagant M91/30
+<li>Accuracy International AWM
+<li>Sako 85
+<li>VKS Vykhlop
+<li>M202 FLASH
+<li>M79
+</ul>
+
+<h3>Changelist:</h3>
+<ul>
+<li><b>Major Addition:</b> (Heavy Duty) New Weapon: HK21E machine gun. This weapon was present in the addon's files but unfinished for quite a while.
+<li><b>Changed:</b> (Base) Altered Stinger lock-on logic to be more performant.
+</ul>
+
+<h3>Asset Updates</h3>
+<ul>
+<li><b>Changed:</b> (All packs) Removed the RMR and/or OKP-7 from applicable weapons where their sight pictures are blocked.
+<li><b>Changed:</b> (Base) SG551 irons are removed when equipping an optic for a better sight picture.
+<li><b>Changed:</b> (Base) Added an optic rail to the Bekas.
+<li><b>Changed:</b> (Base) M320 LE now sports a yellow frame to distinguish it from its lethal counterpart.
+<li><b>Changed:</b> (InterOps) SG550-2 SP irons are removed when equipping an optic, same as the 551.
+<li><b>Changed:</b> (InterOps) Fixed clipping bolt and forend on the Chinalake.
+<li><b>Changed:</b> (Special Delivery) Added optic rails to the MP40 and Thompson.
+<li><b>Changed:</b> (Heavy Duty) Tweaked Intervention ironsights.
+<li><b>Changed:</b> (Exo Ops) Added an optic rail to the L85.
+<li><b>Changed:</b> (Exo Ops) Revised MCX SPEAR animations.
+<li><b>Fixed:</b> (Exo Ops) Broken bipod bodygroup on MG42.
+<li><b>Fixed:</b> (Exo Ops) PSG-1 bolt not moving far enough back when reloading.
+</ul>
+]]
     },
 }
 TacRP.NewsRead = TacRP.NewsRead or {}
