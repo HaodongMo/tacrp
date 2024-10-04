@@ -930,7 +930,7 @@ function SWEP:DrawLockOnHUD()
 
         local trueFOV = self:WidescreenFix(self.TacRPLastFOV)
 
-        local circle = (ScrH() / trueFOV) * math.deg(math.acos(self:GetValue("LockOnAngle"))) * 1.5 + ss
+        local circle = (ScrH() / trueFOV) * math.deg(math.atan2(self:GetValue("LockOnHull"), self:GetValue("LockOnRange") / 4)) * 1.5 + ss
         local offset = 0
 
         for i = 0, 15 do

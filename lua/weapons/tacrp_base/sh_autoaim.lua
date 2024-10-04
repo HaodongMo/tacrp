@@ -42,59 +42,41 @@ function SWEP:ThinkLockOn()
         self:SetLockOnEntity(nil)
         self:SetLockOnStartTime(CurTime())
     elseif should_autoaim_scan then
-        local lockontargets = ents.FindInCone(owner:GetShootPos(), owner:GetAimVector(), self:GetValue("LockOnRange"), self:GetValue("LockOnAngle"))
-
-        local lockontarget = nil
-        local targeted_flare = false
-        local angle = 90
-
-        local player_aim_vector = owner:GetAimVector()
-
-        for _, target in ipairs(lockontargets) do
-            if not IsValid(target) then continue end
-            if target == owner then continue end
-
-            local try_target = nil
-
-            if TacRP.FlareEntities[target:GetClass()] then
-                try_target = target
-                targeted_flare = true
-            end
-
-            if not targeted_flare then
-                if target:IsPlayer() and target:Alive() then
-                    try_target = target
-                elseif (target:IsNPC() or target:IsNextBot()) and target:Health() > 0 then
-                    try_target = target
-                elseif (target.LVS and target:GetHP() > 0) or target.Targetable then
-                    try_target = target
-                elseif TacRP.LockableEntities[target:GetClass()] then
-                    try_target = target
+        // local lockontargets = ents.FindInCone(owner:GetShootPos(), owner:GetAimVector(), self:GetValue("LockOnRange"), self:GetValue("LockOnAngle"))
+        local v1 = Vector(1, 1, 1)
+        local tr = util.TraceHull(
+            {
+                start = owner:GetShootPos(),
+                endpos = owner:GetShootPos() + owner:GetAimVector() * self:GetValue("LockOnRange"),
+                mins = v1 * -self:GetValue("LockOnHull"),
+                maxs = v1 * self:GetValue("LockOnHull"),
+                ignoreworld = true,
+                filter = function(target)
+                    if target == owner then return false end
+                    if target:IsPlayer() and target:IsAlive() then return true end
+                    if (target:IsNPC() or target:IsNextBot()) and target:Health() > 0 then return true end
+                    if (target.LVS and target:GetHP() > 0) or target.Targetable then return true end
+                    if TacRP.LockableEntities[target:GetClass()] then return true end
+                    if TacRP.FlareEntities[target:GetClass()] then return true end
                 end
-            end
+            }
+        )
 
-            if try_target then
-                // Dot product
-                local target_angle = math.deg(math.acos(player_aim_vector:Dot((try_target:WorldSpaceCenter() - owner:GetShootPos()):GetNormalized())))
+        local lockontarget = tr.Entity
 
-                if target_angle >= angle then continue end
-
-                local occlusion_tr = util.TraceLine({
-                    start = owner:GetShootPos(),
-                    endpos = try_target:WorldSpaceCenter(),
-                    mask = MASK_SHOT,
-                    filter = function(ent)
-                        if ent == try_target or ent == owner or ent:GetOwner() == try_target then return false end
-                        if ent:IsVehicle() and ent:GetDriver() == owner then return false end
-                        if ent:GetClass() == "lvs_wheeldrive_wheel" or scripted_ents.IsBasedOn(ent:GetClass(), "tacrp_proj_base") then return false end
-                        return true
-                    end
-                })
-                if occlusion_tr.Hit then continue end
-
-                lockontarget = try_target
-                angle = target_angle
-            end
+        if lockontarget and IsValid(lockontarget) then
+            local occlusion_tr = util.TraceLine({
+                start = owner:GetShootPos(),
+                endpos = lockontarget:WorldSpaceCenter(),
+                mask = MASK_SHOT,
+                filter = function(ent)
+                    if ent == lockontarget or ent == owner or ent:GetOwner() == lockontarget then return false end
+                    if ent:IsVehicle() and ent:GetDriver() == owner then return false end
+                    if ent:GetClass() == "lvs_wheeldrive_wheel" or scripted_ents.IsBasedOn(ent:GetClass(), "tacrp_proj_base") then return false end
+                    return true
+                end
+            })
+            if occlusion_tr.Hit then lockontarget = nil end
         end
 
         if lockontarget and IsValid(lockontarget) then

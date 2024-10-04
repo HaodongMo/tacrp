@@ -1514,7 +1514,7 @@ ATT.SortOrder = 1
 
 ATT.Override_ShootEnt = "tacrp_proj_stinger_saam"
 
-ATT.Override_LockOnAngle = math.cos(math.rad(10))
+ATT.Override_LockOnHull = 512
 ATT.Override_LockOnTime = 0.1
 
 ATT.NoAutoReload = true
@@ -1578,7 +1578,7 @@ ATT.Override_Num = 4
 ATT.Override_Spread = 0.1
 ATT.Override_Damage_Max = 75
 ATT.Override_Damage_Min = 75
-ATT.Override_LockOnAngle = math.cos(math.rad(15))
+ATT.Override_LockOnHull = 1024
 
 ATT.Hook_PreShoot = function(wep)
     wep.QuadShootIndex = 0
@@ -1615,7 +1615,7 @@ ATT.Override_ShootEnt = "tacrp_proj_stinger_apers"
 
 ATT.Override_LockOnRange = 6000
 ATT.Override_LockOnTime = 0.5
-ATT.Override_LockOnAngle = math.cos(math.rad(20))
+ATT.Override_LockOnHull = 2048
 
 ATT.Range_Max = 6000
 ATT.Range_Min = 1000
