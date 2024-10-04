@@ -8,40 +8,16 @@ function SWEP:ThinkLockOn()
     local owner = self:GetOwner()
     local lastlockonentity = self:GetLockOnEntity()
 
-    local should_autoaim_scan = false
-
     if CLIENT then
-        if self.LastSearchTime + 0.1 + engine.TickInterval() < CurTime() then
-            should_autoaim_scan = true
-            self.LastSearchTime = CurTime()
-        end
-
-        if not game.SinglePlayer() and not IsFirstTimePredicted() then
-            // There is zero sense in running this very expensive block of calculations every time prediction is called
-            // We have to PRETEND like we find this in the predicted blocks, but we'll actually find it the first time around
-            // So... This is a shortcut!
-            self:SetLockOnEntity(self.LockOnEntity)
-            should_autoaim_scan = false
-        end
-
         if !IsValid(self:GetLockOnEntity()) then
             self.PlayedLockOnSound = false
-        end
-    else
-        if owner:KeyPressed(TacRP.IN_RELOCK) then
-            should_autoaim_scan = true
-        end
-
-        if self.LastSearchTime + 0.25 + engine.TickInterval() < CurTime() then
-            should_autoaim_scan = true
-            self.LastSearchTime = CurTime()
         end
     end
 
     if not ((self:GetSightAmount() >= 1 and self:GetValue("LockOnInSights")) or (self:GetSightAmount() < 1 and self:GetValue("LockOnOutOfSights"))) then
         self:SetLockOnEntity(nil)
         self:SetLockOnStartTime(CurTime())
-    elseif should_autoaim_scan then
+    else
         local lockontarget = nil
 
         if lastlockonentity and IsValid(lastlockonentity) then
