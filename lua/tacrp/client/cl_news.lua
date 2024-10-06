@@ -1060,7 +1060,7 @@ Notably, some weapons in the base pack are now Value grade, a new lowest grade t
         Contents = [[<body style="font-family:'Myriad Pro';color:white;font-size:125%;">
 <h2>Scavenger's Spoils<i> (New!)</i></h2>
 <p><input type='submit' value='Open Workshop' onclick='console.log("RUNLUA:gui.OpenURL(\"https://steamcommunity.com/sharedfiles/filedetails/?id=3271554982\")")' /></p>
-The fourth major expansion, featuring 27 weapons themed around the apocalypse, zombies and the wasteland. All you have out here is whatever you can get your hands on, scavenger. 
+The fourth major expansion, featuring 28 weapons themed around the apocalypse, zombies and the wasteland. All you have out here is whatever you can get your hands on, scavenger. 
 <ul>
 <li>Colt Woodsman
 <li>Fort-12
@@ -1069,6 +1069,7 @@ The fourth major expansion, featuring 27 weapons themed around the apocalypse, z
 <li>Colt Python
 <li>Remington M700 Obrez
 <li>Smith & Wesson 686
+<li>CZ 75 Automatic
 <li>OTs-33 Pernach
 <li>PP-9 "Klin"
 <li>IMI Uzi
