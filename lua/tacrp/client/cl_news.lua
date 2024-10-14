@@ -1060,13 +1060,14 @@ Notably, some weapons in the base pack are now Value grade, a new lowest grade t
         Contents = [[<body style="font-family:'Myriad Pro';color:white;font-size:125%;">
 <h2>Scavenger's Spoils<i> (New!)</i></h2>
 <p><input type='submit' value='Open Workshop' onclick='console.log("RUNLUA:gui.OpenURL(\"https://steamcommunity.com/sharedfiles/filedetails/?id=3271554982\")")' /></p>
-The fourth major expansion, featuring 28 weapons themed around the apocalypse, zombies and the wasteland. All you have out here is whatever you can get your hands on, scavenger. 
+The fourth major expansion, featuring 30 weapons themed around the apocalypse, zombies and the post-Soviet aesthetic. All you have out here is whatever you can get your hands on, comrade. 
 <ul>
 <li>Colt Woodsman
 <li>Fort-12
 <li>Makarov PM
 <li>Olympic Arms OA-93
 <li>Colt Python
+<li>Coonan .357 Magnum
 <li>Remington M700 Obrez
 <li>Smith & Wesson 686
 <li>CZ 75 Automatic
@@ -1076,6 +1077,7 @@ The fourth major expansion, featuring 28 weapons themed around the apocalypse, z
 <li>Madsen M-50
 <li>PPSh-41
 <li>Tokarev SVT-40
+<li>SKS
 <li>FN MAG
 <li>Lewis Gun
 <li>Browning Auto-5
@@ -1115,6 +1117,7 @@ The fourth major expansion, featuring 28 weapons themed around the apocalypse, z
 <li><b>Changed:</b> (Exo Ops) Revised Winchester M1873 animations.
 <li><b>Fixed:</b> (Exo Ops) Broken bipod bodygroup on MG42.
 <li><b>Fixed:</b> (Exo Ops) PSG-1 bolt not moving far enough back when reloading.
+<li><b>Fixed:</b> (Exo Ops) SG 510 folded ironsights bodygroup
 </ul>
 ]]
     },
