@@ -1053,14 +1053,14 @@ Notably, some weapons in the base pack are now Value grade, a new lowest grade t
 	{
         Title = "Scavenger's Spoils release!",
         Type = "Update",
-        Date = "2024-10-4",
+        Date = "2024-10-24",
 		Author = "speedonerd",
         Major = true,
         Summary = "New expansion release!", 
         Contents = [[<body style="font-family:'Myriad Pro';color:white;font-size:125%;">
 <h2>Scavenger's Spoils<i> (New!)</i></h2>
 <p><input type='submit' value='Open Workshop' onclick='console.log("RUNLUA:gui.OpenURL(\"https://steamcommunity.com/sharedfiles/filedetails/?id=3271554982\")")' /></p>
-The fourth major expansion, featuring 30 weapons themed around the apocalypse, zombies and the post-Soviet aesthetic. All you have out here is whatever you can get your hands on, comrade. 
+The fourth major expansion, featuring 34 weapons themed around zombies, the apocalypse and a post-Soviet aesthetic. All you have out here is whatever you can get your hands on, comrade.
 <ul>
 <li>Colt Woodsman
 <li>Fort-12
@@ -1076,18 +1076,22 @@ The fourth major expansion, featuring 30 weapons themed around the apocalypse, z
 <li>IMI Uzi
 <li>Madsen M-50
 <li>PPSh-41
+<li>Sturmgewehr 44
 <li>Tokarev SVT-40
 <li>SKS
 <li>FN MAG
 <li>Lewis Gun
 <li>Browning Auto-5
 <li>Ithaca 37
+<li>Kel-Tec KSG
 <li>Serbu Super Shorty
 <li>TOZ-106
 <li>TOZ-34
 <li>Hi-Point Model 995 Carbine
+<li>Ohio Ordnance HCAR
 <li>Mosin-Nagant M91/30
 <li>Accuracy International AWM
+<li>Barrett M82
 <li>Sako 85
 <li>VKS Vykhlop
 <li>M202 FLASH
@@ -1110,11 +1114,12 @@ The fourth major expansion, featuring 30 weapons themed around the apocalypse, z
 <li><b>Changed:</b> (InterOps) Fixed clipping bolt and forend on the Chinalake.
 <li><b>Changed:</b> (Special Delivery) Added optic rails to the MP40 and Thompson.
 <li><b>Changed:</b> (Special Delivery) Revised both FAMAS variants' animations.
+<li><b>Changed:</b> (Special Delivery) Revised Gyrojet animations to be less obstructive when reloading.
 <li><b>Changed:</b> (Heavy Duty) Tweaked Intervention ironsights.
 <li><b>Changed:</b> (Exo Ops) Added an optic rail to the L85.
 <li><b>Changed:</b> (Exo Ops) Revised MCX SPEAR animations.
 <li><b>Changed:</b> (Exo Ops) Revised HK CAWS animations.
-<li><b>Changed:</b> (Exo Ops) Revised Winchester M1873 animations.
+<li><b>Changed:</b> (Exo Ops) Revised Winchester M1873 animations. They should be a tad more lively now.
 <li><b>Fixed:</b> (Exo Ops) Broken bipod bodygroup on MG42.
 <li><b>Fixed:</b> (Exo Ops) PSG-1 bolt not moving far enough back when reloading.
 <li><b>Fixed:</b> (Exo Ops) SG 510 folded ironsights bodygroup
