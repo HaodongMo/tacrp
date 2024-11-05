@@ -1053,11 +1053,19 @@ Notably, some weapons in the base pack are now Value grade, a new lowest grade t
     {
         Title = "Update 26",
         Type = "Update",
-        Date = "2024-11-4",
+        Date = "2024-11-5",
         Author = "speedonerd",
         Major = false,
-        Summary = "A new weapon and lots of visual touch-ups.",
+        Summary = "A new weapon, a fun bonus and lots of visual touch-ups.",
         Contents = [[<body style="font-family:'Myriad Pro';color:white;font-size:125%;">
+
+<p>Greetings all. Unfortunately the long-awaited post-apocalypse pack still isn't finished, but rest assured we are still working on it and it will see the light of day eventually.
+For now, enjoy a small-ish update that consists mostly of visual updates but also contains some fancy new content.</p>		
+
+<h2>SIG SG 510 "Black Shark" One-Off Release</h2>
+<p><input type='submit' value='Open Workshop' onclick='console.log("RUNLUA:gui.OpenURL(\"https://steamcommunity.com/sharedfiles/filedetails/?id=3360753764\")")' /></p>
+<p>I made this in an afternoon on a whim; a customized SG 510 visually inspired by Battlefield Hardline's weird hybridized 510 and functionally inspired by the infamous "Rico Special" that was featured on Forgotten Weapons.
+Give it a whirl! Apologies in advance for the blindness and potential motion sickness.</p>
 
 <h3>Changelist:</h3>
 <ul>
