@@ -1050,17 +1050,18 @@ Notably, some weapons in the base pack are now Value grade, a new lowest grade t
 </ul>
 ]],
     },
-	{
+    {
         Title = "Update 26",
         Type = "Update",
         Date = "2024-11-4",
-		Author = "speedonerd",
+        Author = "speedonerd",
         Major = false,
-        Summary = "A new weapon and lots of visual touch-ups.", 
+        Summary = "A new weapon and lots of visual touch-ups.",
         Contents = [[<body style="font-family:'Myriad Pro';color:white;font-size:125%;">
 
 <h3>Changelist:</h3>
 <ul>
+<li><b>Added:</b> (Base) ConVar to disable quick grenades (but this will make us sad).
 <li><b>Changed:</b> (Base) Altered Stinger lock-on logic to be more performant.
 <li><b>Changed:</b> (All packs) Removed the RMR and/or OKP-7 from weapons where their sight pictures are blocked.
 <li><b>Major Addition:</b> (Heavy Duty) New Weapon: HK21E machine gun. This weapon was present in the addon's files but unfinished for quite a while.

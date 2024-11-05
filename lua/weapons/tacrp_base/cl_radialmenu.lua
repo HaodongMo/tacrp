@@ -70,7 +70,7 @@ local currentind
 local lastmenu
 function SWEP:DrawGrenadeHUD()
     if !TacRP.ConVars["nademenu"]:GetBool() then return end
-    if !self:GetValue("CanQuickNade") then return end
+    if !self:IsQuickNadeAllowed() then return end
 
     -- adapted from tfa vox radial menu
     local nades = self:GetAvailableGrenades(false)

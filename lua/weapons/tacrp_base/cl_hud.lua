@@ -7,7 +7,7 @@ function SWEP:ShouldDrawCrosshair()
         and !(self:DoForceSightsBehavior() and !self:GetPeeking())
         and !self:GetJammed()
         and (self:GetSightAmount() <= 0.5 or (self:GetPeeking() and !self:GetValue("ThermalCamera")) or self:DoLowerIrons())
-        and !(self:GetValue("CanQuickNade") and tobool(self:GetOwner():GetInfo("tacrp_nademenu")) and self:GetOwner():KeyDown(IN_GRENADE2))
+        and !(self:IsQuickNadeAllowed() and tobool(self:GetOwner():GetInfo("tacrp_nademenu")) and self:GetOwner():KeyDown(IN_GRENADE2))
         and !(self:GetValue("CanBlindFire") and tobool(self:GetOwner():GetInfo("tacrp_blindfiremenu")) and (self:GetOwner():KeyDown(IN_ZOOM) or self:GetOwner().TacRPBlindFireDown))
 end
 
@@ -191,7 +191,7 @@ local col_hi2 = Color(255, 230, 200)
 local col_dark = Color(255, 255, 255, 20)
 
 function SWEP:ShouldDrawBottomBar()
-    return self:GetFiremodeAmount() > 0 or self:GetValue("CanQuickNade")
+    return self:GetFiremodeAmount() > 0 or self:IsQuickNadeAllowed()
 end
 
 function SWEP:DrawBottomBar(x, y, w, h)
@@ -230,7 +230,7 @@ function SWEP:DrawBottomBar(x, y, w, h)
         fmoffset = 0
     end
 
-    if self:GetValue("CanQuickNade") then
+    if self:IsQuickNadeAllowed() then
         local nade = self:GetGrenade()
 
         local qty = nil --"INF"

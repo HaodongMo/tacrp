@@ -901,6 +901,12 @@ local conVars = {
         notify = true,
         replicated = true,
     },
+    {
+        name = "quicknade",
+        default = "1",
+        replicated = true,
+        notify = true,
+    },
 
     // --------------------------- Medkit
     {
@@ -1666,6 +1672,10 @@ local function menu_mechanics_ti(panel)
     panel:AddControl("checkbox", {
         label = "Allow Aiming While Reloading",
         command = "tacrp_ads_reload"
+    })
+    panel:AddControl("checkbox", {
+        label = "Enable Quick Grenades",
+        command = "tacrp_quicknade"
     })
 end
 

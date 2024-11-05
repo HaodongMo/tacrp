@@ -120,7 +120,7 @@ function SWEP:GetHintCapabilities()
         end
     end
 
-    if self:GetValue("CanQuickNade") then
+    if self:IsQuickNadeAllowed() then
         local bound1, bound2 = TacRP.GetKeyIsBound("+grenade1"), TacRP.GetKeyIsBound("+grenade2")
         if bound1 then
             self.CachedCapabilities["+grenade1"] = {so = 35, str = "hint.quicknade.throw"}

@@ -293,7 +293,7 @@ function SWEP:SetBaseSettings()
         self.Primary.DefaultClip = math.ceil(self.Primary.ClipSize * TacRP.ConVars["defaultammo"]:GetFloat())
     end
 
-    if self:GetValue("CanQuickNade") then
+    if self:IsQuickNadeAllowed() then
         self.Secondary.Ammo = self:GetGrenade().Ammo or "grenade"
     else
         self.Secondary.Ammo = "none"

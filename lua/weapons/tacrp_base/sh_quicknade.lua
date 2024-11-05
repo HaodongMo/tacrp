@@ -1,10 +1,14 @@
 SWEP.GrenadeDownKey = IN_GRENADE1
 SWEP.GrenadeMenuKey = IN_GRENADE2
 
+function SWEP:IsQuickNadeAllowed()
+    return TacRP.ConVars["quicknade"]:GetBool() and self:GetValue("CanQuickNade")
+end
+
 function SWEP:PrimeGrenade()
     self.Primary.Automatic = true
 
-    if !self:GetValue("CanQuickNade") and !self:GetValue("PrimaryGrenade") then return end
+    if !self:IsQuickNadeAllowed() and !self:GetValue("PrimaryGrenade") then return end
     if self:StillWaiting(nil, true) then return end
     if self:GetPrimedGrenade() then return end
 
@@ -222,7 +226,7 @@ function SWEP:GetNextGrenade(ind)
 end
 
 function SWEP:SelectGrenade(index, requireammo)
-    if !self:GetValue("CanQuickNade") then return end
+    if !self:IsQuickNadeAllowed() then return end
     if !IsFirstTimePredicted() then return end
     if self:GetPrimedGrenade() then return end
 
@@ -290,7 +294,7 @@ SWEP.QuickNadeModel = nil
 end
 
 function SWEP:ThinkGrenade()
-    if !self:GetValue("CanQuickNade") then return end
+    if !self:IsQuickNadeAllowed() then return end
 
     if CLIENT then
         if self:GetPrimedGrenade() and !IsValid(self.QuickNadeModel) and self:GetStartPrimedGrenadeTime() + 0.2 < CurTime() and self:GetGrenade().Model then
