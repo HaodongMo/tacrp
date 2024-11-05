@@ -175,7 +175,7 @@ SWEP.StatGroups = {
             d_min = d_min + explosive_damage
 
             local dmg_max = math.max(d_max, d_min)
-            local dmg_avg = Lerp(0.2, math.max(d_max, d_min), math.min(d_max, d_min)) * bdm_add
+            local dmg_avg = dmg_max * bdm_add --Lerp(0.2, math.max(d_max, d_min), math.min(d_max, d_min)) * bdm_add
 
             -- max single shot damage
             local mssd = 0
