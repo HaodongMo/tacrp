@@ -1098,54 +1098,72 @@ Give it a whirl! Apologies in advance for the blindness and potential motion sic
     },
 	
 	{
-        Title = "Scavenger's Spoils release!",
+        Title = "Update 26 Patch 0.5",
         Type = "Update",
-        Date = "2025-1-1",
+        Date = "2024-11-6",
 		Author = "speedonerd",
-        Major = true,
-        Summary = "New expansion release!", 
+        Major = false,
+        Summary = "Micro-update.", 
         Contents = [[<body style="font-family:'Myriad Pro';color:white;font-size:125%;">
-<h2>Scavenger's Spoils<i> (New!)</i></h2>
-<p><input type='submit' value='Open Workshop' onclick='console.log("RUNLUA:gui.OpenURL(\"https://steamcommunity.com/sharedfiles/filedetails/?id=3271554982\")")' /></p>
-The fourth major expansion, featuring 33 weapons themed around zombies, the apocalypse and a post-Soviet aesthetic. All you have out here is whatever you can get your hands on, comrade.
+		<p>Nothing huge, just something extra I would've included in yesterday's update if I had it ready by then.<p>
+<h3>Changelist:</h3>
 <ul>
-<li>Colt Woodsman
-<li>Fort-12
-<li>Makarov PM
-<li>Olympic Arms OA-93
-<li>Colt Python
-<li>Remington M700 Obrez
-<li>Smith & Wesson 686
-<li>CZ 75 Automatic
-<li>OTs-33 Pernach
-<li>PP-9 "Klin"
-<li>IMI Uzi
-<li>Madsen M-50
-<li>PPSh-41
-<li>CZ Scorpion EVO 3
-<li>Sturmgewehr 44
-<li>Tokarev SVT-40
-<li>SKS
-<li>FN MAG
-<li>Lewis Gun
-<li>Browning Auto-5
-<li>Ithaca 37
-<li>Kel-Tec KSG
-<li>Serbu Super Shorty
-<li>TOZ-106
-<li>TOZ-34
-<li>Hi-Point Model 995 Carbine
-<li>Mosin-Nagant M91/30
-<li>Accuracy International AWM
-<li>SVU
-<li>Sako 85
-<li>VKS Vykhlop
-<li>M202 FLASH
-<li>M79
+<li><b>Changed:</b> (ExoOps) New bespoke Winchester animations.
+<li><b>Changed:</b> (ExoOps) Winchester now uses rifle ammunition if using extended ammo.
 </ul>
 
 ]]
     },
+	
+	-- {
+        -- Title = "Scavenger's Spoils release!",
+        -- Type = "Update",
+        -- Date = "2025-1-1",
+		-- Author = "speedonerd",
+        -- Major = true,
+        -- Summary = "New expansion release!", 
+        -- Contents = [[<body style="font-family:'Myriad Pro';color:white;font-size:125%;">
+-- <h2>Scavenger's Spoils<i> (New!)</i></h2>
+-- <p><input type='submit' value='Open Workshop' onclick='console.log("RUNLUA:gui.OpenURL(\"https://steamcommunity.com/sharedfiles/filedetails/?id=3271554982\")")' /></p>
+-- The fourth major expansion, featuring 33 weapons themed around zombies, the apocalypse and a post-Soviet aesthetic. All you have out here is whatever you can get your hands on, comrade.
+-- <ul>
+-- <li>Colt Woodsman
+-- <li>Fort-12
+-- <li>Makarov PM
+-- <li>Olympic Arms OA-93
+-- <li>Colt Python
+-- <li>Remington M700 Obrez
+-- <li>Smith & Wesson 686
+-- <li>CZ 75 Automatic
+-- <li>OTs-33 Pernach
+-- <li>PP-9 "Klin"
+-- <li>IMI Uzi
+-- <li>Madsen M-50
+-- <li>PPSh-41
+-- <li>CZ Scorpion EVO 3
+-- <li>Sturmgewehr 44
+-- <li>Tokarev SVT-40
+-- <li>SKS
+-- <li>FN MAG
+-- <li>Lewis Gun
+-- <li>Browning Auto-5
+-- <li>Ithaca 37
+-- <li>Kel-Tec KSG
+-- <li>Serbu Super Shorty
+-- <li>TOZ-106
+-- <li>TOZ-34
+-- <li>Hi-Point Model 995 Carbine
+-- <li>Mosin-Nagant M91/30
+-- <li>Accuracy International AWM
+-- <li>SVU
+-- <li>Sako 85
+-- <li>VKS Vykhlop
+-- <li>M202 FLASH
+-- <li>M79
+-- </ul>
+
+-- ]]
+    -- },
 }
 TacRP.NewsRead = TacRP.NewsRead or {}
 TacRP.NewsFirstLoad = false
