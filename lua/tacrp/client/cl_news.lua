@@ -1097,24 +1097,6 @@ Give it a whirl! Apologies in advance for the blindness and potential motion sic
 ]]
     },
 	
-	{
-        Title = "Update 26 Patch 0.5",
-        Type = "Update",
-        Date = "2024-11-6",
-		Author = "speedonerd",
-        Major = false,
-        Summary = "Micro-update.", 
-        Contents = [[<body style="font-family:'Myriad Pro';color:white;font-size:125%;">
-		<p>Nothing huge, just something extra I would've included in yesterday's update if I had it ready by then.<p>
-<h3>Changelist:</h3>
-<ul>
-<li><b>Changed:</b> (ExoOps) New bespoke Winchester animations.
-<li><b>Changed:</b> (ExoOps) Winchester now uses rifle ammunition if using extended ammo.
-</ul>
-
-]]
-    },
-	
 	-- {
         -- Title = "Scavenger's Spoils release!",
         -- Type = "Update",
