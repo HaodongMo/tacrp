@@ -24,6 +24,7 @@ L["tier.2"] = "Security"
 L["tier.3"] = "Operator"
 L["tier.4"] = "Elite"
 L["tier.0"] = "Value" -- like Walmart
+L["tier.5"] = "Exotic"
 
 L["tier.spec"] = "Special"
 L["type.sidearm"] = "Pistol" -- non-magnum pistols or pistol-form factor weapons
