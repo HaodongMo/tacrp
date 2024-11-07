@@ -496,6 +496,7 @@ STL["tier.1"] = "4Consumer"
 STL["tier.2"] = "3Security"
 STL["tier.3"] = "2Operator"
 STL["tier.4"] = "1Elite"
+STL["tier.5"] = "0Exotic"
 STL["tier.0"] = "5Value"
 
 STL["tier.spec"] = "9Special"
