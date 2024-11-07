@@ -106,3 +106,81 @@ hook.Add("PopulateWeapons", "zzz_TacRP_SubCategories", function(pnlContent, tree
         end
     end)
 end)
+
+
+
+local function BuildWeaponCategories()
+    local weapons = list.Get( "Weapon" )
+    local Categorised = {}
+
+    -- Build into categories
+    for k, weapon in pairs( weapons ) do
+
+        if ( !weapon.Spawnable ) then continue end
+
+        local Category = weapon.Category or "Other"
+        if ( !isstring( Category ) ) then Category = tostring( Category ) end
+
+        Categorised[ Category ] = Categorised[ Category ] or {}
+        table.insert( Categorised[ Category ], weapon )
+
+    end
+
+    return Categorised
+end
+
+local function AddCategory( tree, cat )
+    local CustomIcons = list.Get( "ContentCategoryIcons" )
+
+    -- Add a node to the tree
+    local node = tree:AddNode( cat, CustomIcons[ cat ] or "icon16/gun.png" )
+    tree.Categories[ cat ] = node
+
+    -- When we click on the node - populate it using this function
+    node.DoPopulate = function( self )
+
+        -- If we've already populated it - forget it.
+        if ( IsValid( self.PropPanel ) ) then return end
+
+        -- Create the container panel
+        self.PropPanel = vgui.Create( "ContentContainer", tree.pnlContent )
+        self.PropPanel:SetVisible( false )
+        self.PropPanel:SetTriggerSpawnlistChange( false )
+
+        local weps = BuildWeaponCategories()[ cat ]
+        for k, ent in SortedPairsByMemberValue( weps, "PrintName" ) do
+
+            spawnmenu.CreateContentIcon( ent.ScriptedEntityType or "weapon", self.PropPanel, {
+                nicename	= ent.PrintName or ent.ClassName,
+                spawnname	= ent.ClassName,
+                material	= ent.IconOverride or ( "entities/" .. ent.ClassName .. ".png" ),
+                admin		= ent.AdminOnly
+            } )
+
+        end
+
+    end
+
+    -- If we click on the node populate it and switch to it.
+    node.DoClick = function( self )
+
+        self:DoPopulate()
+        tree.pnlContent:SwitchPanel( self.PropPanel )
+
+    end
+
+    node.OnRemove = function( self )
+
+        if ( IsValid( self.PropPanel ) ) then self.PropPanel:Remove() end
+
+    end
+
+    return node
+end
+
+hook.Add("InitPostEntity", "TacRP_OverrideSpawnmenuReloadSWEP", function()
+    hook.Add( "PreRegisterSWEP", "spawnmenu_reload_swep", function( weapon, name )
+        if !weapon.Spawnable or weapons.IsBasedOn(name, "tacrp_base") then return end
+        timer.Simple( 0, function() AutorefreshWeaponToSpawnmenu( weapon, name ) end )
+    end )
+end)
