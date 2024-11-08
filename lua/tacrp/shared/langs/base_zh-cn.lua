@@ -7,6 +7,7 @@ L["tier.2"] = "警备"
 L["tier.3"] = "特遣"
 L["tier.4"] = "精英"
 L["tier.0"] = "下等"
+L["tier.5"] = "特异"
 L["tier.spec"] = "特殊"
 
 L["type.sidearm"] = "手枪"

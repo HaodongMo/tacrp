@@ -24,6 +24,7 @@ L["tier.2"] = "Security"
 L["tier.3"] = "Operator"
 L["tier.4"] = "Elite"
 L["tier.0"] = "Value" -- like Walmart
+L["tier.5"] = "Exotic"
 
 L["tier.spec"] = "Special"
 L["type.sidearm"] = "Pistol" -- non-magnum pistols or pistol-form factor weapons
@@ -495,6 +496,7 @@ STL["tier.1"] = "4Consumer"
 STL["tier.2"] = "3Security"
 STL["tier.3"] = "2Operator"
 STL["tier.4"] = "1Elite"
+STL["tier.5"] = "0Exotic"
 STL["tier.0"] = "5Value"
 
 STL["tier.spec"] = "9Special"
