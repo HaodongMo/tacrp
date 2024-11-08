@@ -217,7 +217,7 @@ SWEP.QCA_Muzzle = 1
 // ditto for shell
 SWEP.QCA_Eject = 2
 
-SWEP.MuzzleEffect = "muzzleflash_1"
+SWEP.MuzzleEffect = "muzzleflash_m82_tacrp"
 SWEP.EjectEffect = 2
 SWEP.EjectDelay = 1.15
 
