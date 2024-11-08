@@ -262,7 +262,9 @@ function SWEP:PrimaryAttack()
         -- If the bullet is going to hit something very close in front, use hitscan bullets instead
         -- This uses the aim direction without random spread, which may result in hitscan bullets in distances where it shouldn't be.
         if !hitscan and (!TacRP.ConVars["client_damage"]:GetBool()) then
-            dist = math.max(self:GetValue("MuzzleVelocity"), 15000) * engine.TickInterval() * (num == 1 and 2 or 1) * (game.IsDedicated() and 1 or 2)
+            dist = math.max(self:GetValue("MuzzleVelocity"), 15000) * engine.TickInterval()
+                    * game.GetTimeScale()
+                    * (num == 1 and 2 or 1) * (game.IsDedicated() and 1 or 2)
             local threshold = dir:Forward() * dist
             local inst_tr = util.TraceLine({
                 start = self:GetMuzzleOrigin(),
