@@ -128,7 +128,7 @@ TacRP.MuzzleEffects = {
     "muzzleflash_m14",
     "muzzleflash_ak47",
     "muzzleflash_ak74",
-    "muzzleflash_m82_tacrp",
+    "muzzleflash_m82",
     "muzzleflash_m3",
     "muzzleflash_famas",
     "muzzleflash_g3",
