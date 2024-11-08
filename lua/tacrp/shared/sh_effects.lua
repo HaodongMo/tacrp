@@ -1,6 +1,6 @@
 
-game.AddParticles( "particles/muzzleflashes_test.pcf" )
-game.AddParticles( "particles/muzzleflashes_test_b.pcf" )
+game.AddParticles( "particles/tacrp_muzzleflashes.pcf" )
+game.AddParticles( "particles/tacrp_muzzleflashes_b.pcf" )
 
 PrecacheParticleSystem( "muzzleflash_m14" )
 PrecacheParticleSystem( "muzzleflash_5" )
