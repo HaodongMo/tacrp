@@ -1,12 +1,12 @@
 local qualitymat = Material("tacrp/quality_overlay.png", "smooth")
 
 local quality_to_color = {
-    ["5Value"] = Color(255, 255, 255, 150),
-    ["4Consumer"] = Color(200, 255, 200, 100),
-    ["3Security"] = Color(50, 50, 200, 100),
-    ["2Operator"] = Color(200, 40, 200, 100),
-    ["1Elite"] = Color(255, 50, 50, 100),
-    ["0Exotic"] = Color(225, 225, 50, 100),
+    ["5Value"] = Color(255, 255, 255, 75),
+    ["4Consumer"] = Color(200, 255, 200, 75),
+    ["3Security"] = Color(50, 50, 200, 75),
+    ["2Operator"] = Color(200, 40, 200, 75),
+    ["1Elite"] = Color(255, 50, 50, 75),
+    ["0Exotic"] = Color(225, 225, 50, 75),
 }
 
 spawnmenu.AddContentType("tacrp_weapon", function(container, obj)
@@ -30,32 +30,25 @@ spawnmenu.AddContentType("tacrp_weapon", function(container, obj)
     end
 
     if SWEPinfo then
-        toolTip = toolTip .. "\n"
-
         -- These 2 really should be one
-        if SWEPinfo.Purpose and SWEPinfo.Purpose ~= "" then
-            toolTip = toolTip .. "\n" .. SWEPinfo.Purpose
+        if SWEPinfo.Description and SWEPinfo.Description != "" then
+            toolTip = toolTip .. "\n" .. SWEPinfo.Description
         end
 
-        if SWEPinfo.Instructions and SWEPinfo.Instructions ~= "" then
-            toolTip = toolTip .. "\n" .. SWEPinfo.Instructions
-        end
-
-        if SWEPinfo.Author and SWEPinfo.Author ~= "" then
-            toolTip = toolTip .. "\nAuthor: " .. SWEPinfo.Author
+        if SWEPinfo.Description_Quote and SWEPinfo.Description_Quote != "" then
+            toolTip = toolTip .. "\n" .. SWEPinfo.Description_Quote
         end
     end
 
-    toolTip = toolTip .. "\n\n" .. language.GetPhrase("spawnmenu.mmb_weapons")
     icon:SetTooltip(toolTip)
     local oldpaint = icon.Paint
 
     icon.Paint = function(self2, w, h)
-        oldpaint(self2, w, h)
-
         surface.SetDrawColor(quality_to_color[self2.Quality] or Color(0, 0, 0, 0))
         surface.SetMaterial(qualitymat)
         surface.DrawTexturedRect(0, 0, w, h)
+
+        oldpaint(self2, w, h)
     end
 
     icon.DoClick = function()
@@ -123,7 +116,7 @@ hook.Add("PopulateWeapons", "zzz_TacRP_SubCategories", function(pnlContent, tree
             local SubCategory = "Other"
 
             if cvar == 2 then
-                if WepTable ~= nil and WepTable.SubCatTier ~= nil then
+                if WepTable != nil and WepTable.SubCatTier != nil then
                     SubCategory = WepTable.SubCatTier
 
                     if SubCategory == "9Special" then
@@ -135,7 +128,7 @@ hook.Add("PopulateWeapons", "zzz_TacRP_SubCategories", function(pnlContent, tree
                     end
                 end
             elseif cvar == 1 then
-                if WepTable ~= nil and WepTable.SubCatType ~= nil then
+                if WepTable != nil and WepTable.SubCatType != nil then
                     SubCategory = WepTable.SubCatType
 
                     if not isstring(SubCategory) then
