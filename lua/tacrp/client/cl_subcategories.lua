@@ -29,27 +29,32 @@ spawnmenu.AddContentType("tacrp_weapon", function(container, obj)
         SWEPinfo = list.Get("Weapon")[obj.spawnname]
     end
 
+
     if SWEPinfo then
-        -- These 2 really should be one
+        toolTip = toolTip .. "\n"
+
         if SWEPinfo.Description and SWEPinfo.Description != "" then
             toolTip = toolTip .. "\n" .. SWEPinfo.Description
         end
 
         if SWEPinfo.Description_Quote and SWEPinfo.Description_Quote != "" then
-            toolTip = toolTip .. "\n" .. SWEPinfo.Description_Quote
+            toolTip = toolTip .. "\n\n" .. SWEPinfo.Description_Quote
         end
     end
 
     icon:SetTooltip(toolTip)
-    local oldpaint = icon.Paint
 
-    icon.Paint = function(self2, w, h)
-        surface.SetDrawColor(quality_to_color[self2.Quality] or Color(0, 0, 0, 0))
-        surface.SetMaterial(qualitymat)
-        surface.DrawTexturedRect(0, 0, w, h)
-
-        oldpaint(self2, w, h)
+    local highlight = TacRP.ConVars["spawnmenu_highlight"]:GetBool() and TacRP.UseTiers()
+    if highlight then
+        local oldpaint = icon.Paint
+        icon.Paint = function(self2, w, h)
+            surface.SetDrawColor(quality_to_color[self2.Quality] or Color(0, 0, 0, 0))
+            surface.SetMaterial(qualitymat)
+            surface.DrawTexturedRect(0, 0, w, h)
+            oldpaint(self2, w, h)
+        end
     end
+
 
     icon.DoClick = function()
         RunConsoleCommand("gm_giveswep", obj.spawnname)
@@ -91,8 +96,10 @@ spawnmenu.AddContentType("tacrp_weapon", function(container, obj)
 end)
 
 hook.Add("PopulateWeapons", "zzz_TacRP_SubCategories", function(pnlContent, tree, anode)
-    local cvar = TacRP.ConVars["subcats"]:GetInt()
-    if cvar == 0 then return end
+    local cvar = TacRP.ConVars["spawnmenu_subcats"]:GetInt()
+    -- if cvar == 0 then return end
+
+    local sortbytiers = TacRP.ConVars["spawnmenu_sortbytiers"]:GetBool()
 
     timer.Simple(0, function()
         -- Loop through the weapons and add them to the menu
@@ -135,6 +142,8 @@ hook.Add("PopulateWeapons", "zzz_TacRP_SubCategories", function(pnlContent, tree
                         SubCategory = tostring(SubCategory)
                     end
                 end
+            else
+                SubCategory = "Other"
             end
 
             local wep = weapons.Get(weapon.ClassName)
@@ -174,7 +183,7 @@ hook.Add("PopulateWeapons", "zzz_TacRP_SubCategories", function(pnlContent, tree
                     end
 
                     -- Create the clickable icon
-                    for _, ent in SortedPairsByMemberValue(subcatWeps, "Quality") do
+                    for _, ent in SortedPairsByMemberValue(subcatWeps, sortbytiers and "Quality" or "PrintName") do
                         spawnmenu.CreateContentIcon("tacrp_weapon", self.PropPanel, {
                             nicename = ent.PrintName or ent.ClassName,
                             spawnname = ent.ClassName,

@@ -28,7 +28,17 @@ local conVars = {
         userinfo = true,
     },
     {
-        name = "subcats",
+        name = "spawnmenu_subcats",
+        default = "1",
+        client = true,
+    },
+    {
+        name = "spawnmenu_highlight",
+        default = "1",
+        client = true,
+    },
+    {
+        name = "spawnmenu_sortbytiers",
         default = "1",
         client = true,
     },
@@ -1261,6 +1271,23 @@ local function menu_client_ti(panel)
     })
     panel:ControlHelp("If disabled, ALT+F toggles HL2 flashlight and F toggles tactical;\nif enabled, F toggles HL2 flashlight and ALT+F toggles tactical.")
 
+    header(panel, "\nSpawnmenu")
+    panel:ControlHelp("Use ConCommand \"spawnmenu_reload\" to apply changes.")
+
+    panel:AddControl("checkbox", {
+        label = "Subcategory Headers",
+        command = "tacrp_spawnmenu_subcats"
+    })
+    panel:AddControl("checkbox", {
+        label = "Sort by Tiers",
+        command = "tacrp_spawnmenu_sortbytiers"
+    })
+    panel:AddControl("checkbox", {
+        label = "Tier Highlighting",
+        command = "tacrp_spawnmenu_highlight"
+    })
+    panel:ControlHelp("Only applies when tiered balance is enabled.")
+
     header(panel, "\nMiscellaneous")
     panel:AddControl("checkbox", {
         label = "Muzzle Light",
@@ -1290,11 +1317,6 @@ local function menu_client_ti(panel)
         label = "Immersive Ammo Names (Requires map reload)",
         command = "tacrp_ammonames"
     })
-    panel:AddControl("checkbox", {
-        label = "Spawnmenu Subcategories",
-        command = "tacrp_subcats"
-    })
-    panel:ControlHelp("Separate weapons based on their type (like Sidearm, Assault Rifle, Shotgun). Use ConCommand \"spawnmenu_reload\" to take effect.")
 end
 
 local function menu_server_ti(panel)
