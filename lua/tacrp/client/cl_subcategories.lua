@@ -183,7 +183,19 @@ hook.Add("PopulateWeapons", "zzz_TacRP_SubCategories", function(pnlContent, tree
                     end
 
                     -- Create the clickable icon
-                    for _, ent in SortedPairsByMemberValue(subcatWeps, sortbytiers and "Quality" or "PrintName") do
+                    if sortbytiers then
+                        table.sort(subcatWeps, function(a, b)
+                            if (a.Quality == b.Quality) then
+                                return a.PrintName < b.PrintName
+                            else
+                                return a.Quality < b.Quality
+                            end
+                        end)
+                    else
+                        table.SortByMember(subcatWeps, "PrintName")
+                    end
+
+                    for _, ent in ipairs(subcatWeps) do
                         spawnmenu.CreateContentIcon("tacrp_weapon", self.PropPanel, {
                             nicename = ent.PrintName or ent.ClassName,
                             spawnname = ent.ClassName,
