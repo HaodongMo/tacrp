@@ -1,5 +1,103 @@
-hook.Add("PopulateWeapons", "zzz_TacRP_SubCategories", function(pnlContent, tree, anode)
+local qualitymat = Material("tacrp/quality_overlay.png", "smooth")
 
+local quality_to_color = {
+    ["5Value"] = Color(255, 255, 255, 150),
+    ["4Consumer"] = Color(200, 255, 200, 100),
+    ["3Security"] = Color(50, 50, 200, 100),
+    ["2Operator"] = Color(200, 40, 200, 100),
+    ["1Elite"] = Color(255, 50, 50, 100),
+    ["0Exotic"] = Color(225, 225, 50, 100),
+}
+
+spawnmenu.AddContentType("tacrp_weapon", function(container, obj)
+    if not obj.material then return end
+    if not obj.nicename then return end
+    if not obj.spawnname then return end
+    local icon = vgui.Create("ContentIcon", container)
+    icon:SetContentType("weapon")
+    icon:SetSpawnName(obj.spawnname)
+    icon:SetName(obj.nicename)
+    icon:SetMaterial(obj.material)
+    icon:SetAdminOnly(obj.admin)
+    icon.Quality = obj.quality
+    icon:SetColor(Color(135, 206, 250, 255))
+    -- Generate a nice tooltip with extra info.
+    local SWEPinfo = weapons.Get(obj.spawnname)
+    local toolTip = language.GetPhrase(obj.nicename)
+
+    if not SWEPinfo then
+        SWEPinfo = list.Get("Weapon")[obj.spawnname]
+    end
+
+    if SWEPinfo then
+        toolTip = toolTip .. "\n"
+
+        -- These 2 really should be one
+        if SWEPinfo.Purpose and SWEPinfo.Purpose ~= "" then
+            toolTip = toolTip .. "\n" .. SWEPinfo.Purpose
+        end
+
+        if SWEPinfo.Instructions and SWEPinfo.Instructions ~= "" then
+            toolTip = toolTip .. "\n" .. SWEPinfo.Instructions
+        end
+
+        if SWEPinfo.Author and SWEPinfo.Author ~= "" then
+            toolTip = toolTip .. "\nAuthor: " .. SWEPinfo.Author
+        end
+    end
+
+    toolTip = toolTip .. "\n\n" .. language.GetPhrase("spawnmenu.mmb_weapons")
+    icon:SetTooltip(toolTip)
+    local oldpaint = icon.Paint
+
+    icon.Paint = function(self2, w, h)
+        oldpaint(self2, w, h)
+
+        surface.SetDrawColor(quality_to_color[self2.Quality] or Color(0, 0, 0, 0))
+        surface.SetMaterial(qualitymat)
+        surface.DrawTexturedRect(0, 0, w, h)
+    end
+
+    icon.DoClick = function()
+        RunConsoleCommand("gm_giveswep", obj.spawnname)
+        surface.PlaySound("ui/buttonclickrelease.wav")
+    end
+
+    icon.DoMiddleClick = function()
+        RunConsoleCommand("gm_spawnswep", obj.spawnname)
+        surface.PlaySound("ui/buttonclickrelease.wav")
+    end
+
+    icon.OpenMenuExtra = function(self, menu)
+        menu:AddOption("#spawnmenu.menu.spawn_with_toolgun", function()
+            RunConsoleCommand("gmod_tool", "creator")
+            RunConsoleCommand("creator_type", "3")
+            RunConsoleCommand("creator_name", obj.spawnname)
+        end):SetIcon("icon16/brick_add.png")
+
+        if self:GetIsNPCWeapon() then
+            local opt = menu:AddOption("#spawnmenu.menu.use_as_npc_gun", function()
+                RunConsoleCommand("gmod_npcweapon", self:GetSpawnName())
+            end)
+
+            if self:GetSpawnName() == GetConVarString("gmod_npcweapon") then
+                opt:SetIcon("icon16/monkey_tick.png")
+            else
+                opt:SetIcon("icon16/monkey.png")
+            end
+        end
+    end
+
+    icon.OpenMenu = DoGenericSpawnmenuRightclickMenu
+
+    if IsValid(container) then
+        container:Add(icon)
+    end
+
+    return icon
+end)
+
+hook.Add("PopulateWeapons", "zzz_TacRP_SubCategories", function(pnlContent, tree, anode)
     local cvar = TacRP.ConVars["subcats"]:GetInt()
     if cvar == 0 then return end
 
@@ -11,36 +109,44 @@ hook.Add("PopulateWeapons", "zzz_TacRP_SubCategories", function(pnlContent, tree
 
         -- Build into categories + subcategories
         for k, weapon in pairs(Weapons) do
-            if !weapon.Spawnable then continue end
-            if !weapons.IsBasedOn(k, "tacrp_base") then continue end
-
+            if not weapon.Spawnable then continue end
+            if not weapons.IsBasedOn(k, "tacrp_base") then continue end
             -- Get the weapon category as a string
             local Category = weapon.Category or "Other2"
             local WepTable = weapons.Get(weapon.ClassName)
-            if (!isstring(Category)) then
+
+            if not isstring(Category) then
                 Category = tostring(Category)
             end
 
             -- Get the weapon subcategory as a string
             local SubCategory = "Other"
+
             if cvar == 2 then
-                if (WepTable != nil && WepTable.SubCatTier != nil) then
+                if WepTable ~= nil and WepTable.SubCatTier ~= nil then
                     SubCategory = WepTable.SubCatTier
+
                     if SubCategory == "9Special" then
                         SubCategory = WepTable.SubCatType
                     end
-                    if (!isstring(SubCategory)) then
+
+                    if not isstring(SubCategory) then
                         SubCategory = tostring(SubCategory)
                     end
                 end
             elseif cvar == 1 then
-                if (WepTable != nil && WepTable.SubCatType != nil) then
+                if WepTable ~= nil and WepTable.SubCatType ~= nil then
                     SubCategory = WepTable.SubCatType
-                    if (!isstring(SubCategory)) then
+
+                    if not isstring(SubCategory) then
                         SubCategory = tostring(SubCategory)
                     end
                 end
             end
+
+            local wep = weapons.Get(weapon.ClassName)
+
+            weapon.Quality = wep.SubCatTier
 
             -- Insert it into our categorised table
             Categorised[Category] = Categorised[Category] or {}
@@ -51,20 +157,15 @@ hook.Add("PopulateWeapons", "zzz_TacRP_SubCategories", function(pnlContent, tree
 
         -- Iterate through each category in the weapons table
         for _, node in pairs(tree:Root():GetChildNodes()) do
-
-            if !TacRPCats[node:GetText()] then continue end
-
+            if not TacRPCats[node:GetText()] then continue end
             -- Get the subcategories registered in this category
             local catSubcats = Categorised[node:GetText()]
-
-            if !catSubcats then continue end
+            if not catSubcats then continue end
 
             -- Overwrite the icon populate function with a custom one
             node.DoPopulate = function(self)
-
                 -- If we've already populated it - forget it.
-                if (self.PropPanel) then return end
-
+                if self.PropPanel then return end
                 -- Create the container panel
                 self.PropPanel = vgui.Create("ContentContainer", pnlContent)
                 self.PropPanel:SetVisible(false)
@@ -72,21 +173,21 @@ hook.Add("PopulateWeapons", "zzz_TacRP_SubCategories", function(pnlContent, tree
 
                 -- Iterate through the subcategories
                 for subcatName, subcatWeps in SortedPairs(catSubcats) do
-
                     -- Create the subcategory header, if more than one exists for this category
-                    if (table.Count(catSubcats) > 1) then
+                    if table.Count(catSubcats) > 1 then
                         local label = vgui.Create("ContentHeader", container)
                         label:SetText(string.sub(subcatName, 2))
                         self.PropPanel:Add(label)
                     end
 
                     -- Create the clickable icon
-                    for _, ent in SortedPairsByMemberValue(subcatWeps, "PrintName") do
-                        spawnmenu.CreateContentIcon(ent.ScriptedEntityType or "weapon", self.PropPanel, {
-                            nicename  = ent.PrintName or ent.ClassName,
+                    for _, ent in SortedPairsByMemberValue(subcatWeps, "Quality") do
+                        spawnmenu.CreateContentIcon("tacrp_weapon", self.PropPanel, {
+                            nicename = ent.PrintName or ent.ClassName,
                             spawnname = ent.ClassName,
-                            material  = ent.IconOverride or "entities/" .. ent.ClassName .. ".png",
-                            admin     = ent.AdminOnly
+                            material = ent.IconOverride or "entities/" .. ent.ClassName .. ".png",
+                            admin = ent.AdminOnly,
+                            quality = ent.Quality
                         })
                     end
                 end
@@ -101,86 +202,80 @@ hook.Add("PopulateWeapons", "zzz_TacRP_SubCategories", function(pnlContent, tree
 
         -- Select the first node
         local FirstNode = tree:Root():GetChildNode(0)
-        if (IsValid(FirstNode)) then
+
+        if IsValid(FirstNode) then
             FirstNode:InternalDoClick()
         end
     end)
 end)
 
-
-
 local function BuildWeaponCategories()
-    local weapons = list.Get( "Weapon" )
+    local weapons = list.Get("Weapon")
     local Categorised = {}
 
     -- Build into categories
-    for k, weapon in pairs( weapons ) do
-
-        if ( !weapon.Spawnable ) then continue end
-
+    for k, weapon in pairs(weapons) do
+        if not weapon.Spawnable then continue end
         local Category = weapon.Category or "Other"
-        if ( !isstring( Category ) ) then Category = tostring( Category ) end
 
-        Categorised[ Category ] = Categorised[ Category ] or {}
-        table.insert( Categorised[ Category ], weapon )
+        if not isstring(Category) then
+            Category = tostring(Category)
+        end
 
+        Categorised[Category] = Categorised[Category] or {}
+        table.insert(Categorised[Category], weapon)
     end
 
     return Categorised
 end
 
-local function AddCategory( tree, cat )
-    local CustomIcons = list.Get( "ContentCategoryIcons" )
-
+local function AddCategory(tree, cat)
+    local CustomIcons = list.Get("ContentCategoryIcons")
     -- Add a node to the tree
-    local node = tree:AddNode( cat, CustomIcons[ cat ] or "icon16/gun.png" )
-    tree.Categories[ cat ] = node
+    local node = tree:AddNode(cat, CustomIcons[cat] or "icon16/gun.png")
+    tree.Categories[cat] = node
 
     -- When we click on the node - populate it using this function
-    node.DoPopulate = function( self )
-
+    node.DoPopulate = function(self)
         -- If we've already populated it - forget it.
-        if ( IsValid( self.PropPanel ) ) then return end
-
+        if IsValid(self.PropPanel) then return end
         -- Create the container panel
-        self.PropPanel = vgui.Create( "ContentContainer", tree.pnlContent )
-        self.PropPanel:SetVisible( false )
-        self.PropPanel:SetTriggerSpawnlistChange( false )
+        self.PropPanel = vgui.Create("ContentContainer", tree.pnlContent)
+        self.PropPanel:SetVisible(false)
+        self.PropPanel:SetTriggerSpawnlistChange(false)
+        local weps = BuildWeaponCategories()[cat]
 
-        local weps = BuildWeaponCategories()[ cat ]
-        for k, ent in SortedPairsByMemberValue( weps, "PrintName" ) do
-
-            spawnmenu.CreateContentIcon( ent.ScriptedEntityType or "weapon", self.PropPanel, {
-                nicename	= ent.PrintName or ent.ClassName,
-                spawnname	= ent.ClassName,
-                material	= ent.IconOverride or ( "entities/" .. ent.ClassName .. ".png" ),
-                admin		= ent.AdminOnly
-            } )
-
+        for k, ent in SortedPairsByMemberValue(weps, "PrintName") do
+            spawnmenu.CreateContentIcon(ent.ScriptedEntityType or "weapon", self.PropPanel, {
+                nicename = ent.PrintName or ent.ClassName,
+                spawnname = ent.ClassName,
+                material = ent.IconOverride or ("entities/" .. ent.ClassName .. ".png"),
+                admin = ent.AdminOnly
+            })
         end
-
     end
 
     -- If we click on the node populate it and switch to it.
-    node.DoClick = function( self )
-
+    node.DoClick = function(self)
         self:DoPopulate()
-        tree.pnlContent:SwitchPanel( self.PropPanel )
-
+        tree.pnlContent:SwitchPanel(self.PropPanel)
     end
 
-    node.OnRemove = function( self )
-
-        if ( IsValid( self.PropPanel ) ) then self.PropPanel:Remove() end
-
+    node.OnRemove = function(self)
+        if IsValid(self.PropPanel) then
+            self.PropPanel:Remove()
+        end
     end
 
     return node
 end
 
 hook.Add("InitPostEntity", "TacRP_OverrideSpawnmenuReloadSWEP", function()
-    hook.Add( "PreRegisterSWEP", "spawnmenu_reload_swep", function( weapon, name )
-        if !weapon.Spawnable or weapons.IsBasedOn(name, "tacrp_base") then return end
-        timer.Simple( 0, function() AutorefreshWeaponToSpawnmenu( weapon, name ) end )
-    end )
+    hook.Add("PreRegisterSWEP", "spawnmenu_reload_swep", function(weapon, name)
+        if not weapon.Spawnable or weapons.IsBasedOn(name, "tacrp_base") then return end
+
+        timer.Simple(0, function()
+            AutorefreshWeaponToSpawnmenu(weapon, name)
+        end)
+    end)
 end)
