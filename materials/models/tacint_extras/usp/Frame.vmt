@@ -10,4 +10,5 @@ VertexLitGeneric
 	"$phongboost" "1"
 	"$phongfresnelranges"	"[1 6 12]"
 	"$phongalbedotint" "1"
+	"$nocull" "1"
 }
