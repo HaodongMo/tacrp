@@ -9,6 +9,29 @@ local quality_to_color = {
     ["0Exotic"] = Color(225, 225, 50, 75),
 }
 
+local function DoGenericSpawnmenuRightclickMenu(self)
+    local menu = DermaMenu()
+
+    menu:AddOption("#spawnmenu.menu.copy", function()
+        SetClipboardText(self:GetSpawnName())
+    end):SetIcon("icon16/page_copy.png")
+
+    if isfunction(self.OpenMenuExtra) then
+        self:OpenMenuExtra(menu)
+    end
+
+    if not IsValid(self:GetParent()) or not self:GetParent().GetReadOnly or not self:GetParent():GetReadOnly() then
+        menu:AddSpacer()
+
+        menu:AddOption("#spawnmenu.menu.delete", function()
+            self:Remove()
+            hook.Run("SpawnlistContentChanged")
+        end):SetIcon("icon16/bin_closed.png")
+    end
+
+    menu:Open()
+end
+
 spawnmenu.AddContentType("tacrp_weapon", function(container, obj)
     if not obj.material then return end
     if not obj.nicename then return end

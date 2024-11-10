@@ -10,7 +10,7 @@ ATT = {}
 ATT.PrintName = "Deadeye"
 ATT.Icon = Material("entities/tacrp_att_acc_aim.png", "mips smooth")
 ATT.Description = "Zooms in your aim and makes it easier to fire while sighted."
-ATT.Pros = {"stat.zoom", "stat.scopedsway", "stat.quickscope", "stat.movespread"}
+ATT.Pros = {"stat.zoom", "stat.scopedsway", "stat.movespread"}
 
 ATT.Category = "perk_shooting"
 
@@ -18,7 +18,6 @@ ATT.SortOrder = 2
 
 ATT.Mult_ScopeFOV = 0.75
 ATT.Mult_ScopedSway = 0.5
-ATT.Mult_QuickScopeSpreadPenalty = 0.66667
 ATT.Mult_MoveSpreadPenalty = 0.75
 
 TacRP.LoadAtt(ATT, "perk_aim")
@@ -54,15 +53,14 @@ ATT = {}
 ATT.PrintName = "Rambo"
 ATT.Icon = Material("entities/tacrp_att_acc_hipfire.png", "mips smooth")
 ATT.Description = "Improves weapon accuracy while not aiming."
-ATT.Pros = {"stat.sway", "stat.hipfirespread", "stat.midairspread"}
+ATT.Pros = {"stat.sway", "stat.hipfirespread"}
 
 ATT.Category = "perk"
 
 ATT.SortOrder = 2
 
-ATT.Mult_MidAirSpreadPenalty = 0.75
-ATT.Mult_HipFireSpreadPenalty = 0.75
-ATT.Mult_Sway = 0.75
+ATT.Mult_HipFireSpreadPenalty = 0.66667
+ATT.Mult_Sway = 0.66667
 
 TacRP.LoadAtt(ATT, "perk_hipfire")
 -- #endregion
@@ -162,8 +160,28 @@ ATT.Category = {"perk", "perk_throw"}
 ATT.SortOrder = 6
 
 ATT.ThrowRocks = true
-ATT.Mult_QuickNadeTimeMult = 0.65
+ATT.Mult_QuickNadeTimeMult = 0.5
 
 TacRP.LoadAtt(ATT, "perk_throw")
 -- #endregion
 
+------------------------------
+-- #region perk_mlg
+------------------------------
+ATT = {}
+
+ATT.PrintName = "Stylish"
+ATT.Icon = Material("entities/tacrp_att_acc_aim.png", "mips smooth")
+ATT.Description = "Improve quickscoping and mid-air spread."
+ATT.Pros = {"stat.quickscope", "stat.midairspread", "stat.holstertime"}
+
+ATT.Category = "perk_shooting"
+
+ATT.SortOrder = 11
+
+ATT.Mult_QuickScopeSpreadPenalty = 0.15
+ATT.Mult_MidAirSpreadPenalty = 0.15
+ATT.Mult_HolsterTimeMult = 0.25
+
+TacRP.LoadAtt(ATT, "perk_mlg")
+-- #endregion
