@@ -212,7 +212,7 @@ SWEP.StatGroups = {
             local scores = {mssd, ttk_s}
             table.sort(scores)
 
-            return scores[2] * 70 + scores[1] * 30
+            return scores[2] * 75 + scores[1] * 25
 
         end,
     },
