@@ -439,8 +439,8 @@ SWEP.StatGroups = {
             local score = 0
             local valfunc = base and self.GetBaseValue or self.GetValue
 
-            -- [50] free aim + sway (if both are disabled, score goes to other 2)
-            local bonus = 50
+            -- [40] free aim + sway (if both are disabled, score goes to other 2)
+            local bonus = 40
             local freeaim_s = 1
             if TacRP.ConVars["freeaim"]:GetBool() then
                 if valfunc(self, "FreeAim") then
@@ -454,17 +454,17 @@ SWEP.StatGroups = {
                 bonus = 0
             end
             if bonus == 0 then
-                score = score + math.min(freeaim_s, sway_s) * 30 + math.max(freeaim_s, sway_s) * 20
+                score = score + math.min(freeaim_s, sway_s) * 20 + math.max(freeaim_s, sway_s) * 20
             end
 
             -- local diff = valfunc(self, "HipFireSpreadPenalty") / math.Clamp(self:GetBaseValue("Spread"), 0.015, 0.03)
-            local hipspread = valfunc(self, "Spread") + valfunc(self, "HipFireSpreadPenalty")
+            local hipspread = valfunc(self, "Spread") + valfunc(self, "HipFireSpreadPenalty") + valfunc(self, "MoveSpreadPenalty")
 
             -- [0] peeking
             -- score = score + math.Clamp(1 - (hipspread * valfunc(self, "PeekPenaltyFraction") - 0.01) / 0.015, 0, 1) * (10 + bonus * 0.25)
 
-            -- [40] hip spread + spread
-            score = score + math.Clamp(1 - (hipspread - 0.015) / 0.05, 0, 1) * (40 + bonus * 0.75)
+            -- [50] hip spread + spread
+            score = score + math.Clamp(1 - (hipspread - 0.02) / 0.05, 0, 1) * (50 + bonus * 0.75)
 
             -- [10] mid-air spread
             score = score + math.Clamp(1 - (valfunc(self, "MidAirSpreadPenalty") ) / 0.1, 0, 1) * (10 + bonus * 0.25)
