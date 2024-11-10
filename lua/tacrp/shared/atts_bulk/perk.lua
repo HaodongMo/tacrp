@@ -17,7 +17,7 @@ ATT.Category = "perk_shooting"
 ATT.SortOrder = 2
 
 ATT.Mult_ScopeFOV = 0.75
-ATT.Mult_ScopedSway = 0.5
+ATT.Mult_ScopedSway = 0.25
 ATT.Mult_MoveSpreadPenalty = 0.75
 
 TacRP.LoadAtt(ATT, "perk_aim")
@@ -171,17 +171,17 @@ TacRP.LoadAtt(ATT, "perk_throw")
 ATT = {}
 
 ATT.PrintName = "Stylish"
-ATT.Icon = Material("entities/tacrp_att_acc_aim.png", "mips smooth")
-ATT.Description = "Improve quickscoping and mid-air spread."
-ATT.Pros = {"stat.quickscope", "stat.midairspread", "stat.holstertime"}
+ATT.Icon = Material("entities/tacrp_att_acc_mlg.png", "mips smooth")
+ATT.Description = "Improves quickscoping and accuracy while jumping or moving."
+ATT.Pros = {"stat.quickscope", "stat.midairspread", "stat.movespread"}
 
 ATT.Category = "perk_shooting"
 
-ATT.SortOrder = 11
+ATT.SortOrder = 9
 
-ATT.Mult_QuickScopeSpreadPenalty = 0.15
-ATT.Mult_MidAirSpreadPenalty = 0.15
-ATT.Mult_HolsterTimeMult = 0.25
+ATT.Mult_QuickScopeSpreadPenalty = 0.25
+ATT.Mult_MidAirSpreadPenalty = 0.25
+ATT.Mult_MoveSpreadPenalty = 0.75
 
 TacRP.LoadAtt(ATT, "perk_mlg")
 -- #endregion
