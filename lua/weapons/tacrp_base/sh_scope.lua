@@ -162,6 +162,10 @@ function SWEP:DoScope()
             --     surface.SetDrawColor(255, 255, 255, int * 25)
             --     surface.DrawRect(0, 0, w, h)
             -- end
+
+            if self:GetValue("ScopeDraw") then
+                self:GetValue("ScopeDraw")(self)
+            end
         end
     end
 

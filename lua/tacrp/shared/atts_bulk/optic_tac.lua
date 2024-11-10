@@ -667,6 +667,8 @@ ATT.TacticalName = "hint.tac.rangefinder"
 local lastrangefinder = 0
 local rftime = 1 / 10
 local rawdist = 0
+local cached_txt
+local cached_txt2
 local mat_rf = Material("tacrp/hud/rangefinder.png", "mips smooth")
 function ATT.TacticalDraw(self)
     local txt = "NO RTN"
@@ -678,7 +680,7 @@ function ATT.TacticalDraw(self)
         local tr = util.TraceLine({
             start = self:GetMuzzleOrigin(),
             endpos = self:GetMuzzleOrigin() + (self:GetShootDir():Forward() * 50000),
-            mask = MASK_SHOT,
+            mask = MASK_OPAQUE_AND_NPCS,
             filter = self:GetOwner()
         })
 
