@@ -544,6 +544,10 @@ function ATT.TacticalThink(self)
     end
 end
 
+ATT.Compatibility = function(wpn, cats) -- Allows a weapon to have the OKP-7 but not the RMR
+    if wpn.RangefinderIntegral then return false end
+end
+
 TacRP.LoadAtt(ATT, "tac_dmic")
 -- #endregion
 
@@ -838,6 +842,10 @@ end
 
 ATT.TacticalCrosshairTruePos = true
 
+ATT.Compatibility = function(wpn, cats) -- Allows a weapon to have the OKP-7 but not the RMR
+    if wpn.RangefinderIntegral then return false end
+end
+
 TacRP.LoadAtt(ATT, "tac_rangefinder")
 -- #endregion
 
@@ -1008,6 +1016,10 @@ function ATT.TacticalCrosshair(self, x, y, spread, sway)
 end
 
 ATT.TacticalCrosshairTruePos = true
+
+ATT.Compatibility = function(wpn, cats) -- Allows a weapon to have the OKP-7 but not the RMR
+    if wpn.RangefinderIntegral then return false end
+end
 
 TacRP.LoadAtt(ATT, "tac_spreadgauge")
 -- #endregion
