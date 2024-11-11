@@ -12,7 +12,7 @@ SWEP.SubCatTier = "2Operator"
 SWEP.SubCatType = "3Submachine Gun"
 
 SWEP.Description = "Bullpup PDW with a generous top-loaded magazine and controllable spread. High velocity rounds retain effectiveness at range and pierces armor easily."
-SWEP.Description_Quote = "\"This is a weapon of war, made to kill your enemy.\""
+SWEP.Description_Quote = "\"This is a weapon of war, it's made to kill your enemy.\""  // SG-1 Stargate
 
 SWEP.Trivia_Caliber = "5.7x28mm"
 SWEP.Trivia_Manufacturer = "FN Herstal"

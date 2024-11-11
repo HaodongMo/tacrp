@@ -12,7 +12,7 @@ SWEP.SubCatTier = "3Security"
 SWEP.SubCatType = "5Sporter"
 
 SWEP.Description = "Semi-automatic variation of a futuristic PDW.\nUses reduced capacity magazines."
-SWEP.Description_Quote = nil
+SWEP.Description_Quote = "\"This is a weapon of terror. It's made to intimidate the enemy.\"" // SG-1 Stargate
 
 SWEP.Trivia_Caliber = "5.7x28mm"
 SWEP.Trivia_Manufacturer = "FN Herstal"
