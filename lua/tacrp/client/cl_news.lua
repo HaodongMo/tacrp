@@ -1053,7 +1053,7 @@ Notably, some weapons in the base pack are now Value grade, a new lowest grade t
     {
         Title = "Update 26",
         Type = "Update",
-        Date = "2024-11-5",
+        Date = "2024-11-05",
         Author = "speedonerd",
         Major = false,
         Summary = "A new weapon, a fun bonus and lots of visual touch-ups.",
@@ -1096,12 +1096,37 @@ Give it a whirl! Apologies in advance for the blindness and potential motion sic
 </ul>
 ]]
     },
-	
-	-- {
+    {
+        Title = "Update 27",
+        Type = "Update",
+        Date = "2024-11-12",
+        Author = "8Z",
+        Major = false,
+        Summary = "Spawnmenu tidy-up and more bonus guns.",
+        Contents = [[<body style="font-family:'Myriad Pro';color:white;font-size:125%;">
+
+<p>A few misclaneous quality of life improvements, including tier highlighting and sorting in the spawnmenu.</p>
+
+<p>Also, over the past few days, speedonerd has been hard at work kitbashing together more custom guns for fun (but no profit). Expect a release announcement soon!</p>
+
+<h3>Changelist:</h3>
+<ul>
+<li><b>Added:</b> (Base) The spawnmenu will now highlight TacRP weapons' tiers when using tiered balance.
+<li><b>Added:</b> (Base) The spawnmenu sorts by tier first, then by name. Tooltips also show weapon description.
+<li><b>Added:</b> (Base) ConVars for toggling spawnmenu behavior.
+<li><b>Added:</b> (Base) "Stylish" perk, for mid-air trickshots and quickscopes.
+<li><b>Added:</b> (Base) AS-50 and Hecate has a bigger muzzle flash.
+<li><b>Added:</b> (Base) "Exotic" tier, reserved for bonus and custom weapons.
+<li><b>Fixed:</b> (Base) The USP no longer has vaseline smeared all over it.
+<li><b>Rebalance:</b> (Base) Nerfed barrel attachments and Subsonic ammo; minor tweaks to some perks.
+</ul>
+]]
+    },
+    -- {
         -- Title = "Scavenger's Spoils release!",
         -- Type = "Update",
         -- Date = "2025-1-1",
-		-- Author = "speedonerd",
+        -- Author = "speedonerd",
         -- Major = true,
         -- Summary = "New expansion release!", 
         -- Contents = [[<body style="font-family:'Myriad Pro';color:white;font-size:125%;">
