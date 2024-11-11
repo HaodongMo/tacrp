@@ -18,6 +18,7 @@ local sizes_to_make = {
 }
 
 local italic_sizes_to_make = {
+    6,
     8,
 }
 

@@ -455,11 +455,6 @@ function SWEP:CreateCustomizeHUD()
             surface.DrawRect(0, 0, w, h)
             TacRP.DrawCorneredBox(0, 0, w, h)
 
-            -- surface.SetFont("TacRP_Myriad_Pro_8")
-            -- surface.SetTextColor(255, 255, 255)
-            -- surface.SetTextPos(TacRP.SS(6), TacRP.SS(4))
-            -- surface.DrawText(TacRP:GetPhrase("cust.description"))
-
             if !self.MiscCache["cust_desc"] then
                 local phrase = TacRP:GetPhrase("wep." .. self:GetClass() .. ".desc") or self.Description
                 self.MiscCache["cust_desc"] = TacRP.MultiLineText(phrase, w - TacRP.SS(8), "TacRP_Myriad_Pro_8")
@@ -475,8 +470,12 @@ function SWEP:CreateCustomizeHUD()
             local phrase_quote = TacRP:GetPhrase("wep." .. self:GetClass() .. ".desc.quote") or self.Description_Quote
             if phrase_quote then
                 surface.SetFont("TacRP_Myriad_Pro_8_Italic")
+                local tw, th = surface.GetTextSize(phrase_quote)
+                if tw > TacRP.SS(164) then
+                    surface.SetFont("TacRP_Myriad_Pro_6_Italic")
+                end
                 surface.SetTextColor(255, 255, 255)
-                surface.SetTextPos(TacRP.SS(4), TacRP.SS(26))
+                surface.SetTextPos(TacRP.SS(4), TacRP.SS(34) - th)
                 surface.DrawText(phrase_quote)
             end
         end
