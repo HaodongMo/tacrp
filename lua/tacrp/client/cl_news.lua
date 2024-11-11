@@ -1111,14 +1111,15 @@ Give it a whirl! Apologies in advance for the blindness and potential motion sic
 
 <h3>Changelist:</h3>
 <ul>
-<li><b>Added:</b> (Base) The spawnmenu will now highlight TacRP weapons' tiers when using tiered balance.
-<li><b>Added:</b> (Base) The spawnmenu sorts by tier first, then by name. Tooltips also show weapon description.
-<li><b>Added:</b> (Base) ConVars for toggling spawnmenu behavior.
-<li><b>Added:</b> (Base) "Stylish" perk, for mid-air trickshots and quickscopes.
-<li><b>Added:</b> (Base) AS-50 and Hecate has a bigger muzzle flash.
-<li><b>Added:</b> (Base) "Exotic" tier, reserved for bonus and custom weapons.
-<li><b>Fixed:</b> (Base) The USP no longer has vaseline smeared all over it.
-<li><b>Rebalance:</b> (Base) Nerfed barrel attachments and Subsonic ammo; minor tweaks to some perks.
+<li><b>Added:</b> The spawnmenu will now highlight TacRP weapons' tiers when using tiered balance.
+<li><b>Added:</b> The spawnmenu sorts by tier first, then by name. Tooltips also show weapon description.
+<li><b>Added:</b> ConVars for toggling spawnmenu behavior.
+<li><b>Added:</b> "Stylish" perk, for mid-air trickshots and quickscopes.
+<li><b>Added:</b> AS-50 and Hecate has a bigger muzzle flash.
+<li><b>Added:</b> "Exotic" tier, reserved for bonus and custom weapons.
+<li><b>Fixed:</b> USP no longer has vaseline smeared all over it.
+<li><b>Fixed:</b> Casing ejections shouldn't be missing on any gun anymore (let us know).
+<li><b>Rebalance:</b> Nerfed barrel attachments and Subsonic ammo; minor tweaks to some perks.
 </ul>
 ]]
     },
