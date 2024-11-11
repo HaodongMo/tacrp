@@ -1188,12 +1188,11 @@ ATT.Category = {"ammo_rifle", "ammo_pistol"}
 
 ATT.SortOrder = 2
 
-ATT.Mult_RecoilKick = 0.75
-ATT.Mult_RecoilSpreadPenalty = 0.75
+ATT.Mult_RecoilKick = 0.85
 ATT.TracerNum = 0
 ATT.Mult_MuzzleVelocity = 0.75
 ATT.Mult_Vol_Shoot = 0.9
-ATT.Mult_Range_Max = 0.75
+ATT.Mult_Range_Max = 0.85
 
 TacRP.LoadAtt(ATT, "ammo_subsonic")
 -- #endregion
