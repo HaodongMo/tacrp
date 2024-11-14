@@ -1,8 +1,8 @@
 function SWEP:GetRecoilResetTime(base)
     if base then
-        return (self:GetBaseValue("RecoilResetInstant") and 0 or math.min(0.5, 60 / self:GetBaseValue("RPM"))) + self:GetBaseValue("RecoilResetTime")
+        return (self:GetBaseValue("RecoilResetInstant") and 0 or math.min(0.5, 60 / self:GetRPM(true))) + self:GetBaseValue("RecoilResetTime")
     else
-        return (self:GetValue("RecoilResetInstant") and 0 or math.min(0.5, 60 / self:GetValue("RPM"))) + self:GetValue("RecoilResetTime")
+        return (self:GetValue("RecoilResetInstant") and 0 or math.min(0.5, 60 / self:GetRPM())) + self:GetValue("RecoilResetTime")
     end
 end
 
