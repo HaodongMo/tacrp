@@ -1043,8 +1043,12 @@ ATT.Category = "tactical_zoom"
 ATT.SortOrder = 8
 
 ATT.CanToggle = true
-ATT.VariableZoom = true
-ATT.VariableZoomFOV = 90 / 2
+
+ATT.Hook_ModifyMagnification = function(wep, data)
+    if wep:GetTactical() and wep:GetValue("Scope") and (wep:GetValue("ScopeOverlay") or wep:GetValue("Holosight")) then
+        return 2
+    end
+end
 
 ATT.TacticalName = "hint.tac.magnifier"
 

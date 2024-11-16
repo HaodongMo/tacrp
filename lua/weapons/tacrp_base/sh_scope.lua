@@ -88,20 +88,11 @@ function SWEP:ScopeToggle(setlevel)
 end
 
 function SWEP:GetShouldFOV(ignorepeek)
-    local level = self:GetScopeLevel()
-
     local base = 90
-
-    if level > 0 and (ignorepeek or !self:GetPeeking()) then
-        local fov = self:GetValue("ScopeFOV")
-
-        fov = Lerp(level / self:GetValue("ScopeLevels"), base, fov)
-
-        return fov
-    elseif !ignorepeek and self:GetPeeking() then
+    if !ignorepeek and self:GetPeeking() then
         return base / peekzoom
     else
-        return base
+        return base / self:GetMagnification()
     end
 end
 
@@ -252,18 +243,17 @@ function SWEP:GetMagnification()
     local level = self:GetScopeLevel()
 
     if level > 0 then
-
         if self:GetPeeking() then
             return peekzoom
         end
-
         mag = 90 / self:GetValue("ScopeFOV")
-
-        if self:GetValue("VariableZoom") and self:GetTactical() and self:GetValue("Scope") and (self:GetValue("ScopeOverlay") or self:GetValue("Holosight")) then
-            mag = 90 / self:GetValue("VariableZoomFOV")
-        end
-
         mag = Lerp(level / self:GetValue("ScopeLevels"), 1, mag)
+
+        mag = self:RunHook("Hook_ModifyMagnification") or mag
+    end
+
+    if (mag <= 0) then
+        return 0.001 -- just in case
     end
 
     return mag
