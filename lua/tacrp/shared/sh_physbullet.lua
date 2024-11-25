@@ -465,6 +465,7 @@ if SERVER then
         dmg:SetAttacker(ply)
         dmg:SetInflictor(ply)
         dmg:SetDamagePosition(hitpos)
+        dmg:SetDamageType(DMG_BULLET) -- FireBullet attacks do DMG_BULLET by default
         local btr = util.TraceLine({
             start = hitpos - dir * 2,
             endpos = hitpos,
