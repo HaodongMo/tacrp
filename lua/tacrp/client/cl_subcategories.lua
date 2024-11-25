@@ -307,6 +307,50 @@ local function AddCategory(tree, cat)
     return node
 end
 
+local function AutorefreshWeaponToSpawnmenu(weapon, name)
+    local swepTab = g_SpawnMenu.CreateMenu:GetCreationTab("#spawnmenu.category.weapons")
+    if not swepTab or not swepTab.ContentPanel or not IsValid(swepTab.Panel) then return end
+    local tree = swepTab.ContentPanel.ContentNavBar.Tree
+    if not tree.Categories then return end
+    local newCategory = weapon.Category or "Other"
+
+    -- Remove from previous category..
+    for cat, catPnl in pairs(tree.Categories) do
+        if not IsValid(catPnl.PropPanel) then continue end
+
+        for _, icon in pairs(catPnl.PropPanel.IconList:GetChildren()) do
+            if icon:GetName() != "ContentIcon" then continue end
+
+            if icon:GetSpawnName() == name then
+                local added = false
+
+                if cat == newCategory then
+                    -- We already have the new category, just readd the icon here
+                    local newIcon = AddWeaponToCategory(catPnl.PropPanel, weapon)
+                    newIcon:MoveToBefore(icon)
+                    added = true
+                end
+
+                icon:Remove()
+                if added then return end
+            end
+        end
+        -- Leave the empty categories, this only applies to devs anyway
+    end
+
+    -- Weapon changed category...
+    if IsValid(tree.Categories[newCategory]) then
+        -- Only do this if it is already populated.
+        -- If not, the weapon will appear automatically when user clicks on the category
+        if IsValid(tree.Categories[newCategory].PropPanel) then
+            -- Just append it to the end, heck with the order
+            AddWeaponToCategory(tree.Categories[newCategory].PropPanel, weapon)
+        end
+    else
+        AddCategory(tree, newCategory)
+    end
+end
+
 hook.Add("InitPostEntity", "TacRP_OverrideSpawnmenuReloadSWEP", function()
     hook.Add("PreRegisterSWEP", "spawnmenu_reload_swep", function(weapon, name)
         if not weapon.Spawnable or weapons.IsBasedOn(name, "tacrp_base") then return end
