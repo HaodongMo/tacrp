@@ -1123,6 +1123,32 @@ Give it a whirl! Apologies in advance for the blindness and potential motion sic
 </ul>
 ]]
     },
+    {
+        Title = "Update 28",
+        Type = "Update",
+        Date = "2024-11-29",
+        Author = "8Z",
+        Major = false,
+        Summary = "Small additions for bonus weapons.",
+        Contents = [[<body style="font-family:'Myriad Pro';color:white;font-size:125%;">
+
+<h2>Bonus Weapon Releases</h2>
+<p>A set of bonus one-off weapons has been released! These were customized to the tastes of some of our friends and have some cool features not present on base TacRP weapons. Give them a peek!</p>
+
+<p><input type='submit' value='Open Workshop' onclick='console.log("RUNLUA:gui.OpenURL(\"https://steamcommunity.com/sharedfiles/filedetails/?id=3374122098\")")' /> <b>MP5/10 "Zero Eight":</b> A 10mm MP5 with Swordfish kit, prototype foregrip, and 50-round drum.</p>
+<p><input type='submit' value='Open Workshop' onclick='console.log("RUNLUA:gui.OpenURL(\"https://steamcommunity.com/sharedfiles/filedetails/?id=3374124219\")")' /> <b>Hécate "Kingslayer":</b> Hécate with suppressor, rangefinder scope, and fragmentation rounds.</p>
+<p><input type='submit' value='Open Workshop' onclick='console.log("RUNLUA:gui.OpenURL(\"https://steamcommunity.com/sharedfiles/filedetails/?id=3374136864\")")' /> <b>USP "The Governor":</b> USP Elite with compensator and high power rounds.</p>
+<p><input type='submit' value='Open Workshop' onclick='console.log("RUNLUA:gui.OpenURL(\"https://steamcommunity.com/sharedfiles/filedetails/?id=3374144978\")")' /> <b>Desert Eagle "Arbiter":</b> Fully automatic Desert Eagle carbine. Yes, really.</p>
+<p><input type='submit' value='Open Workshop' onclick='console.log("RUNLUA:gui.OpenURL(\"https://steamcommunity.com/sharedfiles/filedetails/?id=3374145882\")")' /> <b>SR-25 "Symbiosis":</b> Suppressed and rechambered in .338 Lapua, with an adjustable scope and kill tracker.</p>
+
+<h3>Changelist:</h3>
+<ul>
+<li><b>Added:</b> Some features to support bonus weapons.
+<li><b>Fixed:</b> Client authoriatitive damage not setting DMG_BULLET.
+<li><b>Rebalance:</b> Buffed SG551 and Hecate's bipod.
+</ul>
+]]
+    },
     -- {
         -- Title = "Scavenger's Spoils release!",
         -- Type = "Update",
