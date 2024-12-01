@@ -81,15 +81,17 @@ function SWEP:Deploy()
 
     self:SetShouldHoldType()
 
-    if self:GetValue("PrimaryGrenade") then
-        local nade = TacRP.QuickNades[self:GetValue("PrimaryGrenade")]
-        if !TacRP.IsGrenadeInfiniteAmmo(nade) and self:GetOwner():GetAmmoCount(nade.Ammo) == 0 then
-            if SERVER then self:Remove() end
-            return true
+    if self:IsQuickNadeAllowed() then
+        if self:GetValue("PrimaryGrenade") then
+            local nade = TacRP.QuickNades[self:GetValue("PrimaryGrenade")]
+            if !TacRP.IsGrenadeInfiniteAmmo(nade) and self:GetOwner():GetAmmoCount(nade.Ammo) == 0 then
+                if SERVER then self:Remove() end
+                return true
+            end
+        elseif !self:CheckGrenade() then
+            self:SelectGrenade()
+            return
         end
-    elseif !self:CheckGrenade() then
-        self:SelectGrenade()
-        return
     end
 
     return true
