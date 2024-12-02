@@ -56,8 +56,8 @@ function SWEP:GetViewModelPosition(pos, ang)
 
     oldang:Set(ang)
 
-    local offsetpos = Vector(self:GetValue("PassivePos"))
-    local offsetang = Angle(self:GetValue("PassiveAng"))
+    local offsetpos = Vector(self.PassivePos)
+    local offsetang = Angle(self.PassiveAng)
 
     local extra_offsetpos = Vector(0, 0, 0)
     local extra_offsetang = Angle(0, 0, 0)
