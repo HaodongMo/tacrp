@@ -139,6 +139,10 @@ function SWEP:PrimaryAttack()
     self:SetNextPrimaryFire(CurTime() + (60 / self:GetValue("RPM")))
 end
 
+function SWEP:IsQuickNadeAllowed()
+    return true // Otherwise it's useless!
+end
+
 function SWEP:SecondaryAttack()
     local nade = self:GetOwner():GetNWInt("ti_nade")
     if nade != 12 and nade != 6 then
