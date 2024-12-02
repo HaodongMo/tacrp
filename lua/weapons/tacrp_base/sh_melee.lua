@@ -23,6 +23,8 @@ function SWEP:Melee(alt)
     self.Primary.Automatic = true
     self.Secondary.Automatic = true
 
+    self:SetCharge(false)
+
     self:CancelReload()
 
     self:ToggleBlindFire(TacRP.BLINDFIRE_NONE)
