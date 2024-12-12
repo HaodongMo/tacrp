@@ -93,12 +93,18 @@ function SWEP:DrawCustomModel(wm, custom_wm)
                     if ele.AttPosMods[slot].Ang_WM then
                         offset_ang = ele.AttPosMods[slot].Ang_WM
                     end
+                    if ele.AttPosMods[slot].WMBone then
+                        bone = ele.AttPosMods[slot].WMBone
+                    end
                 else
                     if ele.AttPosMods[slot].Pos_VM then
                         offset_pos = ele.AttPosMods[slot].Pos_VM
                     end
                     if ele.AttPosMods[slot].Ang_VM then
                         offset_ang = ele.AttPosMods[slot].Ang_VM
+                    end
+                    if ele.AttPosMods[slot].Bone then
+                        bone = ele.AttPosMods[slot].Bone
                     end
                 end
             end

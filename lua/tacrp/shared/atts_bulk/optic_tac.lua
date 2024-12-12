@@ -305,6 +305,8 @@ ATT.Icon = Material("entities/tacrp_att_optic_rmr.png", "mips smooth")
 ATT.Description = "Low profile optic sight for pistols."
 ATT.Pros = {"att.sight.1"}
 
+ATT.InstalledElements = {"optic_rmr"}
+
 ATT.Model = "models/weapons/tacint/addons/optic_rmr_hq.mdl"
 ATT.Scale =  1
 
