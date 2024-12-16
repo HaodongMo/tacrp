@@ -312,6 +312,7 @@ function SWEP:PrimaryAttack()
                         Spread = Vector(),
                         IgnoreEntity = self:GetOwner():GetVehicle(),
                         Distance = dist,
+                        HullSize = self:IsShotgun() and 2 or 0,
                         Callback = function(att, btr, dmg)
                             local range = (btr.HitPos - btr.StartPos):Length()
 
@@ -781,7 +782,22 @@ function SWEP:GetConfigDamageMultiplier()
     end
 end
 
+local shotgundmgmult = {
+    [HITGROUP_HEAD] = 1,
+    [HITGROUP_CHEST] = 1,
+    [HITGROUP_STOMACH] = 1,
+    [HITGROUP_LEFTARM] = 1,
+    [HITGROUP_RIGHTARM] = 1,
+    [HITGROUP_LEFTLEG] = 1,
+    [HITGROUP_RIGHTLEG] = 1,
+    [HITGROUP_GEAR] = 1,
+}
+
 function SWEP:GetBodyDamageMultipliers(base)
+    if self:IsShotgun(base) then -- Shotguns using hull traces will never hit bodygroups
+        return table.Copy(shotgundmgmult)
+    end
+
     local valfunc = base and self.GetBaseValue or self.GetValue
 
     local btbl = table.Copy(valfunc(self, "BodyDamageMultipliers"))

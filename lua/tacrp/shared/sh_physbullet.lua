@@ -38,7 +38,8 @@ function TacRP:ShootPhysBullet(wep, pos, vel, tbl)
         Filter = {wep:GetOwner()},
         Damaged = {},
         Dead = false,
-        NPC = wep:GetOwner():IsNPC()
+        NPC = wep:GetOwner():IsNPC(),
+        HullSize = wep:IsShotgun() and 2 or 0,
     }
 
     if wep:GetValue("TracerNum") == 0 then
@@ -118,6 +119,7 @@ net.Receive("TacRP_sendbullet", function(len, ply)
         Gravity = grav,
         Weapon = weapon,
         Filter = {weapon:GetOwner()},
+        HullSize = weapon:IsShotgun() and 2 or 0,
     }
 
     if weapon:GetValue("TracerNum") == 0 then
@@ -208,12 +210,26 @@ function TacRP:ProgressPhysBullet(bullet, timestep)
             attacker:LagCompensation(true)
         end
 
-        local tr = util.TraceLine({
-            start = oldpos,
-            endpos = newpos,
-            filter = bullet.Filter,
-            mask = MASK_SHOT
-        })
+        local tr
+
+        if (bullet.HullSize or 0) > 0 then
+            local hs = bullet.HullSize / 2
+            tr = util.TraceHull({
+                start = oldpos,
+                endpos = newpos,
+                filter = bullet.Filter,
+                mask = MASK_SHOT,
+                mins = Vector(-hs, -hs, -hs),
+                maxs = Vector(hs, hs, hs),
+            })
+        else
+            tr = util.TraceLine({
+                start = oldpos,
+                endpos = newpos,
+                filter = bullet.Filter,
+                mask = MASK_SHOT
+            })
+        end
 
         if !first and attacker:IsPlayer() then
             attacker:LagCompensation(false)
@@ -268,6 +284,7 @@ function TacRP:ProgressPhysBullet(bullet, timestep)
                         Tracer = 0,
                         Damage = 0,
                         IgnoreEntity = attacker,
+                        HullSize = weapon:IsShotgun() and 2 or 0,
                         Callback = function(att, btr, dmg)
                             if TacRP.ConVars["client_damage"]:GetBool() then
                                 net.Start("tacrp_clientdamage")
@@ -299,6 +316,7 @@ function TacRP:ProgressPhysBullet(bullet, timestep)
                         Dir = bullet.Vel:GetNormalized(),
                         Src = oldpos,
                         Spread = Vector(0, 0, 0),
+                        HullSize = weapon:IsShotgun() and 2 or 0,
                         Callback = function(att, btr, dmg)
                             local range = bullet.Travelled
                             if !IsValid(weapon) then return end
