@@ -471,8 +471,9 @@ function SWEP:CreateCustomizeHUD()
             if phrase_quote then
                 surface.SetFont("TacRP_Myriad_Pro_8_Italic")
                 local tw, th = surface.GetTextSize(phrase_quote)
-                if tw > TacRP.SS(164) then
+                if tw > TacRP.SS(166) then
                     surface.SetFont("TacRP_Myriad_Pro_6_Italic")
+                    tw, th = surface.GetTextSize(phrase_quote)
                 end
                 surface.SetTextColor(255, 255, 255)
                 surface.SetTextPos(TacRP.SS(4), TacRP.SS(34) - th)
