@@ -168,6 +168,10 @@ function SWEP:GetValue(val, static, invert)
             end
         end
 
+        if isfunction(self["Func_" .. val]) then
+            table.insert(modifiers.func, self["Func_" .. val])
+        end
+
         -- Check for stat hooks. If any exist, we must call it whenever we try to get the stat.
         -- Cache this check so we don't unnecessarily call hook.Run a million times when nobody wants to hook us.
         if table.Count(hook.GetTable()["TacRP_Stat_" .. val] or {}) > 0 then
