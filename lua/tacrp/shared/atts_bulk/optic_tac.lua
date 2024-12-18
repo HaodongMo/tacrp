@@ -1099,6 +1099,7 @@ ATT.Hook_ToggleTactical = function(wep)
     wep:GetOwner():DoAnimationEvent(ACT_HL2MP_GESTURE_RELOAD_PISTOL)
     wep:RestoreClip(loadamt)
     wep:DoBulletBodygroups()
+    wep:SetJammed(false)
 
     return true
 end
