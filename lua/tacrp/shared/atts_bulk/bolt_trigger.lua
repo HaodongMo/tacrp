@@ -557,7 +557,7 @@ ATT.FullName = "Marksman Trigger"
 
 ATT.Icon = Material("entities/tacrp_att_trigger_semi.png", "mips smooth")
 ATT.Description = "Trigger that sacrfices automatic fire for precision."
-ATT.Pros = {"stat.spread", "stat.recoil", "stat.rpm"}
+ATT.Pros = {"stat.spread", "stat.recoil", "stat.rpm", "att.procon.reliability"}
 ATT.Cons = {"att.procon.semi"}
 
 ATT.Category = {"trigger_auto", "trigger_burst", "trigger_4pos"}
@@ -565,13 +565,14 @@ ATT.Category = {"trigger_auto", "trigger_burst", "trigger_4pos"}
 ATT.SortOrder = 1
 
 ATT.Override_Firemodes = {1}
-ATT.Mult_Spread = 0.5
+ATT.Mult_Spread = 0.3333
 ATT.Mult_ShotgunPelletSpread = 0.5
 ATT.Mult_RecoilSpreadPenalty = 0.75
 ATT.Mult_RecoilKick = 0.6
 ATT.Mult_RecoilVisualKick = 0.5
 ATT.Mult_RecoilStability = 1.25
 ATT.Add_RPM = 50
+ATT.Mult_JamFactor = 0
 
 TacRP.LoadAtt(ATT, "trigger_semi")
 -- #endregion
