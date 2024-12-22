@@ -377,6 +377,7 @@ L["att.procon.proj.speed"] = "Projectile Top Speed"
 L["att.procon.proj.direct"] = "Impact Damage"
 L["att.procon.shovel"] = "Shoots shovels"
 L["att.procon.heal"] = "Healing effect"
+L["att.procon.infiniteammo"] = "Infinite Ammo"
 
 L["att.sight.1"] = "1x Sight"
 L["att.sight.1.25"] = "1.25x Sight"
