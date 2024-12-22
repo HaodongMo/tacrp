@@ -17,6 +17,8 @@ ENT.ExplodeUnderwater = false
 
 ENT.Delay = 0
 
+ENT.AllowFunny = true
+
 ENT.ExtraModels = {
     "models/props_junk/PopCan01a.mdl",
     "models/Gibs/HGIBS.mdl",
@@ -185,7 +187,7 @@ function ENT:Initialize()
     if SERVER then
         if util.IsValidModel(TacRP.ConVars["rock_funny"]:GetString()) then
             self:SetModel(TacRP.ConVars["rock_funny"]:GetString())
-        elseif math.random() <= TacRP.ConVars["rock_funny"]:GetFloat() then
+        elseif self.AllowFunny and math.random() <= TacRP.ConVars["rock_funny"]:GetFloat() then
             local i = math.min(TacRP.ConVars["rock_funny"]:GetFloat() > 1 and TacRP.ConVars["rock_funny"]:GetInt() - 1 or math.random(1, #self.ExtraModels), #self.ExtraModels)
             local mdl = self.ExtraModels[i]
             self:SetModel(util.IsValidModel(mdl) and mdl or self.Model)
