@@ -342,7 +342,7 @@ ATT.Pros = {"att.sight.1"}
 
 ATT.Model = "models/weapons/tacint/addons/optic_rmr_hq.mdl"
 ATT.Scale =  1
-ATT.ModelOffset = Vector(0, -0, -0.4)
+ATT.ModelOffset = Vector(-1, -0, -0.4)
 
 ATT.Category = "optic_cqb"
 ATT.InvAtt = "optic_rmr"
