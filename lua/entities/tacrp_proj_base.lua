@@ -38,6 +38,7 @@ ENT.Defusable = false // press E on the projectile to defuse it
 ENT.DefuseOnDamage = false
 
 ENT.ImpactDamage = 50
+ENT.ImpactDamageType = DMG_CRUSH + DMG_CLUB
 
 ENT.Delay = 0 // after being triggered and this amount of time has passed, the projectile will explode.
 
@@ -204,7 +205,7 @@ function ENT:PhysicsCollide(data, collider)
         dmg:SetAttacker(IsValid(self:GetOwner()) and self:GetOwner() or self.Attacker)
         dmg:SetInflictor(self)
         dmg:SetDamage(self.ImpactDamage)
-        dmg:SetDamageType(DMG_CRUSH + DMG_CLUB)
+        dmg:SetDamageType(self.ImpactDamageType)
         dmg:SetDamageForce(data.OurOldVelocity)
         dmg:SetDamagePosition(data.HitPos)
         data.HitEntity:TakeDamageInfo(dmg)
@@ -458,7 +459,7 @@ function ENT:SafetyImpact(data, collider)
         local dmginfo = DamageInfo()
         dmginfo:SetAttacker(attacker)
         dmginfo:SetInflictor(self)
-        dmginfo:SetDamageType(DMG_CRUSH + DMG_CLUB)
+        dmginfo:SetDamageType(self.ImpactDamageType)
         dmginfo:SetDamage(self.ImpactDamage * (self.NPCDamage and 0.25 or 1))
         dmginfo:SetDamageForce(data.OurOldVelocity * 20)
         dmginfo:SetDamagePosition(data.HitPos)
