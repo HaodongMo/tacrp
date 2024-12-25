@@ -119,7 +119,7 @@ net.Receive("TacRP_sendbullet", function(len, ply)
         Gravity = grav,
         Weapon = weapon,
         Filter = {weapon:GetOwner()},
-        HullSize = weapon:IsShotgun() and 1 or 0,
+        HullSize = weapon:IsShotgun() and TacRP.ShotgunHullSize or 0,
     }
 
     if weapon:GetValue("TracerNum") == 0 then

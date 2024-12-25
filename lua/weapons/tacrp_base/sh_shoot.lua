@@ -312,7 +312,7 @@ function SWEP:PrimaryAttack()
                         Spread = Vector(),
                         IgnoreEntity = self:GetOwner():GetVehicle(),
                         Distance = dist,
-                        HullSize = self:IsShotgun() and 1 or 0,
+                        HullSize = self:IsShotgun() and TacRP.ShotgunHullSize or 0,
                         Callback = function(att, btr, dmg)
                             local range = (btr.HitPos - btr.StartPos):Length()
 

@@ -11,7 +11,7 @@ SWEP.Category = "Tactical RP"
 SWEP.SubCatTier = "4Consumer"
 SWEP.SubCatType = "5Shotgun"
 
-SWEP.Description = "Accurate hunting shotgun with a low fire rate.\nLimited effectiveness against armor."
+SWEP.Description = "Accurate hunting shotgun with low damage."
 
 SWEP.Trivia_Caliber = "16 Gauge"
 SWEP.Trivia_Manufacturer = "Molot"
@@ -84,9 +84,9 @@ SWEP.TTTReplace = TacRP.TTTReplacePreset.Shotgun
 // "ballistics"
 
 SWEP.Damage_Max = 18
-SWEP.Damage_Min = 6
-SWEP.Range_Min = 600 // distance for which to maintain maximum damage
-SWEP.Range_Max = 2800 // distance at which we drop to minimum damage
+SWEP.Damage_Min = 5
+SWEP.Range_Min = 200 // distance for which to maintain maximum damage
+SWEP.Range_Max = 2000 // distance at which we drop to minimum damage
 SWEP.Penetration = 1 // units of metal this weapon can penetrate
 SWEP.ArmorPenetration = 0.47
 SWEP.ArmorBonus = 1.25
@@ -117,9 +117,9 @@ SWEP.RPM = 60
 SWEP.ShootTimeMult = 0.85
 
 SWEP.Spread = 0.015
-SWEP.ShotgunPelletSpread = 0.005
+SWEP.ShotgunPelletSpread = 0.0075
 
-SWEP.HipFireSpreadPenalty = 0.02
+SWEP.HipFireSpreadPenalty = 0.025
 SWEP.MidAirSpreadPenalty = 0
 
 SWEP.ScopedSpreadPenalty = 0

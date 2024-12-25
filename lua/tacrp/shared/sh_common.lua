@@ -1,5 +1,7 @@
 TacRP.Version = "28" // 2024-11-29
 
+TacRP.ShotgunHullSize = 0.5 // Bigger equals more generous hitboxes
+
 TacRP.PenTable = {
     [MAT_ANTLION]     = 0.1,
     [MAT_BLOODYFLESH] = 0.1,
