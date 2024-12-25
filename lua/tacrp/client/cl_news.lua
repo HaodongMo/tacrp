@@ -1149,55 +1149,36 @@ Give it a whirl! Apologies in advance for the blindness and potential motion sic
 </ul>
 ]]
     },
-    -- {
-        -- Title = "Scavenger's Spoils release!",
-        -- Type = "Update",
-        -- Date = "2025-1-1",
-        -- Author = "speedonerd",
-        -- Major = true,
-        -- Summary = "New expansion release!", 
-        -- Contents = [[<body style="font-family:'Myriad Pro';color:white;font-size:125%;">
--- <h2>Scavenger's Spoils<i> (New!)</i></h2>
--- <p><input type='submit' value='Open Workshop' onclick='console.log("RUNLUA:gui.OpenURL(\"https://steamcommunity.com/sharedfiles/filedetails/?id=3271554982\")")' /></p>
--- The fourth major expansion, featuring 33 weapons themed around zombies, the apocalypse and a post-Soviet aesthetic. All you have out here is whatever you can get your hands on, comrade.
--- <ul>
--- <li>Colt Woodsman
--- <li>Fort-12
--- <li>Makarov PM
--- <li>Olympic Arms OA-93
--- <li>Colt Python
--- <li>Remington M700 Obrez
--- <li>Smith & Wesson 686
--- <li>CZ 75 Automatic
--- <li>OTs-33 Pernach
--- <li>PP-9 "Klin"
--- <li>IMI Uzi
--- <li>Madsen M-50
--- <li>PPSh-41
--- <li>CZ Scorpion EVO 3
--- <li>Sturmgewehr 44
--- <li>Tokarev SVT-40
--- <li>SKS
--- <li>FN MAG
--- <li>Lewis Gun
--- <li>Browning Auto-5
--- <li>Ithaca 37
--- <li>Kel-Tec KSG
--- <li>Serbu Super Shorty
--- <li>TOZ-106
--- <li>TOZ-34
--- <li>Hi-Point Model 995 Carbine
--- <li>Mosin-Nagant M91/30
--- <li>Accuracy International AWM
--- <li>SVU
--- <li>Sako 85
--- <li>VKS Vykhlop
--- <li>M202 FLASH
--- <li>M79
--- </ul>
+    {
+        Title = "Update 29 / Scavenger's Spoils Release",
+        Type = "Update",
+        Date = "2025-12-25",
+        Author = "8Z",
+        Major = true,
+        Summary = "New expansion release!",
+        Contents = [[<body style="font-family:'Myriad Pro';color:white;font-size:125%;">
+<h2>Scavenger's Spoils<i> (New!)</i></h2>
+<p><input type='submit' value='Open Workshop' onclick='console.log("RUNLUA:gui.OpenURL(\"https://steamcommunity.com/sharedfiles/filedetails/?id=3271554982\")")' /></p>
+The fourth major expansion, featuring 33 weapons themed around zombies, the apocalypse and a post-Soviet aesthetic. All you have out here is whatever you can get your hands on, comrade.<br>
 
--- ]]
-    -- },
+
+<ul>
+<li>
+</ul>
+
+<h3>Changelist:</h3>
+<ul>
+<li><b>Added:</b> Various features to support Scavenger's Spoils.
+<li><b>Added:</b> Shotgun pellets now fire hull traces to make shots more consistent, like the HL2 shotgun. As a consequence, they are no longer affected by limb multipliers.
+<li><b>Added:</b> Reworked bullpup animations by speedonerd for the FAMAS and Groza.
+<li><b>Fixed:</b> Client authoriatitive damage not setting DMG_BULLET.
+<li><b>Rebalance:</b> Emergency Bullet will clear a jam when loading.
+<li><b>Rebalance:</b> Marksman Trigger now removes jam chance entirely.
+<li><b>Rebalance:</b> All shotguns have increased spread, reduced damage and significantly reduced range in keeping with the hull size change. I promise they're still good.
+</ul>
+
+]]
+    },
 }
 TacRP.NewsRead = TacRP.NewsRead or {}
 TacRP.NewsFirstLoad = false
