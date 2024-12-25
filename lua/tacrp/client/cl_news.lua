@@ -1158,13 +1158,8 @@ Give it a whirl! Apologies in advance for the blindness and potential motion sic
         Summary = "New expansion release!",
         Contents = [[<body style="font-family:'Myriad Pro';color:white;font-size:125%;">
 <h2>Scavenger's Spoils<i> (New!)</i></h2>
-<p><input type='submit' value='Open Workshop' onclick='console.log("RUNLUA:gui.OpenURL(\"https://steamcommunity.com/sharedfiles/filedetails/?id=3271554982\")")' /></p>
-The fourth major expansion, featuring 33 weapons themed around zombies, the apocalypse and a post-Soviet aesthetic. All you have out here is whatever you can get your hands on, comrade.<br>
-
-
-<ul>
-<li>
-</ul>
+<p><input type='submit' value='Open Workshop' onclick='console.log("RUNLUA:gui.OpenURL(\"https://steamcommunity.com/sharedfiles/filedetails/?id=3391426557\")")' /></p>
+The fourth major expansion, featuring 42 weapons themed around zombies, the apocalypse and a post-Soviet aesthetic. All you have out here is whatever you can get your hands on, comrade.<br>
 
 <h3>Changelist:</h3>
 <ul>
