@@ -75,7 +75,12 @@ TacRP.LockableEntities = {
 TacRP.FlareEntities = {
     ["unity_flare"] = true,
     ["sw_flare_v3"] = true,
-    ["env_flare"] = true
+    ["env_flare"] = true,
+    ["glide_flare"] = true,
+    ["tacrp_proj_p2a1_flare"] = true,
+    ["tacrp_proj_p2a1_paraflare"] = true,
+    ["tacrp_flare_cloud"] = true,
+    ["tacrp_flare_cloud_para"] = true,
 }
 
 TacRP.HolsterBones = {
