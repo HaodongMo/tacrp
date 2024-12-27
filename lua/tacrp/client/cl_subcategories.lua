@@ -32,6 +32,15 @@ local function DoGenericSpawnmenuRightclickMenu(self)
     menu:Open()
 end
 
+local function AddWeaponToCategory( propPanel, ent )
+    return spawnmenu.CreateContentIcon(ent.ScriptedEntityType or "weapon", propPanel, {
+        nicename = ent.PrintName or ent.ClassName,
+        spawnname = ent.ClassName,
+        material = ent.IconOverride or ("entities/" .. ent.ClassName .. ".png"),
+        admin = ent.AdminOnly
+    })
+end
+
 spawnmenu.AddContentType("tacrp_weapon", function(container, obj)
     if not obj.material then return end
     if not obj.nicename then return end
