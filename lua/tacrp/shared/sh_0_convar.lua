@@ -1068,6 +1068,48 @@ local conVars = {
         default = "20",
         min = 0,
     },
+	
+    // Aim Assist
+    {
+        name = "aimassist",
+        default = "0",
+        replicated = true,
+        notify = true,
+    },
+    {
+        name = "aimassist_head",
+        default = "0",
+        replicated = true,
+        notify = true,
+    },
+    {
+        name = "aimassist_intensity",
+        default = "1",
+        replicated = true,
+        notify = true,
+    },
+    {
+        name = "aimassist_cone",
+        default = "5",
+        replicated = true,
+        notify = true,
+    },
+    {
+        name = "aimassist_cl",
+        default = "1",
+        client = true,
+    },
+    {
+        name = "aimassist_multsens",
+        default = "0.75",
+        client = true,
+    },	
+
+    {
+        name = "aimsens",
+        default = "1",
+        client = true,
+    },
 }
 
 TacRP.ConVars = {}
@@ -1237,6 +1279,13 @@ local function menu_client_ti(panel)
         label = "#tacrp.client.togglepeek", -- Toggle Peeking
         command = "tacrp_togglepeek"
     })
+    panel:AddControl("slider", {
+        label = "#tacrp.client.aimsens", -- Aiming Sensitivity
+        command = "tacrp_aimsens",
+        type = "float",
+        min = 0.1,
+        max = 1,
+    })
     panel:AddControl("checkbox", {
         label = "#tacrp.client.aimstopssprint", -- Aiming Stops Sprinting
         command = "tacrp_aim_cancels_sprint"
@@ -1270,6 +1319,12 @@ local function menu_client_ti(panel)
         command = "tacrp_flashlight_alt"
     })
     panel:ControlHelp("#tacrp.client.toggletacticalwalk.desc")
+
+    panel:AddControl("checkbox", {
+        label = "#tacrp.client.aimassist", -- Enable Aim Assist
+        command = "tacrp_aimassist_cl"
+    })
+    panel:ControlHelp("#tacrp.client.aimassist.desc")
 
     header(panel, "#tacrp.client.spawnmenu") -- Spawnmenu
     panel:ControlHelp("#tacrp.client.spawnmenu.desc")
@@ -1365,6 +1420,30 @@ local function menu_server_ti(panel)
     lb_irons_lower:SizeToContents()
     panel:ControlHelp("#tacrp.server.loweredirons.desc")
 
+    panel:AddControl("checkbox", {
+        label = "#tacrp.server.aimassist", -- Allow Aim Assist
+        command = "tacrp_aimassist"
+    })
+    panel:ControlHelp("#tacrp.server.aimassist.desc")
+
+    panel:AddControl("slider", {
+        label = "#tacrp.server.aimassistintensity", -- Aim Assist Intensity
+        command = "tacrp_aimassist_intensity",
+        type = "float",
+        min = 0,
+        max = 2,
+    })
+    panel:ControlHelp("#tacrp.server.aimassistintensity.desc")
+
+    panel:AddControl("slider", {
+        label = "#tacrp.server.aimassistcone", -- Aim Assist Cone
+        command = "tacrp_aimassist_cone",
+        type = "int",
+        min = 0,
+        max = 10,
+    })
+    panel:ControlHelp("#tacrp.server.aimassistcone.desc")
+	
     header(panel, "#tacrp.server.slotrestrict") -- \nWeapon Slot Restriction
     panel:ControlHelp("#tacrp.server.slotrestrict.desc")
     panel:AddControl("slider", {

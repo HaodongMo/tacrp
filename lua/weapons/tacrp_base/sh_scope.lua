@@ -261,9 +261,20 @@ end
 
 function SWEP:AdjustMouseSensitivity()
     local mag = self:GetMagnification()
+	local sensmult = GetConVar("tacrp_aimsens"):GetFloat()
+	-- local aa = GetConVar("tacrp_aimassist")
+	-- local aac = GetConVar("tacrp_aimassist_cl")
+	-- local aai = GetConVar("tacrp_aimassist_intensity")
+	-- local aams = GetConVar("tacrp_aimassist_multsens")
+	
+	-- if self:GetOwner().tacrp_AATarget != nil and aa:GetBool() and aac:GetBool()) then
+		-- aamult = aams:GetFloat() / aai:GetFloat()
+	-- else
+		-- aamult = 1
+	-- end
 
     if mag > 1 then
-        return 1 / mag
+        return 1 / mag * math.Clamp(sensmult, 0.1, 1)
     end
 end
 
