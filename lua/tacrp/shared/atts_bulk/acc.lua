@@ -200,8 +200,8 @@ TacRP.LoadAtt(ATT, "acc_duffelbag")
 ------------------------------
 ATT = {}
 
-ATT.PrintName = "Ergo Grip"
-ATT.FullName = "Ergonomic Grip"
+ATT.PrintName = "att.acc_dual_ergo.name"
+ATT.FullName = "att.acc_dual_ergo.name.full"
 ATT.Icon = Material("entities/tacrp_att_acc_ergo.png", "mips smooth")
 ATT.Description = "Grooved grip makes aiming faster and moving while shooting easier."
 
@@ -596,8 +596,8 @@ TacRP.LoadAtt(ATT, "acc_pad")
 ------------------------------
 ATT = {}
 
-ATT.PrintName = "Quickdraw"
-ATT.FullName = "Quickdraw Holster"
+ATT.PrintName = "att.acc_dual_quickdraw.name"
+ATT.FullName = "att.acc_dual_quickdraw.name.full"
 ATT.Icon = Material("entities/tacrp_att_acc_quickdraw.png", "mips smooth")
 ATT.Description = "Strapless holster with magazine pouches for quick drawing and loading."
 ATT.Pros = {"stat.deploytime", "stat.reloadtime"}
@@ -620,8 +620,8 @@ TacRP.LoadAtt(ATT, "acc_quickdraw")
 ------------------------------
 ATT = {}
 
-ATT.PrintName = "Light Grip"
-ATT.FullName = "Lightweight Grip"
+ATT.PrintName = "att.acc_dual_skel.name"
+ATT.FullName = "att.acc_dual_skel.name.full"
 ATT.Icon = Material("entities/tacrp_att_acc_skel.png", "mips smooth")
 ATT.Description = "Skeletonized grip makes the weapon faster to raise and keep raised."
 ATT.Pros = {"Sighted Speed", "Sprint To Fire Time"}
