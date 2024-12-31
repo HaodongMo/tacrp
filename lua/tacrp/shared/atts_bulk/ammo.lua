@@ -982,10 +982,10 @@ TacRP.LoadAtt(ATT, "ammo_shotgun_mag")
 ------------------------------
 ATT = {}
 
-ATT.PrintName = "att.ammo_shotgun_slugs.name"
-ATT.FullName = "att.ammo_shotgun_slugs.name.full"
+ATT.PrintName = "Slugs"
+ATT.FullName = "Slug Shells"
 ATT.Icon = Material("entities/tacrp_att_acc_slugs.png", "mips smooth")
-ATT.Description = "att.ammo_shotgun_slugs.desc"
+ATT.Description = "Fire a single projectile for medium range shooting."
 ATT.Pros = {"stat.spread", "stat.range"}
 ATT.Cons = {"att.procon.1proj", "stat.hipfirespread"}
 
@@ -1080,10 +1080,10 @@ TacRP.LoadAtt(ATT, "ammo_shotgun_slugs2")
 ------------------------------
 ATT = {}
 
-ATT.PrintName = "att.ammo_shotgun_triple.name"
-ATT.FullName = "att.ammo_shotgun_triple.name.full"
+ATT.PrintName = "Triple Hit"
+ATT.FullName = "Triple Hit Shells"
 ATT.Icon = Material("entities/tacrp_att_acc_triple.png", "mips smooth")
-ATT.Description = "att.ammo_shotgun_triple.desc"
+ATT.Description = "Fire three projectiles for more accuracy."
 ATT.Pros = {"stat.spread"}
 ATT.Cons = {"att.procon.3proj", "stat.hipfirespread"}
 

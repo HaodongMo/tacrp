@@ -641,8 +641,113 @@ L["att.acc_skel.desc"] = "Skeletonized grip makes the weapon faster to raise and
 L["att.acc_sling.name"] = "Sling"
 L["att.acc_sling.desc"] = "Attach a strap to the weapon, making it easier to draw and reload."
 
+-- Attachments (ammo)
+L["att.ammo_40mm_3gl.name.full"] = "40mm Cluster Grenades"
+L["att.ammo_40mm_3gl.name"] = "3GL"
+L["att.ammo_40mm_3gl.desc"] = "Three weak cluster grenades, fired at once."
 
+L["att.ammo_40mm_buck.name.full"] = "40mm Buckshot Grenades"
+L["att.ammo_40mm_buck.name"] = "Buckshot"
+L["att.ammo_40mm_buck.desc"] = "Flat-top grenade firing shotgun pellets. Weak due to low pressure curve."
 
+L["att.ammo_40mm_gas.name.full"] = "40mm CS Gas Grenades"
+L["att.ammo_40mm_gas.name"] = "CS Gas"
+L["att.ammo_40mm_gas.desc"] = "Grenade containing crowd control chemicals that deal lingering damage."
+
+L["att.ammo_40mm_heat.name.full"] = "40mm Flechette Grenades"
+L["att.ammo_40mm_heat.name"] = "Flechette"
+L["att.ammo_40mm_heat.desc"] = "Flat-top grenade packing accurate flechette darts."
+
+L["att.ammo_40mm_lvg.name.full"] = "40mm Concussion Grenades"
+L["att.ammo_40mm_lvg.name"] = "Concussion"
+L["att.ammo_40mm_lvg.desc"] = "Low velocity grenade made to incapacitate targets with indirect fire."
+
+L["att.ammo_40mm_ratshot.name.full"] = "40mm Ratshot Grenades"
+L["att.ammo_40mm_ratshot.name"] = "Ratshot"
+L["att.ammo_40mm_ratshot.desc"] = "For rodents of unbelievable size."
+
+L["att.ammo_40mm_smoke.name.full"] = "40mm Smoke Grenades"
+L["att.ammo_40mm_smoke.name"] = "Smoke"
+L["att.ammo_40mm_smoke.desc"] = "Grenade that produces a concealing smokescreen on impact."
+
+L["att.ammo_40mm_heal.name.full"] = "40mm Medi-Smoke Grenades"
+L["att.ammo_40mm_heal.name"] = "Medi-Smoke"
+L["att.ammo_40mm_heal.desc"] = "Grenade that produces a cloud of restorative gas on impact."
+
+L["att.ammo_amr_hv.name.full"] = "High Velocity Rounds"
+L["att.ammo_amr_hv.name"] = "HV"
+L["att.ammo_amr_hv.desc"] = "Bullets with much higher velocity, but worsens overpenetration."
+
+L["att.ammo_amr_ratshot.name.full"] = "Ratshot Rounds"
+L["att.ammo_amr_ratshot.name"] = "Ratshot"
+L["att.ammo_amr_ratshot.desc"] = "For rodents of unusual size."
+
+L["att.ammo_amr_saphe.name.full"] = "Semi-Armor Piercing High-Explosive Rounds"
+L["att.ammo_amr_saphe.name"] = "SAPHE"
+L["att.ammo_amr_saphe.desc"] = "Explosive rounds effective against both armor and personnel."
+
+L["att.ammo_ks23_flashbang.name.full"] = "KS-23 Zvezda Flash Shells"
+L["att.ammo_ks23_flashbang.name"] = "Zvezda"
+L["att.ammo_ks23_flashbang.desc"] = "Flashbang shells that stun enemies, right from the barrel."
+
+L["att.ammo_ks23_flashbang_top.name.full"] = "KS-23 Zvezda Flash Shells (Top-Loaded)"
+L["att.ammo_ks23_flashbang_top.name"] = "Zvezda (T)"
+L["att.ammo_ks23_flashbang_top.desc"] = "Load the first round with flash rounds and the rest with standard shells."
+
+L["att.ammo_magnum.name.full"] = "Overpressured Rounds"
+L["att.ammo_magnum.name"] = "+P"
+L["att.ammo_magnum.desc"] = "Bullets that maintain close range power better, but have higher recoil."
+
+L["att.ammo_pistol_ap.name.full"] = "Steel Core Rounds"
+L["att.ammo_pistol_ap.name"] = "Steel Core"
+L["att.ammo_pistol_ap.desc"] = "Hardened bullets better penetrate armor, but destabilize ballistics."
+
+L["att.ammo_pistol_headshot.name.full"] = "Skullsplitter Rounds"
+L["att.ammo_pistol_headshot.name"] = "Skullsplitter"
+L["att.ammo_pistol_headshot.desc"] = "Specialized rounds that do more damage to vital body parts."
+
+L["att.ammo_pistol_hollowpoints.name.full"] = "Hollow-point Rounds"
+L["att.ammo_pistol_hollowpoints.name"] = "HP"
+L["att.ammo_pistol_hollowpoints.desc"] = "Bullets that expand on hit, improving damage to flesh targets and limbs."
+
+L["att.ammo_rifle_jhp.name.full"] = "Jacketed Hollow-point Rounds"
+L["att.ammo_rifle_jhp.name"] = "JHP"
+L["att.ammo_rifle_jhp.desc"] = "Bullets with much higher velocity, but worsens overpenetration."
+
+L["att.ammo_pistol_match.name.full"] = "Pistol Match Rounds"
+L["att.ammo_pistol_match.name"] = "Match"
+L["att.ammo_pistol_match.desc"] = "Bullets with improved range and accuracy."
+
+L["att.ammo_rifle_match.name.full"] = "Rifle Match Rounds"
+L["att.ammo_rifle_match.name"] = "Match"
+L["att.ammo_rifle_match.desc"] = "Bullets with greatly improved accuracy."
+
+L["att.ammo_roulette.name.full"] = "Russian Roulette"
+L["att.ammo_roulette.name"] = "Roulette"
+L["att.ammo_roulette.desc"] = "A lethal game of chance. Spin the cylinder while loaded to reset the odds."
+
+L["att.ammo_rpg_improvised.name.full"] = "RPG-7 Improvised Warhead"
+L["att.ammo_rpg_improvised.name"] = "Improvised"
+L["att.ammo_rpg_improvised.desc"] = "Straight from the bargain bin."
+
+L["att.ammo_rpg_mortar.name.full"] = "RPG-7 Mortar Warhead"
+L["att.ammo_rpg_mortar.name"] = "Mortar"
+L["att.ammo_rpg_mortar.desc"] = "A mortar with a booster stuck to it, for \"indirect fire\". Needs time to prime."
+
+L["att.ammo_rpg_ratshot.name.full"] = "RPG-7 Ratshot Warhead"
+L["att.ammo_rpg_ratshot.name"] = "Ratshot"
+L["att.ammo_rpg_ratshot.desc"] = "For rodents of unacceptable size."
+
+L["att.ammo_rpg_harpoon.name.full"] = "RPG-7 Shovel Warhead"
+L["att.ammo_rpg_harpoon.name"] = "Shovel"
+L["att.ammo_rpg_harpoon.desc"] = "Fire shovels, somehow. Either you're crazy, out of rockets, or both."
+
+L["att.ammo_shotgun_bird.name"] = "Birdshot"
+L["att.ammo_shotgun_bird.desc"] = "Fire smaller pellets in a larger spread."
+
+L["att.ammo_shotgun_mag.name.full"] = "Magnum Buckshot"
+L["att.ammo_shotgun_mag.name"] = "Magnum"
+L["att.ammo_shotgun_mag.desc"] = "High yield powder improves damage retention past point blank."
 
 L["att.ammo_shotgun_slugs.name"] = "Slugs"
 L["att.ammo_shotgun_slugs.name.full"] = "Slug Shells"
@@ -651,6 +756,61 @@ L["att.ammo_shotgun_slugs.desc"] = "Fire a single projectile for medium range sh
 L["att.ammo_shotgun_triple.name"] = "Triple Hit"
 L["att.ammo_shotgun_triple.name.full"] = "Triple Hit Shells"
 L["att.ammo_shotgun_triple.desc"] = "Fire three projectiles for more accuracy."
+
+L["att.ammo_subsonic.name"] = "Subsonic"
+L["att.ammo_subsonic.name.full"] = "Subsonic Rounds"
+L["att.ammo_subsonic.desc"] = "Bullets with reduced powder load."
+
+L["att.ammo_surplus.name"] = "Surplus"
+L["att.ammo_surplus.name.full"] = "Surplus Rounds"
+L["att.ammo_surplus.desc"] = "Unreliable old ammo, yet you keep finding them everywhere."
+
+L["att.ammo_tmj.name"] = "TMJ"
+L["att.ammo_tmj.name.full"] = "Total Metal Jacket Rounds"
+L["att.ammo_tmj.desc"] = "Bullets with improved penetration capability."
+
+L["att.ammo_buckshot_roulette.name"] = "B. Roulette"
+L["att.ammo_buckshot_roulette.name.full"] = "Buckshot Roulette"
+L["att.ammo_buckshot_roulette.desc"] = "The shells enter the chamber in an unknown order."
+
+L["att.ammo_shotgun_minishell.name"] = "Minis"
+L["att.ammo_shotgun_minishell.name.full"] = "Minishells"
+L["att.ammo_shotgun_minishell.desc"] = "Short shells increase ammo capacity but don't hit as hard."
+
+L["att.ammo_shotgun_dragon.name"] = "Dragon"
+L["att.ammo_shotgun_dragon.name.full"] = "Dragon's Breath"
+L["att.ammo_shotgun_dragon.desc"] = "Magnesium pellets set targets on fire, but have poor range and damage."
+
+L["att.ammo_shotgun_frag.name"] = "Frag"
+L["att.ammo_shotgun_frag.name.full"] = "High-Explosive Fragmentation Shells"
+L["att.ammo_shotgun_frag.desc"] = "Explosive slugs deal area damage, but don't expect too much from them."
+
+L["att.ammo_shotgun_breach.name"] = "Breach (T)"
+L["att.ammo_shotgun_breach.name.full"] = "Breaching Shells (Top-Loaded)"
+L["att.ammo_shotgun_breach.desc"] = "Load the first round with a specialized breaching slug."
+
+L["att.ammo_stinger_saam.name"] = "Semi-Active"
+L["att.ammo_stinger_saam.name.full"] = "FIM-92 Stinger Semi-Active Missile"
+L["att.ammo_stinger_saam.desc"] = "Powerful missiles that lock rapidly but require constant guidance."
+
+L["att.ammo_stinger_qaam.name"] = "Agile"
+L["att.ammo_stinger_qaam.name.full"] = "FIM-92 Stinger High Agility Missile"
+L["att.ammo_stinger_qaam.desc"] = "Highly maneuverable missile with a short range and long lock time."
+
+L["att.ammo_stinger_4aam.name"] = "4x"
+L["att.ammo_stinger_4aam.name.full"] = "FIM-92 Stinger Quad Missiles"
+L["att.ammo_stinger_4aam.desc"] = "Guided cluster missiles maximize pressure to enemy pilots."
+
+L["att.ammo_stinger_apers.name"] = "Killer Bee"
+L["att.ammo_stinger_apers.name.full"] = "FIM-92 Stinger Anti-Personnel Missiles"
+L["att.ammo_stinger_apers.desc"] = "For rodents of unacceptable agility."
+
+L["att.ammo_usp_9mm.name"] = "9×19mm"
+L["att.ammo_usp_9mm.name.full"] = "H&K USP 9×19mm Conversion"
+L["att.ammo_usp_9mm.desc"] = "Fire a smaller caliber round with higher capacity and firerate."
+
+
+
 
 L["att.muzz_pistol_comp.name"] = "Compensator"
 L["att.muzz_pistol_comp.desc"] = "Muzzle device which reduces recoil impact."
