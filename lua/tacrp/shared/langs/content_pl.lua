@@ -1,4 +1,5 @@
--- Polish Localization by meerfi
+L = {} -- Polish Content Strings by meerfi
+-- This file is incomplete and will be edited in the future.
 
 L["wep.tacrp_eo_sg510.name"] = [[SIG SG 510]]
 L["wep.tacrp_eo_sg510.desc"] = [[Zabytkowy karabin bojowy o doskonałych osiągach na daleki dystans. Odrzut jest ostry, ale stabilny.]]

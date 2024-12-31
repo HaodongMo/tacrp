@@ -1,7 +1,7 @@
 ATT.PrintName = "Frenzy"
 ATT.Icon = Material("entities/tacrp_att_melee_spec_lunge.png", "mips smooth")
 ATT.Description = "Close the distance and overwhelm your enemies."
-ATT.Pros = {"RELOAD: Lunge in aim direction"}
+ATT.Pros = { "att.pro.melee_spec_lunge1" }
 
 ATT.Category = {"melee_spec"}
 

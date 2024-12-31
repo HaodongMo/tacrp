@@ -2,8 +2,8 @@ ATT.PrintName = "Bomber"
 ATT.FullName = "Bombardier"
 ATT.Icon = Material("entities/tacrp_att_melee_spec_nade.png", "mips smooth")
 ATT.Description = "Use jury rigged impact grenades to ruin someone's day."
-ATT.Pros = {"RELOAD: Toggle Grenade", "Grenades explode on impact"}
-ATT.Cons = {"Grenade Damage"}
+ATT.Pros = { "att.pro.melee_spec_nade1", "att.pro.melee_spec_nade2" }
+ATT.Cons = { "att.con.melee_spec_nade" }
 
 ATT.Category = {"melee_spec"}
 ATT.Free = false

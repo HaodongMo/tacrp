@@ -1,52 +1,35 @@
-L = {}
+L = {} -- Base English
 
 L["font.1"] = "Myriad Pro"
 L["font.2"] = "HD44780A00 5x8"
 
---[[
-To localize an attachment (replace optic_acog with your attachment class):
-L["att.optic_acog.name"] = "Attachment Name"
-L["att.optic_acog.name.full"] = "Attachment Full Name"
-L["att.optic_acog.desc"] = "Attachment Description"
+L["tier.0"] = "5Value" -- like Walmart
+L["tier.1"] = "4Consumer"
+L["tier.2"] = "3Security"
+L["tier.3"] = "2Operator"
+L["tier.4"] = "1Elite"
+L["tier.5"] = "0Exotic"
 
-To localize a weapon (replace tacrp_vertec with your weapon class):
-L["wep.tacrp_vertec.name"] = "Weapon Name"
-L["wep.tacrp_vertec.name.full"] = "Weapon Full Name"
-L["wep.tacrp_vertec.desc"] = "Weapon Description"
-L["wep.tacrp_vertec.desc.quote"] = "Weapon Quote" -- this is the italics line at the bottom
-L["wep.tacrp_vertec.trivia.manufacturer"] = "Trivia Manufacturer"
-L["wep.tacrp_vertec.trivia.year"] = "Trivia Caliber"
-L["wep.tacrp_vertec.trivia.caliber"] = "Trivia Year"
-]]
-
-L["tier.1"] = "Consumer"
-L["tier.2"] = "Security"
-L["tier.3"] = "Operator"
-L["tier.4"] = "Elite"
-L["tier.0"] = "Value" -- like Walmart
-L["tier.5"] = "Exotic"
-
-L["tier.spec"] = "Special"
-L["type.sidearm"] = "Pistol" -- non-magnum pistols or pistol-form factor weapons
-L["type.magnum_pistol"] = "Magnum Pistol" -- magnum-caliber pistols
-L["type.machine_pistol"] = "Machine Pistol" -- pistol-caliber automatic weapons small enough to be pistols
-L["type.dual_pistol"] = "Akimbos" -- 2 gunz
-L["type.submachine_gun"] = "Submachine Gun" -- pistol-caliber automatic weapons
-L["type.assault_rifle"] = "Assault Rifle" -- intermediate-caliber automatic weapons
-L["type.machine_gun"] = "Machine Gun" -- big mag
-L["type.shotgun"] = "Shotgun" -- sotgun
-L["type.sporter_carbine"] = "Sporter" -- civilian weapons and civ variants
-L["type.battle_rifle"] = "Battle Rifle" -- large-caliber automatic weapons
-L["type.dmr"] = "Marksman Rifle" -- precision-oritented rifles for intermediate ranges
-L["type.sniper_rifle"] = "Sniper Rifle" -- precision rifles strictly for long range
--- the difference between marksman and sniper can get a little arbitrary sorry
---L["type.amr"] = "Anti-Materiel Rifle" -- 50 cal or thereabouts
-L["type.melee_sharp"] = "Bladed Melee Weapon" -- sharp
-L["type.melee_blunt"] = "Blunt Melee Weapon" -- not sharp
-L["type.equipment"] = "Equipment" -- not a gun, or really a weapon
-L["type.throwable"] = "Throwable" -- baseball
-L["type.launcher"] = "Launcher" -- shoots splodey thing
-L["type.special_weapon"] = "Special Weapon" -- weapons so unique they dont really fit in any other category (also good for containing weapons you dont want to show up in the regular mix)
+L["tier.spec"] = "9Special"
+L["type.sidearm"] = "1Pistol" -- non-magnum pistols or pistol-form factor weapons
+L["type.magnum_pistol"] = "2Magnum Pistol" -- magnum-caliber pistols
+L["type.machine_pistol"] = "3Machine Pistol" -- pistol-caliber automatic weapons small enough to be pistols
+L["type.dual_pistol"] = "3Akimbos" -- 2 gunz
+L["type.submachine_gun"] = "3Submachine Gun" -- pistol-caliber automatic weapons
+L["type.assault_rifle"] = "4Assault Rifle" -- intermediate-caliber automatic weapons
+L["type.machine_gun"] = "5Machine Gun" -- big mag
+L["type.shotgun"] = "5Shotgun" -- sotgun
+L["type.sporter_carbine"] = "5Sporter" -- civilian weapons and civ variants
+L["type.battle_rifle"] = "5Battle Rifle" -- large-caliber automatic weapons
+L["type.dmr"] = "6Marksman Rifle" -- precision-oritented rifles for intermediate ranges
+L["type.sniper_rifle"] = "7Sniper Rifle" -- precision rifles strictly for long range; the difference between marksman and sniper can get a little arbitrary sorry
+L["type.amr"] = "9Anti-Materiel Rifle" -- 50 cal or thereabouts
+L["type.melee_sharp"] = "8Bladed Melee Weapon" -- sharp
+L["type.melee_blunt"] = "8Blunt Melee Weapon" -- not sharp
+L["type.equipment"] = "9Equipment" -- not a gun, or really a weapon
+L["type.throwable"] = "9Throwable" -- baseball
+L["type.launcher"] = "6Launcher" -- shoots splodey thing
+L["type.special_weapon"] = "7Special Weapon" -- weapons so unique they dont really fit in any other category (also good for containing weapons you dont want to show up in the regular mix)
 
 L["cust.rating"] = "Rating"
 L["cust.stats"] = "Stats"
@@ -287,22 +270,6 @@ L["stat.blindfiresway"] = "Blindfire Sway"
 L["stat.zoom"] = "Aim Zoom"
 L["stat.bloomintensity"] = "Bloom Intensity"
 
-
-L["att.acc_extmag.name"] = "Mag Extender"
-L["att.acc_extmag.name.full"] = "Extended Magazine"
-L["att.acc_extmag.desc"] = "Slightly increase weapon capacity."
-L["att.ammo_shotgun_slugs.name"] = "Slugs"
-L["att.ammo_shotgun_slugs.name.full"] = "Slug Shells"
-L["att.ammo_shotgun_slugs.desc"] = "Fire a single projectile for medium range shooting."
-L["att.ammo_shotgun_triple.name"] = "Triple Hit"
-L["att.ammo_shotgun_triple.name.full"] = "Triple Hit Shells"
-L["att.ammo_shotgun_triple.desc"] = "Fire three projectiles for more accuracy."
-L["att.muzz_pistol_comp.name"] = "Compensator"
-L["att.muzz_pistol_comp.desc"] = "Muzzle device which reduces recoil impact."
-L["att.bolt_refurbished.name"] = "Refurbished"
-L["att.bolt_refurbished.name.full"] = "Refurbished Bolt"
-L["att.bolt_refurbished.desc"] = "Fix the gun's reliability problems with some armory tweaks."
-
 L["att.procon.3proj"] = "Three projectiles"
 L["att.procon.moreproj"] = "More projectiles"
 L["att.procon.lessproj"] = "Fewer projectiles"
@@ -493,12 +460,12 @@ L["hint.melee_charge.2.desc"] = "Increased charge speed, reduced turn control.\n
 
 -- STL phrases are not needed for other languages. you can remove these when localizing
 STL = {}
+STL["tier.0"] = "5Value"
 STL["tier.1"] = "4Consumer"
 STL["tier.2"] = "3Security"
 STL["tier.3"] = "2Operator"
 STL["tier.4"] = "1Elite"
 STL["tier.5"] = "0Exotic"
-STL["tier.0"] = "5Value"
 
 STL["tier.spec"] = "9Special"
 STL["type.sidearm"] = "1Pistol"

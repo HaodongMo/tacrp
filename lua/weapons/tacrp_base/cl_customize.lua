@@ -556,7 +556,8 @@ function SWEP:CreateCustomizeHUD()
             TacRP.DrawCorneredBox(0, 0, w, h)
 
             if !self.MiscCache["cust_credits"] then
-                self.MiscCache["cust_credits"] = TacRP.MultiLineText(self.Credits, w - TacRP.SS(8), "TacRP_Myriad_Pro_8")
+                local creditphrase = TacRP:GetPhrase("wep." .. self:GetClass() .. ".credits") or self.Credits
+                self.MiscCache["cust_credits"] = TacRP.MultiLineText(creditphrase, w - TacRP.SS(8), "TacRP_Myriad_Pro_8")
             end
 
             for i, k in ipairs(self.MiscCache["cust_credits"]) do

@@ -2,8 +2,7 @@ ATT.PrintName = "Charge"
 ATT.FullName = "demoknight tf2"
 ATT.Icon = Material("entities/tacrp_att_melee_spec_charge.png", "mips smooth")
 ATT.Description = "Advance with reckless abandon, and break some laws of physics too."
-ATT.Pros = {"RELOAD: Charge forwards", "WALK + RELOAD: Select charge mode", "Damage resistance during charge", "Self damage resistance"}
-ATT.Cons = {}
+ATT.Pros = { "att.pro.melee_spec_charge1", "att.pro.melee_spec_charge2", "att.pro.melee_spec_charge3", "att.pro.melee_spec_charge4" }
 
 ATT.Category = {"melee_spec"}
 

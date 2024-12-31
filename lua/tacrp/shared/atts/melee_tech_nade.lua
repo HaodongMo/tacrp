@@ -2,7 +2,7 @@ ATT.PrintName = "Grenade"
 ATT.FullName = "Grenadier"
 ATT.Icon = Material("entities/tacrp_att_melee_tech_nade.png", "mips smooth")
 ATT.Description = "Always good to have something handy to throw."
-ATT.Pros = {"ALT-FIRE: Quickthrow", "Faster Quickthrow", "Throw Rocks"} -- "RELOAD: Toggle Grenade",
+ATT.Pros = { "att.pro.melee_tech_nade1", "att.pro.melee_tech_nade2", "att.pro.melee_tech_nade3" }
 
 ATT.Category = {"melee_tech"}
 
