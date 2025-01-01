@@ -173,12 +173,19 @@ function PANEL:PaintOver(w, h)
         rx = rx + TacRP.SS(12)
         --ry = ry + TacRP.SS(16)
         local gap = TacRP.SS(18)
-        local firstoff = TacRP.SS(20)
         local statjump = TacRP.SS(12)
         local statted = false
 
         local bw, bh = TacRP.SS(160), TacRP.SS(18)
-		
+
+        atttxt = TacRP:GetAttName(att, true)
+        desctxt = TacRP:GetAttDesc(att)
+        if !self.DescCache then
+            self.DescCache = TacRP.MultiLineText(desctxt, bw, "TacRP_Myriad_Pro_6")
+        end
+        bh = bh + (#self.DescCache - 1) * TacRP.SS(5)
+
+        local firstoff = bh + TacRP.SS(2)
         local vertsize = firstoff + gap + TacRP.SS(4)
         if atttbl.Pros then vertsize = vertsize + statjump * #atttbl.Pros end
         if atttbl.Cons then vertsize = vertsize + statjump * #atttbl.Cons end
@@ -186,39 +193,22 @@ function PANEL:PaintOver(w, h)
         if self:GetY() + ry >= ScrH() - vertsize then
             ry = ry + (ScrH() - vertsize - (self:GetY() + ry))
         end
-		
-        atttxt = TacRP:GetAttName(att, true)
-        desctxt = TacRP:GetAttDesc(att)
 
-		if string.find(desctxt, "\n") then -- Makes the desc longer if a new line is present
-			bh = bh + TacRP.SS(6)
-			firstoff = firstoff + TacRP.SS(6)
-		end
-		
         surface.SetDrawColor(col_bg)
         TacRP.DrawCorneredBox(rx, ry, bw, bh, col_corner)
 
-		-- Att. Name
+        -- Att. Name
         surface.SetTextColor(col_text)
         surface.SetFont("TacRP_Myriad_Pro_10")
         surface.SetTextPos(rx + TacRP.SS(2), ry + TacRP.SS(1))
         surface.DrawText(atttxt)
 
-		-- Att. Description
+        -- Att. Description
         surface.SetFont("TacRP_Myriad_Pro_6")
-        surface.SetTextPos(rx + TacRP.SS(2), ry + TacRP.SS(1 + 8 + 2))
-        draw.DrawText(desctxt, "TacRP_Myriad_Pro_6", rx + TacRP.SS(2), ry + TacRP.SS(1 + 8 + 2), col_text, TEXT_ALIGN_LEFT)
-        -- surface.DrawText(desctxt) -- Old DrawText doesn't do new lines
-
-		-- Multiline that I couldn't get working
-		-- if !wep.MiscCache["att_desc"] then
-			-- wep.MiscCache["att_desc"] = TacRP.MultiLineText(desctxt, TacRP.SS(170), "TacRP_Myriad_Pro_6")
-		-- end
-
-		-- for i, k in ipairs(wep.MiscCache["att_desc"]) do
-			-- surface.SetTextPos(rx + TacRP.SS(2), ry + TacRP.SS(1 + 8 + 2 * i))
-			-- surface.DrawText(k)
-		-- end
+        for i, k in ipairs(self.DescCache) do
+            surface.SetTextPos(rx + TacRP.SS(2), ry + TacRP.SS(1 + 8 + 2 + 5 * (i - 1)))
+            surface.DrawText(k)
+        end
 
         local bump = firstoff
         local txjy = TacRP.SS(1)
@@ -254,10 +244,10 @@ function PANEL:PaintOver(w, h)
             statted = true
         end end
 
-        if statted then
-            surface.SetDrawColor(col_bg)
-            surface.DrawLine(rx, ry + gap, rx + bw, ry + gap)
-        end
+        -- if statted then
+        --     surface.SetDrawColor(col_bg)
+        --     surface.DrawLine(rx, ry + gap, rx + bw, ry + gap)
+        -- end
 
         local can, reason = TacRP.CanCustomize(wep:GetOwner(), wep, att, attslot)
         if !can then
