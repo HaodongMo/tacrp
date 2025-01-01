@@ -229,7 +229,9 @@ hook.Add("PopulateWeapons", "zzz_TacRP_SubCategories", function(pnlContent, tree
 
                     for _, ent in ipairs(subcatWeps) do
                         spawnmenu.CreateContentIcon("tacrp_weapon", self.PropPanel, {
-                            nicename = TacRP:GetPhrase("wep." .. ent.ClassName .. ".name.full") or ent.PrintName or ent.ClassName,
+                            nicename = TacRP:GetPhrase("wep." .. ent.ClassName .. ".name.full")
+                                    or TacRP:GetPhrase("wep." .. ent.ClassName .. ".name")
+                                    or ent.PrintName or ent.ClassName,
                             spawnname = ent.ClassName,
                             material = ent.IconOverride or "entities/" .. ent.ClassName .. ".png",
                             admin = ent.AdminOnly,
