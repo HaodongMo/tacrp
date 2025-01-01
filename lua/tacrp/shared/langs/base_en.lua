@@ -270,6 +270,8 @@ L["stat.blindfiresway"] = "Blindfire Sway"
 L["stat.zoom"] = "Aim Zoom"
 L["stat.bloomintensity"] = "Bloom Intensity"
 
+L["att.none"] = "N/A"
+
 L["att.procon.3proj"] = "Three projectiles"
 L["att.procon.moreproj"] = "More projectiles"
 L["att.procon.lessproj"] = "Fewer projectiles"
@@ -389,6 +391,8 @@ L["trivia.unknown"] = "Unknown"
 L["faction.coalition"] = "Coalition" -- "Counter-Terrorists"
 L["faction.militia"] = "Militia" -- "Terrorists"
 L["faction.neutral"] = "Non-Aligned" -- non-faction specific
+
+L["menu.legacy"] = "Legacy Menu"
 
 L["hint.swap"] = "Swap {weapon} for {weapon2}"
 L["hint.pickup"] = "Pick up {weapon}"

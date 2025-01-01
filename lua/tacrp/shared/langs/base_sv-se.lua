@@ -271,11 +271,7 @@ L["stat.blindfiresway"] = "Svängning (Blind Eld)"
 L["stat.zoom"] = "Siktezoom"
 L["stat.bloomintensity"] = "Blom Styrka"
 
-L["att.muzz_pistol_comp.name"] = "Kompensator"
-L["att.muzz_pistol_comp.desc"] = "Mynningsenhet som sänker rekylkicken."
-L["att.bolt_refurbished.name"] = "Renoverad"
-L["att.bolt_refurbished.name.full"] = "Renoverad Slutstycke"
-L["att.bolt_refurbished.desc"] = "Fixar vapnets pålitlighetsproblem med lite ändringar från förrådet."
+L["att.none"] = "Inget"
 
 L["att.procon.3proj"] = "Tre projektiler"
 L["att.procon.moreproj"] = "Fler projektiler"
@@ -396,6 +392,8 @@ L["trivia.unknown"] = "Okänd"
 L["faction.coalition"] = "Koalition" -- "Counter-Terrorists"
 L["faction.militia"] = "Milis" -- "Terrorists"
 L["faction.neutral"] = "Alliansfri" -- non-faction specific
+
+L["menu.legacy"] = "Gammaldags Meny"
 
 L["hint.swap"] = "Byt {weapon} mot {weapon2}"
 L["hint.pickup"] = "Plocka upp {weapon}"

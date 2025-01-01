@@ -224,6 +224,8 @@ L["stat.zoom"] = "瞄准变焦"
 L["stat.peekpenalty"] = "精准腰射精度"
 L["stat.bloomintensity"] = "散射强度"
 
+-- L["att.none"] = "N/A"
+
 L["att.procon.3proj"] = "三颗弹头"
 L["att.procon.moreproj"] = "更多弹头"
 L["att.procon.lessproj"] = "更少弹头"
@@ -342,6 +344,8 @@ L["trivia.unknown"] = "未知"
 L["faction.coalition"] = "联盟" -- "Counter-Terrorists"
 L["faction.militia"] = "民兵" -- "Terrorists"
 L["faction.neutral"] = "中立" -- non-faction specific
+
+-- L["menu.legacy"] = "Legacy Menu"
 
 L["hint.swap"] = "和 {weapon} 切换"
 L["hint.pickup"] = "捡起 {weapon}"

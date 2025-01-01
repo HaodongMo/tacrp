@@ -109,10 +109,10 @@ TacRP.LoadAtt(ATT, "perk_reload")
 ------------------------------
 ATT = {}
 
-ATT.PrintName = "Shock Trooper"
-ATT.FullName = "Shock Trooper"
+ATT.PrintName = "att.melee_boost_shock.name"
+ATT.FullName = "att.melee_boost_shock.name.full"
 ATT.Icon = Material("entities/tacrp_att_acc_shock.png", "mips smooth")
-ATT.Description = "Reduce impact of impairing effects while weapon is held."
+ATT.Description = "att.melee_boost_shock.desc"
 ATT.Pros = {"att.procon.gasimmune", "att.procon.flashresist", "att.procon.stunresist"}
 
 ATT.Category = {"perk", "perk_passive"}

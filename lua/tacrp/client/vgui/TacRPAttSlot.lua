@@ -45,7 +45,7 @@ function PANEL:PerformLayout(w, h)
 
     if empty then
         self.Icon:SetVisible(false)
-        self.Title:SetText("N/A")
+        self.Title:SetText(TacRP:GetPhrase("att.none") or "N/A")
     else
         self.Icon:SetVisible(true)
         self.Icon:SetMaterial(atttbl.Icon)
@@ -177,6 +177,8 @@ function PANEL:PaintOver(w, h)
         local statjump = TacRP.SS(12)
         local statted = false
 
+        local bw, bh = TacRP.SS(160), TacRP.SS(18)
+		
         local vertsize = firstoff + gap + TacRP.SS(4)
         if atttbl.Pros then vertsize = vertsize + statjump * #atttbl.Pros end
         if atttbl.Cons then vertsize = vertsize + statjump * #atttbl.Cons end
@@ -184,21 +186,39 @@ function PANEL:PaintOver(w, h)
         if self:GetY() + ry >= ScrH() - vertsize then
             ry = ry + (ScrH() - vertsize - (self:GetY() + ry))
         end
+		
+        atttxt = TacRP:GetAttName(att, true)
+        desctxt = TacRP:GetAttDesc(att)
 
-        local bw, bh = TacRP.SS(160), TacRP.SS(18)
+		if string.find(desctxt, "\n") then -- Makes the desc longer if a new line is present
+			bh = bh + TacRP.SS(6)
+			firstoff = firstoff + TacRP.SS(6)
+		end
+		
         surface.SetDrawColor(col_bg)
         TacRP.DrawCorneredBox(rx, ry, bw, bh, col_corner)
 
-        txt = TacRP:GetAttName(att, true)
+		-- Att. Name
         surface.SetTextColor(col_text)
         surface.SetFont("TacRP_Myriad_Pro_10")
         surface.SetTextPos(rx + TacRP.SS(2), ry + TacRP.SS(1))
-        surface.DrawText(txt)
+        surface.DrawText(atttxt)
 
-        txt = TacRP:GetAttDesc(att)
+		-- Att. Description
         surface.SetFont("TacRP_Myriad_Pro_6")
         surface.SetTextPos(rx + TacRP.SS(2), ry + TacRP.SS(1 + 8 + 2))
-        surface.DrawText(txt)
+        draw.DrawText(desctxt, "TacRP_Myriad_Pro_6", rx + TacRP.SS(2), ry + TacRP.SS(1 + 8 + 2), col_text, TEXT_ALIGN_LEFT)
+        -- surface.DrawText(desctxt) -- Old DrawText doesn't do new lines
+
+		-- Multiline that I couldn't get working
+		-- if !wep.MiscCache["att_desc"] then
+			-- wep.MiscCache["att_desc"] = TacRP.MultiLineText(desctxt, TacRP.SS(170), "TacRP_Myriad_Pro_6")
+		-- end
+
+		-- for i, k in ipairs(wep.MiscCache["att_desc"]) do
+			-- surface.SetTextPos(rx + TacRP.SS(2), ry + TacRP.SS(1 + 8 + 2 * i))
+			-- surface.DrawText(k)
+		-- end
 
         local bump = firstoff
         local txjy = TacRP.SS(1)
