@@ -169,7 +169,7 @@ L["wep." .. w .. ".trivia.caliber"] = ".380 ACP"
 L["wep." .. w .. ".credits"] = "Modell/Textur: Enron\nLjud: Vunsunta,  Erick F\nAnimationer: Tactical Intervention"
 
 w = ws .. "ex_mp9"
-L["wep." .. w .. ".name.full"] = "B&T MP9"
+L["wep." .. w .. ".name.full"] = "BT MP9"
 L["wep." .. w .. ".name"] = "MP9"
 L["wep." .. w .. ".desc"] = "Kompakt kulsprutepistol i polymer har hög stoppkraft i ett litet paket."
 L["wep." .. w .. ".desc.quote"] = "\"Är högra handen avtagbar?\""
@@ -401,7 +401,6 @@ L["wep." .. w .. ".trivia.caliber"] = "9 x 19 mm"
 L["wep." .. w .. ".credits"] = "Tillgångar: Tactical Intervention"
 
 w = ws .. "pdw"
-L["wep." .. w .. ".name.full"] = "Knight's Armament Company PDW"
 L["wep." .. w .. ".name"] = "KAC PDW"
 L["wep." .. w .. ".desc"] = "Karbinkaliber delkompakt PDW. Perfekt blandning av gevär och kulsprutepistol."
 L["wep." .. w .. ".trivia.manufacturer"] = "Knight's Armament"
@@ -731,64 +730,64 @@ L["att.ammo_shotgun_mag.name.full"] = "Magnum-Hagelskott"
 L["att.ammo_shotgun_mag.name"] = "Magnum"
 L["att.ammo_shotgun_mag.desc"] = "Högavkastande krut förbättrar skadans behållande förbi \"point blank\"."
 
-L["att.ammo_shotgun_slugs.name"] = "Slugg"
 L["att.ammo_shotgun_slugs.name.full"] = "Sluggpatroner"
+L["att.ammo_shotgun_slugs.name"] = "Slugg"
 L["att.ammo_shotgun_slugs.desc"] = "Skjuter en enda projektil för eld på medelräckvidd."
 
-L["att.ammo_shotgun_triple.name"] = "Trippelträff"
 L["att.ammo_shotgun_triple.name.full"] = "Trippelträff Patroner"
+L["att.ammo_shotgun_triple.name"] = "Trippelträff"
 L["att.ammo_shotgun_triple.desc"] = "Skjuter tre projektiler för ökad träffsäkerhet."
 
-L["att.ammo_subsonic.name"] = "Subsonisk"
 L["att.ammo_subsonic.name.full"] = "Subsoniska Patroner"
+L["att.ammo_subsonic.name"] = "Subsonisk"
 L["att.ammo_subsonic.desc"] = "Patroner med sänkt krutladdning."
 
-L["att.ammo_surplus.name"] = "Överskott"
 L["att.ammo_surplus.name.full"] = "Överskottspatroner"
+L["att.ammo_surplus.name"] = "Överskott"
 L["att.ammo_surplus.desc"] = "Opålitlig gammal ammunition, även om du lyckas hitta dem överallt."
 
-L["att.ammo_tmj.name"] = "TMJ"
 L["att.ammo_tmj.name.full"] = "\"Total Metal Jacket\"-Patroner"
+L["att.ammo_tmj.name"] = "TMJ"
 L["att.ammo_tmj.desc"] = "Patroner med förbättrad penetrationsförmåga."
 
-L["att.ammo_buckshot_roulette.name"] = "H. Roulett"
 L["att.ammo_buckshot_roulette.name.full"] = "Hagelskott Roulett"
+L["att.ammo_buckshot_roulette.name"] = "H. Roulett"
 L["att.ammo_buckshot_roulette.desc"] = "Patronerna går in i kammaren i en okänd ordning."
 
-L["att.ammo_shotgun_minishell.name"] = "Mini"
 L["att.ammo_shotgun_minishell.name.full"] = "Miniskott"
+L["att.ammo_shotgun_minishell.name"] = "Mini"
 L["att.ammo_shotgun_minishell.desc"] = "Korta patroner ökar kapaciteten men träffar inte lika hårt."
 
-L["att.ammo_shotgun_dragon.name"] = "\"Dragon\""
 L["att.ammo_shotgun_dragon.name.full"] = "\"Dragon's Breath\""
+L["att.ammo_shotgun_dragon.name"] = "\"Dragon\""
 L["att.ammo_shotgun_dragon.desc"] = "Magnesiumskott tänder fyr på måltavlor, men har dålig räckvidd och skada."
 
-L["att.ammo_shotgun_frag.name"] = "Splitter"
 L["att.ammo_shotgun_frag.name.full"] = "H.E.-Splittergranatskott"
+L["att.ammo_shotgun_frag.name"] = "Splitter"
 L["att.ammo_shotgun_frag.desc"] = "Explosiva sluggskott gör områdesskada, men förvänta inte för mycket av dem."
 
-L["att.ammo_shotgun_breach.name"] = "Bryt (T)"
 L["att.ammo_shotgun_breach.name.full"] = "Dörrbrytande Skott (Toppladdad)"
+L["att.ammo_shotgun_breach.name"] = "Bryt (T)"
 L["att.ammo_shotgun_breach.desc"] = "Ladda första skottet med en speciell dörrbrytande sluggpatron."
 
-L["att.ammo_stinger_saam.name"] = "Halvt"
 L["att.ammo_stinger_saam.name.full"] = "FIM-92 Stinger Halvt Aktiv Robot"
+L["att.ammo_stinger_saam.name"] = "Halvt"
 L["att.ammo_stinger_saam.desc"] = "Kraftfull robot får lås snabbt men kräver konstant guidning."
 
-L["att.ammo_stinger_qaam.name"] = "Rörlig"
 L["att.ammo_stinger_qaam.name.full"] = "FIM-92 Stinger Hög Rörlighetsrobot"
+L["att.ammo_stinger_qaam.name"] = "Rörlig"
 L["att.ammo_stinger_qaam.desc"] = "Robot med hög rörlighet med kort räckvidd och lång låstid."
 
-L["att.ammo_stinger_4aam.name"] = "4x"
 L["att.ammo_stinger_4aam.name.full"] = "FIM-92 Stinger Quad-Robotar"
+L["att.ammo_stinger_4aam.name"] = "4x"
 L["att.ammo_stinger_4aam.desc"] = "Guidade klusterrobotar orsakar maximalt tryck mot fientliga piloter."
 
-L["att.ammo_stinger_apers.name"] = "Killer Bee"
 L["att.ammo_stinger_apers.name.full"] = "FIM-92 Stinger Antipersonellrobotar"
+L["att.ammo_stinger_apers.name"] = "Killer Bee"
 L["att.ammo_stinger_apers.desc"] = "Mot gnagare med oacceptabel rörlighet."
 
-L["att.ammo_usp_9mm.name"] = "9×19mm"
 L["att.ammo_usp_9mm.name.full"] = "HK USP 9×19mm Konvertering"
+L["att.ammo_usp_9mm.name"] = "9×19mm"
 L["att.ammo_usp_9mm.desc"] = "Skjut en lägre kaliber patron med högre kapacitet och eldhastighet."
 
 -- Attachments (bolt_trigger)
@@ -924,7 +923,7 @@ L["att.muzz_silencer.name"] = "T. Ljuddämp."
 L["att.muzz_silencer.desc"] = "Balanserad ljuddämpare som sänker rekylen och effektiva räckvidden."
 
 L["att.muzz_supp_weighted.name.full"] = "Tung Ljuddämpare"
-L["att.muzz_supp_weighted.name"] = "Tung Ljuddämp."
+L["att.muzz_supp_weighted.name"] = "Tung Ljudd."
 L["att.muzz_supp_weighted.desc"] = "Tung ljuddämpare med överlägsen ballistik men värre hantering."
 
 L["att.muzz_brake_aggressor.name.full"] = "Angripare Mynningsbroms"
@@ -1005,7 +1004,7 @@ L["att.tac_magnifier.name"] = "Variabel Zoom Sikte (2x)"
 L["att.tac_magnifier.name"] = "2x Zoom"
 L["att.tac_magnifier.desc"] = "Ger alla sikten tillgång till en 2x zoom-nivå och tillåter dem att zooma in och ut."
 
-L["att.tac_bullet.name"] = "Akut Patron"
+L["att.tac_bullet.name.full"] = "Akut Patron"
 L["att.tac_bullet.name"] = "Akut Patron"
 L["att.tac_bullet.desc"] = "Tryck på taktiska knappen för att snabbat ladda en patron i akuta fall."
 

@@ -188,7 +188,7 @@ L["wep." .. w .. ".trivia.caliber"] = ".380 ACP"
 L["wep." .. w .. ".credits"] = "Model/Texture: Enron\nSound: Vunsunta,  Erick F\nAnimations: Tactical Intervention"
 
 w = ws .. "ex_mp9"
-L["wep." .. w .. ".name.full"] = "B&T MP9"
+L["wep." .. w .. ".name.full"] = "BT MP9"
 L["wep." .. w .. ".name"] = "MP9"
 L["wep." .. w .. ".desc"] = "Compact polymer submachine gun packing lots of firepower in a small package."
 L["wep." .. w .. ".desc.quote"] = "\"Your right hand comes off?\""
@@ -420,7 +420,6 @@ L["wep." .. w .. ".trivia.caliber"] = "9×19mm"
 L["wep." .. w .. ".credits"] = "Assets: Tactical Intervention"
 
 w = ws .. "pdw"
-L["wep." .. w .. ".name.full"] = "Knight's Armament Company PDW"
 L["wep." .. w .. ".name"] = "KAC PDW"
 L["wep." .. w .. ".desc"] = "Carbine caliber subcompact PDW. The perfect blend of rifle and submachine gun."
 L["wep." .. w .. ".trivia.manufacturer"] = "Knight's Armament"
@@ -749,64 +748,64 @@ L["att.ammo_shotgun_mag.name.full"] = "Magnum Buckshot"
 L["att.ammo_shotgun_mag.name"] = "Magnum"
 L["att.ammo_shotgun_mag.desc"] = "High yield powder improves damage retention past point blank."
 
-L["att.ammo_shotgun_slugs.name"] = "Slugs"
 L["att.ammo_shotgun_slugs.name.full"] = "Slug Shells"
+L["att.ammo_shotgun_slugs.name"] = "Slugs"
 L["att.ammo_shotgun_slugs.desc"] = "Fire a single projectile for medium range shooting."
 
-L["att.ammo_shotgun_triple.name"] = "Triple Hit"
 L["att.ammo_shotgun_triple.name.full"] = "Triple Hit Shells"
+L["att.ammo_shotgun_triple.name"] = "Triple Hit"
 L["att.ammo_shotgun_triple.desc"] = "Fire three projectiles for more accuracy."
 
-L["att.ammo_subsonic.name"] = "Subsonic"
 L["att.ammo_subsonic.name.full"] = "Subsonic Rounds"
+L["att.ammo_subsonic.name"] = "Subsonic"
 L["att.ammo_subsonic.desc"] = "Bullets with reduced powder load."
 
-L["att.ammo_surplus.name"] = "Surplus"
 L["att.ammo_surplus.name.full"] = "Surplus Rounds"
+L["att.ammo_surplus.name"] = "Surplus"
 L["att.ammo_surplus.desc"] = "Unreliable old ammo, yet you keep finding them everywhere."
 
-L["att.ammo_tmj.name"] = "TMJ"
 L["att.ammo_tmj.name.full"] = "Total Metal Jacket Rounds"
+L["att.ammo_tmj.name"] = "TMJ"
 L["att.ammo_tmj.desc"] = "Bullets with improved penetration capability."
 
-L["att.ammo_buckshot_roulette.name"] = "B. Roulette"
 L["att.ammo_buckshot_roulette.name.full"] = "Buckshot Roulette"
+L["att.ammo_buckshot_roulette.name"] = "B. Roulette"
 L["att.ammo_buckshot_roulette.desc"] = "The shells enter the chamber in an unknown order."
 
-L["att.ammo_shotgun_minishell.name"] = "Minis"
 L["att.ammo_shotgun_minishell.name.full"] = "Minishells"
+L["att.ammo_shotgun_minishell.name"] = "Minis"
 L["att.ammo_shotgun_minishell.desc"] = "Short shells increase ammo capacity but don't hit as hard."
 
-L["att.ammo_shotgun_dragon.name"] = "Dragon"
 L["att.ammo_shotgun_dragon.name.full"] = "Dragon's Breath"
+L["att.ammo_shotgun_dragon.name"] = "Dragon"
 L["att.ammo_shotgun_dragon.desc"] = "Magnesium pellets set targets on fire, but have poor range and damage."
 
-L["att.ammo_shotgun_frag.name"] = "Frag"
 L["att.ammo_shotgun_frag.name.full"] = "High-Explosive Fragmentation Shells"
+L["att.ammo_shotgun_frag.name"] = "Frag"
 L["att.ammo_shotgun_frag.desc"] = "Explosive slugs deal area damage, but don't expect too much from them."
 
-L["att.ammo_shotgun_breach.name"] = "Breach (T)"
 L["att.ammo_shotgun_breach.name.full"] = "Breaching Shells (Top-Loaded)"
+L["att.ammo_shotgun_breach.name"] = "Breach (T)"
 L["att.ammo_shotgun_breach.desc"] = "Load the first round with a specialized breaching slug."
 
-L["att.ammo_stinger_saam.name"] = "Semi-Active"
 L["att.ammo_stinger_saam.name.full"] = "FIM-92 Stinger Semi-Active Missile"
+L["att.ammo_stinger_saam.name"] = "Semi-Active"
 L["att.ammo_stinger_saam.desc"] = "Powerful missiles that lock rapidly but require constant guidance."
 
-L["att.ammo_stinger_qaam.name"] = "Agile"
 L["att.ammo_stinger_qaam.name.full"] = "FIM-92 Stinger High Agility Missile"
+L["att.ammo_stinger_qaam.name"] = "Agile"
 L["att.ammo_stinger_qaam.desc"] = "Highly maneuverable missile with a short range and long lock time."
 
-L["att.ammo_stinger_4aam.name"] = "4x"
 L["att.ammo_stinger_4aam.name.full"] = "FIM-92 Stinger Quad Missiles"
+L["att.ammo_stinger_4aam.name"] = "4x"
 L["att.ammo_stinger_4aam.desc"] = "Guided cluster missiles maximize pressure to enemy pilots."
 
-L["att.ammo_stinger_apers.name"] = "Killer Bee"
 L["att.ammo_stinger_apers.name.full"] = "FIM-92 Stinger Anti-Personnel Missiles"
+L["att.ammo_stinger_apers.name"] = "Killer Bee"
 L["att.ammo_stinger_apers.desc"] = "For rodents of unacceptable agility."
 
-L["att.ammo_usp_9mm.name"] = "9×19mm"
 L["att.ammo_usp_9mm.name.full"] = "HK USP 9×19mm Conversion"
+L["att.ammo_usp_9mm.name"] = "9×19mm"
 L["att.ammo_usp_9mm.desc"] = "Fire a smaller caliber round with higher capacity and firerate."
 
 -- Attachments (bolt_trigger)
@@ -1023,7 +1022,7 @@ L["att.tac_magnifier.name"] = "Variable Zoom Optic (2x)"
 L["att.tac_magnifier.name"] = "2x Zoom"
 L["att.tac_magnifier.desc"] = "Allows all optics to access a 2x zoom level, allowing them to zoom in or out."
 
-L["att.tac_bullet.name"] = "Emergency Bullet"
+L["att.tac_bullet.name.full"] = "Emergency Bullet"
 L["att.tac_bullet.name"] = "Emrg. Bullet"
 L["att.tac_bullet.desc"] = "Press the tactical key to quickly load a single bullet for emergencies."
 
