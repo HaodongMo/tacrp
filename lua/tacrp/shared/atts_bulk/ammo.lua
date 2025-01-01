@@ -353,8 +353,8 @@ ATT.PrintName = "Ratshot"
 ATT.FullName = "Ratshot Rounds"
 ATT.Icon = Material("entities/tacrp_att_ammo_amr_ratshot.png", "mips smooth")
 ATT.Description = "For rodents of unusual size."
-ATT.Pros = {"att.procon.moreproj", "spacer.maneuvering"}
-ATT.Cons = {"stat.damage", "stat.spread"}
+ATT.Pros = {"att.procon.moreproj", "rating.maneuvering"}
+ATT.Cons = {"stat.damage", "stat.range", "stat.spread"}
 
 ATT.Category = {"ammo_amr"}
 
@@ -363,26 +363,19 @@ ATT.SortOrder = 5
 ATT.Mult_MuzzleVelocity = 0.75
 
 ATT.Override_Num = 16
-ATT.Override_Damage_Max = 6
-ATT.Override_Damage_Min = 4
+ATT.Override_Damage_Max = 7
+ATT.Override_Damage_Min = 1
 ATT.Override_Penetration = 1
 
-ATT.Mult_HipFireSpreadPenalty = 0.5
-ATT.Mult_MidAirSpreadPenalty = 0.5
+ATT.Mult_Range_Min = 0.2
+ATT.Mult_Range_Max = 0.2
 
-ATT.Add_Spread = 0.01
-ATT.Add_ShotgunPelletSpread = 0.02
+ATT.Mult_HipFireSpreadPenalty = 0.25
+ATT.Mult_MidAirSpreadPenalty = 0
+ATT.Mult_MovingSpreadPenalty = 0
 
-ATT.Override_BodyDamageMultipliers = {
-    [HITGROUP_HEAD] = 2,
-    [HITGROUP_CHEST] = 1,
-    [HITGROUP_STOMACH] = 1,
-    [HITGROUP_LEFTARM] = 1,
-    [HITGROUP_RIGHTARM] = 1,
-    [HITGROUP_LEFTLEG] = 0.75,
-    [HITGROUP_RIGHTLEG] = 0.75,
-    [HITGROUP_GEAR] = 0.75
-}
+ATT.Add_Spread = 0.02
+ATT.Add_ShotgunPelletSpread = 0.03
 
 if engine.ActiveGamemode() == "terrortown" then
     ATT.Free = true
