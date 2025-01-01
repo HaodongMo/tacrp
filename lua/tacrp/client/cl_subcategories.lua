@@ -210,7 +210,7 @@ hook.Add("PopulateWeapons", "zzz_TacRP_SubCategories", function(pnlContent, tree
                     -- Create the subcategory header, if more than one exists for this category
                     if table.Count(catSubcats) > 1 then
                         local label = vgui.Create("ContentHeader", container)
-                        label:SetText(string.sub(subcatName, 2))
+                        label:SetText(string.sub(TacRP:TryTranslate(subcatName), 2))
                         self.PropPanel:Add(label)
                     end
 
@@ -229,7 +229,7 @@ hook.Add("PopulateWeapons", "zzz_TacRP_SubCategories", function(pnlContent, tree
 
                     for _, ent in ipairs(subcatWeps) do
                         spawnmenu.CreateContentIcon("tacrp_weapon", self.PropPanel, {
-                            nicename = ent.PrintName or ent.ClassName,
+                            nicename = TacRP:GetPhrase("wep." .. ent.ClassName .. ".name.full") or ent.PrintName or ent.ClassName,
                             spawnname = ent.ClassName,
                             material = ent.IconOverride or "entities/" .. ent.ClassName .. ".png",
                             admin = ent.AdminOnly,
