@@ -360,15 +360,15 @@ ATT.Category = {"ammo_amr"}
 
 ATT.SortOrder = 5
 
-ATT.Mult_MuzzleVelocity = 0.75
+ATT.Override_MuzzleVelocity = 9000
 
 ATT.Override_Num = 16
 ATT.Override_Damage_Max = 7
 ATT.Override_Damage_Min = 1
 ATT.Override_Penetration = 1
 
-ATT.Mult_Range_Min = 0.2
-ATT.Mult_Range_Max = 0.2
+ATT.Mult_Range_Min = 0.3
+ATT.Mult_Range_Max = 0.3
 
 ATT.Mult_HipFireSpreadPenalty = 0.25
 ATT.Mult_MidAirSpreadPenalty = 0
