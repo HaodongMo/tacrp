@@ -496,6 +496,17 @@ L["caliber.38special"] = ".38 Special"
 L["caliber.338"] = ".338 Lapua Magnum"
 L["caliber.9x39"] = "9x39mm"
 
+L["caliber.44p"] = ".44 Percussion"
+L["caliber.300blk"] = ".300 Blackout"
+L["caliber.9x18"] = "9×18mm"
+L["caliber.4570"] = ".45-70 Govt."
+L["caliber.9x21"] = "9x21mm IMI"
+L["caliber.762x54"] = "7.62×54mmR"
+L["caliber.762x25"] = "7.62×25mm Tokarev"
+L["caliber.300winmag"] = ".300 Win Mag"
+
+L["unknown"] = "Unknown"
+
 
 -- STL phrases are not needed for other languages. you can remove these when localizing
 STL = {}
@@ -571,3 +582,14 @@ STL["caliber.22lr"] = ".22 LR"
 STL["caliber.38special"] = ".38 Special"
 STL["caliber.338"] = ".338 Lapua Magnum"
 STL["caliber.9x39"] = "9x39mm"
+
+STL["caliber.44p"] = ".44 Percussion"
+STL["caliber.300blk"] = ".300 Blackout"
+STL["caliber.9x18"] = "9x18mm"
+STL["caliber.4570"] = ".45-70 Govt."
+STL["caliber.9x21"] = "9x21mm IMI"
+STL["caliber.762x54"] = "7.62x54mmR"
+STL["caliber.762x25"] = "7.62x25mm Tokarev"
+STL["caliber.300winmag"] = ".300 Win Mag"
+
+STL["unknown"] = "Unknown"
