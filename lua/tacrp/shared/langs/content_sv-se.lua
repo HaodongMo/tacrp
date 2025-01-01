@@ -791,6 +791,254 @@ L["att.ammo_usp_9mm.name"] = "9×19mm"
 L["att.ammo_usp_9mm.name.full"] = "H&K USP 9×19mm Konvertering"
 L["att.ammo_usp_9mm.desc"] = "Skjut en lägre kaliber patron med högre kapacitet och eldhastighet."
 
+-- Attachments (bolt_trigger)
+L["att.bolt_fine.name.full"] = "Raffinerat Slutstycke"
+L["att.bolt_fine.name"] = "Raffinerad"
+L["att.bolt_fine.desc"] = "Delikat slutstycke gjord för kort salvoeld."
+
+L["att.bolt_greased.name.full"] = "Smord Slutstycke"
+L["att.bolt_greased.name"] = "Smord"
+L["att.bolt_greased.desc"] = "Snabbare cykelhastighet men sämre hantering."
+
+L["att.bolt_heavy.name.full"] = "Tungt Slutstycke"
+L["att.bolt_heavy.name"] = "Tungt"
+L["att.bolt_heavy.desc"] = "Sänkt rekyl med kostnad på eldhastighet."
+
+L["att.bolt_light.name.full"] = "Lätt Slutstycke"
+L["att.bolt_light.name"] = "Lätt"
+L["att.bolt_light.desc"] = "Ökad eldhastighet med kostnad på rekyl."
+
+L["att.bolt_rough.name.full"] = "Tufft Slutstycke"
+L["att.bolt_rough.name"] = "Tuff"
+L["att.bolt_rough.desc"] = "Hållbart slutstycke gjord för lång salvoeld."
+
+L["att.bolt_surplus.name.full"] = "Överskott Slutstycke"
+L["att.bolt_surplus.name"] = "Överskott"
+L["att.bolt_surplus.desc"] = "Rost har käkat det mesta av den, men den fungerar fortfarande."
+
+L["att.bolt_tactical.name.full"] = "Taktiskt Slutstycke"
+L["att.bolt_tactical.name"] = "Taktisk"
+L["att.bolt_tactical.desc"] = "Tungt slutstycke byter cykelhastighet mot utmärkt vapenkontroll."
+
+L["att.bolt_refurbished.name.full"] = "Renoverat Slutstycke"
+L["att.bolt_refurbished.name"] = "Renoverad"
+L["att.bolt_refurbished.desc"] = "Fixar vapnets pålitlighetsproblem med lite ändringar från förrådet."
+
+L["att.trigger_akimbo.name.full"] = "Akimbo-Avtryckare"
+L["att.trigger_akimbo.name"] = "Akimbo"
+L["att.trigger_akimbo.desc"] = "Släpp loss!"
+
+L["att.trigger_burst.name.full"] = "Salvoeld Avtryckare"
+L["att.trigger_burst.name"] = "Salvoeld"
+L["att.trigger_burst.desc"] = "Avtryckare som offrar automateld mot stabilitet."
+
+L["att.trigger_burst2.desc"] = "Avtryckare som emulerar salvoeld."
+
+L["att.trigger_burstauto.name.full"] = "Auto-Salvoeld Avtryckare"
+L["att.trigger_burstauto.name"] = "Auto-Salvoeld"
+L["att.trigger_burstauto.desc"] = "Avtryckare som tillåter fortsatt salvoeld när den hålls inne."
+
+L["att.trigger_comp.name.full"] = "Tävlingsavtryckare"
+L["att.trigger_comp.name"] = "Tävling"
+L["att.trigger_comp.desc"] = "Lätt avtryckare för sportskytte."
+
+L["att.trigger_comp2.desc"] = "Lätt avtryckare som återhämtar sig från träffsäkerhet snabbare."
+
+L["att.trigger_frcd.name.full"] = "Tvungen Återställning Avtryckare"
+L["att.trigger_frcd.name"] = "T. Återställ."
+L["att.trigger_frcd.desc"] = "Avtryckare som emulerar automateld men med dålig prestanda."
+
+L["att.trigger_hair.name.full"] = "Fjäder Avtryckare"
+L["att.trigger_hair.name"] = "Fjäder"
+L["att.trigger_hair.desc"] = "Väldigt känslig avtryckare för snabb halvautomatisk eld."
+
+L["att.trigger_hair_akimbo.desc"] = "Väldigt känslig avtryckare för snabb akimbo-eld."
+
+L["att.trigger_heavy.name.full"] = "Tungt Avtryckare"
+L["att.trigger_heavy.name"] = "Tung"
+L["att.trigger_heavy.desc"] = "Tung avtryckare för kontinuerlig eld."
+
+L["att.trigger_heavy2.desc"] = "Tung avtryckare som sänker rörlighet straffet under eld."
+
+L["att.trigger_semi.name.full"] = "Krypskytte Avtryckare"
+L["att.trigger_semi.name"] = "Krypskytte"
+L["att.trigger_semi.desc"] = "Avtryckare som offrar automateld mot precision."
+
+L["att.trigger_slam.name.full"] = "\"Slamfire\"-Avtryckare"
+L["att.trigger_slam.name"] = "\"Slamfire\""
+
+L["att.trigger_straight.name.full"] = "Rak Avtryckare"
+L["att.trigger_straight.name"] = "Rak"
+L["att.trigger_straight.desc"] = "Smal avtryckare med överlägsen rekylprestanda."
+
+L["att.trigger_wide.name.full"] = "Akimbo-Avtryckare"
+L["att.trigger_wide.name"] = "Akimbo"
+L["att.trigger_wide.desc"] = "Större varbygel, lätt att hålla i besvärliga positioner."
+
+L["att.trigger_dualstage.name.full"] = "\"Dual Stage\"-Avtryckare"
+L["att.trigger_dualstage.name"] = "D. Stage"
+L["att.trigger_dualstage.desc"] = "Avtryckare som sänker eldhastighet i siktet för bättre kontroll och träffsäkerhet."
+
+-- Attachments (melee_boost)
+L["att.melee_boost_all.name"] = "Ökad Nivå"
+L["att.melee_boost_all.desc"] = "Liten boost till alla attributer."
+
+L["att.melee_boost_str.name"] = "Bulka Upp"
+L["att.melee_boost_str.desc"] = "Öka Styrkan drastiskt med kostnad på andra attributer."
+
+L["att.melee_boost_agi.name"] = "Kom Ikapp"
+L["att.melee_boost_agi.desc"] = "Öka Smidigheten drastiskt med kostnad på andra attributer."
+
+L["att.melee_boost_int.name"] = "Tänk På"
+L["att.melee_boost_int.desc"] = "Öka Strategin drastiskt med kostnad på andra attributer."
+
+L["att.melee_boost_lifesteal.name"] = "Livstjuv"
+L["att.melee_boost_lifesteal.desc"] = "Få tillbaka livspoäng genom att göra skada."
+
+L["att.melee_boost_momentum.name"] = "Momentum"
+L["att.melee_boost_momentum.desc"] = "Få tillbaka färdighetsladdning genom att göra skada."
+
+L["att.melee_boost_afterimage.name"] = "Efterbild"
+L["att.melee_boost_afterimage.desc"] = "Sväng ditt vapen snabbt och landa omedelbart attacker."
+
+L["att.melee_boost_shock.name.full"] = "Chocktrupp"
+L["att.melee_boost_shock.name"] = "Chocktrupp"
+L["att.melee_boost_shock.desc"] = "Sänker påverkan av nedsatta effekter när vapnet hålls."
+
+-- Attachments (muzz)
+L["att.muzz_hbar.name"] = "Tung Pipa"
+L["att.muzz_hbar.desc"] = "Stadig pipa som förbättrar svängning och rekylprestanda."
+
+L["att.muzz_lbar.name"] = "Lätt Pipa"
+L["att.muzz_lbar.desc"] = "Lätt pipa som är mer träffsäker och effektiv vid längre distanser."
+
+L["att.muzz_pistol_comp.name"] = "Kompensator"
+L["att.muzz_pistol_comp.desc"] = "Mynningsenhet som sänker rekylträffen."
+
+L["att.muzz_supp_compact.name.full"] = "Kompakt Ljuddämpare"
+L["att.muzz_supp_compact.name"] = "K. Ljuddämp."
+L["att.muzz_supp_compact.desc"] = "Kort ljuddämpare förbättrar träffsäkerheten med låg påverkan på effektiv räckvidd."
+
+L["att.muzz_silencer.name.full"] = "Taktisk Ljuddämpare"
+L["att.muzz_silencer.name"] = "T. Ljuddämp."
+L["att.muzz_silencer.desc"] = "Balanserad ljuddämpare som sänker rekylen och effektiva räckvidden."
+
+L["att.muzz_supp_weighted.name.full"] = "Tung Ljuddämpare"
+L["att.muzz_supp_weighted.name"] = "Tung Ljuddämp."
+L["att.muzz_supp_weighted.desc"] = "Tung ljuddämpare med överlägsen ballistik men värre hantering."
+
+L["att.muzz_brake_aggressor.name.full"] = "Angripare Mynningsbroms"
+L["att.muzz_brake_aggressor.name"] = "A. Broms"
+L["att.muzz_brake_aggressor.desc"] = "Mynningsbroms designad att omdirigera gaser bort från skytten."
+
+L["att.muzz_brake_breaching.name.full"] = "Brytande Mynningsbroms"
+L["att.muzz_brake_breaching.name"] = "B. Broms"
+L["att.muzz_brake_breaching.desc"] = "Spikad mynningsbroms designad för närstrid."
+
+L["att.muzz_brake_concussive.name.full"] = "Hjärnskakning Mynningsbroms"
+L["att.muzz_brake_concussive.name"] = "H. Broms"
+L["att.muzz_brake_concussive.desc"] = "Ondskefullt högljudd, obekväm mynningsbroms för extrem rekylkontroll."
+
+-- Attachments (optic_tac)
+L["att.optic_8x.name.full"] = "Teleskopiskt Sikte"
+L["att.optic_8x.name"] = "Teleskopisk"
+L["att.optic_8x.desc"] = "Kikarsikte för långa avstånd."
+
+L["att.optic_acog.name.full"] = "ACOG-Sikte"
+L["att.optic_acog.name"] = "ACOG"
+L["att.optic_acog.desc"] = "Stridssikte för måttliga avstånd."
+
+L["att.optic_elcan.name.full"] = "ELCAN-Sikte"
+L["att.optic_elcan.name"] = "ELCAN"
+L["att.optic_elcan.desc"] = "Stridssikte med låg kraft."
+
+L["att.optic_holographic.name.full"] = "Holografiskt Sikte"
+L["att.optic_holographic.name"] = "Holografisk"
+L["att.optic_holographic.desc"] = "Boxigt sikte för att hjälpa målförvärv på nära distans."
+
+L["att.optic_irons.name"] = "Järn & Korn"
+L["att.optic_irons.desc"] = "Simpla sikten för tillagd rörlighet."
+
+L["att.optic_irons_sniper.desc"] = "Ersätt standard siktet för snabbare målförvärv och rörlighet."
+
+L["att.optic_okp7.name"] = "OKP-7"
+L["att.optic_okp7.desc"] = "Reflexsikte i låg profil med minimal zoom-räckvidd."
+
+L["att.optic_rds2.name.full"] = "Rödpunktsikte"
+L["att.optic_rds2.name"] = "Rödpunkt"
+L["att.optic_rds2.desc"] = "Öppet reflexsikte med en klar vy."
+
+L["att.optic_rds.name"] = "Aimpoint"
+L["att.optic_rds.desc"] = "Rörsikte för att hjälpa med målförvärv på nära distans."
+
+L["att.optic_rmr.name"] = "RMR"
+L["att.optic_rmr.desc"] = "Sikte i låg profil till pistoler."
+
+L["att.optic_rmr_rifle.desc"] = "Sikte i låg profil."
+
+L["att.optic_shortdot.name"] = "\"Short Dot\""
+L["att.optic_shortdot.desc"] = "Kompakt sikte med måttlig magnifiering."
+
+L["att.tac_cornershot.name"] = "Corner-Cam"
+L["att.tac_cornershot.desc"] = "Visar siktpunkten under blindeld."
+
+L["att.tac_dmic.name"] = "Radar"
+L["att.tac_dmic.desc"] = "Upptäcker positionen av nära måltavlor, men skapar ljud."
+
+L["att.tac_flashlight.name"] = "Ficklampa"
+L["att.tac_flashlight.desc"] = "Avger en stark ljusstråle som bländer dem som tittar in i den."
+
+L["att.tac_laser.name"] = "Laser"
+L["att.tac_laser.desc"] = "Avger en smal röd stråle och punkt som visar vart vapnet pekar."
+
+L["att.tac_combo.name.full"] = "Laser-Lampa Kombo"
+L["att.tac_combo.name"] = "Kombo"
+L["att.tac_combo.desc"] = "Avger en grön stråle och ficklampa. Ljuset är för svart för att blända andra."
+
+L["att.tac_rangefinder.name"] = "Avståndsmätare"
+L["att.tac_rangefinder.desc"] = "Mäter vapnets ballistik prestanda."
+
+L["att.tac_spreadgauge.name"] = "Spridningsmätare"
+L["att.tac_spreadgauge.desc"] = "Mäter vapnets stabilitet från svängning och blom."
+
+L["att.tac_magnifier.name"] = "Variabel Zoom Sikte (2x)"
+L["att.tac_magnifier.name"] = "2x Zoom"
+L["att.tac_magnifier.desc"] = "Ger alla sikten tillgång till en 2x zoom-nivå och tillåter dem att zooma in och ut."
+
+L["att.tac_bullet.name"] = "Akut Patron"
+L["att.tac_bullet.name"] = "Akut Patron"
+L["att.tac_bullet.desc"] = "Tryck på taktiska knappen för att snabbat ladda en patron i akuta fall."
+
+L["att.tac_thermal.name.full"] = "ZUMQFY Thermal Imaging Device"
+L["att.tac_thermal.name"] = "Thermal-Cam"
+L["att.tac_thermal.desc"] = "Visar ett värmeseende överlägg som bländer med huvudvyn när du kikar."
+
+-- Attachments (perk)
+L["att.perk_aim.name"] = "Dödsvy"
+L["att.perk_aim.desc"] = "Zoomar in din vy och gör det lättare att skjuta i siktet."
+
+L["att.perk_blindfire.name.full"] = "Punktskytte"
+L["att.perk_blindfire.name"] = "Punktskytte"
+L["att.perk_blindfire.desc"] = "Förbättar blindeld och eld under kikande."
+
+L["att.perk_hipfire.name"] = "Rambo"
+L["att.perk_hipfire.desc"] = "Förbättrar vapnets träffsäkerhet ur siktet."
+
+L["att.perk_melee.name"] = "Nedslag"
+L["att.perk_melee.desc"] = "Förbättrar närstridsskafan och saktar ner slagna måltavlor."
+
+L["att.perk_reload.name"] = "Snabbladdning"
+L["att.perk_reload.desc"] = "Förbättrar omladdnings hastigheten."
+
+L["att.perk_speed.name"] = "Rörlighet"
+L["att.perk_speed.desc"] = "Förbättrar vapnets rödlighet, speciellt under omladdning."
+
+L["att.perk_throw.name"] = "Grenadjär"
+L["att.perk_throw.desc"] = "Förbättrar snabbkast och lägger till alternativet att kasta stenar."
+
+L["att.perk_mlg.name"] = "Stilfull"
+L["att.perk_mlg.desc"] = "Förbättrar \"quickscoping\" och träffsäkerheten under rörelse och i luften."
+
 ///////////////////// -- [[ InterOps Weapons ]] --
 -- Weapons
 w = ws .. "REPLACEME"

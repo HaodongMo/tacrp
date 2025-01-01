@@ -216,10 +216,10 @@ TacRP.LoadAtt(ATT, "bolt_tactical")
 ------------------------------
 ATT = {}
 
-ATT.PrintName = "att.bolt_refurbished.name"
-ATT.FullName = "att.bolt_refurbished.name.full"
+ATT.PrintName = "Refurbished"
+ATT.FullName = "Refurbished Bolt"
 ATT.Icon = Material("entities/tacrp_att_bolt_refurbished.png", "mips smooth")
-ATT.Description = "att.bolt_refurbished.desc"
+ATT.Description = "Fix the gun's reliability problems with some armory tweaks."
 ATT.Pros = {"att.procon.reliability"}
 ATT.Cons = {"stat.rpm", "stat.spread"}
 
@@ -301,8 +301,8 @@ TacRP.LoadAtt(ATT, "trigger_burst")
 ------------------------------
 ATT = {}
 
-ATT.PrintName = "Burst"
-ATT.FullName = "Burst Trigger"
+ATT.PrintName = "att.trigger_burst.name"
+ATT.FullName = "att.trigger_burst.name.full"
 ATT.Icon = Material("entities/tacrp_att_trigger_burst.png", "mips smooth")
 ATT.Description = "Trigger that emulates burst fire."
 ATT.Pros = {"att.procon.burst"}
@@ -376,8 +376,8 @@ TacRP.LoadAtt(ATT, "trigger_comp")
 ------------------------------
 ATT = {}
 
-ATT.PrintName = "Competition"
-ATT.FullName = "Competition Trigger"
+ATT.PrintName = "att.trigger_comp.name"
+ATT.FullName = "att.trigger_comp.name.full"
 ATT.Icon = Material("entities/tacrp_att_trigger_comp.png", "mips smooth")
 ATT.Description = "Lightweight trigger that recovers from accuracy faster."
 ATT.Pros = {"stat.recoildissipation", "stat.recoilstability"}
@@ -426,10 +426,10 @@ TacRP.LoadAtt(ATT, "trigger_frcd")
 ------------------------------
 ATT = {}
 
-ATT.PrintName = "Forced Reset"
-ATT.FullName = "Forced Reset Trigger"
+ATT.PrintName = "att.trigger_frcd.name"
+ATT.FullName = "att.trigger_frcd.name.full"
 ATT.Icon = Material("entities/tacrp_att_trigger_frcd.png", "mips smooth")
-ATT.Description = "Trigger that emulates automatic fire but with poor performance."
+ATT.Description = "att.trigger_frcd.desc"
 ATT.Pros = {"att.procon.auto"}
 ATT.Cons = {"stat.recoilkick", "stat.bloomintensity", "stat.recoilstability"}
 
@@ -477,8 +477,8 @@ TacRP.LoadAtt(ATT, "trigger_hair")
 ------------------------------
 ATT = {}
 
-ATT.PrintName = "Feather"
-ATT.FullName = "Feather Trigger"
+ATT.PrintName = "att.trigger_hair.name"
+ATT.FullName = "att.trigger_hair.name.full"
 ATT.Icon = Material("entities/tacrp_att_trigger_hair.png", "mips smooth")
 ATT.Description = "Very sensitive trigger for rapid akimbo fire."
 ATT.Pros = {"stat.rpm", "stat.postburstdelay"}
@@ -527,8 +527,8 @@ TacRP.LoadAtt(ATT, "trigger_heavy")
 ------------------------------
 ATT = {}
 
-ATT.PrintName = "Weighted"
-ATT.FullName = "Weighted Trigger"
+ATT.PrintName = "att.trigger_heavy.name"
+ATT.FullName = "att.trigger_heavy.name.full"
 ATT.Icon = Material("entities/tacrp_att_trigger_heavy.png", "mips smooth")
 ATT.Description = "Heavy trigger that reduces mobility impact from shooting."
 ATT.Pros = {"stat.shootingspeed"}
@@ -585,7 +585,7 @@ ATT = {}
 ATT.PrintName = "Slamfire"
 ATT.FullName = "Slamfire Trigger"
 ATT.Icon = Material("entities/tacrp_att_trigger_frcd.png", "mips smooth")
-ATT.Description = "Trigger that emulates automatic fire but with poor performance."
+ATT.Description = "att.trigger_frcd.desc"
 ATT.Pros = {"stat.rpm", "att.procon.auto"}
 ATT.Cons = {"stat.spread", "rating.mobility"}
 
@@ -610,10 +610,10 @@ TacRP.LoadAtt(ATT, "trigger_slam")
 ------------------------------
 ATT = {}
 
-ATT.PrintName = "Slamfire"
-ATT.FullName = "Slamfire Trigger"
+ATT.PrintName = "att.trigger_slam.name"
+ATT.FullName = "att.trigger_slam.name.full"
 ATT.Icon = Material("entities/tacrp_att_trigger_frcd.png", "mips smooth")
-ATT.Description = "Trigger that emulates automatic fire but with poor performance."
+ATT.Description = "att.trigger_frcd.desc"
 ATT.Pros = {"stat.rpm", "att.procon.auto"}
 ATT.Cons = {"stat.spread", "rating.mobility"}
 

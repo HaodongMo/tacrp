@@ -165,7 +165,7 @@ TacRP.LoadAtt(ATT, "optic_irons")
 ------------------------------
 ATT = {}
 
-ATT.PrintName = "Iron Sights"
+ATT.PrintName = "att.optic_irons.name"
 ATT.Icon = Material("entities/tacrp_att_optic_irons.png", "mips smooth")
 ATT.Description = "Replace default scope for faster aim and better mobility."
 ATT.Pros = {"rating.handling", "rating.mobility"}
@@ -335,6 +335,7 @@ TacRP.LoadAtt(ATT, "optic_rmr")
 ------------------------------
 ATT = {}
 
+ATT.PrintName = "RMR"
 ATT.PrintName = "RMR"
 ATT.Icon = Material("entities/tacrp_att_optic_rmr.png", "mips smooth")
 ATT.Description = "Low profile optic sight."

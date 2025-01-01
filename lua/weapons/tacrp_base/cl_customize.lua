@@ -1303,7 +1303,7 @@ function SWEP:CreateCustomizeHUD()
         end
         local todo = DisableClipping(true)
 
-        draw.SimpleText("Legacy Menu", "TacRP_Myriad_Pro_8", w + TacRP.SS(2), h / 2, color_white, TEXT_ALIGN_LEFT, TEXT_ALIGN_CENTER)
+        draw.SimpleText(TacRP:GetPhrase("menu.legacy") or "Legacy Menu", "TacRP_Myriad_Pro_8", w + TacRP.SS(2), h / 2, color_white, TEXT_ALIGN_LEFT, TEXT_ALIGN_CENTER)
 
 
         DisableClipping(todo)

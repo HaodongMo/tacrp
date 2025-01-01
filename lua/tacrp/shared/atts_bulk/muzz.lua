@@ -110,9 +110,9 @@ TacRP.LoadAtt(ATT, "muzz_lbar")
 ------------------------------
 ATT = {}
 
-ATT.PrintName = "att.muzz_pistol_comp.name"
+ATT.PrintName = "Compensator"
 ATT.Icon = Material("entities/tacrp_att_muzz_pistol_comp.png", "mips smooth")
-ATT.Description = "att.muzz_pistol_comp.desc"
+ATT.Description = "Muzzle device which reduces recoil impact."
 ATT.Pros = {"stat.recoil", "stat.spread", "stat.range_min"}
 ATT.Cons = {"stat.rpm"}
 

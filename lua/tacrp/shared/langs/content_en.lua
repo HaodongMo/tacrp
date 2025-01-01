@@ -809,15 +809,253 @@ L["att.ammo_usp_9mm.name"] = "9×19mm"
 L["att.ammo_usp_9mm.name.full"] = "H&K USP 9×19mm Conversion"
 L["att.ammo_usp_9mm.desc"] = "Fire a smaller caliber round with higher capacity and firerate."
 
+-- Attachments (bolt_trigger)
+L["att.bolt_fine.name.full"] = "Refined Bolt"
+L["att.bolt_fine.name"] = "Refined"
+L["att.bolt_fine.desc"] = "A delicate bolt suitable for short bursts."
 
+L["att.bolt_greased.name.full"] = "Greased Bolt"
+L["att.bolt_greased.name"] = "Greased"
+L["att.bolt_greased.desc"] = "Faster cycle speed but handling is worse."
 
+L["att.bolt_heavy.name.full"] = "Heavy Bolt"
+L["att.bolt_heavy.name"] = "Heavy"
+L["att.bolt_heavy.desc"] = "Reduce recoil at the cost of fire rate."
+
+L["att.bolt_light.name.full"] = "Light Bolt"
+L["att.bolt_light.name"] = "Light"
+L["att.bolt_light.desc"] = "Increase fire rate at the cost of recoil."
+
+L["att.bolt_rough.name.full"] = "Rugged Bolt"
+L["att.bolt_rough.name"] = "Rugged"
+L["att.bolt_rough.desc"] = "A durable bolt suitable for long bursts."
+
+L["att.bolt_surplus.name.full"] = "Surplus Bolt"
+L["att.bolt_surplus.name"] = "Surplus"
+L["att.bolt_surplus.desc"] = "Rust has eaten most of it away, but it still kinda works."
+
+L["att.bolt_tactical.name.full"] = "Tactical Bolt"
+L["att.bolt_tactical.name"] = "Tactical"
+L["att.bolt_tactical.desc"] = "Heavier bolt trades cycling speed for superb control of the weapon."
+
+L["att.bolt_refurbished.name.full"] = "Refurbished Bolt"
+L["att.bolt_refurbished.name"] = "Refurbished"
+L["att.bolt_refurbished.desc"] = "Fix the gun's reliability problems with some armory tweaks."
+
+L["att.trigger_akimbo.name.full"] = "Akimbo Trigger"
+L["att.trigger_akimbo.name"] = "Akimbo"
+L["att.trigger_akimbo.desc"] = "Let'em have it!"
+
+L["att.trigger_burst.name.full"] = "Burst Trigger"
+L["att.trigger_burst.name"] = "Burst"
+L["att.trigger_burst.desc"] = "Trigger that sacrfices automatic fire for stability."
+
+L["att.trigger_burst2.desc"] = "Trigger that emulates burst fire."
+
+L["att.trigger_burstauto.name.full"] = "Auto-Burst Trigger"
+L["att.trigger_burstauto.name"] = "Auto-Burst"
+L["att.trigger_burstauto.desc"] = "Trigger that allows continuous burst fire while held."
+
+L["att.trigger_comp.name.full"] = "Competition Trigger"
+L["att.trigger_comp.name"] = "Competition"
+L["att.trigger_comp.desc"] = "Lightweight trigger for sports shooting."
+
+L["att.trigger_comp2.desc"] = "Lightweight trigger that recovers from accuracy faster."
+
+L["att.trigger_frcd.name.full"] = "Forced Reset Trigger"
+L["att.trigger_frcd.name"] = "Forced Reset"
+L["att.trigger_frcd.desc"] = "Trigger that emulates automatic fire but with poor performance."
+
+L["att.trigger_hair.name.full"] = "Feather Trigger"
+L["att.trigger_hair.name"] = "Feather"
+L["att.trigger_hair.desc"] = "Very sensitive trigger for rapid semi-automatic fire."
+
+L["att.trigger_hair_akimbo.desc"] = "Very sensitive trigger for rapid akimbo fire."
+
+L["att.trigger_heavy.name.full"] = "Weighted Trigger"
+L["att.trigger_heavy.name"] = "Weighted"
+L["att.trigger_heavy.desc"] = "Heavy trigger for sustained fire."
+
+L["att.trigger_heavy2.desc"] = "Heavy trigger that reduces mobility impact from shooting."
+
+L["att.trigger_semi.name.full"] = "Marksman Trigger"
+L["att.trigger_semi.name"] = "Marksman"
+L["att.trigger_semi.desc"] = "Trigger that sacrfices automatic fire for precision."
+
+L["att.trigger_slam.name.full"] = "Slamfire Trigger"
+L["att.trigger_slam.name"] = "Slamfire"
+
+L["att.trigger_straight.name.full"] = "Straight Trigger"
+L["att.trigger_straight.name"] = "Straight"
+L["att.trigger_straight.desc"] = "Narrow trigger with superior recoil performance."
+
+L["att.trigger_wide.name.full"] = "Akimbo Trigger"
+L["att.trigger_wide.name"] = "Akimbo"
+L["att.trigger_wide.desc"] = "Large trigger assembly, easy to hold even in awkward positions."
+
+L["att.trigger_dualstage.name.full"] = "Dual Stage Trigger"
+L["att.trigger_dualstage.name"] = "D. Stage"
+L["att.trigger_dualstage.desc"] = "Trigger that reduces firerate while aiming for better control and accuracy."
+
+-- Attachments (melee_boost)
+L["att.melee_boost_all.name"] = "Level Up"
+L["att.melee_boost_all.desc"] = "Small boost to all attributes."
+
+L["att.melee_boost_str.name"] = "Bulk Up"
+L["att.melee_boost_str.desc"] = "Increase Brawn significantly at the cost of other attributes."
+
+L["att.melee_boost_agi.name"] = "Catch Up"
+L["att.melee_boost_agi.desc"] = "Increase Dexterity significantly at the cost of other attributes."
+
+L["att.melee_boost_int.name"] = "Wise Up"
+L["att.melee_boost_int.desc"] = "Increase Strategy significantly at the cost of other attributes."
+
+L["att.melee_boost_lifesteal.name"] = "Lifestealer"
+L["att.melee_boost_lifesteal.desc"] = "Restore health by dealing damage."
+
+L["att.melee_boost_momentum.name"] = "Momentum"
+L["att.melee_boost_momentum.desc"] = "Restore perk charge by dealing damage."
+
+L["att.melee_boost_afterimage.name"] = "Afterimage"
+L["att.melee_boost_afterimage.desc"] = "Swing your weapon in a flash, landing the attack instantly."
+
+L["att.melee_boost_shock.name.full"] = "Shock Trooper"
+L["att.melee_boost_shock.name"] = "S. Trooper"
+L["att.melee_boost_shock.desc"] = "Reduce impact of impairing effects while weapon is held."
+
+-- Attachments (muzz)
+L["att.muzz_hbar.name"] = "Heavy Barrel"
+L["att.muzz_hbar.desc"] = "Sturdy barrel with improved sway and recoil performance."
+
+L["att.muzz_lbar.name"] = "Light Barrel"
+L["att.muzz_lbar.desc"] = "Lightweight barrel more accurate and effective at long range."
 
 L["att.muzz_pistol_comp.name"] = "Compensator"
 L["att.muzz_pistol_comp.desc"] = "Muzzle device which reduces recoil impact."
 
-L["att.bolt_refurbished.name"] = "Refurbished"
-L["att.bolt_refurbished.name.full"] = "Refurbished Bolt"
-L["att.bolt_refurbished.desc"] = "Fix the gun's reliability problems with some armory tweaks."
+L["att.muzz_supp_compact.name.full"] = "Compact Suppressor"
+L["att.muzz_supp_compact.name"] = "C. Suppressor"
+L["att.muzz_supp_compact.desc"] = "Short suppressor improving accuracy with low impact to effective range."
+
+L["att.muzz_silencer.name.full"] = "Tactical Suppressor"
+L["att.muzz_silencer.name"] = "T. Suppressor"
+L["att.muzz_silencer.desc"] = "Balanced suppressor that reduces recoil and effective range."
+
+L["att.muzz_supp_weighted.name.full"] = "Weighted Suppressor"
+L["att.muzz_supp_weighted.name"] = "W. Suppressor"
+L["att.muzz_supp_weighted.desc"] = "Heavy suppressor with superior ballistics but worse handling."
+
+L["att.muzz_brake_aggressor.name.full"] = "Aggressor Brake"
+L["att.muzz_brake_aggressor.name"] = "A. Brake"
+L["att.muzz_brake_aggressor.desc"] = "Muzzle brake designed to redirect vented gases away from the shooter."
+
+L["att.muzz_brake_breaching.name.full"] = "Breaching Brake"
+L["att.muzz_brake_breaching.name"] = "B. Brake"
+L["att.muzz_brake_breaching.desc"] = "Spiked muzzle brake designed for close combat."
+
+L["att.muzz_brake_concussive.name.full"] = "Concussive Brake"
+L["att.muzz_brake_concussive.name"] = "C. Brake"
+L["att.muzz_brake_concussive.desc"] = "Viciously loud, uncomfortable muzzle brake for extreme recoil control."
+
+-- Attachments (optic_tac)
+L["att.optic_8x.name.full"] = "Telescopic Scope"
+L["att.optic_8x.name"] = "Telescopic"
+L["att.optic_8x.desc"] = "Long-range sniper optic."
+
+L["att.optic_acog.name.full"] = "ACOG Scope"
+L["att.optic_acog.name"] = "ACOG"
+L["att.optic_acog.desc"] = "Medium range combat scope."
+
+L["att.optic_elcan.name.full"] = "ELCAN Scope"
+L["att.optic_elcan.name"] = "ELCAN"
+L["att.optic_elcan.desc"] = "Low power combat scope."
+
+L["att.optic_holographic.name.full"] = "Holographic Sight"
+L["att.optic_holographic.name"] = "Holographic"
+L["att.optic_holographic.desc"] = "Boxy optic to assist aiming at close range."
+
+L["att.optic_irons.name"] = "Iron Sights"
+L["att.optic_irons.desc"] = "Basic sights for added mobility."
+
+L["att.optic_irons_sniper.desc"] = "Replace default scope for faster aim and better mobility."
+
+L["att.optic_okp7.name"] = "OKP-7"
+L["att.optic_okp7.desc"] = "Low profile reflex sight with minimal zoom."
+
+L["att.optic_rds2.name.full"] = "Red Dot Sight"
+L["att.optic_rds2.name"] = "Red Dot"
+L["att.optic_rds2.desc"] = "Open reflex sight with a clear view."
+
+L["att.optic_rds.name"] = "Aimpoint"
+L["att.optic_rds.desc"] = "Tube optic to assist aiming at close range."
+
+L["att.optic_rmr.name"] = "RMR"
+L["att.optic_rmr.desc"] = "Low profile optic sight for pistols."
+
+L["att.optic_rmr_rifle.desc"] = "Low profile optic sight."
+
+L["att.optic_shortdot.name"] = "Short Dot"
+L["att.optic_shortdot.desc"] = "Compact optic scope with decent magnification."
+
+L["att.tac_cornershot.name"] = "Corner-Cam"
+L["att.tac_cornershot.desc"] = "Displays point of aim while blindfiring."
+
+L["att.tac_dmic.name"] = "Radar"
+L["att.tac_dmic.desc"] = "Detects the position of nearby targets, but emits sound."
+
+L["att.tac_flashlight.name"] = "Flashlight"
+L["att.tac_flashlight.desc"] = "Emits a strong beam of light, blinding anyone staring into it."
+
+L["att.tac_laser.name"] = "Laser"
+L["att.tac_laser.desc"] = "Emits a narrow red beam and dot, indicating where the gun is pointed at."
+
+L["att.tac_combo.name.full"] = "Laser-Light Combo"
+L["att.tac_combo.name"] = "Combo"
+L["att.tac_combo.desc"] = "Emits a green laser and flashlight. The light is too weak to blind others."
+
+L["att.tac_rangefinder.name"] = "Rangefinder"
+L["att.tac_rangefinder.desc"] = "Measures ballistic performance of the weapon."
+
+L["att.tac_spreadgauge.name"] = "Spread Gauge"
+L["att.tac_spreadgauge.desc"] = "Measures weapon stability from sway and bloom."
+
+L["att.tac_magnifier.name"] = "Variable Zoom Optic (2x)"
+L["att.tac_magnifier.name"] = "2x Zoom"
+L["att.tac_magnifier.desc"] = "Allows all optics to access a 2x zoom level, allowing them to zoom in or out."
+
+L["att.tac_bullet.name"] = "Emergency Bullet"
+L["att.tac_bullet.name"] = "Emrg. Bullet"
+L["att.tac_bullet.desc"] = "Press the tactical key to quickly load a single bullet for emergencies."
+
+L["att.tac_thermal.name.full"] = "ZUMQFY Thermal Imaging Device"
+L["att.tac_thermal.name"] = "Thermal-Cam"
+L["att.tac_thermal.desc"] = "Display a thermal overlay which fuses with the main view while peeking."
+
+-- Attachments (perk)
+L["att.perk_aim.name"] = "Deadeye"
+L["att.perk_aim.desc"] = "Zooms in your aim and makes it easier to fire while sighted."
+
+L["att.perk_blindfire.name.full"] = "Point Shooter"
+L["att.perk_blindfire.name"] = "Point Shoot"
+L["att.perk_blindfire.desc"] = "Improves blindfire and peeking."
+
+L["att.perk_hipfire.name"] = "Rambo"
+L["att.perk_hipfire.desc"] = "Improves weapon accuracy while not aiming."
+
+L["att.perk_melee.name"] = "Smackdown"
+L["att.perk_melee.desc"] = "Improves melee damage, and slows struck targets."
+
+L["att.perk_reload.name"] = "Quickload"
+L["att.perk_reload.desc"] = "Improves reloading speed."
+
+L["att.perk_speed.name"] = "Agility"
+L["att.perk_speed.desc"] = "Improves weapon mobility, especially while reloading."
+
+L["att.perk_throw.name"] = "Grenadier"
+L["att.perk_throw.desc"] = "Improves quickthrow, and adds the option to throw rocks."
+
+L["att.perk_mlg.name"] = "Stylish"
+L["att.perk_mlg.desc"] = "Improves quickscoping and accuracy while jumping or moving."
 
 ///////////////////// -- [[ InterOps Weapons ]] --
 -- Weapons

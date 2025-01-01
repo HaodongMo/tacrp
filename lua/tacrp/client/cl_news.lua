@@ -1152,7 +1152,7 @@ Give it a whirl! Apologies in advance for the blindness and potential motion sic
     {
         Title = "Update 29 / Scavenger's Spoils Release",
         Type = "Update",
-        Date = "2025-12-25",
+        Date = "2024-12-25",
         Author = "8Z",
         Major = true,
         Summary = "New expansion release!",
