@@ -84,8 +84,8 @@ SWEP.TTTReplace = {}
 SWEP.Firemode = 1
 SWEP.Firemodes = false
 
-SWEP.RPM = 550
-SWEP.RPMMultSemi = 400/550
+SWEP.RPM = 650
+SWEP.RPMMultSemi = 550 / 650
 
 SWEP.RecoilKick = 2
 

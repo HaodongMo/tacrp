@@ -11,7 +11,7 @@ SWEP.Category = "Tactical RP"
 SWEP.SubCatTier = "3Security"
 SWEP.SubCatType = "5Sporter"
 
-SWEP.Description = "American semi-automatic AK pattern rifle, customized with an AR-15 style stock and Hungarian handguard. In the interest of public safety, the magazine is limited to 10 rounds."
+SWEP.Description = "American semi-automatic AK pattern rifle, customized with an AR-15 style stock and Hungarian handguard.\nUses reduced capacity magazines."
 
 SWEP.Trivia_Caliber = "7.62x39mm"
 SWEP.Trivia_Manufacturer = "Arsenal Inc"
@@ -29,8 +29,8 @@ SWEP.BalanceStats = {
     [TacRP.BALANCE_SBOX] = {
         Damage_Max = 36,
         Damage_Min = 18,
-        Range_Min = 800,
-        Range_Max = 3200,
+        Range_Min = 1000,
+        Range_Max = 3800,
         ArmorPenetration = 0.675,
         Spread = 0.002,
 
@@ -75,40 +75,33 @@ SWEP.BalanceStats = {
     }
 }
 
-SWEP.TTTReplace = TacRP.TTTReplacePreset.AssaultRifle
-
 // "ballistics"
-
 SWEP.Damage_Max = 28
 SWEP.Damage_Min = 14
-SWEP.Range_Min = 400
-SWEP.Range_Max = 2200
+SWEP.Range_Min = 800
+SWEP.Range_Max = 2600
 SWEP.Penetration = 11
 SWEP.ArmorPenetration = 0.65
 SWEP.ArmorBonus = 1.25
-
-SWEP.BodyDamageMultipliers = {
-    [HITGROUP_HEAD] = 5,
-    [HITGROUP_CHEST] = 1,
-    [HITGROUP_STOMACH] = 1.25,
-    [HITGROUP_LEFTARM] = 1,
-    [HITGROUP_RIGHTARM] = 1,
-    [HITGROUP_LEFTLEG] = 0.75,
-    [HITGROUP_RIGHTLEG] = 0.75,
-    [HITGROUP_GEAR] = 0.9
-}
 
 // misc. shooting
 
 SWEP.Firemode = 1
 SWEP.Firemodes = false
 
-SWEP.RPM = 600
-SWEP.RPMMultSemi = 300 / 600
+SWEP.RPM = 450
+SWEP.RPMMultSemi = 280 / 450
+
+SWEP.ShootTimeMult = 1
 
 SWEP.Spread = 0.005
 
-SWEP.ClipSize = 10
+SWEP.RecoilKick = 4
+
+SWEP.RecoilSpreadPenalty = 0.0025
+SWEP.HipFireSpreadPenalty = 0.03
+
+SWEP.ClipSize = 12
 SWEP.Ammo = "ar2"
 
 SWEP.SightAng = Angle(-0.265, -0.55, -1)
@@ -171,8 +164,8 @@ SWEP.ProceduralIronFire = {
         {
             bone = "ValveBiped.bolt_cover",
             pos = Vector(0, 0, -3),
-            t0 = 0.03,
-            t1 = 0.2,
+            t0 = 0.02,
+            t1 = 0.15,
         },
     },
 }
