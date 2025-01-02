@@ -1019,7 +1019,7 @@ L["wep." .. w .. ".name"] = "AB-10"
 L["wep." .. w .. ".desc"] = "Semi-automatic \"After Ban\" model of the TEC-9 with a short, non-threaded barrel. Big magazine, but unreliable."
 L["wep." .. w .. ".desc.quote"] = "\"Who needs an assault weapon?\""
 L["wep." .. w .. ".trivia.manufacturer"] = "Intratec"
-L["wep." .. w .. ".credits"] = "Model/Textures: Payday 2 \nSounds: The_AntiPirate \nAnimations Tactical Intervention"
+L["wep." .. w .. ".credits"] = "Model/Textures: Payday 2 \nSounds: The_AntiPirate \nAnimations: Tactical Intervention"
 
 w = ws .. "af2011"
 L["wep." .. w .. ".name.full"] = "AF2011-A1"
@@ -1027,7 +1027,7 @@ L["wep." .. w .. ".name"] = "AF2011"
 L["wep." .. w .. ".desc"] = "Effectively two M1911s welded together, this exotic abomination fires two bullets per trigger pull."
 L["wep." .. w .. ".desc.quote"] = "\"If the 1911 is so good, why isn't there a 1911 2?\""
 L["wep." .. w .. ".trivia.manufacturer"] = "Arsenal Firearms"
-L["wep." .. w .. ".credits"] = "Assets: Counter Strike: Online 2 \nAnimations Tactical Intervention"
+L["wep." .. w .. ".credits"] = "Assets: Counter Strike: Online 2 \nAnimations: Tactical Intervention"
 
 w = ws .. "automag"
 L["wep." .. w .. ".name.full"] = "Auto Mag Pistol"
@@ -1035,7 +1035,7 @@ L["wep." .. w .. ".name"] = "Auto Mag"
 L["wep." .. w .. ".desc"] = "Highly accurate magnum pistol. Great handling due to its size, but can only mount pistol optics."
 L["wep." .. w .. ".desc.quote"] = "\"And if properly used, it can remove the fingerprints.\""
 L["wep." .. w .. ".trivia.manufacturer"] = "Auto Mag Corporation"
-L["wep." .. w .. ".credits"] = "Model: RedRogueXIII \nTextures/Sounds: Futon \nAnimations Tactical Intervention"
+L["wep." .. w .. ".credits"] = "Model: RedRogueXIII \nTextures/Sounds: Futon \nAnimations: Tactical Intervention"
 
 w = ws .. "chinalake"
 L["wep." .. w .. ".name.full"] = "China Lake Launcher"
@@ -1043,14 +1043,14 @@ L["wep." .. w .. ".name"] = "China Lake"
 L["wep." .. w .. ".desc"] = "Heavy pump action grenade launcher with high muzzle velocity but poor handling."
 L["wep." .. w .. ".desc.quote"] = "Only 59 of these ever existed. Where'd you get this one?"
 L["wep." .. w .. ".trivia.manufacturer"] = "NAWS China Lake"
-L["wep." .. w .. ".credits"] = "Assets: Counter Strike: Online 2 \nAnimations Tactical Intervention"
+L["wep." .. w .. ".credits"] = "Assets: Counter Strike: Online 2 \nAnimations: Tactical Intervention"
 
 w = ws .. "coltsmg"
 L["wep." .. w .. ".name"] = "Colt 9mm SMG"
 L["wep." .. w .. ".desc"] = "AR platform burst-fire SMG. Excellent recoil control, good damage and range but limited optic options. Favored by the Department of Energy."
 L["wep." .. w .. ".desc.quote"] = "Loudspeaker not included."
 L["wep." .. w .. ".trivia.manufacturer"] = "Colt"
-L["wep." .. w .. ".credits"] = "Assets: Twinke Masta & Kimono \nSounds: Strelok & New World Interactive \nAnimations Tactical Intervention"
+L["wep." .. w .. ".credits"] = "Assets: Twinke Masta & Kimono \nSounds: Strelok & New World Interactive \nAnimations: Tactical Intervention"
 
 w = ws .. "cx4"
 L["wep." .. w .. ".name.full"] = "Beretta CX4 Storm"
@@ -1058,7 +1058,7 @@ L["wep." .. w .. ".name"] = "CX4 Storm"
 L["wep." .. w .. ".desc"] = "Semi-automatic pistol carbine with good range. \nMediocre armor penetration, but the large frame makes the weapon quite stable."
 L["wep." .. w .. ".desc.quote"] = "As famously seen in a certain PMC leader's arsenal."
 L["wep." .. w .. ".trivia.manufacturer"] = "Pietro Beretta"
-L["wep." .. w .. ".credits"] = "Assets: Counter Strike: Online 2 \nAnimations Tactical Intervention"
+L["wep." .. w .. ".credits"] = "Assets: Counter Strike: Online 2 \nAnimations: Tactical Intervention"
 
 w = ws .. "degala"
 L["wep." .. w .. ".name.full"] = "Desert Eagle"
@@ -1066,7 +1066,7 @@ L["wep." .. w .. ".name"] = "Deagle"
 L["wep." .. w .. ".desc"] = "Imposing magnum pistol, as iconic as it gets. \nPowerful and high capacity, but recoil is hard to manage."
 L["wep." .. w .. ".desc.quote"] = "\"You hear that, Mr. Anderson?\""
 L["wep." .. w .. ".trivia.manufacturer"] = "Magnum Research"
-L["wep." .. w .. ".credits"] = "Model: Vashts1985 \nTextures: Racer445 \nSounds:Vunsunta, XLongWayHome \nAnimations Tactical Intervention"
+L["wep." .. w .. ".credits"] = "Model: Vashts1985 \nTextures: Racer445 \nSounds:Vunsunta, XLongWayHome \nAnimations: Tactical Intervention"
 
 w = ws .. "fiveseven"
 L["wep." .. w .. ".name.full"] = "FN Five-seveN"
@@ -1074,7 +1074,7 @@ L["wep." .. w .. ".name"] = "Five-seveN"
 L["wep." .. w .. ".desc"] = "Bulky PDW caliber pistol with excellent capacity. \nHigh velocity rounds retain effectiveness at range and pierces armor easily."
 L["wep." .. w .. ".desc.quote"] = "Is that a ferret running around?"
 L["wep." .. w .. ".trivia.manufacturer"] = "FN Herstal"
-L["wep." .. w .. ".credits"] = "Assets: Counter-Strike: Online 2, edited by speedonerd \nSounds: Vunsunta, Counter-Strike: Online 2 \nAnimations Tactical Intervention"
+L["wep." .. w .. ".credits"] = "Assets: Counter-Strike: Online 2, edited by speedonerd \nSounds: Vunsunta, Counter-Strike: Online 2 \nAnimations: Tactical Intervention"
 
 w = ws .. "fnc"
 L["wep." .. w .. ".name.full"] = "FN FNC Para"
@@ -1082,14 +1082,14 @@ L["wep." .. w .. ".name"] = "FNC Para"
 L["wep." .. w .. ".desc"] = "Lightweight assault rifle with high hipfire precision and mobility, but low range and poor armor penetration."
 L["wep." .. w .. ".desc.quote"] = "\"I say what I mean and I do what I say.\""
 L["wep." .. w .. ".trivia.manufacturer"] = "FN Herstal"
-L["wep." .. w .. ".credits"] = "Model: Twinke Masta \nTextures: Twinke Masta, the_tub,  Xero \nSounds: Vunsunta \nAnimations Tactical Intervention"
+L["wep." .. w .. ".credits"] = "Model: Twinke Masta \nTextures: Twinke Masta, the_tub,  Xero \nSounds: Vunsunta \nAnimations: Tactical Intervention"
 
 w = ws .. "glock18"
 L["wep." .. w .. ".name"] = "Glock 18C"
 L["wep." .. w .. ".desc"] = "Machine pistol with high fire rate and mobility."
 L["wep." .. w .. ".desc.quote"] = "\"Sooner or later, you'll have to jump.\""
 L["wep." .. w .. ".trivia.manufacturer"] = "Glock Ges.m.b.H"
-L["wep." .. w .. ".credits"] = "Model: Hav0k101 \nTextures: el maestro de graffiti \nSounds: BlitzBoaR, Lorn, Ghost597879, Zeven II \nAnimations Tactical Intervention"
+L["wep." .. w .. ".credits"] = "Model: Hav0k101 \nTextures: el maestro de graffiti \nSounds: BlitzBoaR, Lorn, Ghost597879, Zeven II \nAnimations: Tactical Intervention"
 
 w = ws .. "k98"
 L["wep." .. w .. ".name.full"] = "Karabiner 98k"
@@ -1271,7 +1271,7 @@ L["att.ammo_star15_300blk.name.full"] = "ST AR-15 .300 AC Blackout Mod Kit"
 L["att.ammo_star15_300blk.name"] = ".300 BLK"
 L["att.ammo_star15_300blk.desc"] = "Modification to load lower velocity bullets with better CQB potential."
 
-L["att.ammo_star15_50beo.name.full"] = "ST AR-15 .50 Beowulf Blackout Mod Kit"
+L["att.ammo_star15_50beo.name.full"] = "ST AR-15 .50 Beowulf Mod Kit"
 L["att.ammo_star15_50beo.name"] = ".50 BEO"
 L["att.ammo_star15_50beo.desc"] = "Modification to load low capacity, high power magnum rounds."
 
@@ -1295,7 +1295,7 @@ L["att.optic_ar_colt.desc"] = "Low power optical scope mounted on AR pattern car
 
 L["att.optic_k98_zf41.name.full"] = "Zeiss 6x38 Scope"
 L["att.optic_k98_zf41.name"] = "Zeiss"
-L["att.optic_k98_zf41.desc"] = "Malicious interpretation of the concept of \"double-stacked magazines\"."
+L["att.optic_k98_zf41.desc"] = "Medium-power sniper scope made specially for the Kar98k."
 
 L["att.optic_xm8_4x.name.full"] = "XM8 Integrated Scope (4x)"
 L["att.optic_xm8_4x.name"] = "4x"
@@ -1309,8 +1309,8 @@ L["att.optic_xm8_8x.name.full"] = "XM8 Integrated Scope (8x)"
 L["att.optic_xm8_8x.name"] = "8x"
 L["att.optic_xm8_8x.desc"] = "Long range zoom setting with sniper reticle."
 
-L["att.trigger_vp70_auto.name.full"] = "Automatic"
-L["att.trigger_vp70_auto.name"] = "VP-70 Auto Sear Stock"
+L["att.trigger_vp70_auto.name.full"] = "VP-70 Auto Sear Stock"
+L["att.trigger_vp70_auto.name"] = "Automatic"
 L["att.trigger_vp70_auto.desc"] = "The engineers at H&K are frothing at their mouths as we speak."
 
 L["att.trigger_vp70_semi.name.full"] = "VP-70 Remove Stock"
@@ -1587,10 +1587,6 @@ L["wep." .. w .. ".trivia.manufacturer"] = "Walther"
 L["wep." .. w .. ".credits"] = "Assets: Alliance of Valiant Arms \nOriginally ported to CS 1.6 by GR_Lucia \nSounds: HK & Vunsunta \nAnimations: Tactical Intervention, edited by speedonerd"
 
 -- Attachments (sd)
-L["att.bolt_gilboa_alt.name.full"] = "Gilboa DBR Alternating Bolt"
-L["att.bolt_gilboa_alt.name"] = "Alternating"
-L["att.bolt_gilboa_alt.desc"] = "Separated bolts that are able to fire alternatingly, somehow."
-
 L["att.trigger_dual_uzis_semi.name.full"] = "att.trigger_semi.name.full"
 L["att.trigger_dual_uzis_semi.name"] = "att.trigger_semi.name"
 L["att.trigger_dual_uzis_semi.desc"] = "att.trigger_semi.desc"
@@ -1603,9 +1599,9 @@ L["att.optic_m1_scope.name.full"] = "M1 Carbine 3.5x24 Scope"
 L["att.optic_m1_scope.name"] = "3.5x Scope"
 L["att.optic_m1_scope.desc"] = "Optical scope with specialized mount for the M1 Carbine."
 
-L["att.tac_1858_spin.name.full"] = "De Lisle 4x24 Scope"
-L["att.tac_1858_spin.name"] = "4x Scope"
-L["att.tac_1858_spin.desc"] = "Optical scope with specialized mount for the De Lisle."
+L["att.optic_delisle_scope.name.full"] = "De Lisle 4x24 Scope"
+L["att.optic_delisle_scope.name"] = "4x Scope"
+L["att.optic_delisle_scope.desc"] = "Optical scope with specialized mount for the De Lisle."
 
 L["att.muzz_supp_assassin.name.full"] = "Assassin Suppressor"
 L["att.muzz_supp_assassin.name"] = "A. Suppressor"
@@ -1637,14 +1633,153 @@ L["att.ammo_1858_36perc.desc"] = "Caliber conversion firing smaller rounds with 
 
 ///////////////////// -- [[ Brute Force ]] --
 -- Weapons
-ws = "tacrp_io_"
-w = ws .. "REPLACEME"
-L["wep." .. w .. ".name.full"] = "REPLACEME"
-L["wep." .. w .. ".name"] = "REPLACEME"
-L["wep." .. w .. ".desc"] = "REPLACEME"
-L["wep." .. w .. ".desc.quote"] = "REPLACEME"
-L["wep." .. w .. ".trivia.manufacturer"] = "REPLACEME"
-L["wep." .. w .. ".credits"] = "Assets: Tactical Intervention"
+ws = "tacrp_m_"
+w = ws .. "bamaslama"
+L["wep." .. w .. ".name"] = "Alabama Slammer"
+L["wep." .. w .. ".desc"] = "A bowie knife named after a cocktail, featuring a serrated back edge and a bayonet mount."
+L["wep." .. w .. ".desc.quote"] = "\"Did I say you could do that?\""
+L["wep." .. w .. ".credits"] = "Model: Havok101 \nTextures: Millenia"
+
+w = ws .. "bat"
+L["wep." .. w .. ".name.full"] = "Loisville Slugger TPX"
+L["wep." .. w .. ".name"] = "Slugger"
+L["wep." .. w .. ".desc"] = "Aluminum baseball bat, good for hitting home runs or cracking skulls."
+L["wep." .. w .. ".desc.quote"] = "\"Pop quiz! How long's it take to beat a moron to death?\""
+L["wep." .. w .. ".credits"] = "Model & Textures: Yogensia \nAnimations: Lazarus"
+
+w = ws .. "bayonet"
+L["wep." .. w .. ".name"] = "M9 Phrobis III"
+L["wep." .. w .. ".desc"] = "Military standard-issue knife that can be mounted on a weapon as a bayonet. Nothing stopping you from using it like a normal knife, however."
+L["wep." .. w .. ".credits"] = "Assets: BrainBread 2"
+
+w = ws .. "boina"
+L["wep." .. w .. ".name"] = "Cudeman Boina Verde"
+L["wep." .. w .. ".desc"] = "Sturdy, oversized survival knife. \"Boina verde\" is Spanish for \"green beret,\" an attempt to market the knife as military-grade."
+L["wep." .. w .. ".credits"] = "Model & Textures: Shortez"
+
+w = ws .. "cleaver"
+L["wep." .. w .. ".name"] = "Meat Cleaver"
+L["wep." .. w .. ".desc"] = "Large, sturdy blade made for chopping meat, be that animal meat or human meat. Has innate Lifesteal."
+L["wep." .. w .. ".credits"] = "Assets: Warface"
+
+w = ws .. "crowbar"
+L["wep." .. w .. ".name"] = "Crowbar"
+L["wep." .. w .. ".desc"] = "All-purpose utility tool meant for prying things open; crates, safes, doors and humans!"
+L["wep." .. w .. ".desc.quote"] = "\"I think you dropped this back in Black Mesa.\""
+L["wep." .. w .. ".credits"] = "Assets: Counter-Strike: Online 2"
+
+w = ws .. "css"
+L["wep." .. w .. ".name"] = "The Classic"
+L["wep." .. w .. ".desc"] = "A classic knife design from the 90's, before fancy patterns and ludicrous prices were all the rage."
+L["wep." .. w .. ".desc.quote"] = "\"Alright, let's move out!\""
+L["wep." .. w .. ".credits"] = "Assets: Counter-Strike: Source"
+
+w = ws .. "fasthawk"
+L["wep." .. w .. ".name"] = "SOG Fasthawk"
+L["wep." .. w .. ".desc"] = "Modernized tomahawk designed for combat. Aerodynamic design can be thrown far."
+L["wep." .. w .. ".credits"] = "Model & Textures: Yogensia"
+
+w = ws .. "gerber"
+L["wep." .. w .. ".name.full"] = "Gerber LMF Infantry"
+L["wep." .. w .. ".name"] = "LMF Infantry"
+L["wep." .. w .. ".desc"] = "Compact knife for survival situations, such as gutting fish, carving wood or gutting and carving an enemy."
+L["wep." .. w .. ".credits"] = "Model: Macaroane \nTextures: Blackfire"
+
+w = ws .. "glock"
+L["wep." .. w .. ".name.full"] = "Glock Feldmesser 78"
+L["wep." .. w .. ".name"] = "Feldmesser 78"
+L["wep." .. w .. ".desc"] = "A sturdy field knife with a firm grip, designed for use within the Austrian Jagdkommando."
+L["wep." .. w .. ".desc.quote"] = "Yes, this is the same Glock that makes pistols."
+L["wep." .. w .. ".credits"] = "Model: HellSpike \nTextures: Dr. Hubbler"
+
+w = ws .. "hamma"
+L["wep." .. w .. ".name"] = "Hammer"
+L["wep." .. w .. ".desc"] = "Common craftsman tool for inserting nails into wood or securing objects in place."
+L["wep." .. w .. ".desc.quote"] = "When you have a hammer, everything looks like a nail..."
+L["wep." .. w .. ".credits"] = "Model: FearFisch & sHiBaN \nTextures: Meltdown, sHiBaN & Kitteh"
+
+w = ws .. "harpoon"
+L["wep." .. w .. ".name.full"] = "Extrema Ratio Harpoon"
+L["wep." .. w .. ".name"] = "Harpoon"
+L["wep." .. w .. ".desc"] = "Thin-bladed knife with serrations on the back edge for extra deep penetration."
+L["wep." .. w .. ".credits"] = "Model: Warfrog \nTextures: kannoe"
+
+w = ws .. "heathawk"
+L["wep." .. w .. ".name"] = "Heat Hawk"
+L["wep." .. w .. ".desc"] = "Axe-shaped MS weapon scaled down to human size.\nThe original utilizes a superheated edge that cuts through metal like butter, but this replica only has a glowing sticker attached to a metal blade."
+L["wep." .. w .. ".credits"] = "Model & Textures: Amouro"
+
+w = ws .. "incorp"
+L["wep." .. w .. ".name"] = "Viper Knife"
+L["wep." .. w .. ".desc"] = "Flashy flip knife with a premium stainless finish and woodgrain handle."
+L["wep." .. w .. ".credits"] = "Model & Textures: Teh Snake"
+
+w = ws .. "kitchen"
+L["wep." .. w .. ".name"] = "Kitchen Knife"
+L["wep." .. w .. ".desc"] = "Plain, simple kitchen knife. Easy to acquire and adequately lethal, knives like these are popular among street gangs and psychopaths. Has innate Lifesteal."
+L["wep." .. w .. ".desc.quote"] = "Oi mate, you gotta license for that knife?"
+L["wep." .. w .. ".credits"] = "Model: Kitteh \nTextures: Rochenback"
+
+w = ws .. "knife3"
+L["wep." .. w .. ".name"] = "Task Force Knife"
+L["wep." .. w .. ".desc"] = "Oversized knife with a serrated edge and a curved handle, a bit overkill for what's supposed to be a military knife."
+L["wep." .. w .. ".desc.quote"] = "\"MOM GET THE CAMERA!!\""
+L["wep." .. w .. ".credits"] = "Model: Syncing \nTextures: Boba Fett"
+
+w = ws .. "kukri"
+L["wep." .. w .. ".name"] = "Kukri"
+L["wep." .. w .. ".desc"] = "Short knife with a curved blade, supposedly designed as such so it hooks onto targets and inflicts maximum damage."
+L["wep." .. w .. ".desc.quote"] = "\"Professionals have standards.\""
+L["wep." .. w .. ".credits"] = "Model: Loyen \nTextures: Pain_Agent"
+
+w = ws .. "machete"
+L["wep." .. w .. ".name"] = "Machete"
+L["wep." .. w .. ".desc"] = "Versatile blade that can be used as an agricultural tool, a weapon of war or as a navigational aid when deep in the bush."
+L["wep." .. w .. ".credits"] = "Assets: BrainBread 2"
+
+w = ws .. "pan"
+L["wep." .. w .. ".name"] = "Frying Pan"
+L["wep." .. w .. ".desc"] = "Stovetop cooking device made of solid cast-iron. Made iconic as a weapon through slapstick and cartoons."
+L["wep." .. w .. ".credits"] = "Assets: Left 4 Dead 2"
+
+w = ws .. "pipe"
+L["wep." .. w .. ".name"] = "Lead Pipe"
+L["wep." .. w .. ".desc"] = "Sturdy lead water pipe. Despite not being designed for any kind of harm-doing, hitting someone with it does quite a lot of harm."
+L["wep." .. w .. ".desc.quote"] = "\"OH SHIT!! Too late!!\""
+L["wep." .. w .. ".credits"] = "Assets: No More Room in Hell"
+
+w = ws .. "rambo"
+L["wep." .. w .. ".name"] = "Bowie Knife"
+L["wep." .. w .. ".desc"] = "A classic knife design made specifically for dueling, back when knife fights were a form of entertainment. \nRemains popular due to its association with overly-masculine 80's action movie stars."
+L["wep." .. w .. ".credits"] = "Model: fallschirmjager \nTextures: HellSpike & EinHain"
+
+w = ws .. "shovel"
+L["wep." .. w .. ".name"] = "Shovel"
+L["wep." .. w .. ".desc"] = "An old army shovel, designed to quickly dig trenches. Works great as a crude melee weapon, having both a blunt face and a sharp edge."
+L["wep." .. w .. ".desc.quote"] = "\"Maggots!\""
+L["wep." .. w .. ".credits"] = "Assets: Day of Defeat: Source"
+
+w = ws .. "tonfa"
+L["wep." .. w .. ".name"] = "Police Baton"
+L["wep." .. w .. ".desc"] = "Specialized police baton with an angled handle for an alternative grip. Useful for putting down riots in failing \"democratic\" nations."
+L["wep." .. w .. ".credits"] = "Assets: Left 4 Dead 2"
+
+w = ws .. "tracker"
+L["wep." .. w .. ".name"] = "Tracker Knife"
+L["wep." .. w .. ".desc"] = "Oversized gut knife designed for multiple hunting utilities, one of which is, conveniently, slicing open human targets."
+L["wep." .. w .. ".credits"] = "Model: Cartman \nTextures: Henron & Fxdarkloki"
+
+w = ws .. "wiimote"
+L["wep." .. w .. ".name.full"] = "Nintendo Wii Remote"
+L["wep." .. w .. ".name"] = "Wii Remote"
+L["wep." .. w .. ".desc"] = "An iconic game controller with revolutionary motion controls. \nCareful!  Neglecting to wear the wrist strap could lead to injury."
+L["wep." .. w .. ".desc.quote"] = "You're Out!" -- Wii Sports
+L["wep." .. w .. ".credits"] = "Model & Textures: Mr. Pickle"
+
+w = ws .. "wrench"
+L["wep." .. w .. ".name"] = "Pipe Wrench"
+L["wep." .. w .. ".desc"] = "Sturdy wrench designed for tightening water and gas pipes.  All-iron construction makes it quite the blunt weapon."
+L["wep." .. w .. ".credits"] = "Assets: Counter-Strike: Online 2"
 
 ///////////////////// -- [[ Iron Curtain ]] --
 -- Weapons
@@ -1655,7 +1790,7 @@ L["wep." .. w .. ".name"] = "REPLACEME"
 L["wep." .. w .. ".desc"] = "REPLACEME"
 L["wep." .. w .. ".desc.quote"] = "REPLACEME"
 L["wep." .. w .. ".trivia.manufacturer"] = "REPLACEME"
-L["wep." .. w .. ".credits"] = "Assets: Tactical Intervention"
+L["wep." .. w .. ".credits"] = "REPLACEME"
 
 ///////////////////// -- [[ Heavy Duty ]] --
 -- Weapons
@@ -1666,7 +1801,7 @@ L["wep." .. w .. ".name"] = "REPLACEME"
 L["wep." .. w .. ".desc"] = "REPLACEME"
 L["wep." .. w .. ".desc.quote"] = "REPLACEME"
 L["wep." .. w .. ".trivia.manufacturer"] = "REPLACEME"
-L["wep." .. w .. ".credits"] = "Assets: Tactical Intervention"
+L["wep." .. w .. ".credits"] = "REPLACEME"
 
 ///////////////////// -- [[ ExoOps ]] --
 -- Weapons
@@ -1677,7 +1812,7 @@ L["wep." .. w .. ".name"] = "REPLACEME"
 L["wep." .. w .. ".desc"] = "REPLACEME"
 L["wep." .. w .. ".desc.quote"] = "REPLACEME"
 L["wep." .. w .. ".trivia.manufacturer"] = "REPLACEME"
-L["wep." .. w .. ".credits"] = "Assets: Tactical Intervention"
+L["wep." .. w .. ".credits"] = "REPLACEME"
 
 ///////////////////// -- [[ Scavenger's Spoils ]] --
 -- Weapons
@@ -1688,7 +1823,7 @@ L["wep." .. w .. ".name"] = "REPLACEME"
 L["wep." .. w .. ".desc"] = "REPLACEME"
 L["wep." .. w .. ".desc.quote"] = "REPLACEME"
 L["wep." .. w .. ".trivia.manufacturer"] = "REPLACEME"
-L["wep." .. w .. ".credits"] = "Assets: Tactical Intervention"
+L["wep." .. w .. ".credits"] = "REPLACEME"
 
 ///////////////////// -- [[ Danger Zone Entities ]] --
 -- Weapons
@@ -1699,7 +1834,7 @@ L["wep." .. w .. ".name"] = "REPLACEME"
 L["wep." .. w .. ".desc"] = "REPLACEME"
 L["wep." .. w .. ".desc.quote"] = "REPLACEME"
 L["wep." .. w .. ".trivia.manufacturer"] = "REPLACEME"
-L["wep." .. w .. ".credits"] = "Assets: Tactical Intervention"
+L["wep." .. w .. ".credits"] = "REPLACEME"
 
 ///////////////////// -- [[ One-Offs ]] --
 -- Weapons
@@ -1710,4 +1845,4 @@ L["wep." .. w .. ".name"] = "REPLACEME"
 L["wep." .. w .. ".desc"] = "REPLACEME"
 L["wep." .. w .. ".desc.quote"] = "REPLACEME"
 L["wep." .. w .. ".trivia.manufacturer"] = "REPLACEME"
-L["wep." .. w .. ".credits"] = "Assets: Tactical Intervention"
+L["wep." .. w .. ".credits"] = "REPLACEME"
