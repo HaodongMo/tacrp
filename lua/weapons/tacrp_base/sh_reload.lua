@@ -253,8 +253,17 @@ function SWEP:ThinkReload()
     end
 end
 
+local launcher_ammo = {
+    ["smg1_grenade"] = true,
+    ["rpg_round"] = true,
+}
 function SWEP:GetInfiniteAmmo()
-    return TacRP.ConVars["infiniteammo"]:GetBool() or self:GetValue("InfiniteAmmo")
+    local ammo = string.lower(self:GetAmmoType())
+    if launcher_ammo[ammo] then
+        return TacRP.ConVars["infinitelaunchers"]:GetBool() or self:GetValue("InfiniteAmmo")
+    else
+        return TacRP.ConVars["infiniteammo"]:GetBool() or self:GetValue("InfiniteAmmo")
+    end
 end
 
 function SWEP:GetCapacity(base)

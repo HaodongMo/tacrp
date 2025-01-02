@@ -724,7 +724,7 @@ ATT.Override_AmmoPerShot = 1
 ATT.Hook_PreReload = function(wep)
     if wep:StillWaiting(true) then return end
     if wep:Clip1() < 1 then return end
-    if wep:Ammo1() <= 0 and !wep:GetValue("InfiniteAmmo") then return end
+    if wep:Ammo1() <= 0 and !wep:GetInfiniteAmmo() then return end
 
     if SERVER then
         wep:SetNWInt("TacRP_RouletteShot", math.random(1, wep:GetBaseValue("ClipSize")))
@@ -1293,7 +1293,7 @@ end
 
 ATT.Hook_PreReload = function(wep)
     if wep:StillWaiting(true) then return end
-    if wep:Ammo1() <= 0 and !wep:GetValue("InfiniteAmmo") then return end
+    if wep:Ammo1() <= 0 and !wep:GetInfiniteAmmo() then return end
 
     if wep:Clip1() > 0 then return true end
 

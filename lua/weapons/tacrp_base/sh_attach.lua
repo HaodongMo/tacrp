@@ -9,7 +9,7 @@ function SWEP:Attach(slot, att, silent, suppress)
     if !atttbl then return end
     if TacRP:PlayerGetAtts(self:GetOwner(), att) <= 0 then return end
 
-    local inf_old = self:GetValue("InfiniteAmmo")
+    local inf_old = self:GetInfiniteAmmo()
     local ammo_old = self:GetAmmoType()
 
     slottbl.Installed = att
@@ -57,7 +57,7 @@ function SWEP:Attach(slot, att, silent, suppress)
         self:SetFiremode(1)
     end
 
-    local inf_new = self:GetValue("InfiniteAmmo")
+    local inf_new = self:GetInfiniteAmmo()
     local ammo_new = self:GetAmmoType()
     if SERVER then
         if inf_old and !inf_new then
@@ -76,7 +76,7 @@ function SWEP:Detach(slot, silent, suppress)
 
     TacRP:PlayerGiveAtt(self:GetOwner(), slottbl.Installed, 1)
 
-    local inf_old = self:GetValue("InfiniteAmmo")
+    local inf_old = self:GetInfiniteAmmo()
     local ammo_old = self:GetAmmoType()
 
     local atttbl = TacRP.GetAttTable(slottbl.Installed)
@@ -122,7 +122,7 @@ function SWEP:Detach(slot, silent, suppress)
         self:SelectGrenade()
     end
 
-    local inf_new = self:GetValue("InfiniteAmmo")
+    local inf_new = self:GetInfiniteAmmo()
     local ammo_new = self:GetAmmoType()
     if SERVER then
         if inf_old and !inf_new then

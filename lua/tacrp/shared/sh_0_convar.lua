@@ -479,6 +479,12 @@ local conVars = {
         notify = true,
     },
     {
+        name = "infinitelaunchers",
+        default = "0",
+        replicated = true,
+        notify = true,
+    },
+    {
         name = "infinitegrenades",
         default = "0",
         replicated = true,
@@ -1675,6 +1681,11 @@ local function menu_balance_ti(panel)
         command = "tacrp_infiniteammo"
     })
     panel:ControlHelp("#tacrp.balance.infammo.desc")
+    panel:AddControl("checkbox", {
+        label = "#tacrp.balance.inflaunchers", -- Infinite Ammo
+        command = "tacrp_infinitelaunchers"
+    })
+    panel:ControlHelp("#tacrp.balance.inflaunchers.desc")
     panel:AddControl("checkbox", {
         label = "#tacrp.balance.infgren", -- Infinite Grenades
         command = "tacrp_infinitegrenades"
