@@ -799,6 +799,13 @@ local conVars = {
         min = 1,
         replicated = true,
     },
+    {
+        name = "dynamiclight",
+        default = "1",
+        min = 0,
+        max = 1,
+        replicated = true,
+    },
 
     // --------------------------- Multipliers
     {
@@ -1092,7 +1099,7 @@ local conVars = {
         default = "20",
         min = 0,
     },
-	
+
     // Aim Assist
     {
         name = "aimassist",
@@ -1127,8 +1134,7 @@ local conVars = {
         name = "aimassist_multsens",
         default = "0.75",
         client = true,
-    },	
-
+    },
     {
         name = "aimsens",
         default = "1",
@@ -1467,8 +1473,8 @@ local function menu_server_ti(panel)
         max = 10,
     })
     panel:ControlHelp("#tacrp.server.aimassistcone.desc")
-	
-    header(panel, "#tacrp.server.slotrestrict") -- \nWeapon Slot Restriction
+
+    header(panel, "#tacrp.server.slotrestrict") -- Weapon Slot Restriction
     panel:ControlHelp("#tacrp.server.slotrestrict.desc")
     panel:AddControl("slider", {
         label = "#tacrp.server.maxperslot", -- Max per Slot
@@ -1529,7 +1535,7 @@ local function menu_server_ti(panel)
     })
     panel:ControlHelp("#tacrp.server.canceldefaultbodydmg.desc")
     panel:AddControl("checkbox", {
-        label = "#tacrp.server.doorbust", -- Door Busting
+        label = "#tacrp.server.doorbust", -- Enable Door Busting
         command = "tacrp_doorbust"
     })
     panel:ControlHelp("#tacrp.server.doorbust.desc")
@@ -1541,7 +1547,11 @@ local function menu_server_ti(panel)
         max = 600,
     })
     panel:ControlHelp("#tacrp.server.doorrespawntime.desc")
-
+    panel:AddControl("checkbox", {
+        label = "#tacrp.server.dynamiclight", -- Enable Dynamic Lights
+        command = "tacrp_dynamiclight"
+    })
+    panel:ControlHelp("#tacrp.server.dynamiclight.desc")
 end
 
 local function menu_balance_ti(panel)

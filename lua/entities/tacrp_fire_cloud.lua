@@ -49,7 +49,7 @@ function ENT:Think()
     if CLIENT then
         local d = Lerp((self.SpawnTime + self.FireTime - CurTime()) / 8, 1, 0.000001) ^ 2
 
-        if !self.Light then
+        if !self.Light and TacRP.ConVars["dynamiclight"]:GetBool() then
             self.Light = DynamicLight(self:EntIndex())
             if (self.Light) then
                 self.Light.Pos = self:GetPos()
@@ -60,7 +60,7 @@ function ENT:Think()
                 self.Light.Size = math.Clamp(TacRP.ConVars["thermite_radius"]:GetFloat(), 128, 512) * 1.5
                 self.Light.DieTime = CurTime() + self.FireTime
             end
-        else
+        elseif self.Light then
             self.Light.Pos = self:GetPos()
         end
 
