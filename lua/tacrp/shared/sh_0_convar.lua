@@ -1009,6 +1009,24 @@ local conVars = {
         max = 1,
     },
     {
+        name = "flash_affectplayers",
+        default = "1",
+        min = 0,
+        max = 1,
+    },
+    {
+        name = "gas_affectnpcs",
+        default = "1",
+        min = 0,
+        max = 1,
+    },
+    {
+        name = "gas_affectplayers",
+        default = "1",
+        min = 0,
+        max = 1,
+    },
+    {
         name = "thermite_damage_min",
         default = "20",
         min = 0,
@@ -1848,6 +1866,18 @@ local function menu_equipment_ti(panel)
     panel:AddControl("checkbox", {
         label = "#tacrp.equipment.flashnpcs", -- Flashbangs affect NPCs
         command = "tacrp_flash_affectnpcs"
+    })
+    panel:AddControl("checkbox", {
+        label = "#tacrp.equipment.flashplayers", -- Flashbangs affect Players
+        command = "tacrp_flash_affectplayers"
+    })
+    panel:AddControl("checkbox", {
+        label = "#tacrp.equipment.gasnpcs", -- CS Gas affect NPCs
+        command = "tacrp_gas_affectnpcs"
+    })
+    panel:AddControl("checkbox", {
+        label = "#tacrp.equipment.gasplayers", -- CS Gas affect Players
+        command = "tacrp_gas_affectplayers"
     })
     panel:AddControl("slider", {
         label = "#tacrp.equipment.flashslow", -- Flashbang Slow

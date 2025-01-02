@@ -119,9 +119,6 @@ function ENT:Think()
         dmg:SetDamageForce(Vector(0, 0, 0))
         dmg:SetDamagePosition(self:GetPos())
         dmg:SetDamageCustom(1024) -- immersive death
-
-        -- util.BlastDamageInfo(dmg, self:GetPos(), 300)
-
         for i, k in pairs(ents.FindInSphere(origin, 300)) do
             if k:IsPlayer() or k:IsNPC() or k:IsNextBot() then
 
@@ -139,13 +136,12 @@ function ENT:Think()
                     mask = MASK_SOLID_BRUSHONLY
                 })
                 if tr.Fraction < 1 then continue end
-                local dist = (tr.HitPos - tr.StartPos):Length()
-                local delta = dist / 320
 
-                dmg:SetDamage(k:IsPlayer() and math.Rand(4, 8) or math.Rand(5, 15))
-                k:TakeDamageInfo(dmg)
+                dmg:SetDamage(math.Rand(3, 6))
 
-                if k:IsPlayer() then
+                if k:IsPlayer() and TacRP.ConVars["gas_affectplayers"]:GetBool() then
+                    k:TakeDamageInfo(dmg)
+
                     local timername = "tacrp_gas_" .. k:EntIndex()
                     local reps = 6
 
@@ -176,6 +172,17 @@ function ENT:Think()
                             k:EmitSound("ambient/voices/cough" .. math.random(1, 4) .. ".wav", 80, math.Rand(95, 105))
                         end
                     end)
+                elseif k:IsNPC() and TacRP.ConVars["gas_affectnpcs"]:GetBool() and (k:GetHullType() == HULL_HUMAN or k:GetHullType() == HULL_WIDE_HUMAN) then
+                    k:SetCurrentWeaponProficiency(WEAPON_PROFICIENCY_POOR)
+                    local rng = math.random()
+                    if rng <= 0.3 then
+                        k:SetSchedule(SCHED_RUN_RANDOM)
+                    elseif rng <= 0.8 then
+                        k:SetSchedule(SCHED_COWER)
+                    end
+                    k:TakeDamageInfo(dmg)
+                elseif !k:IsNPC() and !k:IsPlayer() then
+                    k:TakeDamageInfo(dmg)
                 end
             end
         end
@@ -196,16 +203,23 @@ end
 
 -- cs gas strips armor and will try not deal lethal damage
 hook.Add("EntityTakeDamage", "tacrp_gas", function(ent, dmg)
-    if ent:IsPlayer() and dmg:GetDamageType() == DMG_NERVEGAS and bit.band(dmg:GetDamageCustom(), 1024) == 1024 then
-        local threshold = TacRP.GetBalanceMode() == TacRP.BALANCE_TTT and 50 or 25
-        local wep = ent:GetActiveWeapon()
-        if IsValid(wep) and wep.ArcticTacRP and wep:GetValue("GasImmunity") then
-            dmg:SetDamage(0)
-        elseif ent:Health() - dmg:GetDamage() <= threshold then
-            dmg:SetDamage(math.max(0, ent:Health() - threshold))
-        end
-        if dmg:GetDamage() <= 0 then
-            ent.TacRPGassed = true
+    if dmg:GetDamageType() == DMG_NERVEGAS and bit.band(dmg:GetDamageCustom(), 1024) == 1024 then
+        if ent:IsPlayer() then
+            local threshold = TacRP.GetBalanceMode() == TacRP.BALANCE_TTT and 50 or 25
+            local wep = ent:GetActiveWeapon()
+            if IsValid(wep) and wep.ArcticTacRP and wep:GetValue("GasImmunity") then
+                dmg:SetDamage(0)
+            elseif ent:Health() - dmg:GetDamage() <= threshold then
+                dmg:SetDamage(math.max(0, ent:Health() - threshold))
+            end
+            if dmg:GetDamage() <= 0 then
+                ent.TacRPGassed = true
+            end
+        elseif ent:IsNPC() then
+            if ent:Health() <= dmg:GetDamage() then
+                ent:SetHealth(1)
+                dmg:SetDamage(0)
+            end
         end
     end
 end)

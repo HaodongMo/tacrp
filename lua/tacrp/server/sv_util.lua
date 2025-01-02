@@ -7,7 +7,7 @@ local badseqs = {
 function TacRP.Flashbang(ent, pos, radius, time_max, time_min, time_stunadd)
     time_stunadd = time_stunadd or 0.5
     for _, k in ipairs(ents.FindInSphere(pos, radius)) do
-        if k:IsPlayer() then
+        if k:IsPlayer() and TacRP.ConVars["flash_affectplayers"]:GetBool() then
             local dist = k:EyePos():Distance(pos)
             local dp = (k:EyePos() - pos):Dot(k:EyeAngles():Forward())
 
