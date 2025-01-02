@@ -385,8 +385,8 @@ L["wep." .. w .. ".desc.quote"] = "\"Bez pytań, bez odpowiedzi. To jest nasz bi
 -- L["wep." .. w .. ".credits"] = "Assets: Tactical Intervention"
 
 w = ws .. "skorpion"
--- L["wep." .. w .. ".name.full"] = "Škorpion vz. 61"
--- L["wep." .. w .. ".name"] = "Škorpion"
+-- L["wep." .. w .. ".name.full"] = "Skorpion vz. 61"
+-- L["wep." .. w .. ".name"] = "Skorpion"
 L["wep." .. w .. ".desc"] = "Lekki pistolet maszynowy o dobrym zasięgu, odrzucie i rozrzucie."
 -- L["wep." .. w .. ".trivia.manufacturer"] = "CZ Uherský Brod"
 -- L["wep." .. w .. ".credits"] = "Assets: Tactical Intervention"
