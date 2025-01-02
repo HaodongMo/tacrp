@@ -1612,7 +1612,7 @@ local function menu_balance_ti(panel)
         min = 0.1,
         max = 3,
     })
-    panel:ControlHelp("##tacrp.balance.meleewpndmg.desc")
+    panel:ControlHelp("#tacrp.balance.meleewpndmg.desc")
     panel:AddControl("slider", {
         label = "#tacrp.balance.headshotmult", -- Headshot Multiplier
         command = "tacrp_mult_headshot",

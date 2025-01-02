@@ -20,8 +20,6 @@ ENT.SmokeColor = SmokeColor
 ENT.BillowTime = 2.5
 ENT.Life = 15
 
-ENT.TacRPSmoke = true
-
 AddCSLuaFile()
 
 function ENT:Initialize()
