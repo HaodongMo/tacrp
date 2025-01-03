@@ -506,4 +506,6 @@ L["caliber.762x54"] = "7,62 × 54 mmR"
 L["caliber.762x25"] = "7,62 × 25 mm Tokarev"
 L["caliber.300winmag"] = ".300 Win Mag"
 
+L["caliber.545x39"] = "5,45 × 39 mm"
+
 L["unknown"] = "Okänd"

@@ -505,6 +505,8 @@ L["caliber.762x54"] = "7.62×54mmR"
 L["caliber.762x25"] = "7.62×25mm Tokarev"
 L["caliber.300winmag"] = ".300 Win Mag"
 
+L["caliber.545x39"] = "5.45×39mm"
+
 L["unknown"] = "Unknown"
 
 
@@ -591,5 +593,7 @@ STL["caliber.9x21"] = "9x21mm IMI"
 STL["caliber.762x54"] = "7.62x54mmR"
 STL["caliber.762x25"] = "7.62x25mm Tokarev"
 STL["caliber.300winmag"] = ".300 Win Mag"
+
+STL["caliber.545x39"] = "5.45x39mm"
 
 STL["unknown"] = "Unknown"
