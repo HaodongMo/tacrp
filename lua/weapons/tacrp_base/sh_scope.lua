@@ -85,6 +85,8 @@ function SWEP:ScopeToggle(setlevel)
     self:EmitSound(self:GetValue("Sound_ScopeIn"), 75, 100, 1, CHAN_ITEM)
 
     self:SetShouldHoldType()
+
+    self:RunHook("Hook_PostScopeToggle", setlevel)
 end
 
 function SWEP:GetShouldFOV(ignorepeek)
