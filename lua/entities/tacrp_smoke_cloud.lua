@@ -110,13 +110,13 @@ function ENT:Initialize()
         self:SetSolid(SOLID_NONE)
     end
 
-    self.dt = CurTime() + self.Life + self.BillowTime + 2
+    self.dt = CurTime() + self.Life + self.BillowTime
 end
 
 function ENT:TestCollision( startpos, delta, isbox, extents, mask )
     if (mask == MASK_BLOCKLOS or mask == MASK_BLOCKLOS_AND_NPCS) then
         local len = delta:Length()
-        if len <= 256 then return false end -- NPCs can see very close
+        if len <= 200 then return false end -- NPCs can see very close
 
         local rad = self.SmokeRadiusSqr
         local pos = self:GetPos()
