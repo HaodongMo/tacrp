@@ -22,6 +22,12 @@ ENT.ImpactDamage = 1
 
 ENT.Delay = 3
 
+
+ENT.SoundHint = true
+ENT.SoundHintDelay = 1.5
+ENT.SoundHintRadius = 328
+ENT.SoundHintDuration = 1.5
+
 ENT.Sticky = true
 
 ENT.ExplodeSounds = {

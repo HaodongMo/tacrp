@@ -17,6 +17,11 @@ ENT.ImpactFuse = false // projectile explodes on impact.
 ENT.ExplodeOnDamage = false // projectile explodes when it takes damage.
 ENT.ExplodeUnderwater = false
 
+ENT.SoundHint = true
+ENT.SoundHintDelay = 1
+ENT.SoundHintRadius = 512
+ENT.SoundHintDuration = 1
+
 ENT.ImpactDamage = 1
 
 ENT.Delay = 2

@@ -26,6 +26,8 @@ function ENT:Initialize()
         self:SetMoveType( MOVETYPE_NONE )
         self:SetSolid( SOLID_NONE )
         self:DrawShadow( false )
+
+        sound.EmitHint(SOUND_DANGER, self:GetPos(), 328, self.Life, self)
     else
         local emitter = ParticleEmitter(self:GetPos())
 

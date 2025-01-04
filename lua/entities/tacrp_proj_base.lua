@@ -42,6 +42,11 @@ ENT.ImpactDamageType = DMG_CRUSH + DMG_CLUB
 
 ENT.Delay = 0 // after being triggered and this amount of time has passed, the projectile will explode.
 
+ENT.SoundHint = false // Emit a sound hint so NPCs can react
+ENT.SoundHintDelay = 0 // Delay after spawn
+ENT.SoundHintRadius = 328
+ENT.SoundHintDuration = 1
+
 ENT.Armed = false
 
 ENT.SmokeTrail = false // leaves trail of smoke
@@ -324,6 +329,11 @@ function ENT:Think()
 
     if !self.SpawnTime then
         self.SpawnTime = CurTime()
+    end
+
+    if SERVER and self.SoundHint and CurTime() >= self.SpawnTime + self.SoundHintDelay then
+        self.SoundHint = false // only once
+        sound.EmitHint(SOUND_DANGER, self:GetPos(), self.SoundHintRadius, self.SoundHintDuration, self)
     end
 
     if !self.Armed and isnumber(self.TimeFuse) and self.SpawnTime + self.TimeFuse < CurTime() then

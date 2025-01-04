@@ -86,6 +86,9 @@ function ENT:Detonate()
 end
 
 function ENT:Stuck()
+
+    sound.EmitHint(SOUND_DANGER, self:GetPos(), 256, 2, self)
+
     self:SetArmTime(CurTime())
     if !self:GetRemote() then
         local ttt = TacRP.GetBalanceMode() == TacRP.BALANCE_TTT
