@@ -120,7 +120,7 @@ function SWEP:CreateCustomizeHUD()
         end
 
         if self.SubCatTier and self.SubCatType then
-            local type_txt = self:GetSubClassName(TacRP.UseTiers())
+            local type_txt = TacRP.FormatTierType(self.SubCatType, self.SubCatTier, TacRP.UseTiers())
             surface.SetFont("TacRP_Myriad_Pro_12")
             local type_w = surface.GetTextSize(type_txt)
 
