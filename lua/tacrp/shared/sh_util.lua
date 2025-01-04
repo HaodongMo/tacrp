@@ -73,7 +73,7 @@ end
 function TacRP.FormatTierType(wtype, wtier, use_tiers)
     if wtype then
         local type_txt = string.sub(TacRP:TryTranslate(wtype), 2)
-        if use_tiers and wtier and tier != "9Special" then
+        if use_tiers and wtier and wtier != "9Special" then
             type_txt = TacRP:GetPhrase("cust.type_tier", {tier = string.sub(TacRP:TryTranslate(wtier), 2), type = type_txt})
         end
         return type_txt
