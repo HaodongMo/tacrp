@@ -174,14 +174,12 @@ function PANEL:PaintOver(w, h)
         --ry = ry + TacRP.SS(16)
         local gap = TacRP.SS(18)
         local statjump = TacRP.SS(12)
-        local statted = false
 
         local bw, bh = TacRP.SS(160), TacRP.SS(18)
 
-        atttxt = TacRP:GetAttName(att, true)
-        desctxt = TacRP:GetAttDesc(att)
+        local atttxt = TacRP:GetAttName(att, true)
         if !self.DescCache then
-            self.DescCache = TacRP.MultiLineText(desctxt, bw, "TacRP_Myriad_Pro_6")
+            self.DescCache = TacRP.MultiLineText(TacRP:GetAttDesc(att), bw, "TacRP_Myriad_Pro_6")
         end
         bh = bh + (#self.DescCache - 1) * TacRP.SS(5)
 
