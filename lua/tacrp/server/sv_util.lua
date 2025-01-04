@@ -75,39 +75,6 @@ function TacRP.Flashbang(ent, pos, radius, time_max, time_min, time_stunadd)
     end
 end
 
-TacRP.WeaponListCache = {}
-function TacRP.GetWeaponList(subcat, tier)
-    if !subcat then subcat = "" end
-    if !tier then tier = "" end
-    if !TacRP.WeaponListCache[subcat] or !TacRP.WeaponListCache[subcat][tier] then
-        TacRP.WeaponListCache[subcat] = TacRP.WeaponListCache[subcat] or {}
-        TacRP.WeaponListCache[subcat][tier] = {}
-
-        for i, wep in pairs(weapons.GetList()) do
-            local weap = weapons.Get(wep.ClassName)
-            if !weap or !weap.ArcticTacRP
-                    or wep.ClassName == "tacrp_base" or wep.ClassName == "tacrp_base_nade" or wep.ClassName == "tacrp_base_melee"
-                    or !weap.Spawnable or weap.AdminOnly
-                    or (subcat == "npc" and !weap.NPCUsable)
-                    or (subcat != "" and subcat != "npc" and subcat != weap.SubCatType)
-                    or (tier != "" and tier != weap.SubCatTier) then
-                continue
-            end
-
-            table.insert(TacRP.WeaponListCache[subcat][tier], wep.ClassName)
-        end
-    end
-    return TacRP.WeaponListCache[subcat][tier]
-end
-
-function TacRP.GetRandomWeapon(subcat, tier)
-    if !subcat then subcat = "" end
-    if !tier then tier = "" end
-
-    local tbl = TacRP.GetWeaponList(subcat, tier)
-    return tbl[math.random(1, #tbl)]
-end
-
 local cats = {
     ["ClassName"] = true,
     ["PrintName"] = true,
