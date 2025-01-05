@@ -353,6 +353,7 @@ L["att.sight.1.25"] = "1.25x Sight"
 L["att.sight.1.5"] = "1.5x Sight"
 L["att.sight.1.75"] = "1.75x Sight"
 L["att.zoom.2"] = "2x Zoom"
+L["att.zoom.2.2"] = "2.2x Zoom"
 L["att.zoom.3"] = "3x Zoom"
 L["att.zoom.3.4"] = "3.4x Zoom"
 L["att.zoom.3.5"] = "3.5x Zoom"
@@ -507,6 +508,30 @@ L["caliber.300winmag"] = ".300 Win Mag"
 
 L["caliber.545x39"] = "5.45×39mm"
 
+L["caliber.410b"] = ".410 Bore"
+L["caliber.408ct"] = ".408 Cheyenne Tactical"
+L["caliber.950jdj"] = ".950 JDJ"
+L["caliber.600ne"] = ".600 Nitro Express"
+L["caliber.83mmr"] = "83mm Rockets"
+L["caliber.25x40"] = "25×40mm"
+
+L["caliber.44m"] = ".44 Magnum"
+L["caliber.763x25"] = "7.63×25mm Mauser"
+L["caliber.277sig"] = ".277 SIG Fury"
+L["caliber.10auto"] = "10mm Auto"
+L["caliber.75x55"] = "7.5×55mm"
+L["caliber.44-40"] = ".44-40 WCF"
+
+L["caliber.20g"] = "20 Gauge"
+L["caliber.9wm"] = "9mm Win Mag"
+L["caliber.44s"] = ".44 Special"
+L["caliber.303b"] = ".303 British"
+L["caliber.66mmr"] = "66mm Rockets"
+L["caliber.25mmf"] = "25mm Flares"
+L["caliber.270w"] = ".270 Winchester"
+
+L["caliber.45s"] = ".45 Super"
+
 L["unknown"] = "Unknown"
 
 
@@ -595,5 +620,29 @@ STL["caliber.762x25"] = "7.62x25mm Tokarev"
 STL["caliber.300winmag"] = ".300 Win Mag"
 
 STL["caliber.545x39"] = "5.45x39mm"
+
+STL["caliber.410b"] = ".410 Bore"
+STL["caliber.408ct"] = ".408 Cheyenne Tactical"
+STL["caliber.950jdj"] = ".950 JDJ"
+STL["caliber.600ne"] = ".600 Nitro Express"
+STL["caliber.83mmr"] = "83mm Rockets"
+STL["caliber.25x40"] = "25x40mm"
+
+STL["caliber.44m"] = ".44 Magnum"
+STL["caliber.763x25"] = "7.63x25mm Mauser"
+STL["caliber.277sig"] = ".277 SIG Fury"
+STL["caliber.10auto"] = "10mm Auto"
+STL["caliber.75x55"] = "7.5x55mm"
+STL["caliber.44-40"] = ".44-40 WCF"
+
+STL["caliber.20g"] = "20 Gauge"
+STL["caliber.9wm"] = "9mm Win Mag"
+STL["caliber.44s"] = ".44 Special"
+STL["caliber.303b"] = ".303 British"
+STL["caliber.66mmr"] = "66mm Rockets"
+STL["caliber.25mmf"] = "25mm Flares"
+STL["caliber.270w"] = ".270 Winchester"
+
+STL["caliber.45s"] = ".45 Super"
 
 STL["unknown"] = "Unknown"
