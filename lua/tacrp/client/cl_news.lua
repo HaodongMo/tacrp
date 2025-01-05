@@ -1174,6 +1174,38 @@ The fourth major expansion, featuring 42 weapons themed around zombies, the apoc
 
 ]]
     },
+    {
+        Title = "Update 30 / Localization Patch",
+        Type = "Update",
+        Date = "2025-99-99", -- REPLACEME BEFORE RELEASE TO WORKSHOP
+        Author = "Moka, 8Z, & speedonerd",
+        Major = true,
+        Summary = "Localizations & Various Fixes",
+        Contents = [[<body style="font-family:'Myriad Pro';color:white;font-size:125%;">
+
+<h3>Full Localization</h3>
+<p>TacRP has been updated and received full localization support. This means that weapons (names, descriptions, trivia & credits), attachments (names, descriptions, pros & cons) and overall base content (stats, categories, etc.) can now be translated to any language Garry's Mod supports.</p>
+<p>TacRP supports English, and it has been partially supporting Chinese and Polish for a long time now. Additionally, Swedish has been added as a translated language, courtesy of Moka.</p>
+<p>All weapon packs that had localization files included in them (Special Delivery, Iron Curtain, InterOps, etc.) will be updated to have them removed, as all those strings are now included in the base.</p>
+
+<h3>Changelist:</h3>
+<ul>
+<li><b>Added:</b> (Base) Added a setting to enable Aim Assistance (Client / Server)
+<li><b>Added:</b> (Base) Added a setting to lower the mouse sensitivity when aiming (Client)
+<li><b>Added:</b> (Base) Added a setting to enable infinite ammo for launchers (Client)
+<li><b>Added:</b> (Base) Added a setting for the CS Gas and Flashbangs to affect players and/or NPCs (Equipment)
+<li><b>Added:</b> (Base) Added a setting to toggle dynamic lights (Server)
+<li><b>Added:</b> (Base) Spawnmenu subcategories and weapon names now use localized strings
+<li><b>Changed:</b> (Base) Tweaked the stats on the "Ratshot Rounds" attachment
+<li><b>Changed:</b> (Base) The Stinger can now lock onto Glide vehicles
+<li><b>Changed:</b> (Base) Fixed that weapons were not added to the Spawnmenu category correctly
+<li><b>Changed:</b> (Base) Attachment descriptions can now be two or more lines long and will scale accordingly
+<li><b>Changed:</b> (Base) Added a separate ConVar for infinite ammo for launchers
+<li><b>Changed:</b> (Base) NPCs now react to nearby grenades
+</ul>
+
+]]
+    },
 }
 TacRP.NewsRead = TacRP.NewsRead or {}
 TacRP.NewsFirstLoad = false
