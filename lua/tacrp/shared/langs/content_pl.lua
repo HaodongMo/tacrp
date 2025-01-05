@@ -1612,6 +1612,8 @@ L["wep." .. w .. ".desc.quote"] = "\"Imiona są dla przyjaciół, więc nie potr
 -- L["att.ammo_1858_36perc.name"] = ".36 Percussion"
 -- L["att.ammo_1858_36perc.desc"] = "Caliber conversion firing smaller rounds with better range."
 
+-- L["att.procon.yeehaw"] = "yeeeeeeeeeeeeehawwwwwwwwww"
+
 ///////////////////// -- [[ Brute Force ]] --
 -- Weapons
 ws = "tacrp_m_"
@@ -1995,6 +1997,9 @@ L["wep." .. w .. ".desc"] = "Granatnik bullpup z zintegrowanym dalmierzem, dobry
 -- L["att.ammo_25mm_heat.name.full"] = "25mm High-Explosive Anti-Tank Grenades"
 -- L["att.ammo_25mm_heat.name"] = "HEAT"
 -- L["att.ammo_25mm_heat.desc"] = "Grenades designed to penetrate armor and deal direct damage."
+
+-- L["att.pro.trigger_spas_freeman1"] = "Twice the fun"
+-- L["att.procon.nikita"] = "Manual Control (while aiming and Laser ON)"
 
 ///////////////////// -- [[ ExoOps ]] --
 -- Weapons
@@ -2772,6 +2777,9 @@ w = ws .. "woodsman"
 -- L["att.ammo_p2a1_confetti.name.full"] = "P2A1 Confetti Shotshells"
 -- L["att.ammo_p2a1_confetti.name"] = "Confetti"
 -- L["att.ammo_p2a1_confetti.desc"] = "For celebrations. Yippie!"
+
+-- L["att.procon.illumradius"] = "Illumination Radius"
+-- L["att.procon.noflare"] = "No Flare"
 
 ///////////////////// -- [[ One-Offs ]] --
 -- Weapons

@@ -1617,6 +1617,8 @@ L["att.ammo_1858_36perc.name.full"] = "Remington 1858 .36 Percussion 改装"
 L["att.ammo_1858_36perc.name"] = ".36 Percussion"
 L["att.ammo_1858_36perc.desc"] = "改装发射威力较小但射程更高的弹药。"
 
+L["att.procon.yeehaw"] = "yeeeeeeeeeeeeehawwwwwwwwww"
+
 ///////////////////// -- [[ Brute Force ]] --
 -- Weapons
 ws = "tacrp_m_"
@@ -1975,7 +1977,6 @@ w = ws .. "xm25"
 -- L["att.ammo_smaw_nikita.name.full"] = "SMAW Nikita Rocket Pod"
 -- L["att.ammo_smaw_nikita.name"] = "Nikita"
 -- L["att.ammo_smaw_nikita.desc"] = "A very slow manually controllable rocket."
-L["att.procon.nikita"] = "遥控火箭 (瞄准并且开启镭射时)"
 
 -- L["att.ammo_smaw_tandem.name.full"] = "SMAW Tandem Rocket Pod"
 -- L["att.ammo_smaw_tandem.name"] = "Tandem"
@@ -2000,6 +2001,9 @@ L["att.procon.nikita"] = "遥控火箭 (瞄准并且开启镭射时)"
 -- L["att.ammo_25mm_heat.name.full"] = "25mm High-Explosive Anti-Tank Grenades"
 -- L["att.ammo_25mm_heat.name"] = "HEAT"
 -- L["att.ammo_25mm_heat.desc"] = "Grenades designed to penetrate armor and deal direct damage."
+
+-- L["att.pro.trigger_spas_freeman1"] = "Twice the fun"
+L["att.procon.nikita"] = "遥控火箭 (瞄准并且开启镭射时)"
 
 ///////////////////// -- [[ ExoOps ]] --
 -- Weapons
@@ -2777,6 +2781,9 @@ w = ws .. "woodsman"
 -- L["att.ammo_p2a1_confetti.name.full"] = "P2A1 Confetti Shotshells"
 -- L["att.ammo_p2a1_confetti.name"] = "Confetti"
 -- L["att.ammo_p2a1_confetti.desc"] = "For celebrations. Yippie!"
+
+-- L["att.procon.illumradius"] = "Illumination Radius"
+-- L["att.procon.noflare"] = "No Flare"
 
 ///////////////////// -- [[ One-Offs ]] --
 -- Weapons

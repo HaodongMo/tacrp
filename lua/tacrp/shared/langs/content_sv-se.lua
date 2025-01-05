@@ -1613,6 +1613,8 @@ L["att.ammo_1858_36perc.name.full"] = "Remington 1858 .36 Tändhattkonvertering"
 L["att.ammo_1858_36perc.name"] = ".36 Tändhatt"
 L["att.ammo_1858_36perc.desc"] = "Kaliberkonvertering skjuter mindre skott med högre räckvidd."
 
+L["att.procon.yeehaw"] = "yeeeeeeeeeeeeehawwwwwwwwww"
+
 ///////////////////// -- [[ Brute Force ]] --
 -- Weapons
 ws = "tacrp_m_"
@@ -1971,7 +1973,6 @@ L["att.ammo_smaw_tri.desc"] = "En trio av snabba och manövrerbara anti-infanter
 L["att.ammo_smaw_nikita.name.full"] = "SMAW \"Nikita\"-Robotpodd"
 L["att.ammo_smaw_nikita.name"] = "Nikita"
 L["att.ammo_smaw_nikita.desc"] = "Söligt manuellt kontrollerbar robot."
-L["att.procon.nikita"] = "Manuell Kontroll (i siktet och Lasern PÅ)"
 
 L["att.ammo_smaw_tandem.name.full"] = "SMAW \"Tandem\"-Robotpodd"
 L["att.ammo_smaw_tandem.name"] = "Tandem"
@@ -1996,6 +1997,9 @@ L["att.ammo_25mm_buckshot.desc"] = "Granat med flat topp som har träffsäkra fl
 L["att.ammo_25mm_heat.name.full"] = "25 mm Pansarspränggranater"
 L["att.ammo_25mm_heat.name"] = "RSV"
 L["att.ammo_25mm_heat.desc"] = "Granater designade att penetrera pansar och göra direkt skada."
+
+L["att.pro.trigger_spas_freeman1"] = "Dubbelt så skoj"
+L["att.procon.nikita"] = "Manuell Kontroll (i siktet och Lasern PÅ)"
 
 ///////////////////// -- [[ ExoOps ]] --
 -- Weapons
@@ -2776,6 +2780,9 @@ L["att.ammo_p2a1_confetti.name.full"] = "P2A1 Konfetti Patroner"
 L["att.ammo_p2a1_confetti.name"] = "Konfetti"
 L["att.ammo_p2a1_confetti.desc"] = "Till firanden. Yippie!"
 
+L["att.procon.illumradius"] = "Belysningsradie"
+L["att.procon.noflare"] = "Inga Signalskott"
+
 ///////////////////// -- [[ One-Offs ]] --
 -- Weapons
 ws = "tacrp_sp_"
@@ -2827,4 +2834,4 @@ L["wep." .. w .. ".desc.quote"] = "\"Det finns inga gudar. Enda mannen i skyn ä
 L["wep." .. w .. ".trivia.manufacturer"] = "Knight's Armament"
 L["wep." .. w .. ".credits"] = "Specialbyggd av speedonerd till Bladelordomega \nSR-25: Firearms: Source \nYtterligare Tillgångar: Battlestate Games, Treyarch, Crytek, kriboez, cR45h"
 
-L["hint.tac.bladespecial"] = "Justera Zoom"
+L["hint.tac.bladespecial"] = "Växla Zoom"
