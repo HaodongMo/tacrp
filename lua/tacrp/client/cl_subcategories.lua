@@ -66,11 +66,11 @@ spawnmenu.AddContentType("tacrp_weapon", function(container, obj)
         toolTip = toolTip .. "\n"
 
         if SWEPinfo.Description and SWEPinfo.Description != "" then
-            toolTip = toolTip .. "\n" .. SWEPinfo.Description
+            toolTip = toolTip .. "\n" .. ( TacRP:GetPhrase("wep." .. SWEPinfo.ClassName .. ".desc") or SWEPinfo.Description )
         end
 
         if SWEPinfo.Description_Quote and SWEPinfo.Description_Quote != "" then
-            toolTip = toolTip .. "\n\n" .. SWEPinfo.Description_Quote
+            toolTip = toolTip .. "\n\n" .. ( TacRP:GetPhrase("wep." .. SWEPinfo.ClassName .. ".desc.quote") or SWEPinfo.Description_Quote )
         end
     end
 
