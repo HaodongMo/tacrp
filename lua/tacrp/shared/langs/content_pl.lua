@@ -1,6 +1,79 @@
 L = {} -- Polish Content Strings by meerfi
 
 ///////////////////// -- [[ TacRP Base ]] --
+-- QuickNades
+-- L["quicknade.fuse"] = "FUSE:"
+
+-- L["quicknade.frag.name.full"] = "Frag Grenade"
+-- L["quicknade.frag.name"] = "FRAG"
+-- L["quicknade.frag.dettype"] = "Timed: 2s"
+-- L["quicknade.frag.desc"] = "Standard explosive grenade spraying shrapnel in a medium radius.\n\nTypically not lethal by itself, but can wound targets or flush them out of cover."
+
+-- L["quicknade.flash.name.full"] = "Flashbang"
+-- L["quicknade.flash.name"] = "FLASH"
+-- L["quicknade.flash.dettype"] = "Timed: 1.5s"
+-- L["quicknade.flash.desc"] = "Emits a bright flash and deafening bang that disorients targets (hence its name).\n\nSlows affected targets, and deals minor damage in a large radius."
+
+-- L["quicknade.smoke.name.full"] = "Smoke Grenade"
+-- L["quicknade.smoke.name"] = "SMOKE"
+-- L["quicknade.smoke.dettype"] = "Timed: 2s"
+-- L["quicknade.smoke.desc"] = "Emits a concealing cloud of smoke that lasts about 20 seconds.\n\nDeals no damage whatsoever, and is commonly used to cover an advance or to obscure a line of sight."
+
+-- L["quicknade.gas.name.full"] = "CS Gas Grenade"
+-- L["quicknade.gas.name"] = "GAS"
+-- L["quicknade.gas.dettype"] = "Timed: 2s"
+-- L["quicknade.gas.desc"] = "Emits a cloud of tear gas that lasts about 15 seconds.\n\nAnyone caught within will take non-lethal lingering damage and have trouble keeping their weapon steady.\n\nIt is a chemical weapon banned by the Geneva Convention and is ABSOLUTELY NOT FART GAS."
+
+-- L["quicknade.fire.name.full"] = "Thermite Grenade"
+-- L["quicknade.fire.name"] = "FIRE"
+-- L["quicknade.fire.dettype"] = "Timed: 3s"
+-- L["quicknade.fire.desc"] = "Sticks to targets and burns intensely for about 8 seconds, dealing damage within a small radius.\n\nWhile thermite is typically used to burn through materiel, it is also useful for area denial."
+
+-- L["quicknade.c4.name.full"] = "C4"
+-- L["quicknade.c4.name"] = "C4 Charge"
+-- L["quicknade.c4.dettype"] = "Remote"
+-- L["quicknade.c4.desc"] = "A brick of powerful explosives that can be touched off by a detonator remotely.\n\nC4 is remarkably inert, but the signalling device can be removed or destroyed, defusing the charge."
+
+-- L["quicknade.nuke.name.full"] = "Nuclear Device"
+-- L["quicknade.nuke.name"] = "NUKE"
+-- L["quicknade.nuke.dettype"] = "Remote"
+-- L["quicknade.nuke.desc"] = "Briefcase-sized micro nuclear bomb that can be touched off by a detonator remotely.\n\nIts explosive outcome needs no description."
+
+-- L["quicknade.breach.name.full"] = "Breaching Charge"
+-- L["quicknade.breach.name"] = "BREACH"
+-- L["quicknade.breach.dettype"] = "Timed: 2s / Remote"
+-- L["quicknade.breach.desc"] = "Shaped charge made to bust through doors and weak walls.\n\nSmall blast radius, but will destroy any door it is attached to and hurt targets on the other side with its shockwave.\n\nWhen holding a detonator, the charge is configured to detonate remotely."
+
+-- L["quicknade.heal.name.full"] = "Medi-Smoke Can"
+-- L["quicknade.heal.name"] = "HEAL"
+-- L["quicknade.heal.dettype"] = "Timed: 5s"
+-- L["quicknade.heal.desc"] = "Emits a cloud of restorative gas for about 15 seconds.\n\nMedical nanites restores health when inhaled. If recipients are healthy, any armor they have can be repaired or recharged.\n\nHas the opposite effect on necrotics, dealing damage instead."
+
+-- L["quicknade.rock.name.full"] = "Rock"
+-- L["quicknade.rock.name"] = "ROCK"
+-- L["quicknade.rock.dettype"] = "Blunt Trauma"
+-- L["quicknade.rock.desc"] = "Possibly the first weapon ever used by humans.\n\nUse as last resort, for ancient capital punishments, or for violent pranks.\n\nResourceful as you are, there's no telling what else you can pull out of your pants in a pinch..."
+
+-- L["quicknade.bump.name.full"] = "Bump Mine"
+-- L["quicknade.bump.name"] = "BUMP"
+-- L["quicknade.bump.dettype"] = "Pressure Plate"
+-- L["quicknade.bump.desc"] = "Magnetized mine that sticks to surfaces.\n\nCreates a harmless explosion that pushes everything away, hurting targets by sending them into walls or floors.\n\nCan be used to launch yourself very far, but remember to bring a parachute."
+
+-- L["quicknade.t-smk.name.full"] = "Smoke Grenade"
+-- L["quicknade.t-smk.name"] = "T-SMK"
+-- L["quicknade.t-smk.dettype"] = "Timed: 2s"
+-- L["quicknade.t-smk.desc"] = "Terrorist-issue smoke grenade.\n\nCreates a smokescreen."
+
+-- L["quicknade.t-dcb.name.full"] = "Discombobulator"
+-- L["quicknade.t-dcb.name"] = "T-DCB"
+-- L["quicknade.t-dcb.dettype"] = "Timed: 3s"
+-- L["quicknade.t-dcb.desc"] = "Terrorist-issue concussion grenade.\n\nDoes no damage, but creates a blast that pulls props in and pulls players out."
+
+-- L["quicknade.t-inc.name.full"] = "Incendiary Grenade"
+-- L["quicknade.t-inc.name"] = "T-INC"
+-- L["quicknade.t-inc.dettype"] = "Timed: 2s"
+-- L["quicknade.t-inc.desc"] = "Terrorist-issue incendiary grenade.\n\nExplodes with minor damage, and starts fires in an area."
+
 -- Weapons
 local ws = "tacrp_"
 local w = ws .. "ak47"

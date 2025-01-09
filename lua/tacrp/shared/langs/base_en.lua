@@ -83,7 +83,6 @@ L["ammo.357"] = "Magnum Ammo"
 L["ammo.smg1"] = "Carbine Ammo"
 L["ammo.ar2"] = "Rifle Ammo"
 
-
 L["rating.score"] = "(Score: {score}/{max})"
 L["rating.lethality"] = "Lethality"
 L["rating.lethality.desc"] = "How easily and quickly the weapon can take out a single target.\nDoes not consider armor penetration.\nAffected by Damage and RPM."
@@ -213,8 +212,6 @@ L["stat.meleerange.desc"] = "How far away the weapon can reach for an attack."
 L["stat.meleedelay"] = "Melee Windup"
 L["stat.meleedelay.desc"] = "Delay between an attack starting and landing."
 
-
-
 L["stat.melee2damage"] = "Damage (H)"
 L["stat.melee2damage.desc"] = "Damage dealt by heavy attacks."
 L["stat.melee2attacktime"] = "Melee Attack Delay (H)"
@@ -231,7 +228,6 @@ L["stat.lifesteal"] = "Health From Damage"
 L["stat.lifesteal.desc"] = "Fraction of damage dealt that is converted into health."
 L["stat.damagecharge"] = "Charge From Damage"
 L["stat.damagecharge.desc"] = "Fraction of damage dealt that is converted into perk charge."
-
 
 L["stat.damage"] = "Damage"
 L["stat.damage.desc"] = "Damage per bullet at all ranges."
@@ -451,6 +447,15 @@ L["hint.melee_ninja.divekick"] = "Divekick"
 
 L["hint.medkit.self"] = "Heal Self"
 L["hint.medkit.others"] = "Heal Others"
+
+L["hint.unlock"] = "Unlock"
+L["hint.exitcustmenu"] = "Exit the Customization Menu"
+
+L["hint.nogrenades"] = "No Grenades Available"
+
+L["hint.hold"] = "(Hold)"
+
+L["hint.shootself"] = "Shoot Yourself"
 
 -- For demoknight charge attachment
 L["hint.melee_charge"] = "Charge"

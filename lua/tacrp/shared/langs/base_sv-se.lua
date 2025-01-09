@@ -83,7 +83,6 @@ L["ammo.357"] = "Magnum Ammo"
 L["ammo.smg1"] = "Karbinammo"
 L["ammo.ar2"] = "Gevärsammo"
 
-
 L["rating.score"] = "(Poäng: {score}/{max})"
 L["rating.lethality"] = "Dödlighet"
 L["rating.lethality.desc"] = "Hur lätt och snabbt vapnet kan ta ner ett mål.\nAnser inte rustning penetration.\nPåverkas av Skada och Eldhastighet."
@@ -202,7 +201,6 @@ L["stat.meleeperkint"] = "Strategi"
 L["stat.meleeperkint.desc"] = "Närstridsattribut påverkar Tekniker och Specialer.\nPåverkar färdighetens laddtid och projektilstyrka."
 
 L["rating.meleeattacktime"] = "Snabbhet"
-L["rating.meleeattacktime.desc"] = "How quickly the weapon can attack."
 L["rating.meleeattacktime.desc"] = "Hur snabbt vapnet kan anfalla."
 L["stat.damage.desc_melee"] = "Skada gjord från Primära Anfall"
 L["stat.meleeattacktime"] = "Närstrids. Fördröjning"
@@ -213,8 +211,6 @@ L["stat.meleerange"] = "Närstridsräckvidd"
 L["stat.meleerange.desc"] = "Hur långt vapnet kan nå med dess anfall."
 L["stat.meleedelay"] = "Närstridstid"
 L["stat.meleedelay.desc"] = "Fördröjning mellan att ett anfall påbörjas och landar."
-
-
 
 L["stat.melee2damage"] = "Skada (T)"
 L["stat.melee2damage.desc"] = "Skada som görs av tunga anfall."
@@ -232,7 +228,6 @@ L["stat.lifesteal"] = "Liv från Skada"
 L["stat.lifesteal.desc"] = "Bråkdel av skadan som görs som byts till livspoäng."
 L["stat.damagecharge"] = "Laddning från Skada"
 L["stat.damagecharge.desc"] = "Bråkdel av skadan som görs som byts till färdighetsladdning."
-
 
 L["stat.damage"] = "Skada"
 L["stat.damage.desc"] = "Skada per skott vid all räckvidd."
@@ -452,6 +447,15 @@ L["hint.melee_ninja.divekick"] = "Dykspark"
 
 L["hint.medkit.self"] = "Heala Själv"
 L["hint.medkit.others"] = "Heala Andra"
+
+L["hint.unlock"] = "Lås Upp"
+L["hint.exitcustmenu"] = "Stäng Anpassningsmenyn"
+
+L["hint.nogrenades"] = "Inga Granater Tillgängliga"
+
+L["hint.hold"] = "(Håll)"
+
+L["hint.shootself"] = "Skjut Dig Själv"
 
 -- For demoknight charge attachment
 L["hint.melee_charge"] = "Anfall"

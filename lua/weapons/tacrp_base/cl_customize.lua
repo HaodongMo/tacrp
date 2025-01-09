@@ -418,20 +418,20 @@ function SWEP:CreateCustomizeHUD()
             local nade = TacRP.QuickNades[self:GetValue("PrimaryGrenade")]
 
             surface.SetFont("TacRP_Myriad_Pro_8")
-            surface.SetTextPos(TacRP.SS(6), TacRP.SS(4))
-            surface.DrawText("FUSE:")
+            surface.SetTextPos(TacRP.SS(4), TacRP.SS(4))
+            surface.DrawText(	TacRP:GetPhrase("quicknade.fuse")	)
 
             surface.SetFont("TacRP_Myriad_Pro_8")
             surface.SetTextPos(TacRP.SS(4), TacRP.SS(12))
-            surface.DrawText(nade.DetType or "")
+            surface.DrawText(TacRP:GetPhrase("quicknade." .. nade.PrintName .. ".dettype") or nade.DetType or "")
 
             surface.SetFont("TacRP_Myriad_Pro_8")
             surface.SetTextColor(255, 255, 255)
-            surface.SetTextPos(TacRP.SS(6), TacRP.SS(24))
+            surface.SetTextPos(TacRP.SS(4), TacRP.SS(24))
             surface.DrawText(TacRP:GetPhrase("cust.description"))
 
             if !self.MiscCache["cust_desc"] then
-                self.MiscCache["cust_desc"] = TacRP.MultiLineText(nade.Description, w - TacRP.SS(8), "TacRP_Myriad_Pro_8")
+                self.MiscCache["cust_desc"] = TacRP.MultiLineText(TacRP:GetPhrase("quicknade." .. nade.PrintName .. ".desc") or nade.Description, w - TacRP.SS(8), "TacRP_Myriad_Pro_8")
             end
 
             for i, k in ipairs(self.MiscCache["cust_desc"]) do

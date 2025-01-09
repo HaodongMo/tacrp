@@ -1,6 +1,79 @@
 L = {} -- Swedish Content Strings by Moka
 
 ///////////////////// -- [[ TacRP Base ]] --
+-- QuickNades
+L["quicknade.fuse"] = "TÄNDNING:"
+
+L["quicknade.frag.name.full"] = "Splittergranat"
+L["quicknade.frag.name"] = "SPLITTER"
+L["quicknade.frag.dettype"] = "Tid: 2s"
+L["quicknade.frag.desc"] = "Normal splitterhandgranat som slänger splitter i en måttlig radie.\n\nTypiskt sett inte dödlig, men kan skada måltavlor eller tvinga ut dem från skydd."
+
+L["quicknade.flash.name.full"] = "Chockgranat"
+L["quicknade.flash.name"] = "CHOCK"
+L["quicknade.flash.dettype"] = "Tid: 1,5s"
+L["quicknade.flash.desc"] = "Avger ett starkt ljus och en dövande smäll som chockar måltavlor (namnet säger så).\n\nSölar ned påverkade måltavlor, och gör minimal skada i en större radie."
+
+L["quicknade.smoke.name.full"] = "Rökgranat"
+L["quicknade.smoke.name"] = "RÖK"
+L["quicknade.smoke.dettype"] = "Tid: 2s"
+L["quicknade.smoke.desc"] = "Avger ett täckande rökmoln som varar i cirka 20 sekunder.\n\nGör ingen skada över huvud taget, och används ofast att täcka ett framtryck eller täcka en siktlinje."
+
+L["quicknade.gas.name.full"] = "Tårgasgranat"
+L["quicknade.gas.name"] = "GAS"
+L["quicknade.gas.dettype"] = "Tid: 2s"
+L["quicknade.gas.desc"] = "Avger ett moln av tårgas som varar i cirka 15 sekunder.\n\nAlla som är i den tar icke-dödlig lingeringskada och har problem att hålla deras vapen stadigt.\n\nDet är ett kemiskt vapen bannlyst av Genèvekonventionen och ÄR INTE LUSTGAS."
+
+L["quicknade.fire.name.full"] = "Termitgranat"
+L["quicknade.fire.name"] = "ELD"
+L["quicknade.fire.dettype"] = "Tid: 3s"
+L["quicknade.fire.desc"] = "Fastnar på måltavlor och brinner intensit i cirka 8 sekunder och gör skada i en liten radie.\n\nMedans termit används oftast att gå genom material så är den också användbar för områdesförnekelse."
+
+L["quicknade.c4.name.full"] = "C4"
+L["quicknade.c4.name"] = "C4-Laddning"
+L["quicknade.c4.dettype"] = "Fjärr"
+L["quicknade.c4.desc"] = "En bunt kraftfulla sprängmedel som kan fjärrsprängas med en detonator.\n\nC4 är ganska trögt, så signaleringsenheten kan tas bort eller förstöras, vilket desarmerar laddningen."
+
+L["quicknade.nuke.name.full"] = "Nukelär Anordning"
+L["quicknade.nuke.name"] = "NUKE"
+L["quicknade.nuke.dettype"] = "Fjärr"
+L["quicknade.nuke.desc"] = "Mikro-nukleär bomb i portföljstorlek som kan fjärrsprängas med en detonator.\n\nDess explosiva resultat kräver ingen beskrivning."
+
+L["quicknade.breach.name.full"] = "Dörrbrytare"
+L["quicknade.breach.name"] = "BRYTARE"
+L["quicknade.breach.dettype"] = "Tid: 2s / Fjärr"
+L["quicknade.breach.desc"] = "Formad laddning som kan spränga sig genom dörrar och svaga väggar.\n\nLiten sprängradie, men kommer förstöra alla dörrar den placeras på, och skada måltavlor på andra sidan med dess chockvåg.\nNär du håller en detonator så kan laddningen konfigureras att fjärrsprängas."
+
+L["quicknade.heal.name.full"] = "Medi-Rök Kanister"
+L["quicknade.heal.name"] = "HEAL"
+L["quicknade.heal.dettype"] = "Tid: 5s"
+L["quicknade.heal.desc"] = "Avger ett moln av återställande gas i cirka 15 sekunder.\n\nMedicinska naniter återställer livspoäng när dem andas in. Om mottagaren är hälsosam så repareras eller fylls rustningen på.\n\nHar motsatt effekt på nekrotik och gör skada istället."
+
+L["quicknade.rock.name.full"] = "Sten"
+L["quicknade.rock.name"] = "STEN"
+L["quicknade.rock.dettype"] = "Trubbigt Trauma"
+L["quicknade.rock.desc"] = "Möjligtvist människans första vapen.\n\nAnvänd som ett sista val, till antika dödsstraff, eller för våldsamma skämt.\n\nSå fyndig du må vara, ingen vet vad du kan ta fram från byxorna när det krävs..."
+
+L["quicknade.bump.name.full"] = "Hoppmina"
+L["quicknade.bump.name"] = "HOPP"
+L["quicknade.bump.dettype"] = "Tryckplatta"
+L["quicknade.bump.desc"] = "Magnetiserad mina som fastnar på ytor.\n\nSkapar en ofarlig sprängning som puttar bort allt och skadar måltavlor genom att skicka in dem i väggar eller golv.\n\nKan användas för att skicka dig långt bort, men kom ihåg fallskärmen."
+
+L["quicknade.t-smk.name.full"] = "Rökgranat"
+L["quicknade.t-smk.name"] = "T-RÖK"
+L["quicknade.t-smk.dettype"] = "Tid: 2s"
+L["quicknade.t-smk.desc"] = "Terroristutfärdad rökgranat.\n\nSkapar en rökskärm."
+
+L["quicknade.t-dcb.name.full"] = "Discombobulator"
+L["quicknade.t-dcb.name"] = "T-DCB"
+L["quicknade.t-dcb.dettype"] = "Tid: 3s"
+L["quicknade.t-dcb.desc"] = "Terroristutfärdad chockgranat.\n\nGör ingen skada, men skapar en sprängning som trycker in föremål och spelare ut."
+
+L["quicknade.t-inc.name.full"] = "Brandgranat"
+L["quicknade.t-inc.name"] = "T-ELD"
+L["quicknade.t-inc.dettype"] = "Tid: 2s"
+L["quicknade.t-inc.desc"] = "Terroristutfärdad brandgranat.\n\nSprängs med minimal skada, men påbörjar en brand ett område."
+
 -- Weapons
 local ws = "tacrp_"
 local w = ws .. "ak47"
