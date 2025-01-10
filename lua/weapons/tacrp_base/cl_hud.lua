@@ -249,17 +249,20 @@ function SWEP:DrawBottomBar(x, y, w, h)
             surface.DrawTexturedRect(x + TacRP.SS(2), y + h - sg - TacRP.SS(1), sg, sg)
         end
 
-        local nadetext = TacRP:GetPhrase("quicknade." .. nade.PrintName .. ".name") or nade.PrintName
-        surface.SetTextPos(x + TacRP.SS(4) + sg, y + h - sg + TacRP.SS(1))
-        surface.SetFont("TacRP_HD44780A00_5x8_6")
-        surface.SetTextColor(col)
-        surface.DrawText(nadetext)
-
         if qty then
             surface.SetTextPos(x + TacRP.SS(4) + sg, y + h - sg + TacRP.SS(8))
             surface.SetFont("TacRP_HD44780A00_5x8_4")
             surface.DrawText("x" .. qty)
+            surface.SetFont("TacRP_HD44780A00_5x8_6")
+        else
+            surface.SetFont("TacRP_HD44780A00_5x8_8")
         end
+
+        local nadetext = TacRP:GetPhrase("quicknade." .. nade.PrintName .. ".name") or nade.PrintName
+        surface.SetTextPos(x + TacRP.SS(4) + sg, y + h - sg + TacRP.SS(1))
+        surface.SetTextColor(col)
+        surface.DrawText(nadetext)
+
 
         local mat = nil
         if !TacRP.ConVars["nademenu"]:GetBool() then
