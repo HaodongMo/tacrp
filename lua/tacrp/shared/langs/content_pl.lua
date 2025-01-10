@@ -1100,7 +1100,8 @@ L["wep." .. w .. ".desc.quote"] = "Tylko 59 takich kiedykolwiek istniało. Skąd
 -- L["wep." .. w .. ".credits"] = "Assets: Counter Strike: Online 2 \nAnimations: Tactical Intervention"
 
 w = ws .. "coltsmg"
--- L["wep." .. w .. ".name"] = "Colt 9mm SMG"
+-- L["wep." .. w .. ".name.full"] = "Colt 9mm SMG"
+-- L["wep." .. w .. ".name"] = "Colt SMG"
 L["wep." .. w .. ".desc"] = "SMG na platformie AR z ogniem seryjnym. Doskonała kontrola odrzutu, dobre obrażenia i zasięg, ale ograniczone opcje optyczne. Faworyzowany przez Departament Energii."
 L["wep." .. w .. ".desc.quote"] = "Głośnik nie jest w zestawie."
 -- L["wep." .. w .. ".trivia.manufacturer"] = "Colt"
@@ -2653,7 +2654,7 @@ w = ws .. "stg44"
 -- L["wep." .. w .. ".desc"] = "Vintage assault rifle, considered by many to be the first of its kind. Somewhat powerful but prone to malfunctions."
 -- L["wep." .. w .. ".desc.quote"] = "\"Mein carbine did not kill you? I will use gas! More gas!\""
 -- L["wep." .. w .. ".trivia.manufacturer"] = "C.G. Haenel"
--- L["wep." .. w .. ".credits"] = "Model & Textures: Tuuttipingu \nSounds: Project Reality, Navaro"
+-- L["wep." .. w .. ".credits"] = "Model & Textures: Tuuttipingu \nSounds: Navaro, Project Reality"
 
 w = ws .. "svt40"
 -- L["wep." .. w .. ".name"] = "SVT-40"
