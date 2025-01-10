@@ -255,9 +255,11 @@ function SWEP:DrawBottomBar(x, y, w, h)
         surface.SetTextColor(col)
         surface.DrawText(nadetext)
 
-        surface.SetTextPos(x + TacRP.SS(4) + sg, y + h - sg + TacRP.SS(8))
-        surface.SetFont("TacRP_HD44780A00_5x8_4")
-        surface.DrawText("x" .. qty)
+        if qty then
+            surface.SetTextPos(x + TacRP.SS(4) + sg, y + h - sg + TacRP.SS(8))
+            surface.SetFont("TacRP_HD44780A00_5x8_4")
+            surface.DrawText("x" .. qty)
+        end
 
         local mat = nil
         if !TacRP.ConVars["nademenu"]:GetBool() then
