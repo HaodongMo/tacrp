@@ -1180,7 +1180,7 @@ The fourth major expansion, featuring 42 weapons themed around zombies, the apoc
         Date = "2025-01-10",
         Author = "Moka, 8Z, & speedonerd",
         Major = false,
-        Summary = "Localizations & Various Fixes",
+        Summary = "Full Localization Support",
         Contents = [[<body style="font-family:'Myriad Pro';color:white;font-size:125%;">
 
 <h3>Full Localization</h3>
@@ -1203,9 +1203,12 @@ The fourth major expansion, featuring 42 weapons themed around zombies, the apoc
 <li><b>Changed:</b> (Base) Added a separate ConVar for infinite ammo for launchers
 <li><b>Changed:</b> (Base) NPCs now react to nearby grenades
 <li><b>Changed:</b> (Base) Altered the behavior of the Quicknade Radial Menu; grenade quantity is only shown when you have more than one, and the quantity is displayed below the grenade name; it is also localized
+<li><b>Changed:</b> (InterOps) Kar 98K given minor tweaks to its quickthrow animations 
 <li><b>Changed:</b> (ExoOps) The HK CAWS has brand new animations 
 <li><b>Changed:</b> (Scavenger's Spoils)  Fixed that the StG 44 had missing credits, and that the scopes were misaligned
 <li><b>Changed:</b> (Scavenger's Spoils)  Lowered the RPM on the M202 FLASH
+<li><b>Changed:</b> (Scavenger's Spoils)  SMLE given minor tweaks to its quickthrow animations.
+<li>The Mosin Nagant hasn't received these tweaks yet due to technical difficulties. Expect this to follow in a hotfix.
 </ul>
 
 ]]
