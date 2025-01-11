@@ -1213,6 +1213,23 @@ The fourth major expansion, featuring 42 weapons themed around zombies, the apoc
 
 ]]
     },
+	{
+        Title = "Update 30 Hotfix 1",
+        Type = "Patch Notes",
+        Date = "2025-01-11",
+        Author = "speedonerd",
+        Major = false,
+        Summary = "",
+        Contents = [[<body style="font-family:'Myriad Pro';color:white;font-size:125%;">
+		
+<h3>Changelist:</h3>
+<ul>
+<li><b>Changed:</b> (Base) Tweaked aim assist.
+<li><b>Changed:</b> (Multiple packs) Several localization errors fixed. Affects InterOps, Heavy Duty and Scavenger's Spoils.
+</ul>
+
+]]
+    },
 }
 TacRP.NewsRead = TacRP.NewsRead or {}
 TacRP.NewsFirstLoad = false
