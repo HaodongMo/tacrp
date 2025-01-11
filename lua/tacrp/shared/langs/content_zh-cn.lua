@@ -1210,7 +1210,7 @@ w = ws .. "rpk"
 -- L["wep." .. w .. ".credits"] = "Assets: Call To Arms \nAnimations: Tactical Intervention"
 
 w = ws .. "ruger"
--- L["wep." .. w .. ".name.full"] = "AMC Amphibian Ruger"
+-- L["wep." .. w .. ".name.full"] = "AWC Amphibian Ruger"
 -- L["wep." .. w .. ".name"] = "Amphibian"
 -- L["wep." .. w .. ".desc"] = "Small caliber pistol fitted with an integrated suppressor. Near-zero recoil due to weak rounds."
 -- L["wep." .. w .. ".desc.quote"] = "\"Take comfort in knowing you never had a choice.\""

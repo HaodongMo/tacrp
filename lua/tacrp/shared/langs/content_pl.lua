@@ -1205,7 +1205,7 @@ L["wep." .. w .. ".desc"] = "Lekki karabin maszynowy pochodzący od karabinu pie
 -- L["wep." .. w .. ".credits"] = "Assets: Call To Arms \nAnimations: Tactical Intervention"
 
 w = ws .. "ruger"
--- L["wep." .. w .. ".name.full"] = "AMC Amphibian Ruger"
+-- L["wep." .. w .. ".name.full"] = "AWC Amphibian Ruger"
 -- L["wep." .. w .. ".name"] = "Amphibian"
 L["wep." .. w .. ".desc"] = "Pistolet małego kalibru wyposażony w zintegrowany tłumik. Prawie zerowy odrzut ze względu na słabe naboje."
 L["wep." .. w .. ".desc.quote"] = "\"Ciesz się, że nigdy nie miałeś wyboru.\""

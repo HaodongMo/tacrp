@@ -467,16 +467,24 @@ function SWEP:CreateCustomizeHUD()
                 surface.DrawText(k)
             end
 
+			-- local lastseenquoteline = false
+			-- local startseequotelinetime = 0
+
             local phrase_quote = TacRP:GetPhrase("wep." .. self:GetClass() .. ".desc.quote") or self.Description_Quote
+            -- local phrase_quote = "THIS IS A TEST QUOTE THAT IS VERY LONG IN LENGTH TO TEST SCROLLING TEXT THIS IS A TEST"
             if phrase_quote then
-                surface.SetFont("TacRP_Myriad_Pro_8_Italic")
+                surface.SetFont("TacRP_Myriad_Pro_6_Italic")
                 local tw, th = surface.GetTextSize(phrase_quote)
-                if tw > TacRP.SS(166) then
-                    surface.SetFont("TacRP_Myriad_Pro_6_Italic")
-                    tw, th = surface.GetTextSize(phrase_quote)
-                end
-                surface.SetTextColor(255, 255, 255)
+				
                 surface.SetTextPos(TacRP.SS(4), TacRP.SS(34) - th)
+				
+                -- if tw > TacRP.SS(166) then
+                    -- surface.SetFont("TacRP_Myriad_Pro_6_Italic")
+                    -- tw, th = surface.GetTextSize(phrase_quote)
+					-- lastseenquoteline = true
+					-- surface.SetTextPos(TacRP.SS(200) - ((CurTime() - startseequotelinetime) * 100) % (tw * 2.25), TacRP.SS(34) - th)
+                -- end
+                surface.SetTextColor(255, 255, 255)
                 surface.DrawText(phrase_quote)
             end
         end
