@@ -1224,8 +1224,8 @@ The fourth major expansion, featuring 42 weapons themed around zombies, the apoc
 		
 <h3>Changelist:</h3>
 <ul>
-<li><b>Changed:</b> (Base) Tweaked aim assist.
-<li><b>Changed:</b> (Multiple packs) Several localization errors fixed. Affects InterOps, Heavy Duty and Scavenger's Spoils.
+<li><b>Changed:</b> (Base) Tweaked aim assist behavior. Certain weapons (namely launchers) will now be unaffected by the aim assist setting.
+<li><b>Changed:</b> (Multiple packs) Several localization errors fixed.
 </ul>
 
 ]]
