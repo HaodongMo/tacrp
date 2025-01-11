@@ -1200,8 +1200,8 @@ The fourth major expansion, featuring 42 weapons themed around zombies, the apoc
 <li><b>Changed:</b> (Base) The Stinger can now lock onto Glide vehicles
 <li><b>Changed:</b> (Base) Fixed that weapons were not added to the Spawnmenu category correctly
 <li><b>Changed:</b> (Base) Attachment descriptions can now be two or more lines long and will scale accordingly
-<li><b>Changed:</b> (Base) Added a separate ConVar for infinite ammo for launchers
 <li><b>Changed:</b> (Base) NPCs now react to nearby grenades
+<li><b>Changed:</b> (Base) NPCs line of sight will be blocked by smoke grenades
 <li><b>Changed:</b> (Base) Altered the behavior of the Quicknade Radial Menu; grenade quantity is only shown when you have more than one, and the quantity is displayed below the grenade name; it is also localized
 <li><b>Changed:</b> (InterOps) Kar 98K given minor tweaks to its quickthrow animations 
 <li><b>Changed:</b> (ExoOps) The HK CAWS has brand new animations 
