@@ -8,6 +8,8 @@ DEFINE_BASECLASS( "tacrp_base" )
 SWEP.PrintName = "First Aid Kit"
 SWEP.Category = "Tactical RP (Special)"
 
+SWEP.NoAimAssist = true
+
 SWEP.SubCatTier = "9Special"
 SWEP.SubCatType = "9Equipment"
 

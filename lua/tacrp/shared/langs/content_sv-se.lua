@@ -29,8 +29,8 @@ L["quicknade.fire.name"] = "ELD"
 L["quicknade.fire.dettype"] = "Tid: 3s"
 L["quicknade.fire.desc"] = "Fastnar på måltavlor och brinner intensit i cirka 8 sekunder och gör skada i en liten radie.\n\nMedans termit används oftast att gå genom material så är den också användbar för områdesförnekelse."
 
-L["quicknade.c4.name.full"] = "C4"
-L["quicknade.c4.name"] = "C4-Laddning"
+L["quicknade.c4.name.full"] = "C4-Laddning"
+L["quicknade.c4.name"] = "C4"
 L["quicknade.c4.dettype"] = "Fjärr"
 L["quicknade.c4.desc"] = "En bunt kraftfulla sprängmedel som kan fjärrsprängas med en detonator.\n\nC4 är ganska trögt, så signaleringsenheten kan tas bort eller förstöras, vilket desarmerar laddningen."
 

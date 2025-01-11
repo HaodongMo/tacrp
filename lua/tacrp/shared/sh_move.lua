@@ -319,6 +319,8 @@ function TacRP.StartCommand(ply, cmd)
 
 		local fav = GetConVar("tacrp_freeaim")
 		local far = wpn:GetValue("FreeAimMaxAngle")
+		local swayc = GetConVar("tacrp_sway"):GetBool()
+		local freeac = GetConVar("tacrp_freeaim"):GetBool()
 
 		-- Check if current target is beyond tracking cone
 		local tgt = ply.tacrp_AATarget
@@ -352,10 +354,10 @@ function TacRP.StartCommand(ply, cmd)
 		tgt = ply.tacrp_AATarget
 		if tacrp_aimassist:GetBool() and ply:GetInfoNum("tacrp_aimassist_cl", 0) == 1 then
 			if IsValid(tgt) and !wpn:GetCustomize() then
-				if !wpn:GetValue("NoAimAssist") then
+				if !wpn.NoAimAssist then
 					local ang = cmd:GetViewAngles()
 					local pos = tgt_pos(tgt, head)
-					local tgt_ang = (pos - ply:EyePos()):Angle() - (wpn:GetSwayAngles() or angle_zero) - (wpn:GetFreeAimAngle() or angle_zero)
+					local tgt_ang = (pos - ply:EyePos()):Angle() - ((swayc and wpn:GetSwayAngles()) or angle_zero) - ((freeac and wpn:GetFreeAimAngle()) or angle_zero)
 					local ang_diff = (pos - ply:EyePos()):Cross(ply:EyeAngles():Forward()):Length()
 					if ang_diff > 0.1 then
 						ang = LerpAngle(math.Clamp(inte / ang_diff, 0, 0.01), ang, tgt_ang)

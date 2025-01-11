@@ -48,8 +48,8 @@ L["quicknade.fire.name"] = "FIRE"
 L["quicknade.fire.dettype"] = "Timed: 3s"
 L["quicknade.fire.desc"] = "Sticks to targets and burns intensely for about 8 seconds, dealing damage within a small radius.\n\nWhile thermite is typically used to burn through materiel, it is also useful for area denial."
 
-L["quicknade.c4.name.full"] = "C4"
-L["quicknade.c4.name"] = "C4 Charge"
+L["quicknade.c4.name.full"] = "C4 Charge"
+L["quicknade.c4.name"] = "C4"
 L["quicknade.c4.dettype"] = "Remote"
 L["quicknade.c4.desc"] = "A brick of powerful explosives that can be touched off by a detonator remotely.\n\nC4 is remarkably inert, but the signalling device can be removed or destroyed, defusing the charge."
 

@@ -8,6 +8,8 @@ SWEP.PrintName = "HK M320"
 SWEP.AbbrevName = "M320"
 SWEP.Category = "Tactical RP (Special)"
 
+SWEP.NoAimAssist = true
+
 SWEP.SubCatTier = "9Special"
 SWEP.SubCatType = "6Launcher"
 

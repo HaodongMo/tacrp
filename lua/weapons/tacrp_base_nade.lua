@@ -6,6 +6,8 @@ SWEP.Base = "tacrp_base"
 SWEP.Spawnable = false
 SWEP.AdminOnly = false
 
+SWEP.NoAimAssist = true
+
 // names and stuff
 SWEP.PrintName = "Arctic's Tactical RP Base Grenade"
 SWEP.Category = "Tactical RP"

@@ -8,6 +8,8 @@ SWEP.PrintName = "FIM-92 Stinger"
 SWEP.AbbrevName = "Stinger"
 SWEP.Category = "Tactical RP (Special)"
 
+SWEP.NoAimAssist = true
+
 SWEP.SubCatTier = "9Special"
 SWEP.SubCatType = "6Launcher"
 
