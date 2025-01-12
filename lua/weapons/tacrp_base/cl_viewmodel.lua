@@ -154,10 +154,10 @@ function SWEP:DrawCustomModel(wm, custom_wm)
 
         if model.IsHolosight and !wm then
             cam.Start3D(EyePos(), EyeAngles(), self.ViewModelFOV, 0, 0, nil, nil, 1, 10000)
-            render.DepthRange(0.1, 0.1)
+            render.DepthRange(0.0, 0.1)
             self:DoHolosight(model)
             cam.End3D()
-            render.DepthRange(0.1, 0.1)
+            render.DepthRange(0.0, 0.1)
         end
 
         if !model.NoDraw then
@@ -187,7 +187,7 @@ function SWEP:PreDrawViewModel()
     end
     -- self.ViewModelFOV = self:GetViewModelFOV()
 
-    render.DepthRange(0.1, 0.1)
+    render.DepthRange(0.0, 0.1)
 end
 
 function SWEP:PostDrawViewModel()
