@@ -165,7 +165,7 @@ function SWEP:ToggleBoneMods(on)
             local boneindex = self:GetOwner():LookupBone(i)
             if !boneindex then continue end
 
-            self:GetOwner():ManipulateBoneAngles(boneindex, Angle(0, 0, 0))
+            self:GetOwner():ManipulateBoneAngles(boneindex, Angle(0, 0, 0), false)
             -- self:GetOwner():ManipulateBonePosition(boneindex, Vector(0, 0, 0))
         end
     else
@@ -180,7 +180,7 @@ function SWEP:ToggleBoneMods(on)
             local boneindex = self:GetOwner():LookupBone(i)
             if !boneindex then continue end
 
-            self:GetOwner():ManipulateBoneAngles(boneindex, k)
+            self:GetOwner():ManipulateBoneAngles(boneindex, k, false)
         end
 
         -- for i, k in pairs(tbl[2]) do
