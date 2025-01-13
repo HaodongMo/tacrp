@@ -2168,7 +2168,7 @@ w = ws .. "howa"
 L["wep." .. w .. ".name.full"] = "Howa Type 64"
 L["wep." .. w .. ".name"] = "Type 64"
 L["wep." .. w .. ".desc"] = "Japanskt stridsgevär som skjuter speciell patron med sänkt laddning. Betydande vikt men väldigt kontrollerbar."
-L["wep." .. w .. ".desc.quote"] = "\"Priest-21, detta är Trevor. Klart att skjuta. Döda Wyvern.\""
+L["wep." .. w .. ".desc.quote"] = "\"Priest-21, detta är Trebor. Klart att skjuta. Döda Wyvern.\""
 L["wep." .. w .. ".trivia.manufacturer"] = "Howa Machinery"
 L["wep." .. w .. ".credits"] = "Tillgångar: Michau, portat från Fallout: New Vegas av 8sianDude \nLjud: speedonerd \nAnimationer: Tactical Intervention"
 

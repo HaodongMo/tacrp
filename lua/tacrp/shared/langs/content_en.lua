@@ -2185,7 +2185,7 @@ w = ws .. "howa"
 L["wep." .. w .. ".name.full"] = "Howa Type 64"
 L["wep." .. w .. ".name"] = "Type 64"
 L["wep." .. w .. ".desc"] = "Japanese battle rifle firing a special reduced load cartridge. Considerable weight but highly controllable."
-L["wep." .. w .. ".desc.quote"] = "\"Priest-21, this is Trevor. Clear to fire. Kill Wyvern.\""
+L["wep." .. w .. ".desc.quote"] = "\"Priest-21, this is Trebor. Clear to fire. Kill Wyvern.\""
 L["wep." .. w .. ".trivia.manufacturer"] = "Howa Machinery"
 L["wep." .. w .. ".credits"] = "Assets: Michau, ported from Fallout: New Vegas by 8sianDude \nSounds: speedonerd \nAnimations: Tactical Intervention"
 
