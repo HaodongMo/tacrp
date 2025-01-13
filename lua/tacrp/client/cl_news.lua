@@ -1230,6 +1230,25 @@ The fourth major expansion, featuring 42 weapons themed around zombies, the apoc
 
 ]]
     },
+	{
+        Title = "Update 30 Hotfix 2",
+        Type = "Patch Notes",
+        Date = "2025-01-13",
+        Author = "speedonerd",
+        Major = false,
+        Summary = "",
+        Contents = [[<body style="font-family:'Myriad Pro';color:white;font-size:125%;">
+		
+<h3>Changelist:</h3>
+<ul>
+<li><b>Changed:</b> (All packs) More localization tweaks.
+<li><b>Changed:</b> (Base) Description quotes are now always size 6 font, regardless of length.
+<li><b>Fixed:</b> (Base) Fixed viewmodels drawing on top of screen overlays (thanks Chen!).
+<li><b>Fixed:</b> (InterOps + Scavenger's Spoils) Fixed blindfire animation weirdness with toploader bolt-actions.
+</ul>
+
+]]
+    },
 }
 TacRP.NewsRead = TacRP.NewsRead or {}
 TacRP.NewsFirstLoad = false
