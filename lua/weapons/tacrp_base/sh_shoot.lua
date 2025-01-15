@@ -312,7 +312,7 @@ function SWEP:PrimaryAttack()
                         Spread = Vector(),
                         IgnoreEntity = self:GetOwner():GetVehicle(),
                         Distance = dist,
-                        HullSize = self:IsShotgun() and TacRP.ShotgunHullSize or 0,
+                        HullSize = (self:IsShotgun() and i % 2 == 0) and TacRP.ShotgunHullSize or 0,
                         Callback = function(att, btr, dmg)
                             local range = (btr.HitPos - btr.StartPos):Length()
 
@@ -325,7 +325,8 @@ function SWEP:PrimaryAttack()
                         end
                     })
                 else
-                    TacRP:ShootPhysBullet(self, self:GetMuzzleOrigin(), new_dir:Forward() * self:GetValue("MuzzleVelocity"))
+                    TacRP:ShootPhysBullet(self, self:GetMuzzleOrigin(), new_dir:Forward() * self:GetValue("MuzzleVelocity"),
+                            {HullSize = (self:IsShotgun() and i % 2 == 0) and TacRP.ShotgunHullSize or 0,})
                 end
             end
         else
