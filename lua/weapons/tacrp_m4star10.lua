@@ -99,7 +99,7 @@ SWEP.Range_Min = 500 // distance for which to maintain maximum damage
 SWEP.Range_Max = 1500 // distance at which we drop to minimum damage
 SWEP.Penetration = 1 // units of metal this weapon can penetrate
 SWEP.ArmorPenetration = 0.8
-SWEP.ArmorBonus = 2
+SWEP.ArmorBonus = 0.5
 
 SWEP.Num = 8
 
