@@ -537,7 +537,7 @@ function SWEP:AfterShotFunction(tr, dmg, range, penleft, alreadypenned, forced)
             dmg:ScaleDamage(0.25)
         elseif matpen > 0 and TacRP.ConVars["penetration"]:GetBool() and !self:GetOwner():IsNPC() then
             local pendelta = penleft / matpen
-            pendelta = Lerp(pendelta, math.Clamp(matpen * 0.03, 0.25, 0.75), 1)
+            pendelta = Lerp(pendelta, math.Clamp(matpen * 0.02, 0.25, 0.5), 1)
             dmg:ScaleDamage(pendelta)
         end
         alreadypenned[tr.Entity] = true

@@ -98,6 +98,8 @@ function SWEP:Penetrate(tr, range, penleft, alreadypenned)
 
         endpos = endpos + (dir * pentracelen)
         range = range + pentracelen
+
+        ptrent = ptr.Entity
     end
 
     if penleft > 0 then
