@@ -1321,6 +1321,8 @@ local function menu_client_ti(panel)
         label = "#tacrp.client.inversepeek", -- Invert Peeking
         command = "tacrp_inversepeek"
     })
+    panel:ControlHelp("#tacrp.client.inversepeek.desc")
+
     panel:AddControl("slider", {
         label = "#tacrp.client.aimsens", -- Aiming Sensitivity
         command = "tacrp_aimsens",
