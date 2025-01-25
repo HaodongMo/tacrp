@@ -87,14 +87,9 @@ SWEP.Sound_MeleeSwing = {
     path .. "swing-6.wav",
 }
 
---[[SWEP.Sound_Lunge = { -- custom lunge sounds for frenzy attachment
-    path .. "swing-1.wav",
-    path .. "swing-2.wav",
-    path .. "swing-3.wav",
-    path .. "swing-4.wav",
-    path .. "swing-5.wav",
-    path .. "swing-6.wav",
-}]]
+SWEP.Sound_Lunge = {
+    "npc/fast_zombie/leap1.wav",
+}
 
 local function addsound(name, spath)
     sound.Add({
