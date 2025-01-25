@@ -806,6 +806,14 @@ local conVars = {
         max = 1,
         replicated = true,
     },
+    {
+        name = "inversepeek",
+        default = "0",
+        client = true,
+        userinfo = true,
+        min = 0,
+        max = 1,
+    },
 
     // --------------------------- Multipliers
     {
@@ -1308,6 +1316,10 @@ local function menu_client_ti(panel)
     panel:AddControl("checkbox", {
         label = "#tacrp.client.togglepeek", -- Toggle Peeking
         command = "tacrp_togglepeek"
+    })
+    panel:AddControl("checkbox", {
+        label = "#tacrp.client.inversepeek", -- Invert Peeking
+        command = "tacrp_inversepeek"
     })
     panel:AddControl("slider", {
         label = "#tacrp.client.aimsens", -- Aiming Sensitivity

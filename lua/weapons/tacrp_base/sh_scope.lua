@@ -384,3 +384,15 @@ function SWEP:GetSprintToFireTime(base)
         return self:GetValue("SprintToFireTime") * TacRP.ConVars["mult_sprinttofire"]:GetFloat()
     end
 end
+
+function SWEP:GetPeeking()
+    return (!self.InversePeek and self:GetNWPeeking()) or (self.InversePeek and !self:GetNWPeeking())
+end
+
+function SWEP:SetPeeking(b)
+    if self.InversePeek then
+        self:SetNWPeeking(!b)
+    else
+        self:SetNWPeeking(b)
+    end
+end

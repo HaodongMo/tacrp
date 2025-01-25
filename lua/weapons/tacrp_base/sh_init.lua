@@ -51,6 +51,9 @@ function SWEP:Deploy()
     self:SetLoadedRounds(self:Clip1())
     self:SetCustomize(false)
 
+    self.InversePeek = self:GetOwner():GetInfoNum("tacrp_inversepeek", 0) == 1
+    self:SetPeeking(false)
+
     self.PreviousZoom = self:GetOwner():GetCanZoom()
     if IsValid(self:GetOwner()) and self:GetOwner():IsPlayer() then
         self:GetOwner():SetCanZoom(false)
