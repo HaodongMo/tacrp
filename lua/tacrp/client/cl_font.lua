@@ -2,6 +2,7 @@ local hudscale = TacRP.ConVars["hudscale"]
 function TacRP.SS(i)
     return ScrW() / 640 * i * hudscale:GetFloat()
 end
+TacRP.HoloSS = (ScreenScaleH(1) / ScreenScale(1)) or 1
 
 local sizes_to_make = {
     4,
@@ -95,6 +96,7 @@ end
 generatefonts()
 
 function TacRP.Regen(full)
+    TacRP.HoloSS = (ScreenScaleH(1) / ScreenScale(1)) -- a little bodge to make sights scale, i'm not adding an extra hook just for this
     if full then
         generatefonts()
     end

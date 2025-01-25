@@ -38,6 +38,7 @@ function SWEP:DoHolosight(mdl)
     if img then
         local pos = self:GetOwner():EyePos()
         local dir = (self:GetShootDir() + self:GetOwner():GetViewPunchAngles() * 0.5):Forward() -- mdl:GetAngles():Forward()
+        local size = 512 * TacRP.HoloSS
 
         pos = pos + dir * 9000
 
@@ -48,7 +49,7 @@ function SWEP:DoHolosight(mdl)
         render.DepthRange(0, 0.005 + (0.0005 * eyedist / 20))
 
         render.SetMaterial(img)
-        render.DrawQuadEasy(pos, -dir, 512, 512, Color(255, 255, 255), 180)
+        render.DrawQuadEasy(pos, -dir, size, size, Color(255, 255, 255), 180)
 
         -- cam.End3D()
 
