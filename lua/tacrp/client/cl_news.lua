@@ -1177,10 +1177,10 @@ The fourth major expansion, featuring 42 weapons themed around zombies, the apoc
     {
         Title = "Update 30 / Localization Patch",
         Type = "Update",
-        Date = "2025-99-99", -- REPLACEME BEFORE RELEASE TO WORKSHOP
+        Date = "2025-01-10",
         Author = "Moka, 8Z, & speedonerd",
-        Major = true,
-        Summary = "Localizations & Various Fixes",
+        Major = false,
+        Summary = "Full Localization Support",
         Contents = [[<body style="font-family:'Myriad Pro';color:white;font-size:125%;">
 
 <h3>Full Localization</h3>
@@ -1195,13 +1195,56 @@ The fourth major expansion, featuring 42 weapons themed around zombies, the apoc
 <li><b>Added:</b> (Base) Added a setting to enable infinite ammo for launchers (Client)
 <li><b>Added:</b> (Base) Added a setting for the CS Gas and Flashbangs to affect players and/or NPCs (Equipment)
 <li><b>Added:</b> (Base) Added a setting to toggle dynamic lights (Server)
-<li><b>Added:</b> (Base) Spawnmenu subcategories and weapon names now use localized strings
+<li><b>Added:</b> (Base) Spawnmenu subcategories weapon names and descriptions now use localized strings
 <li><b>Changed:</b> (Base) Tweaked the stats on the "Ratshot Rounds" attachment
 <li><b>Changed:</b> (Base) The Stinger can now lock onto Glide vehicles
 <li><b>Changed:</b> (Base) Fixed that weapons were not added to the Spawnmenu category correctly
 <li><b>Changed:</b> (Base) Attachment descriptions can now be two or more lines long and will scale accordingly
-<li><b>Changed:</b> (Base) Added a separate ConVar for infinite ammo for launchers
 <li><b>Changed:</b> (Base) NPCs now react to nearby grenades
+<li><b>Changed:</b> (Base) NPCs line of sight will be blocked by smoke grenades
+<li><b>Changed:</b> (Base) Altered the behavior of the Quicknade Radial Menu; grenade quantity is only shown when you have more than one, and the quantity is displayed below the grenade name; it is also localized
+<li><b>Changed:</b> (InterOps) Kar 98K given minor tweaks to its quickthrow animations 
+<li><b>Changed:</b> (ExoOps) The HK CAWS has brand new animations 
+<li><b>Changed:</b> (Scavenger's Spoils)  Fixed that the StG 44 had missing credits, and that the scopes were misaligned
+<li><b>Changed:</b> (Scavenger's Spoils)  Lowered the RPM on the M202 FLASH
+<li><b>Changed:</b> (Scavenger's Spoils)  SMLE given minor tweaks to its quickthrow animations.
+<li>The Mosin Nagant hasn't received these tweaks yet due to technical difficulties. Expect this to follow in a hotfix.
+</ul>
+
+]]
+    },
+	{
+        Title = "Update 30 Hotfix 1",
+        Type = "Patch Notes",
+        Date = "2025-01-11",
+        Author = "speedonerd",
+        Major = false,
+        Summary = "",
+        Contents = [[<body style="font-family:'Myriad Pro';color:white;font-size:125%;">
+		
+<h3>Changelist:</h3>
+<ul>
+<li><b>Changed:</b> (Base) Tweaked aim assist behavior. Certain weapons (namely launchers) will now be unaffected by the aim assist setting.
+<li><b>Changed:</b> (Multiple packs) Several localization errors fixed.
+</ul>
+
+]]
+    },
+	{
+        Title = "Update 30 Hotfix 2",
+        Type = "Patch Notes",
+        Date = "2025-01-13",
+        Author = "speedonerd",
+        Major = false,
+        Summary = "",
+        Contents = [[<body style="font-family:'Myriad Pro';color:white;font-size:125%;">
+		
+<h3>Changelist:</h3>
+<ul>
+<li><b>Changed:</b> (All packs) More localization tweaks.
+<li><b>Changed:</b> (Base) Description quotes are now always size 6 font, regardless of length.
+<li><b>Fixed:</b> (Base) Fixed viewmodels drawing on top of screen overlays (thanks Chen!).
+<li><b>Fixed:</b> (InterOps + Scavenger's Spoils) Fixed blindfire animation weirdness with toploader bolt-actions.
 </ul>
 
 ]]

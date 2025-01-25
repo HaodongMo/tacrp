@@ -9,6 +9,7 @@ function TacRP:SendBullet(bullet, attacker)
     net.WriteFloat(bullet.Drag)
     net.WriteFloat(bullet.Gravity)
     net.WriteEntity(bullet.Weapon)
+    net.WriteUInt(bullet.HullSize, 4)
 
     if attacker and attacker:IsValid() and attacker:IsPlayer() and !game.SinglePlayer() then
         net.SendOmit(attacker)
@@ -39,7 +40,7 @@ function TacRP:ShootPhysBullet(wep, pos, vel, tbl)
         Damaged = {},
         Dead = false,
         NPC = wep:GetOwner():IsNPC(),
-        HullSize = wep:IsShotgun() and 2 or 0,
+        -- HullSize = wep:IsShotgun() and 2 or 0,
     }
 
     if wep:GetValue("TracerNum") == 0 then
@@ -98,6 +99,7 @@ net.Receive("TacRP_sendbullet", function(len, ply)
     local drag = net.ReadFloat()
     local grav = net.ReadFloat()
     local weapon = net.ReadEntity()
+    local hullsize = net.ReadUInt(4)
 
     if game.SinglePlayer() then
         ent = net.ReadEntity()
@@ -119,7 +121,7 @@ net.Receive("TacRP_sendbullet", function(len, ply)
         Gravity = grav,
         Weapon = weapon,
         Filter = {weapon:GetOwner()},
-        HullSize = weapon:IsShotgun() and TacRP.ShotgunHullSize or 0,
+        HullSize = hullsize --weapon:IsShotgun() and TacRP.ShotgunHullSize or 0,
     }
 
     if weapon:GetValue("TracerNum") == 0 then

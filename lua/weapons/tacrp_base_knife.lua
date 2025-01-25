@@ -7,6 +7,8 @@ AddCSLuaFile()
 SWEP.PrintName = "Base Knife"
 SWEP.Category = "Tactical RP (Special)"
 
+SWEP.NoAimAssist = true
+
 SWEP.SubCatTier = "9Special"
 SWEP.SubCatType = "8Melee Weapon"
 
