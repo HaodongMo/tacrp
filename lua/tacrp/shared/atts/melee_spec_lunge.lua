@@ -32,13 +32,10 @@ local function makesound(ent, pitch)
     if TacRP.ShouldWeFunny() then
         ent:EmitSound("tacrp/amongus_loud.mp3", 75, pitch)
     else
-        if leapsoundstatus == true then
-            if istable(leapsound) then
-                leapsound = table.Random(leapsound)
-            end
-            ent:EmitSound(leapsound, 75, pitch)
-        else
-            ent:EmitSound("npc/fast_zombie/leap1.wav", 75, pitch)
+        if istable(leapsound) then
+            leapsound = table.Random(leapsound)
+        end
+        ent:EmitSound(leapsound, 75, pitch)
         end
     end
 end
@@ -48,9 +45,6 @@ ATT.Hook_PreReload = function(wep)
     
     if wep:GetValue("Sound_Lunge") then
         leapsound = wep:GetValue("Sound_Lunge")
-        leapsoundstatus = true
-    else
-        leapsoundstatus = false
     end
 
     if !ply:KeyPressed(IN_RELOAD) or ply:GetMoveType() == MOVETYPE_NOCLIP
