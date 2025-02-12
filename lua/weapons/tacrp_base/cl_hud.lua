@@ -22,7 +22,7 @@ function SWEP:DoDrawCrosshair(x, y)
         self.CrosshairAlpha = math.Approach(self.CrosshairAlpha, 1, 5 * ft)
     end
 
-    local dev = GetConVar("developer"):GetInt() > 0 and LocalPlayer():IsAdmin()
+    local dev = TacRP.Developer()
     local tacfunc
     if self:GetValue("TacticalCrosshair") and self:GetTactical() then
         tacfunc = self:GetValue("TacticalCrosshair")

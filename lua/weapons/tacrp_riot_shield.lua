@@ -233,7 +233,7 @@ function SWEP:SetupShields()
         -- shield:SetModelScale(1.1, 0.00001)
         shield.Weapon = self
         shield.TacRPShield = true
-        if GetConVar("developer"):GetBool() then
+        if TacRP.Developer(2) then
             shield:SetColor( Color(0, 0, 0, 255) )
             shield:SetMaterial("models/wireframe")
         else

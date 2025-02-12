@@ -20,7 +20,7 @@ function TacRP.CollectGarbage()
 
     TacRP.CSModelPile = newpile
 
-    if GetConVar("developer"):GetBool() and removed > 0 then
+    if TacRP.Developer() and removed > 0 then
         print("Removed " .. tostring(removed) .. " CSModels")
     end
 end

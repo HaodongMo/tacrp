@@ -317,7 +317,7 @@ function SWEP:SetBaseSettings()
 end
 
 function SWEP:SetShouldHoldType()
-    if self:GetOwner():IsNPC() then
+    if self:GetOwner():IsNPC() and !self:GetOwner():IsNextBot() then
         self:SetHoldType(self:GetValue("HoldTypeNPC") or self:GetValue("HoldType"))
         return
     end

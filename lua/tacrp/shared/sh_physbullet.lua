@@ -237,7 +237,7 @@ function TacRP:ProgressPhysBullet(bullet, timestep)
             attacker:LagCompensation(false)
         end
 
-        if GetConVar("developer"):GetInt() > 1 then
+        if TacRP.Developer(2) then
             if SERVER then
                 debugoverlay.Line(oldpos, tr.HitPos, 5, Color(100,100,255), true)
             else
