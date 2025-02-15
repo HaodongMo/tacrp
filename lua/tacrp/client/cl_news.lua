@@ -1213,7 +1213,7 @@ The fourth major expansion, featuring 42 weapons themed around zombies, the apoc
 
 ]]
     },
-	{
+    {
         Title = "Update 30 Hotfix 1",
         Type = "Patch Notes",
         Date = "2025-01-11",
@@ -1221,7 +1221,7 @@ The fourth major expansion, featuring 42 weapons themed around zombies, the apoc
         Major = false,
         Summary = "",
         Contents = [[<body style="font-family:'Myriad Pro';color:white;font-size:125%;">
-		
+
 <h3>Changelist:</h3>
 <ul>
 <li><b>Changed:</b> (Base) Tweaked aim assist behavior. Certain weapons (namely launchers) will now be unaffected by the aim assist setting.
@@ -1230,7 +1230,7 @@ The fourth major expansion, featuring 42 weapons themed around zombies, the apoc
 
 ]]
     },
-	{
+    {
         Title = "Update 30 Hotfix 2",
         Type = "Patch Notes",
         Date = "2025-01-13",
@@ -1238,7 +1238,7 @@ The fourth major expansion, featuring 42 weapons themed around zombies, the apoc
         Major = false,
         Summary = "",
         Contents = [[<body style="font-family:'Myriad Pro';color:white;font-size:125%;">
-		
+
 <h3>Changelist:</h3>
 <ul>
 <li><b>Changed:</b> (All packs) More localization tweaks.
@@ -1246,7 +1246,29 @@ The fourth major expansion, featuring 42 weapons themed around zombies, the apoc
 <li><b>Fixed:</b> (Base) Fixed viewmodels drawing on top of screen overlays (thanks Chen!).
 <li><b>Fixed:</b> (InterOps + Scavenger's Spoils) Fixed blindfire animation weirdness with toploader bolt-actions.
 </ul>
-
+]]
+    },
+    {
+        Title = "Update 31",
+        Type = "Patch Notes",
+        Date = "2025-02-15",
+        Author = "8Z",
+        Major = false,
+        Summary = "Minor fixes and features.",
+        Contents = [[<body style="font-family:'Myriad Pro';color:white;font-size:125%;">
+<h3>Changelist:</h3>
+<ul>
+<li><b>Added:</b> Inverse Peeking client ConVar to make peeking the default aiming option.
+<li><b>Changed:</b> Shotgun pellets are now 50% hull traces and 50% non-hull traces, like the HL2 shotgun.
+<li><b>Changed:</b> Wallbang damage is significantly increased.
+<li><b>Changed:</b> Explosive Damage on guns no longer disable penetration.
+<li><b>Changed:</b> Developer-related visuals now require superadmin permissions to be visible.
+<li><b>Fixed:</b> Holosight scaling for unusual aspect ratios.
+<li><b>Fixed:</b> Client-authoratitive damage behaving weirdly in singleplayer.
+<li><b>Fixed:</b> Blindfire bone maniuplation not working in singleplayer.
+<li><b>Fixed:</b> Blindfire bone maniuplation not working in single player.
+<li><b>Rebalance:</b> Nerfed shotgun armor shredding.
+</ul>
 ]]
     },
 }

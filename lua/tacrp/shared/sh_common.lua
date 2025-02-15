@@ -1,4 +1,4 @@
-TacRP.Version = "30" // 2025-1-10
+TacRP.Version = "31" // 2025-02-15
 
 TacRP.ShotgunHullSize = 0.5 // Bigger equals more generous hitboxes
 
