@@ -58,6 +58,7 @@ function SWEP:Reload(force)
     local t = self:PlayAnimation(anim, mult, true, true)
 
     self:GetOwner():DoAnimationEvent(self:GetValue("GestureReload"))
+    self:GetOwner():SetLayerDuration(GESTURE_SLOT_CUSTOM, t * (self:GetValue("ShotgunReload") and 4 or 1))
 
     if SERVER then
         self:SetTimer(self.DropMagazineTime * mult, function()
@@ -153,12 +154,14 @@ function SWEP:EndReload()
         if self:Clip1() >= self:GetCapacity() or (!self:GetInfiniteAmmo() and self:Ammo1() == 0) or self:GetEndReload() then
 
             local cancellable = TacRP.ConVars["reload_sg_cancel"]:GetBool() and !self:GetValue("ShotgunFullCancel")
-
+            local t = 0.5
             if !self.ShotgunNoReverseStart and (self:Clip1() == self:GetLoadedRounds() or !self:GetEmptyReload()) then
-                self:PlayAnimation("reload_start", -0.75 * mult, !cancellable, true)
+                t = self:PlayAnimation("reload_start", -0.75 * mult, !cancellable, true)
             else
-                self:PlayAnimation("reload_finish", mult, !cancellable, true)
+                t = self:PlayAnimation("reload_finish", mult, !cancellable, true)
             end
+            self:GetOwner():SetLayerDuration(GESTURE_SLOT_CUSTOM, t * 2)
+            self:GetOwner():SetLayerCycle(GESTURE_SLOT_CUSTOM, 0.5)
 
             self:SetReloading(false)
 
@@ -177,6 +180,8 @@ function SWEP:EndReload()
             local delay = self:GetValue("ShotgunUpInTime")
             for i = 1, res do
                 self:SetTimer(t * delay * ((i - 1) / 3) + 0.22, function()
+                    self:GetOwner():SetLayerDuration(GESTURE_SLOT_CUSTOM, t * 3)
+                    self:GetOwner():SetLayerCycle(GESTURE_SLOT_CUSTOM, 0.3)
                     self:RestoreClip(1)
                     self:RunHook("Hook_InsertReload", res)
                 end, "ShotgunRestoreClip")
