@@ -22,7 +22,10 @@ function SWEP:Reload(force)
     if self:StillWaiting(true) then return end
 
     if self:GetJammed() then
-        self:PlayAnimation("jam", 0.75, true, true)
+        local t = self:PlayAnimation("jam", 0.75, true, true)
+        self:GetOwner():DoAnimationEvent(self:GetValue("GestureReload"))
+        self:GetOwner():SetLayerDuration(GESTURE_SLOT_CUSTOM, t * 3)
+        self:GetOwner():SetLayerCycle(GESTURE_SLOT_CUSTOM, 0.67)
         self:SetJammed(false)
         self:SetCharge(false)
         return
