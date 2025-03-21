@@ -52,7 +52,7 @@ function SWEP:PrimeGrenade()
     self:SetAnimLockTime(ct + (t * 0.75))
     self:SetNextPrimaryFire(ct + (t * 1.1))
 
-    self:GetOwner():DoAnimationEvent(ACT_GMOD_GESTURE_ITEM_THROW)
+    self:GetOwner():DoCustomAnimEvent(PLAYERANIMEVENT_ATTACK_SECONDARY, t * 1000)
 
     if !nade.NoSounds then
         self:EmitSound(nade.PullSound or ("TacRP/weapons/grenade/pullpin-" .. math.random(1, 2) .. ".wav"), 65)

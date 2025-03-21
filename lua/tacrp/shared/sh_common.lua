@@ -303,9 +303,14 @@ end)
 hook.Add("DoAnimationEvent", "TacRP_HandleAnimEvents", function(ply, event, data)
     local wep = ply:GetActiveWeapon()
     if IsValid(wep) and wep.ArcticTacRP then // we are approximating; data must be an integer
-        local t = data * 0.001
-        if event == PLAYERANIMEVENT_ATTACK_PRIMARY then
+        if data == 0 and event == PLAYERANIMEVENT_ATTACK_PRIMARY then
             ply:AnimRestartGesture(GESTURE_SLOT_ATTACK_AND_RELOAD, wep:GetValue("GestureShoot"), true)
+            return ACT_INVALID
+        end
+        local t = data * 0.001
+        if event == PLAYERANIMEVENT_ATTACK_SECONDARY then
+            ply:AnimRestartGesture(GESTURE_SLOT_ATTACK_AND_RELOAD, ACT_GMOD_GESTURE_ITEM_THROW, true)
+            ply:SetLayerDuration(GESTURE_SLOT_ATTACK_AND_RELOAD, t * 1.5)
             return ACT_INVALID
         end
         if event == PLAYERANIMEVENT_RELOAD then
