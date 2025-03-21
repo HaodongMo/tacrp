@@ -937,7 +937,7 @@ function SWEP:DrawLockOnHUD()
 
         render.OverrideBlend(true, BLEND_ONE, BLEND_ONE, BLENDFUNC_ADD)
 
-        local trueFOV = self:WidescreenFix(self.TacRPLastFOV)
+        local trueFOV = self:WidescreenFix(self.TacRPLastFOV or 90)
 
         local circle = (ScrH() / trueFOV) * self:GetValue("LockOnTrackAngle") + ss
         local offset = 0
