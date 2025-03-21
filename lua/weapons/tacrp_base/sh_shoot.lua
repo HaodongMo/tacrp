@@ -178,7 +178,7 @@ function SWEP:PrimaryAttack()
         self:PlayAnimation(seq, mult, false, idle)
     end
 
-    self:GetOwner():DoCustomAnimEvent(PLAYERANIMEVENT_ATTACK_PRIMARY, 0)
+    self:GetOwner():DoCustomAnimEvent(PLAYERANIMEVENT_ATTACK_PRIMARY, 1)
 
     local pvar = self:GetValue("ShootPitchVariance")
 

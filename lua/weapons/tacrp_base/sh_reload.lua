@@ -154,7 +154,7 @@ function SWEP:EndReload()
         if self:Clip1() >= self:GetCapacity() or (!self:GetInfiniteAmmo() and self:Ammo1() == 0) or self:GetEndReload() then
 
             local cancellable = TacRP.ConVars["reload_sg_cancel"]:GetBool() and !self:GetValue("ShotgunFullCancel")
-            local t = 0.5
+            local t = 1
             if !self.ShotgunNoReverseStart and (self:Clip1() == self:GetLoadedRounds() or !self:GetEmptyReload()) then
                 t = self:PlayAnimation("reload_start", -0.75 * mult, !cancellable, true)
             else
@@ -216,16 +216,17 @@ function SWEP:CancelReload(doanims, keeptime)
         if doanims then
             if self:GetValue("ShotgunReload") then
                 local mult = self:GetValue("ReloadTimeMult") / TacRP.ConVars["mult_reloadspeed"]:GetFloat()
-
+                local t = 1
                 if self.CurrentAnimation == "reload_start" and self.ShotgunReloadCompleteStart then
                     self:SetEndReload(true)
                 elseif self:Clip1() == self:GetLoadedRounds() and !self.ShotgunNoReverseStart then
-                    self:PlayAnimation("reload_start", -0.75 * mult, true, true)
+                    t = self:PlayAnimation("reload_start", -0.75 * mult, true, true)
                     stop = true
                 else
-                    self:PlayAnimation("reload_finish", mult, true, true)
+                    t = self:PlayAnimation("reload_finish", mult, true, true)
                     stop = true
                 end
+                self:GetOwner():DoCustomAnimEvent(PLAYERANIMEVENT_RELOAD_END, t * 1000)
             else
                 self:Idle()
                 stop = true
