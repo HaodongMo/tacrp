@@ -103,9 +103,7 @@ function SWEP:Think()
 
     if self:GetJammed() and !self:StillWaiting() and TacRP.ConVars["jam_autoclear"]:GetBool() then
         local t = self:PlayAnimation("jam", 0.75, true, true)
-        self:GetOwner():DoAnimationEvent(self:GetValue("GestureReload"))
-        self:GetOwner():SetLayerDuration(GESTURE_SLOT_CUSTOM, t * 3)
-        self:GetOwner():SetLayerCycle(GESTURE_SLOT_CUSTOM, 0.67)
+        self:GetOwner():DoCustomAnimEvent(PLAYERANIMEVENT_CANCEL_RELOAD, t * 1000)
         self:SetJammed(false)
     end
 

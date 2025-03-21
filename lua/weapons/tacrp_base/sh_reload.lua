@@ -23,9 +23,7 @@ function SWEP:Reload(force)
 
     if self:GetJammed() then
         local t = self:PlayAnimation("jam", 0.75, true, true)
-        self:GetOwner():DoAnimationEvent(self:GetValue("GestureReload"))
-        self:GetOwner():SetLayerDuration(GESTURE_SLOT_CUSTOM, t * 3)
-        self:GetOwner():SetLayerCycle(GESTURE_SLOT_CUSTOM, 0.67)
+        self:GetOwner():DoCustomAnimEvent(PLAYERANIMEVENT_CANCEL_RELOAD, t * 1000)
         self:SetJammed(false)
         self:SetCharge(false)
         return
@@ -60,8 +58,7 @@ function SWEP:Reload(force)
 
     local t = self:PlayAnimation(anim, mult, true, true)
 
-    self:GetOwner():DoAnimationEvent(self:GetValue("GestureReload"))
-    self:GetOwner():SetLayerDuration(GESTURE_SLOT_CUSTOM, t * (self:GetValue("ShotgunReload") and 4 or 1))
+    self:GetOwner():DoCustomAnimEvent(PLAYERANIMEVENT_RELOAD, t * 1000)
 
     if SERVER then
         self:SetTimer(self.DropMagazineTime * mult, function()
@@ -163,8 +160,7 @@ function SWEP:EndReload()
             else
                 t = self:PlayAnimation("reload_finish", mult, !cancellable, true)
             end
-            self:GetOwner():SetLayerDuration(GESTURE_SLOT_CUSTOM, t * 2)
-            self:GetOwner():SetLayerCycle(GESTURE_SLOT_CUSTOM, 0.5)
+            self:GetOwner():DoCustomAnimEvent(PLAYERANIMEVENT_RELOAD_END, t * 1000)
 
             self:SetReloading(false)
 
@@ -183,8 +179,7 @@ function SWEP:EndReload()
             local delay = self:GetValue("ShotgunUpInTime")
             for i = 1, res do
                 self:SetTimer(t * delay * ((i - 1) / 3) + 0.22, function()
-                    self:GetOwner():SetLayerDuration(GESTURE_SLOT_CUSTOM, t * 3)
-                    self:GetOwner():SetLayerCycle(GESTURE_SLOT_CUSTOM, 0.3)
+                    self:GetOwner():DoCustomAnimEvent(PLAYERANIMEVENT_RELOAD_LOOP, t * 1000)
                     self:RestoreClip(1)
                     self:RunHook("Hook_InsertReload", res)
                 end, "ShotgunRestoreClip")

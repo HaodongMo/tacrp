@@ -299,3 +299,37 @@ hook.Add("InitPostEntity", "tacrp_shelleffect", function()
         end
     end
 end)
+
+hook.Add("DoAnimationEvent", "TacRP_HandleAnimEvents", function(ply, event, data)
+    local wep = ply:GetActiveWeapon()
+    if IsValid(wep) and wep.ArcticTacRP then // we are approximating; data must be an integer
+        local t = data * 0.001
+        if event == PLAYERANIMEVENT_ATTACK_PRIMARY then
+            ply:AnimRestartGesture(GESTURE_SLOT_ATTACK_AND_RELOAD, wep:GetValue("GestureShoot"), true)
+            return ACT_INVALID
+        end
+        if event == PLAYERANIMEVENT_RELOAD then
+            ply:AnimRestartGesture(GESTURE_SLOT_ATTACK_AND_RELOAD, wep:GetValue("GestureReload"), true)
+            ply:SetLayerDuration(GESTURE_SLOT_ATTACK_AND_RELOAD, t * (wep:GetValue("ShotgunReload") and 4 or 1))
+            return ACT_INVALID
+        end
+        if event == PLAYERANIMEVENT_RELOAD_LOOP then
+            ply:AnimRestartGesture(GESTURE_SLOT_ATTACK_AND_RELOAD, wep:GetValue("GestureReload"), true)
+            ply:SetLayerDuration(GESTURE_SLOT_ATTACK_AND_RELOAD, t * 3)
+            ply:SetLayerCycle(GESTURE_SLOT_ATTACK_AND_RELOAD, 0.38)
+            return ACT_INVALID
+        end
+        if event == PLAYERANIMEVENT_RELOAD_END then
+            ply:AnimRestartGesture(GESTURE_SLOT_ATTACK_AND_RELOAD, wep:GetValue("GestureReload"), true)
+            ply:SetLayerDuration(GESTURE_SLOT_ATTACK_AND_RELOAD, t * 2)
+            ply:SetLayerCycle(GESTURE_SLOT_ATTACK_AND_RELOAD, 0.5)
+            return ACT_INVALID
+        end
+        if event == PLAYERANIMEVENT_CANCEL_RELOAD then
+            ply:AnimRestartGesture(GESTURE_SLOT_ATTACK_AND_RELOAD, wep:GetValue("GestureReload"), true)
+            ply:SetLayerDuration(GESTURE_SLOT_ATTACK_AND_RELOAD, t * 2.5)
+            ply:SetLayerCycle(GESTURE_SLOT_ATTACK_AND_RELOAD, 0.6)
+            return ACT_INVALID
+        end
+    end
+end)
