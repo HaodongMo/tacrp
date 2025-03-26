@@ -335,7 +335,7 @@ hook.Add("DoAnimationEvent", "TacRP_HandleAnimEvents", function(ply, event, data
             local gest = wep:GetValue("GestureReload")
             ply:AnimRestartGesture(GESTURE_SLOT_ATTACK_AND_RELOAD, gest, true)
             if wep:GetValue("ShotgunReload") then
-                local offset = (TacRP.ReloadAnimOffsets[event][gest] or 0.4)
+                local offset = (TacRP.ReloadAnimOffsets[event][gest] or 0.5)
                 ply:SetLayerDuration(GESTURE_SLOT_ATTACK_AND_RELOAD, t / offset)
             else
                 ply:SetLayerDuration(GESTURE_SLOT_ATTACK_AND_RELOAD, t)
@@ -344,7 +344,7 @@ hook.Add("DoAnimationEvent", "TacRP_HandleAnimEvents", function(ply, event, data
         end
         if event == PLAYERANIMEVENT_RELOAD_LOOP then
             local gest = wep:GetValue("GestureReload")
-            local offset = (TacRP.ReloadAnimOffsets[event][gest] or 0.4)
+            local offset = (TacRP.ReloadAnimOffsets[event][gest] or 0.5)
             ply:AnimRestartGesture(GESTURE_SLOT_ATTACK_AND_RELOAD, gest, true)
             ply:SetLayerDuration(GESTURE_SLOT_ATTACK_AND_RELOAD, t / offset)
             ply:SetLayerCycle(GESTURE_SLOT_ATTACK_AND_RELOAD, offset)
@@ -352,7 +352,7 @@ hook.Add("DoAnimationEvent", "TacRP_HandleAnimEvents", function(ply, event, data
         end
         if event == PLAYERANIMEVENT_RELOAD_END then
             local gest = wep:GetValue("GestureReload")
-            local offset = (TacRP.ReloadAnimOffsets[event][gest] or 0.5)
+            local offset = (TacRP.ReloadAnimOffsets[event][gest] or 0.6)
             ply:AnimRestartGesture(GESTURE_SLOT_ATTACK_AND_RELOAD, gest, true)
             ply:SetLayerDuration(GESTURE_SLOT_ATTACK_AND_RELOAD, t / (1 - offset))
             ply:SetLayerCycle(GESTURE_SLOT_ATTACK_AND_RELOAD, offset)
