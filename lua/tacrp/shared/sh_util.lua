@@ -116,5 +116,5 @@ function TacRP.GetRandomWeapon(subcat, tier)
 end
 
 function TacRP.Developer(i)
-    return (SERVER or (CLIENT and LocalPlayer():IsSuperAdmin())) and GetConVar("developer"):GetInt() >= (i or 1)
+    return (SERVER or (CLIENT and IsValid(LocalPlayer()) and LocalPlayer():IsSuperAdmin())) and GetConVar("developer"):GetInt() >= (i or 1)
 end
