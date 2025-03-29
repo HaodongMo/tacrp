@@ -323,7 +323,13 @@ hook.Add("DoAnimationEvent", "TacRP_HandleAnimEvents", function(ply, event, data
     if IsValid(wep) and wep.ArcticTacRP and event != 20 and data > 0 then // we are approximating; data must be an integer
         local t = data * 0.001
         if event == PLAYERANIMEVENT_ATTACK_PRIMARY then
-            ply:AnimRestartGesture(GESTURE_SLOT_ATTACK_AND_RELOAD, wep:GetValue("GestureShoot"), true)
+            if data == 0 then
+                ply:AnimRestartGesture(GESTURE_SLOT_ATTACK_AND_RELOAD, wep:GetValue("GestureShoot"), true)
+            else // second layer of bodgening
+                local gest = data < 0 and wep:GetValue("GestureBash2") or wep:GetValue("GestureBash")
+                ply:AnimRestartGesture(GESTURE_SLOT_ATTACK_AND_RELOAD, gest, true)
+                ply:SetLayerDuration(GESTURE_SLOT_ATTACK_AND_RELOAD, math.abs(t))
+            end
             return ACT_INVALID
         end
         if event == PLAYERANIMEVENT_ATTACK_SECONDARY then
