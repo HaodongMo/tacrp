@@ -166,6 +166,14 @@ function SWEP:SetBaseSettings()
     end
 end
 
+function SWEP:OnDrop()
+    if SERVER then
+        self:KillShields()
+    end
+
+    return BaseClass.OnDrop(self, wep)
+end
+
 function SWEP:Holster(wep)
     if SERVER then
         self:KillShields()

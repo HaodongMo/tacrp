@@ -631,7 +631,7 @@ end
 
 function SWEP:OnDrop()
     self:SetReady(false)
- end
+end
 
 function SWEP:SecondaryAttack()
     self:RunHook("Hook_SecondaryAttack")
