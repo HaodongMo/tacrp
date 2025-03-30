@@ -171,7 +171,7 @@ function SWEP:OnDrop()
         self:KillShields()
     end
 
-    return BaseClass.OnDrop(self, wep)
+    return BaseClass.OnDrop(self)
 end
 
 function SWEP:Holster(wep)
