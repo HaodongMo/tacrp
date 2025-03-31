@@ -1265,9 +1265,26 @@ The fourth major expansion, featuring 42 weapons themed around zombies, the apoc
 <li><b>Changed:</b> Developer-related visuals now require superadmin permissions to be visible.
 <li><b>Fixed:</b> Holosight scaling for unusual aspect ratios.
 <li><b>Fixed:</b> Client-authoratitive damage behaving weirdly in singleplayer.
-<li><b>Fixed:</b> Blindfire bone maniuplation not working in singleplayer.
-<li><b>Fixed:</b> Blindfire bone maniuplation not working in single player.
+<li><b>Fixed:</b> Blindfire bone manipulation not working in singleplayer.
 <li><b>Rebalance:</b> Nerfed shotgun armor shredding.
+</ul>
+]]
+    },
+    {
+        Title = "Update 31.5?",
+        Type = "Update",
+        Date = "2025-04-02",
+        Author = "chen",
+        Major = false,
+        Summary = "Third person animation revamp.",
+        Contents = [[<body style="font-family:'Myriad Pro';color:white;font-size:125%;">
+<h3>Changelist:</h3>
+<ul>
+<li><b>Added:</b> Synchronized third person animations for reloading, grenading, jam-clearing, and bashing.
+<li><b>Changed:</b> (Special Delivery) Gyrojet third person reload animation from "pistol" to "revolver".
+<li><b>Fixed:</b> An invisible riot shield sticking to the player after dropping one.
+<li><b>Fixed:</b> Homing launchers breaking HUDs if the player hasn't been in first person.
+<li><b>Fixed:</b> "developer" convar causing a harmless error in multiplayer.
 </ul>
 ]]
     },
