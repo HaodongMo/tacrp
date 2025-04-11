@@ -1271,9 +1271,9 @@ The fourth major expansion, featuring 42 weapons themed around zombies, the apoc
 ]]
     },
     {
-        Title = "Update 31.5?",
+        Title = "Update 32",
         Type = "Update",
-        Date = "2025-04-02",
+        Date = "2025-04-11",
         Author = "chen",
         Major = false,
         Summary = "Third person animation revamp.",
@@ -1281,10 +1281,13 @@ The fourth major expansion, featuring 42 weapons themed around zombies, the apoc
 <h3>Changelist:</h3>
 <ul>
 <li><b>Added:</b> Synchronized third person animations for reloading, grenading, jam-clearing, and bashing.
+<li><b>Added:</b> Quotes for some weapons.
 <li><b>Changed:</b> (Special Delivery) Gyrojet third person reload animation from "pistol" to "revolver" to accommodate for the update.
+<li><b>Changed:</b> Kingslayer renamed to Kingbreaker.
 <li><b>Fixed:</b> An invisible riot shield sticking to the player after dropping one.
 <li><b>Fixed:</b> Homing launchers breaking HUDs if the player hasn't been in first person.
 <li><b>Fixed:</b> "developer" convar causing a harmless error in multiplayer.
+<li><b>Fixed:</b> Some ammo types not having correctly localized names in customization menu because of incorrect captialization.
 </ul>
 ]]
     },

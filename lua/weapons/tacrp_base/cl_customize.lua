@@ -107,7 +107,8 @@ function SWEP:CreateCustomizeHUD()
         surface.SetFont("TacRP_Myriad_Pro_12")
 
         if self:GetAmmoType() != "" then
-            local ammo_txt = language.GetPhrase(string.lower(self:GetAmmoType()) .. "_ammo")
+            -- Have to do this weird double wrapping because ammo type strings are apparently case sensitive now (e.g. "Pistol_ammo")
+            local ammo_txt = language.GetPhrase(game.GetAmmoName(game.GetAmmoID(self:GetAmmoType())) .. "_ammo")
             local ammo_w = surface.GetTextSize(ammo_txt)
 
             surface.SetDrawColor(0, 0, 0, 150)
