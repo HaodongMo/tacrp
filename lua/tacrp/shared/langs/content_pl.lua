@@ -1485,7 +1485,7 @@ w = ws .. "db"
 -- L["wep." .. w .. ".name.full"] = "Stoeger Double Defense"
 -- L["wep." .. w .. ".name"] = "Double Defense"
 L["wep." .. w .. ".desc"] = "Nowoczesna krótka strzelba dwulufowa. Łatwa w obsłudze, niezawodna i śmiertelna w walce wręcz."
-L["wep." .. w .. ".desc.quote"] = "\"Jedyną rzeczą, której się boją... to ty.\""
+L["wep." .. w .. ".desc.quote"] = "\"Eat leaden death, demon.\"" --To be translated
 -- L["wep." .. w .. ".trivia.manufacturer"] = "Stoeger"
 -- L["wep." .. w .. ".credits"] = "Model: Counter-Strike: Online 2 \nSounds: Navaro & Vunsunta \nAnimations: speedonerd & 8Z"
 
@@ -2876,7 +2876,7 @@ w = ws .. "mp5_zeroeight"
 
 w = ws .. "hecate_vinierspecial"
 -- L["wep." .. w .. ".name.full"] = "PGM Hécate II \"Kingbreaker\""
--- L["wep." .. w .. ".name"] = "Kingbreaker"
+-- L["wep." .. w .. ".name"] = "The Kingbreaker"
 -- L["wep." .. w .. ".desc"] = "Customized Hécate II with a mammoth suppressor, custom 16x scope sporting a jury-rigged rangefinder, and a rebellious message scrawled on the gun's side."
 -- L["wep." .. w .. ".desc.quote"] = "\"No more chivalry. Now we fight like wolves.\""
 -- L["wep." .. w .. ".trivia.manufacturer"] = "PGM Précision"

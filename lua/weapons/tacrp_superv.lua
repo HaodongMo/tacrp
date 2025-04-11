@@ -4,7 +4,7 @@ SWEP.Spawnable = true
 AddCSLuaFile()
 
 // names and stuff
-SWEP.PrintName = "Kriss Vector"
+SWEP.PrintName = "KRISS Vector"
 SWEP.AbbrevName = "Vector"
 SWEP.Category = "Tactical RP"
 
@@ -12,6 +12,7 @@ SWEP.SubCatTier = "1Elite"
 SWEP.SubCatType = "3Submachine Gun"
 
 SWEP.Description = "Close range SMG with extremely high fire rate and practically no recoil. Low armor penetration, but can chew through it very quickly."
+SWEP.Description_Quote = "Went by \"TDI Kriss\" in high school." -- KRISS USA was formerly named Transformational Defense Industries (TDI).
 
 SWEP.Trivia_Caliber = "9x19mm"
 SWEP.Trivia_Manufacturer = "Kriss USA, Inc."

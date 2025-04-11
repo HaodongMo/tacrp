@@ -12,7 +12,7 @@ SWEP.SubCatTier = "2Operator"
 SWEP.SubCatType = "3Submachine Gun"
 
 SWEP.Description = "PDW with superb handling and close range effectiveness. High velocity rounds retain effectiveness at range and pierces armor easily."
-SWEP.Description_Quote = "\"You forgot to cock it, muthafucka!\""
+SWEP.Description_Quote = "\"You've got to cock it motherfucker.\"" -- Big Game (2014)
 
 SWEP.Trivia_Caliber = "4.6x30mm"
 SWEP.Trivia_Manufacturer = "Heckler & Koch"

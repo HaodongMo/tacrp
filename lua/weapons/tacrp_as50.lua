@@ -11,7 +11,8 @@ SWEP.Category = "Tactical RP"
 SWEP.SubCatTier = "1Elite"
 SWEP.SubCatType = "7Sniper Rifle"
 
-SWEP.Description = "Semi-automatic anti-materiel rifle that can easily annihilate any person at any distance.\nEquipped with a 12x scope by default.\nFar too heavy to swing, so bashing is out of the question."
+SWEP.Description = "Semi-automatic AMR that can easily decimate at any range. \nEquipped with a 12x scope by default. \nFar too heavy to swing, so bashing is out of the question."
+SWEP.Description_Quote = "As seen on Future Weapons."
 
 SWEP.Trivia_Caliber = ".50 BMG"
 SWEP.Trivia_Manufacturer = "Accuracy International"

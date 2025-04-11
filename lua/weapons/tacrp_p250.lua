@@ -12,6 +12,7 @@ SWEP.SubCatTier = "2Operator"
 SWEP.SubCatType = "1Pistol"
 
 SWEP.Description = "Powerful handgun that exchanges capacity for damage and precision."
+SWEP.Description_Quote = "\"You wait until they get close and aim for the face. You understand?\"" -- Watch_Dogs (2014)
 
 SWEP.Trivia_Caliber = ".357 SIG"
 SWEP.Trivia_Manufacturer = "SIG Sauer, Inc."

@@ -12,6 +12,7 @@ SWEP.SubCatTier = "2Operator"
 SWEP.SubCatType = "5Shotgun"
 
 SWEP.Description = "Combat shotgun with high fire rate and capacity."
+SWEP.Description_Quote = "\"Out there, we learned to guard each other, to hunt, to speak without speaking.\"" -- Call of Duty: Ghosts (2013)
 
 SWEP.Trivia_Caliber = "12 Gauge"
 SWEP.Trivia_Manufacturer = "FABARM S.p.A."
