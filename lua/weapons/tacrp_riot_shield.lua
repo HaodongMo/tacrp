@@ -13,7 +13,9 @@ SWEP.NoAimAssist = true
 SWEP.SubCatTier = "9Special"
 SWEP.SubCatType = "9Equipment"
 
-SWEP.Description = "Lightweight shield. Despite its plastic-looking core, it is capable of stopping almost all rifle caliber rounds.\nAble to sprint and melee attack without compromising the user's safety, but slows down move speed slightly."
+SWEP.Description = "Lightweight plastic shield which can stop most rifle caliber rounds. Able to sprint and melee without compromising safety at the cost of a slight movement speed penalty."
+SWEP.Description_Quote = "You know what they say..." -- Technically a Hotel Mario reference, I guess
+
 SWEP.Credits = "Model/Texture: Tactical Intervention\nAnimation: Arqu"
 
 SWEP.ViewModel = "models/weapons/tacint/v_riot_shield-2.mdl"

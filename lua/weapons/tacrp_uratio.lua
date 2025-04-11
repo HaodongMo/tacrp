@@ -12,6 +12,7 @@ SWEP.SubCatTier = "3Security"
 SWEP.SubCatType = "7Sniper Rifle"
 
 SWEP.Description = "Lightweight sniper rifle with good damage and high mobility.\nEquipped with a 10x scope by default."
+SWEP.Description_Quote = "\"The final argument of kings.\"" --Louis the Great had this engraved on his cannons, or more specifically "ultima ratio regum"
 
 SWEP.Trivia_Caliber = "6.5mm Creedmoor" -- "7.62x51mm" is more common but also too lightweight of a caliber
 SWEP.Trivia_Manufacturer = "PGM Précision"

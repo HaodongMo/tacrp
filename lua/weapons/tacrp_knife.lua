@@ -11,6 +11,7 @@ SWEP.SubCatTier = "9Special"
 SWEP.SubCatType = "8Bladed Melee"
 
 SWEP.Description = "A multi-purpose flip knife, although most of the purposes involving stabbing someone."
+SWEP.Description_Quote = "Stabbin' time."
 
 SWEP.Faction = TacRP.FACTION_COALITION
 SWEP.Credits = "Assets: Tactical Intervention"

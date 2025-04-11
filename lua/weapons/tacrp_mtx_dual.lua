@@ -11,6 +11,7 @@ SWEP.SubCatTier = "1Elite"
 SWEP.SubCatType = "3Akimbo"
 
 SWEP.Description = "An indulgent pair of high capacity, high damage, high quality compact pistols.\nWith firepower like this, who needs aiming?"
+SWEP.Description_Quote = "With firepower like this, who needs aiming?"
 
 SWEP.Trivia_Caliber = ".45 ACP"
 SWEP.Trivia_Manufacturer = "Detonics Defense"

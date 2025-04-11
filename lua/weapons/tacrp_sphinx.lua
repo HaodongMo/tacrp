@@ -12,6 +12,7 @@ SWEP.SubCatTier = "2Operator"
 SWEP.SubCatType = "3Machine Pistol"
 
 SWEP.Description = "Premium pistol modified to be 3-round burst. High firerate but long burst delay."
+SWEP.Description_Quote = "A Swiss-made variant of the beloved CZ 75."
 
 SWEP.Trivia_Caliber = "9x19mm"
 SWEP.Trivia_Manufacturer = "Sphinx Systems"

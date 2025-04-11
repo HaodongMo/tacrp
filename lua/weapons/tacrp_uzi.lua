@@ -12,6 +12,7 @@ SWEP.SubCatTier = "2Operator"
 SWEP.SubCatType = "3Machine Pistol"
 
 SWEP.Description = "Balanced machine pistol with a controllable rate of fire."
+SWEP.Description_Quote = "Like a swarm of wasps." -- Reference to the gun's name in MWIII
 
 SWEP.Trivia_Caliber = "9x19mm"
 SWEP.Trivia_Manufacturer = "Israel Military Industries"

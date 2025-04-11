@@ -11,6 +11,7 @@ SWEP.SubCatTier = "1Elite"
 SWEP.SubCatType = "3Submachine Gun"
 
 SWEP.Description = "Carbine caliber subcompact PDW. The perfect blend of rifle and submachine gun."
+SWEP.Description_Quote = "Notably used during the Hakone Incident." -- Gate: Thus the JSDF Fought There (2015)
 
 SWEP.Trivia_Caliber = "6mm Whisper"
 SWEP.Trivia_Manufacturer = "Knight's Armament"

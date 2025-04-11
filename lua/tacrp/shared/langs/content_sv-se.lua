@@ -1486,7 +1486,7 @@ w = ws .. "db"
 L["wep." .. w .. ".name.full"] = "Stoeger Double Defense"
 L["wep." .. w .. ".name"] = "Double Defense"
 L["wep." .. w .. ".desc"] = "Modern tillverkad kort dubbelpipig hagelbössa. Lätt att hantera, pålitlig och dödlig på nära avstånd."
-L["wep." .. w .. ".desc.quote"] = "\"Det enda dem fruktar är dig.\""
+L["wep." .. w .. ".desc.quote"] = "\"Eat leaden death, demon.\"" --To be translated
 L["wep." .. w .. ".trivia.manufacturer"] = "Stoeger"
 L["wep." .. w .. ".credits"] = "Modell: Counter-Strike: Online 2 \nLjud: Navaro & Vunsunta \nAnimationer: speedonerd & 8Z"
 
@@ -2878,7 +2878,7 @@ L["wep." .. w .. ".credits"] = "Speciellt redigerad av speedonerd och 8Z \nMP5: 
 
 w = ws .. "hecate_vinierspecial"
 L["wep." .. w .. ".name.full"] = "PGM Hécate II \"Kingbreaker\""
-L["wep." .. w .. ".name"] = "Kingbreaker"
+L["wep." .. w .. ".name"] = "The Kingbreaker"
 L["wep." .. w .. ".desc"] = "Anpassad Hécate II med en mammut ljuddämpare, anpassat 16x kikarsikte med avståndsmätare, och ett upproriskt meddelande skrivet på vapnets sida."
 L["wep." .. w .. ".desc.quote"] = "\"Betala en man tillräckligt så går han barfota till helvetet.\"" -- TODO: Change this to the new quote!
 L["wep." .. w .. ".trivia.manufacturer"] = "PGM Précision"

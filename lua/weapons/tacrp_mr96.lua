@@ -12,6 +12,7 @@ SWEP.SubCatTier = "2Operator"
 SWEP.SubCatType = "2Magnum Pistol"
 
 SWEP.Description = "Magnum revolver with good handling and stopping power. Accurate, but hard to fire rapidly."
+SWEP.Description_Quote = "Legend has it a stainless steel version exists..." -- One of the thugs in Ghost in the Shell 2: Innocence (2004) uses a stainless steel MR96
 
 SWEP.Trivia_Caliber = ".357 Magnum"
 SWEP.Trivia_Manufacturer = "Chapuis Armes"

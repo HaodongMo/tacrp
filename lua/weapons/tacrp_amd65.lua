@@ -11,6 +11,7 @@ SWEP.SubCatTier = "3Security"
 SWEP.SubCatType = "4Assault Rifle"
 
 SWEP.Description = "Hungarian AK clone with integrated grip and wire stock. High damage, but lower range than most rifles."
+SWEP.Description_Quote = "\"Are you out of your mind?\" \"No....just out of bullets\"" --Red Scorpion (1988)
 
 SWEP.Trivia_Caliber = "7.62x39mm"
 SWEP.Trivia_Manufacturer = "Fegyver- és Gépgyár"

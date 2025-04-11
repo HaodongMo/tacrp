@@ -12,6 +12,7 @@ SWEP.SubCatTier = "4Consumer"
 SWEP.SubCatType = "3Machine Pistol"
 
 SWEP.Description = "Light machine pistol with good range, recoil and spread."
+SWEP.Description_Quote = "Not to be confused with the CZ EVO 3."
 
 SWEP.Trivia_Caliber = ".32 ACP"
 SWEP.Trivia_Manufacturer = "CZ Uherský Brod"

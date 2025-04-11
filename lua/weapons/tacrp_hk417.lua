@@ -12,6 +12,7 @@ SWEP.SubCatTier = "1Elite"
 SWEP.SubCatType = "5Battle Rifle"
 
 SWEP.Description = "Battle rifle with superb damage, fire rate and precision. Capable of automatic fire, although it is very unstable."
+SWEP.Description_Quote = "\"Hey, he saved our asses back there, and right now he's all we got.\"" -- Spec Ops: The Line (2012)
 
 SWEP.Trivia_Caliber = "7.62x51mm"
 SWEP.Trivia_Manufacturer = "Heckler & Koch"

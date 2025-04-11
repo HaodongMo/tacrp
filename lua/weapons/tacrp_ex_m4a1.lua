@@ -12,6 +12,7 @@ SWEP.SubCatTier = "2Operator"
 SWEP.SubCatType = "4Assault Rifle"
 
 SWEP.Description = "A true American classic boasting high fire rate and balanced performance."
+SWEP.Description_Quote = "\"Burn 'em, Eldridge!\"" --The Hurt Locker (2008)
 
 SWEP.Trivia_Caliber = "5.56x45mm"
 SWEP.Trivia_Manufacturer = "Colt"
