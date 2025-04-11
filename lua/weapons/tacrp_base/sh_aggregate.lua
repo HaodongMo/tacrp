@@ -1001,9 +1001,31 @@ SWEP.StatDisplay = {
             return math.min(100, math.Round(val * 100, 0))
         end,
         Unit = "%",
-        Value = "RecoilCrouchMult",
+        Value = "RecoilMultCrouch",
         LowerIsBetter = true,
         -- HideIfSame = true,
+    },
+    {
+        Name = "stat.recoilburst",
+        Description = "stat.recoilburst.desc",
+        Value = "RecoilMultBurst",
+        Unit = "%",
+        AggregateFunction = function(self, base, val)
+            return math.min(100, math.Round(val * 100, 0))
+        end,
+        LowerIsBetter = true,
+        DefaultValue = 1,
+    },
+    {
+        Name = "stat.recoilsemi",
+        Description = "stat.recoilsemi.desc",
+        Value = "RecoilMultSemi",
+        Unit = "%",
+        AggregateFunction = function(self, base, val)
+            return math.min(100, math.Round(val * 100, 0))
+        end,
+        LowerIsBetter = true,
+        DefaultValue = 1,
     },
     {
         Name = "spacer.mobility",

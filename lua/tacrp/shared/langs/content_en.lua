@@ -944,6 +944,10 @@ L["att.trigger_dualstage.name.full"] = "Dual Stage Trigger"
 L["att.trigger_dualstage.name"] = "D. Stage"
 L["att.trigger_dualstage.desc"] = "Trigger that reduces firerate while aiming for better control and accuracy."
 
+L["att.trigger_tactical.name.full"] = "Tactical Trigger"
+L["att.trigger_tactical.name"] = "Tactical"
+L["att.trigger_tactical.desc"] = "Trigger reducing recoil for burst and semi fire modes."
+
 -- Attachments (melee_boost)
 L["att.melee_boost_all.name"] = "Level Up"
 L["att.melee_boost_all.desc"] = "Small boost to all attributes."

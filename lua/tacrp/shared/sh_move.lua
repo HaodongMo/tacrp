@@ -182,6 +182,7 @@ function TacRP.StartCommand(ply, cmd)
         local kick = wpn:GetValue("RecoilKick")
         local recoildir = wpn:GetRecoilDirection()
         local rec = 1
+        local cfm = wpn:GetCurrentFiremode()
 
         if wpn:UseAltRecoil() then
             rec = 1 + math.Clamp((wpn:GetRecoilAmount() - 1) / (wpn:GetValue("RecoilMaximum") - 1), 0, 1)
@@ -194,16 +195,26 @@ function TacRP.StartCommand(ply, cmd)
             kick = kick * math.min(1, wpn:GetValue("BipodKick"))
         end
 
+        if ply:Crouching() then
+            kick = kick * math.min(1, wpn:GetValue("RecoilMultCrouch"))
+        end
+
+        if cfm < 0 then
+            kick = kick * wpn:GetValue("RecoilMultBurst")
+        elseif cfm == 1 then
+            kick = kick * wpn:GetValue("RecoilMultSemi")
+        end
+
         kick = kick * TacRP.ConVars["mult_recoil_kick"]:GetFloat()
 
         local eyeang = cmd:GetViewAngles()
-
         local suppressfactor = 1
-        if wpn:UseRecoilPatterns() and wpn:GetCurrentFiremode() != 1 then
+        if wpn:UseRecoilPatterns() and cfm != 1 then
             local stab = math.Clamp(wpn:GetValue("RecoilStability"), 0, 0.9)
             local max = wpn:GetBaseValue("RPM") / 60 * (0.75 + stab * 0.833)
             suppressfactor = math.min(3, 1 + (wpn:GetPatternCount() / max))
         end
+
 
         local uprec = math.sin(math.rad(recoildir)) * FrameTime() * rec * kick / suppressfactor
         local siderec = math.cos(math.rad(recoildir)) * FrameTime() * rec * kick

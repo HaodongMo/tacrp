@@ -1280,6 +1280,8 @@ The fourth major expansion, featuring 42 weapons themed around zombies, the apoc
         Contents = [[<body style="font-family:'Myriad Pro';color:white;font-size:125%;">
 <h3>Changelist:</h3>
 <ul>
+<li><b>Added:</b> Global 10% recoil reduction for burst/semi fire modes.
+<li><b>Added:</b> Tactical Trigger, reducing recoil on burst/semi for weapons with multiple firemodes.
 <li><b>Added:</b> Synchronized third person animations for reloading, grenading, jam-clearing, and bashing.
 <li><b>Added:</b> Quotes for some weapons.
 <li><b>Changed:</b> (Special Delivery) Gyrojet third person reload animation from "pistol" to "revolver" to accommodate for the update.
@@ -1288,6 +1290,7 @@ The fourth major expansion, featuring 42 weapons themed around zombies, the apoc
 <li><b>Fixed:</b> Homing launchers breaking HUDs if the player hasn't been in first person.
 <li><b>Fixed:</b> "developer" convar causing a harmless error in multiplayer.
 <li><b>Fixed:</b> Some ammo types not having correctly localized names in customization menu because of incorrect captialization.
+<li><b>Rebalance:</b> Buffed Dual Stage Trigger.
 </ul>
 ]]
     },
