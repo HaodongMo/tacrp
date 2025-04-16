@@ -10,7 +10,8 @@ SWEP.Category = "Tactical RP"
 SWEP.SubCatTier = "1Elite"
 SWEP.SubCatType = "3Submachine Gun"
 
-SWEP.Description = "Carbine caliber subcompact PDW. The perfect blend of rifle and submachine gun."
+SWEP.Description = "Experimental compact PDW firing a carbine-type cartridge. The perfect blend of rifle and submachine gun."
+SWEP.Description_Quote = "The weight and size of an SMG with the power of a rifle." -- Based off the weapon's description in Contract Wars (2010)
 
 SWEP.Trivia_Caliber = "6mm Whisper"
 SWEP.Trivia_Manufacturer = "Knight's Armament"
