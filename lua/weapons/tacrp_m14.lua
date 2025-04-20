@@ -12,7 +12,7 @@ SWEP.SubCatTier = "3Security"
 SWEP.SubCatType = "6Marksman Rifle"
 
 SWEP.Description = "Semi-automatic rifle with a lethal headshot.\nEquipped with a 6x scope by default."
-SWEP.Description_Quote = "\"This my rifle. There are many like it, but this one is mine.\"" -- Full Metal Jacket
+SWEP.Description_Quote = "\"This is my rifle. There are many like it, but this one is mine.\"" // Full Metal Jacket
 
 SWEP.Trivia_Caliber = "7.62x51mm"
 SWEP.Trivia_Manufacturer = "Springfield Armory"

@@ -369,7 +369,7 @@ w = ws .. "m14"
 L["wep." .. w .. ".name.full"] = "Springfield M1A"
 L["wep." .. w .. ".name"] = "M1A"
 L["wep." .. w .. ".desc"] = "Semi-automatic rifle with a lethal headshot. \nEquipped with a 6x scope by default."
-L["wep." .. w .. ".desc.quote"] = "\"This my rifle! There are many like it, but this one is mine!\""
+L["wep." .. w .. ".desc.quote"] = "\"This is my rifle. There are many like it, but this one is mine.\""
 L["wep." .. w .. ".trivia.manufacturer"] = "Springfield Armory"
 L["wep." .. w .. ".credits"] = "Assets: Tactical Intervention"
 
