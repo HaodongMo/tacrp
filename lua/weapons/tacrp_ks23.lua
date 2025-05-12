@@ -11,7 +11,7 @@ SWEP.SubCatTier = "1Elite"
 SWEP.SubCatType = "5Shotgun"
 
 SWEP.Description = "Made from recycled aircraft gun barrels, this heavy shotgun fires shells twice the diameter of typical shotshells.\nAble to breach doors without specialized shells."
-SWEP.Description_Quote = "Oh, those Russians."
+SWEP.Description_Quote = ""
 
 SWEP.Trivia_Caliber = "23x75mmR"
 SWEP.Trivia_Manufacturer = "Tula Arms Plant"
