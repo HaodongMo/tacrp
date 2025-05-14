@@ -473,7 +473,8 @@ L["wep." .. w .. ".credits"] = "Assets: Tactical Intervention"
 
 w = ws .. "pdw"
 L["wep." .. w .. ".name"] = "KAC PDW"
-L["wep." .. w .. ".desc"] = "Carbine caliber subcompact PDW. The perfect blend of rifle and submachine gun."
+L["wep." .. w .. ".desc"] = "Experimental compact PDW firing a carbine-type cartridge. The perfect blend of rifle and submachine gun."
+L["wep." .. w .. ".desc.quote"] = "The weight and size of an SMG with the power of a rifle."
 L["wep." .. w .. ".trivia.manufacturer"] = "Knight's Armament"
 L["wep." .. w .. ".credits"] = "Assets: Tactical Intervention"
 
@@ -1572,7 +1573,7 @@ L["wep." .. w .. ".credits"] = "Model: RedRougeXIII \nTextures: Storm (lovingly 
 w = ws .. "dual_1911"
 L["wep." .. w .. ".name"] = "Dueling Wyverns"
 L["wep." .. w .. ".desc"] = "A pair of gaudy, custom made golden M1911 pistols complete with wyvern-engraved grip. Hits hard, but its low capacity can be hurting."
-L["wep." .. w .. ".desc.quote"] = "\"Engraving... give you no tactical advantage whatsoever.\""
+L["wep." .. w .. ".desc.quote"] = "\"Engravings... give you no tactical advantage whatsoever.\""
 L["wep." .. w .. ".trivia.manufacturer"] = "Springfield Armory"
 L["wep." .. w .. ".credits"] = "Model: Schmung \nTextures: Millenia \nAnimations: Tactical Intervention"
 
