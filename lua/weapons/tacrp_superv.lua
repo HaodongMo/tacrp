@@ -12,7 +12,7 @@ SWEP.SubCatTier = "1Elite"
 SWEP.SubCatType = "3Submachine Gun"
 
 SWEP.Description = "Close range SMG with extremely high fire rate and practically no recoil. Low armor penetration, but can chew through it very quickly."
-SWEP.Description_Quote = "Went by \"TDI Kriss\" in high school." -- KRISS USA was formerly named Transformational Defense Industries (TDI).
+SWEP.Description_Quote = "\"We go forward like a breath exhaled from the Earth.\"" -- Modern Warfare 2 (2009).
 
 SWEP.Trivia_Caliber = "9x19mm"
 SWEP.Trivia_Manufacturer = "Kriss USA, Inc."
