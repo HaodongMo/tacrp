@@ -2053,7 +2053,7 @@ L["wep." .. w .. ".credits"] = "Main Model: Firearms: Source, edited by speedone
 w = ws .. "hardballer"
 L["wep." .. w .. ".name"] = "AMT Hardballer"
 L["wep." .. w .. ".desc"] = "Long-slide pistol with stainless steel construction. Accurate and hits hard at range."
-L["wep." .. w .. ".desc.quote"] = "\"I'll be back...\""
+L["wep." .. w .. ".desc.quote"] = "\"Forty-five long-slide with laser sighting.\""
 L["wep." .. w .. ".trivia.manufacturer"] = "Arcadia Machine & Tool."
 L["wep." .. w .. ".credits"] = "Assets: Terminator: Resistance (port by Sirgibsalot) \nSounds: Navaro \nAnimations: Tactical Intervention"
 
