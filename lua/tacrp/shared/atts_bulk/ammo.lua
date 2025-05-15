@@ -1662,3 +1662,48 @@ end
 
 TacRP.LoadAtt(ATT, "ammo_usp_9mm")
 -- #endregion
+
+
+-- R700 ammos
+ATT = {}
+
+ATT.PrintName = ".300 Win Mag"
+ATT.FullName = "R700 .300 Win Mag Mod Kit"
+ATT.Icon = Material("entities/tacrp_att_ammo_300winmag.png", "mips smooth")
+ATT.Description = "Modification to load a high-power hunting cartridge."
+ATT.Pros = {"rating.lethality", "stat.muzzlevelocity"}
+ATT.Cons = {"stat.rpm", "stat.recoilkick", "stat.range"}
+
+ATT.Category = "ammo_R700"
+ATT.SortOrder = 0.5
+
+ATT.Mult_Damage_Max = 1.335
+ATT.Mult_Damage_Min = 1.25
+
+ATT.Mult_RPM = 1 / 1.2
+ATT.Mult_ShootTimeMult = 1.2
+
+ATT.Mult_Range_Max = 0.7
+ATT.Mult_Range_Min = 0.6
+
+ATT.Add_RecoilKick = 5
+ATT.Mult_MuzzleVelocity = 1.3
+
+ATT.BodyDamageMultipliers = {
+    [HITGROUP_HEAD] = 3,
+    [HITGROUP_CHEST] = 1,
+    [HITGROUP_STOMACH] = 0.9,
+    [HITGROUP_LEFTARM] = 0.75,
+    [HITGROUP_RIGHTARM] = 0.75,
+    [HITGROUP_LEFTLEG] = 0.5,
+    [HITGROUP_RIGHTLEG] = 0.5,
+    [HITGROUP_GEAR] = 0.5
+}
+
+ATT.Override_Ammo = "357"
+ATT.Override_Ammo_Expanded = "ti_sniper"
+
+ATT.Override_Sound_Shoot = "tacrp/weapons/spr/awp1.wav"
+ATT.Add_Pitch_Shoot = 10
+
+TacRP.LoadAtt(ATT, "ammo_r700_300winmag")
