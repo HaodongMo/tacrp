@@ -2647,7 +2647,7 @@ w = ws .. "makarov"
 L["wep." .. w .. ".name.full"] = "Makarov PM"
 L["wep." .. w .. ".name"] = "PM"
 L["wep." .. w .. ".desc"] = "Mass production Soviet sidearm designed to be carried often and rarely shot. Lethality is poor beyond point blank."
-L["wep." .. w .. ".desc.quote"] = "\"You're listening to Apocalypse Radio. The only surviving radio station for miles.\""
+L["wep." .. w .. ".desc.quote"] = "\"You're listening to Apocalypse Radio.\""
 L["wep." .. w .. ".trivia.manufacturer"] = "Izhevsk Mechanical Plant"
 L["wep." .. w .. ".credits"] = "Assets: TehSnake \nSounds: Hk, Vunsunta \nAnimations: Tactical Intervention"
 
