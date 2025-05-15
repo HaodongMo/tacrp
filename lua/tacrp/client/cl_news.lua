@@ -1282,7 +1282,6 @@ The fourth major expansion, featuring 42 weapons themed around zombies, the apoc
 <ul>
 <li><b>Added:</b> Global 10% recoil reduction for burst/semi fire modes.
 <li><b>Added:</b> (Base) Tactical Trigger, reducing recoil on burst/semi for weapons with multiple firemodes.
-<li><b>Added:</b> (Base) .300 Winchester Magnum ammo for R700 SPS.
 <li><b>Added:</b> Synchronized third person animations for reloading, grenading, jam-clearing, and bashing.
 <li><b>Added:</b> Quotes for weapons that previously didnt have any.
 <li><b>Changed:</b> (Special Delivery) Gyrojet third person reload animation from "pistol" to "revolver" to accommodate for the update.
