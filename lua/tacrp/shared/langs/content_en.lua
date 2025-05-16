@@ -1310,8 +1310,8 @@ L["wep." .. w .. ".credits"] = "Model: Hav0c \nTextures: Twinke Masta \nSounds: 
 w = ws .. "star15"
 L["wep." .. w .. ".name.full"] = "Spikes Tactical AR-15"
 L["wep." .. w .. ".name"] = "ST AR-15"
-L["wep." .. w .. ".desc"] = "Aftermarket AR-15 fine tuned for precision shooting and able to accept caliber conversion kits."
-L["wep." .. w .. ".desc.quote"] = "\"Real popular with the big PMCs.\""
+L["wep." .. w .. ".desc"] = "Aftermarket AR-15 fine tuned for precision shooting.\nEver the choice for lone wolves on a path of revenge, your fate will be a cacophonous funeral... and a silent farewell. Bring a detonator."
+L["wep." .. w .. ".desc.quote"] = ""
 L["wep." .. w .. ".trivia.manufacturer"] = "Spikes Tactical"
 L["wep." .. w .. ".credits"] = "Assets: carl ruins everything, Leon-DLL, Mira + various sources \nSounds: Insurgency, rzen1th & Tactical Intervention \nAnimations: Tactical Intervention"
 
