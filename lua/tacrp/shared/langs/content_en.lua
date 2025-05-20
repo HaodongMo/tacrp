@@ -2464,7 +2464,7 @@ L["wep." .. w .. ".name"] = "SPAS-15"
 L["wep." .. w .. ".desc"] = "Heavy, magazine-fed successor to the iconic dual-mode shotgun. Low recoil but isn't very accurate."
 L["wep." .. w .. ".desc.quote"] = "\"We will wait. We will wait and see what he can discover.\""
 L["wep." .. w .. ".trivia.manufacturer"] = "Luigi Franchi S.p.A."
-L["wep." .. w .. ".credits"] = "Assets: filosoma, ported from Fallout: New Vegas by Kindred Flame \nSounds: Navaro, SevenZero & Magmacow \nAnimations: Tactical Intervention & speedonerd"
+L["wep." .. w .. ".credits"] = "Assets: filosoma, ported from Fallout: New Vegas by Kindred Flame \nSounds: DICE, SevenZero & Magmacow \nAnimation: Tactical Intervention, edited by speedonerd"
 
 w = ws .. "winchester"
 L["wep." .. w .. ".name.full"] = "Winchester M1873"
