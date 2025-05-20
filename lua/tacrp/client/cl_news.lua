@@ -1273,7 +1273,7 @@ The fourth major expansion, featuring 42 weapons themed around zombies, the apoc
     {
         Title = "Update 32",
         Type = "Patch Notes",
-        Date = "2025-05-15",
+        Date = "2025-05-20",
         Author = "chen, speedonerd",
         Major = false,
         Summary = "Minor additions and fixes.",
@@ -1286,7 +1286,9 @@ The fourth major expansion, featuring 42 weapons themed around zombies, the apoc
 <li><b>Added:</b> Quotes for weapons that previously didnt have any.
 <li><b>Changed:</b> (Base) Ultima Ratio overhauled. Lower damage but higher magazine capacity.
 <li><b>Changed:</b> (Special Delivery) Gyrojet third person reload animation from "pistol" to "revolver" to accommodate for the update.
+<li><b>Changed:</b> (Exo Ops) SPAS-15 firing sound and minor animation tweaks.
 <li><b>Changed:</b> Kingslayer renamed to Kingbreaker.
+<li><b>Changed:</b> Black Shark model, texture and sound updates (trans rights).
 <li><b>Changed:</b> Altered some existing weapon quotes.
 <li><b>Fixed:</b> An invisible riot shield sticking to the player after dropping one.
 <li><b>Fixed:</b> Homing launchers breaking HUDs if the player hasn't been in first person.
