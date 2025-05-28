@@ -1055,6 +1055,8 @@ end
 
 ATT.TacticalName = "hint.tac.magnifier"
 
+ATT.Free = true
+
 TacRP.LoadAtt(ATT, "tac_magnifier")
 -- #endregion
 
@@ -1078,6 +1080,8 @@ ATT.Override_Sound_ToggleTactical = ""
 ATT.CanToggle = true
 
 ATT.CustomTacticalHint = "hint.tac.load_one"
+
+ATT.Free = true
 
 ATT.Hook_ToggleTactical = function(wep)
     if wep:GetMaxClip1() <= 2 then
