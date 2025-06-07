@@ -2968,7 +2968,7 @@ L["wep." .. w .. ".name"] = "Black Shark"
 L["wep." .. w .. ".desc"] = "A customized battle rifle that announces its presence with a thunderous report and bombastic muzzleflash. \nHigh visual recoil but low recoil kick."
 L["wep." .. w .. ".desc.quote"] = "\"My armor's black. That doesn't mean my heart is as well.\""
 L["wep." .. w .. ".trivia.manufacturer"] = "Karzahni Ironworks"
-L["wep." .. w .. ".credits"] = "Custom built by speedonerd \nAssets: World of Guns: Disassembly, Tactical Intervention \nSounds: Sledgehammer Games, speedonerd"
+L["wep." .. w .. ".credits"] = "Custom built by speedonerd \nAssets: World of Guns: Disassembly, Tactical Intervention \nSounds: Sledgehammer Games, id Software"
 
 w = ws .. "mp5_zeroeight"
 L["wep." .. w .. ".name.full"] = "MP5/10 \"Zero Eight\""

@@ -1299,6 +1299,24 @@ The fourth major expansion, featuring 42 weapons themed around zombies, the apoc
 </ul>
 ]]
     },
+	{
+        Title = "Beautification + Minor content releases.",
+        Type = "Update",
+        Date = "2025-06-7",
+        Author = "speedonerd",
+        Major = true,
+        Summary = "New content and better-looking old content.",
+        Contents = [[<body style="font-family:'Myriad Pro';color:white;font-size:125%;">
+<p>This update is another round of beautification for existing content, mostly focused on animations and models.</p>
+<p>We're also introducing a couple new nifty features, a handful of which have actually been in the works for quite some time now.</p>
+
+<h3>Changelist:</h3>
+<ul>
+<li><b>Changed:</b> (Base) Emergency Bullet and 2x Zoom are always free.
+<li><b>Changed:</b> (Base) Hecate can no longer melee bash.
+</ul>
+]]
+    },
 }
 TacRP.NewsRead = TacRP.NewsRead or {}
 TacRP.NewsFirstLoad = false
