@@ -90,8 +90,6 @@ SWEP.Sound_MeleeSwing = {
     path .. "swing-6.wav",
 }
 
-SWEP.Sound_Lunge = "npc/fast_zombie/leap1.wav"
-
 local function addsound(name, spath)
     sound.Add({
         name = name,
