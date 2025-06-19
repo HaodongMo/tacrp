@@ -68,6 +68,7 @@ end
 local mat_1 = Material("tacrp/hud/firemode_1.png", "mips smooth")
 local mat_2 = Material("tacrp/hud/firemode_2.png", "mips smooth")
 local mat_3 = Material("tacrp/hud/firemode_3.png", "mips smooth")
+local mat_3 = Material("tacrp/hud/firemode_4.png", "mips smooth")
 local mat_a = Material("tacrp/hud/firemode_a.png", "mips smooth")
 local mat_s = Material("tacrp/hud/firemode_s.png", "mips smooth")
 
@@ -82,6 +83,8 @@ function SWEP:GetFiremodeMat(mode)
         return mat_2
     elseif mode == -3 then
         return mat_3
+	elseif mode == -4 then
+        return mat_4
     else
         return mat_1 // epic fail
     end
