@@ -12,6 +12,7 @@ SWEP.SubCatTier = "4Consumer"
 SWEP.SubCatType = "7Sniper Rifle"
 
 SWEP.Description = "Medium range hunting rifle with a fast cycle speed.\nEquipped with a 6x scope by default."
+SWEP.Description_Quote = "SPS stands for \"Special Purpose Synthetic.\""
 
 SWEP.Trivia_Caliber = ".308 Winchester"
 SWEP.Trivia_Manufacturer = "Remington Arms"
@@ -316,7 +317,7 @@ SWEP.Attachments = {
     },
     [7] = {
         PrintName = "Ammo",
-        Category = {"ammo_sniper"},
+        Category = {"ammo_sniper", "ammo_R700"},
         AttachSound = "TacRP/weapons/flashlight_on.wav",
         DetachSound = "TacRP/weapons/flashlight_off.wav",
     },

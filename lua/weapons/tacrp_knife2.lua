@@ -10,6 +10,7 @@ SWEP.SubCatTier = "9Special"
 SWEP.SubCatType = "8Bladed Melee"
 
 SWEP.Description = "Very edgy looking knife. Light, partially skeletized blade makes it faster to swing but do less damage."
+SWEP.Description_Quote = "That doesn't look very pleasant."
 
 SWEP.Faction = TacRP.FACTION_MILITIA
 SWEP.Credits = "Assets: Tactical Intervention (unused)"

@@ -12,6 +12,7 @@ SWEP.SubCatTier = "1Elite"
 SWEP.SubCatType = "3Machine Pistol"
 
 SWEP.Description = "Automatic machine pistol with incredible close range power."
+SWEP.Description_Quote = "Once used to protect the President." -- White House Down (2013)
 
 SWEP.Trivia_Caliber = ".45 ACP"
 SWEP.Trivia_Manufacturer = "Springfield Armory"

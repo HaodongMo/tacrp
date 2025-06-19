@@ -1662,3 +1662,35 @@ end
 
 TacRP.LoadAtt(ATT, "ammo_usp_9mm")
 -- #endregion
+
+
+-- R700 ammos
+ATT = {}
+
+ATT.Ignore = true
+
+ATT.PrintName = ".300 Win Mag"
+ATT.FullName = "R700 .300 Win Mag Mod Kit"
+ATT.Icon = Material("entities/tacrp_att_ammo_300winmag.png", "mips smooth")
+ATT.Description = "Magnum cartridge with higher close range damage."
+ATT.Pros = {"stat.damage_max"}
+ATT.Cons = {"stat.damage_min", "stat.recoilkick", "stat.rpm"}
+
+ATT.Category = "ammo_R700"
+ATT.SortOrder = 0.5
+
+ATT.Mult_Damage_Max = 1.25
+ATT.Mult_Damage_Min = 0.8
+
+ATT.Mult_RPM = 1 / 1.25
+ATT.Mult_ShootTimeMult = 1.25
+
+ATT.Add_RecoilKick = 10
+
+ATT.Override_Ammo = "357"
+ATT.Override_Ammo_Expanded = "ti_sniper"
+
+ATT.Override_Sound_Shoot = "tacrp/weapons/spr/awp1.wav"
+ATT.Add_Pitch_Shoot = 10
+
+TacRP.LoadAtt(ATT, "ammo_r700_300winmag")

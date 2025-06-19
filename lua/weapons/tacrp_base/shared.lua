@@ -123,9 +123,12 @@ SWEP.RecoilMaximum = 10
 SWEP.RecoilResetTime = 0 // time after you stop shooting for recoil to start dissipating
 SWEP.RecoilDissipationRate = 2
 SWEP.RecoilFirstShotMult = 1 // multiplier for the first shot's recoil amount
-SWEP.RecoilCrouchMult = 0.75 // multiplier for when crouched
 SWEP.RecoilSpreadPenalty = 0.001 // extra spread per one unit of recoil
 SWEP.RecoilResetInstant = true // Set false to account for RPM.
+
+SWEP.RecoilMultBurst = 0.9 // Affects both "bloom" and recoil kick while current firemode is burst
+SWEP.RecoilMultSemi = 0.9 // Affects both "bloom" and recoil kick while current firemode is semi
+SWEP.RecoilMultCrouch = 0.85 // Affects both "bloom" and recoil kick while crouched
 
 // Controls alternate bloom behavior, defaults to convar
 SWEP.AlwaysAltRecoil = nil
@@ -596,7 +599,7 @@ function SWEP:SetupDataTables()
     self:NetworkVar("Bool", 6, "BlindFireLeft")
     self:NetworkVar("Bool", 7, "Tactical")
     self:NetworkVar("Bool", 8, "Charge")
-    self:NetworkVar("Bool", 9, "Peeking")
+    self:NetworkVar("Bool", 9, "NWPeeking")
     self:NetworkVar("Bool", 10, "BlindFireRight") // bleh, but actually less networking load than using an integer (32 bit)
     self:NetworkVar("Bool", 11, "Jammed")
     self:NetworkVar("Bool", 12, "Ready")
@@ -631,7 +634,7 @@ end
 
 function SWEP:OnDrop()
     self:SetReady(false)
- end
+end
 
 function SWEP:SecondaryAttack()
     self:RunHook("Hook_SecondaryAttack")

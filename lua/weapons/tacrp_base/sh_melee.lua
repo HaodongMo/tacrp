@@ -36,15 +36,16 @@ function SWEP:Melee(alt)
     local delay = self:GetValue("MeleeDelay")
     if alt then
         self:PlayAnimation("melee2", 1, false, true)
-        self:GetOwner():DoAnimationEvent(self:GetValue("GestureBash2") or self:GetValue("GestureBash"))
+        -- self:GetOwner():DoAnimationEvent(self:GetValue("GestureBash2") or self:GetValue("GestureBash"))
         -- range = self:GetValue("Melee2Range") or range
         dmg = self:GetHeavyAttackDamage() * self:GetConfigDamageMultiplier()
     else
         self:PlayAnimation("melee", 1, false, true)
-        self:GetOwner():DoAnimationEvent(self:GetValue("GestureBash"))
+        -- self:GetOwner():DoAnimationEvent(self:GetValue("GestureBash"))
     end
 
     local t = alt and self:GetHeavyAttackTime() or self:GetValue("MeleeAttackTime")
+    self:GetOwner():DoCustomAnimEvent(PLAYERANIMEVENT_ATTACK_PRIMARY, t * 1000 * (alt and -1 or 1))
 
     if delay > 0 then
         self:EmitSound(self:ChooseSound(self:GetValue("Sound_MeleeSwing")), 75, 100, 1)

@@ -22,7 +22,7 @@ function SWEP:DoDrawCrosshair(x, y)
         self.CrosshairAlpha = math.Approach(self.CrosshairAlpha, 1, 5 * ft)
     end
 
-    local dev = GetConVar("developer"):GetInt() > 0 and LocalPlayer():IsAdmin()
+    local dev = TacRP.Developer()
     local tacfunc
     if self:GetValue("TacticalCrosshair") and self:GetTactical() then
         tacfunc = self:GetValue("TacticalCrosshair")
@@ -937,7 +937,7 @@ function SWEP:DrawLockOnHUD()
 
         render.OverrideBlend(true, BLEND_ONE, BLEND_ONE, BLENDFUNC_ADD)
 
-        local trueFOV = self:WidescreenFix(self.TacRPLastFOV)
+        local trueFOV = self:WidescreenFix(self.TacRPLastFOV or 90)
 
         local circle = (ScrH() / trueFOV) * self:GetValue("LockOnTrackAngle") + ss
         local offset = 0

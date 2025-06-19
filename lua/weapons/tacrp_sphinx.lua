@@ -12,6 +12,7 @@ SWEP.SubCatTier = "2Operator"
 SWEP.SubCatType = "3Machine Pistol"
 
 SWEP.Description = "Premium pistol modified to be 3-round burst. High firerate but long burst delay."
+SWEP.Description_Quote = "What kind of crack was he on making a boutique CZ 75 copy the burst pistol?"
 
 SWEP.Trivia_Caliber = "9x19mm"
 SWEP.Trivia_Manufacturer = "Sphinx Systems"

@@ -18,7 +18,7 @@ ATT.Category = "acc_bipod"
 
 ATT.SortOrder = 5.5
 
-ATT.Mult_RecoilCrouchMult = 0.2
+ATT.Mult_RecoilMultCrouch = 0.2
 ATT.Mult_SwayCrouchMult = 0.15
 
 ATT.InstalledElements = {"bipod"}

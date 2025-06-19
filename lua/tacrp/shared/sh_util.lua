@@ -114,3 +114,7 @@ function TacRP.GetRandomWeapon(subcat, tier)
     local tbl = TacRP.GetWeaponList(subcat, tier)
     return tbl[math.random(1, #tbl)]
 end
+
+function TacRP.Developer(i)
+    return (SERVER or (CLIENT and IsValid(LocalPlayer()) and LocalPlayer():IsSuperAdmin())) and GetConVar("developer"):GetInt() >= (i or 1)
+end

@@ -12,6 +12,7 @@ SWEP.SubCatTier = "3Security"
 SWEP.SubCatType = "5Sporter"
 
 SWEP.Description = "American semi-automatic AK pattern rifle, customized with an AR-15 style stock and Hungarian handguard.\nUses reduced capacity magazines."
+SWEP.Description_Quote = "Bound to become a sought-after shooter and collectible firearm." --From the Arsenal Inc. website
 
 SWEP.Trivia_Caliber = "7.62x39mm"
 SWEP.Trivia_Manufacturer = "Arsenal Inc"

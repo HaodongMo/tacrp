@@ -67,7 +67,7 @@ function SWEP:NPC_PrimaryAttack()
 
                 self:AfterShotFunction(btr, dmg, range, 0, {}) // self:GetValue("Penetration")
 
-                if GetConVar("developer"):GetBool() then
+                if TacRP.Developer() then
                     if SERVER then
                         debugoverlay.Cross(btr.HitPos, 4, 5, Color(255, 0, 0), false)
                     else

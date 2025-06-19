@@ -10,7 +10,8 @@ SWEP.Category = "Tactical RP"
 SWEP.SubCatTier = "1Elite"
 SWEP.SubCatType = "5Shotgun"
 
-SWEP.Description = "Made from recycled aircraft gun barrels, this heavy shotgun fires shells with twice the diameter of typical shotshells and can easily tear apart anything it's vaguely pointed at. Able to breach doors."
+SWEP.Description = "Massive shotgun that shoots massive shells from its massive barrel.\nAble to breach doors without specialized shells."
+SWEP.Description_Quote = "\"You tried to make me kill my president!\" \"Tried?\"" -- Black Ops 1 (2010)
 
 SWEP.Trivia_Caliber = "23x75mmR"
 SWEP.Trivia_Manufacturer = "Tula Arms Plant"

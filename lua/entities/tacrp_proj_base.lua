@@ -64,6 +64,12 @@ ENT.SeekerExplodeRange = 256 // Distance to the target below which the missile w
 ENT.SeekerExplodeSnapPosition = true // When exploding on a seeked target, teleport to the entity's position for more damage
 ENT.SeekerExplodeAngle = 180 // Angle tolerance (degrees) below which detonation can happen
 
+ENT.TopAttack = false // This missile will attack from the top
+ENT.TopAttackHeight = 512 // Distance above target to top attack
+ENT.TopAttackDistance = 128 // Distance from target to stop top attacking
+
+ENT.RocketLifetime = 30 // Rocket will cut after this time
+
 ENT.MinSpeed = 0
 ENT.MaxSpeed = 0
 ENT.Acceleration = 0
@@ -85,6 +91,9 @@ ENT.GunshipWorkaround = true
 
 // Tell LVS to not ricochet us
 ENT.DisableBallistics = true
+
+ENT.TopAttacking = false
+ENT.StartSuperSteerTime = 0
 
 function ENT:SetupDataTables()
     self:NetworkVar("Entity", 0, "Weapon")
@@ -122,9 +131,14 @@ function ENT:Initialize()
             phys:EnableGravity(false)
         end
 
+        if self.TopAttack then
+            self.TopAttacking = true
+        end
+
         self:SwitchTarget(self.LockOnEntity)
     end
 
+    self.StartSuperSteerTime = CurTime()
     self.SpawnTime = CurTime()
     self.NextFlareRedirectTime = 0
 
@@ -298,11 +312,13 @@ function ENT:DoSmokeTrail()
 end
 
 function ENT:PhysicsUpdate(phys)
+    if self.SpawnTime + self.RocketLifetime < CurTime() then return end
+
     if self.TargetPos and (self.SteerDelay + self.SpawnTime) <= CurTime() then
         local v = phys:GetVelocity()
 
         local steer_amount = self.SteerSpeed * FrameTime()
-        if self.SuperSteerTime + self.SpawnTime > CurTime() then
+        if self.SuperSteerTime + self.StartSuperSteerTime > CurTime() then
             steer_amount = self.SuperSteerSpeed * FrameTime()
         end
 
@@ -324,37 +340,30 @@ end
 
 local gunship = {["npc_combinegunship"] = true, ["npc_combinedropship"] = true, ["npc_helicopter"] = true}
 
-function ENT:Think()
-    if !IsValid(self) or self:GetNoDraw() then return end
+function ENT:DoTracking()
+    local target = self.LockOnEntity
+    if IsValid(target) then
+        if self.TopAttack and self.TopAttacking then
+            local xyvector = (target:WorldSpaceCenter() - self:GetPos())
+            xyvector.z = 0
+            local dist = xyvector:Length()
 
-    if !self.SpawnTime then
-        self.SpawnTime = CurTime()
-    end
+            self.TargetPos = target:WorldSpaceCenter() + Vector(0, 0, self.TopAttackHeight)
+            if self.LeadTarget then
+                local dist2 = (self.TargetPos - self:GetPos()):Length()
 
-    if SERVER and self.SoundHint and CurTime() >= self.SpawnTime + self.SoundHintDelay then
-        self.SoundHint = false // only once
-        sound.EmitHint(SOUND_DANGER, self:GetPos(), self.SoundHintRadius, self.SoundHintDuration, self)
-    end
+                local time = dist2 / self:GetVelocity():Length()
+                self.TargetPos = self.TargetPos + (target:GetVelocity() * time)
+            end
 
-    if !self.Armed and isnumber(self.TimeFuse) and self.SpawnTime + self.TimeFuse < CurTime() then
-        self.ArmTime = CurTime()
-        self.Armed = true
-    end
-
-    if self.Armed and self.ArmTime + self.Delay < CurTime() then
-        self:PreDetonate()
-    end
-
-    if self.ExplodeUnderwater and self:WaterLevel() > 0 then
-        self:PreDetonate()
-    end
-
-    if SERVER then
-        local target = self.LockOnEntity
-        if IsValid(target) then
+            if dist <= self.TopAttackDistance then
+                self.TopAttacking = false
+                self.StartSuperSteerTime = CurTime()
+            end
+        else
             local dir = (target:WorldSpaceCenter() - self:GetPos()):GetNormalized()
             local diff = math.deg(math.acos(dir:Dot(self:GetForward())))
-            if diff <= self.SeekerAngle then
+            if diff <= self.SeekerAngle or self.SuperSteerTime + self.StartSuperSteerTime > CurTime() then
                 self.TargetPos = target:WorldSpaceCenter()
                 local dist = (self.TargetPos - self:GetPos()):Length()
                 if self.LeadTarget then
@@ -391,24 +400,54 @@ function ENT:Think()
                 self.LockOnEntity = nil
                 self.TargetPos = nil
             end
-        elseif (!IsValid(target) and self.NoReacquire) or target.UnTrackable then
-            self.LockOnEntity = nil
-            self.TargetPos = nil
         end
+    elseif (!IsValid(target) and self.NoReacquire) or target.UnTrackable then
+        self.LockOnEntity = nil
+        self.TargetPos = nil
+    end
 
-        if self.GunshipWorkaround and (self.GunshipCheck or 0 < CurTime()) then
-            self.GunshipCheck = CurTime() + 0.33
-            local tr = util.TraceLine({
-                start = self:GetPos(),
-                endpos = self:GetPos() + (self:GetVelocity() * 6 * engine.TickInterval()),
-                filter = self,
-                mask = MASK_SHOT
-            })
-            if IsValid(tr.Entity) and gunship[tr.Entity:GetClass()] then
-                self:SetPos(tr.HitPos)
-                self:PreDetonate(tr.Entity)
-            end
+    if self.GunshipWorkaround and (self.GunshipCheck or 0 < CurTime()) then
+        self.GunshipCheck = CurTime() + 0.33
+        local tr = util.TraceLine({
+            start = self:GetPos(),
+            endpos = self:GetPos() + (self:GetVelocity() * 6 * engine.TickInterval()),
+            filter = self,
+            mask = MASK_SHOT
+        })
+        if IsValid(tr.Entity) and gunship[tr.Entity:GetClass()] then
+            self:SetPos(tr.HitPos)
+            self:PreDetonate(tr.Entity)
         end
+    end
+end
+
+function ENT:Think()
+    if !IsValid(self) or self:GetNoDraw() then return end
+
+    if !self.SpawnTime then
+        self.SpawnTime = CurTime()
+    end
+
+    if SERVER and self.SoundHint and CurTime() >= self.SpawnTime + self.SoundHintDelay then
+        self.SoundHint = false // only once
+        sound.EmitHint(SOUND_DANGER, self:GetPos(), self.SoundHintRadius, self.SoundHintDuration, self)
+    end
+
+    if !self.Armed and isnumber(self.TimeFuse) and self.SpawnTime + self.TimeFuse < CurTime() then
+        self.ArmTime = CurTime()
+        self.Armed = true
+    end
+
+    if self.Armed and self.ArmTime + self.Delay < CurTime() then
+        self:PreDetonate()
+    end
+
+    if self.ExplodeUnderwater and self:WaterLevel() > 0 then
+        self:PreDetonate()
+    end
+
+    if SERVER and self.SpawnTime + self.RocketLifetime > CurTime() then
+        self:DoTracking()
     end
 
     self:DoSmokeTrail()

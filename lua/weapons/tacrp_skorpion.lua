@@ -12,6 +12,7 @@ SWEP.SubCatTier = "4Consumer"
 SWEP.SubCatType = "3Machine Pistol"
 
 SWEP.Description = "Light machine pistol with good range, recoil and spread."
+SWEP.Description_Quote = "\"Please remove any metallic items you're carrying, keys, loose change...\"" -- The Matrix (1999), lobby shootout
 
 SWEP.Trivia_Caliber = ".32 ACP"
 SWEP.Trivia_Manufacturer = "CZ Uherský Brod"

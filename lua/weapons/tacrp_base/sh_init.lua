@@ -51,6 +51,14 @@ function SWEP:Deploy()
     self:SetLoadedRounds(self:Clip1())
     self:SetCustomize(false)
 
+    if self:GetOwner():IsPlayer() and IsFirstTimePredicted() then
+        self.InversePeek = self:GetOwner():GetInfoNum("tacrp_inversepeek", 0) == 1
+        if !self.InversePeekInitialized then
+            self:SetPeeking(false)
+        end
+        self.InversePeekInitialized = true
+    end
+
     self.PreviousZoom = self:GetOwner():GetCanZoom()
     if IsValid(self:GetOwner()) and self:GetOwner():IsPlayer() then
         self:GetOwner():SetCanZoom(false)
@@ -309,7 +317,7 @@ function SWEP:SetBaseSettings()
 end
 
 function SWEP:SetShouldHoldType()
-    if self:GetOwner():IsNPC() then
+    if self:GetOwner():IsNPC() and !self:GetOwner():IsNextBot() then
         self:SetHoldType(self:GetValue("HoldTypeNPC") or self:GetValue("HoldType"))
         return
     end

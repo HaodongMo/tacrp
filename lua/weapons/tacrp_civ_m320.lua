@@ -14,6 +14,7 @@ SWEP.SubCatTier = "9Special"
 SWEP.SubCatType = "6Launcher"
 
 SWEP.Description = "Law Enforcement version of the M320 sanctioned for less-lethal munitions. Fires beanbag rounds that incapacitate on direct hit."
+SWEP.Description_Quote = "That is one dangerous beanbag..."
 
 SWEP.Trivia_Caliber = "40mm Grenades"
 SWEP.Trivia_Manufacturer = "Heckler & Koch"

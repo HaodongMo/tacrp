@@ -709,13 +709,13 @@ end
 
 ATT.Func_RecoilKick = function(wep, data)
     if wep:GetScopeLevel() > 0 and not wep:GetPeeking() then
-        data.mul = data.mul * 0.7
+        data.mul = data.mul * 0.5
     end
 end
 
 ATT.Func_RecoilPerShot = function(wep, data)
     if wep:GetScopeLevel() > 0 and not wep:GetPeeking() then
-        data.mul = data.mul * 0.7
+        data.mul = data.mul * 0.5
     end
 end
 
@@ -726,4 +726,28 @@ ATT.Func_Spread = function(wep, data)
 end
 
 TacRP.LoadAtt(ATT, "trigger_dualstage")
+-- #endregion
+
+
+------------------------------
+-- #region trigger_tactical
+------------------------------
+ATT = {}
+
+ATT.PrintName = "Tactical"
+ATT.FullName = "Tactical Trigger"
+ATT.Icon = Material("entities/tacrp_att_trigger_burstauto.png", "mips smooth")
+ATT.Description = "Trigger reducing recoil for burst and semi fire modes."
+ATT.Pros = {"stat.recoilburst", "stat.recoilsemi"}
+ATT.Cons = {"stat.postburstdelay"}
+
+ATT.Category = {"trigger_auto", "trigger_burstauto", "trigger_4pos"}
+
+ATT.SortOrder = 11
+
+ATT.Add_RecoilMultBurst = -0.15
+ATT.Add_RecoilMultSemi = -0.2
+ATT.Add_PostBurstDelay = 0.02
+
+TacRP.LoadAtt(ATT, "trigger_tactical")
 -- #endregion

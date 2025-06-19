@@ -1486,7 +1486,7 @@ w = ws .. "db"
 L["wep." .. w .. ".name.full"] = "Stoeger Double Defense"
 L["wep." .. w .. ".name"] = "Double Defense"
 L["wep." .. w .. ".desc"] = "Modern tillverkad kort dubbelpipig hagelbössa. Lätt att hantera, pålitlig och dödlig på nära avstånd."
-L["wep." .. w .. ".desc.quote"] = "\"Det enda dem fruktar är dig.\""
+L["wep." .. w .. ".desc.quote"] = "\"Eat leaden death, demon.\"" --To be translated
 L["wep." .. w .. ".trivia.manufacturer"] = "Stoeger"
 L["wep." .. w .. ".credits"] = "Modell: Counter-Strike: Online 2 \nLjud: Navaro & Vunsunta \nAnimationer: speedonerd & 8Z"
 
@@ -2877,10 +2877,10 @@ L["wep." .. w .. ".trivia.manufacturer"] = "Neptunium Arms"
 L["wep." .. w .. ".credits"] = "Speciellt redigerad av speedonerd och 8Z \nMP5: Mr. Brightside, Stoke, Twinkie Masta, FxDarkloki \nTillbehör: Treyarch, BlackSpot Entertainment, Crytek \nLjud: Strelok, CS:O2"
 
 w = ws .. "hecate_vinierspecial"
-L["wep." .. w .. ".name.full"] = "PGM Hécate II \"Kingslayer\""
-L["wep." .. w .. ".name"] = "Kingslayer"
+L["wep." .. w .. ".name.full"] = "PGM Hécate II \"Kingbreaker\""
+L["wep." .. w .. ".name"] = "The Kingbreaker"
 L["wep." .. w .. ".desc"] = "Anpassad Hécate II med en mammut ljuddämpare, anpassat 16x kikarsikte med avståndsmätare, och ett upproriskt meddelande skrivet på vapnets sida."
-L["wep." .. w .. ".desc.quote"] = "\"Betala en man tillräckligt så går han barfota till helvetet.\""
+L["wep." .. w .. ".desc.quote"] = "\"Betala en man tillräckligt så går han barfota till helvetet.\"" -- TODO: Change this to the new quote!
 L["wep." .. w .. ".trivia.manufacturer"] = "PGM Précision"
 L["wep." .. w .. ".credits"] = "Specialbyggd av speedonerd till VinierAardvark1 \nHécate II Modell: Toby Burnside \nYtterligare Tillgångar: Treyarch, Infinity Ward, valterjherson1, Unselles, speedonerd"
 

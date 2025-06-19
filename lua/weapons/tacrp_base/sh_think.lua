@@ -102,7 +102,8 @@ function SWEP:Think()
     -- end
 
     if self:GetJammed() and !self:StillWaiting() and TacRP.ConVars["jam_autoclear"]:GetBool() then
-        self:PlayAnimation("jam", 0.75, true, true)
+        local t = self:PlayAnimation("jam", 0.75, true, true)
+        self:GetOwner():DoCustomAnimEvent(PLAYERANIMEVENT_CANCEL_RELOAD, t * 1000)
         self:SetJammed(false)
     end
 

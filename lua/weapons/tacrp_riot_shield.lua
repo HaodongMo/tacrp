@@ -13,7 +13,9 @@ SWEP.NoAimAssist = true
 SWEP.SubCatTier = "9Special"
 SWEP.SubCatType = "9Equipment"
 
-SWEP.Description = "Lightweight shield. Despite its plastic-looking core, it is capable of stopping almost all rifle caliber rounds.\nAble to sprint and melee attack without compromising the user's safety, but slows down move speed slightly."
+SWEP.Description = "Lightweight plastic shield which can stop most rifle caliber rounds. Able to sprint and melee without compromising safety at the cost of a slight movement speed penalty."
+SWEP.Description_Quote = "You know what they say..." -- Technically a Hotel Mario reference, I guess
+
 SWEP.Credits = "Model/Texture: Tactical Intervention\nAnimation: Arqu"
 
 SWEP.ViewModel = "models/weapons/tacint/v_riot_shield-2.mdl"
@@ -166,6 +168,14 @@ function SWEP:SetBaseSettings()
     end
 end
 
+function SWEP:OnDrop()
+    if SERVER then
+        self:KillShields()
+    end
+
+    return BaseClass.OnDrop(self)
+end
+
 function SWEP:Holster(wep)
     if SERVER then
         self:KillShields()
@@ -233,7 +243,7 @@ function SWEP:SetupShields()
         -- shield:SetModelScale(1.1, 0.00001)
         shield.Weapon = self
         shield.TacRPShield = true
-        if GetConVar("developer"):GetBool() then
+        if TacRP.Developer(2) then
             shield:SetColor( Color(0, 0, 0, 255) )
             shield:SetMaterial("models/wireframe")
         else

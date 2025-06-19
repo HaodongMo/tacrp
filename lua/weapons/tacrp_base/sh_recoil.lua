@@ -19,15 +19,21 @@ end
 
 function SWEP:ApplyRecoil()
     local rec = self:GetRecoilAmount()
-
     local rps = self:GetValue("RecoilPerShot")
+    local cfm = self:GetCurrentFiremode()
 
     if rec == 0 then
         rps = rps * self:GetValue("RecoilFirstShotMult")
     end
 
     if self:GetOwner():Crouching() and self:GetOwner():OnGround() then
-        rps = rps * self:GetValue("RecoilCrouchMult")
+        rps = rps * self:GetValue("RecoilMultCrouch")
+    end
+
+    if cfm < 0 then
+        rps = rps * self:GetValue("RecoilMultBurst")
+    elseif cfm == 1 then
+        rps = rps * self:GetValue("RecoilMultSemi")
     end
 
     if self:GetInBipod() then

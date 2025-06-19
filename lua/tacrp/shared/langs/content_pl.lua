@@ -1485,7 +1485,7 @@ w = ws .. "db"
 -- L["wep." .. w .. ".name.full"] = "Stoeger Double Defense"
 -- L["wep." .. w .. ".name"] = "Double Defense"
 L["wep." .. w .. ".desc"] = "Nowoczesna krótka strzelba dwulufowa. Łatwa w obsłudze, niezawodna i śmiertelna w walce wręcz."
-L["wep." .. w .. ".desc.quote"] = "\"Jedyną rzeczą, której się boją... to ty.\""
+L["wep." .. w .. ".desc.quote"] = "\"Eat leaden death, demon.\"" --To be translated
 -- L["wep." .. w .. ".trivia.manufacturer"] = "Stoeger"
 -- L["wep." .. w .. ".credits"] = "Model: Counter-Strike: Online 2 \nSounds: Navaro & Vunsunta \nAnimations: speedonerd & 8Z"
 
@@ -2875,10 +2875,10 @@ w = ws .. "mp5_zeroeight"
 -- L["wep." .. w .. ".credits"] = "Custom edited by speedonerd and 8Z \nMP5: Mr. Brightside, Stoke, Twinkie Masta, FxDarkloki \nAccessories: Treyarch, BlackSpot Entertainment, Crytek \nSounds: Strelok, CS:O2"
 
 w = ws .. "hecate_vinierspecial"
--- L["wep." .. w .. ".name.full"] = "PGM Hécate II \"Kingslayer\""
--- L["wep." .. w .. ".name"] = "Kingslayer"
+-- L["wep." .. w .. ".name.full"] = "PGM Hécate II \"Kingbreaker\""
+-- L["wep." .. w .. ".name"] = "The Kingbreaker"
 -- L["wep." .. w .. ".desc"] = "Customized Hécate II with a mammoth suppressor, custom 16x scope sporting a jury-rigged rangefinder, and a rebellious message scrawled on the gun's side."
--- L["wep." .. w .. ".desc.quote"] = "\"Pay a man enough and he'll walk barefoot into Hell.\""
+-- L["wep." .. w .. ".desc.quote"] = "\"No more chivalry. Now we fight like wolves.\""
 -- L["wep." .. w .. ".trivia.manufacturer"] = "PGM Précision"
 -- L["wep." .. w .. ".credits"] = "Custom built by speedonerd for VinierAardvark1 \nHécate II Model: Toby Burnside \nAdditional assets: Treyarch, Infinity Ward, valterjherson1, Unselles, speedonerd"
 

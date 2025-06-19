@@ -12,6 +12,7 @@ SWEP.SubCatTier = "3Security"
 SWEP.SubCatType = "1Pistol"
 
 SWEP.Description = "High damage pistol with low range and capacity.\nA tactical evolution, or some would call devolution, of a venerable classic."
+SWEP.Description_Quote = "\"Now I see things... in a different light.\"" -- Rainbow Six: Siege (2015) - Maverick's trailer
 
 SWEP.Trivia_Caliber = ".45 ACP"
 SWEP.Trivia_Manufacturer = "SIG Sauer, Inc."

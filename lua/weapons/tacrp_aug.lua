@@ -12,6 +12,7 @@ SWEP.SubCatTier = "2Operator"
 SWEP.SubCatType = "4Assault Rifle"
 
 SWEP.Description = "Burst bullpup rifle with a generous magazine capacity and great handling."
+SWEP.Description_Quote = "\"Welcome to the party, pal.\"" // Die Hard
 
 SWEP.Trivia_Caliber = "5.56x45mm"
 SWEP.Trivia_Manufacturer = "Steyr Arms"

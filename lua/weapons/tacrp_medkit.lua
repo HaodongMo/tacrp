@@ -14,6 +14,8 @@ SWEP.SubCatTier = "9Special"
 SWEP.SubCatType = "9Equipment"
 
 SWEP.Description = "Compact pack of medical supplies for treating wounds."
+SWEP.Description_Quote = "\"Keep still, let me patch you up.\"" -- Left 4 Dead 1/2
+
 SWEP.Credits = "Model/Texture: Left 4 Dead 2\nAnimation: Arqu"
 
 SWEP.ViewModel = "models/weapons/tacint/v_medkit.mdl"
