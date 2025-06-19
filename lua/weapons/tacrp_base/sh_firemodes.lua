@@ -68,7 +68,7 @@ end
 local mat_1 = Material("tacrp/hud/firemode_1.png", "mips smooth")
 local mat_2 = Material("tacrp/hud/firemode_2.png", "mips smooth")
 local mat_3 = Material("tacrp/hud/firemode_3.png", "mips smooth")
-local mat_3 = Material("tacrp/hud/firemode_4.png", "mips smooth")
+local mat_4 = Material("tacrp/hud/firemode_4.png", "mips smooth")
 local mat_a = Material("tacrp/hud/firemode_a.png", "mips smooth")
 local mat_s = Material("tacrp/hud/firemode_s.png", "mips smooth")
 
