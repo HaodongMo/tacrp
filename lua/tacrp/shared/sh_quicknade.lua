@@ -302,7 +302,9 @@ local function reIndexQuickNades()
     TacRP.QuickNades_Bits = math.min(math.ceil(math.log(TacRP.QuickNades_Count + 1, 2)), 32)
 end
 
-reIndexQuickNades()
+hook.Add("InitPostEntity", "TacRP_IndexQuickNades", function()
+    reIndexQuickNades()
+end)
 
 function TacRP.IsGrenadeInfiniteAmmo(i)
     local nade = i
@@ -337,5 +339,4 @@ function TacRP.RegisterQuickNade(name, nade)
     end
 
     TacRP.QuickNades[name] = nade
-    reIndexQuickNades()
 end
