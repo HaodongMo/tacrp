@@ -48,16 +48,6 @@ local ammotypes = {
 }
 
 function TacRP.AddAmmoType(name, data)
-    if ammotypes[name] then
-        TacRP:Error("Tried to add ammo type " .. name .. " but it already exists!")
-        return
-    end
-
-    if !data.max then
-        TacRP:Error("Tried to add ammo type " .. name .. " but it has no max value!")
-        return
-    end
-
     ammotypes[name] = data
 end
 
