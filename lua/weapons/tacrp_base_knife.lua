@@ -94,6 +94,8 @@ SWEP.SprintMidPoint = {
     Ang = Angle(0, 0, 0)
 }
 
+SWEP.Sound_Lunge = "npc/fast_zombie/leap1.wav"
+
 SWEP.HolsterVisible = false
 SWEP.HolsterSlot = TacRP.HOLSTER_SLOT_GEAR
 SWEP.HolsterPos = Vector(2, 0, 0)
