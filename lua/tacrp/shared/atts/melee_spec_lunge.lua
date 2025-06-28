@@ -36,7 +36,6 @@ local function makesound(ent, pitch)
             leapsound = table.Random(leapsound)
         end
         ent:EmitSound(leapsound, 75, pitch)
-        end
     end
 end
 
