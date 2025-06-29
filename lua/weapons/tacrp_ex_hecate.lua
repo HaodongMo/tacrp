@@ -12,7 +12,7 @@ SWEP.Category = "Tactical RP" // "Tactical RP (Extras)"
 SWEP.SubCatTier = "2Operator"
 SWEP.SubCatType = "7Sniper Rifle"
 
-SWEP.Description = "Heavy anti-materiel rifle that can kill in one shot.\nEquipped with a 12x scope by default. \nLight enough for swing for melee."
+SWEP.Description = "Heavy anti-materiel rifle that can kill in one shot. Too heavy to bash with. \nEquipped with a 12x scope by default."
 SWEP.Description_Quote = "Gun Runner tested, NCR approved."
 
 SWEP.Trivia_Caliber = ".50 BMG"
@@ -185,6 +185,8 @@ SWEP.ScopeFOV = 90 / 12
 SWEP.ScopeLevels = 1 // 2 = like CS:S
 SWEP.ScopeHideWeapon = true
 SWEP.ScopeOverlaySize = 0.75
+
+SWEP.CanMeleeAttack = false
 
 // reload
 
