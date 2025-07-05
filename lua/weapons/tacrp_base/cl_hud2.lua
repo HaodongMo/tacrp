@@ -1,6 +1,6 @@
 
-function SWEP:DrawHUD()
-end
+-- function SWEP:DrawHUD()
+-- end
 
 local h2_enabled = CreateClientConVar( "tacrp_h2", 1, true, false )
 
@@ -284,6 +284,6 @@ hook.Add("HUDPaint", "TacRP_HUD2", function()
 		end
 	end
 end)
-function SWEP:DrawHUDBackground()
-	return true
-end
+-- function SWEP:DrawHUDBackground()
+-- 	return true
+-- end

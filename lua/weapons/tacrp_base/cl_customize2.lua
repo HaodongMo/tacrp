@@ -748,7 +748,7 @@ local pages = {
 		Paint = function( page, w, h, c )
 		end,
 	},
-	{
+	--[[ {
 		Name = "Newsletter",
 		Initialize = function( page, par, c )
 		end,
@@ -757,7 +757,7 @@ local pages = {
 			local h = math.ceil( Lerp(1+page.SlidePer, -s(20), h/2) )
 			DST( "Newsletter panel goes here.", "TacRP_C2_36", w/2, h, color_white, s(1), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER )
 		end,
-	},
+	}, ]]
 	{
 		Name = "Inspect",
 		Initialize = function( page, par, c )
