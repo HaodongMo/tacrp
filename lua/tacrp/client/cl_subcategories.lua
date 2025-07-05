@@ -121,11 +121,114 @@ local filtergrades = {
 	["5Value"] = true,
 }
 
+
+function PropPanel_PaintOver(self, w, h)
+    if not vgui.GetHoveredPanel() then return end
+    if not vgui.GetHoveredPanel().S2 then return end
+
+    local ent = vgui.GetHoveredPanel().S2
+    local todo = DisableClipping(true)
+    local rx, ry = self:CursorPos()
+    rx = rx + 20
+    ry = ry + 20
+
+    local SUPERGAP = 4
+    SUPERGAP = SUPERGAP + 20
+    SUPERGAP = SUPERGAP + 16
+    -- SUPERGAP = SUPERGAP + 14
+    SUPERGAP = SUPERGAP + 4
+
+    local drawbar = false
+    if ent.WepTable.ClipSize > 0 then
+        SUPERGAP = SUPERGAP + 9
+        SUPERGAP = SUPERGAP + 16
+        drawbar = true
+    end
+    if ent.WepTable.Trivia_Caliber then
+        SUPERGAP = SUPERGAP + 9
+        SUPERGAP = SUPERGAP + 16
+        drawbar = true
+    end
+    if ent.WepTable.Trivia_Manufacturer then
+        SUPERGAP = SUPERGAP + 9
+        SUPERGAP = SUPERGAP + 16
+        drawbar = true
+    end
+    if ent.WepTable.Trivia_Year then
+        SUPERGAP = SUPERGAP + 9
+        SUPERGAP = SUPERGAP + 16
+        drawbar = true
+    end
+    if drawbar then
+        SUPERGAP = SUPERGAP + 2 + 4
+    end
+
+    surface.SetDrawColor( 0, 0, 0, 200 )
+    surface.DrawRect( rx, ry, 220, SUPERGAP )
+
+    local SUPERGAP = 4
+
+    qt( ent.PrintName, "TacRP_S2_24", rx+8, ry+SUPERGAP )
+    SUPERGAP = SUPERGAP + 20
+
+    local translated_SubCatType = string.sub(TacRP:TryTranslate(ent.WepTable.SubCatType), 2)
+    if TacRP.UseTiers() and ent.WepTable.SubCatTier and ent.WepTable.SubCatTier != "9Special" then
+        translated_SubCatType = TacRP:GetPhrase("cust.type_tier", {tier = string.sub(TacRP:TryTranslate(ent.WepTable.SubCatTier), 2), type = translated_SubCatType})
+    end
+    qt( translated_SubCatType, "TacRP_S2_16", rx+8+4, ry+SUPERGAP )
+    SUPERGAP = SUPERGAP + 16
+
+    -- qt( ent.ClassName, "TacRP_S2_12", rx+8+4, ry+SUPERGAP )
+    -- SUPERGAP = SUPERGAP + 14
+
+    local SI = 8
+
+    if drawbar then
+        SUPERGAP = SUPERGAP + 2
+        surface.SetDrawColor( 0, 0, 0, 255 )
+        surface.DrawRect( rx+SI, ry+SUPERGAP, 220-SI-SI+1+1, 3 )
+
+        surface.SetDrawColor( 255, 255, 255, 255 )
+        surface.DrawRect( rx+SI+1, ry+SUPERGAP+1, 220-SI-SI, 1 )
+
+        SUPERGAP = SUPERGAP + 4
+    end
+
+    if ent.WepTable.ClipSize > 0 then
+        qt( "Capacity", "TacRP_S2_12", rx+8, ry+SUPERGAP )
+        SUPERGAP = SUPERGAP + 9
+        qt( ent.WepTable.ClipSize .. (ent.WepTable.ClipSize==1 and " round" or " rounds"), "TacRP_S2_16", rx+8+4, ry+SUPERGAP )
+        SUPERGAP = SUPERGAP + 16
+    end
+
+    if ent.WepTable.Trivia_Caliber then
+        qt( "Caliber", "TacRP_S2_12", rx+8, ry+SUPERGAP )
+        SUPERGAP = SUPERGAP + 9
+        qt( ent.WepTable.Trivia_Caliber, "TacRP_S2_16", rx+8+4, ry+SUPERGAP )
+        SUPERGAP = SUPERGAP + 16
+    end
+
+    if ent.WepTable.Trivia_Manufacturer then
+        qt( "Manufacturer", "TacRP_S2_12", rx+8, ry+SUPERGAP )
+        SUPERGAP = SUPERGAP + 9
+        qt( ent.WepTable.Trivia_Manufacturer, "TacRP_S2_16", rx+8+4, ry+SUPERGAP )
+        SUPERGAP = SUPERGAP + 16
+    end
+
+    if ent.WepTable.Trivia_Year then
+        qt( "Production Year", "TacRP_S2_12", rx+8, ry+SUPERGAP )
+        SUPERGAP = SUPERGAP + 9
+        qt( ent.WepTable.Trivia_Year, "TacRP_S2_16", rx+8+4, ry+SUPERGAP )
+        SUPERGAP = SUPERGAP + 16
+    end
+    DisableClipping(todo)
+end
+
 local filteredicon_col = Color( 0, 0, 0, 63 )
 local filtered_col = Color( 61, 51, 51, 63 )
 
 hook.Add("PopulateWeapons", "zzz_TacRP_SubCategories", function(pnlContent, tree, anode)
-	local cvar = TacRP.ConVars["subcats"]:GetInt()
+	local cvar = TacRP.ConVars["spawnmenu_subcats"]:GetInt()
 	if cvar == 0 then return end
 	timer.Simple(0, function()
 		-- Loop through the weapons and add them to the menu
@@ -327,106 +430,8 @@ hook.Add("PopulateWeapons", "zzz_TacRP_SubCategories", function(pnlContent, tree
 					UpdateAll()
 				end
 
-				function self.PropPanel:PaintOver(w, h)
-					if vgui.GetHoveredPanel() and vgui.GetHoveredPanel().S2 then
-						local ent = vgui.GetHoveredPanel().S2
-						local todo = DisableClipping(true)
-							local rx, ry = self:CursorPos()
-							rx = rx + 20
-							ry = ry + 20
+                self.PropPanel.PaintOver = PropPanel_PaintOver
 
-							local SUPERGAP = 4
-							SUPERGAP = SUPERGAP + 20
-							SUPERGAP = SUPERGAP + 16
-							-- SUPERGAP = SUPERGAP + 14
-							SUPERGAP = SUPERGAP + 4
-
-							local drawbar = false
-							if ent.WepTable.ClipSize > 0 then
-								SUPERGAP = SUPERGAP + 9
-								SUPERGAP = SUPERGAP + 16
-								drawbar = true
-							end
-							if ent.WepTable.Trivia_Caliber then
-								SUPERGAP = SUPERGAP + 9
-								SUPERGAP = SUPERGAP + 16
-								drawbar = true
-							end
-							if ent.WepTable.Trivia_Manufacturer then
-								SUPERGAP = SUPERGAP + 9
-								SUPERGAP = SUPERGAP + 16
-								drawbar = true
-							end
-							if ent.WepTable.Trivia_Year then
-								SUPERGAP = SUPERGAP + 9
-								SUPERGAP = SUPERGAP + 16
-								drawbar = true
-							end
-							if drawbar then
-								SUPERGAP = SUPERGAP + 2 + 4
-							end
-
-							surface.SetDrawColor( 0, 0, 0, 200 )
-							surface.DrawRect( rx, ry, 220, SUPERGAP )
-
-							local SUPERGAP = 4
-
-							qt( ent.PrintName, "TacRP_S2_24", rx+8, ry+SUPERGAP )
-							SUPERGAP = SUPERGAP + 20
-
-							local LongLongMan = TacRP:TryTranslate(ent.WepTable.SubCatType)
-							if TacRP.UseTiers() and ent.WepTable.SubCatTier and ent.WepTable.SubCatTier != "9Special" then
-								LongLongMan = TacRP:GetPhrase("cust.type_tier", {tier = TacRP:TryTranslate(ent.WepTable.SubCatTier), type = LongLongMan})
-							end
-							qt( LongLongMan, "TacRP_S2_16", rx+8+4, ry+SUPERGAP )
-							SUPERGAP = SUPERGAP + 16
-
-							-- qt( ent.ClassName, "TacRP_S2_12", rx+8+4, ry+SUPERGAP )
-							-- SUPERGAP = SUPERGAP + 14
-
-							local SI = 8
-
-							if drawbar then
-								SUPERGAP = SUPERGAP + 2
-								surface.SetDrawColor( 0, 0, 0, 255 )
-								surface.DrawRect( rx+SI, ry+SUPERGAP, 220-SI-SI+1+1, 3 )
-
-								surface.SetDrawColor( 255, 255, 255, 255 )
-								surface.DrawRect( rx+SI+1, ry+SUPERGAP+1, 220-SI-SI, 1 )
-
-								SUPERGAP = SUPERGAP + 4
-							end
-
-							if ent.WepTable.ClipSize > 0 then
-								qt( "Capacity", "TacRP_S2_12", rx+8, ry+SUPERGAP )
-								SUPERGAP = SUPERGAP + 9
-								qt( ent.WepTable.ClipSize .. (ent.WepTable.ClipSize==1 and " round" or " rounds"), "TacRP_S2_16", rx+8+4, ry+SUPERGAP )
-								SUPERGAP = SUPERGAP + 16
-							end
-
-							if ent.WepTable.Trivia_Caliber then
-								qt( "Caliber", "TacRP_S2_12", rx+8, ry+SUPERGAP )
-								SUPERGAP = SUPERGAP + 9
-								qt( ent.WepTable.Trivia_Caliber, "TacRP_S2_16", rx+8+4, ry+SUPERGAP )
-								SUPERGAP = SUPERGAP + 16
-							end
-
-							if ent.WepTable.Trivia_Manufacturer then
-								qt( "Manufacturer", "TacRP_S2_12", rx+8, ry+SUPERGAP )
-								SUPERGAP = SUPERGAP + 9
-								qt( ent.WepTable.Trivia_Manufacturer, "TacRP_S2_16", rx+8+4, ry+SUPERGAP )
-								SUPERGAP = SUPERGAP + 16
-							end
-
-							if ent.WepTable.Trivia_Year then
-								qt( "Production Year", "TacRP_S2_12", rx+8, ry+SUPERGAP )
-								SUPERGAP = SUPERGAP + 9
-								qt( ent.WepTable.Trivia_Year, "TacRP_S2_16", rx+8+4, ry+SUPERGAP )
-								SUPERGAP = SUPERGAP + 16
-							end
-						DisableClipping(todo)
-					end
-				end
 				--self.PropPanel:SetVisible(false)
 				--self.PropPanel:SetTriggerSpawnlistChange(false)
 

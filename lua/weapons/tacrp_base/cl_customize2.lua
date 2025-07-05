@@ -588,8 +588,9 @@ local pages = {
 				function header:Paint( w, h )
 					Gleemax( s, w, h )
 
+					local type_txt = TacRP.FormatTierType(c.w.SubCatType, c.w.SubCatTier, TacRP.UseTiers())
 					qd( s, c.w:GetPrintName(), "TacRP_C2_36", s(Margin_3), h/2, color_white, nil, TEXT_ALIGN_CENTER )
-					qd( s, c.w:GetSubClassName(TacRP.UseTiers()), "TacRP_C2_12", w - s(Margin_3), h/2 - s(6), color_white, TEXT_ALIGN_RIGHT, TEXT_ALIGN_CENTER )
+					qd( s, type_txt, "TacRP_C2_12", w - s(Margin_3), h/2 - s(6), color_white, TEXT_ALIGN_RIGHT, TEXT_ALIGN_CENTER )
 					qd( s, c.w:GetValue("Trivia_Caliber"), "TacRP_C2_12", w - s(Margin_3), h/2 + s(6), color_white, TEXT_ALIGN_RIGHT, TEXT_ALIGN_CENTER )
 
 					return true
