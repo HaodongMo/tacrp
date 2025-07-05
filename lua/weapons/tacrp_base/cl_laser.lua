@@ -43,7 +43,7 @@ function SWEP:DrawLaser(pos, ang, strength, thirdperson)
     local tr = util.TraceLine({
         start = pos_tr,
         endpos = pos_tr + (ang:Forward() * 30000),
-        mask = MASK_SHOT,
+        mask = MASK_OPAQUE,
         filter = self:GetOwner()
     })
 

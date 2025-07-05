@@ -1,6 +1,6 @@
 
-game.AddParticles( "particles/muzzleflashes_test.pcf" )
-game.AddParticles( "particles/muzzleflashes_test_b.pcf" )
+game.AddParticles( "particles/tacrp_muzzleflashes.pcf" )
+game.AddParticles( "particles/tacrp_muzzleflashes_b.pcf" )
 
 PrecacheParticleSystem( "muzzleflash_m14" )
 PrecacheParticleSystem( "muzzleflash_5" )
@@ -18,7 +18,8 @@ PrecacheParticleSystem( "muzzleflash_ak74" )
 PrecacheParticleSystem( "muzzleflash_ak47" )
 PrecacheParticleSystem( "muzzleflash_3" )
 PrecacheParticleSystem( "muzzleflash_1" )
-PrecacheParticleSystem( "muzzleflash_M82" )
+PrecacheParticleSystem( "muzzleflash_M82_tacrp" )
+PrecacheParticleSystem( "muzzleflash_M82_rico" )
 PrecacheParticleSystem( "muzzleflash_MINIMI"  )
 PrecacheParticleSystem( "port_smoke_heavy" )
 PrecacheParticleSystem( "port_shellsmoke" )

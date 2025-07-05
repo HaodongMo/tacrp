@@ -28,7 +28,17 @@ local conVars = {
         userinfo = true,
     },
     {
-        name = "subcats",
+        name = "spawnmenu_subcats",
+        default = "1",
+        client = true,
+    },
+    {
+        name = "spawnmenu_highlight",
+        default = "1",
+        client = true,
+    },
+    {
+        name = "spawnmenu_sortbytiers",
         default = "1",
         client = true,
     },
@@ -469,6 +479,12 @@ local conVars = {
         notify = true,
     },
     {
+        name = "infinitelaunchers",
+        default = "0",
+        replicated = true,
+        notify = true,
+    },
+    {
         name = "infinitegrenades",
         default = "0",
         replicated = true,
@@ -770,6 +786,34 @@ local conVars = {
         max = 1,
         replicated = true,
     },
+    {
+        name = "doorbust",
+        default = "1",
+        min = 0,
+        max = 1,
+        replicated = true,
+    },
+    {
+        name = "doorbust_time",
+        default = "180",
+        min = 1,
+        replicated = true,
+    },
+    {
+        name = "dynamiclight",
+        default = "1",
+        min = 0,
+        max = 1,
+        replicated = true,
+    },
+    {
+        name = "inversepeek",
+        default = "0",
+        client = true,
+        userinfo = true,
+        min = 0,
+        max = 1,
+    },
 
     // --------------------------- Multipliers
     {
@@ -832,7 +876,18 @@ local conVars = {
         min = 0.1,
         replicated = true,
     },
-
+    {
+        name = "mult_headshot",
+        default = "1",
+        min = 0,
+        replicated = true,
+    },
+    {
+        name = "mult_damage_melee",
+        default = "1",
+        min = 0.01,
+        replicated = true,
+    },
 
     {
         name = "recoilreset",
@@ -868,6 +923,230 @@ local conVars = {
         min = 0,
         notify = true,
         replicated = true,
+    },
+    {
+        name = "dropmagazinemodel",
+        default = "1",
+        min = 0,
+        max = 1,
+        notify = true,
+        replicated = true,
+    },
+    {
+        name = "quicknade",
+        default = "1",
+        replicated = true,
+        notify = true,
+    },
+
+    // --------------------------- Medkit
+    {
+        name = "medkit_clipsize",
+        default = "30",
+        min = 1,
+        replicated = true,
+    },
+    {
+        name = "medkit_regen_activeonly",
+        default = "0",
+        min = 0,
+        max = 1,
+        replicated = true,
+    },
+    {
+        name = "medkit_regen_delay",
+        default = "2",
+        min = 0,
+        replicated = true,
+    },
+    {
+        name = "medkit_regen_amount",
+        default = "1",
+        min = 0,
+        replicated = true,
+        notify = true,
+    },
+    {
+        name = "medkit_heal_self",
+        default = "4",
+        min = 0,
+        replicated = true,
+        notify = true,
+    },
+    {
+        name = "medkit_heal_others",
+        default = "4",
+        min = 0,
+        replicated = true,
+        notify = true,
+    },
+    {
+        name = "medkit_interval",
+        default = "0.2",
+        min = 0,
+        replicated = true,
+        notify = true,
+    },
+
+    // --------------------------- Riot Shield
+    {
+        name = "shield_melee",
+        default = "1",
+        min = 0,
+        max = 1,
+        replicated = true,
+    },
+    {
+        name = "shield_knockback",
+        default = "1",
+        min = 0,
+        max = 1,
+        replicated = true,
+    },
+    {
+        name = "shield_riot_resistance",
+        default = "3.5",
+        min = 0,
+        replicated = true,
+    },
+    {
+        name = "shield_riot_hp",
+        default = "0",
+        min = 0,
+        replicated = true,
+    },
+
+    // --------------------------- Grenades
+    {
+        name = "smoke_affectnpcs",
+        default = "1",
+        min = 0,
+        max = 1,
+    },
+    {
+        name = "flash_affectnpcs",
+        default = "1",
+        min = 0,
+        max = 1,
+    },
+    {
+        name = "flash_affectplayers",
+        default = "1",
+        min = 0,
+        max = 1,
+    },
+    {
+        name = "gas_affectnpcs",
+        default = "1",
+        min = 0,
+        max = 1,
+    },
+    {
+        name = "gas_affectplayers",
+        default = "1",
+        min = 0,
+        max = 1,
+    },
+    {
+        name = "thermite_damage_min",
+        default = "20",
+        min = 0,
+    },
+    {
+        name = "thermite_damage_max",
+        default = "40",
+        min = 0,
+    },
+    {
+        name = "thermite_radius",
+        default = "200",
+        min = 0,
+    },
+    {
+        name = "frag_damage",
+        default = "150",
+        min = 0,
+    },
+    {
+        name = "frag_radius",
+        default = "350",
+        min = 0,
+    },
+    {
+        name = "charge_damage",
+        default = "500",
+        min = 0,
+    },
+    {
+        name = "charge_radius",
+        default = "200",
+        min = 0,
+    },
+    {
+        name = "c4_damage",
+        default = "300",
+        min = 0,
+    },
+    {
+        name = "c4_radius",
+        default = "400",
+        min = 0,
+    },
+    {
+        name = "healnade_heal",
+        default = "3",
+        min = 0,
+    },
+    {
+        name = "healnade_armor",
+        default = "1",
+        min = 0,
+    },
+    {
+        name = "healnade_damage",
+        default = "20",
+        min = 0,
+    },
+
+    // Aim Assist
+    {
+        name = "aimassist",
+        default = "0",
+        replicated = true,
+        notify = true,
+    },
+    {
+        name = "aimassist_head",
+        default = "0",
+        replicated = true,
+        notify = true,
+    },
+    {
+        name = "aimassist_intensity",
+        default = "1",
+        replicated = true,
+        notify = true,
+    },
+    {
+        name = "aimassist_cone",
+        default = "5",
+        replicated = true,
+        notify = true,
+    },
+    {
+        name = "aimassist_cl",
+        default = "1",
+        client = true,
+    },
+    {
+        name = "aimassist_multsens",
+        default = "0.75",
+        client = true,
+    },
+    {
+        name = "aimsens",
+        default = "1",
+        client = true,
     },
 }
 
@@ -945,372 +1224,474 @@ local function menu_client_ti(panel)
 
     local btn_reset = vgui.Create("DButton")
     btn_reset:Dock(TOP)
-    btn_reset:SetText("Apply Default Client Settings")
+    btn_reset:SetText("#tacrp.client.default") -- Apply Default Client Settings
     function btn_reset.DoClick(self)
         Derma_Query(
-            "Are you sure you want to reset ALL client settings to default values? This is irreversible!",
+            "#tacrp.client.default.warning",
             "TacRP",
-            "Yes",
+            "#openurl.yes", -- Yes
             function()
                 reset_cvars()
             end,
-            "No"
+            "#openurl.nope" -- Nope
         )
     end
     panel:AddPanel(btn_reset)
 
-    header(panel, "Interface")
+    header(panel, "#tacrp.client.interface") -- Interface
     panel:AddControl("checkbox", {
-        label = "Show HUD",
+        label = "#tacrp.client.hud", -- Show HUD
         command = "TacRP_drawhud"
     })
     panel:AddControl("checkbox", {
-        label = "Show Backup HUD",
+        label = "#tacrp.client.backuphud", -- Show Backup HUD
         command = "tacrp_minhud"
     })
     panel:AddControl("checkbox", {
-        label = "Quickthrow Radial Menu",
+        label = "#tacrp.client.quickthrowradial", -- Quickthrow Radial Menu
         command = "tacrp_nademenu"
     })
-    panel:ControlHelp("When enabled, +grenade2 brings up a menu to select grenades. Otherwise it switches between them.")
+    panel:ControlHelp("#tacrp.client.quickthrowradial.desc")
     panel:AddControl("checkbox", {
-        label = "Quickthrow Menu Clicking",
+        label = "#tacrp.client.quickthrowclick", -- Quickthrow Menu Clicking
         command = "tacrp_nademenu_click"
     })
-    panel:ControlHelp("When enabled, left click and right click in the quickthrow menu performs an overhand and underhand throw of the highlighted grenade.")
+    panel:ControlHelp("#tacrp.client.quickthrowclick.desc")
     panel:AddControl("checkbox", {
-        label = "Blindfire Radial Menu",
+        label = "#tacrp.client.blindfireradial", -- Blindfire Radial Menu
         command = "tacrp_blindfiremenu"
     })
-    panel:ControlHelp("When enabled, +zoom brings up a menu to change blindfire type. Otherwise it sets blindfire based on movement keys pressed.")
+    panel:ControlHelp("#tacrp.client.blindfireradial.desc")
     panel:AddControl("checkbox", {
-        label = "Blindfire Menu Empty Center",
+        label = "#tacrp.client.blindfireemptymid", -- Blindfire Menu Empty Center
         command = "tacrp_blindfiremenu_nocenter"
     })
-    panel:ControlHelp("When enabled, center option does nothing, and bottom option will cancel blindfire instead.\nThis will hide the option to shoot yourself.")
+    panel:ControlHelp("#tacrp.client.blindfireemptymid.desc")
     panel:AddControl("checkbox", {
-        label = "Use Meters instead of HU",
+        label = "#tacrp.client.usemeters", -- Use Meters instead of Hammer Units
         command = "tacrp_metricunit"
     })
     panel:AddControl("checkbox", {
-        label = "Recoil Vignette",
+        label = "#tacrp.client.recoilvignette", -- Recoil Vignette
         command = "tacrp_vignette"
     })
-    panel:ControlHelp("Vignette intensity is based on amount of accumulated recoil.")
+    panel:ControlHelp("#tacrp.client.recoilvignette.desc")
     panel:AddControl("checkbox", {
-        label = "Show \"Drop Weapon\" Button",
+        label = "#tacrp.client.dropweaponbutton", -- Show "Drop Weapon" Button
         command = "tacrp_cust_drop"
     })
     panel:AddControl("slider", {
-        label = "HUD Scale",
+        label = "#tacrp.client.hudscale", -- HUD Scale
         command = "tacrp_hudscale",
         type = "float",
         min = 0.25,
         max = 1.5,
     })
-    panel:ControlHelp("HUD is already scaled to screen width; this slider may help ultrawide users or people with a vertical setup.")
+    panel:ControlHelp("#tacrp.client.hudscale.desc")
 
-    header(panel, "\nHints")
+    header(panel, "#tacrp.client.hints") -- \nHints
     panel:AddControl("checkbox", {
-        label = "Show Control Hints",
+        label = "#tacrp.client.controlhints", -- Display Control Hints
         command = "tacrp_hints"
     })
-    panel:ControlHelp("Shows your currently available actions regardless of whether the HUD is enabled or not.")
+    panel:ControlHelp("#tacrp.client.controlhints.desc")
     panel:AddControl("checkbox", {
-        label = "Hints Always Active",
+        label = "#tacrp.client.hintsalways", -- Always Display Hints
         command = "tacrp_hints_always"
     })
     panel:AddControl("checkbox", {
-        label = "Hints Use Alternate Font",
+        label = "#tacrp.client.hintsaltfont", -- Hints Use Alternate Font
         command = "tacrp_hints_altfont"
     })
     panel:AddControl("checkbox", {
-        label = "Hide Startup Quickthrow Bind Reminder",
+        label = "#tacrp.client.hintsquickthrowremind", -- Hide Startup Quickthrow Bind Reminder
         command = "tacrp_shutup"
     })
 
-    header(panel, "\nPreference")
+    header(panel, "#tacrp.client.preference") -- \nPreference
     panel:AddControl("checkbox", {
-        label = "Toggle Aiming",
+        label = "#tacrp.client.toggleaim", -- Toggle Aiming
         command = "tacrp_toggleaim"
     })
     panel:AddControl("checkbox", {
-        label = "Toggle Peeking",
+        label = "#tacrp.client.togglepeek", -- Toggle Peeking
         command = "tacrp_togglepeek"
     })
     panel:AddControl("checkbox", {
-        label = "Aiming Stops Sprinting",
+        label = "#tacrp.client.inversepeek", -- Invert Peeking
+        command = "tacrp_inversepeek"
+    })
+    panel:ControlHelp("#tacrp.client.inversepeek.desc")
+
+    panel:AddControl("slider", {
+        label = "#tacrp.client.aimsens", -- Aiming Sensitivity
+        command = "tacrp_aimsens",
+        type = "float",
+        min = 0.1,
+        max = 1,
+    })
+    panel:AddControl("checkbox", {
+        label = "#tacrp.client.aimstopssprint", -- Aiming Stops Sprinting
         command = "tacrp_aim_cancels_sprint"
     })
-    panel:ControlHelp("When holding both Sprint and Aim buttons, aim the weapon and prevent sprinting.")
+    panel:ControlHelp("#tacrp.client.aimstopssprint.desc")
     panel:AddControl("checkbox", {
-        label = "Auto-Save Weapon",
+        label = "#tacrp.client.autosave", -- Auto-Save Weapon
         command = "TacRP_autosave"
     })
     panel:AddControl("checkbox", {
-        label = "Auto Reload When Empty",
+        label = "#tacrp.client.autoreload", -- Auto Reload When Empty
         command = "TacRP_autoreload"
     })
     panel:AddControl("checkbox", {
-        label = "Flashbang Dark Mode",
+        label = "#tacrp.client.flashdark", -- Flashbang Dark Mode
         command = "tacrp_flash_dark"
     })
-    panel:ControlHelp("In dark mode, flashbangs turn your screen black instead of white, and mutes audio intead of ringing.")
+    panel:ControlHelp("#tacrp.client.flashdark.desc")
     panel:AddControl("checkbox", {
-        label = "Quiet Radar",
+        label = "#tacrp.client.quietradar", -- Quiet Radar
         command = "tacrp_radar_quiet"
     })
-    panel:ControlHelp("This mutes your own radar sound for yourself only. Others can still hear your radar, and you can still hear others' radars.")
+    panel:ControlHelp("#tacrp.client.quietradar.desc")
     panel:AddControl("checkbox", {
-        label = "Pickup Requires +USE",
+        label = "#tacrp.client.pickupuse", -- Pickup Requires +USE
         command = "tacrp_pickup_use"
     })
-    panel:ControlHelp("This option only affects TacRP weapons.")
+    panel:ControlHelp("#tacrp.client.pickupuse.desc")
     panel:AddControl("checkbox", {
-        label = "Toggle Tactical with +WALK",
+        label = "#tacrp.client.toggletacticalwalk", -- Toggle Tactical with +WALK
         command = "tacrp_flashlight_alt"
     })
-    panel:ControlHelp("If disabled, ALT+F toggles HL2 flashlight and F toggles tactical;\nif enabled, F toggles HL2 flashlight and ALT+F toggles tactical.")
+    panel:ControlHelp("#tacrp.client.toggletacticalwalk.desc")
 
-    header(panel, "\nMiscellaneous")
     panel:AddControl("checkbox", {
-        label = "Muzzle Light",
+        label = "#tacrp.client.aimassist", -- Enable Aim Assist
+        command = "tacrp_aimassist_cl"
+    })
+    panel:ControlHelp("#tacrp.client.aimassist.desc")
+
+    header(panel, "#tacrp.client.spawnmenu") -- Spawnmenu
+    panel:ControlHelp("#tacrp.client.spawnmenu.desc")
+
+    panel:AddControl("checkbox", {
+        label = "#tacrp.client.subcategory", -- Subcategory Headers
+        command = "tacrp_spawnmenu_subcats"
+    })
+    panel:AddControl("checkbox", {
+        label = "#tacrp.client.sortbytier", -- Sort by Tiers
+        command = "tacrp_spawnmenu_sortbytiers"
+    })
+    panel:AddControl("checkbox", {
+        label = "#tacrp.client.tierhighlight", -- Tier Highlights
+        command = "tacrp_spawnmenu_highlight"
+    })
+    panel:ControlHelp("#tacrp.client.tierhighlight.desc")
+
+    header(panel, "#tacrp.mechanics.misc") -- Misc.
+    panel:AddControl("checkbox", {
+        label = "#tacrp.client.muzzlelight", --Muzzle Light
         command = "tacrp_muzzlelight"
     })
-    panel:ControlHelp("Emits a brief projected light when you shoot (but not for others).")
+    panel:ControlHelp("#tacrp.client.muzzlelight.desc")
     panel:AddControl("checkbox", {
-        label = "Near Walling",
+        label = "#tacrp.client.nearwall", -- Near Walling
         command = "tacrp_nearwall"
     })
-    panel:ControlHelp("Pushes viewmodel back when the point of aim is in front of a wall. Purely visual effect, but may help when blindfiring.")
+    panel:ControlHelp("#tacrp.client.nearwall.desc")
 
     panel:AddControl("checkbox", {
-        label = "Disable Suicide Mode",
+        label = "#tacrp.client.disablesuicide", -- Disable Suicide Mode
         command = "tacrp_idunwannadie"
     })
-    panel:ControlHelp("Hides the option to shoot yourself from the radial menu, and disables the SHIFT+ALT+B key combo.")
+    panel:ControlHelp("#tacrp.client.disablesuicide.desc")
     panel:AddControl("checkbox", {
-        label = "Draw Holstered Weapons",
+        label = "#tacrp.client.drawholstered", -- Draw Holstered Weapons
         command = "tacrp_drawholsters"
     })
     panel:AddControl("checkbox", {
-        label = "True Laser Position",
+        label = "#tacrp.client.truelaser", -- True Laser Position
         command = "tacrp_true_laser"
     })
     panel:AddControl("checkbox", {
-        label = "Immersive Ammo Names (Requires map reload)",
+        label = "#tacrp.client.immersivenames", -- Immersive Ammo Names
         command = "tacrp_ammonames"
     })
-    panel:AddControl("checkbox", {
-        label = "Spawnmenu Subcategories",
-        command = "tacrp_subcats"
-    })
-    panel:ControlHelp("Separate weapons based on their type (like Sidearm, Assault Rifle, Shotgun). Use ConCommand \"spawnmenu_reload\" to take effect.")
+    panel:ControlHelp("#tacrp.client.immersivenames.desc")
 end
 
 local function menu_server_ti(panel)
-    header(panel, "Features")
-    panel:Help("Settings in this section affect ALL PLAYERS.")
+    header(panel, "#tacrp.server.features") -- Features
+    panel:Help("#tacrp.server.features.desc")
     panel:AddControl("checkbox", {
-        label = "Enable Crosshair",
+        label = "#tacrp.server.enablecrosshair", -- Enable Crosshair
         command = "tacrp_crosshair"
     })
     panel:AddControl("checkbox", {
-        label = "Enable HUD (and Minimal HUD)",
+        label = "#tacrp.server.hud", -- Allow HUD
         command = "tacrp_hud"
     })
     panel:AddControl("checkbox", {
-        label = "Holstered Weapon Models",
+        label = "#tacrp.server.holsteredmodels", -- Holstered Weapon Models
         command = "tacrp_visibleholster"
     })
     panel:AddControl("checkbox", {
-        label = "Enable Newsletter",
+        label = "#tacrp.server.newsletter", -- Enable Newsletter
         command = "tacrp_checknews"
     })
-    panel:ControlHelp("If turned off, newsletter popup/notification will not happen. Players can still open the newsletter page manually.")
+    panel:ControlHelp("#tacrp.server.newsletter.desc")
     panel:AddControl("checkbox", {
-        label = "Allow Dropping & Swapping",
+        label = "#tacrp.server.allowdrop", -- Allow Dropping & Swapping Weapons
         command = "tacrp_allowdrop"
     })
     panel:AddControl("checkbox", {
-        label = "Enable Safety On Deploy",
+        label = "#tacrp.server.safeondeploy", -- Enable Safety On Deploy
         command = "tacrp_deploysafety"
     })
 
-    local cb_irons_procedural, lb_irons_procedural = panel:ComboBox("Use Procedural Ironsights", "tacrp_irons_procedural")
-    cb_irons_procedural:AddChoice("0 - Never", "0")
-    cb_irons_procedural:AddChoice("1 - With Optic", "1")
-    cb_irons_procedural:AddChoice("2 - Always", "2")
+    local cb_irons_procedural, lb_irons_procedural = panel:ComboBox("#tacrp.server.proceduralirons", "tacrp_irons_procedural") -- Use Procedural Iron Sights
+    cb_irons_procedural:AddChoice("#tacrp.server.proceduralirons.0", "0") -- 0 - Never
+    cb_irons_procedural:AddChoice("#tacrp.server.proceduralirons.1", "1") -- 1 - With Optic
+    cb_irons_procedural:AddChoice("#tacrp.server.proceduralirons.2", "2") -- 2 - Always
     cb_irons_procedural:DockMargin(8, 0, 0, 0)
     lb_irons_procedural:SizeToContents()
-    panel:ControlHelp("Applies mostly to pistols. Replaces firing animation while aiming with a much less disruptive procedural effect, making aiming with the weapon's sights easier.")
+    panel:ControlHelp("#tacrp.server.proceduralirons.desc")
 
-    local cb_irons_lower, lb_irons_lower = panel:ComboBox("Use Lowered Ironsights", "tacrp_irons_lower")
-    cb_irons_lower:AddChoice("0  - Never", "0")
-    cb_irons_lower:AddChoice("1 - In TTT", "1")
-    cb_irons_lower:AddChoice("2  - Always", "2")
+    local cb_irons_lower, lb_irons_lower = panel:ComboBox("#tacrp.server.loweredirons", "tacrp_irons_lower") -- Use Lowered Iron Sights
+    cb_irons_lower:AddChoice("#tacrp.server.loweredirons.0", "0") -- 0 - Never
+    cb_irons_lower:AddChoice("#tacrp.server.loweredirons.1", "1") -- 1 - Only in TTT
+    cb_irons_lower:AddChoice("#tacrp.server.loweredirons.2", "2") -- 2 - Always
     cb_irons_lower:DockMargin(8, 0, 0, 0)
     lb_irons_lower:SizeToContents()
-    panel:ControlHelp("While aiming with ironsights, lower the weapon and draw a dot where the point of aim is (even when Enable Crosshair is off). The dot does not display weapon sway or spread.")
+    panel:ControlHelp("#tacrp.server.loweredirons.desc")
 
-    header(panel, "\nWeapon Slot Restriction")
-    panel:ControlHelp("Restrict TacRP weapons for pickup/spawning based on their weapon slot.")
+    panel:AddControl("checkbox", {
+        label = "#tacrp.server.aimassist", -- Allow Aim Assist
+        command = "tacrp_aimassist"
+    })
+    panel:ControlHelp("#tacrp.server.aimassist.desc")
+
     panel:AddControl("slider", {
-        label = "Max Per Slot (0 - no limit)",
+        label = "#tacrp.server.aimassistintensity", -- Aim Assist Intensity
+        command = "tacrp_aimassist_intensity",
+        type = "float",
+        min = 0,
+        max = 2,
+    })
+    panel:ControlHelp("#tacrp.server.aimassistintensity.desc")
+
+    panel:AddControl("slider", {
+        label = "#tacrp.server.aimassistcone", -- Aim Assist Cone
+        command = "tacrp_aimassist_cone",
+        type = "int",
+        min = 0,
+        max = 10,
+    })
+    panel:ControlHelp("#tacrp.server.aimassistcone.desc")
+
+    header(panel, "#tacrp.server.slotrestrict") -- Weapon Slot Restriction
+    panel:ControlHelp("#tacrp.server.slotrestrict.desc")
+    panel:AddControl("slider", {
+        label = "#tacrp.server.maxperslot", -- Max per Slot
         command = "tacrp_slot_limit",
         type = "int",
         min = 0,
         max = 3,
     })
+    panel:ControlHelp("#tacrp.server.maxperslot.desc")
     panel:AddControl("checkbox", {
-        label = "Use HL2-style slots",
+        label = "#tacrp.server.hl2slots", -- Use HL2-style Slots
         command = "tacrp_slot_hl2"
     })
-    panel:ControlHelp("Use slot 4 for MGs, shotguns and snipers, slot 5 for explosives.")
+    panel:ControlHelp("#tacrp.server.hl2slots.desc")
     panel:AddControl("checkbox", {
-        label = "Count ALL weapons",
+        label = "#tacrp.server.countall", -- Count ALL Weapons
         command = "tacrp_slot_countall"
     })
-    panel:ControlHelp("WARNING! If set, non-TacRP weapons may be dropped/removed to make room for TacRP weapons! This can have unintended consequences!")
+    panel:ControlHelp("#tacrp.server.countall.desc")
 
-    local cb_slot_action, lb_slot_action = panel:ComboBox("Weapon Spawning Behavior", "tacrp_slot_action")
-    cb_slot_action:AddChoice("0 - Fail", "0")
-    cb_slot_action:AddChoice("1 - Remove", "1")
-    cb_slot_action:AddChoice("2 - Drop", "2")
+    local cb_slot_action, lb_slot_action = panel:ComboBox("#tacrp.server.spawnbehavior", "tacrp_slot_action") -- Weapon Spawning Behavior
+    cb_slot_action:AddChoice("#tacrp.server.spawnbehavior.0", "0") -- 0 - Ignore
+    cb_slot_action:AddChoice("#tacrp.server.spawnbehavior.1", "1") -- 1 - Remove
+    cb_slot_action:AddChoice("#tacrp.server.spawnbehavior.2", "2") -- 2 - Drop
     cb_slot_action:DockMargin(8, 0, 0, 0)
     lb_slot_action:SizeToContents()
 
-    panel:ControlHelp("Only affects giving weapons with the spawnmenu.")
+    panel:ControlHelp("#tacrp.server.spawnbehavior.desc")
 
-    header(panel, "\nNPC")
+    header(panel, "#tacrp.server.npc") -- \nNPC
     panel:AddControl("checkbox", {
-        label = "NPCs Deal Equal Damage",
+        label = "#tacrp.server.npcequaldmg", -- NPC's Deal Equal Damage
         command = "TacRP_npc_equality"
     })
     panel:AddControl("checkbox", {
-        label = "NPCs Get Random Attachments",
+        label = "#tacrp.server.npcrandomatt", -- NPC's Get Random Attachments
         command = "TacRP_npc_atts"
     })
 
 
-    header(panel, "\nMiscellaneous")
+    header(panel, "#tacrp.mechanics.misc") -- \nMiscellaneous
     panel:AddControl("checkbox", {
-        label = "Supply Boxes Resupply Grenades",
+        label = "#tacrp.server.clienthitreg", -- Client Authoratitive Hitreg
+        command = "tacrp_client_damage"
+    })
+    panel:ControlHelp("#tacrp.server.clienthitreg.desc")
+    panel:AddControl("checkbox", {
+        label = "#tacrp.server.dropmag", -- Drop Magazine Models
+        command = "tacrp_dropmagazinemodel"
+    })
+    panel:AddControl("checkbox", {
+        label = "#tacrp.server.supplyboxgrenades", -- Supply Boxes Resupply Grenades
         command = "TacRP_resupply_grenades"
     })
     panel:AddControl("checkbox", {
-        label = "Default Body Damage Cancel",
+        label = "#tacrp.server.canceldefaultbodydmg", -- Default Body Damage Cancel
         command = "TacRP_bodydamagecancel"
     })
-    panel:ControlHelp("Only disable this if another addon or gamemode is also modifying default hitgroup damage multipliers.")
+    panel:ControlHelp("#tacrp.server.canceldefaultbodydmg.desc")
+    panel:AddControl("checkbox", {
+        label = "#tacrp.server.doorbust", -- Enable Door Busting
+        command = "tacrp_doorbust"
+    })
+    panel:ControlHelp("#tacrp.server.doorbust.desc")
+    panel:AddControl("slider", {
+        label = "#tacrp.server.doorrespawntime", -- Door Respawn Time
+        command = "tacrp_doorbust_time",
+        type = "int",
+        min = 10,
+        max = 600,
+    })
+    panel:ControlHelp("#tacrp.server.doorrespawntime.desc")
+    panel:AddControl("checkbox", {
+        label = "#tacrp.server.dynamiclight", -- Enable Dynamic Lights
+        command = "tacrp_dynamiclight"
+    })
+    panel:ControlHelp("#tacrp.server.dynamiclight.desc")
 end
 
 local function menu_balance_ti(panel)
-    header(panel, "Damage")
-    panel:Help("Adjust weapon attributes to suit your gameplay needs.")
-    local cb_balance, lb_balance = panel:ComboBox("Weapon Tiers", "tacrp_balance")
-    cb_balance:AddChoice("[Automatic]", "-1")
-    cb_balance:AddChoice("0 - Tiered", "0")
-    cb_balance:AddChoice("1 - Untiered", "1")
-    cb_balance:AddChoice("2 - TTT", "2")
+    header(panel, "#tacrp.balance.damage") -- Damage
+    panel:Help("#tacrp.balance.damage.desc")
+    local cb_balance, lb_balance = panel:ComboBox("#tacrp.balance.weapontier", "tacrp_balance")
+    cb_balance:AddChoice("#tacrp.balance.weapontier.3", "-1") -- [ Automatic ]
+    cb_balance:AddChoice("#tacrp.balance.weapontier.0", "0") -- 0 - Tiered
+    cb_balance:AddChoice("#tacrp.balance.weapontier.1", "1") -- 1 - Untiered
+    cb_balance:AddChoice("#tacrp.balance.weapontier.2", "2") -- 2 - TTT
     cb_balance:DockMargin(8, 0, 0, 0)
     lb_balance:SizeToContents()
-    panel:Help("Weapon are divided into 4 tiers, with higher tiers having slightly better overall performance.\nDisable to adjust weapon performance to around the same level.")
-    panel:Help("TTT option is untiered, and has lower RPM and high time to kill close to vanilla TTT weapons.")
-    panel:Help("Weapon tiers, best to worst: \n1 - Elite \n2 - Operator \n3 - Security \n4 - Consumer\n5 - Value")
+    panel:Help("#tacrp.balance.weapontier.desc")
+    panel:Help("#tacrp.balance.weapontier.desc2")
+    panel:Help("#tacrp.balance.weapontier.desc3")
 
     panel:AddControl("slider", {
-        label = "Overall Damage",
+        label = "#tacrp.balance.dmg", -- Overall Damage
         command = "tacrp_mult_damage",
         type = "float",
         min = 0.1,
         max = 3,
     })
-    panel:ControlHelp("Only affects bullets. Type-specific damage multipliers takes priority and doesn't stack.")
+    panel:ControlHelp("#tacrp.balance.dmg.desc")
     panel:AddControl("slider", {
-        label = "Shotgun Damage",
+        label = "#tacrp.balance.shotgundmg", -- Shotgun Damage
         command = "tacrp_mult_damage_shotgun",
         type = "float",
         min = 0.1,
         max = 3,
     })
     panel:AddControl("slider", {
-        label = "Sniper Rifle Damage",
+        label = "#tacrp.balance.sniperdmg", -- Sniper Rifle Damage
         command = "tacrp_mult_damage_sniper",
         type = "float",
         min = 0.1,
         max = 3,
     })
     panel:AddControl("slider", {
-        label = "Magnum Pistol Damage",
+        label = "#tacrp.balance.magnumdmg", -- Magnum Pistol Damage
         command = "tacrp_mult_damage_magnum",
         type = "float",
         min = 0.1,
         max = 3,
     })
     panel:AddControl("slider", {
-        label = "Explosive Damage",
+        label = "#tacrp.balance.explosivedmg", -- Explosive Damage
         command = "tacrp_mult_damage_explosive",
+        type = "float",
+        min = 0.1,
+        max = 10,
+    })
+    panel:ControlHelp("#tacrp.balance.explosivedmg.desc")
+    panel:AddControl("slider", {
+        label = "#tacrp.balance.meleewpndmg", -- Melee Weapon Damage
+        command = "tacrp_mult_damage_melee",
         type = "float",
         min = 0.1,
         max = 3,
     })
+    panel:ControlHelp("#tacrp.balance.meleewpndmg.desc")
+    panel:AddControl("slider", {
+        label = "#tacrp.balance.headshotmult", -- Headshot Multiplier
+        command = "tacrp_mult_headshot",
+        type = "float",
+        min = 0,
+        max = 2,
+    })
+    panel:ControlHelp("#tacrp.balance.headshotmult.desc")
 
-    header(panel, "\nRecoil")
+
+    header(panel, "#tacrp.balance.recoil") -- \nRecoil
     panel:AddControl("checkbox", {
-        label = "Bloom Modifies Recoil",
+        label = "#tacrp.balance.bloommodrecoil", -- Bloom Modifies Recoil
         command = "tacrp_altrecoil"
     })
-    panel:ControlHelp("If enabled, gaining bloom intensifies recoil but does not modify spread.\nIf disabled, gaining bloom increases spread but does not modify recoil kick (old behavior).\nBloom is gained when firing consecutive shots.")
+    panel:ControlHelp("#tacrp.balance.bloommodrecoil.desc")
     panel:AddControl("checkbox", {
-        label = "Recoil Patterns",
+        label = "#tacrp.balance.recoilpattern", -- Recoil Patterns
         command = "tacrp_recoilpattern"
     })
-    panel:ControlHelp("Recoil follows a weapon-specific pattern, reset when bloom disappears.\nPattern fades away in long bursts, but reduces vertical recoil.")
+    panel:ControlHelp("#tacrp.balance.recoilpattern.desc")
     panel:AddControl("slider", {
-        label = "Recoil Kick",
+        label = "#tacrp.balance.recoilkick", -- Recoil Kick
         command = "tacrp_mult_recoil_kick",
         type = "float",
         min = 0,
         max = 2,
     })
     panel:AddControl("slider", {
-        label = "Visual Recoil",
+        label = "#tacrp.balance.visualrecoil", -- Visual Recoil
         command = "tacrp_mult_recoil_vis",
         type = "float",
         min = 0,
         max = 2,
     })
 
-    header(panel, "\nAiming")
+    header(panel, "#tacrp.balance.aiming") -- \nAiming
     panel:AddControl("checkbox", {
-        label = "Enable Crosshair",
+        label = "#tacrp.balance.crosshair", -- Enable Crosshair
         command = "tacrp_crosshair"
     })
     panel:AddControl("checkbox", {
-        label = "Enable Old School Scopes",
+        label = "#tacrp.balance.oldschoolscopes", -- Enable Old-School Scopes
         command = "tacrp_oldschool"
     })
-    panel:ControlHelp("Weapons without a scope or holosight cannot aim down sights.\nHip-fire spread is reduced and moving spread is increased based on scope magnification.\nEnabling the crosshair with this enabled is strongly encouraged.")
+    panel:ControlHelp("#tacrp.balance.oldschoolscopes.desc")
     panel:AddControl("checkbox", {
-        label = "Enable Sway",
+        label = "#tacrp.balance.sway", -- Enable Sway
         command = "tacrp_sway"
     })
-    panel:ControlHelp("Weapon point of aim will move around gently. While aiming, hold sprint key to hold breath and steady aim.")
+    panel:ControlHelp("#tacrp.balance.sway.desc")
     panel:AddControl("checkbox", {
-        label = "Enable Free Aim",
+        label = "#tacrp.balance.freeaim", -- Enable Free Aim
         command = "tacrp_freeaim"
     })
-    panel:ControlHelp("While not aiming, moving around will cause the crosshair to move off center.")
+    panel:ControlHelp("#tacrp.balance.freeaim.desc")
     panel:AddControl("slider", {
-        label = "Aim Down Sights Time",
+        label = "#tacrp.balance.adstime", -- Aim Down Sights Time Multiplier
         command = "tacrp_mult_aimdownsights",
         type = "float",
         min = 0.5,
         max = 1.5,
     })
     panel:AddControl("slider", {
-        label = "Sprint To Fire Time",
+        label = "#tacrp.balance.sprinttofiretime", -- Sprint-to-Fire Time Multiplier
         command = "tacrp_mult_sprinttofire",
         type = "float",
         min = 0.5,
@@ -1318,195 +1699,191 @@ local function menu_balance_ti(panel)
     })
 
 
-    header(panel, "\nAmmo & Reloading")
+    header(panel, "#tacrp.balance.ammoreload") -- \nAmmo & Reloading
     panel:AddControl("checkbox", {
-        label = "Infinite Ammo",
+        label = "#tacrp.balance.infammo", -- Infinite Ammo
         command = "tacrp_infiniteammo"
     })
-    panel:ControlHelp("Reloading does not require or consume ammo.")
+    panel:ControlHelp("#tacrp.balance.infammo.desc")
     panel:AddControl("checkbox", {
-        label = "Infinite Grenades",
+        label = "#tacrp.balance.inflaunchers", -- Infinite Ammo
+        command = "tacrp_infinitelaunchers"
+    })
+    panel:ControlHelp("#tacrp.balance.inflaunchers.desc")
+    panel:AddControl("checkbox", {
+        label = "#tacrp.balance.infgren", -- Infinite Grenades
         command = "tacrp_infinitegrenades"
     })
     panel:AddControl("checkbox", {
-        label = "Dump Ammo In Magazines",
+        label = "#tacrp.balance.dumpammo", -- Dump Ammo In Magazines
         command = "tacrp_reload_dump"
     })
-    panel:ControlHelp("Dropping a magazine during a reload will also drop all ammo in the gun. The dropped magazine can be retrieved (unless Infinite Ammo is enabled).")
+    panel:ControlHelp("#tacrp.balance.dumpammo.desc")
     panel:AddControl("checkbox", {
-        label = "Automatically Clear Jams",
+        label = "#tacrp.balance.autoclearjam", -- Automatically Clear Jams
         command = "tacrp_jam_autoclear"
     })
     panel:AddControl("checkbox", {
-        label = "Expanded Ammo Types (Requires map reload)",
+        label = "#tacrp.balance.expandammotype", -- Expanded Ammo Types
         command = "tacrp_expandedammotypes"
     })
-    panel:ControlHelp("Adds new ammo types to diversify ammo economy. Weapon performance is unchanged.")
+    panel:ControlHelp("#tacrp.balance.expandammotype.desc")
     panel:AddControl("slider", {
-        label = "Default Clip Multiplier",
+        label = "#tacrp.balance.defaultclipmult", -- Default Clip Multiplier
         command = "tacrp_defaultammo",
         type = "float",
         min = 0,
         max = 10,
     })
     panel:AddControl("slider", {
-        label = "Reload Speed",
+        label = "#tacrp.balance.reloadspeed", -- Reload Speed Multiplier
         command = "tacrp_mult_reloadspeed",
         type = "float",
         min = 0.5,
         max = 1.5,
     })
+    panel:ControlHelp("\n")
 end
 
 local function menu_mechanics_ti(panel)
-    header(panel, "\nBallistics")
+    header(panel, "#tacrp.mechanics.ballistics") -- Ballistics
     panel:AddControl("checkbox", {
-        label = "Enable Penetration",
+        label = "#tacrp.mechanics.penetration", -- Enable Bullet Penetration
         command = "TacRP_penetration"
     })
     panel:AddControl("checkbox", {
-        label = "Enable Physical Bullets",
+        label = "#tacrp.mechanics.physbullets", -- Enable Physical Bullets
         command = "TacRP_physbullet"
     })
-    panel:ControlHelp("Bullets will be hitscan up to a certain range depending on muzzle velocity.")
+    panel:ControlHelp("#tacrp.mechanics.physbullets.desc")
     panel:AddControl("checkbox", {
-        label = "Enable Shotgun Patterns",
+        label = "#tacrp.mechanics.shotgunpattern", -- Enable Shotgun Patterns
         command = "tacrp_fixedspread"
     })
-    panel:ControlHelp("Shotgun pellets uses a pattern that covers the spread area for more consistency.")
+    panel:ControlHelp("#tacrp.mechanics.shotgunpattern.desc")
     panel:AddControl("checkbox", {
-        label = "Enable Pattern Randomness",
+        label = "#tacrp.mechanics.randompattern", -- Enable Pattern Randomness
         command = "tacrp_pelletspread"
     })
-    panel:ControlHelp("Add random spread onto the pattern. Does not affect total spread. If disabled, shotgun patterns become completely static.")
+    panel:ControlHelp("#tacrp.mechanics.randompattern.desc")
     panel:AddControl("checkbox", {
-        label = "Custom Armor Penetration",
+        label = "#tacrp.mechanics.customarmorpen", -- Custom Armor Penetration
         command = "tacrp_armorpenetration"
     })
-    panel:ControlHelp("Use AP stats against players with HL2 suit armor. This generally increases weapon damage against armor.\nCompatible with Danger Zone Entities.")
+    panel:ControlHelp("#tacrp.mechanics.customarmorpen.desc")
 
-    header(panel, "\nMovement")
+    header(panel, "#tacrp.mechanics.movement") -- \nMovement
     panel:AddControl("checkbox", {
-        label = "Allow Reload while Sprinting",
+        label = "#tacrp.mechanics.reloadsprint", -- Allow Reload while Sprinting
         command = "tacrp_sprint_reload"
     })
-    panel:ControlHelp("If disabled, starting a sprint will cancel an unfinished reload.")
+    panel:ControlHelp("#tacrp.mechanics.reloadsprint.desc")
     panel:AddControl("checkbox", {
-        label = "Lower Weapon While Sprinting",
+        label = "#tacrp.mechanics.lowersprint", -- Lower Weapon While Sprinting
         command = "tacrp_sprint_lower"})
     panel:AddControl("checkbox", {
-        label = "Lower Weapon While Airborne",
+        label = "#tacrp.mechanics.lowerair", -- Lower Weapon While Airborne
         command = "tacrp_sprint_counts_midair"})
     panel:AddControl("checkbox", {
-        label = "Lower Weapon While Not Aiming",
+        label = "#tacrp.mechanics.lowerhipfire", -- Lower Weapon While Not Aiming
         command = "tacrp_sightsonly"
     })
-    panel:ControlHelp("Weapons can only be fired when aiming, like DarkRP weapons. Doesn't affect weapons that cannot aim.\nDisables safety and can't use with Old School Scopes.")
+    panel:ControlHelp("#tacrp.mechanics.lowerhipfire.desc")
 
     panel:AddControl("checkbox", {
-        label = "Movement Penalty",
+        label = "#tacrp.mechanics.penaltymove", -- Movement Penalty
         command = "tacrp_penalty_move"
     })
-    panel:ControlHelp("Penalty when weapon is up.\nDoes not apply in safety.")
+    panel:ControlHelp("#tacrp.mechanics.penaltymove.desc")
     panel:AddControl("checkbox", {
-        label = "Firing Movement Penalty",
+        label = "#tacrp.mechanics.penaltyfire", -- Firing Movement Penalty
         command = "tacrp_penalty_firing"
     })
-    panel:ControlHelp("Penalty from firing the weapon.")
+    panel:ControlHelp("#tacrp.mechanics.penaltyfire.desc")
     panel:AddControl("checkbox", {
-        label = "Aiming Movement Penalty",
+        label = "#tacrp.mechanics.penaltyaim", -- Aiming Movement Penalty
         command = "tacrp_penalty_aiming"
     })
-    panel:ControlHelp("Penalty while aiming the weapon.")
+    panel:ControlHelp("#tacrp.mechanics.penaltyaim.desc")
     panel:AddControl("checkbox", {
-        label = "Reload Movement Penalty",
+        label = "#tacrp.mechanics.penaltyreload", -- Reload Movement Penalty
         command = "tacrp_penalty_reload"
     })
-    panel:ControlHelp("Penalty while reloading.")
+    panel:ControlHelp("#tacrp.mechanics.penaltyreload.desc")
     panel:AddControl("checkbox", {
-        label = "Melee Movement Penalty",
+        label = "#tacrp.mechanics.penaltymelee", -- Melee Movement Penalty
         command = "tacrp_penalty_melee"
     })
-    panel:ControlHelp("Penalty from melee bashing.")
+    panel:ControlHelp("#tacrp.mechanics.penaltymelee.desc")
 
-    header(panel, "\nMiscellaneous")
+    header(panel, "#tacrp.mechanics.misc") -- \nMiscellaneous
     panel:AddControl("checkbox", {
-        label = "Delayed Holstering",
+        label = "#tacrp.mechanics.delayholster", -- Delayed Holstering
         command = "tacrp_holster"
     })
-    panel:ControlHelp("Play a holster animation before pulling out another weapon. If disabled, holstering is instant.")
+    panel:ControlHelp("#tacrp.mechanics.delayholster.desc")
     panel:AddControl("checkbox", {
-        label = "Shotgun Reload Cancel",
+        label = "#tacrp.mechanics.shotgunreloadcancel", -- Shotgun Reload Cancel
         command = "tacrp_reload_sg_cancel"
     })
-    panel:ControlHelp("Instantly fire out of a shotgun reload. If disabled, the finishing part of the animation must play out.")
+    panel:ControlHelp("#tacrp.mechanics.shotgunreloadcancel.desc")
     panel:AddControl("checkbox", {
-        label = "Allow Aiming While Reloading",
+        label = "#tacrp.mechanics.reloadaim", -- Allow Aiming While Reloading
         command = "tacrp_ads_reload"
     })
-    panel:AddControl("slider", {
-        label = "Flashbang Slow",
-        command = "tacrp_flash_slow",
-        type = "float",
-        min = 0,
-        max = 1,
-    })
-    panel:AddControl("slider", {
-        label = "CS Gas Sway",
-        command = "tacrp_gas_sway",
-        type = "float",
-        min = 0,
-        max = 10,
+    panel:AddControl("checkbox", {
+        label = "#tacrp.mechanics.quicknade", -- Enable Quick Grenades
+        command = "tacrp_quicknade"
     })
 end
 
 local function menu_atts_ti(panel)
-    header(panel, "Attachment Inventory")
+    header(panel, "#tacrp.attachments.inventory") -- Attachment Inventory
     panel:AddControl("checkbox", {
-        label = "Free Attachments",
+        label = "#tacrp.attachments.free", -- Free Attachments
         command = "TacRP_free_atts"
     })
     panel:AddControl("checkbox", {
-        label = "Attachment Locking",
+        label = "#tacrp.attachments.locking", -- Attachment Locking
         command = "TacRP_lock_atts"
     })
-    panel:ControlHelp("In Locking mode, owning one attachment allows you to use it on multiple weapons, a-la CW2.0.")
+    panel:ControlHelp("#tacrp.attachments.locking.desc")
     panel:AddControl("checkbox", {
-        label = "Lose Attachments On Death",
+        label = "#tacrp.attachments.ondeath", -- Lose Attachments on Death
         command = "TacRP_loseattsondie"
     })
     panel:AddControl("checkbox", {
-        label = "Attachment Entities in Spawnmenu",
+        label = "#tacrp.attachments.spawnmenu", -- Attachment Entities in Spawnmenu
         command = "TacRP_generateattentities"
     })
 
-    header(panel, "\nAttachment Mechanics")
+    header(panel, "#tacrp.attachments.mechanics") -- \nAttachment Mechanics
     panel:AddControl("checkbox", {
-        label = "Enable Scope Glint",
+        label = "#tacrp.attachments.scopeglint", -- Enable Scope Glint
         command = "tacrp_glint"
     })
-    panel:ControlHelp("Scopes show a visible glint. Glint size is dependent on angle of view, scope magnification and distance, and is bigger when zoomed in.")
+    panel:ControlHelp("#tacrp.attachments.scopeglint.desc")
     panel:AddControl("checkbox", {
-        label = "Enable Blinding Flashlights",
+        label = "#tacrp.attachments.blindflashlight", -- Enable Blinding Flashlight
         command = "tacrp_flashlight_blind"
     })
-    panel:ControlHelp("Flashlight glare will obscure vision based on distance and viewing angle. Effect is more significant on scopes. If disabled, glare sprite will be visible but not grow in size.")
+    panel:ControlHelp("#tacrp.attachments.blindflashlight.desc")
     panel:AddControl("checkbox", {
-        label = "Laser Beam",
+        label = "#tacrp.attachments.laserbeam", -- Laser beam
         command = "tacrp_laser_beam"
     })
-    panel:ControlHelp("If disabled, laser has no beam and only a dot, like Insurgency: Sandstorm. The dot remains static on high RPM weapons to help aiming.")
+    panel:ControlHelp("#tacrp.attachments.laserbeam.desc")
 
-    header(panel, "\nAttachment Balance")
+    header(panel, "#tacrp.attachments.balance") -- \nAttachment Balance
     panel:AddControl("slider", {
-        label = "Smackdown Slow",
+        label = "#tacrp.attachments.smackdown", -- Smackdown Slow
         command = "tacrp_melee_slow",
         type = "float",
         min = 0,
         max = 1,
     })
     panel:AddControl("slider", {
-        label = "Radar Frequency",
+        label = "#tacrp.attachments.radarfreq", -- Radar Frequency
         command = "tacrp_att_radartime",
         type = "float",
         min = 0.5,
@@ -1514,21 +1891,230 @@ local function menu_atts_ti(panel)
     })
 end
 
+
+local function menu_equipment_ti(panel)
+    header(panel, "#tacrp.equipment.grenades") -- Grenades
+    panel:AddControl("checkbox", {
+        label = "#tacrp.equipment.smokenpcs", -- Smoke affects NPCs
+        command = "tacrp_smoke_affectnpcs"
+    })
+    panel:AddControl("checkbox", {
+        label = "#tacrp.equipment.flashnpcs", -- Flashbangs affect NPCs
+        command = "tacrp_flash_affectnpcs"
+    })
+    panel:AddControl("checkbox", {
+        label = "#tacrp.equipment.flashplayers", -- Flashbangs affect Players
+        command = "tacrp_flash_affectplayers"
+    })
+    panel:AddControl("checkbox", {
+        label = "#tacrp.equipment.gasnpcs", -- CS Gas affect NPCs
+        command = "tacrp_gas_affectnpcs"
+    })
+    panel:AddControl("checkbox", {
+        label = "#tacrp.equipment.gasplayers", -- CS Gas affect Players
+        command = "tacrp_gas_affectplayers"
+    })
+    panel:AddControl("slider", {
+        label = "#tacrp.equipment.flashslow", -- Flashbang Slow
+        command = "tacrp_flash_slow",
+        type = "float",
+        min = 0,
+        max = 1,
+    })
+    panel:AddControl("slider", {
+        label = "#tacrp.equipment.fragdmg", -- Frag Grenade Damage
+        command = "tacrp_frag_damage",
+        type = "int",
+        min = 50,
+        max = 500,
+    })
+    panel:AddControl("slider", {
+        label = "#tacrp.equipment.fragradius", -- Frag Grenade Radius
+        command = "tacrp_frag_radius",
+        type = "int",
+        min = 64,
+        max = 512,
+    })
+    panel:AddControl("slider", {
+        label = "#tacrp.equipment.thermitedmg", -- Thermite Starting Damage
+        command = "tacrp_thermite_damage_min",
+        type = "int",
+        min = 1,
+        max = 100,
+    })
+    panel:AddControl("slider", {
+        label = "#tacrp.equipment.thermitedmgmax", -- Thermite Maximum Damage
+        command = "tacrp_thermite_damage_max",
+        type = "int",
+        min = 1,
+        max = 100,
+    })
+    panel:AddControl("slider", {
+        label = "#tacrp.equipment.thermiteradius", -- Thermite Radius
+        command = "tacrp_thermite_radius",
+        type = "int",
+        min = 64,
+        max = 512,
+    })
+    panel:ControlHelp("#tacrp.equipment.thermiteradius.desc")
+    panel:AddControl("slider", {
+        label = "#tacrp.equipment.doorchargedmg", -- Door Charge Damage
+        command = "tacrp_charge_damage",
+        type = "int",
+        min = 100,
+        max = 1000,
+    })
+    panel:AddControl("slider", {
+        label = "#tacrp.equipment.doorchargeradius", -- Door Charge Radius
+        command = "tacrp_charge_radius",
+        type = "int",
+        min = 64,
+        max = 512,
+    })
+    panel:AddControl("slider", {
+        label = "#tacrp.equipment.c4dmg", -- C4 Damage
+        command = "tacrp_c4_damage",
+        type = "int",
+        min = 100,
+        max = 1000,
+    })
+    panel:AddControl("slider", {
+        label = "#tacrp.equipment.c4radius", -- C4 Radius
+        command = "tacrp_c4_radius",
+        type = "int",
+        min = 64,
+        max = 512,
+    })
+    panel:ControlHelp("#tacrp.equipment.c4radius.desc")
+    panel:AddControl("slider", {
+        label = "#tacrp.equipment.medismokehealth", -- Medi-Smoke Health
+        command = "tacrp_healnade_heal",
+        type = "int",
+        min = 0,
+        max = 20,
+    })
+    panel:AddControl("slider", {
+        label = "#tacrp.equipment.medismokearmor", -- Medi-Smoke Armor
+        command = "tacrp_healnade_heal",
+        type = "int",
+        min = 0,
+        max = 20,
+    })
+    panel:AddControl("slider", {
+        label = "#tacrp.equipment.medismokedmg", -- Medi-Smoke Damage
+        command = "tacrp_healnade_damage",
+        type = "int",
+        min = 0,
+        max = 100,
+    })
+    panel:ControlHelp("#tacrp.equipment.medismokedmg.desc")
+    panel:AddControl("slider", {
+        label = "#tacrp.equipment.csgassway", -- CS Gas Sway
+        command = "tacrp_gas_sway",
+        type = "float",
+        min = 0,
+        max = 10,
+    })
+
+    header(panel, "#tacrp.equipment.medkit") -- \nMedkit
+    panel:AddControl("checkbox", {
+        label = "#tacrp.equipment.onlywhenheld", -- Only Regen Charge When Held
+        command = "tacrp_medkit_regen_activeonly"
+    })
+    panel:AddControl("slider", {
+        label = "#tacrp.equipment.maxcharge", -- Max Charge
+        command = "tacrp_medkit_clipsize",
+        type = "int",
+        min = 10,
+        max = 100,
+    })
+    panel:AddControl("slider", {
+        label = "#tacrp.equipment.chargeregentime", -- Charge Regen Interval
+        command = "tacrp_medkit_regen_delay",
+        type = "float",
+        min = 0.01,
+        max = 5,
+    })
+    panel:AddControl("slider", {
+        label = "#tacrp.equipment.chargeregennr", -- Charge Regen Amount
+        command = "tacrp_medkit_regen_amount",
+        type = "int",
+        min = 0,
+        max = 3,
+    })
+    panel:ControlHelp("#tacrp.equipment.chargeregennr.desc")
+
+    panel:AddControl("slider", {
+        label = "#tacrp.equipment.selfhealpercharge", -- Self Heal Per Charge
+        command = "tacrp_medkit_heal_self",
+        type = "int",
+        min = 0,
+        max = 10,
+    })
+    panel:ControlHelp("#tacrp.equipment.selfhealpercharge.desc")
+    panel:AddControl("slider", {
+        label = "#tacrp.equipment.healpercharge", -- Heal Per Charge
+        command = "tacrp_medkit_heal_others",
+        type = "int",
+        min = 0,
+        max = 10,
+    })
+    panel:ControlHelp("#tacrp.equipment.healpercharge.desc")
+    panel:AddControl("slider", {
+        label = "#tacrp.equipment.chargetime", -- Charge Interval
+        command = "tacrp_medkit_interval",
+        type = "float",
+        min = 0.01,
+        max = 1,
+    })
+    panel:ControlHelp("#tacrp.equipment.chargetime.desc")
+
+    header(panel, "#tacrp.equipment.riotshield") -- \nRiot Shield
+    panel:AddControl("checkbox", {
+        label = "#tacrp.equipment.allowquickmelee", -- Allow Quick Melee
+        command = "tacrp_shield_melee"
+    })
+    panel:AddControl("checkbox", {
+        label = "#tacrp.equipment.knockbackonblock", -- Knockback On Melee Block
+        command = "tacrp_shield_knockback"
+    })
+    panel:AddControl("slider", {
+        label = "#tacrp.equipment.penetrationresist", -- Penetration Resistance
+        command = "tacrp_shield_riot_resistance",
+        type = "float",
+        min = 0,
+        max = 5,
+    })
+    panel:ControlHelp("#tacrp.equipment.penetrationresist.desc")
+    panel:AddControl("slider", {
+        label = "#tacrp.equipment.durability", -- Durability
+        command = "tacrp_shield_riot_hp",
+        type = "int",
+        min = 0,
+        max = 9999,
+    })
+    panel:ControlHelp("#tacrp.equipment.durability.desc")
+
+end
+
 local clientmenus_ti = {
     {
-        text = "Client", func = menu_client_ti
+        text = "#tacrp.settings.client", func = menu_client_ti
     },
     {
-        text = "Server", func = menu_server_ti
+        text = "#tacrp.settings.server", func = menu_server_ti
     },
     {
-        text = "Mechanics", func = menu_mechanics_ti
+        text = "#tacrp.settings.mechanics", func = menu_mechanics_ti
     },
     {
-        text = "Attachments", func = menu_atts_ti
+        text = "#tacrp.settings.attachments", func = menu_atts_ti
     },
     {
-        text = "Balance", func = menu_balance_ti
+        text = "#tacrp.settings.balance", func = menu_balance_ti
+    },
+    {
+        text = "#tacrp.settings.equipment", func = menu_equipment_ti
     },
 }
 

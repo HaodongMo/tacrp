@@ -49,11 +49,13 @@ ATT = {}
 ATT.PrintName = "Buckshot"
 ATT.FullName = "40mm Buckshot Grenades"
 ATT.Icon = Material("entities/tacrp_att_ammo_40mm_buck.png", "mips smooth")
-ATT.Description = "Flat-top grenade firing pellets like a shotgun."
+ATT.Description = "Flat-top grenade firing shotgun pellets. Weak due to low pressure curve."
 ATT.Pros = {"att.procon.direct", "att.procon.doorbreach"}
 ATT.Cons = {"att.procon.noexp"}
 
 ATT.Category = "ammo_40mm"
+
+ATT.Override_Ammo = "buckshot" -- extremely not realism
 
 ATT.SortOrder = 2
 
@@ -61,16 +63,17 @@ ATT.Override_ShootEnt = false
 
 ATT.NoRanger = false
 
-ATT.Override_Damage_Max = 10
-ATT.Override_Damage_Min = 3
-ATT.Override_Num = 24
-ATT.Override_Range_Min = 100
-ATT.Override_Range_Max = 1500
+ATT.Override_Damage_Max = 9
+ATT.Override_Damage_Min = 2
+ATT.Override_Num = 18
+ATT.Override_Range_Min = 50
+ATT.Override_Range_Max = 1200
 
-ATT.Override_Spread = 0.06
-ATT.Override_ShotgunPelletSpread = 0.04
+ATT.Override_Spread = 0.05
+ATT.Override_ShotgunPelletSpread = 0.05
 
 ATT.Override_HipFireSpreadPenalty = 0
+ATT.Override_MidAirSpreadPenalty = 0
 
 ATT.Override_MuzzleVelocity = 9500
 
@@ -127,10 +130,12 @@ ATT.FullName = "40mm Flechette Grenades"
 
 ATT.Icon = Material("entities/tacrp_att_ammo_40mm_heat.png", "mips smooth")
 ATT.Description = "Flat-top grenade packing accurate flechette darts."
-ATT.Pros = {"att.procon.direct", "stat.spread"}
+ATT.Pros = {"att.procon.direct", "stat.spread", "stat.armorpenetration"}
 ATT.Cons = {"att.procon.noexp"}
 
 ATT.Category = "ammo_40mm"
+
+ATT.Override_Ammo = "buckshot" -- extremely not realism
 
 ATT.SortOrder = 2.5
 
@@ -140,17 +145,20 @@ ATT.InstalledElements = {"buck"} --{"heat"}
 
 ATT.Override_NoRanger = false
 
-ATT.Override_Damage_Max = 30
+ATT.Override_Damage_Max = 14
 ATT.Override_Damage_Min = 6
 ATT.Override_Num = 8
-ATT.Override_Range_Min = 400
+ATT.Override_Range_Min = 500
 ATT.Override_Range_Max = 2000
 ATT.Override_Penetration = 6
 
+ATT.Override_ArmorPenetration = 0.8
+
 ATT.Override_Spread = 0.015
-ATT.Override_ShotgunPelletSpread = 0.01
+ATT.Override_ShotgunPelletSpread = 0.02
 
 ATT.Override_HipFireSpreadPenalty = 0.03
+ATT.Override_MidAirSpreadPenalty = 0
 
 
 ATT.MuzzleVelocity = 15000
@@ -345,36 +353,29 @@ ATT.PrintName = "Ratshot"
 ATT.FullName = "Ratshot Rounds"
 ATT.Icon = Material("entities/tacrp_att_ammo_amr_ratshot.png", "mips smooth")
 ATT.Description = "For rodents of unusual size."
-ATT.Pros = {"att.procon.moreproj", "spacer.maneuvering"}
-ATT.Cons = {"stat.damage", "stat.spread"}
+ATT.Pros = {"att.procon.moreproj", "rating.maneuvering"}
+ATT.Cons = {"stat.damage", "stat.range", "stat.spread"}
 
 ATT.Category = {"ammo_amr"}
 
 ATT.SortOrder = 5
 
-ATT.Mult_MuzzleVelocity = 0.75
+ATT.Override_MuzzleVelocity = 9000
 
 ATT.Override_Num = 16
-ATT.Override_Damage_Max = 6
-ATT.Override_Damage_Min = 4
+ATT.Override_Damage_Max = 7
+ATT.Override_Damage_Min = 1
 ATT.Override_Penetration = 1
 
-ATT.Mult_HipFireSpreadPenalty = 0.5
-ATT.Mult_MidAirSpreadPenalty = 0.5
+ATT.Mult_Range_Min = 0.3
+ATT.Mult_Range_Max = 0.3
 
-ATT.Add_Spread = 0.01
-ATT.Add_ShotgunPelletSpread = 0.02
+ATT.Mult_HipFireSpreadPenalty = 0.25
+ATT.Mult_MidAirSpreadPenalty = 0
+ATT.Mult_MovingSpreadPenalty = 0
 
-ATT.Override_BodyDamageMultipliers = {
-    [HITGROUP_HEAD] = 2,
-    [HITGROUP_CHEST] = 1,
-    [HITGROUP_STOMACH] = 1,
-    [HITGROUP_LEFTARM] = 1,
-    [HITGROUP_RIGHTARM] = 1,
-    [HITGROUP_LEFTLEG] = 0.75,
-    [HITGROUP_RIGHTLEG] = 0.75,
-    [HITGROUP_GEAR] = 0.75
-}
+ATT.Add_Spread = 0.02
+ATT.Add_ShotgunPelletSpread = 0.03
 
 if engine.ActiveGamemode() == "terrortown" then
     ATT.Free = true
@@ -389,25 +390,26 @@ TacRP.LoadAtt(ATT, "ammo_amr_ratshot")
 ATT = {}
 
 ATT.PrintName = "SAPHE"
+ATT.FullName = "Semi-Armor-Piercing High-Explosive Rounds"
 ATT.Icon = Material("entities/tacrp_att_acc_saphe.png", "mips smooth")
-ATT.Description = "High explosive rounds."
-ATT.Pros = {"att.procon.explosive"}
-ATT.Cons = {"stat.damage", "stat.clipsize", "stat.rpm"}
+ATT.Description = "Explosive rounds effective against both armor and personnel."
+ATT.Pros = {"att.procon.explosive", "stat.penetration"}
+ATT.Cons = {"stat.rpm", "stat.clipsize", "stat.muzzlevelocity"}
 
 ATT.Category = "ammo_amr"
 
 ATT.SortOrder = 4
 
-ATT.ExplosiveEffect = "Explosion"
-ATT.ExplosiveDamage = 50
-ATT.ExplosiveRadius = 256
+ATT.ExplosiveEffect = "HelicopterMegaBomb"
+ATT.ExplosiveDamage = 60
+ATT.ExplosiveRadius = 200
 
-ATT.Add_Damage_Max = -50
-ATT.Add_Damage_Min = -25
+ATT.Add_Damage_Max = -60
+ATT.Add_Damage_Min = -60
 
 ATT.Mult_MuzzleVelocity = 0.667
 
-ATT.Mult_Penetration = 0
+ATT.Mult_Penetration = 1.5
 
 ATT.Mult_ClipSize = 0.51
 
@@ -711,6 +713,8 @@ ATT.Pros = {}
 ATT.Cons = {"att.procon.onebullet"}
 ATT.Category = {"ammo_roulette"}
 
+ATT.Free = true
+
 ATT.SortOrder = -1
 
 --ATT.Mult_ShootChance = 1 / 6
@@ -720,7 +724,7 @@ ATT.Override_AmmoPerShot = 1
 ATT.Hook_PreReload = function(wep)
     if wep:StillWaiting(true) then return end
     if wep:Clip1() < 1 then return end
-    if wep:Ammo1() <= 0 and !wep:GetValue("InfiniteAmmo") then return end
+    if wep:Ammo1() <= 0 and !wep:GetInfiniteAmmo() then return end
 
     if SERVER then
         wep:SetNWInt("TacRP_RouletteShot", math.random(1, wep:GetBaseValue("ClipSize")))
@@ -822,10 +826,8 @@ ATT.Category = "ammo_rpg"
 ATT.SortOrder = 3
 
 ATT.Override_ShootEnt = "tacrp_proj_rpg7_mortar"
-ATT.Add_ShootingSpeedMult = 0.3
-ATT.Add_ReloadSpeedMult = 0.15
 
-ATT.Override_ShootEntForce = 3000
+ATT.Override_ShootEntForce = 2500
 
 if engine.ActiveGamemode() == "terrortown" then
     ATT.Free = true
@@ -880,8 +882,8 @@ ATT.SortOrder = 9
 ATT.Mult_HipFireSpreadPenalty = 0.5
 
 ATT.Override_ShootEnt = "tacrp_proj_rpg7_harpoon"
-ATT.Add_ShootingSpeedMult = 0.3
-ATT.Add_ReloadSpeedMult = 0.15
+ATT.Add_ShootingSpeedMult = 0.6
+ATT.Add_ReloadSpeedMult = 0.4
 
 ATT.Add_RPM = 60
 
@@ -913,8 +915,8 @@ ATT = {}
 ATT.PrintName = "Birdshot"
 ATT.Icon = Material("entities/tacrp_att_acc_bird.png", "mips smooth")
 ATT.Description = "Fire smaller pellets in a larger spread."
-ATT.Pros = {"Extra projectiles", "Recoil"}
-ATT.Cons = {"Spread"}
+ATT.Pros = {"att.procon.moreproj", "stat.recoil"}
+ATT.Cons = {"stat.spread"}
 
 ATT.Category = {"ammo_shotgun", "ammo_shotgun2"}
 
@@ -973,10 +975,10 @@ TacRP.LoadAtt(ATT, "ammo_shotgun_mag")
 ------------------------------
 ATT = {}
 
-ATT.PrintName = "att.ammo_shotgun_slugs.name"
-ATT.FullName = "att.ammo_shotgun_slugs.name.full"
+ATT.PrintName = "Slugs"
+ATT.FullName = "Slug Shells"
 ATT.Icon = Material("entities/tacrp_att_acc_slugs.png", "mips smooth")
-ATT.Description = "att.ammo_shotgun_slugs.desc"
+ATT.Description = "Fire a single projectile for medium range shooting."
 ATT.Pros = {"stat.spread", "stat.range"}
 ATT.Cons = {"att.procon.1proj", "stat.hipfirespread"}
 
@@ -1071,12 +1073,12 @@ TacRP.LoadAtt(ATT, "ammo_shotgun_slugs2")
 ------------------------------
 ATT = {}
 
-ATT.PrintName = "att.ammo_shotgun_triple.name"
-ATT.FullName = "att.ammo_shotgun_triple.name.full"
+ATT.PrintName = "Triple Hit"
+ATT.FullName = "Triple Hit Shells"
 ATT.Icon = Material("entities/tacrp_att_acc_triple.png", "mips smooth")
-ATT.Description = "att.ammo_shotgun_triple.desc"
+ATT.Description = "Fire three projectiles for more accuracy."
 ATT.Pros = {"stat.spread"}
-ATT.Cons = {"att.procon.3proj", "Hipfire Spread"}
+ATT.Cons = {"att.procon.3proj", "stat.hipfirespread"}
 
 ATT.Category = "ammo_shotgun"
 
@@ -1179,12 +1181,11 @@ ATT.Category = {"ammo_rifle", "ammo_pistol"}
 
 ATT.SortOrder = 2
 
-ATT.Mult_RecoilKick = 0.75
-ATT.Mult_RecoilSpreadPenalty = 0.75
+ATT.Mult_RecoilKick = 0.85
 ATT.TracerNum = 0
 ATT.Mult_MuzzleVelocity = 0.75
 ATT.Mult_Vol_Shoot = 0.9
-ATT.Mult_Range_Max = 0.75
+ATT.Mult_Range_Max = 0.85
 
 TacRP.LoadAtt(ATT, "ammo_subsonic")
 -- #endregion
@@ -1238,7 +1239,7 @@ ATT.Category = {"ammo_rifle", "ammo_sniper", "ammo_amr", "ammo_rifle_sub"}
 
 ATT.SortOrder = 1.5
 
-ATT.Add_Penetration = 8
+ATT.Add_Penetration = 10
 ATT.Add_RecoilFirstShotMult = 1
 ATT.Add_RecoilMaximum = 2
 ATT.Add_ArmorPenetration = 0.05
@@ -1260,6 +1261,8 @@ ATT.Cons = {"att.procon.nopartialreloads"}
 ATT.Category = "ammo_shotgun"
 
 ATT.SortOrder = -1
+
+ATT.Free = true
 
 ATT.ShotgunFullCancel = true
 ATT.Override_Firemodes = {1}
@@ -1290,7 +1293,7 @@ end
 
 ATT.Hook_PreReload = function(wep)
     if wep:StillWaiting(true) then return end
-    if wep:Ammo1() <= 0 and !wep:GetValue("InfiniteAmmo") then return end
+    if wep:Ammo1() <= 0 and !wep:GetInfiniteAmmo() then return end
 
     if wep:Clip1() > 0 then return true end
 
@@ -1358,14 +1361,14 @@ ATT.FullName = "Minishells"
 ATT.Icon = Material("entities/tacrp_att_ammo_minishell.png", "mips smooth")
 ATT.Description = "Short shells increase ammo capacity but don't hit as hard."
 ATT.Pros = {"stat.clipsize", "stat.recoilkick"}
-ATT.Cons = {"stat.damage"}
+ATT.Cons = {"att.procon.lessproj"}
 
 ATT.Category = "ammo_shotgun"
 
 ATT.SortOrder = 1
 
-ATT.Mult_Num = 0.666
-ATT.Mult_RecoilKick = 0.75
+ATT.Mult_Num = 0.6667
+ATT.Mult_RecoilKick = 0.85
 ATT.Mult_ClipSize = 1.5
 
 ATT.Compatibility = function(wpn, cats)
@@ -1392,14 +1395,15 @@ ATT.Category = {"ammo_shotgun", "ammo_shotgun2"}
 
 ATT.SortOrder = 6
 
-ATT.Mult_DamageMax = 0.5
-ATT.Mult_DamageMin = 0.1
+ATT.Mult_Damage_Max = 0.75
+ATT.Mult_Damage_Min = 0.5
 ATT.Mult_MuzzleVelocity = 0.75
-ATT.Mult_Spread = 3
+ATT.Add_Spread = 0.03
+ATT.Add_ShotgunPelletSpread = 0.03
 
 ATT.Override_ExplosiveEffect = "ManhackSparks"
-ATT.Add_ExplosiveDamage = 1
-ATT.Add_ExplosiveRadius = 16
+-- ATT.Add_ExplosiveDamage = 1
+-- ATT.Add_ExplosiveRadius = 16
 
 ATT.Override_DamageType = DMG_BURN
 
@@ -1492,8 +1496,8 @@ ATT = {}
 ATT.PrintName = "Semi-Active"
 ATT.FullName = "Stinger Semi-Active Missile"
 ATT.Icon = Material("entities/tacrp_att_ammo_stinger.png", "mips smooth")
-ATT.Description = "Missiles that require constant guidance to hit targets. Locks rapidly."
-ATT.Pros = {"att.procon.locktime", "rating.lethality"}
+ATT.Description = "Powerful missiles that lock rapidly but require constant guidance."
+ATT.Pros = {"att.procon.locktime", "stat.damage"}
 ATT.Cons = {"att.procon.semiactive"}
 
 ATT.Category = "ammo_stinger"
@@ -1502,7 +1506,8 @@ ATT.SortOrder = 1
 
 ATT.Override_ShootEnt = "tacrp_proj_stinger_saam"
 
-ATT.Override_LockOnAngle = math.cos(math.rad(10))
+ATT.Override_LockOnTrackAngle = 10
+
 ATT.Override_LockOnTime = 0.1
 
 ATT.NoAutoReload = true
@@ -1523,8 +1528,8 @@ ATT.PrintName = "Agile"
 ATT.FullName = "Stinger High Agility Missile"
 ATT.Icon = Material("entities/tacrp_att_ammo_stinger_qaam.png", "mips smooth")
 ATT.Description = "Highly maneuverable missile with a short range and long lock time."
-ATT.Pros = {"att.procon.maneuverability"}
-ATT.Cons = {"rating.range"}
+ATT.Pros = {"att.procon.proj.turn"}
+ATT.Cons = {"att.procon.locktime"}
 
 ATT.Category = "ammo_stinger"
 
@@ -1553,14 +1558,16 @@ ATT.PrintName = "Quad"
 ATT.FullName = "Stinger 4x Missile"
 ATT.Icon = Material("entities/tacrp_att_ammo_stinger_4aam.png", "mips smooth")
 ATT.Description = "Guided cluster missiles maximize pressure to enemy pilots."
-ATT.Pros = {"stat.clipsize"}
-ATT.Cons = {"rating.lethality", "att.procon.maneuverability"}
+ATT.Pros = {"att.procon.moreproj", "att.procon.proj.turn"}
+ATT.Cons = {"stat.damage", "stat.spread", "att.procon.armdelay"}
 
 ATT.Category = "ammo_stinger"
 
 ATT.SortOrder = 3
 
 ATT.Override_ShootEnt = "tacrp_proj_stinger_4aam"
+
+ATT.Override_LockOnTrackAngle = 10
 
 ATT.Override_Num = 4
 ATT.Override_Spread = 0.1
@@ -1572,9 +1579,6 @@ ATT.Hook_PreShoot = function(wep)
 end
 
 ATT.Hook_PreShootEnt = function(wep, ent)
-    ent.SoftLaunchTime = 0.5 + (wep.QuadShootIndex * 0.25)
-    ent.BoostSpeed = 1500 + (wep.QuadShootIndex * 250)
-
     wep.QuadShootIndex = wep.QuadShootIndex + 1
 end
 
@@ -1595,7 +1599,7 @@ ATT.FullName = "Stinger Anti-Personnel Missile"
 ATT.Icon = Material("entities/tacrp_att_ammo_stinger_apers.png", "mips smooth")
 ATT.Description = "For rodents of unacceptable agility."
 ATT.Pros = {"att.procon.radius", "att.procon.proxfuse"}
-ATT.Cons = {"rating.range"}
+ATT.Cons = {"stat.damage", "att.procon.armdelay"}
 
 ATT.Category = "ammo_stinger"
 
@@ -1604,8 +1608,8 @@ ATT.SortOrder = 4
 ATT.Override_ShootEnt = "tacrp_proj_stinger_apers"
 
 ATT.Override_LockOnRange = 6000
+ATT.Override_LockOnTrackAngle = 35
 ATT.Override_LockOnTime = 0.5
-ATT.Override_LockOnAngle = math.cos(math.rad(20))
 
 ATT.Range_Max = 6000
 ATT.Range_Min = 1000
@@ -1619,3 +1623,74 @@ end
 
 TacRP.LoadAtt(ATT, "ammo_stinger_apers")
 -- #endregion
+
+
+------------------------------
+-- #region ammo_usp_9mm
+------------------------------
+ATT = {}
+
+ATT.PrintName = "9x19mm"
+ATT.FullName = "USP 9x19mm Conversion"
+ATT.Icon = Material("entities/tacrp_ex_usp.png", "mips smooth")
+ATT.Description = "Fire a smaller caliber round with higher capacity and firerate."
+ATT.Pros = {"stat.clipsize", "stat.rpm", "stat.recoil"}
+ATT.Cons = {"stat.damage"}
+
+ATT.SortOrder = 0
+
+ATT.Category = "ammo_usp"
+
+ATT.Override_Ammo_Expanded = "pistol"
+
+ATT.Mult_RPM = 1.15
+
+ATT.Add_ClipSize = 3
+ATT.Mult_RecoilSpreadPenalty = 0.85
+ATT.Mult_RecoilKick = 0.5
+
+ATT.Mult_Damage_Max = 24 / 28
+ATT.Mult_Damage_Min = 10 / 12
+
+ATT.Override_Sound_Shoot = "weapons/pistol/pistol_fire2.wav" -- maximum gordon freeman
+ATT.Override_Sound_Shoot_Silenced = "tacrp/weapons/p2000/p2000_fire_silenced-1.wav"
+ATT.Override_ShootPitchVariance = 2
+
+if engine.ActiveGamemode() == "terrortown" then
+    ATT.Free = true
+end
+
+TacRP.LoadAtt(ATT, "ammo_usp_9mm")
+-- #endregion
+
+
+-- R700 ammos
+ATT = {}
+
+ATT.Ignore = true
+
+ATT.PrintName = ".300 Win Mag"
+ATT.FullName = "R700 .300 Win Mag Mod Kit"
+ATT.Icon = Material("entities/tacrp_att_ammo_300winmag.png", "mips smooth")
+ATT.Description = "Magnum cartridge with higher close range damage."
+ATT.Pros = {"stat.damage_max"}
+ATT.Cons = {"stat.damage_min", "stat.recoilkick", "stat.rpm"}
+
+ATT.Category = "ammo_R700"
+ATT.SortOrder = 0.5
+
+ATT.Mult_Damage_Max = 1.25
+ATT.Mult_Damage_Min = 0.8
+
+ATT.Mult_RPM = 1 / 1.25
+ATT.Mult_ShootTimeMult = 1.25
+
+ATT.Add_RecoilKick = 10
+
+ATT.Override_Ammo = "357"
+ATT.Override_Ammo_Expanded = "ti_sniper"
+
+ATT.Override_Sound_Shoot = "tacrp/weapons/spr/awp1.wav"
+ATT.Add_Pitch_Shoot = 10
+
+TacRP.LoadAtt(ATT, "ammo_r700_300winmag")

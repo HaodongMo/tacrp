@@ -10,7 +10,8 @@ SWEP.Category = "Tactical RP"
 SWEP.SubCatTier = "1Elite"
 SWEP.SubCatType = "5Shotgun"
 
-SWEP.Description = "Made from recycled aircraft gun barrels, this heavy shotgun fires shells with twice the diameter of typical shotshells and can easily tear apart anything it's vaguely pointed at. Able to breach doors."
+SWEP.Description = "Massive shotgun that shoots massive shells from its massive barrel.\nAble to breach doors without specialized shells."
+SWEP.Description_Quote = "\"You tried to make me kill my president!\" \"Tried?\"" -- Black Ops 1 (2010)
 
 SWEP.Trivia_Caliber = "23x75mmR"
 SWEP.Trivia_Manufacturer = "Tula Arms Plant"
@@ -27,19 +28,19 @@ SWEP.SlotAlt = 3
 
 SWEP.BalanceStats = {
     [TacRP.BALANCE_SBOX] = {
-        Damage_Max = 16,
-        Damage_Min = 11,
+        Damage_Max = 10,
+        Damage_Min = 2,
     },
     [TacRP.BALANCE_TTT] = {
         Damage_Max = 8,
         Damage_Min = 2,
-        Range_Min = 500,
-        Range_Max = 3000,
+        Range_Min = 100,
+        Range_Max = 1000,
         Num = 16,
         ClipSize = 4,
 
         Spread = 0.04,
-        ShotgunPelletSpread = 0.02,
+        ShotgunPelletSpread = 0.03,
         HipFireSpreadPenalty = 0.025,
         RecoilSpreadPenalty = 0.02,
         FreeAimMaxAngle = 5,
@@ -76,14 +77,14 @@ SWEP.TTTReplace = TacRP.TTTReplacePreset.Shotgun
 
 // "ballistics"
 
-SWEP.Damage_Max = 18
-SWEP.Damage_Min = 14
-SWEP.Range_Min = 600 // distance for which to maintain maximum damage
-SWEP.Range_Max = 3000 // distance at which we drop to minimum damage
+SWEP.Damage_Max = 14
+SWEP.Damage_Min = 4
+SWEP.Range_Min = 100 // distance for which to maintain maximum damage
+SWEP.Range_Max = 1200 // distance at which we drop to minimum damage
 SWEP.Penetration = 4 // units of metal this weapon can penetrate
 SWEP.Num = 20
 SWEP.ArmorPenetration = 0.35
-SWEP.ArmorBonus = 1.5
+SWEP.ArmorBonus = 0.25
 
 SWEP.MuzzleVelocity = 10000
 
@@ -106,8 +107,8 @@ SWEP.FiremodeName = "Pump-Action" // only used externally for firemode name dist
 
 SWEP.RPM = 45
 
-SWEP.Spread = 0.03
-SWEP.ShotgunPelletSpread = 0.02
+SWEP.Spread = 0.04
+SWEP.ShotgunPelletSpread = 0.035
 
 SWEP.ShootTimeMult = 1
 
@@ -250,7 +251,7 @@ SWEP.Attachments = {
     },
     [3] = {
         PrintName = "Accessory",
-        Category = {"acc", "acc_duffle", "acc_extmag_shotgun"},
+        Category = {"acc", "acc_duffle", "acc_extmag_shotgun", "acc_sling"},
         AttachSound = "TacRP/weapons/flashlight_on.wav",
         DetachSound = "TacRP/weapons/flashlight_off.wav",
     },

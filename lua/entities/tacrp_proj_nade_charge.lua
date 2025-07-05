@@ -21,6 +21,8 @@ ENT.ExplodeUnderwater = false
 ENT.Defusable = false
 ENT.DefuseOnDamage = true
 
+ENT.ImpactDamage = 0
+
 ENT.Delay = 2
 
 ENT.PickupAmmo = "ti_charge"
@@ -52,8 +54,7 @@ end
 function ENT:Detonate()
     local attacker = IsValid(self.Attacker) and self.Attacker or self:GetOwner()
 
-    util.BlastDamage(self, attacker, self:GetPos(), 200,
-            500 * TacRP.ConVars["mult_damage_explosive"]:GetFloat())
+    util.BlastDamage(self, attacker, self:GetPos(), TacRP.ConVars["charge_radius"]:GetFloat(), TacRP.ConVars["charge_damage"]:GetFloat())
 
     local fx = EffectData()
     fx:SetOrigin(self:GetPos())
@@ -85,6 +86,9 @@ function ENT:Detonate()
 end
 
 function ENT:Stuck()
+
+    sound.EmitHint(SOUND_DANGER, self:GetPos(), 256, 2, self)
+
     self:SetArmTime(CurTime())
     if !self:GetRemote() then
         local ttt = TacRP.GetBalanceMode() == TacRP.BALANCE_TTT

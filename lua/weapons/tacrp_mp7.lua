@@ -12,7 +12,7 @@ SWEP.SubCatTier = "2Operator"
 SWEP.SubCatType = "3Submachine Gun"
 
 SWEP.Description = "PDW with superb handling and close range effectiveness. High velocity rounds retain effectiveness at range and pierces armor easily."
-SWEP.Description_Quote = "\"You forgot to cock it, muthaf*cka!\""
+SWEP.Description_Quote = "\"You've got to cock it motherfucker.\"" -- Big Game (2014)
 
 SWEP.Trivia_Caliber = "4.6x30mm"
 SWEP.Trivia_Manufacturer = "Heckler & Koch"
@@ -228,10 +228,12 @@ SWEP.AttachmentElements = {
     },
 }
 
+SWEP.NoRMR = true
+
 SWEP.Attachments = {
     [1] = {
         PrintName = "Optic",
-        Category = {"optic_cqb_nookp7", "optic_medium"},
+        Category = {"optic_cqb", "optic_medium"},
         Bone = "ValveBiped.mp7_rootbone",
         AttachSound = "tacrp/weapons/optic_on.wav",
         DetachSound = "tacrp/weapons/optic_off.wav",

@@ -11,7 +11,7 @@ SWEP.Category = "Tactical RP"
 SWEP.SubCatTier = "3Security"
 SWEP.SubCatType = "5Sporter"
 
-SWEP.Description = "Customized semi-automatic model of an iconic polymer rifle.\nUses reduced capacity magazines."
+SWEP.Description = "Semi-automatic model of an iconic polymer rifle.\nUses reduced capacity magazines."
 SWEP.Description_Quote = "\"Weapons of war do not belong on our streets!\""
 
 SWEP.ViewModel = "models/weapons/tacint/v_hk243.mdl"
@@ -58,7 +58,7 @@ SWEP.Firemode = 1
 SWEP.Firemodes = false
 
 SWEP.RPM = 550
-SWEP.RPMMultSemi = 400/550
+SWEP.RPMMultSemi = 400 / 550
 
 SWEP.ClipSize = 15
 

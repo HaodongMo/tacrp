@@ -45,7 +45,7 @@ function PANEL:PerformLayout(w, h)
 
     if empty then
         self.Icon:SetVisible(false)
-        self.Title:SetText("N/A")
+        self.Title:SetText(TacRP:GetPhrase("att.none") or "N/A")
     else
         self.Icon:SetVisible(true)
         self.Icon:SetMaterial(atttbl.Icon)
@@ -173,10 +173,17 @@ function PANEL:PaintOver(w, h)
         rx = rx + TacRP.SS(12)
         --ry = ry + TacRP.SS(16)
         local gap = TacRP.SS(18)
-        local firstoff = TacRP.SS(20)
         local statjump = TacRP.SS(12)
-        local statted = false
 
+        local bw, bh = TacRP.SS(160), TacRP.SS(18)
+
+        local atttxt = TacRP:GetAttName(att, true)
+        if !self.DescCache then
+            self.DescCache = TacRP.MultiLineText(TacRP:GetAttDesc(att), bw, "TacRP_Myriad_Pro_6")
+        end
+        bh = bh + (#self.DescCache - 1) * TacRP.SS(5)
+
+        local firstoff = bh + TacRP.SS(2)
         local vertsize = firstoff + gap + TacRP.SS(4)
         if atttbl.Pros then vertsize = vertsize + statjump * #atttbl.Pros end
         if atttbl.Cons then vertsize = vertsize + statjump * #atttbl.Cons end
@@ -185,20 +192,21 @@ function PANEL:PaintOver(w, h)
             ry = ry + (ScrH() - vertsize - (self:GetY() + ry))
         end
 
-        local bw, bh = TacRP.SS(160), TacRP.SS(18)
         surface.SetDrawColor(col_bg)
         TacRP.DrawCorneredBox(rx, ry, bw, bh, col_corner)
 
-        txt = TacRP:GetAttName(att, true)
+        -- Att. Name
         surface.SetTextColor(col_text)
         surface.SetFont("TacRP_Myriad_Pro_10")
         surface.SetTextPos(rx + TacRP.SS(2), ry + TacRP.SS(1))
-        surface.DrawText(txt)
+        surface.DrawText(atttxt)
 
-        txt = TacRP:GetAttDesc(att)
+        -- Att. Description
         surface.SetFont("TacRP_Myriad_Pro_6")
-        surface.SetTextPos(rx + TacRP.SS(2), ry + TacRP.SS(1 + 8 + 2))
-        surface.DrawText(txt)
+        for i, k in ipairs(self.DescCache) do
+            surface.SetTextPos(rx + TacRP.SS(2), ry + TacRP.SS(1 + 8 + 2 + 5 * (i - 1)))
+            surface.DrawText(k)
+        end
 
         local bump = firstoff
         local txjy = TacRP.SS(1)
@@ -234,10 +242,10 @@ function PANEL:PaintOver(w, h)
             statted = true
         end end
 
-        if statted then
-            surface.SetDrawColor(col_bg)
-            surface.DrawLine(rx, ry + gap, rx + bw, ry + gap)
-        end
+        -- if statted then
+        --     surface.SetDrawColor(col_bg)
+        --     surface.DrawLine(rx, ry + gap, rx + bw, ry + gap)
+        -- end
 
         local can, reason = TacRP.CanCustomize(wep:GetOwner(), wep, att, attslot)
         if !can then

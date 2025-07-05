@@ -3,15 +3,16 @@ ATT.FullName = "High Guard"
 
 ATT.Icon = Material("entities/tacrp_att_melee_tech_block.png", "mips smooth")
 ATT.Description = "Defense is the best offense. It is, coinicidently, also the best defense."
-ATT.Pros = {"ALT-FIRE: Block melee attacks or projectiles", "Heavy Counterattack after blocking a hit"}
+ATT.Pros = { "att.pro.melee_tech_block1", "att.pro.melee_tech_block2" }
 
 ATT.Category = {"melee_tech"}
 
 ATT.SortOrder = 2
 
 ATT.MeleeBlock = true
-
 ATT.HeavyAttack = true
+
+ATT.Free = true
 
 local function hold(wep)
     return wep:GetOwner():KeyDown(IN_ATTACK2)
@@ -74,7 +75,7 @@ ATT.Hook_PostThink = function(wep)
     else
         if !canhold then
             wep:SetOutOfBreath(false)
-            wep:SetNextIdle(CurTime())
+            wep:PlayAnimation("idle", 1)
             wep:SetShouldHoldType()
             if wep:GetNWFloat("TacRPKnifeCounter", 0) < CurTime() then
                 wep:SetNextSecondaryFire(CurTime() + 0.5)
@@ -146,7 +147,7 @@ hook.Add("EntityTakeDamage", "TacRP_Block", function(ent, dmginfo)
         return
     end
 
-    wep:SetHoldBreathAmount(wep:GetHoldBreathAmount() - math.Clamp(0.05 + dmginfo:GetDamage() / (wep:GetValue("MeleeDamage") * 2), 0.1, 0.5))
+    wep:SetHoldBreathAmount(wep:GetHoldBreathAmount() - math.Clamp(0.05 + dmginfo:GetDamage() / ent:GetMaxHealth(), 0.05, 0.5))
 
     local ang = ent:EyeAngles()
     local fx = EffectData()
@@ -155,25 +156,10 @@ hook.Add("EntityTakeDamage", "TacRP_Block", function(ent, dmginfo)
     fx:SetAngles(ang)
     util.Effect("ManhackSparks", fx)
 
-    if dmginfo:GetAttacker():IsNPC() and dmginfo:GetAttacker():GetClass() != "npc_antlionguard" and dmginfo:GetAttacker():GetPos():DistToSqr(ent:GetPos()) < 22500 then
-        dmginfo:GetAttacker():SetSchedule(SCHED_FLINCH_PHYSICS)
-    end
-
     ent:EmitSound("physics/metal/metal_solid_impact_hard5.wav", 90, math.Rand(105, 110))
     ent:ViewPunch(AngleRand(-1, 1) * (dmginfo:GetDamage() ^ 0.5))
 
     wep:SetNWFloat("TacRPKnifeCounter", CurTime() + 0.6)
-
-    -- wep:KillTimer("BlockReset")
-    -- wep:SetNWFloat("TacRPNextBlock", CurTime() + 0.75)
-    -- wep:PlayAnimation("idle_defend", 1)
-    -- wep:SetNWFloat("TacRPKnifeParry", CurTime() + 1)
-    -- wep:SetNextIdle(CurTime() + 1)
-    -- if SERVER then
-    --     wep:SetTimer(1, function()
-    --         wep:SetShouldHoldType()
-    --     end, "BlockReset")
-    -- end
 
     local inflictor = dmginfo:GetInflictor()
     timer.Simple(0, function()
@@ -244,5 +230,5 @@ end)
 ]]
 
 ATT.Hook_GetHintCapabilities = function(self, tbl)
-    tbl["+attack2"] = {so = 0.1, str = "Block"}
+    tbl["+attack2"] = {so = 0.1, str = "hint.melee.block"}
 end

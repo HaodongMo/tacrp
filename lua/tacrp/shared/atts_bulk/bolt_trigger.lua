@@ -44,7 +44,8 @@ ATT.SortOrder = 1
 ATT.Mult_RPM = 1.15
 ATT.Mult_ShootTimeMult = 1 / 1.15
 
-ATT.Mult_RecoilKick = 1.25
+ATT.Add_RecoilVisualKick = 1
+ATT.Mult_RecoilKick = 1.5
 ATT.Add_ShootingSpeedMult = -0.1
 ATT.Add_SightedSpeedMult = -0.05
 
@@ -197,9 +198,9 @@ ATT.SortOrder = 2
 ATT.Mult_RPM = 0.85
 ATT.Mult_ShootTimeMult = 1 / 0.85
 
-ATT.Add_ShootingSpeedMult = 0.15
-ATT.Add_SightedSpeedMult = 0.05
-ATT.Mult_RecoilKick = 0.5
+ATT.Add_ShootingSpeedMult = 0.2
+ATT.Add_SightedSpeedMult = 0.08
+ATT.Mult_RecoilKick = 0.4
 ATT.Mult_RecoilVisualKick = 0.5
 
 ATT.Mult_MuzzleVelocity = 1.15
@@ -215,10 +216,10 @@ TacRP.LoadAtt(ATT, "bolt_tactical")
 ------------------------------
 ATT = {}
 
-ATT.PrintName = "att.bolt_refurbished.name"
-ATT.FullName = "att.bolt_refurbished.name.full"
+ATT.PrintName = "Refurbished"
+ATT.FullName = "Refurbished Bolt"
 ATT.Icon = Material("entities/tacrp_att_bolt_refurbished.png", "mips smooth")
-ATT.Description = "att.bolt_refurbished.desc"
+ATT.Description = "Fix the gun's reliability problems with some armory tweaks."
 ATT.Pros = {"att.procon.reliability"}
 ATT.Cons = {"stat.rpm", "stat.spread"}
 
@@ -300,8 +301,8 @@ TacRP.LoadAtt(ATT, "trigger_burst")
 ------------------------------
 ATT = {}
 
-ATT.PrintName = "Burst"
-ATT.FullName = "Burst Trigger"
+ATT.PrintName = "att.trigger_burst.name"
+ATT.FullName = "att.trigger_burst.name.full"
 ATT.Icon = Material("entities/tacrp_att_trigger_burst.png", "mips smooth")
 ATT.Description = "Trigger that emulates burst fire."
 ATT.Pros = {"att.procon.burst"}
@@ -375,8 +376,8 @@ TacRP.LoadAtt(ATT, "trigger_comp")
 ------------------------------
 ATT = {}
 
-ATT.PrintName = "Competition"
-ATT.FullName = "Competition Trigger"
+ATT.PrintName = "att.trigger_comp.name"
+ATT.FullName = "att.trigger_comp.name.full"
 ATT.Icon = Material("entities/tacrp_att_trigger_comp.png", "mips smooth")
 ATT.Description = "Lightweight trigger that recovers from accuracy faster."
 ATT.Pros = {"stat.recoildissipation", "stat.recoilstability"}
@@ -425,10 +426,10 @@ TacRP.LoadAtt(ATT, "trigger_frcd")
 ------------------------------
 ATT = {}
 
-ATT.PrintName = "Forced Reset"
-ATT.FullName = "Forced Reset Trigger"
+ATT.PrintName = "att.trigger_frcd.name"
+ATT.FullName = "att.trigger_frcd.name.full"
 ATT.Icon = Material("entities/tacrp_att_trigger_frcd.png", "mips smooth")
-ATT.Description = "Trigger that emulates automatic fire but with poor performance."
+ATT.Description = "att.trigger_frcd.desc"
 ATT.Pros = {"att.procon.auto"}
 ATT.Cons = {"stat.recoilkick", "stat.bloomintensity", "stat.recoilstability"}
 
@@ -459,7 +460,7 @@ ATT.Description = "Very sensitive trigger for rapid semi-automatic fire."
 ATT.Pros = {"stat.rpm"}
 ATT.Cons = {"stat.recoilmaximum", "stat.recoilstability", "stat.hipfirespread"}
 
-ATT.Category = {"trigger_semi", "trigger_akimbo", "trigger_revolver"}
+ATT.Category = {"trigger_semi", "trigger_revolver"}
 
 ATT.SortOrder = 4
 
@@ -470,6 +471,33 @@ ATT.Mult_HipFireSpreadPenalty = 1.15
 
 TacRP.LoadAtt(ATT, "trigger_hair")
 -- #endregion
+
+------------------------------
+-- #region trigger_hair_akimbo
+------------------------------
+ATT = {}
+
+ATT.PrintName = "att.trigger_hair.name"
+ATT.FullName = "att.trigger_hair.name.full"
+ATT.Icon = Material("entities/tacrp_att_trigger_hair.png", "mips smooth")
+ATT.Description = "Very sensitive trigger for rapid akimbo fire."
+ATT.Pros = {"stat.rpm", "stat.postburstdelay"}
+ATT.Cons = {"stat.recoilmaximum", "stat.recoil"}
+
+ATT.Category = {"trigger_akimbo"}
+ATT.InvATt = "trigger_hair"
+
+ATT.SortOrder = 4
+
+ATT.Mult_PostBurstDelay = 0.5
+
+ATT.Mult_RPMMultSemi = 1.2
+ATT.Mult_RPMMultBurst = 1.2
+ATT.Mult_RecoilMaximum = 1.25
+ATT.Mult_RecoilStability = 0.5
+ATT.Mult_RecoilKick = 1.2
+
+TacRP.LoadAtt(ATT, "trigger_hair_akimbo")
 
 ------------------------------
 -- #region trigger_heavy
@@ -499,8 +527,8 @@ TacRP.LoadAtt(ATT, "trigger_heavy")
 ------------------------------
 ATT = {}
 
-ATT.PrintName = "Weighted"
-ATT.FullName = "Weighted Trigger"
+ATT.PrintName = "att.trigger_heavy.name"
+ATT.FullName = "att.trigger_heavy.name.full"
 ATT.Icon = Material("entities/tacrp_att_trigger_heavy.png", "mips smooth")
 ATT.Description = "Heavy trigger that reduces mobility impact from shooting."
 ATT.Pros = {"stat.shootingspeed"}
@@ -529,7 +557,7 @@ ATT.FullName = "Marksman Trigger"
 
 ATT.Icon = Material("entities/tacrp_att_trigger_semi.png", "mips smooth")
 ATT.Description = "Trigger that sacrfices automatic fire for precision."
-ATT.Pros = {"stat.spread", "stat.recoil", "stat.rpm"}
+ATT.Pros = {"stat.spread", "stat.recoil", "stat.rpm", "att.procon.reliability"}
 ATT.Cons = {"att.procon.semi"}
 
 ATT.Category = {"trigger_auto", "trigger_burst", "trigger_4pos"}
@@ -537,13 +565,14 @@ ATT.Category = {"trigger_auto", "trigger_burst", "trigger_4pos"}
 ATT.SortOrder = 1
 
 ATT.Override_Firemodes = {1}
-ATT.Mult_Spread = 0.5
+ATT.Mult_Spread = 0.3333
 ATT.Mult_ShotgunPelletSpread = 0.5
 ATT.Mult_RecoilSpreadPenalty = 0.75
 ATT.Mult_RecoilKick = 0.6
 ATT.Mult_RecoilVisualKick = 0.5
 ATT.Mult_RecoilStability = 1.25
 ATT.Add_RPM = 50
+ATT.Mult_JamFactor = 0
 
 TacRP.LoadAtt(ATT, "trigger_semi")
 -- #endregion
@@ -556,7 +585,7 @@ ATT = {}
 ATT.PrintName = "Slamfire"
 ATT.FullName = "Slamfire Trigger"
 ATT.Icon = Material("entities/tacrp_att_trigger_frcd.png", "mips smooth")
-ATT.Description = "Trigger that emulates automatic fire but with poor performance."
+ATT.Description = "att.trigger_frcd.desc"
 ATT.Pros = {"stat.rpm", "att.procon.auto"}
 ATT.Cons = {"stat.spread", "rating.mobility"}
 
@@ -581,10 +610,10 @@ TacRP.LoadAtt(ATT, "trigger_slam")
 ------------------------------
 ATT = {}
 
-ATT.PrintName = "Slamfire"
-ATT.FullName = "Slamfire Trigger"
+ATT.PrintName = "att.trigger_slam.name"
+ATT.FullName = "att.trigger_slam.name.full"
 ATT.Icon = Material("entities/tacrp_att_trigger_frcd.png", "mips smooth")
-ATT.Description = "Trigger that emulates automatic fire but with poor performance."
+ATT.Description = "att.trigger_frcd.desc"
 ATT.Pros = {"stat.rpm", "att.procon.auto"}
 ATT.Cons = {"stat.spread", "rating.mobility"}
 
@@ -680,13 +709,13 @@ end
 
 ATT.Func_RecoilKick = function(wep, data)
     if wep:GetScopeLevel() > 0 and not wep:GetPeeking() then
-        data.mul = data.mul * 0.7
+        data.mul = data.mul * 0.5
     end
 end
 
 ATT.Func_RecoilPerShot = function(wep, data)
     if wep:GetScopeLevel() > 0 and not wep:GetPeeking() then
-        data.mul = data.mul * 0.7
+        data.mul = data.mul * 0.5
     end
 end
 
@@ -697,4 +726,28 @@ ATT.Func_Spread = function(wep, data)
 end
 
 TacRP.LoadAtt(ATT, "trigger_dualstage")
+-- #endregion
+
+
+------------------------------
+-- #region trigger_tactical
+------------------------------
+ATT = {}
+
+ATT.PrintName = "Tactical"
+ATT.FullName = "Tactical Trigger"
+ATT.Icon = Material("entities/tacrp_att_trigger_burstauto.png", "mips smooth")
+ATT.Description = "Trigger reducing recoil for burst and semi fire modes."
+ATT.Pros = {"stat.recoilburst", "stat.recoilsemi"}
+ATT.Cons = {"stat.postburstdelay"}
+
+ATT.Category = {"trigger_auto", "trigger_burstauto", "trigger_4pos"}
+
+ATT.SortOrder = 11
+
+ATT.Add_RecoilMultBurst = -0.15
+ATT.Add_RecoilMultSemi = -0.2
+ATT.Add_PostBurstDelay = 0.02
+
+TacRP.LoadAtt(ATT, "trigger_tactical")
 -- #endregion

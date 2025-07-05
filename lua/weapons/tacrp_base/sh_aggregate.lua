@@ -10,11 +10,11 @@ function SWEP:GetReloadTime(base)
         return basetime * mult
     else
         local seq1 = vm:LookupSequence(self:TranslateSequence("reload_start"))
-        local seq2 = vm:LookupSequence(self:TranslateSequence("reload"))
+        -- local seq2 = vm:LookupSequence(self:TranslateSequence("reload"))
         local seq3 = vm:LookupSequence(self:TranslateSequence("reload_finish"))
 
         local time_1 = vm:SequenceDuration(seq1)
-        local time_2 = vm:SequenceDuration(seq2)
+        local time_2 = valfunc(self, "ShotgunUpInTime") --vm:SequenceDuration(seq2)
         local time_3 = vm:SequenceDuration(seq3)
 
         local mult = valfunc(self, "ReloadTimeMult") / TacRP.ConVars["mult_reloadspeed"]:GetFloat()
@@ -100,19 +100,6 @@ function SWEP:GetBestFiremode(base)
     end
 end
 
-function SWEP:GetSubClassName(tier)
-    if self.SubCatType then
-        local type_txt = TacRP:TryTranslate(self.SubCatType)
-        if tier and self.SubCatTier and self.SubCatTier != "9Special" then
-            type_txt = TacRP:GetPhrase("cust.type_tier", {tier = TacRP:TryTranslate(self.SubCatTier), type = type_txt})
-        end
-        return type_txt
-    end
-    return "Weapon"
-end
-
-
-
 local hitgroups = {
     [HITGROUP_HEAD] = 0.1,
     [HITGROUP_CHEST] = 0.2,
@@ -175,7 +162,7 @@ SWEP.StatGroups = {
             d_min = d_min + explosive_damage
 
             local dmg_max = math.max(d_max, d_min)
-            local dmg_avg = Lerp(0.2, math.max(d_max, d_min), math.min(d_max, d_min)) * bdm_add
+            local dmg_avg = dmg_max * bdm_add --Lerp(0.2, math.max(d_max, d_min), math.min(d_max, d_min)) * bdm_add
 
             -- max single shot damage
             local mssd = 0
@@ -212,7 +199,7 @@ SWEP.StatGroups = {
             local scores = {mssd, ttk_s}
             table.sort(scores)
 
-            return scores[2] * 70 + scores[1] * 30
+            return scores[2] * 75 + scores[1] * 25
 
         end,
     },
@@ -439,8 +426,8 @@ SWEP.StatGroups = {
             local score = 0
             local valfunc = base and self.GetBaseValue or self.GetValue
 
-            -- [50] free aim + sway (if both are disabled, score goes to other 2)
-            local bonus = 50
+            -- [40] free aim + sway (if both are disabled, score goes to other 2)
+            local bonus = 40
             local freeaim_s = 1
             if TacRP.ConVars["freeaim"]:GetBool() then
                 if valfunc(self, "FreeAim") then
@@ -454,17 +441,17 @@ SWEP.StatGroups = {
                 bonus = 0
             end
             if bonus == 0 then
-                score = score + math.min(freeaim_s, sway_s) * 30 + math.max(freeaim_s, sway_s) * 20
+                score = score + math.min(freeaim_s, sway_s) * 20 + math.max(freeaim_s, sway_s) * 20
             end
 
             -- local diff = valfunc(self, "HipFireSpreadPenalty") / math.Clamp(self:GetBaseValue("Spread"), 0.015, 0.03)
-            local hipspread = valfunc(self, "Spread") + valfunc(self, "HipFireSpreadPenalty")
+            local hipspread = valfunc(self, "Spread") + valfunc(self, "HipFireSpreadPenalty") + valfunc(self, "MoveSpreadPenalty")
 
             -- [0] peeking
             -- score = score + math.Clamp(1 - (hipspread * valfunc(self, "PeekPenaltyFraction") - 0.01) / 0.015, 0, 1) * (10 + bonus * 0.25)
 
-            -- [40] hip spread + spread
-            score = score + math.Clamp(1 - (hipspread - 0.015) / 0.05, 0, 1) * (40 + bonus * 0.75)
+            -- [50] hip spread + spread
+            score = score + math.Clamp(1 - (hipspread - 0.02) / 0.05, 0, 1) * (50 + bonus * 0.75)
 
             -- [10] mid-air spread
             score = score + math.Clamp(1 - (valfunc(self, "MidAirSpreadPenalty") ) / 0.1, 0, 1) * (10 + bonus * 0.25)
@@ -1014,9 +1001,31 @@ SWEP.StatDisplay = {
             return math.min(100, math.Round(val * 100, 0))
         end,
         Unit = "%",
-        Value = "RecoilCrouchMult",
+        Value = "RecoilMultCrouch",
         LowerIsBetter = true,
         -- HideIfSame = true,
+    },
+    {
+        Name = "stat.recoilburst",
+        Description = "stat.recoilburst.desc",
+        Value = "RecoilMultBurst",
+        Unit = "%",
+        AggregateFunction = function(self, base, val)
+            return math.min(100, math.Round(val * 100, 0))
+        end,
+        LowerIsBetter = true,
+        DefaultValue = 1,
+    },
+    {
+        Name = "stat.recoilsemi",
+        Description = "stat.recoilsemi.desc",
+        Value = "RecoilMultSemi",
+        Unit = "%",
+        AggregateFunction = function(self, base, val)
+            return math.min(100, math.Round(val * 100, 0))
+        end,
+        LowerIsBetter = true,
+        DefaultValue = 1,
     },
     {
         Name = "spacer.mobility",
@@ -1246,7 +1255,6 @@ SWEP.StatGroupsMelee = {
         Description = "stat.damage.desc_melee",
         RatingFunction = function(self, base)
             local valfunc = base and self.GetBaseValue or self.GetValue
-
             return Lerp((valfunc(self, "MeleeDamage") - 10) / 50, 0, 100)
         end,
     },
@@ -1301,7 +1309,7 @@ SWEP.StatDisplayMelee = {
         Description = "stat.damage.desc_melee",
         Value = "MeleeDamage",
         AggregateFunction = function(self, base, val)
-            return math.floor(val)
+            return math.floor(val * self:GetConfigDamageMultiplier())
         end,
     },
     {
@@ -1365,7 +1373,7 @@ SWEP.StatDisplayMelee = {
         Value = "Melee2Damage",
         ValueCheck = "HeavyAttack",
         AggregateFunction = function(self, base, val)
-            return math.Round(self:GetHeavyAttackDamage(base))
+            return math.Round(self:GetHeavyAttackDamage(base) * self:GetConfigDamageMultiplier())
         end,
     },
     {
@@ -1396,7 +1404,7 @@ SWEP.StatDisplayMelee = {
         Value = "MeleeDamage",
         ValueCheck = "ThrowAttack",
         AggregateFunction = function(self, base, val)
-            return math.floor(val * self:GetMeleePerkDamage(base))
+            return math.floor(val * self:GetMeleePerkDamage(base) * self:GetConfigDamageMultiplier())
         end,
     },
     {

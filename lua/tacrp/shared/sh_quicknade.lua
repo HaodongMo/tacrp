@@ -92,8 +92,8 @@ TacRP.QuickNades = {
         CanSetImpact = true,
 
         FullName = "Thermite Grenade",
-        DetType = "Timed - 2 seconds",
-        Description = "Burns intensely for about 8 seconds, dealing damage within a small radius.\n\nWhile thermite is typically used to burn through materiel, it is also useful for area denial.",
+        DetType = "Timed - 3 seconds",
+        Description = "Sticks to targets and burns intensely for about 8 seconds, dealing damage within a small radius.\n\nWhile thermite is typically used to burn through materiel, it is also useful for area denial.",
         Category = "LETHAL",
         SortOrder = 2,
     },
@@ -290,14 +290,21 @@ TacRP.QuickNades_Index = {}
 TacRP.QuickNades_EntLookup = {}
 
 TacRP.QuickNades_Count = 0
-for i, k in SortedPairsByMemberValue(TacRP.QuickNades, "SortOrder") do
-    TacRP.QuickNades_Count = TacRP.QuickNades_Count + 1
 
-    TacRP.QuickNades_Index[TacRP.QuickNades_Count] = i
-    TacRP.QuickNades_EntLookup[k.GrenadeEnt] = i
-    k.Index = TacRP.QuickNades_Count
+local function reIndexQuickNades()
+    for i, k in SortedPairsByMemberValue(TacRP.QuickNades, "SortOrder") do
+        TacRP.QuickNades_Count = TacRP.QuickNades_Count + 1
+
+        TacRP.QuickNades_Index[TacRP.QuickNades_Count] = i
+        TacRP.QuickNades_EntLookup[k.GrenadeEnt] = i
+        k.Index = TacRP.QuickNades_Count
+    end
+    TacRP.QuickNades_Bits = math.min(math.ceil(math.log(TacRP.QuickNades_Count + 1, 2)), 32)
 end
-TacRP.QuickNades_Bits = math.min(math.ceil(math.log(TacRP.QuickNades_Count + 1, 2)), 32)
+
+hook.Add("InitPostEntity", "TacRP_IndexQuickNades", function()
+    reIndexQuickNades()
+end)
 
 function TacRP.IsGrenadeInfiniteAmmo(i)
     local nade = i
@@ -319,4 +326,17 @@ function TacRP.IsGrenadeInfiniteAmmo(i)
     if !nade.AdminOnly and TacRP.ConVars["infinitegrenades"]:GetBool() then return true end
 
     return false
+end
+
+function TacRP.RegisterQuickNade(name, nade)
+    if TacRP.QuickNades[name] then
+        print("TacRP: QuickNade " .. name .. " already exists! Overwriting.")
+    end
+
+    if !istable(nade) then
+        print("TacRP: QuickNade " .. name .. " is not a table! Aborting registration.")
+        return
+    end
+
+    TacRP.QuickNades[name] = nade
 end

@@ -12,6 +12,7 @@ SWEP.SubCatTier = "2Operator"
 SWEP.SubCatType = "3Machine Pistol"
 
 SWEP.Description = "Premium pistol modified to be 3-round burst. High firerate but long burst delay."
+SWEP.Description_Quote = "What kind of crack was he on making a boutique CZ 75 copy the burst pistol?"
 
 SWEP.Trivia_Caliber = "9x19mm"
 SWEP.Trivia_Manufacturer = "Sphinx Systems"
@@ -162,7 +163,7 @@ SWEP.SprintPos = Vector(2, 0, -12)
 SWEP.SightAng = Angle(5.1, 0.4, 1)
 SWEP.SightPos = Vector(-2.4, 0, -3.6)
 
-SWEP.CorrectivePos = Vector(-1.47, 0, 0)
+SWEP.CorrectivePos = Vector(-1.435, 0, 0)
 SWEP.CorrectiveAng = Angle(-5, 5, 0)
 
 SWEP.HolsterVisible = true

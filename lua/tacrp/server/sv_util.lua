@@ -1,12 +1,13 @@
 local badseqs = {
     ["Unknown"] = true, -- no cower sequence
     ["head_pitch"] = true, -- antlion guards
+    ["Walk_Neutral_South"] = true, -- l4d2 common inf
 }
 
 function TacRP.Flashbang(ent, pos, radius, time_max, time_min, time_stunadd)
     time_stunadd = time_stunadd or 0.5
     for _, k in ipairs(ents.FindInSphere(pos, radius)) do
-        if k:IsPlayer() then
+        if k:IsPlayer() and TacRP.ConVars["flash_affectplayers"]:GetBool() then
             local dist = k:EyePos():Distance(pos)
             local dp = (k:EyePos() - pos):Dot(k:EyeAngles():Forward())
 
@@ -32,9 +33,10 @@ function TacRP.Flashbang(ent, pos, radius, time_max, time_min, time_stunadd)
             net.Start("tacrp_flashbang")
                 net.WriteFloat(time)
             net.Send(k)
-        elseif k:IsNPC() then
-
-
+        elseif k:IsNPC() and TacRP.ConVars["flash_affectnpcs"]:GetBool() and (k.TacRP_FlashEnd or 0) < CurTime() then
+            local ret = hook.Run("TacRP_StunNPC", k, ent)
+            if ret then continue end
+            local t = time_max
             -- stun them if they have a good cower sequence. this doesn't affect npcs like antlion guards, manhacks etc.
             if badseqs[k:GetSequenceName(ACT_COWER)] != true then
                 local tr = util.TraceLine({
@@ -47,50 +49,30 @@ function TacRP.Flashbang(ent, pos, radius, time_max, time_min, time_stunadd)
                     k:SetSchedule(SCHED_COWER)
                     k:RestartGesture(ACT_COWER)
                     k:SetNPCState(NPC_STATE_NONE)
-                    local t = time_max + time_stunadd + 1
                     k.TacRP_FlashEnd = CurTime() + t - 0.01
                     timer.Simple(t, function()
-                        if IsValid(k) and k:IsNPC() and k.TacRP_FlashEnd <= CurTime() then
+                        if IsValid(k) then
                             k:SetNPCState(NPC_STATE_ALERT)
                         end
                     end)
                 end
+            else
+                local tr = util.TraceLine({
+                    start = pos,
+                    endpos = k:EyePos(),
+                    mask = MASK_SOLID,
+                    filter = {ent, k}
+                })
+                if tr.Fraction == 1 then
+                    k.TacRP_FlashEnd = CurTime() + t - 0.01
+                    timer.Create("tacrp_flash_" .. k:EntIndex(), 0.5, math.ceil(t / 0.5), function()
+                        if IsValid(k) then k:SetSchedule(SCHED_STANDOFF) end
+                    end)
+                    k:SetSchedule(SCHED_STANDOFF)
+                end
             end
         end
     end
-end
-
-TacRP.WeaponListCache = {}
-function TacRP.GetWeaponList(subcat, tier)
-    if !subcat then subcat = "" end
-    if !tier then tier = "" end
-    if !TacRP.WeaponListCache[subcat] or !TacRP.WeaponListCache[subcat][tier] then
-        TacRP.WeaponListCache[subcat] = TacRP.WeaponListCache[subcat] or {}
-        TacRP.WeaponListCache[subcat][tier] = {}
-
-        for i, wep in pairs(weapons.GetList()) do
-            local weap = weapons.Get(wep.ClassName)
-            if !weap or !weap.ArcticTacRP
-                    or wep.ClassName == "tacrp_base" or wep.ClassName == "tacrp_base_nade" or wep.ClassName == "tacrp_base_melee"
-                    or !weap.Spawnable or weap.AdminOnly
-                    or (subcat == "npc" and !weap.NPCUsable)
-                    or (subcat != "" and subcat != "npc" and subcat != weap.SubCatType)
-                    or (tier != "" and tier != weap.SubCatTier) then
-                continue
-            end
-
-            table.insert(TacRP.WeaponListCache[subcat][tier], wep.ClassName)
-        end
-    end
-    return TacRP.WeaponListCache[subcat][tier]
-end
-
-function TacRP.GetRandomWeapon(subcat, tier)
-    if !subcat then subcat = "" end
-    if !tier then tier = "" end
-
-    local tbl = TacRP.GetWeaponList(subcat, tier)
-    return tbl[math.random(1, #tbl)]
 end
 
 local cats = {

@@ -12,7 +12,7 @@ SWEP.SubCatTier = "5Value"
 SWEP.SubCatType = "3Machine Pistol"
 
 SWEP.Description = "A bullet hose best used for point blank spray-and-pray."
-SWEP.Description_Quote = "\"Give me the motherf*ckin' gun, Tre!\""
+SWEP.Description_Quote = "\"Give me the motherfuckin' gun, Tre!\""
 
 SWEP.Trivia_Caliber = ".380 ACP"
 SWEP.Trivia_Manufacturer = "Military Armament Corporation"

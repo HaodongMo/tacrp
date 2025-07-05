@@ -1,7 +1,7 @@
 function TacRP.DoorBust(ent, vel, attacker)
     if !string.find(ent:GetClass(), "door") then return end
-    local cvar = 1 --TacRP.ConVars["doorbust"]:GetInt()
-    local t = 180 -- TacRP.ConVars["doorbust_time"]:GetFloat()
+    local cvar = TacRP.ConVars["doorbust"]:GetInt()
+    local t = TacRP.ConVars["doorbust_time"]:GetFloat()
 
     local oldSpeed = ent:GetInternalVariable("m_flSpeed")
     ent:Fire("SetSpeed", tostring(oldSpeed * 10), 0)

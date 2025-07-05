@@ -8,10 +8,15 @@ DEFINE_BASECLASS( "tacrp_base" )
 SWEP.PrintName = "Riot Shield"
 SWEP.Category = "Tactical RP (Special)"
 
+SWEP.NoAimAssist = true
+
 SWEP.SubCatTier = "9Special"
 SWEP.SubCatType = "9Equipment"
 
-SWEP.Description = "Lightweight shield. Despite its plastic-looking core, it is capable of stopping almost all rifle caliber rounds.\nAble to sprint and melee attack without compromising the user's safety, but slows down move speed slightly."
+SWEP.Description = "Lightweight plastic shield which can stop most rifle caliber rounds. Able to sprint and melee without compromising safety at the cost of a slight movement speed penalty."
+SWEP.Description_Quote = "You know what they say..." -- Technically a Hotel Mario reference, I guess
+
+SWEP.Credits = "Model/Texture: Tactical Intervention\nAnimation: Arqu"
 
 SWEP.ViewModel = "models/weapons/tacint/v_riot_shield-2.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_riot_shield_2.mdl"
@@ -27,6 +32,7 @@ SWEP.BalanceStats = {
 
 SWEP.NoRanger = true
 SWEP.NoStatBox = true
+SWEP.HUDAmmoMeter = false
 
 SWEP.NPCUsable = false
 
@@ -107,7 +113,7 @@ SWEP.ShieldProps = {
         Model = "models/weapons/tacint/w_riot_shield_2.mdl",
         Pos = Vector(5, -5, 30),
         Ang = Angle(0, 0, 180 - 15),
-        Resistance = 3.5
+        Resistance = "shield_riot_resistance"
     }
 }
 
@@ -122,7 +128,24 @@ SWEP.Attachments = {}
     }
 ]]
 
+
+function SWEP:Initialize()
+
+    self.CanMeleeAttack = TacRP.ConVars["shield_melee"]:GetBool()
+
+    local dur = TacRP.ConVars["shield_riot_hp"]:GetInt()
+    if dur > 0 then
+        self.HUDAmmoMeter = true
+        self.ClipSize = dur
+        self.Primary.ClipSize = dur
+        self:SetClip1(dur)
+    end
+
+    return BaseClass.Initialize(self)
+end
+
 function SWEP:PrimaryAttack()
+    if !self.CanMeleeAttack then return end
     self.Primary.Automatic = true
     self:Melee()
 end
@@ -143,6 +166,14 @@ function SWEP:SetBaseSettings()
     if SERVER then
         self:SetupShields()
     end
+end
+
+function SWEP:OnDrop()
+    if SERVER then
+        self:KillShields()
+    end
+
+    return BaseClass.OnDrop(self)
 end
 
 function SWEP:Holster(wep)
@@ -200,7 +231,7 @@ function SWEP:SetupShields()
             continue
         end
 
-        shield.mmRHAe = k.Resistance
+        shield.mmRHAe = TacRP.ConVars[k.Resistance]:GetFloat()
         // shield.Impenetrable = true
 
         shield:SetModel( k.Model )
@@ -212,7 +243,7 @@ function SWEP:SetupShields()
         -- shield:SetModelScale(1.1, 0.00001)
         shield.Weapon = self
         shield.TacRPShield = true
-        if GetConVar("developer"):GetBool() then
+        if TacRP.Developer(2) then
             shield:SetColor( Color(0, 0, 0, 255) )
             shield:SetMaterial("models/wireframe")
         else
@@ -295,20 +326,49 @@ end
 function SWEP:ThinkSprint()
 end
 
+function SWEP:Think()
+
+    if SERVER and self.ClipSize > 0 and self:Clip1() <= 0 then
+        self:Remove()
+        return
+    end
+
+    return BaseClass.Think(self)
+end
+
 hook.Add("EntityTakeDamage", "TacRP_RiotShield", function(ent, dmginfo)
     if !IsValid(dmginfo:GetAttacker()) or !ent:IsPlayer() then return end
     local wep = ent:GetActiveWeapon()
 
     if !IsValid(wep) or wep:GetClass() != "tacrp_riot_shield" then return end
-    if (dmginfo:GetAttacker():GetPos() - ent:EyePos()):GetNormalized():Dot(ent:EyeAngles():Forward()) < 0.5
-    and ((dmginfo:GetDamagePosition() - ent:EyePos()):GetNormalized():Dot(ent:EyeAngles():Forward()) < 0.5) then return end
-    if dmginfo:IsExplosionDamage() or dmginfo:GetInflictor():GetClass() == "entityflame" then return end
 
-    if dmginfo:IsDamageType(DMG_GENERIC) or dmginfo:IsDamageType(DMG_CLUB) or dmginfo:IsDamageType(DMG_CRUSH) or dmginfo:IsDamageType(DMG_SLASH) or dmginfo:GetDamageType() == 0 then
+    local dir = (dmginfo:GetDamagePosition() - ent:GetPos()):GetNormalized()
+
+    if (dir:Dot(ent:EyeAngles():Forward()) < 0.25) then return end
+    if dmginfo:IsExplosionDamage() or (IsValid(dmginfo:GetInflictor()) and dmginfo:GetInflictor():GetClass() == "entityflame") then return end
+
+    if !wep:StillWaiting() and (dmginfo:IsDamageType(DMG_CLUB) or dmginfo:IsDamageType(DMG_CRUSH) or dmginfo:IsDamageType(DMG_SLASH) or dmginfo:GetDamageType() == DMG_GENERIC) then
+        if TacRP.ConVars["shield_knockback"]:GetBool() then
+            wep:GetOwner():ViewPunch(AngleRand(-1, 1) * math.Clamp(dmginfo:GetDamage() ^ 0.5, 1, 15))
+            wep:GetOwner():SetVelocity(dir * -200 * math.Clamp(dmginfo:GetDamage() ^ 0.25, 1, 4))
+        end
+
+        if wep.ClipSize > 0 then
+            wep:SetClip1(math.max(wep:Clip1() - dmginfo:GetDamage(), 0))
+        end
+
         return true
     end
 
     dmginfo:ScaleDamage(0.5)
+end)
+
+hook.Add("PostEntityTakeDamage", "TacRP_RiotShield", function(ent, dmginfo)
+    if !ent.TacRPShield or !IsValid(ent.Weapon) then return end
+    local wep = ent.Weapon
+    if wep.ClipSize > 0 then
+        wep:SetClip1(math.max(0, wep:Clip1() - dmginfo:GetDamage()))
+    end
 end)
 
 SWEP.AutoSpawnable = false

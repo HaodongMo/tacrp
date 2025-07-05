@@ -20,6 +20,8 @@ ENT.ExplodeUnderwater = false
 ENT.Defusable = true
 ENT.DefuseOnDamage = true
 
+ENT.ImpactDamage = 0
+
 ENT.Delay = 0.5
 
 ENT.PickupAmmo = "ti_c4"
@@ -31,19 +33,34 @@ ENT.ExplodeSounds = {
 function ENT:Detonate()
     local attacker = self.Attacker or self:GetOwner() or self
 
-    local ttt = TacRP.GetBalanceMode() == TacRP.BALANCE_TTT
-    local dmg = (ttt and 200 or 400) * TacRP.ConVars["mult_damage_explosive"]:GetFloat()
+    local dmg = TacRP.ConVars["c4_damage"]:GetFloat()
+    local rad = TacRP.ConVars["c4_radius"]:GetFloat()
+    local p = self:GetPos() + self:GetForward() * 8
 
-    util.BlastDamage(self, attacker, self:GetPos(), 256, dmg)
-    util.BlastDamage(self, attacker, self:GetPos(), 512, dmg * 0.5)
+    util.BlastDamage(self, attacker, p, rad / 2, dmg)
+    util.BlastDamage(self, attacker, p, rad, dmg)
 
     local fx = EffectData()
-    fx:SetOrigin(self:GetPos())
+    fx:SetOrigin(p)
 
     if self:WaterLevel() > 0 then
         util.Effect("WaterSurfaceExplosion", fx)
     else
         util.Effect("Explosion", fx)
+
+        if rad >= 400 then
+            local count = 8
+            for i = 1, count do
+                local tr = util.TraceLine({
+                    start = p,
+                    endpos = p + Angle(0, i / count * 360, 0):Forward() * (rad - 200) * math.Rand(0.9, 1.1),
+                    mask = MASK_SHOT,
+                    filter = self,
+                })
+                fx:SetOrigin(tr.HitPos)
+                util.Effect("HelicopterMegaBomb", fx)
+            end
+        end
     end
 
     self:EmitSound(table.Random(self.ExplodeSounds), 125)

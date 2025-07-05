@@ -97,7 +97,7 @@ ATT.Category = "melee_boost"
 
 ATT.SortOrder = 11
 
-ATT.Add_DamageCharge = 0.01
+ATT.Add_DamageCharge = 0.003
 ATT.Add_MeleePerkInt = -0.08
 
 TacRP.LoadAtt(ATT, "melee_boost_momentum")

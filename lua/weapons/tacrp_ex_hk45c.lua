@@ -12,6 +12,7 @@ SWEP.SubCatTier = "1Elite"
 SWEP.SubCatType = "1Pistol"
 
 SWEP.Description = "Modern high-caliber pistol with great firepower in a handy package."
+SWEP.Description_Quote = "Famously used by a duo of undercover officers." -- 2 Guns (2013)
 
 SWEP.Trivia_Caliber = ".45 ACP"
 SWEP.Trivia_Manufacturer = "Heckler & Koch"

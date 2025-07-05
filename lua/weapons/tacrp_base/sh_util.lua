@@ -5,7 +5,7 @@ function SWEP:SanityCheck()
 end
 
 function SWEP:GetVM()
-    if !IsValid(self:GetOwner()) or self:GetOwner():IsNPC() then return end
+    if !IsValid(self:GetOwner()) or !self:GetOwner():IsPlayer() then return end
     return self:GetOwner():GetViewModel()
 end
 

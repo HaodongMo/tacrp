@@ -12,7 +12,7 @@ SWEP.SubCatTier = "4Consumer"
 SWEP.SubCatType = "5Sporter"
 
 SWEP.Description = "Semi-automatic model of a legendary submachine gun.\nUses reduced capacity magazines."
-SWEP.Description_Quote = nil
+SWEP.Description_Quote = "Frequently seen standing in for its military counterpart."
 
 SWEP.Trivia_Caliber = "9x19mm"
 SWEP.Trivia_Manufacturer = "Heckler & Koch"
@@ -84,8 +84,8 @@ SWEP.TTTReplace = {}
 SWEP.Firemode = 1
 SWEP.Firemodes = false
 
-SWEP.RPM = 550
-SWEP.RPMMultSemi = 400/550
+SWEP.RPM = 650
+SWEP.RPMMultSemi = 550 / 650
 
 SWEP.RecoilKick = 2
 

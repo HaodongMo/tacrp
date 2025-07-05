@@ -8,10 +8,12 @@ SWEP.PrintName = "FIM-92 Stinger"
 SWEP.AbbrevName = "Stinger"
 SWEP.Category = "Tactical RP (Special)"
 
+SWEP.NoAimAssist = true
+
 SWEP.SubCatTier = "9Special"
 SWEP.SubCatType = "6Launcher"
 
-SWEP.Description = "Guided lock-on missile launcher. Requires a lock-on in order to fire. A hit is not guaranteed."
+SWEP.Description = "Homing anti-air missile launcher. High blast damage but limited effect on armored targets.\nRequires a lock-on in order to fire."
 SWEP.Description_Quote = "\"A cornered fox is more dangerous than a jackal!\""
 
 SWEP.Trivia_Caliber = "Infrared Homing Missile"
@@ -77,7 +79,8 @@ SWEP.CannotHipFire = true
 
 // lockon
 
-SWEP.LockOnAngle = math.cos(math.rad(5))
+// SWEP.LockOnAngle = math.cos(math.rad(5))
+SWEP.LockOnTrackAngle = 5
 SWEP.LockOnRange = 40000
 
 SWEP.LockOnTime = 1
@@ -179,7 +182,7 @@ SWEP.QCA_Muzzle = 1
 // ditto for shell
 SWEP.QCA_Eject = 2
 
-SWEP.MuzzleEffect = "muzzleflash_1"
+SWEP.MuzzleEffect = "muzzleflash_deagle"
 
 // anims
 

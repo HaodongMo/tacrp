@@ -1,6 +1,6 @@
 AddCSLuaFile()
 
-ENT.Base                     = "tacrp_proj_base"
+ENT.Base                     = "tacrp_proj_stinger"
 ENT.PrintName                = "FIM-92 Missile (SAAM)"
 ENT.Spawnable                = false
 
@@ -15,18 +15,22 @@ ENT.ImpactFuse = true // projectile explodes on impact.
 ENT.ExplodeOnDamage = true
 ENT.ExplodeUnderwater = true
 
-ENT.Delay = 15
-ENT.SafetyFuse = 0.15
+ENT.GunshipWorkaround = false
 
-ENT.LockOnEntity = NULL
-ENT.SteerSpeed = 600
-ENT.SeekerAngle = math.cos(65)
+ENT.SafetyFuse = 0.1
+ENT.ImpactDamage = 150
+
+ENT.SteerSpeed = 60
+ENT.SeekerAngle = 55
+
 ENT.LeadTarget = true
-ENT.SuperSteerTime = 1.5
-ENT.SuperSteerSpeed = 1200
-ENT.BoostSpeed = 3500
-ENT.SoftLaunchTime = 0.5
-ENT.NoReacquire = false
+ENT.SuperSteerTime = 1
+ENT.SuperSteerSpeed = 150
+
+ENT.MaxSpeed = 4500
+ENT.Acceleration = 2000
+
+ENT.SteerDelay = 0.5
 ENT.FlareRedirectChance = 0.05
 
 ENT.AudioLoop = "TacRP/weapons/rpg7/rocket_flight-1.wav"
@@ -37,61 +41,7 @@ ENT.FlareColor = Color(255, 255, 255)
 
 DEFINE_BASECLASS(ENT.Base)
 
-function ENT:Think()
-    if IsValid(self.LockOnEntity) and self.SoftLaunchTime + self.SpawnTime <= CurTime() then
-        local dist = self.LockOnEntity:WorldSpaceCenter():DistToSqr(self:GetPos())
-
-        if dist < math.pow(512, 2) then
-            self:PreDetonate()
-        end
-    end
-
-    BaseClass.Think(self)
-end
-
-function ENT:Impact(data, collider)
-    if self.SpawnTime + self.SafetyFuse > CurTime() and !self.NPCDamage then
-        local attacker = self.Attacker or self:GetOwner()
-        local ang = data.OurOldVelocity:Angle()
-        local fx = EffectData()
-        fx:SetOrigin(data.HitPos)
-        fx:SetNormal(-ang:Forward())
-        fx:SetAngles(-ang)
-        util.Effect("ManhackSparks", fx)
-
-        if IsValid(data.HitEntity) then
-            local dmginfo = DamageInfo()
-            dmginfo:SetAttacker(attacker)
-            dmginfo:SetInflictor(self)
-            dmginfo:SetDamageType(DMG_CRUSH + DMG_CLUB)
-            dmginfo:SetDamage(100 * (self.NPCDamage and 0.5 or 1))
-            dmginfo:SetDamageForce(data.OurOldVelocity * 25)
-            dmginfo:SetDamagePosition(data.HitPos)
-            data.HitEntity:TakeDamageInfo(dmginfo)
-        end
-
-        self:EmitSound("weapons/rpg/shotdown.wav", 80)
-
-        for i = 1, 4 do
-            local prop = ents.Create("prop_physics")
-            prop:SetPos(self:GetPos())
-            prop:SetAngles(self:GetAngles())
-            prop:SetModel("models/weapons/tacint/rpg7_shrapnel_p" .. i .. ".mdl")
-            prop:Spawn()
-            prop:GetPhysicsObject():SetVelocityInstantaneous(data.OurNewVelocity * 0.5 + VectorRand() * 75)
-            prop:SetCollisionGroup(COLLISION_GROUP_DEBRIS)
-
-            SafeRemoveEntityDelayed(prop, 3)
-        end
-
-        self:Remove()
-        return true
-    else
-        self:PreDetonate()
-    end
-end
-
-function ENT:Detonate()
+function ENT:Detonate(ent)
     local attacker = self.Attacker or self:GetOwner()
     local dir = self:GetForward()
     local src = self:GetPos() - dir * 64
@@ -99,12 +49,13 @@ function ENT:Detonate()
     local mult = TacRP.ConVars["mult_damage_explosive"]:GetFloat()
     local dmg = DamageInfo()
     dmg:SetAttacker(attacker)
-    dmg:SetDamageType(DMG_AIRBOAT + DMG_SNIPER + DMG_BLAST)
+    dmg:SetDamageType(DMG_BLAST + DMG_AIRBOAT)
     dmg:SetInflictor(self)
-    dmg:SetDamageForce(self:GetVelocity() * 100)
+    dmg:SetDamageForce(self:GetVelocity())
     dmg:SetDamagePosition(src)
-    dmg:SetDamage(1400 * mult)
-    util.BlastDamageInfo(dmg, self:GetPos(), 512)
+    dmg:SetDamage(150 * mult)
+    util.BlastDamageInfo(dmg, self:GetPos(), 256)
+    self:ImpactTraceAttack(ent, 700 * mult, 100)
 
     local fx = EffectData()
     fx:SetOrigin(self:GetPos())
@@ -121,12 +72,10 @@ function ENT:Detonate()
 end
 
 function ENT:OnThink()
-    self.LockOnEntity = nil
-
-    if !IsValid(self:GetOwner()) then return end
-    local wpn = self:GetOwner():GetActiveWeapon()
-    if !IsValid(wpn) then return end
-    if !wpn.ArcticTacRP then return end
-
-    self:SwitchTarget(wpn:GetLockOnEntity())
+    if IsValid(self:GetOwner()) and IsValid(self:GetOwner():GetActiveWeapon())
+            and self:GetOwner():GetActiveWeapon().ArcticTacRP then
+        self.LockOnEntity = self:GetOwner():GetActiveWeapon():GetLockOnEntity()
+    else
+        self:SwitchTarget(nil)
+    end
 end

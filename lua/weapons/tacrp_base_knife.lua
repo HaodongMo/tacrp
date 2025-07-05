@@ -7,6 +7,8 @@ AddCSLuaFile()
 SWEP.PrintName = "Base Knife"
 SWEP.Category = "Tactical RP (Special)"
 
+SWEP.NoAimAssist = true
+
 SWEP.SubCatTier = "9Special"
 SWEP.SubCatType = "8Melee Weapon"
 
@@ -91,6 +93,8 @@ SWEP.SprintMidPoint = {
     Pos = Vector(2, 0, -5),
     Ang = Angle(0, 0, 0)
 }
+
+SWEP.Sound_Lunge = "npc/fast_zombie/leap1.wav"
 
 SWEP.HolsterVisible = false
 SWEP.HolsterSlot = TacRP.HOLSTER_SLOT_GEAR

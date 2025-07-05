@@ -123,9 +123,12 @@ SWEP.RecoilMaximum = 10
 SWEP.RecoilResetTime = 0 // time after you stop shooting for recoil to start dissipating
 SWEP.RecoilDissipationRate = 2
 SWEP.RecoilFirstShotMult = 1 // multiplier for the first shot's recoil amount
-SWEP.RecoilCrouchMult = 0.75 // multiplier for when crouched
 SWEP.RecoilSpreadPenalty = 0.001 // extra spread per one unit of recoil
 SWEP.RecoilResetInstant = true // Set false to account for RPM.
+
+SWEP.RecoilMultBurst = 0.9 // Affects both "bloom" and recoil kick while current firemode is burst
+SWEP.RecoilMultSemi = 0.9 // Affects both "bloom" and recoil kick while current firemode is semi
+SWEP.RecoilMultCrouch = 0.85 // Affects both "bloom" and recoil kick while crouched
 
 // Controls alternate bloom behavior, defaults to convar
 SWEP.AlwaysAltRecoil = nil
@@ -147,7 +150,9 @@ SWEP.CannotHipFire = false
 
 // lockon
 
-SWEP.LockOnAngle = math.cos(math.rad(5))
+// We're using a new system for lockon now, which doesn't use this system.
+// SWEP.LockOnAngle = math.cos(math.rad(5))
+SWEP.LockOnTrackAngle = 5
 SWEP.LockOnRange = 3500
 
 SWEP.LockOnTime = 1.5
@@ -307,6 +312,9 @@ SWEP.ShotgunReload = false
 SWEP.ShotgunThreeload = true // use those stupid 3 shot reload animations
 SWEP.ShotgunReloadCompleteStart = false // do not interrupt reload_start and instead wait for it to finish first. used on FP6 animations
 SWEP.ShotgunFullCancel = false // Ignore tacrp_reload_sg_cancel and force cancel animation
+SWEP.ShotgunNoReverseStart = true // don't reverse starting animation on a non-empty reload
+SWEP.ShotgunUpInTime = 0.9 // time after which one round is finished loading
+
 SWEP.ReloadUpInTime = nil // time to restore ammo, if unset restores at end of animation
 SWEP.ReloadTimeMult = 1
 SWEP.DeployTimeMult = 1
@@ -330,6 +338,7 @@ SWEP.BulletBodygroupsSetAll = false // Set all applicable bullet groups, rather 
 }
 */
 SWEP.LoadInTime = 0.25 // how long to replenish the visible "belt" of ammo
+SWEP.ShotgunLoadInTime = 0.9 // visual update delay for shotguns
 
 // sounds
 
@@ -590,7 +599,7 @@ function SWEP:SetupDataTables()
     self:NetworkVar("Bool", 6, "BlindFireLeft")
     self:NetworkVar("Bool", 7, "Tactical")
     self:NetworkVar("Bool", 8, "Charge")
-    self:NetworkVar("Bool", 9, "Peeking")
+    self:NetworkVar("Bool", 9, "NWPeeking")
     self:NetworkVar("Bool", 10, "BlindFireRight") // bleh, but actually less networking load than using an integer (32 bit)
     self:NetworkVar("Bool", 11, "Jammed")
     self:NetworkVar("Bool", 12, "Ready")
@@ -625,7 +634,7 @@ end
 
 function SWEP:OnDrop()
     self:SetReady(false)
- end
+end
 
 function SWEP:SecondaryAttack()
     self:RunHook("Hook_SecondaryAttack")

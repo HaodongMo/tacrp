@@ -12,6 +12,7 @@ SWEP.SubCatTier = "1Elite"
 SWEP.SubCatType = "5Battle Rifle"
 
 SWEP.Description = "Battle rifle with superb damage, fire rate and precision. Capable of automatic fire, although it is very unstable."
+SWEP.Description_Quote = "\"Hey, he saved our asses back there, and right now he's all we got.\"" -- Spec Ops: The Line (2012)
 
 SWEP.Trivia_Caliber = "7.62x51mm"
 SWEP.Trivia_Manufacturer = "Heckler & Koch"
@@ -242,7 +243,7 @@ SWEP.Attachments = {
         InstalledElements = {"sights"},
         AttachSound = "tacrp/weapons/optic_on.wav",
         DetachSound = "tacrp/weapons/optic_off.wav",
-        VMScale = 0.75,
+        VMScale = 0.85,
         Pos_VM = Vector(-4.7, 0.6, 5),
         Pos_WM = Vector(10, 1.25, -6.25),
         Ang_VM = Angle(90, 0, 0),

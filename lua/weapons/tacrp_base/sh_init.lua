@@ -40,6 +40,7 @@ function SWEP:Deploy()
     self:SetLastMeleeTime(0)
     self:SetRecoilAmount(0)
     self:SetLastScopeTime(0)
+    self:SetHolsterTime(0)
     self:SetPrimedGrenade(false)
     self:SetBlindFireFinishTime(0)
     -- self:SetJammed(false)
@@ -49,6 +50,14 @@ function SWEP:Deploy()
     self:SetScopeLevel(0)
     self:SetLoadedRounds(self:Clip1())
     self:SetCustomize(false)
+
+    if self:GetOwner():IsPlayer() and IsFirstTimePredicted() then
+        self.InversePeek = self:GetOwner():GetInfoNum("tacrp_inversepeek", 0) == 1
+        if !self.InversePeekInitialized then
+            self:SetPeeking(false)
+        end
+        self.InversePeekInitialized = true
+    end
 
     self.PreviousZoom = self:GetOwner():GetCanZoom()
     if IsValid(self:GetOwner()) and self:GetOwner():IsPlayer() then
@@ -81,15 +90,17 @@ function SWEP:Deploy()
 
     self:SetShouldHoldType()
 
-    if self:GetValue("PrimaryGrenade") then
-        local nade = TacRP.QuickNades[self:GetValue("PrimaryGrenade")]
-        if !TacRP.IsGrenadeInfiniteAmmo(nade) and self:GetOwner():GetAmmoCount(nade.Ammo) == 0 then
-            if SERVER then self:Remove() end
-            return true
+    if self:IsQuickNadeAllowed() then
+        if self:GetValue("PrimaryGrenade") then
+            local nade = TacRP.QuickNades[self:GetValue("PrimaryGrenade")]
+            if !TacRP.IsGrenadeInfiniteAmmo(nade) and self:GetOwner():GetAmmoCount(nade.Ammo) == 0 then
+                if SERVER then self:Remove() end
+                return true
+            end
+        elseif !self:CheckGrenade() then
+            self:SelectGrenade()
+            return
         end
-    elseif !self:CheckGrenade() then
-        self:SelectGrenade()
-        return
     end
 
     return true
@@ -293,7 +304,7 @@ function SWEP:SetBaseSettings()
         self.Primary.DefaultClip = math.ceil(self.Primary.ClipSize * TacRP.ConVars["defaultammo"]:GetFloat())
     end
 
-    if self:GetValue("CanQuickNade") then
+    if self:IsQuickNadeAllowed() then
         self.Secondary.Ammo = self:GetGrenade().Ammo or "grenade"
     else
         self.Secondary.Ammo = "none"
@@ -306,7 +317,7 @@ function SWEP:SetBaseSettings()
 end
 
 function SWEP:SetShouldHoldType()
-    if self:GetOwner():IsNPC() then
+    if self:GetOwner():IsNPC() and !self:GetOwner():IsNextBot() then
         self:SetHoldType(self:GetValue("HoldTypeNPC") or self:GetValue("HoldType"))
         return
     end

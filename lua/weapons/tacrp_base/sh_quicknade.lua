@@ -1,21 +1,23 @@
 SWEP.GrenadeDownKey = IN_GRENADE1
 SWEP.GrenadeMenuKey = IN_GRENADE2
 
+function SWEP:IsQuickNadeAllowed()
+    return TacRP.ConVars["quicknade"]:GetBool() and self:GetValue("CanQuickNade")
+end
+
 function SWEP:PrimeGrenade()
     self.Primary.Automatic = true
 
-    if !self:GetValue("CanQuickNade") and !self:GetValue("PrimaryGrenade") then return end
+    if !self:IsQuickNadeAllowed() and !self:GetValue("PrimaryGrenade") then return end
     if self:StillWaiting(nil, true) then return end
     if self:GetPrimedGrenade() then return end
 
-    if engine.ActiveGamemode() == "terrortown" then
-        if GetRoundState() == ROUND_PREP and
-        ((TTT2 and !GetConVar("ttt_nade_throw_during_prep"):GetBool()) or (!TTT2 and GetConVar("ttt_no_nade_throw_during_prep"):GetBool())) then
-            return
-        end
-        if !self:GetValue("PrimaryGrenade") and !self:CheckGrenade(nil, true) then
-            self:SelectGrenade(nil, true)
-        end
+    if engine.ActiveGamemode() == "terrortown" and GetRoundState() == ROUND_PREP and ((TTT2 and !GetConVar("ttt_nade_throw_during_prep"):GetBool()) or (!TTT2 and GetConVar("ttt_no_nade_throw_during_prep"):GetBool())) then
+        return
+    end
+
+    if !self:GetValue("PrimaryGrenade") and !self:CheckGrenade(nil, true) then
+        self:SelectGrenade(nil, true)
     end
 
     -- if self:SprintLock() then return end
@@ -50,7 +52,7 @@ function SWEP:PrimeGrenade()
     self:SetAnimLockTime(ct + (t * 0.75))
     self:SetNextPrimaryFire(ct + (t * 1.1))
 
-    self:GetOwner():DoAnimationEvent(ACT_GMOD_GESTURE_ITEM_THROW)
+    self:GetOwner():DoCustomAnimEvent(PLAYERANIMEVENT_ATTACK_SECONDARY, t * 1000)
 
     if !nade.NoSounds then
         self:EmitSound(nade.PullSound or ("TacRP/weapons/grenade/pullpin-" .. math.random(1, 2) .. ".wav"), 65)
@@ -142,7 +144,7 @@ function SWEP:ThrowGrenade()
                 phys:AddAngleVelocity(VectorRand() * 1000)
             end
 
-            if nade.Spoon then
+            if nade.Spoon and TacRP.ConVars["dropmagazinemodel"]:GetBool() then
                 local mag = ents.Create("TacRP_droppedmag")
 
                 if mag then
@@ -224,7 +226,7 @@ function SWEP:GetNextGrenade(ind)
 end
 
 function SWEP:SelectGrenade(index, requireammo)
-    if !self:GetValue("CanQuickNade") then return end
+    if !self:IsQuickNadeAllowed() then return end
     if !IsFirstTimePredicted() then return end
     if self:GetPrimedGrenade() then return end
 
@@ -232,7 +234,7 @@ function SWEP:SelectGrenade(index, requireammo)
 
     if index then
         ind = index
-    else
+    elseif !requireammo then
         if self:GetOwner():KeyDown(IN_WALK) then
             ind = ind - 1
         else
@@ -292,7 +294,7 @@ SWEP.QuickNadeModel = nil
 end
 
 function SWEP:ThinkGrenade()
-    if !self:GetValue("CanQuickNade") then return end
+    if !self:IsQuickNadeAllowed() then return end
 
     if CLIENT then
         if self:GetPrimedGrenade() and !IsValid(self.QuickNadeModel) and self:GetStartPrimedGrenadeTime() + 0.2 < CurTime() and self:GetGrenade().Model then

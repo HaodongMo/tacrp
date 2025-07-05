@@ -1,51 +1,35 @@
-L = {}
+L = {} -- Base English
 
 L["font.1"] = "Myriad Pro"
 L["font.2"] = "HD44780A00 5x8"
 
---[[
-To localize an attachment (replace optic_acog with your attachment class):
-L["att.optic_acog.name"] = "Attachment Name"
-L["att.optic_acog.name.full"] = "Attachment Full Name"
-L["att.optic_acog.desc"] = "Attachment Description"
+L["tier.0"] = "5Value" -- like Walmart
+L["tier.1"] = "4Consumer"
+L["tier.2"] = "3Security"
+L["tier.3"] = "2Operator"
+L["tier.4"] = "1Elite"
+L["tier.5"] = "0Exotic"
 
-To localize a weapon (replace tacrp_vertec with your weapon class):
-L["wep.tacrp_vertec.name"] = "Weapon Name"
-L["wep.tacrp_vertec.name.full"] = "Weapon Full Name"
-L["wep.tacrp_vertec.desc"] = "Weapon Description"
-L["wep.tacrp_vertec.desc.quote"] = "Weapon Quote" -- this is the italics line at the bottom
-L["wep.tacrp_vertec.trivia.manufacturer"] = "Trivia Manufacturer"
-L["wep.tacrp_vertec.trivia.year"] = "Trivia Caliber"
-L["wep.tacrp_vertec.trivia.caliber"] = "Trivia Year"
-]]
-
-L["tier.1"] = "Consumer"
-L["tier.2"] = "Security"
-L["tier.3"] = "Operator"
-L["tier.4"] = "Elite"
-L["tier.0"] = "Value" -- like Walmart
-
-L["tier.spec"] = "Special"
-L["type.sidearm"] = "Pistol" -- non-magnum pistols or pistol-form factor weapons
-L["type.magnum_pistol"] = "Magnum Pistol" -- magnum-caliber pistols
-L["type.machine_pistol"] = "Machine Pistol" -- pistol-caliber automatic weapons small enough to be pistols
-L["type.dual_pistol"] = "Akimbos" -- 2 gunz
-L["type.submachine_gun"] = "Submachine Gun" -- pistol-caliber automatic weapons
-L["type.assault_rifle"] = "Assault Rifle" -- intermediate-caliber automatic weapons
-L["type.machine_gun"] = "Machine Gun" -- big mag
-L["type.shotgun"] = "Shotgun" -- sotgun
-L["type.sporter_carbine"] = "Sporter" -- civilian weapons and civ variants
-L["type.battle_rifle"] = "Battle Rifle" -- large-caliber automatic weapons
-L["type.dmr"] = "Marksman Rifle" -- precision-oritented rifles for intermediate ranges
-L["type.sniper_rifle"] = "Sniper Rifle" -- precision rifles strictly for long range
--- the difference between marksman and sniper can get a little arbitrary sorry
---L["type.amr"] = "Anti-Materiel Rifle" -- 50 cal or thereabouts
-L["type.melee_sharp"] = "Bladed Melee Weapon" -- sharp
-L["type.melee_blunt"] = "Blunt Melee Weapon" -- not sharp
-L["type.equipment"] = "Equipment" -- not a gun, or really a weapon
-L["type.throwable"] = "Throwable" -- baseball
-L["type.launcher"] = "Launcher" -- shoots splodey thing
-L["type.special_weapon"] = "Special Weapon" -- weapons so unique they dont really fit in any other category (also good for containing weapons you dont want to show up in the regular mix)
+L["tier.spec"] = "9Special"
+L["type.sidearm"] = "1Pistol" -- non-magnum pistols or pistol-form factor weapons
+L["type.magnum_pistol"] = "2Magnum Pistol" -- magnum-caliber pistols
+L["type.machine_pistol"] = "3Machine Pistol" -- pistol-caliber automatic weapons small enough to be pistols
+L["type.dual_pistol"] = "3Akimbos" -- 2 gunz
+L["type.submachine_gun"] = "3Submachine Gun" -- pistol-caliber automatic weapons
+L["type.assault_rifle"] = "4Assault Rifle" -- intermediate-caliber automatic weapons
+L["type.machine_gun"] = "5Machine Gun" -- big mag
+L["type.shotgun"] = "5Shotgun" -- sotgun
+L["type.sporter_carbine"] = "5Sporter" -- civilian weapons and civ variants
+L["type.battle_rifle"] = "5Battle Rifle" -- large-caliber automatic weapons
+L["type.dmr"] = "6Marksman Rifle" -- precision-oritented rifles for intermediate ranges
+L["type.sniper_rifle"] = "7Sniper Rifle" -- precision rifles strictly for long range; the difference between marksman and sniper can get a little arbitrary sorry
+L["type.amr"] = "9Anti-Materiel Rifle" -- 50 cal or thereabouts
+L["type.melee_sharp"] = "8Bladed Melee Weapon" -- sharp
+L["type.melee_blunt"] = "8Blunt Melee Weapon" -- not sharp
+L["type.equipment"] = "9Equipment" -- not a gun, or really a weapon
+L["type.throwable"] = "9Throwable" -- baseball
+L["type.launcher"] = "6Launcher" -- shoots splodey thing
+L["type.special_weapon"] = "7Special Weapon" -- weapons so unique they dont really fit in any other category (also good for containing weapons you dont want to show up in the regular mix)
 
 L["cust.rating"] = "Rating"
 L["cust.stats"] = "Stats"
@@ -77,6 +61,7 @@ L["slot.ammo"] = "Ammo"
 L["slot.perk"] = "Perk"
 L["slot.melee_tech"] = "Technique"
 L["slot.melee_spec"] = "Special"
+L["slot.melee_boost"] = "Boost"
 
 L["ammo.ti_flashbang"] = "Flashbangs"
 L["ammo.ti_thermite"] = "Thermite Grenades"
@@ -97,7 +82,6 @@ L["ammo.ti_sniper"] = "Sniper Ammo"
 L["ammo.357"] = "Magnum Ammo"
 L["ammo.smg1"] = "Carbine Ammo"
 L["ammo.ar2"] = "Rifle Ammo"
-
 
 L["rating.score"] = "(Score: {score}/{max})"
 L["rating.lethality"] = "Lethality"
@@ -208,6 +192,10 @@ L["stat.freeaimangle"] = "Free Aim Angle"
 L["stat.freeaimangle.desc"] = "Maximum amount of deviation from the aim direction while hipfiring."
 L["stat.shotstofail"] = "Mean Shots To Fail"
 L["stat.shotstofail.desc"] = "The average number of shots that will be fired before the weapon jams."
+L["stat.recoilburst"] = "Recoil (in Burst)"
+L["stat.recoilburst.desc"] = "Recoil multiplier in burst fire mode."
+L["stat.recoilsemi"] = "Recoil (in Semi)"
+L["stat.recoilsemi.desc"] = "Recoil multiplier in semi-automatic fire mode."
 
 L["stat.meleeperkstr"] = "Brawn"
 L["stat.meleeperkstr.desc"] = "Melee attribute influencing Techniques and Specials.\nAffects perk damage and knockback."
@@ -219,22 +207,20 @@ L["stat.meleeperkint.desc"] = "Melee attribute influencing Techniques and Specia
 L["rating.meleeattacktime"] = "Haste"
 L["rating.meleeattacktime.desc"] = "How quickly the weapon can attack."
 L["stat.damage.desc_melee"] = "Damage dealt by primary attacks." -- used on melee damage
-L["stat.meleeattacktime"] = "Delay On Hit"
+L["stat.meleeattacktime"] = "Melee Attack Delay"
 L["stat.meleeattacktime.desc"] = "Amount of time between each attack if it hit something."
-L["stat.meleeattackmisstime"] = "Delay On Miss"
+L["stat.meleeattackmisstime"] = "Melee Miss Delay"
 L["stat.meleeattackmisstime.desc"] = "Amount of time between each attack if it didn't hit anything."
-L["stat.meleerange"] = "Attack Range"
+L["stat.meleerange"] = "Melee Range"
 L["stat.meleerange.desc"] = "How far away the weapon can reach for an attack."
-L["stat.meleedelay"] = "Windup"
+L["stat.meleedelay"] = "Melee Windup"
 L["stat.meleedelay.desc"] = "Delay between an attack starting and landing."
 
-
-
-L["stat.melee2damage"] = "Damage (Heavy)"
+L["stat.melee2damage"] = "Damage (H)"
 L["stat.melee2damage.desc"] = "Damage dealt by heavy attacks."
-L["stat.melee2attacktime"] = "Delay On Hit (Heavy)"
+L["stat.melee2attacktime"] = "Melee Attack Delay (H)"
 L["stat.melee2attacktime.desc"] = "Amount of time between each heavy attack if it hit something."
-L["stat.melee2attackmisstime"] = "Delay On Miss (Heavy)"
+L["stat.melee2attackmisstime"] = "Melee Miss Delay (H)"
 L["stat.melee2attackmisstime.desc"] = "Amount of time between each heavy attack if it didn't hit anything."
 L["stat.meleethrowdamage"] = "Damage (Throw)"
 L["stat.meleethrowdamage.desc"] = "Damage dealt by thrown weapons."
@@ -246,7 +232,6 @@ L["stat.lifesteal"] = "Health From Damage"
 L["stat.lifesteal.desc"] = "Fraction of damage dealt that is converted into health."
 L["stat.damagecharge"] = "Charge From Damage"
 L["stat.damagecharge.desc"] = "Fraction of damage dealt that is converted into perk charge."
-
 
 L["stat.damage"] = "Damage"
 L["stat.damage.desc"] = "Damage per bullet at all ranges."
@@ -285,24 +270,11 @@ L["stat.blindfiresway"] = "Blindfire Sway"
 L["stat.zoom"] = "Aim Zoom"
 L["stat.bloomintensity"] = "Bloom Intensity"
 
-
-L["att.acc_extmag.name"] = "Mag Extender"
-L["att.acc_extmag.name.full"] = "Extended Magazine"
-L["att.acc_extmag.desc"] = "Slightly increase weapon capacity."
-L["att.ammo_shotgun_slugs.name"] = "Slugs"
-L["att.ammo_shotgun_slugs.name.full"] = "Slug Shells"
-L["att.ammo_shotgun_slugs.desc"] = "Fire a single projectile for medium range shooting."
-L["att.ammo_shotgun_triple.name"] = "Triple Hit"
-L["att.ammo_shotgun_triple.name.full"] = "Triple Hit Shells"
-L["att.ammo_shotgun_triple.desc"] = "Fire three projectiles for more accuracy."
-L["att.muzz_pistol_comp.name"] = "Compensator"
-L["att.muzz_pistol_comp.desc"] = "Muzzle device which reduces recoil impact."
-L["att.bolt_refurbished.name"] = "Refurbished"
-L["att.bolt_refurbished.name.full"] = "Refurbished Bolt"
-L["att.bolt_refurbished.desc"] = "Fix the gun's reliability problems with some armory tweaks."
+L["att.none"] = "N/A"
 
 L["att.procon.3proj"] = "Three projectiles"
 L["att.procon.moreproj"] = "More projectiles"
+L["att.procon.lessproj"] = "Fewer projectiles"
 L["att.procon.1proj"] = "One projectile"
 L["att.procon.noexp"] = "No explosion"
 L["att.procon.direct"] = "Direct fire"
@@ -369,17 +341,22 @@ L["att.procon.aimrpm"] = "Fire Rate (while aiming)"
 L["att.procon.firstround"] = "First shot is a single less-lethal projectile"
 L["att.procon.locktime"] = "Lock-on time"
 L["att.procon.semiactive"] = "Constant guidance required"
-L["att.procon.maneuverability"] = "Missile Maneuverability"
+L["att.procon.proj.turn"] = "Projectile Maneuverability"
+L["att.procon.proj.speed"] = "Projectile Top Speed"
+L["att.procon.proj.direct"] = "Impact Damage"
 L["att.procon.shovel"] = "Shoots shovels"
 L["att.procon.heal"] = "Healing effect"
+L["att.procon.infiniteammo"] = "Infinite Ammo"
 
 L["att.sight.1"] = "1x Sight"
 L["att.sight.1.25"] = "1.25x Sight"
 L["att.sight.1.5"] = "1.5x Sight"
 L["att.sight.1.75"] = "1.75x Sight"
 L["att.zoom.2"] = "2x Zoom"
+L["att.zoom.2.2"] = "2.2x Zoom"
 L["att.zoom.3"] = "3x Zoom"
 L["att.zoom.3.4"] = "3.4x Zoom"
+L["att.zoom.3.5"] = "3.5x Zoom"
 L["att.zoom.4"] = "4x Zoom"
 L["att.zoom.5"] = "5x Zoom"
 L["att.zoom.6"] = "6x Zoom"
@@ -416,19 +393,165 @@ L["faction.coalition"] = "Coalition" -- "Counter-Terrorists"
 L["faction.militia"] = "Militia" -- "Terrorists"
 L["faction.neutral"] = "Non-Aligned" -- non-faction specific
 
+L["menu.legacy"] = "Legacy Menu"
+
 L["hint.swap"] = "Swap {weapon} for {weapon2}"
 L["hint.pickup"] = "Pick up {weapon}"
 L["hint.unjam"] = "Unjam Weapon"
 L["hint.rp_biocode_cp"] = "Biocoded - Police Use Only"
 
+L["hint.melee"] = "Melee Attack"
+L["hint.melee.block"] = "Block"
+L["hint.melee.throw"] = "Melee Throw"
+L["hint.melee.light"] = "Light Attack"
+L["hint.melee.heavy"] = "Heavy Attack"
+
+L["hint.peek.hold"] = "Peek"
+L["hint.peek.toggle"] = "Toggle Peek"
+L["hint.hold_breath"] = "Hold Breath"
+L["hint.customize"] = "Customize"
+L["hint.inspect"] = "Inspect"
+L["hint.firemode"] = "Firemode"
+L["hint.safety.turn_off"] = "Disable Safety"
+L["hint.safety.turn_on"] = "Enable Safety"
+L["hint.hl2_flashlight"] = "Suit Flashlight"
+L["hint.toggle_tactical"] = "Toggle {1}"
+L["hint.blindfire"] = "Blindfire"
+L["hint.blindfire.menu"] = "Blindfire Menu"
+L["hint.blindfire.up"] = "Blindfire Up"
+L["hint.blindfire.left"] = "Blindfire Left"
+L["hint.blindfire.right"] = "Blindfire Right"
+L["hint.blindfire.cancel"] = "Cancel Blindfire"
+L["hint.blindfire.kys"] = "Commit Suicide"
+L["hint.quicknade.over"] = "Overhand Throw"
+L["hint.quicknade.under"] = "Underhand Throw"
+L["hint.quicknade.throw"] = "Quickthrow"
+L["hint.quicknade.pull_out"] = "Pull Out Grenade"
+L["hint.quicknade.menu"] = "Quickthrow Menu"
+L["hint.quicknade.next"] = "Next Grenade"
+L["hint.quicknade.prev"] = "Previous Grenade"
+L["hint.ttt.radio"] = "TTT Radio"
+L["hint.ttt.shop"] = "TTT Shop"
+L["hint.tac"] = "Tactical" -- default value
+L["hint.tac.radar"] = "Radar"
+L["hint.tac.flashlight"] = "Flashlight"
+L["hint.tac.laser"] = "Laser"
+L["hint.tac.combo"] = "Combo"
+L["hint.tac.rangefinder"] = "Ranger"
+L["hint.tac.spread_gauge"] = "Gauge"
+L["hint.tac.magnifier"] = "Magnifier"
+L["hint.tac.cam_mode"] = "Cam Mode" -- Used for both Corner-Cam and Thermal Imager
+L["hint.tac.load_one"] = "Load One Round"
+
+L["hint.melee_lunge"] = "Lunge"
+L["hint.melee_step"] = "Airdash"
+L["hint.melee_ninja.palm"] = "Palm Strike"
+L["hint.melee_ninja.backhop"] = "Backhop"
+L["hint.melee_ninja.divekick"] = "Divekick"
+
+L["hint.medkit.self"] = "Heal Self"
+L["hint.medkit.others"] = "Heal Others"
+
+L["hint.unlock"] = "Unlock"
+L["hint.exitcustmenu"] = "Exit the Customization Menu"
+
+L["hint.nogrenades"] = "No Grenades Available"
+
+L["hint.hold"] = "(Hold)"
+
+L["hint.shootself"] = "Shoot Yourself"
+
+-- For demoknight charge attachment
+L["hint.melee_charge"] = "Charge"
+L["hint.melee_charge.menu"] = "Charge Type"
+L["hint.melee_charge.0.name"] = "Bravery"
+L["hint.melee_charge.0.desc"] = "Standard mode with average turn control.\nBash into a target to deal damage and knockback. Attacking during the charge cancels it."
+L["hint.melee_charge.1.name"] = "Mastery"
+L["hint.melee_charge.1.desc"] = "Significantly increased turn control.\nLow damage resistance and bash damage.\nTaking damage shortens charge duration."
+L["hint.melee_charge.2.name"] = "Tenacity"
+L["hint.melee_charge.2.desc"] = "Increased charge speed, reduced turn control.\nVery high damage resistance and bash damage.\nGains knockback immunity during charge."
+
+-- Weapon calibers
+L["caliber.556x45"] = "5.56×45mm"
+L["caliber.762x39"] = "7.62×39mm"
+L["caliber.762x51"] = "7.62×51mm"
+L["caliber.50bmg"] = ".50 BMG"
+L["caliber.16g"] = "16 Gauge"
+L["caliber.12g"] = "12 Gauge"
+L["caliber.40mmg"] = "40mm Grenades"
+L["caliber.9x19"] = "9×19mm"
+L["caliber.57x28"] = "FN 5.7×28mm"
+L["caliber.45acp"] = ".45 ACP"
+L["caliber.380acp"] = ".380 ACP"
+L["caliber.homing"] = "Infrared Homing Missile"
+L["caliber.40sw"] = ".40 S&W"
+L["caliber.23x75"] = "23×75mmR"
+L["caliber.223r"] = ".223 Remington"
+L["caliber.46x30"] = "HK 4.6×30mm"
+L["caliber.357"] = ".357 Magnum"
+L["caliber.357sig"] = ".357 SIG"
+L["caliber.6mm"] = "6mm Whisper"
+L["caliber.40mmr"] = "40mm Rockets"
+L["caliber.32acp"] = ".32 ACP"
+L["caliber.308"] = ".308 Winchester"
+L["caliber.65mm"] = "6.5mm Creedmoor"
+
+L["caliber.44amp"] = ".44 AMP"
+L["caliber.40x46"] = "40×46mm"
+L["caliber.50ae"] = ".50 AE"
+L["caliber.792x57"] = "7.92×57mm Mauser"
+L["caliber.500sw"] = ".500 S&W Magnum"
+L["caliber.22lr"] = ".22 LR"
+L["caliber.38special"] = ".38 Special"
+L["caliber.338"] = ".338 Lapua Magnum"
+L["caliber.9x39"] = "9x39mm"
+
+L["caliber.44p"] = ".44 Percussion"
+L["caliber.300blk"] = ".300 Blackout"
+L["caliber.9x18"] = "9×18mm"
+L["caliber.4570"] = ".45-70 Govt."
+L["caliber.9x21"] = "9x21mm IMI"
+L["caliber.762x54"] = "7.62×54mmR"
+L["caliber.762x25"] = "7.62×25mm Tokarev"
+L["caliber.300winmag"] = ".300 Win Mag"
+
+L["caliber.545x39"] = "5.45×39mm"
+
+L["caliber.410b"] = ".410 Bore"
+L["caliber.408ct"] = ".408 Cheyenne Tactical"
+L["caliber.950jdj"] = ".950 JDJ"
+L["caliber.600ne"] = ".600 Nitro Express"
+L["caliber.83mmr"] = "83mm Rockets"
+L["caliber.25x40"] = "25×40mm"
+
+L["caliber.44m"] = ".44 Magnum"
+L["caliber.763x25"] = "7.63×25mm Mauser"
+L["caliber.277sig"] = ".277 SIG Fury"
+L["caliber.10auto"] = "10mm Auto"
+L["caliber.75x55"] = "7.5×55mm"
+L["caliber.44-40"] = ".44-40 WCF"
+
+L["caliber.20g"] = "20 Gauge"
+L["caliber.9wm"] = "9mm Win Mag"
+L["caliber.44s"] = ".44 Special"
+L["caliber.303b"] = ".303 British"
+L["caliber.66mmr"] = "66mm Rockets"
+L["caliber.25mmf"] = "25mm Flares"
+L["caliber.270w"] = ".270 Winchester"
+
+L["caliber.45s"] = ".45 Super"
+
+L["unknown"] = "Unknown"
+
 
 -- STL phrases are not needed for other languages. you can remove these when localizing
 STL = {}
+STL["tier.0"] = "5Value"
 STL["tier.1"] = "4Consumer"
 STL["tier.2"] = "3Security"
 STL["tier.3"] = "2Operator"
 STL["tier.4"] = "1Elite"
-STL["tier.0"] = "5Value"
+STL["tier.5"] = "0Exotic"
 
 STL["tier.spec"] = "9Special"
 STL["type.sidearm"] = "1Pistol"
@@ -460,3 +583,75 @@ STL["slot.ammo"] = "Ammo"
 STL["slot.perk"] = "Perk"
 STL["slot.melee_tech"] = "Technique"
 STL["slot.melee_spec"] = "Special"
+STL["slot.melee_boost"] = "Boost"
+
+STL["caliber.556x45"] = "5.56x45mm"
+STL["caliber.762x39"] = "7.62x39mm"
+STL["caliber.762x51"] = "7.62x51mm"
+STL["caliber.50bmg"] = ".50 BMG"
+STL["caliber.16g"] = "16 Gauge"
+STL["caliber.12g"] = "12 Gauge"
+STL["caliber.40mmg"] = "40mm Grenades"
+STL["caliber.9x19"] = "9x19mm"
+STL["caliber.57x28"] = "5.7x28mm"
+STL["caliber.45acp"] = ".45 ACP"
+STL["caliber.380acp"] = ".380 ACP"
+STL["caliber.homing"] = "Infrared Homing Missile"
+STL["caliber.40sw"] = ".40 S&W"
+STL["caliber.23x75"] = "23x75mmR"
+STL["caliber.223r"] = ".223 Remington"
+STL["caliber.46x30"] = "4.6x30mm"
+STL["caliber.357"] = ".357 Magnum"
+STL["caliber.357sig"] = ".357 SIG"
+STL["caliber.6mm"] = "6mm Whisper"
+STL["caliber.40mmr"] = "40mm Rockets"
+STL["caliber.32acp"] = ".32 ACP"
+STL["caliber.308"] = ".308 Winchester"
+STL["caliber.65mm"] = "6.5mm Creedmoor"
+
+STL["caliber.44amp"] = ".44 AMP"
+STL["caliber.40x46"] = "40x46mm"
+STL["caliber.50ae"] = ".50 AE"
+STL["caliber.792x57"] = "7.92x57mm Mauser"
+STL["caliber.500sw"] = ".500 S&W Magnum"
+STL["caliber.22lr"] = ".22 LR"
+STL["caliber.38special"] = ".38 Special"
+STL["caliber.338"] = ".338 Lapua Magnum"
+STL["caliber.9x39"] = "9x39mm"
+
+STL["caliber.44p"] = ".44 Percussion"
+STL["caliber.300blk"] = ".300 Blackout"
+STL["caliber.9x18"] = "9x18mm"
+STL["caliber.4570"] = ".45-70 Govt."
+STL["caliber.9x21"] = "9x21mm IMI"
+STL["caliber.762x54"] = "7.62x54mmR"
+STL["caliber.762x25"] = "7.62x25mm Tokarev"
+STL["caliber.300winmag"] = ".300 Win Mag"
+
+STL["caliber.545x39"] = "5.45x39mm"
+
+STL["caliber.410b"] = ".410 Bore"
+STL["caliber.408ct"] = ".408 Cheyenne Tactical"
+STL["caliber.950jdj"] = ".950 JDJ"
+STL["caliber.600ne"] = ".600 Nitro Express"
+STL["caliber.83mmr"] = "83mm Rockets"
+STL["caliber.25x40"] = "25x40mm"
+
+STL["caliber.44m"] = ".44 Magnum"
+STL["caliber.763x25"] = "7.63x25mm Mauser"
+STL["caliber.277sig"] = ".277 SIG Fury"
+STL["caliber.10auto"] = "10mm Auto"
+STL["caliber.75x55"] = "7.5x55mm"
+STL["caliber.44-40"] = ".44-40 WCF"
+
+STL["caliber.20g"] = "20 Gauge"
+STL["caliber.9wm"] = "9mm Win Mag"
+STL["caliber.44s"] = ".44 Special"
+STL["caliber.303b"] = ".303 British"
+STL["caliber.66mmr"] = "66mm Rockets"
+STL["caliber.25mmf"] = "25mm Flares"
+STL["caliber.270w"] = ".270 Winchester"
+
+STL["caliber.45s"] = ".45 Super"
+
+STL["unknown"] = "Unknown"

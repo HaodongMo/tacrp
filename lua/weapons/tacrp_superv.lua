@@ -4,7 +4,7 @@ SWEP.Spawnable = true
 AddCSLuaFile()
 
 // names and stuff
-SWEP.PrintName = "Kriss Vector"
+SWEP.PrintName = "KRISS Vector"
 SWEP.AbbrevName = "Vector"
 SWEP.Category = "Tactical RP"
 
@@ -12,6 +12,7 @@ SWEP.SubCatTier = "1Elite"
 SWEP.SubCatType = "3Submachine Gun"
 
 SWEP.Description = "Close range SMG with extremely high fire rate and practically no recoil. Low armor penetration, but can chew through it very quickly."
+SWEP.Description_Quote = "\"We go forward like a breath exhaled from the Earth.\"" -- Modern Warfare 2 (2009).
 
 SWEP.Trivia_Caliber = "9x19mm"
 SWEP.Trivia_Manufacturer = "Kriss USA, Inc."
@@ -255,6 +256,8 @@ SWEP.AttachmentElements = {
     },
 }
 
+SWEP.NoRMR = true
+
 SWEP.Attachments = {
     [1] = {
         PrintName = "Optic",
@@ -263,7 +266,7 @@ SWEP.Attachments = {
         AttachSound = "TacRP/weapons/optic_on.wav",
         DetachSound = "TacRP/weapons/optic_off.wav",
         InstalledElements = {"optic"},
-        Pos_VM = Vector(-3.9, -0.15, 5),
+        Pos_VM = Vector(-4.1, -0.15, 5),
         Pos_WM = Vector(7, 1.5, -5.5),
         Ang_VM = Angle(90, 0, 0),
         Ang_WM = Angle(0, -3.5, 180),
@@ -293,7 +296,7 @@ SWEP.Attachments = {
     },
     [4] = {
         PrintName = "Accessory",
-        Category = {"acc", "acc_foldstock", "acc_extmag_smg", "acc_duffle"},
+        Category = {"acc", "acc_foldstock", "acc_extmag_smg", "acc_sling", "acc_duffle"},
         AttachSound = "TacRP/weapons/flashlight_on.wav",
         DetachSound = "TacRP/weapons/flashlight_off.wav",
     },

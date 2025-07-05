@@ -2,7 +2,7 @@ ATT.PrintName = "Grenade"
 ATT.FullName = "Grenadier"
 ATT.Icon = Material("entities/tacrp_att_melee_tech_nade.png", "mips smooth")
 ATT.Description = "Always good to have something handy to throw."
-ATT.Pros = {"ALT-FIRE: Quickthrow", "Faster Quickthrow", "Throw Rocks"} -- "RELOAD: Toggle Grenade",
+ATT.Pros = { "att.pro.melee_tech_nade1", "att.pro.melee_tech_nade2", "att.pro.melee_tech_nade3" }
 
 ATT.Category = {"melee_tech"}
 
@@ -11,6 +11,8 @@ ATT.InvAtt = "perk_throw"
 
 ATT.ThrowRocks = true
 ATT.Mult_QuickNadeTimeMult = 0.65
+
+ATT.Free = true
 
 ATT.Hook_SecondaryAttack = function(self)
     self.GrenadeDownKey = IN_ATTACK2
@@ -28,5 +30,5 @@ end
 ]]
 
 ATT.Hook_GetHintCapabilities = function(self, tbl)
-    tbl["+attack2"] = {so = 0.1, str = "Quickthrow"}
+    tbl["+attack2"] = {so = 0.1, str = "hint.quicknade.throw"}
 end

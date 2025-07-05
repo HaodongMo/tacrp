@@ -11,8 +11,8 @@ SWEP.Category = "Tactical RP" // "Tactical RP (Extras)"
 SWEP.SubCatTier = "3Security"
 SWEP.SubCatType = "1Pistol"
 
-SWEP.Description = "Tactical pistol with good damage and range for its capacity."
-SWEP.Description_Quote = "The weapon of choice for free men."
+SWEP.Description = "Tactical pistol with good damage and range."
+SWEP.Description_Quote = "\"Man of few words, aren't you?\""
 
 SWEP.Trivia_Caliber = ".40 S&W"
 SWEP.Trivia_Manufacturer = "Heckler & Koch"
@@ -204,6 +204,7 @@ SWEP.ShootPitchVariance = 2.5 // amount to vary pitch by each shot
 SWEP.QCA_Muzzle = 4
 
 SWEP.MuzzleEffect = "muzzleflash_pistol"
+SWEP.EjectEffect = 1
 
 // anims
 
@@ -331,7 +332,7 @@ SWEP.Attachments = {
     },
     [7] = {
         PrintName = "Ammo",
-        Category = {"ammo_pistol"},
+        Category = {"ammo_usp", "ammo_pistol"},
         AttachSound = "TacRP/weapons/flashlight_on.wav",
         DetachSound = "TacRP/weapons/flashlight_off.wav",
     },

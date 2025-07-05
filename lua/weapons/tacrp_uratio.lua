@@ -11,11 +11,12 @@ SWEP.Category = "Tactical RP"
 SWEP.SubCatTier = "3Security"
 SWEP.SubCatType = "7Sniper Rifle"
 
-SWEP.Description = "Lightweight sniper rifle with good damage and high mobility.\nEquipped with a 10x scope by default."
+SWEP.Description = "Lightweight sniper rifle with decent damage and high magazine capacity.\nEquipped with a 10x scope by default."
+SWEP.Description_Quote = "\"The final argument of kings.\"" --Louis the Great had this engraved on his cannons, or more specifically "ultima ratio regum"
 
-SWEP.Trivia_Caliber = "6.5mm Creedmoor" -- "7.62x51mm" is more common but also too lightweight of a caliber
+SWEP.Trivia_Caliber = "7.62x51mm"
 SWEP.Trivia_Manufacturer = "PGM Précision"
-SWEP.Trivia_Year = "2000"
+SWEP.Trivia_Year = "1991"
 
 SWEP.Faction = TacRP.FACTION_COALITION
 SWEP.Credits = "Assets: Tactical Intervention"
@@ -28,8 +29,8 @@ SWEP.SlotAlt = 3
 
 SWEP.BalanceStats = {
     [TacRP.BALANCE_SBOX] = {
-        Damage_Max = 65,
-        Damage_Min = 92,
+        Damage_Max = 50,
+        Damage_Min = 80,
 
         Range_Min = 1000,
         Range_Max = 3500,
@@ -38,9 +39,9 @@ SWEP.BalanceStats = {
 
         Description = "Lightweight sniper rifle with high mobility and good damage at distance.\nEquipped with a 10x scope by default.",
 
-        Damage_Max = 30,
-        Damage_Min = 65,
-        Range_Min = 600,
+        Damage_Max = 25,
+        Damage_Min = 45,
+        Range_Min = 800,
         Range_Max = 1800,
 
         RPM = 35,
@@ -57,12 +58,6 @@ SWEP.BalanceStats = {
             [HITGROUP_GEAR] = 0.5
         },
     },
-    [TacRP.BALANCE_PVE] = {
-        Damage_Max = 25,
-        Damage_Min = 55,
-        Range_Min = 1000,
-        Range_Max = 3500,
-    },
     [TacRP.BALANCE_OLDSCHOOL] = {
         HipFireSpreadPenalty = 0.024
     }
@@ -72,18 +67,18 @@ SWEP.TTTReplace = TacRP.TTTReplacePreset.SniperRifle
 
 // "ballistics"
 
-SWEP.Damage_Max = 105
-SWEP.Damage_Min = 85
-SWEP.Range_Min = 1200
-SWEP.Range_Max = 7000
-SWEP.Penetration = 17
-SWEP.ArmorPenetration = 0.9
+SWEP.Damage_Max = 90
+SWEP.Damage_Min = 75
+SWEP.Range_Min = 1500
+SWEP.Range_Max = 7200
+SWEP.Penetration = 15
+SWEP.ArmorPenetration = 0.8
 SWEP.ArmorBonus = 3
 
 SWEP.BodyDamageMultipliers = {
     [HITGROUP_HEAD] = 3,
     [HITGROUP_CHEST] = 1,
-    [HITGROUP_STOMACH] = 1.125,
+    [HITGROUP_STOMACH] = 1.15,
     [HITGROUP_LEFTARM] = 0.75,
     [HITGROUP_RIGHTARM] = 0.75,
     [HITGROUP_LEFTLEG] = 0.5,
@@ -91,7 +86,7 @@ SWEP.BodyDamageMultipliers = {
     [HITGROUP_GEAR] = 0.5
 }
 
-SWEP.MuzzleVelocity = 45000
+SWEP.MuzzleVelocity = 42500
 
 // misc. shooting
 
@@ -99,7 +94,8 @@ SWEP.Firemode = 1
 
 SWEP.FiremodeName = "Bolt-Action" // only used externally for firemode name distinction
 
-SWEP.RPM = 37
+SWEP.RPM = 35
+SWEP.ShootTimeMult = 1.05
 
 SWEP.Spread = 0.00
 
@@ -180,12 +176,12 @@ SWEP.ScopeOverlaySize = 0.75
 
 // reload
 
-SWEP.ClipSize = 6
-SWEP.Ammo = "357"
+SWEP.ClipSize = 10
+SWEP.Ammo = "ar2"
 SWEP.AmmoTTT = "357"
 SWEP.Ammo_Expanded = "ti_rifle"
 
-SWEP.ReloadTimeMult = 1
+SWEP.ReloadTimeMult = 1.15
 SWEP.DropMagazineImpact = "metal"
 SWEP.DropMagazineModel = "models/weapons/tacint/magazines/uratio.mdl"
 

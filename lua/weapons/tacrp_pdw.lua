@@ -10,7 +10,8 @@ SWEP.Category = "Tactical RP"
 SWEP.SubCatTier = "1Elite"
 SWEP.SubCatType = "3Submachine Gun"
 
-SWEP.Description = "Carbine caliber subcompact PDW. The perfect blend of rifle and submachine gun."
+SWEP.Description = "Experimental compact PDW firing a carbine-type cartridge. The perfect blend of rifle and submachine gun."
+SWEP.Description_Quote = "The weight and size of an SMG with the power of a rifle." -- Based off the weapon's description in Contract Wars (2010)
 
 SWEP.Trivia_Caliber = "6mm Whisper"
 SWEP.Trivia_Manufacturer = "Knight's Armament"
@@ -157,8 +158,8 @@ SWEP.SprintPos = Vector(5, 0, -2)
 SWEP.SightAng = Angle(-0.95, -1.1, 1)
 SWEP.SightPos = Vector(-4.78, -7.5, -3.45)
 
-SWEP.CorrectivePos = Vector(0.5, 0, -0.55)
-SWEP.CorrectiveAng = Angle(2.4, 0.34, 0)
+SWEP.CorrectivePos = Vector(0.52, 0, -0.55)
+SWEP.CorrectiveAng = Angle(2.5, 0.45, 0)
 
 SWEP.HolsterVisible = true
 SWEP.HolsterSlot = TacRP.HOLSTER_SLOT_BACK
@@ -239,16 +240,18 @@ SWEP.AttachmentElements = {
     },
 }
 
+SWEP.NoRMR = true
+
 SWEP.Attachments = {
     [1] = {
         PrintName = "Optic",
-        Category = {"optic_cqb", "optic_medium"},
+        Category = {"optic_cqb", "optic_medium", "optic_sniper"},
         Bone = "pdw_ROOT",
         AttachSound = "TacRP/weapons/optic_on.wav",
         DetachSound = "TacRP/weapons/optic_off.wav",
         InstalledElements = {"optic"},
         VMScale = 1,
-        Pos_VM = Vector(-4.8, -0.15, 6),
+        Pos_VM = Vector(-5.2, -0.12, 6),
         Pos_WM = Vector(7, 1.5, -6.5),
         Ang_VM = Angle(90, 0, 0),
         Ang_WM = Angle(0, -3.5, 180),

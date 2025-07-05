@@ -10,8 +10,6 @@ ENT.Life = 10
 
 ENT.MaxRadius = 7500
 
-ENT.TacRPSmoke = true
-
 AddCSLuaFile()
 
 function ENT:Initialize()

@@ -249,6 +249,7 @@ SWEP.ProceduralIronFire = {
     },
 }
 
+SWEP.NoRMR = true
 
 SWEP.Attachments = {
     [1] = {
@@ -260,7 +261,7 @@ SWEP.Attachments = {
         AttachSound = "tacrp/weapons/optic_on.wav",
         DetachSound = "tacrp/weapons/optic_off.wav",
         VMScale = 0.75,
-        Pos_VM = Vector(-5.5, 0.225, 4),
+        Pos_VM = Vector(-5.55, 0.2, 4),
         Ang_VM = Angle(90, 0, 0),
         Pos_WM = Vector(0, 3, 0.5),
         Ang_WM = Angle(0, -90, 0),

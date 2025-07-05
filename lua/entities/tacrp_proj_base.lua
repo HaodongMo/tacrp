@@ -27,6 +27,8 @@ ENT.RemoteFuse = false // allow this projectile to be triggered by remote detona
 ENT.ImpactFuse = false // projectile explodes on impact.
 ENT.StickyFuse = false // projectile becomes timed after sticking.
 
+ENT.SafetyFuse = 0 // impact fuse hitting too early will not detonate
+
 ENT.RemoveOnImpact = false
 ENT.ExplodeOnImpact = false
 ENT.ExplodeOnDamage = false // projectile explodes when it takes damage.
@@ -35,10 +37,15 @@ ENT.ExplodeUnderwater = false // projectile explodes when it enters water
 ENT.Defusable = false // press E on the projectile to defuse it
 ENT.DefuseOnDamage = false
 
-ENT.ImpactDamage = 25
-ENT.ImpactDamageSpeed = 1000
+ENT.ImpactDamage = 50
+ENT.ImpactDamageType = DMG_CRUSH + DMG_CLUB
 
-ENT.Delay = 5 // after being triggered and this amount of time has passed, the projectile will explode.
+ENT.Delay = 0 // after being triggered and this amount of time has passed, the projectile will explode.
+
+ENT.SoundHint = false // Emit a sound hint so NPCs can react
+ENT.SoundHintDelay = 0 // Delay after spawn
+ENT.SoundHintRadius = 328
+ENT.SoundHintDuration = 1
 
 ENT.Armed = false
 
@@ -47,24 +54,46 @@ ENT.FlareColor = nil
 ENT.FlareSizeMin = 200
 ENT.FlareSizeMax = 250
 
-ENT.LockOnEntity = NULL
-ENT.SteerSpeed = 60
-ENT.SeekerAngle = math.cos(35)
-ENT.LeadTarget = false
-ENT.SuperSteerTime = 0
-ENT.SuperSteerSpeed = 100
-ENT.BoostSpeed = 0
-ENT.SoftLaunchTime = 0.5
-ENT.NoReacquire = true
+
+// Guided projectile related
+ENT.SteerDelay = 0 // Delay before steering logic kicks in
+ENT.SteerSpeed = 60 // Turn rate in degrees per second
+ENT.SteerBrake = 0 // Amount of speed to slow down by when turning
+ENT.SeekerAngle = 180 // Angle difference (degrees) above which projectile loses target
+ENT.SeekerExplodeRange = 256 // Distance to the target below which the missile will immediately explode
+ENT.SeekerExplodeSnapPosition = true // When exploding on a seeked target, teleport to the entity's position for more damage
+ENT.SeekerExplodeAngle = 180 // Angle tolerance (degrees) below which detonation can happen
+
+ENT.TopAttack = false // This missile will attack from the top
+ENT.TopAttackHeight = 512 // Distance above target to top attack
+ENT.TopAttackDistance = 128 // Distance from target to stop top attacking
+
+ENT.RocketLifetime = 30 // Rocket will cut after this time
+
+ENT.MinSpeed = 0
+ENT.MaxSpeed = 0
+ENT.Acceleration = 0
+
+ENT.LeadTarget = false // account for target's velocity and distance
+ENT.SuperSteerTime = 0 // Amount of time where turn rate is boosted
+ENT.SuperSteerSpeed = 100 // Boosted turn rate in degrees per seconds
+
+ENT.NoReacquire = true // If target is lost, it cannot be tracked anymore
 ENT.FlareRedirectChance = 0
 
+ENT.LockOnEntity = NULL
+ENT.TargetPos = nil
+
 ENT.AudioLoop = nil
-
 ENT.BounceSounds = nil
-
 ENT.CollisionSphere = nil
-
 ENT.GunshipWorkaround = true
+
+// Tell LVS to not ricochet us
+ENT.DisableBallistics = true
+
+ENT.TopAttacking = false
+ENT.StartSuperSteerTime = 0
 
 function ENT:SetupDataTables()
     self:NetworkVar("Entity", 0, "Weapon")
@@ -102,9 +131,14 @@ function ENT:Initialize()
             phys:EnableGravity(false)
         end
 
+        if self.TopAttack then
+            self.TopAttacking = true
+        end
+
         self:SwitchTarget(self.LockOnEntity)
     end
 
+    self.StartSuperSteerTime = CurTime()
     self.SpawnTime = CurTime()
     self.NextFlareRedirectTime = 0
 
@@ -168,26 +202,33 @@ function ENT:PhysicsCollide(data, collider)
         return
     end
 
-    if self.ImpactFuse and !self.Armed then
-        self.ArmTime = CurTime()
-        self.Armed = true
+    if (self.SafetyFuse or 0) > 0 and self.SpawnTime + self.SafetyFuse > CurTime() then
+        self:SafetyImpact(data, collider)
+        self:Remove()
+        return
+    elseif self.ImpactFuse then
+        if !self.Armed then
+            self.ArmTime = CurTime()
+            self.Armed = true
 
-        if self:Impact(data, collider) then
-            return
+            if self:Impact(data, collider) then
+                return
+            end
         end
 
         if self.Delay == 0 or self.ExplodeOnImpact then
-            self:PreDetonate()
+            self:PreDetonate(data.HitEntity)
         end
-    elseif self.ImpactDamage > 0 and IsValid(data.HitEntity) and (engine.ActiveGamemode() != "terrortown" or !data.HitEntity:IsPlayer()) then
+    elseif self.ImpactDamage > 0 and (self.NextImpactDamage or 0) < CurTime() and data.Speed >= 10 and IsValid(data.HitEntity) and (engine.ActiveGamemode() != "terrortown" or !data.HitEntity:IsPlayer()) then
         local dmg = DamageInfo()
         dmg:SetAttacker(IsValid(self:GetOwner()) and self:GetOwner() or self.Attacker)
         dmg:SetInflictor(self)
-        dmg:SetDamage(Lerp((data.OurOldVelocity:Length() - 0.6 * self.ImpactDamageSpeed) / 0.4 * self.ImpactDamageSpeed, self.ImpactDamage / 5, self.ImpactDamage))
-        dmg:SetDamageType(DMG_CRUSH + DMG_CLUB)
+        dmg:SetDamage(self.ImpactDamage)
+        dmg:SetDamageType(self.ImpactDamageType)
         dmg:SetDamageForce(data.OurOldVelocity)
         dmg:SetDamagePosition(data.HitPos)
         data.HitEntity:TakeDamageInfo(dmg)
+        self.NextImpactDamage = CurTime() + 0.05
     elseif !self.ImpactFuse then
         self:Impact(data, collider)
     end
@@ -270,11 +311,126 @@ function ENT:DoSmokeTrail()
     end
 end
 
+function ENT:PhysicsUpdate(phys)
+    if self.SpawnTime + self.RocketLifetime < CurTime() then return end
+
+    if self.TargetPos and (self.SteerDelay + self.SpawnTime) <= CurTime() then
+        local v = phys:GetVelocity()
+
+        local steer_amount = self.SteerSpeed * FrameTime()
+        if self.SuperSteerTime + self.StartSuperSteerTime > CurTime() then
+            steer_amount = self.SuperSteerSpeed * FrameTime()
+        end
+
+        local dir = (self.TargetPos - self:GetPos()):GetNormalized()
+        local diff = math.deg(math.acos(dir:Dot(self:GetForward())))
+        local turn_deg = math.min(diff, steer_amount)
+
+        local newang = self:GetAngles()
+        newang:RotateAroundAxis(dir:Cross(self:GetForward()), -turn_deg)
+
+        local brake = turn_deg / steer_amount * self.SteerBrake
+
+        self:SetAngles(Angle(newang.p, newang.y, 0))
+        phys:SetVelocityInstantaneous(self:GetForward() * math.Clamp(v:Length() + (self.Acceleration - brake) * FrameTime(), self.MinSpeed, self.MaxSpeed))
+    elseif self.Acceleration > 0 then
+        phys:SetVelocityInstantaneous(self:GetForward() * math.Clamp(phys:GetVelocity():Length() + self.Acceleration * FrameTime(), self.MinSpeed, self.MaxSpeed))
+    end
+end
+
+local gunship = {["npc_combinegunship"] = true, ["npc_combinedropship"] = true, ["npc_helicopter"] = true}
+
+function ENT:DoTracking()
+    local target = self.LockOnEntity
+    if IsValid(target) then
+        if self.TopAttack and self.TopAttacking then
+            local xyvector = (target:WorldSpaceCenter() - self:GetPos())
+            xyvector.z = 0
+            local dist = xyvector:Length()
+
+            self.TargetPos = target:WorldSpaceCenter() + Vector(0, 0, self.TopAttackHeight)
+            if self.LeadTarget then
+                local dist2 = (self.TargetPos - self:GetPos()):Length()
+
+                local time = dist2 / self:GetVelocity():Length()
+                self.TargetPos = self.TargetPos + (target:GetVelocity() * time)
+            end
+
+            if dist <= self.TopAttackDistance then
+                self.TopAttacking = false
+                self.StartSuperSteerTime = CurTime()
+            end
+        else
+            local dir = (target:WorldSpaceCenter() - self:GetPos()):GetNormalized()
+            local diff = math.deg(math.acos(dir:Dot(self:GetForward())))
+            if diff <= self.SeekerAngle or self.SuperSteerTime + self.StartSuperSteerTime > CurTime() then
+                self.TargetPos = target:WorldSpaceCenter()
+                local dist = (self.TargetPos - self:GetPos()):Length()
+                if self.LeadTarget then
+                    local time = dist / self:GetVelocity():Length()
+                    self.TargetPos = self.TargetPos + (target:GetVelocity() * time)
+                end
+
+                if self.FlareRedirectChance > 0 and self.NextFlareRedirectTime <= CurTime() and !TacRP.FlareEntities[target:GetClass()] then
+                    local flares = ents.FindInSphere(self:GetPos(), 2048)
+                    for k, v in pairs(flares) do
+                        if TacRP.FlareEntities[v:GetClass()] and math.Rand(0, 1) <= self.FlareRedirectChance then
+                            self:SwitchTarget(v)
+                            break
+                        end
+                    end
+                    self.NextFlareRedirectTime = CurTime() + 0.5
+                end
+
+                if self.SeekerExplodeRange > 0 and diff <= self.SeekerExplodeAngle
+                        and self.SteerDelay + self.SpawnTime <= CurTime()
+                        and dist < self.SeekerExplodeRange then
+                    local tr = util.TraceLine({
+                        start = self:GetPos(),
+                        endpos = target:GetPos(),
+                        filter = self,
+                        mask = MASK_SOLID,
+                    })
+                    if self.SeekerExplodeSnapPosition then
+                        self:SetPos(tr.HitPos)
+                    end
+                    self:PreDetonate(target)
+                end
+            elseif self.NoReacquire then
+                self.LockOnEntity = nil
+                self.TargetPos = nil
+            end
+        end
+    elseif (!IsValid(target) and self.NoReacquire) or target.UnTrackable then
+        self.LockOnEntity = nil
+        self.TargetPos = nil
+    end
+
+    if self.GunshipWorkaround and (self.GunshipCheck or 0 < CurTime()) then
+        self.GunshipCheck = CurTime() + 0.33
+        local tr = util.TraceLine({
+            start = self:GetPos(),
+            endpos = self:GetPos() + (self:GetVelocity() * 6 * engine.TickInterval()),
+            filter = self,
+            mask = MASK_SHOT
+        })
+        if IsValid(tr.Entity) and gunship[tr.Entity:GetClass()] then
+            self:SetPos(tr.HitPos)
+            self:PreDetonate(tr.Entity)
+        end
+    end
+end
+
 function ENT:Think()
     if !IsValid(self) or self:GetNoDraw() then return end
 
     if !self.SpawnTime then
         self.SpawnTime = CurTime()
+    end
+
+    if SERVER and self.SoundHint and CurTime() >= self.SpawnTime + self.SoundHintDelay then
+        self.SoundHint = false // only once
+        sound.EmitHint(SOUND_DANGER, self:GetPos(), self.SoundHintRadius, self.SoundHintDuration, self)
     end
 
     if !self.Armed and isnumber(self.TimeFuse) and self.SpawnTime + self.TimeFuse < CurTime() then
@@ -290,86 +446,16 @@ function ENT:Think()
         self:PreDetonate()
     end
 
-    if SERVER then
-        local target = self.LockOnEntity
-        if IsValid(target) then
-            if self.SoftLaunchTime + self.SpawnTime < CurTime() then
-                local tpos = target:WorldSpaceCenter()
-
-                if self.LeadTarget then
-                    local dist = (tpos - self:GetPos()):Length()
-                    local time = dist / self:GetVelocity():Length()
-                    tpos = tpos + (target:GetVelocity() * time)
-                end
-
-                local dir = (tpos - self:GetPos()):GetNormalized()
-                local dot = dir:Dot(self:GetAngles():Forward())
-
-                if self.SuperSeeker or dot >= self.SeekerAngle or (self.SuperSteerTime + self.SpawnTime >= CurTime()) then
-
-                    local ang = dir:Angle()
-
-                    local p = self:GetAngles().p
-                    local y = self:GetAngles().y
-
-                    local speed = self.SteerSpeed
-
-                    if self.SuperSteerTime + self.SpawnTime >= CurTime() then
-                        speed = self.SuperSteerSpeed
-                    end
-
-                    p = math.ApproachAngle(p, ang.p, FrameTime() * speed)
-                    y = math.ApproachAngle(y, ang.y, FrameTime() * speed)
-
-                    self:SetAngles(Angle(p, y, 0))
-                elseif self.NoReacquire then
-                    self.LockOnEntity = nil
-                end
-            end
-
-            if target.UnTrackable then self.LockOnEntity = nil end
-
-            if IsValid(target) and self.FlareRedirectChance > 0 and self.NextFlareRedirectTime <= CurTime() and !TacRP.FlareEntities[target:GetClass()] then
-                local flares = ents.FindInSphere(self:GetPos(), 2048)
-
-                for k, v in pairs(flares) do
-                    if TacRP.FlareEntities[v:GetClass()] and math.Rand(0, 1) <= self.FlareRedirectChance then
-                        self:SwitchTarget(v)
-                        break
-                    end
-                end
-
-                self.NextFlareRedirectTime = CurTime() + 0.5
-            end
-        end
-    end
-
-    if self.BoostSpeed > 0 then
-        local phys = self:GetPhysicsObject()
-
-        if IsValid(phys) then
-            phys:SetVelocity(self:GetAngles():Forward() * self.BoostSpeed)
-        end
-    end
-
-    local gunship = {["npc_combinegunship"] = true, ["npc_combinedropship"] = true}
-    if SERVER and self.GunshipWorkaround and (self.GunshipCheck or 0 < CurTime()) then
-            self.GunshipCheck = CurTime() + 0.33
-            local tr = util.TraceLine({
-                start = self:GetPos(),
-                endpos = self:GetPos() + (self:GetVelocity() * 6 * engine.TickInterval()),
-                filter = self,
-                mask = MASK_SHOT
-            })
-        if IsValid(tr.Entity) and gunship[tr.Entity:GetClass()] then
-            self:SetPos(tr.HitPos)
-            self:Detonate()
-        end
+    if SERVER and self.SpawnTime + self.RocketLifetime > CurTime() then
+        self:DoTracking()
     end
 
     self:DoSmokeTrail()
 
     self:OnThink()
+
+    self:NextThink(CurTime())
+    return true
 end
 
 function ENT:Use(ply)
@@ -391,7 +477,7 @@ function ENT:RemoteDetonate()
     self.Armed = true
 end
 
-function ENT:PreDetonate()
+function ENT:PreDetonate(ent)
     if CLIENT then return end
 
     if !self.Detonated then
@@ -399,15 +485,93 @@ function ENT:PreDetonate()
 
         if !IsValid(self.Attacker) and !IsValid(self:GetOwner()) then self.Attacker = game.GetWorld() end
 
-        self:Detonate()
+        self:Detonate(ent)
     end
 end
 
-function ENT:Detonate()
+function ENT:Detonate(ent)
     // fill this in :)
 end
 
-function ENT:Impact()
+function ENT:Impact(data, collider)
+end
+
+function ENT:SafetyImpact(data, collider)
+    local attacker = self.Attacker or self:GetOwner()
+    local ang = data.OurOldVelocity:Angle()
+    local fx = EffectData()
+    fx:SetOrigin(data.HitPos)
+    fx:SetNormal(-ang:Forward())
+    fx:SetAngles(-ang)
+    util.Effect("ManhackSparks", fx)
+
+    if IsValid(data.HitEntity) then
+        local dmginfo = DamageInfo()
+        dmginfo:SetAttacker(attacker)
+        dmginfo:SetInflictor(self)
+        dmginfo:SetDamageType(self.ImpactDamageType)
+        dmginfo:SetDamage(self.ImpactDamage * (self.NPCDamage and 0.25 or 1))
+        dmginfo:SetDamageForce(data.OurOldVelocity * 20)
+        dmginfo:SetDamagePosition(data.HitPos)
+        data.HitEntity:TakeDamageInfo(dmginfo)
+    end
+
+    self:EmitSound("weapons/rpg/shotdown.wav", 80)
+
+    if self:GetModel() == "models/weapons/tacint/rocket_deployed.mdl" then
+        for i = 1, 4 do
+            local prop = ents.Create("prop_physics")
+            prop:SetPos(self:GetPos())
+            prop:SetAngles(self:GetAngles())
+            prop:SetModel("models/weapons/tacint/rpg7_shrapnel_p" .. i .. ".mdl")
+            prop:Spawn()
+            prop:GetPhysicsObject():SetVelocityInstantaneous(data.OurNewVelocity * 0.5 + VectorRand() * 75)
+            prop:SetCollisionGroup(COLLISION_GROUP_DEBRIS)
+            SafeRemoveEntityDelayed(prop, 3)
+        end
+    end
+end
+
+function ENT:ImpactTraceAttack(ent, damage, pen)
+    if !IsValid(ent) then return end
+    if ent.LVS then
+        // LVS only does its penetration logic on FireBullets, so we must fire a bullet to trigger it
+        self:SetCollisionGroup(COLLISION_GROUP_DEBRIS) // The projectile blocks the penetration decal?!
+        self:FireBullets({
+            Attacker = self.Attacker or self:GetOwner(),
+            Damage = damage,
+            Tracer = 0,
+            Src = self:GetPos(),
+            Dir = self:GetForward(),
+            HullSize = 16,
+            Distance = 128,
+            IgnoreEntity = self,
+            Callback = function(atk, btr, dmginfo)
+                dmginfo:SetDamageType(DMG_AIRBOAT + DMG_SNIPER) // LVS wants this
+                dmginfo:SetDamageForce(self:GetForward() * pen) // penetration strength
+            end,
+        })
+    else
+        // This is way more consistent because the damage always lands
+        local tr = util.TraceHull({
+            start = self:GetPos(),
+            endpos = self:GetPos() + self:GetForward() * 256,
+            filter = ent,
+            whitelist = true,
+            ignoreworld = true,
+            mask = MASK_ALL,
+            mins = Vector( -8, -8, -8 ),
+            maxs = Vector( 8, 8, 8 ),
+        })
+        local dmginfo = DamageInfo()
+        dmginfo:SetAttacker(self.Attacker or self:GetOwner())
+        dmginfo:SetInflictor(self)
+        dmginfo:SetDamagePosition(self:GetPos())
+        dmginfo:SetDamageForce(self:GetForward() * pen)
+        dmginfo:SetDamageType(DMG_AIRBOAT + DMG_SNIPER)
+        dmginfo:SetDamage(damage)
+        ent:DispatchTraceAttack(dmginfo, tr, self:GetForward())
+    end
 end
 
 function ENT:Stuck()
@@ -420,11 +584,14 @@ end
 local mat = Material("effects/ar2_altfire1b")
 
 function ENT:Draw()
+    if self:GetOwner() == LocalPlayer() and (self.SpawnTime + 0.05) > CurTime() then return end
+
     self:DrawModel()
 
     if self.FlareColor then
+        local mult = self.SafetyFuse and math.Clamp((CurTime() - (self.SpawnTime + self.SafetyFuse)) / self.SafetyFuse, 0.1, 1) or 1
         render.SetMaterial(mat)
-        render.DrawSprite(self:GetPos() + (self:GetAngles():Forward() * -16), math.Rand(self.FlareSizeMin, self.FlareSizeMax), math.Rand(self.FlareSizeMin, self.FlareSizeMax), self.FlareColor)
+        render.DrawSprite(self:GetPos() + (self:GetAngles():Forward() * -16), mult * math.Rand(self.FlareSizeMin, self.FlareSizeMax), mult * math.Rand(self.FlareSizeMin, self.FlareSizeMax), self.FlareColor)
     end
 end
 

@@ -8,11 +8,8 @@ ENT.Model                    =  "models/props_junk/Shovel01a.mdl"
 
 ENT.ImpactDamage = 0
 
-ENT.IsRocket = false // projectile has a booster and will not drop.
-
-ENT.InstantFuse = false // projectile is armed immediately after firing.
-ENT.RemoteFuse = false // allow this projectile to be triggered by remote detonator.
-ENT.ImpactFuse = true // projectile explodes on impact.
+ENT.InstantFuse = false
+ENT.ImpactFuse = true
 
 ENT.SmokeTrail = false
 
@@ -99,7 +96,7 @@ function ENT:Impact(data, collider)
 
     self:GetPhysicsObject():SetVelocityInstantaneous(data.OurNewVelocity * 0.5)
 
-    timer.Simple(0, function()
+    timer.Simple(0.01, function()
         if IsValid(self) then
             self:SetOwner(NULL) -- lol
             self:SetCollisionGroup(COLLISION_GROUP_INTERACTIVE)

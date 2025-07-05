@@ -12,7 +12,7 @@ SWEP.SubCatTier = "2Operator"
 SWEP.SubCatType = "3Submachine Gun"
 
 SWEP.Description = "Bullpup PDW with a generous top-loaded magazine and controllable spread. High velocity rounds retain effectiveness at range and pierces armor easily."
-SWEP.Description_Quote = "\"This is a weapon of war, made to kill your enemy.\""
+SWEP.Description_Quote = "\"This is a weapon of war, it's made to kill your enemy.\""  // SG-1 Stargate
 
 SWEP.Trivia_Caliber = "5.7x28mm"
 SWEP.Trivia_Manufacturer = "FN Herstal"
@@ -216,12 +216,12 @@ SWEP.AttachmentElements = {
 SWEP.Attachments = {
     [1] = {
         PrintName = "Optic",
-        Category = {"optic_cqb", "optic_medium", "optic_sniper"},
+        Category = {"optic_cqb", "optic_medium"},
         Bone = "p90_ROOT",
         AttachSound = "tacrp/weapons/optic_on.wav",
         DetachSound = "tacrp/weapons/optic_off.wav",
         InstalledElements = {"optic"},
-        Pos_VM = Vector(-5.2, 0, 6.5),
+        Pos_VM = Vector(-5.35, 0, 6.5),
         Pos_WM = Vector(8, 1.5, -7),
         Ang_VM = Angle(90, 0, 0),
         Ang_WM = Angle(0, -3.5, 180),

@@ -897,7 +897,7 @@ The third major expansion pack featuring 38 weapons of all kinds.
 
 <h3>Changelog</h3>
 <ul>
-<li><b>Added:</b> (InterOps) New Weapon: FAMAS G2.
+<li><b>Added:</b> (Special Delivery) New Weapon: FAMAS G2.
 <li><b>Added:</b> Refurbished Bolt attachment. Only available for weapons that innately jam, will remove jam chance but decrease RPM and accuracy.
 <li><b>Changed:</b> Tweaked some stat and rating displays.
 <li><b>Fixed:</b> LVS damage type interactions.
@@ -961,6 +961,361 @@ Notably, some weapons in the base pack are now Value grade, a new lowest grade t
 <li><b>Rebalance:</b> Nerfed M16A1 and Thompson.
 </ul>
 ]],
+    },
+    {
+        Title = "Update 24",
+        Type = "Patch Notes",
+        Date = "2024-08-03",
+        Author = "8Z",
+        Major = false,
+        Summary = "Fixes and more configurations.",
+        Contents = [[<body style="font-family:'Myriad Pro';color:white;font-size:125%;">
+
+<h3>Changelist</h3>
+<ul>
+<li><b>Added:</b> ConVars for tweaking Medkit and Riot Shield behavior, in Equipment tab.
+<li><b>Added:</b> ConVars to disable door busting.
+<li><b>Added:</b> ConVar multipliers for Headshot Damage and Melee Weapon Damage.
+<li><b>Added:</b> USP 9mm conversion attachment (using HL2 sounds).
+<li><b>Added:</b> Quotes for various weapons.
+<li><b>Added:</b> Additional localization.
+<li><b>Added:</b> Credits for Medkit and Riot Shield animations. (thanks Arqu!)
+<li><b>Changed:</b> Reworked missile logic for the Stinger and SMAW.
+<li><b>Changed:</b> Melee Techinques are now free attachments.
+<li><b>Changed:</b> Removed chance to fail an unjam attempt.
+<li><b>Changed:</b> Disabled shotgun reversing their starting animation on non-empty reload.
+<li><b>Changed:</b> Rangefinder now displays range as a percentage on the point of aim.
+<li><b>Changed:</b> Thermal Imager renamed, no longer blurs when peeking.
+<li><b>Changed:</b> SAPHE can now damage Combine Helicopters and LVS vehicles.
+<li><b>Changed:</b> Riot Shield can't block melee attacks when attacking.
+<li><b>Fixed:</b> Improved projectile impact damage consistency.
+<li><b>Fixed:</b> 40mm Healing grenades not healing.
+<li><b>Fixed:</b> RMR being on guns it should not.
+<li><b>Fixed:</b> Missing accessory slot for some akimbos.
+<li><b>Fixed:</b> Missing sling and other accessory attachments on some guns.
+<li><b>Rebalance:</b> Tweaked explosive damage and radius. TTT gamemode no longer reduces explosive damage.
+<li><b>Rebalance:</b> Breaching Brake gives slight increase in recoil stability.
+<li><b>Rebalance:</b> Dual MTX minor damage buff and recoil increase.
+<li><b>Rebalance:</b> P250 minor damage increase.
+<li><b>Rebalance:</b> Grease bolt has more recoil, Tactical Bolt increases more mobility.
+<li><b>Rebalance:</b> Melee Throw now consumes crossbow bolt ammo.
+<li><b>Rebalance:</b> Various nerfs to melee Special attachments and Momentum.
+</ul>
+
+<h3>Expansion Changelist</h3>
+<ul>
+<li><b>Added:</b> SMAW Hummingbird rockets, XM25 flechettes and HEAT grenades.
+<li><b>Changed:</b> Tweaked Kar98k reload behavior.
+<li><b>Changed:</b> Intervention MLG sound now an ammo type. Does what you would expect.
+<li><b>Changed:</b> Improved Groza animations.
+<li><b>Fixed:</b> SMAW projectiles not obeying explosive damage scaling.
+<li><b>Rebalance:</b> Buff PSG-1, Amphibian, P210; nerf SR-25; tweaked Kar98k.
+</ul>
+]],
+    },
+    {
+        Title = "Update 25",
+        Type = "Patch Notes",
+        Date = "2024-08-03",
+        Author = "8Z",
+        Major = false,
+        Summary = "Grenade configurations.",
+        Contents = [[<body style="font-family:'Myriad Pro';color:white;font-size:125%;">
+
+<h3>Changelist</h3>
+<ul>
+<li><b>Added:</b> Client Authoratitive Hit Registration, to improve multiplayer hitreg.
+<li><b>Added:</b> ConVars for tweaking attributes of various grenades, in Equipment tab.
+<li><b>Added:</b> ConVar to disable magazine dropping.
+<li><b>Changed:</b> tacrp_hud will no longer disable minimal HUD.
+<li><b>Changed:</b> Thermite grenade and the thermite cloud will now stick to whatever it hits.
+<li><b>Fixed:</b> Flashbang will now properly stun all kinds of NPCs.
+<li><b>Rebalance:</b> Melee block meter consumption on hit is now based on your max health.
+</ul>
+]],
+    },
+    {
+        Title = "Update 25 Patch 1",
+        Type = "Patch Notes",
+        Date = "2024-09-08",
+        Author = "8Z",
+        Major = false,
+        Summary = "",
+        Contents = [[<body style="font-family:'Myriad Pro';color:white;font-size:125%;">
+<h3>Changelist</h3>
+<ul>
+<li><b>Changed:</b> Melee block no longer flinches NPCs (this was causing issues on most SNPCS).
+<li><b>Fixed:</b> Missing casings on various pistols.
+<li><b>Fixed:</b> Client-authoratitive hitreg doing double damage on listen servers.
+</ul>
+]],
+    },
+    {
+        Title = "Update 26",
+        Type = "Update",
+        Date = "2024-11-05",
+        Author = "speedonerd",
+        Major = false,
+        Summary = "A new weapon, a fun bonus and lots of visual touch-ups.",
+        Contents = [[<body style="font-family:'Myriad Pro';color:white;font-size:125%;">
+
+<p>Greetings all. Unfortunately the long-awaited post-apocalypse pack still isn't finished, but rest assured we are still working on it and it will see the light of day eventually.
+For now, enjoy a small-ish update that consists mostly of visual updates but also contains some fancy new content.</p>		
+
+<h2>SIG SG 510 "Black Shark" One-Off Release</h2>
+<p><input type='submit' value='Open Workshop' onclick='console.log("RUNLUA:gui.OpenURL(\"https://steamcommunity.com/sharedfiles/filedetails/?id=3360753764\")")' /></p>
+<p>I made this in an afternoon on a whim; a customized SG 510 visually inspired by Battlefield Hardline's weird hybridized 510 and functionally inspired by the infamous "Rico Special" that was featured on Forgotten Weapons.
+Give it a whirl! Apologies in advance for the blindness and potential motion sickness.</p>
+
+<h3>Changelist:</h3>
+<ul>
+<li><b>Added:</b> (Base) ConVar to disable quick grenades (but this will make us sad).
+<li><b>Changed:</b> (Base) Altered Stinger lock-on logic to be more performant.
+<li><b>Changed:</b> (All packs) Removed the RMR and/or OKP-7 from weapons where their sight pictures are blocked.
+<li><b>Major Addition:</b> (Heavy Duty) New Weapon: HK21E machine gun. This weapon was present in the addon's files but unfinished for quite a while.
+</ul>
+
+<h3>Asset Updates</h3>
+<ul>
+<li><b>Changed:</b> (Base) SG551 irons are removed when equipping an optic for a better sight picture.
+<li><b>Changed:</b> (Base) Added an optic rail to the Bekas.
+<li><b>Changed:</b> (Base) M320 LE now sports a yellow frame to distinguish it from its lethal counterpart.
+<li><b>Changed:</b> (InterOps) SG550-2 SP irons are removed when equipping an optic, same as the 551.
+<li><b>Changed:</b> (InterOps) Fixed clipping bolt and forend on the Chinalake.
+<li><b>Changed:</b> (Special Delivery) Added optic rails to the MP40 and Thompson.
+<li><b>Changed:</b> (Special Delivery) Revised both FAMAS variants' animations.
+<li><b>Changed:</b> (Special Delivery) Revised Gyrojet animations to be less obstructive when reloading.
+<li><b>Changed:</b> (Heavy Duty) Tweaked Intervention ironsights.
+<li><b>Changed:</b> (Exo Ops) Added an optic rail to the L85.
+<li><b>Changed:</b> (Exo Ops) Revised MCX SPEAR animations.
+<li><b>Changed:</b> (Exo Ops) Revised HK CAWS animations.
+<li><b>Changed:</b> (Exo Ops) Revised Winchester M1873 animations. They should be a tad more lively now.
+<li><b>Fixed:</b> (Exo Ops) Broken bipod bodygroup on MG42.
+<li><b>Fixed:</b> (Exo Ops) PSG-1 bolt not moving far enough back when reloading.
+<li><b>Fixed:</b> (Exo Ops) SG 510 now has its folded ironsights bodygroup (originally absent due to StudioMDL limitations)
+</ul>
+]]
+    },
+    {
+        Title = "Update 27",
+        Type = "Update",
+        Date = "2024-11-12",
+        Author = "8Z",
+        Major = false,
+        Summary = "Spawnmenu tidy-up and more bonus guns.",
+        Contents = [[<body style="font-family:'Myriad Pro';color:white;font-size:125%;">
+
+<p>A few misclaneous quality of life improvements, including tier highlighting and sorting in the spawnmenu.</p>
+
+<p>Also, over the past few days, speedonerd has been hard at work kitbashing together more custom guns for fun (but no profit). Expect a release announcement soon!</p>
+
+<h3>Changelist:</h3>
+<ul>
+<li><b>Added:</b> The spawnmenu will now highlight TacRP weapons' tiers when using tiered balance.
+<li><b>Added:</b> The spawnmenu sorts by tier first, then by name. Tooltips also show weapon description.
+<li><b>Added:</b> ConVars for toggling spawnmenu behavior.
+<li><b>Added:</b> "Stylish" perk, for mid-air trickshots and quickscopes.
+<li><b>Added:</b> AS-50 and Hecate has a bigger muzzle flash.
+<li><b>Added:</b> "Exotic" tier, reserved for bonus and custom weapons.
+<li><b>Fixed:</b> USP no longer has vaseline smeared all over it.
+<li><b>Fixed:</b> Casing ejections shouldn't be missing on any gun anymore (let us know).
+<li><b>Rebalance:</b> Nerfed barrel attachments and Subsonic ammo; minor tweaks to some perks.
+</ul>
+]]
+    },
+    {
+        Title = "Update 28",
+        Type = "Update",
+        Date = "2024-11-29",
+        Author = "8Z",
+        Major = false,
+        Summary = "Small additions for bonus weapons.",
+        Contents = [[<body style="font-family:'Myriad Pro';color:white;font-size:125%;">
+
+<h2>Bonus Weapon Releases</h2>
+<p>A set of bonus one-off weapons has been released! These were customized to the tastes of some of our friends and have some cool features not present on base TacRP weapons. Give them a peek!</p>
+
+<p><input type='submit' value='Open Workshop' onclick='console.log("RUNLUA:gui.OpenURL(\"https://steamcommunity.com/sharedfiles/filedetails/?id=3374122098\")")' /> <b>MP5/10 "Zero Eight":</b> A 10mm MP5 with Swordfish kit, prototype foregrip, and 50-round drum.</p>
+<p><input type='submit' value='Open Workshop' onclick='console.log("RUNLUA:gui.OpenURL(\"https://steamcommunity.com/sharedfiles/filedetails/?id=3374124219\")")' /> <b>Hécate "Kingslayer":</b> Hécate with suppressor, rangefinder scope, and fragmentation rounds.</p>
+<p><input type='submit' value='Open Workshop' onclick='console.log("RUNLUA:gui.OpenURL(\"https://steamcommunity.com/sharedfiles/filedetails/?id=3374136864\")")' /> <b>USP "The Governor":</b> USP Elite with compensator and high power rounds.</p>
+<p><input type='submit' value='Open Workshop' onclick='console.log("RUNLUA:gui.OpenURL(\"https://steamcommunity.com/sharedfiles/filedetails/?id=3374144978\")")' /> <b>Desert Eagle "Arbiter":</b> Fully automatic Desert Eagle carbine. Yes, really.</p>
+<p><input type='submit' value='Open Workshop' onclick='console.log("RUNLUA:gui.OpenURL(\"https://steamcommunity.com/sharedfiles/filedetails/?id=3374145882\")")' /> <b>SR-25 "Symbiosis":</b> Suppressed and rechambered in .338 Lapua, with an adjustable scope and kill tracker.</p>
+
+<h3>Changelist:</h3>
+<ul>
+<li><b>Added:</b> Some features to support bonus weapons.
+<li><b>Fixed:</b> Client authoriatitive damage not setting DMG_BULLET.
+<li><b>Rebalance:</b> Buffed SG551 and Hecate's bipod.
+</ul>
+]]
+    },
+    {
+        Title = "Update 29 / Scavenger's Spoils Release",
+        Type = "Update",
+        Date = "2024-12-25",
+        Author = "8Z",
+        Major = true,
+        Summary = "New expansion release!",
+        Contents = [[<body style="font-family:'Myriad Pro';color:white;font-size:125%;">
+<h2>Scavenger's Spoils<i> (New!)</i></h2>
+<p><input type='submit' value='Open Workshop' onclick='console.log("RUNLUA:gui.OpenURL(\"https://steamcommunity.com/sharedfiles/filedetails/?id=3391426557\")")' /></p>
+The fourth major expansion, featuring 42 weapons themed around zombies, the apocalypse and a post-Soviet aesthetic. All you have out here is whatever you can get your hands on, comrade.<br>
+
+<h3>Changelist:</h3>
+<ul>
+<li><b>Added:</b> Various features to support Scavenger's Spoils.
+<li><b>Added:</b> Shotgun pellets now fire hull traces to make shots more consistent, like the HL2 shotgun. As a consequence, they are no longer affected by limb multipliers.
+<li><b>Added:</b> Reworked bullpup animations by speedonerd for the FAMAS and Groza.
+<li><b>Fixed:</b> Client authoriatitive damage not setting DMG_BULLET.
+<li><b>Rebalance:</b> Emergency Bullet will clear a jam when loading.
+<li><b>Rebalance:</b> Marksman Trigger now removes jam chance entirely.
+<li><b>Rebalance:</b> All shotguns have increased spread, reduced damage and significantly reduced range in keeping with the hull size change. I promise they're still good.
+</ul>
+
+]]
+    },
+    {
+        Title = "Update 30 / Localization Patch",
+        Type = "Update",
+        Date = "2025-01-10",
+        Author = "Moka, 8Z, & speedonerd",
+        Major = false,
+        Summary = "Full Localization Support",
+        Contents = [[<body style="font-family:'Myriad Pro';color:white;font-size:125%;">
+
+<h3>Full Localization</h3>
+<p>TacRP has been updated and received full localization support. This means that weapons (names, descriptions, trivia & credits), attachments (names, descriptions, pros & cons) and overall base content (stats, categories, etc.) can now be translated to any language Garry's Mod supports.</p>
+<p>TacRP supports English, and it has been partially supporting Chinese and Polish for a long time now. Additionally, Swedish has been added as a translated language, courtesy of Moka.</p>
+<p>All weapon packs that had localization files included in them (Special Delivery, Iron Curtain, InterOps, etc.) will be updated to have them removed, as all those strings are now included in the base.</p>
+
+<h3>Changelist:</h3>
+<ul>
+<li><b>Added:</b> (Base) Added a setting to enable Aim Assistance (Client / Server)
+<li><b>Added:</b> (Base) Added a setting to lower the mouse sensitivity when aiming (Client)
+<li><b>Added:</b> (Base) Added a setting to enable infinite ammo for launchers (Client)
+<li><b>Added:</b> (Base) Added a setting for the CS Gas and Flashbangs to affect players and/or NPCs (Equipment)
+<li><b>Added:</b> (Base) Added a setting to toggle dynamic lights (Server)
+<li><b>Added:</b> (Base) Spawnmenu subcategories weapon names and descriptions now use localized strings
+<li><b>Changed:</b> (Base) Tweaked the stats on the "Ratshot Rounds" attachment
+<li><b>Changed:</b> (Base) The Stinger can now lock onto Glide vehicles
+<li><b>Changed:</b> (Base) Fixed that weapons were not added to the Spawnmenu category correctly
+<li><b>Changed:</b> (Base) Attachment descriptions can now be two or more lines long and will scale accordingly
+<li><b>Changed:</b> (Base) NPCs now react to nearby grenades
+<li><b>Changed:</b> (Base) NPCs line of sight will be blocked by smoke grenades
+<li><b>Changed:</b> (Base) Altered the behavior of the Quicknade Radial Menu; grenade quantity is only shown when you have more than one, and the quantity is displayed below the grenade name; it is also localized
+<li><b>Changed:</b> (InterOps) Kar 98K given minor tweaks to its quickthrow animations 
+<li><b>Changed:</b> (ExoOps) The HK CAWS has brand new animations 
+<li><b>Changed:</b> (Scavenger's Spoils)  Fixed that the StG 44 had missing credits, and that the scopes were misaligned
+<li><b>Changed:</b> (Scavenger's Spoils)  Lowered the RPM on the M202 FLASH
+<li><b>Changed:</b> (Scavenger's Spoils)  SMLE given minor tweaks to its quickthrow animations.
+<li>The Mosin Nagant hasn't received these tweaks yet due to technical difficulties. Expect this to follow in a hotfix.
+</ul>
+
+]]
+    },
+    {
+        Title = "Update 30 Hotfix 1",
+        Type = "Patch Notes",
+        Date = "2025-01-11",
+        Author = "speedonerd",
+        Major = false,
+        Summary = "",
+        Contents = [[<body style="font-family:'Myriad Pro';color:white;font-size:125%;">
+
+<h3>Changelist:</h3>
+<ul>
+<li><b>Changed:</b> (Base) Tweaked aim assist behavior. Certain weapons (namely launchers) will now be unaffected by the aim assist setting.
+<li><b>Changed:</b> (Multiple packs) Several localization errors fixed.
+</ul>
+
+]]
+    },
+    {
+        Title = "Update 30 Hotfix 2",
+        Type = "Patch Notes",
+        Date = "2025-01-13",
+        Author = "speedonerd",
+        Major = false,
+        Summary = "",
+        Contents = [[<body style="font-family:'Myriad Pro';color:white;font-size:125%;">
+
+<h3>Changelist:</h3>
+<ul>
+<li><b>Changed:</b> (All packs) More localization tweaks.
+<li><b>Changed:</b> (Base) Description quotes are now always size 6 font, regardless of length.
+<li><b>Fixed:</b> (Base) Fixed viewmodels drawing on top of screen overlays (thanks Chen!).
+<li><b>Fixed:</b> (InterOps + Scavenger's Spoils) Fixed blindfire animation weirdness with toploader bolt-actions.
+</ul>
+]]
+    },
+    {
+        Title = "Update 31",
+        Type = "Patch Notes",
+        Date = "2025-02-15",
+        Author = "8Z",
+        Major = false,
+        Summary = "Minor fixes and features.",
+        Contents = [[<body style="font-family:'Myriad Pro';color:white;font-size:125%;">
+<h3>Changelist:</h3>
+<ul>
+<li><b>Added:</b> Inverse Peeking client ConVar to make peeking the default aiming option.
+<li><b>Changed:</b> Shotgun pellets are now 50% hull traces and 50% non-hull traces, like the HL2 shotgun.
+<li><b>Changed:</b> Wallbang damage is significantly increased.
+<li><b>Changed:</b> Explosive Damage on guns no longer disable penetration.
+<li><b>Changed:</b> Developer-related visuals now require superadmin permissions to be visible.
+<li><b>Fixed:</b> Holosight scaling for unusual aspect ratios.
+<li><b>Fixed:</b> Client-authoratitive damage behaving weirdly in singleplayer.
+<li><b>Fixed:</b> Blindfire bone manipulation not working in singleplayer.
+<li><b>Rebalance:</b> Nerfed shotgun armor shredding.
+</ul>
+]]
+    },
+    {
+        Title = "Update 32",
+        Type = "Patch Notes",
+        Date = "2025-05-20",
+        Author = "chen, speedonerd",
+        Major = false,
+        Summary = "Minor additions and fixes.",
+        Contents = [[<body style="font-family:'Myriad Pro';color:white;font-size:125%;">
+<h3>Changelist:</h3>
+<ul>
+<li><b>Added:</b> Global 10% recoil reduction for burst/semi fire modes.
+<li><b>Added:</b> (Base) Tactical Trigger, reducing recoil on burst/semi for weapons with multiple firemodes.
+<li><b>Added:</b> Synchronized third person animations for reloading, grenading, jam-clearing, and bashing.
+<li><b>Added:</b> Quotes for weapons that previously didnt have any.
+<li><b>Changed:</b> (Base) Ultima Ratio overhauled. Lower damage but higher magazine capacity.
+<li><b>Changed:</b> (Special Delivery) Gyrojet third person reload animation from "pistol" to "revolver" to accommodate for the update.
+<li><b>Changed:</b> (Exo Ops) SPAS-15 firing sound and minor animation tweaks.
+<li><b>Changed:</b> Kingslayer renamed to Kingbreaker.
+<li><b>Changed:</b> Black Shark model, texture and sound updates (trans rights).
+<li><b>Changed:</b> Altered some existing weapon quotes.
+<li><b>Fixed:</b> An invisible riot shield sticking to the player after dropping one.
+<li><b>Fixed:</b> Homing launchers breaking HUDs if the player hasn't been in first person.
+<li><b>Fixed:</b> "developer" convar causing a harmless error in multiplayer.
+<li><b>Fixed:</b> Some ammo types not having correctly localized names in customization menu because of incorrect captialization.
+<li><b>Fixed:</b> (Iron Curtain) Buggy firing animation on AEK-971.
+<li><b>Rebalance:</b> Buffed Dual Stage Trigger.
+</ul>
+]]
+    },
+	{
+        Title = "Beautification + Minor content releases.",
+        Type = "Update",
+        Date = "2025-06-7",
+        Author = "speedonerd",
+        Major = true,
+        Summary = "New content and better-looking old content.",
+        Contents = [[<body style="font-family:'Myriad Pro';color:white;font-size:125%;">
+<p>This update is another round of beautification for existing content, mostly focused on animations and models.</p>
+<p>We're also introducing a couple new nifty features, a handful of which have actually been in the works for quite some time now.</p>
+
+<h3>Changelist:</h3>
+<ul>
+<li><b>Changed:</b> (Base) Emergency Bullet and 2x Zoom are always free.
+<li><b>Changed:</b> (Base) Hecate can no longer melee bash.
+</ul>
+]]
     },
 }
 TacRP.NewsRead = TacRP.NewsRead or {}

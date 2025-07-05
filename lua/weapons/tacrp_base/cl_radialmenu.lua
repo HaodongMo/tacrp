@@ -70,7 +70,7 @@ local currentind
 local lastmenu
 function SWEP:DrawGrenadeHUD()
     if !TacRP.ConVars["nademenu"]:GetBool() then return end
-    if !self:GetValue("CanQuickNade") then return end
+    if !self:IsQuickNadeAllowed() then return end
 
     -- adapted from tfa vox radial menu
     local nades = self:GetAvailableGrenades(false)
@@ -152,7 +152,7 @@ function SWEP:DrawGrenadeHUD()
     filledcircle(scrw / 2, scrh / 2, r, 32)
 
     if #nades == 0 then
-        local nadetext = "NO GRENADES AVAILABLE"
+        local nadetext = TacRP:GetPhrase("hint.nogrenades")
         surface.SetFont("TacRP_HD44780A00_5x8_8")
         local nadetextw = surface.GetTextSize(nadetext)
         surface.SetTextPos(scrw / 2 - nadetextw * 0.5, scrh / 2 + TacRP.SS(6))
@@ -206,11 +206,23 @@ function SWEP:DrawGrenadeHUD()
             surface.SetMaterial(nade.Icon)
             surface.DrawTexturedRect(nadex - sg * 0.5, nadey - sg * 0.5 - TacRP.SS(8), sg, sg)
         end
-        local nadetext = nade.PrintName .. (qty and ("x" .. qty) or "")
+        local nadetext = TacRP:GetPhrase("quicknade." .. nade.PrintName .. ".name") or nade.PrintName
         surface.SetFont("TacRP_HD44780A00_5x8_8")
         local nadetextw = surface.GetTextSize(nadetext)
         surface.SetTextPos(nadex - nadetextw * 0.5, nadey + TacRP.SS(6))
         surface.DrawText(nadetext)
+
+		if !TacRP.IsGrenadeInfiniteAmmo(nade.Index) then
+			local qty
+			if nade.Singleton then
+				qty = self:GetOwner():HasWeapon(nade.GrenadeWep) and "x1" or "x0"
+			else
+				qty = "x" .. tostring(self:GetOwner():GetAmmoCount(nade.Ammo))
+			end
+			local qtyw = surface.GetTextSize(qty)
+			surface.SetTextPos(nadex - qtyw * 0.5, nadey + TacRP.SS(15))
+			surface.DrawText(qty)
+		end
 
         d = d - arcdegrees
 
@@ -223,7 +235,7 @@ function SWEP:DrawGrenadeHUD()
         surface.DrawTexturedRect(scrw / 2 - sg * 0.5, scrh / 2 - sg * 0.5 - TacRP.SS(8), sg, sg)
     end
 
-    local nadetext = nade.PrintName
+    local nadetext = TacRP:GetPhrase("quicknade." .. nade.PrintName .. ".name") or nade.PrintName
     surface.SetFont("TacRP_HD44780A00_5x8_8")
     local nadetextw = surface.GetTextSize(nadetext)
     surface.SetTextPos(scrw / 2 - nadetextw * 0.5, scrh / 2 + TacRP.SS(6))
@@ -256,7 +268,10 @@ function SWEP:DrawGrenadeHUD()
     TacRP.DrawCorneredBox(tx, ty - h * 0.5 - TacRP.SS(28), w, TacRP.SS(24), col)
     surface.SetTextColor(255, 255, 255, a * 255)
 
-    local name = nade.FullName or nade.PrintName
+    local name = TacRP:GetPhrase("quicknade." .. nade.PrintName .. ".name.full")  
+	or TacRP:GetPhrase("quicknade." .. nade.PrintName .. ".name")  
+	or nade.FullName 
+	or nade.PrintName
     surface.SetFont("TacRP_Myriad_Pro_16")
     local name_w, name_h = surface.GetTextSize(name)
     if name_w > w then
@@ -274,20 +289,20 @@ function SWEP:DrawGrenadeHUD()
 
     surface.SetFont("TacRP_Myriad_Pro_8")
     surface.SetTextPos(tx + TacRP.SS(4), ty - h / 2 + TacRP.SS(2))
-    surface.DrawText("FUSE:")
+    surface.DrawText(	TacRP:GetPhrase("quicknade.fuse")	)
 
     surface.SetFont("TacRP_Myriad_Pro_8")
     surface.SetTextPos(tx + TacRP.SS(4), ty - h / 2 + TacRP.SS(10))
-    surface.DrawText(nade.DetType or "")
+    surface.DrawText(TacRP:GetPhrase("quicknade." .. nade.PrintName .. ".dettype") or nade.DetType or "")
 
     surface.SetFont("TacRP_Myriad_Pro_8")
     surface.SetTextPos(tx + TacRP.SS(4), ty - h / 2 + TacRP.SS(22))
-    surface.DrawText("DESCRIPTION:")
+    surface.DrawText(	TacRP:GetPhrase("cust.description")	)
 
     surface.SetFont("TacRP_Myriad_Pro_8")
 
     if nade.Description then
-        nade.DescriptionMultiLine = TacRP.MultiLineText(nade.Description or "", w - TacRP.SS(7), "TacRP_Myriad_Pro_8")
+        nade.DescriptionMultiLine = TacRP.MultiLineText(TacRP:GetPhrase("quicknade." .. nade.PrintName .. ".desc") or nade.Description or "", w - TacRP.SS(7), "TacRP_Myriad_Pro_8")
     end
 
     surface.SetTextColor(255, 255, 255, a * 255)
@@ -309,32 +324,34 @@ function SWEP:DrawGrenadeHUD()
 
         local binded = input.LookupBinding("grenade1")
 
-        TacRP.DrawCorneredBox(tx, ty + h * 0.5 + TacRP.SS(2), w, TacRP.SS(binded and 36 or 28), col)
+        TacRP.DrawCorneredBox(tx, ty + h * 0.5 + TacRP.SS(2), w, TacRP.SS(28), col)
 
         surface.SetTextPos(tx + TacRP.SS(4), ty + h / 2 + TacRP.SS(4))
-        surface.DrawText("[LMB] - Throw Overhand")
+        surface.DrawText( "[ " .. TacRP.GetBind("+attack") .. " ] " .. TacRP:GetPhrase("hint.quicknade.over") )
+		
         surface.SetTextPos(tx + TacRP.SS(4), ty + h / 2 + TacRP.SS(12))
-        surface.DrawText("[RMB] - Throw Underhand")
-        if binded then
-            surface.SetTextPos(tx + TacRP.SS(4), ty + h / 2 + TacRP.SS(20))
-            surface.DrawText("Hold/Tap [" .. TacRP.GetBind("grenade1") .. "] - Over/Under")
-        end
+        surface.DrawText( "[ " .. TacRP.GetBind("+attack2") .. " ] " .. TacRP:GetPhrase("hint.quicknade.under") )
+		
         if TacRP.AreTheGrenadeAnimsReadyYet then
-            surface.SetTextPos(tx + TacRP.SS(4), ty + h / 2 + TacRP.SS(28))
-            surface.DrawText("[MMB] - Pull Out Grenade")
+            surface.SetTextPos(tx + TacRP.SS(4), ty + h / 2 + TacRP.SS(20))
+			surface.DrawText( "[ MOUSE3 ] " .. TacRP:GetPhrase("hint.quicknade.pull_out") )
         end
     else
+		local binded = input.LookupBinding("grenade1")
+
+		if binded then button = TacRP.GetBind("grenade1") else button = "G" end
 
         TacRP.DrawCorneredBox(tx, ty + h * 0.5 + TacRP.SS(2), w, TacRP.SS(28), col)
 
         surface.SetTextPos(tx + TacRP.SS(4), ty + h / 2 + TacRP.SS(4))
-        surface.DrawText("Hold [" .. TacRP.GetBind("grenade1") .. "] - Throw Overhand")
+        surface.DrawText("[ " ..button .. " ] " .. TacRP:GetPhrase("hint.quicknade.over") .. " " .. TacRP:GetPhrase("hint.hold") )
+		
         surface.SetTextPos(tx + TacRP.SS(4), ty + h / 2 + TacRP.SS(12))
-        surface.DrawText("Tap [" .. TacRP.GetBind("grenade1") .. "] - Throw Underhand")
+        surface.DrawText("[ " .. button .. " ] " .. TacRP:GetPhrase("hint.quicknade.under") )
 
         if TacRP.AreTheGrenadeAnimsReadyYet then
             surface.SetTextPos(tx + TacRP.SS(4), ty + h / 2 + TacRP.SS(20))
-            surface.DrawText("[MMB] - Pull Out Grenade")
+            surface.DrawText( "[ MOUSE3 ] " .. TacRP:GetPhrase("hint.quicknade.pull_out") )
         end
     end
 end
@@ -684,6 +701,64 @@ local bf_lines = {
     "Every deity and the spirits of your dead comrades are watching you intently. They will tell you what fun they had.",
     "You may nod then, or wonder what happened. You may even hear a final sound like the breaking of crystal. Then you are no more.",
     -- Kamikaze manual ends
+    "How can you live with yourself?",
+    "A man never steps into the same river twice.",
+    "I don't blame you.",
+    "A robot must protect its own existence as long as such protection does not conflict with the First or Second Law.",
+    "Where is female_05?",
+    "See you in Hell.",
+    "I will not say 'Da svidanya', Commander, because I can assure you, we will never meet again.", -- Red Alert 3
+    "Die Krieg ist verlun.", -- Der Untergang :)
+    "You're a bad kid.",
+    "What would your mother think, if she could see you now?",
+    "I am the Law.",
+    "Fire and forget.",
+    "We will meet again, at the end of Days.",
+    "You're not gonna like where you go next.",
+    "Uh oh!!! The SERVERBLIGHT is coming!!!",
+    "Oh, what's the point.",
+    "Why even bother?",
+    "Cut my life into pieces; this is my last resort.", -- Last Resort by Papa Roach
+    "I wish somebody would tell me I'm fine.",
+    "It all started when I lost my mother.",
+    "I can't go on living this way.",
+    "Nothing's alright. Nothing is fine.", -- End Papa Roach
+    "Would it not be wondrous for this whole nation to be destroyed like a beautiful flower?",
+    "You are borderline retarded, ya fucking dipshit.",
+    "If we could talk, you would understand.",
+    "Think of the poorest person you know and see if your next act will be of any use to him.",
+    "Let your every day be full of joy, love the child that holds your hand, let your wife delight in your embrace, for these alone are the concerns of humanity.",
+    "I am the flail of God. If you had not committed great sins, God would not have sent a punishment like me upon you.",
+    "Against stupidity, the gods themselves contend in vain.",
+    "I believe today that my conduct is in accordance with the will of the Almighty.",
+    "Mein leben!",
+    "Don't wait until tomorrow to do what can be done today.",
+    "Oh, it's only 9mm. You'll be fine.",
+    "Uh, that's airsoft, right?",
+    "I can prove it wasn't murder! You see, first he did this-",
+    "What are you doing!? The safety's on!",
+    "Join me, and choose happiness.",
+    "Nothing you do has any effect on anything.",
+    "No one will remember your name when you die.",
+    "An eye for an eye.",
+    "But what do the quips mean, really?",
+    "Personally, I use TacRP for the quips.",
+    "Eh, register for organ donation first.",
+    "Don't forget to wash your foreskin!",
+    "There are fates worse than death.",
+    "This is pay to win.",
+    "This is the LIVING room! You can't do that here!",
+    "For god's sake, stop! Do it in the bathtub, it'll be easier to clean.",
+    "Upon closer inspection, he is merely pretending to be dead.",
+    "Resistance to tyranny is obedience to God.",
+    "Now's your chance to be a big shot.",
+    "Now or never.",
+    "I don't want to live forever.",
+    "It's my life.",
+    "I did it my way.",
+    "Might as well jump.",
+    "But you'll have to have them all pulled out after the Savoy Truffle.",
+    "What if your head just did that"
 }
 
 local function canhighlight(self, slice)
@@ -844,7 +919,7 @@ function SWEP:DrawBlindFireHUD()
 
         surface.SetFont("TacRP_Myriad_Pro_12")
         surface.SetTextColor(255, 255, 255, 255 * a)
-        local t1 = "Shoot Yourself"
+        local t1 = TacRP:GetPhrase("hint.shootself")
         local t1_w = surface.GetTextSize(t1)
         surface.SetTextPos(tx - t1_w / 2, ty + TacRP.SS(2))
         surface.DrawText(t1)
@@ -860,7 +935,11 @@ function SWEP:DrawBlindFireHUD()
         local t2 = bf_funnyline or ""
         if bf_suicidelock > 0 then
             surface.SetFont("TacRP_Myriad_Pro_8")
-            t2 = "[" .. TacRP.GetBind("attack") .. "] - Unlock"
+            t2 = "[ " .. TacRP.GetBind("attack") .. " ] - " .. TacRP:GetPhrase("hint.unlock")
+			
+			if self:GetCustomize() then
+				t2 = TacRP:GetPhrase("hint.exitcustmenu")
+			end
             lastseenfunnyline = false
         elseif !bf_funnyline then
             bf_funnyline = bf_lines[math.random(1, #bf_lines)]

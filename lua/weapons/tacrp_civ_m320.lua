@@ -8,10 +8,13 @@ SWEP.PrintName = "HK M320LE"
 SWEP.AbbrevName = "M320LE"
 SWEP.Category = "Tactical RP (Special)"
 
+SWEP.NoAimAssist = true
+
 SWEP.SubCatTier = "9Special"
 SWEP.SubCatType = "6Launcher"
 
 SWEP.Description = "Law Enforcement version of the M320 sanctioned for less-lethal munitions. Fires beanbag rounds that incapacitate on direct hit."
+SWEP.Description_Quote = "That is one dangerous beanbag..."
 
 SWEP.Trivia_Caliber = "40mm Grenades"
 SWEP.Trivia_Manufacturer = "Heckler & Koch"
@@ -21,7 +24,8 @@ SWEP.Faction = TacRP.FACTION_NEUTRAL
 SWEP.Credits = "Assets: Tactical Intervention"
 
 SWEP.ViewModel = "models/weapons/tacint/v_m320.mdl"
-SWEP.WorldModel = "models/weapons/tacint/w_m320.mdl"
+SWEP.WorldModel = "models/weapons/tacint/w_m320_civ.mdl"
+SWEP.DefaultSkin = 1
 
 SWEP.NoRanger = true
 

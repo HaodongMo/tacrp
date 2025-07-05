@@ -47,6 +47,10 @@ local ammotypes = {
     },
 }
 
+function TacRP.AddAmmoType(name, data)
+    ammotypes[name] = data
+end
+
 hook.Add("Initialize", "tacrp_ammo", function()
     local expanded = TacRP.ConVars["expandedammotypes"]:GetBool()
     for k, v in SortedPairs(ammotypes) do

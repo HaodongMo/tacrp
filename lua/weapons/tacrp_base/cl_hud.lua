@@ -7,7 +7,7 @@ function SWEP:ShouldDrawCrosshair()
         and !(self:DoForceSightsBehavior() and !self:GetPeeking())
         and !self:GetJammed()
         and (self:GetSightAmount() <= 0.5 or (self:GetPeeking() and !self:GetValue("ThermalCamera")) or self:DoLowerIrons())
-        and !(self:GetValue("CanQuickNade") and tobool(self:GetOwner():GetInfo("tacrp_nademenu")) and self:GetOwner():KeyDown(IN_GRENADE2))
+        and !(self:IsQuickNadeAllowed() and tobool(self:GetOwner():GetInfo("tacrp_nademenu")) and self:GetOwner():KeyDown(IN_GRENADE2))
         and !(self:GetValue("CanBlindFire") and tobool(self:GetOwner():GetInfo("tacrp_blindfiremenu")) and (self:GetOwner():KeyDown(IN_ZOOM) or self:GetOwner().TacRPBlindFireDown))
 end
 
@@ -22,7 +22,7 @@ function SWEP:DoDrawCrosshair(x, y)
         self.CrosshairAlpha = math.Approach(self.CrosshairAlpha, 1, 5 * ft)
     end
 
-    local dev = GetConVar("developer"):GetInt() > 0 and LocalPlayer():IsAdmin()
+    local dev = TacRP.Developer()
     local tacfunc
     if self:GetValue("TacticalCrosshair") and self:GetTactical() then
         tacfunc = self:GetValue("TacticalCrosshair")
@@ -110,16 +110,16 @@ function SWEP:DoDrawCrosshair(x, y)
     if dev then
 
         if self:StillWaiting() then
-            surface.SetDrawColor(150, 150, 150, 150)
+            surface.SetDrawColor(150, 150, 150, 75)
         else
-            surface.SetDrawColor(255, 50, 50, 150)
+            surface.SetDrawColor(255, 50, 50, 75)
         end
         surface.DrawLine(x2, y2 - 256, x2, y2 + 256)
         surface.DrawLine(x2 - 256, y2, x2 + 256, y2)
         spread = TacRP.GetFOVAcc(self)
         local recoil_txt = "Recoil: " .. tostring(math.Round(self:GetRecoilAmount() or 0, 3))
-        surface.DrawCircle(x2, y2, spread, 255, 255, 255, 150)
-        surface.DrawCircle(x2, y2, spread + 1, 255, 255, 255, 150)
+        surface.DrawCircle(x2, y2, spread, 255, 255, 255, 75)
+        surface.DrawCircle(x2, y2, spread + 1, 255, 255, 255, 75)
         surface.SetFont("TacRP_Myriad_Pro_32_Unscaled")
         surface.SetTextColor(255, 255, 255, 255)
         surface.SetTextPos(x2 - 256, y2)
@@ -191,7 +191,7 @@ local col_hi2 = Color(255, 230, 200)
 local col_dark = Color(255, 255, 255, 20)
 
 function SWEP:ShouldDrawBottomBar()
-    return self:GetFiremodeAmount() > 0 or self:GetValue("CanQuickNade")
+    return self:GetFiremodeAmount() > 0 or self:IsQuickNadeAllowed()
 end
 
 function SWEP:DrawBottomBar(x, y, w, h)
@@ -205,6 +205,8 @@ function SWEP:DrawBottomBar(x, y, w, h)
         local sfm = TacRP.SS(14)
         surface.DrawTexturedRect(x + w - sfm - TacRP.SS(1 + 10), y + h - sfm - TacRP.SS(1), sfm, sfm)
     end
+
+    local fmoffset = TacRP.SS(25)
 
     if self:GetFiremodeAmount() > 1 and !self:GetSafe() then
         local nextfm = TacRP.GetBind("use") .. "+" .. TacRP.GetBind("reload")
@@ -224,9 +226,11 @@ function SWEP:DrawBottomBar(x, y, w, h)
         surface.SetDrawColor(col)
         local nfm = TacRP.SS(8)
         surface.DrawTexturedRect(x + w - nfm - TacRP.SS(4), y + h - nfm - TacRP.SS(1), nfm, nfm)
+    elseif self:GetFiremodeAmount() == 0 then
+        fmoffset = 0
     end
 
-    if self:GetValue("CanQuickNade") then
+    if self:IsQuickNadeAllowed() then
         local nade = self:GetGrenade()
 
         local qty = nil --"INF"
@@ -245,11 +249,20 @@ function SWEP:DrawBottomBar(x, y, w, h)
             surface.DrawTexturedRect(x + TacRP.SS(2), y + h - sg - TacRP.SS(1), sg, sg)
         end
 
-        local nadetext = nade.PrintName .. (qty and ("x" .. qty) or "")
-        surface.SetTextPos(x + TacRP.SS(4) + sg, y + h - sg + TacRP.SS(1))
-        surface.SetFont("TacRP_HD44780A00_5x8_8")
         surface.SetTextColor(col)
+        if qty then
+            surface.SetTextPos(x + TacRP.SS(4) + sg, y + h - sg + TacRP.SS(8))
+            surface.SetFont("TacRP_HD44780A00_5x8_4")
+            surface.DrawText("x" .. qty)
+            surface.SetFont("TacRP_HD44780A00_5x8_6")
+        else
+            surface.SetFont("TacRP_HD44780A00_5x8_8")
+        end
+
+        local nadetext = TacRP:GetPhrase("quicknade." .. nade.PrintName .. ".name") or nade.PrintName
+        surface.SetTextPos(x + TacRP.SS(4) + sg, y + h - sg + TacRP.SS(1))
         surface.DrawText(nadetext)
+
 
         local mat = nil
         if !TacRP.ConVars["nademenu"]:GetBool() then
@@ -263,7 +276,7 @@ function SWEP:DrawBottomBar(x, y, w, h)
         if mat then
             surface.SetMaterial(mat)
             surface.SetDrawColor(255, 255, 255)
-            surface.DrawTexturedRect(x + w - TacRP.SS(41), y + h - nsg - TacRP.SS(1), nsg, nsg)
+            surface.DrawTexturedRect(x + w - fmoffset - TacRP.SS(5) - nsg, y + h - nsg, nsg, nsg)
         end
 
         local nextnadetxt = TacRP.GetBind("+grenade2")
@@ -271,7 +284,7 @@ function SWEP:DrawBottomBar(x, y, w, h)
         surface.SetTextColor(col)
         surface.SetFont("TacRP_HD44780A00_5x8_4")
         local tw = surface.GetTextSize(nextnadetxt)
-        surface.SetTextPos(x + w - TacRP.SS(36) - (tw / 2), y + h - nsg - TacRP.SS(4))
+        surface.SetTextPos(x + w - fmoffset - (tw / 2) - nsg, y + h - nsg - TacRP.SS(4))
         surface.DrawText(nextnadetxt)
     end
 end
@@ -375,8 +388,8 @@ function SWEP:DrawHUDBackground()
         end
     end
 
-    if !self:GetCustomize() and TacRP.ConVars["hud"]:GetBool() then
-        if TacRP.ConVars["drawhud"]:GetBool() and engine.ActiveGamemode() != "terrortown" then
+    if !self:GetCustomize() then
+        if TacRP.ConVars["hud"]:GetBool() and TacRP.ConVars["drawhud"]:GetBool() and engine.ActiveGamemode() != "terrortown" then
 
             local w = TacRP.SS(110)
             local h = TacRP.SS(40)
@@ -403,8 +416,23 @@ function SWEP:DrawHUDBackground()
             local ammotype = self:GetValue("PrimaryGrenade") and (TacRP.QuickNades[self:GetValue("PrimaryGrenade")].Ammo) or self:GetAmmoType()
             local clips = math.min(math.ceil(self:GetOwner():GetAmmoCount(ammotype)), 999)
 
-            if self.Primary.ClipSize > 0 then
+            if self:GetValue("HUDAmmoMeter") then
+                local boxes = 25
+                local bw, bh = TacRP.SS(2), TacRP.SS(10)
+                local frac = math.Clamp(math.ceil(boxes * self:Clip1() / self:GetValue("ClipSize")), 0, boxes)
+                for i = 1, boxes do
+                    if i - 1 > (boxes - frac) then
+                        surface.SetDrawColor(col)
+                    elseif i - 1 == (boxes - frac) then
+                        surface.SetDrawColor(col_hi)
+                    else
+                        surface.SetDrawColor(col_dark)
+                    end
+                    surface.DrawRect(x + (i * (bw + TacRP.SS(1))), y + TacRP.SS(12), bw, bh)
+                end
 
+                draw.SimpleText(self:Clip1(), "TacRP_HD44780A00_5x8_10", x + TacRP.SS(93), y + TacRP.SS(17), col, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+            elseif self.Primary.ClipSize > 0 then
                 if TacRP.ConVars["hud_ammo_number"]:GetBool() then
                     surface.SetFont("TacRP_HD44780A00_5x8_10")
                     local t = math.max(0, self:Clip1()) .. " /" .. self.Primary.ClipSize
@@ -909,9 +937,9 @@ function SWEP:DrawLockOnHUD()
 
         render.OverrideBlend(true, BLEND_ONE, BLEND_ONE, BLENDFUNC_ADD)
 
-        local trueFOV = self:WidescreenFix(self.TacRPLastFOV)
+        local trueFOV = self:WidescreenFix(self.TacRPLastFOV or 90)
 
-        local circle = (ScrH() / trueFOV) * math.deg(math.acos(self:GetValue("LockOnAngle"))) * 1.5 + ss
+        local circle = (ScrH() / trueFOV) * self:GetValue("LockOnTrackAngle") + ss
         local offset = 0
 
         for i = 0, 15 do
@@ -921,6 +949,20 @@ function SWEP:DrawLockOnHUD()
             local x2 = sx + math.cos(angle + offset + (math.pi * 1 / 8)) * circle
             local y2 = sy + math.sin(angle + offset + (math.pi * 1 / 8)) * circle
             surface.DrawLine(x1, y1, x2, y2)
+        end
+
+        if !IsValid(self:GetLockOnEntity()) then
+            local circle2 = (ScrH() / trueFOV) * 1 + ss
+            local offset2 = 0
+
+            for i = 0, 15 do
+                local angle = (i / 8) * math.pi
+                local x1 = sx + math.cos(angle + offset2) * circle2
+                local y1 = sy + math.sin(angle + offset2) * circle2
+                local x2 = sx + math.cos(angle + offset2 + (math.pi * 1 / 8)) * circle2
+                local y2 = sy + math.sin(angle + offset2 + (math.pi * 1 / 8)) * circle2
+                surface.DrawLine(x1, y1, x2, y2)
+            end
         end
 
         render.OverrideBlend(false, BLEND_ONE, BLEND_ONE, BLENDFUNC_ADD)

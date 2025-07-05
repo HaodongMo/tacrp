@@ -170,7 +170,7 @@ SWEP.SightPos = Vector(-2.45, -4, -3.11)
 SWEP.SprintAng = Angle(30, -15, 0)
 SWEP.SprintPos = Vector(5, 0, -2)
 
-SWEP.CorrectivePos = Vector(-0.675, 0, 0.15)
+SWEP.CorrectivePos = Vector(-0.64, 0, 0.15)
 SWEP.CorrectiveAng = Angle(-2.5, 2.5, 0)
 
 SWEP.HolsterVisible = true
@@ -229,6 +229,8 @@ SWEP.ProceduralIronFire = {
 }
 
 // attachments
+
+SWEP.NoRMR = true
 
 SWEP.Attachments = {
     [1] = {

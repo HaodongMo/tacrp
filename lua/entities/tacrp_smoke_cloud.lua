@@ -19,13 +19,17 @@ ENT.SmokeColor = Color(150, 150, 150)
 ENT.BillowTime = 1
 ENT.Life = 20
 
+-- Cheap maths
+ENT.SmokeRadiusSqr = ENT.SmokeRadius * ENT.SmokeRadius
+
 AddCSLuaFile()
 
 function ENT:Initialize()
+    local mins, maxs = Vector(-self.SmokeRadius / 2, -self.SmokeRadius / 2, -self.SmokeRadius / 2), Vector(self.SmokeRadius / 2, self.SmokeRadius / 2, self.SmokeRadius / 2)
     if SERVER then
-        self:SetModel( "models/weapons/w_eq_smokegrenade_thrown.mdl" )
+        self:PhysicsInitSphere(self.SmokeRadius / 2)
+        self:SetCollisionBounds(mins, maxs)
         self:SetMoveType( MOVETYPE_NONE )
-        self:SetSolid( SOLID_NONE )
         self:DrawShadow( false )
     else
 
@@ -98,8 +102,56 @@ function ENT:Initialize()
         emitter:Finish()
     end
 
-    self.dt = CurTime() + self.Life + self.BillowTime + 2
+    if TacRP.ConVars["smoke_affectnpcs"]:GetBool() then
+        self:EnableCustomCollisions()
+        self:SetCustomCollisionCheck(true)
+        self:CollisionRulesChanged()
+    else
+        self:SetSolid(SOLID_NONE)
+    end
+
+    self.dt = CurTime() + self.Life + self.BillowTime
 end
+
+function ENT:TestCollision( startpos, delta, isbox, extents, mask )
+    if (mask == MASK_BLOCKLOS or mask == MASK_BLOCKLOS_AND_NPCS) then
+        local len = delta:Length()
+        if len <= 200 then return false end -- NPCs can see very close
+
+        local rad = self.SmokeRadiusSqr
+        local pos = self:GetPos()
+        local dir = delta:GetNormalized()
+
+        -- Trace started within the smoke
+        if startpos:DistToSqr(pos) <= rad then
+            return {
+                HitPos = startpos,
+                Fraction = 0,
+                Normal = -dir,
+            }
+        end
+
+        -- Find the closest point on the original trace to the smoke's origin point
+        local t = (pos - startpos):Dot(dir)
+        local p = startpos + t * dir
+
+        -- If the point is within smoke radius, the trace is intersecting the smoke
+        if p:DistToSqr(pos) <= rad then
+            return {
+                HitPos = p,
+                Fraction = math.Clamp(t / len, 0, 0.95),
+                Normal = -dir,
+            }
+        end
+    else
+        return false
+    end
+end
+
+hook.Add("ShouldCollide", "tacrp_smoke_cloud", function(ent1, ent2)
+    if ent1.TacRPSmoke and !ent2:IsNPC() then return false end
+    if ent2.TacRPSmoke and !ent1:IsNPC()  then return false end
+end)
 
 function ENT:Think()
 
@@ -109,14 +161,19 @@ function ENT:Think()
             return
         end
 
+        --[[]
+        if !TacRP.ConVars["smoke_affectnpcs"]:GetBool() then return end
         local targets = ents.FindInSphere(self:GetPos(), self.SmokeRadius)
         for _, k in pairs(targets) do
             if k:IsNPC() then
+                local ret = hook.Run("TacRP_StunNPC", k, self)
+                if ret then continue end
                 k:SetSchedule(SCHED_STANDOFF)
             end
         end
 
         self:NextThink(CurTime() + 0.5)
+        ]]
         return true
     end
 end

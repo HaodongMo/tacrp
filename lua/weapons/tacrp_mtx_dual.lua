@@ -11,6 +11,7 @@ SWEP.SubCatTier = "1Elite"
 SWEP.SubCatType = "3Akimbo"
 
 SWEP.Description = "An indulgent pair of high capacity, high damage, high quality compact pistols.\nWith firepower like this, who needs aiming?"
+SWEP.Description_Quote = "With firepower like this, who needs aiming?"
 
 SWEP.Trivia_Caliber = ".45 ACP"
 SWEP.Trivia_Manufacturer = "Detonics Defense"
@@ -26,10 +27,13 @@ SWEP.Slot = 1
 
 SWEP.BalanceStats = {
     [TacRP.BALANCE_SBOX] = {
-        Damage_Max = 30,
-        Damage_Min = 8,
+        Damage_Max = 28,
+        Damage_Min = 9,
         RPM = 420,
         Spread = 0.02,
+
+        ShootingSpeedMult = 0.75,
+        RecoilKick = 9,
     },
     [TacRP.BALANCE_TTT] = {
         Damage_Max = 14,
@@ -68,9 +72,9 @@ SWEP.TTTReplace = {["weapon_zm_pistol"] = 0.5, ["weapon_ttt_glock"] = 0.5}
 
 // "ballistics"
 
-SWEP.Damage_Max = 32
+SWEP.Damage_Max = 34
 SWEP.Damage_Min = 10
-SWEP.Range_Min = 500 // distance for which to maintain maximum damage
+SWEP.Range_Min = 400 // distance for which to maintain maximum damage
 SWEP.Range_Max = 1800 // distance at which we drop to minimum damage
 SWEP.Penetration = 3 // units of metal this weapon can penetrate
 SWEP.ArmorPenetration = 0.55
@@ -79,7 +83,7 @@ SWEP.ArmorBonus = 0.5
 SWEP.MuzzleVelocity = 11500
 
 SWEP.BodyDamageMultipliers = {
-    [HITGROUP_HEAD] = 4,
+    [HITGROUP_HEAD] = 3.5,
     [HITGROUP_CHEST] = 1,
     [HITGROUP_STOMACH] = 1,
     [HITGROUP_LEFTARM] = 0.9,
@@ -113,8 +117,8 @@ SWEP.RecoilDissipationRate = 20
 SWEP.RecoilFirstShotMult = 1 // multiplier for the first shot's recoil amount
 
 SWEP.RecoilVisualKick = 1
-SWEP.RecoilKick = 5
-SWEP.RecoilStability = 0.15
+SWEP.RecoilKick = 6
+SWEP.RecoilStability = 0.25
 
 SWEP.RecoilSpreadPenalty = 0.002
 
@@ -128,7 +132,7 @@ SWEP.ShootTimeMult = 0.6
 // handling
 
 SWEP.MoveSpeedMult = 0.975
-SWEP.ShootingSpeedMult = 0.9
+SWEP.ShootingSpeedMult = 0.8
 SWEP.SightedSpeedMult = 1
 
 SWEP.ReloadSpeedMult = 0.6
@@ -236,19 +240,19 @@ SWEP.Attachments = {
         AttachSound = "TacRP/weapons/flashlight_on.wav",
         DetachSound = "TacRP/weapons/flashlight_off.wav",
     },
-    [4] = {
+    [5] = {
         PrintName = "Perk",
         Category = {"perk", "perk_melee", "perk_shooting", "perk_reload"},
         AttachSound = "tacrp/weapons/flashlight_on.wav",
         DetachSound = "tacrp/weapons/flashlight_off.wav",
     },
-    [2] = {
+    [3] = {
         PrintName = "Trigger",
         Category = {"trigger_akimbo"},
         AttachSound = "TacRP/weapons/flashlight_on.wav",
         DetachSound = "TacRP/weapons/flashlight_off.wav",
     },
-    [3] = {
+    [4] = {
         PrintName = "Ammo",
         Category = {"ammo_pistol"},
         AttachSound = "TacRP/weapons/flashlight_on.wav",

@@ -7,10 +7,13 @@ AddCSLuaFile()
 SWEP.PrintName = "C4 Detonator"
 SWEP.Category = "Tactical RP (Special)"
 
+SWEP.NoAimAssist = true
+
 SWEP.SubCatTier = "9Special"
 SWEP.SubCatType = "9Equipment"
 
 SWEP.Description = "Device for touching off C4 charges or other types of remote explosives."
+SWEP.Description_Quote = "\"Yeah, fuck you too!\"" -- The Thing (1982)
 
 SWEP.ViewModel = "models/weapons/tacint/v_c4.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_c4_det.mdl"
@@ -137,6 +140,10 @@ function SWEP:PrimaryAttack()
     end
 
     self:SetNextPrimaryFire(CurTime() + (60 / self:GetValue("RPM")))
+end
+
+function SWEP:IsQuickNadeAllowed()
+    return true // Otherwise it's useless!
 end
 
 function SWEP:SecondaryAttack()

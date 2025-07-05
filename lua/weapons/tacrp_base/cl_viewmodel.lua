@@ -93,12 +93,18 @@ function SWEP:DrawCustomModel(wm, custom_wm)
                     if ele.AttPosMods[slot].Ang_WM then
                         offset_ang = ele.AttPosMods[slot].Ang_WM
                     end
+                    if ele.AttPosMods[slot].WMBone then
+                        bone = ele.AttPosMods[slot].WMBone
+                    end
                 else
                     if ele.AttPosMods[slot].Pos_VM then
                         offset_pos = ele.AttPosMods[slot].Pos_VM
                     end
                     if ele.AttPosMods[slot].Ang_VM then
                         offset_ang = ele.AttPosMods[slot].Ang_VM
+                    end
+                    if ele.AttPosMods[slot].Bone then
+                        bone = ele.AttPosMods[slot].Bone
                     end
                 end
             end
@@ -148,10 +154,10 @@ function SWEP:DrawCustomModel(wm, custom_wm)
 
         if model.IsHolosight and !wm then
             cam.Start3D(EyePos(), EyeAngles(), self.ViewModelFOV, 0, 0, nil, nil, 1, 10000)
-            cam.IgnoreZ(true)
+            render.DepthRange(0.0, 0.1)
             self:DoHolosight(model)
             cam.End3D()
-            cam.IgnoreZ(true)
+            render.DepthRange(0.0, 0.1)
         end
 
         if !model.NoDraw then
@@ -181,7 +187,7 @@ function SWEP:PreDrawViewModel()
     end
     -- self.ViewModelFOV = self:GetViewModelFOV()
 
-    cam.IgnoreZ(true)
+    render.DepthRange(0.0, 0.1)
 end
 
 function SWEP:PostDrawViewModel()

@@ -1,6 +1,6 @@
 
 local function draw_debug()
-    return (CLIENT or game.SinglePlayer()) and GetConVar("developer"):GetInt() >= 2
+    return (CLIENT or game.SinglePlayer()) and TacRP.Developer(2)
 end
 
 local function IsPenetrating(ptr, ptrent)
@@ -89,7 +89,7 @@ function SWEP:Penetrate(tr, range, penleft, alreadypenned)
 
         ptr = util.TraceLine(td)
 
-        if GetConVar("developer"):GetBool() then
+        if TacRP.Developer() then
             local pdeltap = penleft / self:GetValue("Penetration")
             local colorlr = Lerp(pdeltap, 0, 255)
 
@@ -98,6 +98,8 @@ function SWEP:Penetrate(tr, range, penleft, alreadypenned)
 
         endpos = endpos + (dir * pentracelen)
         range = range + pentracelen
+
+        ptrent = ptr.Entity
     end
 
     if penleft > 0 then
@@ -114,7 +116,7 @@ function SWEP:Penetrate(tr, range, penleft, alreadypenned)
                 range = range + (btr.HitPos - btr.StartPos):Length()
                 self:AfterShotFunction(btr, dmg, range, penleft, alreadypenned)
 
-                if GetConVar("developer"):GetBool() then
+                if TacRP.Developer() then
                     if SERVER then
                         debugoverlay.Cross(btr.HitPos, 4, 5, Color(255, 0, 0), false)
                     else

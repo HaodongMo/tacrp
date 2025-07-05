@@ -17,7 +17,8 @@ ENT.ExplodeUnderwater = true
 
 ENT.Delay = 0
 ENT.SafetyFuse = 0.7
-ENT.BoostTime = 0.25
+ENT.BoostTime = 0.3
+ENT.ImpactDamage = 150
 
 ENT.AudioLoop = "TacRP/weapons/rpg7/rocket_flight-1.wav"
 
@@ -43,48 +44,6 @@ function ENT:Initialize()
         phys:SetVelocity(self:GetForward() * 4000)
     end
 end
-
-
-function ENT:Impact(data, collider)
-    if self.SpawnTime + self.BoostTime > CurTime() and !self.NPCDamage then
-        local attacker = self.Attacker or self:GetOwner()
-        local ang = data.OurOldVelocity:Angle()
-        local fx = EffectData()
-        fx:SetOrigin(data.HitPos)
-        fx:SetNormal(-ang:Forward())
-        fx:SetAngles(-ang)
-        util.Effect("ManhackSparks", fx)
-
-        if IsValid(data.HitEntity) then
-            local dmginfo = DamageInfo()
-            dmginfo:SetAttacker(attacker)
-            dmginfo:SetInflictor(self)
-            dmginfo:SetDamageType(DMG_CRUSH + DMG_CLUB)
-            dmginfo:SetDamage(250 * (self.NPCDamage and 0.5 or 1))
-            dmginfo:SetDamageForce(data.OurOldVelocity * 25)
-            dmginfo:SetDamagePosition(data.HitPos)
-            data.HitEntity:TakeDamageInfo(dmginfo)
-        end
-
-        self:EmitSound("weapons/rpg/shotdown.wav", 80)
-
-        for i = 1, 4 do
-            local prop = ents.Create("prop_physics")
-            prop:SetPos(self:GetPos())
-            prop:SetAngles(self:GetAngles())
-            prop:SetModel("models/weapons/tacint/rpg7_shrapnel_p" .. i .. ".mdl")
-            prop:Spawn()
-            prop:GetPhysicsObject():SetVelocityInstantaneous(data.OurNewVelocity * 0.5 + VectorRand() * 75)
-            prop:SetCollisionGroup(COLLISION_GROUP_DEBRIS)
-
-            SafeRemoveEntityDelayed(prop, 3)
-        end
-
-        self:Remove()
-        return true
-    end
-end
-
 
 function ENT:Detonate()
     local attacker = self.Attacker or self:GetOwner()
@@ -116,7 +75,7 @@ function ENT:Detonate()
                 util.Effect("Explosion", fx)
             end
             self:EmitSound("^ambient/explosions/explode_3.wav", 100, 90, 0.75, CHAN_AUTO)
-            util.BlastDamage(self, attacker, self:GetPos(), 200, 300 * mult)
+            util.BlastDamage(self, attacker, self:GetPos(), 128, 500 * mult)
             util.BlastDamage(self, attacker, self:GetPos(), 328, 120 * mult)
             util.BlastDamage(self, attacker, self:GetPos(), 768, 80 * mult)
             local count = 8

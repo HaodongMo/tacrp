@@ -70,50 +70,51 @@ function TacRP.EntityIsNecrotic(ent)
     return false
 end
 
-if CLIENT then
-    -- From GMod wiki
-    function TacRP.FormatViewModelAttachment(nFOV, vOrigin, bFrom)
-        local vEyePos = EyePos()
-        local aEyesRot = EyeAngles()
-        local vOffset = vOrigin - vEyePos
-        local vForward = aEyesRot:Forward()
-        local nViewX = math.tan(nFOV * math.pi / 360)
-
-        if nViewX == 0 then
-            vForward:Mul(vForward:Dot(vOffset))
-            vEyePos:Add(vForward)
-
-            return vEyePos
+function TacRP.FormatTierType(wtype, wtier, use_tiers)
+    if wtype then
+        local type_txt = string.sub(TacRP:TryTranslate(wtype), 2)
+        if use_tiers and wtier and wtier != "9Special" then
+            type_txt = TacRP:GetPhrase("cust.type_tier", {tier = string.sub(TacRP:TryTranslate(wtier), 2), type = type_txt})
         end
-
-        -- FIXME: LocalPlayer():GetFOV() should be replaced with EyeFOV() when it's binded
-        local nWorldX = math.tan(LocalPlayer():GetFOV() * math.pi / 360)
-
-        if nWorldX == 0 then
-            vForward:Mul(vForward:Dot(vOffset))
-            vEyePos:Add(vForward)
-
-            return vEyePos
-        end
-
-        local vRight = aEyesRot:Right()
-        local vUp = aEyesRot:Up()
-
-        if bFrom then
-            local nFactor = nWorldX / nViewX
-            vRight:Mul(vRight:Dot(vOffset) * nFactor)
-            vUp:Mul(vUp:Dot(vOffset) * nFactor)
-        else
-            local nFactor = nViewX / nWorldX
-            vRight:Mul(vRight:Dot(vOffset) * nFactor)
-            vUp:Mul(vUp:Dot(vOffset) * nFactor)
-        end
-
-        vForward:Mul(vForward:Dot(vOffset))
-        vEyePos:Add(vRight)
-        vEyePos:Add(vUp)
-        vEyePos:Add(vForward)
-
-        return vEyePos
+        return type_txt
     end
+    return "Weapon"
+end
+
+
+TacRP.WeaponListCache = {}
+function TacRP.GetWeaponList(subcat, tier)
+    if !subcat then subcat = "" end
+    if !tier then tier = "" end
+    if !TacRP.WeaponListCache[subcat] or !TacRP.WeaponListCache[subcat][tier] then
+        TacRP.WeaponListCache[subcat] = TacRP.WeaponListCache[subcat] or {}
+        TacRP.WeaponListCache[subcat][tier] = {}
+
+        for i, wep in pairs(weapons.GetList()) do
+            local weap = weapons.Get(wep.ClassName)
+            if !weap or !weap.ArcticTacRP
+                    or wep.ClassName == "tacrp_base" or wep.ClassName == "tacrp_base_nade" or wep.ClassName == "tacrp_base_melee"
+                    or !weap.Spawnable or weap.AdminOnly
+                    or (subcat == "npc" and !weap.NPCUsable)
+                    or (subcat != "" and subcat != "npc" and subcat != weap.SubCatType)
+                    or (tier != "" and tier != weap.SubCatTier) then
+                continue
+            end
+
+            table.insert(TacRP.WeaponListCache[subcat][tier], wep.ClassName)
+        end
+    end
+    return TacRP.WeaponListCache[subcat][tier]
+end
+
+function TacRP.GetRandomWeapon(subcat, tier)
+    if !subcat then subcat = "" end
+    if !tier then tier = "" end
+
+    local tbl = TacRP.GetWeaponList(subcat, tier)
+    return tbl[math.random(1, #tbl)]
+end
+
+function TacRP.Developer(i)
+    return (SERVER or (CLIENT and IsValid(LocalPlayer()) and LocalPlayer():IsSuperAdmin())) and GetConVar("developer"):GetInt() >= (i or 1)
 end

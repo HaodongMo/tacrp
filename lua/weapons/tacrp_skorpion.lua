@@ -12,6 +12,7 @@ SWEP.SubCatTier = "4Consumer"
 SWEP.SubCatType = "3Machine Pistol"
 
 SWEP.Description = "Light machine pistol with good range, recoil and spread."
+SWEP.Description_Quote = "\"Please remove any metallic items you're carrying, keys, loose change...\"" -- The Matrix (1999), lobby shootout
 
 SWEP.Trivia_Caliber = ".32 ACP"
 SWEP.Trivia_Manufacturer = "CZ Uherský Brod"
@@ -268,21 +269,21 @@ SWEP.AttachmentElements = {
 }
 
 SWEP.Attachments = {
+    --[1] = {
+        --PrintName = "Optic",
+        --Category = "optic_pistol",
+        --Bone = "Skorpion_ROOT",
+        --WMBone = "Bone02",
+        --AttachSound = "tacrp/weapons/optic_on.wav",
+        --DetachSound = "tacrp/weapons/optic_off.wav",
+        --VMScale = 1.2,
+        --WMScale = 1.2,
+        --Pos_VM = Vector(4.6, 0, 0.5),
+        --Ang_VM = Angle(90, 0, 180),
+        --Pos_WM = Vector(-12, 1.25, -5),
+        --Ang_WM = Angle(0, 0, 180),
+    --},
     [1] = {
-        PrintName = "Optic",
-        Category = "optic_pistol",
-        Bone = "Skorpion_ROOT",
-        WMBone = "Bone02",
-        AttachSound = "tacrp/weapons/optic_on.wav",
-        DetachSound = "tacrp/weapons/optic_off.wav",
-        VMScale = 1.2,
-        WMScale = 1.2,
-        Pos_VM = Vector(4.6, 0, 0.5),
-        Ang_VM = Angle(90, 0, 180),
-        Pos_WM = Vector(-12, 1.25, -5),
-        Ang_WM = Angle(0, 0, 180),
-    },
-    [2] = {
         PrintName = "Muzzle",
         Category = "silencer",
         Bone = "Skorpion_ROOT",
@@ -296,7 +297,7 @@ SWEP.Attachments = {
         Pos_WM = Vector(1.5, 1.25, -4.3),
         Ang_WM = Angle(0, 0, 180),
     },
-    [3] = {
+    [2] = {
         PrintName = "Tactical",
         Category = {"tactical", "tactical_zoom", "tactical_ebullet"},
         Bone = "Skorpion_ROOT",
@@ -310,31 +311,31 @@ SWEP.Attachments = {
         Pos_WM = Vector(-4, 1.25, -3.5),
         Ang_WM = Angle(0, 0, 0),
     },
-    [4] = {
+    [3] = {
         PrintName = "Accessory",
         Category = {"acc", "acc_foldstock", "acc_extmag_smg", "acc_holster"},
         AttachSound = "TacRP/weapons/flashlight_on.wav",
         DetachSound = "TacRP/weapons/flashlight_off.wav",
     },
-    [5] = {
+    [4] = {
         PrintName = "Bolt",
         Category = {"bolt_automatic"},
         AttachSound = "TacRP/weapons/flashlight_on.wav",
         DetachSound = "TacRP/weapons/flashlight_off.wav",
     },
-    [6] = {
+    [5] = {
         PrintName = "Trigger",
         Category = {"trigger_auto"},
         AttachSound = "TacRP/weapons/flashlight_on.wav",
         DetachSound = "TacRP/weapons/flashlight_off.wav",
     },
-    [7] = {
+    [6] = {
         PrintName = "Ammo",
         Category = {"ammo_pistol"},
         AttachSound = "TacRP/weapons/flashlight_on.wav",
         DetachSound = "TacRP/weapons/flashlight_off.wav",
     },
-    [8] = {
+    [7] = {
         PrintName = "Perk",
         Category = {"perk", "perk_melee", "perk_shooting", "perk_reload"},
         AttachSound = "tacrp/weapons/flashlight_on.wav",

@@ -15,6 +15,13 @@ ENT.ImpactFuse = false // projectile explodes on impact.
 ENT.ExplodeOnDamage = false // projectile explodes when it takes damage.
 ENT.ExplodeUnderwater = false
 
+ENT.SoundHint = true
+ENT.SoundHintDelay = 1
+ENT.SoundHintRadius = 512
+ENT.SoundHintDuration = 1
+
+ENT.ImpactDamage = 1
+
 ENT.Delay = 2
 
 ENT.BounceSounds = {
@@ -32,10 +39,10 @@ ENT.ExplodeSounds = {
 function ENT:Detonate()
     local attacker = self.Attacker or self:GetOwner() or self
 
-    local dmg = 150 * TacRP.ConVars["mult_damage_explosive"]:GetFloat()
+    local dmg = TacRP.ConVars["frag_damage"]:GetFloat()
     if self.ImpactFuse then dmg = dmg * 0.5 end
 
-    util.BlastDamage(self, attacker, self:GetPos(), 350, dmg)
+    util.BlastDamage(self, attacker, self:GetPos(), TacRP.ConVars["frag_radius"]:GetFloat(), dmg)
 
     local fx = EffectData()
     fx:SetOrigin(self:GetPos())

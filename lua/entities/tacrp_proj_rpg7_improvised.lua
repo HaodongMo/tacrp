@@ -18,6 +18,7 @@ ENT.ExplodeUnderwater = true
 ENT.Delay = 0
 ENT.SafetyFuse = 0
 ENT.BoostTime = 5
+ENT.ImpactDamage = 150
 
 ENT.AudioLoop = "TacRP/weapons/rpg7/rocket_flight-1.wav"
 
@@ -67,25 +68,7 @@ function ENT:Initialize()
     end
 end
 
-function ENT:Impact(data, collider)
-    if self.Impacted then return end
-    self.Impacted = true
-
-    local attacker = self.Attacker or self:GetOwner() or self
-    if IsValid(data.HitEntity) then
-        local dmginfo = DamageInfo()
-        dmginfo:SetAttacker(attacker)
-        dmginfo:SetInflictor(self)
-        dmginfo:SetDamageType(DMG_CRUSH + DMG_CLUB)
-        dmginfo:SetDamage(250 * (self.NPCDamage and 0.5 or 1))
-        dmginfo:SetDamageForce(data.OurOldVelocity * 25)
-        dmginfo:SetDamagePosition(data.HitPos)
-        data.HitEntity:TakeDamageInfo(dmginfo)
-    end
-end
-
-
-function ENT:Detonate()
+function ENT:Detonate(ent)
     local attacker = self.Attacker or self:GetOwner()
 
     if math.random() <= 0.05 then
@@ -118,22 +101,8 @@ function ENT:Detonate()
     if self.NPCDamage then
         util.BlastDamage(self, attacker, self:GetPos(), 350, 100)
     else
-        // util.BlastDamage(self, attacker, self:GetPos(), 128, math.Rand(300, 700))
-        util.BlastDamage(self, attacker, self:GetPos(), 400, math.Rand(100, 150) * mult)
-        self:FireBullets({
-            Attacker = attacker,
-            Damage = math.Rand(800, 2400) * mult,
-            Tracer = 0,
-            Src = self:GetPos(),
-            Dir = self:GetForward(),
-            HullSize = 0,
-            Distance = 128,
-            IgnoreEntity = self,
-            Callback = function(atk, btr, dmginfo)
-                dmginfo:SetDamageType(DMG_AIRBOAT + DMG_SNIPER + DMG_BLAST) // airboat damage for helicopters and LVS vehicles
-                dmginfo:SetDamageForce(self:GetForward() * math.Rand(10000, 20000)) // LVS uses this to calculate penetration!
-            end,
-        })
+        util.BlastDamage(self, attacker, self:GetPos(), 350, math.Rand(150, 250) * mult)
+        self:ImpactTraceAttack(ent, math.Rand(750, 1500) * mult, math.Rand(7500, 20000))
     end
 
     local fx = EffectData()

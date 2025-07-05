@@ -28,6 +28,33 @@ function SWEP:GenerateAutoSight()
     if !slottbl.Installed then return end
 
     local bone = slottbl.Bone
+    local offset_pos = slottbl.Pos_VM
+    local offset_ang = slottbl.Ang_VM
+
+    for _, ele in ipairs(self:GetElements()) do
+        if !ele.AttPosMods or !ele.AttPosMods[slot] then continue end
+        if wm then
+            if ele.AttPosMods[slot].Pos_WM then
+                offset_pos = ele.AttPosMods[slot].Pos_WM
+            end
+            if ele.AttPosMods[slot].Ang_WM then
+                offset_ang = ele.AttPosMods[slot].Ang_WM
+            end
+            if ele.AttPosMods[slot].WMBone then
+                bone = ele.AttPosMods[slot].WMBone
+            end
+        else
+            if ele.AttPosMods[slot].Pos_VM then
+                offset_pos = ele.AttPosMods[slot].Pos_VM
+            end
+            if ele.AttPosMods[slot].Ang_VM then
+                offset_ang = ele.AttPosMods[slot].Ang_VM
+            end
+            if ele.AttPosMods[slot].Bone then
+                bone = ele.AttPosMods[slot].Bone
+            end
+        end
+    end
 
     if !bone then return end
 
@@ -53,28 +80,6 @@ function SWEP:GenerateAutoSight()
     local bang = self.CorrectiveBoneAng and Angle(self.CorrectiveBoneAng) or mdl:GetBoneMatrix(boneid):GetAngles()
 
     SafeRemoveEntity(mdl)
-
-    local offset_pos = slottbl.Pos_VM
-    local offset_ang = slottbl.Ang_VM
-
-    for _, ele in ipairs(self:GetElements()) do
-        if !ele.AttPosMods or !ele.AttPosMods[slot] then continue end
-        if wm then
-            if ele.AttPosMods[slot].Pos_WM then
-                offset_pos = ele.AttPosMods[slot].Pos_WM
-            end
-            if ele.AttPosMods[slot].Ang_WM then
-                offset_ang = ele.AttPosMods[slot].Ang_WM
-            end
-        else
-            if ele.AttPosMods[slot].Pos_VM then
-                offset_pos = ele.AttPosMods[slot].Pos_VM
-            end
-            if ele.AttPosMods[slot].Ang_VM then
-                offset_ang = ele.AttPosMods[slot].Ang_VM
-            end
-        end
-    end
 
     local apos, aang = bpos, bang
 

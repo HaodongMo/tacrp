@@ -125,6 +125,21 @@ hook.Add("SetupMove", "ArcticTacRP.SetupMove", TacRP.Move)
 TacRP.LastEyeAngles = Angle(0, 0, 0)
 TacRP.RecoilRise = Angle(0, 0, 0)
 
+local function tgt_pos(ent, head) -- From ArcCW & ARC9
+    local mins, maxs = ent:WorldSpaceAABB()
+    local pos = ent:WorldSpaceCenter()
+    pos.z = pos.z + (maxs.z - mins.z) * 0.2 -- Aim at chest level
+    if head and ent:GetAttachment(ent:LookupAttachment("eyes")) ~= nil then
+        pos = ent:GetAttachment(ent:LookupAttachment("eyes")).Pos
+    end
+    return pos
+end
+
+local tacrp_aimassist = GetConVar("tacrp_aimassist")
+local tacrp_aimassist_cone = GetConVar("tacrp_aimassist_cone")
+local tacrp_aimassist_head = GetConVar("tacrp_aimassist_head")
+local tacrp_aimassist_intensity = GetConVar("tacrp_aimassist_intensity")
+
 function TacRP.StartCommand(ply, cmd)
     local wpn = ply:GetActiveWeapon()
     local mt_notair = ply:GetMoveType() == MOVETYPE_NOCLIP or ply:GetMoveType() == MOVETYPE_LADDER
@@ -167,6 +182,7 @@ function TacRP.StartCommand(ply, cmd)
         local kick = wpn:GetValue("RecoilKick")
         local recoildir = wpn:GetRecoilDirection()
         local rec = 1
+        local cfm = wpn:GetCurrentFiremode()
 
         if wpn:UseAltRecoil() then
             rec = 1 + math.Clamp((wpn:GetRecoilAmount() - 1) / (wpn:GetValue("RecoilMaximum") - 1), 0, 1)
@@ -179,16 +195,26 @@ function TacRP.StartCommand(ply, cmd)
             kick = kick * math.min(1, wpn:GetValue("BipodKick"))
         end
 
+        if ply:Crouching() then
+            kick = kick * math.min(1, wpn:GetValue("RecoilMultCrouch"))
+        end
+
+        if cfm < 0 then
+            kick = kick * wpn:GetValue("RecoilMultBurst")
+        elseif cfm == 1 then
+            kick = kick * wpn:GetValue("RecoilMultSemi")
+        end
+
         kick = kick * TacRP.ConVars["mult_recoil_kick"]:GetFloat()
 
         local eyeang = cmd:GetViewAngles()
-
         local suppressfactor = 1
-        if wpn:UseRecoilPatterns() and wpn:GetCurrentFiremode() != 1 then
+        if wpn:UseRecoilPatterns() and cfm != 1 then
             local stab = math.Clamp(wpn:GetValue("RecoilStability"), 0, 0.9)
             local max = wpn:GetBaseValue("RPM") / 60 * (0.75 + stab * 0.833)
             suppressfactor = math.min(3, 1 + (wpn:GetPatternCount() / max))
         end
+
 
         local uprec = math.sin(math.rad(recoildir)) * FrameTime() * rec * kick / suppressfactor
         local siderec = math.cos(math.rad(recoildir)) * FrameTime() * rec * kick
@@ -294,6 +320,65 @@ function TacRP.StartCommand(ply, cmd)
 
     -- Used for sprint checking
     ply.TacRP_Moving = cmd:GetForwardMove() != 0 or cmd:GetSideMove() != 0
+
+    -- Aim assist imported from ARC9
+    if CLIENT and IsValid(wpn) then
+		local cone = tacrp_aimassist_cone:GetFloat()
+		local dist = math.min(wpn.Range_Max * 0.95, 4000) -- 4000hu is somewhat about 100m
+		local inte = tacrp_aimassist_intensity:GetFloat()
+		local head = tacrp_aimassist_head:GetBool()
+
+		local fav = GetConVar("tacrp_freeaim")
+		local far = wpn:GetValue("FreeAimMaxAngle")
+		local swayc = GetConVar("tacrp_sway"):GetBool()
+		local freeac = GetConVar("tacrp_freeaim"):GetBool()
+
+		-- Check if current target is beyond tracking cone
+		local tgt = ply.tacrp_AATarget
+		if IsValid(tgt) and (tgt_pos(tgt, head) - ply:EyePos()):Cross(ply:EyeAngles():Forward()):Length() > cone * 2 then ply.tacrp_AATarget = nil end -- lost track
+
+		-- Try to seek target if not exists
+		tgt = ply.tacrp_AATarget
+		if !IsValid(tgt) or (tgt.Health and tgt:Health() <= 0) or util.QuickTrace(ply:EyePos(), tgt_pos(tgt, head) - ply:EyePos(), ply).Entity ~= tgt then
+			local min_diff
+			ply.tacrp_AATarget = nil
+			-- for _, ent in ipairs(ents.FindInCone(ply:EyePos(), ply:EyeAngles():Forward(), 244, math.cos(math.rad(cone)))) do
+			for _, ent in ipairs(ents.FindInCone(ply:EyePos(), ply:EyeAngles():Forward(), dist, math.cos(math.rad(cone + (fav:GetBool() and far or 0))))) do
+				if ent == ply or (!ent:IsNPC() and !ent:IsNextBot() and !ent:IsPlayer()) or ent:Health() <= 0
+						or (ent:IsPlayer() and ent:Team() ~= TEAM_UNASSIGNED and ent:Team() == ply:Team()) then continue end
+				local tr = util.TraceLine({
+					start = ply:EyePos(),
+					endpos = tgt_pos(ent, head),
+					mask = MASK_SHOT,
+					filter = ply
+				})
+				if tr.Entity ~= ent then continue end
+				local diff = (tgt_pos(ent, head) - ply:EyePos()):Cross(ply:EyeAngles():Forward()):Length()
+				if !ply.tacrp_AATarget or diff < min_diff then
+					ply.tacrp_AATarget = ent
+					min_diff = diff
+				end
+			end
+		end
+
+		-- Aim towards target
+		tgt = ply.tacrp_AATarget
+		if tacrp_aimassist:GetBool() and ply:GetInfoNum("tacrp_aimassist_cl", 0) == 1 then
+			if IsValid(tgt) and !wpn:GetCustomize() then
+				if !wpn.NoAimAssist then
+					local ang = cmd:GetViewAngles()
+					local pos = tgt_pos(tgt, head)
+					local tgt_ang = (pos - ply:EyePos()):Angle() - ((swayc and wpn:GetSwayAngles()) or angle_zero) - ((freeac and wpn:GetFreeAimAngle()) or angle_zero)
+					local ang_diff = (pos - ply:EyePos()):Cross(ply:EyeAngles():Forward()):Length()
+					if ang_diff > 0.1 then
+						ang = LerpAngle(math.Clamp(inte / ang_diff, 0, 0.01), ang, tgt_ang)
+						cmd:SetViewAngles(ang)
+					end
+				end
+			end
+		end
+    end
+	
 end
 
 hook.Add("StartCommand", "TacRP_StartCommand", TacRP.StartCommand)

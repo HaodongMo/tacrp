@@ -87,8 +87,13 @@ function SWEP:PrimaryAttack()
     if util.SharedRandom("tacRP_shootChance", 0, 1) <= self:GetJamChance(false) then
         local ret = self:RunHook("Hook_PreJam")
         if ret != true then
-            if self:GetBurstCount() == 0 then -- dryfire anim is snapping so don't interrupt fire anim for it
+            if self:GetBurstCount() == 0 then
                 self.Primary.Automatic = false
+            end
+            if self:GetBlindFire() then
+                self:PlayAnimation("blind_dryfire")
+            else
+                self:PlayAnimation("dryfire")
             end
             self:EmitSound(self:GetValue("Sound_Jam"), 75, 100, 1, CHAN_ITEM)
             self:SetBurstCount(0)
@@ -173,7 +178,7 @@ function SWEP:PrimaryAttack()
         self:PlayAnimation(seq, mult, false, idle)
     end
 
-    self:GetOwner():DoAnimationEvent(self:GetValue("GestureShoot"))
+    self:GetOwner():DoCustomAnimEvent(PLAYERANIMEVENT_ATTACK_PRIMARY, 0)
 
     local pvar = self:GetValue("ShootPitchVariance")
 
@@ -256,8 +261,10 @@ function SWEP:PrimaryAttack()
 
         -- If the bullet is going to hit something very close in front, use hitscan bullets instead
         -- This uses the aim direction without random spread, which may result in hitscan bullets in distances where it shouldn't be.
-        if !hitscan and (!TacRP.ConVars["client_damage"]:GetBool()) then
-            dist = math.max(self:GetValue("MuzzleVelocity"), 15000) * engine.TickInterval() * (num == 1 and 2 or 1) * (game.IsDedicated() and 1 or 2)
+        if !hitscan and (game.SinglePlayer() or !TacRP.ConVars["client_damage"]:GetBool()) then
+            dist = math.max(self:GetValue("MuzzleVelocity"), 15000) * engine.TickInterval()
+                    * game.GetTimeScale()
+                    * (num == 1 and 2 or 1) * (game.IsDedicated() and 1 or 2)
             local threshold = dir:Forward() * dist
             local inst_tr = util.TraceLine({
                 start = self:GetMuzzleOrigin(),
@@ -271,7 +278,8 @@ function SWEP:PrimaryAttack()
             -- debugoverlay.Line(self:GetMuzzleOrigin(), self:GetMuzzleOrigin() + threshold, 2, hitscan and Color(255, 0, 255) or Color(255, 255, 255))
         end
 
-        self:GetOwner():LagCompensation(true)
+        -- Firebullets already does this so this is just placebo
+        -- self:GetOwner():LagCompensation(true)
 
         if shootent or !hitscan or fixed_spread then
             local d = math.random() -- self:GetNthShot() / self:GetCapacity()
@@ -304,6 +312,7 @@ function SWEP:PrimaryAttack()
                         Spread = Vector(),
                         IgnoreEntity = self:GetOwner():GetVehicle(),
                         Distance = dist,
+                        HullSize = (self:IsShotgun() and i % 2 == 0) and TacRP.ShotgunHullSize or 0,
                         Callback = function(att, btr, dmg)
                             local range = (btr.HitPos - btr.StartPos):Length()
 
@@ -316,7 +325,8 @@ function SWEP:PrimaryAttack()
                         end
                     })
                 else
-                    TacRP:ShootPhysBullet(self, self:GetMuzzleOrigin(), new_dir:Forward() * self:GetValue("MuzzleVelocity"))
+                    TacRP:ShootPhysBullet(self, self:GetMuzzleOrigin(), new_dir:Forward() * self:GetValue("MuzzleVelocity"),
+                            {HullSize = (self:IsShotgun() and i % 2 == 0) and TacRP.ShotgunHullSize or 0,})
                 end
             end
         else
@@ -343,17 +353,36 @@ function SWEP:PrimaryAttack()
                 Callback = function(att, btr, dmg)
                     local range = (btr.HitPos - btr.StartPos):Length()
 
-                    self:AfterShotFunction(btr, dmg, range, self:GetValue("Penetration"), {})
+                    if IsValid(btr.Entity) and (!game.SinglePlayer() and TacRP.ConVars["client_damage"]:GetBool()) then
+                        if CLIENT then
+                            net.Start("tacrp_clientdamage")
+                                net.WriteEntity(self)
+                                net.WriteEntity(btr.Entity)
+                                net.WriteVector(btr.Normal)
+                                net.WriteVector(btr.Entity:WorldToLocal(btr.HitPos))
+                                net.WriteUInt(btr.HitGroup, 8)
+                                net.WriteFloat(range)
+                                net.WriteFloat(self:GetValue("Penetration"))
+                                net.WriteUInt(0, 4)
+                            net.SendToServer()
+                        else
+                            self:AfterShotFunction(btr, dmg, range, self:GetValue("Penetration"), {[btr.Entity] = true})
+                        end
+                    else
+                        self:AfterShotFunction(btr, dmg, range, self:GetValue("Penetration"), {})
+                    end
+
                     if SERVER then
                         debugoverlay.Cross(btr.HitPos, 4, 5, Color(255, 0, 0), false)
                     else
                         debugoverlay.Cross(btr.HitPos, 4, 5, Color(255, 255, 255), false)
+
                     end
                 end
             })
         end
 
-        self:GetOwner():LagCompensation(false)
+        -- self:GetOwner():LagCompensation(false)
     end
 
     self:ApplyRecoil()
@@ -486,6 +515,8 @@ function SWEP:AfterShotFunction(tr, dmg, range, penleft, alreadypenned, forced)
         dmg:SetDamageType(DMG_BUCKSHOT + (engine.ActiveGamemode() == "terrortown" and DMG_BULLET or 0))
     end
 
+    local matpen = self:GetValue("Penetration")
+
     if tr.Entity and alreadypenned[tr.Entity] then
         dmg:SetDamage(0)
     elseif IsValid(tr.Entity) then
@@ -502,31 +533,41 @@ function SWEP:AfterShotFunction(tr, dmg, range, penleft, alreadypenned, forced)
 
         TacRP.CancelBodyDamage(tr.Entity, dmg, tr.HitGroup)
 
-        local matpen = self:GetValue("Penetration")
-
         if self:GetOwner():IsNPC() and !TacRP.ConVars["npc_equality"]:GetBool() then
             dmg:ScaleDamage(0.25)
         elseif matpen > 0 and TacRP.ConVars["penetration"]:GetBool() and !self:GetOwner():IsNPC() then
             local pendelta = penleft / matpen
-            pendelta = Lerp(pendelta, math.Clamp(matpen * 0.005, 0.1, 0.25), 1)
+            pendelta = Lerp(pendelta, math.Clamp(matpen * 0.02, 0.25, 0.5), 1)
             dmg:ScaleDamage(pendelta)
         end
         alreadypenned[tr.Entity] = true
 
         if tr.Entity.LVS and !self:IsShotgun() then
-            dmg:ScaleDamage(0.8)
-            dmg:SetDamageForce(dmg:GetDamageForce():GetNormalized() * matpen * 80)
-            dmg:SetDamageType(DMG_AIRBOAT)
+            dmg:ScaleDamage(0.5)
+            dmg:SetDamageForce(dmg:GetDamageForce():GetNormalized() * matpen * 75)
+            dmg:SetDamageType(DMG_AIRBOAT + DMG_SNIPER)
             penleft = 0
         end
 
-        if self:GetValue("DamageType") == DMG_BURN then
+        if SERVER and self:GetValue("DamageType") == DMG_BURN and IsValid(tr.Entity) then
             tr.Entity:Ignite(1, 64)
         end
     end
 
-    if self:GetValue("ExplosiveDamage") > 0 then
-        util.BlastDamage(self, self:GetOwner(), tr.HitPos, self:GetValue("ExplosiveRadius"), self:GetValue("ExplosiveDamage"))
+    if self:GetValue("ExplosiveDamage") > 0 and penleft == matpen then
+        -- Add DMG_AIRBOAT to hit helicopters
+        -- Need a timer here because only one DamageInfo can exist at a time
+        timer.Simple(0, function()
+            if !IsValid(self) then return end
+            local dmginfo = DamageInfo()
+            dmginfo:SetAttacker(self:GetOwner())
+            dmginfo:SetInflictor(self)
+            dmginfo:SetDamageType(self:GetValue("ExplosiveDamageType") or (DMG_BLAST + DMG_AIRBOAT))
+            dmginfo:SetDamage(self:GetValue("ExplosiveDamage"))
+            util.BlastDamageInfo(dmginfo, tr.HitPos, self:GetValue("ExplosiveRadius"))
+        end)
+        -- penleft = 0
+        --util.BlastDamage(self, self:GetOwner(), tr.HitPos, self:GetValue("ExplosiveRadius"), self:GetValue("ExplosiveDamage"))
     end
 
     if self:GetValue("ExplosiveEffect") then
@@ -535,8 +576,7 @@ function SWEP:AfterShotFunction(tr, dmg, range, penleft, alreadypenned, forced)
         fx:SetNormal(tr.HitNormal)
 
         if bit.band(util.PointContents(tr.HitPos), CONTENTS_WATER) == CONTENTS_WATER then
-            fx:SetScale(5)
-            util.Effect("WaterSplash", fx, true)
+            util.Effect("WaterSurfaceExplosion", fx, true)
         else
             util.Effect(self:GetValue("ExplosiveEffect"), fx, true)
         end
@@ -735,14 +775,32 @@ local type_to_cvar = {
 function SWEP:GetConfigDamageMultiplier()
     if self:IsShotgun() then
         return TacRP.ConVars["mult_damage_shotgun"]:GetFloat()
+    elseif self:GetValue("PrimaryMelee") then
+        return TacRP.ConVars["mult_damage_melee"]:GetFloat()
     else
         local cvar = type_to_cvar[self.SubCatType] or "mult_damage"
         return TacRP.ConVars[cvar] and TacRP.ConVars[cvar]:GetFloat() or 1
     end
 end
 
+local shotgundmgmult = {
+    [HITGROUP_HEAD] = 1,
+    [HITGROUP_CHEST] = 1,
+    [HITGROUP_STOMACH] = 1,
+    [HITGROUP_LEFTARM] = 1,
+    [HITGROUP_RIGHTARM] = 1,
+    [HITGROUP_LEFTLEG] = 1,
+    [HITGROUP_RIGHTLEG] = 1,
+    [HITGROUP_GEAR] = 1,
+}
+
 function SWEP:GetBodyDamageMultipliers(base)
+    if self:IsShotgun(base) then -- Shotguns using hull traces will never hit bodygroups
+        return table.Copy(shotgundmgmult)
+    end
+
     local valfunc = base and self.GetBaseValue or self.GetValue
+
     local btbl = table.Copy(valfunc(self, "BodyDamageMultipliers"))
 
     for k, v in pairs(valfunc(self, "BodyDamageMultipliersExtra") or {}) do
@@ -751,6 +809,15 @@ function SWEP:GetBodyDamageMultipliers(base)
         else
             btbl[k] = btbl[k] * v
         end
+    end
+
+    local mult = TacRP.ConVars["mult_headshot"]:GetFloat()
+    if mult <= 0 then
+        btbl[HITGROUP_HEAD] = 1
+    elseif mult <= 1 then
+        btbl[HITGROUP_HEAD] = Lerp(mult, 1, btbl[HITGROUP_HEAD])
+    else
+        btbl[HITGROUP_HEAD] = btbl[HITGROUP_HEAD] * mult
     end
 
     return btbl

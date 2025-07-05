@@ -1,7 +1,7 @@
 ATT.PrintName = "Ninja"
 ATT.Icon = Material("entities/tacrp_att_melee_spec_ninja.png", "mips smooth")
 ATT.Description = "Disrupt your enemies and strike with the element of surprise."
-ATT.Pros = {"RELOAD: Palm Strike / Climb", "RELOAD (Mid-air + Crouch): Dive Kick","RELOAD (Ground + Crouch): Backhop", "Silent Footsteps"}
+ATT.Pros = { "att.pro.melee_spec_ninja1", "att.pro.melee_spec_ninja2", "att.pro.melee_spec_ninja3", "att.pro.melee_spec_ninja4" }
 
 ATT.Category = {"melee_spec"}
 
@@ -24,11 +24,11 @@ local function setcharge(wep, f)
 end
 
 ATT.Hook_GetHintCapabilities = function(self, tbl)
-    tbl["+reload"] = {so = 0.4, str = "Palm Strike"}
+    tbl["+reload"] = {so = 0.4, str = "hint.melee_ninja.palm"}
     if self:GetOwner():IsOnGround() then
-        tbl["+duck/+reload"] = {so = 0.5, str = "Backhop"}
+        tbl["+duck/+reload"] = {so = 0.5, str = "hint.melee_ninja.backhop"}
     else
-        tbl["+duck/+reload"] = {so = 0.5, str = "Dive Kick"}
+        tbl["+duck/+reload"] = {so = 0.5, str = "hint.melee_ninja.divekick"}
     end
 end
 

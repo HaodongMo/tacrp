@@ -1,6 +1,6 @@
 AddCSLuaFile()
 
-ENT.Base                     = "tacrp_proj_base"
+ENT.Base                     = "tacrp_proj_stinger"
 ENT.PrintName                = "FIM-92 Missile (APERS)"
 ENT.Spawnable                = false
 
@@ -8,7 +8,7 @@ ENT.Model                    = "models/weapons/tacint/rocket_deployed.mdl"
 
 ENT.IsRocket = true // projectile has a booster and will not drop.
 
-ENT.InstantFuse = true // projectile is armed immediately after firing.
+ENT.InstantFuse = false // projectile is armed immediately after firing.
 ENT.RemoteFuse = false // allow this projectile to be triggered by remote detonator.
 ENT.ImpactFuse = true // projectile explodes on impact.
 ENT.TimeFuse = false
@@ -16,18 +16,26 @@ ENT.TimeFuse = false
 ENT.ExplodeOnDamage = true
 ENT.ExplodeUnderwater = true
 
-ENT.Delay = 5
-ENT.SafetyFuse = 0
+ENT.GunshipWorkaround = false
 
-ENT.LockOnEntity = NULL
-ENT.SteerSpeed = 2000
-ENT.SeekerAngle = math.cos(180)
-ENT.LeadTarget = false
-ENT.SuperSteerTime = 2
-ENT.SuperSteerSpeed = 1500
-ENT.BoostSpeed = 2000
-ENT.SoftLaunchTime = 0.5
-ENT.FlareRedirectChance = 0.1
+ENT.SafetyFuse = 0.1
+ENT.ImpactDamage = 150
+
+ENT.SteerSpeed = 30
+ENT.SeekerAngle = 180
+ENT.SeekerExplodeRange = 728
+ENT.SeekerExplodeSnapPosition = false
+ENT.SeekerExplodeAngle = 20
+
+ENT.LeadTarget = true
+ENT.SuperSteerTime = 1.5
+ENT.SuperSteerSpeed = 400
+
+ENT.MaxSpeed = 2000
+ENT.Acceleration = 5000
+
+ENT.SteerDelay = 0.5
+ENT.FlareRedirectChance = 0.5
 
 ENT.AudioLoop = "TacRP/weapons/rpg7/rocket_flight-1.wav"
 
@@ -35,69 +43,12 @@ ENT.SmokeTrail = true
 
 ENT.FlareColor = Color(255, 255, 255)
 
-
-DEFINE_BASECLASS(ENT.Base)
-
-function ENT:PhysicsCollide(data, collider)
-    if self:Impact(data, collider) then
-        return
+function ENT:OnInitialize()
+    if SERVER and IsValid(self.LockOnEntity) then
+        local dist = self.LockOnEntity:WorldSpaceCenter():Distance(self:GetPos())
+        self.SteerDelay = math.Clamp(dist / 2000, 0.75, 3)
+        self.SuperSteerTime = self.SteerDelay + 0.5
     end
-
-    BaseClass.PhysicsCollide(self, data, collider)
-end
-
-function ENT:Think()
-    if IsValid(self.LockOnEntity) and self.SoftLaunchTime + self.SpawnTime <= CurTime() then
-        local dist = self.LockOnEntity:WorldSpaceCenter():DistToSqr(self:GetPos())
-
-        if dist < math.pow(1024, 2) then
-            self:PreDetonate()
-        end
-    end
-
-    BaseClass.Think(self)
-end
-
-function ENT:Impact(data, collider)
-    if self.Impacted then return true end
-    self.Impacted = true
-
-    local attacker = self.Attacker or self:GetOwner() or self
-
-    local ang = data.OurOldVelocity:Angle()
-    local fx = EffectData()
-    fx:SetOrigin(data.HitPos)
-    fx:SetNormal(-ang:Forward())
-    fx:SetAngles(-ang)
-    util.Effect("ManhackSparks", fx)
-
-    if IsValid(data.HitEntity) then
-        local dmginfo = DamageInfo()
-        dmginfo:SetAttacker(attacker)
-        dmginfo:SetInflictor(self)
-        dmginfo:SetDamageType(DMG_CRUSH + DMG_CLUB)
-        dmginfo:SetDamage(250 * (self.NPCDamage and 0.25 or 1))
-        dmginfo:SetDamageForce(data.OurOldVelocity * 25)
-        dmginfo:SetDamagePosition(data.HitPos)
-        data.HitEntity:TakeDamageInfo(dmginfo)
-    end
-
-    self:EmitSound("weapons/rpg/shotdown.wav", 80)
-
-    for i = 1, 4 do
-        local prop = ents.Create("prop_physics")
-        prop:SetPos(self:GetPos())
-        prop:SetAngles(self:GetAngles())
-        prop:SetModel("models/weapons/tacint/rpg7_shrapnel_p" .. i .. ".mdl")
-        prop:Spawn()
-        prop:GetPhysicsObject():SetVelocityInstantaneous(data.OurNewVelocity * 0.5 + VectorRand() * 75)
-        prop:SetCollisionGroup(COLLISION_GROUP_DEBRIS)
-
-        SafeRemoveEntityDelayed(prop, 3)
-    end
-
-    self:Remove()
-    return true
 end
 
 function ENT:Detonate()
@@ -139,7 +90,7 @@ function ENT:Detonate()
         Attacker = attacker,
         Damage = 5,
         Force = 1,
-        Distance = 2048,
+        Distance = 1024,
         HullSize = 16,
         Num = 48,
         Tracer = 1,
@@ -150,14 +101,14 @@ function ENT:Detonate()
     })
     local dmg = DamageInfo()
     dmg:SetAttacker(attacker)
-    dmg:SetDamageType(DMG_BULLET + DMG_BLAST)
+    dmg:SetDamageType(DMG_BUCKSHOT + DMG_BLAST)
     dmg:SetInflictor(self)
     dmg:SetDamageForce(self:GetVelocity() * 100)
     dmg:SetDamagePosition(src)
-    for _, ent in pairs(ents.FindInCone(src, dir, 2048, 0.707)) do
+    for _, ent in pairs(ents.FindInCone(src, dir, 1024, 0.707)) do
         local tr = util.QuickTrace(src, ent:GetPos() - src, {self, ent})
         if tr.Fraction == 1 then
-            dmg:SetDamage(130 * math.Rand(0.75, 1) * Lerp((ent:GetPos():DistToSqr(src) / 4194304) ^ 0.5, 1, 0.25) * (self.NPCDamage and 0.5 or 1) * mult)
+            dmg:SetDamage(100 * math.Rand(0.75, 1) * Lerp((ent:GetPos():DistToSqr(src) / 1048576) ^ 0.5, 1, 0.25) * (self.NPCDamage and 0.5 or 1) * mult)
             if !ent:IsOnGround() then dmg:ScaleDamage(1.5) end
             ent:TakeDamageInfo(dmg)
         end

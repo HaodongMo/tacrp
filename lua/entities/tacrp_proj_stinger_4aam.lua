@@ -1,6 +1,6 @@
 AddCSLuaFile()
 
-ENT.Base                     = "tacrp_proj_base"
+ENT.Base                     = "tacrp_proj_stinger"
 ENT.PrintName                = "FIM-92 Missile (4AAM)"
 ENT.Spawnable                = false
 
@@ -12,21 +12,29 @@ ENT.InstantFuse = false // projectile is armed immediately after firing.
 ENT.RemoteFuse = false // allow this projectile to be triggered by remote detonator.
 ENT.ImpactFuse = true // projectile explodes on impact.
 
-ENT.ExplodeOnDamage = true
+ENT.ExplodeOnDamage = false
 ENT.ExplodeUnderwater = true
 
-ENT.Delay = 15
-ENT.SafetyFuse = 0.15
+ENT.GunshipWorkaround = false
 
-ENT.LockOnEntity = NULL
-ENT.SteerSpeed = 600
-ENT.SeekerAngle = math.cos(55)
+ENT.FlareSizeMin = 150
+ENT.FlareSizeMax = 200
+
+ENT.SafetyFuse = 0.1
+ENT.ImpactDamage = 150
+
+ENT.SteerSpeed = 200
+ENT.SeekerAngle = 90
+
 ENT.LeadTarget = true
-ENT.SuperSteerTime = 5
-ENT.SuperSteerSpeed = 600
-ENT.BoostSpeed = 3500
-ENT.SoftLaunchTime = 1
-ENT.FlareRedirectChance = 0.1
+ENT.SuperSteerTime = 0.5
+ENT.SuperSteerSpeed = -90 // yes this is intentionally negative
+
+ENT.MaxSpeed = 6000
+ENT.Acceleration = 2000
+
+ENT.SteerDelay = 0
+ENT.FlareRedirectChance = 0.4
 
 ENT.AudioLoop = "TacRP/weapons/rpg7/rocket_flight-1.wav"
 
@@ -36,61 +44,7 @@ ENT.FlareColor = Color(255, 230, 200)
 
 DEFINE_BASECLASS(ENT.Base)
 
-function ENT:Think()
-    if IsValid(self.LockOnEntity) and self.SoftLaunchTime + self.SpawnTime <= CurTime() then
-        local dist = self.LockOnEntity:WorldSpaceCenter():DistToSqr(self:GetPos())
-
-        if dist < math.pow(512, 2) then
-            self:PreDetonate()
-        end
-    end
-
-    BaseClass.Think(self)
-end
-
-function ENT:Impact(data, collider)
-    if self.SpawnTime + self.SafetyFuse > CurTime() and !self.NPCDamage then
-        local attacker = self.Attacker or self:GetOwner()
-        local ang = data.OurOldVelocity:Angle()
-        local fx = EffectData()
-        fx:SetOrigin(data.HitPos)
-        fx:SetNormal(-ang:Forward())
-        fx:SetAngles(-ang)
-        util.Effect("ManhackSparks", fx)
-
-        if IsValid(data.HitEntity) then
-            local dmginfo = DamageInfo()
-            dmginfo:SetAttacker(attacker)
-            dmginfo:SetInflictor(self)
-            dmginfo:SetDamageType(DMG_CRUSH + DMG_CLUB)
-            dmginfo:SetDamage(100 * (self.NPCDamage and 0.5 or 1))
-            dmginfo:SetDamageForce(data.OurOldVelocity * 25)
-            dmginfo:SetDamagePosition(data.HitPos)
-            data.HitEntity:TakeDamageInfo(dmginfo)
-        end
-
-        self:EmitSound("weapons/rpg/shotdown.wav", 80)
-
-        for i = 1, 4 do
-            local prop = ents.Create("prop_physics")
-            prop:SetPos(self:GetPos())
-            prop:SetAngles(self:GetAngles())
-            prop:SetModel("models/weapons/tacint/rpg7_shrapnel_p" .. i .. ".mdl")
-            prop:Spawn()
-            prop:GetPhysicsObject():SetVelocityInstantaneous(data.OurNewVelocity * 0.5 + VectorRand() * 75)
-            prop:SetCollisionGroup(COLLISION_GROUP_DEBRIS)
-
-            SafeRemoveEntityDelayed(prop, 3)
-        end
-
-        self:Remove()
-        return true
-    else
-        self:PreDetonate()
-    end
-end
-
-function ENT:Detonate()
+function ENT:Detonate(ent)
     local attacker = self.Attacker or self:GetOwner()
     local dir = self:GetForward()
     local src = self:GetPos() - dir * 64
@@ -99,23 +53,19 @@ function ENT:Detonate()
 
     local dmg = DamageInfo()
     dmg:SetAttacker(attacker)
-    dmg:SetDamageType(DMG_AIRBOAT + DMG_SNIPER + DMG_BLAST)
+    dmg:SetDamageType(DMG_BLAST + DMG_AIRBOAT)
     dmg:SetInflictor(self)
     dmg:SetDamageForce(self:GetVelocity() * 100)
     dmg:SetDamagePosition(src)
-    dmg:SetDamage(300 * mult)
-    util.BlastDamageInfo(dmg, self:GetPos(), 512)
+    dmg:SetDamage(75 * mult)
+    util.BlastDamageInfo(dmg, self:GetPos(), 200)
+    self:ImpactTraceAttack(ent, 100 * mult, 100)
 
     local fx = EffectData()
     fx:SetOrigin(self:GetPos())
+    util.Effect("HelicopterMegaBomb", fx)
 
-    if self:WaterLevel() > 0 then
-        util.Effect("WaterSurfaceExplosion", fx)
-    else
-        util.Effect("Explosion", fx)
-    end
-
-    self:EmitSound("TacRP/weapons/rpg7/explode.wav", 125)
+    self:EmitSound("^tacrp/weapons/grenade/40mm_explode-" .. math.random(1, 3) .. ".wav", 115)
 
     self:Remove()
 end

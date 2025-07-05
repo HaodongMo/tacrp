@@ -2,7 +2,7 @@ VertexLitGeneric
 {
 	"$baseTexture" "models\tacint_extras\usp\Match"
 	"$bumpmap" 	"models\tacint_extras\usp\Match_Normal"
- 	"$envmap" "env_cubemap"
+ 	//"$envmap" "env_cubemap"
 	"$normalmapalphaenvmapmask" 1
 	"$halflambert" 	"1"
  	"$phong" "1"

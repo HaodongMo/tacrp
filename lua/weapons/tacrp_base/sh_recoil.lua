@@ -1,8 +1,8 @@
 function SWEP:GetRecoilResetTime(base)
     if base then
-        return (self:GetBaseValue("RecoilResetInstant") and 0 or math.min(0.5, 60 / self:GetBaseValue("RPM"))) + self:GetBaseValue("RecoilResetTime")
+        return (self:GetBaseValue("RecoilResetInstant") and 0 or math.min(0.5, 60 / self:GetRPM(true))) + self:GetBaseValue("RecoilResetTime")
     else
-        return (self:GetValue("RecoilResetInstant") and 0 or math.min(0.5, 60 / self:GetValue("RPM"))) + self:GetValue("RecoilResetTime")
+        return (self:GetValue("RecoilResetInstant") and 0 or math.min(0.5, 60 / self:GetRPM())) + self:GetValue("RecoilResetTime")
     end
 end
 
@@ -19,15 +19,21 @@ end
 
 function SWEP:ApplyRecoil()
     local rec = self:GetRecoilAmount()
-
     local rps = self:GetValue("RecoilPerShot")
+    local cfm = self:GetCurrentFiremode()
 
     if rec == 0 then
         rps = rps * self:GetValue("RecoilFirstShotMult")
     end
 
     if self:GetOwner():Crouching() and self:GetOwner():OnGround() then
-        rps = rps * self:GetValue("RecoilCrouchMult")
+        rps = rps * self:GetValue("RecoilMultCrouch")
+    end
+
+    if cfm < 0 then
+        rps = rps * self:GetValue("RecoilMultBurst")
+    elseif cfm == 1 then
+        rps = rps * self:GetValue("RecoilMultSemi")
     end
 
     if self:GetInBipod() then

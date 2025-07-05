@@ -2,7 +2,7 @@ ATT.PrintName = "Throw"
 ATT.FullName = "Knife Throw"
 ATT.Icon = Material("entities/tacrp_att_melee_tech_throw.png", "mips smooth")
 ATT.Description = "Bar trick turned lethal."
-ATT.Pros = {"ALT-FIRE: Throw knife", "Does not consume weapon or ammo", "Bonus damage on headshot", "Bonus damage on slowed/stunned targets"}
+ATT.Pros = { "att.pro.melee_tech_throw1", "att.pro.melee_tech_throw2", "att.pro.melee_tech_throw3", "att.pro.melee_tech_throw4" }
 
 ATT.Category = {"melee_tech"}
 
@@ -10,9 +10,15 @@ ATT.SortOrder = 3
 
 ATT.ThrowAttack = true
 
+ATT.Free = true
+
+ATT.Override_Ammo = "xbowbolt"
+
 ATT.Hook_SecondaryAttack = function(self)
 
     if self:StillWaiting() or self:GetNextSecondaryFire() > CurTime() then return end
+
+    if !self:GetInfiniteAmmo() and self:GetOwner():GetAmmoCount("xbowbolt") <= 0 then return end
 
     local s = self:GetValue("MeleeAttackTime") * 3 * self:GetMeleePerkCooldown()
     self:PlayAnimation("meleethrow", s, false, true)
@@ -35,7 +41,7 @@ ATT.Hook_SecondaryAttack = function(self)
         dispersion = dispersion * spread * 36
 
         rocket.Model = self.ThrownKnifeModel or self.WorldModel
-        rocket.Damage = self:GetValue("MeleeDamage") * self:GetMeleePerkDamage()
+        rocket.Damage = self:GetValue("MeleeDamage") * self:GetMeleePerkDamage() * self:GetConfigDamageMultiplier()
         rocket.Inflictor = self
         rocket.DamageType = self:GetValue("MeleeDamageType")
         rocket.Sound_MeleeHit = istable(self.Sound_MeleeHit) and table.Copy(self.Sound_MeleeHit) or self.Sound_MeleeHit
@@ -46,6 +52,7 @@ ATT.Hook_SecondaryAttack = function(self)
         rocket:SetAngles(ang + dispersion)
         rocket:Spawn()
         rocket:SetPhysicsAttacker(self:GetOwner(), 10)
+        rocket.HasAmmo = !self:GetInfiniteAmmo()
 
         local phys = rocket:GetPhysicsObject()
 
@@ -55,16 +62,42 @@ ATT.Hook_SecondaryAttack = function(self)
         end
     end)
 
+    if !self:GetInfiniteAmmo() then
+        self:GetOwner():RemoveAmmo(1, "xbowbolt")
+    end
+
     local throwtimewait = math.max(0, s - 0.75) --self:GetValue("MeleeThrowTimeWait")
     self:SetTimer(throwtimewait, function()
         self:PlayAnimation("deploy", 1, false, true)
     end)
 
     self:SetNextSecondaryFire(CurTime() + s)
+
+    -- Cancel demoknight charge
+    local ply = self:GetOwner()
+    if ply:Alive() and ply:GetNWBool("TacRPChargeState", false) then
+        ply:SetNWBool("TacRPChargeState", false)
+        ply:SetNWFloat("TacRPChargeTime", 0)
+        ply:SetNWFloat("TacRPChargeEnd", CurTime())
+
+        if IsValid(ply:GetNWEntity("TacRPChargeWeapon")) then
+            ply:GetNWEntity("TacRPChargeWeapon"):SetBreath(0)
+        end
+
+        ply:SetCustomCollisionCheck(ply.TacRPPrevColCheck)
+        if ply.TacRPPrevFlag then
+            ply:RemoveEFlags(EFL_NO_DAMAGE_FORCES)
+        end
+        ply.TacRPPrevColCheck = nil
+        ply.TacRPPrevFlag = nil
+
+        ply:EmitSound("TacRP.Charge.End")
+    end
+
     return true
 end
 
 
 ATT.Hook_GetHintCapabilities = function(self, tbl)
-    tbl["+attack2"] = {so = 0.1, str = "Knife Throw"}
+    tbl["+attack2"] = {so = 0.1, str = "hint.melee.throw"}
 end

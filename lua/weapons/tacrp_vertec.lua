@@ -12,7 +12,7 @@ SWEP.SubCatTier = "4Consumer"
 SWEP.SubCatType = "1Pistol"
 
 SWEP.Description = "Italian pistol with above average range and accuracy."
-SWEP.Description_Quote = "\"Yippie ki-yay, motherf*cker!\""
+SWEP.Description_Quote = "\"Yippie ki-yay, motherfucker!\""
 
 SWEP.Trivia_Caliber = "9x19mm"
 SWEP.Trivia_Manufacturer = "Pietro Beretta"

@@ -8,10 +8,13 @@ SWEP.PrintName = "HK M320"
 SWEP.AbbrevName = "M320"
 SWEP.Category = "Tactical RP (Special)"
 
+SWEP.NoAimAssist = true
+
 SWEP.SubCatTier = "9Special"
 SWEP.SubCatType = "6Launcher"
 
 SWEP.Description = "Grenade launcher capable of firing a variety of payloads."
+SWEP.Description_Quote = "Not beanbags, NOT BEANBAGS!"
 
 SWEP.Trivia_Caliber = "40mm Grenades"
 SWEP.Trivia_Manufacturer = "Heckler & Koch"

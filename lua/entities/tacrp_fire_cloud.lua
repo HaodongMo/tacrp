@@ -49,7 +49,7 @@ function ENT:Think()
     if CLIENT then
         local d = Lerp((self.SpawnTime + self.FireTime - CurTime()) / 8, 1, 0.000001) ^ 2
 
-        if !self.Light then
+        if !self.Light and TacRP.ConVars["dynamiclight"]:GetBool() then
             self.Light = DynamicLight(self:EntIndex())
             if (self.Light) then
                 self.Light.Pos = self:GetPos()
@@ -57,10 +57,10 @@ function ENT:Think()
                 self.Light.g = 135
                 self.Light.b = 0
                 self.Light.Brightness = 5
-                self.Light.Size = 328
+                self.Light.Size = math.Clamp(TacRP.ConVars["thermite_radius"]:GetFloat(), 128, 512) * 1.5
                 self.Light.DieTime = CurTime() + self.FireTime
             end
-        else
+        elseif self.Light then
             self.Light.Pos = self:GetPos()
         end
 
@@ -213,14 +213,16 @@ function ENT:Think()
 
         local dmg = DamageInfo()
         dmg:SetDamageType(DMG_BURN)
-        dmg:SetDamage(Lerp((self.SpawnTime + self.FireTime - CurTime()) / self.FireTime, 35, 20))
+        dmg:SetDamage(Lerp((self.SpawnTime + self.FireTime - CurTime()) / self.FireTime, TacRP.ConVars["thermite_damage_max"]:GetFloat(), TacRP.ConVars["thermite_damage_min"]:GetFloat()))
         dmg:SetInflictor(self)
         dmg:SetAttacker(self:GetOwner())
-        util.BlastDamageInfo(dmg, self:GetPos(), 200)
-
-        self.NextDamageTick = CurTime() + 0.15
+        util.BlastDamageInfo(dmg, IsValid(self:GetParent()) and self:GetParent():GetPos() or self:GetPos(), TacRP.ConVars["thermite_radius"]:GetFloat())
 
         if self.SpawnTime + self.FireTime <= CurTime() then self:Remove() return end
+
+        self.NextDamageTick = CurTime() + 0.2
+        self:NextThink(self.NextDamageTick)
+        return true
     end
 end
 
@@ -285,10 +287,14 @@ hook.Add("EntityTakeDamage", "tacrp_fire_cloud", function(ent, dmginfo)
         if ent:IsNPC() then
             if directfiredamage[ent:GetClass()] then
                 dmginfo:SetDamageType(DMG_SLOWBURN) -- DMG_BURN does not hurt HL2 zombies and instead turns them black.
+            elseif ent.Immune_Fire then
+                dmginfo:SetDamageType(DMG_DIRECT) -- Bitch
             end
         elseif !ent:IsNextBot() and !ent:IsPlayer() then
             if ent:GetClass() == "prop_physics" then
                 dmginfo:SetDamageType(DMG_DIRECT) -- some props like to burn slowly against DMG_BURN or DMG_SLOWBURN. don't.
+            elseif ent:GetClass() == "tacrp_proj_nade_thermite" then
+                return true -- don't burn other thermite grenades
             end
             dmginfo:ScaleDamage(2) -- tremendous damage to props
         end

@@ -1,5 +1,5 @@
 SWEP.Base = "tacrp_m4"
-SWEP.Spawnable = true // deprecated by ST AR-15
+SWEP.Spawnable = true // deprecated by ST AR-15 -- NOT ANYMORE DOOFUS
 
 AddCSLuaFile()
 
@@ -12,7 +12,7 @@ SWEP.SubCatTier = "4Consumer"
 SWEP.SubCatType = "5Sporter"
 
 SWEP.Description = "Customized semi-automatic model of an ubiquitous American rifle. Uses reduced capacity magazines."
-SWEP.Description_Quote = "\"One of the most beloved and most vilified rifles in the country\""
+SWEP.Description_Quote = "\"One of the most beloved and most vilified rifles in the country.\""
 
 SWEP.ViewModel = "models/weapons/tacint/v_ar15.mdl"
 SWEP.WorldModel = "models/weapons/tacint/w_m4.mdl"

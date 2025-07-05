@@ -16,8 +16,19 @@ ENT.ImpactFuse = false // projectile explodes on impact.
 
 ENT.ExplodeOnDamage = false // projectile explodes when it takes damage.
 ENT.ExplodeUnderwater = true
+ENT.DefuseOnDamage = true
 
-ENT.Delay = 2
+ENT.ImpactDamage = 1
+
+ENT.Delay = 3
+
+
+ENT.SoundHint = true
+ENT.SoundHintDelay = 1.5
+ENT.SoundHintRadius = 328
+ENT.SoundHintDuration = 1.5
+
+ENT.Sticky = true
 
 ENT.ExplodeSounds = {
     "^TacRP/weapons/grenade/frag_explode-1.wav",
@@ -47,8 +58,56 @@ function ENT:Detonate()
     cloud:SetAngles(self:GetAngles())
     cloud:SetOwner(attacker)
     cloud:Spawn()
+    if IsValid(self:GetParent()) then
+        cloud:SetParent(self:GetParent())
+    elseif self:GetMoveType() == MOVETYPE_NONE then
+        cloud:SetMoveType(MOVETYPE_NONE)
+    end
 
     self:Remove()
 end
 
 ENT.NextDamageTick = 0
+
+ENT.SmokeTrail = true
+function ENT:DoSmokeTrail()
+    if CLIENT and self.SmokeTrail then
+        local pos = self:GetPos() + self:GetUp() * 4
+        local emitter = ParticleEmitter(pos)
+
+        local smoke = emitter:Add("particles/smokey", pos)
+
+        smoke:SetStartAlpha(30)
+        smoke:SetEndAlpha(0)
+
+        smoke:SetStartSize(2)
+        smoke:SetEndSize(math.Rand(16, 24))
+
+        smoke:SetRoll(math.Rand(-180, 180))
+        smoke:SetRollDelta(math.Rand(-1, 1))
+
+        smoke:SetVelocity(VectorRand() * 16 + Vector(0, 0, 64))
+        smoke:SetColor(200, 200, 200)
+        smoke:SetLighting(false)
+
+        smoke:SetDieTime(math.Rand(0.5, 1))
+        smoke:SetGravity(Vector(0, 0, -100))
+        smoke:SetNextThink( CurTime() + FrameTime() )
+        smoke:SetThinkFunction( function(pa)
+            if !pa then return end
+            local col1 = Color(255, 135, 0)
+            local col2 = Color(255, 255, 255)
+
+            local col3 = col1
+            local d = pa:GetLifeTime() / pa:GetDieTime()
+            col3.r = Lerp(d, col1.r, col2.r)
+            col3.g = Lerp(d, col1.g, col2.g)
+            col3.b = Lerp(d, col1.b, col2.b)
+
+            pa:SetColor(col3.r, col3.g, col3.b)
+            pa:SetNextThink( CurTime() + FrameTime() )
+        end )
+
+        emitter:Finish()
+    end
+end

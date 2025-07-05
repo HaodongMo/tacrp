@@ -11,7 +11,8 @@ SWEP.Category = "Tactical RP"
 SWEP.SubCatTier = "4Consumer"
 SWEP.SubCatType = "5Shotgun"
 
-SWEP.Description = "Accurate hunting shotgun with a low fire rate.\nLimited effectiveness against armor."
+SWEP.Description = "Accurate hunting shotgun with low damage."
+SWEP.Description_Quote = "\"If you can hear them but can't shoot them, you can probably grenade them.\"" --Hardcore Henry (2016) (It's not a Bekas in that exact scene, but one is used later on in the complex so uuuuhhhhh     explode)
 
 SWEP.Trivia_Caliber = "16 Gauge"
 SWEP.Trivia_Manufacturer = "Molot"
@@ -84,12 +85,12 @@ SWEP.TTTReplace = TacRP.TTTReplacePreset.Shotgun
 // "ballistics"
 
 SWEP.Damage_Max = 18
-SWEP.Damage_Min = 6
-SWEP.Range_Min = 600 // distance for which to maintain maximum damage
-SWEP.Range_Max = 2800 // distance at which we drop to minimum damage
+SWEP.Damage_Min = 5
+SWEP.Range_Min = 200 // distance for which to maintain maximum damage
+SWEP.Range_Max = 2000 // distance at which we drop to minimum damage
 SWEP.Penetration = 1 // units of metal this weapon can penetrate
 SWEP.ArmorPenetration = 0.47
-SWEP.ArmorBonus = 1.25
+SWEP.ArmorBonus = 0.25
 
 SWEP.Num = 6
 
@@ -117,9 +118,9 @@ SWEP.RPM = 60
 SWEP.ShootTimeMult = 0.85
 
 SWEP.Spread = 0.015
-SWEP.ShotgunPelletSpread = 0.005
+SWEP.ShotgunPelletSpread = 0.0075
 
-SWEP.HipFireSpreadPenalty = 0.02
+SWEP.HipFireSpreadPenalty = 0.025
 SWEP.MidAirSpreadPenalty = 0
 
 SWEP.ScopedSpreadPenalty = 0
@@ -224,17 +225,25 @@ SWEP.AnimationTranslationTable = {
 
 // attachments
 
+SWEP.AttachmentElements = {
+    ["optic"] = {
+        BGs_VM = {
+            {5, 1}
+        },
+    },
+}
+
 SWEP.Attachments = {
     [1] = {
         PrintName = "Optic",
-        Category = {"optic_cqb_nookp7", "optic_medium"},
+        Category = {"optic_cqb", "optic_medium"},
         Bone = "ValveBiped.bekas_rootbone",
         WMBone = "ValveBiped.Bip01_R_Hand",
-        InstalledElements = {"sights"},
+        InstalledElements = {"optic"},
         AttachSound = "TacRP/weapons/optic_on.wav",
         DetachSound = "TacRP/weapons/optic_off.wav",
         VMScale = 0.75,
-        Pos_VM = Vector(-2.75, 0, 7),
+        Pos_VM = Vector(-3.2, 0, 8),
         Ang_VM = Angle(90, 0, 0),
         Pos_WM = Vector(11, 0.85, -7),
         Ang_WM = Angle(-25, 3.5, 180),

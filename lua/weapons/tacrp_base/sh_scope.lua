@@ -85,23 +85,16 @@ function SWEP:ScopeToggle(setlevel)
     self:EmitSound(self:GetValue("Sound_ScopeIn"), 75, 100, 1, CHAN_ITEM)
 
     self:SetShouldHoldType()
+
+    self:RunHook("Hook_PostScopeToggle", setlevel)
 end
 
 function SWEP:GetShouldFOV(ignorepeek)
-    local level = self:GetScopeLevel()
-
     local base = 90
-
-    if level > 0 and (ignorepeek or !self:GetPeeking()) then
-        local fov = self:GetValue("ScopeFOV")
-
-        fov = Lerp(level / self:GetValue("ScopeLevels"), base, fov)
-
-        return fov
-    elseif !ignorepeek and self:GetPeeking() then
+    if !ignorepeek and self:GetPeeking() then
         return base / peekzoom
     else
-        return base
+        return base / self:GetMagnification()
     end
 end
 
@@ -162,6 +155,10 @@ function SWEP:DoScope()
             --     surface.SetDrawColor(255, 255, 255, int * 25)
             --     surface.DrawRect(0, 0, w, h)
             -- end
+
+            if self:GetValue("ScopeDraw") then
+                self:GetValue("ScopeDraw")(self)
+            end
         end
     end
 
@@ -248,18 +245,17 @@ function SWEP:GetMagnification()
     local level = self:GetScopeLevel()
 
     if level > 0 then
-
         if self:GetPeeking() then
             return peekzoom
         end
-
         mag = 90 / self:GetValue("ScopeFOV")
-
-        if self:GetValue("VariableZoom") and self:GetTactical() and self:GetValue("Scope") and (self:GetValue("ScopeOverlay") or self:GetValue("Holosight")) then
-            mag = 90 / self:GetValue("VariableZoomFOV")
-        end
-
         mag = Lerp(level / self:GetValue("ScopeLevels"), 1, mag)
+
+        mag = self:RunHook("Hook_ModifyMagnification") or mag
+    end
+
+    if (mag <= 0) then
+        return 0.001 -- just in case
     end
 
     return mag
@@ -267,9 +263,20 @@ end
 
 function SWEP:AdjustMouseSensitivity()
     local mag = self:GetMagnification()
+	local sensmult = GetConVar("tacrp_aimsens"):GetFloat()
+	-- local aa = GetConVar("tacrp_aimassist")
+	-- local aac = GetConVar("tacrp_aimassist_cl")
+	-- local aai = GetConVar("tacrp_aimassist_intensity")
+	-- local aams = GetConVar("tacrp_aimassist_multsens")
+	
+	-- if self:GetOwner().tacrp_AATarget != nil and aa:GetBool() and aac:GetBool()) then
+		-- aamult = aams:GetFloat() / aai:GetFloat()
+	-- else
+		-- aamult = 1
+	-- end
 
     if mag > 1 then
-        return 1 / mag
+        return 1 / mag * math.Clamp(sensmult, 0.1, 1)
     end
 end
 
@@ -375,5 +382,17 @@ function SWEP:GetSprintToFireTime(base)
         return self:GetBaseValue("SprintToFireTime") * TacRP.ConVars["mult_sprinttofire"]:GetFloat()
     else
         return self:GetValue("SprintToFireTime") * TacRP.ConVars["mult_sprinttofire"]:GetFloat()
+    end
+end
+
+function SWEP:GetPeeking()
+    return (!self.InversePeek and self:GetNWPeeking()) or (self.InversePeek and !self:GetNWPeeking())
+end
+
+function SWEP:SetPeeking(b)
+    if self.InversePeek then
+        self:SetNWPeeking(!b)
+    else
+        self:SetNWPeeking(b)
     end
 end

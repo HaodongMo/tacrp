@@ -12,6 +12,7 @@ SWEP.SubCatTier = "2Operator"
 SWEP.SubCatType = "5Shotgun"
 
 SWEP.Description = "Combat shotgun with high fire rate and capacity."
+SWEP.Description_Quote = "\"Out there, we learned to guard each other, to hunt, to speak without speaking.\"" -- Call of Duty: Ghosts (2013)
 
 SWEP.Trivia_Caliber = "12 Gauge"
 SWEP.Trivia_Manufacturer = "FABARM S.p.A."
@@ -33,8 +34,8 @@ SWEP.BalanceStats = {
         ClipSize = 7,
     },
     [TacRP.BALANCE_TTT] = {
-        Damage_Max = 9,
-        Damage_Min = 4,
+        Damage_Max = 8,
+        Damage_Min = 3,
         Range_Min = 250,
         Range_Max = 1500,
         Num = 8,
@@ -72,13 +73,13 @@ SWEP.TTTReplace = TacRP.TTTReplacePreset.Shotgun
 // "ballistics"
 
 SWEP.Damage_Max = 15
-SWEP.Damage_Min = 6
-SWEP.Range_Min = 900 // distance for which to maintain maximum damage
-SWEP.Range_Max = 3000 // distance at which we drop to minimum damage
+SWEP.Damage_Min = 4
+SWEP.Range_Min = 300 // distance for which to maintain maximum damage
+SWEP.Range_Max = 1600 // distance at which we drop to minimum damage
 SWEP.Penetration = 1 // units of metal this weapon can penetrate
 SWEP.Num = 8
 SWEP.ArmorPenetration = 0.7
-SWEP.ArmorBonus = 1.5
+SWEP.ArmorBonus = 0.5
 
 SWEP.MuzzleVelocity = 9000
 
@@ -102,7 +103,7 @@ SWEP.FiremodeName = "Pump-Action" // only used externally for firemode name dist
 SWEP.RPM = 75
 
 SWEP.Spread = 0.03
-SWEP.ShotgunPelletSpread = 0.005
+SWEP.ShotgunPelletSpread = 0.015
 
 SWEP.ShootTimeMult = 0.8
 
@@ -215,7 +216,7 @@ SWEP.AnimationTranslationTable = {
 SWEP.Attachments = {
     [1] = {
         PrintName = "Optic",
-        Category = {"optic_cqb", "optic_medium"},
+        Category = {"optic_cqb_nookp7", "optic_medium"},
         Bone = "ValveBiped.FP6_base",
         InstalledElements = {"sights"},
         AttachSound = "TacRP/weapons/optic_on.wav",

@@ -4,18 +4,19 @@ SWEP.Spawnable = true
 AddCSLuaFile()
 
 // names and stuff
-SWEP.PrintName = "Molot TGS-12"
-SWEP.AbbrevName = "TGS-12"
+SWEP.PrintName = "Tomahawk Matador" -- https://www.tomahawk.com.tr/older.html#lg=1&slide=3
+SWEP.AbbrevName = "Matador"
 SWEP.Category = "Tactical RP"
 
 SWEP.SubCatTier = "3Security"
 SWEP.SubCatType = "5Shotgun"
 
 SWEP.Description = "Short barrel pistol grip shotgun. High mobility and recoil, and most effective at close range."
+SWEP.Description_Quote = "For years, its true identity was a mystery."
 
 SWEP.Trivia_Caliber = "12 Gauge"
-SWEP.Trivia_Manufacturer = "Molot"
-SWEP.Trivia_Year = "1999"
+SWEP.Trivia_Manufacturer = "Tomahawk Shotguns"
+SWEP.Trivia_Year = "2006"
 
 SWEP.Faction = TacRP.FACTION_NEUTRAL
 SWEP.Credits = "Assets: Tactical Intervention"
@@ -29,7 +30,7 @@ SWEP.SlotAlt = 3
 SWEP.BalanceStats = {
     [TacRP.BALANCE_SBOX] = {
         Damage_Max = 18,
-        Damage_Min = 5,
+        Damage_Min = 3,
         ClipSize = 5,
     },
     [TacRP.BALANCE_TTT] = {
@@ -82,13 +83,13 @@ SWEP.TTTReplace = TacRP.TTTReplacePreset.Shotgun
 
 // "ballistics"
 
-SWEP.Damage_Max = 18
-SWEP.Damage_Min = 4
+SWEP.Damage_Max = 16
+SWEP.Damage_Min = 2
 SWEP.Range_Min = 150 // distance for which to maintain maximum damage
-SWEP.Range_Max = 1500 // distance at which we drop to minimum damage
+SWEP.Range_Max = 1200 // distance at which we drop to minimum damage
 SWEP.Penetration = 1 // units of metal this weapon can penetrate
-SWEP.ArmorPenetration = 0.7
-SWEP.ArmorBonus = 1.25
+SWEP.ArmorPenetration = 0.5
+SWEP.ArmorBonus = 0.25
 
 SWEP.Num = 8
 
@@ -113,12 +114,13 @@ SWEP.FiremodeName = "Pump-Action" // only used externally for firemode name dist
 
 SWEP.RPM = 70
 
-SWEP.Spread = 0.025
-SWEP.ShotgunPelletSpread = 0.02
+SWEP.Spread = 0.04
+SWEP.ShotgunPelletSpread = 0.03
 
 SWEP.ShootTimeMult = 0.8
 
 SWEP.MidAirSpreadPenalty = 0
+SWEP.MoveSpreadPenalty = 0
 
 SWEP.RecoilPerShot = 1
 SWEP.RecoilMaximum = 2.5
@@ -258,7 +260,7 @@ SWEP.Attachments = {
     },
     [3] = {
         PrintName = "Accessory",
-        Category = {"acc", "acc_duffle", "acc_extmag_shotgun"},
+        Category = {"acc", "acc_duffle", "acc_extmag_shotgun", "acc_slingonly"},
         AttachSound = "tacrp/weapons/flashlight_on.wav",
         DetachSound = "tacrp/weapons/flashlight_off.wav",
     },

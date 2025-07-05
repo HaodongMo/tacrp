@@ -12,7 +12,7 @@ SWEP.Category = "Tactical RP" // "Tactical RP (Extras)"
 SWEP.SubCatTier = "2Operator"
 SWEP.SubCatType = "7Sniper Rifle"
 
-SWEP.Description = "Heavy anti-materiel rifle that can kill in one shot.\nEquipped with a 12x scope by default. \nLight enough for swing for melee."
+SWEP.Description = "Heavy anti-materiel rifle that can kill in one shot. Too heavy to bash with. \nEquipped with a 12x scope by default."
 SWEP.Description_Quote = "Gun Runner tested, NCR approved."
 
 SWEP.Trivia_Caliber = ".50 BMG"
@@ -109,7 +109,7 @@ SWEP.RecoilMaximum = 1
 SWEP.RecoilResetTime = 0.25
 SWEP.RecoilDissipationRate = 1.25
 SWEP.RecoilFirstShotMult = 1
-SWEP.RecoilCrouchMult = 1
+SWEP.RecoilMultCrouch = 1
 
 SWEP.RecoilVisualKick = 5
 SWEP.RecoilKick = 10
@@ -137,7 +137,7 @@ SWEP.FreeAimMaxAngle = 9
 
 SWEP.Bipod = true
 SWEP.BipodRecoil = 1
-SWEP.BipodKick = 0.25
+SWEP.BipodKick = 0.15
 
 // hold types
 
@@ -186,6 +186,8 @@ SWEP.ScopeLevels = 1 // 2 = like CS:S
 SWEP.ScopeHideWeapon = true
 SWEP.ScopeOverlaySize = 0.75
 
+SWEP.CanMeleeAttack = false
+
 // reload
 
 SWEP.ClipSize = 7
@@ -217,7 +219,7 @@ SWEP.QCA_Muzzle = 1
 // ditto for shell
 SWEP.QCA_Eject = 2
 
-SWEP.MuzzleEffect = "muzzleflash_1"
+SWEP.MuzzleEffect = "muzzleflash_m82_tacrp"
 SWEP.EjectEffect = 2
 SWEP.EjectDelay = 1.15
 
@@ -310,8 +312,8 @@ SWEP.Attachments = {
         InstalledElements = {"tactical"},
         Pos_VM = Vector(-3.9, -1.5, 19.25),
         Ang_VM = Angle(90, 0, 270),
-        Pos_WM = Vector(0, 23.75, -2),
-        Ang_WM = Angle(0, -90, 180),
+        Pos_WM = Vector(-1.75, 22.5, -0.05),
+        Ang_WM = Angle(0, -90, 90),
     },
     [4] = {
         PrintName = "Accessory",

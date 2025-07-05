@@ -1,7 +1,7 @@
 ATT.PrintName = "Frenzy"
 ATT.Icon = Material("entities/tacrp_att_melee_spec_lunge.png", "mips smooth")
 ATT.Description = "Close the distance and overwhelm your enemies."
-ATT.Pros = {"RELOAD (Ground): Pounce", "RELOAD (Ground + Crouch): Super Jump", "RELOAD (Mid-Air): Lunge"}
+ATT.Pros = { "att.pro.melee_spec_lunge1" }
 
 ATT.Category = {"melee_spec"}
 
@@ -9,9 +9,9 @@ ATT.SortOrder = 3
 
 -- ATT.Lifesteal = 1 / 4
 
+
 ATT.Hook_GetHintCapabilities = function(self, tbl)
-    tbl["+reload"] = {so = 0.4, str = "Pounce / Lunge"}
-    tbl["+duck/+reload"] = {so = 0.5, str = "Super Jump"}
+    tbl["+reload"] = {so = 0.4, str = "hint.melee_lunge"}
 end
 
 local chargeamt = 0.5
@@ -25,16 +25,26 @@ local function setcharge(wep, f)
     wep:SetBreath(math.Clamp(f, 0, 1))
 end
 
+local leapsoundstatus = false
+local leapsound = ""
+
 local function makesound(ent, pitch)
     if TacRP.ShouldWeFunny() then
         ent:EmitSound("tacrp/amongus_loud.mp3", 75, pitch)
     else
-        ent:EmitSound("npc/fast_zombie/leap1.wav", 75, pitch)
+        if istable(leapsound) then
+            leapsound = table.Random(leapsound)
+        end
+        ent:EmitSound(leapsound, 75, pitch)
     end
 end
 
 ATT.Hook_PreReload = function(wep)
     local ply = wep:GetOwner()
+    
+    if wep:GetValue("Sound_Lunge") then
+        leapsound = wep:GetValue("Sound_Lunge")
+    end
 
     if !ply:KeyPressed(IN_RELOAD) or ply:GetMoveType() == MOVETYPE_NOCLIP
             or getcharge(wep) < chargeamt --ply:GetNWFloat("TacRPDashCharge", 0) < chargeamt
@@ -45,20 +55,13 @@ ATT.Hook_PreReload = function(wep)
     ply:SetNWFloat("TacRPLastLeap", CurTime())
     setcharge(wep, getcharge(wep) - chargeamt)
 
-    local ang = Angle(0, ply:GetAngles().y, 0)
+    local ang = Angle(ply:GetAngles().p, ply:GetAngles().y, 0)
     local vel
     local mult = wep:GetMeleePerkSpeed()
 
-    if ply:IsOnGround() and ply:Crouching() then
-        local ang2 = ply:GetAngles()
-        ang2.p = math.min(-70, ang2.p)
-        vel = ang2:Forward() * mult * 800
-        if SERVER then
-            ply:EmitSound("physics/concrete/boulder_impact_hard" .. math.random(1, 4) .. ".wav", 70, 120, 0.5)
-            makesound(ply, 100)
-        end
-    elseif ply:IsOnGround() then
-        vel = ang:Forward() * mult * (400 + math.max(0, 500 - ang:Forward():Dot(ply:GetVelocity()))) + Vector(0, 0, 300)
+    if ply:IsOnGround() then
+        ang.p = math.min(0, ang.p)
+        vel = ang:Forward() * mult * (400 + math.max(0, 400 - ang:Forward():Dot(ply:GetVelocity()))) + Vector(0, 0, 250)
         if SERVER then
             makesound(ply, 92)
         end

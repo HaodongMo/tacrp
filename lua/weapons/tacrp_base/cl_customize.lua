@@ -107,7 +107,8 @@ function SWEP:CreateCustomizeHUD()
         surface.SetFont("TacRP_Myriad_Pro_12")
 
         if self:GetAmmoType() != "" then
-            local ammo_txt = language.GetPhrase(string.lower(self:GetAmmoType()) .. "_ammo")
+            -- Have to do this weird double wrapping because ammo type strings are apparently case sensitive now (e.g. "Pistol_ammo")
+            local ammo_txt = language.GetPhrase(game.GetAmmoName(game.GetAmmoID(self:GetAmmoType())) .. "_ammo")
             local ammo_w = surface.GetTextSize(ammo_txt)
 
             surface.SetDrawColor(0, 0, 0, 150)
@@ -120,7 +121,7 @@ function SWEP:CreateCustomizeHUD()
         end
 
         if self.SubCatTier and self.SubCatType then
-            local type_txt = self:GetSubClassName(TacRP.UseTiers())
+            local type_txt = TacRP.FormatTierType(self.SubCatType, self.SubCatTier, TacRP.UseTiers())
             surface.SetFont("TacRP_Myriad_Pro_12")
             local type_w = surface.GetTextSize(type_txt)
 
@@ -418,20 +419,20 @@ function SWEP:CreateCustomizeHUD()
             local nade = TacRP.QuickNades[self:GetValue("PrimaryGrenade")]
 
             surface.SetFont("TacRP_Myriad_Pro_8")
-            surface.SetTextPos(TacRP.SS(6), TacRP.SS(4))
-            surface.DrawText("FUSE:")
+            surface.SetTextPos(TacRP.SS(4), TacRP.SS(4))
+            surface.DrawText(	TacRP:GetPhrase("quicknade.fuse")	)
 
             surface.SetFont("TacRP_Myriad_Pro_8")
             surface.SetTextPos(TacRP.SS(4), TacRP.SS(12))
-            surface.DrawText(nade.DetType or "")
+            surface.DrawText(TacRP:GetPhrase("quicknade." .. nade.PrintName .. ".dettype") or nade.DetType or "")
 
             surface.SetFont("TacRP_Myriad_Pro_8")
             surface.SetTextColor(255, 255, 255)
-            surface.SetTextPos(TacRP.SS(6), TacRP.SS(24))
+            surface.SetTextPos(TacRP.SS(4), TacRP.SS(24))
             surface.DrawText(TacRP:GetPhrase("cust.description"))
 
             if !self.MiscCache["cust_desc"] then
-                self.MiscCache["cust_desc"] = TacRP.MultiLineText(nade.Description, w - TacRP.SS(8), "TacRP_Myriad_Pro_8")
+                self.MiscCache["cust_desc"] = TacRP.MultiLineText(TacRP:GetPhrase("quicknade." .. nade.PrintName .. ".desc") or nade.Description, w - TacRP.SS(8), "TacRP_Myriad_Pro_8")
             end
 
             for i, k in ipairs(self.MiscCache["cust_desc"]) do
@@ -455,11 +456,6 @@ function SWEP:CreateCustomizeHUD()
             surface.DrawRect(0, 0, w, h)
             TacRP.DrawCorneredBox(0, 0, w, h)
 
-            -- surface.SetFont("TacRP_Myriad_Pro_8")
-            -- surface.SetTextColor(255, 255, 255)
-            -- surface.SetTextPos(TacRP.SS(6), TacRP.SS(4))
-            -- surface.DrawText(TacRP:GetPhrase("cust.description"))
-
             if !self.MiscCache["cust_desc"] then
                 local phrase = TacRP:GetPhrase("wep." .. self:GetClass() .. ".desc") or self.Description
                 self.MiscCache["cust_desc"] = TacRP.MultiLineText(phrase, w - TacRP.SS(8), "TacRP_Myriad_Pro_8")
@@ -472,11 +468,24 @@ function SWEP:CreateCustomizeHUD()
                 surface.DrawText(k)
             end
 
+			-- local lastseenquoteline = false
+			-- local startseequotelinetime = 0
+
             local phrase_quote = TacRP:GetPhrase("wep." .. self:GetClass() .. ".desc.quote") or self.Description_Quote
+            -- local phrase_quote = "THIS IS A TEST QUOTE THAT IS VERY LONG IN LENGTH TO TEST SCROLLING TEXT THIS IS A TEST"
             if phrase_quote then
-                surface.SetFont("TacRP_Myriad_Pro_8_Italic")
+                surface.SetFont("TacRP_Myriad_Pro_6_Italic")
+                local tw, th = surface.GetTextSize(phrase_quote)
+				
+                surface.SetTextPos(TacRP.SS(4), TacRP.SS(34) - th)
+				
+                -- if tw > TacRP.SS(166) then
+                    -- surface.SetFont("TacRP_Myriad_Pro_6_Italic")
+                    -- tw, th = surface.GetTextSize(phrase_quote)
+					-- lastseenquoteline = true
+					-- surface.SetTextPos(TacRP.SS(200) - ((CurTime() - startseequotelinetime) * 100) % (tw * 2.25), TacRP.SS(34) - th)
+                -- end
                 surface.SetTextColor(255, 255, 255)
-                surface.SetTextPos(TacRP.SS(4), TacRP.SS(26))
                 surface.DrawText(phrase_quote)
             end
         end
@@ -556,7 +565,8 @@ function SWEP:CreateCustomizeHUD()
             TacRP.DrawCorneredBox(0, 0, w, h)
 
             if !self.MiscCache["cust_credits"] then
-                self.MiscCache["cust_credits"] = TacRP.MultiLineText(self.Credits, w - TacRP.SS(8), "TacRP_Myriad_Pro_8")
+                local creditphrase = TacRP:GetPhrase("wep." .. self:GetClass() .. ".credits") or self.Credits
+                self.MiscCache["cust_credits"] = TacRP.MultiLineText(creditphrase, w - TacRP.SS(8), "TacRP_Myriad_Pro_8")
             end
 
             for i, k in ipairs(self.MiscCache["cust_credits"]) do
@@ -1302,7 +1312,7 @@ function SWEP:CreateCustomizeHUD()
         end
         local todo = DisableClipping(true)
 
-        draw.SimpleText("Legacy Menu", "TacRP_Myriad_Pro_8", w + TacRP.SS(2), h / 2, color_white, TEXT_ALIGN_LEFT, TEXT_ALIGN_CENTER)
+        draw.SimpleText(TacRP:GetPhrase("menu.legacy") or "Legacy Menu", "TacRP_Myriad_Pro_8", w + TacRP.SS(2), h / 2, color_white, TEXT_ALIGN_LEFT, TEXT_ALIGN_CENTER)
 
 
         DisableClipping(todo)
@@ -1373,7 +1383,7 @@ function SWEP:CreateCustomizeHUD()
         if !self.CustomizeHUD then return end
 
         for i, v in ipairs(TacRP.NewsLoaded) do
-            if newsbutton and !TacRP.NewsRead[v.Key] then
+            if IsValid(newsbutton) and !TacRP.NewsRead[v.Key] then
                 newsbutton.flash = v.Type or "article"
                 break
             end

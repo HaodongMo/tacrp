@@ -11,7 +11,8 @@ SWEP.Category = "Tactical RP"
 SWEP.SubCatTier = "1Elite"
 SWEP.SubCatType = "5Machine Gun"
 
-SWEP.Description = "Machine gun with huge volume of fire, but is difficult to use without bipod deployed."
+SWEP.Description = "Machine gun with huge volume of fire."
+SWEP.Description_Quote = "The buzzsaw's great grandson."
 
 SWEP.Trivia_Caliber = "5.56x45mm"
 SWEP.Trivia_Manufacturer = "Heckler & Koch"
