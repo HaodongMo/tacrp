@@ -911,6 +911,13 @@ local conVars = {
         replicated = true
     },
     {
+        name = "can_jam",
+        default = "1",
+        min = 0,
+        max = 1,
+        replicated = true
+    },    
+	{
         name = "jam_autoclear",
         default = "0",
         min = 0,
@@ -1720,9 +1727,14 @@ local function menu_balance_ti(panel)
     })
     panel:ControlHelp("#tacrp.balance.dumpammo.desc")
     panel:AddControl("checkbox", {
+        label = "#tacrp.balance.canjam", -- Automatically Clear Jams
+        command = "tacrp_can_jam"
+    })    
+	panel:AddControl("checkbox", {
         label = "#tacrp.balance.autoclearjam", -- Automatically Clear Jams
         command = "tacrp_jam_autoclear"
     })
+	panel:ControlHelp("#tacrp.balance.autoclearjam.desc")
     panel:AddControl("checkbox", {
         label = "#tacrp.balance.expandammotype", -- Expanded Ammo Types
         command = "tacrp_expandedammotypes"

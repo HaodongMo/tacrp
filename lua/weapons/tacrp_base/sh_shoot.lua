@@ -848,9 +848,10 @@ function SWEP:IsShotgun(base)
 end
 
 function SWEP:GetJamChance(base)
+	
     local valfunc = base and self.GetBaseValue or self.GetValue
     local factor = valfunc(self, "JamFactor")
-    if factor <= 0 then return 0 end
+    if factor <= 0 or !TacRP.ConVars["can_jam"]:GetBool() then return 0 end
 
     local default = TacRP.AmmoJamMSB[self:GetAmmoType(base)] or 15
     local msb = (valfunc(self, "JamBaseMSB") or default) / math.sqrt(factor)
