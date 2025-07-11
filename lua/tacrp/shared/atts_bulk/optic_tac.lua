@@ -1141,3 +1141,32 @@ ATT.TacticalName = "hint.tac.cam_mode"
 -- end
 
 TacRP.LoadAtt(ATT, "tac_thermal")
+-- #endregion
+
+------------------------------
+-- toploader_stripper_clip
+------------------------------
+ATT = {}
+
+ATT.PrintName = "Clip"
+ATT.FullName = "Stripper Clip"
+ATT.Icon = Material("entities/tacrp_att_optic_stripperclip.png", "mips smooth")
+ATT.Description = "Use stripper clips to improve reload speed."
+ATT.Pros = {"Reloads all rounds at once"}
+ATT.Cons = {"No single-round reloads", "Incompatible with optics"}
+
+ATT.Category = "stripper_clip"
+
+ATT.SortOrder = 0
+
+ATT.ShotgunReload = false
+
+ATT.Hook_TranslateSequence = function(self, seq)
+    if seq == "reload" then
+        return {"reload_clip"}
+    end
+end
+
+ATT.InstalledElements = {"optic_clip"}
+
+TacRP.LoadAtt(ATT, "toploader_stripper_clip")
