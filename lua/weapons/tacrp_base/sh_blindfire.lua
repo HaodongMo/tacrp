@@ -160,6 +160,7 @@ local bone_mods_index = {
 }
 
 function SWEP:ToggleBoneMods(on)
+    if !IsValid(self:GetOwner()) then return end
     if on == TacRP.BLINDFIRE_NONE or on == false or on == nil then
         for _, i in ipairs(bone_list) do
             local boneindex = self:GetOwner():LookupBone(i)
