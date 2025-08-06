@@ -422,7 +422,7 @@ ATT.Description = "att.acc_extmag.desc"
 ATT.Pros = {"stat.clipsize"}
 ATT.Cons = {"stat.reloadtime"}
 
-ATT.Category = "acc_extmag_shotgun"
+ATT.Category = {"acc_extmag_shotgun", "acc_extmag_shotgun_mag", "acc_extmag_shotgun_tube"} -- Left the original as a failsafe/backup for third-party weapons/weapon packs
 
 ATT.InvAtt = "acc_extmag_rifle"
 
