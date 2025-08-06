@@ -624,6 +624,10 @@ L["att.acc_extmag.name.full"] = "Rozszerzony magazynek"
 L["att.acc_extmag.name"] = "Rozszerzacz magazynka"
 L["att.acc_extmag.desc"] = "Niewielkie zwiększenie pojemności broni."
 
+-- L["att.acc_extmag_shotgun_tube.name.full"] = "Tube Extender"
+-- L["att.acc_extmag_shotgun_tube.name"] = "Tube Ext."
+-- L["att.acc_extmag_shotgun_tube.desc"] = "Slightly increase weapon capacity."
+
 -- L["att.acc_foldstock.name"] = "Fold Stock"
 -- L["att.acc_foldstock.desc"] = "Keep stock folded, improving handling significantly at the cost of recoil."
 

@@ -624,6 +624,10 @@ L["att.acc_extmag.name.full"] = "扩容弹匣"
 L["att.acc_extmag.name"] = "扩容弹匣"
 L["att.acc_extmag.desc"] = "小幅提升武器的弹药装填量。"
 
+-- L["att.acc_extmag_shotgun_tube.name.full"] = "Tube Extender"
+-- L["att.acc_extmag_shotgun_tube.name"] = "Tube Ext."
+-- L["att.acc_extmag_shotgun_tube.desc"] = "Slightly increase weapon capacity."
+
 L["att.acc_foldstock.name"] = "折叠枪托"
 L["att.acc_foldstock.desc"] = "不使用枪托。"
 

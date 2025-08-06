@@ -624,6 +624,10 @@ L["att.acc_extmag.name.full"] = "Förlängt Magasin"
 L["att.acc_extmag.name"] = "Förl. Mag"
 L["att.acc_extmag.desc"] = "Ökar lätt vapnets kapacitet."
 
+-- L["att.acc_extmag_shotgun_tube.name.full"] = "Tube Extender"
+-- L["att.acc_extmag_shotgun_tube.name"] = "Tube Ext."
+-- L["att.acc_extmag_shotgun_tube.desc"] = "Slightly increase weapon capacity."
+
 L["att.acc_foldstock.name"] = "Vikt Kolv"
 L["att.acc_foldstock.desc"] = "Håller kolven vikt vilket förbättrar hanteringen drastiskt med kostnad på rekyl."
 

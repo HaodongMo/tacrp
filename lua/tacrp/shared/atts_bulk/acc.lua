@@ -411,7 +411,7 @@ TacRP.LoadAtt(ATT, "acc_extmag_rifle2")
 -- #endregion
 
 ------------------------------
--- #region acc_extmag_shotgun
+-- #region acc_extmag_shotgun (Leaving the original as a backup for third-party weapons/weapon packs that may rely on it)
 ------------------------------
 ATT = {}
 
@@ -422,7 +422,7 @@ ATT.Description = "att.acc_extmag.desc"
 ATT.Pros = {"stat.clipsize"}
 ATT.Cons = {"stat.reloadtime"}
 
-ATT.Category = {"acc_extmag_shotgun", "acc_extmag_shotgun_mag", "acc_extmag_shotgun_tube"} -- Left the original as a failsafe/backup for third-party weapons/weapon packs
+ATT.Category = {"acc_extmag_shotgun"}
 
 ATT.InvAtt = "acc_extmag_rifle"
 
@@ -433,6 +433,56 @@ ATT.Add_ClipSize = 2
 ATT.Mult_ReloadTimeMult = 1.03
 
 TacRP.LoadAtt(ATT, "acc_extmag_shotgun")
+-- #endregion
+
+------------------------------
+-- #region acc_extmag_shotgun_mag
+------------------------------
+ATT = {}
+
+ATT.PrintName = "att.acc_extmag.name"
+ATT.FullName = "att.acc_extmag.name.full"
+ATT.Icon = Material("entities/tacrp_att_acc_extmag_shotgun.png", "mips smooth") -- make new icon maybe?
+ATT.Description = "att.acc_extmag.desc"
+ATT.Pros = {"stat.clipsize"}
+ATT.Cons = {"stat.reloadtime"}
+
+ATT.Category = {"acc_extmag_shotgun_mag"}
+
+ATT.InvAtt = "acc_extmag_rifle"
+
+ATT.SortOrder = 1
+
+ATT.Add_ClipSize = 5
+
+ATT.Mult_ReloadTimeMult = 1.05
+
+TacRP.LoadAtt(ATT, "acc_extmag_shotgun_mag")
+-- #endregion
+
+------------------------------
+-- #region acc_extmag_shotgun_tube
+------------------------------
+ATT = {}
+
+ATT.PrintName = "att.acc_extmag_shotgun_tube.name"
+ATT.FullName = "att.acc_extmag_shotgun_tube.name.full"
+ATT.Icon = Material("entities/tacrp_att_acc_extmag_shotgun.png", "mips smooth")
+ATT.Description = "att.acc_extmag.desc"
+ATT.Pros = {"stat.clipsize"}
+ATT.Cons = {"stat.reloadtime"}
+
+ATT.Category = {"acc_extmag_shotgun_tube"}
+
+ATT.InvAtt = "acc_extmag_rifle"
+
+ATT.SortOrder = 1
+
+ATT.Add_ClipSize = 2
+
+ATT.Mult_ReloadTimeMult = 1.03
+
+TacRP.LoadAtt(ATT, "acc_extmag_shotgun_tube")
 -- #endregion
 
 ------------------------------
