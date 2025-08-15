@@ -1300,17 +1300,19 @@ The fourth major expansion, featuring 42 weapons themed around zombies, the apoc
 ]]
     },
 	{
-        Title = "Update 33.",
+        Title = "Update 33",
         Type = "Update",
-        Date = "2025-07-11",
+        Date = "2025-08-15",
         Author = "speedonerd",
         Major = true,
-        Summary = "",
+        Summary = "Kept you waiting, huh?",
         Contents = [[<body style="font-family:'Myriad Pro';color:white;font-size:125%;">
+
+<p>A small-ish update with a couple of bugfixes and minor changes. This update cycle saw a lot of content development in the background but most of it was unfortunately scrapped due to a lack of motivation.
+<p>What hasn't been scrapped is a complete reanimation of the top-loaded bolt-action rifles (Kar 98k, Mosin-Nagant, Lee-Enfield). This also includes a new attachment to allow these rifles to use stripper clips.</p>	
 
 <h3>Changelist:</h3>
 <ul>
-<li><b>New Content:</b> Dillon Aero M134 Minigun. Its already been released but it technically was part of this update's dev cycle.
 <li><b>Added:</b> (Base) Support for custom ammotypes and quicknades.
 <li><b>Added:</b> (Base) ConVar to disable weapon jamming.
 <li><b>Added:</b> (Base) Melee weapons can have custom lunge sounds defined.
@@ -1318,6 +1320,7 @@ The fourth major expansion, featuring 42 weapons themed around zombies, the apoc
 <li><b>Fixed:</b> (Base) Melee specials breaking if auto reload was enabled.
 <li><b>Changed:</b> (Base) Emergency Bullet and 2x Zoom are always free.
 <li><b>Changed:</b> (Base) Hecate can no longer melee bash.
+<li><b>Changed:</b> (Base) Shotgun extended magazine attachment category split into two separate categories to distinguish between tube magazines and detachable magazines.
 <li><b>Changed:</b> (InterOps + Scavenger's Spoils) New bespoke animations for top-loaded bolt-action rifles (Kar98k, Mosin, Lee-Enfield).
 <li><b>Changed:</b> (Exo Ops) Steyr Scout moved to Marksman Rifles.
 </ul>
