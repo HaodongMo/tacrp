@@ -246,7 +246,7 @@ w = ws .. "ex_mac10"
 L["wep." .. w .. ".name.full"] = "Ingram MAC-11"
 L["wep." .. w .. ".name"] = "MAC-11"
 L["wep." .. w .. ".desc"] = "A bullet hose best used for point blank spray-and-pray."
-L["wep." .. w .. ".desc.quote"] = "\"Give me the motherfuckin' gun, Tre!\""
+L["wep." .. w .. ".desc.quote"] = "\"I want that fucker dead!\""
 L["wep." .. w .. ".trivia.manufacturer"] = "Military Armament Corporation"
 L["wep." .. w .. ".credits"] = "Model & Textures: Enron \nSounds: Vunsunta,  Erick F \nAnimations: Tactical Intervention"
 
