@@ -1053,6 +1053,8 @@ ATT.Hook_ModifyMagnification = function(wep, data)
     end
 end
 
+ATT.Override_Sound_ToggleTactical = "tacrp/2xzoom.wav"
+
 ATT.TacticalName = "hint.tac.magnifier"
 
 ATT.Free = true
