@@ -1325,6 +1325,7 @@ The fourth major expansion, featuring 42 weapons themed around zombies, the apoc
 <li><b>Changed:</b> (Base) Hecate can no longer melee bash.
 <li><b>Changed:</b> (Base) Shotgun extended magazine attachment category split into two separate categories to distinguish between tube magazines and detachable magazines.
 <li><b>Changed:</b> (InterOps + Scavenger's Spoils) New bespoke animations for top-loaded bolt-action rifles (Kar98k, Mosin, Lee-Enfield).
+<li><b>Changed:</b> (Heavy Duty) Small SPAS-12 model edit and unique semi-auto reload.
 <li><b>Changed:</b> (Exo Ops) Steyr Scout moved to Marksman Rifles.
 <li><b>Changed:</b> (Exo Ops) SPAS-15 animation overhaul.
 </ul>
