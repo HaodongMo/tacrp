@@ -377,7 +377,7 @@ w = ws .. "m320"
 L["wep." .. w .. ".name.full"] = "HK M320"
 L["wep." .. w .. ".name"] = "M320"
 L["wep." .. w .. ".desc"] = "Grenade launcher capable of firing a variety of payloads."
-L["wep." .. w .. ".desc.quote"] = "Not beanbags, NOT BEANBAGS!"
+L["wep." .. w .. ".desc.quote"] = "\"Frags out you motherfuckers!\"" -- Battlefield 3
 L["wep." .. w .. ".trivia.manufacturer"] = "Heckler & Koch"
 L["wep." .. w .. ".credits"] = "Assets: Tactical Intervention"
 
@@ -1275,7 +1275,7 @@ L["wep." .. w .. ".credits"] = "Model: The Lama \nTextures: The Miller \nAnimati
 w = ws .. "saiga"
 L["wep." .. w .. ".name"] = "Saiga-12K"
 L["wep." .. w .. ".desc"] = "High capacity shotgun feeding from a box magazine, suitable for spraying down a room."
-L["wep." .. w .. ".desc.quote"] = "Some people call it the SASG."
+L["wep." .. w .. ".desc.quote"] = "\"Fuck! There's an anti-fucker over there!\"" -- Battlefield 3
 L["wep." .. w .. ".trivia.manufacturer"] = "Kalashnikov Concern"
 L["wep." .. w .. ".credits"] = "Assets: Battlefield 3 \nAnimations: Tactical Intervention"
 
