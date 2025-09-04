@@ -551,7 +551,7 @@ w = ws .. "uzi"
 L["wep." .. w .. ".name.full"] = "IMI Uzi Pro"
 L["wep." .. w .. ".name"] = "Uzi Pro"
 L["wep." .. w .. ".desc"] = "Balanced machine pistol with a controllable rate of fire."
-L["wep." .. w .. ".desc.quote"] = "Like a swarm of wasps."
+L["wep." .. w .. ".desc.quote"] = "Slava Ukraini."
 L["wep." .. w .. ".trivia.manufacturer"] = "Israel Military Industries"
 L["wep." .. w .. ".credits"] = "Assets: Tactical Intervention"
 
