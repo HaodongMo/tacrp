@@ -1320,7 +1320,6 @@ The fourth major expansion, featuring 42 weapons themed around zombies, the apoc
 <li><b>Added:</b> (Base) Melee weapons can have custom lunge sounds defined.
 <li><b>Added:</b> (Base) Stripper clip attachment for top-loaded bolt-action rifles (Kar98k, Mosin, Lee-Enfield).
 <li><b>Fixed:</b> (Base) Melee specials breaking if auto reload was enabled.
-<li><b>Fixed:</b> (Base) P2000 ironsights being misaligned after shooting.
 <li><b>Changed:</b> (Base) Emergency Bullet and 2x Zoom are always free.
 <li><b>Changed:</b> (Base) Hecate can no longer melee bash.
 <li><b>Changed:</b> (Base) Shotgun extended magazine attachment category split into two separate categories to distinguish between tube magazines and detachable magazines.
