@@ -632,7 +632,10 @@ function SWEP:SetupDataTables()
     self:SetLockOnStartTime(0)
 end
 
-function SWEP:OnDrop()
+function SWEP:OnDrop(owner)
+    if self.PreviousZoom and IsValid(owner) then
+        owner:SetCanZoom(true)
+    end
     self:SetReady(false)
 end
 
