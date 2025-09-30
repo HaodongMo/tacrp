@@ -1301,7 +1301,7 @@ The fourth major expansion, featuring 42 weapons themed around zombies, the apoc
     },
 	{
         Title = "Update 33",
-        Type = "Update",
+        Type = "Patch Notes",
         Date = "2025-09-11",
         Author = "speedonerd",
         Major = true,
@@ -1327,6 +1327,20 @@ The fourth major expansion, featuring 42 weapons themed around zombies, the apoc
 <li><b>Changed:</b> (Heavy Duty) Small SPAS-12 model edit and unique semi-auto reload.
 <li><b>Changed:</b> (Exo Ops) Steyr Scout moved to Marksman Rifles.
 <li><b>Changed:</b> (Exo Ops) SPAS-15 animation overhaul.
+</ul>
+]]
+    },
+    {
+        Title = "Update 33 Patch 1",
+        Type = "Patch Notes",
+        Date = "2025-09-30",
+        Author = "8Z",
+        Major = false,
+        Summary = "Hotfix for sound issues.",
+        Contents = [[<body style="font-family:'Myriad Pro';color:white;font-size:125%;">
+<h3>Changelist:</h3>
+<ul>
+<li><b>Fixed:</b> Missing sounds due to FireAnimationEvent behavior change in beta branch (thanks to chen for the fix).
 </ul>
 ]]
     },
