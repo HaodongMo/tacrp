@@ -116,7 +116,7 @@ net.Receive("tacrp_receivepreset", function(len, ply)
 end)
 
 function TacRP.DropWeapon(ply, wep)
-    if wep:GetValue("PrimaryGrenade") then
+    if wep.ArcticTacRP and wep:GetValue("PrimaryGrenade") then
         -- Grenades don't have a clip size. this would mean players can constantly generate and drop nade sweps that do nothing.
         local nade = TacRP.QuickNades[wep:GetValue("PrimaryGrenade")]
         if TacRP.IsGrenadeInfiniteAmmo(nade) then
