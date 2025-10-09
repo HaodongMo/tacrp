@@ -56,7 +56,7 @@ if CLIENT then
             for _, k in pairs(weaponlist) do
                 local weptbl = weapons.Get(k.ClassName)
                 if weptbl and weptbl.ArcticTacRP and weptbl.Spawnable
-                        and weptbl.NPCUsable and !weptbl.PrimaryMelee and !weptbl.PrimaryGrenade then
+                        and weptbl.NPCUsable and !weptbl.PrimaryMelee and !weptbl.PrimaryGrenade and weptbl.SubCatType then
                     local cat = k.SubCatType
                     if !catdict[cat] then
                         catdict[cat] = true
