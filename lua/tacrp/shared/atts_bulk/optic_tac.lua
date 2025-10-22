@@ -1102,8 +1102,9 @@ ATT.Hook_ToggleTactical = function(wep)
     if wep:Ammo1() < loadamt and !wep:GetInfiniteAmmo() then return end
 
     -- wep:SetNextPrimaryFire(CurTime() + 1)
-    wep:PlayAnimation("jam", 0.667, true, true)
-    wep:GetOwner():DoAnimationEvent(ACT_HL2MP_GESTURE_RELOAD_PISTOL)
+    local t = wep:PlayAnimation("jam", 0.667, true, true)
+    wep:GetOwner():DoCustomAnimEvent(PLAYERANIMEVENT_RELOAD_LOOP, t * 1000)
+    -- wep:GetOwner():DoAnimationEvent(ACT_HL2MP_GESTURE_RELOAD_PISTOL)
     wep:RestoreClip(loadamt)
     wep:DoBulletBodygroups()
     wep:SetJammed(false)
