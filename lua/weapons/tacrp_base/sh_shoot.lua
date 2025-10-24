@@ -824,7 +824,7 @@ function SWEP:GetBodyDamageMultipliers(base)
 end
 
 function SWEP:FireAnimationEvent( pos, ang, event, options )
-    if (bit.band(event, 8192) != 0) then return true end
+    if event != 5004 then return true end
 end
 
 -- DO NOT USE AngleRand() to do bullet spread as it generates a random angle in 3 directions when we only use two (roll is not relevant!)
