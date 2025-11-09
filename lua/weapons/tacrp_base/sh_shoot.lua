@@ -557,8 +557,8 @@ function SWEP:AfterShotFunction(tr, dmg, range, penleft, alreadypenned, forced)
     if self:GetValue("ExplosiveDamage") > 0 and penleft == matpen then
         -- Add DMG_AIRBOAT to hit helicopters
         -- Need a timer here because only one DamageInfo can exist at a time
-        timer.Simple(0, function()
-            if !IsValid(self) then return end
+        timer.Simple(0.0001, function()
+            if !IsValid(self) or !IsValid(self:GetOwner()) then return end
             local dmginfo = DamageInfo()
             dmginfo:SetAttacker(self:GetOwner())
             dmginfo:SetInflictor(self)
