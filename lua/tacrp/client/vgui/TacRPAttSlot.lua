@@ -153,7 +153,7 @@ end
 
 function PANEL:PaintOver(w, h)
     -- thank u fesiug
-    if self:IsHovered() and self:GetInstalled() != "" then
+    if self:IsHovered() and self:GetInstalled() != nil then
 
         local wep = self:GetWeapon()
         local att = self:GetInstalled()
