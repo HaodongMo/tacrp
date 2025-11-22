@@ -153,10 +153,10 @@ end
 
 function PANEL:PaintOver(w, h)
     -- thank u fesiug
-    if self:IsHovered() and self:GetShortName() != nil and self:GetShortName() != "" then
+    if self:IsHovered() and self:GetInstalled() != "" then
 
         local wep = self:GetWeapon()
-        local att = self:GetShortName()
+        local att = self:GetInstalled()
         local atttbl = TacRP.GetAttTable(att)
         local attslot = wep.Attachments[self:GetSlot()]
 
