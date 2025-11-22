@@ -67,20 +67,17 @@ function PANEL:GetColors()
 
     local wep = self:GetWeapon()
     local att = self:GetShortName()
-    local atttbl = TacRP.GetAttTable(att)
-    local empty = self:GetInstalled() == nil
     local hover = self:IsHovered()
     local attached = IsValid(wep) and self:GetSlot()
             and wep.Attachments[self:GetSlot()].Installed == att
     self:SetDrawOnTop(hover)
-    local has = empty and 0 or TacRP:PlayerGetAtts(wep:GetOwner(), att)
 
     local col_bg = Color(0, 0, 0, 150)
     local col_corner = Color(255, 255, 255)
     local col_text = Color(255, 255, 255)
     local col_image = Color(255, 255, 255)
 
-    if (attached and !self:GetIsMenu()) or (self:GetIsMenu() and self:GetSlotLayout():GetActiveSlot() == self:GetSlot()) then
+    if (attached and !self:GetIsMenu()) or (self:GetIsMenu() and self:GetSlotLayout() and self:GetSlotLayout():GetActiveSlot() == self:GetSlot()) then
         col_bg = Color(150, 150, 150, 150)
         col_corner = Color(50, 50, 255)
         col_text = Color(0, 0, 0)
@@ -92,7 +89,7 @@ function PANEL:GetColors()
             col_image = Color(255, 255, 255)
         end
     else
-        if self:GetIsMenu() or TacRP.ConVars["free_atts"]:GetBool() or has > 0 then
+        if self:GetIsMenu() or TacRP:PlayerGetAtts(LocalPlayer(), att) > 0 then
             if hover then
                 col_bg = Color(255, 255, 255)
                 col_corner = Color(0, 0, 0)
@@ -156,7 +153,7 @@ end
 
 function PANEL:PaintOver(w, h)
     -- thank u fesiug
-    if self:IsHovered() and self:GetShortName() != nil then
+    if self:IsHovered() and self:GetShortName() != nil and self:GetShortName() != "" then
 
         local wep = self:GetWeapon()
         local att = self:GetShortName()
