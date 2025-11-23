@@ -1243,6 +1243,7 @@ function SWEP:CreateCustomizeHUD()
         layout:SetSpaceX(math.floor(TacRP.SS(6)))
         layout:SetSpaceY(math.floor(TacRP.SS(6)))
         layout:SetLayoutDir(LEFT)
+        bg.SlotLayout = layout
 
         local scroll = vgui.Create("DScrollPanel", bg)
         scroll:SetSize(TacRP.SS(100), scrh * 0.9)
@@ -1259,6 +1260,7 @@ function SWEP:CreateCustomizeHUD()
         if self.LastCustomizeSlot then
             slotlayout:SetSlot(self.LastCustomizeSlot)
         end
+        bg.ScrollLayout = slotlayout
         -- slotlayout:Dock(FILL)
 
         for slot, attslot in pairs(self.Attachments) do
