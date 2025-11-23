@@ -1390,6 +1390,8 @@ function SWEP:CreateCustomizeHUD()
         end
     end)
 
+    hook.Run("TacRP_CreateCustomizeHUD", self, self.CustomizeHUD)
+
     self.StaticStats = false
 end
 
