@@ -5,6 +5,7 @@ AddCSLuaFile()
 
 // names and stuff
 SWEP.PrintName = "Glock 17"
+SWEP.AbbrevName = "G17"
 SWEP.Category = "Tactical RP" // "Tactical RP (Extras)"
 
 SWEP.SubCatTier = "4Consumer"
@@ -166,16 +167,16 @@ SWEP.HolsterAng = Angle(90, 0, 0)
 
 // reload
 
-SWEP.ClipSize = 18
+SWEP.ClipSize = 17 --why was it 18 so random
 SWEP.Ammo = "pistol"
+
+SWEP.ReloadUpInTime = 0.85
+SWEP.DropMagazineTime = 0.2
 
 SWEP.ReloadTimeMult = 1.4
 
 SWEP.DropMagazineModel = "models/weapons/tacint_extras/magazines/glock_new.mdl"
 SWEP.DropMagazineImpact = "pistol"
-
-SWEP.ReloadUpInTime = 0.85
-SWEP.DropMagazineTime = 0.2
 
 // sounds
 
@@ -239,7 +240,7 @@ SWEP.ProceduralIronFire = {
     },
 }
 
-SWEP.NoIdle = false
+SWEP.NoIdle = true --fixes animation bug, why was this set to false??
 
 SWEP.ShootTimeMult = 0.45
 
