@@ -167,7 +167,7 @@ SWEP.HolsterAng = Angle(90, 0, 0)
 
 // reload
 
-SWEP.ClipSize = 17 --why was it 18 so random
+SWEP.ClipSize = 18
 SWEP.Ammo = "pistol"
 
 SWEP.ReloadUpInTime = 0.85
