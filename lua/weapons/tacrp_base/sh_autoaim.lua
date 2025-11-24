@@ -44,7 +44,7 @@ function SWEP:ThinkLockOn()
                         if (target.LVS and target:GetHP() > 0) or target.Targetable then return true end
                         if target.IsGlideVehicle then return true end
                         if TacRP.LockableEntities[target:GetClass()] then return true end
-                        if TacRP.FlareEntities[target:GetClass()] then return true end
+                        if TacRP.FlareEntities[target:GetClass()] or target.IsTacRPFlare then return true end
                     end
                 }
             )
