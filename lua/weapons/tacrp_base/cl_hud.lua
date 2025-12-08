@@ -90,9 +90,13 @@ function SWEP:DoDrawCrosshair(x, y)
         clr = clr or color_white
         surface.SetDrawColor(clr.r, clr.g, clr.b, clr.a * self.CrosshairAlpha * 0.75 * self:GetSightAmount())
         surface.DrawRect(x - 1, y - 1, 3, 3)
+        surface.DrawRect(x - 13, y - 0.5, 6, 3)
+        surface.DrawRect(x + 8, y - 0.5, 6, 3)
 
-        surface.SetDrawColor(0, 0, 0, clr.a * self.CrosshairAlpha * self:GetSightAmount() * 0.5)
+        surface.SetDrawColor(0, 0, 0, clr.a * self.CrosshairAlpha * self:GetSightAmount() * 0.7)
         surface.DrawOutlinedRect(x - 2, y - 2, 5, 5, 1)
+        surface.DrawOutlinedRect(x - 14, y - 1.25, 8, 5, 1)
+        surface.DrawOutlinedRect(x + 7, y - 1.25, 8, 5, 1)
     elseif TacRP.ConVars["crosshair"]:GetBool() then
         clr = clr or Color(50, 255, 50)
         surface.SetDrawColor(clr.r, clr.g, clr.b, clr.a * self.CrosshairAlpha)
