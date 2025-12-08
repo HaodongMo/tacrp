@@ -1343,6 +1343,25 @@ The fourth major expansion, featuring 42 weapons themed around zombies, the apoc
 <li><b>Fixed:</b> Missing sounds due to FireAnimationEvent behavior change in beta branch (thanks to chen for the fix).
 </ul>
 ]]
+    },    
+	{
+        Title = "Update 34",
+        Type = "Patch Notes",
+        Date = "2025-12-08",
+        Author = "speedonerd",
+        Major = false,
+        Summary = "Minor fixes and changes.",
+        Contents = [[<body style="font-family:'Myriad Pro';color:white;font-size:125%;">
+<h3>Changelist:</h3>
+<ul>
+<li><b>Added:</b> (Scav. Spoils) Added Mad Minute bolt for Lee-Enfield.
+<li><b>Changed:</b> (Base) Improved flare detection for tracking projectiles and autoaim.
+<li><b>Changed:</b> (Base) Altered lowered irons dot to be a small two-prong reticle.
+<li><b>Changed:</b> (Base) Glock 17 model fixes.
+<li><b>Fixed:</b> Fixed explosive damage sometimes having a null attacker.
+<li><b>Fixed:</b> Fixed weapons that inherit their ammotype from another weapon not being able to pick up ammo in TTT.
+</ul>
+]]
     },
 }
 TacRP.NewsRead = TacRP.NewsRead or {}
