@@ -101,13 +101,13 @@ local function setupttt()
             wep.PrintName = wep.AbbrevName
         end
 
-        if wep.AmmoTTT then
-            wep.Ammo = wep.AmmoTTT
-        elseif TacRP.AmmoToTTT[wep.Ammo] then
-            wep.Ammo = TacRP.AmmoToTTT[wep.Ammo]
+        if weap.AmmoTTT then
+            wep.Ammo = weap.AmmoTTT
+        elseif TacRP.AmmoToTTT[weap.Ammo] then
+            wep.Ammo = TacRP.AmmoToTTT[weap.Ammo]
         end
 
-        wep.AmmoEnt = TacRP.TTTAmmoToEntity[wep.Ammo] or ""
+        wep.AmmoEnt = TacRP.TTTAmmoToEntity[wep.Ammo or weap.Ammo] or ""
         if wep.AutoSpawnable == nil then
             wep.AutoSpawnable = wep.Spawnable and !wep.AdminOnly
         end
@@ -133,9 +133,9 @@ local function setupttt()
                 -- other weapons are considered primary
                 -- try to determine spawntype if none exists
                 if !wep.spawnType then
-                    if wep.Ammo == "357" or (wep.Slot == 3 and (wep.Num or 1) == 1) then
+                    if (wep.Ammo or weap.Ammo) == "357" or (wep.Slot == 3 and (wep.Num or 1) == 1) then
                         wep.spawnType = WEAPON_TYPE_SNIPER
-                    elseif wep.Ammo == "buckshot" or (wep.Num or 1) > 1 then
+                    elseif (wep.Ammo or weap.Ammo) == "buckshot" or (wep.Num or 1) > 1 then
                         wep.spawnType = WEAPON_TYPE_SHOTGUN
                     else
                         wep.spawnType = WEAPON_TYPE_HEAVY
