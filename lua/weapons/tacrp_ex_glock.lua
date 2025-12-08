@@ -5,8 +5,7 @@ AddCSLuaFile()
 
 // names and stuff
 SWEP.PrintName = "Glock 17"
-SWEP.AbbrevName = "G17"
-SWEP.Category = "Tactical RP" // "Tactical RP (Extras)"
+SWEP.Category = "Tactical RP"
 
 SWEP.SubCatTier = "4Consumer"
 SWEP.SubCatType = "1Pistol"
@@ -167,7 +166,7 @@ SWEP.HolsterAng = Angle(90, 0, 0)
 
 // reload
 
-SWEP.ClipSize = 17 --why was it 18 so random
+SWEP.ClipSize = 18 --why was it 18 so random // it's for balance also 17 is a stupid number
 SWEP.Ammo = "pistol"
 
 SWEP.ReloadUpInTime = 0.85
