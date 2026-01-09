@@ -32,14 +32,8 @@ function SWEP:DoDrawCrosshair(x, y)
 
     local dir = self:GetShootDir(true)
 
-    local tr = util.TraceLine({
-        start = self:GetMuzzleOrigin(),
-        endpos = self:GetMuzzleOrigin() + (dir:Forward() * 50000),
-        mask = MASK_SHOT,
-        filter = self:GetOwner()
-    })
     cam.Start3D()
-        local w2s = tr.HitPos:ToScreen()
+        local w2s = (EyePos() + dir:Forward()):ToScreen() -- we can lie a little bit
         x = math.Round(w2s.x)
         y = math.Round(w2s.y)
     cam.End3D()
@@ -113,6 +107,12 @@ function SWEP:DoDrawCrosshair(x, y)
     -- Developer Crosshair
     if dev then
 
+        local tr = util.TraceLine({
+            start = self:GetMuzzleOrigin(),
+            endpos = self:GetMuzzleOrigin() + (dir:Forward() * 50000),
+            mask = MASK_SHOT,
+            filter = self:GetOwner()
+        })
         if self:StillWaiting() then
             surface.SetDrawColor(150, 150, 150, 75)
         else
