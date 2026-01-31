@@ -83,7 +83,7 @@ function SWEP:GetTracerOrigin()
     end
 end
 
-function SWEP:GetMuzzleDevice(wm)
+function SWEP:GetMuzzleDevice(wm, att)
     if !wm and self:GetOwner():IsNPC() then return end
 
     local model = self.WModel
@@ -95,6 +95,35 @@ function SWEP:GetMuzzleDevice(wm)
     end
 
     if model then
+        // For akimbo weapons with dual muzzle devices, determine which one based on attachment
+        local wantLeft = nil
+        local wantRight = nil
+
+        if att and self:GetValue("Akimbo") then
+            local qcaL = wm and self:GetValue("WM_QCA_MuzzleL") or self:GetValue("QCA_MuzzleL")
+            local qcaR = wm and self:GetValue("WM_QCA_MuzzleR") or self:GetValue("QCA_MuzzleR")
+
+            if att == qcaL then
+                wantLeft = true
+            elseif att == qcaR then
+                wantRight = true
+            end
+        end
+
+        // First pass: look for matching left/right muzzle device
+        if wantLeft or wantRight then
+            for i, k in pairs(model) do
+                if k.IsMuzzleDevice then
+                    if wantLeft and k.IsLeftMuzzle then
+                        return k
+                    elseif wantRight and k.IsRightMuzzle then
+                        return k
+                    end
+                end
+            end
+        end
+
+        // Fallback: return any muzzle device
         for i, k in pairs(model) do
             if k.IsMuzzleDevice then
                 return k

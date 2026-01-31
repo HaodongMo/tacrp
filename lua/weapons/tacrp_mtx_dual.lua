@@ -191,6 +191,7 @@ SWEP.DropMagazineTime = 0.25
 local path = "tacrp/weapons/mtx/"
 
 SWEP.Sound_Shoot = "^" .. path .. "fire-1.wav"
+SWEP.Sound_Shoot_Silenced = "^tacrp/weapons/p250/p250_fire_silenced-1.wav"
 
 SWEP.Vol_Shoot = 110
 SWEP.ShootPitchVariance = 2.5 // amount to vary pitch by each shot
@@ -259,6 +260,28 @@ SWEP.Attachments = {
         Category = {"ammo_pistol"},
         AttachSound = "TacRP/weapons/flashlight_on.wav",
         DetachSound = "TacRP/weapons/flashlight_off.wav",
+    },
+    [6] = {
+        PrintName = "Muzzle",
+        Category = {"silencer", "pistol_muzzle"},
+        AttachSound = "TacRP/weapons/silencer_on.wav",
+        DetachSound = "TacRP/weapons/silencer_off.wav",
+        VMScale = 0.5,
+        WMScale = 0.5,
+        Bone_L = "ValveBiped.barrel_assembly",
+        Pos_VM_L = Vector(-0.85, 0.33, 6),
+        Ang_VM_L = Angle(90, 0, 0),
+        // Right gun muzzle
+        Bone_R = "ValveBiped.barrel_assembly1",
+        Pos_VM_R = Vector(-0.85, 0.25, 6),
+        Ang_VM_R = Angle(90, 0, 0),
+        // World model (single for now)
+        WMBone_L = "Box01",
+        Pos_WM_L = Vector(0, 9, -1.5),
+        Ang_WM_L = Angle(0, -90, 0),
+        WMBone_R = "Box01",
+        Pos_WM_R = Vector(0, 9, -1.5),
+        Ang_WM_R = Angle(0, -90, 0),
     }
 }
 
