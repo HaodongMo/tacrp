@@ -266,22 +266,22 @@ SWEP.Attachments = {
         Category = {"silencer", "pistol_muzzle"},
         AttachSound = "TacRP/weapons/silencer_on.wav",
         DetachSound = "TacRP/weapons/silencer_off.wav",
-        VMScale = 0.5,
-        WMScale = 0.5,
+        VMScale = 0.6,
+        WMScale = 0.6,
         Bone_L = "ValveBiped.barrel_assembly",
-        Pos_VM_L = Vector(-0.85, 0.33, 6),
+        Pos_VM_L = Vector(-0.82, 0.28, 6.5),
         Ang_VM_L = Angle(90, 0, 0),
         // Right gun muzzle
         Bone_R = "ValveBiped.barrel_assembly1",
-        Pos_VM_R = Vector(-0.85, 0.25, 6),
+        Pos_VM_R = Vector(-0.82, 0.28, 6.5),
         Ang_VM_R = Angle(90, 0, 0),
         // World model (single for now)
-        WMBone_L = "Box01",
-        Pos_WM_L = Vector(0, 9, -1.5),
-        Ang_WM_L = Angle(0, -90, 0),
-        WMBone_R = "Box01",
-        Pos_WM_R = Vector(0, 9, -1.5),
-        Ang_WM_R = Angle(0, -90, 0),
+        WMBone_L = "ValveBiped.Bip01_L_Hand",
+        Pos_WM_L = Vector(11.65, 1.3, 3.25),
+        Ang_WM_L = Angle(0, 0, 0),
+        WMBone_R = "ValveBiped.Bip01_R_Hand",
+        Pos_WM_R = Vector(12.755, 1.1, -4.1),
+        Ang_WM_R = Angle(0, 0, 0),
     }
 }
 
