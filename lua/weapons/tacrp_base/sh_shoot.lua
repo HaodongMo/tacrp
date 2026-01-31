@@ -295,6 +295,7 @@ function SWEP:PrimaryAttack()
     local forceRight = nil
     if self:GetValue("DualAkimbo") then
         forceRight = false
+        self:SetLastFiredRight(false)
     end
     if ejectdelay == 0 then
         self:DoEject(nil, forceRight)
@@ -1166,6 +1167,7 @@ function SWEP:SecondaryShoot()
 
     self:SetNthShot2(self:GetNthShot2() + 1)
     self.LastSecondaryFireTime = CurTime()
+    self:SetLastFiredRight(true)
 
     // Force right side effects (forceRight = true)
     local ejectdelay = self:GetValue("EjectDelay")

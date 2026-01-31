@@ -654,6 +654,7 @@ function SWEP:SetupDataTables()
     self:NetworkVar("Bool", 15, "HoldingBreath")
     self:NetworkVar("Bool", 16, "LastWasSprinting")
     self:NetworkVar("Bool", 17, "EmptyReload")
+    self:NetworkVar("Bool", 18, "LastFiredRight") // For DualAkimbo tracer origin prediction
 
     self:NetworkVar("Angle", 0, "FreeAimAngle")
     self:NetworkVar("Angle", 1, "LastAimAngle")
