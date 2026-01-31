@@ -179,6 +179,12 @@ local mat_radial = Material("tacrp/grenades/radial.png", "mips smooth")
 local rackrisetime = 0
 local lastrow = 0
 
+// DualAkimbo independent sliding for each gun
+local rackrisetime_left = 0
+local lastrow_left = 0
+local rackrisetime_right = 0
+local lastrow_right = 0
+
 local lasthp = 0
 local lasthealtime = 0
 local lastdmgtime = 0
@@ -444,6 +450,158 @@ function SWEP:DrawHUDBackground()
                     surface.SetTextColor(col)
                     surface.SetTextPos(x + w - tw - TacRP.SS(40), y + TacRP.SS(12))
                     surface.DrawText(t)
+                elseif self:GetValue("DualAkimbo") then
+                    // DualAkimbo: Split display - left gun on left, right gun on right
+                    // Each side has independent row scrolling like the standard HUD
+                    local sb = TacRP.SS(4)
+                    local spacing = TacRP.SS(1)
+                    local row_size = 7
+                    local gap = TacRP.SS(3)  // gap between left and right sides
+                    local aps = self:GetValue("AmmoPerShot")
+
+                    local cs1 = self:GetCapacity()
+                    local cs2 = self:GetCapacity2()
+                    local c1 = self:Clip1()
+                    local c2 = self:Clip2()
+
+                    // Align to LEFT HAND side of the HUD box
+                    // Left gun's right edge (for right-alignment of top row)
+                    local left_right_edge = x + TacRP.SS(2) + (row_size * (sb + spacing))
+                    local right_start = left_right_edge + gap
+
+                    local start_y = y + TacRP.SS(12)
+
+                    // === LEFT GUN ===
+                    // Calculate row info for left gun (independent scrolling)
+                    local row_left = math.ceil(c1 / row_size)
+                    local maxrow_left = math.ceil(cs1 / row_size)
+                    local row2_size_left = math.min(row_size, cs1)
+                    local row1_size_left = math.Clamp(cs1 - row2_size_left, 0, row_size)
+
+                    local row1_bullets_left, row2_bullets_left = 0, 0
+                    local rackrise_left = 0
+
+                    if c1 > row_size * 2 then
+                        if row_left == maxrow_left then
+                            row1_size_left = cs1 - row_size * (maxrow_left - 1)
+                            row1_bullets_left = c1 - row_size * (maxrow_left - 1)
+                        elseif c1 % row_size == 0 then
+                            row1_bullets_left = row_size
+                        else
+                            row1_bullets_left = c1 % row_size
+                        end
+                        row2_bullets_left = row2_size_left
+                    else
+                        row2_bullets_left = math.min(row2_size_left, c1)
+                        row1_bullets_left = math.min(row1_size_left, c1 - row2_bullets_left)
+                    end
+
+                    // Smooth sliding animation for left gun
+                    if row_left > 1 and row_left < lastrow_left then
+                        rackrisetime_left = CurTime()
+                    end
+                    lastrow_left = row_left
+
+                    if rackrisetime_left + 0.2 > CurTime() then
+                        local rackrisedelta = ((rackrisetime_left + 0.2) - CurTime()) / 0.2
+                        rackrise_left = rackrisedelta * (sb + spacing)
+                    end
+
+                    render.SetScissorRect(x, y, x + w, y + TacRP.SS(12) + sb + sb + 3, true)
+
+                    // Draw left gun row 1 (top) - RIGHT-ALIGNED (draws right to left)
+                    for i = 1, row1_size_left do
+                        if i >= row1_bullets_left - aps + 1 and i <= row1_bullets_left then
+                            surface.SetDrawColor(col_hi)
+                        elseif i > row1_bullets_left then
+                            surface.SetDrawColor(col_dark)
+                        elseif i % row_size == 0 then
+                            surface.SetDrawColor(col_hi2)
+                        else
+                            surface.SetDrawColor(col)
+                        end
+                        surface.DrawRect(left_right_edge - (i * (sb + spacing)), start_y + rackrise_left, sb, sb)
+                    end
+
+                    // Draw left gun row 2 (bottom) - RIGHT-ALIGNED (draws right to left)
+                    local hi_left_left = math.max(0, aps - row1_bullets_left)
+                    for i = 1, row2_size_left do
+                        if (i >= row2_bullets_left - aps + 1 and i <= row2_bullets_left and row1_bullets_left <= 0) or (row1_bullets_left > 0 and hi_left_left > 0 and i >= row2_bullets_left - hi_left_left + 1 and i <= row2_bullets_left) then
+                            surface.SetDrawColor(col_hi)
+                        elseif i > row2_bullets_left then
+                            surface.SetDrawColor(col_dark)
+                        elseif i % row_size == 0 then
+                            surface.SetDrawColor(col_hi2)
+                        else
+                            surface.SetDrawColor(col)
+                        end
+                        surface.DrawRect(left_right_edge - (i * (sb + spacing)), start_y + sb + spacing + rackrise_left, sb, sb)
+                    end
+
+                    // === RIGHT GUN ===
+                    // Calculate row info for right gun (independent scrolling)
+                    local row_right = math.ceil(c2 / row_size)
+                    local maxrow_right = math.ceil(cs2 / row_size)
+                    local row2_size_right = math.min(row_size, cs2)
+                    local row1_size_right = math.Clamp(cs2 - row2_size_right, 0, row_size)
+
+                    local row1_bullets_right, row2_bullets_right = 0, 0
+                    local rackrise_right = 0
+
+                    if c2 > row_size * 2 then
+                        if row_right == maxrow_right then
+                            row1_size_right = cs2 - row_size * (maxrow_right - 1)
+                            row1_bullets_right = c2 - row_size * (maxrow_right - 1)
+                        elseif c2 % row_size == 0 then
+                            row1_bullets_right = row_size
+                        else
+                            row1_bullets_right = c2 % row_size
+                        end
+                        row2_bullets_right = row2_size_right
+                    else
+                        row2_bullets_right = math.min(row2_size_right, c2)
+                        row1_bullets_right = math.min(row1_size_right, c2 - row2_bullets_right)
+                    end
+
+                    // Smooth sliding animation for right gun
+                    if row_right > 1 and row_right < lastrow_right then
+                        rackrisetime_right = CurTime()
+                    end
+                    lastrow_right = row_right
+
+                    if rackrisetime_right + 0.2 > CurTime() then
+                        local rackrisedelta = ((rackrisetime_right + 0.2) - CurTime()) / 0.2
+                        rackrise_right = rackrisedelta * (sb + spacing)
+                    end
+
+                    // Draw right gun row 1 (top) - LEFT-ALIGNED (draws left to right)
+                    for i = 1, row1_size_right do
+                        if i >= row1_bullets_right - aps + 1 and i <= row1_bullets_right then
+                            surface.SetDrawColor(col_hi)
+                        elseif i > row1_bullets_right then
+                            surface.SetDrawColor(col_dark)
+                        elseif i % row_size == 0 then
+                            surface.SetDrawColor(col_hi2)
+                        else
+                            surface.SetDrawColor(col)
+                        end
+                        surface.DrawRect(right_start + (i - 1) * (sb + spacing), start_y + rackrise_right, sb, sb)
+                    end
+
+                    // Draw right gun row 2 (bottom) - LEFT-ALIGNED (draws left to right)
+                    local hi_left_right = math.max(0, aps - row1_bullets_right)
+                    for i = 1, row2_size_right do
+                        if (i >= row2_bullets_right - aps + 1 and i <= row2_bullets_right and row1_bullets_right <= 0) or (row1_bullets_right > 0 and hi_left_right > 0 and i >= row2_bullets_right - hi_left_right + 1 and i <= row2_bullets_right) then
+                            surface.SetDrawColor(col_hi)
+                        elseif i > row2_bullets_right then
+                            surface.SetDrawColor(col_dark)
+                        elseif i % row_size == 0 then
+                            surface.SetDrawColor(col_hi2)
+                        else
+                            surface.SetDrawColor(col)
+                        end
+                        surface.DrawRect(right_start + (i - 1) * (sb + spacing), start_y + sb + spacing + rackrise_right, sb, sb)
+                    end
                 else
                     local sb = TacRP.SS(4)
                     local xoffset = TacRP.SS(77)

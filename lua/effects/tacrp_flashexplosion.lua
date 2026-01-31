@@ -60,7 +60,7 @@ function EFFECT:Init(data)
         light.g = 255
         light.b = 255
         light.Brightness = 10 * data:GetScale()
-        light.Decay = 2500
+        light.Decay = 5000
         light.Size = data:GetRadius()
         light.DieTime = CurTime() + 0.1
     end

@@ -95,8 +95,8 @@ SWEP.BodyDamageMultipliers = {
 
 // misc. shooting
 
-SWEP.Firemodes = {-2, 2}
-SWEP.Firemode = false
+SWEP.Firemodes = {1}  // Semi-auto only for DualAkimbo
+SWEP.Firemode = 1
 SWEP.RunawayBurst = false
 SWEP.PostBurstDelay = 0.06
 
@@ -172,7 +172,8 @@ SWEP.HolsterAng = Angle(60, 5, 0)
 
 // reload
 
-SWEP.ClipSize = 24
+SWEP.ClipSize = 12   // Left gun magazine
+SWEP.ClipSize2 = 12  // Right gun magazine
 SWEP.Ammo = "pistol"
 SWEP.Ammo_Expanded = "ti_pistol_heavy"
 
@@ -215,6 +216,7 @@ SWEP.AnimationTranslationTable = {
 
 SWEP.LastShot = true
 SWEP.Akimbo = true
+SWEP.DualAkimbo = true  // Proper dual wielding: LMB=left, RMB=right
 SWEP.EffectsAlternate = true
 
 // attachments
@@ -248,7 +250,7 @@ SWEP.Attachments = {
     },
     [3] = {
         PrintName = "Trigger",
-        Category = {"trigger_akimbo"},
+        Category = {"trigger_semi"},
         AttachSound = "TacRP/weapons/flashlight_on.wav",
         DetachSound = "TacRP/weapons/flashlight_off.wav",
     },

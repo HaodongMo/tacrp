@@ -186,6 +186,9 @@ end
 function SWEP:ThinkSights()
     if !IsValid(self:GetOwner()) then return end
 
+    // DualAkimbo weapons use right-click for shooting, not aiming
+    if self:GetValue("DualAkimbo") then return end
+
     local ftp = IsFirstTimePredicted()
     local ftsp = IsFirstTimePredicted() or !game.SinglePlayer()
 

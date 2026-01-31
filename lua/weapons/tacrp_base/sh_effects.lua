@@ -1,6 +1,6 @@
-function SWEP:DoEffects(alt)
+function SWEP:DoEffects(alt, forceRight)
     if !IsFirstTimePredicted() then return end
-    local muzz_qca, muzz_qca_wm = self:GetQCAMuzzle(alt)
+    local muzz_qca, muzz_qca_wm = self:GetQCAMuzzle(alt, forceRight)
 
     local data = EffectData()
     data:SetEntity(self)
@@ -10,9 +10,15 @@ function SWEP:DoEffects(alt)
     util.Effect( "TacRP_muzzleeffect", data )
 end
 
-function SWEP:GetQCAMuzzle(alt)
+// forceRight: true = always right, false = always left, nil = use NthShot alternation
+function SWEP:GetQCAMuzzle(alt, forceRight)
     if self:GetValue("EffectsAlternate") then
-        if self:GetNthShot() % 2 == (alt and 1 or 0) then
+        local useRight = forceRight
+        if forceRight == nil then
+            useRight = self:GetNthShot() % 2 == (alt and 1 or 0)
+        end
+
+        if useRight then
             return self:GetValue("QCA_MuzzleR"), self:GetValue("WM_QCA_MuzzleR")
         else
             return self:GetValue("QCA_MuzzleL"), self:GetValue("WM_QCA_MuzzleL")
@@ -22,9 +28,15 @@ function SWEP:GetQCAMuzzle(alt)
     end
 end
 
-function SWEP:GetQCAEject(alt)
+// forceRight: true = always right, false = always left, nil = use NthShot alternation
+function SWEP:GetQCAEject(alt, forceRight)
     if self:GetValue("EffectsAlternate") then
-        if self:GetNthShot() % 2 == (alt and 1 or 0) then
+        local useRight = forceRight
+        if forceRight == nil then
+            useRight = self:GetNthShot() % 2 == (alt and 1 or 0)
+        end
+
+        if useRight then
             return self:GetValue("QCA_EjectR"), self:GetValue("WM_QCA_EjectR")
         else
             return self:GetValue("QCA_EjectL"), self:GetValue("WM_QCA_EjectL")
@@ -36,11 +48,11 @@ end
 
 SWEP.EjectedShells = {}
 
-function SWEP:DoEject(alt)
+function SWEP:DoEject(alt, forceRight)
     if !IsFirstTimePredicted() then return end
     if self:GetValue("EjectEffect") == 0 then return end
 
-    local eject_qca, eject_qca_wm = self:GetQCAEject(alt)
+    local eject_qca, eject_qca_wm = self:GetQCAEject(alt, forceRight)
 
     local data = EffectData()
     data:SetEntity(self)

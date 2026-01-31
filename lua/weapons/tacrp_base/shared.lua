@@ -447,6 +447,50 @@ SWEP.LastShot = false
 // Does not adjust effects - set AlternatingEffects separately.
 SWEP.Akimbo = false
 
+// Proper dual wielding: LMB fires left gun (Clip1), RMB fires right gun (Clip2)
+// Both can fire independently and simultaneously
+SWEP.DualAkimbo = false
+SWEP.ClipSize2 = 0  // Magazine size for right gun
+
+// For DualAkimbo: redistribute magazine extension bonuses across both guns
+// Note: Func_ modifiers are ADDED to cached values, so we subtract to reduce
+function SWEP:Func_ClipSize(modifiers)
+    if !self.DualAkimbo then return end
+    // Gather the total Add_ClipSize from attachments
+    local totalAdd = 0
+    for slot, slottbl in pairs(self.Attachments) do
+        if !slottbl.Installed then continue end
+        local atttbl = TacRP.GetAttTable(slottbl.Installed)
+        if atttbl["Add_ClipSize"] then
+            totalAdd = totalAdd + atttbl["Add_ClipSize"]
+        end
+    end
+    // Subtract half (floor) so left gun gets ceil(total/2)
+    // cache has full totalAdd, we subtract floor(total/2) so result is ceil(total/2)
+    modifiers.add = modifiers.add - math.floor(totalAdd / 2)
+end
+
+function SWEP:Func_ClipSize2(modifiers)
+    if !self.DualAkimbo then return end
+    // ClipSize2 gets the same bonuses as ClipSize would get
+    // We need to manually gather Add_ClipSize and Mult_ClipSize from attachments
+    local totalAdd = 0
+    local totalMult = 1
+    for slot, slottbl in pairs(self.Attachments) do
+        if !slottbl.Installed then continue end
+        local atttbl = TacRP.GetAttTable(slottbl.Installed)
+        if atttbl["Add_ClipSize"] then
+            totalAdd = totalAdd + atttbl["Add_ClipSize"]
+        end
+        if atttbl["Mult_ClipSize"] then
+            totalMult = totalMult * atttbl["Mult_ClipSize"]
+        end
+    end
+    // Give half (rounded up) to right gun
+    modifiers.add = modifiers.add + math.ceil(totalAdd / 2)
+    modifiers.mul = modifiers.mul * totalMult
+end
+
 // attachments
 
 SWEP.AttachmentElements = nil
@@ -589,6 +633,8 @@ function SWEP:SetupDataTables()
     self:NetworkVar("Int", 3, "LoadedRounds")
     self:NetworkVar("Int", 4, "Firemode")
     self:NetworkVar("Int", 5, "PatternCount")
+    self:NetworkVar("Int", 6, "BurstCount2")  // Right gun burst tracking for DualAkimbo
+    self:NetworkVar("Int", 7, "NthShot2")     // Right gun shot counter for DualAkimbo
 
     self:NetworkVar("Bool", 0, "Customize")
     self:NetworkVar("Bool", 1, "Reloading")
@@ -640,6 +686,10 @@ function SWEP:OnDrop(owner)
 end
 
 function SWEP:SecondaryAttack()
+    if self:GetValue("DualAkimbo") then
+        self:SecondaryShoot()
+        return
+    end
     self:RunHook("Hook_SecondaryAttack")
     return
 end

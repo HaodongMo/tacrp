@@ -31,7 +31,14 @@ function SWEP:Reload(force)
 
     if !self:CanReloadInSprint() and self:GetIsSprinting() then return end
     if self:GetCapacity() <= 0 then return end
-    if self:Clip1() >= self:GetCapacity() then return end
+
+    // For DualAkimbo, check if both magazines are full
+    if self:GetValue("DualAkimbo") then
+        if self:Clip1() >= self:GetCapacity() and self:Clip2() >= self:GetCapacity2() then return end
+    else
+        if self:Clip1() >= self:GetCapacity() then return end
+    end
+
     if self:Ammo1() <= 0 and !self:GetInfiniteAmmo() then return end
 
     self:ToggleBlindFire(TacRP.BLINDFIRE_NONE)
@@ -83,8 +90,10 @@ end
 function SWEP:DropMagazine()
     -- if !IsFirstTimePredicted() and !game.SinglePlayer() then return end
     if self:GetValue("DropMagazineModel") and TacRP.ConVars["dropmagazinemodel"]:GetBool() then
+        local isDualAkimbo = self:GetValue("DualAkimbo")
         local dropamt = math.floor(self:Clip1() / self:GetValue("DropMagazineAmount"))
         local clip1 = self:Clip1()
+        local clip2 = isDualAkimbo and self:Clip2() or 0
         for i = 1, self:GetValue("DropMagazineAmount") do
             local mag = ents.Create("TacRP_droppedmag")
 
@@ -106,11 +115,27 @@ function SWEP:DropMagazine()
                 mag.Model = self:GetValue("DropMagazineModel")
                 mag.ImpactType = self:GetValue("DropMagazineImpact")
                 mag:SetOwner(self:GetOwner())
-                if clip1 > 0 and TacRP.ConVars["reload_dump"]:GetBool() then
-                    local amt = (i == self:GetValue("DropMagazineAmount") and clip1) or dropamt
-                    clip1 = clip1 - amt
+                if TacRP.ConVars["reload_dump"]:GetBool() then
+                    // For DualAkimbo: right hand (i=1) drops clip2, left hand (i=2) drops clip1
+                    local amt = 0
+                    if isDualAkimbo then
+                        if i == 1 then
+                            // Right hand drops right gun's magazine (Clip2)
+                            amt = clip2
+                            clip2 = 0
+                        else
+                            // Left hand drops left gun's magazine (Clip1)
+                            amt = clip1
+                            clip1 = 0
+                        end
+                    else
+                        if clip1 > 0 then
+                            amt = (i == self:GetValue("DropMagazineAmount") and clip1) or dropamt
+                            clip1 = clip1 - amt
+                        end
+                    end
 
-                    if !self:GetInfiniteAmmo() then
+                    if amt > 0 and !self:GetInfiniteAmmo() then
                         mag.AmmoType = self:GetAmmoType()
                         mag.AmmoCount = amt
                     end
@@ -125,6 +150,9 @@ function SWEP:DropMagazine()
             end
         end
         self:SetClip1(clip1)
+        if isDualAkimbo then
+            self:SetClip2(clip2)
+        end
     end
 end
 
@@ -137,6 +165,20 @@ function SWEP:RestoreClip(amt)
 
     if !self:GetInfiniteAmmo() then
         reserve = reserve - self:Clip1()
+    end
+
+    // Also restore Clip2 for DualAkimbo weapons
+    if self:GetValue("DualAkimbo") then
+        local lastclip2 = self:Clip2()
+        local newclip2 = math.min(math.min(self:Clip2() + amt, self:GetCapacity2()), reserve)
+        self:SetClip2(newclip2)
+
+        if !self:GetInfiniteAmmo() then
+            reserve = reserve - (newclip2 - lastclip2)
+        end
+    end
+
+    if !self:GetInfiniteAmmo() then
         self:GetOwner():SetAmmo(reserve, self.Primary.Ammo)
     end
 
@@ -165,6 +207,9 @@ function SWEP:EndReload()
             self:SetReloading(false)
 
             self:SetNthShot(0)
+            if self:GetValue("DualAkimbo") then
+                self:SetNthShot2(0)
+            end
 
             self:DoBulletBodygroups()
 
@@ -198,6 +243,9 @@ function SWEP:EndReload()
         if !self.ReloadUpInTime then
             self:RestoreClip(self:GetCapacity())
             self:SetNthShot(0)
+            if self:GetValue("DualAkimbo") then
+                self:SetNthShot2(0)
+            end
         end
         self:SetReloading(false)
         self:SetEndReload(false)
