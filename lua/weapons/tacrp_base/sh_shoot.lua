@@ -75,19 +75,24 @@ function SWEP:PrimaryAttack()
         if ret != true then
             self.Primary.Automatic = false
             if self:GetValue("DualAkimbo") then
-                local rightEmpty = self:Clip2() < self:GetValue("AmmoPerShot")
-                if rightEmpty then
-                    // Both guns empty - use standard dryfire
-                    if self:GetBlindFire() then
-                        self:PlayAnimation("blind_dryfire")
-                    else
-                        self:PlayAnimation("dryfire")
+                // Don't play dryfire animation while the other gun is cooling
+                local coolingTime = 0.5
+                local rightCooling = self.LastSecondaryFireTime and CurTime() - self.LastSecondaryFireTime < coolingTime
+                if !rightCooling then
+                    local rightEmpty = self:Clip2() < self:GetValue("AmmoPerShot")
+                    if rightEmpty then
+                        // Both guns empty - use standard dryfire
+                        if self:GetBlindFire() then
+                            self:PlayAnimation("blind_dryfire")
+                        else
+                            self:PlayAnimation("dryfire")
+                        end
+                    elseif self:HasSequence("dryfire_left") then
+                        // Only left gun empty, right has ammo - use partial dryfire if available
+                        self:PlayAnimation("dryfire_left")
                     end
-                elseif self:HasSequence("dryfire_left") then
-                    // Only left gun empty, right has ammo - use partial dryfire if available
-                    self:PlayAnimation("dryfire_left")
+                    // If no partial dryfire animation, skip animation (just play sound)
                 end
-                // If no partial dryfire animation, skip animation (just play sound)
             else
                 if self:GetBlindFire() then
                     self:PlayAnimation("blind_dryfire")
@@ -195,9 +200,10 @@ function SWEP:PrimaryAttack()
             elseif rightEmpty and self:HasSequence("shoot_left_second_empty") then
                 // Right gun empty (slide locked), left gun still has ammo
                 seq = "shoot_left_second_empty"
-            elseif rightJustFired and self:HasSequence("shoot_left_cooling") then
-                // Right gun just fired (slide cycling/cooling down)
+            elseif rightJustFired and !self.RightCoolingShown and self:HasSequence("shoot_left_cooling") then
+                // Right gun just fired (slide cycling/cooling down) - only show once per shot
                 seq = "shoot_left_cooling"
+                self.RightCoolingShown = true
             elseif self:HasSequence("shoot_left-1") then
                 seq = "shoot_left-1"
             else
@@ -288,6 +294,7 @@ function SWEP:PrimaryAttack()
 
     self:SetNthShot(self:GetNthShot() + 1)
     self.LastPrimaryFireTime = CurTime()
+    self.LeftCoolingShown = false  // Reset so right gun can show cooling animation for this shot
 
     local ejectdelay = self:GetValue("EjectDelay")
     // For DualAkimbo, force left side effects (forceRight = false)
@@ -952,6 +959,17 @@ function SWEP:GetRPM(base, fm)
     return rpm
 end
 
+// Returns effective RPM for stat calculations
+// DualAkimbo weapons have double the effective fire rate since both guns fire independently
+function SWEP:GetEffectiveRPM(base, fm)
+    local rpm = self:GetRPM(base, fm)
+    local valfunc = base and self.GetBaseValue or self.GetValue
+    if valfunc(self, "DualAkimbo") then
+        rpm = rpm * 2
+    end
+    return rpm
+end
+
 // =====================================
 // DualAkimbo Secondary Shooting System
 // =====================================
@@ -967,6 +985,9 @@ end
 // Secondary attack for right gun in DualAkimbo mode
 function SWEP:SecondaryShoot()
     if self:GetOwner():IsNPC() then return end
+
+    // Don't let dryfire interrupt reload - check early before shotgun reload cancellation
+    if self:GetReloading() and self:Clip2() < self:GetValue("AmmoPerShot") then return end
 
     if self:GetValue("Melee") and self:GetOwner():KeyDown(IN_USE) and !(self:GetValue("RunawayBurst") and self:GetBurstCount2() > 0) then
         self:SetSafe(false)
@@ -1004,19 +1025,24 @@ function SWEP:SecondaryShoot()
         local ret = self:RunHook("Hook_PreDryfire")
         if ret != true then
             self.Secondary.Automatic = false
-            local leftEmpty = self:Clip1() < self:GetValue("AmmoPerShot")
-            if leftEmpty then
-                // Both guns empty - use standard dryfire
-                if self:GetBlindFire() then
-                    self:PlayAnimation("blind_dryfire")
-                else
-                    self:PlayAnimation("dryfire")
+            // Don't play dryfire animation while the other gun is cooling
+            local coolingTime = 0.5
+            local leftCooling = self.LastPrimaryFireTime and CurTime() - self.LastPrimaryFireTime < coolingTime
+            if !leftCooling then
+                local leftEmpty = self:Clip1() < self:GetValue("AmmoPerShot")
+                if leftEmpty then
+                    // Both guns empty - use standard dryfire
+                    if self:GetBlindFire() then
+                        self:PlayAnimation("blind_dryfire")
+                    else
+                        self:PlayAnimation("dryfire")
+                    end
+                elseif self:HasSequence("dryfire_right") then
+                    // Only right gun empty, left has ammo - use partial dryfire if available
+                    self:PlayAnimation("dryfire_right")
                 end
-            elseif self:HasSequence("dryfire_right") then
-                // Only right gun empty, left has ammo - use partial dryfire if available
-                self:PlayAnimation("dryfire_right")
+                // If no partial dryfire animation, skip animation (just play sound)
             end
-            // If no partial dryfire animation, skip animation (just play sound)
             self:EmitSound(self:GetValue("Sound_DryFire"), 75, 100, 1, CHAN_ITEM)
             self:SetBurstCount2(0)
             // Only block secondary fire, not primary
@@ -1097,9 +1123,10 @@ function SWEP:SecondaryShoot()
     elseif leftEmpty and self:HasSequence("shoot_right_second_empty") then
         // Left gun empty (slide locked), right gun still has ammo
         seq = "shoot_right_second_empty"
-    elseif leftJustFired and self:HasSequence("shoot_right_cooling") then
-        // Left gun just fired (slide cycling/cooling down)
+    elseif leftJustFired and !self.LeftCoolingShown and self:HasSequence("shoot_right_cooling") then
+        // Left gun just fired (slide cycling/cooling down) - only show once per shot
         seq = "shoot_right_cooling"
+        self.LeftCoolingShown = true
     elseif self:HasSequence("shoot_right-1") then
         seq = "shoot_right-1"
     else
@@ -1154,7 +1181,14 @@ function SWEP:SecondaryShoot()
         self:EmitSound(self:GetValue("Sound_ShootAdd"), self:GetValue("Vol_Shoot"), self:GetValue("Pitch_Shoot") + util.SharedRandom("TacRP_sshoot2", -pvar, pvar), self:GetValue("Loudness_Shoot"), CHAN_BODY)
     end
 
-    self:EmitSound(sshoot, self:GetValue("Vol_Shoot"), self:GetValue("Pitch_Shoot") + util.SharedRandom("TacRP_sshoot2", -pvar, pvar), self:GetValue("Loudness_Shoot"), CHAN_WEAPON)
+    -- if we die from suicide, EmitSound will not play, so do this instead
+    if self:GetBlindFireMode() == TacRP.BLINDFIRE_KYS then
+        if SERVER then
+            sound.Play(sshoot, self:GetMuzzleOrigin(), self:GetValue("Vol_Shoot"), self:GetValue("Pitch_Shoot") + util.SharedRandom("TacRP_sshoot2", -pvar, pvar), self:GetValue("Loudness_Shoot"))
+        end
+    else
+        self:EmitSound(sshoot, self:GetValue("Vol_Shoot"), self:GetValue("Pitch_Shoot") + util.SharedRandom("TacRP_sshoot2", -pvar, pvar), self:GetValue("Loudness_Shoot"), CHAN_WEAPON)
+    end
 
     local delay = 60 / self:GetRPM()
 
@@ -1167,6 +1201,7 @@ function SWEP:SecondaryShoot()
 
     self:SetNthShot2(self:GetNthShot2() + 1)
     self.LastSecondaryFireTime = CurTime()
+    self.RightCoolingShown = false  // Reset so left gun can show cooling animation for this shot
     self:SetLastFiredRight(true)
 
     // Force right side effects (forceRight = true)
@@ -1311,6 +1346,24 @@ function SWEP:SecondaryShoot()
     self:DoBulletBodygroups()
 
     if self:Clip2() == 0 then self.Secondary.Automatic = false end
+
+    -- FireBullets won't hit ourselves. Apply damage directly!
+    if SERVER and self:GetBlindFireMode() == TacRP.BLINDFIRE_KYS and !self:GetValue("ShootEnt") then
+        timer.Simple(0, function()
+            if !IsValid(self) or !IsValid(self:GetOwner()) then return end
+            local damage = DamageInfo()
+            damage:SetAttacker(self:GetOwner())
+            damage:SetInflictor(self)
+            damage:SetDamage(self:GetValue("Damage_Max") * self:GetValue("Num") * self:GetConfigDamageMultiplier())
+            damage:SetDamageType(self:GetValue("DamageType") or self:IsShotgun() and DMG_BUCKSHOT or DMG_BULLET)
+            damage:SetDamagePosition(self:GetMuzzleOrigin())
+            damage:SetDamageForce(dir:Forward() * self:GetValue("Num"))
+
+            damage:ScaleDamage(self:GetBodyDamageMultipliers()[HITGROUP_HEAD])
+
+            self:GetOwner():TakeDamageInfo(damage)
+        end)
+    end
 
     if CLIENT and self:GetOwner() == LocalPlayer() then
         self:DoMuzzleLight()
