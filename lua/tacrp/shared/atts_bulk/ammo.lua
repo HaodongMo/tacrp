@@ -930,6 +930,8 @@ ATT.Mult_Damage_Max = 0.55
 ATT.Mult_Num = 2
 ATT.Mult_RecoilKick = 0.85
 
+ATT.ShellColor = Color(255, 255, 255)
+
 -- ATT.Add_Spread = 0.02
 -- ATT.Add_ShotgunPelletSpread = 0.008
 
@@ -967,6 +969,8 @@ ATT.Mult_RecoilSpreadPenalty = 1.25
 
 ATT.Mult_ShootingSpeedMult = 0.8
 
+ATT.ShellColor = Color(0, 255, 0)
+
 TacRP.LoadAtt(ATT, "ammo_shotgun_mag")
 -- #endregion
 
@@ -1001,6 +1005,8 @@ ATT.Mult_RecoilSpreadPenalty = 0.25
 ATT.Add_HipFireSpreadPenalty = 0.025
 
 ATT.Mult_MuzzleVelocity = 1.5
+
+ATT.ShellColor = Color(25, 25, 25)
 
 ATT.Override_MuzzleEffect = "muzzleflash_slug"
 
@@ -1052,6 +1058,8 @@ ATT.Add_HipFireSpreadPenalty = 0.025
 
 ATT.Mult_MuzzleVelocity = 1.5
 
+ATT.ShellColor = Color(25, 25, 25)
+
 ATT.Override_MuzzleEffect = "muzzleflash_slug"
 
 ATT.Override_BodyDamageMultipliers = {
@@ -1099,6 +1107,8 @@ ATT.Mult_RecoilSpreadPenalty = 0.5
 ATT.Add_HipFireSpreadPenalty = 0.01
 
 ATT.Mult_MuzzleVelocity = 1.25
+
+ATT.ShellColor = Color(100, 100, 100)
 
 ATT.Override_MuzzleEffect = "muzzleflash_slug"
 
@@ -1150,6 +1160,8 @@ ATT.Add_HipFireSpreadPenalty = 0.005
 ATT.Mult_MuzzleVelocity = 1.25
 
 ATT.Override_MuzzleEffect = "muzzleflash_slug"
+
+ATT.ShellColor = Color(100, 100, 100)
 
 ATT.Override_BodyDamageMultipliers = {
     [HITGROUP_HEAD] = 1.5,
@@ -1213,6 +1225,8 @@ ATT.Mult_RecoilKick = 0.85
 
 ATT.Add_JamFactor = 0.2
 ATT.Add_ShootPitchVariance = 2
+
+ATT.ShellColor = Color(0, 0, 255)
 
 ATT.Hook_PostShoot = function(wep)
     if CLIENT then return end
@@ -1371,6 +1385,8 @@ ATT.Mult_Num = 0.6667
 ATT.Mult_RecoilKick = 0.85
 ATT.Mult_ClipSize = 1.5
 
+ATT.ShellColor = Color(255, 200, 200)
+
 ATT.Compatibility = function(wpn, cats)
     if !wpn.ShotgunReload then return false end
 end
@@ -1400,6 +1416,8 @@ ATT.Mult_Damage_Min = 0.5
 ATT.Mult_MuzzleVelocity = 0.75
 ATT.Add_Spread = 0.03
 ATT.Add_ShotgunPelletSpread = 0.03
+
+ATT.ShellColor = Color(255, 50, 0)
 
 ATT.Override_ExplosiveEffect = "ManhackSparks"
 -- ATT.Add_ExplosiveDamage = 1
@@ -1443,6 +1461,8 @@ ATT.Override_ExplosiveEffect = "HelicopterMegaBomb"
 ATT.Add_ExplosiveDamage = 40
 ATT.Add_ExplosiveRadius = 150
 
+ATT.ShellColor = Color(225, 225, 0)
+
 TacRP.LoadAtt(ATT, "ammo_shotgun_frag")
 -- #endregion
 
@@ -1483,6 +1503,8 @@ ATT.Func_MuzzleEffect = function(wep, modifiers)
         modifiers.prio = 10
     end
 end
+
+ATT.ShellColor = Color(255, 125, 75)
 
 TacRP.LoadAtt(ATT, "ammo_shotgun_breach")
 -- #endregion

@@ -394,6 +394,7 @@ SWEP.MuzzleEffect = "muzzleflash_pistol"
 SWEP.EjectEffect = 0 // 1 = pistol, 2 = rifle, 3 = shotgun
 SWEP.EjectDelay = 0
 SWEP.EjectScale = 1
+SWEP.ShellColor = Color(255, 0, 0) // Shell color override for colorable shell types (e.g., shotgun shells)
 
 // anims
 // VM:
