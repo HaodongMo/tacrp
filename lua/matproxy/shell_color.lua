@@ -17,14 +17,20 @@ matproxy.Add({
 	end,
 
 	bind = function(self, mat, ent)
-		print("[ShellColor] bind called, ent:", ent, "valid:", IsValid(ent), "ShellColor:", ent and ent.ShellColor)
 		if !IsValid(ent) then return end
 
-		-- If the entity has ShellColor set, use it
+		local c = nil
+
+		-- Check for direct ShellColor (shell effects)
 		if ent.ShellColor then
-			local c = ent.ShellColor
-			print("[ShellColor] Setting color:", c)
-			mat:SetVector(self.ResultTo, Vector(c.r / 255, c.g / 255, c.b / 255))
+			c = ent.ShellColor
+		-- Check for weapon GetValue (weapons with shell models)
+		elseif ent.GetValue then
+			c = ent:GetValue("ShellColor")
+		end
+
+		if c then
+			mat:SetVector(self.ResultTo, 5 * Vector(c.r / 255, c.g / 255, c.b / 255))
 		else
 			mat:SetVector(self.ResultTo, clrFallback)
 		end

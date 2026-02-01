@@ -205,6 +205,12 @@ function SWEP:PreDrawViewModel()
         render.SetBlend(0)
     end
 
+    // Set shell color on viewmodel for matproxy
+    local vm = self:GetVM()
+    if IsValid(vm) then
+        vm.ShellColor = self:GetValue("ShellColor")
+    end
+
     -- Apparently setting this will fix the viewmodel position and angle going all over the place in benchgun.
     if TacRP.ConVars["dev_benchgun"]:GetBool() then
         if self.OriginalViewModelFOV == nil then

@@ -13,7 +13,7 @@ matproxy.Add({
         // Check if entity has a ShellColor set (from shell effect)
         if IsValid(ent) and ent.ShellColor then
             local c = ent.ShellColor
-            mat:SetVector(self.ResultTo, Vector(c.r * 3 / 255, c.g * 3 / 255, c.b * 3 / 255))
+            mat:SetVector(self.ResultTo, Vector(c.r * 5 / 255, c.g * 5 / 255, c.b * 5 / 255))
         else
             mat:SetVector(self.ResultTo, defaultColor)
         end

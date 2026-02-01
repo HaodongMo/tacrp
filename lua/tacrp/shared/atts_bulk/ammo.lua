@@ -1260,7 +1260,7 @@ ATT.Mult_RecoilKick = 0.85
 ATT.Add_JamFactor = 0.2
 ATT.Add_ShootPitchVariance = 2
 
-ATT.ShellColor = Color(0, 0, 255)
+ATT.ShellColor = Color(0, 50, 255)
 
 ATT.Hook_PostShoot = function(wep)
     if CLIENT then return end
@@ -1419,7 +1419,7 @@ ATT.Mult_Num = 0.6667
 ATT.Mult_RecoilKick = 0.85
 ATT.Mult_ClipSize = 1.5
 
-ATT.ShellColor = Color(255, 200, 200)
+ATT.ShellColor = Color(255, 100, 100)
 
 ATT.Compatibility = function(wpn, cats)
     if !wpn.ShotgunReload then return false end
@@ -1451,7 +1451,7 @@ ATT.Mult_MuzzleVelocity = 0.75
 ATT.Add_Spread = 0.03
 ATT.Add_ShotgunPelletSpread = 0.03
 
-ATT.ShellColor = Color(255, 50, 0)
+ATT.ShellColor = Color(255, 75, 0)
 
 ATT.Override_ExplosiveEffect = "ManhackSparks"
 -- ATT.Add_ExplosiveDamage = 1
