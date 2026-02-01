@@ -4,6 +4,8 @@ function SWEP:StillWaiting(cust, reload, dualPrimary)
     if !dualPrimary and self:GetNextSecondaryFire() > CurTime() and (!reload or !(reload and self:GetReloading())) then return true end
     // For DualAkimbo, don't block on AnimLockTime (animations don't prevent shooting)
     if !dualPrimary and self:GetAnimLockTime() > CurTime() and (!reload or !(reload and self:GetReloading())) then return true end
+    // For DualAkimbo, still block on reload (AnimLockTime skip above would otherwise allow shooting during reload)
+    if dualPrimary and self:GetReloading() then return true end
     if !cust and self:GetBlindFireFinishTime() > CurTime() then return true end
     if !cust and self:GetCustomize() then return true end
     if self:GetPrimedGrenade() then return true end
