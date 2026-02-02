@@ -1,9 +1,7 @@
-function SWEP:StillWaiting(cust, reload, dualPrimary)
-    if self:GetNextPrimaryFire() > CurTime() then return true end
-    // For DualAkimbo primary attack, don't block on secondary fire timing
-    if !dualPrimary and self:GetNextSecondaryFire() > CurTime() and (!reload or !(reload and self:GetReloading())) then return true end
-    // For DualAkimbo, don't block on AnimLockTime (animations don't prevent shooting)
-    if !dualPrimary and self:GetAnimLockTime() > CurTime() and (!reload or !(reload and self:GetReloading())) then return true end
+function SWEP:StillWaiting(cust, reload, rightgun)
+    if !rightgun and self:GetNextPrimaryFire() > CurTime() then return true end
+    if rightgun and self:GetNextSecondaryFire() > CurTime() then return true end
+    if self:GetAnimLockTime() > CurTime() then return true end
     // For DualAkimbo, still block on reload (AnimLockTime skip above would otherwise allow shooting during reload)
     if dualPrimary and self:GetReloading() then return true end
     if !cust and self:GetBlindFireFinishTime() > CurTime() then return true end
@@ -67,8 +65,7 @@ function SWEP:PrimaryAttack()
     if self:SprintLock(true) then return end
     if DarkRP and self:GetNWBool("TacRP_PoliceBiocode") and !self:GetOwner():isCP() then return end
     if self:GetSafe() and !self:GetReloading() then self:ToggleSafety(false) return end
-    // For DualAkimbo, don't block primary on secondary timing or AnimLockTime
-    if self:StillWaiting(nil, nil, self:GetValue("DualAkimbo")) then return end
+    if self:StillWaiting(nil, nil, false) then return end
 
     if self:GetValue("RequireLockOn") and !(IsValid(self:GetLockOnEntity()) and CurTime() > self:GetLockOnStartTime() + self:GetValue("LockOnTime")) then return end
 
@@ -988,7 +985,6 @@ end
 function SWEP:SecondaryShoot()
     if self:GetOwner():IsNPC() then return end
 
-    // Don't let dryfire interrupt reload - check early before shotgun reload cancellation
     if self:GetReloading() and self:Clip2() < self:GetValue("AmmoPerShot") then return end
 
     if self:GetValue("Melee") and self:GetOwner():KeyDown(IN_USE) and !(self:GetValue("RunawayBurst") and self:GetBurstCount2() > 0) then
@@ -1012,8 +1008,7 @@ function SWEP:SecondaryShoot()
     if DarkRP and self:GetNWBool("TacRP_PoliceBiocode") and !self:GetOwner():isCP() then return end
     if self:GetSafe() and !self:GetReloading() then self:ToggleSafety(false) return end
 
-    // Only check secondary fire timing - don't block on primary fire or AnimLockTime
-    // This allows both guns to fire independently
+    if self:StillWaiting(nil, nil, true) then return end
     if self:GetNextSecondaryFire() > CurTime() then return end
     if self:GetBlindFireFinishTime() > CurTime() then return end
     if self:GetCustomize() then return end
