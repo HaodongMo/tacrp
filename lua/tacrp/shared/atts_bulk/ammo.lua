@@ -1316,6 +1316,8 @@ ATT.ShotgunFullCancel = true
 ATT.Override_Firemodes = {1}
 ATT.Override_Priority_Firemodes = 999
 
+ATT.ShellColor = Color(125, 255, 255)
+
 ATT.OnPresetLoad = function(wep)
     if SERVER then
         local blanks = math.random(1, wep:GetValue("ClipSize") - 1)
@@ -1538,8 +1540,7 @@ ATT.Func_MuzzleEffect = function(wep, modifiers)
     end
 end
 
-ATT.ShellColor = Color(255, 125, 75)
-
+ATT.ShellColor = Color(255, 175, 100)
 TacRP.LoadAtt(ATT, "ammo_shotgun_breach")
 -- #endregion
 
