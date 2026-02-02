@@ -1096,7 +1096,7 @@ ATT.Hook_ToggleTactical = function(wep)
 
     if wep:GetCapacity() <= 0 then return end
 
-    local loadamt = math.min(wep:GetCapacity() - wep:Clip1(), wep:GetValue("Akimbo") and 2 or wep:GetValue("AmmoPerShot"))
+    local loadamt = math.min(wep:GetCapacity() - wep:Clip1(), ((wep:GetValue("Akimbo") and !wep:GetValue("DualAkimbo")) and 2 or 1) * wep:GetValue("AmmoPerShot"))
 
     if loadamt <= 0 then return end
     if wep:Ammo1() < loadamt and !wep:GetInfiniteAmmo() then return end
