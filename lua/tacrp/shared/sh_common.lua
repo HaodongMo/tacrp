@@ -286,6 +286,8 @@ TacRP.ShellTypes = {
     },
     [3] = {
         Model = "models/tacint/shells/shotgun_shell.mdl",
+        Colorable = true,
+        DefaultColor = Color(255, 50, 50),
         Sounds = {
             "TacRP/shells/shotshell_drop-1.wav",
             "TacRP/shells/shotshell_drop-2.wav",

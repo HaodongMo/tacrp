@@ -70,18 +70,48 @@ function SWEP:DrawCustomModel(wm, custom_wm)
             slottbl = self.Attachments[slot]
             atttbl = TacRP.GetAttTable(self.Attachments[slot].Installed)
 
-            bone = slottbl.Bone
+            // Check for dual akimbo left/right positioning
+            local isLeft = model.IsLeftAttachment or model.IsLeftMuzzle
+            local isRight = model.IsRightAttachment or model.IsRightMuzzle
 
-            if wm then
-                bone = slottbl.WMBone or "ValveBiped.Bip01_R_Hand"
+            if isLeft and slottbl.Bone_L then
+                bone = slottbl.Bone_L
+                if wm then
+                    bone = slottbl.WMBone_L or slottbl.Bone_L
+                end
+            elseif isRight and slottbl.Bone_R then
+                bone = slottbl.Bone_R
+                if wm then
+                    bone = slottbl.WMBone_R or slottbl.Bone_R
+                end
+            else
+                bone = slottbl.Bone
+                if wm then
+                    bone = slottbl.WMBone or "ValveBiped.Bip01_R_Hand"
+                end
             end
 
-            offset_pos = slottbl.Pos_VM
-            offset_ang = slottbl.Ang_VM
-
-            if wm then
-                offset_pos = slottbl.Pos_WM
-                offset_ang = slottbl.Ang_WM
+            if isLeft and slottbl.Pos_VM_L then
+                offset_pos = slottbl.Pos_VM_L
+                offset_ang = slottbl.Ang_VM_L or slottbl.Ang_VM
+                if wm then
+                    offset_pos = slottbl.Pos_WM_L or slottbl.Pos_VM_L
+                    offset_ang = slottbl.Ang_WM_L or slottbl.Ang_VM_L or slottbl.Ang_WM
+                end
+            elseif isRight and slottbl.Pos_VM_R then
+                offset_pos = slottbl.Pos_VM_R
+                offset_ang = slottbl.Ang_VM_R or slottbl.Ang_VM
+                if wm then
+                    offset_pos = slottbl.Pos_WM_R or slottbl.Pos_VM_R
+                    offset_ang = slottbl.Ang_WM_R or slottbl.Ang_VM_R or slottbl.Ang_WM
+                end
+            else
+                offset_pos = slottbl.Pos_VM
+                offset_ang = slottbl.Ang_VM
+                if wm then
+                    offset_pos = slottbl.Pos_WM
+                    offset_ang = slottbl.Ang_WM
+                end
             end
 
             for _, ele in ipairs(self:GetElements()) do
@@ -173,6 +203,12 @@ end
 function SWEP:PreDrawViewModel()
     if self:GetValue("ScopeHideWeapon") and self:IsInScope() then
         render.SetBlend(0)
+    end
+
+    // Set shell color on viewmodel for matproxy
+    local vm = self:GetVM()
+    if IsValid(vm) then
+        vm.ShellColor = self:GetValue("ShellColor")
     end
 
     -- Apparently setting this will fix the viewmodel position and angle going all over the place in benchgun.

@@ -13,4 +13,16 @@ vertexlitgeneric
  $rimlight 0
  $rimlightexponent 55
  $rimlightboost "0.350000"
+
+ $blendtintbybasealpha 1
+    $blendtintcoloroverbase 0.1
+    $color2 "[1 1 1]"
+
+    Proxies
+    {
+        ShellColor
+        {
+            resultvar $color2
+        }
+    }
 }

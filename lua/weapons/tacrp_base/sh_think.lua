@@ -28,6 +28,32 @@ function SWEP:Think()
         end
     end
 
+    // Secondary attack burst tracking for DualAkimbo
+    if self:GetValue("DualAkimbo") then
+        if self:GetValue("RunawayBurst") and cfm < 0 then
+            if self:GetBurstCount2() >= -cfm then
+                self:SetBurstCount2(0)
+                self:SetNextSecondaryFire(CurTime() + self:GetValue("PostBurstDelay"))
+            elseif self:GetBurstCount2() > 0 and self:GetBurstCount2() < -cfm then
+                self:SecondaryShoot()
+            end
+        else
+            if (owner:KeyReleased(IN_ATTACK2) or (cfm < 0 and self:GetBurstCount2() >= -cfm)) then
+                if cfm < 0 and self:GetBurstCount2() > 1 then
+                    if !self:GetValue("AutoBurst") then
+                        self.Secondary.Automatic = false
+                    end
+                    local add = 0
+                    if self:GetBurstCount2() >= -cfm then
+                        add = 60 / self:GetValue("RPM")
+                    end
+                    self:SetNextSecondaryFire(CurTime() + self:GetValue("PostBurstDelay") + add)
+                end
+                self:SetBurstCount2(0)
+            end
+        end
+    end
+
     if self:GetPatternCount() > 0 and (self:GetRecoilAmount() == 0 or self:GetReloading()) then
         self:SetPatternCount(0)
     end

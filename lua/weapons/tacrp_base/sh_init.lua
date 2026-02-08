@@ -47,9 +47,15 @@ function SWEP:Deploy()
     self:SetCharge(false)
 
     self:SetBurstCount(0)
+    self:SetBurstCount2(0)
     self:SetScopeLevel(0)
     self:SetLoadedRounds(self:Clip1())
     self:SetCustomize(false)
+
+    // Initialize Clip2 for DualAkimbo weapons
+    if self:GetValue("DualAkimbo") and self:Clip2() < 0 then
+        self:SetClip2(self:GetCapacity2())
+    end
 
     if self:GetOwner():IsPlayer() and IsFirstTimePredicted() then
         self.InversePeek = self:GetOwner():GetInfoNum("tacrp_inversepeek", 0) == 1
@@ -230,6 +236,7 @@ function SWEP:Initialize()
 
     self:SetLastMeleeTime(0)
     self:SetNthShot(0)
+    self:SetNthShot2(0)
 
     if self:GetOwner():IsNPC() then
         self:NPC_Initialize()
@@ -292,6 +299,12 @@ function SWEP:SetBaseSettings()
         end
     else
         self.Primary.Automatic = false
+    end
+
+    // DualAkimbo: Secondary.Automatic mirrors Primary.Automatic
+    if self:GetValue("DualAkimbo") then
+        self.Secondary.Automatic = self.Primary.Automatic
+        self.Secondary.ClipSize = self:GetCapacity2()
     end
 
     if self.PrimaryGrenade then

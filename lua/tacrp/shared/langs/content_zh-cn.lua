@@ -2477,7 +2477,7 @@ w = ws .. "hipoint"
 -- L["wep." .. w .. ".name.full"] = "Hi-Point 995"
 -- L["wep." .. w .. ".name"] = "Hi-Point"
 -- L["wep." .. w .. ".desc"] = "Infamous semi-automatic pistol-caliber carbine.\nReasonably powerful... when it works, which is never."
--- L["wep." .. w .. ".desc.quote"] = "\"Good wombs have borne bad sons.\""
+-- L["wep." .. w .. ".desc.quote"] = "\"That chandelier was expensive, asshole!!\""
 -- L["wep." .. w .. ".trivia.manufacturer"] = "Hi-Point Firearms"
 -- L["wep." .. w .. ".credits"] = "Model & Textures: Yumyumshisha \nSounds: Obsidian \nAnimations: Tactical Intervention"
 

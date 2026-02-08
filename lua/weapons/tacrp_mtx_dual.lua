@@ -95,8 +95,8 @@ SWEP.BodyDamageMultipliers = {
 
 // misc. shooting
 
-SWEP.Firemodes = {-2, 2}
-SWEP.Firemode = false
+SWEP.Firemodes = {1}  // Semi-auto only for DualAkimbo
+SWEP.Firemode = 1
 SWEP.RunawayBurst = false
 SWEP.PostBurstDelay = 0.06
 
@@ -172,7 +172,8 @@ SWEP.HolsterAng = Angle(60, 5, 0)
 
 // reload
 
-SWEP.ClipSize = 24
+SWEP.ClipSize = 12   // Left gun magazine
+SWEP.ClipSize2 = 12  // Right gun magazine
 SWEP.Ammo = "pistol"
 SWEP.Ammo_Expanded = "ti_pistol_heavy"
 
@@ -190,6 +191,7 @@ SWEP.DropMagazineTime = 0.25
 local path = "tacrp/weapons/mtx/"
 
 SWEP.Sound_Shoot = "^" .. path .. "fire-1.wav"
+SWEP.Sound_Shoot_Silenced = "^tacrp/weapons/p250/p250_fire_silenced-1.wav"
 
 SWEP.Vol_Shoot = 110
 SWEP.ShootPitchVariance = 2.5 // amount to vary pitch by each shot
@@ -215,6 +217,7 @@ SWEP.AnimationTranslationTable = {
 
 SWEP.LastShot = true
 SWEP.Akimbo = true
+SWEP.DualAkimbo = true  // Proper dual wielding: LMB=left, RMB=right
 SWEP.EffectsAlternate = true
 
 // attachments
@@ -248,7 +251,7 @@ SWEP.Attachments = {
     },
     [3] = {
         PrintName = "Trigger",
-        Category = {"trigger_akimbo"},
+        Category = {"trigger_semi"},
         AttachSound = "TacRP/weapons/flashlight_on.wav",
         DetachSound = "TacRP/weapons/flashlight_off.wav",
     },
@@ -257,6 +260,28 @@ SWEP.Attachments = {
         Category = {"ammo_pistol"},
         AttachSound = "TacRP/weapons/flashlight_on.wav",
         DetachSound = "TacRP/weapons/flashlight_off.wav",
+    },
+    [6] = {
+        PrintName = "Muzzle",
+        Category = {"silencer", "pistol_muzzle"},
+        AttachSound = "TacRP/weapons/silencer_on.wav",
+        DetachSound = "TacRP/weapons/silencer_off.wav",
+        VMScale = 0.6,
+        WMScale = 0.6,
+        Bone_L = "ValveBiped.barrel_assembly",
+        Pos_VM_L = Vector(-0.82, 0.28, 6.5),
+        Ang_VM_L = Angle(90, 0, 0),
+        // Right gun muzzle
+        Bone_R = "ValveBiped.barrel_assembly1",
+        Pos_VM_R = Vector(-0.82, 0.28, 6.5),
+        Ang_VM_R = Angle(90, 0, 0),
+        // World model (single for now)
+        WMBone_L = "ValveBiped.Bip01_L_Hand",
+        Pos_WM_L = Vector(11.65, 1.3, 3.25),
+        Ang_WM_L = Angle(0, 0, 0),
+        WMBone_R = "ValveBiped.Bip01_R_Hand",
+        Pos_WM_R = Vector(12.755, 1.1, -4.1),
+        Ang_WM_R = Angle(0, 0, 0),
     }
 }
 

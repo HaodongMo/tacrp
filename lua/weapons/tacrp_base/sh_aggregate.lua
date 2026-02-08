@@ -142,7 +142,7 @@ SWEP.StatGroups = {
             local valfunc = base and self.GetBaseValue or self.GetValue
 
             local bfm = self:GetBestFiremode(base)
-            local rrpm = self:GetRPM(base, bfm)
+            local rrpm = self:GetEffectiveRPM(base, bfm)
             local pbd = valfunc(self, "PostBurstDelay")
             local ttt = TacRP.GetBalanceMode() == TacRP.BALANCE_TTT
             local pve = TacRP.GetBalanceMode() == TacRP.BALANCE_PVE
@@ -210,7 +210,7 @@ SWEP.StatGroups = {
             local valfunc = base and self.GetBaseValue or self.GetValue
 
             local bfm = self:GetBestFiremode(base)
-            local rrpm = self:GetRPM(base, bfm)
+            local rrpm = self:GetEffectiveRPM(base, bfm)
             local erpm = rrpm
             local pbd = valfunc(self, "PostBurstDelay")
             local ttt = TacRP.GetBalanceMode() == TacRP.BALANCE_TTT
@@ -303,7 +303,7 @@ SWEP.StatGroups = {
             local valfunc = base and self.GetBaseValue or self.GetValue
 
             local bfm = self:GetBestFiremode(base)
-            local rpm = valfunc(self, "RPM")
+            local rpm = self:GetEffectiveRPM(base, bfm)
 
             local num = valfunc(self, "Num")
             local spread = valfunc(self, "Spread")
@@ -357,7 +357,7 @@ SWEP.StatGroups = {
             local valfunc = base and self.GetBaseValue or self.GetValue
 
             local bfm = self:GetBestFiremode(base)
-            local erpm = valfunc(self, "RPM")
+            local erpm = self:GetEffectiveRPM(base, bfm)
             local pbd = valfunc(self, "AutoBurst") and valfunc(self, "PostBurstDelay") or math.max(0.15, valfunc(self, "PostBurstDelay"))
             if bfm == 1 then
                 erpm = math.min(erpm, 600) -- you can't click *that* fast
@@ -629,7 +629,7 @@ SWEP.StatDisplay = {
             local valfunc = base and self.GetBaseValue or self.GetValue
 
             local bfm = self:GetBestFiremode(base)
-            local rrpm = self:GetRPM(base, bfm)
+            local rrpm = self:GetEffectiveRPM(base, bfm)
             local erpm = rrpm
             local pbd = valfunc(self, "PostBurstDelay")
 
@@ -654,7 +654,7 @@ SWEP.StatDisplay = {
             local valfunc = base and self.GetBaseValue or self.GetValue
 
             local bfm = self:GetBestFiremode(base)
-            local rpm = self:GetRPM(base, bfm)
+            local rpm = self:GetEffectiveRPM(base, bfm)
 
             local num = valfunc(self, "Num")
             local dmg = math.max(valfunc(self, "Damage_Max"), valfunc(self, "Damage_Min"))

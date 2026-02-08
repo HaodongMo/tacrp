@@ -75,20 +75,55 @@ function SWEP:SetupModel(wm, custom_wm)
 
         if !atttbl.Model then continue end
 
-        local csmodel = self:CreateAttachmentModel(wm, atttbl, slot, slottbl)
+        // Check if this is an akimbo weapon with dual positioning for this slot
+        local isDualSlot = self:GetValue("Akimbo") and slottbl.Bone_L and slottbl.Bone_R
 
-        csmodel.IsHolosight = atttbl.Holosight
+        if isDualSlot then
+            // Create left attachment model
+            local csmodel_l = self:CreateAttachmentModel(wm, atttbl, slot, slottbl)
+            csmodel_l.IsHolosight = atttbl.Holosight
+            csmodel_l.IsLeftAttachment = true
 
-        if atttbl.Silencer then
-            local slmodel = self:CreateAttachmentModel(wm, atttbl, slot, slottbl)
-            slmodel.IsMuzzleDevice = true
-            slmodel.NoDraw = true
-        end
+            // Create right attachment model
+            local csmodel_r = self:CreateAttachmentModel(wm, atttbl, slot, slottbl)
+            csmodel_r.IsHolosight = atttbl.Holosight
+            csmodel_r.IsRightAttachment = true
 
-        if wm then
-            slottbl.WModel = csmodel
+            if atttbl.Silencer then
+                local slmodel_l = self:CreateAttachmentModel(wm, atttbl, slot, slottbl)
+                slmodel_l.IsMuzzleDevice = true
+                slmodel_l.IsLeftMuzzle = true
+                slmodel_l.NoDraw = true
+
+                local slmodel_r = self:CreateAttachmentModel(wm, atttbl, slot, slottbl)
+                slmodel_r.IsMuzzleDevice = true
+                slmodel_r.IsRightMuzzle = true
+                slmodel_r.NoDraw = true
+            end
+
+            if wm then
+                slottbl.WModel = csmodel_l
+                slottbl.WModel_R = csmodel_r
+            else
+                slottbl.VModel = csmodel_l
+                slottbl.VModel_R = csmodel_r
+            end
         else
-            slottbl.VModel = csmodel
+            local csmodel = self:CreateAttachmentModel(wm, atttbl, slot, slottbl)
+
+            csmodel.IsHolosight = atttbl.Holosight
+
+            if atttbl.Silencer then
+                local slmodel = self:CreateAttachmentModel(wm, atttbl, slot, slottbl)
+                slmodel.IsMuzzleDevice = true
+                slmodel.NoDraw = true
+            end
+
+            if wm then
+                slottbl.WModel = csmodel
+            else
+                slottbl.VModel = csmodel
+            end
         end
     end
 

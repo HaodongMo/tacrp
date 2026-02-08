@@ -29,7 +29,7 @@ function EFFECT:Init(data)
     end
 
     if wpn.GetMuzzleDevice then
-        parent = wpn:GetMuzzleDevice(wm)
+        parent = wpn:GetMuzzleDevice(wm, att)
     else
         parent = self
     end

@@ -930,6 +930,8 @@ ATT.Mult_Damage_Max = 0.55
 ATT.Mult_Num = 2
 ATT.Mult_RecoilKick = 0.85
 
+ATT.ShellColor = Color(255, 255, 255)
+
 -- ATT.Add_Spread = 0.02
 -- ATT.Add_ShotgunPelletSpread = 0.008
 
@@ -967,6 +969,8 @@ ATT.Mult_RecoilSpreadPenalty = 1.25
 
 ATT.Mult_ShootingSpeedMult = 0.8
 
+ATT.ShellColor = Color(0, 255, 0)
+
 TacRP.LoadAtt(ATT, "ammo_shotgun_mag")
 -- #endregion
 
@@ -1001,6 +1005,8 @@ ATT.Mult_RecoilSpreadPenalty = 0.25
 ATT.Add_HipFireSpreadPenalty = 0.025
 
 ATT.Mult_MuzzleVelocity = 1.5
+
+ATT.ShellColor = Color(25, 25, 25)
 
 ATT.Override_MuzzleEffect = "muzzleflash_slug"
 
@@ -1052,6 +1058,8 @@ ATT.Add_HipFireSpreadPenalty = 0.025
 
 ATT.Mult_MuzzleVelocity = 1.5
 
+ATT.ShellColor = Color(25, 25, 25)
+
 ATT.Override_MuzzleEffect = "muzzleflash_slug"
 
 ATT.Override_BodyDamageMultipliers = {
@@ -1099,6 +1107,8 @@ ATT.Mult_RecoilSpreadPenalty = 0.5
 ATT.Add_HipFireSpreadPenalty = 0.01
 
 ATT.Mult_MuzzleVelocity = 1.25
+
+ATT.ShellColor = Color(100, 100, 100)
 
 ATT.Override_MuzzleEffect = "muzzleflash_slug"
 
@@ -1151,6 +1161,8 @@ ATT.Mult_MuzzleVelocity = 1.25
 
 ATT.Override_MuzzleEffect = "muzzleflash_slug"
 
+ATT.ShellColor = Color(100, 100, 100)
+
 ATT.Override_BodyDamageMultipliers = {
     [HITGROUP_HEAD] = 1.5,
     [HITGROUP_CHEST] = 1.15,
@@ -1201,7 +1213,7 @@ ATT.Icon = Material("entities/tacrp_att_acc_surplus.png", "mips smooth")
 ATT.Description = "Unreliable old ammo, yet you keep finding them everywhere."
 ATT.Pros = {"att.procon.refund", "stat.recoil"}
 ATT.Cons = {"att.procon.unreliable"}
-ATT.Category = {"ammo_rifle", "ammo_sniper", "ammo_pistol", "ammo_amr", "ammo_shotgun", "ammo_shotgun2", "ammo_rifle_sub", "ammo_pistol_sub"}
+ATT.Category = {"ammo_rifle", "ammo_sniper", "ammo_pistol", "ammo_amr", "ammo_rifle_sub", "ammo_pistol_sub"}
 
 ATT.SortOrder = 999
 
@@ -1222,6 +1234,42 @@ ATT.Hook_PostShoot = function(wep)
 end
 
 TacRP.LoadAtt(ATT, "ammo_surplus")
+-- #endregion
+
+------------------------------
+-- #region ammo_surplus2
+------------------------------
+ATT = {}
+
+ATT.PrintName = "Surplus"
+ATT.FullName = "Surplus Shells"
+ATT.Icon = Material("entities/tacrp_att_acc_surplus2.png", "mips smooth")
+ATT.Description = "Unreliable old ammo, yet you keep finding them everywhere."
+ATT.Pros = {"att.procon.refund", "stat.recoil"}
+ATT.Cons = {"att.procon.unreliable"}
+ATT.Category = {"ammo_shotgun", "ammo_shotgun2"}
+
+ATT.SortOrder = 999
+
+-- ATT.Mult_SupplyLimit = 2
+-- ATT.Mult_ShootChance = 0.98
+
+ATT.Mult_RecoilSpreadPenalty = 0.9
+ATT.Mult_RecoilKick = 0.85
+
+ATT.Add_JamFactor = 0.2
+ATT.Add_ShootPitchVariance = 2
+
+ATT.ShellColor = Color(0, 50, 255)
+
+ATT.Hook_PostShoot = function(wep)
+    if CLIENT then return end
+    if wep:GetOwner():IsPlayer() and !wep:GetInfiniteAmmo() and math.random() <= 0.5 then
+        wep:GetOwner():GiveAmmo(math.random(1, wep:GetValue("AmmoPerShot")), wep:GetPrimaryAmmoType(), true)
+    end
+end
+
+TacRP.LoadAtt(ATT, "ammo_surplus2")
 -- #endregion
 
 ------------------------------
@@ -1267,6 +1315,8 @@ ATT.Free = true
 ATT.ShotgunFullCancel = true
 ATT.Override_Firemodes = {1}
 ATT.Override_Priority_Firemodes = 999
+
+ATT.ShellColor = Color(125, 255, 255)
 
 ATT.OnPresetLoad = function(wep)
     if SERVER then
@@ -1371,6 +1421,8 @@ ATT.Mult_Num = 0.6667
 ATT.Mult_RecoilKick = 0.85
 ATT.Mult_ClipSize = 1.5
 
+ATT.ShellColor = Color(255, 100, 100)
+
 ATT.Compatibility = function(wpn, cats)
     if !wpn.ShotgunReload then return false end
 end
@@ -1400,6 +1452,8 @@ ATT.Mult_Damage_Min = 0.5
 ATT.Mult_MuzzleVelocity = 0.75
 ATT.Add_Spread = 0.03
 ATT.Add_ShotgunPelletSpread = 0.03
+
+ATT.ShellColor = Color(255, 75, 0)
 
 ATT.Override_ExplosiveEffect = "ManhackSparks"
 -- ATT.Add_ExplosiveDamage = 1
@@ -1443,6 +1497,8 @@ ATT.Override_ExplosiveEffect = "HelicopterMegaBomb"
 ATT.Add_ExplosiveDamage = 40
 ATT.Add_ExplosiveRadius = 150
 
+ATT.ShellColor = Color(225, 225, 0)
+
 TacRP.LoadAtt(ATT, "ammo_shotgun_frag")
 -- #endregion
 
@@ -1484,6 +1540,7 @@ ATT.Func_MuzzleEffect = function(wep, modifiers)
     end
 end
 
+ATT.ShellColor = Color(255, 175, 100)
 TacRP.LoadAtt(ATT, "ammo_shotgun_breach")
 -- #endregion
 

@@ -11,6 +11,7 @@ SWEP.ExcludeFromRawStats = {
 
 SWEP.IntegerStats = {
     ["ClipSize"] = true,
+    ["ClipSize2"] = true,
     ["Num"] = true,
 }
 

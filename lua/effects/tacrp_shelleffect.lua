@@ -22,6 +22,15 @@ function EFFECT:Init(data)
     if !IsValid(ent) then self:Remove() return end
     if !IsValid(ent:GetOwner()) then self:Remove() return end
 
+    // Store shell color for colorable shell types
+    if typetbl and typetbl.Colorable then
+        if ent.GetValue then
+            self.ShellColor = ent:GetValue("ShellColor") or typetbl.DefaultColor
+        else
+            self.ShellColor = typetbl.DefaultColor
+        end
+    end
+
     local origin, ang, dir
 
     if ent:GetOwner() == LocalPlayer() and ent:GetValue("ScopeHideWeapon") and ent:IsInScope() then

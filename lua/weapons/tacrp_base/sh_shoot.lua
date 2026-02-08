@@ -1,7 +1,9 @@
-function SWEP:StillWaiting(cust, reload)
-    if self:GetNextPrimaryFire() > CurTime() then return true end
-    if self:GetNextSecondaryFire() > CurTime() and (!reload or !(reload and self:GetReloading())) then return true end
-    if self:GetAnimLockTime() > CurTime() and (!reload or !(reload and self:GetReloading())) then return true end
+function SWEP:StillWaiting(cust, reload, rightgun)
+    if !rightgun and self:GetNextPrimaryFire() > CurTime() then return true end
+    if rightgun and self:GetNextSecondaryFire() > CurTime() then return true end
+    if self:GetAnimLockTime() > CurTime() then return true end
+    // For DualAkimbo, still block on reload (AnimLockTime skip above would otherwise allow shooting during reload)
+    if dualPrimary and self:GetReloading() then return true end
     if !cust and self:GetBlindFireFinishTime() > CurTime() then return true end
     if !cust and self:GetCustomize() then return true end
     if self:GetPrimedGrenade() then return true end
@@ -63,7 +65,7 @@ function SWEP:PrimaryAttack()
     if self:SprintLock(true) then return end
     if DarkRP and self:GetNWBool("TacRP_PoliceBiocode") and !self:GetOwner():isCP() then return end
     if self:GetSafe() and !self:GetReloading() then self:ToggleSafety(false) return end
-    if self:StillWaiting() then return end
+    if self:StillWaiting(nil, nil, false) then return end
 
     if self:GetValue("RequireLockOn") and !(IsValid(self:GetLockOnEntity()) and CurTime() > self:GetLockOnStartTime() + self:GetValue("LockOnTime")) then return end
 
@@ -71,10 +73,31 @@ function SWEP:PrimaryAttack()
         local ret = self:RunHook("Hook_PreDryfire")
         if ret != true then
             self.Primary.Automatic = false
-            if self:GetBlindFire() then
-                self:PlayAnimation("blind_dryfire")
+            if self:GetValue("DualAkimbo") then
+                // Don't play dryfire animation while the other gun is cooling
+                local coolingTime = 0.5
+                local rightCooling = self.LastSecondaryFireTime and CurTime() - self.LastSecondaryFireTime < coolingTime
+                if !rightCooling then
+                    local rightEmpty = self:Clip2() < self:GetValue("AmmoPerShot")
+                    if rightEmpty then
+                        // Both guns empty - use standard dryfire
+                        if self:GetBlindFire() then
+                            self:PlayAnimation("blind_dryfire")
+                        else
+                            self:PlayAnimation("dryfire")
+                        end
+                    elseif self:HasSequence("dryfire_left") then
+                        // Only left gun empty, right has ammo - use partial dryfire if available
+                        self:PlayAnimation("dryfire_left")
+                    end
+                    // If no partial dryfire animation, skip animation (just play sound)
+                end
             else
-                self:PlayAnimation("dryfire")
+                if self:GetBlindFire() then
+                    self:PlayAnimation("blind_dryfire")
+                else
+                    self:PlayAnimation("dryfire")
+                end
             end
             self:EmitSound(self:GetValue("Sound_DryFire"), 75, 100, 1, CHAN_ITEM)
             self:SetBurstCount(0)
@@ -99,7 +122,10 @@ function SWEP:PrimaryAttack()
             self:SetBurstCount(0)
             self:SetPatternCount(0)
             self:SetNextPrimaryFire(CurTime() + self:GetValue("JamWaitTime"))
-            self:SetNextSecondaryFire(CurTime() + self:GetValue("JamWaitTime"))
+            // For DualAkimbo, don't block secondary fire on primary jam
+            if !self:GetValue("DualAkimbo") then
+                self:SetNextSecondaryFire(CurTime() + self:GetValue("JamWaitTime"))
+            end
             if self:GetValue("JamTakesRound") then
                 self:TakePrimaryAmmo(self:GetValue("AmmoPerShot"))
             end
@@ -132,13 +158,63 @@ function SWEP:PrimaryAttack()
     end
 
     if self:GetValue("Akimbo") and !self:GetBlindFire() then
-        if self:GetNthShot() % 2 == 0 then
+        if self:GetValue("DualAkimbo") then
+            // DualAkimbo: PrimaryAttack always fires left gun
+            local aps = self:GetValue("AmmoPerShot")
+            local rightEmpty = self:Clip2() == 0
+            local coolingTime = 0.5
+            local rightJustFired = self.LastSecondaryFireTime and CurTime() - self.LastSecondaryFireTime < coolingTime
+            local leftLastShot = self:Clip1() == aps
+
+            // Check if right gun fired recently - use shoot_both if so
+            local simultaneousLeeway = 0.05
+            local rightFiredRecently = self.LastSecondaryFireTime and CurTime() - self.LastSecondaryFireTime < simultaneousLeeway
+
+            if rightFiredRecently and self:HasSequence("shoot_both") then
+                // Both guns firing nearly simultaneously
+                // Check for last shot variants
+                local rightNowEmpty = self:Clip2() == 0  // Right already fired, check if it's now empty
+                if leftLastShot and rightNowEmpty and self:HasSequence("shoot_both_lastshot") then
+                    seq = "shoot_both_lastshot"
+                    idle = false
+                elseif leftLastShot and self:HasSequence("shoot_both_left_lastshot") then
+                    seq = "shoot_both_left_lastshot"
+                    idle = false
+                elseif rightNowEmpty and self:HasSequence("shoot_both_right_lastshot") then
+                    seq = "shoot_both_right_lastshot"
+                    idle = false
+                else
+                    seq = "shoot_both"
+                end
+            elseif leftLastShot and self:GetValue("LastShot") then
+                // This shot empties the left gun
+                if rightEmpty then
+                    // Both guns will be empty - lastshot
+                    seq = "shoot_left_lastshot"
+                else
+                    // Only left gun empty, right still has ammo - second_2_lastshot
+                    seq = "shoot_left_second_2_lastshot"
+                end
+                idle = false
+            elseif rightEmpty and self:HasSequence("shoot_left_second_empty") then
+                // Right gun empty (slide locked), left gun still has ammo
+                seq = "shoot_left_second_empty"
+            elseif rightJustFired and !self.RightCoolingShown and self:HasSequence("shoot_left_cooling") then
+                // Right gun just fired (slide cycling/cooling down) - only show once per shot
+                seq = "shoot_left_cooling"
+                self.RightCoolingShown = true
+            elseif self:HasSequence("shoot_left-1") then
+                seq = "shoot_left-1"
+            else
+                seq = "shoot_left"
+            end
+        elseif self:GetNthShot() % 2 == 0 then
             seq = "shoot_left"
         else
             seq = "shoot_right"
         end
 
-        if self:GetValue("LastShot") then
+        if !self:GetValue("DualAkimbo") and self:GetValue("LastShot") then
             if self:Clip1() == self:GetValue("AmmoPerShot") then
                 seq = seq .. "_lastshot"
             elseif self:Clip1() == self:GetValue("AmmoPerShot") * 2 then
@@ -216,26 +292,35 @@ function SWEP:PrimaryAttack()
     end
 
     self:SetNthShot(self:GetNthShot() + 1)
+    self.LastPrimaryFireTime = CurTime()
+    self.LeftCoolingShown = false  // Reset so right gun can show cooling animation for this shot
 
     local ejectdelay = self:GetValue("EjectDelay")
+    // For DualAkimbo, force left side effects (forceRight = false)
+    // Note: Can't use "DualAkimbo and false or nil" because "false or nil" evaluates to nil in Lua
+    local forceRight = nil
+    if self:GetValue("DualAkimbo") then
+        forceRight = false
+        self:SetLastFiredRight(false)
+    end
     if ejectdelay == 0 then
-        self:DoEject()
+        self:DoEject(nil, forceRight)
     else
         self:SetTimer(ejectdelay, function()
-            self:DoEject()
+            self:DoEject(nil, forceRight)
         end)
     end
 
-    self:DoEffects()
+    self:DoEffects(nil, forceRight)
 
     if self:GetValue("EffectsDoubled") then
         -- self:SetNthShot(self:GetNthShot() + 1)
-        self:DoEffects(true)
+        self:DoEffects(true, forceRight)
         if ejectdelay == 0 then
-            self:DoEject(true)
+            self:DoEject(true, forceRight)
         else
             self:SetTimer(ejectdelay, function()
-                self:DoEject(true)
+                self:DoEject(true, forceRight)
             end)
         end
         -- self:SetNthShot(self:GetNthShot() - 1)
@@ -697,6 +782,8 @@ function SWEP:ShootRocket(dir)
     rocket:Spawn()
     self:RunHook("Hook_PostShootEnt", rocket)
 
+    rocket.IsTacRPProjectile = true
+
     local phys = rocket:GetPhysicsObject()
 
     if phys:IsValid() and self:GetValue("ShootEntForce") > 0 then
@@ -869,4 +956,419 @@ function SWEP:GetRPM(base, fm)
         rpm = rpm * valfunc(self, "RPMMultBurst")
     end
     return rpm
+end
+
+// Returns effective RPM for stat calculations
+// DualAkimbo weapons have double the effective fire rate since both guns fire independently
+function SWEP:GetEffectiveRPM(base, fm)
+    local rpm = self:GetRPM(base, fm)
+    local valfunc = base and self.GetBaseValue or self.GetValue
+    if valfunc(self, "DualAkimbo") then
+        rpm = rpm * 2
+    end
+    return rpm
+end
+
+// =====================================
+// DualAkimbo Secondary Shooting System
+// =====================================
+
+function SWEP:GetCapacity2()
+    return self:GetValue("ClipSize2")
+end
+
+function SWEP:TakeSecondaryAmmo(amt)
+    self:SetClip2(math.max(self:Clip2() - amt, 0))
+end
+
+// Secondary attack for right gun in DualAkimbo mode
+function SWEP:SecondaryShoot()
+    if self:GetOwner():IsNPC() then return end
+
+    if self:GetReloading() and self:Clip2() < self:GetValue("AmmoPerShot") then return end
+
+    if self:GetValue("Melee") and self:GetOwner():KeyDown(IN_USE) and !(self:GetValue("RunawayBurst") and self:GetBurstCount2() > 0) then
+        self:SetSafe(false)
+        self:Melee()
+        return
+    end
+
+    if self:GetCurrentFiremode() < 0 and self:GetBurstCount2() >= -self:GetCurrentFiremode() then return end
+
+    if self:GetReloading() and self:GetValue("ShotgunReload") then
+        if TacRP.ConVars["reload_sg_cancel"]:GetBool() and !self:GetValue("ShotgunFullCancel") then
+            self:CancelReload(false)
+            self:Idle()
+        else
+            self:CancelReload(true)
+        end
+    end
+
+    if self:SprintLock(true) then return end
+    if DarkRP and self:GetNWBool("TacRP_PoliceBiocode") and !self:GetOwner():isCP() then return end
+    if self:GetSafe() and !self:GetReloading() then self:ToggleSafety(false) return end
+
+    if self:StillWaiting(nil, nil, true) then return end
+    if self:GetNextSecondaryFire() > CurTime() then return end
+    if self:GetBlindFireFinishTime() > CurTime() then return end
+    if self:GetCustomize() then return end
+    if self:GetPrimedGrenade() then return end
+    if self:GetReloading() then return end
+
+    if self:GetValue("RequireLockOn") and !(IsValid(self:GetLockOnEntity()) and CurTime() > self:GetLockOnStartTime() + self:GetValue("LockOnTime")) then return end
+
+    // Use Clip2 for right gun ammo
+    if self:Clip2() < self:GetValue("AmmoPerShot") or self:GetJammed() then
+        local ret = self:RunHook("Hook_PreDryfire")
+        if ret != true then
+            self.Secondary.Automatic = false
+            // Don't play dryfire animation while the other gun is cooling
+            local coolingTime = 0.5
+            local leftCooling = self.LastPrimaryFireTime and CurTime() - self.LastPrimaryFireTime < coolingTime
+            if !leftCooling then
+                local leftEmpty = self:Clip1() < self:GetValue("AmmoPerShot")
+                if leftEmpty then
+                    // Both guns empty - use standard dryfire
+                    if self:GetBlindFire() then
+                        self:PlayAnimation("blind_dryfire")
+                    else
+                        self:PlayAnimation("dryfire")
+                    end
+                elseif self:HasSequence("dryfire_right") then
+                    // Only right gun empty, left has ammo - use partial dryfire if available
+                    self:PlayAnimation("dryfire_right")
+                end
+                // If no partial dryfire animation, skip animation (just play sound)
+            end
+            self:EmitSound(self:GetValue("Sound_DryFire"), 75, 100, 1, CHAN_ITEM)
+            self:SetBurstCount2(0)
+            // Only block secondary fire, not primary
+            self:SetNextSecondaryFire(CurTime() + 0.2)
+            self:RunHook("Hook_PostDryfire")
+            return
+        end
+    end
+
+    if util.SharedRandom("tacRP_shootChance2", 0, 1) <= self:GetJamChance(false) then
+        local ret = self:RunHook("Hook_PreJam")
+        if ret != true then
+            if self:GetBurstCount2() == 0 then
+                self.Secondary.Automatic = false
+            end
+            self:EmitSound(self:GetValue("Sound_Jam"), 75, 100, 1, CHAN_ITEM)
+            self:SetBurstCount2(0)
+            self:SetPatternCount(0)
+            // Only block secondary fire for jam, not primary
+            self:SetNextSecondaryFire(CurTime() + self:GetValue("JamWaitTime"))
+            if self:GetValue("JamTakesRound") then
+                self:TakeSecondaryAmmo(self:GetValue("AmmoPerShot"))
+            end
+            if self:Clip2() > 0 and !self:GetValue("JamSkipFix") then
+                self:SetJammed(true)
+            end
+            self:RunHook("Hook_PostJam")
+            return
+        end
+    end
+
+    self:SetBaseSettings()
+
+    local stop = self:RunHook("Hook_PreShoot")
+    if stop then return end
+
+    // Animation selection for right gun
+    local seq = "shoot_right"
+    local idle = true
+    local mult = self:GetValue("ShootTimeMult")
+
+    local aps = self:GetValue("AmmoPerShot")
+    local leftEmpty = self:Clip1() == 0
+    local coolingTime = 0.5
+    local leftJustFired = self.LastPrimaryFireTime and CurTime() - self.LastPrimaryFireTime < coolingTime
+    local rightLastShot = self:Clip2() == aps
+
+    // Check if left gun fired recently - use shoot_both if so
+    local simultaneousLeeway = 0.05
+    local leftFiredRecently = self.LastPrimaryFireTime and CurTime() - self.LastPrimaryFireTime < simultaneousLeeway
+
+    if leftFiredRecently and self:HasSequence("shoot_both") then
+        // Both guns firing nearly simultaneously
+        // Check for last shot variants
+        local leftNowEmpty = self:Clip1() == 0  // Left already fired, check if it's now empty
+        if rightLastShot and leftNowEmpty and self:HasSequence("shoot_both_lastshot") then
+            seq = "shoot_both_lastshot"
+            idle = false
+        elseif rightLastShot and self:HasSequence("shoot_both_right_lastshot") then
+            seq = "shoot_both_right_lastshot"
+            idle = false
+        elseif leftNowEmpty and self:HasSequence("shoot_both_left_lastshot") then
+            seq = "shoot_both_left_lastshot"
+            idle = false
+        else
+            seq = "shoot_both"
+        end
+    elseif rightLastShot and self:GetValue("LastShot") then
+        // This shot empties the right gun
+        if leftEmpty then
+            // Both guns will be empty - lastshot
+            seq = "shoot_right_lastshot"
+        else
+            // Only right gun empty, left still has ammo - second_2_lastshot
+            seq = "shoot_right_second_2_lastshot"
+        end
+        idle = false
+    elseif leftEmpty and self:HasSequence("shoot_right_second_empty") then
+        // Left gun empty (slide locked), right gun still has ammo
+        seq = "shoot_right_second_empty"
+    elseif leftJustFired and !self.LeftCoolingShown and self:HasSequence("shoot_right_cooling") then
+        // Left gun just fired (slide cycling/cooling down) - only show once per shot
+        seq = "shoot_right_cooling"
+        self.LeftCoolingShown = true
+    elseif self:HasSequence("shoot_right-1") then
+        seq = "shoot_right-1"
+    else
+        seq = "shoot_right"
+    end
+
+    local prociron = self:DoProceduralIrons()
+    if self:GetScopeLevel() > 0 and (prociron or self:HasSequence(seq .. "_iron")) and !self:GetPeeking() then
+        if prociron then
+            if self:GetValue("LastShot") and self:Clip2() == self:GetValue("AmmoPerShot") then
+                self:PlayAnimation(self:TranslateSequence("dryfire"), mult, false)
+            end
+            self:SetLastProceduralFireTime(CurTime())
+        else
+            self:PlayAnimation(seq .. "_iron", mult, false, idle)
+        end
+    elseif self:HasSequence(seq .. "1") then
+        local seq1 = seq .. "1"
+        if !self:GetInBipod() and (self:GetScopeLevel() < 1 or self:GetPeeking()) then
+            seq1 = seq .. tostring(self:GetBurstCount2() + 1)
+        end
+
+        if self:HasSequence(seq1) then
+            self:PlayAnimation(seq1, mult, false, idle)
+        elseif self:GetScopeLevel() < 1 or self:GetPeeking() then
+            for i = self:GetBurstCount2() + 1, 1, -1 do
+                local seq2 = seq .. tostring(i)
+                if self:HasSequence(seq2) then
+                    self:PlayAnimation(seq2, mult, false, idle)
+                    break
+                end
+            end
+        end
+    else
+        self:PlayAnimation(seq, mult, false, idle)
+    end
+
+    self:GetOwner():DoCustomAnimEvent(PLAYERANIMEVENT_ATTACK_PRIMARY, 0)
+
+    local pvar = self:GetValue("ShootPitchVariance")
+    local sshoot = self:GetValue("Sound_Shoot")
+
+    if self:GetValue("Silencer") then
+        sshoot = self:GetValue("Sound_Shoot_Silenced")
+    end
+
+    if istable(sshoot) then
+        sshoot = table.Random(sshoot)
+    end
+
+    if self:GetValue("Sound_ShootAdd") then
+        self:EmitSound(self:GetValue("Sound_ShootAdd"), self:GetValue("Vol_Shoot"), self:GetValue("Pitch_Shoot") + util.SharedRandom("TacRP_sshoot2", -pvar, pvar), self:GetValue("Loudness_Shoot"), CHAN_BODY)
+    end
+
+    -- if we die from suicide, EmitSound will not play, so do this instead
+    if self:GetBlindFireMode() == TacRP.BLINDFIRE_KYS then
+        if SERVER then
+            sound.Play(sshoot, self:GetMuzzleOrigin(), self:GetValue("Vol_Shoot"), self:GetValue("Pitch_Shoot") + util.SharedRandom("TacRP_sshoot2", -pvar, pvar), self:GetValue("Loudness_Shoot"))
+        end
+    else
+        self:EmitSound(sshoot, self:GetValue("Vol_Shoot"), self:GetValue("Pitch_Shoot") + util.SharedRandom("TacRP_sshoot2", -pvar, pvar), self:GetValue("Loudness_Shoot"), CHAN_WEAPON)
+    end
+
+    local delay = 60 / self:GetRPM()
+
+    local curatt = self:GetNextSecondaryFire()
+    local diff = CurTime() - curatt
+
+    if diff > engine.TickInterval() or diff < 0 then
+        curatt = CurTime()
+    end
+
+    self:SetNthShot2(self:GetNthShot2() + 1)
+    self.LastSecondaryFireTime = CurTime()
+    self.RightCoolingShown = false  // Reset so left gun can show cooling animation for this shot
+    self:SetLastFiredRight(true)
+
+    // Force right side effects (forceRight = true)
+    local ejectdelay = self:GetValue("EjectDelay")
+    if ejectdelay == 0 then
+        self:DoEject(nil, true)
+    else
+        self:SetTimer(ejectdelay, function()
+            self:DoEject(nil, true)
+        end)
+    end
+
+    self:DoEffects(nil, true)
+
+    if self:GetValue("EffectsDoubled") then
+        self:DoEffects(true, true)
+        if ejectdelay == 0 then
+            self:DoEject(true, true)
+        else
+            self:SetTimer(ejectdelay, function()
+                self:DoEject(true, true)
+            end)
+        end
+    end
+
+    local num = self:GetValue("Num")
+    local fixed_spread = self:IsShotgun() and TacRP.ConVars["fixedspread"]:GetBool()
+    local pellet_spread = self:IsShotgun() and self:GetValue("ShotgunPelletSpread") > 0 and TacRP.ConVars["pelletspread"]:GetBool()
+
+    local spread = self:GetSpread()
+    local dir = self:GetShootDir()
+    local tr = self:GetValue("TracerNum")
+    local shootent = self:GetValue("ShootEnt")
+
+    if IsFirstTimePredicted() then
+        local hitscan = !TacRP.ConVars["physbullet"]:GetBool()
+        local dist = 100000
+
+        if !hitscan and (game.SinglePlayer() or !TacRP.ConVars["client_damage"]:GetBool()) then
+            dist = math.max(self:GetValue("MuzzleVelocity"), 15000) * engine.TickInterval()
+                    * game.GetTimeScale()
+                    * (num == 1 and 2 or 1) * (game.IsDedicated() and 1 or 2)
+            local threshold = dir:Forward() * dist
+            local inst_tr = util.TraceLine({
+                start = self:GetMuzzleOrigin(),
+                endpos = self:GetMuzzleOrigin() + threshold,
+                mask = MASK_SHOT,
+                filter = {self:GetOwner(), self:GetOwner():GetVehicle(), self},
+            })
+            if inst_tr.Hit and !inst_tr.HitSky then
+                hitscan = true
+            end
+        end
+
+        if shootent or !hitscan or fixed_spread then
+            local d = math.random()
+            for i = 1, num do
+                local new_dir = Angle(dir)
+                if fixed_spread then
+                    local sgp_x, sgp_y = self:GetShotgunPattern(i, d)
+                    new_dir = anglerotate(new_dir, Angle(sgp_x, sgp_y, 0) * 36 * 1.4142135623730)
+                    if pellet_spread then
+                        new_dir = anglerotate(new_dir, self:RandomSpread(self:GetValue("ShotgunPelletSpread"), i))
+                    end
+                else
+                    new_dir = anglerotate(new_dir, self:RandomSpread(spread, i))
+                end
+
+                if shootent then
+                    self:ShootRocket(new_dir)
+                elseif hitscan then
+                    self:GetOwner():FireBullets({
+                        Damage = self:GetValue("Damage_Max"),
+                        Force = 8,
+                        Tracer = tr,
+                        TracerName = "tacrp_tracer",
+                        Num = 1,
+                        Dir = new_dir:Forward(),
+                        Src = self:GetMuzzleOrigin(),
+                        Spread = Vector(),
+                        IgnoreEntity = self:GetOwner():GetVehicle(),
+                        Distance = dist,
+                        HullSize = (self:IsShotgun() and i % 2 == 0) and TacRP.ShotgunHullSize or 0,
+                        Callback = function(att, btr, dmg)
+                            local range = (btr.HitPos - btr.StartPos):Length()
+                            self:AfterShotFunction(btr, dmg, range, self:GetValue("Penetration"), {})
+                        end
+                    })
+                else
+                    TacRP:ShootPhysBullet(self, self:GetMuzzleOrigin(), new_dir:Forward() * self:GetValue("MuzzleVelocity"),
+                            {HullSize = (self:IsShotgun() and i % 2 == 0) and TacRP.ShotgunHullSize or 0,})
+                end
+            end
+        else
+            local new_dir = Angle(dir)
+            local new_spread = spread
+
+            self:GetOwner():FireBullets({
+                Damage = self:GetValue("Damage_Max"),
+                Force = 8,
+                Tracer = tr,
+                TracerName = "tacrp_tracer",
+                Num = num,
+                Dir = new_dir:Forward(),
+                Src = self:GetMuzzleOrigin(),
+                Spread = Vector(new_spread, new_spread, 0),
+                IgnoreEntity = self:GetOwner():GetVehicle(),
+                Distance = dist,
+                Callback = function(att, btr, dmg)
+                    local range = (btr.HitPos - btr.StartPos):Length()
+
+                    if IsValid(btr.Entity) and (!game.SinglePlayer() and TacRP.ConVars["client_damage"]:GetBool()) then
+                        if CLIENT then
+                            net.Start("tacrp_clientdamage")
+                                net.WriteEntity(self)
+                                net.WriteEntity(btr.Entity)
+                                net.WriteVector(btr.Normal)
+                                net.WriteVector(btr.Entity:WorldToLocal(btr.HitPos))
+                                net.WriteUInt(btr.HitGroup, 8)
+                                net.WriteFloat(range)
+                                net.WriteFloat(self:GetValue("Penetration"))
+                                net.WriteUInt(0, 4)
+                            net.SendToServer()
+                        else
+                            self:AfterShotFunction(btr, dmg, range, self:GetValue("Penetration"), {[btr.Entity] = true})
+                        end
+                    else
+                        self:AfterShotFunction(btr, dmg, range, self:GetValue("Penetration"), {})
+                    end
+                end
+            })
+        end
+    end
+
+    self:ApplyRecoil()
+
+    self:SetNextSecondaryFire(curatt + delay)
+    self:TakeSecondaryAmmo(self:GetValue("AmmoPerShot"))
+
+    self:SetBurstCount2(self:GetBurstCount2() + 1)
+    self:SetPatternCount(self:GetPatternCount() + 1)
+    self:DoBulletBodygroups()
+
+    if self:Clip2() == 0 then self.Secondary.Automatic = false end
+
+    -- FireBullets won't hit ourselves. Apply damage directly!
+    if SERVER and self:GetBlindFireMode() == TacRP.BLINDFIRE_KYS and !self:GetValue("ShootEnt") then
+        timer.Simple(0, function()
+            if !IsValid(self) or !IsValid(self:GetOwner()) then return end
+            local damage = DamageInfo()
+            damage:SetAttacker(self:GetOwner())
+            damage:SetInflictor(self)
+            damage:SetDamage(self:GetValue("Damage_Max") * self:GetValue("Num") * self:GetConfigDamageMultiplier())
+            damage:SetDamageType(self:GetValue("DamageType") or self:IsShotgun() and DMG_BUCKSHOT or DMG_BULLET)
+            damage:SetDamagePosition(self:GetMuzzleOrigin())
+            damage:SetDamageForce(dir:Forward() * self:GetValue("Num"))
+
+            damage:ScaleDamage(self:GetBodyDamageMultipliers()[HITGROUP_HEAD])
+
+            self:GetOwner():TakeDamageInfo(damage)
+        end)
+    end
+
+    if CLIENT and self:GetOwner() == LocalPlayer() then
+        self:DoMuzzleLight()
+    elseif game.SinglePlayer() then
+        self:CallOnClient("DoMuzzleLight")
+    end
+
+    self:SetCharge(false)
+
+    self:RunHook("Hook_PostShoot")
 end
