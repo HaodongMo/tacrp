@@ -313,7 +313,7 @@ function SWEP:GetViewModelPosition(pos, ang)
         extra_offsetang:Add(sprang)
     end
 
-    self.SwayScale = f_lerp(sightdelta, 1, 0.1)
+    self.SwayScale = 0
     self.BobScale = 0
 
     local speed = 15 * FT * (game.SinglePlayer() and 1 or 2)
@@ -342,7 +342,6 @@ function SWEP:GetViewModelPosition(pos, ang)
     ang:RotateAroundAxis(oldang:Forward(), extra_offsetang[3])
 
     pos, ang = self:GetViewModelBob(pos, ang)
-    pos, ang = self:GetViewModelSway(pos, ang)
 
     self.ViewModelPos = pos
     self.ViewModelAng = ang
