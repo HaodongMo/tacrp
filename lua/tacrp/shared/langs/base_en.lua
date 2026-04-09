@@ -442,6 +442,7 @@ L["hint.tac.spread_gauge"] = "Gauge"
 L["hint.tac.magnifier"] = "Magnifier"
 L["hint.tac.cam_mode"] = "Cam Mode" -- Used for both Corner-Cam and Thermal Imager
 L["hint.tac.load_one"] = "Load One Round"
+L["hint.tac.spin_revolver"] = "Spin"
 
 L["hint.melee_lunge"] = "Lunge"
 L["hint.melee_step"] = "Airdash"

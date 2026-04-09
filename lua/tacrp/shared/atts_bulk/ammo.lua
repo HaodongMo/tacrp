@@ -3,15 +3,14 @@
 local ATT = {}
 
 ------------------------------
--- #region ammo_40mm_3gl
+-- #region ammo_40mm_3gl (40mm Cluster Grenades)
 ------------------------------
 ATT = {}
 
-ATT.PrintName = "3GL"
-ATT.FullName = "40mm Cluster Grenades"
-
+ATT.PrintName = "att.ammo_40mm_3gl.name"
+ATT.FullName = "att.ammo_40mm_3gl.name.full"
 ATT.Icon = Material("entities/tacrp_att_ammo_40mm_3gl.png", "mips smooth")
-ATT.Description = "Three weak cluster grenades, fired at once."
+ATT.Description = "att.ammo_40mm_3gl.desc"
 ATT.Pros = {"att.procon.moreproj"}
 ATT.Cons = {"stat.spread", "stat.muzzlevelocity"}
 
@@ -42,14 +41,14 @@ TacRP.LoadAtt(ATT, "ammo_40mm_3gl")
 -- #endregion
 
 ------------------------------
--- #region ammo_40mm_buck
+-- #region ammo_40mm_buck (40mm Buckshot Grenades)
 ------------------------------
 ATT = {}
 
-ATT.PrintName = "Buckshot"
-ATT.FullName = "40mm Buckshot Grenades"
+ATT.PrintName = "att.ammo_40mm_buck.name"
+ATT.FullName = "att.ammo_40mm_buck.name.full"
 ATT.Icon = Material("entities/tacrp_att_ammo_40mm_buck.png", "mips smooth")
-ATT.Description = "Flat-top grenade firing shotgun pellets. Weak due to low pressure curve."
+ATT.Description = "att.ammo_40mm_buck.desc"
 ATT.Pros = {"att.procon.direct", "att.procon.doorbreach"}
 ATT.Cons = {"att.procon.noexp"}
 
@@ -93,15 +92,15 @@ TacRP.LoadAtt(ATT, "ammo_40mm_buck")
 -- #endregion
 
 ------------------------------
--- #region ammo_40mm_gas
+-- #region ammo_40mm_gas (40mm CS Gas Grenades)
 ------------------------------
 ATT = {}
 
-ATT.PrintName = "CS Gas"
-ATT.FullName = "40mm CS Gas Grenades"
+ATT.PrintName = "att.ammo_40mm_gas.name"
+ATT.FullName = "att.ammo_40mm_gas.name.full"
 
 ATT.Icon = Material("entities/tacrp_att_ammo_40mm_lvg.png", "mips smooth")
-ATT.Description = "Grenade containing crowd control chemicals that deal lingering damage."
+ATT.Description = "att.ammo_40mm_gas.desc"
 ATT.Pros = {"att.procon.crowd"}
 ATT.Cons = {"att.procon.noexp", "att.procon.nonlethal"}
 
@@ -121,15 +120,15 @@ TacRP.LoadAtt(ATT, "ammo_40mm_gas")
 -- #endregion
 
 ------------------------------
--- #region ammo_40mm_heat
+-- #region ammo_40mm_heat (40mm Flechete Grenades)
 ------------------------------
 ATT = {}
 
-ATT.PrintName = "Flechette"
-ATT.FullName = "40mm Flechette Grenades"
+ATT.PrintName = "att.ammo_40mm_heat.name"
+ATT.FullName = "att.ammo_40mm_heat.name.full"
 
 ATT.Icon = Material("entities/tacrp_att_ammo_40mm_heat.png", "mips smooth")
-ATT.Description = "Flat-top grenade packing accurate flechette darts."
+ATT.Description = "att.ammo_40mm_heat.desc"
 ATT.Pros = {"att.procon.direct", "stat.spread", "stat.armorpenetration"}
 ATT.Cons = {"att.procon.noexp"}
 
@@ -174,7 +173,7 @@ TacRP.LoadAtt(ATT, "ammo_40mm_heat")
 -- #endregion
 
 ------------------------------
--- #region ammo_40mm_impact
+-- #region ammo_40mm_impact (40mm Dummy Grenades)
 ------------------------------
 ATT = {}
 
@@ -199,15 +198,15 @@ TacRP.LoadAtt(ATT, "ammo_40mm_impact")
 -- #endregion
 
 ------------------------------
--- #region ammo_40mm_lvg
+-- #region ammo_40mm_lvg (40mm Concussion Grenades)
 ------------------------------
 ATT = {}
 
-ATT.PrintName = "Concussion" --"LVG"
-ATT.FullName = "40mm Concussion Grenades"
+ATT.PrintName = "att.ammo_40mm_lvg.name" --"LVG"
+ATT.FullName = "att.ammo_40mm_lvg.name.full"
 
 ATT.Icon = Material("entities/tacrp_att_ammo_40mm_concussion.png", "mips smooth")
-ATT.Description = "Low velocity grenade made to incapacitate targets with indirect fire."
+ATT.Description = "att.ammo_40mm_lvg.desc"
 ATT.Pros = {"att.procon.detdelay", "att.procon.flash"}
 ATT.Cons = {"stat.muzzlevelocity", "stat.damage"}
 
@@ -228,14 +227,14 @@ TacRP.LoadAtt(ATT, "ammo_40mm_lvg")
 -- #endregion
 
 ------------------------------
--- #region ammo_40mm_ratshot
+-- #region ammo_40mm_ratshot (40mm Ratshot Grenades)
 ------------------------------
 ATT = {}
 
-ATT.PrintName = "Ratshot"
-ATT.FullName = "40mm Ratshot Grenades"
+ATT.PrintName = "att.ammo_40mm_ratshot.name"
+ATT.FullName = "att.ammo_40mm_ratshot.name.full"
 ATT.Icon = Material("entities/tacrp_att_ammo_40mm_ratshot.png", "mips smooth")
-ATT.Description = "For rodents of unbelievable size."
+ATT.Description = "att.ammo_40mm_ratshot.desc"
 ATT.Pros = {"att.procon.radius", "att.procon.proxfuse"}
 ATT.Cons = {"stat.damage", "stat.muzzlevelocity"}
 
@@ -261,15 +260,15 @@ TacRP.LoadAtt(ATT, "ammo_40mm_ratshot")
 -- #endregion
 
 ------------------------------
--- #region ammo_40mm_smoke
+-- #region ammo_40mm_smoke (40mm Smoke Grenades)
 ------------------------------
 ATT = {}
 
-ATT.PrintName = "Smoke"
-ATT.FullName = "40mm Smoke Grenades"
+ATT.PrintName = "att.ammo_40mm_smoke.name"
+ATT.FullName = "att.ammo_40mm_smoke.name.full"
 
 ATT.Icon = Material("entities/tacrp_att_ammo_40mm_smoke.png", "mips smooth")
-ATT.Description = "Grenade that produces a concealing smokescreen on impact."
+ATT.Description = "att.ammo_40mm_smoke.desc"
 ATT.Pros = {"att.procon.smoke"}
 ATT.Cons = {"att.procon.noexp"}
 
@@ -289,15 +288,15 @@ TacRP.LoadAtt(ATT, "ammo_40mm_smoke")
 -- #endregion
 
 ------------------------------
--- #region ammo_40mm_heal
+-- #region ammo_40mm_heal (40mm Medi-Smoke Grenades)
 ------------------------------
 ATT = {}
 
-ATT.PrintName = "Medi-Smoke"
-ATT.FullName = "40mm Medi-Smoke Grenades"
+ATT.PrintName = "att.ammo_40mm_heal.name"
+ATT.FullName = "att.ammo_40mm_heal.name.full"
 
 ATT.Icon = Material("entities/tacrp_att_ammo_40mm_smoke.png", "mips smooth")
-ATT.Description = "Grenade that produces a cloud of restorative gas on impact."
+ATT.Description = "att.ammo_40mm_heal.desc"
 ATT.Pros = {"att.procon.heal"}
 ATT.Cons = {"att.procon.noexp"}
 
@@ -317,14 +316,14 @@ TacRP.LoadAtt(ATT, "ammo_40mm_heal")
 -- #endregion
 
 ------------------------------
--- #region ammo_amr_hv
+-- #region ammo_amr_hv (High Velocity Rounds)
 ------------------------------
 ATT = {}
 
-ATT.PrintName = "HV"
-ATT.FullName = "High Velocity Rounds"
+ATT.PrintName = "att.ammo_amr_hv.name"
+ATT.FullName = "att.ammo_amr_hv.name.full"
 ATT.Icon = Material("entities/tacrp_att_acc_match.png", "mips smooth")
-ATT.Description = "Bullets with much higher velocity, but worsens overpenetration."
+ATT.Description = "att.ammo_amr_hv.desc"
 ATT.Pros = {"stat.range", "stat.muzzlevelocity"}
 ATT.Cons = {"stat.damage_max"}
 
@@ -345,14 +344,14 @@ TacRP.LoadAtt(ATT, "ammo_amr_hv")
 -- #endregion
 
 ------------------------------
--- #region ammo_amr_ratshot
+-- #region ammo_amr_ratshot (Ratshot Rounds)
 ------------------------------
 ATT = {}
 
-ATT.PrintName = "Ratshot"
-ATT.FullName = "Ratshot Rounds"
+ATT.PrintName = "att.ammo_amr_ratshot.name"
+ATT.FullName = "att.ammo_amr_ratshot.name.full"
 ATT.Icon = Material("entities/tacrp_att_ammo_amr_ratshot.png", "mips smooth")
-ATT.Description = "For rodents of unusual size."
+ATT.Description = "att.ammo_amr_ratshot.desc"
 ATT.Pros = {"att.procon.moreproj", "rating.maneuvering"}
 ATT.Cons = {"stat.damage", "stat.range", "stat.spread"}
 
@@ -385,14 +384,14 @@ TacRP.LoadAtt(ATT, "ammo_amr_ratshot")
 -- #endregion
 
 ------------------------------
--- #region ammo_amr_saphe
+-- #region ammo_amr_saphe (Semi-Armor Piercing High-Explosive Rounds)
 ------------------------------
 ATT = {}
 
-ATT.PrintName = "SAPHE"
-ATT.FullName = "Semi-Armor-Piercing High-Explosive Rounds"
+ATT.PrintName = "att.ammo_amr_saphe.name"
+ATT.FullName = "att.ammo_amr_saphe.name.full"
 ATT.Icon = Material("entities/tacrp_att_acc_saphe.png", "mips smooth")
-ATT.Description = "Explosive rounds effective against both armor and personnel."
+ATT.Description = "att.ammo_amr_saphe.desc"
 ATT.Pros = {"att.procon.explosive", "stat.penetration"}
 ATT.Cons = {"stat.rpm", "stat.clipsize", "stat.muzzlevelocity"}
 
@@ -424,14 +423,14 @@ TacRP.LoadAtt(ATT, "ammo_amr_saphe")
 -- #endregion
 
 ------------------------------
--- #region ammo_ks23_flashbang
+-- #region ammo_ks23_flashbang (KS-23 Zvezda Flash Shells)
 ------------------------------
 ATT = {}
 
-ATT.PrintName = "Zvezda"
-ATT.FullName = "KS-23 Zvezda Flash Shells"
+ATT.PrintName = "att.ammo_ks23_flashbang.name"
+ATT.FullName = "att.ammo_ks23_flashbang.name.full"
 ATT.Icon = Material("entities/tacrp_att_ammo_ks23_flashbang.png", "mips smooth")
-ATT.Description = "Flashbang shells that stun enemies, right from the barrel."
+ATT.Description = "att.ammo_ks23_flashbang.desc"
 ATT.Pros = {"att.procon.flash"}
 ATT.Cons = {"att.procon.timedfuse", "att.procon.nonlethal"}
 
@@ -449,14 +448,14 @@ TacRP.LoadAtt(ATT, "ammo_ks23_flashbang")
 -- #endregion
 
 ------------------------------
--- #region ammo_ks23_flashbang_top
+-- #region ammo_ks23_flashbang_top (KS-23 Zvezda Flash Shells (Top-Loaded))
 ------------------------------
 ATT = {}
 
-ATT.PrintName = "Zvezda (Top)"
-ATT.FullName = "KS-23 Zvezda Flash Shells (Top-loaded)"
+ATT.PrintName = "att.ammo_ks23_flashbang_top.name"
+ATT.FullName = "att.ammo_ks23_flashbang_top.name.full"
 ATT.Icon = Material("entities/tacrp_att_ammo_ks23_flashbang.png", "mips smooth")
-ATT.Description = "Load the first round with flash rounds and the rest with standard shells."
+ATT.Description = "att.ammo_ks23_flashbang_top.desc"
 ATT.Pros = {"att.procon.flash"}
 ATT.Cons = {"att.procon.firstround"}
 
@@ -489,14 +488,14 @@ TacRP.LoadAtt(ATT, "ammo_ks23_flashbang_top")
 -- #endregion
 
 ------------------------------
--- #region ammo_magnum
+-- #region ammo_magnum (Overpressured Rounds/+P)
 ------------------------------
 ATT = {}
 
-ATT.PrintName = "+P"
-ATT.FullName = "Overpressured Rounds"
+ATT.PrintName = "att.ammo_magnum.name"
+ATT.FullName = "att.ammo_magnum.name.full"
 ATT.Icon = Material("entities/tacrp_att_acc_plusp.png", "mips smooth")
-ATT.Description = "Bullets that maintain close range power better, but have higher recoil."
+ATT.Description = "att.ammo_magnum.desc"
 ATT.Pros = {"stat.range_min", "stat.muzzlevelocity"}
 ATT.Cons = {"stat.recoilkick", "stat.spread"}
 
@@ -515,15 +514,14 @@ TacRP.LoadAtt(ATT, "ammo_magnum")
 -- #endregion
 
 ------------------------------
--- #region ammo_pistol_ap
+-- #region ammo_pistol_ap (Steel Core Rounds)
 ------------------------------
 ATT = {}
 
-ATT.PrintName = "Steel Core"
-ATT.FullName = "Steel Core Rounds"
-
+ATT.PrintName = "att.ammo_pistol_ap.name"
+ATT.FullName = "att.ammo_pistol_ap.name.full"
 ATT.Icon = Material("entities/tacrp_att_ammo_pistol_ap.png", "mips smooth")
-ATT.Description = "Hardened bullets better penetrate armor, but destabilize ballistics."
+ATT.Description = "att.ammo_pistol_ap.desc"
 ATT.Pros = {"att.procon.armor", "stat.penetration"}
 ATT.Cons = {"stat.spread", "stat.muzzlevelocity", "stat.range"}
 
@@ -544,14 +542,14 @@ TacRP.LoadAtt(ATT, "ammo_pistol_ap")
 -- #endregion
 
 ------------------------------
--- #region ammo_pistol_headshot
+-- #region ammo_pistol_headshot (Skullsplitter Rounds)
 ------------------------------
 ATT = {}
 
-ATT.PrintName = "Skullsplitter"
-ATT.FullName = "Skullsplitter Rounds"
+ATT.PrintName = "att.ammo_pistol_headshot.name"
+ATT.FullName = "att.ammo_pistol_headshot.name.full"
 ATT.Icon = Material("entities/tacrp_att_acc_skullsplitter.png", "mips smooth")
-ATT.Description = "Specialized rounds that do more damage to vital body parts."
+ATT.Description = "att.ammo_pistol_headshot.desc"
 ATT.Pros = {"att.procon.head", "stat.spread"}
 ATT.Cons = {"att.procon.limb", "stat.armorbonus"}
 
@@ -575,15 +573,14 @@ TacRP.LoadAtt(ATT, "ammo_pistol_headshot")
 -- #endregion
 
 ------------------------------
--- #region ammo_pistol_hollowpoints
+-- #region ammo_pistol_hollowpoints (Hollow-Point Rounds/HP)
 ------------------------------
 ATT = {}
 
-ATT.PrintName = "Hollow-points"
-ATT.FullName = "Hollow-point Rounds"
-
+ATT.PrintName = "att.ammo_pistol_hollowpoints.name"
+ATT.FullName = "att.ammo_pistol_hollowpoints.name.full"
 ATT.Icon = Material("entities/tacrp_att_acc_hollowpoints.png", "mips smooth")
-ATT.Description = "Bullets that expand on hit, improving damage to flesh targets and limbs."
+ATT.Description = "att.ammo_pistol_hollowpoints.desc"
 ATT.Pros = {"att.procon.chest", "att.procon.limb"}
 ATT.Cons = {"att.procon.head", "att.procon.armor", "stat.penetration"}
 
@@ -610,14 +607,14 @@ TacRP.LoadAtt(ATT, "ammo_pistol_hollowpoints")
 
 
 ------------------------------
--- #region ammo_rifle_jhp
+-- #region ammo_rifle_jhp (Jacketed Hollow-Point Rounds)
 ------------------------------
 ATT = {}
 
-ATT.PrintName = "JHP"
-ATT.FullName = "Jacketed Hollow-point Rounds"
+ATT.PrintName = "att.ammo_rifle_jhp.name"
+ATT.FullName = "att.ammo_rifle_jhp.name.full"
 ATT.Icon = Material("entities/tacrp_att_ammo_rifle_jhp.png", "mips smooth")
-ATT.Description = "Bullets that expand on hit, improving damage to flesh targets and limbs."
+ATT.Description = "att.ammo_rifle_jhp.desc"
 ATT.Pros = {"att.procon.chest", "att.procon.limb"}
 ATT.Cons = {"stat.range", "att.procon.armor", "stat.penetration"}
 
@@ -645,14 +642,14 @@ TacRP.LoadAtt(ATT, "ammo_rifle_jhp")
 -- #endregion
 
 ------------------------------
--- #region ammo_pistol_match
+-- #region ammo_pistol_match (Pistol Match Rounds)
 ------------------------------
 ATT = {}
 
-ATT.PrintName = "Match"
-ATT.FullName = "Pistol Match Rounds"
+ATT.PrintName = "att.ammo_pistol_match.name"
+ATT.FullName = "att.ammo_pistol_match.name.full"
 ATT.Icon = Material("entities/tacrp_att_ammo_pistol_match.png", "mips smooth")
-ATT.Description = "Bullets with improved range and accuracy."
+ATT.Description = "att.ammo_pistol_match.desc"
 ATT.Pros = {"stat.spread", "stat.range_max"}
 ATT.Cons = {"stat.hipfirespread", "stat.peekpenalty"}
 
@@ -669,14 +666,14 @@ TacRP.LoadAtt(ATT, "ammo_pistol_match")
 -- #endregion
 
 ------------------------------
--- #region ammo_rifle_match
+-- #region ammo_rifle_match (Rifle Match Rounds)
 ------------------------------
 ATT = {}
 
-ATT.PrintName = "Match"
-ATT.FullName = "Rifle Match Rounds"
+ATT.PrintName = "att.ammo_rifle_match.name"
+ATT.FullName = "att.ammo_rifle_match.name.full"
 ATT.Icon = Material("entities/tacrp_att_acc_match.png", "mips smooth")
-ATT.Description = "Bullets with greatly improved accuracy."
+ATT.Description = "att.ammo_rifle_match.desc"
 ATT.Pros = {"stat.spread", "stat.muzzlevelocity", "stat.bloomintensity"}
 ATT.Cons = {"stat.hipfirespread", "att.procon.limb"}
 
@@ -701,14 +698,14 @@ TacRP.LoadAtt(ATT, "ammo_rifle_match")
 -- #endregion
 
 ------------------------------
--- #region ammo_roulette
+-- #region ammo_roulette (Russian Roulette)
 ------------------------------
 ATT = {}
 
-ATT.PrintName = "Roulette"
-ATT.FullName = "Russian Roulette"
+ATT.PrintName = "att.ammo_roulette.name"
+ATT.FullName = "att.ammo_roulette.name.full"
 ATT.Icon = Material("entities/tacrp_att_acc_roulette.png", "mips smooth")
-ATT.Description = "A lethal game of chance. Spin the cylinder while loaded to reset the odds."
+ATT.Description = "att.ammo_roulette.desc"
 ATT.Pros = {}
 ATT.Cons = {"att.procon.onebullet"}
 ATT.Category = {"ammo_roulette"}
@@ -774,14 +771,14 @@ TacRP.LoadAtt(ATT, "ammo_roulette")
 -- #endregion
 
 ------------------------------
--- #region ammo_rpg_improvised
+-- #region ammo_rpg_improvised (RPG-7 Improvised Warhead)
 ------------------------------
 ATT = {}
 
-ATT.PrintName = "Improvised"
-ATT.FullName = "RPG-7 Improvised Warhead"
+ATT.PrintName = "att.ammo_rpg_improvised.name"
+ATT.FullName = "att.ammo_rpg_improvised.name.full"
 ATT.Icon = Material("entities/tacrp_att_ammo_rpg_improvised.png", "mips smooth")
-ATT.Description = "Straight from the bargain bin."
+ATT.Description = "att.ammo_rpg_improvised.desc"
 ATT.Pros = {"att.procon.refund", "att.procon.nosafety", "rating.mobility"}
 ATT.Cons = {"att.procon.projrng", "att.procon.failrng"}
 
@@ -810,14 +807,14 @@ TacRP.LoadAtt(ATT, "ammo_rpg_improvised")
 -- #endregion
 
 ------------------------------
--- #region ammo_rpg_mortar
+-- #region ammo_rpg_mortar (RPG-7 Mortar Warhead)
 ------------------------------
 ATT = {}
 
-ATT.PrintName = "Mortar"
-ATT.FullName = "RPG-7 Mortar Warhead"
+ATT.PrintName = "att.ammo_rpg_mortar.name"
+ATT.FullName = "att.ammo_rpg_mortar.name.full"
 ATT.Icon = Material("entities/tacrp_att_ammo_rpg_mortar.png", "mips smooth")
-ATT.Description = "A mortar with a booster stuck to it, for \"indirect fire\". Needs time to prime."
+ATT.Description = "att.ammo_rpg_mortar.desc"
 ATT.Pros = {"att.procon.radius"}
 ATT.Cons = {"att.procon.needprime"}
 
@@ -837,14 +834,14 @@ TacRP.LoadAtt(ATT, "ammo_rpg_mortar")
 -- #endregion
 
 ------------------------------
--- #region ammo_rpg_ratshot
+-- #region ammo_rpg_ratshot (RPG-7 Ratshot Warhead)
 ------------------------------
 ATT = {}
 
-ATT.PrintName = "Ratshot"
-ATT.FullName = "RPG-7 Ratshot Warhead"
+ATT.PrintName = "att.ammo_rpg_ratshot.name"
+ATT.FullName = "att.ammo_rpg_ratshot.name.full"
 ATT.Icon = Material("entities/tacrp_att_ammo_rpg_ratshot.png", "mips smooth")
-ATT.Description = "For rodents of unacceptable size."
+ATT.Description = "att.ammo_rpg_ratshot.desc"
 ATT.Pros = {"att.procon.airburst"}
 ATT.Cons = {"att.procon.timedfuse"}
 
@@ -863,14 +860,14 @@ TacRP.LoadAtt(ATT, "ammo_rpg_ratshot")
 -- #endregion
 
 ------------------------------
--- #region ammo_rpg_harpoon
+-- #region ammo_rpg_shovel (RPG-7 Shovel Warhead)
 ------------------------------
 ATT = {}
 
-ATT.PrintName = "Shovel"
-ATT.FullName = "RPG-7 Shovel Warhead"
+ATT.PrintName = "att.ammo_rpg_shovel.name"
+ATT.FullName = "att.ammo_rpg_shovel.name.full"
 ATT.Icon = Material("entities/tacrp_att_ammo_rpg_improvised.png", "mips smooth")
-ATT.Description = "Fire shovels, somehow. Either you're crazy, out of rockets, or both."
+ATT.Description = "att.ammo_rpg_shovel.desc"
 ATT.Pros = {"att.procon.shovel"}
 ATT.Cons = {"att.procon.shovel"}
 
@@ -881,7 +878,7 @@ ATT.SortOrder = 9
 
 ATT.Mult_HipFireSpreadPenalty = 0.5
 
-ATT.Override_ShootEnt = "tacrp_proj_rpg7_harpoon"
+ATT.Override_ShootEnt = "tacrp_proj_rpg7_shovel"
 ATT.Add_ShootingSpeedMult = 0.6
 ATT.Add_ReloadSpeedMult = 0.4
 
@@ -904,17 +901,17 @@ if engine.ActiveGamemode() == "terrortown" then
     ATT.Free = true
 end
 
-TacRP.LoadAtt(ATT, "ammo_rpg_harpoon")
+TacRP.LoadAtt(ATT, "ammo_rpg_shovel")
 -- #endregion
 
 ------------------------------
--- #region ammo_shotgun_bird
+-- #region ammo_shotgun_bird (Birtshot)
 ------------------------------
 ATT = {}
 
-ATT.PrintName = "Birdshot"
+ATT.PrintName = "att.ammo_shotgun_bird.name"
 ATT.Icon = Material("entities/tacrp_att_acc_bird.png", "mips smooth")
-ATT.Description = "Fire smaller pellets in a larger spread."
+ATT.Description = "att.ammo_shotgun_bird.desc"
 ATT.Pros = {"att.procon.moreproj", "stat.recoil"}
 ATT.Cons = {"stat.spread"}
 
@@ -942,14 +939,14 @@ TacRP.LoadAtt(ATT, "ammo_shotgun_bird")
 -- #endregion
 
 ------------------------------
--- #region ammo_shotgun_mag
+-- #region ammo_shotgun_mag (Magnum Buckshot)
 ------------------------------
 ATT = {}
 
-ATT.PrintName = "Magnum Buck"
-ATT.FullName = "Magnum Buckshot"
+ATT.PrintName = "att.ammo_shotgun_mag.name"
+ATT.FullName = "att.ammo_shotgun_mag.name.full"
 ATT.Icon = Material("entities/tacrp_att_acc_magnum.png", "mips smooth")
-ATT.Description = "High yield powder improves damage retention past point blank."
+ATT.Description = "att.ammo_shotgun_mag.desc"
 ATT.Pros = {"stat.range_min", "stat.muzzlevelocity"}
 ATT.Cons = {"stat.recoil", "rating.mobility"}
 
@@ -975,14 +972,14 @@ TacRP.LoadAtt(ATT, "ammo_shotgun_mag")
 -- #endregion
 
 ------------------------------
--- #region ammo_shotgun_slugs
+-- #region ammo_shotgun_slugs (Slug Shells)
 ------------------------------
 ATT = {}
 
-ATT.PrintName = "Slugs"
-ATT.FullName = "Slug Shells"
+ATT.PrintName = "att.ammo_shotgun_slugs.name"
+ATT.FullName = "att.ammo_shotgun_slugs.name.full"
 ATT.Icon = Material("entities/tacrp_att_acc_slugs.png", "mips smooth")
-ATT.Description = "Fire a single projectile for medium range shooting."
+ATT.Description = "att.ammo_shotgun_slugs.desc"
 ATT.Pros = {"stat.spread", "stat.range"}
 ATT.Cons = {"att.procon.1proj", "stat.hipfirespread"}
 
@@ -1077,14 +1074,14 @@ TacRP.LoadAtt(ATT, "ammo_shotgun_slugs2")
 -- #endregion
 
 ------------------------------
--- #region ammo_shotgun_triple
+-- #region ammo_shotgun_triple (triple Hit Shells)
 ------------------------------
 ATT = {}
 
-ATT.PrintName = "Triple Hit"
-ATT.FullName = "Triple Hit Shells"
+ATT.PrintName = "att.ammo_shotgun_triple.name"
+ATT.FullName = "att.ammo_shotgun_triple.name.full"
 ATT.Icon = Material("entities/tacrp_att_acc_triple.png", "mips smooth")
-ATT.Description = "Fire three projectiles for more accuracy."
+ATT.Description = "att.ammo_shotgun_triple.desc"
 ATT.Pros = {"stat.spread"}
 ATT.Cons = {"att.procon.3proj", "stat.hipfirespread"}
 
@@ -1178,14 +1175,14 @@ TacRP.LoadAtt(ATT, "ammo_shotgun_triple2")
 -- #endregion
 
 ------------------------------
--- #region ammo_subsonic
+-- #region ammo_subsonic (Subsonic Rounds)
 ------------------------------
 ATT = {}
 
-ATT.PrintName = "Subsonic"
-ATT.FullName = "Subsonic Rounds"
+ATT.PrintName = "att.ammo_subsonic.name"
+ATT.FullName = "att.ammo_subsonic.name.full"
 ATT.Icon = Material("entities/tacrp_att_acc_subsonic.png", "mips smooth")
-ATT.Description = "Bullets with reduced powder load."
+ATT.Description = "att.ammo_subsonic.desc"
 ATT.Pros = {"att.procon.notracer", "stat.recoil"}
 ATT.Cons = {"stat.muzzlevelocity", "stat.range_max"}
 
@@ -1203,14 +1200,14 @@ TacRP.LoadAtt(ATT, "ammo_subsonic")
 -- #endregion
 
 ------------------------------
--- #region ammo_surplus
+-- #region ammo_surplus (Surplus Rounds)
 ------------------------------
 ATT = {}
 
-ATT.PrintName = "Surplus"
-ATT.FullName = "Surplus Rounds"
+ATT.PrintName = "att.ammo_surplus_bullet.name"
+ATT.FullName = "att.ammo_surplus_bullet.name.full"
 ATT.Icon = Material("entities/tacrp_att_acc_surplus.png", "mips smooth")
-ATT.Description = "Unreliable old ammo, yet you keep finding them everywhere."
+ATT.Description = "att.ammo_surplus_bullet.desc"
 ATT.Pros = {"att.procon.refund", "stat.recoil"}
 ATT.Cons = {"att.procon.unreliable"}
 ATT.Category = {"ammo_rifle", "ammo_sniper", "ammo_pistol", "ammo_amr", "ammo_rifle_sub", "ammo_pistol_sub"}
@@ -1241,10 +1238,10 @@ TacRP.LoadAtt(ATT, "ammo_surplus")
 ------------------------------
 ATT = {}
 
-ATT.PrintName = "Surplus"
-ATT.FullName = "Surplus Shells"
+ATT.PrintName = "att.ammo_surplus_shell.name"
+ATT.FullName = "att.ammo_surplus_shell.name.full"
 ATT.Icon = Material("entities/tacrp_att_acc_surplus2.png", "mips smooth")
-ATT.Description = "Unreliable old ammo, yet you keep finding them everywhere."
+ATT.Description = "att.ammo_surplus_shell.desc"
 ATT.Pros = {"att.procon.refund", "stat.recoil"}
 ATT.Cons = {"att.procon.unreliable"}
 ATT.Category = {"ammo_shotgun", "ammo_shotgun2"}
@@ -1273,14 +1270,14 @@ TacRP.LoadAtt(ATT, "ammo_surplus2")
 -- #endregion
 
 ------------------------------
--- #region ammo_tmj
+-- #region ammo_tmj (Total Metal Jacket Rounds)
 ------------------------------
 ATT = {}
 
-ATT.PrintName = "TMJ"
-ATT.FullName = "Total Metal Jacket Rounds"
+ATT.PrintName = "att.ammo_tmj.name"
+ATT.FullName = "att.ammo_tmj.name.full"
 ATT.Icon = Material("entities/tacrp_att_acc_tmj.png", "mips smooth")
-ATT.Description = "Bullets with improved penetration capability."
+ATT.Description = "att.ammo_tmj.desc"
 ATT.Pros = {"att.procon.armor", "stat.penetration"}
 ATT.Cons = {"stat.recoilfirstshot", "stat.recoilmaximum"}
 ATT.Category = {"ammo_rifle", "ammo_sniper", "ammo_amr", "ammo_rifle_sub"}
@@ -1297,14 +1294,14 @@ TacRP.LoadAtt(ATT, "ammo_tmj")
 
 
 ------------------------------
--- #region ammo_buckshot_roulette
+-- #region ammo_buckshot_roulette (Buckshot Roulette)
 ------------------------------
 ATT = {}
 
-ATT.PrintName = "B. Roulette"
-ATT.FullName = "Buckshot Roulette"
+ATT.PrintName = "att.ammo_buckshotroulette.name"
+ATT.FullName = "att.ammo_buckshotroulette.name.full"
 ATT.Icon = Material("entities/tacrp_att_ammo_buckshot_roulette.png", "mips smooth")
-ATT.Description = "The shells enter the chamber in an unknown order."
+ATT.Description = "att.ammo_buckshotroulette.desc"
 ATT.Cons = {"att.procon.nopartialreloads"}
 ATT.Category = "ammo_shotgun"
 
@@ -1402,14 +1399,14 @@ TacRP.LoadAtt(ATT, "ammo_buckshotroulette")
 -- #endregion
 
 ------------------------------
--- #region ammo_shotgun_minishell
+-- #region ammo_shotgun_minishell (Minishells/Minis)
 ------------------------------
 ATT = {}
 
-ATT.PrintName = "Mini"
-ATT.FullName = "Minishells"
+ATT.PrintName = "att.ammo_shotgun_minishell.name"
+ATT.FullName = "att.ammo_shotgun_minishell.name.full"
 ATT.Icon = Material("entities/tacrp_att_ammo_minishell.png", "mips smooth")
-ATT.Description = "Short shells increase ammo capacity but don't hit as hard."
+ATT.Description = "att.ammo_shotgun_minishell.desc"
 ATT.Pros = {"stat.clipsize", "stat.recoilkick"}
 ATT.Cons = {"att.procon.lessproj"}
 
@@ -1432,14 +1429,14 @@ TacRP.LoadAtt(ATT, "ammo_shotgun_minishell")
 
 
 ------------------------------
--- #region ammo_shotgun_dragon
+-- #region ammo_shotgun_dragon (Dragon's Breath)
 ------------------------------
 ATT = {}
 
-ATT.PrintName = "Dragon"
-ATT.FullName = "Dragon's Breath"
+ATT.PrintName = "att.ammo_shotgun_dragon.name"
+ATT.FullName = "att.ammo_shotgun_dragon.name.full"
 ATT.Icon = Material("entities/tacrp_att_ammo_dragonsbreath.png", "mips smooth")
-ATT.Description = "Magnesium pellets set targets on fire, but have poor range and damage."
+ATT.Description = "att.ammo_shotgun_dragon.desc"
 ATT.Pros = {"att.procon.incendiary"}
 ATT.Cons = {"stat.damage", "stat.muzzlevelocity", "stat.spread"}
 
@@ -1465,14 +1462,14 @@ TacRP.LoadAtt(ATT, "ammo_shotgun_dragon")
 -- #endregion
 
 ------------------------------
--- #region ammo_shotgun_frag
+-- #region ammo_shotgun_frag (High-Explosive Fragmentation Shells)
 ------------------------------
 ATT = {}
 
-ATT.PrintName = "Frag"
-ATT.FullName = "High Explosive Fragmentation"
+ATT.PrintName = "att.ammo_shotgun_frag.name"
+ATT.FullName = "att.ammo_shotgun_frag.name.full"
 ATT.Icon = Material("entities/tacrp_att_ammo_frag12.png", "mips smooth")
-ATT.Description = "Explosive slugs deal area damage, but don't expect too much from them."
+ATT.Description = "att.ammo_shotgun_frag.desc"
 ATT.Pros = {"att.procon.explosive"}
 ATT.Cons = {"stat.damage", "stat.spread", "stat.muzzlevelocity"}
 
@@ -1504,14 +1501,14 @@ TacRP.LoadAtt(ATT, "ammo_shotgun_frag")
 
 
 ------------------------------
--- #region ammo_shotgun_breach
+-- #region ammo_shotgun_breach (Breaching Shells (Top-Loaded))
 ------------------------------
 ATT = {}
 
-ATT.PrintName = "Breach (Top)"
-ATT.FullName = "Breaching Shell (Top-loaded)"
+ATT.PrintName = "att.ammo_shotgun_breach.name"
+ATT.FullName = "att.ammo_shotgun_breach.name.full"
 ATT.Icon = Material("entities/tacrp_att_ammo_breaching.png", "mips smooth")
-ATT.Description = "Load the first round with a specialized breaching slug."
+ATT.Description = "att.ammo_shotgun_breach.desc"
 ATT.Pros = {"att.procon.doorbreach"}
 ATT.Cons = {"att.procon.firstround"}
 
@@ -1546,14 +1543,14 @@ TacRP.LoadAtt(ATT, "ammo_shotgun_breach")
 
 
 ------------------------------
--- #region ammo_stinger_saam
+-- #region ammo_stinger_saam (FIM-92 Stinger Semi-Active Missile)
 ------------------------------
 ATT = {}
 
-ATT.PrintName = "Semi-Active"
-ATT.FullName = "Stinger Semi-Active Missile"
+ATT.PrintName = "att.ammo_stinger_saam.name"
+ATT.FullName = "att.ammo_stinger_saam.name.full"
 ATT.Icon = Material("entities/tacrp_att_ammo_stinger.png", "mips smooth")
-ATT.Description = "Powerful missiles that lock rapidly but require constant guidance."
+ATT.Description = "att.ammo_stinger_saam.desc"
 ATT.Pros = {"att.procon.locktime", "stat.damage"}
 ATT.Cons = {"att.procon.semiactive"}
 
@@ -1577,14 +1574,14 @@ TacRP.LoadAtt(ATT, "ammo_stinger_saam")
 -- #endregion
 
 ------------------------------
--- #region ammo_stinger_qaam
+-- #region ammo_stinger_qaam (FIM-92 Stinger High Agility Missile)
 ------------------------------
 ATT = {}
 
-ATT.PrintName = "Agile"
-ATT.FullName = "Stinger High Agility Missile"
+ATT.PrintName = "att.ammo_stinger_qaam.name"
+ATT.FullName = "att.ammo_stinger_qaam.name.full"
 ATT.Icon = Material("entities/tacrp_att_ammo_stinger_qaam.png", "mips smooth")
-ATT.Description = "Highly maneuverable missile with a short range and long lock time."
+ATT.Description = "att.ammo_stinger_qaam.desc"
 ATT.Pros = {"att.procon.proj.turn"}
 ATT.Cons = {"att.procon.locktime"}
 
@@ -1607,14 +1604,14 @@ TacRP.LoadAtt(ATT, "ammo_stinger_qaam")
 -- #endregion
 
 ------------------------------
--- #region ammo_stinger_4aam
+-- #region ammo_stinger_4aam (FIM-92 Stinger Quad Missiles)
 ------------------------------
 ATT = {}
 
-ATT.PrintName = "Quad"
-ATT.FullName = "Stinger 4x Missile"
+ATT.PrintName = "att.ammo_stinger_4aam.name"
+ATT.FullName = "att.ammo_stinger_4aam.name.full"
 ATT.Icon = Material("entities/tacrp_att_ammo_stinger_4aam.png", "mips smooth")
-ATT.Description = "Guided cluster missiles maximize pressure to enemy pilots."
+ATT.Description = "att.ammo_stinger_4aam.desc"
 ATT.Pros = {"att.procon.moreproj", "att.procon.proj.turn"}
 ATT.Cons = {"stat.damage", "stat.spread", "att.procon.armdelay"}
 
@@ -1647,14 +1644,14 @@ TacRP.LoadAtt(ATT, "ammo_stinger_4aam")
 -- #endregion
 
 ------------------------------
--- #region ammo_stinger_apers
+-- #region ammo_stinger_apers (FIM-92 Stinger Anti-Personnel Missile)
 ------------------------------
 ATT = {}
 
-ATT.PrintName = "Killer Bee"
-ATT.FullName = "Stinger Anti-Personnel Missile"
+ATT.PrintName = "att.ammo_stinger_apers.name"
+ATT.FullName = "att.ammo_stinger_apers.name.full"
 ATT.Icon = Material("entities/tacrp_att_ammo_stinger_apers.png", "mips smooth")
-ATT.Description = "For rodents of unacceptable agility."
+ATT.Description = "att.ammo_stinger_apers.desc"
 ATT.Pros = {"att.procon.radius", "att.procon.proxfuse"}
 ATT.Cons = {"stat.damage", "att.procon.armdelay"}
 
@@ -1683,14 +1680,14 @@ TacRP.LoadAtt(ATT, "ammo_stinger_apers")
 
 
 ------------------------------
--- #region ammo_usp_9mm
+-- #region ammo_usp_9mm (HK USP 9×19mm Conversion/9×19mm Conversion/9x19)
 ------------------------------
 ATT = {}
 
-ATT.PrintName = "9x19mm"
-ATT.FullName = "USP 9x19mm Conversion"
+ATT.PrintName = "att.ammo_usp_9mm.name"
+ATT.FullName = "att.ammo_usp_9mm.name.full"
 ATT.Icon = Material("entities/tacrp_ex_usp.png", "mips smooth")
-ATT.Description = "Fire a smaller caliber round with higher capacity and firerate."
+ATT.Description = "att.ammo_usp_9mm.desc"
 ATT.Pros = {"stat.clipsize", "stat.rpm", "stat.recoil"}
 ATT.Cons = {"stat.damage"}
 
@@ -1720,16 +1717,17 @@ end
 TacRP.LoadAtt(ATT, "ammo_usp_9mm")
 -- #endregion
 
-
--- R700 ammos
+------------------------------
+-- #region ammo_r700_300winmag (R700 .300 Win Mag Mod Kit/.300 Win Mag)
+------------------------------
 ATT = {}
 
 ATT.Ignore = true
 
-ATT.PrintName = ".300 Win Mag"
-ATT.FullName = "R700 .300 Win Mag Mod Kit"
+ATT.PrintName = "att.ammo_r700_300wm.name"
+ATT.FullName = "att.ammo_r700_300wm.name.full"
 ATT.Icon = Material("entities/tacrp_att_ammo_300winmag.png", "mips smooth")
-ATT.Description = "Magnum cartridge with higher close range damage."
+ATT.Description = "att.ammo_r700_300wm.desc"
 ATT.Pros = {"stat.damage_max"}
 ATT.Cons = {"stat.damage_min", "stat.recoilkick", "stat.rpm"}
 

@@ -1,8 +1,7 @@
-ATT.PrintName = "Guard"
-ATT.FullName = "High Guard"
-
+ATT.PrintName = "att.melee_tech_block.name"
+ATT.FullName = "att.melee_tech_block.name.full"
 ATT.Icon = Material("entities/tacrp_att_melee_tech_block.png", "mips smooth")
-ATT.Description = "Defense is the best offense. It is, coinicidently, also the best defense."
+ATT.Description = "att.melee_tech_block.desc"
 ATT.Pros = { "att.pro.melee_tech_block1", "att.pro.melee_tech_block2" }
 
 ATT.Category = {"melee_tech"}

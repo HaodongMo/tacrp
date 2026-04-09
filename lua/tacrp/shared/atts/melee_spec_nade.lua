@@ -1,7 +1,7 @@
-ATT.PrintName = "Bomber"
-ATT.FullName = "Bombardier"
+ATT.PrintName = "att.melee_spec_nade.name"
+ATT.FullName = "att.melee_spec_nade.name.full"
 ATT.Icon = Material("entities/tacrp_att_melee_spec_nade.png", "mips smooth")
-ATT.Description = "Use jury rigged impact grenades to ruin someone's day."
+ATT.Description = "att.melee_spec_nade.desc"
 ATT.Pros = { "att.pro.melee_spec_nade1", "att.pro.melee_spec_nade2" }
 ATT.Cons = { "att.con.melee_spec_nade" }
 

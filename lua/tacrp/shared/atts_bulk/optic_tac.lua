@@ -3,13 +3,14 @@
 local ATT = {}
 
 ------------------------------
--- #region optic_8x
+-- #region optic_8x (Telescopic Scope)
 ------------------------------
 ATT = {}
 
-ATT.PrintName = "Telescopic"
+ATT.PrintName = "att.optic_8x.name"
+ATT.FullName = "att.optic_8x.name.full"
 ATT.Icon = Material("entities/tacrp_att_optic_8x.png", "mips smooth")
-ATT.Description = "Long-range sniper optic."
+ATT.Description = "att.optic_8x.desc"
 ATT.Pros = {"att.zoom.8"}
 
 ATT.Model = "models/weapons/tacint/addons/scope.mdl"
@@ -32,13 +33,14 @@ TacRP.LoadAtt(ATT, "optic_8x")
 -- #endregion
 
 ------------------------------
--- #region optic_acog
+-- #region optic_acog (ACOG Scope)
 ------------------------------
 ATT = {}
 
-ATT.PrintName = "ACOG"
+ATT.PrintName = "att.optic_acog.name"
+ATT.Fullname = "att.optic_acog.name.full"
 ATT.Icon = Material("entities/tacrp_att_optic_acog.png", "mips smooth")
-ATT.Description = "Medium range combat scope."
+ATT.Description = "att.optic_acog.desc"
 ATT.Pros = {"att.zoom.4"}
 
 ATT.Model = "models/weapons/tacint/addons/acog.mdl"
@@ -64,13 +66,14 @@ TacRP.LoadAtt(ATT, "optic_acog")
 -- #endregion
 
 ------------------------------
--- #region optic_elcan
+-- #region optic_elcan (ELCAN Scope)
 ------------------------------
 ATT = {}
 
-ATT.PrintName = "ELCAN"
+ATT.PrintName = "att.optic_elcan.name"
+ATT.FullName = "att.optic_elcan.name.full"
 ATT.Icon = Material("entities/tacrp_att_optic_elcan.png", "mips smooth")
-ATT.Description = "Low power combat scope."
+ATT.Description = "att.optic_elcan.desc"
 ATT.Pros = {"att.zoom.3.4"}
 
 -- model: https://gamebanana.com/mods/210646
@@ -97,13 +100,14 @@ TacRP.LoadAtt(ATT, "optic_elcan")
 -- #endregion
 
 ------------------------------
--- #region optic_holographic
+-- #region optic_holographic (Holographic Sight)
 ------------------------------
 ATT = {}
 
-ATT.PrintName = "Holographic"
+ATT.PrintName = "att.optic_holographic.name"
+ATT.FullName = "att.optic_holographic.name.full"
 ATT.Icon = Material("entities/tacrp_att_optic_holographic.png", "mips smooth")
-ATT.Description = "Boxy optic to assist aiming at close range."
+ATT.Description = "att.optic_holographic.desc"
 ATT.Pros = {"att.sight.1.5"}
 
 ATT.Model = "models/weapons/tacint/addons/holosight_hq.mdl"
@@ -131,13 +135,13 @@ TacRP.LoadAtt(ATT, "optic_holographic")
 -- #endregion
 
 ------------------------------
--- #region optic_irons
+-- #region optic_irons (Iron Sights)
 ------------------------------
 ATT = {}
 
-ATT.PrintName = "Iron Sights"
+ATT.PrintName = "att.optic_irons.name"
 ATT.Icon = Material("entities/tacrp_att_optic_irons.png", "mips smooth")
-ATT.Description = "Basic sights for added mobility."
+ATT.Description = "att.optic_irons.desc"
 ATT.Pros = {"rating.handling"}
 ATT.Cons = {"att.procon.noscope"}
 
@@ -161,13 +165,13 @@ TacRP.LoadAtt(ATT, "optic_irons")
 -- #endregion
 
 ------------------------------
--- #region optic_irons_sniper
+-- #region optic_irons_sniper (Iron Sights)
 ------------------------------
 ATT = {}
 
 ATT.PrintName = "att.optic_irons.name"
 ATT.Icon = Material("entities/tacrp_att_optic_irons.png", "mips smooth")
-ATT.Description = "Replace default scope for faster aim and better mobility."
+ATT.Description = "att.optic_irons_sniper.desc"
 ATT.Pros = {"rating.handling", "rating.mobility"}
 ATT.Cons = {"att.procon.noscope"}
 
@@ -194,13 +198,13 @@ TacRP.LoadAtt(ATT, "optic_irons_sniper")
 -- #endregion
 
 ------------------------------
--- #region optic_okp7
+-- #region optic_okp7 (OKP-7)
 ------------------------------
 ATT = {}
 
-ATT.PrintName = "OKP-7"
+ATT.PrintName = "att.optic_okp7.name"
 ATT.Icon = Material("entities/tacrp_att_optic_okp7.png", "mips smooth")
-ATT.Description = "Low profile reflex sight with minimal zoom."
+ATT.Description = "att.optic_okp7.desc"
 ATT.Pros = {"att.sight.1.25"}
 
 ATT.Model = "models/weapons/tacint/addons/okp7.mdl"
@@ -228,13 +232,14 @@ TacRP.LoadAtt(ATT, "optic_okp7")
 -- #endregion
 
 ------------------------------
--- #region optic_rds2
+-- #region optic_rds2 (Red Dot Sight)
 ------------------------------
 ATT = {}
 
-ATT.PrintName = "Red Dot"
-ATT.Icon = Material("entities/tacrp_att_optic_rds2.png", "mips smooth")
-ATT.Description = "Open reflex sight with a clear view."
+ATT.PrintName = "att.optic_rds.name"
+ATT.FullName = "att.optic_rds.name.full"
+ATT.Icon = Material("entities/tacrp_att_optic_rds.png", "mips smooth")
+ATT.Description = "att.optic_rds.desc"
 ATT.Pros = {"att.sight.1.25"}
 
 ATT.Model = "models/weapons/tacint/addons/rds2.mdl"
@@ -262,13 +267,14 @@ TacRP.LoadAtt(ATT, "optic_rds2")
 -- #endregion
 
 ------------------------------
--- #region optic_rds
+-- #region optic_rds (Aimpoint Sight)
 ------------------------------
 ATT = {}
 
-ATT.PrintName = "Aimpoint"
-ATT.Icon = Material("entities/tacrp_att_optic_rds.png", "mips smooth")
-ATT.Description = "Tube optic to assist aiming at close range."
+ATT.PrintName = "att.optic_aimpoint.name"
+ATT.FullName = "att.optic_aimpoint.name.full"
+ATT.Icon = Material("entities/tacrp_att_optic_aimpoint.png", "mips smooth")
+ATT.Description = "att.optic_aimpoint.desc"
 ATT.Pros = {"att.sight.1.75"}
 
 ATT.Model = "models/weapons/tacint/addons/reddot_hq.mdl"
@@ -296,13 +302,13 @@ TacRP.LoadAtt(ATT, "optic_rds")
 -- #endregion
 
 ------------------------------
--- #region optic_rmr
+-- #region optic_rmr (RMR Reflex Sight (Pistol))
 ------------------------------
 ATT = {}
 
-ATT.PrintName = "RMR"
+ATT.PrintName = "att.optic_rmr.name"
 ATT.Icon = Material("entities/tacrp_att_optic_rmr.png", "mips smooth")
-ATT.Description = "Low profile optic sight for pistols."
+ATT.Description = "att.optic_rmr.desc"
 ATT.Pros = {"att.sight.1"}
 
 ATT.InstalledElements = {"optic_rmr"}
@@ -335,10 +341,10 @@ TacRP.LoadAtt(ATT, "optic_rmr")
 ------------------------------
 ATT = {}
 
-ATT.PrintName = "RMR"
-ATT.PrintName = "RMR"
+ATT.PrintName = "att.optic_rmr.name"
+ATT.FullName = "att.optic_rmr.name.full"
 ATT.Icon = Material("entities/tacrp_att_optic_rmr.png", "mips smooth")
-ATT.Description = "Low profile optic sight."
+ATT.Description = "att.optic_rmr_rifle.desc"
 ATT.Pros = {"att.sight.1"}
 
 ATT.Model = "models/weapons/tacint/addons/optic_rmr_hq.mdl"
@@ -371,13 +377,14 @@ TacRP.LoadAtt(ATT, "optic_rmr_rifle")
 -- #endregion
 
 ------------------------------
--- #region optic_shortdot
+-- #region optic_shortdot (Short Dot Scope)
 ------------------------------
 ATT = {}
 
-ATT.PrintName = "Short Dot"
+ATT.PrintName = "att.optic_shortdot.name"
+ATT.FullName = "att.optic_shortdot.name.full"
 ATT.Icon = Material("entities/tacrp_att_optic_shortdot.png", "mips smooth")
-ATT.Description = "Compact optic scope with decent magnification."
+ATT.Description = "att.optic_shortdot.desc"
 ATT.Pros = {"att.zoom.5"}
 
 -- model: gamebanana
@@ -404,13 +411,13 @@ TacRP.LoadAtt(ATT, "optic_shortdot")
 -- #endregion
 
 ------------------------------
--- #region tac_cornershot
+-- #region tac_cornershot (Corner-Cam)
 ------------------------------
 ATT = {}
 
-ATT.PrintName = "Corner-Cam"
+ATT.PrintName = "att.tac_cornershot.name"
 ATT.Icon = Material("entities/tacrp_att_tac_cornershot.png", "mips smooth")
-ATT.Description = "Displays point of aim while blindfiring."
+ATT.Description = "att.tac_cornershot.desc"
 ATT.Pros = {"att.procon.cornershot"}
 
 ATT.Model = "models/weapons/tacint/addons/cornershot_mounted.mdl"
@@ -427,13 +434,13 @@ TacRP.LoadAtt(ATT, "tac_cornershot")
 -- #endregion
 
 ------------------------------
--- #region tac_dmic
+-- #region tac_dmic (Radar)
 ------------------------------
 ATT = {}
 
-ATT.PrintName = "Radar"
+ATT.PrintName = "att.tac_dmic.name"
 ATT.Icon = Material("entities/tacrp_att_tac_dmic.png", "mips smooth")
-ATT.Description = "Detects the position of nearby targets, but emits sound."
+ATT.Description = "att.tac_dmic.desc"
 ATT.Pros = {"att.procon.dmic"}
 ATT.Cons = {"att.procon.audible"}
 
@@ -559,9 +566,9 @@ TacRP.LoadAtt(ATT, "tac_dmic")
 ------------------------------
 ATT = {}
 
-ATT.PrintName = "Flashlight"
+ATT.PrintName = "att.tac_flashlight.name"
 ATT.Icon = Material("entities/tacrp_att_tac_flashlight.png", "mips smooth")
-ATT.Description = "Emits a strong beam of light, blinding anyone staring into it."
+ATT.Description = "att.tac_flashlight.desc"
 ATT.Pros = {"att.procon.flashlight", "att.procon.blind"}
 ATT.Cons = {"att.procon.visible"}
 
@@ -589,9 +596,9 @@ TacRP.LoadAtt(ATT, "tac_flashlight")
 ------------------------------
 ATT = {}
 
-ATT.PrintName = "Laser"
+ATT.PrintName = "att.tac_laser.name"
 ATT.Icon = Material("entities/tacrp_att_tac_laser.png", "mips smooth")
-ATT.Description = "Emits a narrow red beam and dot, indicating where the gun is pointed at."
+ATT.Description = "att.tac_laser.desc"
 ATT.Pros = {"att.procon.laser"}
 ATT.Cons = {"att.procon.visible"}
 
@@ -614,14 +621,14 @@ TacRP.LoadAtt(ATT, "tac_laser")
 
 
 ------------------------------
--- #region tac_combo
+-- #region tac_combo (Laser-Light Combo)
 ------------------------------
 ATT = {}
 
-ATT.FullName = "Laser-Light Combo"
-ATT.PrintName = "Combo"
+ATT.PrintName = "att.tac_combo.name"
+ATT.FullName = "att.tac_combo.name.full"
 ATT.Icon = Material("entities/tacrp_att_tac_combo.png", "mips smooth")
-ATT.Description = "Emits a green laser and flashlight. The light is too weak to blind others."
+ATT.Description = "att.tac_combo.desc"
 ATT.Pros = {"att.procon.laser", "att.procon.flashlight"}
 ATT.Cons = {"att.procon.visible"}
 
@@ -652,9 +659,9 @@ TacRP.LoadAtt(ATT, "tac_combo")
 ------------------------------
 ATT = {}
 
-ATT.PrintName = "Rangefinder"
+ATT.PrintName = "att.tac_rangefinder.name"
 ATT.Icon = Material("entities/tacrp_att_tac_rangefinder.png", "mips smooth")
-ATT.Description = "Measures ballistic performance of the weapon."
+ATT.Description = "att.tac_rangefinder.desc"
 ATT.Pros = {"att.procon.rf1", "att.procon.rf2"}
 
 ATT.Model = "models/weapons/tacint/addons/rangefinder_mounted.mdl"
@@ -855,13 +862,13 @@ TacRP.LoadAtt(ATT, "tac_rangefinder")
 -- #endregion
 
 ------------------------------
--- #region tac_spreadgauge
+-- #region tac_spreadgauge (Spread Gauge)
 ------------------------------
 ATT = {}
 
-ATT.PrintName = "Spread Gauge"
+ATT.PrintName = "att.tac_spreadgauge.name"
 ATT.Icon = Material("entities/tacrp_att_tac_rangefinder.png", "mips smooth")
-ATT.Description = "Measures weapon stability from sway and bloom."
+ATT.Description = "att.tac_spreadgauge.desc"
 ATT.Pros = {"att.procon.gauge1", "att.procon.gauge2"}
 
 ATT.Model = "models/weapons/tacint/addons/rangefinder_mounted.mdl"
@@ -1030,14 +1037,14 @@ TacRP.LoadAtt(ATT, "tac_spreadgauge")
 -- #endregion
 
 ------------------------------
--- #region tac_magnifier
+-- #region tac_magnifier (Variable Zoom Optic (2x)/2x Zoom)
 ------------------------------
 ATT = {}
 
-ATT.PrintName = "2x Zoom"
-ATT.FullName = "Variable Zoom Optic (2x)"
+ATT.PrintName = "att.tac_magnifier.name"
+ATT.FullName = "att.tac_magnifier.name.full"
 ATT.Icon = Material("entities/tacrp_att_tac_magnifier.png", "mips smooth")
-ATT.Description = "Allows all optics to access a 2x zoom level, allowing them to zoom in or out."
+ATT.Description = "att.tac_magnifier.desc"
 ATT.Pros = {"att.procon.magnifier"}
 ATT.Cons = {"att.procon.needscope"}
 
@@ -1063,14 +1070,14 @@ TacRP.LoadAtt(ATT, "tac_magnifier")
 -- #endregion
 
 ------------------------------
--- #region tac_bullet
+-- #region tac_bullet (Emergency Bullet/Emrg. Bullet)
 ------------------------------
 ATT = {}
 
-ATT.FullName = "Emergency Bullet"
-ATT.PrintName = "Emrg. Bullet"
+ATT.FullName = "att.tac_bullet.name"
+ATT.PrintName = "att.tac_bullet.name.full"
 ATT.Icon = Material("entities/tacrp_att_tac_bullet.png", "mips smooth")
-ATT.Description = "Press the tactical key to quickly load a single bullet for emergencies."
+ATT.Description = "att.tac_bullet.desc"
 ATT.Pros = {"att.procon.bullet"}
 ATT.Cons = {}
 
@@ -1116,14 +1123,14 @@ TacRP.LoadAtt(ATT, "tac_bullet")
 -- #endregion
 
 ------------------------------
--- #region tac_thermal
+-- #region tac_thermal (ZUMQFY Thermal Imaging Device/Thermal Cam)
 ------------------------------
 ATT = {}
 
-ATT.PrintName = "Thermal-Cam"
-ATT.FullName = "ZUMQFY Thermal Imaging Device"
+ATT.PrintName = "att.tac_thermal.name"
+ATT.FullName = "att.tac_thermal.name.full"
 ATT.Icon = Material("entities/tacrp_att_tac_cornershot.png", "mips smooth")
-ATT.Description = "Display a thermal overlay which fuses with the main view while peeking."
+ATT.Description = "att.tac_thermal.desc"
 ATT.Pros = {"att.procon.thermal"}
 ATT.Cons = {} --{"att.procon.blurpeek"}
 
@@ -1147,14 +1154,14 @@ TacRP.LoadAtt(ATT, "tac_thermal")
 -- #endregion
 
 ------------------------------
--- toploader_stripper_clip
+-- toploader_stripper_clip (Stripper Clip)
 ------------------------------
 ATT = {}
 
-ATT.PrintName = "Clip"
-ATT.FullName = "Stripper Clip"
+ATT.PrintName = "att.tac_stripper.name"
+ATT.FullName = "att.tac_stripper.name.full"
 ATT.Icon = Material("entities/tacrp_att_optic_stripperclip.png", "mips smooth")
-ATT.Description = "Use stripper clips to improve reload speed."
+ATT.Description = "att.tac_stripper.desc"
 ATT.Pros = {"Reloads all rounds at once"}
 ATT.Cons = {"No single-round reloads", "Incompatible with optics"}
 

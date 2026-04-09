@@ -3,14 +3,14 @@
 local ATT = {}
 
 ------------------------------
--- #region acc_bipod
+-- #region acc_bipod (Bipod)
 ------------------------------
 ATT = {}
 ATT.Ignore = true
 
-ATT.PrintName = "Bipod"
+ATT.PrintName = "att.acc_bipod.name"
 ATT.Icon = Material("entities/tacrp_att_acc_bipod.png", "mips smooth")
-ATT.Description = "Foldable support that stabilizes the weapon when deployed."
+ATT.Description = "att.acc_bipod.desc"
 ATT.Pros = {"stat.recoilcrouch", "stat.swaycrouch"}
 
 ATT.Category = "acc_bipod"
@@ -27,13 +27,13 @@ TacRP.LoadAtt(ATT, "acc_bipod")
 -- #endregion
 
 ------------------------------
--- #region acc_brace
+-- #region acc_brace (Pistol Brace)
 ------------------------------
 ATT = {}
 
-ATT.PrintName = "Pistol Brace"
+ATT.PrintName = "att.acc_brace.name"
 ATT.Icon = Material("entities/tacrp_att_acc_brace.png", "mips smooth")
-ATT.Description = "Turns your pistol into a rifle. The ATF is gonna get your ass."
+ATT.Description = "att.acc_brace.desc"
 ATT.Pros = {"rating.control", "rating.stability"}
 ATT.Cons = {"rating.handling", "rating.maneuvering"}
 
@@ -61,13 +61,13 @@ TacRP.LoadAtt(ATT, "acc_brace")
 -- #endregion
 
 ------------------------------
--- #region acc_cheekrest
+-- #region acc_cheekrest (Cheek Rest)
 ------------------------------
 ATT = {}
 
-ATT.PrintName = "Cheek Rest"
+ATT.PrintName = "att.acc_cheekrest.name"
 ATT.Icon = Material("entities/tacrp_att_acc_cheekrest.png", "mips smooth")
-ATT.Description = "Stabilizes your head while aiming down sights, reducing sway."
+ATT.Description = "att.acc_cheekrest.desc"
 ATT.Pros = {"stat.scopedsway", "stat.bloomintensity"}
 
 ATT.Category = "acc_sling"
@@ -81,13 +81,14 @@ TacRP.LoadAtt(ATT, "acc_cheekrest")
 -- #endregion
 
 ------------------------------
--- #region acc_conceal
+-- #region acc_conceal (Concealed Carry Holster/Concealment)
 ------------------------------
 ATT = {}
 
-ATT.PrintName = "Concealment"
+ATT.PrintName = "att.acc_concealment.name"
+ATT.FullName = "att.acc_concealment.name.full"
 ATT.Icon = Material("entities/tacrp_att_acc_conceal.png", "mips smooth")
-ATT.Description = "Carry the weapon discretely, hiding it from view when not held."
+ATT.Description = "att.acc_concealment.desc"
 ATT.Pros = {"att.procon.conceal"}
 
 ATT.Category = "acc_holster"
@@ -102,106 +103,12 @@ TacRP.LoadAtt(ATT, "acc_conceal")
 -- #endregion
 
 ------------------------------
--- #region acc_dual_ergo
+-- #region acc_ergo (Ergonomic Grip/Ergo Grip)
 ------------------------------
 ATT = {}
 
-ATT.PrintName = "Ergo Grip"
-ATT.FullName = "Ergonomic Grip"
-ATT.Icon = Material("entities/tacrp_att_acc_ergo.png", "mips smooth")
-ATT.Description = "Grooved grip makes it easier to move while shooting two guns."
-
-ATT.Category = "acc_dual"
-ATT.InvAtt = "acc_ergo"
-
-ATT.SortOrder = 2
-
-ATT.Pros = {"stat.shootingspeed"}
-ATT.Add_ShootingSpeedMult = 0.08
-
-TacRP.LoadAtt(ATT, "acc_dual_ergo")
--- #endregion
-
-------------------------------
--- #region acc_dual_quickdraw
-------------------------------
-ATT = {}
-
-ATT.PrintName = "Quickdraw"
-ATT.FullName = "Quickdraw Holster"
-ATT.Icon = Material("entities/tacrp_att_acc_quickdraw.png", "mips smooth")
-ATT.Description = "A pair of strapless holster to quickly draw the weapons and hasten loading."
-ATT.Pros = {"stat.deploytime", "stat.reloadtime"}
-
-ATT.Category = "acc_dual"
-ATT.InvAtt = "acc_quickdraw"
-
-ATT.SortOrder = 4
-
-ATT.Mult_DeployTimeMult = 0.75
-ATT.Mult_HolsterTimeMult = 0.5
-
-ATT.Mult_ReloadTimeMult = 0.95
-
-ATT.TryUnholster = true
-
-TacRP.LoadAtt(ATT, "acc_dual_quickdraw")
--- #endregion
-
-------------------------------
--- #region acc_dual_skel
-------------------------------
-ATT = {}
-
-ATT.PrintName = "Light Grip"
-ATT.FullName = "Lightweight Grip"
-ATT.Icon = Material("entities/tacrp_att_acc_skel.png", "mips smooth")
-ATT.Description = "Skeletonized grip makes the guns lighter and easier to move around with."
-
-ATT.Category = "acc_dual"
-ATT.InvAtt = "acc_skel"
-
-ATT.SortOrder = 2.1
-
-ATT.Pros = {"stat.movespeed", "stat.reloadspeed"}
-ATT.Add_MoveSpeedMult = 0.08
-ATT.Add_ReloadSpeedMult = 0.1
-
-TacRP.LoadAtt(ATT, "acc_dual_skel")
--- #endregion
-
-------------------------------
--- #region acc_duffelbag
-------------------------------
-ATT = {}
-
-ATT.PrintName = "Gun Bag"
-ATT.Icon = Material("entities/tacrp_dufflebag.png", "mips smooth")
-ATT.Description = "Hide the gun in a bag so you don't cause mass panic."
-ATT.Pros = {"Conceal weapon in bag"}
-
-ATT.Category = "acc_duffle"
-
-ATT.SortOrder = 8
-
-ATT.Override_HolsterVisible = true
-ATT.HolsterModel = "models/jessev92/payday2/item_bag_loot.mdl"
-ATT.HolsterSlot = TacRP.HOLSTER_SLOT_BACK
-ATT.HolsterPos = Vector(7, -2, 0)
-ATT.HolsterAng = Angle(10, 90, 90)
-
-ATT.Ignore = true
-
-TacRP.LoadAtt(ATT, "acc_duffelbag")
--- #endregion
-
-------------------------------
--- #region acc_ergo
-------------------------------
-ATT = {}
-
-ATT.PrintName = "att.acc_dual_ergo.name"
-ATT.FullName = "att.acc_dual_ergo.name.full"
+ATT.PrintName = "att.acc_ergo.name"
+ATT.FullName = "att.acc_ergo.name.full"
 ATT.Icon = Material("entities/tacrp_att_acc_ergo.png", "mips smooth")
 ATT.Description = "Grooved grip makes aiming faster and moving while shooting easier."
 
@@ -224,13 +131,161 @@ TacRP.LoadAtt(ATT, "acc_ergo")
 -- #endregion
 
 ------------------------------
--- #region acc_extendedbelt
+-- #region acc_dual_ergo
 ------------------------------
 ATT = {}
 
-ATT.PrintName = "Box Extender"
+ATT.PrintName = "att.acc_ergo.name"
+ATT.FullName = "att.acc_ergo.name.full"
+ATT.Icon = Material("entities/tacrp_att_acc_ergo.png", "mips smooth")
+ATT.Description = "att.acc_dual_ergo.name.desc"
+
+ATT.Category = "acc_dual"
+ATT.InvAtt = "acc_ergo"
+
+ATT.SortOrder = 2
+
+ATT.Pros = {"stat.shootingspeed"}
+ATT.Add_ShootingSpeedMult = 0.08
+
+TacRP.LoadAtt(ATT, "acc_dual_ergo")
+-- #endregion
+
+------------------------------
+-- #region acc_quickdraw (Quickdraw Holster)
+------------------------------
+ATT = {}
+
+ATT.PrintName = "att.acc_quickdraw.name"
+ATT.FullName = "att.acc_quickdraw.name.full"
+ATT.Icon = Material("entities/tacrp_att_acc_quickdraw.png", "mips smooth")
+ATT.Description = "att.acc_quickdraw.name.desc"
+ATT.Pros = {"stat.deploytime", "stat.reloadtime"}
+
+ATT.Category = "acc_holster"
+
+ATT.SortOrder = 4
+
+--ATT.Mult_DeployTimeMult = 0.6
+ATT.Mult_HolsterTimeMult = 0.5
+ATT.Mult_ReloadTimeMult = 0.925
+
+ATT.TryUnholster = true
+
+TacRP.LoadAtt(ATT, "acc_quickdraw")
+-- #endregion
+
+------------------------------
+-- #region acc_dual_quickdraw
+------------------------------
+ATT = {}
+
+ATT.PrintName = "att.acc_quickdraw.name"
+ATT.FullName = "att.acc_dual_quickdraw.name.full"
+ATT.Icon = Material("entities/tacrp_att_acc_quickdraw.png", "mips smooth")
+ATT.Description = "att.acc_dual_quickdraw.name.desc"
+ATT.Pros = {"stat.deploytime", "stat.reloadtime"}
+
+ATT.Category = "acc_dual"
+ATT.InvAtt = "acc_quickdraw"
+
+ATT.SortOrder = 4
+
+ATT.Mult_DeployTimeMult = 0.75
+ATT.Mult_HolsterTimeMult = 0.5
+
+ATT.Mult_ReloadTimeMult = 0.95
+
+ATT.TryUnholster = true
+
+TacRP.LoadAtt(ATT, "acc_dual_quickdraw")
+-- #endregion
+
+------------------------------
+-- #region acc_skel (Lightweight Grip/Light Grip)
+------------------------------
+ATT = {}
+
+ATT.PrintName = "att.acc_skel.name"
+ATT.FullName = "att.acc_skel.name.full"
+ATT.Icon = Material("entities/tacrp_att_acc_skel.png", "mips smooth")
+ATT.Description = "att.acc_skel.desc"
+ATT.Pros = {"Sighted Speed", "Sprint To Fire Time"}
+
+ATT.Category = "acc"
+
+ATT.SortOrder = 2.1
+
+if engine.ActiveGamemode() == "terrortown" then
+    ATT.Pros = {"stat.sightedspeed"}
+
+    ATT.Add_SightedSpeedMult = 0.12
+else
+    ATT.Pros = {"stat.sightedspeed", "stat.sprinttofire"}
+
+    ATT.Add_SightedSpeedMult = 0.08
+    ATT.Mult_SprintToFireTime = 0.85
+end
+
+TacRP.LoadAtt(ATT, "acc_skel")
+-- #endregion
+
+------------------------------
+-- #region acc_dual_skel
+------------------------------
+ATT = {}
+
+ATT.PrintName = "att.acc_skel.name"
+ATT.FullName = "att.acc_skel.name.full"
+ATT.Icon = Material("entities/tacrp_att_acc_skel.png", "mips smooth")
+ATT.Description = "att.acc_dual_skel.desc"
+
+ATT.Category = "acc_dual"
+ATT.InvAtt = "acc_skel"
+
+ATT.SortOrder = 2.1
+
+ATT.Pros = {"stat.movespeed", "stat.reloadspeed"}
+ATT.Add_MoveSpeedMult = 0.08
+ATT.Add_ReloadSpeedMult = 0.1
+
+TacRP.LoadAtt(ATT, "acc_dual_skel")
+-- #endregion
+
+------------------------------
+-- #region acc_duffelbag (Gun Bag)
+------------------------------
+ATT = {}
+
+ATT.PrintName = "att.acc_duffelbag.name"
+ATT.Icon = Material("entities/tacrp_dufflebag.png", "mips smooth")
+ATT.Description = "att.acc_duffelbag.desc"
+ATT.Pros = {"Conceal weapon in bag"}
+
+ATT.Category = "acc_duffle"
+
+ATT.SortOrder = 8
+
+ATT.Override_HolsterVisible = true
+ATT.HolsterModel = "models/jessev92/payday2/item_bag_loot.mdl"
+ATT.HolsterSlot = TacRP.HOLSTER_SLOT_BACK
+ATT.HolsterPos = Vector(7, -2, 0)
+ATT.HolsterAng = Angle(10, 90, 90)
+
+ATT.Ignore = true
+
+TacRP.LoadAtt(ATT, "acc_duffelbag")
+-- #endregion
+
+------------------------------
+-- #region acc_extendedbelt (Box Extender)
+------------------------------
+ATT = {}
+
+ATT.PrintName = "att.acc_extendedbelt.name"
+ATT.Fullname = "att.acc_extendedbelt.name.full"
 ATT.Icon = Material("entities/tacrp_att_acc_extendedbelt.png", "mips smooth")
-ATT.Description = "Increase ammo capacity for machine guns significantly."
+ATT.Description = "att.acc_extendedbelt.desc"
 ATT.Pros = {"stat.clipsize"}
 ATT.Cons = {"stat.reloadtime"}
 
@@ -245,7 +300,7 @@ TacRP.LoadAtt(ATT, "acc_extendedbelt")
 -- #endregion
 
 ------------------------------
--- #region acc_extmag_dual
+-- #region acc_extmag_dual (Extended Mag)
 ------------------------------
 ATT = {}
 
@@ -461,7 +516,7 @@ TacRP.LoadAtt(ATT, "acc_extmag_shotgun_mag")
 -- #endregion
 
 ------------------------------
--- #region acc_extmag_shotgun_tube
+-- #region acc_extmag_shotgun_tube (Tube Extender)
 ------------------------------
 ATT = {}
 
@@ -536,13 +591,13 @@ TacRP.LoadAtt(ATT, "acc_extmag_sniper")
 -- #endregion
 
 ------------------------------
--- #region acc_foldstock
+-- #region acc_foldstock (Fold Stock)
 ------------------------------
 ATT = {}
 
-ATT.PrintName = "Fold Stock"
+ATT.PrintName = "att.acc_foldstock.name"
 ATT.Icon = Material("entities/tacrp_att_acc_foldstock.png", "mips smooth")
-ATT.Description = "Keep stock folded, improving handling significantly at the cost of recoil."
+ATT.Description = "att.acc_foldstock.desc"
 ATT.Pros = {"rating.handling", "rating.maneuvering"}
 ATT.Cons = {"stat.recoilkick", "stat.scopedsway"}
 
@@ -579,13 +634,13 @@ TacRP.LoadAtt(ATT, "acc_foldstock")
 -- #endregion
 
 ------------------------------
--- #region acc_foldstock2
+-- #region acc_foldstock2 (Adjust Stock)
 ------------------------------
 ATT = {}
 
-ATT.PrintName = "Adjust Stock"
+ATT.PrintName = "att.acc_foldstock2.name"
 ATT.Icon = Material("entities/tacrp_att_acc_foldstock.png", "mips smooth")
-ATT.Description = "Shorten stock to improve handling somewhat at the cost of recoil."
+ATT.Description = "att.acc_foldstock2.name"
 ATT.Pros = {"rating.handling", "rating.maneuvering"}
 ATT.Cons = {"stat.recoilkick", "stat.scopedsway"}
 
@@ -620,13 +675,13 @@ TacRP.LoadAtt(ATT, "acc_foldstock2")
 -- #endregion
 
 ------------------------------
--- #region acc_pad
+-- #region acc_pad (Recoil Pad)
 ------------------------------
 ATT = {}
 
-ATT.PrintName = "Recoil Pad"
+ATT.PrintName = "att.acc_pad.name"
 ATT.Icon = Material("entities/tacrp_att_acc_pad.png", "mips smooth")
-ATT.Description = "Rubber pad attached to the end of the stock."
+ATT.Description = "att.acc_pad.desc"
 ATT.Pros = {"stat.recoilkick"}
 
 ATT.Category = "acc_sling"
@@ -642,68 +697,13 @@ TacRP.LoadAtt(ATT, "acc_pad")
 -- #endregion
 
 ------------------------------
--- #region acc_quickdraw
+-- #region acc_sling (Sling)
 ------------------------------
 ATT = {}
 
-ATT.PrintName = "att.acc_dual_quickdraw.name"
-ATT.FullName = "att.acc_dual_quickdraw.name.full"
-ATT.Icon = Material("entities/tacrp_att_acc_quickdraw.png", "mips smooth")
-ATT.Description = "Strapless holster with magazine pouches for quick drawing and loading."
-ATT.Pros = {"stat.deploytime", "stat.reloadtime"}
-
-ATT.Category = "acc_holster"
-
-ATT.SortOrder = 4
-
---ATT.Mult_DeployTimeMult = 0.6
-ATT.Mult_HolsterTimeMult = 0.5
-ATT.Mult_ReloadTimeMult = 0.925
-
-ATT.TryUnholster = true
-
-TacRP.LoadAtt(ATT, "acc_quickdraw")
--- #endregion
-
-------------------------------
--- #region acc_skel
-------------------------------
-ATT = {}
-
-ATT.PrintName = "att.acc_dual_skel.name"
-ATT.FullName = "att.acc_dual_skel.name.full"
-ATT.Icon = Material("entities/tacrp_att_acc_skel.png", "mips smooth")
-ATT.Description = "Skeletonized grip makes the weapon faster to raise and keep raised."
-ATT.Pros = {"Sighted Speed", "Sprint To Fire Time"}
-
-ATT.Category = "acc"
-
-ATT.SortOrder = 2.1
-
-
-
-if engine.ActiveGamemode() == "terrortown" then
-    ATT.Pros = {"stat.sightedspeed"}
-
-    ATT.Add_SightedSpeedMult = 0.12
-else
-    ATT.Pros = {"stat.sightedspeed", "stat.sprinttofire"}
-
-    ATT.Add_SightedSpeedMult = 0.08
-    ATT.Mult_SprintToFireTime = 0.85
-end
-
-TacRP.LoadAtt(ATT, "acc_skel")
--- #endregion
-
-------------------------------
--- #region acc_sling
-------------------------------
-ATT = {}
-
-ATT.PrintName = "Sling"
+ATT.PrintName = "att.acc_sling.name"
 ATT.Icon = Material("entities/tacrp_att_acc_sling.png", "mips smooth")
-ATT.Description = "Attach a strap to the weapon, making it easier to draw and reload."
+ATT.Description = "att.acc_sling.desc"
 ATT.Pros = {"stat.deploytime", "stat.reloadtime"}
 
 ATT.Category = {"acc_sling", "acc_slingonly"}
@@ -716,4 +716,3 @@ ATT.Mult_ReloadTimeMult = 0.925
 
 TacRP.LoadAtt(ATT, "acc_sling")
 -- #endregion
-

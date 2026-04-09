@@ -1,7 +1,7 @@
-ATT.PrintName = "Throw"
-ATT.FullName = "Knife Throw"
+ATT.PrintName = "att.melee_tech_throw.name"
+ATT.FullName = "att.melee_tech_throw.name.full"
 ATT.Icon = Material("entities/tacrp_att_melee_tech_throw.png", "mips smooth")
-ATT.Description = "Bar trick turned lethal."
+ATT.Description = "att.melee_tech_throw.desc"
 ATT.Pros = { "att.pro.melee_tech_throw1", "att.pro.melee_tech_throw2", "att.pro.melee_tech_throw3", "att.pro.melee_tech_throw4" }
 
 ATT.Category = {"melee_tech"}

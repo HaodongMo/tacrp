@@ -1,6 +1,6 @@
-ATT.PrintName = "Ninja"
+ATT.PrintName = "att.melee_spec_ninja.name"
 ATT.Icon = Material("entities/tacrp_att_melee_spec_ninja.png", "mips smooth")
-ATT.Description = "Disrupt your enemies and strike with the element of surprise."
+ATT.Description = "att.melee_spec_ninja.desc"
 ATT.Pros = { "att.pro.melee_spec_ninja1", "att.pro.melee_spec_ninja2", "att.pro.melee_spec_ninja3", "att.pro.melee_spec_ninja4" }
 
 ATT.Category = {"melee_spec"}

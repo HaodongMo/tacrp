@@ -1,7 +1,7 @@
-ATT.PrintName = "Heavy"
-ATT.FullName = "Heavy-handed"
+ATT.PrintName = "att.melee_tech_heavy.name"
+ATT.FullName = "att.melee_tech_heavy.name.full"
 ATT.Icon = Material("entities/tacrp_att_melee_tech_heavy.png", "mips smooth")
-ATT.Description = "A classic counter-terrorist technique: Just smack them real hard."
+ATT.Description = "att.melee_tech_heavy.desc"
 ATT.Pros = { "att.pro.melee_tech_heavy1", "att.pro.melee_tech_heavy2" }
 
 ATT.Category = {"melee_tech"}
