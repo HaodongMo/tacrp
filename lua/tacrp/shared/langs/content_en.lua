@@ -728,6 +728,10 @@ L["att.ammo_40mm_heal.name.full"] = "40mm Medi-Smoke Grenades"
 L["att.ammo_40mm_heal.name"] = "Medi-Smoke"
 L["att.ammo_40mm_heal.desc"] = "Grenade that produces a cloud of restorative gas on impact."
 
+L["att.ammo_40mm_ball.name.full"] = "40mm Baseball Grenades"
+L["att.ammo_40mm_ball.name"] = "Baseball"
+L["att.ammo_40mm_ball.desc"] = "Batta-batta-batta-batta SWING!"
+
 L["att.ammo_amr_hv.name.full"] = "High Velocity Rounds"
 L["att.ammo_amr_hv.name"] = "HV"
 L["att.ammo_amr_hv.desc"] = "Bullets with much higher velocity, but worsens overpenetration."

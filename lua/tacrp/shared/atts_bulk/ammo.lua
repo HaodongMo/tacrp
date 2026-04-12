@@ -316,6 +316,46 @@ TacRP.LoadAtt(ATT, "ammo_40mm_heal")
 -- #endregion
 
 ------------------------------
+-- #region ammo_40mm_ball (40mm Baseball Grenades)
+------------------------------
+ATT = {}
+
+ATT.PrintName = "att.ammo_40mm_ball.name"
+ATT.FullName = "att.ammo_40mm_ball.name.full"
+
+ATT.Icon = Material("entities/tacrp_att_ammo_40mm_ball.png", "mips smooth")
+ATT.Description = "att.ammo_40mm_ball.desc"
+ATT.Pros = {"stat.spread", "att.procon.infiniteammo"}
+ATT.Cons = {"stat.muzzlevelocity", "att.procon.noexp"}
+
+ATT.Category = {"ammo_40mm", "ammo_40mm_civ"}
+
+ATT.SortOrder = 4.5
+
+
+ATT.Mult_ShootEntForce = 0.8
+ATT.Override_Damage_Max = 60
+ATT.Override_Damage_Min = 120
+ATT.Override_Range_Min = 0
+ATT.Override_Range_Max = 2000
+ATT.Mult_Spread = 0.1
+ATT.Mult_HipFireSpreadPenalty = 0.333
+
+ATT.ShootEnt = "tacrp_proj_40mm_ball"
+
+ATT.InfiniteAmmo = true
+
+
+ATT.InstalledElements = {"smoke"}
+
+if engine.ActiveGamemode() == "terrortown" then
+    ATT.Free = true
+end
+
+TacRP.LoadAtt(ATT, "ammo_40mm_ball")
+-- #endregion
+
+------------------------------
 -- #region ammo_amr_hv (High Velocity Rounds)
 ------------------------------
 ATT = {}

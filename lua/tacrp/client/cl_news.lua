@@ -1373,6 +1373,7 @@ The fourth major expansion, featuring 42 weapons themed around zombies, the apoc
         Contents = [[<body style="font-family:'Myriad Pro';color:white;font-size:125%;">
 <h3>Changelist:</h3>
 <ul>
+<li><b>Added:</b> 40mm Baseball Grenades.
 <li><b>Rebalance:</b> Melee projectile velocity now scales off Brawn instead of Strategy.
 <li><b>Rebalance:</b> Adjusted Strategy recharge scaling.
 <li><b>Rebalance:</b> Baseball projectile reflects towards owner when impacting a player, NPC or nextbot.
