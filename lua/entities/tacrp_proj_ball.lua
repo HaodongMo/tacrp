@@ -4,7 +4,7 @@ ENT.Base                     = "tacrp_proj_base"
 ENT.PrintName                = "Thrown Ball"
 ENT.Spawnable                = false
 
-ENT.Model                    = "models/weapons/tacint_extras/w_baseball.mdl" --"models/weapons/w_models/w_baseball.mdl" -- TODO replace with hexed model
+ENT.Model                    = "models/weapons/tacint_extras/w_baseball.mdl"
 
 ENT.IsRocket = false
 
@@ -61,7 +61,7 @@ function ENT:PhysicsCollide(data, collider)
     if self.Impacted then return end
     self.Impacted = true
     self:SetTrigger(true)
-    self:UseTriggerBounds(true, 8)
+    self:UseTriggerBounds(true, 16)
     if IsValid(self.Trail) then
         self.Trail:Remove()
     end
@@ -101,6 +101,8 @@ function ENT:PhysicsCollide(data, collider)
             else
                 data.HitEntity:EmitSound("tacrp/sandman/pl_impact_stun.wav", 90)
             end
+            -- return to sender
+            self:GetPhysicsObject():SetVelocityInstantaneous((self:GetOwner():WorldSpaceCenter() + VectorRand(128) - self:GetPos()):GetNormalized() * dist * 0.75)
         else
             data.HitEntity:EmitSound("tacrp/sandman/baseball_hitworld" .. math.random(1, 3) .. ".wav", 90)
         end
