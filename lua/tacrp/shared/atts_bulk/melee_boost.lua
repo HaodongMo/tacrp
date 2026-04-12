@@ -15,9 +15,9 @@ ATT.Category = "melee_boost"
 
 ATT.SortOrder = 1
 
-ATT.Add_MeleePerkStr = 0.03
-ATT.Add_MeleePerkAgi = 0.03
-ATT.Add_MeleePerkInt = 0.03
+ATT.Add_MeleePerkStr = 0.04
+ATT.Add_MeleePerkAgi = 0.04
+ATT.Add_MeleePerkInt = 0.04
 
 TacRP.LoadAtt(ATT, "melee_boost_all")
 
@@ -36,9 +36,9 @@ ATT.Category = "melee_boost"
 
 ATT.SortOrder = 2
 
-ATT.Add_MeleePerkStr = 0.2
-ATT.Add_MeleePerkAgi = -0.05
-ATT.Add_MeleePerkInt = -0.05
+ATT.Add_MeleePerkStr = 0.3
+ATT.Add_MeleePerkAgi = -0.08
+ATT.Add_MeleePerkInt = -0.08
 
 TacRP.LoadAtt(ATT, "melee_boost_str")
 
@@ -57,9 +57,9 @@ ATT.Category = "melee_boost"
 
 ATT.SortOrder = 3
 
-ATT.Add_MeleePerkAgi = 0.2
-ATT.Add_MeleePerkStr = -0.05
-ATT.Add_MeleePerkInt = -0.05
+ATT.Add_MeleePerkAgi = 0.3
+ATT.Add_MeleePerkStr = -0.08
+ATT.Add_MeleePerkInt = -0.08
 
 TacRP.LoadAtt(ATT, "melee_boost_agi")
 
@@ -78,9 +78,9 @@ ATT.Category = "melee_boost"
 
 ATT.SortOrder = 4
 
-ATT.Add_MeleePerkInt = 0.2
-ATT.Add_MeleePerkStr = -0.05
-ATT.Add_MeleePerkAgi = -0.05
+ATT.Add_MeleePerkInt = 0.3
+ATT.Add_MeleePerkStr = -0.08
+ATT.Add_MeleePerkAgi = -0.08
 
 TacRP.LoadAtt(ATT, "melee_boost_int")
 
@@ -99,7 +99,7 @@ ATT.Category = "melee_boost"
 
 ATT.SortOrder = 10
 
-ATT.Add_Lifesteal = 0.3
+ATT.Add_Lifesteal = 0.15
 ATT.Add_MeleePerkStr = -0.05
 ATT.Add_MeleePerkAgi = -0.05
 
@@ -120,8 +120,8 @@ ATT.Category = "melee_boost"
 
 ATT.SortOrder = 11
 
-ATT.Add_DamageCharge = 0.003
-ATT.Add_MeleePerkInt = -0.08
+ATT.Add_DamageCharge = 0.0015
+ATT.Add_MeleePerkInt = -0.25
 
 TacRP.LoadAtt(ATT, "melee_boost_momentum")
 

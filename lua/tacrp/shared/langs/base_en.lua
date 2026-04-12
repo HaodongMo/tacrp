@@ -49,6 +49,7 @@ L["unit.mps"] = "m/s" -- meters per second
 L["unit.damage"] = " DMG"
 L["unit.stk"] = " STK" -- shots to kill
 L["unit.ptk"] = " PTK" -- pellets to kill
+L["unit.percentpersecond"] = "%/s"
 
 L["slot.default"] = "Slot"
 L["slot.optic"] = "Optic"
@@ -198,11 +199,13 @@ L["stat.recoilsemi"] = "Recoil (in Semi)"
 L["stat.recoilsemi.desc"] = "Recoil multiplier in semi-automatic fire mode."
 
 L["stat.meleeperkstr"] = "Brawn"
-L["stat.meleeperkstr.desc"] = "Melee attribute influencing Techniques and Specials.\nAffects perk damage and knockback."
+L["stat.meleeperkstr.desc"] = "Melee attribute influencing Techniques and Specials.\nAffects perk damage and projectile power."
 L["stat.meleeperkagi"] = "Dexterity"
 L["stat.meleeperkagi.desc"] = "Melee attribute influencing Techniques and Specials.\nAffects perk movement power and attack interval."
 L["stat.meleeperkint"] = "Strategy"
-L["stat.meleeperkint.desc"] = "Melee attribute influencing Techniques and Specials.\nAffects perk recharge speed and projectile force."
+L["stat.meleeperkint.desc"] = "Melee attribute influencing Techniques and Specials.\nAffects perk recharge speed."
+L["stat.meleerechargerate"] = "Special Recharge"
+L["stat.meleerechargerate.desc"] = "The rate at which special abilities recharge."
 
 L["rating.meleeattacktime"] = "Haste"
 L["rating.meleeattacktime.desc"] = "How quickly the weapon can attack."
@@ -466,11 +469,11 @@ L["hint.shootself"] = "Shoot Yourself"
 L["hint.melee_charge"] = "Charge"
 L["hint.melee_charge.menu"] = "Charge Type"
 L["hint.melee_charge.0.name"] = "Bravery"
-L["hint.melee_charge.0.desc"] = "Standard mode with average turn control.\nBash into a target to deal damage and knockback. Attacking during the charge cancels it."
+L["hint.melee_charge.0.desc"] = "Average turn control and speed.\nBash into a target to deal damage and knockback. Attacking during the charge cancels it."
 L["hint.melee_charge.1.name"] = "Mastery"
-L["hint.melee_charge.1.desc"] = "Significantly increased turn control.\nLow damage resistance and bash damage.\nTaking damage shortens charge duration."
+L["hint.melee_charge.1.desc"] = "Very high turn control, low charge speed.\nLow damage resistance and bash damage.\nTaking damage shortens charge duration."
 L["hint.melee_charge.2.name"] = "Tenacity"
-L["hint.melee_charge.2.desc"] = "Increased charge speed, reduced turn control.\nVery high damage resistance and bash damage.\nGains knockback immunity during charge."
+L["hint.melee_charge.2.desc"] = "Very low turn control, high charge speed.\nVery high damage resistance and bash damage.\nGains knockback immunity during charge."
 
 -- Weapon calibers
 L["caliber.556x45"] = "5.56×45mm"

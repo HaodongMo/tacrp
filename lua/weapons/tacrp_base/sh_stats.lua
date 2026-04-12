@@ -19,6 +19,12 @@ SWEP.AllowNegativeStats = {
     ["RecoilKick"] = true,
 }
 
+-- Only exists on base table, can't be used in attachments or hooks
+SWEP.BaseOnlyStats = {
+    ["PrimaryMelee"] = true,
+    ["PrimaryGrenade"] = true,
+}
+
 function SWEP:InvalidateCache()
     self.StatCache = {}
     self.HookCache = {}
@@ -64,6 +70,10 @@ end
 function SWEP:GetBaseValue(val)
     local stat = self:GetTable()[val]
 
+    if self.BaseOnlyStats[val] then
+        return stat
+    end
+
     local b = TacRP.GetBalanceMode()
     if b > 0 and self.BalanceStats != nil then
         if TacRP.BalanceDefaults[b] and TacRP.BalanceDefaults[b][val] != nil then
@@ -95,6 +105,10 @@ function SWEP:GetValue(val, static, invert)
 
     if static == nil then
         static = self.StaticStats
+    end
+
+    if self.BaseOnlyStats[val] then
+        return self:GetTable()[val]
     end
 
     local stat = nil

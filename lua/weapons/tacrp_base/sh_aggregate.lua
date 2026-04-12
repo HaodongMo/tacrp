@@ -1346,7 +1346,7 @@ SWEP.StatDisplayMelee = {
         Description = "stat.meleeperkstr.desc",
         Value = "MeleePerkStr",
         AggregateFunction = function(self, base, val)
-            return math.floor(val * 100)
+            return math.Round(val * 100)
         end,
     },
     {
@@ -1354,7 +1354,7 @@ SWEP.StatDisplayMelee = {
         Description = "stat.meleeperkagi.desc",
         Value = "MeleePerkAgi",
         AggregateFunction = function(self, base, val)
-            return math.floor(val * 100)
+            return math.Round(val * 100)
         end,
     },
     {
@@ -1362,10 +1362,19 @@ SWEP.StatDisplayMelee = {
         Description = "stat.meleeperkint.desc",
         Value = "MeleePerkInt",
         AggregateFunction = function(self, base, val)
-            return math.floor(val * 100)
+            return math.Round(val * 100)
         end,
     },
-
+    {
+        Name = "stat.meleerechargerate",
+        Description = "stat.meleerechargerate.desc",
+        Value = "MeleeRechargeRate",
+        AggregateFunction = function(self, base, val)
+            return math.Round(val * self:GetMeleePerkRecharge(base) * 100)
+        end,
+        Unit = "unit.percentpersecond",
+        LowerIsBetter = false,
+    },
 
     {
         Name = "stat.melee2damage",

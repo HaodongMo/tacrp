@@ -3,12 +3,15 @@ ATT.FullName = "att.melee_spec_charge.name.full"
 ATT.Icon = Material("entities/tacrp_att_melee_spec_charge.png", "mips smooth")
 ATT.Description = "att.melee_spec_charge.name.desc"
 ATT.Pros = { "att.pro.melee_spec_charge1", "att.pro.melee_spec_charge2", "att.pro.melee_spec_charge3", "att.pro.melee_spec_charge4" }
+ATT.Cons = { "stat.meleerechargerate" }
 
 ATT.Category = {"melee_spec"}
 
 ATT.SortOrder = 5
 
 ATT.MeleeCharge = true
+
+ATT.Mult_MeleeRechargeRate = 0.8
 
 ATT.Override_NoBreathBar = true
 
@@ -22,9 +25,9 @@ local followup = 0.75
 local modecount = 3
 local modes = {
     --  {speed, duration, turnrate, damagemult, resistance}
-    [0] = {700, 1.5, 240, 1, 0.25},
-    [1] = {700, 1.5, 960, 0.75, 0},
-    [2] = {800, 1.5, 90, 1.25, 0.5},
+    [0] = {700, 1.5, 180, 1, 0.25},
+    [1] = {650, 1.5, 720, 0.5, 0},
+    [2] = {850, 1.5, 90, 1.25, 0.5},
 }
 
 local stat_vel = 1
@@ -384,7 +387,7 @@ hook.Add("Move", "TacRP_Charge", function(ply, mv)
         -- Grounded friction is constantly trying to slow us down. Counteract it!
         -- TF2 doesn't have to deal with it since it disables friction in-engine. We can't since I don't want to reimplement gamemovement.cpp
         if ply:IsOnGround() and ply:WaterLevel() == 0 then
-            wishspeed = wishspeed / 0.88 -- approximate grounded friciton with magic number
+            wishspeed = wishspeed / 0.88 -- approximate grounded friction with magic number
             if !game.SinglePlayer() then
                 wishspeed = wishspeed / 0.88 -- ???????????
             end
@@ -483,7 +486,7 @@ hook.Add("FinishMove", "TacRP_Charge", function(ply, mv)
                 local grace = false
                 if IsValid(ent) and ent:GetOwner() != ply then
                     if SERVER then
-                        local df = math.max(0.25, d) * (1 + wep:GetMeleePerkDamage())
+                        local df = wep:GetMeleePerkDamage()
                         local dmgscale = chargestats(ply, stat_dmg)
                         local dmginfo = DamageInfo()
                         dmginfo:SetDamageForce(ply:GetForward() * 5000 * df)
