@@ -1,7 +1,7 @@
 AddCSLuaFile()
 
 ENT.Base                     = "tacrp_proj_base"
-ENT.PrintName                = "RPG7 Shovel" -- not actually a harpoon lol
+ENT.PrintName                = "RPG7 Shovel" -- not actually a harpoon lol (why the FUCK was it called harpoon then???)
 ENT.Spawnable                = false
 
 ENT.Model                    =  "models/props_junk/Shovel01a.mdl"

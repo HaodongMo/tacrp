@@ -213,12 +213,32 @@ end
 
 function SWEP:GetMeleePerkVelocity(base)
     local valfunc = base and self.GetBaseValue or self.GetValue
-    local stat = valfunc(self, "MeleePerkInt")
+    local stat = valfunc(self, "MeleePerkStr")
     if stat >= 0.5 then
-        return Lerp((stat - 0.5) * 2, 1, 3) * valfunc(self, "MeleeThrowForce")
+        return Lerp((stat - 0.5) / 0.5, 1, 1.5) * valfunc(self, "MeleeThrowForce")
     else
-        return Lerp(stat * 2, 0.5, 1) * valfunc(self, "MeleeThrowForce")
+        return Lerp(stat * 2, 0.66667, 1) * valfunc(self, "MeleeThrowForce")
     end
+end
+
+function SWEP:GetMeleePerkRecharge(base)
+    local valfunc = base and self.GetBaseValue or self.GetValue
+    local stat = valfunc(self, "MeleePerkInt")
+    local cache = base and "melee_int_base" or "melee_int"
+
+    if self.MiscCache[cache] == nil then
+        local min = 1 / 25
+        local mid = 1 / 5
+        local max = 1 / 2.5
+
+        if stat <= 0.5 then
+            self.MiscCache[cache] = Lerp(math.pow(stat * 2, 1.25), min, mid)
+        else
+            self.MiscCache[cache] = Lerp(math.pow((stat - 0.5) * 2, 1), mid, max)
+        end
+    end
+
+    return self.MiscCache[cache] * valfunc(self, "MeleeRechargeRate")
 end
 
 hook.Add("PostEntityTakeDamage", "tacrp_melee", function(ent, dmg, took)

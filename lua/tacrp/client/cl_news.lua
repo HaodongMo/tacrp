@@ -526,26 +526,26 @@ The Soviet/AK themed expansion starring 9 weapons, including well-known AK varia
 <p>And for those who enjoy chaos, we've included an option for NPCs to spawn with <i>any</i> weapon randomly. Enjoy a random rebel with no sense of self-preservation facerocketing you!
 
 <h2>drop me avp plz</h2>
-<p>There's now a dedicated button in the customization menu to drop your current weapon, with dropped weapons able to be picked up with your 'use' key. 
+<p>There's now a dedicated button in the customization menu to drop your current weapon, with dropped weapons able to be picked up with your 'use' key.
 <p>This synergizes with weapon slot restrictions, allowing you to swap weapons with any gun you find lying around with the press of a button.
 
 <h2>It's like wading through molasses.</h2>
-<p>In case you don't like how a certain balancing scheme punishes movement, there are now convars for each of the movement penalties that let you turn them off individually. 
+<p>In case you don't like how a certain balancing scheme punishes movement, there are now convars for each of the movement penalties that let you turn them off individually.
 <p>They can all be found under Movement in the Mechanics tab.
 
 <h2>What happened to my freakin' car?!</h2>
 <p>Fighting against vehicles with TacRP will now be a lot more interesting thanks to some hackery and workarounds to make infantry-to-vehicle combat functional.
-<p>TacRP now works with LVS' armor penetration system, allowing gunfire, launched grenades and rockets to pierce vehicle armor. 
+<p>TacRP now works with LVS' armor penetration system, allowing gunfire, launched grenades and rockets to pierce vehicle armor.
 <p>Combine Hunter Choppers, infamous for their hardcoded immunity to everything but airboat gun damage, can now take damage from direct hits with rockets.
 
 <h2>Now this...is a knife.</h2>
-<p>TacRP's melee system has been very superficial for a while now with little statistical difference between weapons (which is especially prominent if you have Brute Force installed) and were more goofy than they were actually viable. 
-<p>As such, we've remade the melee system with a host of new features, including actual weapon stats and a new attachment slot: Boost, which acts as a perk slot with various passive benefits from simple stat boosts to unique effects like regaining health. 
+<p>TacRP's melee system has been very superficial for a while now with little statistical difference between weapons (which is especially prominent if you have Brute Force installed) and were more goofy than they were actually viable.
+<p>As such, we've remade the melee system with a host of new features, including actual weapon stats and a new attachment slot: Boost, which acts as a perk slot with various passive benefits from simple stat boosts to unique effects like regaining health.
 <p>The base pack's knives and every weapon from Brute Force have been updated to use this new system.
 
 <h2>You kids today don't know how to circlestrafe!</h2>
-<p>Do you yearn for the good old days, when shooters were fun because they didn't have depth or good game balance? I did for a brief period, and it compelled me to quickly integrate a new balance mode that removed ironsights and tightened up weapon spread. 
-<p>It didn't really pan out how I had hoped—TacRP is built around so many modern mechanics and systems that it's hard to make it "old school" without stripping away nearly all of them. 
+<p>Do you yearn for the good old days, when shooters were fun because they didn't have depth or good game balance? I did for a brief period, and it compelled me to quickly integrate a new balance mode that removed ironsights and tightened up weapon spread.
+<p>It didn't really pan out how I had hoped—TacRP is built around so many modern mechanics and systems that it's hard to make it "old school" without stripping away nearly all of them.
 <p>Regardless, what I ended up with before abandoning it is still accessible via the console for preservation's sake, if you're interested.
 
 <hr>
@@ -710,10 +710,10 @@ The heavy weaponry expansion, sporting 10 new weapons including autoshotties, gu
 <p>These sliders and certain options that directly affect balance are under the Balance tab while mechanics that exist independent of balance scheme are under the Mechanics tab.
 
 <h2>Dwarves don't use ironsights.</h2>
-<p>Old School mode has been reworked into Old School Scopes; a balance mechanic independent of any one scheme. Like before, it disables ironsights and tightens hipfire, but spread will now be increased with an optic fitted. The higher an optic's magnification, the higher your spread penalty. 
+<p>Old School mode has been reworked into Old School Scopes; a balance mechanic independent of any one scheme. Like before, it disables ironsights and tightens hipfire, but spread will now be increased with an optic fitted. The higher an optic's magnification, the higher your spread penalty.
 
 <h2>More options, more fun!</h2>
-<p>Some new minor gameplay options have been added for extra spice. 
+<p>Some new minor gameplay options have been added for extra spice.
 <p>'Dump ammo in magazines' does exactly what it says on the tin: any ammo left in your magazine when you reload will be dropped onto the ground. It is not lost, however, as dropped magazines can be picked up by the player to recover the lost ammo. (This mechanic was not inspired by any particular <i>democratic game</i> and was entirely of our own invention)
 <p>'Lower weapon while not aiming' forces weapons to always be lowered unless you're aiming them, similar to DarkRP.
 
@@ -749,14 +749,14 @@ The heavy weaponry expansion, sporting 10 new weapons including autoshotties, gu
         Contents = [[<body style="font-family:'Myriad Pro';color:white;font-size:125%;">
 <p>Howdy all! It's a little crazy to think about, but May 14th (14 - 5 - 2024) marks exactly one year since TacRP InterOps launched on the Workshop. Since then TacRP's weapon selection has gone from 70-something weapons to over 200, and a myriad of new features have been added.
 <p>It's been quite a ride, and we appreciate all the support and kind words we've continued to receive throughout this year of development.
-<p>We've been cooking up a pretty substantial update the past month or so with not one, but two massive content drops being developed concurrently. Unfortunately, they're still yet to be released, but we still have a decent-sized update to satiate you in the meantime. 
+<p>We've been cooking up a pretty substantial update the past month or so with not one, but two massive content drops being developed concurrently. Unfortunately, they're still yet to be released, but we still have a decent-sized update to satiate you in the meantime.
 
 <p>(8Z's Note: This news was written back when we were still not that far off from the anniversary date. Alas...)
 
 <hr>
 
 <h2>"They were actually known cheaters who were using a lag switch."</h2>
-<p>The base has received updates to networking that should finally eliminate pesky jitter and inconsistencies at high ping. 
+<p>The base has received updates to networking that should finally eliminate pesky jitter and inconsistencies at high ping.
 <p>Movement code prediction has been almost completely rewritten and the breath holding mechanic should now actually work in multiplayer. Viewmodel jitter should also hopefully be a thing of the past.
 
 <h2>You Tactical?</h2>
@@ -1060,7 +1060,7 @@ Notably, some weapons in the base pack are now Value grade, a new lowest grade t
         Contents = [[<body style="font-family:'Myriad Pro';color:white;font-size:125%;">
 
 <p>Greetings all. Unfortunately the long-awaited post-apocalypse pack still isn't finished, but rest assured we are still working on it and it will see the light of day eventually.
-For now, enjoy a small-ish update that consists mostly of visual updates but also contains some fancy new content.</p>		
+For now, enjoy a small-ish update that consists mostly of visual updates but also contains some fancy new content.</p>
 
 <h2>SIG SG 510 "Black Shark" One-Off Release</h2>
 <p><input type='submit' value='Open Workshop' onclick='console.log("RUNLUA:gui.OpenURL(\"https://steamcommunity.com/sharedfiles/filedetails/?id=3360753764\")")' /></p>
@@ -1203,8 +1203,8 @@ The fourth major expansion, featuring 42 weapons themed around zombies, the apoc
 <li><b>Changed:</b> (Base) NPCs now react to nearby grenades
 <li><b>Changed:</b> (Base) NPCs line of sight will be blocked by smoke grenades
 <li><b>Changed:</b> (Base) Altered the behavior of the Quicknade Radial Menu; grenade quantity is only shown when you have more than one, and the quantity is displayed below the grenade name; it is also localized
-<li><b>Changed:</b> (InterOps) Kar 98K given minor tweaks to its quickthrow animations 
-<li><b>Changed:</b> (ExoOps) The HK CAWS has brand new animations 
+<li><b>Changed:</b> (InterOps) Kar 98K given minor tweaks to its quickthrow animations
+<li><b>Changed:</b> (ExoOps) The HK CAWS has brand new animations
 <li><b>Changed:</b> (Scavenger's Spoils)  Fixed that the StG 44 had missing credits, and that the scopes were misaligned
 <li><b>Changed:</b> (Scavenger's Spoils)  Lowered the RPM on the M202 FLASH
 <li><b>Changed:</b> (Scavenger's Spoils)  SMLE given minor tweaks to its quickthrow animations.
@@ -1299,7 +1299,7 @@ The fourth major expansion, featuring 42 weapons themed around zombies, the apoc
 </ul>
 ]]
     },
-	{
+    {
         Title = "Update 33",
         Type = "Patch Notes",
         Date = "2025-09-11",
@@ -1311,7 +1311,7 @@ The fourth major expansion, featuring 42 weapons themed around zombies, the apoc
 <p>A small-ish update with a couple of bugfixes and minor changes. This update cycle saw a lot of content development in the background but most of it was unfortunately scrapped due to a lack of motivation. While there's a possibility that some of it may resurface in the future, don't count on it.
 
 <h2>Every squad will be given one rifle. To share.</h2>
-<p>What hasn't been scrapped is a complete reanimation of the top-loaded bolt-action rifles (Kar 98k, Mosin-Nagant, Lee-Enfield) done by <i>yours truly</i> (speedonerd, in case you forgot), and a new attachment to allow these rifles to use stripper clips!</p>	
+<p>What hasn't been scrapped is a complete reanimation of the top-loaded bolt-action rifles (Kar 98k, Mosin-Nagant, Lee-Enfield) done by <i>yours truly</i> (speedonerd, in case you forgot), and a new attachment to allow these rifles to use stripper clips!</p>
 
 <h3>Changelist:</h3>
 <ul>
@@ -1343,8 +1343,8 @@ The fourth major expansion, featuring 42 weapons themed around zombies, the apoc
 <li><b>Fixed:</b> Missing sounds due to FireAnimationEvent behavior change in beta branch (thanks to chen for the fix).
 </ul>
 ]]
-    },    
-	{
+    },
+    {
         Title = "Update 34",
         Type = "Patch Notes",
         Date = "2025-12-08",
@@ -1360,6 +1360,24 @@ The fourth major expansion, featuring 42 weapons themed around zombies, the apoc
 <li><b>Changed:</b> (Base) Glock 17 model fixes.
 <li><b>Fixed:</b> Fixed explosive damage sometimes having a null attacker.
 <li><b>Fixed:</b> Fixed weapons that inherit their ammotype from another weapon not being able to pick up ammo in TTT.
+</ul>
+]]
+    },
+    {
+        Title = "Update 35",
+        Type = "Patch Notes",
+        Date = "2026-04-12",
+        Author = "8Z",
+        Major = false,
+        Summary = "Huh.",
+        Contents = [[<body style="font-family:'Myriad Pro';color:white;font-size:125%;">
+<h3>Changelist:</h3>
+<ul>
+<li><b>Added:</b> 40mm Baseball Grenades.
+<li><b>Rebalance:</b> Melee projectile velocity now scales off Brawn instead of Strategy.
+<li><b>Rebalance:</b> Adjusted Strategy recharge scaling.
+<li><b>Rebalance:</b> Baseball projectile reflects towards owner when impacting a player, NPC or nextbot.
+<li><b>Rebalance:</b> Rebalanced demoknight charge modes.
 </ul>
 ]]
     },

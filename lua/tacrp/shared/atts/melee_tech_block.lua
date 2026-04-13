@@ -1,8 +1,7 @@
-ATT.PrintName = "Guard"
-ATT.FullName = "High Guard"
-
+ATT.PrintName = "att.melee_tech_block.name"
+ATT.FullName = "att.melee_tech_block.name.full"
 ATT.Icon = Material("entities/tacrp_att_melee_tech_block.png", "mips smooth")
-ATT.Description = "Defense is the best offense. It is, coinicidently, also the best defense."
+ATT.Description = "att.melee_tech_block.desc"
 ATT.Pros = { "att.pro.melee_tech_block1", "att.pro.melee_tech_block2" }
 
 ATT.Category = {"melee_tech"}
@@ -16,7 +15,7 @@ ATT.Free = true
 
 local function hold(wep)
     return wep:GetOwner():KeyDown(IN_ATTACK2)
-            and wep:GetHoldBreathAmount() > 0
+            and wep:GetBreath() > 0
             and wep:GetNextSecondaryFire() < CurTime()
 end
 
@@ -44,7 +43,7 @@ end
 ATT.Hook_PreShoot = function(wep)
     if wep:GetNWFloat("TacRPKnifeCounter", 0) > CurTime() then
         wep:EmitSound("common/warning.wav", 70, 120, 1, CHAN_AUTO)
-        -- wep:SetHoldBreathAmount(math.max(0, wep:GetHoldBreathAmount() - 0.5))
+        -- wep:SetBreath(math.max(0, wep:GetBreath() - 0.5))
         wep:Melee(true)
         wep:SetOutOfBreath(false)
         wep:SetNWFloat("TacRPKnifeCounter", 0)
@@ -56,21 +55,18 @@ end
 ATT.Hook_PostThink = function(wep)
     local canhold = hold(wep)
 
-    local ft = FrameTime()
+    local ft = engine.TickInterval() --FrameTime()
 
     if !IsFirstTimePredicted() then return end
 
 
     if !wep:GetOutOfBreath() then
-        if canhold and wep:GetHoldBreathAmount() > 0.05 then
-            -- wep:SetHoldBreathAmount(wep:GetHoldBreathAmount() - 0.1)
+        if canhold and wep:GetBreath() > 0.05 then
             wep:SetOutOfBreath(true)
             wep:SetHoldingBreath(false)
             wep:SetNextIdle(math.huge)
             wep:PlayAnimation("idle_defend", 1)
             wep:SetHoldType("magic")
-        else
-            wep:SetHoldBreathAmount(math.min(1, wep:GetHoldBreathAmount() + FrameTime() * Lerp(wep:GetValue("MeleePerkInt"), 0.075, 0.2)))
         end
     else
         if !canhold then
@@ -83,7 +79,7 @@ ATT.Hook_PostThink = function(wep)
                 wep:SetNextSecondaryFire(CurTime() + 0.15)
             end
         else
-            wep:SetHoldBreathAmount(math.max(0, wep:GetHoldBreathAmount() - FrameTime() * 0.25))
+            wep:SetBreath(math.max(0, wep:GetBreath() - ft * 0.25))
         end
     end
 
@@ -93,49 +89,11 @@ ATT.Hook_PostThink = function(wep)
     -- end
 end
 
-local breath_a = 0
-local last = 1
-local lastt = 0
-function ATT.TacticalDraw(self)
-    local scrw = ScrW()
-    local scrh = ScrH()
-
-    local w = TacRP.SS(48)
-    local h = TacRP.SS(4)
-
-    local x = scrw / 2
-    local y = scrh * 0.65 + TacRP.SS(6)
-
-    if CurTime() > lastt + 1 then
-        breath_a = math.Approach(breath_a, 0, FrameTime() * 2)
-    elseif breath_a < 1 then
-        breath_a = math.Approach(breath_a, 1, FrameTime())
-    end
-    local breath = self:GetHoldBreathAmount()
-    if last != breath then
-        lastt = CurTime()
-        last = breath
-    end
-    if breath_a == 0 then return end
-
-    x = x - w / 2
-    y = y - h / 2
-
-    surface.SetDrawColor(90, 90, 90, 200 * breath_a)
-    surface.DrawOutlinedRect(x - 1, y - 1, w + 2, h + 2, 1)
-    surface.SetDrawColor(0, 0, 0, 75 * breath_a)
-    surface.DrawRect(x, y, w, h)
-
-    surface.SetDrawColor(255, 255, 255, 150 * breath_a)
-
-    surface.DrawRect(x, y, w * breath, h)
-end
-
 hook.Add("EntityTakeDamage", "TacRP_Block", function(ent, dmginfo)
     if !IsValid(dmginfo:GetAttacker()) or !ent:IsPlayer() then return end
     local wep = ent:GetActiveWeapon()
 
-    if !IsValid(wep) or !wep.ArcticTacRP or !wep:GetValue("MeleeBlock") or !wep:GetOutOfBreath() then return end
+    if !IsValid(wep) or !wep.ArcticTacRP or !wep:GetValue("MeleeBlock") or !wep:GetBreath() then return end
     if !(dmginfo:IsDamageType(DMG_GENERIC) or dmginfo:IsDamageType(DMG_CLUB) or dmginfo:IsDamageType(DMG_CRUSH) or dmginfo:IsDamageType(DMG_SLASH) or dmginfo:GetDamageType() == 0) then return end
     -- if dmginfo:GetAttacker():GetPos():DistToSqr(ent:GetPos()) >= 22500 then return end
     if (dmginfo:GetAttacker():GetPos() - ent:EyePos()):GetNormalized():Dot(ent:EyeAngles():Forward()) < 0.5 and ((dmginfo:GetDamagePosition() - ent:EyePos()):GetNormalized():Dot(ent:EyeAngles():Forward()) < 0.5) then return end
@@ -146,8 +104,6 @@ hook.Add("EntityTakeDamage", "TacRP_Block", function(ent, dmginfo)
         ent:DropWeapon(wep, dmginfo:GetAttacker():GetPos())
         return
     end
-
-    wep:SetHoldBreathAmount(wep:GetHoldBreathAmount() - math.Clamp(0.05 + dmginfo:GetDamage() / ent:GetMaxHealth(), 0.05, 0.5))
 
     local ang = ent:EyeAngles()
     local fx = EffectData()
@@ -169,7 +125,7 @@ hook.Add("EntityTakeDamage", "TacRP_Block", function(ent, dmginfo)
         end
     end)
 
-    if wep:GetHoldBreathAmount() <= 0 then
+    if wep:GetBreath() <= 0 then
         ent:SetActiveWeapon(NULL)
         ent:DropWeapon(wep, dmginfo:GetAttacker():GetPos())
         ent:EmitSound("physics/metal/metal_box_break1.wav", 80, 110)

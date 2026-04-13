@@ -1,6 +1,6 @@
-ATT.PrintName = "Airdash"
+ATT.PrintName = "att.melee_spec_step.name"
 ATT.Icon = Material("entities/tacrp_att_melee_spec_step.png", "mips smooth")
-ATT.Description = "Mobility tool used by blood-fueled robots and transgender women."
+ATT.Description = "att.melee_spec_step.desc"
 ATT.Pros = { "att.pro.melee_spec_step1", "att.pro.melee_spec_step2" }
 
 ATT.Category = {"melee_spec"}

@@ -147,8 +147,20 @@ end
 function SWEP:ThinkHoldBreath()
     local ret = self:RunHook("Hook_Recharge")
     if ret then return end
-    local f = 10 - math.min(self:GetValue("MeleePerkInt"), 0.5) * 2 - math.max((self:GetValue("MeleePerkInt") - 0.5) * 2, 0) * 6
-    self:SetBreath(math.min(1, self:GetBreath() + FrameTime() / f * self:GetValue("MeleeRechargeRate")))
+    if self:GetOutOfBreath() then return end
+
+    if self.MiscCache["melee_recharge"] == nil then
+        local int = self:GetValue("MeleePerkInt")
+        local min = 1 / 8
+        local mid = 1 / 4
+        local max = 1 / 2
+        if int <= 0.5 then
+            self.MiscCache["melee_recharge"] = Lerp(int / 0.5, min, mid)
+        else
+            self.MiscCache["melee_recharge"] = Lerp((int - 0.5) / 0.5, mid, max)
+        end
+    end
+    self:SetBreath(math.min(1, self:GetBreath() + FrameTime() * self:GetMeleePerkRecharge()))
 end
 
 SWEP.NoBreathBar = false

@@ -1,7 +1,7 @@
-ATT.PrintName = "Scout"
-ATT.FullName = "jerma tf2"
+ATT.PrintName = "att.melee_spec_scout.name"
+ATT.FullName = "att.melee_spec_scout.name.full"
 ATT.Icon = Material("entities/tacrp_att_melee_spec_scout.png", "mips smooth")
-ATT.Description = "Grass grows, sun shines, birds fly, and brotha' - I hurt people."
+ATT.Description = "att.melee_spec_scout.desc"
 ATT.Pros = { "att.pro.melee_spec_scout1", "att.pro.melee_spec_scout2", "att.pro.melee_spec_scout3" }
 
 ATT.Category = {"melee_spec"}
