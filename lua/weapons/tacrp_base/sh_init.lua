@@ -67,7 +67,7 @@ function SWEP:Deploy()
     end
 
     self.PreviousZoom = self:GetOwner():GetCanZoom()
-    if IsValid(self:GetOwner()) and self:GetOwner():IsPlayer() and self.LastDeployTime != CurTime() then
+    if IsValid(self:GetOwner()) and self:GetOwner():IsPlayer() and self.LastDeployTime == CurTime() then
         self:GetOwner():SetCanZoom(false)
     end
 
