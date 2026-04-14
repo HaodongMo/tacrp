@@ -19,7 +19,6 @@ function SWEP:DoDeployAnimation()
 end
 
 function SWEP:Deploy()
-    local dp = self.LastDeployTime != CurTime()
     if self:GetOwner():IsNPC() or self:GetOwner():IsNextBot() then
         if SERVER then
             self:NetworkWeapon()
@@ -28,8 +27,7 @@ function SWEP:Deploy()
             self:SetupModel(true)
         end
         return
-    elseif SERVER and self:GetOwner():IsPlayer() and dp then
-        self.LastDeployTime = CurTime()
+    elseif SERVER and self:GetOwner():IsPlayer() then
         self:GetOwner():SetSaveValue("m_flNextAttack", 0)
     end
 
@@ -68,7 +66,7 @@ function SWEP:Deploy()
     end
 
     self.PreviousZoom = self:GetOwner():GetCanZoom()
-    if IsValid(self:GetOwner()) and self:GetOwner():IsPlayer() and dp then
+    if IsValid(self:GetOwner()) and self:GetOwner():IsPlayer() then
         self:GetOwner():SetCanZoom(false)
     end
 
