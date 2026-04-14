@@ -27,7 +27,8 @@ function SWEP:Deploy()
             self:SetupModel(true)
         end
         return
-    elseif SERVER and self:GetOwner():IsPlayer() then
+    elseif SERVER and self:GetOwner():IsPlayer() and self.LastDeployTime != CurTime() then
+        self.LastDeployTime = CurTime()
         self:GetOwner():SetSaveValue("m_flNextAttack", 0)
     end
 
@@ -66,7 +67,7 @@ function SWEP:Deploy()
     end
 
     self.PreviousZoom = self:GetOwner():GetCanZoom()
-    if IsValid(self:GetOwner()) and self:GetOwner():IsPlayer() then
+    if IsValid(self:GetOwner()) and self:GetOwner():IsPlayer() and self.LastDeployTime != CurTime() then
         self:GetOwner():SetCanZoom(false)
     end
 
