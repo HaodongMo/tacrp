@@ -68,7 +68,7 @@ SWEP.Firemode = 1
 
 SWEP.FiremodeName = "Single-Shot" // only used externally for firemode name distinction
 
-SWEP.RPM = 60
+SWEP.RPM = 100
 
 SWEP.Spread = 0.025
 
