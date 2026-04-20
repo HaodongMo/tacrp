@@ -472,7 +472,13 @@ function SWEP:Func_ClipSize(modifiers)
 end
 
 function SWEP:Func_Spread(modifiers)
-    modifiers.mul = modifiers.mul * TacRP.ConVars["mult_spread_ads"]:GetFloat()
+    // DualAkimbo weapons can't ADS; their base Spread IS their hipfire spread,
+    // so route it through the hipfire multiplier instead of the ADS one.
+    if self:GetBaseValue("DualAkimbo") then
+        modifiers.mul = modifiers.mul * TacRP.ConVars["mult_spread_hip"]:GetFloat()
+    else
+        modifiers.mul = modifiers.mul * TacRP.ConVars["mult_spread_ads"]:GetFloat()
+    end
 end
 
 function SWEP:Func_HipFireSpreadPenalty(modifiers)
