@@ -471,6 +471,18 @@ function SWEP:Func_ClipSize(modifiers)
     modifiers.add = modifiers.add - math.floor(totalAdd / 2)
 end
 
+function SWEP:Func_Spread(modifiers)
+    modifiers.mul = modifiers.mul * TacRP.ConVars["mult_spread_ads"]:GetFloat()
+end
+
+function SWEP:Func_HipFireSpreadPenalty(modifiers)
+    modifiers.mul = modifiers.mul * TacRP.ConVars["mult_spread_hip"]:GetFloat()
+end
+
+function SWEP:Func_ShotgunPelletSpread(modifiers)
+    modifiers.mul = modifiers.mul * TacRP.ConVars["mult_spread_shotgun"]:GetFloat()
+end
+
 function SWEP:Func_ClipSize2(modifiers)
     if !self.DualAkimbo then return end
     // ClipSize2 gets the same bonuses as ClipSize would get

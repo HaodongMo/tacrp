@@ -896,6 +896,24 @@ local conVars = {
         min = 0.01,
         replicated = true,
     },
+    {
+        name = "mult_spread_ads",
+        default = "1",
+        min = 0,
+        replicated = true,
+    },
+    {
+        name = "mult_spread_hip",
+        default = "1",
+        min = 0,
+        replicated = true,
+    },
+    {
+        name = "mult_spread_shotgun",
+        default = "1",
+        min = 0,
+        replicated = true,
+    },
 
     {
         name = "recoilreset",
@@ -1712,6 +1730,30 @@ local function menu_balance_ti(panel)
         min = 0.5,
         max = 1.5,
     })
+    panel:AddControl("slider", {
+        label = "#tacrp.balance.adsspread", -- ADS Spread Multiplier
+        command = "tacrp_mult_spread_ads",
+        type = "float",
+        min = 0,
+        max = 3,
+    })
+    panel:ControlHelp("#tacrp.balance.adsspread.desc")
+    panel:AddControl("slider", {
+        label = "#tacrp.balance.hipspread", -- Hipfire Spread Multiplier
+        command = "tacrp_mult_spread_hip",
+        type = "float",
+        min = 0,
+        max = 3,
+    })
+    panel:ControlHelp("#tacrp.balance.hipspread.desc")
+    panel:AddControl("slider", {
+        label = "#tacrp.balance.shotgunspread", -- Shotgun Pellet Spread Multiplier
+        command = "tacrp_mult_spread_shotgun",
+        type = "float",
+        min = 0,
+        max = 3,
+    })
+    panel:ControlHelp("#tacrp.balance.shotgunspread.desc")
 
 
     header(panel, "#tacrp.balance.ammoreload") -- \nAmmo & Reloading
