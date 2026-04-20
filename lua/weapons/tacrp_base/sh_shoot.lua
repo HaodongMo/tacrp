@@ -43,6 +43,34 @@ function SWEP:PrimaryAttack()
         return
     end
 
+    // One-Button Akimbo dispatch.
+    if self:IsOneButtonAkimbo() and !(self:GetValue("Melee") and self:GetOwner():KeyDown(IN_USE)) then
+        local cfm = self:GetCurrentFiremode()
+        local aps = self:GetValue("AmmoPerShot")
+        if cfm == 2 then
+            // Full-auto: if left is empty but right has ammo, fire right alone.
+            if self:Clip1() < aps and self:Clip2() >= aps then
+                self:SecondaryShoot()
+                return
+            end
+        elseif self:GetBurstCount() == 0 and self:GetBurstCount2() == 0 then
+            // Semi/burst: alternate between clicks (but not within a burst).
+            local fireRight = self:GetOBANextRight()
+            if fireRight and self:Clip2() < aps and self:Clip1() >= aps then
+                fireRight = false
+            elseif !fireRight and self:Clip1() < aps and self:Clip2() >= aps then
+                fireRight = true
+            end
+            if fireRight then
+                self:SetOBANextRight(false)
+                self:SecondaryShoot()
+                return
+            elseif self:Clip1() >= aps then
+                self:SetOBANextRight(true)
+            end
+        end
+    end
+
     if self:GetValue("Melee") and self:GetOwner():KeyDown(IN_USE) and !(self:GetValue("RunawayBurst") and self:GetBurstCount() > 0) then
         -- self.Primary.Automatic = false
         self:SetSafe(false)
@@ -507,6 +535,15 @@ function SWEP:PrimaryAttack()
     end
 
     self:SetCharge(false)
+
+    // One-Button Akimbo full-auto: fire the right gun alongside the left.
+    // Delay its shoot sound by one tick so the two shots sound distinct rather than as one doubled echo.
+    if self:IsOneButtonAkimbo() and self:GetCurrentFiremode() == 2
+            and self:Clip2() >= self:GetValue("AmmoPerShot") then
+        self.OBA_DelayShootSound = true
+        self:SecondaryShoot()
+        self.OBA_DelayShootSound = nil
+    end
 
     -- Troll
     if self:GetBurstCount() >= 8 and TacRP.ShouldWeFunny(true) and (self.NextTroll or 0) < CurTime() and math.random() <= 0.02 then
@@ -1183,6 +1220,17 @@ function SWEP:SecondaryShoot()
         if SERVER then
             sound.Play(sshoot, self:GetMuzzleOrigin(), self:GetValue("Vol_Shoot"), self:GetValue("Pitch_Shoot") + util.SharedRandom("TacRP_sshoot2", -pvar, pvar), self:GetValue("Loudness_Shoot"))
         end
+    elseif self.OBA_DelayShootSound then
+        // Delay the right-gun firing sound by one tick so it's audibly distinct from the left gun.
+        local sshoot_cap = sshoot
+        local pitch = self:GetValue("Pitch_Shoot") + util.SharedRandom("TacRP_sshoot2", -pvar, pvar)
+        local vol = self:GetValue("Vol_Shoot")
+        local loud = self:GetValue("Loudness_Shoot")
+        timer.Simple(engine.TickInterval(), function()
+            if IsValid(self) then
+                self:EmitSound(sshoot_cap, vol, pitch, loud, CHAN_WEAPON)
+            end
+        end)
     else
         self:EmitSound(sshoot, self:GetValue("Vol_Shoot"), self:GetValue("Pitch_Shoot") + util.SharedRandom("TacRP_sshoot2", -pvar, pvar), self:GetValue("Loudness_Shoot"), CHAN_WEAPON)
     end

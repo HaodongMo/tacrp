@@ -1053,7 +1053,7 @@ function SWEP:CustomAmmoDisplay()
     self.AmmoDisplay.Draw = true
 
     if TacRP.IsGrenadeInfiniteAmmo(self:GetGrenadeIndex()) then
-        self.AmmoDisplay.SecondaryAmmo = 99
+        self.AmmoDisplay.SecondaryAmmo = -1
     end
 
     if self.Primary.ClipSize <= 0 and self.Primary.Ammo != "" then
@@ -1062,14 +1062,14 @@ function SWEP:CustomAmmoDisplay()
             self.AmmoDisplay.PrimaryClip = -1
             self.AmmoDisplay.PrimaryAmmo = -1
         else
-            self.AmmoDisplay.PrimaryClip = self:Ammo1()
+            self.AmmoDisplay.PrimaryClip = self:GetInfiniteAmmo() and -1 or self:Ammo1()
             self.AmmoDisplay.PrimaryAmmo = -1
         end
     elseif self.Primary.ClipSize <= 0 then
         self.AmmoDisplay.PrimaryClip = -1
     else
         self.AmmoDisplay.PrimaryClip = self:Clip1()
-        self.AmmoDisplay.PrimaryAmmo = self:GetInfiniteAmmo() and 9999 or self:Ammo1()
+        self.AmmoDisplay.PrimaryAmmo = self:GetInfiniteAmmo() and -1 or self:Ammo1()
     end
 
     if self:GetValue("DualAkimbo") then

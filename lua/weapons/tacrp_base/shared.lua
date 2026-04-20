@@ -656,6 +656,7 @@ function SWEP:SetupDataTables()
     self:NetworkVar("Bool", 16, "LastWasSprinting")
     self:NetworkVar("Bool", 17, "EmptyReload")
     self:NetworkVar("Bool", 18, "LastFiredRight") // For DualAkimbo tracer origin prediction
+    self:NetworkVar("Bool", 19, "OBANextRight") // One-Button Akimbo alternating state (semi/burst)
 
     self:NetworkVar("Angle", 0, "FreeAimAngle")
     self:NetworkVar("Angle", 1, "LastAimAngle")
@@ -687,9 +688,19 @@ function SWEP:OnDrop(owner)
     self:SetReady(false)
 end
 
+function SWEP:IsOneButtonAkimbo()
+    if !self:GetValue("DualAkimbo") then return false end
+    return TacRP.ConVars["onebutton_akimbo"]:GetBool()
+end
+
 function SWEP:SecondaryAttack()
-    if self:GetValue("DualAkimbo") then
+    if self:GetValue("DualAkimbo") and !self:IsOneButtonAkimbo() then
         self:SecondaryShoot()
+        return
+    end
+    if self:IsOneButtonAkimbo() and self:GetValue("CanMeleeAttack") then
+        self:SetSafe(false)
+        self:Melee()
         return
     end
     self:RunHook("Hook_SecondaryAttack")

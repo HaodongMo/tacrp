@@ -504,7 +504,7 @@ w = ws .. "sphinx"
 L["wep." .. w .. ".name.full"] = "Sphinx 2000"
 L["wep." .. w .. ".name"] = "Sphinx"
 L["wep." .. w .. ".desc"] = "Premium pistol modified to be 3-round burst. High firerate but long burst delay."
-L["wep." .. w .. ".desc.quote"] = "What kind of crack was he on making a boutique CZ 75 copy the burst pistol?"
+L["wep." .. w .. ".desc.quote"] = "What kind of crack was she on making a boutique CZ 75 copy the burst pistol?"
 L["wep." .. w .. ".trivia.manufacturer"] = "Sphinx Systems"
 L["wep." .. w .. ".credits"] = "Assets: Tactical Intervention"
 

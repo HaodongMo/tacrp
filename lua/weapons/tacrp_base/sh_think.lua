@@ -38,7 +38,31 @@ function SWEP:Think()
                 self:SecondaryShoot()
             end
         else
-            if (owner:KeyReleased(IN_ATTACK2) or (cfm < 0 and self:GetBurstCount2() >= -cfm)) then
+            // One-Button Akimbo routing for the right gun.
+            local oba = self:IsOneButtonAkimbo()
+            local aps = self:GetValue("AmmoPerShot")
+            if oba and cfm == 2
+                    and owner:KeyDown(IN_ATTACK)
+                    and self:Clip1() < aps
+                    and self:GetNextSecondaryFire() <= CurTime()
+                    and self:Clip2() >= aps then
+                // Full-auto: left gun is dry but right still has ammo, keep firing right.
+                self:SecondaryShoot()
+            elseif oba and cfm != 2
+                    and owner:KeyPressed(IN_ATTACK)
+                    and self:GetNextPrimaryFire() > CurTime()
+                    and self:GetOBANextRight()
+                    and self:GetNextSecondaryFire() <= CurTime()
+                    and self:Clip2() >= aps
+                    and self:GetBurstCount() == 0
+                    and self:GetBurstCount2() == 0 then
+                // Semi/burst: catch fast alt-clicks that the engine primary-side rate-limit drops.
+                self:SetOBANextRight(false)
+                self:SecondaryShoot()
+            end
+
+            local releaseKey = oba and IN_ATTACK or IN_ATTACK2
+            if (owner:KeyReleased(releaseKey) or (cfm < 0 and self:GetBurstCount2() >= -cfm)) then
                 if cfm < 0 and self:GetBurstCount2() > 1 then
                     if !self:GetValue("AutoBurst") then
                         self.Secondary.Automatic = false

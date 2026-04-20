@@ -22,7 +22,7 @@ function SWEP:Reload(force)
     if self:StillWaiting(true) then return end
 
     if self:GetJammed() then
-        local t = self:PlayAnimation("jam", 0.75, true, true)
+        local t = self:PlayAnimation("jam", 0.75, true, true) or 0
         self:GetOwner():DoCustomAnimEvent(PLAYERANIMEVENT_CANCEL_RELOAD, t * 1000)
         self:SetJammed(false)
         self:SetCharge(false)

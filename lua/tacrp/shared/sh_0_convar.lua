@@ -814,6 +814,14 @@ local conVars = {
         min = 0,
         max = 1,
     },
+    {
+        name = "onebutton_akimbo",
+        default = "0",
+        replicated = true,
+        notify = true,
+        min = 0,
+        max = 1,
+    },
 
     // --------------------------- Multipliers
     {
@@ -1847,6 +1855,11 @@ local function menu_mechanics_ti(panel)
         label = "#tacrp.mechanics.quicknade", -- Enable Quick Grenades
         command = "tacrp_quicknade"
     })
+    panel:AddControl("checkbox", {
+        label = "#tacrp.mechanics.onebuttonakimbo", -- One-Button Akimbo
+        command = "tacrp_onebutton_akimbo"
+    })
+    panel:ControlHelp("#tacrp.mechanics.onebuttonakimbo.desc")
 end
 
 local function menu_atts_ti(panel)
