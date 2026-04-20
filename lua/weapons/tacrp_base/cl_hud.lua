@@ -1071,6 +1071,15 @@ function SWEP:CustomAmmoDisplay()
         self.AmmoDisplay.PrimaryClip = self:Clip1()
         self.AmmoDisplay.PrimaryAmmo = self:GetInfiniteAmmo() and 9999 or self:Ammo1()
     end
+
+    if self:GetValue("DualAkimbo") then
+        if self.Primary.ClipSize <= 0 then
+            self.AmmoDisplay.SecondaryAmmo = -1
+        else
+            self.AmmoDisplay.SecondaryAmmo = self:Clip2()
+        end
+    end
+
     return self.AmmoDisplay
 end
 
