@@ -110,7 +110,7 @@ hook.Add( "HUDDrawTargetID", "TacRP_FlashlightGlint", function()
 
 
     -- Smoke
-    for i, ent in ipairs(TacRP.ClientSmokeCache) do
+    for i, ent in pairs(TacRP.ClientSmokeCache) do
         if !IsValid(ent) or !ent.TacRPSmoke then table.remove(TacRP.ClientSmokeCache, i) continue end
         local pos = ent:GetPos()
         local rad = ent.SmokeRadius

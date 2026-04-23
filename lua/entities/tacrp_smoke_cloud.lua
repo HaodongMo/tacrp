@@ -173,8 +173,8 @@ function ENT:Think()
         end
 
         self:NextThink(CurTime() + 0.5)
-        ]]
         return true
+        ]]
     end
 end
 
