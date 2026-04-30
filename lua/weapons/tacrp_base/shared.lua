@@ -708,7 +708,8 @@ end
 
 function SWEP:IsOneButtonAkimbo()
     if !self:GetValue("DualAkimbo") then return false end
-    return TacRP.ConVars["onebutton_akimbo"]:GetBool()
+    local owner = self:GetOwner()
+    return TacRP.ConVars["onebutton_akimbo"]:GetBool() or owner:GetInfoNum("tacrp_onebutton_akimbo_client", 0) != 0
 end
 
 function SWEP:SecondaryAttack()

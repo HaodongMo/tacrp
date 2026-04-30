@@ -822,6 +822,14 @@ local conVars = {
         min = 0,
         max = 1,
     },
+    {
+        name = "onebutton_akimbo_client",
+        default = "0",
+        client = true,
+        userinfo = true,
+        min = 0,
+        max = 1,
+    },
 
     // --------------------------- Multipliers
     {
@@ -1355,6 +1363,11 @@ local function menu_client_ti(panel)
         command = "tacrp_inversepeek"
     })
     panel:ControlHelp("#tacrp.client.inversepeek.desc")
+    panel:AddControl("checkbox", {
+        label = "#tacrp.mechanics.onebuttonakimbo", -- One-Button Akimbo
+        command = "tacrp_onebutton_akimbo_client"
+    })
+    panel:ControlHelp("#tacrp.mechanics.onebuttonakimbo.desc")
 
     panel:AddControl("slider", {
         label = "#tacrp.client.aimsens", -- Aiming Sensitivity
