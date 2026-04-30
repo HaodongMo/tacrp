@@ -192,5 +192,5 @@ if CLIENT then
         if !ply:Alive() then return end
         net.Start("tacrp_drop")
         net.SendToServer()
-    end, "Drops the currently held TacRP weapon.")
+    end, nil, "Drops the currently held TacRP weapon.")
 end
